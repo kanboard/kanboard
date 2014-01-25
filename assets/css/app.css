@@ -1,0 +1,540 @@
+/* reset */
+figure,
+li,
+ul,
+ol,
+table,
+tr,
+td,
+th,
+p,
+blockquote,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+/* layout */
+body {
+    max-width: 1500px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #333;
+    font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* links */
+a {
+    color: #3366CC;
+    border: 1px solid rgba(255, 255, 255, 0);
+}
+
+a:focus {
+    outline: 0;
+    color: red;
+    text-decoration: none;
+    border: 1px dotted #aaa;
+}
+
+a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+/* titles */
+h1, h2, h3 {
+    font-weight: normal;
+    color: #333;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+/* tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table caption {
+    font-weight: bold;
+    font-size: 1.0em;
+    text-align: left;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 5px;
+}
+
+th {
+    text-align: left;
+    background: #f0f0f0;
+}
+
+tr:nth-child(odd) td {
+    background: #fcfcfc;
+}
+
+td li {
+    margin-left: 20px;
+}
+
+/* forms */
+form {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    border-left: 2px dotted #ddd;
+}
+
+label {
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="checkbox"] {
+    border: 1px solid #ccc;
+}
+
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 3px;
+    line-height: 15px;
+    width: 400px;
+    font-size: 99%;
+    margin-top: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+    color: #000;
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+textarea {
+    border: 1px solid #ccc;
+    padding: 3px;
+    width: 400px;
+    height: 200px;
+    font-size: 99%;
+}
+
+select {
+}
+
+::-webkit-input-placeholder {
+    color: #bbb;
+    padding-top: 2px;
+}
+
+::-ms-input-placeholder {
+    color: #bbb;
+    padding-top: 2px;
+}
+
+::-moz-placeholder {
+    color: #bbb;
+    padding-top: 2px;
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+input.form-error,
+textarea.form-error {
+    border: 2px solid #b94a48;
+}
+
+.form-errors {
+    color: #b94a48;
+    list-style-type: none;
+}
+
+.form-help {
+    font-size: 0.9em;
+    color: brown;
+    margin-bottom: 15px;
+}
+
+.form-inline {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.form-inline label {
+    display: inline;
+}
+
+.form-inline input,
+.form-inline select {
+    margin: 0;
+    margin-right: 15px;
+}
+
+/* alerts */
+.alert {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    color: #c09853;
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #468847;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+}
+
+.alert-info {
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.alert-normal {
+    color: #333;
+    background-color: #f0f0f0;
+    border-color: #ddd;
+}
+
+/* labels */
+a.label {
+    text-decoration: none;
+}
+
+a.label:hover,
+a.label:focus {
+    text-decoration: underline;
+}
+
+.label {
+    font-size: 0.9em;
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid #000;
+    border-color: rgba(0, 0, 0, 0.3);
+    background: #fff;
+    color: #000;
+    color: rgba(0, 0, 0, 0.8);
+    display: inline-block;
+    padding: 2px 5px;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.label-yellow {
+    background-color: #ffee92;
+}
+
+.label-red {
+    background-color: #eea2a0;
+}
+
+.label-green {
+    background-color: #b3e494;
+}
+
+.label-blue {
+    background-color: #d5eeff;
+}
+
+.label-purple {
+    background-color: #dca9de;
+}
+
+/* buttons */
+.btn {
+    -webkit-appearance: none;
+    appearance: none;
+    display: inline-block;
+    color: #333;
+    border: 1px solid #ccc;
+    background: #efefef;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.btn-small {
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+a.btn {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-red {
+    border-color: #b0281a;;
+    background: #d14836;
+    color: #fff;
+}
+
+a.btn-red:hover,
+.btn-red:hover,
+.btn-red:focus {
+    color: #fff;
+    background: #c53727;
+}
+
+.btn-blue {
+    border-color: #3079ed;
+    background: #4d90fe;
+    color: #fff;
+}
+
+.btn-blue:hover,
+.btn-blue:focus {
+    border-color: #2f5bb7;
+    background: #357ae8;
+}
+
+/* header */
+header {
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+header ul {
+    text-align: right;
+    font-size: 90%;
+}
+
+header li {
+    display: inline;
+    padding-left: 30px;
+}
+
+header a {
+    color: #777;
+    text-decoration: none;
+}
+
+nav .active a {
+    color: #333;
+    font-weight: bold;
+}
+
+.logo {
+    color: #DF5353;
+    letter-spacing: 1px;
+    float: left;
+}
+
+.page-section {
+    margin-top: 30px;
+}
+
+.page-section,
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-section h2,
+.page-header h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 140%;
+    border-bottom: 1px dotted red;
+}
+
+.page-header ul {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.page-header li {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 1px dotted #ccc;
+}
+
+.page-header li:first-child {
+    border: none;
+    padding-left: 0;
+}
+
+/* boards */
+#board th a {
+    text-decoration: none;
+    font-size: 150%;
+}
+
+#board td {
+    vertical-align: top;
+}
+
+.task-title {
+    margin-top: 10px;
+    font-size: 110%;
+}
+
+.task-user {
+    font-size: 80%;
+}
+
+.task-nobody {
+    font-style: italic;
+}
+
+.task {
+    border: 1px solid #000;
+    padding: 5px;
+    font-size: 95%;
+}
+
+td.over {
+    background-color: #f0f0f0;
+}
+
+td div.over {
+    border: 2px dashed #000;
+}
+
+.draggable-item {
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+[draggable] {
+    user-select: none;
+}
+
+[draggable=true]:hover {
+    box-shadow: 0 0 3px #333;
+}
+
+div.task a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+div.task a:focus,
+div.task a:hover {
+    text-decoration: underline;
+}
+
+article.task li {
+    margin-left: 20px;
+    list-style-type: square;
+}
+
+.task-blue {
+    background-color: rgb(219, 235, 255);
+    border-color: rgb(168, 207, 255);
+}
+
+.task-purple {
+    background-color: rgb(223, 176, 255);
+    border-color: rgb(205, 133, 254);
+}
+
+.task-grey {
+    background-color: rgb(238, 238, 238);
+    border-color: rgb(204, 204, 204);
+}
+
+.task-red {
+    background-color: rgb(255, 187, 187);
+    border-color: rgb(255, 151, 151);
+}
+
+.task-green {
+    background-color: rgb(189, 244, 203);
+    border-color: rgb(74, 227, 113);
+}
+
+.task-yellow {
+    background-color: rgb(245, 247, 196);
+    border-color: rgb(223, 227, 45);
+}
+
+.task-orange {
+    background-color: rgb(255, 215, 179);
+    border-color: rgb(255, 172, 98);
+}
+
+#description {
+    border-left: 5px solid #000;
+    background: #f0f0f0;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#description li {
+    margin-left: 25px;
+}
+
+/* config page */
+.settings {
+    border-radius: 4px;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    color: #333;
+    background-color: #f0f0f0;
+}
+
+.settings li {
+    list-style-type: square;
+    margin-left: 20px;
+    margin-bottom: 3px;
+}
+
+/* confirmation box */
+.confirm {
+    max-width: 700px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    border-left: 2px dotted #ddd;
+}
