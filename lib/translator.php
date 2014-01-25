@@ -34,14 +34,12 @@ namespace Translator {
         $str = '';
 
         if ($position === 'before') {
-
             $str .= $symbol;
         }
 
         $str .= number($amount);
 
         if ($position === 'after') {
-
             $str .= ' '.$symbol;
         }
 
@@ -50,7 +48,7 @@ namespace Translator {
 
     function datetime($format, $timestamp)
     {
-        return strftime(get($format), (int) $timestamp);
+        return strftime(get($format, $format), (int) $timestamp);
     }
 
     function get($identifier, $default = '')
@@ -58,11 +56,9 @@ namespace Translator {
         $locales = container();
 
         if (isset($locales[$identifier])) {
-
             return $locales[$identifier];
         }
         else {
-
             return $default;
         }
     }
