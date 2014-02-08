@@ -32,11 +32,12 @@ class Config extends Base
             if ($this->config->save($values)) {
                 $this->config->reload();
                 $this->session->flash(t('Settings saved successfully.'));
-                $this->response->redirect('?controller=config');
             }
             else {
                 $this->session->flashError(t('Unable to save your settings.'));
             }
+
+            $this->response->redirect('?controller=config');
         }
 
         $this->response->html($this->template->layout('config_index', array(

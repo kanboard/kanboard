@@ -11,10 +11,14 @@ class Config extends Base
 
     public function getLanguages()
     {
-        return array(
+        $languages = array(
             'en_US' => t('English'),
             'fr_FR' => t('French'),
         );
+
+        asort($languages);
+
+        return $languages;
     }
 
     public function get($name, $default_value = '')
