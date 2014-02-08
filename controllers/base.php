@@ -40,16 +40,25 @@ abstract class Base
         $this->board = new \Model\Board;
     }
 
-    public function beforeAction($controller, $action)
+    private function noAuthAllowed($controller, $action)
     {
-        $this->session->open();
-
         $public = array(
             'user' => array('login', 'check'),
             'task' => array('add'),
         );
 
-        if (! isset($_SESSION['user']) && ! isset($public[$controller]) && ! in_array($action, $public[$controller])) {
+        if (isset($public[$controller])) {
+            return in_array($action, $public[$controller]);
+        }
+
+        return false;
+    }
+
+    public function beforeAction($controller, $action)
+    {
+        $this->session->open(dirname($_SERVER['PHP_SELF']));
+
+        if (! isset($_SESSION['user']) && ! $this->noAuthAllowed($controller, $action)) {
             $this->response->redirect('?controller=user&action=login');
         }
 
