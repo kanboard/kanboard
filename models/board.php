@@ -39,7 +39,7 @@ class Board extends Base
 
             $values = array(
                 'title' => $title,
-                'position' => ++$i,
+                'position' => ++$position,
                 'project_id' => $project_id,
             );
 

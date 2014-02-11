@@ -6,7 +6,7 @@
         </ul>
     </div>
     <section>
-    <form method="post" action="?controller=user&amp;action=update&amp;username=<?= Helper\escape($username) ?>" autocomplete="off">
+    <form method="post" action="?controller=user&amp;action=update" autocomplete="off">
 
         <?= Helper\form_hidden('id', $values) ?>
 
