@@ -36,6 +36,10 @@
                     <?= t('Official website:') ?>
                     <a href="http://kanboard.net/" target="_blank">http://kanboard.net/</a>
                 </li>
+                <li>
+                    <?= t('Application version:') ?>
+                    <?= Model\Base::APP_VERSION ?>
+                </li>
             </ul>
         </section>
     <?php endif ?>

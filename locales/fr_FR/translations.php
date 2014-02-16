@@ -167,4 +167,5 @@ return array(
     'Backlog' => 'En attente',
     'Work in progress' => 'En cours',
     'Done' => 'Terminé',
+    'Application version: ' => 'Version de l\'application :'
 );
