@@ -13,14 +13,22 @@ class Task extends Base
             $this->response->text('Not Authorized', 401);
         }
 
+        $projectModel = new \Model\Project;
+        $defaultProject = $projectModel->getFirst();
+
         $values = array(
             'title' => $this->request->getStringParam('title'),
             'description' => $this->request->getStringParam('description'),
-            'color_id' => $this->request->getStringParam('color_id'),
-            'project_id' => $this->request->getIntegerParam('project_id'),
+            'color_id' => $this->request->getStringParam('color_id', 'blue'),
+            'project_id' => $this->request->getIntegerParam('project_id', $defaultProject['id']),
             'owner_id' => $this->request->getIntegerParam('owner_id'),
             'column_id' => $this->request->getIntegerParam('column_id'),
         );
+
+        if ($values['column_id'] == 0) {
+            $boardModel = new \Model\Board;
+            $values['column_id'] = $boardModel->getFirstColumn($values['project_id']);
+        }
 
         list($valid,) = $this->task->validateCreation($values);
 

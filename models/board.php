@@ -88,6 +88,12 @@ class Board extends Base
         return $columns;
     }
 
+    // Get first column id for a given project
+    public function getFirstColumn($project_id)
+    {
+        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->findOneColumn('id');
+    }
+
     // Get list of columns
     public function getColumnsList($project_id)
     {

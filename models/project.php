@@ -16,6 +16,11 @@ class Project extends Base
         return $this->db->table(self::TABLE)->eq('id', $project_id)->findOne();
     }
 
+    public function getFirst()
+    {
+        return $this->db->table(self::TABLE)->findOne();
+    }
+
     public function getAll($fetch_stats = false)
     {
         if (! $fetch_stats) {
