@@ -1,9 +1,11 @@
 <section id="main">
     <div class="page-header">
         <h2><?= t('Projects') ?><span id="page-counter"> (<?= $nb_projects ?>)</span></h2>
+        <?php if ($_SESSION['user']['is_admin'] == 1): ?>
         <ul>
             <li><a href="?controller=project&amp;action=create"><?= t('New project') ?></a></li>
         </ul>
+        <?php endif ?>
     </div>
     <section>
     <?php if (empty($projects)): ?>

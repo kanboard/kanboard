@@ -2,16 +2,16 @@
 
 namespace Model;
 
-require 'vendor/SimpleValidator/Validator.php';
-require 'vendor/SimpleValidator/Base.php';
-require 'vendor/SimpleValidator/Validators/Required.php';
-require 'vendor/SimpleValidator/Validators/Unique.php';
-require 'vendor/SimpleValidator/Validators/MaxLength.php';
-require 'vendor/SimpleValidator/Validators/MinLength.php';
-require 'vendor/SimpleValidator/Validators/Integer.php';
-require 'vendor/SimpleValidator/Validators/Equals.php';
-require 'vendor/SimpleValidator/Validators/AlphaNumeric.php';
-require 'vendor/PicoDb/Database.php';
+require __DIR__.'/../vendor/SimpleValidator/Validator.php';
+require __DIR__.'/../vendor/SimpleValidator/Base.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Required.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Unique.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/MaxLength.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/MinLength.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Integer.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Equals.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/AlphaNumeric.php';
+require __DIR__.'/../vendor/PicoDb/Database.php';
 require __DIR__.'/schema.php';
 
 abstract class Base

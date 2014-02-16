@@ -2,7 +2,7 @@
     <div class="page-header">
         <h2><?= t('Edit user') ?></h2>
         <ul>
-            <li><a href="?action=users"><?= t('All users') ?></a></li>
+            <li><a href="?controller=user"><?= t('All users') ?></a></li>
         </ul>
     </div>
     <section>
