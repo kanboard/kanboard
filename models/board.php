@@ -155,6 +155,7 @@ class Board extends Base
     // Validate column creation
     public function validateCreation(array $values)
     {
+        // FIXME: $rules is unused
         $rules = array();
 
         $v = new Validator($values, array(

@@ -151,6 +151,7 @@ class Task extends Base
             'errors' => $errors,
             'values' => $values,
             'projects_list' => $this->project->getListByStatus(\Model\Project::ACTIVE),
+            // FIXME: $task is undefined
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'users_list' => $this->user->getList(),
             'colors_list' => $this->task->getColors(),
