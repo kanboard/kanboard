@@ -14,6 +14,7 @@ class Config extends Base
         $languages = array(
             'en_US' => t('English'),
             'fr_FR' => t('French'),
+            'pl_PL' => t('Polish'),
         );
 
         asort($languages);

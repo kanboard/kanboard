@@ -3,6 +3,7 @@
 return array(
     'English' => 'Anglais',
     'French' => 'Français',
+    'Polish' => 'Polonais',
     'None' => 'Aucun',
     'edit' => 'modifier',
     'Edit' => 'Modifier',
