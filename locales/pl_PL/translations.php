@@ -168,5 +168,5 @@ return array(
     'Backlog' => 'Log',
     'Work in progress' => 'W trakcie',
     'Done' => 'Zakończone',
-    'Application version: ' => 'Wersja aplikacji :'
+    'Application version:' => 'Wersja aplikacji :'
 );
