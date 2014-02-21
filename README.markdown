@@ -63,12 +63,17 @@ Authors
 
 Original author: [Frédéric Guillot](http://fredericguillot.com/)
 
+Contributors:
+
+- Mathgl67: https://github.com/mathgl67
+- Rzeka: https://github.com/rzeka
+
 Requirements
 ------------
 
 - Apache or Nginx
-- PHP >= 5.3.7
-- PHP Sqlite extension
+- PHP >= 5.3.3
+- PHP extensions required: mbstring and pdo_sqlite
 - A web browser with HTML5 drag and drop support
 
 Installation
