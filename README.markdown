@@ -34,7 +34,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English and French
+- Translations in English, French and Polish
 
 Todo
 ----
@@ -125,6 +125,12 @@ FAQ
 
 Desktop version of Mozilla Firefox, Safari and Google Chrome.
 
+### Why the minimum requirement is PHP 5.3.3 or 5.3.7?
+
+Kanboard use the function `password_hash()` to crypt passwords but it's available only for PHP >= 5.5.
+However, there is a backport for [older versions of PHP](https://github.com/ircmaxell/password_compat#requirements).
+This library needs to have at least PHP 5.3.7 to work correctly (however on Debian Wheezy, PHP 5.3.3 should be fine).
+
 ### How to test Kanboard with Vagrant?
 
 - Install Vagrant (http://www.vagrantup.com or apt-get install vagrant)
@@ -132,3 +138,25 @@ Desktop version of Mozilla Firefox, Safari and Google Chrome.
 - Inside the root directory, run: vagrant up
 - Go to http://localhost:8080/index.php
 - Login with admin / admin
+
+### How to test Kanboard with the PHP built-in web server?
+
+If you don't want to install a web server like Apache on localhost. You can test with the embedded web server of PHP:
+
+```
+unzip kanboard-VERSION.zip
+cd kanboard
+php -S localhost:8000
+open http://localhost:8000/
+```
+
+### How to install Kanboard on Debian?
+
+```
+apt-get update
+apt-get install -y php5 php5-sqlite
+cd /var/www/
+wget http://kanboard.net/kanboard-VERSION.zip
+unzip kanboard-VERSION.zip
+chown -R www-data kanboard/data
+```
