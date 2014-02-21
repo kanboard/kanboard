@@ -1,8 +1,8 @@
 <?php
 
 // PHP 5.3 minimum
-if (version_compare(PHP_VERSION, '5.3.7', '<')) {
-    die('This software require PHP 5.3.7 minimum');
+if (version_compare(PHP_VERSION, '5.3.3', '<')) {
+    die('This software require PHP 5.3.3 minimum');
 }
 
 // Short tags must be enabled for PHP < 5.4
@@ -13,9 +13,14 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
     }
 }
 
-// Check PDO Sqlite
+// Check extension: PDO Sqlite
 if (! extension_loaded('pdo_sqlite')) {
     die('PHP extension required: pdo_sqlite');
+}
+
+// Check extension: mbstring
+if (! extension_loaded('mbstring')) {
+    die('PHP extension required: mbstring');
 }
 
 // Check if /data is writeable
