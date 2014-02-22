@@ -68,6 +68,7 @@ Contributors:
 - Mathgl67: https://github.com/mathgl67
 - Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
+- Toomyem: https://github.com/toomyem
 
 There is also many people who have reported bugs or proposed awesome ideas.
 
