@@ -12,6 +12,11 @@
             <li>
                 <?= dt('Created on %B %e, %G at %k:%M %p', $task['date_creation']) ?>
             </li>
+            <?php if ($task['date_completed']): ?>
+            <li>
+                <?= dt('Completed on %B %e, %G at %k:%M %p', $task['date_completed']) ?>
+            </li>
+            <?php endif ?>
             <li>
                 <strong>
                 <?php if ($task['username']): ?>

@@ -1,7 +1,9 @@
 <section id="main">
 
-    <div class="page-header">
-        <h2><?= t('Project "%s"', $current_project_name) ?></h2>
+    <div class="page-header board">
+        <h2>
+            <?= t('Project "%s"', $current_project_name) ?>
+        </h2>
         <ul>
             <?php foreach ($projects as $project_id => $project_name): ?>
             <?php if ($project_id != $current_project_id): ?>
@@ -10,6 +12,12 @@
             </li>
             <?php endif ?>
             <?php endforeach ?>
+        </ul>
+    </div>
+
+    <div class="project-menu">
+        <ul>
+            <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $current_project_id ?>"><?= t('completed tasks') ?></a></li>
         </ul>
     </div>
 

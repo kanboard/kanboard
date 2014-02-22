@@ -166,5 +166,20 @@ return array(
     'Backlog' => 'Log',
     'Work in progress' => 'W trakcie',
     'Done' => 'Zakończone',
-    'Application version:' => 'Wersja aplikacji :'
+    'Application version:' => 'Wersja aplikacji :',
+
+    /* Missing translations:
+
+    'Completed on %B %e, %G at %k:%M %p' => '',
+    '%B %e, %G at %k:%M %p' => '',
+    'Date created' => '',
+    'Date completed' => '',
+    'Id' => '',
+    'Show this task' => '',
+    'No task' => '',
+    'completed tasks' => '',
+    'List of projects' => '',
+    'Completed tasks for "%s"' => '',
+    '%d closed tasks' => '',
+    'no task for this project' => '',*/
 );

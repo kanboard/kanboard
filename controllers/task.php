@@ -188,7 +188,7 @@ class Task extends Base
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
 
-        if ($task && $this->task->close($task['id'])) {
+        if ($task && $this->task->open($task['id'])) {
             $this->session->flash(t('Task opened successfully.'));
         } else {
             $this->session->flashError(t('Unable to open this task.'));

@@ -402,6 +402,30 @@ nav .active a {
 }
 
 /* boards */
+.page-header.board {
+    margin-bottom: 0;
+}
+
+.project-menu li {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px dotted #ccc;
+}
+
+.project-menu li:last-child {
+    border: none;
+    padding-right: 0;
+}
+
+.project-menu ul {
+    padding-bottom: 5px;
+}
+
+.project-menu {
+    text-align: right;
+}
+
 #board th a {
     text-decoration: none;
     font-size: 150%;
@@ -451,12 +475,15 @@ td div.over {
     box-shadow: 0 0 3px #333;
 }
 
+tr td.task a,
 div.task a {
     color: #000;
     text-decoration: none;
     font-weight: bold;
 }
 
+tr td.task a:focus,
+tr td.task a:hover,
 div.task a:focus,
 div.task a:hover {
     text-decoration: underline;
@@ -467,36 +494,43 @@ article.task li {
     list-style-type: square;
 }
 
+tr td.task-blue,
 .task-blue {
     background-color: rgb(219, 235, 255);
     border-color: rgb(168, 207, 255);
 }
 
+tr td.task-purple,
 .task-purple {
     background-color: rgb(223, 176, 255);
     border-color: rgb(205, 133, 254);
 }
 
+tr td.task-grey,
 .task-grey {
     background-color: rgb(238, 238, 238);
     border-color: rgb(204, 204, 204);
 }
 
+tr td.task-red,
 .task-red {
     background-color: rgb(255, 187, 187);
     border-color: rgb(255, 151, 151);
 }
 
+tr td.task-green,
 .task-green {
     background-color: rgb(189, 244, 203);
     border-color: rgb(74, 227, 113);
 }
 
+tr td.task-yellow,
 .task-yellow {
     background-color: rgb(245, 247, 196);
     border-color: rgb(223, 227, 45);
 }
 
+tr td.task-orange,
 .task-orange {
     background-color: rgb(255, 215, 179);
     border-color: rgb(255, 172, 98);

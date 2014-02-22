@@ -49,6 +49,7 @@ class Project extends Base
 
             $project['columns'] = $columns;
             $project['nb_tasks'] = $taskModel->countByProjectId($project['id']);
+            $project['nb_inactive_tasks'] = $project['nb_tasks'] - $project['nb_active_tasks'];
         }
 
         $this->db->closeTransaction();

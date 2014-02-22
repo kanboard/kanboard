@@ -2,6 +2,14 @@
 
 namespace Schema;
 
+function version_2($pdo)
+{
+    $pdo->exec('ALTER TABLE tasks ADD column date_completed INTEGER');
+
+    // For all existing completed tasks, set the date of creation as a date of completion
+    $pdo->exec('UPDATE tasks SET date_completed=date_creation WHERE is_active=0');
+}
+
 function version_1($pdo)
 {
     $pdo->exec("

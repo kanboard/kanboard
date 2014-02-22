@@ -4,6 +4,29 @@ namespace Controller;
 
 class Project extends Base
 {
+    // List of completed tasks for a given project
+    public function tasks()
+    {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $project = $this->project->get($project_id);
+
+        if (! $project) {
+            $this->session->flashError(t('Project not found.'));
+            $this->response->redirect('?controller=project');
+        }
+
+        $tasks = $this->task->getAllByProjectId($project_id, array(0));
+        $nb_tasks = count($tasks);
+
+        $this->response->html($this->template->layout('project_tasks', array(
+            'menu' => 'projects',
+            'project' => $project,
+            'tasks' => $tasks,
+            'nb_tasks' => $nb_tasks,
+            'title' => $project['name'].' ('.$nb_tasks.')'
+        )));
+    }
+
     // List of projects
     public function index()
     {

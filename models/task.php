@@ -33,6 +33,7 @@ class Task extends Base
                         self::TABLE.'.title',
                         self::TABLE.'.description',
                         self::TABLE.'.date_creation',
+                        self::TABLE.'.date_completed',
                         self::TABLE.'.color_id',
                         self::TABLE.'.project_id',
                         self::TABLE.'.column_id',
@@ -55,9 +56,30 @@ class Task extends Base
         }
     }
 
-    public function getAllByProjectId($project_id)
+    public function getAllByProjectId($project_id, array $status = array(1, 0))
     {
-        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->findAll();
+        return $this->db->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.id',
+                self::TABLE.'.title',
+                self::TABLE.'.description',
+                self::TABLE.'.date_creation',
+                self::TABLE.'.date_completed',
+                self::TABLE.'.color_id',
+                self::TABLE.'.project_id',
+                self::TABLE.'.column_id',
+                self::TABLE.'.owner_id',
+                self::TABLE.'.position',
+                self::TABLE.'.is_active',
+                \Model\Board::TABLE.'.title AS column_title',
+                \Model\User::TABLE.'.username'
+            )
+            ->join(\Model\Board::TABLE, 'id', 'column_id')
+            ->join(\Model\User::TABLE, 'id', 'owner_id')
+            ->eq(self::TABLE.'.project_id', $project_id)
+            ->in('is_active', $status)
+            ->desc('date_completed')
+            ->findAll();
     }
 
     public function countByProjectId($project_id, $status = array(1, 0))
@@ -117,12 +139,22 @@ class Task extends Base
 
     public function close($task_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $task_id)->update(array('is_active' => 0));
+        return $this->db->table(self::TABLE)
+            ->eq('id', $task_id)
+            ->update(array(
+                'is_active' => 0,
+                'date_completed' => time()
+            ));
     }
 
     public function open($task_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $task_id)->update(array('is_active' => 1));
+        return $this->db->table(self::TABLE)
+            ->eq('id', $task_id)
+            ->update(array(
+                'is_active' => 1,
+                'date_completed' => ''
+            ));
     }
 
     public function remove($task_id)

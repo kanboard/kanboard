@@ -166,5 +166,17 @@ return array(
     'Backlog' => 'En attente',
     'Work in progress' => 'En cours',
     'Done' => 'Terminé',
-    'Application version:' => 'Version de l\'application :'
+    'Application version:' => 'Version de l\'application :',
+    'Completed on %B %e, %G at %k:%M %p' => 'Terminé le %e %B %G à %k:%M',
+    '%B %e, %G at %k:%M %p' => '%e %B %G à %k:%M',
+    'Date created' => 'Date de création',
+    'Date completed' => 'Date de clôture',
+    'Id' => 'Identifiant',
+    'Show this task' => 'Afficher cette tâche',
+    'No task' => 'Aucune tâche',
+    'completed tasks' => 'tâches terminées',
+    'List of projects' => 'Liste des projets',
+    'Completed tasks for "%s"' => 'Tâches terminées pour "%s"',
+    '%d closed tasks' => '%d tâches terminées',
+    'no task for this project' => 'aucune tâche pour ce projet',
 );
