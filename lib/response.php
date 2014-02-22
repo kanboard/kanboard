@@ -125,7 +125,9 @@ class Response
 
     public function hsts()
     {
-        header('Strict-Transport-Security: max-age=31536000');
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+            header('Strict-Transport-Security: max-age=31536000');
+        }
     }
 
     public function xframe($mode = 'DENY', array $urls = array())
