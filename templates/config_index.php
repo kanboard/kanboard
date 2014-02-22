@@ -51,7 +51,7 @@
         <ul>
             <li>
                 <strong><?= t('My default project:') ?> </strong>
-                <?= isset($user['default_project_id']) ? $projects[$user['default_project_id']] : t('None') ?>,
+                <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $projects[$user['default_project_id']] : t('None') ?>,
                 <a href="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>"><?= t('edit') ?></a>
             </li>
         </ul>

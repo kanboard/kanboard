@@ -27,7 +27,7 @@
                     <?= $user['is_admin'] ? t('Yes') : t('No') ?>
                 </td>
                 <td>
-                    <?= $projects[$user['default_project_id']] ?>
+                    <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $projects[$user['default_project_id']] : t('None'); ?>
                 </td>
                 <td>
                     <?php if ($_SESSION['user']['is_admin'] == 1 || $_SESSION['user']['id'] == $user['id']): ?>
