@@ -6,7 +6,7 @@
         </ul>
     </div>
     <section>
-    <form method="post" action="?controller=project&amp;action=update&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
+    <form method="post" action="?controller=project&amp;action=update&amp;project_id=<?= $values['id'] ?>" autocomplete="off">
 
         <?= Helper\form_hidden('id', $values) ?>
 
