@@ -4,8 +4,13 @@ namespace Helper;
 
 function markdown($text)
 {
-    require_once __DIR__.'/../vendor/Parsedown/Parsedown.php';
-    return \Parsedown::instance()->parse($text);
+    require_once __DIR__.'/../vendor/Michelf/MarkdownExtra.inc.php';
+
+    $parser = new \Michelf\MarkdownExtra;
+    $parser->no_markup = true;
+    $parser->no_entities = true;
+
+    return $parser->transform($text);
 }
 
 function get_current_base_url()
