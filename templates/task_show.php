@@ -45,10 +45,12 @@
         </ul>
         </article>
 
-        <h3><?= t('Description') ?></h3>
-        <article id="description">
-            <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
-        </article>
+        <?php if ($task['description']): ?>
+            <h3><?= t('Description') ?></h3>
+            <article id="description">
+                <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
+            </article>
+        <?php endif ?>
 
     </section>
 </section>
