@@ -66,7 +66,10 @@ Original author: [Frédéric Guillot](http://fredericguillot.com/)
 Contributors:
 
 - Mathgl67: https://github.com/mathgl67
+- Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
+
+There is also many people who have reported bugs or proposed awesome ideas.
 
 Requirements
 ------------
@@ -143,7 +146,7 @@ This library needs to have at least PHP 5.3.7 to work correctly (however on Debi
 
 If you don't want to install a web server like Apache on localhost. You can test with the embedded web server of PHP:
 
-```
+```bash
 unzip kanboard-VERSION.zip
 cd kanboard
 php -S localhost:8000
@@ -152,7 +155,7 @@ open http://localhost:8000/
 
 ### How to install Kanboard on Debian?
 
-```
+```bash
 apt-get update
 apt-get install -y php5 php5-sqlite
 cd /var/www/
@@ -160,3 +163,17 @@ wget http://kanboard.net/kanboard-VERSION.zip
 unzip kanboard-VERSION.zip
 chown -R www-data kanboard/data
 ```
+
+### How to use the webhook to create a task?
+
+Firstly, you have to get the token from the preferences page. After that, just call this url from anywhere:
+
+```bash
+# Create a task for the default project inside the first column
+curl "http://myserver/?controller=task&action=add&token=superSecretToken&title=mySuperTask"
+
+# Create a task to another project inside a specific column with the color red
+curl "http://myserver/?controller=task&action=add&token=superSecretToken&title=task123&project_id=3&column_id=7&color_id=red"
+```
+
+Webhooks are useful to perform actions from external applications (shell-script, git hooks...).
