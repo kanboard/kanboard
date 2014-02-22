@@ -151,7 +151,7 @@ class Task extends Base
             'errors' => $errors,
             'values' => $values,
             'projects_list' => $this->project->getListByStatus(\Model\Project::ACTIVE),
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'columns_list' => $this->board->getColumnsList($values['project_id']),
             'users_list' => $this->user->getList(),
             'colors_list' => $this->task->getColors(),
             'menu' => 'tasks',

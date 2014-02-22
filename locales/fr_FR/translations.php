@@ -124,8 +124,6 @@ return array(
     'The user id is required' => 'L\'id de l\'utilisateur est obligatoire',
     'Passwords doesn\'t matches' => 'Les mots de passe ne correspondent pas',
     'The confirmation is required' => 'Le confirmation est requise',
-    'The password is required' => 'Le mot de passe est obligatoire',
-    'The title is required' => 'Le titre est obligatoire',
     'The column is required' => 'La colonne est obligatoire',
     'The project is required' => 'Le projet est obligatoire',
     'The color is required' => 'La couleur est obligatoire',

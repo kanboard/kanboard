@@ -155,8 +155,6 @@ class Board extends Base
     // Validate column creation
     public function validateCreation(array $values)
     {
-        $rules = array();
-
         $v = new Validator($values, array(
             new Validators\Required('project_id', t('The project id is required')),
             new Validators\Integer('project_id', t('This value must be an integer')),
