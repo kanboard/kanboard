@@ -75,6 +75,9 @@
                         <li>
                             <a href="?controller=project&amp;action=confirm&amp;project_id=<?= $project['id'] ?>"><?= t('Remove') ?></a>
                         </li>
+                        <li>
+                            <a href="?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a>
+                        </li>
                     </ul>
                 </td>
                 <?php endif ?>

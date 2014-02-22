@@ -10,6 +10,9 @@
         <link rel="apple-touch-icon" sizes="114x114" href="assets/img/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="144x144" href="assets/img/touch-icon-ipad-retina.png">
         <title><?= isset($title) ? Helper\escape($title) : 'Kanboard' ?></title>
+        <?php if (isset($auto_refresh)): ?>
+            <meta http-equiv="refresh" content="<?= AUTO_REFRESH_DURATION ?>" >
+        <?php endif ?>
     </head>
     <body>
     <?php if (isset($no_layout)): ?>

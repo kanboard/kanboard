@@ -2,11 +2,27 @@
 
 namespace Schema;
 
+function version_3($pdo)
+{
+    $pdo->exec('ALTER TABLE projects ADD column token TEXT');
+
+    // For each existing project, assign a different token
+    $rq = $pdo->prepare("SELECT id FROM projects WHERE token IS NULL");
+    $rq->execute();
+    $results = $rq->fetchAll(\PDO::FETCH_ASSOC);
+
+    if ($results !== false) {
+
+        foreach ($results as &$result) {
+            $rq = $pdo->prepare('UPDATE projects SET token=? WHERE id=?');
+            $rq->execute(array(\Model\Base::generateToken(), $result['id']));
+        }
+    }
+}
+
 function version_2($pdo)
 {
     $pdo->exec('ALTER TABLE tasks ADD column date_completed INTEGER');
-
-    // For all existing completed tasks, set the date of creation as a date of completion
     $pdo->exec('UPDATE tasks SET date_completed=date_creation WHERE is_active=0');
 }
 
@@ -74,6 +90,6 @@ function version_1($pdo)
     $pdo->exec("
         INSERT INTO config
         (language, webhooks_token)
-        VALUES ('en_US', '".\Model\Config::generateToken()."')
+        VALUES ('en_US', '".\Model\Base::generateToken()."')
     ");
 }

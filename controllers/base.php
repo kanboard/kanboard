@@ -45,6 +45,7 @@ abstract class Base
         $public = array(
             'user' => array('login', 'check'),
             'task' => array('add'),
+            'board' => array('readonly'),
         );
 
         if (isset($public[$controller])) {

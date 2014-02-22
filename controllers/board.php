@@ -4,7 +4,29 @@ namespace Controller;
 
 class Board extends Base
 {
-    // Display current board
+    // Display the public version of a board
+    // Access checked by a simple token, no user login, read only, auto-refresh
+    public function readonly()
+    {
+        $token = $this->request->getStringParam('token');
+        $project = $this->project->getByToken($token);
+
+        // Token verification
+        if (! $project) {
+            $this->response->text('Not Authorized', 401);
+        }
+
+        // Display the board with a specific layout
+        $this->response->html($this->template->layout('board_public', array(
+            'project' => $project,
+            'columns' => $this->board->get($project['id']),
+            'title' => $project['name'],
+            'no_layout' => true,
+            'auto_refresh' => true,
+        )));
+    }
+
+    // Display the default user project or the first project
     public function index()
     {
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
@@ -30,7 +52,7 @@ class Board extends Base
         )));
     }
 
-    // Show a board
+    // Show a board for a given project
     public function show()
     {
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
@@ -175,7 +197,7 @@ class Board extends Base
         $this->response->redirect('?controller=board&action=edit&project_id='.$column['project_id']);
     }
 
-    // Save the board (Ajax request made by drag and drop)
+    // Save the board (Ajax request made by the drag and drop)
     public function save()
     {
         $this->response->json(array(

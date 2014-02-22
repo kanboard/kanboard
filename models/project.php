@@ -16,6 +16,11 @@ class Project extends Base
         return $this->db->table(self::TABLE)->eq('id', $project_id)->findOne();
     }
 
+    public function getByToken($token)
+    {
+        return $this->db->table(self::TABLE)->eq('token', $token)->findOne();
+    }
+
     public function getFirst()
     {
         return $this->db->table(self::TABLE)->findOne();
@@ -92,12 +97,12 @@ class Project extends Base
     {
         $this->db->startTransaction();
 
+        $values['token'] = self::generateToken();
         $this->db->table(self::TABLE)->save($values);
 
         $project_id = $this->db->getConnection()->getLastId();
 
         $boardModel = new \Model\Board;
-
         $boardModel->create($project_id, array(
             t('Backlog'),
             t('Ready'),

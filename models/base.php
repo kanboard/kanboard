@@ -17,7 +17,7 @@ require __DIR__.'/schema.php';
 abstract class Base
 {
     const APP_VERSION = 'master';
-    const DB_VERSION  = 2;
+    const DB_VERSION  = 3;
     const DB_FILENAME = 'data/db.sqlite';
 
     private static $dbInstance = null;
@@ -45,5 +45,18 @@ abstract class Base
         else {
             die('Unable to migrate database schema!');
         }
+    }
+
+    // Generate a random token from /dev/urandom or with uniqid()
+    public static function generateToken()
+    {
+        if (ini_get('open_basedir') === '') {
+            $token = file_get_contents('/dev/urandom', false, null, 0, 30);
+        }
+        else {
+            $token = uniqid(mt_rand(), true);
+        }
+
+        return hash('crc32b', $token);
     }
 }

@@ -66,16 +66,6 @@ class Config extends Base
         );
     }
 
-    public static function generateToken()
-    {
-        if (ini_get('open_basedir') === '') {
-            return substr(base64_encode(file_get_contents('/dev/urandom', false, null, 0, 20)), 0, 15);
-        }
-        else {
-            return substr(base64_encode(uniqid(mt_rand(), true)), 0, 20);
-        }
-    }
-
     public function optimizeDatabase()
     {
         $this->db->getconnection()->exec("VACUUM");

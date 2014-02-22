@@ -181,5 +181,7 @@ return array(
     'List of projects' => '',
     'Completed tasks for "%s"' => '',
     '%d closed tasks' => '',
-    'no task for this project' => '',*/
+    'no task for this project' => '',
+    'Public link' => '',
+    */
 );

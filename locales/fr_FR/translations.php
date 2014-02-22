@@ -179,4 +179,5 @@ return array(
     'Completed tasks for "%s"' => 'Tâches terminées pour "%s"',
     '%d closed tasks' => '%d tâches terminées',
     'no task for this project' => 'aucune tâche pour ce projet',
+    'Public link' => 'Accès public',
 );
