@@ -22,6 +22,7 @@ class Board extends Base
 
         $this->response->html($this->template->layout('board_index', array(
             'projects' => $projects,
+            // FIXME: $project_id and $project_name might have not been defined
             'current_project_id' => $project_id,
             'current_project_name' => $project_name,
             'columns' => $this->board->get($project_id),
