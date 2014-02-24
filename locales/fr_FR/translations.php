@@ -85,7 +85,7 @@ return array(
     'settings' => 'préférences',
     'Application Settings' => 'Paramètres de l\'application',
     'Language' => 'Langue',
-    'Webhooks token' => 'Jeton de securité pour les webhooks',
+    'Webhooks token:' => 'Jeton de securité pour les webhooks :',
     'More information' => 'Plus d\'informations',
     'Database size:' => 'Taille de la base de données :',
     'Download the database' => 'Télécharger la base de données',
@@ -183,7 +183,5 @@ return array(
     'There is no column in your project!' => 'Il n\'y a aucune colonne dans votre projet !',
     'Change assignee' => 'Changer la personne assignée',
     'Change assignee for the task "%s"' => 'Changer la personne assignée pour la tâche « %s »',
-    /* missing
-    'Timezone' => ''
-    */
+    'Timezone' => 'Fuseau horaire',
 );

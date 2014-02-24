@@ -85,7 +85,7 @@ return array(
     'settings' => 'ustawienia',
     'Application Settings' => 'Ustawienia aplikacji',
     'Language' => 'Język',
-    'Webhooks token' => 'Token',
+    'Webhooks token:' => 'Token :',
     'More information' => 'Więcej informacji',
     'Database size:' => 'Rozmiar bazy danych :',
     'Download the database' => 'Pobierz bazę danych',

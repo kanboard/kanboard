@@ -16,7 +16,7 @@ class Config extends Base
             'errors' => array(),
             'menu' => 'config',
             'title' => t('Settings'),
-            'timezones' => array_combine(timezone_identifiers_list(), timezone_identifiers_list())
+            'timezones' => $this->config->getTimezones()
         )));
     }
 
@@ -49,7 +49,7 @@ class Config extends Base
             'errors' => $errors,
             'menu' => 'config',
             'title' => t('Settings'),
-            'timezones' => array_combine(timezone_identifiers_list(), timezone_identifiers_list())
+            'timezones' => $this->config->getTimezones()
         )));
     }
 

@@ -10,11 +10,9 @@
             <?= Helper\form_label(t('Language'), 'language') ?>
             <?= Helper\form_select('language', $languages, $values, $errors) ?><br/>
 
-            <?= Helper\form_label(t('Webhooks token'), 'webhooks_token') ?>
-            <?= Helper\form_text('webhooks_token', $values, $errors, array('readonly')) ?><br/>
-
             <?= Helper\form_label(t('Timezone'), 'timezone') ?>
             <?= Helper\form_select('timezone', $timezones, $values, $errors) ?><br/>
+
             <div class="form-actions">
                 <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
             </div>
@@ -25,6 +23,10 @@
         </div>
         <section class="settings">
             <ul>
+                <li>
+                    <?= t('Webhooks token:') ?>
+                    <strong><?= Helper\escape($values['webhooks_token']) ?></strong>
+                </li>
                 <li><?= t('Database size:') ?> <strong><?= Helper\format_bytes($db_size) ?></strong></li>
                 <li>
                     <a href="?controller=config&amp;action=downloadDb"><?= t('Download the database') ?></a>

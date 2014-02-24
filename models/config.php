@@ -9,6 +9,12 @@ class Config extends Base
 {
     const TABLE = 'config';
 
+    public function getTimezones()
+    {
+        $timezones = \timezone_identifiers_list();
+        return array_combine(array_values($timezones), $timezones);
+    }
+
     public function getLanguages()
     {
         $languages = array(
