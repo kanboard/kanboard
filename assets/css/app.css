@@ -426,6 +426,10 @@ nav .active a {
     text-align: right;
 }
 
+.public-board {
+    margin-top: 5px;
+}
+
 #board th a {
     text-decoration: none;
     font-size: 150%;

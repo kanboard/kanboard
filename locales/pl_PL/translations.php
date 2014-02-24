@@ -180,4 +180,8 @@ return array(
     '%d closed tasks' => '%d zamkniętych zadań',
     'no task for this project' => 'brak zadań dla tego projektu',
     'Public link' => 'Link publiczny',
+
+    /* Missing translations:
+    'There is no column in your project!' => '',
+    */
 );

@@ -180,4 +180,5 @@ return array(
     '%d closed tasks' => '%d tâches terminées',
     'no task for this project' => 'aucune tâche pour ce projet',
     'Public link' => 'Accès public',
+    'There is no column in your project!' => 'Il n\'y a aucune colonne dans votre projet !',
 );
