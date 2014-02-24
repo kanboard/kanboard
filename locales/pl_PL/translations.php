@@ -183,5 +183,7 @@ return array(
 
     /* Missing translations:
     'There is no column in your project!' => '',
+    'Change assignee' => '',
+    'Change assignee for the task "%s"' => '',
     */
 );

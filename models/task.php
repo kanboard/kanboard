@@ -209,4 +209,21 @@ class Task extends Base
             $v->getErrors()
         );
     }
+
+    public function validateAssigneeModification(array $values)
+    {
+        $v = new Validator($values, array(
+            new Validators\Required('id', t('The id is required')),
+            new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Required('project_id', t('The project is required')),
+            new Validators\Integer('project_id', t('This value must be an integer')),
+            new Validators\Required('owner_id', t('This value is required')),
+            new Validators\Integer('owner_id', t('This value must be an integer')),
+        ));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
 }

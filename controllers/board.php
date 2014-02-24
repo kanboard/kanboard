@@ -4,6 +4,41 @@ namespace Controller;
 
 class Board extends Base
 {
+    // Change a task assignee directly from the board
+    public function assign()
+    {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
+        $project = $this->project->get($task['project_id']);
+        $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
+
+        $this->response->html($this->template->layout('board_assign', array(
+            'errors' => array(),
+            'values' => $task,
+            'users_list' => $this->user->getList(),
+            'projects' => $projects,
+            'current_project_id' => $project['id'],
+            'current_project_name' => $project['name'],
+            'menu' => 'boards',
+            'title' => t('Change assignee').' - '.$task['title'],
+        )));
+    }
+
+    // Validate an assignee change
+    public function assignTask()
+    {
+        $values = $this->request->getValues();
+        list($valid,) = $this->task->validateAssigneeModification($values);
+
+        if ($valid && $this->task->update($values)) {
+            $this->session->flash(t('Task updated successfully.'));
+        }
+        else {
+            $this->session->flashError(t('Unable to update your task.'));
+        }
+
+        $this->response->redirect('?controller=board&action=show&project_id='.$values['project_id']);
+    }
+
     // Display the public version of a board
     // Access checked by a simple token, no user login, read only, auto-refresh
     public function readonly()

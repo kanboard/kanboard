@@ -46,9 +46,9 @@
 
                             <span class="task-user">
                             <?php if (! empty($task['owner_id'])): ?>
-                                <?= t('Assigned to %s', $task['username']) ?>
+                                <a href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>"><?= t('Assigned to %s', $task['username']) ?></a>
                             <?php else: ?>
-                                <span class="task-nobody"><?= t('No body assigned') ?></span>
+                                <a href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>" class="task-nobody"><?= t('No body assigned') ?></a>
                             <?php endif ?>
                             </span>
 
