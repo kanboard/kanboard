@@ -2,6 +2,14 @@
 
 namespace Schema;
 
+function version_4($pdo)
+{
+    $pdo->exec('ALTER TABLE config ADD column timezone TEXT');
+
+    //set default timezone to UTC
+    $pdo->exec('UPDATE config SET timezone = \'UTC\'');
+}
+
 function version_3($pdo)
 {
     $pdo->exec('ALTER TABLE projects ADD column token TEXT');

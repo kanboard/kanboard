@@ -183,4 +183,5 @@ return array(
     'There is no column in your project!' => 'Brak kolumnt w Twoim projekcie',
     'Change assignee' => 'Zmień odpowiedzialną osobę',
     'Change assignee for the task "%s"' => 'Zmień odpowiedzialną osobę dla zadania "%s"',
+    'Timezone' => 'Strefa czasowa'
 );

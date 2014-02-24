@@ -15,7 +15,8 @@ class Config extends Base
             'values' => $this->config->getAll(),
             'errors' => array(),
             'menu' => 'config',
-            'title' => t('Settings')
+            'title' => t('Settings'),
+            'timezones' => array_combine(timezone_identifiers_list(), timezone_identifiers_list())
         )));
     }
 
@@ -32,8 +33,7 @@ class Config extends Base
             if ($this->config->save($values)) {
                 $this->config->reload();
                 $this->session->flash(t('Settings saved successfully.'));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to save your settings.'));
             }
 
@@ -48,7 +48,8 @@ class Config extends Base
             'values' => $values,
             'errors' => $errors,
             'menu' => 'config',
-            'title' => t('Settings')
+            'title' => t('Settings'),
+            'timezones' => array_combine(timezone_identifiers_list(), timezone_identifiers_list())
         )));
     }
 

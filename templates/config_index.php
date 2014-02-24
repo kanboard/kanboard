@@ -13,6 +13,8 @@
             <?= Helper\form_label(t('Webhooks token'), 'webhooks_token') ?>
             <?= Helper\form_text('webhooks_token', $values, $errors, array('readonly')) ?><br/>
 
+            <?= Helper\form_label(t('Timezone'), 'timezone') ?>
+            <?= Helper\form_select('timezone', $timezones, $values, $errors) ?><br/>
             <div class="form-actions">
                 <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
             </div>
