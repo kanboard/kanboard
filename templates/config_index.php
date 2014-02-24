@@ -27,7 +27,10 @@
                     <?= t('Webhooks token:') ?>
                     <strong><?= Helper\escape($values['webhooks_token']) ?></strong>
                 </li>
-                <li><?= t('Database size:') ?> <strong><?= Helper\format_bytes($db_size) ?></strong></li>
+                <li>
+                    <?= t('Database size:') ?>
+                    <strong><?= Helper\format_bytes($db_size) ?></strong>
+                </li>
                 <li>
                     <a href="?controller=config&amp;action=downloadDb"><?= t('Download the database') ?></a>
                     <?= t('(Gzip compressed Sqlite file)') ?>
@@ -38,7 +41,7 @@
                 </li>
                 <li>
                     <?= t('Official website:') ?>
-                    <a href="http://kanboard.net/" target="_blank">http://kanboard.net/</a>
+                    <a href="http://kanboard.net/" target="_blank" rel="noreferer">http://kanboard.net/</a>
                 </li>
                 <li>
                     <?= t('Application version:') ?>
@@ -55,7 +58,7 @@
         <ul>
             <li>
                 <strong><?= t('My default project:') ?> </strong>
-                <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $projects[$user['default_project_id']] : t('None') ?>,
+                <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? Helper\escape($projects[$user['default_project_id']]) : t('None') ?>,
                 <a href="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>"><?= t('edit') ?></a>
             </li>
         </ul>

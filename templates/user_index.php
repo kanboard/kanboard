@@ -27,7 +27,7 @@
                     <?= $user['is_admin'] ? t('Yes') : t('No') ?>
                 </td>
                 <td>
-                    <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $projects[$user['default_project_id']] : t('None'); ?>
+                    <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? Helper\escape($projects[$user['default_project_id']]) : t('None'); ?>
                 </td>
                 <td>
                     <?php if (Helper\is_admin() || Helper\is_current_user($user['id'])): ?>

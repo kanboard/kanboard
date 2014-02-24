@@ -11,6 +11,10 @@ namespace Translator {
         \array_shift($args);
         \array_unshift($args, get($identifier, $identifier));
 
+        foreach ($args as &$arg) {
+            $arg = htmlspecialchars($arg, ENT_QUOTES, 'UTF-8', false);
+        }
+
         return \call_user_func_array(
             'sprintf',
             $args
@@ -77,7 +81,6 @@ namespace Translator {
             foreach ($dir as $fileinfo) {
 
                 if (strpos($fileinfo->getFilename(), '.php') !== false) {
-
                     $locales = array_merge($locales, include $fileinfo->getPathname());
                 }
             }
@@ -91,7 +94,6 @@ namespace Translator {
         static $values = array();
 
         if ($locales !== null) {
-
             $values = $locales;
         }
 

@@ -5,7 +5,7 @@
 
     <div class="confirm">
         <p class="alert alert-info">
-            <?= t('Do you really want to remove this project: "%s"?', Helper\escape($project['name'])) ?>
+            <?= t('Do you really want to remove this project: "%s"?', $project['name']) ?>
         </p>
 
         <div class="form-actions">
