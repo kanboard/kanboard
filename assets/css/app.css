@@ -472,6 +472,7 @@ td div.over {
 }
 
 [draggable] {
+    cursor: pointer;
     user-select: none;
 }
 
