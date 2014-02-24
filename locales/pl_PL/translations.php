@@ -180,10 +180,8 @@ return array(
     '%d closed tasks' => '%d zamkniętych zadań',
     'no task for this project' => 'brak zadań dla tego projektu',
     'Public link' => 'Link publiczny',
-
-    /* Missing translations:
-    'There is no column in your project!' => '',
-    'Change assignee' => '',
-    'Change assignee for the task "%s"' => '',
-    */
+    'There is no column in your project!' => 'Brak kolumnt w Twoim projekcie',
+    'Change assignee' => 'Zmień odpowiedzialną osobę',
+    'Change assignee for the task "%s"' => 'Zmień odpowiedzialną osobę dla zadania "%s"',
+    'Timezone' => 'Strefa czasowa'
 );

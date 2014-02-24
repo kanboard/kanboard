@@ -183,4 +183,7 @@ return array(
     'There is no column in your project!' => 'Il n\'y a aucune colonne dans votre projet !',
     'Change assignee' => 'Changer la personne assignée',
     'Change assignee for the task "%s"' => 'Changer la personne assignée pour la tâche « %s »',
+    /* missing
+    'Timezone' => ''
+    */
 );
