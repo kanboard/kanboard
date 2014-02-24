@@ -6,12 +6,10 @@
     <form method="post" action="?controller=task&amp;action=update" autocomplete="off">
 
         <?= Helper\form_hidden('id', $values) ?>
+        <?= Helper\form_hidden('project_id', $values) ?>
 
         <?= Helper\form_label(t('Title'), 'title') ?>
         <?= Helper\form_text('title', $values, $errors, array('required')) ?><br/>
-
-        <?= Helper\form_label(t('Project'), 'project_id') ?>
-        <?= Helper\form_select('project_id', $projects_list, $values, $errors) ?><br/>
 
         <?= Helper\form_label(t('Column'), 'column_id') ?>
         <?= Helper\form_select('column_id', $columns_list, $values, $errors) ?><br/>

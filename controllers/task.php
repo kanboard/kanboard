@@ -121,7 +121,6 @@ class Task extends Base
         $this->response->html($this->template->layout('task_edit', array(
             'errors' => array(),
             'values' => $task,
-            'projects_list' => $this->project->getListByStatus(\Model\Project::ACTIVE),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'users_list' => $this->user->getList(),
             'colors_list' => $this->task->getColors(),
@@ -150,7 +149,6 @@ class Task extends Base
         $this->response->html($this->template->layout('task_edit', array(
             'errors' => $errors,
             'values' => $values,
-            'projects_list' => $this->project->getListByStatus(\Model\Project::ACTIVE),
             'columns_list' => $this->board->getColumnsList($values['project_id']),
             'users_list' => $this->user->getList(),
             'colors_list' => $this->task->getColors(),
