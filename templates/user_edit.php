@@ -22,7 +22,7 @@
         <?= Helper\form_label(t('Default Project'), 'default_project_id') ?>
         <?= Helper\form_select('default_project_id', $projects, $values, $errors) ?><br/>
 
-        <?php if ($values['is_admin'] == 1): ?>
+        <?php if (Helper\is_admin()): ?>
             <?= Helper\form_checkbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1 ? true : false) ?>
         <?php endif ?>
 

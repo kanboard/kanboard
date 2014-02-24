@@ -2,6 +2,16 @@
 
 namespace Helper;
 
+function is_current_user($user_id)
+{
+    return $_SESSION['user']['id'] == $user_id;
+}
+
+function is_admin()
+{
+    return $_SESSION['user']['is_admin'] == 1;
+}
+
 function markdown($text)
 {
     require_once __DIR__.'/../vendor/Michelf/MarkdownExtra.inc.php';

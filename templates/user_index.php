@@ -1,7 +1,7 @@
 <section id="main">
     <div class="page-header">
         <h2><?= t('Users') ?><span id="page-counter"> (<?= $nb_users ?>)</span></h2>
-        <?php if ($_SESSION['user']['is_admin'] == 1): ?>
+        <?php if (Helper\is_admin()): ?>
         <ul>
             <li><a href="?controller=user&amp;action=create"><?= t('New user') ?></a></li>
         </ul>
@@ -30,10 +30,10 @@
                     <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $projects[$user['default_project_id']] : t('None'); ?>
                 </td>
                 <td>
-                    <?php if ($_SESSION['user']['is_admin'] == 1 || $_SESSION['user']['id'] == $user['id']): ?>
+                    <?php if (Helper\is_admin() || Helper\is_current_user($user['id'])): ?>
                         <a href="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>"><?= t('edit') ?></a>
                     <?php endif ?>
-                    <?php if ($_SESSION['user']['is_admin'] == 1): ?>
+                    <?php if (Helper\is_admin()): ?>
                         <?php if (count($users) > 1): ?>
                             <?= t('or') ?>
                             <a href="?controller=user&amp;action=confirm&amp;user_id=<?= $user['id'] ?>"><?= t('remove') ?></a>

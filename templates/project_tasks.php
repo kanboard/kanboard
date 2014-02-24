@@ -4,7 +4,7 @@
         <ul>
             <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('Back to the board') ?></a></li>
             <li><a href="?controller=project&amp;action=index"><?= t('List of projects') ?></a></li>
-            <?php if ($_SESSION['user']['is_admin'] == 1): ?>
+            <?php if (Helper\is_admin()): ?>
                 <li><a href="?controller=project&amp;action=create"><?= t('New project') ?></a></li>
             <?php endif ?>
         </ul>

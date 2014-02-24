@@ -1,7 +1,7 @@
 <section id="main">
     <div class="page-header">
         <h2><?= t('Projects') ?><span id="page-counter"> (<?= $nb_projects ?>)</span></h2>
-        <?php if ($_SESSION['user']['is_admin'] == 1): ?>
+        <?php if (Helper\is_admin()): ?>
         <ul>
             <li><a href="?controller=project&amp;action=create"><?= t('New project') ?></a></li>
         </ul>
@@ -18,7 +18,7 @@
                 <th><?= t('Tasks') ?></th>
                 <th><?= t('Board') ?></th>
 
-                <?php if ($_SESSION['user']['is_admin'] == 1): ?>
+                <?php if (Helper\is_admin()): ?>
                     <th><?= t('Actions') ?></th>
                 <?php endif ?>
             </tr>
@@ -56,7 +56,7 @@
                     <?php endforeach ?>
                     </ul>
                 </td>
-                <?php if ($_SESSION['user']['is_admin'] == 1): ?>
+                <?php if (Helper\is_admin()): ?>
                 <td>
                     <ul>
                         <li>
