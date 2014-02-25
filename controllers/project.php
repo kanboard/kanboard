@@ -88,6 +88,11 @@ class Project extends Base
 
         $project = $this->project->get($this->request->getIntegerParam('project_id'));
 
+        if (! $project) {
+            $this->session->flashError(t('Project not found.'));
+            $this->response->redirect('?controller=project');
+        }
+
         $this->response->html($this->template->layout('project_edit', array(
             'errors' => array(),
             'values' => $project,
@@ -128,8 +133,15 @@ class Project extends Base
     {
         $this->checkPermissions();
 
+        $project = $this->project->get($this->request->getIntegerParam('project_id'));
+
+        if (! $project) {
+            $this->session->flashError(t('Project not found.'));
+            $this->response->redirect('?controller=project');
+        }
+
         $this->response->html($this->template->layout('project_remove', array(
-            'project' => $this->project->get($this->request->getIntegerParam('project_id')),
+            'project' => $project,
             'menu' => 'projects',
             'title' => t('Remove project')
         )));

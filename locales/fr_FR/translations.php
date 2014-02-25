@@ -184,4 +184,6 @@ return array(
     'Change assignee' => 'Changer la personne assignée',
     'Change assignee for the task "%s"' => 'Changer la personne assignée pour la tâche « %s »',
     'Timezone' => 'Fuseau horaire',
+    'Sorry, I didn\'t found this information in my database!' => 'Désolé, je n\'ai pas trouvé cette information dans ma base de données !',
+    'Page not found' => 'Page introuvable',
 );

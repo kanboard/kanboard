@@ -112,11 +112,13 @@ class User extends Base
     {
         $user = $this->user->getById($this->request->getIntegerParam('user_id'));
 
+        if (! $user) $this->notfound();
+
         if (! $_SESSION['user']['is_admin'] && $_SESSION['user']['id'] != $user['id']) {
-            $this->response->redirect('?controller=user&action=forbidden');
+            $this->forbidden();
         }
 
-        if (! empty($user)) unset($user['password']);
+        unset($user['password']);
 
         $this->response->html($this->template->layout('user_edit', array(
             'projects' => $this->project->getList(),
@@ -138,7 +140,7 @@ class User extends Base
         else {
 
             if ($_SESSION['user']['id'] != $values['id']) {
-                $this->response->redirect('?controller=user&action=forbidden');
+                $this->forbidden();
             }
 
             if (isset($values['is_admin'])) {
@@ -173,8 +175,12 @@ class User extends Base
     {
         $this->checkPermissions();
 
+        $user = $this->user->getById($this->request->getIntegerParam('user_id'));
+
+        if (! $user) $this->notfound();
+
         $this->response->html($this->template->layout('user_remove', array(
-            'user' => $this->user->getById($this->request->getIntegerParam('user_id')),
+            'user' => $user,
             'menu' => 'users',
             'title' => t('Remove user')
         )));

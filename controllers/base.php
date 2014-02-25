@@ -90,4 +90,9 @@ abstract class Base
         $this->session->flash(t('There is no active project, the first step is to create a new project.'));
         $this->response->redirect('?controller=project&action=create');
     }
+
+    public function notfound()
+    {
+        $this->response->html($this->template->layout('app_notfound', array('title' => t('Page not found'))));
+    }
 }

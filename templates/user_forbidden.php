@@ -6,5 +6,4 @@
     <p class="alert alert-error">
         <?= t('Only administrators can access to this page.') ?>
     </p>
-
 </section>

@@ -44,6 +44,8 @@ class Task extends Base
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
 
+        if (! $task) $this->notfound();
+
         $this->response->html($this->template->layout('task_show', array(
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
@@ -118,6 +120,8 @@ class Task extends Base
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
 
+        if (! $task) $this->notfound();
+
         $this->response->html($this->template->layout('task_edit', array(
             'errors' => array(),
             'values' => $task,
@@ -174,8 +178,12 @@ class Task extends Base
     // Confirmation dialog before to close a task
     public function confirmClose()
     {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
+
+        if (! $task) $this->notfound();
+
         $this->response->html($this->template->layout('task_close', array(
-            'task' => $this->task->getById($this->request->getIntegerParam('task_id')),
+            'task' => $task,
             'menu' => 'tasks',
             'title' => t('Close a task')
         )));
@@ -198,8 +206,12 @@ class Task extends Base
     // Confirmation dialog before to open a task
     public function confirmOpen()
     {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
+
+        if (! $task) $this->notfound();
+
         $this->response->html($this->template->layout('task_open', array(
-            'task' => $this->task->getById($this->request->getIntegerParam('task_id')),
+            'task' => $task,
             'menu' => 'tasks',
             'title' => t('Open a task')
         )));

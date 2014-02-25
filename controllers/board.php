@@ -11,6 +11,8 @@ class Board extends Base
         $project = $this->project->get($task['project_id']);
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
 
+        if (! $project) $this->notfound();
+
         $this->response->html($this->template->layout('board_assign', array(
             'errors' => array(),
             'values' => $task,
@@ -92,6 +94,9 @@ class Board extends Base
     {
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
         $project_id = $this->request->getIntegerParam('project_id');
+
+        if (! isset($projects[$project_id])) $this->notfound();
+
         $project_name = $projects[$project_id];
 
         $this->response->html($this->template->layout('board_index', array(
@@ -111,6 +116,9 @@ class Board extends Base
 
         $project_id = $this->request->getIntegerParam('project_id');
         $project = $this->project->get($project_id);
+
+        if (! $project) $this->notfound();
+
         $columns = $this->board->getColumnsList($project_id);
         $values = array();
 
@@ -135,6 +143,9 @@ class Board extends Base
 
         $project_id = $this->request->getIntegerParam('project_id');
         $project = $this->project->get($project_id);
+
+        if (! $project) $this->notfound();
+
         $columns = $this->board->getColumnsList($project_id);
         $data = $this->request->getValues();
         $values = array();
@@ -173,6 +184,9 @@ class Board extends Base
 
         $project_id = $this->request->getIntegerParam('project_id');
         $project = $this->project->get($project_id);
+
+        if (! $project) $this->notfound();
+
         $columns = $this->board->getColumnsList($project_id);
         $data = $this->request->getValues();
         $values = array();
