@@ -115,6 +115,7 @@ input[type="checkbox"] {
     border: 1px solid #ccc;
 }
 
+input[type="number"],
 input[type="date"],
 input[type="email"],
 input[type="tel"],
@@ -130,6 +131,7 @@ input[type="text"] {
     appearance: none;
 }
 
+input[type="number"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
 input[type="tel"]:focus,
@@ -140,6 +142,10 @@ textarea:focus {
     border-color: rgba(82, 168, 236, 0.8);
     outline: 0;
     box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+input[type="number"] {
+    width: 50px;
 }
 
 textarea {
@@ -494,11 +500,35 @@ div.task a:hover {
     text-decoration: underline;
 }
 
+#infos,
+div.task {
+    position: relative;
+}
+
+.task-score {
+    font-weight: bold;
+    position: absolute;
+}
+
+div.task .task-score {
+    font-size: 1.5em;
+    right: 5px;
+    top: 0;
+}
+
+/* task view */
 article.task li {
     margin-left: 20px;
     list-style-type: square;
 }
 
+article .task-score {
+    font-size: 1.9em;
+    right: 10px;
+    top: 5px;
+}
+
+/* task colors */
 tr td.task-blue,
 .task-blue {
     background-color: rgb(219, 235, 255);

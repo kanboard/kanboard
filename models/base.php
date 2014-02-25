@@ -17,7 +17,7 @@ require __DIR__.'/schema.php';
 abstract class Base
 {
     const APP_VERSION = 'master';
-    const DB_VERSION  = 4;
+    const DB_VERSION  = 5;
     const DB_FILENAME = 'data/db.sqlite';
 
     private static $dbInstance = null;

@@ -20,6 +20,9 @@
         <?= Helper\form_label(t('Assignee'), 'owner_id') ?>
         <?= Helper\form_select('owner_id', $users_list, $values, $errors) ?><br/>
 
+        <?= Helper\form_label(t('Story Points'), 'score') ?>
+        <?= Helper\form_number('score', $values, $errors) ?><br/>
+
         <?= Helper\form_label(t('Description'), 'description') ?>
         <?= Helper\form_textarea('description', $values, $errors) ?><br/>
 

@@ -29,6 +29,10 @@
                             <?php endif ?>
                             </span>
 
+                            <?php if ($task['score']): ?>
+                                <span class="task-score"><?= Helper\escape($task['score']) ?></span>
+                            <?php endif ?>
+
                             <div class="task-title">
                                 <?= Helper\escape($task['title']) ?>
                             </div>

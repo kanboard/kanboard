@@ -2,6 +2,11 @@
 
 namespace Schema;
 
+function version_5($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD column score INTEGER");
+}
+
 function version_4($pdo)
 {
     $pdo->exec("ALTER TABLE config ADD column timezone TEXT DEFAULT 'UTC'");

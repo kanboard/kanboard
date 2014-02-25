@@ -186,4 +186,5 @@ return array(
     'Timezone' => 'Strefa czasowa',
     //'Sorry, I didn\'t found this information in my database!' => '',
     //'Page not found' => '',
+    //'Story Points' => '',
 );

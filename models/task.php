@@ -40,6 +40,7 @@ class Task extends Base
                         self::TABLE.'.owner_id',
                         self::TABLE.'.position',
                         self::TABLE.'.is_active',
+                        self::TABLE.'.score',
                         \Model\Project::TABLE.'.name AS project_name',
                         \Model\Board::TABLE.'.title AS column_title',
                         \Model\User::TABLE.'.username'
@@ -71,6 +72,7 @@ class Task extends Base
                 self::TABLE.'.owner_id',
                 self::TABLE.'.position',
                 self::TABLE.'.is_active',
+                self::TABLE.'.score',
                 \Model\Board::TABLE.'.title AS column_title',
                 \Model\User::TABLE.'.username'
             )
@@ -95,7 +97,7 @@ class Task extends Base
     {
         return $this->db
                     ->table(self::TABLE)
-                    ->columns('tasks.id', 'title', 'color_id', 'project_id', 'owner_id', 'column_id', 'position', 'users.username')
+                    ->columns('tasks.id', 'title', 'color_id', 'project_id', 'owner_id', 'column_id', 'position', 'score', 'users.username')
                     ->join('users', 'id', 'owner_id')
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
@@ -179,6 +181,7 @@ class Task extends Base
             new Validators\Required('column_id', t('The column is required')),
             new Validators\Integer('column_id', t('This value must be an integer')),
             new Validators\Integer('owner_id', t('This value must be an integer')),
+            new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Required('title', t('The title is required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
         ));
@@ -200,6 +203,7 @@ class Task extends Base
             new Validators\Required('column_id', t('The column is required')),
             new Validators\Integer('column_id', t('This value must be an integer')),
             new Validators\Integer('owner_id', t('This value must be an integer')),
+            new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Required('title', t('The title is required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
         ));

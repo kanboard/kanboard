@@ -230,3 +230,8 @@ function form_date($name, $values = array(), array $errors = array(), array $att
 {
     return form_input('date', $name, $values, $errors, $attributes, $class);
 }
+
+function form_number($name, $values = array(), array $errors = array(), array $attributes = array(), $class = '')
+{
+    return form_input('number', $name, $values, $errors, $attributes, $class);
+}

@@ -186,4 +186,5 @@ return array(
     'Timezone' => 'Fuseau horaire',
     'Sorry, I didn\'t found this information in my database!' => 'Désolé, je n\'ai pas trouvé cette information dans ma base de données !',
     'Page not found' => 'Page introuvable',
+    'Story Points' => 'Complexité',
 );

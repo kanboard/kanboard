@@ -8,6 +8,9 @@
     <section>
         <h3><?= t('Details') ?></h3>
         <article id="infos" class="task task-<?= $task['color_id'] ?>">
+        <?php if ($task['score']): ?>
+            <span class="task-score"><?= Helper\escape($task['score']) ?></span>
+        <?php endif ?>
         <ul>
             <li>
                 <?= dt('Created on %B %e, %G at %k:%M %p', $task['date_creation']) ?>
