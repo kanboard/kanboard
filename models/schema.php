@@ -2,19 +2,24 @@
 
 namespace Schema;
 
+function version_6($pdo)
+{
+    $pdo->exec("ALTER TABLE columns ADD COLUMN task_limit INTEGER DEFAULT '0'");
+}
+
 function version_5($pdo)
 {
-    $pdo->exec("ALTER TABLE tasks ADD column score INTEGER");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN score INTEGER");
 }
 
 function version_4($pdo)
 {
-    $pdo->exec("ALTER TABLE config ADD column timezone TEXT DEFAULT 'UTC'");
+    $pdo->exec("ALTER TABLE config ADD COLUMN timezone TEXT DEFAULT 'UTC'");
 }
 
 function version_3($pdo)
 {
-    $pdo->exec('ALTER TABLE projects ADD column token TEXT');
+    $pdo->exec('ALTER TABLE projects ADD COLUMN token TEXT');
 
     // For each existing project, assign a different token
     $rq = $pdo->prepare("SELECT id FROM projects WHERE token IS NULL");
@@ -32,7 +37,7 @@ function version_3($pdo)
 
 function version_2($pdo)
 {
-    $pdo->exec('ALTER TABLE tasks ADD column date_completed INTEGER');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN date_completed INTEGER');
     $pdo->exec('UPDATE tasks SET date_completed=date_creation WHERE is_active=0');
 }
 

@@ -61,8 +61,10 @@ class Board extends Base
     {
         $this->db->startTransaction();
 
-        foreach ($values as $column_id => $column_title) {
-            $this->db->table(self::TABLE)->eq('id', $column_id)->update(array('title' => $column_title));
+        foreach (array('title', 'task_limit') as $field) {
+            foreach ($values[$field] as $column_id => $field_value) {
+                $this->db->table(self::TABLE)->eq('id', $column_id)->update(array($field => $field_value));
+            }
         }
 
         $this->db->closeTransaction();
@@ -140,6 +142,8 @@ class Board extends Base
         $rules = array();
 
         foreach ($columns as $column_id => $column_title) {
+            $rules[] = new Validators\Integer('task_limit['.$column_id.']', t('This value must be an integer'));
+            $rules[] = new Validators\GreaterThan('task_limit['.$column_id.']', t('This value must be greater than %d', 0), 0);
             $rules[] = new Validators\Required('title['.$column_id.']', t('The title is required'));
             $rules[] = new Validators\MaxLength('title['.$column_id.']', t('The maximum length is %d characters', 50), 50);
         }

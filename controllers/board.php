@@ -119,11 +119,12 @@ class Board extends Base
 
         if (! $project) $this->notfound();
 
-        $columns = $this->board->getColumnsList($project_id);
+        $columns = $this->board->getColumns($project_id);
         $values = array();
 
-        foreach ($columns as $column_id => $column_title) {
-            $values['title['.$column_id.']'] = $column_title;
+        foreach ($columns as $column) {
+            $values['title['.$column['id'].']'] = $column['title'];
+            $values['task_limit['.$column['id'].']'] = $column['task_limit'] ?: null;
         }
 
         $this->response->html($this->template->layout('board_edit', array(
@@ -146,19 +147,21 @@ class Board extends Base
 
         if (! $project) $this->notfound();
 
-        $columns = $this->board->getColumnsList($project_id);
+        $columns = $this->board->getColumns($project_id);
         $data = $this->request->getValues();
-        $values = array();
+        $values = $columns_list = array();
 
-        foreach ($columns as $column_id => $column_title) {
-            $values['title['.$column_id.']'] = isset($data['title'][$column_id]) ? $data['title'][$column_id] : '';
+        foreach ($columns as $column) {
+            $columns_list[$column['id']] = $column['title'];
+            $values['title['.$column['id'].']'] = isset($data['title'][$column['id']]) ? $data['title'][$column['id']] : '';
+            $values['task_limit['.$column['id'].']'] = isset($data['task_limit'][$column['id']]) ? $data['task_limit'][$column['id']] : 0;
         }
 
-        list($valid, $errors) = $this->board->validateModification($columns, $values);
+        list($valid, $errors) = $this->board->validateModification($columns_list, $values);
 
         if ($valid) {
 
-            if ($this->board->update($data['title'])) {
+            if ($this->board->update($data)) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
             }

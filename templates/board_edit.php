@@ -12,9 +12,10 @@
 
         <?php $i = 0; ?>
 
-        <?php foreach ($columns as $column_id => $column_title): ?>
-            <?= Helper\form_label(t('Column %d', ++$i), 'title['.$column_id.']') ?>
-            <?= Helper\form_text('title['.$column_id.']', $values, $errors, array('required')) ?>
+        <?php foreach ($columns as $column): ?>
+            <?= Helper\form_label(t('Column %d', ++$i), 'title['.$column['id'].']') ?>
+            <?= Helper\form_text('title['.$column['id'].']', $values, $errors, array('required')) ?>
+            <?= Helper\form_number('task_limit['.$column['id'].']', $values, $errors, array('placeholder="'.t('limit').'"')) ?>
             <a href="?controller=board&amp;action=confirm&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column_id ?>"><?= t('Remove') ?></a>
         <?php endforeach ?>
 

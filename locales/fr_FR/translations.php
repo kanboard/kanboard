@@ -187,4 +187,7 @@ return array(
     'Sorry, I didn\'t found this information in my database!' => 'Désolé, je n\'ai pas trouvé cette information dans ma base de données !',
     'Page not found' => 'Page introuvable',
     'Story Points' => 'Complexité',
+    'limit' => 'limite',
+    'Task limit' => 'Nombre maximum de tâches',
+    'This value must be greater than %d' => 'Cette valeur doit être plus grande que %d',
 );

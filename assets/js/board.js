@@ -111,6 +111,23 @@
 
         [].forEach.call(cols, function(col) {
 
+            var task_limit = col.getAttribute("data-task-limit");
+
+            if (task_limit != "") {
+
+                task_limit = parseInt(task_limit);
+
+                if (col.children.length > task_limit) {
+                    col.classList.add("task-limit-warning");
+                }
+                else {
+                    col.classList.remove("task-limit-warning");
+                }
+
+                var counter = document.getElementById("task-number-column-" + col.getAttribute("data-column-id"));
+                if (counter) counter.innerHTML = col.children.length;
+            }
+
             [].forEach.call(col.children, function(item) {
 
                 data.push({

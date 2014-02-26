@@ -67,9 +67,8 @@ abstract class Base
         $language = $this->config->get('language', 'en_US');
         if ($language !== 'en_US') \Translator\load($language);
 
-        //set timezone
-        $timezone = $this->config->get('timezone', 'UTC');
-        date_default_timezone_set($timezone);
+        // Set timezone
+        date_default_timezone_set($this->config->get('timezone', 'UTC'));
 
         $this->response->csp();
         $this->response->nosniff();

@@ -445,6 +445,10 @@ nav .active a {
     vertical-align: top;
 }
 
+#board td.task-limit-warning {
+    background-color: red;
+}
+
 .task-title {
     margin-top: 10px;
     font-size: 110%;

@@ -9,12 +9,15 @@
                 <?php foreach ($columns as $column): ?>
                 <th width="<?= $column_with ?>%">
                     <?= Helper\escape($column['title']) ?>
+                    <?php if ($column['task_limit']): ?>
+                        <span title="<?= t('Task limit') ?>" class="task-limit">(<?= Helper\escape(count($column['tasks']).'/'.$column['task_limit']) ?>)</span>
+                    <?php endif ?>
                 </th>
                 <?php endforeach ?>
             </tr>
             <tr>
                 <?php foreach ($columns as $column): ?>
-                <td class="column">
+                <td class="column <?= $column['task_limit'] && count($column['tasks']) > $column['task_limit'] ? 'task-limit-warning' : '' ?>">
                     <?php foreach ($column['tasks'] as $task): ?>
                     <div class="draggable-item">
                         <div class="task task-<?= $task['color_id'] ?>">

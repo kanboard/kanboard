@@ -32,12 +32,26 @@
                 <th width="<?= $column_with ?>%">
                     <a href="?controller=task&amp;action=create&amp;project_id=<?= $column['project_id'] ?>&amp;column_id=<?= $column['id'] ?>" title="<?= t('Add a new task') ?>">+</a>
                     <?= Helper\escape($column['title']) ?>
+                    <?php if ($column['task_limit']): ?>
+                        <span title="<?= t('Task limit') ?>" class="task-limit">
+                            (
+                             <span id="task-number-column-<?= $column['id'] ?>"><?= count($column['tasks']) ?></span>
+                             /
+                             <?= Helper\escape($column['task_limit']) ?>
+                            )
+                        </span>
+                    <?php endif ?>
                 </th>
                 <?php endforeach ?>
             </tr>
             <tr>
                 <?php foreach ($columns as $column): ?>
-                <td id="column-<?= $column['id'] ?>" class="column" data-column-id="<?= $column['id'] ?>" dropzone="copy">
+                <td
+                    id="column-<?= $column['id'] ?>"
+                    class="column <?= $column['task_limit'] && count($column['tasks']) > $column['task_limit'] ? 'task-limit-warning' : '' ?>"
+                    data-column-id="<?= $column['id'] ?>"
+                    data-task-limit="<?= $column['task_limit'] ?>"
+                    dropzone="copy">
                     <?php foreach ($column['tasks'] as $task): ?>
                     <div class="draggable-item" draggable="true">
                         <div class="task task-<?= $task['color_id'] ?>" data-task-id="<?= $task['id'] ?>">
