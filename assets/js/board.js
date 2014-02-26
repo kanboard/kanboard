@@ -113,7 +113,7 @@
 
             var task_limit = col.getAttribute("data-task-limit");
 
-            if (task_limit != "") {
+            if (task_limit != "" && task_limit != "0") {
 
                 task_limit = parseInt(task_limit);
 
