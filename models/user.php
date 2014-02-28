@@ -88,7 +88,7 @@ class User extends Base
             new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
             new Validators\Required('confirmation', t('The confirmation is required')),
             new Validators\Equals('password', 'confirmation', t('Passwords doesn\'t matches')),
-            new Validators\Integer('default_project_id', t('The value must be an integer')),
+            new Validators\Integer('default_project_id', t('This value must be an integer')),
             new Validators\Integer('is_admin', t('This value must be an integer')),
         ));
 

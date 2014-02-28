@@ -9,5 +9,8 @@ if (file_exists('config.php')) require 'config.php';
 // Auto-refresh frequency in seconds for the public board view
 defined('AUTO_REFRESH_DURATION') or define('AUTO_REFRESH_DURATION', 60);
 
+// Custom session save path
+defined('SESSION_SAVE_PATH') or define('SESSION_SAVE_PATH', '');
+
 $router = new Router;
 $router->execute();

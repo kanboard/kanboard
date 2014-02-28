@@ -57,7 +57,7 @@ abstract class Base
 
     public function beforeAction($controller, $action)
     {
-        $this->session->open(dirname($_SERVER['PHP_SELF']));
+        $this->session->open(dirname($_SERVER['PHP_SELF']), SESSION_SAVE_PATH);
 
         if (! isset($_SESSION['user']) && ! $this->noAuthAllowed($controller, $action)) {
             $this->response->redirect('?controller=user&action=login');
