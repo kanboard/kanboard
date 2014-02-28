@@ -16,7 +16,7 @@
             <?= Helper\form_label(t('Column %d', ++$i), 'title['.$column['id'].']') ?>
             <?= Helper\form_text('title['.$column['id'].']', $values, $errors, array('required')) ?>
             <?= Helper\form_number('task_limit['.$column['id'].']', $values, $errors, array('placeholder="'.t('limit').'"')) ?>
-            <a href="?controller=board&amp;action=confirm&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column_id ?>"><?= t('Remove') ?></a>
+            <a href="?controller=board&amp;action=confirm&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'] ?>"><?= t('Remove') ?></a>
         <?php endforeach ?>
 
         <div class="form-actions">
