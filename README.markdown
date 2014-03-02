@@ -77,7 +77,7 @@ Requirements
 
 - Apache or Nginx
 - PHP >= 5.3.3
-- PHP extensions required: mbstring and pdo_sqlite
+- PHP extensions required: mbstring and pdo_sqlite (don't forget to enable extensions)
 - A web browser with HTML5 drag and drop support
 
 Installation
@@ -159,6 +159,7 @@ open http://localhost:8000/
 ```bash
 apt-get update
 apt-get install -y php5 php5-sqlite
+echo 'extension=sqlite.so' >> /etc/php5/conf.d/sqlite.ini
 cd /var/www/
 wget http://kanboard.net/kanboard-VERSION.zip
 unzip kanboard-VERSION.zip
