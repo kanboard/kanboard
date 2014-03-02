@@ -184,10 +184,23 @@ return array(
     'Change assignee' => 'Zmień odpowiedzialną osobę',
     'Change assignee for the task "%s"' => 'Zmień odpowiedzialną osobę dla zadania "%s"',
     'Timezone' => 'Strefa czasowa',
+    // Missing translations:
+
     //'Sorry, I didn\'t found this information in my database!' => '',
     //'Page not found' => '',
     //'Story Points' => '',
     //'limit' => '',
     //'Task limit' => '',
     //'This value must be greater than %d' => '',
+    // 'Edit project access list' => '',
+    // 'Edit users access' => '',
+    // 'Allow this user' => '',
+    // 'Project access list for "%s"' => '',
+    // 'Only those users have access to this project:' => '',
+    // 'Don\'t forget that administrators have access to everything.' => '',
+    // 'revoke' => '',
+    // 'List of authorized users' => '',
+    // 'User' => '',
+    // 'Everybody have access to this project.' => '',
+    // 'You are not allowed to access to this project.' => '',
 );

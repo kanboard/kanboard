@@ -12,5 +12,8 @@ defined('AUTO_REFRESH_DURATION') or define('AUTO_REFRESH_DURATION', 60);
 // Custom session save path
 defined('SESSION_SAVE_PATH') or define('SESSION_SAVE_PATH', '');
 
+// Database filename
+defined('DB_FILENAME') or define('DB_FILENAME', 'data/db.sqlite');
+
 $router = new Router;
 $router->execute();

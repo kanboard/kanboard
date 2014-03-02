@@ -23,8 +23,6 @@ class Config extends Base
     // Validate and save settings
     public function save()
     {
-        $this->checkPermissions();
-
         $values = $this->request->getValues();
         list($valid, $errors) = $this->config->validateModification($values);
 
@@ -56,7 +54,6 @@ class Config extends Base
     // Download the database
     public function downloadDb()
     {
-        $this->checkPermissions();
         $this->response->forceDownload('db.sqlite.gz');
         $this->response->binary($this->config->downloadDatabase());
     }
@@ -64,7 +61,6 @@ class Config extends Base
     // Optimize the database
     public function optimizeDb()
     {
-        $this->checkPermissions();
         $this->config->optimizeDatabase();
         $this->session->flash(t('Database optimization done.'));
         $this->response->redirect('?controller=config');

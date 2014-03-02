@@ -63,6 +63,9 @@
                             <a href="?controller=project&amp;action=edit&amp;project_id=<?= $project['id'] ?>"><?= t('Edit project') ?></a>
                         </li>
                         <li>
+                            <a href="?controller=project&amp;action=users&amp;project_id=<?= $project['id'] ?>"><?= t('Edit users access') ?></a>
+                        </li>
+                        <li>
                             <a href="?controller=board&amp;action=edit&amp;project_id=<?= $project['id'] ?>"><?= t('Edit board') ?></a>
                         </li>
                         <li>

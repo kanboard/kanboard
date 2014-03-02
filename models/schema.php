@@ -2,6 +2,20 @@
 
 namespace Schema;
 
+function version_7($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_has_users (
+            id INTEGER PRIMARY KEY,
+            project_id INTEGER,
+            user_id INTEGER,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            UNIQUE(project_id, user_id)
+        )
+    ");
+}
+
 function version_6($pdo)
 {
     $pdo->exec("ALTER TABLE columns ADD COLUMN task_limit INTEGER DEFAULT '0'");

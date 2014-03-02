@@ -9,6 +9,7 @@ require __DIR__.'/../lib/template.php';
 require __DIR__.'/../lib/helper.php';
 require __DIR__.'/../lib/translator.php';
 require __DIR__.'/../models/base.php';
+require __DIR__.'/../models/acl.php';
 require __DIR__.'/../models/config.php';
 require __DIR__.'/../models/user.php';
 require __DIR__.'/../models/project.php';
@@ -26,6 +27,7 @@ abstract class Base
     protected $task;
     protected $board;
     protected $config;
+    protected $acl;
 
     public function __construct()
     {
@@ -38,30 +40,20 @@ abstract class Base
         $this->project = new \Model\Project;
         $this->task = new \Model\Task;
         $this->board = new \Model\Board;
-    }
-
-    private function noAuthAllowed($controller, $action)
-    {
-        $public = array(
-            'user' => array('login', 'check'),
-            'task' => array('add'),
-            'board' => array('readonly'),
-        );
-
-        if (isset($public[$controller])) {
-            return in_array($action, $public[$controller]);
-        }
-
-        return false;
+        $this->acl = new \Model\Acl;
     }
 
     public function beforeAction($controller, $action)
     {
+        // Start the session
         $this->session->open(dirname($_SERVER['PHP_SELF']), SESSION_SAVE_PATH);
 
-        if (! isset($_SESSION['user']) && ! $this->noAuthAllowed($controller, $action)) {
-            $this->response->redirect('?controller=user&action=login');
-        }
+        // HTTP secure headers
+        $this->response->csp();
+        $this->response->nosniff();
+        $this->response->xss();
+        $this->response->hsts();
+        $this->response->xframe();
 
         // Load translations
         $language = $this->config->get('language', 'en_US');
@@ -70,17 +62,24 @@ abstract class Base
         // Set timezone
         date_default_timezone_set($this->config->get('timezone', 'UTC'));
 
-        $this->response->csp();
-        $this->response->nosniff();
-        $this->response->xss();
-        $this->response->hsts();
-        $this->response->xframe();
+        // If the user is not authenticated redirect to the login form, if the action is public continue
+        if (! isset($_SESSION['user']) && ! $this->acl->isPublicAction($controller, $action)) {
+            $this->response->redirect('?controller=user&action=login');
+        }
+
+        // Check if the user is allowed to see this page
+        if (! $this->acl->isPageAccessAllowed($controller, $action)) {
+            $this->response->redirect('?controller=user&action=forbidden');
+        }
     }
 
-    public function checkPermissions()
+    public function checkProjectPermissions($project_id)
     {
-        if ($_SESSION['user']['is_admin'] == 0) {
-            $this->response->redirect('?controller=user&action=forbidden');
+        if ($this->acl->isRegularUser()) {
+
+            if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+                $this->response->redirect('?controller=project&action=forbidden');
+            }
         }
     }
 

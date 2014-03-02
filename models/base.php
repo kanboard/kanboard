@@ -18,8 +18,7 @@ require __DIR__.'/schema.php';
 abstract class Base
 {
     const APP_VERSION = 'master';
-    const DB_VERSION  = 6;
-    const DB_FILENAME = 'data/db.sqlite';
+    const DB_VERSION  = 7;
 
     private static $dbInstance = null;
     protected $db;
@@ -37,7 +36,7 @@ abstract class Base
     {
         $db = new \PicoDb\Database(array(
             'driver' => 'sqlite',
-            'filename' => self::DB_FILENAME
+            'filename' => DB_FILENAME
         ));
 
         if ($db->schema()->check(self::DB_VERSION)) {

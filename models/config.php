@@ -79,11 +79,11 @@ class Config extends Base
 
     public function downloadDatabase()
     {
-        return gzencode(file_get_contents(self::DB_FILENAME));
+        return gzencode(file_get_contents(DB_FILENAME));
     }
 
     public function getDatabaseSize()
     {
-        return filesize(self::DB_FILENAME);
+        return filesize(DB_FILENAME);
     }
 }

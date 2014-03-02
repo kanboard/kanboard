@@ -8,15 +8,20 @@ class Board extends Base
     public function assign()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
-        $project = $this->project->get($task['project_id']);
+        $project = $this->project->getById($task['project_id']);
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
 
+        if ($this->acl->isRegularUser()) {
+            $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());
+        }
+
         if (! $project) $this->notfound();
+        $this->checkProjectPermissions($project['id']);
 
         $this->response->html($this->template->layout('board_assign', array(
             'errors' => array(),
             'values' => $task,
-            'users_list' => $this->user->getList(),
+            'users_list' => $this->project->getUsersList($project['id']),
             'projects' => $projects,
             'current_project_id' => $project['id'],
             'current_project_name' => $project['name'],
@@ -29,6 +34,8 @@ class Board extends Base
     public function assignTask()
     {
         $values = $this->request->getValues();
+        $this->checkProjectPermissions($values['project_id']);
+
         list($valid,) = $this->task->validateAssigneeModification($values);
 
         if ($valid && $this->task->update($values)) {
@@ -68,8 +75,18 @@ class Board extends Base
     {
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
 
-        if (! count($projects)) {
-            $this->redirectNoProject();
+        if ($this->acl->isRegularUser()) {
+            $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());
+        }
+
+        if (empty($projects)) {
+
+            if ($this->acl->isAdminUser()) {
+                $this->redirectNoProject();
+            }
+            else {
+                $this->response->redirect('?controller=project&action=forbidden');
+            }
         }
         else if (! empty($_SESSION['user']['default_project_id']) && isset($projects[$_SESSION['user']['default_project_id']])) {
             $project_id = $_SESSION['user']['default_project_id'];
@@ -78,6 +95,8 @@ class Board extends Base
         else {
             list($project_id, $project_name) = each($projects);
         }
+
+        $this->checkProjectPermissions($project_id);
 
         $this->response->html($this->template->layout('board_index', array(
             'projects' => $projects,
@@ -93,8 +112,14 @@ class Board extends Base
     public function show()
     {
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
+
+        if ($this->acl->isRegularUser()) {
+            $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());
+        }
+
         $project_id = $this->request->getIntegerParam('project_id');
 
+        $this->checkProjectPermissions($project_id);
         if (! isset($projects[$project_id])) $this->notfound();
 
         $project_name = $projects[$project_id];
@@ -112,10 +137,8 @@ class Board extends Base
     // Display a form to edit a board
     public function edit()
     {
-        $this->checkPermissions();
-
         $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->get($project_id);
+        $project = $this->project->getById($project_id);
 
         if (! $project) $this->notfound();
 
@@ -140,10 +163,8 @@ class Board extends Base
     // Validate and update a board
     public function update()
     {
-        $this->checkPermissions();
-
         $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->get($project_id);
+        $project = $this->project->getById($project_id);
 
         if (! $project) $this->notfound();
 
@@ -183,10 +204,8 @@ class Board extends Base
     // Validate and add a new column
     public function add()
     {
-        $this->checkPermissions();
-
         $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->get($project_id);
+        $project = $this->project->getById($project_id);
 
         if (! $project) $this->notfound();
 
@@ -224,8 +243,6 @@ class Board extends Base
     // Confirmation dialog before removing a column
     public function confirm()
     {
-        $this->checkPermissions();
-
         $this->response->html($this->template->layout('board_remove', array(
             'column' => $this->board->getColumn($this->request->getIntegerParam('column_id')),
             'menu' => 'projects',
@@ -236,8 +253,6 @@ class Board extends Base
     // Remove a column
     public function remove()
     {
-        $this->checkPermissions();
-
         $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
 
         if ($column && $this->board->removeColumn($column['id'])) {
@@ -252,6 +267,12 @@ class Board extends Base
     // Save the board (Ajax request made by the drag and drop)
     public function save()
     {
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+            $this->response->json(array('result' => false), 401);
+        }
+
         $this->response->json(array(
             'result' => $this->board->saveTasksPosition($this->request->getValues())
         ));

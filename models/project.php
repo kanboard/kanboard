@@ -8,10 +8,89 @@ use \SimpleValidator\Validators;
 class Project extends Base
 {
     const TABLE = 'projects';
+    const TABLE_USERS = 'project_has_users';
     const ACTIVE = 1;
     const INACTIVE = 0;
 
-    public function get($project_id)
+    public function getUsersList($project_id)
+    {
+        $allowed_users = $this->getAllowedUsers($project_id);
+
+        if (empty($allowed_users)) {
+            $userModel = new User;
+            $allowed_users = $userModel->getList();
+        }
+
+        return array(t('Unassigned')) + $allowed_users;
+    }
+
+    public function getAllowedUsers($project_id)
+    {
+        return $this->db
+            ->table(self::TABLE_USERS)
+            ->join(\Model\User::TABLE, 'id', 'user_id')
+            ->eq('project_id', $project_id)
+            ->asc('username')
+            ->listing('user_id', 'username');
+    }
+
+    public function getAllUsers($project_id)
+    {
+        $users = array(
+            'allowed' => array(),
+            'not_allowed' => array(),
+        );
+
+        $userModel = new User;
+        $all_users = $userModel->getList();
+
+        $users['allowed'] = $this->getAllowedUsers($project_id);
+
+        foreach ($all_users as $user_id => $username) {
+
+            if (! isset($users['allowed'][$user_id])) {
+                $users['not_allowed'][$user_id] = $username;
+            }
+        }
+
+        return $users;
+    }
+
+    public function allowUser($project_id, $user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE_USERS)
+                    ->save(array('project_id' => $project_id, 'user_id' => $user_id));
+    }
+
+    public function revokeUser($project_id, $user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE_USERS)
+                    ->eq('project_id', $project_id)
+                    ->eq('user_id', $user_id)
+                    ->remove();
+    }
+
+    public function isUserAllowed($project_id, $user_id)
+    {
+        // If there is nobody specified, everybody have access to the project
+        $nb_users = $this->db
+                    ->table(self::TABLE_USERS)
+                    ->eq('project_id', $project_id)
+                    ->count();
+
+        if ($nb_users < 1) return true;
+
+        // Otherwise, allow only specific users
+        return (bool) $this->db
+                    ->table(self::TABLE_USERS)
+                    ->eq('project_id', $project_id)
+                    ->eq('user_id', $user_id)
+                    ->count();
+    }
+
+    public function getById($project_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $project_id)->findOne();
     }
@@ -26,7 +105,7 @@ class Project extends Base
         return $this->db->table(self::TABLE)->findOne();
     }
 
-    public function getAll($fetch_stats = false)
+    public function getAll($fetch_stats = false, $check_permissions = false)
     {
         if (! $fetch_stats) {
             return $this->db->table(self::TABLE)->asc('name')->findAll();
@@ -41,20 +120,27 @@ class Project extends Base
 
         $taskModel = new \Model\Task;
         $boardModel = new \Model\Board;
+        $aclModel = new \Model\Acl;
 
-        foreach ($projects as &$project) {
+        foreach ($projects as $pkey => &$project) {
 
-            $columns = $boardModel->getcolumns($project['id']);
-            $project['nb_active_tasks'] = 0;
-
-            foreach ($columns as &$column) {
-                $column['nb_active_tasks'] = $taskModel->countByColumnId($project['id'], $column['id']);
-                $project['nb_active_tasks'] += $column['nb_active_tasks'];
+            if ($check_permissions && ! $this->isUserAllowed($project['id'], $aclModel->getUserId())) {
+                unset($projects[$pkey]);
             }
+            else {
 
-            $project['columns'] = $columns;
-            $project['nb_tasks'] = $taskModel->countByProjectId($project['id']);
-            $project['nb_inactive_tasks'] = $project['nb_tasks'] - $project['nb_active_tasks'];
+                $columns = $boardModel->getcolumns($project['id']);
+                $project['nb_active_tasks'] = 0;
+
+                foreach ($columns as &$column) {
+                    $column['nb_active_tasks'] = $taskModel->countByColumnId($project['id'], $column['id']);
+                    $project['nb_active_tasks'] += $column['nb_active_tasks'];
+                }
+
+                $project['columns'] = $columns;
+                $project['nb_tasks'] = $taskModel->countByProjectId($project['id']);
+                $project['nb_inactive_tasks'] = $project['nb_tasks'] - $project['nb_active_tasks'];
+            }
         }
 
         $this->db->closeTransaction();
@@ -93,12 +179,27 @@ class Project extends Base
                     ->count();
     }
 
+    public function filterListByAccess(array $projects, $user_id)
+    {
+        foreach ($projects as $project_id => $project_name) {
+            if (! $this->isUserAllowed($project_id, $user_id)) {
+                unset($projects[$project_id]);
+            }
+        }
+
+        return $projects;
+    }
+
     public function create(array $values)
     {
         $this->db->startTransaction();
 
         $values['token'] = self::generateToken();
-        $this->db->table(self::TABLE)->save($values);
+
+        if (! $this->db->table(self::TABLE)->save($values)) {
+            $this->db->cancelTransaction();
+            return false;
+        }
 
         $project_id = $this->db->getConnection()->getLastId();
 
@@ -112,7 +213,7 @@ class Project extends Base
 
         $this->db->closeTransaction();
 
-        return $project_id;
+        return (int) $project_id;
     }
 
     public function update(array $values)
@@ -163,6 +264,21 @@ class Project extends Base
             new Validators\Required('name', t('The project name is required')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
             new Validators\Unique('name', t('This project must be unique'), $this->db->getConnection(), self::TABLE)
+        ));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    public function validateUserAccess(array $values)
+    {
+        $v = new Validator($values, array(
+            new Validators\Required('project_id', t('The project id is required')),
+            new Validators\Integer('project_id', t('This value must be an integer')),
+            new Validators\Required('user_id', t('The user id is required')),
+            new Validators\Integer('user_id', t('This value must be an integer')),
         ));
 
         return array(

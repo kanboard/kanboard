@@ -588,6 +588,7 @@ tr td.task-orange,
 }
 
 /* config page */
+.listing,
 .settings {
     border-radius: 4px;
     padding: 8px 35px 8px 14px;
@@ -597,10 +598,16 @@ tr td.task-orange,
     background-color: #f0f0f0;
 }
 
+.listing li,
 .settings li {
     list-style-type: square;
     margin-left: 20px;
     margin-bottom: 3px;
+}
+
+.listing ul {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 /* confirmation box */

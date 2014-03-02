@@ -45,6 +45,7 @@ class Task extends Base
         $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
 
         if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
 
         $this->response->html($this->template->layout('task_show', array(
             'task' => $task,
@@ -59,6 +60,7 @@ class Task extends Base
     public function create()
     {
         $project_id = $this->request->getIntegerParam('project_id');
+        $this->checkProjectPermissions($project_id);
 
         $this->response->html($this->template->layout('task_new', array(
             'errors' => array(),
@@ -71,7 +73,7 @@ class Task extends Base
             ),
             'projects_list' => $this->project->getListByStatus(\Model\Project::ACTIVE),
             'columns_list' => $this->board->getColumnsList($project_id),
-            'users_list' => $this->user->getList(),
+            'users_list' => $this->project->getUsersList($project_id),
             'colors_list' => $this->task->getColors(),
             'menu' => 'tasks',
             'title' => t('New task')
@@ -82,6 +84,8 @@ class Task extends Base
     public function save()
     {
         $values = $this->request->getValues();
+        $this->checkProjectPermissions($values['project_id']);
+
         list($valid, $errors) = $this->task->validateCreation($values);
 
         if ($valid) {
@@ -108,7 +112,7 @@ class Task extends Base
             'values' => $values,
             'projects_list' => $this->project->getListByStatus(\Model\Project::ACTIVE),
             'columns_list' => $this->board->getColumnsList($values['project_id']),
-            'users_list' => $this->user->getList(),
+            'users_list' => $this->project->getUsersList($values['project_id']),
             'colors_list' => $this->task->getColors(),
             'menu' => 'tasks',
             'title' => t('New task')
@@ -121,12 +125,13 @@ class Task extends Base
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
 
         if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
 
         $this->response->html($this->template->layout('task_edit', array(
             'errors' => array(),
             'values' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'users_list' => $this->user->getList(),
+            'users_list' => $this->project->getUsersList($task['project_id']),
             'colors_list' => $this->task->getColors(),
             'menu' => 'tasks',
             'title' => t('Edit a task')
@@ -137,6 +142,8 @@ class Task extends Base
     public function update()
     {
         $values = $this->request->getValues();
+        $this->checkProjectPermissions($values['project_id']);
+
         list($valid, $errors) = $this->task->validateModification($values);
 
         if ($valid) {
@@ -154,7 +161,7 @@ class Task extends Base
             'errors' => $errors,
             'values' => $values,
             'columns_list' => $this->board->getColumnsList($values['project_id']),
-            'users_list' => $this->user->getList(),
+            'users_list' => $this->project->getUsersList($values['project_id']),
             'colors_list' => $this->task->getColors(),
             'menu' => 'tasks',
             'title' => t('Edit a task')
@@ -166,7 +173,10 @@ class Task extends Base
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
 
-        if ($task && $this->task->close($task['id'])) {
+        if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
+
+        if ($this->task->close($task['id'])) {
             $this->session->flash(t('Task closed successfully.'));
         } else {
             $this->session->flashError(t('Unable to close this task.'));
@@ -181,6 +191,7 @@ class Task extends Base
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
 
         if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
 
         $this->response->html($this->template->layout('task_close', array(
             'task' => $task,
@@ -194,7 +205,10 @@ class Task extends Base
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
 
-        if ($task && $this->task->open($task['id'])) {
+        if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
+
+        if ($this->task->open($task['id'])) {
             $this->session->flash(t('Task opened successfully.'));
         } else {
             $this->session->flashError(t('Unable to open this task.'));
@@ -209,6 +223,7 @@ class Task extends Base
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
 
         if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
 
         $this->response->html($this->template->layout('task_open', array(
             'task' => $task,

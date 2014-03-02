@@ -30,12 +30,12 @@ class User extends Base
 
     public function getList()
     {
-        return array(t('Unassigned')) + $this->db->table(self::TABLE)->asc('username')->listing('id', 'username');
+        return $this->db->table(self::TABLE)->asc('username')->listing('id', 'username');
     }
 
     public function create(array $values)
     {
-        unset($values['confirmation']);
+        if (isset($values['confirmation'])) unset($values['confirmation']);
         $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
 
         return $this->db->table(self::TABLE)->save($values);

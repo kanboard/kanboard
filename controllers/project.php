@@ -4,16 +4,27 @@ namespace Controller;
 
 class Project extends Base
 {
+    // Display access forbidden page
+    public function forbidden()
+    {
+        $this->response->html($this->template->layout('project_forbidden', array(
+            'menu' => 'projects',
+            'title' => t('Access Forbidden')
+        )));
+    }
+
     // List of completed tasks for a given project
     public function tasks()
     {
         $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->get($project_id);
+        $project = $this->project->getById($project_id);
 
         if (! $project) {
             $this->session->flashError(t('Project not found.'));
             $this->response->redirect('?controller=project');
         }
+
+        $this->checkProjectPermissions($project['id']);
 
         $tasks = $this->task->getAllByProjectId($project_id, array(0));
         $nb_tasks = count($tasks);
@@ -30,7 +41,7 @@ class Project extends Base
     // List of projects
     public function index()
     {
-        $projects = $this->project->getAll(true);
+        $projects = $this->project->getAll(true, $this->acl->isRegularUser());
         $nb_projects = count($projects);
 
         $this->response->html($this->template->layout('project_index', array(
@@ -44,8 +55,6 @@ class Project extends Base
     // Display a form to create a new project
     public function create()
     {
-        $this->checkPermissions();
-
         $this->response->html($this->template->layout('project_new', array(
             'errors' => array(),
             'values' => array(),
@@ -57,8 +66,6 @@ class Project extends Base
     // Validate and save a new project
     public function save()
     {
-        $this->checkPermissions();
-
         $values = $this->request->getValues();
         list($valid, $errors) = $this->project->validateCreation($values);
 
@@ -84,9 +91,7 @@ class Project extends Base
     // Display a form to edit a project
     public function edit()
     {
-        $this->checkPermissions();
-
-        $project = $this->project->get($this->request->getIntegerParam('project_id'));
+        $project = $this->project->getById($this->request->getIntegerParam('project_id'));
 
         if (! $project) {
             $this->session->flashError(t('Project not found.'));
@@ -104,8 +109,6 @@ class Project extends Base
     // Validate and update a project
     public function update()
     {
-        $this->checkPermissions();
-
         $values = $this->request->getValues() + array('is_active' => 0);
         list($valid, $errors) = $this->project->validateModification($values);
 
@@ -131,9 +134,7 @@ class Project extends Base
     // Confirmation dialog before to remove a project
     public function confirm()
     {
-        $this->checkPermissions();
-
-        $project = $this->project->get($this->request->getIntegerParam('project_id'));
+        $project = $this->project->getById($this->request->getIntegerParam('project_id'));
 
         if (! $project) {
             $this->session->flashError(t('Project not found.'));
@@ -150,8 +151,6 @@ class Project extends Base
     // Remove a project
     public function remove()
     {
-        $this->checkPermissions();
-
         $project_id = $this->request->getIntegerParam('project_id');
 
         if ($project_id && $this->project->remove($project_id)) {
@@ -166,8 +165,6 @@ class Project extends Base
     // Enable a project
     public function enable()
     {
-        $this->checkPermissions();
-
         $project_id = $this->request->getIntegerParam('project_id');
 
         if ($project_id && $this->project->enable($project_id)) {
@@ -182,8 +179,6 @@ class Project extends Base
     // Disable a project
     public function disable()
     {
-        $this->checkPermissions();
-
         $project_id = $this->request->getIntegerParam('project_id');
 
         if ($project_id && $this->project->disable($project_id)) {
@@ -193,5 +188,65 @@ class Project extends Base
         }
 
         $this->response->redirect('?controller=project');
+    }
+
+    // Users list for the selected project
+    public function users()
+    {
+        $project = $this->project->getById($this->request->getIntegerParam('project_id'));
+
+        if (! $project) {
+            $this->session->flashError(t('Project not found.'));
+            $this->response->redirect('?controller=project');
+        }
+
+        $this->response->html($this->template->layout('project_users', array(
+            'project' => $project,
+            'users' => $this->project->getAllUsers($project['id']),
+            'menu' => 'projects',
+            'title' => t('Edit project access list')
+        )));
+    }
+
+    // Allow a specific user for the selected project
+    public function allow()
+    {
+        $values = $this->request->getValues();
+        list($valid,) = $this->project->validateUserAccess($values);
+
+        if ($valid) {
+
+            if ($this->project->allowUser($values['project_id'], $values['user_id'])) {
+                $this->session->flash(t('Project updated successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to update this project.'));
+            }
+        }
+
+        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
+    }
+
+    // Revoke user access
+    public function revoke()
+    {
+        $values = array(
+            'project_id' => $this->request->getIntegerParam('project_id'),
+            'user_id' => $this->request->getIntegerParam('user_id'),
+        );
+
+        list($valid,) = $this->project->validateUserAccess($values);
+
+        if ($valid) {
+
+            if ($this->project->revokeUser($values['project_id'], $values['user_id'])) {
+                $this->session->flash(t('Project updated successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to update this project.'));
+            }
+        }
+
+        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
     }
 }

@@ -68,8 +68,6 @@ class User extends Base
     // Display a form to create a new user
     public function create()
     {
-        $this->checkPermissions();
-
         $this->response->html($this->template->layout('user_new', array(
             'projects' => $this->project->getList(),
             'errors' => array(),
@@ -82,8 +80,6 @@ class User extends Base
     // Validate and save a new user
     public function save()
     {
-        $this->checkPermissions();
-
         $values = $this->request->getValues();
         list($valid, $errors) = $this->user->validateCreation($values);
 
@@ -121,7 +117,7 @@ class User extends Base
         unset($user['password']);
 
         $this->response->html($this->template->layout('user_edit', array(
-            'projects' => $this->project->getList(),
+            'projects' => $this->project->filterListByAccess($this->project->getList(), $user['id']),
             'errors' => array(),
             'values' => $user,
             'menu' => 'users',
@@ -162,7 +158,7 @@ class User extends Base
         }
 
         $this->response->html($this->template->layout('user_edit', array(
-            'projects' => $this->project->getList(),
+            'projects' => $this->project->filterListByAccess($this->project->getList(), $values['id']),
             'errors' => $errors,
             'values' => $values,
             'menu' => 'users',
@@ -173,8 +169,6 @@ class User extends Base
     // Confirmation dialog before to remove a user
     public function confirm()
     {
-        $this->checkPermissions();
-
         $user = $this->user->getById($this->request->getIntegerParam('user_id'));
 
         if (! $user) $this->notfound();
@@ -189,8 +183,6 @@ class User extends Base
     // Remove a user
     public function remove()
     {
-        $this->checkPermissions();
-
         $user_id = $this->request->getIntegerParam('user_id');
 
         if ($user_id && $this->user->remove($user_id)) {
