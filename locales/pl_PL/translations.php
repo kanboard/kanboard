@@ -190,7 +190,7 @@ return array(
     'Details' => 'Informacje',
     'Sorry, I didn\'t found this information in my database!' => 'Niestety nie znaleziono tej informacji w bazie danych',
     'Page not found' => 'Strona nie istnieje',
-    'Story Points' => '',
+    'Story Points' => 'Story Points', // don't know how to translate it to polish
     'limit' => 'limit',
     'Task limit' => 'Limit zadań',
     'This value must be greater than %d' => 'Wartość musi być większa niż %d',
