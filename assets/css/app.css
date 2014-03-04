@@ -532,6 +532,24 @@ article .task-score {
     top: 5px;
 }
 
+ul#comments {
+    list-style-type: none;
+}
+
+ul#comments li {
+    margin: 10px 0;
+    padding: 10px 0 10px 10px;
+    border-left: 5px solid #000;
+}
+
+ul#comments li:nth-child(odd) {
+    background-color: #f0f0f0;
+}
+
+ul#comments li p:first-child {
+    font-size: .8em;
+}
+
 /* task colors */
 tr td.task-blue,
 .task-blue {
