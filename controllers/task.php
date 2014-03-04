@@ -45,15 +45,43 @@ class Task extends Base
         $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
 
         if (! $task) $this->notfound();
+
         $this->checkProjectPermissions($task['project_id']);
+
+        $values = $values = $this->request->getValues();
+        $errors = $this->comment($values, $task['id']);
+        $comments = $this->task->getCommentsByTask($task['id']);
 
         $this->response->html($this->template->layout('task_show', array(
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->task->getColors(),
             'menu' => 'tasks',
-            'title' => $task['title']
+            'title' => $task['title'],
+            'comments' => $comments,
+            'errors' => $errors,
+            'values' => $values
         )));
+    }
+
+    //add a comment
+    public function comment(array $values, $task_id)
+    {
+        $errors = array();
+
+        if ($_POST) {
+            list($valid, $errors) = $this->task->validateComment($values);
+
+            if ($valid) {
+                $this->task->addComment(array(
+                    'task_id' => $task_id,
+                    'comment' => $values['comment'],
+                    'user_id' => $this->acl->getUserId()
+                ));
+            }
+        }
+
+        return $errors;
     }
 
     // Display a form to create a new task

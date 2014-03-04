@@ -205,5 +205,8 @@ return array(
     'User' => 'Użytkownik',
     'Everybody have access to this project.' => 'Każdy ma dostęp do tego projektu.',
     'You are not allowed to access to this project.' => 'Nie masz dostępu do tego projektu.',
+    '%B %e, %G at %k:%M %p' => '%e %B %G o %k:%M',
+    'Comments' => 'Komentarze',
+    'No comments' => 'Brak komentarzy',
+    'Post comment' => 'Dodaj komentarz',
 );
-

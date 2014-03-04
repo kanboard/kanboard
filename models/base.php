@@ -18,7 +18,7 @@ require __DIR__.'/schema.php';
 abstract class Base
 {
     const APP_VERSION = 'master';
-    const DB_VERSION  = 7;
+    const DB_VERSION  = 8;
 
     private static $dbInstance = null;
     protected $db;

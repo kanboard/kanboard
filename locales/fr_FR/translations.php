@@ -201,4 +201,8 @@ return array(
     'User' => 'Utilisateur',
     'Everybody have access to this project.' => 'Tout le monde a accès au projet.',
     'You are not allowed to access to this project.' => 'Vous n\'êtes pas autorisé à accéder à ce projet.',
+    '%B %e, %G at %k:%M %p' => '%e %B %G à %k:%M',
+    //Comments => '',
+    //'No comments' => '',
+    //'Post comment' => '',
 );

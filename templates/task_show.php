@@ -60,5 +60,26 @@
             </article>
         <?php endif ?>
 
+        <h3><?= t('Comments') ?></h3>
+        <?php if ($comments): ?>
+            <ul id="comments">
+            <?php foreach ($comments as $comment): ?>
+                <li>
+                    <p><?= $comment['username'] ?> @ <?= dt('%B %e, %G at %k:%M %p', $comment['date']) ?></p>
+                    <?= Helper\markdown($comment['comment']) ?>
+                </li>
+            <?php endforeach ?>
+            </ul>
+        <?php else: ?>
+            <p><?= t('No comments') ?></p>
+        <?php endif ?>
+
+        <form method="post" action="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
+        <?= Helper\form_textarea('comment', $values, $errors) ?><br/>
+
+        <div class="form-actions">
+            <input type="submit" value="<?= t('Post comment') ?>" class="btn btn-blue"/>
+        </div>
+    </form>
     </section>
 </section>

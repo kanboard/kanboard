@@ -2,6 +2,21 @@
 
 namespace Schema;
 
+function version_8($pdo)
+{
+    $pdo->exec(
+        'CREATE TABLE comments (
+            id INTEGER PRIMARY KEY,
+            task_id INTEGER,
+            user_id INTEGER,
+            date INTEGER,
+            comment TEXT,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )'
+    );
+}
+
 function version_7($pdo)
 {
     $pdo->exec("
