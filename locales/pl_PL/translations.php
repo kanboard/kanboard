@@ -208,10 +208,11 @@ return array(
     '%B %e, %G at %k:%M %p' => '%e %B %G o %k:%M',
     'Comments' => 'Komentarze',
     'Post comment' => 'Dodaj komentarz',
-    //'Write your text in Markdown' => '',
-    //'Leave a comment' => '',
-    //'Comment is required' => '',
-    //'Comment added successfully.' => '',
-    //'Unable to create your comment.' => '',
-    //'The description is required' => '',
+    'Write your text in Markdown' => 'Możesz użyć Markdown',
+    'Leave a comment' => 'Zostaw komentarz',
+    'Comment is required' => 'Komentarz jest wymagany',
+    'Comment added successfully.' => 'Komentarz dodany',
+    'Unable to create your comment.' => 'Nie udało się dodać komentarza',
+    'The description is required' => 'Opis jest wymagany',
+    'Edit this task' => 'Edytuj zadanie'
 );

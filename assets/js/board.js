@@ -211,4 +211,10 @@
         col.addEventListener('drop', handleColumnDrop, false);
     });
 
+    [].forEach.call(document.querySelectorAll('[data-task-id]'), function (item) {
+            item.addEventListener('click', function() {
+                window.location.href = '?controller=task&action=show&task_id=' + item.getAttribute('data-task-id');
+            });
+        });
+
 }());

@@ -54,9 +54,9 @@
                     dropzone="copy">
                     <?php foreach ($column['tasks'] as $task): ?>
                     <div class="draggable-item" draggable="true">
-                        <div class="task task-<?= $task['color_id'] ?>" data-task-id="<?= $task['id'] ?>">
+                        <div class="task task-<?= $task['color_id'] ?>" data-task-id="<?= $task['id'] ?>" title="<?= t('View this task') ?>">
 
-                            <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>">#<?= $task['id'] ?></a> -
+                            <a href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a> -
 
                             <span class="task-user">
                             <?php if (! empty($task['owner_id'])): ?>

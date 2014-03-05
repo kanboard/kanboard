@@ -211,4 +211,5 @@ return array(
     'Comment added successfully.' => 'Commentaire ajouté avec succès.',
     'Unable to create your comment.' => 'Impossible de sauvegarder votre commentaire.',
     'The description is required' => 'La description est obligatoire',
+    //'Edit this task' => '',
 );
