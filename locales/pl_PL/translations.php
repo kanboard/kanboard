@@ -211,4 +211,7 @@ return array(
     //'Write your text in Markdown' => '',
     //'Leave a comment' => '',
     //'Comment is required' => '',
+    //'Comment added successfully.' => '',
+    //'Unable to create your comment.' => '',
+    //'The description is required' => '',
 );

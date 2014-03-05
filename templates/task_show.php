@@ -53,11 +53,22 @@
         </ul>
         </article>
 
+        <h3><?= t('Description') ?></h3>
         <?php if ($task['description']): ?>
-            <h3><?= t('Description') ?></h3>
             <article id="description" class="markdown">
                 <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
             </article>
+        <?php else: ?>
+            <form method="post" action="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
+
+                <?= Helper\form_hidden('id', $description_form['values']) ?>
+                <?= Helper\form_textarea('description', $description_form['values'], $description_form['errors'], array('required', 'placeholder="'.t('Leave a description').'"')) ?><br/>
+                <div class="form-help"><a href="http://en.wikipedia.org/wiki/Markdown#Example" target="_blank"><?= t('Write your text in Markdown') ?></a></div>
+
+                <div class="form-actions">
+                    <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+                </div>
+            </form>
         <?php endif ?>
 
         <h3><?= t('Comments') ?></h3>
@@ -74,9 +85,9 @@
 
         <form method="post" action="?controller=task&amp;action=comment&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
 
-            <?= Helper\form_hidden('task_id', $comment_values) ?>
-            <?= Helper\form_hidden('user_id', $comment_values) ?>
-            <?= Helper\form_textarea('comment', $comment_values, $comment_errors, array('required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
+            <?= Helper\form_hidden('task_id', $comment_form['values']) ?>
+            <?= Helper\form_hidden('user_id', $comment_form['values']) ?>
+            <?= Helper\form_textarea('comment', $comment_form['values'], $comment_form['errors'], array('required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
             <div class="form-help"><a href="http://en.wikipedia.org/wiki/Markdown#Example" target="_blank"><?= t('Write your text in Markdown') ?></a></div>
 
             <div class="form-actions">

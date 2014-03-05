@@ -207,4 +207,8 @@ return array(
     'Write your text in Markdown' => 'Écrivez votre texte en Markdown',
     'Leave a comment' => 'Laissez un commentaire',
     'Comment is required' => 'Le commentaire est obligatoire',
+    'Leave a description' => 'Laissez une description',
+    'Comment added successfully.' => 'Commentaire ajouté avec succès.',
+    'Unable to create your comment.' => 'Impossible de sauvegarder votre commentaire.',
+    'The description is required' => 'La description est obligatoire',
 );

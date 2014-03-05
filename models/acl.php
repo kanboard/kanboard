@@ -16,7 +16,7 @@ class Acl extends Base
         'app' => array('index'),
         'board' => array('index', 'show', 'assign', 'assigntask', 'save'),
         'project' => array('tasks', 'index', 'forbidden'),
-        'task' => array('show', 'create', 'save', 'edit', 'update', 'close', 'confirmclose', 'open', 'confirmopen', 'comment'),
+        'task' => array('show', 'create', 'save', 'edit', 'update', 'close', 'confirmclose', 'open', 'confirmopen', 'comment', 'description'),
         'user' => array('index', 'edit', 'update', 'forbidden', 'logout', 'index'),
         'config' => array('index'),
     );

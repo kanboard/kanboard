@@ -39,6 +39,42 @@ class Task extends Base
         $this->response->text('FAILED');
     }
 
+    // Display the template show task, common between different task view
+    private function showTask(array $task, array $comment_form = array(), array $description_form = array())
+    {
+        if (empty($comment_form)) {
+
+            $comment_form = array(
+                'values' => array(
+                    'task_id' => $task['id'],
+                    'user_id' => $this->acl->getUserId()
+                ),
+                'errors' => array()
+            );
+        }
+
+        if (empty($description_form)) {
+
+            $description_form = array(
+                'values' => array(
+                    'id' => $task['id'],
+                ),
+                'errors' => array()
+            );
+        }
+
+        $this->response->html($this->template->layout('task_show', array(
+            'comment_form' => $comment_form,
+            'description_form' => $description_form,
+            'comments' => $this->comment->getAll($task['id']),
+            'task' => $task,
+            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'colors_list' => $this->task->getColors(),
+            'menu' => 'tasks',
+            'title' => $task['title'],
+        )));
+    }
+
     // Show a task
     public function show()
     {
@@ -47,16 +83,7 @@ class Task extends Base
         if (! $task) $this->notfound();
         $this->checkProjectPermissions($task['project_id']);
 
-        $this->response->html($this->template->layout('task_show', array(
-            'comments' => $this->comment->getAll($task['id']),
-            'comment_errors' => array(),
-            'comment_values' => array('task_id' => $task['id'], 'user_id' => $this->acl->getUserId()),
-            'task' => $task,
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'colors_list' => $this->task->getColors(),
-            'menu' => 'tasks',
-            'title' => $task['title'],
-        )));
+        $this->showTask($task);
     }
 
     // Add a comment
@@ -82,16 +109,40 @@ class Task extends Base
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
         }
 
-        $this->response->html($this->template->layout('task_show', array(
-            'comments' => $this->comment->getAll($task['id']),
-            'comment_errors' => $errors,
-            'comment_values' => $values,
-            'task' => $task,
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'colors_list' => $this->task->getColors(),
-            'menu' => 'tasks',
-            'title' => $task['title'],
-        )));
+        $this->showTask(
+            $task,
+            array('values' => $values, 'errors' => $errors)
+        );
+    }
+
+    // Add a description from the show task page
+    public function description()
+    {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+        $values = $this->request->getValues();
+
+        if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
+
+        list($valid, $errors) = $this->task->validateDescriptionCreation($values);
+
+        if ($valid) {
+
+            if ($this->task->update($values)) {
+                $this->session->flash(t('Task updated successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to update your task.'));
+            }
+
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+        }
+
+        $this->showTask(
+            $task,
+            array(),
+            array('values' => $values, 'errors' => $errors)
+        );
     }
 
     // Display a form to create a new task

@@ -192,6 +192,20 @@ class Task extends Base
         );
     }
 
+    public function validateDescriptionCreation(array $values)
+    {
+        $v = new Validator($values, array(
+            new Validators\Required('id', t('The id is required')),
+            new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Required('description', t('The description is required')),
+        ));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
     public function validateModification(array $values)
     {
         $v = new Validator($values, array(
