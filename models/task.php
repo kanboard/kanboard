@@ -8,7 +8,6 @@ use \SimpleValidator\Validators;
 class Task extends Base
 {
     const TABLE = 'tasks';
-    const COMMENTS = 'comments';
 
     public function getColors()
     {
@@ -56,21 +55,6 @@ class Task extends Base
 
             return $this->db->table(self::TABLE)->eq('id', $task_id)->findOne();
         }
-    }
-
-    public function getCommentsByTask($task_id)
-    {
-        return $this->db
-            ->table(self::COMMENTS)
-            ->columns(
-                self::COMMENTS.'.date',
-                self::COMMENTS.'.comment',
-                \Model\User::TABLE.'.username'
-            )
-            ->join(\Model\User::TABLE, 'id', 'user_id')
-            ->orderBy(self::COMMENTS.'.date', 'ASC')
-            ->eq(self::COMMENTS.'.task_id', $task_id)
-            ->findAll();
     }
 
     public function getAllByProjectId($project_id, array $status = array(1, 0))
@@ -186,25 +170,6 @@ class Task extends Base
                     ->table(self::TABLE)
                     ->eq('id', $task_id)
                     ->update(array('column_id' => $column_id, 'position' => $position));
-    }
-
-    public function addComment($values)
-    {
-        $values['date'] = time();
-
-        return (bool) $this->db->table(self::COMMENTS)->save($values);
-    }
-
-    public function validateComment(array $values)
-    {
-        $v = new Validator($values, array(
-            new Validators\Required('comment', t('Comment is required'))
-        ));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
     }
 
     public function validateCreation(array $values)

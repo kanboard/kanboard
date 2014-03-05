@@ -202,7 +202,9 @@ return array(
     'Everybody have access to this project.' => 'Tout le monde a accès au projet.',
     'You are not allowed to access to this project.' => 'Vous n\'êtes pas autorisé à accéder à ce projet.',
     '%B %e, %G at %k:%M %p' => '%e %B %G à %k:%M',
-    //Comments => '',
-    //'No comments' => '',
-    //'Post comment' => '',
+    'Comments' => 'Commentaires',
+    'Post comment' => 'Commenter',
+    'Write your text in Markdown' => 'Écrivez votre texte en Markdown',
+    'Leave a comment' => 'Laissez un commentaire',
+    'Comment is required' => 'Le commentaire est obligatoire',
 );

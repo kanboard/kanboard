@@ -189,7 +189,7 @@ textarea.form-error {
 }
 
 .form-help {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: brown;
     margin-bottom: 15px;
 }
@@ -532,22 +532,70 @@ article .task-score {
     top: 5px;
 }
 
-ul#comments {
-    list-style-type: none;
+#description {
+    border-left: 5px solid #000;
+    background: #f0f0f0;
+    padding: 10px;
 }
 
-ul#comments li {
+/* markdown content */
+.markdown {
+    line-height: 1.4em;
+}
+
+.markdown ol,
+.markdown ul {
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.markdown pre {
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: auto;
+    color: #000;
+}
+
+/* comments */
+.comment {
     margin: 10px 0;
-    padding: 10px 0 10px 10px;
+    padding: 10px;
     border-left: 5px solid #000;
 }
 
-ul#comments li:nth-child(odd) {
+.comment:nth-child(odd) {
     background-color: #f0f0f0;
 }
 
-ul#comments li p:first-child {
+.comment:nth-child(even) {
+    background-color: #ddd;
+}
+
+.comment p:first-child {
     font-size: .8em;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #000;
+}
+
+.comment p:first-child a {
+    color: #000;
+    text-decoration: none;
+}
+
+.comment p:first-child a:hover,
+.comment p:first-child a:focus {
+    text-decoration: underline;
+}
+
+.comment .username {
+    font-weight: bold;
+}
+
+.comment-textarea {
+    height: 70px;
+    width: 500px;
 }
 
 /* task colors */
@@ -591,18 +639,6 @@ tr td.task-orange,
 .task-orange {
     background-color: rgb(255, 215, 179);
     border-color: rgb(255, 172, 98);
-}
-
-#description {
-    border-left: 5px solid #000;
-    background: #f0f0f0;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-#description li {
-    margin-left: 25px;
 }
 
 /* config page */

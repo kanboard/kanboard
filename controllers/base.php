@@ -15,6 +15,7 @@ require __DIR__.'/../models/user.php';
 require __DIR__.'/../models/project.php';
 require __DIR__.'/../models/task.php';
 require __DIR__.'/../models/board.php';
+require __DIR__.'/../models/comment.php';
 
 abstract class Base
 {
@@ -28,6 +29,7 @@ abstract class Base
     protected $board;
     protected $config;
     protected $acl;
+    protected $comment;
 
     public function __construct()
     {
@@ -41,6 +43,7 @@ abstract class Base
         $this->task = new \Model\Task;
         $this->board = new \Model\Board;
         $this->acl = new \Model\Acl;
+        $this->comment = new \Model\Comment;
     }
 
     public function beforeAction($controller, $action)

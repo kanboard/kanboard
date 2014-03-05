@@ -25,6 +25,7 @@
 
         <?= Helper\form_label(t('Description'), 'description') ?>
         <?= Helper\form_textarea('description', $values, $errors) ?><br/>
+        <div class="form-help"><a href="http://en.wikipedia.org/wiki/Markdown#Example" target="_blank"><?= t('Write your text in Markdown') ?></a></div>
 
         <?= Helper\form_checkbox('another_task', t('Create another task'), 1) ?>
 

@@ -45,43 +45,53 @@ class Task extends Base
         $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
 
         if (! $task) $this->notfound();
-
         $this->checkProjectPermissions($task['project_id']);
 
-        $values = $values = $this->request->getValues();
-        $errors = $this->comment($values, $task['id']);
-        $comments = $this->task->getCommentsByTask($task['id']);
-
         $this->response->html($this->template->layout('task_show', array(
+            'comments' => $this->comment->getAll($task['id']),
+            'comment_errors' => array(),
+            'comment_values' => array('task_id' => $task['id'], 'user_id' => $this->acl->getUserId()),
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->task->getColors(),
             'menu' => 'tasks',
             'title' => $task['title'],
-            'comments' => $comments,
-            'errors' => $errors,
-            'values' => $values
         )));
     }
 
-    //add a comment
-    public function comment(array $values, $task_id)
+    // Add a comment
+    public function comment()
     {
-        $errors = array();
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+        $values = $this->request->getValues();
 
-        if ($_POST) {
-            list($valid, $errors) = $this->task->validateComment($values);
+        if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
 
-            if ($valid) {
-                $this->task->addComment(array(
-                    'task_id' => $task_id,
-                    'comment' => $values['comment'],
-                    'user_id' => $this->acl->getUserId()
-                ));
+        list($valid, $errors) = $this->comment->validateCreation($values);
+
+        if ($valid) {
+
+            if ($this->comment->create($values)) {
+                $this->session->flash(t('Comment added successfully.'));
             }
+            else {
+                $this->session->flashError(t('Unable to create your comment.'));
+            }
+
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
         }
 
-        return $errors;
+        $this->response->html($this->template->layout('task_show', array(
+            'comments' => $this->comment->getAll($task['id']),
+            'comment_errors' => $errors,
+            'comment_values' => $values,
+            'task' => $task,
+            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'colors_list' => $this->task->getColors(),
+            'menu' => 'tasks',
+            'title' => $task['title'],
+        )));
     }
 
     // Display a form to create a new task

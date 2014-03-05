@@ -55,7 +55,7 @@
 
         <?php if ($task['description']): ?>
             <h3><?= t('Description') ?></h3>
-            <article id="description">
+            <article id="description" class="markdown">
                 <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
             </article>
         <?php endif ?>
@@ -64,22 +64,24 @@
         <?php if ($comments): ?>
             <ul id="comments">
             <?php foreach ($comments as $comment): ?>
-                <li>
-                    <p><?= $comment['username'] ?> @ <?= dt('%B %e, %G at %k:%M %p', $comment['date']) ?></p>
+                <div class="comment markdown" id="comment-<?= $comment['id'] ?>">
+                    <p><span class="username"><?= Helper\escape($comment['username']) ?></span> @ <a href="#comment-<?= $comment['id'] ?>"><?= dt('%B %e, %G at %k:%M %p', $comment['date']) ?></a></p>
                     <?= Helper\markdown($comment['comment']) ?>
-                </li>
+                </div>
             <?php endforeach ?>
             </ul>
-        <?php else: ?>
-            <p><?= t('No comments') ?></p>
         <?php endif ?>
 
-        <form method="post" action="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
-        <?= Helper\form_textarea('comment', $values, $errors) ?><br/>
+        <form method="post" action="?controller=task&amp;action=comment&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
 
-        <div class="form-actions">
-            <input type="submit" value="<?= t('Post comment') ?>" class="btn btn-blue"/>
-        </div>
-    </form>
+            <?= Helper\form_hidden('task_id', $comment_values) ?>
+            <?= Helper\form_hidden('user_id', $comment_values) ?>
+            <?= Helper\form_textarea('comment', $comment_values, $comment_errors, array('required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
+            <div class="form-help"><a href="http://en.wikipedia.org/wiki/Markdown#Example" target="_blank"><?= t('Write your text in Markdown') ?></a></div>
+
+            <div class="form-actions">
+                <input type="submit" value="<?= t('Post comment') ?>" class="btn btn-blue"/>
+            </div>
+        </form>
     </section>
 </section>
