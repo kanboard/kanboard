@@ -82,6 +82,15 @@ class Project extends Base
 
         if ($nb_users < 1) return true;
 
+        // check if user has admin rights
+        $nb_users = $this->db
+                    ->table(\Model\User::TABLE)
+                    ->eq('id', $user_id)
+                    ->eq('is_admin', 1)
+                    ->count();
+         
+        if ($nb_users > 0) return true;
+
         // Otherwise, allow only specific users
         return (bool) $this->db
                     ->table(self::TABLE_USERS)
