@@ -57,7 +57,13 @@ class ProjectTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($p->revokeUser(1, 1));
 
         $this->assertEquals(array('2' => 'unittest'), $p->getAllowedUsers(1));
-        $this->assertFalse($p->isUserAllowed(1, 1));
+        $this->assertTrue($p->isUserAllowed(1, 1)); // has admin priviledges
         $this->assertTrue($p->isUserAllowed(1, 2));
+        
+        // Check if revoked regular user is not allowed
+        $this->assertTrue($p->allowUser(1, 1));
+        $this->assertTrue($p->revokeUser(1, 2));
+        $this->assertEquals(array('1' => 'admin'), $p->getAllowedUsers(1));
+        $this->assertFalse($p->isUserAllowed(1, 2)); // regulat user is not allowed
     }
 }
