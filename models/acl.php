@@ -21,6 +21,7 @@ class Acl extends Base
         'config' => array('index'),
     );
 
+    // Return true if the specified controller/action is allowed according to the given acl
     public function isAllowedAction(array $acl, $controller, $action)
     {
         if (isset($acl[$controller])) {
@@ -30,31 +31,37 @@ class Acl extends Base
         return false;
     }
 
+    // Return true if the given action is public
     public function isPublicAction($controller, $action)
     {
         return $this->isAllowedAction($this->public_actions, $controller, $action);
     }
 
+    // Return true if the given action is allowed for a regular user
     public function isUserAction($controller, $action)
     {
         return $this->isAllowedAction($this->user_actions, $controller, $action);
     }
 
+    // Return true if the logged user is admin
     public function isAdminUser()
     {
         return isset($_SESSION['user']['is_admin']) && $_SESSION['user']['is_admin'] === '1';
     }
 
+    // Return true if the logged user is not admin
     public function isRegularUser()
     {
         return isset($_SESSION['user']['is_admin']) && $_SESSION['user']['is_admin'] === '0';
     }
 
+    // Get the connected user id
     public function getUserId()
     {
         return isset($_SESSION['user']['id']) ? (int) $_SESSION['user']['id'] : 0;
     }
 
+    // Check if an action is allowed for the logged user
     public function isPageAccessAllowed($controller, $action)
     {
         return $this->isPublicAction($controller, $action) ||

@@ -12,6 +12,7 @@ class Project extends Base
     const ACTIVE = 1;
     const INACTIVE = 0;
 
+    // Get a list of people that can by assigned for tasks
     public function getUsersList($project_id)
     {
         $allowed_users = $this->getAllowedUsers($project_id);
@@ -24,6 +25,7 @@ class Project extends Base
         return array(t('Unassigned')) + $allowed_users;
     }
 
+    // Get a list of allowed people for a project
     public function getAllowedUsers($project_id)
     {
         return $this->db
@@ -34,6 +36,7 @@ class Project extends Base
             ->listing('user_id', 'username');
     }
 
+    // Get allowed and not allowed users for a project
     public function getAllUsers($project_id)
     {
         $users = array(
@@ -56,6 +59,7 @@ class Project extends Base
         return $users;
     }
 
+    // Allow a specific user for a given project
     public function allowUser($project_id, $user_id)
     {
         return $this->db
@@ -63,6 +67,7 @@ class Project extends Base
                     ->save(array('project_id' => $project_id, 'user_id' => $user_id));
     }
 
+    // Revoke a specific user for a given project
     public function revokeUser($project_id, $user_id)
     {
         return $this->db
@@ -72,6 +77,7 @@ class Project extends Base
                     ->remove();
     }
 
+    // Check if a specific user is allowed to access to a given project
     public function isUserAllowed($project_id, $user_id)
     {
         // If there is nobody specified, everybody have access to the project
@@ -82,13 +88,13 @@ class Project extends Base
 
         if ($nb_users < 1) return true;
 
-        // check if user has admin rights
+        // Check if user has admin rights
         $nb_users = $this->db
                     ->table(\Model\User::TABLE)
                     ->eq('id', $user_id)
                     ->eq('is_admin', 1)
                     ->count();
-         
+
         if ($nb_users > 0) return true;
 
         // Otherwise, allow only specific users
