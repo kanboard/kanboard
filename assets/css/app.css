@@ -210,6 +210,10 @@ textarea.form-error {
     margin-right: 15px;
 }
 
+input.form-date {
+    width: 150px;
+}
+
 /* alerts */
 .alert {
     padding: 8px 35px 8px 14px;
@@ -460,6 +464,21 @@ nav .active a {
 
 .task-nobody {
     font-style: italic;
+}
+
+.task-date {
+    font-weight: bold;
+    color: #D90000;
+}
+
+.task-comment-counter {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+}
+
+.task-footer {
+    margin-top: 10px;
 }
 
 .task {

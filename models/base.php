@@ -12,13 +12,14 @@ require __DIR__.'/../vendor/SimpleValidator/Validators/Integer.php';
 require __DIR__.'/../vendor/SimpleValidator/Validators/Equals.php';
 require __DIR__.'/../vendor/SimpleValidator/Validators/AlphaNumeric.php';
 require __DIR__.'/../vendor/SimpleValidator/Validators/GreaterThan.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Date.php';
 require __DIR__.'/../vendor/PicoDb/Database.php';
 require __DIR__.'/schema.php';
 
 abstract class Base
 {
     const APP_VERSION = 'master';
-    const DB_VERSION  = 8;
+    const DB_VERSION  = 9;
 
     private static $dbInstance = null;
     protected $db;
@@ -58,5 +59,20 @@ abstract class Base
         }
 
         return hash('crc32b', $token);
+    }
+
+    public function getTimestampFromDate($value, $format)
+    {
+        $date = \DateTime::createFromFormat($format, $value);
+
+        if ($date !== false) {
+            $errors = \DateTime::getLastErrors();
+            if ($errors['error_count'] === 0 && $errors['warning_count'] === 0) {
+                $timestamp = $date->getTimestamp();
+                return $timestamp > 0 ? $timestamp : 0;
+            }
+        }
+
+        return 0;
     }
 }

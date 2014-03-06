@@ -151,7 +151,7 @@ return array(
     'Task opened successfully.' => 'Tâche ouverte avec succès.',
     'Unable to close this task.' => 'Impossible de fermer cette tâche.',
     'Task closed successfully.' => 'Tâche fermé avec succès.',
-    'Unable to update your task.' => 'Impossible de fermer cette tâche.',
+    'Unable to update your task.' => 'Impossible de modifier cette tâche.',
     'Task updated successfully.' => 'Tâche mise à jour avec succès.',
     'Unable to create your task.' => 'Impossible de créer cette tâche.',
     'Task created successfully.' => 'Tâche créée avec succès.',
@@ -212,4 +212,10 @@ return array(
     'Unable to create your comment.' => 'Impossible de sauvegarder votre commentaire.',
     'The description is required' => 'La description est obligatoire',
     'Edit this task' => 'Modifier cette tâche',
+    'Due Date' => 'Date d\'échéance',
+    'm/d/Y' => 'd/m/Y',                    // Date format parsed with php
+    'month/day/year' => 'jour/mois/année', // Help shown to the user
+    'Invalid date' => 'Date invalide',
+    'Must be done before %B %e, %G' => 'Doit être fait avant le %e %B %G',
+    '%B %e, %G' => '%e %B %G',
 );

@@ -2,6 +2,11 @@
 
 namespace Schema;
 
+function version_9($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN date_due INTEGER");
+}
+
 function version_8($pdo)
 {
     $pdo->exec(

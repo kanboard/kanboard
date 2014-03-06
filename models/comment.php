@@ -25,6 +25,14 @@ class Comment extends Base
             ->findAll();
     }
 
+    public function count($task_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->eq(self::TABLE.'.task_id', $task_id)
+            ->count();
+    }
+
     public function create(array $values)
     {
         $values['date'] = time();

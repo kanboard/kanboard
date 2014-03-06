@@ -40,6 +40,20 @@
                                 <?= Helper\escape($task['title']) ?>
                             </div>
 
+                            <div class="task-footer">
+                                <?php if (! empty($task['date_due'])): ?>
+                                <div class="task-date">
+                                    <?= dt('%B %e, %G', $task['date_due']) ?>
+                                </div>
+                                <?php endif ?>
+
+                                <?php if (! empty($task['nb_comments'])): ?>
+                                <div class="task-comment-counter">
+                                    <?= $task['nb_comments'] ?>
+                                </div>
+                                <?php endif ?>
+                            </div>
+
                         </div>
                     </div>
                     <?php endforeach ?>

@@ -34,6 +34,7 @@ class Task extends Base
                         self::TABLE.'.description',
                         self::TABLE.'.date_creation',
                         self::TABLE.'.date_completed',
+                        self::TABLE.'.date_due',
                         self::TABLE.'.color_id',
                         self::TABLE.'.project_id',
                         self::TABLE.'.column_id',
@@ -66,6 +67,7 @@ class Task extends Base
                 self::TABLE.'.description',
                 self::TABLE.'.date_creation',
                 self::TABLE.'.date_completed',
+                self::TABLE.'.date_due',
                 self::TABLE.'.color_id',
                 self::TABLE.'.project_id',
                 self::TABLE.'.column_id',
@@ -95,15 +97,23 @@ class Task extends Base
 
     public function getAllByColumnId($project_id, $column_id, $status = array(1))
     {
-        return $this->db
+        $tasks = $this->db
                     ->table(self::TABLE)
-                    ->columns('tasks.id', 'title', 'color_id', 'project_id', 'owner_id', 'column_id', 'position', 'score', 'users.username')
+                    ->columns('tasks.id', 'title', 'color_id', 'project_id', 'owner_id', 'column_id', 'position', 'score', 'date_due', 'users.username')
                     ->join('users', 'id', 'owner_id')
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
                     ->in('is_active', $status)
                     ->asc('position')
                     ->findAll();
+
+        $commentModel = new Comment;
+
+        foreach ($tasks as &$task) {
+            $task['nb_comments'] = $commentModel->count($task['id']);
+        }
+
+        return $tasks;
     }
 
     public function countByColumnId($project_id, $column_id, $status = array(1))
@@ -122,10 +132,17 @@ class Task extends Base
 
         unset($values['another_task']);
 
+        if (! empty($values['date_due'])) {
+            $values['date_due'] = $this->getTimestampFromDate($values['date_due'], t('m/d/Y')) ?: null;
+        }
+
         $values['date_creation'] = time();
         $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']);
 
-        $this->db->table(self::TABLE)->save($values);
+        if (! $this->db->table(self::TABLE)->save($values)) {
+            $this->db->cancelTransaction();
+            return false;
+        }
 
         $task_id = $this->db->getConnection()->getLastId();
 
@@ -136,9 +153,14 @@ class Task extends Base
 
     public function update(array $values)
     {
+        if (! empty($values['date_due'])) {
+            $values['date_due'] = $this->getTimestampFromDate($values['date_due'], t('m/d/Y')) ?: null;
+        }
+
         return $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
     }
 
+    // Mark a task closed
     public function close($task_id)
     {
         return $this->db->table(self::TABLE)
@@ -149,6 +171,7 @@ class Task extends Base
             ));
     }
 
+    // Mark a task open
     public function open($task_id)
     {
         return $this->db->table(self::TABLE)
@@ -159,11 +182,13 @@ class Task extends Base
             ));
     }
 
+    // Remove a task
     public function remove($task_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $task_id)->remove();
     }
 
+    // Move a task to another column or to another position
     public function move($task_id, $column_id, $position)
     {
         return (bool) $this->db
@@ -184,6 +209,7 @@ class Task extends Base
             new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Required('title', t('The title is required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
+            new Validators\Date('date_due', t('Invalid date'), t('m/d/Y')),
         ));
 
         return array(
@@ -220,6 +246,7 @@ class Task extends Base
             new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Required('title', t('The title is required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
+            new Validators\Date('date_due', t('Invalid date'), t('m/d/Y')),
         ));
 
         return array(

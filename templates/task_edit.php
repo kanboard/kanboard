@@ -23,6 +23,9 @@
         <?= Helper\form_label(t('Story Points'), 'score') ?>
         <?= Helper\form_number('score', $values, $errors) ?><br/>
 
+        <?= Helper\form_label(t('Due Date'), 'date_due') ?>
+        <?= Helper\form_text('date_due', $values, $errors, array('placeholder="'.t('month/day/year').'"'), 'form-date') ?><br/>
+
         <?= Helper\form_label(t('Description'), 'description') ?>
         <?= Helper\form_textarea('description', $values, $errors) ?><br/>
         <div class="form-help"><a href="http://en.wikipedia.org/wiki/Markdown#Example" target="_blank"><?= t('Write your text in Markdown') ?></a></div>

@@ -20,6 +20,11 @@
                 <?= dt('Completed on %B %e, %G at %k:%M %p', $task['date_completed']) ?>
             </li>
             <?php endif ?>
+            <?php if ($task['date_due']): ?>
+            <li>
+                <strong><?= dt('Must be done before %B %e, %G', $task['date_due']) ?></strong>
+            </li>
+            <?php endif ?>
             <li>
                 <strong>
                 <?php if ($task['username']): ?>

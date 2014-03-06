@@ -216,6 +216,10 @@ class Task extends Base
         if (! $task) $this->notfound();
         $this->checkProjectPermissions($task['project_id']);
 
+        if (! empty($task['date_due'])) {
+            $task['date_due'] = date(t('m/d/Y'), $task['date_due']);
+        }
+
         $this->response->html($this->template->layout('task_edit', array(
             'errors' => array(),
             'values' => $task,
