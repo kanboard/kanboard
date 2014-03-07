@@ -57,11 +57,17 @@ There is also many people who have reported bugs or proposed awesome ideas.
 Documentation
 -------------
 
+### Technical details
+
 - [Installation instructions](docs/installation.markdown)
 - [Installation on Debian](docs/debian-installation.markdown)
 - [Upgrade Kanboard to a new version](docs/update.markdown)
 - [How to use Kanboard with Vagrant](docs/vagrant.markdown)
 - [Webhooks](docs/webhooks.markdown)
+
+### Using Kanboard
+
+- [Manage users](docs/manage-users.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.
