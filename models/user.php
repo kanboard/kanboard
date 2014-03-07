@@ -63,7 +63,15 @@ class User extends Base
 
     public function remove($user_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $user_id)->remove();
+        $this->db->startTransaction();
+
+        // All tasks assigned to this user will be unassigned
+        $this->db->table(Task::TABLE)->eq('owner_id', $user_id)->update(array('owner_id' => ''));
+        $this->db->table(self::TABLE)->eq('id', $user_id)->remove();
+
+        $this->db->closeTransaction();
+
+        return true;
     }
 
     public function updateSession(array $user = array())
