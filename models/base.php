@@ -51,7 +51,7 @@ abstract class Base
     // Generate a random token from /dev/urandom or with uniqid()
     public static function generateToken()
     {
-        if (ini_get('open_basedir') === '') {
+        if (ini_get('open_basedir') === '' and strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
             $token = file_get_contents('/dev/urandom', false, null, 0, 30);
         }
         else {
