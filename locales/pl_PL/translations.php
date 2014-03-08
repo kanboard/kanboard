@@ -215,10 +215,10 @@ return array(
     'Unable to create your comment.' => 'Nie udało się dodać komentarza',
     'The description is required' => 'Opis jest wymagany',
     'Edit this task' => 'Edytuj zadanie',
-    // 'Due Date' => '',
-    // 'm/d/Y' => 'd/m/Y',                    // Date format parsed with php
-    // 'month/day/year' => 'jour/mois/année', // Help shown to the user
-    // 'Invalid date' => '',
-    // 'Must be done before %B %e, %G' => '',
-    // '%B %e, %G' => '%e %B %G',
+    'Due Date' => 'Termin',
+    'm/d/Y' => 'd/m/Y',                    // Date format parsed with php
+    'month/day/year' => 'dzień/miesiąc/rok', // Help shown to the user
+    'Invalid date' => 'Błędna data',
+    'Must be done before %B %e, %G' => 'Termin do %e %B %G',
+    '%B %e, %G' => '%e %B %G',
 );
