@@ -8,7 +8,7 @@ use Model\Board;
 use Model\Task;
 
 class ActionTest extends Base
-{/*
+{
     public function testFetchActions()
     {
         $action = new Action($this->db, $this->event);
@@ -89,7 +89,7 @@ class ActionTest extends Base
         $t1 = $task->getById(1);
         $this->assertEquals(4, $t1['column_id']);
         $this->assertEquals(0, $t1['is_active']);
-    }*/
+    }
 
     public function testExecuteMultipleActions()
     {
