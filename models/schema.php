@@ -2,6 +2,29 @@
 
 namespace Schema;
 
+function version_10($pdo)
+{
+    $pdo->exec(
+        'CREATE TABLE actions (
+            id INTEGER PRIMARY KEY,
+            project_id INTEGER,
+            event_name TEXT,
+            action_name TEXT,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )'
+    );
+
+    $pdo->exec(
+        'CREATE TABLE action_has_params (
+            id INTEGER PRIMARY KEY,
+            action_id INTEGER,
+            name TEXT,
+            value TEXT,
+            FOREIGN KEY(action_id) REFERENCES actions(id) ON DELETE CASCADE
+        )'
+    );
+}
+
 function version_9($pdo)
 {
     $pdo->exec("ALTER TABLE tasks ADD COLUMN date_due INTEGER");

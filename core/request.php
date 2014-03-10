@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Request
 {
     public function getStringParam($name, $default_value = '')

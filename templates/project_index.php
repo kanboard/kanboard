@@ -69,6 +69,9 @@
                             <a href="?controller=board&amp;action=edit&amp;project_id=<?= $project['id'] ?>"><?= t('Edit board') ?></a>
                         </li>
                         <li>
+                            <a href="?controller=action&amp;action=index&amp;project_id=<?= $project['id'] ?>"><?= t('Automatic actions') ?></a>
+                        </li>
+                        <li>
                             <?php if ($project['is_active']): ?>
                                 <a href="?controller=project&amp;action=disable&amp;project_id=<?= $project['id'] ?>"><?= t('Disable') ?></a>
                             <?php else: ?>

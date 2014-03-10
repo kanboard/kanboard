@@ -2,6 +2,9 @@
 
 namespace Model;
 
+require_once __DIR__.'/base.php';
+require_once __DIR__.'/task.php';
+
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
 
@@ -14,8 +17,8 @@ class Board extends Base
     {
         $this->db->startTransaction();
 
-        $taskModel = new \Model\Task;
         $results = array();
+        $taskModel = new Task($this->db, $this->event);
 
         foreach ($values as $value) {
             $results[] = $taskModel->move(
@@ -30,7 +33,7 @@ class Board extends Base
         return ! in_array(false, $results, true);
     }
 
-    // Create board with default columns => must executed inside a transaction
+    // Create board with default columns => must be executed inside a transaction
     public function create($project_id, array $columns)
     {
         $position = 0;
@@ -75,11 +78,10 @@ class Board extends Base
     // Get columns and tasks for each column
     public function get($project_id)
     {
-        $taskModel = new \Model\Task;
-
         $this->db->startTransaction();
 
         $columns = $this->getColumns($project_id);
+        $taskModel = new Task($this->db, $this->event);
 
         foreach ($columns as &$column) {
             $column['tasks'] = $taskModel->getAllByColumnId($project_id, $column['id'], array(1));

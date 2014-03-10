@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Session
 {
     const SESSION_LIFETIME = 2678400; // 31 days

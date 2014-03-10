@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+require_once __DIR__.'/Base.php';
+
 class Config extends Base
 {
     // Settings page

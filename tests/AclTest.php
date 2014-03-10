@@ -1,24 +1,18 @@
 <?php
 
-require_once __DIR__.'/../models/base.php';
-require_once __DIR__.'/../models/acl.php';
+require_once __DIR__.'/base.php';
 
 use Model\Acl;
 
-class AclTest extends PHPUnit_Framework_TestCase
+class AclTest extends Base
 {
-    public function setUp()
-    {
-        defined('DB_FILENAME') or define('DB_FILENAME', ':memory:');
-    }
-
     public function testAllowedAction()
     {
         $acl_rules = array(
             'controller1' => array('action1', 'action3'),
         );
 
-        $acl = new Acl;
+        $acl = new Acl($this->db, $this->event);
         $this->assertTrue($acl->isAllowedAction($acl_rules, 'controller1', 'action1'));
         $this->assertTrue($acl->isAllowedAction($acl_rules, 'controller1', 'action3'));
         $this->assertFalse($acl->isAllowedAction($acl_rules, 'controller1', 'action2'));
@@ -28,7 +22,7 @@ class AclTest extends PHPUnit_Framework_TestCase
 
     public function testIsAdmin()
     {
-        $acl = new Acl;
+        $acl = new Acl($this->db, $this->event);
 
         $_SESSION = array();
         $this->assertFalse($acl->isAdminUser());
@@ -51,7 +45,7 @@ class AclTest extends PHPUnit_Framework_TestCase
 
     public function testIsUser()
     {
-        $acl = new Acl;
+        $acl = new Acl($this->db, $this->event);
 
         $_SESSION = array();
         $this->assertFalse($acl->isRegularUser());
@@ -74,7 +68,7 @@ class AclTest extends PHPUnit_Framework_TestCase
 
     public function testIsPageAllowed()
     {
-        $acl = new Acl;
+        $acl = new Acl($this->db, $this->event);
 
         // Public access
         $_SESSION = array();

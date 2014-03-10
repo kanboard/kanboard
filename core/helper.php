@@ -89,6 +89,11 @@ function summary($value, $min_length = 5, $max_length = 120, $end = '[...]')
     return $value;
 }
 
+function contains($haystack, $needle)
+{
+    return strpos($haystack, $needle) !== false;
+}
+
 function in_list($id, array $listing)
 {
     if (isset($listing[$id])) {

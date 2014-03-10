@@ -2,6 +2,8 @@
 
 namespace Model;
 
+require_once __DIR__.'/base.php';
+
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
 

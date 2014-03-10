@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+require_once __DIR__.'/Base.php';
+
 class Board extends Base
 {
     // Change a task assignee directly from the board

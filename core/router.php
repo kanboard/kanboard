@@ -1,12 +1,21 @@
 <?php
 
+namespace Core;
+
+require __DIR__.'/request.php';
+require __DIR__.'/response.php';
+require __DIR__.'/session.php';
+require __DIR__.'/template.php';
+
 class Router
 {
     private $controller = '';
     private $action = '';
+    private $registry;
 
-    public function __construct($controller = '', $action = '')
+    public function __construct(Registry $registry, $controller = '', $action = '')
     {
+        $this->registry = $registry;
         $this->controller = empty($_GET['controller']) ? $controller : $_GET['controller'];
         $this->action = empty($_GET['action']) ? $controller : $_GET['action'];
     }
@@ -16,7 +25,7 @@ class Router
         return ! ctype_alpha($value) || empty($value) ? $default_value : strtolower($value);
     }
 
-    public function loadController($filename, $class, $method)
+    public function load($filename, $class, $method)
     {
         if (file_exists($filename)) {
 
@@ -24,7 +33,11 @@ class Router
 
             if (! method_exists($class, $method)) return false;
 
-            $instance = new $class;
+            $instance = new $class($this->registry);
+            $instance->request = new Request;
+            $instance->response = new Response;
+            $instance->session = new Session;
+            $instance->template = new Template;
             $instance->beforeAction($this->controller, $this->action);
             $instance->$method();
 
@@ -39,7 +52,7 @@ class Router
         $this->controller = $this->sanitize($this->controller, 'app');
         $this->action = $this->sanitize($this->action, 'index');
 
-        if (! $this->loadController('controllers/'.$this->controller.'.php', '\Controller\\'.$this->controller, $this->action)) {
+        if (! $this->load('controllers/'.$this->controller.'.php', '\Controller\\'.$this->controller, $this->action)) {
             die('Page not found!');
         }
     }

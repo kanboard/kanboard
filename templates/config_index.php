@@ -45,7 +45,7 @@
                 </li>
                 <li>
                     <?= t('Application version:') ?>
-                    <?= Model\Base::APP_VERSION ?>
+                    <?= APP_VERSION ?>
                 </li>
             </ul>
         </section>

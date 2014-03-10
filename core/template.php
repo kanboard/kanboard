@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Template
 {
     const PATH = 'templates/';

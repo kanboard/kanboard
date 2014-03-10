@@ -140,6 +140,23 @@
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "?controller=board&action=save&project_id=" + projectId, true);
+
+        xhr.onreadystatechange = function(response) {
+
+            if (this.readyState == this.DONE) {
+                try {
+                    var response = JSON.parse(this.responseText);
+
+                    if (response.result == true) {
+
+                        // TODO: don't refresh the whole page!
+                        window.location = "?controller=board&action=show&project_id=" + projectId;
+                    }
+                }
+                catch (e) {}
+            }
+        };
+
         xhr.send(JSON.stringify(data));
     }
 

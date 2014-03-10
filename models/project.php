@@ -2,6 +2,11 @@
 
 namespace Model;
 
+require_once __DIR__.'/base.php';
+require_once __DIR__.'/acl.php';
+require_once __DIR__.'/board.php';
+require_once __DIR__.'/task.php';
+
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
 
@@ -13,16 +18,20 @@ class Project extends Base
     const INACTIVE = 0;
 
     // Get a list of people that can by assigned for tasks
-    public function getUsersList($project_id)
+    public function getUsersList($project_id, $prepend = true)
     {
         $allowed_users = $this->getAllowedUsers($project_id);
+        $userModel = new User($this->db, $this->event);
 
         if (empty($allowed_users)) {
-            $userModel = new User;
             $allowed_users = $userModel->getList();
         }
 
-        return array(t('Unassigned')) + $allowed_users;
+        if ($prepend) {
+            return array(t('Unassigned')) + $allowed_users;
+        }
+
+        return $allowed_users;
     }
 
     // Get a list of allowed people for a project
@@ -30,7 +39,7 @@ class Project extends Base
     {
         return $this->db
             ->table(self::TABLE_USERS)
-            ->join(\Model\User::TABLE, 'id', 'user_id')
+            ->join(User::TABLE, 'id', 'user_id')
             ->eq('project_id', $project_id)
             ->asc('username')
             ->listing('user_id', 'username');
@@ -44,7 +53,7 @@ class Project extends Base
             'not_allowed' => array(),
         );
 
-        $userModel = new User;
+        $userModel = new User($this->db, $this->event);
         $all_users = $userModel->getList();
 
         $users['allowed'] = $this->getAllowedUsers($project_id);
@@ -90,7 +99,7 @@ class Project extends Base
 
         // Check if user has admin rights
         $nb_users = $this->db
-                    ->table(\Model\User::TABLE)
+                    ->table(User::TABLE)
                     ->eq('id', $user_id)
                     ->eq('is_admin', 1)
                     ->count();
@@ -133,9 +142,9 @@ class Project extends Base
                         ->asc('name')
                         ->findAll();
 
-        $taskModel = new \Model\Task;
-        $boardModel = new \Model\Board;
-        $aclModel = new \Model\Acl;
+        $boardModel = new Board($this->db, $this->event);
+        $taskModel = new Task($this->db, $this->event);
+        $aclModel = new Acl($this->db, $this->event);
 
         foreach ($projects as $pkey => &$project) {
 
@@ -163,9 +172,13 @@ class Project extends Base
         return $projects;
     }
 
-    public function getList()
+    public function getList($prepend = true)
     {
-        return array(t('None')) + $this->db->table(self::TABLE)->asc('name')->listing('id', 'name');
+        if ($prepend) {
+            return array(t('None')) + $this->db->table(self::TABLE)->asc('name')->listing('id', 'name');
+        }
+
+        return $this->db->table(self::TABLE)->asc('name')->listing('id', 'name');
     }
 
     public function getAllByStatus($status)
@@ -218,7 +231,7 @@ class Project extends Base
 
         $project_id = $this->db->getConnection()->getLastId();
 
-        $boardModel = new \Model\Board;
+        $boardModel = new Board($this->db, $this->event);
         $boardModel->create($project_id, array(
             t('Backlog'),
             t('Ready'),

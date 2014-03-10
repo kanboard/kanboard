@@ -2,48 +2,18 @@
 
 namespace Controller;
 
-require __DIR__.'/../lib/request.php';
-require __DIR__.'/../lib/response.php';
-require __DIR__.'/../lib/session.php';
-require __DIR__.'/../lib/template.php';
-require __DIR__.'/../lib/helper.php';
-require __DIR__.'/../lib/translator.php';
-require __DIR__.'/../models/base.php';
-require __DIR__.'/../models/acl.php';
-require __DIR__.'/../models/config.php';
-require __DIR__.'/../models/user.php';
-require __DIR__.'/../models/project.php';
-require __DIR__.'/../models/task.php';
-require __DIR__.'/../models/board.php';
-require __DIR__.'/../models/comment.php';
-
 abstract class Base
 {
-    protected $request;
-    protected $response;
-    protected $session;
-    protected $template;
-    protected $user;
-    protected $project;
-    protected $task;
-    protected $board;
-    protected $config;
-    protected $acl;
-    protected $comment;
-
-    public function __construct()
+    public function __construct(\Core\Registry $registry)
     {
-        $this->request = new \Request;
-        $this->response = new \Response;
-        $this->session = new \Session;
-        $this->template = new \Template;
-        $this->config = new \Model\Config;
-        $this->user = new \Model\User;
-        $this->project = new \Model\Project;
-        $this->task = new \Model\Task;
-        $this->board = new \Model\Board;
-        $this->acl = new \Model\Acl;
-        $this->comment = new \Model\Comment;
+        $this->acl = $registry->acl;
+        $this->action = $registry->action;
+        $this->board = $registry->board;
+        $this->config = $registry->config;
+        $this->project = $registry->project;
+        $this->task = $registry->task;
+        $this->user = $registry->user;
+        $this->comment = $registry->comment;
     }
 
     public function beforeAction($controller, $action)
@@ -74,6 +44,9 @@ abstract class Base
         if (! $this->acl->isPageAccessAllowed($controller, $action)) {
             $this->response->redirect('?controller=user&action=forbidden');
         }
+
+        // Attach events for automatic actions
+        $this->action->attachEvents();
     }
 
     public function checkProjectPermissions($project_id)

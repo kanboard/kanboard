@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+require_once __DIR__.'/Base.php';
+
 class Task extends Base
 {
     // Webhook to create a task (useful for external software)

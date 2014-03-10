@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+require_once __DIR__.'/Base.php';
+
 class User extends Base
 {
     // Display access forbidden page

@@ -2,12 +2,21 @@
 
 namespace Model;
 
+require_once __DIR__.'/base.php';
+require_once __DIR__.'/comment.php';
+
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
 
 class Task extends Base
 {
-    const TABLE = 'tasks';
+    const TABLE               = 'tasks';
+    const EVENT_MOVE_COLUMN   = 'task.move.column';
+    const EVENT_MOVE_POSITION = 'task.move.position';
+    const EVENT_UPDATE        = 'task.update';
+    const EVENT_CREATE        = 'task.create';
+    const EVENT_CLOSE         = 'task.close';
+    const EVENT_OPEN          = 'task.open';
 
     public function getColors()
     {
@@ -42,13 +51,13 @@ class Task extends Base
                         self::TABLE.'.position',
                         self::TABLE.'.is_active',
                         self::TABLE.'.score',
-                        \Model\Project::TABLE.'.name AS project_name',
-                        \Model\Board::TABLE.'.title AS column_title',
-                        \Model\User::TABLE.'.username'
+                        Project::TABLE.'.name AS project_name',
+                        Board::TABLE.'.title AS column_title',
+                        User::TABLE.'.username'
                     )
-                    ->join(\Model\Project::TABLE, 'id', 'project_id')
-                    ->join(\Model\Board::TABLE, 'id', 'column_id')
-                    ->join(\Model\User::TABLE, 'id', 'owner_id')
+                    ->join(Project::TABLE, 'id', 'project_id')
+                    ->join(Board::TABLE, 'id', 'column_id')
+                    ->join(User::TABLE, 'id', 'owner_id')
                     ->eq(self::TABLE.'.id', $task_id)
                     ->findOne();
         }
@@ -75,11 +84,11 @@ class Task extends Base
                 self::TABLE.'.position',
                 self::TABLE.'.is_active',
                 self::TABLE.'.score',
-                \Model\Board::TABLE.'.title AS column_title',
-                \Model\User::TABLE.'.username'
+                Board::TABLE.'.title AS column_title',
+                User::TABLE.'.username'
             )
-            ->join(\Model\Board::TABLE, 'id', 'column_id')
-            ->join(\Model\User::TABLE, 'id', 'owner_id')
+            ->join(Board::TABLE, 'id', 'column_id')
+            ->join(User::TABLE, 'id', 'owner_id')
             ->eq(self::TABLE.'.project_id', $project_id)
             ->in('is_active', $status)
             ->desc('date_completed')
@@ -107,7 +116,7 @@ class Task extends Base
                     ->asc('position')
                     ->findAll();
 
-        $commentModel = new Comment;
+        $commentModel = new Comment($this->db, $this->event);
 
         foreach ($tasks as &$task) {
             $task['nb_comments'] = $commentModel->count($task['id']);
@@ -126,19 +135,60 @@ class Task extends Base
                     ->count();
     }
 
+    public function duplicateToAnotherProject($task_id, $project_id)
+    {
+        $this->db->startTransaction();
+
+        $boardModel = new Board($this->db, $this->event);
+
+        // Get the original task
+        $task = $this->getById($task_id);
+
+        // Cleanup data
+        unset($task['id']);
+        unset($task['date_completed']);
+
+        // Assign new values
+        $task['date_creation'] = time();
+        $task['owner_id'] = 0;
+        $task['is_active'] = 1;
+        $task['column_id'] = $boardModel->getFirstColumn($project_id);
+        $task['project_id'] = $project_id;
+        $task['position'] = $this->countByColumnId($task['project_id'], $task['column_id']);
+
+        // Save task
+        if (! $this->db->table(self::TABLE)->save($task)) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+
+        $task_id = $this->db->getConnection()->getLastId();
+
+        $this->db->closeTransaction();
+
+        // Trigger events
+        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $task);
+
+        return $task_id;
+    }
+
     public function create(array $values)
     {
         $this->db->startTransaction();
 
-        unset($values['another_task']);
+        // Prepare data
+        if (isset($values['another_task'])) {
+            unset($values['another_task']);
+        }
 
-        if (! empty($values['date_due'])) {
+        if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
             $values['date_due'] = $this->getTimestampFromDate($values['date_due'], t('m/d/Y')) ?: null;
         }
 
         $values['date_creation'] = time();
         $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']);
 
+        // Save task
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
             return false;
@@ -148,38 +198,83 @@ class Task extends Base
 
         $this->db->closeTransaction();
 
+        // Trigger events
+        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $values);
+
         return $task_id;
     }
 
     public function update(array $values)
     {
-        if (! empty($values['date_due'])) {
+        // Prepare data
+        if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
             $values['date_due'] = $this->getTimestampFromDate($values['date_due'], t('m/d/Y')) ?: null;
         }
 
-        return $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
+        $original_task = $this->getById($values['id']);
+        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
+
+        // Trigger events
+        if ($result) {
+
+            $events = array();
+
+            if ($this->event->getLastTriggeredEvent() !== self::EVENT_UPDATE) {
+                $events[] = self::EVENT_UPDATE;
+            }
+
+            if (isset($values['column_id']) && $original_task['column_id'] != $values['column_id']) {
+                $events[] = self::EVENT_MOVE_COLUMN;
+            }
+            else if (isset($values['position']) && $original_task['position'] != $values['position']) {
+                $events[] = self::EVENT_MOVE_POSITION;
+            }
+
+            $event_data = array_merge($original_task, $values);
+            $event_data['task_id'] = $original_task['id'];
+
+            foreach ($events as $event) {
+                $this->event->trigger($event, $event_data);
+            }
+        }
+
+        return $result;
     }
 
     // Mark a task closed
     public function close($task_id)
     {
-        return $this->db->table(self::TABLE)
-            ->eq('id', $task_id)
-            ->update(array(
-                'is_active' => 0,
-                'date_completed' => time()
-            ));
+        $result = $this->db
+                        ->table(self::TABLE)
+                        ->eq('id', $task_id)
+                        ->update(array(
+                            'is_active' => 0,
+                            'date_completed' => time()
+                        ));
+
+        if ($result) {
+            $this->event->trigger(self::EVENT_CLOSE, array('task_id' => $task_id) + $this->getById($task_id));
+        }
+
+        return $result;
     }
 
     // Mark a task open
     public function open($task_id)
     {
-        return $this->db->table(self::TABLE)
-            ->eq('id', $task_id)
-            ->update(array(
-                'is_active' => 1,
-                'date_completed' => ''
-            ));
+        $result = $this->db
+                        ->table(self::TABLE)
+                        ->eq('id', $task_id)
+                        ->update(array(
+                            'is_active' => 1,
+                            'date_completed' => ''
+                        ));
+
+        if ($result) {
+            $this->event->trigger(self::EVENT_OPEN, array('task_id' => $task_id) + $this->getById($task_id));
+        }
+
+        return $result;
     }
 
     // Remove a task
@@ -191,10 +286,11 @@ class Task extends Base
     // Move a task to another column or to another position
     public function move($task_id, $column_id, $position)
     {
-        return (bool) $this->db
-                    ->table(self::TABLE)
-                    ->eq('id', $task_id)
-                    ->update(array('column_id' => $column_id, 'position' => $position));
+        return $this->update(array(
+            'id' => $task_id,
+            'column_id' => $column_id,
+            'position' => $position,
+        ));
     }
 
     public function validateCreation(array $values)
@@ -270,5 +366,20 @@ class Task extends Base
             $v->execute(),
             $v->getErrors()
         );
+    }
+
+    public function getTimestampFromDate($value, $format)
+    {
+        $date = \DateTime::createFromFormat($format, $value);
+
+        if ($date !== false) {
+            $errors = \DateTime::getLastErrors();
+            if ($errors['error_count'] === 0 && $errors['warning_count'] === 0) {
+                $timestamp = $date->getTimestamp();
+                return $timestamp > 0 ? $timestamp : 0;
+            }
+        }
+
+        return 0;
     }
 }

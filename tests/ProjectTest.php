@@ -1,24 +1,19 @@
 <?php
 
-require_once __DIR__.'/../lib/translator.php';
-require_once __DIR__.'/../models/base.php';
-require_once __DIR__.'/../models/board.php';
-require_once __DIR__.'/../models/user.php';
-require_once __DIR__.'/../models/project.php';
+require_once __DIR__.'/base.php';
 
 use Model\Project;
 use Model\User;
+use Model\Task;
+use Model\Acl;
+use Model\Board;
 
-class ProjectTest extends PHPUnit_Framework_TestCase
+class ProjectTest extends Base
 {
-    public function setUp()
-    {
-        defined('DB_FILENAME') or define('DB_FILENAME', ':memory:');
-    }
-
     public function testCreation()
     {
-        $p = new Project;
+        $p = new Project($this->db, $this->event);
+
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertNotEmpty($p->getById(1));
     }
@@ -26,10 +21,10 @@ class ProjectTest extends PHPUnit_Framework_TestCase
     public function testAllowEverybody()
     {
         // We create a regular user
-        $user = new User;
+        $user = new User($this->db, $this->event);
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
-        $p = new Project;
+        $p = new Project($this->db, $this->event);
         $this->assertEmpty($p->getAllowedUsers(1)); // Nobody is specified for the given project
         $this->assertTrue($p->isUserAllowed(1, 1)); // Everybody should be allowed
         $this->assertTrue($p->isUserAllowed(1, 2)); // Everybody should be allowed
@@ -37,7 +32,12 @@ class ProjectTest extends PHPUnit_Framework_TestCase
 
     public function testAllowUser()
     {
-        $p = new Project;
+        $p = new Project($this->db, $this->event);
+        $user = new User($this->db, $this->event);
+        $user->create(array('username' => 'unittest', 'password' => 'unittest'));
+
+        // We create a project
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
         // We allow the admin user
         $this->assertTrue($p->allowUser(1, 1));
@@ -58,7 +58,13 @@ class ProjectTest extends PHPUnit_Framework_TestCase
 
     public function testRevokeUser()
     {
-        $p = new Project;
+        $p = new Project($this->db, $this->event);
+
+        $user = new User($this->db, $this->event);
+        $user->create(array('username' => 'unittest', 'password' => 'unittest'));
+
+        // We create a project
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
         // We revoke our admin user
         $this->assertTrue($p->revokeUser(1, 1));
@@ -107,7 +113,13 @@ class ProjectTest extends PHPUnit_Framework_TestCase
 
     public function testUsersList()
     {
-        $p = new Project;
+        $p = new Project($this->db, $this->event);
+
+        $user = new User($this->db, $this->event);
+        $user->create(array('username' => 'unittest', 'password' => 'unittest'));
+
+        // We create project
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
         // No restriction, we should have everybody
         $this->assertEquals(
