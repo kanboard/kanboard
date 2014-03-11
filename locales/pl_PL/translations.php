@@ -250,4 +250,5 @@ return array(
     // 'Task creation' => '',
     // 'Open a closed task' => '',
     // 'Closing a task' => '',
+    // 'Assign a color to a specific user' => '',
 );

@@ -99,7 +99,7 @@ return array(
     'Edit a task' => 'Modifier une tâche',
     'Column' => 'Colonne',
     'Color' => 'Couleur',
-    'Assignee' => 'Personne assigné',
+    'Assignee' => 'Personne assignée',
     'Create another task' => 'Créer une autre tâche',
     'New task' => 'Nouvelle tâche',
     'Open a task' => 'Ouvrir une tâche',
@@ -247,4 +247,5 @@ return array(
     'Task creation' => 'Création d\'une tâche',
     'Open a closed task' => 'Ouverture d\'une tâche fermée',
     'Closing a task' => 'Fermeture d\'une tâche',
+    'Assign a color to a specific user' => 'Assigner une couleur à un utilisateur',
 );

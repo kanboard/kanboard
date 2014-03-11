@@ -26,6 +26,7 @@ class Action extends Base
             'TaskAssignSpecificUser' => t('Assign the task to a specific user'),
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
+            'TaskAssignColorUser' => t('Assign a color to a specific user'),
         );
     }
 
@@ -216,6 +217,10 @@ class Action extends Base
             case 'TaskDuplicateAnotherProject':
                 require_once __DIR__.'/../actions/task_duplicate_another_project.php';
                 $className = '\Action\TaskDuplicateAnotherProject';
+                return new $className($project_id, new Task($this->db, $this->event));
+            case 'TaskAssignColorUser':
+                require_once __DIR__.'/../actions/task_assign_color_user.php';
+                $className = '\Action\TaskAssignColorUser';
                 return new $className($project_id, new Task($this->db, $this->event));
             default:
                 throw new \LogicException('Action not found: '.$name);
