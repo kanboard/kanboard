@@ -48,6 +48,8 @@ Original author: [Frédéric Guillot](http://fredericguillot.com/)
 Contributors:
 
 - Mathgl67: https://github.com/mathgl67
+- Matthieu Keller: https://github.com/maggick
+- Maxime: https://github.com/EpocDotFr
 - Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
 - Toomyem: https://github.com/toomyem
