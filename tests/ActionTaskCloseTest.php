@@ -3,6 +3,7 @@
 require_once __DIR__.'/base.php';
 
 use Model\Task;
+use Model\Project;
 
 class ActionTaskCloseTest extends Base
 {
@@ -17,7 +18,8 @@ class ActionTaskCloseTest extends Base
             'column_id' => 5,
         );
 
-        $this->assertFalse($action->doAction($event));
+        $this->assertFalse($action->isExecutable($event));
+        $this->assertFalse($action->execute($event));
     }
 
     public function testBadColumn()
@@ -31,7 +33,7 @@ class ActionTaskCloseTest extends Base
             'column_id' => 3,
         );
 
-        $this->assertFalse($action->doAction($event));
+        $this->assertFalse($action->execute($event));
     }
 
     public function testExecute()
@@ -40,7 +42,8 @@ class ActionTaskCloseTest extends Base
         $action->setParam('column_id', 2);
 
         // We create a task in the first column
-        $task = new Task($this->db, $this->event);
+        $t = new Task($this->db, $this->event);
+        $p = new Project($this->db, $this->event);
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
 
@@ -52,11 +55,11 @@ class ActionTaskCloseTest extends Base
         );
 
         // Our event should be executed
-        $this->assertTrue($action->doAction($event));
+        $this->assertTrue($action->execute($event));
 
         // Our task should be closed
-        $t = $task->getById(1);
-        $this->assertNotEmpty($t);
-        $this->assertEquals(0, $t['is_active']);
+        $task = $t->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(0, $task['is_active']);
     }
 }
