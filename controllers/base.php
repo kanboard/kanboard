@@ -14,6 +14,7 @@ abstract class Base
         $this->task = $registry->task;
         $this->user = $registry->user;
         $this->comment = $registry->comment;
+        $this->event = $registry->shared('event');
     }
 
     public function beforeAction($controller, $action)

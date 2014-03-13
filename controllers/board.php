@@ -276,7 +276,8 @@ class Board extends Base
         }
 
         $this->response->json(array(
-            'result' => $this->board->saveTasksPosition($this->request->getValues())
+            'result' => $this->board->saveTasksPosition($this->request->getValues()),
+            'refresh' => $this->event->getLastListenerExecuted() !== ''
         ));
     }
 }

@@ -147,9 +147,10 @@
                 try {
                     var response = JSON.parse(this.responseText);
 
-                    if (response.result == true) {
-
-                        // TODO: don't refresh the whole page!
+                    if (response.result == false) {
+                        window.alert('Unable to update the board');
+                    }
+                    else if (response.refresh == true) {
                         window.location = "?controller=board&action=show&project_id=" + projectId;
                     }
                 }

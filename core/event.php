@@ -29,6 +29,14 @@ class Event
     private $listeners = array();
 
     /**
+     * The last listener executed
+     *
+     * @access private
+     * @var string
+     */
+    private $lastListener = '';
+
+    /**
      * The last triggered event
      *
      * @access private
@@ -74,9 +82,22 @@ class Event
 
         if (isset($this->listeners[$eventName])) {
             foreach ($this->listeners[$eventName] as $listener) {
-                $listener->execute($data); // TODO: keep an history of executed actions for unit test
+                if ($listener->execute($data)) {
+                    $this->lastListener = get_class($listener);
+                }
             }
         }
+    }
+
+    /**
+     * Get the last listener executed
+     *
+     * @access public
+     * @return string Event name
+     */
+    public function getLastListenerExecuted()
+    {
+        return $this->lastListener;
     }
 
     /**

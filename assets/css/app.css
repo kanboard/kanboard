@@ -523,6 +523,10 @@ div.task a:hover {
     text-decoration: underline;
 }
 
+div.task-title a {
+    font-weight: normal;
+}
+
 #infos,
 div.task {
     position: relative;
