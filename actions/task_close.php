@@ -39,9 +39,8 @@ class TaskClose extends Base
     }
 
     /**
-     * Get the required parameter for the event (check if for the event data)
+     * Get the required parameter for the event
      *
-     * @abstract
      * @access public
      * @return array
      */

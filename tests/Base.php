@@ -12,6 +12,10 @@ require_once __DIR__.'/../models/user.php';
 require_once __DIR__.'/../models/board.php';
 require_once __DIR__.'/../models/action.php';
 require_once __DIR__.'/../actions/task_close.php';
+require_once __DIR__.'/../actions/task_assign_specific_user.php';
+require_once __DIR__.'/../actions/task_assign_color_user.php';
+require_once __DIR__.'/../actions/task_assign_current_user.php';
+require_once __DIR__.'/../actions/task_duplicate_another_project.php';
 
 abstract class Base extends PHPUnit_Framework_TestCase
 {
