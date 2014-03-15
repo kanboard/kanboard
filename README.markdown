@@ -18,6 +18,7 @@ Features
 - Multiple boards/projects
 - Boards customization, rename or add columns
 - Tasks with different colors, Markdown support for the description
+- Automatic actions
 - Users management with a basic privileges separation (administrator or regular user)
 - Webhooks to create tasks from an external software
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
@@ -69,7 +70,9 @@ Documentation
 
 ### Using Kanboard
 
+- [Usage examples](docs/usage-examples.markdown)
 - [Manage users](docs/manage-users.markdown)
+- [Automatic actions](docs/automatic-actions.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.
