@@ -65,6 +65,7 @@ Documentation
 - [Installation instructions](docs/installation.markdown)
 - [Installation on Debian](docs/debian-installation.markdown)
 - [Upgrade Kanboard to a new version](docs/update.markdown)
+- [Sqlite database management](docs/sqlite-database.markdown)
 - [How to use Kanboard with Vagrant](docs/vagrant.markdown)
 - [Webhooks](docs/webhooks.markdown)
 
@@ -72,6 +73,7 @@ Documentation
 
 - [Usage examples](docs/usage-examples.markdown)
 - [Manage users](docs/manage-users.markdown)
+- [Syntax guide](docs/syntax-guide.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
