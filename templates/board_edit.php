@@ -11,13 +11,38 @@
     <form method="post" action="?controller=board&amp;action=update&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
 
         <?php $i = 0; ?>
-
-        <?php foreach ($columns as $column): ?>
-            <?= Helper\form_label(t('Column %d', ++$i), 'title['.$column['id'].']') ?>
-            <?= Helper\form_text('title['.$column['id'].']', $values, $errors, array('required')) ?>
-            <?= Helper\form_number('task_limit['.$column['id'].']', $values, $errors, array('placeholder="'.t('limit').'"')) ?>
-            <a href="?controller=board&amp;action=confirm&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'] ?>"><?= t('Remove') ?></a>
-        <?php endforeach ?>
+        <table>
+            <tr>
+                <th><?= t('Position') ?></th>
+                <th><?= t('Column title') ?></th>
+                <th><?= t('Task limit') ?></th>
+                <th><?= t('Actions') ?></th>
+            </tr>
+            <?php foreach ($columns as $column): ?>
+            <tr>
+                <td><?= Helper\form_label(t('Column %d', ++$i), 'title['.$column['id'].']') ?></td>
+                <td><?= Helper\form_text('title['.$column['id'].']', $values, $errors, array('required')) ?></td>
+                <td><?= Helper\form_number('task_limit['.$column['id'].']', $values, $errors, array('placeholder="'.t('limit').'"')) ?></td>
+                <td>
+                    <ul>
+                        <?php if ($column['position'] != 1): ?>
+                        <li>
+                            <a href="?controller=board&amp;action=moveUp&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'] ?>"><?= t('Move Up') ?></a>
+                        </li>
+                        <?php endif ?>
+                        <?php if ($column['position'] != count($columns)): ?>
+                        <li>
+                            <a href="?controller=board&amp;action=moveDown&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'] ?>"><?= t('Move Down') ?></a>
+                        </li>
+                        <?php endif ?>
+                        <li>
+                            <a href="?controller=board&amp;action=confirm&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'] ?>"><?= t('Remove') ?></a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <?php endforeach ?>
+        </table>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Update') ?>" class="btn btn-blue"/>

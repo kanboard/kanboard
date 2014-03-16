@@ -8,6 +8,12 @@ require_once __DIR__.'/task.php';
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
 
+/**
+ * Action model
+ *
+ * @package  model
+ * @author   Frederic Guillot
+ */
 class Action extends Base
 {
     const TABLE = 'actions';

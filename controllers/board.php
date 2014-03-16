@@ -4,9 +4,49 @@ namespace Controller;
 
 require_once __DIR__.'/base.php';
 
+/**
+ * Board controller
+ *
+ * @package  controller
+ * @author   Frederic Guillot
+ */
 class Board extends Base
 {
-    // Change a task assignee directly from the board
+    /**
+     * Move a column up
+     *
+     * @access public
+     */
+    public function moveUp()
+    {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $column_id = $this->request->getIntegerParam('column_id');
+
+        $this->board->moveUp($project_id, $column_id);
+
+        $this->response->redirect('?controller=board&action=edit&project_id='.$project_id);
+    }
+
+    /**
+     * Move a column down
+     *
+     * @access public
+     */
+    public function moveDown()
+    {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $column_id = $this->request->getIntegerParam('column_id');
+
+        $this->board->moveDown($project_id, $column_id);
+
+        $this->response->redirect('?controller=board&action=edit&project_id='.$project_id);
+    }
+
+    /**
+     * Change a task assignee directly from the board
+     *
+     * @access public
+     */
     public function assign()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
@@ -32,7 +72,11 @@ class Board extends Base
         )));
     }
 
-    // Validate an assignee change
+    /**
+     * Validate an assignee modification
+     *
+     * @access public
+     */
     public function assignTask()
     {
         $values = $this->request->getValues();
@@ -50,8 +94,12 @@ class Board extends Base
         $this->response->redirect('?controller=board&action=show&project_id='.$values['project_id']);
     }
 
-    // Display the public version of a board
-    // Access checked by a simple token, no user login, read only, auto-refresh
+    /**
+     * Display the public version of a board
+     * Access checked by a simple token, no user login, read only, auto-refresh
+     *
+     * @access public
+     */
     public function readonly()
     {
         $token = $this->request->getStringParam('token');
@@ -72,7 +120,11 @@ class Board extends Base
         )));
     }
 
-    // Display the default user project or the first project
+    /**
+     * Display the default user project or the first project
+     *
+     * @access public
+     */
     public function index()
     {
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
@@ -110,7 +162,11 @@ class Board extends Base
         )));
     }
 
-    // Show a board for a given project
+    /**
+     * Show a board for a given project
+     *
+     * @access public
+     */
     public function show()
     {
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
@@ -136,7 +192,11 @@ class Board extends Base
         )));
     }
 
-    // Display a form to edit a board
+    /**
+     * Display a form to edit a board
+     *
+     * @access public
+     */
     public function edit()
     {
         $project_id = $this->request->getIntegerParam('project_id');
@@ -162,7 +222,11 @@ class Board extends Base
         )));
     }
 
-    // Validate and update a board
+    /**
+     * Validate and update a board
+     *
+     * @access public
+     */
     public function update()
     {
         $project_id = $this->request->getIntegerParam('project_id');
@@ -203,7 +267,11 @@ class Board extends Base
         )));
     }
 
-    // Validate and add a new column
+    /**
+     * Validate and add a new column
+     *
+     * @access public
+     */
     public function add()
     {
         $project_id = $this->request->getIntegerParam('project_id');
@@ -242,7 +310,11 @@ class Board extends Base
         )));
     }
 
-    // Confirmation dialog before removing a column
+    /**
+     * Confirmation dialog before removing a column
+     *
+     * @access public
+     */
     public function confirm()
     {
         $this->response->html($this->template->layout('board_remove', array(
@@ -252,7 +324,11 @@ class Board extends Base
         )));
     }
 
-    // Remove a column
+    /**
+     * Remove a column
+     *
+     * @access public
+     */
     public function remove()
     {
         $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
@@ -266,7 +342,11 @@ class Board extends Base
         $this->response->redirect('?controller=board&action=edit&project_id='.$column['project_id']);
     }
 
-    // Save the board (Ajax request made by the drag and drop)
+    /**
+     * Save the board (Ajax request made by the drag and drop)
+     *
+     * @access public
+     */
     public function save()
     {
         $project_id = $this->request->getIntegerParam('project_id');

@@ -248,4 +248,8 @@ return array(
     'Open a closed task' => 'Ouverture d\'une tâche fermée',
     'Closing a task' => 'Fermeture d\'une tâche',
     'Assign a color to a specific user' => 'Assigner une couleur à un utilisateur',
+    'Column title' => 'Titre de la colonne',
+    'Position' => 'Position',
+    'Move Up' => 'Déplacer vers le haut',
+    'Move Down' => 'Déplacer vers le bas',
 );

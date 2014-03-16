@@ -8,11 +8,23 @@ require_once __DIR__.'/task.php';
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
 
+/**
+ * Board model
+ *
+ * @package  model
+ * @author   Frederic Guillot
+ */
 class Board extends Base
 {
     const TABLE = 'columns';
 
-    // Save the board (each task position/column)
+    /**
+     * Save task positions for each column
+     *
+     * @access public
+     * @param  array  $values    [['task_id' => X, 'column_id' => X, 'position' => X], ...]
+     * @return boolean
+     */
     public function saveTasksPosition(array $values)
     {
         $this->db->startTransaction();
@@ -33,7 +45,14 @@ class Board extends Base
         return ! in_array(false, $results, true);
     }
 
-    // Create board with default columns => must be executed inside a transaction
+    /**
+     * Create a board with default columns, must be executed inside a transaction
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @param  array    $columns      List of columns title ['column1', 'column2', ...]
+     * @return boolean
+     */
     public function create($project_id, array $columns)
     {
         $position = 0;
@@ -46,20 +65,34 @@ class Board extends Base
                 'project_id' => $project_id,
             );
 
-            $this->db->table(self::TABLE)->save($values);
+            if (! $this->db->table(self::TABLE)->save($values)) {
+                return false;
+            }
         }
 
         return true;
     }
 
-    // Add a new column to the board
+    /**
+     * Add a new column to the board
+     *
+     * @access public
+     * @param  array    $values   ['title' => X, 'project_id' => X]
+     * @return boolean
+     */
     public function add(array $values)
     {
         $values['position'] = $this->getLastColumnPosition($values['project_id']) + 1;
         return $this->db->table(self::TABLE)->save($values);
     }
 
-    // Update columns
+    /**
+     * Update columns
+     *
+     * @access public
+     * @param  array    $values   Form values
+     * @return boolean
+     */
     public function update(array $values)
     {
         $this->db->startTransaction();
@@ -75,7 +108,71 @@ class Board extends Base
         return true;
     }
 
-    // Get columns and tasks for each column
+    /**
+     * Move a column down, increment the column position value
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @param  integer  $column_id    Column id
+     * @return boolean
+     */
+    public function moveDown($project_id, $column_id)
+    {
+        $columns = $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->listing('id', 'position');
+        $positions = array_flip($columns);
+
+        if (isset($columns[$column_id]) && $columns[$column_id] < count($columns)) {
+
+            $position = ++$columns[$column_id];
+            $columns[$positions[$position]]--;
+
+            $this->db->startTransaction();
+            $this->db->table(self::TABLE)->eq('id', $column_id)->update(array('position' => $position));
+            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $columns[$positions[$position]]));
+            $this->db->closeTransaction();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Move a column up, decrement the column position value
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @param  integer  $column_id    Column id
+     * @return boolean
+     */
+    public function moveUp($project_id, $column_id)
+    {
+        $columns = $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->listing('id', 'position');
+        $positions = array_flip($columns);
+
+        if (isset($columns[$column_id]) && $columns[$column_id] > 1) {
+
+            $position = --$columns[$column_id];
+            $columns[$positions[$position]]++;
+
+            $this->db->startTransaction();
+            $this->db->table(self::TABLE)->eq('id', $column_id)->update(array('position' => $position));
+            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $columns[$positions[$position]]));
+            $this->db->closeTransaction();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get all columns and tasks for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return array
+     */
     public function get($project_id)
     {
         $this->db->startTransaction();
@@ -92,37 +189,73 @@ class Board extends Base
         return $columns;
     }
 
-    // Get first column id for a given project
+    /**
+     * Get the first column id for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return integer
+     */
     public function getFirstColumn($project_id)
     {
         return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->findOneColumn('id');
     }
 
-    // Get list of columns
+    /**
+     * Get the list of columns sorted by position [ column_id => title ]
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return array
+     */
     public function getColumnsList($project_id)
     {
         return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->listing('id', 'title');
     }
 
-    // Get all columns information for a project
+    /**
+     * Get all columns sorted by position for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return array
+     */
     public function getColumns($project_id)
     {
         return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->findAll();
     }
 
-    // Get the number of columns for a project
+    /**
+     * Get the number of columns for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return integer
+     */
     public function countColumns($project_id)
     {
         return $this->db->table(self::TABLE)->eq('project_id', $project_id)->count();
     }
 
-    // Get just one column
+    /**
+     * Get a column by the id
+     *
+     * @access public
+     * @param  integer  $column_id    Column id
+     * @return array
+     */
     public function getColumn($column_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $column_id)->findOne();
     }
 
-    // Get the position of the last column for a project
+    /**
+     * Get the position of the last column for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return integer
+     */
     public function getLastColumnPosition($project_id)
     {
         return (int) $this->db
@@ -132,13 +265,26 @@ class Board extends Base
                         ->findOneColumn('position');
     }
 
-    // Remove a column and all tasks associated to this column
+    /**
+     * Remove a column and all tasks associated to this column
+     *
+     * @access public
+     * @param  integer  $column_id    Column id
+     * @return boolean
+     */
     public function removeColumn($column_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $column_id)->remove();
     }
 
-    // Validate columns update
+    /**
+     * Validate column modification
+     *
+     * @access public
+     * @param  array   $columns          Original columns List
+     * @param  array   $values           Required parameters to update a column
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
     public function validateModification(array $columns, array $values)
     {
         $rules = array();
@@ -158,7 +304,13 @@ class Board extends Base
         );
     }
 
-    // Validate column creation
+    /**
+     * Validate column creation
+     *
+     * @access public
+     * @param  array   $values           Required parameters to save an action
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
     public function validateCreation(array $values)
     {
         $v = new Validator($values, array(
