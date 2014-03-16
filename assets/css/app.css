@@ -566,6 +566,23 @@ article .task-score {
     line-height: 1.4em;
 }
 
+.markdown h1 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 2em;
+    padding-bottom: 3px;
+    border-bottom: 1px dotted #000;
+}
+
+.markdown h2 {
+    text-decoration: underline;
+}
+
+.markdown h3 {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .markdown ol,
 .markdown ul {
     margin-left: 25px;

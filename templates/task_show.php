@@ -68,7 +68,7 @@
 
                 <?= Helper\form_hidden('id', $description_form['values']) ?>
                 <?= Helper\form_textarea('description', $description_form['values'], $description_form['errors'], array('required', 'placeholder="'.t('Leave a description').'"')) ?><br/>
-                <div class="form-help"><a href="http://en.wikipedia.org/wiki/Markdown#Example" target="_blank"><?= t('Write your text in Markdown') ?></a></div>
+                <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
                 <div class="form-actions">
                     <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
@@ -93,7 +93,7 @@
             <?= Helper\form_hidden('task_id', $comment_form['values']) ?>
             <?= Helper\form_hidden('user_id', $comment_form['values']) ?>
             <?= Helper\form_textarea('comment', $comment_form['values'], $comment_form['errors'], array('required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
-            <div class="form-help"><a href="http://en.wikipedia.org/wiki/Markdown#Example" target="_blank"><?= t('Write your text in Markdown') ?></a></div>
+            <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
             <div class="form-actions">
                 <input type="submit" value="<?= t('Post comment') ?>" class="btn btn-blue"/>
