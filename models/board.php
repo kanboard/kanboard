@@ -16,6 +16,11 @@ use \SimpleValidator\Validators;
  */
 class Board extends Base
 {
+    /**
+     * SQL table name
+     *
+     * @var string
+     */
     const TABLE = 'columns';
 
     /**

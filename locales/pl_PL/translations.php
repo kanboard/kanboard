@@ -255,4 +255,6 @@ return array(
     // 'Position' => '',
     // 'Move Up' => '',
     // 'Move Down' => '',
+    // 'Duplicate to another project' => '',
+    // 'Duplicate' => '',
 );

@@ -252,4 +252,6 @@ return array(
     'Position' => 'Position',
     'Move Up' => 'Déplacer vers le haut',
     'Move Down' => 'Déplacer vers le bas',
+    'Duplicate to another project' => 'Dupliquer dans un autre projet',
+    'Duplicate' => 'Dupliquer',
 );

@@ -3,6 +3,8 @@
         <h2>#<?= $task['id'] ?> - <?= Helper\escape($task['title']) ?></h2>
         <ul>
             <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $task['project_id'] ?>"><?= t('Back to the board') ?></a></li>
+            <li><a href="?controller=task&amp;action=duplicate&amp;project_id=<?= $task['project_id'] ?>&amp;task_id=<?= $task['id'] ?>"><?= t('Duplicate') ?></a></li>
+            <!-- <li><a href="#"><?= t('Duplicate to another project') ?></a></li> -->
         </ul>
     </div>
     <section>

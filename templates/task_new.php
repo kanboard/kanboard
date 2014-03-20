@@ -8,8 +8,7 @@
         <?= Helper\form_label(t('Title'), 'title') ?>
         <?= Helper\form_text('title', $values, $errors, array('autofocus required')) ?><br/>
 
-        <?= Helper\form_label(t('Project'), 'project_id') ?>
-        <?= Helper\form_select('project_id', $projects_list, $values, $errors) ?><br/>
+        <?= Helper\form_hidden('project_id', $values) ?>
 
         <?= Helper\form_label(t('Column'), 'column_id') ?>
         <?= Helper\form_select('column_id', $columns_list, $values, $errors) ?><br/>
@@ -30,7 +29,9 @@
         <?= Helper\form_textarea('description', $values, $errors) ?><br/>
         <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
-        <?= Helper\form_checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>
+        <?php if (! isset($duplicate)): ?>
+            <?= Helper\form_checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>
+        <?php endif ?>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

@@ -20,6 +20,32 @@ class TaskTest extends Base
         $this->assertEquals(0, $t->getTimestampFromDate('5-3-2014', 'd/m/Y'));
     }
 
+    public function testDuplicateTask()
+    {
+        $t = new Task($this->db, $this->event);
+        $p = new Project($this->db, $this->event);
+
+        // We create a task and a project
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
+
+        $task = $t->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(0, $task['position']);
+
+        // We duplicate our task
+        $this->assertEquals(2, $t->duplicate(1));
+        $this->assertEquals(Task::EVENT_CREATE, $this->event->getLastTriggeredEvent());
+
+        // Check the values of the duplicated task
+        $task = $t->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(Task::STATUS_OPEN, $task['is_active']);
+        $this->assertEquals(1, $task['project_id']);
+        $this->assertEquals(1, $task['owner_id']);
+        $this->assertEquals(1, $task['position']);
+    }
+
     public function testDuplicateToAnotherProject()
     {
         $t = new Task($this->db, $this->event);

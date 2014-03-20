@@ -4,9 +4,19 @@ namespace Controller;
 
 require_once __DIR__.'/base.php';
 
+/**
+ * Task controller
+ *
+ * @package  controller
+ * @author   Frederic Guillot
+ */
 class Task extends Base
 {
-    // Webhook to create a task (useful for external software)
+    /**
+     * Webhook to create a task (useful for external software)
+     *
+     * @access public
+     */
     public function add()
     {
         $token = $this->request->getStringParam('token');
@@ -41,7 +51,11 @@ class Task extends Base
         $this->response->text('FAILED');
     }
 
-    // Display the template show task, common between different task view
+    /**
+     * Display the template show task, common between different task view
+     *
+     * @access public
+     */
     private function showTask(array $task, array $comment_form = array(), array $description_form = array())
     {
         if (empty($comment_form)) {
@@ -77,7 +91,11 @@ class Task extends Base
         )));
     }
 
-    // Show a task
+    /**
+     * Show a task
+     *
+     * @access public
+     */
     public function show()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
@@ -88,7 +106,11 @@ class Task extends Base
         $this->showTask($task);
     }
 
-    // Add a comment
+    /**
+     * Add a comment
+     *
+     * @access public
+     */
     public function comment()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
@@ -117,7 +139,11 @@ class Task extends Base
         );
     }
 
-    // Add a description from the show task page
+    /**
+     * Add a description from the show task page
+     *
+     * @access public
+     */
     public function description()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
@@ -147,7 +173,11 @@ class Task extends Base
         );
     }
 
-    // Display a form to create a new task
+    /**
+     * Display a form to create a new task
+     *
+     * @access public
+     */
     public function create()
     {
         $project_id = $this->request->getIntegerParam('project_id');
@@ -171,7 +201,11 @@ class Task extends Base
         )));
     }
 
-    // Validate and save a new task
+    /**
+     * Validate and save a new task
+     *
+     * @access public
+     */
     public function save()
     {
         $values = $this->request->getValues();
@@ -210,7 +244,11 @@ class Task extends Base
         )));
     }
 
-    // Display a form to edit a task
+    /**
+     * Display a form to edit a task
+     *
+     * @access public
+     */
     public function edit()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
@@ -233,7 +271,11 @@ class Task extends Base
         )));
     }
 
-    // Validate and update a task
+    /**
+     * Validate and update a task
+     *
+     * @access public
+     */
     public function update()
     {
         $values = $this->request->getValues();
@@ -263,7 +305,11 @@ class Task extends Base
         )));
     }
 
-    // Hide a task
+    /**
+     * Hide a task
+     *
+     * @access public
+     */
     public function close()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
@@ -280,7 +326,11 @@ class Task extends Base
         $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
     }
 
-    // Confirmation dialog before to close a task
+    /**
+     * Confirmation dialog before to close a task
+     *
+     * @access public
+     */
     public function confirmClose()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
@@ -295,7 +345,11 @@ class Task extends Base
         )));
     }
 
-    // Open a task
+    /**
+     * Open a task
+     *
+     * @access public
+     */
     public function open()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
@@ -312,7 +366,11 @@ class Task extends Base
         $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
     }
 
-    // Confirmation dialog before to open a task
+    /**
+     * Confirmation dialog before to open a task
+     *
+     * @access public
+     */
     public function confirmOpen()
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
@@ -324,6 +382,31 @@ class Task extends Base
             'task' => $task,
             'menu' => 'tasks',
             'title' => t('Open a task')
+        )));
+    }
+
+    /**
+     * Duplicate a task (fill the form for a new task)
+     *
+     * @access public
+     */
+    public function duplicate()
+    {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
+
+        if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
+
+        $this->response->html($this->template->layout('task_new', array(
+            'errors' => array(),
+            'values' => $task,
+            'projects_list' => $this->project->getListByStatus(\Model\Project::ACTIVE),
+            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'users_list' => $this->project->getUsersList($task['project_id']),
+            'colors_list' => $this->task->getColors(),
+            'duplicate' => true,
+            'menu' => 'tasks',
+            'title' => t('New task')
         )));
     }
 }
