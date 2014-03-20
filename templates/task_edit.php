@@ -30,8 +30,6 @@
         <?= Helper\form_textarea('description', $values, $errors) ?><br/>
         <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
-        <?= Helper\form_checkbox('another_task', t('Create another task'), 1) ?>
-
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
             <?= t('or') ?> <a href="?controller=board&amp;action=show&amp;project_id=<?= $values['project_id'] ?>"><?= t('cancel') ?></a>
