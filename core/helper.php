@@ -2,6 +2,12 @@
 
 namespace Helper;
 
+function template($name, array $args = array())
+{
+    $tpl = new \Core\Template;
+    return $tpl->load($name, $args);
+}
+
 function is_current_user($user_id)
 {
     return $_SESSION['user']['id'] == $user_id;

@@ -2,8 +2,20 @@
 
 namespace Controller;
 
+/**
+ * Base controller
+ *
+ * @package  controller
+ * @author   Frederic Guillot
+ */
 abstract class Base
 {
+    /**
+     * Constructor
+     *
+     * @access public
+     * @param  Core\Registry  $registry
+     */
     public function __construct(\Core\Registry $registry)
     {
         $this->acl = $registry->acl;
@@ -17,6 +29,11 @@ abstract class Base
         $this->event = $registry->shared('event');
     }
 
+    /**
+     * Method executed before each action
+     *
+     * @access public
+     */
     public function beforeAction($controller, $action)
     {
         // Start the session
@@ -50,7 +67,13 @@ abstract class Base
         $this->action->attachEvents();
     }
 
-    public function checkProjectPermissions($project_id)
+    /**
+     * Check if the current user have access to the given project
+     *
+     * @access protected
+     * @param  integer   $project_id  Project id
+     */
+    protected function checkProjectPermissions($project_id)
     {
         if ($this->acl->isRegularUser()) {
 
@@ -60,14 +83,73 @@ abstract class Base
         }
     }
 
-    public function redirectNoProject()
+    /**
+     * Redirection when there is no project in the database
+     *
+     * @access protected
+     */
+    protected function redirectNoProject()
     {
         $this->session->flash(t('There is no active project, the first step is to create a new project.'));
         $this->response->redirect('?controller=project&action=create');
     }
 
+    /**
+     * Application not found page (404 error)
+     *
+     * @access public
+     */
     public function notfound()
     {
         $this->response->html($this->template->layout('app_notfound', array('title' => t('Page not found'))));
+    }
+
+    /**
+     * Display the template show task (common between different actions)
+     *
+     * @access protected
+     * @param  array  $task               Task data
+     * @param  array  $comment_form       Comment form data
+     * @param  array  $description_form   Description form data
+     * @param  array  $comment_edit_form  Comment edit form data
+     */
+    protected function showTask(array $task, array $comment_form = array(), array $description_form = array(), array $comment_edit_form = array())
+    {
+        if (empty($comment_form)) {
+            $comment_form = array(
+                'values' => array('task_id' => $task['id'], 'user_id' => $this->acl->getUserId()),
+                'errors' => array()
+            );
+        }
+
+        if (empty($description_form)) {
+            $description_form = array(
+                'values' => array('id' => $task['id']),
+                'errors' => array()
+            );
+        }
+
+        if (empty($comment_edit_form)) {
+            $comment_edit_form = array(
+                'values' => array('id' => 0),
+                'errors' => array()
+            );
+        }
+        else {
+            $hide_comment_form = true;
+        }
+
+        $this->response->html($this->template->layout('task_show', array(
+            'hide_comment_form' => isset($hide_comment_form),
+            'comment_edit_form' => $comment_edit_form,
+            'comment_form' => $comment_form,
+            'description_form' => $description_form,
+            'comments' => $this->comment->getAll($task['id']),
+            'task' => $task,
+            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'colors_list' => $this->task->getColors(),
+            'menu' => 'tasks',
+            'title' => $task['title'],
+        )));
     }
 }

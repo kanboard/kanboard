@@ -556,7 +556,8 @@ article .task-score {
 }
 
 #description {
-    border-left: 5px solid #000;
+    border: 1px solid #999;
+    border-radius: 5px;
     background: #f0f0f0;
     padding: 10px;
 }
@@ -594,48 +595,103 @@ article .task-score {
     background: #fff;
     padding: 10px;
     border-radius: 5px;
+    border: 1px dashed #000;
     overflow: auto;
     color: #000;
 }
 
+.markdown blockquote {
+    font-style: italic;
+    border-left: 5px solid #ddd;
+    padding-left: 8px;
+}
+
 /* comments */
 .comment {
-    margin: 10px 0;
-    padding: 10px;
-    border-left: 5px solid #000;
+    margin-bottom: 25px;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-.comment:nth-child(odd) {
-    background-color: #f0f0f0;
+.comment-edit {
+    margin-bottom: 25px;
+    padding: 0;
+    border: 2px solid #000;
+    border-radius: 5px;
 }
 
-.comment:nth-child(even) {
-    background-color: #ddd;
+.comment:hover {
+    border: 1px solid #888;
 }
 
-.comment p:first-child {
-    font-size: .8em;
-    margin-bottom: 10px;
-    border-bottom: 1px dotted #000;
+.comment-title {
+    font-size: 0.9em;
+    padding: 5px;
+    margin-bottom: 2px;
+    border-bottom: 1px solid #ddd;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #f0f0f0;
 }
 
-.comment p:first-child a {
+.comment:nth-child(odd) .comment-title {
+    background: #f0f0f0;
+}
+
+.comment:nth-child(even) .comment-title {
+    background: #ddd;
+}
+
+.comment-actions a,
+.comment-title a {
     color: #000;
     text-decoration: none;
 }
 
-.comment p:first-child a:hover,
-.comment p:first-child a:focus {
+.comment-actions a:hover,
+.comment-actions a:focus,
+.comment-title a:hover,
+.comment-title a:focus {
     text-decoration: underline;
 }
 
-.comment .username {
+.comment-actions {
+    font-size: 0.8em;
+    padding: 0;
+    text-align: right;
+}
+
+.comment-actions li {
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: 1px dotted #000;
+}
+
+.comment-actions li:last-child {
+    border: 0;
+}
+
+.comment-username {
     font-weight: bold;
 }
 
 .comment-textarea {
     height: 70px;
     width: 500px;
+}
+
+.comment .markdown {
+    margin: 10px;
+}
+
+.comment .markdown pre {
+    background: #fdfdfd;
+}
+
+.comment-edit form {
+    border: none;
 }
 
 /* task colors */

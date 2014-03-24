@@ -8,7 +8,7 @@
         </ul>
     </div>
     <section>
-        <h3><?= t('Details') ?></h3>
+        <h2><?= t('Details') ?></h2>
         <article id="infos" class="task task-<?= $task['color_id'] ?>">
         <?php if ($task['score']): ?>
             <span class="task-score"><?= Helper\escape($task['score']) ?></span>
@@ -60,7 +60,7 @@
         </ul>
         </article>
 
-        <h3><?= t('Description') ?></h3>
+        <h2><?= t('Description') ?></h2>
         <?php if ($task['description']): ?>
             <article id="description" class="markdown">
                 <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
@@ -78,19 +78,23 @@
             </form>
         <?php endif ?>
 
-        <h3><?= t('Comments') ?></h3>
+        <h2><?= t('Comments') ?></h2>
         <?php if ($comments): ?>
             <ul id="comments">
             <?php foreach ($comments as $comment): ?>
-                <div class="comment markdown" id="comment-<?= $comment['id'] ?>">
-                    <p><span class="username"><?= Helper\escape($comment['username']) ?></span> @ <a href="#comment-<?= $comment['id'] ?>"><?= dt('%B %e, %G at %k:%M %p', $comment['date']) ?></a></p>
-                    <?= Helper\markdown($comment['comment']) ?>
-                </div>
+                <?= Helper\template('comment_show', array(
+                    'comment' => $comment,
+                    'task' => $task,
+                    'display_edit_form' => $comment['id'] == $comment_edit_form['values']['id'],
+                    'values' => $comment_edit_form['values'] + array('comment' => $comment['comment']),
+                    'errors' => $comment_edit_form['errors']
+                )) ?>
             <?php endforeach ?>
             </ul>
         <?php endif ?>
 
-        <form method="post" action="?controller=task&amp;action=comment&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
+        <?php if (! isset($hide_comment_form) || $hide_comment_form === false): ?>
+        <form method="post" action="?controller=comment&amp;action=save&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
 
             <?= Helper\form_hidden('task_id', $comment_form['values']) ?>
             <?= Helper\form_hidden('user_id', $comment_form['values']) ?>
@@ -101,5 +105,6 @@
                 <input type="submit" value="<?= t('Post comment') ?>" class="btn btn-blue"/>
             </div>
         </form>
+        <?php endif ?>
     </section>
 </section>

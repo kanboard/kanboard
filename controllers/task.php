@@ -52,46 +52,6 @@ class Task extends Base
     }
 
     /**
-     * Display the template show task, common between different task view
-     *
-     * @access public
-     */
-    private function showTask(array $task, array $comment_form = array(), array $description_form = array())
-    {
-        if (empty($comment_form)) {
-
-            $comment_form = array(
-                'values' => array(
-                    'task_id' => $task['id'],
-                    'user_id' => $this->acl->getUserId()
-                ),
-                'errors' => array()
-            );
-        }
-
-        if (empty($description_form)) {
-
-            $description_form = array(
-                'values' => array(
-                    'id' => $task['id'],
-                ),
-                'errors' => array()
-            );
-        }
-
-        $this->response->html($this->template->layout('task_show', array(
-            'comment_form' => $comment_form,
-            'description_form' => $description_form,
-            'comments' => $this->comment->getAll($task['id']),
-            'task' => $task,
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'colors_list' => $this->task->getColors(),
-            'menu' => 'tasks',
-            'title' => $task['title'],
-        )));
-    }
-
-    /**
      * Show a task
      *
      * @access public
@@ -104,39 +64,6 @@ class Task extends Base
         $this->checkProjectPermissions($task['project_id']);
 
         $this->showTask($task);
-    }
-
-    /**
-     * Add a comment
-     *
-     * @access public
-     */
-    public function comment()
-    {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
-        $values = $this->request->getValues();
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
-
-        list($valid, $errors) = $this->comment->validateCreation($values);
-
-        if ($valid) {
-
-            if ($this->comment->create($values)) {
-                $this->session->flash(t('Comment added successfully.'));
-            }
-            else {
-                $this->session->flashError(t('Unable to create your comment.'));
-            }
-
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
-        }
-
-        $this->showTask(
-            $task,
-            array('values' => $values, 'errors' => $errors)
-        );
     }
 
     /**
