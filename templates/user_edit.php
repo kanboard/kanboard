@@ -13,6 +13,9 @@
         <?= Helper\form_label(t('Username'), 'username') ?>
         <?= Helper\form_text('username', $values, $errors, array('required')) ?><br/>
 
+        <?= Helper\form_label(t('Current password for the user "%s"', Helper\get_username()), 'current_password') ?>
+        <?= Helper\form_password('current_password', $values, $errors) ?><br/>
+
         <?= Helper\form_label(t('Password'), 'password') ?>
         <?= Helper\form_password('password', $values, $errors) ?><br/>
 

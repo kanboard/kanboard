@@ -7,20 +7,51 @@ require_once __DIR__.'/base.php';
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
 
+/**
+ * User model
+ *
+ * @package  model
+ * @author   Frederic Guillot
+ */
 class User extends Base
 {
+    /**
+     * SQL table name
+     *
+     * @var string
+     */
     const TABLE = 'users';
 
+    /**
+     * Get a specific user by id
+     *
+     * @access public
+     * @param  integer  $user_id  User id
+     * @return array
+     */
     public function getById($user_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $user_id)->findOne();
     }
 
+    /**
+     * Get a specific user by the username
+     *
+     * @access public
+     * @param  string  $username  Username
+     * @return array
+     */
     public function getByUsername($username)
     {
         return $this->db->table(self::TABLE)->eq('username', $username)->findOne();
     }
 
+    /**
+     * Get all users
+     *
+     * @access public
+     * @return array
+     */
     public function getAll()
     {
         return $this->db
@@ -30,11 +61,24 @@ class User extends Base
                     ->findAll();
     }
 
+    /**
+     * List all users (key-value pairs with id/username)
+     *
+     * @access public
+     * @return array
+     */
     public function getList()
     {
         return $this->db->table(self::TABLE)->asc('username')->listing('id', 'username');
     }
 
+    /**
+     * Add a new user in the database
+     *
+     * @access public
+     * @param  array  $values  Form values
+     * @return boolean
+     */
     public function create(array $values)
     {
         if (isset($values['confirmation'])) unset($values['confirmation']);
@@ -43,6 +87,13 @@ class User extends Base
         return $this->db->table(self::TABLE)->save($values);
     }
 
+    /**
+     * Modify a new user
+     *
+     * @access public
+     * @param  array  $values  Form values
+     * @return array
+     */
     public function update(array $values)
     {
         if (! empty($values['password'])) {
@@ -52,17 +103,25 @@ class User extends Base
             unset($values['password']);
         }
 
-        unset($values['confirmation']);
+        if (isset($values['confirmation'])) unset($values['confirmation']);
+        if (isset($values['current_password'])) unset($values['current_password']);
 
-        $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
         if ($_SESSION['user']['id'] == $values['id']) {
             $this->updateSession();
         }
 
-        return true;
+        return $result;
     }
 
+    /**
+     * Remove a specific user
+     *
+     * @access public
+     * @param  integer  $user_id  User id
+     * @return boolean
+     */
     public function remove($user_id)
     {
         $this->db->startTransaction();
@@ -76,17 +135,32 @@ class User extends Base
         return true;
     }
 
+    /**
+     * Update user session information
+     *
+     * @access public
+     * @param  array  $user  User data
+     */
     public function updateSession(array $user = array())
     {
         if (empty($user)) {
             $user = $this->getById($_SESSION['user']['id']);
         }
 
-        if (isset($user['password'])) unset($user['password']);
+        if (isset($user['password'])) {
+            unset($user['password']);
+        }
 
         $_SESSION['user'] = $user;
     }
 
+    /**
+     * Validate user creation
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
     public function validateCreation(array $values)
     {
         $v = new Validator($values, array(
@@ -108,23 +182,28 @@ class User extends Base
         );
     }
 
+    /**
+     * Validate user modification
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
     public function validateModification(array $values)
     {
         if (! empty($values['password'])) {
-            return $this->validateCreation($values);
+            return $this->validatePasswordModification($values);
         }
-        else {
 
-            $v = new Validator($values, array(
-                new Validators\Required('id', t('The user id is required')),
-                new Validators\Required('username', t('The username is required')),
-                new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
-                new Validators\AlphaNumeric('username', t('The username must be alphanumeric')),
-                new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
-                new Validators\Integer('default_project_id', t('This value must be an integer')),
-                new Validators\Integer('is_admin', t('This value must be an integer')),
-            ));
-        }
+        $v = new Validator($values, array(
+            new Validators\Required('id', t('The user id is required')),
+            new Validators\Required('username', t('The username is required')),
+            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
+            new Validators\AlphaNumeric('username', t('The username must be alphanumeric')),
+            new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
+            new Validators\Integer('default_project_id', t('This value must be an integer')),
+            new Validators\Integer('is_admin', t('This value must be an integer')),
+        ));
 
         return array(
             $v->execute(),
@@ -132,6 +211,53 @@ class User extends Base
         );
     }
 
+    /**
+     * Validate password modification
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validatePasswordModification(array $values)
+    {
+        $v = new Validator($values, array(
+            new Validators\Required('id', t('The user id is required')),
+            new Validators\Required('username', t('The username is required')),
+            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
+            new Validators\AlphaNumeric('username', t('The username must be alphanumeric')),
+            new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
+            new Validators\Required('current_password', t('The current password is required')),
+            new Validators\Required('password', t('The password is required')),
+            new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
+            new Validators\Required('confirmation', t('The confirmation is required')),
+            new Validators\Equals('password', 'confirmation', t('Passwords doesn\'t matches')),
+            new Validators\Integer('default_project_id', t('This value must be an integer')),
+            new Validators\Integer('is_admin', t('This value must be an integer')),
+        ));
+
+        if ($v->execute()) {
+
+            // Check password
+            $user = $this->getById($_SESSION['user']['id']);
+
+            if ($user !== false && \password_verify($values['current_password'], $user['password'])) {
+                return array(true, array());
+            }
+            else {
+                return array(false, array('current_password' => array(t('Wrong password'))));
+            }
+        }
+
+        return array(false, $v->getErrors());
+    }
+
+    /**
+     * Validate user login
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
     public function validateLogin(array $values)
     {
         $v = new Validator($values, array(

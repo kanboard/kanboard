@@ -18,6 +18,11 @@ function is_admin()
     return $_SESSION['user']['is_admin'] == 1;
 }
 
+function get_username()
+{
+    return $_SESSION['user']['username'];
+}
+
 function markdown($text)
 {
     require_once __DIR__.'/../vendor/Michelf/MarkdownExtra.inc.php';
@@ -206,6 +211,7 @@ function form_textarea($name, $values = array(), array $errors = array(), array 
     $html .= implode(' ', $attributes).'>';
     $html .= isset($values->$name) ? escape($values->$name) : isset($values[$name]) ? $values[$name] : '';
     $html .= '</textarea>';
+    if (in_array('required', $attributes)) $html .= '<span class="form-required">*</span>';
     $html .= error_list($errors, $name);
 
     return $html;
@@ -217,6 +223,7 @@ function form_input($type, $name, $values = array(), array $errors = array(), ar
 
     $html = '<input type="'.$type.'" name="'.$name.'" id="form-'.$name.'" '.form_value($values, $name).' class="'.$class.'" ';
     $html .= implode(' ', $attributes).'/>';
+    if (in_array('required', $attributes)) $html .= '<span class="form-required">*</span>';
     $html .= error_list($errors, $name);
 
     return $html;

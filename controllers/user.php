@@ -4,9 +4,19 @@ namespace Controller;
 
 require_once __DIR__.'/base.php';
 
+/**
+ * User controller
+ *
+ * @package  controller
+ * @author   Frederic Guillot
+ */
 class User extends Base
 {
-    // Display access forbidden page
+    /**
+     * Display access forbidden page
+     *
+     * @access public
+     */
     public function forbidden()
     {
         $this->response->html($this->template->layout('user_forbidden', array(
@@ -15,14 +25,22 @@ class User extends Base
         )));
     }
 
-    // Logout and destroy session
+    /**
+     * Logout and destroy session
+     *
+     * @access public
+     */
     public function logout()
     {
         $this->session->close();
         $this->response->redirect('?controller=user&action=login');
     }
 
-    // Display the form login
+    /**
+     * Display the form login
+     *
+     * @access public
+     */
     public function login()
     {
         if (isset($_SESSION['user'])) $this->response->redirect('?controller=app');
@@ -35,7 +53,11 @@ class User extends Base
         )));
     }
 
-    // Check credentials
+    /**
+     * Check credentials
+     *
+     * @access public
+     */
     public function check()
     {
         $values = $this->request->getValues();
@@ -51,7 +73,11 @@ class User extends Base
         )));
     }
 
-    // List all users
+    /**
+     * List all users
+     *
+     * @access public
+     */
     public function index()
     {
         $users = $this->user->getAll();
@@ -67,7 +93,11 @@ class User extends Base
         )));
     }
 
-    // Display a form to create a new user
+    /**
+     * Display a form to create a new user
+     *
+     * @access public
+     */
     public function create()
     {
         $this->response->html($this->template->layout('user_new', array(
@@ -79,7 +109,11 @@ class User extends Base
         )));
     }
 
-    // Validate and save a new user
+    /**
+     * Validate and save a new user
+     *
+     * @access public
+     */
     public function save()
     {
         $values = $this->request->getValues();
@@ -105,14 +139,18 @@ class User extends Base
         )));
     }
 
-    // Display a form to edit a user
+    /**
+     * Display a form to edit a user
+     *
+     * @access public
+     */
     public function edit()
     {
         $user = $this->user->getById($this->request->getIntegerParam('user_id'));
 
         if (! $user) $this->notfound();
 
-        if (! $_SESSION['user']['is_admin'] && $_SESSION['user']['id'] != $user['id']) {
+        if ($this->acl->isRegularUser() && $this->acl->getUserId() != $user['id']) {
             $this->forbidden();
         }
 
@@ -127,17 +165,21 @@ class User extends Base
         )));
     }
 
-    // Validate and update a user
+    /**
+     * Validate and update a user
+     *
+     * @access public
+     */
     public function update()
     {
         $values = $this->request->getValues();
 
-        if ($_SESSION['user']['is_admin'] == 1) {
+        if ($this->acl->isAdminUser()) {
             $values += array('is_admin' => 0);
         }
         else {
 
-            if ($_SESSION['user']['id'] != $values['id']) {
+            if ($this->acl->getUserId() != $values['id']) {
                 $this->forbidden();
             }
 
@@ -168,7 +210,11 @@ class User extends Base
         )));
     }
 
-    // Confirmation dialog before to remove a user
+    /**
+     * Confirmation dialog before to remove a user
+     *
+     * @access public
+     */
     public function confirm()
     {
         $user = $this->user->getById($this->request->getIntegerParam('user_id'));
@@ -182,7 +228,11 @@ class User extends Base
         )));
     }
 
-    // Remove a user
+    /**
+     * Remove a user
+     *
+     * @access public
+     */
     public function remove()
     {
         $user_id = $this->request->getIntegerParam('user_id');

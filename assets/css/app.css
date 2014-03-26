@@ -156,9 +156,6 @@ textarea {
     font-size: 99%;
 }
 
-select {
-}
-
 ::-webkit-input-placeholder {
     color: #bbb;
     padding-top: 2px;
@@ -181,6 +178,12 @@ select {
 input.form-error,
 textarea.form-error {
     border: 2px solid #b94a48;
+}
+
+.form-required {
+    color: red;
+    padding-left: 5px;
+    font-weight: bold;
 }
 
 .form-errors {

@@ -267,4 +267,7 @@ return array(
     // 'Do you really want to remove this comment?' => '',
     // 'Only administrators or the creator of the comment can access to this page.' => '',
     // 'Details' => '',
+    // 'Current password for the user "%s"' => '',
+    // 'The current password is required' => '',
+    // 'Wrong password' => '',
 );

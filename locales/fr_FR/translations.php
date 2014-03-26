@@ -264,4 +264,7 @@ return array(
     'Do you really want to remove this comment?' => 'Voulez-vous vraiment supprimer ce commentaire ?',
     'Only administrators or the creator of the comment can access to this page.' => 'Uniquement les administrateurs ou le créateur du commentaire peuvent accéder à cette page.',
     'Details' => 'Détails',
+    'Current password for the user "%s"' => 'Mot de passe actuel pour l\'utilisateur « %s »',
+    'The current password is required' => 'Le mot de passe actuel est obligatoire',
+    'Wrong password' => 'Mauvais mot de passe',
 );

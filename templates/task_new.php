@@ -6,7 +6,7 @@
     <form method="post" action="?controller=task&amp;action=save" autocomplete="off">
 
         <?= Helper\form_label(t('Title'), 'title') ?>
-        <?= Helper\form_text('title', $values, $errors, array('autofocus required')) ?><br/>
+        <?= Helper\form_text('title', $values, $errors, array('autofocus', 'required')) ?><br/>
 
         <?= Helper\form_hidden('project_id', $values) ?>
 
