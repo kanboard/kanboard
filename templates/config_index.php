@@ -27,18 +27,20 @@
                     <?= t('Webhooks token:') ?>
                     <strong><?= Helper\escape($values['webhooks_token']) ?></strong>
                 </li>
-                <li>
-                    <?= t('Database size:') ?>
-                    <strong><?= Helper\format_bytes($db_size) ?></strong>
-                </li>
-                <li>
-                    <a href="?controller=config&amp;action=downloadDb"><?= t('Download the database') ?></a>
-                    <?= t('(Gzip compressed Sqlite file)') ?>
-                </li>
-                <li>
-                    <a href="?controller=config&amp;action=optimizeDb"><?= t('Optimize the database') ?></a>
-                     <?= t('(VACUUM command)') ?>
-                </li>
+                <?php if (DB_DRIVER === 'sqlite'): ?>
+                    <li>
+                        <?= t('Database size:') ?>
+                        <strong><?= Helper\format_bytes($db_size) ?></strong>
+                    </li>
+                    <li>
+                        <a href="?controller=config&amp;action=downloadDb"><?= t('Download the database') ?></a>
+                        <?= t('(Gzip compressed Sqlite file)') ?>
+                    </li>
+                    <li>
+                        <a href="?controller=config&amp;action=optimizeDb"><?= t('Optimize the database') ?></a>
+                         <?= t('(VACUUM command)') ?>
+                    </li>
+                <?php endif ?>
                 <li>
                     <?= t('Official website:') ?>
                     <a href="http://kanboard.net/" target="_blank" rel="noreferer">http://kanboard.net/</a>

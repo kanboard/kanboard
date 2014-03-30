@@ -18,7 +18,6 @@ class Schema
         $current_version = $this->db->getConnection()->getSchemaVersion();
 
         if ($current_version < $last_version) {
-
             return $this->migrateTo($current_version, $last_version);
         }
 

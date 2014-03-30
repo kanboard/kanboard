@@ -67,8 +67,7 @@ class Table
 
         $result = $this->db->execute($sql, $values);
 
-        if ($result !== false && $result->rowCount() > 0) {
-
+        if ($result !== false/* && $result->rowCount() > 0*/) {
             return true;
         }
 

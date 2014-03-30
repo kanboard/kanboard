@@ -5,9 +5,19 @@ namespace PicoDb;
 class Sqlite extends \PDO {
 
 
-    public function __construct($filename)
+    public function __construct(array $settings)
     {
-        parent::__construct('sqlite:'.$filename);
+        $required_atttributes = array(
+            'filename',
+        );
+
+        foreach ($required_atttributes as $attribute) {
+            if (! isset($settings[$attribute])) {
+                throw new \LogicException('This configuration parameter is missing: "'.$attribute.'"');
+            }
+        }
+
+        parent::__construct('sqlite:'.$settings['filename']);
 
         $this->exec('PRAGMA foreign_keys = ON');
     }
@@ -20,8 +30,7 @@ class Sqlite extends \PDO {
         $result = $rq->fetch(\PDO::FETCH_ASSOC);
 
         if (isset($result['user_version'])) {
-
-            return $result['user_version'];
+            return (int) $result['user_version'];
         }
 
         return 0;

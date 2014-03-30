@@ -348,7 +348,15 @@ class Task extends Base
         }
 
         $original_task = $this->getById($values['id']);
-        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
+
+        if ($original_task === false) {
+            return false;
+        }
+
+        $updated_task = $values;
+        unset($updated_task['id']);
+
+        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task);
 
         // Trigger events
         if ($result) {

@@ -186,6 +186,11 @@ class Task extends Base
         if (! empty($task['date_due'])) {
             $task['date_due'] = date(t('m/d/Y'), $task['date_due']);
         }
+        else {
+            $task['date_due'] = '';
+        }
+
+        $task['score'] = $task['score'] ?: '';
 
         $this->response->html($this->template->layout('task_edit', array(
             'errors' => array(),
@@ -323,6 +328,15 @@ class Task extends Base
 
         if (! $task) $this->notfound();
         $this->checkProjectPermissions($task['project_id']);
+
+        if (! empty($task['date_due'])) {
+            $task['date_due'] = date(t('m/d/Y'), $task['date_due']);
+        }
+        else {
+            $task['date_due'] = '';
+        }
+
+        $task['score'] = $task['score'] ?: '';
 
         $this->response->html($this->template->layout('task_new', array(
             'errors' => array(),

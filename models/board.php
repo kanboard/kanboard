@@ -32,22 +32,20 @@ class Board extends Base
      */
     public function saveTasksPosition(array $values)
     {
-        $this->db->startTransaction();
-
-        $results = array();
         $taskModel = new Task($this->db, $this->event);
 
+        $this->db->startTransaction();
+
         foreach ($values as $value) {
-            $results[] = $taskModel->move(
-                $value['task_id'],
-                $value['column_id'],
-                $value['position']
-            );
+            if (! $taskModel->move($value['task_id'], $value['column_id'], $value['position'])) {
+                $this->db->cancelTransaction();
+                return false;
+            }
         }
 
         $this->db->closeTransaction();
 
-        return ! in_array(false, $results, true);
+        return true;
     }
 
     /**

@@ -63,8 +63,6 @@ class CommentTest extends Base
         $comment = $c->getById(1);
         $this->assertNotEmpty($comment);
         $this->assertEquals('bla', $comment['comment']);
-
-        $this->assertFalse($c->update(array('id' => 4, 'comment' => 'bla')));
     }
 
     public function testValidateCreation()

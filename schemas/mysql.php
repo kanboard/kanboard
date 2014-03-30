@@ -1,0 +1,165 @@
+<?php
+
+namespace Schema;
+
+function version_10($pdo)
+{
+}
+
+function version_9($pdo)
+{
+}
+
+function version_8($pdo)
+{
+}
+
+function version_7($pdo)
+{
+}
+
+function version_6($pdo)
+{
+}
+
+function version_5($pdo)
+{
+}
+
+function version_4($pdo)
+{
+}
+
+function version_3($pdo)
+{
+}
+
+function version_2($pdo)
+{
+}
+
+function version_1($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE config (
+            language CHAR(5) DEFAULT 'en_US',
+            webhooks_token VARCHAR(255),
+            timezone VARCHAR(50) DEFAULT 'UTC'
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE users (
+            id INT NOT NULL AUTO_INCREMENT,
+            username VARCHAR(50),
+            password VARCHAR(255),
+            is_admin TINYINT DEFAULT 0,
+            default_project_id INT DEFAULT 0,
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE projects (
+            id INT NOT NULL AUTO_INCREMENT,
+            name VARCHAR(50) UNIQUE,
+            is_active TINYINT DEFAULT 1,
+            token VARCHAR(255),
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE project_has_users (
+            id INT NOT NULL AUTO_INCREMENT,
+            project_id INT,
+            user_id INT,
+            PRIMARY KEY (id),
+            UNIQUE KEY `idx_project_user` (project_id, user_id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE columns (
+            id INT NOT NULL AUTO_INCREMENT,
+            title VARCHAR(255),
+            position INT NOT NULL,
+            project_id INT NOT NULL,
+            task_limit INT DEFAULT '0',
+            UNIQUE KEY `idx_title_project` (title, project_id),
+            PRIMARY KEY (id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE tasks (
+            id INT NOT NULL AUTO_INCREMENT,
+            title VARCHAR(255),
+            description TEXT,
+            date_creation INT,
+            date_completed INT,
+            date_due INT,
+            color_id VARCHAR(50),
+            project_id INT,
+            column_id INT,
+            owner_id INT DEFAULT '0',
+            position INT,
+            score INT,
+            is_active TINYINT DEFAULT 1,
+            PRIMARY KEY (id),
+            INDEX `idx_task_active` (is_active),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(column_id) REFERENCES columns(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE comments (
+            id INT NOT NULL AUTO_INCREMENT,
+            task_id INT,
+            user_id INT,
+            date INT,
+            comment TEXT,
+            PRIMARY KEY (id),
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES tasks(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE actions (
+            id INT NOT NULL AUTO_INCREMENT,
+            project_id INT,
+            event_name VARCHAR(50),
+            action_name VARCHAR(50),
+            PRIMARY KEY (id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE action_has_params (
+            id INT NOT NULL AUTO_INCREMENT,
+            action_id INT,
+            name VARCHAR(50),
+            value VARCHAR(50),
+            PRIMARY KEY (id),
+            FOREIGN KEY(action_id) REFERENCES actions(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        INSERT INTO users
+        (username, password, is_admin)
+        VALUES ('admin', '".\password_hash('admin', PASSWORD_BCRYPT)."', '1')
+    ");
+
+    $pdo->exec("
+        INSERT INTO config
+        (webhooks_token)
+        VALUES ('".\Model\Base::generateToken()."')
+    ");
+}

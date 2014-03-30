@@ -42,8 +42,8 @@ Thumbs.db
 
 # Vagrant #
 ###########
-
 .vagrant
 
 # App specific #
 ################
+config.php

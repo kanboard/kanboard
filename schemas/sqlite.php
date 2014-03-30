@@ -113,7 +113,7 @@ function version_1($pdo)
             username TEXT,
             password TEXT,
             is_admin INTEGER DEFAULT 0,
-            default_project_id DEFAULT 0
+            default_project_id INTEGER DEFAULT 0
         )
     ");
 

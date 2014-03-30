@@ -10,12 +10,32 @@ $registry->db_version = 10;
 
 $registry->db = function() use ($registry) {
     require __DIR__.'/vendor/PicoDb/Database.php';
-    require __DIR__.'/models/schema.php';
 
-    $db = new \PicoDb\Database(array(
-        'driver' => 'sqlite',
-        'filename' => DB_FILENAME
-    ));
+    if (DB_DRIVER === 'sqlite') {
+
+        require __DIR__.'/schemas/sqlite.php';
+
+        $db = new \PicoDb\Database(array(
+            'driver' => 'sqlite',
+            'filename' => DB_FILENAME
+        ));
+    }
+    elseif (DB_DRIVER === 'mysql') {
+
+        require __DIR__.'/schemas/mysql.php';
+
+        $db = new \PicoDb\Database(array(
+            'driver'   => 'mysql',
+            'hostname' => DB_HOSTNAME,
+            'username' => DB_USERNAME,
+            'password' => DB_PASSWORD,
+            'database' => DB_NAME,
+            'charset'  => 'utf8',
+        ));
+    }
+    else {
+        die('Database driver not supported');
+    }
 
     if ($db->schema()->check($registry->db_version)) {
         return $db;
@@ -83,8 +103,17 @@ defined('AUTO_REFRESH_DURATION') or define('AUTO_REFRESH_DURATION', 60);
 // Custom session save path
 defined('SESSION_SAVE_PATH') or define('SESSION_SAVE_PATH', '');
 
-// Database filename
-defined('DB_FILENAME') or define('DB_FILENAME', 'data/db.sqlite');
-
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
+
+// Database driver: sqlite or mysql
+defined('DB_DRIVER') or define('DB_DRIVER', 'sqlite');
+
+// Sqlite configuration
+defined('DB_FILENAME') or define('DB_FILENAME', 'data/db.sqlite');
+
+// Mysql configuration
+defined('DB_USERNAME') or define('DB_USERNAME', 'root');
+defined('DB_PASSWORD') or define('DB_PASSWORD', '');
+defined('DB_HOSTNAME') or define('DB_HOSTNAME', 'localhost');
+defined('DB_NAME') or define('DB_NAME', 'kanboard');

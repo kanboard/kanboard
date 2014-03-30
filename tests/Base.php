@@ -3,7 +3,7 @@
 require_once __DIR__.'/../vendor/PicoDb/Database.php';
 require_once __DIR__.'/../core/event.php';
 require_once __DIR__.'/../core/translator.php';
-require_once __DIR__.'/../models/schema.php';
+require_once __DIR__.'/../schemas/sqlite.php';
 require_once __DIR__.'/../models/task.php';
 require_once __DIR__.'/../models/acl.php';
 require_once __DIR__.'/../models/comment.php';
