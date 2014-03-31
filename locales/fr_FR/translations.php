@@ -267,4 +267,6 @@ return array(
     'Current password for the user "%s"' => 'Mot de passe actuel pour l\'utilisateur « %s »',
     'The current password is required' => 'Le mot de passe actuel est obligatoire',
     'Wrong password' => 'Mauvais mot de passe',
+    'Reset all tokens' => 'Réinitialiser tous les jetons de sécurité',
+    'All tokens have been regenerated.' => 'Tous les jetons de sécurité ont été réinitialisés.',
 );

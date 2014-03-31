@@ -23,6 +23,7 @@
         </div>
         <section class="settings">
             <ul>
+                <li><a href="?controller=config&amp;action=tokens"><?= t('Reset all tokens') ?></a></li>
                 <li>
                     <?= t('Webhooks token:') ?>
                     <strong><?= Helper\escape($values['webhooks_token']) ?></strong>

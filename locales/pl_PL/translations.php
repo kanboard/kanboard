@@ -270,4 +270,6 @@ return array(
     // 'Current password for the user "%s"' => '',
     // 'The current password is required' => '',
     // 'Wrong password' => '',
+    // 'Reset all tokens' => '',
+    // 'All tokens have been regenerated.' => '',
 );

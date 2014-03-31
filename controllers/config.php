@@ -4,9 +4,19 @@ namespace Controller;
 
 require_once __DIR__.'/base.php';
 
+/**
+ * Config controller
+ *
+ * @package  controller
+ * @author   Frederic Guillot
+ */
 class Config extends Base
 {
-    // Settings page
+    /**
+     * Display the settings page
+     *
+     * @access public
+     */
     public function index()
     {
         $this->response->html($this->template->layout('config_index', array(
@@ -22,7 +32,11 @@ class Config extends Base
         )));
     }
 
-    // Validate and save settings
+    /**
+     * Validate and save settings
+     *
+     * @access public
+     */
     public function save()
     {
         $values = $this->request->getValues();
@@ -53,18 +67,38 @@ class Config extends Base
         )));
     }
 
-    // Download the database
+    /**
+     * Download the Sqlite database
+     *
+     * @access public
+     */
     public function downloadDb()
     {
         $this->response->forceDownload('db.sqlite.gz');
         $this->response->binary($this->config->downloadDatabase());
     }
 
-    // Optimize the database
+    /**
+     * Optimize the Sqlite database
+     *
+     * @access public
+     */
     public function optimizeDb()
     {
         $this->config->optimizeDatabase();
         $this->session->flash(t('Database optimization done.'));
+        $this->response->redirect('?controller=config');
+    }
+
+    /**
+     * Regenerate all application tokens
+     *
+     * @access public
+     */
+    public function tokens()
+    {
+        $this->config->regenerateTokens();
+        $this->session->flash(t('All tokens have been regenerated.'));
         $this->response->redirect('?controller=config');
     }
 }
