@@ -16,6 +16,7 @@ Install Kanboard:
 ```bash
 cd /var/www
 wget http://kanboard.net/kanboard-VERSION.zip
+unzip kanboard-VERSION.zip
 chown -R www-data:www-data kanboard/data
 rm kanboard-VERSION.zip
 ```
@@ -35,6 +36,7 @@ Install Kanboard:
 ```bash
 cd /var/www
 wget http://kanboard.net/kanboard-VERSION.zip
+unzip kanboard-VERSION.zip
 chown -R www-data:www-data kanboard/data
 rm kanboard-VERSION.zip
 ```
