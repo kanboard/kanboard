@@ -64,6 +64,7 @@ Documentation
 
 - [Installation instructions](docs/installation.markdown)
 - [Installation on Debian](docs/debian-installation.markdown)
+- [Installation on Centos](docs/centos-installation.markdown)
 - [Upgrade Kanboard to a new version](docs/update.markdown)
 - [Sqlite database management](docs/sqlite-database.markdown)
 - [How to use Mysql instead of Sqlite](docs/mysql-configuration.markdown)
