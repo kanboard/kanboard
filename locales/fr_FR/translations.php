@@ -4,6 +4,7 @@ return array(
     'English' => 'Anglais',
     'French' => 'Français',
     'Polish' => 'Polonais',
+    'Portuguese (Brazilian)' => 'Portugais (Brésil)',
     'None' => 'Aucun',
     'edit' => 'modifier',
     'Edit' => 'Modifier',

@@ -48,12 +48,13 @@ Original author: [Frédéric Guillot](http://fredericguillot.com/)
 
 Contributors:
 
+- Claudio Lobo
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
 - Maxime: https://github.com/EpocDotFr
 - Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
-- Toomyem: https://github.com/toomyem
+- Toomyem: https://github.com/Toomyem
 
 There is also many people who have reported bugs or proposed awesome ideas.
 
