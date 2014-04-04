@@ -24,7 +24,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English, French and Polish
+- Translations in English, French, Brazilian Portuguese and Polish
 
 Roadmap
 -------
