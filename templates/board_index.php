@@ -71,7 +71,7 @@
                             <?php endif ?>
 
                             <div class="task-title">
-                                <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('Show this task') ?>"><?= Helper\escape($task['title']) ?></a>
+                                <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>
                             </div>
 
                             <div class="task-footer">

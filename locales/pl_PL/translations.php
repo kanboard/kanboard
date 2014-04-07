@@ -173,7 +173,6 @@ return array(
     'Date created' => 'Data utworzenia',
     'Date completed' => 'Data zakończenia',
     'Id' => 'Ident',
-    'Show this task' => 'Pokaż to zadanie',
     'No task' => 'Brak zadań',
     'completed tasks' => 'ukończone zadania',
     'List of projects' => 'Lista projektów',
