@@ -76,7 +76,7 @@ return array(
     'Title' => 'Titre',
     'Add Column' => 'Nouvelle colonne',
     'Project "%s"' => 'Projet « %s »',
-    'No body assigned' => 'Personne assigné',
+    'Nobody assigned' => 'Personne assigné',
     'Assigned to %s' => 'Assigné à %s',
     'Remove a column' => 'Supprimer une colonne',
     'Remove a column from a board' => 'Supprimer une colonne d\'un tableau',
