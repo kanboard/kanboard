@@ -25,13 +25,13 @@
             <?php foreach ($tasks as $task): ?>
             <tr>
                 <td class="task task-<?= $task['color_id'] ?>">
-                    <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('Show this task') ?>"><?= Helper\escape($task['id']) ?></a>
+                    <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['id']) ?></a>
                 </td>
                 <td>
                     <?= Helper\escape($task['column_title']) ?>
                 </td>
                 <td>
-                    <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('Show this task') ?>"><?= Helper\escape($task['title']) ?></a>
+                    <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>
                 </td>
                 <td>
                     <?= Helper\escape($task['username']) ?>

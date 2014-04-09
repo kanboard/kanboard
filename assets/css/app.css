@@ -466,7 +466,7 @@ nav .active a {
 }
 
 .task-nobody {
-    font-style: italic;
+    opacity: 0.3;
 }
 
 .task-date {
