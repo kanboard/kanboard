@@ -465,8 +465,10 @@ nav .active a {
     font-size: 80%;
 }
 
-.task-nobody {
+.task a.task-nobody {
+    font-weight: normal;
     font-style: italic;
+    color: #444;
 }
 
 .task-date {

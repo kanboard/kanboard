@@ -32,7 +32,7 @@
                 <?php if ($task['username']): ?>
                     <?= t('Assigned to %s', $task['username']) ?>
                 <?php else: ?>
-                    <?= t('There is no body assigned') ?>
+                    <?= t('There is nobody assigned') ?>
                 <?php endif ?>
                 </strong>
             </li>

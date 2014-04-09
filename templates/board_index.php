@@ -62,7 +62,7 @@
                             <?php if (! empty($task['owner_id'])): ?>
                                 <a href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>"><?= t('Assigned to %s', $task['username']) ?></a>
                             <?php else: ?>
-                                <a href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>" class="task-nobody"><?= t('No body assigned') ?></a>
+                                <a href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>" class="task-nobody"><?= t('Nobody assigned') ?></a>
                             <?php endif ?>
                             </span>
 
@@ -71,7 +71,7 @@
                             <?php endif ?>
 
                             <div class="task-title">
-                                <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('Show this task') ?>"><?= Helper\escape($task['title']) ?></a>
+                                <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>
                             </div>
 
                             <div class="task-footer">

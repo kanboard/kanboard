@@ -28,7 +28,7 @@
                             <?php if (! empty($task['owner_id'])): ?>
                                 <?= t('Assigned to %s', $task['username']) ?>
                             <?php else: ?>
-                                <span class="task-nobody"><?= t('No body assigned') ?></span>
+                                <span class="task-nobody"><?= t('Nobody assigned') ?></span>
                             <?php endif ?>
                             </span>
 
