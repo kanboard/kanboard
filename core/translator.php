@@ -69,7 +69,7 @@ namespace Translator {
 
     function load($language)
     {
-        setlocale(LC_TIME, $language.'.UTF-8');
+        setlocale(LC_TIME, $language.'.UTF-8', $language);
 
         $path = PATH.$language;
         $locales = array();
