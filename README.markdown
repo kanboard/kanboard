@@ -52,6 +52,7 @@ Contributors:
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
 - Maxime: https://github.com/EpocDotFr
+- Nekohayo: https://github.com/nekohayo
 - Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
 - Toomyem: https://github.com/Toomyem
