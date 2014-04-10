@@ -2,6 +2,33 @@
 
 namespace Schema;
 
+function version_11($pdo)
+{
+    $pdo->exec(
+        'ALTER TABLE comments RENAME TO comments_bak'
+    );
+
+    $pdo->exec(
+        'CREATE TABLE comments (
+            id INTEGER PRIMARY KEY,
+            task_id INTEGER,
+            user_id INTEGER,
+            date INTEGER,
+            comment TEXT,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        )'
+    );
+
+    $pdo->exec(
+       'INSERT INTO comments SELECT * FROM comments_bak'
+    );
+
+    $pdo->exec(
+       'DROP TABLE comments_bak'
+    );
+}
+
 function version_10($pdo)
 {
     $pdo->exec(

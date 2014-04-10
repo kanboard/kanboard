@@ -6,7 +6,7 @@ require __DIR__.'/core/translator.php';
 
 $registry = new Core\Registry;
 
-$registry->db_version = 10;
+$registry->db_version = 11;
 
 $registry->db = function() use ($registry) {
     require __DIR__.'/vendor/PicoDb/Database.php';
