@@ -2,6 +2,10 @@
 
 namespace Schema;
 
+function version_11($pdo)
+{
+}
+
 function version_10($pdo)
 {
 }
@@ -125,7 +129,7 @@ function version_1($pdo)
             comment TEXT,
             PRIMARY KEY (id),
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
-            FOREIGN KEY(user_id) REFERENCES tasks(id) ON DELETE CASCADE
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
         ) ENGINE=InnoDB CHARSET=utf8
     ");
 
