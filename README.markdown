@@ -24,7 +24,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English, French, Brazilian Portuguese and Polish
+- Translations in English, French, Brazilian Portuguese, Spanish and Polish
 
 Roadmap
 -------
@@ -55,6 +55,7 @@ Contributors:
 - Nekohayo: https://github.com/nekohayo
 - Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
+- Sebastien pacilly: https://github.com/spacilly
 - Toomyem: https://github.com/Toomyem
 
 There is also many people who have reported bugs or proposed awesome ideas.

@@ -5,6 +5,7 @@ return array(
     'French' => 'Francês',
     'Polish' => 'Polonês',
     'Portuguese (Brazilian)' => 'Português (Brasil)',
+    'Spanish' => 'Espanhol',
     'None' => 'Nenhum',
     'edit' => 'editar',
     'Edit' => 'Editar',

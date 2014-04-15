@@ -44,6 +44,7 @@ class Config extends Base
     {
         $languages = array(
             'en_US' => t('English'),
+            'es_ES' => t('Spanish'),
             'fr_FR' => t('French'),
             'pl_PL' => t('Polish'),
             'pt_BR' => t('Portuguese (Brazilian)'),
