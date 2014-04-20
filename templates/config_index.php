@@ -18,6 +18,22 @@
             </div>
         </form>
         </section>
+    <?php endif ?>
+
+    <div class="page-header">
+        <h2><?= t('User settings') ?></h2>
+    </div>
+    <section class="settings">
+        <ul>
+            <li>
+                <strong><?= t('My default project:') ?> </strong>
+                <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? Helper\escape($projects[$user['default_project_id']]) : t('None') ?>,
+                <a href="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>"><?= t('edit') ?></a>
+            </li>
+        </ul>
+    </section>
+
+    <?php if ($user['is_admin']): ?>
         <div class="page-header">
             <h2><?= t('More information') ?></h2>
         </div>
@@ -53,19 +69,6 @@
             </ul>
         </section>
     <?php endif ?>
-
-    <div class="page-header">
-        <h2><?= t('User settings') ?></h2>
-    </div>
-    <section class="settings">
-        <ul>
-            <li>
-                <strong><?= t('My default project:') ?> </strong>
-                <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? Helper\escape($projects[$user['default_project_id']]) : t('None') ?>,
-                <a href="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>"><?= t('edit') ?></a>
-            </li>
-        </ul>
-    </section>
 
     <div class="page-header" id="last-logins">
         <h2><?= t('Last logins') ?></h2>

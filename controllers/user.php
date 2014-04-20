@@ -65,14 +65,6 @@ class User extends Base
         list($valid, $errors) = $this->user->validateLogin($values);
 
         if ($valid) {
-
-            $this->lastLogin->create(
-                \Model\LastLogin::AUTH_DATABASE,
-                $this->acl->getUserId(),
-                $this->user->getIpAddress(),
-                $this->user->getUserAgent()
-            );
-
             $this->response->redirect('?controller=app');
         }
 

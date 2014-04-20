@@ -57,7 +57,7 @@ class User extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->asc('username')
-                    ->columns('id', 'username', 'is_admin', 'default_project_id')
+                    ->columns('id', 'username', 'is_admin', 'default_project_id', 'is_ldap_user')
                     ->findAll();
     }
 
@@ -81,8 +81,13 @@ class User extends Base
      */
     public function create(array $values)
     {
-        if (isset($values['confirmation'])) unset($values['confirmation']);
-        $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
+        if (isset($values['confirmation'])) {
+            unset($values['confirmation']);
+        }
+
+        if (isset($values['password'])) {
+            $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
+        }
 
         return $this->db->table(self::TABLE)->save($values);
     }
@@ -154,6 +159,7 @@ class User extends Base
         $user['id'] = (int) $user['id'];
         $user['default_project_id'] = (int) $user['default_project_id'];
         $user['is_admin'] = (bool) $user['is_admin'];
+        $user['is_ldap_user'] = (bool) $user['is_ldap_user'];
 
         $_SESSION['user'] = $user;
     }
@@ -242,9 +248,9 @@ class User extends Base
         if ($v->execute()) {
 
             // Check password
-            $user = $this->getById($_SESSION['user']['id']);
+            list($authenticated,) = $this->authenticate($_SESSION['user']['username'], $values['current_password']);
 
-            if ($user !== false && \password_verify($values['current_password'], $user['password'])) {
+            if ($authenticated) {
                 return array(true, array());
             }
             else {
@@ -275,12 +281,22 @@ class User extends Base
 
         if ($result) {
 
-            $user = $this->getByUsername($values['username']);
+            list($authenticated, $method) = $this->authenticate($values['username'], $values['password']);
 
-            if ($user !== false && \password_verify($values['password'], $user['password'])) {
+            if ($authenticated === true) {
 
                 // Create the user session
+                $user = $this->getByUsername($values['username']);
                 $this->updateSession($user);
+
+                // Update login history
+                $lastLogin = new LastLogin($this->db, $this->event);
+                $lastLogin->create(
+                    $method,
+                    $user['id'],
+                    $this->getIpAddress(),
+                    $this->getUserAgent()
+                );
 
                 // Setup the remember me feature
                 if (! empty($values['remember_me'])) {
@@ -299,6 +315,32 @@ class User extends Base
             $result,
             $errors
         );
+    }
+
+    /**
+     * Authenticate a user
+     *
+     * @access public
+     * @param  string  $username  Username
+     * @param  string  $password  Password
+     * @return array
+     */
+    public function authenticate($username, $password)
+    {
+        // Database authentication
+        $user = $this->db->table(self::TABLE)->eq('username', $username)->eq('is_ldap_user', 0)->findOne();
+        $authenticated = $user && \password_verify($password, $user['password']);
+        $method = LastLogin::AUTH_DATABASE;
+
+        // LDAP authentication
+        if (! $authenticated && LDAP_AUTH) {
+            require __DIR__.'/ldap.php';
+            $ldap = new Ldap($this->db, $this->event);
+            $authenticated = $ldap->authenticate($username, $password);
+            $method = LastLogin::AUTH_LDAP;
+        }
+
+        return array($authenticated, $method);
     }
 
     /**

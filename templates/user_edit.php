@@ -9,18 +9,23 @@
     <form method="post" action="?controller=user&amp;action=update" autocomplete="off">
 
         <?= Helper\form_hidden('id', $values) ?>
+        <?= Helper\form_hidden('is_ldap_user', $values) ?>
 
         <?= Helper\form_label(t('Username'), 'username') ?>
-        <?= Helper\form_text('username', $values, $errors, array('required')) ?><br/>
+        <?= Helper\form_text('username', $values, $errors, array('required', $values['is_ldap_user'] == 1 ? 'readonly' : '')) ?><br/>
 
-        <?= Helper\form_label(t('Current password for the user "%s"', Helper\get_username()), 'current_password') ?>
-        <?= Helper\form_password('current_password', $values, $errors) ?><br/>
+        <?php if ($values['is_ldap_user'] == 0): ?>
 
-        <?= Helper\form_label(t('Password'), 'password') ?>
-        <?= Helper\form_password('password', $values, $errors) ?><br/>
+            <?= Helper\form_label(t('Current password for the user "%s"', Helper\get_username()), 'current_password') ?>
+            <?= Helper\form_password('current_password', $values, $errors) ?><br/>
 
-        <?= Helper\form_label(t('Confirmation'), 'confirmation') ?>
-        <?= Helper\form_password('confirmation', $values, $errors) ?><br/>
+            <?= Helper\form_label(t('Password'), 'password') ?>
+            <?= Helper\form_password('password', $values, $errors) ?><br/>
+
+            <?= Helper\form_label(t('Confirmation'), 'confirmation') ?>
+            <?= Helper\form_password('confirmation', $values, $errors) ?><br/>
+
+        <?php endif ?>
 
         <?= Helper\form_label(t('Default Project'), 'default_project_id') ?>
         <?= Helper\form_select('default_project_id', $projects, $values, $errors) ?><br/>

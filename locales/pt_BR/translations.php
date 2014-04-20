@@ -280,4 +280,5 @@ return array(
     // 'No session' => '',
     // 'Expiration date' => '',
     // 'Remember Me' => '',
+    // 'Creation date' => '',
 );

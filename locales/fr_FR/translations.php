@@ -279,4 +279,5 @@ return array(
     'No session' => 'Aucune session',
     'Expiration date' => 'Date d\'expiration',
     'Remember Me' => 'Connexion automatique',
+    'Creation date' => 'Date de création',
 );

@@ -6,7 +6,7 @@ require __DIR__.'/core/translator.php';
 
 $registry = new Core\Registry;
 
-$registry->db_version = 12;
+$registry->db_version = 13;
 
 $registry->db = function() use ($registry) {
     require __DIR__.'/vendor/PicoDb/Database.php';
@@ -130,3 +130,9 @@ defined('DB_USERNAME') or define('DB_USERNAME', 'root');
 defined('DB_PASSWORD') or define('DB_PASSWORD', '');
 defined('DB_HOSTNAME') or define('DB_HOSTNAME', 'localhost');
 defined('DB_NAME') or define('DB_NAME', 'kanboard');
+
+// LDAP configuration
+defined('LDAP_AUTH') or define('LDAP_AUTH', false);
+defined('LDAP_SERVER') or define('LDAP_SERVER', '');
+defined('LDAP_PORT') or define('LDAP_PORT', 389);
+defined('LDAP_USER_DN') or define('LDAP_USER_DN', '%s');

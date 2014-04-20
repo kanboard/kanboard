@@ -2,6 +2,11 @@
 
 namespace Schema;
 
+function version_13($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN is_ldap_user TINYINT(1) DEFAULT 0");
+}
+
 function version_12($pdo)
 {
     $pdo->exec("
