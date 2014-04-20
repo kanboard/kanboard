@@ -66,6 +66,7 @@ Documentation
 ### Technical details
 
 - [Installation instructions](docs/installation.markdown)
+- [Installation on Ubuntu](docs/ubuntu-installation.markdown)
 - [Installation on Debian](docs/debian-installation.markdown)
 - [Installation on Centos](docs/centos-installation.markdown)
 - [Upgrade Kanboard to a new version](docs/update.markdown)
