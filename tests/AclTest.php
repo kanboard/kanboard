@@ -30,16 +30,16 @@ class AclTest extends Base
         $_SESSION = array('user' => array());
         $this->assertFalse($acl->isAdminUser());
 
-        $_SESSION = array('user' => array('is_admin' => true));
+        $_SESSION = array('user' => array('is_admin' => '1'));
         $this->assertFalse($acl->isAdminUser());
 
-        $_SESSION = array('user' => array('is_admin' => '0'));
+        $_SESSION = array('user' => array('is_admin' => false));
         $this->assertFalse($acl->isAdminUser());
 
         $_SESSION = array('user' => array('is_admin' => '2'));
         $this->assertFalse($acl->isAdminUser());
 
-        $_SESSION = array('user' => array('is_admin' => '1'));
+        $_SESSION = array('user' => array('is_admin' => true));
         $this->assertTrue($acl->isAdminUser());
     }
 
@@ -56,13 +56,13 @@ class AclTest extends Base
         $_SESSION = array('user' => array('is_admin' => true));
         $this->assertFalse($acl->isRegularUser());
 
-        $_SESSION = array('user' => array('is_admin' => '1'));
+        $_SESSION = array('user' => array('is_admin' => true));
         $this->assertFalse($acl->isRegularUser());
 
         $_SESSION = array('user' => array('is_admin' => '2'));
         $this->assertFalse($acl->isRegularUser());
 
-        $_SESSION = array('user' => array('is_admin' => '0'));
+        $_SESSION = array('user' => array('is_admin' => false));
         $this->assertTrue($acl->isRegularUser());
     }
 
@@ -84,7 +84,7 @@ class AclTest extends Base
         $this->assertTrue($acl->isPageAccessAllowed('board', 'readonly'));
 
         // Regular user
-        $_SESSION = array('user' => array('is_admin' => '0'));
+        $_SESSION = array('user' => array('is_admin' => false));
         $this->assertFalse($acl->isPageAccessAllowed('user', 'create'));
         $this->assertFalse($acl->isPageAccessAllowed('user', 'save'));
         $this->assertFalse($acl->isPageAccessAllowed('user', 'remove'));
@@ -97,7 +97,7 @@ class AclTest extends Base
         $this->assertTrue($acl->isPageAccessAllowed('board', 'readonly'));
 
         // Admin user
-        $_SESSION = array('user' => array('is_admin' => '1'));
+        $_SESSION = array('user' => array('is_admin' => true));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'create'));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'save'));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'remove'));

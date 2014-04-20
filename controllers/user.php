@@ -32,6 +32,7 @@ class User extends Base
      */
     public function logout()
     {
+        $this->rememberMe->destroy($this->acl->getUserId());
         $this->session->close();
         $this->response->redirect('?controller=user&action=login');
     }
@@ -63,7 +64,17 @@ class User extends Base
         $values = $this->request->getValues();
         list($valid, $errors) = $this->user->validateLogin($values);
 
-        if ($valid) $this->response->redirect('?controller=app');
+        if ($valid) {
+
+            $this->lastLogin->create(
+                \Model\LastLogin::AUTH_DATABASE,
+                $this->acl->getUserId(),
+                $this->user->getIpAddress(),
+                $this->user->getUserAgent()
+            );
+
+            $this->response->redirect('?controller=app');
+        }
 
         $this->response->html($this->template->layout('user_login', array(
             'errors' => $errors,

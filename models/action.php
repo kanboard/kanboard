@@ -16,7 +16,18 @@ use \SimpleValidator\Validators;
  */
 class Action extends Base
 {
+    /**
+     * SQL table name for actions
+     *
+     * @var string
+     */
     const TABLE = 'actions';
+
+    /**
+     * SQL table name for action parameters
+     *
+     * @var string
+     */
     const TABLE_PARAMS = 'action_has_params';
 
     /**

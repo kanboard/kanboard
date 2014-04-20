@@ -14,6 +14,8 @@
     <?= Helper\form_label(t('Password'), 'password') ?>
     <?= Helper\form_password('password', $values, $errors, array('required')) ?>
 
+    <?= Helper\form_checkbox('remember_me', t('Remember Me'), 1) ?>
+
     <div class="form-actions">
         <input type="submit" value="<?= t('Sign in') ?>" class="btn btn-blue"/>
     </div>

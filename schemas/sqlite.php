@@ -2,6 +2,37 @@
 
 namespace Schema;
 
+function version_12($pdo)
+{
+    $pdo->exec(
+        'CREATE TABLE remember_me (
+            id INTEGER PRIMARY KEY,
+            user_id INTEGER,
+            ip TEXT,
+            user_agent TEXT,
+            token TEXT,
+            sequence TEXT,
+            expiration INTEGER,
+            date_creation INTEGER,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        )'
+    );
+
+    $pdo->exec(
+        'CREATE TABLE last_logins (
+            id INTEGER PRIMARY KEY,
+            auth_type TEXT,
+            user_id INTEGER,
+            ip TEXT,
+            user_agent TEXT,
+            date_creation INTEGER,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        )'
+    );
+
+    $pdo->exec('CREATE INDEX last_logins_user_idx ON last_logins(user_id)');
+}
+
 function version_11($pdo)
 {
     $pdo->exec(

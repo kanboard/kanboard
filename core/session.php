@@ -4,7 +4,7 @@ namespace Core;
 
 class Session
 {
-    const SESSION_LIFETIME = 2678400; // 31 days
+    const SESSION_LIFETIME = 86400; // 1 day
 
     public function open($base_path = '/', $save_path = '')
     {

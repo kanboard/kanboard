@@ -7,7 +7,7 @@ require_once __DIR__.'/base.php';
 /**
  * Automatic actions management
  *
- * @package controllers
+ * @package controller
  * @author  Frederic Guillot
  */
 class Action extends Base

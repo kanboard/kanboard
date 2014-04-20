@@ -26,6 +26,8 @@ abstract class Base
         $this->task = $registry->task;
         $this->user = $registry->user;
         $this->comment = $registry->comment;
+        $this->rememberMe = $registry->rememberMe;
+        $this->lastLogin = $registry->lastLogin;
         $this->event = $registry->shared('event');
     }
 
@@ -37,7 +39,7 @@ abstract class Base
     public function beforeAction($controller, $action)
     {
         // Start the session
-        $this->session->open(dirname($_SERVER['PHP_SELF']), SESSION_SAVE_PATH);
+        $this->session->open(BASE_URL_DIRECTORY, SESSION_SAVE_PATH);
 
         // HTTP secure headers
         $this->response->csp();
@@ -53,9 +55,27 @@ abstract class Base
         // Set timezone
         date_default_timezone_set($this->config->get('timezone', 'UTC'));
 
-        // If the user is not authenticated redirect to the login form, if the action is public continue
-        if (! isset($_SESSION['user']) && ! $this->acl->isPublicAction($controller, $action)) {
-            $this->response->redirect('?controller=user&action=login');
+        // Authentication
+        if (! $this->acl->isLogged() && ! $this->acl->isPublicAction($controller, $action)) {
+
+            // Try the remember me authentication first
+            if (! $this->rememberMe->authenticate()) {
+
+                // Redirect to the login form if not authenticated
+                $this->response->redirect('?controller=user&action=login');
+            }
+            else {
+
+                $this->lastLogin->create(
+                    \Model\LastLogin::AUTH_REMEMBER_ME,
+                    $this->acl->getUserId(),
+                    $this->user->getIpAddress(),
+                    $this->user->getUserAgent()
+                );
+            }
+        }
+        else if ($this->rememberMe->hasCookie()) {
+            $this->rememberMe->refresh();
         }
 
         // Check if the user is allowed to see this page

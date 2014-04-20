@@ -54,6 +54,7 @@ abstract class Base
     /**
      * Generate a random token with different methods: openssl or /dev/urandom or fallback to uniqid()
      *
+     * @static
      * @access public
      * @return string  Random token
      */

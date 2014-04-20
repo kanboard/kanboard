@@ -28,7 +28,9 @@ class Config extends Base
             'errors' => array(),
             'menu' => 'config',
             'title' => t('Settings'),
-            'timezones' => $this->config->getTimezones()
+            'timezones' => $this->config->getTimezones(),
+            'remember_me_sessions' => $this->rememberMe->getAll($this->acl->getUserId()),
+            'last_logins' => $this->lastLogin->getAll($this->acl->getUserId()),
         )));
     }
 
@@ -63,7 +65,9 @@ class Config extends Base
             'errors' => $errors,
             'menu' => 'config',
             'title' => t('Settings'),
-            'timezones' => $this->config->getTimezones()
+            'timezones' => $this->config->getTimezones(),
+            'remember_me_sessions' => $this->rememberMe->getAll($this->acl->getUserId()),
+            'last_logins' => $this->lastLogin->getAll($this->acl->getUserId()),
         )));
     }
 
@@ -100,5 +104,16 @@ class Config extends Base
         $this->config->regenerateTokens();
         $this->session->flash(t('All tokens have been regenerated.'));
         $this->response->redirect('?controller=config');
+    }
+
+    /**
+     * Remove a "RememberMe" token
+     *
+     * @access public
+     */
+    public function removeRememberMeToken()
+    {
+        $this->rememberMe->remove($this->request->getIntegerParam('id'));
+        $this->response->redirect('?controller=config&action=index#remember-me');
     }
 }

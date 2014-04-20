@@ -6,7 +6,7 @@ require __DIR__.'/core/translator.php';
 
 $registry = new Core\Registry;
 
-$registry->db_version = 11;
+$registry->db_version = 12;
 
 $registry->db = function() use ($registry) {
     require __DIR__.'/vendor/PicoDb/Database.php';
@@ -95,6 +95,16 @@ $registry->action = function() use ($registry) {
     return new \Model\Action($registry->shared('db'), $registry->shared('event'));
 };
 
+$registry->rememberMe = function() use ($registry) {
+    require_once __DIR__.'/models/remember_me.php';
+    return new \Model\RememberMe($registry->shared('db'), $registry->shared('event'));
+};
+
+$registry->lastLogin = function() use ($registry) {
+    require_once __DIR__.'/models/last_login.php';
+    return new \Model\LastLogin($registry->shared('db'), $registry->shared('event'));
+};
+
 if (file_exists('config.php')) require 'config.php';
 
 // Auto-refresh frequency in seconds for the public board view
@@ -105,6 +115,9 @@ defined('SESSION_SAVE_PATH') or define('SESSION_SAVE_PATH', '');
 
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
+
+// Base directory
+define('BASE_URL_DIRECTORY', dirname($_SERVER['PHP_SELF']));
 
 // Database driver: sqlite or mysql
 defined('DB_DRIVER') or define('DB_DRIVER', 'sqlite');

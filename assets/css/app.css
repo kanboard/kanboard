@@ -65,6 +65,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    margin-bottom: 20px;
 }
 
 table caption {
@@ -80,7 +81,8 @@ td {
     border: 1px solid #ccc;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    padding-left: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 th {
@@ -89,11 +91,21 @@ th {
 }
 
 tr:nth-child(odd) td {
-    background: #fcfcfc;
+    background: #f8f8f8;
 }
 
 td li {
     margin-left: 20px;
+}
+
+.table-small {
+    font-size: 0.85em;
+}
+
+.table-hover tr:hover td {
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    background: rgb(219, 235, 255)
 }
 
 /* forms */

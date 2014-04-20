@@ -151,6 +151,10 @@ class User extends Base
             unset($user['password']);
         }
 
+        $user['id'] = (int) $user['id'];
+        $user['default_project_id'] = (int) $user['default_project_id'];
+        $user['is_admin'] = (bool) $user['is_admin'];
+
         $_SESSION['user'] = $user;
     }
 
@@ -274,7 +278,16 @@ class User extends Base
             $user = $this->getByUsername($values['username']);
 
             if ($user !== false && \password_verify($values['password'], $user['password'])) {
+
+                // Create the user session
                 $this->updateSession($user);
+
+                // Setup the remember me feature
+                if (! empty($values['remember_me'])) {
+                    $rememberMe = new RememberMe($this->db, $this->event);
+                    $credentials = $rememberMe->create($user['id'], $this->getIpAddress(), $this->getUserAgent());
+                    $rememberMe->writeCookie($credentials['token'], $credentials['sequence'], $credentials['expiration']);
+                }
             }
             else {
                 $result = false;
@@ -286,5 +299,61 @@ class User extends Base
             $result,
             $errors
         );
+    }
+
+    /**
+     * Get the user agent of the connected user
+     *
+     * @access public
+     * @return string
+     */
+    public function getUserAgent()
+    {
+        return empty($_SERVER['HTTP_USER_AGENT']) ? t('Unknown') : $_SERVER['HTTP_USER_AGENT'];
+    }
+
+    /**
+     * Get the real IP address of the connected user
+     *
+     * @access public
+     * @param  bool    $only_public   Return only public IP address
+     * @return string
+     */
+    public function getIpAddress($only_public = false)
+    {
+        $keys = array(
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_FORWARDED',
+            'HTTP_X_CLUSTER_CLIENT_IP',
+            'HTTP_FORWARDED_FOR',
+            'HTTP_FORWARDED',
+            'REMOTE_ADDR'
+        );
+
+        foreach ($keys as $key) {
+
+            if (isset($_SERVER[$key])) {
+
+                foreach (explode(',', $_SERVER[$key]) as $ip_address) {
+
+                    $ip_address = trim($ip_address);
+
+                    if ($only_public) {
+
+                        // Return only public IP address
+                        if (filter_var($ip_address, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
+                            return $ip_address;
+                        }
+                    }
+                    else {
+
+                        return $ip_address;
+                    }
+                }
+            }
+        }
+
+        return t('Unknown');
     }
 }

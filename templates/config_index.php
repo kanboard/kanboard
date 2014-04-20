@@ -2,7 +2,7 @@
 
     <?php if ($user['is_admin']): ?>
         <div class="page-header">
-            <h2><?= t('Application Settings') ?></h2>
+            <h2><?= t('Application settings') ?></h2>
         </div>
         <section>
         <form method="post" action="?controller=config&amp;action=save" autocomplete="off">
@@ -55,7 +55,7 @@
     <?php endif ?>
 
     <div class="page-header">
-        <h2><?= t('User Settings') ?></h2>
+        <h2><?= t('User settings') ?></h2>
     </div>
     <section class="settings">
         <ul>
@@ -66,4 +66,52 @@
             </li>
         </ul>
     </section>
+
+    <div class="page-header" id="last-logins">
+        <h2><?= t('Last logins') ?></h2>
+    </div>
+    <?php if (! empty($last_logins)): ?>
+        <table class="table-small table-hover">
+        <tr>
+            <th><?= t('Login date') ?></th>
+            <th><?= t('Authentication method') ?></th>
+            <th><?= t('IP address') ?></th>
+            <th><?= t('User agent') ?></th>
+        </tr>
+        <?php foreach($last_logins as $login): ?>
+        <tr>
+            <td><?= dt('%B %e, %G at %k:%M %p', $login['date_creation']) ?></td>
+            <td><?= Helper\escape($login['auth_type']) ?></td>
+            <td><?= Helper\escape($login['ip']) ?></td>
+            <td><?= Helper\escape($login['user_agent']) ?></td>
+        </tr>
+        <?php endforeach ?>
+        </table>
+    <?php endif ?>
+
+    <div class="page-header" id="remember-me">
+        <h2><?= t('Persistent connections') ?></h2>
+    </div>
+    <?php if (empty($remember_me_sessions)): ?>
+        <p class="alert alert-info"><?= t('No session') ?></p>
+    <?php else: ?>
+        <table class="table-small table-hover">
+        <tr>
+            <th><?= t('Creation date') ?></th>
+            <th><?= t('Expiration date') ?></th>
+            <th><?= t('IP address') ?></th>
+            <th><?= t('User agent') ?></th>
+            <th><?= t('Action') ?></th>
+        </tr>
+        <?php foreach($remember_me_sessions as $session): ?>
+        <tr>
+            <td><?= dt('%B %e, %G at %k:%M %p', $session['date_creation']) ?></td>
+            <td><?= dt('%B %e, %G at %k:%M %p', $session['expiration']) ?></td>
+            <td><?= Helper\escape($session['ip']) ?></td>
+            <td><?= Helper\escape($session['user_agent']) ?></td>
+            <td><a href="?controller=config&amp;action=removeRememberMeToken&amp;id=<?= $session['id'] ?>"><?= t('Remove') ?></a></td>
+        </tr>
+        <?php endforeach ?>
+        </table>
+    <?php endif ?>
 </section>

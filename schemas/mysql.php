@@ -2,6 +2,38 @@
 
 namespace Schema;
 
+function version_12($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE remember_me (
+            id INT NOT NULL AUTO_INCREMENT,
+            user_id INT,
+            ip VARCHAR(40),
+            user_agent VARCHAR(255),
+            token VARCHAR(255),
+            sequence VARCHAR(255),
+            expiration INT,
+            date_creation INT,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB CHARSET=utf8"
+    );
+
+    $pdo->exec("
+        CREATE TABLE last_logins (
+            id INT NOT NULL AUTO_INCREMENT,
+            auth_type VARCHAR(25),
+            user_id INT,
+            ip VARCHAR(40),
+            user_agent VARCHAR(255),
+            date_creation INT,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            PRIMARY KEY (id),
+            INDEX (user_id)
+        ) ENGINE=InnoDB CHARSET=utf8"
+    );
+}
+
 function version_11($pdo)
 {
 }

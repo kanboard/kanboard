@@ -4,9 +4,19 @@ namespace Controller;
 
 require_once __DIR__.'/base.php';
 
+/**
+ * Project controller
+ *
+ * @package  controller
+ * @author   Frederic Guillot
+ */
 class Project extends Base
 {
-    // Display access forbidden page
+    /**
+     * Display access forbidden page
+     *
+     * @access public
+     */
     public function forbidden()
     {
         $this->response->html($this->template->layout('project_forbidden', array(
@@ -15,7 +25,11 @@ class Project extends Base
         )));
     }
 
-    // List of completed tasks for a given project
+    /**
+     * List of completed tasks for a given project
+     *
+     * @access public
+     */
     public function tasks()
     {
         $project_id = $this->request->getIntegerParam('project_id');
@@ -40,7 +54,11 @@ class Project extends Base
         )));
     }
 
-    // List of projects
+    /**
+     * List of projects
+     *
+     * @access public
+     */
     public function index()
     {
         $projects = $this->project->getAll(true, $this->acl->isRegularUser());
@@ -54,7 +72,11 @@ class Project extends Base
         )));
     }
 
-    // Display a form to create a new project
+    /**
+     * Display a form to create a new project
+     *
+     * @access public
+     */
     public function create()
     {
         $this->response->html($this->template->layout('project_new', array(
@@ -65,7 +87,11 @@ class Project extends Base
         )));
     }
 
-    // Validate and save a new project
+    /**
+     * Validate and save a new project
+     *
+     * @access public
+     */
     public function save()
     {
         $values = $this->request->getValues();
@@ -90,7 +116,11 @@ class Project extends Base
         )));
     }
 
-    // Display a form to edit a project
+    /**
+     * Display a form to edit a project
+     *
+     * @access public
+     */
     public function edit()
     {
         $project = $this->project->getById($this->request->getIntegerParam('project_id'));
@@ -108,7 +138,11 @@ class Project extends Base
         )));
     }
 
-    // Validate and update a project
+    /**
+     * Validate and update a project
+     *
+     * @access public
+     */
     public function update()
     {
         $values = $this->request->getValues() + array('is_active' => 0);
@@ -133,7 +167,11 @@ class Project extends Base
         )));
     }
 
-    // Confirmation dialog before to remove a project
+    /**
+     * Confirmation dialog before to remove a project
+     *
+     * @access public
+     */
     public function confirm()
     {
         $project = $this->project->getById($this->request->getIntegerParam('project_id'));
@@ -150,7 +188,11 @@ class Project extends Base
         )));
     }
 
-    // Remove a project
+    /**
+     * Remove a project
+     *
+     * @access public
+     */
     public function remove()
     {
         $project_id = $this->request->getIntegerParam('project_id');
@@ -164,7 +206,11 @@ class Project extends Base
         $this->response->redirect('?controller=project');
     }
 
-    // Enable a project
+    /**
+     * Enable a project
+     *
+     * @access public
+     */
     public function enable()
     {
         $project_id = $this->request->getIntegerParam('project_id');
@@ -178,7 +224,11 @@ class Project extends Base
         $this->response->redirect('?controller=project');
     }
 
-    // Disable a project
+    /**
+     * Disable a project
+     *
+     * @access public
+     */
     public function disable()
     {
         $project_id = $this->request->getIntegerParam('project_id');
@@ -192,7 +242,11 @@ class Project extends Base
         $this->response->redirect('?controller=project');
     }
 
-    // Users list for the selected project
+    /**
+     * Users list for the selected project
+     *
+     * @access public
+     */
     public function users()
     {
         $project = $this->project->getById($this->request->getIntegerParam('project_id'));
@@ -210,7 +264,11 @@ class Project extends Base
         )));
     }
 
-    // Allow a specific user for the selected project
+    /**
+     * Allow a specific user for the selected project
+     *
+     * @access public
+     */
     public function allow()
     {
         $values = $this->request->getValues();
@@ -229,7 +287,11 @@ class Project extends Base
         $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
     }
 
-    // Revoke user access
+    /**
+     * Revoke user access
+     *
+     * @access public
+     */
     public function revoke()
     {
         $values = array(
