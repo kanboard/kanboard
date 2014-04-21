@@ -72,6 +72,7 @@ Documentation
 - [Upgrade Kanboard to a new version](docs/update.markdown)
 - [Sqlite database management](docs/sqlite-database.markdown)
 - [How to use Mysql instead of Sqlite](docs/mysql-configuration.markdown)
+- [LDAP authentication](docs/ldap-authentication.markdown)
 - [How to use Kanboard with Vagrant](docs/vagrant.markdown)
 - [Webhooks](docs/webhooks.markdown)
 
