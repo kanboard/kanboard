@@ -14,7 +14,7 @@ abstract class Base
      * Constructor
      *
      * @access public
-     * @param  Core\Registry  $registry
+     * @param  \Core\Registry  $registry
      */
     public function __construct(\Core\Registry $registry)
     {

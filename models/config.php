@@ -60,7 +60,7 @@ class Config extends Base
      *
      * @access public
      * @param  string  $name            Parameter name
-     * @param  mixed   $default_value   Default value of the parameter
+     * @param  string   $default_value   Default value of the parameter
      * @return mixed
      */
     public function get($name, $default_value = '')

@@ -110,7 +110,7 @@ class Acl extends Base
      * Get the connected user id
      *
      * @access public
-     * @return bool
+     * @return integer
      */
     public function getUserId()
     {

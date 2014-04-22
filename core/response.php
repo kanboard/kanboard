@@ -9,6 +9,9 @@ class Response
         header('Content-Disposition: attachment; filename="'.$filename.'"');
     }
 
+    /**
+     * @param integer $status_code
+     */
     public function status($status_code)
     {
         if (strpos(php_sapi_name(), 'apache') !== false) {
