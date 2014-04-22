@@ -17,7 +17,7 @@ class TaskDuplicateAnotherProject extends Base
      *
      * @access public
      * @param  integer  $project_id  Project id
-     * @param  Task     $task        Task model instance
+     * @param  \Model\Task     $task        Task model instance
      */
     public function __construct($project_id, \Model\Task $task)
     {
@@ -43,7 +43,7 @@ class TaskDuplicateAnotherProject extends Base
      * Get the required parameter for the event
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getEventRequiredParameters()
     {

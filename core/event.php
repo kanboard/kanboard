@@ -9,6 +9,10 @@ namespace Core;
  * @author  Frederic Guillot
  */
 interface Listener {
+
+    /**
+     * @return boolean
+     */
     public function execute(array $data);
 }
 

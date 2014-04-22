@@ -43,7 +43,7 @@ abstract class Base
      *
      * @access public
      * @param  PicoDb\Database  $db     Database instance
-     * @param  Core\Event       $event  Event dispatcher instance
+     * @param  \Core\Event       $event  Event dispatcher instance
      */
     public function __construct(\PicoDb\Database $db, \Core\Event $event)
     {

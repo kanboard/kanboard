@@ -18,7 +18,7 @@ class Ldap extends Base
      * @access public
      * @param  string  $username  Username
      * @param  string  $password  Password
-     * @return bool
+     * @return null|boolean
      */
     public function authenticate($username, $password)
     {

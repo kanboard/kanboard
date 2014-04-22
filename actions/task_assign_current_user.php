@@ -17,8 +17,8 @@ class TaskAssignCurrentUser extends Base
      *
      * @access public
      * @param  integer  $project_id  Project id
-     * @param  Task     $task        Task model instance
-     * @param  Acl      $acl         Acl model instance
+     * @param  \Model\Task     $task        Task model instance
+     * @param  \Model\Acl      $acl         Acl model instance
      */
     public function __construct($project_id, \Model\Task $task, \Model\Acl $acl)
     {
@@ -44,7 +44,7 @@ class TaskAssignCurrentUser extends Base
      * Get the required parameter for the event
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getEventRequiredParameters()
     {

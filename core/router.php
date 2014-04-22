@@ -20,11 +20,18 @@ class Router
         $this->action = empty($_GET['action']) ? $controller : $_GET['action'];
     }
 
+    /**
+     * @param string $default_value
+     */
     public function sanitize($value, $default_value)
     {
         return ! ctype_alpha($value) || empty($value) ? $default_value : strtolower($value);
     }
 
+    /**
+     * @param string $filename
+     * @param string $class
+     */
     public function load($filename, $class, $method)
     {
         if (file_exists($filename)) {
