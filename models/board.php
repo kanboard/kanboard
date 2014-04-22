@@ -181,10 +181,24 @@ class Board extends Base
         $this->db->startTransaction();
 
         $columns = $this->getColumns($project_id);
+
+        $filters = array(
+            array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id),
+            array('column' => 'is_active', 'operator' => 'eq', 'value' => Task::STATUS_OPEN),
+        );
+
         $taskModel = new Task($this->db, $this->event);
+        $tasks = $taskModel->find($filters);
 
         foreach ($columns as &$column) {
-            $column['tasks'] = $taskModel->getAllByColumnId($project_id, $column['id'], array(1));
+
+            $column['tasks'] = array();
+
+            foreach ($tasks as &$task) {
+                if ($task['column_id'] == $column['id']) {
+                    $column['tasks'][] = $task;
+                }
+            }
         }
 
         $this->db->closeTransaction();

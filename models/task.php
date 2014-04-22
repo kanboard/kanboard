@@ -3,7 +3,6 @@
 namespace Model;
 
 require_once __DIR__.'/base.php';
-require_once __DIR__.'/comment.php';
 
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
@@ -107,42 +106,6 @@ class Task extends Base
     }
 
     /**
-     * Get all tasks for a given project
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @param  array     $status       List of status id
-     * @return array
-     */
-    public function getAllByProjectId($project_id, array $status = array(self::STATUS_OPEN, self::STATUS_CLOSED))
-    {
-        return $this->db->table(self::TABLE)
-            ->columns(
-                self::TABLE.'.id',
-                self::TABLE.'.title',
-                self::TABLE.'.description',
-                self::TABLE.'.date_creation',
-                self::TABLE.'.date_completed',
-                self::TABLE.'.date_due',
-                self::TABLE.'.color_id',
-                self::TABLE.'.project_id',
-                self::TABLE.'.column_id',
-                self::TABLE.'.owner_id',
-                self::TABLE.'.position',
-                self::TABLE.'.is_active',
-                self::TABLE.'.score',
-                Board::TABLE.'.title AS column_title',
-                User::TABLE.'.username'
-            )
-            ->join(Board::TABLE, 'id', 'column_id')
-            ->join(User::TABLE, 'id', 'owner_id')
-            ->eq(self::TABLE.'.project_id', $project_id)
-            ->in('is_active', $status)
-            ->desc('date_completed')
-            ->findAll();
-    }
-
-    /**
      * Count all tasks for a given project and status
      *
      * @access public
@@ -160,33 +123,39 @@ class Task extends Base
     }
 
     /**
-     * Get all tasks for a given column
+     * Get tasks that match defined filters
      *
      * @access public
-     * @param  integer   $project_id   Project id
-     * @param  integer   $column_id    Column id
-     * @param  array     $status       List of status id
+     * @param  array    $filters   Filters: [ ['column' => '...', 'operator' => '...', 'value' => '...'], ... ]
      * @return array
      */
-    public function getAllByColumnId($project_id, $column_id, array $status = array(self::STATUS_OPEN))
+    public function find(array $filters)
     {
-        $tasks = $this->db
+        $table = $this->db
                     ->table(self::TABLE)
-                    ->columns('tasks.id', 'title', 'color_id', 'project_id', 'owner_id', 'column_id', 'position', 'score', 'date_due', 'users.username')
-                    ->join('users', 'id', 'owner_id')
-                    ->eq('project_id', $project_id)
-                    ->eq('column_id', $column_id)
-                    ->in('is_active', $status)
-                    ->asc('position')
-                    ->findAll();
+                    ->columns(
+                        '(SELECT count(*) FROM comments WHERE task_id=tasks.id) AS nb_comments',
+                        'tasks.id',
+                        'tasks.title',
+                        'tasks.date_creation',
+                        'tasks.date_completed',
+                        'tasks.date_due',
+                        'tasks.color_id',
+                        'tasks.project_id',
+                        'tasks.column_id',
+                        'tasks.owner_id',
+                        'tasks.position',
+                        'tasks.is_active',
+                        'tasks.score',
+                        'users.username'
+                    )
+                    ->join('users', 'id', 'owner_id');
 
-        $commentModel = new Comment($this->db, $this->event);
-
-        foreach ($tasks as &$task) {
-            $task['nb_comments'] = $commentModel->count($task['id']);
+        foreach ($filters as $filter) {
+            $table->$filter['operator']($filter['column'], $filter['value']);
         }
 
-        return $tasks;
+        return $table->findAll();
     }
 
     /**

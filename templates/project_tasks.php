@@ -28,7 +28,7 @@
                     <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['id']) ?></a>
                 </td>
                 <td>
-                    <?= Helper\escape($task['column_title']) ?>
+                    <?= Helper\in_list($task['column_id'], $columns) ?>
                 </td>
                 <td>
                     <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>

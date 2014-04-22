@@ -42,12 +42,18 @@ class Project extends Base
 
         $this->checkProjectPermissions($project['id']);
 
-        $tasks = $this->task->getAllByProjectId($project_id, array(0));
+        $filters = array(
+            array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id),
+            array('column' => 'is_active', 'operator' => 'eq', 'value' => \Model\Task::STATUS_CLOSED),
+        );
+
+        $tasks = $this->task->find($filters);
         $nb_tasks = count($tasks);
 
         $this->response->html($this->template->layout('project_tasks', array(
             'menu' => 'projects',
             'project' => $project,
+            'columns' => $this->board->getColumnsList($project_id),
             'tasks' => $tasks,
             'nb_tasks' => $nb_tasks,
             'title' => $project['name'].' ('.$nb_tasks.')'

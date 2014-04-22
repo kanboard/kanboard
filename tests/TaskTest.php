@@ -7,6 +7,35 @@ use Model\Project;
 
 class TaskTest extends Base
 {
+    public function testFilter()
+    {
+        $t = new Task($this->db, $this->event);
+        $p = new Project($this->db, $this->event);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $t->create(array('title' => 'test a', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
+        $this->assertEquals(2, $t->create(array('title' => 'test b', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2)));
+
+        $tasks = $t->find(array(array('column' => 'project_id', 'operator' => 'eq', 'value' => '1')));
+        $this->assertEquals(2, count($tasks));
+        $this->assertEquals(1, $tasks[0]['id']);
+        $this->assertEquals(2, $tasks[1]['id']);
+
+        $tasks = $t->find(array(
+            array('column' => 'project_id', 'operator' => 'eq', 'value' => '1'),
+            array('column' => 'owner_id', 'operator' => 'eq', 'value' => '2'),
+        ));
+        $this->assertEquals(1, count($tasks));
+        $this->assertEquals(2, $tasks[0]['id']);
+
+        $tasks = $t->find(array(
+            array('column' => 'project_id', 'operator' => 'eq', 'value' => '1'),
+            array('column' => 'title', 'operator' => 'like', 'value' => '%b%'),
+        ));
+        $this->assertEquals(1, count($tasks));
+        $this->assertEquals(2, $tasks[0]['id']);
+    }
+
     public function testDateFormat()
     {
         $t = new Task($this->db, $this->event);
