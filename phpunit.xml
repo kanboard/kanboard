@@ -1,0 +1,7 @@
+<phpunit>
+    <testsuites>
+        <testsuite name="Kanboard">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

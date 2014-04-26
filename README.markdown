@@ -36,6 +36,8 @@ Known bugs
 
 See Issues: <https://github.com/fguillot/kanboard/issues>
 
+[![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
+
 License
 -------
 
