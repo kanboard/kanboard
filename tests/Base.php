@@ -1,5 +1,9 @@
 <?php
 
+if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+    require __DIR__.'/../vendor/password.php';
+}
+
 require_once __DIR__.'/../vendor/PicoDb/Database.php';
 require_once __DIR__.'/../core/event.php';
 require_once __DIR__.'/../core/translator.php';

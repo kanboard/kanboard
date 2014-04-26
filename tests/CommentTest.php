@@ -69,24 +69,48 @@ class CommentTest extends Base
     {
         $c = new Comment($this->db, $this->event);
 
-        $this->assertTrue($c->validateCreation(['user_id' => 1, 'task_id' => 1, 'comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateCreation(['user_id' => 1, 'task_id' => 1, 'comment' => ''])[0]);
-        $this->assertFalse($c->validateCreation(['user_id' => 1, 'task_id' => 'a', 'comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateCreation(['user_id' => 'b', 'task_id' => 1, 'comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateCreation(['user_id' => 1, 'comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateCreation(['task_id' => 1, 'comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateCreation(['comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateCreation([])[0]);
+        $result = $c->validateCreation(array('user_id' => 1, 'task_id' => 1, 'comment' => 'bla'));
+        $this->assertTrue($result[0]);
+
+        $result = $c->validateCreation(array('user_id' => 1, 'task_id' => 1, 'comment' => ''));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateCreation(array('user_id' => 1, 'task_id' => 'a', 'comment' => 'bla'));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateCreation(array('user_id' => 'b', 'task_id' => 1, 'comment' => 'bla'));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateCreation(array('user_id' => 1, 'comment' => 'bla'));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateCreation(array('task_id' => 1, 'comment' => 'bla'));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateCreation(array('comment' => 'bla'));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateCreation(array());
+        $this->assertFalse($result[0]);
     }
 
     public function testValidateModification()
     {
         $c = new Comment($this->db, $this->event);
 
-        $this->assertTrue($c->validateModification(['id' => 1, 'comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateModification(['id' => 1, 'comment' => ''])[0]);
-        $this->assertFalse($c->validateModification(['comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateModification(['id' => 'b', 'comment' => 'bla'])[0]);
-        $this->assertFalse($c->validateModification([])[0]);
+        $result = $c->validateModification(array('id' => 1, 'comment' => 'bla'));
+        $this->assertTrue($result[0]);
+
+        $result = $c->validateModification(array('id' => 1, 'comment' => ''));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateModification(array('comment' => 'bla'));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateModification(array('id' => 'b', 'comment' => 'bla'));
+        $this->assertFalse($result[0]);
+
+        $result = $c->validateModification(array());
+        $this->assertFalse($result[0]);
     }
 }
