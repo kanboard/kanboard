@@ -176,16 +176,14 @@ class Board extends Base
      * @param  integer  $project_id   Project id
      * @return array
      */
-    public function get($project_id)
+    public function get($project_id, array $filters = array())
     {
         $this->db->startTransaction();
 
         $columns = $this->getColumns($project_id);
 
-        $filters = array(
-            array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id),
-            array('column' => 'is_active', 'operator' => 'eq', 'value' => Task::STATUS_OPEN),
-        );
+        $filters[] = array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id);
+        $filters[] = array('column' => 'is_active', 'operator' => 'eq', 'value' => Task::STATUS_OPEN);
 
         $taskModel = new Task($this->db, $this->event);
         $tasks = $taskModel->find($filters);

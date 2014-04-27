@@ -468,6 +468,11 @@ nav .active a {
     background-color: red;
 }
 
+a.filter-on {
+    font-weight: bold;
+    color: #333;
+}
+
 .task-title {
     margin-top: 10px;
     font-size: 110%;

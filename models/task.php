@@ -127,9 +127,10 @@ class Task extends Base
      *
      * @access public
      * @param  array    $filters   Filters: [ ['column' => '...', 'operator' => '...', 'value' => '...'], ... ]
+     * @param  array    $sorting   Sorting: [ 'column' => 'date_creation', 'direction' => 'asc']
      * @return array
      */
-    public function find(array $filters)
+    public function find(array $filters, array $sorting = array())
     {
         $table = $this->db
                     ->table(self::TABLE)
@@ -153,6 +154,13 @@ class Task extends Base
 
         foreach ($filters as $filter) {
             $table->$filter['operator']($filter['column'], $filter['value']);
+        }
+
+        if (empty($sorting)) {
+            $table->orderBy('tasks.position', 'ASC');
+        }
+        else {
+            $table->orderBy($sorting['column'], $sorting['direction']);
         }
 
         return $table->findAll();

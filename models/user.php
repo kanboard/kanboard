@@ -23,6 +23,13 @@ class User extends Base
     const TABLE = 'users';
 
     /**
+     * Id used for everbody (filtering)
+     *
+     * @var integer
+     */
+    const EVERYBODY_ID = -1;
+
+    /**
      * Get a specific user by id
      *
      * @access public

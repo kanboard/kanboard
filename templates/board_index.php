@@ -17,7 +17,12 @@
 
     <div class="project-menu">
         <ul>
-            <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $current_project_id ?>"><?= t('completed tasks') ?></a></li>
+            <li>
+                <?= t('Filter by user') ?>
+                <?= Helper\form_select('user_id', $users, $filters) ?>
+            </li>
+            <li><a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a></li>
+            <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $current_project_id ?>"><?= t('Completed tasks') ?></a></li>
         </ul>
     </div>
 
@@ -54,7 +59,11 @@
                     dropzone="copy">
                     <?php foreach ($column['tasks'] as $task): ?>
                     <div class="draggable-item" draggable="true">
-                        <div class="task task-<?= $task['color_id'] ?>" data-task-id="<?= $task['id'] ?>" title="<?= t('View this task') ?>">
+                        <div class="task task-<?= $task['color_id'] ?>"
+                             data-task-id="<?= $task['id'] ?>"
+                             data-owner-id="<?= $task['owner_id'] ?>"
+                             data-due-date="<?= $task['date_due'] ?>"
+                             title="<?= t('View this task') ?>">
 
                             <a href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a> -
 

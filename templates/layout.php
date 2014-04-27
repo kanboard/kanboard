@@ -9,7 +9,7 @@
         <link rel="apple-touch-icon" sizes="72x72" href="assets/img/touch-icon-ipad.png">
         <link rel="apple-touch-icon" sizes="114x114" href="assets/img/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="144x144" href="assets/img/touch-icon-ipad-retina.png">
-        <title><?= isset($title) ? Helper\escape($title) : 'Kanboard' ?></title>
+        <title><?= isset($title) ? Helper\escape($title).' - Kanboard' : 'Kanboard' ?></title>
         <?php if (isset($auto_refresh)): ?>
             <meta http-equiv="refresh" content="<?= AUTO_REFRESH_DURATION ?>" >
         <?php endif ?>
@@ -23,19 +23,19 @@
                 <a class="logo" href="?">kan<span>board</span></a>
                 <ul>
                     <li <?= isset($menu) && $menu === 'boards' ? 'class="active"' : '' ?>>
-                        <a href="?controller=board"><?= t('boards') ?></a>
+                        <a href="?controller=board"><?= t('Boards') ?></a>
                     </li>
                     <li <?= isset($menu) && $menu === 'projects' ? 'class="active"' : '' ?>>
-                        <a href="?controller=project"><?= t('projects') ?></a>
+                        <a href="?controller=project"><?= t('Projects') ?></a>
                     </li>
                     <li <?= isset($menu) && $menu === 'users' ? 'class="active"' : '' ?>>
-                        <a href="?controller=user"><?= t('users') ?></a>
+                        <a href="?controller=user"><?= t('Users') ?></a>
                     </li>
                     <li <?= isset($menu) && $menu === 'config' ? 'class="active"' : '' ?>>
-                        <a href="?controller=config"><?= t('settings') ?></a>
+                        <a href="?controller=config"><?= t('Settings') ?></a>
                     </li>
                     <li>
-                        <a href="?controller=user&amp;action=logout"><?= t('logout') ?></a>
+                        <a href="?controller=user&amp;action=logout"><?= t('Logout') ?></a>
                         (<?= Helper\escape($_SESSION['user']['username']) ?>)
                     </li>
                 </ul>

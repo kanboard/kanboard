@@ -208,6 +208,8 @@
         });
     }
 
+    // Drag and drop events
+
     var dragSrcItem = null;
     var dragSrcColumn = null;
 
@@ -234,5 +236,57 @@
             window.location.href = '?controller=task&action=show&task_id=' + item.getAttribute('data-task-id');
         });
     });
+
+    // Filtering
+
+    function getSelectedUserFilter()
+    {
+        var select = document.getElementById("form-user_id");
+        return select.options[select.selectedIndex].value;
+    }
+
+    function hasDueDateFilter()
+    {
+        var dateFilter = document.getElementById("filter-due-date");
+        return dateFilter.classList.contains("filter-on");
+    }
+
+    function applyFilter(selectedUserId, filterDueDate)
+    {
+        [].forEach.call(document.querySelectorAll('[data-task-id]'), function (item) {
+
+            var ownerId = item.getAttribute("data-owner-id");
+            var dueDate = item.getAttribute("data-due-date");
+
+            if (ownerId != selectedUserId && selectedUserId != -1) {
+                item.style.opacity = "0.2";
+            }
+            else {
+                item.style.opacity = "1.0";
+            }
+
+            if (filterDueDate && dueDate == "") {
+                item.style.opacity = "0.2";
+            }
+        });
+    }
+
+    var userFilter = document.getElementById("form-user_id");
+    var dateFilter = document.getElementById("filter-due-date");
+
+    if (userFilter) {
+        userFilter.onchange = function() {
+            applyFilter(getSelectedUserFilter(), hasDueDateFilter());
+        };
+    }
+
+    if (dateFilter) {
+
+        dateFilter.onclick = function(e) {
+            dateFilter.classList.toggle("filter-on");
+            applyFilter(getSelectedUserFilter(), hasDueDateFilter());
+            e.preventDefault();
+        };
+    }
 
 }());

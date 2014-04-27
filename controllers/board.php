@@ -121,7 +121,7 @@ class Board extends Base
     }
 
     /**
-     * Display the default user project or the first project
+     * Redirect the user to the default project
      *
      * @access public
      */
@@ -150,16 +150,7 @@ class Board extends Base
             list($project_id, $project_name) = each($projects);
         }
 
-        $this->checkProjectPermissions($project_id);
-
-        $this->response->html($this->template->layout('board_index', array(
-            'projects' => $projects,
-            'current_project_id' => $project_id,
-            'current_project_name' => $project_name,
-            'columns' => $this->board->get($project_id),
-            'menu' => 'boards',
-            'title' => $project_name
-        )));
+        $this->response->redirect('?controller=board&action=show&project_id='.$project_id);
     }
 
     /**
@@ -169,26 +160,36 @@ class Board extends Base
      */
     public function show()
     {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $user_id = $this->request->getIntegerParam('user_id', \Model\User::EVERYBODY_ID);
+
+        $this->checkProjectPermissions($project_id);
         $projects = $this->project->getListByStatus(\Model\Project::ACTIVE);
 
         if ($this->acl->isRegularUser()) {
             $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());
         }
 
-        $project_id = $this->request->getIntegerParam('project_id');
+        if (! isset($projects[$project_id])) {
+            $this->notfound();
+        }
 
-        $this->checkProjectPermissions($project_id);
-        if (! isset($projects[$project_id])) $this->notfound();
+        $filters = array();
+        $users = $this->project->getUsersList($project_id, true, true);
 
-        $project_name = $projects[$project_id];
+        if ($user_id !== \Model\User::EVERYBODY_ID && in_array($user_id, array_keys($users))) {
+            $filters[] = array('column' => 'owner_id', 'operator' => 'eq', 'value' => $user_id);
+        }
 
         $this->response->html($this->template->layout('board_index', array(
+            'users' => $users,
+            'filters' => array('user_id' => $user_id),
             'projects' => $projects,
             'current_project_id' => $project_id,
-            'current_project_name' => $project_name,
-            'columns' => $this->board->get($project_id),
+            'current_project_name' => $projects[$project_id],
+            'columns' => $this->board->get($project_id, $filters),
             'menu' => 'boards',
-            'title' => $project_name
+            'title' => $projects[$project_id]
         )));
     }
 

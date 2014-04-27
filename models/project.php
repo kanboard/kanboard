@@ -18,7 +18,7 @@ class Project extends Base
     const INACTIVE = 0;
 
     // Get a list of people that can by assigned for tasks
-    public function getUsersList($project_id, $prepend = true)
+    public function getUsersList($project_id, $prepend_unassigned = true, $prepend_everybody = false)
     {
         $allowed_users = $this->getAllowedUsers($project_id);
         $userModel = new User($this->db, $this->event);
@@ -27,8 +27,12 @@ class Project extends Base
             $allowed_users = $userModel->getList();
         }
 
-        if ($prepend) {
-            return array(t('Unassigned')) + $allowed_users;
+        if ($prepend_unassigned) {
+            $allowed_users = array(t('Unassigned')) + $allowed_users;
+        }
+
+        if ($prepend_everybody) {
+            $allowed_users = array(User::EVERYBODY_ID => t('Everybody')) + $allowed_users;
         }
 
         return $allowed_users;
