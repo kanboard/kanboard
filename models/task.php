@@ -6,6 +6,7 @@ require_once __DIR__.'/base.php';
 
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
+use DateTime;
 
 /**
  * Task model
@@ -301,7 +302,7 @@ class Task extends Base
         }
 
         if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
-            $values['date_due'] = $this->getTimestampFromDate($values['date_due'], t('m/d/Y')) ?: null;
+            $values['date_due'] = $this->parseDate($values['date_due']);
         }
 
         $values['date_creation'] = time();
@@ -334,7 +335,7 @@ class Task extends Base
     {
         // Prepare data
         if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
-            $values['date_due'] = $this->getTimestampFromDate($values['date_due'], t('m/d/Y')) ?: null;
+            $values['date_due'] = $this->parseDate($values['date_due']);
         }
 
         $original_task = $this->getById($values['id']);
@@ -472,7 +473,7 @@ class Task extends Base
             new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Required('title', t('The title is required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
-            new Validators\Date('date_due', t('Invalid date'), t('m/d/Y')),
+            new Validators\Date('date_due', t('Invalid date'), $this->getDateFormats()),
         ));
 
         return array(
@@ -523,7 +524,7 @@ class Task extends Base
             new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Required('title', t('The title is required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
-            new Validators\Date('date_due', t('Invalid date'), t('m/d/Y')),
+            new Validators\Date('date_due', t('Invalid date'), $this->getDateFormats()),
         ));
 
         return array(
@@ -557,19 +558,19 @@ class Task extends Base
     }
 
     /**
-     * Parse a date (different format for each locale) to a timestamp
+     * Return a timestamp if the given date format is correct otherwise return 0
      *
      * @access public
      * @param  string   $value  Date to parse
      * @param  string   $format Date format
      * @return integer
      */
-    public function getTimestampFromDate($value, $format)
+    public function getValidDate($value, $format)
     {
-        $date = \DateTime::createFromFormat($format, $value);
+        $date = DateTime::createFromFormat($format, $value);
 
         if ($date !== false) {
-            $errors = \DateTime::getLastErrors();
+            $errors = DateTime::getLastErrors();
             if ($errors['error_count'] === 0 && $errors['warning_count'] === 0) {
                 $timestamp = $date->getTimestamp();
                 return $timestamp > 0 ? $timestamp : 0;
@@ -577,5 +578,41 @@ class Task extends Base
         }
 
         return 0;
+    }
+
+    /**
+     * Parse a date ad return a unix timestamp, try different date formats
+     *
+     * @access public
+     * @param  string   $value   Date to parse
+     * @return integer
+     */
+    public function parseDate($value)
+    {
+        foreach ($this->getDateFormats() as $format) {
+
+            $timestamp = $this->getValidDate($value, $format);
+
+            if ($timestamp !== 0) {
+                return $timestamp;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Return the list of supported date formats
+     *
+     * @access public
+     * @return array
+     */
+    public function getDateFormats()
+    {
+        return array(
+            t('m/d/Y'),
+            'Y-m-d',
+            'Y_m_d',
+        );
     }
 }

@@ -294,4 +294,5 @@ return array(
     // 'Nothing found.' => '',
     // 'Search in the project "%s"' => '',
     // 'Due date' => '',
+    // 'Others formats accepted: %s and %s' => '',
 );

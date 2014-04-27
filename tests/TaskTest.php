@@ -79,13 +79,19 @@ class TaskTest extends Base
     {
         $t = new Task($this->db, $this->event);
 
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getTimestampFromDate('05/03/2014', 'd/m/Y')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getTimestampFromDate('03/05/2014', 'm/d/Y')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getTimestampFromDate('3/5/2014', 'm/d/Y')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getTimestampFromDate('5/3/2014', 'd/m/Y')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getTimestampFromDate('5/3/14', 'd/m/y')));
-        $this->assertEquals(0, $t->getTimestampFromDate('5/3/14', 'd/m/Y'));
-        $this->assertEquals(0, $t->getTimestampFromDate('5-3-2014', 'd/m/Y'));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('2014-03-05', 'Y-m-d')));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('2014_03_05', 'Y_m_d')));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('05/03/2014', 'd/m/Y')));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('03/05/2014', 'm/d/Y')));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('3/5/2014', 'm/d/Y')));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('5/3/2014', 'd/m/Y')));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('5/3/14', 'd/m/y')));
+        $this->assertEquals(0, $t->getValidDate('5/3/14', 'd/m/Y'));
+        $this->assertEquals(0, $t->getValidDate('5-3-2014', 'd/m/Y'));
+
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->parseDate('2014-03-05')));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->parseDate('2014_03_05')));
+        $this->assertEquals('2014-03-05', date('Y-m-d', $t->parseDate('03/05/2014')));
     }
 
     public function testDuplicateTask()
