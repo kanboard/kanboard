@@ -10,14 +10,51 @@ require_once __DIR__.'/task.php';
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
 
+/**
+ * Project model
+ *
+ * @package  model
+ * @author   Frederic Guillot
+ */
 class Project extends Base
 {
+    /**
+     * SQL table name for projects
+     *
+     * @var string
+     */
     const TABLE = 'projects';
+
+    /**
+     * SQL table name for users
+     *
+     * @var string
+     */
     const TABLE_USERS = 'project_has_users';
+
+    /**
+     * Value for active project
+     *
+     * @var integer
+     */
     const ACTIVE = 1;
+
+    /**
+     * Value for inactive project
+     *
+     * @var integer
+     */
     const INACTIVE = 0;
 
-    // Get a list of people that can by assigned for tasks
+    /**
+     * Get a list of people that can be assigned for tasks
+     *
+     * @access public
+     * @param  integer   $project_id            Project id
+     * @param  bool      $prepend_unassigned    Prepend the 'Unassigned' value
+     * @param  bool      $prepend_everybody     Prepend the 'Everbody' value
+     * @return array
+     */
     public function getUsersList($project_id, $prepend_unassigned = true, $prepend_everybody = false)
     {
         $allowed_users = $this->getAllowedUsers($project_id);
@@ -38,7 +75,13 @@ class Project extends Base
         return $allowed_users;
     }
 
-    // Get a list of allowed people for a project
+    /**
+     * Get a list of allowed people for a project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return array
+     */
     public function getAllowedUsers($project_id)
     {
         return $this->db
@@ -49,7 +92,13 @@ class Project extends Base
             ->listing('user_id', 'username');
     }
 
-    // Get allowed and not allowed users for a project
+    /**
+     * Get allowed and not allowed users for a project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return array
+     */
     public function getAllUsers($project_id)
     {
         $users = array(
@@ -72,7 +121,14 @@ class Project extends Base
         return $users;
     }
 
-    // Allow a specific user for a given project
+    /**
+     * Allow a specific user for a given project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @return bool
+     */
     public function allowUser($project_id, $user_id)
     {
         return $this->db
@@ -80,7 +136,14 @@ class Project extends Base
                     ->save(array('project_id' => $project_id, 'user_id' => $user_id));
     }
 
-    // Revoke a specific user for a given project
+    /**
+     * Revoke a specific user for a given project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @return bool
+     */
     public function revokeUser($project_id, $user_id)
     {
         return $this->db
@@ -90,7 +153,14 @@ class Project extends Base
                     ->remove();
     }
 
-    // Check if a specific user is allowed to access to a given project
+    /**
+     * Check if a specific user is allowed to access to a given project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @return bool
+     */
     public function isUserAllowed($project_id, $user_id)
     {
         // If there is nobody specified, everybody have access to the project
@@ -118,21 +188,49 @@ class Project extends Base
                     ->count();
     }
 
+    /**
+     * Get a project by the id
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return array
+     */
     public function getById($project_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $project_id)->findOne();
     }
 
+    /**
+     * Fetch project data by using the token
+     *
+     * @access public
+     * @param  string   $token    Token
+     * @return array
+     */
     public function getByToken($token)
     {
         return $this->db->table(self::TABLE)->eq('token', $token)->findOne();
     }
 
+    /**
+     * Return the first project from the database (no sorting)
+     *
+     * @access public
+     * @return array
+     */
     public function getFirst()
     {
         return $this->db->table(self::TABLE)->findOne();
     }
 
+    /**
+     * Get all projects, optionaly fetch stats for each project and can check users permissions
+     *
+     * @access public
+     * @param  bool       $fetch_stats          If true, return metrics about each projects
+     * @param  bool       $check_permissions    If true, remove projects not allowed for the current user
+     * @return array
+     */
     public function getAll($fetch_stats = false, $check_permissions = false)
     {
         if (! $fetch_stats) {
@@ -142,9 +240,9 @@ class Project extends Base
         $this->db->startTransaction();
 
         $projects = $this->db
-                        ->table(self::TABLE)
-                        ->asc('name')
-                        ->findAll();
+                         ->table(self::TABLE)
+                         ->asc('name')
+                         ->findAll();
 
         $boardModel = new Board($this->db, $this->event);
         $taskModel = new Task($this->db, $this->event);
@@ -176,6 +274,13 @@ class Project extends Base
         return $projects;
     }
 
+    /**
+     * Return the list of all projects
+     *
+     * @access public
+     * @param  bool     $prepend   If true, prepend to the list the value 'None'
+     * @return array
+     */
     public function getList($prepend = true)
     {
         if ($prepend) {
@@ -185,6 +290,13 @@ class Project extends Base
         return $this->db->table(self::TABLE)->asc('name')->listing('id', 'name');
     }
 
+    /**
+     * Get all projects with all its data for a given status
+     *
+     * @access public
+     * @param  integer   $status   Proejct status: self::ACTIVE or self:INACTIVE
+     * @return array
+     */
     public function getAllByStatus($status)
     {
         return $this->db
@@ -194,6 +306,13 @@ class Project extends Base
                     ->findAll();
     }
 
+    /**
+     * Get a list of project by status
+     *
+     * @access public
+     * @param  integer   $status   Proejct status: self::ACTIVE or self:INACTIVE
+     * @return array
+     */
     public function getListByStatus($status)
     {
         return $this->db
@@ -203,6 +322,13 @@ class Project extends Base
                     ->listing('id', 'name');
     }
 
+    /**
+     * Return the number of projects by status
+     *
+     * @access public
+     * @param  integer   $status   Status: self::ACTIVE or self:INACTIVE
+     * @return integer
+     */
     public function countByStatus($status)
     {
         return $this->db
@@ -211,6 +337,14 @@ class Project extends Base
                     ->count();
     }
 
+    /**
+     * Return a list of projects for a given user
+     *
+     * @access public
+     * @param  array     $projects     Project list: ['project_id' => 'project_name']
+     * @param  integer   $user_id      User id
+     * @return array
+     */
     public function filterListByAccess(array $projects, $user_id)
     {
         foreach ($projects as $project_id => $project_name) {
@@ -222,6 +356,13 @@ class Project extends Base
         return $projects;
     }
 
+    /**
+     * Create a project
+     *
+     * @access public
+     * @param  array    $values   Form values
+     * @return integer            Project id
+     */
     public function create(array $values)
     {
         $this->db->startTransaction();
@@ -248,16 +389,37 @@ class Project extends Base
         return (int) $project_id;
     }
 
+    /**
+     * Update a project
+     *
+     * @access public
+     * @param  array    $values    Form values
+     * @return bool
+     */
     public function update(array $values)
     {
         return $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
     }
 
+    /**
+     * Remove a project
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return bool
+     */
     public function remove($project_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $project_id)->remove();
     }
 
+    /**
+     * Enable a project
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return bool
+     */
     public function enable($project_id)
     {
         return $this->db
@@ -266,6 +428,13 @@ class Project extends Base
                     ->save(array('is_active' => 1));
     }
 
+    /**
+     * Disable a project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return bool
+     */
     public function disable($project_id)
     {
         return $this->db
@@ -274,6 +443,13 @@ class Project extends Base
                     ->save(array('is_active' => 0));
     }
 
+    /**
+     * Validate project creation
+     *
+     * @access public
+     * @param  array   $array            Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
     public function validateCreation(array $values)
     {
         $v = new Validator($values, array(
@@ -288,6 +464,13 @@ class Project extends Base
         );
     }
 
+    /**
+     * Validate project modification
+     *
+     * @access public
+     * @param  array   $array            Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
     public function validateModification(array $values)
     {
         $v = new Validator($values, array(
@@ -304,6 +487,13 @@ class Project extends Base
         );
     }
 
+    /**
+     * Validate allowed users
+     *
+     * @access public
+     * @param  array   $array            Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
     public function validateUserAccess(array $values)
     {
         $v = new Validator($values, array(
