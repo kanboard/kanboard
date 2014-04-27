@@ -26,6 +26,57 @@ class Project extends Base
     }
 
     /**
+     * Task search for a given project
+     *
+     * @access public
+     */
+    public function search()
+    {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $search = $this->request->getStringParam('search');
+
+        $project = $this->project->getById($project_id);
+        $tasks = array();
+        $nb_tasks = 0;
+
+        if (! $project) {
+            $this->session->flashError(t('Project not found.'));
+            $this->response->redirect('?controller=project');
+        }
+
+        $this->checkProjectPermissions($project['id']);
+
+        if ($search !== '') {
+
+            $filters = array(
+                array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id),
+                'or' => array(
+                    array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
+                    array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
+                )
+            );
+
+            $tasks = $this->task->find($filters);
+            $nb_tasks = count($tasks);
+        }
+
+        $this->response->html($this->template->layout('project_search', array(
+            'tasks' => $tasks,
+            'nb_tasks' => $nb_tasks,
+            'values' => array(
+                'search' => $search,
+                'controller' => 'project',
+                'action' => 'search',
+                'project_id' => $project['id'],
+            ),
+            'menu' => 'projects',
+            'project' => $project,
+            'columns' => $this->board->getColumnsList($project_id),
+            'title' => $project['name'].($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
+        )));
+    }
+
+    /**
      * List of completed tasks for a given project
      *
      * @access public

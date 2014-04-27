@@ -152,8 +152,21 @@ class Task extends Base
                     )
                     ->join('users', 'id', 'owner_id');
 
-        foreach ($filters as $filter) {
-            $table->$filter['operator']($filter['column'], $filter['value']);
+        foreach ($filters as $key => $filter) {
+
+            if ($key === 'or') {
+
+                $table->beginOr();
+
+                foreach ($filter as $subfilter) {
+                    $table->$subfilter['operator']($subfilter['column'], $subfilter['value']);
+                }
+
+                $table->closeOr();
+            }
+            else if (isset($filter['operator']) && isset($filter['column']) && isset($filter['value'])) {
+                $table->$filter['operator']($filter['column'], $filter['value']);
+            }
         }
 
         if (empty($sorting)) {

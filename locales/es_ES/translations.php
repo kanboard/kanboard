@@ -283,4 +283,10 @@ return array(
     // 'Filter by user' => '',
     // 'Filter by due date' => ',
     // 'Everybody' => '',
+    // 'Open' => '',
+    // 'Closed' => '',
+    // 'Search' => '',
+    // 'Nothing found.' => '',
+    // 'Search in the project "%s"' => '',
+    // 'Due date' => '',
 );

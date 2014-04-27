@@ -13,8 +13,8 @@ class TaskTest extends Base
         $p = new Project($this->db, $this->event);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
-        $this->assertEquals(1, $t->create(array('title' => 'test a', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
-        $this->assertEquals(2, $t->create(array('title' => 'test b', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2)));
+        $this->assertEquals(1, $t->create(array('title' => 'test a', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1, 'description' => 'biloute')));
+        $this->assertEquals(2, $t->create(array('title' => 'test b', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2, 'description' => 'toto et titi sont dans un bateau')));
 
         $tasks = $t->find(array(array('column' => 'project_id', 'operator' => 'eq', 'value' => '1')));
         $this->assertEquals(2, count($tasks));
@@ -34,6 +34,45 @@ class TaskTest extends Base
         ));
         $this->assertEquals(1, count($tasks));
         $this->assertEquals(2, $tasks[0]['id']);
+
+        // Condition with OR
+        $search = 'bateau';
+        $filters = array(
+            array('column' => 'project_id', 'operator' => 'eq', 'value' => 1),
+            'or' => array(
+                array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
+                array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
+            )
+        );
+
+        $tasks = $t->find($filters);
+        $this->assertEquals(1, count($tasks));
+        $this->assertEquals(2, $tasks[0]['id']);
+
+        $search = 'toto et titi';
+        $filters = array(
+            array('column' => 'project_id', 'operator' => 'eq', 'value' => 1),
+            'or' => array(
+                array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
+                array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
+            )
+        );
+
+        $tasks = $t->find($filters);
+        $this->assertEquals(1, count($tasks));
+        $this->assertEquals(2, $tasks[0]['id']);
+
+        $search = 'john';
+        $filters = array(
+            array('column' => 'project_id', 'operator' => 'eq', 'value' => 1),
+            'or' => array(
+                array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
+                array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
+            )
+        );
+
+        $tasks = $t->find($filters);
+        $this->assertEquals(0, count($tasks));
     }
 
     public function testDateFormat()

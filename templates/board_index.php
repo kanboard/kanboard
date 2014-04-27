@@ -22,6 +22,7 @@
                 <?= Helper\form_select('user_id', $users, $filters) ?>
             </li>
             <li><a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a></li>
+            <li><a href="?controller=project&amp;action=search&amp;project_id=<?= $current_project_id ?>"><?= t('Search') ?></a></li>
             <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $current_project_id ?>"><?= t('Completed tasks') ?></a></li>
         </ul>
     </div>

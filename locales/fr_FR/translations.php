@@ -283,4 +283,10 @@ return array(
     'Filter by user' => 'Filtrer par utilisateur',
     'Filter by due date' => 'Filtrer par date d\'échéance',
     'Everybody' => 'Tout le monde',
+    'Open' => 'Ouvert',
+    'Closed' => 'Fermé',
+    'Search' => 'Rechercher',
+    'Nothing found.' => 'Rien trouvé.',
+    'Search in the project "%s"' => 'Rechercher dans le projet « %s »',
+    'Due date' => 'Date d\'échéance',
 );

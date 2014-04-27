@@ -1,16 +1,29 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= t('Completed tasks for "%s"', $project['name']) ?><span id="page-counter"> (<?= $nb_tasks ?>)</span></h2>
+        <h2>
+            <?= t('Search in the project "%s"', $project['name']) ?>
+            <?php if (! empty($nb_tasks)): ?>
+                <span id="page-counter"> (<?= $nb_tasks ?>)</span>
+            <?php endif ?>
+        </h2>
         <ul>
             <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('Back to the board') ?></a></li>
-            <li><a href="?controller=project&amp;action=search&amp;project_id=<?= $project['id'] ?>"><?= t('Search') ?></a></li>
+            <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $project['id'] ?>"><?= t('Completed tasks') ?></a></li>
             <li><a href="?controller=project&amp;action=index"><?= t('List of projects') ?></a></li>
         </ul>
     </div>
     <section>
-    <?php if (empty($tasks)): ?>
-        <p class="alert"><?= t('No task') ?></p>
-    <?php else: ?>
+    <form method="get" action="?" autocomplete="off">
+        <?= Helper\form_hidden('controller', $values) ?>
+        <?= Helper\form_hidden('action', $values) ?>
+        <?= Helper\form_hidden('project_id', $values) ?>
+        <?= Helper\form_text('search', $values, array(), array('autofocus', 'required', 'placeholder="'.t('Search').'"')) ?>
+        <input type="submit" value="<?= t('Search') ?>" class="btn btn-blue"/>
+    </form>
+
+    <?php if (empty($tasks) && ! empty($values['search'])): ?>
+        <p class="alert"><?= t('Nothing found.') ?></p>
+    <?php elseif (! empty($tasks)): ?>
         <table>
             <tr>
                 <th><?= t('Id') ?></th>
@@ -20,6 +33,7 @@
                 <th><?= t('Due date') ?></th>
                 <th><?= t('Date created') ?></th>
                 <th><?= t('Date completed') ?></th>
+                <th><?= t('Status') ?></th>
             </tr>
             <?php foreach ($tasks as $task): ?>
             <tr>
@@ -50,9 +64,17 @@
                         <?= dt('%B %e, %G at %k:%M %p', $task['date_completed']) ?>
                     <?php endif ?>
                 </td>
+                <td>
+                    <?php if ($task['is_active'] == \Model\Task::STATUS_OPEN): ?>
+                        <?= t('Open') ?>
+                    <?php else: ?>
+                        <?= t('Closed') ?>
+                    <?php endif ?>
+                </td>
             </tr>
             <?php endforeach ?>
         </table>
     <?php endif ?>
+
     </section>
 </section>

@@ -52,6 +52,10 @@ namespace Translator {
 
     function datetime($format, $timestamp)
     {
+        if (! $timestamp) {
+            return '';
+        }
+
         return strftime(get($format, $format), (int) $timestamp);
     }
 
