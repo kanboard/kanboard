@@ -12,6 +12,11 @@ Official website: <http://kanboard.net>
 - Open source and self-hosted
 - Super simple installation
 
+
+[![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fguillot/kanboard/badges/quality-score.png?s=2b6490781608657cc8c43d02285bfafb4f489528)](https://scrutinizer-ci.com/g/fguillot/kanboard/)
+
 Features
 --------
 
@@ -35,8 +40,6 @@ Known bugs
 ----------
 
 See Issues: <https://github.com/fguillot/kanboard/issues>
-
-[![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
 
 License
 -------
