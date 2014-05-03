@@ -25,8 +25,7 @@ class Task extends Base
             $this->response->text('Not Authorized', 401);
         }
 
-        $projectModel = new \Model\Project;
-        $defaultProject = $projectModel->getFirst();
+        $defaultProject = $this->project->getFirst();
 
         $values = array(
             'title' => $this->request->getStringParam('title'),
@@ -38,8 +37,7 @@ class Task extends Base
         );
 
         if ($values['column_id'] == 0) {
-            $boardModel = new \Model\Board;
-            $values['column_id'] = $boardModel->getFirstColumn($values['project_id']);
+            $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
         }
 
         list($valid,) = $this->task->validateCreation($values);
