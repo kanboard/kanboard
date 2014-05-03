@@ -43,7 +43,7 @@
             </nav>
         </header>
         <section class="page">
-            <?= Helper\flash('<div class="alert alert-success">%s</div>') ?>
+            <?= Helper\flash('<div class="alert alert-success alert-fade-out">%s</div>') ?>
             <?= Helper\flash_error('<div class="alert alert-error">%s</div>') ?>
             <?= $content_for_layout ?>
          </section>

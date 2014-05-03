@@ -239,6 +239,38 @@ input.form-date {
     border-radius: 4px;
 }
 
+.alert-fade-out {
+    animation: fadeOut 1s forwards;
+    -webkit-animation: fadeOut 1s forwards;
+    animation-delay: 7s;
+    -webkit-animation-delay: 7s;
+    cursor: pointer;
+}
+
+@-webkit-keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+        height: 0;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+        height: 0;
+    }
+}
+
 .alert-success {
     color: #468847;
     background-color: #dff0d8;
