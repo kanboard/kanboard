@@ -91,11 +91,15 @@
                                 </div>
                                 <?php endif ?>
 
-                                <?php if (! empty($task['nb_comments'])): ?>
-                                <div class="task-comment-counter">
-                                    <?= $task['nb_comments'] ?>
+                                <div class="task-icons">
+                                    <?php if (! empty($task['nb_comments'])): ?>
+                                        <?= $task['nb_comments'] ?> <i class="fa fa-comment-o" title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>"></i>
+                                    <?php endif ?>
+
+                                    <?php if (! empty($task['description'])): ?>
+                                        <i class="fa fa-file-text-o" title="<?= t('Description') ?>"></i>
+                                    <?php endif ?>
                                 </div>
-                                <?php endif ?>
                             </div>
                         </div>
                     </div>

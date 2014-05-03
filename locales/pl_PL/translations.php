@@ -295,4 +295,7 @@ return array(
     // 'Search in the project "%s"' => '',
     // 'Due date' => '',
     // 'Others formats accepted: %s and %s' => '',
+    // 'Description' => '',
+    // '%d comments' => '',
+    // '%d comment' => '',
 );

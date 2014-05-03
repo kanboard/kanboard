@@ -493,7 +493,7 @@ a.filter-on {
     color: #D90000;
 }
 
-.task-comment-counter {
+.task-icons {
     position: absolute;
     bottom: 0;
     right: 5px;
@@ -563,6 +563,11 @@ div.task .task-score {
     font-size: 1.5em;
     right: 5px;
     top: 0;
+}
+
+.task-table-icons {
+    float: right ;
+    text-align: right;
 }
 
 /* task view */

@@ -290,4 +290,7 @@ return array(
     'Search in the project "%s"' => 'Rechercher dans le projet « %s »',
     'Due date' => 'Date d\'échéance',
     'Others formats accepted: %s and %s' => 'Autres formats acceptés : %s et %s',
+    'Description' => 'Description',
+    '%d comments' => '%d commentaires',
+    '%d comment' => '%d commentaire',
 );

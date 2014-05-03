@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="assets/css/app.css" media="screen">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css" media="screen">
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
         <link rel="apple-touch-icon" sizes="72x72" href="assets/img/touch-icon-ipad.png">
@@ -36,7 +37,7 @@
                     </li>
                     <li>
                         <a href="?controller=user&amp;action=logout"><?= t('Logout') ?></a>
-                        (<?= Helper\escape($_SESSION['user']['username']) ?>)
+                        (<?= Helper\escape(Helper\get_username()) ?>)
                     </li>
                 </ul>
             </nav>

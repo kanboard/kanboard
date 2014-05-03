@@ -31,6 +31,15 @@
                 </td>
                 <td>
                     <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>
+                    <div class="task-table-icons">
+                        <?php if (! empty($task['nb_comments'])): ?>
+                            <?= $task['nb_comments'] ?> <i class="fa fa-comment-o" title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>"></i>
+                        <?php endif ?>
+
+                        <?php if (! empty($task['description'])): ?>
+                            <i class="fa fa-file-text-o" title="<?= t('Description') ?>"></i>
+                        <?php endif ?>
+                    </div>
                 </td>
                 <td>
                     <?php if ($task['username']): ?>

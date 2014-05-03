@@ -123,4 +123,8 @@ namespace {
     function dt() {
         return call_user_func_array('\Translator\datetime', func_get_args());
     }
+
+    function p($value, $t1, $t2) {
+        return $value > 1 ? $t2 : $t1;
+    }
 }

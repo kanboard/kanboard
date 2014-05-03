@@ -139,6 +139,7 @@ class Task extends Base
                         '(SELECT count(*) FROM comments WHERE task_id=tasks.id) AS nb_comments',
                         'tasks.id',
                         'tasks.title',
+                        'tasks.description',
                         'tasks.date_creation',
                         'tasks.date_completed',
                         'tasks.date_due',
