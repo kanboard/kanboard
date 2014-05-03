@@ -21,7 +21,7 @@
             <?php foreach ($users as $user): ?>
             <tr>
                 <td>
-                    <?= Helper\escape($user['username']) ?>
+                    <span title="user_id=<?= $user['id'] ?>"><?= Helper\escape($user['username']) ?></span>
                 </td>
                 <td>
                     <?= $user['is_admin'] ? t('Yes') : t('No') ?>

@@ -198,9 +198,9 @@ function form_checkbox($name, $label, $value, $checked = false, $class = '')
     return '<label><input type="checkbox" name="'.$name.'" class="'.$class.'" value="'.escape($value).'" '.($checked ? 'checked="checked"' : '').'>&nbsp;'.escape($label).'</label>';
 }
 
-function form_label($label, $name, $class = '')
+function form_label($label, $name, array $attributes = array())
 {
-    return '<label for="form-'.$name.'" class="'.$class.'">'.escape($label).'</label>';
+    return '<label for="form-'.$name.'" '.implode(' ', $attributes).'>'.escape($label).'</label>';
 }
 
 function form_textarea($name, $values = array(), array $errors = array(), array $attributes = array(), $class = '')

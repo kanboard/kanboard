@@ -20,7 +20,7 @@
             </tr>
             <?php foreach ($columns as $column): ?>
             <tr>
-                <td><?= Helper\form_label(t('Column %d', ++$i), 'title['.$column['id'].']') ?></td>
+                <td><?= Helper\form_label(t('Column %d', ++$i), 'title['.$column['id'].']', array('title="column_id='.$column['id'].'"')) ?></td>
                 <td><?= Helper\form_text('title['.$column['id'].']', $values, $errors, array('required')) ?></td>
                 <td><?= Helper\form_number('task_limit['.$column['id'].']', $values, $errors, array('placeholder="'.t('limit').'"')) ?></td>
                 <td>

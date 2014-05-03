@@ -25,7 +25,7 @@
             <?php foreach ($projects as $project): ?>
             <tr>
                 <td>
-                    <a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= Helper\escape($project['name']) ?></a>
+                    <a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>" title="project_id=<?= $project['id'] ?>"><?= Helper\escape($project['name']) ?></a>
                 </td>
                 <td>
                     <?= $project['is_active'] ? t('Active') : t('Inactive') ?>
@@ -51,7 +51,7 @@
                     <ul>
                     <?php foreach ($project['columns'] as $column): ?>
                         <li>
-                            <?= Helper\escape($column['title']) ?> (<?= $column['nb_active_tasks'] ?>)
+                            <span title="column_id=<?= $column['id'] ?>"><?= Helper\escape($column['title']) ?></span> (<?= $column['nb_active_tasks'] ?>)
                         </li>
                     <?php endforeach ?>
                     </ul>
