@@ -12,7 +12,6 @@ Official website: <http://kanboard.net>
 - Open source and self-hosted
 - Super simple installation
 
-
 [![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fguillot/kanboard/badges/quality-score.png?s=2b6490781608657cc8c43d02285bfafb4f489528)](https://scrutinizer-ci.com/g/fguillot/kanboard/)
@@ -25,6 +24,7 @@ Features
 - Tasks with different colors, Markdown support for the description
 - Automatic actions
 - Users management with a basic privileges separation (administrator or regular user)
+- External authentication: Google Account and LDAP/ActiveDirectory
 - Webhooks to create tasks from an external software
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
@@ -68,25 +68,37 @@ There is also many people who have reported bugs or proposed awesome ideas.
 Documentation
 -------------
 
-### Technical details
-
-- [Installation instructions](docs/installation.markdown)
-- [Installation on Ubuntu](docs/ubuntu-installation.markdown)
-- [Installation on Debian](docs/debian-installation.markdown)
-- [Installation on Centos](docs/centos-installation.markdown)
-- [Upgrade Kanboard to a new version](docs/update.markdown)
-- [Sqlite database management](docs/sqlite-database.markdown)
-- [How to use Mysql instead of Sqlite](docs/mysql-configuration.markdown)
-- [LDAP authentication](docs/ldap-authentication.markdown)
-- [How to use Kanboard with Vagrant](docs/vagrant.markdown)
-- [Webhooks](docs/webhooks.markdown)
-
 ### Using Kanboard
 
 - [Usage examples](docs/usage-examples.markdown)
 - [Manage users](docs/manage-users.markdown)
 - [Syntax guide](docs/syntax-guide.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
+
+### Technical details
+
+#### Installation
+
+- [Installation instructions](docs/installation.markdown)
+- [Installation on Ubuntu](docs/ubuntu-installation.markdown)
+- [Installation on Debian](docs/debian-installation.markdown)
+- [Installation on Centos](docs/centos-installation.markdown)
+- [Upgrade Kanboard to a new version](docs/update.markdown)
+
+#### Database
+
+- [Sqlite database management](docs/sqlite-database.markdown)
+- [How to use Mysql instead of Sqlite](docs/mysql-configuration.markdown)
+
+#### Authentication
+
+- [LDAP authentication](docs/ldap-authentication.markdown)
+- [Google authentication](docs/google-authentication.markdown)
+
+#### Developers
+
+- [How to use Kanboard with Vagrant](docs/vagrant.markdown)
+- [Webhooks](docs/webhooks.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.
