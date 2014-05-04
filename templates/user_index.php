@@ -14,6 +14,8 @@
         <table>
             <tr>
                 <th><?= t('Username') ?></th>
+                <th><?= t('Name') ?></th>
+                <th><?= t('Email') ?></th>
                 <th><?= t('Administrator') ?></th>
                 <th><?= t('Default Project') ?></th>
                 <th><?= t('Actions') ?></th>
@@ -22,6 +24,12 @@
             <tr>
                 <td>
                     <span title="user_id=<?= $user['id'] ?>"><?= Helper\escape($user['username']) ?></span>
+                </td>
+                <td>
+                    <?= Helper\escape($user['name']) ?>
+                </td>
+                <td>
+                    <?= Helper\escape($user['email']) ?>
                 </td>
                 <td>
                     <?= $user['is_admin'] ? t('Yes') : t('No') ?>

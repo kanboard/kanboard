@@ -42,6 +42,18 @@ class User extends Base
     }
 
     /**
+     * Get a specific user by the Google id
+     *
+     * @access public
+     * @param  string  $google_id  Google unique id
+     * @return array
+     */
+    public function getByGoogleId($google_id)
+    {
+        return $this->db->table(self::TABLE)->eq('google_id', $google_id)->findOne();
+    }
+
+    /**
      * Get a specific user by the username
      *
      * @access public
@@ -64,7 +76,7 @@ class User extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->asc('username')
-                    ->columns('id', 'username', 'is_admin', 'default_project_id', 'is_ldap_user')
+                    ->columns('id', 'username', 'name', 'email', 'is_admin', 'default_project_id', 'is_ldap_user')
                     ->findAll();
     }
 
@@ -115,8 +127,13 @@ class User extends Base
             unset($values['password']);
         }
 
-        if (isset($values['confirmation'])) unset($values['confirmation']);
-        if (isset($values['current_password'])) unset($values['current_password']);
+        if (isset($values['confirmation'])) {
+            unset($values['confirmation']);
+        }
+
+        if (isset($values['current_password'])) {
+            unset($values['current_password']);
+        }
 
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
@@ -191,6 +208,7 @@ class User extends Base
             new Validators\Equals('password', 'confirmation', t('Passwords doesn\'t matches')),
             new Validators\Integer('default_project_id', t('This value must be an integer')),
             new Validators\Integer('is_admin', t('This value must be an integer')),
+            new Validators\Email('email', t('Email address invalid')),
         ));
 
         return array(
@@ -220,6 +238,7 @@ class User extends Base
             new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
             new Validators\Integer('default_project_id', t('This value must be an integer')),
             new Validators\Integer('is_admin', t('This value must be an integer')),
+            new Validators\Email('email', t('Email address invalid')),
         ));
 
         return array(
@@ -250,6 +269,7 @@ class User extends Base
             new Validators\Equals('password', 'confirmation', t('Passwords doesn\'t matches')),
             new Validators\Integer('default_project_id', t('This value must be an integer')),
             new Validators\Integer('is_admin', t('This value must be an integer')),
+            new Validators\Email('email', t('Email address invalid')),
         ));
 
         if ($v->execute()) {

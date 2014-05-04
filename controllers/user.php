@@ -248,4 +248,65 @@ class User extends Base
 
         $this->response->redirect('?controller=user');
     }
+
+    /**
+     * Google authentication
+     *
+     * @access public
+     */
+    public function google()
+    {
+        $code = $this->request->getStringParam('code');
+
+        if ($code) {
+
+            $profile = $this->google->getGoogleProfile($code);
+
+            if (is_array($profile)) {
+
+                // If the user is already logged, link the account otherwise authenticate
+                if ($this->acl->isLogged()) {
+
+                    if ($this->google->updateUser($this->acl->getUserId(), $profile)) {
+                        $this->session->flash(t('Your Google Account is linked to your profile successfully.'));
+                    }
+                    else {
+                        $this->session->flashError(t('Unable to link your Google Account.'));
+                    }
+
+                    $this->response->redirect('?controller=user');
+                }
+                else if ($this->google->authenticate($profile['id'])) {
+                    $this->response->redirect('?controller=app');
+                }
+                else {
+                    $this->response->html($this->template->layout('user_login', array(
+                        'errors' => array('login' => t('Google authentication failed')),
+                        'values' => array(),
+                        'no_layout' => true,
+                        'title' => t('Login')
+                    )));
+                }
+            }
+        }
+
+        $this->response->redirect($this->google->getAuthorizationUrl());
+    }
+
+    /**
+     * Unlink a Google account
+     *
+     * @access public
+     */
+    public function unlinkGoogle()
+    {
+        if ($this->google->unlink($this->acl->getUserId())) {
+            $this->session->flash(t('Your Google Account is not linked anymore to your profile.'));
+        }
+        else {
+            $this->session->flashError(t('Unable to unlink your Google Account.'));
+        }
+
+        $this->response->redirect('?controller=user');
+    }
 }

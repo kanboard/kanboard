@@ -31,3 +31,12 @@ define('LDAP_PORT', 389);
 // Example for ActiveDirectory: 'MYDOMAIN\\%s' or '%s@mydomain.local'
 // Example for OpenLDAP: 'uid=%s,ou=People,dc=example,dc=com'
 define('LDAP_USER_DN', '%s');
+
+// Enable/disable Google authentication
+define('GOOGLE_AUTH', false);
+
+// Google client id (Get this value from the Google developer console)
+define('GOOGLE_CLIENT_ID', '');
+
+// Google client secret key (Get this value from the Google developer console)
+define('GOOGLE_CLIENT_SECRET', '');

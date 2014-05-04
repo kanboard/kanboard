@@ -11,6 +11,12 @@
         <?= Helper\form_label(t('Username'), 'username') ?>
         <?= Helper\form_text('username', $values, $errors, array('autofocus', 'required')) ?><br/>
 
+        <?= Helper\form_label(t('Name'), 'name') ?>
+        <?= Helper\form_text('name', $values, $errors) ?><br/>
+
+        <?= Helper\form_label(t('Email'), 'email') ?>
+        <?= Helper\form_email('email', $values, $errors) ?><br/>
+
         <?= Helper\form_label(t('Password'), 'password') ?>
         <?= Helper\form_password('password', $values, $errors, array('required')) ?><br/>
 

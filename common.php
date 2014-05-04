@@ -6,7 +6,7 @@ require __DIR__.'/core/translator.php';
 
 $registry = new Core\Registry;
 
-$registry->db_version = 13;
+$registry->db_version = 14;
 
 $registry->db = function() use ($registry) {
     require __DIR__.'/vendor/PicoDb/Database.php';
@@ -105,6 +105,11 @@ $registry->lastLogin = function() use ($registry) {
     return new \Model\LastLogin($registry->shared('db'), $registry->shared('event'));
 };
 
+$registry->google = function() use ($registry) {
+    require_once __DIR__.'/models/google.php';
+    return new \Model\Google($registry->shared('db'), $registry->shared('event'));
+};
+
 if (file_exists('config.php')) require 'config.php';
 
 // Auto-refresh frequency in seconds for the public board view
@@ -136,3 +141,8 @@ defined('LDAP_AUTH') or define('LDAP_AUTH', false);
 defined('LDAP_SERVER') or define('LDAP_SERVER', '');
 defined('LDAP_PORT') or define('LDAP_PORT', 389);
 defined('LDAP_USER_DN') or define('LDAP_USER_DN', '%s');
+
+// Google authentication
+defined('GOOGLE_AUTH') or define('GOOGLE_AUTH', false);
+defined('GOOGLE_CLIENT_ID') or define('GOOGLE_CLIENT_ID', '');
+defined('GOOGLE_CLIENT_SECRET') or define('GOOGLE_CLIENT_SECRET', '');

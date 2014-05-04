@@ -19,7 +19,7 @@ class Acl extends Base
      * @var array
      */
     private $public_actions = array(
-        'user' => array('login', 'check'),
+        'user' => array('login', 'check', 'google'),
         'task' => array('add'),
         'board' => array('readonly'),
     );
@@ -36,7 +36,7 @@ class Acl extends Base
         'project' => array('tasks', 'index', 'forbidden'),
         'task' => array('show', 'create', 'save', 'edit', 'update', 'close', 'confirmclose', 'open', 'confirmopen', 'description', 'duplicate'),
         'comment' => array('save', 'confirm', 'remove', 'update', 'edit'),
-        'user' => array('index', 'edit', 'update', 'forbidden', 'logout', 'index'),
+        'user' => array('index', 'edit', 'update', 'forbidden', 'logout', 'index', 'unlinkgoogle'),
         'config' => array('index', 'removeremembermetoken'),
     );
 

@@ -265,7 +265,7 @@
                 item.style.opacity = "1.0";
             }
 
-            if (filterDueDate && dueDate == "") {
+            if (filterDueDate && (dueDate == "" || dueDate == "0")) {
                 item.style.opacity = "0.2";
             }
         });

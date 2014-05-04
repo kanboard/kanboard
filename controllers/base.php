@@ -11,6 +11,102 @@ namespace Controller;
 abstract class Base
 {
     /**
+     * Acl model
+     *
+     * @accesss protected
+     * @var \Model\Acl
+     */
+    protected $acl;
+
+    /**
+     * Action model
+     *
+     * @accesss protected
+     * @var \Model\Action
+     */
+    protected $action;
+
+    /**
+     * Board model
+     *
+     * @accesss protected
+     * @var \Model\Board
+     */
+    protected $board;
+
+    /**
+     * Config model
+     *
+     * @accesss protected
+     * @var \Model\Config
+     */
+    protected $config;
+
+    /**
+     * Project model
+     *
+     * @accesss protected
+     * @var \Model\Project
+     */
+    protected $project;
+
+    /**
+     * Task model
+     *
+     * @accesss protected
+     * @var \Model\Task
+     */
+    protected $task;
+
+    /**
+     * User model
+     *
+     * @accesss protected
+     * @var \Model\User
+     */
+    protected $user;
+
+    /**
+     * Comment model
+     *
+     * @accesss protected
+     * @var \Model\Comment
+     */
+    protected $comment;
+
+    /**
+     * RememberMe model
+     *
+     * @accesss protected
+     * @var \Model\RememberMe
+     */
+    protected $rememberMe;
+
+    /**
+     * LastLogin model
+     *
+     * @accesss protected
+     * @var \Model\LastLogin
+     */
+    protected $lastLogin;
+
+    /**
+     * Google model
+     *
+     * @accesss protected
+     * @var \Model\Google
+     */
+    protected $google;
+
+    /**
+     * Event instance
+     *
+     * @accesss protected
+     * @var \Model\Event
+     */
+    protected $event;
+
+    /**
      * Constructor
      *
      * @access public
@@ -28,6 +124,7 @@ abstract class Base
         $this->comment = $registry->comment;
         $this->rememberMe = $registry->rememberMe;
         $this->lastLogin = $registry->lastLogin;
+        $this->google = $registry->google;
         $this->event = $registry->shared('event');
     }
 

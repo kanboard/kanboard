@@ -2,6 +2,13 @@
 
 namespace Schema;
 
+function version_14($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN name TEXT");
+    $pdo->exec("ALTER TABLE users ADD COLUMN email TEXT");
+    $pdo->exec("ALTER TABLE users ADD COLUMN google_id TEXT");
+}
+
 function version_13($pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN is_ldap_user INTEGER DEFAULT 0");

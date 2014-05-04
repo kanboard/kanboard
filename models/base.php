@@ -13,6 +13,7 @@ require __DIR__.'/../vendor/SimpleValidator/Validators/Equals.php';
 require __DIR__.'/../vendor/SimpleValidator/Validators/AlphaNumeric.php';
 require __DIR__.'/../vendor/SimpleValidator/Validators/GreaterThan.php';
 require __DIR__.'/../vendor/SimpleValidator/Validators/Date.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Email.php';
 
 /**
  * Base model class

@@ -24,7 +24,7 @@ class LastLogin extends Base
      *
      * @var integer
      */
-    const NB_LOGINS = 15;
+    const NB_LOGINS = 10;
 
     /**
      * Authentication methods

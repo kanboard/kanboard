@@ -229,6 +229,11 @@ input.form-date {
     width: 150px;
 }
 
+.form-row {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 /* alerts */
 .alert {
     padding: 8px 35px 8px 14px;
