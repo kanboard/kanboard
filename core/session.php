@@ -20,7 +20,7 @@ class Session
         );
 
         // Avoid session id in the URL
-        ini_set('session.use_only_cookies', true);
+        ini_set('session.use_only_cookies', '1');
 
         // Ensure session ID integrity
         ini_set('session.entropy_file', '/dev/urandom');

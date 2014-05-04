@@ -144,7 +144,9 @@ class Google extends Base
             $googleService->requestAccessToken($code);
             return json_decode($googleService->request('https://www.googleapis.com/oauth2/v1/userinfo'), true);
         }
-        catch (TokenResponseException $e) {}
+        catch (TokenResponseException $e) {
+            return false;
+        }
 
         return false;
     }

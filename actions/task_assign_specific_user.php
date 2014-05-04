@@ -13,6 +13,14 @@ require_once __DIR__.'/base.php';
 class TaskAssignSpecificUser extends Base
 {
     /**
+     * Task model
+     *
+     * @accesss private
+     * @var \Model\Task
+     */
+    private $task;
+
+    /**
      * Constructor
      *
      * @access public

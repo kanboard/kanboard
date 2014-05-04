@@ -11,6 +11,38 @@ namespace Controller;
 abstract class Base
 {
     /**
+     * Request instance
+     *
+     * @accesss public
+     * @var \Core\Request
+     */
+    public $request;
+
+    /**
+     * Response instance
+     *
+     * @accesss public
+     * @var \Core\Response
+     */
+    public $response;
+
+    /**
+     * Template instance
+     *
+     * @accesss public
+     * @var \Core\Template
+     */
+    public $template;
+
+    /**
+     * Session instance
+     *
+     * @accesss public
+     * @var \Core\Session
+     */
+    public $session;
+
+    /**
      * Acl model
      *
      * @accesss protected
