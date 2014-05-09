@@ -110,11 +110,11 @@ td li {
 
 /* forms */
 form {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 15px;
+    padding: 10px;
     margin-bottom: 20px;
-    border-left: 2px dotted #ddd;
+    background: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: 5px;
 }
 
 label {
@@ -133,11 +133,13 @@ input[type="email"],
 input[type="tel"],
 input[type="password"],
 input[type="text"] {
+    color: #888;
     border: 1px solid #ccc;
-    padding: 3px;
-    line-height: 15px;
     width: 400px;
-    font-size: 99%;
+    font-size: 1.0em;
+    height: 25px;
+    padding-bottom: 0;
+    font-family: sans-serif;
     margin-top: 5px;
     -webkit-appearance: none;
     appearance: none;
@@ -162,10 +164,10 @@ input[type="number"] {
 
 textarea {
     border: 1px solid #ccc;
-    padding: 3px;
     width: 400px;
     height: 200px;
-    font-size: 99%;
+    font-size: 1.0em;
+    font-family: sans-serif;
 }
 
 ::-webkit-input-placeholder {
@@ -184,6 +186,7 @@ textarea {
 }
 
 .form-actions {
+    clear: both;
     margin-top: 20px;
 }
 
@@ -232,6 +235,22 @@ input.form-date {
 .form-row {
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.form-column {
+    float: left;
+    margin-bottom: 60px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.form-column:first-child {
+    padding-left: 0;
+}
+
+.form-login {
+    padding-left: 20px;
+    width: 430px;
 }
 
 /* alerts */
