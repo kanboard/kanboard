@@ -1,6 +1,6 @@
 <section id="main">
     <div class="page-header">
-        <h2>#<?= $task['id'] ?> - <?= Helper\escape($task['title']) ?></h2>
+        <h2><?= Helper\escape($task['project_name']) ?> &gt; <?= t('Task #%d', $task['id']) ?></h2>
         <ul>
             <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $task['project_id'] ?>"><?= t('Back to the board') ?></a></li>
         </ul>
@@ -26,8 +26,8 @@
         </div>
 
         <div class="task-show-main">
-            <h2><?= t('Details') ?></h2>
-            <article id="infos" class="task task-<?= $task['color_id'] ?>">
+            <article class="task task-<?= $task['color_id'] ?> task-show-details">
+                <h2><?= Helper\escape($task['title']) ?></h2>
             <?php if ($task['score']): ?>
                 <span class="task-score"><?= Helper\escape($task['score']) ?></span>
             <?php endif ?>
@@ -71,7 +71,7 @@
 
             <h2><?= t('Description') ?></h2>
             <?php if ($task['description']): ?>
-                <article id="description" class="markdown">
+                <article class="markdown task-show-description">
                     <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
                 </article>
             <?php else: ?>
@@ -115,7 +115,6 @@
                 </div>
             </form>
             <?php endif ?>
-
         </div>
 
     </section>

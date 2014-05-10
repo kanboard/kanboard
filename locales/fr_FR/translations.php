@@ -303,5 +303,6 @@ return array(
     'Link my Google Account' => 'Lier mon compte Google',
     'Unlink my Google Account' => 'Ne plus utiliser mon compte Google',
     'Login with my Google Account' => 'Se connecter avec mon compte Google',
-    'Project not found.' => 'Projet introuvable.'
+    'Project not found.' => 'Projet introuvable.',
+    'Task #%d' => 'Tâche n°%d',
 );

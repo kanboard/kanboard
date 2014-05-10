@@ -305,4 +305,5 @@ return array(
     // 'Unlink my Google Account' => '',
     // 'Login with my Google Account' => '',
     // 'Project not found.' => '',
+    // 'Task #%d' => '',
 );

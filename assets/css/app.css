@@ -606,7 +606,6 @@ div.task-title a {
     font-weight: normal;
 }
 
-#infos,
 div.task {
     position: relative;
 }
@@ -628,24 +627,6 @@ div.task .task-score {
 }
 
 /* task view */
-article.task li {
-    margin-left: 20px;
-    list-style-type: square;
-}
-
-article .task-score {
-    font-size: 1.9em;
-    right: 10px;
-    top: 5px;
-}
-
-#description {
-    border: 1px solid #999;
-    border-radius: 5px;
-    background: #f0f0f0;
-    padding: 10px;
-}
-
 .task-show {
     position: relative;
 }
@@ -670,6 +651,38 @@ article .task-score {
     list-style-type: square;
     margin-left: 30px;
     line-height: 1.8em;
+}
+
+.task-show-details {
+    position: relative;
+    border-radius: 5px;
+}
+
+.task-show-details h2 {
+    font-size: 1.8em;
+    margin: 0;
+    margin-bottom: 25px;
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.task-show-details li {
+    margin-left: 25px;
+    list-style-type: circle;
+}
+
+.task-show-details .task-score {
+    font-size: 1.9em;
+    right: 10px;
+    bottom: 5px;
+}
+
+.task-show-description {
+    border: 1px solid #999;
+    border-radius: 5px;
+    background: #f0f0f0;
+    padding: 10px;
 }
 
 /* markdown content */
