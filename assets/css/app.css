@@ -52,7 +52,8 @@ h1, h2, h3 {
 }
 
 h2 {
-    font-size: 1.6em;
+    font-size: 1.3em;
+    margin-bottom: 10px;
 }
 
 h3 {
@@ -112,7 +113,7 @@ td li {
 form {
     padding: 10px;
     margin-bottom: 20px;
-    background: #fcfcfc;
+    background: #fafafa;
     border: 1px solid #eee;
     border-radius: 5px;
 }
@@ -643,6 +644,32 @@ article .task-score {
     border-radius: 5px;
     background: #f0f0f0;
     padding: 10px;
+}
+
+.task-show {
+    position: relative;
+}
+
+.task-show-main {
+    margin-left: 330px;
+}
+
+.task-show-sidebar {
+    position: absolute;
+    left: 0px;
+    top: 0;
+    width: 250px;
+    padding: 10px;
+    padding-top: 0;
+    border: 1px solid #ccc;
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+
+.task-show-sidebar li {
+    list-style-type: square;
+    margin-left: 30px;
+    line-height: 1.8em;
 }
 
 /* markdown content */
