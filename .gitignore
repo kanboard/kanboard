@@ -28,6 +28,11 @@
 *.sqlite
 *.sqlite-journal
 
+# IDE generated files #
+######################
+.buildpath
+.project
+
 # OS generated files #
 ######################
 .DS_Store

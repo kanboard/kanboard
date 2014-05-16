@@ -23,6 +23,13 @@ function get_username()
     return $_SESSION['user']['username'];
 }
 
+function parse($text)
+{
+    $text = markdown($text);
+    $text = preg_replace('!#(\d+)!i', '<a href="?controller=task&action=show&task_id=$1">$0</a>', $text);
+    return $text;
+}
+
 function markdown($text)
 {
     require_once __DIR__.'/../vendor/Michelf/MarkdownExtra.inc.php';
