@@ -72,7 +72,7 @@
             <h2><?= t('Description') ?></h2>
             <?php if ($task['description']): ?>
                 <article class="markdown task-show-description">
-                    <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
+                    <?= Helper\parse($task['description']) ?: t('There is no description.') ?>
                 </article>
             <?php else: ?>
                 <form method="post" action="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
