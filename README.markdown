@@ -58,6 +58,7 @@ Contributors:
 - Matthieu Keller: https://github.com/maggick
 - Maxime: https://github.com/EpocDotFr
 - Nekohayo: https://github.com/nekohayo
+- Olivier Maridat: https://github.com/oliviermaridat
 - Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
 - Sebastien pacilly: https://github.com/spacilly
