@@ -881,8 +881,5 @@ tr td.task-orange,
 /* confirmation box */
 .confirm {
     max-width: 700px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 15px;
-    border-left: 2px dotted #ddd;
+    font-size: 1.1em;
 }

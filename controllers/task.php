@@ -253,7 +253,7 @@ class Task extends Base
             $this->session->flashError(t('Unable to close this task.'));
         }
 
-        $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
     }
 
     /**
@@ -263,12 +263,12 @@ class Task extends Base
      */
     public function confirmClose()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
 
         if (! $task) $this->notfound();
         $this->checkProjectPermissions($task['project_id']);
 
-        $this->response->html($this->template->layout('task_close', array(
+        $this->response->html($this->taskLayout('task_close', array(
             'task' => $task,
             'menu' => 'tasks',
             'title' => t('Close a task')
@@ -293,7 +293,7 @@ class Task extends Base
             $this->session->flashError(t('Unable to open this task.'));
         }
 
-        $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
     }
 
     /**
@@ -303,15 +303,55 @@ class Task extends Base
      */
     public function confirmOpen()
     {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+
+        if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
+
+        $this->response->html($this->taskLayout('task_open', array(
+            'task' => $task,
+            'menu' => 'tasks',
+            'title' => t('Open a task')
+        )));
+    }
+
+    /**
+     * Remove a task
+     *
+     * @access public
+     */
+    public function remove()
+    {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
 
         if (! $task) $this->notfound();
         $this->checkProjectPermissions($task['project_id']);
 
-        $this->response->html($this->template->layout('task_open', array(
+        if ($this->task->remove($task['id'])) {
+            $this->session->flash(t('Task removed successfully.'));
+        } else {
+            $this->session->flashError(t('Unable to remove this task.'));
+        }
+
+        $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
+    }
+
+    /**
+     * Confirmation dialog before removing a task
+     *
+     * @access public
+     */
+    public function confirmRemove()
+    {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+
+        if (! $task) $this->notfound();
+        $this->checkProjectPermissions($task['project_id']);
+
+        $this->response->html($this->taskLayout('task_remove', array(
             'task' => $task,
             'menu' => 'tasks',
-            'title' => t('Open a task')
+            'title' => t('Remove a task')
         )));
     }
 

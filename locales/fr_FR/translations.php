@@ -305,4 +305,8 @@ return array(
     'Login with my Google Account' => 'Se connecter avec mon compte Google',
     'Project not found.' => 'Projet introuvable.',
     'Task #%d' => 'Tâche n°%d',
+    'Task removed successfully.' => 'Tâche supprimée avec succès.',
+    'Unable to remove this task.' => 'Impossible de supprimer cette tâche.',
+    'Remove a task' => 'Supprimer une tâche',
+    'Do you really want to remove this task: "%s"?' => 'Voulez-vous vraiment supprimer cette tâche « %s » ?',
 );

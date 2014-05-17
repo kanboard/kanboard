@@ -306,4 +306,8 @@ return array(
     // 'Login with my Google Account' => '',
     // 'Project not found.' => '',
     // 'Task #%d' => '',
+    // 'Task removed successfully.' => '',
+    // 'Unable to remove this task.' => '',
+    // 'Remove a task' => '',
+    // 'Do you really want to remove this task: "%s"?' => '',
 );

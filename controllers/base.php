@@ -289,7 +289,7 @@ abstract class Base
             $hide_comment_form = true;
         }
 
-        $this->response->html($this->template->layout('task_show', array(
+        $this->response->html($this->taskLayout('task_show', array(
             'hide_comment_form' => isset($hide_comment_form),
             'comment_edit_form' => $comment_edit_form,
             'comment_form' => $comment_form,
@@ -301,5 +301,20 @@ abstract class Base
             'menu' => 'tasks',
             'title' => $task['title'],
         )));
+    }
+
+    /**
+     * Common layout for task views
+     *
+     * @access protected
+     * @param  string   $template   Template name
+     * @param  array    $params     Template parameters
+     */
+    protected function taskLayout($template, array $params)
+    {
+        $content = $this->template->load($template, $params);
+        $params['task_content_for_layout'] = $content;
+
+        return $this->template->layout('task_layout', $params);
     }
 }
