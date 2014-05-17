@@ -5,6 +5,7 @@
     // Setup the board
     function board_load_events()
     {
+        // Drag and drop
         $(".column").sortable({
             connectWith: ".column",
             placeholder: "draggable-placeholder",
@@ -13,6 +14,14 @@
             }
         });
 
+        // Redirect to the task details page
+        $("[data-task-id]").each(function() {
+            $(this).click(function() {
+                window.location = "?controller=task&action=show&task_id=" + $(this).attr("data-task-id");
+            });
+        });
+
+        // Automatic refresh
         var interval = parseInt($("#board").attr("data-check-interval"));
 
         if (interval > 0) {
