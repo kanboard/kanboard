@@ -14,12 +14,8 @@ class Response
      */
     public function status($status_code)
     {
-        if (strpos(php_sapi_name(), 'apache') !== false) {
-            header('HTTP/1.0 '.$status_code);
-        }
-        else {
-            header('Status: '.$status_code);
-        }
+        header('Status: '.$status_code);
+        header($_SERVER['SERVER_PROTOCOL'].' '.$status_code);
     }
 
     public function redirect($url)

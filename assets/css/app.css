@@ -29,7 +29,7 @@ body {
 /* links */
 a {
     color: #3366CC;
-    border: 1px solid rgba(255, 255, 255, 0);
+    border: none;
 }
 
 a:focus {
@@ -121,10 +121,6 @@ label {
     cursor: pointer;
     display: block;
     margin-top: 10px;
-}
-
-input[type="checkbox"] {
-    border: 1px solid #ccc;
 }
 
 input[type="number"],
@@ -574,17 +570,15 @@ td div.over {
 }
 
 .draggable-item {
-    margin-right: 5px;
-    margin-bottom: 10px;
-}
-
-[draggable] {
     cursor: pointer;
     user-select: none;
 }
 
-[draggable=true]:hover {
-    box-shadow: 0 0 3px #333;
+.draggable-placeholder {
+    border: 2px dashed #000;
+    background: #fafafa;
+    height: 70px;
+    margin-bottom: 10px;
 }
 
 tr td.task a,
@@ -607,6 +601,8 @@ div.task-title a {
 
 div.task {
     position: relative;
+    margin-right: 5px;
+    margin-bottom: 10px;
 }
 
 .task-score {

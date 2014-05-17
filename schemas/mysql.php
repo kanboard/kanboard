@@ -2,6 +2,11 @@
 
 namespace Schema;
 
+function version_15($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN last_modified INT DEFAULT 0");
+}
+
 function version_14($pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN name VARCHAR(255)");

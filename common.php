@@ -6,7 +6,7 @@ require __DIR__.'/core/translator.php';
 
 $registry = new Core\Registry;
 
-$registry->db_version = 14;
+$registry->db_version = 15;
 
 $registry->db = function() use ($registry) {
     require __DIR__.'/vendor/PicoDb/Database.php';
@@ -112,8 +112,11 @@ $registry->google = function() use ($registry) {
 
 if (file_exists('config.php')) require 'config.php';
 
-// Auto-refresh frequency in seconds for the public board view
-defined('AUTO_REFRESH_DURATION') or define('AUTO_REFRESH_DURATION', 60);
+// Board refresh frequency in seconds for the public board view
+defined('BOARD_PUBLIC_CHECK_INTERVAL') or define('BOARD_PUBLIC_CHECK_INTERVAL', 60);
+
+// Board refresh frequency in seconds (the value 0 disable this feature)
+defined('BOARD_CHECK_INTERVAL') or define('BOARD_CHECK_INTERVAL', 10);
 
 // Custom session save path
 defined('SESSION_SAVE_PATH') or define('SESSION_SAVE_PATH', '');

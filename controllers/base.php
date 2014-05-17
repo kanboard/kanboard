@@ -212,8 +212,9 @@ abstract class Base
             $this->response->redirect('?controller=user&action=forbidden');
         }
 
-        // Attach events for automatic actions
+        // Attach events
         $this->action->attachEvents();
+        $this->project->attachEvents();
     }
 
     /**

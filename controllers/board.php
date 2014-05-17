@@ -174,20 +174,13 @@ class Board extends Base
             $this->notfound();
         }
 
-        $filters = array();
-        $users = $this->project->getUsersList($project_id, true, true);
-
-        if ($user_id !== \Model\User::EVERYBODY_ID && in_array($user_id, array_keys($users))) {
-            $filters[] = array('column' => 'owner_id', 'operator' => 'eq', 'value' => $user_id);
-        }
-
         $this->response->html($this->template->layout('board_index', array(
-            'users' => $users,
+            'users' => $this->project->getUsersList($project_id, true, true),
             'filters' => array('user_id' => $user_id),
             'projects' => $projects,
             'current_project_id' => $project_id,
             'current_project_name' => $projects[$project_id],
-            'columns' => $this->board->get($project_id, $filters),
+            'board' => $this->board->get($project_id),
             'menu' => 'boards',
             'title' => $projects[$project_id]
         )));
@@ -351,14 +344,43 @@ class Board extends Base
     public function save()
     {
         $project_id = $this->request->getIntegerParam('project_id');
+        $values = $this->request->getValues();
 
         if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
-            $this->response->json(array('result' => false), 401);
+            $this->response->text('Not Authorized', 401);
         }
 
-        $this->response->json(array(
-            'result' => $this->board->saveTasksPosition($this->request->getValues()),
-            'refresh' => $this->event->getLastListenerExecuted() !== ''
-        ));
+        if (isset($values['positions'])) {
+            $this->board->saveTasksPosition($values['positions']);
+        }
+
+        $this->response->html(
+            $this->template->load('board_show', array('current_project_id' => $project_id, 'board' => $this->board->get($project_id))),
+            201
+        );
+    }
+
+    /**
+     * Check if the board have been changed
+     *
+     * @access public
+     */
+    public function check()
+    {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $timestamp = $this->request->getIntegerParam('timestamp');
+
+        if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+            $this->response->text('Not Authorized', 401);
+        }
+
+        if ($this->project->isModifiedSince($project_id, $timestamp)) {
+            $this->response->html(
+                $this->template->load('board_show', array('current_project_id' => $project_id, 'board' => $this->board->get($project_id)))
+            );
+        }
+        else {
+            $this->response->status(304);
+        }
     }
 }

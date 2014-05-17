@@ -6,9 +6,11 @@ require_once __DIR__.'/base.php';
 require_once __DIR__.'/acl.php';
 require_once __DIR__.'/board.php';
 require_once __DIR__.'/task.php';
+require_once __DIR__.'/../events/task_modification.php';
 
 use \SimpleValidator\Validator;
 use \SimpleValidator\Validators;
+use \Event\TaskModification;
 
 /**
  * Project model
@@ -390,6 +392,36 @@ class Project extends Base
     }
 
     /**
+     * Check if the project have been modified
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @param  integer   $timestamp     Timestamp
+     * @return bool
+     */
+    public function isModifiedSince($project_id, $timestamp)
+    {
+        return (bool) $this->db->table(self::TABLE)
+                                ->eq('id', $project_id)
+                                ->gt('last_modified', $timestamp)
+                                ->count();
+    }
+
+    /**
+     * Update modification date
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return bool
+     */
+    public function updateModificationDate($project_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $project_id)->save(array(
+            'last_modified' => time()
+        ));
+    }
+
+    /**
      * Update a project
      *
      * @access public
@@ -507,5 +539,26 @@ class Project extends Base
             $v->execute(),
             $v->getErrors()
         );
+    }
+
+    /**
+     * Attach events
+     *
+     * @access public
+     */
+    public function attachEvents()
+    {
+        $events = array(
+            Task::EVENT_UPDATE,
+            Task::EVENT_CREATE,
+            Task::EVENT_CLOSE,
+            Task::EVENT_OPEN,
+        );
+
+        $listener = new TaskModification($this);
+
+        foreach ($events as $event_name) {
+            $this->event->attach($event_name, $listener);
+        }
     }
 }
