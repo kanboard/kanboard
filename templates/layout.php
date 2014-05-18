@@ -2,18 +2,24 @@
 <html>
     <head>
         <meta charset="utf-8">
+
         <meta name="viewport" content="width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
         <script src="assets/js/jquery-1.11.1.min.js"></script>
         <script src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
         <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+
         <link rel="stylesheet" href="assets/css/app.css" media="screen">
         <link rel="stylesheet" href="assets/css/font-awesome.min.css" media="screen">
+
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
         <link rel="apple-touch-icon" sizes="72x72" href="assets/img/touch-icon-ipad.png">
         <link rel="apple-touch-icon" sizes="114x114" href="assets/img/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="144x144" href="assets/img/touch-icon-ipad-retina.png">
+
         <title><?= isset($title) ? Helper\escape($title).' - Kanboard' : 'Kanboard' ?></title>
         <?php if (isset($auto_refresh)): ?>
             <meta http-equiv="refresh" content="<?= BOARD_PUBLIC_CHECK_INTERVAL ?>" >
