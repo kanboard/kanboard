@@ -5,7 +5,6 @@
 
         <meta name="viewport" content="width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
 
         <script src="assets/js/jquery-1.11.1.min.js"></script>
         <script src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
