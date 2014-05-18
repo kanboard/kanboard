@@ -20,7 +20,7 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     color: #333;
-    font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -882,4 +882,24 @@ tr td.task-orange,
 .confirm {
     max-width: 700px;
     font-size: 1.1em;
+}
+
+/* modal box */
+#popover-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#popover-content {
+    position: fixed;
+    width: 70%;
+    margin: 0 0 0 -35%;
+    left: 50%;
+    top: 5%;
+    padding: 15px;
+    background: #fff;
 }

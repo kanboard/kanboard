@@ -14,6 +14,19 @@
             }
         });
 
+        // Open assignee popover
+        $(".task-user a").click(function(e) {
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            var taskId = $(this).parent().parent().attr("data-task-id");
+
+            $.get("?controller=board&action=assign&task_id=" + taskId, function(data) {
+                popover_show(data);
+            });
+        });
+
         // Redirect to the task details page
         $("[data-task-id]").each(function() {
             $(this).click(function() {
@@ -134,6 +147,20 @@
             $(this).toggleClass("filter-on");
             applyFilter(getSelectedUserFilter(), hasDueDateFilter());
             e.preventDefault();
+        });
+    }
+
+    // Show popup
+    function popover_show(content)
+    {
+        $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+
+        $("#popover-container").click(function() {
+            $(this).remove();
+        });
+
+        $("#popover-content").click(function(e) {
+            e.stopPropagation();
         });
     }
 

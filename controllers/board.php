@@ -60,16 +60,30 @@ class Board extends Base
         if (! $project) $this->notfound();
         $this->checkProjectPermissions($project['id']);
 
-        $this->response->html($this->template->layout('board_assign', array(
-            'errors' => array(),
-            'values' => $task,
-            'users_list' => $this->project->getUsersList($project['id']),
-            'projects' => $projects,
-            'current_project_id' => $project['id'],
-            'current_project_name' => $project['name'],
-            'menu' => 'boards',
-            'title' => t('Change assignee').' - '.$task['title'],
-        )));
+        if ($this->request->isAjax()) {
+
+            $this->response->html($this->template->load('board_assign', array(
+                'errors' => array(),
+                'values' => $task,
+                'users_list' => $this->project->getUsersList($project['id']),
+                'projects' => $projects,
+                'current_project_id' => $project['id'],
+                'current_project_name' => $project['name'],
+            )));
+        }
+        else {
+
+            $this->response->html($this->template->layout('board_assign', array(
+                'errors' => array(),
+                'values' => $task,
+                'users_list' => $this->project->getUsersList($project['id']),
+                'projects' => $projects,
+                'current_project_id' => $project['id'],
+                'current_project_name' => $project['name'],
+                'menu' => 'boards',
+                'title' => t('Change assignee').' - '.$task['title'],
+            )));
+        }
     }
 
     /**
