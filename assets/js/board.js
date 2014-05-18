@@ -76,7 +76,7 @@
                 $("#board").remove();
                 $("#main").append(data);
                 board_load_events();
-                applyFilter(getSelectedUserFilter(), hasDueDateFilter());
+                filter_apply(filter_get_user_id(), filter_has_due_date());
             }
         });
     }
@@ -87,7 +87,7 @@
         var projectId = $("#board").attr("data-project-id");
         var timestamp = $("#board").attr("data-time");
 
-        if (projectId != undefined && timestamp != undefined) {
+        if (is_visible() && projectId != undefined && timestamp != undefined) {
             $.ajax({
                 url: "?controller=board&action=check&project_id=" + projectId + "&timestamp=" + timestamp,
                 statusCode: {
@@ -96,7 +96,7 @@
                         $("#main").append(data);
                         board_unload_events();
                         board_load_events();
-                        applyFilter(getSelectedUserFilter(), hasDueDateFilter());
+                        filter_apply(filter_get_user_id(), filter_has_due_date());
                     }
                 }
             });
@@ -104,19 +104,19 @@
     }
 
     // Get the selected user id
-    function getSelectedUserFilter()
+    function filter_get_user_id()
     {
         return $("#form-user_id").val();
     }
 
     // Return true if the filter is activated
-    function hasDueDateFilter()
+    function filter_has_due_date()
     {
         return $("#filter-due-date").hasClass("filter-on");
     }
 
     // Apply user or date filter (change tasks opacity)
-    function applyFilter(selectedUserId, filterDueDate)
+    function filter_apply(selectedUserId, filterDueDate)
     {
         $("[data-task-id]").each(function(index, item) {
 
@@ -140,12 +140,12 @@
     function filter_load_events()
     {
         $("#form-user_id").change(function() {
-            applyFilter(getSelectedUserFilter(), hasDueDateFilter());
+            filter_apply(filter_get_user_id(), filter_has_due_date());
         });
 
         $("#filter-due-date").click(function(e) {
             $(this).toggleClass("filter-on");
-            applyFilter(getSelectedUserFilter(), hasDueDateFilter());
+            filter_apply(filter_get_user_id(), filter_has_due_date());
             e.preventDefault();
         });
     }
@@ -162,6 +162,28 @@
         $("#popover-content").click(function(e) {
             e.stopPropagation();
         });
+    }
+
+    // Return true if the page is visible
+    function is_visible()
+    {
+        var property = "";
+
+        if (typeof document.hidden !== "undefined") {
+            property = "visibilityState";
+        } else if (typeof document.mozHidden !== "undefined") {
+            property = "mozVisibilityState";
+        } else if (typeof document.msHidden !== "undefined") {
+            property = "msVisibilityState";
+        } else if (typeof document.webkitHidden !== "undefined") {
+            property = "webkitVisibilityState";
+        }
+
+        if (property != "") {
+            return document[property] == "visible";
+        }
+
+        return true;
     }
 
     // Initialization
