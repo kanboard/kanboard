@@ -1,7 +1,10 @@
 <?php
 
 // Auto-refresh frequency in seconds for the public board view (60 seconds by default)
-define('AUTO_REFRESH_DURATION', 60);
+define('BOARD_PUBLIC_CHECK_INTERVAL', 60);
+
+// Board refresh frequency in seconds (the value 0 disable this feature, 10 seconds by default)
+define('BOARD_CHECK_INTERVAL', 10);
 
 // Database driver: sqlite or mysql (sqlite by default)
 define('DB_DRIVER', 'sqlite');

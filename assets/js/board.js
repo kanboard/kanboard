@@ -45,6 +45,7 @@
     // Stop events
     function board_unload_events()
     {
+        $("[data-task-id]").off();
         clearInterval(checkInterval);
     }
 

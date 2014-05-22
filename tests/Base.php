@@ -5,21 +5,28 @@ if (version_compare(PHP_VERSION, '5.5.0', '<')) {
 }
 
 require_once __DIR__.'/../vendor/PicoDb/Database.php';
-require_once __DIR__.'/../core/event.php';
-require_once __DIR__.'/../core/translator.php';
-require_once __DIR__.'/../schemas/sqlite.php';
-require_once __DIR__.'/../models/task.php';
-require_once __DIR__.'/../models/acl.php';
-require_once __DIR__.'/../models/comment.php';
-require_once __DIR__.'/../models/project.php';
-require_once __DIR__.'/../models/user.php';
-require_once __DIR__.'/../models/board.php';
-require_once __DIR__.'/../models/action.php';
-require_once __DIR__.'/../actions/task_close.php';
-require_once __DIR__.'/../actions/task_assign_specific_user.php';
-require_once __DIR__.'/../actions/task_assign_color_user.php';
-require_once __DIR__.'/../actions/task_assign_current_user.php';
-require_once __DIR__.'/../actions/task_duplicate_another_project.php';
+require_once __DIR__.'/../app/Schema/Sqlite.php';
+
+require_once __DIR__.'/../app/Core/Listener.php';
+require_once __DIR__.'/../app/Core/Event.php';
+require_once __DIR__.'/../app/Core/Translator.php';
+require_once __DIR__.'/../app/translator.php';
+
+require_once __DIR__.'/../app/Model/Base.php';
+require_once __DIR__.'/../app/Model/Task.php';
+require_once __DIR__.'/../app/Model/Acl.php';
+require_once __DIR__.'/../app/Model/Comment.php';
+require_once __DIR__.'/../app/Model/Project.php';
+require_once __DIR__.'/../app/Model/User.php';
+require_once __DIR__.'/../app/Model/Board.php';
+require_once __DIR__.'/../app/Model/Action.php';
+
+require_once __DIR__.'/../app/Action/Base.php';
+require_once __DIR__.'/../app/Action/TaskClose.php';
+require_once __DIR__.'/../app/Action/TaskAssignSpecificUser.php';
+require_once __DIR__.'/../app/Action/TaskAssignColorUser.php';
+require_once __DIR__.'/../app/Action/TaskAssignCurrentUser.php';
+require_once __DIR__.'/../app/Action/TaskDuplicateAnotherProject.php';
 
 abstract class Base extends PHPUnit_Framework_TestCase
 {
@@ -36,7 +43,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
             'filename' => ':memory:'
         ));
 
-        if ($db->schema()->check(16)) {
+        if ($db->schema()->check(\Schema\VERSION)) {
             return $db;
         }
         else {
