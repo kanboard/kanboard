@@ -8,9 +8,9 @@ require_once __DIR__.'/board.php';
 require_once __DIR__.'/task.php';
 require_once __DIR__.'/../events/task_modification.php';
 
-use \SimpleValidator\Validator;
-use \SimpleValidator\Validators;
-use \Event\TaskModification;
+use SimpleValidator\Validator;
+use SimpleValidator\Validators;
+use Event\TaskModification;
 
 /**
  * Project model

@@ -4,8 +4,8 @@ namespace Model;
 
 require_once __DIR__.'/base.php';
 
-use \SimpleValidator\Validator;
-use \SimpleValidator\Validators;
+use SimpleValidator\Validator;
+use SimpleValidator\Validators;
 use DateTime;
 
 /**
@@ -42,6 +42,7 @@ class Task extends Base
     const EVENT_CREATE        = 'task.create';
     const EVENT_CLOSE         = 'task.close';
     const EVENT_OPEN          = 'task.open';
+    const EVENT_CREATE_UPDATE = 'task.create_update';
 
     /**
      * Get available colors
@@ -90,10 +91,13 @@ class Task extends Base
                         self::TABLE.'.position',
                         self::TABLE.'.is_active',
                         self::TABLE.'.score',
+                        self::TABLE.'.category_id',
+                        Category::TABLE.'.name AS category_name',
                         Project::TABLE.'.name AS project_name',
                         Board::TABLE.'.title AS column_title',
                         User::TABLE.'.username'
                     )
+                    ->join(Category::TABLE, 'id', 'category_id')
                     ->join(Project::TABLE, 'id', 'project_id')
                     ->join(Board::TABLE, 'id', 'column_id')
                     ->join(User::TABLE, 'id', 'owner_id')
@@ -150,6 +154,7 @@ class Task extends Base
                         'tasks.position',
                         'tasks.is_active',
                         'tasks.score',
+                        'tasks.category_id',
                         'users.username'
                     )
                     ->join('users', 'id', 'owner_id');
@@ -236,6 +241,7 @@ class Task extends Base
         $this->db->closeTransaction();
 
         // Trigger events
+        $this->event->trigger(self::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $task);
         $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $task);
 
         return $task_id;
@@ -265,6 +271,7 @@ class Task extends Base
         // Assign new values
         $task['date_creation'] = time();
         $task['owner_id'] = 0;
+        $task['category_id'] = 0;
         $task['is_active'] = 1;
         $task['column_id'] = $boardModel->getFirstColumn($project_id);
         $task['project_id'] = $project_id;
@@ -281,6 +288,7 @@ class Task extends Base
         $this->db->closeTransaction();
 
         // Trigger events
+        $this->event->trigger(self::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $task);
         $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $task);
 
         return $task_id;
@@ -320,6 +328,7 @@ class Task extends Base
         $this->db->closeTransaction();
 
         // Trigger events
+        $this->event->trigger(self::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $values);
         $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $values);
 
         return $task_id;
@@ -355,7 +364,8 @@ class Task extends Base
 
             $events = array();
 
-            if ($this->event->getLastTriggeredEvent() !== self::EVENT_UPDATE) {
+            if (! in_array($this->event->getLastTriggeredEvent(), array(self::EVENT_CREATE_UPDATE))) {
+                $events[] = self::EVENT_CREATE_UPDATE;
                 $events[] = self::EVENT_UPDATE;
             }
 

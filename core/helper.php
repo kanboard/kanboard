@@ -112,13 +112,13 @@ function contains($haystack, $needle)
     return strpos($haystack, $needle) !== false;
 }
 
-function in_list($id, array $listing)
+function in_list($id, array $listing, $default_value = '?')
 {
     if (isset($listing[$id])) {
         return escape($listing[$id]);
     }
 
-    return '?';
+    return $default_value;
 }
 
 function error_class(array $errors, $name)

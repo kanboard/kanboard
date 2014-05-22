@@ -21,6 +21,10 @@
                 <?= t('Filter by user') ?>
                 <?= Helper\form_select('user_id', $users, $filters) ?>
             </li>
+            <li>
+                <?= t('Filter by category') ?>
+                <?= Helper\form_select('category_id', $categories, $filters) ?>
+            </li>
             <li><a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a></li>
             <li><a href="?controller=project&amp;action=search&amp;project_id=<?= $current_project_id ?>"><?= t('Search') ?></a></li>
             <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $current_project_id ?>"><?= t('Completed tasks') ?></a></li>
@@ -30,7 +34,7 @@
     <?php if (empty($board)): ?>
         <p class="alert alert-error"><?= t('There is no column in your project!') ?></p>
     <?php else: ?>
-        <?= Helper\template('board_show', array('current_project_id' => $current_project_id, 'board' => $board)) ?>
+        <?= Helper\template('board_show', array('current_project_id' => $current_project_id, 'board' => $board, 'categories' => $categories)) ?>
     <?php endif ?>
 
 </section>

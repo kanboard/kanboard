@@ -44,6 +44,7 @@ class Action extends Base
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
             'TaskAssignColorUser' => t('Assign a color to a specific user'),
+            'TaskAssignColorCategory' => t('Assign a color to a specific category'),
         );
     }
 
@@ -62,6 +63,7 @@ class Action extends Base
             Task::EVENT_CREATE => t('Task creation'),
             Task::EVENT_OPEN => t('Open a closed task'),
             Task::EVENT_CLOSE => t('Closing a task'),
+            Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
         );
     }
 
@@ -238,6 +240,10 @@ class Action extends Base
             case 'TaskAssignColorUser':
                 require_once __DIR__.'/../actions/task_assign_color_user.php';
                 $className = '\Action\TaskAssignColorUser';
+                return new $className($project_id, new Task($this->db, $this->event));
+            case 'TaskAssignColorCategory':
+                require_once __DIR__.'/../actions/task_assign_color_category.php';
+                $className = '\Action\TaskAssignColorCategory';
                 return new $className($project_id, new Task($this->db, $this->event));
             default:
                 throw new \LogicException('Action not found: '.$name);

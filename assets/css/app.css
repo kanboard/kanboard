@@ -484,23 +484,26 @@ nav .active a {
 }
 
 .project-menu li {
+    padding-left: 5px;
     display: inline;
-    padding-left: 10px;
-    padding-right: 10px;
     border-right: 1px dotted #ccc;
 }
 
 .project-menu li:last-child {
     border: none;
-    padding-right: 0;
 }
 
 .project-menu ul {
     padding-bottom: 5px;
 }
 
+.project-menu a {
+    padding-right: 5px;
+}
+
 .project-menu {
     text-align: right;
+    font-size: 0.8em;
 }
 
 .public-board {
@@ -540,7 +543,26 @@ a.filter-on {
     color: #444;
 }
 
+.task-category-container {
+    text-align: right;
+    padding-bottom: 2px;
+}
+
+.task-category {
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #000;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
 .task-date {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
     font-weight: bold;
     color: #D90000;
 }
@@ -552,7 +574,7 @@ a.filter-on {
 }
 
 .task-footer {
-    margin-top: 10px;
+    height: 18px;
 }
 
 .task {

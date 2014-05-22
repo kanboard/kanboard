@@ -34,6 +34,7 @@ class Task extends Base
             'project_id' => $this->request->getIntegerParam('project_id', $defaultProject['id']),
             'owner_id' => $this->request->getIntegerParam('owner_id'),
             'column_id' => $this->request->getIntegerParam('column_id'),
+            'category_id' => $this->request->getIntegerParam('category_id'),
         );
 
         if ($values['column_id'] == 0) {
@@ -121,6 +122,7 @@ class Task extends Base
             'columns_list' => $this->board->getColumnsList($project_id),
             'users_list' => $this->project->getUsersList($project_id),
             'colors_list' => $this->task->getColors(),
+            'categories_list' => $this->category->getList($project_id),
             'menu' => 'tasks',
             'title' => t('New task')
         )));
@@ -164,6 +166,7 @@ class Task extends Base
             'columns_list' => $this->board->getColumnsList($values['project_id']),
             'users_list' => $this->project->getUsersList($values['project_id']),
             'colors_list' => $this->task->getColors(),
+            'categories_list' => $this->category->getList($values['project_id']),
             'menu' => 'tasks',
             'title' => t('New task')
         )));
@@ -196,6 +199,7 @@ class Task extends Base
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'users_list' => $this->project->getUsersList($task['project_id']),
             'colors_list' => $this->task->getColors(),
+            'categories_list' => $this->category->getList($task['project_id']),
             'menu' => 'tasks',
             'title' => t('Edit a task')
         )));
@@ -230,6 +234,7 @@ class Task extends Base
             'columns_list' => $this->board->getColumnsList($values['project_id']),
             'users_list' => $this->project->getUsersList($values['project_id']),
             'colors_list' => $this->task->getColors(),
+            'categories_list' => $this->category->getList($values['project_id']),
             'menu' => 'tasks',
             'title' => t('Edit a task')
         )));
@@ -383,6 +388,7 @@ class Task extends Base
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'users_list' => $this->project->getUsersList($task['project_id']),
             'colors_list' => $this->task->getColors(),
+            'categories_list' => $this->category->getList($task['project_id']),
             'duplicate' => true,
             'menu' => 'tasks',
             'title' => t('New task')

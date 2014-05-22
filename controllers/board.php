@@ -128,6 +128,7 @@ class Board extends Base
         $this->response->html($this->template->layout('board_public', array(
             'project' => $project,
             'columns' => $this->board->get($project['id']),
+            'categories' => $this->category->getList($project['id'], false),
             'title' => $project['name'],
             'no_layout' => true,
             'auto_refresh' => true,
@@ -195,6 +196,7 @@ class Board extends Base
             'current_project_id' => $project_id,
             'current_project_name' => $projects[$project_id],
             'board' => $this->board->get($project_id),
+            'categories' => $this->category->getList($project_id, true, true),
             'menu' => 'boards',
             'title' => $projects[$project_id]
         )));
@@ -369,7 +371,11 @@ class Board extends Base
         }
 
         $this->response->html(
-            $this->template->load('board_show', array('current_project_id' => $project_id, 'board' => $this->board->get($project_id))),
+            $this->template->load('board_show', array(
+                'current_project_id' => $project_id,
+                'board' => $this->board->get($project_id),
+                'categories' => $this->category->getList($project_id, false),
+            )),
             201
         );
     }
@@ -390,7 +396,11 @@ class Board extends Base
 
         if ($this->project->isModifiedSince($project_id, $timestamp)) {
             $this->response->html(
-                $this->template->load('board_show', array('current_project_id' => $project_id, 'board' => $this->board->get($project_id)))
+                $this->template->load('board_show', array(
+                    'current_project_id' => $project_id,
+                    'board' => $this->board->get($project_id),
+                    'categories' => $this->category->getList($project_id, false),
+                ))
             );
         }
         else {

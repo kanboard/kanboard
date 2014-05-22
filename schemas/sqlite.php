@@ -2,6 +2,21 @@
 
 namespace Schema;
 
+function version_16($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_has_categories (
+            id INTEGER PRIMARY KEY,
+            name TEXT COLLATE NOCASE,
+            project_id INT,
+            UNIQUE (project_id, name),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )"
+    );
+
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN category_id INTEGER DEFAULT 0");
+}
+
 function version_15($pdo)
 {
     $pdo->exec("ALTER TABLE projects ADD COLUMN last_modified INTEGER DEFAULT 0");

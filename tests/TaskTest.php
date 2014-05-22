@@ -17,6 +17,7 @@ class TaskTest extends Base
         $this->assertEquals(2, $t->create(array('title' => 'test b', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2, 'description' => 'toto et titi sont dans un bateau')));
 
         $tasks = $t->find(array(array('column' => 'project_id', 'operator' => 'eq', 'value' => '1')));
+        $this->assertNotFalse($tasks);
         $this->assertEquals(2, count($tasks));
         $this->assertEquals(1, $tasks[0]['id']);
         $this->assertEquals(2, $tasks[1]['id']);
@@ -101,7 +102,7 @@ class TaskTest extends Base
 
         // We create a task and a project
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
+        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1, 'category_id' => 2)));
 
         $task = $t->getById(1);
         $this->assertNotEmpty($task);
@@ -118,6 +119,7 @@ class TaskTest extends Base
         $this->assertEquals(1, $task['project_id']);
         $this->assertEquals(1, $task['owner_id']);
         $this->assertEquals(1, $task['position']);
+        $this->assertEquals(2, $task['category_id']);
     }
 
     public function testDuplicateToAnotherProject()
@@ -130,11 +132,19 @@ class TaskTest extends Base
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
         // We create a task
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1, 'category_id' => 1)));
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $t->duplicateToAnotherProject(1, 2));
         $this->assertEquals(Task::EVENT_CREATE, $this->event->getLastTriggeredEvent());
+
+        // Check the values of the duplicated task
+        $task = $t->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(0, $task['owner_id']);
+        $this->assertEquals(0, $task['category_id']);
+        $this->assertEquals(2, $task['project_id']);
+        $this->assertEquals('test', $task['title']);
     }
 
     public function testEvents()

@@ -60,6 +60,9 @@
                 <td>
                     <ul>
                         <li>
+                            <a href="?controller=category&amp;action=index&amp;project_id=<?= $project['id'] ?>"><?= t('Categories') ?></a>
+                        </li>
+                        <li>
                             <a href="?controller=project&amp;action=edit&amp;project_id=<?= $project['id'] ?>"><?= t('Edit project') ?></a>
                         </li>
                         <li>

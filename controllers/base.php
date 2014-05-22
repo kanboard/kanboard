@@ -131,6 +131,14 @@ abstract class Base
     protected $google;
 
     /**
+     * Category model
+     *
+     * @accesss protected
+     * @var \Model\Category
+     */
+    protected $category;
+
+    /**
      * Event instance
      *
      * @accesss protected
@@ -157,6 +165,7 @@ abstract class Base
         $this->rememberMe = $registry->rememberMe;
         $this->lastLogin = $registry->lastLogin;
         $this->google = $registry->google;
+        $this->category = $registry->category;
         $this->event = $registry->shared('event');
     }
 

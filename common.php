@@ -6,7 +6,7 @@ require __DIR__.'/core/translator.php';
 
 $registry = new Core\Registry;
 
-$registry->db_version = 15;
+$registry->db_version = 16;
 
 $registry->db = function() use ($registry) {
     require __DIR__.'/vendor/PicoDb/Database.php';
@@ -108,6 +108,11 @@ $registry->lastLogin = function() use ($registry) {
 $registry->google = function() use ($registry) {
     require_once __DIR__.'/models/google.php';
     return new \Model\Google($registry->shared('db'), $registry->shared('event'));
+};
+
+$registry->category = function() use ($registry) {
+    require_once __DIR__.'/models/category.php';
+    return new \Model\Category($registry->shared('db'), $registry->shared('event'));
 };
 
 if (file_exists('config.php')) require 'config.php';

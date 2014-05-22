@@ -29,6 +29,7 @@
         <div class="task draggable-item task-<?= $task['color_id'] ?>"
              data-task-id="<?= $task['id'] ?>"
              data-owner-id="<?= $task['owner_id'] ?>"
+             data-category-id="<?= $task['category_id'] ?>"
              data-due-date="<?= $task['date_due'] ?>"
              title="<?= t('View this task') ?>">
 
@@ -50,7 +51,17 @@
                 <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>
             </div>
 
+            <?php if ($task['category_id']): ?>
+            <div class="task-category-container">
+                <span class="task-category">
+                    <?= Helper\in_list($task['category_id'], $categories) ?>
+                </span>
+            </div>
+            <?php endif ?>
+
+            <?php if (! empty($task['date_due']) || ! empty($task['nb_comments']) || ! empty($task['description'])): ?>
             <div class="task-footer">
+
                 <?php if (! empty($task['date_due'])): ?>
                 <div class="task-date">
                     <?= dt('%B %e, %G', $task['date_due']) ?>
@@ -67,6 +78,8 @@
                     <?php endif ?>
                 </div>
             </div>
+            <?php endif ?>
+
         </div>
         <?php endforeach ?>
     </td>

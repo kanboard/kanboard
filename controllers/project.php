@@ -52,7 +52,7 @@ class Project extends Base
                 array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id),
                 'or' => array(
                     array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
-                    array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
+                    //array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
                 )
             );
 
@@ -72,6 +72,7 @@ class Project extends Base
             'menu' => 'projects',
             'project' => $project,
             'columns' => $this->board->getColumnsList($project_id),
+            'categories' => $this->category->getList($project['id'], false),
             'title' => $project['name'].($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
         )));
     }
@@ -105,6 +106,7 @@ class Project extends Base
             'menu' => 'projects',
             'project' => $project,
             'columns' => $this->board->getColumnsList($project_id),
+            'categories' => $this->category->getList($project['id'], false),
             'tasks' => $tasks,
             'nb_tasks' => $nb_tasks,
             'title' => $project['name'].' ('.$nb_tasks.')'

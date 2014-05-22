@@ -24,6 +24,7 @@ List of available events
 - Task creation
 - Open a closed task
 - Closing a task
+- Task creation or modification
 
 List of available actions
 -------------------------
@@ -33,6 +34,7 @@ List of available actions
 - Assign the task to the person who does the action
 - Duplicate the task to another project
 - Assign a color to a specific user
+- Assign a color to a specific category
 
 Examples
 --------
@@ -65,8 +67,14 @@ Let's say we have two projects "Customer orders" and "Production", once the orde
 - Choose the action: **Duplicate the task to another project**
 - Define the action parameters: **Column = Validated** and **Project = Production**
 
-### When I create a new task in the column "To do", assign a specific color to the user Bob
+### I want to assign a specific color to the user Bob
 
 - Choose the event: **Task creation**
 - Choose the action: **Assign a color to a specific user**
-- Define the action parameters: **Column = To do**, **Color = Green** and **Assignee = Bob**
+- Define the action parameters: **Color = Green** and **Assignee = Bob**
+
+### I want to assign a specific color to the category "Feature Request"
+
+- Choose the event: **Task creation or modification**
+- Choose the action: **Assign a color to a specific category**
+- Define the action parameters: **Color = Blue** and **Category = Feature Request**

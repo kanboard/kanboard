@@ -36,7 +36,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
             'filename' => ':memory:'
         ));
 
-        if ($db->schema()->check(10)) {
+        if ($db->schema()->check(16)) {
             return $db;
         }
         else {

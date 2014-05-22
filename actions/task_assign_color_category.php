@@ -5,12 +5,12 @@ namespace Action;
 require_once __DIR__.'/base.php';
 
 /**
- * Assign a color to a specific user
+ * Assign a color to a specific category
  *
  * @package action
  * @author  Frederic Guillot
  */
-class TaskAssignColorUser extends Base
+class TaskAssignColorCategory extends Base
 {
     /**
      * Task model
@@ -43,7 +43,7 @@ class TaskAssignColorUser extends Base
     {
         return array(
             'color_id' => t('Color'),
-            'user_id' => t('Assignee'),
+            'category_id' => t('Category'),
         );
     }
 
@@ -57,7 +57,7 @@ class TaskAssignColorUser extends Base
     {
         return array(
             'task_id',
-            'owner_id',
+            'category_id',
         );
     }
 
@@ -70,7 +70,7 @@ class TaskAssignColorUser extends Base
      */
     public function doAction(array $data)
     {
-        if ($data['owner_id'] == $this->getParam('user_id')) {
+        if ($data['category_id'] == $this->getParam('category_id')) {
 
             $this->task->update(array(
                 'id' => $data['task_id'],

@@ -39,7 +39,17 @@
                             <?= Helper\escape($task['title']) ?>
                         </div>
 
+                        <?php if ($task['category_id']): ?>
+                        <div class="task-category-container">
+                            <span class="task-category">
+                                <?= Helper\in_list($task['category_id'], $categories) ?>
+                            </span>
+                        </div>
+                        <?php endif ?>
+
+                        <?php if (! empty($task['date_due']) || ! empty($task['nb_comments']) || ! empty($task['description'])): ?>
                         <div class="task-footer">
+
                             <?php if (! empty($task['date_due'])): ?>
                             <div class="task-date">
                                 <?= dt('%B %e, %G', $task['date_due']) ?>
@@ -56,6 +66,7 @@
                                 <?php endif ?>
                             </div>
                         </div>
+                        <?php endif ?>
 
                     </div>
                     <?php endforeach ?>

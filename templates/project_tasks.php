@@ -15,6 +15,7 @@
             <tr>
                 <th><?= t('Id') ?></th>
                 <th><?= t('Column') ?></th>
+                <th><?= t('Category') ?></th>
                 <th><?= t('Title') ?></th>
                 <th><?= t('Assignee') ?></th>
                 <th><?= t('Due date') ?></th>
@@ -28,6 +29,9 @@
                 </td>
                 <td>
                     <?= Helper\in_list($task['column_id'], $columns) ?>
+                </td>
+                <td>
+                    <?= Helper\in_list($task['category_id'], $categories, '') ?>
                 </td>
                 <td>
                     <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>

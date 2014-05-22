@@ -36,6 +36,8 @@
                             <?= Helper\in_list($param['value'], $projects_list) ?>
                         <?php elseif (Helper\contains($param['name'], 'color_id')): ?>
                             <?= Helper\in_list($param['value'], $colors_list) ?>
+                        <?php elseif (Helper\contains($param['name'], 'category_id')): ?>
+                            <?= Helper\in_list($param['value'], $categories_list) ?>
                         <?php endif ?>
                         </strong>
                     </li>

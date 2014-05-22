@@ -76,7 +76,7 @@
                 $("#board").remove();
                 $("#main").append(data);
                 board_load_events();
-                filter_apply(filter_get_user_id(), filter_has_due_date());
+                filter_apply();
             }
         });
     }
@@ -96,32 +96,25 @@
                         $("#main").append(data);
                         board_unload_events();
                         board_load_events();
-                        filter_apply(filter_get_user_id(), filter_has_due_date());
+                        filter_apply();
                     }
                 }
             });
         }
     }
 
-    // Get the selected user id
-    function filter_get_user_id()
-    {
-        return $("#form-user_id").val();
-    }
-
-    // Return true if the filter is activated
-    function filter_has_due_date()
-    {
-        return $("#filter-due-date").hasClass("filter-on");
-    }
-
     // Apply user or date filter (change tasks opacity)
-    function filter_apply(selectedUserId, filterDueDate)
+    function filter_apply()
     {
+        var selectedUserId = $("#form-user_id").val();
+        var selectedCategoryId = $("#form-category_id").val();
+        var filterDueDate = $("#filter-due-date").hasClass("filter-on");
+
         $("[data-task-id]").each(function(index, item) {
 
             var ownerId = item.getAttribute("data-owner-id");
             var dueDate = item.getAttribute("data-due-date");
+            var categoryId = item.getAttribute("data-category-id");
 
             if (ownerId != selectedUserId && selectedUserId != -1) {
                 item.style.opacity = "0.2";
@@ -133,19 +126,23 @@
             if (filterDueDate && (dueDate == "" || dueDate == "0")) {
                 item.style.opacity = "0.2";
             }
+
+            if (categoryId != selectedCategoryId && selectedCategoryId != -1) {
+                item.style.opacity = "0.2";
+            }
         });
     }
 
     // Load filter events
     function filter_load_events()
     {
-        $("#form-user_id").change(function() {
-            filter_apply(filter_get_user_id(), filter_has_due_date());
-        });
+        $("#form-user_id").change(filter_apply);
+
+        $("#form-category_id").change(filter_apply);
 
         $("#filter-due-date").click(function(e) {
             $(this).toggleClass("filter-on");
-            filter_apply(filter_get_user_id(), filter_has_due_date());
+            filter_apply();
             e.preventDefault();
         });
     }

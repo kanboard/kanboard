@@ -31,6 +31,11 @@
         <strong><?= Helper\escape($task['column_title']) ?></strong>
         (<?= Helper\escape($task['project_name']) ?>)
     </li>
+    <?php if ($task['category_name']): ?>
+    <li>
+        <?= t('Category:') ?> <strong><?= Helper\escape($task['category_name']) ?></strong>
+    </li>
+    <?php endif ?>
     <li>
         <?php if ($task['is_active'] == 1): ?>
             <?= t('Status is open') ?>
