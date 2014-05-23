@@ -15,7 +15,7 @@
         });
 
         // Open assignee popover
-        $(".task-boad-user a").click(function(e) {
+        $(".task-board-user a").click(function(e) {
 
             e.preventDefault();
             e.stopPropagation();
