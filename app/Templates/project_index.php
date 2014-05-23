@@ -31,21 +31,23 @@
                     <?= $project['is_active'] ? t('Active') : t('Inactive') ?>
                 </td>
                 <td>
+                    <ul>
                     <?php if ($project['nb_tasks'] > 0): ?>
 
                         <?php if ($project['nb_active_tasks'] > 0): ?>
-                            <a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('%d tasks on the board', $project['nb_active_tasks']) ?></a>,
+                            <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('%d tasks on the board', $project['nb_active_tasks']) ?></a></li>
                         <?php endif ?>
 
                         <?php if ($project['nb_inactive_tasks'] > 0): ?>
-                            <a href="?controller=project&amp;action=tasks&amp;project_id=<?= $project['id'] ?>"><?= t('%d closed tasks', $project['nb_inactive_tasks']) ?></a>,
+                            <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $project['id'] ?>"><?= t('%d closed tasks', $project['nb_inactive_tasks']) ?></a></li>
                         <?php endif ?>
 
-                        <?= t('%d tasks in total', $project['nb_tasks']) ?>
+                        <li><?= t('%d tasks in total', $project['nb_tasks']) ?></li>
 
                     <?php else: ?>
-                        <?= t('no task for this project') ?>
+                        <li><?= t('no task for this project') ?></li>
                     <?php endif ?>
+                    </ul>
                 </td>
                 <td>
                     <ul>

@@ -18,11 +18,11 @@
     <div class="project-menu">
         <ul>
             <li>
-                <?= t('Filter by user') ?>
+                <span class="hide-tablet"><?= t('Filter by user') ?></span>
                 <?= Helper\form_select('user_id', $users, $filters) ?>
             </li>
             <li>
-                <?= t('Filter by category') ?>
+                <span class="hide-tablet"><?= t('Filter by category') ?></span>
                 <?= Helper\form_select('category_id', $categories, $filters) ?>
             </li>
             <li><a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a></li>

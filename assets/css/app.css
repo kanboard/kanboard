@@ -83,6 +83,7 @@ td {
     padding-bottom: 0.5em;
     padding-left: 3px;
     padding-right: 3px;
+    vertical-align: top;
 }
 
 th {
@@ -420,7 +421,7 @@ header {
 
 header ul {
     text-align: right;
-    font-size: 90%;
+    font-size: 0.9em;
 }
 
 header li {
@@ -931,4 +932,49 @@ tr td.task-orange,
     top: 5%;
     padding: 15px;
     background: #fff;
+}
+
+/* responsive design */
+@media only screen and (min-width : 600px) and (max-width : 1024px) {
+
+    .hide-tablet {
+        display: none;
+    }
+
+    .form-column {
+        float: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #board {
+        font-size: 0.85em;
+    }
+
+    .project-menu {
+        font-size: 0.7em;
+    }
+
+    table input[type="text"] {
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width : 600px) {
+
+    header {
+        font-size: 0.8em;
+    }
+
+    .project-menu {
+        display: none;
+    }
+
+    #board {
+        margin-top: 10px;
+    }
+
+    .task-board .task-score {
+        display: none;
+    }
 }
