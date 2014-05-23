@@ -91,7 +91,7 @@ class Action extends Base
 
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->action->validateCreation($values);
+        list($valid,) = $this->action->validateCreation($values);
 
         if ($valid) {
 

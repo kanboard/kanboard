@@ -86,7 +86,7 @@ class File extends Base
      */
     public function getAll($task_id)
     {
-        return $listing = $this->db->table(self::TABLE)
+        return $this->db->table(self::TABLE)
             ->eq('task_id', $task_id)
             ->asc('name')
             ->findAll();

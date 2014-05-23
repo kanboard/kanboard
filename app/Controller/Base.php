@@ -19,10 +19,10 @@ use Model\LastLogin;
  * @property \Model\Config      $config
  * @property \Model\File        $file
  * @property \Model\Google      $google
- * @property \Model\LastLogin   $lastlogin
+ * @property \Model\LastLogin   $lastLogin
  * @property \Model\Ldap        $ldap
  * @property \Model\Project     $project
- * @property \Model\RememberMe  $rememberme
+ * @property \Model\RememberMe  $rememberMe
  * @property \Model\Task        $task
  * @property \Model\User        $user
  */

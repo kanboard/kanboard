@@ -144,6 +144,8 @@ class Board extends Base
     public function index()
     {
         $projects = $this->project->getListByStatus(ProjectModel::ACTIVE);
+        $project_id = 0;
+        $project_name = '';
 
         if ($this->acl->isRegularUser()) {
             $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());

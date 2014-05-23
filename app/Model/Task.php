@@ -215,8 +215,6 @@ class Task extends Base
     {
         $this->db->startTransaction();
 
-        $boardModel = new Board($this->db, $this->event);
-
         // Get the original task
         $task = $this->getById($task_id);
 

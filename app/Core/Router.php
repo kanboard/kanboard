@@ -46,7 +46,7 @@ class Router
     {
         $this->registry = $registry;
         $this->controller = empty($_GET['controller']) ? $controller : $_GET['controller'];
-        $this->action = empty($_GET['action']) ? $controller : $_GET['action'];
+        $this->action = empty($_GET['action']) ? $action : $_GET['action'];
     }
 
     /**
