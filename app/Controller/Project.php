@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\Task;
+use Model\Task as TaskModel;
 
 /**
  * Project controller
@@ -96,7 +96,7 @@ class Project extends Base
 
         $filters = array(
             array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id),
-            array('column' => 'is_active', 'operator' => 'eq', 'value' => Task::STATUS_CLOSED),
+            array('column' => 'is_active', 'operator' => 'eq', 'value' => TaskModel::STATUS_CLOSED),
         );
 
         $tasks = $this->task->find($filters);

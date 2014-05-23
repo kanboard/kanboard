@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\Project;
+use Model\Project as ProjectModel;
 
 /**
  * Application controller
@@ -19,7 +19,7 @@ class App extends Base
      */
     public function index()
     {
-        if ($this->project->countByStatus(Project::ACTIVE)) {
+        if ($this->project->countByStatus(ProjectModel::ACTIVE)) {
             $this->response->redirect('?controller=board');
         }
         else {

@@ -11,6 +11,20 @@ use Model\LastLogin;
  *
  * @package  controller
  * @author   Frederic Guillot
+ * @property \Model\Acl         $acl
+ * @property \Model\Action      $action
+ * @property \Model\Board       $board
+ * @property \Model\Category    $category
+ * @property \Model\Comment     $comment
+ * @property \Model\Config      $config
+ * @property \Model\File        $file
+ * @property \Model\Google      $google
+ * @property \Model\LastLogin   $lastlogin
+ * @property \Model\Ldap        $ldap
+ * @property \Model\Project     $project
+ * @property \Model\RememberMe  $rememberme
+ * @property \Model\Task        $task
+ * @property \Model\User        $user
  */
 abstract class Base
 {
@@ -173,56 +187,6 @@ abstract class Base
     }
 
     /**
-     * Display the template show task (common between different actions)
-     *
-     * @access protected
-     * @param  array  $task               Task data
-     * @param  array  $comment_form       Comment form data
-     * @param  array  $description_form   Description form data
-     * @param  array  $comment_edit_form  Comment edit form data
-     */
-    protected function showTask(array $task, array $comment_form = array(), array $description_form = array(), array $comment_edit_form = array())
-    {
-        if (empty($comment_form)) {
-            $comment_form = array(
-                'values' => array('task_id' => $task['id'], 'user_id' => $this->acl->getUserId()),
-                'errors' => array()
-            );
-        }
-
-        if (empty($description_form)) {
-            $description_form = array(
-                'values' => array('id' => $task['id']),
-                'errors' => array()
-            );
-        }
-
-        if (empty($comment_edit_form)) {
-            $comment_edit_form = array(
-                'values' => array('id' => 0),
-                'errors' => array()
-            );
-        }
-        else {
-            $hide_comment_form = true;
-        }
-
-        $this->response->html($this->taskLayout('task_show', array(
-            'hide_comment_form' => isset($hide_comment_form),
-            'comment_edit_form' => $comment_edit_form,
-            'comment_form' => $comment_form,
-            'description_form' => $description_form,
-            'comments' => $this->comment->getAll($task['id']),
-            'task' => $task,
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'colors_list' => $this->task->getColors(),
-            'files' => $this->file->getAll($task['id']),
-            'menu' => 'tasks',
-            'title' => $task['title'],
-        )));
-    }
-
-    /**
      * Common layout for task views
      *
      * @access protected
@@ -235,5 +199,24 @@ abstract class Base
         $params['task_content_for_layout'] = $content;
 
         return $this->template->layout('task_layout', $params);
+    }
+
+    /**
+     * Common method to get a task for task views
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getTask()
+    {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+
+        if (! $task) {
+            $this->notfound();
+        }
+
+        $this->checkProjectPermissions($task['project_id']);
+
+        return $task;
     }
 }

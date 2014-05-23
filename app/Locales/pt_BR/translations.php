@@ -339,4 +339,9 @@ return array(
     // 'Do you really want to remove this file: "%s"?' => '',
     // 'open' => '',
     // 'Attachments' => '',
+    // 'Edit the task' => '',
+    // 'Edit the description' => '',
+    // 'Add a comment' => '',
+    // 'Edit a comment' => '',
+    // 'Summary' => '',
 );

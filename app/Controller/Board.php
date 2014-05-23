@@ -2,8 +2,8 @@
 
 namespace Controller;
 
-use Model\Project;
-use Model\User;
+use Model\Project as ProjectModel;
+use Model\User as UserModel;
 
 /**
  * Board controller
@@ -52,7 +52,7 @@ class Board extends Base
     {
         $task = $this->task->getById($this->request->getIntegerParam('task_id'));
         $project = $this->project->getById($task['project_id']);
-        $projects = $this->project->getListByStatus(Project::ACTIVE);
+        $projects = $this->project->getListByStatus(ProjectModel::ACTIVE);
 
         if ($this->acl->isRegularUser()) {
             $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());
@@ -143,7 +143,7 @@ class Board extends Base
      */
     public function index()
     {
-        $projects = $this->project->getListByStatus(Project::ACTIVE);
+        $projects = $this->project->getListByStatus(ProjectModel::ACTIVE);
 
         if ($this->acl->isRegularUser()) {
             $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());
@@ -177,10 +177,10 @@ class Board extends Base
     public function show()
     {
         $project_id = $this->request->getIntegerParam('project_id');
-        $user_id = $this->request->getIntegerParam('user_id', User::EVERYBODY_ID);
+        $user_id = $this->request->getIntegerParam('user_id', UserModel::EVERYBODY_ID);
 
         $this->checkProjectPermissions($project_id);
-        $projects = $this->project->getListByStatus(Project::ACTIVE);
+        $projects = $this->project->getListByStatus(ProjectModel::ACTIVE);
 
         if ($this->acl->isRegularUser()) {
             $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());

@@ -11,6 +11,27 @@ namespace Controller;
 class Comment extends Base
 {
     /**
+     * Get the current comment
+     *
+     * @access private
+     * @return array
+     */
+    private function getComment()
+    {
+        $comment = $this->comment->getById($this->request->getIntegerParam('comment_id'));
+
+        if (! $comment) {
+            $this->notfound();
+        }
+
+        if (! $this->acl->isAdminUser() && $comment['user_id'] != $this->acl->getUserId()) {
+            $this->forbidden();
+        }
+
+        return $comment;
+    }
+
+    /**
      * Forbidden page for comments
      *
      * @access public
@@ -24,17 +45,35 @@ class Comment extends Base
     }
 
     /**
+     * Add comment form
+     *
+     * @access public
+     */
+    public function create()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->taskLayout('comment_create', array(
+            'values' => array(
+                'user_id' => $this->acl->getUserId(),
+                'task_id' => $task['id'],
+            ),
+            'errors' => array(),
+            'task' => $task,
+            'menu' => 'tasks',
+            'title' => t('Add a comment')
+        )));
+    }
+
+    /**
      * Add a comment
      *
      * @access public
      */
     public function save()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+        $task = $this->getTask();
         $values = $this->request->getValues();
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
 
         list($valid, $errors) = $this->comment->validateCreation($values);
 
@@ -47,13 +86,16 @@ class Comment extends Base
                 $this->session->flashError(t('Unable to create your comment.'));
             }
 
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comments');
         }
 
-        $this->showTask(
-            $task,
-            array('values' => $values, 'errors' => $errors)
-        );
+        $this->response->html($this->taskLayout('comment_create', array(
+            'values' => $values,
+            'errors' => $errors,
+            'task' => $task,
+            'menu' => 'tasks',
+            'title' => t('Add a comment')
+        )));
     }
 
     /**
@@ -63,26 +105,17 @@ class Comment extends Base
      */
     public function edit()
     {
-        $task_id = $this->request->getIntegerParam('task_id');
-        $comment_id = $this->request->getIntegerParam('comment_id');
+        $task = $this->getTask();
+        $comment = $this->getComment();
 
-        $task = $this->task->getById($task_id, true);
-        $comment = $this->comment->getById($comment_id);
-
-        if (! $task || ! $comment) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
-
-        if ($this->acl->isAdminUser() || $comment['user_id'] == $this->acl->getUserId()) {
-
-            $this->showTask(
-                $task,
-                array(),
-                array(),
-                array('values' => array('id' => $comment['id']), 'errors' => array())
-            );
-        }
-
-        $this->forbidden();
+        $this->response->html($this->taskLayout('comment_edit', array(
+            'values' => $comment,
+            'errors' => array(),
+            'comment' => $comment,
+            'task' => $task,
+            'menu' => 'tasks',
+            'title' => t('Edit a comment')
+        )));
     }
 
     /**
@@ -92,42 +125,32 @@ class Comment extends Base
      */
     public function update()
     {
-        $task_id = $this->request->getIntegerParam('task_id');
-        $comment_id = $this->request->getIntegerParam('comment_id');
-
-        $task = $this->task->getById($task_id, true);
-        $comment = $this->comment->getById($comment_id);
+        $task = $this->getTask();
+        $comment = $this->getComment();
 
         $values = $this->request->getValues();
+        list($valid, $errors) = $this->comment->validateModification($values);
 
-        if (! $task || ! $comment) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        if ($valid) {
 
-        if ($this->acl->isAdminUser() || $comment['user_id'] == $this->acl->getUserId()) {
-
-            list($valid, $errors) = $this->comment->validateModification($values);
-
-            if ($valid) {
-
-                if ($this->comment->update($values)) {
-                    $this->session->flash(t('Comment updated successfully.'));
-                }
-                else {
-                    $this->session->flashError(t('Unable to update your comment.'));
-                }
-
-                $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comment-'.$comment_id);
+            if ($this->comment->update($values)) {
+                $this->session->flash(t('Comment updated successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to update your comment.'));
             }
 
-            $this->showTask(
-                $task,
-                array(),
-                array(),
-                array('values' => $values, 'errors' => $errors)
-            );
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comment-'.$comment['id']);
         }
 
-        $this->forbidden();
+        $this->response->html($this->taskLayout('comment_edit', array(
+            'values' => $values,
+            'errors' => $errors,
+            'comment' => $comment,
+            'task' => $task,
+            'menu' => 'tasks',
+            'title' => t('Edit a comment')
+        )));
     }
 
     /**
@@ -137,25 +160,15 @@ class Comment extends Base
      */
     public function confirm()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $comment_id = $this->request->getIntegerParam('comment_id');
+        $task = $this->getTask();
+        $comment = $this->getComment();
 
-        $this->checkProjectPermissions($project_id);
-
-        $comment = $this->comment->getById($comment_id);
-        if (! $comment) $this->notfound();
-
-        if ($this->acl->isAdminUser() || $comment['user_id'] == $this->acl->getUserId()) {
-
-            $this->response->html($this->template->layout('comment_remove', array(
-                'comment' => $comment,
-                'project_id' => $project_id,
-                'menu' => 'tasks',
-                'title' => t('Remove a comment')
-            )));
-        }
-
-        $this->forbidden();
+        $this->response->html($this->taskLayout('comment_remove', array(
+            'comment' => $comment,
+            'task' => $task,
+            'menu' => 'tasks',
+            'title' => t('Remove a comment')
+        )));
     }
 
     /**
@@ -165,25 +178,16 @@ class Comment extends Base
      */
     public function remove()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $comment_id = $this->request->getIntegerParam('comment_id');
+        $task = $this->getTask();
+        $comment = $this->getComment();
 
-        $this->checkProjectPermissions($project_id);
-
-        $comment = $this->comment->getById($comment_id);
-        if (! $comment) $this->notfound();
-
-        if ($this->acl->isAdminUser() || $comment['user_id'] == $this->acl->getUserId()) {
-
-            if ($this->comment->remove($comment['id'])) {
-                $this->session->flash(t('Comment removed successfully.'));
-            } else {
-                $this->session->flashError(t('Unable to remove this comment.'));
-            }
-
-            $this->response->redirect('?controller=task&action=show&task_id='.$comment['task_id']);
+        if ($this->comment->remove($comment['id'])) {
+            $this->session->flash(t('Comment removed successfully.'));
+        }
+        else {
+            $this->session->flashError(t('Unable to remove this comment.'));
         }
 
-        $this->forbidden();
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comments');
     }
 }

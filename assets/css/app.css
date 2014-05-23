@@ -673,6 +673,7 @@ div.task .task-score {
 .task-show-details {
     position: relative;
     border-radius: 5px;
+    padding-bottom: 10px;
 }
 
 .task-show-details h2 {
@@ -695,11 +696,9 @@ div.task .task-score {
     bottom: 5px;
 }
 
-.task-show-description {
-    border: 1px solid #999;
-    border-radius: 5px;
-    background: #f0f0f0;
-    padding: 10px;
+.task-show-section {
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .task-show-files a {
@@ -729,6 +728,12 @@ div.task .task-score {
     color: #333;
 }
 
+.description-textarea {
+    width: 80%;
+    max-width: 800px;
+    height: 300px;
+}
+
 .task-file-viewer {
     position: relative;
 }
@@ -737,6 +742,69 @@ div.task .task-score {
     max-width: 95%;
     max-height: 85%;
     margin-top: 10px;
+}
+
+/* comments */
+.comment {
+    margin-bottom: 20px;
+}
+
+.comment:hover {
+    background: #F7F8E0;
+}
+
+.comment-inner {
+    border-left: 4px solid #333;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.comment-preview {
+    border: 2px solid #000;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.comment-preview .comment-inner {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-title {
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    border-bottom: 1px dotted #aaa;
+}
+
+.comment-actions {
+    font-size: 0.8em;
+    padding: 0;
+    text-align: right;
+}
+
+.comment-actions li {
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: 1px dotted #000;
+}
+
+.comment-actions li:last-child {
+    padding-right: 0;
+    border: 0;
+}
+
+.comment-username {
+    font-weight: bold;
+}
+
+.comment-textarea {
+    height: 200px;
+    width: 80%;
+    max-width: 800px;
 }
 
 /* markdown content */
@@ -769,12 +837,12 @@ div.task .task-score {
 }
 
 .markdown pre {
-    background: #fff;
+    background: #fafafa;
     padding: 10px;
     border-radius: 5px;
-    border: 1px dashed #000;
+    border: 1px solid #ccc;
     overflow: auto;
-    color: #000;
+    color: brown;
 }
 
 .markdown blockquote {
@@ -783,92 +851,8 @@ div.task .task-score {
     padding-left: 8px;
 }
 
-/* comments */
-.comment {
-    margin-bottom: 25px;
-    padding: 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.comment-edit {
-    margin-bottom: 25px;
-    padding: 0;
-    border: 2px solid #000;
-    border-radius: 5px;
-}
-
-.comment:hover {
-    border: 1px solid #888;
-}
-
-.comment-title {
-    font-size: 0.9em;
-    padding: 5px;
-    margin-bottom: 2px;
-    border-bottom: 1px solid #ddd;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background: #f0f0f0;
-}
-
-.comment:nth-child(odd) .comment-title {
-    background: #f0f0f0;
-}
-
-.comment:nth-child(even) .comment-title {
-    background: #ddd;
-}
-
-.comment-actions a,
-.comment-title a {
-    color: #000;
-    text-decoration: none;
-}
-
-.comment-actions a:hover,
-.comment-actions a:focus,
-.comment-title a:hover,
-.comment-title a:focus {
-    text-decoration: underline;
-}
-
-.comment-actions {
-    font-size: 0.8em;
-    padding: 0;
-    text-align: right;
-}
-
-.comment-actions li {
-    display: inline;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-right: 1px dotted #000;
-}
-
-.comment-actions li:last-child {
-    border: 0;
-}
-
-.comment-username {
-    font-weight: bold;
-}
-
-.comment-textarea {
-    height: 70px;
-    width: 500px;
-}
-
-.comment .markdown {
-    margin: 10px;
-}
-
-.comment .markdown pre {
-    background: #fdfdfd;
-}
-
-.comment-edit form {
-    border: none;
+.markdown p {
+    margin-bottom: 10px;
 }
 
 /* task colors */

@@ -2,8 +2,7 @@
 
 namespace Controller;
 
-use Model\Project;
-use Model\File;
+use Model\Project as ProjectModel;
 
 /**
  * Task controller
@@ -13,19 +12,6 @@ use Model\File;
  */
 class Task extends Base
 {
-    private function getTask()
-    {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
-
-        if (! $task) {
-            $this->notfound();
-        }
-
-        $this->checkProjectPermissions($task['project_id']);
-
-        return $task;
-    }
-
     /**
      * Webhook to create a task (useful for external software)
      *
@@ -71,41 +57,17 @@ class Task extends Base
      */
     public function show()
     {
-        $this->showTask($this->getTask());
-    }
+        $task = $this->getTask();
 
-    /**
-     * Add a description from the show task page
-     *
-     * @access public
-     */
-    public function description()
-    {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
-        $values = $this->request->getValues();
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
-
-        list($valid, $errors) = $this->task->validateDescriptionCreation($values);
-
-        if ($valid) {
-
-            if ($this->task->update($values)) {
-                $this->session->flash(t('Task updated successfully.'));
-            }
-            else {
-                $this->session->flashError(t('Unable to update your task.'));
-            }
-
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
-        }
-
-        $this->showTask(
-            $task,
-            array(),
-            array('values' => $values, 'errors' => $errors)
-        );
+        $this->response->html($this->taskLayout('task_show', array(
+            'files' => $this->file->getAll($task['id']),
+            'comments' => $this->comment->getAll($task['id']),
+            'task' => $task,
+            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'colors_list' => $this->task->getColors(),
+            'menu' => 'tasks',
+            'title' => $task['title'],
+        )));
     }
 
     /**
@@ -127,7 +89,7 @@ class Task extends Base
                 'owner_id' => $this->request->getIntegerParam('owner_id'),
                 'another_task' => $this->request->getIntegerParam('another_task'),
             ),
-            'projects_list' => $this->project->getListByStatus(\Model\Project::ACTIVE),
+            'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($project_id),
             'users_list' => $this->project->getUsersList($project_id),
             'colors_list' => $this->task->getColors(),
@@ -171,7 +133,7 @@ class Task extends Base
         $this->response->html($this->template->layout('task_new', array(
             'errors' => $errors,
             'values' => $values,
-            'projects_list' => $this->project->getListByStatus(Project::ACTIVE),
+            'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($values['project_id']),
             'users_list' => $this->project->getUsersList($values['project_id']),
             'colors_list' => $this->task->getColors(),
@@ -188,10 +150,7 @@ class Task extends Base
      */
     public function edit()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        $task = $this->getTask();
 
         if (! empty($task['date_due'])) {
             $task['date_due'] = date(t('m/d/Y'), $task['date_due']);
@@ -203,8 +162,9 @@ class Task extends Base
         $task['score'] = $task['score'] ?: '';
 
         $this->response->html($this->template->layout('task_edit', array(
-            'errors' => array(),
             'values' => $task,
+            'errors' => array(),
+            'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'users_list' => $this->project->getUsersList($task['project_id']),
             'colors_list' => $this->task->getColors(),
@@ -221,8 +181,8 @@ class Task extends Base
      */
     public function update()
     {
+        $task = $this->getTask();
         $values = $this->request->getValues();
-        $this->checkProjectPermissions($values['project_id']);
 
         list($valid, $errors) = $this->task->validateModification($values);
 
@@ -238,8 +198,9 @@ class Task extends Base
         }
 
         $this->response->html($this->template->layout('task_edit', array(
-            'errors' => $errors,
             'values' => $values,
+            'errors' => $errors,
+            'task' => $task,
             'columns_list' => $this->board->getColumnsList($values['project_id']),
             'users_list' => $this->project->getUsersList($values['project_id']),
             'colors_list' => $this->task->getColors(),
@@ -372,7 +333,7 @@ class Task extends Base
         $this->response->html($this->template->layout('task_new', array(
             'errors' => array(),
             'values' => $task,
-            'projects_list' => $this->project->getListByStatus(Project::ACTIVE),
+            'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'users_list' => $this->project->getUsersList($task['project_id']),
             'colors_list' => $this->task->getColors(),
@@ -384,124 +345,53 @@ class Task extends Base
     }
 
     /**
-     * File upload form
+     * Edit description form
      *
      * @access public
      */
-    public function file()
+    public function editDescription()
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task_upload', array(
+        $this->response->html($this->taskLayout('task_edit_description', array(
+            'values' => $task,
+            'errors' => array(),
             'task' => $task,
             'menu' => 'tasks',
-            'title' => t('Attach a document')
+            'title' => t('Edit the description')
         )));
     }
 
     /**
-     * File upload (save files)
+     * Save and validation the description
      *
      * @access public
      */
-    public function upload()
+    public function saveDescription()
     {
         $task = $this->getTask();
-        $this->file->upload($task['project_id'], $task['id'], 'files');
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#attachments');
-    }
+        $values = $this->request->getValues();
 
-    /**
-     * File download
-     *
-     * @access public
-     */
-    public function download()
-    {
-        $task = $this->getTask();
-        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-        $filename = File::BASE_PATH.$file['path'];
+        list($valid, $errors) = $this->task->validateDescriptionCreation($values);
 
-        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
-            $this->response->forceDownload($file['name']);
-            $this->response->binary(file_get_contents($filename));
-        }
+        if ($valid) {
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
-    }
-
-    /**
-     * Open a file (show the content in a popover)
-     *
-     * @access public
-     */
-    public function openFile()
-    {
-        $task = $this->getTask();
-        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-
-        if ($file['task_id'] == $task['id']) {
-            $this->response->html($this->template->load('task_open_file', array(
-                'file' => $file
-            )));
-        }
-    }
-
-    /**
-     * Return the file content (work only for images)
-     *
-     * @access public
-     */
-    public function image()
-    {
-        $task = $this->getTask();
-        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-        $filename = File::BASE_PATH.$file['path'];
-
-        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
-            $metadata = getimagesize($filename);
-
-            if (isset($metadata['mime'])) {
-                $this->response->contentType($metadata['mime']);
-                readfile($filename);
+            if ($this->task->update($values)) {
+                $this->session->flash(t('Task updated successfully.'));
             }
-        }
-    }
+            else {
+                $this->session->flashError(t('Unable to update your task.'));
+            }
 
-    /**
-     * Remove a file
-     *
-     * @access public
-     */
-    public function removeFile()
-    {
-        $task = $this->getTask();
-        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-
-        if ($file['task_id'] == $task['id'] && $this->file->remove($file['id'])) {
-            $this->session->flash(t('File removed successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to remove this file.'));
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
-    }
-
-    /**
-     * Confirmation dialog before removing a file
-     *
-     * @access public
-     */
-    public function confirmRemoveFile()
-    {
-        $task = $this->getTask();
-        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-
-        $this->response->html($this->taskLayout('task_remove_file', array(
+        $this->response->html($this->taskLayout('task_edit_description', array(
+            'values' => $values,
+            'errors' => $errors,
             'task' => $task,
-            'file' => $file,
             'menu' => 'tasks',
-            'title' => t('Remove a file')
+            'title' => t('Edit the description')
         )));
     }
 }

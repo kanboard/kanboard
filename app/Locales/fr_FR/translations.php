@@ -338,4 +338,9 @@ return array(
     'Do you really want to remove this file: "%s"?' => 'Voulez-vous vraiment supprimer ce fichier « %s » ?',
     'open' => 'ouvrir',
     'Attachments' => 'Pièces-jointes',
+    'Edit the task' => 'Modifier la tâche',
+    'Edit the description' => 'Modifier la description',
+    'Add a comment' => 'Ajouter un commentaire',
+    'Edit a comment' => 'Modifier un commentaire',
+    'Summary' => 'Résumé',
 );

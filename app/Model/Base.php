@@ -30,7 +30,7 @@ abstract class Base
      * Database instance
      *
      * @access protected
-     * @var PicoDb
+     * @var \PicoDb\Database
      */
     protected $db;
 
@@ -38,7 +38,7 @@ abstract class Base
      * Event dispatcher instance
      *
      * @access protected
-     * @var Core\Event
+     * @var \Core\Event
      */
     protected $event;
 
