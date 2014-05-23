@@ -83,6 +83,9 @@ td {
     padding-bottom: 0.5em;
     padding-left: 3px;
     padding-right: 3px;
+}
+
+td {
     vertical-align: top;
 }
 
