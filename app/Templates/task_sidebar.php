@@ -2,8 +2,10 @@
     <h2><?= t('Actions') ?></h2>
     <div class="task-show-actions">
         <ul>
-            <li><a href="?controller=task&amp;action=duplicate&amp;project_id=<?= $task['project_id'] ?>&amp;task_id=<?= $task['id'] ?>"><?= t('Duplicate') ?></a></li>
+            <li><a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('Description') ?></a></li>
             <li><a href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>"><?= t('Edit') ?></a></li>
+            <li><a href="?controller=task&amp;action=file&amp;task_id=<?= $task['id'] ?>"><?= t('Attach a document') ?></a></li>
+            <li><a href="?controller=task&amp;action=duplicate&amp;project_id=<?= $task['project_id'] ?>&amp;task_id=<?= $task['id'] ?>"><?= t('Duplicate') ?></a></li>
             <li>
                 <?php if ($task['is_active'] == 1): ?>
                     <a href="?controller=task&amp;action=confirmClose&amp;task_id=<?= $task['id'] ?>"><?= t('Close this task') ?></a>

@@ -702,6 +702,43 @@ div.task .task-score {
     padding: 10px;
 }
 
+.task-show-files a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.task-show-files li {
+    margin-left: 25px;
+    list-style-type: square;
+    line-height: 25px;
+}
+
+.task-show-file-actions {
+    font-size: 0.75em;
+}
+
+.task-show-file-actions:before {
+    content: " [";
+}
+
+.task-show-file-actions:after {
+    content: "]";
+}
+
+.task-show-file-actions a {
+    color: #333;
+}
+
+.task-file-viewer {
+    position: relative;
+}
+
+.task-file-viewer img {
+    max-width: 95%;
+    max-height: 85%;
+    margin-top: 10px;
+}
+
 /* markdown content */
 .markdown {
     line-height: 1.4em;

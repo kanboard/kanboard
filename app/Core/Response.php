@@ -4,6 +4,11 @@ namespace Core;
 
 class Response
 {
+    public function contentType($mimetype)
+    {
+        header('Content-Type: '.$mimetype);
+    }
+
     public function forceDownload($filename)
     {
         header('Content-Disposition: attachment; filename="'.$filename.'"');

@@ -2,7 +2,21 @@
 
 namespace Schema;
 
-const VERSION = 16;
+const VERSION = 17;
+
+function version_17($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_files (
+            id INTEGER PRIMARY KEY,
+            name TEXT COLLATE NOCASE,
+            path TEXT,
+            is_image INTEGER DEFAULT 0,
+            task_id INTEGER,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )"
+    );
+}
 
 function version_16($pdo)
 {

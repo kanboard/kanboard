@@ -2,7 +2,22 @@
 
 namespace Schema;
 
-const VERSION = 16;
+const VERSION = 17;
+
+function version_17($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_files (
+            id INT NOT NULL AUTO_INCREMENT,
+            name VARCHAR(50),
+            path VARCHAR(255),
+            is_image TINYINT(1) DEFAULT 0,
+            task_id INT,
+            PRIMARY KEY (id),
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8"
+    );
+}
 
 function version_16($pdo)
 {

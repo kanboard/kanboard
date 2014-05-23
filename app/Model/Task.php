@@ -139,6 +139,7 @@ class Task extends Base
                     ->table(self::TABLE)
                     ->columns(
                         '(SELECT count(*) FROM comments WHERE task_id=tasks.id) AS nb_comments',
+                        '(SELECT count(*) FROM task_has_files WHERE task_id=tasks.id) AS nb_files',
                         'tasks.id',
                         'tasks.title',
                         'tasks.description',

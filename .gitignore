@@ -52,3 +52,4 @@ Thumbs.db
 # App specific #
 ################
 config.php
+data/files

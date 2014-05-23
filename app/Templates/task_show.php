@@ -64,6 +64,23 @@
     </form>
 <?php endif ?>
 
+<?php if (! empty($files)): ?>
+    <h2 id="attachments"><?= t('Attachments') ?></h2>
+    <ul class="task-show-files">
+    <?php foreach ($files as $file): ?>
+        <li>
+            <a href="?controller=task&amp;action=download&amp;file_id=<?= $file['id'] ?>&amp;task_id=<?= $task['id'] ?>"><?= Helper\escape($file['name']) ?></a>
+            <span class="task-show-file-actions">
+                <?php if ($file['is_image']): ?>
+                    <a href="?controller=task&amp;action=openFile&amp;file_id=<?= $file['id'] ?>&amp;task_id=<?= $task['id'] ?>" class="popover"><?= t('open') ?></a>,
+                <?php endif ?>
+                <a href="?controller=task&amp;action=confirmRemoveFile&amp;file_id=<?= $file['id'] ?>&amp;task_id=<?= $task['id'] ?>"><?= t('remove') ?></a>
+            </span>
+        </li>
+    <?php endforeach ?>
+    </ul>
+<?php endif ?>
+
 <h2><?= t('Comments') ?></h2>
 <?php if ($comments): ?>
     <ul id="comments">

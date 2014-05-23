@@ -59,7 +59,7 @@
             </div>
             <?php endif ?>
 
-            <?php if (! empty($task['date_due']) || ! empty($task['nb_comments']) || ! empty($task['description'])): ?>
+            <?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description'])): ?>
             <div class="task-footer">
 
                 <?php if (! empty($task['date_due'])): ?>
@@ -69,6 +69,10 @@
                 <?php endif ?>
 
                 <div class="task-icons">
+                    <?php if (! empty($task['nb_files'])): ?>
+                        <?= $task['nb_files'] ?> <i class="fa fa-paperclip"></i>
+                    <?php endif ?>
+
                     <?php if (! empty($task['nb_comments'])): ?>
                         <?= $task['nb_comments'] ?> <i class="fa fa-comment-o" title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>"></i>
                     <?php endif ?>

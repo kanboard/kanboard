@@ -1,3 +1,7 @@
+<div class="page-header">
+    <h2><?= t('Close a task') ?></h2>
+</div>
+
 <div class="confirm">
     <p class="alert alert-info">
         <?= t('Do you really want to close this task: "%s"?', Helper\escape($task['title'])) ?>

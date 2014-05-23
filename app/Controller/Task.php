@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Project;
+use Model\File;
 
 /**
  * Task controller
@@ -12,6 +13,19 @@ use Model\Project;
  */
 class Task extends Base
 {
+    private function getTask()
+    {
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+
+        if (! $task) {
+            $this->notfound();
+        }
+
+        $this->checkProjectPermissions($task['project_id']);
+
+        return $task;
+    }
+
     /**
      * Webhook to create a task (useful for external software)
      *
@@ -57,12 +71,7 @@ class Task extends Base
      */
     public function show()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
-
-        $this->showTask($task);
+        $this->showTask($this->getTask());
     }
 
     /**
@@ -247,10 +256,7 @@ class Task extends Base
      */
     public function close()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        $task = $this->getTask();
 
         if ($this->task->close($task['id'])) {
             $this->session->flash(t('Task closed successfully.'));
@@ -268,10 +274,7 @@ class Task extends Base
      */
     public function confirmClose()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        $task = $this->getTask();
 
         $this->response->html($this->taskLayout('task_close', array(
             'task' => $task,
@@ -287,10 +290,7 @@ class Task extends Base
      */
     public function open()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        $task = $this->getTask();
 
         if ($this->task->open($task['id'])) {
             $this->session->flash(t('Task opened successfully.'));
@@ -308,10 +308,7 @@ class Task extends Base
      */
     public function confirmOpen()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        $task = $this->getTask();
 
         $this->response->html($this->taskLayout('task_open', array(
             'task' => $task,
@@ -327,10 +324,7 @@ class Task extends Base
      */
     public function remove()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        $task = $this->getTask();
 
         if ($this->task->remove($task['id'])) {
             $this->session->flash(t('Task removed successfully.'));
@@ -348,10 +342,7 @@ class Task extends Base
      */
     public function confirmRemove()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        $task = $this->getTask();
 
         $this->response->html($this->taskLayout('task_remove', array(
             'task' => $task,
@@ -367,10 +358,7 @@ class Task extends Base
      */
     public function duplicate()
     {
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'));
-
-        if (! $task) $this->notfound();
-        $this->checkProjectPermissions($task['project_id']);
+        $task = $this->getTask();
 
         if (! empty($task['date_due'])) {
             $task['date_due'] = date(t('m/d/Y'), $task['date_due']);
@@ -392,6 +380,128 @@ class Task extends Base
             'duplicate' => true,
             'menu' => 'tasks',
             'title' => t('New task')
+        )));
+    }
+
+    /**
+     * File upload form
+     *
+     * @access public
+     */
+    public function file()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->taskLayout('task_upload', array(
+            'task' => $task,
+            'menu' => 'tasks',
+            'title' => t('Attach a document')
+        )));
+    }
+
+    /**
+     * File upload (save files)
+     *
+     * @access public
+     */
+    public function upload()
+    {
+        $task = $this->getTask();
+        $this->file->upload($task['project_id'], $task['id'], 'files');
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#attachments');
+    }
+
+    /**
+     * File download
+     *
+     * @access public
+     */
+    public function download()
+    {
+        $task = $this->getTask();
+        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+        $filename = File::BASE_PATH.$file['path'];
+
+        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
+            $this->response->forceDownload($file['name']);
+            $this->response->binary(file_get_contents($filename));
+        }
+
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+    }
+
+    /**
+     * Open a file (show the content in a popover)
+     *
+     * @access public
+     */
+    public function openFile()
+    {
+        $task = $this->getTask();
+        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+
+        if ($file['task_id'] == $task['id']) {
+            $this->response->html($this->template->load('task_open_file', array(
+                'file' => $file
+            )));
+        }
+    }
+
+    /**
+     * Return the file content (work only for images)
+     *
+     * @access public
+     */
+    public function image()
+    {
+        $task = $this->getTask();
+        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+        $filename = File::BASE_PATH.$file['path'];
+
+        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
+            $metadata = getimagesize($filename);
+
+            if (isset($metadata['mime'])) {
+                $this->response->contentType($metadata['mime']);
+                readfile($filename);
+            }
+        }
+    }
+
+    /**
+     * Remove a file
+     *
+     * @access public
+     */
+    public function removeFile()
+    {
+        $task = $this->getTask();
+        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+
+        if ($file['task_id'] == $task['id'] && $this->file->remove($file['id'])) {
+            $this->session->flash(t('File removed successfully.'));
+        } else {
+            $this->session->flashError(t('Unable to remove this file.'));
+        }
+
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+    }
+
+    /**
+     * Confirmation dialog before removing a file
+     *
+     * @access public
+     */
+    public function confirmRemoveFile()
+    {
+        $task = $this->getTask();
+        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+
+        $this->response->html($this->taskLayout('task_remove_file', array(
+            'task' => $task,
+            'file' => $file,
+            'menu' => 'tasks',
+            'title' => t('Remove a file')
         )));
     }
 }

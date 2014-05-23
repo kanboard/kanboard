@@ -331,4 +331,11 @@ return array(
     'All categories' => 'Toutes les catégories',
     'No category' => 'Aucune catégorie',
     'The name is required' => 'Le nom est requis',
+    'Remove a file' => 'Supprimer un fichier',
+    'Unable to remove this file.' => 'Impossible de supprimer ce fichier.',
+    'File removed successfully.' => 'Fichier supprimé avec succès.',
+    'Attach a document' => 'Joindre un document',
+    'Do you really want to remove this file: "%s"?' => 'Voulez-vous vraiment supprimer ce fichier « %s » ?',
+    'open' => 'ouvrir',
+    'Attachments' => 'Pièces-jointes',
 );

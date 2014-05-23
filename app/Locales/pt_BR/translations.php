@@ -332,4 +332,11 @@ return array(
     // 'All categories' => '',
     // 'No category' => '',
     // 'The name is required' => '',
+    // 'Remove a file' => '',
+    // 'Unable to remove this file.' => '',
+    // 'File removed successfully.' => '',
+    // 'Attach a document' => '',
+    // 'Do you really want to remove this file: "%s"?' => '',
+    // 'open' => '',
+    // 'Attachments' => '',
 );

@@ -216,6 +216,7 @@ abstract class Base
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->task->getColors(),
+            'files' => $this->file->getAll($task['id']),
             'menu' => 'tasks',
             'title' => $task['title'],
         )));
