@@ -11,6 +11,10 @@ namespace Core;
 interface Listener {
 
     /**
+     * Execute the listener
+     *
+     * @access public
+     * @param  array     $data    Event data
      * @return boolean
      */
     public function execute(array $data);

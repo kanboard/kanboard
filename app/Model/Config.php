@@ -57,9 +57,9 @@ class Config extends Base
      * Get a config variable from the session or the database
      *
      * @access public
-     * @param  string  $name            Parameter name
+     * @param  string   $name            Parameter name
      * @param  string   $default_value   Default value of the parameter
-     * @return mixed
+     * @return string
      */
     public function get($name, $default_value = '')
     {

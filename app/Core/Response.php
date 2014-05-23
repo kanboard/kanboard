@@ -2,20 +2,41 @@
 
 namespace Core;
 
+/**
+ * Response class
+ *
+ * @package  core
+ * @author   Frederic Guillot
+ */
 class Response
 {
+    /**
+     * Send a custom Content-Type header
+     *
+     * @access public
+     * @param  string   $mimetype   Mime-type
+     */
     public function contentType($mimetype)
     {
         header('Content-Type: '.$mimetype);
     }
 
+    /**
+     * Force the browser to download an attachment
+     *
+     * @access public
+     * @param  string   $filename    File name
+     */
     public function forceDownload($filename)
     {
         header('Content-Disposition: attachment; filename="'.$filename.'"');
     }
 
     /**
-     * @param integer $status_code
+     * Send a custom HTTP status code
+     *
+     * @access public
+     * @param  integer   $status_code   HTTP status code
      */
     public function status($status_code)
     {
@@ -23,12 +44,25 @@ class Response
         header($_SERVER['SERVER_PROTOCOL'].' '.$status_code);
     }
 
+    /**
+     * Redirect to another URL
+     *
+     * @access public
+     * @param  string   $url   Redirection URL
+     */
     public function redirect($url)
     {
         header('Location: '.$url);
         exit;
     }
 
+    /**
+     * Send a Json response
+     *
+     * @access public
+     * @param  array    $data          Data to serialize in json
+     * @param  integer  $status_code   HTTP status code
+     */
     public function json(array $data, $status_code = 200)
     {
         $this->status($status_code);
@@ -39,6 +73,13 @@ class Response
         exit;
     }
 
+    /**
+     * Send a text response
+     *
+     * @access public
+     * @param  string   $data          Raw data
+     * @param  integer  $status_code   HTTP status code
+     */
     public function text($data, $status_code = 200)
     {
         $this->status($status_code);
@@ -49,6 +90,13 @@ class Response
         exit;
     }
 
+    /**
+     * Send a HTML response
+     *
+     * @access public
+     * @param  string   $data          Raw data
+     * @param  integer  $status_code   HTTP status code
+     */
     public function html($data, $status_code = 200)
     {
         $this->status($status_code);
@@ -59,6 +107,13 @@ class Response
         exit;
     }
 
+    /**
+     * Send a XML response
+     *
+     * @access public
+     * @param  string   $data          Raw data
+     * @param  integer  $status_code   HTTP status code
+     */
     public function xml($data, $status_code = 200)
     {
         $this->status($status_code);
@@ -69,6 +124,13 @@ class Response
         exit;
     }
 
+    /**
+     * Send a javascript response
+     *
+     * @access public
+     * @param  string   $data          Raw data
+     * @param  integer  $status_code   HTTP status code
+     */
     public function js($data, $status_code = 200)
     {
         $this->status($status_code);
@@ -79,6 +141,13 @@ class Response
         exit;
     }
 
+    /**
+     * Send a binary response
+     *
+     * @access public
+     * @param  string   $data          Raw data
+     * @param  integer  $status_code   HTTP status code
+     */
     public function binary($data, $status_code = 200)
     {
         $this->status($status_code);
@@ -90,6 +159,12 @@ class Response
         exit;
     }
 
+    /**
+     * Send the security header: Content-Security-Policy
+     *
+     * @access public
+     * @param  array    $policies   CSP rules
+     */
     public function csp(array $policies = array())
     {
         $policies['default-src'] = "'self'";
@@ -119,16 +194,31 @@ class Response
         header('Content-Security-Policy: '.$values);
     }
 
+    /**
+     * Send the security header: X-Content-Type-Options
+     *
+     * @access public
+     */
     public function nosniff()
     {
         header('X-Content-Type-Options: nosniff');
     }
 
+    /**
+     * Send the security header: X-XSS-Protection
+     *
+     * @access public
+     */
     public function xss()
     {
         header('X-XSS-Protection: 1; mode=block');
     }
 
+    /**
+     * Send the security header: Strict-Transport-Security (only if we use HTTPS)
+     *
+     * @access public
+     */
     public function hsts()
     {
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
@@ -136,6 +226,13 @@ class Response
         }
     }
 
+    /**
+     * Send the security header: X-Frame-Options (deny by default)
+     *
+     * @access public
+     * @param  string   $mode   Frame option mode
+     * @param  array    $urls   Allowed urls for the given mode
+     */
     public function xframe($mode = 'DENY', array $urls = array())
     {
         header('X-Frame-Options: '.$mode.' '.implode(' ', $urls));

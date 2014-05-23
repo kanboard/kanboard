@@ -2,13 +2,33 @@
 
 namespace Core;
 
+/**
+ * Session class
+ *
+ * @package  core
+ * @author   Frederic Guillot
+ */
 class Session
 {
+    /**
+     * Sesion lifetime
+     *
+     * @var integer
+     */
     const SESSION_LIFETIME = 86400; // 1 day
 
+    /**
+     * Open a session
+     *
+     * @access public
+     * @param  string   $base_path    Cookie path
+     * @param  string   $save_path    Custom session save path
+     */
     public function open($base_path = '/', $save_path = '')
     {
-        if ($save_path !== '') session_save_path($save_path);
+        if ($save_path !== '') {
+            session_save_path($save_path);
+        }
 
         // HttpOnly and secure flags for session cookie
         session_set_cookie_params(
@@ -39,16 +59,33 @@ class Session
         }
     }
 
+    /**
+     * Destroy the session
+     *
+     * @access public
+     */
     public function close()
     {
         session_destroy();
     }
 
+    /**
+     * Register a flash message (success notification)
+     *
+     * @access public
+     * @param  string   $message   Message
+     */
     public function flash($message)
     {
         $_SESSION['flash_message'] = $message;
     }
 
+    /**
+     * Register a flash error message (error notification)
+     *
+     * @access public
+     * @param  string   $message   Message
+     */
     public function flashError($message)
     {
         $_SESSION['flash_error_message'] = $message;

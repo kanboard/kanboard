@@ -2,9 +2,6 @@
 
 namespace Model;
 
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
-
 /**
  * File model
  *
@@ -111,7 +108,7 @@ class File extends Base
      * @param  integer   $project_id    Project id
      * @param  integer   $task_id       Task id
      * @param  string    $filename      Filename
-     * @return bool
+     * @return string
      */
     public function generatePath($project_id, $task_id, $filename)
     {

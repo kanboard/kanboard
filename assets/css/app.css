@@ -478,7 +478,7 @@ nav .active a {
     padding-left: 0;
 }
 
-/* boards */
+/* board */
 .page-header.board {
     margin-bottom: 0;
 }
@@ -506,6 +506,11 @@ nav .active a {
     font-size: 0.8em;
 }
 
+a.filter-on {
+    font-weight: bold;
+    color: #333;
+}
+
 .public-board {
     margin-top: 5px;
 }
@@ -523,74 +528,6 @@ nav .active a {
     background-color: red;
 }
 
-a.filter-on {
-    font-weight: bold;
-    color: #333;
-}
-
-.task-title {
-    margin-top: 10px;
-    font-size: 110%;
-}
-
-.task-user {
-    font-size: 80%;
-}
-
-.task a.task-nobody {
-    font-weight: normal;
-    font-style: italic;
-    color: #444;
-}
-
-.task-category-container {
-    text-align: right;
-    padding-bottom: 2px;
-}
-
-.task-category {
-    font-weight: bold;
-    font-size: 0.8em;
-    color: #000;
-    border: 1px solid #555;
-    border-radius: 4px;
-    padding: 2px;
-    padding-right: 5px;
-    padding-left: 5px;
-}
-
-.task-date {
-    position: absolute;
-    bottom: 0;
-    left: 5px;
-    font-weight: bold;
-    color: #D90000;
-}
-
-.task-icons {
-    position: absolute;
-    bottom: 0;
-    right: 5px;
-}
-
-.task-footer {
-    height: 18px;
-}
-
-.task {
-    border: 1px solid #000;
-    padding: 5px;
-    font-size: 95%;
-}
-
-td.over {
-    background-color: #f0f0f0;
-}
-
-td div.over {
-    border: 2px dashed #000;
-}
-
 .draggable-item {
     cursor: pointer;
     user-select: none;
@@ -603,44 +540,93 @@ td div.over {
     margin-bottom: 10px;
 }
 
-tr td.task a,
-div.task a {
+/* task inside the board */
+.task-board {
+    position: relative;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    padding: 5px;
+    font-size: 95%;
+}
+
+.task-table a,
+.task-board a {
     color: #000;
     text-decoration: none;
     font-weight: bold;
 }
 
-tr td.task a:focus,
-tr td.task a:hover,
-div.task a:focus,
-div.task a:hover {
+.task-table a:focus,
+.task-table a:hover,
+.task-board a:focus,
+.task-board a:hover {
     text-decoration: underline;
 }
 
-div.task-title a {
+.task-board-title {
+    margin-top: 10px;
+    font-size: 110%;
+}
+
+.task-board-title a {
     font-weight: normal;
 }
 
-div.task {
-    position: relative;
-    margin-right: 5px;
-    margin-bottom: 10px;
+.task-board-user {
+    font-size: 80%;
 }
 
+a.task-board-nobody {
+    font-weight: normal;
+    font-style: italic;
+    color: #444;
+}
+
+.task-board-category-container {
+    text-align: right;
+    padding-bottom: 2px;
+}
+
+.task-board-category {
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #000;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.task-board-footer {
+    height: 18px;
+}
+
+.task-board-date {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    font-weight: bold;
+    color: #D90000;
+}
+
+.task-board-icons {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+}
+
+/* task score */
 .task-score {
     font-weight: bold;
     position: absolute;
 }
 
-div.task .task-score {
+.task-board .task-score {
     font-size: 1.5em;
     right: 5px;
     top: 0;
-}
-
-.task-table-icons {
-    float: right ;
-    text-align: right;
 }
 
 /* task view */

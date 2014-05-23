@@ -121,7 +121,7 @@ class Translator
      * Get an identifier from the translations or return the default
      *
      * @access public
-     * @param  string   $idendifier   Locale identifier
+     * @param  string   $identifier   Locale identifier
      * @param  string   $default      Default value
      * @return string
      */

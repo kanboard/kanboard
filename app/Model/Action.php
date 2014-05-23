@@ -213,7 +213,7 @@ class Action extends Base
      * @access public
      * @param  string  $name        Action class name
      * @param  integer $project_id  Project id
-     * @return mixed                Action Instance
+     * @return \Core\Listener       Action Instance
      * @throw  LogicException
      */
     public function load($name, $project_id)

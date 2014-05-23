@@ -15,7 +15,7 @@
         });
 
         // Open assignee popover
-        $(".task-user a").click(function(e) {
+        $(".task-boad-user a").click(function(e) {
 
             e.preventDefault();
             e.stopPropagation();
@@ -60,7 +60,7 @@
         $(".column").each(function() {
             var columnId = $(this).attr("data-column-id");
 
-            $("#column-" + columnId + " .task").each(function(index) {
+            $("#column-" + columnId + " .task-board").each(function(index) {
                 data.push({
                     "task_id": parseInt($(this).attr("data-task-id")),
                     "position": index + 1,

@@ -19,54 +19,9 @@
                 <?php foreach ($columns as $column): ?>
                 <td class="column <?= $column['task_limit'] && count($column['tasks']) > $column['task_limit'] ? 'task-limit-warning' : '' ?>">
                     <?php foreach ($column['tasks'] as $task): ?>
-                    <div class="task task-<?= $task['color_id'] ?>">
+                    <div class="task-board task-<?= $task['color_id'] ?>">
 
-                        #<?= $task['id'] ?> -
-
-                        <span class="task-user">
-                        <?php if (! empty($task['owner_id'])): ?>
-                            <?= t('Assigned to %s', $task['username']) ?>
-                        <?php else: ?>
-                            <span class="task-nobody"><?= t('Nobody assigned') ?></span>
-                        <?php endif ?>
-                        </span>
-
-                        <?php if ($task['score']): ?>
-                            <span class="task-score"><?= Helper\escape($task['score']) ?></span>
-                        <?php endif ?>
-
-                        <div class="task-title">
-                            <?= Helper\escape($task['title']) ?>
-                        </div>
-
-                        <?php if ($task['category_id']): ?>
-                        <div class="task-category-container">
-                            <span class="task-category">
-                                <?= Helper\in_list($task['category_id'], $categories) ?>
-                            </span>
-                        </div>
-                        <?php endif ?>
-
-                        <?php if (! empty($task['date_due']) || ! empty($task['nb_comments']) || ! empty($task['description'])): ?>
-                        <div class="task-footer">
-
-                            <?php if (! empty($task['date_due'])): ?>
-                            <div class="task-date">
-                                <?= dt('%B %e, %G', $task['date_due']) ?>
-                            </div>
-                            <?php endif ?>
-
-                            <div class="task-icons">
-                                <?php if (! empty($task['nb_comments'])): ?>
-                                    <?= $task['nb_comments'] ?> <i class="fa fa-comment-o" title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>"></i>
-                                <?php endif ?>
-
-                                <?php if (! empty($task['description'])): ?>
-                                    <i class="fa fa-file-text-o" title="<?= t('Description') ?>"></i>
-                                <?php endif ?>
-                            </div>
-                        </div>
-                        <?php endif ?>
+                        <?= Helper\template('board_task', array('task' => $task, 'categories' => $categories, 'not_editable' => true)) ?>
 
                     </div>
                     <?php endforeach ?>

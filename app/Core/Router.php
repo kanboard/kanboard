@@ -38,7 +38,7 @@ class Router
      * Constructor
      *
      * @access public
-     * @param  Core\Registry   $registry     Registry instance
+     * @param  Registry        $registry     Registry instance
      * @param  string          $controller   Controller name
      * @param  string          $action       Action name
      */

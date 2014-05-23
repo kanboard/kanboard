@@ -473,7 +473,7 @@ class Project extends Base
      * Validate project creation
      *
      * @access public
-     * @param  array   $array            Form values
+     * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
     public function validateCreation(array $values)
@@ -494,7 +494,7 @@ class Project extends Base
      * Validate project modification
      *
      * @access public
-     * @param  array   $array            Form values
+     * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
     public function validateModification(array $values)
@@ -517,7 +517,7 @@ class Project extends Base
      * Validate allowed users
      *
      * @access public
-     * @param  array   $array            Form values
+     * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
     public function validateUserAccess(array $values)
