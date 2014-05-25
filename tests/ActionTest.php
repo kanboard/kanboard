@@ -6,6 +6,7 @@ use Model\Action;
 use Model\Project;
 use Model\Board;
 use Model\Task;
+use Model\Category;
 
 class ActionTest extends Base
 {
@@ -45,7 +46,7 @@ class ActionTest extends Base
         $this->assertEquals(4, $actions[0]['params'][0]['value']);
     }
 
-    public function testExecuteAction()
+    public function testEventMoveColumn()
     {
         $task = new Task($this->db, $this->event);
         $board = new Board($this->db, $this->event);
@@ -88,6 +89,56 @@ class ActionTest extends Base
         // Our task should be closed
         $t1 = $task->getById(1);
         $this->assertEquals(4, $t1['column_id']);
+        $this->assertEquals(0, $t1['is_active']);
+    }
+
+    public function testEventMovePosition()
+    {
+        $task = new Task($this->db, $this->event);
+        $board = new Board($this->db, $this->event);
+        $project = new Project($this->db, $this->event);
+        $action = new Action($this->db, $this->event);
+
+        // We create a project
+        $this->assertEquals(1, $project->create(array('name' => 'unit_test')));
+
+        // We create a task
+        $this->assertEquals(1, $task->create(array(
+            'title' => 'unit_test',
+            'project_id' => 1,
+            'owner_id' => 1,
+            'color_id' => 'red',
+            'column_id' => 1,
+        )));
+
+        // We create a new action, when the category_id=2 then the color_id should be green
+        $this->assertTrue($action->create(array(
+            'project_id' => 1,
+            'event_name' => Task::EVENT_MOVE_POSITION,
+            'action_name' => 'TaskClose',
+            'params' => array(
+                'column_id' => 1,
+                'color_id' => 'green',
+            )
+        )));
+
+        // We bind events
+        $action->attachEvents();
+
+        $this->assertTrue($this->event->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskClose'));
+
+        // Our task should have the color red and position=0
+        $t1 = $task->getById(1);
+        $this->assertEquals(0, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
+
+        // We move our task
+        $task->move(1, 1, 2);
+        $this->assertEquals(Task::EVENT_CLOSE, $this->event->getLastTriggeredEvent());
+
+        // Our task should be green and have the position 2
+        $t1 = $task->getById(1);
+        $this->assertEquals(2, $t1['position']);
         $this->assertEquals(0, $t1['is_active']);
     }
 
@@ -161,4 +212,6 @@ class ActionTest extends Base
         $this->assertEquals(2, $t2['project_id']);
         $this->assertEquals('unit_test', $t2['title']);
     }
+
+
 }

@@ -36,6 +36,7 @@ class Acl extends Base
         'config' => array('index', 'removeremembermetoken'),
         'comment' => array('create', 'save', 'confirm', 'remove', 'update', 'edit', 'forbidden'),
         'file' => array('create', 'save', 'download', 'confirm', 'remove', 'open', 'image'),
+        'subtask' => array('create', 'save', 'edit', 'update', 'confirm', 'remove'),
         'task' => array(
             'show',
             'create',
