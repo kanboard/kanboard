@@ -159,7 +159,7 @@ class File extends Base
 
                     if (@move_uploaded_file($uploaded_filename, self::BASE_PATH.$destination_filename)) {
 
-                        $this->create(
+                        return $this->create(
                             $task_id,
                             $original_filename,
                             $destination_filename,

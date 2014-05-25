@@ -369,4 +369,6 @@ return array(
     // 'Unable to update your sub-task.' => '',
     // 'Unable to create your sub-task.' => '',
     // 'Sub-task added successfully.' => '',
+    // 'Maximum size: ' => '',
+    // 'Unable to upload the file.' => '',
 );

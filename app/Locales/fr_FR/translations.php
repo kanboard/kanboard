@@ -369,4 +369,6 @@ return array(
     'Unable to update your sub-task.' => 'Impossible de mettre à jour votre sous-tâche.',
     'Unable to create your sub-task.' => 'Impossible de créer votre sous-tâche.',
     'Sub-task added successfully.' => 'Sous-tâche ajouté avec succès.',
+    'Maximum size: ' => 'Taille maximum : ',
+    'Unable to upload the file.' => 'Impossible de transférer le fichier.',
 );
