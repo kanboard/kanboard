@@ -2,7 +2,23 @@
 
 namespace Schema;
 
-const VERSION = 17;
+const VERSION = 18;
+
+function version_18($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_subtasks (
+            id INTEGER PRIMARY KEY,
+            title TEXT COLLATE NOCASE,
+            status INTEGER DEFAULT 0,
+            time_estimated INTEGER DEFAULT 0,
+            time_spent INTEGER DEFAULT 0,
+            task_id INTEGER,
+            user_id INTEGER,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )"
+    );
+}
 
 function version_17($pdo)
 {

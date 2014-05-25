@@ -23,6 +23,7 @@ use Model\LastLogin;
  * @property \Model\Ldap        $ldap
  * @property \Model\Project     $project
  * @property \Model\RememberMe  $rememberMe
+ * @property \Model\SubTask     $subTask
  * @property \Model\Task        $task
  * @property \Model\User        $user
  */

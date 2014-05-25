@@ -2,7 +2,24 @@
 
 namespace Schema;
 
-const VERSION = 17;
+const VERSION = 18;
+
+function version_18($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_subtasks (
+            id INT NOT NULL AUTO_INCREMENT,
+            title VARCHAR(255),
+            status INT DEFAULT 0,
+            time_estimated INT DEFAULT 0,
+            time_spent INT DEFAULT 0,
+            task_id INT,
+            user_id INT,
+            PRIMARY KEY (id),
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8"
+    );
+}
 
 function version_17($pdo)
 {

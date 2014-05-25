@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Add a comment') ?></h2>
+    <h2><?= t('Remove a comment') ?></h2>
 </div>
 
 <div class="confirm">
