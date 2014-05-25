@@ -55,6 +55,22 @@ class File extends Base
     }
 
     /**
+     * Remove all files for a given task
+     *
+     * @access public
+     * @param  integer   $task_id    Task id
+     * @return bool
+     */
+    public function removeAll($task_id)
+    {
+        $files = $this->getAll($task_id);
+
+        foreach ($files as $file) {
+            $this->remove($file['id']);
+        }
+    }
+
+    /**
      * Create a file entry in the database
      *
      * @access public
@@ -144,6 +160,7 @@ class File extends Base
     public function upload($project_id, $task_id, $form_name)
     {
         $this->setup();
+        $result = array();
 
         if (! empty($_FILES[$form_name])) {
 
@@ -159,7 +176,7 @@ class File extends Base
 
                     if (@move_uploaded_file($uploaded_filename, self::BASE_PATH.$destination_filename)) {
 
-                        return $this->create(
+                        $result[] = $this->create(
                             $task_id,
                             $original_filename,
                             $destination_filename,
@@ -169,5 +186,7 @@ class File extends Base
                 }
             }
         }
+
+        return count(array_unique($result)) === 1;
     }
 }

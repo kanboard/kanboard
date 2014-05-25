@@ -441,6 +441,9 @@ class Task extends Base
      */
     public function remove($task_id)
     {
+        $file = new File($this->db, $this->event);
+        $file->removeAll($task_id);
+
         return $this->db->table(self::TABLE)->eq('id', $task_id)->remove();
     }
 
