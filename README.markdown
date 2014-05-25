@@ -29,7 +29,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English, French, Brazilian Portuguese, Spanish and Polish
+- Translations in English, French, Brazilian Portuguese, Spanish, German and Polish
 
 Roadmap
 -------
@@ -63,6 +63,7 @@ Contributors:
 - Rzeka: https://github.com/rzeka
 - Sebastien pacilly: https://github.com/spacilly
 - Toomyem: https://github.com/Toomyem
+- Troloo: https://github.com/troloo
 
 There is also many people who have reported bugs or proposed awesome ideas.
 

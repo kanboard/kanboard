@@ -4,6 +4,7 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
+use Core\Translator;
 
 /**
  * Config model
@@ -41,6 +42,7 @@ class Config extends Base
     public function getLanguages()
     {
         $languages = array(
+            'de_DE' => t('German'),
             'en_US' => t('English'),
             'es_ES' => t('Spanish'),
             'fr_FR' => t('French'),
@@ -106,9 +108,7 @@ class Config extends Base
     public function reload()
     {
         $_SESSION['config'] = $this->getAll();
-
-        $language = $this->get('language', 'en_US');
-        if ($language !== 'en_US') \Translator\load($language);
+        Translator::load($this->get('language', 'en_US'));
     }
 
     /**

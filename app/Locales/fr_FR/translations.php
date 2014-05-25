@@ -6,6 +6,7 @@ return array(
     'Polish' => 'Polonais',
     'Portuguese (Brazilian)' => 'Portugais (Brésil)',
     'Spanish' => 'Espagnol',
+    'German' => 'Allemand',
     'None' => 'Aucun',
     'edit' => 'modifier',
     'Edit' => 'Modifier',
