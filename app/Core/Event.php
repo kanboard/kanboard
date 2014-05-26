@@ -67,13 +67,16 @@ class Event
      */
     public function trigger($eventName, array $data)
     {
-        $this->lastEvent = $eventName;
-        $this->events[] = $eventName;
+        if (! $this->isEventTriggered($eventName)) {
 
-        if (isset($this->listeners[$eventName])) {
-            foreach ($this->listeners[$eventName] as $listener) {
-                if ($listener->execute($data)) {
-                    $this->lastListener = get_class($listener);
+            $this->lastEvent = $eventName;
+            $this->events[] = $eventName;
+
+            if (isset($this->listeners[$eventName])) {
+                foreach ($this->listeners[$eventName] as $listener) {
+                    if ($listener->execute($data)) {
+                        $this->lastListener = get_class($listener);
+                    }
                 }
             }
         }
@@ -110,6 +113,18 @@ class Event
     public function getTriggeredEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Check if an event have been triggered
+     *
+     * @access public
+     * @param  string $eventName    Event name
+     * @return bool
+     */
+    public function isEventTriggered($eventName)
+    {
+        return in_array($eventName, $this->events);
     }
 
     /**

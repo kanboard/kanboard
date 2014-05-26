@@ -86,6 +86,9 @@ class ActionTest extends Base
         // We move our task
         $task->move(1, 4, 1);
 
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_UPDATE));
+
         // Our task should be closed
         $t1 = $task->getById(1);
         $this->assertEquals(4, $t1['column_id']);
@@ -109,15 +112,16 @@ class ActionTest extends Base
             'owner_id' => 1,
             'color_id' => 'red',
             'column_id' => 1,
+            'category_id' => 1,
         )));
 
         // We create a new action, when the category_id=2 then the color_id should be green
         $this->assertTrue($action->create(array(
             'project_id' => 1,
             'event_name' => Task::EVENT_MOVE_POSITION,
-            'action_name' => 'TaskClose',
+            'action_name' => 'TaskAssignColorCategory',
             'params' => array(
-                'column_id' => 1,
+                'category_id' => 1,
                 'color_id' => 'green',
             )
         )));
@@ -125,21 +129,24 @@ class ActionTest extends Base
         // We bind events
         $action->attachEvents();
 
-        $this->assertTrue($this->event->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskClose'));
+        $this->assertTrue($this->event->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskAssignColorCategory'));
 
         // Our task should have the color red and position=0
         $t1 = $task->getById(1);
         $this->assertEquals(0, $t1['position']);
         $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('red', $t1['color_id']);
 
         // We move our task
         $task->move(1, 1, 2);
-        $this->assertEquals(Task::EVENT_CLOSE, $this->event->getLastTriggeredEvent());
+
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
         // Our task should be green and have the position 2
         $t1 = $task->getById(1);
         $this->assertEquals(2, $t1['position']);
-        $this->assertEquals(0, $t1['is_active']);
+        $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('green', $t1['color_id']);
     }
 
     public function testExecuteMultipleActions()
@@ -197,7 +204,9 @@ class ActionTest extends Base
 
         // We move our task
         $task->move(1, 4, 1);
-        $this->assertEquals(Task::EVENT_CREATE, $this->event->getLastTriggeredEvent());
+
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CLOSE));
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // Our task should be closed
         $t1 = $task->getById(1);
@@ -212,6 +221,4 @@ class ActionTest extends Base
         $this->assertEquals(2, $t2['project_id']);
         $this->assertEquals('unit_test', $t2['title']);
     }
-
-
 }

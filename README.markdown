@@ -21,7 +21,7 @@ Features
 
 - Multiple boards/projects
 - Boards customization, rename or add columns
-- Tasks with different colors, Markdown support for the description
+- Tasks with different colors, categories, sub-tasks, attachments, Markdown support for the description
 - Automatic actions
 - Users management with a basic privileges separation (administrator or regular user)
 - External authentication: Google Account and LDAP/ActiveDirectory

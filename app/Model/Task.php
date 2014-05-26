@@ -359,12 +359,10 @@ class Task extends Base
         // Trigger events
         if ($result) {
 
-            $events = array();
-
-            if (! in_array($this->event->getLastTriggeredEvent(), array(self::EVENT_CREATE_UPDATE))) {
-                $events[] = self::EVENT_CREATE_UPDATE;
-                $events[] = self::EVENT_UPDATE;
-            }
+            $events = array(
+                self::EVENT_CREATE_UPDATE,
+                self::EVENT_UPDATE,
+            );
 
             if (isset($values['column_id']) && $original_task['column_id'] != $values['column_id']) {
                 $events[] = self::EVENT_MOVE_COLUMN;
