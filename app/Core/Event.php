@@ -128,6 +128,17 @@ class Event
     }
 
     /**
+     * Flush the list of triggered events
+     *
+     * @access public
+     */
+    public function clearTriggeredEvents()
+    {
+        $this->events = array();
+        $this->lastEvent = '';
+    }
+
+    /**
      * Check if a listener bind to an event
      *
      * @access public

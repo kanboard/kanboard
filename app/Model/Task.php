@@ -456,6 +456,8 @@ class Task extends Base
      */
     public function move($task_id, $column_id, $position)
     {
+        $this->event->clearTriggeredEvents();
+
         return $this->update(array(
             'id' => $task_id,
             'column_id' => $column_id,

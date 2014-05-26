@@ -107,10 +107,19 @@ class ActionTest extends Base
 
         // We create a task
         $this->assertEquals(1, $task->create(array(
-            'title' => 'unit_test',
+            'title' => 'unit_test 0',
             'project_id' => 1,
             'owner_id' => 1,
             'color_id' => 'red',
+            'column_id' => 1,
+            'category_id' => 1,
+        )));
+
+        $this->assertEquals(2, $task->create(array(
+            'title' => 'unit_test 1',
+            'project_id' => 1,
+            'owner_id' => 1,
+            'color_id' => 'yellow',
             'column_id' => 1,
             'category_id' => 1,
         )));
@@ -137,14 +146,25 @@ class ActionTest extends Base
         $this->assertEquals(1, $t1['is_active']);
         $this->assertEquals('red', $t1['color_id']);
 
-        // We move our task
-        $task->move(1, 1, 2);
+        $t1 = $task->getById(2);
+        $this->assertEquals(1, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('yellow', $t1['color_id']);
+
+        // We move our tasks
+        $task->move(1, 1, 1); // task #1 to position 1
+        $task->move(2, 1, 0); // task #2 to position 0
 
         $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
-        // Our task should be green and have the position 2
+        // Both tasks should be green
         $t1 = $task->getById(1);
-        $this->assertEquals(2, $t1['position']);
+        $this->assertEquals(1, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('green', $t1['color_id']);
+
+        $t1 = $task->getById(2);
+        $this->assertEquals(0, $t1['position']);
         $this->assertEquals(1, $t1['is_active']);
         $this->assertEquals('green', $t1['color_id']);
     }
