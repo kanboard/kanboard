@@ -34,7 +34,8 @@ List of available actions
 - Assign the task to the person who does the action
 - Duplicate the task to another project
 - Assign a color to a specific user
-- Assign a color to a specific category
+- Assign automatically a color based on a category
+- Assign automatically a category based on a color
 
 Examples
 --------
@@ -67,14 +68,14 @@ Let's say we have two projects "Customer orders" and "Production", once the orde
 - Choose the action: **Duplicate the task to another project**
 - Define the action parameters: **Column = Validated** and **Project = Production**
 
-### I want to assign a specific color to the user Bob
+### I want to assign automatically a color to the user Bob
 
 - Choose the event: **Task creation**
 - Choose the action: **Assign a color to a specific user**
 - Define the action parameters: **Color = Green** and **Assignee = Bob**
 
-### I want to assign a specific color to the category "Feature Request"
+### I want to assign automatically a color to the defined category "Feature Request"
 
 - Choose the event: **Task creation or modification**
-- Choose the action: **Assign a color to a specific category**
+- Choose the action: **Assign automatically a color based on a category**
 - Define the action parameters: **Color = Blue** and **Category = Feature Request**
