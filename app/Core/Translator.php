@@ -114,7 +114,15 @@ class Translator
             return '';
         }
 
-        return strftime($this->get($format, $format), (int) $timestamp);
+        $format = $this->get($format, $format);
+
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $format = str_replace('%e', '%d', $format);
+            $format = str_replace('%G', '%Y', $format);
+            $format = str_replace('%k', '%H', $format);
+        }
+
+        return strftime($format, (int) $timestamp);
     }
 
     /**

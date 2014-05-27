@@ -11,6 +11,18 @@ namespace Core;
 class Response
 {
     /**
+     * Send no cache headers
+     *
+     * @access public
+     */
+    public function nocache()
+    {
+        header('Pragma: no-cache');
+        header('Cache-Control: no-cache, must-revalidate');
+        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+    }
+
+    /**
      * Send a custom Content-Type header
      *
      * @access public
@@ -66,7 +78,7 @@ class Response
     public function json(array $data, $status_code = 200)
     {
         $this->status($status_code);
-
+        $this->nocache();
         header('Content-Type: application/json');
         echo json_encode($data);
 
@@ -83,7 +95,7 @@ class Response
     public function text($data, $status_code = 200)
     {
         $this->status($status_code);
-
+        $this->nocache();
         header('Content-Type: text/plain; charset=utf-8');
         echo $data;
 
@@ -100,7 +112,7 @@ class Response
     public function html($data, $status_code = 200)
     {
         $this->status($status_code);
-
+        $this->nocache();
         header('Content-Type: text/html; charset=utf-8');
         echo $data;
 
@@ -117,7 +129,7 @@ class Response
     public function xml($data, $status_code = 200)
     {
         $this->status($status_code);
-
+        $this->nocache();
         header('Content-Type: text/xml; charset=utf-8');
         echo $data;
 
@@ -151,7 +163,7 @@ class Response
     public function binary($data, $status_code = 200)
     {
         $this->status($status_code);
-
+        $this->nocache();
         header('Content-Transfer-Encoding: binary');
         header('Content-Type: application/octet-stream');
         echo $data;
