@@ -2,6 +2,16 @@
 
 namespace Helper;
 
+function js($filename)
+{
+    return '<script type="text/javascript" src="'.$filename.'?'.filemtime($filename).'"></script>';
+}
+
+function css($filename)
+{
+    return '<link rel="stylesheet" href="'.$filename.'?'.filemtime($filename).'" media="screen">';
+}
+
 function template($name, array $args = array())
 {
     $tpl = new \Core\Template;

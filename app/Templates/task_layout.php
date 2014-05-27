@@ -14,4 +14,5 @@
         </div>
     </section>
 </section>
-<script type="text/javascript" src="assets/js/task.js"></script>
+
+<?= Helper\js('assets/js/task.js') ?>

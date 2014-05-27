@@ -6,12 +6,12 @@
         <meta name="viewport" content="width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
 
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
-        <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+        <?= Helper\js('assets/js/jquery-1.11.1.min.js') ?>
+        <?= Helper\js('assets/js/jquery-ui-1.10.4.custom.min.js') ?>
+        <?= Helper\js('assets/js/jquery.ui.touch-punch.min.js') ?>
 
-        <link rel="stylesheet" href="assets/css/app.css" media="screen">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css" media="screen">
+        <?= Helper\css('assets/css/app.css') ?>
+        <?= Helper\css('assets/css/font-awesome.min.css') ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
