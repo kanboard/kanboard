@@ -15,8 +15,8 @@ Install Kanboard:
 
 ```bash
 cd /var/www/html
-sudo wget http://kanboard.net/kanboard-VERSION.zip
-sudo unzip kanboard-VERSION.zip
+sudo wget http://kanboard.net/kanboard-latest.zip
+sudo unzip kanboard-latest.zip
 sudo chown -R www-data:www-data kanboard/data
-sudo rm kanboard-VERSION.zip
+sudo rm kanboard-latest.zip
 ```

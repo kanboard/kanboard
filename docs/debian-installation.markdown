@@ -15,10 +15,10 @@ Install Kanboard:
 
 ```bash
 cd /var/www
-wget http://kanboard.net/kanboard-VERSION.zip
-unzip kanboard-VERSION.zip
+wget http://kanboard.net/kanboard-latest.zip
+unzip kanboard-latest.zip
 chown -R www-data:www-data kanboard/data
-rm kanboard-VERSION.zip
+rm kanboard-latest.zip
 ```
 
 Debian 6 (Squeeze)
@@ -35,8 +35,8 @@ Install Kanboard:
 
 ```bash
 cd /var/www
-wget http://kanboard.net/kanboard-VERSION.zip
-unzip kanboard-VERSION.zip
+wget http://kanboard.net/kanboard-latest.zip
+unzip kanboard-latest.zip
 chown -R www-data:www-data kanboard/data
-rm kanboard-VERSION.zip
+rm kanboard-latest.zip
 ```
