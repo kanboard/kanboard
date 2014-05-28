@@ -15,7 +15,7 @@ class Session
      *
      * @var integer
      */
-    const SESSION_LIFETIME = 86400; // 1 day
+    const SESSION_LIFETIME = 7200; // 2 hours
 
     /**
      * Open a session
@@ -35,7 +35,7 @@ class Session
             self::SESSION_LIFETIME,
             $base_path ?: '/',
             null,
-            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on',
+            ! empty($_SERVER['HTTPS']),
             true
         );
 
