@@ -70,8 +70,9 @@
         });
 
         $.ajax({
+            cache: false,
             url: "?controller=board&action=save&project_id=" + projectId,
-            data: {positions: data},
+            data: {"positions": data, "csrf_token": $("#board").attr("data-csrf-token")},
             type: "POST",
             success: function(data) {
                 $("#board").remove();
@@ -90,6 +91,7 @@
 
         if (is_visible() && projectId != undefined && timestamp != undefined) {
             $.ajax({
+                cache: false,
                 url: "?controller=board&action=check&project_id=" + projectId + "&timestamp=" + timestamp,
                 statusCode: {
                     200: function(data) {

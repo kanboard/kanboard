@@ -2,6 +2,11 @@
 
 namespace Helper;
 
+function param_csrf()
+{
+    return '&amp;csrf_token='.\Core\Security::getCSRFToken();
+}
+
 function js($filename)
 {
     return '<script type="text/javascript" src="'.$filename.'?'.filemtime($filename).'"></script>';
@@ -161,6 +166,11 @@ function form_value($values, $name)
     }
 
     return isset($values[$name]) ? 'value="'.escape($values[$name]).'"' : '';
+}
+
+function form_csrf()
+{
+    return '<input type="hidden" name="csrf_token" value="'.\Core\Security::getCSRFToken().'"/>';
 }
 
 function form_hidden($name, $values = array())

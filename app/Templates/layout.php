@@ -45,7 +45,7 @@
                         <a href="?controller=config"><?= t('Settings') ?></a>
                     </li>
                     <li>
-                        <a href="?controller=user&amp;action=logout"><?= t('Logout') ?></a>
+                        <a href="?controller=user&amp;action=logout<?= Helper\param_csrf() ?>"><?= t('Logout') ?></a>
                         (<?= Helper\escape(Helper\get_username()) ?>)
                     </li>
                 </ul>

@@ -209,7 +209,7 @@ function version_3($pdo)
 
         foreach ($results as &$result) {
             $rq = $pdo->prepare('UPDATE projects SET token=? WHERE id=?');
-            $rq->execute(array(\Model\Base::generateToken(), $result['id']));
+            $rq->execute(array(\Core\Security::generateToken(), $result['id']));
         }
     }
 }
@@ -284,6 +284,6 @@ function version_1($pdo)
     $pdo->exec("
         INSERT INTO config
         (language, webhooks_token)
-        VALUES ('en_US', '".\Model\Base::generateToken()."')
+        VALUES ('en_US', '".\Core\Security::generateToken()."')
     ");
 }

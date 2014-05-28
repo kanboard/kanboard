@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Core\Registry;
+use Core\Security;
 use Core\Translator;
 use Model\LastLogin;
 
@@ -161,6 +162,28 @@ abstract class Base
     }
 
     /**
+     * Application forbidden page
+     *
+     * @access public
+     */
+    public function forbidden()
+    {
+        $this->response->html($this->template->layout('app_forbidden', array('title' => t('Access Forbidden'))));
+    }
+
+    /**
+     * Check if the CSRF token from the URL is correct
+     *
+     * @access protected
+     */
+    protected function checkCSRFParam()
+    {
+        if (! Security::validateCSRFToken($this->request->getStringParam('csrf_token'))) {
+            $this->forbidden();
+        }
+    }
+
+    /**
      * Check if the current user have access to the given project
      *
      * @access protected
@@ -171,7 +194,7 @@ abstract class Base
         if ($this->acl->isRegularUser()) {
 
             if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
-                $this->response->redirect('?controller=project&action=forbidden');
+                $this->forbidden();
             }
         }
     }

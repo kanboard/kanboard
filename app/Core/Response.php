@@ -18,8 +18,10 @@ class Response
     public function nocache()
     {
         header('Pragma: no-cache');
-        header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+
+        // Use no-store due to a Chrome bug: https://code.google.com/p/chromium/issues/detail?id=28035
+        header('Cache-Control: no-store, must-revalidate');
     }
 
     /**

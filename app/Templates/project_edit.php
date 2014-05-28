@@ -8,6 +8,7 @@
     <section>
     <form method="post" action="?controller=project&amp;action=update&amp;project_id=<?= $values['id'] ?>" autocomplete="off">
 
+        <?= Helper\form_csrf() ?>
         <?= Helper\form_hidden('id', $values) ?>
 
         <?= Helper\form_label(t('Name'), 'name') ?>

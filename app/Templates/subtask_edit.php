@@ -4,6 +4,8 @@
 
 <form method="post" action="?controller=subtask&amp;action=update&amp;task_id=<?= $task['id'] ?>&amp;subtask_id=<?= $subtask['id'] ?>" autocomplete="off">
 
+    <?= Helper\form_csrf() ?>
+
     <?= Helper\form_hidden('id', $values) ?>
     <?= Helper\form_hidden('task_id', $values) ?>
 

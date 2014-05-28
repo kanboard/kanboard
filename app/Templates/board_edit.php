@@ -9,7 +9,7 @@
 
     <h3><?= t('Change columns') ?></h3>
     <form method="post" action="?controller=board&amp;action=update&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
-
+        <?= Helper\form_csrf() ?>
         <?php $i = 0; ?>
         <table>
             <tr>
@@ -27,12 +27,12 @@
                     <ul>
                         <?php if ($column['position'] != 1): ?>
                         <li>
-                            <a href="?controller=board&amp;action=moveUp&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'] ?>"><?= t('Move Up') ?></a>
+                            <a href="?controller=board&amp;action=moveUp&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'].Helper\param_csrf() ?>"><?= t('Move Up') ?></a>
                         </li>
                         <?php endif ?>
                         <?php if ($column['position'] != count($columns)): ?>
                         <li>
-                            <a href="?controller=board&amp;action=moveDown&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'] ?>"><?= t('Move Down') ?></a>
+                            <a href="?controller=board&amp;action=moveDown&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'].Helper\param_csrf() ?>"><?= t('Move Down') ?></a>
                         </li>
                         <?php endif ?>
                         <li>
@@ -52,7 +52,7 @@
 
     <h3><?= t('Add a new column') ?></h3>
     <form method="post" action="?controller=board&amp;action=add&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
-
+        <?= Helper\form_csrf() ?>
         <?= Helper\form_hidden('project_id', $values) ?>
         <?= Helper\form_label(t('Title'), 'title') ?>
         <?= Helper\form_text('title', $values, $errors, array('required')) ?>

@@ -263,6 +263,6 @@ function version_1($pdo)
     $pdo->exec("
         INSERT INTO config
         (webhooks_token)
-        VALUES ('".\Model\Base::generateToken()."')
+        VALUES ('".\Core\Security::generateToken()."')
     ");
 }

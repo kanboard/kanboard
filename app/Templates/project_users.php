@@ -10,6 +10,8 @@
     <?php if (! empty($users['not_allowed'])): ?>
         <form method="post" action="?controller=project&amp;action=allow&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
 
+            <?= Helper\form_csrf() ?>
+
             <?= Helper\form_hidden('project_id', array('project_id' => $project['id'])) ?>
 
             <?= Helper\form_label(t('User'), 'user_id') ?>
@@ -32,7 +34,7 @@
         <?php foreach ($users['allowed'] as $user_id => $username): ?>
             <li>
                 <strong><?= Helper\escape($username) ?></strong>
-                (<a href="?controller=project&amp;action=revoke&amp;project_id=<?= $project['id'] ?>&amp;user_id=<?= $user_id ?>"><?= t('revoke') ?></a>)
+                (<a href="?controller=project&amp;action=revoke&amp;project_id=<?= $project['id'] ?>&amp;user_id=<?= $user_id.Helper\param_csrf() ?>"><?= t('revoke') ?></a>)
             </li>
         <?php endforeach ?>
         </ul>

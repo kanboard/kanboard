@@ -4,6 +4,8 @@
 
 <form method="post" action="?controller=subtask&amp;action=save&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
 
+    <?= Helper\form_csrf() ?>
+
     <?= Helper\form_hidden('task_id', $values) ?>
 
     <?= Helper\form_label(t('Title'), 'title') ?>

@@ -9,7 +9,7 @@
         </p>
 
         <div class="form-actions">
-            <a href="?controller=project&amp;action=remove&amp;project_id=<?= $project['id'] ?>" class="btn btn-red"><?= t('Yes') ?></a>
+            <a href="?controller=project&amp;action=remove&amp;project_id=<?= $project['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
             <?= t('or') ?> <a href="?controller=project"><?= t('cancel') ?></a>
         </div>
     </div>

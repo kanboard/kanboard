@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\Project as ProjectModel;
 use Model\User as UserModel;
+use Core\Security;
 
 /**
  * Board controller
@@ -20,6 +21,7 @@ class Board extends Base
      */
     public function moveUp()
     {
+        $this->checkCSRFParam();
         $project_id = $this->request->getIntegerParam('project_id');
         $column_id = $this->request->getIntegerParam('column_id');
 
@@ -35,6 +37,7 @@ class Board extends Base
      */
     public function moveDown()
     {
+        $this->checkCSRFParam();
         $project_id = $this->request->getIntegerParam('project_id');
         $column_id = $this->request->getIntegerParam('column_id');
 
@@ -344,6 +347,7 @@ class Board extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
 
         if ($column && $this->board->removeColumn($column['id'])) {
@@ -362,25 +366,31 @@ class Board extends Base
      */
     public function save()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $values = $this->request->getValues();
+        if ($this->request->isAjax()) {
 
-        if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
-            $this->response->text('Not Authorized', 401);
+            $project_id = $this->request->getIntegerParam('project_id');
+            $values = $this->request->getValues();
+
+            if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+                $this->response->text('Not Authorized', 401);
+            }
+
+            if (isset($values['positions'])) {
+                $this->board->saveTasksPosition($values['positions']);
+            }
+
+            $this->response->html(
+                $this->template->load('board_show', array(
+                    'current_project_id' => $project_id,
+                    'board' => $this->board->get($project_id),
+                    'categories' => $this->category->getList($project_id, false),
+                )),
+                201
+            );
         }
-
-        if (isset($values['positions'])) {
-            $this->board->saveTasksPosition($values['positions']);
+        else {
+            $this->response->status(401);
         }
-
-        $this->response->html(
-            $this->template->load('board_show', array(
-                'current_project_id' => $project_id,
-                'board' => $this->board->get($project_id),
-                'categories' => $this->category->getList($project_id, false),
-            )),
-            201
-        );
     }
 
     /**
@@ -390,24 +400,30 @@ class Board extends Base
      */
     public function check()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $timestamp = $this->request->getIntegerParam('timestamp');
+        if ($this->request->isAjax()) {
 
-        if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
-            $this->response->text('Not Authorized', 401);
-        }
+            $project_id = $this->request->getIntegerParam('project_id');
+            $timestamp = $this->request->getIntegerParam('timestamp');
 
-        if ($this->project->isModifiedSince($project_id, $timestamp)) {
-            $this->response->html(
-                $this->template->load('board_show', array(
-                    'current_project_id' => $project_id,
-                    'board' => $this->board->get($project_id),
-                    'categories' => $this->category->getList($project_id, false),
-                ))
-            );
+            if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+                $this->response->text('Not Authorized', 401);
+            }
+
+            if ($this->project->isModifiedSince($project_id, $timestamp)) {
+                $this->response->html(
+                    $this->template->load('board_show', array(
+                        'current_project_id' => $project_id,
+                        'board' => $this->board->get($project_id),
+                        'categories' => $this->category->getList($project_id, false),
+                    ))
+                );
+            }
+            else {
+                $this->response->status(304);
+            }
         }
         else {
-            $this->response->status(304);
+            $this->response->status(401);
         }
     }
 }

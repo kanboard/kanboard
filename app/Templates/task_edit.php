@@ -8,6 +8,8 @@
     <section>
     <form method="post" action="?controller=task&amp;action=update&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
 
+        <?= Helper\form_csrf() ?>
+
         <div class="form-column">
 
             <?= Helper\form_label(t('Title'), 'title') ?>

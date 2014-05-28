@@ -170,6 +170,7 @@ class Subtask extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 

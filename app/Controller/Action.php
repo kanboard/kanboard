@@ -129,6 +129,7 @@ class Action extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $action = $this->action->getById($this->request->getIntegerParam('action_id'));
 
         if ($action && $this->action->remove($action['id'])) {

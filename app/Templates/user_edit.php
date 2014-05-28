@@ -8,6 +8,8 @@
     <section>
     <form method="post" action="?controller=user&amp;action=update" autocomplete="off">
 
+        <?= Helper\form_csrf() ?>
+
         <div class="form-column">
 
             <?= Helper\form_hidden('id', $values) ?>
@@ -48,9 +50,9 @@
 
             <?php if (GOOGLE_AUTH && Helper\is_current_user($values['id'])): ?>
                 <?php if (empty($values['google_id'])): ?>
-                    <a href="?controller=user&amp;action=google"><?= t('Link my Google Account') ?></a>
+                    <a href="?controller=user&amp;action=google<?= Helper\param_csrf() ?>"><?= t('Link my Google Account') ?></a>
                 <?php else: ?>
-                    <a href="?controller=user&amp;action=unlinkGoogle"><?= t('Unlink my Google Account') ?></a>
+                    <a href="?controller=user&amp;action=unlinkGoogle<?= Helper\param_csrf() ?>"><?= t('Unlink my Google Account') ?></a>
                 <?php endif ?>
             <?php endif ?>
 

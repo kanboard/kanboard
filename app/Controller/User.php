@@ -11,25 +11,13 @@ namespace Controller;
 class User extends Base
 {
     /**
-     * Display access forbidden page
-     *
-     * @access public
-     */
-    public function forbidden()
-    {
-        $this->response->html($this->template->layout('user_forbidden', array(
-            'menu' => 'users',
-            'title' => t('Access Forbidden')
-        )));
-    }
-
-    /**
      * Logout and destroy session
      *
      * @access public
      */
     public function logout()
     {
+        $this->checkCSRFParam();
         $this->rememberMe->destroy($this->acl->getUserId());
         $this->session->close();
         $this->response->redirect('?controller=user&action=login');
@@ -42,7 +30,9 @@ class User extends Base
      */
     public function login()
     {
-        if (isset($_SESSION['user'])) $this->response->redirect('?controller=app');
+        if (isset($_SESSION['user'])) {
+            $this->response->redirect('?controller=app');
+        }
 
         $this->response->html($this->template->layout('user_login', array(
             'errors' => array(),
@@ -236,6 +226,7 @@ class User extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $user_id = $this->request->getIntegerParam('user_id');
 
         if ($user_id && $this->user->remove($user_id)) {
@@ -298,6 +289,7 @@ class User extends Base
      */
     public function unlinkGoogle()
     {
+        $this->checkCSRFParam();
         if ($this->google->unlink($this->acl->getUserId())) {
             $this->session->flash(t('Your Google Account is not linked anymore to your profile.'));
         }

@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Core\Security;
+
 /**
  * RememberMe model
  *
@@ -174,8 +176,8 @@ class RememberMe extends Base
      */
     public function create($user_id, $ip, $user_agent)
     {
-        $token = hash('sha256', $user_id.$user_agent.$ip.$this->generateToken());
-        $sequence = $this->generateToken();
+        $token = hash('sha256', $user_id.$user_agent.$ip.Security::generateToken());
+        $sequence = Security::generateToken();
         $expiration = time() + self::EXPIRATION;
 
         $this->cleanup($user_id);
@@ -225,7 +227,7 @@ class RememberMe extends Base
      */
     public function update($token, $sequence)
     {
-        $new_sequence = $this->generateToken();
+        $new_sequence = Security::generateToken();
 
         $this->db
              ->table(self::TABLE)

@@ -4,6 +4,7 @@
 
 <form method="post" action="?controller=comment&amp;action=update&amp;task_id=<?= $task['id'] ?>&amp;comment_id=<?= $comment['id'] ?>" autocomplete="off">
 
+    <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('id', $values) ?>
     <?= Helper\form_textarea('comment', $values, $errors, array('required', 'placeholder="'.t('Leave a comment').'"')) ?><br/>
 

@@ -218,6 +218,7 @@ class Task extends Base
      */
     public function close()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
 
         if ($this->task->close($task['id'])) {
@@ -252,6 +253,7 @@ class Task extends Base
      */
     public function open()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
 
         if ($this->task->open($task['id'])) {
@@ -286,6 +288,7 @@ class Task extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
 
         if ($this->task->remove($task['id'])) {

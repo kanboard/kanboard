@@ -111,6 +111,7 @@ class File extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 

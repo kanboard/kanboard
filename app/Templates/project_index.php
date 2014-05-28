@@ -78,9 +78,9 @@
                         </li>
                         <li>
                             <?php if ($project['is_active']): ?>
-                                <a href="?controller=project&amp;action=disable&amp;project_id=<?= $project['id'] ?>"><?= t('Disable') ?></a>
+                                <a href="?controller=project&amp;action=disable&amp;project_id=<?= $project['id'].Helper\param_csrf() ?>"><?= t('Disable') ?></a>
                             <?php else: ?>
-                                <a href="?controller=project&amp;action=enable&amp;project_id=<?= $project['id'] ?>"><?= t('Enable') ?></a>
+                                <a href="?controller=project&amp;action=enable&amp;project_id=<?= $project['id'].Helper\param_csrf() ?>"><?= t('Enable') ?></a>
                             <?php endif ?>
                         </li>
                         <li>

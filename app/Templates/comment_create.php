@@ -3,7 +3,7 @@
 </div>
 
 <form method="post" action="?controller=comment&amp;action=save&amp;task_id=<?= $task['id'] ?>" autocomplete="off">
-
+    <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('task_id', $values) ?>
     <?= Helper\form_hidden('user_id', $values) ?>
     <?= Helper\form_textarea('comment', $values, $errors, array('required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>

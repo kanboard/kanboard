@@ -76,6 +76,7 @@ class Config extends Base
      */
     public function downloadDb()
     {
+        $this->checkCSRFParam();
         $this->response->forceDownload('db.sqlite.gz');
         $this->response->binary($this->config->downloadDatabase());
     }
@@ -87,6 +88,7 @@ class Config extends Base
      */
     public function optimizeDb()
     {
+        $this->checkCSRFParam();
         $this->config->optimizeDatabase();
         $this->session->flash(t('Database optimization done.'));
         $this->response->redirect('?controller=config');
@@ -99,6 +101,7 @@ class Config extends Base
      */
     public function tokens()
     {
+        $this->checkCSRFParam();
         $this->config->regenerateTokens();
         $this->session->flash(t('All tokens have been regenerated.'));
         $this->response->redirect('?controller=config');
@@ -111,6 +114,7 @@ class Config extends Base
      */
     public function removeRememberMeToken()
     {
+        $this->checkCSRFParam();
         $this->rememberMe->remove($this->request->getIntegerParam('id'));
         $this->response->redirect('?controller=config&action=index#remember-me');
     }

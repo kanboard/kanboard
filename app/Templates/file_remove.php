@@ -8,7 +8,7 @@
     </p>
 
     <div class="form-actions">
-        <a href="?controller=file&amp;action=remove&amp;task_id=<?= $task['id'] ?>&amp;file_id=<?= $file['id'] ?>" class="btn btn-red"><?= t('Yes') ?></a>
+        <a href="?controller=file&amp;action=remove&amp;task_id=<?= $task['id'] ?>&amp;file_id=<?= $file['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
         <?= t('or') ?> <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('cancel') ?></a>
     </div>
 </div>
