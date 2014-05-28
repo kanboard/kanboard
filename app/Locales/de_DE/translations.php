@@ -126,7 +126,7 @@ return array(
     'The username must be unique' => 'Der Benutzername muss eindeutig sein',
     'The username must be alphanumeric' => 'Der Benutzername muss alphanumerisch sein',
     'The user id is required' => 'Die Benutzer ID wird benötigt',
-    'Passwords doesn\'t matches' => 'Passwörter passen nicht zusammen',
+    'Passwords don\'t match' => 'Passwörter passen nicht zusammen',
     'The confirmation is required' => 'Die Bestätigung wird benötigt',
     'The column is required' => 'Die Spalte wird benötigt',
     'The project is required' => 'Das Projekt wird benötigt',
