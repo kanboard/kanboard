@@ -3,7 +3,9 @@
     <?php $column_with = round(100 / count($board), 2); ?>
     <?php foreach ($board as $column): ?>
     <th width="<?= $column_with ?>%">
-        <a href="?controller=task&amp;action=create&amp;project_id=<?= $column['project_id'] ?>&amp;column_id=<?= $column['id'] ?>" title="<?= t('Add a new task') ?>">+</a>
+        <div class="div-add">
+	    <a href="?controller=task&amp;action=create&amp;project_id=<?= $column['project_id'] ?>&amp;column_id=<?= $column['id'] ?>" title="<?= t('Add a new task') ?>">+</a>
+        </div>
         <?= Helper\escape($column['title']) ?>
         <?php if ($column['task_limit']): ?>
             <span title="<?= t('Task limit') ?>" class="task-limit">
