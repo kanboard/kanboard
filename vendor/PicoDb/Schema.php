@@ -1,3 +1,11 @@
+/*
+ * This file is part of PicoDB.
+ *
+ * (c) Frédéric Guillot <contact@fredericguillot.com>
+ *
+ * This source file is subject to the WTFPL that is bundled
+ * with this source code in the file LICENSE.
+ */
 <?php
 
 namespace PicoDb;
