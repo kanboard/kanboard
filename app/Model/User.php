@@ -359,7 +359,6 @@ class User extends Base
 
         // LDAP authentication
         if (! $authenticated && LDAP_AUTH) {
-            require __DIR__.'/ldap.php';
             $ldap = new Ldap($this->db, $this->event);
             $authenticated = $ldap->authenticate($username, $password);
             $method = LastLogin::AUTH_LDAP;
