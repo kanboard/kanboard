@@ -545,12 +545,12 @@ a.filter-on {
     margin-bottom: 10px;
 }
 
-.div-add {
+.board-add-icon {
     float: left;
     padding: 0 5px;
 }
 
-.div-add a {
+.board-add-icon a {
     line-height: 70%;
 }
 

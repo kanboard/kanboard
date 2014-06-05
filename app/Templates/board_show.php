@@ -3,7 +3,7 @@
     <?php $column_with = round(100 / count($board), 2); ?>
     <?php foreach ($board as $column): ?>
     <th width="<?= $column_with ?>%">
-        <div class="div-add">
+        <div class="board-add-icon">
 	    <a href="?controller=task&amp;action=create&amp;project_id=<?= $column['project_id'] ?>&amp;column_id=<?= $column['id'] ?>" title="<?= t('Add a new task') ?>">+</a>
         </div>
         <?= Helper\escape($column['title']) ?>

@@ -12,6 +12,7 @@
 
         <?= Helper\css('assets/css/app.css') ?>
         <?= Helper\css('assets/css/font-awesome.min.css') ?>
+        <?= Helper\css('assets/css/jquery-ui-1.10.4.custom.css'); ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
