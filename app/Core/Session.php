@@ -15,7 +15,7 @@ class Session
      *
      * @var integer
      */
-    const SESSION_LIFETIME = 86400; // 1 day
+    const SESSION_LIFETIME = 7200; // 2 hours
 
     /**
      * Open a session
@@ -35,7 +35,7 @@ class Session
             self::SESSION_LIFETIME,
             $base_path ?: '/',
             null,
-            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on',
+            ! empty($_SERVER['HTTPS']),
             true
         );
 
@@ -66,6 +66,25 @@ class Session
      */
     public function close()
     {
+        // Flush all sessions variables
+        $_SESSION = array();
+
+        // Destroy the session cookie
+        if (ini_get('session.use_cookies')) {
+            $params = session_get_cookie_params();
+
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params['path'],
+                $params['domain'],
+                $params['secure'],
+                $params['httponly']
+            );
+        }
+
+        // Destroy session data
         session_destroy();
     }
 

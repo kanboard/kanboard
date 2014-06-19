@@ -8,7 +8,7 @@
     <section>
 
     <form method="post" action="?controller=category&amp;action=update&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
-
+        <?= Helper\form_csrf() ?>
         <?= Helper\form_hidden('id', $values) ?>
         <?= Helper\form_hidden('project_id', $values) ?>
 

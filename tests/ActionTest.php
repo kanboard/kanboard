@@ -6,6 +6,7 @@ use Model\Action;
 use Model\Project;
 use Model\Board;
 use Model\Task;
+use Model\Category;
 
 class ActionTest extends Base
 {
@@ -45,7 +46,7 @@ class ActionTest extends Base
         $this->assertEquals(4, $actions[0]['params'][0]['value']);
     }
 
-    public function testExecuteAction()
+    public function testEventMoveColumn()
     {
         $task = new Task($this->db, $this->event);
         $board = new Board($this->db, $this->event);
@@ -85,10 +86,87 @@ class ActionTest extends Base
         // We move our task
         $task->move(1, 4, 1);
 
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_UPDATE));
+
         // Our task should be closed
         $t1 = $task->getById(1);
         $this->assertEquals(4, $t1['column_id']);
         $this->assertEquals(0, $t1['is_active']);
+    }
+
+    public function testEventMovePosition()
+    {
+        $task = new Task($this->db, $this->event);
+        $board = new Board($this->db, $this->event);
+        $project = new Project($this->db, $this->event);
+        $action = new Action($this->db, $this->event);
+
+        // We create a project
+        $this->assertEquals(1, $project->create(array('name' => 'unit_test')));
+
+        // We create a task
+        $this->assertEquals(1, $task->create(array(
+            'title' => 'unit_test 0',
+            'project_id' => 1,
+            'owner_id' => 1,
+            'color_id' => 'red',
+            'column_id' => 1,
+            'category_id' => 1,
+        )));
+
+        $this->assertEquals(2, $task->create(array(
+            'title' => 'unit_test 1',
+            'project_id' => 1,
+            'owner_id' => 1,
+            'color_id' => 'yellow',
+            'column_id' => 1,
+            'category_id' => 1,
+        )));
+
+        // We create a new action, when the category_id=2 then the color_id should be green
+        $this->assertTrue($action->create(array(
+            'project_id' => 1,
+            'event_name' => Task::EVENT_MOVE_POSITION,
+            'action_name' => 'TaskAssignColorCategory',
+            'params' => array(
+                'category_id' => 1,
+                'color_id' => 'green',
+            )
+        )));
+
+        // We bind events
+        $action->attachEvents();
+
+        $this->assertTrue($this->event->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskAssignColorCategory'));
+
+        // Our task should have the color red and position=0
+        $t1 = $task->getById(1);
+        $this->assertEquals(0, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('red', $t1['color_id']);
+
+        $t1 = $task->getById(2);
+        $this->assertEquals(1, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('yellow', $t1['color_id']);
+
+        // We move our tasks
+        $task->move(1, 1, 1); // task #1 to position 1
+        $task->move(2, 1, 0); // task #2 to position 0
+
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
+
+        // Both tasks should be green
+        $t1 = $task->getById(1);
+        $this->assertEquals(1, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('green', $t1['color_id']);
+
+        $t1 = $task->getById(2);
+        $this->assertEquals(0, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('green', $t1['color_id']);
     }
 
     public function testExecuteMultipleActions()
@@ -146,7 +224,9 @@ class ActionTest extends Base
 
         // We move our task
         $task->move(1, 4, 1);
-        $this->assertEquals(Task::EVENT_CREATE, $this->event->getLastTriggeredEvent());
+
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CLOSE));
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // Our task should be closed
         $t1 = $task->getById(1);

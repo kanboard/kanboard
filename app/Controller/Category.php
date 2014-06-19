@@ -175,6 +175,7 @@ class Category extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $project = $this->getProject();
         $category = $this->getCategory($project['id']);
 

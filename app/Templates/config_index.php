@@ -7,6 +7,8 @@
         <section>
         <form method="post" action="?controller=config&amp;action=save" autocomplete="off">
 
+            <?= Helper\form_csrf() ?>
+
             <?= Helper\form_label(t('Language'), 'language') ?>
             <?= Helper\form_select('language', $languages, $values, $errors) ?><br/>
 
@@ -39,7 +41,7 @@
         </div>
         <section class="settings">
             <ul>
-                <li><a href="?controller=config&amp;action=tokens"><?= t('Reset all tokens') ?></a></li>
+                <li><a href="?controller=config&amp;action=tokens<?= Helper\param_csrf() ?>"><?= t('Reset all tokens') ?></a></li>
                 <li>
                     <?= t('Webhooks token:') ?>
                     <strong><?= Helper\escape($values['webhooks_token']) ?></strong>
@@ -50,11 +52,11 @@
                         <strong><?= Helper\format_bytes($db_size) ?></strong>
                     </li>
                     <li>
-                        <a href="?controller=config&amp;action=downloadDb"><?= t('Download the database') ?></a>
+                        <a href="?controller=config&amp;action=downloadDb<?= Helper\param_csrf() ?>"><?= t('Download the database') ?></a>
                         <?= t('(Gzip compressed Sqlite file)') ?>
                     </li>
                     <li>
-                        <a href="?controller=config&amp;action=optimizeDb"><?= t('Optimize the database') ?></a>
+                        <a href="?controller=config&amp;action=optimizeDb <?= Helper\param_csrf() ?>"><?= t('Optimize the database') ?></a>
                          <?= t('(VACUUM command)') ?>
                     </li>
                 <?php endif ?>
@@ -112,7 +114,7 @@
             <td><?= dt('%B %e, %G at %k:%M %p', $session['expiration']) ?></td>
             <td><?= Helper\escape($session['ip']) ?></td>
             <td><?= Helper\escape($session['user_agent']) ?></td>
-            <td><a href="?controller=config&amp;action=removeRememberMeToken&amp;id=<?= $session['id'] ?>"><?= t('Remove') ?></a></td>
+            <td><a href="?controller=config&amp;action=removeRememberMeToken&amp;id=<?= $session['id'].Helper\param_csrf() ?>"><?= t('Remove') ?></a></td>
         </tr>
         <?php endforeach ?>
         </table>

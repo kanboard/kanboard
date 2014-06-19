@@ -9,7 +9,7 @@
 
     <h3><?= t('Define action parameters') ?></h3>
     <form method="post" action="?controller=action&amp;action=create&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
-
+        <?= Helper\form_csrf() ?>
         <?= Helper\form_hidden('project_id', $values) ?>
         <?= Helper\form_hidden('event_name', $values) ?>
         <?= Helper\form_hidden('action_name', $values) ?>

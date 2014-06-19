@@ -4,6 +4,6 @@
     </div>
 
     <p class="alert alert-error">
-        <?= t('You are not allowed to access to this project.') ?>
+        <?= t('Access Forbidden') ?>
     </p>
 </section>

@@ -34,6 +34,7 @@
     <h3><?= t('Add a new category') ?></h3>
     <form method="post" action="?controller=category&amp;action=save&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
 
+        <?= Helper\form_csrf() ?>
         <?= Helper\form_hidden('project_id', $values) ?>
 
         <?= Helper\form_label(t('Category Name'), 'name') ?>

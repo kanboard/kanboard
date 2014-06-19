@@ -2,7 +2,23 @@
 
 namespace Schema;
 
-const VERSION = 17;
+const VERSION = 18;
+
+function version_18($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_subtasks (
+            id INTEGER PRIMARY KEY,
+            title TEXT COLLATE NOCASE,
+            status INTEGER DEFAULT 0,
+            time_estimated INTEGER DEFAULT 0,
+            time_spent INTEGER DEFAULT 0,
+            task_id INTEGER,
+            user_id INTEGER,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )"
+    );
+}
 
 function version_17($pdo)
 {
@@ -193,7 +209,7 @@ function version_3($pdo)
 
         foreach ($results as &$result) {
             $rq = $pdo->prepare('UPDATE projects SET token=? WHERE id=?');
-            $rq->execute(array(\Model\Base::generateToken(), $result['id']));
+            $rq->execute(array(\Core\Security::generateToken(), $result['id']));
         }
     }
 }
@@ -268,6 +284,6 @@ function version_1($pdo)
     $pdo->exec("
         INSERT INTO config
         (language, webhooks_token)
-        VALUES ('en_US', '".\Model\Base::generateToken()."')
+        VALUES ('en_US', '".\Core\Security::generateToken()."')
     ");
 }

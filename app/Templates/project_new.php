@@ -8,6 +8,7 @@
     <section>
     <form method="post" action="?controller=project&amp;action=save" autocomplete="off">
 
+        <?= Helper\form_csrf() ?>
         <?= Helper\form_label(t('Name'), 'name') ?>
         <?= Helper\form_text('name', $values, $errors, array('autofocus', 'required')) ?>
 

@@ -7,7 +7,7 @@
         <p class="alert alert-info"><?= t('Do you really want to remove this user: "%s"?', $user['username']) ?></p>
 
         <div class="form-actions">
-            <a href="?controller=user&amp;action=remove&amp;user_id=<?= $user['id'] ?>" class="btn btn-red"><?= t('Yes') ?></a>
+            <a href="?controller=user&amp;action=remove&amp;user_id=<?= $user['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
             <?= t('or') ?> <a href="?controller=user"><?= t('cancel') ?></a>
         </div>
     </div>

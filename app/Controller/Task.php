@@ -62,6 +62,7 @@ class Task extends Base
         $this->response->html($this->taskLayout('task_show', array(
             'files' => $this->file->getAll($task['id']),
             'comments' => $this->comment->getAll($task['id']),
+            'subtasks' => $this->subTask->getAll($task['id']),
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->task->getColors(),
@@ -217,6 +218,7 @@ class Task extends Base
      */
     public function close()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
 
         if ($this->task->close($task['id'])) {
@@ -251,6 +253,7 @@ class Task extends Base
      */
     public function open()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
 
         if ($this->task->open($task['id'])) {
@@ -285,6 +288,7 @@ class Task extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
 
         if ($this->task->remove($task['id'])) {

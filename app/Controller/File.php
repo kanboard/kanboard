@@ -24,6 +24,7 @@ class File extends Base
         $this->response->html($this->taskLayout('file_new', array(
             'task' => $task,
             'menu' => 'tasks',
+            'max_size' => ini_get('upload_max_filesize'),
             'title' => t('Attach a document')
         )));
     }
@@ -36,8 +37,14 @@ class File extends Base
     public function save()
     {
         $task = $this->getTask();
-        $this->file->upload($task['project_id'], $task['id'], 'files');
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#attachments');
+
+        if ($this->file->upload($task['project_id'], $task['id'], 'files') === true) {
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#attachments');
+        }
+        else {
+            $this->session->flashError(t('Unable to upload the file.'));
+            $this->response->redirect('?controller=file&action=create&task_id='.$task['id']);
+        }
     }
 
     /**
@@ -104,6 +111,7 @@ class File extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 

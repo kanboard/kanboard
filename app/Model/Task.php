@@ -359,12 +359,10 @@ class Task extends Base
         // Trigger events
         if ($result) {
 
-            $events = array();
-
-            if (! in_array($this->event->getLastTriggeredEvent(), array(self::EVENT_CREATE_UPDATE))) {
-                $events[] = self::EVENT_CREATE_UPDATE;
-                $events[] = self::EVENT_UPDATE;
-            }
+            $events = array(
+                self::EVENT_CREATE_UPDATE,
+                self::EVENT_UPDATE,
+            );
 
             if (isset($values['column_id']) && $original_task['column_id'] != $values['column_id']) {
                 $events[] = self::EVENT_MOVE_COLUMN;
@@ -441,6 +439,9 @@ class Task extends Base
      */
     public function remove($task_id)
     {
+        $file = new File($this->db, $this->event);
+        $file->removeAll($task_id);
+
         return $this->db->table(self::TABLE)->eq('id', $task_id)->remove();
     }
 
@@ -455,6 +456,8 @@ class Task extends Base
      */
     public function move($task_id, $column_id, $position)
     {
+        $this->event->clearTriggeredEvents();
+
         return $this->update(array(
             'id' => $task_id,
             'column_id' => $column_id,

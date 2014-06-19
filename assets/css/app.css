@@ -158,6 +158,7 @@ textarea:focus {
     box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
 }
 
+input.form-numeric,
 input[type="number"] {
     width: 70px;
 }
@@ -795,6 +796,24 @@ a.task-board-nobody {
     height: 200px;
     width: 80%;
     max-width: 800px;
+}
+
+/* subtasks */
+.subtasks-table {
+    font-size: 0.85em;
+}
+
+.subtasks-table td {
+    vertical-align: middle;
+}
+
+.subtasks-time-tracking h4 {
+    margin-bottom: 5px;
+}
+
+.subtasks-time-tracking li {
+    list-style-type: square;
+    margin-left: 30px;
 }
 
 /* markdown content */

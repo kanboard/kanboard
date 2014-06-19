@@ -56,7 +56,7 @@
 
     <h3><?= t('Add an action') ?></h3>
     <form method="post" action="?controller=action&amp;action=params&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
-
+        <?= Helper\form_csrf() ?>
         <?= Helper\form_hidden('project_id', $values) ?>
 
         <?= Helper\form_label(t('Event'), 'event_name') ?>

@@ -1,4 +1,4 @@
-<table id="board" data-project-id="<?= $current_project_id ?>" data-time="<?= time() ?>" data-check-interval="<?= BOARD_CHECK_INTERVAL ?>">
+<table id="board" data-project-id="<?= $current_project_id ?>" data-time="<?= time() ?>" data-check-interval="<?= BOARD_CHECK_INTERVAL ?>" data-csrf-token=<?= \Core\Security::getCSRFToken() ?>>
 <tr>
     <?php $column_with = round(100 / count($board), 2); ?>
     <?php foreach ($board as $column): ?>

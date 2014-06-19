@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\Security;
+
 /**
  * Request class
  *
@@ -58,7 +60,12 @@ class Request
     public function getValues()
     {
         if (! empty($_POST)) {
-            return $_POST;
+
+            if (Security::validateCSRFFormToken($_POST)) {
+                return $_POST;
+            }
+
+            return array();
         }
 
         $result = json_decode($this->getBody(), true);
@@ -116,6 +123,19 @@ class Request
      */
     public function isAjax()
     {
-        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
+        return $this->getHeader('X-Requested-With') === 'XMLHttpRequest';
+    }
+
+    /**
+     * Return a HTTP header value
+     *
+     * @access public
+     * @param  string   $name   Header name
+     * @return string
+     */
+    public function getHeader($name)
+    {
+        $name = 'HTTP_'.str_replace('-', '_', strtoupper($name));
+        return isset($_SERVER[$name]) ? $_SERVER[$name] : '';
     }
 }

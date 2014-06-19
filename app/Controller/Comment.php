@@ -178,6 +178,7 @@ class Comment extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $task = $this->getTask();
         $comment = $this->getComment();
 

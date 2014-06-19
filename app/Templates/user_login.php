@@ -8,6 +8,8 @@
 
 <form method="post" action="?controller=user&amp;action=check" class="form-login">
 
+    <?= Helper\form_csrf() ?>
+
     <?= Helper\form_label(t('Username'), 'username') ?>
     <?= Helper\form_text('username', $values, $errors, array('autofocus', 'required')) ?><br/>
 

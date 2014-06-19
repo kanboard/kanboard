@@ -5,6 +5,7 @@ namespace Model;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Core\Translator;
+use Core\Security;
 
 /**
  * Config model
@@ -29,7 +30,7 @@ class Config extends Base
      */
     public function getTimezones()
     {
-        $timezones = \timezone_identifiers_list();
+        $timezones = timezone_identifiers_list();
         return array_combine(array_values($timezones), $timezones);
     }
 
@@ -171,12 +172,12 @@ class Config extends Base
      */
     public function regenerateTokens()
     {
-        $this->db->table(self::TABLE)->update(array('webhooks_token' => $this->generateToken()));
+        $this->db->table(self::TABLE)->update(array('webhooks_token' => Security::generateToken()));
 
         $projects = $this->db->table(Project::TABLE)->findAllByColumn('id');
 
         foreach ($projects as $project_id) {
-            $this->db->table(Project::TABLE)->eq('id', $project_id)->update(array('token' => $this->generateToken()));
+            $this->db->table(Project::TABLE)->eq('id', $project_id)->update(array('token' => Security::generateToken()));
         }
     }
 }

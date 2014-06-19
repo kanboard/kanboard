@@ -110,7 +110,7 @@ class TaskTest extends Base
 
         // We duplicate our task
         $this->assertEquals(2, $t->duplicate(1));
-        $this->assertEquals(Task::EVENT_CREATE, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
         $task = $t->getById(2);
@@ -136,7 +136,7 @@ class TaskTest extends Base
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $t->duplicateToAnotherProject(1, 2));
-        $this->assertEquals(Task::EVENT_CREATE, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
         $task = $t->getById(2);
@@ -157,30 +157,31 @@ class TaskTest extends Base
 
         // We create task
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(Task::EVENT_CREATE, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CREATE));
 
         // We update a task
         $this->assertTrue($t->update(array('title' => 'test2', 'id' => 1)));
-        $this->assertEquals(Task::EVENT_UPDATE, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_UPDATE));
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CREATE_UPDATE));
 
         // We close our task
         $this->assertTrue($t->close(1));
-        $this->assertEquals(Task::EVENT_CLOSE, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CLOSE));
 
         // We open our task
         $this->assertTrue($t->open(1));
-        $this->assertEquals(Task::EVENT_OPEN, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_OPEN));
 
         // We change the column of our task
         $this->assertTrue($t->move(1, 2, 1));
-        $this->assertEquals(Task::EVENT_MOVE_COLUMN, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // We change the position of our task
         $this->assertTrue($t->move(1, 2, 2));
-        $this->assertEquals(Task::EVENT_MOVE_POSITION, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
         // We change the column and the position of our task
         $this->assertTrue($t->move(1, 1, 3));
-        $this->assertEquals(Task::EVENT_MOVE_COLUMN, $this->event->getLastTriggeredEvent());
+        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
     }
 }

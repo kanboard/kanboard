@@ -10,7 +10,7 @@
         </p>
 
         <div class="form-actions">
-            <a href="?controller=board&amp;action=remove&amp;column_id=<?= $column['id'] ?>" class="btn btn-red"><?= t('Yes') ?></a>
+            <a href="?controller=board&amp;action=remove&amp;column_id=<?= $column['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
             <?= t('or') ?> <a href="?controller=board&amp;action=edit&amp;project_id=<?= $column['project_id'] ?>"><?= t('cancel') ?></a>
         </div>
     </div>

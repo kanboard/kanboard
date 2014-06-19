@@ -13,19 +13,6 @@ use Model\Task as TaskModel;
 class Project extends Base
 {
     /**
-     * Display access forbidden page
-     *
-     * @access public
-     */
-    public function forbidden()
-    {
-        $this->response->html($this->template->layout('project_forbidden', array(
-            'menu' => 'projects',
-            'title' => t('Access Forbidden')
-        )));
-    }
-
-    /**
      * Task search for a given project
      *
      * @access public
@@ -254,6 +241,7 @@ class Project extends Base
      */
     public function remove()
     {
+        $this->checkCSRFParam();
         $project_id = $this->request->getIntegerParam('project_id');
 
         if ($project_id && $this->project->remove($project_id)) {
@@ -272,6 +260,7 @@ class Project extends Base
      */
     public function enable()
     {
+        $this->checkCSRFParam();
         $project_id = $this->request->getIntegerParam('project_id');
 
         if ($project_id && $this->project->enable($project_id)) {
@@ -290,6 +279,7 @@ class Project extends Base
      */
     public function disable()
     {
+        $this->checkCSRFParam();
         $project_id = $this->request->getIntegerParam('project_id');
 
         if ($project_id && $this->project->disable($project_id)) {
@@ -353,6 +343,8 @@ class Project extends Base
      */
     public function revoke()
     {
+        $this->checkCSRFParam();
+
         $values = array(
             'project_id' => $this->request->getIntegerParam('project_id'),
             'user_id' => $this->request->getIntegerParam('user_id'),

@@ -5,6 +5,7 @@ namespace Model;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Event\TaskModification;
+use Core\Security;
 
 /**
  * Project model
@@ -363,7 +364,7 @@ class Project extends Base
     {
         $this->db->startTransaction();
 
-        $values['token'] = self::generateToken();
+        $values['token'] = Security::generateToken();
 
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();

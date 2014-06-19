@@ -42,7 +42,8 @@ class Action extends Base
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
             'TaskAssignColorUser' => t('Assign a color to a specific user'),
-            'TaskAssignColorCategory' => t('Assign a color to a specific category'),
+            'TaskAssignColorCategory' => t('Assign automatically a color based on a category'),
+            'TaskAssignCategoryColor' => t('Assign automatically a category based on a color'),
         );
     }
 
@@ -236,6 +237,9 @@ class Action extends Base
                 return new $className($project_id, new Task($this->db, $this->event));
             case 'TaskAssignColorCategory':
                 $className = '\Action\TaskAssignColorCategory';
+                return new $className($project_id, new Task($this->db, $this->event));
+            case 'TaskAssignCategoryColor':
+                $className = '\Action\TaskAssignCategoryColor';
                 return new $className($project_id, new Task($this->db, $this->event));
             default:
                 throw new LogicException('Action not found: '.$name);

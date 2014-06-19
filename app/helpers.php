@@ -2,6 +2,21 @@
 
 namespace Helper;
 
+function param_csrf()
+{
+    return '&amp;csrf_token='.\Core\Security::getCSRFToken();
+}
+
+function js($filename)
+{
+    return '<script type="text/javascript" src="'.$filename.'?'.filemtime($filename).'"></script>';
+}
+
+function css($filename)
+{
+    return '<link rel="stylesheet" href="'.$filename.'?'.filemtime($filename).'" media="screen">';
+}
+
 function template($name, array $args = array())
 {
     $tpl = new \Core\Template;
@@ -153,6 +168,11 @@ function form_value($values, $name)
     return isset($values[$name]) ? 'value="'.escape($values[$name]).'"' : '';
 }
 
+function form_csrf()
+{
+    return '<input type="hidden" name="csrf_token" value="'.\Core\Security::getCSRFToken().'"/>';
+}
+
 function form_hidden($name, $values = array())
 {
     return '<input type="hidden" name="'.$name.'" id="form-'.$name.'" '.form_value($values, $name).'/>';
@@ -259,4 +279,9 @@ function form_date($name, $values = array(), array $errors = array(), array $att
 function form_number($name, $values = array(), array $errors = array(), array $attributes = array(), $class = '')
 {
     return form_input('number', $name, $values, $errors, $attributes, $class);
+}
+
+function form_numeric($name, $values = array(), array $errors = array(), array $attributes = array(), $class = '')
+{
+    return form_input('text', $name, $values, $errors, $attributes, $class.' form-numeric');
 }

@@ -8,6 +8,8 @@
     <section>
     <form method="post" action="?controller=user&amp;action=save" autocomplete="off">
 
+        <?= Helper\form_csrf() ?>
+
         <div class="form-column">
 
             <?= Helper\form_label(t('Username'), 'username') ?>

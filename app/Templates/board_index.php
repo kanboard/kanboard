@@ -39,4 +39,4 @@
 
 </section>
 
-<script type="text/javascript" src="assets/js/board.js"></script>
+<?= Helper\js('assets/js/board.js') ?>
