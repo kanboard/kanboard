@@ -21,7 +21,6 @@
         </div>
 
         <div class="form-column">
-
             <?= Helper\form_hidden('project_id', $values) ?>
 
             <?= Helper\form_label(t('Assignee'), 'owner_id') ?>
@@ -51,3 +50,5 @@
     </form>
     </section>
 </section>
+
+<?= Helper\js('assets/js/task.js'); ?>

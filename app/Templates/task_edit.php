@@ -22,7 +22,6 @@
         </div>
 
         <div class="form-column">
-
             <?= Helper\form_hidden('id', $values) ?>
             <?= Helper\form_hidden('project_id', $values) ?>
 
@@ -44,7 +43,6 @@
             <?= Helper\form_label(t('Due Date'), 'date_due') ?>
             <?= Helper\form_text('date_due', $values, $errors, array('placeholder="'.t('month/day/year').'"'), 'form-date') ?><br/>
             <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
-
         </div>
 
         <div class="form-actions">
@@ -54,3 +52,5 @@
     </form>
     </section>
 </section>
+
+<?= Helper\js('assets/js/task.js'); ?>
