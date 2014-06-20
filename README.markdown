@@ -29,7 +29,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English, French, Brazilian Portuguese, Spanish, German and Polish
+- Translations in English, French, Brazilian Portuguese, Spanish, German, Polish and Chinese
 
 Roadmap
 -------
@@ -57,6 +57,7 @@ Contributors:
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
 - Maxime: https://github.com/EpocDotFr
+- Nala Ginrut: https://github.com/NalaGinrut
 - Nekohayo: https://github.com/nekohayo
 - Olivier Maridat: https://github.com/oliviermaridat
 - Raphaël Doursenaud: https://github.com/rdoursenaud

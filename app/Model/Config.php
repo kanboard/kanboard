@@ -49,7 +49,7 @@ class Config extends Base
             'fr_FR' => t('French'),
             'pl_PL' => t('Polish'),
             'pt_BR' => t('Portuguese (Brazilian)'),
-	    'zh_CN' => t('Chinese(Simplified)'),
+            'zh_CN' => t('Chinese (Simplified)'),
         );
 
         asort($languages);

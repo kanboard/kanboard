@@ -7,6 +7,7 @@ return array(
     'Portuguese (Brazilian)' => 'Português (Brasil)',
     'Spanish' => 'Espanhol',
     // 'German' => '',
+    // 'Chinese (Simplified)' => '',
     'None' => 'Nenhum',
     'edit' => 'editar',
     'Edit' => 'Editar',
