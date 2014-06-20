@@ -545,6 +545,15 @@ a.filter-on {
     margin-bottom: 10px;
 }
 
+.board-add-icon {
+    float: left;
+    padding: 0 5px;
+}
+
+.board-add-icon a {
+    line-height: 70%;
+}
+
 /* task inside the board */
 .task-board {
     position: relative;
