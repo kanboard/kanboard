@@ -114,6 +114,23 @@ class Task extends Base
      * @access public
      * @param  integer   $project_id   Project id
      * @param  array     $status       List of status id
+     * @return array
+     */
+    public function getAll($project_id, array $status = array(self::STATUS_OPEN, self::STATUS_CLOSED))
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->in('is_active', $status)
+                    ->findAll();
+    }
+
+    /**
+     * Count all tasks for a given project and status
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  array     $status       List of status id
      * @return integer
      */
     public function countByProjectId($project_id, array $status = array(self::STATUS_OPEN, self::STATUS_CLOSED))

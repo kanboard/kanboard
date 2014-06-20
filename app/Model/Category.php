@@ -62,6 +62,21 @@ class Category extends Base
     }
 
     /**
+     * Return all categories for a given project
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return array
+     */
+    public function getAll($project_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('project_id', $project_id)
+            ->asc('name')
+            ->findAll();
+    }
+
+    /**
      * Create a category
      *
      * @access public

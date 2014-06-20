@@ -2,7 +2,12 @@
 
 namespace Schema;
 
-const VERSION = 18;
+const VERSION = 19;
+
+function version_19($pdo)
+{
+    $pdo->exec("ALTER TABLE config ADD COLUMN api_token VARCHAR(255) DEFAULT '".\Core\Security::generateToken()."'");
+}
 
 function version_18($pdo)
 {

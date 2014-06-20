@@ -99,13 +99,26 @@ class Board extends Base
 
         foreach (array('title', 'task_limit') as $field) {
             foreach ($values[$field] as $column_id => $field_value) {
-                $this->db->table(self::TABLE)->eq('id', $column_id)->update(array($field => $field_value));
+                $this->updateColumn($column_id, array($field => $field_value));
             }
         }
 
         $this->db->closeTransaction();
 
         return true;
+    }
+
+    /**
+     * Update a column
+     *
+     * @access public
+     * @param  integer  $column_id  Column id
+     * @param  array    $values     Form values
+     * @return boolean
+     */
+    public function updateColumn($column_id, array $values)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->update($values);
     }
 
     /**

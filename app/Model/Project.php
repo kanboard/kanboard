@@ -198,6 +198,18 @@ class Project extends Base
     }
 
     /**
+     * Get a project by the name
+     *
+     * @access public
+     * @param  string   $project_name    Project name
+     * @return array
+     */
+    public function getByName($project_name)
+    {
+        return $this->db->table(self::TABLE)->eq('name', $project_name)->findOne();
+    }
+
+    /**
      * Fetch project data by using the token
      *
      * @access public
@@ -505,7 +517,8 @@ class Project extends Base
             new Validators\Integer('id', t('This value must be an integer')),
             new Validators\Required('name', t('The project name is required')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
-            new Validators\Unique('name', t('This project must be unique'), $this->db->getConnection(), self::TABLE)
+            new Validators\Unique('name', t('This project must be unique'), $this->db->getConnection(), self::TABLE),
+            new Validators\Integer('is_active', t('This value must be an integer'))
         ));
 
         return array(

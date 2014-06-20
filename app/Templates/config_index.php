@@ -46,6 +46,10 @@
                     <?= t('Webhooks token:') ?>
                     <strong><?= Helper\escape($values['webhooks_token']) ?></strong>
                 </li>
+                <li>
+                    <?= t('API token:') ?>
+                    <strong><?= Helper\escape($values['api_token']) ?></strong>
+                </li>
                 <?php if (DB_DRIVER === 'sqlite'): ?>
                     <li>
                         <?= t('Database size:') ?>

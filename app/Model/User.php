@@ -135,7 +135,7 @@ class User extends Base
 
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
-        if ($_SESSION['user']['id'] == $values['id']) {
+        if (session_id() !== '' && $_SESSION['user']['id'] == $values['id']) {
             $this->updateSession();
         }
 
