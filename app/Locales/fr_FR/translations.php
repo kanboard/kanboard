@@ -373,4 +373,5 @@ return array(
     'Sub-task added successfully.' => 'Sous-tâche ajouté avec succès.',
     'Maximum size: ' => 'Taille maximum : ',
     'Unable to upload the file.' => 'Impossible de transférer le fichier.',
+    'Display another project' => 'Afficher un autre projet',
 );

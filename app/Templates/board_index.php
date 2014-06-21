@@ -4,15 +4,6 @@
         <h2>
             <?= t('Project "%s"', $current_project_name) ?>
         </h2>
-        <ul>
-            <?php foreach ($projects as $project_id => $project_name): ?>
-            <?php if ($project_id != $current_project_id): ?>
-            <li>
-                <a href="?controller=board&amp;action=show&amp;project_id=<?= $project_id ?>"><?= Helper\escape($project_name) ?></a>
-            </li>
-            <?php endif ?>
-            <?php endforeach ?>
-        </ul>
     </div>
 
     <div class="project-menu">

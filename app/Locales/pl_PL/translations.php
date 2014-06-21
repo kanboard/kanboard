@@ -378,4 +378,5 @@ return array(
     // 'Sub-task added successfully.' => '',
     // 'Maximum size: ' => '',
     // 'Unable to upload the file.' => '',
+    // 'Display another project' => '',
 );

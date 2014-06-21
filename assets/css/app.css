@@ -485,7 +485,7 @@ nav .active a {
 
 /* board */
 .page-header.board {
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 
 .project-menu li {

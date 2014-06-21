@@ -319,7 +319,7 @@ class Project extends Base
      * Get a list of project by status
      *
      * @access public
-     * @param  integer   $status   Proejct status: self::ACTIVE or self:INACTIVE
+     * @param  integer   $status   Project status: self::ACTIVE or self:INACTIVE
      * @return array
      */
     public function getListByStatus($status)
@@ -347,7 +347,7 @@ class Project extends Base
     }
 
     /**
-     * Return a list of projects for a given user
+     * Filter a list of projects for a given user
      *
      * @access public
      * @param  array     $projects     Project list: ['project_id' => 'project_name']
@@ -363,6 +363,18 @@ class Project extends Base
         }
 
         return $projects;
+    }
+
+    /**
+     * Return a list of projects for a given user
+     *
+     * @access public
+     * @param  integer   $user_id      User id
+     * @return array
+     */
+    public function getAvailableList($user_id)
+    {
+        return $this->filterListByAccess($this->getListByStatus(self::ACTIVE), $user_id);
     }
 
     /**

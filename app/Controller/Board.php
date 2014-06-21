@@ -185,11 +185,7 @@ class Board extends Base
         $user_id = $this->request->getIntegerParam('user_id', UserModel::EVERYBODY_ID);
 
         $this->checkProjectPermissions($project_id);
-        $projects = $this->project->getListByStatus(ProjectModel::ACTIVE);
-
-        if ($this->acl->isRegularUser()) {
-            $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());
-        }
+        $projects = $this->project->getAvailableList($this->acl->getUserId());
 
         if (! isset($projects[$project_id])) {
             $this->notfound();
@@ -204,7 +200,8 @@ class Board extends Base
             'board' => $this->board->get($project_id),
             'categories' => $this->category->getList($project_id, true, true),
             'menu' => 'boards',
-            'title' => $projects[$project_id]
+            'title' => $projects[$project_id],
+            'board_selector' => array(t('Display another project')) + $projects,
         )));
     }
 
