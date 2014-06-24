@@ -50,7 +50,10 @@ class Session
         // Custom session name
         session_name('__S');
 
-        session_start();
+        if (!isset($_SESSION))
+        {
+            session_start();
+        }
 
         // Regenerate the session id to avoid session fixation issue
         if (empty($_SESSION['__validated'])) {
