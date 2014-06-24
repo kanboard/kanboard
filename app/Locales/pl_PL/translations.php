@@ -190,7 +190,6 @@ return array(
     'Actions' => 'Akcje',
     'Confirmation' => 'Powtórzenie hasła',
     'Description' => 'Opis',
-    'Details' => 'Informacje',
     'Sorry, I didn\'t found this information in my database!' => 'Niestety nie znaleziono tej informacji w bazie danych',
     'Page not found' => 'Strona nie istnieje',
     'Story Points' => 'Poziom trudności',
