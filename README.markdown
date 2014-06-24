@@ -100,6 +100,7 @@ Documentation
 
 #### Developers
 
+- [Json-RPC API](docs/api-json-rpc.markdown)
 - [How to use Kanboard with Vagrant](docs/vagrant.markdown)
 - [Webhooks](docs/webhooks.markdown)
 
