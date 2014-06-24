@@ -1,6 +1,7 @@
 <?php
 
 namespace Core;
+use RuntimeException;
 
 /**
  * The registry class is a dependency injection container
