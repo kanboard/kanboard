@@ -8,6 +8,7 @@ return array(
     'Spanish' => 'Espagnol',
     'German' => 'Allemand',
     'Chinese (Simplified)' => 'Chinois simplifié',
+    'Swedish' => 'Suèdois',
     'None' => 'Aucun',
     'edit' => 'modifier',
     'Edit' => 'Modifier',
