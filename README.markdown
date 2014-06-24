@@ -55,6 +55,7 @@ Contributors:
 
 - Claudio Lobo
 - Gavlepeter: https://github.com/gavlepeter
+- Jesusaplsoft: https://github.com/jesusaplsoft
 - Kiswa: https://github.com/kiswa
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
