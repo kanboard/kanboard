@@ -32,6 +32,7 @@ class Translator
      * $translator->translate('I have %d kids', 5);
      *
      * @access public
+     * @param $identifier
      * @return string
      */
     public function translate($identifier)
