@@ -365,7 +365,6 @@ return array(
     'The time must be a numeric value' => 'Le temps doit-être une valeur numérique',
     'Todo' => 'À faire',
     'In progress' => 'En cours',
-    'Done' => 'Terminé',
     'Sub-task removed successfully.' => 'Sous-tâche supprimée avec succès.',
     'Unable to remove this sub-task.' => 'Impossible de supprimer cette sous-tâche.',
     'Sub-task updated successfully.' => 'Sous-tâche mise à jour avec succès.',
