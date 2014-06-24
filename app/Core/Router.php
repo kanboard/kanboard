@@ -30,7 +30,7 @@ class Router
      * Registry instance
      *
      * @access private
-     * @var Core\Registry
+     * @var \Core\Registry
      */
     private $registry;
 
