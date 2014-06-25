@@ -6,6 +6,8 @@ use RuntimeException;
 /**
  * The registry class is a dependency injection container
  *
+ * @property mixed db
+ * @property mixed event
  * @package core
  * @author  Frederic Guillot
  */
