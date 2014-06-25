@@ -57,6 +57,7 @@ Contributors:
 - Gavlepeter: https://github.com/gavlepeter
 - Jesusaplsoft: https://github.com/jesusaplsoft
 - Kiswa: https://github.com/kiswa
+- Levlaz: https://github.com/levlaz
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
 - Maxime: https://github.com/EpocDotFr
@@ -90,6 +91,7 @@ Documentation
 - [Installation on Debian](docs/debian-installation.markdown)
 - [Installation on Centos](docs/centos-installation.markdown)
 - [Upgrade Kanboard to a new version](docs/update.markdown)
+- [Secure connections (HTTPS)](docs/secure-connections.markdown)
 
 #### Database
 
