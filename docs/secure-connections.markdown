@@ -56,4 +56,4 @@ Restart Apache:
 service apache2 restart 
 ``` 
 
-You will now be able to access your Kanboard site securely by navigating to HTTPS://www.example.com/kanboard. Your browser will indicate that the certificate is not trusted. This is due to the fact that it is self signed. You can safely ignore this warning, although the certificate is not trusted, your data is still encrypted. 
+You will now be able to access your Kanboard site securely by navigating to `https://www.example.com/kanboard`. Your browser will indicate that the certificate is not trusted. This is due to the fact that it is self signed. You can safely ignore this warning, although the certificate is not trusted, your data is still encrypted. 
