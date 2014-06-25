@@ -135,6 +135,79 @@ Procedures
 
 
 
+### getBoard
+
+- Purpose: **Get all necessary information to display a board**
+- Parameters: **project_id** (integer)
+- Result on success: **board properties**
+- Result on failure: **null**
+
+### getColumns
+
+- Purpose: **Get all columns information for a given project**
+- Parameters: **project_id** (integer)
+- Result on success: **columns properties**
+- Result on failure: **null**
+
+### moveColumnUp
+
+- Purpose: **Move up the column position**
+- Parameters: **project_id** (integer), **column_id** (integer)
+- Result on success: **true**
+- Result on failure: **false**
+
+### moveColumnDown
+
+- Purpose: **Move down the column position**
+- Parameters: **project_id** (integer), **column_id** (integer)
+- Result on success: **true**
+- Result on failure: **false**
+
+### updateColumn
+
+- Purpose: **Update column properties**
+- Parameters: **column_id** (integer), **values** (**title** string, **task_limit** integer)
+- Result on success: **true**
+- Result on failure: **false**
+
+### addColumn
+
+- Purpose: **Add a new column**
+- Parameters: **project_id** (integer), **values** (**title** string, **task_limit** integer)
+- Result on success: **true**
+- Result on failure: **false**
+
+### removeColumn
+
+- Purpose: **Remove a column**
+- Parameters: **column_id** (integer)
+- Result on success: **true**
+- Result on failure: **false**
+
+### getAllowedUsers
+
+- Purpose: **Get allowed users for a given project**
+- Parameters: **project_id** (integer)
+- Result on success: Key/value pair of user_id and username
+- Result on failure: **false**
+
+### revokeUser
+
+- Purpose: **Revoke user access for a given project**
+- Parameters: **project_id** (integer), **user_id** (integer)
+- Result on success: **true**
+- Result on failure: **false**
+
+### allowUser
+
+- Purpose: **Grant user access for a given project**
+- Parameters: **project_id** (integer), **user_id** (integer)
+- Result on success: **true**
+- Result on failure: **false**
+
+
+
+
 ### createTask
 
 - Purpose: **Create a new task**
