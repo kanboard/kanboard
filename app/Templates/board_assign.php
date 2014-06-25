@@ -32,4 +32,4 @@
         </form>
     </section>
 
-</div>
+</section>
