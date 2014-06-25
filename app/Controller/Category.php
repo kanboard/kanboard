@@ -33,6 +33,7 @@ class Category extends Base
      * Get the category (common method between actions)
      *
      * @access private
+     * @param $project_id
      * @return array
      */
     private function getCategory($project_id)
