@@ -66,7 +66,7 @@ abstract class Base
      * Registry instance
      *
      * @access private
-     * @var Core\Registry
+     * @var \Core\Registry
      */
     private $registry;
 
@@ -85,7 +85,8 @@ abstract class Base
      * Load automatically models
      *
      * @access public
-     * @param  string   $name   Model name
+     * @param  string $name Model name
+     * @return mixed
      */
     public function __get($name)
     {
@@ -214,8 +215,9 @@ abstract class Base
      * Common layout for task views
      *
      * @access protected
-     * @param  string   $template   Template name
-     * @param  array    $params     Template parameters
+     * @param  string $template Template name
+     * @param  array $params Template parameters
+     * @return string
      */
     protected function taskLayout($template, array $params)
     {

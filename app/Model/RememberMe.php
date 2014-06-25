@@ -37,6 +37,8 @@ class RememberMe extends Base
      * Get a remember me record
      *
      * @access public
+     * @param $token
+     * @param $sequence
      * @return mixed
      */
     public function find($token, $sequence)

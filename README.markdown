@@ -53,6 +53,7 @@ Original author: [Frédéric Guillot](http://fredericguillot.com/)
 
 Contributors:
 
+- Alex Butum: https://github.com/dZkF9RWJT6wN8ux
 - Claudio Lobo
 - Gavlepeter: https://github.com/gavlepeter
 - Jesusaplsoft: https://github.com/jesusaplsoft

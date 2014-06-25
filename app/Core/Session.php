@@ -47,6 +47,12 @@ class Session
         ini_set('session.entropy_length', '32');
         ini_set('session.hash_bits_per_character', 6);
 
+        // If session was autostarted with session.auto_start = 1 in php.ini destroy it, otherwise we cannot login
+        if (isset($_SESSION))
+        {
+            session_destroy();
+        }
+
         // Custom session name
         session_name('__S');
 

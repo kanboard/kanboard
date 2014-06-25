@@ -53,7 +53,8 @@
     function board_save()
     {
         var data = [];
-        var projectId = $("#board").attr("data-project-id");
+        var $boardSelector = $("#board");
+        var projectId = $boardSelector.attr("data-project-id");
 
         board_unload_events();
 
@@ -72,7 +73,7 @@
         $.ajax({
             cache: false,
             url: "?controller=board&action=save&project_id=" + projectId,
-            data: {"positions": data, "csrf_token": $("#board").attr("data-csrf-token")},
+            data: {"positions": data, "csrf_token": $boardSelector.attr("data-csrf-token")},
             type: "POST",
             success: function(data) {
                 $("#board").remove();
@@ -86,8 +87,9 @@
     // Check if a board have been changed by someone else
     function board_check()
     {
-        var projectId = $("#board").attr("data-project-id");
-        var timestamp = $("#board").attr("data-time");
+        var $boardSelector = $("#board");
+        var projectId = $boardSelector.attr("data-project-id");
+        var timestamp = $boardSelector.attr("data-time");
 
         if (is_visible() && projectId != undefined && timestamp != undefined) {
             $.ajax({
@@ -95,7 +97,7 @@
                 url: "?controller=board&action=check&project_id=" + projectId + "&timestamp=" + timestamp,
                 statusCode: {
                     200: function(data) {
-                        $("#board").remove();
+                        $boardSelector.remove();
                         $("#main").append(data);
                         board_unload_events();
                         board_load_events();

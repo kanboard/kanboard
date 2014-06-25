@@ -204,7 +204,6 @@ return array(
     'User' => 'Usuário',
     'Everybody have access to this project.' => 'Todos têm acesso a este projeto.',
     'You are not allowed to access to this project.' => 'Você não está autorizado a acessar este projeto.',
-    '%B %e, %G at %k:%M %p' => '%d %B %G às %H:%M',
     'Comments' => 'Comentários',
     'Post comment' => 'Postar comentário',
     'Write your text in Markdown' => 'Escreva seu texto em Markdown',

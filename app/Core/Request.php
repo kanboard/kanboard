@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Core\Security;
-
 /**
  * Request class
  *

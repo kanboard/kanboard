@@ -153,9 +153,10 @@ class File extends Base
      * Handle file upload
      *
      * @access public
-     * @param  integer   $project_id     Project id
-     * @param  integer   $task_id        Task id
-     * @param  string    $form_name      File form name
+     * @param  integer $project_id Project id
+     * @param  integer $task_id Task id
+     * @param  string $form_name File form name
+     * @return bool
      */
     public function upload($project_id, $task_id, $form_name)
     {

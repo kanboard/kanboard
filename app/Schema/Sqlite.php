@@ -1,12 +1,13 @@
 <?php
 
 namespace Schema;
+use Core\Security;
 
 const VERSION = 19;
 
 function version_19($pdo)
 {
-    $pdo->exec("ALTER TABLE config ADD COLUMN api_token TEXT DEFAULT '".\Core\Security::generateToken()."'");
+    $pdo->exec("ALTER TABLE config ADD COLUMN api_token TEXT DEFAULT '".Security::generateToken()."'");
 }
 
 function version_18($pdo)
@@ -214,7 +215,7 @@ function version_3($pdo)
 
         foreach ($results as &$result) {
             $rq = $pdo->prepare('UPDATE projects SET token=? WHERE id=?');
-            $rq->execute(array(\Core\Security::generateToken(), $result['id']));
+            $rq->execute(array(Security::generateToken(), $result['id']));
         }
     }
 }
@@ -289,6 +290,6 @@ function version_1($pdo)
     $pdo->exec("
         INSERT INTO config
         (language, webhooks_token)
-        VALUES ('en_US', '".\Core\Security::generateToken()."')
+        VALUES ('en_US', '".Security::generateToken()."')
     ");
 }

@@ -30,7 +30,7 @@ class Router
      * Registry instance
      *
      * @access private
-     * @var Core\Registry
+     * @var \Core\Registry
      */
     private $registry;
 
@@ -53,8 +53,9 @@ class Router
      * Check controller and action parameter
      *
      * @access public
-     * @param  string    $value           Controller or action name
-     * @param  string    $default_value   Default value if validation fail
+     * @param  string $value Controller or action name
+     * @param  string $default_value Default value if validation fail
+     * @return string
      */
     public function sanitize($value, $default_value)
     {
@@ -65,9 +66,10 @@ class Router
      * Load a controller and execute the action
      *
      * @access public
-     * @param  string     $filename     Controller filename
-     * @param  string     $class        Class name
-     * @param  string     $method       Method name
+     * @param  string $filename Controller filename
+     * @param  string $class Class name
+     * @param  string $method Method name
+     * @return bool
      */
     public function load($filename, $class, $method)
     {

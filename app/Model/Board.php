@@ -183,7 +183,8 @@ class Board extends Base
      * Get all columns and tasks for a given project
      *
      * @access public
-     * @param  integer  $project_id   Project id
+     * @param  integer $project_id Project id
+     * @param array $filters
      * @return array
      */
     public function get($project_id, array $filters = array())
