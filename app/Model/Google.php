@@ -146,7 +146,5 @@ class Google extends Base
         catch (TokenResponseException $e) {
             return false;
         }
-
-        return false;
     }
 }
