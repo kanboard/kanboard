@@ -559,9 +559,31 @@ a.filter-on {
     position: relative;
     margin-right: 5px;
     margin-bottom: 10px;
-    border: 1px solid #000;
+    border: 1px outset #000;
     padding: 5px;
     font-size: 95%;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(56,49,56,1), 2px 2px 0px 0px rgba(0,0,0,.7);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(56,49,56,1), 2px 2px 0px 0px rgba(0,0,0,.7);
+    box-shadow: 0px 0px 3px 0px rgba(56,49,56,1), 2px 2px 0px 0px rgba(0,0,0,.7);
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+    -ms-transition: all .1s ease;
+    -o-transition: all .1s ease;
+    transition: all .1s ease;
+}
+
+.task-board:focus,
+.task-board:hover,
+.task-board:focus,
+.task-table:hover {
+    -webkit-box-shadow: 0px 3px 6px rgba(0,0,0,.9);
+    -moz-box-shadow: 0px 3px 6px rgba(0,0,0,.9);
+    box-shadow: 0px 3px 6px rgba(0,0,0,.9);
+    position: relative;
+    top: 2px;
 }
 
 .task-table a,
