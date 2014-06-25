@@ -70,6 +70,7 @@ class Action extends Base
      * Return actions and parameters for a given project
      *
      * @access public
+     * @param $project_id
      * @return array
      */
     public function getAllByProject($project_id)
@@ -212,8 +213,9 @@ class Action extends Base
      * Load an action
      *
      * @access public
-     * @param  string  $name        Action class name
-     * @param  integer $project_id  Project id
+     * @param  string $name Action class name
+     * @param  integer $project_id Project id
+     * @throws \LogicException
      * @return \Core\Listener       Action Instance
      * @throw  LogicException
      */
