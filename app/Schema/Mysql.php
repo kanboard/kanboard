@@ -2,11 +2,12 @@
 
 namespace Schema;
 
+use Core\Security;
 const VERSION = 19;
 
 function version_19($pdo)
 {
-    $pdo->exec("ALTER TABLE config ADD COLUMN api_token VARCHAR(255) DEFAULT '".\Core\Security::generateToken()."'");
+    $pdo->exec("ALTER TABLE config ADD COLUMN api_token VARCHAR(255) DEFAULT '".Security::generateToken()."'");
 }
 
 function version_18($pdo)
@@ -268,6 +269,6 @@ function version_1($pdo)
     $pdo->exec("
         INSERT INTO config
         (webhooks_token)
-        VALUES ('".\Core\Security::generateToken()."')
+        VALUES ('".Security::generateToken()."')
     ");
 }
