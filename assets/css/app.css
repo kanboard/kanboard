@@ -250,8 +250,9 @@ input.form-date {
 }
 
 .form-login {
-    padding-left: 20px;
-    width: 430px;
+    padding: 10px;
+    margin: 10% auto 20% auto;
+    width: 470px;
 }
 
 /* alerts */
@@ -300,6 +301,12 @@ input.form-date {
     color: #468847;
     background-color: #dff0d8;
     border-color: #d6e9c6;
+}
+
+.alert-center {
+    margin: 0 auto;
+    padding: 0;
+    width: 430px;
 }
 
 .alert-error {
@@ -418,6 +425,14 @@ a.btn-red:hover,
 }
 
 /* header */
+
+legend {
+    font-weight: bold;
+    position: relative;
+    top: -.4em;
+    font-size: 1.2em;
+}
+
 header {
     margin-bottom: 25px;
     margin-top: 10px;
