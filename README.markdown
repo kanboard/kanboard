@@ -62,6 +62,7 @@ Contributors:
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
 - Maxime: https://github.com/EpocDotFr
+- Moraxy: https://github.com/moraxy
 - Nala Ginrut: https://github.com/NalaGinrut
 - Nekohayo: https://github.com/nekohayo
 - Olivier Maridat: https://github.com/oliviermaridat
