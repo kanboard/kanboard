@@ -10,7 +10,7 @@ use Model\User;
 use Model\Config;
 use Model\Category;
 use Model\Comment;
-use Model\Subtask;
+use Model\SubTask;
 use Model\Board;
 use Model\Action;
 
@@ -20,7 +20,7 @@ $task = new Task($registry->shared('db'), $registry->shared('event'));
 $user = new User($registry->shared('db'), $registry->shared('event'));
 $category = new Category($registry->shared('db'), $registry->shared('event'));
 $comment = new Comment($registry->shared('db'), $registry->shared('event'));
-$subtask = new Subtask($registry->shared('db'), $registry->shared('event'));
+$subtask = new SubTask($registry->shared('db'), $registry->shared('event'));
 $board = new Board($registry->shared('db'), $registry->shared('event'));
 $action = new Action($registry->shared('db'), $registry->shared('event'));
 
