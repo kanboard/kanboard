@@ -15,14 +15,14 @@
         });
 
         // Open assignee popover
-        $(".task-board-user a").click(function(e) {
+        $(".task-board-popover").click(function(e) {
 
             e.preventDefault();
             e.stopPropagation();
 
-            var taskId = $(this).parent().parent().attr("data-task-id");
+            var href = $(this).attr('href');
 
-            $.get("?controller=board&action=assign&task_id=" + taskId, function(data) {
+            $.get(href, function(data) {
                 popover_show(data);
             });
         });

@@ -162,17 +162,24 @@ class Task extends Base
 
         $task['score'] = $task['score'] ?: '';
 
-        $this->response->html($this->template->layout('task_edit', array(
-            'values' => $task,
-            'errors' => array(),
-            'task' => $task,
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'users_list' => $this->project->getUsersList($task['project_id']),
-            'colors_list' => $this->task->getColors(),
-            'categories_list' => $this->category->getList($task['project_id']),
-            'menu' => 'tasks',
-            'title' => t('Edit a task')
-        )));
+        $params = array(
+                'values' => $task,
+                'errors' => array(),
+                'task' => $task,
+                'columns_list' => $this->board->getColumnsList($task['project_id']),
+                'users_list' => $this->project->getUsersList($task['project_id']),
+                'colors_list' => $this->task->getColors(),
+                'categories_list' => $this->category->getList($task['project_id']),
+                'ajax' => $this->request->isAjax(),
+                'menu' => 'tasks',
+                'title' => t('Edit a task')
+            );
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->load('task_edit', $params));
+        }
+        else {
+            $this->response->html($this->template->layout('task_edit', $params));
+        }
     }
 
     /**
@@ -191,7 +198,13 @@ class Task extends Base
 
             if ($this->task->update($values)) {
                 $this->session->flash(t('Task updated successfully.'));
-                $this->response->redirect('?controller=task&action=show&task_id='.$values['id']);
+
+                if ($this->request->getIntegerParam('ajax')) {
+                    $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
+                }
+                else {
+                    $this->response->redirect('?controller=task&action=show&task_id='.$values['id']);
+                }
             }
             else {
                 $this->session->flashError(t('Unable to update your task.'));
@@ -357,13 +370,20 @@ class Task extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task_edit_description', array(
-            'values' => $task,
-            'errors' => array(),
-            'task' => $task,
-            'menu' => 'tasks',
-            'title' => t('Edit the description')
-        )));
+        $params = array(
+                'values' => $task,
+                'errors' => array(),
+                'task' => $task,
+                'ajax' => $this->request->isAjax(),
+                'menu' => 'tasks',
+                'title' => t('Edit the description')
+            );
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->load('task_edit_description', $params));
+        }
+        else {
+            $this->response->html($this->taskLayout('task_edit_description', $params));
+        }
     }
 
     /**
@@ -387,7 +407,12 @@ class Task extends Base
                 $this->session->flashError(t('Unable to update your task.'));
             }
 
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+            if ($this->request->getIntegerParam('ajax')) {
+                $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
+            }
+            else {
+                $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+            }
         }
 
         $this->response->html($this->taskLayout('task_edit_description', array(
