@@ -35,6 +35,53 @@ Kanboard.Board = (function() {
         // Description popover
         $(".task-description-popover").click(Kanboard.Popover);
 
+        // Tooltips
+        $(".task-board-tooltip").tooltip({
+            track: false,
+            position: { my: 'left-20 top', at: 'center bottom+9', using: function( position, feedback ) {
+                $( this ).css( position );
+                var arrow_pos = feedback.target.left + feedback.target.width / 2 - feedback.element.left - 20
+                $( "<div>" )
+                    .addClass("tooltip-arrow")
+                    .addClass(feedback.vertical)
+                    .addClass(arrow_pos == 0 ? "align-left" : "align-right")
+                    .appendTo(this);
+            }},
+            content: function(e) {
+                var content = $(this).attr('data-content');
+                 if (content)
+                    return content;
+                var href = $(this).attr('href');
+                if (!href)
+                    return;
+                element = $(this)
+                $.get(href, function setTooltipContent(data) {
+                    $('.ui-tooltip-content:visible').html(data);
+                    $('.ui-tooltip-content:visible a').click(function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var href = $(this).attr('href');
+                        $.get(href, setTooltipContent);
+                    });
+                });
+                return '<i class="fa fa-refresh fa-spin fa-2x"></i>';
+            }
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).tooltip("open");
+            $(".ui-tooltip").on("mouseleave", function () {
+                $(_this).tooltip('close');
+            });
+        }).on("mouseleave focusout", function (e) {
+            e.stopImmediatePropagation();
+
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".ui-tooltip:hover").length)
+                    $(_this).tooltip("close");
+            }, 100);
+        });
+
         // Redirect to the task details page
         $("[data-task-url]").each(function() {
             $(this).click(function() {

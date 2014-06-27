@@ -1,0 +1,61 @@
+/* tooltip */
+.ui-tooltip, .tooltip-arrow:after {
+    background: white;
+    border: 2px solid #aaaaaa;
+    box-shadow: 0 0 5px #aaa;
+}
+
+div.ui-tooltip {
+    min-width: 20px;
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+.tooltip-arrow {
+    width: 20px;
+    height: 10px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.tooltip-arrow.top {
+    top: -10px;
+}
+
+.tooltip-arrow.bottom {
+    bottom: -10px;
+}
+
+.tooltip-arrow.align-left {
+    left: 10px;
+}
+
+.tooltip-arrow.align-right {
+    right: 10px;
+}
+
+.tooltip-arrow:after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.tooltip-arrow.bottom:after {
+    top: -10px;
+}
+
+.tooltip-arrow.top:after {
+    bottom: -10px;
+}
+
+.tooltip-arrow.align-left:after {
+    left: 0px;
+}
+
+.tooltip-arrow.align-right:after {
+    right: 0px;
+}
