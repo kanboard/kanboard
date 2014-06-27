@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'English' => 'angielski',
-    'French' => 'francuski',
-    'Polish' => 'polski',
-    'Portuguese (Brazilian)' => 'Portugalski (brazylijski)',
-    'Spanish' => 'Hiszpański',
+    'English' => 'angielski [English]',
+    'French' => 'francuski [French]',
+    'Polish' => 'polski [Polish]',
+    'Portuguese (Brazilian)' => 'Portugalski (brazylijski) [Portuguese (Brazilian)]',
+    'Spanish' => 'Hiszpański [Spanish]',
     // 'German' => '',
     // 'Chinese (Simplified)' => '',
     'None' => 'Brak',
