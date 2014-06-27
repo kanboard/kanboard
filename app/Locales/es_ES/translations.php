@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'English' => 'Inglés',
-    'French' => 'Francés',
-    'Polish' => 'Polaco',
-    'Portuguese (Brazilian)' => 'Portugués (Brasil)',
-    'Spanish' => 'Español',
-    // 'German' => '',
-    // 'Chinese (Simplified)' => '',
-    // 'Swedish' => 'Suèdois',
+    'English' => 'Inglés [English]',
+    'French' => 'Francés [French]',
+    'Polish' => 'Polaco [Polish]',
+    'Portuguese (Brazilian)' => 'Portugués (Brasil) [Portuguese (Brazilian)]',
+    'Spanish' => 'Español [Spanish]',
+    'German' => 'Alemán [German]',
+    'Chinese (Simplified)' => 'Chino (Simplificado) [Chinese (Simplified)]',
+    'Swedish' => 'Suèdoisi [Swedish]',
     'None' => 'Ninguno',
     'edit' => 'modificar',
     'Edit' => 'Modificar',
@@ -375,5 +375,5 @@ return array(
     'Maximum size: ' => 'Tamaño máximo',
     'Unable to upload the file.' => 'No pude cargar el fichero.',
     'Actions' => 'Acciones',
-    // 'Display another project' => '',
+    'Display another project' => 'Mostrar otro proyecto',
 );
