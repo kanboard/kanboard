@@ -442,4 +442,31 @@ class Board extends Base
             $this->response->status(401);
         }
     }
+
+    public function getSubtasks() {
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+        $this->response->html($this->template->load('board_subtasks', array(
+            'values' => $values,
+            'task' => $task,
+            'subtasks' => $this->subTask->getAll($task['id'])
+        )));
+    }
+
+    public function toggleSubtask() {
+        $subtask = $this->subTask->getById($this->request->getIntegerParam('subtask_id'));
+        $value = array( 'id' => $subtask['id'],
+                        'status' => ($subtask['status'] + 1) % 3 );
+        if (!$this->subTask->update($value))
+            $this->session->flashError(t('Unable to change sub-task state.'));
+
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+        $this->response->html($this->template->load('board_subtasks', array(
+            'values' => $values,
+            'task' => $task,
+            'subtasks' => $this->subTask->getAll($task['id'])
+        )));
+
+    }
 }
