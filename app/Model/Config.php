@@ -59,6 +59,30 @@ class Config extends Base
     }
 
     /**
+     * Get available languages using native language of everyone
+     *
+     * @access public
+     * @return array
+     */
+    public function getNativeLanguages()
+    {
+        $languages = array(
+                'de_DE' => 'Deutsch',
+                'en_US' => 'English',
+                'es_ES' => 'Español',
+                'fr_FR' => 'Français',
+                'pl_PL' => 'Polski',
+                'pt_BR' => 'Português (Brasil)',
+                'sv_SE' => 'Svenska',
+                'zh_CN' => '中文(简体)',
+        );
+    
+        asort($languages);
+    
+        return $languages;
+    }
+    
+    /**
      * Get a config variable from the session or the database
      *
      * @access public
