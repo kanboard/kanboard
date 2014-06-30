@@ -43,3 +43,12 @@ define('GOOGLE_CLIENT_ID', '');
 
 // Google client secret key (Get this value from the Google developer console)
 define('GOOGLE_CLIENT_SECRET', '');
+
+// Enable/disable GitHub authentication
+define('GITHUB_AUTH', false);
+
+// GitHub client id (Copy it from your settings -> Applications -> Developer applications)
+define('GITHUB_CLIENT_ID', '');
+
+// GitHub client secret key (Copy it from your settings -> Applications -> Developer applications)
+define('GITHUB_CLIENT_SECRET', '');

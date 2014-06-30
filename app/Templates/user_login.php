@@ -24,6 +24,12 @@
         </p>
     <?php endif ?>
 
+    <?php if (GITHUB_AUTH): ?>
+        <p>
+            <a href="?controller=user&amp;action=gitHub"><?= t('Login with my GitHub Account') ?></a>
+        </p>
+    <?php endif ?>
+
     <div class="form-actions">
         <input type="submit" value="<?= t('Sign in') ?>" class="btn btn-blue"/>
     </div>

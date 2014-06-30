@@ -52,6 +52,18 @@ class User extends Base
     }
 
     /**
+     * Get a specific user by the GitHub id
+     *
+     * @access public
+     * @param  string  $github_id  GitHub user id
+     * @return array
+     */
+    public function getByGitHubId($github_id)
+    {
+        return $this->db->table(self::TABLE)->eq('github_id', $github_id)->findOne();
+    }
+
+    /**
      * Get a specific user by the username
      *
      * @access public

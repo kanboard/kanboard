@@ -20,6 +20,7 @@ use Model\LastLogin;
  * @property \Model\Config      $config
  * @property \Model\File        $file
  * @property \Model\Google      $google
+ * @property \Model\GitHub      $gitHub
  * @property \Model\LastLogin   $lastLogin
  * @property \Model\Ldap        $ldap
  * @property \Model\Project     $project
