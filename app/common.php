@@ -44,7 +44,8 @@ defined('DB_NAME') or define('DB_NAME', 'kanboard');
 defined('LDAP_AUTH') or define('LDAP_AUTH', false);
 defined('LDAP_SERVER') or define('LDAP_SERVER', '');
 defined('LDAP_PORT') or define('LDAP_PORT', 389);
-defined('LDAP_USER_DN') or define('LDAP_USER_DN', '%s');
+defined('LDAP_ACCOUNT_FULLNAME') or define('LDAP_ACCOUNT_FULLNAME', 'displayname');
+defined('LDAP_ACCOUNT_EMAIL') or define('LDAP_ACCOUNT_EMAIL', 'mail');
 
 // Google authentication
 defined('GOOGLE_AUTH') or define('GOOGLE_AUTH', false);

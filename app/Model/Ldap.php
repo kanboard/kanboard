@@ -33,8 +33,20 @@ class Ldap extends Base
         ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
 
-        if (@ldap_bind($ldap, sprintf(LDAP_USER_DN, $username), $password)) {
-            return $this->create($username);
+        if (!@ldap_bind($ldap, LDAP_USERNAME, LDAP_PASSWORD)) {
+            die('Unable to bind to the LDAP server: "'.LDAP_SERVER.'"');
+        }
+
+        $sr = ldap_search($ldap, LDAP_ACCOUNT_BASE, sprintf(LDAP_USER_PATTERN, $username), array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL));
+        $info = ldap_get_entries($ldap, $sr);
+        if (count($info) == 0 || $info['count'] == 0) {
+            //User not found
+            return false;
+        }
+
+        if (@ldap_bind($ldap,  $info[0]['dn'], $password)) {
+            error_log("Bind to user OK");
+            return $this->create($username, $info[0][LDAP_ACCOUNT_FULLNAME][0], $info[0][LDAP_ACCOUNT_EMAIL][0]);
         }
 
         return false;
@@ -45,9 +57,11 @@ class Ldap extends Base
      *
      * @access public
      * @param  string  $username  Username
+     * @param  string  $name      Name of the user
+     * @param  string  $email       Email address
      * @return bool
      */
-    public function create($username)
+    public function create($username, $name, $email)
     {
         $userModel = new User($this->db, $this->event);
         $user = $userModel->getByUsername($username);
@@ -70,6 +84,8 @@ class Ldap extends Base
         // Create a LDAP user
         $values = array(
             'username' => $username,
+            'name' => $name,
+            'email' => $email,
             'is_admin' => 0,
             'is_ldap_user' => 1,
         );
