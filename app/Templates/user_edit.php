@@ -56,6 +56,14 @@
                 <?php endif ?>
             <?php endif ?>
 
+            <?php if (GITHUB_AUTH && Helper\is_current_user($values['id'])): ?>
+                <?php if (empty($values['github_id'])): ?>
+                    <a href="?controller=user&amp;action=gitHub<?= Helper\param_csrf() ?>"><?= t('Link my GitHub Account') ?></a>
+                <?php else: ?>
+                    <a href="?controller=user&amp;action=unlinkGitHub<?= Helper\param_csrf() ?>"><?= t('Unlink my GitHub Account') ?></a>
+                <?php endif ?>
+            <?php endif ?>
+
         </div>
 
         <div class="form-actions">

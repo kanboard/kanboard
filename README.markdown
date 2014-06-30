@@ -24,7 +24,7 @@ Features
 - Tasks with different colors, categories, sub-tasks, attachments, Markdown support for the description
 - Automatic actions
 - Users management with a basic privileges separation (administrator or regular user)
-- External authentication: Google Account and LDAP/ActiveDirectory
+- External authentication: Google and GitHub accounts as well as LDAP/ActiveDirectory
 - Webhooks to create tasks from an external software
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
@@ -104,6 +104,7 @@ Documentation
 
 - [LDAP authentication](docs/ldap-authentication.markdown)
 - [Google authentication](docs/google-authentication.markdown)
+- [GitHub authentication](docs/github-authentication.markdown)
 
 #### Developers
 
