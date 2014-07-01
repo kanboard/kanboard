@@ -33,10 +33,10 @@ class Action extends Base
             'available_events' => $this->action->getAvailableEvents(),
             'available_params' => $this->action->getAllActionParameters(),
             'columns_list' => $this->board->getColumnsList($project['id']),
-            'users_list' => $this->project->getUsersList($project['id'], false),
+            'users_list' => $this->project->getUsersList($project['id']),
             'projects_list' => $this->project->getList(false),
             'colors_list' => $this->task->getColors(),
-            'categories_list' => $this->category->getList($project['id'], false),
+            'categories_list' => $this->category->getList($project['id']),
             'menu' => 'projects',
             'title' => t('Automatic actions')
         )));
@@ -64,10 +64,10 @@ class Action extends Base
             'values' => $values,
             'action_params' => $action->getActionRequiredParameters(),
             'columns_list' => $this->board->getColumnsList($project['id']),
-            'users_list' => $this->project->getUsersList($project['id'], false),
+            'users_list' => $this->project->getUsersList($project['id']),
             'projects_list' => $this->project->getList(false),
             'colors_list' => $this->task->getColors(),
-            'categories_list' => $this->category->getList($project['id'], false),
+            'categories_list' => $this->category->getList($project['id']),
             'project' => $project,
             'menu' => 'projects',
             'title' => t('Automatic actions')
