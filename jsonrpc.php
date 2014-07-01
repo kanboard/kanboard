@@ -123,6 +123,10 @@ $server->register('updateTask', function($values) use ($task) {
     return $valid && $task->update($values);
 });
 
+$server->register('openTask', function($task_id) use ($task) {
+    return $task->open($task_id);
+});
+
 $server->register('closeTask', function($task_id) use ($task) {
     return $task->close($task_id);
 });
