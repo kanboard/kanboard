@@ -299,4 +299,68 @@ class User extends Base
 
         $this->response->redirect('?controller=user');
     }
+
+    /**
+     * GitHub authentication
+     *
+     * @access public
+     */
+    public function gitHub()
+    {
+        $code = $this->request->getStringParam('code');
+
+        if ($code) {
+            $profile = $this->gitHub->getGitHubProfile($code);
+
+            if (is_array($profile)) {
+
+                // If the user is already logged, link the account otherwise authenticate
+                if ($this->acl->isLogged()) {
+
+                    if ($this->gitHub->updateUser($this->acl->getUserId(), $profile)) {
+                        $this->session->flash(t('Your GitHub account was successfully linked to your profile.'));
+                    }
+                    else {
+                        $this->session->flashError(t('Unable to link your GitHub Account.'));
+                    }
+
+                    $this->response->redirect('?controller=user');
+                }
+                else if ($this->gitHub->authenticate($profile['id'])) {
+                    $this->response->redirect('?controller=app');
+                }
+                else {
+                    $this->response->html($this->template->layout('user_login', array(
+                        'errors' => array('login' => t('GitHub authentication failed')),
+                        'values' => array(),
+                        'no_layout' => true,
+                        'title' => t('Login')
+                    )));
+                }
+            }
+        }
+
+        $this->response->redirect($this->gitHub->getAuthorizationUrl());
+    }
+
+    /**
+     * Unlink a GitHub account
+     *
+     * @access public
+     */
+    public function unlinkGitHub()
+    {
+        $this->checkCSRFParam();
+
+        $this->gitHub->revokeGitHubAccess();
+
+        if ($this->gitHub->unlink($this->acl->getUserId())) {
+            $this->session->flash(t('Your GitHub account is no longer linked to your profile.'));
+        }
+        else {
+            $this->session->flashError(t('Unable to unlink your GitHub Account.'));
+        }
+
+        $this->response->redirect('?controller=user');
+    }
 }

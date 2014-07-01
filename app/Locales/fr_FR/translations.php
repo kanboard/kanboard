@@ -374,4 +374,12 @@ return array(
     'Maximum size: ' => 'Taille maximum : ',
     'Unable to upload the file.' => 'Impossible de transférer le fichier.',
     'Display another project' => 'Afficher un autre projet',
+    'Your GitHub account was successfully linked to your profile.' => 'Votre compte Github est désormais lié avec votre profile.',
+    'Unable to link your GitHub Account.' => 'Impossible de lier votre compte Github.',
+    'GitHub authentication failed' => 'L\'authentification avec Github à échouée',
+    'Your GitHub account is no longer linked to your profile.' => 'Votre compte Github n\'est plus relié avec votre profile.',
+    'Unable to unlink your GitHub Account.' => 'Impossible de déconnecter votre compte Github.',
+    'Login with my GitHub Account' => 'Se connecter avec mon compte Github',
+    'Link my GitHub Account' => 'Lier mon compte Github',
+    'Unlink my GitHub Account'  => 'Ne plus utiliser mon compte Github',
 );

@@ -3,7 +3,12 @@
 namespace Schema;
 use Core\Security;
 
-const VERSION = 19;
+const VERSION = 20;
+
+function version_20($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN github_id TEXT");
+}
 
 function version_19($pdo)
 {

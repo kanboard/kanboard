@@ -48,14 +48,27 @@
                 <?= Helper\form_checkbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1 ? true : false) ?><br/>
             <?php endif ?>
 
+            <ul>
             <?php if (GOOGLE_AUTH && Helper\is_current_user($values['id'])): ?>
+                <li>
                 <?php if (empty($values['google_id'])): ?>
                     <a href="?controller=user&amp;action=google<?= Helper\param_csrf() ?>"><?= t('Link my Google Account') ?></a>
                 <?php else: ?>
                     <a href="?controller=user&amp;action=unlinkGoogle<?= Helper\param_csrf() ?>"><?= t('Unlink my Google Account') ?></a>
                 <?php endif ?>
+                </li>
             <?php endif ?>
 
+            <?php if (GITHUB_AUTH && Helper\is_current_user($values['id'])): ?>
+                <li>
+                <?php if (empty($values['github_id'])): ?>
+                    <a href="?controller=user&amp;action=gitHub<?= Helper\param_csrf() ?>"><?= t('Link my GitHub Account') ?></a>
+                <?php else: ?>
+                    <a href="?controller=user&amp;action=unlinkGitHub<?= Helper\param_csrf() ?>"><?= t('Unlink my GitHub Account') ?></a>
+                <?php endif ?>
+                </li>
+            <?php endif ?>
+            </ul>
         </div>
 
         <div class="form-actions">

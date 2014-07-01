@@ -18,11 +18,19 @@
 
     <?= Helper\form_checkbox('remember_me', t('Remember Me'), 1) ?><br/>
 
+    <ul>
     <?php if (GOOGLE_AUTH): ?>
-        <p>
+        <li>
             <a href="?controller=user&amp;action=google"><?= t('Login with my Google Account') ?></a>
-        </p>
+        </li>
     <?php endif ?>
+
+    <?php if (GITHUB_AUTH): ?>
+        <li>
+            <a href="?controller=user&amp;action=gitHub"><?= t('Login with my GitHub Account') ?></a>
+        </li>
+    <?php endif ?>
+    </ul>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Sign in') ?>" class="btn btn-blue"/>

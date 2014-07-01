@@ -249,9 +249,19 @@ input.form-date {
     padding-left: 0;
 }
 
+.form-column ul {
+    margin-top: 15px;
+}
+
 .form-login {
     padding-left: 20px;
     width: 430px;
+}
+
+.form-column li,
+.form-login li {
+    margin-left: 25px;
+    line-height: 25px;
 }
 
 /* alerts */
