@@ -24,6 +24,11 @@ class Ldap extends Base
             die('The PHP LDAP extension is required');
         }
 
+        if (!LDAP_SSL_VERIFY) {
+            //Skip SSL certificate verification
+            putenv('LDAPTLS_REQCERT=never');
+        }
+
         $ldap = ldap_connect(LDAP_SERVER, LDAP_PORT);
 
         if (! is_resource($ldap)) {

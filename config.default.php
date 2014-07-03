@@ -30,6 +30,9 @@ define('LDAP_SERVER', '');
 // LDAP server port (389 by default)
 define('LDAP_PORT', 389);
 
+// By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
+define('LDAP_SSL_VERIFY', true);
+
 // LDAP username to connect with. NULL for anonymous bind (by default).
 define('LDAP_USERNAME', null);
 

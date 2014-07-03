@@ -44,6 +44,7 @@ defined('DB_NAME') or define('DB_NAME', 'kanboard');
 defined('LDAP_AUTH') or define('LDAP_AUTH', false);
 defined('LDAP_SERVER') or define('LDAP_SERVER', '');
 defined('LDAP_PORT') or define('LDAP_PORT', 389);
+defined('LDAP_SSL_VERIFY') or define('LDAP_SSL_VERIFY', true);
 defined('LDAP_ACCOUNT_FULLNAME') or define('LDAP_ACCOUNT_FULLNAME', 'displayname');
 defined('LDAP_ACCOUNT_EMAIL') or define('LDAP_ACCOUNT_EMAIL', 'mail');
 
