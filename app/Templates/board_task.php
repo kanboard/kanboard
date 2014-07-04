@@ -20,13 +20,13 @@
 
 <?php else: ?>
 
-    <a href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a> -
+    <a class="task-board-popover" href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a> -
 
     <span class="task-board-user">
     <?php if (! empty($task['owner_id'])): ?>
-        <a href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>"><?= t('Assigned to %s', $task['username']) ?></a>
+        <a class="task-board-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>"><?= t('Assigned to %s', $task['username']) ?></a>
     <?php else: ?>
-        <a href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>" class="task-board-nobody"><?= t('Nobody assigned') ?></a>
+        <a class="task-board-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>" class="task-board-nobody"><?= t('Nobody assigned') ?></a>
     <?php endif ?>
     </span>
 
@@ -69,7 +69,7 @@
         <?php endif ?>
 
         <?php if (! empty($task['description'])): ?>
-            <i class="fa fa-file-text-o" title="<?= t('Description') ?>"></i>
+            <a class="task-board-popover" href='?controller=task&amp;action=editDescription&amp;task_id=<?= $task['id'] ?>'><i class="fa fa-file-text-o" title="<?= t('Description') ?>"></i></a>
         <?php endif ?>
     </div>
 </div>
