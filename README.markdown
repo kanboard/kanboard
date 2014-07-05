@@ -71,6 +71,7 @@ Contributors:
 - Sebastien pacilly: https://github.com/spacilly
 - Toomyem: https://github.com/Toomyem
 - Troloo: https://github.com/troloo
+- Typz: https://github.com/Typz
 
 There is also many people who have reported bugs or proposed awesome ideas.
 
