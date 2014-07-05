@@ -99,6 +99,11 @@ class Board extends Base
 
         foreach (array('title', 'task_limit') as $field) {
             foreach ($values[$field] as $column_id => $field_value) {
+
+                if ($field === 'task_limit' && empty($field_value)) {
+                    $field_value = 0;
+                }
+
                 $this->updateColumn($column_id, array($field => $field_value));
             }
         }

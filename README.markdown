@@ -98,7 +98,8 @@ Documentation
 #### Database
 
 - [Sqlite database management](docs/sqlite-database.markdown)
-- [How to use Mysql instead of Sqlite](docs/mysql-configuration.markdown)
+- [How to use Mysql](docs/mysql-configuration.markdown)
+- [How to use Postgresql](docs/postgresql-configuration.markdown)
 
 #### Authentication
 

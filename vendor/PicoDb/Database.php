@@ -27,6 +27,11 @@ class Database
                 $this->pdo = new Mysql($settings);
                 break;
 
+            case 'postgres':
+                require_once __DIR__.'/Drivers/Postgres.php';
+                $this->pdo = new Postgres($settings);
+                break;
+
             default:
                 throw new \LogicException('This database driver is not supported.');
         }

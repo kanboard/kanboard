@@ -1,6 +1,7 @@
 <?php
 
 namespace Schema;
+
 use Core\Security;
 
 const VERSION = 20;

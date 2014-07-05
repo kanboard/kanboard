@@ -174,7 +174,10 @@ class Config extends Base
      */
     public function regenerateTokens()
     {
-        $this->db->table(self::TABLE)->update(array('webhooks_token' => Security::generateToken()));
+        $this->db->table(self::TABLE)->update(array(
+            'webhooks_token' => Security::generateToken(),
+            'api_token' => Security::generateToken(),
+        ));
 
         $projects = $this->db->table(Project::TABLE)->findAllByColumn('id');
 

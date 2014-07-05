@@ -327,6 +327,13 @@ class Task extends Base
         if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
             $values['date_due'] = $this->parseDate($values['date_due']);
         }
+        else {
+            $values['date_due'] = 0;
+        }
+
+        if (empty($values['score'])) {
+            $values['score'] = 0;
+        }
 
         $values['date_creation'] = time();
         $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']);
@@ -360,6 +367,13 @@ class Task extends Base
         // Prepare data
         if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
             $values['date_due'] = $this->parseDate($values['date_due']);
+        }
+        else {
+            $values['date_due'] = 0;
+        }
+
+        if (empty($values['score'])) {
+            $values['score'] = 0;
         }
 
         $original_task = $this->getById($values['id']);

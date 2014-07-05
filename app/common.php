@@ -66,31 +66,49 @@ $registry = new Registry;
 $registry->db = function() use ($registry) {
     require __DIR__.'/../vendor/PicoDb/Database.php';
 
-    if (DB_DRIVER === 'sqlite') {
+    switch (DB_DRIVER) {
+        case 'sqlite':
+            require __DIR__.'/Schema/Sqlite.php';
 
-        require __DIR__.'/Schema/Sqlite.php';
+            $params = array(
+                'driver' => 'sqlite',
+                'filename' => DB_FILENAME
+            );
 
-        $db = new \PicoDb\Database(array(
-            'driver' => 'sqlite',
-            'filename' => DB_FILENAME
-        ));
+            break;
+
+        case 'mysql':
+            require __DIR__.'/Schema/Mysql.php';
+
+            $params = array(
+                'driver'   => 'mysql',
+                'hostname' => DB_HOSTNAME,
+                'username' => DB_USERNAME,
+                'password' => DB_PASSWORD,
+                'database' => DB_NAME,
+                'charset'  => 'utf8',
+            );
+
+            break;
+
+        case 'postgres':
+            require __DIR__.'/Schema/Postgres.php';
+
+            $params = array(
+                'driver'   => 'postgres',
+                'hostname' => DB_HOSTNAME,
+                'username' => DB_USERNAME,
+                'password' => DB_PASSWORD,
+                'database' => DB_NAME,
+            );
+
+            break;
+
+        default:
+            die('Database driver not supported');
     }
-    elseif (DB_DRIVER === 'mysql') {
 
-        require __DIR__.'/Schema/Mysql.php';
-
-        $db = new \PicoDb\Database(array(
-            'driver'   => 'mysql',
-            'hostname' => DB_HOSTNAME,
-            'username' => DB_USERNAME,
-            'password' => DB_PASSWORD,
-            'database' => DB_NAME,
-            'charset'  => 'utf8',
-        ));
-    }
-    else {
-        die('Database driver not supported');
-    }
+    $db = new \PicoDb\Database($params);
 
     if ($db->schema()->check(Schema\VERSION)) {
         return $db;

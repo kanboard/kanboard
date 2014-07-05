@@ -118,6 +118,14 @@ class User extends Base
             $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
         }
 
+        if (empty($values['is_admin'])) {
+            $values['is_admin'] = 0;
+        }
+
+        if (empty($values['is_ldap_user'])) {
+            $values['is_ldap_user'] = 0;
+        }
+
         return $this->db->table(self::TABLE)->save($values);
     }
 
@@ -143,6 +151,14 @@ class User extends Base
 
         if (isset($values['current_password'])) {
             unset($values['current_password']);
+        }
+
+        if (empty($values['is_admin'])) {
+            $values['is_admin'] = 0;
+        }
+
+        if (empty($values['is_ldap_user'])) {
+            $values['is_ldap_user'] = 0;
         }
 
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);

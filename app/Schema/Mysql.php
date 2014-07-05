@@ -3,6 +3,7 @@
 namespace Schema;
 
 use Core\Security;
+
 const VERSION = 20;
 
 function version_20($pdo)
