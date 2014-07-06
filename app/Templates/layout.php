@@ -9,10 +9,12 @@
         <?= Helper\js('assets/js/jquery-1.11.1.min.js') ?>
         <?= Helper\js('assets/js/jquery-ui-1.10.4.custom.min.js') ?>
         <?= Helper\js('assets/js/jquery.ui.touch-punch.min.js') ?>
+        <?= Helper\js('assets/js/chosen.jquery.min.js') ?>
 
         <?= Helper\css('assets/css/app.css') ?>
         <?= Helper\css('assets/css/font-awesome.min.css') ?>
         <?= Helper\css('assets/css/jquery-ui-1.10.4.custom.css'); ?>
+        <?= Helper\css('assets/css/chosen.min.css'); ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
@@ -36,7 +38,12 @@
                 <ul>
                     <?php if (isset($board_selector)): ?>
                     <li>
-                        <?= Helper\form_select('board-selector', $board_selector) ?>
+                        <select id="board-selector" data-placeholder="<?= t('Display another project') ?>">
+                            <option value=""></option>
+                            <?php foreach($board_selector as $board_id => $board_name): ?>
+                                <option value="<?= $board_id ?>"><?= Helper\escape($board_name) ?></option>
+                            <?php endforeach ?>
+                        </select>
                     </li>
                     <?php endif ?>
                     <li <?= isset($menu) && $menu === 'boards' ? 'class="active"' : '' ?>>

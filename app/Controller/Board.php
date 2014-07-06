@@ -201,7 +201,7 @@ class Board extends Base
             'categories' => $this->category->getList($project_id, true, true),
             'menu' => 'boards',
             'title' => $projects[$project_id],
-            'board_selector' => array(t('Display another project')) + $projects,
+            'board_selector' => $projects,
         )));
     }
 

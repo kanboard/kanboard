@@ -193,7 +193,9 @@
         board_load_events();
         filter_load_events();
 
-        $("#form-board-selector").change(function() {
+        $("#board-selector").chosen();
+
+        $("#board-selector").change(function() {
             window.location = "?controller=board&action=show&project_id=" + $(this).val();
         });
     });
