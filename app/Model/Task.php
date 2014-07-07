@@ -368,11 +368,13 @@ class Task extends Base
         if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
             $values['date_due'] = $this->parseDate($values['date_due']);
         }
-        else {
+
+        // Force integer fields at 0 (for Postgresql)
+        if (isset($values['date_due']) && empty($values['date_due'])) {
             $values['date_due'] = 0;
         }
 
-        if (empty($values['score'])) {
+        if (isset($values['score']) && empty($values['score'])) {
             $values['score'] = 0;
         }
 
