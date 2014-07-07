@@ -50,5 +50,3 @@
     </form>
     </section>
 </section>
-
-<?= Helper\js('assets/js/task.js'); ?>

@@ -29,5 +29,3 @@
     <?php endif ?>
 
 </section>
-
-<?= Helper\js('assets/js/board.js') ?>

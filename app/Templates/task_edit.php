@@ -1,11 +1,11 @@
 <section id="main">
     <div class="page-header">
         <h2><?= t('Edit a task') ?></h2>
-<?php if (!$ajax): ?>
+        <?php if (! $ajax): ?>
         <ul>
             <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $task['project_id'] ?>"><?= t('Back to the board') ?></a></li>
         </ul>
-<?php endif ?>
+        <?php endif ?>
     </div>
     <section>
     <form method="post" action="?controller=task&amp;action=update&amp;task_id=<?= $task['id'] ?>&amp;ajax=<?= $ajax ?>" autocomplete="off">
@@ -50,14 +50,12 @@
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
             <?= t('or') ?>
-<?php if ($ajax): ?>
-            <a href="?controller=board&amp;action=show&amp;project_id=<?= $task['project_id'] ?>"><?= t('cancel') ?></a>
-<?php else: ?>
-            <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('cancel') ?></a>
-<?php endif ?>
+            <?php if ($ajax): ?>
+                <a href="?controller=board&amp;action=show&amp;project_id=<?= $task['project_id'] ?>"><?= t('cancel') ?></a>
+            <?php else: ?>
+                <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('cancel') ?></a>
+            <?php endif ?>
         </div>
     </form>
     </section>
 </section>
-
-<?= Helper\js('assets/js/task.js'); ?>

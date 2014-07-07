@@ -20,13 +20,13 @@
 
 <?php else: ?>
 
-    <a class="task-board-popover" href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a> -
+    <a class="task-edit-popover" href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a> -
 
     <span class="task-board-user">
     <?php if (! empty($task['owner_id'])): ?>
-        <a class="task-board-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>"><?= t('Assigned to %s', $task['username']) ?></a>
+        <a class="assignee-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>"><?= t('Assigned to %s', $task['username']) ?></a>
     <?php else: ?>
-        <a class="task-board-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>" class="task-board-nobody"><?= t('Nobody assigned') ?></a>
+        <a class="assignee-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>" class="task-board-nobody"><?= t('Nobody assigned') ?></a>
     <?php endif ?>
     </span>
 

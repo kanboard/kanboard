@@ -107,7 +107,7 @@ abstract class Base
         $this->session->open(BASE_URL_DIRECTORY, SESSION_SAVE_PATH);
 
         // HTTP secure headers
-        $this->response->csp();
+        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'"));
         $this->response->nosniff();
         $this->response->xss();
         $this->response->hsts();

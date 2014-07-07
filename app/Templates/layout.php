@@ -10,6 +10,7 @@
         <?= Helper\js('assets/js/jquery-ui-1.10.4.custom.min.js') ?>
         <?= Helper\js('assets/js/jquery.ui.touch-punch.min.js') ?>
         <?= Helper\js('assets/js/chosen.jquery.min.js') ?>
+        <?= Helper\js('assets/js/app.js') ?>
 
         <?= Helper\css('assets/css/app.css') ?>
         <?= Helper\css('assets/css/font-awesome.min.css') ?>

@@ -1,4 +1,60 @@
-(function () {
+
+// Common functions
+var Kanboard = (function() {
+
+    return {
+
+        // Display a popup
+        Popover: function(e, callback) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            $.get(e.target.getAttribute("href"), function(content) {
+
+                $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+
+                $("#popover-container").click(function() {
+                    $(this).remove();
+                });
+
+                $("#popover-content").click(function(e) {
+                    e.stopPropagation();
+                });
+
+                if (callback) {
+                    callback();
+                }
+            });
+        },
+
+        // Return true if the page is visible
+        IsVisible: function()
+        {
+            var property = "";
+
+            if (typeof document.hidden !== "undefined") {
+                property = "visibilityState";
+            } else if (typeof document.mozHidden !== "undefined") {
+                property = "mozVisibilityState";
+            } else if (typeof document.msHidden !== "undefined") {
+                property = "msVisibilityState";
+            } else if (typeof document.webkitHidden !== "undefined") {
+                property = "webkitVisibilityState";
+            }
+
+            if (property != "") {
+                return document[property] == "visible";
+            }
+
+            return true;
+        }
+    };
+
+})();
+
+
+// Board related functions
+Kanboard.Board = (function() {
 
     var checkInterval = null;
 
@@ -14,17 +70,12 @@
             }
         });
 
-        // Open assignee popover
-        $(".task-board-popover").click(function(e) {
+        // Assignee change
+        $(".assignee-popover").click(Kanboard.Popover);
 
-            e.preventDefault();
-            e.stopPropagation();
-
-            var href = $(this).attr('href');
-
-            $.get(href, function(data) {
-                popover_show(data);
-            });
+        // Task edit popover
+        $(".task-edit-popover").click(function(e) {
+            Kanboard.Popover(e, Kanboard.Task.Init);
         });
 
         // Redirect to the task details page
@@ -53,8 +104,8 @@
     function board_save()
     {
         var data = [];
-        var $boardSelector = $("#board");
-        var projectId = $boardSelector.attr("data-project-id");
+        var boardSelector = $("#board");
+        var projectId = boardSelector.attr("data-project-id");
 
         board_unload_events();
 
@@ -73,7 +124,7 @@
         $.ajax({
             cache: false,
             url: "?controller=board&action=save&project_id=" + projectId,
-            data: {"positions": data, "csrf_token": $boardSelector.attr("data-csrf-token")},
+            data: {"positions": data, "csrf_token": boardSelector.attr("data-csrf-token")},
             type: "POST",
             success: function(data) {
                 $("#board").remove();
@@ -87,17 +138,17 @@
     // Check if a board have been changed by someone else
     function board_check()
     {
-        var $boardSelector = $("#board");
-        var projectId = $boardSelector.attr("data-project-id");
-        var timestamp = $boardSelector.attr("data-time");
+        var boardSelector = $("#board");
+        var projectId = boardSelector.attr("data-project-id");
+        var timestamp = boardSelector.attr("data-time");
 
-        if (is_visible() && projectId != undefined && timestamp != undefined) {
+        if (Kanboard.IsVisible() && projectId != undefined && timestamp != undefined) {
             $.ajax({
                 cache: false,
                 url: "?controller=board&action=check&project_id=" + projectId + "&timestamp=" + timestamp,
                 statusCode: {
                     200: function(data) {
-                        $boardSelector.remove();
+                        boardSelector.remove();
                         $("#main").append(data);
                         board_unload_events();
                         board_load_events();
@@ -152,52 +203,53 @@
         });
     }
 
-    // Show popup
-    function popover_show(content)
-    {
-        $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+    return {
+        Init: function() {
+            board_load_events();
+            filter_load_events();
 
-        $("#popover-container").click(function() {
-            $(this).remove();
-        });
+            // Project select box
+            $("#board-selector").chosen({
+                width: 180
+            });
 
-        $("#popover-content").click(function(e) {
-            e.stopPropagation();
-        });
-    }
-
-    // Return true if the page is visible
-    function is_visible()
-    {
-        var property = "";
-
-        if (typeof document.hidden !== "undefined") {
-            property = "visibilityState";
-        } else if (typeof document.mozHidden !== "undefined") {
-            property = "mozVisibilityState";
-        } else if (typeof document.msHidden !== "undefined") {
-            property = "msVisibilityState";
-        } else if (typeof document.webkitHidden !== "undefined") {
-            property = "webkitVisibilityState";
+            $("#board-selector").change(function() {
+                window.location = "?controller=board&action=show&project_id=" + $(this).val();
+            });
         }
+    };
 
-        if (property != "") {
-            return document[property] == "visible";
+})();
+
+
+// Task related functions
+Kanboard.Task = (function() {
+
+    return {
+        Init: function() {
+
+            // Datepicker for the due date
+            $("#form-date_due").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                dateFormat: 'yy-mm-dd'
+            });
+
+            // Image preview for attachments
+            $(".file-popover").click(Kanboard.Popover);
         }
+    };
 
-        return true;
+})();
+
+
+// Initialization
+$(function() {
+
+    if ($("#board").length) {
+        Kanboard.Board.Init();
     }
-
-    // Initialization
-    $(function() {
-        board_load_events();
-        filter_load_events();
-
-        $("#board-selector").chosen();
-
-        $("#board-selector").change(function() {
-            window.location = "?controller=board&action=show&project_id=" + $(this).val();
-        });
-    });
-
-}());
+    else {
+        Kanboard.Task.Init();
+    }
+});
