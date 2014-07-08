@@ -24,8 +24,8 @@ class Ldap extends Base
             die('The PHP LDAP extension is required');
         }
 
-        if (!LDAP_SSL_VERIFY) {
-            //Skip SSL certificate verification
+        // Skip SSL certificate verification
+        if (! LDAP_SSL_VERIFY) {
             putenv('LDAPTLS_REQCERT=never');
         }
 
@@ -38,19 +38,24 @@ class Ldap extends Base
         ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
 
-        if (!@ldap_bind($ldap, LDAP_USERNAME, LDAP_PASSWORD)) {
+        if (! @ldap_bind($ldap, LDAP_USERNAME, LDAP_PASSWORD)) {
             die('Unable to bind to the LDAP server: "'.LDAP_SERVER.'"');
         }
 
-        $sr = ldap_search($ldap, LDAP_ACCOUNT_BASE, sprintf(LDAP_USER_PATTERN, $username), array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL));
+        $sr = @ldap_search($ldap, LDAP_ACCOUNT_BASE, sprintf(LDAP_USER_PATTERN, $username), array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL));
+
+        if ($sr === false) {
+            return false;
+        }
+
         $info = ldap_get_entries($ldap, $sr);
+
+        // User not found
         if (count($info) == 0 || $info['count'] == 0) {
-            //User not found
             return false;
         }
 
         if (@ldap_bind($ldap,  $info[0]['dn'], $password)) {
-            error_log("Bind to user OK");
             return $this->create($username, $info[0][LDAP_ACCOUNT_FULLNAME][0], $info[0][LDAP_ACCOUNT_EMAIL][0]);
         }
 
