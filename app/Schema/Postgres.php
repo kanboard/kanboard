@@ -4,7 +4,13 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 1;
+const VERSION = 2;
+
+function version_2($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN creator_id INTEGER DEFAULT 0");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN date_modification INTEGER DEFAULT 0");
+}
 
 function version_1($pdo)
 {

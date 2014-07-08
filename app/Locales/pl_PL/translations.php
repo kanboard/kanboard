@@ -385,4 +385,6 @@ return array(
     // 'Login with my GitHub Account' => '',
     // 'Link my GitHub Account' => '',
     // 'Unlink my GitHub Account'  => '',
+    // 'Created by %s' => 'Créé par %s',
+    // 'Last modified on %B %e, %G at %k:%M %p' => '',
 );

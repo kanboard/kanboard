@@ -382,4 +382,6 @@ return array(
     'Login with my GitHub Account' => 'Se connecter avec mon compte Github',
     'Link my GitHub Account' => 'Lier mon compte Github',
     'Unlink my GitHub Account'  => 'Ne plus utiliser mon compte Github',
+    'Created by %s' => 'Créé par %s',
+    'Last modified on %B %e, %G at %k:%M %p' => 'Modifié le %d/%m/%Y à %H:%M',
 );

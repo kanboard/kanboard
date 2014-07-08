@@ -108,6 +108,8 @@ class Task extends Base
     public function save()
     {
         $values = $this->request->getValues();
+        $values['creator_id'] = $this->acl->getUserId();
+
         $this->checkProjectPermissions($values['project_id']);
 
         list($valid, $errors) = $this->task->validateCreation($values);

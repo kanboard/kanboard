@@ -7,6 +7,11 @@
         <li>
             <?= dt('Created on %B %e, %G at %k:%M %p', $task['date_creation']) ?>
         </li>
+        <?php if ($task['date_modification']): ?>
+        <li>
+            <?= dt('Last modified on %B %e, %G at %k:%M %p', $task['date_modification']) ?>
+        </li>
+        <?php endif ?>
         <?php if ($task['date_completed']): ?>
         <li>
             <?= dt('Completed on %B %e, %G at %k:%M %p', $task['date_completed']) ?>
@@ -17,10 +22,15 @@
             <strong><?= dt('Must be done before %B %e, %G', $task['date_due']) ?></strong>
         </li>
         <?php endif ?>
+        <?php if ($task['creator_username']): ?>
+        <li>
+            <?= t('Created by %s', $task['creator_username']) ?>
+        </li>
+        <?php endif ?>
         <li>
             <strong>
-            <?php if ($task['username']): ?>
-                <?= t('Assigned to %s', $task['username']) ?>
+            <?php if ($task['assignee_username']): ?>
+                <?= t('Assigned to %s', $task['assignee_username']) ?>
             <?php else: ?>
                 <?= t('There is nobody assigned') ?>
             <?php endif ?>
