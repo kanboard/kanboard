@@ -564,6 +564,11 @@ a.filter-on {
     line-height: 70%;
 }
 
+.task-count {
+    color: #888;
+    font-weight: normal;
+}
+
 /* task inside the board */
 .task-board {
     position: relative;
