@@ -254,8 +254,9 @@ input.form-date {
 }
 
 .form-login {
-    padding-left: 20px;
-    width: 430px;
+    width: 470px;
+    padding: 10px;
+    margin: 3% auto 20% auto;
 }
 
 .form-column li,
