@@ -6,7 +6,7 @@
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('task_id', $values) ?>
     <?= Helper\form_hidden('user_id', $values) ?>
-    <?= Helper\form_textarea('comment', $values, $errors, array('required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
+    <?= Helper\form_textarea('comment', $values, $errors, array('autofocus', 'required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
     <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
     <div class="form-actions">

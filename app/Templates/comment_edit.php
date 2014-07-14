@@ -6,7 +6,7 @@
 
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('id', $values) ?>
-    <?= Helper\form_textarea('comment', $values, $errors, array('required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
+    <?= Helper\form_textarea('comment', $values, $errors, array('autofocus', 'required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Update') ?>" class="btn btn-blue"/>
