@@ -1,13 +1,14 @@
-<div class="page-header">
-    <h1><?= t('Sign in') ?></h1>
-</div>
-
-<?php if (isset($errors['login'])): ?>
-    <p class="alert alert-error"><?= Helper\escape($errors['login']) ?></p>
-<?php endif ?>
 
 <form method="post" action="?controller=user&amp;action=check" class="form-login">
-
+  <fieldset>
+    <legend>
+      <div>
+        <?= t('Sign in') ?>
+      </div>
+    </legend>
+    <?php if (isset($errors['login'])): ?>
+      <p class="alert-center alert alert-error"><?= Helper\escape($errors['login']) ?></p>
+    <?php endif ?>
     <?= Helper\form_csrf() ?>
 
     <?= Helper\form_label(t('Username'), 'username') ?>
@@ -35,4 +36,5 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Sign in') ?>" class="btn btn-blue"/>
     </div>
+  </fieldset>
 </form>
