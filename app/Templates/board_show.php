@@ -15,6 +15,10 @@
                  <?= Helper\escape($column['task_limit']) ?>
                 )
             </span>
+        <?php else: ?>
+            <span title="<?= t('Task count') ?>" class="task-count">
+                (<span id="task-number-column-<?= $column['id'] ?>"><?= count($column['tasks']) ?></span>)
+            </span>
         <?php endif ?>
     </th>
     <?php endforeach ?>
