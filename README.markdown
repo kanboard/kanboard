@@ -66,6 +66,7 @@ Contributors:
 - Nala Ginrut: https://github.com/NalaGinrut
 - Nekohayo: https://github.com/nekohayo
 - Olivier Maridat: https://github.com/oliviermaridat
+- Poikilotherm: https://github.com/poikilotherm
 - Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
 - Sebastien pacilly: https://github.com/spacilly
