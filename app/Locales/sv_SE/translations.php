@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'English' => 'Engelska',
-    'French' => 'Franska',
-    'Polish' => 'Polska',
-    'Portuguese (Brazilian)' => 'Portugisiska (Brasilien)',
-    'Spanish' => 'Spanska',
-    'German' => 'Tyska',
+    'English' => 'Engelska [English]',
+    'French' => 'Franska [French]',
+    'Polish' => 'Polska [Polish]',
+    'Portuguese (Brazilian)' => 'Portugisiska (Brasilien) [Portuguese (Brazilian)]',
+    'Spanish' => 'Spanska [Spanish]',
+    'German' => 'Tyska [German]',
     // 'Swedish' => '',
     'None' => 'Ingen',
     'edit' => 'redigera',
