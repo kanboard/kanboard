@@ -89,6 +89,9 @@
                         <li>
                             <a href="?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a>
                         </li>
+                        <li>
+                            <a href="?controller=project&amp;action=export&amp;project_id=<?= $project['id'] ?>"><?= t('Tasks Export') ?></a>
+                        </li>
                     </ul>
                 </td>
                 <?php endif ?>

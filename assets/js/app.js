@@ -28,8 +28,8 @@ var Kanboard = (function() {
         },
 
         // Return true if the page is visible
-        IsVisible: function()
-        {
+        IsVisible: function() {
+
             var property = "";
 
             if (typeof document.hidden !== "undefined") {
@@ -47,6 +47,17 @@ var Kanboard = (function() {
             }
 
             return true;
+        },
+
+        // Common init
+        Before: function() {
+
+            // Datepicker
+            $(".form-date").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                dateFormat: 'yy-mm-dd'
+            });
         }
     };
 
@@ -228,15 +239,22 @@ Kanboard.Task = (function() {
     return {
         Init: function() {
 
-            // Datepicker for the due date
-            $("#form-date_due").datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                dateFormat: 'yy-mm-dd'
-            });
+            Kanboard.Before();
 
             // Image preview for attachments
             $(".file-popover").click(Kanboard.Popover);
+        }
+    };
+
+})();
+
+
+// Project related functions
+Kanboard.Project = (function() {
+
+    return {
+        Init: function() {
+            Kanboard.Before();
         }
     };
 
@@ -249,7 +267,10 @@ $(function() {
     if ($("#board").length) {
         Kanboard.Board.Init();
     }
-    else {
+    else if ($("#task-section").length) {
         Kanboard.Task.Init();
+    }
+    else if ($("#project-section").length) {
+        Kanboard.Project.Init();
     }
 });

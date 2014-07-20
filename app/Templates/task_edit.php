@@ -7,7 +7,7 @@
         </ul>
         <?php endif ?>
     </div>
-    <section>
+    <section id="task-section">
     <form method="post" action="?controller=task&amp;action=update&amp;task_id=<?= $task['id'] ?>&amp;ajax=<?= $ajax ?>" autocomplete="off">
 
         <?= Helper\form_csrf() ?>
@@ -39,7 +39,7 @@
             <?= Helper\form_label(t('Color'), 'color_id') ?>
             <?= Helper\form_select('color_id', $colors_list, $values, $errors) ?><br/>
 
-            <?= Helper\form_label(t('Story Points'), 'score') ?>
+            <?= Helper\form_label(t('Complexity'), 'score') ?>
             <?= Helper\form_number('score', $values, $errors) ?><br/>
 
             <?= Helper\form_label(t('Due Date'), 'date_due') ?>

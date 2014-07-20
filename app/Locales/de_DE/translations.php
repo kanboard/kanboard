@@ -387,4 +387,13 @@ return array(
     'Unlink my GitHub Account'  => 'Verbindung mit meinem GitHub Account trennen',
     'Created by %s' => 'Erstellt durch %s',
     'Last modified on %B %e, %G at %k:%M %p' => 'Letzte Änderung am %d.%m.%Y um %H:%M',
+    // 'Tasks Export' => '',
+    // 'Tasks exportation for "%s"' => '',
+    // 'Start Date' => '',
+    // 'End Date' => '',
+    // 'Execute' => '',
+    // 'Task Id' => '',
+    // 'Creator' => '',
+    // 'Modification date' => '',
+    // 'Completion date' => '',
 );

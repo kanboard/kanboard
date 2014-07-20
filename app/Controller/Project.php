@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Task as TaskModel;
+use Core\Translator;
 
 /**
  * Project controller
@@ -13,30 +14,54 @@ use Model\Task as TaskModel;
 class Project extends Base
 {
     /**
+     * Task export
+     *
+     * @access public
+     */
+    public function export()
+    {
+        $project = $this->getProject();
+        $from = $this->request->getStringParam('from');
+        $to = $this->request->getStringParam('to');
+
+        if ($from && $to) {
+            Translator::disableEscaping();
+            $data = $this->task->export($project['id'], $from, $to);
+            $this->response->forceDownload('Export_'.date('Y_m_d_H_i_S').'.csv');
+            $this->response->csv($data);
+        }
+
+        $this->response->html($this->template->layout('project_export', array(
+            'values' => array(
+                'controller' => 'project',
+                'action' => 'export',
+                'project_id' => $project['id'],
+                'from' => $from,
+                'to' => $to,
+            ),
+            'errors' => array(),
+            'menu' => 'projects',
+            'project' => $project,
+            'title' => t('Tasks Export')
+        )));
+    }
+
+    /**
      * Task search for a given project
      *
      * @access public
      */
     public function search()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
+        $project = $this->getProject();
         $search = $this->request->getStringParam('search');
-
-        $project = $this->project->getById($project_id);
         $tasks = array();
         $nb_tasks = 0;
-
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
-
-        $this->checkProjectPermissions($project['id']);
 
         if ($search !== '') {
 
             $filters = array(
-                array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id),
+                array('column' => 'project_id', 'operator' => 'eq', 'value' => $project['id']),
                 'or' => array(
                     array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
                     //array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
@@ -58,7 +83,7 @@ class Project extends Base
             ),
             'menu' => 'projects',
             'project' => $project,
-            'columns' => $this->board->getColumnsList($project_id),
+            'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
             'title' => $project['name'].($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
         )));
@@ -71,18 +96,10 @@ class Project extends Base
      */
     public function tasks()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->getById($project_id);
-
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
-
-        $this->checkProjectPermissions($project['id']);
+        $project = $this->getProject();
 
         $filters = array(
-            array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id),
+            array('column' => 'project_id', 'operator' => 'eq', 'value' => $project['id']),
             array('column' => 'is_active', 'operator' => 'eq', 'value' => TaskModel::STATUS_CLOSED),
         );
 
@@ -92,7 +109,7 @@ class Project extends Base
         $this->response->html($this->template->layout('project_tasks', array(
             'menu' => 'projects',
             'project' => $project,
-            'columns' => $this->board->getColumnsList($project_id),
+            'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
             'tasks' => $tasks,
             'nb_tasks' => $nb_tasks,
@@ -169,12 +186,7 @@ class Project extends Base
      */
     public function edit()
     {
-        $project = $this->project->getById($this->request->getIntegerParam('project_id'));
-
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
+        $project = $this->getProject();
 
         $this->response->html($this->template->layout('project_edit', array(
             'errors' => array(),
@@ -220,12 +232,7 @@ class Project extends Base
      */
     public function confirm()
     {
-        $project = $this->project->getById($this->request->getIntegerParam('project_id'));
-
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
+        $project = $this->getProject();
 
         $this->response->html($this->template->layout('project_remove', array(
             'project' => $project,
@@ -298,12 +305,7 @@ class Project extends Base
      */
     public function users()
     {
-        $project = $this->project->getById($this->request->getIntegerParam('project_id'));
-
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
+        $project = $this->getProject();
 
         $this->response->html($this->template->layout('project_users', array(
             'project' => $project,

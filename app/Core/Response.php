@@ -71,6 +71,22 @@ class Response
     }
 
     /**
+     * Send a CSV response
+     *
+     * @access public
+     * @param  array    $data          Data to serialize in csv
+     * @param  integer  $status_code   HTTP status code
+     */
+    public function csv(array $data, $status_code = 200)
+    {
+        $this->status($status_code);
+        $this->nocache();
+        header('Content-Type: text/csv');
+        Tool::csv($data);
+        exit;
+    }
+
+    /**
      * Send a Json response
      *
      * @access public
@@ -83,7 +99,6 @@ class Response
         $this->nocache();
         header('Content-Type: application/json');
         echo json_encode($data);
-
         exit;
     }
 
@@ -100,7 +115,6 @@ class Response
         $this->nocache();
         header('Content-Type: text/plain; charset=utf-8');
         echo $data;
-
         exit;
     }
 
@@ -117,7 +131,6 @@ class Response
         $this->nocache();
         header('Content-Type: text/html; charset=utf-8');
         echo $data;
-
         exit;
     }
 
@@ -134,7 +147,6 @@ class Response
         $this->nocache();
         header('Content-Type: text/xml; charset=utf-8');
         echo $data;
-
         exit;
     }
 
@@ -169,7 +181,6 @@ class Response
         header('Content-Transfer-Encoding: binary');
         header('Content-Type: application/octet-stream');
         echo $data;
-
         exit;
     }
 

@@ -5,7 +5,7 @@
             <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $task['project_id'] ?>"><?= t('Back to the board') ?></a></li>
         </ul>
     </div>
-    <section class="task-show">
+    <section class="task-show" id="task-section">
 
         <?= Helper\template('task_sidebar', array('task' => $task)) ?>
 

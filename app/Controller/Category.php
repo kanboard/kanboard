@@ -11,25 +11,6 @@ namespace Controller;
 class Category extends Base
 {
     /**
-     * Get the current project (common method between actions)
-     *
-     * @access private
-     * @return array
-     */
-    private function getProject()
-    {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->getById($project_id);
-
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
-
-        return $project;
-    }
-
-    /**
      * Get the category (common method between actions)
      *
      * @access private

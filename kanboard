@@ -1,0 +1,51 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/app/common.php';
+
+use Core\Cli;
+use Core\Tool;
+use Core\Translator;
+use Model\Config;
+use Model\Task;
+
+$config = new Config($registry->shared('db'), $registry->shared('event'));
+
+// Load translations
+$language = $config->get('language', 'en_US');
+if ($language !== 'en_US') Translator::load($language);
+
+// Set timezone
+date_default_timezone_set($config->get('timezone', 'UTC'));
+
+// Setup CLI
+$cli = new Cli;
+
+// Usage
+$cli->register('help', function() {
+    echo 'Kanboard command line interface'.PHP_EOL.'==============================='.PHP_EOL;
+    echo '- Task export to stdout (CSV format): '.$GLOBALS['argv'][0].' export-csv <project_id> <start_date> <end_date>'.PHP_EOL;
+});
+
+// CSV Export
+$cli->register('export-csv', function() use ($cli, $registry) {
+
+    if ($GLOBALS['argc'] !== 5) {
+        $cli->call($cli->default_command);
+    }
+
+    $project_id = $GLOBALS['argv'][2];
+    $start_date = $GLOBALS['argv'][3];
+    $end_date = $GLOBALS['argv'][4];
+
+    Translator::disableEscaping();
+
+    $task = new Task($registry->shared('db'), $registry->shared('event'));
+    $data = $task->export($project_id, $start_date, $end_date);
+
+    if (is_array($data)) {
+        Tool::csv($data);
+    }
+});
+
+$cli->execute();

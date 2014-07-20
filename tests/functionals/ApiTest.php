@@ -173,6 +173,7 @@ class Api extends PHPUnit_Framework_TestCase
         $task['color_id'] = 'green';
         $task['column_id'] = 1;
         $task['description'] = 'test';
+        $task['date_due'] = '';
 
         $this->assertTrue($this->client->updateTask($task));
     }
