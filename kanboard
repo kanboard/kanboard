@@ -23,7 +23,7 @@ $cli = new Cli;
 
 // Usage
 $cli->register('help', function() {
-    echo 'Kanboard command line interface'.PHP_EOL.'==============================='.PHP_EOL;
+    echo 'Kanboard command line interface'.PHP_EOL.'==============================='.PHP_EOL.PHP_EOL;
     echo '- Task export to stdout (CSV format): '.$GLOBALS['argv'][0].' export-csv <project_id> <start_date> <end_date>'.PHP_EOL;
 });
 

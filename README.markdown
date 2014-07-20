@@ -20,9 +20,9 @@ Features
 --------
 
 - Multiple boards/projects
-- Boards customization, rename or add columns
+- Boards customization, rename/add/remove columns
 - Tasks with different colors, categories, sub-tasks, attachments, Markdown support for the description
-- Automatic actions
+- Automatic actions based on events
 - Users management with a basic privileges separation (administrator or regular user)
 - External authentication: Google and GitHub accounts as well as LDAP/ActiveDirectory
 - Webhooks to create tasks from an external software
@@ -31,13 +31,8 @@ Features
 - **Super easy setup**, copy and paste files and you are done!
 - Translations in English, French, Brazilian Portuguese, Spanish, German, Polish, Swedish and Chinese
 
-Roadmap
--------
-
-Kanboard is under active development, have a look to the roadmap: <http://kanboard.net/#roadmap>
-
-Known bugs
-----------
+Known bugs and feature requests
+-------------------------------
 
 See Issues: <https://github.com/fguillot/kanboard/issues>
 
@@ -109,11 +104,12 @@ Documentation
 - [Google authentication](docs/google-authentication.markdown)
 - [GitHub authentication](docs/github-authentication.markdown)
 
-#### Developers
+#### Developers and sysadmins
 
+- [Command line interface](docs/cli.markdown)
 - [Json-RPC API](docs/api-json-rpc.markdown)
-- [How to use Kanboard with Vagrant](docs/vagrant.markdown)
 - [Webhooks](docs/webhooks.markdown)
+- [How to use Kanboard with Vagrant](docs/vagrant.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.
