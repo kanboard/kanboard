@@ -151,6 +151,7 @@ abstract class Base
         // Attach events
         $this->action->attachEvents();
         $this->project->attachEvents();
+        $this->webhook->attachEvents();
     }
 
     /**

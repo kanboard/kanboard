@@ -6,12 +6,14 @@ use Core\Listener;
 use Model\Project;
 
 /**
- * Task modification listener
+ * Project modification date listener
  *
- * @package events
+ * Update the last modified field for a project
+ *
+ * @package event
  * @author  Frederic Guillot
  */
-class TaskModification implements Listener
+class ProjectModificationDate implements Listener
 {
     /**
      * Project model

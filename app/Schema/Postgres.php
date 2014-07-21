@@ -4,7 +4,13 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 2;
+const VERSION = 3;
+
+function version_3($pdo)
+{
+    $pdo->exec("ALTER TABLE config ADD COLUMN webhooks_url_task_modification VARCHAR(255)");
+    $pdo->exec("ALTER TABLE config ADD COLUMN webhooks_url_task_creation VARCHAR(255)");
+}
 
 function version_2($pdo)
 {

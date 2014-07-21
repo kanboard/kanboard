@@ -13,6 +13,7 @@ use Model\Comment;
 use Model\SubTask;
 use Model\Board;
 use Model\Action;
+use Model\Webhook;
 
 $config = new Config($registry->shared('db'), $registry->shared('event'));
 $project = new Project($registry->shared('db'), $registry->shared('event'));
@@ -23,9 +24,11 @@ $comment = new Comment($registry->shared('db'), $registry->shared('event'));
 $subtask = new SubTask($registry->shared('db'), $registry->shared('event'));
 $board = new Board($registry->shared('db'), $registry->shared('event'));
 $action = new Action($registry->shared('db'), $registry->shared('event'));
+$webhook = new Webhook($registry->shared('db'), $registry->shared('event'));
 
 $action->attachEvents();
 $project->attachEvents();
+$webhook->attachEvents();
 
 $server = new Server;
 $server->authentication(array('jsonrpc' => $config->get('api_token')));

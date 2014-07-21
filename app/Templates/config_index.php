@@ -15,6 +15,12 @@
             <?= Helper\form_label(t('Timezone'), 'timezone') ?>
             <?= Helper\form_select('timezone', $timezones, $values, $errors) ?><br/>
 
+            <?= Helper\form_label(t('Webhook URL for task creation'), 'webhooks_url_task_creation') ?>
+            <?= Helper\form_text('webhooks_url_task_creation', $values, $errors) ?><br/>
+
+            <?= Helper\form_label(t('Webhook URL for task modification'), 'webhooks_url_task_modification') ?>
+            <?= Helper\form_text('webhooks_url_task_modification', $values, $errors) ?><br/>
+
             <div class="form-actions">
                 <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
             </div>

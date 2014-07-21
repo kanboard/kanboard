@@ -4,7 +4,7 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Event\TaskModification;
+use Event\ProjectModificationDate;
 use Core\Security;
 
 /**
@@ -575,7 +575,7 @@ class Project extends Base
             Task::EVENT_OPEN,
         );
 
-        $listener = new TaskModification($this);
+        $listener = new ProjectModificationDate($this);
 
         foreach ($events as $event_name) {
             $this->event->attach($event_name, $listener);

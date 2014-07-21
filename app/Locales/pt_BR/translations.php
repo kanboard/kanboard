@@ -393,4 +393,6 @@ return array(
     // 'Creator' => '',
     // 'Modification date' => '',
     // 'Completion date' => '',
+    // 'Webhook URL for task creation' => '',
+    // 'Webhook URL for task modification' => '',
 );
