@@ -236,6 +236,20 @@ Procedures
 - Result on success: **true**
 - Result on failure: **false**
 
+### openTask
+
+- Purpose: **Set a task to the status open**
+- Parameters: **task_id** (integer)
+- Result on success: **true**
+- Result on failure: **false**
+
+### closeTask
+
+- Purpose: **Set a task to the status close**
+- Parameters: **task_id** (integer)
+- Result on success: **true**
+- Result on failure: **false**
+
 ### removeTask
 
 - Purpose: **Remove a task**
