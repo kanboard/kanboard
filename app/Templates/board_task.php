@@ -54,7 +54,7 @@
 <div class="task-board-footer">
 
     <?php if (! empty($task['date_due'])): ?>
-    <div class="task-board-date">
+    <div class="task-board-date<?php if ( date("Y-m-d") > date_create($task['date_due'])) echo "-overdue"; ?>">
         <?= dt('%B %e, %G', $task['date_due']) ?>
     </div>
     <?php endif ?>
