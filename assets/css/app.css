@@ -638,6 +638,10 @@ a.task-board-nobody {
     bottom: 0;
     left: 5px;
     font-weight: bold;
+    color: #000;
+}
+
+.task-board-date-overdue {
     color: #D90000;
 }
 

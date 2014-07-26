@@ -69,6 +69,7 @@ Contributors:
 - Toomyem: https://github.com/Toomyem
 - Troloo: https://github.com/troloo
 - Typz: https://github.com/Typz
+- Ybarc: https://github.com/ybarc
 
 There is also many people who have reported bugs or proposed awesome ideas.
 
