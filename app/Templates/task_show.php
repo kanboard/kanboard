@@ -5,21 +5,21 @@
     <?php endif ?>
     <ul>
         <li>
-            <?= dt('Created on %B %e, %G at %k:%M %p', $task['date_creation']) ?>
+            <?= dt('Created on %B %e, %Y at %k:%M %p', $task['date_creation']) ?>
         </li>
         <?php if ($task['date_modification']): ?>
         <li>
-            <?= dt('Last modified on %B %e, %G at %k:%M %p', $task['date_modification']) ?>
+            <?= dt('Last modified on %B %e, %Y at %k:%M %p', $task['date_modification']) ?>
         </li>
         <?php endif ?>
         <?php if ($task['date_completed']): ?>
         <li>
-            <?= dt('Completed on %B %e, %G at %k:%M %p', $task['date_completed']) ?>
+            <?= dt('Completed on %B %e, %Y at %k:%M %p', $task['date_completed']) ?>
         </li>
         <?php endif ?>
         <?php if ($task['date_due']): ?>
         <li>
-            <strong><?= dt('Must be done before %B %e, %G', $task['date_due']) ?></strong>
+            <strong><?= dt('Must be done before %B %e, %Y', $task['date_due']) ?></strong>
         </li>
         <?php endif ?>
         <?php if ($task['creator_username']): ?>

@@ -55,7 +55,7 @@
 
     <?php if (! empty($task['date_due'])): ?>
     <div class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
-        <?= dt('%B %e, %G', $task['date_due']) ?>
+        <?= dt('%B %e, %Y', $task['date_due']) ?>
     </div>
     <?php endif ?>
 

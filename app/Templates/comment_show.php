@@ -1,7 +1,7 @@
 <div class="comment <?= isset($preview) ? 'comment-preview' : '' ?>" id="comment-<?= $comment['id'] ?>">
 
     <p class="comment-title">
-        <span class="comment-username"><?= Helper\escape($comment['username']) ?></span> @ <span class="comment-date"><?= dt('%B %e, %G at %k:%M %p', $comment['date']) ?></span>
+        <span class="comment-username"><?= Helper\escape($comment['username']) ?></span> @ <span class="comment-date"><?= dt('%B %e, %Y at %k:%M %p', $comment['date']) ?></span>
     </p>
 
     <div class="comment-inner">

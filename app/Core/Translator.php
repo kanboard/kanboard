@@ -141,7 +141,6 @@ class Translator
 
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $format = str_replace('%e', '%d', $format);
-            $format = str_replace('%G', '%Y', $format);
             $format = str_replace('%k', '%H', $format);
         }
 

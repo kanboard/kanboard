@@ -32,14 +32,14 @@
             <?php endif ?>
         </td>
         <td>
-            <?= dt('%B %e, %G', $task['date_due']) ?>
+            <?= dt('%B %e, %Y', $task['date_due']) ?>
         </td>
         <td>
-            <?= dt('%B %e, %G at %k:%M %p', $task['date_creation']) ?>
+            <?= dt('%B %e, %Y at %k:%M %p', $task['date_creation']) ?>
         </td>
         <td>
             <?php if ($task['date_completed']): ?>
-                <?= dt('%B %e, %G at %k:%M %p', $task['date_completed']) ?>
+                <?= dt('%B %e, %Y at %k:%M %p', $task['date_completed']) ?>
             <?php endif ?>
         </td>
         <td>
