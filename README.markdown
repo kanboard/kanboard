@@ -50,6 +50,7 @@ Contributors:
 
 - Alex Butum: https://github.com/dZkF9RWJT6wN8ux
 - Claudio Lobo
+- Floaltvater: https://github.com/floaltvater
 - Gavlepeter: https://github.com/gavlepeter
 - Jesusaplsoft: https://github.com/jesusaplsoft
 - Kiswa: https://github.com/kiswa
