@@ -616,6 +616,7 @@ a.task-board-nobody {
 .task-board-category-container {
     text-align: right;
     padding-bottom: 2px;
+    margin-top: 10px;
 }
 
 .task-board-category {
