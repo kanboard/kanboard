@@ -7,6 +7,7 @@ return array(
     'Portuguese (Brazilian)' => 'Portugisiska (Brasilien)',
     'Spanish' => 'Spanska',
     'German' => 'Tyska',
+    'Chinese (Simplified)' => 'Kinesiska (förenklad)',
     'Swedish' => 'Svenska',
     'None' => 'Ingen',
     'edit' => 'redigera',

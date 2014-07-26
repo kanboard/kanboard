@@ -2,11 +2,11 @@
 
 return array(
     'English' => 'Englisch',
-    'German' => 'Deutsch',
     'French' => 'Französisch',
     'Polish' => 'Polnisch',
     'Portuguese (Brazilian)' => 'Portugiesisch (Brasilien)',
     'Spanish' => 'Spanisch',
+    'German' => 'Deutsch',
     'Chinese (Simplified)' => 'Chinesisch (vereinfacht)',
     'Swedish' => 'Schwedisch',
     'None' => 'Keines',
