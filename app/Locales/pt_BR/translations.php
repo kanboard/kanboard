@@ -387,7 +387,7 @@ return array(
     'Last modified on %B %e, %Y at %k:%M %p' => 'Última modificação em %B %e, %Y às %k: %M %p',
     'Tasks Export' => 'Tarefas Export',
     'Tasks exportation for "%s"' => 'Tarefas exportação para "%s"',
-    'Start Date' => 'Data inicial', ,
+    'Start Date' => 'Data inicial',
     'End Date' => 'Data final',
     'Execute' => 'Executar',
     'Task Id' => 'Id da Tarefa',
