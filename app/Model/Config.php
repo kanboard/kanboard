@@ -51,6 +51,7 @@ class Config extends Base
             'pt_BR' => t('Portuguese (Brazilian)'),
             'sv_SE' => t('Swedish'),
             'zh_CN' => t('Chinese (Simplified)'),
+            'fi_FI' => t('Finnish'),
         );
 
         asort($languages);
