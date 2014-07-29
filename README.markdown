@@ -29,7 +29,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English, French, Brazilian Portuguese, Spanish, German, Polish, Swedish and Chinese
+- Translations in English, French, Brazilian Portuguese, Spanish, German, Polish, Swedish, Finnish, Chinese...
 
 Known bugs and feature requests
 -------------------------------
@@ -52,6 +52,7 @@ Contributors:
 - Claudio Lobo
 - Floaltvater: https://github.com/floaltvater
 - Gavlepeter: https://github.com/gavlepeter
+- Janne Mäntyharju: https://github.com/JanneMantyharju
 - Jesusaplsoft: https://github.com/jesusaplsoft
 - Kiswa: https://github.com/kiswa
 - Levlaz: https://github.com/levlaz
