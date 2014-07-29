@@ -401,4 +401,7 @@ return array(
     'Completion date' => 'Data de conclusão',
     'Webhook URL for task creation' => 'Webhook URL para criação de tarefas',
     'Webhook URL for task modification' => 'Webhook URL para modificação tarefa',
+	'Clone Project' => 'Clonar Projeto',
+	'Project cloned successfully.' => 'Projeto clonado com sucesso.',
+	'Unable to clone this project.' => 'Impossível clonar este projeto.',	
 );
