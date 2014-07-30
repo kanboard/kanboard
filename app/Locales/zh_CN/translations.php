@@ -401,8 +401,8 @@ return array(
     'Completion date' => '完成日期',
     'Webhook URL for task creation' => 'Webhook网址为任务创建',
     'Webhook URL for task modification' => 'Webhook网址为任务修改',
+    'Clone' => '克隆',
     'Clone Project' => '克隆项目',
     'Project cloned successfully.' => '项目成功克隆。',
     'Unable to clone this project.' => '无法复制这个项目。',
-		
 );

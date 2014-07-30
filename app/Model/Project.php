@@ -391,7 +391,7 @@ class Project extends Base
     
     	// Create a Clone project
     	$clone_project = array(
-    			'name' => $project['name'] . ' Clone',
+    			'name' => $project['name'] . ' '.t('Clone'),
     			'is_active' => TRUE,
     			'last_modified' => 0,
     			'token' => Security::generateToken()
