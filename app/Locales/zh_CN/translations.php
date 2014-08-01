@@ -42,7 +42,7 @@ return array(
     'Password' => '密码',
     'Default Project' => '默认项目',
     'Administrator' => '管理员',
-    'Sign in' => '注册',
+    'Sign in' => '登录',
     'Users' => '用户组',
     'No user' => '没有用户',
     'Forbidden' => '禁止',
