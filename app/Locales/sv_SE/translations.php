@@ -370,7 +370,6 @@ return array(
     'The time must be a numeric value' => 'Tiden måste ha ett numeriskt värde',
     'Todo' => 'Att göra',
     'In progress' => 'Pågående',
-    'Done' => 'Slutfört',
     'Sub-task removed successfully.' => 'Deluppgiften har tagits bort.',
     'Unable to remove this sub-task.' => 'Kunde inte ta bort denna deluppgift.',
     'Sub-task updated successfully.' => 'Deluppgiften har uppdaterats.',

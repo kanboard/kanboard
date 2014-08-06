@@ -370,7 +370,6 @@ return array(
     'The time must be a numeric value' => '的时间必须是数值',
     'Todo' => '待办事项',
     'In progress' => '进行中',
-    'Done' => '完成',
     'Sub-task removed successfully.' => '子任务成功删除。',
     'Unable to remove this sub-task.' => '无法删除此子任务。',
     'Sub-task updated successfully.' => '子任务成功更新。',

@@ -370,7 +370,6 @@ return array(
     'The time must be a numeric value' => 'Zeit nur als nummerische Angabe',
     'Todo' => 'Nicht gestartet',
     'In progress' => 'In Bearbeitung',
-    'Done' => 'Erledigt',
     'Sub-task removed successfully.' => 'Unteraufgabe erfolgreich gelöscht.',
     'Unable to remove this sub-task.' => 'Löschen der Unteraufgabe nicht möglich.',
     'Sub-task updated successfully.' => 'Unteraufgabe erfolgreich aktualisiert.',

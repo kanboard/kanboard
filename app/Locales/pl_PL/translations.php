@@ -370,7 +370,6 @@ return array(
     'The time must be a numeric value' => 'Czas musi byc wartoscia liczbowa ',
     'Todo' => 'Todo' ,
     'In progress' => 'W toku ',
-    'Done' => 'Gotowe' ,
     'Sub-task removed successfully.' => 'Sub-zadanie pomyslnie usuniete. ',
     'Unable to remove this sub-task.' => 'Nie mozna usunac tego podzadania.',
     'Sub-task updated successfully.' => 'Sub-zadanie zaktualizowany. ',
