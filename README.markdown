@@ -50,11 +50,13 @@ Contributors:
 
 - Alex Butum: https://github.com/dZkF9RWJT6wN8ux
 - Claudio Lobo
+- Cmer: https://github.com/chncsu
 - Floaltvater: https://github.com/floaltvater
 - Gavlepeter: https://github.com/gavlepeter
 - Janne Mäntyharju: https://github.com/JanneMantyharju
 - Jesusaplsoft: https://github.com/jesusaplsoft
 - Kiswa: https://github.com/kiswa
+- Kralo: https://github.com/kralo
 - Levlaz: https://github.com/levlaz
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
