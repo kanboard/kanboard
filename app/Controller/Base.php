@@ -25,6 +25,7 @@ use Model\LastLogin;
  * @property \Model\Ldap        $ldap
  * @property \Model\Project     $project
  * @property \Model\RememberMe  $rememberMe
+ * @property \Model\ProxyAuth   $proxyAuth
  * @property \Model\SubTask     $subTask
  * @property \Model\Task        $task
  * @property \Model\User        $user
@@ -126,8 +127,14 @@ abstract class Base
             // Try the remember me authentication first
             if (! $this->rememberMe->authenticate()) {
 
-                // Redirect to the login form if not authenticated
-                $this->response->redirect('?controller=user&action=login');
+                // automatic proxy header authentication
+                if(PROXY_AUTH && $this->proxyAuth->authenticate()) {
+                    // ok, do nothing
+                }
+                else {
+                    // Redirect to the login form if not authenticated
+                    $this->response->redirect('?controller=user&action=login');
+                }
             }
             else {
 
