@@ -34,7 +34,7 @@ class LastLogin extends Base
     const AUTH_LDAP        = 'ldap';
     const AUTH_GOOGLE      = 'google';
     const AUTH_GITHUB      = 'github';
-    const AUTH_PROXY       = 'proxy';
+    const AUTH_REVERSE_PROXY = 'reverse_proxy';
 
     /**
      * Create a new record

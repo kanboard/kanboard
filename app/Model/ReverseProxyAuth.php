@@ -5,12 +5,12 @@ namespace Model;
 use Core\Security;
 
 /**
- * Proxy model
+ * ReverseProxyAuth model
  *
  * @package  model
  * @author   Sylvain Veyrié
  */
-class ProxyAuth extends Base
+class ReverseProxyAuth extends Base
 {
     /**
      * Authenticate the user with the HTTP header
@@ -20,9 +20,9 @@ class ProxyAuth extends Base
      */
     public function authenticate()
     {
-        if(isset($_SERVER[PROXY_USER_HEADER])) {
+        if(isset($_SERVER[REVERSE_PROXY_USER_HEADER])) {
 
-            $login = $_SERVER[PROXY_USER_HEADER];
+            $login = $_SERVER[REVERSE_PROXY_USER_HEADER];
             $userModel = new User($this->db, $this->event);
             $user = $userModel->getByUsername($login);
         
@@ -37,7 +37,7 @@ class ProxyAuth extends Base
             // Update login history
             $lastLogin = new LastLogin($this->db, $this->event);
             $lastLogin->create(
-                LastLogin::AUTH_PROXY,
+                LastLogin::AUTH_REVERSE_PROXY,
                 $user['id'],
                 $userModel->getIpAddress(),
                 $userModel->getUserAgent()
@@ -51,7 +51,7 @@ class ProxyAuth extends Base
     {
         $userModel = new User($this->db, $this->event);
 
-        $is_admin = PROXY_DEFAULT_ADMIN === $login;
+        $is_admin = REVERSE_PROXY_DEFAULT_ADMIN === $login;
 
         return $userModel->create(array(
             'email' => $login,
