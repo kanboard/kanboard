@@ -92,6 +92,9 @@
                         <li>
                             <a href="?controller=project&amp;action=export&amp;project_id=<?= $project['id'] ?>"><?= t('Tasks Export') ?></a>
                         </li>
+                        <li>
+                            <a href="?controller=project&amp;action=duplicate&amp;project_id=<?= $project['id'].Helper\param_csrf() ?>"><?= t('Clone Project') ?></a>
+                        </li>
                     </ul>
                 </td>
                 <?php endif ?>

@@ -13,6 +13,27 @@ use Core\Translator;
  */
 class Project extends Base
 {
+
+	/**
+	 * Clone Project
+	 *
+	 * @author Antonio Rabelo
+	 * @access public
+	 */
+	public function duplicate()
+	{
+		$this->checkCSRFParam();
+		$project_id = $this->request->getIntegerParam('project_id');
+
+		if ($project_id && $this->project->duplicate($project_id)) {
+			$this->session->flash(t('Project cloned successfully.'));
+		} else {
+			$this->session->flashError(t('Unable to clone this project.'));
+		}
+
+		$this->response->redirect('?controller=project');
+	}
+
     /**
      * Task export
      *

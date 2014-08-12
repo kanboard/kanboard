@@ -397,4 +397,8 @@ return array(
     // 'Completion date' => '',
     // 'Webhook URL for task creation' => '',
     // 'Webhook URL for task modification' => '',
+    // 'Clone' => '',
+    // 'Clone Project' => '',
+    // 'Project cloned successfully.' => '',
+    // 'Unable to clone this project.' => '',
 );

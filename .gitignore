@@ -32,6 +32,7 @@
 ######################
 .buildpath
 .project
+/.settings/
 
 # OS generated files #
 ######################
