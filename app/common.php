@@ -58,6 +58,11 @@ defined('GITHUB_AUTH') or define('GITHUB_AUTH', false);
 defined('GITHUB_CLIENT_ID') or define('GITHUB_CLIENT_ID', '');
 defined('GITHUB_CLIENT_SECRET') or define('GITHUB_CLIENT_SECRET', '');
 
+// Proxy authentication
+defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', false);
+defined('REVERSE_PROXY_USER_HEADER') or define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
+defined('REVERSE_PROXY_DEFAULT_ADMIN') or define('REVERSE_PROXY_DEFAULT_ADMIN', '');
+
 $loader = new Loader;
 $loader->execute();
 
