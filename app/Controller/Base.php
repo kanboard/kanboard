@@ -12,22 +12,24 @@ use Model\LastLogin;
  *
  * @package  controller
  * @author   Frederic Guillot
- * @property \Model\Acl         $acl
- * @property \Model\Action      $action
- * @property \Model\Board       $board
- * @property \Model\Category    $category
- * @property \Model\Comment     $comment
- * @property \Model\Config      $config
- * @property \Model\File        $file
- * @property \Model\Google      $google
- * @property \Model\GitHub      $gitHub
- * @property \Model\LastLogin   $lastLogin
- * @property \Model\Ldap        $ldap
- * @property \Model\Project     $project
- * @property \Model\RememberMe  $rememberMe
- * @property \Model\SubTask     $subTask
- * @property \Model\Task        $task
- * @property \Model\User        $user
+ *
+ * @property \Model\Acl                $acl
+ * @property \Model\Action             $action
+ * @property \Model\Board              $board
+ * @property \Model\Category           $category
+ * @property \Model\Comment            $comment
+ * @property \Model\Config             $config
+ * @property \Model\File               $file
+ * @property \Model\Google             $google
+ * @property \Model\GitHub             $gitHub
+ * @property \Model\LastLogin          $lastLogin
+ * @property \Model\Ldap               $ldap
+ * @property \Model\Project            $project
+ * @property \Model\RememberMe         $rememberMe
+ * @property \Model\ReverseProxyAuth   $reverseProxyAuth
+ * @property \Model\SubTask            $subTask
+ * @property \Model\Task               $task
+ * @property \Model\User               $user
  */
 abstract class Base
 {
@@ -123,11 +125,14 @@ abstract class Base
         // Authentication
         if (! $this->acl->isLogged() && ! $this->acl->isPublicAction($controller, $action)) {
 
-            // Try the remember me authentication first
+            // Try the "remember me" authentication first
             if (! $this->rememberMe->authenticate()) {
 
-                // Redirect to the login form if not authenticated
-                $this->response->redirect('?controller=user&action=login');
+                // Automatic reverse proxy header authentication
+                if(! (REVERSE_PROXY_AUTH && $this->reverseProxyAuth->authenticate()) ) {
+                    // Redirect to the login form if not authenticated
+                    $this->response->redirect('?controller=user&action=login');
+                }
             }
             else {
 
