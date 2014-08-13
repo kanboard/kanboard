@@ -373,7 +373,7 @@ class Board extends Base
             }
 
             if (isset($values['positions'])) {
-                $this->board->saveTasksPosition($values['positions']);
+                $this->board->saveTasksPosition($values['positions'], $values['moved_task_id']);
             }
 
             $this->response->html(
