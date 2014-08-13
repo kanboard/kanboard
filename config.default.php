@@ -6,6 +6,9 @@ define('BOARD_PUBLIC_CHECK_INTERVAL', 60);
 // Board refresh frequency in seconds (the value 0 disable this feature, 10 seconds by default)
 define('BOARD_CHECK_INTERVAL', 10);
 
+// Period (in second) to consider a task was modified recently (0 to disable, 2 days by default)
+define('RECENT_TASK_PERIOD', 48*60*60);
+
 // Database driver: sqlite or mysql (sqlite by default)
 define('DB_DRIVER', 'sqlite');
 
