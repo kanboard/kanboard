@@ -69,6 +69,7 @@ Contributors:
 - Raphaël Doursenaud: https://github.com/rdoursenaud
 - Rzeka: https://github.com/rzeka
 - Sebastien pacilly: https://github.com/spacilly
+- Sylvain Veyrié: https://github.com/turb
 - Toomyem: https://github.com/Toomyem
 - Troloo: https://github.com/troloo
 - Typz: https://github.com/Typz
