@@ -21,7 +21,7 @@ function version_4($pdo)
 				  date INTEGER,
 				  column_id INTEGER,
 				  user_id INTEGER DEFAULT 0,
-				  FOREIGN KEY (column_id) REFERENCES columns (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+				  FOREIGN KEY (column_id) REFERENCES columns (id) ON DELETE CASCADE,
 				  UNIQUE (date, column_id, user_id)
 				)");
 

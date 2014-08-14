@@ -23,7 +23,7 @@ function version_23($pdo)
 				user_id INT DEFAULT '0',
 				PRIMARY KEY (id),
 				INDEX `idx_stats_date` (date),
-				FOREIGN KEY (column_id) REFERENCES columns(id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+				FOREIGN KEY (column_id) REFERENCES columns(id) ON DELETE CASCADE,
 				UNIQUE KEY `idx_date_column_id_user_id` (date, column_id, user_id)
 			   ) ENGINE=InnoDB CHARSET=utf8");
 	
