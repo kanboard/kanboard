@@ -231,6 +231,27 @@ class Task extends Base
     }
 
     /**
+     * Count the number of tasks for a given column and status and owner id.
+     * 
+     * @author Antonio Rabelo
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $column_id    Column id
+     * @param  integer   $user_id      User id
+     * @param  array     $status       List of status id
+     * @return integer
+     */
+    public function countByOwnerId($project_id, $column_id, $owner_id)
+    {
+    	return $this->db
+					->table(self::TABLE)
+					->eq('project_id', $project_id)
+					->eq('column_id', $column_id)
+					->eq('owner_id', $owner_id)
+    				->count();
+    }
+    
+    /**
      * Duplicate a task
      *
      * @access public
@@ -257,6 +278,12 @@ class Task extends Base
         if (! $this->db->table(self::TABLE)->save($task)) {
             $this->db->cancelTransaction();
             return false;
+        }
+        
+        // Update statistics
+        if (!$this->updateStats($task, array())) {
+        	$this->db->cancelTransaction();
+        	return false;
         }
 
         $task_id = $this->db->getConnection()->getLastId();
@@ -305,6 +332,12 @@ class Task extends Base
             $this->db->cancelTransaction();
             return false;
         }
+        
+        // Update statistics
+        if (!$this->updateStats($task, array())) {
+        	$this->db->cancelTransaction();
+        	return false;
+        }
 
         $task_id = $this->db->getConnection()->getLastId();
 
@@ -352,6 +385,12 @@ class Task extends Base
             $this->db->cancelTransaction();
             return false;
         }
+        
+        // Update statistics
+        if (!$this->updateStats($values, array())) {
+        	$this->db->cancelTransaction();
+        	return false;
+        }
 
         $task_id = $this->db->getConnection()->getLastId();
 
@@ -388,17 +427,22 @@ class Task extends Base
         }
 
         $original_task = $this->getById($values['id']);
-
+        
         if ($original_task === false) {
             return false;
         }
-
+        
         $updated_task = $values;
         $updated_task['date_modification'] = time();
         unset($updated_task['id']);
 
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task);
 
+        // Update Statistics
+        if ($result) {
+        	$result = $this->updateStats($original_task, $updated_task);
+        }
+        
         // Trigger events
         if ($result) {
 
@@ -423,6 +467,66 @@ class Task extends Base
         }
 
         return $result;
+    }
+    
+    /**
+     * Update the WIP statistics.
+     * 
+     * Prepared for moving tasks between projects.
+     * 
+     * @author Antonio Rabelo
+     * @param array $original_task
+     * @param array $updated_task
+     */
+    public function updateStats($original_task, $updated_task) 
+    {
+    	$column_changed = isset($updated_task['column_id']);
+    	$owner_changed  = isset($updated_task['owner_id']);
+    	
+   		// get original information
+   		$old_column = $original_task['column_id'];
+   		$old_owner  = $original_task['owner_id'];
+   		
+   		// get project id from column
+   		$boardModel = new Board($this->db, $this->event);
+   		$old_column_reference = $boardModel->getColumn($old_column);
+   		$old_project = $old_column_reference['project_id'];
+    		 
+   		$wipModel = new WIP($this->db, $this->event);
+   		// Always update the old information (creation and deletion cases apply)
+   		if (!$wipModel->saveStatsByColumnAndTaskOwner($old_project, $old_column, $old_owner)) {
+   			return false;
+   		}
+   		
+    	if ($column_changed || $owner_changed) {
+    		$new_owner = NULL;
+    		// Update new owner information when it exists
+    		if ($owner_changed) {
+    			$new_owner = $updated_task['owner_id'];
+    			if (!$wipModel->saveStatsByColumnAndTaskOwner($old_project, $old_column, $new_owner)) {
+	    			return false;
+    			}    			
+    		}
+
+    		// Update new column information when it exists 
+    		if ($column_changed) {
+    			$new_column = $updated_task['column_id'];    			
+    			$new_column_reference = $boardModel->getColumn($new_column);
+    			$new_project = $new_column_reference['project_id'];
+    			 
+    			if (!$wipModel->saveStatsByColumnAndTaskOwner($new_project, $new_column, $old_owner)) {
+    				return false;
+    			}
+    			
+    			// Update new owner and new column.
+    			if ($owner_changed &&
+            		!$wipModel->saveStatsByColumnAndTaskOwner($new_project, $new_column, $new_owner)) {
+    				return false;
+    			}
+    		}
+    	}
+    	
+    	return true;
     }
 
     /**
@@ -485,7 +589,19 @@ class Task extends Base
         $file = new File($this->db, $this->event);
         $file->removeAll($task_id);
 
-        return $this->db->table(self::TABLE)->eq('id', $task_id)->remove();
+        // get task information before deletion
+        $task = $this->getById($task_id);
+        
+        if(!$this->db->table(self::TABLE)->eq('id', $task_id)->remove()) {
+        	return false;
+        }
+
+        // Update statistics
+        if (!$this->updateStats($task, array())) {
+        	return false;
+        }
+
+        return true;
     }
 
     /**
@@ -500,12 +616,14 @@ class Task extends Base
     public function move($task_id, $column_id, $position)
     {
         $this->event->clearTriggeredEvents();
-
-        return $this->update(array(
+        
+        $result = $this->update(array(
             'id' => $task_id,
             'column_id' => $column_id,
             'position' => $position,
         ));
+        
+        return $result; 
     }
 
     /**

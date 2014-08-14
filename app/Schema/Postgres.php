@@ -4,7 +4,35 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 3;
+const VERSION = 4;
+
+/**
+ * Creating a WIP statistics table for all columns/users.
+ * 
+ * @author Antonio Rabelo
+ * @param mixed $pdo
+ */
+function version_4($pdo)
+{
+	// Create table for gathering WIP statistics
+	$pdo->exec("CREATE TABLE columns_stats (
+				  id SERIAL PRIMARY KEY,
+				  quantity INTEGER,
+				  date INTEGER,
+				  column_id INTEGER,
+				  user_id INTEGER DEFAULT 0,
+				  FOREIGN KEY (column_id) REFERENCES columns (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+				  UNIQUE (date, column_id, user_id)
+				)");
+
+	// First load of actual statistics
+	$pdo->exec("INSERT INTO columns_stats (quantity, date, column_id, user_id)
+				SELECT COUNT(t.id), EXTRACT(EPOCH FROM CURRENT_DATE), c.id, t.owner_id 
+				FROM   columns c, tasks t 
+				WHERE  c.id = t.column_id 
+				GROUP BY c.id, t.owner_id
+			   ");
+}
 
 function version_3($pdo)
 {
