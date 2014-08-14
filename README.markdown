@@ -110,6 +110,7 @@ Documentation
 - [LDAP authentication](docs/ldap-authentication.markdown)
 - [Google authentication](docs/google-authentication.markdown)
 - [GitHub authentication](docs/github-authentication.markdown)
+- [Reverse proxy authentication](docs/reverse-proxy-authentication.markdown)
 
 #### Developers and sysadmins
 
