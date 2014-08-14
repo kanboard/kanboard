@@ -241,7 +241,7 @@ return array(
     'Event' => 'Evento',
     'When the selected event occurs execute the corresponding action.' => 'Quando o evento selecionado ocorrer, execute a ação correspondente',
     'Next step' => 'Próximo passo',
-    'Define action parameters' => 'Definir parêmetros da ação',
+    'Define action parameters' => 'Definir parâmetros da ação',
     'Save this action' => 'Salvar esta ação',
     'Do you really want to remove this action: "%s"?' => 'Você quer realmente remover esta ação: "%s"?',
     'Remove an automatic action' => 'Remove uma ação automática',
