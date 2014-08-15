@@ -344,7 +344,7 @@ class Task extends Base
             $values['score'] = 0;
         }
 
-        $values['date_creation'] = time();
+        $values['date_creation'] = $values['date_modification'] = time();
         $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']);
 
         // Save task
@@ -368,10 +368,11 @@ class Task extends Base
      * Update a task
      *
      * @access public
-     * @param  array    $values   Form values
+     * @param  array    $values    Form values
+	 * @param  boolean  $taskMoved Optional flag to indicate the task was explicitely moved (by user)
      * @return boolean
      */
-    public function update(array $values)
+    public function update(array $values, $taskMoved = null)
     {
         // Prepare data
         if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
@@ -394,8 +395,15 @@ class Task extends Base
         }
 
         $updated_task = $values;
-        $updated_task['date_modification'] = time();
         unset($updated_task['id']);
+        unset($updated_task['date_modification']);
+
+        //Update 'date_modification' only if significant changes are made
+        //Position may be considered a change only if this specific task was moved by the user
+        foreach ($updated_task as $key => $value) {
+            if (($key != 'position' || $taskMoved == true) && $original_task[$key] != $value)
+                $updated_task['date_modification'] = time();
+        }
 
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task);
 
@@ -495,9 +503,10 @@ class Task extends Base
      * @param  integer    $task_id     Task id
      * @param  integer    $column_id   Column id
      * @param  integer    $position    Position (must be greater than 1)
+     * @param  boolean    $taskMoved   Indicates this task was moved explicitely. e.g. set to false is the position is modified due to another task being moved.
      * @return boolean
      */
-    public function move($task_id, $column_id, $position)
+    public function move($task_id, $column_id, $position, $taskMoved = true)
     {
         $this->event->clearTriggeredEvents();
 
@@ -505,7 +514,7 @@ class Task extends Base
             'id' => $task_id,
             'column_id' => $column_id,
             'position' => $position,
-        ));
+        ), $taskMoved);
     }
 
     /**

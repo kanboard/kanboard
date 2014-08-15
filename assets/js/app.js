@@ -77,7 +77,7 @@ Kanboard.Board = (function() {
             connectWith: ".column",
             placeholder: "draggable-placeholder",
             stop: function(event, ui) {
-                board_save();
+                board_save(ui.item.attr('data-task-id'));
             }
         });
 
@@ -112,7 +112,7 @@ Kanboard.Board = (function() {
     }
 
     // Save and refresh the board
-    function board_save()
+    function board_save(movedTaskId)
     {
         var data = [];
         var boardSelector = $("#board");
@@ -135,7 +135,7 @@ Kanboard.Board = (function() {
         $.ajax({
             cache: false,
             url: "?controller=board&action=save&project_id=" + projectId,
-            data: {"positions": data, "csrf_token": boardSelector.attr("data-csrf-token")},
+            data: {"positions": data, "csrf_token": boardSelector.attr("data-csrf-token"), "moved_task_id": movedTaskId},
             type: "POST",
             success: function(data) {
                 $("#board").remove();

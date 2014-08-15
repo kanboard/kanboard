@@ -32,7 +32,7 @@
         data-task-limit="<?= $column['task_limit'] ?>"
         >
         <?php foreach ($column['tasks'] as $task): ?>
-        <div class="task-board draggable-item task-<?= $task['color_id'] ?>"
+        <div class="task-board draggable-item task-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - RECENT_TASK_PERIOD ? 'task-board-recent' : '' ?>"
              data-task-id="<?= $task['id'] ?>"
              data-owner-id="<?= $task['owner_id'] ?>"
              data-category-id="<?= $task['category_id'] ?>"

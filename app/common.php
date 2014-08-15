@@ -19,6 +19,9 @@ defined('BOARD_PUBLIC_CHECK_INTERVAL') or define('BOARD_PUBLIC_CHECK_INTERVAL', 
 // Board refresh frequency in seconds (the value 0 disable this feature)
 defined('BOARD_CHECK_INTERVAL') or define('BOARD_CHECK_INTERVAL', 10);
 
+// Period (in second) to consider a task was modified recently
+defined('RECENT_TASK_PERIOD') or define('RECENT_TASK_PERIOD', 48*60*60);
+
 // Custom session save path
 defined('SESSION_SAVE_PATH') or define('SESSION_SAVE_PATH', '');
 

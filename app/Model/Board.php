@@ -25,16 +25,17 @@ class Board extends Base
      *
      * @access public
      * @param  array  $values    [['task_id' => X, 'column_id' => X, 'position' => X], ...]
+     * @param  $movedTaskId      id of the task that was moved
      * @return boolean
      */
-    public function saveTasksPosition(array $values)
+    public function saveTasksPosition(array $values, $movedTaskId)
     {
         $taskModel = new Task($this->db, $this->event);
 
         $this->db->startTransaction();
 
         foreach ($values as $value) {
-            if (! $taskModel->move($value['task_id'], $value['column_id'], $value['position'])) {
+            if (! $taskModel->move($value['task_id'], $value['column_id'], $value['position'], $value['task_id'] == $movedTaskId)) {
                 $this->db->cancelTransaction();
                 return false;
             }
