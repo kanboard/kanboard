@@ -2,10 +2,9 @@ Command Line Interface
 ======================
 
 Kanboard provide a simple command line interface that can be used from any Unix terminal.
+This tool can be used only on the local machine.
 
 This feature is useful to run commands outside the web server by example a huge report.
-
-Actually there is only one command, more stuff will be added later.
 
 Usage
 -----
@@ -19,6 +18,7 @@ Kanboard command line interface
 ===============================
 
 - Task export to stdout (CSV format): ./kanboard export-csv <project_id> <start_date> <end_date>
+- Send notifications for due tasks: ./kanboard send-notifications-due-tasks
 ```
 
 Available commands
@@ -36,4 +36,19 @@ Example:
 
 ```bash
 ./kanboard export-csv 1 2014-07-14 2014-07-20 > /tmp/my_custom_export.csv
+```
+
+### Send notifications for due tasks
+
+Emails will be sent to all users with notifications enabled.
+
+```bash
+./kanboard send-notifications-due-tasks
+```
+
+Cronjob example:
+
+```bash
+# Everyday at 8am we check for due tasks
+0 8 * * *  cd /path/to/kanboard && ./kanboard send-notifications-due-tasks >/dev/null 2>&1
 ```

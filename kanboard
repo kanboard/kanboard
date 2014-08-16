@@ -26,7 +26,7 @@ $cli = new Cli;
 $cli->register('help', function() {
     echo 'Kanboard command line interface'.PHP_EOL.'==============================='.PHP_EOL.PHP_EOL;
     echo '- Task export to stdout (CSV format): '.$GLOBALS['argv'][0].' export-csv <project_id> <start_date> <end_date>'.PHP_EOL;
-    echo '- Send notifications for tasks due: '.$GLOBALS['argv'][0].' send-notifications-tasks-due'.PHP_EOL;
+    echo '- Send notifications for due tasks: '.$GLOBALS['argv'][0].' send-notifications-due-tasks'.PHP_EOL;
 });
 
 // CSV Export
@@ -51,7 +51,7 @@ $cli->register('export-csv', function() use ($cli, $registry) {
 });
 
 // Send notification for tasks due
-$cli->register('send-notifications-tasks-due', function() use ($cli, $registry) {
+$cli->register('send-notifications-due-tasks', function() use ($cli, $registry) {
 
     $notificationModel = new Notification($registry);
     $taskModel = new Task($registry);

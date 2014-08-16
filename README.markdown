@@ -21,11 +21,13 @@ Features
 
 - Multiple boards/projects
 - Boards customization, rename/add/remove columns
-- Tasks with different colors, categories, sub-tasks, attachments, Markdown support for the description
+- Tasks with different colors, categories, sub-tasks, attachments, comments and Markdown support for the description
 - Automatic actions based on events
 - Users management with a basic privileges separation (administrator or regular user)
-- External authentication: Google and GitHub accounts as well as LDAP/ActiveDirectory
+- Email notifications
+- External authentication: Google, GitHub, LDAP/ActiveDirectory and Reverse-Proxy
 - Webhooks to create tasks from an external software
+- A basic command line interface
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
@@ -40,43 +42,6 @@ License
 -------
 
 GNU Affero General Public License version 3: <http://www.gnu.org/licenses/agpl-3.0.txt>
-
-Authors
--------
-
-Original author: [Frédéric Guillot](http://fredericguillot.com/)
-
-Contributors:
-
-- Alex Butum: https://github.com/dZkF9RWJT6wN8ux
-- Claudio Lobo
-- Cmer: https://github.com/chncsu
-- Floaltvater: https://github.com/floaltvater
-- Gavlepeter: https://github.com/gavlepeter
-- Janne Mäntyharju: https://github.com/JanneMantyharju
-- Jesusaplsoft: https://github.com/jesusaplsoft
-- Kiswa: https://github.com/kiswa
-- Kralo: https://github.com/kralo
-- Levlaz: https://github.com/levlaz
-- Mathgl67: https://github.com/mathgl67
-- Matthieu Keller: https://github.com/maggick
-- Maxime: https://github.com/EpocDotFr
-- Moraxy: https://github.com/moraxy
-- Nala Ginrut: https://github.com/NalaGinrut
-- Nekohayo: https://github.com/nekohayo
-- Olivier Maridat: https://github.com/oliviermaridat
-- Poikilotherm: https://github.com/poikilotherm
-- Rafaelrossa: https://github.com/rafaelrossa
-- Raphaël Doursenaud: https://github.com/rdoursenaud
-- Rzeka: https://github.com/rzeka
-- Sebastien pacilly: https://github.com/spacilly
-- Sylvain Veyrié: https://github.com/turb
-- Toomyem: https://github.com/Toomyem
-- Troloo: https://github.com/troloo
-- Typz: https://github.com/Typz
-- Ybarc: https://github.com/ybarc
-
-There is also many people who have reported bugs or proposed awesome ideas.
 
 Documentation
 -------------
@@ -114,6 +79,7 @@ Documentation
 
 #### Developers and sysadmins
 
+- [Email configuration](docs/email-configuration.markdown)
 - [Command line interface](docs/cli.markdown)
 - [Json-RPC API](docs/api-json-rpc.markdown)
 - [Webhooks](docs/webhooks.markdown)
@@ -126,3 +92,40 @@ FAQ
 ---
 
 Go to the official website: <http://kanboard.net/faq>
+
+Authors
+-------
+
+Original author: [Frédéric Guillot](http://fredericguillot.com/)
+
+Contributors:
+
+- Alex Butum: https://github.com/dZkF9RWJT6wN8ux
+- Claudio Lobo
+- Cmer: https://github.com/chncsu
+- Floaltvater: https://github.com/floaltvater
+- Gavlepeter: https://github.com/gavlepeter
+- Janne Mäntyharju: https://github.com/JanneMantyharju
+- Jesusaplsoft: https://github.com/jesusaplsoft
+- Kiswa: https://github.com/kiswa
+- Kralo: https://github.com/kralo
+- Levlaz: https://github.com/levlaz
+- Mathgl67: https://github.com/mathgl67
+- Matthieu Keller: https://github.com/maggick
+- Maxime: https://github.com/EpocDotFr
+- Moraxy: https://github.com/moraxy
+- Nala Ginrut: https://github.com/NalaGinrut
+- Nekohayo: https://github.com/nekohayo
+- Olivier Maridat: https://github.com/oliviermaridat
+- Poikilotherm: https://github.com/poikilotherm
+- Rafaelrossa: https://github.com/rafaelrossa
+- Raphaël Doursenaud: https://github.com/rdoursenaud
+- Rzeka: https://github.com/rzeka
+- Sebastien pacilly: https://github.com/spacilly
+- Sylvain Veyrié: https://github.com/turb
+- Toomyem: https://github.com/Toomyem
+- Troloo: https://github.com/troloo
+- Typz: https://github.com/Typz
+- Ybarc: https://github.com/ybarc
+
+There is also many people who have reported bugs or proposed awesome ideas.

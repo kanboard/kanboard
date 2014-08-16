@@ -13,8 +13,8 @@ How does this work?
   - If it is the same web server that runs Kanboard, the CGI spec specifies this header to be REMOTE_USER (see [RFC 3875](http://www.ietf.org/rfc/rfc3875) §4.1.11). For example, Apache adds REMOTE_USER by default if `Require valid-user` is set. Note this header is only set for CGI (like PHP), and not if Apache is a reverse proxy to another Apache running Kanboard. It works the same with IIS and nginx according to their documentation.
   - If it is a real reverse proxy, the HTTP ICAP extension draft spec proposes the header to be X-Authenticated-User (see [IETF draft spec §3.4](http://tools.ietf.org/html/draft-stecher-icap-subid-00#section-3.4)). This de-facto standart has been adopted by a number of tools.
 - Kanboard retrieves the value of the specified HTTP header, and:
-  - if the user does not exist yet, creates it (it also checks if it is the default admin).
-  - authenticates the given user without any prompt, assuming it is valid (so it does NOT prompt the login page).
+  - If the user does not exist yet, creates it (it also checks if it is the default admin).
+  - **Authenticates the given user without any prompt, assuming it's valid (so it does NOT prompt the login page)**.
 
 
 Installation instructions
@@ -24,7 +24,7 @@ Installation instructions
 
 This is not in the scope of this documentation. You should check that the user login is sent by the reverse proxy using a HTTP header, and find which one.
 
-### Setting up Kanboad
+### Setting up Kanboard
 
 Create a custom `config.php` file or copy the `config.default.php` file:
 
