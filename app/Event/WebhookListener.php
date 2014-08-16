@@ -22,6 +22,14 @@ class WebhookListener implements Listener
     private $webhook;
 
     /**
+     * Url to call
+     *
+     * @access private
+     * @var string
+     */
+    private $url = '';
+
+    /**
      * Constructor
      *
      * @access public

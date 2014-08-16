@@ -431,7 +431,7 @@ class Project extends Base
             unset($category['id']);
             $category['project_id'] = $project_to;
 
-            if (! $categoryModel->create($category)) {
+            if (! $this->category->create($category)) {
                 return false;
             }
         }

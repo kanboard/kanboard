@@ -4,7 +4,6 @@ namespace Auth;
 
 use Core\Tool;
 use Core\Registry;
-use PicoDb\Database;
 
 /**
  * Base auth class

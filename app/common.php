@@ -158,8 +158,6 @@ $registry->mailer = function() use ($registry) {
 
     require_once 'vendor/swiftmailer/swift_required.php';
 
-    $transport = null;
-
     switch (MAIL_TRANSPORT) {
         case 'smtp':
             $transport = Swift_SmtpTransport::newInstance(MAIL_SMTP_HOSTNAME, MAIL_SMTP_PORT);

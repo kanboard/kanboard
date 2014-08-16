@@ -26,6 +26,7 @@ use PicoDb\Database;
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
  * @property \Model\User               $user
+ * @property \Model\Webhook            $webhook
  */
 abstract class Base
 {
