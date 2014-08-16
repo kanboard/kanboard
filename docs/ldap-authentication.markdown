@@ -23,17 +23,54 @@ Differences between a local user and a LDAP user are the following:
 - By default, all LDAP users have no admin privileges
 - To become administrator, a LDAP user must be promoted by another administrator
 
+The full name and the email address are automatically fetched from the LDAP server.
+
 Configuration
 -------------
 
-The first step is to create a custom config file named `config.php`.
-This file must be stored in the root directory.
+You have to create a custom config file named `config.php` (you can also use the template `config.default.php`).
+This file must be stored in the root directory of Kanboard.
 
-To do that, you can create an empty PHP file or copy/rename the sample file `config.default.php`.
+### Available configuration parameters
+
+```php
+// Enable LDAP authentication (false by default)
+define('LDAP_AUTH', false);
+
+// LDAP server hostname
+define('LDAP_SERVER', '');
+
+// LDAP server port (389 by default)
+define('LDAP_PORT', 389);
+
+// By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
+define('LDAP_SSL_VERIFY', true);
+
+// LDAP username to connect with. NULL for anonymous bind (by default).
+define('LDAP_USERNAME', null);
+
+// LDAP password to connect with. NULL for anonymous bind (by default).
+define('LDAP_PASSWORD', null);
+
+// LDAP account base, i.e. root of all user account
+// Example: ou=People,dc=example,dc=com
+define('LDAP_ACCOUNT_BASE', '');
+
+// LDAP query pattern to use when searching for a user account
+// Example for ActiveDirectory: '(&(objectClass=user)(sAMAccountName=%s))'
+// Example for OpenLDAP: 'uid=%s'
+define('LDAP_USER_PATTERN', '');
+
+// Name of an attribute of the user account object which should be used as the full name of the user.
+define('LDAP_ACCOUNT_FULLNAME', 'displayname');
+
+// Name of an attribute of the user account object which should be used as the email of the user.
+define('LDAP_ACCOUNT_EMAIL', 'mail');
+```
 
 ### Example for Microsoft Active Directory
 
-Let's say we have a domain `MYDOMAIN` (mydomain.local) and the primary controller is `myserver.mydomain.local`.
+Let's say we have a domain `KANBOARD` (kanboard.local) and the primary controller is `myserver.kanboard.local`.
 
 ```php
 <?php
@@ -41,15 +78,18 @@ Let's say we have a domain `MYDOMAIN` (mydomain.local) and the primary controlle
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', true);
 
+// Set credentials for be allow to browse the LDAP directory
+define('LDAP_USERNAME', 'administrator@kanboard.local');
+define('LDAP_PASSWORD', 'my super secret password');
+
 // LDAP server hostname
-define('LDAP_SERVER', 'myserver.mydomain.local');
+define('LDAP_SERVER', 'myserver.kanboard.local');
 
-// User LDAP DN
-define('LDAP_USER_DN', 'MYDOMAIN\\%s');
-
-// Another way to do the same thing
-define('LDAP_USER_DN', '%s@mydomain.local');
-
+// LDAP properties
+define('LDAP_ACCOUNT_BASE', 'CN=Users,DC=kanboard,DC=local');
+define('LDAP_USER_PATTERN', '(&(objectClass=user)(sAMAccountName=%s))');
+define('LDAP_ACCOUNT_FULLNAME', 'displayname');
+define('LDAP_ACCOUNT_EMAIL', 'mail');
 ```
 
 ### Example for OpenLDAP
@@ -65,9 +105,11 @@ define('LDAP_AUTH', true);
 // LDAP server hostname
 define('LDAP_SERVER', 'myserver.example.com');
 
-// User LDAP DN
-define('LDAP_USER_DN', 'uid=%s,ou=People,dc=example,dc=com');
-
+// LDAP properties
+define('LDAP_ACCOUNT_BASE', 'ou=People,dc=example,dc=com');
+define('LDAP_USER_PATTERN', 'uid=%s');
+define('LDAP_ACCOUNT_FULLNAME', 'displayname');
+define('LDAP_ACCOUNT_EMAIL', 'mail');
 ```
 
-The `%s` is replaced by the username for the parameter `LDAP_USER_DN`, so you can define a custom Distinguished Name.
+The `%s` is replaced by the username for the parameter `LDAP_USER_PATTERN`, so you can define a custom Distinguished Name.

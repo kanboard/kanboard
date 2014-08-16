@@ -1,17 +1,24 @@
 <?php
 
-namespace Model;
+namespace Auth;
 
 use Core\Security;
 
 /**
  * RememberMe model
  *
- * @package  model
+ * @package  auth
  * @author   Frederic Guillot
  */
 class RememberMe extends Base
 {
+    /**
+     * Backend name
+     *
+     * @var string
+     */
+    const AUTH_NAME = 'RememberMe';
+
     /**
      * SQL table name
      *
@@ -94,6 +101,14 @@ class RememberMe extends Base
                 // Create the session
                 $this->user->updateSession($this->user->getById($record['user_id']));
                 $this->acl->isRememberMe(true);
+
+                // Update last login infos
+                $this->lastLogin->create(
+                    self::AUTH_NAME,
+                    $this->acl->getUserId(),
+                    $this->user->getIpAddress(),
+                    $this->user->getUserAgent()
+                );
 
                 return true;
             }

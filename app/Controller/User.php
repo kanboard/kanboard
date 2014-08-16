@@ -18,7 +18,7 @@ class User extends Base
     public function logout()
     {
         $this->checkCSRFParam();
-        $this->rememberMe->destroy($this->acl->getUserId());
+        $this->authentication->backend('rememberMe')->destroy($this->acl->getUserId());
         $this->session->close();
         $this->response->redirect('?controller=user&action=login');
     }
@@ -30,7 +30,7 @@ class User extends Base
      */
     public function login()
     {
-        if (isset($_SESSION['user'])) {
+        if ($this->acl->isLogged()) {
             $this->response->redirect('?controller=app');
         }
 
@@ -50,7 +50,7 @@ class User extends Base
     public function check()
     {
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->user->validateLogin($values);
+        list($valid, $errors) = $this->authentication->validateForm($values);
 
         if ($valid) {
             $this->response->redirect('?controller=app');
@@ -249,14 +249,14 @@ class User extends Base
 
         if ($code) {
 
-            $profile = $this->google->getGoogleProfile($code);
+            $profile = $this->authentication->backend('google')->getGoogleProfile($code);
 
             if (is_array($profile)) {
 
                 // If the user is already logged, link the account otherwise authenticate
                 if ($this->acl->isLogged()) {
 
-                    if ($this->google->updateUser($this->acl->getUserId(), $profile)) {
+                    if ($this->authentication->backend('google')->updateUser($this->acl->getUserId(), $profile)) {
                         $this->session->flash(t('Your Google Account is linked to your profile successfully.'));
                     }
                     else {
@@ -265,7 +265,7 @@ class User extends Base
 
                     $this->response->redirect('?controller=user');
                 }
-                else if ($this->google->authenticate($profile['id'])) {
+                else if ($this->authentication->backend('google')->authenticate($profile['id'])) {
                     $this->response->redirect('?controller=app');
                 }
                 else {
@@ -279,7 +279,7 @@ class User extends Base
             }
         }
 
-        $this->response->redirect($this->google->getAuthorizationUrl());
+        $this->response->redirect($this->authentication->backend('google')->getAuthorizationUrl());
     }
 
     /**
@@ -290,7 +290,7 @@ class User extends Base
     public function unlinkGoogle()
     {
         $this->checkCSRFParam();
-        if ($this->google->unlink($this->acl->getUserId())) {
+        if ($this->authentication->backend('google')->unlink($this->acl->getUserId())) {
             $this->session->flash(t('Your Google Account is not linked anymore to your profile.'));
         }
         else {
@@ -310,14 +310,14 @@ class User extends Base
         $code = $this->request->getStringParam('code');
 
         if ($code) {
-            $profile = $this->gitHub->getGitHubProfile($code);
+            $profile = $this->authentication->backend('gitHub')->getGitHubProfile($code);
 
             if (is_array($profile)) {
 
                 // If the user is already logged, link the account otherwise authenticate
                 if ($this->acl->isLogged()) {
 
-                    if ($this->gitHub->updateUser($this->acl->getUserId(), $profile)) {
+                    if ($this->authentication->backend('gitHub')->updateUser($this->acl->getUserId(), $profile)) {
                         $this->session->flash(t('Your GitHub account was successfully linked to your profile.'));
                     }
                     else {
@@ -326,7 +326,7 @@ class User extends Base
 
                     $this->response->redirect('?controller=user');
                 }
-                else if ($this->gitHub->authenticate($profile['id'])) {
+                else if ($this->authentication->backend('gitHub')->authenticate($profile['id'])) {
                     $this->response->redirect('?controller=app');
                 }
                 else {
@@ -340,7 +340,7 @@ class User extends Base
             }
         }
 
-        $this->response->redirect($this->gitHub->getAuthorizationUrl());
+        $this->response->redirect($this->authentication->backend('gitHub')->getAuthorizationUrl());
     }
 
     /**
@@ -352,9 +352,9 @@ class User extends Base
     {
         $this->checkCSRFParam();
 
-        $this->gitHub->revokeGitHubAccess();
+        $this->authentication->backend('gitHub')->revokeGitHubAccess();
 
-        if ($this->gitHub->unlink($this->acl->getUserId())) {
+        if ($this->authentication->backend('gitHub')->unlink($this->acl->getUserId())) {
             $this->session->flash(t('Your GitHub account is no longer linked to your profile.'));
         }
         else {

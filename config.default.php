@@ -55,7 +55,7 @@ define('LDAP_USERNAME', null);
 define('LDAP_PASSWORD', null);
 
 // LDAP account base, i.e. root of all user account
-// Example: ou=people,dc=example,dc=com
+// Example: ou=People,dc=example,dc=com
 define('LDAP_ACCOUNT_BASE', '');
 
 // LDAP query pattern to use when searching for a user account

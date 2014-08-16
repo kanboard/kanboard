@@ -4,6 +4,20 @@ if (version_compare(PHP_VERSION, '5.5.0', '<')) {
     require __DIR__.'/../../vendor/password.php';
 }
 
+require __DIR__.'/../../vendor/SimpleValidator/Validator.php';
+require __DIR__.'/../../vendor/SimpleValidator/Base.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/Required.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/Unique.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/MaxLength.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/MinLength.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/Integer.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/Equals.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/AlphaNumeric.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/GreaterThan.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/Date.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/Email.php';
+require __DIR__.'/../../vendor/SimpleValidator/Validators/Numeric.php';
+
 require_once __DIR__.'/../../app/Core/Security.php';
 
 require_once __DIR__.'/../../vendor/PicoDb/Database.php';

@@ -1,30 +1,19 @@
 <?php
 
-namespace Model;
+namespace Auth;
 
-use Core\Event;
 use Core\Tool;
 use Core\Registry;
 use PicoDb\Database;
 
 /**
- * Base model class
+ * Base auth class
  *
- * @package  model
+ * @package  auth
  * @author   Frederic Guillot
  *
  * @property \Model\Acl                $acl
- * @property \Model\Action             $action
- * @property \Model\Board              $board
- * @property \Model\Category           $category
- * @property \Model\Comment            $comment
- * @property \Model\Config             $config
- * @property \Model\File               $file
  * @property \Model\LastLogin          $lastLogin
- * @property \Model\Notification       $notification
- * @property \Model\Project            $project
- * @property \Model\SubTask            $subTask
- * @property \Model\Task               $task
  * @property \Model\User               $user
  */
 abstract class Base
@@ -36,14 +25,6 @@ abstract class Base
      * @var \PicoDb\Database
      */
     protected $db;
-
-    /**
-     * Event dispatcher instance
-     *
-     * @access protected
-     * @var \Core\Event
-     */
-    protected $event;
 
     /**
      * Registry instance
@@ -63,7 +44,6 @@ abstract class Base
     {
         $this->registry = $registry;
         $this->db = $this->registry->shared('db');
-        $this->event = $this->registry->shared('event');
     }
 
     /**

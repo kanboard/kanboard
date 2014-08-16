@@ -25,18 +25,6 @@ class LastLogin extends Base
     const NB_LOGINS = 10;
 
     /**
-     * Authentication methods
-     *
-     * @var string
-     */
-    const AUTH_DATABASE    = 'database';
-    const AUTH_REMEMBER_ME = 'remember_me';
-    const AUTH_LDAP        = 'ldap';
-    const AUTH_GOOGLE      = 'google';
-    const AUTH_GITHUB      = 'github';
-    const AUTH_REVERSE_PROXY = 'reverse_proxy';
-
-    /**
      * Create a new record
      *
      * @access public

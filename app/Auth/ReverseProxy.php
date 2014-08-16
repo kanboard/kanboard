@@ -1,17 +1,24 @@
 <?php
 
-namespace Model;
+namespace Auth;
 
 use Core\Security;
 
 /**
- * ReverseProxyAuth model
+ * ReverseProxy backend
  *
- * @package  model
+ * @package  auth
  * @author   Sylvain Veyrié
  */
-class ReverseProxyAuth extends Base
+class ReverseProxy extends Base
 {
+    /**
+     * Backend name
+     *
+     * @var string
+     */
+    const AUTH_NAME = 'ReverseProxy';
+
     /**
      * Authenticate the user with the HTTP header
      *
@@ -35,7 +42,7 @@ class ReverseProxyAuth extends Base
 
             // Update login history
             $this->lastLogin->create(
-                LastLogin::AUTH_REVERSE_PROXY,
+                self::AUTH_NAME,
                 $user['id'],
                 $this->user->getIpAddress(),
                 $this->user->getUserAgent()

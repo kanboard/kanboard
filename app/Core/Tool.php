@@ -34,8 +34,11 @@ class Tool
 
     public static function loadModel(Registry $registry, $name)
     {
-        $class = '\Model\\'.ucfirst($name);
-        $registry->$name = new $class($registry);
+        if (! isset($registry->$name)) {
+            $class = '\Model\\'.ucfirst($name);
+            $registry->$name = new $class($registry);
+        }
+
         return $registry->shared($name);
     }
 }

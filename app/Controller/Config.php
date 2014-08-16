@@ -28,7 +28,7 @@ class Config extends Base
             'menu' => 'config',
             'title' => t('Settings'),
             'timezones' => $this->config->getTimezones(),
-            'remember_me_sessions' => $this->rememberMe->getAll($this->acl->getUserId()),
+            'remember_me_sessions' => $this->authentication->backend('rememberMe')->getAll($this->acl->getUserId()),
             'last_logins' => $this->lastLogin->getAll($this->acl->getUserId()),
         )));
     }
@@ -73,7 +73,7 @@ class Config extends Base
             'menu' => 'config',
             'title' => t('Settings'),
             'timezones' => $this->config->getTimezones(),
-            'remember_me_sessions' => $this->rememberMe->getAll($this->acl->getUserId()),
+            'remember_me_sessions' => $this->authentication->backend('rememberMe')->getAll($this->acl->getUserId()),
             'last_logins' => $this->lastLogin->getAll($this->acl->getUserId()),
         )));
     }
@@ -124,7 +124,7 @@ class Config extends Base
     public function removeRememberMeToken()
     {
         $this->checkCSRFParam();
-        $this->rememberMe->remove($this->request->getIntegerParam('id'));
+        $this->authentication->backend('rememberMe')->remove($this->request->getIntegerParam('id'));
         $this->response->redirect('?controller=config&action=index#remember-me');
     }
 }

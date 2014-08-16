@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Auth;
 
 require __DIR__.'/../../vendor/OAuth/bootstrap.php';
 
@@ -11,23 +11,29 @@ use OAuth\ServiceFactory;
 use OAuth\Common\Http\Exception\TokenResponseException;
 
 /**
- * Google model
+ * GitHub backend
  *
- * @package  model
- * @author   Frederic Guillot
+ * @package auth
  */
-class Google extends Base
+class GitHub extends Base
 {
     /**
-     * Authenticate a Google user
+     * Backend name
+     *
+     * @var string
+     */
+    const AUTH_NAME = 'Github';
+
+    /**
+     * Authenticate a GitHub user
      *
      * @access public
-     * @param  string  $google_id   Google unique id
+     * @param  string  $github_id   GitHub user id
      * @return boolean
      */
-    public function authenticate($google_id)
+    public function authenticate($github_id)
     {
-        $user = $this->user->getByGoogleId($google_id);
+        $user = $this->user->getByGitHubId($github_id);
 
         if ($user) {
 
@@ -36,7 +42,7 @@ class Google extends Base
 
             // Update login history
             $this->lastLogin->create(
-                LastLogin::AUTH_GOOGLE,
+                self::AUTH_NAME,
                 $user['id'],
                 $this->user->getIpAddress(),
                 $this->user->getUserAgent()
@@ -49,7 +55,7 @@ class Google extends Base
     }
 
     /**
-     * Unlink a Google account for a given user
+     * Unlink a GitHub account for a given user
      *
      * @access public
      * @param  integer   $user_id    User id
@@ -59,55 +65,56 @@ class Google extends Base
     {
         return $this->user->update(array(
             'id' => $user_id,
-            'google_id' => '',
+            'github_id' => '',
         ));
     }
 
     /**
-     * Update the user table based on the Google profile information
+     * Update the user table based on the GitHub profile information
      *
      * @access public
      * @param  integer   $user_id    User id
-     * @param  array     $profile    Google profile
+     * @param  array     $profile    GitHub profile
      * @return boolean
+     * @todo Don't overwrite existing email/name with empty GitHub data
      */
     public function updateUser($user_id, array $profile)
     {
         return $this->user->update(array(
             'id' => $user_id,
-            'google_id' => $profile['id'],
+            'github_id' => $profile['id'],
             'email' => $profile['email'],
             'name' => $profile['name'],
         ));
     }
 
     /**
-     * Get the Google service instance
+     * Get the GitHub service instance
      *
      * @access public
-     * @return \OAuth\OAuth2\Service\Google
+     * @return \OAuth\OAuth2\Service\GitHub
      */
     public function getService()
     {
         $uriFactory = new UriFactory();
         $currentUri = $uriFactory->createFromSuperGlobalArray($_SERVER);
-        $currentUri->setQuery('controller=user&action=google');
+        $currentUri->setQuery('controller=user&action=gitHub');
 
         $storage = new Session(false);
 
         $credentials = new Credentials(
-            GOOGLE_CLIENT_ID,
-            GOOGLE_CLIENT_SECRET,
+            GITHUB_CLIENT_ID,
+            GITHUB_CLIENT_SECRET,
             $currentUri->getAbsoluteUri()
         );
 
         $serviceFactory = new ServiceFactory();
 
         return $serviceFactory->createService(
-            'google',
+            'gitHub',
             $credentials,
             $storage,
-            array('userinfo_email', 'userinfo_profile')
+            array('')
         );
     }
 
@@ -123,19 +130,44 @@ class Google extends Base
     }
 
     /**
-     * Get Google profile information from the API
+     * Get GitHub profile information from the API
      *
      * @access public
-     * @param  string    $code   Google authorization code
+     * @param  string    $code   GitHub authorization code
      * @return bool|array
      */
-    public function getGoogleProfile($code)
+    public function getGitHubProfile($code)
     {
         try {
+            $gitHubService = $this->getService();
+            $gitHubService->requestAccessToken($code);
 
-            $googleService = $this->getService();
-            $googleService->requestAccessToken($code);
-            return json_decode($googleService->request('https://www.googleapis.com/oauth2/v1/userinfo'), true);
+            return json_decode($gitHubService->request('user'), true);
+        }
+        catch (TokenResponseException $e) {
+            return false;
+        }
+
+        return false;
+    }
+
+    /**
+     * Revokes this user's GitHub tokens for Kanboard
+     *
+     * @access public
+     * @return bool|array
+     * @todo Currently this simply removes all our tokens for this user, ideally it should
+     *       restrict itself to the one in question
+     */
+    public function revokeGitHubAccess()
+    {
+        try {
+            $gitHubService = $this->getService();
+
+            $basicAuthHeader = array('Authorization' => 'Basic ' .
+            base64_encode(GITHUB_CLIENT_ID.':'.GITHUB_CLIENT_SECRET));
+
+            return json_decode($gitHubService->request('/applications/'.GITHUB_CLIENT_ID.'/tokens', 'DELETE', null, $basicAuthHeader), true);
         }
         catch (TokenResponseException $e) {
             return false;

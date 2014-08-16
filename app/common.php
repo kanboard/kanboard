@@ -4,7 +4,19 @@ require __DIR__.'/Core/Loader.php';
 require __DIR__.'/helpers.php';
 require __DIR__.'/translator.php';
 
-require 'vendor/swiftmailer/swift_required.php';
+require __DIR__.'/../vendor/SimpleValidator/Validator.php';
+require __DIR__.'/../vendor/SimpleValidator/Base.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Required.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Unique.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/MaxLength.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/MinLength.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Integer.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Equals.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/AlphaNumeric.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/GreaterThan.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Date.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Email.php';
+require __DIR__.'/../vendor/SimpleValidator/Validators/Numeric.php';
 
 use Core\Event;
 use Core\Loader;
@@ -47,6 +59,10 @@ defined('LDAP_AUTH') or define('LDAP_AUTH', false);
 defined('LDAP_SERVER') or define('LDAP_SERVER', '');
 defined('LDAP_PORT') or define('LDAP_PORT', 389);
 defined('LDAP_SSL_VERIFY') or define('LDAP_SSL_VERIFY', true);
+defined('LDAP_USERNAME') or define('LDAP_USERNAME', null);
+defined('LDAP_PASSWORD') or define('LDAP_PASSWORD', null);
+defined('LDAP_ACCOUNT_BASE') or define('LDAP_ACCOUNT_BASE', '');
+defined('LDAP_USER_PATTERN') or define('LDAP_USER_PATTERN', '');
 defined('LDAP_ACCOUNT_FULLNAME') or define('LDAP_ACCOUNT_FULLNAME', 'displayname');
 defined('LDAP_ACCOUNT_EMAIL') or define('LDAP_ACCOUNT_EMAIL', 'mail');
 

@@ -15,20 +15,16 @@ use Model\LastLogin;
  * @author   Frederic Guillot
  *
  * @property \Model\Acl                $acl
+ * @property \Model\Authentication     $authentication
  * @property \Model\Action             $action
  * @property \Model\Board              $board
  * @property \Model\Category           $category
  * @property \Model\Comment            $comment
  * @property \Model\Config             $config
  * @property \Model\File               $file
- * @property \Model\Google             $google
- * @property \Model\GitHub             $gitHub
  * @property \Model\LastLogin          $lastLogin
- * @property \Model\Ldap               $ldap
  * @property \Model\Notification       $notification
  * @property \Model\Project            $project
- * @property \Model\RememberMe         $rememberMe
- * @property \Model\ReverseProxyAuth   $reverseProxyAuth
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
  * @property \Model\User               $user
@@ -123,29 +119,8 @@ abstract class Base
         date_default_timezone_set($this->config->get('timezone', 'UTC'));
 
         // Authentication
-        if (! $this->acl->isLogged() && ! $this->acl->isPublicAction($controller, $action)) {
-
-            // Try the "remember me" authentication first
-            if (! $this->rememberMe->authenticate()) {
-
-                // Automatic reverse proxy header authentication
-                if(! (REVERSE_PROXY_AUTH && $this->reverseProxyAuth->authenticate()) ) {
-                    // Redirect to the login form if not authenticated
-                    $this->response->redirect('?controller=user&action=login');
-                }
-            }
-            else {
-
-                $this->lastLogin->create(
-                    LastLogin::AUTH_REMEMBER_ME,
-                    $this->acl->getUserId(),
-                    $this->user->getIpAddress(),
-                    $this->user->getUserAgent()
-                );
-            }
-        }
-        else if ($this->rememberMe->hasCookie()) {
-            $this->rememberMe->refresh();
+        if (! $this->authentication->isAuthenticated($controller, $action)) {
+            $this->response->redirect('?controller=user&action=login');
         }
 
         // Check if the user is allowed to see this page
