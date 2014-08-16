@@ -340,8 +340,7 @@ class User extends Base
                 $this->updateSession($user);
 
                 // Update login history
-                $lastLogin = new LastLogin($this->db, $this->event);
-                $lastLogin->create(
+                $this->lastLogin->create(
                     $method,
                     $user['id'],
                     $this->getIpAddress(),
@@ -350,9 +349,8 @@ class User extends Base
 
                 // Setup the remember me feature
                 if (! empty($values['remember_me'])) {
-                    $rememberMe = new RememberMe($this->db, $this->event);
-                    $credentials = $rememberMe->create($user['id'], $this->getIpAddress(), $this->getUserAgent());
-                    $rememberMe->writeCookie($credentials['token'], $credentials['sequence'], $credentials['expiration']);
+                    $credentials = $this->rememberMe->create($user['id'], $this->getIpAddress(), $this->getUserAgent());
+                    $this->rememberMe->writeCookie($credentials['token'], $credentials['sequence'], $credentials['expiration']);
                 }
             }
             else {
@@ -384,8 +382,7 @@ class User extends Base
 
         // LDAP authentication
         if (! $authenticated && LDAP_AUTH) {
-            $ldap = new Ldap($this->db, $this->event);
-            $authenticated = $ldap->authenticate($username, $password);
+            $authenticated = $this->ldap->authenticate($username, $password);
             $method = LastLogin::AUTH_LDAP;
         }
 

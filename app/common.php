@@ -4,6 +4,8 @@ require __DIR__.'/Core/Loader.php';
 require __DIR__.'/helpers.php';
 require __DIR__.'/translator.php';
 
+require 'vendor/swiftmailer/swift_required.php';
+
 use Core\Event;
 use Core\Loader;
 use Core\Registry;
@@ -62,6 +64,15 @@ defined('GITHUB_CLIENT_SECRET') or define('GITHUB_CLIENT_SECRET', '');
 defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', false);
 defined('REVERSE_PROXY_USER_HEADER') or define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
 defined('REVERSE_PROXY_DEFAULT_ADMIN') or define('REVERSE_PROXY_DEFAULT_ADMIN', '');
+
+// Mail configuration
+defined('MAIL_FROM') or define('MAIL_FROM', 'notifications@kanboard.net');
+defined('MAIL_TRANSPORT') or define('MAIL_TRANSPORT', 'mail');
+defined('MAIL_SMTP_HOSTNAME') or define('MAIL_SMTP_HOSTNAME', '');
+defined('MAIL_SMTP_PORT') or define('MAIL_SMTP_PORT', 25);
+defined('MAIL_SMTP_USERNAME') or define('MAIL_SMTP_USERNAME', '');
+defined('MAIL_SMTP_PASSWORD') or define('MAIL_SMTP_PASSWORD', '');
+defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 
 $loader = new Loader;
 $loader->execute();
@@ -125,4 +136,26 @@ $registry->db = function() use ($registry) {
 
 $registry->event = function() use ($registry) {
     return new Event;
+};
+
+$registry->mailer = function() use ($registry) {
+
+    require_once 'vendor/swiftmailer/swift_required.php';
+
+    $transport = null;
+
+    switch (MAIL_TRANSPORT) {
+        case 'smtp':
+            $transport = Swift_SmtpTransport::newInstance(MAIL_SMTP_HOSTNAME, MAIL_SMTP_PORT);
+            $transport->setUsername(MAIL_SMTP_USERNAME);
+            $transport->setPassword(MAIL_SMTP_PASSWORD);
+            break;
+        case 'sendmail':
+            $transport = Swift_SendmailTransport::newInstance(MAIL_SENDMAIL_COMMAND);
+            break;
+        default:
+            $transport = Swift_MailTransport::newInstance();
+    }
+
+    return $transport;
 };

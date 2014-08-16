@@ -12,7 +12,7 @@ class ProjectTest extends Base
 {
     public function testCreation()
     {
-        $p = new Project($this->db, $this->event);
+        $p = new Project($this->registry);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertNotEmpty($p->getById(1));
@@ -21,10 +21,10 @@ class ProjectTest extends Base
     public function testAllowEverybody()
     {
         // We create a regular user
-        $user = new User($this->db, $this->event);
+        $user = new User($this->registry);
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
-        $p = new Project($this->db, $this->event);
+        $p = new Project($this->registry);
         $this->assertEmpty($p->getAllowedUsers(1)); // Nobody is specified for the given project
         $this->assertTrue($p->isUserAllowed(1, 1)); // Everybody should be allowed
         $this->assertTrue($p->isUserAllowed(1, 2)); // Everybody should be allowed
@@ -32,8 +32,8 @@ class ProjectTest extends Base
 
     public function testAllowUser()
     {
-        $p = new Project($this->db, $this->event);
-        $user = new User($this->db, $this->event);
+        $p = new Project($this->registry);
+        $user = new User($this->registry);
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
         // We create a project
@@ -58,9 +58,9 @@ class ProjectTest extends Base
 
     public function testRevokeUser()
     {
-        $p = new Project($this->db, $this->event);
+        $p = new Project($this->registry);
 
-        $user = new User($this->db, $this->event);
+        $user = new User($this->registry);
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
         // We create a project
@@ -113,9 +113,9 @@ class ProjectTest extends Base
 
     public function testUsersList()
     {
-        $p = new Project($this->db, $this->event);
+        $p = new Project($this->registry);
 
-        $user = new User($this->db, $this->event);
+        $user = new User($this->registry);
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
         // We create project

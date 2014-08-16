@@ -265,6 +265,10 @@ input.form-date {
     line-height: 25px;
 }
 
+.form-checkbox-group label {
+    display: inline;
+}
+
 /* alerts */
 .alert {
     padding: 8px 35px 8px 14px;

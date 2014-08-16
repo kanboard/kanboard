@@ -24,17 +24,18 @@ class Board extends Base
      * Save task positions for each column
      *
      * @access public
-     * @param  array  $values    [['task_id' => X, 'column_id' => X, 'position' => X], ...]
+     * @param  array    $positions          [['task_id' => X, 'column_id' => X, 'position' => X], ...]
+     * @param  integer  $selected_task_id   The selected task id
      * @return boolean
      */
-    public function saveTasksPosition(array $values)
+    public function saveTasksPosition(array $positions, $selected_task_id)
     {
-        $taskModel = new Task($this->db, $this->event);
-
         $this->db->startTransaction();
 
-        foreach ($values as $value) {
-            if (! $taskModel->move($value['task_id'], $value['column_id'], $value['position'])) {
+        foreach ($positions as $value) {
+
+            // We trigger events only for the selected task
+            if (! $this->task->move($value['task_id'], $value['column_id'], $value['position'], $value['task_id'] == $selected_task_id)) {
                 $this->db->cancelTransaction();
                 return false;
             }
@@ -201,8 +202,7 @@ class Board extends Base
         $filters[] = array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id);
         $filters[] = array('column' => 'is_active', 'operator' => 'eq', 'value' => Task::STATUS_OPEN);
 
-        $taskModel = new Task($this->db, $this->event);
-        $tasks = $taskModel->find($filters);
+        $tasks = $this->task->find($filters);
 
         foreach ($columns as &$column) {
 

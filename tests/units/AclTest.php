@@ -12,7 +12,7 @@ class AclTest extends Base
             'controller1' => array('action1', 'action3'),
         );
 
-        $acl = new Acl($this->db, $this->event);
+        $acl = new Acl($this->registry);
         $this->assertTrue($acl->isAllowedAction($acl_rules, 'controller1', 'action1'));
         $this->assertTrue($acl->isAllowedAction($acl_rules, 'controller1', 'action3'));
         $this->assertFalse($acl->isAllowedAction($acl_rules, 'controller1', 'action2'));
@@ -22,7 +22,7 @@ class AclTest extends Base
 
     public function testIsAdmin()
     {
-        $acl = new Acl($this->db, $this->event);
+        $acl = new Acl($this->registry);
 
         $_SESSION = array();
         $this->assertFalse($acl->isAdminUser());
@@ -45,7 +45,7 @@ class AclTest extends Base
 
     public function testIsUser()
     {
-        $acl = new Acl($this->db, $this->event);
+        $acl = new Acl($this->registry);
 
         $_SESSION = array();
         $this->assertFalse($acl->isRegularUser());
@@ -68,7 +68,7 @@ class AclTest extends Base
 
     public function testIsPageAllowed()
     {
-        $acl = new Acl($this->db, $this->event);
+        $acl = new Acl($this->registry);
 
         // Public access
         $_SESSION = array();

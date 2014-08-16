@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Core\Tool;
 use Core\Registry;
 use Core\Security;
 use Core\Translator;
@@ -24,6 +25,7 @@ use Model\LastLogin;
  * @property \Model\GitHub             $gitHub
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\Ldap               $ldap
+ * @property \Model\Notification       $notification
  * @property \Model\Project            $project
  * @property \Model\RememberMe         $rememberMe
  * @property \Model\ReverseProxyAuth   $reverseProxyAuth
@@ -93,9 +95,7 @@ abstract class Base
      */
     public function __get($name)
     {
-        $class = '\Model\\'.ucfirst($name);
-        $this->registry->$name = new $class($this->registry->shared('db'), $this->registry->shared('event'));
-        return $this->registry->shared($name);
+        return Tool::loadModel($this->registry, $name);
     }
 
     /**
@@ -157,6 +157,7 @@ abstract class Base
         $this->action->attachEvents();
         $this->project->attachEvents();
         $this->webhook->attachEvents();
+        $this->notification->attachEvents();
     }
 
     /**

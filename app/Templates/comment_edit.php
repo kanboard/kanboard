@@ -6,6 +6,7 @@
 
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('id', $values) ?>
+    <?= Helper\form_hidden('task_id', $values) ?>
     <?= Helper\form_textarea('comment', $values, $errors, array('autofocus', 'required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
 
     <div class="form-actions">

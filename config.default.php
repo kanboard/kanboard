@@ -1,5 +1,20 @@
 <?php
 
+// E-mail address for the "From" header (notifications)
+define('MAIL_FROM', 'notifications@kanboard.net');
+
+// Mail transport to use: "smtp", "sendmail" or "mail" (PHP mail function)
+define('MAIL_TRANSPORT', 'mail');
+
+// SMTP configuration to use when the "smtp" transport is chosen
+define('MAIL_SMTP_HOSTNAME', '');
+define('MAIL_SMTP_PORT', 25);
+define('MAIL_SMTP_USERNAME', '');
+define('MAIL_SMTP_PASSWORD', '');
+
+// Sendmail command to use when the transport is "sendmail"
+define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
+
 // Auto-refresh frequency in seconds for the public board view (60 seconds by default)
 define('BOARD_PUBLIC_CHECK_INTERVAL', 60);
 

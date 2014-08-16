@@ -64,11 +64,9 @@ class Webhook extends Base
      */
     public function attachEvents()
     {
-        $config = new Config($this->db, $this->event);
-
-        $this->url_task_creation = $config->get('webhooks_url_task_creation');
-        $this->url_task_modification = $config->get('webhooks_url_task_modification');
-        $this->token = $config->get('webhooks_token');
+        $this->url_task_creation = $this->config->get('webhooks_url_task_creation');
+        $this->url_task_modification = $this->config->get('webhooks_url_task_modification');
+        $this->token = $this->config->get('webhooks_token');
 
         if ($this->url_task_creation) {
             $this->attachCreateEvents();

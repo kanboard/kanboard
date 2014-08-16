@@ -4,7 +4,22 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 3;
+const VERSION = 4;
+
+function version_4($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN notifications_enabled BOOLEAN DEFAULT '0'");
+
+    $pdo->exec("
+        CREATE TABLE user_has_notifications (
+            user_id INTEGER,
+            project_id INTEGER,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            UNIQUE(project_id, user_id)
+        );
+    ");
+}
 
 function version_3($pdo)
 {

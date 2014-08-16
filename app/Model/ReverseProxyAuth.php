@@ -23,24 +23,22 @@ class ReverseProxyAuth extends Base
         if (isset($_SERVER[REVERSE_PROXY_USER_HEADER])) {
 
             $login = $_SERVER[REVERSE_PROXY_USER_HEADER];
-            $userModel = new User($this->db, $this->event);
-            $user = $userModel->getByUsername($login);
+            $user = $this->user->getByUsername($login);
 
             if (! $user) {
                 $this->createUser($login);
-                $user = $userModel->getByUsername($login);
+                $user = $this->user->getByUsername($login);
             }
 
             // Create the user session
-            $userModel->updateSession($user);
+            $this->user->updateSession($user);
 
             // Update login history
-            $lastLogin = new LastLogin($this->db, $this->event);
-            $lastLogin->create(
+            $this->lastLogin->create(
                 LastLogin::AUTH_REVERSE_PROXY,
                 $user['id'],
-                $userModel->getIpAddress(),
-                $userModel->getUserAgent()
+                $this->user->getIpAddress(),
+                $this->user->getUserAgent()
             );
 
             return true;
@@ -58,9 +56,7 @@ class ReverseProxyAuth extends Base
      */
     private function createUser($login)
     {
-        $userModel = new User($this->db, $this->event);
-
-        return $userModel->create(array(
+        return $this->user->create(array(
             'email' => strpos($login, '@') !== false ? $login : '',
             'username' => $login,
             'is_admin' => REVERSE_PROXY_DEFAULT_ADMIN === $login,

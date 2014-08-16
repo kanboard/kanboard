@@ -31,14 +31,25 @@
     <div class="page-header">
         <h2><?= t('User settings') ?></h2>
     </div>
-    <section class="settings">
-        <ul>
-            <li>
-                <strong><?= t('My default project:') ?> </strong>
-                <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? Helper\escape($projects[$user['default_project_id']]) : t('None') ?>,
-                <a href="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>"><?= t('edit') ?></a>
-            </li>
-        </ul>
+    <section>
+        <h3 id="notifications"><?= t('Email notifications') ?></h3>
+        <form method="post" action="?controller=config&amp;action=notifications" autocomplete="off">
+
+            <?= Helper\form_csrf() ?>
+
+            <?= Helper\form_checkbox('notifications_enabled', t('Enable email notifications'), '1', $notifications['notifications_enabled'] == 1) ?><br/>
+
+            <p><?= t('I want to receive notifications only for those projects:') ?><br/><br/></p>
+
+            <div class="form-checkbox-group">
+            <?php foreach ($user_projects as $project_id => $project_name): ?>
+                <?= Helper\form_checkbox('projects['.$project_id.']', $project_name, '1', isset($notifications['project_'.$project_id])) ?>
+            <?php endforeach ?>
+            </div>
+            <div class="form-actions">
+                <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+            </div>
+        </form>
     </section>
 
     <?php if ($user['is_admin']): ?>

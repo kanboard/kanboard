@@ -379,6 +379,12 @@ class Table
                 $sql = sprintf('%s = ?', $this->db->escapeIdentifier($column));
                 break;
 
+            case 'neq':
+            case 'notequal':
+            case 'notequals':
+                $sql = sprintf('%s != ?', $this->db->escapeIdentifier($column));
+                break;
+
             case 'gt':
             case 'greaterthan':
                 $sql = sprintf('%s > ?', $this->db->escapeIdentifier($column));

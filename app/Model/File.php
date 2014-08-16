@@ -25,6 +25,13 @@ class File extends Base
     const BASE_PATH = 'data/files/';
 
     /**
+     * Events
+     *
+     * @var string
+     */
+    const EVENT_CREATE = 'file.create';
+
+    /**
      * Get a file by the id
      *
      * @access public
@@ -82,6 +89,8 @@ class File extends Base
      */
     public function create($task_id, $name, $path, $is_image)
     {
+        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id, 'name' => $name));
+
         return $this->db->table(self::TABLE)->save(array(
             'task_id' => $task_id,
             'name' => $name,

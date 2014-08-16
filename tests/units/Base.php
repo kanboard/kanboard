@@ -9,6 +9,8 @@ require_once __DIR__.'/../../app/Core/Security.php';
 require_once __DIR__.'/../../vendor/PicoDb/Database.php';
 require_once __DIR__.'/../../app/Schema/Sqlite.php';
 
+require_once __DIR__.'/../../app/Core/Registry.php';
+require_once __DIR__.'/../../app/Core/Tool.php';
 require_once __DIR__.'/../../app/Core/Listener.php';
 require_once __DIR__.'/../../app/Core/Event.php';
 require_once __DIR__.'/../../app/Core/Translator.php';
@@ -36,8 +38,9 @@ abstract class Base extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->db = $this->getDbConnection();
-        $this->event = new \Core\Event;
+        $this->registry = new \Core\Registry;
+        $this->registry->db = $this->getDbConnection();
+        $this->registry->event = new \Core\Event;
     }
 
     public function getDbConnection()

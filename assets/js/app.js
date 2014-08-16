@@ -77,7 +77,8 @@ Kanboard.Board = (function() {
             connectWith: ".column",
             placeholder: "draggable-placeholder",
             stop: function(event, ui) {
-                board_save();
+                var task_id = parseInt(ui.item[0].getAttribute("data-task-id"));
+                board_save(task_id);
             }
         });
 
@@ -112,7 +113,7 @@ Kanboard.Board = (function() {
     }
 
     // Save and refresh the board
-    function board_save()
+    function board_save(selected_task_id)
     {
         var data = [];
         var boardSelector = $("#board");
@@ -135,7 +136,7 @@ Kanboard.Board = (function() {
         $.ajax({
             cache: false,
             url: "?controller=board&action=save&project_id=" + projectId,
-            data: {"positions": data, "csrf_token": boardSelector.attr("data-csrf-token")},
+            data: {"positions": data, "csrf_token": boardSelector.attr("data-csrf-token"), "selected_task_id": selected_task_id},
             type: "POST",
             success: function(data) {
                 $("#board").remove();

@@ -224,25 +224,25 @@ class Action extends Base
         switch ($name) {
             case 'TaskClose':
                 $className = '\Action\TaskClose';
-                return new $className($project_id, new Task($this->db, $this->event));
+                return new $className($project_id, new Task($this->registry));
             case 'TaskAssignCurrentUser':
                 $className = '\Action\TaskAssignCurrentUser';
-                return new $className($project_id, new Task($this->db, $this->event), new Acl($this->db, $this->event));
+                return new $className($project_id, new Task($this->registry), new Acl($this->registry));
             case 'TaskAssignSpecificUser':
                 $className = '\Action\TaskAssignSpecificUser';
-                return new $className($project_id, new Task($this->db, $this->event));
+                return new $className($project_id, new Task($this->registry));
             case 'TaskDuplicateAnotherProject':
                 $className = '\Action\TaskDuplicateAnotherProject';
-                return new $className($project_id, new Task($this->db, $this->event));
+                return new $className($project_id, new Task($this->registry));
             case 'TaskAssignColorUser':
                 $className = '\Action\TaskAssignColorUser';
-                return new $className($project_id, new Task($this->db, $this->event));
+                return new $className($project_id, new Task($this->registry));
             case 'TaskAssignColorCategory':
                 $className = '\Action\TaskAssignColorCategory';
-                return new $className($project_id, new Task($this->db, $this->event));
+                return new $className($project_id, new Task($this->registry));
             case 'TaskAssignCategoryColor':
                 $className = '\Action\TaskAssignCategoryColor';
-                return new $className($project_id, new Task($this->db, $this->event));
+                return new $className($project_id, new Task($this->registry));
             default:
                 throw new LogicException('Action not found: '.$name);
         }

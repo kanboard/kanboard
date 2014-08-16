@@ -17,6 +17,8 @@ require __DIR__.'/../../vendor/SimpleValidator/Validators/Email.php';
 require __DIR__.'/../../vendor/SimpleValidator/Validators/Numeric.php';
 
 use Core\Event;
+use Core\Tool;
+use Core\Registry;
 use PicoDb\Database;
 
 /**
@@ -24,6 +26,21 @@ use PicoDb\Database;
  *
  * @package  model
  * @author   Frederic Guillot
+ *
+ * @property \Model\Acl                $acl
+ * @property \Model\Action             $action
+ * @property \Model\Board              $board
+ * @property \Model\Category           $category
+ * @property \Model\Comment            $comment
+ * @property \Model\Config             $config
+ * @property \Model\File               $file
+ * @property \Model\LastLogin          $lastLogin
+ * @property \Model\Ldap               $ldap
+ * @property \Model\Notification       $notification
+ * @property \Model\Project            $project
+ * @property \Model\SubTask            $subTask
+ * @property \Model\Task               $task
+ * @property \Model\User               $user
  */
 abstract class Base
 {
@@ -44,15 +61,35 @@ abstract class Base
     protected $event;
 
     /**
+     * Registry instance
+     *
+     * @access protected
+     * @var \Core\Registry
+     */
+    protected $registry;
+
+    /**
      * Constructor
      *
      * @access public
-     * @param  \PicoDb\Database  $db     Database instance
-     * @param  \Core\Event       $event  Event dispatcher instance
+     * @param  \Core\Registry  $registry  Registry instance
      */
-    public function __construct(Database $db, Event $event)
+    public function __construct(Registry $registry)
     {
-        $this->db = $db;
-        $this->event = $event;
+        $this->registry = $registry;
+        $this->db = $this->registry->shared('db');
+        $this->event = $this->registry->shared('event');
+    }
+
+    /**
+     * Load automatically models
+     *
+     * @access public
+     * @param  string $name Model name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return Tool::loadModel($this->registry, $name);
     }
 }

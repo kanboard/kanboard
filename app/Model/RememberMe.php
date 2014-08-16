@@ -92,11 +92,8 @@ class RememberMe extends Base
                 );
 
                 // Create the session
-                $user = new User($this->db, $this->event);
-                $acl = new Acl($this->db, $this->event);
-
-                $user->updateSession($user->getById($record['user_id']));
-                $acl->isRememberMe(true);
+                $this->user->updateSession($this->user->getById($record['user_id']));
+                $this->acl->isRememberMe(true);
 
                 return true;
             }

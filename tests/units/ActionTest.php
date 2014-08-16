@@ -12,9 +12,9 @@ class ActionTest extends Base
 {
     public function testFetchActions()
     {
-        $action = new Action($this->db, $this->event);
-        $board = new Board($this->db, $this->event);
-        $project = new Project($this->db, $this->event);
+        $action = new Action($this->registry);
+        $board = new Board($this->registry);
+        $project = new Project($this->registry);
 
         $this->assertEquals(1, $project->create(array('name' => 'unit_test')));
 
@@ -48,10 +48,10 @@ class ActionTest extends Base
 
     public function testEventMoveColumn()
     {
-        $task = new Task($this->db, $this->event);
-        $board = new Board($this->db, $this->event);
-        $project = new Project($this->db, $this->event);
-        $action = new Action($this->db, $this->event);
+        $task = new Task($this->registry);
+        $board = new Board($this->registry);
+        $project = new Project($this->registry);
+        $action = new Action($this->registry);
 
         // We create a project
         $this->assertEquals(1, $project->create(array('name' => 'unit_test')));
@@ -86,8 +86,8 @@ class ActionTest extends Base
         // We move our task
         $task->move(1, 4, 1);
 
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_UPDATE));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_UPDATE));
 
         // Our task should be closed
         $t1 = $task->getById(1);
@@ -97,10 +97,10 @@ class ActionTest extends Base
 
     public function testEventMovePosition()
     {
-        $task = new Task($this->db, $this->event);
-        $board = new Board($this->db, $this->event);
-        $project = new Project($this->db, $this->event);
-        $action = new Action($this->db, $this->event);
+        $task = new Task($this->registry);
+        $board = new Board($this->registry);
+        $project = new Project($this->registry);
+        $action = new Action($this->registry);
 
         // We create a project
         $this->assertEquals(1, $project->create(array('name' => 'unit_test')));
@@ -138,7 +138,7 @@ class ActionTest extends Base
         // We bind events
         $action->attachEvents();
 
-        $this->assertTrue($this->event->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskAssignColorCategory'));
+        $this->assertTrue($this->registry->event->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskAssignColorCategory'));
 
         // Our task should have the color red and position=0
         $t1 = $task->getById(1);
@@ -155,7 +155,7 @@ class ActionTest extends Base
         $task->move(1, 1, 1); // task #1 to position 1
         $task->move(2, 1, 0); // task #2 to position 0
 
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
         // Both tasks should be green
         $t1 = $task->getById(1);
@@ -171,10 +171,10 @@ class ActionTest extends Base
 
     public function testExecuteMultipleActions()
     {
-        $task = new Task($this->db, $this->event);
-        $board = new Board($this->db, $this->event);
-        $project = new Project($this->db, $this->event);
-        $action = new Action($this->db, $this->event);
+        $task = new Task($this->registry);
+        $board = new Board($this->registry);
+        $project = new Project($this->registry);
+        $action = new Action($this->registry);
 
         // We create 2 projects
         $this->assertEquals(1, $project->create(array('name' => 'unit_test1')));
@@ -213,8 +213,8 @@ class ActionTest extends Base
         $action->attachEvents();
 
         // Events should be attached
-        $this->assertTrue($this->event->hasListener(Task::EVENT_CLOSE, 'Action\TaskDuplicateAnotherProject'));
-        $this->assertTrue($this->event->hasListener(Task::EVENT_MOVE_COLUMN, 'Action\TaskClose'));
+        $this->assertTrue($this->registry->event->hasListener(Task::EVENT_CLOSE, 'Action\TaskDuplicateAnotherProject'));
+        $this->assertTrue($this->registry->event->hasListener(Task::EVENT_MOVE_COLUMN, 'Action\TaskClose'));
 
         // Our task should be open, linked to the first project and in the first column
         $t1 = $task->getById(1);
@@ -225,8 +225,8 @@ class ActionTest extends Base
         // We move our task
         $task->move(1, 4, 1);
 
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CLOSE));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CLOSE));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // Our task should be closed
         $t1 = $task->getById(1);

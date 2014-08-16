@@ -42,6 +42,14 @@ class SubTask extends Base
     const STATUS_TODO = 0;
 
     /**
+     * Events
+     *
+     * @var string
+     */
+    const EVENT_UPDATE = 'subtask.update';
+    const EVENT_CREATE = 'subtask.create';
+
+    /**
      * Get available status
      *
      * @access public
@@ -88,10 +96,27 @@ class SubTask extends Base
      *
      * @access public
      * @param  integer   $subtask_id    Subtask id
+     * @param  bool      $more          Fetch more data
      * @return array
      */
-    public function getById($subtask_id)
+    public function getById($subtask_id, $more = false)
     {
+        if ($more) {
+
+            $subtask = $this->db->table(self::TABLE)
+                             ->eq(self::TABLE.'.id', $subtask_id)
+                             ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
+                             ->join(User::TABLE, 'id', 'user_id')
+                             ->findOne();
+
+            if ($subtask) {
+                $status = $this->getStatusList();
+                $subtask['status_name'] = $status[$subtask['status']];
+            }
+
+            return $subtask;
+        }
+
         return $this->db->table(self::TABLE)->eq('id', $subtask_id)->findOne();
     }
 
@@ -116,7 +141,14 @@ class SubTask extends Base
             $values['time_spent'] = 0;
         }
 
-        return $this->db->table(self::TABLE)->save($values);
+        $result = $this->db->table(self::TABLE)->save($values);
+
+        if ($result) {
+            $values['id'] = $this->db->getConnection()->getLastId();
+            $this->event->trigger(self::EVENT_CREATE, $values);
+        }
+
+        return $result;
     }
 
     /**
@@ -136,7 +168,13 @@ class SubTask extends Base
             $values['time_spent'] = 0;
         }
 
-        return $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+
+        if ($result) {
+            $this->event->trigger(self::EVENT_UPDATE, $values);
+        }
+
+        return $result;
     }
 
     /**

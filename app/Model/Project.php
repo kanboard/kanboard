@@ -55,10 +55,9 @@ class Project extends Base
     public function getUsersList($project_id, $prepend_unassigned = true, $prepend_everybody = false)
     {
         $allowed_users = $this->getAllowedUsers($project_id);
-        $userModel = new User($this->db, $this->event);
 
         if (empty($allowed_users)) {
-            $allowed_users = $userModel->getList();
+            $allowed_users = $this->user->getList();
         }
 
         if ($prepend_unassigned) {
@@ -103,8 +102,7 @@ class Project extends Base
             'not_allowed' => array(),
         );
 
-        $userModel = new User($this->db, $this->event);
-        $all_users = $userModel->getList();
+        $all_users = $this->user->getList();
 
         $users['allowed'] = $this->getAllowedUsers($project_id);
 
@@ -253,27 +251,23 @@ class Project extends Base
                          ->asc('name')
                          ->findAll();
 
-        $boardModel = new Board($this->db, $this->event);
-        $taskModel = new Task($this->db, $this->event);
-        $aclModel = new Acl($this->db, $this->event);
-
         foreach ($projects as $pkey => &$project) {
 
-            if ($check_permissions && ! $this->isUserAllowed($project['id'], $aclModel->getUserId())) {
+            if ($check_permissions && ! $this->isUserAllowed($project['id'], $this->acl->getUserId())) {
                 unset($projects[$pkey]);
             }
             else {
 
-                $columns = $boardModel->getcolumns($project['id']);
+                $columns = $this->board->getcolumns($project['id']);
                 $project['nb_active_tasks'] = 0;
 
                 foreach ($columns as &$column) {
-                    $column['nb_active_tasks'] = $taskModel->countByColumnId($project['id'], $column['id']);
+                    $column['nb_active_tasks'] = $this->task->countByColumnId($project['id'], $column['id']);
                     $project['nb_active_tasks'] += $column['nb_active_tasks'];
                 }
 
                 $project['columns'] = $columns;
-                $project['nb_tasks'] = $taskModel->countByProjectId($project['id']);
+                $project['nb_tasks'] = $this->task->countByProjectId($project['id']);
                 $project['nb_inactive_tasks'] = $project['nb_tasks'] - $project['nb_active_tasks'];
             }
         }
@@ -416,9 +410,8 @@ class Project extends Base
      */
     public function copyBoardFromAnotherProject($project_from, $project_to)
     {
-        $boardModel = new Board($this->db, $this->event);
         $columns = $this->db->table(Board::TABLE)->eq('project_id', $project_from)->asc('position')->findAllByColumn('title');
-        return $boardModel->create($project_to, $columns);
+        return $this->board->create($project_to, $columns);
     }
 
     /**
@@ -431,8 +424,7 @@ class Project extends Base
      */
     public function copyCategoriesFromAnotherProject($project_from, $project_to)
     {
-        $categoryModel = new Category($this->db, $this->event);
-        $categoriesTemplate = $categoryModel->getAll($project_from);
+        $categoriesTemplate = $this->category->getAll($project_from);
 
         foreach ($categoriesTemplate as $category) {
 
@@ -478,8 +470,7 @@ class Project extends Base
      */
     public function copyActionsFromAnotherProject($project_from, $project_to)
     {
-        $actionModel = new Action($this->db, $this->event);
-        $actionTemplate = $actionModel->getAllByProject($project_from);
+        $actionTemplate = $this->action->getAllByProject($project_from);
 
         foreach ($actionTemplate as $action) {
 
@@ -522,13 +513,11 @@ class Project extends Base
             case 'project_id':
                 return $project_to;
             case 'category_id':
-                $categoryModel = new Category($this->db, $this->event);
-                $categoryTemplate = $categoryModel->getById($param['value']);
+                $categoryTemplate = $this->category->getById($param['value']);
                 $categoryFromNewProject = $this->db->table(Category::TABLE)->eq('project_id', $project_to)->eq('name', $categoryTemplate['name'])->findOne();
                 return $categoryFromNewProject['id'];
             case 'column_id':
-                $boardModel = new Board($this->db, $this->event);
-                $boardTemplate = $boardModel->getColumn($param['value']);
+                $boardTemplate = $this->board->getColumn($param['value']);
                 $boardFromNewProject = $this->db->table(Board::TABLE)->eq('project_id', $project_to)->eq('title', $boardTemplate['title'])->findOne();
                 return $boardFromNewProject['id'];
             default:
@@ -603,8 +592,7 @@ class Project extends Base
 
         $project_id = $this->db->getConnection()->getLastId();
 
-        $boardModel = new Board($this->db, $this->event);
-        $boardModel->create($project_id, array(
+        $this->board->create($project_id, array(
             t('Backlog'),
             t('Ready'),
             t('Work in progress'),

@@ -9,7 +9,7 @@ class ActionTaskCloseTest extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskClose(3, new Task($this->db, $this->event));
+        $action = new Action\TaskClose(3, new Task($this->registry));
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -24,7 +24,7 @@ class ActionTaskCloseTest extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskClose(3, new Task($this->db, $this->event));
+        $action = new Action\TaskClose(3, new Task($this->registry));
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -38,12 +38,12 @@ class ActionTaskCloseTest extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskClose(1, new Task($this->db, $this->event));
+        $action = new Action\TaskClose(1, new Task($this->registry));
         $action->setParam('column_id', 2);
 
         // We create a task in the first column
-        $t = new Task($this->db, $this->event);
-        $p = new Project($this->db, $this->event);
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
 

@@ -33,7 +33,7 @@ class Acl extends Base
         'board' => array('index', 'show', 'assign', 'assigntask', 'save', 'check'),
         'project' => array('tasks', 'index', 'forbidden', 'search'),
         'user' => array('index', 'edit', 'update', 'forbidden', 'logout', 'index', 'unlinkgoogle', 'unlinkgithub'),
-        'config' => array('index', 'removeremembermetoken'),
+        'config' => array('index', 'removeremembermetoken', 'notifications'),
         'comment' => array('create', 'save', 'confirm', 'remove', 'update', 'edit', 'forbidden'),
         'file' => array('create', 'save', 'download', 'confirm', 'remove', 'open', 'image'),
         'subtask' => array('create', 'save', 'edit', 'update', 'confirm', 'remove'),

@@ -4,7 +4,22 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 22;
+const VERSION = 23;
+
+function version_23($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN notifications_enabled INTEGER DEFAULT '0'");
+
+    $pdo->exec("
+        CREATE TABLE user_has_notifications (
+            user_id INTEGER,
+            project_id INTEGER,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            UNIQUE(project_id, user_id)
+        );
+    ");
+}
 
 function version_22($pdo)
 {

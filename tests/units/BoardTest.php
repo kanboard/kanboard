@@ -9,8 +9,8 @@ class BoardTest extends Base
 {
     public function testMoveColumns()
     {
-        $p = new Project($this->db, $this->event);
-        $b = new Board($this->db, $this->event);
+        $p = new Project($this->registry);
+        $b = new Board($this->registry);
 
         // We create 2 projects
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));

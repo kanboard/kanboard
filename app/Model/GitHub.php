@@ -26,22 +26,19 @@ class GitHub extends Base
      */
     public function authenticate($github_id)
     {
-        $userModel = new User($this->db, $this->event);
-
-        $user = $userModel->getByGitHubId($github_id);
+        $user = $this->user->getByGitHubId($github_id);
 
         if ($user) {
 
             // Create the user session
-            $userModel->updateSession($user);
+            $this->user->updateSession($user);
 
             // Update login history
-            $lastLogin = new LastLogin($this->db, $this->event);
-            $lastLogin->create(
+            $this->lastLogin->create(
                 LastLogin::AUTH_GITHUB,
                 $user['id'],
-                $userModel->getIpAddress(),
-                $userModel->getUserAgent()
+                $this->user->getIpAddress(),
+                $this->user->getUserAgent()
             );
 
             return true;
@@ -59,9 +56,7 @@ class GitHub extends Base
      */
     public function unlink($user_id)
     {
-        $userModel = new User($this->db, $this->event);
-
-        return $userModel->update(array(
+        return $this->user->update(array(
             'id' => $user_id,
             'github_id' => '',
         ));
@@ -78,9 +73,7 @@ class GitHub extends Base
      */
     public function updateUser($user_id, array $profile)
     {
-        $userModel = new User($this->db, $this->event);
-        
-        return $userModel->update(array(
+        return $this->user->update(array(
             'id' => $user_id,
             'github_id' => $profile['id'],
             'email' => $profile['email'],
@@ -141,7 +134,7 @@ class GitHub extends Base
         try {
             $gitHubService = $this->getService();
             $gitHubService->requestAccessToken($code);
-            
+
             return json_decode($gitHubService->request('user'), true);
         }
         catch (TokenResponseException $e) {
@@ -150,7 +143,7 @@ class GitHub extends Base
 
         return false;
     }
-    
+
     /**
      * Revokes this user's GitHub tokens for Kanboard
      *

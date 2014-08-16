@@ -3,6 +3,7 @@
 require __DIR__.'/app/common.php';
 require __DIR__.'/vendor/JsonRPC/Server.php';
 
+use Core\Translator;
 use JsonRPC\Server;
 use Model\Project;
 use Model\Task;
@@ -14,21 +15,28 @@ use Model\SubTask;
 use Model\Board;
 use Model\Action;
 use Model\Webhook;
+use Model\Notification;
 
-$config = new Config($registry->shared('db'), $registry->shared('event'));
-$project = new Project($registry->shared('db'), $registry->shared('event'));
-$task = new Task($registry->shared('db'), $registry->shared('event'));
-$user = new User($registry->shared('db'), $registry->shared('event'));
-$category = new Category($registry->shared('db'), $registry->shared('event'));
-$comment = new Comment($registry->shared('db'), $registry->shared('event'));
-$subtask = new SubTask($registry->shared('db'), $registry->shared('event'));
-$board = new Board($registry->shared('db'), $registry->shared('event'));
-$action = new Action($registry->shared('db'), $registry->shared('event'));
-$webhook = new Webhook($registry->shared('db'), $registry->shared('event'));
+$config = new Config($registry);
+$project = new Project($registry);
+$task = new Task($registry);
+$user = new User($registry);
+$category = new Category($registry);
+$comment = new Comment($registry);
+$subtask = new SubTask($registry);
+$board = new Board($registry);
+$action = new Action($registry);
+$webhook = new Webhook($registry);
+$notification = new Notification($registry);
 
 $action->attachEvents();
 $project->attachEvents();
 $webhook->attachEvents();
+$notification->attachEvents();
+
+// Load translations
+$language = $config->get('language', 'en_US');
+if ($language !== 'en_US') Translator::load($language);
 
 $server = new Server;
 $server->authentication(array('jsonrpc' => $config->get('api_token')));

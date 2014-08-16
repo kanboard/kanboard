@@ -10,9 +10,9 @@ class TaskTest extends Base
 {
     public function testExport()
     {
-        $t = new Task($this->db, $this->event);
-        $p = new Project($this->db, $this->event);
-        $c = new Category($this->db, $this->event);
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+        $c = new Category($this->registry);
 
         $this->assertEquals(1, $p->create(array('name' => 'Export Project')));
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
@@ -45,8 +45,8 @@ class TaskTest extends Base
 
     public function testFilter()
     {
-        $t = new Task($this->db, $this->event);
-        $p = new Project($this->db, $this->event);
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $t->create(array('title' => 'test a', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1, 'description' => 'biloute')));
@@ -114,7 +114,7 @@ class TaskTest extends Base
 
     public function testDateFormat()
     {
-        $t = new Task($this->db, $this->event);
+        $t = new Task($this->registry);
 
         $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('2014-03-05', 'Y-m-d')));
         $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('2014_03_05', 'Y_m_d')));
@@ -133,8 +133,8 @@ class TaskTest extends Base
 
     public function testDuplicateTask()
     {
-        $t = new Task($this->db, $this->event);
-        $p = new Project($this->db, $this->event);
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
 
         // We create a task and a project
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
@@ -146,7 +146,7 @@ class TaskTest extends Base
 
         // We duplicate our task
         $this->assertEquals(2, $t->duplicate(1));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CREATE));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
         $task = $t->getById(2);
@@ -160,8 +160,8 @@ class TaskTest extends Base
 
     public function testDuplicateToAnotherProject()
     {
-        $t = new Task($this->db, $this->event);
-        $p = new Project($this->db, $this->event);
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
 
         // We create 2 projects
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
@@ -172,7 +172,7 @@ class TaskTest extends Base
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $t->duplicateToAnotherProject(1, 2));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CREATE));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
         $task = $t->getById(2);
@@ -185,39 +185,39 @@ class TaskTest extends Base
 
     public function testEvents()
     {
-        $t = new Task($this->db, $this->event);
-        $p = new Project($this->db, $this->event);
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
 
         // We create a project
         $this->assertEquals(1, $p->create(array('name' => 'test')));
 
         // We create task
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CREATE));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CREATE));
 
         // We update a task
         $this->assertTrue($t->update(array('title' => 'test2', 'id' => 1)));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_UPDATE));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CREATE_UPDATE));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_UPDATE));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CREATE_UPDATE));
 
         // We close our task
         $this->assertTrue($t->close(1));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_CLOSE));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CLOSE));
 
         // We open our task
         $this->assertTrue($t->open(1));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_OPEN));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_OPEN));
 
         // We change the column of our task
         $this->assertTrue($t->move(1, 2, 1));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // We change the position of our task
         $this->assertTrue($t->move(1, 2, 2));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
         // We change the column and the position of our task
         $this->assertTrue($t->move(1, 1, 3));
-        $this->assertTrue($this->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
     }
 }

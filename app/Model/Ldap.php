@@ -73,8 +73,7 @@ class Ldap extends Base
      */
     public function create($username, $name, $email)
     {
-        $userModel = new User($this->db, $this->event);
-        $user = $userModel->getByUsername($username);
+        $user = $this->user->getByUsername($username);
 
         // There is an existing user account
         if ($user) {
