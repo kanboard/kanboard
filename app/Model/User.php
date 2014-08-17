@@ -112,6 +112,41 @@ class User extends Base
     }
 
     /**
+     * Prepare values before an update or a create
+     *
+     * @access public
+     * @param  array    $values    Form values
+     */
+    public function prepare(array &$values)
+    {
+        if (isset($values['password'])) {
+
+            if (! empty($values['password'])) {
+                $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
+            }
+            else {
+                unset($values['password']);
+            }
+        }
+
+        if (isset($values['confirmation'])) {
+            unset($values['confirmation']);
+        }
+
+        if (isset($values['current_password'])) {
+            unset($values['current_password']);
+        }
+
+        if (isset($values['is_admin']) && empty($values['is_admin'])) {
+            $values['is_admin'] = 0;
+        }
+
+        if (isset($values['is_ldap_user']) && empty($values['is_ldap_user'])) {
+            $values['is_ldap_user'] = 0;
+        }
+    }
+
+    /**
      * Add a new user in the database
      *
      * @access public
@@ -120,22 +155,7 @@ class User extends Base
      */
     public function create(array $values)
     {
-        if (isset($values['confirmation'])) {
-            unset($values['confirmation']);
-        }
-
-        if (isset($values['password'])) {
-            $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
-        }
-
-        if (empty($values['is_admin'])) {
-            $values['is_admin'] = 0;
-        }
-
-        if (empty($values['is_ldap_user'])) {
-            $values['is_ldap_user'] = 0;
-        }
-
+        $this->prepare($values);
         return $this->db->table(self::TABLE)->save($values);
     }
 
@@ -148,31 +168,10 @@ class User extends Base
      */
     public function update(array $values)
     {
-        if (! empty($values['password'])) {
-            $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
-        }
-        else {
-            unset($values['password']);
-        }
-
-        if (isset($values['confirmation'])) {
-            unset($values['confirmation']);
-        }
-
-        if (isset($values['current_password'])) {
-            unset($values['current_password']);
-        }
-
-        if (empty($values['is_admin'])) {
-            $values['is_admin'] = 0;
-        }
-
-        if (empty($values['is_ldap_user'])) {
-            $values['is_ldap_user'] = 0;
-        }
-
+        $this->prepare($values);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
+        // If the user is connected refresh his session
         if (session_id() !== '' && $_SESSION['user']['id'] == $values['id']) {
             $this->updateSession();
         }
