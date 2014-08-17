@@ -77,8 +77,7 @@ Kanboard.Board = (function() {
             connectWith: ".column",
             placeholder: "draggable-placeholder",
             stop: function(event, ui) {
-                var task_id = parseInt(ui.item[0].getAttribute("data-task-id"));
-                board_save(task_id);
+                board_save(ui.item.attr('data-task-id'));
             }
         });
 

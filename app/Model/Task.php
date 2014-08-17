@@ -387,6 +387,7 @@ class Task extends Base
         // Prepare data
         $this->prepare($values);
         $values['date_creation'] = time();
+        $values['date_modification'] = $values['date_creation'];
         $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']);
 
         // Save task
@@ -426,8 +427,12 @@ class Task extends Base
         // Prepare data
         $this->prepare($values);
         $updated_task = $values;
-        $updated_task['date_modification'] = time();
         unset($updated_task['id']);
+
+        // We update the modification date only for the selected task to highlight recent moves
+        if ($trigger_events) {
+            $updated_task['date_modification'] = time();
+        }
 
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task);
 
