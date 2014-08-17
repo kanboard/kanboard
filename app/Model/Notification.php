@@ -2,6 +2,7 @@
 
 namespace Model;
 
+use Core\Translator;
 use Core\Template;
 use Event\TaskNotificationListener;
 use Event\CommentNotificationListener;
@@ -114,30 +115,46 @@ class Notification extends Base
      */
     public function getMailSubject($template, array $data)
     {
+        Translator::disableEscaping();
+
         switch ($template) {
             case 'notification_file_creation':
-                return t('[%s][New attachment] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][New attachment] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_comment_creation':
-                return t('[%s][New comment] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][New comment] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_comment_update':
-                return t('[%s][Comment updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][Comment updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_subtask_creation':
-                return t('[%s][New subtask] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][New subtask] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_subtask_update':
-                return t('[%s][Subtask updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][Subtask updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_task_creation':
-                return t('[%s][New task] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][New task] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_task_update':
-                return t('[%s][Task updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][Task updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_task_close':
-                return t('[%s][Task closed] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][Task closed] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_task_open':
-                return t('[%s][Task opened] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                $subject = t('[%s][Task opened] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
             case 'notification_task_due':
-                return t('[%s][Due tasks]', $data['project']);
+                $subject = t('[%s][Due tasks]', $data['project']);
+                break;
+            default:
+                $subject = t('[Kanboard] Notification');
         }
 
-        return t('[Kanboard] Notification');
+        Translator::enableEscaping();
+
+        return $subject;
     }
 
     /**

@@ -47,6 +47,17 @@ class Translator
     }
 
     /**
+     * Enable HTML escaping for translations
+     *
+     * @static
+     * @access public
+     */
+    public static function enableEscaping()
+    {
+        self::$enable_escaping = true;
+    }
+
+    /**
      * Get a translation
      *
      * $translator->translate('I have %d kids', 5);
