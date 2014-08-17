@@ -1,14 +1,6 @@
 <?php
 
 return array(
-    'English' => 'Englanti',
-    'French' => 'Ranska',
-    'Polish' => 'Puola',
-    'Portuguese (Brazilian)' => 'Portugali (Brasilia)',
-    'Spanish' => 'Espanja',
-    'German' => 'Saksa',
-    'Chinese (Simplified)' => 'Kiina (yksinkertaistettu)',
-    'Swedish' => 'Ruotsi',
     'None' => 'Ei mikään',
     'edit' => 'muokkaa',
     'Edit' => 'Muokkaa',

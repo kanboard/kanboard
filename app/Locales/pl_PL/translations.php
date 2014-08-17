@@ -1,13 +1,6 @@
 <?php
 
 return array(
-    'English' => 'angielski',
-    'French' => 'francuski',
-    'Polish' => 'polski',
-    'Portuguese (Brazilian)' => 'Portugalski (brazylijski)',
-    'Spanish' => 'Hiszpański',
-    // 'German' => '',
-    // 'Chinese (Simplified)' => '',
     'None' => 'Brak',
     'edit' => 'edytuj',
     'Edit' => 'Edytuj',

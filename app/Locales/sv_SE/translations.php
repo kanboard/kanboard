@@ -1,13 +1,6 @@
 <?php
 
 return array(
-    'English' => 'Engelska',
-    'French' => 'Franska',
-    'Polish' => 'Polska',
-    'Portuguese (Brazilian)' => 'Portugisiska (Brasilien)',
-    'Spanish' => 'Spanska',
-    'German' => 'Tyska',
-    'Swedish' => 'Svenska',
     'None' => 'Ingen',
     'edit' => 'redigera',
     'Edit' => 'Redigera',

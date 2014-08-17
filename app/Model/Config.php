@@ -43,15 +43,15 @@ class Config extends Base
     public function getLanguages()
     {
         $languages = array(
-            'de_DE' => t('German'),
-            'en_US' => t('English'),
-            'es_ES' => t('Spanish'),
-            'fr_FR' => t('French'),
-            'pl_PL' => t('Polish'),
-            'pt_BR' => t('Portuguese (Brazilian)'),
-            'sv_SE' => t('Swedish'),
-            'zh_CN' => t('Chinese (Simplified)'),
-            'fi_FI' => t('Finnish'),
+            'de_DE' => 'Deutsch',
+            'en_US' => 'English',
+            'es_ES' => 'Español',
+            'fr_FR' => 'Français',
+            'pl_PL' => 'Polski',
+            'pt_BR' => 'Português (Brasil)',
+            'sv_SE' => 'Svenska',
+            'zh_CN' => '中文(简体)',
+            'fi_FI' => 'Suomi',
         );
 
         asort($languages);
