@@ -91,6 +91,7 @@ defined('MAIL_SMTP_HOSTNAME') or define('MAIL_SMTP_HOSTNAME', '');
 defined('MAIL_SMTP_PORT') or define('MAIL_SMTP_PORT', 25);
 defined('MAIL_SMTP_USERNAME') or define('MAIL_SMTP_USERNAME', '');
 defined('MAIL_SMTP_PASSWORD') or define('MAIL_SMTP_PASSWORD', '');
+defined('MAIL_SMTP_ENCRYPTION') or define('MAIL_SMTP_ENCRYPTION', null);
 defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 
 $loader = new Loader;
@@ -166,6 +167,7 @@ $registry->mailer = function() use ($registry) {
             $transport = Swift_SmtpTransport::newInstance(MAIL_SMTP_HOSTNAME, MAIL_SMTP_PORT);
             $transport->setUsername(MAIL_SMTP_USERNAME);
             $transport->setPassword(MAIL_SMTP_PASSWORD);
+            $transport->setEncryption(MAIL_SMTP_ENCRYPTION);
             break;
         case 'sendmail':
             $transport = Swift_SendmailTransport::newInstance(MAIL_SENDMAIL_COMMAND);
