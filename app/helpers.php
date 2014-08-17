@@ -37,7 +37,7 @@ function is_admin()
 
 function get_username()
 {
-    return $_SESSION['user']['username'];
+    return $_SESSION['user']['name'] ?: $_SESSION['user']['username'];
 }
 
 function parse($text)

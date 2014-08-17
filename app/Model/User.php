@@ -98,7 +98,17 @@ class User extends Base
      */
     public function getList()
     {
-        return $this->db->table(self::TABLE)->asc('username')->listing('id', 'username');
+        $users = $this->db->table(self::TABLE)->columns('id', 'username', 'name')->findAll();
+
+        $result = array();
+
+        foreach ($users as $user) {
+            $result[$user['id']] = $user['name'] ?: $user['username'];
+        }
+
+        asort($result);
+
+        return $result;
     }
 
     /**

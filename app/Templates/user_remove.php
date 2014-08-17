@@ -4,7 +4,7 @@
     </div>
 
     <div class="confirm">
-        <p class="alert alert-info"><?= t('Do you really want to remove this user: "%s"?', $user['username']) ?></p>
+        <p class="alert alert-info"><?= t('Do you really want to remove this user: "%s"?', $user['name'] ?: $user['username']) ?></p>
 
         <div class="form-actions">
             <a href="?controller=user&amp;action=remove&amp;user_id=<?= $user['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>

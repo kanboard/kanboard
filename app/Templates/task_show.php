@@ -24,13 +24,13 @@
         <?php endif ?>
         <?php if ($task['creator_username']): ?>
         <li>
-            <?= t('Created by %s', $task['creator_username']) ?>
+            <?= t('Created by %s', $task['creator_name'] ?: $task['creator_username']) ?>
         </li>
         <?php endif ?>
         <li>
             <strong>
             <?php if ($task['assignee_username']): ?>
-                <?= t('Assigned to %s', $task['assignee_username']) ?>
+                <?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?>
             <?php else: ?>
                 <?= t('There is nobody assigned') ?>
             <?php endif ?>

@@ -24,7 +24,7 @@ $total_remaining = 0;
         <td><?= Helper\escape($subtask['status_name']) ?></td>
         <td>
             <?php if (! empty($subtask['username'])): ?>
-                <?= Helper\escape($subtask['username']) ?>
+                <?= Helper\escape($subtask['name'] ?: $subtask['username']) ?>
             <?php endif ?>
         </td>
         <td>

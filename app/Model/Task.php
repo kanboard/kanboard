@@ -125,7 +125,9 @@ class Task extends Base
                 projects.name AS project_name,
                 columns.title AS column_title,
                 users.username AS assignee_username,
-                creators.username AS creator_username
+                users.name AS assignee_name,
+                creators.username AS creator_username,
+                creators.name AS creator_name
                 FROM tasks
                 LEFT JOIN users ON users.id = tasks.owner_id
                 LEFT JOIN users AS creators ON creators.id = tasks.creator_id
@@ -209,7 +211,8 @@ class Task extends Base
                         'tasks.is_active',
                         'tasks.score',
                         'tasks.category_id',
-                        'users.username'
+                        'users.username AS assignee_username',
+                        'users.name AS assignee_name'
                     )
                     ->join(User::TABLE, 'id', 'owner_id');
 

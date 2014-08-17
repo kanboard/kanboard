@@ -25,8 +25,8 @@
             <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>
         </td>
         <td>
-            <?php if ($task['username']): ?>
-                <?= Helper\escape($task['username']) ?>
+            <?php if ($task['assignee_username']): ?>
+                <?= Helper\escape($task['assignee_name'] ?: $task['assignee_username']) ?>
             <?php else: ?>
                 <?= t('Unassigned') ?>
             <?php endif ?>

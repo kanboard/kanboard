@@ -4,7 +4,7 @@
 
     <span class="task-board-user">
     <?php if (! empty($task['owner_id'])): ?>
-        <?= t('Assigned to %s', $task['username']) ?>
+        <?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?>
     <?php else: ?>
         <span class="task-board-nobody"><?= t('Nobody assigned') ?></span>
     <?php endif ?>
@@ -24,7 +24,7 @@
 
     <span class="task-board-user">
     <?php if (! empty($task['owner_id'])): ?>
-        <a class="assignee-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>"><?= t('Assigned to %s', $task['username']) ?></a>
+        <a class="assignee-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>"><?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?></a>
     <?php else: ?>
         <a class="assignee-popover" href="?controller=board&amp;action=assign&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>" class="task-board-nobody"><?= t('Nobody assigned') ?></a>
     <?php endif ?>

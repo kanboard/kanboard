@@ -80,12 +80,23 @@ class Project extends Base
      */
     public function getAllowedUsers($project_id)
     {
-        return $this->db
+        $users = $this->db
             ->table(self::TABLE_USERS)
             ->join(User::TABLE, 'id', 'user_id')
             ->eq('project_id', $project_id)
             ->asc('username')
-            ->listing('user_id', 'username');
+            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
+            ->findAll();
+
+        $result = array();
+
+        foreach ($users as $user) {
+            $result[$user['id']] = $user['name'] ?: $user['username'];
+        }
+
+        asort($result);
+
+        return $result;
     }
 
     /**
