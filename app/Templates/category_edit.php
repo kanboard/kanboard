@@ -13,7 +13,7 @@
         <?= Helper\form_hidden('project_id', $values) ?>
 
         <?= Helper\form_label(t('Category Name'), 'name') ?>
-        <?= Helper\form_text('name', $values, $errors, array('required')) ?>
+        <?= Helper\form_text('name', $values, $errors, array('autofocus required')) ?>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
