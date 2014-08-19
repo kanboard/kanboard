@@ -79,6 +79,7 @@ Documentation
 
 #### Developers and sysadmins
 
+- [Board configuration](docs/board-configuration.markdown)
 - [Email configuration](docs/email-configuration.markdown)
 - [Command line interface](docs/cli.markdown)
 - [Json-RPC API](docs/api-json-rpc.markdown)
