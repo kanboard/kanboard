@@ -85,6 +85,11 @@ Documentation
 - [Webhooks](docs/webhooks.markdown)
 - [How to use Kanboard with Vagrant](docs/vagrant.markdown)
 
+### Contributors
+
+- [Translations](docs/translations.markdown)
+- [Coding standards](docs/coding-standards.markdown)
+
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.
 
