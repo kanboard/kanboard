@@ -46,10 +46,14 @@ define('LDAP_PORT', 389);
 // By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
 define('LDAP_SSL_VERIFY', true);
 
-// LDAP username to connect with. NULL for anonymous bind (by default).
+// LDAP bind type: "anonymous", "user" (use the given user/password from the form) and "proxy" (a specific user to browse the LDAP directory)
+define('LDAP_BIND_TYPE', 'anonymous');
+
+// LDAP username to connect with. null for anonymous bind (by default).
+// Or for user bind type, you can use a pattern like that %s@kanboard.local
 define('LDAP_USERNAME', null);
 
-// LDAP password to connect with. NULL for anonymous bind (by default).
+// LDAP password to connect with. null for anonymous bind (by default).
 define('LDAP_PASSWORD', null);
 
 // LDAP account base, i.e. root of all user account
@@ -68,9 +72,58 @@ define('LDAP_ACCOUNT_FULLNAME', 'displayname');
 define('LDAP_ACCOUNT_EMAIL', 'mail');
 ```
 
+### LDAP bind type
+
+There is 3 possible ways to browse the LDAP directory:
+
+#### Anonymous browsing
+
+```php
+define('LDAP_BIND_TYPE', 'anonymous');
+define('LDAP_USERNAME', null);
+define('LDAP_PASSWORD', null);
+```
+
+This is the default value but some LDAP servers don't allow that.
+
+#### Proxy user
+
+A specific user is used to browse the LDAP directory.
+By example, Novell eDirectory use that method.
+
+```php
+define('LDAP_BIND_TYPE', 'proxy');
+define('LDAP_USERNAME', 'my proxy user');
+define('LDAP_PASSWORD', 'my proxy password');
+```
+
+#### User credentials
+
+This method use the credentials provided by the end-user.
+By example, Microsoft Active Directory doesn't allow anonymous browsing by default and if you don't want to use a proxy user you can use this method.
+
+```php
+define('LDAP_BIND_TYPE', 'user');
+define('LDAP_USERNAME', '%s@mydomain.local');
+define('LDAP_PASSWORD', null);
+```
+
+Here, the `LDAP_USERNAME` is use to define a replacement pattern:
+
+```php
+define('LDAP_USERNAME', '%s@mydomain.local');
+
+// Another way to do the same:
+
+define('LDAP_USERNAME', 'MYDOMAIN\\%s');
+```
+
 ### Example for Microsoft Active Directory
 
 Let's say we have a domain `KANBOARD` (kanboard.local) and the primary controller is `myserver.kanboard.local`.
+Microsoft Active Directory doesn't allow anonymous binding by default.
+
+First example with a proxy user:
 
 ```php
 <?php
@@ -78,9 +131,33 @@ Let's say we have a domain `KANBOARD` (kanboard.local) and the primary controlle
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', true);
 
-// Set credentials for be allow to browse the LDAP directory
+// Credentials to be allowed to browse the LDAP directory
+define('LDAP_BIND_TYPE', 'proxy');
 define('LDAP_USERNAME', 'administrator@kanboard.local');
 define('LDAP_PASSWORD', 'my super secret password');
+
+// LDAP server hostname
+define('LDAP_SERVER', 'myserver.kanboard.local');
+
+// LDAP properties
+define('LDAP_ACCOUNT_BASE', 'CN=Users,DC=kanboard,DC=local');
+define('LDAP_USER_PATTERN', '(&(objectClass=user)(sAMAccountName=%s))');
+define('LDAP_ACCOUNT_FULLNAME', 'displayname');
+define('LDAP_ACCOUNT_EMAIL', 'mail');
+```
+
+Another way with no proxy user:
+
+```php
+<?php
+
+// Enable LDAP authentication (false by default)
+define('LDAP_AUTH', true);
+
+// Credentials to be allowed to browse the LDAP directory
+define('LDAP_BIND_TYPE', 'user');
+define('LDAP_USERNAME', '%s@kanboard.local'); // or 'KANBOARD\\%s'
+define('LDAP_PASSWORD', null);
 
 // LDAP server hostname
 define('LDAP_SERVER', 'myserver.kanboard.local');
@@ -95,6 +172,8 @@ define('LDAP_ACCOUNT_EMAIL', 'mail');
 ### Example for OpenLDAP
 
 Here, our LDAP server is `myserver.example.com` and all users are stored in the hierarchy `ou=People,dc=example,dc=com`.
+
+For this example with use the anonymous binding.
 
 ```php
 <?php

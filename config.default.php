@@ -55,10 +55,14 @@ define('LDAP_PORT', 389);
 // By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
 define('LDAP_SSL_VERIFY', true);
 
-// LDAP username to connect with. NULL for anonymous bind (by default).
+// LDAP bind type: "anonymous", "user" (use the given user/password from the form) and "proxy" (a specific user to browse the LDAP directory)
+define('LDAP_BIND_TYPE', 'anonymous');
+
+// LDAP username to connect with. null for anonymous bind (by default).
+// Or for user bind type, you can use a pattern: %s@kanboard.local
 define('LDAP_USERNAME', null);
 
-// LDAP password to connect with. NULL for anonymous bind (by default).
+// LDAP password to connect with. null for anonymous bind (by default).
 define('LDAP_PASSWORD', null);
 
 // LDAP account base, i.e. root of all user account

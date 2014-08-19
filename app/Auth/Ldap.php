@@ -96,8 +96,21 @@ class Ldap extends Base
         ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
 
-        if (! @ldap_bind($ldap, LDAP_USERNAME, LDAP_PASSWORD)) {
-            die('Unable to bind to the LDAP server: "'.LDAP_SERVER.'"');
+        if (LDAP_BIND_TYPE === 'user') {
+            $ldap_username = sprintf(LDAP_USERNAME, $username);
+            $ldap_password = $password;
+        }
+        else if (LDAP_BIND_TYPE === 'proxy') {
+            $ldap_username = LDAP_USERNAME;
+            $ldap_password = LDAP_PASSWORD;
+        }
+        else {
+            $ldap_username = null;
+            $ldap_password = null;
+        }
+
+        if (! @ldap_bind($ldap, $ldap_username, $ldap_password)) {
+            return false;
         }
 
         $sr = @ldap_search($ldap, LDAP_ACCOUNT_BASE, sprintf(LDAP_USER_PATTERN, $username), array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL));
