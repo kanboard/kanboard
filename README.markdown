@@ -31,7 +31,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English, French, Brazilian Portuguese, Spanish, German, Polish, Swedish, Finnish, Chinese...
+- Translations in English, French, Brazilian Portuguese, Spanish, German, Polish, Swedish, Finnish, Italian, Chinese...
 
 Known bugs and feature requests
 -------------------------------
@@ -118,6 +118,7 @@ Contributors:
 - Levlaz: https://github.com/levlaz
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
+- Mauro Mariño: https://github.com/moromarino
 - Maxime: https://github.com/EpocDotFr
 - Moraxy: https://github.com/moraxy
 - Nala Ginrut: https://github.com/NalaGinrut
