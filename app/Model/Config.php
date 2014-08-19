@@ -42,21 +42,19 @@ class Config extends Base
      */
     public function getLanguages()
     {
-        $languages = array(
+        // Sorted by value
+        return array(
             'de_DE' => 'Deutsch',
             'en_US' => 'English',
             'es_ES' => 'Español',
             'fr_FR' => 'Français',
+            'it_IT' => 'Italiano',
             'pl_PL' => 'Polski',
             'pt_BR' => 'Português (Brasil)',
+            'fi_FI' => 'Suomi',
             'sv_SE' => 'Svenska',
             'zh_CN' => '中文(简体)',
-            'fi_FI' => 'Suomi',
         );
-
-        asort($languages);
-
-        return $languages;
     }
 
     /**
