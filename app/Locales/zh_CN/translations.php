@@ -426,4 +426,5 @@ return array(
     // '[%s][Task opened] %s (#%d)' => '',
     // '[%s][Due tasks]' => '',
     // '[Kanboard] Notification' => '',
+    // 'view the task on Kanboard' => '',
 );

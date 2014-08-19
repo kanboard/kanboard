@@ -40,5 +40,4 @@
     <?= Helper\parse($task['description']) ?>
 <?php endif ?>
 
-<hr/>
-<p>Kanboard</p>
+<?= Helper\template('notification_footer', array('task' => $task)) ?>

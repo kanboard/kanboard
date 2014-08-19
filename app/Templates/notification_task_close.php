@@ -2,5 +2,4 @@
 
 <p><?= t('The task #%d have been closed.', $task['id']) ?></p>
 
-<hr/>
-<p>Kanboard</p>
+<?= Helper\template('notification_footer', array('task' => $task)) ?>

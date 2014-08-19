@@ -1,5 +1,8 @@
 <?php
 
+// Your Kanboard base URL, example: http://demo.kanboard.net/ (used by email notifications or CLI scripts)
+define('KANBOARD_URL', '');
+
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.net');
 

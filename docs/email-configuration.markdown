@@ -90,3 +90,23 @@ Here a example:
 # Everyday at 8am we check for due tasks
 0 8 * * *  cd /path/to/kanboard && ./kanboard send-notifications-due-tasks >/dev/null 2>&1
 ```
+
+### How to display a link to the task in notifications?
+
+To do that, you have to specify the URL of your Kanboard installation in your config file.
+By default, nothing is defined, so no links will be displayed.
+
+```php
+// Your Kanboard base URL, example: http://demo.kanboard.net/ (used by email notifications or CLI scripts)
+define('KANBOARD_URL', '');
+```
+
+Examples:
+
+- http://demo.kanboard.net/
+- http://myserver/kanboard/
+- http://kanboard.mydomain.com/
+
+Don't forget the ending `/`.
+
+You need to define that manually because Kanboard can't guess the URL from a command line script and some people have very specific configuration.

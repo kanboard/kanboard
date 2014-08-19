@@ -423,4 +423,5 @@ return array(
     // '[%s][Due tasks]' => '',
     // '[Kanboard] Notification' => '',
     // 'I want to receive notifications only for those projects:' => '',
+    // 'view the task on Kanboard' => '',
 );

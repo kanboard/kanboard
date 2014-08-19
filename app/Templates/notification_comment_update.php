@@ -4,5 +4,4 @@
 
 <?= Helper\parse($comment['comment']) ?>
 
-<hr/>
-<p>Kanboard</p>
+<?= Helper\template('notification_footer', array('task' => $task)) ?>

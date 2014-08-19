@@ -418,4 +418,5 @@ return array(
     '[%s][Due tasks]' => '[%s][Tâches expirées]',
     '[Kanboard] Notification' => '[Kanboard] Notification',
     'I want to receive notifications only for those projects:' => 'Je souhaite reçevoir les notifications uniquement pour les projets sélectionnés :',
+    'view the task on Kanboard' => 'voir la tâche sur Kanboard',
 );
