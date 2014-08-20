@@ -104,15 +104,7 @@ class Webhook extends Base
      */
     public function attachCreateEvents()
     {
-        $events = array(
-            Task::EVENT_CREATE,
-        );
-
-        $listener = new WebhookListener($this->url_task_creation, $this);
-
-        foreach ($events as $event_name) {
-            $this->event->attach($event_name, $listener);
-        }
+        $this->event->attach(Task::EVENT_CREATE, new WebhookListener($this->url_task_creation, $this));
     }
 
     /**
