@@ -51,19 +51,20 @@ class Board extends Base
      *
      * @access public
      * @param  integer  $project_id   Project id
-     * @param  array    $columns      List of columns title ['column1', 'column2', ...]
+     * @param  array    $columns      Column parameters [ 'title' => 'boo', 'task_limit' => 2 ... ]
      * @return boolean
      */
     public function create($project_id, array $columns)
     {
         $position = 0;
 
-        foreach ($columns as $title) {
+        foreach ($columns as $column) {
 
             $values = array(
-                'title' => $title,
+                'title' => $column['title'],
                 'position' => ++$position,
                 'project_id' => $project_id,
+                'task_limit' => $column['task_limit'],
             );
 
             if (! $this->db->table(self::TABLE)->save($values)) {
@@ -72,6 +73,25 @@ class Board extends Base
         }
 
         return true;
+    }
+
+    /**
+     * Copy board columns from a project to another one
+     *
+     * @author Antonio Rabelo
+     * @param  integer    $project_from      Project Template
+     * @return integer    $project_to        Project that receives the copy
+     * @return boolean
+     */
+    public function duplicate($project_from, $project_to)
+    {
+        $columns = $this->db->table(Board::TABLE)
+                            ->columns('title', 'task_limit')
+                            ->eq('project_id', $project_from)
+                            ->asc('position')
+                            ->findAll();
+
+        return $this->board->create($project_to, $columns);
     }
 
     /**

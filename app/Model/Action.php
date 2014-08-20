@@ -249,6 +249,71 @@ class Action extends Base
     }
 
     /**
+     * Copy Actions and related Actions Parameters from a project to another one
+     *
+     * @author Antonio Rabelo
+     * @param  integer    $project_from      Project Template
+     * @return integer    $project_to        Project that receives the copy
+     * @return boolean
+     */
+    public function duplicate($project_from, $project_to)
+    {
+        $actionTemplate = $this->action->getAllByProject($project_from);
+
+        foreach ($actionTemplate as $action) {
+
+            unset($action['id']);
+            $action['project_id'] = $project_to;
+            $actionParams = $action['params'];
+            unset($action['params']);
+
+            if (! $this->db->table(self::TABLE)->save($action)) {
+                return false;
+            }
+
+            $action_clone_id = $this->db->getConnection()->getLastId();
+
+            foreach ($actionParams as $param) {
+                unset($param['id']);
+                $param['value'] = $this->resolveDuplicatedParameters($param, $project_to);
+                $param['action_id'] = $action_clone_id;
+
+                if (! $this->db->table(self::TABLE_PARAMS)->save($param)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Resolve type of action value from a project to the respective value in another project
+     *
+     * @author Antonio Rabelo
+     * @param  integer    $param             An action parameter
+     * @return integer    $project_to        Project to find the corresponding values
+     * @return mixed                         The corresponding values from $project_to
+     */
+    private function resolveDuplicatedParameters($param, $project_to)
+    {
+        switch($param['name']) {
+            case 'project_id':
+                return $project_to;
+            case 'category_id':
+                $categoryTemplate = $this->category->getById($param['value']);
+                $categoryFromNewProject = $this->db->table(Category::TABLE)->eq('project_id', $project_to)->eq('name', $categoryTemplate['name'])->findOne();
+                return $categoryFromNewProject['id'];
+            case 'column_id':
+                $boardTemplate = $this->board->getColumn($param['value']);
+                $boardFromNewProject = $this->db->table(Board::TABLE)->eq('project_id', $project_to)->eq('title', $boardTemplate['title'])->findOne();
+                return $boardFromNewProject['id'];
+            default:
+                return $param['value'];
+        }
+    }
+
+    /**
      * Validate action creation
      *
      * @access public

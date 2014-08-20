@@ -118,6 +118,34 @@ class Category extends Base
     }
 
     /**
+     * Duplicate categories from a project to another one
+     *
+     * @author Antonio Rabelo
+     * @param  integer    $project_from      Project Template
+     * @return integer    $project_to        Project that receives the copy
+     * @return boolean
+     */
+    public function duplicate($project_from, $project_to)
+    {
+        $categories = $this->db->table(self::TABLE)
+                               ->columns('name')
+                               ->eq('project_id', $project_from)
+                               ->asc('name')
+                               ->findAll();
+
+        foreach ($categories as $category) {
+
+            $category['project_id'] = $project_to;
+
+            if (! $this->category->create($category)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Validate category creation
      *
      * @access public
