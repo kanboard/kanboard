@@ -84,6 +84,7 @@ defined('GITHUB_CLIENT_SECRET') or define('GITHUB_CLIENT_SECRET', '');
 defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', false);
 defined('REVERSE_PROXY_USER_HEADER') or define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
 defined('REVERSE_PROXY_DEFAULT_ADMIN') or define('REVERSE_PROXY_DEFAULT_ADMIN', '');
+defined('REVERSE_PROXY_DEFAULT_DOMAIN') or define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
 
 // Mail configuration
 defined('MAIL_FROM') or define('MAIL_FROM', 'notifications@kanboard.net');

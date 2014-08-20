@@ -64,8 +64,9 @@ class ReverseProxy extends Base
     private function createUser($login)
     {
         $email = strpos($login, '@') !== false ? $login : '';
+
         if (REVERSE_PROXY_DEFAULT_DOMAIN !== '' && empty($email)) {
-            $email = $login . '@' . REVERSE_PROXY_DEFAULT_DOMAIN;
+            $email = $login.'@'.REVERSE_PROXY_DEFAULT_DOMAIN;
         }
 
         return $this->user->create(array(
