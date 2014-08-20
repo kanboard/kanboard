@@ -71,6 +71,27 @@ class Authentication extends Base
     }
 
     /**
+     * Authenticate a user by different methods
+     *
+     * @access public
+     * @param  string  $username  Username
+     * @param  string  $password  Password
+     * @return boolean
+     */
+    public function authenticate($username, $password)
+    {
+        // Try first the database auth and then LDAP if activated
+        if ($this->backend('database')->authenticate($username, $password)) {
+            return true;
+        }
+        else if (LDAP_AUTH && $this->backend('ldap')->authenticate($username, $password)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Validate user login form
      *
      * @access public
@@ -90,17 +111,7 @@ class Authentication extends Base
 
         if ($result) {
 
-            $authenticated = false;
-
-            // Try first the database auth and then LDAP if activated
-            if ($this->backend('database')->authenticate($values['username'], $values['password'])) {
-                $authenticated = true;
-            }
-            else if (LDAP_AUTH && $this->backend('ldap')->authenticate($values['username'], $values['password'])) {
-                $authenticated = true;
-            }
-
-            if ($authenticated) {
+            if ($this->authenticate($values['username'], $values['password'])) {
 
                 // Setup the remember me feature
                 if (! empty($values['remember_me'])) {

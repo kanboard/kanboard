@@ -307,9 +307,7 @@ class User extends Base
         if ($v->execute()) {
 
             // Check password
-            list($authenticated,) = $this->authenticate($_SESSION['user']['username'], $values['current_password']);
-
-            if ($authenticated) {
+            if ($this->authentication->authenticate($_SESSION['user']['username'], $values['current_password'])) {
                 return array(true, array());
             }
             else {
