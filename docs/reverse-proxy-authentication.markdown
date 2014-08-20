@@ -42,4 +42,9 @@ define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
 // you should want to have a bootstrap admin user.
 define('REVERSE_PROXY_DEFAULT_ADMIN', 'myadmin');
 
+// The default domain to assume for the email address.
+// In case the username is not an email address, it
+// will be updated automatically as USER@mydomain.com
+define('REVERSE_PROXY_DEFAULT_DOMAIN', 'mydomain.com');
+
 ```

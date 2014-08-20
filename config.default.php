@@ -106,3 +106,6 @@ define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
 
 // Username of the admin, by default blank
 define('REVERSE_PROXY_DEFAULT_ADMIN', '');
+
+// Default domain to use for setting the email address
+define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
