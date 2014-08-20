@@ -15,6 +15,7 @@ use PicoDb\Database;
  *
  * @property \Model\Acl                $acl
  * @property \Model\Action             $action
+ * @property \Model\Authentication     $authentication
  * @property \Model\Board              $board
  * @property \Model\Category           $category
  * @property \Model\Comment            $comment
