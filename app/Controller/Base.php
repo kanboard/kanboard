@@ -212,6 +212,22 @@ abstract class Base
     }
 
     /**
+     * Common layout for project views
+     *
+     * @access protected
+     * @param  string    $template   Template name
+     * @param  array     $params     Template parameters
+     * @return string
+     */
+    protected function projectLayout($template, array $params)
+    {
+        $content = $this->template->load($template, $params);
+        $params['project_content_for_layout'] = $content;
+
+        return $this->template->layout('project_layout', $params);
+    }
+
+    /**
      * Common method to get a task for task views
      *
      * @access protected

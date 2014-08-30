@@ -13,26 +13,52 @@ use Core\Translator;
  */
 class Project extends Base
 {
+    /**
+     * List of projects
+     *
+     * @access public
+     */
+    public function index()
+    {
+        $projects = $this->project->getAll($this->acl->isRegularUser());
+        $nb_projects = count($projects);
+        $active_projects = array();
+        $inactive_projects = array();
 
-	/**
-	 * Clone Project
-	 *
-	 * @author Antonio Rabelo
-	 * @access public
-	 */
-	public function duplicate()
-	{
-		$this->checkCSRFParam();
-		$project_id = $this->request->getIntegerParam('project_id');
+        foreach ($projects as $project) {
+            if ($project['is_active'] == 1) {
+                $active_projects[] = $project;
+            }
+            else {
+                $inactive_projects[] = $project;
+            }
+        }
 
-		if ($project_id && $this->project->duplicate($project_id)) {
-			$this->session->flash(t('Project cloned successfully.'));
-		} else {
-			$this->session->flashError(t('Unable to clone this project.'));
-		}
+        $this->response->html($this->template->layout('project_index', array(
+            'active_projects' => $active_projects,
+            'inactive_projects' => $inactive_projects,
+            'nb_projects' => $nb_projects,
+            'menu' => 'projects',
+            'title' => t('Projects').' ('.$nb_projects.')'
+        )));
+    }
 
-		$this->response->redirect('?controller=project');
-	}
+    /**
+     * Show the project information page
+     *
+     * @access public
+     */
+    public function show()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('project_show', array(
+            'project' => $project,
+            'stats' => $this->project->getStats($project['id']),
+            'menu' => 'projects',
+            'title' => $project['name'],
+        )));
+    }
 
     /**
      * Task export
@@ -52,7 +78,7 @@ class Project extends Base
             $this->response->csv($data);
         }
 
-        $this->response->html($this->template->layout('project_export', array(
+        $this->response->html($this->projectLayout('project_export', array(
             'values' => array(
                 'controller' => 'project',
                 'action' => 'export',
@@ -65,6 +91,319 @@ class Project extends Base
             'project' => $project,
             'title' => t('Tasks Export')
         )));
+    }
+
+    /**
+     * Public access management
+     *
+     * @access public
+     */
+    public function share()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('project_share', array(
+            'project' => $project,
+            'menu' => 'projects',
+            'title' => t('Public access'),
+        )));
+    }
+
+    /**
+     * Enable public access for a project
+     *
+     * @access public
+     */
+    public function enablePublic()
+    {
+        $this->checkCSRFParam();
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if ($project_id && $this->project->enablePublicAccess($project_id)) {
+            $this->session->flash(t('Project updated successfully.'));
+        } else {
+            $this->session->flashError(t('Unable to update this project.'));
+        }
+
+        $this->response->redirect('?controller=project&action=share&project_id='.$project_id);
+    }
+
+    /**
+     * Disable public access for a project
+     *
+     * @access public
+     */
+    public function disablePublic()
+    {
+        $this->checkCSRFParam();
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if ($project_id && $this->project->disablePublicAccess($project_id)) {
+            $this->session->flash(t('Project updated successfully.'));
+        } else {
+            $this->session->flashError(t('Unable to update this project.'));
+        }
+
+        $this->response->redirect('?controller=project&action=share&project_id='.$project_id);
+    }
+
+    /**
+     * Display a form to edit a project
+     *
+     * @access public
+     */
+    public function edit()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('project_edit', array(
+            'errors' => array(),
+            'values' => $project,
+            'project' => $project,
+            'menu' => 'projects',
+            'title' => t('Edit project')
+        )));
+    }
+
+    /**
+     * Validate and update a project
+     *
+     * @access public
+     */
+    public function update()
+    {
+        $project = $this->getProject();
+        $values = $this->request->getValues() + array('is_active' => 0);
+        list($valid, $errors) = $this->project->validateModification($values);
+
+        if ($valid) {
+
+            if ($this->project->update($values)) {
+                $this->session->flash(t('Project updated successfully.'));
+                $this->response->redirect('?controller=project&action=edit&project_id='.$project['id']);
+            }
+            else {
+                $this->session->flashError(t('Unable to update this project.'));
+            }
+        }
+
+        $this->response->html($this->projectLayout('project_edit', array(
+            'errors' => $errors,
+            'values' => $values,
+            'project' => $project,
+            'menu' => 'projects',
+            'title' => t('Edit Project')
+        )));
+    }
+
+        /**
+     * Users list for the selected project
+     *
+     * @access public
+     */
+    public function users()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('project_users', array(
+            'project' => $project,
+            'users' => $this->project->getAllUsers($project['id']),
+            'menu' => 'projects',
+            'title' => t('Edit project access list')
+        )));
+    }
+
+    /**
+     * Allow a specific user for the selected project
+     *
+     * @access public
+     */
+    public function allow()
+    {
+        $values = $this->request->getValues();
+        list($valid,) = $this->project->validateUserAccess($values);
+
+        if ($valid) {
+
+            if ($this->project->allowUser($values['project_id'], $values['user_id'])) {
+                $this->session->flash(t('Project updated successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to update this project.'));
+            }
+        }
+
+        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
+    }
+
+    /**
+     * Revoke user access
+     *
+     * @access public
+     */
+    public function revoke()
+    {
+        $this->checkCSRFParam();
+
+        $values = array(
+            'project_id' => $this->request->getIntegerParam('project_id'),
+            'user_id' => $this->request->getIntegerParam('user_id'),
+        );
+
+        list($valid,) = $this->project->validateUserAccess($values);
+
+        if ($valid) {
+
+            if ($this->project->revokeUser($values['project_id'], $values['user_id'])) {
+                $this->session->flash(t('Project updated successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to update this project.'));
+            }
+        }
+
+        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
+    }
+
+    /**
+     * Confirmation dialog before to remove a project
+     *
+     * @access public
+     */
+    public function confirmRemove()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('project_remove', array(
+            'project' => $project,
+            'menu' => 'projects',
+            'title' => t('Remove project')
+        )));
+    }
+
+    /**
+     * Remove a project
+     *
+     * @access public
+     */
+    public function remove()
+    {
+        $this->checkCSRFParam();
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if ($project_id && $this->project->remove($project_id)) {
+            $this->session->flash(t('Project removed successfully.'));
+        } else {
+            $this->session->flashError(t('Unable to remove this project.'));
+        }
+
+        $this->response->redirect('?controller=project');
+    }
+
+    /**
+     * Confirmation dialog before to clone a project
+     *
+     * @access public
+     */
+    public function confirmDuplicate()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('project_duplicate', array(
+            'project' => $project,
+            'menu' => 'projects',
+            'title' => t('Clone this project')
+        )));
+    }
+
+    /**
+     * Duplicate a project
+     *
+     * @author Antonio Rabelo
+     * @access public
+     */
+    public function duplicate()
+    {
+        $this->checkCSRFParam();
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if ($project_id && $this->project->duplicate($project_id)) {
+            $this->session->flash(t('Project cloned successfully.'));
+        } else {
+            $this->session->flashError(t('Unable to clone this project.'));
+        }
+
+        $this->response->redirect('?controller=project');
+    }
+
+    /**
+     * Confirmation dialog before to disable a project
+     *
+     * @access public
+     */
+    public function confirmDisable()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('project_disable', array(
+            'project' => $project,
+            'menu' => 'projects',
+            'title' => t('Project activation')
+        )));
+    }
+
+    /**
+     * Disable a project
+     *
+     * @access public
+     */
+    public function disable()
+    {
+        $this->checkCSRFParam();
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if ($project_id && $this->project->disable($project_id)) {
+            $this->session->flash(t('Project disabled successfully.'));
+        } else {
+            $this->session->flashError(t('Unable to disable this project.'));
+        }
+
+        $this->response->redirect('?controller=project&action=show&project_id='.$project_id);
+    }
+
+    /**
+     * Confirmation dialog before to enable a project
+     *
+     * @access public
+     */
+    public function confirmEnable()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('project_enable', array(
+            'project' => $project,
+            'menu' => 'projects',
+            'title' => t('Project activation')
+        )));
+    }
+
+    /**
+     * Enable a project
+     *
+     * @access public
+     */
+    public function enable()
+    {
+        $this->checkCSRFParam();
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if ($project_id && $this->project->enable($project_id)) {
+            $this->session->flash(t('Project activated successfully.'));
+        } else {
+            $this->session->flashError(t('Unable to activate this project.'));
+        }
+
+        $this->response->redirect('?controller=project&action=show&project_id='.$project_id);
     }
 
     /**
@@ -139,24 +478,6 @@ class Project extends Base
     }
 
     /**
-     * List of projects
-     *
-     * @access public
-     */
-    public function index()
-    {
-        $projects = $this->project->getAll(true, $this->acl->isRegularUser());
-        $nb_projects = count($projects);
-
-        $this->response->html($this->template->layout('project_index', array(
-            'projects' => $projects,
-            'nb_projects' => $nb_projects,
-            'menu' => 'projects',
-            'title' => t('Projects').' ('.$nb_projects.')'
-        )));
-    }
-
-    /**
      * Display a form to create a new project
      *
      * @access public
@@ -198,193 +519,5 @@ class Project extends Base
             'menu' => 'projects',
             'title' => t('New Project')
         )));
-    }
-
-    /**
-     * Display a form to edit a project
-     *
-     * @access public
-     */
-    public function edit()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->template->layout('project_edit', array(
-            'errors' => array(),
-            'values' => $project,
-            'menu' => 'projects',
-            'title' => t('Edit project')
-        )));
-    }
-
-    /**
-     * Validate and update a project
-     *
-     * @access public
-     */
-    public function update()
-    {
-        $values = $this->request->getValues() + array('is_active' => 0);
-        list($valid, $errors) = $this->project->validateModification($values);
-
-        if ($valid) {
-
-            if ($this->project->update($values)) {
-                $this->session->flash(t('Project updated successfully.'));
-                $this->response->redirect('?controller=project');
-            }
-            else {
-                $this->session->flashError(t('Unable to update this project.'));
-            }
-        }
-
-        $this->response->html($this->template->layout('project_edit', array(
-            'errors' => $errors,
-            'values' => $values,
-            'menu' => 'projects',
-            'title' => t('Edit Project')
-        )));
-    }
-
-    /**
-     * Confirmation dialog before to remove a project
-     *
-     * @access public
-     */
-    public function confirm()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->template->layout('project_remove', array(
-            'project' => $project,
-            'menu' => 'projects',
-            'title' => t('Remove project')
-        )));
-    }
-
-    /**
-     * Remove a project
-     *
-     * @access public
-     */
-    public function remove()
-    {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
-
-        if ($project_id && $this->project->remove($project_id)) {
-            $this->session->flash(t('Project removed successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to remove this project.'));
-        }
-
-        $this->response->redirect('?controller=project');
-    }
-
-    /**
-     * Enable a project
-     *
-     * @access public
-     */
-    public function enable()
-    {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
-
-        if ($project_id && $this->project->enable($project_id)) {
-            $this->session->flash(t('Project activated successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to activate this project.'));
-        }
-
-        $this->response->redirect('?controller=project');
-    }
-
-    /**
-     * Disable a project
-     *
-     * @access public
-     */
-    public function disable()
-    {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
-
-        if ($project_id && $this->project->disable($project_id)) {
-            $this->session->flash(t('Project disabled successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to disable this project.'));
-        }
-
-        $this->response->redirect('?controller=project');
-    }
-
-    /**
-     * Users list for the selected project
-     *
-     * @access public
-     */
-    public function users()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->template->layout('project_users', array(
-            'project' => $project,
-            'users' => $this->project->getAllUsers($project['id']),
-            'menu' => 'projects',
-            'title' => t('Edit project access list')
-        )));
-    }
-
-    /**
-     * Allow a specific user for the selected project
-     *
-     * @access public
-     */
-    public function allow()
-    {
-        $values = $this->request->getValues();
-        list($valid,) = $this->project->validateUserAccess($values);
-
-        if ($valid) {
-
-            if ($this->project->allowUser($values['project_id'], $values['user_id'])) {
-                $this->session->flash(t('Project updated successfully.'));
-            }
-            else {
-                $this->session->flashError(t('Unable to update this project.'));
-            }
-        }
-
-        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
-    }
-
-    /**
-     * Revoke user access
-     *
-     * @access public
-     */
-    public function revoke()
-    {
-        $this->checkCSRFParam();
-
-        $values = array(
-            'project_id' => $this->request->getIntegerParam('project_id'),
-            'user_id' => $this->request->getIntegerParam('user_id'),
-        );
-
-        list($valid,) = $this->project->validateUserAccess($values);
-
-        if ($valid) {
-
-            if ($this->project->revokeUser($values['project_id'], $values['user_id'])) {
-                $this->session->flash(t('Project updated successfully.'));
-            }
-            else {
-                $this->session->flashError(t('Unable to update this project.'));
-            }
-        }
-
-        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
     }
 }

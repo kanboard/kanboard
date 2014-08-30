@@ -4,7 +4,12 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 23;
+const VERSION = 24;
+
+function version_24($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN is_public TINYINT(1) DEFAULT '0'");
+}
 
 function version_23($pdo)
 {

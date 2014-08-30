@@ -420,13 +420,16 @@ a.btn-red:hover,
     background: #c53727;
 }
 
+a.btn-blue,
 .btn-blue {
     border-color: #3079ed;
     background: #4d90fe;
     color: #fff;
 }
 
+a.btn-blue:hover,
 .btn-blue:hover,
+a.btn-blue:focus,
 .btn-blue:focus {
     border-color: #2f5bb7;
     background: #357ae8;
@@ -673,14 +676,17 @@ a.task-board-nobody {
 }
 
 /* task view */
+.project-show,
 .task-show {
     position: relative;
 }
 
+.project-show-main,
 .task-show-main {
     margin-left: 330px;
 }
 
+.project-show-sidebar,
 .task-show-sidebar {
     position: absolute;
     left: 0px;
@@ -693,6 +699,7 @@ a.task-board-nobody {
     border-radius: 5px;
 }
 
+.project-show-sidebar li,
 .task-show-sidebar li {
     list-style-type: square;
     margin-left: 30px;
@@ -966,6 +973,35 @@ tr td.task-orange,
 .listing ul {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+/* project view */
+.project-listing {
+    border-left: 3px solid #000;
+    margin-left: 35px;
+    padding-bottom: 10px;
+    width: 700px;
+}
+
+.project-listing li {
+    font-size: 1.3em;
+    line-height: 1.7em;
+    list-style-type: none;
+    margin-left: 20px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.project-listing li:hover {
+    border-color: #333;
+}
+
+.project-listing a {
+    text-decoration: none;
+}
+
+.project-listing a:hover,
+.project-listing a:focus {
+    color: #000;
 }
 
 /* confirmation box */

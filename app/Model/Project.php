@@ -227,7 +227,7 @@ class Project extends Base
      */
     public function getByToken($token)
     {
-        return $this->db->table(self::TABLE)->eq('token', $token)->findOne();
+        return $this->db->table(self::TABLE)->eq('token', $token)->eq('is_public', 1)->findOne();
     }
 
     /**
@@ -245,45 +245,22 @@ class Project extends Base
      * Get all projects, optionaly fetch stats for each project and can check users permissions
      *
      * @access public
-     * @param  bool       $fetch_stats          If true, return metrics about each projects
-     * @param  bool       $check_permissions    If true, remove projects not allowed for the current user
+     * @param  bool       $filter_permissions    If true, remove projects not allowed for the current user
      * @return array
      */
-    public function getAll($fetch_stats = false, $check_permissions = false)
+    public function getAll($filter_permissions = false)
     {
-        if (! $fetch_stats) {
-            return $this->db->table(self::TABLE)->asc('name')->findAll();
-        }
+        $projects = $this->db->table(self::TABLE)->asc('name')->findAll();
 
-        $this->db->startTransaction();
+        if ($filter_permissions) {
 
-        $projects = $this->db
-                         ->table(self::TABLE)
-                         ->asc('name')
-                         ->findAll();
+            foreach ($projects as $key => $project) {
 
-        foreach ($projects as $pkey => &$project) {
-
-            if ($check_permissions && ! $this->isUserAllowed($project['id'], $this->acl->getUserId())) {
-                unset($projects[$pkey]);
-            }
-            else {
-
-                $columns = $this->board->getcolumns($project['id']);
-                $project['nb_active_tasks'] = 0;
-
-                foreach ($columns as &$column) {
-                    $column['nb_active_tasks'] = $this->task->countByColumnId($project['id'], $column['id']);
-                    $project['nb_active_tasks'] += $column['nb_active_tasks'];
+                if (! $this->isUserAllowed($project['id'], $this->acl->getUserId())) {
+                    unset($projects[$key]);
                 }
-
-                $project['columns'] = $columns;
-                $project['nb_tasks'] = $this->task->countByProjectId($project['id']);
-                $project['nb_inactive_tasks'] = $project['nb_tasks'] - $project['nb_active_tasks'];
             }
         }
-
-        $this->db->closeTransaction();
 
         return $projects;
     }
@@ -383,6 +360,31 @@ class Project extends Base
     }
 
     /**
+     * Gather some task metrics for a given project
+     *
+     * @access public
+     * @param  integer    $project_id    Project id
+     * @return array
+     */
+    public function getStats($project_id)
+    {
+        $stats = array();
+        $columns = $this->board->getcolumns($project_id);
+        $stats['nb_active_tasks'] = 0;
+
+        foreach ($columns as &$column) {
+            $column['nb_active_tasks'] = $this->task->countByColumnId($project_id, $column['id']);
+            $stats['nb_active_tasks'] += $column['nb_active_tasks'];
+        }
+
+        $stats['columns'] = $columns;
+        $stats['nb_tasks'] = $this->task->countByProjectId($project_id);
+        $stats['nb_inactive_tasks'] = $stats['nb_tasks'] - $stats['nb_active_tasks'];
+
+        return $stats;
+    }
+
+    /**
      * Create a project from another one.
      *
      * @author Antonio Rabelo
@@ -397,7 +399,7 @@ class Project extends Base
             'name' => $project_name.' ('.t('Clone').')',
             'is_active' => true,
             'last_modified' => 0,
-            'token' => Security::generateToken(),
+            'token' => '',
         );
 
         if (! $this->db->table(self::TABLE)->save($project)) {
@@ -486,7 +488,7 @@ class Project extends Base
     {
         $this->db->startTransaction();
 
-        $values['token'] = Security::generateToken();
+        $values['token'] = '';
 
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
@@ -589,6 +591,36 @@ class Project extends Base
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
                     ->save(array('is_active' => 0));
+    }
+
+    /**
+     * Enable public access for a project
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return bool
+     */
+    public function enablePublicAccess($project_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('id', $project_id)
+                    ->save(array('is_public' => 1, 'token' => Security::generateToken()));
+    }
+
+    /**
+     * Disable public access for a project
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return bool
+     */
+    public function disablePublicAccess($project_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('id', $project_id)
+                    ->save(array('is_public' => 0, 'token' => ''));
     }
 
     /**

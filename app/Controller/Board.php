@@ -212,12 +212,8 @@ class Board extends Base
      */
     public function edit()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->getById($project_id);
-
-        if (! $project) $this->notfound();
-
-        $columns = $this->board->getColumns($project_id);
+        $project = $this->getProject();
+        $columns = $this->board->getColumns($project['id']);
         $values = array();
 
         foreach ($columns as $column) {
@@ -225,9 +221,9 @@ class Board extends Base
             $values['task_limit['.$column['id'].']'] = $column['task_limit'] ?: null;
         }
 
-        $this->response->html($this->template->layout('board_edit', array(
+        $this->response->html($this->projectLayout('board_edit', array(
             'errors' => array(),
-            'values' => $values + array('project_id' => $project_id),
+            'values' => $values + array('project_id' => $project['id']),
             'columns' => $columns,
             'project' => $project,
             'menu' => 'projects',
@@ -242,12 +238,8 @@ class Board extends Base
      */
     public function update()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->getById($project_id);
-
-        if (! $project) $this->notfound();
-
-        $columns = $this->board->getColumns($project_id);
+        $project = $this->getProject();
+        $columns = $this->board->getColumns($project['id']);
         $data = $this->request->getValues();
         $values = $columns_list = array();
 
@@ -270,9 +262,9 @@ class Board extends Base
             }
         }
 
-        $this->response->html($this->template->layout('board_edit', array(
+        $this->response->html($this->projectLayout('board_edit', array(
             'errors' => $errors,
-            'values' => $values + array('project_id' => $project_id),
+            'values' => $values + array('project_id' => $project['id']),
             'columns' => $columns,
             'project' => $project,
             'menu' => 'projects',
@@ -287,11 +279,7 @@ class Board extends Base
      */
     public function add()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->getById($project_id);
-
-        if (! $project) $this->notfound();
-
+        $project = $this->getProject();
         $columns = $this->board->getColumnsList($project_id);
         $data = $this->request->getValues();
         $values = array();
@@ -313,7 +301,7 @@ class Board extends Base
             }
         }
 
-        $this->response->html($this->template->layout('board_edit', array(
+        $this->response->html($this->projectLayout('board_edit', array(
             'errors' => $errors,
             'values' => $values + $data,
             'columns' => $columns,
@@ -330,8 +318,11 @@ class Board extends Base
      */
     public function confirm()
     {
-        $this->response->html($this->template->layout('board_remove', array(
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('board_remove', array(
             'column' => $this->board->getColumn($this->request->getIntegerParam('column_id')),
+            'project' => $project,
             'menu' => 'projects',
             'title' => t('Remove a column from a board')
         )));

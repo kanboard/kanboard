@@ -4,7 +4,12 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 23;
+const VERSION = 24;
+
+function version_24($pdo)
+{
+    $pdo->exec('ALTER TABLE projects ADD COLUMN is_public INTEGER DEFAULT "0"');
+}
 
 function version_23($pdo)
 {
@@ -238,19 +243,6 @@ function version_4($pdo)
 function version_3($pdo)
 {
     $pdo->exec('ALTER TABLE projects ADD COLUMN token TEXT');
-
-    // For each existing project, assign a different token
-    $rq = $pdo->prepare("SELECT id FROM projects WHERE token IS NULL");
-    $rq->execute();
-    $results = $rq->fetchAll(\PDO::FETCH_ASSOC);
-
-    if ($results !== false) {
-
-        foreach ($results as &$result) {
-            $rq = $pdo->prepare('UPDATE projects SET token=? WHERE id=?');
-            $rq->execute(array(Security::generateToken(), $result['id']));
-        }
-    }
 }
 
 function version_2($pdo)

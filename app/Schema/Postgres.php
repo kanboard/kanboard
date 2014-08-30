@@ -4,7 +4,12 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 4;
+const VERSION = 5;
+
+function version_5($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN is_public BOOLEAN DEFAULT '0'");
+}
 
 function version_4($pdo)
 {

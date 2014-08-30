@@ -17,15 +17,9 @@ class Action extends Base
      */
     public function index()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->getById($project_id);
+        $project = $this->getProject();
 
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
-
-        $this->response->html($this->template->layout('action_index', array(
+        $this->response->html($this->projectLayout('action_index', array(
             'values' => array('project_id' => $project['id']),
             'project' => $project,
             'actions' => $this->action->getAllByProject($project['id']),
@@ -49,18 +43,11 @@ class Action extends Base
      */
     public function params()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->getById($project_id);
-
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
-
+        $project = $this->getProject();
         $values = $this->request->getValues();
         $action = $this->action->load($values['action_name'], $values['project_id']);
 
-        $this->response->html($this->template->layout('action_params', array(
+        $this->response->html($this->projectLayout('action_params', array(
             'values' => $values,
             'action_params' => $action->getActionRequiredParameters(),
             'columns_list' => $this->board->getColumnsList($project['id']),
@@ -81,14 +68,7 @@ class Action extends Base
      */
     public function create()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $project = $this->project->getById($project_id);
-
-        if (! $project) {
-            $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
-        }
-
+        $project = $this->getProject();
         $values = $this->request->getValues();
 
         list($valid,) = $this->action->validateCreation($values);
@@ -113,10 +93,13 @@ class Action extends Base
      */
     public function confirm()
     {
-        $this->response->html($this->template->layout('action_remove', array(
+        $project = $this->getProject();
+
+        $this->response->html($this->projectLayout('action_remove', array(
             'action' => $this->action->getById($this->request->getIntegerParam('action_id')),
             'available_events' => $this->action->getAvailableEvents(),
             'available_actions' => $this->action->getAvailableActions(),
+            'project' => $project,
             'menu' => 'projects',
             'title' => t('Remove an action')
         )));
