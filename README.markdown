@@ -132,6 +132,7 @@ Contributors:
 - Sebastien pacilly: https://github.com/spacilly
 - Sylvain Veyrié: https://github.com/turb
 - Toomyem: https://github.com/Toomyem
+- Tony G. Bolaño: https://github.com/tonybolanyo
 - Troloo: https://github.com/troloo
 - Typz: https://github.com/Typz
 - Ybarc: https://github.com/ybarc
