@@ -52,6 +52,7 @@ class Acl extends Base
             'confirmremove',
             'editdescription',
             'savedescription',
+            'move',
         ),
     );
 

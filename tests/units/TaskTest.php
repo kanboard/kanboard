@@ -5,6 +5,7 @@ require_once __DIR__.'/Base.php';
 use Model\Task;
 use Model\Project;
 use Model\Category;
+use Model\User;
 
 class TaskTest extends Base
 {
@@ -183,6 +184,51 @@ class TaskTest extends Base
         $this->assertEquals('test', $task['title']);
     }
 
+    public function testMoveToAnotherProject()
+    {
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+        $user = new User($this->registry);
+
+        // We create a regular user
+        $user->create(array('username' => 'unittest1', 'password' => 'unittest'));
+        $user->create(array('username' => 'unittest2', 'password' => 'unittest'));
+
+        // We create 2 projects
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(2, $p->create(array('name' => 'test2')));
+
+        // We create a task
+        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1, 'category_id' => 10, 'position' => 333)));
+        $this->assertEquals(2, $t->create(array('title' => 'test2', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 3, 'category_id' => 10, 'position' => 333)));
+
+        // We duplicate our task to the 2nd project
+        $task = $t->getById(1);
+        $this->assertTrue($t->moveToAnotherProject(2, $task));
+        //$this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CREATE));
+
+        // Check the values of the duplicated task
+        $task = $t->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['owner_id']);
+        $this->assertEquals(0, $task['category_id']);
+        $this->assertEquals(2, $task['project_id']);
+        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(0, $task['position']);
+        $this->assertEquals('test', $task['title']);
+
+        // We allow only one user on the second project
+        $this->assertTrue($p->allowUser(2, 2));
+
+        // The owner should be reseted
+        $task = $t->getById(2);
+        $this->assertTrue($t->moveToAnotherProject(2, $task));
+
+        $task = $t->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(0, $task['owner_id']);
+    }
+
     public function testEvents()
     {
         $t = new Task($this->registry);
@@ -209,15 +255,15 @@ class TaskTest extends Base
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_OPEN));
 
         // We change the column of our task
-        $this->assertTrue($t->move(1, 2, 1));
+        $this->assertTrue($t->movePosition(1, 2, 1));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // We change the position of our task
-        $this->assertTrue($t->move(1, 2, 2));
+        $this->assertTrue($t->movePosition(1, 2, 2));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
         // We change the column and the position of our task
-        $this->assertTrue($t->move(1, 1, 3));
+        $this->assertTrue($t->movePosition(1, 1, 3));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
     }
 }

@@ -9,6 +9,7 @@
             <li><a href="?controller=comment&amp;action=create&amp;task_id=<?= $task['id'] ?>"><?= t('Add a comment') ?></a></li>
             <li><a href="?controller=file&amp;action=create&amp;task_id=<?= $task['id'] ?>"><?= t('Attach a document') ?></a></li>
             <li><a href="?controller=task&amp;action=duplicate&amp;project_id=<?= $task['project_id'] ?>&amp;task_id=<?= $task['id'] ?>"><?= t('Duplicate') ?></a></li>
+            <li><a href="?controller=task&amp;action=move&amp;project_id=<?= $task['project_id'] ?>&amp;task_id=<?= $task['id'] ?>"><?= t('Move to another project') ?></a></li>
             <li>
                 <?php if ($task['is_active'] == 1): ?>
                     <a href="?controller=task&amp;action=confirmClose&amp;task_id=<?= $task['id'] ?>"><?= t('Close this task') ?></a>

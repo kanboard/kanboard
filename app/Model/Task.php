@@ -545,7 +545,7 @@ class Task extends Base
      * @param  boolean    $trigger_events    Flag to trigger events
      * @return boolean
      */
-    public function move($task_id, $column_id, $position, $trigger_events = true)
+    public function movePosition($task_id, $column_id, $position, $trigger_events = true)
     {
         $this->event->clearTriggeredEvents();
 
@@ -556,6 +556,35 @@ class Task extends Base
         );
 
         return $this->update($values, $trigger_events);
+    }
+
+    /**
+     * Move a task to another project
+     *
+     * @access public
+     * @param  integer    $project_id           Project id
+     * @param  array      $task                 Task data
+     * @return boolean
+     */
+    public function moveToAnotherProject($project_id, array $task)
+    {
+        $values = array();
+
+        // Clear values (categories are different for each project)
+        $values['category_id'] = 0;
+        $values['owner_id'] = 0;
+
+        // Check if the assigned user is allowed for the new project
+        if ($task['owner_id'] && $this->project->isUserAllowed($project_id, $task['owner_id'])) {
+            $values['owner_id'] = $task['owner_id'];
+        }
+
+        // We use the first column of the new project
+        $values['column_id'] = $this->board->getFirstColumn($project_id);
+        $values['position'] = $this->countByColumnId($project_id, $values['column_id']);
+        $values['project_id'] = $project_id;
+
+        return $this->db->table(self::TABLE)->eq('id', $task['id'])->update($values);
     }
 
     /**
@@ -654,6 +683,28 @@ class Task extends Base
             new Validators\Integer('project_id', t('This value must be an integer')),
             new Validators\Required('owner_id', t('This value is required')),
             new Validators\Integer('owner_id', t('This value must be an integer')),
+        ));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    /**
+     * Validate project modification
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateProjectModification(array $values)
+    {
+        $v = new Validator($values, array(
+            new Validators\Required('id', t('The id is required')),
+            new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Required('project_id', t('The project is required')),
+            new Validators\Integer('project_id', t('This value must be an integer')),
         ));
 
         return array(

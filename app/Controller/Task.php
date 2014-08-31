@@ -352,7 +352,6 @@ class Task extends Base
         $this->response->html($this->template->layout('task_new', array(
             'errors' => array(),
             'values' => $task,
-            'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'users_list' => $this->project->getUsersList($task['project_id']),
             'colors_list' => $this->task->getColors(),
@@ -373,13 +372,14 @@ class Task extends Base
         $task = $this->getTask();
 
         $params = array(
-                'values' => $task,
-                'errors' => array(),
-                'task' => $task,
-                'ajax' => $this->request->isAjax(),
-                'menu' => 'tasks',
-                'title' => t('Edit the description')
-            );
+            'values' => $task,
+            'errors' => array(),
+            'task' => $task,
+            'ajax' => $this->request->isAjax(),
+            'menu' => 'tasks',
+            'title' => t('Edit the description'),
+        );
+
         if ($this->request->isAjax()) {
             $this->response->html($this->template->load('task_edit_description', $params));
         }
@@ -423,6 +423,43 @@ class Task extends Base
             'task' => $task,
             'menu' => 'tasks',
             'title' => t('Edit the description')
+        )));
+    }
+
+    /**
+     * Move a task to another project
+     *
+     * @access public
+     */
+    public function move()
+    {
+        $task = $this->getTask();
+        $values = $task;
+        $errors = array();
+
+        if ($this->request->isPost()) {
+
+            $values = $this->request->getValues();
+            list($valid, $errors) = $this->task->validateProjectModification($values);
+
+            if ($valid) {
+                if ($this->task->moveToAnotherProject($values['project_id'], $task)) {
+                    $this->session->flash(t('Task updated successfully.'));
+                    $this->response->redirect('?controller=task&action=show&task_id='.$values['id']);
+                }
+                else {
+                    $this->session->flashError(t('Unable to update your task.'));
+                }
+            }
+        }
+
+        $this->response->html($this->taskLayout('task_move_project', array(
+            'values' => $values,
+            'errors' => $errors,
+            'task' => $task,
+            'projects_list' => $this->project->getAvailableList($this->acl->getUserId()),
+            'menu' => 'tasks',
+            'title' => t('Move the task to another project')
         )));
     }
 }

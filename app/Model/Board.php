@@ -35,7 +35,7 @@ class Board extends Base
         foreach ($positions as $value) {
 
             // We trigger events only for the selected task
-            if (! $this->task->move($value['task_id'], $value['column_id'], $value['position'], $value['task_id'] == $selected_task_id)) {
+            if (! $this->task->movePosition($value['task_id'], $value['column_id'], $value['position'], $value['task_id'] == $selected_task_id)) {
                 $this->db->cancelTransaction();
                 return false;
             }

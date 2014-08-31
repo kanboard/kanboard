@@ -84,7 +84,7 @@ class ActionTest extends Base
         $this->assertEquals(1, $t1['column_id']);
 
         // We move our task
-        $task->move(1, 4, 1);
+        $task->movePosition(1, 4, 1);
 
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_UPDATE));
@@ -152,8 +152,8 @@ class ActionTest extends Base
         $this->assertEquals('yellow', $t1['color_id']);
 
         // We move our tasks
-        $task->move(1, 1, 1); // task #1 to position 1
-        $task->move(2, 1, 0); // task #2 to position 0
+        $task->movePosition(1, 1, 1); // task #1 to position 1
+        $task->movePosition(2, 1, 0); // task #2 to position 0
 
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
@@ -223,7 +223,7 @@ class ActionTest extends Base
         $this->assertEquals(1, $t1['project_id']);
 
         // We move our task
-        $task->move(1, 4, 1);
+        $task->movePosition(1, 4, 1);
 
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CLOSE));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
