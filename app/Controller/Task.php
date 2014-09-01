@@ -436,6 +436,9 @@ class Task extends Base
         $task = $this->getTask();
         $values = $task;
         $errors = array();
+        $projects_list = $this->project->getAvailableList($this->acl->getUserId());
+
+        unset($projects_list[$task['project_id']]);
 
         if ($this->request->isPost()) {
 
@@ -457,7 +460,7 @@ class Task extends Base
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'projects_list' => $this->project->getAvailableList($this->acl->getUserId()),
+            'projects_list' => $projects_list,
             'menu' => 'tasks',
             'title' => t('Move the task to another project')
         )));
