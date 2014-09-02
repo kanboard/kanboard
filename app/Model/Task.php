@@ -263,55 +263,20 @@ class Task extends Base
     }
 
     /**
-     * Duplicate a task
+     * Generic method to duplicate a task
      *
      * @access public
-     * @param  integer   $task_id      Task id
-     * @return boolean
+     * @param  array      $task         Task data
+     * @param  array      $override     Task properties to override
+     * @return integer|boolean
      */
-    public function duplicate($task_id)
+    public function copy(array $task, array $override = array())
     {
-        $this->db->startTransaction();
-
-        // Get the original task
-        $task = $this->getById($task_id);
-
-        // Cleanup data
-        unset($task['id']);
-        unset($task['date_completed']);
-
-        // Assign new values
-        $task['date_creation'] = time();
-        $task['is_active'] = 1;
-        $task['position'] = $this->countByColumnId($task['project_id'], $task['column_id']);
-
-        // Save task
-        if (! $this->db->table(self::TABLE)->save($task)) {
-            $this->db->cancelTransaction();
-            return false;
+        // Values to override
+        if (! empty($override)) {
+            $task = $override + $task;
         }
 
-        $task_id = $this->db->getConnection()->getLastId();
-
-        $this->db->closeTransaction();
-
-        // Trigger events
-        $this->event->trigger(self::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $task);
-        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $task);
-
-        return $task_id;
-    }
-
-    /**
-     * Duplicate a task to another project (always copy to the first column)
-     *
-     * @access public
-     * @param  integer   $project_id   Destination project id
-     * @param  array      $task        Task data
-     * @return boolean
-     */
-    public function duplicateToAnotherProject($project_id, array $task)
-    {
         $this->db->startTransaction();
 
         // Assign new values
@@ -322,17 +287,22 @@ class Task extends Base
         $values['date_modification'] = $values['date_creation'];
         $values['date_due'] = $task['date_due'];
         $values['color_id'] = $task['color_id'];
-        $values['project_id'] = $project_id;
-        $values['column_id'] = $this->board->getFirstColumn($project_id);
+        $values['project_id'] = $task['project_id'];
+        $values['column_id'] = $task['column_id'];
         $values['owner_id'] = 0;
         $values['creator_id'] = $task['creator_id'];
-        $values['position'] = $this->countByColumnId($project_id, $values['column_id']);
+        $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
         $values['score'] = $task['score'];
         $values['category_id'] = 0;
 
         // Check if the assigned user is allowed for the new project
-        if ($task['owner_id'] && $this->project->isUserAllowed($project_id, $task['owner_id'])) {
+        if ($task['owner_id'] && $this->project->isUserAllowed($values['project_id'], $task['owner_id'])) {
             $values['owner_id'] = $task['owner_id'];
+        }
+
+        // Check if the category exists
+        if ($task['category_id'] && $this->category->exists($task['category_id'], $task['project_id'])) {
+            $values['category_id'] = $task['category_id'];
         }
 
         // Save task
@@ -356,6 +326,34 @@ class Task extends Base
         $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $values);
 
         return $task_id;
+    }
+
+    /**
+     * Duplicate a task to the same project
+     *
+     * @access public
+     * @param  array      $task         Task data
+     * @return integer|boolean
+     */
+    public function duplicateSameProject($task)
+    {
+        return $this->copy($task);
+    }
+
+    /**
+     * Duplicate a task to another project (always copy to the first column)
+     *
+     * @access public
+     * @param  integer    $project_id   Destination project id
+     * @param  array      $task         Task data
+     * @return integer|boolean
+     */
+    public function duplicateToAnotherProject($project_id, array $task)
+    {
+        return $this->copy($task, array(
+            'project_id' => $project_id,
+            'column_id' => $this->board->getFirstColumn($project_id),
+        ));
     }
 
     /**
@@ -399,7 +397,7 @@ class Task extends Base
         $this->prepare($values);
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
-        $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']);
+        $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
 
         // Save task
         if (! $this->db->table(self::TABLE)->save($values)) {
@@ -592,7 +590,7 @@ class Task extends Base
 
         // We use the first column of the new project
         $values['column_id'] = $this->board->getFirstColumn($project_id);
-        $values['position'] = $this->countByColumnId($project_id, $values['column_id']);
+        $values['position'] = $this->countByColumnId($project_id, $values['column_id']) + 1;
         $values['project_id'] = $project_id;
 
         if ($this->db->table(self::TABLE)->eq('id', $task['id'])->update($values)) {

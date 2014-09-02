@@ -332,7 +332,7 @@ class Task extends Base
     }
 
     /**
-     * Duplicate a task (fill the form for a new task)
+     * Duplicate a task
      *
      * @access public
      */
@@ -340,25 +340,24 @@ class Task extends Base
     {
         $task = $this->getTask();
 
-        if (! empty($task['date_due'])) {
-            $task['date_due'] = date(t('m/d/Y'), $task['date_due']);
-        }
-        else {
-            $task['date_due'] = '';
+        if ($this->request->getStringParam('confirmation') === 'yes') {
+
+            $this->checkCSRFParam();
+            $task_id = $this->task->duplicateSameProject($task);
+
+            if ($task_id) {
+                $this->session->flash(t('Task created successfully.'));
+                $this->response->redirect('?controller=task&action=show&task_id='.$task_id);
+            } else {
+                $this->session->flashError(t('Unable to create this task.'));
+                $this->response->redirect('?controller=task&action=duplicate&task_id='.$task['id']);
+            }
         }
 
-        $task['score'] = $task['score'] ?: '';
-
-        $this->response->html($this->template->layout('task_new', array(
-            'errors' => array(),
-            'values' => $task,
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'users_list' => $this->project->getUsersList($task['project_id']),
-            'colors_list' => $this->task->getColors(),
-            'categories_list' => $this->category->getList($task['project_id']),
-            'duplicate' => true,
+        $this->response->html($this->taskLayout('task_duplicate', array(
+            'task' => $task,
             'menu' => 'tasks',
-            'title' => t('New task')
+            'title' => t('Duplicate a task')
         )));
     }
 

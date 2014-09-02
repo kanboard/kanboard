@@ -436,4 +436,6 @@ return array(
     'Project activation' => 'Activation du projet',
     'Move the task to another project' => 'Déplacer la tâche vers un autre projet',
     'Move to another project' => 'Déplacer vers un autre projet',
+    'Do you really want to duplicate this task?' => 'Voulez-vous vraiment dupliquer cette tâche ?',
+    'Duplicate a task' => 'Dupliquer une tâche'
 );

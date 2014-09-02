@@ -132,21 +132,29 @@ class TaskTest extends Base
         $this->assertEquals('2014-03-05', date('Y-m-d', $t->parseDate('03/05/2014')));
     }
 
-    public function testDuplicateTask()
+    public function testDuplicateToTheSameProject()
     {
         $t = new Task($this->registry);
         $p = new Project($this->registry);
+        $c = new Category($this->registry);
 
         // We create a task and a project
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
+
+        // Some categories
+        $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
+        $this->assertNotFalse($c->create(array('name' => 'Category #2', 'project_id' => 1)));
+        $this->assertTrue($c->exists(1, 1));
+        $this->assertTrue($c->exists(2, 1));
+
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1, 'category_id' => 2)));
 
         $task = $t->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(0, $task['position']);
+        $this->assertEquals(1, $task['position']);
 
         // We duplicate our task
-        $this->assertEquals(2, $t->duplicate(1));
+        $this->assertEquals(2, $t->duplicateSameProject($task));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
@@ -155,21 +163,26 @@ class TaskTest extends Base
         $this->assertEquals(Task::STATUS_OPEN, $task['is_active']);
         $this->assertEquals(1, $task['project_id']);
         $this->assertEquals(1, $task['owner_id']);
-        $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['category_id']);
+        $this->assertEquals(3, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
     }
 
     public function testDuplicateToAnotherProject()
     {
         $t = new Task($this->registry);
         $p = new Project($this->registry);
+        $c = new Category($this->registry);
 
         // We create 2 projects
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
+        $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
+        $this->assertTrue($c->exists(1, 1));
+
         // We create a task
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1, 'category_id' => 1)));
+        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1, 'category_id' => 1)));
         $task = $t->getById(1);
 
         // We duplicate our task to the 2nd project
@@ -181,6 +194,8 @@ class TaskTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals(1, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
+        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
     }
@@ -215,7 +230,7 @@ class TaskTest extends Base
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals(5, $task['column_id']);
-        $this->assertEquals(0, $task['position']);
+        $this->assertEquals(1, $task['position']);
         $this->assertEquals('test', $task['title']);
 
         // We allow only one user on the second project

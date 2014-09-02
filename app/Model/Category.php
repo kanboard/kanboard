@@ -21,6 +21,19 @@ class Category extends Base
     const TABLE = 'project_has_categories';
 
     /**
+     * Return true if a category exists for a given project
+     *
+     * @access public
+     * @param  integer   $category_id    Category id
+     * @param  integer   $project_id     Project id
+     * @return boolean
+     */
+    public function exists($category_id, $project_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $category_id)->eq('project_id', $project_id)->count() > 0;
+    }
+
+    /**
      * Get a category by the id
      *
      * @access public

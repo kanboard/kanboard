@@ -436,4 +436,6 @@ return array(
     // 'Project activation' => '',
     // 'Move the task to another project' => '',
     // 'Move to another project' => '',
+    // 'Do you really want to duplicate this task?' => '',
+    // 'Duplicate a task' => '',
 );

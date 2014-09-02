@@ -41,6 +41,7 @@
             <strong><?= Helper\escape($task['column_title']) ?></strong>
             (<?= Helper\escape($task['project_name']) ?>)
         </li>
+        <li><?= t('Task position:').' '.Helper\escape($task['position']) ?></li>
         <?php if ($task['category_name']): ?>
         <li>
             <?= t('Category:') ?> <strong><?= Helper\escape($task['category_name']) ?></strong>
