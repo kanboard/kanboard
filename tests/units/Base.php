@@ -47,6 +47,7 @@ require_once __DIR__.'/../../app/Action/TaskAssignColorUser.php';
 require_once __DIR__.'/../../app/Action/TaskAssignColorCategory.php';
 require_once __DIR__.'/../../app/Action/TaskAssignCurrentUser.php';
 require_once __DIR__.'/../../app/Action/TaskDuplicateAnotherProject.php';
+require_once __DIR__.'/../../app/Action/TaskMoveAnotherProject.php';
 
 abstract class Base extends PHPUnit_Framework_TestCase
 {

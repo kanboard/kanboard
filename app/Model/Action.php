@@ -41,6 +41,7 @@ class Action extends Base
             'TaskAssignSpecificUser' => t('Assign the task to a specific user'),
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
+            'TaskMoveAnotherProject' => t('Move the task to another project'),
             'TaskAssignColorUser' => t('Assign a color to a specific user'),
             'TaskAssignColorCategory' => t('Assign automatically a color based on a category'),
             'TaskAssignCategoryColor' => t('Assign automatically a category based on a color'),
@@ -217,34 +218,16 @@ class Action extends Base
      * @param  integer $project_id Project id
      * @throws \LogicException
      * @return \Core\Listener       Action Instance
-     * @throw  LogicException
      */
     public function load($name, $project_id)
     {
-        switch ($name) {
-            case 'TaskClose':
-                $className = '\Action\TaskClose';
-                return new $className($project_id, new Task($this->registry));
-            case 'TaskAssignCurrentUser':
-                $className = '\Action\TaskAssignCurrentUser';
-                return new $className($project_id, new Task($this->registry), new Acl($this->registry));
-            case 'TaskAssignSpecificUser':
-                $className = '\Action\TaskAssignSpecificUser';
-                return new $className($project_id, new Task($this->registry));
-            case 'TaskDuplicateAnotherProject':
-                $className = '\Action\TaskDuplicateAnotherProject';
-                return new $className($project_id, new Task($this->registry));
-            case 'TaskAssignColorUser':
-                $className = '\Action\TaskAssignColorUser';
-                return new $className($project_id, new Task($this->registry));
-            case 'TaskAssignColorCategory':
-                $className = '\Action\TaskAssignColorCategory';
-                return new $className($project_id, new Task($this->registry));
-            case 'TaskAssignCategoryColor':
-                $className = '\Action\TaskAssignCategoryColor';
-                return new $className($project_id, new Task($this->registry));
-            default:
-                throw new LogicException('Action not found: '.$name);
+        $className = '\Action\\'.$name;
+
+        if ($name === 'TaskAssignCurrentUser') {
+            return new $className($project_id, new Task($this->registry), new Acl($this->registry));
+        }
+        else {
+            return new $className($project_id, new Task($this->registry));
         }
     }
 
