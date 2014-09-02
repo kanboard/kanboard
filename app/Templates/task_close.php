@@ -8,7 +8,7 @@
     </p>
 
     <div class="form-actions">
-        <a href="?controller=task&amp;action=close&amp;task_id=<?= $task['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
+        <a href="?controller=task&amp;action=close&amp;confirmation=yes&amp;task_id=<?= $task['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
         <?= t('or') ?> <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('cancel') ?></a>
     </div>
 </div>

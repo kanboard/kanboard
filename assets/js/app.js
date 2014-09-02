@@ -9,22 +9,30 @@ var Kanboard = (function() {
             e.preventDefault();
             e.stopPropagation();
 
-            $.get(e.target.getAttribute("href"), function(content) {
+            var link = e.target.getAttribute("href");
 
-                $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+            if (! link) {
+                link = e.target.getAttribute("data-href");
+            }
 
-                $("#popover-container").click(function() {
-                    $(this).remove();
+            if (link) {
+                $.get(link, function(content) {
+
+                    $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+
+                    $("#popover-container").click(function() {
+                        $(this).remove();
+                    });
+
+                    $("#popover-content").click(function(e) {
+                        e.stopPropagation();
+                    });
+
+                    if (callback) {
+                        callback();
+                    }
                 });
-
-                $("#popover-content").click(function(e) {
-                    e.stopPropagation();
-                });
-
-                if (callback) {
-                    callback();
-                }
-            });
+            }
         },
 
         // Return true if the page is visible
@@ -88,6 +96,9 @@ Kanboard.Board = (function() {
         $(".task-edit-popover").click(function(e) {
             Kanboard.Popover(e, Kanboard.Task.Init);
         });
+
+        // Description popover
+        $(".task-description-popover").click(Kanboard.Popover);
 
         // Redirect to the task details page
         $("[data-task-id]").each(function() {

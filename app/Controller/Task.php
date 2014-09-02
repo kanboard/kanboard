@@ -233,26 +233,20 @@ class Task extends Base
      */
     public function close()
     {
-        $this->checkCSRFParam();
         $task = $this->getTask();
 
-        if ($this->task->close($task['id'])) {
-            $this->session->flash(t('Task closed successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to close this task.'));
+        if ($this->request->getStringParam('confirmation') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            if ($this->task->close($task['id'])) {
+                $this->session->flash(t('Task closed successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to close this task.'));
+            }
+
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
         }
-
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
-    }
-
-    /**
-     * Confirmation dialog before to close a task
-     *
-     * @access public
-     */
-    public function confirmClose()
-    {
-        $task = $this->getTask();
 
         $this->response->html($this->taskLayout('task_close', array(
             'task' => $task,
@@ -268,26 +262,20 @@ class Task extends Base
      */
     public function open()
     {
-        $this->checkCSRFParam();
         $task = $this->getTask();
 
-        if ($this->task->open($task['id'])) {
-            $this->session->flash(t('Task opened successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to open this task.'));
+        if ($this->request->getStringParam('confirmation') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            if ($this->task->open($task['id'])) {
+                $this->session->flash(t('Task opened successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to open this task.'));
+            }
+
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
         }
-
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
-    }
-
-    /**
-     * Confirmation dialog before to open a task
-     *
-     * @access public
-     */
-    public function confirmOpen()
-    {
-        $task = $this->getTask();
 
         $this->response->html($this->taskLayout('task_open', array(
             'task' => $task,
@@ -303,26 +291,20 @@ class Task extends Base
      */
     public function remove()
     {
-        $this->checkCSRFParam();
         $task = $this->getTask();
 
-        if ($this->task->remove($task['id'])) {
-            $this->session->flash(t('Task removed successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to remove this task.'));
+        if ($this->request->getStringParam('confirmation') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            if ($this->task->remove($task['id'])) {
+                $this->session->flash(t('Task removed successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to remove this task.'));
+            }
+
+            $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
         }
-
-        $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
-    }
-
-    /**
-     * Confirmation dialog before removing a task
-     *
-     * @access public
-     */
-    public function confirmRemove()
-    {
-        $task = $this->getTask();
 
         $this->response->html($this->taskLayout('task_remove', array(
             'task' => $task,
@@ -366,63 +348,54 @@ class Task extends Base
      *
      * @access public
      */
-    public function editDescription()
+    public function description()
     {
         $task = $this->getTask();
+        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
+
+        if ($this->request->isPost()) {
+
+            $values = $this->request->getValues();
+
+            list($valid, $errors) = $this->task->validateDescriptionCreation($values);
+
+            if ($valid) {
+
+                if ($this->task->update($values)) {
+                    $this->session->flash(t('Task updated successfully.'));
+                }
+                else {
+                    $this->session->flashError(t('Unable to update your task.'));
+                }
+
+                if ($ajax) {
+                    $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
+                }
+                else {
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+                }
+            }
+        }
+        else {
+            $values = $task;
+            $errors = array();
+        }
 
         $params = array(
-            'values' => $task,
-            'errors' => array(),
+            'values' => $values,
+            'errors' => $errors,
             'task' => $task,
-            'ajax' => $this->request->isAjax(),
+            'ajax' => $ajax,
             'menu' => 'tasks',
             'title' => t('Edit the description'),
         );
 
-        if ($this->request->isAjax()) {
+        if ($ajax) {
             $this->response->html($this->template->load('task_edit_description', $params));
         }
         else {
             $this->response->html($this->taskLayout('task_edit_description', $params));
         }
-    }
-
-    /**
-     * Save and validation the description
-     *
-     * @access public
-     */
-    public function saveDescription()
-    {
-        $task = $this->getTask();
-        $values = $this->request->getValues();
-
-        list($valid, $errors) = $this->task->validateDescriptionCreation($values);
-
-        if ($valid) {
-
-            if ($this->task->update($values)) {
-                $this->session->flash(t('Task updated successfully.'));
-            }
-            else {
-                $this->session->flashError(t('Unable to update your task.'));
-            }
-
-            if ($this->request->getIntegerParam('ajax')) {
-                $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
-            }
-            else {
-                $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
-            }
-        }
-
-        $this->response->html($this->taskLayout('task_edit_description', array(
-            'values' => $values,
-            'errors' => $errors,
-            'task' => $task,
-            'menu' => 'tasks',
-            'title' => t('Edit the description')
-        )));
     }
 
     /**

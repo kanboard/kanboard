@@ -37,23 +37,7 @@ class Acl extends Base
         'comment' => array('create', 'save', 'confirm', 'remove', 'update', 'edit', 'forbidden'),
         'file' => array('create', 'save', 'download', 'confirm', 'remove', 'open', 'image'),
         'subtask' => array('create', 'save', 'edit', 'update', 'confirm', 'remove'),
-        'task' => array(
-            'show',
-            'create',
-            'save',
-            'edit',
-            'update',
-            'close',
-            'confirmclose',
-            'open',
-            'confirmopen',
-            'duplicate',
-            'remove',
-            'confirmremove',
-            'editdescription',
-            'savedescription',
-            'move',
-        ),
+        'task' => array('show', 'create', 'save', 'edit', 'update', 'close', 'open', 'duplicate', 'remove', 'description', 'move', 'copy'),
     );
 
     /**
