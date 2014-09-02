@@ -73,7 +73,8 @@ class TaskDuplicateAnotherProject extends Base
     {
         if ($data['column_id'] == $this->getParam('column_id') && $data['project_id'] != $this->getParam('project_id')) {
 
-            $this->task->duplicateToAnotherProject($data['task_id'], $this->getParam('project_id'));
+            $task = $this->task->getById($data['task_id']);
+            $this->task->duplicateToAnotherProject($this->getParam('project_id'), $task);
 
             return true;
         }

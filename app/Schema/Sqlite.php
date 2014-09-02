@@ -57,7 +57,7 @@ function version_18($pdo)
             status INTEGER DEFAULT 0,
             time_estimated INTEGER DEFAULT 0,
             time_spent INTEGER DEFAULT 0,
-            task_id INTEGER,
+            task_id INTEGER NOT NULL,
             user_id INTEGER,
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
         )"

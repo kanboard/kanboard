@@ -121,13 +121,12 @@ class SubTask extends Base
     }
 
     /**
-     * Create
+     * Prepare data before insert/update
      *
      * @access public
      * @param  array    $values    Form values
-     * @return bool
      */
-    public function create(array $values)
+    public function prepare(array &$values)
     {
         if (isset($values['another_subtask'])) {
             unset($values['another_subtask']);
@@ -140,7 +139,18 @@ class SubTask extends Base
         if (isset($values['time_spent']) && empty($values['time_spent'])) {
             $values['time_spent'] = 0;
         }
+    }
 
+    /**
+     * Create
+     *
+     * @access public
+     * @param  array    $values    Form values
+     * @return bool
+     */
+    public function create(array $values)
+    {
+        $this->prepare($values);
         $result = $this->db->table(self::TABLE)->save($values);
 
         if ($result) {
@@ -160,14 +170,7 @@ class SubTask extends Base
      */
     public function update(array $values)
     {
-        if (isset($values['time_estimated']) && empty($values['time_estimated'])) {
-            $values['time_estimated'] = 0;
-        }
-
-        if (isset($values['time_spent']) && empty($values['time_spent'])) {
-            $values['time_spent'] = 0;
-        }
-
+        $this->prepare($values);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
         if ($result) {
@@ -187,6 +190,34 @@ class SubTask extends Base
     public function remove($subtask_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $subtask_id)->remove();
+    }
+
+    /**
+     * Duplicate all subtasks to another task
+     *
+     * @access public
+     * @param  integer   $src_task_id    Source task id
+     * @param  integer   $dst_task_id    Destination task id
+     * @return bool
+     */
+    public function duplicate($src_task_id, $dst_task_id)
+    {
+        $subtasks = $this->db->table(self::TABLE)
+                             ->columns('title', 'time_estimated')
+                             ->eq('task_id', $src_task_id)
+                             ->findAll();
+
+        foreach ($subtasks as &$subtask) {
+
+            $subtask['task_id'] = $dst_task_id;
+            $subtask['time_spent'] = 0;
+
+            if (! $this->db->table(self::TABLE)->save($subtask)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

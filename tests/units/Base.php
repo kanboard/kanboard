@@ -39,6 +39,7 @@ require_once __DIR__.'/../../app/Model/User.php';
 require_once __DIR__.'/../../app/Model/Board.php';
 require_once __DIR__.'/../../app/Model/Action.php';
 require_once __DIR__.'/../../app/Model/Category.php';
+require_once __DIR__.'/../../app/Model/SubTask.php';
 
 require_once __DIR__.'/../../app/Action/Base.php';
 require_once __DIR__.'/../../app/Action/TaskClose.php';

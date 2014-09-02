@@ -170,15 +170,16 @@ class TaskTest extends Base
 
         // We create a task
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1, 'category_id' => 1)));
+        $task = $t->getById(1);
 
         // We duplicate our task to the 2nd project
-        $this->assertEquals(2, $t->duplicateToAnotherProject(1, 2));
+        $this->assertEquals(2, $t->duplicateToAnotherProject(2, $task));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
         $task = $t->getById(2);
         $this->assertNotEmpty($task);
-        $this->assertEquals(0, $task['owner_id']);
+        $this->assertEquals(1, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
@@ -204,7 +205,7 @@ class TaskTest extends Base
 
         // We duplicate our task to the 2nd project
         $task = $t->getById(1);
-        $this->assertTrue($t->moveToAnotherProject(2, $task));
+        $this->assertEquals(1, $t->moveToAnotherProject(2, $task));
         //$this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
@@ -222,7 +223,7 @@ class TaskTest extends Base
 
         // The owner should be reseted
         $task = $t->getById(2);
-        $this->assertTrue($t->moveToAnotherProject(2, $task));
+        $this->assertEquals(2, $t->moveToAnotherProject(2, $task));
 
         $task = $t->getById(2);
         $this->assertNotEmpty($task);

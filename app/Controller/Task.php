@@ -433,6 +433,26 @@ class Task extends Base
      */
     public function move()
     {
+        $this->toAnotherProject('move');
+    }
+
+    /**
+     * Duplicate a task to another project
+     *
+     * @access public
+     */
+    public function copy()
+    {
+        $this->toAnotherProject('duplicate');
+    }
+
+    /**
+     * Common methods between the actions "move" and "copy"
+     *
+     * @access private
+     */
+    private function toAnotherProject($action)
+    {
         $task = $this->getTask();
         $values = $task;
         $errors = array();
@@ -446,23 +466,24 @@ class Task extends Base
             list($valid, $errors) = $this->task->validateProjectModification($values);
 
             if ($valid) {
-                if ($this->task->moveToAnotherProject($values['project_id'], $task)) {
-                    $this->session->flash(t('Task updated successfully.'));
-                    $this->response->redirect('?controller=task&action=show&task_id='.$values['id']);
+                $task_id = $this->task->{$action.'ToAnotherProject'}($values['project_id'], $task);
+                if ($task_id) {
+                    $this->session->flash(t('Task created successfully.'));
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task_id);
                 }
                 else {
-                    $this->session->flashError(t('Unable to update your task.'));
+                    $this->session->flashError(t('Unable to create your task.'));
                 }
             }
         }
 
-        $this->response->html($this->taskLayout('task_move_project', array(
+        $this->response->html($this->taskLayout('task_'.$action.'_project', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
             'projects_list' => $projects_list,
             'menu' => 'tasks',
-            'title' => t('Move the task to another project')
+            'title' => t(ucfirst($action).' the task to another project')
         )));
     }
 }

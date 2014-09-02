@@ -33,6 +33,7 @@ List of available actions
 - Assign the task to a specific user
 - Assign the task to the person who does the action
 - Duplicate the task to another project
+- Move the task to another project
 - Assign a color to a specific user
 - Assign automatically a color based on a category
 - Assign automatically a category based on a color
@@ -67,6 +68,14 @@ Let's say we have two projects "Customer orders" and "Production", once the orde
 - Choose the event: **Closing a task**
 - Choose the action: **Duplicate the task to another project**
 - Define the action parameters: **Column = Validated** and **Project = Production**
+
+### When a task is moved to the last column, move the exact same task to another project
+
+Let's say we have two projects "Ideas" and "Development", once the idea is validated, swap it to the "Development" project.
+
+- Choose the event: **Move a task to another column**
+- Choose the action: **Move the task to another project**
+- Define the action parameters: **Column = Validated** and **Project = Development**
 
 ### I want to assign automatically a color to the user Bob
 

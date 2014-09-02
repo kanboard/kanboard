@@ -306,43 +306,54 @@ class Task extends Base
      * Duplicate a task to another project (always copy to the first column)
      *
      * @access public
-     * @param  integer   $task_id      Task id
      * @param  integer   $project_id   Destination project id
+     * @param  array      $task        Task data
      * @return boolean
      */
-    public function duplicateToAnotherProject($task_id, $project_id)
+    public function duplicateToAnotherProject($project_id, array $task)
     {
         $this->db->startTransaction();
 
-        // Get the original task
-        $task = $this->getById($task_id);
-
-        // Cleanup data
-        unset($task['id']);
-        unset($task['date_completed']);
-
         // Assign new values
-        $task['date_creation'] = time();
-        $task['owner_id'] = 0;
-        $task['category_id'] = 0;
-        $task['is_active'] = 1;
-        $task['column_id'] = $this->board->getFirstColumn($project_id);
-        $task['project_id'] = $project_id;
-        $task['position'] = $this->countByColumnId($task['project_id'], $task['column_id']);
+        $values = array();
+        $values['title'] = $task['title'];
+        $values['description'] = $task['description'];
+        $values['date_creation'] = time();
+        $values['date_modification'] = $values['date_creation'];
+        $values['date_due'] = $task['date_due'];
+        $values['color_id'] = $task['color_id'];
+        $values['project_id'] = $project_id;
+        $values['column_id'] = $this->board->getFirstColumn($project_id);
+        $values['owner_id'] = 0;
+        $values['creator_id'] = $task['creator_id'];
+        $values['position'] = $this->countByColumnId($project_id, $values['column_id']);
+        $values['score'] = $task['score'];
+        $values['category_id'] = 0;
+
+        // Check if the assigned user is allowed for the new project
+        if ($task['owner_id'] && $this->project->isUserAllowed($project_id, $task['owner_id'])) {
+            $values['owner_id'] = $task['owner_id'];
+        }
 
         // Save task
-        if (! $this->db->table(self::TABLE)->save($task)) {
+        if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
             return false;
         }
 
         $task_id = $this->db->getConnection()->getLastId();
 
+        // Duplicate subtasks
+        if (! $this->subTask->duplicate($task['id'], $task_id)) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+
         $this->db->closeTransaction();
 
         // Trigger events
-        $this->event->trigger(self::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $task);
-        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $task);
+        $this->event->trigger(self::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $values);
+        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $values);
 
         return $task_id;
     }
@@ -584,7 +595,11 @@ class Task extends Base
         $values['position'] = $this->countByColumnId($project_id, $values['column_id']);
         $values['project_id'] = $project_id;
 
-        return $this->db->table(self::TABLE)->eq('id', $task['id'])->update($values);
+        if ($this->db->table(self::TABLE)->eq('id', $task['id'])->update($values)) {
+            return $task['id'];
+        }
+
+        return false;
     }
 
     /**
