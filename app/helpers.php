@@ -40,6 +40,11 @@ function get_username()
     return $_SESSION['user']['name'] ?: $_SESSION['user']['username'];
 }
 
+function get_user_id()
+{
+    return $_SESSION['user']['id'];
+}
+
 function parse($text)
 {
     $text = markdown($text);
@@ -110,15 +115,12 @@ function get_host_from_url($url)
     return escape(parse_url($url, PHP_URL_HOST)) ?: $url;
 }
 
-function summary($value, $min_length = 5, $max_length = 120, $end = '[...]')
+function summary($value, $max_length = 85, $end = '[...]')
 {
     $length = strlen($value);
 
     if ($length > $max_length) {
-        return substr($value, 0, strpos($value, ' ', $max_length)).' '.$end;
-    }
-    else if ($length < $min_length) {
-        return '';
+        return substr($value, 0, $max_length).' '.$end;
     }
 
     return $value;

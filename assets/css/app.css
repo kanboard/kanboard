@@ -60,6 +60,11 @@ h3 {
     font-size: 1.2em;
 }
 
+ul.no-bullet li {
+    list-style-type: none;
+    margin-left: 0;
+}
+
 /* tables */
 table {
     width: 100%;
@@ -103,7 +108,7 @@ td li {
 }
 
 .table-small {
-    font-size: 0.85em;
+    font-size: 0.8em;
 }
 
 .table-hover tr:hover td {
@@ -461,6 +466,15 @@ nav .active a {
     font-weight: bold;
 }
 
+.username {
+    color: #000;
+}
+
+.username:hover {
+    color: red;
+    text-decoration: underline;
+}
+
 .logo {
     color: #DF5353;
     letter-spacing: 1px;
@@ -676,16 +690,19 @@ a.task-board-nobody {
 }
 
 /* task view */
+.user-show,
 .project-show,
 .task-show {
     position: relative;
 }
 
+.user-show-main,
 .project-show-main,
 .task-show-main {
     margin-left: 330px;
 }
 
+.user-show-sidebar,
 .project-show-sidebar,
 .task-show-sidebar {
     position: absolute;
@@ -699,6 +716,7 @@ a.task-board-nobody {
     border-radius: 5px;
 }
 
+.user-show-sidebar li,
 .project-show-sidebar li,
 .task-show-sidebar li {
     list-style-type: square;

@@ -65,6 +65,48 @@ class User extends Base
     }
 
     /**
+     * Common layout for project views
+     *
+     * @access private
+     * @param  string    $template   Template name
+     * @param  array     $params     Template parameters
+     * @return string
+     */
+    private function layout($template, array $params)
+    {
+        $content = $this->template->load($template, $params);
+        $params['user_content_for_layout'] = $content;
+        $params['menu'] = 'users';
+
+        if (isset($params['user'])) {
+            $params['title'] = $params['user']['name'] ?: $params['user']['username'];
+        }
+
+        return $this->template->layout('user_layout', $params);
+    }
+
+    /**
+     * Common method to get the user
+     *
+     * @access private
+     * @return array
+     */
+    private function getUser()
+    {
+        $user = $this->user->getById($this->request->getIntegerParam('user_id'), true);
+
+        if (! $user) {
+            $this->notfound();
+        }
+
+        if ($this->acl->isRegularUser() && $this->acl->getUserId() != $user['id']) {
+            $this->forbidden();
+        }
+
+        return $user;
+    }
+
+    /**
      * List all users
      *
      * @access public
@@ -131,91 +173,180 @@ class User extends Base
     }
 
     /**
+     * Display user information
+     *
+     * @access public
+     */
+    public function show()
+    {
+        $user = $this->getUser();
+        $this->response->html($this->layout('user_show', array(
+            'projects' => $this->project->getAvailableList($user['id']),
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Display last connections
+     *
+     * @access public
+     */
+    public function last()
+    {
+        $user = $this->getUser();
+        $this->response->html($this->layout('user_last', array(
+            'last_logins' => $this->lastLogin->getAll($user['id']),
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Display user sessions
+     *
+     * @access public
+     */
+    public function sessions()
+    {
+        $user = $this->getUser();
+        $this->response->html($this->layout('user_sessions', array(
+            'sessions' => $this->authentication->backend('rememberMe')->getAll($user['id']),
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Remove a "RememberMe" token
+     *
+     * @access public
+     */
+    public function removeSession()
+    {
+        $this->checkCSRFParam();
+        $user = $this->getUser();
+        $this->authentication->backend('rememberMe')->remove($this->request->getIntegerParam('id'));
+        $this->response->redirect('?controller=user&action=sessions&user_id='.$user['id']);
+    }
+
+    /**
+     * Display user notifications
+     *
+     * @access public
+     */
+    public function notifications()
+    {
+        $user = $this->getUser();
+
+        if ($this->request->isPost()) {
+            $values = $this->request->getValues();
+            $this->notification->saveSettings($user['id'], $values);
+            $this->session->flash(t('User updated successfully.'));
+            $this->response->redirect('?controller=user&action=notifications&user_id='.$user['id']);
+        }
+
+        $this->response->html($this->layout('user_notifications', array(
+            'projects' => $this->project->getAvailableList($user['id']),
+            'notifications' => $this->notification->readSettings($user['id']),
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Display external accounts
+     *
+     * @access public
+     */
+    public function external()
+    {
+        $user = $this->getUser();
+        $this->response->html($this->layout('user_external', array(
+            'last_logins' => $this->lastLogin->getAll($user['id']),
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Password modification
+     *
+     * @access public
+     */
+    public function password()
+    {
+        $user = $this->getUser();
+        $values = array('id' => $user['id']);
+        $errors = array();
+
+        if ($this->request->isPost()) {
+
+            $values = $this->request->getValues();
+            list($valid, $errors) = $this->user->validatePasswordModification($values);
+
+            if ($valid) {
+
+                if ($this->user->update($values)) {
+                    $this->session->flash(t('Password modified successfully.'));
+                }
+                else {
+                    $this->session->flashError(t('Unable to change the password.'));
+                }
+
+                $this->response->redirect('?controller=user&action=show&user_id='.$user['id']);
+            }
+        }
+
+        $this->response->html($this->layout('user_password', array(
+            'values' => $values,
+            'errors' => $errors,
+            'user' => $user,
+        )));
+    }
+
+    /**
      * Display a form to edit a user
      *
      * @access public
      */
     public function edit()
     {
-        $user = $this->user->getById($this->request->getIntegerParam('user_id'));
+        $user = $this->getUser();
+        $values = $user;
+        $errors = array();
 
-        if (! $user) $this->notfound();
+        unset($values['password']);
 
-        if ($this->acl->isRegularUser() && $this->acl->getUserId() != $user['id']) {
-            $this->forbidden();
-        }
+        if ($this->request->isPost()) {
 
-        unset($user['password']);
+            $values = $this->request->getValues();
 
-        $this->response->html($this->template->layout('user_edit', array(
-            'projects' => $this->project->filterListByAccess($this->project->getList(), $user['id']),
-            'errors' => array(),
-            'values' => $user,
-            'menu' => 'users',
-            'title' => t('Edit user')
-        )));
-    }
-
-    /**
-     * Validate and update a user
-     *
-     * @access public
-     */
-    public function update()
-    {
-        $values = $this->request->getValues();
-
-        if ($this->acl->isAdminUser()) {
-            $values += array('is_admin' => 0);
-        }
-        else {
-
-            if ($this->acl->getUserId() != $values['id']) {
-                $this->forbidden();
-            }
-
-            if (isset($values['is_admin'])) {
-                unset($values['is_admin']); // Regular users can't be admin
-            }
-        }
-
-        list($valid, $errors) = $this->user->validateModification($values);
-
-        if ($valid) {
-
-            if ($this->user->update($values)) {
-                $this->session->flash(t('User updated successfully.'));
-                $this->response->redirect('?controller=user');
+            if ($this->acl->isAdminUser()) {
+                $values += array('is_admin' => 0);
             }
             else {
-                $this->session->flashError(t('Unable to update your user.'));
+
+                if (isset($values['is_admin'])) {
+                    unset($values['is_admin']); // Regular users can't be admin
+                }
+            }
+
+            list($valid, $errors) = $this->user->validateModification($values);
+
+            if ($valid) {
+
+                if ($this->user->update($values)) {
+                    $this->session->flash(t('User updated successfully.'));
+                }
+                else {
+                    $this->session->flashError(t('Unable to update your user.'));
+                }
+
+                $this->response->redirect('?controller=user&action=show&user_id='.$user['id']);
             }
         }
 
-        $this->response->html($this->template->layout('user_edit', array(
-            'projects' => $this->project->filterListByAccess($this->project->getList(), $values['id']),
-            'errors' => $errors,
+        $this->response->html($this->layout('user_edit', array(
             'values' => $values,
-            'menu' => 'users',
-            'title' => t('Edit user')
-        )));
-    }
-
-    /**
-     * Confirmation dialog before to remove a user
-     *
-     * @access public
-     */
-    public function confirm()
-    {
-        $user = $this->user->getById($this->request->getIntegerParam('user_id'));
-
-        if (! $user) $this->notfound();
-
-        $this->response->html($this->template->layout('user_remove', array(
+            'errors' => $errors,
+            'projects' => $this->project->filterListByAccess($this->project->getList(), $user['id']),
             'user' => $user,
-            'menu' => 'users',
-            'title' => t('Remove user')
         )));
     }
 
@@ -226,16 +357,24 @@ class User extends Base
      */
     public function remove()
     {
-        $this->checkCSRFParam();
-        $user_id = $this->request->getIntegerParam('user_id');
+        $user = $this->getUser();
 
-        if ($user_id && $this->user->remove($user_id)) {
-            $this->session->flash(t('User removed successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to remove this user.'));
+        if ($this->request->getStringParam('confirmation') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            if ($this->user->remove($user['id'])) {
+                $this->session->flash(t('User removed successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to remove this user.'));
+            }
+
+            $this->response->redirect('?controller=user');
         }
 
-        $this->response->redirect('?controller=user');
+        $this->response->html($this->layout('user_remove', array(
+            'user' => $user,
+        )));
     }
 
     /**
@@ -263,7 +402,7 @@ class User extends Base
                         $this->session->flashError(t('Unable to link your Google Account.'));
                     }
 
-                    $this->response->redirect('?controller=user');
+                    $this->response->redirect('?controller=user&action=external&user_id='.$this->acl->getUserId());
                 }
                 else if ($this->authentication->backend('google')->authenticate($profile['id'])) {
                     $this->response->redirect('?controller=app');
@@ -297,7 +436,7 @@ class User extends Base
             $this->session->flashError(t('Unable to unlink your Google Account.'));
         }
 
-        $this->response->redirect('?controller=user');
+        $this->response->redirect('?controller=user&action=external&user_id='.$this->acl->getUserId());
     }
 
     /**
@@ -324,7 +463,7 @@ class User extends Base
                         $this->session->flashError(t('Unable to link your GitHub Account.'));
                     }
 
-                    $this->response->redirect('?controller=user');
+                    $this->response->redirect('?controller=user&action=external&user_id='.$this->acl->getUserId());
                 }
                 else if ($this->authentication->backend('gitHub')->authenticate($profile['id'])) {
                     $this->response->redirect('?controller=app');
@@ -361,6 +500,6 @@ class User extends Base
             $this->session->flashError(t('Unable to unlink your GitHub Account.'));
         }
 
-        $this->response->redirect('?controller=user');
+        $this->response->redirect('?controller=user&action=external&user_id='.$this->acl->getUserId());
     }
 }

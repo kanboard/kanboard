@@ -57,12 +57,14 @@
                     <li <?= isset($menu) && $menu === 'users' ? 'class="active"' : '' ?>>
                         <a href="?controller=user"><?= t('Users') ?></a>
                     </li>
-                    <li <?= isset($menu) && $menu === 'config' ? 'class="active"' : '' ?>>
-                        <a href="?controller=config"><?= t('Settings') ?></a>
-                    </li>
+                    <?php if (Helper\is_admin()): ?>
+                        <li <?= isset($menu) && $menu === 'config' ? 'class="active"' : '' ?>>
+                            <a href="?controller=config"><?= t('Settings') ?></a>
+                        </li>
+                    <?php endif ?>
                     <li>
                         <a href="?controller=user&amp;action=logout<?= Helper\param_csrf() ?>"><?= t('Logout') ?></a>
-                        (<?= Helper\escape(Helper\get_username()) ?>)
+                        (<a class="username" href="?controller=user&amp;action=show&amp;user_id=<?= Helper\get_user_id() ?>"><?= Helper\escape(Helper\get_username()) ?></a>)
                     </li>
                 </ul>
             </nav>

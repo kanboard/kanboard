@@ -21,9 +21,6 @@
             <?= Helper\form_label(t('Email'), 'email') ?>
             <?= Helper\form_email('email', $values, $errors) ?><br/>
 
-            <?= Helper\form_label(t('Default Project'), 'default_project_id') ?>
-            <?= Helper\form_select('default_project_id', $projects, $values, $errors) ?><br/>
-
         </div>
 
         <div class="form-column">
@@ -33,6 +30,9 @@
 
             <?= Helper\form_label(t('Confirmation'), 'confirmation') ?>
             <?= Helper\form_password('confirmation', $values, $errors, array('required')) ?><br/>
+
+            <?= Helper\form_label(t('Default project'), 'default_project_id') ?>
+            <?= Helper\form_select('default_project_id', $projects, $values, $errors) ?><br/>
 
             <?= Helper\form_checkbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1 ? true : false) ?>
 

@@ -13,17 +13,23 @@
     <?php else: ?>
         <table>
             <tr>
+                <th><?= t('Id') ?></th>
                 <th><?= t('Username') ?></th>
                 <th><?= t('Name') ?></th>
                 <th><?= t('Email') ?></th>
                 <th><?= t('Administrator') ?></th>
-                <th><?= t('Default Project') ?></th>
-                <th><?= t('Actions') ?></th>
+                <th><?= t('Default project') ?></th>
+                <th><?= t('Notifications') ?></th>
+                <th><?= t('External accounts') ?></th>
+                <th><?= t('Account type') ?></th>
             </tr>
             <?php foreach ($users as $user): ?>
             <tr>
                 <td>
-                    <span title="user_id=<?= $user['id'] ?>"><?= Helper\escape($user['username']) ?></span>
+                    <a href="?controller=user&amp;action=show&amp;user_id=<?= $user['id'] ?>">#<?= $user['id'] ?></a>
+                </td>
+                <td>
+                    <a href="?controller=user&amp;action=show&amp;user_id=<?= $user['id'] ?>"><?= Helper\escape($user['username']) ?></a>
                 </td>
                 <td>
                     <?= Helper\escape($user['name']) ?>
@@ -38,15 +44,24 @@
                     <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? Helper\escape($projects[$user['default_project_id']]) : t('None'); ?>
                 </td>
                 <td>
-                    <?php if (Helper\is_admin() || Helper\is_current_user($user['id'])): ?>
-                        <a href="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>"><?= t('edit') ?></a>
+                    <?php if ($user['notifications_enabled'] == 1): ?>
+                        <?= t('Enabled') ?>
+                    <?php else: ?>
+                        <?= t('Disabled') ?>
                     <?php endif ?>
-                    <?php if (Helper\is_admin()): ?>
-                        <?php if (count($users) > 1): ?>
-                            <?= t('or') ?>
-                            <a href="?controller=user&amp;action=confirm&amp;user_id=<?= $user['id'] ?>"><?= t('remove') ?></a>
-                        <?php endif ?>
+                </td>
+                <td>
+                    <ul class="no-bullet">
+                    <?php if ($user['google_id']): ?>
+                        <li><?= t('Google account linked') ?></li>
                     <?php endif ?>
+                    <?php if ($user['github_id']): ?>
+                        <li><?= t('Github account linked') ?></li>
+                    <?php endif ?>
+                    </ul>
+                </td>
+                <td>
+                    <?= $user['is_ldap_user'] ? t('Remote') : t('Local') ?>
                 </td>
             </tr>
             <?php endforeach ?>
