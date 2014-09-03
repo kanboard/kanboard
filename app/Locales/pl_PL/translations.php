@@ -466,4 +466,6 @@ return array(
     // 'No external authentication enabled.' => '',
     // 'Password modified successfully.' => '',
     // 'Unable to change the password.' => '',
+    // 'Change category for the task "%s"' => '',
+    // 'Change category' => '',
 );

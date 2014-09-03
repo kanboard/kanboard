@@ -466,4 +466,6 @@ return array(
     'No external authentication enabled.' => 'Aucune authentication externe activée.',
     'Password modified successfully.' => 'Mot de passe changé avec succès.',
     'Unable to change the password.' => 'Impossible de changer le mot de passe.',
+    'Change category for the task "%s"' => 'Changer la catégorie pour la tâche « %s »',
+    'Change category' => 'Changer de catégorie',
 );

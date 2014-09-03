@@ -92,6 +92,9 @@ Kanboard.Board = (function() {
         // Assignee change
         $(".assignee-popover").click(Kanboard.Popover);
 
+        // Category change
+        $(".category-popover").click(Kanboard.Popover);
+
         // Task edit popover
         $(".task-edit-popover").click(function(e) {
             Kanboard.Popover(e, Kanboard.Task.Init);

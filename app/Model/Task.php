@@ -705,6 +705,30 @@ class Task extends Base
     }
 
     /**
+     * Validate category change
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateCategoryModification(array $values)
+    {
+        $v = new Validator($values, array(
+            new Validators\Required('id', t('The id is required')),
+            new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Required('project_id', t('The project is required')),
+            new Validators\Integer('project_id', t('This value must be an integer')),
+            new Validators\Required('category_id', t('This value is required')),
+            new Validators\Integer('category_id', t('This value must be an integer')),
+        ));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    /**
      * Validate project modification
      *
      * @access public
