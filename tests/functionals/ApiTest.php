@@ -396,23 +396,19 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($subtasks));
         $this->assertEquals(1, count($subtasks));
     }
-/*
-    public function testAutomaticActions()
+
+    public function testMoveTaskPosition()
     {
         $task = array(
-            'title' => 'Task #1',
+            'title' => 'Task to move',
             'color_id' => 'blue',
-            'owner_id' => 0,
+            'owner_id' => 1,
             'project_id' => 1,
             'column_id' => 1,
         );
 
         $this->assertTrue($this->client->createTask($task));
 
-        $tasks = $this->client->getAllTasks(1, array(1));
-        $task = $tasks[count($tasks) - 1];
-        $task['column_id'] = 3;
-
-        $this->assertTrue($this->client->updateTask($task));
-    }*/
+        $this->assertTrue($this->client->moveTaskPosition(1, 2, 3, 1));
+    }
 }

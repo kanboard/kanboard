@@ -146,6 +146,10 @@ $server->register('removeTask', function($task_id) use ($task) {
     return $task->remove($task_id);
 });
 
+$server->register('moveTaskPosition', function($project_id, $task_id, $column_id, $position) use ($task) {
+    return $task->movePosition($project_id, $task_id, $column_id, $position);
+});
+
 
 /**
  * User procedures

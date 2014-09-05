@@ -257,6 +257,12 @@ Procedures
 - Result on success: **true**
 - Result on failure: **false**
 
+### moveTaskPosition
+
+- Purpose: **Move a task to another column or another position**
+- Parameters: **project_id** (integer), **task_id** (integer), **column_id** (integer), **position** (integer)
+- Result on success: **true**
+- Result on failure: **false**
 
 
 

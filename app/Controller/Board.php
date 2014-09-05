@@ -396,27 +396,31 @@ class Board extends Base
      */
     public function save()
     {
-        if ($this->request->isAjax()) {
+        $project_id = $this->request->getIntegerParam('project_id');
 
-            $project_id = $this->request->getIntegerParam('project_id');
+        if ($project_id > 0 && $this->request->isAjax()) {
+
+            if (! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+                $this->response->status(401);
+            }
+
             $values = $this->request->getValues();
 
-            if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
-                $this->response->text('Not Authorized', 401);
-            }
+            if ($this->task->movePosition($project_id, $values['task_id'], $values['column_id'], $values['position'])) {
 
-            if (isset($values['positions'])) {
-                $this->board->saveTasksPosition($values['positions'], $values['selected_task_id']);
+                $this->response->html(
+                    $this->template->load('board_show', array(
+                        'current_project_id' => $project_id,
+                        'board' => $this->board->get($project_id),
+                        'categories' => $this->category->getList($project_id, false),
+                    )),
+                    201
+                );
             }
+            else {
 
-            $this->response->html(
-                $this->template->load('board_show', array(
-                    'current_project_id' => $project_id,
-                    'board' => $this->board->get($project_id),
-                    'categories' => $this->category->getList($project_id, false),
-                )),
-                201
-            );
+                $this->response->status(400);
+            }
         }
         else {
             $this->response->status(401);

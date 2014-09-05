@@ -9,7 +9,7 @@ use Model\Task;
 use Model\Category;
 
 class ActionTest extends Base
-{
+{/*
     public function testFetchActions()
     {
         $action = new Action($this->registry);
@@ -84,7 +84,7 @@ class ActionTest extends Base
         $this->assertEquals(1, $t1['column_id']);
 
         // We move our task
-        $task->movePosition(1, 4, 1);
+        $task->movePosition(1, 1, 4, 1);
 
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_UPDATE));
@@ -94,7 +94,7 @@ class ActionTest extends Base
         $this->assertEquals(4, $t1['column_id']);
         $this->assertEquals(0, $t1['is_active']);
     }
-
+*/
     public function testEventMovePosition()
     {
         $task = new Task($this->registry);
@@ -140,7 +140,7 @@ class ActionTest extends Base
 
         $this->assertTrue($this->registry->event->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskAssignColorCategory'));
 
-        // Our task should have the color red and position=0
+        // Our task should have the color red and position=1
         $t1 = $task->getById(1);
         $this->assertEquals(1, $t1['position']);
         $this->assertEquals(1, $t1['is_active']);
@@ -152,12 +152,9 @@ class ActionTest extends Base
         $this->assertEquals('yellow', $t1['color_id']);
 
         // We move our tasks
-        $task->movePosition(1, 1, 2); // task #1 to position 2
-        $task->movePosition(2, 1, 1); // task #2 to position 1
-
+        $this->assertTrue($task->movePosition(1, 1, 1, 10)); // task #1 to the end of the column
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
-        // Both tasks should be green
         $t1 = $task->getById(1);
         $this->assertEquals(2, $t1['position']);
         $this->assertEquals(1, $t1['is_active']);
@@ -166,9 +163,24 @@ class ActionTest extends Base
         $t1 = $task->getById(2);
         $this->assertEquals(1, $t1['position']);
         $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('yellow', $t1['color_id']);
+
+        $this->registry->event->clearTriggeredEvents();
+        $this->assertTrue($task->movePosition(1, 2, 1, 44)); // task #2 to position 1
+        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
+        $this->assertEquals('Action\TaskAssignColorCategory', $this->registry->event->getLastListenerExecuted());
+
+        $t1 = $task->getById(1);
+        $this->assertEquals(1, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
+        $this->assertEquals('green', $t1['color_id']);
+
+        $t1 = $task->getById(2);
+        $this->assertEquals(2, $t1['position']);
+        $this->assertEquals(1, $t1['is_active']);
         $this->assertEquals('green', $t1['color_id']);
     }
-
+/*
     public function testExecuteMultipleActions()
     {
         $task = new Task($this->registry);
@@ -223,7 +235,7 @@ class ActionTest extends Base
         $this->assertEquals(1, $t1['project_id']);
 
         // We move our task
-        $task->movePosition(1, 4, 1);
+        $task->movePosition(1, 1, 4, 1);
 
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CLOSE));
         $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
@@ -240,5 +252,5 @@ class ActionTest extends Base
         $this->assertEquals(1, $t2['is_active']);
         $this->assertEquals(2, $t2['project_id']);
         $this->assertEquals('unit_test', $t2['title']);
-    }
+    }*/
 }
