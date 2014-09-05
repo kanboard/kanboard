@@ -135,6 +135,8 @@ Kanboard.Board = (function() {
         var boardSelector = $("#board");
         var projectId = boardSelector.attr("data-project-id");
 
+        board_unload_events();
+
         $.ajax({
             cache: false,
             url: "?controller=board&action=save&project_id=" + projectId,
