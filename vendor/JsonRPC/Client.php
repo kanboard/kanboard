@@ -28,14 +28,6 @@ class Client
     private $timeout;
 
     /**
-     * Debug flag
-     *
-     * @access private
-     * @var bool
-     */
-    private $debug;
-
-    /**
      * Username for authentication
      *
      * @access private
@@ -69,14 +61,12 @@ class Client
      * @access public
      * @param  string    $url         Server URL
      * @param  integer   $timeout     Server URL
-     * @param  bool      $debug       Debug flag
      * @param  array     $headers     Custom HTTP headers
      */
-    public function __construct($url, $timeout = 5, $debug = false, $headers = array())
+    public function __construct($url, $timeout = 5, $headers = array())
     {
         $this->url = $url;
         $this->timeout = $timeout;
-        $this->debug = $debug;
         $this->headers = array_merge($this->headers, $headers);
     }
 
@@ -132,9 +122,6 @@ class Client
 
         if (isset($result['id']) && $result['id'] == $id && array_key_exists('result', $result)) {
             return $result['result'];
-        }
-        else if ($this->debug && isset($result['error'])) {
-            print_r($result['error']);
         }
 
         return null;

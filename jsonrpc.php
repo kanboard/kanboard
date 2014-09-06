@@ -116,7 +116,21 @@ $server->register('allowUser', function($project_id, $user_id) use ($project) {
 /**
  * Task procedures
  */
-$server->register('createTask', function(array $values) use ($task) {
+$server->register('createTask', function($title, $project_id, $color_id, $column_id, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($task) {
+
+    $values = array(
+        'title' => $title,
+        'project_id' => $project_id,
+        'color_id' => $color_id,
+        'column_id' => $column_id,
+        'owner_id' => $owner_id,
+        'creator_id' => $creator_id,
+        'date_due' => $date_due,
+        'description' => $description,
+        'category_id' => $category_id,
+        'score' => $score,
+    );
+
     list($valid,) = $task->validateCreation($values);
     return $valid && $task->create($values) !== false;
 });
@@ -129,8 +143,29 @@ $server->register('getAllTasks', function($project_id, array $status) use ($task
     return $task->getAll($project_id, $status);
 });
 
-$server->register('updateTask', function($values) use ($task) {
-    list($valid,) = $task->validateModification($values);
+$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null) use ($task) {
+
+    $values = array(
+        'id' => $id,
+        'title' => $title,
+        'project_id' => $project_id,
+        'color_id' => $color_id,
+        'column_id' => $column_id,
+        'owner_id' => $owner_id,
+        'creator_id' => $creator_id,
+        'date_due' => $date_due,
+        'description' => $description,
+        'category_id' => $category_id,
+        'score' => $score,
+    );
+
+    foreach ($values as $key => $value) {
+        if (is_null($value)) {
+            unset($values[$key]);
+        }
+    }
+
+    list($valid) = $task->validateModification($values);
     return $valid && $task->update($values);
 });
 

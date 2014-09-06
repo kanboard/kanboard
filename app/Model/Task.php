@@ -428,7 +428,7 @@ class Task extends Base
         // Fetch original task
         $original_task = $this->getById($values['id']);
 
-        if ($original_task === false) {
+        if (! $original_task) {
             return false;
         }
 
@@ -730,14 +730,10 @@ class Task extends Base
         $v = new Validator($values, array(
             new Validators\Required('id', t('The id is required')),
             new Validators\Integer('id', t('This value must be an integer')),
-            new Validators\Required('color_id', t('The color is required')),
-            new Validators\Required('project_id', t('The project is required')),
             new Validators\Integer('project_id', t('This value must be an integer')),
-            new Validators\Required('column_id', t('The column is required')),
             new Validators\Integer('column_id', t('This value must be an integer')),
             new Validators\Integer('owner_id', t('This value must be an integer')),
             new Validators\Integer('score', t('This value must be an integer')),
-            new Validators\Required('title', t('The title is required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
             new Validators\Date('date_due', t('Invalid date'), $this->getDateFormats()),
         ));
