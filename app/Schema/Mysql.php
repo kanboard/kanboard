@@ -4,7 +4,12 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 24;
+const VERSION = 25;
+
+function version_25($pdo)
+{
+    $pdo->exec("ALTER TABLE config ADD COLUMN default_columns VARCHAR(255) DEFAULT 'Backlog,Ready,Work in Progress,Done'");
+}
 
 function version_24($pdo)
 {
