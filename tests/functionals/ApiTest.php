@@ -11,7 +11,7 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = new JsonRPC\Client(self::URL, 5, true);
+        $this->client = new JsonRPC\Client(self::URL);
         $this->client->authentication('jsonrpc', self::KEY);
 
         $pdo = new PDO('sqlite:data/db.sqlite');
@@ -132,7 +132,7 @@ class Api extends PHPUnit_Framework_TestCase
             'column_id' => 2,
         );
 
-        $this->assertTrue($this->client->createTask($task));
+        $this->assertTrue($this->client->execute('createTask', $task));
 
         $task = array(
             'title' => 'Task #1',
@@ -140,7 +140,7 @@ class Api extends PHPUnit_Framework_TestCase
             'owner_id' => 1,
         );
 
-        $this->assertFalse($this->client->createTask($task));
+        $this->assertNull($this->client->createTask($task));
     }
 
     public function testGetTask()
@@ -175,7 +175,7 @@ class Api extends PHPUnit_Framework_TestCase
         $task['description'] = 'test';
         $task['date_due'] = '';
 
-        $this->assertTrue($this->client->updateTask($task));
+        $this->assertTrue($this->client->execute('updateTask', $task));
     }
 
     public function testRemoveTask()
@@ -278,7 +278,7 @@ class Api extends PHPUnit_Framework_TestCase
             'column_id' => 1,
         );
 
-        $this->assertTrue($this->client->createTask($task));
+        $this->assertTrue($this->client->execute('createTask', $task));
 
         $comment = array(
             'task_id' => 1,
@@ -396,23 +396,26 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($subtasks));
         $this->assertEquals(1, count($subtasks));
     }
-/*
-    public function testAutomaticActions()
+
+    public function testMoveTaskPosition()
     {
         $task = array(
-            'title' => 'Task #1',
+            'title' => 'Task to move',
             'color_id' => 'blue',
-            'owner_id' => 0,
+            'owner_id' => 1,
             'project_id' => 1,
             'column_id' => 1,
         );
 
-        $this->assertTrue($this->client->createTask($task));
+        $this->assertTrue($this->client->execute('createTask', $task));
 
-        $tasks = $this->client->getAllTasks(1, array(1));
-        $task = $tasks[count($tasks) - 1];
-        $task['column_id'] = 3;
+        $this->assertTrue($this->client->moveTaskPosition(1, 1, 3, 1));
 
-        $this->assertTrue($this->client->updateTask($task));
-    }*/
+        $task = $this->client->getTask(1);
+
+        $this->assertNotFalse($task);
+        $this->assertTrue(is_array($task));
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(3, $task['column_id']);
+    }
 }

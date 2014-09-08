@@ -177,7 +177,7 @@ class Server
                 $params[$name] = $request_params[$name];
             }
             else if ($p->isDefaultValueAvailable()) {
-                continue;
+                $params[$name] = $p->getDefaultValue();
             }
             else {
                 return false;

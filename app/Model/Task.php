@@ -421,36 +421,28 @@ class Task extends Base
      *
      * @access public
      * @param  array    $values            Form values
-     * @param  boolean  $trigger_events    Flag to trigger events
      * @return boolean
      */
-    public function update(array $values, $trigger_events = true)
+    public function update(array $values)
     {
         // Fetch original task
         $original_task = $this->getById($values['id']);
 
-        if ($original_task === false) {
+        if (! $original_task) {
             return false;
         }
 
         // Prepare data
         $this->prepare($values);
         $updated_task = $values;
+        $updated_task['date_modification'] = time();
         unset($updated_task['id']);
 
-        // We update the modification date only for the selected task to highlight recent moves
-        if ($trigger_events) {
-            $updated_task['date_modification'] = time();
-        }
-
-        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task);
-
-        // Trigger events
-        if ($result && $trigger_events) {
+        if ($this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task)) {
             $this->triggerUpdateEvents($original_task, $updated_task);
         }
 
-        return $result;
+        return true;
     }
 
     /**
@@ -548,23 +540,99 @@ class Task extends Base
      * Move a task to another column or to another position
      *
      * @access public
+     * @param  integer    $project_id        Project id
      * @param  integer    $task_id           Task id
      * @param  integer    $column_id         Column id
-     * @param  integer    $position          Position (must be greater than 1)
-     * @param  boolean    $trigger_events    Flag to trigger events
+     * @param  integer    $position          Position (must be >= 1)
      * @return boolean
      */
-    public function movePosition($task_id, $column_id, $position, $trigger_events = true)
+    public function movePosition($project_id, $task_id, $column_id, $position)
     {
-        $this->event->clearTriggeredEvents();
+        // The position can't be lower than 1
+        if ($position < 1) {
+            return false;
+        }
 
-        $values = array(
-            'id' => $task_id,
-            'column_id' => $column_id,
-            'position' => $position,
-        );
+        // We fetch all tasks on the board
+        $tasks = $this->db->table(self::TABLE)
+                          ->columns('id', 'column_id', 'position')
+                          ->eq('is_active', 1)
+                          ->eq('project_id', $project_id)
+                          ->findAll();
 
-        return $this->update($values, $trigger_events);
+        // We sort everything by column and position
+        $board = $this->board->getColumnsList($project_id);
+        $columns = array();
+
+        foreach ($board as $board_column_id => $board_column_name) {
+            $columns[$board_column_id] = array();
+        }
+
+        foreach ($tasks as &$task) {
+            if ($task['id'] != $task_id) {
+                $columns[$task['column_id']][$task['position'] - 1] = (int) $task['id'];
+            }
+        }
+
+        // The column must exists
+        if (! isset($columns[$column_id])) {
+            return false;
+        }
+
+        // We put our task to the new position
+        array_splice($columns[$column_id], $position - 1, 0, $task_id); // print_r($columns);
+
+        // We save the new positions for all tasks
+        return $this->savePositions($task_id, $columns);
+    }
+
+    /**
+     * Save task positions
+     *
+     * @access private
+     * @param  integer     $moved_task_id    Id of the moved task
+     * @param  array       $columns          Sorted tasks
+     * @return boolean
+     */
+    private function savePositions($moved_task_id, array $columns)
+    {
+        $this->db->startTransaction();
+
+        foreach ($columns as $column_id => $column) {
+
+            $position = 1;
+            ksort($column);
+
+            foreach ($column as $task_id) {
+
+                if ($task_id == $moved_task_id) {
+
+                    // Events will be triggered only for that task
+                    $result = $this->update(array(
+                        'id' => $task_id,
+                        'position' => $position,
+                        'column_id' => $column_id
+                    ));
+                }
+                else {
+                    $result = $this->db->table(self::TABLE)->eq('id', $task_id)->update(array(
+                        'position' => $position,
+                        'column_id' => $column_id
+                    ));
+                }
+
+                $position++;
+
+                if (! $result) {
+                    $this->db->cancelTransaction();
+                    return false;
+                }
+            }
+        }
+
+        $this->db->closeTransaction();
+
+        return true;
     }
 
     /**
@@ -662,14 +730,10 @@ class Task extends Base
         $v = new Validator($values, array(
             new Validators\Required('id', t('The id is required')),
             new Validators\Integer('id', t('This value must be an integer')),
-            new Validators\Required('color_id', t('The color is required')),
-            new Validators\Required('project_id', t('The project is required')),
             new Validators\Integer('project_id', t('This value must be an integer')),
-            new Validators\Required('column_id', t('The column is required')),
             new Validators\Integer('column_id', t('This value must be an integer')),
             new Validators\Integer('owner_id', t('This value must be an integer')),
             new Validators\Integer('score', t('This value must be an integer')),
-            new Validators\Required('title', t('The title is required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
             new Validators\Date('date_due', t('Invalid date'), $this->getDateFormats()),
         ));
