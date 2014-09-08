@@ -13,9 +13,11 @@ class Session
     /**
      * Sesion lifetime
      *
+     * http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
+     *
      * @var integer
      */
-    const SESSION_LIFETIME = 7200; // 2 hours
+    const SESSION_LIFETIME = 0; // Until the browser is closed
 
     /**
      * Open a session
