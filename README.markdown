@@ -134,6 +134,7 @@ Contributors:
 - Sylvain Veyrié: https://github.com/turb
 - Toomyem: https://github.com/Toomyem
 - Tony G. Bolaño: https://github.com/tonybolanyo
+- Torsten: https://github.com/misterfu
 - Troloo: https://github.com/troloo
 - Typz: https://github.com/Typz
 - Ybarc: https://github.com/ybarc
