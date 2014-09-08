@@ -560,23 +560,30 @@ class Task extends Base
                           ->eq('project_id', $project_id)
                           ->findAll();
 
-        // We sort everything by column and position
         $board = $this->board->getColumnsList($project_id);
         $columns = array();
+        $task_id = (int) $task_id;
 
+        // Prepare the columns
         foreach ($board as $board_column_id => $board_column_name) {
             $columns[$board_column_id] = array();
         }
 
+        // The column must exists
+        if (! isset($columns[$column_id])) {
+            return false;
+        }
+
+        // Sort everything by column
         foreach ($tasks as &$task) {
             if ($task['id'] != $task_id) {
                 $columns[$task['column_id']][$task['position'] - 1] = (int) $task['id'];
             }
         }
 
-        // The column must exists
-        if (! isset($columns[$column_id])) {
-            return false;
+        // Sort all tasks by position
+        foreach ($columns as &$column) {
+            ksort($column);
         }
 
         // We put our task to the new position
@@ -601,7 +608,6 @@ class Task extends Base
         foreach ($columns as $column_id => $column) {
 
             $position = 1;
-            ksort($column);
 
             foreach ($column as $task_id) {
 

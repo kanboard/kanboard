@@ -9,6 +9,78 @@ use Model\User;
 
 class TaskTest extends Base
 {
+    public function testMoveTaskTop()
+    {
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
+        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(3, $t->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(4, $t->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 1)));
+
+        // Move the last task to hte top
+        $this->assertTrue($t->movePosition(1, 4, 1, 1));
+
+        // Check tasks position
+        $task = $t->getById(1);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+
+        $task = $t->getById(2);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(3, $task['position']);
+
+        $task = $t->getById(3);
+        $this->assertEquals(3, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(4, $task['position']);
+
+        $task = $t->getById(4);
+        $this->assertEquals(4, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+    }
+
+    public function testMoveTaskBottom()
+    {
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
+        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(3, $t->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(4, $t->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 1)));
+
+        // Move the last task to hte top
+        $this->assertTrue($t->movePosition(1, 1, 1, 4));
+
+        // Check tasks position
+        $task = $t->getById(1);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(4, $task['position']);
+
+        $task = $t->getById(2);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+
+        $task = $t->getById(3);
+        $this->assertEquals(3, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+
+        $task = $t->getById(4);
+        $this->assertEquals(4, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(3, $task['position']);
+    }
+
     public function testMovePosition()
     {
         $t = new Task($this->registry);
