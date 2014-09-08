@@ -395,6 +395,11 @@ class Task extends Base
 
         // Prepare data
         $this->prepare($values);
+
+        if (empty($values['column_id'])) {
+            $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
+        }
+
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
         $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
@@ -553,37 +558,25 @@ class Task extends Base
             return false;
         }
 
-        // We fetch all tasks on the board
-        $tasks = $this->db->table(self::TABLE)
-                          ->columns('id', 'column_id', 'position')
-                          ->eq('is_active', 1)
-                          ->eq('project_id', $project_id)
-                          ->findAll();
-
-        $board = $this->board->getColumnsList($project_id);
+        $board = $this->db->table(Board::TABLE)->eq('project_id', $project_id)->asc('position')->findAllByColumn('id');
         $columns = array();
         $task_id = (int) $task_id;
 
         // Prepare the columns
-        foreach ($board as $board_column_id => $board_column_name) {
-            $columns[$board_column_id] = array();
+        foreach ($board as $board_column_id) {
+
+            $columns[$board_column_id] = $this->db->table(self::TABLE)
+                          ->eq('is_active', 1)
+                          ->eq('project_id', $project_id)
+                          ->eq('column_id', $board_column_id)
+                          ->neq('id', $task_id)
+                          ->asc('position')
+                          ->findAllByColumn('id');
         }
 
         // The column must exists
         if (! isset($columns[$column_id])) {
             return false;
-        }
-
-        // Sort everything by column
-        foreach ($tasks as &$task) {
-            if ($task['id'] != $task_id) {
-                $columns[$task['column_id']][$task['position'] - 1] = (int) $task['id'];
-            }
-        }
-
-        // Sort all tasks by position
-        foreach ($columns as &$column) {
-            ksort($column);
         }
 
         // We put our task to the new position
@@ -687,7 +680,6 @@ class Task extends Base
             new Validators\Required('color_id', t('The color is required')),
             new Validators\Required('project_id', t('The project is required')),
             new Validators\Integer('project_id', t('This value must be an integer')),
-            new Validators\Required('column_id', t('The column is required')),
             new Validators\Integer('column_id', t('This value must be an integer')),
             new Validators\Integer('owner_id', t('This value must be an integer')),
             new Validators\Integer('creator_id', t('This value must be an integer')),

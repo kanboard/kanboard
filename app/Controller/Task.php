@@ -37,10 +37,6 @@ class Task extends Base
             'category_id' => $this->request->getIntegerParam('category_id'),
         );
 
-        if ($values['column_id'] == 0) {
-            $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
-        }
-
         list($valid,) = $this->task->validateCreation($values);
 
         if ($valid && $this->task->create($values)) {
