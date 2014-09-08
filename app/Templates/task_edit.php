@@ -33,9 +33,6 @@
             <?= Helper\form_label(t('Category'), 'category_id') ?>
             <?= Helper\form_select('category_id', $categories_list, $values, $errors) ?><br/>
 
-            <?= Helper\form_label(t('Column'), 'column_id') ?>
-            <?= Helper\form_select('column_id', $columns_list, $values, $errors) ?><br/>
-
             <?= Helper\form_label(t('Color'), 'color_id') ?>
             <?= Helper\form_select('color_id', $colors_list, $values, $errors) ?><br/>
 

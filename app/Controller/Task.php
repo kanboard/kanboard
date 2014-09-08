@@ -168,7 +168,6 @@ class Task extends Base
                 'values' => $task,
                 'errors' => array(),
                 'task' => $task,
-                'columns_list' => $this->board->getColumnsList($task['project_id']),
                 'users_list' => $this->project->getUsersList($task['project_id']),
                 'colors_list' => $this->task->getColors(),
                 'categories_list' => $this->category->getList($task['project_id']),
