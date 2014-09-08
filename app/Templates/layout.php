@@ -30,7 +30,7 @@
         <?php endif ?>
     </head>
     <body>
-    <?php if (isset($no_layout)): ?>
+    <?php if (isset($no_layout) && $no_layout): ?>
         <?= $content_for_layout ?>
     <?php else: ?>
         <header>

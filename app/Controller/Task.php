@@ -47,6 +47,39 @@ class Task extends Base
     }
 
     /**
+     * Public access (display a task)
+     *
+     * @access public
+     */
+    public function readonly()
+    {
+        $project = $this->project->getByToken($this->request->getStringParam('token'));
+
+        // Token verification
+        if (! $project) {
+            $this->forbidden(true);
+        }
+
+        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+
+        if (! $task) {
+            $this->notfound(true);
+        }
+
+        $this->response->html($this->template->layout('task_public', array(
+            'project' => $project,
+            'comments' => $this->comment->getAll($task['id']),
+            'subtasks' => $this->subTask->getAll($task['id']),
+            'task' => $task,
+            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'colors_list' => $this->task->getColors(),
+            'title' => $task['title'],
+            'no_layout' => true,
+            'auto_refresh' => true,
+        )));
+    }
+
+    /**
      * Show a task
      *
      * @access public
@@ -56,6 +89,7 @@ class Task extends Base
         $task = $this->getTask();
 
         $this->response->html($this->taskLayout('task_show', array(
+            'project' => $this->project->getById($task['project_id']),
             'files' => $this->file->getAll($task['id']),
             'comments' => $this->comment->getAll($task['id']),
             'subtasks' => $this->subTask->getAll($task['id']),

@@ -1,6 +1,6 @@
 <?php if (isset($not_editable)): ?>
 
-    #<?= $task['id'] ?> -
+    <a href="?controller=task&amp;action=readonly&amp;task_id=<?= $task['id'] ?>&amp;token=<?= $project['token'] ?>">#<?= $task['id'] ?></a> -
 
     <span class="task-board-user">
     <?php if (! empty($task['owner_id'])): ?>
@@ -15,7 +15,9 @@
     <?php endif ?>
 
     <div class="task-board-title">
-        <?= Helper\escape($task['title']) ?>
+        <a href="?controller=task&amp;action=readonly&amp;task_id=<?= $task['id'] ?>&amp;token=<?= $project['token'] ?>">
+            <?= Helper\escape($task['title']) ?>
+        </a>
     </div>
 
 <?php else: ?>
@@ -73,7 +75,11 @@
         <?php endif ?>
 
         <?php if (! empty($task['description'])): ?>
-            <a class="task-description-popover" href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"><i class="fa fa-file-text-o" title="<?= t('Description') ?>" data-href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"></i></a>
+            <?php if (! isset($not_editable)): ?>
+                <a class="task-description-popover" href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"><i class="fa fa-file-text-o" title="<?= t('Description') ?>" data-href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"></i></a>
+            <?php else: ?>
+                <i class="fa fa-file-text-o" title="<?= t('Description') ?>"></i>
+            <?php endif ?>
         <?php endif ?>
     </div>
 </div>

@@ -140,20 +140,28 @@ abstract class Base
      * Application not found page (404 error)
      *
      * @access public
+     * @param  boolean   $no_layout   Display the layout or not
      */
-    public function notfound()
+    public function notfound($no_layout = false)
     {
-        $this->response->html($this->template->layout('app_notfound', array('title' => t('Page not found'))));
+        $this->response->html($this->template->layout('app_notfound', array(
+            'title' => t('Page not found'),
+            'no_layout' => $no_layout,
+        )));
     }
 
     /**
      * Application forbidden page
      *
      * @access public
+     * @param  boolean   $no_layout   Display the layout or not
      */
-    public function forbidden()
+    public function forbidden($no_layout = false)
     {
-        $this->response->html($this->template->layout('app_forbidden', array('title' => t('Access Forbidden'))));
+        $this->response->html($this->template->layout('app_forbidden', array(
+            'title' => t('Access Forbidden'),
+            'no_layout' => $no_layout,
+        )));
     }
 
     /**

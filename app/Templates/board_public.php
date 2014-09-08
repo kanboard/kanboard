@@ -21,7 +21,7 @@
                     <?php foreach ($column['tasks'] as $task): ?>
                     <div class="task-board task-<?= $task['color_id'] ?>">
 
-                        <?= Helper\template('board_task', array('task' => $task, 'categories' => $categories, 'not_editable' => true)) ?>
+                        <?= Helper\template('board_task', array('task' => $task, 'categories' => $categories, 'not_editable' => true, 'project' => $project)) ?>
 
                     </div>
                     <?php endforeach ?>

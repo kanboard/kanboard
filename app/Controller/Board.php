@@ -167,7 +167,7 @@ class Board extends Base
 
         // Token verification
         if (! $project) {
-            $this->response->text('Not Authorized', 401);
+            $this->forbidden(true);
         }
 
         // Display the board with a specific layout

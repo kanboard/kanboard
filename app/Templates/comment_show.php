@@ -9,7 +9,7 @@
         <?php if (! isset($preview)): ?>
         <ul class="comment-actions">
             <li><a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a></li>
-            <?php if (Helper\is_admin() || Helper\is_current_user($comment['user_id'])): ?>
+            <?php if ((! isset($not_editable) || ! $not_editable) && (Helper\is_admin() || Helper\is_current_user($comment['user_id']))): ?>
                 <li>
                     <a href="?controller=comment&amp;action=confirm&amp;task_id=<?= $task['id'] ?>&amp;comment_id=<?= $comment['id'] ?>"><?= t('remove') ?></a>
                 </li>

@@ -25,23 +25,13 @@ class Comment extends Base
         }
 
         if (! $this->acl->isAdminUser() && $comment['user_id'] != $this->acl->getUserId()) {
-            $this->forbidden();
+            $this->response->html($this->template->layout('comment_forbidden', array(
+                'menu' => 'tasks',
+                'title' => t('Access Forbidden')
+            )));
         }
 
         return $comment;
-    }
-
-    /**
-     * Forbidden page for comments
-     *
-     * @access public
-     */
-    public function forbidden()
-    {
-        $this->response->html($this->template->layout('comment_forbidden', array(
-            'menu' => 'tasks',
-            'title' => t('Access Forbidden')
-        )));
     }
 
     /**
