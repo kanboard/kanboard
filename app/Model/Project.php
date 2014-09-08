@@ -496,13 +496,14 @@ class Project extends Base
         }
 
         $project_id = $this->db->getConnection()->getLastId();
+        
+        $default_columns = explode(",",$this->config->get('default_columns', 'Backlog,Ready,Work in Progress,Done'));
+        $columns = array();
+        foreach ($default_columns as $column) {
+            $columns[] = array('title' => t(trim($column)), 'task_limit' => 0);
+        }
 
-        $this->board->create($project_id, array(
-            array('title' => t('Backlog'), 'task_limit' => 0),
-            array('title' => t('Ready'), 'task_limit' => 0),
-            array('title' => t('Work in progress'), 'task_limit' => 0),
-            array('title' => t('Done'), 'task_limit' => 0),
-        ));
+        $this->board->create($project_id, $columns);
 
         $this->db->closeTransaction();
 
