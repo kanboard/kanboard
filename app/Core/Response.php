@@ -246,7 +246,7 @@ class Response
      */
     public function hsts()
     {
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+        if (Tool::isHTTPS()) {
             header('Strict-Transport-Security: max-age=31536000');
         }
     }

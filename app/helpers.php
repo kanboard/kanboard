@@ -65,7 +65,7 @@ function markdown($text)
 
 function get_current_base_url()
 {
-    $url = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    $url = \Core\Tool::isHTTPS() ? 'https://' : 'http://';
     $url .= $_SERVER['SERVER_NAME'];
     $url .= $_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443 ? '' : ':'.$_SERVER['SERVER_PORT'];
     $url .= dirname($_SERVER['PHP_SELF']) !== '/' ? dirname($_SERVER['PHP_SELF']).'/' : '/';

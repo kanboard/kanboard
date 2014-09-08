@@ -32,6 +32,15 @@ class Tool
         }
     }
 
+    /**
+     * Load and register a model
+     *
+     * @static
+     * @access public
+     * @param  Core\Registry    $registry    DPI container
+     * @param  string           $name        Model name
+     * @return mixed
+     */
     public static function loadModel(Registry $registry, $name)
     {
         if (! isset($registry->$name)) {
@@ -40,5 +49,19 @@ class Tool
         }
 
         return $registry->shared($name);
+    }
+
+    /**
+     * Check if the page is requested through HTTPS
+     *
+     * Note: IIS return the value 'off' and other web servers an empty value when it's not HTTPS
+     *
+     * @static
+     * @access public
+     * @return boolean
+     */
+    public static function isHTTPS()
+    {
+        return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== '' && $_SERVER['HTTPS'] !== 'off';
     }
 }

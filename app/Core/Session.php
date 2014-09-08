@@ -35,7 +35,7 @@ class Session
             self::SESSION_LIFETIME,
             $base_path ?: '/',
             null,
-            ! empty($_SERVER['HTTPS']),
+            Tool::isHTTPS(),
             true
         );
 

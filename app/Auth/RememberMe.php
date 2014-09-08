@@ -3,6 +3,7 @@
 namespace Auth;
 
 use Core\Security;
+use Core\Tool;
 
 /**
  * RememberMe model
@@ -309,7 +310,7 @@ class RememberMe extends Base
             $expiration,
             BASE_URL_DIRECTORY,
             null,
-            ! empty($_SERVER['HTTPS']),
+            Tool::isHTTPS(),
             true
         );
     }
@@ -342,7 +343,7 @@ class RememberMe extends Base
             time() - 3600,
             BASE_URL_DIRECTORY,
             null,
-            ! empty($_SERVER['HTTPS']),
+            Tool::isHTTPS(),
             true
         );
     }
