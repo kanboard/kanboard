@@ -28,7 +28,9 @@ require_once __DIR__.'/../../app/Core/Tool.php';
 require_once __DIR__.'/../../app/Core/Listener.php';
 require_once __DIR__.'/../../app/Core/Event.php';
 require_once __DIR__.'/../../app/Core/Translator.php';
+require_once __DIR__.'/../../app/Core/Template.php';
 require_once __DIR__.'/../../app/translator.php';
+require_once __DIR__.'/../../app/helpers.php';
 
 require_once __DIR__.'/../../app/Model/Base.php';
 require_once __DIR__.'/../../app/Model/Task.php';
@@ -41,6 +43,7 @@ require_once __DIR__.'/../../app/Model/Action.php';
 require_once __DIR__.'/../../app/Model/Category.php';
 require_once __DIR__.'/../../app/Model/SubTask.php';
 require_once __DIR__.'/../../app/Model/File.php';
+require_once __DIR__.'/../../app/Model/TaskHistory.php';
 
 require_once __DIR__.'/../../app/Action/Base.php';
 require_once __DIR__.'/../../app/Action/TaskClose.php';
@@ -55,6 +58,8 @@ abstract class Base extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        date_default_timezone_set('UTC');
+
         $this->registry = new \Core\Registry;
         $this->registry->db = $this->getDbConnection();
         $this->registry->event = new \Core\Event;

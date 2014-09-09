@@ -4,7 +4,24 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 24;
+const VERSION = 25;
+
+function version_25($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_events (
+            id INTEGER PRIMARY KEY,
+            date_creation INTEGER,
+            event_name TEXT NOT NULL,
+            creator_id INTEGER,
+            project_id INTEGER,
+            task_id INTEGER,
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        );
+    ");
+}
 
 function version_24($pdo)
 {

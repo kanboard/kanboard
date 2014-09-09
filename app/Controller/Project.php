@@ -407,6 +407,23 @@ class Project extends Base
     }
 
     /**
+     * Activity page for a project
+     *
+     * @access public
+     */
+    public function activity()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->template->layout('project_activity', array(
+            'events' => $this->project->getActivity($project['id']),
+            'menu' => 'projects',
+            'project' => $project,
+            'title' => t('%s\'s activity', $project['name'])
+        )));
+    }
+
+    /**
      * Task search for a given project
      *
      * @access public

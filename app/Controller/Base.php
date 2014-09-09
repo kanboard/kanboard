@@ -27,6 +27,7 @@ use Model\LastLogin;
  * @property \Model\Project            $project
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
+ * @property \Model\TaskHistory        $taskHistory
  * @property \Model\User               $user
  * @property \Model\Webhook            $webhook
  */
@@ -134,6 +135,7 @@ abstract class Base
         $this->project->attachEvents();
         $this->webhook->attachEvents();
         $this->notification->attachEvents();
+        $this->taskHistory->attachEvents();
     }
 
     /**

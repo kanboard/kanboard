@@ -26,6 +26,7 @@ use PicoDb\Database;
  * @property \Model\Project            $project
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
+ * @property \Model\TaskHistory        $taskHistory
  * @property \Model\User               $user
  * @property \Model\Webhook            $webhook
  */
@@ -42,10 +43,10 @@ abstract class Base
     /**
      * Event dispatcher instance
      *
-     * @access protected
+     * @access public
      * @var \Core\Event
      */
-    protected $event;
+    public $event;
 
     /**
      * Registry instance

@@ -710,4 +710,17 @@ class Project extends Base
             $this->event->attach($event_name, $listener);
         }
     }
+
+    /**
+     * Get project activity
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return array
+     */
+    public function getActivity($project_id)
+    {
+        // TODO: merge comments and subtasks activity
+        return $this->taskHistory->getAllContentByProjectId($project_id);
+    }
 }

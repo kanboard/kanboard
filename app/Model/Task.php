@@ -464,16 +464,17 @@ class Task extends Base
      */
     public function triggerUpdateEvents(array $original_task, array $updated_task)
     {
-        $events = array(
-            self::EVENT_CREATE_UPDATE,
-            self::EVENT_UPDATE,
-        );
+        $events = array();
 
         if (isset($updated_task['column_id']) && $original_task['column_id'] != $updated_task['column_id']) {
             $events[] = self::EVENT_MOVE_COLUMN;
         }
         else if (isset($updated_task['position']) && $original_task['position'] != $updated_task['position']) {
             $events[] = self::EVENT_MOVE_POSITION;
+        }
+        else {
+            $events[] = self::EVENT_CREATE_UPDATE;
+            $events[] = self::EVENT_UPDATE;
         }
 
         $event_data = array_merge($original_task, $updated_task);

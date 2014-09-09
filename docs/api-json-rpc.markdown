@@ -132,7 +132,7 @@ Response example:
 Request example:
 
 ```json
-
+{
     "jsonrpc": "2.0",
     "method": "getProjectById",
     "id": 226760253,

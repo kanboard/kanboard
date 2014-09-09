@@ -4,6 +4,7 @@
         <ul>
             <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('Back to the board') ?></a></li>
             <li><a href="?controller=project&amp;action=search&amp;project_id=<?= $project['id'] ?>"><?= t('Search') ?></a></li>
+            <li><a href="?controller=project&amp;action=activity&amp;project_id=<?= $project['id'] ?>"><?= t('Activity') ?></a></li>
             <li><a href="?controller=project&amp;action=index"><?= t('List of projects') ?></a></li>
         </ul>
     </div>
