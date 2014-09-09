@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth\Common\Service;
+namespace OAuth\OAuth2\Service;
 
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;

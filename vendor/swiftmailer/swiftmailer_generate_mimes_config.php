@@ -35,13 +35,10 @@ function generateUpToDateMimeArray()
             'php3' => 'application/x-php',
             'php4' => 'application/x-php',
             'php5' => 'application/x-php',
-            'pdf'  => 'application/pdf',
             'zip'  => 'application/zip',
             'gif'  => 'image/gif',
-            'jpg'  => 'image/jpeg',
             'png'  => 'image/png',
             'css'  => 'text/css',
-            'html' => 'text/html',
             'js'   => 'text/javascript',
             'txt'  => 'text/plain',
             'xml'  => 'text/xml',
@@ -58,7 +55,6 @@ function generateUpToDateMimeArray()
             'aps'  => 'application/postscript',
             'exe'  => 'application/x-ms-dos-executable',
             'flv'  => 'video/x-flv',
-            'gif'  => 'image/gif',
             'gz'   => 'application/x-gzip',
             'hqx'  => 'application/stuffit',
             'htm'  => 'text/html',
@@ -82,7 +78,6 @@ function generateUpToDateMimeArray()
             'ods'  => 'vnd.oasis.opendocument.spreadsheet',
             'ogg'  => 'audio/ogg',
             'pdf'  => 'application/pdf',
-            'png'  => 'image/png',
             'ppt'  => 'application/vnd.ms-powerpoint',
             'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             'ps'   => 'application/postscript',
@@ -94,15 +89,13 @@ function generateUpToDateMimeArray()
             'tif'  => 'image/tiff',
             'tiff' => 'image/tiff',
             'ttf'  => 'application/x-font-truetype',
-            'txt'  => 'text/plain',
             'vcf'  => 'text/x-vcard',
             'wav'  => 'audio/wav',
             'wma'  => 'audio/x-ms-wma',
             'wmv'  => 'audio/x-ms-wmv',
             'xls'  => 'application/excel',
             'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'xml'  => 'application/xml',
-            'zip'  => 'application/zip'
+            'xml'  => 'application/xml'
         );
 
         // wrap array for generating file

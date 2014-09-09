@@ -51,6 +51,13 @@ class GitHub extends AbstractService
     const SCOPE_REPO = 'repo';
 
     /**
+     * Grants access to deployment statuses for public and private repositories.
+     * This scope is only necessary to grant other users or services access to deployment statuses,
+     * without granting access to the code.
+     */
+    const SCOPE_REPO_DEPLOYMENT = 'repo_deployment';
+
+    /**
      * Read/write access to public and private repository commit statuses. This scope is only necessary to grant other
      * users or services access to private repository commit statuses without granting access to the code. The repo and
      * public_repo scopes already include access to commit status for private and public repositories, respectively.
@@ -71,21 +78,51 @@ class GitHub extends AbstractService
      * Write access to gists.
      */
     const SCOPE_GIST = 'gist';
-    
+
     /**
      * Grants read and ping access to hooks in public or private repositories.
      */
     const SCOPE_HOOKS_READ = 'read:repo_hook';
-    
+
     /**
      * Grants read, write, and ping access to hooks in public or private repositories.
      */
     const SCOPE_HOOKS_WRITE = 'write:repo_hook';
-    
+
     /**
      * Grants read, write, ping, and delete access to hooks in public or private repositories.
      */
     const SCOPE_HOOKS_ADMIN = 'admin:repo_hook';
+
+    /**
+     * Read-only access to organization, teams, and membership.
+     */
+    const SCOPE_ORG_READ = 'read:org';
+
+    /**
+     * Publicize and unpublicize organization membership.
+     */
+    const SCOPE_ORG_WRITE = 'write:org';
+
+    /**
+     * Fully manage organization, teams, and memberships.
+     */
+    const SCOPE_ORG_ADMIN = 'admin:org';
+
+    /**
+     * List and view details for public keys.
+     */
+    const SCOPE_PUBLIC_KEY_READ = 'read:public_key';
+
+    /**
+     * Create, list, and view details for public keys.
+     */
+    const SCOPE_PUBLIC_KEY_WRITE = 'write:public_key';
+
+    /**
+     * Fully manage public keys.
+     */
+    const SCOPE_PUBLIC_KEY_ADMIN = 'admin:public_key';
 
     public function __construct(
         CredentialsInterface $credentials,

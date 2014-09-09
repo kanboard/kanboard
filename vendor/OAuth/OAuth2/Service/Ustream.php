@@ -10,34 +10,15 @@ use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
 use OAuth\Common\Http\Uri\UriInterface;
 
-class Vkontakte extends AbstractService
+class Ustream extends AbstractService
 {
     /**
-     * Defined scopes
+     * Scopes
      *
-     * @link http://vk.com/dev/permissions
+     * @var string
      */
-    const SCOPE_EMAIL         = 'email';
-    const SCOPE_NOTIFY        = 'notify';
-    const SCOPE_FRIENDS       = 'friends';
-    const SCOPE_PHOTOS        = 'photos';
-    const SCOPE_AUDIO         = 'audio';
-    const SCOPE_VIDEO         = 'video';
-    const SCOPE_DOCS          = 'docs';
-    const SCOPE_NOTES         = 'notes';
-    const SCOPE_PAGES         = 'pages';
-    const SCOPE_APP_LINK      = '';
-    const SCOPE_STATUS        = 'status';
-    const SCOPE_OFFERS        = 'offers';
-    const SCOPE_QUESTIONS     = 'questions';
-    const SCOPE_WALL          = 'wall';
-    const SCOPE_GROUPS        = 'groups';
-    const SCOPE_MESSAGES      = 'messages';
-    const SCOPE_NOTIFICATIONS = 'notifications';
-    const SCOPE_STATS         = 'stats';
-    const SCOPE_ADS           = 'ads';
-    const SCOPE_OFFLINE       = 'offline';
-    const SCOPE_NOHTTPS       = 'nohttps';
+    const SCOPE_OFFLINE     = 'offline';
+    const SCOPE_BROADCASTER = 'broadcaster';
 
     public function __construct(
         CredentialsInterface $credentials,
@@ -46,10 +27,10 @@ class Vkontakte extends AbstractService
         $scopes = array(),
         UriInterface $baseApiUri = null
     ) {
-        parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
+        parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri, true);
 
         if (null === $baseApiUri) {
-            $this->baseApiUri = new Uri('https://api.vk.com/method/');
+            $this->baseApiUri = new Uri('https://api.ustream.tv/');
         }
     }
 
@@ -58,7 +39,7 @@ class Vkontakte extends AbstractService
      */
     public function getAuthorizationEndpoint()
     {
-        return new Uri('https://oauth.vk.com/authorize');
+        return new Uri('https://www.ustream.tv/oauth2/authorize');
     }
 
     /**
@@ -66,7 +47,15 @@ class Vkontakte extends AbstractService
      */
     public function getAccessTokenEndpoint()
     {
-        return new Uri('https://oauth.vk.com/access_token');
+        return new Uri('https://www.ustream.tv/oauth2/token');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getAuthorizationMethod()
+    {
+        return static::AUTHORIZATION_METHOD_HEADER_BEARER;
     }
 
     /**
@@ -98,12 +87,12 @@ class Vkontakte extends AbstractService
 
         return $token;
     }
-    
+
     /**
      * {@inheritdoc}
      */
-    protected function getAuthorizationMethod()
+    protected function getExtraOAuthHeaders()
     {
-        return static::AUTHORIZATION_METHOD_QUERY_STRING;
+        return array('Authorization' => 'Basic ' . $this->credentials->getConsumerSecret());
     }
 }
