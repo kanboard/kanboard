@@ -35,6 +35,18 @@ class TaskTest extends Base
         $this->assertEquals(time(), $task['date_modification']);
     }
 
+    public function testRemove()
+    {
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
+
+        $this->assertTrue($t->remove(1));
+        $this->assertFalse($t->remove(1234));
+    }
+
     public function testMoveTaskWithBadPreviousPosition()
     {
         $t = new Task($this->registry);

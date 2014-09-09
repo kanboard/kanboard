@@ -41,6 +41,7 @@ if ($language !== 'en_US') Translator::load($language);
 $server = new Server;
 $server->authentication(array('jsonrpc' => $config->get('api_token')));
 
+
 /**
  * Project procedures
  */
@@ -62,7 +63,22 @@ $server->register('getAllProjects', function() use ($project) {
     return $project->getAll();
 });
 
-$server->register('updateProject', function(array $values) use ($project) {
+$server->register('updateProject', function($id, $name, $is_active = null, $is_public = null, $token = null) use ($project) {
+
+    $values = array(
+        'id' => $id,
+        'name' => $name,
+        'is_active' => $is_active,
+        'is_public' => $is_public,
+        'token' => $token,
+    );
+
+    foreach ($values as $key => $value) {
+        if (is_null($value)) {
+            unset($values[$key]);
+        }
+    }
+
     list($valid,) = $project->validateModification($values);
     return $valid && $project->update($values);
 });
@@ -71,6 +87,26 @@ $server->register('removeProject', function($project_id) use ($project) {
     return $project->remove($project_id);
 });
 
+$server->register('enableProject', function($project_id) use ($project) {
+    return $project->enable($project_id);
+});
+
+$server->register('disableProject', function($project_id) use ($project) {
+    return $project->disable($project_id);
+});
+
+$server->register('enableProjectPublicAccess', function($project_id) use ($project) {
+    return $project->enablePublicAccess($project_id);
+});
+
+$server->register('disableProjectPublicAccess', function($project_id) use ($project) {
+    return $project->disablePublicAccess($project_id);
+});
+
+
+/**
+ * Board procedures
+ */
 $server->register('getBoard', function($project_id) use ($board) {
     return $board->get($project_id);
 });

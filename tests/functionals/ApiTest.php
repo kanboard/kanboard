@@ -24,7 +24,7 @@ class Api extends PHPUnit_Framework_TestCase
 
         if ($projects) {
             foreach ($projects as $project) {
-                $this->client->removeProject($project['id']);
+                $this->assertTrue($this->client->removeProject($project['id']));
             }
         }
     }
@@ -45,13 +45,13 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $project = $this->client->getProjectById(1);
         $this->assertNotEmpty($project);
-        $this->assertTrue($this->client->updateProject(array('id' => 1, 'name' => 'API test 2', 'is_active' => 0)));
+        $this->assertTrue($this->client->execute('updateProject', array('id' => 1, 'name' => 'API test 2', 'is_active' => 0)));
 
         $project = $this->client->getProjectById(1);
         $this->assertEquals('API test 2', $project['name']);
         $this->assertEquals(0, $project['is_active']);
 
-        $this->assertTrue($this->client->updateProject(array('id' => 1, 'name' => 'API test', 'is_active' => 1)));
+        $this->assertTrue($this->client->execute('updateProject', array('id' => 1, 'name' => 'API test', 'is_active' => 1)));
 
         $project = $this->client->getProjectById(1);
         $this->assertEquals('API test', $project['name']);

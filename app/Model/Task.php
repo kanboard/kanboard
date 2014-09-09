@@ -565,7 +565,6 @@ class Task extends Base
 
         $board = $this->db->table(Board::TABLE)->eq('project_id', $project_id)->asc('position')->findAllByColumn('id');
         $columns = array();
-        $task_id = (int) $task_id;
 
         // Prepare the columns
         foreach ($board as $board_column_id) {
