@@ -141,6 +141,7 @@ input[type="text"] {
     color: #888;
     border: 1px solid #ccc;
     width: 400px;
+    max-width: 99%;
     font-size: 1.0em;
     height: 25px;
     padding-bottom: 0;
@@ -1060,7 +1061,7 @@ tr td.task-orange,
 }
 
 /* responsive design */
-@media only screen and (min-width : 600px) and (max-width : 1024px) {
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
 
     .hide-tablet {
         display: none;
@@ -1079,24 +1080,30 @@ tr td.task-orange,
     .project-menu {
         font-size: 0.7em;
     }
-
-    table input[type="text"] {
-        width: 200px;
-    }
 }
 
-@media only screen and (max-width : 600px) {
+@media only screen and (max-width : 768px) {
 
     header {
         font-size: 0.8em;
     }
 
+    .logo,
     .project-menu {
         display: none;
     }
 
+    nav ul {
+        text-align: left;
+    }
+
+    nav li:first-child {
+        padding-left: 0;
+    }
+
     #board {
         margin-top: 10px;
+        font-size: 0.85em;
     }
 
     .task-board .task-score {
