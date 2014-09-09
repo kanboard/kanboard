@@ -21,6 +21,7 @@ class TaskTest extends Base
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(1, $task['column_id']);
         $this->assertEquals(1, $task['position']);
+        $this->assertEquals('yellow', $task['color_id']);
         $this->assertEquals(time(), $task['date_creation']);
         $this->assertEquals(time(), $task['date_modification']);
 

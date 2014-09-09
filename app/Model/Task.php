@@ -400,6 +400,11 @@ class Task extends Base
             $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
         }
 
+        if (empty($values['color_id'])) {
+            $colors = $this->getColors();
+            $values['color_id'] = key($colors);
+        }
+
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
         $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
@@ -677,7 +682,6 @@ class Task extends Base
     public function validateCreation(array $values)
     {
         $v = new Validator($values, array(
-            new Validators\Required('color_id', t('The color is required')),
             new Validators\Required('project_id', t('The project is required')),
             new Validators\Integer('project_id', t('This value must be an integer')),
             new Validators\Integer('column_id', t('This value must be an integer')),

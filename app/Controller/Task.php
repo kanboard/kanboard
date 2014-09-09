@@ -30,7 +30,7 @@ class Task extends Base
         $values = array(
             'title' => $this->request->getStringParam('title'),
             'description' => $this->request->getStringParam('description'),
-            'color_id' => $this->request->getStringParam('color_id', 'blue'),
+            'color_id' => $this->request->getStringParam('color_id'),
             'project_id' => $this->request->getIntegerParam('project_id', $defaultProject['id']),
             'owner_id' => $this->request->getIntegerParam('owner_id'),
             'column_id' => $this->request->getIntegerParam('column_id'),

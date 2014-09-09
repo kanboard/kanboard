@@ -116,7 +116,7 @@ $server->register('allowUser', function($project_id, $user_id) use ($project) {
 /**
  * Task procedures
  */
-$server->register('createTask', function($title, $project_id, $color_id, $column_id, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($task) {
+$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($task) {
 
     $values = array(
         'title' => $title,
