@@ -12,6 +12,9 @@
     <?php if (empty($events)): ?>
         <p class="alert"><?= t('No activity.') ?></p>
     <?php else: ?>
+
+        <p class="pull-right"><i class="fa fa-rss-square"></i> <a href="?controller=project&amp;action=feed&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('RSS feed') ?></a></p>
+
         <?php foreach ($events as $event): ?>
         <div class="activity-event">
             <p class="activity-datetime">

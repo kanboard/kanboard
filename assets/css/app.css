@@ -65,6 +65,10 @@ ul.no-bullet li {
     margin-left: 0;
 }
 
+.pull-right {
+    text-align: right;
+}
+
 /* tables */
 table {
     width: 100%;

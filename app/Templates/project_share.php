@@ -5,7 +5,10 @@
 <?php if ($project['is_public']): ?>
 
     <div class="settings">
-        <strong><a href="?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a></strong><br/>
+        <ul class="no-bullet">
+            <li><strong><i class="fa fa-share-alt"></i> <a href="?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a></strong></li>
+            <li><strong><i class="fa fa-rss-square"></i> <a href="?controller=project&amp;action=feed&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('RSS feed') ?></a></strong></li>
+        </ul>
         <input type="text" readonly="readonly" value="<?= Helper\get_current_base_url() ?>?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>"/>
     </div>
 

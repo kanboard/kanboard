@@ -53,10 +53,10 @@
                 <td>
                     <ul class="no-bullet">
                     <?php if ($user['google_id']): ?>
-                        <li><?= t('Google account linked') ?></li>
+                        <li><i class="fa fa-google"></i> <?= t('Google account linked') ?></li>
                     <?php endif ?>
                     <?php if ($user['github_id']): ?>
-                        <li><?= t('Github account linked') ?></li>
+                        <li><i class="fa fa-github"></i> <?= t('Github account linked') ?></li>
                     <?php endif ?>
                     </ul>
                 </td>

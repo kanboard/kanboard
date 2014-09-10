@@ -20,6 +20,7 @@ class Acl extends Base
         'user' => array('login', 'check', 'google', 'github'),
         'task' => array('add', 'readonly'),
         'board' => array('readonly'),
+        'project' => array('feed'),
     );
 
     /**

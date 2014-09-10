@@ -5,7 +5,8 @@
     <li><strong><?= $project['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
 
     <?php if ($project['is_public']): ?>
-        <li><a href="?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a></li>
+        <li><i class="fa fa-share-alt"></i>  <a href="?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a></li>
+        <li><i class="fa fa-rss-square"></i> <a href="?controller=project&amp;action=feed&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('RSS feed') ?></a></li>
     <?php else: ?>
         <li><?= t('Public access disabled') ?></li>
     <?php endif ?>

@@ -3,7 +3,7 @@
 </div>
 
 <?php if (GOOGLE_AUTH): ?>
-    <h3><?= t('Google Account') ?></h3>
+    <h3><i class="fa fa-google"></i> <?= t('Google Account') ?></h3>
 
     <p class="settings">
     <?php if (Helper\is_current_user($user['id'])): ?>
@@ -19,7 +19,7 @@
 <?php endif ?>
 
 <?php if (GITHUB_AUTH): ?>
-    <h3><?= t('Github Account') ?></h3>
+    <h3><i class="fa fa-github"></i> <?= t('Github Account') ?></h3>
 
     <p class="settings">
     <?php if (Helper\is_current_user($user['id'])): ?>
