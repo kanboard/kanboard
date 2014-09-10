@@ -5,7 +5,7 @@
     <em><?= Helper\escape($task_title) ?></em><br/>
     <p><?= Helper\escape($subtask_title) ?> <strong>(<?= Helper\in_list($subtask_status, $subtask_status_list) ?>)</strong></p>
     <?php if ($subtask_assignee): ?>
-        <p><?= t('Assigned to %s with estimate of %s/%sh', $subtask_assignee, $subtask_time_spent, $subtask_time_estimated) ?></p>
+        <p><?= t('Assigned to %s with an estimate of %s/%sh', $subtask_assignee, $subtask_time_spent, $subtask_time_estimated) ?></p>
     <?php else: ?>
         <p><?= t('Not assigned, estimate of %sh', $subtask_time_estimated) ?></p>
     <?php endif ?>

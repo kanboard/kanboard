@@ -19,8 +19,9 @@ function version_25($pdo)
             data TEXT,
             FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
-            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
-        );
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB CHARSET=utf8
     ");
 
     $pdo->exec("
@@ -36,8 +37,9 @@ function version_25($pdo)
             FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             FOREIGN KEY(subtask_id) REFERENCES task_has_subtasks(id) ON DELETE CASCADE,
-            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
-        );
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB CHARSET=utf8
     ");
 
     $pdo->exec("
@@ -53,8 +55,9 @@ function version_25($pdo)
             FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             FOREIGN KEY(comment_id) REFERENCES comments(id) ON DELETE CASCADE,
-            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
-        );
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB CHARSET=utf8
     ");
 }
 
@@ -195,46 +198,6 @@ function version_12($pdo)
             INDEX (user_id)
         ) ENGINE=InnoDB CHARSET=utf8"
     );
-}
-
-function version_11($pdo)
-{
-}
-
-function version_10($pdo)
-{
-}
-
-function version_9($pdo)
-{
-}
-
-function version_8($pdo)
-{
-}
-
-function version_7($pdo)
-{
-}
-
-function version_6($pdo)
-{
-}
-
-function version_5($pdo)
-{
-}
-
-function version_4($pdo)
-{
-}
-
-function version_3($pdo)
-{
-}
-
-function version_2($pdo)
-{
 }
 
 function version_1($pdo)

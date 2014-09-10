@@ -152,7 +152,8 @@ $registry->db = function() use ($registry) {
         return $db;
     }
     else {
-        die('Unable to migrate database schema!');
+        $errors = $db->getLogMessages();
+        die('Unable to migrate database schema: <br/><br/><strong>'.(isset($errors[0]) ? $errors[0] : 'Unknown error').'</strong>');
     }
 };
 

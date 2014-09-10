@@ -96,7 +96,7 @@ class TaskHistory extends BaseHistory
             LEFT JOIN columns ON columns.id=tasks.column_id
             WHERE task_has_events.project_id = ?
             ORDER BY task_has_events.id DESC
-            LIMIT 0, '.$limit.'
+            LIMIT '.$limit.' OFFSET 0
         ';
 
         $rq = $this->db->execute($sql, array($project_id));

@@ -36,20 +36,15 @@ class Schema
                 $function_name = '\Schema\version_'.$i;
 
                 if (function_exists($function_name)) {
-
                     call_user_func($function_name, $this->db->getConnection());
                     $this->db->getConnection()->setSchemaVersion($i);
-                }
-                else {
-
-                    throw new \LogicException('To execute a database migration, you need to create this function: "'.$function_name.'".');
                 }
             }
 
             $this->db->closeTransaction();
         }
         catch (\PDOException $e) {
-
+            $this->db->setLogMessage($function_name.' => '.$e->getMessage());
             $this->db->cancelTransaction();
             return false;
         }

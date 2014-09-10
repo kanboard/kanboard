@@ -105,7 +105,7 @@ class SubtaskHistory extends BaseHistory
             LEFT JOIN users AS assignees ON assignees.id=task_has_subtasks.user_id
             WHERE subtask_has_events.project_id = ?
             ORDER BY subtask_has_events.id DESC
-            LIMIT 0, '.$limit.'
+            LIMIT '.$limit.' OFFSET 0
         ';
 
         $rq = $this->db->execute($sql, array($project_id));

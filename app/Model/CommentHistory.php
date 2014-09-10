@@ -98,7 +98,7 @@ class CommentHistory extends BaseHistory
             LEFT JOIN tasks ON tasks.id=comment_has_events.task_id
             WHERE comment_has_events.project_id = ?
             ORDER BY comment_has_events.id DESC
-            LIMIT 0, '.$limit.'
+            LIMIT '.$limit.' OFFSET 0
         ';
 
         $rq = $this->db->execute($sql, array($project_id));
