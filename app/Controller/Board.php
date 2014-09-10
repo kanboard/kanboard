@@ -233,6 +233,9 @@ class Board extends Base
             $this->notfound();
         }
 
+        $board_selector = $projects;
+        unset($board_selector[$project_id]);
+
         $this->response->html($this->template->layout('board_index', array(
             'users' => $this->project->getUsersList($project_id, true, true),
             'filters' => array('user_id' => $user_id),
@@ -243,7 +246,7 @@ class Board extends Base
             'categories' => $this->category->getList($project_id, true, true),
             'menu' => 'boards',
             'title' => $projects[$project_id],
-            'board_selector' => $projects,
+            'board_selector' => $board_selector,
         )));
     }
 

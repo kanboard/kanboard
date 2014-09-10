@@ -82,6 +82,8 @@ Kanboard.Board = (function() {
     {
         // Drag and drop
         $(".column").sortable({
+            delay: 300,
+            distance: 5,
             connectWith: ".column",
             placeholder: "draggable-placeholder",
             stop: function(event, ui) {
@@ -273,7 +275,7 @@ Kanboard.Project = (function() {
 
 // Initialization
 $(function() {
-
+//alert($(window).width());
     if ($("#board").length) {
         Kanboard.Board.Init();
     }

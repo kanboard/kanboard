@@ -145,7 +145,7 @@ input[type="text"] {
     color: #888;
     border: 1px solid #ccc;
     width: 400px;
-    max-width: 99%;
+    max-width: 95%;
     font-size: 1.0em;
     height: 25px;
     padding-bottom: 0;
@@ -176,9 +176,14 @@ input[type="number"] {
 textarea {
     border: 1px solid #ccc;
     width: 400px;
+    max-width: 95%;
     height: 200px;
     font-size: 1.0em;
     font-family: sans-serif;
+}
+
+select {
+    max-width: 95%;
 }
 
 ::-webkit-input-placeholder {
@@ -471,11 +476,11 @@ nav .active a {
     font-weight: bold;
 }
 
-.username {
+.username a {
     color: #000;
 }
 
-.username:hover {
+.username a:hover {
     color: red;
     text-decoration: underline;
 }
@@ -1009,7 +1014,7 @@ tr td.task-orange,
     border-left: 3px solid #000;
     margin-left: 35px;
     padding-bottom: 10px;
-    width: 700px;
+    max-width: 700px;
 }
 
 .project-listing li {
@@ -1099,25 +1104,27 @@ tr td.task-orange,
         display: none;
     }
 
-    .form-column {
-        float: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    #board {
-        font-size: 0.85em;
+    body {
+        font-size: 0.9em;
     }
 
     .project-menu {
-        font-size: 0.7em;
+        font-size: 0.8em;
+    }
+
+    .task-board-title {
+        font-size: 1.5em;
     }
 }
 
 @media only screen and (max-width : 768px) {
 
-    header {
-        font-size: 0.8em;
+    .hide-tablet {
+        display: none;
+    }
+
+    body {
+        font-size: 0.85em;
     }
 
     .logo,
@@ -1125,20 +1132,36 @@ tr td.task-orange,
         display: none;
     }
 
-    nav ul {
-        text-align: left;
-    }
-
     nav li:first-child {
         padding-left: 0;
     }
 
-    #board {
-        margin-top: 10px;
-        font-size: 0.85em;
+    .username {
+        display: block;
+        text-align: right;
     }
 
-    .task-board .task-score {
+    .user-show-sidebar,
+    .project-show-sidebar,
+    .task-show-sidebar {
+        width: 200px;
+    }
+
+    .user-show-main,
+    .project-show-main,
+    .task-show-main {
+        margin-left: 230px;
+    }
+
+    table input[type="text"] {
+        width: 150px;
+    }
+
+    .task-score {
         display: none;
+    }
+
+    .task-board-title {
+        font-size: 1.5em;
     }
 }
