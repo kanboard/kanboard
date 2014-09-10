@@ -9,6 +9,13 @@ function t()
     return call_user_func_array(array($t, 'translate'), func_get_args());
 }
 
+// translate with no html escaping
+function e()
+{
+    $t = new Translator;
+    return call_user_func_array(array($t, 'translateNoEscaping'), func_get_args());
+}
+
 // Get a locale currency
 function c($value)
 {

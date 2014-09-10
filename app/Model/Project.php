@@ -720,7 +720,25 @@ class Project extends Base
      */
     public function getActivity($project_id)
     {
-        // TODO: merge comments and subtasks activity
-        return $this->taskHistory->getAllContentByProjectId($project_id);
+        $activity = array();
+        $tasks = $this->taskHistory->getAllContentByProjectId($project_id, 25);
+        $comments = $this->commentHistory->getAllContentByProjectId($project_id, 25);
+        $subtasks = $this->subtaskHistory->getAllContentByProjectId($project_id, 25);
+
+        foreach ($tasks as &$task) {
+            $activity[$task['date_creation'].'-'.$task['id']] = $task;
+        }
+
+        foreach ($subtasks as &$subtask) {
+            $activity[$subtask['date_creation'].'-'.$subtask['id']] = $subtask;
+        }
+
+        foreach ($comments as &$comment) {
+            $activity[$comment['date_creation'].'-'.$comment['id']] = $comment;
+        }
+
+        krsort($activity);
+
+        return $activity;
     }
 }

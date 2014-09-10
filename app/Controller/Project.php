@@ -72,7 +72,6 @@ class Project extends Base
         $to = $this->request->getStringParam('to');
 
         if ($from && $to) {
-            Translator::disableEscaping();
             $data = $this->task->export($project['id'], $from, $to);
             $this->response->forceDownload('Export_'.date('Y_m_d_H_i_S').'.csv');
             $this->response->csv($data);

@@ -936,21 +936,21 @@ class Task extends Base
         $tasks = $rq->fetchAll(PDO::FETCH_ASSOC);
 
         $columns = array(
-            t('Task Id'),
-            t('Project'),
-            t('Status'),
-            t('Category'),
-            t('Column'),
-            t('Position'),
-            t('Color'),
-            t('Due date'),
-            t('Creator'),
-            t('Assignee'),
-            t('Complexity'),
-            t('Title'),
-            t('Creation date'),
-            t('Modification date'),
-            t('Completion date'),
+            e('Task Id'),
+            e('Project'),
+            e('Status'),
+            e('Category'),
+            e('Column'),
+            e('Position'),
+            e('Color'),
+            e('Due date'),
+            e('Creator'),
+            e('Assignee'),
+            e('Complexity'),
+            e('Title'),
+            e('Creation date'),
+            e('Modification date'),
+            e('Completion date'),
         );
 
         $results = array($columns);
@@ -973,7 +973,7 @@ class Task extends Base
     {
         $colors = $this->getColors();
         $task['score'] = $task['score'] ?: '';
-        $task['is_active'] = $task['is_active'] == self::STATUS_OPEN ? t('Open') : t('Closed');
+        $task['is_active'] = $task['is_active'] == self::STATUS_OPEN ? e('Open') : e('Closed');
         $task['color_id'] = $colors[$task['color_id']];
         $task['date_creation'] = date('Y-m-d', $task['date_creation']);
         $task['date_due'] = $task['date_due'] ? date('Y-m-d', $task['date_due']) : '';

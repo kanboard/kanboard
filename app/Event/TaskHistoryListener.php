@@ -14,7 +14,7 @@ use Model\TaskHistory;
 class TaskHistoryListener implements Listener
 {
     /**
-     * TaskHistory model
+     * Task History model
      *
      * @accesss private
      * @var \Model\TaskHistory
@@ -25,7 +25,7 @@ class TaskHistoryListener implements Listener
      * Constructor
      *
      * @access public
-     * @param  \Model\TaskHistory   $model   TaskHistory model instance
+     * @param  \Model\TaskHistory   $model   Task History model instance
      */
     public function __construct(TaskHistory $model)
     {

@@ -4,22 +4,22 @@ namespace Model;
 
 use PDO;
 use Core\Registry;
-use Event\TaskHistoryListener;
+use Event\SubtaskHistoryListener;
 
 /**
- * Task history model
+ * Comment history model
  *
  * @package  model
  * @author   Frederic Guillot
  */
-class TaskHistory extends BaseHistory
+class SubtaskHistory extends BaseHistory
 {
     /**
      * SQL table name
      *
      * @var string
      */
-    const TABLE = 'task_has_events';
+    const TABLE = 'subtask_has_events';
 
     /**
      * Maximum number of events
@@ -46,18 +46,22 @@ class TaskHistory extends BaseHistory
      * @access public
      * @param  integer   $project_id    Project id
      * @param  integer   $task_id       Task id
+     * @param  integer   $subtask_id    Subtask id
      * @param  integer   $creator_id    Author of the event (user id)
      * @param  string    $event_name    Task event name
+     * @param  string    $data          Current comment
      * @return boolean
      */
-    public function create($project_id, $task_id, $creator_id, $event_name)
+    public function create($project_id, $task_id, $subtask_id, $creator_id, $event_name, $data)
     {
         $values = array(
             'project_id' => $project_id,
             'task_id' => $task_id,
+            'subtask_id' => $subtask_id,
             'creator_id' => $creator_id,
             'event_name' => $event_name,
             'date_creation' => time(),
+            'data' => $data,
         );
 
         $this->db->startTransaction();
@@ -81,21 +85,26 @@ class TaskHistory extends BaseHistory
     {
         $sql = '
             SELECT
-                task_has_events.id,
-                task_has_events.date_creation,
-                task_has_events.event_name,
-                task_has_events.task_id,
+                subtask_has_events.id,
+                subtask_has_events.date_creation,
+                subtask_has_events.event_name,
+                subtask_has_events.task_id,
                 tasks.title as task_title,
-                tasks.position as task_position,
-                columns.title as task_column_name,
                 users.username as author_username,
-                users.name as author_name
-            FROM task_has_events
-            LEFT JOIN users ON users.id=task_has_events.creator_id
-            LEFT JOIN tasks ON tasks.id=task_has_events.task_id
-            LEFT JOIN columns ON columns.id=tasks.column_id
-            WHERE task_has_events.project_id = ?
-            ORDER BY task_has_events.id DESC
+                users.name as author_name,
+                assignees.name as subtask_assignee_name,
+                assignees.username as subtask_assignee_username,
+                task_has_subtasks.title as subtask_title,
+                task_has_subtasks.status as subtask_status,
+                task_has_subtasks.time_spent as subtask_time_spent,
+                task_has_subtasks.time_estimated as subtask_time_estimated
+            FROM subtask_has_events
+            LEFT JOIN users ON users.id=subtask_has_events.creator_id
+            LEFT JOIN tasks ON tasks.id=subtask_has_events.task_id
+            LEFT JOIN task_has_subtasks ON task_has_subtasks.id=subtask_has_events.subtask_id
+            LEFT JOIN users AS assignees ON assignees.id=task_has_subtasks.user_id
+            WHERE subtask_has_events.project_id = ?
+            ORDER BY subtask_has_events.id DESC
             LIMIT 0, '.$limit.'
         ';
 
@@ -104,9 +113,11 @@ class TaskHistory extends BaseHistory
 
         foreach ($events as &$event) {
             $event['author'] = $event['author_name'] ?: $event['author_username'];
+            $event['subtask_assignee'] = $event['subtask_assignee_name'] ?: $event['subtask_assignee_username'];
+            $event['subtask_status_list'] = $this->subTask->getStatusList();
             $event['event_title'] = $this->getTitle($event);
             $event['event_content'] = $this->getContent($event);
-            $event['event_type'] = 'task';
+            $event['event_type'] = 'subtask';
         }
 
         return $events;
@@ -122,12 +133,8 @@ class TaskHistory extends BaseHistory
     public function getTitle(array $event)
     {
         $titles = array(
-            Task::EVENT_UPDATE => t('%s updated the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_CREATE => t('%s created the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_CLOSE => t('%s closed the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_OPEN => t('%s open the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_MOVE_COLUMN => t('%s moved the task #%d to the column %s', $event['author'], $event['task_id'], $event['task_column_name']),
-            Task::EVENT_MOVE_POSITION => t('%s moved the task #%d to the position %d in the column %s', $event['author'], $event['task_id'], $event['task_position'], $event['task_column_name']),
+            SubTask::EVENT_UPDATE => t('%s updated a subtask for the task #%d', $event['author'], $event['task_id']),
+            SubTask::EVENT_CREATE => t('%s created a subtask for the task #%d', $event['author'], $event['task_id']),
         );
 
         return isset($titles[$event['event_name']]) ? $titles[$event['event_name']] : '';
@@ -141,15 +148,11 @@ class TaskHistory extends BaseHistory
     public function attachEvents()
     {
         $events = array(
-            Task::EVENT_UPDATE,
-            Task::EVENT_CREATE,
-            Task::EVENT_CLOSE,
-            Task::EVENT_OPEN,
-            Task::EVENT_MOVE_COLUMN,
-            Task::EVENT_MOVE_POSITION,
+            SubTask::EVENT_UPDATE,
+            SubTask::EVENT_CREATE,
         );
 
-        $listener = new TaskHistoryListener($this);
+        $listener = new SubtaskHistoryListener($this);
 
         foreach ($events as $event_name) {
             $this->event->attach($event_name, $listener);

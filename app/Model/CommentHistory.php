@@ -4,22 +4,22 @@ namespace Model;
 
 use PDO;
 use Core\Registry;
-use Event\TaskHistoryListener;
+use Event\CommentHistoryListener;
 
 /**
- * Task history model
+ * Comment history model
  *
  * @package  model
  * @author   Frederic Guillot
  */
-class TaskHistory extends BaseHistory
+class CommentHistory extends BaseHistory
 {
     /**
      * SQL table name
      *
      * @var string
      */
-    const TABLE = 'task_has_events';
+    const TABLE = 'comment_has_events';
 
     /**
      * Maximum number of events
@@ -46,18 +46,22 @@ class TaskHistory extends BaseHistory
      * @access public
      * @param  integer   $project_id    Project id
      * @param  integer   $task_id       Task id
+     * @param  integer   $comment_id    Comment id
      * @param  integer   $creator_id    Author of the event (user id)
      * @param  string    $event_name    Task event name
+     * @param  string    $data          Current comment
      * @return boolean
      */
-    public function create($project_id, $task_id, $creator_id, $event_name)
+    public function create($project_id, $task_id, $comment_id, $creator_id, $event_name, $data)
     {
         $values = array(
             'project_id' => $project_id,
             'task_id' => $task_id,
+            'comment_id' => $comment_id,
             'creator_id' => $creator_id,
             'event_name' => $event_name,
             'date_creation' => time(),
+            'data' => $data,
         );
 
         $this->db->startTransaction();
@@ -81,21 +85,19 @@ class TaskHistory extends BaseHistory
     {
         $sql = '
             SELECT
-                task_has_events.id,
-                task_has_events.date_creation,
-                task_has_events.event_name,
-                task_has_events.task_id,
+                comment_has_events.id,
+                comment_has_events.date_creation,
+                comment_has_events.event_name,
+                comment_has_events.data as comment,
+                comment_has_events.task_id,
                 tasks.title as task_title,
-                tasks.position as task_position,
-                columns.title as task_column_name,
                 users.username as author_username,
                 users.name as author_name
-            FROM task_has_events
-            LEFT JOIN users ON users.id=task_has_events.creator_id
-            LEFT JOIN tasks ON tasks.id=task_has_events.task_id
-            LEFT JOIN columns ON columns.id=tasks.column_id
-            WHERE task_has_events.project_id = ?
-            ORDER BY task_has_events.id DESC
+            FROM comment_has_events
+            LEFT JOIN users ON users.id=comment_has_events.creator_id
+            LEFT JOIN tasks ON tasks.id=comment_has_events.task_id
+            WHERE comment_has_events.project_id = ?
+            ORDER BY comment_has_events.id DESC
             LIMIT 0, '.$limit.'
         ';
 
@@ -106,7 +108,7 @@ class TaskHistory extends BaseHistory
             $event['author'] = $event['author_name'] ?: $event['author_username'];
             $event['event_title'] = $this->getTitle($event);
             $event['event_content'] = $this->getContent($event);
-            $event['event_type'] = 'task';
+            $event['event_type'] = 'comment';
         }
 
         return $events;
@@ -122,12 +124,8 @@ class TaskHistory extends BaseHistory
     public function getTitle(array $event)
     {
         $titles = array(
-            Task::EVENT_UPDATE => t('%s updated the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_CREATE => t('%s created the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_CLOSE => t('%s closed the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_OPEN => t('%s open the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_MOVE_COLUMN => t('%s moved the task #%d to the column %s', $event['author'], $event['task_id'], $event['task_column_name']),
-            Task::EVENT_MOVE_POSITION => t('%s moved the task #%d to the position %d in the column %s', $event['author'], $event['task_id'], $event['task_position'], $event['task_column_name']),
+            Comment::EVENT_UPDATE => t('%s updated a comment on the task #%d', $event['author'], $event['task_id']),
+            Comment::EVENT_CREATE => t('%s commented on the task #%d', $event['author'], $event['task_id']),
         );
 
         return isset($titles[$event['event_name']]) ? $titles[$event['event_name']] : '';
@@ -141,15 +139,11 @@ class TaskHistory extends BaseHistory
     public function attachEvents()
     {
         $events = array(
-            Task::EVENT_UPDATE,
-            Task::EVENT_CREATE,
-            Task::EVENT_CLOSE,
-            Task::EVENT_OPEN,
-            Task::EVENT_MOVE_COLUMN,
-            Task::EVENT_MOVE_POSITION,
+            Comment::EVENT_UPDATE,
+            Comment::EVENT_CREATE,
         );
 
-        $listener = new TaskHistoryListener($this);
+        $listener = new CommentHistoryListener($this);
 
         foreach ($events as $event_name) {
             $this->event->attach($event_name, $listener);

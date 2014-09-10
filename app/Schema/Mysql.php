@@ -4,7 +4,59 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 24;
+const VERSION = 25;
+
+function version_25($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_events (
+            id INT NOT NULL AUTO_INCREMENT,
+            date_creation INT NOT NULL,
+            event_name TEXT NOT NULL,
+            creator_id INT,
+            project_id INT,
+            task_id INT,
+            data TEXT,
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        );
+    ");
+
+    $pdo->exec("
+        CREATE TABLE subtask_has_events (
+            id INT NOT NULL AUTO_INCREMENT,
+            date_creation INT NOT NULL,
+            event_name TEXT NOT NULL,
+            creator_id INT,
+            project_id INT,
+            subtask_id INT,
+            task_id INT,
+            data TEXT,
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(subtask_id) REFERENCES task_has_subtasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        );
+    ");
+
+    $pdo->exec("
+        CREATE TABLE comment_has_events (
+            id INT NOT NULL AUTO_INCREMENT,
+            date_creation INT NOT NULL,
+            event_name TEXT NOT NULL,
+            creator_id INT,
+            project_id INT,
+            comment_id INT,
+            task_id INT,
+            data TEXT,
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        );
+    ");
+}
 
 function version_24($pdo)
 {

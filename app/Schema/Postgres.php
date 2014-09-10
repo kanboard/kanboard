@@ -4,7 +4,59 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 5;
+const VERSION = 6;
+
+function version_6($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_events (
+            id SERIAL PRIMARY KEY,
+            date_creation INTEGER NOT NULL,
+            event_name TEXT NOT NULL,
+            creator_id INTEGER,
+            project_id INTEGER,
+            task_id INTEGER,
+            data TEXT,
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        );
+    ");
+
+    $pdo->exec("
+        CREATE TABLE subtask_has_events (
+            id SERIAL PRIMARY KEY,
+            date_creation INTEGER NOT NULL,
+            event_name TEXT NOT NULL,
+            creator_id INTEGER,
+            project_id INTEGER,
+            subtask_id INTEGER,
+            task_id INTEGER,
+            data TEXT,
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(subtask_id) REFERENCES task_has_subtasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        );
+    ");
+
+    $pdo->exec("
+        CREATE TABLE comment_has_events (
+            id SERIAL PRIMARY KEY,
+            date_creation INTEGER NOT NULL,
+            event_name TEXT NOT NULL,
+            creator_id INTEGER,
+            project_id INTEGER,
+            comment_id INTEGER,
+            task_id INTEGER,
+            data TEXT,
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(comment_id) REFERENCES comments(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        );
+    ");
+}
 
 function version_5($pdo)
 {

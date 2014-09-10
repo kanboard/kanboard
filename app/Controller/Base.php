@@ -28,6 +28,8 @@ use Model\LastLogin;
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
  * @property \Model\TaskHistory        $taskHistory
+ * @property \Model\CommentHistory     $commentHistory
+ * @property \Model\SubtaskHistory     $subtaskHistory
  * @property \Model\User               $user
  * @property \Model\Webhook            $webhook
  */
@@ -131,11 +133,29 @@ abstract class Base
         }
 
         // Attach events
-        $this->action->attachEvents();
-        $this->project->attachEvents();
-        $this->webhook->attachEvents();
-        $this->notification->attachEvents();
-        $this->taskHistory->attachEvents();
+        $this->attachEvents();
+    }
+
+    /**
+     * Attach events
+     *
+     * @access private
+     */
+    private function attachEvents()
+    {
+        $models = array(
+            'action',
+            'project',
+            'webhook',
+            'notification',
+            'taskHistory',
+            'commentHistory',
+            'subtaskHistory',
+        );
+
+        foreach ($models as $model) {
+            $this->$model->attachEvents();
+        }
     }
 
     /**

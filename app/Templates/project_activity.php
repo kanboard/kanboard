@@ -17,6 +17,10 @@
             <p class="activity-datetime">
                 <?php if ($event['event_type'] === 'task'): ?>
                     <i class="fa fa-newspaper-o"></i>
+                <?php elseif ($event['event_type'] === 'subtask'): ?>
+                    <i class="fa fa-tasks"></i>
+                <?php elseif ($event['event_type'] === 'comment'): ?>
+                    <i class="fa fa-comments-o"></i>
                 <?php endif ?>
                 &nbsp;<?= dt('%B %e, %Y at %k:%M %p', $event['date_creation']) ?>
             </p>
