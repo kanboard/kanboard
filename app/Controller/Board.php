@@ -205,6 +205,10 @@ class Board extends Base
                 $this->response->redirect('?controller=project&action=forbidden');
             }
         }
+        else if (! empty($_SESSION['user']['last_show_project_id']) && isset($projects[$_SESSION['user']['last_show_project_id']])) {
+            $project_id = $_SESSION['user']['last_show_project_id'];
+            $project_name = $projects[$_SESSION['user']['last_show_project_id']];
+        }
         else if (! empty($_SESSION['user']['default_project_id']) && isset($projects[$_SESSION['user']['default_project_id']])) {
             $project_id = $_SESSION['user']['default_project_id'];
             $project_name = $projects[$_SESSION['user']['default_project_id']];
@@ -225,6 +229,9 @@ class Board extends Base
     {
         $project_id = $this->request->getIntegerParam('project_id');
         $user_id = $this->request->getIntegerParam('user_id', UserModel::EVERYBODY_ID);
+
+        // Stored last seen in the project dashboard
+        $_SESSION['user']['last_show_project_id'] = $project_id ;
 
         $this->checkProjectPermissions($project_id);
         $projects = $this->project->getAvailableList($this->acl->getUserId());
