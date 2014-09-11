@@ -13,7 +13,9 @@
         <p class="alert"><?= t('No activity.') ?></p>
     <?php else: ?>
 
-        <p class="pull-right"><i class="fa fa-rss-square"></i> <a href="?controller=project&amp;action=feed&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('RSS feed') ?></a></p>
+        <?php if ($project['is_public']): ?>
+            <p class="pull-right"><i class="fa fa-rss-square"></i> <a href="?controller=project&amp;action=feed&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('RSS feed') ?></a></p>
+        <?php endif ?>
 
         <?php foreach ($events as $event): ?>
         <div class="activity-event">

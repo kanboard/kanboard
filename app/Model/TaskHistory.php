@@ -126,8 +126,8 @@ class TaskHistory extends BaseHistory
             Task::EVENT_CREATE => t('%s created the task #%d', $event['author'], $event['task_id']),
             Task::EVENT_CLOSE => t('%s closed the task #%d', $event['author'], $event['task_id']),
             Task::EVENT_OPEN => t('%s open the task #%d', $event['author'], $event['task_id']),
-            Task::EVENT_MOVE_COLUMN => t('%s moved the task #%d to the column %s', $event['author'], $event['task_id'], $event['task_column_name']),
-            Task::EVENT_MOVE_POSITION => t('%s moved the task #%d to the position %d in the column %s', $event['author'], $event['task_id'], $event['task_position'], $event['task_column_name']),
+            Task::EVENT_MOVE_COLUMN => t('%s moved the task #%d to the column "%s"', $event['author'], $event['task_id'], $event['task_column_name']),
+            Task::EVENT_MOVE_POSITION => t('%s moved the task #%d to the position %d in the column "%s"', $event['author'], $event['task_id'], $event['task_position'], $event['task_column_name']),
         );
 
         return isset($titles[$event['event_name']]) ? $titles[$event['event_name']] : '';
