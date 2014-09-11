@@ -251,7 +251,13 @@ $server->register('removeUser', function($user_id) use ($user) {
 /**
  * Category procedures
  */
-$server->register('createCategory', function(array $values) use ($category) {
+$server->register('createCategory', function($project_id, $name) use ($category) {
+
+    $values = array(
+        'project_id' => $project_id,
+        'name' => $name,
+    );
+
     list($valid,) = $category->validateCreation($values);
     return $valid && $category->create($values);
 });
@@ -264,7 +270,13 @@ $server->register('getAllCategories', function($project_id) use ($category) {
     return $category->getAll($project_id);
 });
 
-$server->register('updateCategory', function($values) use ($category) {
+$server->register('updateCategory', function($id, $name) use ($category) {
+
+    $values = array(
+        'id' => $id,
+        'name' => $name,
+    );
+
     list($valid,) = $category->validateModification($values);
     return $valid && $category->update($values);
 });

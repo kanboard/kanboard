@@ -123,11 +123,17 @@ class Category extends Base
     public function remove($category_id)
     {
         $this->db->startTransaction();
-        $r1 = $this->db->table(Task::TABLE)->eq('category_id', $category_id)->update(array('category_id' => 0));
-        $r2 = $this->db->table(self::TABLE)->eq('id', $category_id)->remove();
+
+        $this->db->table(Task::TABLE)->eq('category_id', $category_id)->update(array('category_id' => 0));
+
+        if (! $this->db->table(self::TABLE)->eq('id', $category_id)->remove()) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+
         $this->db->closeTransaction();
 
-        return $r1 && $r2;
+        return true;
     }
 
     /**
@@ -192,7 +198,6 @@ class Category extends Base
         $v = new Validator($values, array(
             new Validators\Required('id', t('The id is required')),
             new Validators\Integer('id', t('The id must be an integer')),
-            new Validators\Required('project_id', t('The project id is required')),
             new Validators\Integer('project_id', t('The project id must be an integer')),
             new Validators\Required('name', t('The name is required')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50)

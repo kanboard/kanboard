@@ -418,4 +418,79 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(3, $task['column_id']);
     }
+
+    public function testCategoryCreation()
+    {
+        $category = array(
+            'name' => 'Category',
+            'project_id' => 1,
+        );
+
+        $this->assertTrue($this->client->execute('createCategory', $category));
+
+        // Duplicate
+
+        $category = array(
+            'name' => 'Category',
+            'project_id' => 1,
+        );
+
+        $this->assertFalse($this->client->execute('createCategory', $category));
+
+        // Missing project id
+
+        $category = array(
+            'name' => 'Category',
+        );
+
+        $this->assertNull($this->client->execute('createCategory', $category));
+    }
+
+    public function testCategoryRead()
+    {
+        $category = $this->client->getCategory(1);
+
+        $this->assertTrue(is_array($category));
+        $this->assertNotEmpty($category);
+        $this->assertEquals(1, $category['id']);
+        $this->assertEquals('Category', $category['name']);
+        $this->assertEquals(1, $category['project_id']);
+    }
+
+    public function testGetAllCategories()
+    {
+        $categories = $this->client->getAllCategories(1);
+
+        $this->assertNotEmpty($categories);
+        $this->assertNotFalse($categories);
+        $this->assertTrue(is_array($categories));
+        $this->assertEquals(1, count($categories));
+        $this->assertEquals(1, $categories[0]['id']);
+        $this->assertEquals('Category', $categories[0]['name']);
+        $this->assertEquals(1, $categories[0]['project_id']);
+    }
+
+    public function testCategoryUpdate()
+    {
+        $category = array(
+            'id' => 1,
+            'name' => 'Renamed category',
+        );
+
+        $this->assertTrue($this->client->execute('updateCategory', $category));
+
+        $category = $this->client->getCategory(1);
+        $this->assertTrue(is_array($category));
+        $this->assertNotEmpty($category);
+        $this->assertEquals(1, $category['id']);
+        $this->assertEquals('Renamed category', $category['name']);
+        $this->assertEquals(1, $category['project_id']);
+    }
+
+    public function testCategoryRemove()
+    {
+        $this->assertTrue($this->client->removeCategory(1));
+        $this->assertFalse($this->client->removeCategory(1));
+        $this->assertFalse($this->client->removeCategory(1111));
+    }
 }
