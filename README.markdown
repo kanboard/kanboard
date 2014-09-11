@@ -125,6 +125,7 @@ Contributors:
 - Moraxy: https://github.com/moraxy
 - Nala Ginrut: https://github.com/NalaGinrut
 - Nekohayo: https://github.com/nekohayo
+- Nramel: https://github.com/nramel
 - Olivier Maridat: https://github.com/oliviermaridat
 - Poikilotherm: https://github.com/poikilotherm
 - Rafaelrossa: https://github.com/rafaelrossa
