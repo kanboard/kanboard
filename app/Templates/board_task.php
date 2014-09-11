@@ -56,7 +56,7 @@
 <?php endif ?>
 
 
-<?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description'])): ?>
+<?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description']) || ! empty($task['nb_subtasks'])): ?>
 <div class="task-board-footer">
 
     <?php if (! empty($task['date_due'])): ?>
@@ -66,20 +66,27 @@
     <?php endif ?>
 
     <div class="task-board-icons">
+
+        <?php if (! empty($task['nb_subtasks'])): ?>
+            <span title="<?= t('Sub-Tasks') ?>"><?= $task['nb_completed_subtasks'].'/'.$task['nb_subtasks'] ?> <i class="fa fa-bars"></i></span>
+        <?php endif ?>
+
         <?php if (! empty($task['nb_files'])): ?>
-            <?= $task['nb_files'] ?> <i class="fa fa-paperclip" title="<?= t('Attachments') ?>"></i>
+            <span title="<?= t('Attachments') ?>"><?= $task['nb_files'] ?> <i class="fa fa-paperclip"></i></span>
         <?php endif ?>
 
         <?php if (! empty($task['nb_comments'])): ?>
-            <?= $task['nb_comments'] ?> <i class="fa fa-comment-o" title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>"></i>
+            <span title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>"><?= $task['nb_comments'] ?> <i class="fa fa-comment-o"></i></span>
         <?php endif ?>
 
         <?php if (! empty($task['description'])): ?>
+            <span title="<?= t('Description') ?>">
             <?php if (! isset($not_editable)): ?>
-                <a class="task-description-popover" href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"><i class="fa fa-file-text-o" title="<?= t('Description') ?>" data-href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"></i></a>
+                <a class="task-description-popover" href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"><i class="fa fa-file-text-o" data-href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"></i></a>
             <?php else: ?>
-                <i class="fa fa-file-text-o" title="<?= t('Description') ?>"></i>
+                <i class="fa fa-file-text-o"></i>
             <?php endif ?>
+            </span>
         <?php endif ?>
     </div>
 </div>

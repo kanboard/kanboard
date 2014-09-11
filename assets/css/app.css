@@ -693,6 +693,20 @@ a.task-board-nobody {
     right: 5px;
 }
 
+.task-board-icons a {
+    opacity: 0.5;
+}
+
+.task-board-icons span {
+    opacity: 0.5;
+    margin-left: 5px;
+}
+
+.task-board-icons a:hover,
+.task-board-icons span:hover {
+    opacity: 1.0;
+}
+
 /* task score */
 .task-score {
     font-weight: bold;

@@ -195,6 +195,8 @@ class Task extends Base
                     ->columns(
                         '(SELECT count(*) FROM comments WHERE task_id=tasks.id) AS nb_comments',
                         '(SELECT count(*) FROM task_has_files WHERE task_id=tasks.id) AS nb_files',
+                        '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id) AS nb_subtasks',
+                        '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id AND status=2) AS nb_completed_subtasks',
                         'tasks.id',
                         'tasks.title',
                         'tasks.description',
