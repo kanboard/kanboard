@@ -4,9 +4,41 @@ require_once __DIR__.'/Base.php';
 
 use Model\Project;
 use Model\Board;
+use Model\Config;
 
 class BoardTest extends Base
 {
+    public function testCreation()
+    {
+        $p = new Project($this->registry);
+        $b = new Board($this->registry);
+        $c = new Config($this->registry);
+
+        // Default columns
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
+        $columns = $b->getColumnsList(1);
+
+        $this->assertTrue(is_array($columns));
+        $this->assertEquals(4, count($columns));
+        $this->assertEquals('Backlog', $columns[1]);
+        $this->assertEquals('Ready', $columns[2]);
+        $this->assertEquals('Work in progress', $columns[3]);
+        $this->assertEquals('Done', $columns[4]);
+
+        // Custom columns: spaces should be trimed and no empty columns
+
+        $this->assertTrue($c->save(array('default_columns' => '   column #1  , column #2, ')));
+
+        $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
+        $columns = $b->getColumnsList(2);
+
+        $this->assertTrue(is_array($columns));
+        $this->assertEquals(2, count($columns));
+        $this->assertEquals('column #1', $columns[5]);
+        $this->assertEquals('column #2', $columns[6]);
+    }
+
     public function testMoveColumns()
     {
         $p = new Project($this->registry);

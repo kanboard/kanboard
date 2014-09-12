@@ -4,7 +4,12 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 6;
+const VERSION = 7;
+
+function version_7($pdo)
+{
+    $pdo->exec("ALTER TABLE config ADD COLUMN default_columns VARCHAR(255) DEFAULT ''");
+}
 
 function version_6($pdo)
 {
@@ -95,9 +100,9 @@ function version_1($pdo)
     $pdo->exec("
         CREATE TABLE config (
             language CHAR(5) DEFAULT 'en_US',
-            webhooks_token VARCHAR(255),
+            webhooks_token VARCHAR(255) DEFAULT '',
             timezone VARCHAR(50) DEFAULT 'UTC',
-            api_token VARCHAR(255)
+            api_token VARCHAR(255) DEFAULT ''
         );
 
         CREATE TABLE users (

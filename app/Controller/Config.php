@@ -25,6 +25,7 @@ class Config extends Base
             'menu' => 'config',
             'title' => t('Settings'),
             'timezones' => $this->config->getTimezones(),
+            'default_columns' => implode(', ', $this->board->getDefaultColumns()),
         )));
     }
 
@@ -58,6 +59,7 @@ class Config extends Base
             'menu' => 'config',
             'title' => t('Settings'),
             'timezones' => $this->config->getTimezones(),
+            'default_columns' => implode(', ', $this->board->getDefaultColumns()),
         )));
     }
 

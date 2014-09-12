@@ -21,6 +21,17 @@ class Board extends Base
     const TABLE = 'columns';
 
     /**
+     * Get Kanboard default columns
+     *
+     * @access public
+     * @return array
+     */
+    public function getDefaultColumns()
+    {
+        return array(t('Backlog'), t('Ready'), t('Work in progress'), t('Done'));
+    }
+
+    /**
      * Create a board with default columns, must be executed inside a transaction
      *
      * @access public

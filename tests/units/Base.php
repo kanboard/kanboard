@@ -33,6 +33,7 @@ require_once __DIR__.'/../../app/translator.php';
 require_once __DIR__.'/../../app/helpers.php';
 
 require_once __DIR__.'/../../app/Model/Base.php';
+require_once __DIR__.'/../../app/Model/Config.php';
 require_once __DIR__.'/../../app/Model/Task.php';
 require_once __DIR__.'/../../app/Model/Acl.php';
 require_once __DIR__.'/../../app/Model/Comment.php';

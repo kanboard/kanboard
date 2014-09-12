@@ -118,6 +118,7 @@ Contributors:
 - Kiswa: https://github.com/kiswa
 - Kralo: https://github.com/kralo
 - Levlaz: https://github.com/levlaz
+- Lim Yuen Hoe: https://github.com/jasonmoofang
 - Mathgl67: https://github.com/mathgl67
 - Matthieu Keller: https://github.com/maggick
 - Mauro Mariño: https://github.com/moromarino

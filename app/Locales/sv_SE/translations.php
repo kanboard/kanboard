@@ -494,4 +494,6 @@ return array(
     // '%s moved the task #%d to the column "%s"' => '',
     // '%s moved the task #%d to the position %d in the column "%s"' => '',
     // 'Activity' => '',
+    // 'Default values are "%s"' => '',
+    // 'Default columns for new projects (Comma-separated)' => '',
 );

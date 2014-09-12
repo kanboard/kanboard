@@ -4,7 +4,12 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 25;
+const VERSION = 26;
+
+function version_26($pdo)
+{
+    $pdo->exec("ALTER TABLE config ADD COLUMN default_columns TEXT DEFAULT ''");
+}
 
 function version_25($pdo)
 {
@@ -97,7 +102,8 @@ function version_20($pdo)
 
 function version_19($pdo)
 {
-    $pdo->exec("ALTER TABLE config ADD COLUMN api_token TEXT DEFAULT '".Security::generateToken()."'");
+    $pdo->exec("ALTER TABLE config ADD COLUMN api_token TEXT DEFAULT ''");
+    $pdo->exec("UPDATE config SET api_token='".Security::generateToken()."'");
 }
 
 function version_18($pdo)
@@ -307,8 +313,8 @@ function version_1($pdo)
 {
     $pdo->exec("
         CREATE TABLE config (
-            language TEXT,
-            webhooks_token TEXT
+            language TEXT DEFAULT 'en_US',
+            webhooks_token TEXT DEFAULT ''
         )
     ");
 
@@ -366,7 +372,7 @@ function version_1($pdo)
 
     $pdo->exec("
         INSERT INTO config
-        (language, webhooks_token)
-        VALUES ('en_US', '".Security::generateToken()."')
+        (webhooks_token)
+        VALUES ('".Security::generateToken()."')
     ");
 }

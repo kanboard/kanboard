@@ -20,6 +20,10 @@
         <?= Helper\form_label(t('Webhook URL for task modification'), 'webhooks_url_task_modification') ?>
         <?= Helper\form_text('webhooks_url_task_modification', $values, $errors) ?><br/>
 
+        <?= Helper\form_label(t('Default columns for new projects (Comma-separated)'), 'default_columns') ?>
+        <?= Helper\form_text('default_columns', $values, $errors) ?><br/>
+        <p class="form-help"><?= t('Default values are "%s"', $default_columns) ?></p>
+
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         </div>

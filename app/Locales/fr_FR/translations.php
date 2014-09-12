@@ -494,4 +494,6 @@ return array(
     '%s moved the task #%d to the column "%s"' => '%s a déplacé la tâche n°%d dans la colonne « %s »',
     '%s moved the task #%d to the position %d in the column "%s"' => '%s a déplacé la tâche n°%d à la position n°%d dans la colonne « %s »',
     'Activity' => 'Activité',
+    'Default values are "%s"' => 'Les valeurs par défaut sont « %s »',
+    'Default columns for new projects (Comma-separated)' => 'Colonnes par défaut pour les nouveaux projets (séparé par des virgules)',
 );
