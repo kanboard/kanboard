@@ -40,8 +40,6 @@ $cli->register('export-csv', function() use ($cli, $registry) {
     $start_date = $GLOBALS['argv'][3];
     $end_date = $GLOBALS['argv'][4];
 
-    Translator::disableEscaping();
-
     $taskModel = new Task($registry);
     $data = $taskModel->export($project_id, $start_date, $end_date);
 
