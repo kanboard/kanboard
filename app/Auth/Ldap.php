@@ -69,6 +69,28 @@ class Ldap extends Base
     }
 
     /**
+     * Create a new local user after the LDAP authentication
+     *
+     * @access public
+     * @param  string  $username    Username
+     * @param  string  $name        Name of the user
+     * @param  string  $email       Email address
+     * @return bool
+     */
+    public function createUser($username, $name, $email)
+    {
+        $values = array(
+            'username' => $username,
+            'name' => $name,
+            'email' => $email,
+            'is_admin' => 0,
+            'is_ldap_user' => 1,
+        );
+
+        return $this->user->create($values);
+    }
+
+    /**
      * Find the user from the LDAP server
      *
      * @access public
@@ -77,6 +99,23 @@ class Ldap extends Base
      * @return boolean|array
      */
     public function findUser($username, $password)
+    {
+        $ldap = $this->connect();
+
+        if ($this->bind($ldap, $username, $password)) {
+            return $this->search($ldap, $username, $password);
+        }
+
+        return false;
+    }
+
+    /**
+     * LDAP connection
+     *
+     * @access private
+     * @return resource    $ldap    LDAP connection
+     */
+    private function connect()
     {
         if (! function_exists('ldap_connect')) {
             die('The PHP LDAP extension is required');
@@ -96,6 +135,20 @@ class Ldap extends Base
         ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
 
+        return $ldap;
+    }
+
+    /**
+     * LDAP bind
+     *
+     * @access private
+     * @param  resource  $ldap      LDAP connection
+     * @param  string    $username  Username
+     * @param  string    $password  Password
+     * @return boolean
+     */
+    private function bind($ldap, $username, $password)
+    {
         if (LDAP_BIND_TYPE === 'user') {
             $ldap_username = sprintf(LDAP_USERNAME, $username);
             $ldap_password = $password;
@@ -113,6 +166,20 @@ class Ldap extends Base
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * LDAP user lookup
+     *
+     * @access private
+     * @param  resource  $ldap      LDAP connection
+     * @param  string    $username  Username
+     * @param  string    $password  Password
+     * @return boolean|array
+     */
+    private function search($ldap, $username, $password)
+    {
         $sr = @ldap_search($ldap, LDAP_ACCOUNT_BASE, sprintf(LDAP_USER_PATTERN, $username), array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL));
 
         if ($sr === false) {
@@ -137,27 +204,5 @@ class Ldap extends Base
         }
 
         return false;
-    }
-
-    /**
-     * Create a new local user after the LDAP authentication
-     *
-     * @access public
-     * @param  string  $username    Username
-     * @param  string  $name        Name of the user
-     * @param  string  $email       Email address
-     * @return bool
-     */
-    public function createUser($username, $name, $email)
-    {
-        $values = array(
-            'username' => $username,
-            'name' => $name,
-            'email' => $email,
-            'is_admin' => 0,
-            'is_ldap_user' => 1,
-        );
-
-        return $this->user->create($values);
     }
 }
