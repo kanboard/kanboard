@@ -315,8 +315,24 @@ $server->register('removeComment', function($comment_id) use ($comment) {
 /**
  * Subtask procedures
  */
-$server->register('createSubtask', function(array $values) use ($subtask) {
-    list($valid,) = $subtask->validate($values);
+$server->register('createSubtask', function($task_id, $title, $user_id = 0, $time_estimated = 0, $time_spent = 0, $status = 0) use ($subtask) {
+
+    $values = array(
+        'title' => $title,
+        'task_id' => $task_id,
+        'user_id' => $user_id,
+        'time_estimated' => $time_estimated,
+        'time_spent' => $time_spent,
+        'status' => $status,
+    );
+
+    foreach ($values as $key => $value) {
+        if (is_null($value)) {
+            unset($values[$key]);
+        }
+    }
+
+    list($valid,) = $subtask->validateCreation($values);
     return $valid && $subtask->create($values);
 });
 
@@ -328,8 +344,25 @@ $server->register('getAllSubtasks', function($task_id) use ($subtask) {
     return $subtask->getAll($task_id);
 });
 
-$server->register('updateSubtask', function($values) use ($subtask) {
-    list($valid,) = $subtask->validate($values);
+$server->register('updateSubtask', function($id, $task_id, $title = null, $user_id = 0, $time_estimated = 0, $time_spent = 0, $status = 0) use ($subtask) {
+
+    $values = array(
+        'id' => $id,
+        'task_id' => $task_id,
+        'title' => $title,
+        'user_id' => $user_id,
+        'time_estimated' => $time_estimated,
+        'time_spent' => $time_spent,
+        'status' => $status,
+    );
+
+    foreach ($values as $key => $value) {
+        if (is_null($value)) {
+            unset($values[$key]);
+        }
+    }
+
+    list($valid,) = $subtask->validateModification($values);
     return $valid && $subtask->update($values);
 });
 

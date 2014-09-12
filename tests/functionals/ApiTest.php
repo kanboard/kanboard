@@ -345,7 +345,7 @@ class Api extends PHPUnit_Framework_TestCase
             'title' => 'subtask #1',
         );
 
-        $this->assertTrue($this->client->createSubtask($subtask));
+        $this->assertTrue($this->client->execute('createSubtask', $subtask));
     }
 
     public function testGetSubtask()
@@ -360,10 +360,12 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testUpdateSubtask()
     {
-        $subtask = $this->client->getSubtask(1);
+        $subtask = array();
+        $subtask['id'] = 1;
+        $subtask['task_id'] = 1;
         $subtask['title'] = 'test';
 
-        $this->assertTrue($this->client->updateSubtask($subtask));
+        $this->assertTrue($this->client->execute('updateSubtask', $subtask));
 
         $subtask = $this->client->getSubtask(1);
         $this->assertEquals('test', $subtask['title']);
@@ -377,7 +379,7 @@ class Api extends PHPUnit_Framework_TestCase
             'title' => 'Subtask #2',
         );
 
-        $this->assertTrue($this->client->createSubtask($subtask));
+        $this->assertTrue($this->client->execute('createSubtask', $subtask));
 
         $subtasks = $this->client->getAllSubtasks(1);
         $this->assertNotFalse($subtasks);
