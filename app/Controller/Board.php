@@ -332,7 +332,7 @@ class Board extends Base
     public function add()
     {
         $project = $this->getProject();
-        $columns = $this->board->getColumnsList($project_id);
+        $columns = $this->board->getColumnsList($project['id']);
         $data = $this->request->getValues();
         $values = array();
 
