@@ -624,6 +624,23 @@ class Project extends Base
     }
 
     /**
+     * Common validation rules
+     *
+     * @access private
+     * @return array
+     */
+    private function commonValidationRules()
+    {
+        return array(
+            new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Integer('is_active', t('This value must be an integer')),
+            new Validators\Required('name', t('The project name is required')),
+            new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
+            new Validators\Unique('name', t('This project must be unique'), $this->db->getConnection(), self::TABLE),
+        );
+    }
+
+    /**
      * Validate project creation
      *
      * @access public
@@ -632,11 +649,7 @@ class Project extends Base
      */
     public function validateCreation(array $values)
     {
-        $v = new Validator($values, array(
-            new Validators\Required('name', t('The project name is required')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
-            new Validators\Unique('name', t('This project must be unique'), $this->db->getConnection(), self::TABLE)
-        ));
+        $v = new Validator($values, $this->commonValidationRules());
 
         return array(
             $v->execute(),
@@ -653,14 +666,11 @@ class Project extends Base
      */
     public function validateModification(array $values)
     {
-        $v = new Validator($values, array(
-            new Validators\Required('id', t('The project id is required')),
-            new Validators\Integer('id', t('This value must be an integer')),
-            new Validators\Required('name', t('The project name is required')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
-            new Validators\Unique('name', t('This project must be unique'), $this->db->getConnection(), self::TABLE),
-            new Validators\Integer('is_active', t('This value must be an integer'))
-        ));
+        $rules = array(
+            new Validators\Required('id', t('This value is required')),
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),

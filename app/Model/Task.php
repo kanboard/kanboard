@@ -675,6 +675,27 @@ class Task extends Base
     }
 
     /**
+     * Common validation rules
+     *
+     * @access private
+     * @return array
+     */
+    private function commonValidationRules()
+    {
+        return array(
+            new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Integer('project_id', t('This value must be an integer')),
+            new Validators\Integer('column_id', t('This value must be an integer')),
+            new Validators\Integer('owner_id', t('This value must be an integer')),
+            new Validators\Integer('creator_id', t('This value must be an integer')),
+            new Validators\Integer('score', t('This value must be an integer')),
+            new Validators\Integer('category_id', t('This value must be an integer')),
+            new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
+            new Validators\Date('date_due', t('Invalid date'), $this->getDateFormats()),
+        );
+    }
+
+    /**
      * Validate task creation
      *
      * @access public
@@ -683,17 +704,12 @@ class Task extends Base
      */
     public function validateCreation(array $values)
     {
-        $v = new Validator($values, array(
+        $rules = array(
             new Validators\Required('project_id', t('The project is required')),
-            new Validators\Integer('project_id', t('This value must be an integer')),
-            new Validators\Integer('column_id', t('This value must be an integer')),
-            new Validators\Integer('owner_id', t('This value must be an integer')),
-            new Validators\Integer('creator_id', t('This value must be an integer')),
-            new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Required('title', t('The title is required')),
-            new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
-            new Validators\Date('date_due', t('Invalid date'), $this->getDateFormats()),
-        ));
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),
@@ -710,11 +726,12 @@ class Task extends Base
      */
     public function validateDescriptionCreation(array $values)
     {
-        $v = new Validator($values, array(
+        $rules = array(
             new Validators\Required('id', t('The id is required')),
-            new Validators\Integer('id', t('This value must be an integer')),
             new Validators\Required('description', t('The description is required')),
-        ));
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),
@@ -731,16 +748,11 @@ class Task extends Base
      */
     public function validateModification(array $values)
     {
-        $v = new Validator($values, array(
+        $rules = array(
             new Validators\Required('id', t('The id is required')),
-            new Validators\Integer('id', t('This value must be an integer')),
-            new Validators\Integer('project_id', t('This value must be an integer')),
-            new Validators\Integer('column_id', t('This value must be an integer')),
-            new Validators\Integer('owner_id', t('This value must be an integer')),
-            new Validators\Integer('score', t('This value must be an integer')),
-            new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
-            new Validators\Date('date_due', t('Invalid date'), $this->getDateFormats()),
-        ));
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),
@@ -757,14 +769,13 @@ class Task extends Base
      */
     public function validateAssigneeModification(array $values)
     {
-        $v = new Validator($values, array(
+        $rules = array(
             new Validators\Required('id', t('The id is required')),
-            new Validators\Integer('id', t('This value must be an integer')),
             new Validators\Required('project_id', t('The project is required')),
-            new Validators\Integer('project_id', t('This value must be an integer')),
             new Validators\Required('owner_id', t('This value is required')),
-            new Validators\Integer('owner_id', t('This value must be an integer')),
-        ));
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),
@@ -781,14 +792,14 @@ class Task extends Base
      */
     public function validateCategoryModification(array $values)
     {
-        $v = new Validator($values, array(
+        $rules = array(
             new Validators\Required('id', t('The id is required')),
-            new Validators\Integer('id', t('This value must be an integer')),
             new Validators\Required('project_id', t('The project is required')),
-            new Validators\Integer('project_id', t('This value must be an integer')),
             new Validators\Required('category_id', t('This value is required')),
-            new Validators\Integer('category_id', t('This value must be an integer')),
-        ));
+
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),
@@ -805,12 +816,12 @@ class Task extends Base
      */
     public function validateProjectModification(array $values)
     {
-        $v = new Validator($values, array(
+        $rules = array(
             new Validators\Required('id', t('The id is required')),
-            new Validators\Integer('id', t('This value must be an integer')),
             new Validators\Required('project_id', t('The project is required')),
-            new Validators\Integer('project_id', t('This value must be an integer')),
-        ));
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),

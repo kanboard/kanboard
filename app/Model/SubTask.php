@@ -234,7 +234,7 @@ class SubTask extends Base
             new Validators\Required('title', t('The title is required')),
         );
 
-        $v = new Validator($values, $rules + $this->commonValidationRules());
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),
@@ -256,7 +256,7 @@ class SubTask extends Base
             new Validators\Required('task_id', t('The task id is required')),
         );
 
-        $v = new Validator($values, $rules + $this->commonValidationRules());
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),

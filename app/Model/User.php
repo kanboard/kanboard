@@ -224,6 +224,40 @@ class User extends Base
     }
 
     /**
+     * Common validation rules
+     *
+     * @access private
+     * @return array
+     */
+    private function commonValidationRules()
+    {
+        return array(
+            new Validators\Required('username', t('The username is required')),
+            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
+            new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
+            new Validators\Email('email', t('Email address invalid')),
+            new Validators\Integer('default_project_id', t('This value must be an integer')),
+            new Validators\Integer('is_admin', t('This value must be an integer')),
+        );
+    }
+
+    /**
+     * Common password validation rules
+     *
+     * @access private
+     * @return array
+     */
+    private function commonPasswordValidationRules()
+    {
+        return array(
+            new Validators\Required('password', t('The password is required')),
+            new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
+            new Validators\Required('confirmation', t('The confirmation is required')),
+            new Validators\Equals('password', 'confirmation', t('Passwords don\'t match')),
+        );
+    }
+
+    /**
      * Validate user creation
      *
      * @access public
@@ -232,18 +266,7 @@ class User extends Base
      */
     public function validateCreation(array $values)
     {
-        $v = new Validator($values, array(
-            new Validators\Required('username', t('The username is required')),
-            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
-            new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
-            new Validators\Required('password', t('The password is required')),
-            new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
-            new Validators\Required('confirmation', t('The confirmation is required')),
-            new Validators\Equals('password', 'confirmation', t('Passwords don\'t match')),
-            new Validators\Integer('default_project_id', t('This value must be an integer')),
-            new Validators\Integer('is_admin', t('This value must be an integer')),
-            new Validators\Email('email', t('Email address invalid')),
-        ));
+        $v = new Validator($values, array_merge($this->commonValidationRules(), $this->commonPasswordValidationRules()));
 
         return array(
             $v->execute(),
@@ -260,19 +283,11 @@ class User extends Base
      */
     public function validateModification(array $values)
     {
-        if (! empty($values['password'])) {
-            return $this->validatePasswordModification($values);
-        }
-
-        $v = new Validator($values, array(
+        $rules = array(
             new Validators\Required('id', t('The user id is required')),
-            new Validators\Required('username', t('The username is required')),
-            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
-            new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
-            new Validators\Integer('default_project_id', t('This value must be an integer')),
-            new Validators\Integer('is_admin', t('This value must be an integer')),
-            new Validators\Email('email', t('Email address invalid')),
-        ));
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
 
         return array(
             $v->execute(),
@@ -289,14 +304,12 @@ class User extends Base
      */
     public function validatePasswordModification(array $values)
     {
-        $v = new Validator($values, array(
+        $rules = array(
             new Validators\Required('id', t('The user id is required')),
             new Validators\Required('current_password', t('The current password is required')),
-            new Validators\Required('password', t('The password is required')),
-            new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
-            new Validators\Required('confirmation', t('The confirmation is required')),
-            new Validators\Equals('password', 'confirmation', t('Passwords don\'t match')),
-        ));
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonPasswordValidationRules()));
 
         if ($v->execute()) {
 
