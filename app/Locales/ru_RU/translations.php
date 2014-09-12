@@ -210,7 +210,7 @@ return array(
     'The description is required' => 'Требуется описание',
     'Edit this task' => 'Изменить задачу',
     'Due Date' => 'Срок',
-    'm/d/Y' => 'd/m/Y',                    // Date format parsed with php
+    'm/d/Y' => 'м/д/Г',                    // Date format parsed with php
     'month/day/year' => 'месяц/день/год', // Help shown to the user
     'Invalid date' => 'Неверная дата',
     'Must be done before %B %e, %Y' => 'Должно быть сделано до %d/%m/%Y',
