@@ -31,7 +31,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English, French, Brazilian Portuguese, Spanish, German, Polish, Swedish, Finnish, Italian, Chinese...
+- Translations in English, French, Brazilian Portuguese, Spanish, German, Polish, Swedish, Finnish, Italian, Chinese, Russian...
 
 Known bugs and feature requests
 -------------------------------
@@ -126,6 +126,7 @@ Contributors:
 - Nala Ginrut: https://github.com/NalaGinrut
 - Nekohayo: https://github.com/nekohayo
 - Nramel: https://github.com/nramel
+- Null-Kelvin: https://github.com/Null-Kelvin
 - Olivier Maridat: https://github.com/oliviermaridat
 - Poikilotherm: https://github.com/poikilotherm
 - Rafaelrossa: https://github.com/rafaelrossa

@@ -51,6 +51,7 @@ class Config extends Base
             'it_IT' => 'Italiano',
             'pl_PL' => 'Polski',
             'pt_BR' => 'Português (Brasil)',
+            'ru_RU' => 'Русский',
             'fi_FI' => 'Suomi',
             'sv_SE' => 'Svenska',
             'zh_CN' => '中文(简体)',
