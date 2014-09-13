@@ -12,7 +12,7 @@
     </tr>
     <?php foreach ($tasks as $task): ?>
     <tr>
-        <td class="task-table task-<?= $task['color_id'] ?>">
+        <td class="task-table<?= constant('3D_BOARD') == 'true' ? '-3d' : '' ?>  task-<?= $task['color_id'] ?>">
             <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['id']) ?></a>
         </td>
         <td>
