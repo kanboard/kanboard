@@ -19,9 +19,10 @@
                 <?php foreach ($columns as $column): ?>
                 <td class="column <?= $column['task_limit'] && count($column['tasks']) > $column['task_limit'] ? 'task-limit-warning' : '' ?>">
                     <?php foreach ($column['tasks'] as $task): ?>
-                    <div class="task-board task-<?= $task['color_id'] ?>">
+                    <div class="task-board<?= constant('3D_BOARD') == 'true' ? '-3d' : '' ?> task-<?= $task['color_id'] ?>">
 
                         <?= Helper\template('board_task', array('task' => $task, 'categories' => $categories, 'not_editable' => true, 'project' => $project)) ?>
+                        
 
                     </div>
                     <?php endforeach ?>
