@@ -20,8 +20,8 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
 }
 
 // Check extension: PDO
-if (! extension_loaded('pdo_sqlite') && ! extension_loaded('pdo_mysql')) {
-    die('PHP extension required: pdo_sqlite or pdo_mysql');
+if (! extension_loaded('pdo_sqlite') && ! extension_loaded('pdo_mysql') && ! extension_loaded('pdo_pgsql')) {
+    die('PHP extension required: pdo_sqlite, pdo_mysql, or pdo_pgsql');
 }
 
 // Check extension: mbstring
