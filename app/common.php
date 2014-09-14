@@ -45,13 +45,13 @@ defined('APP_VERSION') or define('APP_VERSION', 'master');
 // Base directory
 define('BASE_URL_DIRECTORY', dirname($_SERVER['PHP_SELF']));
 
-// Database driver: sqlite or mysql
+// Database driver: sqlite, mysql, or postgres
 defined('DB_DRIVER') or define('DB_DRIVER', 'sqlite');
 
 // Sqlite configuration
 defined('DB_FILENAME') or define('DB_FILENAME', 'data/db.sqlite');
 
-// Mysql configuration
+// Mysql/Postgres configuration
 defined('DB_USERNAME') or define('DB_USERNAME', 'root');
 defined('DB_PASSWORD') or define('DB_PASSWORD', '');
 defined('DB_HOSTNAME') or define('DB_HOSTNAME', 'localhost');
