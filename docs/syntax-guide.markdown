@@ -105,13 +105,14 @@ Execute this command: `tail -f /var/log/messages`.
 Use 3 backticks with eventually the language name.
 
 <pre>
-```php
+<code class="language-markdown">```php
 &lt;?php
 
 phpinfo();
 
 ?&gt;
 ```
+</code>
 </pre>
 
 ### Result
