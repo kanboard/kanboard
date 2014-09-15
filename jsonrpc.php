@@ -1,7 +1,6 @@
 <?php
 
 require __DIR__.'/app/common.php';
-require __DIR__.'/vendor/JsonRPC/Server.php';
 
 use Core\Translator;
 use JsonRPC\Server;
@@ -175,7 +174,7 @@ $server->register('getTask', function($task_id) use ($task) {
     return $task->getById($task_id);
 });
 
-$server->register('getAllTasks', function($project_id, array $status) use ($task) {
+$server->register('getAllTasks', function($project_id, $status) use ($task) {
     return $task->getAll($project_id, $status);
 });
 

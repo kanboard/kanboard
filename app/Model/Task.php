@@ -150,16 +150,16 @@ class Task extends Base
      * Count all tasks for a given project and status
      *
      * @access public
-     * @param  integer   $project_id   Project id
-     * @param  array     $status       List of status id
+     * @param  integer   $project_id      Project id
+     * @param  integer   $status_id       Status id
      * @return array
      */
-    public function getAll($project_id, array $status = array(self::STATUS_OPEN, self::STATUS_CLOSED))
+    public function getAll($project_id, $status_id = self::STATUS_OPEN)
     {
         return $this->db
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
-                    ->in('is_active', $status)
+                    ->eq('is_active', $status_id)
                     ->findAll();
     }
 
@@ -382,6 +382,10 @@ class Task extends Base
         if (isset($values['score']) && empty($values['score'])) {
             $values['score'] = 0;
         }
+
+        if (isset($values['is_active'])) {
+            $values['is_active'] = (int) $values['is_active'];
+        }
     }
 
     /**
@@ -488,6 +492,18 @@ class Task extends Base
     }
 
     /**
+     * Return true if the project exists
+     *
+     * @access public
+     * @param  integer    $task_id   Task id
+     * @return boolean
+     */
+    public function exists($task_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $task_id)->count() === 1;
+    }
+
+    /**
      * Mark a task closed
      *
      * @access public
@@ -496,6 +512,10 @@ class Task extends Base
      */
     public function close($task_id)
     {
+        if (! $this->exists($task_id)) {
+            return false;
+        }
+
         $result = $this->db
                         ->table(self::TABLE)
                         ->eq('id', $task_id)
@@ -520,12 +540,16 @@ class Task extends Base
      */
     public function open($task_id)
     {
+        if (! $this->exists($task_id)) {
+            return false;
+        }
+
         $result = $this->db
                         ->table(self::TABLE)
                         ->eq('id', $task_id)
                         ->update(array(
                             'is_active' => 1,
-                            'date_completed' => ''
+                            'date_completed' => 0
                         ));
 
         if ($result) {
@@ -544,6 +568,10 @@ class Task extends Base
      */
     public function remove($task_id)
     {
+        if (! $this->exists($task_id)) {
+            return false;
+        }
+
         $this->file->removeAll($task_id);
 
         return $this->db->table(self::TABLE)->eq('id', $task_id)->remove();

@@ -78,6 +78,12 @@ class Database
     }
 
 
+    public function closeConnection()
+    {
+        $this->pdo = null;
+    }
+
+
     public function escapeIdentifier($value)
     {
         return $this->pdo->escapeIdentifier($value);

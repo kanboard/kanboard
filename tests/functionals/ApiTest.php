@@ -1,21 +1,52 @@
 <?php
 
+require_once __DIR__.'/../../vendor/PicoDb/Database.php';
 require_once __DIR__.'/../../vendor/JsonRPC/Client.php';
+require_once __DIR__.'/../../app/Core/Security.php';
+require_once __DIR__.'/../../app/functions.php';
 
 class Api extends PHPUnit_Framework_TestCase
 {
-    const URL = 'http://localhost:8000/jsonrpc.php';
-    const KEY = '19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929';
-
     private $client;
+
+    public static function setUpBeforeClass()
+    {
+        if (DB_DRIVER === 'sqlite') {
+            @unlink(DB_FILENAME);
+            $pdo = new PDO('sqlite:'.DB_FILENAME);
+        }
+        else if (DB_DRIVER === 'mysql') {
+            $pdo = new PDO('mysql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
+            $pdo->exec('DROP DATABASE '.DB_NAME);
+            $pdo->exec('CREATE DATABASE '.DB_NAME);
+            $pdo = new PDO('mysql:host='.DB_HOSTNAME.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
+        }
+        else if (DB_DRIVER === 'postgres') {
+            $pdo = new PDO('pgsql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
+            $pdo->exec('DROP DATABASE '.DB_NAME);
+            $pdo->exec('CREATE DATABASE '.DB_NAME.' WITH OWNER '.DB_USERNAME);
+            $pdo = new PDO('pgsql:host='.DB_HOSTNAME.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
+        }
+
+        setup_db();
+
+        $pdo->exec("UPDATE config SET api_token='".API_KEY."'");
+        $pdo = null;
+    }
 
     public function setUp()
     {
-        $this->client = new JsonRPC\Client(self::URL);
-        $this->client->authentication('jsonrpc', self::KEY);
+        $this->client = new JsonRPC\Client(API_URL);
+        $this->client->authentication('jsonrpc', API_KEY);
+    }
 
-        $pdo = new PDO('sqlite:data/db.sqlite');
-        $pdo->exec('UPDATE config SET api_token="'.self::KEY.'"');
+    private function getTaskId()
+    {
+        $tasks = $this->client->getAllTasks(1, 1);
+        $this->assertNotEmpty($tasks);
+        $this->assertEquals(1, count($tasks));
+
+        return $tasks[0]['id'];
     }
 
     public function testRemoveAll()
@@ -154,13 +185,13 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testGetAllTasks()
     {
-        $tasks = $this->client->getAllTasks(1, array(1));
+        $tasks = $this->client->getAllTasks(1, 1);
 
         $this->assertNotFalse($tasks);
         $this->assertTrue(is_array($tasks));
         $this->assertEquals('Task #1', $tasks[0]['title']);
 
-        $tasks = $this->client->getAllTasks(2, array(1, 2));
+        $tasks = $this->client->getAllTasks(2, 0);
 
         $this->assertNotFalse($tasks);
         $this->assertTrue(is_array($tasks));
@@ -228,10 +259,10 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testUpdateUser()
     {
-        $user = $this->client->getUser(2);
+        $user = array();
+        $user['id'] = 2;
         $user['username'] = 'titi';
         $user['name'] = 'Titi';
-        unset($user['password']);
 
         $this->assertTrue($this->client->updateUser($user));
 
@@ -280,8 +311,12 @@ class Api extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->client->execute('createTask', $task));
 
+        $tasks = $this->client->getAllTasks(1, 1);
+        $this->assertNotEmpty($tasks);
+        $this->assertEquals(1, count($tasks));
+
         $comment = array(
-            'task_id' => 1,
+            'task_id' => $tasks[0]['id'],
             'user_id' => 2,
             'comment' => 'boo',
         );
@@ -294,7 +329,6 @@ class Api extends PHPUnit_Framework_TestCase
         $comment = $this->client->getComment(1);
         $this->assertNotFalse($comment);
         $this->assertNotEmpty($comment);
-        $this->assertEquals(1, $comment['task_id']);
         $this->assertEquals(2, $comment['user_id']);
         $this->assertEquals('boo', $comment['comment']);
     }
@@ -312,15 +346,17 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testGetAllComments()
     {
+        $task_id = $this->getTaskId();
+
         $comment = array(
-            'task_id' => 1,
+            'task_id' => $task_id,
             'user_id' => 1,
             'comment' => 'blabla',
         );
 
         $this->assertTrue($this->client->createComment($comment));
 
-        $comments = $this->client->getAllComments(1);
+        $comments = $this->client->getAllComments($task_id);
         $this->assertNotFalse($comments);
         $this->assertNotEmpty($comments);
         $this->assertTrue(is_array($comments));
@@ -329,9 +365,10 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testRemoveComment()
     {
-        $this->assertTrue($this->client->removeComment(1));
+        $task_id = $this->getTaskId();
+        $this->assertTrue($this->client->removeComment($task_id));
 
-        $comments = $this->client->getAllComments(1);
+        $comments = $this->client->getAllComments($task_id);
         $this->assertNotFalse($comments);
         $this->assertNotEmpty($comments);
         $this->assertTrue(is_array($comments));
@@ -341,7 +378,7 @@ class Api extends PHPUnit_Framework_TestCase
     public function testCreateSubtask()
     {
         $subtask = array(
-            'task_id' => 1,
+            'task_id' => $this->getTaskId(),
             'title' => 'subtask #1',
         );
 
@@ -353,7 +390,7 @@ class Api extends PHPUnit_Framework_TestCase
         $subtask = $this->client->getSubtask(1);
         $this->assertNotFalse($subtask);
         $this->assertNotEmpty($subtask);
-        $this->assertEquals(1, $subtask['task_id']);
+        $this->assertEquals($this->getTaskId(), $subtask['task_id']);
         $this->assertEquals(0, $subtask['user_id']);
         $this->assertEquals('subtask #1', $subtask['title']);
     }
@@ -362,7 +399,7 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $subtask = array();
         $subtask['id'] = 1;
-        $subtask['task_id'] = 1;
+        $subtask['task_id'] = $this->getTaskId();
         $subtask['title'] = 'test';
 
         $this->assertTrue($this->client->execute('updateSubtask', $subtask));
@@ -374,14 +411,14 @@ class Api extends PHPUnit_Framework_TestCase
     public function testGetAllSubtasks()
     {
         $subtask = array(
-            'task_id' => 1,
+            'task_id' => $this->getTaskId(),
             'user_id' => 2,
             'title' => 'Subtask #2',
         );
 
         $this->assertTrue($this->client->execute('createSubtask', $subtask));
 
-        $subtasks = $this->client->getAllSubtasks(1);
+        $subtasks = $this->client->getAllSubtasks($this->getTaskId());
         $this->assertNotFalse($subtasks);
         $this->assertNotEmpty($subtasks);
         $this->assertTrue(is_array($subtasks));
@@ -392,7 +429,7 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->client->removeSubtask(1));
 
-        $subtasks = $this->client->getAllSubtasks(1);
+        $subtasks = $this->client->getAllSubtasks($this->getTaskId());
         $this->assertNotFalse($subtasks);
         $this->assertNotEmpty($subtasks);
         $this->assertTrue(is_array($subtasks));
@@ -401,20 +438,10 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testMoveTaskPosition()
     {
-        $task = array(
-            'title' => 'Task to move',
-            'color_id' => 'blue',
-            'owner_id' => 1,
-            'project_id' => 1,
-            'column_id' => 1,
-        );
+        $task_id = $this->getTaskId();
+        $this->assertTrue($this->client->moveTaskPosition(1, $task_id, 3, 1));
 
-        $this->assertTrue($this->client->execute('createTask', $task));
-
-        $this->assertTrue($this->client->moveTaskPosition(1, 1, 3, 1));
-
-        $task = $this->client->getTask(1);
-
+        $task = $this->client->getTask($task_id);
         $this->assertNotFalse($task);
         $this->assertTrue(is_array($task));
         $this->assertEquals(1, $task['position']);

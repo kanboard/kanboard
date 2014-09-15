@@ -553,7 +553,8 @@ class Project extends Base
      */
     public function update(array $values)
     {
-        return $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+        return $this->exists($values['id']) &&
+               $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
     }
 
     /**
@@ -569,6 +570,18 @@ class Project extends Base
     }
 
     /**
+     * Return true if the project exists
+     *
+     * @access public
+     * @param  integer    $project_id   Project id
+     * @return boolean
+     */
+    public function exists($project_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $project_id)->count() === 1;
+    }
+
+    /**
      * Enable a project
      *
      * @access public
@@ -577,10 +590,11 @@ class Project extends Base
      */
     public function enable($project_id)
     {
-        return $this->db
+        return $this->exists($project_id) &&
+               $this->db
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
-                    ->save(array('is_active' => 1));
+                    ->update(array('is_active' => 1));
     }
 
     /**
@@ -592,10 +606,11 @@ class Project extends Base
      */
     public function disable($project_id)
     {
-        return $this->db
+        return $this->exists($project_id) &&
+               $this->db
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
-                    ->save(array('is_active' => 0));
+                    ->update(array('is_active' => 0));
     }
 
     /**
@@ -607,7 +622,8 @@ class Project extends Base
      */
     public function enablePublicAccess($project_id)
     {
-        return $this->db
+        return $this->exists($project_id) &&
+               $this->db
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
                     ->save(array('is_public' => 1, 'token' => Security::generateToken()));
@@ -622,7 +638,8 @@ class Project extends Base
      */
     public function disablePublicAccess($project_id)
     {
-        return $this->db
+        return $this->exists($project_id) &&
+               $this->db
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
                     ->save(array('is_public' => 0, 'token' => ''));

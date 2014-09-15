@@ -58,12 +58,12 @@ Documentation
 #### Installation
 
 - [Installation instructions](docs/installation.markdown)
+- [Upgrade Kanboard to a new version](docs/update.markdown)
 - [Installation on Ubuntu](docs/ubuntu-installation.markdown)
 - [Installation on Debian](docs/debian-installation.markdown)
 - [Installation on Centos](docs/centos-installation.markdown)
 - [Installation on Windows Server with IIS](docs/windows-iis-installation.markdown)
-- [Upgrade Kanboard to a new version](docs/update.markdown)
-- [Secure connections (HTTPS)](docs/secure-connections.markdown)
+- [Example with Nginx + HTTPS + SPDY + PHP-FPM](docs/secure-connections.markdown)
 
 #### Database
 

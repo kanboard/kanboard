@@ -73,7 +73,7 @@ class TaskHistoryTest extends Base
             $this->assertTrue($e->create(1, 1, 1, Task::EVENT_CLOSE));
         }
 
-        $this->assertEquals($nb_events, $this->registry->db->table('task_has_events')->count());
+        $this->assertEquals($nb_events, $this->registry->shared('db')->table('task_has_events')->count());
         $e->cleanup($max);
 
         $events = $e->getAllByProjectId(1);
@@ -93,6 +93,6 @@ class TaskHistoryTest extends Base
             $this->assertTrue($e->create(1, 1, 1, Task::EVENT_CLOSE));
         }
 
-        $this->assertEquals(TaskHistory::MAX_EVENTS, $this->registry->db->table('task_has_events')->count());
+        $this->assertEquals(TaskHistory::MAX_EVENTS, $this->registry->shared('db')->table('task_has_events')->count());
     }
 }

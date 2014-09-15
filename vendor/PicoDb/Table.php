@@ -44,7 +44,11 @@ class Table
         }
     }
 
-
+    /**
+     * Update
+     *
+     * Note: Do not use `rowCount()` the behaviour is different across drivers
+     */
     public function update(array $data)
     {
         $columns = array();
@@ -70,7 +74,7 @@ class Table
 
         $result = $this->db->execute($sql, $values);
 
-        return $result !== false && $result->rowCount() > 0;
+        return $result !== false;
     }
 
 

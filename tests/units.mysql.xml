@@ -1,0 +1,11 @@
+<phpunit>
+    <testsuites>
+        <testsuite name="Kanboard">
+            <directory>units</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <const name="DB_DRIVER" value="mysql" />
+        <const name="DB_NAME" value="kanboard_unit_test" />
+    </php>
+</phpunit>

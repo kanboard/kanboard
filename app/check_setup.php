@@ -33,8 +33,3 @@ if (! extension_loaded('mbstring')) {
 if (! is_writable('data')) {
     die('The directory "data" must be writeable by your web server user');
 }
-
-// Include password_compat for PHP < 5.5
-if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-    require __DIR__.'/../vendor/password.php';
-}

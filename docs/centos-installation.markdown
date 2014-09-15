@@ -1,6 +1,11 @@
 Centos Installation
 ===================
 
+Centos 7
+--------
+
+
+
 Centos 6.5
 ----------
 

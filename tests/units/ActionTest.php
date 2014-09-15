@@ -9,7 +9,7 @@ use Model\Task;
 use Model\Category;
 
 class ActionTest extends Base
-{/*
+{
     public function testFetchActions()
     {
         $action = new Action($this->registry);
@@ -86,15 +86,15 @@ class ActionTest extends Base
         // We move our task
         $task->movePosition(1, 1, 4, 1);
 
-        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
-        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_UPDATE));
+        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertFalse($this->registry->shared('event')->isEventTriggered(Task::EVENT_UPDATE));
 
         // Our task should be closed
         $t1 = $task->getById(1);
         $this->assertEquals(4, $t1['column_id']);
         $this->assertEquals(0, $t1['is_active']);
     }
-*/
+
     public function testEventMovePosition()
     {
         $task = new Task($this->registry);
@@ -138,7 +138,7 @@ class ActionTest extends Base
         // We bind events
         $action->attachEvents();
 
-        $this->assertTrue($this->registry->event->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskAssignColorCategory'));
+        $this->assertTrue($this->registry->shared('event')->hasListener(Task::EVENT_MOVE_POSITION, 'Action\TaskAssignColorCategory'));
 
         // Our task should have the color red and position=1
         $t1 = $task->getById(1);
@@ -153,7 +153,7 @@ class ActionTest extends Base
 
         // We move our tasks
         $this->assertTrue($task->movePosition(1, 1, 1, 10)); // task #1 to the end of the column
-        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
+        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
         $t1 = $task->getById(1);
         $this->assertEquals(2, $t1['position']);
@@ -165,10 +165,10 @@ class ActionTest extends Base
         $this->assertEquals(1, $t1['is_active']);
         $this->assertEquals('yellow', $t1['color_id']);
 
-        $this->registry->event->clearTriggeredEvents();
+        $this->registry->shared('event')->clearTriggeredEvents();
         $this->assertTrue($task->movePosition(1, 2, 1, 44)); // task #2 to position 1
-        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_POSITION));
-        $this->assertEquals('Action\TaskAssignColorCategory', $this->registry->event->getLastListenerExecuted());
+        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_POSITION));
+        $this->assertEquals('Action\TaskAssignColorCategory', $this->registry->shared('event')->getLastListenerExecuted());
 
         $t1 = $task->getById(1);
         $this->assertEquals(1, $t1['position']);
@@ -180,7 +180,7 @@ class ActionTest extends Base
         $this->assertEquals(1, $t1['is_active']);
         $this->assertEquals('green', $t1['color_id']);
     }
-/*
+
     public function testExecuteMultipleActions()
     {
         $task = new Task($this->registry);
@@ -225,8 +225,8 @@ class ActionTest extends Base
         $action->attachEvents();
 
         // Events should be attached
-        $this->assertTrue($this->registry->event->hasListener(Task::EVENT_CLOSE, 'Action\TaskDuplicateAnotherProject'));
-        $this->assertTrue($this->registry->event->hasListener(Task::EVENT_MOVE_COLUMN, 'Action\TaskClose'));
+        $this->assertTrue($this->registry->shared('event')->hasListener(Task::EVENT_CLOSE, 'Action\TaskDuplicateAnotherProject'));
+        $this->assertTrue($this->registry->shared('event')->hasListener(Task::EVENT_MOVE_COLUMN, 'Action\TaskClose'));
 
         // Our task should be open, linked to the first project and in the first column
         $t1 = $task->getById(1);
@@ -237,8 +237,8 @@ class ActionTest extends Base
         // We move our task
         $task->movePosition(1, 1, 4, 1);
 
-        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_CLOSE));
-        $this->assertTrue($this->registry->event->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CLOSE));
+        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // Our task should be closed
         $t1 = $task->getById(1);
@@ -252,5 +252,5 @@ class ActionTest extends Base
         $this->assertEquals(1, $t2['is_active']);
         $this->assertEquals(2, $t2['project_id']);
         $this->assertEquals('unit_test', $t2['title']);
-    }*/
+    }
 }
