@@ -28,19 +28,19 @@ define('BOARD_CHECK_INTERVAL', 10);
 // Period (in second) to consider a task was modified recently (0 to disable, 2 days by default)
 define('RECENT_TASK_PERIOD', 48*60*60);
 
-// Database driver: sqlite or mysql (sqlite by default)
+// Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');
 
-// Mysql username
+// Mysql/Postgres username
 define('DB_USERNAME', 'root');
 
-// Mysql password
+// Mysql/Postgres password
 define('DB_PASSWORD', '');
 
-// Mysql hostname
+// Mysql/Postgres hostname
 define('DB_HOSTNAME', 'localhost');
 
-// Mysql database name
+// Mysql/Postgres database name
 define('DB_NAME', 'kanboard');
 
 // Enable LDAP authentication (false by default)
