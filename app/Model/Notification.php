@@ -10,6 +10,7 @@ use Event\FileNotificationListener;
 use Event\SubTaskNotificationListener;
 use Swift_Message;
 use Swift_Mailer;
+use Helper;
 
 /**
  * Notification model
@@ -46,7 +47,11 @@ class Notification extends Base
             $projects = $this->db->table(self::TABLE)
                                  ->eq('user_id', $user['id'])
                                  ->findAllByColumn('project_id');
-
+            // don't send notifications to the current user for their own actions
+            if ($user['id'] == Helper\get_user_id()) {
+                unset($users[$index]);
+                continue;
+            }
             // The user have selected only some projects
             if (! empty($projects)) {
 
