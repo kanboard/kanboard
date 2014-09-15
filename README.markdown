@@ -63,7 +63,7 @@ Documentation
 - [Installation on Debian](docs/debian-installation.markdown)
 - [Installation on Centos](docs/centos-installation.markdown)
 - [Installation on Windows Server with IIS](docs/windows-iis-installation.markdown)
-- [Example with Nginx + HTTPS + SPDY + PHP-FPM](docs/secure-connections.markdown)
+- [Example with Nginx + HTTPS + SPDY + PHP-FPM](docs/nginx-ssl-php-fpm.markdown)
 
 #### Database
 
