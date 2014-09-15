@@ -496,4 +496,5 @@ return array(
     // 'Activity' => '',
     // 'Default values are "%s"' => '',
     // 'Default columns for new projects (Comma-separated)' => '',
+    // 'New password for the user "%s"' => '',
 );

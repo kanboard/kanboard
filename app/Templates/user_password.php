@@ -10,7 +10,7 @@
     <?= Helper\form_label(t('Current password for the user "%s"', Helper\get_username()), 'current_password') ?>
     <?= Helper\form_password('current_password', $values, $errors) ?><br/>
 
-    <?= Helper\form_label(t('Password'), 'password') ?>
+    <?= Helper\form_label(t('New password for the user "%s"', Helper\get_username($user)), 'password') ?>
     <?= Helper\form_password('password', $values, $errors) ?><br/>
 
     <?= Helper\form_label(t('Confirmation'), 'confirmation') ?>
