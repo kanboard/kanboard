@@ -147,8 +147,6 @@ class GitHub extends Base
         catch (TokenResponseException $e) {
             return false;
         }
-
-        return false;
     }
 
     /**
@@ -172,7 +170,5 @@ class GitHub extends Base
         catch (TokenResponseException $e) {
             return false;
         }
-
-        return false;
     }
 }

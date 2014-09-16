@@ -93,7 +93,7 @@ class User extends Base
      */
     private function getUser()
     {
-        $user = $this->user->getById($this->request->getIntegerParam('user_id'), true);
+        $user = $this->user->getById($this->request->getIntegerParam('user_id'));
 
         if (! $user) {
             $this->notfound();
