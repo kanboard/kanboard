@@ -280,11 +280,12 @@ abstract class Base
      * Common method to get a project
      *
      * @access protected
+     * @param  integer      $project_id    Default project id
      * @return array
      */
-    protected function getProject()
+    protected function getProject($project_id = 0)
     {
-        $project_id = $this->request->getIntegerParam('project_id');
+        $project_id = $this->request->getIntegerParam('project_id', $project_id);
         $project = $this->project->getById($project_id);
 
         if (! $project) {

@@ -53,7 +53,7 @@ class User extends Base
         list($valid, $errors) = $this->authentication->validateForm($values);
 
         if ($valid) {
-            $this->response->redirect('?controller=app');
+            $this->response->redirect('?controller=board');
         }
 
         $this->response->html($this->template->layout('user_login', array(

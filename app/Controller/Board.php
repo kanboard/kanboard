@@ -188,71 +188,54 @@ class Board extends Base
      */
     public function index()
     {
-        $projects = $this->project->getListByStatus(ProjectModel::ACTIVE);
-        $project_id = 0;
-        $project_name = '';
+        $last_seen_project_id = $this->user->getLastSeenProject();
+        $favorite_project_id = $this->user->getFavoriteProjectId();
+        $project_id = $last_seen_project_id ?: $favorite_project_id;
 
-        if ($this->acl->isRegularUser()) {
-            $projects = $this->project->filterListByAccess($projects, $this->acl->getUserId());
-        }
+        if (! $project_id) {
+            $projects = $this->project->getAvailableList($this->acl->getUserId());
 
-        if (empty($projects)) {
+            if (empty($projects)) {
 
-            if ($this->acl->isAdminUser()) {
-                $this->redirectNoProject();
+                if ($this->acl->isAdminUser()) {
+                    $this->redirectNoProject();
+                }
+
+                $this->forbidden();
             }
-            else {
-                $this->response->redirect('?controller=project&action=forbidden');
-            }
-        }
-        else if (! empty($_SESSION['user']['last_show_project_id']) && isset($projects[$_SESSION['user']['last_show_project_id']])) {
-            $project_id = $_SESSION['user']['last_show_project_id'];
-            $project_name = $projects[$_SESSION['user']['last_show_project_id']];
-        }
-        else if (! empty($_SESSION['user']['default_project_id']) && isset($projects[$_SESSION['user']['default_project_id']])) {
-            $project_id = $_SESSION['user']['default_project_id'];
-            $project_name = $projects[$_SESSION['user']['default_project_id']];
-        }
-        else {
-            list($project_id, $project_name) = each($projects);
+
+            $project_id = key($projects);
         }
 
-        $this->response->redirect('?controller=board&action=show&project_id='.$project_id);
+        $this->show($project_id);
     }
 
     /**
      * Show a board for a given project
      *
      * @access public
+     * @param  integer   $project_id    Default project id
      */
-    public function show()
+    public function show($project_id = 0)
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $user_id = $this->request->getIntegerParam('user_id', UserModel::EVERYBODY_ID);
-
-        // Stored last seen in the project dashboard
-        $_SESSION['user']['last_show_project_id'] = $project_id ;
-
-        $this->checkProjectPermissions($project_id);
+        $project = $this->getProject($project_id);
         $projects = $this->project->getAvailableList($this->acl->getUserId());
 
-        if (! isset($projects[$project_id])) {
-            $this->notfound();
-        }
-
         $board_selector = $projects;
-        unset($board_selector[$project_id]);
+        unset($board_selector[$project['id']]);
+
+        $this->user->storeLastSeenProject($project['id']);
 
         $this->response->html($this->template->layout('board_index', array(
-            'users' => $this->project->getUsersList($project_id, true, true),
-            'filters' => array('user_id' => $user_id),
+            'users' => $this->project->getUsersList($project['id'], true, true),
+            'filters' => array('user_id' => UserModel::EVERYBODY_ID),
             'projects' => $projects,
-            'current_project_id' => $project_id,
-            'current_project_name' => $projects[$project_id],
-            'board' => $this->board->get($project_id),
-            'categories' => $this->category->getList($project_id, true, true),
+            'current_project_id' => $project['id'],
+            'current_project_name' => $projects[$project['id']],
+            'board' => $this->board->get($project['id']),
+            'categories' => $this->category->getList($project['id'], true, true),
             'menu' => 'boards',
-            'title' => $projects[$project_id],
+            'title' => $projects[$project['id']],
             'board_selector' => $board_selector,
         )));
     }

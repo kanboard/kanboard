@@ -28,6 +28,39 @@ class User extends Base
     const EVERYBODY_ID = -1;
 
     /**
+     * Get the default project from the session
+     *
+     * @access public
+     * @return integer
+     */
+    public function getFavoriteProjectId()
+    {
+        return isset($_SESSION['user']['default_project_id']) ? $_SESSION['user']['default_project_id'] : 0;
+    }
+
+    /**
+     * Get the last seen project from the session
+     *
+     * @access public
+     * @return integer
+     */
+    public function getLastSeenProject()
+    {
+        return empty($_SESSION['user']['last_show_project_id']) ? 0 : $_SESSION['user']['last_show_project_id'];
+    }
+
+    /**
+     * Set the last seen project from the session
+     *
+     * @access public
+     * @@param integer    $project_id    Project id
+     */
+    public function storeLastSeenProject($project_id)
+    {
+        $_SESSION['user']['last_show_project_id'] = (int) $project_id;
+    }
+
+    /**
      * Get a specific user by id
      *
      * @access public
