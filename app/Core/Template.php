@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use LogicException;
+
 /**
  * Template class
  *
@@ -25,31 +27,22 @@ class Template
      * $template->load('template_name', ['bla' => 'value']);
      *
      * @access public
+     * @params string   $__template_name   Template name
+     * @params array    $__template_args   Key/Value map of template variables
      * @return string
      */
-    public function load()
+    public function load($__template_name, array $__template_args = array())
     {
-        if (func_num_args() < 1 || func_num_args() > 2) {
-            die('Invalid template arguments');
+        $__template_file = self::PATH.$__template_name.'.php';
+
+        if (! file_exists($__template_file)) {
+            throw new LogicException('Unable to load the template: "'.$__template_name.'"');
         }
 
-        if (! file_exists(self::PATH.func_get_arg(0).'.php')) {
-            die('Unable to load the template: "'.func_get_arg(0).'"');
-        }
-
-        if (func_num_args() === 2) {
-
-            if (! is_array(func_get_arg(1))) {
-                die('Template variables must be an array');
-            }
-
-            extract(func_get_arg(1));
-        }
+        extract($__template_args);
 
         ob_start();
-
-        include self::PATH.func_get_arg(0).'.php';
-
+        include $__template_file;
         return ob_get_clean();
     }
 
