@@ -188,7 +188,7 @@ class Board extends Base
      */
     public function index()
     {
-        $last_seen_project_id = $this->user->getLastSeenProject();
+        $last_seen_project_id = $this->user->getLastSeenProjectId();
         $favorite_project_id = $this->user->getFavoriteProjectId();
         $project_id = $last_seen_project_id ?: $favorite_project_id;
 
@@ -224,7 +224,7 @@ class Board extends Base
         $board_selector = $projects;
         unset($board_selector[$project['id']]);
 
-        $this->user->storeLastSeenProject($project['id']);
+        $this->user->storeLastSeenProjectId($project['id']);
 
         $this->response->html($this->template->layout('board_index', array(
             'users' => $this->project->getUsersList($project['id'], true, true),

@@ -44,7 +44,7 @@ class User extends Base
      * @access public
      * @return integer
      */
-    public function getLastSeenProject()
+    public function getLastSeenProjectId()
     {
         return empty($_SESSION['user']['last_show_project_id']) ? 0 : $_SESSION['user']['last_show_project_id'];
     }
@@ -55,7 +55,7 @@ class User extends Base
      * @access public
      * @@param integer    $project_id    Project id
      */
-    public function storeLastSeenProject($project_id)
+    public function storeLastSeenProjectId($project_id)
     {
         $_SESSION['user']['last_show_project_id'] = (int) $project_id;
     }
