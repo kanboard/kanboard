@@ -56,6 +56,67 @@ class TaskTest extends Base
         $this->assertFalse($t->remove(1234));
     }
 
+    public function testMoveTaskWithColumnThatNotChange()
+    {
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
+
+        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(3, $t->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(4, $t->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 2)));
+        $this->assertEquals(5, $t->create(array('title' => 'Task #5', 'project_id' => 1, 'column_id' => 2)));
+        $this->assertEquals(6, $t->create(array('title' => 'Task #6', 'project_id' => 1, 'column_id' => 2)));
+        $this->assertEquals(7, $t->create(array('title' => 'Task #7', 'project_id' => 1, 'column_id' => 3)));
+        $this->assertEquals(8, $t->create(array('title' => 'Task #8', 'project_id' => 1, 'column_id' => 1)));
+
+        // We move the task 3 to the column 3
+        $this->assertTrue($t->movePosition(1, 3, 3, 2));
+
+        // Check tasks position
+        $task = $t->getById(1);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+
+        $task = $t->getById(2);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+
+        $task = $t->getById(3);
+        $this->assertEquals(3, $task['id']);
+        $this->assertEquals(3, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+
+        $task = $t->getById(4);
+        $this->assertEquals(4, $task['id']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+
+        $task = $t->getById(5);
+        $this->assertEquals(5, $task['id']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+
+        $task = $t->getById(6);
+        $this->assertEquals(6, $task['id']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(3, $task['position']);
+
+        $task = $t->getById(7);
+        $this->assertEquals(7, $task['id']);
+        $this->assertEquals(3, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+
+        $task = $t->getById(8);
+        $this->assertEquals(8, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(3, $task['position']);
+    }
+
     public function testMoveTaskWithBadPreviousPosition()
     {
         $t = new Task($this->registry);
