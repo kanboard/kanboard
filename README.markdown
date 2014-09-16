@@ -140,6 +140,7 @@ Contributors:
 - Torsten: https://github.com/misterfu
 - Troloo: https://github.com/troloo
 - Typz: https://github.com/Typz
+- Vedovator: https://github.com/vedovator
 - Ybarc: https://github.com/ybarc
 
 There is also many people who have reported bugs or proposed awesome ideas.
