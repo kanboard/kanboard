@@ -76,6 +76,7 @@ class Task extends Base
             'title' => $task['title'],
             'no_layout' => true,
             'auto_refresh' => true,
+            'not_editable' => true,
         )));
     }
 

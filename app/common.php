@@ -29,4 +29,4 @@ $loader->execute();
 $registry = new Registry;
 $registry->db = setup_db();
 $registry->event = setup_events();
-$registry->mailer = setup_mailer();
+$registry->mailer = function() { return setup_mailer(); };

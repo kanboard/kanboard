@@ -178,6 +178,7 @@ class Board extends Base
             'title' => $project['name'],
             'no_layout' => true,
             'auto_refresh' => true,
+            'not_editable' => true,
         )));
     }
 
