@@ -224,12 +224,12 @@ class User extends Base
         $this->db->startTransaction();
 
         // All tasks assigned to this user will be unassigned
-        $this->db->table(Task::TABLE)->eq('owner_id', $user_id)->update(array('owner_id' => ''));
-        $this->db->table(self::TABLE)->eq('id', $user_id)->remove();
+        $this->db->table(Task::TABLE)->eq('owner_id', $user_id)->update(array('owner_id' => 0));
+        $result = $this->db->table(self::TABLE)->eq('id', $user_id)->remove();
 
         $this->db->closeTransaction();
 
-        return true;
+        return $result;
     }
 
     /**
@@ -265,7 +265,6 @@ class User extends Base
     private function commonValidationRules()
     {
         return array(
-            new Validators\Required('username', t('The username is required')),
             new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
             new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
             new Validators\Email('email', t('Email address invalid')),
@@ -299,7 +298,11 @@ class User extends Base
      */
     public function validateCreation(array $values)
     {
-        $v = new Validator($values, array_merge($this->commonValidationRules(), $this->commonPasswordValidationRules()));
+        $rules = array(
+            new Validators\Required('username', t('The username is required')),
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules(), $this->commonPasswordValidationRules()));
 
         return array(
             $v->execute(),
@@ -315,6 +318,28 @@ class User extends Base
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
     public function validateModification(array $values)
+    {
+        $rules = array(
+            new Validators\Required('id', t('The user id is required')),
+            new Validators\Required('username', t('The username is required')),
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    /**
+     * Validate user API modification
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateApiModification(array $values)
     {
         $rules = array(
             new Validators\Required('id', t('The user id is required')),

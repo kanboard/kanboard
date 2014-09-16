@@ -135,6 +135,10 @@ $server->register('removeColumn', function($column_id) use ($board) {
     return $board->removeColumn($column_id);
 });
 
+
+/**
+ * Projects permissions procedures
+ */
 $server->register('getAllowedUsers', function($project_id) use ($project) {
     return $project->getUsersList($project_id, false, false);
 });
@@ -224,7 +228,18 @@ $server->register('moveTaskPosition', function($project_id, $task_id, $column_id
 /**
  * User procedures
  */
-$server->register('createUser', function(array $values) use ($user) {
+$server->register('createUser', function($username, $password, $name = '', $email = '', $is_admin = 0, $default_project_id = 0) use ($user) {
+
+    $values = array(
+        'username' => $username,
+        'password' => $password,
+        'confirmation' => $password,
+        'name' => $name,
+        'email' => $email,
+        'is_admin' => $is_admin,
+        'default_project_id' => $default_project_id,
+    );
+
     list($valid,) = $user->validateCreation($values);
     return $valid && $user->create($values);
 });
@@ -237,8 +252,24 @@ $server->register('getAllUsers', function() use ($user) {
     return $user->getAll();
 });
 
-$server->register('updateUser', function($values) use ($user) {
-    list($valid,) = $user->validateModification($values);
+$server->register('updateUser', function($id, $username = null, $name = null, $email = null, $is_admin = null, $default_project_id = null) use ($user) {
+
+    $values = array(
+        'id' => $id,
+        'username' => $username,
+        'name' => $name,
+        'email' => $email,
+        'is_admin' => $is_admin,
+        'default_project_id' => $default_project_id,
+    );
+
+    foreach ($values as $key => $value) {
+        if (is_null($value)) {
+            unset($values[$key]);
+        }
+    }
+
+    list($valid,) = $user->validateApiModification($values);
     return $valid && $user->update($values);
 });
 
@@ -356,7 +387,7 @@ $server->register('getAllSubtasks', function($task_id) use ($subtask) {
     return $subtask->getAll($task_id);
 });
 
-$server->register('updateSubtask', function($id, $task_id, $title = null, $user_id = 0, $time_estimated = 0, $time_spent = 0, $status = 0) use ($subtask) {
+$server->register('updateSubtask', function($id, $task_id, $title = null, $user_id = null, $time_estimated = null, $time_spent = null, $status = null) use ($subtask) {
 
     $values = array(
         'id' => $id,

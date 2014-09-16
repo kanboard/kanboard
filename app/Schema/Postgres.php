@@ -4,7 +4,12 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 7;
+const VERSION = 8;
+
+function version_8($pdo)
+{
+    $pdo->exec('CREATE UNIQUE INDEX users_username_idx ON users(username)');
+}
 
 function version_7($pdo)
 {

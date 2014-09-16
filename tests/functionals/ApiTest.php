@@ -233,28 +233,26 @@ class Api extends PHPUnit_Framework_TestCase
             'username' => 'toto',
             'name' => 'Toto',
             'password' => '123456',
-            'confirmation' => '123456',
         );
 
-        $this->assertTrue($this->client->createUser($user));
+        $this->assertTrue($this->client->execute('createUser', $user));
 
         $user = array(
-            'username' => 'titi',
             'name' => 'Titi',
             'password' => '123456',
-            'confirmation' => '789',
         );
 
-        $this->assertFalse($this->client->createUser($user));
+        $this->assertNull($this->client->execute('createUser', $user));
     }
 
     public function testGetUser()
     {
         $user = $this->client->getUser(2);
-
         $this->assertNotFalse($user);
         $this->assertTrue(is_array($user));
         $this->assertEquals('toto', $user['username']);
+
+        $this->assertNull($this->client->getUser(2222));
     }
 
     public function testUpdateUser()
@@ -264,14 +262,24 @@ class Api extends PHPUnit_Framework_TestCase
         $user['username'] = 'titi';
         $user['name'] = 'Titi';
 
-        $this->assertTrue($this->client->updateUser($user));
+        $this->assertTrue($this->client->execute('updateUser', $user));
 
         $user = $this->client->getUser(2);
-
         $this->assertNotFalse($user);
         $this->assertTrue(is_array($user));
         $this->assertEquals('titi', $user['username']);
         $this->assertEquals('Titi', $user['name']);
+
+        $user = array();
+        $user['id'] = 2;
+        $user['email'] = 'titi@localhost';
+
+        $this->assertTrue($this->client->execute('updateUser', $user));
+
+        $user = $this->client->getUser(2);
+        $this->assertNotFalse($user);
+        $this->assertTrue(is_array($user));
+        $this->assertEquals('titi@localhost', $user['email']);
     }
 
     public function testGetAllowedUsers()

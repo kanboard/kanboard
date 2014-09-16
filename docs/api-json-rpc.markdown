@@ -967,96 +967,191 @@ Response example:
 ### createUser
 
 - Purpose: **Create a new user**
-- Parameters: Key/value pair composed of the **username** (string), **password** (string), **confirmation** (string), **name** (string, optional), **email** (string, optional), is_admin (integer, optional), **default_project_id** (integer, optional)
+- Parameters:
+    - **username** Must be unique (string, required)
+    - **password** Must have at least 6 characters (string, required)
+    - **name** (string, optional)
+    - **email** (string, optional)
+    - **is_admin** Set the value 1 for admins or 0 for regular users (integer, optional)
+    - **default_project_id** (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
 Request example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "method": "createUser",
+    "id": 1518863034,
+    "params": {
+        "username": "biloute",
+        "password": "123456"
+    }
+}
 ```
 
 Response example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "id": 1518863034,
+    "result": true
+}
 ```
 
 ### getUser
 
 - Purpose: **Get user information**
-- Parameters: **user_id** (integer)
+- Parameters:
+    - **user_id** (integer, required)
 - Result on success: **user properties**
 - Result on failure: **null**
 
 Request example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "method": "getUser",
+    "id": 1769674781,
+    "params": {
+        "user_id": 1
+    }
+}
 ```
 
 Response example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "id": 1769674781,
+    "result": {
+        "id": "1",
+        "username": "biloute",
+        "password": "$2y$10$dRs6pPoBu935RpmsrhmbjevJH5MgZ7Kr9QrnVINwwyZ3.MOwqg.0m",
+        "is_admin": "0",
+        "default_project_id": "0",
+        "is_ldap_user": "0",
+        "name": "",
+        "email": "",
+        "google_id": null,
+        "github_id": null,
+        "notifications_enabled": "0"
+    }
+}
 ```
 
 ### getAllUsers
 
 - Purpose: **Get all available users**
-- Parameters: **none**
+- Parameters:
+    - **none**
 - Result on success: **List of users**
 - Result on failure: **false**
 
 Request example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "method": "getAllUsers",
+    "id": 1438712131
+}
 ```
 
 Response example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "id": 1438712131,
+    "result": [
+        {
+            "id": "1",
+            "username": "biloute",
+            "name": "",
+            "email": "",
+            "is_admin": "0",
+            "default_project_id": "0",
+            "is_ldap_user": "0",
+            "notifications_enabled": "0",
+            "google_id": null,
+            "github_id": null
+        },
+        ...
+    ]
+}
 ```
 
 ### updateUser
 
 - Purpose: **Update a user**
-- Parameters: Key/value pair composed of the **id** (integer), **username** (string), **password** (string), **confirmation** (string), **name** (string, optional), **email** (string, optional), is_admin (integer, optional), **default_project_id** (integer, optional)
+- Parameters:
+    - **id** (integer)
+    - **username** (string, optional)
+    - **name** (string, optional)
+    - **email** (string, optional)
+    - **is_admin** (integer, optional)
+    - **default_project_id** (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
 Request example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "method": "updateUser",
+    "id": 322123657,
+    "params": {
+        "id": 1,
+        "is_admin": 1
+    }
+}
 ```
 
 Response example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "id": 322123657,
+    "result": true
+}
 ```
 
 ### removeUser
 
 - Purpose: **Remove a user**
-- Parameters: **user_id** (integer)
+- Parameters:
+    - **user_id** (integer, required)
 - Result on success: **true**
 - Result on failure: **false**
 
 Request example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "method": "removeUser",
+    "id": 2094191872,
+    "params": {
+        "user_id": 1
+    }
+}
 ```
 
 Response example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "id": 2094191872,
+    "result": true
+}
 ```
 
 
