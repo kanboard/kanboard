@@ -496,4 +496,10 @@ return array(
     'Activity' => 'Activité',
     'Default values are "%s"' => 'Les valeurs par défaut sont « %s »',
     'Default columns for new projects (Comma-separated)' => 'Colonnes par défaut pour les nouveaux projets (séparé par des virgules)',
+    'Task assignee change' => 'Modification de la personne assignée sur une tâche',
+    '%s change the assignee of the task #%d' => '%s a changé la personne assignée sur la tâche #%d',
+    '%s change the assignee of the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a>' => '%s a changé la personne assignée sur la tâche <a href="?controller=task&amp;action=show&amp;task_id=%d">n°%d</a>',
+    '[%s][Column Change] %s (#%d)' => '[%s][Changement de colonne] %s (#%d)',
+    '[%s][Position Change] %s (#%d)' => '[%s][Changement de position] %s (#%d)',
+    '[%s][Assignee Change] %s (#%d)' => '[%s][Changement d\'assigné] %s (#%d)',
 );

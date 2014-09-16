@@ -79,6 +79,9 @@ class Notification extends Base
         $this->event->attach(Task::EVENT_UPDATE, new TaskNotificationListener($this, 'notification_task_update'));
         $this->event->attach(Task::EVENT_CLOSE, new TaskNotificationListener($this, 'notification_task_close'));
         $this->event->attach(Task::EVENT_OPEN, new TaskNotificationListener($this, 'notification_task_open'));
+        $this->event->attach(Task::EVENT_MOVE_COLUMN, new TaskNotificationListener($this, 'notification_task_move_column'));
+        $this->event->attach(Task::EVENT_MOVE_POSITION, new TaskNotificationListener($this, 'notification_task_move_position'));
+        $this->event->attach(Task::EVENT_ASSIGNEE_CHANGE, new TaskNotificationListener($this, 'notification_task_assignee_change'));
     }
 
     /**
@@ -97,7 +100,6 @@ class Notification extends Base
         $message = Swift_Message::newInstance()
                         ->setSubject($this->getMailSubject($template, $data))
                         ->setFrom(array(MAIL_FROM => 'Kanboard'))
-                        //->setTo(array($user['email'] => $user['name']))
                         ->setBody($this->getMailContent($template, $data), 'text/html');
 
         foreach ($users as $user) {
@@ -142,6 +144,15 @@ class Notification extends Base
                 break;
             case 'notification_task_open':
                 $subject = e('[%s][Task opened] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
+            case 'notification_task_move_column':
+                $subject = e('[%s][Column Change] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
+            case 'notification_task_move_position':
+                $subject = e('[%s][Position Change] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
+                break;
+            case 'notification_task_assignee_change':
+                $subject = e('[%s][Assignee Change] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
             case 'notification_task_due':
                 $subject = e('[%s][Due tasks]', $data['project']);

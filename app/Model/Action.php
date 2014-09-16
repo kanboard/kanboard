@@ -64,6 +64,7 @@ class Action extends Base
             Task::EVENT_OPEN => t('Open a closed task'),
             Task::EVENT_CLOSE => t('Closing a task'),
             Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
+            Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
         );
     }
 

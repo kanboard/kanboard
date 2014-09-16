@@ -648,5 +648,9 @@ class TaskTest extends Base
         // We change the column and the position of our task
         $this->assertTrue($t->movePosition(1, 1, 1, 1));
         $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+
+        // We change the assignee
+        $this->assertTrue($t->update(array('owner_id' => 1, 'id' => 1)));
+        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_ASSIGNEE_CHANGE));
     }
 }

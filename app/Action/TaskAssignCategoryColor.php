@@ -75,7 +75,7 @@ class TaskAssignCategoryColor extends Base
             $this->task->update(array(
                 'id' => $data['task_id'],
                 'category_id' => $this->getParam('category_id'),
-            ));
+            ), false);
 
             return true;
         }

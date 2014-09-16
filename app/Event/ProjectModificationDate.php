@@ -35,6 +35,17 @@ class ProjectModificationDate implements Listener
     }
 
     /**
+     * Return class information
+     *
+     * @access public
+     * @return string
+     */
+    public function __toString()
+    {
+        return get_called_class();
+    }
+
+    /**
      * Execute the action
      *
      * @access public

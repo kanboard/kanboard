@@ -122,6 +122,7 @@ class TaskHistory extends BaseHistory
     public function getTitle(array $event)
     {
         $titles = array(
+            Task::EVENT_ASSIGNEE_CHANGE => t('%s change the assignee of the task #%d', $event['author'], $event['task_id']),
             Task::EVENT_UPDATE => t('%s updated the task #%d', $event['author'], $event['task_id']),
             Task::EVENT_CREATE => t('%s created the task #%d', $event['author'], $event['task_id']),
             Task::EVENT_CLOSE => t('%s closed the task #%d', $event['author'], $event['task_id']),
@@ -141,6 +142,7 @@ class TaskHistory extends BaseHistory
     public function attachEvents()
     {
         $events = array(
+            Task::EVENT_ASSIGNEE_CHANGE,
             Task::EVENT_UPDATE,
             Task::EVENT_CREATE,
             Task::EVENT_CLOSE,

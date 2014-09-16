@@ -25,6 +25,7 @@ List of available events
 - Open a closed task
 - Closing a task
 - Task creation or modification
+- Task assignee change
 
 List of available actions
 -------------------------
@@ -79,7 +80,7 @@ Let's say we have two projects "Ideas" and "Development", once the idea is valid
 
 ### I want to assign automatically a color to the user Bob
 
-- Choose the event: **Task creation**
+- Choose the event: **Task assignee change**
 - Choose the action: **Assign a color to a specific user**
 - Define the action parameters: **Color = Green** and **Assignee = Bob**
 

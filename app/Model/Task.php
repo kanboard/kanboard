@@ -35,13 +35,14 @@ class Task extends Base
      *
      * @var string
      */
-    const EVENT_MOVE_COLUMN   = 'task.move.column';
-    const EVENT_MOVE_POSITION = 'task.move.position';
-    const EVENT_UPDATE        = 'task.update';
-    const EVENT_CREATE        = 'task.create';
-    const EVENT_CLOSE         = 'task.close';
-    const EVENT_OPEN          = 'task.open';
-    const EVENT_CREATE_UPDATE = 'task.create_update';
+    const EVENT_MOVE_COLUMN     = 'task.move.column';
+    const EVENT_MOVE_POSITION   = 'task.move.position';
+    const EVENT_UPDATE          = 'task.update';
+    const EVENT_CREATE          = 'task.create';
+    const EVENT_CLOSE           = 'task.close';
+    const EVENT_OPEN            = 'task.open';
+    const EVENT_CREATE_UPDATE   = 'task.create_update';
+    const EVENT_ASSIGNEE_CHANGE = 'task.assignee_change';
 
     /**
      * Get available colors
@@ -437,9 +438,10 @@ class Task extends Base
      *
      * @access public
      * @param  array    $values            Form values
+     * @param  boolean  $trigger_Events    Trigger events
      * @return boolean
      */
-    public function update(array $values)
+    public function update(array $values, $trigger_events = true)
     {
         // Fetch original task
         $original_task = $this->getById($values['id']);
@@ -454,7 +456,9 @@ class Task extends Base
         $updated_task['date_modification'] = time();
         unset($updated_task['id']);
 
-        if ($this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task)) {
+        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task);
+
+        if ($result && $trigger_events) {
             $this->triggerUpdateEvents($original_task, $updated_task);
         }
 
@@ -472,7 +476,10 @@ class Task extends Base
     {
         $events = array();
 
-        if (isset($updated_task['column_id']) && $original_task['column_id'] != $updated_task['column_id']) {
+        if (isset($updated_task['owner_id']) && $original_task['owner_id'] != $updated_task['owner_id']) {
+            $events[] = self::EVENT_ASSIGNEE_CHANGE;
+        }
+        else if (isset($updated_task['column_id']) && $original_task['column_id'] != $updated_task['column_id']) {
             $events[] = self::EVENT_MOVE_COLUMN;
         }
         else if (isset($updated_task['position']) && $original_task['position'] != $updated_task['position']) {

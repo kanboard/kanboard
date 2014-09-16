@@ -139,4 +139,15 @@ abstract class Base implements Listener
 
         return false;
     }
+
+    /**
+     * Return class information
+     *
+     * @access public
+     * @return string
+     */
+    public function __toString()
+    {
+        return get_called_class();
+    }
 }

@@ -85,7 +85,7 @@ class TaskAssignCurrentUser extends Base
             $this->task->update(array(
                 'id' => $data['task_id'],
                 'owner_id' => $this->acl->getUserId(),
-            ));
+            ), false);
 
             return true;
         }
