@@ -288,7 +288,14 @@ $server->register('removeCategory', function($category_id) use ($category) {
 /**
  * Comments procedures
  */
-$server->register('createComment', function(array $values) use ($comment) {
+$server->register('createComment', function($task_id, $user_id, $content) use ($comment) {
+
+    $values = array(
+        'task_id' => $task_id,
+        'user_id' => $user_id,
+        'comment' => $content,
+    );
+
     list($valid,) = $comment->validateCreation($values);
     return $valid && $comment->create($values);
 });
@@ -301,7 +308,13 @@ $server->register('getAllComments', function($task_id) use ($comment) {
     return $comment->getAll($task_id);
 });
 
-$server->register('updateComment', function($values) use ($comment) {
+$server->register('updateComment', function($id, $content) use ($comment) {
+
+    $values = array(
+        'id' => $id,
+        'comment' => $content,
+    );
+
     list($valid,) = $comment->validateModification($values);
     return $valid && $comment->update($values);
 });

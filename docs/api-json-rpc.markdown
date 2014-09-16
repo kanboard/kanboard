@@ -440,12 +440,36 @@ Response example:
 - Result on success: **board properties**
 - Result on failure: **null**
 
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
+
 ### getColumns
 
 - Purpose: **Get all columns information for a given project**
 - Parameters: **project_id** (integer)
 - Result on success: **columns properties**
 - Result on failure: **null**
+
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
 
 ### moveColumnUp
 
@@ -454,12 +478,36 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
+
 ### moveColumnDown
 
 - Purpose: **Move down the column position**
 - Parameters: **project_id** (integer), **column_id** (integer)
 - Result on success: **true**
 - Result on failure: **false**
+
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
 
 ### updateColumn
 
@@ -468,12 +516,36 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
+
 ### addColumn
 
 - Purpose: **Add a new column**
 - Parameters: **project_id** (integer), **values** (**title** string, **task_limit** integer)
 - Result on success: **true**
 - Result on failure: **false**
+
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
 
 ### removeColumn
 
@@ -482,12 +554,36 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
+
 ### getAllowedUsers
 
 - Purpose: **Get allowed users for a given project**
 - Parameters: **project_id** (integer)
 - Result on success: Key/value pair of user_id and username
 - Result on failure: **false**
+
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
 
 ### revokeUser
 
@@ -496,6 +592,18 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
+
 ### allowUser
 
 - Purpose: **Grant user access for a given project**
@@ -503,7 +611,17 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
 
+```json
+
+```
+
+Response example:
+
+```json
+
+```
 
 
 ### createTask
@@ -853,12 +971,36 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
+
 ### getUser
 
 - Purpose: **Get user information**
 - Parameters: **user_id** (integer)
 - Result on success: **user properties**
 - Result on failure: **null**
+
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
 
 ### getAllUsers
 
@@ -867,12 +1009,36 @@ Response example:
 - Result on success: **List of users**
 - Result on failure: **false**
 
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
+
 ### updateUser
 
 - Purpose: **Update a user**
 - Parameters: Key/value pair composed of the **id** (integer), **username** (string), **password** (string), **confirmation** (string), **name** (string, optional), **email** (string, optional), is_admin (integer, optional), **default_project_id** (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
+
+Request example:
+
+```json
+
+```
+
+Response example:
+
+```json
+
+```
 
 ### removeUser
 
@@ -881,7 +1047,17 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
 
+```json
+
+```
+
+Response example:
+
+```json
+
+```
 
 
 ### createCategory
@@ -1058,39 +1234,182 @@ Response example:
 ### createComment
 
 - Purpose: **Create a new comment**
-- Parameters: Key/value pair composed of the **task_id** (integer), **user_id** (integer), **comment** (string)
+- Parameters:
+    - **task_id** (integer, required)
+    - **user_id** (integer, required)
+    - **content** Markdown content (string, required)
 - Result on success: **true**
 - Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "createComment",
+    "id": 1580417921,
+    "params": {
+        "task_id": 1,
+        "user_id": 1,
+        "content": "Comment #1"
+    }
+}
+```
+
+Response example:
+
+```json
+
+    "jsonrpc": "2.0",
+    "id": 1580417921,
+    "result": true
+}
+```
 
 ### getComment
 
 - Purpose: **Get comment information**
-- Parameters: **comment_id** (integer)
+- Parameters:
+    - **comment_id** (integer, required)
 - Result on success: **comment properties**
 - Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getComment",
+    "id": 867839500,
+    "params": {
+        "comment_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 867839500,
+    "result": {
+        "id": "1",
+        "task_id": "1",
+        "user_id": "1",
+        "date": "1410881970",
+        "comment": "Comment #1",
+        "username": "admin",
+        "name": null
+    }
+}
+```
 
 ### getAllComments
 
 - Purpose: **Get all available comments**
-- Parameters: **none**
+- Parameters:
+    - **task_id** (integer, required)
 - Result on success: **List of comments**
 - Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getAllComments",
+    "id": 148484683,
+    "params": {
+        "task_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 148484683,
+    "result": [
+        {
+            "id": "1",
+            "date": "1410882272",
+            "task_id": "1",
+            "user_id": "1",
+            "comment": "Comment #1",
+            "username": "admin",
+            "name": null
+        },
+        ...
+    ]
+}
+```
 
 ### updateComment
 
 - Purpose: **Update a comment**
-- Parameters: Key/value pair composed of the **id** (integer), **task_id** (integer), **user_id** (integer), **comment** (string)
+- Parameters:
+    - **id** (integer, required)
+    - **content** Markdown content (string, required)
 - Result on success: **true**
 - Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "updateComment",
+    "id": 496470023,
+    "params": {
+        "id": 1,
+        "content": "Comment #1 updated"
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1493368950,
+    "result": true
+}
+```
 
 ### removeComment
 
 - Purpose: **Remove a comment**
-- Parameters: **comment_id** (integer)
+- Parameters:
+    - **comment_id** (integer, required)
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
 
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "removeComment",
+    "id": 328836871,
+    "params": {
+        "comment_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 328836871,
+    "result": true
+}
+```
 
 
 ### createSubtask

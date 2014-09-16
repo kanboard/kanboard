@@ -47,6 +47,8 @@ class CommentTest extends Base
         $this->assertEquals(1, $comments[0]['id']);
         $this->assertEquals(2, $comments[1]['id']);
         $this->assertEquals(3, $comments[2]['id']);
+
+        $this->assertEquals(3, $c->count(1));
     }
 
     public function testUpdate()
@@ -63,6 +65,21 @@ class CommentTest extends Base
         $comment = $c->getById(1);
         $this->assertNotEmpty($comment);
         $this->assertEquals('bla', $comment['comment']);
+    }
+
+    public function validateRemove()
+    {
+        $c = new Comment($this->registry);
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
+        $this->assertTrue($c->create(array('task_id' => 1, 'comment' => 'c1', 'user_id' => 1)));
+
+        $this->assertTrue($c->remove(1));
+        $this->assertFalse($c->remove(1));
+        $this->assertFalse($c->remove(1111));
     }
 
     public function testValidateCreation()

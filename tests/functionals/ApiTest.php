@@ -318,10 +318,10 @@ class Api extends PHPUnit_Framework_TestCase
         $comment = array(
             'task_id' => $tasks[0]['id'],
             'user_id' => 2,
-            'comment' => 'boo',
+            'content' => 'boo',
         );
 
-        $this->assertTrue($this->client->createComment($comment));
+        $this->assertTrue($this->client->execute('createComment', $comment));
     }
 
     public function testGetComment()
@@ -335,10 +335,11 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testUpdateComment()
     {
-        $comment = $this->client->getComment(1);
-        $comment['comment'] = 'test';
+        $comment = array();
+        $comment['id'] = 1;
+        $comment['content'] = 'test';
 
-        $this->assertTrue($this->client->updateComment($comment));
+        $this->assertTrue($this->client->execute('updateComment', $comment));
 
         $comment = $this->client->getComment(1);
         $this->assertEquals('test', $comment['comment']);
@@ -351,10 +352,10 @@ class Api extends PHPUnit_Framework_TestCase
         $comment = array(
             'task_id' => $task_id,
             'user_id' => 1,
-            'comment' => 'blabla',
+            'content' => 'blabla',
         );
 
-        $this->assertTrue($this->client->createComment($comment));
+        $this->assertTrue($this->client->execute('createComment', $comment));
 
         $comments = $this->client->getAllComments($task_id);
         $this->assertNotFalse($comments);
@@ -366,13 +367,20 @@ class Api extends PHPUnit_Framework_TestCase
     public function testRemoveComment()
     {
         $task_id = $this->getTaskId();
-        $this->assertTrue($this->client->removeComment($task_id));
 
         $comments = $this->client->getAllComments($task_id);
         $this->assertNotFalse($comments);
         $this->assertNotEmpty($comments);
         $this->assertTrue(is_array($comments));
-        $this->assertEquals(1, count($comments));
+
+        foreach ($comments as $comment) {
+            $this->assertTrue($this->client->removeComment($comment['id']));
+        }
+
+        $comments = $this->client->getAllComments($task_id);
+        $this->assertNotFalse($comments);
+        $this->assertEmpty($comments);
+        $this->assertTrue(is_array($comments));
     }
 
     public function testCreateSubtask()
