@@ -424,7 +424,7 @@ Request example:
 Response example:
 
 ```json
-
+{
     "jsonrpc": "2.0",
     "id": 942472945,
     "result": true
@@ -434,58 +434,103 @@ Response example:
 ### getAllowedUsers
 
 - Purpose: **Get allowed users for a given project**
-- Parameters: **project_id** (integer)
+- Note: Only people explicitly allowed are part of this list, administrators are always authorized
+- Parameters:
+    - **project_id** (integer, required)
 - Result on success: Key/value pair of user_id and username
 - Result on failure: **false**
 
 Request example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "method": "getAllowedUsers",
+    "id": 1944388643,
+    "params": [
+        1
+    ]
+}
 ```
 
 Response example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "id": 1944388643,
+    "result": {
+        "1": "user1",
+        "2": "user2",
+        "3": "user3"
+    }
+}
 ```
 
 ### revokeUser
 
 - Purpose: **Revoke user access for a given project**
-- Parameters: **project_id** (integer), **user_id** (integer)
+- Parameters:
+    - **project_id** (integer, required)
+    - **user_id** (integer, required)
 - Result on success: **true**
 - Result on failure: **false**
 
 Request example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "method": "revokeUser",
+    "id": 251218350,
+    "params": [
+        1,
+        2
+    ]
+}
 ```
 
 Response example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "id": 251218350,
+    "result": true
+}
 ```
 
 ### allowUser
 
 - Purpose: **Grant user access for a given project**
-- Parameters: **project_id** (integer), **user_id** (integer)
+- Parameters:
+    - **project_id** (integer, required)
+    - **user_id** (integer, required)
 - Result on success: **true**
 - Result on failure: **false**
 
 Request example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "method": "allowUser",
+    "id": 2111451404,
+    "params": [
+        1,
+        2
+    ]
+}
 ```
 
 Response example:
 
 ```json
-
+{
+    "jsonrpc": "2.0",
+    "id": 2111451404,
+    "result": true
+}
 ```
 
 

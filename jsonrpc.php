@@ -140,7 +140,7 @@ $server->register('removeColumn', function($column_id) use ($board) {
 
 
 /**
- * Projects permissions procedures
+ * Project permissions procedures
  */
 $server->register('getAllowedUsers', function($project_id) use ($project) {
     return $project->getUsersList($project_id, false, false);
