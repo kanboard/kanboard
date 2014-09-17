@@ -162,7 +162,8 @@ Response example:
 ### getProjectByName
 
 - Purpose: **Get project information**
-- Parameters: **name** (string)
+- Parameters:
+    - **name** (string, required)
 - Result on success: **project properties**
 - Result on failure: **null**
 
@@ -199,7 +200,8 @@ Response example:
 ### getAllProjects
 
 - Purpose: **Get all available projects**
-- Parameters: **none**
+- Parameters:
+    - **none**
 - Result on success: **List of projects**
 - Result on failure: **false**
 
@@ -881,7 +883,7 @@ Response example:
     - **project_id** (integer, required)
     - **color_id** (string, optional)
     - **column_id** (integer, optional)
-    - **description** (string, optional)
+    - **description** Markdown content (string, optional)
     - **owner_id** (integer, optional)
     - **creator_id** (integer, optional)
     - **score** (integer, optional)
@@ -1050,7 +1052,7 @@ Response example:
     - **color_id** (string, optional)
     - **project_id** (integer, optional)
     - **column_id** (integer, optional)
-    - **description** (string, optional)
+    - **description** Markdown content (string, optional)
     - **owner_id** (integer, optional)
     - **creator_id** (integer, optional)
     - **score** (integer, optional)
@@ -1409,7 +1411,7 @@ Response example:
 - Purpose: **Create a new category**
 - Parameters:
 - **project_id** (integer, required)
-    - **name** (string, required, must unique for the given project)
+    - **name** (string, required, must be unique for the given project)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -1497,7 +1499,7 @@ Request example:
 Response example:
 
 ```json
-
+{
     "jsonrpc": "2.0",
     "id": 1261777968,
     "result": [
@@ -1603,7 +1605,7 @@ Request example:
 Response example:
 
 ```json
-
+{
     "jsonrpc": "2.0",
     "id": 1580417921,
     "result": true
@@ -1769,6 +1771,8 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
+
 ```json
 {
     "jsonrpc": "2.0",
@@ -1878,11 +1882,13 @@ Response example:
     - **task_id** (integer, required)
     - **title** (integer, optional)
     - **assignee_id** (integer, optional)
-    - **time_estimated (integer, optional)
+    - **time_estimated** (integer, optional)
     - **time_spent** (integer, optional)
     - **status** (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
+
+Request examples:
 
 ```json
 {
@@ -1913,7 +1919,7 @@ Response example:
 
 - Purpose: **Remove a subtask**
 - Parameters:
-    **subtask_id** (integer, required)
+    - **subtask_id** (integer, required)
 - Result on success: **true**
 - Result on failure: **false**
 
