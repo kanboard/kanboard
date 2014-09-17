@@ -53,6 +53,10 @@ Documentation
 - [Syntax guide](docs/syntax-guide.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
 
+#### Working with tasks
+
+- [Creating tasks](docs/creating-tasks.markdown)
+
 ### Technical details
 
 #### Installation

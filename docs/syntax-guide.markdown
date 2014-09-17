@@ -1,7 +1,7 @@
 Syntax Guide
 ============
 
-Kanboard use the [Markdown syntax](http://en.wikipedia.org/wiki/Markdown) to write comments or tasks description.
+Kanboard use the [Markdown syntax](http://en.wikipedia.org/wiki/Markdown) to write comments or task descriptions.
 Here are some examples:
 
 Bold and italic
