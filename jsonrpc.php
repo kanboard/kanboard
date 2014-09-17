@@ -114,6 +114,10 @@ $server->register('getColumns', function($project_id) use ($board) {
     return $board->getColumns($project_id);
 });
 
+$server->register('getColumn', function($column_id) use ($board) {
+    return $board->getColumn($column_id);
+});
+
 $server->register('moveColumnUp', function($project_id, $column_id) use ($board) {
     return $board->moveUp($project_id, $column_id);
 });
@@ -122,13 +126,12 @@ $server->register('moveColumnDown', function($project_id, $column_id) use ($boar
     return $board->moveDown($project_id, $column_id);
 });
 
-$server->register('updateColumn', function($column_id, array $values) use ($board) {
-    return $board->updateColumn($column_id, $values);
+$server->register('updateColumn', function($column_id, $title, $task_limit = 0) use ($board) {
+    return $board->updateColumn($column_id, $title, $task_limit);
 });
 
-$server->register('addColumn', function($project_id, array $values) use ($board) {
-    $values += array('project_id' => $project_id);
-    return $board->add($values);
+$server->register('addColumn', function($project_id, $title, $task_limit = 0) use ($board) {
+    return $board->addColumn($project_id, $title, $task_limit);
 });
 
 $server->register('removeColumn', function($column_id) use ($board) {

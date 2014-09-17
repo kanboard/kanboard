@@ -2,11 +2,13 @@
 
 namespace JsonRPC;
 
+use BadFunctionCallException;
+
 /**
  * JsonRPC client class
  *
  * @package JsonRPC
- * @author Frderic Guillot
+ * @author Frederic Guillot
  * @license Unlicense http://unlicense.org/
  */
 class Client
@@ -42,6 +44,14 @@ class Client
      * @var string
      */
     private $password;
+
+    /**
+     * Enable debug output to the php error log
+     *
+     * @access public
+     * @var boolean
+     */
+    public $debug = false;
 
     /**
      * Default HTTP headers to send to the server
@@ -100,6 +110,7 @@ class Client
      * Execute
      *
      * @access public
+     * @throws BadFunctionCallException  Exception thrown when a bad request is made (missing argument/procedure)
      * @param  string   $procedure   Procedure name
      * @param  array    $params      Procedure arguments
      * @return mixed
@@ -124,7 +135,7 @@ class Client
             return $result['result'];
         }
 
-        return null;
+        throw new BadFunctionCallException('Bad Request');
     }
 
     /**
@@ -153,6 +164,11 @@ class Client
 
         $result = curl_exec($ch);
         $response = json_decode($result, true);
+
+        if ($this->debug) {
+            error_log('==> Request: '.PHP_EOL.json_encode($payload, JSON_PRETTY_PRINT));
+            error_log('==> Response: '.PHP_EOL.json_encode($response, JSON_PRETTY_PRINT));
+        }
 
         curl_close($ch);
 

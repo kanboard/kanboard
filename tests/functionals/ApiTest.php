@@ -38,6 +38,7 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $this->client = new JsonRPC\Client(API_URL);
         $this->client->authentication('jsonrpc', API_KEY);
+        //$this->client->debug = true;
     }
 
     private function getTaskId()
@@ -126,7 +127,7 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testUpdateColumn()
     {
-        $this->assertTrue($this->client->updateColumn(4, array('title' => 'Boo', 'task_limit' => 2)));
+        $this->assertTrue($this->client->updateColumn(4, 'Boo', 2));
 
         $columns = $this->client->getColumns(1);
         $this->assertTrue(is_array($columns));
@@ -136,7 +137,7 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testAddColumn()
     {
-        $this->assertTrue($this->client->addColumn(1, array('title' => 'New column')));
+        $this->assertTrue($this->client->addColumn(1, 'New column'));
 
         $columns = $this->client->getColumns(1);
         $this->assertTrue(is_array($columns));
@@ -164,14 +165,20 @@ class Api extends PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue($this->client->execute('createTask', $task));
+    }
 
+    /**
+     * @expectedException BadFunctionCallException
+     */
+    public function testCreateTaskWithBadParams()
+    {
         $task = array(
             'title' => 'Task #1',
             'color_id' => 'blue',
             'owner_id' => 1,
         );
 
-        $this->assertNull($this->client->createTask($task));
+        $this->client->createTask($task);
     }
 
     public function testGetTask()
@@ -236,7 +243,13 @@ class Api extends PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue($this->client->execute('createUser', $user));
+    }
 
+    /**
+     * @expectedException BadFunctionCallException
+     */
+    public function testCreateUserWithBadParams()
+    {
         $user = array(
             'name' => 'Titi',
             'password' => '123456',
@@ -481,9 +494,14 @@ class Api extends PHPUnit_Framework_TestCase
         );
 
         $this->assertFalse($this->client->execute('createCategory', $category));
+    }
 
+    /**
+     * @expectedException BadFunctionCallException
+     */
+    public function testCategoryCreationWithBadParams()
+    {
         // Missing project id
-
         $category = array(
             'name' => 'Category',
         );

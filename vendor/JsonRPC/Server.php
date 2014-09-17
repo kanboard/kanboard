@@ -9,7 +9,7 @@ use Closure;
  * JsonRPC server class
  *
  * @package JsonRPC
- * @author Frderic Guillot
+ * @author Frederic Guillot
  * @license Unlicense http://unlicense.org/
  */
 class Server
@@ -155,16 +155,18 @@ class Server
      * @param  array    $request_params      Incoming arguments
      * @param  array    $method_params       Procedure arguments
      * @param  array    $params              Arguments to pass to the callback
+     * @param  integer  $nb_required_params  Number of required parameters
      * @return bool
      */
-    public function mapParameters(array $request_params, array $method_params, array &$params)
+    public function mapParameters(array $request_params, array $method_params, array &$params, $nb_required_params)
     {
+        if (count($request_params) < $nb_required_params) {
+            return false;
+        }
+
         // Positional parameters
         if (array_keys($request_params) === range(0, count($request_params) - 1)) {
-
-            if (count($request_params) !== count($method_params)) return false;
             $params = $request_params;
-
             return true;
         }
 
@@ -188,14 +190,13 @@ class Server
     }
 
     /**
-     * Parse incoming requests
+     * Parse the payload and test if the parsed JSON is ok
      *
      * @access public
-     * @return string
+     * @return boolean
      */
-    public function execute()
+    public function isValidJsonFormat()
     {
-        // Parse payload
         if (empty($this->payload)) {
             $this->payload = file_get_contents('php://input');
         }
@@ -204,9 +205,86 @@ class Server
             $this->payload = json_decode($this->payload, true);
         }
 
-        // Check JSON format
-        if (! is_array($this->payload)) {
+        return is_array($this->payload);
+    }
 
+    /**
+     * Test if all required JSON-RPC parameters are here
+     *
+     * @access public
+     * @return boolean
+     */
+    public function isValidJsonRpcFormat()
+    {
+        if (! isset($this->payload['jsonrpc']) ||
+            ! isset($this->payload['method']) ||
+            ! is_string($this->payload['method']) ||
+            $this->payload['jsonrpc'] !== '2.0' ||
+            (isset($this->payload['params']) && ! is_array($this->payload['params']))) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Return true if we have a batch request
+     *
+     * @access public
+     * @return boolean
+     */
+    private function isBatchRequest()
+    {
+        return array_keys($this->payload) === range(0, count($this->payload) - 1);
+    }
+
+    /**
+     * Handle batch request
+     *
+     * @access private
+     * @return string
+     */
+    private function handleBatchRequest()
+    {
+        $responses = array();
+
+        foreach ($this->payload as $payload) {
+
+            if (! is_array($payload)) {
+
+                $responses[] = $this->getResponse(array(
+                    'error' => array(
+                        'code' => -32600,
+                        'message' => 'Invalid Request'
+                    )),
+                    array('id' => null)
+                );
+            }
+            else {
+
+                $server = new Server($payload);
+                $response = $server->execute();
+
+                if ($response) {
+                    $responses[] = $response;
+                }
+            }
+        }
+
+        return empty($responses) ? '' : '['.implode(',', $responses).']';
+    }
+
+    /**
+     * Parse incoming requests
+     *
+     * @access public
+     * @return string
+     */
+    public function execute()
+    {
+        // Invalid Json
+        if (! $this->isValidJsonFormat()) {
             return $this->getResponse(array(
                 'error' => array(
                     'code' => -32700,
@@ -217,40 +295,12 @@ class Server
         }
 
         // Handle batch request
-        if (array_keys($this->payload) === range(0, count($this->payload) - 1)) {
-
-            $responses = array();
-
-            foreach ($this->payload as $payload) {
-
-                if (! is_array($payload)) {
-
-                    $responses[] = $this->getResponse(array(
-                        'error' => array(
-                            'code' => -32600,
-                            'message' => 'Invalid Request'
-                        )),
-                        array('id' => null)
-                    );
-                }
-                else {
-
-                    $server = new Server($payload);
-                    $response = $server->execute();
-
-                    if ($response) $responses[] = $response;
-                }
-            }
-
-            return empty($responses) ? '' : '['.implode(',', $responses).']';
+        if ($this->isBatchRequest()){
+            return $this->handleBatchRequest();
         }
 
-        // Check JSON-RPC format
-        if (! isset($this->payload['jsonrpc']) ||
-            ! isset($this->payload['method']) ||
-            ! is_string($this->payload['method']) ||
-            $this->payload['jsonrpc'] !== '2.0' ||
-            (isset($this->payload['params']) && ! is_array($this->payload['params']))) {
+        // Invalid JSON-RPC format
+        if (! $this->isValidJsonRpcFormat()) {
 
             return $this->getResponse(array(
                 'error' => array(
@@ -273,6 +323,7 @@ class Server
             );
         }
 
+        // Execute the procedure
         $callback = self::$procedures[$this->payload['method']];
         $params = array();
 
@@ -282,7 +333,7 @@ class Server
 
             $parameters = $reflection->getParameters();
 
-            if (! $this->mapParameters($this->payload['params'], $parameters, $params)) {
+            if (! $this->mapParameters($this->payload['params'], $parameters, $params, $reflection->getNumberOfRequiredParameters())) {
 
                 return $this->getResponse(array(
                     'error' => array(

@@ -431,141 +431,6 @@ Response example:
 }
 ```
 
-
-
-### getBoard
-
-- Purpose: **Get all necessary information to display a board**
-- Parameters: **project_id** (integer)
-- Result on success: **board properties**
-- Result on failure: **null**
-
-Request example:
-
-```json
-
-```
-
-Response example:
-
-```json
-
-```
-
-### getColumns
-
-- Purpose: **Get all columns information for a given project**
-- Parameters: **project_id** (integer)
-- Result on success: **columns properties**
-- Result on failure: **null**
-
-Request example:
-
-```json
-
-```
-
-Response example:
-
-```json
-
-```
-
-### moveColumnUp
-
-- Purpose: **Move up the column position**
-- Parameters: **project_id** (integer), **column_id** (integer)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-
-```
-
-Response example:
-
-```json
-
-```
-
-### moveColumnDown
-
-- Purpose: **Move down the column position**
-- Parameters: **project_id** (integer), **column_id** (integer)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-
-```
-
-Response example:
-
-```json
-
-```
-
-### updateColumn
-
-- Purpose: **Update column properties**
-- Parameters: **column_id** (integer), **values** (**title** string, **task_limit** integer)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-
-```
-
-Response example:
-
-```json
-
-```
-
-### addColumn
-
-- Purpose: **Add a new column**
-- Parameters: **project_id** (integer), **values** (**title** string, **task_limit** integer)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-
-```
-
-Response example:
-
-```json
-
-```
-
-### removeColumn
-
-- Purpose: **Remove a column**
-- Parameters: **column_id** (integer)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-
-```
-
-Response example:
-
-```json
-
-```
-
 ### getAllowedUsers
 
 - Purpose: **Get allowed users for a given project**
@@ -621,6 +486,345 @@ Response example:
 
 ```json
 
+```
+
+
+### getBoard
+
+- Purpose: **Get all necessary information to display a board**
+- Parameters:
+    - **project_id** (integer, required)
+- Result on success: **board properties**
+- Result on failure: **empty list**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getBoard",
+    "id": 1627282648,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1627282648,
+    "result": [
+        {
+            "id": "1",
+            "title": "Backlog",
+            "position": "1",
+            "project_id": "1",
+            "task_limit": "0",
+            "tasks": []
+        },
+        {
+            "id": "2",
+            "title": "Ready",
+            "position": "2",
+            "project_id": "1",
+            "task_limit": "0",
+            "tasks": []
+        },
+        {
+            "id": "3",
+            "title": "Work in progress",
+            "position": "3",
+            "project_id": "1",
+            "task_limit": "0",
+            "tasks": [
+                {
+                    "nb_comments": "0",
+                    "nb_files": "0",
+                    "nb_subtasks": "1",
+                    "nb_completed_subtasks": "0",
+                    "id": "1",
+                    "title": "Task with comment",
+                    "description": "",
+                    "date_creation": "1410952872",
+                    "date_modification": "1410952872",
+                    "date_completed": null,
+                    "date_due": "0",
+                    "color_id": "red",
+                    "project_id": "1",
+                    "column_id": "3",
+                    "owner_id": "1",
+                    "creator_id": "0",
+                    "position": "1",
+                    "is_active": "1",
+                    "score": "0",
+                    "category_id": "0",
+                    "assignee_username": "admin",
+                    "assignee_name": null
+                }
+            ]
+        },
+        ...
+    ]
+}
+```
+
+### getColumns
+
+- Purpose: **Get all columns information for a given project**
+- Parameters:
+    - **project_id** (integer, required)
+- Result on success: **columns properties**
+- Result on failure: **empty list**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getColumns",
+    "id": 887036325,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 887036325,
+    "result": [
+        {
+            "id": "1",
+            "title": "Backlog",
+            "position": "1",
+            "project_id": "1",
+            "task_limit": "0"
+        },
+        {
+            "id": "2",
+            "title": "Ready",
+            "position": "2",
+            "project_id": "1",
+            "task_limit": "0"
+        },
+        {
+            "id": "3",
+            "title": "Work in progress",
+            "position": "3",
+            "project_id": "1",
+            "task_limit": "0"
+        }
+    ]
+}
+```
+
+### getColumn
+
+- Purpose: **Get a single column**
+- Parameters:
+    - **column_id** (integer, required)
+- Result on success: **column properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getColumn",
+    "id": 1242049935,
+    "params": [
+        2
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1242049935,
+    "result": {
+        "id": "2",
+        "title": "Youpi",
+        "position": "2",
+        "project_id": "1",
+        "task_limit": "5"
+    }
+}
+```
+
+### moveColumnUp
+
+- Purpose: **Move up the column position**
+- Parameters:
+    - **project_id** (integer, required)
+    - **column_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "moveColumnUp",
+    "id": 99275573,
+    "params": [
+        1,
+        2
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 99275573,
+    "result": true
+}
+```
+
+### moveColumnDown
+
+- Purpose: **Move down the column position**
+- Parameters:
+    - **project_id** (integer, required)
+    - **column_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "moveColumnDown",
+    "id": 957090649,
+    "params": {
+        "project_id": 1,
+        "column_id": 2
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 957090649,
+    "result": true
+}
+```
+
+### updateColumn
+
+- Purpose: **Update column properties**
+- Parameters:
+    - **column_id** (integer, required)
+    - **title** (string, required)
+    - **task_limit** (integer, optional)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "updateColumn",
+    "id": 480740641,
+    "params": [
+        2,
+        "Boo",
+        5
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 480740641,
+    "result": true
+}
+```
+
+### addColumn
+
+- Purpose: **Add a new column**
+- Parameters:
+    - **project_id** (integer, required)
+    - **title** (string, required)
+    - **task_limit** (integer, optional)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "addColumn",
+    "id": 638544704,
+    "params": [
+        1,
+        "Boo"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 638544704,
+    "result": true
+}
+```
+
+### removeColumn
+
+- Purpose: **Remove a column**
+- Parameters:
+    - **column_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "removeColumn",
+    "id": 1433237746,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": true
+}
 ```
 
 

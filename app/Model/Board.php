@@ -83,13 +83,19 @@ class Board extends Base
      * Add a new column to the board
      *
      * @access public
-     * @param  array    $values   ['title' => X, 'project_id' => X]
+     * @param  integer   $project_id    Project id
+     * @param  string    $title         Column title
+     * @param  integer   $task_limit    Task limit
      * @return boolean
      */
-    public function add(array $values)
+    public function addColumn($project_id, $title, $task_limit = 0)
     {
-        $values['position'] = $this->getLastColumnPosition($values['project_id']) + 1;
-        return $this->db->table(self::TABLE)->save($values);
+        return $this->db->table(self::TABLE)->save(array(
+            'project_id' => $project_id,
+            'title' => $title,
+            'task_limit' => $task_limit,
+            'position' => $this->getLastColumnPosition($project_id) + 1,
+        ));
     }
 
     /**
@@ -101,17 +107,18 @@ class Board extends Base
      */
     public function update(array $values)
     {
-        $this->db->startTransaction();
+        $columns = array();
 
         foreach (array('title', 'task_limit') as $field) {
-            foreach ($values[$field] as $column_id => $field_value) {
-
-                if ($field === 'task_limit' && empty($field_value)) {
-                    $field_value = 0;
-                }
-
-                $this->updateColumn($column_id, array($field => $field_value));
+            foreach ($values[$field] as $column_id => $value) {
+                $columns[$column_id][$field] = $value;
             }
+        }
+
+        $this->db->startTransaction();
+
+        foreach ($columns as $column_id => $values) {
+            $this->updateColumn($column_id, $values['title'], (int) $values['task_limit']);
         }
 
         $this->db->closeTransaction();
@@ -123,13 +130,17 @@ class Board extends Base
      * Update a column
      *
      * @access public
-     * @param  integer  $column_id  Column id
-     * @param  array    $values     Form values
+     * @param  integer   $column_id     Column id
+     * @param  string    $title         Column title
+     * @param  integer   $task_limit    Task limit
      * @return boolean
      */
-    public function updateColumn($column_id, array $values)
+    public function updateColumn($column_id, $title, $task_limit = 0)
     {
-        return $this->db->table(self::TABLE)->eq('id', $column_id)->update($values);
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->update(array(
+            'title' => $title,
+            'task_limit' => $task_limit,
+        ));
     }
 
     /**
@@ -195,7 +206,7 @@ class Board extends Base
      *
      * @access public
      * @param  integer $project_id Project id
-     * @param array $filters
+     * @param  array $filters
      * @return array
      */
     public function get($project_id, array $filters = array())

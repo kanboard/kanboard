@@ -328,7 +328,7 @@ class Board extends Base
 
         if ($valid) {
 
-            if ($this->board->add($data)) {
+            if ($this->board->addColumn($project['id'], $data['title'])) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
             }
