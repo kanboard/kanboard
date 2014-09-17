@@ -48,14 +48,26 @@ Documentation
 
 ### Using Kanboard
 
+#### Introduction
+
 - [Usage examples](docs/usage-examples.markdown)
-- [Manage users](docs/manage-users.markdown)
-- [Syntax guide](docs/syntax-guide.markdown)
+
+#### Working with projects
+
+- [Creating projects](docs/creating-projects.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
 
 #### Working with tasks
 
 - [Creating tasks](docs/creating-tasks.markdown)
+
+#### Working with users
+
+- [User management](docs/manage-users.markdown)
+
+#### More
+
+- [Syntax guide](docs/syntax-guide.markdown)
 
 ### Technical details
 
