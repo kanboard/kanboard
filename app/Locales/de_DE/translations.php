@@ -496,4 +496,11 @@ return array(
     // 'Activity' => '',
     // 'Default values are "%s"' => '',
     // 'Default columns for new projects (Comma-separated)' => '',
+    // 'Task assignee change' => '',
+    // '%s change the assignee of the task #%d' => '',
+    // '%s change the assignee of the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a>' => '',
+    // '[%s][Column Change] %s (#%d)' => '',
+    // '[%s][Position Change] %s (#%d)' => '',
+    // '[%s][Assignee Change] %s (#%d)' => '',
+    // 'New password for the user "%s"' => '',
 );

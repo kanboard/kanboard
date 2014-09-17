@@ -496,4 +496,11 @@ return array(
     'Activity' => 'Активность',
     'Default values are "%s"' => 'Колонки по умолчанию: "%s"',
     'Default columns for new projects (Comma-separated)' => 'Колонки по умолчанию для новых проектов (разделять запятой)',
+    // 'Task assignee change' => '',
+    // '%s change the assignee of the task #%d' => '',
+    // '%s change the assignee of the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a>' => '',
+    // '[%s][Column Change] %s (#%d)' => '',
+    // '[%s][Position Change] %s (#%d)' => '',
+    // '[%s][Assignee Change] %s (#%d)' => '',
+    // 'New password for the user "%s"' => '',
 );
