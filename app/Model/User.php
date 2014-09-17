@@ -426,4 +426,66 @@ class User extends Base
 
         return t('Unknown');
     }
+
+    /**
+     * Get activity on user's projects
+     *
+     * @access public
+     * @param  integer   $user_id   User id
+     * @return array
+     */
+    public function getUserProjectActivity($user_id)
+    {
+        $comments = $this->commentHistory->getAllContentRelatedTo($user_id, 25);
+        $tasks = $this->taskHistory->getAllContentRelatedTo($user_id, 25);
+        $subtasks = $this->subtaskHistory->getAllContentRelatedTo($user_id, 25);
+        $activity = array();
+
+        foreach ($tasks as &$task) {
+            $activity[$task['date_creation'].'-'.$task['id']] = $task;
+        }
+
+        foreach ($subtasks as &$subtask) {
+            $activity[$subtask['date_creation'].'-'.$subtask['id']] = $subtask;
+        }
+
+        foreach ($comments as &$comment) {
+            $activity[$comment['date_creation'].'-'.$comment['id']] = $comment;
+        }
+
+        krsort($activity);
+        
+        return $activity;
+    }
+
+    /**
+     * Get activity on user's assigned tasks
+     *
+     * @access public
+     * @param  integer   $user_id   User id
+     * @return array
+     */
+    public function getUserAssignedActivity($user_id)
+    {
+        $comments = $this->commentHistory->getAllContentAssignedTo($user_id, 25);
+        $tasks = $this->taskHistory->getAllContentAssignedTo($user_id, 25);
+        $subtasks = $this->subtaskHistory->getAllContentAssignedTo($user_id, 25);
+        $activity = array();
+
+        foreach ($tasks as &$task) {
+            $activity[$task['date_creation'].'-'.$task['id']] = $task;
+        }
+
+        foreach ($subtasks as &$subtask) {
+            $activity[$subtask['date_creation'].'-'.$subtask['id']] = $subtask;
+        }
+
+        foreach ($comments as &$comment) {
+            $activity[$comment['date_creation'].'-'.$comment['id']] = $comment;
+        }
+
+        krsort($activity);
+
+        return $activity;
+    }
 }

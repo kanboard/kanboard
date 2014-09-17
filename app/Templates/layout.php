@@ -50,6 +50,9 @@
                         </select>
                     </li>
                     <?php endif ?>
+                    <li <?= isset($menu) && $menu === 'dashboard' ? 'class="active"' : '' ?>>
+                        <a href="?controller=app&action=dashboard"><?= t('Dashboard') ?></a>
+                    </li>
                     <li <?= isset($menu) && $menu === 'boards' ? 'class="active"' : '' ?>>
                         <a href="?controller=board"><?= t('Boards') ?></a>
                     </li>

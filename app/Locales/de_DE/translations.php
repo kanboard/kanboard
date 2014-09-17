@@ -503,4 +503,9 @@ return array(
     // '[%s][Position Change] %s (#%d)' => '',
     // '[%s][Assignee Change] %s (#%d)' => '',
     // 'New password for the user "%s"' => '',
+    // 'Dashboard' => '',
+    // 'My projects' => '',
+    // 'Recent activity on my projects' => '',
+    // 'My recent assigned tasks' => '',
+    // 'Recent activity on my assigned tasks' => '',
 );
