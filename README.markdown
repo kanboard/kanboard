@@ -91,6 +91,7 @@ Documentation
 
 - [Translations](docs/translations.markdown)
 - [Coding standards](docs/coding-standards.markdown)
+- [Running tests](docs/tests.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.
