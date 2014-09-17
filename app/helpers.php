@@ -35,9 +35,10 @@ function is_admin()
     return $_SESSION['user']['is_admin'] == 1;
 }
 
-function get_username()
+function get_username($user = false)
 {
-    return $_SESSION['user']['name'] ?: $_SESSION['user']['username'];
+    return $user ? ($user['name'] ?: $user['username'])
+                : ($_SESSION['user']['name'] ?: $_SESSION['user']['username']);
 }
 
 function get_user_id()

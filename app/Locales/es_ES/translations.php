@@ -496,4 +496,5 @@ return array(
     'Activity' => 'Actividad',
     'Default values are "%s"' => 'Los valores por defecto son "%s"',
     'Default columns for new projects (Comma-separated)' => 'Columnas por defecto de los nuevos proyectos (Separadas mediante comas)',
+    // 'New password for the user "%s"' => '',
 );

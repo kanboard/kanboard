@@ -496,4 +496,5 @@ return array(
     'Activity' => 'Активность',
     'Default values are "%s"' => 'Колонки по умолчанию: "%s"',
     'Default columns for new projects (Comma-separated)' => 'Колонки по умолчанию для новых проектов (разделять запятой)',
+    // 'New password for the user "%s"' => '',
 );
