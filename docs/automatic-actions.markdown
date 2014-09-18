@@ -7,13 +7,19 @@ Each automatic action is defined like that:
 
 - An event to listen
 - An action linked to this event
-- Eventually there is some parameters to define according to the chosen action
+- Eventually there is some parameters to define
 
 Each project can have a different set of automatic actions, the configuration panel is located on the project listing page, just click on the link "Automatic actions".
 
+![Automatic action creation (step 1)](http://kanboard.net/screenshots/documentation/project-automatic-action-step1.png)
+
 To add a new automatic action, choose the event with an action and click on the button "Next Step", then specify action parameters and finish the process by clicking on the button "Save this action".
 
+![Automatic action creation (step 2)](http://kanboard.net/screenshots/documentation/project-automatic-action-step2.png)
+
 Each time an event occurs, the corresponding actions are executed.
+
+![Automatic actions](http://kanboard.net/screenshots/documentation/project-automatic-actions.png)
 
 List of available events
 ------------------------
