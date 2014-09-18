@@ -8,7 +8,7 @@
         <p class="alert alert-error"><?= Helper\escape($errors['login']) ?></p>
     <?php endif ?>
 
-    <form method="post" action="?controller=user&amp;action=check">
+    <form method="post" action="?controller=user&amp;action=check&amp;redirect_query=<?= urlencode($redirect_query) ?>">
 
         <?= Helper\form_csrf() ?>
 

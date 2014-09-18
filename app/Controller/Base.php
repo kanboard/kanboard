@@ -124,7 +124,7 @@ abstract class Base
 
         // Authentication
         if (! $this->authentication->isAuthenticated($controller, $action)) {
-            $this->response->redirect('?controller=user&action=login');
+            $this->response->redirect('?controller=user&action=login&redirect_query='.urlencode($this->request->getQueryString()));
         }
 
         // Check if the user is allowed to see this page
