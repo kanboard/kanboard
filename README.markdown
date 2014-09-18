@@ -55,6 +55,7 @@ Documentation
 #### Working with projects
 
 - [Creating projects](docs/creating-projects.markdown)
+- [Sharing boards and tasks](docs/sharing-projects.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
 
 #### Working with tasks
