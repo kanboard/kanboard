@@ -489,6 +489,7 @@ class Project extends Base
         $this->db->startTransaction();
 
         $values['token'] = '';
+        $values['last_modified'] = time();
 
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
@@ -539,7 +540,7 @@ class Project extends Base
      */
     public function updateModificationDate($project_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $project_id)->save(array(
+        return $this->db->table(self::TABLE)->eq('id', $project_id)->update(array(
             'last_modified' => time()
         ));
     }
@@ -730,10 +731,12 @@ class Project extends Base
     public function attachEvents()
     {
         $events = array(
-            Task::EVENT_UPDATE,
-            Task::EVENT_CREATE,
+            Task::EVENT_CREATE_UPDATE,
             Task::EVENT_CLOSE,
             Task::EVENT_OPEN,
+            Task::EVENT_MOVE_COLUMN,
+            Task::EVENT_MOVE_POSITION,
+            Task::EVENT_ASSIGNEE_CHANGE,
         );
 
         $listener = new ProjectModificationDate($this);

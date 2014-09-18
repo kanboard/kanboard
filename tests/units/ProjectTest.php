@@ -20,7 +20,52 @@ class ProjectTest extends Base
         $this->assertNotEmpty($project);
         $this->assertEquals(1, $project['is_active']);
         $this->assertEquals(0, $project['is_public']);
+        $this->assertEquals(time(), $project['last_modified']);
         $this->assertEmpty($project['token']);
+    }
+
+    public function testUpdateLastModifiedDate()
+    {
+        $p = new Project($this->registry);
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+
+        $now = time();
+
+        $project = $p->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals($now, $project['last_modified']);
+
+        sleep(1);
+        $this->assertTrue($p->updateModificationDate(1));
+
+        $project = $p->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals($now + 1, $project['last_modified']);
+    }
+
+    public function testIsLastModified()
+    {
+        $p = new Project($this->registry);
+        $t = new Task($this->registry);
+
+        $now = time();
+        $p->attachEvents();
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+
+        $project = $p->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals($now, $project['last_modified']);
+
+        sleep(1);
+
+        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CREATE));
+        $this->assertEquals('Event\ProjectModificationDate', $this->registry->shared('event')->getLastListenerExecuted());
+
+        $project = $p->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertTrue($p->isModifiedSince(1, $now));
     }
 
     public function testRemove()

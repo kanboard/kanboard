@@ -55,8 +55,7 @@ class ProjectModificationDate implements Listener
     public function execute(array $data)
     {
         if (isset($data['project_id'])) {
-            $this->project->updateModificationDate($data['project_id']);
-            return true;
+            return $this->project->updateModificationDate($data['project_id']);
         }
 
         return false;
