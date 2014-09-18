@@ -69,7 +69,7 @@ class Task extends Base
      * @access public
      * @return array
      */
-    public function getTasksDue()
+    public function getOverdueTasks()
     {
         $tasks = $this->db->table(self::TABLE)
                     ->columns(
@@ -85,7 +85,7 @@ class Task extends Base
                     ->join(User::TABLE, 'id', 'owner_id')
                     ->eq(Project::TABLE.'.is_active', 1)
                     ->eq(self::TABLE.'.is_active', 1)
-                    ->neq(self::TABLE.'.date_due', '')
+                    ->neq(self::TABLE.'.date_due', 0)
                     ->lte(self::TABLE.'.date_due', mktime(23, 59, 59))
                     ->findAll();
 

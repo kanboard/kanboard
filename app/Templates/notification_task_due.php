@@ -2,7 +2,13 @@
 
 <ul>
     <?php foreach ($tasks as $task): ?>
-        <li>(<strong>#<?= $task['id'] ?></strong>) <?= Helper\escape($task['title']) ?> (<strong><?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?></strong>)</li>
+        <li>
+            (<strong>#<?= $task['id'] ?></strong>)
+            <?= Helper\escape($task['title']) ?>
+            <?php if ($task['assignee_username']): ?>
+                (<strong><?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?></strong>)
+            <?php endif ?>
+        </li>
     <?php endforeach ?>
 </ul>
 

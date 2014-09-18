@@ -53,7 +53,7 @@ $cli->register('send-notifications-due-tasks', function() use ($cli, $registry) 
 
     $notificationModel = new Notification($registry);
     $taskModel = new Task($registry);
-    $tasks = $taskModel->getTasksDue();
+    $tasks = $taskModel->getOverdueTasks();
 
     // Group tasks by project
     $projects = array();

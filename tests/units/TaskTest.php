@@ -24,6 +24,7 @@ class TaskTest extends Base
         $this->assertEquals('yellow', $task['color_id']);
         $this->assertEquals(time(), $task['date_creation']);
         $this->assertEquals(time(), $task['date_modification']);
+        $this->assertEquals(0, $task['date_due']);
 
         $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1)));
 
@@ -33,6 +34,7 @@ class TaskTest extends Base
         $this->assertEquals(2, $task['position']);
         $this->assertEquals(time(), $task['date_creation']);
         $this->assertEquals(time(), $task['date_modification']);
+        $this->assertEquals(0, $task['date_due']);
 
         $tasks = $t->getAll(1, 1);
         $this->assertNotEmpty($tasks);
@@ -54,6 +56,24 @@ class TaskTest extends Base
 
         $this->assertTrue($t->remove(1));
         $this->assertFalse($t->remove(1234));
+    }
+
+    public function testGetOverdueTasks()
+    {
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
+        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'date_due' => strtotime('-1 day'))));
+        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1, 'date_due' => strtotime('+1 day'))));
+        $this->assertEquals(3, $t->create(array('title' => 'Task #3', 'project_id' => 1, 'date_due' => 0)));
+        $this->assertEquals(4, $t->create(array('title' => 'Task #3', 'project_id' => 1)));
+
+        $tasks = $t->getOverdueTasks();
+        $this->assertNotEmpty($tasks);
+        $this->assertTrue(is_array($tasks));
+        $this->assertEquals(1, count($tasks));
+        $this->assertEquals('Task #1', $tasks[0]['title']);
     }
 
     public function testMoveTaskWithColumnThatNotChange()
