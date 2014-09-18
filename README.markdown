@@ -55,6 +55,7 @@ Documentation
 #### Working with projects
 
 - [Creating projects](docs/creating-projects.markdown)
+- [Editing projects](docs/editing-projects.markdown)
 - [Sharing boards and tasks](docs/sharing-projects.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
 
@@ -125,7 +126,7 @@ Original author: [Frédéric Guillot](http://fredericguillot.com/)
 
 Contributors:
 
-- Alex Butum: https://github.com/dZkF9RWJT6wN8ux
+- Alex Butum
 - Ashish Kulkarni: https://github.com/ashkulz
 - Claudio Lobo
 - Cmer: https://github.com/chncsu
