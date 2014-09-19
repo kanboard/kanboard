@@ -111,8 +111,13 @@ class Swift_Plugins_RedirectingPlugin implements Swift_Events_SendListener
         $this->_filterHeaderSet($headers, 'Bcc');
 
         // Add each hard coded recipient
+        $to = $message->getTo();
+        if (null === $to) {
+            $to = array();
+        }
+
         foreach ( (array) $this->_recipient as $recipient) {
-            if (!array_key_exists($recipient, $message->getTo())) {
+            if (!array_key_exists($recipient, $to)) {
                 $message->addTo($recipient);
             }
         }
@@ -190,6 +195,8 @@ class Swift_Plugins_RedirectingPlugin implements Swift_Events_SendListener
         if ($headers->has('X-Swift-To')) {
             $message->setTo($headers->get('X-Swift-To')->getNameAddresses());
             $headers->removeAll('X-Swift-To');
+        } else {
+            $message->setTo(null);
         }
 
         if ($headers->has('X-Swift-Cc')) {

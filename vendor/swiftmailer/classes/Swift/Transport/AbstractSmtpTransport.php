@@ -166,13 +166,13 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
 
         $to = (array) $message->getTo();
         $cc = (array) $message->getCc();
+        $tos = array_merge($to, $cc);
         $bcc = (array) $message->getBcc();
 
         $message->setBcc(array());
 
         try {
-            $sent += $this->_sendTo($message, $reversePath, $to, $failedRecipients);
-            $sent += $this->_sendCc($message, $reversePath, $cc, $failedRecipients);
+            $sent += $this->_sendTo($message, $reversePath, $tos, $failedRecipients);
             $sent += $this->_sendBcc($message, $reversePath, $bcc, $failedRecipients);
         } catch (Exception $e) {
             $message->setBcc($bcc);
@@ -441,17 +441,6 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
         }
 
         return $this->_doMailTransaction($message, $reversePath, array_keys($to),
-            $failedRecipients);
-    }
-
-    /** Send a message to the given Cc: recipients */
-    private function _sendCc(Swift_Mime_Message $message, $reversePath, array $cc, array &$failedRecipients)
-    {
-        if (empty($cc)) {
-            return 0;
-        }
-
-        return $this->_doMailTransaction($message, $reversePath, array_keys($cc),
             $failedRecipients);
     }
 
