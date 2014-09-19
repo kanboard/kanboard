@@ -56,10 +56,10 @@
                     <li <?= isset($menu) && $menu === 'projects' ? 'class="active"' : '' ?>>
                         <a href="?controller=project"><?= t('Projects') ?></a>
                     </li>
-                    <li <?= isset($menu) && $menu === 'users' ? 'class="active"' : '' ?>>
-                        <a href="?controller=user"><?= t('Users') ?></a>
-                    </li>
                     <?php if (Helper\is_admin()): ?>
+                        <li <?= isset($menu) && $menu === 'users' ? 'class="active"' : '' ?>>
+                            <a href="?controller=user"><?= t('Users') ?></a>
+                        </li>
                         <li class="hide-tablet <?= isset($menu) && $menu === 'config' ? 'active' : '' ?>">
                             <a href="?controller=config"><?= t('Settings') ?></a>
                         </li>
