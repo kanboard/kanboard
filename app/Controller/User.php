@@ -34,10 +34,12 @@ class User extends Base
             $this->response->redirect('?controller=app');
         }
 
+        $redirect_query = $this->request->getStringParam('redirect_query');
         $this->response->html($this->template->layout('user_login', array(
             'errors' => array(),
             'values' => array(),
             'no_layout' => true,
+            'redirect_query' => $redirect_query,
             'title' => t('Login')
         )));
     }
@@ -49,17 +51,23 @@ class User extends Base
      */
     public function check()
     {
+        $redirect_query = $this->request->getStringParam('redirect_query');
         $values = $this->request->getValues();
         list($valid, $errors) = $this->authentication->validateForm($values);
 
         if ($valid) {
-            $this->response->redirect('?controller=board');
+            if ($redirect_query != "") {
+                $this->response->redirect('?'.$redirect_query);
+            } else {
+                $this->response->redirect('?controller=board');
+            }
         }
 
         $this->response->html($this->template->layout('user_login', array(
             'errors' => $errors,
             'values' => $values,
             'no_layout' => true,
+            'redirect_query' => $redirect_query,
             'title' => t('Login')
         )));
     }

@@ -136,4 +136,16 @@ class Request
         $name = 'HTTP_'.str_replace('-', '_', strtoupper($name));
         return isset($_SERVER[$name]) ? $_SERVER[$name] : '';
     }
+
+    /**
+     * Returns current request's query string, useful for redirecting
+     *
+     * @access public
+     * @return string
+     */
+    public function getQueryString()
+    {
+        return $_SERVER['QUERY_STRING'];
+    }
+
 }
