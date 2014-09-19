@@ -5,6 +5,7 @@ APP="kanboard"
 
 cd /tmp
 rm -rf /tmp/$APP /tmp/$APP-*.zip 2>/dev/null
+
 git clone --depth 1 https://github.com/fguillot/$APP.git
 
 rm -rf $APP/data/*.sqlite \
@@ -16,7 +17,7 @@ rm -rf $APP/data/*.sqlite \
       $APP/README.markdown \
       $APP/docs
 
-sed -i.bak s/master/$VERSION/g $APP/app/common.php && rm -f $APP/app/*.bak
+sed -i.bak s/master/$VERSION/g $APP/app/constants.php && rm -f $APP/app/*.bak
 zip -r $APP-$VERSION.zip $APP
 
 mv $APP-$VERSION.zip ~/Devel/websites/$APP
