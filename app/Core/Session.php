@@ -20,6 +20,18 @@ class Session
     const SESSION_LIFETIME = 0; // Until the browser is closed
 
     /**
+     * Return true if the session is open
+     *
+     * @static
+     * @access public
+     * @return boolean
+     */
+    public static function isOpen()
+    {
+        return session_id() !== '';
+    }
+
+    /**
      * Open a session
      *
      * @access public
@@ -50,14 +62,14 @@ class Session
         ini_set('session.hash_bits_per_character', 6);
 
         // If session was autostarted with session.auto_start = 1 in php.ini destroy it, otherwise we cannot login
-        if (isset($_SESSION))
-        {
+        if (isset($_SESSION)) {
             session_destroy();
         }
 
         // Custom session name
         session_name('__S');
 
+        // Start the session
         session_start();
 
         // Regenerate the session id to avoid session fixation issue

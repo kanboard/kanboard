@@ -4,6 +4,7 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
+use Core\Session;
 
 /**
  * User model
@@ -205,7 +206,7 @@ class User extends Base
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
         // If the user is connected refresh his session
-        if (session_id() !== '' && $_SESSION['user']['id'] == $values['id']) {
+        if (Session::isOpen() && $_SESSION['user']['id'] == $values['id']) {
             $this->updateSession();
         }
 

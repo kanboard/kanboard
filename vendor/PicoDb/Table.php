@@ -350,7 +350,7 @@ class Table
         switch (strtolower($name)) {
 
             case 'in':
-                if (isset($arguments[1]) && is_array($arguments[1])) {
+                if (isset($arguments[1]) && is_array($arguments[1]) && ! empty($arguments[1])) {
 
                     $sql = sprintf(
                         '%s IN (%s)',
@@ -361,7 +361,7 @@ class Table
                 break;
 
             case 'notin':
-                if (isset($arguments[1]) && is_array($arguments[1])) {
+                if (isset($arguments[1]) && is_array($arguments[1]) && ! empty($arguments[1])) {
 
                     $sql = sprintf(
                         '%s NOT IN (%s)',

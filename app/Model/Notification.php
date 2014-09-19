@@ -2,6 +2,7 @@
 
 namespace Model;
 
+use Core\Session;
 use Core\Translator;
 use Core\Template;
 use Event\TaskNotificationListener;
@@ -30,15 +31,22 @@ class Notification extends Base
      * Get the list of users to send the notification for a given project
      *
      * @access public
-     * @param  integer   $project_id   Project id
+     * @param  integer   $project_id     Project id
+     * @param  array     $exlude_users   List of user_id to exclude
      * @return array
      */
-    public function getUsersList($project_id)
+    public function getUsersList($project_id, array $exclude_users = array())
     {
+        // Exclude the connected user
+        if (Session::isOpen()) {
+            $exclude_users[] = $this->acl->getUserId();
+        }
+
         $users = $this->db->table(User::TABLE)
                           ->columns('id', 'username', 'name', 'email')
                           ->eq('notifications_enabled', '1')
                           ->neq('email', '')
+                          ->notin('id', $exclude_users)
                           ->findAll();
 
         foreach ($users as $index => $user) {
