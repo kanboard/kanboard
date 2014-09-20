@@ -55,11 +55,11 @@ class Board extends Base
     {
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
-        $projects = $this->project->getAvailableList($this->acl->getUserId());
+        $projects = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
         $params = array(
             'errors' => array(),
             'values' => $task,
-            'users_list' => $this->project->getUsersList($project['id']),
+            'users_list' => $this->projectPermission->getUsersList($project['id']),
             'projects' => $projects,
             'current_project_id' => $project['id'],
             'current_project_name' => $project['name'],
@@ -109,7 +109,7 @@ class Board extends Base
     {
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
-        $projects = $this->project->getAvailableList($this->acl->getUserId());
+        $projects = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
         $params = array(
             'errors' => array(),
             'values' => $task,
@@ -194,7 +194,7 @@ class Board extends Base
         $project_id = $last_seen_project_id ?: $favorite_project_id;
 
         if (! $project_id) {
-            $projects = $this->project->getAvailableList($this->acl->getUserId());
+            $projects = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 
             if (empty($projects)) {
 
@@ -220,7 +220,7 @@ class Board extends Base
     public function show($project_id = 0)
     {
         $project = $this->getProject($project_id);
-        $projects = $this->project->getAvailableList($this->acl->getUserId());
+        $projects = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 
         $board_selector = $projects;
         unset($board_selector[$project['id']]);
@@ -228,7 +228,7 @@ class Board extends Base
         $this->user->storeLastSeenProjectId($project['id']);
 
         $this->response->html($this->template->layout('board_index', array(
-            'users' => $this->project->getUsersList($project['id'], true, true),
+            'users' => $this->projectPermission->getUsersList($project['id'], true, true),
             'filters' => array('user_id' => UserModel::EVERYBODY_ID),
             'projects' => $projects,
             'current_project_id' => $project['id'],
@@ -394,7 +394,7 @@ class Board extends Base
 
         if ($project_id > 0 && $this->request->isAjax()) {
 
-            if (! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+            if (! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
                 $this->response->status(401);
             }
 
@@ -433,7 +433,7 @@ class Board extends Base
             $project_id = $this->request->getIntegerParam('project_id');
             $timestamp = $this->request->getIntegerParam('timestamp');
 
-            if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+            if ($project_id > 0 && ! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
                 $this->response->text('Not Authorized', 401);
             }
 

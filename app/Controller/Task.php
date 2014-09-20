@@ -123,7 +123,7 @@ class Task extends Base
             ),
             'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($project_id),
-            'users_list' => $this->project->getUsersList($project_id),
+            'users_list' => $this->projectPermission->getUsersList($project_id),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project_id),
             'menu' => 'tasks',
@@ -169,7 +169,7 @@ class Task extends Base
             'values' => $values,
             'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($values['project_id']),
-            'users_list' => $this->project->getUsersList($values['project_id']),
+            'users_list' => $this->projectPermission->getUsersList($values['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($values['project_id']),
             'menu' => 'tasks',
@@ -199,7 +199,7 @@ class Task extends Base
                 'values' => $task,
                 'errors' => array(),
                 'task' => $task,
-                'users_list' => $this->project->getUsersList($task['project_id']),
+                'users_list' => $this->projectPermission->getUsersList($task['project_id']),
                 'colors_list' => $this->color->getList(),
                 'categories_list' => $this->category->getList($task['project_id']),
                 'ajax' => $this->request->isAjax(),
@@ -248,7 +248,7 @@ class Task extends Base
             'errors' => $errors,
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($values['project_id']),
-            'users_list' => $this->project->getUsersList($values['project_id']),
+            'users_list' => $this->projectPermission->getUsersList($values['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($values['project_id']),
             'menu' => 'tasks',
@@ -458,7 +458,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $task;
         $errors = array();
-        $projects_list = $this->project->getAvailableList($this->acl->getUserId());
+        $projects_list = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 
         unset($projects_list[$task['project_id']]);
 

@@ -189,7 +189,7 @@ class User extends Base
     {
         $user = $this->getUser();
         $this->response->html($this->layout('user_show', array(
-            'projects' => $this->project->getAvailableList($user['id']),
+            'projects' => $this->projectPermission->getAllowedProjects($user['id']),
             'user' => $user,
         )));
     }
@@ -252,7 +252,7 @@ class User extends Base
         }
 
         $this->response->html($this->layout('user_notifications', array(
-            'projects' => $this->project->getAvailableList($user['id']),
+            'projects' => $this->projectPermission->getAllowedProjects($user['id']),
             'notifications' => $this->notification->readSettings($user['id']),
             'user' => $user,
         )));
@@ -353,7 +353,7 @@ class User extends Base
         $this->response->html($this->layout('user_edit', array(
             'values' => $values,
             'errors' => $errors,
-            'projects' => $this->project->filterListByAccess($this->project->getList(), $user['id']),
+            'projects' => $this->projectPermission->getAllowedProjects($user['id']),
             'user' => $user,
         )));
     }

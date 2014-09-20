@@ -26,6 +26,7 @@ use Model\LastLogin;
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\Notification       $notification
  * @property \Model\Project            $project
+ * @property \Model\ProjectPermission  $projectPermission
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
  * @property \Model\TaskHistory        $taskHistory
@@ -211,7 +212,7 @@ abstract class Base
     {
         if ($this->acl->isRegularUser()) {
 
-            if ($project_id > 0 && ! $this->project->isUserAllowed($project_id, $this->acl->getUserId())) {
+            if ($project_id > 0 && ! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
                 $this->forbidden();
             }
         }

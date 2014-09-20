@@ -206,7 +206,7 @@ class Project extends Base
 
         $this->response->html($this->projectLayout('project_users', array(
             'project' => $project,
-            'users' => $this->project->getAllUsers($project['id']),
+            'users' => $this->projectPermission->getAllUsers($project['id']),
             'menu' => 'projects',
             'title' => t('Edit project access list')
         )));
@@ -220,11 +220,11 @@ class Project extends Base
     public function allow()
     {
         $values = $this->request->getValues();
-        list($valid,) = $this->project->validateUserAccess($values);
+        list($valid,) = $this->projectPermission->validateModification($values);
 
         if ($valid) {
 
-            if ($this->project->allowUser($values['project_id'], $values['user_id'])) {
+            if ($this->projectPermission->allowUser($values['project_id'], $values['user_id'])) {
                 $this->session->flash(t('Project updated successfully.'));
             }
             else {
@@ -249,11 +249,11 @@ class Project extends Base
             'user_id' => $this->request->getIntegerParam('user_id'),
         );
 
-        list($valid,) = $this->project->validateUserAccess($values);
+        list($valid,) = $this->projectPermission->validateModification($values);
 
         if ($valid) {
 
-            if ($this->project->revokeUser($values['project_id'], $values['user_id'])) {
+            if ($this->projectPermission->revokeUser($values['project_id'], $values['user_id'])) {
                 $this->session->flash(t('Project updated successfully.'));
             }
             else {

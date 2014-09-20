@@ -26,6 +26,7 @@ use PicoDb\Database;
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\Notification       $notification
  * @property \Model\Project            $project
+ * @property \Model\ProjectPermission  $projectPermission
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
  * @property \Model\TaskExport         $taskExport

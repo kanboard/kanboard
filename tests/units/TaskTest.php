@@ -4,6 +4,7 @@ require_once __DIR__.'/Base.php';
 
 use Model\Task;
 use Model\Project;
+use Model\ProjectPermission;
 use Model\Category;
 use Model\User;
 
@@ -536,6 +537,7 @@ class TaskTest extends Base
     {
         $t = new Task($this->registry);
         $p = new Project($this->registry);
+        $pp = new ProjectPermission($this->registry);
         $user = new User($this->registry);
 
         // We create a regular user
@@ -566,7 +568,7 @@ class TaskTest extends Base
         $this->assertEquals('test', $task['title']);
 
         // We allow only one user on the second project
-        $this->assertTrue($p->allowUser(2, 2));
+        $this->assertTrue($pp->allowUser(2, 2));
 
         // The owner should be reseted
         $task = $t->getById(2);

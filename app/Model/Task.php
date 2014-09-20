@@ -279,7 +279,7 @@ class Task extends Base
         $values['category_id'] = 0;
 
         // Check if the assigned user is allowed for the new project
-        if ($task['owner_id'] && $this->project->isUserAllowed($values['project_id'], $task['owner_id'])) {
+        if ($task['owner_id'] && $this->projectPermission->isUserAllowed($values['project_id'], $task['owner_id'])) {
             $values['owner_id'] = $task['owner_id'];
         }
 
@@ -673,7 +673,7 @@ class Task extends Base
         $values['owner_id'] = 0;
 
         // Check if the assigned user is allowed for the new project
-        if ($task['owner_id'] && $this->project->isUserAllowed($project_id, $task['owner_id'])) {
+        if ($task['owner_id'] && $this->projectPermission->isUserAllowed($project_id, $task['owner_id'])) {
             $values['owner_id'] = $task['owner_id'];
         }
 

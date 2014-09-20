@@ -5,6 +5,7 @@ require __DIR__.'/app/common.php';
 use Core\Translator;
 use JsonRPC\Server;
 use Model\Project;
+use Model\projectPermission;
 use Model\Task;
 use Model\TaskValidator;
 use Model\User;
@@ -19,6 +20,7 @@ use Model\Notification;
 
 $config = new Config($registry);
 $project = new Project($registry);
+$projectPermission = new ProjectPermission($registry);
 $task = new Task($registry);
 $taskValidator = new TaskValidator($registry);
 $user = new User($registry);
@@ -144,16 +146,16 @@ $server->register('removeColumn', function($column_id) use ($board) {
 /**
  * Project permissions procedures
  */
-$server->register('getAllowedUsers', function($project_id) use ($project) {
-    return $project->getUsersList($project_id, false, false);
+$server->register('getAllowedUsers', function($project_id) use ($projectPermission) {
+    return $projectPermission->getUsersList($project_id, false, false);
 });
 
-$server->register('revokeUser', function($project_id, $user_id) use ($project) {
-    return $project->revokeUser($project_id, $user_id);
+$server->register('revokeUser', function($project_id, $user_id) use ($project, $projectPermission) {
+    return $projectPermission->revokeUser($project_id, $user_id);
 });
 
-$server->register('allowUser', function($project_id, $user_id) use ($project) {
-    return $project->allowUser($project_id, $user_id);
+$server->register('allowUser', function($project_id, $user_id) use ($project, $projectPermission) {
+    return $projectPermission->allowUser($project_id, $user_id);
 });
 
 
