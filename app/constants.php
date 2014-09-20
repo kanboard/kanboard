@@ -68,3 +68,6 @@ defined('MAIL_SMTP_USERNAME') or define('MAIL_SMTP_USERNAME', '');
 defined('MAIL_SMTP_PASSWORD') or define('MAIL_SMTP_PASSWORD', '');
 defined('MAIL_SMTP_ENCRYPTION') or define('MAIL_SMTP_ENCRYPTION', null);
 defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
+
+// Server configuration
+defined('HEADER_STS') or define('HEADER_STS', true);
