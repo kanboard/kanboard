@@ -116,8 +116,11 @@ abstract class Base
         $this->response->csp(array('style-src' => "'self' 'unsafe-inline'"));
         $this->response->nosniff();
         $this->response->xss();
-        $this->response->hsts();
         $this->response->xframe();
+
+        if (ENABLE_HSTS) {
+            $this->response->hsts();
+        }
 
         // Load translations
         $language = $this->config->get('language', 'en_US');
