@@ -240,13 +240,13 @@ class Response
     }
 
     /**
-     * Send the security header: Strict-Transport-Security (only if we use HTTPS)
+     * Send the security header: Strict-Transport-Security if we use HTTPS and configured to send
      *
      * @access public
      */
     public function hsts()
     {
-        if (Tool::isHTTPS()) {
+        if (Tool::isHTTPS() && HEADER_STS) {
             header('Strict-Transport-Security: max-age=31536000');
         }
     }
