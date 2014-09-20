@@ -29,7 +29,7 @@ class Action extends Base
             'columns_list' => $this->board->getColumnsList($project['id']),
             'users_list' => $this->project->getUsersList($project['id']),
             'projects_list' => $this->project->getList(false),
-            'colors_list' => $this->task->getColors(),
+            'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'menu' => 'projects',
             'title' => t('Automatic actions')
@@ -53,7 +53,7 @@ class Action extends Base
             'columns_list' => $this->board->getColumnsList($project['id']),
             'users_list' => $this->project->getUsersList($project['id']),
             'projects_list' => $this->project->getList(false),
-            'colors_list' => $this->task->getColors(),
+            'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'project' => $project,
             'menu' => 'projects',

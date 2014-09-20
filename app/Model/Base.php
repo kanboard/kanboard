@@ -19,14 +19,18 @@ use PicoDb\Database;
  * @property \Model\Board              $board
  * @property \Model\Category           $category
  * @property \Model\Comment            $comment
+ * @property \Model\Color              $color
  * @property \Model\Config             $config
+ * @property \Model\DateParser         $dateParser
  * @property \Model\File               $file
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\Notification       $notification
  * @property \Model\Project            $project
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
+ * @property \Model\TaskExport         $taskExport
  * @property \Model\TaskHistory        $taskHistory
+ * @property \Model\TaskValidator      $taskValidator
  * @property \Model\User               $user
  * @property \Model\Webhook            $webhook
  */

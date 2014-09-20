@@ -8,6 +8,7 @@ use Core\Tool;
 use Core\Translator;
 use Model\Config;
 use Model\Task;
+use Model\TaskExport;
 use Model\Notification;
 
 $config = new Config($registry);
@@ -40,8 +41,8 @@ $cli->register('export-csv', function() use ($cli, $registry) {
     $start_date = $GLOBALS['argv'][3];
     $end_date = $GLOBALS['argv'][4];
 
-    $taskModel = new Task($registry);
-    $data = $taskModel->export($project_id, $start_date, $end_date);
+    $taskExport = new TaskExport($registry);
+    $data = $taskExport->export($project_id, $start_date, $end_date);
 
     if (is_array($data)) {
         Tool::csv($data);

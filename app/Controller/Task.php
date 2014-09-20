@@ -37,7 +37,7 @@ class Task extends Base
             'category_id' => $this->request->getIntegerParam('category_id'),
         );
 
-        list($valid,) = $this->task->validateCreation($values);
+        list($valid,) = $this->taskValidator->validateCreation($values);
 
         if ($valid && $this->task->create($values)) {
             $this->response->text('OK');
@@ -72,7 +72,7 @@ class Task extends Base
             'subtasks' => $this->subTask->getAll($task['id']),
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'colors_list' => $this->task->getColors(),
+            'colors_list' => $this->color->getList(),
             'title' => $task['title'],
             'no_layout' => true,
             'auto_refresh' => true,
@@ -96,7 +96,7 @@ class Task extends Base
             'subtasks' => $this->subTask->getAll($task['id']),
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
-            'colors_list' => $this->task->getColors(),
+            'colors_list' => $this->color->getList(),
             'menu' => 'tasks',
             'title' => $task['title'],
         )));
@@ -124,7 +124,7 @@ class Task extends Base
             'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($project_id),
             'users_list' => $this->project->getUsersList($project_id),
-            'colors_list' => $this->task->getColors(),
+            'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project_id),
             'menu' => 'tasks',
             'title' => t('New task')
@@ -143,7 +143,7 @@ class Task extends Base
 
         $this->checkProjectPermissions($values['project_id']);
 
-        list($valid, $errors) = $this->task->validateCreation($values);
+        list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
         if ($valid) {
 
@@ -170,7 +170,7 @@ class Task extends Base
             'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($values['project_id']),
             'users_list' => $this->project->getUsersList($values['project_id']),
-            'colors_list' => $this->task->getColors(),
+            'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($values['project_id']),
             'menu' => 'tasks',
             'title' => t('New task')
@@ -200,7 +200,7 @@ class Task extends Base
                 'errors' => array(),
                 'task' => $task,
                 'users_list' => $this->project->getUsersList($task['project_id']),
-                'colors_list' => $this->task->getColors(),
+                'colors_list' => $this->color->getList(),
                 'categories_list' => $this->category->getList($task['project_id']),
                 'ajax' => $this->request->isAjax(),
                 'menu' => 'tasks',
@@ -224,7 +224,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->task->validateModification($values);
+        list($valid, $errors) = $this->taskValidator->validateModification($values);
 
         if ($valid) {
 
@@ -249,7 +249,7 @@ class Task extends Base
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($values['project_id']),
             'users_list' => $this->project->getUsersList($values['project_id']),
-            'colors_list' => $this->task->getColors(),
+            'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($values['project_id']),
             'menu' => 'tasks',
             'title' => t('Edit a task')
@@ -387,7 +387,7 @@ class Task extends Base
 
             $values = $this->request->getValues();
 
-            list($valid, $errors) = $this->task->validateDescriptionCreation($values);
+            list($valid, $errors) = $this->taskValidator->validateDescriptionCreation($values);
 
             if ($valid) {
 
@@ -465,7 +465,7 @@ class Task extends Base
         if ($this->request->isPost()) {
 
             $values = $this->request->getValues();
-            list($valid, $errors) = $this->task->validateProjectModification($values);
+            list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid) {
                 $task_id = $this->task->{$action.'ToAnotherProject'}($values['project_id'], $task);

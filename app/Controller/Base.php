@@ -19,6 +19,7 @@ use Model\LastLogin;
  * @property \Model\Action             $action
  * @property \Model\Board              $board
  * @property \Model\Category           $category
+ * @property \Model\Color              $color
  * @property \Model\Comment            $comment
  * @property \Model\Config             $config
  * @property \Model\File               $file
@@ -28,6 +29,8 @@ use Model\LastLogin;
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
  * @property \Model\TaskHistory        $taskHistory
+ * @property \Model\TaskExport         $taskExport
+ * @property \Model\TaskValidator      $taskValidator
  * @property \Model\CommentHistory     $commentHistory
  * @property \Model\SubtaskHistory     $subtaskHistory
  * @property \Model\User               $user

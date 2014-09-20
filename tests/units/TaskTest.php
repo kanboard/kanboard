@@ -395,41 +395,6 @@ class TaskTest extends Base
         $this->assertEquals($task_per_column + 1, $t->countByColumnId(1, 4));
     }
 
-    public function testExport()
-    {
-        $t = new Task($this->registry);
-        $p = new Project($this->registry);
-        $c = new Category($this->registry);
-
-        $this->assertEquals(1, $p->create(array('name' => 'Export Project')));
-        $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
-        $this->assertNotFalse($c->create(array('name' => 'Category #2', 'project_id' => 1)));
-        $this->assertNotFalse($c->create(array('name' => 'Category #3', 'project_id' => 1)));
-
-        for ($i = 1; $i <= 100; $i++) {
-
-            $task = array(
-                'title' => 'Task #'.$i,
-                'project_id' => 1,
-                'column_id' => rand(1, 3),
-                'creator_id' => rand(0, 1),
-                'owner_id' => rand(0, 1),
-                'color_id' => rand(0, 1) === 0 ? 'green' : 'purple',
-                'category_id' => rand(0, 3),
-                'date_due' => array_rand(array(0, date('Y-m-d'), date('Y-m-d', strtotime('+'.$i.'day')))),
-                'score' => rand(0, 21)
-            );
-
-            $this->assertEquals($i, $t->create($task));
-        }
-
-        $rows = $t->export(1, strtotime('-1 day'), strtotime('+1 day'));
-        $this->assertEquals($i, count($rows));
-        $this->assertEquals('Task Id', $rows[0][0]);
-        $this->assertEquals(1, $rows[1][0]);
-        $this->assertEquals('Task #'.($i - 1), $rows[$i - 1][11]);
-    }
-
     public function testFilter()
     {
         $t = new Task($this->registry);
@@ -497,25 +462,6 @@ class TaskTest extends Base
 
         $tasks = $t->find($filters);
         $this->assertEquals(0, count($tasks));
-    }
-
-    public function testDateFormat()
-    {
-        $t = new Task($this->registry);
-
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('2014-03-05', 'Y-m-d')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('2014_03_05', 'Y_m_d')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('05/03/2014', 'd/m/Y')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('03/05/2014', 'm/d/Y')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('3/5/2014', 'm/d/Y')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('5/3/2014', 'd/m/Y')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->getValidDate('5/3/14', 'd/m/y')));
-        $this->assertEquals(0, $t->getValidDate('5/3/14', 'd/m/Y'));
-        $this->assertEquals(0, $t->getValidDate('5-3-2014', 'd/m/Y'));
-
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->parseDate('2014-03-05')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->parseDate('2014_03_05')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $t->parseDate('03/05/2014')));
     }
 
     public function testDuplicateToTheSameProject()

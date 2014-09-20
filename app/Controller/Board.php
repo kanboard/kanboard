@@ -88,7 +88,7 @@ class Board extends Base
         $values = $this->request->getValues();
         $this->checkProjectPermissions($values['project_id']);
 
-        list($valid,) = $this->task->validateAssigneeModification($values);
+        list($valid,) = $this->taskValidator->validateAssigneeModification($values);
 
         if ($valid && $this->task->update($values)) {
             $this->session->flash(t('Task updated successfully.'));
@@ -142,7 +142,7 @@ class Board extends Base
         $values = $this->request->getValues();
         $this->checkProjectPermissions($values['project_id']);
 
-        list($valid,) = $this->task->validateCategoryModification($values);
+        list($valid,) = $this->taskValidator->validateCategoryModification($values);
 
         if ($valid && $this->task->update($values)) {
             $this->session->flash(t('Task updated successfully.'));

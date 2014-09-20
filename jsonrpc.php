@@ -6,6 +6,7 @@ use Core\Translator;
 use JsonRPC\Server;
 use Model\Project;
 use Model\Task;
+use Model\TaskValidator;
 use Model\User;
 use Model\Config;
 use Model\Category;
@@ -19,6 +20,7 @@ use Model\Notification;
 $config = new Config($registry);
 $project = new Project($registry);
 $task = new Task($registry);
+$taskValidator = new TaskValidator($registry);
 $user = new User($registry);
 $category = new Category($registry);
 $comment = new Comment($registry);
@@ -158,7 +160,7 @@ $server->register('allowUser', function($project_id, $user_id) use ($project) {
 /**
  * Task procedures
  */
-$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($task) {
+$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($task, $taskValidator) {
 
     $values = array(
         'title' => $title,
@@ -173,7 +175,7 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
         'score' => $score,
     );
 
-    list($valid,) = $task->validateCreation($values);
+    list($valid,) = $taskValidator->validateCreation($values);
     return $valid && $task->create($values) !== false;
 });
 
@@ -185,7 +187,7 @@ $server->register('getAllTasks', function($project_id, $status) use ($task) {
     return $task->getAll($project_id, $status);
 });
 
-$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null) use ($task) {
+$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null) use ($task, $taskValidator) {
 
     $values = array(
         'id' => $id,
@@ -207,7 +209,7 @@ $server->register('updateTask', function($id, $title = null, $project_id = null,
         }
     }
 
-    list($valid) = $task->validateModification($values);
+    list($valid) = $taskValidator->validateModification($values);
     return $valid && $task->update($values);
 });
 
