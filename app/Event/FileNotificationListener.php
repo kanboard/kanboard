@@ -23,7 +23,7 @@ class FileNotificationListener extends BaseNotificationListener
     {
         $values = array();
         $values['file'] = $data;
-        $values['task'] = $this->notification->task->getById($data['task_id'], true);
+        $values['task'] = $this->notification->task->getDetails($data['task_id']);
 
         return $values;
     }

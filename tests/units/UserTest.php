@@ -8,6 +8,57 @@ use Model\Project;
 
 class UserTest extends Base
 {
+    public function testPrepare()
+    {
+        $u = new User($this->registry);
+
+        $input = array(
+            'username' => 'user1',
+            'password' => '1234',
+            'confirmation' => '1234',
+            'name' => 'me',
+            'is_admin' => '',
+        );
+
+        $u->prepare($input);
+        $this->assertArrayNotHasKey('confirmation', $input);
+
+        $this->assertArrayHasKey('password', $input);
+        $this->assertNotEquals('1234', $input['password']);
+        $this->assertNotEmpty($input['password']);
+
+        $this->assertArrayHasKey('is_admin', $input);
+        $this->assertInternalType('integer', $input['is_admin']);
+
+        $input = array(
+            'username' => 'user1',
+            'password' => '1234',
+            'current_password' => 'bla',
+            'confirmation' => '1234',
+            'name' => 'me',
+            'is_ldap_user' => '1',
+        );
+
+        $u->prepare($input);
+        $this->assertArrayNotHasKey('confirmation', $input);
+        $this->assertArrayNotHasKey('current_password', $input);
+
+        $this->assertArrayHasKey('password', $input);
+        $this->assertNotEquals('1234', $input['password']);
+        $this->assertNotEmpty($input['password']);
+
+        $this->assertArrayHasKey('is_ldap_user', $input);
+        $this->assertEquals(1, $input['is_ldap_user']);
+
+        $input = array(
+            'id' => 2,
+            'name' => 'me',
+        );
+
+        $u->prepare($input);
+        $this->assertEquals(array('id' => 2, 'name' => 'me'), $input);
+    }
+
     public function testCreate()
     {
         $u = new User($this->registry);

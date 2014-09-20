@@ -60,7 +60,7 @@ class Task extends Base
             $this->forbidden(true);
         }
 
-        $task = $this->task->getById($this->request->getIntegerParam('task_id'), true);
+        $task = $this->task->getDetails($this->request->getIntegerParam('task_id'));
 
         if (! $task) {
             $this->notfound(true);

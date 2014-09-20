@@ -22,7 +22,7 @@ class TaskNotificationListener extends BaseNotificationListener
     public function getTemplateData(array $data)
     {
         $values = array();
-        $values['task'] = $this->notification->task->getById($data['task_id'], true);
+        $values['task'] = $this->notification->task->getDetails($data['task_id']);
 
         return $values;
     }

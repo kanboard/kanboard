@@ -10,6 +10,103 @@ use Model\User;
 
 class TaskTest extends Base
 {
+    public function testPrepareCreation()
+    {
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
+
+        $input = array(
+            'title' => 'youpi',
+            'description' => '',
+            'project_id' => '1',
+            'owner_id' => '0',
+            'category_id' => '0',
+            'column_id' => '2',
+            'color_id' => 'yellow',
+            'score' => '',
+            'date_due' => '',
+            'creator_id' => '1',
+            'another_task' => '1',
+        );
+
+        $t->prepareCreation($input);
+
+        $this->assertInternalType('integer', $input['date_due']);
+        $this->assertEquals(0, $input['date_due']);
+
+        $this->assertInternalType('integer', $input['score']);
+        $this->assertEquals(0, $input['score']);
+
+        $this->assertArrayNotHasKey('another_task', $input);
+
+        $this->assertArrayHasKey('date_creation', $input);
+        $this->assertEquals(time(), $input['date_creation']);
+
+        $this->assertArrayHasKey('date_modification', $input);
+        $this->assertEquals(time(), $input['date_modification']);
+
+        $this->assertArrayHasKey('position', $input);
+        $this->assertGreaterThan(0, $input['position']);
+
+        $input = array(
+            'title' => 'youpi',
+            'project_id' => '1',
+        );
+
+        $t->prepareCreation($input);
+
+        $this->assertArrayNotHasKey('date_due', $input);
+        $this->assertArrayNotHasKey('score', $input);
+
+        $this->assertArrayHasKey('date_creation', $input);
+        $this->assertEquals(time(), $input['date_creation']);
+
+        $this->assertArrayHasKey('date_modification', $input);
+        $this->assertEquals(time(), $input['date_modification']);
+
+        $this->assertArrayHasKey('position', $input);
+        $this->assertGreaterThan(0, $input['position']);
+
+        $this->assertArrayHasKey('color_id', $input);
+        $this->assertEquals('yellow', $input['color_id']);
+
+        $this->assertArrayHasKey('column_id', $input);
+        $this->assertEquals(1, $input['column_id']);
+
+        $input = array(
+            'title' => 'youpi',
+            'project_id' => '1',
+            'date_due' => '2014-09-15',
+        );
+
+        $t->prepareCreation($input);
+
+        $this->assertArrayHasKey('date_due', $input);
+        $this->assertInternalType('integer', $input['date_due']);
+        $this->assertEquals('2014-09-15', date('Y-m-d', $input['date_due']));
+    }
+
+    public function testPrepareModification()
+    {
+        $t = new Task($this->registry);
+        $p = new Project($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
+
+        $input = array(
+            'id' => '1',
+            'description' => 'Boo',
+        );
+
+        $t->prepareModification($input);
+
+        $this->assertArrayNotHasKey('id', $input);
+        $this->assertArrayHasKey('date_modification', $input);
+        $this->assertEquals(time(), $input['date_modification']);
+    }
+
     public function testCreation()
     {
         $t = new Task($this->registry);

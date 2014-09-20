@@ -128,17 +128,8 @@ class SubTask extends Base
      */
     public function prepare(array &$values)
     {
-        if (isset($values['another_subtask'])) {
-            unset($values['another_subtask']);
-        }
-
-        if (isset($values['time_estimated']) && empty($values['time_estimated'])) {
-            $values['time_estimated'] = 0;
-        }
-
-        if (isset($values['time_spent']) && empty($values['time_spent'])) {
-            $values['time_spent'] = 0;
-        }
+        $this->removeFields($values, array('another_subtask'));
+        $this->resetFields($values, array('time_estimated', 'time_spent'));
     }
 
     /**

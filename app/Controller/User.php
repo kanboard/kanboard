@@ -353,7 +353,7 @@ class User extends Base
         $this->response->html($this->layout('user_edit', array(
             'values' => $values,
             'errors' => $errors,
-            'projects' => $this->projectPermission->getAllowedProjects($user['id']),
+            'projects' => $this->projectPermission->filterProjects($this->project->getList(), $user['id']),
             'user' => $user,
         )));
     }

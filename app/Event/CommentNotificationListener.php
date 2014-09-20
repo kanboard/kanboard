@@ -23,7 +23,7 @@ class CommentNotificationListener extends BaseNotificationListener
     {
         $values = array();
         $values['comment'] = $this->notification->comment->getById($data['id']);
-        $values['task'] = $this->notification->task->getById($values['comment']['task_id'], true);
+        $values['task'] = $this->notification->task->getDetails($values['comment']['task_id']);
 
         return $values;
     }

@@ -163,21 +163,8 @@ class User extends Base
             }
         }
 
-        if (isset($values['confirmation'])) {
-            unset($values['confirmation']);
-        }
-
-        if (isset($values['current_password'])) {
-            unset($values['current_password']);
-        }
-
-        if (isset($values['is_admin']) && empty($values['is_admin'])) {
-            $values['is_admin'] = 0;
-        }
-
-        if (isset($values['is_ldap_user']) && empty($values['is_ldap_user'])) {
-            $values['is_ldap_user'] = 0;
-        }
+        $this->removeFields($values, array('confirmation', 'current_password'));
+        $this->resetFields($values, array('is_admin', 'is_ldap_user'));
     }
 
     /**

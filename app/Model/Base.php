@@ -19,6 +19,7 @@ use PicoDb\Database;
  * @property \Model\Board              $board
  * @property \Model\Category           $category
  * @property \Model\Comment            $comment
+ * @property \Model\CommentHistory     $commentHistory
  * @property \Model\Color              $color
  * @property \Model\Config             $config
  * @property \Model\DateParser         $dateParser
@@ -28,6 +29,7 @@ use PicoDb\Database;
  * @property \Model\Project            $project
  * @property \Model\ProjectPermission  $projectPermission
  * @property \Model\SubTask            $subTask
+ * @property \Model\SubtaskHistory     $subtaskHistory
  * @property \Model\Task               $task
  * @property \Model\TaskExport         $taskExport
  * @property \Model\TaskHistory        $taskHistory
@@ -84,5 +86,53 @@ abstract class Base
     public function __get($name)
     {
         return Tool::loadModel($this->registry, $name);
+    }
+
+    /**
+     * Remove keys from an array
+     *
+     * @access public
+     * @param  array     $values    Input array
+     * @param  array     $keys      List of keys to remove
+     */
+    public function removeFields(array &$values, array $keys)
+    {
+        foreach ($keys as $key) {
+            if (isset($values[$key])) {
+                unset($values[$key]);
+            }
+        }
+    }
+
+    /**
+     * Force some fields to be at 0 if empty
+     *
+     * @access public
+     * @param  array     $values    Input array
+     * @param  array     $keys      List of keys
+     */
+    public function resetFields(array &$values, array $keys)
+    {
+        foreach ($keys as $key) {
+            if (isset($values[$key]) && empty($values[$key])) {
+                $values[$key] = 0;
+            }
+        }
+    }
+
+    /**
+     * Force some fields to be integer
+     *
+     * @access public
+     * @param  array     $values    Input array
+     * @param  array     $keys      List of keys
+     */
+    public function convertIntegerFields(array &$values, array $keys)
+    {
+        foreach ($keys as $key) {
+            if (isset($values[$key])) {
+                $values[$key] = (int) $values[$key];
+            }
+        }
     }
 }

@@ -41,8 +41,6 @@ class Task extends Base
     const EVENT_CREATE_UPDATE   = 'task.create_update';
     const EVENT_ASSIGNEE_CHANGE = 'task.assignee_change';
 
-
-
     /**
      * Get a list of due tasks for all projects
      *
@@ -73,58 +71,62 @@ class Task extends Base
     }
 
     /**
+     * Get task details (fetch more information from other tables)
+     *
+     * @access public
+     * @param  integer   $task_id   Task id
+     * @return array
+     */
+    public function getDetails($task_id)
+    {
+        $sql = '
+            SELECT
+            tasks.id,
+            tasks.title,
+            tasks.description,
+            tasks.date_creation,
+            tasks.date_completed,
+            tasks.date_modification,
+            tasks.date_due,
+            tasks.color_id,
+            tasks.project_id,
+            tasks.column_id,
+            tasks.owner_id,
+            tasks.creator_id,
+            tasks.position,
+            tasks.is_active,
+            tasks.score,
+            tasks.category_id,
+            project_has_categories.name AS category_name,
+            projects.name AS project_name,
+            columns.title AS column_title,
+            users.username AS assignee_username,
+            users.name AS assignee_name,
+            creators.username AS creator_username,
+            creators.name AS creator_name
+            FROM tasks
+            LEFT JOIN users ON users.id = tasks.owner_id
+            LEFT JOIN users AS creators ON creators.id = tasks.creator_id
+            LEFT JOIN project_has_categories ON project_has_categories.id = tasks.category_id
+            LEFT JOIN projects ON projects.id = tasks.project_id
+            LEFT JOIN columns ON columns.id = tasks.column_id
+            WHERE tasks.id = ?
+        ';
+
+        $rq = $this->db->execute($sql, array($task_id));
+        return $rq->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Fetch one task
      *
      * @access public
      * @param  integer   $task_id   Task id
-     * @param  boolean   $more      If true, fetch all related information
      * @return array
      */
-    public function getById($task_id, $more = false)
+    public function getById($task_id)
     {
-        if ($more) {
-
-            $sql = '
-                SELECT
-                tasks.id,
-                tasks.title,
-                tasks.description,
-                tasks.date_creation,
-                tasks.date_completed,
-                tasks.date_modification,
-                tasks.date_due,
-                tasks.color_id,
-                tasks.project_id,
-                tasks.column_id,
-                tasks.owner_id,
-                tasks.creator_id,
-                tasks.position,
-                tasks.is_active,
-                tasks.score,
-                tasks.category_id,
-                project_has_categories.name AS category_name,
-                projects.name AS project_name,
-                columns.title AS column_title,
-                users.username AS assignee_username,
-                users.name AS assignee_name,
-                creators.username AS creator_username,
-                creators.name AS creator_name
-                FROM tasks
-                LEFT JOIN users ON users.id = tasks.owner_id
-                LEFT JOIN users AS creators ON creators.id = tasks.creator_id
-                LEFT JOIN project_has_categories ON project_has_categories.id = tasks.category_id
-                LEFT JOIN projects ON projects.id = tasks.project_id
-                LEFT JOIN columns ON columns.id = tasks.column_id
-                WHERE tasks.id = ?
-            ';
-
-            $rq = $this->db->execute($sql, array($task_id));
-            return $rq->fetch(PDO::FETCH_ASSOC);
-        }
-        else {
-
-            return $this->db->table(self::TABLE)->eq('id', $task_id)->findOne();
-        }
+        return $this->db->table(self::TABLE)->eq('id', $task_id)->findOne();
     }
 
     /**
@@ -157,6 +159,25 @@ class Task extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
+                    ->in('is_active', $status)
+                    ->count();
+    }
+
+    /**
+     * Count the number of tasks for a given column and status
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $column_id    Column id
+     * @param  array     $status       List of status id
+     * @return integer
+     */
+    public function countByColumnId($project_id, $column_id, array $status = array(self::STATUS_OPEN))
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('column_id', $column_id)
                     ->in('is_active', $status)
                     ->count();
     }
@@ -224,25 +245,6 @@ class Task extends Base
         }
 
         return $table->findAll();
-    }
-
-    /**
-     * Count the number of tasks for a given column and status
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @param  integer   $column_id    Column id
-     * @param  array     $status       List of status id
-     * @return integer
-     */
-    public function countByColumnId($project_id, $column_id, array $status = array(self::STATUS_OPEN))
-    {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->eq('column_id', $column_id)
-                    ->in('is_active', $status)
-                    ->count();
     }
 
     /**
@@ -347,40 +349,23 @@ class Task extends Base
      */
     public function prepare(array &$values)
     {
-        if (isset($values['another_task'])) {
-            unset($values['another_task']);
-        }
-
         if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
             $values['date_due'] = $this->dateParser->getTimestamp($values['date_due']);
         }
 
-        // Force integer fields at 0 (for Postgresql)
-        if (isset($values['date_due']) && empty($values['date_due'])) {
-            $values['date_due'] = 0;
-        }
-
-        if (isset($values['score']) && empty($values['score'])) {
-            $values['score'] = 0;
-        }
-
-        if (isset($values['is_active'])) {
-            $values['is_active'] = (int) $values['is_active'];
-        }
+        $this->removeFields($values, array('another_task', 'id'));
+        $this->resetFields($values, array('date_due', 'score', 'category_id'));
+        $this->convertIntegerFields($values, array('is_active'));
     }
 
     /**
-     * Create a task
+     * Prepare data before task creation
      *
      * @access public
-     * @param  array    $values   Form values
-     * @return boolean
+     * @param  array    $values    Form values
      */
-    public function create(array $values)
+    public function prepareCreation(array &$values)
     {
-        $this->db->startTransaction();
-
-        // Prepare data
         $this->prepare($values);
 
         if (empty($values['column_id'])) {
@@ -395,8 +380,33 @@ class Task extends Base
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
         $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
+    }
 
-        // Save task
+    /**
+     * Prepare data before task modification
+     *
+     * @access public
+     * @param  array    $values    Form values
+     */
+    public function prepareModification(array &$values)
+    {
+        $this->prepare($values);
+        $values['date_modification'] = time();
+    }
+
+    /**
+     * Create a task
+     *
+     * @access public
+     * @param  array    $values   Form values
+     * @return boolean|integer
+     */
+    public function create(array $values)
+    {
+        $this->db->startTransaction();
+
+        $this->prepareCreation($values);
+
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
             return false;
@@ -431,10 +441,8 @@ class Task extends Base
         }
 
         // Prepare data
-        $this->prepare($values);
         $updated_task = $values;
-        $updated_task['date_modification'] = time();
-        unset($updated_task['id']);
+        $this->prepareModification($updated_task);
 
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updated_task);
 
