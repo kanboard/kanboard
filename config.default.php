@@ -109,3 +109,6 @@ define('REVERSE_PROXY_DEFAULT_ADMIN', '');
 
 // Default domain to use for setting the email address
 define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
+
+// Enable/disable adding STS header
+define('HEADER_STS', false);
