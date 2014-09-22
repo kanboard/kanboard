@@ -13,40 +13,6 @@ use Model\Project as ProjectModel;
 class Task extends Base
 {
     /**
-     * Webhook to create a task (useful for external software)
-     *
-     * @access public
-     */
-    public function add()
-    {
-        $token = $this->request->getStringParam('token');
-
-        if ($this->config->get('webhooks_token') !== $token) {
-            $this->response->text('Not Authorized', 401);
-        }
-
-        $defaultProject = $this->project->getFirst();
-
-        $values = array(
-            'title' => $this->request->getStringParam('title'),
-            'description' => $this->request->getStringParam('description'),
-            'color_id' => $this->request->getStringParam('color_id'),
-            'project_id' => $this->request->getIntegerParam('project_id', $defaultProject['id']),
-            'owner_id' => $this->request->getIntegerParam('owner_id'),
-            'column_id' => $this->request->getIntegerParam('column_id'),
-            'category_id' => $this->request->getIntegerParam('category_id'),
-        );
-
-        list($valid,) = $this->taskValidator->validateCreation($values);
-
-        if ($valid && $this->task->create($values)) {
-            $this->response->text('OK');
-        }
-
-        $this->response->text('FAILED');
-    }
-
-    /**
      * Public access (display a task)
      *
      * @access public

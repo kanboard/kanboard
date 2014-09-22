@@ -13,10 +13,10 @@ Firstly, you have to get the token from the settings page. After that, just call
 
 ```bash
 # Create a task for the default project inside the first column
-curl "http://myserver/?controller=task&action=add&token=superSecretToken&title=mySuperTask"
+curl "http://myserver/?controller=webhook&action=task&token=superSecretToken&title=mySuperTask"
 
 # Create a task to another project inside a specific column with the color red
-curl "http://myserver/?controller=task&action=add&token=superSecretToken&title=task123&project_id=3&column_id=7&color_id=red"
+curl "http://myserver/?controller=webhook&action=task&token=superSecretToken&title=task123&project_id=3&column_id=7&color_id=red"
 ```
 
 ### Available responses
@@ -27,7 +27,7 @@ curl "http://myserver/?controller=task&action=add&token=superSecretToken&title=t
 
 ### Available parameters
 
-Base URL: `http://YOUR_SERVER_HOSTNAME/?controller=task&action=add`
+Base URL: `http://YOUR_SERVER_HOSTNAME/?controller=webhook&action=task`
 
 - `token`: Token displayed on the settings page (required)
 - `title`: Task title (required)
