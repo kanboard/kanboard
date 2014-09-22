@@ -80,7 +80,7 @@ class AclTest extends Base
         $this->assertFalse($acl->isPageAccessAllowed('user', 'index'));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'login'));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'check'));
-        $this->assertTrue($acl->isPageAccessAllowed('task', 'add'));
+        $this->assertTrue($acl->isPageAccessAllowed('webhook', 'task'));
         $this->assertTrue($acl->isPageAccessAllowed('board', 'readonly'));
 
         // Regular user
@@ -93,7 +93,7 @@ class AclTest extends Base
         $this->assertTrue($acl->isPageAccessAllowed('user', 'index'));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'login'));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'check'));
-        $this->assertTrue($acl->isPageAccessAllowed('task', 'add'));
+        $this->assertTrue($acl->isPageAccessAllowed('webhook', 'task'));
         $this->assertTrue($acl->isPageAccessAllowed('board', 'readonly'));
 
         // Admin user
