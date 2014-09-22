@@ -145,7 +145,7 @@ class Request
      */
     public function getQueryString()
     {
-        return $_SERVER['QUERY_STRING'];
+        return isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
     }
 
 }

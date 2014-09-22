@@ -65,6 +65,7 @@ class Action extends Base
             Task::EVENT_CLOSE => t('Closing a task'),
             Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
             Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
+            GithubWebhook::EVENT_COMMIT => t('Github commit received'),
         );
     }
 

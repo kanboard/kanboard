@@ -18,9 +18,10 @@ class Acl extends Base
      */
     private $public_actions = array(
         'user' => array('login', 'check', 'google', 'github'),
-        'task' => array('add', 'readonly'),
+        'task' => array('readonly'),
         'board' => array('readonly'),
         'project' => array('feed'),
+        'webhook' => array('task', 'github'),
     );
 
     /**

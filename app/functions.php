@@ -6,6 +6,10 @@ use PicoDb\Database;
 
 function debug($message)
 {
+    if (! is_string($message)) {
+        $message = var_export($message, true);
+    }
+
     error_log($message.PHP_EOL, 3, 'data/debug.log');
 }
 

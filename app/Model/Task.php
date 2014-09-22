@@ -696,4 +696,22 @@ class Task extends Base
 
         return false;
     }
+
+    /**
+     * Get a the task id from a text
+     *
+     * Example: "Fix bug #1234" will return 1234
+     *
+     * @access public
+     * @param  string   $message   Text
+     * @return integer
+     */
+    public function getTaskIdFromText($message)
+    {
+        if (preg_match('!#(\d+)!i', $message, $matches) && isset($matches[1])) {
+            return $matches[1];
+        }
+
+        return 0;
+    }
 }
