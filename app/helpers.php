@@ -49,6 +49,7 @@ function get_user_id()
 function parse($text)
 {
     $text = markdown($text);
+    $text = url_to_links($text);
     $text = preg_replace('!#(\d+)!i', '<a href="?controller=task&action=show&task_id=$1">$0</a>', $text);
     return $text;
 }
@@ -64,6 +65,32 @@ function markdown($text)
     return $parser->transform($text);
 }
 
+// replaces urls in a plaintext string with html hyperlinks
+function url_to_links($text)
+{
+    return  preg_replace(
+     array(
+       '/(?(?=<a[^>]*>.+<\/a>)
+             (?:<a[^>]*>.+<\/a>)
+             |
+             ([^="\']?)((?:https?|ftp|bf2|):\/\/[^<> \n\r]+)
+         )/iex',
+       '/<a([^>]*)target="?[^"\']+"?/i',
+       '/<a([^>]+)>/i',
+       '/(^|\s)(www.[^<> \n\r]+)/iex',
+       '/(([_A-Za-z0-9-]+)(\\.[_A-Za-z0-9-]+)*@([A-Za-z0-9-]+)
+       (\\.[A-Za-z0-9-]+)*)/iex'
+       ),
+     array(
+       "stripslashes((strlen('\\2')>0?'\\1<a href=\"\\2\">\\2</a>\\3':'\\0'))",
+       '<a\\1',
+       '<a\\1 target="_blank">',
+       "stripslashes((strlen('\\2')>0?'\\1<a href=\"http://\\2\">\\2</a>\\3':'\\0'))",
+       "stripslashes((strlen('\\2')>0?'<a href=\"mailto:\\0\">\\0</a>':'\\0'))"
+       ),
+       $text
+    );
+}
 function get_current_base_url()
 {
     $url = \Core\Tool::isHTTPS() ? 'https://' : 'http://';
