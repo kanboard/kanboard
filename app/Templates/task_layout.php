@@ -7,7 +7,7 @@
     </div>
     <section class="task-show" id="task-section">
 
-        <?= Helper\template('task_sidebar', array('task' => $task)) ?>
+        <?= Helper\template('task_sidebar', array('task' => $task, 'hide_remove_menu' => isset($hide_remove_menu))) ?>
 
         <div class="task-show-main">
             <?= $task_content_for_layout ?>

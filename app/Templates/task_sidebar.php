@@ -18,7 +18,9 @@
                     <a href="?controller=task&amp;action=open&amp;task_id=<?= $task['id'] ?>"><?= t('Open this task') ?></a>
                 <?php endif ?>
             </li>
-            <li><a href="?controller=task&amp;action=remove&amp;task_id=<?= $task['id'] ?>"><?= t('Remove') ?></a></li>
+            <?php if (! $hide_remove_menu): ?>
+                <li><a href="?controller=task&amp;action=remove&amp;task_id=<?= $task['id'] ?>"><?= t('Remove') ?></a></li>
+            <?php endif ?>
         </ul>
     </div>
 </div>

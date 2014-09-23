@@ -289,6 +289,10 @@ class Task extends Base
     {
         $task = $this->getTask();
 
+        if (! $this->taskPermission->canRemoveTask($task)) {
+            $this->forbidden();
+        }
+
         if ($this->request->getStringParam('confirmation') === 'yes') {
 
             $this->checkCSRFParam();

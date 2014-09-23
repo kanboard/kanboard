@@ -31,6 +31,7 @@ use Model\LastLogin;
  * @property \Model\Task               $task
  * @property \Model\TaskHistory        $taskHistory
  * @property \Model\TaskExport         $taskExport
+ * @property \Model\TaskPermission     $taskPermission
  * @property \Model\TaskValidator      $taskValidator
  * @property \Model\CommentHistory     $commentHistory
  * @property \Model\SubtaskHistory     $subtaskHistory
@@ -242,6 +243,10 @@ abstract class Base
      */
     protected function taskLayout($template, array $params)
     {
+        if (isset($params['task']) && $this->taskPermission->canRemoveTask($params['task']) === false) {
+            $params['hide_remove_menu'] = true;
+        }
+
         $content = $this->template->load($template, $params);
         $params['task_content_for_layout'] = $content;
 
