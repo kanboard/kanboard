@@ -222,6 +222,10 @@ textarea.form-error {
     list-style-type: none;
 }
 
+ul.form-errors li {
+    margin-left: 0;
+}
+
 .form-help {
     font-size: 0.8em;
     color: brown;

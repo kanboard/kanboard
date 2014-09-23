@@ -79,13 +79,35 @@ class TaskValidator extends Base
     }
 
     /**
-     * Validate task modification
+     * Validate task modification (form)
      *
      * @access public
      * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
     public function validateModification(array $values)
+    {
+        $rules = array(
+            new Validators\Required('id', t('The id is required')),
+            new Validators\Required('title', t('The title is required')),
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    /**
+     * Validate task modification (Api)
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateApiModification(array $values)
     {
         $rules = array(
             new Validators\Required('id', t('The id is required')),

@@ -160,23 +160,25 @@ class Task extends Base
         }
 
         $task['score'] = $task['score'] ?: '';
+        $ajax = $this->request->isAjax();
 
         $params = array(
-                'values' => $task,
-                'errors' => array(),
-                'task' => $task,
-                'users_list' => $this->projectPermission->getUsersList($task['project_id']),
-                'colors_list' => $this->color->getList(),
-                'categories_list' => $this->category->getList($task['project_id']),
-                'ajax' => $this->request->isAjax(),
-                'menu' => 'tasks',
-                'title' => t('Edit a task')
-            );
-        if ($this->request->isAjax()) {
+            'values' => $task,
+            'errors' => array(),
+            'task' => $task,
+            'users_list' => $this->projectPermission->getUsersList($task['project_id']),
+            'colors_list' => $this->color->getList(),
+            'categories_list' => $this->category->getList($task['project_id']),
+            'ajax' => $ajax,
+            'menu' => 'tasks',
+            'title' => t('Edit a task')
+        );
+
+        if ($ajax) {
             $this->response->html($this->template->load('task_edit', $params));
         }
         else {
-            $this->response->html($this->template->layout('task_edit', $params));
+            $this->response->html($this->taskLayout('task_edit', $params));
         }
     }
 
@@ -209,7 +211,7 @@ class Task extends Base
             }
         }
 
-        $this->response->html($this->template->layout('task_edit', array(
+        $this->response->html($this->taskLayout('task_edit', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -218,7 +220,8 @@ class Task extends Base
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($values['project_id']),
             'menu' => 'tasks',
-            'title' => t('Edit a task')
+            'title' => t('Edit a task'),
+            'ajax' => $this->request->isAjax(),
         )));
     }
 

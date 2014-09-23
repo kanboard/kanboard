@@ -8,8 +8,8 @@ namespace Core;
  * @package core
  * @author  Frederic Guillot
  */
-interface Listener {
-
+interface Listener
+{
     /**
      * Execute the listener
      *

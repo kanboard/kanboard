@@ -211,7 +211,7 @@ $server->register('updateTask', function($id, $title = null, $project_id = null,
         }
     }
 
-    list($valid) = $taskValidator->validateModification($values);
+    list($valid) = $taskValidator->validateApiModification($values);
     return $valid && $task->update($values);
 });
 
