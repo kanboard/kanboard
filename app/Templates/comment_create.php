@@ -11,7 +11,9 @@
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-        <?= t('or') ?>
-        <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('cancel') ?></a>
+        <? if (!$skip_cancel): ?>
+            <?= t('or') ?>
+            <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('cancel') ?></a>
+        <? endif ?>
     </div>
 </form>

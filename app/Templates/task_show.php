@@ -12,3 +12,11 @@
 <?php endif ?>
 
 <?= Helper\template('task_comments', array('task' => $task, 'comments' => $comments)) ?>
+
+<?= Helper\template('comment_create', array('skip_cancel' => true,
+                                        'values' => array(
+                                            'user_id' => $user_id,
+                                            'task_id' => $task['id'],
+                                        ),
+                                        'errors' => array(),
+                                        'task' => $task)); ?>
