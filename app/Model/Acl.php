@@ -31,7 +31,7 @@ class Acl extends Base
      * @var array
      */
     private $user_actions = array(
-        'app' => array('index'),
+        'app' => array('index', 'dashboard'),
         'board' => array('index', 'show', 'save', 'check', 'changeassignee', 'updateassignee', 'changecategory', 'updatecategory'),
         'project' => array('tasks', 'index', 'forbidden', 'search', 'export', 'show', 'activity'),
         'user' => array('index', 'edit', 'forbidden', 'logout', 'index', 'show', 'external', 'unlinkgoogle', 'unlinkgithub', 'sessions', 'removesession', 'last', 'notifications', 'password'),

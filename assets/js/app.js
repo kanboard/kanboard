@@ -272,6 +272,29 @@ Kanboard.Project = (function() {
 
 })();
 
+// Dashboard related functions
+Kanboard.Dashboard = (function() {
+
+    return {
+        Init: function() {
+            // Project select box
+            $("#board-selector").chosen({
+                width: 180
+            });
+
+            $("#board-selector").change(function() {
+                window.location = "?controller=board&action=show&project_id=" + $(this).val();
+            });
+            
+            $('.toggle-section').click(function() {
+                $('.dashboard-block').hide();
+                $('#' + $(this).data("target")).show();
+                return false;
+            });
+        }
+    };
+
+})();
 
 // Initialization
 $(function() {
@@ -284,5 +307,8 @@ $(function() {
     }
     else if ($("#project-section").length) {
         Kanboard.Project.Init();
+    }
+    else if ($("#dashboard").length) {
+        Kanboard.Dashboard.Init();
     }
 });

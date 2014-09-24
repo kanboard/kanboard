@@ -113,6 +113,96 @@ class CommentHistory extends BaseHistory
 
         return $events;
     }
+    
+    /**
+     * Get all necessary content to display activity feed for tasks assigned to user
+     *
+     * @access public
+     * @param  integer   $user_id       User id
+     * @param  integer   $limit         Number of rows to fetch
+     * @return array
+     */
+    public function getAllContentAssignedTo($user_id, $limit = 50) {
+        $sql = '
+            SELECT
+                comment_has_events.id,
+                comment_has_events.date_creation,
+                comment_has_events.event_name,
+                comment_has_events.data as comment,
+                comment_has_events.task_id,
+                comment_has_events.comment_id,
+                tasks.title as task_title,
+                users.username as author_username,
+                users.name as author_name,
+                projects.name as project_name,
+                projects.id as project_id
+            FROM comment_has_events
+            LEFT JOIN users ON users.id=comment_has_events.creator_id
+            LEFT JOIN tasks ON tasks.id=comment_has_events.task_id
+            LEFT JOIN projects ON comment_has_events.project_id=projects.id
+            WHERE tasks.owner_id = ? AND comment_has_events.creator_id <> ?
+            ORDER BY comment_has_events.id DESC
+            LIMIT '.$limit.' OFFSET 0
+        ';
+
+        $rq = $this->db->execute($sql, array($user_id, $user_id));
+        $events = $rq->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($events as &$event) {
+            $event['author'] = $event['author_name'] ?: $event['author_username'];
+            $event['event_title'] = $this->getTitle($event);
+            $event['event_content'] = $this->getContent($event);
+            $event['event_type'] = 'comment';
+        }
+
+        return $events;
+    }
+
+    /**
+     * Get all necessary content to display activity feed for tasks in user's projects
+     *
+     * @access public
+     * @param  integer   $user_id       User id
+     * @param  integer   $limit         Number of rows to fetch
+     * @return array
+     */
+    public function getAllContentRelatedTo($user_id, $limit = 50) {
+        $sql = '
+            SELECT
+                comment_has_events.id,
+                comment_has_events.date_creation,
+                comment_has_events.event_name,
+                comment_has_events.data as comment,
+                comment_has_events.task_id,
+                comment_has_events.comment_id,
+                tasks.title as task_title,
+                users.username as author_username,
+                users.name as author_name,
+                projects.name as project_name,
+                projects.id as project_id
+            FROM comment_has_events
+            LEFT JOIN users ON users.id=comment_has_events.creator_id
+            LEFT JOIN tasks ON tasks.id=comment_has_events.task_id
+            LEFT JOIN projects ON comment_has_events.project_id=projects.id
+            WHERE (comment_has_events.project_id IN (SELECT project_id FROM project_has_users WHERE user_id = ?)
+            OR comment_has_events.project_id NOT IN (SELECT project_id FROM project_has_users))
+            AND comment_has_events.creator_id <> ?
+            ORDER BY comment_has_events.id DESC
+            LIMIT '.$limit.' OFFSET 0
+        ';
+
+        $rq = $this->db->execute($sql, array($user_id, $user_id));
+        $events = $rq->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($events as &$event) {
+            $event['author'] = $event['author_name'] ?: $event['author_username'];
+            $event['event_title'] = $this->getTitle($event);
+            $event['event_content'] = $this->getContent($event);
+            $event['event_type'] = 'comment';
+        }
+
+        return $events;
+    }
 
     /**
      * Get the event title (translated)

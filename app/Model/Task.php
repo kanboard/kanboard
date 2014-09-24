@@ -71,6 +71,41 @@ class Task extends Base
     }
 
     /**
+     * Get a list of recently updated tasks assigned to user
+     *
+     * @access public
+     * @param  integer   $user_id       User id
+     * @param  integer   $limit         Max number of rows to fetch
+     * @return array
+     */
+    public function getRecentTasksAssigned($user_id, $limit=false)
+    {
+        $tasks = $this->db->table(self::TABLE)
+                    ->columns(
+                        self::TABLE.'.id',
+                        self::TABLE.'.title',
+                        self::TABLE.'.date_due',
+                        self::TABLE.'.project_id',
+                        Project::TABLE.'.name AS project_name',
+                        User::TABLE.'.username AS assignee_username',
+                        User::TABLE.'.name AS assignee_name',
+                        'columns.title AS column_title'
+                    )
+                    ->join(Project::TABLE, 'id', 'project_id')
+                    ->join(User::TABLE, 'id', 'owner_id')
+                    ->join('columns', 'id', 'column_id')
+                    ->eq(Project::TABLE.'.is_active', 1)
+                    ->eq(self::TABLE.'.is_active', 1)
+                    ->eq(self::TABLE.'.owner_id', $user_id)
+                    ->desc(self::TABLE.'.date_modification');
+        if ($limit) {
+            $tasks->limit($limit);
+        }
+
+        return $tasks->findAll();;
+    }
+
+    /**
      * Get task details (fetch more information from other tables)
      *
      * @access public

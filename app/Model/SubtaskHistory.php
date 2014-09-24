@@ -124,6 +124,114 @@ class SubtaskHistory extends BaseHistory
     }
 
     /**
+     * Get all necessary content to display activity feed for tasks assigned to user
+     *
+     * @access public
+     * @param  integer   $user_id       User id
+     * @param  integer   $limit         Number of rows to fetch
+     * @return array
+     */
+    public function getAllContentAssignedTo($user_id, $limit = 50)
+    {
+        $sql = '
+            SELECT
+                subtask_has_events.id,
+                subtask_has_events.date_creation,
+                subtask_has_events.event_name,
+                subtask_has_events.task_id,
+                tasks.title as task_title,
+                users.username as author_username,
+                users.name as author_name,
+                assignees.name as subtask_assignee_name,
+                assignees.username as subtask_assignee_username,
+                task_has_subtasks.title as subtask_title,
+                task_has_subtasks.status as subtask_status,
+                task_has_subtasks.time_spent as subtask_time_spent,
+                task_has_subtasks.time_estimated as subtask_time_estimated,
+                projects.name as project_name,
+                projects.id as project_id
+            FROM subtask_has_events
+            LEFT JOIN users ON users.id=subtask_has_events.creator_id
+            LEFT JOIN tasks ON tasks.id=subtask_has_events.task_id
+            LEFT JOIN task_has_subtasks ON task_has_subtasks.id=subtask_has_events.subtask_id
+            LEFT JOIN users AS assignees ON assignees.id=task_has_subtasks.user_id
+            LEFT JOIN projects ON subtask_has_events.project_id=projects.id
+            WHERE assignees.id = ? AND subtask_has_events.creator_id <> ?
+            ORDER BY subtask_has_events.id DESC
+            LIMIT '.$limit.' OFFSET 0
+        ';
+
+        $rq = $this->db->execute($sql, array($user_id, $user_id));
+        $events = $rq->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($events as &$event) {
+            $event['author'] = $event['author_name'] ?: $event['author_username'];
+            $event['subtask_assignee'] = $event['subtask_assignee_name'] ?: $event['subtask_assignee_username'];
+            $event['subtask_status_list'] = $this->subTask->getStatusList();
+            $event['event_title'] = $this->getTitle($event);
+            $event['event_content'] = $this->getContent($event);
+            $event['event_type'] = 'subtask';
+        }
+
+        return $events;
+    }
+
+    /**
+     * Get all necessary content to display activity feed for tasks in user's project
+     *
+     * @access public
+     * @param  integer   $user_id       User id
+     * @param  integer   $limit         Number of rows to fetch
+     * @return array
+     */
+    public function getAllContentRelatedTo($user_id, $limit = 50)
+    {
+        $sql = '
+            SELECT
+                subtask_has_events.id,
+                subtask_has_events.date_creation,
+                subtask_has_events.event_name,
+                subtask_has_events.task_id,
+                tasks.title as task_title,
+                users.username as author_username,
+                users.name as author_name,
+                assignees.name as subtask_assignee_name,
+                assignees.username as subtask_assignee_username,
+                task_has_subtasks.title as subtask_title,
+                task_has_subtasks.status as subtask_status,
+                task_has_subtasks.time_spent as subtask_time_spent,
+                task_has_subtasks.time_estimated as subtask_time_estimated,
+                projects.name as project_name,
+                projects.id as project_id
+            FROM subtask_has_events
+            LEFT JOIN users ON users.id=subtask_has_events.creator_id
+            LEFT JOIN tasks ON tasks.id=subtask_has_events.task_id
+            LEFT JOIN task_has_subtasks ON task_has_subtasks.id=subtask_has_events.subtask_id
+            LEFT JOIN users AS assignees ON assignees.id=task_has_subtasks.user_id
+            LEFT JOIN projects ON subtask_has_events.project_id=projects.id
+            WHERE (subtask_has_events.project_id IN (SELECT project_id FROM project_has_users WHERE user_id = ?)
+            OR subtask_has_events.project_id NOT IN (SELECT project_id FROM project_has_users))
+            AND subtask_has_events.creator_id <> ?
+            ORDER BY subtask_has_events.id DESC
+            LIMIT '.$limit.' OFFSET 0
+        ';
+
+        $rq = $this->db->execute($sql, array($user_id, $user_id));
+        $events = $rq->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($events as &$event) {
+            $event['author'] = $event['author_name'] ?: $event['author_username'];
+            $event['subtask_assignee'] = $event['subtask_assignee_name'] ?: $event['subtask_assignee_username'];
+            $event['subtask_status_list'] = $this->subTask->getStatusList();
+            $event['event_title'] = $this->getTitle($event);
+            $event['event_content'] = $this->getContent($event);
+            $event['event_type'] = 'subtask';
+        }
+
+        return $events;
+    }
+
+    /**
      * Get the event title (translated)
      *
      * @access public

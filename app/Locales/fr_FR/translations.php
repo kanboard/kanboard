@@ -503,4 +503,9 @@ return array(
     '[%s][Position Change] %s (#%d)' => '[%s][Changement de position] %s (#%d)',
     '[%s][Assignee Change] %s (#%d)' => '[%s][Changement d\'assigné] %s (#%d)',
     'New password for the user "%s"' => 'Nouveau mot de passe pour l\'utilisateur « %s »',
+    // 'Dashboard' => '',
+    // 'My projects' => '',
+    // 'Recent activity on my projects' => '',
+    // 'My recent assigned tasks' => '',
+    // 'Recent activity on my assigned tasks' => '',
 );

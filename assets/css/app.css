@@ -1183,3 +1183,39 @@ tr td.task-orange,
         font-size: 1.5em;
     }
 }
+
+/* dashboard */
+.task-listing {
+    border-left: 3px solid #000;
+    margin-left: 35px;
+    padding-bottom: 10px;
+    max-width: 700px;
+}
+
+.task-listing li {
+    font-size: 1.3em;
+    line-height: 1.7em;
+    list-style-type: none;
+    margin-left: 20px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.task-listing li:hover {
+    border-color: #333;
+}
+
+.task-listing a {
+    text-decoration: none;
+}
+
+.task-listing a:hover,
+.task-listing a:focus {
+    color: #000;
+}
+
+.task-listing-description li {
+    font-size: 0.8em;
+    line-height: 1.0em;
+    color: #aaa;
+    padding-top: 5px;
+}
