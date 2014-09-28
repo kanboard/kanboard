@@ -1,6 +1,14 @@
 <?php if (isset($not_editable)): ?>
 
-    <a href="?controller=task&amp;action=readonly&amp;task_id=<?= $task['id'] ?>&amp;token=<?= $project['token'] ?>">#<?= $task['id'] ?></a> -
+    <a href="?controller=task&amp;action=readonly&amp;task_id=<?= $task['id'] ?>&amp;token=<?= $project['token'] ?>">#<?= $task['id'] ?></a>
+
+    <?php if ($task['reference']): ?>
+    <span class="task-board-reference" title="<?= t('Reference') ?>">
+        (<?= $task['reference'] ?>)
+    </span>
+    <?php endif ?>
+
+    &nbsp;-&nbsp;
 
     <span class="task-board-user">
     <?php if (! empty($task['owner_id'])): ?>
@@ -22,7 +30,15 @@
 
 <?php else: ?>
 
-    <a class="task-edit-popover" href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a> -
+    <a class="task-edit-popover" href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a>
+
+    <?php if ($task['reference']): ?>
+    <span class="task-board-reference" title="<?= t('Reference') ?>">
+        (<?= $task['reference'] ?>)
+    </span>
+    <?php endif ?>
+
+    &nbsp;-&nbsp;
 
     <span class="task-board-user">
         <a class="assignee-popover" href="?controller=board&amp;action=changeAssignee&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>">

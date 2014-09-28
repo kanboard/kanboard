@@ -546,3 +546,26 @@ function form_numeric($name, $values = array(), array $errors = array(), array $
 {
     return form_input('text', $name, $values, $errors, $attributes, $class.' form-numeric');
 }
+
+/**
+ * Link
+ *
+ * a('link', 'task', 'show', array('task_id' => $task_id))
+ *
+ * @param  string   $label       Link label
+ * @param  string   $controller  Controller name
+ * @param  string   $action      Action name
+ * @param  array    $params      Url parameters
+ * @param  string   $class       CSS class attribute
+ * @return string
+ */
+function a($label, $controller, $action, array $params = array(), $css = '')
+{
+    $html = '<a href="?controller='.$controller.'&amp;action='.$action;
+
+    foreach ($params as $key => $value) {
+        $html .= '&amp;'.$key.'='.$value;
+    }
+
+    return '" class="'.$class.'"/>'.$label.'</a>';
+}

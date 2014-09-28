@@ -26,7 +26,11 @@
         <?php elseif (Helper\contains($param_name, 'category_id')): ?>
             <?= Helper\form_label($param_desc, $param_name) ?>
             <?= Helper\form_select('params['.$param_name.']', $categories_list, $values) ?><br/>
+        <?php elseif (Helper\contains($param_name, 'label')): ?>
+            <?= Helper\form_label($param_desc, $param_name) ?>
+            <?= Helper\form_text('params['.$param_name.']', $values) ?>
         <?php endif ?>
+
     <?php endforeach ?>
 
     <div class="form-actions">

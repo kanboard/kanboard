@@ -4,6 +4,11 @@
         <span class="task-score"><?= Helper\escape($task['score']) ?></span>
     <?php endif ?>
     <ul>
+        <?php if ($task['reference']): ?>
+        <li>
+            <strong><?= t('Reference: %s', $task['reference']) ?></strong>
+        </li>
+        <?php endif ?>
         <li>
             <?= dt('Created on %B %e, %Y at %k:%M %p', $task['date_creation']) ?>
         </li>

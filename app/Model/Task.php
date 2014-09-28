@@ -82,6 +82,7 @@ class Task extends Base
         $sql = '
             SELECT
             tasks.id,
+            tasks.reference,
             tasks.title,
             tasks.description,
             tasks.date_creation,
@@ -118,7 +119,7 @@ class Task extends Base
     }
 
     /**
-     * Fetch one task
+     * Fetch a task by the id
      *
      * @access public
      * @param  integer   $task_id   Task id
@@ -127,6 +128,18 @@ class Task extends Base
     public function getById($task_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $task_id)->findOne();
+    }
+
+    /**
+     * Fetch a task  by the reference (external id)
+     *
+     * @access public
+     * @param  string   $reference   Task reference
+     * @return array
+     */
+    public function getByReference($reference)
+    {
+        return $this->db->table(self::TABLE)->eq('reference', $reference)->findOne();
     }
 
     /**
@@ -200,6 +213,7 @@ class Task extends Base
                         '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id) AS nb_subtasks',
                         '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id AND status=2) AS nb_completed_subtasks',
                         'tasks.id',
+                        'tasks.reference',
                         'tasks.title',
                         'tasks.description',
                         'tasks.date_creation',

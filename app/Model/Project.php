@@ -505,6 +505,13 @@ class Project extends Base
             Task::EVENT_MOVE_COLUMN,
             Task::EVENT_MOVE_POSITION,
             Task::EVENT_ASSIGNEE_CHANGE,
+            GithubWebhook::EVENT_ISSUE_OPENED,
+            GithubWebhook::EVENT_ISSUE_CLOSED,
+            GithubWebhook::EVENT_ISSUE_REOPENED,
+            GithubWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE,
+            GithubWebhook::EVENT_ISSUE_LABEL_CHANGE,
+            GithubWebhook::EVENT_ISSUE_COMMENT,
+            GithubWebhook::EVENT_COMMIT,
         );
 
         $listener = new ProjectModificationDate($this);

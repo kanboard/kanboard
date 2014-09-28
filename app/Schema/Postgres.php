@@ -4,7 +4,16 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 8;
+const VERSION = 9;
+
+function version_9($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN reference VARCHAR(50) DEFAULT ''");
+    $pdo->exec("ALTER TABLE comments ADD COLUMN reference VARCHAR(50) DEFAULT ''");
+
+    $pdo->exec('CREATE INDEX tasks_reference_idx ON tasks(reference)');
+    $pdo->exec('CREATE INDEX comments_reference_idx ON comments(reference)');
+}
 
 function version_8($pdo)
 {
@@ -22,7 +31,7 @@ function version_6($pdo)
         CREATE TABLE task_has_events (
             id SERIAL PRIMARY KEY,
             date_creation INTEGER NOT NULL,
-            event_name TEXT NOT NULL,
+            event_name VARCHAR(50) NOT NULL,
             creator_id INTEGER,
             project_id INTEGER,
             task_id INTEGER,
@@ -37,7 +46,7 @@ function version_6($pdo)
         CREATE TABLE subtask_has_events (
             id SERIAL PRIMARY KEY,
             date_creation INTEGER NOT NULL,
-            event_name TEXT NOT NULL,
+            event_name VARCHAR(50) NOT NULL,
             creator_id INTEGER,
             project_id INTEGER,
             subtask_id INTEGER,
@@ -54,7 +63,7 @@ function version_6($pdo)
         CREATE TABLE comment_has_events (
             id SERIAL PRIMARY KEY,
             date_creation INTEGER NOT NULL,
-            event_name TEXT NOT NULL,
+            event_name VARCHAR(50) NOT NULL,
             creator_id INTEGER,
             project_id INTEGER,
             comment_id INTEGER,

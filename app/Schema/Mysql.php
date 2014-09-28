@@ -4,7 +4,16 @@ namespace Schema;
 
 use Core\Security;
 
-const VERSION = 27;
+const VERSION = 28;
+
+function version_28($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN reference VARCHAR(50) DEFAULT ''");
+    $pdo->exec("ALTER TABLE comments ADD COLUMN reference VARCHAR(50) DEFAULT ''");
+
+    $pdo->exec('CREATE INDEX tasks_reference_idx ON tasks(reference)');
+    $pdo->exec('CREATE INDEX comments_reference_idx ON comments(reference)');
+}
 
 function version_27($pdo)
 {

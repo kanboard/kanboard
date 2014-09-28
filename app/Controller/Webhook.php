@@ -53,6 +53,8 @@ class Webhook extends Base
             $this->response->text('Not Authorized', 401);
         }
 
+        $this->githubWebhook->setProjectId($this->request->getIntegerParam('project_id'));
+
         $this->githubWebhook->parsePayload(
             $this->request->getHeader('X-Github-Event'),
             $this->request->getBody()

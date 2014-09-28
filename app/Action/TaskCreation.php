@@ -3,15 +3,14 @@
 namespace Action;
 
 use Model\GithubWebhook;
-use Model\Task;
 
 /**
- * Close automatically a task
+ * Create automatically a task from a webhook
  *
  * @package action
  * @author  Frederic Guillot
  */
-class TaskClose extends Base
+class TaskCreation extends Base
 {
     /**
      * Get the list of compatible events
@@ -22,9 +21,7 @@ class TaskClose extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_MOVE_COLUMN,
-            GithubWebhook::EVENT_COMMIT,
-            GithubWebhook::EVENT_ISSUE_CLOSED,
+            GithubWebhook::EVENT_ISSUE_OPENED,
         );
     }
 
@@ -36,13 +33,7 @@ class TaskClose extends Base
      */
     public function getActionRequiredParameters()
     {
-        switch ($this->event_name) {
-            case GithubWebhook::EVENT_COMMIT:
-            case GithubWebhook::EVENT_ISSUE_CLOSED:
-                return array();
-            default:
-                return array('column_id' => t('Column'));
-        }
+        return array();
     }
 
     /**
@@ -53,17 +44,14 @@ class TaskClose extends Base
      */
     public function getEventRequiredParameters()
     {
-        switch ($this->event_name) {
-            case GithubWebhook::EVENT_COMMIT:
-            case GithubWebhook::EVENT_ISSUE_CLOSED:
-                return array('task_id');
-            default:
-                return array('task_id', 'column_id');
-        }
+        return array(
+            'reference',
+            'title',
+        );
     }
 
     /**
-     * Execute the action (close the task)
+     * Execute the action (create a new task)
      *
      * @access public
      * @param  array   $data   Event data dictionary
@@ -71,7 +59,12 @@ class TaskClose extends Base
      */
     public function doAction(array $data)
     {
-        return $this->task->close($data['task_id']);
+        return $this->task->create(array(
+            'project_id' => $data['project_id'],
+            'title' => $data['title'],
+            'reference' => $data['reference'],
+            'description' => $data['description'],
+        ));
     }
 
     /**
@@ -83,12 +76,6 @@ class TaskClose extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        switch ($this->event_name) {
-            case GithubWebhook::EVENT_COMMIT:
-            case GithubWebhook::EVENT_ISSUE_CLOSED:
-                return true;
-            default:
-                return $data['column_id'] == $this->getParam('column_id');
-        }
+        return true;
     }
 }

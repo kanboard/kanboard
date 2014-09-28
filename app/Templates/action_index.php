@@ -33,6 +33,8 @@
                         <?= Helper\in_list($param['value'], $colors_list) ?>
                     <?php elseif (Helper\contains($param['name'], 'category_id')): ?>
                         <?= Helper\in_list($param['value'], $categories_list) ?>
+                    <?php elseif (Helper\contains($param['name'], 'label')): ?>
+                        <?= Helper\escape($param['value']) ?>
                     <?php endif ?>
                     </strong>
                 </li>

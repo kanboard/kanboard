@@ -36,8 +36,9 @@ class Action extends Base
      */
     public function getAvailableActions()
     {
-        return array(
+        $values = array(
             'TaskClose' => t('Close a task'),
+            'TaskOpen' => t('Open a task'),
             'TaskAssignSpecificUser' => t('Assign the task to a specific user'),
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
@@ -45,7 +46,14 @@ class Action extends Base
             'TaskAssignColorUser' => t('Assign a color to a specific user'),
             'TaskAssignColorCategory' => t('Assign automatically a color based on a category'),
             'TaskAssignCategoryColor' => t('Assign automatically a category based on a color'),
+            'TaskCreation' => t('Create a task from an external provider'),
+            'TaskAssignUser' => t('Change the assignee based on an external username'),
+            'TaskAssignCategoryLabel' => t('Change the category based on an external label'),
         );
+
+        asort($values);
+
+        return $values;
     }
 
     /**
@@ -56,7 +64,7 @@ class Action extends Base
      */
     public function getAvailableEvents()
     {
-        return array(
+        $values = array(
             Task::EVENT_MOVE_COLUMN => t('Move a task to another column'),
             Task::EVENT_UPDATE => t('Task modification'),
             Task::EVENT_CREATE => t('Task creation'),
@@ -65,7 +73,16 @@ class Action extends Base
             Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
             Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
             GithubWebhook::EVENT_COMMIT => t('Github commit received'),
+            GithubWebhook::EVENT_ISSUE_OPENED => t('Github issue opened'),
+            GithubWebhook::EVENT_ISSUE_CLOSED => t('Github issue closed'),
+            GithubWebhook::EVENT_ISSUE_REOPENED => t('Github issue reopened'),
+            GithubWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE => t('Github issue assignee change'),
+            GithubWebhook::EVENT_ISSUE_LABEL_CHANGE => t('Github issue label change'),
         );
+
+        asort($values);
+
+        return $values;
     }
 
     /**
