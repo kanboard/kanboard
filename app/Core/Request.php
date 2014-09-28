@@ -50,26 +50,15 @@ class Request
     }
 
     /**
-     * Get form values or unserialized json request
+     * Get form values and check for CSRF token
      *
      * @access public
      * @return array
      */
     public function getValues()
     {
-        if (! empty($_POST)) {
-
-            if (Security::validateCSRFFormToken($_POST)) {
-                return $_POST;
-            }
-
-            return array();
-        }
-
-        $result = json_decode($this->getBody(), true);
-
-        if ($result) {
-            return $result;
+        if (! empty($_POST) && Security::validateCSRFFormToken($_POST)) {
+            return $_POST;
         }
 
         return array();
