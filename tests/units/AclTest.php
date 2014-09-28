@@ -90,7 +90,7 @@ class AclTest extends Base
         $this->assertFalse($acl->isPageAccessAllowed('user', 'remove'));
         $this->assertFalse($acl->isPageAccessAllowed('user', 'confirm'));
         $this->assertTrue($acl->isPageAccessAllowed('app', 'index'));
-        $this->assertTrue($acl->isPageAccessAllowed('user', 'index'));
+        $this->assertFalse($acl->isPageAccessAllowed('user', 'index'));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'login'));
         $this->assertTrue($acl->isPageAccessAllowed('user', 'check'));
         $this->assertTrue($acl->isPageAccessAllowed('webhook', 'task'));
