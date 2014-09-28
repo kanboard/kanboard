@@ -5,7 +5,7 @@
         </div>
 
         <article class="markdown task-show-description">
-            <?= Helper\parse($task['description']) ?: t('There is no description.') ?>
+            <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
         </article>
     </div>
 <?php endif ?>

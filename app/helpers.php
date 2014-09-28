@@ -10,7 +10,7 @@ namespace Helper;
 use Core\Security;
 use Core\Template;
 use Core\Tool;
-use Michelf\MarkdownExtra;
+use Parsedown\Parsedown;
 
 /**
  * Append a CSRF token to a query string
@@ -101,19 +101,6 @@ function get_user_id()
 }
 
 /**
- * Transform a Markdown text to HTML and add some post-processing
- *
- * @param  string   $text   Markdown content
- * @return string
- */
-function parse($text)
-{
-    $text = markdown($text);
-    $text = preg_replace('!#(\d+)!i', '<a href="?controller=task&action=show&task_id=$1">$0</a>', $text);
-    return $text;
-}
-
-/**
  * Markdown transformation
  *
  * @param  string    $text   Markdown content
@@ -121,10 +108,14 @@ function parse($text)
  */
 function markdown($text)
 {
-    $parser = new MarkdownExtra;
-    $parser->no_markup = true;
-    $parser->no_entities = true;
-    return $parser->transform($text);
+    $html = Parsedown::instance()
+                ->setMarkupEscaped(true) # escapes markup (HTML)
+                ->text($text);
+
+    // Replace task #123 by a link to the task
+    $html = preg_replace('!#(\d+)!i', '<a href="?controller=task&action=show&task_id=$1">$0</a>', $html);
+
+    return $html;
 }
 
 /**

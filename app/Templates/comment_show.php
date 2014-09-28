@@ -21,7 +21,7 @@
         <?php endif ?>
 
         <div class="markdown">
-            <?= Helper\parse($comment['comment']) ?>
+            <?= Helper\markdown($comment['comment']) ?>
         </div>
 
     </div>

@@ -37,7 +37,7 @@
 
 <?php if (! empty($task['description'])): ?>
     <h2><?= t('Description') ?></h2>
-    <?= Helper\parse($task['description']) ?: t('There is no description.') ?>
+    <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
 <?php endif ?>
 
 <?= Helper\template('notification_footer', array('task' => $task)) ?>
