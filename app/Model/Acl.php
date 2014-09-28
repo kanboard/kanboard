@@ -34,7 +34,7 @@ class Acl extends Base
         'app' => array('index'),
         'board' => array('index', 'show', 'save', 'check', 'changeassignee', 'updateassignee', 'changecategory', 'updatecategory'),
         'project' => array('tasks', 'index', 'forbidden', 'search', 'export', 'show', 'activity'),
-        'user' => array('index', 'edit', 'forbidden', 'logout', 'index', 'show', 'external', 'unlinkgoogle', 'unlinkgithub', 'sessions', 'removesession', 'last', 'notifications', 'password'),
+        'user' => array('edit', 'forbidden', 'logout', 'index', 'show', 'external', 'unlinkgoogle', 'unlinkgithub', 'sessions', 'removesession', 'last', 'notifications', 'password'),
         'comment' => array('create', 'save', 'confirm', 'remove', 'update', 'edit', 'forbidden'),
         'file' => array('create', 'save', 'download', 'confirm', 'remove', 'open', 'image'),
         'subtask' => array('create', 'save', 'edit', 'update', 'confirm', 'remove'),
