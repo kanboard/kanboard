@@ -2,6 +2,8 @@
 
 namespace Auth;
 
+use Core\Request;
+
 /**
  * LDAP model
  *
@@ -58,8 +60,8 @@ class Ldap extends Base
             $this->lastLogin->create(
                 self::AUTH_NAME,
                 $user['id'],
-                $this->user->getIpAddress(),
-                $this->user->getUserAgent()
+                Request::getIpAddress(),
+                Request::getUserAgent()
             );
 
             return true;

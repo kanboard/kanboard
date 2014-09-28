@@ -34,12 +34,11 @@ class User extends Base
             $this->response->redirect('?controller=app');
         }
 
-        $redirect_query = $this->request->getStringParam('redirect_query');
         $this->response->html($this->template->layout('user_login', array(
             'errors' => array(),
             'values' => array(),
             'no_layout' => true,
-            'redirect_query' => $redirect_query,
+            'redirect_query' => $this->request->getStringParam('redirect_query'),
             'title' => t('Login')
         )));
     }
@@ -56,9 +55,10 @@ class User extends Base
         list($valid, $errors) = $this->authentication->validateForm($values);
 
         if ($valid) {
-            if ($redirect_query != "") {
+            if ($redirect_query !== '') {
                 $this->response->redirect('?'.$redirect_query);
-            } else {
+            }
+            else {
                 $this->response->redirect('?controller=board');
             }
         }
@@ -420,6 +420,7 @@ class User extends Base
                         'errors' => array('login' => t('Google authentication failed')),
                         'values' => array(),
                         'no_layout' => true,
+                        'redirect_query' => '',
                         'title' => t('Login')
                     )));
                 }
@@ -481,6 +482,7 @@ class User extends Base
                         'errors' => array('login' => t('GitHub authentication failed')),
                         'values' => array(),
                         'no_layout' => true,
+                        'redirect_query' => '',
                         'title' => t('Login')
                     )));
                 }

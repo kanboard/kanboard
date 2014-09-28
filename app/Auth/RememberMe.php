@@ -2,6 +2,7 @@
 
 namespace Auth;
 
+use Core\Request;
 use Core\Security;
 use Core\Tool;
 
@@ -107,8 +108,8 @@ class RememberMe extends Base
                 $this->lastLogin->create(
                     self::AUTH_NAME,
                     $this->acl->getUserId(),
-                    $this->user->getIpAddress(),
-                    $this->user->getUserAgent()
+                    Request::getIpAddress(),
+                    Request::getUserAgent()
                 );
 
                 return true;

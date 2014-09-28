@@ -2,6 +2,7 @@
 
 namespace Auth;
 
+use Core\Request;
 use Core\Security;
 
 /**
@@ -44,8 +45,8 @@ class ReverseProxy extends Base
             $this->lastLogin->create(
                 self::AUTH_NAME,
                 $user['id'],
-                $this->user->getIpAddress(),
-                $this->user->getUserAgent()
+                Request::getIpAddress(),
+                Request::getUserAgent()
             );
 
             return true;

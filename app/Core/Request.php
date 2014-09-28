@@ -148,4 +148,61 @@ class Request
         return isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
     }
 
+    /**
+     * Get the user agent
+     *
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function getUserAgent()
+    {
+        return empty($_SERVER['HTTP_USER_AGENT']) ? t('Unknown') : $_SERVER['HTTP_USER_AGENT'];
+    }
+
+    /**
+     * Get the real IP address of the user
+     *
+     * @static
+     * @access public
+     * @param  bool    $only_public   Return only public IP address
+     * @return string
+     */
+    public static function getIpAddress($only_public = false)
+    {
+        $keys = array(
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_FORWARDED',
+            'HTTP_X_CLUSTER_CLIENT_IP',
+            'HTTP_FORWARDED_FOR',
+            'HTTP_FORWARDED',
+            'REMOTE_ADDR'
+        );
+
+        foreach ($keys as $key) {
+
+            if (isset($_SERVER[$key])) {
+
+                foreach (explode(',', $_SERVER[$key]) as $ip_address) {
+
+                    $ip_address = trim($ip_address);
+
+                    if ($only_public) {
+
+                        // Return only public IP address
+                        if (filter_var($ip_address, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
+                            return $ip_address;
+                        }
+                    }
+                    else {
+
+                        return $ip_address;
+                    }
+                }
+            }
+        }
+
+        return t('Unknown');
+    }
 }

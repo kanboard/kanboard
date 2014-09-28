@@ -2,6 +2,7 @@
 
 namespace Model;
 
+use Core\Request;
 use Auth\Database;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
@@ -117,7 +118,7 @@ class Authentication extends Base
                 if (! empty($values['remember_me'])) {
 
                     $credentials = $this->backend('rememberMe')
-                                        ->create($this->acl->getUserId(), $this->user->getIpAddress(), $this->user->getUserAgent());
+                                        ->create($this->acl->getUserId(), Request::getIpAddress(), Request::getUserAgent());
 
                     $this->backend('rememberMe')->writeCookie($credentials['token'], $credentials['sequence'], $credentials['expiration']);
                 }

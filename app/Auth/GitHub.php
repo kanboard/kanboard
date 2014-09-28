@@ -4,6 +4,7 @@ namespace Auth;
 
 require __DIR__.'/../../vendor/OAuth/bootstrap.php';
 
+use Core\Request;
 use OAuth\Common\Storage\Session;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Uri\UriFactory;
@@ -44,8 +45,8 @@ class GitHub extends Base
             $this->lastLogin->create(
                 self::AUTH_NAME,
                 $user['id'],
-                $this->user->getIpAddress(),
-                $this->user->getUserAgent()
+                Request::getIpAddress(),
+                Request::getUserAgent()
             );
 
             return true;
