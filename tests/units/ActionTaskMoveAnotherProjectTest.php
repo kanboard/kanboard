@@ -9,7 +9,7 @@ class ActionTaskMoveAnotherProject extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskMoveAnotherProject(3, new Task($this->registry));
+        $action = new Action\TaskMoveAnotherProject($this->registry, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -24,7 +24,7 @@ class ActionTaskMoveAnotherProject extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskMoveAnotherProject(3, new Task($this->registry));
+        $action = new Action\TaskMoveAnotherProject($this->registry, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -38,7 +38,7 @@ class ActionTaskMoveAnotherProject extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskMoveAnotherProject(1, new Task($this->registry));
+        $action = new Action\TaskMoveAnotherProject($this->registry, 1, Task::EVENT_MOVE_COLUMN);
 
         // We create a task in the first column
         $t = new Task($this->registry);

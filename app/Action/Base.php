@@ -3,12 +3,17 @@
 namespace Action;
 
 use Core\Listener;
+use Core\Registry;
+use Core\Tool;
 
 /**
  * Base class for automatic actions
  *
  * @package action
  * @author  Frederic Guillot
+ *
+ * @property \Model\Acl                $acl
+ * @property \Model\Task               $task
  */
 abstract class Base implements Listener
 {
@@ -27,6 +32,22 @@ abstract class Base implements Listener
      * @var array
      */
     private $params = array();
+
+    /**
+     * Attached event name
+     *
+     * @access protected
+     * @var string
+     */
+    protected $event_name = '';
+
+    /**
+     * Registry instance
+     *
+     * @access protected
+     * @var \Core\Registry
+     */
+    protected $registry;
 
     /**
      * Execute the action
@@ -57,14 +78,59 @@ abstract class Base implements Listener
     abstract public function getEventRequiredParameters();
 
     /**
+     * Get the compatible events
+     *
+     * @abstract
+     * @access public
+     * @return array
+     */
+    abstract public function getCompatibleEvents();
+
+    /**
+     * Check if the event data meet the action condition
+     *
+     * @access public
+     * @param  array   $data   Event data dictionary
+     * @return bool
+     */
+    abstract public function hasRequiredCondition(array $data);
+
+    /**
      * Constructor
      *
      * @access public
-     * @param  integer  $project_id  Project id
+     * @param  \Core\Registry   $registry         Regsitry instance
+     * @param  integer          $project_id       Project id
+     * @param  string           $event_name       Attached event name
      */
-    public function __construct($project_id)
+    public function __construct(Registry $registry, $project_id, $event_name)
     {
+        $this->registry = $registry;
         $this->project_id = $project_id;
+        $this->event_name = $event_name;
+    }
+
+    /**
+     * Return class information
+     *
+     * @access public
+     * @return string
+     */
+    public function __toString()
+    {
+        return get_called_class();
+    }
+
+    /**
+     * Load automatically models
+     *
+     * @access public
+     * @param  string $name Model name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return Tool::loadModel($this->registry, $name);
     }
 
     /**
@@ -101,11 +167,34 @@ abstract class Base implements Listener
      */
     public function isExecutable(array $data)
     {
-        if (isset($data['project_id']) && $data['project_id'] == $this->project_id && $this->hasRequiredParameters($data)) {
-            return true;
-        }
+        return $this->hasCompatibleEvent() &&
+               $this->hasRequiredProject($data) &&
+               $this->hasRequiredParameters($data) &&
+               $this->hasRequiredCondition($data);
+    }
 
-        return false;
+    /**
+     * Check if the event is compatible with the action
+     *
+     * @access public
+     * @param  array   $data   Event data dictionary
+     * @return bool
+     */
+    public function hasCompatibleEvent()
+    {
+        return in_array($this->event_name, $this->getCompatibleEvents());
+    }
+
+    /**
+     * Check if the event data has the required project
+     *
+     * @access public
+     * @param  array   $data   Event data dictionary
+     * @return bool
+     */
+    public function hasRequiredProject(array $data)
+    {
+        return isset($data['project_id']) && $data['project_id'] == $this->project_id;
     }
 
     /**
@@ -118,7 +207,9 @@ abstract class Base implements Listener
     public function hasRequiredParameters(array $data)
     {
         foreach ($this->getEventRequiredParameters() as $parameter) {
-            if (! isset($data[$parameter])) return false;
+            if (! isset($data[$parameter])) {
+                return false;
+            }
         }
 
         return true;
@@ -138,16 +229,5 @@ abstract class Base implements Listener
         }
 
         return false;
-    }
-
-    /**
-     * Return class information
-     *
-     * @access public
-     * @return string
-     */
-    public function __toString()
-    {
-        return get_called_class();
     }
 }

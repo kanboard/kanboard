@@ -3,7 +3,6 @@
 namespace Action;
 
 use Model\Task;
-use Model\Acl;
 
 /**
  * Assign a task to the logged user
@@ -14,34 +13,17 @@ use Model\Acl;
 class TaskAssignCurrentUser extends Base
 {
     /**
-     * Task model
-     *
-     * @accesss private
-     * @var \Model\Task
-     */
-    private $task;
-
-    /**
-     * Acl model
-     *
-     * @accesss private
-     * @var \Model\Acl
-     */
-    private $acl;
-
-    /**
-     * Constructor
+     * Get the list of compatible events
      *
      * @access public
-     * @param  integer  $project_id  Project id
-     * @param  \Model\Task     $task        Task model instance
-     * @param  \Model\Acl      $acl         Acl model instance
+     * @return array
      */
-    public function __construct($project_id, Task $task, Acl $acl)
+    public function getCompatibleEvents()
     {
-        parent::__construct($project_id);
-        $this->task = $task;
-        $this->acl = $acl;
+        return array(
+            Task::EVENT_CREATE,
+            Task::EVENT_MOVE_COLUMN,
+        );
     }
 
     /**
@@ -80,16 +62,23 @@ class TaskAssignCurrentUser extends Base
      */
     public function doAction(array $data)
     {
-        if ($data['column_id'] == $this->getParam('column_id')) {
+        $values = array(
+            'id' => $data['task_id'],
+            'owner_id' => $this->acl->getUserId(),
+        );
 
-            $this->task->update(array(
-                'id' => $data['task_id'],
-                'owner_id' => $this->acl->getUserId(),
-            ), false);
+        return $this->task->update($values, false);
+    }
 
-            return true;
-        }
-
-        return false;
+    /**
+     * Check if the event data meet the action condition
+     *
+     * @access public
+     * @param  array   $data   Event data dictionary
+     * @return bool
+     */
+    public function hasRequiredCondition(array $data)
+    {
+        return $data['column_id'] == $this->getParam('column_id');
     }
 }

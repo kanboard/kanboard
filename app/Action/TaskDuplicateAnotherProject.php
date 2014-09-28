@@ -13,24 +13,17 @@ use Model\Task;
 class TaskDuplicateAnotherProject extends Base
 {
     /**
-     * Task model
-     *
-     * @accesss private
-     * @var \Model\Task
-     */
-    private $task;
-
-    /**
-     * Constructor
+     * Get the list of compatible events
      *
      * @access public
-     * @param  integer  $project_id  Project id
-     * @param  \Model\Task     $task        Task model instance
+     * @return array
      */
-    public function __construct($project_id, Task $task)
+    public function getCompatibleEvents()
     {
-        parent::__construct($project_id);
-        $this->task = $task;
+        return array(
+            Task::EVENT_MOVE_COLUMN,
+            Task::EVENT_CLOSE,
+        );
     }
 
     /**
@@ -63,7 +56,7 @@ class TaskDuplicateAnotherProject extends Base
     }
 
     /**
-     * Execute the action
+     * Execute the action (duplicate the task to another project)
      *
      * @access public
      * @param  array   $data   Event data dictionary
@@ -71,14 +64,20 @@ class TaskDuplicateAnotherProject extends Base
      */
     public function doAction(array $data)
     {
-        if ($data['column_id'] == $this->getParam('column_id') && $data['project_id'] != $this->getParam('project_id')) {
+        $task = $this->task->getById($data['task_id']);
+        $this->task->duplicateToAnotherProject($this->getParam('project_id'), $task);
+        return true;
+    }
 
-            $task = $this->task->getById($data['task_id']);
-            $this->task->duplicateToAnotherProject($this->getParam('project_id'), $task);
-
-            return true;
-        }
-
-        return false;
+    /**
+     * Check if the event data meet the action condition
+     *
+     * @access public
+     * @param  array   $data   Event data dictionary
+     * @return bool
+     */
+    public function hasRequiredCondition(array $data)
+    {
+        return $data['column_id'] == $this->getParam('column_id') && $data['project_id'] != $this->getParam('project_id');
     }
 }

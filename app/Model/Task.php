@@ -690,6 +690,9 @@ class Task extends Base
         $values['position'] = $this->countByColumnId($project_id, $values['column_id']) + 1;
         $values['project_id'] = $project_id;
 
+        // The task will be open (close event binding)
+        $values['is_active'] = 1;
+
         if ($this->db->table(self::TABLE)->eq('id', $task['id'])->update($values)) {
             return $task['id'];
         }

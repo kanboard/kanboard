@@ -2,6 +2,7 @@
 
 namespace Action;
 
+use Model\GithubWebhook;
 use Model\Task;
 
 /**
@@ -13,24 +14,17 @@ use Model\Task;
 class TaskClose extends Base
 {
     /**
-     * Task model
-     *
-     * @accesss private
-     * @var \Model\Task
-     */
-    private $task;
-
-    /**
-     * Constructor
+     * Get the list of compatible events
      *
      * @access public
-     * @param  integer  $project_id  Project id
-     * @param  \Model\Task     $task        Task model instance
+     * @return array
      */
-    public function __construct($project_id, Task $task)
+    public function getCompatibleEvents()
     {
-        parent::__construct($project_id);
-        $this->task = $task;
+        return array(
+            Task::EVENT_MOVE_COLUMN,
+            GithubWebhook::EVENT_COMMIT,
+        );
     }
 
     /**
@@ -41,9 +35,12 @@ class TaskClose extends Base
      */
     public function getActionRequiredParameters()
     {
-        return array(
-            'column_id' => t('Column'),
-        );
+        switch ($this->event_name) {
+            case GithubWebhook::EVENT_COMMIT:
+                return array();
+            default:
+                return array('column_id' => t('Column'));
+        }
     }
 
     /**
@@ -54,14 +51,16 @@ class TaskClose extends Base
      */
     public function getEventRequiredParameters()
     {
-        return array(
-            'task_id',
-            'column_id',
-        );
+        switch ($this->event_name) {
+            case GithubWebhook::EVENT_COMMIT:
+                return array('task_id');
+            default:
+                return array('task_id', 'column_id');
+        }
     }
 
     /**
-     * Execute the action
+     * Execute the action (close the task)
      *
      * @access public
      * @param  array   $data   Event data dictionary
@@ -69,11 +68,23 @@ class TaskClose extends Base
      */
     public function doAction(array $data)
     {
-        if ($data['column_id'] == $this->getParam('column_id')) {
-            $this->task->close($data['task_id']);
-            return true;
-        }
+        return $this->task->close($data['task_id']);
+    }
 
-        return false;
+    /**
+     * Check if the event data meet the action condition
+     *
+     * @access public
+     * @param  array   $data   Event data dictionary
+     * @return bool
+     */
+    public function hasRequiredCondition(array $data)
+    {
+        switch ($this->event_name) {
+            case GithubWebhook::EVENT_COMMIT:
+                return true;
+            default:
+                return $data['column_id'] == $this->getParam('column_id');
+        }
     }
 }

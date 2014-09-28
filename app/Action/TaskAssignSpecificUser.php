@@ -13,24 +13,17 @@ use Model\Task;
 class TaskAssignSpecificUser extends Base
 {
     /**
-     * Task model
-     *
-     * @accesss private
-     * @var \Model\Task
-     */
-    private $task;
-
-    /**
-     * Constructor
+     * Get the list of compatible events
      *
      * @access public
-     * @param  integer  $project_id  Project id
-     * @param  \Model\Task     $task        Task model instance
+     * @return array
      */
-    public function __construct($project_id, Task $task)
+    public function getCompatibleEvents()
     {
-        parent::__construct($project_id);
-        $this->task = $task;
+        return array(
+            Task::EVENT_CREATE_UPDATE,
+            Task::EVENT_MOVE_COLUMN,
+        );
     }
 
     /**
@@ -62,7 +55,7 @@ class TaskAssignSpecificUser extends Base
     }
 
     /**
-     * Execute the action
+     * Execute the action (assign the given user)
      *
      * @access public
      * @param  array   $data   Event data dictionary
@@ -70,16 +63,23 @@ class TaskAssignSpecificUser extends Base
      */
     public function doAction(array $data)
     {
-        if ($data['column_id'] == $this->getParam('column_id')) {
+        $values = array(
+            'id' => $data['task_id'],
+            'owner_id' => $this->getParam('user_id'),
+        );
 
-            $this->task->update(array(
-                'id' => $data['task_id'],
-                'owner_id' => $this->getParam('user_id'),
-            ), false);
+        return $this->task->update($values, false);
+    }
 
-            return true;
-        }
-
-        return false;
+    /**
+     * Check if the event data meet the action condition
+     *
+     * @access public
+     * @param  array   $data   Event data dictionary
+     * @return bool
+     */
+    public function hasRequiredCondition(array $data)
+    {
+        return $data['column_id'] == $this->getParam('column_id');
     }
 }

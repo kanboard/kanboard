@@ -10,7 +10,7 @@ class ActionTaskAssignCurrentUser extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignCurrentUser(3, new Task($this->registry), new Acl($this->registry));
+        $action = new Action\TaskAssignCurrentUser($this->registry, 3, Task::EVENT_CREATE);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -25,7 +25,7 @@ class ActionTaskAssignCurrentUser extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskAssignCurrentUser(3, new Task($this->registry), new Acl($this->registry));
+        $action = new Action\TaskAssignCurrentUser($this->registry, 3, Task::EVENT_CREATE);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -39,7 +39,7 @@ class ActionTaskAssignCurrentUser extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignCurrentUser(1, new Task($this->registry), new Acl($this->registry));
+        $action = new Action\TaskAssignCurrentUser($this->registry, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $_SESSION = array(
             'user' => array('id' => 5)

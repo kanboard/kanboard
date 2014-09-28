@@ -1,7 +1,6 @@
 <div class="page-header">
     <h2><?= t('Automatic actions for the project "%s"', $project['name']) ?></h2>
 </div>
-<section>
 
 <h3><?= t('Define action parameters') ?></h3>
 <form method="post" action="?controller=action&amp;action=create&amp;project_id=<?= $project['id'] ?>" autocomplete="off">

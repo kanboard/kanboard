@@ -9,7 +9,7 @@ class ActionTaskAssignColorUser extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignColorUser(3, new Task($this->registry));
+        $action = new Action\TaskAssignColorUser($this->registry, 3, Task::EVENT_CREATE);
 
         $event = array(
             'project_id' => 2,
@@ -23,7 +23,7 @@ class ActionTaskAssignColorUser extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignColorUser(1, new Task($this->registry));
+        $action = new Action\TaskAssignColorUser($this->registry, 1, Task::EVENT_ASSIGNEE_CHANGE);
         $action->setParam('user_id', 1);
         $action->setParam('color_id', 'blue');
 
@@ -33,11 +33,10 @@ class ActionTaskAssignColorUser extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'color_id' => 'green')));
 
-        // We create an event to move the task to the 2nd column with a user id 5
+        // We change the assignee
         $event = array(
             'project_id' => 1,
             'task_id' => 1,
-            'column_id' => 2,
             'owner_id' => 5,
         );
 
@@ -50,11 +49,10 @@ class ActionTaskAssignColorUser extends Base
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals('green', $task['color_id']);
 
-        // We create an event to move the task to the 2nd column with a user id 1
+        // We change the assignee
         $event = array(
             'project_id' => 1,
             'task_id' => 1,
-            'column_id' => 2,
             'owner_id' => 1,
         );
 

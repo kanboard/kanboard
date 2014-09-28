@@ -37,7 +37,7 @@ class Action extends Base
     public function getAvailableActions()
     {
         return array(
-            'TaskClose' => t('Close the task'),
+            'TaskClose' => t('Close a task'),
             'TaskAssignSpecificUser' => t('Assign the task to a specific user'),
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
@@ -58,7 +58,6 @@ class Action extends Base
     {
         return array(
             Task::EVENT_MOVE_COLUMN => t('Move a task to another column'),
-            Task::EVENT_MOVE_POSITION => t('Move a task to another position in the same column'),
             Task::EVENT_UPDATE => t('Task modification'),
             Task::EVENT_CREATE => t('Task creation'),
             Task::EVENT_OPEN => t('Open a closed task'),
@@ -67,6 +66,28 @@ class Action extends Base
             Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
             GithubWebhook::EVENT_COMMIT => t('Github commit received'),
         );
+    }
+
+    /**
+     * Return the name and description of compatible actions
+     *
+     * @access public
+     * @param  string    $action_name   Action name
+     * @return array
+     */
+    public function getCompatibleEvents($action_name)
+    {
+        $action = $this->load($action_name, 0, '');
+        $compatible_events = $action->getCompatibleEvents();
+        $events = array();
+
+        foreach ($this->getAvailableEvents() as $event_name => $event_description) {
+            if (in_array($event_name, $compatible_events)) {
+                $events[$event_name] = $event_description;
+            }
+        }
+
+        return $events;
     }
 
     /**
@@ -116,7 +137,7 @@ class Action extends Base
 
         foreach ($this->getAll() as $action) {
 
-            $action = $this->load($action['action_name'], $action['project_id']);
+            $action = $this->load($action['action_name'], $action['project_id'], $action['event_name']);
             $params += $action->getActionRequiredParameters();
         }
 
@@ -202,7 +223,7 @@ class Action extends Base
     {
         foreach ($this->getAll() as $action) {
 
-            $listener = $this->load($action['action_name'], $action['project_id']);
+            $listener = $this->load($action['action_name'], $action['project_id'], $action['event_name']);
 
             foreach ($action['params'] as $param) {
                 $listener->setParam($param['name'], $param['value']);
@@ -216,21 +237,15 @@ class Action extends Base
      * Load an action
      *
      * @access public
-     * @param  string $name Action class name
-     * @param  integer $project_id Project id
-     * @throws \LogicException
-     * @return \Core\Listener       Action Instance
+     * @param  string           $name         Action class name
+     * @param  integer          $project_id   Project id
+     * @param  string           $event        Event name
+     * @return \Core\Listener                 Action instance
      */
-    public function load($name, $project_id)
+    public function load($name, $project_id, $event)
     {
         $className = '\Action\\'.$name;
-
-        if ($name === 'TaskAssignCurrentUser') {
-            return new $className($project_id, new Task($this->registry), new Acl($this->registry));
-        }
-        else {
-            return new $className($project_id, new Task($this->registry));
-        }
+        return new $className($this->registry, $project_id, $event);
     }
 
     /**

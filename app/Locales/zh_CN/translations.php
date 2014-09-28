@@ -503,4 +503,6 @@ return array(
     // '[%s][Position Change] %s (#%d)' => '',
     // '[%s][Assignee Change] %s (#%d)' => '',
     // 'New password for the user "%s"' => '',
+    // 'Choose an event' => '',
+    // 'Github commit received' => '',
 );

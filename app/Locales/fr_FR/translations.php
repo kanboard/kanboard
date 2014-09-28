@@ -503,4 +503,6 @@ return array(
     '[%s][Position Change] %s (#%d)' => '[%s][Changement de position] %s (#%d)',
     '[%s][Assignee Change] %s (#%d)' => '[%s][Changement d\'assigné] %s (#%d)',
     'New password for the user "%s"' => 'Nouveau mot de passe pour l\'utilisateur « %s »',
+    'Choose an event' => 'Choisir un événement',
+    'Github commit received' => '« Commit » reçu via Github',
 );
