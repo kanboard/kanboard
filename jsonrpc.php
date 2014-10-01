@@ -5,7 +5,7 @@ require __DIR__.'/app/common.php';
 use Core\Translator;
 use JsonRPC\Server;
 use Model\Project;
-use Model\projectPermission;
+use Model\ProjectPermission;
 use Model\Task;
 use Model\TaskValidator;
 use Model\User;
