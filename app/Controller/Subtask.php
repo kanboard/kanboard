@@ -39,6 +39,7 @@ class Subtask extends Base
         $this->response->html($this->taskLayout('subtask_create', array(
             'values' => array(
                 'task_id' => $task['id'],
+                'another_subtask' => $this->request->getIntegerParam('another_subtask', 0)
             ),
             'errors' => array(),
             'users_list' => $this->projectPermission->getUsersList($task['project_id']),
@@ -70,7 +71,7 @@ class Subtask extends Base
             }
 
             if (isset($values['another_subtask']) && $values['another_subtask'] == 1) {
-                $this->response->redirect('?controller=subtask&action=create&task_id='.$task['id']);
+                $this->response->redirect('?controller=subtask&action=create&task_id='.$task['id'].'&another_subtask=1');
             }
 
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#subtasks');

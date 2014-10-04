@@ -275,7 +275,6 @@ Kanboard.Project = (function() {
 
 // Initialization
 $(function() {
-//alert($(window).width());
     if ($("#board").length) {
         Kanboard.Board.Init();
     }
