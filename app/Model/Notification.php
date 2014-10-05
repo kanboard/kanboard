@@ -182,7 +182,7 @@ class Notification extends Base
     public function getMailContent($template, array $data)
     {
         $tpl = new Template;
-        return $tpl->load($template, $data);
+        return $tpl->load($template, $data + array('application_url' => $this->config->get('application_url')));
     }
 
     /**

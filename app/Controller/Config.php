@@ -11,55 +11,114 @@ namespace Controller;
 class Config extends Base
 {
     /**
-     * Display the settings page
+     * Common layout for config views
+     *
+     * @access private
+     * @param  string    $template   Template name
+     * @param  array     $params     Template parameters
+     * @return string
+     */
+    private function layout($template, array $params)
+    {
+        $params['values'] = $this->config->getAll();
+        $params['errors'] = array();
+        $params['menu'] = 'config';
+        $params['config_content_for_layout'] = $this->template->load($template, $params);
+
+        return $this->template->layout('config_layout', $params);
+    }
+
+    /**
+     * Common method between pages
+     *
+     * @access private
+     * @param  string     $redirect    Action to redirect after saving the form
+     */
+    private function common($redirect)
+    {
+        if ($this->request->isPost()) {
+
+            $values = $this->request->getValues();
+
+            if ($this->config->save($values)) {
+                $this->config->reload();
+                $this->session->flash(t('Settings saved successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to save your settings.'));
+            }
+
+            $this->response->redirect('?controller=config&action='.$redirect);
+        }
+    }
+
+    /**
+     * Display the about page
      *
      * @access public
      */
     public function index()
     {
-        $this->response->html($this->template->layout('config_index', array(
+        $this->response->html($this->layout('config_about', array(
             'db_size' => $this->config->getDatabaseSize(),
+            'title' => t('About'),
+        )));
+    }
+
+    /**
+     * Display the application settings page
+     *
+     * @access public
+     */
+    public function application()
+    {
+        $this->common('application');
+
+        $this->response->html($this->layout('config_application', array(
+            'title' => t('Application settings'),
             'languages' => $this->config->getLanguages(),
-            'values' => $this->config->getAll(),
-            'errors' => array(),
-            'menu' => 'config',
-            'title' => t('Settings'),
             'timezones' => $this->config->getTimezones(),
+        )));
+    }
+
+    /**
+     * Display the board settings page
+     *
+     * @access public
+     */
+    public function board()
+    {
+        $this->common('board');
+
+        $this->response->html($this->layout('config_board', array(
+            'title' => t('Board settings'),
             'default_columns' => implode(', ', $this->board->getDefaultColumns()),
         )));
     }
 
     /**
-     * Validate and save settings
+     * Display the webhook settings page
      *
      * @access public
      */
-    public function save()
+    public function webhook()
     {
-        $values = $this->request->getValues();
-        list($valid, $errors) = $this->config->validateModification($values);
+        $this->common('webhook');
 
-        if ($valid) {
+        $this->response->html($this->layout('config_webhook', array(
+            'title' => t('Webhook settings'),
+        )));
+    }
 
-            if ($this->config->save($values)) {
-                $this->config->reload();
-                $this->session->flash(t('Settings saved successfully.'));
-            } else {
-                $this->session->flashError(t('Unable to save your settings.'));
-            }
-
-            $this->response->redirect('?controller=config');
-        }
-
-        $this->response->html($this->template->layout('config_index', array(
-            'db_size' => $this->config->getDatabaseSize(),
-            'languages' => $this->config->getLanguages(),
-            'values' => $values,
-            'errors' => $errors,
-            'menu' => 'config',
-            'title' => t('Settings'),
-            'timezones' => $this->config->getTimezones(),
-            'default_columns' => implode(', ', $this->board->getDefaultColumns()),
+    /**
+     * Display the api settings page
+     *
+     * @access public
+     */
+    public function api()
+    {
+        $this->response->html($this->layout('config_api', array(
+            'title' => t('API'),
         )));
     }
 
@@ -89,15 +148,18 @@ class Config extends Base
     }
 
     /**
-     * Regenerate all application tokens
+     * Regenerate webhook token
      *
      * @access public
      */
-    public function tokens()
+    public function token()
     {
+        $type = $this->request->getStringParam('type');
+
         $this->checkCSRFParam();
-        $this->config->regenerateTokens();
-        $this->session->flash(t('All tokens have been regenerated.'));
-        $this->response->redirect('?controller=config');
+        $this->config->regenerateToken($type.'_token');
+
+        $this->session->flash(t('Token regenerated.'));
+        $this->response->redirect('?controller=config&action='.$type);
     }
 }

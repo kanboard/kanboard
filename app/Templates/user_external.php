@@ -5,7 +5,7 @@
 <?php if (GOOGLE_AUTH): ?>
     <h3><i class="fa fa-google"></i> <?= t('Google Account') ?></h3>
 
-    <p class="settings">
+    <p class="listing">
     <?php if (Helper\is_current_user($user['id'])): ?>
         <?php if (empty($user['google_id'])): ?>
             <a href="?controller=user&amp;action=google<?= Helper\param_csrf() ?>"><?= t('Link my Google Account') ?></a>
@@ -21,7 +21,7 @@
 <?php if (GITHUB_AUTH): ?>
     <h3><i class="fa fa-github"></i> <?= t('Github Account') ?></h3>
 
-    <p class="settings">
+    <p class="listing">
     <?php if (Helper\is_current_user($user['id'])): ?>
         <?php if (empty($user['github_id'])): ?>
             <a href="?controller=user&amp;action=gitHub<?= Helper\param_csrf() ?>"><?= t('Link my GitHub Account') ?></a>

@@ -5,7 +5,6 @@ namespace Controller;
 use Core\Tool;
 use Core\Registry;
 use Core\Security;
-use Core\Translator;
 use Model\LastLogin;
 
 /**
@@ -123,12 +122,8 @@ abstract class Base
             $this->response->hsts();
         }
 
-        // Load translations
-        $language = $this->config->get('language', 'en_US');
-        if ($language !== 'en_US') Translator::load($language);
-
-        // Set timezone
-        date_default_timezone_set($this->config->get('timezone', 'UTC'));
+        $this->config->setupTranslations();
+        $this->config->setupTimezone();
 
         // Authentication
         if (! $this->authentication->isAuthenticated($controller, $action)) {

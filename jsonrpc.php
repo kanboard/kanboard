@@ -2,7 +2,6 @@
 
 require __DIR__.'/app/common.php';
 
-use Core\Translator;
 use JsonRPC\Server;
 use Model\Project;
 use Model\ProjectPermission;
@@ -19,6 +18,9 @@ use Model\Webhook;
 use Model\Notification;
 
 $config = new Config($registry);
+$config->setupTranslations();
+$config->setupTimezone();
+
 $project = new Project($registry);
 $projectPermission = new ProjectPermission($registry);
 $task = new Task($registry);
@@ -37,13 +39,8 @@ $project->attachEvents();
 $webhook->attachEvents();
 $notification->attachEvents();
 
-// Load translations
-$language = $config->get('language', 'en_US');
-if ($language !== 'en_US') Translator::load($language);
-
 $server = new Server;
 $server->authentication(array('jsonrpc' => $config->get('api_token')));
-
 
 /**
  * Project procedures

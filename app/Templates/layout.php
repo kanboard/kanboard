@@ -6,8 +6,8 @@
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="robots" content="noindex,nofollow">
 
-        <?php if (isset($auto_refresh)): ?>
-            <meta http-equiv="refresh" content="<?= BOARD_PUBLIC_CHECK_INTERVAL ?>" >
+        <?php if (isset($board_public_refresh_interval)): ?>
+            <meta http-equiv="refresh" content="<?= $board_public_refresh_interval ?>" >
         <?php endif ?>
 
         <?php if (! isset($not_editable)): ?>

@@ -6,6 +6,7 @@ use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Core\Translator;
 use Core\Security;
+use Core\Session;
 
 /**
  * Config model
@@ -20,7 +21,7 @@ class Config extends Base
      *
      * @var string
      */
-    const TABLE = 'config';
+    const TABLE = 'settings';
 
     /**
      * Get available timezones
@@ -68,6 +69,11 @@ class Config extends Base
      */
     public function get($name, $default_value = '')
     {
+        if (! Session::isOpen()) {
+            $value = $this->db->table(self::TABLE)->eq('option', $name)->findOneColumn('value');
+            return $value ?: $default_value;
+        }
+
         if (! isset($_SESSION['config'][$name])) {
             $_SESSION['config'] = $this->getAll();
         }
@@ -87,7 +93,7 @@ class Config extends Base
      */
     public function getAll()
     {
-        return $this->db->table(self::TABLE)->findOne();
+        return $this->db->table(self::TABLE)->listing('option', 'value');
     }
 
     /**
@@ -99,8 +105,16 @@ class Config extends Base
      */
     public function save(array $values)
     {
-        $_SESSION['config'] = $values;
-        return $this->db->table(self::TABLE)->update($values);
+        foreach ($values as $option => $value) {
+
+            $result = $this->db->table(self::TABLE)->eq('option', $option)->update(array('value' => $value));
+
+            if (! $result) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -111,27 +125,31 @@ class Config extends Base
     public function reload()
     {
         $_SESSION['config'] = $this->getAll();
-        Translator::load($this->get('language', 'en_US'));
+        $this->setupTranslations();
     }
 
     /**
-     * Validate settings modification
+     * Load translations
      *
      * @access public
-     * @param  array    $values           Form values
-     * @return array    $valid, $errors   [0] = Success or not, [1] = List of errors
      */
-    public function validateModification(array $values)
+    public function setupTranslations()
     {
-        $v = new Validator($values, array(
-            new Validators\Required('language', t('The language is required')),
-            new Validators\Required('timezone', t('The timezone is required')),
-        ));
+        $language = $this->get('application_language', 'en_US');
 
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
+        if ($language !== 'en_US') {
+            Translator::load($language);
+        }
+    }
+
+    /**
+     * Set timezone
+     *
+     * @access public
+     */
+    public function setupTimezone()
+    {
+        date_default_timezone_set($this->get('application_timezone', 'UTC'));
     }
 
     /**
@@ -168,21 +186,15 @@ class Config extends Base
     }
 
     /**
-     * Regenerate all tokens (projects and webhooks)
+     * Regenerate a token
      *
      * @access public
+     * @param  string   $option   Parameter name
      */
-    public function regenerateTokens()
+    public function regenerateToken($option)
     {
-        $this->db->table(self::TABLE)->update(array(
-            'webhooks_token' => Security::generateToken(),
-            'api_token' => Security::generateToken(),
-        ));
-
-        $projects = $this->db->table(Project::TABLE)->findAllByColumn('id');
-
-        foreach ($projects as $project_id) {
-            $this->db->table(Project::TABLE)->eq('id', $project_id)->update(array('token' => Security::generateToken()));
-        }
+        return $this->db->table(self::TABLE)
+                 ->eq('option', $option)
+                 ->update(array('value' => Security::generateToken()));
     }
 }

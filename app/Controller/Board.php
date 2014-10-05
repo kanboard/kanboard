@@ -177,8 +177,8 @@ class Board extends Base
             'categories' => $this->category->getList($project['id'], false),
             'title' => $project['name'],
             'no_layout' => true,
-            'auto_refresh' => true,
             'not_editable' => true,
+            'board_public_refresh_interval' => $this->config->get('board_public_refresh_interval'),
         )));
     }
 
@@ -238,6 +238,8 @@ class Board extends Base
             'menu' => 'boards',
             'title' => $projects[$project['id']],
             'board_selector' => $board_selector,
+            'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
+            'board_highlight_period' => $this->config->get('board_highlight_period'),
         )));
     }
 
@@ -407,6 +409,8 @@ class Board extends Base
                         'current_project_id' => $project_id,
                         'board' => $this->board->get($project_id),
                         'categories' => $this->category->getList($project_id, false),
+                        'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
+                        'board_highlight_period' => $this->config->get('board_highlight_period'),
                     )),
                     201
                 );
@@ -443,6 +447,8 @@ class Board extends Base
                         'current_project_id' => $project_id,
                         'board' => $this->board->get($project_id),
                         'categories' => $this->category->getList($project_id, false),
+                        'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
+                        'board_highlight_period' => $this->config->get('board_highlight_period'),
                     ))
                 );
             }

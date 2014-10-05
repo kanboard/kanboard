@@ -73,7 +73,7 @@ class User extends Base
     }
 
     /**
-     * Common layout for project views
+     * Common layout for user views
      *
      * @access private
      * @param  string    $template   Template name

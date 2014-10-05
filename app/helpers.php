@@ -556,16 +556,37 @@ function form_numeric($name, $values = array(), array $errors = array(), array $
  * @param  string   $controller  Controller name
  * @param  string   $action      Action name
  * @param  array    $params      Url parameters
+ * @param  boolean  $csrf        Add a CSRF token
  * @param  string   $class       CSS class attribute
  * @return string
  */
-function a($label, $controller, $action, array $params = array(), $css = '')
+function a($label, $controller, $action, array $params = array(), $csrf = false, $class = '')
 {
-    $html = '<a href="?controller='.$controller.'&amp;action='.$action;
+    return '<a href="'.u($controller, $action, $params, $csrf).'" class="'.$class.'"/>'.$label.'</a>';
+}
+
+/**
+ * URL
+ *
+ * a('link', 'task', 'show', array('task_id' => $task_id))
+ *
+ * @param  string   $controller  Controller name
+ * @param  string   $action      Action name
+ * @param  array    $params      Url parameters
+ * @param  boolean  $csrf        Add a CSRF token
+ * @return string
+ */
+function u($controller, $action, array $params = array(), $csrf = false)
+{
+    $html = '?controller='.$controller.'&amp;action='.$action;
+
+    if ($csrf) {
+        $params['csrf_token'] = Security::getCSRFToken();
+    }
 
     foreach ($params as $key => $value) {
         $html .= '&amp;'.$key.'='.$value;
     }
 
-    return '" class="'.$class.'"/>'.$label.'</a>';
+    return $html;
 }

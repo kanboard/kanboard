@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Summary') ?></h2>
 </div>
-<ul class="settings">
+<ul class="listing">
     <li><?= t('Username:') ?> <strong><?= Helper\escape($user['username']) ?></strong></li>
     <li><?= t('Name:') ?> <strong><?= Helper\escape($user['name']) ?></strong></li>
     <li><?= t('Email:') ?> <strong><?= Helper\escape($user['email']) ?></strong></li>

@@ -4,4 +4,4 @@
 
 <?= Helper\markdown($comment['comment']) ?>
 
-<?= Helper\template('notification_footer', array('task' => $task)) ?>
+<?= Helper\template('notification_footer', array('task' => $task, 'application_url' => $application_url)) ?>

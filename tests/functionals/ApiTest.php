@@ -30,7 +30,7 @@ class Api extends PHPUnit_Framework_TestCase
 
         setup_db();
 
-        $pdo->exec("UPDATE config SET api_token='".API_KEY."'");
+        $pdo->exec("UPDATE settings SET value='".API_KEY."' WHERE option='api_token'");
         $pdo = null;
     }
 

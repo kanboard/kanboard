@@ -287,7 +287,7 @@ class Project extends Base
         }
 
         $project_id = $this->db->getConnection()->getLastId();
-        $column_names = explode(',', $this->config->get('default_columns', implode(',', $this->board->getDefaultColumns())));
+        $column_names = explode(',', $this->config->get('board_columns', implode(',', $this->board->getDefaultColumns())));
         $columns = array();
 
         foreach ($column_names as $column_name) {

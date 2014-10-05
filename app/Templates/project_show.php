@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Summary') ?></h2>
 </div>
-<ul class="settings">
+<ul class="listing">
     <li><strong><?= $project['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
 
     <?php if ($project['is_public']): ?>

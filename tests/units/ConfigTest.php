@@ -10,14 +10,14 @@ class ConfigTest extends Base
     {
         $c = new Config($this->registry);
 
-        $this->assertEquals('en_US', $c->get('language'));
-        $this->assertEquals('UTC', $c->get('timezone'));
+        $this->assertEquals('en_US', $c->get('application_language'));
+        $this->assertEquals('UTC', $c->get('application_timezone'));
 
-        $this->assertEmpty($c->get('webhooks_url_task_modification'));
-        $this->assertEmpty($c->get('webhooks_url_task_creation'));
-        $this->assertEmpty($c->get('default_columns'));
+        $this->assertEmpty($c->get('webhook_url_task_modification'));
+        $this->assertEmpty($c->get('webhook_url_task_creation'));
+        $this->assertEmpty($c->get('board_columns'));
 
-        $this->assertNotEmpty($c->get('webhooks_token'));
+        $this->assertNotEmpty($c->get('webhook_token'));
         $this->assertNotEmpty($c->get('api_token'));
     }
 
@@ -25,8 +25,8 @@ class ConfigTest extends Base
     {
         $c = new Config($this->registry);
 
-        $this->assertEquals('', $c->get('default_columns'));
-        $this->assertEquals('test', $c->get('default_columns', 'test'));
-        $this->assertEquals(0, $c->get('default_columns', 0));
+        $this->assertEquals('', $c->get('board_columns'));
+        $this->assertEquals('test', $c->get('board_columns', 'test'));
+        $this->assertEquals(0, $c->get('board_columns', 0));
     }
 }

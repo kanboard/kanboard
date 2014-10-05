@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 $script = <<SCRIPT
 # install packages
 apt-get update
-apt-get install -y apache2 php5 php5-sqlite php5-ldap php5-xdebug
+apt-get install -y apache2 php5 php5-sqlite php5-ldap php5-xdebug php5-curl php5-mysql php5-pgsql
 service apache2 restart
 rm -f /var/www/html/index.html
 date > /etc/vagrant_provisioned_at

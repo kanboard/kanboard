@@ -4,7 +4,7 @@
 
 <?php if ($project['is_public']): ?>
 
-    <div class="settings">
+    <div class="listing">
         <ul class="no-bullet">
             <li><strong><i class="fa fa-share-alt"></i> <a href="?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a></strong></li>
             <li><strong><i class="fa fa-rss-square"></i> <a href="?controller=project&amp;action=feed&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('RSS feed') ?></a></strong></li>

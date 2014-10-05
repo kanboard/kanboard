@@ -1,8 +1,5 @@
 <?php
 
-// Your Kanboard base URL, example: http://demo.kanboard.net/ (used by email notifications or CLI scripts)
-define('KANBOARD_URL', '');
-
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.net');
 
@@ -18,15 +15,6 @@ define('MAIL_SMTP_ENCRYPTION', null); // Valid values are "null", "ssl" or "tls"
 
 // Sendmail command to use when the transport is "sendmail"
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
-
-// Auto-refresh frequency in seconds for the public board view (60 seconds by default)
-define('BOARD_PUBLIC_CHECK_INTERVAL', 60);
-
-// Board refresh frequency in seconds (the value 0 disable this feature, 10 seconds by default)
-define('BOARD_CHECK_INTERVAL', 10);
-
-// Period (in second) to consider a task was modified recently (0 to disable, 2 days by default)
-define('RECENT_TASK_PERIOD', 48*60*60);
 
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');

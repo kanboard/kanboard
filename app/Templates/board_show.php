@@ -1,4 +1,4 @@
-<table id="board" data-project-id="<?= $current_project_id ?>" data-time="<?= time() ?>" data-check-interval="<?= BOARD_CHECK_INTERVAL ?>" data-csrf-token=<?= \Core\Security::getCSRFToken() ?>>
+<table id="board" data-project-id="<?= $current_project_id ?>" data-time="<?= time() ?>" data-check-interval="<?= $board_private_refresh_interval ?>" data-csrf-token=<?= \Core\Security::getCSRFToken() ?>>
 <tr>
     <?php $column_with = round(100 / count($board), 2); ?>
     <?php foreach ($board as $column): ?>
@@ -32,7 +32,7 @@
         data-task-limit="<?= $column['task_limit'] ?>"
         >
         <?php foreach ($column['tasks'] as $task): ?>
-        <div class="task-board draggable-item task-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - RECENT_TASK_PERIOD ? 'task-board-recent' : '' ?>"
+        <div class="task-board draggable-item task-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>"
              data-task-id="<?= $task['id'] ?>"
              data-owner-id="<?= $task['owner_id'] ?>"
              data-category-id="<?= $task['category_id'] ?>"

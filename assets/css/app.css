@@ -724,18 +724,21 @@ a.task-board-nobody {
 }
 
 /* task view */
+.config-show,
 .user-show,
 .project-show,
 .task-show {
     position: relative;
 }
 
+.config-show-main,
 .user-show-main,
 .project-show-main,
 .task-show-main {
     margin-left: 330px;
 }
 
+.config-show-sidebar,
 .user-show-sidebar,
 .project-show-sidebar,
 .task-show-sidebar {
@@ -750,6 +753,7 @@ a.task-board-nobody {
     border-radius: 5px;
 }
 
+.config-show-sidebar li,
 .user-show-sidebar li,
 .project-show-sidebar li,
 .task-show-sidebar li {
@@ -1004,9 +1008,8 @@ tr td.task-orange,
     border-color: rgb(255, 172, 98);
 }
 
-/* config page */
-.listing,
-.settings {
+/* listing block */
+.listing {
     border-radius: 4px;
     padding: 8px 35px 8px 14px;
     margin-bottom: 20px;
@@ -1015,8 +1018,7 @@ tr td.task-orange,
     background-color: #f0f0f0;
 }
 
-.listing li,
-.settings li {
+.listing li {
     list-style-type: square;
     margin-left: 20px;
     margin-bottom: 3px;

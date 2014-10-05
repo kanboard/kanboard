@@ -26,7 +26,13 @@
     <?php if (empty($board)): ?>
         <p class="alert alert-error"><?= t('There is no column in your project!') ?></p>
     <?php else: ?>
-        <?= Helper\template('board_show', array('current_project_id' => $current_project_id, 'board' => $board, 'categories' => $categories)) ?>
+        <?= Helper\template('board_show', array(
+                'current_project_id' => $current_project_id,
+                'board' => $board,
+                'categories' => $categories,
+                'board_private_refresh_interval' => $board_private_refresh_interval,
+                'board_highlight_period' => $board_highlight_period,
+        )) ?>
     <?php endif ?>
 
 </section>

@@ -17,7 +17,7 @@ class Webhook extends Base
      */
     public function task()
     {
-        if ($this->config->get('webhooks_token') !== $this->request->getStringParam('token')) {
+        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
             $this->response->text('Not Authorized', 401);
         }
 
@@ -49,7 +49,7 @@ class Webhook extends Base
      */
     public function github()
     {
-        if ($this->config->get('webhooks_token') !== $this->request->getStringParam('token')) {
+        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
             $this->response->text('Not Authorized', 401);
         }
 

@@ -27,8 +27,10 @@ class BoardTest extends Base
         $this->assertEquals('Done', $columns[4]);
 
         // Custom columns: spaces should be trimed and no empty columns
+        $input = '   column #1  , column #2, ';
 
-        $this->assertTrue($c->save(array('default_columns' => '   column #1  , column #2, ')));
+        $this->assertTrue($c->save(array('board_columns' => $input)));
+        $this->assertEquals($input, $c->get('board_columns'));
 
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
         $columns = $b->getColumnsList(2);

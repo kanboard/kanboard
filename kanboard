@@ -5,20 +5,14 @@ require __DIR__.'/app/common.php';
 
 use Core\Cli;
 use Core\Tool;
-use Core\Translator;
 use Model\Config;
 use Model\Task;
 use Model\TaskExport;
 use Model\Notification;
 
 $config = new Config($registry);
-
-// Load translations
-$language = $config->get('language', 'en_US');
-if ($language !== 'en_US') Translator::load($language);
-
-// Set timezone
-date_default_timezone_set($config->get('timezone', 'UTC'));
+$config->setupTranslations();
+$config->setupTimezone();
 
 // Setup CLI
 $cli = new Cli;
