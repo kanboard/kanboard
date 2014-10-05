@@ -8,7 +8,7 @@ use Model\User;
 
 class ProjectPermissionTest extends Base
 {
-    public function testAllowEverybody()
+    public function testDisallowEverybody()
     {
         // We create a regular user
         $user = new User($this->registry);
@@ -20,8 +20,8 @@ class ProjectPermissionTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
         $this->assertEmpty($pp->getAllowedUsers(1)); // Nobody is specified for the given project
-        $this->assertTrue($pp->isUserAllowed(1, 1)); // Everybody should be allowed
-        $this->assertTrue($pp->isUserAllowed(1, 2)); // Everybody should be allowed
+        $this->assertTrue($pp->isUserAllowed(1, 1)); // Admin should be allowed
+        $this->assertFalse($pp->isUserAllowed(1, 2)); // Regular user should be denied
     }
 
     public function testAllowUser()
@@ -37,6 +37,7 @@ class ProjectPermissionTest extends Base
 
         // We allow the admin user
         $this->assertTrue($pp->allowUser(1, 1));
+        $this->assertTrue($pp->allowUser(1, 2));
 
         // Non-existant project
         $this->assertFalse($pp->allowUser(50, 1));
@@ -44,12 +45,10 @@ class ProjectPermissionTest extends Base
         // Non-existant user
         $this->assertFalse($pp->allowUser(1, 50));
 
-        // Our admin user should be allowed
-        $this->assertEquals(array('1' => 'admin'), $pp->getAllowedUsers(1));
+        // Both users should be allowed
+        $this->assertEquals(array('1' => 'admin', '2' => 'unittest'), $pp->getAllowedUsers(1));
         $this->assertTrue($pp->isUserAllowed(1, 1));
-
-        // Our regular user should be forbidden
-        $this->assertFalse($pp->isUserAllowed(1, 2));
+        $this->assertTrue($pp->isUserAllowed(1, 2));
     }
 
     public function testRevokeUser()
@@ -69,9 +68,9 @@ class ProjectPermissionTest extends Base
         // We should have nobody in the users list
         $this->assertEmpty($pp->getAllowedUsers(1));
 
-        // Our admin user and our regular user should be allowed
+        // Only admin is allowed
         $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
+        $this->assertFalse($pp->isUserAllowed(1, 2));
 
         // We allow only the regular user
         $this->assertTrue($pp->allowUser(1, 2));
@@ -103,9 +102,9 @@ class ProjectPermissionTest extends Base
         $this->assertTrue($pp->revokeUser(1, 1));
         $this->assertEmpty($pp->getAllowedUsers(1));
 
-        // Everybody should be allowed again
+        // Only admin should be allowed again
         $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
+        $this->assertFalse($pp->isUserAllowed(1, 2));
     }
 
     public function testUsersList()
@@ -119,9 +118,9 @@ class ProjectPermissionTest extends Base
         // We create project
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
-        // No restriction, we should have everybody
+        // No restriction, we should have no body
         $this->assertEquals(
-            array('Unassigned', 'admin', 'unittest'),
+            array('Unassigned'),
             $pp->getUsersList(1)
         );
 
@@ -153,7 +152,7 @@ class ProjectPermissionTest extends Base
         $this->assertTrue($pp->revokeUser(1, 1));
 
         $this->assertEquals(
-            array(0 => 'Unassigned', 1 => 'admin', 2 => 'unittest'),
+            array(0 => 'Unassigned'),
             $pp->getUsersList(1)
         );
     }

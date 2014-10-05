@@ -23,7 +23,7 @@ Features
 - Boards customization, rename/add/remove columns
 - Tasks with different colors, categories, sub-tasks, attachments, comments and Markdown support for the description
 - Automatic actions based on events
-- Users management with a basic privileges separation (administrator or regular user)
+- User management with a basic privileges separation (administrator or regular user)
 - Email notifications
 - External authentication: Google, GitHub, LDAP/ActiveDirectory and Reverse-Proxy
 - Webhooks to create tasks from an external software

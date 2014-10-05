@@ -23,7 +23,7 @@
                 <a href="?controller=category&amp;action=index&amp;project_id=<?= $project['id'] ?>"><?= t('Categories management') ?></a>
             </li>
             <li>
-                <a href="?controller=project&amp;action=users&amp;project_id=<?= $project['id'] ?>"><?= t('Users management') ?></a>
+                <a href="?controller=project&amp;action=users&amp;project_id=<?= $project['id'] ?>"><?= t('User management') ?></a>
             </li>
             <li>
                 <a href="?controller=action&amp;action=index&amp;project_id=<?= $project['id'] ?>"><?= t('Automatic actions') ?></a>

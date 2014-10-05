@@ -33,10 +33,6 @@ class ProjectPermission extends Base
     {
         $allowed_users = $this->getAllowedUsers($project_id);
 
-        if (empty($allowed_users)) {
-            $allowed_users = $this->user->getList();
-        }
-
         if ($prepend_unassigned) {
             $allowed_users = array(t('Unassigned')) + $allowed_users;
         }
@@ -146,22 +142,10 @@ class ProjectPermission extends Base
      */
     public function isUserAllowed($project_id, $user_id)
     {
-        // If there is nobody specified, everybody have access to the project
-        $nb_users = $this->db
-                    ->table(self::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->count();
-
-        if ($nb_users < 1) return true;
-
-        // Check if user has admin rights
-        $nb_users = $this->db
-                    ->table(User::TABLE)
-                    ->eq('id', $user_id)
-                    ->eq('is_admin', 1)
-                    ->count();
-
-        if ($nb_users > 0) return true;
+        // Check if the user has admin rights
+        if ($this->user->isAdmin($user_id)) {
+            return true;
+        }
 
         // Otherwise, allow only specific users
         return (bool) $this->db

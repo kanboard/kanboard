@@ -3,7 +3,7 @@
 </div>
 
 <?php if (empty($users['allowed'])): ?>
-    <div class="alert alert-info"><?= t('Everybody have access to this project.') ?></div>
+    <div class="alert alert-info"><?= t('Nobody have access to this project.') ?></div>
 <?php else: ?>
 <div class="listing">
     <p><?= t('Only those users have access to this project:') ?></p>

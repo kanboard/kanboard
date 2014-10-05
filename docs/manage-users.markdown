@@ -1,5 +1,5 @@
-Users management
-================
+User management
+===============
 
 Type of users
 -------------

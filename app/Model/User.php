@@ -29,6 +29,24 @@ class User extends Base
     const EVERYBODY_ID = -1;
 
     /**
+     * Return true is the given user id is administrator
+     *
+     * @access public
+     * @param  integer   $user_id   User id
+     * @return boolean
+     */
+    public function isAdmin($user_id)
+    {
+        $result = $this->db
+                    ->table(User::TABLE)
+                    ->eq('id', $user_id)
+                    ->eq('is_admin', 1)
+                    ->count();
+
+        return $result > 0;
+    }
+
+    /**
      * Get the default project from the session
      *
      * @access public
