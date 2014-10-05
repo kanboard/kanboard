@@ -209,8 +209,6 @@ return array(
     'The description is required' => 'La descripción es obligatoria',
     'Edit this task' => 'Editar esta tarea',
     'Due Date' => 'Fecha límite',
-    'm/d/Y' => 'd/m/Y',
-    'month/day/year' => 'día/mes/año',
     'Invalid date' => 'Fecha no válida',
     'Must be done before %B %e, %Y' => 'Debe de estar hecho antes del %d/%m/%Y',
     '%B %e, %Y' => '%d/%m/%Y',
@@ -534,4 +532,6 @@ return array(
     // 'Application URL' => '',
     // 'Example: http://example.kanboard.net/ (used by email notifications)' => '',
     // 'Token regenerated.' => '',
+    // 'Date format' => '',
+    // 'ISO format is always accepted, example: "%s" and "%s"' => '',
 );

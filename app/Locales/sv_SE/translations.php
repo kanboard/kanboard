@@ -209,8 +209,6 @@ return array(
     'The description is required' => 'En beskrivning måste lämnas',
     'Edit this task' => 'Ändra denna uppgift',
     'Due Date' => 'Måldatum',
-    'm/d/Y' => 'd/m/Y',
-    'month/day/year' => 'dag/månad/år',
     'Invalid date' => 'Ej tillåtet datum',
     'Must be done before %B %e, %Y' => 'Måste vara klart innan %B %e, %Y',
     '%B %e, %Y' => '%d %B %Y',
@@ -534,4 +532,6 @@ return array(
     // 'Application URL' => '',
     // 'Example: http://example.kanboard.net/ (used by email notifications)' => '',
     // 'Token regenerated.' => '',
+    // 'Date format' => '',
+    // 'ISO format is always accepted, example: "%s" and "%s"' => '',
 );

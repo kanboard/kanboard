@@ -5,7 +5,13 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 29;
+const VERSION = 30;
+
+function version_30($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('application_date_format', 'm/d/Y'));
+}
 
 function version_29($pdo)
 {

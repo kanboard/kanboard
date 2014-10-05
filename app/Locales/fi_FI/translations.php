@@ -209,8 +209,6 @@ return array(
     'The description is required' => 'Kuvaus vaaditaan',
     'Edit this task' => 'Muokkaa tehtävää',
     'Due Date' => 'Deadline',
-    'm/d/Y' => 'd.m.Y',
-    'month/day/year' => 'päivä.kuukausi.vuosi',
     'Invalid date' => 'Virheellinen päiväys',
     'Must be done before %B %e, %Y' => 'Täytyy suorittaa ennen %d.%m.%Y',
     '%B %e, %Y' => '%d.%m.%Y',
@@ -534,4 +532,6 @@ return array(
     // 'Application URL' => '',
     // 'Example: http://example.kanboard.net/ (used by email notifications)' => '',
     // 'Token regenerated.' => '',
+    // 'Date format' => '',
+    // 'ISO format is always accepted, example: "%s" and "%s"' => '',
 );

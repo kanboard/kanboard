@@ -78,6 +78,7 @@ class Config extends Base
             'title' => t('Application settings'),
             'languages' => $this->config->getLanguages(),
             'timezones' => $this->config->getTimezones(),
+            'date_formats' => $this->dateParser->getAvailableFormats(),
         )));
     }
 

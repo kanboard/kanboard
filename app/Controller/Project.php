@@ -86,6 +86,8 @@ class Project extends Base
                 'to' => $to,
             ),
             'errors' => array(),
+            'date_format' => $this->config->get('application_date_format'),
+            'date_formats' => $this->dateParser->getAvailableFormats(),
             'menu' => 'projects',
             'project' => $project,
             'title' => t('Tasks Export')

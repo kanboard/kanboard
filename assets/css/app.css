@@ -187,17 +187,17 @@ select {
 }
 
 ::-webkit-input-placeholder {
-    color: #bbb;
+    color: #ddd;
     padding-top: 2px;
 }
 
 ::-ms-input-placeholder {
-    color: #bbb;
+    color: #ddd;
     padding-top: 2px;
 }
 
 ::-moz-placeholder {
-    color: #bbb;
+    color: #ddd;
     padding-top: 2px;
 }
 

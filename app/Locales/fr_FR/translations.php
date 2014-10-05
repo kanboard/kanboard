@@ -209,11 +209,9 @@ return array(
     'The description is required' => 'La description est obligatoire',
     'Edit this task' => 'Modifier cette tâche',
     'Due Date' => 'Date d\'échéance',
-    'm/d/Y' => 'd/m/Y',                    // Date format parsed with php
-    'month/day/year' => 'jour/mois/année', // Help shown to the user
     'Invalid date' => 'Date invalide',
     'Must be done before %B %e, %Y' => 'Doit être fait avant le %d/%m/%Y',
-    '%B %e, %Y' => '%d/%m/%Y',
+    '%B %e, %Y' => '%d %B %Y',
     'Automatic actions' => 'Actions automatisées',
     'Your automatic action have been created successfully.' => 'Votre action automatisée a été ajouté avec succès.',
     'Unable to create your automatic action.' => 'Impossible de créer votre action automatisée.',
@@ -534,4 +532,6 @@ return array(
     'Application URL' => 'URL de l\'application',
     'Example: http://example.kanboard.net/ (used by email notifications)' => 'Exemple : http://exemple.kanboard.net/ (utilisé pour les notifications)',
     'Token regenerated.' => 'Jeton de sécurité regénéré.',
+    'Date format' => 'Format de date',
+    'ISO format is always accepted, example: "%s" and "%s"' => 'Le format ISO est toujours accepté, exemple : « %s » et « %s »',
 );

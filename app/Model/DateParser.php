@@ -57,7 +57,7 @@ class DateParser extends Base
     }
 
     /**
-     * Return the list of supported date formats
+     * Return the list of supported date formats (for the parser)
      *
      * @access public
      * @return array
@@ -65,9 +65,24 @@ class DateParser extends Base
     public function getDateFormats()
     {
         return array(
-            t('m/d/Y'),
+            $this->config->get('application_date_format', 'm/d/Y'),
             'Y-m-d',
             'Y_m_d',
+        );
+    }
+
+    /**
+     * Return the list of available date formats (for the config page)
+     *
+     * @access public
+     * @return array
+     */
+    public function getAvailableFormats()
+    {
+        return array(
+            'm/d/Y' => date('m/d/Y'),
+            'd/m/Y' => date('d/m/Y'),
+            'Y/m/d' => date('Y/m/d'),
         );
     }
 

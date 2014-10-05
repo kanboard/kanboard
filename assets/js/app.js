@@ -64,7 +64,8 @@ var Kanboard = (function() {
             $(".form-date").datepicker({
                 showOtherMonths: true,
                 selectOtherMonths: true,
-                dateFormat: 'yy-mm-dd'
+                dateFormat: 'yy-mm-dd',
+                constrainInput: false
             });
         }
     };

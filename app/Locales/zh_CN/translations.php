@@ -209,8 +209,6 @@ return array(
     'The description is required' => '必须得有描述',
     'Edit this task' => '编辑该任务',
     'Due Date' => '到期',
-    'm/d/Y' => 'Y/m/d',
-    'month/day/year' => '年/月/日',
     'Invalid date' => '无效日期',
     'Must be done before %B %e, %Y' => '必须在%Y年%m月%d日前完成',
     '%B %e, %Y' => '%Y/%m/%d',
@@ -534,4 +532,6 @@ return array(
     // 'Application URL' => '',
     // 'Example: http://example.kanboard.net/ (used by email notifications)' => '',
     // 'Token regenerated.' => '',
+    // 'Date format' => '',
+    // 'ISO format is always accepted, example: "%s" and "%s"' => '',
 );

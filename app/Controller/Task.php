@@ -92,6 +92,8 @@ class Task extends Base
             'users_list' => $this->projectPermission->getUsersList($project_id),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project_id),
+            'date_format' => $this->config->get('application_date_format'),
+            'date_formats' => $this->dateParser->getAvailableFormats(),
             'menu' => 'tasks',
             'title' => t('New task')
         )));
@@ -138,6 +140,8 @@ class Task extends Base
             'users_list' => $this->projectPermission->getUsersList($values['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($values['project_id']),
+            'date_format' => $this->config->get('application_date_format'),
+            'date_formats' => $this->dateParser->getAvailableFormats(),
             'menu' => 'tasks',
             'title' => t('New task')
         )));
@@ -153,7 +157,7 @@ class Task extends Base
         $task = $this->getTask();
 
         if (! empty($task['date_due'])) {
-            $task['date_due'] = date(t('m/d/Y'), $task['date_due']);
+            $task['date_due'] = date($this->config->get('application_date_format'), $task['date_due']);
         }
         else {
             $task['date_due'] = '';
@@ -169,6 +173,8 @@ class Task extends Base
             'users_list' => $this->projectPermission->getUsersList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($task['project_id']),
+            'date_format' => $this->config->get('application_date_format'),
+            'date_formats' => $this->dateParser->getAvailableFormats(),
             'ajax' => $ajax,
             'menu' => 'tasks',
             'title' => t('Edit a task')
@@ -219,6 +225,8 @@ class Task extends Base
             'users_list' => $this->projectPermission->getUsersList($values['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($values['project_id']),
+            'date_format' => $this->config->get('application_date_format'),
+            'date_formats' => $this->dateParser->getAvailableFormats(),
             'menu' => 'tasks',
             'title' => t('Edit a task'),
             'ajax' => $this->request->isAjax(),

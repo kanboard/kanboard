@@ -39,7 +39,7 @@
             <?= Helper\form_number('score', $values, $errors) ?><br/>
 
             <?= Helper\form_label(t('Due Date'), 'date_due') ?>
-            <?= Helper\form_text('date_due', $values, $errors, array('placeholder="'.t('month/day/year').'"'), 'form-date') ?><br/>
+            <?= Helper\form_text('date_due', $values, $errors, array('placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?><br/>
             <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
         </div>
 

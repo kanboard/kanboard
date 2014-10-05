@@ -11,10 +11,10 @@
     <?= Helper\form_hidden('project_id', $values) ?>
 
     <?= Helper\form_label(t('Start Date'), 'from') ?>
-    <?= Helper\form_text('from', $values, $errors, array('required', 'placeholder="'.t('month/day/year').'"'), 'form-date') ?><br/>
+    <?= Helper\form_text('from', $values, $errors, array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?><br/>
 
     <?= Helper\form_label(t('End Date'), 'to') ?>
-    <?= Helper\form_text('to', $values, $errors, array('required', 'placeholder="'.t('month/day/year').'"'), 'form-date') ?>
+    <?= Helper\form_text('to', $values, $errors, array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?>
 
     <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
 
