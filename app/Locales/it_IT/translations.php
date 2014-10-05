@@ -420,7 +420,7 @@ return array(
     'I want to receive notifications only for those projects:' => 'Vorrei ricevere le notifiche solo da questi progetti:',
     'view the task on Kanboard' => 'vedi il compito su Kanboard',
     // 'Public access' => '',
-    // 'Categories management' => '',
+    // 'Category management' => '',
     // 'User management' => '',
     // 'Active tasks' => '',
     // 'Disable public access' => '',
@@ -534,4 +534,6 @@ return array(
     // 'Token regenerated.' => '',
     // 'Date format' => '',
     // 'ISO format is always accepted, example: "%s" and "%s"' => '',
+    // 'New private project' => '',
+    // 'This project is private' => '',
 );

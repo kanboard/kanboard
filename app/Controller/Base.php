@@ -209,11 +209,8 @@ abstract class Base
      */
     protected function checkProjectPermissions($project_id)
     {
-        if ($this->acl->isRegularUser()) {
-
-            if ($project_id > 0 && ! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
-                $this->forbidden();
-            }
+        if ($this->acl->isRegularUser() && ! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
+            $this->forbidden();
         }
     }
 
@@ -260,6 +257,7 @@ abstract class Base
     {
         $content = $this->template->load($template, $params);
         $params['project_content_for_layout'] = $content;
+        $params['menu'] = 'projects';
 
         return $this->template->layout('project_layout', $params);
     }
@@ -301,6 +299,27 @@ abstract class Base
         }
 
         $this->checkProjectPermissions($project['id']);
+
+        return $project;
+    }
+
+    /**
+     * Common method to get a project with administration rights
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getProjectManagement()
+    {
+        $project = $this->project->getById($this->request->getIntegerParam('project_id'));
+
+        if (! $project) {
+            $this->notfound();
+        }
+
+        if ($this->acl->isRegularUser() && ! $this->projectPermission->adminAllowed($project['id'], $this->acl->getUserId())) {
+            $this->forbidden();
+        }
 
         return $project;
     }

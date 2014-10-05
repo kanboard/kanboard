@@ -11,7 +11,9 @@
     <?php foreach ($users['allowed'] as $user_id => $username): ?>
         <li>
             <strong><?= Helper\escape($username) ?></strong>
-            (<a href="?controller=project&amp;action=revoke&amp;project_id=<?= $project['id'] ?>&amp;user_id=<?= $user_id.Helper\param_csrf() ?>"><?= t('revoke') ?></a>)
+            <?php if ($project['is_private'] == 0): ?>
+                (<a href="?controller=project&amp;action=revoke&amp;project_id=<?= $project['id'] ?>&amp;user_id=<?= $user_id.Helper\param_csrf() ?>"><?= t('revoke') ?></a>)
+            <?php endif ?>
         </li>
     <?php endforeach ?>
     </ul>
@@ -19,7 +21,7 @@
 </div>
 <?php endif ?>
 
-<?php if (! empty($users['not_allowed'])): ?>
+<?php if ($project['is_private'] == 0 && ! empty($users['not_allowed'])): ?>
     <form method="post" action="?controller=project&amp;action=allow&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
 
         <?= Helper\form_csrf() ?>

@@ -15,35 +15,22 @@ use Core\Security;
 class Board extends Base
 {
     /**
-     * Move a column up
+     * Move a column down or up
      *
      * @access public
      */
-    public function moveUp()
+    public function moveColumn()
     {
         $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
+        $project = $this->getProjectManagement();
         $column_id = $this->request->getIntegerParam('column_id');
+        $direction = $this->request->getStringParam('direction');
 
-        $this->board->moveUp($project_id, $column_id);
+        if ($direction === 'up' || $direction === 'down') {
+            $this->board->{'move'.$direction}($project['id'], $column_id);
+        }
 
-        $this->response->redirect('?controller=board&action=edit&project_id='.$project_id);
-    }
-
-    /**
-     * Move a column down
-     *
-     * @access public
-     */
-    public function moveDown()
-    {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
-        $column_id = $this->request->getIntegerParam('column_id');
-
-        $this->board->moveDown($project_id, $column_id);
-
-        $this->response->redirect('?controller=board&action=edit&project_id='.$project_id);
+        $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
     }
 
     /**
@@ -232,11 +219,11 @@ class Board extends Base
             'filters' => array('user_id' => UserModel::EVERYBODY_ID),
             'projects' => $projects,
             'current_project_id' => $project['id'],
-            'current_project_name' => $projects[$project['id']],
+            'current_project_name' => $project['name'],
             'board' => $this->board->get($project['id']),
             'categories' => $this->category->getList($project['id'], true, true),
             'menu' => 'boards',
-            'title' => $projects[$project['id']],
+            'title' => $project['name'],
             'board_selector' => $board_selector,
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->config->get('board_highlight_period'),
@@ -250,7 +237,7 @@ class Board extends Base
      */
     public function edit()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $columns = $this->board->getColumns($project['id']);
         $values = array();
 
@@ -276,7 +263,7 @@ class Board extends Base
      */
     public function update()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $columns = $this->board->getColumns($project['id']);
         $data = $this->request->getValues();
         $values = $columns_list = array();
@@ -317,7 +304,7 @@ class Board extends Base
      */
     public function add()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $columns = $this->board->getColumnsList($project['id']);
         $data = $this->request->getValues();
         $values = array();
@@ -350,13 +337,27 @@ class Board extends Base
     }
 
     /**
-     * Confirmation dialog before removing a column
+     * Remove a column
      *
      * @access public
      */
-    public function confirm()
+    public function remove()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
+
+        if ($this->request->getStringParam('remove') === 'yes') {
+
+            $this->checkCSRFParam();
+            $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
+
+            if ($column && $this->board->removeColumn($column['id'])) {
+                $this->session->flash(t('Column removed successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to remove this column.'));
+            }
+
+            $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
+        }
 
         $this->response->html($this->projectLayout('board_remove', array(
             'column' => $this->board->getColumn($this->request->getIntegerParam('column_id')),
@@ -364,25 +365,6 @@ class Board extends Base
             'menu' => 'projects',
             'title' => t('Remove a column from a board')
         )));
-    }
-
-    /**
-     * Remove a column
-     *
-     * @access public
-     */
-    public function remove()
-    {
-        $this->checkCSRFParam();
-        $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
-
-        if ($column && $this->board->removeColumn($column['id'])) {
-            $this->session->flash(t('Column removed successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to remove this column.'));
-        }
-
-        $this->response->redirect('?controller=board&action=edit&project_id='.$column['project_id']);
     }
 
     /**

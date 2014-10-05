@@ -1,11 +1,12 @@
 <section id="main">
     <div class="page-header">
         <h2><?= t('Projects') ?><span id="page-counter"> (<?= $nb_projects ?>)</span></h2>
-        <?php if (Helper\is_admin()): ?>
         <ul>
-            <li><a href="?controller=project&amp;action=create"><?= t('New project') ?></a></li>
+            <?php if (Helper\is_admin()): ?>
+                <li><?= Helper\a(t('New project'), 'project', 'create') ?></li>
+            <?php endif ?>
+            <li><?= Helper\a(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
         </ul>
-        <?php endif ?>
     </div>
     <section>
     <?php if (empty($active_projects) && empty($inactive_projects)): ?>
@@ -17,7 +18,10 @@
             <ul class="project-listing">
                 <?php foreach ($active_projects as $project): ?>
                     <li>
-                        <a href="?controller=project&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= Helper\escape($project['name']) ?></a>
+                        <?php if ($project['is_private']): ?>
+                            <i class="fa fa-lock"></i>
+                        <?php endif ?>
+                        <?= Helper\a(Helper\escape($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
                     </li>
                 <?php endforeach ?>
             </ul>
@@ -28,7 +32,10 @@
             <ul class="project-listing">
                 <?php foreach ($inactive_projects as $project): ?>
                     <li>
-                        <a href="?controller=project&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= Helper\escape($project['name']) ?></a>
+                        <?php if ($project['is_private']): ?>
+                            <i class="fa fa-lock"></i>
+                        <?php endif ?>
+                        <?= Helper\a(Helper\escape($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
                     </li>
                 <?php endforeach ?>
             </ul>

@@ -2,8 +2,8 @@
     <div class="page-header">
         <h2><?= t('Project "%s"', $project['name']) ?> (#<?= $project['id'] ?>)</h2>
         <ul>
-            <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('Back to the board') ?></a></li>
-            <li><a href="?controller=project"><?= t('All projects') ?></a></li>
+            <li><?= Helper\a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?></li>
+            <li><?= Helper\a(t('All projects'), 'project', 'index') ?></li>
         </ul>
     </div>
     <section class="project-show" id="project-section">

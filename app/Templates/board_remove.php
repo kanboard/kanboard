@@ -9,7 +9,7 @@
     </p>
 
     <div class="form-actions">
-        <a href="?controller=board&amp;action=remove&amp;column_id=<?= $column['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
-        <?= t('or') ?> <a href="?controller=board&amp;action=edit&amp;project_id=<?= $column['project_id'] ?>"><?= t('cancel') ?></a>
+        <?= Helper\a(t('Yes'), 'board', 'remove', array('project_id' => $project['id'], 'column_id' => $column['id'], 'remove' => 'yes'), true, 'btn btn-red') ?>
+        <?= t('or') ?> <?= Helper\a(t('cancel'), 'board', 'edit', array('project_id' => $project['id'])) ?>
     </div>
 </div>

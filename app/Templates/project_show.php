@@ -4,9 +4,13 @@
 <ul class="listing">
     <li><strong><?= $project['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
 
+    <?php if ($project['is_private']): ?>
+        <li><i class="fa fa-lock"></i> <?= t('This project is private') ?></li>
+    <?php endif ?>
+
     <?php if ($project['is_public']): ?>
-        <li><i class="fa fa-share-alt"></i>  <a href="?controller=board&amp;action=readonly&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a></li>
-        <li><i class="fa fa-rss-square"></i> <a href="?controller=project&amp;action=feed&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('RSS feed') ?></a></li>
+        <li><i class="fa fa-share-alt"></i> <?= Helper\a(t('Public link'), 'board', 'readonly', array('token' => $project['token'])) ?></li>
+        <li><i class="fa fa-rss-square"></i> <?= Helper\a(t('RSS feed'), 'project', 'feed', array('token' => $project['token'])) ?></li>
     <?php else: ?>
         <li><?= t('Public access disabled') ?></li>
     <?php endif ?>
@@ -18,11 +22,11 @@
     <?php if ($stats['nb_tasks'] > 0): ?>
 
         <?php if ($stats['nb_active_tasks'] > 0): ?>
-            <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('%d tasks on the board', $stats['nb_active_tasks']) ?></a></li>
+            <li><?= Helper\a(t('%d tasks on the board', $stats['nb_active_tasks']), 'board', 'show', array('project_id' => $project['id'])) ?></li>
         <?php endif ?>
 
         <?php if ($stats['nb_inactive_tasks'] > 0): ?>
-            <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $project['id'] ?>"><?= t('%d closed tasks', $stats['nb_inactive_tasks']) ?></a></li>
+            <li><?= Helper\a(t('%d closed tasks', $stats['nb_inactive_tasks']), 'project', 'tasks', array('project_id' => $project['id'])) ?></li>
         <?php endif ?>
 
         <li><?= t('%d tasks in total', $stats['nb_tasks']) ?></li>

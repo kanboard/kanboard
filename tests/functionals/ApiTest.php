@@ -299,7 +299,7 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $users = $this->client->getAllowedUsers(1);
         $this->assertNotFalse($users);
-        $this->assertEquals(array(1 => 'admin', 2 => 'Titi'), $users);
+        $this->assertEquals(array(), $users);
     }
 
     public function testAllowedUser()
@@ -317,7 +317,7 @@ class Api extends PHPUnit_Framework_TestCase
 
         $users = $this->client->getAllowedUsers(1);
         $this->assertNotFalse($users);
-        $this->assertEquals(array(1 => 'admin', 2 => 'Titi'), $users);
+        $this->assertEquals(array(), $users);
     }
 
     public function testCreateComment()

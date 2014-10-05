@@ -17,7 +17,7 @@ class Action extends Base
      */
     public function index()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
 
         $this->response->html($this->projectLayout('action_index', array(
             'values' => array('project_id' => $project['id']),
@@ -43,7 +43,7 @@ class Action extends Base
      */
     public function event()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $values = $this->request->getValues();
 
         if (empty($values['action_name']) || empty($values['project_id'])) {
@@ -66,7 +66,7 @@ class Action extends Base
      */
     public function params()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $values = $this->request->getValues();
 
         if (empty($values['action_name']) || empty($values['project_id']) || empty($values['event_name'])) {
@@ -104,7 +104,7 @@ class Action extends Base
      */
     public function create()
     {
-        $this->doCreation($this->getProject(), $this->request->getValues());
+        $this->doCreation($this->getProjectManagement(), $this->request->getValues());
     }
 
     /**
@@ -138,7 +138,7 @@ class Action extends Base
      */
     public function confirm()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
 
         $this->response->html($this->projectLayout('action_remove', array(
             'action' => $this->action->getById($this->request->getIntegerParam('action_id')),
@@ -158,6 +158,7 @@ class Action extends Base
     public function remove()
     {
         $this->checkCSRFParam();
+        $project = $this->getProjectManagement();
         $action = $this->action->getById($this->request->getIntegerParam('action_id'));
 
         if ($action && $this->action->remove($action['id'])) {
@@ -166,6 +167,6 @@ class Action extends Base
             $this->session->flashError(t('Unable to remove this action.'));
         }
 
-        $this->response->redirect('?controller=action&action=index&project_id='.$action['project_id']);
+        $this->response->redirect('?controller=action&action=index&project_id='.$project['id']);
     }
 }

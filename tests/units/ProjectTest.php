@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Project;
+use Model\ProjectPermission;
 use Model\User;
 use Model\Task;
 use Model\Acl;
@@ -20,6 +21,7 @@ class ProjectTest extends Base
         $this->assertNotEmpty($project);
         $this->assertEquals(1, $project['is_active']);
         $this->assertEquals(0, $project['is_public']);
+        $this->assertEquals(0, $project['is_private']);
         $this->assertEquals(time(), $project['last_modified']);
         $this->assertEmpty($project['token']);
     }
@@ -135,5 +137,37 @@ class ProjectTest extends Base
         $this->assertEmpty($project['token']);
 
         $this->assertFalse($p->disablePublicAccess(123));
+    }
+
+    public function testDuplicate()
+    {
+        $p = new Project($this->registry);
+
+        // Clone public project
+        $this->assertEquals(1, $p->create(array('name' => 'Public')));
+        $this->assertEquals(2, $p->duplicate(1));
+
+        $project = $p->getById(2);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('Public (Clone)', $project['name']);
+        $this->assertEquals(0, $project['is_private']);
+        $this->assertEquals(0, $project['is_public']);
+        $this->assertEmpty($project['token']);
+
+        // Clone private project
+        $this->assertEquals(3, $p->create(array('name' => 'Private', 'is_private' => 1), 1));
+        $this->assertEquals(4, $p->duplicate(3));
+
+        $project = $p->getById(4);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('Private (Clone)', $project['name']);
+        $this->assertEquals(1, $project['is_private']);
+        $this->assertEquals(0, $project['is_public']);
+        $this->assertEmpty($project['token']);
+
+        $pp = new ProjectPermission($this->registry);
+
+        $this->assertEquals(array(1 => 'admin'), $pp->getAllowedUsers(3));
+        $this->assertEquals(array(1 => 'admin'), $pp->getAllowedUsers(4));
     }
 }

@@ -23,16 +23,16 @@
                 <ul>
                     <?php if ($column['position'] != 1): ?>
                     <li>
-                        <a href="?controller=board&amp;action=moveUp&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'].Helper\param_csrf() ?>"><?= t('Move Up') ?></a>
+                        <?= Helper\a(t('Move Up'), 'board', 'moveColumn', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'up'), true) ?>
                     </li>
                     <?php endif ?>
                     <?php if ($column['position'] != count($columns)): ?>
                     <li>
-                        <a href="?controller=board&amp;action=moveDown&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'].Helper\param_csrf() ?>"><?= t('Move Down') ?></a>
+                        <?= Helper\a(t('Move Down'), 'board', 'moveColumn', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'down'), true) ?>
                     </li>
                     <?php endif ?>
                     <li>
-                        <a href="?controller=board&amp;action=confirm&amp;project_id=<?= $project['id'] ?>&amp;column_id=<?= $column['id'] ?>"><?= t('Remove') ?></a>
+                        <?= Helper\a(t('Remove'), 'board', 'remove', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
                     </li>
                 </ul>
             </td>

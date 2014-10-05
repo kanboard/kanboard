@@ -5,7 +5,12 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 30;
+const VERSION = 31;
+
+function version_31($pdo)
+{
+    $pdo->exec('ALTER TABLE projects ADD COLUMN is_private INTEGER DEFAULT "0"');
+}
 
 function version_30($pdo)
 {

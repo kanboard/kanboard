@@ -142,17 +142,32 @@ class ProjectPermission extends Base
      */
     public function isUserAllowed($project_id, $user_id)
     {
-        // Check if the user has admin rights
         if ($this->user->isAdmin($user_id)) {
             return true;
         }
 
-        // Otherwise, allow only specific users
         return (bool) $this->db
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
                     ->count();
+    }
+
+    /**
+     * Check if a specific user is allowed to manage a project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @return bool
+     */
+    public function adminAllowed($project_id, $user_id)
+    {
+        if ($this->isUserAllowed($project_id, $user_id) && $this->project->isPrivate($project_id)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

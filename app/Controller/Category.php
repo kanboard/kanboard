@@ -3,7 +3,7 @@
 namespace Controller;
 
 /**
- * Categories management
+ * Category management
  *
  * @package controller
  * @author  Frederic Guillot
@@ -36,7 +36,7 @@ class Category extends Base
      */
     public function index()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
 
         $this->response->html($this->projectLayout('category_index', array(
             'categories' => $this->category->getList($project['id'], false),
@@ -55,7 +55,7 @@ class Category extends Base
      */
     public function save()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->category->validateCreation($values);
@@ -88,7 +88,7 @@ class Category extends Base
      */
     public function edit()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $category = $this->getCategory($project['id']);
 
         $this->response->html($this->projectLayout('category_edit', array(
@@ -107,7 +107,7 @@ class Category extends Base
      */
     public function update()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->category->validateModification($values);
@@ -139,7 +139,7 @@ class Category extends Base
      */
     public function confirm()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $category = $this->getCategory($project['id']);
 
         $this->response->html($this->projectLayout('category_remove', array(
@@ -158,7 +158,7 @@ class Category extends Base
     public function remove()
     {
         $this->checkCSRFParam();
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $category = $this->getCategory($project['id']);
 
         if ($this->category->remove($category['id'])) {

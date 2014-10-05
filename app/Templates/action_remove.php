@@ -8,7 +8,7 @@
     </p>
 
     <div class="form-actions">
-        <a href="?controller=action&amp;action=remove&amp;action_id=<?= $action['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
-        <?= t('or') ?> <a href="?controller=action&amp;action=index&amp;project_id=<?= $action['project_id'] ?>"><?= t('cancel') ?></a>
+        <?= Helper\a(t('Yes'), 'action', 'remove', array('project_id' => $project['id'], 'action_id' => $action['id']), true, 'btn btn-red') ?>
+        <?= t('or') ?> <?= Helper\a(t('cancel'), 'action', 'index', array('project_id' => $project['id'])) ?>
     </div>
 </div>

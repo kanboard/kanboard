@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Model\Task as TaskModel;
-use Core\Translator;
 
 /**
  * Project controller
@@ -55,7 +54,6 @@ class Project extends Base
         $this->response->html($this->projectLayout('project_show', array(
             'project' => $project,
             'stats' => $this->project->getStats($project['id']),
-            'menu' => 'projects',
             'title' => $project['name'],
         )));
     }
@@ -67,7 +65,7 @@ class Project extends Base
      */
     public function export()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $from = $this->request->getStringParam('from');
         $to = $this->request->getStringParam('to');
 
@@ -88,7 +86,6 @@ class Project extends Base
             'errors' => array(),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
-            'menu' => 'projects',
             'project' => $project,
             'title' => t('Tasks Export')
         )));
@@ -101,51 +98,26 @@ class Project extends Base
      */
     public function share()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
+        $switch = $this->request->getStringParam('switch');
+
+        if ($switch === 'enable' || $switch === 'disable') {
+
+            $this->checkCSRFParam();
+
+            if ($this->project->{$switch.'PublicAccess'}($project['id'])) {
+                $this->session->flash(t('Project updated successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to update this project.'));
+            }
+
+            $this->response->redirect('?controller=project&action=share&project_id='.$project['id']);
+        }
 
         $this->response->html($this->projectLayout('project_share', array(
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Public access'),
         )));
-    }
-
-    /**
-     * Enable public access for a project
-     *
-     * @access public
-     */
-    public function enablePublic()
-    {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
-
-        if ($project_id && $this->project->enablePublicAccess($project_id)) {
-            $this->session->flash(t('Project updated successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to update this project.'));
-        }
-
-        $this->response->redirect('?controller=project&action=share&project_id='.$project_id);
-    }
-
-    /**
-     * Disable public access for a project
-     *
-     * @access public
-     */
-    public function disablePublic()
-    {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
-
-        if ($project_id && $this->project->disablePublicAccess($project_id)) {
-            $this->session->flash(t('Project updated successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to update this project.'));
-        }
-
-        $this->response->redirect('?controller=project&action=share&project_id='.$project_id);
     }
 
     /**
@@ -155,13 +127,12 @@ class Project extends Base
      */
     public function edit()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
 
         $this->response->html($this->projectLayout('project_edit', array(
             'errors' => array(),
             'values' => $project,
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Edit project')
         )));
     }
@@ -173,7 +144,7 @@ class Project extends Base
      */
     public function update()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
         $values = $this->request->getValues() + array('is_active' => 0);
         list($valid, $errors) = $this->project->validateModification($values);
 
@@ -192,30 +163,28 @@ class Project extends Base
             'errors' => $errors,
             'values' => $values,
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Edit Project')
         )));
     }
 
-        /**
+    /**
      * Users list for the selected project
      *
      * @access public
      */
     public function users()
     {
-        $project = $this->getProject();
+        $project = $this->getProjectManagement();
 
         $this->response->html($this->projectLayout('project_users', array(
             'project' => $project,
             'users' => $this->projectPermission->getAllUsers($project['id']),
-            'menu' => 'projects',
             'title' => t('Edit project access list')
         )));
     }
 
     /**
-     * Allow a specific user for the selected project
+     * Allow a specific user (admin only)
      *
      * @access public
      */
@@ -238,7 +207,7 @@ class Project extends Base
     }
 
     /**
-     * Revoke user access
+     * Revoke user access (admin only)
      *
      * @access public
      */
@@ -267,53 +236,30 @@ class Project extends Base
     }
 
     /**
-     * Confirmation dialog before to remove a project
-     *
-     * @access public
-     */
-    public function confirmRemove()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->projectLayout('project_remove', array(
-            'project' => $project,
-            'menu' => 'projects',
-            'title' => t('Remove project')
-        )));
-    }
-
-    /**
      * Remove a project
      *
      * @access public
      */
     public function remove()
     {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
+        $project = $this->getProjectManagement();
 
-        if ($project_id && $this->project->remove($project_id)) {
-            $this->session->flash(t('Project removed successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to remove this project.'));
+        if ($this->request->getStringParam('remove') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            if ($this->project->remove($project['id'])) {
+                $this->session->flash(t('Project removed successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to remove this project.'));
+            }
+
+            $this->response->redirect('?controller=project');
         }
 
-        $this->response->redirect('?controller=project');
-    }
-
-    /**
-     * Confirmation dialog before to clone a project
-     *
-     * @access public
-     */
-    public function confirmDuplicate()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->projectLayout('project_duplicate', array(
+        $this->response->html($this->projectLayout('project_remove', array(
             'project' => $project,
-            'menu' => 'projects',
-            'title' => t('Clone this project')
+            'title' => t('Remove project')
         )));
     }
 
@@ -325,31 +271,24 @@ class Project extends Base
      */
     public function duplicate()
     {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
+        $project = $this->getProjectManagement();
 
-        if ($project_id && $this->project->duplicate($project_id)) {
-            $this->session->flash(t('Project cloned successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to clone this project.'));
+        if ($this->request->getStringParam('duplicate') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            if ($this->project->duplicate($project['id'])) {
+                $this->session->flash(t('Project cloned successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to clone this project.'));
+            }
+
+            $this->response->redirect('?controller=project');
         }
 
-        $this->response->redirect('?controller=project');
-    }
-
-    /**
-     * Confirmation dialog before to disable a project
-     *
-     * @access public
-     */
-    public function confirmDisable()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->projectLayout('project_disable', array(
+        $this->response->html($this->projectLayout('project_duplicate', array(
             'project' => $project,
-            'menu' => 'projects',
-            'title' => t('Project activation')
+            'title' => t('Clone this project')
         )));
     }
 
@@ -360,30 +299,23 @@ class Project extends Base
      */
     public function disable()
     {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
+        $project = $this->getProjectManagement();
 
-        if ($project_id && $this->project->disable($project_id)) {
-            $this->session->flash(t('Project disabled successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to disable this project.'));
+        if ($this->request->getStringParam('disable') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            if ($this->project->disable($project['id'])) {
+                $this->session->flash(t('Project disabled successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to disable this project.'));
+            }
+
+            $this->response->redirect('?controller=project&action=show&project_id='.$project['id']);
         }
 
-        $this->response->redirect('?controller=project&action=show&project_id='.$project_id);
-    }
-
-    /**
-     * Confirmation dialog before to enable a project
-     *
-     * @access public
-     */
-    public function confirmEnable()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->projectLayout('project_enable', array(
+        $this->response->html($this->projectLayout('project_disable', array(
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Project activation')
         )));
     }
@@ -395,20 +327,29 @@ class Project extends Base
      */
     public function enable()
     {
-        $this->checkCSRFParam();
-        $project_id = $this->request->getIntegerParam('project_id');
+        $project = $this->getProjectManagement();
 
-        if ($project_id && $this->project->enable($project_id)) {
-            $this->session->flash(t('Project activated successfully.'));
-        } else {
-            $this->session->flashError(t('Unable to activate this project.'));
+        if ($this->request->getStringParam('enable') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            if ($this->project->enable($project['id'])) {
+                $this->session->flash(t('Project activated successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to activate this project.'));
+            }
+
+            $this->response->redirect('?controller=project&action=show&project_id='.$project['id']);
         }
 
-        $this->response->redirect('?controller=project&action=show&project_id='.$project_id);
+        $this->response->html($this->projectLayout('project_enable', array(
+            'project' => $project,
+            'title' => t('Project activation')
+        )));
     }
 
     /**
-     * RSS feed for a project
+     * RSS feed for a project (public)
      *
      * @access public
      */
@@ -480,7 +421,6 @@ class Project extends Base
                 'action' => 'search',
                 'project_id' => $project['id'],
             ),
-            'menu' => 'projects',
             'project' => $project,
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
@@ -506,7 +446,6 @@ class Project extends Base
         $nb_tasks = count($tasks);
 
         $this->response->html($this->template->layout('project_tasks', array(
-            'menu' => 'projects',
             'project' => $project,
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
@@ -525,8 +464,9 @@ class Project extends Base
     {
         $this->response->html($this->template->layout('project_new', array(
             'errors' => array(),
-            'values' => array(),
-            'menu' => 'projects',
+            'values' => array(
+                'is_private' => $this->request->getIntegerParam('private', $this->acl->isRegularUser()),
+            ),
             'title' => t('New project')
         )));
     }
@@ -543,7 +483,7 @@ class Project extends Base
 
         if ($valid) {
 
-            if ($this->project->create($values)) {
+            if ($this->project->create($values, $this->acl->getUserId())) {
                 $this->session->flash(t('Your project have been created successfully.'));
                 $this->response->redirect('?controller=project');
             }
@@ -555,7 +495,6 @@ class Project extends Base
         $this->response->html($this->template->layout('project_new', array(
             'errors' => $errors,
             'values' => $values,
-            'menu' => 'projects',
             'title' => t('New Project')
         )));
     }

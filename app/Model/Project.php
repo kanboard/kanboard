@@ -84,6 +84,18 @@ class Project extends Base
     }
 
     /**
+     * Return true if the project is private
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return boolean
+     */
+    public function isPrivate($project_id)
+    {
+        return (bool) $this->db->table(self::TABLE)->eq('id', $project_id)->eq('is_private', 1)->count();
+    }
+
+    /**
      * Get all projects, optionaly fetch stats for each project and can check users permissions
      *
      * @access public
@@ -204,16 +216,18 @@ class Project extends Base
      */
     public function createProjectFromAnotherProject($project_id)
     {
-        $project_name = $this->db->table(self::TABLE)->eq('id', $project_id)->findOneColumn('name');
+        $project = $this->getById($project_id);
 
-        $project = array(
-            'name' => $project_name.' ('.t('Clone').')',
+        $values = array(
+            'name' => $project['name'].' ('.t('Clone').')',
             'is_active' => true,
             'last_modified' => 0,
             'token' => '',
+            'is_public' => 0,
+            'is_private' => empty($project['is_private']) ? 0 : 1,
         );
 
-        if (! $this->db->table(self::TABLE)->save($project)) {
+        if (! $this->db->table(self::TABLE)->save($values)) {
             return false;
         }
 
@@ -233,33 +247,18 @@ class Project extends Base
 
         // Get the cloned project Id
         $clone_project_id = $this->createProjectFromAnotherProject($project_id);
+
         if (! $clone_project_id) {
             $this->db->cancelTransaction();
             return false;
         }
 
-        // Clone Board
-        if (! $this->board->duplicate($project_id, $clone_project_id)) {
-            $this->db->cancelTransaction();
-            return false;
-        }
+        foreach (array('board', 'category', 'projectPermission', 'action') as $model) {
 
-        // Clone Categories
-        if (! $this->category->duplicate($project_id, $clone_project_id)) {
-            $this->db->cancelTransaction();
-            return false;
-        }
-
-        // Clone Allowed Users
-        if (! $this->projectPermission->duplicate($project_id, $clone_project_id)) {
-            $this->db->cancelTransaction();
-            return false;
-        }
-
-        // Clone Actions
-        if (! $this->action->duplicate($project_id, $clone_project_id)) {
-            $this->db->cancelTransaction();
-            return false;
+            if (! $this->$model->duplicate($project_id, $clone_project_id)) {
+                $this->db->cancelTransaction();
+                return false;
+            }
         }
 
         $this->db->closeTransaction();
@@ -272,14 +271,16 @@ class Project extends Base
      *
      * @access public
      * @param  array    $values   Form values
+     * @param  integer  $user_id  User who create the project
      * @return integer            Project id
      */
-    public function create(array $values)
+    public function create(array $values, $user_id = 0)
     {
         $this->db->startTransaction();
 
         $values['token'] = '';
         $values['last_modified'] = time();
+        $values['is_private'] = empty($values['is_private']) ? 0 : 1;
 
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
@@ -287,19 +288,16 @@ class Project extends Base
         }
 
         $project_id = $this->db->getConnection()->getLastId();
-        $column_names = explode(',', $this->config->get('board_columns', implode(',', $this->board->getDefaultColumns())));
-        $columns = array();
 
-        foreach ($column_names as $column_name) {
-
-            $column_name = trim($column_name);
-
-            if (! empty($column_name)) {
-                $columns[] = array('title' => $column_name, 'task_limit' => 0);
-            }
+        if (! $this->board->create($project_id, $this->board->getUserColumns())) {
+            $this->db->cancelTransaction();
+            return false;
         }
 
-        $this->board->create($project_id, $columns);
+        if ($values['is_private'] && $user_id) {
+            $this->projectPermission->allowUser($project_id, $user_id);
+        }
+
         $this->db->closeTransaction();
 
         return (int) $project_id;

@@ -420,7 +420,7 @@ return array(
     'I want to receive notifications only for those projects:' => 'Je souhaite reçevoir les notifications uniquement pour les projets sélectionnés :',
     'view the task on Kanboard' => 'voir la tâche sur Kanboard',
     'Public access' => 'Accès public',
-    'Categories management' => 'Gestion des catégories',
+    'Category management' => 'Gestion des catégories',
     'User management' => 'Gestion des utilisateurs',
     'Active tasks' => 'Tâches actives',
     'Disable public access' => 'Désactiver l\'accès public',
@@ -532,6 +532,8 @@ return array(
     'Application URL' => 'URL de l\'application',
     'Example: http://example.kanboard.net/ (used by email notifications)' => 'Exemple : http://exemple.kanboard.net/ (utilisé pour les notifications)',
     'Token regenerated.' => 'Jeton de sécurité regénéré.',
-    'Date format' => 'Format de date',
+    'Date format' => 'Format des dates',
     'ISO format is always accepted, example: "%s" and "%s"' => 'Le format ISO est toujours accepté, exemple : « %s » et « %s »',
+    'New private project' => 'Nouveau projet privé',
+    'This project is private' => 'Ce projet est privé',
 );
