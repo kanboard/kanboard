@@ -1031,22 +1031,23 @@ tr td.task-orange,
 
 /* project view */
 .project-listing {
-    border-left: 3px solid #000;
-    margin-left: 35px;
-    padding-bottom: 10px;
-    max-width: 700px;
+    max-width: 500px;
+    margin-left: 30px;
 }
 
 .project-listing li {
-    font-size: 1.3em;
-    line-height: 1.7em;
-    list-style-type: none;
-    margin-left: 20px;
-    border-bottom: 1px dashed #ccc;
+    font-weight: bold;
+    padding: 10px;
+    margin-top: 8px;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .project-listing li:hover {
-    border-color: #333;
+    border-color: #ccc;
+    background: #fcfcfc;
+    box-shadow: 0 0 8px rgba(200, 200, 200, 0.6);
 }
 
 .project-listing a {
