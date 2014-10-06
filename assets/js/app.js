@@ -122,6 +122,15 @@ Kanboard.Board = (function() {
         // Tooltips
         $(".task-board-tooltip").tooltip({
             track: false,
+            position: { my: 'left-20 top', at: 'center bottom+9', using: function( position, feedback ) {
+                $( this ).css( position );
+                var arrow_pos = feedback.target.left + feedback.target.width / 2 - feedback.element.left - 20
+                $( "<div>" )
+                    .addClass("tooltip-arrow")
+                    .addClass(feedback.vertical)
+                    .addClass(arrow_pos == 0 ? "align-left" : "align-right")
+                    .appendTo(this);
+            }},
             content: function(e) {
                 var content = $(this).attr('data-content');
                  if (content)
