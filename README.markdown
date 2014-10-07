@@ -127,6 +127,7 @@ Original author: [Frédéric Guillot](http://fredericguillot.com/)
 Contributors:
 
 - Alex Butum
+- Aleix Pol: https://github.com/aleixpol
 - Ashish Kulkarni: https://github.com/ashkulz
 - Claudio Lobo
 - Cmer: https://github.com/chncsu
