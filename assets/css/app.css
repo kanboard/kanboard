@@ -904,6 +904,11 @@ a.task-board-nobody {
     max-width: 800px;
 }
 
+#comments .comment-textarea {
+    height: 80px;
+    width: 500px;
+}
+
 /* subtasks */
 .subtasks-table {
     font-size: 0.85em;
