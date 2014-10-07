@@ -4,14 +4,56 @@ require_once __DIR__.'/Base.php';
 
 use Model\User;
 use Model\Project;
+use Model\ProjectPermission;
 use Model\Notification;
 
 class NotificationTest extends Base
 {
+    public function testGetUsersWithNotification()
+    {
+        $u = new User($this->registry);
+        $p = new Project($this->registry);
+        $n = new Notification($this->registry);
+        $pp = new ProjectPermission($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
+
+        // Email + Notifications enabled
+        $this->assertTrue($u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
+
+        // No email + Notifications enabled
+        $this->assertTrue($u->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
+
+        // Email + Notifications enabled
+        $this->assertTrue($u->create(array('username' => 'user3', 'email' => 'user3@here', 'notifications_enabled' => 1)));
+
+        // No email + notifications disabled
+        $this->assertTrue($u->create(array('username' => 'user4')));
+
+        // Nobody is member of any projects
+        $this->assertEmpty($pp->getAllowedUsers(1));
+        $this->assertEmpty($n->getUsersWithNotification(1));
+
+        // We allow all users to be member of our projects
+        $this->assertTrue($pp->allowUser(1, 1));
+        $this->assertTrue($pp->allowUser(1, 2));
+        $this->assertTrue($pp->allowUser(1, 3));
+        $this->assertTrue($pp->allowUser(1, 4));
+
+        $this->assertNotEmpty($pp->getAllowedUsers(1));
+        $users = $n->getUsersWithNotification(1);
+
+        $this->assertNotEmpty($users);
+        $this->assertEquals(2, count($users));
+        $this->assertEquals('user1@here', $users[0]['email']);
+        $this->assertEquals('user3@here', $users[1]['email']);
+    }
+
     public function testGetUserList()
     {
         $u = new User($this->registry);
         $p = new Project($this->registry);
+        $pp = new ProjectPermission($this->registry);
         $n = new Notification($this->registry);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
@@ -28,6 +70,17 @@ class NotificationTest extends Base
 
         // No email + notifications disabled
         $this->assertTrue($u->create(array('username' => 'user4')));
+
+        // We allow all users to be member of our projects
+        $this->assertTrue($pp->allowUser(1, 1));
+        $this->assertTrue($pp->allowUser(1, 2));
+        $this->assertTrue($pp->allowUser(1, 3));
+        $this->assertTrue($pp->allowUser(1, 4));
+
+        $this->assertTrue($pp->allowUser(2, 1));
+        $this->assertTrue($pp->allowUser(2, 2));
+        $this->assertTrue($pp->allowUser(2, 3));
+        $this->assertTrue($pp->allowUser(2, 4));
 
         $users = $n->getUsersList(1);
         $this->assertNotEmpty($users);

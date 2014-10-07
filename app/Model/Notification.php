@@ -28,6 +28,27 @@ class Notification extends Base
     const TABLE = 'user_has_notifications';
 
     /**
+     * Get a list of people with notifications enabled
+     *
+     * @access public
+     * @param  integer   $project_id     Project id
+     * @param  array     $exlude_users   List of user_id to exclude
+     * @return array
+     */
+    public function getUsersWithNotification($project_id, array $exclude_users = array())
+    {
+        return $this->db
+            ->table(ProjectPermission::TABLE)
+            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email')
+            ->join(User::TABLE, 'id', 'user_id')
+            ->eq('project_id', $project_id)
+            ->eq('notifications_enabled', '1')
+            ->neq('email', '')
+            ->notin(User::TABLE.'.id', $exclude_users)
+            ->findAll();
+    }
+
+    /**
      * Get the list of users to send the notification for a given project
      *
      * @access public
@@ -42,12 +63,7 @@ class Notification extends Base
             $exclude_users[] = $this->acl->getUserId();
         }
 
-        $users = $this->db->table(User::TABLE)
-                          ->columns('id', 'username', 'name', 'email')
-                          ->eq('notifications_enabled', '1')
-                          ->neq('email', '')
-                          ->notin('id', $exclude_users)
-                          ->findAll();
+        $users = $this->getUsersWithNotification($project_id, $exclude_users);
 
         foreach ($users as $index => $user) {
 
