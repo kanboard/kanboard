@@ -18,8 +18,11 @@
             <ul class="project-listing">
                 <?php foreach ($active_projects as $project): ?>
                     <li>
+                        <?php if ($project['is_public']): ?>
+                            <i class="fa fa-share-alt fa-fw"></i>
+                        <?php endif ?>
                         <?php if ($project['is_private']): ?>
-                            <i class="fa fa-lock"></i>
+                            <i class="fa fa-lock fa-fw"></i>
                         <?php endif ?>
                         <?= Helper\a(Helper\escape($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
                     </li>
