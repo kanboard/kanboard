@@ -116,7 +116,11 @@ abstract class Base
         $this->response->csp(array('style-src' => "'self' 'unsafe-inline'"));
         $this->response->nosniff();
         $this->response->xss();
-        $this->response->xframe();
+
+        // Allow the public board iframe inclusion
+        if ($action !== 'readonly') {
+            $this->response->xframe();
+        }
 
         if (ENABLE_HSTS) {
             $this->response->hsts();
