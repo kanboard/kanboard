@@ -467,6 +467,25 @@ class Board extends Base
             'task' => $task,
             'subtasks' => $this->subTask->getAll($task['id'])
         )));
+    }
 
+    public function getAttachments() {
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+        $this->response->html($this->template->load('board_files', array(
+            'values' => $values,
+            'task' => $task,
+            'files' => $this->file->getAll($task['id'])
+        )));
+    }
+
+    public function getComments() {
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+        $this->response->html($this->template->load('board_comments', array(
+            'values' => $values,
+            'task' => $task,
+            'comments' => $this->comment->getAll($task['id'])
+        )));
     }
 }
