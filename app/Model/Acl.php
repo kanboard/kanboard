@@ -37,7 +37,7 @@ class Acl extends Base
         'user' => array('edit', 'forbidden', 'logout', 'show', 'external', 'unlinkgoogle', 'unlinkgithub', 'sessions', 'removesession', 'last', 'notifications', 'password'),
         'comment' => array('create', 'save', 'confirm', 'remove', 'update', 'edit', 'forbidden'),
         'file' => array('create', 'save', 'download', 'confirm', 'remove', 'open', 'image'),
-        'subtask' => array('create', 'save', 'edit', 'update', 'confirm', 'remove'),
+        'subtask' => array('create', 'save', 'edit', 'update', 'confirm', 'remove', 'togglestatus'),
         'task' => array('show', 'create', 'save', 'edit', 'update', 'close', 'open', 'duplicate', 'remove', 'description', 'move', 'copy'),
         'category' => array('index', 'save', 'edit', 'update', 'confirm', 'remove'),
         'action' => array('index', 'event', 'params', 'create', 'confirm', 'remove'),

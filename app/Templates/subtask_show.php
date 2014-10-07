@@ -26,7 +26,22 @@
         <?php foreach ($subtasks as $subtask): ?>
         <tr>
             <td><?= Helper\escape($subtask['title']) ?></td>
-            <td><?= Helper\escape($subtask['status_name']) ?></td>
+            <td>
+            <?php if (!isset($not_editable)): ?>
+                <a href="<?= Helper\u('subtask', 'toggleStatus', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>">
+            <?php endif ?>
+                    <?php if ($subtask['status'] == 0): ?>
+                        <i class="fa fa-square-o fa-fw"></i><i class="fa">&nbsp;<?= Helper\escape($subtask['status_name']) ?></i>
+                    <?php elseif ($subtask['status'] == 1): ?>
+                        <i class="fa fa-gears fa-fw"></i><i class="fa">&nbsp;<?= Helper\escape($subtask['status_name']) ?></i>
+                    <?php else: ?>
+                        <i class="fa fa-check-square-o fa-fw"></i><i class="fa">&nbsp;<?= Helper\escape($subtask['status_name']) ?></i>
+                    <?php endif ?>
+            <?php if (! isset($not_editable)): ?>
+                </a>
+            <?php endif ?>
+			</td>
+
             <td>
                 <?php if (! empty($subtask['username'])): ?>
                     <?= Helper\escape($subtask['name'] ?: $subtask['username']) ?>
@@ -43,9 +58,9 @@
             </td>
             <?php if (! isset($not_editable)): ?>
                 <td>
-                    <a href="?controller=subtask&amp;action=edit&amp;task_id=<?= $task['id'] ?>&amp;subtask_id=<?= $subtask['id'] ?>"><?= t('Edit') ?></a>
+                    <?= Helper\a(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
                     <?= t('or') ?>
-                    <a href="?controller=subtask&amp;action=confirm&amp;task_id=<?= $task['id'] ?>&amp;subtask_id=<?= $subtask['id'] ?>"><?= t('Remove') ?></a>
+                    <?= Helper\a(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
                 </td>
             <?php endif ?>
         </tr>
@@ -56,6 +71,15 @@
             ?>
         <?php endforeach ?>
     </table>
+
+    <?php if (! isset($not_editable)): ?>
+        <form method="post" action="<?= Helper\u('subtask', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off">
+            <?= Helper\form_csrf() ?>
+            <?= Helper\form_hidden('task_id', array('task_id' => $task['id'])) ?>
+            <?= Helper\form_text('title', array(), array(), array('required', 'placeholder="'.t('Type here to create a new sub-task').'"')) ?>
+            <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
+        </form>
+    <?php endif ?>
 
     <div class="subtasks-time-tracking">
         <h4><?= t('Time tracking') ?></h4>

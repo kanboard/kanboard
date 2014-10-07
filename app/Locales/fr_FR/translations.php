@@ -536,4 +536,6 @@ return array(
     'ISO format is always accepted, example: "%s" and "%s"' => 'Le format ISO est toujours accepté, exemple : « %s » et « %s »',
     'New private project' => 'Nouveau projet privé',
     'This project is private' => 'Ce projet est privé',
+    'Type here to create a new sub-task' => 'Créer une sous-tâche en écrivant le titre ici',
+    'Add' => 'Ajouter',
 );
