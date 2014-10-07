@@ -63,6 +63,7 @@ class Task extends Base
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
+            'user_id' => $this->acl->getUserId(),
             'menu' => 'tasks',
             'title' => $task['title'],
         )));
