@@ -71,6 +71,11 @@ class Notification extends Base
                                  ->eq('user_id', $user['id'])
                                  ->findAllByColumn('project_id');
 
+            // check first if user has access to this project in the first place
+            if (! $this->projectPermission->isUserAllowed($project_id, $user['id'])) {
+                unset($users[$index]);
+            }
+            
             // The user have selected only some projects
             if (! empty($projects)) {
 
