@@ -173,6 +173,10 @@ class Table
 
     public function buildSelectQuery()
     {
+        foreach ($this->columns as $key => $value) {
+            $this->columns[$key] = $this->db->escapeIdentifier($value);
+        }
+
         return sprintf(
             'SELECT %s %s FROM %s %s %s %s %s %s %s',
             $this->distinct ? 'DISTINCT' : '',

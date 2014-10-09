@@ -22,8 +22,8 @@ function version_29($pdo)
 {
     $pdo->exec("
         CREATE TABLE settings (
-            option VARCHAR(100) PRIMARY KEY,
-            value VARCHAR(255) DEFAULT ''
+            `option` VARCHAR(100) PRIMARY KEY,
+            `value` VARCHAR(255) DEFAULT ''
         )
     ");
 
