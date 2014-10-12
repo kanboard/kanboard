@@ -493,75 +493,6 @@ class TaskTest extends Base
         $this->assertEquals($task_per_column + 1, $t->countByColumnId(1, 4));
     }
 
-    public function testFilter()
-    {
-        $t = new Task($this->registry);
-        $p = new Project($this->registry);
-
-        $this->assertEquals(1, $p->create(array('name' => 'test1')));
-        $this->assertEquals(1, $t->create(array('title' => 'test a', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1, 'description' => 'biloute')));
-        $this->assertEquals(2, $t->create(array('title' => 'test b', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2, 'description' => 'toto et titi sont dans un bateau')));
-
-        $tasks = $t->find(array(array('column' => 'project_id', 'operator' => 'eq', 'value' => '1')));
-        $this->assertNotFalse($tasks);
-        $this->assertEquals(2, count($tasks));
-        $this->assertEquals(1, $tasks[0]['id']);
-        $this->assertEquals(2, $tasks[1]['id']);
-
-        $tasks = $t->find(array(
-            array('column' => 'project_id', 'operator' => 'eq', 'value' => '1'),
-            array('column' => 'owner_id', 'operator' => 'eq', 'value' => '2'),
-        ));
-        $this->assertEquals(1, count($tasks));
-        $this->assertEquals(2, $tasks[0]['id']);
-
-        $tasks = $t->find(array(
-            array('column' => 'project_id', 'operator' => 'eq', 'value' => '1'),
-            array('column' => 'title', 'operator' => 'like', 'value' => '%b%'),
-        ));
-        $this->assertEquals(1, count($tasks));
-        $this->assertEquals(2, $tasks[0]['id']);
-
-        // Condition with OR
-        $search = 'bateau';
-        $filters = array(
-            array('column' => 'project_id', 'operator' => 'eq', 'value' => 1),
-            'or' => array(
-                array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
-                array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
-            )
-        );
-
-        $tasks = $t->find($filters);
-        $this->assertEquals(1, count($tasks));
-        $this->assertEquals(2, $tasks[0]['id']);
-
-        $search = 'toto et titi';
-        $filters = array(
-            array('column' => 'project_id', 'operator' => 'eq', 'value' => 1),
-            'or' => array(
-                array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
-                array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
-            )
-        );
-
-        $tasks = $t->find($filters);
-        $this->assertEquals(1, count($tasks));
-        $this->assertEquals(2, $tasks[0]['id']);
-
-        $search = 'john';
-        $filters = array(
-            array('column' => 'project_id', 'operator' => 'eq', 'value' => 1),
-            'or' => array(
-                array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
-                array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
-            )
-        );
-
-        $tasks = $t->find($filters);
-        $this->assertEquals(0, count($tasks));
-    }
-
     public function testDuplicateToTheSameProject()
     {
         $t = new Task($this->registry);
@@ -584,7 +515,7 @@ class TaskTest extends Base
         $this->assertEquals(1, $task['position']);
 
         // We duplicate our task
-        $this->assertEquals(2, $t->duplicateSameProject($task));
+        $this->assertEquals(2, $t->duplicateToSameProject($task));
         $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task

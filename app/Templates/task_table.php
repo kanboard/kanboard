@@ -1,14 +1,14 @@
 <table>
     <tr>
-        <th><?= t('Id') ?></th>
-        <th><?= t('Column') ?></th>
-        <th><?= t('Category') ?></th>
-        <th><?= t('Title') ?></th>
-        <th><?= t('Assignee') ?></th>
-        <th><?= t('Due date') ?></th>
-        <th><?= t('Date created') ?></th>
-        <th><?= t('Date completed') ?></th>
-        <th><?= t('Status') ?></th>
+        <th><?= Helper\order(t('Id'), 'tasks.id', $pagination) ?></th>
+        <th><?= Helper\order(t('Column'), 'tasks.column_id', $pagination) ?></th>
+        <th><?= Helper\order(t('Category'), 'tasks.category_id', $pagination) ?></th>
+        <th><?= Helper\order(t('Title'), 'tasks.title', $pagination) ?></th>
+        <th><?= Helper\order(t('Assignee'), 'users.username', $pagination) ?></th>
+        <th><?= Helper\order(t('Due date'), 'tasks.date_due', $pagination) ?></th>
+        <th><?= Helper\order(t('Date created'), 'tasks.date_creation', $pagination) ?></th>
+        <th><?= Helper\order(t('Date completed'), 'tasks.date_completed', $pagination) ?></th>
+        <th><?= Helper\order(t('Status'), 'tasks.is_active', $pagination) ?></th>
     </tr>
     <?php foreach ($tasks as $task): ?>
     <tr>
@@ -52,3 +52,5 @@
     </tr>
     <?php endforeach ?>
 </table>
+
+<?= Helper\paginate($pagination) ?>

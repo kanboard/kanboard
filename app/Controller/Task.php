@@ -365,7 +365,7 @@ class Task extends Base
         if ($this->request->getStringParam('confirmation') === 'yes') {
 
             $this->checkCSRFParam();
-            $task_id = $this->task->duplicateSameProject($task);
+            $task_id = $this->task->duplicateToSameProject($task);
 
             if ($task_id) {
                 $this->session->flash(t('Task created successfully.'));

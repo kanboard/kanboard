@@ -30,6 +30,7 @@ use Model\LastLogin;
  * @property \Model\Task               $task
  * @property \Model\TaskHistory        $taskHistory
  * @property \Model\TaskExport         $taskExport
+ * @property \Model\TaskFinder         $taskFinder
  * @property \Model\TaskPermission     $taskPermission
  * @property \Model\TaskValidator      $taskValidator
  * @property \Model\CommentHistory     $commentHistory

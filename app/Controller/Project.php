@@ -395,26 +395,31 @@ class Project extends Base
     {
         $project = $this->getProject();
         $search = $this->request->getStringParam('search');
+        $direction = $this->request->getStringParam('direction', 'DESC');
+        $order = $this->request->getStringParam('order', 'tasks.id');
+        $offset = $this->request->getIntegerParam('offset', 0);
         $tasks = array();
         $nb_tasks = 0;
+        $limit = 25;
 
         if ($search !== '') {
-
-            $filters = array(
-                array('column' => 'project_id', 'operator' => 'eq', 'value' => $project['id']),
-                'or' => array(
-                    array('column' => 'title', 'operator' => 'like', 'value' => '%'.$search.'%'),
-                    //array('column' => 'description', 'operator' => 'like', 'value' => '%'.$search.'%'),
-                )
-            );
-
-            $tasks = $this->task->find($filters);
-            $nb_tasks = count($tasks);
+            $tasks = $this->taskFinder->search($project['id'], $search, $offset, $limit, $order, $direction);
+            $nb_tasks = $this->taskFinder->countSearch($project['id'], $search);
         }
 
         $this->response->html($this->template->layout('project_search', array(
             'tasks' => $tasks,
             'nb_tasks' => $nb_tasks,
+            'pagination' => array(
+                'controller' => 'project',
+                'action' => 'search',
+                'params' => array('search' => $search, 'project_id' => $project['id']),
+                'direction' => $direction,
+                'order' => $order,
+                'total' => $nb_tasks,
+                'offset' => $offset,
+                'limit' => $limit,
+            ),
             'values' => array(
                 'search' => $search,
                 'controller' => 'project',
@@ -436,16 +441,25 @@ class Project extends Base
     public function tasks()
     {
         $project = $this->getProject();
+        $direction = $this->request->getStringParam('direction', 'DESC');
+        $order = $this->request->getStringParam('order', 'tasks.date_completed');
+        $offset = $this->request->getIntegerParam('offset', 0);
+        $limit = 25;
 
-        $filters = array(
-            array('column' => 'project_id', 'operator' => 'eq', 'value' => $project['id']),
-            array('column' => 'is_active', 'operator' => 'eq', 'value' => TaskModel::STATUS_CLOSED),
-        );
-
-        $tasks = $this->task->find($filters);
-        $nb_tasks = count($tasks);
+        $tasks = $this->taskFinder->getClosedTasks($project['id'], $offset, $limit, $order, $direction);
+        $nb_tasks = $this->task->countByProjectId($project['id'], array(TaskModel::STATUS_CLOSED));
 
         $this->response->html($this->template->layout('project_tasks', array(
+            'pagination' => array(
+                'controller' => 'project',
+                'action' => 'tasks',
+                'params' => array('project_id' => $project['id']),
+                'direction' => $direction,
+                'order' => $order,
+                'total' => $nb_tasks,
+                'offset' => $offset,
+                'limit' => $limit,
+            ),
             'project' => $project,
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),

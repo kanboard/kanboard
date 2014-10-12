@@ -19,6 +19,7 @@ foreach (array(1, 2, 3, 4) as $column_id) {
             'owner_id' => rand(0, 1),
             'color_id' => rand(0, 1) === 0 ? 'green' : 'purple',
             'score' => rand(0, 21),
+            'is_active' => rand(0, 1),
         );
 
         $taskModel->create($task);

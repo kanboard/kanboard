@@ -125,6 +125,16 @@ td li {
     background: rgb(219, 235, 255)
 }
 
+th a {
+    text-decoration: none;
+    color: #333;
+}
+
+th a:focus,
+th a:hover {
+    text-decoration: underline;
+}
+
 /* forms */
 form {
     padding: 10px;
@@ -1127,6 +1137,19 @@ tr td.task-orange,
 /* datepicker */
 #ui-datepicker-div {
     font-size: 0.8em;
+}
+
+/* pagination */
+#pagination {
+    text-align: center;
+}
+
+#pagination-next {
+    margin-left: 5px;
+}
+
+#pagination-previous {
+    margin-right: 5px;
 }
 
 /* responsive design */

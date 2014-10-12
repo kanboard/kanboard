@@ -234,14 +234,8 @@ class Board extends Base
      */
     public function get($project_id, array $filters = array())
     {
-        $this->db->startTransaction();
-
         $columns = $this->getColumns($project_id);
-
-        $filters[] = array('column' => 'project_id', 'operator' => 'eq', 'value' => $project_id);
-        $filters[] = array('column' => 'is_active', 'operator' => 'eq', 'value' => Task::STATUS_OPEN);
-
-        $tasks = $this->task->find($filters);
+        $tasks = $this->taskFinder->getOpenTasks($project_id);
 
         foreach ($columns as &$column) {
 
@@ -253,8 +247,6 @@ class Board extends Base
                 }
             }
         }
-
-        $this->db->closeTransaction();
 
         return $columns;
     }

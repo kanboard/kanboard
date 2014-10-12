@@ -12,7 +12,12 @@
     <?php if (empty($tasks)): ?>
         <p class="alert"><?= t('No task') ?></p>
     <?php else: ?>
-        <?= Helper\template('task_table', array('tasks' => $tasks, 'categories' => $categories, 'columns' => $columns)) ?>
+        <?= Helper\template('task_table', array(
+            'tasks' => $tasks,
+            'categories' => $categories,
+            'columns' => $columns,
+            'pagination' => $pagination,
+        )) ?>
     <?php endif ?>
     </section>
 </section>

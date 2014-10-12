@@ -146,7 +146,7 @@ class Task extends Base
     }
 
     /**
-     * Count all tasks for a given project and status
+     * Get all tasks for a given project and status
      *
      * @access public
      * @param  integer   $project_id      Project id
@@ -196,166 +196,6 @@ class Task extends Base
                     ->eq('column_id', $column_id)
                     ->in('is_active', $status)
                     ->count();
-    }
-
-    /**
-     * Get tasks that match defined filters
-     *
-     * @access public
-     * @param  array    $filters   Filters: [ ['column' => '...', 'operator' => '...', 'value' => '...'], ... ]
-     * @param  array    $sorting   Sorting: [ 'column' => 'date_creation', 'direction' => 'asc']
-     * @return array
-     */
-    public function find(array $filters, array $sorting = array())
-    {
-        $table = $this->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        '(SELECT count(*) FROM comments WHERE task_id=tasks.id) AS nb_comments',
-                        '(SELECT count(*) FROM task_has_files WHERE task_id=tasks.id) AS nb_files',
-                        '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id) AS nb_subtasks',
-                        '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id AND status=2) AS nb_completed_subtasks',
-                        'tasks.id',
-                        'tasks.reference',
-                        'tasks.title',
-                        'tasks.description',
-                        'tasks.date_creation',
-                        'tasks.date_modification',
-                        'tasks.date_completed',
-                        'tasks.date_due',
-                        'tasks.color_id',
-                        'tasks.project_id',
-                        'tasks.column_id',
-                        'tasks.owner_id',
-                        'tasks.creator_id',
-                        'tasks.position',
-                        'tasks.is_active',
-                        'tasks.score',
-                        'tasks.category_id',
-                        'users.username AS assignee_username',
-                        'users.name AS assignee_name'
-                    )
-                    ->join(User::TABLE, 'id', 'owner_id');
-
-        foreach ($filters as $key => $filter) {
-
-            if ($key === 'or') {
-
-                $table->beginOr();
-
-                foreach ($filter as $subfilter) {
-                    $table->$subfilter['operator']($subfilter['column'], $subfilter['value']);
-                }
-
-                $table->closeOr();
-            }
-            else if (isset($filter['operator']) && isset($filter['column']) && isset($filter['value'])) {
-                $table->$filter['operator']($filter['column'], $filter['value']);
-            }
-        }
-
-        if (empty($sorting)) {
-            $table->orderBy('tasks.position', 'ASC');
-        }
-        else {
-            $table->orderBy($sorting['column'], $sorting['direction']);
-        }
-
-        return $table->findAll();
-    }
-
-    /**
-     * Generic method to duplicate a task
-     *
-     * @access public
-     * @param  array      $task         Task data
-     * @param  array      $override     Task properties to override
-     * @return integer|boolean
-     */
-    public function copy(array $task, array $override = array())
-    {
-        // Values to override
-        if (! empty($override)) {
-            $task = $override + $task;
-        }
-
-        $this->db->startTransaction();
-
-        // Assign new values
-        $values = array();
-        $values['title'] = $task['title'];
-        $values['description'] = $task['description'];
-        $values['date_creation'] = time();
-        $values['date_modification'] = $values['date_creation'];
-        $values['date_due'] = $task['date_due'];
-        $values['color_id'] = $task['color_id'];
-        $values['project_id'] = $task['project_id'];
-        $values['column_id'] = $task['column_id'];
-        $values['owner_id'] = 0;
-        $values['creator_id'] = $task['creator_id'];
-        $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
-        $values['score'] = $task['score'];
-        $values['category_id'] = 0;
-
-        // Check if the assigned user is allowed for the new project
-        if ($task['owner_id'] && $this->projectPermission->isUserAllowed($values['project_id'], $task['owner_id'])) {
-            $values['owner_id'] = $task['owner_id'];
-        }
-
-        // Check if the category exists
-        if ($task['category_id'] && $this->category->exists($task['category_id'], $task['project_id'])) {
-            $values['category_id'] = $task['category_id'];
-        }
-
-        // Save task
-        if (! $this->db->table(self::TABLE)->save($values)) {
-            $this->db->cancelTransaction();
-            return false;
-        }
-
-        $task_id = $this->db->getConnection()->getLastId();
-
-        // Duplicate subtasks
-        if (! $this->subTask->duplicate($task['id'], $task_id)) {
-            $this->db->cancelTransaction();
-            return false;
-        }
-
-        $this->db->closeTransaction();
-
-        // Trigger events
-        $this->event->trigger(self::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $values);
-        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $values);
-
-        return $task_id;
-    }
-
-    /**
-     * Duplicate a task to the same project
-     *
-     * @access public
-     * @param  array      $task         Task data
-     * @return integer|boolean
-     */
-    public function duplicateSameProject($task)
-    {
-        return $this->copy($task);
-    }
-
-    /**
-     * Duplicate a task to another project (always copy to the first column)
-     *
-     * @access public
-     * @param  integer    $project_id   Destination project id
-     * @param  array      $task         Task data
-     * @return integer|boolean
-     */
-    public function duplicateToAnotherProject($project_id, array $task)
-    {
-        return $this->copy($task, array(
-            'project_id' => $project_id,
-            'column_id' => $this->board->getFirstColumn($project_id),
-        ));
     }
 
     /**
@@ -712,6 +552,100 @@ class Task extends Base
         }
 
         return false;
+    }
+
+    /**
+     * Generic method to duplicate a task
+     *
+     * @access public
+     * @param  array      $task         Task data
+     * @param  array      $override     Task properties to override
+     * @return integer|boolean
+     */
+    public function copy(array $task, array $override = array())
+    {
+        // Values to override
+        if (! empty($override)) {
+            $task = $override + $task;
+        }
+
+        $this->db->startTransaction();
+
+        // Assign new values
+        $values = array();
+        $values['title'] = $task['title'];
+        $values['description'] = $task['description'];
+        $values['date_creation'] = time();
+        $values['date_modification'] = $values['date_creation'];
+        $values['date_due'] = $task['date_due'];
+        $values['color_id'] = $task['color_id'];
+        $values['project_id'] = $task['project_id'];
+        $values['column_id'] = $task['column_id'];
+        $values['owner_id'] = 0;
+        $values['creator_id'] = $task['creator_id'];
+        $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
+        $values['score'] = $task['score'];
+        $values['category_id'] = 0;
+
+        // Check if the assigned user is allowed for the new project
+        if ($task['owner_id'] && $this->projectPermission->isUserAllowed($values['project_id'], $task['owner_id'])) {
+            $values['owner_id'] = $task['owner_id'];
+        }
+
+        // Check if the category exists
+        if ($task['category_id'] && $this->category->exists($task['category_id'], $task['project_id'])) {
+            $values['category_id'] = $task['category_id'];
+        }
+
+        // Save task
+        if (! $this->db->table(Task::TABLE)->save($values)) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+
+        $task_id = $this->db->getConnection()->getLastId();
+
+        // Duplicate subtasks
+        if (! $this->subTask->duplicate($task['id'], $task_id)) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+
+        $this->db->closeTransaction();
+
+        // Trigger events
+        $this->event->trigger(Task::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $values);
+        $this->event->trigger(Task::EVENT_CREATE, array('task_id' => $task_id) + $values);
+
+        return $task_id;
+    }
+
+    /**
+     * Duplicate a task to the same project
+     *
+     * @access public
+     * @param  array      $task         Task data
+     * @return integer|boolean
+     */
+    public function duplicateToSameProject($task)
+    {
+        return $this->copy($task);
+    }
+
+    /**
+     * Duplicate a task to another project (always copy to the first column)
+     *
+     * @access public
+     * @param  integer    $project_id   Destination project id
+     * @param  array      $task         Task data
+     * @return integer|boolean
+     */
+    public function duplicateToAnotherProject($project_id, array $task)
+    {
+        return $this->copy($task, array(
+            'project_id' => $project_id,
+            'column_id' => $this->board->getFirstColumn($project_id),
+        ));
     }
 
     /**

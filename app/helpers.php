@@ -590,3 +590,65 @@ function u($controller, $action, array $params = array(), $csrf = false)
 
     return $html;
 }
+
+/**
+ * Pagination links
+ *
+ * @param  array    $pagination    Pagination information
+ * @return string
+ */
+function paginate(array $pagination)
+{
+    extract($pagination);
+
+    $html = '<div id="pagination">';
+    $html .= '<span id="pagination-previous">';
+
+    if ($pagination['offset'] > 0) {
+        $offset = $pagination['offset'] - $limit;
+        $html .= a('&larr; '.t('Previous'), $controller, $action, $params + compact('offset', 'order', 'direction'));
+    }
+    else {
+        $html .= '&larr; '.t('Previous');
+    }
+
+    $html .= '</span>';
+    $html .= '<span id="pagination-next">';
+
+    if (($total - $pagination['offset']) > $limit) {
+        $offset = $pagination['offset'] + $limit;
+        $html .= a(t('Next').' &rarr;', $controller, $action, $params + compact('offset', 'order', 'direction'));
+    }
+    else {
+        $html .= t('Next').' &rarr;';
+    }
+
+    $html .= '</span>';
+    $html .= '</div>';
+
+    return $html;
+}
+
+/**
+ * Column sorting (work with pagination)
+ *
+ * @param  string   $label         Column title
+ * @param  string   $column        SQL column name
+ * @param  array    $pagination    Pagination information
+ * @return string
+ */
+function order($label, $column, array $pagination)
+{
+    extract($pagination);
+
+    $prefix = '';
+
+    if ($order === $column) {
+        $prefix = $direction === 'DESC' ? '&#9660; ' : '&#9650; ';
+        $direction = $direction === 'DESC' ? 'ASC' : 'DESC';
+    }
+
+    $order = $column;
+
+    return $prefix.a($label, $controller, $action, $params + compact('offset', 'order', 'direction'));
+}
