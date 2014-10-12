@@ -6,6 +6,7 @@ use Model\Action;
 use Model\Project;
 use Model\Board;
 use Model\Task;
+use Model\TaskFinder;
 use Model\Category;
 
 class ActionTest extends Base
@@ -49,6 +50,7 @@ class ActionTest extends Base
     public function testEventMoveColumn()
     {
         $task = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $board = new Board($this->registry);
         $project = new Project($this->registry);
         $action = new Action($this->registry);
@@ -79,7 +81,7 @@ class ActionTest extends Base
         $action->attachEvents();
 
         // Our task should be open
-        $t1 = $task->getById(1);
+        $t1 = $tf->getById(1);
         $this->assertEquals(1, $t1['is_active']);
         $this->assertEquals(1, $t1['column_id']);
 
@@ -90,7 +92,7 @@ class ActionTest extends Base
         $this->assertFalse($this->registry->shared('event')->isEventTriggered(Task::EVENT_UPDATE));
 
         // Our task should be closed
-        $t1 = $task->getById(1);
+        $t1 = $tf->getById(1);
         $this->assertEquals(4, $t1['column_id']);
         $this->assertEquals(0, $t1['is_active']);
     }
@@ -98,6 +100,7 @@ class ActionTest extends Base
     public function testExecuteMultipleActions()
     {
         $task = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $board = new Board($this->registry);
         $project = new Project($this->registry);
         $action = new Action($this->registry);
@@ -143,7 +146,7 @@ class ActionTest extends Base
         $this->assertTrue($this->registry->shared('event')->hasListener(Task::EVENT_MOVE_COLUMN, 'Action\TaskClose'));
 
         // Our task should be open, linked to the first project and in the first column
-        $t1 = $task->getById(1);
+        $t1 = $tf->getById(1);
         $this->assertEquals(1, $t1['is_active']);
         $this->assertEquals(1, $t1['column_id']);
         $this->assertEquals(1, $t1['project_id']);
@@ -155,12 +158,12 @@ class ActionTest extends Base
         $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // Our task should be closed
-        $t1 = $task->getById(1);
+        $t1 = $tf->getById(1);
         $this->assertEquals(4, $t1['column_id']);
         $this->assertEquals(0, $t1['is_active']);
 
         // Our task should be duplicated to the 2nd project
-        $t2 = $task->getById(2);
+        $t2 = $tf->getById(2);
         $this->assertNotEmpty($t2);
         $this->assertNotEquals(4, $t2['column_id']);
         $this->assertEquals(1, $t2['is_active']);

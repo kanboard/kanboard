@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskFinder;
 use Model\Project;
 use Model\Category;
 
@@ -30,6 +31,7 @@ class ActionTaskAssignColorCategory extends Base
 
         // We create a task in the first column
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
         $c = new Category($this->registry);
 
@@ -51,7 +53,7 @@ class ActionTaskAssignColorCategory extends Base
         $this->assertFalse($action->execute($event));
 
         // Our task should be assigned to the ategory_id=1 and have the green color
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(2, $task['category_id']);
         $this->assertEquals('green', $task['color_id']);
@@ -69,7 +71,7 @@ class ActionTaskAssignColorCategory extends Base
         $this->assertTrue($action->execute($event));
 
         // Our task should have the blue color
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals('blue', $task['color_id']);
     }

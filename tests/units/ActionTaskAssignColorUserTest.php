@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskFinder;
 use Model\Project;
 
 class ActionTaskAssignColorUser extends Base
@@ -29,6 +30,7 @@ class ActionTaskAssignColorUser extends Base
 
         // We create a task in the first column
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'color_id' => 'green')));
@@ -44,7 +46,7 @@ class ActionTaskAssignColorUser extends Base
         $this->assertFalse($action->execute($event));
 
         // Our task should be assigned to nobody and have the green color
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals('green', $task['color_id']);
@@ -60,7 +62,7 @@ class ActionTaskAssignColorUser extends Base
         $this->assertTrue($action->execute($event));
 
         // Our task should be assigned to nobody and have the blue color
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals('blue', $task['color_id']);

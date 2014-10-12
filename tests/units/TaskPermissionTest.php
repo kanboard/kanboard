@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskFinder;
 use Model\TaskPermission;
 use Model\Project;
 use Model\Category;
@@ -13,6 +14,7 @@ class TaskPermissionTest extends Base
     public function testPrepareCreation()
     {
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $tp = new TaskPermission($this->registry);
         $p = new Project($this->registry);
         $u = new User($this->registry);
@@ -30,7 +32,7 @@ class TaskPermissionTest extends Base
         $this->assertNotEmpty($user);
         $u->updateSession($user);
 
-        $task = $t->getbyId(1);
+        $task = $tf->getbyId(1);
         $this->assertNotEmpty($task);
         $this->assertTrue($tp->canRemoveTask($task));
 
@@ -39,7 +41,7 @@ class TaskPermissionTest extends Base
         $this->assertNotEmpty($user);
         $u->updateSession($user);
 
-        $task = $t->getbyId(1);
+        $task = $tf->getbyId(1);
         $this->assertNotEmpty($task);
         $this->assertFalse($tp->canRemoveTask($task));
 
@@ -48,7 +50,7 @@ class TaskPermissionTest extends Base
         $this->assertNotEmpty($user);
         $u->updateSession($user);
 
-        $task = $t->getbyId(2);
+        $task = $tf->getbyId(2);
         $this->assertNotEmpty($task);
         $this->assertTrue($tp->canRemoveTask($task));
 
@@ -57,7 +59,7 @@ class TaskPermissionTest extends Base
         $this->assertNotEmpty($user);
         $u->updateSession($user);
 
-        $task = $t->getbyId(2);
+        $task = $tf->getbyId(2);
         $this->assertNotEmpty($task);
         $this->assertTrue($tp->canRemoveTask($task));
 
@@ -66,7 +68,7 @@ class TaskPermissionTest extends Base
         $this->assertNotEmpty($user);
         $u->updateSession($user);
 
-        $task = $t->getbyId(3);
+        $task = $tf->getbyId(3);
         $this->assertNotEmpty($task);
         $this->assertTrue($tp->canRemoveTask($task));
 
@@ -75,7 +77,7 @@ class TaskPermissionTest extends Base
         $this->assertNotEmpty($user);
         $u->updateSession($user);
 
-        $task = $t->getbyId(3);
+        $task = $tf->getbyId(3);
         $this->assertNotEmpty($task);
         $this->assertFalse($tp->canRemoveTask($task));
 
@@ -84,7 +86,7 @@ class TaskPermissionTest extends Base
         $this->assertNotEmpty($user);
         $u->updateSession($user);
 
-        $task = $t->getbyId(4);
+        $task = $tf->getbyId(4);
         $this->assertNotEmpty($task);
         $this->assertTrue($tp->canRemoveTask($task));
 
@@ -93,7 +95,7 @@ class TaskPermissionTest extends Base
         $this->assertNotEmpty($user);
         $u->updateSession($user);
 
-        $task = $t->getbyId(4);
+        $task = $tf->getbyId(4);
         $this->assertNotEmpty($task);
         $this->assertFalse($tp->canRemoveTask($task));
     }

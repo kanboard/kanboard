@@ -56,7 +56,7 @@ class SubtaskHistoryListener implements Listener
 
         if ($creator_id && isset($data['task_id']) && isset($data['id'])) {
 
-            $task = $this->model->task->getById($data['task_id']);
+            $task = $this->model->taskFinder->getById($data['task_id']);
 
             $this->model->create(
                 $task['project_id'],

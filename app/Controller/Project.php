@@ -447,7 +447,7 @@ class Project extends Base
         $limit = 25;
 
         $tasks = $this->taskFinder->getClosedTasks($project['id'], $offset, $limit, $order, $direction);
-        $nb_tasks = $this->task->countByProjectId($project['id'], array(TaskModel::STATUS_CLOSED));
+        $nb_tasks = $this->taskFinder->countByProjectId($project['id'], array(TaskModel::STATUS_CLOSED));
 
         $this->response->html($this->template->layout('project_tasks', array(
             'pagination' => array(

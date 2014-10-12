@@ -4,6 +4,7 @@ require_once __DIR__.'/Base.php';
 
 use Model\User;
 use Model\Task;
+use Model\TaskFinder;
 use Model\Project;
 
 class UserTest extends Base
@@ -110,13 +111,14 @@ class UserTest extends Base
     {
         $u = new User($this->registry);
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
 
         $this->assertTrue($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'owner_id' => 2)));
 
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(2, $task['owner_id']);
 
@@ -126,7 +128,7 @@ class UserTest extends Base
         $this->assertFalse($u->remove(55));
 
         // Make sure that assigned tasks are unassigned after removing the user
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(0, $task['owner_id']);
     }

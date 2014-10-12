@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskFinder;
 use Model\Project;
 use Model\Acl;
 
@@ -47,6 +48,7 @@ class ActionTaskAssignCurrentUser extends Base
 
         // We create a task in the first column
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
         $a = new Acl($this->registry);
 
@@ -65,7 +67,7 @@ class ActionTaskAssignCurrentUser extends Base
         $this->assertTrue($action->execute($event));
 
         // Our task should be assigned to the user 5 (from the session)
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(5, $task['owner_id']);

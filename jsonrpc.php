@@ -6,6 +6,7 @@ use JsonRPC\Server;
 use Model\Project;
 use Model\ProjectPermission;
 use Model\Task;
+use Model\TaskFinder;
 use Model\TaskValidator;
 use Model\User;
 use Model\Config;
@@ -24,6 +25,7 @@ $config->setupTimezone();
 $project = new Project($registry);
 $projectPermission = new ProjectPermission($registry);
 $task = new Task($registry);
+$taskFinder = new TaskFinder($registry);
 $taskValidator = new TaskValidator($registry);
 $user = new User($registry);
 $category = new Category($registry);
@@ -178,12 +180,12 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
     return $valid && $task->create($values) !== false;
 });
 
-$server->register('getTask', function($task_id) use ($task) {
-    return $task->getById($task_id);
+$server->register('getTask', function($task_id) use ($taskFinder) {
+    return $taskFinder->getById($task_id);
 });
 
-$server->register('getAllTasks', function($project_id, $status) use ($task) {
-    return $task->getAll($project_id, $status);
+$server->register('getAllTasks', function($project_id, $status) use ($taskFinder) {
+    return $taskFinder->getAll($project_id, $status);
 });
 
 $server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null) use ($task, $taskValidator) {

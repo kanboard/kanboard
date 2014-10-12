@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskFinder;
 use Model\Project;
 use Model\Category;
 use Model\User;
@@ -12,6 +13,7 @@ class CategoryTest extends Base
     public function testCreation()
     {
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
         $c = new Category($this->registry);
 
@@ -20,7 +22,7 @@ class CategoryTest extends Base
         $this->assertEquals(2, $c->create(array('name' => 'Category #2', 'project_id' => 1)));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'category_id' => 2)));
 
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertTrue(is_array($task));
         $this->assertEquals(2, $task['category_id']);
 
@@ -34,6 +36,7 @@ class CategoryTest extends Base
     public function testRemove()
     {
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
         $c = new Category($this->registry);
 
@@ -42,7 +45,7 @@ class CategoryTest extends Base
         $this->assertEquals(2, $c->create(array('name' => 'Category #2', 'project_id' => 1)));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'category_id' => 2)));
 
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertTrue(is_array($task));
         $this->assertEquals(2, $task['category_id']);
 
@@ -50,7 +53,7 @@ class CategoryTest extends Base
         $this->assertTrue($c->remove(2));
 
         // Make sure tasks assigned with that category are reseted
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertTrue(is_array($task));
         $this->assertEquals(0, $task['category_id']);
     }

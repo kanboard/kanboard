@@ -276,7 +276,7 @@ abstract class Base
      */
     protected function getTask()
     {
-        $task = $this->task->getDetails($this->request->getIntegerParam('task_id'));
+        $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
         if (! $task) {
             $this->notfound();

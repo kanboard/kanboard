@@ -196,12 +196,12 @@ class Project extends Base
         $stats['nb_active_tasks'] = 0;
 
         foreach ($columns as &$column) {
-            $column['nb_active_tasks'] = $this->task->countByColumnId($project_id, $column['id']);
+            $column['nb_active_tasks'] = $this->taskFinder->countByColumnId($project_id, $column['id']);
             $stats['nb_active_tasks'] += $column['nb_active_tasks'];
         }
 
         $stats['columns'] = $columns;
-        $stats['nb_tasks'] = $this->task->countByProjectId($project_id);
+        $stats['nb_tasks'] = $this->taskFinder->countByProjectId($project_id);
         $stats['nb_inactive_tasks'] = $stats['nb_tasks'] - $stats['nb_active_tasks'];
 
         return $stats;

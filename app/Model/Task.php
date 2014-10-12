@@ -2,8 +2,6 @@
 
 namespace Model;
 
-use PDO;
-
 /**
  * Task model
  *
@@ -42,163 +40,6 @@ class Task extends Base
     const EVENT_ASSIGNEE_CHANGE = 'task.assignee_change';
 
     /**
-     * Get a list of due tasks for all projects
-     *
-     * @access public
-     * @return array
-     */
-    public function getOverdueTasks()
-    {
-        $tasks = $this->db->table(self::TABLE)
-                    ->columns(
-                        self::TABLE.'.id',
-                        self::TABLE.'.title',
-                        self::TABLE.'.date_due',
-                        self::TABLE.'.project_id',
-                        Project::TABLE.'.name AS project_name',
-                        User::TABLE.'.username AS assignee_username',
-                        User::TABLE.'.name AS assignee_name'
-                    )
-                    ->join(Project::TABLE, 'id', 'project_id')
-                    ->join(User::TABLE, 'id', 'owner_id')
-                    ->eq(Project::TABLE.'.is_active', 1)
-                    ->eq(self::TABLE.'.is_active', 1)
-                    ->neq(self::TABLE.'.date_due', 0)
-                    ->lte(self::TABLE.'.date_due', mktime(23, 59, 59))
-                    ->findAll();
-
-        return $tasks;
-    }
-
-    /**
-     * Get task details (fetch more information from other tables)
-     *
-     * @access public
-     * @param  integer   $task_id   Task id
-     * @return array
-     */
-    public function getDetails($task_id)
-    {
-        $sql = '
-            SELECT
-            tasks.id,
-            tasks.reference,
-            tasks.title,
-            tasks.description,
-            tasks.date_creation,
-            tasks.date_completed,
-            tasks.date_modification,
-            tasks.date_due,
-            tasks.date_started,
-            tasks.time_estimated,
-            tasks.time_spent,
-            tasks.color_id,
-            tasks.project_id,
-            tasks.column_id,
-            tasks.owner_id,
-            tasks.creator_id,
-            tasks.position,
-            tasks.is_active,
-            tasks.score,
-            tasks.category_id,
-            project_has_categories.name AS category_name,
-            projects.name AS project_name,
-            columns.title AS column_title,
-            users.username AS assignee_username,
-            users.name AS assignee_name,
-            creators.username AS creator_username,
-            creators.name AS creator_name
-            FROM tasks
-            LEFT JOIN users ON users.id = tasks.owner_id
-            LEFT JOIN users AS creators ON creators.id = tasks.creator_id
-            LEFT JOIN project_has_categories ON project_has_categories.id = tasks.category_id
-            LEFT JOIN projects ON projects.id = tasks.project_id
-            LEFT JOIN columns ON columns.id = tasks.column_id
-            WHERE tasks.id = ?
-        ';
-
-        $rq = $this->db->execute($sql, array($task_id));
-        return $rq->fetch(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * Fetch a task by the id
-     *
-     * @access public
-     * @param  integer   $task_id   Task id
-     * @return array
-     */
-    public function getById($task_id)
-    {
-        return $this->db->table(self::TABLE)->eq('id', $task_id)->findOne();
-    }
-
-    /**
-     * Fetch a task  by the reference (external id)
-     *
-     * @access public
-     * @param  string   $reference   Task reference
-     * @return array
-     */
-    public function getByReference($reference)
-    {
-        return $this->db->table(self::TABLE)->eq('reference', $reference)->findOne();
-    }
-
-    /**
-     * Get all tasks for a given project and status
-     *
-     * @access public
-     * @param  integer   $project_id      Project id
-     * @param  integer   $status_id       Status id
-     * @return array
-     */
-    public function getAll($project_id, $status_id = self::STATUS_OPEN)
-    {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->eq('is_active', $status_id)
-                    ->findAll();
-    }
-
-    /**
-     * Count all tasks for a given project and status
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @param  array     $status       List of status id
-     * @return integer
-     */
-    public function countByProjectId($project_id, array $status = array(self::STATUS_OPEN, self::STATUS_CLOSED))
-    {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->in('is_active', $status)
-                    ->count();
-    }
-
-    /**
-     * Count the number of tasks for a given column and status
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @param  integer   $column_id    Column id
-     * @param  array     $status       List of status id
-     * @return integer
-     */
-    public function countByColumnId($project_id, $column_id, array $status = array(self::STATUS_OPEN))
-    {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->eq('column_id', $column_id)
-                    ->in('is_active', $status)
-                    ->count();
-    }
-
-    /**
      * Prepare data before task creation or modification
      *
      * @access public
@@ -233,7 +74,7 @@ class Task extends Base
 
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
-        $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
+        $values['position'] = $this->taskFinder->countByColumnId($values['project_id'], $values['column_id']) + 1;
     }
 
     /**
@@ -288,7 +129,7 @@ class Task extends Base
     public function update(array $values, $trigger_events = true)
     {
         // Fetch original task
-        $original_task = $this->getById($values['id']);
+        $original_task = $this->taskFinder->getById($values['id']);
 
         if (! $original_task) {
             return false;
@@ -341,18 +182,6 @@ class Task extends Base
     }
 
     /**
-     * Return true if the project exists
-     *
-     * @access public
-     * @param  integer    $task_id   Task id
-     * @return boolean
-     */
-    public function exists($task_id)
-    {
-        return $this->db->table(self::TABLE)->eq('id', $task_id)->count() === 1;
-    }
-
-    /**
      * Mark a task closed
      *
      * @access public
@@ -361,7 +190,7 @@ class Task extends Base
      */
     public function close($task_id)
     {
-        if (! $this->exists($task_id)) {
+        if (! $this->taskFinder->exists($task_id)) {
             return false;
         }
 
@@ -374,7 +203,7 @@ class Task extends Base
                         ));
 
         if ($result) {
-            $this->event->trigger(self::EVENT_CLOSE, array('task_id' => $task_id) + $this->getById($task_id));
+            $this->event->trigger(self::EVENT_CLOSE, array('task_id' => $task_id) + $this->taskFinder->getById($task_id));
         }
 
         return $result;
@@ -389,7 +218,7 @@ class Task extends Base
      */
     public function open($task_id)
     {
-        if (! $this->exists($task_id)) {
+        if (! $this->taskFinder->exists($task_id)) {
             return false;
         }
 
@@ -402,7 +231,7 @@ class Task extends Base
                         ));
 
         if ($result) {
-            $this->event->trigger(self::EVENT_OPEN, array('task_id' => $task_id) + $this->getById($task_id));
+            $this->event->trigger(self::EVENT_OPEN, array('task_id' => $task_id) + $this->taskFinder->getById($task_id));
         }
 
         return $result;
@@ -417,7 +246,7 @@ class Task extends Base
      */
     public function remove($task_id)
     {
-        if (! $this->exists($task_id)) {
+        if (! $this->taskFinder->exists($task_id)) {
             return false;
         }
 
@@ -541,7 +370,7 @@ class Task extends Base
 
         // We use the first column of the new project
         $values['column_id'] = $this->board->getFirstColumn($project_id);
-        $values['position'] = $this->countByColumnId($project_id, $values['column_id']) + 1;
+        $values['position'] = $this->taskFinder->countByColumnId($project_id, $values['column_id']) + 1;
         $values['project_id'] = $project_id;
 
         // The task will be open (close event binding)
@@ -583,7 +412,7 @@ class Task extends Base
         $values['column_id'] = $task['column_id'];
         $values['owner_id'] = 0;
         $values['creator_id'] = $task['creator_id'];
-        $values['position'] = $this->countByColumnId($values['project_id'], $values['column_id']) + 1;
+        $values['position'] = $this->taskFinder->countByColumnId($values['project_id'], $values['column_id']) + 1;
         $values['score'] = $task['score'];
         $values['category_id'] = 0;
 

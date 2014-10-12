@@ -235,7 +235,7 @@ class Board extends Base
     public function get($project_id, array $filters = array())
     {
         $columns = $this->getColumns($project_id);
-        $tasks = $this->taskFinder->getOpenTasks($project_id);
+        $tasks = $this->taskFinder->getTasksOnBoard($project_id);
 
         foreach ($columns as &$column) {
 

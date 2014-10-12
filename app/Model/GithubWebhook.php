@@ -77,7 +77,7 @@ class GithubWebhook extends Base
                 continue;
             }
 
-            $task = $this->task->getById($task_id);
+            $task = $this->taskFinder->getById($task_id);
 
             if (! $task) {
                 continue;
@@ -148,7 +148,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueClosed(array $issue)
     {
-        $task = $this->task->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($issue['number']);
 
         if ($task) {
             $event = array(
@@ -169,7 +169,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueReopened(array $issue)
     {
-        $task = $this->task->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($issue['number']);
 
         if ($task) {
             $event = array(
@@ -191,7 +191,7 @@ class GithubWebhook extends Base
     public function handleIssueAssigned(array $issue)
     {
         $user = $this->user->getByUsername($issue['assignee']['login']);
-        $task = $this->task->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($issue['number']);
 
         if ($user && $task) {
 
@@ -214,7 +214,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueUnassigned(array $issue)
     {
-        $task = $this->task->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($issue['number']);
 
         if ($task) {
 
@@ -238,7 +238,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueLabeled(array $issue, array $label)
     {
-        $task = $this->task->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($issue['number']);
 
         if ($task) {
 
@@ -262,7 +262,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueUnlabeled(array $issue, array $label)
     {
-        $task = $this->task->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($issue['number']);
 
         if ($task) {
 

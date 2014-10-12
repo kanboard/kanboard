@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskFinder;
 use Model\Project;
 
 class ActionTaskMoveAnotherProject extends Base
@@ -42,6 +43,7 @@ class ActionTaskMoveAnotherProject extends Base
 
         // We create a task in the first column
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
         $this->assertEquals(1, $p->create(array('name' => 'project 1')));
         $this->assertEquals(2, $p->create(array('name' => 'project 2')));
@@ -60,7 +62,7 @@ class ActionTaskMoveAnotherProject extends Base
         $this->assertFalse($action->execute($event));
 
         // Our task should be assigned to the project 1
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(1, $task['project_id']);
 
@@ -77,7 +79,7 @@ class ActionTaskMoveAnotherProject extends Base
         $this->assertTrue($action->execute($event));
 
         // Our task should be assigned to the project 2
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(2, $task['project_id']);
     }

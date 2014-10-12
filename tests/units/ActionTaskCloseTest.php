@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskFinder;
 use Model\Project;
 use Model\GithubWebhook;
 
@@ -82,6 +83,7 @@ class ActionTaskCloseTest extends Base
 
         // We create a task in the first column
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
@@ -97,7 +99,7 @@ class ActionTaskCloseTest extends Base
         $this->assertTrue($action->execute($event));
 
         // Our task should be closed
-        $task = $t->getById(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(0, $task['is_active']);
     }
