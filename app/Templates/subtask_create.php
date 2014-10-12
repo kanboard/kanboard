@@ -14,7 +14,7 @@
     <?= Helper\form_label(t('Assignee'), 'user_id') ?>
     <?= Helper\form_select('user_id', $users_list, $values, $errors) ?><br/>
 
-    <?= Helper\form_label(t('Original Estimate'), 'time_estimated') ?>
+    <?= Helper\form_label(t('Original estimate'), 'time_estimated') ?>
     <?= Helper\form_numeric('time_estimated', $values, $errors) ?> <?= t('hours') ?><br/>
 
     <?= Helper\form_checkbox('another_subtask', t('Create another sub-task'), 1, isset($values['another_subtask']) && $values['another_subtask'] == 1) ?>

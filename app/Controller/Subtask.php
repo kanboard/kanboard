@@ -197,7 +197,8 @@ class Subtask extends Base
 
         $value = array(
             'id' => $subtask['id'],
-            'status' => ($subtask['status'] + 1) % 3
+            'status' => ($subtask['status'] + 1) % 3,
+            'task_id' => $task['id'],
         );
 
         if (! $this->subTask->update($value)) {

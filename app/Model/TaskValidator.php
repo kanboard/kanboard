@@ -31,6 +31,9 @@ class TaskValidator extends Base
             new Validators\Integer('category_id', t('This value must be an integer')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
             new Validators\Date('date_due', t('Invalid date'), $this->dateParser->getDateFormats()),
+            new Validators\Date('date_started', t('Invalid date'), $this->dateParser->getDateFormats()),
+            new Validators\Numeric('time_spent', t('This value must be numeric')),
+            new Validators\Numeric('time_estimated', t('This value must be numeric')),
         );
     }
 
@@ -180,6 +183,27 @@ class TaskValidator extends Base
         $rules = array(
             new Validators\Required('id', t('The id is required')),
             new Validators\Required('project_id', t('The project is required')),
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    /**
+     * Validate time tracking modification (form)
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateTimeModification(array $values)
+    {
+        $rules = array(
+            new Validators\Required('id', t('The id is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));

@@ -5,14 +5,6 @@
         <h2><?= t('Sub-Tasks') ?></h2>
     </div>
 
-    <?php
-
-    $total_spent = 0;
-    $total_estimated = 0;
-    $total_remaining = 0;
-
-    ?>
-
     <table class="subtasks-table">
         <tr>
             <th width="40%"><?= t('Title') ?></th>
@@ -64,11 +56,6 @@
                 </td>
             <?php endif ?>
         </tr>
-            <?php
-                $total_estimated += $subtask['time_estimated'];
-                $total_spent += $subtask['time_spent'];
-                $total_remaining = $total_estimated - $total_spent;
-            ?>
         <?php endforeach ?>
     </table>
 
@@ -80,15 +67,6 @@
             <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
         </form>
     <?php endif ?>
-
-    <div class="subtasks-time-tracking">
-        <h4><?= t('Time tracking') ?></h4>
-        <ul>
-            <li><?= t('Estimate:') ?> <strong><?= Helper\escape($total_estimated) ?></strong> <?= t('hours') ?></li>
-            <li><?= t('Spent:') ?> <strong><?= Helper\escape($total_spent) ?></strong> <?= t('hours') ?></li>
-            <li><?= t('Remaining:') ?> <strong><?= Helper\escape($total_remaining > 0 ? $total_remaining : 0) ?></strong> <?= t('hours') ?></li>
-        </ul>
-    </div>
 
 </div>
 <?php endif ?>

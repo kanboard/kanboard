@@ -34,6 +34,7 @@ use Model\LastLogin;
  * @property \Model\TaskValidator      $taskValidator
  * @property \Model\CommentHistory     $commentHistory
  * @property \Model\SubtaskHistory     $subtaskHistory
+ * @property \Model\TimeTracking       $timeTracking
  * @property \Model\User               $user
  * @property \Model\Webhook            $webhook
  */

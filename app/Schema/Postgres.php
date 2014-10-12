@@ -5,7 +5,17 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 12;
+const VERSION = 13;
+
+function version_13($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN date_started INTEGER");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_spent FLOAT DEFAULT 0");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_estimated FLOAT DEFAULT 0");
+
+    $pdo->exec("ALTER TABLE task_has_subtasks ALTER COLUMN time_estimated TYPE FLOAT");
+    $pdo->exec("ALTER TABLE task_has_subtasks ALTER COLUMN time_spent TYPE FLOAT");
+}
 
 function version_12($pdo)
 {

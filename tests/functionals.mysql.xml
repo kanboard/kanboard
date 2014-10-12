@@ -5,7 +5,7 @@
         </testsuite>
     </testsuites>
     <php>
-        <const name="API_URL" value="http://localhost:8080/jsonrpc.php" />
+        <const name="API_URL" value="http://localhost:8000/jsonrpc.php" />
         <const name="API_KEY" value="19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929" />
         <const name="DB_DRIVER" value="mysql" />
         <const name="DB_NAME" value="kanboard" />

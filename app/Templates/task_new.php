@@ -38,6 +38,9 @@
             <?= Helper\form_label(t('Complexity'), 'score') ?>
             <?= Helper\form_number('score', $values, $errors) ?><br/>
 
+            <?= Helper\form_label(t('Original estimate'), 'time_estimated') ?>
+            <?= Helper\form_numeric('time_estimated', $values, $errors) ?> <?= t('hours') ?><br/>
+
             <?= Helper\form_label(t('Due Date'), 'date_due') ?>
             <?= Helper\form_text('date_due', $values, $errors, array('placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?><br/>
             <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>

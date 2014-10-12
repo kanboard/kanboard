@@ -26,6 +26,10 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+.align-right {
+    text-align: right;
+}
+
 /* links */
 a {
     color: #3366CC;
@@ -841,6 +845,12 @@ a.task-board-nobody {
     margin-top: 10px;
 }
 
+.task-time-form {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 3px;
+}
+
 /* comments */
 .comment {
     margin-bottom: 20px;
@@ -916,15 +926,6 @@ a.task-board-nobody {
 
 .subtasks-table td {
     vertical-align: middle;
-}
-
-.subtasks-time-tracking h4 {
-    margin-bottom: 5px;
-}
-
-.subtasks-time-tracking li {
-    list-style-type: square;
-    margin-left: 30px;
 }
 
 /* markdown content */

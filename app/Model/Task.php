@@ -89,6 +89,9 @@ class Task extends Base
             tasks.date_completed,
             tasks.date_modification,
             tasks.date_due,
+            tasks.date_started,
+            tasks.time_estimated,
+            tasks.time_spent,
             tasks.color_id,
             tasks.project_id,
             tasks.column_id,
@@ -363,12 +366,9 @@ class Task extends Base
      */
     public function prepare(array &$values)
     {
-        if (! empty($values['date_due']) && ! is_numeric($values['date_due'])) {
-            $values['date_due'] = $this->dateParser->getTimestamp($values['date_due']);
-        }
-
+        $this->dateParser->convert($values, array('date_due', 'date_started'));
         $this->removeFields($values, array('another_task', 'id'));
-        $this->resetFields($values, array('date_due', 'score', 'category_id'));
+        $this->resetFields($values, array('date_due', 'date_started', 'score', 'category_id', 'time_estimated', 'time_spent'));
         $this->convertIntegerFields($values, array('is_active'));
     }
 

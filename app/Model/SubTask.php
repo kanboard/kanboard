@@ -82,6 +82,7 @@ class SubTask extends Base
                              ->eq('task_id', $task_id)
                              ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
                              ->join(User::TABLE, 'id', 'user_id')
+                             ->asc(self::TABLE.'.id')
                              ->findAll();
 
         foreach ($subtasks as &$subtask) {

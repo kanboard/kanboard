@@ -22,9 +22,24 @@
             <?= dt('Completed on %B %e, %Y at %k:%M %p', $task['date_completed']) ?>
         </li>
         <?php endif ?>
+        <?php if ($task['date_started']): ?>
+        <li>
+            <?= dt('Started on %B %e, %Y', $task['date_started']) ?>
+        </li>
+        <?php endif ?>
         <?php if ($task['date_due']): ?>
         <li>
             <strong><?= dt('Must be done before %B %e, %Y', $task['date_due']) ?></strong>
+        </li>
+        <?php endif ?>
+        <?php if ($task['time_estimated']): ?>
+        <li>
+            <?= t('Estimated time: %s hours', $task['time_estimated']) ?>
+        </li>
+        <?php endif ?>
+        <?php if ($task['time_spent']): ?>
+        <li>
+            <?= t('Time spent: %s hours', $task['time_spent']) ?>
         </li>
         <?php endif ?>
         <?php if ($task['creator_username']): ?>

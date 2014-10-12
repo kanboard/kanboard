@@ -54,15 +54,29 @@ class Task extends Base
     public function show()
     {
         $task = $this->getTask();
+        $subtasks = $this->subTask->getAll($task['id']);
+
+        $values = array(
+            'id' => $task['id'],
+            'date_started' => $task['date_started'],
+            'time_estimated' => $task['time_estimated'] ?: '',
+            'time_spent' => $task['time_spent'] ?: '',
+        );
+
+        $this->dateParser->format($values, array('date_started'));
 
         $this->response->html($this->taskLayout('task_show', array(
             'project' => $this->project->getById($task['project_id']),
             'files' => $this->file->getAll($task['id']),
             'comments' => $this->comment->getAll($task['id']),
-            'subtasks' => $this->subTask->getAll($task['id']),
+            'subtasks' => $subtasks,
             'task' => $task,
+            'values' => $values,
+            'timesheet' => $this->timeTracking->getTaskTimesheet($task, $subtasks),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
+            'date_format' => $this->config->get('application_date_format'),
+            'date_formats' => $this->dateParser->getAvailableFormats(),
             'menu' => 'tasks',
             'title' => $task['title'],
         )));
@@ -155,16 +169,9 @@ class Task extends Base
     public function edit()
     {
         $task = $this->getTask();
-
-        if (! empty($task['date_due'])) {
-            $task['date_due'] = date($this->config->get('application_date_format'), $task['date_due']);
-        }
-        else {
-            $task['date_due'] = '';
-        }
-
-        $task['score'] = $task['score'] ?: '';
         $ajax = $this->request->isAjax();
+
+        $this->dateParser->format($task, array('date_due'));
 
         $params = array(
             'values' => $task,
@@ -209,7 +216,7 @@ class Task extends Base
                     $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
                 }
                 else {
-                    $this->response->redirect('?controller=task&action=show&task_id='.$values['id']);
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
                 }
             }
             else {
@@ -231,6 +238,28 @@ class Task extends Base
             'title' => t('Edit a task'),
             'ajax' => $this->request->isAjax(),
         )));
+    }
+
+    /**
+     * Update time tracking information
+     *
+     * @access public
+     */
+    public function time()
+    {
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+
+        list($valid, $errors) = $this->taskValidator->validateTimeModification($values);
+
+        if ($valid && $this->task->update($values)) {
+            $this->session->flash(t('Task updated successfully.'));
+        }
+        else {
+            $this->session->flashError(t('Unable to update your task.'));
+        }
+
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
     }
 
     /**

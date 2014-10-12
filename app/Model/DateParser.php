@@ -97,4 +97,46 @@ class DateParser extends Base
     {
         return mktime(0, 0, 0, date('m', $timestamp), date('d', $timestamp), date('Y', $timestamp));
     }
+
+    /**
+     * Format date (form display)
+     *
+     * @access public
+     * @param  array    $values   Database values
+     * @param  array    $fields   Date fields
+     * @param  string   $format   Date format
+     */
+    public function format(array &$values, array $fields, $format = '')
+    {
+        if ($format === '') {
+            $format = $this->config->get('application_date_format');
+        }
+
+        foreach ($fields as $field) {
+
+            if (! empty($values[$field])) {
+                $values[$field] = date($format, $values[$field]);
+            }
+            else {
+                $values[$field] = '';
+            }
+        }
+    }
+
+    /**
+     * Convert date (form input data)
+     *
+     * @access public
+     * @param  array    $values   Database values
+     * @param  array    $fields   Date fields
+     */
+    public function convert(array &$values, array $fields)
+    {
+        foreach ($fields as $field) {
+
+            if (! empty($values[$field]) && ! is_numeric($values[$field])) {
+                $values[$field] = $this->getTimestamp($values[$field]);
+            }
+        }
+    }
 }

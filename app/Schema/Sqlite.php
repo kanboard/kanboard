@@ -5,7 +5,14 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 31;
+const VERSION = 32;
+
+function version_32($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN date_started INTEGER");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_spent FLOAT DEFAULT 0");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_estimated FLOAT DEFAULT 0");
+}
 
 function version_31($pdo)
 {
@@ -169,8 +176,8 @@ function version_18($pdo)
             id INTEGER PRIMARY KEY,
             title TEXT COLLATE NOCASE,
             status INTEGER DEFAULT 0,
-            time_estimated INTEGER DEFAULT 0,
-            time_spent INTEGER DEFAULT 0,
+            time_estimated NUMERIC DEFAULT 0,
+            time_spent NUMERIC DEFAULT 0,
             task_id INTEGER NOT NULL,
             user_id INTEGER,
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE

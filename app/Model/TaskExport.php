@@ -27,7 +27,7 @@ class TaskExport extends Base
         $results = array($this->getColumns());
 
         foreach ($tasks as &$task) {
-            $results[] = array_values($this->formatOutput($task));
+            $results[] = array_values($this->format($task));
         }
 
         return $results;
@@ -60,7 +60,10 @@ class TaskExport extends Base
             tasks.title,
             tasks.date_creation,
             tasks.date_modification,
-            tasks.date_completed
+            tasks.date_completed,
+            tasks.date_started,
+            tasks.time_estimated,
+            tasks.time_spent
             FROM tasks
             LEFT JOIN users ON users.id = tasks.owner_id
             LEFT JOIN users AS creators ON creators.id = tasks.creator_id
@@ -89,16 +92,14 @@ class TaskExport extends Base
      * @param  array     $task    Task properties
      * @return array
      */
-    public function formatOutput(array &$task)
+    public function format(array &$task)
     {
         $colors = $this->color->getList();
-        $task['score'] = $task['score'] ?: '';
+
         $task['is_active'] = $task['is_active'] == Task::STATUS_OPEN ? e('Open') : e('Closed');
         $task['color_id'] = $colors[$task['color_id']];
-        $task['date_creation'] = date('Y-m-d', $task['date_creation']);
-        $task['date_due'] = $task['date_due'] ? date('Y-m-d', $task['date_due']) : '';
-        $task['date_modification'] = $task['date_modification'] ? date('Y-m-d', $task['date_modification']) : '';
-        $task['date_completed'] = $task['date_completed'] ? date('Y-m-d', $task['date_completed']) : '';
+
+        $this->dateParser->format($task, array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'), 'Y-m-d');
 
         return $task;
     }
@@ -127,6 +128,9 @@ class TaskExport extends Base
             e('Creation date'),
             e('Modification date'),
             e('Completion date'),
+            e('Start date'),
+            e('Time estimated'),
+            e('Time spent'),
         );
     }
 }
