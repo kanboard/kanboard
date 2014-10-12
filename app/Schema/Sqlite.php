@@ -10,8 +10,8 @@ const VERSION = 32;
 function version_32($pdo)
 {
     $pdo->exec("ALTER TABLE tasks ADD COLUMN date_started INTEGER");
-    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_spent FLOAT DEFAULT 0");
-    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_estimated FLOAT DEFAULT 0");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_spent NUMERIC DEFAULT 0");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN time_estimated NUMERIC DEFAULT 0");
 }
 
 function version_31($pdo)
