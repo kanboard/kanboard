@@ -107,6 +107,7 @@ Documentation
 
 ### Contributors
 
+- [Contributor guide](docs/contributing.markdown)
 - [Translations](docs/translations.markdown)
 - [Coding standards](docs/coding-standards.markdown)
 - [Running tests](docs/tests.markdown)
