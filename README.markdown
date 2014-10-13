@@ -50,6 +50,8 @@ Documentation
 
 #### Introduction
 
+- [What is Kanban?](docs/what-is-kanban.markdown)
+- [Kanban vs Todo Lists and Scrum](docs/kanban-vs-todo-and-scrum.markdown)
 - [Usage examples](docs/usage-examples.markdown)
 
 #### Working with projects
