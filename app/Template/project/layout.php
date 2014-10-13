@@ -7,7 +7,7 @@
     </div>
     <section class="sidebar-container" id="project-section">
 
-        <?= Helper\template('project/sidebar', array('project' => $project)) ?>
+        <?= Helper\template('project/sidebar', array('project' => $project, 'is_owner' => $is_owner)) ?>
 
         <div class="sidebar-content">
             <?= $project_content_for_layout ?>

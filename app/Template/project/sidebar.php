@@ -18,11 +18,13 @@
         <li>
             <?= Helper\a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
         </li>
-        <?php if (Helper\is_admin()): ?>
+        <?php endif ?>
+        <?php if ((Helper\is_admin() || $is_owner) && !$project['is_private']): ?>
             <li>
                 <?= Helper\a(t('User management'), 'project', 'users', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
+        <?php if (Helper\is_admin() || $project['is_private']): ?>
         <li>
             <?= Helper\a(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
         </li>
