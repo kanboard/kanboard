@@ -105,7 +105,8 @@ Documentation
 - [Command line interface](docs/cli.markdown)
 - [Json-RPC API](docs/api-json-rpc.markdown)
 - [Webhooks](docs/webhooks.markdown)
-- [How to use Kanboard with Vagrant](docs/vagrant.markdown)
+- [Run Kanboard with Vagrant](docs/vagrant.markdown)
+- [Run Kanboard with Docker](docs/docker.markdown)
 
 ### Contributors
 
