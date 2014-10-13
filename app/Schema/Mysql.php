@@ -5,7 +5,30 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 32;
+const VERSION = 33;
+
+function version_33($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_activities (
+            id INT NOT NULL AUTO_INCREMENT,
+            date_creation INT NOT NULL,
+            event_name VARCHAR(50) NOT NULL,
+            creator_id INT,
+            project_id INT,
+            task_id INT,
+            data TEXT,
+            PRIMARY KEY(id),
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec('DROP TABLE task_has_events');
+    $pdo->exec('DROP TABLE comment_has_events');
+    $pdo->exec('DROP TABLE subtask_has_events');
+}
 
 function version_32($pdo)
 {
@@ -355,7 +378,7 @@ function version_1($pdo)
             id INT NOT NULL AUTO_INCREMENT,
             task_id INT,
             user_id INT,
-            date INT,
+            `date` INT,
             comment TEXT,
             PRIMARY KEY (id),
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,

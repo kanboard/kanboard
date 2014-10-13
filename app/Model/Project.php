@@ -4,7 +4,7 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Event\ProjectModificationDate;
+use Event\ProjectModificationDateListener;
 use Core\Security;
 
 /**
@@ -512,41 +512,10 @@ class Project extends Base
             GithubWebhook::EVENT_COMMIT,
         );
 
-        $listener = new ProjectModificationDate($this);
+        $listener = new ProjectModificationDateListener($this->registry);
 
         foreach ($events as $event_name) {
             $this->event->attach($event_name, $listener);
         }
-    }
-
-    /**
-     * Get project activity
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @return array
-     */
-    public function getActivity($project_id)
-    {
-        $activity = array();
-        $tasks = $this->taskHistory->getAllContentByProjectId($project_id, 25);
-        $comments = $this->commentHistory->getAllContentByProjectId($project_id, 25);
-        $subtasks = $this->subtaskHistory->getAllContentByProjectId($project_id, 25);
-
-        foreach ($tasks as &$task) {
-            $activity[$task['date_creation'].'-'.$task['id']] = $task;
-        }
-
-        foreach ($subtasks as &$subtask) {
-            $activity[$subtask['date_creation'].'-'.$subtask['id']] = $subtask;
-        }
-
-        foreach ($comments as &$comment) {
-            $activity[$comment['date_creation'].'-'.$comment['id']] = $comment;
-        }
-
-        krsort($activity);
-
-        return $activity;
     }
 }

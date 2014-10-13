@@ -2,10 +2,10 @@
     <div class="page-header">
         <h2><?= t('%s\'s activity', $project['name']) ?></h2>
         <ul>
-            <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('Back to the board') ?></a></li>
-            <li><a href="?controller=project&amp;action=search&amp;project_id=<?= $project['id'] ?>"><?= t('Search') ?></a></li>
-            <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $project['id'] ?>"><?= t('Completed tasks') ?></a></li>
-            <li><a href="?controller=project&amp;action=index"><?= t('List of projects') ?></a></li>
+            <li><?= Helper\a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?></li>
+            <li><?= Helper\a(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?></li>
+            <li><?= Helper\a(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?></li>
+            <li><?= Helper\a(t('List of projects'), 'project', 'index') ?></li>
         </ul>
     </div>
     <section>
@@ -14,17 +14,17 @@
     <?php else: ?>
 
         <?php if ($project['is_public']): ?>
-            <p class="pull-right"><i class="fa fa-rss-square"></i> <a href="?controller=project&amp;action=feed&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('RSS feed') ?></a></p>
+            <p class="pull-right"><i class="fa fa-rss-square"></i> <?= Helper\a(t('RSS feed'), 'project', 'feed', array('token' => $project['token'])) ?></p>
         <?php endif ?>
 
         <?php foreach ($events as $event): ?>
         <div class="activity-event">
             <p class="activity-datetime">
-                <?php if ($event['event_type'] === 'task'): ?>
+                <?php if (Helper\contains($event['event_name'], 'task')): ?>
                     <i class="fa fa-newspaper-o"></i>
-                <?php elseif ($event['event_type'] === 'subtask'): ?>
+                <?php elseif (Helper\contains($event['event_name'], 'subtask')): ?>
                     <i class="fa fa-tasks"></i>
-                <?php elseif ($event['event_type'] === 'comment'): ?>
+                <?php elseif (Helper\contains($event['event_name'], 'comment')): ?>
                     <i class="fa fa-comments-o"></i>
                 <?php endif ?>
                 &nbsp;<?= dt('%B %e, %Y at %k:%M %p', $event['date_creation']) ?>

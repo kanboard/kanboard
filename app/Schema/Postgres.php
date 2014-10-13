@@ -5,7 +5,29 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 13;
+const VERSION = 14;
+
+function version_14($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_activities (
+            id SERIAL PRIMARY KEY,
+            date_creation INTEGER NOT NULL,
+            event_name VARCHAR(50) NOT NULL,
+            creator_id INTEGER,
+            project_id INTEGER,
+            task_id INTEGER,
+            data TEXT,
+            FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )
+    ");
+
+    $pdo->exec('DROP TABLE task_has_events');
+    $pdo->exec('DROP TABLE comment_has_events');
+    $pdo->exec('DROP TABLE subtask_has_events');
+}
 
 function version_13($pdo)
 {

@@ -63,7 +63,7 @@ class ProjectTest extends Base
 
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
         $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CREATE));
-        $this->assertEquals('Event\ProjectModificationDate', $this->registry->shared('event')->getLastListenerExecuted());
+        $this->assertEquals('Event\ProjectModificationDateListener', $this->registry->shared('event')->getLastListenerExecuted());
 
         $project = $p->getById(1);
         $this->assertNotEmpty($project);

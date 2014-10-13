@@ -3,26 +3,28 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
-use Model\TaskHistory;
+use Model\TaskFinder;
+use Model\ProjectActivity;
 use Model\Project;
 
-class TaskHistoryTest extends Base
+class ProjectActivityTest extends Base
 {
     public function testCreation()
     {
-        $e = new TaskHistory($this->registry);
+        $e = new ProjectActivity($this->registry);
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
         $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1)));
 
-        $this->assertTrue($e->create(1, 1, 1, Task::EVENT_CLOSE));
-        $this->assertTrue($e->create(1, 2, 1, Task::EVENT_UPDATE));
-        $this->assertFalse($e->create(1, 1, 0, Task::EVENT_OPEN));
+        $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $tf->getbyId(1))));
+        $this->assertTrue($e->createEvent(1, 2, 1, Task::EVENT_UPDATE, array('task' => $tf->getById(2))));
+        $this->assertFalse($e->createEvent(1, 1, 0, Task::EVENT_OPEN, array('task' => $tf->getbyId(1))));
 
-        $events = $e->getAllByProjectId(1);
+        $events = $e->getAll(1);
 
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));
@@ -34,8 +36,9 @@ class TaskHistoryTest extends Base
 
     public function testFetchAllContent()
     {
-        $e = new TaskHistory($this->registry);
+        $e = new ProjectActivity($this->registry);
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
@@ -44,10 +47,10 @@ class TaskHistoryTest extends Base
         $nb_events = 80;
 
         for ($i = 0; $i < $nb_events; $i++) {
-            $this->assertTrue($e->create(1, 1, 1, Task::EVENT_UPDATE));
+            $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_UPDATE, array('task' => $tf->getbyId(1))));
         }
 
-        $events = $e->getAllContentByProjectId(1);
+        $events = $e->getAll(1);
 
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));
@@ -59,8 +62,9 @@ class TaskHistoryTest extends Base
 
     public function testCleanup()
     {
-        $e = new TaskHistory($this->registry);
+        $e = new ProjectActivity($this->registry);
         $t = new Task($this->registry);
+        $tf = new TaskFinder($this->registry);
         $p = new Project($this->registry);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
@@ -70,13 +74,13 @@ class TaskHistoryTest extends Base
         $nb_events = 100;
 
         for ($i = 0; $i < $nb_events; $i++) {
-            $this->assertTrue($e->create(1, 1, 1, Task::EVENT_CLOSE));
+            $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $tf->getbyId(1))));
         }
 
-        $this->assertEquals($nb_events, $this->registry->shared('db')->table('task_has_events')->count());
+        $this->assertEquals($nb_events, $this->registry->shared('db')->table('project_activities')->count());
         $e->cleanup($max);
 
-        $events = $e->getAllByProjectId(1);
+        $events = $e->getAll(1);
 
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));
@@ -87,12 +91,12 @@ class TaskHistoryTest extends Base
 
         // Cleanup during task creation
 
-        $nb_events = TaskHistory::MAX_EVENTS + 10;
+        $nb_events = ProjectActivity::MAX_EVENTS + 10;
 
         for ($i = 0; $i < $nb_events; $i++) {
-            $this->assertTrue($e->create(1, 1, 1, Task::EVENT_CLOSE));
+            $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $tf->getbyId(1))));
         }
 
-        $this->assertEquals(TaskHistory::MAX_EVENTS, $this->registry->shared('db')->table('task_has_events')->count());
+        $this->assertEquals(ProjectActivity::MAX_EVENTS, $this->registry->shared('db')->table('project_activities')->count());
     }
 }

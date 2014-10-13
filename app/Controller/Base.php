@@ -153,13 +153,11 @@ abstract class Base
     private function attachEvents()
     {
         $models = array(
+            'projectActivity', // Order is important
             'action',
             'project',
             'webhook',
             'notification',
-            'taskHistory',
-            'commentHistory',
-            'subtaskHistory',
         );
 
         foreach ($models as $model) {

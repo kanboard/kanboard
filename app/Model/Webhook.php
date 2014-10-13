@@ -88,9 +88,13 @@ class Webhook extends Base
             Task::EVENT_UPDATE,
             Task::EVENT_CLOSE,
             Task::EVENT_OPEN,
+            Task::EVENT_MOVE_COLUMN,
+            Task::EVENT_MOVE_POSITION,
+            Task::EVENT_ASSIGNEE_CHANGE,
         );
 
-        $listener = new WebhookListener($this->url_task_modification, $this);
+        $listener = new WebhookListener($this->registry);
+        $listener->setUrl($this->url_task_modification);
 
         foreach ($events as $event_name) {
             $this->event->attach($event_name, $listener);
@@ -104,7 +108,10 @@ class Webhook extends Base
      */
     public function attachCreateEvents()
     {
-        $this->event->attach(Task::EVENT_CREATE, new WebhookListener($this->url_task_creation, $this));
+        $listener = new WebhookListener($this->registry);
+        $listener->setUrl($this->url_task_creation);
+
+        $this->event->attach(Task::EVENT_CREATE, $listener);
     }
 
     /**

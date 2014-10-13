@@ -14,6 +14,7 @@ use Core\Tool;
  *
  * @property \Model\Acl                $acl
  * @property \Model\Task               $task
+ * @property \Model\TaskFinder         $taskFinder
  */
 abstract class Base implements Listener
 {

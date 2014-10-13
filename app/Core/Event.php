@@ -69,11 +69,14 @@ class Event
     {
         if (! $this->isEventTriggered($eventName)) {
 
-            $this->lastEvent = $eventName;
             $this->events[] = $eventName;
 
             if (isset($this->listeners[$eventName])) {
+
                 foreach ($this->listeners[$eventName] as $listener) {
+
+                    $this->lastEvent = $eventName;
+
                     if ($listener->execute($data)) {
                         $this->lastListener = get_class($listener);
                     }

@@ -5,12 +5,10 @@ namespace Model;
 use Core\Session;
 use Core\Translator;
 use Core\Template;
-use Event\TaskNotificationListener;
-use Event\CommentNotificationListener;
-use Event\FileNotificationListener;
-use Event\SubTaskNotificationListener;
+use Event\NotificationListener;
 use Swift_Message;
 use Swift_Mailer;
+use Swift_TransportException;
 
 /**
  * Notification model
@@ -91,21 +89,28 @@ class Notification extends Base
      */
     public function attachEvents()
     {
-        $this->event->attach(File::EVENT_CREATE, new FileNotificationListener($this, 'notification_file_creation'));
+        $events = array(
+            Task::EVENT_CREATE => 'notification_task_creation',
+            Task::EVENT_UPDATE => 'notification_task_update',
+            Task::EVENT_CLOSE => 'notification_task_close',
+            Task::EVENT_OPEN => 'notification_task_open',
+            Task::EVENT_MOVE_COLUMN => 'notification_task_move_column',
+            Task::EVENT_MOVE_POSITION => 'notification_task_move_position',
+            Task::EVENT_ASSIGNEE_CHANGE => 'notification_task_assignee_change',
+            SubTask::EVENT_CREATE => 'notification_subtask_creation',
+            SubTask::EVENT_UPDATE => 'notification_subtask_update',
+            Comment::EVENT_CREATE => 'notification_comment_creation',
+            Comment::EVENT_UPDATE => 'notification_comment_update',
+            File::EVENT_CREATE => 'notification_file_creation',
+        );
 
-        $this->event->attach(Comment::EVENT_CREATE, new CommentNotificationListener($this, 'notification_comment_creation'));
-        $this->event->attach(Comment::EVENT_UPDATE, new CommentNotificationListener($this, 'notification_comment_update'));
+        foreach ($events as $event_name => $template_name) {
 
-        $this->event->attach(SubTask::EVENT_CREATE, new SubTaskNotificationListener($this, 'notification_subtask_creation'));
-        $this->event->attach(SubTask::EVENT_UPDATE, new SubTaskNotificationListener($this, 'notification_subtask_update'));
+            $listener = new NotificationListener($this->registry);
+            $listener->setTemplate($template_name);
 
-        $this->event->attach(Task::EVENT_CREATE, new TaskNotificationListener($this, 'notification_task_creation'));
-        $this->event->attach(Task::EVENT_UPDATE, new TaskNotificationListener($this, 'notification_task_update'));
-        $this->event->attach(Task::EVENT_CLOSE, new TaskNotificationListener($this, 'notification_task_close'));
-        $this->event->attach(Task::EVENT_OPEN, new TaskNotificationListener($this, 'notification_task_open'));
-        $this->event->attach(Task::EVENT_MOVE_COLUMN, new TaskNotificationListener($this, 'notification_task_move_column'));
-        $this->event->attach(Task::EVENT_MOVE_POSITION, new TaskNotificationListener($this, 'notification_task_move_position'));
-        $this->event->attach(Task::EVENT_ASSIGNEE_CHANGE, new TaskNotificationListener($this, 'notification_task_assignee_change'));
+            $this->event->attach($event_name, $listener);
+        }
     }
 
     /**
@@ -118,17 +123,22 @@ class Notification extends Base
      */
     public function sendEmails($template, array $users, array $data)
     {
-        $transport = $this->registry->shared('mailer');
-        $mailer = Swift_Mailer::newInstance($transport);
+        try {
+            $transport = $this->registry->shared('mailer');
+            $mailer = Swift_Mailer::newInstance($transport);
 
-        $message = Swift_Message::newInstance()
-                        ->setSubject($this->getMailSubject($template, $data))
-                        ->setFrom(array(MAIL_FROM => 'Kanboard'))
-                        ->setBody($this->getMailContent($template, $data), 'text/html');
+            $message = Swift_Message::newInstance()
+                            ->setSubject($this->getMailSubject($template, $data))
+                            ->setFrom(array(MAIL_FROM => 'Kanboard'))
+                            ->setBody($this->getMailContent($template, $data), 'text/html');
 
-        foreach ($users as $user) {
-            $message->setTo(array($user['email'] => $user['name'] ?: $user['username']));
-            $mailer->send($message);
+            foreach ($users as $user) {
+                $message->setTo(array($user['email'] => $user['name'] ?: $user['username']));
+                $mailer->send($message);
+            }
+        }
+        catch (Swift_TransportException $e) {
+            debug($e->getMessage());
         }
     }
 

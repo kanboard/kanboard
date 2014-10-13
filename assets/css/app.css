@@ -26,10 +26,6 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-.align-right {
-    text-align: right;
-}
-
 /* links */
 a {
     color: #3366CC;
@@ -1106,6 +1102,21 @@ tr td.task-orange,
     font-size: 0.9em;
     color: #aaa;
     padding-top: 5px;
+}
+
+.activity-description ul {
+    margin-top: 10px;
+}
+
+.activity-description li {
+    margin-left: 40px;
+    list-style-type: circle;
+    color: #555;
+}
+
+.activity-description .markdown {
+    margin-top: 10px;
+    color: #555;
 }
 
 /* confirmation box */

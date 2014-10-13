@@ -2,7 +2,7 @@
 
     <?= Helper\template('task_details', array('task' => $task, 'project' => $project)) ?>
 
-    <p class="align-right"><?= Helper\a(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?></p>
+    <p class="pull-right"><?= Helper\a(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?></p>
 
     <?= Helper\template('task_show_description', array('task' => $task)) ?>
 

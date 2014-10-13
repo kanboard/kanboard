@@ -2,25 +2,14 @@
 
 namespace Event;
 
-use Core\Listener;
-use Model\Webhook;
-
 /**
  * Webhook task events
  *
  * @package event
  * @author  Frederic Guillot
  */
-class WebhookListener implements Listener
+class WebhookListener extends Base
 {
-    /**
-     * Webhook model
-     *
-     * @accesss private
-     * @var \Model\Webhook
-     */
-    private $webhook;
-
     /**
      * Url to call
      *
@@ -30,27 +19,14 @@ class WebhookListener implements Listener
     private $url = '';
 
     /**
-     * Constructor
+     * Set webhook url
      *
      * @access public
-     * @param  string           $url       URL to call
-     * @param  \Model\Webhook   $webhook   Webhook model instance
+     * @param  string     $url       URL to call
      */
-    public function __construct($url, Webhook $webhook)
+    public function setUrl($url)
     {
         $this->url = $url;
-        $this->webhook = $webhook;
-    }
-
-    /**
-     * Return class information
-     *
-     * @access public
-     * @return string
-     */
-    public function __toString()
-    {
-        return get_called_class();
     }
 
     /**
