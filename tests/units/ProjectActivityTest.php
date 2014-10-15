@@ -24,7 +24,7 @@ class ProjectActivityTest extends Base
         $this->assertTrue($e->createEvent(1, 2, 1, Task::EVENT_UPDATE, array('task' => $tf->getById(2))));
         $this->assertFalse($e->createEvent(1, 1, 0, Task::EVENT_OPEN, array('task' => $tf->getbyId(1))));
 
-        $events = $e->getAll(1);
+        $events = $e->getProject(1);
 
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));
@@ -50,7 +50,7 @@ class ProjectActivityTest extends Base
             $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_UPDATE, array('task' => $tf->getbyId(1))));
         }
 
-        $events = $e->getAll(1);
+        $events = $e->getProject(1);
 
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));
@@ -80,7 +80,7 @@ class ProjectActivityTest extends Base
         $this->assertEquals($nb_events, $this->registry->shared('db')->table('project_activities')->count());
         $e->cleanup($max);
 
-        $events = $e->getAll(1);
+        $events = $e->getProject(1);
 
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));

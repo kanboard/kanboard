@@ -67,6 +67,15 @@ var Kanboard = (function() {
                 dateFormat: 'yy-mm-dd',
                 constrainInput: false
             });
+
+            // Project select box
+            $("#board-selector").chosen({
+                width: 180
+            });
+
+            $("#board-selector").change(function() {
+                window.location = "?controller=board&action=show&project_id=" + $(this).val();
+            });
         }
     };
 
@@ -229,17 +238,11 @@ Kanboard.Board = (function() {
 
     return {
         Init: function() {
+
+            Kanboard.Before();
+
             board_load_events();
             filter_load_events();
-
-            // Project select box
-            $("#board-selector").chosen({
-                width: 180
-            });
-
-            $("#board-selector").change(function() {
-                window.location = "?controller=board&action=show&project_id=" + $(this).val();
-            });
         }
     };
 
@@ -274,6 +277,18 @@ Kanboard.Project = (function() {
 })();
 
 
+// Dashboard related functions
+Kanboard.Dashboard = (function() {
+
+    return {
+        Init: function() {
+            Kanboard.Before();
+        }
+    };
+
+})();
+
+
 // Initialization
 $(function() {
     if ($("#board").length) {
@@ -281,6 +296,9 @@ $(function() {
     }
     else if ($("#task-section").length) {
         Kanboard.Task.Init();
+    }
+    else if ($("#dashboard").length) {
+        Kanboard.Dashboard.Init();
     }
     else if ($("#project-section").length) {
         Kanboard.Project.Init();

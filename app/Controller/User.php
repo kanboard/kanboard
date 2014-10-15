@@ -59,7 +59,7 @@ class User extends Base
                 $this->response->redirect('?'.$redirect_query);
             }
             else {
-                $this->response->redirect('?controller=board');
+                $this->response->redirect('?controller=app');
             }
         }
 

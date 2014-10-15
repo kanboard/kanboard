@@ -112,6 +112,33 @@ class TaskFinder extends Base
     }
 
     /**
+     * Get all open tasks for a given user
+     *
+     * @access public
+     * @param  integer    $user_id    User id
+     * @return array
+     */
+    public function getAllTasksByUser($user_id)
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->columns(
+                        'tasks.id',
+                        'tasks.title',
+                        'tasks.date_due',
+                        'tasks.date_creation',
+                        'tasks.project_id',
+                        'tasks.color_id',
+                        'projects.name AS project_name'
+                    )
+                    ->join(Project::TABLE, 'id', 'project_id')
+                    ->eq('tasks.owner_id', $user_id)
+                    ->eq('tasks.is_active', Task::STATUS_OPEN)
+                    ->asc('tasks.id')
+                    ->findAll();
+    }
+
+    /**
      * Get all tasks for a given project and status
      *
      * @access public

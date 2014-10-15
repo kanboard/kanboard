@@ -1119,6 +1119,22 @@ tr td.task-orange,
     color: #555;
 }
 
+/* dashboard */
+#dashboard table {
+    font-size: 0.95em;
+}
+
+.dashboard-left-column {
+    width: 55%;
+    float: left;
+}
+
+.dashboard-right-column {
+    margin-left: 5%;
+    width: 40%;
+    float: left;
+}
+
 /* confirmation box */
 .confirm {
     max-width: 700px;

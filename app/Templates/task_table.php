@@ -13,7 +13,7 @@
     <?php foreach ($tasks as $task): ?>
     <tr>
         <td class="task-table task-<?= $task['color_id'] ?>">
-            <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['id']) ?></a>
+            <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>">#<?= Helper\escape($task['id']) ?></a>
         </td>
         <td>
             <?= Helper\in_list($task['column_id'], $columns) ?>

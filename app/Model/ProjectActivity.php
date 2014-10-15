@@ -61,15 +61,32 @@ class ProjectActivity extends Base
      * @param  integer     $limit           Maximum events number
      * @return array
      */
-    public function getAll($project_id, $limit = 50)
+    public function getProject($project_id, $limit = 50)
     {
+        return $this->getProjects(array($project_id), $limit);
+    }
+
+    /**
+     * Get all events for the given projects list
+     *
+     * @access public
+     * @param  integer     $project_id      Project id
+     * @param  integer     $limit           Maximum events number
+     * @return array
+     */
+    public function getProjects(array $projects, $limit = 50)
+    {
+        if (empty($projects)) {
+            return array();
+        }
+
         $events = $this->db->table(self::TABLE)
                            ->columns(
                                 self::TABLE.'.*',
                                 User::TABLE.'.username AS author_username',
                                 User::TABLE.'.name AS author_name'
                            )
-                           ->eq('project_id', $project_id)
+                           ->in('project_id', $projects)
                            ->join(User::TABLE, 'id', 'creator_id')
                            ->desc('id')
                            ->limit($limit)

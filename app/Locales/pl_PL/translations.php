@@ -543,4 +543,8 @@ return array(
     // 'Started on %B %e, %Y' => '',
     // 'Start date' => '',
     // 'Time estimated' => '',
+    // 'There is nothing assigned to you.' => '',
+    // 'My tasks' => '',
+    // 'Activity stream' => '',
+    // 'Dashboard' => '',
 );

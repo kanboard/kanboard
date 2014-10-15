@@ -379,7 +379,7 @@ class Project extends Base
         $project = $this->getProject();
 
         $this->response->html($this->template->layout('project_activity', array(
-            'events' => $this->projectActivity->getAll($project['id']),
+            'events' => $this->projectActivity->getProject($project['id']),
             'menu' => 'projects',
             'project' => $project,
             'title' => t('%s\'s activity', $project['name'])
@@ -427,6 +427,7 @@ class Project extends Base
                 'project_id' => $project['id'],
             ),
             'project' => $project,
+            'menu' => 'projects',
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
             'title' => $project['name'].($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
@@ -461,6 +462,7 @@ class Project extends Base
                 'limit' => $limit,
             ),
             'project' => $project,
+            'menu' => 'projects',
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
             'tasks' => $tasks,
