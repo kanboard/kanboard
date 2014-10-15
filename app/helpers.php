@@ -566,9 +566,9 @@ function a($label, $controller, $action, array $params = array(), $csrf = false,
 }
 
 /**
- * URL
+ * URL query string
  *
- * a('link', 'task', 'show', array('task_id' => $task_id))
+ * u('task', 'show', array('task_id' => $task_id))
  *
  * @param  string   $controller  Controller name
  * @param  string   $action      Action name
