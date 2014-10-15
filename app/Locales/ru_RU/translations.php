@@ -192,7 +192,7 @@ return array(
     'Edit users access' => 'Изменить доступ пользователей',
     'Allow this user' => 'Разрешить этого пользователя',
     'Only those users have access to this project:' => 'Только эти пользователи имеют доступ к проекту :',
-    'Don\'t forget that administrators have access to everything.' => 'Помните, администратор имеет доступ всюду.',
+    'Don\'t forget that administrators have access to everything.' => 'Помните, администратор имеет доступ ко всему.',
     'revoke' => 'отозвать',
     'List of authorized users' => 'Список авторизованных пользователей',
     'User' => 'Пользователь',
@@ -495,8 +495,8 @@ return array(
     'Default values are "%s"' => 'Колонки по умолчанию: "%s"',
     'Default columns for new projects (Comma-separated)' => 'Колонки по умолчанию для новых проектов (разделять запятой)',
     'Task assignee change' => 'Изменен назначенный',
-    '%s change the assignee of the task #%d to %s' => '%s сменил назначенного на задачу #%d to %s',
-    '%s change the assignee of the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a> to %s' => '%s сменил назначенного на задачу <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a> to %s',
+    '%s change the assignee of the task #%d to %s' => '%s сменил назначенного для задачи #%d на %s',
+    '%s change the assignee of the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a> to %s' => '%s сменил назначенного для задачи <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a> на %s',
     '[%s][Column Change] %s (#%d)' => '[%s][Изменение колонки] %s (#%d)',
     '[%s][Position Change] %s (#%d)' => '[%s][Изменение позиции] %s (#%d)',
     '[%s][Assignee Change] %s (#%d)' => '[%s][Изменение назначеного] %s (#%d)',
@@ -547,6 +547,5 @@ return array(
     'My tasks' => 'Мои задачи',
     'Activity stream' => 'Текущая активность',
     'Dashboard' => 'Инфопанель',
-    'Confirmation' => 'Подтверждение пароля',
+	'Confirmation' => 'Подтверждение пароля',
 );
-
