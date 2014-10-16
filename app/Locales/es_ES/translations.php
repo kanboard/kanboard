@@ -449,6 +449,7 @@ return array(
     'Email:' => 'Correo electrónico:',
     'Default project:' => 'Proyecto por defecto:',
     'Notifications:' => 'Notificaciones:',
+    // 'Notifications' => '',
     'Group:' => 'Grupo:',
     'Regular user' => 'Usuario regular:',
     'Account type:' => 'Tipo de Cuenta:',
@@ -547,4 +548,5 @@ return array(
     // 'My tasks' => '',
     // 'Activity stream' => '',
     // 'Dashboard' => '',
+    // 'Confirmation' => '',
 );
