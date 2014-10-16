@@ -56,6 +56,7 @@ class Config extends Base
             'fi_FI' => 'Suomi',
             'sv_SE' => 'Svenska',
             'zh_CN' => '中文(简体)',
+            'ja_JP' => '日本語',
         );
     }
 
