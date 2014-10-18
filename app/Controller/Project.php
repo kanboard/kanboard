@@ -364,7 +364,7 @@ class Project extends Base
         }
 
         $this->response->xml($this->template->load('project_feed', array(
-            'events' => $this->projectActivity->getAll($project['id']),
+            'events' => $this->projectActivity->getProject($project['id']),
             'project' => $project,
         )));
     }
