@@ -51,7 +51,6 @@ class Sqlite extends \PDO {
 
     public function escapeIdentifier($value)
     {
-        if (strpos($value, '.') !== false) return $value;
         return '"'.$value.'"';
     }
 }

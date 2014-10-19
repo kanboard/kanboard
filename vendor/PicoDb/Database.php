@@ -86,6 +86,11 @@ class Database
 
     public function escapeIdentifier($value)
     {
+        // Do not escape custom query
+        if (strpos($value, '.') !== false || strpos($value, ' ') !== false) {
+            return $value;
+        }
+
         return $this->pdo->escapeIdentifier($value);
     }
 
