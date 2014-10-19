@@ -31,7 +31,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translations in English, French, Brazilian Portuguese, Spanish, German, Polish, Swedish, Finnish, Italian, Chinese, Russian...
+- Translated in Brazilian, Chinese, English, Finnish, French, German, Italian, Japanese, Polish, Russian, Spanish, Swedish...
 
 Known bugs and feature requests
 -------------------------------
@@ -131,40 +131,41 @@ Original author: [Frédéric Guillot](http://fredericguillot.com/)
 Contributors:
 
 - Alex Butum
-- Aleix Pol: https://github.com/aleixpol
-- Ashish Kulkarni: https://github.com/ashkulz
+- [Aleix Pol](https://github.com/aleixpol)
+- [Ashish Kulkarni](https://github.com/ashkulz)
 - Claudio Lobo
-- Cmer: https://github.com/chncsu
-- Floaltvater: https://github.com/floaltvater
-- Gavlepeter: https://github.com/gavlepeter
-- Janne Mäntyharju: https://github.com/JanneMantyharju
-- Jesusaplsoft: https://github.com/jesusaplsoft
-- Kiswa: https://github.com/kiswa
-- Kralo: https://github.com/kralo
-- Levlaz: https://github.com/levlaz
-- Lim Yuen Hoe: https://github.com/jasonmoofang
-- Mathgl67: https://github.com/mathgl67
-- Matthieu Keller: https://github.com/maggick
-- Mauro Mariño: https://github.com/moromarino
-- Maxime: https://github.com/EpocDotFr
-- Moraxy: https://github.com/moraxy
-- Nala Ginrut: https://github.com/NalaGinrut
-- Nekohayo: https://github.com/nekohayo
-- Nramel: https://github.com/nramel
-- Null-Kelvin: https://github.com/Null-Kelvin
-- Olivier Maridat: https://github.com/oliviermaridat
-- Poikilotherm: https://github.com/poikilotherm
-- Rafaelrossa: https://github.com/rafaelrossa
-- Raphaël Doursenaud: https://github.com/rdoursenaud
-- Rzeka: https://github.com/rzeka
-- Sebastien pacilly: https://github.com/spacilly
-- Sylvain Veyrié: https://github.com/turb
-- Toomyem: https://github.com/Toomyem
-- Tony G. Bolaño: https://github.com/tonybolanyo
-- Torsten: https://github.com/misterfu
-- Troloo: https://github.com/troloo
-- Typz: https://github.com/Typz
-- Vedovator: https://github.com/vedovator
-- Ybarc: https://github.com/ybarc
+- [Cmer](https://github.com/chncsu)
+- [Floaltvater](https://github.com/floaltvater)
+- [Gavlepeter](https://github.com/gavlepeter)
+- [Janne Mäntyharju](https://github.com/JanneMantyharju)
+- [Jesusaplsoft](https://github.com/jesusaplsoft)
+- [Kiswa](https://github.com/kiswa)
+- [Kralo](https://github.com/kralo)
+- [Levlaz](https://github.com/levlaz)
+- [Lim Yuen Hoe](https://github.com/jasonmoofang)
+- [Mathgl67](https://github.com/mathgl67)
+- [Matthieu Keller](https://github.com/maggick)
+- [Mauro Mariño](https://github.com/moromarino)
+- [Maxime](https://github.com/EpocDotFr)
+- [Moraxy](https://github.com/moraxy)
+- [Nala Ginrut](https://github.com/NalaGinrut)
+- [Nekohayo](https://github.com/nekohayo)
+- [Nramel](https://github.com/nramel)
+- [Null-Kelvin](https://github.com/Null-Kelvin)
+- [Olivier Maridat](https://github.com/oliviermaridat)
+- [Poikilotherm](https://github.com/poikilotherm)
+- [Rafaelrossa](https://github.com/rafaelrossa)
+- [Raphaël Doursenaud](https://github.com/rdoursenaud)
+- [Rzeka](https://github.com/rzeka)
+- [Sebastien pacilly](https://github.com/spacilly)
+- [Sylvain Veyrié](https://github.com/turb)
+- [Toomyem](https://github.com/Toomyem)
+- [Tony G. Bolaño](https://github.com/tonybolanyo)
+- [Torsten](https://github.com/misterfu)
+- [Troloo](https://github.com/troloo)
+- [Typz](https://github.com/Typz)
+- [Vedovator](https://github.com/vedovator)
+- [Ybarc](https://github.com/ybarc)
+- [Yuichi Murata](https://github.com/yuichi1004)
 
 There is also many people who have reported bugs or proposed awesome ideas.
