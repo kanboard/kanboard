@@ -31,7 +31,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translated in Brazilian, Chinese, English, Finnish, French, German, Italian, Japanese, Polish, Russian, Spanish, Swedish...
+- Translated in 13 languages (Brazilian, Chinese, Danish, English, Finnish, French, German, Italian, Japanese, Polish, Russian, Spanish, Swedish)
 
 Known bugs and feature requests
 -------------------------------
@@ -141,6 +141,7 @@ Contributors:
 - [Jesusaplsoft](https://github.com/jesusaplsoft)
 - [Kiswa](https://github.com/kiswa)
 - [Kralo](https://github.com/kralo)
+- [Lars Christian Schou](https://github.com/NegoZiatoR)
 - [Levlaz](https://github.com/levlaz)
 - [Lim Yuen Hoe](https://github.com/jasonmoofang)
 - [Mathgl67](https://github.com/mathgl67)
