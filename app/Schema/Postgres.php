@@ -5,8 +5,13 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 14;
+const VERSION = 15;
 
+function version_15($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('board_use_gravatar_images', 1));
+}
 function version_14($pdo)
 {
     $pdo->exec("

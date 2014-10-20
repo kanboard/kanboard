@@ -193,6 +193,7 @@ class Response
     public function csp(array $policies = array())
     {
         $policies['default-src'] = "'self'";
+        $policies['img-src'] = "'self' www.gravatar.com";
         $values = '';
 
         foreach ($policies as $policy => $hosts) {

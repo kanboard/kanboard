@@ -22,6 +22,8 @@
     <?= Helper\form_text('board_columns', $values, $errors) ?><br/>
     <p class="form-help"><?= t('Default values are "%s"', $default_columns) ?></p>
 
+    <?= Helper\form_checkbox('board_use_gravatar_images', t('Use images from gravatar'), 1, isset($values['board_use_gravatar_images']) && $values['board_use_gravatar_images'] == 1 ? true : false) ?><br/>
+
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
     </div>

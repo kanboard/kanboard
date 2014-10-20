@@ -40,6 +40,9 @@ class Config extends Base
 
             $values = $this->request->getValues();
 
+            if(!isset($values['board_use_gravatar_images'])) {
+                $values['board_use_gravatar_images'] = false;
+            }
             if ($this->config->save($values)) {
                 $this->config->reload();
                 $this->session->flash(t('Settings saved successfully.'));
