@@ -453,7 +453,7 @@ return array(
     'Group:' => 'Groupe :',
     'Regular user' => 'Utilisateur normal',
     'Account type:' => 'Type de compte :',
-    'Edit profile' => 'Modifier le profile',
+    'Edit profile' => 'Modifier le profil',
     'Change password' => 'Changer le mot de passe',
     'Password modification' => 'Changement de mot de passe',
     'External authentications' => 'Authentifications externe',
