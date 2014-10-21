@@ -549,4 +549,6 @@ return array(
     'Activity stream' => 'Aktivitetsström',
     'Dashboard' => 'Instrumentpanel',
     'Confirmation' => 'Bekräftelse',
+    // 'Allow everybody to access to this project' => '',
+    // 'Everybody have access to this project.' => '',
 );

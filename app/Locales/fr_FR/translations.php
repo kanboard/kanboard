@@ -549,4 +549,6 @@ return array(
     'Activity stream' => 'Flux d\'activité',
     'Dashboard' => 'Tableau de bord',
     'Confirmation' => 'Confirmation',
+    'Allow everybody to access to this project' => 'Autoriser tout le monde à accéder à ce projet',
+    'Everybody have access to this project.' => 'Tout le monde a acccès à ce projet.',
 );

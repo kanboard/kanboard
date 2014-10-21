@@ -549,4 +549,6 @@ return array(
     'Activity stream' => '活动流',
     'Dashboard' => '面板',
     'Confirmation' => '确认',
+    // 'Allow everybody to access to this project' => '',
+    // 'Everybody have access to this project.' => '',
 );
