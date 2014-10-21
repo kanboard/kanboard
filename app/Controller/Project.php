@@ -244,7 +244,7 @@ class Project extends Base
             'user_id' => $this->request->getIntegerParam('user_id'),
         );
 
-        list($valid,) = $this->projectPermission->validateModification($values);
+        list($valid,) = $this->projectPermission->validateUserModification($values);
 
         if ($valid) {
 
