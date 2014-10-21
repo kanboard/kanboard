@@ -3,7 +3,9 @@
     <p class="comment-title">
         <span class="comment-username"><?= Helper\escape($comment['name'] ?: $comment['username']) ?></span> @ <span class="comment-date"><?= dt('%B %e, %Y at %k:%M %p', $comment['date']) ?></span>
     </p>
-
+    <?php if($comment['gravatar_image']): ?>
+    <img class="activity-user-image" src="<?= $comment['gravatar_image'] ?>" alt="<?=Helper\escape($author)?>">
+    <?php endif;?>
     <div class="comment-inner">
 
         <?php if (! isset($preview)): ?>

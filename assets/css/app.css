@@ -1092,6 +1092,9 @@ tr td.task-orange,
     padding-left: 20px;
     border-left: 2px solid #666;
 }
+.activity-user-image {
+    float:left;margin-right:1em;
+}
 
 .activity-title {
     font-weight: bold;

@@ -84,7 +84,8 @@ class ProjectActivity extends Base
                            ->columns(
                                 self::TABLE.'.*',
                                 User::TABLE.'.username AS author_username',
-                                User::TABLE.'.name AS author_name'
+                                User::TABLE.'.name AS author_name',
+                                User::TABLE.'.email AS email'
                            )
                            ->in('project_id', $projects)
                            ->join(User::TABLE, 'id', 'creator_id')
@@ -96,6 +97,12 @@ class ProjectActivity extends Base
 
             $event += unserialize($event['data']);
             unset($event['data']);
+            if (empty($this->config->get('board_use_gravatar_images')) ){
+                $event['gravatar_image'] =false;
+            }else{
+                $event['gravatar_image'] = 'http://www.gravatar.com/avatar/' . md5($event['email']);
+
+            }
 
             $event['author'] = $event['author_name'] ?: $event['author_username'];
             $event['event_title'] = $this->getTitle($event);

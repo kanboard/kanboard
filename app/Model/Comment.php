@@ -37,7 +37,7 @@ class Comment extends Base
      */
     public function getAll($task_id)
     {
-        return $this->db
+        $data = $this->db
             ->table(self::TABLE)
             ->columns(
                 self::TABLE.'.id',
@@ -46,12 +46,20 @@ class Comment extends Base
                 self::TABLE.'.user_id',
                 self::TABLE.'.comment',
                 User::TABLE.'.username',
-                User::TABLE.'.name'
+                User::TABLE.'.name',
+                User::TABLE.'.email'
             )
             ->join(User::TABLE, 'id', 'user_id')
             ->orderBy(self::TABLE.'.date', 'ASC')
             ->eq(self::TABLE.'.task_id', $task_id)
             ->findAll();
+        if (!empty($this->config->get('board_use_gravatar_images')) ){
+            foreach($data as $key => $row){
+                $data[$key]['gravatar_image'] = 'http://www.gravatar.com/avatar/' . md5($row['email']);
+            }
+        }
+
+        return $data;
     }
 
     /**
