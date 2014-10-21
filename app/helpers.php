@@ -103,17 +103,25 @@ function get_user_id()
 /**
  * Markdown transformation
  *
- * @param  string    $text   Markdown content
+ * @param  string    $text     Markdown content
+ * @param  array     $link     Link parameters for replacement
  * @return string
  */
-function markdown($text)
+function markdown($text, array $link = array('controller' => 'task', 'action' => 'show', 'params' => array()))
 {
     $html = Parsedown::instance()
                 ->setMarkupEscaped(true) # escapes markup (HTML)
                 ->text($text);
 
     // Replace task #123 by a link to the task
-    $html = preg_replace('!#(\d+)!i', '<a href="?controller=task&action=show&task_id=$1">$0</a>', $html);
+    $html = preg_replace_callback('!#(\d+)!i', function($matches) use ($link) {
+        return a(
+            $matches[0],
+            $link['controller'],
+            $link['action'],
+            $link['params'] + array('task_id' => $matches[1])
+        );
+    }, $html);
 
     return $html;
 }

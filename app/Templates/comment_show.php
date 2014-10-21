@@ -21,7 +21,20 @@
         <?php endif ?>
 
         <div class="markdown">
-            <?= Helper\markdown($comment['comment']) ?>
+            <?php if (isset($is_public) && $is_public): ?>
+                <?= Helper\markdown(
+                    $comment['comment'],
+                    array(
+                        'controller' => 'task',
+                        'action' => 'readonly',
+                        'params' => array(
+                            'token' => $project['token']
+                        )
+                    )
+                ) ?>
+            <?php else: ?>
+                <?= Helper\markdown($comment['comment']) ?>
+            <?php endif ?>
         </div>
 
     </div>
