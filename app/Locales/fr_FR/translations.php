@@ -453,7 +453,7 @@ return array(
     'Group:' => 'Groupe :',
     'Regular user' => 'Utilisateur normal',
     'Account type:' => 'Type de compte :',
-    'Edit profile' => 'Modifier le profile',
+    'Edit profile' => 'Modifier le profil',
     'Change password' => 'Changer le mot de passe',
     'Password modification' => 'Changement de mot de passe',
     'External authentications' => 'Authentifications externe',
@@ -549,4 +549,6 @@ return array(
     'Activity stream' => 'Flux d\'activité',
     'Dashboard' => 'Tableau de bord',
     'Confirmation' => 'Confirmation',
+    'Allow everybody to access to this project' => 'Autoriser tout le monde à accéder à ce projet',
+    'Everybody have access to this project.' => 'Tout le monde a acccès à ce projet.',
 );

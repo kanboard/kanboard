@@ -151,7 +151,18 @@ class User extends Base
     public function getList()
     {
         $users = $this->db->table(self::TABLE)->columns('id', 'username', 'name')->findAll();
+        return $this->prepareList($users);
+    }
 
+    /**
+     * Common method to prepare a user list
+     *
+     * @access public
+     * @param  array     $users    Users list (from database)
+     * @return array               Formated list
+     */
+    public function prepareList(array $users)
+    {
         $result = array();
 
         foreach ($users as $user) {

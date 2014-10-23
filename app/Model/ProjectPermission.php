@@ -53,6 +53,22 @@ class ProjectPermission extends Base
      */
     public function getAllowedUsers($project_id)
     {
+        if ($this->isEverybodyAllowed($project_id)) {
+            return $this->user->getList();
+        }
+
+        return $this->getAssociatedUsers($project_id);
+    }
+
+    /**
+     * Get a list of people associated to the project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return array
+     */
+    public function getAssociatedUsers($project_id)
+    {
         $users = $this->db
             ->table(self::TABLE)
             ->join(User::TABLE, 'id', 'user_id')
@@ -61,15 +77,7 @@ class ProjectPermission extends Base
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
             ->findAll();
 
-        $result = array();
-
-        foreach ($users as $user) {
-            $result[$user['id']] = $user['name'] ?: $user['username'];
-        }
-
-        asort($result);
-
-        return $result;
+        return $this->user->prepareList($users);
     }
 
     /**
@@ -146,10 +154,30 @@ class ProjectPermission extends Base
             return true;
         }
 
+        if ($this->isEverybodyAllowed($project_id)) {
+            return true;
+        }
+
         return (bool) $this->db
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
+                    ->count();
+    }
+
+    /**
+     * Return true if everybody is allowed for the project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return bool
+     */
+    public function isEverybodyAllowed($project_id)
+    {
+        return (bool) $this->db
+                    ->table(Project::TABLE)
+                    ->eq('id', $project_id)
+                    ->eq('is_everybody_allowed', 1)
                     ->count();
     }
 
@@ -223,19 +251,40 @@ class ProjectPermission extends Base
     }
 
     /**
-     * Validate allowed users
+     * Validate allow user
      *
      * @access public
      * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
-    public function validateModification(array $values)
+    public function validateUserModification(array $values)
     {
         $v = new Validator($values, array(
             new Validators\Required('project_id', t('The project id is required')),
             new Validators\Integer('project_id', t('This value must be an integer')),
             new Validators\Required('user_id', t('The user id is required')),
             new Validators\Integer('user_id', t('This value must be an integer')),
+        ));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    /**
+     * Validate allow everybody
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateProjectModification(array $values)
+    {
+        $v = new Validator($values, array(
+            new Validators\Required('id', t('The project id is required')),
+            new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Integer('is_everybody_allowed', t('This value must be an integer')),
         ));
 
         return array(

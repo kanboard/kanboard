@@ -589,6 +589,7 @@ a.filter-on {
 #board th a {
     text-decoration: none;
     font-size: 150%;
+    color: #3366CC;
 }
 
 #board td {

@@ -5,7 +5,12 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 14;
+const VERSION = 15;
+
+function version_15($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN is_everybody_allowed BOOLEAN DEFAULT '0'");
+}
 
 function version_14($pdo)
 {

@@ -8,6 +8,32 @@ use Model\User;
 
 class ProjectPermissionTest extends Base
 {
+    public function testAllowEverybody()
+    {
+        $user = new User($this->registry);
+        $this->assertTrue($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
+        $this->assertTrue($user->create(array('username' => 'unittest#2', 'password' => 'unittest')));
+
+        $p = new Project($this->registry);
+        $pp = new ProjectPermission($this->registry);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertFalse($pp->isEverybodyAllowed(1));
+        $this->assertTrue($pp->isUserAllowed(1, 1));
+        $this->assertFalse($pp->isUserAllowed(1, 2));
+        $this->assertFalse($pp->isUserAllowed(1, 3));
+        $this->assertEquals(array(), $pp->getAllowedUsers(1));
+        $this->assertEquals(array('Unassigned'), $pp->getUsersList(1));
+
+        $this->assertTrue($p->update(array('id' => 1, 'is_everybody_allowed' => 1)));
+        $this->assertTrue($pp->isEverybodyAllowed(1));
+        $this->assertTrue($pp->isUserAllowed(1, 1));
+        $this->assertTrue($pp->isUserAllowed(1, 2));
+        $this->assertTrue($pp->isUserAllowed(1, 3));
+        $this->assertEquals(array('1' => 'admin', '2' => 'unittest#1', '3' => 'unittest#2'), $pp->getAllowedUsers(1));
+        $this->assertEquals(array('Unassigned', '1' => 'admin', '2' => 'unittest#1', '3' => 'unittest#2'), $pp->getUsersList(1));
+    }
+
     public function testDisallowEverybody()
     {
         // We create a regular user

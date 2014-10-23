@@ -184,6 +184,30 @@ class Project extends Base
     }
 
     /**
+     * Allow everybody
+     *
+     * @access public
+     */
+    public function allowEverybody()
+    {
+        $project = $this->getProjectManagement();
+        $values = $this->request->getValues() + array('is_everybody_allowed' => 0);
+        list($valid,) = $this->projectPermission->validateProjectModification($values);
+
+        if ($valid) {
+
+            if ($this->project->update($values)) {
+                $this->session->flash(t('Project updated successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to update this project.'));
+            }
+        }
+
+        $this->response->redirect('?controller=project&action=users&project_id='.$project['id']);
+    }
+
+    /**
      * Allow a specific user (admin only)
      *
      * @access public
@@ -191,7 +215,7 @@ class Project extends Base
     public function allow()
     {
         $values = $this->request->getValues();
-        list($valid,) = $this->projectPermission->validateModification($values);
+        list($valid,) = $this->projectPermission->validateUserModification($values);
 
         if ($valid) {
 
@@ -220,7 +244,7 @@ class Project extends Base
             'user_id' => $this->request->getIntegerParam('user_id'),
         );
 
-        list($valid,) = $this->projectPermission->validateModification($values);
+        list($valid,) = $this->projectPermission->validateUserModification($values);
 
         if ($valid) {
 
