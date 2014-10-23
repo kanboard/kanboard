@@ -19,7 +19,7 @@
     </span>
 
     <?php if ($task['score']): ?>
-        <span class="task-score"><?= Helper\escape($task['score']) ?></span>
+        <span class="task-score">&nbsp;<?= Helper\escape($task['score']) ?></span>
     <?php endif ?>
 
     <div class="task-board-title">
@@ -51,7 +51,7 @@
     </span>
 
     <?php if ($task['score']): ?>
-        <span class="task-score"><?= Helper\escape($task['score']) ?></span>
+        <span class="task-score">&nbsp;<?= Helper\escape($task['score']) ?></span>
     <?php endif ?>
 
     <div class="task-board-title">
