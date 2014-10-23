@@ -1,7 +1,7 @@
 <div class="task-<?= $task['color_id'] ?> task-show-details">
     <h2><?= Helper\escape($task['title']) ?></h2>
     <?php if ($task['score']): ?>
-        <span class="task-score"><?= Helper\escape($task['score']) ?></span>
+        <span class="task-score">&nbsp;<?= Helper\escape($task['score']) ?></span>
     <?php endif ?>
     <ul>
         <?php if ($task['reference']): ?>
