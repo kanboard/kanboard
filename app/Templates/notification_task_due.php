@@ -4,7 +4,12 @@
     <?php foreach ($tasks as $task): ?>
         <li>
             (<strong>#<?= $task['id'] ?></strong>)
-            <?= Helper\escape($task['title']) ?>
+            <?php if ($application_url): ?>
+                <a href="<?= $application_url.'?controller=task&action=show&task_id='.$task['id'] ?>"><?= Helper\escape($task['title']) ?></a>
+            <?php else: ?>
+                <?= Helper\escape($task['title']) ?>
+            <?php endif ?>
+            (<?= dt('%B %e, %Y', $task['date_due']) ?>)
             <?php if ($task['assignee_username']): ?>
                 (<strong><?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?></strong>)
             <?php endif ?>
@@ -12,4 +17,4 @@
     <?php endforeach ?>
 </ul>
 
-<?= Helper\template('notification_footer', array('task' => $task, 'application_url' => $application_url)) ?>
+<?= Helper\template('notification_footer', array('task' => $task)) ?>
