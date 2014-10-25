@@ -1,9 +1,9 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= t('New task') ?></h2>
+        <h2><?= Helper\in_list($values['project_id'], $projects_list) ?> &gt; <?= t('New task') ?></h2>
     </div>
     <section id="task-section">
-    <form method="post" action="?controller=task&amp;action=save" autocomplete="off">
+    <form method="post" action="<?= Helper\u('task', 'save') ?>" autocomplete="off">
 
         <?= Helper\form_csrf() ?>
 
@@ -48,7 +48,7 @@
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-            <?= t('or') ?> <a href="?controller=board&amp;action=show&amp;project_id=<?= $values['project_id'] ?>"><?= t('cancel') ?></a>
+            <?= t('or') ?> <?= Helper\a(t('cancel'), 'board', 'show', array('project_id' => $values['project_id'])) ?>
         </div>
     </form>
     </section>
