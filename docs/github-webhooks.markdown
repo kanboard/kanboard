@@ -36,6 +36,8 @@ Go to your project settings page, on the left choose "Webhooks & Services", then
 - **Payload url**: This url is available on Kanboard, go to "projects", select your project, at the bottom of the page, you have a section Github webhooks, just copy and paste the link.
 - Select **"Send me everything"**
 
+![Github webhook](http://kanboard.net/screenshots/documentation/kanboard-github-webhooks.png)
+
 Each time an event happens, Github will send an event to Kanboard now.
 The Kanboard webhook url is protected by a random token.
 
