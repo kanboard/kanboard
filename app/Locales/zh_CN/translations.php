@@ -551,4 +551,6 @@ return array(
     'Confirmation' => '确认',
     // 'Allow everybody to access to this project' => '',
     // 'Everybody have access to this project.' => '',
+    // 'Webhooks' => '',
+    // 'API' => '',
 );

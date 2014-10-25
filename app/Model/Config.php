@@ -58,6 +58,7 @@ class Config extends Base
             'sv_SE' => 'Svenska',
             'zh_CN' => '中文(简体)',
             'ja_JP' => '日本語',
+            'th_TH' => 'ไทย',
         );
     }
 
