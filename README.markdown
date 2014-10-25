@@ -136,6 +136,7 @@ Contributors:
 - [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo
 - [Cmer](https://github.com/chncsu)
+- [David-Norris](https://github.com/David-Norris)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
 - [Gavlepeter](https://github.com/gavlepeter)
@@ -155,8 +156,8 @@ Contributors:
 - [Nekohayo](https://github.com/nekohayo)
 - [Nramel](https://github.com/nramel)
 - [Null-Kelvin](https://github.com/Null-Kelvin)
+- [Oliver Bertuch](https://github.com/poikilotherm)
 - [Olivier Maridat](https://github.com/oliviermaridat)
-- [Poikilotherm](https://github.com/poikilotherm)
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
 - [Rzeka](https://github.com/rzeka)
