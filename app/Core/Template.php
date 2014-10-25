@@ -17,7 +17,7 @@ class Template
      *
      * @var string
      */
-    const PATH = 'app/Templates/';
+    const PATH = 'app/Template/';
 
     /**
      * Load a template
