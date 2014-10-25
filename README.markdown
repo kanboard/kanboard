@@ -154,6 +154,7 @@ Contributors:
 - [Moraxy](https://github.com/moraxy)
 - [Nala Ginrut](https://github.com/NalaGinrut)
 - [Nekohayo](https://github.com/nekohayo)
+- [Nicolas Lœuillet](https://github.com/nicosomb)
 - [Nramel](https://github.com/nramel)
 - [Null-Kelvin](https://github.com/Null-Kelvin)
 - [Oliver Bertuch](https://github.com/poikilotherm)
