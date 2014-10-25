@@ -3,7 +3,7 @@
         <h2><?= t('Users') ?><span id="page-counter"> (<?= $nb_users ?>)</span></h2>
         <?php if (Helper\is_admin()): ?>
         <ul>
-            <li><a href="?controller=user&amp;action=create"><?= t('New user') ?></a></li>
+            <li><?= Helper\a(t('New user'), 'user', 'create') ?></li>
         </ul>
         <?php endif ?>
     </div>
@@ -13,29 +13,29 @@
     <?php else: ?>
         <table>
             <tr>
-                <th><?= t('Id') ?></th>
-                <th><?= t('Username') ?></th>
-                <th><?= t('Name') ?></th>
-                <th><?= t('Email') ?></th>
-                <th><?= t('Administrator') ?></th>
-                <th><?= t('Default project') ?></th>
-                <th><?= t('Notifications') ?></th>
+                <th><?= Helper\order(t('Id'), 'id', $pagination) ?></th>
+                <th><?= Helper\order(t('Username'), 'username', $pagination) ?></th>
+                <th><?= Helper\order(t('Name'), 'name', $pagination) ?></th>
+                <th><?= Helper\order(t('Email'), 'email', $pagination) ?></th>
+                <th><?= Helper\order(t('Administrator'), 'is_admin', $pagination) ?></th>
+                <th><?= Helper\order(t('Default project'), 'default_project_id', $pagination) ?></th>
+                <th><?= Helper\order(t('Notifications'), 'notifications_enabled', $pagination) ?></th>
                 <th><?= t('External accounts') ?></th>
-                <th><?= t('Account type') ?></th>
+                <th><?= Helper\order(t('Account type'), 'is_ldap_user', $pagination) ?></th>
             </tr>
             <?php foreach ($users as $user): ?>
             <tr>
                 <td>
-                    <a href="?controller=user&amp;action=show&amp;user_id=<?= $user['id'] ?>">#<?= $user['id'] ?></a>
+                    <?= Helper\a('#'.$user['id'], 'user', 'show', array('user_id' => $user['id'])) ?>
                 </td>
                 <td>
-                    <a href="?controller=user&amp;action=show&amp;user_id=<?= $user['id'] ?>"><?= Helper\escape($user['username']) ?></a>
+                    <?= Helper\a(Helper\escape($user['username']), 'user', 'show', array('user_id' => $user['id'])) ?>
                 </td>
                 <td>
                     <?= Helper\escape($user['name']) ?>
                 </td>
                 <td>
-                    <?= Helper\escape($user['email']) ?>
+                    <a href="mailto:<?= Helper\escape($user['email']) ?>"><?= Helper\escape($user['email']) ?></a>
                 </td>
                 <td>
                     <?= $user['is_admin'] ? t('Yes') : t('No') ?>
@@ -66,6 +66,8 @@
             </tr>
             <?php endforeach ?>
         </table>
+
+        <?= Helper\paginate($pagination) ?>
     <?php endif ?>
     </section>
 </section>
