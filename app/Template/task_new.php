@@ -1,6 +1,6 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= $projects_list[$values['project_id']].' > '.t('New task') ?></h2>
+        <h2><?= Helper\escape($projects_list[$values['project_id']]) ?> &gt; <?= t('New task') ?></h2>
     </div>
     <section id="task-section">
     <form method="post" action="?controller=task&amp;action=save" autocomplete="off">
