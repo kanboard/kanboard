@@ -2,6 +2,9 @@
 
     <div class="page-header board">
         <h2>
+            <?php if (Helper\is_admin()): ?>
+                <?= Helper\a('<i class="fa fa-cog"></i>', 'project', 'show', array('project_id' => $current_project_id)) ?>
+            <?php endif ?>
             <?= t('Project "%s"', $current_project_name) ?>
         </h2>
     </div>
@@ -16,10 +19,25 @@
                 <span class="hide-tablet"><?= t('Filter by category') ?></span>
                 <?= Helper\form_select('category_id', $categories, $filters) ?>
             </li>
-            <li><a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a></li>
-            <li><a href="?controller=project&amp;action=search&amp;project_id=<?= $current_project_id ?>"><?= t('Search') ?></a></li>
-            <li><a href="?controller=project&amp;action=tasks&amp;project_id=<?= $current_project_id ?>"><?= t('Completed tasks') ?></a></li>
-            <li><a href="?controller=project&amp;action=activity&amp;project_id=<?= $current_project_id ?>"><?= t('Activity') ?></a></li>
+            <li>
+                <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>
+            </li>
+            <li>
+                <i class="fa fa-search"></i>
+                <?= Helper\a(t('Search'), 'project', 'search', array('project_id' => $current_project_id)) ?>
+            </li>
+            <li>
+                <i class="fa fa-check-square-o"></i>
+                <?= Helper\a(t('Completed tasks'), 'project', 'tasks', array('project_id' => $current_project_id)) ?>
+            </li>
+            <li>
+                <i class="fa fa-dashboard"></i>
+                <?= Helper\a(t('Activity'), 'project', 'activity', array('project_id' => $current_project_id)) ?>
+            </li>
+            <?php if (Helper\is_admin()): ?>
+                <li><i class="fa fa-cog"></i>
+                <?= Helper\a(t('Edit board'), 'board', 'edit', array('project_id' => $current_project_id)) ?>
+            <?php endif ?>
         </ul>
     </div>
 

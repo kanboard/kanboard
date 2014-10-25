@@ -522,6 +522,15 @@ nav .active a {
     border-bottom: 1px dotted red;
 }
 
+.page-header h2 a {
+    color: #ddd;
+}
+
+.page-header h2 a:focus,
+.page-header h2 a:hover {
+    color: #333;
+}
+
 .page-header ul {
     text-align: left;
     margin-top: 5px;
