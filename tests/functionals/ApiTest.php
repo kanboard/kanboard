@@ -164,7 +164,8 @@ class Api extends PHPUnit_Framework_TestCase
             'column_id' => 2,
         );
 
-        $this->assertTrue($this->client->execute('createTask', $task));
+        //$this->assertTrue($this->client->execute('createTask', $task));
+        $this->assertTrue($this->client->createTask($task));
     }
 
     /**
