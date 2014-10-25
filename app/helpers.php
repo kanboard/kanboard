@@ -570,7 +570,7 @@ function form_numeric($name, $values = array(), array $errors = array(), array $
  */
 function a($label, $controller, $action, array $params = array(), $csrf = false, $class = '')
 {
-    return '<a href="'.u($controller, $action, $params, $csrf).'" class="'.$class.'"/>'.$label.'</a>';
+    return '<a href="'.u($controller, $action, $params, $csrf).'" class="'.$class.'">'.$label.'</a>';
 }
 
 /**

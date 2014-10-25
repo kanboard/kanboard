@@ -1,8 +1,45 @@
-How to test Kanboard with Vagrant?
-==================================
+Run Kanboard with Vagrant
+=========================
 
-- Install Vagrant (http://www.vagrantup.com or apt-get install vagrant)
-- Install VirtualBox (https://www.virtualbox.org/ or apt-get install virtualbox)
-- Inside the root directory, and run the command `vagrant up`
-- Go to http://localhost:8080/index.php
-- Login with admin / admin
+Vagrant is used to test Kanboard in different environments.
+Several configurations are available:
+
+- Ubuntu 14.04 LTS with Kanboard/Sqlite
+- Ubuntu 14.04 LTS with Kanboard/Mysql
+- Ubuntu 14.04 LTS with Kanboard/Postgresql
+- Debian 7.6 with Kanboard/Sqlite
+- Debian 6 with Kanboard/Sqlite
+
+To use those configurations, you have to install the **last version** of Virtualbox and Vagrant.
+
+Standard boxes can be download from [VagrantCloud](https://vagrantcloud.com):
+
+```bash
+vagrant box add ubuntu/trusty64
+vagrant box add chef/debian-7.6
+vagrant box add chef/debian-6.0.10
+```
+
+If you want to test Kanboard on Ubuntu with Sqlite:
+
+```bash
+vagrant up sqlite
+```
+
+After the initialization, go to http://localhost:8001/.
+
+To test with Mysql:
+
+```bash
+vagrant up mysql
+```
+
+You have to configure Kanboard to use Mysql or Postgresql the first time (config file and database access).
+
+Available boxes are:
+
+- `vagrant up sqlite`
+- `vagrant up mysql`
+- `vagrant up postgres`
+- `vagrant up debian7`
+- `vagrant up debian6`

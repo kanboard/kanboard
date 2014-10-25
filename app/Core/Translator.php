@@ -11,14 +11,14 @@ namespace Core;
 class Translator
 {
     /**
-     * Locales path
+     * Locale path
      *
      * @var string
      */
-    const PATH = 'app/Locales/';
+    const PATH = 'app/Locale/';
 
     /**
-     * Locales
+     * Locale
      *
      * @static
      * @access private

@@ -2,7 +2,7 @@ filter:
     excluded_paths:
         - 'vendor/*'
         - 'tests/*'
-        - 'app/Templates/*'
+        - 'app/Template/*'
     paths: {  }
 tools:
     php_sim:
@@ -12,7 +12,7 @@ tools:
             excluded_paths:
                 - 'vendor/*'
                 - 'tests/*'
-                - 'app/Templates/*'
+                - 'app/Template/*'
             paths: {  }
     php_pdepend:
         enabled: true
@@ -24,7 +24,7 @@ tools:
             excluded_paths:
                 - 'vendor/*'
                 - 'tests/*'
-                - 'app/Templates/*'
+                - 'app/Template/*'
             paths: {  }
     php_analyzer:
         enabled: true
@@ -35,7 +35,7 @@ tools:
             excluded_paths:
                 - 'vendor/*'
                 - 'tests/*'
-                - 'app/Templates/*'
+                - 'app/Template/*'
             paths: {  }
         path_configs: {  }
     php_changetracking:
@@ -49,5 +49,5 @@ tools:
             excluded_paths:
                 - 'vendor/*'
                 - 'tests/*'
-                - 'app/Templates/*'
+                - 'app/Template/*'
             paths: {  }

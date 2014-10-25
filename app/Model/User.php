@@ -138,8 +138,62 @@ class User extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->asc('username')
-                    ->columns('id', 'username', 'name', 'email', 'is_admin', 'default_project_id', 'is_ldap_user', 'notifications_enabled', 'google_id', 'github_id')
+                    ->columns(
+                        'id',
+                        'username',
+                        'name',
+                        'email',
+                        'is_admin',
+                        'default_project_id',
+                        'is_ldap_user',
+                        'notifications_enabled',
+                        'google_id',
+                        'github_id'
+                    )
                     ->findAll();
+    }
+
+    /**
+     * Get all users with pagination
+     *
+     * @access public
+     * @param  integer    $offset        Offset
+     * @param  integer    $limit         Limit
+     * @param  string     $column        Sorting column
+     * @param  string     $direction     Sorting direction
+     * @return array
+     */
+    public function paginate($offset = 0, $limit = 25, $column = 'username', $direction = 'ASC')
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->columns(
+                        'id',
+                        'username',
+                        'name',
+                        'email',
+                        'is_admin',
+                        'default_project_id',
+                        'is_ldap_user',
+                        'notifications_enabled',
+                        'google_id',
+                        'github_id'
+                    )
+                    ->offset($offset)
+                    ->limit($limit)
+                    ->orderBy($column, $direction)
+                    ->findAll();
+    }
+
+    /**
+     * Get the number of users
+     *
+     * @access public
+     * @return integer
+     */
+    public function count()
+    {
+        return $this->db->table(self::TABLE)->count();
     }
 
     /**

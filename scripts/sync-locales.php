@@ -2,7 +2,7 @@
 <?php
 
 $reference_lang = 'fr_FR';
-$reference_file = 'app/Locales/'.$reference_lang.'/translations.php';
+$reference_file = 'app/Locale/'.$reference_lang.'/translations.php';
 $reference = include $reference_file;
 
 
@@ -30,11 +30,11 @@ function update_missing_locales(array $reference, $outdated_file)
 }
 
 
-foreach (new DirectoryIterator('app/Locales') as $fileInfo) {
+foreach (new DirectoryIterator('app/Locale') as $fileInfo) {
 
     if (! $fileInfo->isDot() && $fileInfo->isDir() && $fileInfo->getFilename() !== $reference_lang) {
 
-        $filename = 'app/Locales/'.$fileInfo->getFilename().'/translations.php';
+        $filename = 'app/Locale/'.$fileInfo->getFilename().'/translations.php';
 
         echo $fileInfo->getFilename().' ('.$filename.')'.PHP_EOL;
 

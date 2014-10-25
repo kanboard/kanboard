@@ -551,4 +551,6 @@ return array(
     'Confirmation' => 'Wiederholung',
     'Allow everybody to access to this project' => 'Allen Benutzern Zugriff zu diesem Projekt gewähren',
     'Everybody have access to this project.' => 'Alle Benutzer haben Zugriff zu diesem Projekt',
+    // 'Webhooks' => '',
+    // 'API' => '',
 );

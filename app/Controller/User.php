@@ -121,16 +121,31 @@ class User extends Base
      */
     public function index()
     {
-        $users = $this->user->getAll();
-        $nb_users = count($users);
+        $direction = $this->request->getStringParam('direction', 'ASC');
+        $order = $this->request->getStringParam('order', 'username');
+        $offset = $this->request->getIntegerParam('offset', 0);
+        $limit = 25;
+
+        $users = $this->user->paginate($offset, $limit, $order, $direction);
+        $nb_users = $this->user->count();
 
         $this->response->html(
             $this->template->layout('user_index', array(
                 'projects' => $this->project->getList(),
-                'users' => $users,
                 'nb_users' => $nb_users,
+                'users' => $users,
                 'menu' => 'users',
-                'title' => t('Users').' ('.$nb_users.')'
+                'title' => t('Users').' ('.$nb_users.')',
+                'pagination' => array(
+                    'controller' => 'user',
+                    'action' => 'index',
+                    'direction' => $direction,
+                    'order' => $order,
+                    'total' => $nb_users,
+                    'offset' => $offset,
+                    'limit' => $limit,
+                    'params' => array(),
+                ),
         )));
     }
 

@@ -31,7 +31,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translated in 13 languages (Brazilian, Chinese, Danish, English, Finnish, French, German, Italian, Japanese, Polish, Russian, Spanish, Swedish)
+- Translated in 14 languages (Brazilian, Chinese, Danish, English, Finnish, French, German, Italian, Japanese, Polish, Russian, Spanish, Swedish, Thai)
 
 Known bugs and feature requests
 -------------------------------
@@ -133,8 +133,10 @@ Contributors:
 - Alex Butum
 - [Aleix Pol](https://github.com/aleixpol)
 - [Ashish Kulkarni](https://github.com/ashkulz)
+- [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo
 - [Cmer](https://github.com/chncsu)
+- [David-Norris](https://github.com/David-Norris)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
 - [Gavlepeter](https://github.com/gavlepeter)
@@ -152,10 +154,11 @@ Contributors:
 - [Moraxy](https://github.com/moraxy)
 - [Nala Ginrut](https://github.com/NalaGinrut)
 - [Nekohayo](https://github.com/nekohayo)
+- [Nicolas Lœuillet](https://github.com/nicosomb)
 - [Nramel](https://github.com/nramel)
 - [Null-Kelvin](https://github.com/Null-Kelvin)
+- [Oliver Bertuch](https://github.com/poikilotherm)
 - [Olivier Maridat](https://github.com/oliviermaridat)
-- [Poikilotherm](https://github.com/poikilotherm)
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
 - [Rzeka](https://github.com/rzeka)

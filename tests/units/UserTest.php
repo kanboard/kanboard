@@ -9,6 +9,15 @@ use Model\Project;
 
 class UserTest extends Base
 {
+    public function testPassword()
+    {
+        $password = 'test123';
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+
+        $this->assertNotEmpty($hash);
+        $this->assertTrue(password_verify($password, $hash));
+    }
+
     public function testPrepare()
     {
         $u = new User($this->registry);
