@@ -53,3 +53,14 @@
     </tr>
     <?php endforeach ?>
 </table>
+
+<?php if (Helper\is_admin()): ?>
+<div class="page-header">
+    <h2><?= t('Integration') ?></h2>
+</div>
+
+<h3><i class="fa fa-github fa-fw"></i><?= t('Github webhook') ?></h3>
+<input type="text" readonly="readonly" value="<?= Helper\get_current_base_url().Helper\u('webhook', 'github', array('token' => $webhook_token, 'project_id' => $project['id'])) ?>"/><br/>
+<p class="form-help"><a href="http://kanboard.net/documentation/github-webhooks" target="_blank"><?= t('Help on Github webhook') ?></a></p>
+
+<?php endif ?>

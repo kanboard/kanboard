@@ -55,9 +55,11 @@ class Webhook extends Base
 
         $this->githubWebhook->setProjectId($this->request->getIntegerParam('project_id'));
 
-        $this->githubWebhook->parsePayload(
+        $result = $this->githubWebhook->parsePayload(
             $this->request->getHeader('X-Github-Event'),
             $this->request->getBody()
         );
+
+        echo $result ? 'PARSED' : 'IGNORED';
     }
 }

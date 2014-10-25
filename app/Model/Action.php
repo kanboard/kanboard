@@ -46,6 +46,7 @@ class Action extends Base
             'TaskAssignColorUser' => t('Assign a color to a specific user'),
             'TaskAssignColorCategory' => t('Assign automatically a color based on a category'),
             'TaskAssignCategoryColor' => t('Assign automatically a category based on a color'),
+            'CommentCreation' => t('Create a comment from an external provider'),
             'TaskCreation' => t('Create a task from an external provider'),
             'TaskAssignUser' => t('Change the assignee based on an external username'),
             'TaskAssignCategoryLabel' => t('Change the category based on an external label'),
@@ -78,6 +79,7 @@ class Action extends Base
             GithubWebhook::EVENT_ISSUE_REOPENED => t('Github issue reopened'),
             GithubWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE => t('Github issue assignee change'),
             GithubWebhook::EVENT_ISSUE_LABEL_CHANGE => t('Github issue label change'),
+            GithubWebhook::EVENT_ISSUE_COMMENT => t('Github issue comment created'),
         );
 
         asort($values);

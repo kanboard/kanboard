@@ -32,6 +32,13 @@ List of available events
 - Closing a task
 - Task creation or modification
 - Task assignee change
+- Github commit received
+- Github issue opened
+- Github issue closed
+- Github issue reopened
+- Github issue assignee change
+- Github issue label change
+- Github issue comment created
 
 List of available actions
 -------------------------
@@ -44,6 +51,10 @@ List of available actions
 - Assign a color to a specific user
 - Assign automatically a color based on a category
 - Assign automatically a category based on a color
+- Create a task from an external provider
+- Change the assignee based on an external username
+- Change the category based on an external label
+- Create a comment from an external provider
 
 Examples
 --------

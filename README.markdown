@@ -98,6 +98,10 @@ Documentation
 - [GitHub authentication](docs/github-authentication.markdown)
 - [Reverse proxy authentication](docs/reverse-proxy-authentication.markdown)
 
+### Integration
+
+- [Github webhooks](docs/github-webhooks.markdown)
+
 #### Developers and sysadmins
 
 - [Board configuration](docs/board-configuration.markdown)

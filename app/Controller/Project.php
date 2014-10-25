@@ -54,6 +54,7 @@ class Project extends Base
         $this->response->html($this->projectLayout('project_show', array(
             'project' => $project,
             'stats' => $this->project->getStats($project['id']),
+            'webhook_token' => $this->config->get('webhook_token'),
             'title' => $project['name'],
         )));
     }

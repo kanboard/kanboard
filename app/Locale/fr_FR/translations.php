@@ -553,4 +553,9 @@ return array(
     'Everybody have access to this project.' => 'Tout le monde a acccès à ce projet.',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
+    'Integration' => 'Intégration',
+    'Github webhook' => 'Webhook Github',
+    'Help on Github webhook' => 'Aide sur les webhooks Github',
+    'Create a comment from an external provider' => 'Créer un commentaire depuis un fournisseur externe',
+    'Github issue comment created' => 'Commentaire créé sur un ticket Github',
 );
