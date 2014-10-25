@@ -24,6 +24,11 @@ body {
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-y: scroll;
+}
+
+nav {
+    height: 25px;
 }
 
 /* links */
@@ -32,11 +37,11 @@ a {
     border: none;
 }
 
-a:focus {
+a:focus, a:active {
     outline: 0;
     color: red;
     text-decoration: none;
-    border: 1px dotted #aaa;
+    /*border: 1px dotted #aaa;*/
 }
 
 a:hover {
@@ -362,6 +367,68 @@ input.form-date {
     color: #333;
     background-color: #f0f0f0;
     border-color: #ddd;
+}
+
+/* tooltip */
+.ui-tooltip, .tooltip-arrow:after {
+    background: white;
+    border: 2px solid #aaaaaa;
+    box-shadow: 0 0 5px #aaa;
+}
+
+div.ui-tooltip {
+    min-width: 20px;
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+.tooltip-arrow {
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.tooltip-arrow.top {
+    top: -20px;
+}
+
+.tooltip-arrow.bottom {
+    bottom: -20px;
+}
+
+.tooltip-arrow.align-left {
+    left: 10px;
+}
+
+.tooltip-arrow.align-right {
+    right: 10px;
+}
+
+.tooltip-arrow:after {
+    content: "";
+    position: absolute;
+    width: 14.14213562373095048802px;
+    height: 14.14213562373095048802px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.tooltip-arrow.bottom:after {
+    top: -10px;
+}
+
+.tooltip-arrow.top:after {
+    bottom: -10px;
+}
+
+.tooltip-arrow.align-left:after {
+    left: 0px;
+}
+
+.tooltip-arrow.align-right:after {
+    right: 0px;
 }
 
 /* labels */
@@ -900,6 +967,14 @@ a.task-board-nobody {
     margin-bottom: 8px;
     padding-bottom: 3px;
     border-bottom: 1px dotted #aaa;
+}
+
+.ui-tooltip .comment-title {
+    font-size: 80%;
+}
+
+.ui-tooltip .comment-inner {
+    padding-bottom: 0;
 }
 
 .comment-actions {
