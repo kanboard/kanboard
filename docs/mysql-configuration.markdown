@@ -4,8 +4,6 @@ How to use Mysql or MariaDB instead of Sqlite
 By default Kanboard use Sqlite to stores its data.
 However it's possible to use Mysql or MariaDB instead of Sqlite.
 
-By example, it can be useful if you don't want to store any data on the web server itself.
-
 Mysql configuration
 -------------------
 
@@ -37,7 +35,7 @@ The second step is to create a config file named `config.php`:
 
 ### Define Mysql parameters
 
-Inside our config file write those lines:
+Copy and paste this config file and replace the values:
 
 ```php
 <?php
@@ -52,4 +50,4 @@ define('DB_HOSTNAME', 'REPLACE_ME');
 define('DB_NAME', 'kanboard');
 ```
 
-Now, you are ready to use Mysql!
+Note: You can also rename the template file `config.default.php` to `config.php`.

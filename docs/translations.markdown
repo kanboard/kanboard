@@ -18,11 +18,11 @@ How to translate Kanboard to a new language?
 3. Use the content of the French locales and replace the values
 4. Inside the file `app/Model/Config.php`, add a new entry for your translation inside the function `getLanguages()`
 5. Check with your local installation of Kanboard if everything is ok
-6. Send a pull-request with Github
+6. Send a [pull-request with Github](https://help.github.com/articles/using-pull-requests/)
 
 How to update an existing translation?
 --------------------------------------
 
 1. Open the translation file `app/Locale/xx_XX/translations.php`
-2. Missing translations are commented with `//` and the values are empty, just fill blank and remove comments
-3. Check with your local installation of Kanboard and send a pull-request
+2. Missing translations are commented with `//` and the values are empty, just fill blank and remove the comment
+3. Check with your local installation of Kanboard and send a [pull-request](https://help.github.com/articles/using-pull-requests/)

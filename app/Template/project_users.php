@@ -9,7 +9,7 @@
     <?php if (empty($users['allowed'])): ?>
         <div class="alert alert-error"><?= t('Nobody have access to this project.') ?></div>
     <?php else: ?>
-    <div class="listing">
+    <div class="alert alert-info">
         <p><?= t('Only those users have access to this project:') ?></p>
         <ul>
         <?php foreach ($users['allowed'] as $user_id => $username): ?>

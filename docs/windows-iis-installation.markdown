@@ -6,7 +6,7 @@ Windows 2008/2012 with IIS
 
 ### PHP installation
 
-- Install IIS on your server (Add new role and don't forget to enable CGI/FastCGI)
+- Install IIS on your server (Add a new role and don't forget to enable CGI/FastCGI)
 - Install PHP by following the official documentation:
     - [Microsoft IIS 5.1 and IIS 6.0](http://php.net/manual/en/install.windows.iis6.php)
     - [Microsoft IIS 7.0 and later](http://php.net/manual/en/install.windows.iis7.php)

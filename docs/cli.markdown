@@ -4,7 +4,7 @@ Command Line Interface
 Kanboard provide a simple command line interface that can be used from any Unix terminal.
 This tool can be used only on the local machine.
 
-This feature is useful to run commands outside the web server by example a huge report.
+This feature is useful to run commands outside the web server process by example running a huge report.
 
 Usage
 -----

@@ -1,30 +1,36 @@
-Board configuration
-===================
+Board settings
+===============
 
-Some parameters for the boards can be changed with a config file.
+Some parameters for boards can be changed on the settings page.
+Only administrators can change those settings.
 
-Default values are available in the file `config.default.php`.
-If you want to override the default values, you have to create a config file `config.php` in the root directory of your Kanboard installation.
+Go to the menu **Settings**, then choose **Board settings** on the left.
 
-### Auto-refresh frequency for the public board view
-
-```php
-// Auto-refresh frequency in seconds for the public board view (60 seconds by default)
-define('BOARD_PUBLIC_CHECK_INTERVAL', 60);
-```
-
-### Auto-refresh frequency for the board (Ajax polling)
-
-```php
-// Board refresh frequency in seconds (the value 0 disable this feature, 10 seconds by default)
-define('BOARD_CHECK_INTERVAL', 10);
-```
+![Board settings](http://kanboard.net/screenshots/documentation/board-settings.png)
 
 ### Task highlighting
 
-Display a shadow around the task when a task was moved recently. Set the value 0 to disable this feature.
+This feature display a shadow around the task when a task is moved recently.
 
-```php
-// Period (in seconds) to consider a task was modified recently (0 to disable, 2 days by default)
-define('RECENT_TASK_PERIOD', 48*60*60);
-```
+Set the value 0 to disable this feature, 2 days by default (172800 seconds).
+
+Everything moved since 2 days will have shadow around the task.
+
+### Refresh interval for public board
+
+When you share a board, the page will refresh automatically every 60 seconds by default.
+
+### Refresh interval for private board
+
+When your web browser is open on a board, Kanboard check every 10 seconds if something have been changed by someone else.
+
+Technically this process is done by Ajax polling.
+
+### Default columns for new projects
+
+You can change the default column names here.
+It's useful if you always create projects with the same columns.
+
+Each column name must be separated by a comma.
+
+By default, Kanboard use those column names: Backlog, Ready, Work in progress and Done.

@@ -60,6 +60,7 @@ Documentation
 - [Editing projects](docs/editing-projects.markdown)
 - [Sharing boards and tasks](docs/sharing-projects.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
+- [Project permissions](docs/project-permissions.markdown)
 
 #### Working with tasks
 
@@ -67,7 +68,12 @@ Documentation
 
 #### Working with users
 
-- [User management](docs/manage-users.markdown)
+- [User management](docs/user-management.markdown)
+
+#### Settings
+
+- [Application settings](docs/application-configuration.markdown)
+- [Board settings](docs/board-configuration.markdown)
 
 #### More
 
@@ -104,7 +110,6 @@ Documentation
 
 #### Developers and sysadmins
 
-- [Board configuration](docs/board-configuration.markdown)
 - [Email configuration](docs/email-configuration.markdown)
 - [Command line interface](docs/cli.markdown)
 - [Json-RPC API](docs/api-json-rpc.markdown)

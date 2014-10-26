@@ -364,6 +364,15 @@ input.form-date {
     border-color: #ddd;
 }
 
+.alert ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.alert li {
+    margin-left: 25px;
+}
+
 /* labels */
 a.label {
     text-decoration: none;

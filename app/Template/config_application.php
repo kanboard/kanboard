@@ -7,7 +7,7 @@
     <?= Helper\form_csrf() ?>
 
     <?= Helper\form_label(t('Application URL'), 'application_url') ?>
-    <?= Helper\form_text('application_url', $values, $errors, array('placeholder="http://example.kanboar.net/"')) ?><br/>
+    <?= Helper\form_text('application_url', $values, $errors, array('placeholder="http://example.kanboard.net/"')) ?><br/>
     <p class="form-help"><?= t('Example: http://example.kanboard.net/ (used by email notifications)') ?></p>
 
     <?= Helper\form_label(t('Language'), 'application_language') ?>

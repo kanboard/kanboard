@@ -93,13 +93,8 @@ Here a example:
 
 ### How to display a link to the task in notifications?
 
-To do that, you have to specify the URL of your Kanboard installation in your config file.
+To do that, you have to specify the URL of your Kanboard installation in your [Application Settings](http://kanboard.net/documentation/application-configuration).
 By default, nothing is defined, so no links will be displayed.
-
-```php
-// Your Kanboard base URL, example: http://demo.kanboard.net/ (used by email notifications or CLI scripts)
-define('KANBOARD_URL', '');
-```
 
 Examples:
 

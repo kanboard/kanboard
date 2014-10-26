@@ -1,6 +1,8 @@
 Update
 ======
 
+Important: **Always do a backup of your database before upgrading!**
+
 From the archive
 ----------------
 
@@ -10,6 +12,7 @@ From the archive
 4. Make the directory `data` writeable by the web server user
 5. Login and check if everything is ok
 6. Remove the old Kanboard directory
+
 
 From the repository
 -------------------

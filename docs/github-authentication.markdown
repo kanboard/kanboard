@@ -9,7 +9,9 @@ Requirements
 How does this work?
 -------------------
 
-The GitHub authentication in Kanboard uses the [OAuth 2.0](http://oauth.net/2/) protocol, so any user of Kanboard can be linked to a GitHub account. When that is done, they no longer need to manually login with their Kanboard account, but can simply automatically login with their GitHub account.
+The GitHub authentication in Kanboard uses the [OAuth 2.0](http://oauth.net/2/) protocol, so any user of Kanboard can be linked to a GitHub account.
+
+When that is done, they no longer need to manually login with their Kanboard account, but can simply automatically login with their GitHub account.
 
 How to link a GitHub account
 ----------------------------------
@@ -26,16 +28,16 @@ Installation instructions
 
 ### Setting up OAuth 2.0
 
-If you know what you're doing, you can directly go to the ["Register a new OAuth application"](https://github.com/settings/applications/new) site, set everything up and skip to [Setting up Kanboard](#setting-up-kanboard) below.
+On Github, go to the page ["Register a new OAuth application"](https://github.com/settings/applications/new).
 
-Summarizing the [official GitHub documentation](https://developer.github.com/guides/basics-of-authentication/#registering-your-app):
+Just follow the [official GitHub documentation](https://developer.github.com/guides/basics-of-authentication/#registering-your-app):
 
-- Open your [**Settings**](https://github.com/settings), select [**Applications**](https://github.com/settings/applications) from the sidebar and click on [**Register new application**](https://github.com/settings/applications/new) on the top, next to where it says **Developer applications**
-- Fill out the form with whatever values you like, only the **Authorization callback URL** _must_ be: **http://YOUR_SERVER/?controller=user&action=gitHub**
+- Open your [Settings](https://github.com/settings), select [Applications](https://github.com/settings/applications) from the sidebar and click on [Register new application](https://github.com/settings/applications/new) on the top, next to where it says **Developer applications**
+- Fill out the form with whatever values you like, the **Authorization callback URL** _must_ be: **http://YOUR_SERVER/?controller=user&action=gitHub**
 
 ### Setting up Kanboard
 
-Either create a new `config.php` file or copy and rename the `config.default.php` file and set the following values:
+Either create a new `config.php` file or rename the `config.default.php` file and set the following values:
 
 ```php
 // Enable/disable GitHub authentication

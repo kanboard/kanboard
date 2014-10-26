@@ -128,11 +128,11 @@ Actually only the API calls are tested.
 Real HTTP calls are made with those tests.
 So a local instance of Kanboard is necessary and must listen on `http://localhost:8000`.
 
-Don't forget that all data will be removed/altered by the testsuite.
+Don't forget that all data will be removed/altered by the test suite.
 Moreover the script will reset and set a new API key.
 
 1. Start a local instance of Kanboard `php -S 127.0.0.1:8000`
-2. Run the testsuite from another terminal
+2. Run the test suite from another terminal
 
 The same method as above is used to run tests across different databases:
 

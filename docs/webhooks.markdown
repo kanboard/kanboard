@@ -33,8 +33,8 @@ Base URL: `http://YOUR_SERVER_HOSTNAME/?controller=webhook&action=task`
 - `title`: Task title (required)
 - `description`: Task description
 - `color_id`: Supported colors are yellow, blue, green, purple, red, orange and grey
-- `project_id`: Project id (Get the id from the projects page, mouse over on the project title)
-- `owner_id`: Assignee (Get the user id from the users page, mouse over on the username)
+- `project_id`: Project id (Get the id from the project page)
+- `owner_id`: Assignee (Get the user id from the users page)
 - `column_id`: Column on the board (Get the column id from the projects page, mouse over on the column name)
 
 Only the token and the title parameters are mandatory. The different id can also be found in the database.

@@ -22,3 +22,4 @@ Field description:
 - **Color**: Choose the color of the card.
 - **Complexity**: Used in agile project management (Scrum), the complexity or story points is a number that tells the team how hard the story is. Often, people use the fibonacci series.
 - **Due Date**: Overdue tasks will have a red due date and upcoming due dates will be black on the board. Several date format are accepted in addition to the date picker.
+- **Original Estimate**: Estimation in hours to complete the tasks.
