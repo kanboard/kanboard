@@ -78,6 +78,7 @@ Documentation
 #### More
 
 - [Syntax guide](docs/syntax-guide.markdown)
+- [Frequently asked questions](docs/faq.markdown)
 
 ### Technical details
 
