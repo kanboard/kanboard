@@ -12,7 +12,7 @@ Build your own Docker image
 From your kanboard directory run the following command:
 
 ```bash
-docker build -t youruser\kanboard:master .
+docker build -t youruser/kanboard:master .
 ```
 
 To run your image in background on the port 80:
@@ -37,6 +37,8 @@ Run the image:
 ```bash
 docker run -d --name kanboard -p 80:80 -t kanboard/kanboard:master
 ```
+
+Note: This image is not necessary up to date
 
 Store your data on a volume
 ---------------------------
