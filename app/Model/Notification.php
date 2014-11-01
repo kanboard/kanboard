@@ -35,6 +35,17 @@ class Notification extends Base
      */
     public function getUsersWithNotification($project_id, array $exclude_users = array())
     {
+        if ($this->projectPermission->isEverybodyAllowed($project_id)) {
+
+            return $this->db
+                        ->table(User::TABLE)
+                        ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email')
+                        ->eq('notifications_enabled', '1')
+                        ->neq('email', '')
+                        ->notin(User::TABLE.'.id', $exclude_users)
+                        ->findAll();
+        }
+
         return $this->db
             ->table(ProjectPermission::TABLE)
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email')
