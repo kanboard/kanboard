@@ -15,7 +15,8 @@ rm -rf $APP/data/*.sqlite \
       $APP/Vagrantfile \
       $APP/.*.yml \
       $APP/README.markdown \
-      $APP/docs
+      $APP/docs \
+      $APP/Dockerfile
 
 sed -i.bak s/master/$VERSION/g $APP/app/constants.php && rm -f $APP/app/*.bak
 zip -r $APP-$VERSION.zip $APP
