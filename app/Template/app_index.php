@@ -1,6 +1,16 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= t('Dashboard') ?></h2>
+        <ul>
+            <?php if (Helper\is_admin()): ?>
+                <li><i class="fa fa-plus fa-fw"></i><?= Helper\a(t('New project'), 'project', 'create') ?></li>
+            <?php endif ?>
+            <li><i class="fa fa-lock fa-fw"></i><?= Helper\a(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
+            <li><i class="fa fa-folder fa-fw"></i><?= Helper\a(t('Project management'), 'project', 'index') ?></li>
+            <?php if (Helper\is_admin()): ?>
+                <li><i class="fa fa-user fa-fw"></i><?= Helper\a(t('User management'), 'user', 'index') ?></li>
+                <li><i class="fa fa-cog fa-fw"></i><?= Helper\a(t('Settings'), 'config', 'index') ?></li>
+            <?php endif ?>
+        </ul>
     </div>
     <section id="dashboard">
         <div class="dashboard-left-column">

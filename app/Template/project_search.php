@@ -1,16 +1,9 @@
 <section id="main">
     <div class="page-header">
-        <h2>
-            <?= t('Search in the project "%s"', $project['name']) ?>
-            <?php if (! empty($nb_tasks)): ?>
-                <span id="page-counter"> (<?= $nb_tasks ?>)</span>
-            <?php endif ?>
-        </h2>
         <ul>
-            <li><?= Helper\a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?></li>
-            <li><?= Helper\a(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?></li>
-            <li><?= Helper\a(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?></li>
-            <li><?= Helper\a(t('List of projects'), 'project', 'index') ?></li>
+            <li><i class="fa fa-table fa-fw"></i><?= Helper\a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?></li>
+            <li><i class="fa fa-check-square-o fa-fw"></i><?= Helper\a(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?></li>
+            <li><i class="fa fa-dashboard fa-fw"></i><?= Helper\a(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?></li>
         </ul>
     </div>
     <section>

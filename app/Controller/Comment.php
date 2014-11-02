@@ -26,7 +26,6 @@ class Comment extends Base
 
         if (! $this->acl->isAdminUser() && $comment['user_id'] != $this->acl->getUserId()) {
             $this->response->html($this->template->layout('comment_forbidden', array(
-                'menu' => 'tasks',
                 'title' => t('Access Forbidden')
             )));
         }
@@ -50,7 +49,6 @@ class Comment extends Base
             ),
             'errors' => array(),
             'task' => $task,
-            'menu' => 'tasks',
             'title' => t('Add a comment')
         )));
     }
@@ -83,7 +81,6 @@ class Comment extends Base
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'menu' => 'tasks',
             'title' => t('Add a comment')
         )));
     }
@@ -103,7 +100,6 @@ class Comment extends Base
             'errors' => array(),
             'comment' => $comment,
             'task' => $task,
-            'menu' => 'tasks',
             'title' => t('Edit a comment')
         )));
     }
@@ -138,7 +134,6 @@ class Comment extends Base
             'errors' => $errors,
             'comment' => $comment,
             'task' => $task,
-            'menu' => 'tasks',
             'title' => t('Edit a comment')
         )));
     }
@@ -156,7 +151,6 @@ class Comment extends Base
         $this->response->html($this->taskLayout('comment_remove', array(
             'comment' => $comment,
             'task' => $task,
-            'menu' => 'tasks',
             'title' => t('Remove a comment')
         )));
     }

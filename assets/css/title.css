@@ -1,0 +1,15 @@
+/* titles */
+h1, h2, h3 {
+    font-weight: normal;
+    color: #333;
+}
+
+h2 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+}

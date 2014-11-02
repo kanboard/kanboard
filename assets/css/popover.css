@@ -1,0 +1,19 @@
+/* popover */
+#popover-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#popover-content {
+    position: fixed;
+    width: 70%;
+    margin: 0 0 0 -35%;
+    left: 50%;
+    top: 5%;
+    padding: 15px;
+    background: #fff;
+}

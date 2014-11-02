@@ -43,7 +43,6 @@ class Category extends Base
             'values' => array('project_id' => $project['id']),
             'errors' => array(),
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Categories')
         )));
     }
@@ -76,7 +75,6 @@ class Category extends Base
             'values' => $values,
             'errors' => $errors,
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Categories')
         )));
     }
@@ -95,7 +93,6 @@ class Category extends Base
             'values' => $category,
             'errors' => array(),
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Categories')
         )));
     }
@@ -127,7 +124,6 @@ class Category extends Base
             'values' => $values,
             'errors' => $errors,
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Categories')
         )));
     }
@@ -145,7 +141,6 @@ class Category extends Base
         $this->response->html($this->projectLayout('category_remove', array(
             'project' => $project,
             'category' => $category,
-            'menu' => 'projects',
             'title' => t('Remove a category')
         )));
     }

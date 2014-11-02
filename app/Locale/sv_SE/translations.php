@@ -187,6 +187,7 @@ return array(
     'Complexity' => 'Ungefärligt antal timmar',
     'limit' => 'max',
     'Task limit' => 'Uppgiftsbegränsning',
+    // 'Task count' => '',
     'This value must be greater than %d' => 'Värdet måste vara större än %d',
     'Edit project access list' => 'Ändra projektåtkomst lista',
     'Edit users access' => 'Användaråtkomst',
@@ -558,4 +559,6 @@ return array(
     // 'Help on Github webhook' => '',
     // 'Create a comment from an external provider' => '',
     // 'Github issue comment created' => '',
+    // 'Configure' => '',
+    // 'Project management' => '',
 );

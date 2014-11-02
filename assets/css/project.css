@@ -1,0 +1,29 @@
+/* project view */
+.project-listing {
+    max-width: 500px;
+    margin-left: 30px;
+}
+
+.project-listing li {
+    font-weight: bold;
+    padding: 10px;
+    margin-top: 8px;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.project-listing li:hover {
+    border-color: #ccc;
+    background: #fcfcfc;
+    box-shadow: 0 0 8px rgba(200, 200, 200, 0.6);
+}
+
+.project-listing a {
+    text-decoration: none;
+}
+
+.project-listing a:hover,
+.project-listing a:focus {
+    color: #000;
+}

@@ -187,6 +187,7 @@ return array(
     'Complexity' => '复杂度',
     'limit' => '限制',
     'Task limit' => '任务限制',
+    // 'Task count' => '',
     'This value must be greater than %d' => '该数值必须大于%d',
     'Edit project access list' => '编辑项目存取列表',
     'Edit users access' => '编辑用户存取权限',
@@ -558,4 +559,6 @@ return array(
     // 'Help on Github webhook' => '',
     // 'Create a comment from an external provider' => '',
     // 'Github issue comment created' => '',
+    // 'Configure' => '',
+    // 'Project management' => '',
 );

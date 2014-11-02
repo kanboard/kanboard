@@ -6,7 +6,6 @@ namespace Helper;
  * Template helpers
  *
  */
-
 use Core\Security;
 use Core\Template;
 use Core\Tool;
@@ -568,9 +567,9 @@ function form_numeric($name, $values = array(), array $errors = array(), array $
  * @param  string   $class       CSS class attribute
  * @return string
  */
-function a($label, $controller, $action, array $params = array(), $csrf = false, $class = '')
+function a($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '')
 {
-    return '<a href="'.u($controller, $action, $params, $csrf).'" class="'.$class.'">'.$label.'</a>';
+    return '<a href="'.u($controller, $action, $params, $csrf).'" class="'.$class.'" title="'.$title.'">'.$label.'</a>';
 }
 
 /**

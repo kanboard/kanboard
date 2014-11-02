@@ -187,6 +187,7 @@ return array(
     'Complexity' => 'Monimutkaisuus',
     'limit' => 'raja',
     'Task limit' => 'Tehtävien maksimimäärä',
+    // 'Task count' => '',
     'This value must be greater than %d' => 'Arvon täytyy olla suurempi kuin %d',
     'Edit project access list' => 'Muuta projektin käyttäjiä',
     'Edit users access' => 'Muuta käyttäjien pääsyä',
@@ -558,4 +559,6 @@ return array(
     // 'Help on Github webhook' => '',
     // 'Create a comment from an external provider' => '',
     // 'Github issue comment created' => '',
+    // 'Configure' => '',
+    // 'Project management' => '',
 );

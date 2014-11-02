@@ -59,7 +59,6 @@ class Board extends Base
         else {
 
             $this->response->html($this->template->layout('board_assignee', $params + array(
-                'menu' => 'boards',
                 'title' => t('Change assignee').' - '.$task['title'],
             )));
         }
@@ -113,7 +112,6 @@ class Board extends Base
         else {
 
             $this->response->html($this->template->layout('board_category', $params + array(
-                'menu' => 'boards',
                 'title' => t('Change category').' - '.$task['title'],
             )));
         }
@@ -222,7 +220,6 @@ class Board extends Base
             'current_project_name' => $project['name'],
             'board' => $this->board->get($project['id']),
             'categories' => $this->category->getList($project['id'], true, true),
-            'menu' => 'boards',
             'title' => $project['name'],
             'board_selector' => $board_selector,
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
@@ -251,7 +248,6 @@ class Board extends Base
             'values' => $values + array('project_id' => $project['id']),
             'columns' => $columns,
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Edit board')
         )));
     }
@@ -292,7 +288,6 @@ class Board extends Base
             'values' => $values + array('project_id' => $project['id']),
             'columns' => $columns,
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Edit board')
         )));
     }
@@ -331,7 +326,6 @@ class Board extends Base
             'values' => $values + $data,
             'columns' => $columns,
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Edit board')
         )));
     }
@@ -362,7 +356,6 @@ class Board extends Base
         $this->response->html($this->projectLayout('board_remove', array(
             'column' => $this->board->getColumn($this->request->getIntegerParam('column_id')),
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Remove a column from a board')
         )));
     }

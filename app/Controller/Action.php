@@ -31,7 +31,6 @@ class Action extends Base
             'projects_list' => $this->project->getList(false),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
-            'menu' => 'projects',
             'title' => t('Automatic actions')
         )));
     }
@@ -54,7 +53,6 @@ class Action extends Base
             'values' => $values,
             'project' => $project,
             'events' => $this->action->getCompatibleEvents($values['action_name']),
-            'menu' => 'projects',
             'title' => t('Automatic actions')
         )));
     }
@@ -92,7 +90,6 @@ class Action extends Base
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Automatic actions')
         )));
     }
@@ -145,7 +142,6 @@ class Action extends Base
             'available_events' => $this->action->getAvailableEvents(),
             'available_actions' => $this->action->getAvailableActions(),
             'project' => $project,
-            'menu' => 'projects',
             'title' => t('Remove an action')
         )));
     }

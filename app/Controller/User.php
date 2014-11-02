@@ -84,10 +84,10 @@ class User extends Base
     {
         $content = $this->template->load($template, $params);
         $params['user_content_for_layout'] = $content;
-        $params['menu'] = 'users';
+        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 
         if (isset($params['user'])) {
-            $params['title'] = $params['user']['name'] ?: $params['user']['username'];
+            $params['title'] = ($params['user']['name'] ?: $params['user']['username']).' (#'.$params['user']['id'].')';
         }
 
         return $this->template->layout('user_layout', $params);
@@ -131,10 +131,10 @@ class User extends Base
 
         $this->response->html(
             $this->template->layout('user_index', array(
+                'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
                 'projects' => $this->project->getList(),
                 'nb_users' => $nb_users,
                 'users' => $users,
-                'menu' => 'users',
                 'title' => t('Users').' ('.$nb_users.')',
                 'pagination' => array(
                     'controller' => 'user',
@@ -157,10 +157,10 @@ class User extends Base
     public function create()
     {
         $this->response->html($this->template->layout('user_new', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'projects' => $this->project->getList(),
             'errors' => array(),
             'values' => array(),
-            'menu' => 'users',
             'title' => t('New user')
         )));
     }
@@ -187,10 +187,10 @@ class User extends Base
         }
 
         $this->response->html($this->template->layout('user_new', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'projects' => $this->project->getList(),
             'errors' => $errors,
             'values' => $values,
-            'menu' => 'users',
             'title' => t('New user')
         )));
     }

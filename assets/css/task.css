@@ -1,0 +1,236 @@
+/* task inside the board */
+.task-board {
+    position: relative;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    padding: 5px;
+    font-size: 95%;
+    word-wrap: break-word;
+}
+
+.task-board-recent {
+    box-shadow: 0px 0px 10px rgba(130, 130, 130, 1);
+}
+
+.task-table a,
+.task-board a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.task-table a:focus,
+.task-table a:hover,
+.task-board a:focus,
+.task-board a:hover {
+    text-decoration: underline;
+}
+
+.task-board-title {
+    margin-top: 10px;
+    font-size: 110%;
+}
+
+.task-board-title a {
+    font-weight: normal;
+}
+
+.task-board-user {
+    font-size: 80%;
+}
+
+a.task-board-nobody {
+    font-weight: normal;
+    font-style: italic;
+    color: #444;
+}
+
+.task-board-category-container {
+    text-align: right;
+    padding-bottom: 2px;
+    margin-top: 10px;
+}
+
+.task-board-category {
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #000;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.task-board-footer {
+    height: 18px;
+}
+
+.task-board-date {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    font-weight: bold;
+    color: #000;
+}
+
+.task-board-date-overdue {
+    color: #D90000;
+}
+
+.task-board-icons {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+}
+
+.task-board-icons a {
+    opacity: 0.5;
+}
+
+.task-board-icons span {
+    opacity: 0.5;
+    margin-left: 5px;
+}
+
+.task-board-icons a:hover,
+.task-board-icons span:hover {
+    opacity: 1.0;
+}
+
+/* task score */
+.task-score {
+    font-weight: bold;
+    position: absolute;
+}
+
+.task-board .task-score {
+    font-size: 1.5em;
+    right: 5px;
+    top: 0;
+}
+
+/* task view */
+.task-show-details {
+    position: relative;
+    border-radius: 5px;
+    padding-bottom: 10px;
+}
+
+.task-show-details h2 {
+    font-size: 1.8em;
+    margin: 0;
+    margin-bottom: 25px;
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.task-show-details li {
+    margin-left: 25px;
+    list-style-type: circle;
+}
+
+.task-show-details .task-score {
+    font-size: 1.9em;
+    right: 10px;
+    bottom: 5px;
+}
+
+.task-show-section {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.task-show-files a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.task-show-files li {
+    margin-left: 25px;
+    list-style-type: square;
+    line-height: 25px;
+}
+
+.task-show-file-actions {
+    font-size: 0.75em;
+}
+
+.task-show-file-actions:before {
+    content: " [";
+}
+
+.task-show-file-actions:after {
+    content: "]";
+}
+
+.task-show-file-actions a {
+    color: #333;
+}
+
+.description-textarea {
+    width: 80%;
+    max-width: 800px;
+    height: 300px;
+}
+
+.task-file-viewer {
+    position: relative;
+}
+
+.task-file-viewer img {
+    max-width: 95%;
+    max-height: 85%;
+    margin-top: 10px;
+}
+
+.task-time-form {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 3px;
+}
+
+/* task colors */
+tr td.task-blue,
+.task-blue {
+    background-color: rgb(219, 235, 255);
+    border-color: rgb(168, 207, 255);
+}
+
+tr td.task-purple,
+.task-purple {
+    background-color: rgb(223, 176, 255);
+    border-color: rgb(205, 133, 254);
+}
+
+tr td.task-grey,
+.task-grey {
+    background-color: rgb(238, 238, 238);
+    border-color: rgb(204, 204, 204);
+}
+
+tr td.task-red,
+.task-red {
+    background-color: rgb(255, 187, 187);
+    border-color: rgb(255, 151, 151);
+}
+
+tr td.task-green,
+.task-green {
+    background-color: rgb(189, 244, 203);
+    border-color: rgb(74, 227, 113);
+}
+
+tr td.task-yellow,
+.task-yellow {
+    background-color: rgb(245, 247, 196);
+    border-color: rgb(223, 227, 45);
+}
+
+tr td.task-orange,
+.task-orange {
+    background-color: rgb(255, 215, 179);
+    border-color: rgb(255, 172, 98);
+}

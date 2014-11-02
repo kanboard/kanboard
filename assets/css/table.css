@@ -1,0 +1,44 @@
+/* tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+}
+
+th,
+td {
+    border: 1px solid #eee;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+td {
+    vertical-align: top;
+}
+
+th {
+    background: #fbfbfb;
+    text-align: left;
+}
+
+td li {
+    margin-left: 20px;
+}
+
+.table-small {
+    font-size: 0.8em;
+}
+
+th a {
+    text-decoration: none;
+    color: #333;
+}
+
+th a:focus,
+th a:hover {
+    text-decoration: underline;
+}

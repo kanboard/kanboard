@@ -245,6 +245,8 @@ abstract class Base
 
         $content = $this->template->load($template, $params);
         $params['task_content_for_layout'] = $content;
+        $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];
+        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 
         return $this->template->layout('task_layout', $params);
     }
@@ -261,7 +263,8 @@ abstract class Base
     {
         $content = $this->template->load($template, $params);
         $params['project_content_for_layout'] = $content;
-        $params['menu'] = 'projects';
+        $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
+        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 
         return $this->template->layout('project_layout', $params);
     }

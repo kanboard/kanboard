@@ -187,6 +187,7 @@ return array(
     'Complexity' => 'ความซับซ้อน',
     'limit' => 'จำกัด',
     'Task limit' => 'จำกัดงาน',
+    // 'Task count' => '',
     'This value must be greater than %d' => 'ค่าต้องมากกว่า %d',
     'Edit project access list' => 'แก้ไขการเข้าถึงรายชื่อโปรเจค',
     'Edit users access' => 'แก้ไขการเข้าถึงผู้ใช้',
@@ -558,4 +559,6 @@ return array(
     // 'Help on Github webhook' => '',
     // 'Create a comment from an external provider' => '',
     // 'Github issue comment created' => '',
+    // 'Configure' => '',
+    // 'Project management' => '',
 );

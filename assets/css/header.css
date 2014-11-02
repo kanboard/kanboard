@@ -1,0 +1,85 @@
+/* header */
+header {
+    margin-top: 10px;
+    padding-bottom: 15px;
+    clear: both;
+    border-bottom: 1px solid #dedede;
+}
+
+header h1 {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+header ul {
+    text-align: right;
+    font-size: 0.9em;
+}
+
+header li {
+    display: inline;
+    padding-left: 30px;
+}
+
+header a {
+    color: #777;
+    text-decoration: none;
+}
+
+nav .active a {
+    color: #333;
+    font-weight: bold;
+}
+
+/* username */
+.username a {
+    color: #000;
+}
+
+.username a:hover {
+    color: #DF5353;
+    text-decoration: underline;
+}
+
+/* home icon */
+.home-link {
+    color: #eee;
+}
+
+.home-link:focus,
+.home-link:hover {
+    color: #ccc;
+}
+
+/* page header */
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 140%;
+    border-bottom: 1px dotted #DF5353;
+}
+
+.page-header h2 a {
+    color: #ddd;
+}
+
+.page-header h2 a:focus,
+.page-header h2 a:hover {
+    color: #333;
+}
+
+.page-header ul {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.page-header li {
+    display: inline;
+    padding-right: 10px;
+    font-size: 0.9em;
+}

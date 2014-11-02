@@ -1,0 +1,17 @@
+/* links */
+a {
+    color: #3366CC;
+    border: none;
+}
+
+a:focus {
+    outline: 0;
+    color: #DF5353;
+    text-decoration: none;
+    border: 1px dotted #aaa;
+}
+
+a:hover {
+    color: #333;
+    text-decoration: none;
+}

@@ -7,21 +7,14 @@
         <meta name="robots" content="noindex,nofollow">
 
         <?php if (isset($board_public_refresh_interval)): ?>
-            <meta http-equiv="refresh" content="<?= $board_public_refresh_interval ?>" >
+            <meta http-equiv="refresh" content="<?= $board_public_refresh_interval ?>">
         <?php endif ?>
 
         <?php if (! isset($not_editable)): ?>
-            <?= Helper\js('assets/js/jquery-1.11.1.min.js') ?>
-            <?= Helper\js('assets/js/jquery-ui-1.10.4.custom.min.js') ?>
-            <?= Helper\js('assets/js/jquery.ui.touch-punch.min.js') ?>
-            <?= Helper\js('assets/js/chosen.jquery.min.js') ?>
             <?= Helper\js('assets/js/app.js') ?>
         <?php endif ?>
 
         <?= Helper\css('assets/css/app.css') ?>
-        <?= Helper\css('assets/css/font-awesome.min.css') ?>
-        <?= Helper\css('assets/css/jquery-ui-1.10.4.custom.css'); ?>
-        <?= Helper\css('assets/css/chosen.min.css'); ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
@@ -29,7 +22,7 @@
         <link rel="apple-touch-icon" sizes="114x114" href="assets/img/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="144x144" href="assets/img/touch-icon-ipad-retina.png">
 
-        <title><?= isset($title) ? Helper\escape($title).' - Kanboard' : 'Kanboard' ?></title>
+        <title><?= isset($title) ? Helper\escape($title) : 'Kanboard' ?></title>
     </head>
     <body>
     <?php if (isset($no_layout) && $no_layout): ?>
@@ -37,8 +30,7 @@
     <?php else: ?>
         <header>
             <nav>
-                <a class="logo" href="?">kanboard</a>
-
+                <h1><?= Helper\a('<i class="fa fa-home fa-fw"></i>', 'app', 'index', array(), false, 'home-link', t('Dashboard')).' '.Helper\summary(Helper\escape($title)) ?></h1>
                 <ul>
                     <?php if (isset($board_selector) && ! empty($board_selector)): ?>
                     <li>
@@ -50,26 +42,9 @@
                         </select>
                     </li>
                     <?php endif ?>
-                    <li <?= isset($menu) && $menu === 'dashboard' ? 'class="active"' : '' ?>>
-                        <a href="?controller=app"><?= t('Dashboard') ?></a>
-                    </li>
-                    <li <?= isset($menu) && $menu === 'boards' ? 'class="active"' : '' ?>>
-                        <a href="?controller=board"><?= t('Boards') ?></a>
-                    </li>
-                    <li <?= isset($menu) && $menu === 'projects' ? 'class="active"' : '' ?>>
-                        <a href="?controller=project"><?= t('Projects') ?></a>
-                    </li>
-                    <?php if (Helper\is_admin()): ?>
-                        <li <?= isset($menu) && $menu === 'users' ? 'class="active"' : '' ?>>
-                            <a href="?controller=user"><?= t('Users') ?></a>
-                        </li>
-                        <li class="hide-tablet <?= isset($menu) && $menu === 'config' ? 'active' : '' ?>">
-                            <a href="?controller=config"><?= t('Settings') ?></a>
-                        </li>
-                    <?php endif ?>
                     <li>
-                        <a href="?controller=user&amp;action=logout<?= Helper\param_csrf() ?>"><?= t('Logout') ?></a>
-                        <span class="username">(<a href="?controller=user&amp;action=show&amp;user_id=<?= Helper\get_user_id() ?>"><?= Helper\escape(Helper\get_username()) ?></a>)</span>
+                        <?= Helper\a(t('Logout'), 'user', 'logout', array(), true) ?>
+                        <span class="username">(<?= Helper\a(Helper\escape(Helper\get_username()), 'user', 'show', array('user_id' => Helper\get_user_id())) ?>)</span>
                     </li>
                 </ul>
             </nav>

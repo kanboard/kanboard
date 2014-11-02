@@ -1,12 +1,11 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= t('New user') ?></h2>
         <ul>
-            <li><a href="?controller=user"><?= t('All users') ?></a></li>
+            <li><i class="fa fa-user fa-fw"></i><?= Helper\a(t('All users'), 'user', 'index') ?></li>
         </ul>
     </div>
     <section>
-    <form method="post" action="?controller=user&amp;action=save" autocomplete="off">
+    <form method="post" action="<?= Helper\u('user', 'save') ?>" autocomplete="off">
 
         <?= Helper\form_csrf() ?>
 
@@ -32,7 +31,7 @@
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-            <?= t('or') ?> <a href="?controller=user"><?= t('cancel') ?></a>
+            <?= t('or') ?> <?= Helper\a(t('cancel'), 'user', 'index') ?>
         </div>
     </form>
     </section>

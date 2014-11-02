@@ -44,8 +44,6 @@ class Subtask extends Base
             'errors' => array(),
             'users_list' => $this->projectPermission->getUsersList($task['project_id']),
             'task' => $task,
-            'menu' => 'tasks',
-            'title' => t('Add a sub-task')
         )));
     }
 
@@ -82,8 +80,6 @@ class Subtask extends Base
             'errors' => $errors,
             'users_list' => $this->projectPermission->getUsersList($task['project_id']),
             'task' => $task,
-            'menu' => 'tasks',
-            'title' => t('Add a sub-task')
         )));
     }
 
@@ -104,8 +100,6 @@ class Subtask extends Base
             'status_list' => $this->subTask->getStatusList(),
             'subtask' => $subtask,
             'task' => $task,
-            'menu' => 'tasks',
-            'title' => t('Edit a sub-task')
         )));
     }
 
@@ -141,8 +135,6 @@ class Subtask extends Base
             'status_list' => $this->subTask->getStatusList(),
             'subtask' => $subtask,
             'task' => $task,
-            'menu' => 'tasks',
-            'title' => t('Edit a sub-task')
         )));
     }
 
@@ -159,8 +151,6 @@ class Subtask extends Base
         $this->response->html($this->taskLayout('subtask_remove', array(
             'subtask' => $subtask,
             'task' => $task,
-            'menu' => 'tasks',
-            'title' => t('Remove a sub-task')
         )));
     }
 

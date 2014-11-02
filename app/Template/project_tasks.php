@@ -1,11 +1,9 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= t('Completed tasks for "%s"', $project['name']) ?><span id="page-counter"> (<?= $nb_tasks ?>)</span></h2>
         <ul>
-            <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $project['id'] ?>"><?= t('Back to the board') ?></a></li>
-            <li><a href="?controller=project&amp;action=search&amp;project_id=<?= $project['id'] ?>"><?= t('Search') ?></a></li>
-            <li><a href="?controller=project&amp;action=activity&amp;project_id=<?= $project['id'] ?>"><?= t('Activity') ?></a></li>
-            <li><a href="?controller=project&amp;action=index"><?= t('List of projects') ?></a></li>
+            <li><i class="fa fa-table fa-fw"></i><?= Helper\a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?></li>
+            <li><i class="fa fa-search fa-fw"></i><?= Helper\a(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?></li>
+            <li><i class="fa fa-dashboard fa-fw"></i><?= Helper\a(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?></li>
         </ul>
     </div>
     <section>

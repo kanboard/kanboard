@@ -187,6 +187,7 @@ return array(
     'Complexity' => '複雑さ',
     'limit' => '制限',
     'Task limit' => 'タスク数制限',
+    // 'Task count' => '',
     'This value must be greater than %d' => '%d より大きな値を入力してください',
     'Edit project access list' => 'プロジェクトのアクセス許可を変更',
     'Edit users access' => 'ユーザのアクセス許可を変更',
@@ -558,4 +559,6 @@ return array(
     // 'Help on Github webhook' => '',
     // 'Create a comment from an external provider' => '',
     // 'Github issue comment created' => '',
+    // 'Configure' => '',
+    // 'Project management' => '',
 );

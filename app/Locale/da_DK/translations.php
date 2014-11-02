@@ -187,6 +187,7 @@ return array(
     'Complexity' => 'Kompleksitet',
     'limit' => 'Begrænsning',
     'Task limit' => 'Opgave begrænsning',
+    // 'Task count' => '',
     'This value must be greater than %d' => 'Denne værdi skal være større end %d',
     'Edit project access list' => 'Rediger adgangstilladelser for projektet',
     'Edit users access' => 'Rediger brugertilladelser',
@@ -558,4 +559,6 @@ return array(
     // 'Help on Github webhook' => '',
     // 'Create a comment from an external provider' => '',
     // 'Github issue comment created' => '',
+    // 'Configure' => '',
+    // 'Project management' => '',
 );

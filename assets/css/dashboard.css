@@ -1,0 +1,15 @@
+/* dashboard */
+#dashboard table {
+    font-size: 0.95em;
+}
+
+.dashboard-left-column {
+    width: 55%;
+    float: left;
+}
+
+.dashboard-right-column {
+    margin-left: 5%;
+    width: 40%;
+    float: left;
+}

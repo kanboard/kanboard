@@ -1,19 +1,19 @@
-<table id="board" data-project-id="<?= $current_project_id ?>" data-time="<?= time() ?>" data-check-interval="<?= $board_private_refresh_interval ?>" data-csrf-token=<?= \Core\Security::getCSRFToken() ?>>
+<table id="board"
+       data-project-id="<?= $current_project_id ?>"
+       data-time="<?= time() ?>"
+       data-check-interval="<?= $board_private_refresh_interval ?>"
+       data-csrf-token=<?= \Core\Security::getCSRFToken() ?>>
 <tr>
     <?php $column_with = round(100 / count($board), 2); ?>
     <?php foreach ($board as $column): ?>
     <th width="<?= $column_with ?>%">
         <div class="board-add-icon">
-	    <a href="?controller=task&amp;action=create&amp;project_id=<?= $column['project_id'] ?>&amp;column_id=<?= $column['id'] ?>" title="<?= t('Add a new task') ?>">+</a>
+            <?= Helper\a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id']), false, '', t('Add a new task')) ?>
         </div>
         <?= Helper\escape($column['title']) ?>
         <?php if ($column['task_limit']): ?>
             <span title="<?= t('Task limit') ?>" class="task-limit">
-                (
-                 <span id="task-number-column-<?= $column['id'] ?>"><?= count($column['tasks']) ?></span>
-                 /
-                 <?= Helper\escape($column['task_limit']) ?>
-                )
+                (<span id="task-number-column-<?= $column['id'] ?>"><?= count($column['tasks']) ?></span>/<?= Helper\escape($column['task_limit']) ?>)
             </span>
         <?php else: ?>
             <span title="<?= t('Task count') ?>" class="task-count">

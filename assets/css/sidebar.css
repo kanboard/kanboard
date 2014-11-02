@@ -1,0 +1,27 @@
+/* sidebar */
+.sidebar-container {
+    margin-top: 30px;
+    position: relative;
+}
+
+.sidebar-content {
+    margin-left: 330px;
+}
+
+.sidebar {
+    position: absolute;
+    left: 0px;
+    top: 0;
+    width: 250px;
+    padding: 10px;
+    padding-top: 0;
+    border: 1px solid #ccc;
+    background: #fbfbfb;
+    border-radius: 5px;
+}
+
+.sidebar li {
+    list-style-type: square;
+    margin-left: 30px;
+    line-height: 1.8em;
+}

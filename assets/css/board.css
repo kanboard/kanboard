@@ -1,0 +1,62 @@
+/* board filters */
+a.filter-on {
+    font-weight: bold;
+    color: #333;
+}
+
+/* public board */
+.public-board {
+    margin-top: 5px;
+}
+
+.public-task {
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+/* board table */
+#board {
+    table-layout: fixed;
+}
+
+#board th a {
+    text-decoration: none;
+    color: #3366CC;
+    font-size: 150%;
+}
+
+#board td {
+    vertical-align: top;
+}
+
+#board td.task-limit-warning {
+    background-color: #DF5353;
+}
+
+.board-add-icon {
+    float: left;
+    padding: 0 5px;
+}
+
+.board-add-icon a {
+    line-height: 70%;
+}
+
+.task-count {
+    color: #999;
+    font-weight: normal;
+}
+
+/* drag and drop */
+.draggable-item {
+    cursor: pointer;
+    user-select: none;
+}
+
+.draggable-placeholder {
+    border: 2px dashed #000;
+    background: #fafafa;
+    height: 70px;
+    margin-bottom: 10px;
+}

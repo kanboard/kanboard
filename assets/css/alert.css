@@ -1,0 +1,79 @@
+/* alerts */
+.alert {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    color: #c09853;
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #468847;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+}
+
+.alert-info {
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.alert-normal {
+    color: #333;
+    background-color: #f0f0f0;
+    border-color: #ddd;
+}
+
+.alert ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.alert li {
+    margin-left: 25px;
+}
+
+/* fade out animation */
+.alert-fade-out {
+    animation: fadeOut 1s forwards;
+    -webkit-animation: fadeOut 1s forwards;
+    animation-delay: 7s;
+    -webkit-animation-delay: 7s;
+    cursor: pointer;
+}
+
+@-webkit-keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+        height: 0;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+        height: 0;
+    }
+}
+
+.page .alert {
+    margin-top: 10px;
+}

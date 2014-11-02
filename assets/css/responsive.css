@@ -1,0 +1,68 @@
+/* responsive design */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+    .hide-tablet {
+        display: none;
+    }
+
+    body {
+        font-size: 0.9em;
+    }
+
+    .project-menu {
+        font-size: 0.8em;
+    }
+
+    .task-board-title {
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (max-width : 768px) {
+
+    .hide-tablet {
+        display: none;
+    }
+
+    body {
+        font-size: 0.85em;
+    }
+
+    .logo,
+    .project-menu {
+        display: none;
+    }
+
+    nav li:first-child {
+        padding-left: 0;
+    }
+
+    .username {
+        display: block;
+        text-align: right;
+    }
+
+    .user-show-sidebar,
+    .project-show-sidebar,
+    .task-show-sidebar {
+        width: 200px;
+    }
+
+    .user-show-main,
+    .project-show-main,
+    .task-show-main {
+        margin-left: 230px;
+    }
+
+    table input[type="text"] {
+        width: 150px;
+    }
+
+    .task-score {
+        display: none;
+    }
+
+    .task-board-title {
+        font-size: 1.5em;
+    }
+}

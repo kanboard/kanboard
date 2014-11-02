@@ -1,11 +1,10 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= t('Projects') ?><span id="page-counter"> (<?= $nb_projects ?>)</span></h2>
         <ul>
             <?php if (Helper\is_admin()): ?>
-                <li><?= Helper\a(t('New project'), 'project', 'create') ?></li>
+                <li><i class="fa fa-plus fa-fw"></i><?= Helper\a(t('New project'), 'project', 'create') ?></li>
             <?php endif ?>
-            <li><?= Helper\a(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
+            <li><i class="fa fa-lock fa-fw"></i><?= Helper\a(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
         </ul>
     </div>
     <section>

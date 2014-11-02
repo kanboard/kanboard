@@ -187,6 +187,7 @@ return array(
     'Complexity' => 'Complejidad',
     'limit' => 'límite',
     'Task limit' => 'Número máximo de tareas',
+    // 'Task count' => '',
     'This value must be greater than %d' => 'Este valor no debe de ser más grande que %d',
     'Edit project access list' => 'Editar los permisos del proyecto',
     'Edit users access' => 'Editar los permisos de usuario',
@@ -558,4 +559,6 @@ return array(
     // 'Help on Github webhook' => '',
     // 'Create a comment from an external provider' => '',
     // 'Github issue comment created' => '',
+    // 'Configure' => '',
+    // 'Project management' => '',
 );

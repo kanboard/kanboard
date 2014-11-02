@@ -34,10 +34,10 @@ class Project extends Base
         }
 
         $this->response->html($this->template->layout('project_index', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'active_projects' => $active_projects,
             'inactive_projects' => $inactive_projects,
             'nb_projects' => $nb_projects,
-            'menu' => 'projects',
             'title' => t('Projects').' ('.$nb_projects.')'
         )));
     }
@@ -405,7 +405,6 @@ class Project extends Base
 
         $this->response->html($this->template->layout('project_activity', array(
             'events' => $this->projectActivity->getProject($project['id']),
-            'menu' => 'projects',
             'project' => $project,
             'title' => t('%s\'s activity', $project['name'])
         )));
@@ -452,10 +451,9 @@ class Project extends Base
                 'project_id' => $project['id'],
             ),
             'project' => $project,
-            'menu' => 'projects',
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
-            'title' => $project['name'].($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
+            'title' => t('Search in the project "%s"', $project['name']).($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
         )));
     }
 
@@ -487,12 +485,11 @@ class Project extends Base
                 'limit' => $limit,
             ),
             'project' => $project,
-            'menu' => 'projects',
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
             'tasks' => $tasks,
             'nb_tasks' => $nb_tasks,
-            'title' => $project['name'].' ('.$nb_tasks.')'
+            'title' => t('Completed tasks for "%s"', $project['name']).' ('.$nb_tasks.')'
         )));
     }
 
@@ -503,12 +500,15 @@ class Project extends Base
      */
     public function create()
     {
+        $is_private = $this->request->getIntegerParam('private', $this->acl->isRegularUser());
+
         $this->response->html($this->template->layout('project_new', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'errors' => array(),
             'values' => array(
-                'is_private' => $this->request->getIntegerParam('private', $this->acl->isRegularUser()),
+                'is_private' => $is_private,
             ),
-            'title' => t('New project')
+            'title' => $is_private ? t('New private project') : t('New project'),
         )));
     }
 
@@ -534,9 +534,10 @@ class Project extends Base
         }
 
         $this->response->html($this->template->layout('project_new', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'errors' => $errors,
             'values' => $values,
-            'title' => t('New Project')
+            'title' => ! empty($values['is_private']) ? t('New private project') : t('New project'),
         )));
     }
 }

@@ -26,7 +26,6 @@ class App extends Base
             'board_selector' => $projects,
             'events' => $this->projectActivity->getProjects(array_keys($projects), 10),
             'tasks' => $this->taskFinder->getAllTasksByUser($user_id),
-            'menu' => 'dashboard',
             'title' => t('Dashboard'),
         )));
     }

@@ -1,0 +1,42 @@
+/* activity */
+.activity-event {
+    margin-bottom: 20px;
+}
+
+.activity-datetime {
+    color: #999;
+    font-size: 0.85em;
+}
+
+.activity-content {
+    margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 2px solid #666;
+}
+
+.activity-title {
+    font-weight: bold;
+    color: #000;
+}
+
+.activity-description {
+    font-size: 0.9em;
+    color: #aaa;
+    padding-top: 5px;
+}
+
+.activity-description ul {
+    margin-top: 10px;
+}
+
+.activity-description li {
+    margin-left: 40px;
+    list-style-type: circle;
+    color: #555;
+}
+
+.activity-description .markdown {
+    margin-top: 10px;
+    color: #555;
+}

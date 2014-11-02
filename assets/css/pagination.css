@@ -1,0 +1,17 @@
+/* datepicker */
+#ui-datepicker-div {
+    font-size: 0.8em;
+}
+
+/* pagination */
+#pagination {
+    text-align: center;
+}
+
+#pagination-next {
+    margin-left: 5px;
+}
+
+#pagination-previous {
+    margin-right: 5px;
+}

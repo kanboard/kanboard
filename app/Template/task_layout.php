@@ -1,15 +1,14 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= Helper\escape($task['project_name']) ?> &gt; <?= t('Task #%d', $task['id']) ?></h2>
         <ul>
-            <li><a href="?controller=board&amp;action=show&amp;project_id=<?= $task['project_id'] ?>"><?= t('Back to the board') ?></a></li>
+            <li><i class="fa fa-table fa-fw"></i><?= Helper\a(t('Back to the board'), 'board', 'show', array('project_id' => $task['project_id'])) ?></li>
         </ul>
     </div>
-    <section class="task-show" id="task-section">
+    <section class="sidebar-container" id="task-section">
 
         <?= Helper\template('task_sidebar', array('task' => $task, 'hide_remove_menu' => isset($hide_remove_menu))) ?>
 
-        <div class="task-show-main">
+        <div class="sidebar-content">
             <?= $task_content_for_layout ?>
         </div>
     </section>

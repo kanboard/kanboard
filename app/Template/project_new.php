@@ -1,8 +1,7 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= empty($values['is_private']) ? t('New project') : t('New private project') ?></h2>
         <ul>
-            <li><?= Helper\a(t('All projects'), 'project', 'index') ?></li>
+            <li><i class="fa fa-folder fa-fw"></i><?= Helper\a(t('All projects'), 'project', 'index') ?></li>
         </ul>
     </div>
     <section>

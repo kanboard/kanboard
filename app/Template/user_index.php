@@ -1,9 +1,8 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= t('Users') ?><span id="page-counter"> (<?= $nb_users ?>)</span></h2>
         <?php if (Helper\is_admin()): ?>
         <ul>
-            <li><?= Helper\a(t('New user'), 'user', 'create') ?></li>
+            <li><i class="fa fa-plus fa-fw"></i><?= Helper\a(t('New user'), 'user', 'create') ?></li>
         </ul>
         <?php endif ?>
     </div>
@@ -53,10 +52,10 @@
                 <td>
                     <ul class="no-bullet">
                     <?php if ($user['google_id']): ?>
-                        <li><i class="fa fa-google"></i> <?= t('Google account linked') ?></li>
+                        <li><i class="fa fa-google fa-fw"></i><?= t('Google account linked') ?></li>
                     <?php endif ?>
                     <?php if ($user['github_id']): ?>
-                        <li><i class="fa fa-github"></i> <?= t('Github account linked') ?></li>
+                        <li><i class="fa fa-github fa-fw"></i><?= t('Github account linked') ?></li>
                     <?php endif ?>
                     </ul>
                 </td>

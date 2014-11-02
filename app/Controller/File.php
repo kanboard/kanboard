@@ -23,9 +23,7 @@ class File extends Base
 
         $this->response->html($this->taskLayout('file_new', array(
             'task' => $task,
-            'menu' => 'tasks',
             'max_size' => ini_get('upload_max_filesize'),
-            'title' => t('Attach a document')
         )));
     }
 
@@ -137,8 +135,6 @@ class File extends Base
         $this->response->html($this->taskLayout('file_remove', array(
             'task' => $task,
             'file' => $file,
-            'menu' => 'tasks',
-            'title' => t('Remove a file')
         )));
     }
 }

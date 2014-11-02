@@ -1,42 +1,39 @@
-<div class="project-show-sidebar">
+<div class="sidebar">
     <h2><?= t('Actions') ?></h2>
-    <div class="user-show-actions">
-        <ul>
-            <li>
-                <a href="?controller=user&amp;action=show&amp;user_id=<?= $user['id'] ?>"><?= t('Summary') ?></a>
-            </li>
+    <ul>
+        <li>
+            <?= Helper\a(t('Summary'), 'user', 'show', array('user_id' => $user['id'])) ?>
+        </li>
 
-            <?php if (Helper\is_admin() || Helper\is_current_user($user['id'])): ?>
+        <?php if (Helper\is_admin() || Helper\is_current_user($user['id'])): ?>
             <li>
-                <a href="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>"><?= t('Edit profile') ?></a>
+                <?= Helper\a(t('Edit profile'), 'user', 'edit', array('user_id' => $user['id'])) ?>
             </li>
 
             <?php if ($user['is_ldap_user'] == 0): ?>
-            <li>
-                <a href="?controller=user&amp;action=password&amp;user_id=<?= $user['id'] ?>"><?= t('Change password') ?></a>
-            </li>
+                <li>
+                    <?= Helper\a(t('Change password'), 'user', 'password', array('user_id' => $user['id'])) ?>
+                </li>
             <?php endif ?>
 
             <li>
-                <a href="?controller=user&amp;action=notifications&amp;user_id=<?= $user['id'] ?>"><?= t('Email notifications') ?></a>
+                <?= Helper\a(t('Email notifications'), 'user', 'notifications', array('user_id' => $user['id'])) ?>
             </li>
             <li>
-                <a href="?controller=user&amp;action=external&amp;user_id=<?= $user['id'] ?>"><?= t('External accounts') ?></a>
+                <?= Helper\a(t('External accounts'), 'user', 'external', array('user_id' => $user['id'])) ?>
             </li>
             <li>
-                <a href="?controller=user&amp;action=last&amp;user_id=<?= $user['id'] ?>"><?= t('Last logins') ?></a>
+                <?= Helper\a(t('Last logins'), 'user', 'last', array('user_id' => $user['id'])) ?>
             </li>
             <li>
-                <a href="?controller=user&amp;action=sessions&amp;user_id=<?= $user['id'] ?>"><?= t('Persistent connections') ?></a>
+                <?= Helper\a(t('Persistent connections'), 'user', 'sessions', array('user_id' => $user['id'])) ?>
             </li>
-            <?php endif ?>
+        <?php endif ?>
 
-            <?php if (Helper\is_admin()): ?>
+        <?php if (Helper\is_admin()): ?>
             <li>
-                <a href="?controller=user&amp;action=remove&amp;user_id=<?= $user['id'] ?>"><?= t('Remove') ?></a>
+                <?= Helper\a(t('Remove'), 'user', 'remove', array('user_id' => $user['id'])) ?>
             </li>
-            <?php endif ?>
-
-        </ul>
-    </div>
+        <?php endif ?>
+    </ul>
 </div>
