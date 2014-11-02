@@ -1,5 +1,5 @@
-Github webhook integration
-==========================
+Github webhooks integration
+===========================
 
 Kanboard can be synchronized with Github.
 Currently, it's only a one-way synchronization: Github to Kanboard.
