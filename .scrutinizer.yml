@@ -3,6 +3,7 @@ filter:
         - 'vendor/*'
         - 'tests/*'
         - 'app/Template/*'
+        - 'scripts/*'
     paths: {  }
 tools:
     php_sim:
