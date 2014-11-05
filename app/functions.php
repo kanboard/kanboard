@@ -35,8 +35,6 @@ function setup_events()
  */
 function setup_mailer()
 {
-    require_once __DIR__.'/../vendor/swiftmailer/swift_required.php';
-
     switch (MAIL_TRANSPORT) {
         case 'smtp':
             $transport = Swift_SmtpTransport::newInstance(MAIL_SMTP_HOSTNAME, MAIL_SMTP_PORT);

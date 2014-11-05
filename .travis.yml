@@ -7,4 +7,6 @@ php:
   - "5.3"
 
 before_script: wget https://phar.phpunit.de/phpunit.phar
-script: php phpunit.phar -c tests/units.sqlite.xml
+script:
+  - composer install
+  - php phpunit.phar -c tests/units.sqlite.xml

@@ -2,8 +2,6 @@
 
 namespace Auth;
 
-require __DIR__.'/../../vendor/OAuth/bootstrap.php';
-
 use Core\Request;
 use OAuth\Common\Storage\Session;
 use OAuth\Common\Consumer\Credentials;

@@ -1,0 +1,18 @@
+{
+    "require": {
+        "ircmaxell/password-compat": "1.0.3",
+        "fguillot/simple-validator": "dev-master",
+        "swiftmailer/swiftmailer": "@stable",
+        "fguillot/json-rpc": "dev-master",
+        "fguillot/picodb": "dev-master",
+        "erusev/parsedown": "1.1.1",
+        "lusitanian/oauth": "0.3.5"
+    },
+    "autoload": {
+        "psr-0": {"": "app/"},
+        "files": [
+            "app/helpers.php",
+            "app/functions.php"
+        ]
+    }
+}

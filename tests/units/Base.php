@@ -1,23 +1,12 @@
 <?php
 
-require __DIR__.'/../../app/Core/Loader.php';
-require __DIR__.'/../../app/helpers.php';
-require __DIR__.'/../../app/functions.php';
+require __DIR__.'/../../vendor/autoload.php';
 require __DIR__.'/../../app/constants.php';
 
 use Core\Loader;
 use Core\Registry;
 
-if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-    require __DIR__.'/../../vendor/password.php';
-}
-
 date_default_timezone_set('UTC');
-
-$loader = new Loader;
-$loader->setPath('app');
-$loader->setPath('vendor');
-$loader->execute();
 
 abstract class Base extends PHPUnit_Framework_TestCase
 {
