@@ -19,21 +19,20 @@
         <tr>
             <td><?= Helper\escape($subtask['title']) ?></td>
             <td>
-            <?php if (!isset($not_editable)): ?>
-                <a href="<?= Helper\u('subtask', 'toggleStatus', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>">
-            <?php endif ?>
-                    <?php if ($subtask['status'] == 0): ?>
-                        <i class="fa fa-square-o fa-fw"></i><i class="fa">&nbsp;<?= Helper\escape($subtask['status_name']) ?></i>
-                    <?php elseif ($subtask['status'] == 1): ?>
-                        <i class="fa fa-gears fa-fw"></i><i class="fa">&nbsp;<?= Helper\escape($subtask['status_name']) ?></i>
-                    <?php else: ?>
-                        <i class="fa fa-check-square-o fa-fw"></i><i class="fa">&nbsp;<?= Helper\escape($subtask['status_name']) ?></i>
-                    <?php endif ?>
-            <?php if (! isset($not_editable)): ?>
-                </a>
-            <?php endif ?>
-			</td>
+                <?php if ($subtask['status'] == 0): ?>
+                    <i class="fa fa-square-o fa-fw"></i>
+                <?php elseif ($subtask['status'] == 1): ?>
+                    <i class="fa fa-gears fa-fw"></i>
+                <?php else: ?>
+                    <i class="fa fa-check-square-o fa-fw"></i>
+                <?php endif ?>
 
+                <?php if (! isset($not_editable)): ?>
+                    <?= Helper\a(Helper\escape($subtask['status_name']), 'subtask', 'toggleStatus', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
+                <?php else: ?>
+                    <?= Helper\escape($subtask['status_name']) ?>
+                <?php endif ?>
+            </td>
             <td>
                 <?php if (! empty($subtask['username'])): ?>
                     <?= Helper\escape($subtask['name'] ?: $subtask['username']) ?>
