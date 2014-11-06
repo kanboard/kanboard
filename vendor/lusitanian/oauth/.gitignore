@@ -1,0 +1,6 @@
+.idea
+vendor
+.DS_Store
+composer.lock
+examples/init.php
+atlassian-ide-plugin.xml

@@ -9,7 +9,7 @@ namespace Helper;
 use Core\Security;
 use Core\Template;
 use Core\Tool;
-use Parsedown\Parsedown;
+use Parsedown;
 
 /**
  * Append a CSRF token to a query string
