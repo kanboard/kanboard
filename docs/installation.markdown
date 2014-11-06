@@ -9,8 +9,8 @@ Requirements
 - PHP extensions required: mbstring and pdo_sqlite (don't forget to enable extensions)
 - A web browser with HTML5 drag and drop support
 
-From the archive
-----------------
+From the archive (stable version)
+---------------------------------
 
 1. You must have a web server with PHP installed
 2. Download the source code and copy the directory `kanboard` where you want
@@ -22,11 +22,16 @@ From the archive
 
 Note: The folder data is the location where Kanboard stores uploaded files as well as the Sqlite database.
 
-From the repository
--------------------
+From the repository (development version)
+-----------------------------------------
+
+You must install [composer](https://getcomposer.org/) to use this method.
 
 1. `git clone https://github.com/fguillot/kanboard.git`
-2. Go to the third step just above
+2. `composer update`
+3. Go to the third step just above
+
+Note: This method will install the **current development version**, use at your own risk.
 
 Security
 --------
