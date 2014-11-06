@@ -1,1 +1,0 @@
-[single quotes](http://example.com 'Title') and [double quotes](http://example.com "Title")
