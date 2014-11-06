@@ -3,6 +3,8 @@
 // Common file between cli and web interface
 
 require 'vendor/autoload.php';
+require __DIR__.'/functions.php';
+require __DIR__.'/helpers.php';
 
 // Include custom config file
 if (file_exists('config.php')) {

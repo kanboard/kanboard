@@ -9,10 +9,6 @@
         "lusitanian/oauth": "0.3.5"
     },
     "autoload": {
-        "psr-0": {"": "app/"},
-        "files": [
-            "app/helpers.php",
-            "app/functions.php"
-        ]
+        "psr-0": {"": "app/"}
     }
 }

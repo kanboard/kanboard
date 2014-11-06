@@ -8,6 +8,4 @@ $baseDir = dirname($vendorDir);
 return array(
     $vendorDir . '/ircmaxell/password-compat/lib/password.php',
     $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
-    $baseDir . '/app/helpers.php',
-    $baseDir . '/app/functions.php',
 );
