@@ -55,3 +55,4 @@ Thumbs.db
 ################
 config.php
 data/files
+vendor
