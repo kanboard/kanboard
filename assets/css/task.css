@@ -9,8 +9,8 @@
     word-wrap: break-word;
 }
 
-.task-board-recent {
-    box-shadow: 0px 0px 10px rgba(130, 130, 130, 1);
+div.task-board-recent {
+    border: 1px solid #666;
 }
 
 .task-table a,
