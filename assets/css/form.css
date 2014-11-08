@@ -1,10 +1,6 @@
 /* forms */
 form {
-    padding: 10px;
     margin-bottom: 20px;
-    background: #fefefe;
-    border: 1px solid #ddd;
-    border-radius: 5px;
 }
 
 label {
@@ -21,13 +17,13 @@ input[type="password"],
 input[type="text"] {
     color: #888;
     border: 1px solid #ccc;
-    width: 400px;
+    width: 300px;
     max-width: 95%;
     font-size: 1.0em;
     height: 25px;
     padding-bottom: 0;
     font-family: sans-serif;
-    margin-top: 5px;
+    margin-top: 10px;
     -webkit-appearance: none;
     appearance: none;
 }
@@ -129,6 +125,10 @@ input.form-date {
     width: 150px;
 }
 
+input.form-input-large {
+    width: 400px;
+}
+
 .form-row {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -137,8 +137,7 @@ input.form-date {
 .form-column {
     float: left;
     margin-bottom: 60px;
-    padding-right: 30px;
-    padding-left: 30px;
+    padding-right: 50px;
 }
 
 .form-column:first-child {
@@ -150,9 +149,9 @@ input.form-date {
 }
 
 .form-login {
-    width: 470px;
-    padding: 10px;
-    margin: 3% auto 20% auto;
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 8%;
 }
 
 .form-column li,

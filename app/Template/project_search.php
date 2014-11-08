@@ -11,7 +11,7 @@
         <?= Helper\form_hidden('controller', $values) ?>
         <?= Helper\form_hidden('action', $values) ?>
         <?= Helper\form_hidden('project_id', $values) ?>
-        <?= Helper\form_text('search', $values, array(), array('autofocus', 'required', 'placeholder="'.t('Search').'"')) ?>
+        <?= Helper\form_text('search', $values, array(), array('autofocus', 'required', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
         <input type="submit" value="<?= t('Search') ?>" class="btn btn-blue"/>
     </form>
 

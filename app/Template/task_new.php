@@ -11,7 +11,7 @@
 
         <div class="form-column">
             <?= Helper\form_label(t('Title'), 'title') ?>
-            <?= Helper\form_text('title', $values, $errors, array('autofocus', 'required')) ?><br/>
+            <?= Helper\form_text('title', $values, $errors, array('autofocus', 'required'), 'form-input-large') ?><br/>
 
             <?= Helper\form_label(t('Description'), 'description') ?>
             <?= Helper\form_textarea('description', $values, $errors) ?><br/>

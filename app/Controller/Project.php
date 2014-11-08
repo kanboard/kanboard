@@ -404,6 +404,7 @@ class Project extends Base
         $project = $this->getProject();
 
         $this->response->html($this->template->layout('project_activity', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'events' => $this->projectActivity->getProject($project['id']),
             'project' => $project,
             'title' => t('%s\'s activity', $project['name'])
@@ -432,6 +433,7 @@ class Project extends Base
         }
 
         $this->response->html($this->template->layout('project_search', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'tasks' => $tasks,
             'nb_tasks' => $nb_tasks,
             'pagination' => array(
@@ -474,6 +476,7 @@ class Project extends Base
         $nb_tasks = $this->taskFinder->countByProjectId($project['id'], array(TaskModel::STATUS_CLOSED));
 
         $this->response->html($this->template->layout('project_tasks', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'pagination' => array(
                 'controller' => 'project',
                 'action' => 'tasks',
