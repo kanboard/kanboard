@@ -936,7 +936,7 @@ tr td.task-orange,
     margin-bottom: 20px;
     border: 1px solid #ddd;
     color: #333;
-    background-color: #fbfbfb;
+    background-color: #fefefe;
 }
 
 .listing li {
@@ -1058,8 +1058,8 @@ tr td.task-orange,
     width: 250px;
     padding: 10px;
     padding-top: 0;
-    border: 1px solid #ccc;
-    background: #fbfbfb;
+    border: 1px solid #ddd;
+    background: #fefefe;
     border-radius: 5px;
 }
 
