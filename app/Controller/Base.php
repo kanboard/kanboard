@@ -26,6 +26,7 @@ use Model\LastLogin;
  * @property \Model\Notification       $notification
  * @property \Model\Project            $project
  * @property \Model\ProjectPermission  $projectPermission
+ * @property \Model\ProjectAnalytic    $projectAnalytic
  * @property \Model\SubTask            $subTask
  * @property \Model\Task               $task
  * @property \Model\TaskHistory        $taskHistory

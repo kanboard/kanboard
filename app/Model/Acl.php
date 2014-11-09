@@ -41,6 +41,7 @@ class Acl extends Base
         'task' => array('show', 'create', 'save', 'edit', 'update', 'close', 'open', 'duplicate', 'remove', 'description', 'move', 'copy', 'time'),
         'category' => array('index', 'save', 'edit', 'update', 'confirm', 'remove'),
         'action' => array('index', 'event', 'params', 'create', 'confirm', 'remove'),
+        'analytic' => array('repartition'),
     );
 
     /**

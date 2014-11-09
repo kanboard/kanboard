@@ -18,6 +18,15 @@ var Kanboard = (function() {
 
     return {
 
+        // Return true if the element#id exists
+        Exists: function(id) {
+            if (document.getElementById(id)) {
+                return true;
+            }
+
+            return false;
+        },
+
         // Display a popup
         Popover: function(e, callback) {
             e.preventDefault();
@@ -264,15 +273,76 @@ Kanboard.Task = (function() {
         }
     };
 
-})();// Initialization
+})();
+Kanboard.Analytic = (function() {
+
+    return {
+        Init: function() {
+
+            if (Kanboard.Exists("analytic-repartition")) {
+                Kanboard.Analytic.Repartition.Init();
+            }
+        }
+    };
+
+})();
+
+Kanboard.Analytic.Repartition = (function() {
+
+    function fetchData()
+    {
+        jQuery.getJSON($("#chart").attr("data-url"), function(data) {
+            drawGraph(data.metrics, data.labels);
+        });
+    }
+
+    function drawGraph(metrics, labels)
+    {
+        var series = prepareSeries(metrics, labels);
+
+        var svg = dimple.newSvg("#chart", 700, 350);
+
+        var chart = new dimple.chart(svg, series);
+        chart.addMeasureAxis("p", labels["nb_tasks"]);
+        var ring = chart.addSeries(labels["column_title"], dimple.plot.pie);
+        ring.innerRadius = "50%";
+        chart.addLegend(0, 0, 100, 100, "left");
+        chart.draw();
+    }
+
+    function prepareSeries(metrics, labels)
+    {
+        var series = [];
+
+        for (var i = 0; i < metrics.length; i++) {
+
+            var serie = {};
+            serie[labels["nb_tasks"]] = metrics[i]["nb_tasks"];
+            serie[labels["column_title"]] = metrics[i]["column_title"];
+
+            series.push(serie);
+        }
+
+        return series;
+    }
+
+    return {
+        Init: fetchData
+    };
+
+})();
+// Initialization
 $(function() {
 
     Kanboard.Init();
 
-    if ($("#board").length) {
+    if (Kanboard.Exists("board")) {
         Kanboard.Board.Init();
     }
-    else if ($("#task-section").length) {
+    else if (Kanboard.Exists("task-section")) {
         Kanboard.Task.Init();
+    }
+    else if (Kanboard.Exists("analytic-section")) {
+        Kanboard.Analytic.Init();
     }
 });

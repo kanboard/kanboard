@@ -3,10 +3,13 @@ $(function() {
 
     Kanboard.Init();
 
-    if ($("#board").length) {
+    if (Kanboard.Exists("board")) {
         Kanboard.Board.Init();
     }
-    else if ($("#task-section").length) {
+    else if (Kanboard.Exists("task-section")) {
         Kanboard.Task.Init();
+    }
+    else if (Kanboard.Exists("analytic-section")) {
+        Kanboard.Analytic.Init();
     }
 });

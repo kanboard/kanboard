@@ -565,4 +565,10 @@ return array(
     'Columns' => 'Colonnes',
     'Task' => 'Tâche',
     'Your are not member of any project.' => 'Vous n\'êtes membre d\'aucun projet.',
+    'Percentage' => 'Pourcentage',
+    'Number of tasks' => 'Nombre de tâches',
+    'Task distribution' => 'Répartition des tâches',
+    'Reportings' => 'Rapports',
+    'Task repartition for "%s"' => 'Répartition des tâches pour « %s »',
+    'Analytics' => 'Analytique',
 );

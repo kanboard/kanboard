@@ -24,6 +24,10 @@
                 <i class="fa fa-dashboard fa-fw"></i>
                 <?= Helper\a(t('Activity'), 'project', 'activity', array('project_id' => $current_project_id)) ?>
             </li>
+            <li>
+                <i class="fa fa-line-chart fa-fw"></i>
+                <?= Helper\a(t('Analytics'), 'analytic', 'repartition', array('project_id' => $current_project_id)) ?>
+            </li>
             <?php if (Helper\is_admin()): ?>
                 <li><i class="fa fa-cog fa-fw"></i>
                 <?= Helper\a(t('Configure'), 'project', 'show', array('project_id' => $current_project_id)) ?>

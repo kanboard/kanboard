@@ -3,6 +3,15 @@ var Kanboard = (function() {
 
     return {
 
+        // Return true if the element#id exists
+        Exists: function(id) {
+            if (document.getElementById(id)) {
+                return true;
+            }
+
+            return false;
+        },
+
         // Display a popup
         Popover: function(e, callback) {
             e.preventDefault();
