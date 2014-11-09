@@ -146,7 +146,7 @@ class Project extends Base
     public function update()
     {
         $project = $this->getProjectManagement();
-        $values = $this->request->getValues() + array('is_active' => 0);
+        $values = $this->request->getValues();
         list($valid, $errors) = $this->project->validateModification($values);
 
         if ($valid) {
@@ -527,9 +527,11 @@ class Project extends Base
 
         if ($valid) {
 
-            if ($this->project->create($values, $this->acl->getUserId())) {
+            $project_id = $this->project->create($values, $this->acl->getUserId());
+
+            if ($project_id) {
                 $this->session->flash(t('Your project have been created successfully.'));
-                $this->response->redirect('?controller=project');
+                $this->response->redirect('?controller=project&action=show&project_id='.$project_id);
             }
             else {
                 $this->session->flashError(t('Unable to create your project.'));

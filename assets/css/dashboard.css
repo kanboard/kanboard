@@ -1,6 +1,6 @@
 /* dashboard */
 #dashboard table {
-    font-size: 0.95em;
+    font-size: 0.9em;
 }
 
 .dashboard-left-column {
@@ -12,4 +12,25 @@
     margin-left: 5%;
     width: 40%;
     float: left;
+}
+
+.dashboard-project-stats span {
+    font-size: 0.75em;
+    margin-right: 10px;
+    color: #999;
+}
+
+.dashboard-project-stats strong {
+    font-size: 1.1em;
+}
+
+.dashboard-table-link {
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+}
+
+.dashboard-table-link:focus,
+.dashboard-table-link:hover {
+    color: #999;
 }

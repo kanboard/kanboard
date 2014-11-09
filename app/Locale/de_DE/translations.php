@@ -561,4 +561,8 @@ return array(
     'Github issue comment created' => 'Github Fehler Kommentar hinzugefügt',
     // 'Configure' => '',
     // 'Project management' => '',
+    // 'My projects' => '',
+    // 'Columns' => '',
+    // 'Task' => '',
+    // 'Your are not member of any project.' => '',
 );

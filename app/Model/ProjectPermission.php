@@ -29,9 +29,9 @@ class ProjectPermission extends Base
      * @param  bool      $prepend_everybody     Prepend the 'Everbody' value
      * @return array
      */
-    public function getUsersList($project_id, $prepend_unassigned = true, $prepend_everybody = false)
+    public function getMemberList($project_id, $prepend_unassigned = true, $prepend_everybody = false)
     {
-        $allowed_users = $this->getAllowedUsers($project_id);
+        $allowed_users = $this->getMembers($project_id);
 
         if ($prepend_unassigned) {
             $allowed_users = array(t('Unassigned')) + $allowed_users;
@@ -51,7 +51,7 @@ class ProjectPermission extends Base
      * @param  integer   $project_id   Project id
      * @return array
      */
-    public function getAllowedUsers($project_id)
+    public function getMembers($project_id)
     {
         if ($this->isEverybodyAllowed($project_id)) {
             return $this->user->getList();
@@ -96,7 +96,7 @@ class ProjectPermission extends Base
 
         $all_users = $this->user->getList();
 
-        $users['allowed'] = $this->getAllowedUsers($project_id);
+        $users['allowed'] = $this->getMembers($project_id);
 
         foreach ($all_users as $user_id => $username) {
 
@@ -141,19 +141,15 @@ class ProjectPermission extends Base
     }
 
     /**
-     * Check if a specific user is allowed to access to a given project
+     * Check if a specific user is member of a project
      *
      * @access public
      * @param  integer   $project_id   Project id
      * @param  integer   $user_id      User id
      * @return bool
      */
-    public function isUserAllowed($project_id, $user_id)
+    public function isMember($project_id, $user_id)
     {
-        if ($this->user->isAdmin($user_id)) {
-            return true;
-        }
-
         if ($this->isEverybodyAllowed($project_id)) {
             return true;
         }
@@ -163,6 +159,19 @@ class ProjectPermission extends Base
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
                     ->count();
+    }
+
+    /**
+     * Check if a specific user is allowed to access to a given project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @return bool
+     */
+    public function isUserAllowed($project_id, $user_id)
+    {
+        return $this->user->isAdmin($user_id) || $this->isMember($project_id, $user_id);
     }
 
     /**
@@ -204,12 +213,13 @@ class ProjectPermission extends Base
      * @access public
      * @param  array     $projects     Project list: ['project_id' => 'project_name']
      * @param  integer   $user_id      User id
+     * @param  string    $filter       Method name to apply
      * @return array
      */
-    public function filterProjects(array $projects, $user_id)
+    public function filterProjects(array $projects, $user_id, $filter = 'isUserAllowed')
     {
         foreach ($projects as $project_id => $project_name) {
-            if (! $this->isUserAllowed($project_id, $user_id)) {
+            if (! $this->$filter($project_id, $user_id)) {
                 unset($projects[$project_id]);
             }
         }
@@ -218,7 +228,7 @@ class ProjectPermission extends Base
     }
 
     /**
-     * Return a list of projects for a given user
+     * Return a list of allowed projects for a given user
      *
      * @access public
      * @param  integer   $user_id      User id
@@ -226,7 +236,19 @@ class ProjectPermission extends Base
      */
     public function getAllowedProjects($user_id)
     {
-        return $this->filterProjects($this->project->getListByStatus(Project::ACTIVE), $user_id);
+        return $this->filterProjects($this->project->getListByStatus(Project::ACTIVE), $user_id, 'isUserAllowed');
+    }
+
+    /**
+     * Return a list of projects where the user is member
+     *
+     * @access public
+     * @param  integer   $user_id      User id
+     * @return array
+     */
+    public function getMemberProjects($user_id)
+    {
+        return $this->filterProjects($this->project->getListByStatus(Project::ACTIVE), $user_id, 'isMember');
     }
 
     /**
@@ -239,7 +261,7 @@ class ProjectPermission extends Base
      */
     public function duplicate($project_from, $project_to)
     {
-        $users = $this->getAllowedUsers($project_from);
+        $users = $this->getMembers($project_from);
 
         foreach ($users as $user_id => $name) {
             if (! $this->allowUser($project_to, $user_id)) {

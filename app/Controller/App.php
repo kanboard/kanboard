@@ -20,12 +20,14 @@ class App extends Base
     public function index()
     {
         $user_id = $this->acl->getUserId();
-        $projects = $this->projectPermission->getAllowedProjects($user_id);
+        $projects = $this->projectPermission->getMemberProjects($user_id);
+        $project_ids = array_keys($projects);
 
         $this->response->html($this->template->layout('app_index', array(
-            'board_selector' => $projects,
-            'events' => $this->projectActivity->getProjects(array_keys($projects), 10),
+            'board_selector' => $this->projectPermission->getAllowedProjects($user_id),
+            'events' => $this->projectActivity->getProjects($project_ids, 10),
             'tasks' => $this->taskFinder->getAllTasksByUser($user_id),
+            'projects' => $this->project->getSummary($project_ids),
             'title' => t('Dashboard'),
         )));
     }

@@ -167,7 +167,7 @@ class ProjectTest extends Base
 
         $pp = new ProjectPermission($this->registry);
 
-        $this->assertEquals(array(1 => 'admin'), $pp->getAllowedUsers(3));
-        $this->assertEquals(array(1 => 'admin'), $pp->getAllowedUsers(4));
+        $this->assertEquals(array(1 => 'admin'), $pp->getMembers(3));
+        $this->assertEquals(array(1 => 'admin'), $pp->getMembers(4));
     }
 }

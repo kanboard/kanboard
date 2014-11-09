@@ -78,6 +78,16 @@ function is_admin()
 }
 
 /**
+ * Return true if the user can configure the project (project are previously filtered)
+ *
+ * @return boolean
+ */
+function is_project_admin(array $project)
+{
+    return is_admin() || $project['is_private'] == 1;
+}
+
+/**
  * Return the username
  *
  * @param  array    $user   User properties (optional)

@@ -14,17 +14,48 @@
     </div>
     <section id="dashboard">
         <div class="dashboard-left-column">
+            <h2><?= t('My projects') ?></h2>
+            <?php if (empty($projects)): ?>
+                <p class="alert"><?= t('Your are not member of any project.') ?></p>
+            <?php else: ?>
+                <table>
+                    <tr>
+                        <th width="5%">&nbsp;</th>
+                        <th width="15%"><?= t('Project') ?></th>
+                        <th width="75%"><?= t('Columns') ?></th>
+                    </tr>
+                    <?php foreach ($projects as $project): ?>
+                    <tr>
+                        <td>
+                            <?= Helper\a('#'.$project['id'], 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link') ?>
+                        </td>
+                        <td>
+                            <?php if (Helper\is_project_admin($project)): ?>
+                                <?= Helper\a('<i class="fa fa-cog"></i>', 'project', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Settings')) ?>&nbsp;
+                            <?php endif ?>
+                            <?= Helper\a(Helper\escape($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
+                        </td>
+                        <td class="dashboard-project-stats">
+                            <?php foreach ($project['columns'] as $column): ?>
+                                <strong title="<?= t('Task count') ?>"><?= $column['nb_tasks'] ?></strong>
+                                <span><?= Helper\escape($column['title']) ?></span>
+                            <?php endforeach ?>
+                        </td>
+                    </tr>
+                    <?php endforeach ?>
+                </table>
+            <?php endif ?>
+
             <h2><?= t('My tasks') ?></h2>
             <?php if (empty($tasks)): ?>
                 <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
             <?php else: ?>
                 <table>
                     <tr>
-                        <th>&nbsp;</th>
+                        <th width="5%">&nbsp;</th>
                         <th width="15%"><?= t('Project') ?></th>
-                        <th width="40%"><?= t('Title') ?></th>
-                        <th><?= t('Due date') ?></th>
-                        <th><?= t('Date created') ?></th>
+                        <th width="60%"><?= t('Task') ?></th>
+                        <th width="20%"><?= t('Due date') ?></th>
                     </tr>
                     <?php foreach ($tasks as $task): ?>
                     <tr>
@@ -39,9 +70,6 @@
                         </td>
                         <td>
                             <?= dt('%B %e, %Y', $task['date_due']) ?>
-                        </td>
-                        <td>
-                            <?= dt('%B %e, %Y', $task['date_creation']) ?>
                         </td>
                     </tr>
                     <?php endforeach ?>

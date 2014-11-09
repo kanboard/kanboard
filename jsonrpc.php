@@ -146,7 +146,7 @@ $server->register('removeColumn', function($column_id) use ($board) {
  * Project permissions procedures
  */
 $server->register('getAllowedUsers', function($project_id) use ($projectPermission) {
-    return $projectPermission->getUsersList($project_id, false, false);
+    return $projectPermission->getMemberList($project_id, false, false);
 });
 
 $server->register('revokeUser', function($project_id, $user_id) use ($project, $projectPermission) {

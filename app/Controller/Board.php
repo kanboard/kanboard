@@ -42,12 +42,11 @@ class Board extends Base
     {
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
-        $projects = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
+
         $params = array(
             'errors' => array(),
             'values' => $task,
-            'users_list' => $this->projectPermission->getUsersList($project['id']),
-            'projects' => $projects,
+            'users_list' => $this->projectPermission->getMemberList($project['id']),
             'current_project_id' => $project['id'],
             'current_project_name' => $project['name'],
         );
@@ -95,12 +94,11 @@ class Board extends Base
     {
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
-        $projects = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
+
         $params = array(
             'errors' => array(),
             'values' => $task,
             'categories_list' => $this->category->getList($project['id']),
-            'projects' => $projects,
             'current_project_id' => $project['id'],
             'current_project_name' => $project['name'],
         );
@@ -213,7 +211,7 @@ class Board extends Base
         $this->user->storeLastSeenProjectId($project['id']);
 
         $this->response->html($this->template->layout('board_index', array(
-            'users' => $this->projectPermission->getUsersList($project['id'], true, true),
+            'users' => $this->projectPermission->getMemberList($project['id'], true, true),
             'filters' => array('user_id' => UserModel::EVERYBODY_ID),
             'projects' => $projects,
             'current_project_id' => $project['id'],

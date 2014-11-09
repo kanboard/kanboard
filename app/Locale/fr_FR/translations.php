@@ -561,4 +561,8 @@ return array(
     'Github issue comment created' => 'Commentaire créé sur un ticket Github',
     'Configure' => 'Configurer',
     'Project management' => 'Gestion des projets',
+    'My projects' => 'Mes projets',
+    'Columns' => 'Colonnes',
+    'Task' => 'Tâche',
+    'Your are not member of any project.' => 'Vous n\'êtes membre d\'aucun projet.',
 );

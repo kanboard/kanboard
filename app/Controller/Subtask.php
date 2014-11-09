@@ -42,7 +42,7 @@ class Subtask extends Base
                 'another_subtask' => $this->request->getIntegerParam('another_subtask', 0)
             ),
             'errors' => array(),
-            'users_list' => $this->projectPermission->getUsersList($task['project_id']),
+            'users_list' => $this->projectPermission->getMemberList($task['project_id']),
             'task' => $task,
         )));
     }
@@ -78,7 +78,7 @@ class Subtask extends Base
         $this->response->html($this->taskLayout('subtask_create', array(
             'values' => $values,
             'errors' => $errors,
-            'users_list' => $this->projectPermission->getUsersList($task['project_id']),
+            'users_list' => $this->projectPermission->getMemberList($task['project_id']),
             'task' => $task,
         )));
     }
@@ -96,7 +96,7 @@ class Subtask extends Base
         $this->response->html($this->taskLayout('subtask_edit', array(
             'values' => $subtask,
             'errors' => array(),
-            'users_list' => $this->projectPermission->getUsersList($task['project_id']),
+            'users_list' => $this->projectPermission->getMemberList($task['project_id']),
             'status_list' => $this->subTask->getStatusList(),
             'subtask' => $subtask,
             'task' => $task,
@@ -131,7 +131,7 @@ class Subtask extends Base
         $this->response->html($this->taskLayout('subtask_edit', array(
             'values' => $values,
             'errors' => $errors,
-            'users_list' => $this->projectPermission->getUsersList($task['project_id']),
+            'users_list' => $this->projectPermission->getMemberList($task['project_id']),
             'status_list' => $this->subTask->getStatusList(),
             'subtask' => $subtask,
             'task' => $task,
