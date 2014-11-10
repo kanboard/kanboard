@@ -4,6 +4,10 @@ a.filter-on {
     color: #333;
 }
 
+.board-filters .hide-tablet {
+    float:right;
+}
+
 /* public board */
 .public-board {
     margin-top: 5px;
