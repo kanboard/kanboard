@@ -1,8 +1,9 @@
 <table id="board"
-       data-project-id="<?= $current_project_id ?>"
-       data-time="<?= time() ?>"
+       data-project-id="<?= $project['id'] ?>"
        data-check-interval="<?= $board_private_refresh_interval ?>"
-       data-csrf-token=<?= \Core\Security::getCSRFToken() ?>>
+       data-save-url="<?= Helper\u('board', 'save', array('project_id' => $project['id'])) ?>"
+       data-check-url="<?= Helper\u('board', 'check', array('project_id' => $project['id'], 'timestamp' => time())) ?>"
+>
 <tr>
     <?php $column_with = round(100 / count($board), 2); ?>
     <?php foreach ($board as $column): ?>
@@ -37,9 +38,10 @@
              data-owner-id="<?= $task['owner_id'] ?>"
              data-category-id="<?= $task['category_id'] ?>"
              data-due-date="<?= $task['date_due'] ?>"
+             data-task-url="<?= Helper\u('task', 'show', array('task_id' => $task['id'])) ?>"
              title="<?= t('View this task') ?>">
 
-            <?= Helper\template('board_task', array('task' => $task, 'categories' => $categories)) ?>
+            <?= Helper\template('board/task', array('task' => $task, 'categories' => $categories)) ?>
 
         </div>
         <?php endforeach ?>

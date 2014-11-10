@@ -3,8 +3,10 @@
 </div>
 
 <h3><?= t('Choose an event') ?></h3>
-<form method="post" action="?controller=action&amp;action=params&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('action', 'params', array('project_id' => $project['id'])) ?>">
+
     <?= Helper\form_csrf() ?>
+
     <?= Helper\form_hidden('project_id', $values) ?>
     <?= Helper\form_hidden('action_name', $values) ?>
 
@@ -17,6 +19,7 @@
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Next step') ?>" class="btn btn-blue"/>
-        <?= t('or') ?> <a href="?controller=action&amp;action=index&amp;project_id=<?= $project['id'] ?>"><?= t('cancel') ?></a>
+        <?= t('or') ?>
+        <?= Helper\a(t('cancel'), 'action', 'index', array('project_id' => $project['id'])) ?>
     </div>
 </form>

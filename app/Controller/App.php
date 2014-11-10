@@ -23,7 +23,7 @@ class App extends Base
         $projects = $this->projectPermission->getMemberProjects($user_id);
         $project_ids = array_keys($projects);
 
-        $this->response->html($this->template->layout('app_index', array(
+        $this->response->html($this->template->layout('app/index', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($user_id),
             'events' => $this->projectActivity->getProjects($project_ids, 10),
             'tasks' => $this->taskFinder->getAllTasksByUser($user_id),

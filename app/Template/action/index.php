@@ -42,17 +42,16 @@
             </ul>
         </td>
         <td>
-            <a href="?controller=action&amp;action=confirm&amp;project_id=<?= $project['id'] ?>&amp;action_id=<?= $action['id'] ?>"><?= t('Remove') ?></a>
+            <?= Helper\a(t('Remove'), 'action', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id'])) ?>
         </td>
     </tr>
     <?php endforeach ?>
-
 </table>
 
 <?php endif ?>
 
 <h3><?= t('Add an action') ?></h3>
-<form method="post" action="?controller=action&amp;action=event&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('action', 'event', array('project_id' => $project['id'])) ?>">
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('project_id', $values) ?>
 

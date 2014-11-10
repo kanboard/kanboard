@@ -36,9 +36,9 @@ Kanboard.Board = (function() {
         $(".task-description-popover").click(Kanboard.Popover);
 
         // Redirect to the task details page
-        $("[data-task-id]").each(function() {
+        $("[data-task-url]").each(function() {
             $(this).click(function() {
-                window.location = "?controller=task&action=show&task_id=" + $(this).attr("data-task-id");
+                window.location = $(this).attr("data-task-url");
             });
         });
 
@@ -53,28 +53,26 @@ Kanboard.Board = (function() {
     // Stop events
     function board_unload_events()
     {
-        $("[data-task-id]").off();
+        $("[data-task-url]").off();
         clearInterval(checkInterval);
     }
 
     // Save and refresh the board
     function board_save(taskId, columnId, position)
     {
-        var boardSelector = $("#board");
-        var projectId = boardSelector.attr("data-project-id");
-
         board_unload_events();
 
         $.ajax({
             cache: false,
-            url: "?controller=board&action=save&project_id=" + projectId,
-            data: {
+            url: $("#board").attr("data-save-url"),
+            contentType: "application/json",
+            type: "POST",
+            processData: false,
+            data: JSON.stringify({
                 "task_id": taskId,
                 "column_id": columnId,
                 "position": position,
-                "csrf_token": boardSelector.attr("data-csrf-token"),
-            },
-            type: "POST",
+            }),
             success: function(data) {
                 $("#board").remove();
                 $("#main").append(data);
@@ -87,17 +85,13 @@ Kanboard.Board = (function() {
     // Check if a board have been changed by someone else
     function board_check()
     {
-        var boardSelector = $("#board");
-        var projectId = boardSelector.attr("data-project-id");
-        var timestamp = boardSelector.attr("data-time");
-
-        if (Kanboard.IsVisible() && projectId != undefined && timestamp != undefined) {
+        if (Kanboard.IsVisible()) {
             $.ajax({
                 cache: false,
-                url: "?controller=board&action=check&project_id=" + projectId + "&timestamp=" + timestamp,
+                url: $("#board").attr("data-check-url"),
                 statusCode: {
                     200: function(data) {
-                        boardSelector.remove();
+                        $("#board").remove();
                         $("#main").append(data);
                         board_unload_events();
                         board_load_events();

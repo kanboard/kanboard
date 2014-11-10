@@ -1,6 +1,6 @@
 <?php if (isset($not_editable)): ?>
 
-    <a href="?controller=task&amp;action=readonly&amp;task_id=<?= $task['id'] ?>&amp;token=<?= $project['token'] ?>">#<?= $task['id'] ?></a>
+    <?= Helper\a('#'.$task['id'], 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
 
     <?php if ($task['reference']): ?>
     <span class="task-board-reference" title="<?= t('Reference') ?>">
@@ -23,14 +23,12 @@
     <?php endif ?>
 
     <div class="task-board-title">
-        <a href="?controller=task&amp;action=readonly&amp;task_id=<?= $task['id'] ?>&amp;token=<?= $project['token'] ?>">
-            <?= Helper\escape($task['title']) ?>
-        </a>
+        <?= Helper\a(Helper\escape($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
     </div>
 
 <?php else: ?>
 
-    <a class="task-edit-popover" href="?controller=task&amp;action=edit&amp;task_id=<?= $task['id'] ?>" title="<?= t('Edit this task') ?>">#<?= $task['id'] ?></a>
+    <?= Helper\a('#'.$task['id'], 'task', 'edit', array('task_id' => $task['id']), false, 'task-edit-popover', t('Edit this task')) ?>
 
     <?php if ($task['reference']): ?>
     <span class="task-board-reference" title="<?= t('Reference') ?>">
@@ -41,13 +39,15 @@
     &nbsp;-&nbsp;
 
     <span class="task-board-user">
-        <a class="assignee-popover" href="?controller=board&amp;action=changeAssignee&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change assignee') ?>">
-        <?php if (! empty($task['owner_id'])): ?>
-            <?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?></a>
-        <?php else: ?>
-            <?= t('Nobody assigned') ?>
-        <?php endif ?>
-        </a>
+        <?= Helper\a(
+            ! empty($task['owner_id']) ? t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned'),
+            'board',
+            'changeAssignee',
+            array('task_id' => $task['id']),
+            false,
+            'assignee-popover',
+            t('Change assignee')
+        ) ?>
     </span>
 
     <?php if ($task['score']): ?>
@@ -55,7 +55,7 @@
     <?php endif ?>
 
     <div class="task-board-title">
-        <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>
+        <?= Helper\a(Helper\escape($task['title']), 'task', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
     </div>
 
 <?php endif ?>
@@ -64,9 +64,15 @@
 <?php if ($task['category_id']): ?>
 <div class="task-board-category-container">
     <span class="task-board-category">
-        <a class="category-popover" href="?controller=board&amp;action=changeCategory&amp;task_id=<?= $task['id'] ?>" title="<?= t('Change category') ?>">
-            <?= Helper\in_list($task['category_id'], $categories) ?>
-        </a>
+        <?= Helper\a(
+            Helper\in_list($task['category_id'], $categories),
+            'board',
+            'changeCategory',
+            array('task_id' => $task['id']),
+            false,
+            'category-popover',
+            t('Change category')
+        ) ?>
     </span>
 </div>
 <?php endif ?>

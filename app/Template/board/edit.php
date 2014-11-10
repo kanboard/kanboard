@@ -4,7 +4,7 @@
 <section>
 
 <h3><?= t('Change columns') ?></h3>
-<form method="post" action="?controller=board&amp;action=update&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('board', 'update', array('project_id' => $project['id'])) ?>" autocomplete="off">
     <?= Helper\form_csrf() ?>
     <?php $i = 0; ?>
     <table>
@@ -46,9 +46,12 @@
 </form>
 
 <h3><?= t('Add a new column') ?></h3>
-<form method="post" action="?controller=board&amp;action=add&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('board', 'add', array('project_id' => $project['id'])) ?>" autocomplete="off">
+
     <?= Helper\form_csrf() ?>
+
     <?= Helper\form_hidden('project_id', $values) ?>
+
     <?= Helper\form_label(t('Title'), 'title') ?>
     <?= Helper\form_text('title', $values, $errors, array('required')) ?>
 

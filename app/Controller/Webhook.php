@@ -57,7 +57,7 @@ class Webhook extends Base
 
         $result = $this->githubWebhook->parsePayload(
             $this->request->getHeader('X-Github-Event'),
-            $this->request->getBody()
+            $this->request->getJson()
         );
 
         echo $result ? 'PARSED' : 'IGNORED';

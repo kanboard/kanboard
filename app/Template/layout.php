@@ -34,7 +34,7 @@
                 <ul>
                     <?php if (isset($board_selector) && ! empty($board_selector)): ?>
                     <li>
-                        <select id="board-selector" data-placeholder="<?= t('Display another project') ?>">
+                        <select id="board-selector" data-placeholder="<?= t('Display another project') ?>" data-board-url="<?= Helper\u('board', 'show', array('project_id' => '%d')) ?>">
                             <option value=""></option>
                             <?php foreach($board_selector as $board_id => $board_name): ?>
                                 <option value="<?= $board_id ?>"><?= Helper\escape($board_name) ?></option>

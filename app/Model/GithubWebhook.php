@@ -47,13 +47,11 @@ class GithubWebhook extends Base
      *
      * @access public
      * @param  string  $type      Github event type
-     * @param  string  $payload   Raw Github event (JSON)
+     * @param  array   $payload   Github event
      * @return boolean
      */
-    public function parsePayload($type, $payload)
+    public function parsePayload($type, array $payload)
     {
-        $payload = json_decode($payload, true);
-
         switch ($type) {
             case 'push':
                 return $this->parsePushEvent($payload);

@@ -76,6 +76,17 @@ class Request
     }
 
     /**
+     * Get the Json request body
+     *
+     * @access public
+     * @return array
+     */
+    public function getJson()
+    {
+        return json_decode($this->getBody(), true);
+    }
+
+    /**
      * Get the content of an uploaded file
      *
      * @access public

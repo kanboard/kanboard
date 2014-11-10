@@ -82,7 +82,7 @@ var Kanboard = (function() {
             });
 
             $("#board-selector").change(function() {
-                window.location = "?controller=board&action=show&project_id=" + $(this).val();
+                window.location = $(this).attr("data-board-url").replace(/%d/g, $(this).val());
             });
         }
     };
