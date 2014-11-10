@@ -18,11 +18,11 @@
             <?php if (empty($projects)): ?>
                 <p class="alert"><?= t('Your are not member of any project.') ?></p>
             <?php else: ?>
-                <table>
+                <table class="table-fixed">
                     <tr>
-                        <th width="5%">&nbsp;</th>
-                        <th width="15%"><?= t('Project') ?></th>
-                        <th width="75%"><?= t('Columns') ?></th>
+                        <th class="column-8">&nbsp;</th>
+                        <th class="column-20"><?= t('Project') ?></th>
+                        <th><?= t('Columns') ?></th>
                     </tr>
                     <?php foreach ($projects as $project): ?>
                     <tr>
@@ -50,12 +50,12 @@
             <?php if (empty($tasks)): ?>
                 <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
             <?php else: ?>
-                <table>
+                <table class="table-fixed">
                     <tr>
-                        <th width="5%">&nbsp;</th>
-                        <th width="15%"><?= t('Project') ?></th>
-                        <th width="60%"><?= t('Task') ?></th>
-                        <th width="20%"><?= t('Due date') ?></th>
+                        <th class="column-8">&nbsp;</th>
+                        <th class="column-20"><?= t('Project') ?></th>
+                        <th><?= t('Task') ?></th>
+                        <th class="column-20"><?= t('Due date') ?></th>
                     </tr>
                     <?php foreach ($tasks as $task): ?>
                     <tr>

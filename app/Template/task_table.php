@@ -1,14 +1,14 @@
-<table>
+<table class="table-fixed table-small">
     <tr>
-        <th><?= Helper\order(t('Id'), 'tasks.id', $pagination) ?></th>
-        <th><?= Helper\order(t('Column'), 'tasks.column_id', $pagination) ?></th>
-        <th><?= Helper\order(t('Category'), 'tasks.category_id', $pagination) ?></th>
+        <th class="column-8"><?= Helper\order(t('Id'), 'tasks.id', $pagination) ?></th>
+        <th class="column-8"><?= Helper\order(t('Column'), 'tasks.column_id', $pagination) ?></th>
+        <th class="column-8"><?= Helper\order(t('Category'), 'tasks.category_id', $pagination) ?></th>
         <th><?= Helper\order(t('Title'), 'tasks.title', $pagination) ?></th>
-        <th><?= Helper\order(t('Assignee'), 'users.username', $pagination) ?></th>
-        <th><?= Helper\order(t('Due date'), 'tasks.date_due', $pagination) ?></th>
-        <th><?= Helper\order(t('Date created'), 'tasks.date_creation', $pagination) ?></th>
-        <th><?= Helper\order(t('Date completed'), 'tasks.date_completed', $pagination) ?></th>
-        <th><?= Helper\order(t('Status'), 'tasks.is_active', $pagination) ?></th>
+        <th class="column-10"><?= Helper\order(t('Assignee'), 'users.username', $pagination) ?></th>
+        <th class="column-10"><?= Helper\order(t('Due date'), 'tasks.date_due', $pagination) ?></th>
+        <th class="column-10"><?= Helper\order(t('Date created'), 'tasks.date_creation', $pagination) ?></th>
+        <th class="column-10"><?= Helper\order(t('Date completed'), 'tasks.date_completed', $pagination) ?></th>
+        <th class="column-5"><?= Helper\order(t('Status'), 'tasks.is_active', $pagination) ?></th>
     </tr>
     <?php foreach ($tasks as $task): ?>
     <tr>
@@ -35,11 +35,11 @@
             <?= dt('%B %e, %Y', $task['date_due']) ?>
         </td>
         <td>
-            <?= dt('%B %e, %Y at %k:%M %p', $task['date_creation']) ?>
+            <?= dt('%B %e, %Y', $task['date_creation']) ?>
         </td>
         <td>
             <?php if ($task['date_completed']): ?>
-                <?= dt('%B %e, %Y at %k:%M %p', $task['date_completed']) ?>
+                <?= dt('%B %e, %Y', $task['date_completed']) ?>
             <?php endif ?>
         </td>
         <td>

@@ -105,7 +105,7 @@ class Project extends Base
      * @param  string    $direction       Sorting direction
      * @return array                      Project properties
      */
-    public function getSummary(array $project_ids, $status = self::ACTIVE, $order = 'last_modified', $direction = 'desc')
+    public function getSummary(array $project_ids, $status = self::ACTIVE, $order = 'name', $direction = 'asc')
     {
         if (empty($project_ids)) {
             return array();
