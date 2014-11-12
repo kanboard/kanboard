@@ -571,4 +571,6 @@ return array(
     'Reportings' => 'Rapports',
     'Task repartition for "%s"' => 'Répartition des tâches pour « %s »',
     'Analytics' => 'Analytique',
+    'Subtask' => 'Sous-tâche',
+    'My subtasks' => 'Mes sous-tâches',
 );

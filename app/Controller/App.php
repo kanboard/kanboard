@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Project as ProjectModel;
+use Model\SubTask;
 
 /**
  * Application controller
@@ -27,6 +28,7 @@ class App extends Base
             'board_selector' => $this->projectPermission->getAllowedProjects($user_id),
             'events' => $this->projectActivity->getProjects($project_ids, 10),
             'tasks' => $this->taskFinder->getAllTasksByUser($user_id),
+            'subtasks' => $this->subTask->getAllByUser($user_id, array(SubTask::STATUS_TODO, SubTask::STATUS_INPROGRESS)),
             'projects' => $this->project->getSummary($project_ids),
             'title' => t('Dashboard'),
         )));

@@ -75,6 +75,37 @@
                     <?php endforeach ?>
                 </table>
             <?php endif ?>
+
+            <h2><?= t('My subtasks') ?></h2>
+            <?php if (empty($subtasks)): ?>
+                <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
+            <?php else: ?>
+                <table class="table-fixed">
+                    <tr>
+                        <th class="column-8">&nbsp;</th>
+                        <th class="column-20"><?= t('Project') ?></th>
+                        <th class="column-15"><?= t('Status') ?></th>
+                        <th><?= t('Subtask') ?></th>
+                    </tr>
+                    <?php foreach ($subtasks as $subtask): ?>
+                    <tr>
+                        <td class="task-table task-<?= $subtask['color_id'] ?>">
+                            <?= Helper\a('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'])) ?>
+                        </td>
+                        <td>
+                            <?= Helper\a(Helper\escape($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
+                        </td>
+                        <td>
+                            <?= Helper\escape($subtask['status_name']) ?>
+                        </td>
+                        <td>
+                            <?= Helper\a(Helper\escape($subtask['title']), 'task', 'show', array('task_id' => $subtask['task_id'])) ?>
+                        </td>
+                    </tr>
+                    <?php endforeach ?>
+                </table>
+            <?php endif ?>
+
         </div>
         <div class="dashboard-right-column">
             <h2><?= t('Activity stream') ?></h2>
