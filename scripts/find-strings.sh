@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REF_LANG=${1:=fr_FR}
+REF_LANG=${1:-fr_FR}
 
 ###
 APP_DIR=`dirname $0`/../app
