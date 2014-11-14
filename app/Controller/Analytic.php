@@ -27,11 +27,11 @@ class Analytic extends Base
     }
 
     /**
-     * Show task distribution graph
+     * Show tasks distribution graph
      *
      * @access public
      */
-    public function repartition()
+    public function tasks()
     {
         $project = $this->getProject();
         $metrics = $this->projectAnalytic->getTaskRepartition($project['id']);
@@ -46,10 +46,38 @@ class Analytic extends Base
             ));
         }
         else {
-            $this->response->html($this->layout('analytic/repartition', array(
+            $this->response->html($this->layout('analytic/tasks', array(
                 'project' => $project,
                 'metrics' => $metrics,
                 'title' => t('Task repartition for "%s"', $project['name']),
+            )));
+        }
+    }
+
+    /**
+     * Show users repartition
+     *
+     * @access public
+     */
+    public function users()
+    {
+        $project = $this->getProject();
+        $metrics = $this->projectAnalytic->getUserRepartition($project['id']);
+
+        if ($this->request->isAjax()) {
+            $this->response->json(array(
+                'metrics' => $metrics,
+                'labels' => array(
+                    'user' => t('User'),
+                    'nb_tasks' => t('Number of tasks'),
+                )
+            ));
+        }
+        else {
+            $this->response->html($this->layout('analytic/users', array(
+                'project' => $project,
+                'metrics' => $metrics,
+                'title' => t('User repartition for "%s"', $project['name']),
             )));
         }
     }

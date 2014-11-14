@@ -25,7 +25,7 @@
         </li>
         <li>
             <i class="fa fa-line-chart fa-fw"></i>
-            <?= Helper\a(t('Analytics'), 'analytic', 'repartition', array('project_id' => $project['id'])) ?>
+            <?= Helper\a(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
         </li>
         <?php if (Helper\is_admin()): ?>
             <li><i class="fa fa-cog fa-fw"></i>

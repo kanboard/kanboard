@@ -1,9 +1,9 @@
 <div class="page-header">
     <h2><?= t('Task distribution') ?></h2>
 </div>
-<section id="analytic-repartition">
+<section id="analytic-task-repartition">
 
-<div id="chart" data-url="<?= Helper\u('analytic', 'repartition', array('project_id' => $project['id'])) ?>"></div>
+<div id="chart" data-url="<?= Helper\u('analytic', 'tasks', array('project_id' => $project['id'])) ?>"></div>
 
 <table>
     <tr>

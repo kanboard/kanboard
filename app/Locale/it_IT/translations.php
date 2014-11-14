@@ -573,4 +573,6 @@ return array(
     // 'Analytics' => '',
     // 'Subtask' => '',
     // 'My subtasks' => '',
+    // 'User repartition' => '',
+    // 'User repartition for "%s"' => '',
 );
