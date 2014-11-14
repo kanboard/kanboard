@@ -14,10 +14,10 @@
         <td>
             <ul>
                 <li>
-                    <a href="?controller=category&amp;action=edit&amp;project_id=<?= $project['id'] ?>&amp;category_id=<?= $category_id ?>"><?= t('Edit') ?></a>
+                    <?= Helper\a(t('Edit'), 'category', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
                 </li>
                 <li>
-                    <a href="?controller=category&amp;action=confirm&amp;project_id=<?= $project['id'] ?>&amp;category_id=<?= $category_id ?>"><?= t('Remove') ?></a>
+                    <?= Helper\a(t('Remove'), 'category', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
                 </li>
             </ul>
         </td>
@@ -27,7 +27,7 @@
 <?php endif ?>
 
 <h3><?= t('Add a new category') ?></h3>
-<form method="post" action="?controller=category&amp;action=save&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('category', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('project_id', $values) ?>

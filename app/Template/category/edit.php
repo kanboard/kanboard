@@ -2,8 +2,10 @@
     <h2><?= t('Category modification for the project "%s"', $project['name']) ?></h2>
 </div>
 
-<form method="post" action="?controller=category&amp;action=update&amp;project_id=<?= $project['id'] ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('category', 'update', array('project_id' => $project['id'])) ?>" autocomplete="off">
+
     <?= Helper\form_csrf() ?>
+
     <?= Helper\form_hidden('id', $values) ?>
     <?= Helper\form_hidden('project_id', $values) ?>
 

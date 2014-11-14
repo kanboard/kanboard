@@ -9,8 +9,9 @@
         </p>
 
         <div class="form-actions">
-            <a href="?controller=category&amp;action=remove&amp;project_id=<?= $project['id'] ?>&amp;category_id=<?= $category['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
-            <?= t('or') ?> <a href="?controller=category&amp;project_id=<?= $project['id'] ?>"><?= t('cancel') ?></a>
+            <?= Helper\a(t('Yes'), 'category', 'remove', array('project_id' => $project['id'], 'category_id' => $category['id']), true, 'btn btn-red') ?>
+            <?= t('or') ?>
+            <?= Helper\a(t('cancel'), 'category', 'index', array('project_id' => $project['id'])) ?>
         </div>
     </div>
 </section>
