@@ -102,6 +102,16 @@ abstract class Base
     }
 
     /**
+     * Destructor
+     *
+     * @access public
+     */
+    public function __destruct()
+    {
+        // $this->container['logger']->addDebug(var_export($this->container['db']->getLogMessages(), true));
+    }
+
+    /**
      * Load automatically models
      *
      * @access public
@@ -151,7 +161,9 @@ abstract class Base
         }
 
         // Attach events
-        $this->attachEvents();
+        if ($controller === 'board') {
+            $this->attachEvents();
+        }
     }
 
     /**

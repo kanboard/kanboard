@@ -19,7 +19,7 @@ From the repository (development version)
 
 1. Close your session (logout)
 2. `git pull`
-3. `composer update`
+3. `composer install`
 3. Login and check if everything is ok
 
 Note: This method will install the **current development version**, use at your own risk.
