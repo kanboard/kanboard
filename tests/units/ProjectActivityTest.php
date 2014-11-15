@@ -11,10 +11,10 @@ class ProjectActivityTest extends Base
 {
     public function testCreation()
     {
-        $e = new ProjectActivity($this->registry);
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $e = new ProjectActivity($this->container);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
@@ -36,10 +36,10 @@ class ProjectActivityTest extends Base
 
     public function testFetchAllContent()
     {
-        $e = new ProjectActivity($this->registry);
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $e = new ProjectActivity($this->container);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
@@ -62,10 +62,10 @@ class ProjectActivityTest extends Base
 
     public function testCleanup()
     {
-        $e = new ProjectActivity($this->registry);
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $e = new ProjectActivity($this->container);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
@@ -77,7 +77,7 @@ class ProjectActivityTest extends Base
             $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $tf->getbyId(1))));
         }
 
-        $this->assertEquals($nb_events, $this->registry->shared('db')->table('project_activities')->count());
+        $this->assertEquals($nb_events, $this->container['db']->table('project_activities')->count());
         $e->cleanup($max);
 
         $events = $e->getProject(1);
@@ -97,6 +97,6 @@ class ProjectActivityTest extends Base
             $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $tf->getbyId(1))));
         }
 
-        $this->assertEquals(ProjectActivity::MAX_EVENTS, $this->registry->shared('db')->table('project_activities')->count());
+        $this->assertEquals(ProjectActivity::MAX_EVENTS, $this->container['db']->table('project_activities')->count());
     }
 }

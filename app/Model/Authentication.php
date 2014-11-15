@@ -24,12 +24,12 @@ class Authentication extends Base
      */
     public function backend($name)
     {
-        if (! isset($this->registry->$name)) {
+        if (! isset($this->container[$name])) {
             $class = '\Auth\\'.ucfirst($name);
-            $this->registry->$name = new $class($this->registry);
+            $this->container[$name] = new $class($this->container);
         }
 
-        return $this->registry->shared($name);
+        return $this->container[$name];
     }
 
     /**

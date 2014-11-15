@@ -18,23 +18,23 @@ use Model\Action;
 use Model\Webhook;
 use Model\Notification;
 
-$config = new Config($registry);
+$config = new Config($container);
 $config->setupTranslations();
 $config->setupTimezone();
 
-$project = new Project($registry);
-$projectPermission = new ProjectPermission($registry);
-$task = new Task($registry);
-$taskFinder = new TaskFinder($registry);
-$taskValidator = new TaskValidator($registry);
-$user = new User($registry);
-$category = new Category($registry);
-$comment = new Comment($registry);
-$subtask = new SubTask($registry);
-$board = new Board($registry);
-$action = new Action($registry);
-$webhook = new Webhook($registry);
-$notification = new Notification($registry);
+$project = new Project($container);
+$projectPermission = new ProjectPermission($container);
+$task = new Task($container);
+$taskFinder = new TaskFinder($container);
+$taskValidator = new TaskValidator($container);
+$user = new User($container);
+$category = new Category($container);
+$comment = new Comment($container);
+$subtask = new SubTask($container);
+$board = new Board($container);
+$action = new Action($container);
+$webhook = new Webhook($container);
+$notification = new Notification($container);
 
 $action->attachEvents();
 $project->attachEvents();

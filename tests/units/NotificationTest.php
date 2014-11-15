@@ -11,10 +11,10 @@ class NotificationTest extends Base
 {
     public function testGetUsersWithNotification()
     {
-        $u = new User($this->registry);
-        $p = new Project($this->registry);
-        $n = new Notification($this->registry);
-        $pp = new ProjectPermission($this->registry);
+        $u = new User($this->container);
+        $p = new Project($this->container);
+        $n = new Notification($this->container);
+        $pp = new ProjectPermission($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
@@ -51,10 +51,10 @@ class NotificationTest extends Base
 
     public function testGetUserList()
     {
-        $u = new User($this->registry);
-        $p = new Project($this->registry);
-        $pp = new ProjectPermission($this->registry);
-        $n = new Notification($this->registry);
+        $u = new User($this->container);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $n = new Notification($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));

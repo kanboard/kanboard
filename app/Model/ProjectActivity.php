@@ -147,7 +147,7 @@ class ProjectActivity extends Base
             SubTask::EVENT_CREATE,
         );
 
-        $listener = new ProjectActivityListener($this->registry);
+        $listener = new ProjectActivityListener($this->container);
 
         foreach ($events as $event_name) {
             $this->event->attach($event_name, $listener);

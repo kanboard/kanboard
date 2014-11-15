@@ -12,11 +12,11 @@ class TimeTrackingTest extends Base
 {
     public function testCalculateTime()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
-        $s = new SubTask($this->registry);
-        $ts = new TimeTracking($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $s = new SubTask($this->container);
+        $ts = new TimeTracking($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'time_estimated' => 4.5)));

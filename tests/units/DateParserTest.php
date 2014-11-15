@@ -8,7 +8,7 @@ class DateParserTest extends Base
 {
     public function testValidDate()
     {
-        $d = new DateParser($this->registry);
+        $d = new DateParser($this->container);
 
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getValidDate('2014-03-05', 'Y-m-d')));
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getValidDate('2014_03_05', 'Y_m_d')));
@@ -23,7 +23,7 @@ class DateParserTest extends Base
 
     public function testGetTimestamp()
     {
-        $d = new DateParser($this->registry);
+        $d = new DateParser($this->container);
 
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getTimestamp('2014-03-05')));
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getTimestamp('2014_03_05')));

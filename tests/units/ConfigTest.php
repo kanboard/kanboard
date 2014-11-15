@@ -8,7 +8,7 @@ class ConfigTest extends Base
 {
     public function testDefaultValues()
     {
-        $c = new Config($this->registry);
+        $c = new Config($this->container);
 
         $this->assertEquals('en_US', $c->get('application_language'));
         $this->assertEquals('UTC', $c->get('application_timezone'));
@@ -23,7 +23,7 @@ class ConfigTest extends Base
 
     public function testGet()
     {
-        $c = new Config($this->registry);
+        $c = new Config($this->container);
 
         $this->assertEquals('', $c->get('board_columns'));
         $this->assertEquals('test', $c->get('board_columns', 'test'));

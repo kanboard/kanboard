@@ -2,8 +2,8 @@
 
 namespace Event;
 
+use Pimple\Container;
 use Core\Listener;
-use Core\Registry;
 use Core\Tool;
 
 /**
@@ -25,19 +25,19 @@ abstract class Base implements Listener
      * Registry instance
      *
      * @access protected
-     * @var \Core\Registry
+     * @var Pimple\Container
      */
-    protected $registry;
+    protected $container;
 
     /**
      * Constructor
      *
      * @access public
-     * @param  \Core\Registry     $registry     Regsitry instance
+     * @param  Pimple\Container    $container
      */
-    public function __construct(Registry $registry)
+    public function __construct(Container $container)
     {
-        $this->registry = $registry;
+        $this->container = $container;
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class Base implements Listener
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->registry, $name);
+        return Tool::loadModel($this->container, $name);
     }
 
     /**
@@ -73,7 +73,7 @@ abstract class Base implements Listener
      */
     public function getEventNamespace()
     {
-        $event_name = $this->registry->event->getLastTriggeredEvent();
+        $event_name = $this->container['event']->getLastTriggeredEvent();
         return substr($event_name, 0, strpos($event_name, '.'));
     }
 }

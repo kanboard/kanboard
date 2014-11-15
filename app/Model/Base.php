@@ -4,7 +4,7 @@ namespace Model;
 
 use Core\Event;
 use Core\Tool;
-use Core\Registry;
+use Pimple\Container;
 use PicoDb\Database;
 
 /**
@@ -58,24 +58,24 @@ abstract class Base
     public $event;
 
     /**
-     * Registry instance
+     * Container instance
      *
      * @access protected
-     * @var \Core\Registry
+     * @var Pimple\Container
      */
-    protected $registry;
+    protected $container;
 
     /**
      * Constructor
      *
      * @access public
-     * @param  \Core\Registry  $registry  Registry instance
+     * @param  Pimple\Container   $container
      */
-    public function __construct(Registry $registry)
+    public function __construct(Container $container)
     {
-        $this->registry = $registry;
-        $this->db = $this->registry->shared('db');
-        $this->event = $this->registry->shared('event');
+        $this->container = $container;
+        $this->db = $this->container['db'];
+        $this->event = $this->container['event'];
     }
 
     /**
@@ -87,7 +87,7 @@ abstract class Base
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->registry, $name);
+        return Tool::loadModel($this->container, $name);
     }
 
     /**

@@ -8,7 +8,7 @@ namespace Helper;
  */
 use Core\Security;
 use Core\Template;
-use Core\Tool;
+use Core\Request;
 use Parsedown;
 
 /**
@@ -142,7 +142,7 @@ function markdown($text, array $link = array('controller' => 'task', 'action' =>
  */
 function get_current_base_url()
 {
-    $url = Tool::isHTTPS() ? 'https://' : 'http://';
+    $url = Request::isHTTPS() ? 'https://' : 'http://';
     $url .= $_SERVER['SERVER_NAME'];
     $url .= $_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443 ? '' : ':'.$_SERVER['SERVER_PORT'];
     $url .= dirname($_SERVER['PHP_SELF']) !== '/' ? dirname($_SERVER['PHP_SELF']).'/' : '/';

@@ -11,7 +11,7 @@ use Model\TaskFinder;
 use Model\TaskExport;
 use Model\Notification;
 
-$config = new Config($registry);
+$config = new Config($container);
 $config->setupTranslations();
 $config->setupTimezone();
 
@@ -26,7 +26,7 @@ $cli->register('help', function() {
 });
 
 // CSV Export
-$cli->register('export-csv', function() use ($cli, $registry) {
+$cli->register('export-csv', function() use ($cli, $container) {
 
     if ($GLOBALS['argc'] !== 5) {
         $cli->call($cli->default_command);
@@ -36,7 +36,7 @@ $cli->register('export-csv', function() use ($cli, $registry) {
     $start_date = $GLOBALS['argv'][3];
     $end_date = $GLOBALS['argv'][4];
 
-    $taskExport = new TaskExport($registry);
+    $taskExport = new TaskExport($container);
     $data = $taskExport->export($project_id, $start_date, $end_date);
 
     if (is_array($data)) {
@@ -45,10 +45,10 @@ $cli->register('export-csv', function() use ($cli, $registry) {
 });
 
 // Send notification for tasks due
-$cli->register('send-notifications-due-tasks', function() use ($cli, $registry) {
+$cli->register('send-notifications-due-tasks', function() use ($cli, $container) {
 
-    $notificationModel = new Notification($registry);
-    $taskModel = new TaskFinder($registry);
+    $notificationModel = new Notification($container);
+    $taskModel = new TaskFinder($container);
     $tasks = $taskModel->getOverdueTasks();
 
     // Group tasks by project

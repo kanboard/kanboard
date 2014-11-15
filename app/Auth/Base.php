@@ -3,7 +3,7 @@
 namespace Auth;
 
 use Core\Tool;
-use Core\Registry;
+use Pimple\Container;
 
 /**
  * Base auth class
@@ -26,34 +26,34 @@ abstract class Base
     protected $db;
 
     /**
-     * Registry instance
+     * Container instance
      *
      * @access protected
-     * @var \Core\Registry
+     * @var Pimple\Container
      */
-    protected $registry;
+    protected $container;
 
     /**
      * Constructor
      *
      * @access public
-     * @param  \Core\Registry  $registry  Registry instance
+     * @param  Pimple\Container    $container
      */
-    public function __construct(Registry $registry)
+    public function __construct(Container $container)
     {
-        $this->registry = $registry;
-        $this->db = $this->registry->shared('db');
+        $this->container = $container;
+        $this->db = $this->container['db'];
     }
 
     /**
      * Load automatically models
      *
      * @access public
-     * @param  string $name Model name
+     * @param  string     $name    Model name
      * @return mixed
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->registry, $name);
+        return Tool::loadModel($this->container, $name);
     }
 }

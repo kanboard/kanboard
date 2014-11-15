@@ -10,7 +10,7 @@ class ActionTaskAssignColorUser extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignColorUser($this->registry, 3, Task::EVENT_CREATE);
+        $action = new Action\TaskAssignColorUser($this->container, 3, Task::EVENT_CREATE);
 
         $event = array(
             'project_id' => 2,
@@ -24,14 +24,14 @@ class ActionTaskAssignColorUser extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignColorUser($this->registry, 1, Task::EVENT_ASSIGNEE_CHANGE);
+        $action = new Action\TaskAssignColorUser($this->container, 1, Task::EVENT_ASSIGNEE_CHANGE);
         $action->setParam('user_id', 1);
         $action->setParam('color_id', 'blue');
 
         // We create a task in the first column
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'color_id' => 'green')));
 

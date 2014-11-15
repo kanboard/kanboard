@@ -49,7 +49,7 @@ class Session
             self::SESSION_LIFETIME,
             $base_path ?: '/',
             null,
-            Tool::isHTTPS(),
+            Request::isHTTPS(),
             true
         );
 

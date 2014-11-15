@@ -546,7 +546,7 @@ class Project extends Base
             GithubWebhook::EVENT_COMMIT,
         );
 
-        $listener = new ProjectModificationDateListener($this->registry);
+        $listener = new ProjectModificationDateListener($this->container);
 
         foreach ($events as $event_name) {
             $this->event->attach($event_name, $listener);

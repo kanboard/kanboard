@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Pimple\Container;
 use Core\Tool;
 use Core\Registry;
 use Core\Security;
@@ -75,34 +76,34 @@ abstract class Base
     public $session;
 
     /**
-     * Registry instance
+     * Container instance
      *
      * @access private
-     * @var \Core\Registry
+     * @var Pimple\Container
      */
-    private $registry;
+    private $container;
 
     /**
      * Constructor
      *
      * @access public
-     * @param  \Core\Registry  $registry   Registry instance
+     * @param  Pimple\Container   $container
      */
-    public function __construct(Registry $registry)
+    public function __construct(Container $container)
     {
-        $this->registry = $registry;
+        $this->container = $container;
     }
 
     /**
      * Load automatically models
      *
      * @access public
-     * @param  string $name Model name
+     * @param  string    $name    Model name
      * @return mixed
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->registry, $name);
+        return Tool::loadModel($this->container, $name);
     }
 
     /**

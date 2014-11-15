@@ -10,7 +10,7 @@ class ActionTaskMoveAnotherProject extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskMoveAnotherProject($this->registry, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new Action\TaskMoveAnotherProject($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -25,7 +25,7 @@ class ActionTaskMoveAnotherProject extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskMoveAnotherProject($this->registry, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new Action\TaskMoveAnotherProject($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -39,12 +39,12 @@ class ActionTaskMoveAnotherProject extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskMoveAnotherProject($this->registry, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new Action\TaskMoveAnotherProject($this->container, 1, Task::EVENT_MOVE_COLUMN);
 
         // We create a task in the first column
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
         $this->assertEquals(1, $p->create(array('name' => 'project 1')));
         $this->assertEquals(2, $p->create(array('name' => 'project 2')));
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));

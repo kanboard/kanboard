@@ -20,7 +20,7 @@ class UserTest extends Base
 
     public function testPrepare()
     {
-        $u = new User($this->registry);
+        $u = new User($this->container);
 
         $input = array(
             'username' => 'user1',
@@ -71,7 +71,7 @@ class UserTest extends Base
 
     public function testCreate()
     {
-        $u = new User($this->registry);
+        $u = new User($this->container);
         $this->assertTrue($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertTrue($u->create(array('username' => 'titi', 'is_ldap_user' => 1)));
         $this->assertFalse($u->create(array('username' => 'toto')));
@@ -103,7 +103,7 @@ class UserTest extends Base
 
     public function testUpdate()
     {
-        $u = new User($this->registry);
+        $u = new User($this->container);
         $this->assertTrue($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertTrue($u->update(array('id' => 2, 'username' => 'biloute')));
 
@@ -118,10 +118,10 @@ class UserTest extends Base
 
     public function testRemove()
     {
-        $u = new User($this->registry);
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $u = new User($this->container);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertTrue($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));

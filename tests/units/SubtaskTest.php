@@ -12,9 +12,9 @@ class SubTaskTest extends Base
 {
     public function testDuplicate()
     {
-        $t = new Task($this->registry);
-        $s = new SubTask($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $s = new SubTask($this->container);
+        $p = new Project($this->container);
 
         // We create a project
         $this->assertEquals(1, $p->create(array('name' => 'test1')));

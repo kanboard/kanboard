@@ -13,9 +13,9 @@ class TaskTest extends Base
 {
     public function testPrepareCreation()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
 
@@ -92,9 +92,9 @@ class TaskTest extends Base
 
     public function testPrepareModification()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
 
@@ -112,9 +112,9 @@ class TaskTest extends Base
 
     public function testCreation()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
@@ -150,9 +150,9 @@ class TaskTest extends Base
 
     public function testRemove()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
@@ -163,9 +163,9 @@ class TaskTest extends Base
 
     public function testMoveTaskWithColumnThatNotChange()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
 
@@ -225,16 +225,16 @@ class TaskTest extends Base
 
     public function testMoveTaskWithBadPreviousPosition()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $this->registry->shared('db')->table('tasks')->insert(array('title' => 'A', 'column_id' => 1, 'project_id' => 1, 'position' => 1)));
+        $this->assertEquals(1, $this->container['db']->table('tasks')->insert(array('title' => 'A', 'column_id' => 1, 'project_id' => 1, 'position' => 1)));
 
         // Both tasks have the same position
-        $this->assertEquals(2, $this->registry->shared('db')->table('tasks')->insert(array('title' => 'B', 'column_id' => 2, 'project_id' => 1, 'position' => 1)));
-        $this->assertEquals(3, $this->registry->shared('db')->table('tasks')->insert(array('title' => 'C', 'column_id' => 2, 'project_id' => 1, 'position' => 1)));
+        $this->assertEquals(2, $this->container['db']->table('tasks')->insert(array('title' => 'B', 'column_id' => 2, 'project_id' => 1, 'position' => 1)));
+        $this->assertEquals(3, $this->container['db']->table('tasks')->insert(array('title' => 'C', 'column_id' => 2, 'project_id' => 1, 'position' => 1)));
 
         // Move the first column to the last position of the 2nd column
         $this->assertTrue($t->movePosition(1, 1, 2, 3));
@@ -258,9 +258,9 @@ class TaskTest extends Base
 
     public function testMoveTaskTop()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
@@ -295,9 +295,9 @@ class TaskTest extends Base
 
     public function testMoveTaskBottom()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
@@ -332,9 +332,9 @@ class TaskTest extends Base
 
     public function testMovePosition()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $counter = 1;
@@ -487,10 +487,10 @@ class TaskTest extends Base
 
     public function testDuplicateToTheSameProject()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
-        $c = new Category($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $c = new Category($this->container);
 
         // We create a task and a project
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
@@ -509,7 +509,7 @@ class TaskTest extends Base
 
         // We duplicate our task
         $this->assertEquals(2, $t->duplicateToSameProject($task));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CREATE));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
         $task = $tf->getById(2);
@@ -524,10 +524,10 @@ class TaskTest extends Base
 
     public function testDuplicateToAnotherProject()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
-        $c = new Category($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $c = new Category($this->container);
 
         // We create 2 projects
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
@@ -542,7 +542,7 @@ class TaskTest extends Base
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $t->duplicateToAnotherProject(2, $task));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CREATE));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
         $task = $tf->getById(2);
@@ -557,11 +557,11 @@ class TaskTest extends Base
 
     public function testMoveToAnotherProject()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
-        $pp = new ProjectPermission($this->registry);
-        $user = new User($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $user = new User($this->container);
 
         // We create a regular user
         $user->create(array('username' => 'unittest1', 'password' => 'unittest'));
@@ -578,7 +578,7 @@ class TaskTest extends Base
         // We duplicate our task to the 2nd project
         $task = $tf->getById(1);
         $this->assertEquals(1, $t->moveToAnotherProject(2, $task));
-        //$this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CREATE));
+        //$this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
 
         // Check the values of the duplicated task
         $task = $tf->getById(1);
@@ -604,44 +604,44 @@ class TaskTest extends Base
 
     public function testEvents()
     {
-        $t = new Task($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $p = new Project($this->container);
 
         // We create a project
         $this->assertEquals(1, $p->create(array('name' => 'test')));
 
         // We create task
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CREATE));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
 
         // We update a task
         $this->assertTrue($t->update(array('title' => 'test2', 'id' => 1)));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_UPDATE));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CREATE_UPDATE));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_UPDATE));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
 
         // We close our task
         $this->assertTrue($t->close(1));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_CLOSE));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CLOSE));
 
         // We open our task
         $this->assertTrue($t->open(1));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_OPEN));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_OPEN));
 
         // We change the column of our task
         $this->assertTrue($t->movePosition(1, 1, 2, 1));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // We change the position of our task
         $this->assertEquals(2, $t->create(array('title' => 'test 2', 'project_id' => 1, 'column_id' => 2)));
         $this->assertTrue($t->movePosition(1, 1, 2, 2));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_POSITION));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
         // We change the column and the position of our task
         $this->assertTrue($t->movePosition(1, 1, 1, 1));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_MOVE_COLUMN));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // We change the assignee
         $this->assertTrue($t->update(array('owner_id' => 1, 'id' => 1)));
-        $this->assertTrue($this->registry->shared('event')->isEventTriggered(Task::EVENT_ASSIGNEE_CHANGE));
+        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_ASSIGNEE_CHANGE));
     }
 }

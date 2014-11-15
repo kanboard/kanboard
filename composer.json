@@ -6,7 +6,9 @@
         "fguillot/json-rpc": "dev-master",
         "fguillot/picodb": "dev-master",
         "erusev/parsedown": "1.1.1",
-        "lusitanian/oauth": "0.3.5"
+        "lusitanian/oauth": "0.3.5",
+        "pimple/pimple": "~3.0",
+        "monolog/monolog": "1.11.0"
     },
     "autoload": {
         "psr-0": {"": "app/"},

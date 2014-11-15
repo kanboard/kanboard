@@ -11,7 +11,7 @@ class ActionTaskAssignColorCategory extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignColorCategory($this->registry, 3, Task::EVENT_CREATE_UPDATE);
+        $action = new Action\TaskAssignColorCategory($this->container, 3, Task::EVENT_CREATE_UPDATE);
 
         $event = array(
             'project_id' => 2,
@@ -25,15 +25,15 @@ class ActionTaskAssignColorCategory extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignColorCategory($this->registry, 1, Task::EVENT_CREATE_UPDATE);
+        $action = new Action\TaskAssignColorCategory($this->container, 1, Task::EVENT_CREATE_UPDATE);
         $action->setParam('category_id', 1);
         $action->setParam('color_id', 'blue');
 
         // We create a task in the first column
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
-        $c = new Category($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $c = new Category($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $c->create(array('name' => 'c1')));

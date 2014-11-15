@@ -246,7 +246,7 @@ class Response
      */
     public function hsts()
     {
-        if (Tool::isHTTPS()) {
+        if (Request::isHTTPS()) {
             header('Strict-Transport-Security: max-age=31536000');
         }
     }

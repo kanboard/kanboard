@@ -10,7 +10,7 @@ class ActionTaskAssignSpecificUser extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignSpecificUser($this->registry, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new Action\TaskAssignSpecificUser($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -25,7 +25,7 @@ class ActionTaskAssignSpecificUser extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskAssignSpecificUser($this->registry, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new Action\TaskAssignSpecificUser($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -39,14 +39,14 @@ class ActionTaskAssignSpecificUser extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignSpecificUser($this->registry, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new Action\TaskAssignSpecificUser($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $action->setParam('user_id', 1);
 
         // We create a task in the first column
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
 

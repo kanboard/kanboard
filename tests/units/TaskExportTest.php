@@ -12,10 +12,10 @@ class TaskExportTest extends Base
 {
     public function testExport()
     {
-        $t = new Task($this->registry);
-        $p = new Project($this->registry);
-        $c = new Category($this->registry);
-        $e = new TaskExport($this->registry);
+        $t = new Task($this->container);
+        $p = new Project($this->container);
+        $c = new Category($this->container);
+        $e = new TaskExport($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Export Project')));
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));

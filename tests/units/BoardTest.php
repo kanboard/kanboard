@@ -10,9 +10,9 @@ class BoardTest extends Base
 {
     public function testCreation()
     {
-        $p = new Project($this->registry);
-        $b = new Board($this->registry);
-        $c = new Config($this->registry);
+        $p = new Project($this->container);
+        $b = new Board($this->container);
+        $c = new Config($this->container);
 
         // Default columns
 
@@ -43,8 +43,8 @@ class BoardTest extends Base
 
     public function testGetBoard()
     {
-        $p = new Project($this->registry);
-        $b = new Board($this->registry);
+        $p = new Project($this->container);
+        $b = new Board($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
@@ -57,8 +57,8 @@ class BoardTest extends Base
 
     public function testGetColumn()
     {
-        $p = new Project($this->registry);
-        $b = new Board($this->registry);
+        $p = new Project($this->container);
+        $b = new Board($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
@@ -72,8 +72,8 @@ class BoardTest extends Base
 
     public function testRemoveColumn()
     {
-        $p = new Project($this->registry);
-        $b = new Board($this->registry);
+        $p = new Project($this->container);
+        $b = new Board($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
         $this->assertTrue($b->removeColumn(3));
@@ -86,8 +86,8 @@ class BoardTest extends Base
 
     public function testUpdateColumn()
     {
-        $p = new Project($this->registry);
-        $b = new Board($this->registry);
+        $p = new Project($this->container);
+        $b = new Board($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
@@ -107,8 +107,8 @@ class BoardTest extends Base
 
     public function testAddColumn()
     {
-        $p = new Project($this->registry);
-        $b = new Board($this->registry);
+        $p = new Project($this->container);
+        $b = new Board($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
         $this->assertTrue($b->addColumn(1, 'another column'));
@@ -129,8 +129,8 @@ class BoardTest extends Base
 
     public function testMoveColumns()
     {
-        $p = new Project($this->registry);
-        $b = new Board($this->registry);
+        $p = new Project($this->container);
+        $b = new Board($this->container);
 
         // We create 2 projects
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));

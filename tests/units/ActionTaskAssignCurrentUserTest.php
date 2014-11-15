@@ -11,7 +11,7 @@ class ActionTaskAssignCurrentUser extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignCurrentUser($this->registry, 3, Task::EVENT_CREATE);
+        $action = new Action\TaskAssignCurrentUser($this->container, 3, Task::EVENT_CREATE);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -26,7 +26,7 @@ class ActionTaskAssignCurrentUser extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskAssignCurrentUser($this->registry, 3, Task::EVENT_CREATE);
+        $action = new Action\TaskAssignCurrentUser($this->container, 3, Task::EVENT_CREATE);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -40,17 +40,17 @@ class ActionTaskAssignCurrentUser extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignCurrentUser($this->registry, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new Action\TaskAssignCurrentUser($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $_SESSION = array(
             'user' => array('id' => 5)
         );
 
         // We create a task in the first column
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $p = new Project($this->registry);
-        $a = new Acl($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $a = new Acl($this->container);
 
         $this->assertEquals(5, $a->getUserId());
         $this->assertEquals(1, $p->create(array('name' => 'test')));

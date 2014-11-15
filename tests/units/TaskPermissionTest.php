@@ -13,11 +13,11 @@ class TaskPermissionTest extends Base
 {
     public function testPrepareCreation()
     {
-        $t = new Task($this->registry);
-        $tf = new TaskFinder($this->registry);
-        $tp = new TaskPermission($this->registry);
-        $p = new Project($this->registry);
-        $u = new User($this->registry);
+        $t = new Task($this->container);
+        $tf = new TaskFinder($this->container);
+        $tp = new TaskPermission($this->container);
+        $p = new Project($this->container);
+        $u = new User($this->container);
 
         $this->assertTrue($u->create(array('username' => 'toto', 'password' => '123456')));
         $this->assertTrue($u->create(array('username' => 'toto2', 'password' => '123456')));

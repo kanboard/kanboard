@@ -125,6 +125,20 @@ class Request
     }
 
     /**
+     * Check if the page is requested through HTTPS
+     *
+     * Note: IIS return the value 'off' and other web servers an empty value when it's not HTTPS
+     *
+     * @static
+     * @access public
+     * @return boolean
+     */
+    public static function isHTTPS()
+    {
+        return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== '' && $_SERVER['HTTPS'] !== 'off';
+    }
+
+    /**
      * Return a HTTP header value
      *
      * @access public

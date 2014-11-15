@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Pimple\Container;
+
 /**
  * Router class
  *
@@ -27,24 +29,24 @@ class Router
     private $action = '';
 
     /**
-     * Registry instance
+     * Container instance
      *
      * @access private
-     * @var \Core\Registry
+     * @var Pimple\Container
      */
-    private $registry;
+    private $container;
 
     /**
      * Constructor
      *
      * @access public
-     * @param  Registry        $registry     Registry instance
-     * @param  string          $controller   Controller name
-     * @param  string          $action       Action name
+     * @param  Pimple\Container   $container     Container instance
+     * @param  string             $controller   Controller name
+     * @param  string             $action       Action name
      */
-    public function __construct(Registry $registry, $controller = '', $action = '')
+    public function __construct(Container $container, $controller = '', $action = '')
     {
-        $this->registry = $registry;
+        $this->container = $container;
         $this->controller = empty($_GET['controller']) ? $controller : $_GET['controller'];
         $this->action = empty($_GET['action']) ? $action : $_GET['action'];
     }
@@ -81,7 +83,7 @@ class Router
                 return false;
             }
 
-            $instance = new $class($this->registry);
+            $instance = new $class($this->container);
             $instance->request = new Request;
             $instance->response = new Response;
             $instance->session = new Session;

@@ -264,7 +264,7 @@ class Action extends Base
     public function load($name, $project_id, $event)
     {
         $className = '\Action\\'.$name;
-        return new $className($this->registry, $project_id, $event);
+        return new $className($this->container, $project_id, $event);
     }
 
     /**

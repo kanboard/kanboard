@@ -10,12 +10,12 @@ class ProjectPermissionTest extends Base
 {
     public function testAllowEverybody()
     {
-        $user = new User($this->registry);
+        $user = new User($this->container);
         $this->assertTrue($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
         $this->assertTrue($user->create(array('username' => 'unittest#2', 'password' => 'unittest')));
 
-        $p = new Project($this->registry);
-        $pp = new ProjectPermission($this->registry);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertFalse($pp->isEverybodyAllowed(1));
@@ -37,11 +37,11 @@ class ProjectPermissionTest extends Base
     public function testDisallowEverybody()
     {
         // We create a regular user
-        $user = new User($this->registry);
+        $user = new User($this->container);
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
-        $p = new Project($this->registry);
-        $pp = new ProjectPermission($this->registry);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
@@ -52,9 +52,9 @@ class ProjectPermissionTest extends Base
 
     public function testAllowUser()
     {
-        $p = new Project($this->registry);
-        $pp = new ProjectPermission($this->registry);
-        $user = new User($this->registry);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $user = new User($this->container);
 
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
@@ -79,9 +79,9 @@ class ProjectPermissionTest extends Base
 
     public function testRevokeUser()
     {
-        $p = new Project($this->registry);
-        $pp = new ProjectPermission($this->registry);
-        $user = new User($this->registry);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $user = new User($this->container);
 
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
@@ -135,10 +135,10 @@ class ProjectPermissionTest extends Base
 
     public function testUsersList()
     {
-        $p = new Project($this->registry);
-        $pp = new ProjectPermission($this->registry);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
 
-        $user = new User($this->registry);
+        $user = new User($this->container);
         $user->create(array('username' => 'unittest', 'password' => 'unittest'));
 
         // We create project

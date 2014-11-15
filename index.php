@@ -5,5 +5,5 @@ require __DIR__.'/app/common.php';
 
 use Core\Router;
 
-$router = new Router($registry);
+$router = new Router($container);
 $router->execute();

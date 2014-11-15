@@ -27,7 +27,7 @@ class ProjectActivityListener extends Base
                 $values['task']['project_id'],
                 $values['task']['id'],
                 $this->acl->getUserId(),
-                $this->registry->event->getLastTriggeredEvent(),
+                $this->container['event']->getLastTriggeredEvent(),
                 $values
             );
         }

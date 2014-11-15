@@ -2,8 +2,8 @@
 
 namespace Action;
 
+use Pimple\Container;
 use Core\Listener;
-use Core\Registry;
 use Core\Tool;
 
 /**
@@ -44,12 +44,12 @@ abstract class Base implements Listener
     protected $event_name = '';
 
     /**
-     * Registry instance
+     * Container instance
      *
      * @access protected
-     * @var \Core\Registry
+     * @var Pimple\Container
      */
-    protected $registry;
+    protected $container;
 
     /**
      * Execute the action
@@ -101,13 +101,13 @@ abstract class Base implements Listener
      * Constructor
      *
      * @access public
-     * @param  \Core\Registry   $registry         Regsitry instance
-     * @param  integer          $project_id       Project id
-     * @param  string           $event_name       Attached event name
+     * @param  Pimple\Container   $container        Container
+     * @param  integer            $project_id       Project id
+     * @param  string             $event_name       Attached event name
      */
-    public function __construct(Registry $registry, $project_id, $event_name)
+    public function __construct(Container $container, $project_id, $event_name)
     {
-        $this->registry = $registry;
+        $this->container = $container;
         $this->project_id = $project_id;
         $this->event_name = $event_name;
     }
@@ -132,7 +132,7 @@ abstract class Base implements Listener
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->registry, $name);
+        return Tool::loadModel($this->container, $name);
     }
 
     /**
