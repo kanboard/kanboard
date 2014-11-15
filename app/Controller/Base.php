@@ -4,8 +4,11 @@ namespace Controller;
 
 use Pimple\Container;
 use Core\Tool;
-use Core\Registry;
 use Core\Security;
+use Core\Request;
+use Core\Response;
+use Core\Template;
+use Core\Session;
 use Model\LastLogin;
 
 /**
@@ -46,34 +49,34 @@ abstract class Base
     /**
      * Request instance
      *
-     * @accesss public
-     * @var \Core\Request
+     * @accesss protected
+     * @var Core\Request
      */
-    public $request;
+    protected $request;
 
     /**
      * Response instance
      *
-     * @accesss public
-     * @var \Core\Response
+     * @accesss protected
+     * @var Core\Response
      */
-    public $response;
+    protected $response;
 
     /**
      * Template instance
      *
-     * @accesss public
-     * @var \Core\Template
+     * @accesss protected
+     * @var Core\Template
      */
-    public $template;
+    protected $template;
 
     /**
      * Session instance
      *
      * @accesss public
-     * @var \Core\Session
+     * @var Core\Session
      */
-    public $session;
+    protected $session;
 
     /**
      * Container instance
@@ -92,6 +95,10 @@ abstract class Base
     public function __construct(Container $container)
     {
         $this->container = $container;
+        $this->request = new Request;
+        $this->response = new Response;
+        $this->session = new Session;
+        $this->template = new Template;
     }
 
     /**

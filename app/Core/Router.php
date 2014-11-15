@@ -84,10 +84,6 @@ class Router
             }
 
             $instance = new $class($this->container);
-            $instance->request = new Request;
-            $instance->response = new Response;
-            $instance->session = new Session;
-            $instance->template = new Template;
             $instance->beforeAction($this->controller, $this->action);
             $instance->$method();
 

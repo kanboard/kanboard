@@ -22,7 +22,7 @@ use Core\Tool;
 abstract class Base implements Listener
 {
     /**
-     * Registry instance
+     * Container instance
      *
      * @access protected
      * @var Pimple\Container
