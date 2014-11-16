@@ -161,9 +161,7 @@ abstract class Base
         }
 
         // Attach events
-        if ($controller === 'board') {
-            $this->attachEvents();
-        }
+        $this->attachEvents();
     }
 
     /**
