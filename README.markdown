@@ -152,6 +152,7 @@ Contributors:
 - [Gavlepeter](https://github.com/gavlepeter)
 - [Janne Mäntyharju](https://github.com/JanneMantyharju)
 - [Jesusaplsoft](https://github.com/jesusaplsoft)
+- [Karol J](https://github.com/dzudek)
 - [Kiswa](https://github.com/kiswa)
 - [Kralo](https://github.com/kralo)
 - [Lars Christian Schou](https://github.com/NegoZiatoR)
