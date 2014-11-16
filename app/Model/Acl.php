@@ -32,7 +32,7 @@ class Acl extends Base
      */
     private $user_actions = array(
         'app' => array('index'),
-        'board' => array('index', 'show', 'save', 'check', 'changeassignee', 'updateassignee', 'changecategory', 'updatecategory', 'movecolumn', 'edit', 'update', 'add', 'confirm', 'remove'),
+        'board' => array('index', 'show', 'save', 'check', 'changeassignee', 'updateassignee', 'changecategory', 'updatecategory', 'movecolumn', 'edit', 'update', 'add', 'confirm', 'remove', 'getsubtasks', 'togglesubtask', 'getattachments', 'getcomments'),
         'project' => array('index', 'show', 'export', 'share', 'edit', 'update', 'users', 'remove', 'duplicate', 'disable', 'enable', 'activity', 'search', 'tasks', 'create', 'save'),
         'user' => array('edit', 'forbidden', 'logout', 'show', 'external', 'unlinkgoogle', 'unlinkgithub', 'sessions', 'removesession', 'last', 'notifications', 'password'),
         'comment' => array('create', 'save', 'confirm', 'remove', 'update', 'edit', 'forbidden'),

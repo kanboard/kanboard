@@ -33,6 +33,14 @@
     border-bottom: 1px dotted #aaa;
 }
 
+.ui-tooltip .comment-title {
+    font-size: 80%;
+}
+
+.ui-tooltip .comment-inner {
+    padding-bottom: 0;
+}
+
 .comment-actions {
     font-size: 0.8em;
     padding: 0;
