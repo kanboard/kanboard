@@ -17,6 +17,7 @@ body {
 body {
     margin-left: 10px;
     margin-right: 10px;
+    padding-bottom: 20px;
     color: #333;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

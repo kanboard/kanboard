@@ -618,8 +618,8 @@ function paginate(array $pagination)
 {
     extract($pagination);
 
-    $html = '<div id="pagination">';
-    $html .= '<span id="pagination-previous">';
+    $html = '<div class="pagination">';
+    $html .= '<span class="pagination-previous">';
 
     if ($pagination['offset'] > 0) {
         $offset = $pagination['offset'] - $limit;
@@ -630,7 +630,7 @@ function paginate(array $pagination)
     }
 
     $html .= '</span>';
-    $html .= '<span id="pagination-next">';
+    $html .= '<span class="pagination-next">';
 
     if (($total - $pagination['offset']) > $limit) {
         $offset = $pagination['offset'] + $limit;

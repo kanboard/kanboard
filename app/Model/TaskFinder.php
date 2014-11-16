@@ -15,10 +15,10 @@ class TaskFinder extends Base
     /**
      * Common request to fetch a list of tasks
      *
-     * @access private
+     * @access public
      * @return \PicoDb\Table
      */
-    private function prepareRequestList()
+    public function getQuery()
     {
         return $this->db
             ->table(Task::TABLE)
@@ -51,51 +51,6 @@ class TaskFinder extends Base
     }
 
     /**
-     * Task search with pagination
-     *
-     * @access public
-     * @param  integer    $project_id    Project id
-     * @param  string     $search        Search terms
-     * @param  integer    $offset        Offset
-     * @param  integer    $limit         Limit
-     * @param  string     $column        Sorting column
-     * @param  string     $direction     Sorting direction
-     * @return array
-     */
-    public function search($project_id, $search, $offset = 0, $limit = 25, $column = 'tasks.id', $direction = 'DESC')
-    {
-        return $this->prepareRequestList()
-                    ->eq('project_id', $project_id)
-                    ->like('title', '%'.$search.'%')
-                    ->offset($offset)
-                    ->limit($limit)
-                    ->orderBy($column, $direction)
-                    ->findAll();
-    }
-
-    /**
-     * Get all completed tasks with pagination
-     *
-     * @access public
-     * @param  integer    $project_id    Project id
-     * @param  integer    $offset        Offset
-     * @param  integer    $limit         Limit
-     * @param  string     $column        Sorting column
-     * @param  string     $direction     Sorting direction
-     * @return array
-     */
-    public function getClosedTasks($project_id, $offset = 0, $limit = 25, $column = 'tasks.date_completed', $direction = 'DESC')
-    {
-        return $this->prepareRequestList()
-                    ->eq('project_id', $project_id)
-                    ->eq('is_active', Task::STATUS_CLOSED)
-                    ->offset($offset)
-                    ->limit($limit)
-                    ->orderBy($column, $direction)
-                    ->findAll();
-    }
-
-    /**
      * Get all tasks shown on the board (sorted by position)
      *
      * @access public
@@ -104,37 +59,10 @@ class TaskFinder extends Base
      */
     public function getTasksOnBoard($project_id)
     {
-        return $this->prepareRequestList()
+        return $this->getQuery()
                     ->eq('project_id', $project_id)
                     ->eq('is_active', Task::STATUS_OPEN)
                     ->asc('tasks.position')
-                    ->findAll();
-    }
-
-    /**
-     * Get all open tasks for a given user
-     *
-     * @access public
-     * @param  integer    $user_id    User id
-     * @return array
-     */
-    public function getAllTasksByUser($user_id)
-    {
-        return $this->db
-                    ->table(Task::TABLE)
-                    ->columns(
-                        'tasks.id',
-                        'tasks.title',
-                        'tasks.date_due',
-                        'tasks.date_creation',
-                        'tasks.project_id',
-                        'tasks.color_id',
-                        'projects.name AS project_name'
-                    )
-                    ->join(Project::TABLE, 'id', 'project_id')
-                    ->eq('tasks.owner_id', $user_id)
-                    ->eq('tasks.is_active', Task::STATUS_OPEN)
-                    ->asc('tasks.id')
                     ->findAll();
     }
 
@@ -293,22 +221,6 @@ class TaskFinder extends Base
                     ->eq('column_id', $column_id)
                     ->in('is_active', $status)
                     ->count();
-    }
-
-    /**
-     * Count the number of tasks for a custom search
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @param  string    $search       Search terms
-     * @return integer
-     */
-    public function countSearch($project_id, $search)
-    {
-        return $this->db->table(Task::TABLE)
-                        ->eq('project_id', $project_id)
-                        ->like('title', '%'.$search.'%')
-                        ->count();
     }
 
     /**

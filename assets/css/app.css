@@ -18,6 +18,7 @@ body {
 body {
     margin-left: 10px;
     margin-right: 10px;
+    padding-bottom: 20px;
     color: #333;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -1082,15 +1083,15 @@ tr td.task-orange,
 }
 
 /* pagination */
-#pagination {
+.pagination {
     text-align: center;
 }
 
-#pagination-next {
+.pagination-next {
     margin-left: 5px;
 }
 
-#pagination-previous {
+.pagination-previous {
     margin-right: 5px;
 }/* popover */
 #popover-container {

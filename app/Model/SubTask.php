@@ -93,38 +93,6 @@ class SubTask extends Base
     }
 
     /**
-     * Get all subtasks assigned to a user
-     *
-     * @access public
-     * @param  integer   $user_id    User id
-     * @param  array     $status     List of status
-     * @return array
-     */
-    public function getAllByUser($user_id, array $status)
-    {
-        $status_list = $this->getStatusList();
-        $subtasks = $this->db->table(self::TABLE)
-                             ->columns(
-                                self::TABLE.'.*',
-                                Task::TABLE.'.project_id',
-                                Task::TABLE.'.color_id',
-                                Project::TABLE.'.name AS project_name'
-                             )
-                             ->eq('user_id', $user_id)
-                             ->in(self::TABLE.'.status', $status)
-                             ->join(Task::TABLE, 'id', 'task_id')
-                             ->join(Project::TABLE, 'id', 'project_id', Task::TABLE)
-                             ->asc(Task::TABLE.'.id')
-                             ->findAll();
-
-        foreach ($subtasks as &$subtask) {
-            $subtask['status_name'] = $status_list[$subtask['status']];
-        }
-
-        return $subtasks;
-    }
-
-    /**
      * Get a subtask by the id
      *
      * @access public

@@ -5,7 +5,7 @@ require __DIR__.'/../app/common.php';
 
 use Model\User;
 
-$userModel = new User($registry);
+$userModel = new User($container);
 
 for ($i = 0; $i < 500; $i++) {
     $userModel->create(array(

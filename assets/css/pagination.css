@@ -4,14 +4,14 @@
 }
 
 /* pagination */
-#pagination {
+.pagination {
     text-align: center;
 }
 
-#pagination-next {
+.pagination-next {
     margin-left: 5px;
 }
 
-#pagination-previous {
+.pagination-previous {
     margin-right: 5px;
 }

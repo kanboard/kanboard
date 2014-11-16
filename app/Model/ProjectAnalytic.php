@@ -57,7 +57,7 @@ class ProjectAnalytic extends Base
 
         foreach ($tasks as $task) {
 
-            $user = $users[$task['owner_id']];
+            $user = isset($users[$task['owner_id']]) ? $users[$task['owner_id']] : $users[0];
             $total++;
 
             if (! isset($metrics[$user])) {

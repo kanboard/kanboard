@@ -428,8 +428,8 @@ class Project extends Base
         $limit = 25;
 
         if ($search !== '') {
-            $tasks = $this->taskFinder->search($project['id'], $search, $offset, $limit, $order, $direction);
-            $nb_tasks = $this->taskFinder->countSearch($project['id'], $search);
+            $tasks = $this->taskPaginator->searchTasks($project['id'], $search, $offset, $limit, $order, $direction);
+            $nb_tasks = $this->taskPaginator->countSearchTasks($project['id'], $search);
         }
 
         $this->response->html($this->template->layout('project_search', array(
@@ -472,8 +472,8 @@ class Project extends Base
         $offset = $this->request->getIntegerParam('offset', 0);
         $limit = 25;
 
-        $tasks = $this->taskFinder->getClosedTasks($project['id'], $offset, $limit, $order, $direction);
-        $nb_tasks = $this->taskFinder->countByProjectId($project['id'], array(TaskModel::STATUS_CLOSED));
+        $tasks = $this->taskPaginator->closedTasks($project['id'], $offset, $limit, $order, $direction);
+        $nb_tasks = $this->taskPaginator->countClosedTasks($project['id']);
 
         $this->response->html($this->template->layout('project_tasks', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
