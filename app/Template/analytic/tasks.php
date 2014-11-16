@@ -3,7 +3,7 @@
 </div>
 
 <?php if (empty($metrics)): ?>
-    <p class="alert"><?= t('Not enough data.') ?></p>
+    <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
     <section id="analytic-task-repartition">
 
