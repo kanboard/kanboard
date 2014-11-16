@@ -34,6 +34,10 @@ class ProjectAnalytic extends Base
             );
         }
 
+        if ($total === 0) {
+            return array();
+        }
+
         foreach ($metrics as &$metric) {
             $metric['percentage'] = round(($metric['nb_tasks'] * 100) / $total, 2);
         }
@@ -69,6 +73,10 @@ class ProjectAnalytic extends Base
             }
 
             $metrics[$user]['nb_tasks']++;
+        }
+
+        if ($total === 0) {
+            return array();
         }
 
         foreach ($metrics as &$metric) {
