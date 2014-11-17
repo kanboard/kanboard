@@ -618,6 +618,10 @@ function paginate(array $pagination)
 {
     extract($pagination);
 
+    if ($pagination['offset'] === 0 && ($total - $pagination['offset']) < $limit) {
+        return '';
+    }
+
     $html = '<div class="pagination">';
     $html .= '<span class="pagination-previous">';
 
