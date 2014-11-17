@@ -594,4 +594,9 @@ return array(
     // 'Unable to create this task.' => '',
     // 'Cumulative flow diagram' => '',
     // 'Cumulative flow diagram for "%s"' => '',
+    // 'Daily project summary' => '',
+    // 'Daily project summary export' => '',
+    // 'Daily project summary export for "%s"' => '',
+    // 'Exports' => '',
+    // 'This export contains the number of tasks per column grouped per day.' => '',
 );

@@ -7,9 +7,6 @@
 
         <?php if (Helper\is_admin() || $project['is_private']): ?>
         <li>
-            <a href="?controller=project&amp;action=export&amp;project_id=<?= $project['id'] ?>"><?= t('Tasks Export') ?></a>
-        </li>
-        <li>
             <a href="?controller=project&amp;action=share&amp;project_id=<?= $project['id'] ?>"><?= t('Public access') ?></a>
         </li>
         <li>
@@ -44,4 +41,16 @@
         </li>
         <?php endif ?>
     </ul>
+
+    <?php if (Helper\is_admin() || $project['is_private']): ?>
+    <h2><?= t('Exports') ?></h2>
+    <ul>
+        <li>
+            <?= Helper\a(t('Tasks'), 'project', 'exportTasks', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
+            <?= Helper\a(t('Daily project summary'), 'project', 'exportDailyProjectSummary', array('project_id' => $project['id'])) ?>
+        </li>
+    </li>
+    <?php endif ?>
 </div>

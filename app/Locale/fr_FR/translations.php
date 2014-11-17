@@ -594,4 +594,9 @@ return array(
     'Unable to create this task.' => 'Impossible de créer cette tâche',
     'Cumulative flow diagram' => 'Diagramme de flux cumulé',
     'Cumulative flow diagram for "%s"' => 'Diagramme de flux cumulé pour « %s »',
+    'Daily project summary' => 'Résumé journalier du projet',
+    'Daily project summary export' => 'Export du résumé journalier du projet',
+    'Daily project summary export for "%s"' => 'Export du résumé quotidien du projet pour « %s »',
+    'Exports' => 'Exports',
+    'This export contains the number of tasks per column grouped per day.' => 'Cet export contient le nombre de tâches par colonne groupé par jour.',
 );
