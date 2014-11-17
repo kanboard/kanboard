@@ -592,4 +592,6 @@ return array(
     // 'This value is required' => '',
     // 'This value must be numeric' => '',
     // 'Unable to create this task.' => '',
+    // 'Cumulative flow diagram' => '',
+    // 'Cumulative flow diagram for "%s"' => '',
 );

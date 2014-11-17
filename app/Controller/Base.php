@@ -108,7 +108,9 @@ abstract class Base
      */
     public function __destruct()
     {
-        // $this->container['logger']->addDebug(var_export($this->container['db']->getLogMessages(), true));
+        // foreach ($this->container['db']->getLogMessages() as $message) {
+        //     $this->container['logger']->addDebug($message);
+        // }
     }
 
     /**
@@ -173,6 +175,7 @@ abstract class Base
     {
         $models = array(
             'projectActivity', // Order is important
+            'projectDailySummary',
             'action',
             'project',
             'webhook',

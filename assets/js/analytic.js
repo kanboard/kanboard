@@ -10,7 +10,60 @@ Kanboard.Analytic = (function() {
             else if (Kanboard.Exists("analytic-user-repartition")) {
                 Kanboard.Analytic.UserRepartition.Init();
             }
+            else if (Kanboard.Exists("analytic-cfd")) {
+                Kanboard.Analytic.CFD.Init();
+            }
         }
+    };
+
+})();
+
+Kanboard.Analytic.CFD = (function() {
+
+    function fetchData()
+    {
+        jQuery.getJSON($("#chart").attr("data-url"), function(data) {
+            drawGraph(data.metrics, data.labels, data.columns);
+        });
+    }
+
+    function drawGraph(metrics, labels, columns)
+    {
+        var series = prepareSeries(metrics, labels);
+
+        var svg = dimple.newSvg("#chart", 800, 380);
+        var chart = new dimple.chart(svg, series);
+
+        var x = chart.addCategoryAxis("x", labels['day']);
+        x.addOrderRule("Date");
+
+        chart.addMeasureAxis("y", labels['total']);
+
+        var s = chart.addSeries(labels['column'], dimple.plot.area);
+        s.addOrderRule(columns.reverse());
+
+        chart.addLegend(10, 10, 500, 30, "left");
+        chart.draw();
+    }
+
+    function prepareSeries(metrics, labels)
+    {
+        var series = [];
+
+        for (var i = 0; i < metrics.length; i++) {
+
+            var row = {};
+            row[labels['column']] = metrics[i]['column_title'];
+            row[labels['day']] = metrics[i]['day'];
+            row[labels['total']] = metrics[i]['total'];
+            series.push(row);
+        }
+
+        return series;
+    }
+
+    return {
+        Init: fetchData
     };
 
 })();

@@ -81,4 +81,48 @@ class Analytic extends Base
             )));
         }
     }
+
+    /**
+     * Show cumulative flow diagram
+     *
+     * @access public
+     */
+    public function cfd()
+    {
+        $project = $this->getProject();
+        $values = $this->request->getValues();
+
+        $from = $this->request->getStringParam('from', date('Y-m-d', strtotime('-1week')));
+        $to = $this->request->getStringParam('to', date('Y-m-d'));
+
+        if (! empty($values)) {
+            $from = $values['from'];
+            $to = $values['to'];
+        }
+
+        if ($this->request->isAjax()) {
+            $this->response->json(array(
+                'columns' => array_values($this->board->getColumnsList($project['id'])),
+                'metrics' => $this->projectDailySummary->getRawMetrics($project['id'], $from, $to),
+                'labels' => array(
+                    'column' => t('Column'),
+                    'day' => t('Date'),
+                    'total' => t('Tasks'),
+                )
+            ));
+        }
+        else {
+            $this->response->html($this->layout('analytic/cfd', array(
+                'values' => array(
+                    'from' => $from,
+                    'to' => $to,
+                ),
+                'display_graph' => $this->projectDailySummary->countDays($project['id'], $from, $to) >= 2,
+                'project' => $project,
+                'date_format' => $this->config->get('application_date_format'),
+                'date_formats' => $this->dateParser->getAvailableFormats(),
+                'title' => t('Cumulative flow diagram for "%s"', $project['name']),
+            )));
+        }
+    }
 }

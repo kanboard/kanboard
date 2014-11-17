@@ -579,7 +579,7 @@ return array(
     'Column removed successfully.' => 'Colonne supprimée avec succès.',
     'Edit Project' => 'Modifier le projet',
     'Github Issue' => 'Ticket Github',
-    'Not enough data to show the graph.' => 'Pas assez de données pour afficher le graphique',
+    'Not enough data to show the graph.' => 'Pas assez de données pour afficher le graphique.',
     'Previous' => 'Précédent',
     'The id must be an integer' => 'L\'id doit être un entier',
     'The project id must be an integer' => 'L\'id du projet doit être un entier',
@@ -592,4 +592,6 @@ return array(
     'This value is required' => 'Cette valeur est obligatoire',
     'This value must be numeric' => 'Cette valeur doit être numérique',
     'Unable to create this task.' => 'Impossible de créer cette tâche',
+    'Cumulative flow diagram' => 'Diagramme de flux cumulé',
+    'Cumulative flow diagram for "%s"' => 'Diagramme de flux cumulé pour « %s »',
 );

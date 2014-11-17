@@ -121,6 +121,10 @@ ul.form-errors li {
     margin-right: 15px;
 }
 
+.form-inline .form-required {
+    display: none;
+}
+
 input.form-date {
     width: 150px;
 }

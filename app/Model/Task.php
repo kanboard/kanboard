@@ -309,8 +309,6 @@ class Task extends Base
      */
     private function savePositions($moved_task_id, array $columns)
     {
-        $this->db->startTransaction();
-
         foreach ($columns as $column_id => $column) {
 
             $position = 1;
@@ -336,13 +334,10 @@ class Task extends Base
                 $position++;
 
                 if (! $result) {
-                    $this->db->cancelTransaction();
                     return false;
                 }
             }
         }
-
-        $this->db->closeTransaction();
 
         return true;
     }

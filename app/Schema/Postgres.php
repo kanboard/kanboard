@@ -5,7 +5,24 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 15;
+const VERSION = 16;
+
+function version_16($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_daily_summaries (
+            id SERIAL PRIMARY KEY,
+            day CHAR(10) NOT NULL,
+            project_id INTEGER NOT NULL,
+            column_id INTEGER NOT NULL,
+            total INTEGER NOT NULL DEFAULT 0,
+            FOREIGN KEY(column_id) REFERENCES columns(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )
+    ");
+
+    $pdo->exec('CREATE UNIQUE INDEX project_daily_column_stats_idx ON project_daily_summaries(day, project_id, column_id)');
+}
 
 function version_15($pdo)
 {
