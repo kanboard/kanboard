@@ -57,11 +57,14 @@
 
 .comment-textarea {
     height: 200px;
-    width: 80%;
-    max-width: 800px;
+    width: 99%;
+    max-width: 99%;
 }
 
 #comments .comment-textarea {
-    height: 80px;
-    width: 500px;
+    height: 100px;
+}
+
+#comments .form-tabs {
+    max-width: 500px;
 }

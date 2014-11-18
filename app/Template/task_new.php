@@ -14,8 +14,19 @@
             <?= Helper\form_text('title', $values, $errors, array('autofocus', 'required'), 'form-input-large') ?><br/>
 
             <?= Helper\form_label(t('Description'), 'description') ?>
-            <?= Helper\form_textarea('description', $values, $errors) ?><br/>
-            <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
+            <div class="form-tabs">
+                <div class="form-tabs-nav">
+                    <a id="w" class="form-tab form-tab-selected btn btn-small" href="#w"><?= t('Write') ?></a>
+                    <a id="p" class="form-tab btn btn-small" href="#p"><?= t('Preview') ?></a>
+                    <span class="form-help pull-right"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><i class="octicon octicon-markdown"></i> <?= t('Markdown supported') ?></a></span>
+                </div>
+                <div class="write-area form-tab">
+                    <?= Helper\form_textarea('description', $values, $errors) ?>
+                </div>
+                <div class="preview-area form-tab">
+                    <div class="markdown"></div>
+                </div>
+            </div>
 
             <?php if (! isset($duplicate)): ?>
                 <?= Helper\form_checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>

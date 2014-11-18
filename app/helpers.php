@@ -445,7 +445,8 @@ function form_textarea($name, $values = array(), array $errors = array(), array 
     $html .= implode(' ', $attributes).'>';
     $html .= isset($values->$name) ? escape($values->$name) : isset($values[$name]) ? $values[$name] : '';
     $html .= '</textarea>';
-    if (in_array('required', $attributes)) $html .= '<span class="form-required">*</span>';
+    # commented out for now, as this conflicts with the new tabs layout
+    #if (in_array('required', $attributes)) $html .= '<span class="form-required">*</span>';
     $html .= error_list($errors, $name);
 
     return $html;
