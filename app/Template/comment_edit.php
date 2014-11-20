@@ -7,7 +7,22 @@
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('id', $values) ?>
     <?= Helper\form_hidden('task_id', $values) ?>
-    <?= Helper\form_textarea('comment', $values, $errors, array('autofocus', 'required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?><br/>
+    <div class="form-tabs">
+        <div class="form-tabs-nav">
+            <a id="w" class="form-tab form-tab-selected btn btn-small" href="#w"><?= t('Write') ?></a>
+            <a id="p" class="form-tab btn btn-small" href="#p"><?= t('Preview') ?></a>
+            <span class="form-required">*</span>
+            <span class="form-help pull-right"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><i class="octicon octicon-markdown"></i> <?= t('Markdown supported') ?></a></span>
+        </div>
+        <div class="write-area form-tab">
+            <?= Helper\form_textarea('comment', $values, $errors, array('autofocus', 'required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?>
+        </div>
+        <div class="preview-area form-tab">
+            <div class="comment-inner">
+                <div class="markdown"></div>
+            </div>
+        </div>
+    </div>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Update') ?>" class="btn btn-blue"/>

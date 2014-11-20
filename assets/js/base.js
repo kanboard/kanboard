@@ -84,6 +84,10 @@ var Kanboard = (function() {
             $("#board-selector").change(function() {
                 window.location = $(this).attr("data-board-url").replace(/%d/g, $(this).val());
             });
+
+            // Markdown Preview for Textareas
+            $("#p").click(Kanboard.Task.Preview);
+            $("#w").click(Kanboard.Task.Textarea);
         }
     };
 

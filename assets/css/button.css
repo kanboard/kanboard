@@ -5,7 +5,7 @@
     display: inline-block;
     color: #333;
     border: 1px solid #ccc;
-    background: #efefef;
+    background: #fafafa;
     padding: 5px;
     padding-left: 15px;
     padding-right: 15px;
@@ -16,15 +16,15 @@
 
 a.btn {
     text-decoration: none;
-    font-weight: bold;
 }
 
 .btn-small {
-    padding: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 3px;
+    padding-left: 9px;
+    padding-right: 9px;
 }
 
+/* red buttons */
 .btn-red {
     border-color: #b0281a;;
     background: #d14836;
@@ -38,6 +38,7 @@ a.btn-red:hover,
     background: #c53727;
 }
 
+/* blue buttons */
 a.btn-blue,
 .btn-blue {
     border-color: #3079ed;
@@ -52,3 +53,4 @@ a.btn-blue:focus,
     border-color: #2f5bb7;
     background: #357ae8;
 }
+
