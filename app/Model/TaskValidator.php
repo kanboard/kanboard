@@ -70,7 +70,6 @@ class TaskValidator extends Base
     {
         $rules = array(
             new Validators\Required('id', t('The id is required')),
-            new Validators\Required('description', t('The description is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
