@@ -25,7 +25,7 @@ class Config extends Base
         $params['errors'] = array();
         $params['config_content_for_layout'] = $this->template->load($template, $params);
 
-        return $this->template->layout('config_layout', $params);
+        return $this->template->layout('config/layout', $params);
     }
 
     /**
@@ -59,7 +59,7 @@ class Config extends Base
      */
     public function index()
     {
-        $this->response->html($this->layout('config_about', array(
+        $this->response->html($this->layout('config/about', array(
             'db_size' => $this->config->getDatabaseSize(),
             'title' => t('Settings').' &gt; '.t('About'),
         )));
@@ -74,7 +74,7 @@ class Config extends Base
     {
         $this->common('application');
 
-        $this->response->html($this->layout('config_application', array(
+        $this->response->html($this->layout('config/application', array(
             'languages' => $this->config->getLanguages(),
             'timezones' => $this->config->getTimezones(),
             'date_formats' => $this->dateParser->getAvailableFormats(),
@@ -91,7 +91,7 @@ class Config extends Base
     {
         $this->common('board');
 
-        $this->response->html($this->layout('config_board', array(
+        $this->response->html($this->layout('config/board', array(
             'default_columns' => implode(', ', $this->board->getDefaultColumns()),
             'title' => t('Settings').' &gt; '.t('Board settings'),
         )));
@@ -106,7 +106,7 @@ class Config extends Base
     {
         $this->common('webhook');
 
-        $this->response->html($this->layout('config_webhook', array(
+        $this->response->html($this->layout('config/webhook', array(
             'title' => t('Settings').' &gt; '.t('Webhook settings'),
         )));
     }
@@ -118,7 +118,7 @@ class Config extends Base
      */
     public function api()
     {
-        $this->response->html($this->layout('config_api', array(
+        $this->response->html($this->layout('config/api', array(
             'title' => t('Settings').' &gt; '.t('API'),
         )));
     }

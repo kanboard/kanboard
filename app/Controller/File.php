@@ -21,7 +21,7 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('file_new', array(
+        $this->response->html($this->taskLayout('file/new', array(
             'task' => $task,
             'max_size' => ini_get('upload_max_filesize'),
         )));
@@ -75,7 +75,7 @@ class File extends Base
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
         if ($file['task_id'] == $task['id']) {
-            $this->response->html($this->template->load('file_open', array(
+            $this->response->html($this->template->load('file/open', array(
                 'file' => $file
             )));
         }
@@ -132,7 +132,7 @@ class File extends Base
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
-        $this->response->html($this->taskLayout('file_remove', array(
+        $this->response->html($this->taskLayout('file/remove', array(
             'task' => $task,
             'file' => $file,
         )));
