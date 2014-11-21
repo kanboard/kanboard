@@ -51,7 +51,7 @@ class App extends Base
     {
         $limit = 10;
 
-        if (! in_array($order, array('tasks.id', 'project_name', 'title'))) {
+        if (! in_array($order, array('tasks.id', 'project_name', 'title', 'date_due'))) {
             $order = 'tasks.id';
             $direction = 'ASC';
         }
