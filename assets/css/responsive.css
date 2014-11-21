@@ -1,5 +1,5 @@
 /* responsive design */
-@media only screen and (min-width : 768px) and (max-width : 1024px) {
+@media only screen and (min-width : 769px) and (max-width : 1024px) {
 
     .hide-tablet {
         display: none;
@@ -15,6 +15,14 @@
 
     .task-board-title {
         font-size: 1.5em;
+    }
+
+    .form-tab {
+        max-width: 662px;
+    }
+
+    input.form-date ~ div.form-help {
+        max-width: 150px;
     }
 }
 
@@ -64,5 +72,9 @@
 
     .task-board-title {
         font-size: 1.5em;
+    }
+
+    .form-tab {
+        max-width: 404px;
     }
 }

@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\Project as ProjectModel;
 use Model\SubTask;
+use Helper;
 
 /**
  * Application controller
@@ -153,4 +154,22 @@ class App extends Base
             )
         );
     }
+
+    /**
+     * Render Markdown Text and reply with the HTML Code
+     *
+     * @access public
+     */
+    public function preview()
+    {
+        $payload = $this->request->getJson();
+
+        if (empty($payload['text'])) {
+            $this->response->html('<p>'.t('Nothing to preview...').'</p>');
+        }
+        else {
+            $this->response->html(Helper\markdown($payload['text']));
+        }
+    }
+
 }

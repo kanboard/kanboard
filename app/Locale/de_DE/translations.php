@@ -599,4 +599,7 @@ return array(
     // 'Daily project summary export for "%s"' => '',
     // 'Exports' => '',
     // 'This export contains the number of tasks per column grouped per day.' => '',
+    // 'Nothing to preview...' => '',
+    // 'Preview' => '',
+    // 'Write' => '',
 );
