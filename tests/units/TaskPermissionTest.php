@@ -20,8 +20,8 @@ class TaskPermissionTest extends Base
         $p = new Project($this->container);
         $u = new User($this->container);
 
-        $this->assertTrue($u->create(array('username' => 'toto', 'password' => '123456')));
-        $this->assertTrue($u->create(array('username' => 'toto2', 'password' => '123456')));
+        $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456')));
+        $this->assertNotFalse($u->create(array('username' => 'toto2', 'password' => '123456')));
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'creator_id' => 1)));
         $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'creator_id' => 2)));

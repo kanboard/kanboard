@@ -255,12 +255,20 @@ class User extends Base
      *
      * @access public
      * @param  array  $values  Form values
-     * @return boolean
+     * @return boolean|integer
      */
     public function create(array $values)
     {
         $this->prepare($values);
-        return $this->db->table(self::TABLE)->save($values);
+
+        return $this->db->transaction(function($db) use ($values) {
+
+            if (! $db->table(User::TABLE)->save($values)) {
+                return false;
+            }
+
+            return (int) $db->getConnection()->getLastId();
+        });
     }
 
     /**

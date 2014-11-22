@@ -99,20 +99,25 @@ class Comment extends Base
      *
      * @access public
      * @param  array    $values   Form values
-     * @return boolean
+     * @return boolean|integer
      */
     public function create(array $values)
     {
         $values['date'] = time();
 
-        if ($this->db->table(self::TABLE)->save($values)) {
+        return $this->db->transaction(function($db) use ($values) {
 
-            $values['id'] = $this->db->getConnection()->getLastId();
+            if (! $db->table(Comment::TABLE)->save($values)) {
+                return false;
+            }
+
+            $comment_id = (int) $db->getConnection()->getLastId();
+            $values['id'] = $comment_id;
+
             $this->event->trigger(self::EVENT_CREATE, $values);
-            return true;
-        }
 
-        return false;
+            return $comment_id;
+        });
     }
 
     /**

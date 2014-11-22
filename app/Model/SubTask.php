@@ -138,19 +138,25 @@ class SubTask extends Base
      *
      * @access public
      * @param  array    $values    Form values
-     * @return bool
+     * @return bool|integer
      */
     public function create(array $values)
     {
         $this->prepare($values);
-        $result = $this->db->table(self::TABLE)->save($values);
 
-        if ($result) {
-            $values['id'] = $this->db->getConnection()->getLastId();
+        return $this->db->transaction(function($db) use ($values) {
+
+            if (! $db->table(SubTask::TABLE)->save($values)) {
+                return false;
+            }
+
+            $subtask_id = (int) $db->getConnection()->getLastId();
+            $values['id'] = $subtask_id;
+
             $this->event->trigger(self::EVENT_CREATE, $values);
-        }
 
-        return $result;
+            return $subtask_id;
+        });
     }
 
     /**

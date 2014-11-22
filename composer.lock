@@ -51,12 +51,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/JsonRPC.git",
-                "reference": "66db4093984790c34577c0ba0e17f2e3d2dc14a0"
+                "reference": "86e8339205616ad9b09d581957cc084a99c0ed27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/66db4093984790c34577c0ba0e17f2e3d2dc14a0",
-                "reference": "66db4093984790c34577c0ba0e17f2e3d2dc14a0",
+                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/86e8339205616ad9b09d581957cc084a99c0ed27",
+                "reference": "86e8339205616ad9b09d581957cc084a99c0ed27",
                 "shasum": ""
             },
             "require": {
@@ -80,7 +80,7 @@
             ],
             "description": "A simple Json-RPC client/server library that just works",
             "homepage": "https://github.com/fguillot/JsonRPC",
-            "time": "2014-11-05 01:56:31"
+            "time": "2014-11-22 20:32:14"
         },
         {
             "name": "fguillot/picodb",
@@ -88,12 +88,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "48602866414b5b396a37c40eef9724962042ff21"
+                "reference": "ebe721de0002b7ff86b7f66df0065224bf896eb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/48602866414b5b396a37c40eef9724962042ff21",
-                "reference": "48602866414b5b396a37c40eef9724962042ff21",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/ebe721de0002b7ff86b7f66df0065224bf896eb2",
+                "reference": "ebe721de0002b7ff86b7f66df0065224bf896eb2",
                 "shasum": ""
             },
             "require": {
@@ -117,7 +117,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2014-11-15 23:37:30"
+            "time": "2014-11-22 04:15:43"
         },
         {
             "name": "fguillot/simple-validator",
