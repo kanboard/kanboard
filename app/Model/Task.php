@@ -182,62 +182,6 @@ class Task extends Base
     }
 
     /**
-     * Mark a task closed
-     *
-     * @access public
-     * @param  integer   $task_id   Task id
-     * @return boolean
-     */
-    public function close($task_id)
-    {
-        if (! $this->taskFinder->exists($task_id)) {
-            return false;
-        }
-
-        $result = $this->db
-                        ->table(self::TABLE)
-                        ->eq('id', $task_id)
-                        ->update(array(
-                            'is_active' => 0,
-                            'date_completed' => time()
-                        ));
-
-        if ($result) {
-            $this->event->trigger(self::EVENT_CLOSE, array('task_id' => $task_id) + $this->taskFinder->getById($task_id));
-        }
-
-        return $result;
-    }
-
-    /**
-     * Mark a task open
-     *
-     * @access public
-     * @param  integer   $task_id   Task id
-     * @return boolean
-     */
-    public function open($task_id)
-    {
-        if (! $this->taskFinder->exists($task_id)) {
-            return false;
-        }
-
-        $result = $this->db
-                        ->table(self::TABLE)
-                        ->eq('id', $task_id)
-                        ->update(array(
-                            'is_active' => 1,
-                            'date_completed' => 0
-                        ));
-
-        if ($result) {
-            $this->event->trigger(self::EVENT_OPEN, array('task_id' => $task_id) + $this->taskFinder->getById($task_id));
-        }
-
-        return $result;
-    }
-
-    /**
      * Remove a task
      *
      * @access public

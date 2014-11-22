@@ -71,7 +71,7 @@ class TaskClose extends Base
      */
     public function doAction(array $data)
     {
-        return $this->task->close($data['task_id']);
+        return $this->taskStatus->close($data['task_id']);
     }
 
     /**

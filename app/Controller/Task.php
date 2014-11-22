@@ -268,7 +268,7 @@ class Task extends Base
 
             $this->checkCSRFParam();
 
-            if ($this->task->close($task['id'])) {
+            if ($this->taskStatus->close($task['id'])) {
                 $this->session->flash(t('Task closed successfully.'));
             } else {
                 $this->session->flashError(t('Unable to close this task.'));
@@ -295,7 +295,7 @@ class Task extends Base
 
             $this->checkCSRFParam();
 
-            if ($this->task->open($task['id'])) {
+            if ($this->taskStatus->open($task['id'])) {
                 $this->session->flash(t('Task opened successfully.'));
             } else {
                 $this->session->flashError(t('Unable to open this task.'));

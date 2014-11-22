@@ -4,6 +4,7 @@ require_once __DIR__.'/Base.php';
 
 use Model\Task;
 use Model\TaskFinder;
+use Model\TaskStatus;
 use Model\Project;
 use Model\ProjectPermission;
 use Model\Category;
@@ -605,6 +606,7 @@ class TaskTest extends Base
     public function testEvents()
     {
         $t = new Task($this->container);
+        $ts = new TaskStatus($this->container);
         $p = new Project($this->container);
 
         // We create a project
@@ -620,11 +622,11 @@ class TaskTest extends Base
         $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
 
         // We close our task
-        $this->assertTrue($t->close(1));
+        $this->assertTrue($ts->close(1));
         $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CLOSE));
 
         // We open our task
-        $this->assertTrue($t->open(1));
+        $this->assertTrue($ts->open(1));
         $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_OPEN));
 
         // We change the column of our task

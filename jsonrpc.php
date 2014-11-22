@@ -7,6 +7,7 @@ use Model\Project;
 use Model\ProjectPermission;
 use Model\Task;
 use Model\TaskFinder;
+use Model\TaskStatus;
 use Model\TaskValidator;
 use Model\User;
 use Model\Config;
@@ -26,6 +27,7 @@ $project = new Project($container);
 $projectPermission = new ProjectPermission($container);
 $task = new Task($container);
 $taskFinder = new TaskFinder($container);
+$taskStatus = new TaskStatus($container);
 $taskValidator = new TaskValidator($container);
 $user = new User($container);
 $category = new Category($container);
@@ -214,12 +216,12 @@ $server->register('updateTask', function($id, $title = null, $project_id = null,
     return $valid && $task->update($values);
 });
 
-$server->register('openTask', function($task_id) use ($task) {
-    return $task->open($task_id);
+$server->register('openTask', function($task_id) use ($taskStatus) {
+    return $taskStatus->open($task_id);
 });
 
-$server->register('closeTask', function($task_id) use ($task) {
-    return $task->close($task_id);
+$server->register('closeTask', function($task_id) use ($taskStatus) {
+    return $taskStatus->close($task_id);
 });
 
 $server->register('removeTask', function($task_id) use ($task) {

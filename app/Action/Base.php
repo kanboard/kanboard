@@ -16,6 +16,7 @@ use Core\Tool;
  * @property \Model\Comment            $comment
  * @property \Model\Task               $task
  * @property \Model\TaskFinder         $taskFinder
+ * @property \Model\TaskStatus         $taskStatus
  */
 abstract class Base implements Listener
 {
