@@ -20,7 +20,7 @@ class TaskCreation extends Base
     public function create(array $values)
     {
         $this->prepare($values);
-        $task_id = $this->persist($values);
+        $task_id = $this->persist(Task::TABLE, $values);
         $this->fireEvents($task_id, $values);
 
         return (int) $task_id;
@@ -49,25 +49,6 @@ class TaskCreation extends Base
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
         $values['position'] = $this->taskFinder->countByColumnId($values['project_id'], $values['column_id']) + 1;
-    }
-
-    /**
-     * Save the task to the database
-     *
-     * @access private
-     * @param  array    $values    Form values
-     * @return boolean|integer
-     */
-    private function persist(array $values)
-    {
-        return $this->db->transaction(function($db) use ($values) {
-
-            if (! $db->table(Task::TABLE)->save($values)) {
-                return false;
-            }
-
-            return $db->getConnection()->getLastId();
-        });
     }
 
     /**

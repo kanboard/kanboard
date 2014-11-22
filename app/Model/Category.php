@@ -98,14 +98,7 @@ class Category extends Base
      */
     public function create(array $values)
     {
-        return $this->db->transaction(function($db) use ($values) {
-
-            if (! $db->table(Category::TABLE)->save($values)) {
-                return false;
-            }
-
-            return (int) $db->getConnection()->getLastId();
-        });
+        return $this->persist(self::TABLE, $values);
     }
 
     /**

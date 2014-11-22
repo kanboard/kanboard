@@ -260,15 +260,7 @@ class User extends Base
     public function create(array $values)
     {
         $this->prepare($values);
-
-        return $this->db->transaction(function($db) use ($values) {
-
-            if (! $db->table(User::TABLE)->save($values)) {
-                return false;
-            }
-
-            return (int) $db->getConnection()->getLastId();
-        });
+        return $this->persist(self::TABLE, $values);
     }
 
     /**

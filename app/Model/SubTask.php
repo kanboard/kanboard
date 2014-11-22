@@ -134,7 +134,7 @@ class SubTask extends Base
     }
 
     /**
-     * Create
+     * Create a new subtask
      *
      * @access public
      * @param  array    $values    Form values
@@ -143,20 +143,13 @@ class SubTask extends Base
     public function create(array $values)
     {
         $this->prepare($values);
+        $subtask_id = $this->persist(self::TABLE, $values);
 
-        return $this->db->transaction(function($db) use ($values) {
+        if ($subtask_id) {
+            $this->event->trigger(self::EVENT_CREATE, array('id' => $subtask_id) + $values);
+        }
 
-            if (! $db->table(SubTask::TABLE)->save($values)) {
-                return false;
-            }
-
-            $subtask_id = (int) $db->getConnection()->getLastId();
-            $values['id'] = $subtask_id;
-
-            $this->event->trigger(self::EVENT_CREATE, $values);
-
-            return $subtask_id;
-        });
+        return $subtask_id;
     }
 
     /**

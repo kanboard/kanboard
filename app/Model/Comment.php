@@ -95,7 +95,7 @@ class Comment extends Base
     }
 
     /**
-     * Save a comment in the database
+     * Create a new comment
      *
      * @access public
      * @param  array    $values   Form values
@@ -104,20 +104,13 @@ class Comment extends Base
     public function create(array $values)
     {
         $values['date'] = time();
+        $comment_id = $this->persist(self::TABLE, $values);
 
-        return $this->db->transaction(function($db) use ($values) {
+        if ($comment_id) {
+            $this->event->trigger(self::EVENT_CREATE, array('id' => $comment_id) + $values);
+        }
 
-            if (! $db->table(Comment::TABLE)->save($values)) {
-                return false;
-            }
-
-            $comment_id = (int) $db->getConnection()->getLastId();
-            $values['id'] = $comment_id;
-
-            $this->event->trigger(self::EVENT_CREATE, $values);
-
-            return $comment_id;
-        });
+        return $comment_id;
     }
 
     /**

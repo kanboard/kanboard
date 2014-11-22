@@ -91,6 +91,26 @@ abstract class Base
     }
 
     /**
+     * Save a record in the database
+     *
+     * @access public
+     * @param  string            $table      Table name
+     * @param  array             $values     Form values
+     * @return boolean|integer
+     */
+    public function persist($table, array $values)
+    {
+        return $this->db->transaction(function($db) use ($table, $values) {
+
+            if (! $db->table($table)->save($values)) {
+                return false;
+            }
+
+            return (int) $db->getConnection()->getLastId();
+        });
+    }
+
+    /**
      * Remove keys from an array
      *
      * @access public

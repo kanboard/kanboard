@@ -3,7 +3,7 @@
 
 require __DIR__.'/../app/common.php';
 
-use Model\Task;
+use Model\TaskCreation;
 use Model\SubTask;
 use Model\Project;
 use Model\ProjectPermission;
@@ -14,7 +14,7 @@ $task_per_column = 50;
 $userModel = new User($container);
 $projectModel = new Project($container);
 $permissionModel = new ProjectPermission($container);
-$taskModel = new Task($container);
+$taskModel = new TaskCreation($container);
 $subtaskModel = new SubTask($container);
 
 for ($i = 0; $i <= 100; $i++) {

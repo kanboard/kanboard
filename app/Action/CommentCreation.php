@@ -61,7 +61,7 @@ class CommentCreation extends Base
      */
     public function doAction(array $data)
     {
-        return $this->comment->create(array(
+        return (bool) $this->comment->create(array(
             'reference' => $data['reference'],
             'comment' => $data['comment'],
             'task_id' => $data['task_id'],
