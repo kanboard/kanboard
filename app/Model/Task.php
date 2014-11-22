@@ -54,30 +54,6 @@ class Task extends Base
     }
 
     /**
-     * Prepare data before task creation
-     *
-     * @access public
-     * @param  array    $values    Form values
-     */
-    public function prepareCreation(array &$values)
-    {
-        $this->prepare($values);
-
-        if (empty($values['column_id'])) {
-            $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
-        }
-
-        if (empty($values['color_id'])) {
-            $colors = $this->color->getList();
-            $values['color_id'] = key($colors);
-        }
-
-        $values['date_creation'] = time();
-        $values['date_modification'] = $values['date_creation'];
-        $values['position'] = $this->taskFinder->countByColumnId($values['project_id'], $values['column_id']) + 1;
-    }
-
-    /**
      * Prepare data before task modification
      *
      * @access public
@@ -87,35 +63,6 @@ class Task extends Base
     {
         $this->prepare($values);
         $values['date_modification'] = time();
-    }
-
-    /**
-     * Create a task
-     *
-     * @access public
-     * @param  array    $values   Form values
-     * @return boolean|integer
-     */
-    public function create(array $values)
-    {
-        $this->db->startTransaction();
-
-        $this->prepareCreation($values);
-
-        if (! $this->db->table(self::TABLE)->save($values)) {
-            $this->db->cancelTransaction();
-            return false;
-        }
-
-        $task_id = $this->db->getConnection()->getLastId();
-
-        $this->db->closeTransaction();
-
-        // Trigger events
-        $this->event->trigger(self::EVENT_CREATE_UPDATE, array('task_id' => $task_id) + $values);
-        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id) + $values);
-
-        return $task_id;
     }
 
     /**

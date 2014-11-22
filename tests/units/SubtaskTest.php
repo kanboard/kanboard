@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskCreation;
 use Model\SubTask;
 use Model\Project;
 use Model\Category;
@@ -12,7 +13,7 @@ class SubTaskTest extends Base
 {
     public function testDuplicate()
     {
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $s = new SubTask($this->container);
         $p = new Project($this->container);
 
@@ -20,8 +21,8 @@ class SubTaskTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
 
         // We create 2 tasks
-        $this->assertEquals(1, $t->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
-        $this->assertEquals(2, $t->create(array('title' => 'test 2', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 0)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'test 2', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 0)));
 
         // We create many subtasks for the first task
         $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1, 'time_estimated' => 5, 'time_spent' => 3, 'status' => 1, 'another_subtask' => 'on')));

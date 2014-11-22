@@ -35,7 +35,7 @@ class Webhook extends Base
 
         list($valid,) = $this->taskValidator->validateCreation($values);
 
-        if ($valid && $this->task->create($values)) {
+        if ($valid && $this->taskCreation->create($values)) {
             $this->response->text('OK');
         }
 

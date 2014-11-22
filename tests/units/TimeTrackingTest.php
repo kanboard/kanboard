@@ -4,6 +4,7 @@ require_once __DIR__.'/Base.php';
 
 use Model\SubTask;
 use Model\Task;
+use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
 use Model\TimeTracking;
@@ -13,13 +14,14 @@ class TimeTrackingTest extends Base
     public function testCalculateTime()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $s = new SubTask($this->container);
         $ts = new TimeTracking($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'time_estimated' => 4.5)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'time_estimated' => 4.5)));
         $this->assertTrue($t->update(array('id' => 1, 'time_spent' => 3.5)));
 
         $task = $tf->getById(1);

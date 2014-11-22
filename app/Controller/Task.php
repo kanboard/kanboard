@@ -127,7 +127,7 @@ class Task extends Base
 
         if ($valid) {
 
-            if ($this->task->create($values)) {
+            if ($this->taskCreation->create($values)) {
                 $this->session->flash(t('Task created successfully.'));
 
                 if (isset($values['another_task']) && $values['another_task'] == 1) {

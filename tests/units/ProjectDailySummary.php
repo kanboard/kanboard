@@ -5,6 +5,7 @@ require_once __DIR__.'/Base.php';
 use Model\Project;
 use Model\ProjectDailySummary;
 use Model\Task;
+use Model\TaskCreation;
 
 class ProjectDailySummaryTest extends Base
 {
@@ -12,27 +13,27 @@ class ProjectDailySummaryTest extends Base
     {
         $p = new Project($this->container);
         $pds = new ProjectDailySummary($this->container);
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(0, $pds->countDays(1, date('Y-m-d', strtotime('-2days')), date('Y-m-d')));
 
         for ($i = 0; $i < 10; $i++) {
-            $this->assertNotFalse($t->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 1)));
+            $this->assertNotFalse($tc->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 1)));
         }
 
         for ($i = 0; $i < 5; $i++) {
-            $this->assertNotFalse($t->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 4)));
+            $this->assertNotFalse($tc->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 4)));
         }
 
         $pds->updateTotals(1, date('Y-m-d', strtotime('-2days')));
 
         for ($i = 0; $i < 15; $i++) {
-            $this->assertNotFalse($t->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 3)));
+            $this->assertNotFalse($tc->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 3)));
         }
 
         for ($i = 0; $i < 25; $i++) {
-            $this->assertNotFalse($t->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 2)));
+            $this->assertNotFalse($tc->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 2)));
         }
 
         $pds->updateTotals(1, date('Y-m-d', strtotime('-1 day')));
@@ -41,15 +42,15 @@ class ProjectDailySummaryTest extends Base
         $this->assertNotFalse($t->close(2));
 
         for ($i = 0; $i < 3; $i++) {
-            $this->assertNotFalse($t->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 3)));
+            $this->assertNotFalse($tc->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 3)));
         }
 
         for ($i = 0; $i < 5; $i++) {
-            $this->assertNotFalse($t->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 2)));
+            $this->assertNotFalse($tc->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 2)));
         }
 
         for ($i = 0; $i < 4; $i++) {
-            $this->assertNotFalse($t->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 4)));
+            $this->assertNotFalse($tc->create(array('title' => 'Task #'.$i, 'project_id' => 1, 'column_id' => 4)));
         }
 
         $pds->updateTotals(1, date('Y-m-d'));

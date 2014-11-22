@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\TaskStatus;
 use Model\Project;
@@ -12,13 +13,13 @@ class TaskStatusTest extends Base
 {
     public function testStatus()
     {
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $ts = new TaskStatus($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
         // The task must be open
 
@@ -32,8 +33,7 @@ class TaskStatusTest extends Base
 
         // We close the task
 
-        $ts->close(1);
-
+        $this->assertTrue($ts->close(1));
         $this->assertTrue($ts->isClosed(1));
 
         $task = $tf->getById(1);
@@ -46,8 +46,7 @@ class TaskStatusTest extends Base
 
         // We open the task again
 
-        $ts->open(1);
-
+        $this->assertTrue($ts->open(1));
         $this->assertTrue($ts->isOpen(1));
 
         $task = $tf->getById(1);

@@ -5,7 +5,12 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 35;
+const VERSION = 36;
+
+function version_36($pdo)
+{
+    $pdo->exec('ALTER TABLE tasks MODIFY title VARCHAR(255) NOT NULL');
+}
 
 function version_35($pdo)
 {

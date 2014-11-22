@@ -28,4 +28,15 @@ class Color extends Base
             'grey' => t('Grey'),
         );
     }
+
+    /**
+     * Get the default color
+     *
+     * @access public
+     * @return string
+     */
+    public function getDefaultColor()
+    {
+        return 'yellow'; // TODO: make this parameter configurable
+    }
 }

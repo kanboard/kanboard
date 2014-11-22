@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskCreation;
 use Model\TaskExport;
 use Model\Project;
 use Model\Category;
@@ -12,7 +13,7 @@ class TaskExportTest extends Base
 {
     public function testExport()
     {
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
         $e = new TaskExport($this->container);
@@ -36,7 +37,7 @@ class TaskExportTest extends Base
                 'score' => rand(0, 21)
             );
 
-            $this->assertEquals($i, $t->create($task));
+            $this->assertEquals($i, $tc->create($task));
         }
 
         $rows = $e->export(1, strtotime('-1 day'), strtotime('+1 day'));

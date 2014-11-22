@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
 
@@ -44,11 +45,11 @@ class ActionTaskAssignSpecificUser extends Base
         $action->setParam('user_id', 1);
 
         // We create a task in the first column
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
 
         // We create an event to move the task to the 2nd column
         $event = array(

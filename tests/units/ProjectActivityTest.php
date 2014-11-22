@@ -4,6 +4,7 @@ require_once __DIR__.'/Base.php';
 
 use Model\Task;
 use Model\TaskFinder;
+use Model\TaskCreation;
 use Model\ProjectActivity;
 use Model\Project;
 
@@ -12,13 +13,13 @@ class ProjectActivityTest extends Base
     public function testCreation()
     {
         $e = new ProjectActivity($this->container);
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
-        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1)));
 
         $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $tf->getbyId(1))));
         $this->assertTrue($e->createEvent(1, 2, 1, Task::EVENT_UPDATE, array('task' => $tf->getById(2))));
@@ -37,12 +38,12 @@ class ProjectActivityTest extends Base
     public function testFetchAllContent()
     {
         $e = new ProjectActivity($this->container);
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
         $nb_events = 80;
 
@@ -63,12 +64,12 @@ class ProjectActivityTest extends Base
     public function testCleanup()
     {
         $e = new ProjectActivity($this->container);
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
         $max = 15;
         $nb_events = 100;

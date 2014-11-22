@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\TaskStatus;
 use Model\Project;
@@ -12,151 +13,15 @@ use Model\User;
 
 class TaskTest extends Base
 {
-    public function testPrepareCreation()
-    {
-        $t = new Task($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-
-        $input = array(
-            'title' => 'youpi',
-            'description' => '',
-            'project_id' => '1',
-            'owner_id' => '0',
-            'category_id' => '0',
-            'column_id' => '2',
-            'color_id' => 'yellow',
-            'score' => '',
-            'date_due' => '',
-            'creator_id' => '1',
-            'another_task' => '1',
-        );
-
-        $t->prepareCreation($input);
-
-        $this->assertInternalType('integer', $input['date_due']);
-        $this->assertEquals(0, $input['date_due']);
-
-        $this->assertInternalType('integer', $input['score']);
-        $this->assertEquals(0, $input['score']);
-
-        $this->assertArrayNotHasKey('another_task', $input);
-
-        $this->assertArrayHasKey('date_creation', $input);
-        $this->assertEquals(time(), $input['date_creation']);
-
-        $this->assertArrayHasKey('date_modification', $input);
-        $this->assertEquals(time(), $input['date_modification']);
-
-        $this->assertArrayHasKey('position', $input);
-        $this->assertGreaterThan(0, $input['position']);
-
-        $input = array(
-            'title' => 'youpi',
-            'project_id' => '1',
-        );
-
-        $t->prepareCreation($input);
-
-        $this->assertArrayNotHasKey('date_due', $input);
-        $this->assertArrayNotHasKey('score', $input);
-
-        $this->assertArrayHasKey('date_creation', $input);
-        $this->assertEquals(time(), $input['date_creation']);
-
-        $this->assertArrayHasKey('date_modification', $input);
-        $this->assertEquals(time(), $input['date_modification']);
-
-        $this->assertArrayHasKey('position', $input);
-        $this->assertGreaterThan(0, $input['position']);
-
-        $this->assertArrayHasKey('color_id', $input);
-        $this->assertEquals('yellow', $input['color_id']);
-
-        $this->assertArrayHasKey('column_id', $input);
-        $this->assertEquals(1, $input['column_id']);
-
-        $input = array(
-            'title' => 'youpi',
-            'project_id' => '1',
-            'date_due' => '2014-09-15',
-        );
-
-        $t->prepareCreation($input);
-
-        $this->assertArrayHasKey('date_due', $input);
-        $this->assertInternalType('integer', $input['date_due']);
-        $this->assertEquals('2014-09-15', date('Y-m-d', $input['date_due']));
-    }
-
-    public function testPrepareModification()
-    {
-        $t = new Task($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-
-        $input = array(
-            'id' => '1',
-            'description' => 'Boo',
-        );
-
-        $t->prepareModification($input);
-
-        $this->assertArrayNotHasKey('id', $input);
-        $this->assertArrayHasKey('date_modification', $input);
-        $this->assertEquals(time(), $input['date_modification']);
-    }
-
-    public function testCreation()
-    {
-        $t = new Task($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
-
-        $task = $tf->getById(1);
-        $this->assertEquals(1, $task['id']);
-        $this->assertEquals(1, $task['column_id']);
-        $this->assertEquals(1, $task['position']);
-        $this->assertEquals('yellow', $task['color_id']);
-        $this->assertEquals(time(), $task['date_creation']);
-        $this->assertEquals(time(), $task['date_modification']);
-        $this->assertEquals(0, $task['date_due']);
-
-        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1)));
-
-        $task = $tf->getById(2);
-        $this->assertEquals(2, $task['id']);
-        $this->assertEquals(1, $task['column_id']);
-        $this->assertEquals(2, $task['position']);
-        $this->assertEquals(time(), $task['date_creation']);
-        $this->assertEquals(time(), $task['date_modification']);
-        $this->assertEquals(0, $task['date_due']);
-
-        $tasks = $tf->getAll(1, 1);
-        $this->assertNotEmpty($tasks);
-        $this->assertTrue(is_array($tasks));
-        $this->assertEquals(1, $tasks[0]['id']);
-        $this->assertEquals(2, $tasks[1]['id']);
-
-        $tasks = $tf->getAll(1, 0);
-        $this->assertEmpty($tasks);
-    }
-
     public function testRemove()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
         $this->assertTrue($t->remove(1));
         $this->assertFalse($t->remove(1234));
@@ -165,19 +30,20 @@ class TaskTest extends Base
     public function testMoveTaskWithColumnThatNotChange()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
 
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(3, $t->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(4, $t->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 2)));
-        $this->assertEquals(5, $t->create(array('title' => 'Task #5', 'project_id' => 1, 'column_id' => 2)));
-        $this->assertEquals(6, $t->create(array('title' => 'Task #6', 'project_id' => 1, 'column_id' => 2)));
-        $this->assertEquals(7, $t->create(array('title' => 'Task #7', 'project_id' => 1, 'column_id' => 3)));
-        $this->assertEquals(8, $t->create(array('title' => 'Task #8', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(4, $tc->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 2)));
+        $this->assertEquals(5, $tc->create(array('title' => 'Task #5', 'project_id' => 1, 'column_id' => 2)));
+        $this->assertEquals(6, $tc->create(array('title' => 'Task #6', 'project_id' => 1, 'column_id' => 2)));
+        $this->assertEquals(7, $tc->create(array('title' => 'Task #7', 'project_id' => 1, 'column_id' => 3)));
+        $this->assertEquals(8, $tc->create(array('title' => 'Task #8', 'project_id' => 1, 'column_id' => 1)));
 
         // We move the task 3 to the column 3
         $this->assertTrue($t->movePosition(1, 3, 3, 2));
@@ -227,6 +93,7 @@ class TaskTest extends Base
     public function testMoveTaskWithBadPreviousPosition()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
@@ -260,14 +127,15 @@ class TaskTest extends Base
     public function testMoveTaskTop()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(3, $t->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(4, $t->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(4, $tc->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 1)));
 
         // Move the last task to the top
         $this->assertTrue($t->movePosition(1, 4, 1, 1));
@@ -297,14 +165,15 @@ class TaskTest extends Base
     public function testMoveTaskBottom()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(2, $t->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(3, $t->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(4, $t->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(4, $tc->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 1)));
 
         // Move the last task to hte top
         $this->assertTrue($t->movePosition(1, 1, 1, 4));
@@ -334,6 +203,7 @@ class TaskTest extends Base
     public function testMovePosition()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
@@ -352,7 +222,7 @@ class TaskTest extends Base
                     'owner_id' => 0,
                 );
 
-                $this->assertEquals($counter, $t->create($task));
+                $this->assertEquals($counter, $tc->create($task));
 
                 $task = $tf->getById($counter);
                 $this->assertNotFalse($task);
@@ -489,6 +359,7 @@ class TaskTest extends Base
     public function testDuplicateToTheSameProject()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
@@ -502,7 +373,7 @@ class TaskTest extends Base
         $this->assertTrue($c->exists(1, 1));
         $this->assertTrue($c->exists(2, 1));
 
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1, 'category_id' => 2)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1, 'category_id' => 2)));
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
@@ -526,6 +397,7 @@ class TaskTest extends Base
     public function testDuplicateToAnotherProject()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
@@ -538,7 +410,7 @@ class TaskTest extends Base
         $this->assertTrue($c->exists(1, 1));
 
         // We create a task
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1, 'category_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1, 'category_id' => 1)));
         $task = $tf->getById(1);
 
         // We duplicate our task to the 2nd project
@@ -559,6 +431,7 @@ class TaskTest extends Base
     public function testMoveToAnotherProject()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
@@ -573,8 +446,8 @@ class TaskTest extends Base
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
         // We create a task
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1, 'category_id' => 10, 'position' => 333)));
-        $this->assertEquals(2, $t->create(array('title' => 'test2', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 3, 'category_id' => 10, 'position' => 333)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1, 'category_id' => 10, 'position' => 333)));
+        $this->assertEquals(2, $tc->create(array('title' => 'test2', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 3, 'category_id' => 10, 'position' => 333)));
 
         // We duplicate our task to the 2nd project
         $task = $tf->getById(1);
@@ -606,6 +479,7 @@ class TaskTest extends Base
     public function testEvents()
     {
         $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $ts = new TaskStatus($this->container);
         $p = new Project($this->container);
 
@@ -613,7 +487,7 @@ class TaskTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
 
         // We create task
-        $this->assertEquals(1, $t->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
         $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
 
         // We update a task
@@ -634,7 +508,7 @@ class TaskTest extends Base
         $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_COLUMN));
 
         // We change the position of our task
-        $this->assertEquals(2, $t->create(array('title' => 'test 2', 'project_id' => 1, 'column_id' => 2)));
+        $this->assertEquals(2, $tc->create(array('title' => 'test 2', 'project_id' => 1, 'column_id' => 2)));
         $this->assertTrue($t->movePosition(1, 1, 2, 2));
         $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_POSITION));
 

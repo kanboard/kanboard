@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Task;
+use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
 use Model\Category;
@@ -12,7 +13,7 @@ class CategoryTest extends Base
 {
     public function testCreation()
     {
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
@@ -20,7 +21,7 @@ class CategoryTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $c->create(array('name' => 'Category #1', 'project_id' => 1)));
         $this->assertEquals(2, $c->create(array('name' => 'Category #2', 'project_id' => 1)));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'category_id' => 2)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'category_id' => 2)));
 
         $task = $tf->getById(1);
         $this->assertTrue(is_array($task));
@@ -35,7 +36,7 @@ class CategoryTest extends Base
 
     public function testRemove()
     {
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
@@ -43,7 +44,7 @@ class CategoryTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $c->create(array('name' => 'Category #1', 'project_id' => 1)));
         $this->assertEquals(2, $c->create(array('name' => 'Category #2', 'project_id' => 1)));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'category_id' => 2)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'category_id' => 2)));
 
         $task = $tf->getById(1);
         $this->assertTrue(is_array($task));

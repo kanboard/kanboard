@@ -6,6 +6,7 @@ use JsonRPC\Server;
 use Model\Project;
 use Model\ProjectPermission;
 use Model\Task;
+use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\TaskStatus;
 use Model\TaskValidator;
@@ -26,6 +27,7 @@ $config->setupTimezone();
 $project = new Project($container);
 $projectPermission = new ProjectPermission($container);
 $task = new Task($container);
+$taskCreation = new TaskCreation($container);
 $taskFinder = new TaskFinder($container);
 $taskStatus = new TaskStatus($container);
 $taskValidator = new TaskValidator($container);
@@ -163,7 +165,7 @@ $server->register('allowUser', function($project_id, $user_id) use ($project, $p
 /**
  * Task procedures
  */
-$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($task, $taskValidator) {
+$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($taskCreation, $taskValidator) {
 
     $values = array(
         'title' => $title,
@@ -179,7 +181,7 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
     );
 
     list($valid,) = $taskValidator->validateCreation($values);
-    return $valid && $task->create($values) !== false;
+    return $valid && $taskCreation->create($values) !== false;
 });
 
 $server->register('getTask', function($task_id) use ($taskFinder) {

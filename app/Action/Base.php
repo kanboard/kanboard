@@ -15,6 +15,7 @@ use Core\Tool;
  * @property \Model\Acl                $acl
  * @property \Model\Comment            $comment
  * @property \Model\Task               $task
+ * @property \Model\TaskCreation       $taskCreation
  * @property \Model\TaskFinder         $taskFinder
  * @property \Model\TaskStatus         $taskStatus
  */

@@ -457,7 +457,7 @@ function version_1($pdo)
     $pdo->exec("
         CREATE TABLE tasks (
             id INTEGER PRIMARY KEY,
-            title TEXT,
+            title TEXT NOT NULL,
             description TEXT,
             date_creation INTEGER,
             color_id TEXT,

@@ -4,6 +4,7 @@ require_once __DIR__.'/Base.php';
 
 use Model\User;
 use Model\Task;
+use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
 
@@ -119,13 +120,13 @@ class UserTest extends Base
     public function testRemove()
     {
         $u = new User($this->container);
-        $t = new Task($this->container);
+        $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertTrue($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $t->create(array('title' => 'Task #1', 'project_id' => 1, 'owner_id' => 2)));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'owner_id' => 2)));
 
         $task = $tf->getById(1);
         $this->assertEquals(1, $task['id']);
