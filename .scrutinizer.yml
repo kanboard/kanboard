@@ -14,6 +14,7 @@ tools:
                 - 'vendor/*'
                 - 'tests/*'
                 - 'app/Template/*'
+                - 'scripts/*'
             paths: {  }
     php_pdepend:
         enabled: true
@@ -26,6 +27,7 @@ tools:
                 - 'vendor/*'
                 - 'tests/*'
                 - 'app/Template/*'
+                - 'scripts/*'
             paths: {  }
     php_analyzer:
         enabled: true
@@ -37,6 +39,7 @@ tools:
                 - 'vendor/*'
                 - 'tests/*'
                 - 'app/Template/*'
+                - 'scripts/*'
             paths: {  }
         path_configs: {  }
     php_changetracking:
@@ -51,4 +54,5 @@ tools:
                 - 'vendor/*'
                 - 'tests/*'
                 - 'app/Template/*'
+                - 'scripts/*'
             paths: {  }

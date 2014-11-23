@@ -34,6 +34,7 @@ use PicoDb\Database;
  * @property \Model\TaskExport         $taskExport
  * @property \Model\TaskFinder         $taskFinder
  * @property \Model\TaskHistory        $taskHistory
+ * @property \Model\TaskPosition       $taskPosition
  * @property \Model\TaskValidator      $taskValidator
  * @property \Model\TimeTracking       $timeTracking
  * @property \Model\User               $user
