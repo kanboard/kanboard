@@ -231,10 +231,9 @@ class Board extends Base
      *
      * @access public
      * @param  integer $project_id Project id
-     * @param  array $filters
      * @return array
      */
-    public function get($project_id, array $filters = array())
+    public function get($project_id)
     {
         $columns = $this->getColumns($project_id);
         $tasks = $this->taskFinder->getTasksOnBoard($project_id);

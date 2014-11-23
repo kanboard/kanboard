@@ -243,7 +243,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->taskValidator->validateTimeModification($values);
+        list($valid,) = $this->taskValidator->validateTimeModification($values);
 
         if ($valid && $this->taskModification->update($values)) {
             $this->session->flash(t('Task updated successfully.'));

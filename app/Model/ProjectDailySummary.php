@@ -72,8 +72,8 @@ class ProjectDailySummary extends Base
     public function countDays($project_id, $from, $to)
     {
         $rq = $this->db->execute(
-            'SELECT COUNT(DISTINCT day) FROM '.self::TABLE.' WHERE day >= ? AND day <= ?',
-            array($from, $to)
+            'SELECT COUNT(DISTINCT day) FROM '.self::TABLE.' WHERE day >= ? AND day <= ? AND project_id=?',
+            array($from, $to, $project_id)
         );
 
         return $rq->fetchColumn(0);

@@ -31,6 +31,7 @@ use PicoDb\Database;
  * @property \Model\SubTask            $subTask
  * @property \Model\SubtaskHistory     $subtaskHistory
  * @property \Model\Task               $task
+ * @property \Model\TaskCreation       $taskCreation
  * @property \Model\TaskExport         $taskExport
  * @property \Model\TaskFinder         $taskFinder
  * @property \Model\TaskHistory        $taskHistory
