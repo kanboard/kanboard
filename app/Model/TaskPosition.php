@@ -94,7 +94,7 @@ class TaskPosition extends Base
 
                 foreach ($column as $task_id) {
 
-                    $result = $this->db->table(Task::TABLE)->eq('id', $task_id)->update(array(
+                    $result = $db->table(Task::TABLE)->eq('id', $task_id)->update(array(
                         'position' => $position,
                         'column_id' => $column_id
                     ));
