@@ -32,6 +32,12 @@ class CategoryTest extends Base
         $this->assertEquals(2, $category['id']);
         $this->assertEquals('Category #2', $category['name']);
         $this->assertEquals(1, $category['project_id']);
+
+        $this->assertEquals(2, $c->getIdByName(1, 'Category #2'));
+        $this->assertEquals(0, $c->getIdByName(2, 'Category #2'));
+
+        $this->assertEquals('Category #2', $c->getNameById(2));
+        $this->assertEquals('', $c->getNameById(23));
     }
 
     public function testRemove()

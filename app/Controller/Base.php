@@ -35,6 +35,7 @@ use Model\LastLogin;
  * @property \Model\Task               $task
  * @property \Model\TaskCreation       $taskCreation
  * @property \Model\TaskModification   $taskModification
+ * @property \Model\TaskDuplication    $taskDuplication
  * @property \Model\TaskHistory        $taskHistory
  * @property \Model\TaskExport         $taskExport
  * @property \Model\TaskFinder         $taskFinder

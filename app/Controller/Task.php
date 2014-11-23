@@ -352,7 +352,7 @@ class Task extends Base
         if ($this->request->getStringParam('confirmation') === 'yes') {
 
             $this->checkCSRFParam();
-            $task_id = $this->task->duplicateToSameProject($task);
+            $task_id = $this->taskDuplication->duplicate($task['id']);
 
             if ($task_id) {
                 $this->session->flash(t('Task created successfully.'));
@@ -428,7 +428,36 @@ class Task extends Base
      */
     public function move()
     {
-        $this->toAnotherProject('move');
+        $task = $this->getTask();
+        $values = $task;
+        $errors = array();
+        $projects_list = $this->projectPermission->getMemberProjects($this->acl->getUserId());
+
+        unset($projects_list[$task['project_id']]);
+
+        if ($this->request->isPost()) {
+
+            $values = $this->request->getValues();
+            list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
+
+            if ($valid) {
+
+                if ($this->taskDuplication->moveToProject($task['id'], $values['project_id'])) {
+                    $this->session->flash(t('Task updated successfully.'));
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+                }
+                else {
+                    $this->session->flashError(t('Unable to update your task.'));
+                }
+            }
+        }
+
+        $this->response->html($this->taskLayout('task_move_project', array(
+            'values' => $values,
+            'errors' => $errors,
+            'task' => $task,
+            'projects_list' => $projects_list,
+        )));
     }
 
     /**
@@ -437,16 +466,6 @@ class Task extends Base
      * @access public
      */
     public function copy()
-    {
-        $this->toAnotherProject('duplicate');
-    }
-
-    /**
-     * Common methods between the actions "move" and "copy"
-     *
-     * @access private
-     */
-    private function toAnotherProject($action)
     {
         $task = $this->getTask();
         $values = $task;
@@ -461,7 +480,7 @@ class Task extends Base
             list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid) {
-                $task_id = $this->task->{$action.'ToAnotherProject'}($values['project_id'], $task);
+                $task_id = $this->taskDuplication->duplicateToProject($task['id'], $values['project_id']);
                 if ($task_id) {
                     $this->session->flash(t('Task created successfully.'));
                     $this->response->redirect('?controller=task&action=show&task_id='.$task_id);
@@ -472,7 +491,7 @@ class Task extends Base
             }
         }
 
-        $this->response->html($this->taskLayout('task_'.$action.'_project', array(
+        $this->response->html($this->taskLayout('task_duplicate_project', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,

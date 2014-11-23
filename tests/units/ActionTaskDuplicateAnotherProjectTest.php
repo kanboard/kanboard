@@ -77,6 +77,7 @@ class ActionTaskDuplicateAnotherProject extends Base
         // Our event should be executed because we define a different project
         $action->setParam('column_id', 2);
         $action->setParam('project_id', 2);
+        $this->assertTrue($action->hasRequiredCondition($event));
         $this->assertTrue($action->execute($event));
 
         // Our task should be assigned to the project 1

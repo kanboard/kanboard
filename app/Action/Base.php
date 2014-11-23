@@ -17,6 +17,7 @@ use Core\Tool;
  * @property \Model\Task               $task
  * @property \Model\TaskCreation       $taskCreation
  * @property \Model\TaskModification   $taskModification
+ * @property \Model\TaskDuplication    $taskDuplication
  * @property \Model\TaskFinder         $taskFinder
  * @property \Model\TaskStatus         $taskStatus
  */

@@ -193,22 +193,22 @@ class SubTask extends Base
      */
     public function duplicate($src_task_id, $dst_task_id)
     {
-        $subtasks = $this->db->table(self::TABLE)
-                             ->columns('title', 'time_estimated')
-                             ->eq('task_id', $src_task_id)
-                             ->findAll();
+        return $this->db->transaction(function ($db) use ($src_task_id, $dst_task_id) {
 
-        foreach ($subtasks as &$subtask) {
+            $subtasks = $db->table(self::TABLE)
+                                 ->columns('title', 'time_estimated')
+                                 ->eq('task_id', $src_task_id)
+                                 ->findAll();
 
-            $subtask['task_id'] = $dst_task_id;
-            $subtask['time_spent'] = 0;
+            foreach ($subtasks as &$subtask) {
 
-            if (! $this->db->table(self::TABLE)->save($subtask)) {
-                return false;
+                $subtask['task_id'] = $dst_task_id;
+
+                if (! $db->table(self::TABLE)->save($subtask)) {
+                    return false;
+                }
             }
-        }
-
-        return true;
+        });
     }
 
     /**

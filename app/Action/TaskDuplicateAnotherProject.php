@@ -64,9 +64,7 @@ class TaskDuplicateAnotherProject extends Base
      */
     public function doAction(array $data)
     {
-        $task = $this->taskFinder->getById($data['task_id']);
-        $this->task->duplicateToAnotherProject($this->getParam('project_id'), $task);
-        return true;
+        return (bool) $this->taskDuplication->duplicateToProject($data['task_id'], $this->getParam('project_id'));
     }
 
     /**
