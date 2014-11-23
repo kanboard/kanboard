@@ -95,7 +95,7 @@ abstract class Base
      * Constructor
      *
      * @access public
-     * @param  Pimple\Container   $container
+     * @param  \Pimple\Container   $container
      */
     public function __construct(Container $container)
     {

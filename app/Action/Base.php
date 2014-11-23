@@ -105,9 +105,9 @@ abstract class Base implements Listener
      * Constructor
      *
      * @access public
-     * @param  Pimple\Container   $container        Container
-     * @param  integer            $project_id       Project id
-     * @param  string             $event_name       Attached event name
+     * @param  \Pimple\Container   $container        Container
+     * @param  integer             $project_id       Project id
+     * @param  string              $event_name       Attached event name
      */
     public function __construct(Container $container, $project_id, $event_name)
     {

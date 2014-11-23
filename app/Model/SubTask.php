@@ -195,7 +195,7 @@ class SubTask extends Base
     {
         return $this->db->transaction(function ($db) use ($src_task_id, $dst_task_id) {
 
-            $subtasks = $db->table(self::TABLE)
+            $subtasks = $db->table(SubTask::TABLE)
                                  ->columns('title', 'time_estimated')
                                  ->eq('task_id', $src_task_id)
                                  ->findAll();
@@ -204,7 +204,7 @@ class SubTask extends Base
 
                 $subtask['task_id'] = $dst_task_id;
 
-                if (! $db->table(self::TABLE)->save($subtask)) {
+                if (! $db->table(SubTask::TABLE)->save($subtask)) {
                     return false;
                 }
             }
