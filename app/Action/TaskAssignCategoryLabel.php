@@ -67,7 +67,7 @@ class TaskAssignCategoryLabel extends Base
             'category_id' => isset($data['category_id']) ? $data['category_id'] : $this->getParam('category_id'),
         );
 
-        return $this->task->update($values, false);
+        return $this->taskModification->update($values, false);
     }
 
     /**

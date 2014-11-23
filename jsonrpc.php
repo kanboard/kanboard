@@ -8,6 +8,7 @@ $models = array(
     'ProjectPermission',
     'Task',
     'TaskCreation',
+    'TaskModification',
     'TaskFinder',
     'TaskPosition',
     'TaskStatus',
@@ -136,7 +137,7 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
     return $taskCreationModel->create($values);
 });
 
-$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null) use ($taskModel, $taskValidatorModel) {
+$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null) use ($taskModificationModel, $taskValidatorModel) {
 
     $values = array(
         'id' => $id,
@@ -159,7 +160,7 @@ $server->register('updateTask', function($id, $title = null, $project_id = null,
     }
 
     list($valid) = $taskValidatorModel->validateApiModification($values);
-    return $valid && $taskModel->update($values);
+    return $valid && $taskModificationModel->update($values);
 });
 
 

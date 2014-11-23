@@ -109,6 +109,14 @@ class TaskPosition extends Base
         });
     }
 
+    /**
+     * Fire events
+     *
+     * @access public
+     * @param  array     $task
+     * @param  integer   $new_column_id
+     * @param  integer   $new_position
+     */
     public function fireEvents(array $task, $new_column_id, $new_position)
     {
         $event_data = array(

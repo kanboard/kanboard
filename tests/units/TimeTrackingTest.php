@@ -3,7 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Model\SubTask;
-use Model\Task;
+use Model\TaskModification;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
@@ -13,7 +13,7 @@ class TimeTrackingTest extends Base
 {
     public function testCalculateTime()
     {
-        $t = new Task($this->container);
+        $tm = new TaskModification($this->container);
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
@@ -22,7 +22,7 @@ class TimeTrackingTest extends Base
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'time_estimated' => 4.5)));
-        $this->assertTrue($t->update(array('id' => 1, 'time_spent' => 3.5)));
+        $this->assertTrue($tm->update(array('id' => 1, 'time_spent' => 3.5)));
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);

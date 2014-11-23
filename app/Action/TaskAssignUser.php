@@ -64,7 +64,7 @@ class TaskAssignUser extends Base
             'owner_id' => $data['owner_id'],
         );
 
-        return $this->task->update($values, false);
+        return $this->taskModification->update($values, false);
     }
 
     /**

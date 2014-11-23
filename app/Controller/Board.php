@@ -62,7 +62,7 @@ class Board extends Base
 
         list($valid,) = $this->taskValidator->validateAssigneeModification($values);
 
-        if ($valid && $this->task->update($values)) {
+        if ($valid && $this->taskModification->update($values)) {
             $this->session->flash(t('Task updated successfully.'));
         }
         else {
@@ -101,7 +101,7 @@ class Board extends Base
 
         list($valid,) = $this->taskValidator->validateCategoryModification($values);
 
-        if ($valid && $this->task->update($values)) {
+        if ($valid && $this->taskModification->update($values)) {
             $this->session->flash(t('Task updated successfully.'));
         }
         else {

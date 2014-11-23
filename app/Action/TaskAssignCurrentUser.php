@@ -67,7 +67,7 @@ class TaskAssignCurrentUser extends Base
             'owner_id' => $this->acl->getUserId(),
         );
 
-        return $this->task->update($values, false);
+        return $this->taskModification->update($values, false);
     }
 
     /**

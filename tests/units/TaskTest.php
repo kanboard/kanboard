@@ -146,27 +146,4 @@ class TaskTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals(0, $task['owner_id']);
     }
-
-    public function testEvents()
-    {
-        $t = new Task($this->container);
-        $tc = new TaskCreation($this->container);
-        $ts = new TaskStatus($this->container);
-        $p = new Project($this->container);
-
-        // We create a project
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-
-        // We create task
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-
-        // We update a task
-        $this->assertTrue($t->update(array('title' => 'test2', 'id' => 1)));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_UPDATE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
-
-        // We change the assignee
-        $this->assertTrue($t->update(array('owner_id' => 1, 'id' => 1)));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_ASSIGNEE_CHANGE));
-    }
 }

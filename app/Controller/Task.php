@@ -204,7 +204,7 @@ class Task extends Base
 
         if ($valid) {
 
-            if ($this->task->update($values)) {
+            if ($this->taskModification->update($values)) {
                 $this->session->flash(t('Task updated successfully.'));
 
                 if ($this->request->getIntegerParam('ajax')) {
@@ -245,7 +245,7 @@ class Task extends Base
 
         list($valid, $errors) = $this->taskValidator->validateTimeModification($values);
 
-        if ($valid && $this->task->update($values)) {
+        if ($valid && $this->taskModification->update($values)) {
             $this->session->flash(t('Task updated successfully.'));
         }
         else {
@@ -386,7 +386,7 @@ class Task extends Base
 
             if ($valid) {
 
-                if ($this->task->update($values)) {
+                if ($this->taskModification->update($values)) {
                     $this->session->flash(t('Task updated successfully.'));
                 }
                 else {
