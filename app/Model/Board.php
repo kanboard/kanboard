@@ -109,16 +109,18 @@ class Board extends Base
      * @param  integer   $project_id    Project id
      * @param  string    $title         Column title
      * @param  integer   $task_limit    Task limit
-     * @return boolean
+     * @return boolean|integer
      */
     public function addColumn($project_id, $title, $task_limit = 0)
     {
-        return $this->db->table(self::TABLE)->save(array(
+        $values = array(
             'project_id' => $project_id,
             'title' => $title,
             'task_limit' => $task_limit,
             'position' => $this->getLastColumnPosition($project_id) + 1,
-        ));
+        );
+
+        return $this->persist(self::TABLE, $values);
     }
 
     /**

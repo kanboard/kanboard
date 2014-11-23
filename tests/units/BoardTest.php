@@ -111,8 +111,8 @@ class BoardTest extends Base
         $b = new Board($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
-        $this->assertTrue($b->addColumn(1, 'another column'));
-        $this->assertTrue($b->addColumn(1, 'one more', 3));
+        $this->assertNotFalse($b->addColumn(1, 'another column'));
+        $this->assertNotFalse($b->addColumn(1, 'one more', 3));
 
         $columns = $b->getColumns(1);
         $this->assertTrue(is_array($columns));

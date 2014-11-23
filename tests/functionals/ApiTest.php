@@ -135,7 +135,11 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testAddColumn()
     {
-        $this->assertTrue($this->client->addColumn(1, 'New column'));
+        $column_id = $this->client->addColumn(1, 'New column');
+
+        $this->assertNotFalse($column_id);
+        $this->assertInternalType('int', $column_id);
+        $this->assertTrue($column_id > 0);
 
         $columns = $this->client->getColumns(1);
         $this->assertTrue(is_array($columns));

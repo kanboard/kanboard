@@ -869,7 +869,7 @@ Response example:
     - **project_id** (integer, required)
     - **title** (string, required)
     - **task_limit** (integer, optional)
-- Result on success: **true**
+- Result on success: **column_id**
 - Result on failure: **false**
 
 Request example:
@@ -892,7 +892,7 @@ Response example:
 {
     "jsonrpc": "2.0",
     "id": 638544704,
-    "result": true
+    "result": 5
 }
 ```
 
