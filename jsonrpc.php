@@ -9,6 +9,7 @@ $models = array(
     'Task',
     'TaskCreation',
     'TaskFinder',
+    'TaskPosition',
     'TaskStatus',
     'TaskValidator',
     'User',
@@ -109,7 +110,7 @@ $server->bind('getAllTasks', $taskFinderModel, 'getAll');
 $server->bind('openTask', $taskStatusModel, 'open');
 $server->bind('closeTask', $taskStatusModel, 'close');
 $server->bind('removeTask', $taskModel, 'remove');
-$server->bind('moveTaskPosition', $taskModel, 'movePosition');
+$server->bind('moveTaskPosition', $taskPositionModel, 'movePosition');
 
 $server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($taskCreationModel, $taskValidatorModel) {
 

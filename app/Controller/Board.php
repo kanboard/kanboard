@@ -347,7 +347,7 @@ class Board extends Base
 
             $values = $this->request->getJson();
 
-            if ($this->task->movePosition($project_id, $values['task_id'], $values['column_id'], $values['position'])) {
+            if ($this->taskPosition->movePosition($project_id, $values['task_id'], $values['column_id'], $values['position'])) {
 
                 $this->response->html(
                     $this->template->load('board/show', array(

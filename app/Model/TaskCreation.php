@@ -21,7 +21,10 @@ class TaskCreation extends Base
     {
         $this->prepare($values);
         $task_id = $this->persist(Task::TABLE, $values);
-        $this->fireEvents($task_id, $values);
+
+        if ($task_id) {
+            $this->fireEvents($task_id, $values);
+        }
 
         return (int) $task_id;
     }
@@ -60,10 +63,8 @@ class TaskCreation extends Base
      */
     private function fireEvents($task_id, array $values)
     {
-        if ($task_id) {
-            $values['task_id'] = $task_id;
-            $this->event->trigger(Task::EVENT_CREATE_UPDATE, $values);
-            $this->event->trigger(Task::EVENT_CREATE, $values);
-        }
+        $values['task_id'] = $task_id;
+        $this->event->trigger(Task::EVENT_CREATE_UPDATE, $values);
+        $this->event->trigger(Task::EVENT_CREATE, $values);
     }
 }

@@ -69,7 +69,7 @@ class Event
     {
         if (! $this->isEventTriggered($eventName)) {
 
-            $this->events[] = $eventName;
+            $this->events[$eventName] = $data;
 
             if (isset($this->listeners[$eventName])) {
 
@@ -119,6 +119,17 @@ class Event
     }
 
     /**
+     * Get a list of triggered events
+     *
+     * @access public
+     * @return array
+     */
+    public function getEventData($eventName)
+    {
+        return isset($this->events[$eventName]) ? $this->events[$eventName] : array();
+    }
+
+    /**
      * Check if an event have been triggered
      *
      * @access public
@@ -127,7 +138,7 @@ class Event
      */
     public function isEventTriggered($eventName)
     {
-        return in_array($eventName, $this->events);
+        return isset($this->events[$eventName]);
     }
 
     /**
