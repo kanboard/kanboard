@@ -1,5 +1,5 @@
 <div class="task-<?= $task['color_id'] ?> task-show-details">
-    <h2><?= Helper\escape($task['title']) ?></h2>
+    <h2><?= Helper\escape('#'.$task['id'].' '.$task['title']) ?></h2>
     <?php if ($task['score']): ?>
         <span class="task-score"><?= Helper\escape($task['score']) ?></span>
     <?php endif ?>
