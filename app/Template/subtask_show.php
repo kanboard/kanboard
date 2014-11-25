@@ -19,13 +19,7 @@
         <tr>
             <td><?= Helper\escape($subtask['title']) ?></td>
             <td>
-                <?php if ($subtask['status'] == 0): ?>
-                    <i class="fa fa-square-o fa-fw"></i>
-                <?php elseif ($subtask['status'] == 1): ?>
-                    <i class="fa fa-gears fa-fw"></i>
-                <?php else: ?>
-                    <i class="fa fa-check-square-o fa-fw"></i>
-                <?php endif ?>
+                <?= Helper\template('subtask/icons', array('subtask' => $subtask)) ?>
 
                 <?php if (! isset($not_editable)): ?>
                     <?= Helper\a(Helper\escape($subtask['status_name']), 'subtask', 'toggleStatus', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>

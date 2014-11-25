@@ -574,11 +574,12 @@ function form_numeric($name, $values = array(), array $errors = array(), array $
  * @param  array    $params      Url parameters
  * @param  boolean  $csrf        Add a CSRF token
  * @param  string   $class       CSS class attribute
+ * @param  boolean  $new_tab     Open the link in a new tab
  * @return string
  */
-function a($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '')
+function a($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false)
 {
-    return '<a href="'.u($controller, $action, $params, $csrf).'" class="'.$class.'" title="'.$title.'">'.$label.'</a>';
+    return '<a href="'.u($controller, $action, $params, $csrf).'" class="'.$class.'" title="'.$title.'" '.($new_tab ? 'target="_blank"' : '').'>'.$label.'</a>';
 }
 
 /**

@@ -172,6 +172,28 @@ class SubTask extends Base
     }
 
     /**
+     * Change the status of subtask
+     *
+     * Todo -> In progress -> Done -> Todo -> etc...
+     *
+     * @access public
+     * @param  integer  $subtask_id
+     * @return bool
+     */
+    public function toggleStatus($subtask_id)
+    {
+        $subtask = $this->getById($subtask_id);
+
+        $values = array(
+            'id' => $subtask['id'],
+            'status' => ($subtask['status'] + 1) % 3,
+            'task_id' => $subtask['task_id'],
+        );
+
+        return $this->update($values);
+    }
+
+    /**
      * Remove
      *
      * @access public

@@ -183,15 +183,9 @@ class Subtask extends Base
     public function toggleStatus()
     {
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $subtask_id = $this->request->getIntegerParam('subtask_id');
 
-        $value = array(
-            'id' => $subtask['id'],
-            'status' => ($subtask['status'] + 1) % 3,
-            'task_id' => $task['id'],
-        );
-
-        if (! $this->subTask->update($value)) {
+        if (! $this->subTask->toggleStatus($subtask_id)) {
             $this->session->flashError(t('Unable to update your sub-task.'));
         }
 

@@ -405,4 +405,74 @@ class Board extends Base
             $this->response->status(401);
         }
     }
+
+    /**
+     * Get subtasks on mouseover
+     *
+     * @access public
+     */
+    public function subtasks()
+    {
+        $task = $this->getTask();
+        $this->response->html($this->template->load('board/subtasks', array(
+            'subtasks' => $this->subTask->getAll($task['id'])
+        )));
+    }
+
+    /**
+     * Change the status of a subtask from the mouseover
+     *
+     * @access public
+     */
+    public function toggleSubtask()
+    {
+        $task = $this->getTask();
+        $this->subTask->toggleStatus($this->request->getIntegerParam('subtask_id'));
+
+        $this->response->html($this->template->load('board/subtasks', array(
+            'subtasks' => $this->subTask->getAll($task['id'])
+        )));
+    }
+
+    /**
+     * Display all attachments during the task mouseover
+     *
+     * @access public
+     */
+    public function attachments()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->template->load('board/files', array(
+            'files' => $this->file->getAll($task['id'])
+        )));
+    }
+
+    /**
+     * Display comments during a task mouseover
+     *
+     * @access public
+     */
+    public function comments()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->template->load('board/comments', array(
+            'comments' => $this->comment->getAll($task['id'])
+        )));
+    }
+
+    /**
+     * Display the description
+     *
+     * @access public
+     */
+    public function description()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->template->load('board/description', array(
+            'task' => $task
+        )));
+    }
 }

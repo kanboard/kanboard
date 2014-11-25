@@ -90,19 +90,19 @@
     <div class="task-board-icons">
 
         <?php if (! empty($task['nb_subtasks'])): ?>
-            <span title="<?= t('Sub-Tasks') ?>"><?= $task['nb_completed_subtasks'].'/'.$task['nb_subtasks'] ?> <i class="fa fa-bars"></i></span>
+            <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= helper\u('board', 'subtasks', array('task_id' => $task['id'])) ?>"><?= $task['nb_completed_subtasks'].'/'.$task['nb_subtasks'] ?> <i class="fa fa-bars"></i></span>
         <?php endif ?>
 
         <?php if (! empty($task['nb_files'])): ?>
-            <span title="<?= t('Attachments') ?>"><?= $task['nb_files'] ?> <i class="fa fa-paperclip"></i></span>
+            <span title="<?= t('Attachments') ?>" class="task-board-tooltip" data-href="<?= helper\u('board', 'attachments', array('task_id' => $task['id'])) ?>"><?= $task['nb_files'] ?> <i class="fa fa-paperclip"></i></span>
         <?php endif ?>
 
         <?php if (! empty($task['nb_comments'])): ?>
-            <span title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>"><?= $task['nb_comments'] ?> <i class="fa fa-comment-o"></i></span>
+            <span title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>" class="task-board-tooltip" data-href="<?= helper\u('board', 'comments', array('task_id' => $task['id'])) ?>"><?= $task['nb_comments'] ?> <i class="fa fa-comment-o"></i></span>
         <?php endif ?>
 
         <?php if (! empty($task['description'])): ?>
-            <span title="<?= t('Description') ?>">
+            <span title="<?= t('Description') ?>" class="task-board-tooltip" data-href="<?= helper\u('board', 'description', array('task_id' => $task['id'])) ?>">
             <?php if (! isset($not_editable)): ?>
                 <a class="task-description-popover" href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"><i class="fa fa-file-text-o" data-href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"></i></a>
             <?php else: ?>
