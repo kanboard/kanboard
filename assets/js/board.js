@@ -3,6 +3,11 @@ Kanboard.Board = (function() {
 
     var checkInterval = null;
 
+    function on_popover(e)
+    {
+        Kanboard.Popover(e, Kanboard.Init);
+    }
+
     // Setup the board
     function board_load_events()
     {
@@ -28,12 +33,10 @@ Kanboard.Board = (function() {
         $(".category-popover").click(Kanboard.Popover);
 
         // Task edit popover
-        $(".task-edit-popover").click(function(e) {
-            Kanboard.Popover(e, Kanboard.Init);
-        });
+        $(".task-edit-popover").click(on_popover);
 
         // Description popover
-        $(".task-description-popover").click(Kanboard.Popover);
+        $(".task-description-popover").click(on_popover);
 
         // Tooltips
         $(".task-board-tooltip").tooltip({
