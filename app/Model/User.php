@@ -311,7 +311,7 @@ class User extends Base
             }
 
             // Finally remove the user
-            if (! $db->table(self::TABLE)->eq('id', $user_id)->remove()) {
+            if (! $db->table(User::TABLE)->eq('id', $user_id)->remove()) {
                 return false;
             }
         });
