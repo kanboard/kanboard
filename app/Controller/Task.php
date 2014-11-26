@@ -86,20 +86,25 @@ class Task extends Base
      *
      * @access public
      */
-    public function create()
+    public function create(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
         $method = $this->request->isAjax() ? 'load' : 'layout';
 
-        $this->response->html($this->template->$method('task_new', array(
-            'errors' => array(),
-            'values' => array(
-                'project_id' => $project['id'],
+        if (empty($values)) {
+
+            $values = array(
                 'column_id' => $this->request->getIntegerParam('column_id'),
                 'color_id' => $this->request->getStringParam('color_id'),
                 'owner_id' => $this->request->getIntegerParam('owner_id'),
                 'another_task' => $this->request->getIntegerParam('another_task'),
-            ),
+            );
+        }
+
+        $this->response->html($this->template->$method('task_new', array(
+            'ajax' => $this->request->isAjax(),
+            'errors' => $errors,
+            'values' => $values + array('project_id' => $project['id']),
             'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($project['id']),
             'users_list' => $this->projectPermission->getMemberList($project['id'], true, false, true),
@@ -122,7 +127,7 @@ class Task extends Base
         $values = $this->request->getValues();
         $values['creator_id'] = $this->acl->getUserId();
 
-        $this->checkProjectPermissions($values['project_id']);
+        $this->checkProjectPermissions($project['id']);
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
@@ -145,18 +150,7 @@ class Task extends Base
             }
         }
 
-        $this->response->html($this->template->layout('task_new', array(
-            'errors' => $errors,
-            'values' => $values,
-            'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
-            'columns_list' => $this->board->getColumnsList($project['id']),
-            'users_list' => $this->projectPermission->getMemberList($project['id']),
-            'colors_list' => $this->color->getList(),
-            'categories_list' => $this->category->getList($project['id']),
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
-            'title' => $project['name'].' &gt; '.t('New task')
-        )));
+        $this->create($values, $errors);
     }
 
     /**
