@@ -27,11 +27,16 @@ class ProjectPermission extends Base
      * @param  integer   $project_id            Project id
      * @param  bool      $prepend_unassigned    Prepend the 'Unassigned' value
      * @param  bool      $prepend_everybody     Prepend the 'Everbody' value
+     * @param  bool      $allow_single_user     If there is only one user return only this user
      * @return array
      */
-    public function getMemberList($project_id, $prepend_unassigned = true, $prepend_everybody = false)
+    public function getMemberList($project_id, $prepend_unassigned = true, $prepend_everybody = false, $allow_single_user = false)
     {
         $allowed_users = $this->getMembers($project_id);
+
+        if ($allow_single_user && count($allowed_users) === 1) {
+            return $allowed_users;
+        }
 
         if ($prepend_unassigned) {
             $allowed_users = array(t('Unassigned')) + $allowed_users;

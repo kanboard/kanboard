@@ -101,7 +101,7 @@ class Task extends Base
             ),
             'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($project['id']),
-            'users_list' => $this->projectPermission->getMemberList($project['id']),
+            'users_list' => $this->projectPermission->getMemberList($project['id'], true, false, true),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'date_format' => $this->config->get('application_date_format'),
