@@ -3,5 +3,4 @@
 </p>
 <div class="activity-description">
     <em><?= Helper\escape($task['title']) ?></em><br/>
-    <div class="markdown"><?= Helper\markdown($comment['comment']) ?></div>
 </div>
