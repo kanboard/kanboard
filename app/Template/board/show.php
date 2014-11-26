@@ -9,7 +9,7 @@
     <?php foreach ($board as $column): ?>
     <th width="<?= $column_with ?>%">
         <div class="board-add-icon">
-            <?= Helper\a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id']), false, '', t('Add a new task')) ?>
+            <?= Helper\a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id']), false, 'task-creation-popover', t('Add a new task')) ?>
         </div>
         <?= Helper\escape($column['title']) ?>
         <?php if ($column['task_limit']): ?>

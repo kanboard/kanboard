@@ -89,8 +89,9 @@ class Task extends Base
     public function create()
     {
         $project = $this->getProject();
+        $method = $this->request->isAjax() ? 'load' : 'layout';
 
-        $this->response->html($this->template->layout('task_new', array(
+        $this->response->html($this->template->$method('task_new', array(
             'errors' => array(),
             'values' => array(
                 'project_id' => $project['id'],

@@ -34,6 +34,7 @@ Kanboard.Board = (function() {
 
         // Task edit popover
         $(".task-edit-popover").click(on_popover);
+        $(".task-creation-popover").click(on_popover);
 
         // Description popover
         $(".task-description-popover").click(on_popover);
