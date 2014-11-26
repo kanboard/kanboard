@@ -156,7 +156,7 @@ class ProjectTest extends Base
         $this->assertEmpty($project['token']);
 
         // Clone private project
-        $this->assertEquals(3, $p->create(array('name' => 'Private', 'is_private' => 1), 1));
+        $this->assertEquals(3, $p->create(array('name' => 'Private', 'is_private' => 1), 1, true));
         $this->assertEquals(4, $p->duplicate(3));
 
         $project = $p->getById(4);

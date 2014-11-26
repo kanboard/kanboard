@@ -560,7 +560,7 @@ class Project extends Base
 
         if ($valid) {
 
-            $project_id = $this->project->create($values, $this->acl->getUserId());
+            $project_id = $this->project->create($values, $this->acl->getUserId(), true);
 
             if ($project_id) {
                 $this->session->flash(t('Your project have been created successfully.'));
