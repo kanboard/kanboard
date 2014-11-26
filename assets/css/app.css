@@ -251,6 +251,11 @@ textarea.form-error {
     border: 2px solid #b94a48;
 }
 
+input.form-error:focus,
+textarea.form-error:focus {
+    box-shadow: none;
+}
+
 .form-required {
     color: red;
     padding-left: 5px;
