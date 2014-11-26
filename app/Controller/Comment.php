@@ -25,7 +25,7 @@ class Comment extends Base
         }
 
         if (! $this->acl->isAdminUser() && $comment['user_id'] != $this->acl->getUserId()) {
-            $this->response->html($this->template->layout('comment_forbidden', array(
+            $this->response->html($this->template->layout('comment/forbidden', array(
                 'title' => t('Access Forbidden')
             )));
         }
@@ -38,16 +38,20 @@ class Comment extends Base
      *
      * @access public
      */
-    public function create()
+    public function create(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('comment_create', array(
-            'values' => array(
+        if (empty($values)) {
+            $values = array(
                 'user_id' => $this->acl->getUserId(),
                 'task_id' => $task['id'],
-            ),
-            'errors' => array(),
+            );
+        }
+
+        $this->response->html($this->taskLayout('comment/create', array(
+            'values' => $values,
+            'errors' => $errors,
             'task' => $task,
             'title' => t('Add a comment')
         )));
@@ -77,12 +81,7 @@ class Comment extends Base
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comments');
         }
 
-        $this->response->html($this->taskLayout('comment_create', array(
-            'values' => $values,
-            'errors' => $errors,
-            'task' => $task,
-            'title' => t('Add a comment')
-        )));
+        $this->create($values, $errors);
     }
 
     /**
@@ -90,14 +89,14 @@ class Comment extends Base
      *
      * @access public
      */
-    public function edit()
+    public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
         $comment = $this->getComment();
 
-        $this->response->html($this->taskLayout('comment_edit', array(
-            'values' => $comment,
-            'errors' => array(),
+        $this->response->html($this->taskLayout('comment/edit', array(
+            'values' => empty($values) ? $comment : $values,
+            'errors' => $errors,
             'comment' => $comment,
             'task' => $task,
             'title' => t('Edit a comment')
@@ -129,13 +128,7 @@ class Comment extends Base
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comment-'.$comment['id']);
         }
 
-        $this->response->html($this->taskLayout('comment_edit', array(
-            'values' => $values,
-            'errors' => $errors,
-            'comment' => $comment,
-            'task' => $task,
-            'title' => t('Edit a comment')
-        )));
+        $this->edit($values, $errors);
     }
 
     /**
@@ -148,7 +141,7 @@ class Comment extends Base
         $task = $this->getTask();
         $comment = $this->getComment();
 
-        $this->response->html($this->taskLayout('comment_remove', array(
+        $this->response->html($this->taskLayout('comment/remove', array(
             'comment' => $comment,
             'task' => $task,
             'title' => t('Remove a comment')

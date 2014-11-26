@@ -5,7 +5,7 @@
     </div>
 
     <?php foreach ($comments as $comment): ?>
-        <?= Helper\template('comment_show', array(
+        <?= Helper\template('comment/show', array(
             'comment' => $comment,
             'task' => $task,
             'project' => $project,
@@ -15,7 +15,7 @@
     <?php endforeach ?>
 
     <?php if (! isset($not_editable)): ?>
-        <?= Helper\template('comment_create', array(
+        <?= Helper\template('comment/create', array(
                 'skip_cancel' => true,
                 'values' => array(
                     'user_id' => Helper\get_user_id(),
