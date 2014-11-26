@@ -141,5 +141,20 @@ class UserTest extends Base
         $task = $tf->getById(1);
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(0, $task['owner_id']);
+
+        // Make sure that private projects are also removed
+        $user_id1 = $u->create(array('username' => 'toto1', 'password' => '123456', 'name' => 'Toto'));
+        $user_id2 = $u->create(array('username' => 'toto2', 'password' => '123456', 'name' => 'Toto'));
+        $this->assertNotFalse($user_id1);
+        $this->assertNotFalse($user_id2);
+        $this->assertEquals(2, $p->create(array('name' => 'Private project #1', 'is_private' => 1), $user_id1, true));
+        $this->assertEquals(3, $p->create(array('name' => 'Private project #2', 'is_private' => 1), $user_id2, true));
+
+        $this->assertTrue($u->remove($user_id1));
+
+        $this->assertNotEmpty($p->getById(1));
+        $this->assertNotEmpty($p->getById(3));
+
+        $this->assertEmpty($p->getById(2));
     }
 }

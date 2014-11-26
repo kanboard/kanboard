@@ -292,15 +292,29 @@ class User extends Base
      */
     public function remove($user_id)
     {
-        $this->db->startTransaction();
+        return $this->db->transaction(function ($db) use ($user_id) {
 
-        // All tasks assigned to this user will be unassigned
-        $this->db->table(Task::TABLE)->eq('owner_id', $user_id)->update(array('owner_id' => 0));
-        $result = $this->db->table(self::TABLE)->eq('id', $user_id)->remove();
+            // All assigned tasks are now unassigned
+            if (! $db->table(Task::TABLE)->eq('owner_id', $user_id)->update(array('owner_id' => 0))) {
+                return false;
+            }
 
-        $this->db->closeTransaction();
+            // All private projects are removed
+            $project_ids = $db->table(Project::TABLE)
+                           ->eq('is_private', 1)
+                           ->eq(ProjectPermission::TABLE.'.user_id', $user_id)
+                           ->join(ProjectPermission::TABLE, 'project_id', 'id')
+                           ->findAllByColumn(Project::TABLE.'.id');
 
-        return $result;
+            if (! empty($project_ids)) {
+                $db->table(Project::TABLE)->in('id', $project_ids)->remove();
+            }
+
+            // Finally remove the user
+            if (! $db->table(self::TABLE)->eq('id', $user_id)->remove()) {
+                return false;
+            }
+        });
     }
 
     /**
