@@ -87,6 +87,7 @@ textarea.form-error {
 input.form-error:focus,
 textarea.form-error:focus {
     box-shadow: none;
+    border: 2px solid #b94a48;
 }
 
 .form-required {

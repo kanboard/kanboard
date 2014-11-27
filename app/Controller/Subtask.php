@@ -32,16 +32,20 @@ class Subtask extends Base
      *
      * @access public
      */
-    public function create()
+    public function create(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('subtask_create', array(
-            'values' => array(
+        if (empty($values)) {
+            $values = array(
                 'task_id' => $task['id'],
                 'another_subtask' => $this->request->getIntegerParam('another_subtask', 0)
-            ),
-            'errors' => array(),
+            );
+        }
+
+        $this->response->html($this->taskLayout('subtask/create', array(
+            'values' => $values,
+            'errors' => $errors,
             'users_list' => $this->projectPermission->getMemberList($task['project_id']),
             'task' => $task,
         )));
@@ -75,12 +79,7 @@ class Subtask extends Base
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#subtasks');
         }
 
-        $this->response->html($this->taskLayout('subtask_create', array(
-            'values' => $values,
-            'errors' => $errors,
-            'users_list' => $this->projectPermission->getMemberList($task['project_id']),
-            'task' => $task,
-        )));
+        $this->create($values, $errors);
     }
 
     /**
@@ -88,14 +87,14 @@ class Subtask extends Base
      *
      * @access public
      */
-    public function edit()
+    public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
         $subtask = $this->getSubTask();
 
-        $this->response->html($this->taskLayout('subtask_edit', array(
-            'values' => $subtask,
-            'errors' => array(),
+        $this->response->html($this->taskLayout('subtask/edit', array(
+            'values' => empty($values) ? $subtask : $values,
+            'errors' => $errors,
             'users_list' => $this->projectPermission->getMemberList($task['project_id']),
             'status_list' => $this->subTask->getStatusList(),
             'subtask' => $subtask,
@@ -128,14 +127,7 @@ class Subtask extends Base
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#subtasks');
         }
 
-        $this->response->html($this->taskLayout('subtask_edit', array(
-            'values' => $values,
-            'errors' => $errors,
-            'users_list' => $this->projectPermission->getMemberList($task['project_id']),
-            'status_list' => $this->subTask->getStatusList(),
-            'subtask' => $subtask,
-            'task' => $task,
-        )));
+        $this->edit($values, $errors);
     }
 
     /**
@@ -148,7 +140,7 @@ class Subtask extends Base
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        $this->response->html($this->taskLayout('subtask_remove', array(
+        $this->response->html($this->taskLayout('subtask/remove', array(
             'subtask' => $subtask,
             'task' => $task,
         )));

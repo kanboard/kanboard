@@ -267,6 +267,29 @@ class SubTask extends Base
         $rules = array(
             new Validators\Required('id', t('The subtask id is required')),
             new Validators\Required('task_id', t('The task id is required')),
+            new Validators\Required('title', t('The title is required')),
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    /**
+     * Validate API modification
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateApiModification(array $values)
+    {
+        $rules = array(
+            new Validators\Required('id', t('The subtask id is required')),
+            new Validators\Required('task_id', t('The task id is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));

@@ -10,7 +10,8 @@
     <p><strong><?= Helper\escape($subtask['title']) ?></strong></p>
 
     <div class="form-actions">
-        <a href="?controller=subtask&amp;action=remove&amp;task_id=<?= $task['id'] ?>&amp;subtask_id=<?= $subtask['id'].Helper\param_csrf() ?>" class="btn btn-red"><?= t('Yes') ?></a>
-        <?= t('or') ?> <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>#subtasks"><?= t('cancel') ?></a>
+        <?= Helper\a(t('Yes'), 'subtask', 'remove', array('task_id' => $task['id'], 'subtask_id' => $subtask['id']), true, 'btn btn-red') ?>
+        <?= t('or') ?>
+        <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
     </div>
 </div>

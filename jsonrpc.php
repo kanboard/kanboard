@@ -333,7 +333,7 @@ $server->register('updateSubtask', function($id, $task_id, $title = null, $user_
         }
     }
 
-    list($valid,) = $subTaskModel->validateModification($values);
+    list($valid,) = $subTaskModel->validateApiModification($values);
     return $valid && $subTaskModel->update($values);
 });
 
