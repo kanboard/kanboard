@@ -17,37 +17,38 @@ use Model\LastLogin;
  * @package  controller
  * @author   Frederic Guillot
  *
- * @property \Model\Acl                $acl
- * @property \Model\Authentication     $authentication
- * @property \Model\Action             $action
- * @property \Model\Board              $board
- * @property \Model\Category           $category
- * @property \Model\Color              $color
- * @property \Model\Comment            $comment
- * @property \Model\Config             $config
- * @property \Model\File               $file
- * @property \Model\LastLogin          $lastLogin
- * @property \Model\Notification       $notification
- * @property \Model\Project            $project
- * @property \Model\ProjectPermission  $projectPermission
- * @property \Model\ProjectAnalytic    $projectAnalytic
- * @property \Model\SubTask            $subTask
- * @property \Model\Task               $task
- * @property \Model\TaskCreation       $taskCreation
- * @property \Model\TaskModification   $taskModification
- * @property \Model\TaskDuplication    $taskDuplication
- * @property \Model\TaskHistory        $taskHistory
- * @property \Model\TaskExport         $taskExport
- * @property \Model\TaskFinder         $taskFinder
- * @property \Model\TaskPosition       $taskPosition
- * @property \Model\TaskPermission     $taskPermission
- * @property \Model\TaskStatus         $taskStatus
- * @property \Model\TaskValidator      $taskValidator
- * @property \Model\CommentHistory     $commentHistory
- * @property \Model\SubtaskHistory     $subtaskHistory
- * @property \Model\TimeTracking       $timeTracking
- * @property \Model\User               $user
- * @property \Model\Webhook            $webhook
+ * @property \Model\Acl                    $acl
+ * @property \Model\Authentication         $authentication
+ * @property \Model\Action                 $action
+ * @property \Model\Board                  $board
+ * @property \Model\Category               $category
+ * @property \Model\Color                  $color
+ * @property \Model\Comment                $comment
+ * @property \Model\Config                 $config
+ * @property \Model\File                   $file
+ * @property \Model\LastLogin              $lastLogin
+ * @property \Model\Notification           $notification
+ * @property \Model\Project                $project
+ * @property \Model\ProjectPermission      $projectPermission
+ * @property \Model\ProjectAnalytic        $projectAnalytic
+ * @property \Model\ProjectDailySummary    $projectDailySummary
+ * @property \Model\SubTask                $subTask
+ * @property \Model\Task                   $task
+ * @property \Model\TaskCreation           $taskCreation
+ * @property \Model\TaskModification       $taskModification
+ * @property \Model\TaskDuplication        $taskDuplication
+ * @property \Model\TaskHistory            $taskHistory
+ * @property \Model\TaskExport             $taskExport
+ * @property \Model\TaskFinder             $taskFinder
+ * @property \Model\TaskPosition           $taskPosition
+ * @property \Model\TaskPermission         $taskPermission
+ * @property \Model\TaskStatus             $taskStatus
+ * @property \Model\TaskValidator          $taskValidator
+ * @property \Model\CommentHistory         $commentHistory
+ * @property \Model\SubtaskHistory         $subtaskHistory
+ * @property \Model\TimeTracking           $timeTracking
+ * @property \Model\User                   $user
+ * @property \Model\Webhook                $webhook
  */
 abstract class Base
 {
