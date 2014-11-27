@@ -2,7 +2,7 @@
     <h2><?= t('Category modification for the project "%s"', $project['name']) ?></h2>
 </div>
 
-<form method="post" action="<?= Helper\u('category', 'update', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('category', 'update', array('project_id' => $project['id'], 'category_id' => $values['id'])) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>
 

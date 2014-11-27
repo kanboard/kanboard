@@ -34,14 +34,14 @@ class Category extends Base
      *
      * @access public
      */
-    public function index()
+    public function index(array $values = array(), array $errors = array())
     {
         $project = $this->getProjectManagement();
 
         $this->response->html($this->projectLayout('category/index', array(
             'categories' => $this->category->getList($project['id'], false),
-            'values' => array('project_id' => $project['id']),
-            'errors' => array(),
+            'values' => $values + array('project_id' => $project['id']),
+            'errors' => $errors,
             'project' => $project,
             'title' => t('Categories')
         )));
@@ -70,13 +70,7 @@ class Category extends Base
             }
         }
 
-        $this->response->html($this->projectLayout('category/index', array(
-            'categories' => $this->category->getList($project['id'], false),
-            'values' => $values,
-            'errors' => $errors,
-            'project' => $project,
-            'title' => t('Categories')
-        )));
+        $this->index($values, $errors);
     }
 
     /**
@@ -84,14 +78,14 @@ class Category extends Base
      *
      * @access public
      */
-    public function edit()
+    public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProjectManagement();
         $category = $this->getCategory($project['id']);
 
         $this->response->html($this->projectLayout('category/edit', array(
-            'values' => $category,
-            'errors' => array(),
+            'values' => empty($values) ? $category : $values,
+            'errors' => $errors,
             'project' => $project,
             'title' => t('Categories')
         )));
@@ -120,12 +114,7 @@ class Category extends Base
             }
         }
 
-        $this->response->html($this->projectLayout('category/edit', array(
-            'values' => $values,
-            'errors' => $errors,
-            'project' => $project,
-            'title' => t('Categories')
-        )));
+        $this->edit($values, $errors);
     }
 
     /**
