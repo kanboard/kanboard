@@ -25,6 +25,7 @@ use Model\LastLogin;
  * @property \Model\Color                  $color
  * @property \Model\Comment                $comment
  * @property \Model\Config                 $config
+ * @property \Model\DateParser             $dateParser
  * @property \Model\File                   $file
  * @property \Model\LastLogin              $lastLogin
  * @property \Model\Notification           $notification
