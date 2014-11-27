@@ -17,4 +17,4 @@
     <?php endforeach ?>
 </ul>
 
-<?= Helper\template('notification_footer', array('task' => $task)) ?>
+<?= Helper\template('notification/footer', array('task' => $task)) ?>

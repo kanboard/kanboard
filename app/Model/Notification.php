@@ -101,18 +101,18 @@ class Notification extends Base
     public function attachEvents()
     {
         $events = array(
-            Task::EVENT_CREATE => 'notification_task_creation',
-            Task::EVENT_UPDATE => 'notification_task_update',
-            Task::EVENT_CLOSE => 'notification_task_close',
-            Task::EVENT_OPEN => 'notification_task_open',
-            Task::EVENT_MOVE_COLUMN => 'notification_task_move_column',
-            Task::EVENT_MOVE_POSITION => 'notification_task_move_position',
-            Task::EVENT_ASSIGNEE_CHANGE => 'notification_task_assignee_change',
-            SubTask::EVENT_CREATE => 'notification_subtask_creation',
-            SubTask::EVENT_UPDATE => 'notification_subtask_update',
-            Comment::EVENT_CREATE => 'notification_comment_creation',
-            Comment::EVENT_UPDATE => 'notification_comment_update',
-            File::EVENT_CREATE => 'notification_file_creation',
+            Task::EVENT_CREATE => 'task_creation',
+            Task::EVENT_UPDATE => 'task_update',
+            Task::EVENT_CLOSE => 'task_close',
+            Task::EVENT_OPEN => 'task_open',
+            Task::EVENT_MOVE_COLUMN => 'task_move_column',
+            Task::EVENT_MOVE_POSITION => 'task_move_position',
+            Task::EVENT_ASSIGNEE_CHANGE => 'task_assignee_change',
+            SubTask::EVENT_CREATE => 'subtask_creation',
+            SubTask::EVENT_UPDATE => 'subtask_update',
+            Comment::EVENT_CREATE => 'comment_creation',
+            Comment::EVENT_UPDATE => 'comment_update',
+            File::EVENT_CREATE => 'file_creation',
         );
 
         foreach ($events as $event_name => $template_name) {
@@ -162,43 +162,43 @@ class Notification extends Base
     public function getMailSubject($template, array $data)
     {
         switch ($template) {
-            case 'notification_file_creation':
+            case 'file_creation':
                 $subject = e('[%s][New attachment] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_comment_creation':
+            case 'comment_creation':
                 $subject = e('[%s][New comment] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_comment_update':
+            case 'comment_update':
                 $subject = e('[%s][Comment updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_subtask_creation':
+            case 'subtask_creation':
                 $subject = e('[%s][New subtask] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_subtask_update':
+            case 'subtask_update':
                 $subject = e('[%s][Subtask updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_task_creation':
+            case 'task_creation':
                 $subject = e('[%s][New task] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_task_update':
+            case 'task_update':
                 $subject = e('[%s][Task updated] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_task_close':
+            case 'task_close':
                 $subject = e('[%s][Task closed] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_task_open':
+            case 'task_open':
                 $subject = e('[%s][Task opened] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_task_move_column':
+            case 'task_move_column':
                 $subject = e('[%s][Column Change] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_task_move_position':
+            case 'task_move_position':
                 $subject = e('[%s][Position Change] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_task_assignee_change':
+            case 'task_assignee_change':
                 $subject = e('[%s][Assignee Change] %s (#%d)', $data['task']['project_name'], $data['task']['title'], $data['task']['id']);
                 break;
-            case 'notification_task_due':
+            case 'task_due':
                 $subject = e('[%s][Due tasks]', $data['project']);
                 break;
             default:
@@ -218,7 +218,7 @@ class Notification extends Base
     public function getMailContent($template, array $data)
     {
         $tpl = new Template;
-        return $tpl->load($template, $data + array('application_url' => $this->config->get('application_url')));
+        return $tpl->load('notification/'.$template, $data + array('application_url' => $this->config->get('application_url')));
     }
 
     /**

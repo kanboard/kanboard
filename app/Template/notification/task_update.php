@@ -40,4 +40,4 @@
     <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
 <?php endif ?>
 
-<?= Helper\template('notification_footer', array('task' => $task, 'application_url' => $application_url)) ?>
+<?= Helper\template('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>
