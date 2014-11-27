@@ -104,7 +104,7 @@ class Ldap extends Base
     {
         $ldap = $this->connect();
 
-        if ($this->bind($ldap, $username, $password)) {
+        if (is_resource($ldap) && $this->bind($ldap, $username, $password)) {
             return $this->search($ldap, $username, $password);
         }
 

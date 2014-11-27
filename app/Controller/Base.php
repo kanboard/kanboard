@@ -55,7 +55,7 @@ abstract class Base
      * Request instance
      *
      * @accesss protected
-     * @var Core\Request
+     * @var \Core\Request
      */
     protected $request;
 
@@ -63,7 +63,7 @@ abstract class Base
      * Response instance
      *
      * @accesss protected
-     * @var Core\Response
+     * @var \Core\Response
      */
     protected $response;
 
@@ -71,7 +71,7 @@ abstract class Base
      * Template instance
      *
      * @accesss protected
-     * @var Core\Template
+     * @var \Core\Template
      */
     protected $template;
 
@@ -79,7 +79,7 @@ abstract class Base
      * Session instance
      *
      * @accesss public
-     * @var Core\Session
+     * @var \Core\Session
      */
     protected $session;
 
@@ -87,7 +87,7 @@ abstract class Base
      * Container instance
      *
      * @access private
-     * @var Pimple\Container
+     * @var \Pimple\Container
      */
     private $container;
 

@@ -32,7 +32,7 @@ class Router
      * Container instance
      *
      * @access private
-     * @var Pimple\Container
+     * @var \Pimple\Container
      */
     private $container;
 
@@ -40,9 +40,9 @@ class Router
      * Constructor
      *
      * @access public
-     * @param  Pimple\Container   $container     Container instance
-     * @param  string             $controller   Controller name
-     * @param  string             $action       Action name
+     * @param  \Pimple\Container   $container     Container instance
+     * @param  string              $controller    Controller name
+     * @param  string              $action        Action name
      */
     public function __construct(Container $container, $controller = '', $action = '')
     {

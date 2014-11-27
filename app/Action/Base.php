@@ -51,7 +51,7 @@ abstract class Base implements Listener
      * Container instance
      *
      * @access protected
-     * @var Pimple\Container
+     * @var \Pimple\Container
      */
     protected $container;
 

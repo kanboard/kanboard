@@ -3,7 +3,7 @@
 namespace Controller;
 
 use Model\Project as ProjectModel;
-use Model\SubTask;
+use Model\SubTask as SubTaskModel;
 use Helper;
 
 /**
@@ -87,7 +87,7 @@ class App extends Base
      */
     private function getSubtaskPagination($user_id, $paginate, $offset, $order, $direction)
     {
-        $status = array(SubTask::STATUS_TODO, SubTask::STATUS_INPROGRESS);
+        $status = array(SubTaskModel::STATUS_TODO, SubTaskModel::STATUS_INPROGRESS);
         $limit = 10;
 
         if (! in_array($order, array('tasks.id', 'project_name', 'status', 'title'))) {

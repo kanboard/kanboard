@@ -63,7 +63,7 @@ abstract class Base
      * Container instance
      *
      * @access protected
-     * @var Pimple\Container
+     * @var \Pimple\Container
      */
     protected $container;
 
