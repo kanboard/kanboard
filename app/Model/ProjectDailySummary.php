@@ -76,7 +76,7 @@ class ProjectDailySummary extends Base
             array($from, $to, $project_id)
         );
 
-        return $rq->fetchColumn(0);
+        return $rq !== false ? $rq->fetchColumn(0) : 0;
     }
 
     /**
