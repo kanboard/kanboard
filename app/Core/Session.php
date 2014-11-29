@@ -36,14 +36,9 @@ class Session
      *
      * @access public
      * @param  string   $base_path    Cookie path
-     * @param  string   $save_path    Custom session save path
      */
-    public function open($base_path = '/', $save_path = '')
+    public function open($base_path = '/')
     {
-        if ($save_path !== '') {
-            session_save_path($save_path);
-        }
-
         // HttpOnly and secure flags for session cookie
         session_set_cookie_params(
             self::SESSION_LIFETIME,
@@ -56,12 +51,15 @@ class Session
         // Avoid session id in the URL
         ini_set('session.use_only_cookies', '1');
 
+        // Enable strict mode
+        ini_set('session.use_strict_mode', '1');
+
         // Ensure session ID integrity
         ini_set('session.entropy_file', '/dev/urandom');
         ini_set('session.entropy_length', '32');
         ini_set('session.hash_bits_per_character', 6);
 
-        // If session was autostarted with session.auto_start = 1 in php.ini destroy it, otherwise we cannot login
+        // If session was autostarted with session.auto_start = 1 in php.ini destroy it
         if (isset($_SESSION)) {
             session_destroy();
         }

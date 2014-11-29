@@ -113,6 +113,22 @@ var Kanboard = (function() {
             $(".preview-area").hide();
         },
 
+        // Check session and redirect to the login page if not logged
+        CheckSession: function() {
+
+            if (Kanboard.IsVisible() && ! $(".form-login").length) {
+                $.ajax({
+                    cache: false,
+                    url: $("body").data("status-url"),
+                    statusCode: {
+                        401: function(data) {
+                            window.location = $("body").data("login-url");
+                        }
+                    }
+                });
+            }
+        },
+
         // Common init
         Init: function() {
 
@@ -136,6 +152,9 @@ var Kanboard = (function() {
             // Markdown Preview for textareas
             $("#markdown-preview").click(Kanboard.MarkdownPreview);
             $("#markdown-write").click(Kanboard.MarkdownWriter);
+
+            // Check the session every 10s
+            window.setInterval(Kanboard.CheckSession, 10000);
         }
     };
 

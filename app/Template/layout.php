@@ -24,7 +24,7 @@
 
         <title><?= isset($title) ? Helper\escape($title) : 'Kanboard' ?></title>
     </head>
-    <body>
+    <body data-status-url="<?= Helper\u('app', 'status') ?>" data-login-url="<?= Helper\u('user', 'login') ?>">
     <?php if (isset($no_layout) && $no_layout): ?>
         <?= $content_for_layout ?>
     <?php else: ?>

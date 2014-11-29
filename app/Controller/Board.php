@@ -342,7 +342,7 @@ class Board extends Base
         if ($project_id > 0 && $this->request->isAjax()) {
 
             if (! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
-                $this->response->status(401);
+                $this->response->text('Forbidden', 403);
             }
 
             $values = $this->request->getJson();
@@ -366,7 +366,7 @@ class Board extends Base
             }
         }
         else {
-            $this->response->status(401);
+            $this->response->status(403);
         }
     }
 
@@ -383,7 +383,7 @@ class Board extends Base
             $timestamp = $this->request->getIntegerParam('timestamp');
 
             if ($project_id > 0 && ! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
-                $this->response->text('Not Authorized', 401);
+                $this->response->text('Forbidden', 403);
             }
 
             if ($this->project->isModifiedSince($project_id, $timestamp)) {
@@ -402,7 +402,7 @@ class Board extends Base
             }
         }
         else {
-            $this->response->status(401);
+            $this->response->status(403);
         }
     }
 

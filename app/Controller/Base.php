@@ -140,7 +140,7 @@ abstract class Base
     public function beforeAction($controller, $action)
     {
         // Start the session
-        $this->session->open(BASE_URL_DIRECTORY, SESSION_SAVE_PATH);
+        $this->session->open(BASE_URL_DIRECTORY);
 
         // HTTP secure headers
         $this->response->csp(array('style-src' => "'self' 'unsafe-inline'"));
@@ -161,6 +161,11 @@ abstract class Base
 
         // Authentication
         if (! $this->authentication->isAuthenticated($controller, $action)) {
+
+            if ($this->request->isAjax()) {
+                $this->response->text('Not Authorized', 401);
+            }
+
             $this->response->redirect('?controller=user&action=login&redirect_query='.urlencode($this->request->getQueryString()));
         }
 

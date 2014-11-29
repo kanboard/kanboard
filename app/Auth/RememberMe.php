@@ -95,7 +95,7 @@ class RememberMe extends Base
                 // Update the sequence
                 $this->writeCookie(
                     $record['token'],
-                    $this->update($record['token'], $record['sequence']),
+                    $this->update($record['token']),
                     $record['expiration']
                 );
 
@@ -136,7 +136,7 @@ class RememberMe extends Base
                 // Update the sequence
                 $this->writeCookie(
                     $record['token'],
-                    $this->update($record['token'], $record['sequence']),
+                    $this->update($record['token']),
                     $record['expiration']
                 );
             }
@@ -237,17 +237,15 @@ class RememberMe extends Base
      *
      * @access public
      * @param  string   $token        Session token
-     * @param  string   $sequence     Sequence token
      * @return string
      */
-    public function update($token, $sequence)
+    public function update($token)
     {
         $new_sequence = Security::generateToken();
 
         $this->db
              ->table(self::TABLE)
              ->eq('token', $token)
-             ->eq('sequence', $sequence)
              ->update(array('sequence' => $new_sequence));
 
         return $new_sequence;
