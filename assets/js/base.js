@@ -116,7 +116,7 @@ var Kanboard = (function() {
         // Check session and redirect to the login page if not logged
         CheckSession: function() {
 
-            if (Kanboard.IsVisible() && ! $(".form-login").length) {
+            if (! $(".form-login").length) {
                 $.ajax({
                     cache: false,
                     url: $("body").data("status-url"),
