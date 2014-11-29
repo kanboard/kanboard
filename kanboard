@@ -3,72 +3,9 @@
 
 require __DIR__.'/app/common.php';
 
-use Core\Cli;
-use Core\Tool;
-use Model\Config;
-use Model\Task;
-use Model\TaskFinder;
-use Model\TaskExport;
-use Model\Notification;
+use Symfony\Component\Console\Application;
 
-$config = new Config($container);
-$config->setupTranslations();
-$config->setupTimezone();
-
-// Setup CLI
-$cli = new Cli;
-
-// Usage
-$cli->register('help', function() {
-    echo 'Kanboard command line interface'.PHP_EOL.'==============================='.PHP_EOL.PHP_EOL;
-    echo '- Task export to stdout (CSV format): '.$GLOBALS['argv'][0].' export-csv <project_id> <start_date> <end_date>'.PHP_EOL;
-    echo '- Send notifications for due tasks: '.$GLOBALS['argv'][0].' send-notifications-due-tasks'.PHP_EOL;
-});
-
-// CSV Export
-$cli->register('export-csv', function() use ($cli, $container) {
-
-    if ($GLOBALS['argc'] !== 5) {
-        $cli->call($cli->default_command);
-    }
-
-    $project_id = $GLOBALS['argv'][2];
-    $start_date = $GLOBALS['argv'][3];
-    $end_date = $GLOBALS['argv'][4];
-
-    $taskExport = new TaskExport($container);
-    $data = $taskExport->export($project_id, $start_date, $end_date);
-
-    if (is_array($data)) {
-        Tool::csv($data);
-    }
-});
-
-// Send notification for tasks due
-$cli->register('send-notifications-due-tasks', function() use ($cli, $container) {
-
-    $notificationModel = new Notification($container);
-    $taskModel = new TaskFinder($container);
-    $tasks = $taskModel->getOverdueTasks();
-
-    // Group tasks by project
-    $projects = array();
-
-    foreach ($tasks as $task) {
-        $projects[$task['project_id']][] = $task;
-    }
-
-    // Send notifications for each project
-    foreach ($projects as $project_id => $project_tasks) {
-
-        $users = $notificationModel->getUsersList($project_id);
-
-        $notificationModel->sendEmails(
-            'notification_task_due',
-            $users,
-            array('tasks' => $project_tasks, 'project' => $project_tasks[0]['project_name'])
-        );
-    }
-});
-
-$cli->execute();
+$application = new Application('Kanboard', APP_VERSION);
+$application->add(new Console\OverdueNotification($container));
+$application->add(new Console\TaskExport($container));
+$application->run();
