@@ -12,10 +12,14 @@ use Symfony\Component\Console\Command\Command;
  * @package  console
  * @author   Frederic Guillot
  *
- * @property \Model\Notification       $notification
- * @property \Model\Task               $task
- * @property \Model\TaskExport         $taskExport
- * @property \Model\TaskFinder         $taskFinder
+ * @property \Model\Notification           $notification
+ * @property \Model\Project                $project
+ * @property \Model\ProjectPermission      $projectPermission
+ * @property \Model\ProjectAnalytic        $projectAnalytic
+ * @property \Model\ProjectDailySummary    $projectDailySummary
+ * @property \Model\Task                   $task
+ * @property \Model\TaskExport             $taskExport
+ * @property \Model\TaskFinder             $taskFinder
  */
 abstract class Base extends Command
 {
