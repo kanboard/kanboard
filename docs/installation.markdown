@@ -5,9 +5,9 @@ Requirements
 ------------
 
 - Apache or Nginx
-- PHP >= 5.3.3
+- PHP >= 5.3.7
 - PHP extensions required: mbstring and pdo_sqlite (don't forget to enable extensions)
-- A web browser with HTML5 drag and drop support
+- A modern web browser
 
 From the archive (stable version)
 ---------------------------------

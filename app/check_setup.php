@@ -1,8 +1,8 @@
 <?php
 
 // PHP 5.3.3 minimum
-if (version_compare(PHP_VERSION, '5.3.3', '<')) {
-    die('This software require PHP 5.3.3 minimum');
+if (version_compare(PHP_VERSION, '5.3.7', '<')) {
+    die('This software require PHP 5.3.7 minimum');
 }
 
 // Checks for PHP < 5.4
