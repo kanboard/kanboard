@@ -29,6 +29,7 @@ class Api extends PHPUnit_Framework_TestCase
         $service->getInstance();
 
         $pdo->exec("UPDATE settings SET value='".API_KEY."' WHERE option='api_token'");
+        $pdo->exec("UPDATE settings SET value='Europe/Paris' WHERE option='application_timezone'");
         $pdo = null;
     }
 
@@ -46,6 +47,12 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($tasks));
 
         return $tasks[0]['id'];
+    }
+
+    public function testGetTimezone()
+    {
+        $timezone = $this->client->getTimezone();
+        $this->assertEquals('Europe/Paris', $timezone);
     }
 
     public function testRemoveAll()

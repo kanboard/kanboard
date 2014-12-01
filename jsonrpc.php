@@ -338,6 +338,13 @@ $server->register('updateSubtask', function($id, $task_id, $title = null, $user_
 });
 
 /**
+ * Application procedures
+ */
+$server->register('getTimezone', function() use($configModel) {
+    return $configModel->get('application_timezone');
+});
+
+/**
  * Parse incoming requests
  */
 echo $server->execute();
