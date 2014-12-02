@@ -300,7 +300,7 @@ abstract class Base
         $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 
-        return $this->template->layout('project_layout', $params);
+        return $this->template->layout('project/layout', $params);
     }
 
     /**

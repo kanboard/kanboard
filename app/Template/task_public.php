@@ -10,7 +10,7 @@
         'is_public' => true
     )) ?>
 
-    <?= Helper\template('subtask_show', array(
+    <?= Helper\template('subtask/show', array(
         'task' => $task,
         'subtasks' => $subtasks,
         'not_editable' => true
