@@ -139,36 +139,4 @@ class ProjectTest extends Base
 
         $this->assertFalse($p->disablePublicAccess(123));
     }
-
-    public function testDuplicate()
-    {
-        $p = new Project($this->container);
-
-        // Clone public project
-        $this->assertEquals(1, $p->create(array('name' => 'Public')));
-        $this->assertEquals(2, $p->duplicate(1));
-
-        $project = $p->getById(2);
-        $this->assertNotEmpty($project);
-        $this->assertEquals('Public (Clone)', $project['name']);
-        $this->assertEquals(0, $project['is_private']);
-        $this->assertEquals(0, $project['is_public']);
-        $this->assertEmpty($project['token']);
-
-        // Clone private project
-        $this->assertEquals(3, $p->create(array('name' => 'Private', 'is_private' => 1), 1, true));
-        $this->assertEquals(4, $p->duplicate(3));
-
-        $project = $p->getById(4);
-        $this->assertNotEmpty($project);
-        $this->assertEquals('Private (Clone)', $project['name']);
-        $this->assertEquals(1, $project['is_private']);
-        $this->assertEquals(0, $project['is_public']);
-        $this->assertEmpty($project['token']);
-
-        $pp = new ProjectPermission($this->container);
-
-        $this->assertEquals(array(1 => 'admin'), $pp->getMembers(3));
-        $this->assertEquals(array(1 => 'admin'), $pp->getMembers(4));
-    }
 }

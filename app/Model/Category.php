@@ -165,26 +165,26 @@ class Category extends Base
     }
 
     /**
-     * Duplicate categories from a project to another one
+     * Duplicate categories from a project to another one, must be executed inside a transaction
      *
      * @author Antonio Rabelo
-     * @param  integer    $project_from      Project Template
-     * @return integer    $project_to        Project that receives the copy
+     * @param  integer    $src_project_id        Source project id
+     * @return integer    $dst_project_id        Destination project id
      * @return boolean
      */
-    public function duplicate($project_from, $project_to)
+    public function duplicate($src_project_id, $dst_project_id)
     {
         $categories = $this->db->table(self::TABLE)
                                ->columns('name')
-                               ->eq('project_id', $project_from)
+                               ->eq('project_id', $src_project_id)
                                ->asc('name')
                                ->findAll();
 
         foreach ($categories as $category) {
 
-            $category['project_id'] = $project_to;
+            $category['project_id'] = $dst_project_id;
 
-            if (! $this->category->create($category)) {
+            if (! $this->db->table(self::TABLE)->save($category)) {
                 return false;
             }
         }
