@@ -33,7 +33,7 @@ class Project extends Base
             }
         }
 
-        $this->response->html($this->template->layout('project_index', array(
+        $this->response->html($this->template->layout('project/index', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'active_projects' => $active_projects,
             'inactive_projects' => $inactive_projects,
@@ -51,7 +51,7 @@ class Project extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('project_show', array(
+        $this->response->html($this->projectLayout('project/show', array(
             'project' => $project,
             'stats' => $this->project->getStats($project['id']),
             'webhook_token' => $this->config->get('webhook_token'),
@@ -148,7 +148,7 @@ class Project extends Base
             $this->response->redirect('?controller=project&action=share&project_id='.$project['id']);
         }
 
-        $this->response->html($this->projectLayout('project_share', array(
+        $this->response->html($this->projectLayout('project/share', array(
             'project' => $project,
             'title' => t('Public access'),
         )));
@@ -159,13 +159,13 @@ class Project extends Base
      *
      * @access public
      */
-    public function edit()
+    public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProjectManagement();
 
-        $this->response->html($this->projectLayout('project_edit', array(
-            'errors' => array(),
-            'values' => $project,
+        $this->response->html($this->projectLayout('project/edit', array(
+            'values' => empty($values) ? $project : $values,
+            'errors' => $errors,
             'project' => $project,
             'title' => t('Edit project')
         )));
@@ -193,12 +193,7 @@ class Project extends Base
             }
         }
 
-        $this->response->html($this->projectLayout('project_edit', array(
-            'errors' => $errors,
-            'values' => $values,
-            'project' => $project,
-            'title' => t('Edit Project')
-        )));
+        $this->edit($values, $errors);
     }
 
     /**
@@ -210,7 +205,7 @@ class Project extends Base
     {
         $project = $this->getProjectManagement();
 
-        $this->response->html($this->projectLayout('project_users', array(
+        $this->response->html($this->projectLayout('project/users', array(
             'project' => $project,
             'users' => $this->projectPermission->getAllUsers($project['id']),
             'title' => t('Edit project access list')
@@ -315,7 +310,7 @@ class Project extends Base
             $this->response->redirect('?controller=project');
         }
 
-        $this->response->html($this->projectLayout('project_remove', array(
+        $this->response->html($this->projectLayout('project/remove', array(
             'project' => $project,
             'title' => t('Remove project')
         )));
@@ -344,7 +339,7 @@ class Project extends Base
             $this->response->redirect('?controller=project');
         }
 
-        $this->response->html($this->projectLayout('project_duplicate', array(
+        $this->response->html($this->projectLayout('project/duplicate', array(
             'project' => $project,
             'title' => t('Clone this project')
         )));
@@ -372,7 +367,7 @@ class Project extends Base
             $this->response->redirect('?controller=project&action=show&project_id='.$project['id']);
         }
 
-        $this->response->html($this->projectLayout('project_disable', array(
+        $this->response->html($this->projectLayout('project/disable', array(
             'project' => $project,
             'title' => t('Project activation')
         )));
@@ -400,7 +395,7 @@ class Project extends Base
             $this->response->redirect('?controller=project&action=show&project_id='.$project['id']);
         }
 
-        $this->response->html($this->projectLayout('project_enable', array(
+        $this->response->html($this->projectLayout('project/enable', array(
             'project' => $project,
             'title' => t('Project activation')
         )));
@@ -421,7 +416,7 @@ class Project extends Base
             $this->forbidden(true);
         }
 
-        $this->response->xml($this->template->load('project_feed', array(
+        $this->response->xml($this->template->load('project/feed', array(
             'events' => $this->projectActivity->getProject($project['id']),
             'project' => $project,
         )));
@@ -436,7 +431,7 @@ class Project extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->template->layout('project_activity', array(
+        $this->response->html($this->template->layout('project/activity', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'events' => $this->projectActivity->getProject($project['id']),
             'project' => $project,
@@ -465,7 +460,7 @@ class Project extends Base
             $nb_tasks = $this->taskPaginator->countSearchTasks($project['id'], $search);
         }
 
-        $this->response->html($this->template->layout('project_search', array(
+        $this->response->html($this->template->layout('project/search', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'tasks' => $tasks,
             'nb_tasks' => $nb_tasks,
@@ -508,7 +503,7 @@ class Project extends Base
         $tasks = $this->taskPaginator->closedTasks($project['id'], $offset, $limit, $order, $direction);
         $nb_tasks = $this->taskPaginator->countClosedTasks($project['id']);
 
-        $this->response->html($this->template->layout('project_tasks', array(
+        $this->response->html($this->template->layout('project/tasks', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'pagination' => array(
                 'controller' => 'project',
@@ -534,16 +529,14 @@ class Project extends Base
      *
      * @access public
      */
-    public function create()
+    public function create(array $values = array(), array $errors = array())
     {
         $is_private = $this->request->getIntegerParam('private', $this->acl->isRegularUser());
 
-        $this->response->html($this->template->layout('project_new', array(
+        $this->response->html($this->template->layout('project/new', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
-            'errors' => array(),
-            'values' => array(
-                'is_private' => $is_private,
-            ),
+            'values' => empty($values) ? array('is_private' => $is_private) : $values,
+            'errors' => $errors,
             'title' => $is_private ? t('New private project') : t('New project'),
         )));
     }
@@ -571,11 +564,6 @@ class Project extends Base
             }
         }
 
-        $this->response->html($this->template->layout('project_new', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
-            'errors' => $errors,
-            'values' => $values,
-            'title' => ! empty($values['is_private']) ? t('New private project') : t('New project'),
-        )));
+        $this->create($values, $errors);
     }
 }

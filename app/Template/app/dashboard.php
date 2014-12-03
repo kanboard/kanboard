@@ -20,7 +20,7 @@
         </div>
         <div class="dashboard-right-column">
             <h2><?= t('Activity stream') ?></h2>
-            <?= Helper\template('project_events', array('events' => $events)) ?>
+            <?= Helper\template('project/events', array('events' => $events)) ?>
         </div>
     </section>
 </section>

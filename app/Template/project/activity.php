@@ -11,6 +11,6 @@
             <p class="pull-right"><i class="fa fa-rss-square"></i> <?= Helper\a(t('RSS feed'), 'project', 'feed', array('token' => $project['token'])) ?></p>
         <?php endif ?>
 
-        <?= Helper\template('project_events', array('events' => $events)) ?>
+        <?= Helper\template('project/events', array('events' => $events)) ?>
     </section>
 </section>

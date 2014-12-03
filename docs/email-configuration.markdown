@@ -79,18 +79,6 @@ define('MAIL_FROM', 'notifications@kanboard.net');
 
 That can be useful if your SMTP server configuration doesn't accept the default address.
 
-
-### Check for due tasks
-
-Every day, Kanboard can check for due tasks, to do that you have to setup a cronjob on your server and use the Kanboard command line interface.
-
-Here a example:
-
-```bash
-# Everyday at 8am we check for due tasks
-0 8 * * *  cd /path/to/kanboard && ./kanboard send-notifications-due-tasks >/dev/null 2>&1
-```
-
 ### How to display a link to the task in notifications?
 
 To do that, you have to specify the URL of your Kanboard installation in your [Application Settings](http://kanboard.net/documentation/application-configuration).

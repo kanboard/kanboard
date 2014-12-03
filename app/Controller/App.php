@@ -15,6 +15,16 @@ use Helper;
 class App extends Base
 {
     /**
+     * Check if the user is connected
+     *
+     * @access public
+     */
+    public function status()
+    {
+        $this->response->text('OK');
+    }
+
+    /**
      * Dashboard for the current user
      *
      * @access public

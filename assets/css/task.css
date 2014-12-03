@@ -170,6 +170,11 @@ a.task-board-nobody {
     color: #333;
 }
 
+.task-show-description {
+    border-left: 4px solid #333;
+    padding-left: 20px;
+}
+
 .description-textarea {
     width: 99%;
     max-width: 99%;

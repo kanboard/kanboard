@@ -8,7 +8,6 @@ Several configurations are available:
 - Ubuntu 14.04 LTS with Kanboard/Mysql
 - Ubuntu 14.04 LTS with Kanboard/Postgresql
 - Debian 7.6 with Kanboard/Sqlite
-- Debian 6 with Kanboard/Sqlite
 
 To use those configurations, you have to install the **last version** of Virtualbox and Vagrant.
 
@@ -17,7 +16,6 @@ Standard boxes can be download from [VagrantCloud](https://vagrantcloud.com):
 ```bash
 vagrant box add ubuntu/trusty64
 vagrant box add chef/debian-7.6
-vagrant box add chef/debian-6.0.10
 ```
 
 If you want to test Kanboard on Ubuntu with Sqlite:
@@ -42,4 +40,3 @@ Available boxes are:
 - `vagrant up mysql`
 - `vagrant up postgres`
 - `vagrant up debian7`
-- `vagrant up debian6`

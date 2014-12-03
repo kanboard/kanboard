@@ -1,8 +1,5 @@
 <?php
 
-// Custom session save path
-defined('SESSION_SAVE_PATH') or define('SESSION_SAVE_PATH', '');
-
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
 

@@ -26,6 +26,7 @@
     <?php endif ?>
 
     <?php if ($project['is_private'] == 0 && ! empty($users['not_allowed'])): ?>
+        <hr/>
         <form method="post" action="<?= Helper\u('project', 'allow', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
             <?= Helper\form_csrf() ?>
@@ -44,6 +45,7 @@
 <?php endif ?>
 
 <?php if ($project['is_private'] == 0): ?>
+<hr/>
 <form method="post" action="<?= Helper\u('project', 'allowEverybody', array('project_id' => $project['id'])) ?>">
     <?= Helper\form_csrf() ?>
 

@@ -8,7 +8,8 @@
         "erusev/parsedown": "1.1.1",
         "lusitanian/oauth": "0.3.5",
         "pimple/pimple": "~3.0",
-        "monolog/monolog": "1.11.0"
+        "monolog/monolog": "1.11.0",
+        "symfony/console": "@stable"
     },
     "autoload": {
         "psr-0": {"": "app/"},

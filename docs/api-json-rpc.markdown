@@ -144,6 +144,33 @@ Array
 Procedures
 ----------
 
+### getTimezone
+
+- Purpose: **Get the application timezone**
+- Parameters: none
+- Result on success: **Timezone** (Example: UTC, Europe/Paris)
+- Result on failure: **Default timezone** (UTC)
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getTimezone",
+    "id": 1661138292
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1661138292,
+    "result": "Europe\/Paris"
+}
+```
+
 ### createProject
 
 - Purpose: **Create a new project**
