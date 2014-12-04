@@ -241,9 +241,23 @@ Kanboard.Board = (function() {
                     return;
                 }
 
+                var _this = this;
                 $.get(href, function setTooltipContent(data) {
 
                     $('.ui-tooltip-content:visible').html(data);
+
+                    var tooltip = $('.ui-tooltip:visible');
+
+                    // Clear previous position, it interferes with the updated position computation
+                    tooltip.css({ top: '', left: '' });
+
+                    // Remove arrow, it will be added when repositionning
+                    tooltip.children('.tooltip-arrow').remove();
+
+                    // Reposition the tooltip
+                    var position = $(_this).tooltip("option", "position");
+                    position.of = $(_this);
+                    tooltip.position(position);
 
                     // Toggle subtasks status
                     $('#tooltip-subtasks a').click(function(e) {
