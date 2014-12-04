@@ -1,9 +1,11 @@
 FROM ubuntu:14.04
 MAINTAINER Frederic Guillot <fred@kanboard.net>
 
-RUN apt-get update && apt-get install -y apache2 php5 php5-sqlite git && apt-get clean
+RUN apt-get update && apt-get install -y apache2 php5 php5-sqlite git curl && apt-get clean
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN curl -sS https://getcomposer.org/installer | php -- --filename=/usr/local/bin/composer
 RUN cd /var/www && git clone https://github.com/fguillot/kanboard.git
+RUN cd /var/www/kanboard && composer install
 RUN rm -rf /var/www/html && mv /var/www/kanboard /var/www/html
 RUN chown -R www-data:www-data /var/www/html/data
 
