@@ -19,12 +19,11 @@
         <tr>
             <td><?= Helper\escape($subtask['title']) ?></td>
             <td>
-                <?= Helper\template('subtask/icons', array('subtask' => $subtask)) ?>
-
                 <?php if (! isset($not_editable)): ?>
-                    <?= Helper\a(Helper\escape($subtask['status_name']), 'subtask', 'toggleStatus', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
+                    <?= Helper\a(trim(Helper\template('subtask/icons', array('subtask' => $subtask))) . Helper\escape($subtask['status_name']),
+                                 'subtask', 'toggleStatus', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
                 <?php else: ?>
-                    <?= Helper\escape($subtask['status_name']) ?>
+                    <?= Helper\template('subtask/icons', array('subtask' => $subtask)) . Helper\escape($subtask['status_name']) ?>
                 <?php endif ?>
             </td>
             <td>
