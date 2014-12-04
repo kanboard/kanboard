@@ -13,7 +13,7 @@
     <?php foreach ($tasks as $task): ?>
     <tr>
         <td class="task-table task-<?= $task['color_id'] ?>">
-            <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>">#<?= Helper\escape($task['id']) ?></a>
+            <?= Helper\a('#'.Helper\escape($task['id']), 'task', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
         </td>
         <td>
             <?= Helper\in_list($task['column_id'], $columns) ?>
@@ -22,7 +22,7 @@
             <?= Helper\in_list($task['category_id'], $categories, '') ?>
         </td>
         <td>
-            <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>" title="<?= t('View this task') ?>"><?= Helper\escape($task['title']) ?></a>
+            <?= Helper\a(Helper\escape($task['title']), 'task', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
         </td>
         <td>
             <?php if ($task['assignee_username']): ?>

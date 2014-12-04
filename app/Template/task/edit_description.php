@@ -2,7 +2,7 @@
     <h2><?= t('Edit the description') ?></h2>
 </div>
 
-<form method="post" action="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>&amp;ajax=<?= $ajax ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('task', 'description', array('task_id' => $task['id'], 'ajax' => $ajax)) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('id', $values) ?>
@@ -30,9 +30,9 @@
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
         <?php if ($ajax): ?>
-                <a href="?controller=board&amp;action=show&amp;project_id=<?= $task['project_id'] ?>"><?= t('cancel') ?></a>
+            <?= Helper\a(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
         <?php else: ?>
-                <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('cancel') ?></a>
+            <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
         <?php endif ?>
     </div>
 </form>

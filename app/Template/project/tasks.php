@@ -10,7 +10,7 @@
     <?php if (empty($tasks)): ?>
         <p class="alert"><?= t('No task') ?></p>
     <?php else: ?>
-        <?= Helper\template('task_table', array(
+        <?= Helper\template('task/table', array(
             'tasks' => $tasks,
             'categories' => $categories,
             'columns' => $columns,

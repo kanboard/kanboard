@@ -282,7 +282,7 @@ abstract class Base
         $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 
-        return $this->template->layout('task_layout', $params);
+        return $this->template->layout('task/layout', $params);
     }
 
     /**

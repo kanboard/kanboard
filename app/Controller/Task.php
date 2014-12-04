@@ -32,7 +32,7 @@ class Task extends Base
             $this->notfound(true);
         }
 
-        $this->response->html($this->template->layout('task_public', array(
+        $this->response->html($this->template->layout('task/public', array(
             'project' => $project,
             'comments' => $this->comment->getAll($task['id']),
             'subtasks' => $this->subTask->getAll($task['id']),
@@ -65,7 +65,7 @@ class Task extends Base
 
         $this->dateParser->format($values, array('date_started'));
 
-        $this->response->html($this->taskLayout('task_show', array(
+        $this->response->html($this->taskLayout('task/show', array(
             'project' => $this->project->getById($task['project_id']),
             'files' => $this->file->getAll($task['id']),
             'comments' => $this->comment->getAll($task['id']),
@@ -101,7 +101,7 @@ class Task extends Base
             );
         }
 
-        $this->response->html($this->template->$method('task_new', array(
+        $this->response->html($this->template->$method('task/new', array(
             'ajax' => $this->request->isAjax(),
             'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
@@ -178,10 +178,10 @@ class Task extends Base
         );
 
         if ($ajax) {
-            $this->response->html($this->template->load('task_edit', $params));
+            $this->response->html($this->template->load('task/edit', $params));
         }
         else {
-            $this->response->html($this->taskLayout('task_edit', $params));
+            $this->response->html($this->taskLayout('task/edit', $params));
         }
     }
 
@@ -214,7 +214,7 @@ class Task extends Base
             }
         }
 
-        $this->response->html($this->taskLayout('task_edit', array(
+        $this->response->html($this->taskLayout('task/edit', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -272,7 +272,7 @@ class Task extends Base
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
         }
 
-        $this->response->html($this->taskLayout('task_close', array(
+        $this->response->html($this->taskLayout('task/close', array(
             'task' => $task,
         )));
     }
@@ -299,7 +299,7 @@ class Task extends Base
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
         }
 
-        $this->response->html($this->taskLayout('task_open', array(
+        $this->response->html($this->taskLayout('task/open', array(
             'task' => $task,
         )));
     }
@@ -330,7 +330,7 @@ class Task extends Base
             $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
         }
 
-        $this->response->html($this->taskLayout('task_remove', array(
+        $this->response->html($this->taskLayout('task/remove', array(
             'task' => $task,
         )));
     }
@@ -358,7 +358,7 @@ class Task extends Base
             }
         }
 
-        $this->response->html($this->taskLayout('task_duplicate', array(
+        $this->response->html($this->taskLayout('task/duplicate', array(
             'task' => $task,
         )));
     }
@@ -409,10 +409,10 @@ class Task extends Base
         );
 
         if ($ajax) {
-            $this->response->html($this->template->load('task_edit_description', $params));
+            $this->response->html($this->template->load('task/edit_description', $params));
         }
         else {
-            $this->response->html($this->taskLayout('task_edit_description', $params));
+            $this->response->html($this->taskLayout('task/edit_description', $params));
         }
     }
 
@@ -447,7 +447,7 @@ class Task extends Base
             }
         }
 
-        $this->response->html($this->taskLayout('task_move_project', array(
+        $this->response->html($this->taskLayout('task/move_project', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -486,7 +486,7 @@ class Task extends Base
             }
         }
 
-        $this->response->html($this->taskLayout('task_duplicate_project', array(
+        $this->response->html($this->taskLayout('task/duplicate_project', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,

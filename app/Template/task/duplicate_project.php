@@ -6,7 +6,7 @@
     <p class="alert"><?= t('No project') ?></p>
 <?php else: ?>
 
-    <form method="post" action="?controller=task&amp;action=copy&amp;task_id=<?= $task['id'] ?>&amp;project_id=<?= $task['project_id'] ?>" autocomplete="off">
+    <form method="post" action="<?= Helper\u('task', 'copy', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 
         <?= Helper\form_csrf() ?>
 
@@ -17,7 +17,7 @@
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
             <?= t('or') ?>
-            <a href="?controller=task&amp;action=show&amp;task_id=<?= $task['id'] ?>"><?= t('cancel') ?></a>
+            <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
         </div>
     </form>
 

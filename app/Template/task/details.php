@@ -76,7 +76,7 @@
         </li>
         <?php if ($project['is_public']): ?>
         <li>
-            <a href="?controller=task&amp;action=readonly&amp;task_id=<?= $task['id'] ?>&amp;token=<?= $project['token'] ?>" target="_blank"><?= t('Public link') ?></a>
+            <?= Helper\a(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
         </li>
         <?php endif ?>
     </ul>

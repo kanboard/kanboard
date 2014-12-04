@@ -18,7 +18,7 @@
     <?php if (empty($tasks) && ! empty($values['search'])): ?>
         <p class="alert"><?= t('Nothing found.') ?></p>
     <?php elseif (! empty($tasks)): ?>
-        <?= Helper\template('task_table', array(
+        <?= Helper\template('task/table', array(
             'tasks' => $tasks,
             'categories' => $categories,
             'columns' => $columns,
