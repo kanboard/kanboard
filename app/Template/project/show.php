@@ -9,8 +9,8 @@
     <?php endif ?>
 
     <?php if ($project['is_public']): ?>
-        <li><i class="fa fa-share-alt"></i> <?= Helper\a(t('Public link'), 'board', 'readonly', array('token' => $project['token'])) ?></li>
-        <li><i class="fa fa-rss-square"></i> <?= Helper\a(t('RSS feed'), 'project', 'feed', array('token' => $project['token'])) ?></li>
+        <li><i class="fa fa-share-alt"></i> <?= Helper\a(t('Public link'), 'board', 'readonly', array('token' => $project['token']), false, '', '', true) ?></li>
+        <li><i class="fa fa-rss-square"></i> <?= Helper\a(t('RSS feed'), 'project', 'feed', array('token' => $project['token']), false, '', '', true) ?></li>
     <?php else: ?>
         <li><?= t('Public access disabled') ?></li>
     <?php endif ?>
