@@ -9,7 +9,7 @@
     </div>
     <section class="sidebar-container" id="user-section">
 
-        <?= Helper\template('user_sidebar', array('user' => $user)) ?>
+        <?= Helper\template('user/sidebar', array('user' => $user)) ?>
 
         <div class="sidebar-content">
             <?= $user_content_for_layout ?>

@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Edit user') ?></h2>
 </div>
-<form method="post" action="?controller=user&amp;action=edit&amp;user_id=<?= $user['id'] ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('user', 'edit', array('user_id' => $user['id'])) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>
 
@@ -25,6 +25,8 @@
     <?php endif ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/> <?= t('or') ?> <a href="?controller=user&amp;action=show&amp;user_id=<?= $user['id'] ?>"><?= t('cancel') ?></a>
+        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <?= t('or') ?>
+        <?= Helper\a(t('cancel'), 'user', 'show', array('user_id' => $user['id'])) ?>
     </div>
 </form>

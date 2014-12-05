@@ -457,7 +457,7 @@ return array(
     'Edit profile' => 'Modifier le profil',
     'Change password' => 'Changer le mot de passe',
     'Password modification' => 'Changement de mot de passe',
-    'External authentications' => 'Authentifications externe',
+    'External authentications' => 'Authentifications externes',
     'Google Account' => 'Compte Google',
     'Github Account' => 'Compte Github',
     'Never connected.' => 'Jamais connecté.',

@@ -31,7 +31,8 @@
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-            <?= t('or') ?> <?= Helper\a(t('cancel'), 'user', 'index') ?>
+            <?= t('or') ?>
+            <?= Helper\a(t('cancel'), 'user', 'index') ?>
         </div>
     </form>
     </section>

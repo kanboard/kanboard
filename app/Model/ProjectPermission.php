@@ -176,7 +176,7 @@ class ProjectPermission extends Base
      */
     public function isUserAllowed($project_id, $user_id)
     {
-        return $this->user->isAdmin($user_id) || $this->isMember($project_id, $user_id);
+        return $project_id === 0 || $this->user->isAdmin($user_id) || $this->isMember($project_id, $user_id);
     }
 
     /**

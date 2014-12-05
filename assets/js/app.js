@@ -410,7 +410,8 @@ Kanboard.Board = (function() {
         }
     };
 
-})();// Task related functions
+})();
+// Task related functions
 Kanboard.Task = (function() {
 
     return {

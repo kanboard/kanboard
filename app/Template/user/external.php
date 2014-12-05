@@ -8,9 +8,9 @@
     <p class="listing">
     <?php if (Helper\is_current_user($user['id'])): ?>
         <?php if (empty($user['google_id'])): ?>
-            <a href="?controller=user&amp;action=google<?= Helper\param_csrf() ?>"><?= t('Link my Google Account') ?></a>
+            <?= Helper\a(t('Link my Google Account'), 'user', 'google', array(), true) ?>
         <?php else: ?>
-            <a href="?controller=user&amp;action=unlinkGoogle<?= Helper\param_csrf() ?>"><?= t('Unlink my Google Account') ?></a>
+            <?= Helper\a(t('Unlink my Google Account'), 'user', 'unlinkGoogle', array(), true) ?>
         <?php endif ?>
     <?php else: ?>
         <?= empty($user['google_id']) ? t('No account linked.') : t('Account linked.') ?>
@@ -24,9 +24,9 @@
     <p class="listing">
     <?php if (Helper\is_current_user($user['id'])): ?>
         <?php if (empty($user['github_id'])): ?>
-            <a href="?controller=user&amp;action=gitHub<?= Helper\param_csrf() ?>"><?= t('Link my GitHub Account') ?></a>
+            <?= Helper\a(t('Link my GitHub Account'), 'user', 'github', array(), true) ?>
         <?php else: ?>
-            <a href="?controller=user&amp;action=unlinkGitHub<?= Helper\param_csrf() ?>"><?= t('Unlink my GitHub Account') ?></a>
+            <?= Helper\a(t('Unlink my GitHub Account'), 'user', 'unlinkGitHub', array(), true) ?>
         <?php endif ?>
     <?php else: ?>
         <?= empty($user['github_id']) ? t('No account linked.') : t('Account linked.') ?>

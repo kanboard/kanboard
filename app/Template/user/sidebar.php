@@ -30,7 +30,7 @@
             </li>
         <?php endif ?>
 
-        <?php if (Helper\is_admin()): ?>
+        <?php if (Helper\is_admin() && ! Helper\is_current_user($user['id'])): ?>
             <li>
                 <?= Helper\a(t('Remove'), 'user', 'remove', array('user_id' => $user['id'])) ?>
             </li>

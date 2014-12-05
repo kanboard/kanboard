@@ -2,7 +2,7 @@
     <h2><?= t('Email notifications') ?></h2>
 </div>
 
-<form method="post" action="?controller=user&amp;action=notifications&amp;user_id=<?= $user['id'] ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('user', 'notifications', array('user_id' => $user['id'])) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>
 
@@ -13,13 +13,14 @@
 
         <div class="form-checkbox-group">
         <?php foreach ($projects as $project_id => $project_name): ?>
-            <?= Helper\form_checkbox('projects['.$project_id.']', $project_name, '1', isset($notifications['project_'.$project_id])) ?>
+            <?= Helper\form_checkbox('projects['.$project_id.']', $project_name, '1', isset($notifications['project_'.$project_id])) ?><br/>
         <?php endforeach ?>
         </div>
     <?php endif ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-        <?= t('or') ?> <a href="?controller=user&amp;action=show&amp;user_id=<?= $user['id'] ?>"><?= t('cancel') ?></a>
+        <?= t('or') ?>
+        <?= Helper\a(t('cancel'), 'user', 'show', array('user_id' => $user['id'])) ?>
     </div>
 </form>

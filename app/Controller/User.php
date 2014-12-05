@@ -34,7 +34,7 @@ class User extends Base
             $this->response->redirect('?controller=app');
         }
 
-        $this->response->html($this->template->layout('user_login', array(
+        $this->response->html($this->template->layout('user/login', array(
             'errors' => array(),
             'values' => array(),
             'no_layout' => true,
@@ -63,7 +63,7 @@ class User extends Base
             }
         }
 
-        $this->response->html($this->template->layout('user_login', array(
+        $this->response->html($this->template->layout('user/login', array(
             'errors' => $errors,
             'values' => $values,
             'no_layout' => true,
@@ -90,7 +90,7 @@ class User extends Base
             $params['title'] = ($params['user']['name'] ?: $params['user']['username']).' (#'.$params['user']['id'].')';
         }
 
-        return $this->template->layout('user_layout', $params);
+        return $this->template->layout('user/layout', $params);
     }
 
     /**
@@ -130,7 +130,7 @@ class User extends Base
         $nb_users = $this->user->count();
 
         $this->response->html(
-            $this->template->layout('user_index', array(
+            $this->template->layout('user/index', array(
                 'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
                 'projects' => $this->project->getList(),
                 'nb_users' => $nb_users,
@@ -156,7 +156,7 @@ class User extends Base
      */
     public function create()
     {
-        $this->response->html($this->template->layout('user_new', array(
+        $this->response->html($this->template->layout('user/new', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'projects' => $this->project->getList(),
             'errors' => array(),
@@ -186,7 +186,7 @@ class User extends Base
             }
         }
 
-        $this->response->html($this->template->layout('user_new', array(
+        $this->response->html($this->template->layout('user/new', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'projects' => $this->project->getList(),
             'errors' => $errors,
@@ -203,7 +203,7 @@ class User extends Base
     public function show()
     {
         $user = $this->getUser();
-        $this->response->html($this->layout('user_show', array(
+        $this->response->html($this->layout('user/show', array(
             'projects' => $this->projectPermission->getAllowedProjects($user['id']),
             'user' => $user,
         )));
@@ -217,7 +217,7 @@ class User extends Base
     public function last()
     {
         $user = $this->getUser();
-        $this->response->html($this->layout('user_last', array(
+        $this->response->html($this->layout('user/last', array(
             'last_logins' => $this->lastLogin->getAll($user['id']),
             'user' => $user,
         )));
@@ -231,7 +231,7 @@ class User extends Base
     public function sessions()
     {
         $user = $this->getUser();
-        $this->response->html($this->layout('user_sessions', array(
+        $this->response->html($this->layout('user/sessions', array(
             'sessions' => $this->authentication->backend('rememberMe')->getAll($user['id']),
             'user' => $user,
         )));
@@ -266,7 +266,7 @@ class User extends Base
             $this->response->redirect('?controller=user&action=notifications&user_id='.$user['id']);
         }
 
-        $this->response->html($this->layout('user_notifications', array(
+        $this->response->html($this->layout('user/notifications', array(
             'projects' => $this->projectPermission->getAllowedProjects($user['id']),
             'notifications' => $this->notification->readSettings($user['id']),
             'user' => $user,
@@ -281,7 +281,7 @@ class User extends Base
     public function external()
     {
         $user = $this->getUser();
-        $this->response->html($this->layout('user_external', array(
+        $this->response->html($this->layout('user/external', array(
             'last_logins' => $this->lastLogin->getAll($user['id']),
             'user' => $user,
         )));
@@ -316,7 +316,7 @@ class User extends Base
             }
         }
 
-        $this->response->html($this->layout('user_password', array(
+        $this->response->html($this->layout('user/password', array(
             'values' => $values,
             'errors' => $errors,
             'user' => $user,
@@ -365,7 +365,7 @@ class User extends Base
             }
         }
 
-        $this->response->html($this->layout('user_edit', array(
+        $this->response->html($this->layout('user/edit', array(
             'values' => $values,
             'errors' => $errors,
             'projects' => $this->projectPermission->filterProjects($this->project->getList(), $user['id']),
@@ -395,7 +395,7 @@ class User extends Base
             $this->response->redirect('?controller=user');
         }
 
-        $this->response->html($this->layout('user_remove', array(
+        $this->response->html($this->layout('user/remove', array(
             'user' => $user,
         )));
     }
@@ -431,7 +431,7 @@ class User extends Base
                     $this->response->redirect('?controller=app');
                 }
                 else {
-                    $this->response->html($this->template->layout('user_login', array(
+                    $this->response->html($this->template->layout('user/login', array(
                         'errors' => array('login' => t('Google authentication failed')),
                         'values' => array(),
                         'no_layout' => true,
@@ -493,7 +493,7 @@ class User extends Base
                     $this->response->redirect('?controller=app');
                 }
                 else {
-                    $this->response->html($this->template->layout('user_login', array(
+                    $this->response->html($this->template->layout('user/login', array(
                         'errors' => array('login' => t('GitHub authentication failed')),
                         'values' => array(),
                         'no_layout' => true,

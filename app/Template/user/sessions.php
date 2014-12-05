@@ -19,7 +19,7 @@
         <td><?= dt('%B %e, %Y at %k:%M %p', $session['expiration']) ?></td>
         <td><?= Helper\escape($session['ip']) ?></td>
         <td><?= Helper\escape(Helper\summary($session['user_agent'])) ?></td>
-        <td><a href="?controller=user&amp;action=removeSession&amp;user_id=<?= $user['id'] ?>&amp;id=<?= $session['id'].Helper\param_csrf() ?>"><?= t('Remove') ?></a></td>
+        <td><?= Helper\a(t('Remove'), 'user', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true) ?></td>
     </tr>
     <?php endforeach ?>
     </table>
