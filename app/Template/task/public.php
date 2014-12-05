@@ -1,6 +1,6 @@
 <section id="main" class="public-task">
 
-    <?= Helper\template('task_details', array('task' => $task, 'project' => $project)) ?>
+    <?= Helper\template('task/details', array('task' => $task, 'project' => $project)) ?>
 
     <p class="pull-right"><?= Helper\a(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?></p>
 
