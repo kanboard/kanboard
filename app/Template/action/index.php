@@ -51,7 +51,7 @@
 <?php endif ?>
 
 <h3><?= t('Add an action') ?></h3>
-<form method="post" action="<?= Helper\u('action', 'event', array('project_id' => $project['id'])) ?>">
+<form method="post" action="<?= Helper\u('action', 'event', array('project_id' => $project['id'])) ?>" class="listing">
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('project_id', $values) ?>
 
