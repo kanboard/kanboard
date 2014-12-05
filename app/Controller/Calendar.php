@@ -8,8 +8,8 @@ namespace Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Calendar extends Base
-{
+class Calendar extends Base {
+
     /**
      * Common layout for calendar view
      *
@@ -18,8 +18,7 @@ class Calendar extends Base
      * @param  array     $params     Template parameters
      * @return string
      */
-    private function layout($template, array $params)
-    {
+    private function layout($template, array $params) {
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
         $params['analytic_content_for_layout'] = $this->template->load($template, $params);
 
@@ -31,95 +30,114 @@ class Calendar extends Base
      *
      * @access public
      */
-    public function show()
-    {
+    public function show() {
         $project = $this->getProject();
-        
+
+        $status = array();
+        $status[-1] = t('All Tasks');
+        $status[0] = t('closed');
+        $status[1] = t('open');
+
+        $columns = array();
+        $columns[-1] = t('All columns');
+        $columns = array_replace($columns, $this->board->getColumnsList($project['id']));
+
+        $projects = array();
+        $projects[$project['id']] = $project['name'];
+
         $this->response->html($this->layout('calendar/show', array(
-            'project' => $project,
-            'users' => $this->projectPermission->getMemberList($project['id'], true, true),
-            'categories' => $this->category->getList($project['id'], true, true),
-            'dataurl' => '?controller=calendar&amp;action=events&amp;project_id='.$project['id'],
-            'title' => t('Task calendar for "%s"', $project['name']),
+                    'project' => $project,
+                    'users' => $this->projectPermission->getMemberList($project['id'], true, true),
+                    'categories' => $this->category->getList($project['id'], true, true),
+                    'projects' => $projects,
+                    'columns' => $columns,
+                    'status' => $status,
+                    'dataurl' => '?controller=calendar&amp;action=events&amp;status_id=1&amp;project_id=' . $project['id'],
+                    'ical_url' => 'ToDo: iCal-URL',
+                    'title' => t('Task calendar for "%s"', $project['name']),
         )));
-        
     }
-    
-    public function ical()
-    {
+
+    public function ical() {
         //TODO
     }
-    
-    public function events()
-    {
-        
-        /*$project_id = $this->request->getIntegerParam('project_id', 0);
-        $user_id = $this->request->getIntegerParam('user_id', 0);
-        $category_id = $this->request->getIntegerParam('category_id', 0);*/
-        
-        $project = $this->getProject();
-        $project_id = $project['id'];
-        
-        $tasks = $this->taskFinder->getAll($project_id);
-        
-        /* $tasks = $this->taskFinder->getQuery()
-                    ->eq('project_id', $project_id)
-                    ->eq('owner_id', $user_id)
-                    ->eq('category_id', $category_id)
-                    //->eq('is_active', Task::STATUS_OPEN)
-                    ->asc('tasks.position')
-                    ->findAll();*/
-        
+
+    public function events() {
+
+
+        $project_id = $this->request->getIntegerParam('project_id');
+        $user_id = $this->request->getIntegerParam('user_id', -1);
+        $category_id = $this->request->getIntegerParam('category_id', -1);
+        $column_id = $this->request->getIntegerParam('column_id', -1);
+        $status_id = $this->request->getIntegerParam('status_id', -1);
+
+        if ($status_id == -1) {
+            $tasks = $this->taskFinder->getAll($project_id, 1);
+            $tasks = array_replace($tasks, $this->taskFinder->getAll($project_id, 0));
+        } else {
+            $tasks = $this->taskFinder->getAll($project_id, $status_id);
+        }
+
         // List of events
-        $array = array();
-        
+        $event_array = array();
+
         foreach ($tasks as $task) {
             if ($task['date_due'] > 0) {
-                $json = array();
-                $json['id'] = $task['id'];
-                $json['title'] = '#'.$task['id'].': '. $task['title'];
-                $json['start'] = date('c', $task['date_due']);          //"start": "2014-09-09T16:00:00-05:00" 
-                $json['allDay'] = true;
-                
-                /* task colors */
-                // TODO: model for the future color picker
-                if($task['color_id'] === 'blue') {
-                    $json['backgroundColor'] = 'rgb(219, 235, 255)';
-                    $json['borderColor'] = 'rgb(168, 207, 255)';
-                } elseif($task['color_id'] === 'purple') {
-                    $json['backgroundColor'] = 'rgb(223, 176, 255)';
-                    $json['borderColor'] = 'rgb(205, 133, 254)';
-                } elseif($task['color_id'] === 'grey') {
-                    $json['backgroundColor'] = 'rgb(238, 238, 238)';
-                    $json['borderColor'] = 'rgb(204, 204, 204)';
-                } elseif($task['color_id'] === 'red') {
-                    $json['backgroundColor'] = 'rgb(255, 187, 187)';
-                    $json['borderColor'] = 'rgb(255, 151, 151)';
-                } elseif($task['color_id'] === 'green') {
-                    $json['backgroundColor'] = 'rgb(189, 244, 203)';
-                    $json['borderColor'] = 'rgb(74, 227, 113)';
-                } elseif($task['color_id'] === 'yellow') {
-                    $json['backgroundColor'] = 'rgb(245, 247, 196)';
-                    $json['borderColor'] = 'rgb(223, 227, 45)';
-                } elseif($task['color_id'] === 'orange') {
-                    $json['backgroundColor'] = 'rgb(255, 215, 179)';
-                    $json['borderColor'] = 'rgb(255, 172, 98)';
-                }
-                
-                $json['textColor'] = 'black';
-                $json['url'] = '?controller=task&action=show&task_id=' . $task['id'];
+                if ($project_id == -1 || $task['project_id'] == $project_id) {
+                    if ($status_id == -1 || $task['is_active'] == $status_id) {
+                        if ($user_id == -1 || $task['owner_id'] == $user_id) {
+                            if ($category_id == -1 || $task['category_id'] == $category_id) {
+                                if ($column_id == -1 || $task['column_id'] == $column_id) {
+                                    $json_event = array();
+                                    $json_event['id'] = $task['id'];
+                                    $json_event['title'] = '#' . $task['id'] . ': ' . $task['title'];
+                                    $json_event['start'] = date('c', $task['date_due']);          //"start": "2014-09-09T16:00:00-05:00" 
+                                    $json_event['allDay'] = true;
 
-                //additional fields:
-                $json['project_id'] = $task['project_id'];
-                $json['column_id'] = $task['column_id'];
-                $json['owner_id'] = $task['owner_id'];
-                $json['is_active'] = $task['is_active'];
-                $json['category_id'] = $task['category_id'];
-        
-    
-                array_push($array, $json);
+                                    /* task colors */
+                                    // TODO: model for the future color picker
+                                    if ($task['color_id'] === 'blue') {
+                                        $json_event['backgroundColor'] = 'rgb(219, 235, 255)';
+                                        $json_event['borderColor'] = 'rgb(168, 207, 255)';
+                                    } elseif ($task['color_id'] === 'purple') {
+                                        $json_event['backgroundColor'] = 'rgb(223, 176, 255)';
+                                        $json_event['borderColor'] = 'rgb(205, 133, 254)';
+                                    } elseif ($task['color_id'] === 'grey') {
+                                        $json_event['backgroundColor'] = 'rgb(238, 238, 238)';
+                                        $json_event['borderColor'] = 'rgb(204, 204, 204)';
+                                    } elseif ($task['color_id'] === 'red') {
+                                        $json_event['backgroundColor'] = 'rgb(255, 187, 187)';
+                                        $json_event['borderColor'] = 'rgb(255, 151, 151)';
+                                    } elseif ($task['color_id'] === 'green') {
+                                        $json_event['backgroundColor'] = 'rgb(189, 244, 203)';
+                                        $json_event['borderColor'] = 'rgb(74, 227, 113)';
+                                    } elseif ($task['color_id'] === 'yellow') {
+                                        $json_event['backgroundColor'] = 'rgb(245, 247, 196)';
+                                        $json_event['borderColor'] = 'rgb(223, 227, 45)';
+                                    } elseif ($task['color_id'] === 'orange') {
+                                        $json_event['backgroundColor'] = 'rgb(255, 215, 179)';
+                                        $json_event['borderColor'] = 'rgb(255, 172, 98)';
+                                    }
+
+                                    $json_event['textColor'] = 'black';
+                                    $json_event['url'] = '?controller=task&action=show&task_id=' . $task['id'];
+
+                                    //additional fields:
+                                    /* $json_event['project_id'] = $task['project_id'];
+                                      $json_event['column_id'] = $task['column_id'];
+                                      $json_event['owner_id'] = $task['owner_id'];
+                                      $json_event['is_active'] = $task['is_active'];
+                                      $json_event['category_id'] = $task['category_id']; */
+
+                                    array_push($event_array, $json_event);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-       echo json_encode($array);
+        echo json_encode($event_array);
     }
+
 }

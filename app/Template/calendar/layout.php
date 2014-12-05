@@ -14,7 +14,7 @@
     </div>
     <section class="sidebar-container">
 
-        <?= Helper\template('calendar/sidebar', array('project' => $project, 'users' => $users, 'categories' => $categories)) ?>
+        <?= Helper\template('calendar/sidebar', array('project' => $project, 'users' => $users, 'categories' => $categories, 'ical_url' => $ical_url, 'projects' => $projects, 'columns' => $columns, 'status' => $status)) ?>
 
         <div class="sidebar-content">
             <?= $analytic_content_for_layout ?>
