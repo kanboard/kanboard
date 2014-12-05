@@ -5,7 +5,40 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 35;
+const VERSION = 42;
+
+function version_36($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE links (
+            id INTEGER PRIMARY KEY,
+            project_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            name_inverse TEXT NOT NULL,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )
+    ");
+    $pdo->exec("
+        CREATE TABLE tasks_links (
+            id INTEGER PRIMARY KEY,
+            task_id INTEGER NOT NULL,
+            task_inverse_id INTEGER NOT NULL,
+            link_id INTEGER NOT NULL,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(link_id) REFERENCES links(id) ON DELETE CASCADE
+        )
+    ");
+    $pdo->exec("
+        INSERT INTO links
+        (project_id, name, name_inverse)
+        VALUES
+            (1, 'Related to', 'Related to'),
+            (1, 'In roadmap', 'Contains'),
+            (1, 'Follow', 'Preced'),
+            (1, 'Child of', 'Parent of')
+    ");
+}
 
 function version_35($pdo)
 {

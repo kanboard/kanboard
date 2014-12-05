@@ -35,6 +35,7 @@ use Model\LastLogin;
  * @property \Model\ProjectDailySummary    $projectDailySummary
  * @property \Model\SubTask                $subTask
  * @property \Model\Task                   $task
+ * @property \Model\Link                   $link
  * @property \Model\TaskCreation           $taskCreation
  * @property \Model\TaskModification       $taskModification
  * @property \Model\TaskDuplication        $taskDuplication

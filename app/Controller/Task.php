@@ -55,6 +55,7 @@ class Task extends Base
     {
         $task = $this->getTask();
         $subtasks = $this->subTask->getAll($task['id']);
+        $links = $this->link->getAll($task['id']);
 
         $values = array(
             'id' => $task['id'],
@@ -70,6 +71,7 @@ class Task extends Base
             'files' => $this->file->getAll($task['id']),
             'comments' => $this->comment->getAll($task['id']),
             'subtasks' => $subtasks,
+            'links' => $links,
             'task' => $task,
             'values' => $values,
             'timesheet' => $this->timeTracking->getTaskTimesheet($task, $subtasks),
