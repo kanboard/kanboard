@@ -23,22 +23,18 @@ $(document).ready(function () {
             dayNamesShort: [data.Sun, data.Mon, data.Tue, data.Wed, data.Thu, data.Fri, data.Sat]
 
         });
-    });
 
-    /*$.getJSON('?controller=calendar&action=getTexts', function (data) {
-        $('#calendar').fullCalendar({monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Dedsdscember']});
-    });*/
+        //init
+        updateEvents();
+        $('#form-project_id').prop("disabled", true);
+        $("#form-status_id option[value='1']").attr('selected', true);
+    });
 
     function updateEvents() {
         $('#calendar').fullCalendar('removeEvents');
         $('#calendar').fullCalendar('removeEventSource', $('.Source').val());
         $('#calendar').fullCalendar('addEventSource', $("#calendarurl").attr("data-url"));
     }
-
-    $('#form-project_id').prop("disabled", true);
-    $("#form-status_id option[value='1']").attr('selected', true);
-
-    updateEvents();
 
     function changeDataUrl(parameter, value) {
         var queryParameters = {}, queryString = $("#calendarurl").attr("data-url"),
