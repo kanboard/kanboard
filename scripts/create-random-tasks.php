@@ -9,7 +9,7 @@ use Model\Project;
 use Model\ProjectPermission;
 use Model\User;
 
-$task_per_column = 50;
+$task_per_column = 200;
 
 $userModel = new User($container);
 $projectModel = new Project($container);
@@ -17,15 +17,13 @@ $permissionModel = new ProjectPermission($container);
 $taskModel = new TaskCreation($container);
 $subtaskModel = new SubTask($container);
 
-for ($i = 0; $i <= 100; $i++) {
-    $id = $projectModel->create(array(
-        'name' => 'Project #'.$i
-    ));
+$project_id = $projectModel->create(array(
+    'name' => 'Project #1'
+));
 
-    $permissionModel->allowUser($id, 1);
-}
+$permissionModel->allowUser($project_id, 1);
 
-for ($i = 0; $i <= 500; $i++) {
+for ($i = 0; $i <= 5; $i++) {
     $userModel->create(array(
         'username' => 'user'.$i,
         'password' => 'password'.$i,
@@ -40,7 +38,7 @@ foreach (array(1, 2, 3, 4) as $column_id) {
 
         $task = array(
             'title' => 'Task #'.$i.'-'.$column_id,
-            'project_id' => mt_rand(1, 100),
+            'project_id' => 1,
             'column_id' => $column_id,
             'owner_id' => 1,
             'color_id' => mt_rand(0, 1) === 0 ? 'green' : 'purple',
