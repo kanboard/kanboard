@@ -136,6 +136,12 @@ class Ldap extends Base
 
         ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
+        ldap_set_option($ldap, LDAP_OPT_NETWORK_TIMEOUT, 1);
+        ldap_set_option($ldap, LDAP_OPT_TIMELIMIT, 1);
+
+        if (LDAP_START_TLS && ! @ldap_start_tls($ldap)) {
+            die('Unable to use ldap_start_tls()');
+        }
 
         return $ldap;
     }
