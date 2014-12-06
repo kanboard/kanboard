@@ -618,7 +618,7 @@ function paginate(array $pagination)
 {
     extract($pagination);
 
-    if ($pagination['offset'] === 0 && ($total - $pagination['offset']) < $limit) {
+    if ($pagination['offset'] === 0 && ($total - $pagination['offset']) <= $limit) {
         return '';
     }
 
