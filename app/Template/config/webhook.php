@@ -29,7 +29,7 @@
         </li>
         <li>
             <?= t('URL for task creation:') ?>
-            <input type="text" readonly="readonly" value="<?= Helper\get_current_base_url().Helper\u('webhook', 'task', array('token' => $values['webhook_token'])) ?>">
+            <input type="text" class="auto-select" readonly="readonly" value="<?= Helper\get_current_base_url().Helper\u('webhook', 'task', array('token' => $values['webhook_token'])) ?>">
         </li>
         <li>
             <?= Helper\a(t('Reset token'), 'config', 'token', array('type' => 'webhook'), true) ?>

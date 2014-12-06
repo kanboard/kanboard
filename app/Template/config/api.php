@@ -9,7 +9,7 @@
         </li>
         <li>
             <?= t('API endpoint:') ?>
-            <input type="text" readonly="readonly" value="<?= Helper\get_current_base_url().'jsonrpc.php' ?>">
+            <input type="text" class="auto-select" readonly="readonly" value="<?= Helper\get_current_base_url().'jsonrpc.php' ?>">
         </li>
         <li>
             <?= Helper\a(t('Reset token'), 'config', 'token', array('type' => 'api'), true) ?>
