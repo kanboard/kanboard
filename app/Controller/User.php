@@ -28,15 +28,15 @@ class User extends Base
      *
      * @access public
      */
-    public function login()
+    public function login(array $values = array(), array $errors = array())
     {
         if ($this->acl->isLogged()) {
             $this->response->redirect('?controller=app');
         }
 
         $this->response->html($this->template->layout('user/login', array(
-            'errors' => array(),
-            'values' => array(),
+            'errors' => $errors,
+            'values' => $values,
             'no_layout' => true,
             'redirect_query' => $this->request->getStringParam('redirect_query'),
             'title' => t('Login')
@@ -63,13 +63,7 @@ class User extends Base
             }
         }
 
-        $this->response->html($this->template->layout('user/login', array(
-            'errors' => $errors,
-            'values' => $values,
-            'no_layout' => true,
-            'redirect_query' => $redirect_query,
-            'title' => t('Login')
-        )));
+        $this->login($values, $errors);
     }
 
     /**
@@ -154,13 +148,13 @@ class User extends Base
      *
      * @access public
      */
-    public function create()
+    public function create(array $values = array(), array $errors = array())
     {
         $this->response->html($this->template->layout('user/new', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
             'projects' => $this->project->getList(),
-            'errors' => array(),
-            'values' => array(),
+            'errors' => $errors,
+            'values' => $values,
             'title' => t('New user')
         )));
     }
@@ -186,13 +180,7 @@ class User extends Base
             }
         }
 
-        $this->response->html($this->template->layout('user/new', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
-            'projects' => $this->project->getList(),
-            'errors' => $errors,
-            'values' => $values,
-            'title' => t('New user')
-        )));
+        $this->create($values, $errors);
     }
 
     /**
