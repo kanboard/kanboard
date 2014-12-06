@@ -131,6 +131,10 @@ ul.form-errors li {
     display: none;
 }
 
+.form-inline-group {
+    display: inline;
+}
+
 input.form-date {
     width: 150px;
 }

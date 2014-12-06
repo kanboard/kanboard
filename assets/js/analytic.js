@@ -31,7 +31,7 @@ Kanboard.Analytic.CFD = (function() {
     {
         var series = prepareSeries(metrics, labels);
 
-        var svg = dimple.newSvg("#chart", 800, 380);
+        var svg = dimple.newSvg("#chart", "100%", 380);
         var chart = new dimple.chart(svg, series);
 
         var x = chart.addCategoryAxis("x", labels['day']);
@@ -81,13 +81,13 @@ Kanboard.Analytic.TaskRepartition = (function() {
     {
         var series = prepareSeries(metrics, labels);
 
-        var svg = dimple.newSvg("#chart", 700, 350);
+        var svg = dimple.newSvg("#chart", "100%", 350);
 
         var chart = new dimple.chart(svg, series);
         chart.addMeasureAxis("p", labels["nb_tasks"]);
         var ring = chart.addSeries(labels["column_title"], dimple.plot.pie);
         ring.innerRadius = "50%";
-        chart.addLegend(0, 0, 100, 100, "left");
+        chart.addLegend(0, 0, 100, "100%", "left");
         chart.draw();
     }
 
@@ -126,13 +126,13 @@ Kanboard.Analytic.UserRepartition = (function() {
     {
         var series = prepareSeries(metrics, labels);
 
-        var svg = dimple.newSvg("#chart", 700, 350);
+        var svg = dimple.newSvg("#chart", "100%", 350);
 
         var chart = new dimple.chart(svg, series);
         chart.addMeasureAxis("p", labels["nb_tasks"]);
         var ring = chart.addSeries(labels["user"], dimple.plot.pie);
         ring.innerRadius = "50%";
-        chart.addLegend(0, 0, 100, 100, "left");
+        chart.addLegend(0, 0, 100, "100%", "left");
         chart.draw();
     }
 

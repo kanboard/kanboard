@@ -16,11 +16,17 @@
 
     <?= Helper\form_csrf() ?>
 
-    <?= Helper\form_label(t('Start Date'), 'from') ?>
-    <?= Helper\form_text('from', $values, array(), array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?>
+    <div class="form-inline-group">
+        <?= Helper\form_label(t('Start Date'), 'from') ?>
+        <?= Helper\form_text('from', $values, array(), array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?>
+    </div>
 
-    <?= Helper\form_label(t('End Date'), 'to') ?>
-    <?= Helper\form_text('to', $values, array(), array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?>
+    <div class="form-inline-group">
+        <?= Helper\form_label(t('End Date'), 'to') ?>
+        <?= Helper\form_text('to', $values, array(), array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?>
+    </div>
 
-    <input type="submit" value="<?= t('Execute') ?>" class="btn btn-blue"/>
+    <div class="form-inline-group">
+        <input type="submit" value="<?= t('Execute') ?>" class="btn btn-blue"/>
+    </div>
 </form>

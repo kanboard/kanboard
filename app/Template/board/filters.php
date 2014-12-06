@@ -1,14 +1,14 @@
 <div class="page-header">
-    <ul>
-        <li>
+    <ul class="board-filters">
+        <li class="hide-tablet">
             <?= t('Filter by user') ?>
             <?= Helper\form_select('user_id', $users) ?>
         </li>
-        <li>
+        <li class="hide-tablet">
             <?= t('Filter by category') ?>
             <?= Helper\form_select('category_id', $categories) ?>
         </li>
-        <li>
+        <li class="hide-tablet">
             <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>
         </li>
         <li>

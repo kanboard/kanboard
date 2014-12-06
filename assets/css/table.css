@@ -48,6 +48,10 @@ th a:hover {
     white-space: nowrap;
 }
 
+.table-fixed th {
+    overflow: hidden;
+}
+
 .table-fixed td {
     white-space: nowrap;
     overflow: hidden;

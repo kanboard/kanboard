@@ -4,7 +4,7 @@
 <?php else: ?>
     <table class="table-fixed">
         <tr>
-            <th class="column-10"><?= Helper\order(t('Task Id'), 'tasks.id', $pagination) ?></th>
+            <th class="column-10"><?= Helper\order('Id', 'tasks.id', $pagination) ?></th>
             <th class="column-20"><?= Helper\order(t('Project'), 'project_name', $pagination) ?></th>
             <th class="column-15"><?= Helper\order(t('Status'), 'status', $pagination) ?></th>
             <th><?= Helper\order(t('Subtask'), 'title', $pagination) ?></th>
