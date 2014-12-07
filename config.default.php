@@ -1,7 +1,7 @@
 <?php
 
 // E-mail address for the "From" header (notifications)
-define('MAIL_FROM', 'notifications@kanboard.net');
+define('MAIL_FROM', 'notifications@kanboard.local');
 
 // Mail transport to use: "smtp", "sendmail" or "mail" (PHP mail function)
 define('MAIL_TRANSPORT', 'mail');

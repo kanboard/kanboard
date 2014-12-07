@@ -68,7 +68,7 @@ define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 
 ### The sender email address
 
-By default, emails will use the sender address `notifications@kanboard.net`.
+By default, emails will use the sender address `notifications@kanboard.local`.
 It's not possible to reply to this address.
 
 You can customize this address by changing the value of the constant `MAIL_FROM` in your config file.
