@@ -61,7 +61,7 @@ $server->bind('disableProjectPublicAccess', $projectModel, 'disablePublicAccess'
 $server->register('createProject', function($name) use ($projectModel) {
     $values = array('name' => $name);
     list($valid,) = $projectModel->validateCreation($values);
-    return $valid && $projectModel->create($values);
+    return $valid ? $projectModel->create($values) : false;
 });
 
 $server->register('updateProject', function($id, $name, $is_active = null, $is_public = null, $token = null) use ($projectModel) {
