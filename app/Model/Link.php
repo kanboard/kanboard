@@ -4,7 +4,7 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-
+use PDO;
 /**
  * Link model
  *
@@ -43,7 +43,7 @@ class Link extends Base
      */
     public function getById($link_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $link_id)->findOne();
+        return $this->db->table(self::TABLE_TASKS_LINKS)->eq('id', $link_id)->findOne();
     }
 
     /**
@@ -127,15 +127,46 @@ class Link extends Base
      */
     public function getAll($task_id)
     {
+//         $sql = '
+//             SELECT
+//             '.self::TABLE_TASKS_LINKS.'.*,
+//             '.self::TABLE.'.*
+//             FROM '.self::TABLE_TASKS_LINKS.'
+//             JOIN '.self::TABLE.' ON '.self::TABLE.'.id = link_id
+//             WHERE task_id = ? OR task_inverse_id = ?
+//         ';
+// //             '.Task::TABLE.'.title AS task_name
+// //             LEFT JOIN '.Task::TABLE.' ON ('.Task::TABLE.'.id != ? AND ('.Task::TABLE.'.id == '.self::TABLE_TASKS_LINKS.'.task_id OR '.Task::TABLE.'.id == '.self::TABLE_TASKS_LINKS.'.task__inverse_id))
+//         $rq = $this->db->execute($sql, array($task_id, $task_id));
+//         var_dump($rq);
+//         var_dump($sql);
+//         $res = $rq->fetch(PDO::FETCH_ASSOC);
+//         var_dump($res);
+//         return $res;
+        
         return $this->db->table(self::TABLE_TASKS_LINKS)
             ->beginOr()
             ->eq('task_id', $task_id)
             ->eq('task_inverse_id', $task_id)
             ->closeOr()
+            ->columns(self::TABLE_TASKS_LINKS.'.*', self::TABLE.".*", Task::TABLE.".title AS task_name")
             ->join(self::TABLE, 'id', 'link_id')
-            ->asc('name')
+            ->join(Task::TABLE, 'id', 'task_id')
+            ->asc(self::TABLE.'.name')
             ->findAll();
     }
+    
+    /**
+     * Prepare data before insert/update
+     *
+     * @access public
+     * @param  array    $values    Form values
+     */
+    public function prepare(array &$values)
+    {
+        $this->removeFields($values, array('another_link'));
+    }
+    
 
     /**
      * Create a link
@@ -146,7 +177,8 @@ class Link extends Base
      */
     public function create(array $values)
     {
-        return $this->persist(self::TABLE, $values);
+        $this->prepare($values);
+        return $this->persist(self::TABLE_TASKS_LINKS, $values);
     }
 
     /**
@@ -158,7 +190,8 @@ class Link extends Base
      */
     public function update(array $values)
     {
-        return $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+        $this->prepare($values);
+        return $this->db->table(self::TABLE_TASKS_LINKS)->eq('id', $values['id'])->save($values);
     }
 
     /**
@@ -222,9 +255,9 @@ class Link extends Base
     public function validateCreation(array $values)
     {
         $rules = array(
-            new Validators\Required('project_id', t('The project id is required')),
-            new Validators\Required('name', t('The name is required')),
-            new Validators\Required('name_inverse', t('The inversed name is required')),
+            new Validators\Required('task_id', t('The task id is required')),
+            new Validators\Required('task_inverse_id', t('The linked task id is required')),
+            new Validators\Required('link_id', t('The link type is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));

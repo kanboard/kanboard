@@ -67,7 +67,6 @@
             <?= t('Category:') ?> <strong><?= Helper\escape($task['category_name']) ?></strong>
         </li>
         <?php endif ?>
-        <?= Helper\template('link/show', array('task' => $task, 'links' => $links)) ?>
         <li>
             <?php if ($task['is_active'] == 1): ?>
                 <?= t('Status is open') ?>
