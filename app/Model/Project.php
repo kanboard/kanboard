@@ -52,12 +52,12 @@ class Project extends Base
      * Get a project by the name
      *
      * @access public
-     * @param  string   $project_name    Project name
+     * @param  string     $name    Project name
      * @return array
      */
-    public function getByName($project_name)
+    public function getByName($name)
     {
-        return $this->db->table(self::TABLE)->eq('name', $project_name)->findOne();
+        return $this->db->table(self::TABLE)->eq('name', $name)->findOne();
     }
 
     /**
