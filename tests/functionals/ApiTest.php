@@ -68,7 +68,9 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testCreateProject()
     {
-        $this->assertTrue($this->client->createProject('API test'));
+        $project_id = $this->client->createProject('API test');
+        $this->assertNotFalse($project_id);
+        $this->assertInternalType('int', $project_id);
     }
 
     public function testGetProjectById()
