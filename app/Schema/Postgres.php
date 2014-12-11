@@ -5,7 +5,12 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 17;
+const VERSION = 18;
+
+function version_18($pdo)
+{
+    $pdo->exec("ALTER TABLE project_has_users ADD COLUMN is_owner BOOLEAN DEFAULT '0'");
+}
 
 function version_17($pdo)
 {

@@ -244,11 +244,43 @@ class Project extends Base
     public function allow()
     {
         $values = $this->request->getValues();
+        $this->checkProjectOwnerPermissions($values['project_id']);
         list($valid,) = $this->projectPermission->validateUserModification($values);
 
         if ($valid) {
 
-            if ($this->projectPermission->allowUser($values['project_id'], $values['user_id'])) {
+            if ($this->projectPermission->allowUser($values['project_id'], $values['user_id'], $values['is_owner'])) {
+                $this->session->flash(t('Project updated successfully.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to update this project.'));
+            }
+        }
+
+        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
+    }
+
+    /**
+     * Set ownership for a specific user (admin only)
+     *
+     * @access public
+     */
+    public function setOwner()
+    {
+        $this->checkCSRFParam();
+
+        $values = array(
+            'project_id' => $this->request->getIntegerParam('project_id'),
+            'user_id' => $this->request->getIntegerParam('user_id'),
+            'is_owner' => $this->request->getIntegerParam('is_owner'),
+        );
+
+        $this->checkProjectOwnerPermissions($values['project_id']);
+        list($valid,) = $this->projectPermission->validateUserModification($values);
+
+        if ($valid) {
+
+            if ($this->projectPermission->setOwner($values['project_id'], $values['user_id'], $values['is_owner'])) {
                 $this->session->flash(t('Project updated successfully.'));
             }
             else {
@@ -273,6 +305,7 @@ class Project extends Base
             'user_id' => $this->request->getIntegerParam('user_id'),
         );
 
+        $this->checkProjectOwnerPermissions($values['project_id']);
         list($valid,) = $this->projectPermission->validateUserModification($values);
 
         if ($valid) {

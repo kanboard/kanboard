@@ -86,6 +86,27 @@ class ProjectPermission extends Base
     }
 
     /**
+     * Get a list of owners for a project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return array
+     */
+    public function getOwners($project_id)
+    {
+        $users = $this->db
+            ->table(self::TABLE)
+            ->join(User::TABLE, 'id', 'user_id')
+            ->eq('project_id', $project_id)
+            ->eq('is_owner', 1)
+            ->asc('username')
+            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
+            ->findAll();
+
+        return $this->user->prepareList($users);
+    }
+
+    /**
      * Get allowed and not allowed users for a project
      *
      * @access public
@@ -97,11 +118,13 @@ class ProjectPermission extends Base
         $users = array(
             'allowed' => array(),
             'not_allowed' => array(),
+            'owners' => array(),
         );
 
         $all_users = $this->user->getList();
 
         $users['allowed'] = $this->getMembers($project_id);
+        $users['owners'] = $this->getOwners($project_id);
 
         foreach ($all_users as $user_id => $username) {
 
@@ -126,6 +149,24 @@ class ProjectPermission extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->save(array('project_id' => $project_id, 'user_id' => $user_id));
+    }
+
+    /**
+     * Make the specific user owner of the given project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @param  bool      $is_owner     Is user owner of the project
+     * @return bool
+     */
+    public function setOwner($project_id, $user_id, $is_owner = 1)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('user_id', $user_id) 
+                    ->update(array('is_owner' => $is_owner));
     }
 
     /**
@@ -163,6 +204,24 @@ class ProjectPermission extends Base
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
+                    ->count();
+	}
+
+	/**
+     * Check if a specific user is owner of a given project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @return bool
+     */
+    public function isOwner($project_id, $user_id)
+    {
+        return (bool) $this->db
+                    ->table(self::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('user_id', $user_id)
+                    ->eq('is_owner', 1)
                     ->count();
     }
 
@@ -206,6 +265,10 @@ class ProjectPermission extends Base
     public function adminAllowed($project_id, $user_id)
     {
         if ($this->isUserAllowed($project_id, $user_id) && $this->project->isPrivate($project_id)) {
+            return true;
+        }
+
+        if ($this->isOwner($project_id, $user_id)) {
             return true;
         }
 
@@ -291,6 +354,7 @@ class ProjectPermission extends Base
             new Validators\Integer('project_id', t('This value must be an integer')),
             new Validators\Required('user_id', t('The user id is required')),
             new Validators\Integer('user_id', t('This value must be an integer')),
+            new Validators\Integer('is_owner', t('This value must be an integer')),
         ));
 
         return array(

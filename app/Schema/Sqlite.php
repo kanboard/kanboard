@@ -5,7 +5,12 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 35;
+const VERSION = 36;
+
+function version_36($pdo)
+{
+    $pdo->exec('ALTER TABLE project_has_users ADD COLUMN is_owner INTEGER DEFAULT "0"');
+}
 
 function version_35($pdo)
 {
