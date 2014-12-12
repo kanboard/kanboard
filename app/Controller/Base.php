@@ -253,6 +253,20 @@ abstract class Base
     }
 
     /**
+     * Check if the current user is owner of the given project
+     *
+     * @access protected
+     * @param  integer   $project_id  Project id
+     */
+    protected function checkProjectOwnerPermissions($project_id)
+    {
+        if (! $this->acl->isAdminUser() &&
+            ! ($this->acl->isRegularUser() && $this->projectPermission->isOwner($project_id, $this->acl->getUserId()))) {
+            $this->forbidden();
+        }
+    }
+
+    /**
      * Redirection when there is no project in the database
      *
      * @access protected
@@ -299,6 +313,7 @@ abstract class Base
         $params['project_content_for_layout'] = $content;
         $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
+        $params['is_owner'] = $this->projectPermission->isOwner($params['project']['id'], $this->acl->getUserId());
 
         return $this->template->layout('project/layout', $params);
     }

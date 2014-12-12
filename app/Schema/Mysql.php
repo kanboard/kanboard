@@ -5,7 +5,12 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 36;
+const VERSION = 37;
+
+function version_37($pdo)
+{
+    $pdo->exec("ALTER TABLE project_has_users ADD COLUMN is_owner TINYINT(1) DEFAULT '0'");
+}
 
 function version_36($pdo)
 {

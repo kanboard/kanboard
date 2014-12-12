@@ -15,8 +15,16 @@
         <?php foreach ($users['allowed'] as $user_id => $username): ?>
             <li>
                 <strong><?= Helper\escape($username) ?></strong>
+                <?php $is_owner = array_key_exists($user_id, $users['owners']);
+                      if ($is_owner): ?> [owner] <?php endif ?>
                 <?php if ($project['is_private'] == 0): ?>
-                    (<?= Helper\a(t('revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?>)
+                    <?php if ($is_owner): ?>
+                        (<a href=<?= Helper\u('project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?> ><?= t('make user') ?></a>
+                    <?php else: ?>
+                        (<a href=<?= Helper\u('project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?> ><?= t('make owner') ?></a>
+                    <?php endif ?>
+                    or
+                    <?= Helper\a(t('revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?>)
                 <?php endif ?>
             </li>
         <?php endforeach ?>
