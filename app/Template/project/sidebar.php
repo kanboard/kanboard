@@ -12,22 +12,24 @@
         <li>
             <?= Helper\a(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
         </li>
-        <li>
-            <?= Helper\a(t('Edit board'), 'board', 'edit', array('project_id' => $project['id'])) ?>
-        </li>
-        <li>
-            <?= Helper\a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
-        </li>
         <?php endif ?>
-        <?php if ((Helper\is_admin() || $is_owner) && $project['is_private'] == 0): ?>
+        <?php if (Helper\is_admin() || $is_owner || $project['is_private']): ?>
+            <li>
+                <?= Helper\a(t('Edit board'), 'board', 'edit', array('project_id' => $project['id'])) ?>
+            </li>
+            <li>
+                <?= Helper\a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
+            </li>
+            <?php if ($project['is_private'] == 0): ?>
             <li>
                 <?= Helper\a(t('User management'), 'project', 'users', array('project_id' => $project['id'])) ?>
             </li>
+            <?php endif ?>
+            <li>
+                <?= Helper\a(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
+            </li>
         <?php endif ?>
         <?php if (Helper\is_admin() || $project['is_private']): ?>
-        <li>
-            <?= Helper\a(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
-        </li>
         <li>
             <?= Helper\a(t('Duplicate'), 'project', 'duplicate', array('project_id' => $project['id']), true) ?>
         </li>
