@@ -55,7 +55,7 @@ class Task extends Base
     {
         $task = $this->getTask();
         $subtasks = $this->subTask->getAll($task['id']);
-        $links = $this->link->getAll($task['id']);
+        $links = $this->taskLink->getAll($task['id']);
 
         $values = array(
             'id' => $task['id'],

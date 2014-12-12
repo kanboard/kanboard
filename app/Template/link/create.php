@@ -2,7 +2,7 @@
     <h2><?= t('Add a link') ?></h2>
 </div>
 
-<form method="post" action="<?= Helper\u('link', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('tasklink', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>
 

@@ -46,6 +46,7 @@ use Model\LastLogin;
  * @property \Model\TaskPermission         $taskPermission
  * @property \Model\TaskStatus             $taskStatus
  * @property \Model\TaskValidator          $taskValidator
+ * @property \Model\TaskLink               $taskLink
  * @property \Model\CommentHistory         $commentHistory
  * @property \Model\SubtaskHistory         $subtaskHistory
  * @property \Model\TimeTracking           $timeTracking

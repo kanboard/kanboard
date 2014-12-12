@@ -37,6 +37,7 @@ use PicoDb\Database;
  * @property \Model\TaskHistory        $taskHistory
  * @property \Model\TaskPosition       $taskPosition
  * @property \Model\TaskValidator      $taskValidator
+ * @property \Model\TaskLink           $taskLink
  * @property \Model\TimeTracking       $timeTracking
  * @property \Model\User               $user
  * @property \Model\Webhook            $webhook

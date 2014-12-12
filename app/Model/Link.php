@@ -19,7 +19,6 @@ class Link extends Base
      * @var string
      */
     const TABLE = 'links';
-    const TABLE_TASKS_LINKS = 'tasks_links';
 
     /**
      * Return true if a link exists for a given project
@@ -43,7 +42,7 @@ class Link extends Base
      */
     public function getById($link_id)
     {
-        return $this->db->table(self::TABLE_TASKS_LINKS)->eq('id', $link_id)->findOne();
+        return $this->db->table(self::TABLE)->eq('id', $link_id)->findOne();
     }
 
     /**
@@ -59,18 +58,6 @@ class Link extends Base
     }
     
     /**
-     * Get the link name by the id
-     *
-     * @access public
-     * @param  integer   $link_id    Category id
-     * @return string
-     */
-    public function getInversedNameById($link_id)
-    {
-        return $this->db->table(self::TABLE)->eq('id', $link_id)->findOneColumn('name_inverse') ?: '';
-    }
-
-    /**
      * Get a link id by the project and the name
      *
      * @access public
@@ -82,15 +69,12 @@ class Link extends Base
     {
         return (int) $this->db->table(self::TABLE)
                         ->eq('project_id', $project_id)
-                        ->beginOr()
                         ->eq('name', $link_name)
-                        ->eq('name_inverse', $link_name)
-                        ->closeOr()
                         ->findOneColumn('id');
     }
 
     /**
-     * Return the list of all links
+     * Return the list of all links for a given project
      *
      * @access public
      * @param  integer   $project_id    Project id
@@ -102,7 +86,7 @@ class Link extends Base
     {
         $listing = $this->db->table(self::TABLE)
             ->eq('project_id', $project_id)
-            ->asc('name')
+            ->asc('id')
             ->listing('id', 'name');
 
         $prepend = array();
@@ -119,41 +103,29 @@ class Link extends Base
     }
 
     /**
-     * Return all links for a given project
-     *
+     * Return all links
      * @access public
-     * @param  integer   $project_id    Project id
+     * @param  bool      $prepend_none  If true, prepend to the list the value 'None'
+     * @param  bool      $prepend_all   If true, prepend to the list the value 'All'
      * @return array
      */
-    public function getAll($task_id)
+    public function getAll($prepend_none = false, $prepend_all = false)
     {
-//         $sql = '
-//             SELECT
-//             '.self::TABLE_TASKS_LINKS.'.*,
-//             '.self::TABLE.'.*
-//             FROM '.self::TABLE_TASKS_LINKS.'
-//             JOIN '.self::TABLE.' ON '.self::TABLE.'.id = link_id
-//             WHERE task_id = ? OR task_inverse_id = ?
-//         ';
-// //             '.Task::TABLE.'.title AS task_name
-// //             LEFT JOIN '.Task::TABLE.' ON ('.Task::TABLE.'.id != ? AND ('.Task::TABLE.'.id == '.self::TABLE_TASKS_LINKS.'.task_id OR '.Task::TABLE.'.id == '.self::TABLE_TASKS_LINKS.'.task__inverse_id))
-//         $rq = $this->db->execute($sql, array($task_id, $task_id));
-//         var_dump($rq);
-//         var_dump($sql);
-//         $res = $rq->fetch(PDO::FETCH_ASSOC);
-//         var_dump($res);
-//         return $res;
-        
-        return $this->db->table(self::TABLE_TASKS_LINKS)
-            ->beginOr()
-            ->eq('task_id', $task_id)
-            ->eq('task_inverse_id', $task_id)
-            ->closeOr()
-            ->columns(self::TABLE_TASKS_LINKS.'.*', self::TABLE.".*", Task::TABLE.".title AS task_name")
-            ->join(self::TABLE, 'id', 'link_id')
-            ->join(Task::TABLE, 'id', 'task_id')
-            ->asc(self::TABLE.'.name')
-            ->findAll();
+        $listing = $this->db->table(self::TABLE)
+            ->asc('name')
+            ->listing('id', 'name');
+
+        $prepend = array();
+
+        if ($prepend_all) {
+            $prepend[-1] = t('All links');
+        }
+
+        if ($prepend_none) {
+            $prepend[0] = t('No link');
+        }
+
+        return $prepend + $listing;
     }
     
     /**
@@ -178,7 +150,7 @@ class Link extends Base
     public function create(array $values)
     {
         $this->prepare($values);
-        return $this->persist(self::TABLE_TASKS_LINKS, $values);
+        return $this->persist(self::TABLE, $values);
     }
 
     /**
@@ -191,21 +163,21 @@ class Link extends Base
     public function update(array $values)
     {
         $this->prepare($values);
-        return $this->db->table(self::TABLE_TASKS_LINKS)->eq('id', $values['id'])->save($values);
+        return $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
     }
 
     /**
      * Remove a link
      *
      * @access public
-     * @param  integer   $link_id    Category id
+     * @param  integer   $link_id    Link id
      * @return bool
      */
     public function remove($link_id)
     {
         $this->db->startTransaction();
 
-        $this->db->table(Task::TABLE)->eq('link_id', $link_id)->update(array('link_id' => 0));
+        $this->db->table(Task::TABLE)->eq('id', $link_id)->update(array('id' => 0));
 
         if (! $this->db->table(self::TABLE)->eq('id', $link_id)->remove()) {
             $this->db->cancelTransaction();
@@ -255,9 +227,7 @@ class Link extends Base
     public function validateCreation(array $values)
     {
         $rules = array(
-            new Validators\Required('task_id', t('The task id is required')),
-            new Validators\Required('task_inverse_id', t('The linked task id is required')),
-            new Validators\Required('link_id', t('The link type is required')),
+            new Validators\Required('name', t('The link name is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -279,8 +249,7 @@ class Link extends Base
     {
         $rules = array(
             new Validators\Required('id', t('The id is required')),
-            new Validators\Required('name', t('The name is required')),
-            new Validators\Required('name_inverse', t('The inversed name is required')),
+            new Validators\Required('name', t('The link name is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -302,8 +271,7 @@ class Link extends Base
         return array(
             new Validators\Integer('id', t('The id must be an integer')),
             new Validators\Integer('project_id', t('The project id must be an integer')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
-            new Validators\MaxLength('name_inverse', t('The maximum length is %d characters', 50), 50),
+            new Validators\MaxLength('name', t('The maximum length is %d characters', 150), 150),
         );
     }
 }

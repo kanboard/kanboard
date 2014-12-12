@@ -14,6 +14,9 @@
             <?= Helper\a(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'])) ?>
         </li>
         <li>
+            <?= Helper\a(t('Add a link'), 'tasklink', 'create', array('task_id' => $task['id'])) ?>
+        </li>
+        <li>
             <?= Helper\a(t('Add a comment'), 'comment', 'create', array('task_id' => $task['id'])) ?>
         </li>
         <li>

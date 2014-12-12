@@ -2,7 +2,7 @@
     <h2><?= t('Edit a link') ?></h2>
 </div>
 
-<form method="post" action="<?= Helper\u('link', 'update', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= Helper\u('tasklink', 'update', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>
 
@@ -14,8 +14,6 @@
 
     <?= Helper\form_label(t('Linked Task'), 'task_inverse_id') ?>
     <?= Helper\form_text('task_inverse_id', $values, $errors, array('required')) ?><br/>
-
-    <?= Helper\form_checkbox('another_link', t('Create another link'), 1, isset($values['another_link']) && $values['another_link'] == 1) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

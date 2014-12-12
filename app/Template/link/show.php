@@ -7,20 +7,11 @@
         <ul>
         <?php foreach ($links as $link): ?>
             <li>
-            <?php
-            $linkName = $link['name'];
-            $linkedTaskId = $link['task_inverse_id'];
-            $linkedTaskName = $link['task_inverse_name'];
-            if ($link['task_inverse_id'] == $task['id']) {
-                $linkName = $link['name_inverse'];
-                $linkedTaskId = $link['task_id'];
-                $linkedTaskName = $link['task_name'];
-            }
-            ?>
-            <?= Helper\escape($linkName) ?> <?= Helper\a('#'.Helper\escape($linkedTaskId).' '.Helper\escape($linkedTaskName), 'task', '', array('task_id' => $linkedTaskId, 'action' => 'show')) ?>
-            <?= Helper\a(t('Edit'), 'link', 'create', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
+            <?= Helper\escape($link['name']) ?> <?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' '.Helper\escape($link['task_inverse_name']), 'task', '', array('task_id' => $link['task_inverse_id'], 'action' => 'show')) ?>
+            
+            <?= Helper\a(t('Edit'), 'tasklink', 'edit', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
             <?= t('or') ?>
-            <?= Helper\a(t('Remove'), 'link', 'confirm', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
+            <?= Helper\a(t('Remove'), 'tasklink', 'confirm', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
             </li>
         <?php endforeach ?>
         </ul>
