@@ -42,6 +42,7 @@ class Acl extends Base
         'category' => array('index', 'save', 'edit', 'update', 'confirm', 'remove'),
         'action' => array('index', 'event', 'params', 'create', 'confirm', 'remove'),
         'analytic' => array('tasks', 'users', 'cfd'),
+        'calendar' => array('show', 'events', 'updateevent', 'gettexts'),
     );
 
     /**
