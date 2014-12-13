@@ -22,10 +22,6 @@
             <?= Helper\form_select('status_id', $status) ?>
         </li>
     </ul>
-    <!--<hr>
-    <h2><?= t('iCal-Url') ?></h2>
-    <input value="<?= $ical_url ?>" readonly><br>
-    <i>uses Project-Token or Api token</i>-->
 </li>
 </ul>
 </div>

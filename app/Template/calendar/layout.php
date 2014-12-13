@@ -1,5 +1,3 @@
-<?= Helper\js('assets/js/d3.v3.4.8.min.js') ?>
-<?= Helper\js('assets/js/dimple.v2.1.0.min.js') ?>
 <?= Helper\js('assets/js/moment.min.js') ?>
 <?= Helper\js('assets/js/fullcalendar.min.js') ?>
 <?= Helper\css('assets/css/fullcalendar.min.css') ?>
@@ -14,7 +12,7 @@
     </div>
     <section class="sidebar-container">
 
-        <?= Helper\template('calendar/sidebar', array('project' => $project, 'users' => $users, 'categories' => $categories, 'ical_url' => $ical_url, 'projects' => $projects, 'columns' => $columns, 'status' => $status)) ?>
+        <?= Helper\template('calendar/sidebar', array('project' => $project, 'users' => $users, 'categories' => $categories, 'projects' => $projects, 'columns' => $columns, 'status' => $status)) ?>
 
         <div class="sidebar-content">
             <?= $analytic_content_for_layout ?>

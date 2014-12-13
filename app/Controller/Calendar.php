@@ -53,29 +53,8 @@ class Calendar extends Base {
                     'columns' => $columns,
                     'status' => $status,
                     'dataurl' => '?controller=calendar&amp;action=events&amp;status_id=1&amp;project_id=' . $project['id'],
-                    'ical_url' => $this->generateIcalUrl(),
                     'title' => t('Task calendar for "%s"', $project['name']),
         )));
-    }
-
-    /**
-     *  Generate iCal Url
-     * 
-     * @return string
-     * @access public
-     */
-    public function generateIcalUrl() {
-        //TODO
-        return "ToDo: iCal-URL";
-    }
-
-    /**
-     * Generate iCal
-     * 
-     * @access public
-     */
-    public function generateIcal() {
-        //TODO
     }
 
     /**
@@ -84,13 +63,19 @@ class Calendar extends Base {
      * @access public
      */
     public function updateevent() {
-        if ($this->request->isPost()) {
-            $task_id = $_POST['id'];
-            $task_start = $_POST['start'];
+        
+        $project_id = $this->request->getIntegerParam('project_id');
+        
+        if ($project_id > 0 && $this->request->isAjax() && $this->request->isPost()) {
 
-            // TODO: use the request
-            //$task_id = $this->request->getValue("id");
-            //$task_start = $this->request->getValue("start");
+            if (! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
+                $this->response->text('Forbidden', 403);
+            }
+            
+            $values = $this->request->getJson();
+            
+            $task_id = $values['id'];
+            $task_start = $values['start'];
 
             $task = $this->taskFinder->getById($task_id);
             $date_parts = explode('-', $task_start);
@@ -115,9 +100,10 @@ class Calendar extends Base {
         $column_id = $this->request->getIntegerParam('column_id', -1);
         $status_id = $this->request->getIntegerParam('status_id', -1);
 
-        if ($status_id == -1) {
-            $tasks = $this->taskFinder->getAll($project_id, 1);
-            $tasks = array_replace($tasks, $this->taskFinder->getAll($project_id, 0));
+        if ($status_id == -1) {            
+            $tasks1 = $this->taskFinder->getAll($project_id, 1);
+            $tasks2 = $this->taskFinder->getAll($project_id, 0);
+            $tasks = array_merge($tasks1, $tasks2);            
         } else {
             $tasks = $this->taskFinder->getAll($project_id, $status_id);
         }
@@ -191,7 +177,7 @@ class Calendar extends Base {
      * @access public
      * @return json
      */
-    public function getTexts() {
+    public function gettexts() {
         $json = array();
         $json['today'] = t('today');
         $json['Jan'] = t('Jan');

@@ -1,7 +1,7 @@
 // Calendar related functions
 $(document).ready(function () {
 
-    $.getJSON('?controller=calendar&action=getTexts', function (data) {
+    $.getJSON('?controller=calendar&action=gettexts&project_id=' + $('#form-project_id').val(), function (data) {
 
         $('#calendar').fullCalendar({
             header: {
@@ -13,7 +13,20 @@ $(document).ready(function () {
             eventDrop: function (event, delta, revertFunc) {
                 var id = event.id;
                 var start = event.start.format();
-                $.post('?controller=calendar&action=updateevent', {id: id, start: start});
+                $.ajax({
+                    cache: false,
+                    url: '?controller=calendar&action=updateevent&project_id=' + $('#form-project_id').val(),
+                    contentType: "application/json",
+                    type: "POST",
+                    processData: false,
+                    data: JSON.stringify({
+                        "id": id,
+                        "start": start,
+                    }),
+                    success: function (data) {
+                        updateEvents();
+                    }
+                });
             },
             eventLimit: true, // allow "more" link when too many events
             monthNames: [data.January, data.February, data.March, data.April, data.May, data.June, data.July, data.August, data.September, data.October, data.November, data.December],
