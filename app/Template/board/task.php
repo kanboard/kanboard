@@ -40,7 +40,8 @@
 
     <span class="task-board-user">
         <?= Helper\a(
-            ! empty($task['owner_id']) ? t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned'),
+            (! empty($task['owner_id']) ? t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned')) .
+            ( Helper\is_current_user($task['owner_id']) ? '&nbsp;<i class="fa fa-star"></i>' : ''),
             'board',
             'changeAssignee',
             array('task_id' => $task['id']),
