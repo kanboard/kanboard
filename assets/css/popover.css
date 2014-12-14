@@ -9,11 +9,13 @@
 }
 
 #popover-content {
-    position: fixed;
+    position: absolute;
     width: 70%;
     margin: 0 0 0 -35%;
     left: 50%;
     top: 5%;
+    bottom: 2.5%;
+    overflow:auto;
     padding: 15px;
     background: #fff;
-}
+}	
