@@ -213,6 +213,7 @@ return array(
     'Invalid date' => 'วันที่ผิด',
     'Must be done before %B %e, %Y' => 'ต้องทำให้เสร็จก่อน %d/%m/%Y',
     '%B %e, %Y' => '%d/%m/%Y',
+    // '%b %e, %Y' => '',
     'Automatic actions' => 'การกระทำอัตโนมัติ',
     'Your automatic action have been created successfully.' => 'การกระทำอัตโนมัติสร้างเรียบร้อยแล้ว',
     'Unable to create your automatic action.' => 'ไม่สามารถสร้างการกระทำอัตโนมัติได้',

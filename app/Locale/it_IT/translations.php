@@ -213,6 +213,7 @@ return array(
     'Invalid date' => 'Data sbagliata',
     // 'Must be done before %B %e, %Y' => '',
     // '%B %e, %Y' => '',
+    // '%b %e, %Y' => '',
     'Automatic actions' => 'Azioni automatiche',
     'Your automatic action have been created successfully.' => 'l\'azione automatica è stata creata correttamente.',
     'Unable to create your automatic action.' => 'Non si può creare quest\'azione automatica.',

@@ -213,6 +213,7 @@ return array(
     'Invalid date' => '日付が無効です',
     'Must be done before %B %e, %Y' => '%Y/%m/%d までに完了',
     '%B %e, %Y' => '%d %B %Y',
+    // '%b %e, %Y' => '',
     'Automatic actions' => '自動アクションを管理する',
     'Your automatic action have been created successfully.' => '自動アクションを作成しました。',
     'Unable to create your automatic action.' => '自動アクションの作成に失敗しました。',

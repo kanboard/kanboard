@@ -213,6 +213,7 @@ return array(
     'Invalid date' => 'Ej tillåtet datum',
     'Must be done before %B %e, %Y' => 'Måste vara klart innan %B %e, %Y',
     '%B %e, %Y' => '%d %B %Y',
+    // '%b %e, %Y' => '',
     'Automatic actions' => 'Automatiska åtgärder',
     'Your automatic action have been created successfully.' => 'Din automatiska åtgärd har skapats.',
     'Unable to create your automatic action.' => 'Kunde inte skapa din automatiska åtgärd.',

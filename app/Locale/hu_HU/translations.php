@@ -213,6 +213,7 @@ return array(
     'Invalid date' => 'Érvénytelen dátum',
     'Must be done before %B %e, %Y' => 'Kész kell lennie %Y.%m.%d előtt',
     '%B %e, %Y' => '%Y.%m.%d',
+    // '%b %e, %Y' => '',
     'Automatic actions' => 'Automatikus intézkedések',
     'Your automatic action have been created successfully.' => 'Az automatikus intézkedés sikeresen elkészült.',
     'Unable to create your automatic action.' => 'Automatikus intézkedés létrehozása nem lehetséges.',
@@ -434,7 +435,7 @@ return array(
     'Do you really want to enable this project: "%s"?' => 'Tényleg szeretné engedélyezni ezt a projektet: "%s"',
     'Project activation' => 'Projekt aktiválás',
     'Move the task to another project' => 'Feladatot mozgatása másik projektbe',
-    'Move to another project' => 'Másik projektbe',   // XXX átlépés vagy átmozgatás??
+    'Move to another project' => 'Másik projektbe',
     'Do you really want to duplicate this task?' => 'Tényleg szeretné megkettőzni ezt a feladatot?',
     'Duplicate a task' => 'Feladat megkettőzése',
     'External accounts' => 'Külső fiókok',
@@ -476,7 +477,7 @@ return array(
     '%s closed the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a>' => '%s lezárta a feladatot <a href="?controller=task&amp;action=show&amp;task_id=%d"> #%d</a>',
     '%s created a subtask for the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a>' => '%s létrehozott egy részfeladat a feladathoz <a href="?controller=task&amp;action=show&amp;task_id=%d"> #%d</a>',
     '%s updated a subtask for the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a>' => '%s frissített egy részfeladatot a feladathoz <a href="?controller=task&amp;action=show&amp;task_id=%d"> #%d</a>',
-    'Assigned to %s with an estimate of %s/%s' => '%s-nek kiosztva %s/%s óra becsült idő mellett',
+    'Assigned to %s with an estimate of %s/%sh' => '%s-nek kiosztva %s/%s óra becsült idő mellett',
     'Not assigned, estimate of %sh' => 'Nincs kiosztva, becsült idő: %s óra',
     '%s updated a comment on the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a>' => '%s frissítette a megjegyzését a feladatban <a href="?controller=task&amp;action=show&amp;task_id=%d"> #%d</a>',
     '%s commented the task <a href="?controller=task&amp;action=show&amp;task_id=%d">#%d</a>' => '%s megjegyzést fűzött a feladathoz <a href="?controller=task&amp;action=show&amp;task_id=%d"> #%d</a>',
@@ -601,6 +602,5 @@ return array(
     'This export contains the number of tasks per column grouped per day.' => 'Ez az export tartalmazza a feladatok számát oszloponként összesítve, napokra lebontva.',
     'Nothing to preview...' => 'Nincs semmi az előnézetben ...',
     'Preview' => 'Előnézet',
-    'Write' => 'Írd'
+    'Write' => 'Írd',
 );
-?>

@@ -213,6 +213,7 @@ return array(
     'Invalid date' => '无效日期',
     'Must be done before %B %e, %Y' => '必须在%Y/%m/%d前完成',
     '%B %e, %Y' => '%Y/%m/%d',
+    // '%b %e, %Y' => '',
     'Automatic actions' => '自动动作',
     'Your automatic action have been created successfully.' => '您的自动动作已成功创建',
     'Unable to create your automatic action.' => '无法为您创建自动动作。',

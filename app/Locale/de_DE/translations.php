@@ -213,6 +213,7 @@ return array(
     'Invalid date' => 'Ungültiges Datum',
     'Must be done before %B %e, %Y' => 'Muss vor dem %d.%m.%Y erledigt werden',
     '%B %e, %Y' => '%d.%m.%Y',
+    // '%b %e, %Y' => '',
     'Automatic actions' => 'Automatische Aktionen',
     'Your automatic action have been created successfully.' => 'Die Automatische Aktion wurde erfolgreich erstellt.',
     'Unable to create your automatic action.' => 'Erstellen der automatischen Aktion nicht möglich.',

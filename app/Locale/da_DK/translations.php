@@ -213,6 +213,7 @@ return array(
     'Invalid date' => 'Ugyldig dato',
     'Must be done before %B %e, %Y' => 'Skal være fuldført inden %d.%m.%Y',
     '%B %e, %Y' => '%d.%m.%Y',
+    // '%b %e, %Y' => '',
     'Automatic actions' => 'Automatiske handlinger',
     'Your automatic action have been created successfully.' => 'Din automatiske handling er oprettet.',
     'Unable to create your automatic action.' => 'Din automatiske handling kunne ikke oprettes.',

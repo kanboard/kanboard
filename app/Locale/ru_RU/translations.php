@@ -213,6 +213,7 @@ return array(
     'Invalid date' => 'Неверная дата',
     'Must be done before %B %e, %Y' => 'Должно быть сделано до %d/%m/%Y',
     '%B %e, %Y' => '%d/%m/%Y',
+    // '%b %e, %Y' => '',
     'Automatic actions' => 'Автоматические действия',
     'Your automatic action have been created successfully.' => 'Автоматика настроена.',
     'Unable to create your automatic action.' => 'Не удалось создать автоматизированное действие.',

@@ -213,6 +213,7 @@ return array(
     'Invalid date' => 'Virheellinen päiväys',
     'Must be done before %B %e, %Y' => 'Täytyy suorittaa ennen %d.%m.%Y',
     '%B %e, %Y' => '%d.%m.%Y',
+    // '%b %e, %Y' => '',
     'Automatic actions' => 'Automaattiset toiminnot',
     'Your automatic action have been created successfully.' => 'Toiminto suoritettiin onnistuneesti.',
     'Unable to create your automatic action.' => 'Automaattisen toiminnon luominen epäonnistui.',
