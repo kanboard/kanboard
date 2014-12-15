@@ -186,7 +186,7 @@ return array(
     'Page not found' => 'Page introuvable',
     'Complexity' => 'Complexité',
     'limit' => 'limite',
-    'Task limit' => 'Nombre maximum de tâches',
+    'Task limit' => 'Tâches Max.',
     'Task count' => 'Nombre de tâches',
     'This value must be greater than %d' => 'Cette valeur doit être plus grande que %d',
     'Edit project access list' => 'Modifier l\'accès au projet',

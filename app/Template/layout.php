@@ -44,7 +44,7 @@
                     <?php endif ?>
                     <li>
                         <?= Helper\a(t('Logout'), 'user', 'logout', array(), true) ?>
-                        <span class="username">(<?= Helper\a(Helper\escape(Helper\get_username()), 'user', 'show', array('user_id' => Helper\get_user_id())) ?>)</span>
+                        <span class="username hide-tablet">(<?= Helper\a(Helper\escape(Helper\get_username()), 'user', 'show', array('user_id' => Helper\get_user_id())) ?>)</span>
                     </li>
                 </ul>
             </nav>

@@ -16,7 +16,7 @@
         </tr>
         <?php foreach ($columns as $column): ?>
         <tr>
-            <td><?= Helper\form_label(t('Column %d', ++$i), 'title['.$column['id'].']', array('title="column_id='.$column['id'].'"')) ?></td>
+            <td><?= Helper\form_label(++$i, 'title['.$column['id'].']', array('title="column_id='.$column['id'].'"')) ?></td>
             <td><?= Helper\form_text('title['.$column['id'].']', $values, $errors, array('required')) ?></td>
             <td><?= Helper\form_number('task_limit['.$column['id'].']', $values, $errors, array('placeholder="'.t('limit').'"')) ?></td>
             <td>
@@ -44,7 +44,7 @@
         <input type="submit" value="<?= t('Update') ?>" class="btn btn-blue"/>
     </div>
 </form>
-
+<hr/>
 <h3><?= t('Add a new column') ?></h3>
 <form method="post" action="<?= Helper\u('board', 'add', array('project_id' => $project['id'])) ?>" autocomplete="off">
 

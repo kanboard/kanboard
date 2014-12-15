@@ -12,7 +12,6 @@ label {
 input[type="number"],
 input[type="date"],
 input[type="email"],
-input[type="tel"],
 input[type="password"],
 input[type="text"] {
     color: #888;
@@ -31,7 +30,6 @@ input[type="text"] {
 input[type="number"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
-input[type="tel"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus,
 textarea:focus {

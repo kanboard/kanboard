@@ -10,6 +10,10 @@
         font-size: 0.85em;
     }
 
+    .sidebar-content {
+        margin-left: 255px;
+    }
+
     .form-tab {
         max-width: 404px;
     }
@@ -21,5 +25,40 @@
 
     .form-inline-group input[type="submit"] {
         margin-top: 20px;
+    }
+
+    td > input[type="text"] {
+        max-width: 150px;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+
+    body {
+        font-size: 0.7em;
+    }
+
+    header {
+        padding-bottom: 4px;
+    }
+
+    .sidebar {
+        max-width: 220px;
+    }
+
+    .sidebar-content {
+        margin-left: 225px;
+    }
+
+    div.chosen-container {
+        font-size: 0.9em;
+    }
+
+    input[type="number"],
+    input[type="date"],
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        height: 18px;
     }
 }

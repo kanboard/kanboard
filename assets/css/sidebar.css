@@ -5,14 +5,14 @@
 }
 
 .sidebar-content {
-    margin-left: 330px;
+    margin-left: 280px;
 }
 
 .sidebar {
     position: absolute;
     left: 0px;
     top: 0;
-    width: 250px;
+    max-width: 250px;
     padding: 10px;
     padding-top: 0;
     border: 1px solid #ddd;
