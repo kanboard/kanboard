@@ -10,10 +10,9 @@
     <?= Helper\form_hidden('task_id', $values) ?>
 
     <?= Helper\form_label(t('Link Type'), 'link_id') ?>
-    <?= Helper\form_select('link_id', $link_list, $values, $errors, array('required autofocus')) ?><br/>
+    <?= Helper\form_select('link_id', $link_list, $values, $errors, 'required autofocus') ?><br/>
 
-    <?= Helper\form_label(t('Linked Task'), 'task_inverse_id') ?>
-    <?= Helper\form_text('task_inverse_id', $values, $errors, array('required')) ?><br/>
+    <?= Helper\form_label(t('Linked Task'), 'task_inverse_id') ?> #<?= Helper\form_number('task_inverse_id', $values, $errors, array('required')) ?><br/>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

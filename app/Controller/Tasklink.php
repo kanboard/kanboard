@@ -144,18 +144,18 @@ class Tasklink extends Base
      *
      * @access public
      */
-    public function remove()
+	public function remove()
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
-        $taskLink = $this->getTaskLink();
-        if ($this->taskLink->remove($link['id'])) {
+
+        if ($this->taskLink->remove($this->request->getIntegerParam('link_id'))) {
             $this->session->flash(t('Link removed successfully.'));
+        	$this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
         }
         else {
             $this->session->flashError(t('Unable to remove this link.'));
+	        $this->response->redirect('?controller=tasklink&action=confirm&task_id='.$task['id'].'&link_id='.$this->request->getIntegerParam('link_id'));
         }
-
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
     }
 }

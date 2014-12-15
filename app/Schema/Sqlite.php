@@ -33,8 +33,8 @@ function version_46($pdo)
             (1, 'Related to'),
             (1, 'In roadmap'),
             (1, 'Contains'),
-            (1, 'Follow'),
-            (1, 'Precede'),
+            (1, 'Follows'),
+            (1, 'Precedes'),
             (1, 'Child of'),
             (1, 'Parent of')
         ");
@@ -82,8 +82,8 @@ function version_36($pdo)
             (1, 'Related to'),
             (1, 'In roadmap'),
             (1, 'Contains'),
-            (1, 'Follow'),
-            (1, 'Precede'),
+            (1, 'Follows'),
+            (1, 'Precedes'),
             (1, 'Child of'),
             (1, 'Parent of')
         ");
