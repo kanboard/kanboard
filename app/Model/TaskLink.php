@@ -167,13 +167,18 @@ class TaskLink extends Base
 	 */
 	public function remove($id)
 	{
+		$this->db->startTransaction();
 		$res = $this->db->table(self::TABLE)
 			->eq('id', $id)
 			->remove();
-		var_dump($this->db->getLogMessages());
-		$res = $this->db->table(self::TABLE)
+		$res *= $this->db->table(self::TABLE)
 			->eq('id', (0 == ($id % 2)) ? $id - 1 : $id + 1)
 			->remove();
+		if (! $res) {
+			$this->db->cancelTransaction();
+			return false;
+		}
+		$this->db->closeTransaction();
 		return $res;
 	}
 

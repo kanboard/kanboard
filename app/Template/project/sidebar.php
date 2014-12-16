@@ -18,6 +18,9 @@
         <li>
             <?= Helper\a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
         </li>
+         <li>
+            <?= Helper\a(t('Link management'), 'link', 'index', array('project_id' => $project['id'])) ?>
+        </li>
         <?php if (Helper\is_admin()): ?>
             <li>
                 <?= Helper\a(t('User management'), 'project', 'users', array('project_id' => $project['id'])) ?>

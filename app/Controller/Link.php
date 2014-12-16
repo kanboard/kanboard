@@ -26,60 +26,64 @@ class Link extends Base
 
         return $link;
     }
-
+    
     /**
-     * Creation form
+     * Get the current link
+     *
+     * @access private
+     * @return array
+     */
+    private function getMergedLink()
+    {
+    	$link = $this->link->getMergedById($this->request->getIntegerParam('link_id'));
+    
+    	if (! $link) {
+    		$this->notfound();
+    	}
+    
+    	return $link;
+    }
+    
+    /**
+     * List of links for a given project
      *
      * @access public
      */
-    public function create(array $values = array(), array $errors = array())
+    public function index(array $values = array(), array $errors = array())
     {
-        $task = $this->getTask();
-
-        if (empty($values)) {
-            $values = array(
-                'task_id' => $task['id'],
-                'another_link' => $this->request->getIntegerParam('another_link', 0)
-            );
-        }
-
-        $this->response->html($this->taskLayout('link/create', array(
-            'values' => $values,
-            'errors' => $errors,
-            'link_list' => $this->link->getList($task['project_id'], false),
-            'task' => $task,
-        )));
+    	$project = $this->getProjectManagement();
+    	$this->response->html($this->projectLayout('link/index', array(
+    		'links' => $this->link->getMergedList($project['id']),
+    		'values' => $values + array('project_id' => $project['id']),
+    		'errors' => $errors,
+    		'project' => $project,
+    		'title' => t('Links')
+    	)));
     }
 
     /**
-     * Validation and creation
+     * Validate and save a new link
      *
      * @access public
      */
     public function save()
     {
-        $task = $this->getTask();
-        $values = $this->request->getValues();
+        $project = $this->getProjectManagement();
 
+        $values = $this->request->getValues();
         list($valid, $errors) = $this->link->validateCreation($values);
 
         if ($valid) {
-
             if ($this->link->create($values)) {
-                $this->session->flash(t('Link added successfully.'));
+                $this->session->flash(t('Your link have been created successfully.'));
+                $this->response->redirect('?controller=link&action=index&project_id='.$project['id']);
             }
             else {
                 $this->session->flashError(t('Unable to create your link.'));
             }
-
-            if (isset($values['another_link']) && $values['another_link'] == 1) {
-                $this->response->redirect('?controller=link&action=create&task_id='.$task['id'].'&another_link=1');
-            }
-
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
         }
 
-        $this->create($values, $errors);
+        $this->index($values, $errors);
     }
 
     /**
@@ -89,27 +93,25 @@ class Link extends Base
      */
     public function edit(array $values = array(), array $errors = array())
     {
-        $task = $this->getTask();
-        $link = $this->getLink();
+        $project = $this->getProjectManagement();
+        $link = $this->getMergedLink();//($project['id']);
 
-        $this->response->html($this->taskLayout('link/edit', array(
+        $this->response->html($this->projectLayout('link/edit', array(
             'values' => empty($values) ? $link : $values,
             'errors' => $errors,
-            'link_list' => $this->link->getList($task['project_id'], false),
-            'link' => $link,
-            'task' => $task,
+            'project' => $project,
+            'title' => t('Links')
         )));
     }
 
     /**
-     * Update and validate a link
+     * Edit a link (validate the form and update the database)
      *
      * @access public
      */
     public function update()
     {
-        $task = $this->getTask();
-        $link = $this->getLink();
+        $project = $this->getProjectManagement();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->link->validateModification($values);
@@ -117,13 +119,12 @@ class Link extends Base
         if ($valid) {
 
             if ($this->link->update($values)) {
-                $this->session->flash(t('Link updated successfully.'));
+                $this->session->flash(t('Your link have been updated successfully.'));
+                $this->response->redirect('?controller=link&action=index&project_id='.$project['id']);
             }
             else {
                 $this->session->flashError(t('Unable to update your link.'));
             }
-
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
         }
 
         $this->edit($values, $errors);
@@ -136,15 +137,16 @@ class Link extends Base
      */
     public function confirm()
     {
-        $task = $this->getTask();
-        $link = $this->getLink();
-
-        $this->response->html($this->taskLayout('link/remove', array(
-            'link' => $link,
-            'task' => $task,
-        )));
+    	$project = $this->getProjectManagement();
+    	$link = $this->getLink($project['id']);
+    
+    	$this->response->html($this->projectLayout('link/remove', array(
+    		'project' => $project,
+    		'link' => $link,
+    		'title' => t('Remove a link')
+    	)));
     }
-
+    
     /**
      * Remove a link
      *
@@ -152,16 +154,16 @@ class Link extends Base
      */
     public function remove()
     {
-        $this->checkCSRFParam();
-        $task = $this->getTask();
-
-        if ($this->taskLink->remove($this->request->getIntegerParam('link_id'))) {
-            $this->session->flash(t('Link removed successfully.'));
-        	$this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
-        }
-        else {
-            $this->session->flashError(t('Unable to remove this link.'));
-	        $this->response->redirect('?controller=tasklink&action=confirm&task_id='.$task['id'].'&link_id='.$this->request->getIntegerParam('link_id'));
-        }
+    	$this->checkCSRFParam();
+    	$project = $this->getProjectManagement();
+    	$link = $this->getLink($project['id']);
+    
+    	if ($this->link->remove($link['id'])) {
+    		$this->session->flash(t('Link removed successfully.'));
+    	} else {
+    		$this->session->flashError(t('Unable to remove this link.'));
+    	}
+    
+    	$this->response->redirect('?controller=link&action=index&project_id='.$project['id']);
     }
 }

@@ -63,6 +63,7 @@ function version_36($pdo)
             id INTEGER PRIMARY KEY,
             project_id INTEGER NOT NULL,
             name TEXT NOT NULL,
+    		inverse INTEGER NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
         )");
     $pdo->exec("CREATE TABLE task_has_links
@@ -76,16 +77,16 @@ function version_36($pdo)
             FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
         )");
     $pdo->exec("INSERT INTO links
-        (project_id, name)
+        (project_id, name, inverse)
         VALUES
-            (1, 'Related to'),
-            (1, 'Related to'),
-            (1, 'In roadmap'),
-            (1, 'Contains'),
-            (1, 'Follows'),
-            (1, 'Precedes'),
-            (1, 'Child of'),
-            (1, 'Parent of')
+            (1, 'Related to', 0),
+            (1, 'Related to', 1),
+            (1, 'To be done for milestone', 0),
+            (1, 'Milestone for', 1),
+            (1, 'Follows', 0),
+            (1, 'Precedes', 1),
+            (1, 'Childs of', 0),
+            (1, 'Parents of', 1)
         ");
     $pdo->exec("INSERT INTO task_has_links
             (link_id, task_id, task_inverse_id)

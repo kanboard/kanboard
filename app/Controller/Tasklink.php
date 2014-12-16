@@ -43,7 +43,7 @@ class Tasklink extends Base
             );
         }
 
-        $this->response->html($this->taskLayout('link/create', array(
+        $this->response->html($this->taskLayout('tasklink/create', array(
             'values' => $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
@@ -90,7 +90,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $taskLink = $this->getTaskLink();
 
-        $this->response->html($this->taskLayout('link/edit', array(
+        $this->response->html($this->taskLayout('tasklink/edit', array(
             'values' => empty($values) ? $taskLink : $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
@@ -133,7 +133,7 @@ class Tasklink extends Base
     {
         $task = $this->getTask();
         $link = $this->getTaskLink();
-        $this->response->html($this->taskLayout('link/remove', array(
+        $this->response->html($this->taskLayout('tasklink/remove', array(
             'link' => $link,
             'task' => $task,
         )));

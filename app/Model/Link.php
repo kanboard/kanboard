@@ -37,12 +37,38 @@ class Link extends Base
      * Get a link by the id
      *
      * @access public
-     * @param  integer   $link_id    Category id
+     * @param  integer   $link_id    Link id
      * @return array
      */
     public function getById($link_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $link_id)->findOne();
+    }
+    
+    /**
+     * Get a link (name + name inverse) by the id
+     *
+     * @access public
+     * @param  integer   $link_id    Link id
+     * @return array
+     */
+    public function getMergedById($link_id)
+    {
+    	$link_id2 = (0 == ($link_id%2)) ? $link_id-1 : $link_id+1;
+    	$link = $this->db->table(self::TABLE)->eq('id', $link_id)->findOne();
+    	$link2 = $this->db->table(self::TABLE)->eq('id', $link_id2)->findOne();
+    	if (!$link || !$link2) {
+    		return false;
+    	}
+    	// Link is inverse
+    	if (0 == ($link_id%2)) {
+    		$link['name_inverse'] = $link['name'];
+    		$link['name'] = $link2['name'];
+    	}
+    	else {
+    		$link['name_inverse'] = $link2['name'];
+    	}
+    	return $link;
     }
 
     /**
@@ -101,6 +127,37 @@ class Link extends Base
 
         return $prepend + $listing;
     }
+    
+    /**
+     * Return the list of all links (name + inverse name) for a given project
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return array
+     */
+    public function getMergedList($project_id)
+    {
+    	$listing = $this->db->table(self::TABLE)
+	    	->eq('project_id', $project_id)
+	    	->asc('id')
+	    	->column('id', 'name')
+    		->findAll();
+    
+    	$mergedListing = array();
+    	$current = null;
+    	foreach($listing AS $link) {
+    		if (0 != ($link['id']%2)) {
+    			$current = $link;
+    		}
+    		else {
+    			$current['name_inverse'] = $link['name'];
+    			$mergedListing[] = $current;
+    			$current = null;
+    		}
+    	}
+    	$listing = $mergedListing;
+    	return $listing;
+    }
 
     /**
      * Return all links
@@ -136,7 +193,26 @@ class Link extends Base
      */
     public function prepare(array &$values)
     {
-        $this->removeFields($values, array('another_link'));
+    	$link1 = array(
+    		'project_id' => $values['project_id'],
+    		'name' => $values['name'],
+    	);
+    	$link2 = array(
+    		'project_id' => $values['project_id'],
+    		'name' => $values['name_inverse'],
+    	);
+    	$link_id1 = 0;
+    	$link_id2 = 0;
+    	if (isset($values['id'])) {
+    		$link_id1 = (0 == ($values['id']%2) ? $values['id']-1 : $values['id']);
+    		$link_id2 = (0 == ($values['id']%2) ? $values['id'] : $values['id']+1);
+    	}
+    	return array(
+    		$link1,
+    		$link2,
+    		$link_id1,
+    		$link_id2
+    	);
     }
     
 
@@ -149,8 +225,16 @@ class Link extends Base
      */
     public function create(array $values)
     {
-        $this->prepare($values);
-        return $this->persist(self::TABLE, $values);
+        list ($link1, $link2) = $this->prepare($values);
+		$this->db->startTransaction();
+		$res = $this->db->table(self::TABLE)->save($link1);
+		$res *= $this->db->table(self::TABLE)->save($link2);
+		if (! $res) {
+			$this->db->cancelTransaction();
+			return false;
+		}
+		$this->db->closeTransaction();
+		return $res;
     }
 
     /**
@@ -162,8 +246,20 @@ class Link extends Base
      */
     public function update(array $values)
     {
-        $this->prepare($values);
-        return $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+        list ($link1, $link2, $link_id1, $link_id2) = $this->prepare($values);
+		$this->db->startTransaction();
+		$res = $this->db->table(self::TABLE)
+			->eq('id', $link_id1)
+			->save($link1);
+		$res *= $this->db->table(self::TABLE)
+			->eq('id', $link_id2)
+			->save($link2);
+		if (! $res) {
+			$this->db->cancelTransaction();
+			return false;
+		}
+		$this->db->closeTransaction();
+		return $res;
     }
 
     /**
@@ -175,18 +271,19 @@ class Link extends Base
      */
     public function remove($link_id)
     {
-        $this->db->startTransaction();
-
-        $this->db->table(Task::TABLE)->eq('id', $link_id)->update(array('id' => 0));
-
-        if (! $this->db->table(self::TABLE)->eq('id', $link_id)->remove()) {
-            $this->db->cancelTransaction();
-            return false;
-        }
-
-        $this->db->closeTransaction();
-
-        return true;
+    	$this->db->startTransaction();
+       	$res = $this->db->table(self::TABLE)
+			->eq('id', $link_id)
+			->remove();
+		$res *= $this->db->table(self::TABLE)
+			->eq('id', (0 == ($link_id % 2)) ? $link_id - 1 : $link_id + 1)
+			->remove();
+		if (! $res) {
+			$this->db->cancelTransaction();
+			return false;
+		}
+		$this->db->closeTransaction();
+		return $res;
     }
 
     /**
@@ -227,7 +324,9 @@ class Link extends Base
     public function validateCreation(array $values)
     {
         $rules = array(
+            new Validators\Required('project_id', t('The project id is required')),
             new Validators\Required('name', t('The link name is required')),
+            new Validators\Required('name_inverse', t('The link inverse name is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -249,7 +348,9 @@ class Link extends Base
     {
         $rules = array(
             new Validators\Required('id', t('The id is required')),
+            new Validators\Required('project_id', t('The project id is required')),
             new Validators\Required('name', t('The link name is required')),
+            new Validators\Required('name_inverse', t('The link inverse name is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -272,6 +373,7 @@ class Link extends Base
             new Validators\Integer('id', t('The id must be an integer')),
             new Validators\Integer('project_id', t('The project id must be an integer')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 150), 150),
+            new Validators\MaxLength('name_inverse', t('The maximum length is %d characters', 150), 150),
         );
     }
 }
