@@ -47,6 +47,7 @@ class Tasklink extends Base
             'values' => $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
+            'task_list' => $this->taskFinder->getAll($task['project_id']),
             'task' => $task,
         )));
     }
@@ -94,6 +95,7 @@ class Tasklink extends Base
             'values' => empty($values) ? $taskLink : $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
+        	'task_list' => $this->taskFinder->getAll($task['project_id']),
             'link' => $taskLink,
             'task' => $task,
         )));

@@ -12,7 +12,16 @@
     <?= Helper\form_label(t('Link Type'), 'link_id') ?>
     <?= Helper\form_select('link_id', $link_list, $values, $errors, 'required autofocus') ?><br/>
 
-    <?= Helper\form_label(t('Linked Task'), 'task_inverse_id') ?> #<?= Helper\form_number('task_inverse_id', $values, $errors, array('required')) ?><br/>
+    <?= Helper\form_label(t('Linked Task'), 'task_inverse_id') ?>
+    #<?= Helper\form_numeric('task_inverse_id', $values, $errors, array('required', 'placeholder="'.t('Task id').'"', 'list="task_inverse_ids"')) ?>
+	<datalist id="task_inverse_ids">
+	  <select>
+	  <?php foreach ($task_list as $task_inverse): ?>
+	    <option value="<?= $task_inverse['id'] ?>">#<?= $task_inverse['id'].' '.$task_inverse['title'] ?></option>
+	  <?php endforeach ?>
+	  </select>
+	</datalist>
+	<br/>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
