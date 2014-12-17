@@ -1,17 +1,30 @@
 <?php if (! empty($links)): ?>
 <aside id="links" class="task-show-section">
-	<ul>
-	<?php foreach ($links as $link): ?>
-		<li>
-		<?= Helper\escape($link['name']) ?>
-		<?php if (0 == $link['task_inverse_is_active']): ?><span class="task-closed"><?php endif ?><?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' '.trim(Helper\escape($link['task_inverse_name'])), 'task', '', array('task_id' => $link['task_inverse_id'], 'action' => 'show')) ?><?php if (0 == $link['task_inverse_is_active']): ?></span><?php endif ?>
-		
-		<?= Helper\a(t('Edit'), 'tasklink', 'edit', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
-		<?= t('or') ?>
-		<?= Helper\a(t('Remove'), 'tasklink', 'confirm', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
-		</li>
-	<?php endforeach ?>
-	</ul>
+	<div class="page-header">
+        <h2><?= t('Links') ?></h2>
+    </div>
+    
+	<table class="link-table">
+        <tr>
+            <th width="80%"><?= t('Links') ?></th>
+            <?php if (! isset($not_editable)): ?>
+                <th><?= t('Actions') ?></th>
+            <?php endif ?>
+        </tr>
+		<?php foreach ($links as $link): ?>
+		<tr>
+            <td>
+			<?= Helper\escape($link['name']) ?>
+			<?php if (0 == $link['task_inverse_is_active']): ?><span class="task-closed"><?php endif ?><?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' '.trim(Helper\escape($link['task_inverse_name'])), 'task', '', array('task_id' => $link['task_inverse_id'], 'action' => 'show')) ?><?php if (0 == $link['task_inverse_is_active']): ?></span><?php endif ?>
+			</td>
+			<td>
+			<?= Helper\a(t('Edit'), 'tasklink', 'edit', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
+			<?= t('or') ?>
+			<?= Helper\a(t('Remove'), 'tasklink', 'confirm', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
+			</td>
+		</tr>
+		<?php endforeach ?>
+	</table>
         
 	<?php if (! isset($not_editable)): ?>
 	<form method="post" action="<?= Helper\u('tasklink', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off">

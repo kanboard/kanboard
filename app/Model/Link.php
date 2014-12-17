@@ -196,10 +196,12 @@ class Link extends Base
     	$link1 = array(
     		'project_id' => $values['project_id'],
     		'name' => $values['name'],
+    		'is_inverse' => 0,
     	);
     	$link2 = array(
     		'project_id' => $values['project_id'],
     		'name' => $values['name_inverse'],
+    		'is_inverse' => 1,
     	);
     	$link_id1 = 0;
     	$link_id2 = 0;

@@ -5,55 +5,11 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 46;
+const VERSION = 47;
 
-function version_46($pdo)
+function version_47($pdo)
 {
-    $pdo->exec("CREATE TABLE links
-        (
-            id INTEGER PRIMARY KEY,
-            project_id INTEGER NOT NULL,
-            name TEXT NOT NULL,
-            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
-        )");
-    $pdo->exec("CREATE TABLE task_has_links
-        (
-            id INTEGER PRIMARY KEY,
-            link_id INTEGER NOT NULL,
-            task_id INTEGER NOT NULL,
-            task_inverse_id INTEGER NOT NULL,
-            FOREIGN KEY(link_id) REFERENCES links(id) ON DELETE CASCADE,
-            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
-            FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
-        )");
-    $pdo->exec("INSERT INTO links
-        (project_id, name)
-        VALUES
-            (1, 'Related to'),
-            (1, 'Related to'),
-            (1, 'In roadmap'),
-            (1, 'Contains'),
-            (1, 'Follows'),
-            (1, 'Precedes'),
-            (1, 'Child of'),
-            (1, 'Parent of')
-        ");
-    $pdo->exec("INSERT INTO task_has_links
-            (link_id, task_id, task_inverse_id)
-            VALUES
-                (1, 1, 2),
-                (2, 2, 1),
-                (3, 1, 3),
-                (4, 3, 1),
-                (3, 2, 3),
-                (4, 3, 2)
-        ");
-}
-
-function version_45($pdo)
-{
-    $pdo->exec("DROP TABLE links");
-    $pdo->exec("DROP TABLE tasks_links");
+    $pdo->exec('ALTER TABLE links ADD COLUMN is_inverse INTEGER DEFAULT "0"');
 }
 
 function version_36($pdo)
@@ -63,7 +19,7 @@ function version_36($pdo)
             id INTEGER PRIMARY KEY,
             project_id INTEGER NOT NULL,
             name TEXT NOT NULL,
-    		inverse INTEGER NOT NULL,
+    		is_inverse INTEGER DEFAULT '0',
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
         )");
     $pdo->exec("CREATE TABLE task_has_links
