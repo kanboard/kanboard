@@ -65,6 +65,25 @@ class TaskFinder extends Base
                     ->asc('tasks.position')
                     ->findAll();
     }
+    
+    /**
+     * Get ids and names of all (limited by $limit) tasks for a given project and status
+     *
+     * @access public
+     * @param  integer   $project_id      Project id
+     * @param  integer   $status_id       Status id
+     * @param  integer   $limit           Number of tasks to list
+     * @return array
+     */
+    public function getList($project_id, $status_id = Task::STATUS_OPEN, $limit=50)
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('is_active', $status_id)
+                    ->limit($limit)
+                    ->listing('id', 'title');
+    }
 
     /**
      * Get all tasks for a given project and status

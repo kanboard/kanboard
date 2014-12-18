@@ -66,16 +66,18 @@ class TaskLink extends Base
             ' . self::TABLE . '.task_inverse_id,
             ' . Link::TABLE . '.name AS name,
             ' . Task::TABLE . '.title AS task_inverse_name,
+            ' . Category::TABLE . '.name AS task_inverse_category,
             ' . Task::TABLE . '.is_active AS task_inverse_is_active
             FROM ' . self::TABLE . '
             LEFT JOIN ' . Link::TABLE . ' ON ' . Link::TABLE . '.id = link_id
             LEFT JOIN ' . Task::TABLE . ' ON ' . Task::TABLE . '.id = task_inverse_id
+            LEFT JOIN ' . Category::TABLE . ' ON ' . Category::TABLE . '.id = '.Task::TABLE . '.category_id
             WHERE task_id = ?
+            ORDER BY ' . Link::TABLE . '.name, ' . Category::TABLE . '.name, ' . self::TABLE . '.task_inverse_id
         ';
 		$rq = $this->db->execute($sql, array(
 			$task_id
 		));
-		// var_dump($this->db->getLogMessages());
 		$res = $rq->fetchAll(PDO::FETCH_ASSOC);
 		return $res;
 	}
