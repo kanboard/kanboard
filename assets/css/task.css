@@ -197,6 +197,10 @@ a.task-board-nobody {
     padding: 3px;
 }
 
+.task-closed {
+    text-decoration: line-through;
+}
+
 /* task colors */
 tr td.task-blue,
 .task-blue {
