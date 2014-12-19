@@ -55,6 +55,6 @@
         <li>
             <?= Helper\a(t('Daily project summary'), 'project', 'exportDailyProjectSummary', array('project_id' => $project['id'])) ?>
         </li>
-    </li>
+    </ul>
     <?php endif ?>
 </div>
