@@ -1271,6 +1271,8 @@ tr td.task-orange,
     top: 5%;
     padding: 15px;
     background: #fff;
+    overflow: scroll;
+    max-height: 83%;
 }
 /* confirmation box */
 .confirm {

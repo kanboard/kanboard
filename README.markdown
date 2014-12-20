@@ -146,6 +146,7 @@ Contributors:
 - [Ashish Kulkarni](https://github.com/ashkulz)
 - [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo
+- [Cluxter](https://github.com/cluxter)
 - [Cmer](https://github.com/chncsu)
 - [David-Norris](https://github.com/David-Norris)
 - [Fengchao](https://github.com/fengchao)
@@ -176,6 +177,7 @@ Contributors:
 - [Peller Zoltan](https://github.com/PierP)
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
+- [René Stoltenberg](https://github.com/rstoltenberg)
 - [Rzeka](https://github.com/rzeka)
 - [Sebastien Pacilly](https://github.com/spacilly)
 - [Sebastian Reese](https://github.com/ReeseSebastian)
