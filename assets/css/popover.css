@@ -17,4 +17,6 @@
     top: 5%;
     padding: 15px;
     background: #fff;
+    overflow: scroll;
+    max-height: 83%;
 }
