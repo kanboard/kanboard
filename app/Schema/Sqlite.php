@@ -5,12 +5,7 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 47;
-
-function version_47($pdo)
-{
-    $pdo->exec('ALTER TABLE links ADD COLUMN is_inverse INTEGER DEFAULT "0"');
-}
+const VERSION = 36;
 
 function version_36($pdo)
 {
@@ -32,28 +27,28 @@ function version_36($pdo)
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
             FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
         )");
-    $pdo->exec("INSERT INTO links
-        (project_id, name, inverse)
-        VALUES
-            (1, 'Related to', 0),
-            (1, 'Related to', 1),
-            (1, 'To be done for milestone', 0),
-            (1, 'Milestone for', 1),
-            (1, 'Follows', 0),
-            (1, 'Precedes', 1),
-            (1, 'Childs of', 0),
-            (1, 'Parents of', 1)
-        ");
-    $pdo->exec("INSERT INTO task_has_links
-            (link_id, task_id, task_inverse_id)
-            VALUES
-                (1, 1, 2),
-                (2, 2, 1),
-                (3, 1, 3),
-                (4, 3, 1),
-                (3, 2, 3),
-                (4, 3, 2)
-        ");
+//     $pdo->exec("INSERT INTO links
+//         (project_id, name, is_inverse)
+//         VALUES
+//             (1, 'Related to', 0),
+//             (1, 'Related to', 1),
+//             (1, 'To be done for milestone', 0),
+//             (1, 'Milestone for', 1),
+//             (1, 'Follows', 0),
+//             (1, 'Precedes', 1),
+//             (1, 'Childs of', 0),
+//             (1, 'Parents of', 1)
+//         ");
+//     $pdo->exec("INSERT INTO task_has_links
+//             (link_id, task_id, task_inverse_id)
+//             VALUES
+//                 (1, 1, 2),
+//                 (2, 2, 1),
+//                 (3, 1, 3),
+//                 (4, 3, 1),
+//                 (3, 2, 3),
+//                 (4, 3, 2)
+//         ");
 }
 
 function version_35($pdo)

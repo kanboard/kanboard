@@ -5,7 +5,31 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 36;
+const VERSION = 37;
+
+function version_37($pdo)
+{
+    $pdo->exec("CREATE TABLE links
+        (
+            id INT NOT NULL AUTO_INCREMENT,
+            project_id INT NOT NULL,
+            name TEXT NOT NULL,
+            is_inverse INT DEFAULT 0,
+            PRIMARY KEY(id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8");
+    $pdo->exec("CREATE TABLE task_has_links
+        (
+            id INT NOT NULL AUTO_INCREMENT,
+            link_id INT NOT NULL,
+            task_id INT NOT NULL,
+            task_inverse_id INT NOT NULL,
+            PRIMARY KEY(id),
+            FOREIGN KEY(link_id) REFERENCES links(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8");
+}
 
 function version_36($pdo)
 {
