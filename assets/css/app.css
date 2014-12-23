@@ -580,6 +580,9 @@ div.ui-tooltip {
 
 .tooltip-large {
     width: 550px;
+}
+.tooltip-tasklinks ul{
+    padding-left: 13px;
 }/* header */
 header {
     margin-top: 10px;

@@ -407,6 +407,19 @@ class Board extends Base
     }
 
     /**
+     * Get links on mouseover
+     *
+     * @access public
+     */
+    public function tasklinks()
+    {
+        $task = $this->getTask();
+        $this->response->html($this->template->load('board/tasklinks', array(
+            'links' => $this->taskLink->getAll($task['id'])
+        )));
+    }
+
+    /**
      * Get subtasks on mouseover
      *
      * @access public

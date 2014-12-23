@@ -3,6 +3,7 @@
 namespace Model;
 
 use PDO;
+use Model\TaskLink;
 
 /**
  * Task Finder model
@@ -27,6 +28,7 @@ class TaskFinder extends Base
                 '(SELECT count(*) FROM task_has_files WHERE task_id=tasks.id) AS nb_files',
                 '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id) AS nb_subtasks',
                 '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id AND status=2) AS nb_completed_subtasks',
+                '(SELECT count(*) FROM ' . TaskLink::TABLE . ' WHERE ' . TaskLink::TABLE . '.task_id = tasks.id) AS nb_links',
                 'tasks.id',
                 'tasks.reference',
                 'tasks.title',
