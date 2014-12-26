@@ -94,6 +94,7 @@ class Task extends Base
         if (empty($values)) {
 
             $values = array(
+                'swimlane_id' => $this->request->getIntegerParam('swimlane_id'),
                 'column_id' => $this->request->getIntegerParam('column_id'),
                 'color_id' => $this->request->getStringParam('color_id'),
                 'owner_id' => $this->request->getIntegerParam('owner_id'),

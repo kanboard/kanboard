@@ -227,29 +227,30 @@ class Board extends Base
     }
 
     /**
-     * Get all columns and tasks for a given project
+     * Get all tasks sorted by columns and swimlanes
      *
      * @access public
      * @param  integer $project_id Project id
      * @return array
      */
-    public function get($project_id)
+    public function getBoard($project_id)
     {
+        $swimlanes = $this->swimlane->getSwimlanes($project_id);
         $columns = $this->getColumns($project_id);
-        $tasks = $this->taskFinder->getTasksOnBoard($project_id);
+        $nb_columns = count($columns);
 
-        foreach ($columns as &$column) {
+        foreach ($swimlanes as &$swimlane) {
 
-            $column['tasks'] = array();
-
-            foreach ($tasks as &$task) {
-                if ($task['column_id'] == $column['id']) {
-                    $column['tasks'][] = $task;
-                }
+            foreach ($columns as &$column) {
+                $column['tasks'] = $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $column['id'], $swimlane['id']);
+                $column['nb_tasks'] = count($column['tasks']);
             }
+
+            $swimlane['columns'] = $columns;
+            $swimlane['nb_columns'] = $nb_columns;
         }
 
-        return $columns;
+        return $swimlanes;
     }
 
     /**

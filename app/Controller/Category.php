@@ -14,7 +14,7 @@ class Category extends Base
      * Get the category (common method between actions)
      *
      * @access private
-     * @param $project_id
+     * @param  integer   $project_id
      * @return array
      */
     private function getCategory($project_id)
@@ -48,7 +48,7 @@ class Category extends Base
     }
 
     /**
-     * Validate and save a new project
+     * Validate and save a new category
      *
      * @access public
      */

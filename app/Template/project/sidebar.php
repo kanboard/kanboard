@@ -20,6 +20,9 @@
             <li>
                 <?= Helper\a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
             </li>
+            <li>
+                <?= Helper\a(t('Swimlanes'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>
+            </li>
             <?php if ($project['is_private'] == 0): ?>
             <li>
                 <?= Helper\a(t('User management'), 'project', 'users', array('project_id' => $project['id'])) ?>

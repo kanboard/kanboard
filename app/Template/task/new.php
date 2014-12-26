@@ -47,6 +47,7 @@
 
     <div class="form-column">
         <?= Helper\form_hidden('project_id', $values) ?>
+        <?= Helper\form_hidden('swimlane_id', $values) ?>
 
         <?= Helper\form_label(t('Assignee'), 'owner_id') ?>
         <?= Helper\form_select('owner_id', $users_list, $values, $errors) ?><br/>

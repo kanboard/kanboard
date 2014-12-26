@@ -39,7 +39,7 @@ class TaskCreation extends Base
     {
         $this->dateParser->convert($values, array('date_due', 'date_started'));
         $this->removeFields($values, array('another_task'));
-        $this->resetFields($values, array('owner_id', 'owner_id', 'date_due', 'score', 'category_id', 'time_estimated'));
+        $this->resetFields($values, array('owner_id', 'swimlane_id', 'date_due', 'score', 'category_id', 'time_estimated'));
 
         if (empty($values['column_id'])) {
             $values['column_id'] = $this->board->getFirstColumn($values['project_id']);

@@ -733,7 +733,12 @@ a.filter-on {
     height: 70px;
     margin-bottom: 10px;
 }
-/* project view */
+
+/* swimlanes */
+th.board-swimlane-title {
+    vertical-align: top;
+    text-align: right;
+}/* project view */
 .project-listing {
     max-width: 500px;
     margin-left: 30px;

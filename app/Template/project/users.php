@@ -19,9 +19,9 @@
                       if ($is_owner): ?> [owner] <?php endif ?>
                 <?php if ($project['is_private'] == 0): ?>
                     <?php if ($is_owner): ?>
-                        (<a href=<?= Helper\u('project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?> ><?= t('make user') ?></a>
+                        (<a href=<?= Helper\u('project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?> ><?= t('set user') ?></a>
                     <?php else: ?>
-                        (<a href=<?= Helper\u('project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?> ><?= t('make owner') ?></a>
+                        (<a href=<?= Helper\u('project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?> ><?= t('set manager') ?></a>
                     <?php endif ?>
                     or
                     <?= Helper\a(t('revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?>)

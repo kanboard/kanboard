@@ -87,7 +87,7 @@ $server->register('updateProject', function($id, $name, $is_active = null, $is_p
 /**
  * Board procedures
  */
-$server->bind('getBoard', $boardModel, 'get');
+$server->bind('getBoard', $boardModel, 'getBoard');
 $server->bind('getColumns', $boardModel, 'getColumns');
 $server->bind('getColumn', $boardModel, 'getColumn');
 $server->bind('moveColumnUp', $boardModel, 'moveUp');
@@ -113,7 +113,7 @@ $server->bind('closeTask', $taskStatusModel, 'close');
 $server->bind('removeTask', $taskModel, 'remove');
 $server->bind('moveTaskPosition', $taskPositionModel, 'movePosition');
 
-$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($taskCreationModel, $taskValidatorModel) {
+$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0) use ($taskCreationModel, $taskValidatorModel) {
 
     $values = array(
         'title' => $title,
@@ -126,6 +126,7 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
         'description' => $description,
         'category_id' => $category_id,
         'score' => $score,
+        'swimlane_id' => $swimlane_id,
     );
 
     list($valid,) = $taskValidatorModel->validateCreation($values);
@@ -137,7 +138,7 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
     return $taskCreationModel->create($values);
 });
 
-$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null) use ($taskModificationModel, $taskValidatorModel) {
+$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null, $swimlane_id = null) use ($taskModificationModel, $taskValidatorModel) {
 
     $values = array(
         'id' => $id,
@@ -151,6 +152,7 @@ $server->register('updateTask', function($id, $title = null, $project_id = null,
         'description' => $description,
         'category_id' => $category_id,
         'score' => $score,
+        'swimlane_id' => $swimlane_id,
     );
 
     foreach ($values as $key => $value) {

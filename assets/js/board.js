@@ -21,7 +21,8 @@ Kanboard.Board = (function() {
                 board_save(
                     ui.item.attr('data-task-id'),
                     ui.item.parent().attr("data-column-id"),
-                    ui.item.index() + 1
+                    ui.item.index() + 1,
+                    ui.item.parent().attr('data-swimlane-id')
                 );
             }
         });
@@ -139,7 +140,7 @@ Kanboard.Board = (function() {
     }
 
     // Save and refresh the board
-    function board_save(taskId, columnId, position)
+    function board_save(taskId, columnId, position, swimlaneId)
     {
         board_unload_events();
 
@@ -152,6 +153,7 @@ Kanboard.Board = (function() {
             data: JSON.stringify({
                 "task_id": taskId,
                 "column_id": columnId,
+                "swimlane_id": swimlaneId,
                 "position": position,
             }),
             success: function(data) {

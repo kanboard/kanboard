@@ -1,4 +1,8 @@
-<?php if (isset($not_editable)): ?>
+
+
+<?php if ($not_editable): ?>
+
+<div class="task-board task-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>">
 
     <?= Helper\a('#'.$task['id'], 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
 
@@ -27,6 +31,14 @@
     </div>
 
 <?php else: ?>
+
+<div class="task-board draggable-item task-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>"
+     data-task-id="<?= $task['id'] ?>"
+     data-owner-id="<?= $task['owner_id'] ?>"
+     data-category-id="<?= $task['category_id'] ?>"
+     data-due-date="<?= $task['date_due'] ?>"
+     data-task-url="<?= Helper\u('task', 'show', array('task_id' => $task['id'])) ?>"
+     title="<?= t('View this task') ?>">
 
     <?= Helper\a('#'.$task['id'], 'task', 'edit', array('task_id' => $task['id']), false, 'task-edit-popover', t('Edit this task')) ?>
 
@@ -114,3 +126,5 @@
     </div>
 </div>
 <?php endif ?>
+
+</div>

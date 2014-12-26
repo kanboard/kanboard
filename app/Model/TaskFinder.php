@@ -38,6 +38,7 @@ class TaskFinder extends Base
                 'tasks.color_id',
                 'tasks.project_id',
                 'tasks.column_id',
+                'tasks.swimlane_id',
                 'tasks.owner_id',
                 'tasks.creator_id',
                 'tasks.position',
@@ -54,13 +55,17 @@ class TaskFinder extends Base
      * Get all tasks shown on the board (sorted by position)
      *
      * @access public
-     * @param  integer    $project_id    Project id
+     * @param  integer    $project_id     Project id
+     * @param  integer    $column_id      Column id
+     * @param  integer    $swimlane_id    Swimlane id
      * @return array
      */
-    public function getTasksOnBoard($project_id)
+    public function getTasksByColumnAndSwimlane($project_id, $column_id, $swimlane_id = 0)
     {
         return $this->getQuery()
                     ->eq('project_id', $project_id)
+                    ->eq('column_id', $column_id)
+                    ->eq('swimlane_id', $swimlane_id)
                     ->eq('is_active', Task::STATUS_OPEN)
                     ->asc('tasks.position')
                     ->findAll();
@@ -167,6 +172,7 @@ class TaskFinder extends Base
             tasks.is_active,
             tasks.score,
             tasks.category_id,
+            tasks.swimlane_id,
             project_has_categories.name AS category_name,
             projects.name AS project_name,
             columns.title AS column_title,

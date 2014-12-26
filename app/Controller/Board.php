@@ -130,12 +130,14 @@ class Board extends Base
         // Display the board with a specific layout
         $this->response->html($this->template->layout('board/public', array(
             'project' => $project,
-            'columns' => $this->board->get($project['id']),
+            'swimlanes' => $this->board->getBoard($project['id']),
             'categories' => $this->category->getList($project['id'], false),
             'title' => $project['name'],
             'no_layout' => true,
             'not_editable' => true,
             'board_public_refresh_interval' => $this->config->get('board_public_refresh_interval'),
+            'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
+            'board_highlight_period' => $this->config->get('board_highlight_period'),
         )));
     }
 
@@ -188,7 +190,7 @@ class Board extends Base
             'users' => $this->projectPermission->getMemberList($project['id'], true, true),
             'projects' => $projects,
             'project' => $project,
-            'board' => $this->board->get($project['id']),
+            'swimlanes' => $this->board->getBoard($project['id']),
             'categories' => $this->category->getList($project['id'], true, true),
             'title' => $project['name'],
             'board_selector' => $board_selector,
@@ -339,35 +341,38 @@ class Board extends Base
     {
         $project_id = $this->request->getIntegerParam('project_id');
 
-        if ($project_id > 0 && $this->request->isAjax()) {
-
-            if (! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
-                $this->response->text('Forbidden', 403);
-            }
-
-            $values = $this->request->getJson();
-
-            if ($this->taskPosition->movePosition($project_id, $values['task_id'], $values['column_id'], $values['position'])) {
-
-                $this->response->html(
-                    $this->template->load('board/show', array(
-                        'project' => $this->project->getById($project_id),
-                        'board' => $this->board->get($project_id),
-                        'categories' => $this->category->getList($project_id, false),
-                        'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-                        'board_highlight_period' => $this->config->get('board_highlight_period'),
-                    )),
-                    201
-                );
-            }
-            else {
-
-                $this->response->status(400);
-            }
+        if (! $project_id || ! $this->request->isAjax()) {
+            return $this->response->status(403);
         }
-        else {
-            $this->response->status(403);
+
+        if (! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
+            $this->response->text('Forbidden', 403);
         }
+
+        $values = $this->request->getJson();
+
+        $result =$this->taskPosition->movePosition(
+            $project_id,
+            $values['task_id'],
+            $values['column_id'],
+            $values['position'],
+            $values['swimlane_id']
+        );
+
+        if (! $result) {
+            return $this->response->status(400);
+        }
+
+        $this->response->html(
+            $this->template->load('board/show', array(
+                'project' => $this->project->getById($project_id),
+                'swimlanes' => $this->board->getBoard($project_id),
+                'categories' => $this->category->getList($project_id, false),
+                'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
+                'board_highlight_period' => $this->config->get('board_highlight_period'),
+            )),
+            201
+        );
     }
 
     /**
@@ -377,33 +382,30 @@ class Board extends Base
      */
     public function check()
     {
-        if ($this->request->isAjax()) {
-
-            $project_id = $this->request->getIntegerParam('project_id');
-            $timestamp = $this->request->getIntegerParam('timestamp');
-
-            if ($project_id > 0 && ! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
-                $this->response->text('Forbidden', 403);
-            }
-
-            if ($this->project->isModifiedSince($project_id, $timestamp)) {
-                $this->response->html(
-                    $this->template->load('board/show', array(
-                        'project' => $this->project->getById($project_id),
-                        'board' => $this->board->get($project_id),
-                        'categories' => $this->category->getList($project_id, false),
-                        'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-                        'board_highlight_period' => $this->config->get('board_highlight_period'),
-                    ))
-                );
-            }
-            else {
-                $this->response->status(304);
-            }
+        if (! $this->request->isAjax()) {
+            return $this->response->status(403);
         }
-        else {
-            $this->response->status(403);
+
+        $project_id = $this->request->getIntegerParam('project_id');
+        $timestamp = $this->request->getIntegerParam('timestamp');
+
+        if (! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
+            $this->response->text('Forbidden', 403);
         }
+
+        if (! $this->project->isModifiedSince($project_id, $timestamp)) {
+            return $this->response->status(304);
+        }
+
+        $this->response->html(
+            $this->template->load('board/show', array(
+                'project' => $this->project->getById($project_id),
+                'swimlanes' => $this->board->getBoard($project_id),
+                'categories' => $this->category->getList($project_id, false),
+                'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
+                'board_highlight_period' => $this->config->get('board_highlight_period'),
+            ))
+        );
     }
 
     /**

@@ -5,7 +5,27 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 37;
+const VERSION = 38;
+
+function version_38($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE swimlanes (
+            id INT NOT NULL AUTO_INCREMENT,
+            name VARCHAR(200) NOT NULL,
+            position INT DEFAULT 1,
+            is_active INT DEFAULT 1,
+            project_id INT,
+            PRIMARY KEY(id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            UNIQUE (name, project_id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN swimlane_id INT DEFAULT 0');
+    $pdo->exec("ALTER TABLE projects ADD COLUMN default_swimlane VARCHAR(200) DEFAULT '".t('Default swimlane')."'");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN show_default_swimlane INT DEFAULT 1");
+}
 
 function version_37($pdo)
 {

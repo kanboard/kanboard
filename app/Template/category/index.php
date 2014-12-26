@@ -1,8 +1,7 @@
+<?php if (! empty($categories)): ?>
 <div class="page-header">
     <h2><?= t('Categories') ?></h2>
 </div>
-
-<?php if (! empty($categories)): ?>
 <table>
     <tr>
         <th><?= t('Category Name') ?></th>
@@ -26,7 +25,9 @@
 </table>
 <?php endif ?>
 
-<h3><?= t('Add a new category') ?></h3>
+<div class="page-header">
+    <h2><?= t('Add a new category') ?></h2>
+</div>
 <form method="post" action="<?= Helper\u('category', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>

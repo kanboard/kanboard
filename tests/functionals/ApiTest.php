@@ -116,7 +116,9 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $board = $this->client->getBoard(1);
         $this->assertTrue(is_array($board));
-        $this->assertEquals(4, count($board));
+        $this->assertEquals(1, count($board));
+        $this->assertEquals('Default swimlane', $board[0]['name']);
+        $this->assertEquals(4, count($board[0]['columns']));
     }
 
     public function testGetColumns()
