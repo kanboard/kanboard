@@ -7,6 +7,7 @@ use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
 use Model\Category;
+use Event\GenericEvent;
 
 class ActionTaskAssignColorCategory extends Base
 {
@@ -21,7 +22,7 @@ class ActionTaskAssignColorCategory extends Base
         );
 
         $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testExecute()
@@ -51,7 +52,7 @@ class ActionTaskAssignColorCategory extends Base
         );
 
         // Our event should NOT be executed
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
 
         // Our task should be assigned to the ategory_id=1 and have the green color
         $task = $tf->getById(1);
@@ -69,7 +70,7 @@ class ActionTaskAssignColorCategory extends Base
         );
 
         // Our event should be executed
-        $this->assertTrue($action->execute($event));
+        $this->assertTrue($action->execute(new GenericEvent($event)));
 
         // Our task should have the blue color
         $task = $tf->getById(1);

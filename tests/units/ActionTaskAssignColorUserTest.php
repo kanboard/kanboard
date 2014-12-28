@@ -6,6 +6,7 @@ use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
+use Event\GenericEvent;
 
 class ActionTaskAssignColorUser extends Base
 {
@@ -20,7 +21,7 @@ class ActionTaskAssignColorUser extends Base
         );
 
         $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testExecute()
@@ -44,7 +45,7 @@ class ActionTaskAssignColorUser extends Base
         );
 
         // Our event should NOT be executed
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
 
         // Our task should be assigned to nobody and have the green color
         $task = $tf->getById(1);
@@ -60,7 +61,7 @@ class ActionTaskAssignColorUser extends Base
         );
 
         // Our event should be executed
-        $this->assertTrue($action->execute($event));
+        $this->assertTrue($action->execute(new GenericEvent($event)));
 
         // Our task should be assigned to nobody and have the blue color
         $task = $tf->getById(1);

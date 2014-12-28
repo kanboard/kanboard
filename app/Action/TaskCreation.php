@@ -63,7 +63,7 @@ class TaskCreation extends Base
             'project_id' => $data['project_id'],
             'title' => $data['title'],
             'reference' => $data['reference'],
-            'description' => $data['description'],
+            'description' => isset($data['description']) ? $data['description'] : '',
         ));
     }
 

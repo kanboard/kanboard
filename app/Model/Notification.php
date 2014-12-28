@@ -94,37 +94,6 @@ class Notification extends Base
     }
 
     /**
-     * Attach events
-     *
-     * @access public
-     */
-    public function attachEvents()
-    {
-        $events = array(
-            Task::EVENT_CREATE => 'task_creation',
-            Task::EVENT_UPDATE => 'task_update',
-            Task::EVENT_CLOSE => 'task_close',
-            Task::EVENT_OPEN => 'task_open',
-            Task::EVENT_MOVE_COLUMN => 'task_move_column',
-            Task::EVENT_MOVE_POSITION => 'task_move_position',
-            Task::EVENT_ASSIGNEE_CHANGE => 'task_assignee_change',
-            SubTask::EVENT_CREATE => 'subtask_creation',
-            SubTask::EVENT_UPDATE => 'subtask_update',
-            Comment::EVENT_CREATE => 'comment_creation',
-            Comment::EVENT_UPDATE => 'comment_update',
-            File::EVENT_CREATE => 'file_creation',
-        );
-
-        foreach ($events as $event_name => $template_name) {
-
-            $listener = new NotificationListener($this->container);
-            $listener->setTemplate($template_name);
-
-            $this->event->attach($event_name, $listener);
-        }
-    }
-
-    /**
      * Send the email notifications
      *
      * @access public

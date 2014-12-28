@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/Base.php';
 
+use Subscriber\ProjectModificationDateSubscriber;
 use Model\Project;
 use Model\ProjectPermission;
 use Model\User;
@@ -52,7 +53,6 @@ class ProjectTest extends Base
         $tc = new TaskCreation($this->container);
 
         $now = time();
-        $p->attachEvents();
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
@@ -62,9 +62,13 @@ class ProjectTest extends Base
 
         sleep(1);
 
+        $listener = new ProjectModificationDateSubscriber($this->container);
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, array($listener, 'execute'));
+
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
-        $this->assertEquals('Event\ProjectModificationDateListener', $this->container['event']->getLastListenerExecuted());
+
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.Subscriber\ProjectModificationDateSubscriber::execute', $called);
 
         $project = $p->getById(1);
         $this->assertNotEmpty($project);

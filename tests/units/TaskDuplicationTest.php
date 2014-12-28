@@ -45,10 +45,15 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(2, $task['category_id']);
         $this->assertEquals(4.4, $task['time_spent']);
 
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
+
         // We duplicate our task
         $this->assertEquals(2, $td->duplicate(1));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
+
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayHasKey(Task::EVENT_CREATE.'.closure', $called);
 
         // Check the values of the duplicated task
         $task = $tf->getById(2);
@@ -82,10 +87,15 @@ class TaskDuplicationTest extends Base
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1, 'category_id' => 1)));
 
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
+
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $td->duplicateToProject(1, 2));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
+
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayHasKey(Task::EVENT_CREATE.'.closure', $called);
 
         // Check the values of the duplicated task
         $task = $tf->getById(2);
@@ -121,8 +131,6 @@ class TaskDuplicationTest extends Base
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $td->duplicateToProject(1, 2));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
 
         // Check the values of the duplicated task
         $task = $tf->getById(2);
@@ -156,8 +164,6 @@ class TaskDuplicationTest extends Base
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $td->duplicateToProject(1, 2));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
 
         // Check the values of the duplicated task
         $task = $tf->getById(2);
@@ -191,8 +197,6 @@ class TaskDuplicationTest extends Base
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $td->duplicateToProject(1, 2));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
 
         // Check the values of the duplicated task
         $task = $tf->getById(2);
@@ -223,8 +227,6 @@ class TaskDuplicationTest extends Base
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $td->duplicateToProject(1, 2));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
 
         // Check the values of the duplicated task
         $task = $tf->getById(2);
@@ -265,6 +267,16 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(5, $task['column_id']);
     }
 
+    public function onMoveProject($event)
+    {
+        $this->assertInstanceOf('Event\TaskEvent', $event);
+
+        $event_data = $event->getAll();
+        $this->assertNotEmpty($event_data);
+        $this->assertEquals(1, $event_data['task_id']);
+        $this->assertEquals('test', $event_data['title']);
+    }
+
     public function testMoveAnotherProject()
     {
         $td = new TaskDuplication($this->container);
@@ -281,8 +293,13 @@ class TaskDuplicationTest extends Base
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'owner_id' => 1, 'category_id' => 10, 'position' => 333)));
 
+        $this->container['dispatcher']->addListener(Task::EVENT_MOVE_PROJECT, array($this, 'onMoveProject'));
+
         // We duplicate our task to the 2nd project
         $this->assertTrue($td->moveToProject(1, 2));
+
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_MOVE_PROJECT.'.TaskDuplicationTest::onMoveProject', $called);
 
         // Check the values of the moved task
         $task = $tf->getById(1);

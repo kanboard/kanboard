@@ -3,7 +3,6 @@
 namespace Model;
 
 use Core\Template;
-use Event\ProjectActivityListener;
 
 /**
  * Project activity model
@@ -123,34 +122,6 @@ class ProjectActivity extends Base
                     ) foo
                 )'
             );
-        }
-    }
-
-    /**
-     * Attach events to be able to record the history
-     *
-     * @access public
-     */
-    public function attachEvents()
-    {
-        $events = array(
-            Task::EVENT_ASSIGNEE_CHANGE,
-            Task::EVENT_UPDATE,
-            Task::EVENT_CREATE,
-            Task::EVENT_CLOSE,
-            Task::EVENT_OPEN,
-            Task::EVENT_MOVE_COLUMN,
-            Task::EVENT_MOVE_POSITION,
-            Comment::EVENT_UPDATE,
-            Comment::EVENT_CREATE,
-            SubTask::EVENT_UPDATE,
-            SubTask::EVENT_CREATE,
-        );
-
-        $listener = new ProjectActivityListener($this->container);
-
-        foreach ($events as $event_name) {
-            $this->event->attach($event_name, $listener);
         }
     }
 

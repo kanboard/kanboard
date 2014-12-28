@@ -4,9 +4,9 @@ namespace ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use PicoDb\Database as Dbal;
+use PicoDb\Database;
 
-class Database implements ServiceProviderInterface
+class DatabaseProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
@@ -55,7 +55,7 @@ class Database implements ServiceProviderInterface
     {
         require_once __DIR__.'/../Schema/Sqlite.php';
 
-        return new Dbal(array(
+        return new Database(array(
             'driver' => 'sqlite',
             'filename' => DB_FILENAME
         ));
@@ -70,7 +70,7 @@ class Database implements ServiceProviderInterface
     {
         require_once __DIR__.'/../Schema/Mysql.php';
 
-        return new Dbal(array(
+        return new Database(array(
             'driver'   => 'mysql',
             'hostname' => DB_HOSTNAME,
             'username' => DB_USERNAME,
@@ -89,7 +89,7 @@ class Database implements ServiceProviderInterface
     {
         require_once __DIR__.'/../Schema/Postgres.php';
 
-        return new Dbal(array(
+        return new Database(array(
             'driver'   => 'postgres',
             'hostname' => DB_HOSTNAME,
             'username' => DB_USERNAME,

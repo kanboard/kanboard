@@ -1,29 +1,19 @@
 <?php
 
-namespace Auth;
+namespace Subscriber;
 
+use Event\TaskEvent;
+use Model\Task;
 use Pimple\Container;
 
 /**
- * Base auth class
+ * Base subscriber class
  *
- * @package  auth
+ * @package  subscriber
  * @author   Frederic Guillot
- *
- * @property \Model\Acl                $acl
- * @property \Model\LastLogin          $lastLogin
- * @property \Model\User               $user
  */
 abstract class Base
 {
-    /**
-     * Database instance
-     *
-     * @access protected
-     * @var \PicoDb\Database
-     */
-    protected $db;
-
     /**
      * Container instance
      *
@@ -36,19 +26,18 @@ abstract class Base
      * Constructor
      *
      * @access public
-     * @param  \Pimple\Container    $container
+     * @param  \Pimple\Container   $container
      */
     public function __construct(Container $container)
     {
         $this->container = $container;
-        $this->db = $this->container['db'];
     }
 
     /**
      * Load automatically models
      *
      * @access public
-     * @param  string     $name    Model name
+     * @param  string $name Model name
      * @return mixed
      */
     public function __get($name)

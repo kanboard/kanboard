@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Event\TaskEvent;
+
 /**
  * Task Creation
  *
@@ -64,7 +66,7 @@ class TaskCreation extends Base
     private function fireEvents($task_id, array $values)
     {
         $values['task_id'] = $task_id;
-        $this->event->trigger(Task::EVENT_CREATE_UPDATE, $values);
-        $this->event->trigger(Task::EVENT_CREATE, $values);
+        $this->container['dispatcher']->dispatch(Task::EVENT_CREATE_UPDATE, new TaskEvent($values));
+        $this->container['dispatcher']->dispatch(Task::EVENT_CREATE, new TaskEvent($values));
     }
 }

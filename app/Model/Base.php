@@ -2,10 +2,7 @@
 
 namespace Model;
 
-use Core\Event;
-use Core\Tool;
 use Pimple\Container;
-use PicoDb\Database;
 
 /**
  * Base model class
@@ -52,14 +49,6 @@ abstract class Base
     protected $db;
 
     /**
-     * Event dispatcher instance
-     *
-     * @access public
-     * @var \Core\Event
-     */
-    public $event;
-
-    /**
      * Container instance
      *
      * @access protected
@@ -77,7 +66,6 @@ abstract class Base
     {
         $this->container = $container;
         $this->db = $this->container['db'];
-        $this->event = $this->container['event'];
     }
 
     /**
@@ -89,7 +77,7 @@ abstract class Base
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->container, $name);
+        return $this->container[$name];
     }
 
     /**

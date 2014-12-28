@@ -8,7 +8,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogHandler;
 
-class Logging implements ServiceProviderInterface
+class LoggingProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {

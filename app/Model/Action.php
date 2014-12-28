@@ -248,7 +248,7 @@ class Action extends Base
                 $listener->setParam($param['name'], $param['value']);
             }
 
-            $this->event->attach($action['event_name'], $listener);
+            $this->container['dispatcher']->addListener($action['event_name'], array($listener, 'execute'));
         }
     }
 

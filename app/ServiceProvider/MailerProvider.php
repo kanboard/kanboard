@@ -8,7 +8,7 @@ use Swift_SmtpTransport;
 use Swift_SendmailTransport;
 use Swift_MailTransport;
 
-class Mailer implements ServiceProviderInterface
+class MailerProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {

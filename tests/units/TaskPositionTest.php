@@ -73,8 +73,6 @@ class TaskPositionTest extends Base
 
         // We move the task 3 to the column 3
         $this->assertTrue($tp->movePosition(1, 3, 3, 2));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_COLUMN));
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_MOVE_POSITION));
 
         // Check tasks position
         $task = $tf->getById(1);
@@ -470,6 +468,10 @@ class TaskPositionTest extends Base
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 2)));
 
+        $this->container['dispatcher']->addListener(Task::EVENT_MOVE_COLUMN, array($this, 'onMoveColumn'));
+        $this->container['dispatcher']->addListener(Task::EVENT_MOVE_POSITION, array($this, 'onMovePosition'));
+        $this->container['dispatcher']->addListener(Task::EVENT_MOVE_SWIMLANE, array($this, 'onMoveSwimlane'));
+
         // We move the task 1 to the column 2
         $this->assertTrue($tp->movePosition(1, 1, 2, 1));
 
@@ -483,18 +485,9 @@ class TaskPositionTest extends Base
         $this->assertEquals(2, $task['column_id']);
         $this->assertEquals(2, $task['position']);
 
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_MOVE_SWIMLANE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_COLUMN));
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_MOVE_POSITION));
-
-        $event_data = $this->container['event']->getEventData(Task::EVENT_MOVE_COLUMN);
-        $this->assertNotEmpty($event_data);
-        $this->assertEquals(1, $event_data['task_id']);
-        $this->assertEquals(1, $event_data['position']);
-        $this->assertEquals(2, $event_data['column_id']);
-        $this->assertEquals(1, $event_data['project_id']);
-
-        $this->container['event']->clearTriggeredEvents();
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_MOVE_COLUMN.'.TaskPositionTest::onMoveColumn', $called);
+        $this->assertEquals(1, count($called));
 
         // We move the task 1 to the position 2
         $this->assertTrue($tp->movePosition(1, 1, 2, 2));
@@ -509,18 +502,9 @@ class TaskPositionTest extends Base
         $this->assertEquals(2, $task['column_id']);
         $this->assertEquals(1, $task['position']);
 
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_MOVE_SWIMLANE));
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_MOVE_COLUMN));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_POSITION));
-
-        $event_data = $this->container['event']->getEventData(Task::EVENT_MOVE_POSITION);
-        $this->assertNotEmpty($event_data);
-        $this->assertEquals(1, $event_data['task_id']);
-        $this->assertEquals(2, $event_data['position']);
-        $this->assertEquals(2, $event_data['column_id']);
-        $this->assertEquals(1, $event_data['project_id']);
-
-        $this->container['event']->clearTriggeredEvents();
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_MOVE_POSITION.'.TaskPositionTest::onMovePosition', $called);
+        $this->assertEquals(2, count($called));
 
         // Move to another swimlane
         $this->assertTrue($tp->movePosition(1, 1, 3, 1, 1));
@@ -537,11 +521,40 @@ class TaskPositionTest extends Base
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(0, $task['swimlane_id']);
 
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_SWIMLANE));
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_MOVE_POSITION));
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_MOVE_POSITION));
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_MOVE_SWIMLANE.'.TaskPositionTest::onMoveSwimlane', $called);
+        $this->assertEquals(3, count($called));
+    }
 
-        $event_data = $this->container['event']->getEventData(Task::EVENT_MOVE_SWIMLANE);
+    public function onMoveColumn($event)
+    {
+        $this->assertInstanceOf('Event\TaskEvent', $event);
+
+        $event_data = $event->getAll();
+        $this->assertNotEmpty($event_data);
+        $this->assertEquals(1, $event_data['task_id']);
+        $this->assertEquals(1, $event_data['position']);
+        $this->assertEquals(2, $event_data['column_id']);
+        $this->assertEquals(1, $event_data['project_id']);
+    }
+
+    public function onMovePosition($event)
+    {
+        $this->assertInstanceOf('Event\TaskEvent', $event);
+
+        $event_data = $event->getAll();
+        $this->assertNotEmpty($event_data);
+        $this->assertEquals(1, $event_data['task_id']);
+        $this->assertEquals(2, $event_data['position']);
+        $this->assertEquals(2, $event_data['column_id']);
+        $this->assertEquals(1, $event_data['project_id']);
+    }
+
+    public function onMoveSwimlane($event)
+    {
+        $this->assertInstanceOf('Event\TaskEvent', $event);
+
+        $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
         $this->assertEquals(1, $event_data['task_id']);
         $this->assertEquals(1, $event_data['position']);

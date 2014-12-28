@@ -25,7 +25,7 @@ class Api extends PHPUnit_Framework_TestCase
             $pdo = new PDO('pgsql:host='.DB_HOSTNAME.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
         }
 
-        $service = new ServiceProvider\Database;
+        $service = new ServiceProvider\DatabaseProvider;
         $service->getInstance();
 
         $pdo->exec("UPDATE settings SET value='".API_KEY."' WHERE option='api_token'");

@@ -2,7 +2,6 @@
 
 namespace Console;
 
-use Core\Tool;
 use Pimple\Container;
 use Symfony\Component\Console\Command\Command;
 
@@ -52,6 +51,6 @@ abstract class Base extends Command
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->container, $name);
+        return $this->container[$name];
     }
 }

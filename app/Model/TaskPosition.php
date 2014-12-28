@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Event\TaskEvent;
+
 /**
  * Task Position
  *
@@ -139,13 +141,13 @@ class TaskPosition extends Base
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {
-            $this->event->trigger(Task::EVENT_MOVE_SWIMLANE, $event_data);
+            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_SWIMLANE, new TaskEvent($event_data));
         }
         else if ($task['column_id'] != $new_column_id) {
-            $this->event->trigger(Task::EVENT_MOVE_COLUMN, $event_data);
+            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_COLUMN, new TaskEvent($event_data));
         }
         else if ($task['position'] != $new_position) {
-            $this->event->trigger(Task::EVENT_MOVE_POSITION, $event_data);
+            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_POSITION, new TaskEvent($event_data));
         }
     }
 

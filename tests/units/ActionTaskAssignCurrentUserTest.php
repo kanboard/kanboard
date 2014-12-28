@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/Base.php';
 
+use Event\GenericEvent;
 use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
@@ -22,7 +23,7 @@ class ActionTaskAssignCurrentUser extends Base
         );
 
         $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testBadColumn()
@@ -36,7 +37,7 @@ class ActionTaskAssignCurrentUser extends Base
             'column_id' => 3,
         );
 
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testExecute()
@@ -65,7 +66,7 @@ class ActionTaskAssignCurrentUser extends Base
         );
 
         // Our event should be executed
-        $this->assertTrue($action->execute($event));
+        $this->assertTrue($action->execute(new GenericEvent($event)));
 
         // Our task should be assigned to the user 5 (from the session)
         $task = $tf->getById(1);

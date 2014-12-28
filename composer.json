@@ -9,7 +9,8 @@
         "lusitanian/oauth": "0.3.5",
         "pimple/pimple": "~3.0",
         "monolog/monolog": "1.11.0",
-        "symfony/console": "@stable"
+        "symfony/console": "@stable",
+        "symfony/event-dispatcher": "~2.6"
     },
     "autoload": {
         "psr-0": {"": "app/"},
@@ -17,5 +18,8 @@
             "app/helpers.php",
             "app/functions.php"
         ]
+    },
+    "require-dev": {
+        "symfony/stopwatch": "~2.6"
     }
 }

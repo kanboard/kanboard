@@ -68,7 +68,7 @@ class TaskAssignSpecificUser extends Base
             'owner_id' => $this->getParam('user_id'),
         );
 
-        return $this->taskModification->update($values, false);
+        return $this->taskModification->update($values);
     }
 
     /**

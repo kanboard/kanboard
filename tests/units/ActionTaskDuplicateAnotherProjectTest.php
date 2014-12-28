@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/Base.php';
 
+use Event\GenericEvent;
 use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
@@ -21,7 +22,7 @@ class ActionTaskDuplicateAnotherProject extends Base
         );
 
         $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testBadColumn()
@@ -35,7 +36,7 @@ class ActionTaskDuplicateAnotherProject extends Base
             'column_id' => 3,
         );
 
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testExecute()
@@ -60,7 +61,7 @@ class ActionTaskDuplicateAnotherProject extends Base
         // Our event should NOT be executed because we define the same project
         $action->setParam('column_id', 2);
         $action->setParam('project_id', 1);
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
 
         // Our task should be assigned to the project 1
         $task = $tf->getById(1);
@@ -78,7 +79,7 @@ class ActionTaskDuplicateAnotherProject extends Base
         $action->setParam('column_id', 2);
         $action->setParam('project_id', 2);
         $this->assertTrue($action->hasRequiredCondition($event));
-        $this->assertTrue($action->execute($event));
+        $this->assertTrue($action->execute(new GenericEvent($event)));
 
         // Our task should be assigned to the project 1
         $task = $tf->getById(1);

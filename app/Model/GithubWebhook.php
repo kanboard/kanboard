@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Event\GenericEvent;
+
 /**
  * Github Webhook model
  *
@@ -88,7 +90,10 @@ class GithubWebhook extends Base
             }
 
             if ($task['is_active'] == Task::STATUS_OPEN) {
-                $this->event->trigger(self::EVENT_COMMIT, array('task_id' => $task_id) + $task);
+                $this->container['dispatcher']->dispatch(
+                    self::EVENT_COMMIT,
+                    new GenericEvent(array('task_id' => $task_id) + $task)
+                );
             }
         }
 
@@ -146,7 +151,11 @@ class GithubWebhook extends Base
                 'task_id' => $task['id'],
             );
 
-            $this->event->trigger(self::EVENT_ISSUE_COMMENT, $event);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_ISSUE_COMMENT,
+                new GenericEvent($event)
+            );
+
             return true;
         }
 
@@ -169,7 +178,11 @@ class GithubWebhook extends Base
             'description' => $issue['body']."\n\n[".t('Github Issue').']('.$issue['html_url'].')',
         );
 
-        $this->event->trigger(self::EVENT_ISSUE_OPENED, $event);
+        $this->container['dispatcher']->dispatch(
+            self::EVENT_ISSUE_OPENED,
+            new GenericEvent($event)
+        );
+
         return true;
     }
 
@@ -191,7 +204,11 @@ class GithubWebhook extends Base
                 'reference' => $issue['number'],
             );
 
-            $this->event->trigger(self::EVENT_ISSUE_CLOSED, $event);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_ISSUE_CLOSED,
+                new GenericEvent($event)
+            );
+
             return true;
         }
 
@@ -216,7 +233,11 @@ class GithubWebhook extends Base
                 'reference' => $issue['number'],
             );
 
-            $this->event->trigger(self::EVENT_ISSUE_REOPENED, $event);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_ISSUE_REOPENED,
+                new GenericEvent($event)
+            );
+
             return true;
         }
 
@@ -244,7 +265,11 @@ class GithubWebhook extends Base
                 'reference' => $issue['number'],
             );
 
-            $this->event->trigger(self::EVENT_ISSUE_ASSIGNEE_CHANGE, $event);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_ISSUE_ASSIGNEE_CHANGE,
+                new GenericEvent($event)
+            );
+
             return true;
         }
 
@@ -271,7 +296,11 @@ class GithubWebhook extends Base
                 'reference' => $issue['number'],
             );
 
-            $this->event->trigger(self::EVENT_ISSUE_ASSIGNEE_CHANGE, $event);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_ISSUE_ASSIGNEE_CHANGE,
+                new GenericEvent($event)
+            );
+
             return true;
         }
 
@@ -299,7 +328,11 @@ class GithubWebhook extends Base
                 'label' => $label['name'],
             );
 
-            $this->event->trigger(self::EVENT_ISSUE_LABEL_CHANGE, $event);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_ISSUE_LABEL_CHANGE,
+                new GenericEvent($event)
+            );
+
             return true;
         }
 
@@ -328,7 +361,11 @@ class GithubWebhook extends Base
                 'category_id' => 0,
             );
 
-            $this->event->trigger(self::EVENT_ISSUE_LABEL_CHANGE, $event);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_ISSUE_LABEL_CHANGE,
+                new GenericEvent($event)
+            );
+
             return true;
         }
 

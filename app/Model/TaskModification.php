@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Event\TaskEvent;
+
 /**
  * Task Modification
  *
@@ -15,17 +17,16 @@ class TaskModification extends Base
      *
      * @access public
      * @param  array     $values
-     * @param  boolean   $fire_events
      * @return boolean
      */
-    public function update(array $values, $fire_events = true)
+    public function update(array $values)
     {
         $original_task = $this->taskFinder->getById($values['id']);
 
         $this->prepare($values);
         $result = $this->db->table(Task::TABLE)->eq('id', $original_task['id'])->update($values);
 
-        if ($result && $fire_events) {
+        if ($result) {
             $this->fireEvents($original_task, $values);
         }
 
@@ -51,7 +52,7 @@ class TaskModification extends Base
         }
 
         foreach ($events as $event) {
-            $this->event->trigger($event, $event_data);
+            $this->container['dispatcher']->dispatch($event, new TaskEvent($event_data));
         }
     }
 

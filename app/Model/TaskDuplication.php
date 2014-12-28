@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Event\TaskEvent;
+
 /**
  * Task Duplication
  *
@@ -84,7 +86,14 @@ class TaskDuplication extends Base
 
         $this->checkDestinationProjectValues($values);
 
-        return $this->db->table(Task::TABLE)->eq('id', $task['id'])->update($values);
+        if ($this->db->table(Task::TABLE)->eq('id', $task['id'])->update($values)) {
+            $this->container['dispatcher']->dispatch(
+                Task::EVENT_MOVE_PROJECT,
+                new TaskEvent(array_merge($task, $values, array('task_id' => $task['id'])))
+            );
+        }
+
+        return true;
     }
 
     /**

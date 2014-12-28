@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Pimple\Container;
-
 /**
  * Tool class
  *
@@ -32,24 +30,5 @@ class Tool
 
             fclose($fp);
         }
-    }
-
-    /**
-     * Load and register a model
-     *
-     * @static
-     * @access public
-     * @param  Pimple\Container    $container     Container instance
-     * @param  string              $name          Model name
-     * @return mixed
-     */
-    public static function loadModel(Container $container, $name)
-    {
-        if (! isset($container[$name])) {
-            $class = '\Model\\'.ucfirst($name);
-            $container[$name] = new $class($container);
-        }
-
-        return $container[$name];
     }
 }

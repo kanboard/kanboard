@@ -62,12 +62,16 @@ class TaskAssignCurrentUser extends Base
      */
     public function doAction(array $data)
     {
+        if (! $this->acl->isLogged()) {
+            return false;
+        }
+
         $values = array(
             'id' => $data['task_id'],
             'owner_id' => $this->acl->getUserId(),
         );
 
-        return $this->taskModification->update($values, false);
+        return $this->taskModification->update($values);
     }
 
     /**

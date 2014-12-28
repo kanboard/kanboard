@@ -4,7 +4,6 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Event\ProjectModificationDateListener;
 use Core\Security;
 
 /**
@@ -488,35 +487,5 @@ class Project extends Base
             $v->execute(),
             $v->getErrors()
         );
-    }
-
-    /**
-     * Attach events
-     *
-     * @access public
-     */
-    public function attachEvents()
-    {
-        $events = array(
-            Task::EVENT_CREATE_UPDATE,
-            Task::EVENT_CLOSE,
-            Task::EVENT_OPEN,
-            Task::EVENT_MOVE_COLUMN,
-            Task::EVENT_MOVE_POSITION,
-            Task::EVENT_ASSIGNEE_CHANGE,
-            GithubWebhook::EVENT_ISSUE_OPENED,
-            GithubWebhook::EVENT_ISSUE_CLOSED,
-            GithubWebhook::EVENT_ISSUE_REOPENED,
-            GithubWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE,
-            GithubWebhook::EVENT_ISSUE_LABEL_CHANGE,
-            GithubWebhook::EVENT_ISSUE_COMMENT,
-            GithubWebhook::EVENT_COMMIT,
-        );
-
-        $listener = new ProjectModificationDateListener($this->container);
-
-        foreach ($events as $event_name) {
-            $this->event->attach($event_name, $listener);
-        }
     }
 }

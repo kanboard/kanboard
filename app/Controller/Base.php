@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Pimple\Container;
-use Core\Tool;
 use Core\Security;
 use Core\Request;
 use Core\Response;
@@ -129,7 +128,7 @@ abstract class Base
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->container, $name);
+        return $this->container[$name];
     }
 
     /**
@@ -156,9 +155,6 @@ abstract class Base
             $this->response->hsts();
         }
 
-        $this->config->setupTranslations();
-        $this->config->setupTimezone();
-
         // Authentication
         if (! $this->authentication->isAuthenticated($controller, $action)) {
 
@@ -172,30 +168,6 @@ abstract class Base
         // Check if the user is allowed to see this page
         if (! $this->acl->isPageAccessAllowed($controller, $action)) {
             $this->response->redirect('?controller=user&action=forbidden');
-        }
-
-        // Attach events
-        $this->attachEvents();
-    }
-
-    /**
-     * Attach events
-     *
-     * @access private
-     */
-    private function attachEvents()
-    {
-        $models = array(
-            'projectActivity', // Order is important
-            'projectDailySummary',
-            'action',
-            'project',
-            'webhook',
-            'notification',
-        );
-
-        foreach ($models as $model) {
-            $this->$model->attachEvents();
         }
     }
 
