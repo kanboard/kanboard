@@ -81,7 +81,7 @@ class Config extends Base
             $this->session['config'] = $this->getAll();
         }
 
-        if (isset($this->session['config'][$name])) {
+        if (! empty($this->session['config'][$name])) {
             return $this->session['config'][$name];
         }
 
