@@ -3,7 +3,6 @@
 namespace Model;
 
 use Core\Session;
-use Core\Template;
 use Swift_Message;
 use Swift_Mailer;
 use Swift_TransportException;
@@ -184,8 +183,10 @@ class Notification extends Base
      */
     public function getMailContent($template, array $data)
     {
-        $tpl = new Template;
-        return $tpl->load('notification/'.$template, $data + array('application_url' => $this->config->get('application_url')));
+        return $this->template->render(
+            'notification/'.$template,
+            $data + array('application_url' => $this->config->get('application_url'))
+        );
     }
 
     /**

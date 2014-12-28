@@ -5,9 +5,9 @@
 </div>
 
 <ul class="listing">
-    <li><?= t('Estimate:') ?> <strong><?= Helper\escape($timesheet['time_estimated']) ?></strong> <?= t('hours') ?></li>
-    <li><?= t('Spent:') ?> <strong><?= Helper\escape($timesheet['time_spent']) ?></strong> <?= t('hours') ?></li>
-    <li><?= t('Remaining:') ?> <strong><?= Helper\escape($timesheet['time_remaining']) ?></strong> <?= t('hours') ?></li>
+    <li><?= t('Estimate:') ?> <strong><?= $this->e($timesheet['time_estimated']) ?></strong> <?= t('hours') ?></li>
+    <li><?= t('Spent:') ?> <strong><?= $this->e($timesheet['time_spent']) ?></strong> <?= t('hours') ?></li>
+    <li><?= t('Remaining:') ?> <strong><?= $this->e($timesheet['time_remaining']) ?></strong> <?= t('hours') ?></li>
 </ul>
 
 <?php endif ?>

@@ -10,6 +10,8 @@ use Pimple\Container;
  * @package  model
  * @author   Frederic Guillot
  *
+ * @property \Core\Session             $session
+ * @property \Core\Template            $template
  * @property \Model\Acl                $acl
  * @property \Model\Action             $action
  * @property \Model\Authentication     $authentication

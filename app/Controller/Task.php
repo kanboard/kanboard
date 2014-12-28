@@ -89,7 +89,7 @@ class Task extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $method = $this->request->isAjax() ? 'load' : 'layout';
+        $method = $this->request->isAjax() ? 'render' : 'layout';
 
         if (empty($values)) {
 
@@ -179,7 +179,7 @@ class Task extends Base
         );
 
         if ($ajax) {
-            $this->response->html($this->template->load('task/edit', $params));
+            $this->response->html($this->template->render('task/edit', $params));
         }
         else {
             $this->response->html($this->taskLayout('task/edit', $params));
@@ -410,7 +410,7 @@ class Task extends Base
         );
 
         if ($ajax) {
-            $this->response->html($this->template->load('task/edit_description', $params));
+            $this->response->html($this->template->render('task/edit_description', $params));
         }
         else {
             $this->response->html($this->taskLayout('task/edit_description', $params));

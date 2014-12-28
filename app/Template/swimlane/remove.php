@@ -9,9 +9,9 @@
         </p>
 
         <div class="form-actions">
-            <?= Helper\a(t('Yes'), 'swimlane', 'remove', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true, 'btn btn-red') ?>
+            <?= $this->a(t('Yes'), 'swimlane', 'remove', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true, 'btn btn-red') ?>
             <?= t('or') ?>
-            <?= Helper\a(t('cancel'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>
+            <?= $this->a(t('cancel'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>
         </div>
     </div>
 </section>

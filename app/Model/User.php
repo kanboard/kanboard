@@ -29,6 +29,17 @@ class User extends Base
     const EVERYBODY_ID = -1;
 
     /**
+     * Return the full name
+     *
+     * @param  array    $user   User properties
+     * @return string
+     */
+    public function getFullname(array $user)
+    {
+        return $user['name'] ?: $user['username'];
+    }
+
+    /**
      * Return true is the given user id is administrator
      *
      * @access public
@@ -54,7 +65,7 @@ class User extends Base
      */
     public function getFavoriteProjectId()
     {
-        return isset($_SESSION['user']['default_project_id']) ? $_SESSION['user']['default_project_id'] : 0;
+        return isset($this->session['user']['default_project_id']) ? $this->session['user']['default_project_id'] : 0;
     }
 
     /**
@@ -65,7 +76,7 @@ class User extends Base
      */
     public function getLastSeenProjectId()
     {
-        return empty($_SESSION['user']['last_show_project_id']) ? 0 : $_SESSION['user']['last_show_project_id'];
+        return empty($this->session['last_show_project_id']) ? 0 : $this->session['last_show_project_id'];
     }
 
     /**
@@ -76,7 +87,7 @@ class User extends Base
      */
     public function storeLastSeenProjectId($project_id)
     {
-        $_SESSION['user']['last_show_project_id'] = (int) $project_id;
+        $this->session['last_show_project_id'] = (int) $project_id;
     }
 
     /**
@@ -276,7 +287,7 @@ class User extends Base
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
         // If the user is connected refresh his session
-        if (Session::isOpen() && $_SESSION['user']['id'] == $values['id']) {
+        if (Session::isOpen() && $this->acl->getUserId() == $values['id']) {
             $this->updateSession();
         }
 
@@ -326,7 +337,7 @@ class User extends Base
     public function updateSession(array $user = array())
     {
         if (empty($user)) {
-            $user = $this->getById($_SESSION['user']['id']);
+            $user = $this->getById($this->acl->getUserId());
         }
 
         if (isset($user['password'])) {
@@ -338,7 +349,7 @@ class User extends Base
         $user['is_admin'] = (bool) $user['is_admin'];
         $user['is_ldap_user'] = (bool) $user['is_ldap_user'];
 
-        $_SESSION['user'] = $user;
+        $this->session['user'] = $user;
     }
 
     /**
@@ -457,7 +468,7 @@ class User extends Base
         if ($v->execute()) {
 
             // Check password
-            if ($this->authentication->authenticate($_SESSION['user']['username'], $values['current_password'])) {
+            if ($this->authentication->authenticate($this->session['user']['username'], $values['current_password'])) {
                 return array(true, array());
             }
             else {

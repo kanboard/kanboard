@@ -264,6 +264,10 @@ class ProjectPermission extends Base
      */
     public function adminAllowed($project_id, $user_id)
     {
+        if ($this->user->isAdmin($user_id)) {
+            return true;
+        }
+
         if ($this->isUserAllowed($project_id, $user_id) && $this->project->isPrivate($project_id)) {
             return true;
         }

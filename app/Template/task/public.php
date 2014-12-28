@@ -1,22 +1,22 @@
 <section id="main" class="public-task">
 
-    <?= Helper\template('task/details', array('task' => $task, 'project' => $project)) ?>
+    <?= $this->render('task/details', array('task' => $task, 'project' => $project)) ?>
 
-    <p class="pull-right"><?= Helper\a(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?></p>
+    <p class="pull-right"><?= $this->a(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?></p>
 
-    <?= Helper\template('task/show_description', array(
+    <?= $this->render('task/show_description', array(
         'task' => $task,
         'project' => $project,
         'is_public' => true
     )) ?>
 
-    <?= Helper\template('subtask/show', array(
+    <?= $this->render('subtask/show', array(
         'task' => $task,
         'subtasks' => $subtasks,
         'not_editable' => true
     )) ?>
 
-    <?= Helper\template('task/comments', array(
+    <?= $this->render('task/comments', array(
         'task' => $task,
         'comments' => $comments,
         'project' => $project,

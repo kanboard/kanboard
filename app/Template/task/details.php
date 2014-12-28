@@ -1,7 +1,7 @@
 <div class="task-<?= $task['color_id'] ?> task-show-details">
-    <h2><?= Helper\escape('#'.$task['id'].' '.$task['title']) ?></h2>
+    <h2><?= $this->e('#'.$task['id'].' '.$task['title']) ?></h2>
     <?php if ($task['score']): ?>
-        <span class="task-score"><?= Helper\escape($task['score']) ?></span>
+        <span class="task-score"><?= $this->e($task['score']) ?></span>
     <?php endif ?>
     <ul>
         <?php if ($task['reference']): ?>
@@ -58,13 +58,13 @@
         </li>
         <li>
             <?= t('Column on the board:') ?>
-            <strong><?= Helper\escape($task['column_title']) ?></strong>
-            (<?= Helper\escape($task['project_name']) ?>)
+            <strong><?= $this->e($task['column_title']) ?></strong>
+            (<?= $this->e($task['project_name']) ?>)
         </li>
-        <li><?= t('Task position:').' '.Helper\escape($task['position']) ?></li>
+        <li><?= t('Task position:').' '.$this->e($task['position']) ?></li>
         <?php if ($task['category_name']): ?>
         <li>
-            <?= t('Category:') ?> <strong><?= Helper\escape($task['category_name']) ?></strong>
+            <?= t('Category:') ?> <strong><?= $this->e($task['category_name']) ?></strong>
         </li>
         <?php endif ?>
         <li>
@@ -76,7 +76,7 @@
         </li>
         <?php if ($project['is_public']): ?>
         <li>
-            <?= Helper\a(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+            <?= $this->a(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
         </li>
         <?php endif ?>
     </ul>

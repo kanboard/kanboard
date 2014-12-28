@@ -8,15 +8,15 @@
 
 <form method="get" action="?" autocomplete="off">
 
-    <?= Helper\form_hidden('controller', $values) ?>
-    <?= Helper\form_hidden('action', $values) ?>
-    <?= Helper\form_hidden('project_id', $values) ?>
+    <?= $this->formHidden('controller', $values) ?>
+    <?= $this->formHidden('action', $values) ?>
+    <?= $this->formHidden('project_id', $values) ?>
 
-    <?= Helper\form_label(t('Start Date'), 'from') ?>
-    <?= Helper\form_text('from', $values, $errors, array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?><br/>
+    <?= $this->formLabel(t('Start Date'), 'from') ?>
+    <?= $this->formText('from', $values, $errors, array('required', 'placeholder="'.$this->inList($date_format, $date_formats).'"'), 'form-date') ?><br/>
 
-    <?= Helper\form_label(t('End Date'), 'to') ?>
-    <?= Helper\form_text('to', $values, $errors, array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?>
+    <?= $this->formLabel(t('End Date'), 'to') ?>
+    <?= $this->formText('to', $values, $errors, array('required', 'placeholder="'.$this->inList($date_format, $date_formats).'"'), 'form-date') ?>
 
     <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
 

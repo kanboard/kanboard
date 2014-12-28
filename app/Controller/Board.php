@@ -39,7 +39,7 @@ class Board extends Base
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
 
-        $this->response->html($this->template->load('board/assignee', array(
+        $this->response->html($this->template->render('board/assignee', array(
             'values' => $task,
             'users_list' => $this->projectPermission->getMemberList($project['id']),
             'project' => $project,
@@ -78,7 +78,7 @@ class Board extends Base
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
 
-        $this->response->html($this->template->load('board/category', array(
+        $this->response->html($this->template->render('board/category', array(
             'values' => $task,
             'categories_list' => $this->category->getList($project['id']),
             'project' => $project,
@@ -360,7 +360,7 @@ class Board extends Base
         }
 
         $this->response->html(
-            $this->template->load('board/show', array(
+            $this->template->render('board/show', array(
                 'project' => $this->project->getById($project_id),
                 'swimlanes' => $this->board->getBoard($project_id),
                 'categories' => $this->category->getList($project_id, false),
@@ -394,7 +394,7 @@ class Board extends Base
         }
 
         $this->response->html(
-            $this->template->load('board/show', array(
+            $this->template->render('board/show', array(
                 'project' => $this->project->getById($project_id),
                 'swimlanes' => $this->board->getBoard($project_id),
                 'categories' => $this->category->getList($project_id, false),
@@ -412,7 +412,7 @@ class Board extends Base
     public function subtasks()
     {
         $task = $this->getTask();
-        $this->response->html($this->template->load('board/subtasks', array(
+        $this->response->html($this->template->render('board/subtasks', array(
             'subtasks' => $this->subTask->getAll($task['id'])
         )));
     }
@@ -427,7 +427,7 @@ class Board extends Base
         $task = $this->getTask();
         $this->subTask->toggleStatus($this->request->getIntegerParam('subtask_id'));
 
-        $this->response->html($this->template->load('board/subtasks', array(
+        $this->response->html($this->template->render('board/subtasks', array(
             'subtasks' => $this->subTask->getAll($task['id'])
         )));
     }
@@ -441,7 +441,7 @@ class Board extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->load('board/files', array(
+        $this->response->html($this->template->render('board/files', array(
             'files' => $this->file->getAll($task['id'])
         )));
     }
@@ -455,7 +455,7 @@ class Board extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->load('board/comments', array(
+        $this->response->html($this->template->render('board/comments', array(
             'comments' => $this->comment->getAll($task['id'])
         )));
     }
@@ -469,7 +469,7 @@ class Board extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->load('board/description', array(
+        $this->response->html($this->template->render('board/description', array(
             'task' => $task
         )));
     }

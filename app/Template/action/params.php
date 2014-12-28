@@ -3,34 +3,34 @@
 </div>
 
 <h3><?= t('Define action parameters') ?></h3>
-<form method="post" action="<?= Helper\u('action', 'create', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('action', 'create', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-    <?= Helper\form_csrf() ?>
+    <?= $this->formCsrf() ?>
 
-    <?= Helper\form_hidden('project_id', $values) ?>
-    <?= Helper\form_hidden('event_name', $values) ?>
-    <?= Helper\form_hidden('action_name', $values) ?>
+    <?= $this->formHidden('project_id', $values) ?>
+    <?= $this->formHidden('event_name', $values) ?>
+    <?= $this->formHidden('action_name', $values) ?>
 
     <?php foreach ($action_params as $param_name => $param_desc): ?>
 
-        <?php if (Helper\contains($param_name, 'column_id')): ?>
-            <?= Helper\form_label($param_desc, $param_name) ?>
-            <?= Helper\form_select('params['.$param_name.']', $columns_list, $values) ?><br/>
-        <?php elseif (Helper\contains($param_name, 'user_id')): ?>
-            <?= Helper\form_label($param_desc, $param_name) ?>
-            <?= Helper\form_select('params['.$param_name.']', $users_list, $values) ?><br/>
-        <?php elseif (Helper\contains($param_name, 'project_id')): ?>
-            <?= Helper\form_label($param_desc, $param_name) ?>
-            <?= Helper\form_select('params['.$param_name.']', $projects_list, $values) ?><br/>
-        <?php elseif (Helper\contains($param_name, 'color_id')): ?>
-            <?= Helper\form_label($param_desc, $param_name) ?>
-            <?= Helper\form_select('params['.$param_name.']', $colors_list, $values) ?><br/>
-        <?php elseif (Helper\contains($param_name, 'category_id')): ?>
-            <?= Helper\form_label($param_desc, $param_name) ?>
-            <?= Helper\form_select('params['.$param_name.']', $categories_list, $values) ?><br/>
-        <?php elseif (Helper\contains($param_name, 'label')): ?>
-            <?= Helper\form_label($param_desc, $param_name) ?>
-            <?= Helper\form_text('params['.$param_name.']', $values) ?>
+        <?php if ($this->contains($param_name, 'column_id')): ?>
+            <?= $this->formLabel($param_desc, $param_name) ?>
+            <?= $this->formSelect('params['.$param_name.']', $columns_list, $values) ?><br/>
+        <?php elseif ($this->contains($param_name, 'user_id')): ?>
+            <?= $this->formLabel($param_desc, $param_name) ?>
+            <?= $this->formSelect('params['.$param_name.']', $users_list, $values) ?><br/>
+        <?php elseif ($this->contains($param_name, 'project_id')): ?>
+            <?= $this->formLabel($param_desc, $param_name) ?>
+            <?= $this->formSelect('params['.$param_name.']', $projects_list, $values) ?><br/>
+        <?php elseif ($this->contains($param_name, 'color_id')): ?>
+            <?= $this->formLabel($param_desc, $param_name) ?>
+            <?= $this->formSelect('params['.$param_name.']', $colors_list, $values) ?><br/>
+        <?php elseif ($this->contains($param_name, 'category_id')): ?>
+            <?= $this->formLabel($param_desc, $param_name) ?>
+            <?= $this->formSelect('params['.$param_name.']', $categories_list, $values) ?><br/>
+        <?php elseif ($this->contains($param_name, 'label')): ?>
+            <?= $this->formLabel($param_desc, $param_name) ?>
+            <?= $this->formText('params['.$param_name.']', $values) ?>
         <?php endif ?>
 
     <?php endforeach ?>
@@ -38,6 +38,6 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Save this action') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
-        <?= Helper\a(t('cancel'), 'action', 'index', array('project_id' => $project['id'])) ?>
+        <?= $this->a(t('cancel'), 'action', 'index', array('project_id' => $project['id'])) ?>
     </div>
 </form>

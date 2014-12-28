@@ -8,7 +8,7 @@
     </p>
 
     <div class="form-actions">
-        <?= Helper\a(t('Yes'), 'project', 'duplicate', array('project_id' => $project['id'], 'duplicate' => 'yes'), true, 'btn btn-red') ?>
-        <?= t('or') ?> <?= Helper\a(t('cancel'), 'project', 'show', array('project_id' => $project['id'])) ?>
+        <?= $this->a(t('Yes'), 'project', 'duplicate', array('project_id' => $project['id'], 'duplicate' => 'yes'), true, 'btn btn-red') ?>
+        <?= t('or') ?> <?= $this->a(t('cancel'), 'project', 'show', array('project_id' => $project['id'])) ?>
     </div>
 </div>

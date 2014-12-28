@@ -75,7 +75,7 @@ class File extends Base
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
         if ($file['task_id'] == $task['id']) {
-            $this->response->html($this->template->load('file/open', array(
+            $this->response->html($this->template->render('file/open', array(
                 'file' => $file
             )));
         }

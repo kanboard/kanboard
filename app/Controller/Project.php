@@ -447,7 +447,7 @@ class Project extends Base
             $this->forbidden(true);
         }
 
-        $this->response->xml($this->template->load('project/feed', array(
+        $this->response->xml($this->template->render('project/feed', array(
             'events' => $this->projectActivity->getProject($project['id']),
             'project' => $project,
         )));

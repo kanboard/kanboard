@@ -21,19 +21,19 @@
     <ul>
         <li>
             <?= t('Database driver:') ?>
-            <strong><?= Helper\escape(DB_DRIVER) ?></strong>
+            <strong><?= $this->e(DB_DRIVER) ?></strong>
         </li>
         <?php if (DB_DRIVER === 'sqlite'): ?>
             <li>
                 <?= t('Database size:') ?>
-                <strong><?= Helper\format_bytes($db_size) ?></strong>
+                <strong><?= $this->formatBytes($db_size) ?></strong>
             </li>
             <li>
-                <?= Helper\a(t('Download the database'), 'config', 'downloadDb', array(), true) ?>&nbsp;
+                <?= $this->a(t('Download the database'), 'config', 'downloadDb', array(), true) ?>&nbsp;
                 <?= t('(Gzip compressed Sqlite file)') ?>
             </li>
             <li>
-                <?= Helper\a(t('Optimize the database'), 'config', 'optimizeDb', array(), true) ?>&nbsp;
+                <?= $this->a(t('Optimize the database'), 'config', 'optimizeDb', array(), true) ?>&nbsp;
                 <?= t('(VACUUM command)') ?>
             </li>
         <?php endif ?>

@@ -2,19 +2,19 @@
     <h2><?= t('Actions') ?></h2>
     <ul>
         <li>
-            <?= Helper\a(t('About'), 'config', 'index') ?>
+            <?= $this->a(t('About'), 'config', 'index') ?>
         </li>
         <li>
-            <?= Helper\a(t('Application settings'), 'config', 'application') ?>
+            <?= $this->a(t('Application settings'), 'config', 'application') ?>
         </li>
         <li>
-            <?= Helper\a(t('Board settings'), 'config', 'board') ?>
+            <?= $this->a(t('Board settings'), 'config', 'board') ?>
         </li>
         <li>
-            <?= Helper\a(t('Webhooks'), 'config', 'webhook') ?>
+            <?= $this->a(t('Webhooks'), 'config', 'webhook') ?>
         </li>
         <li>
-            <?= Helper\a(t('API'), 'config', 'api') ?>
+            <?= $this->a(t('API'), 'config', 'api') ?>
         </li>
     </ul>
 </div>

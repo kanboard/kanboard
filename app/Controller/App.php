@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Model\SubTask as SubTaskModel;
-use Helper;
 
 /**
  * Application controller
@@ -192,7 +191,7 @@ class App extends Base
             $this->response->html('<p>'.t('Nothing to preview...').'</p>');
         }
         else {
-            $this->response->html(Helper\markdown($payload['text']));
+            $this->response->html($this->template->markdown($payload['text']));
         }
     }
 

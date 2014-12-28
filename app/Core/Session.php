@@ -2,13 +2,15 @@
 
 namespace Core;
 
+use ArrayAccess;
+
 /**
  * Session class
  *
  * @package  core
  * @author   Frederic Guillot
  */
-class Session
+class Session implements ArrayAccess
 {
     /**
      * Sesion lifetime
@@ -59,7 +61,7 @@ class Session
         ini_set('session.entropy_length', '32');
         ini_set('session.hash_bits_per_character', 6);
 
-        // If session was autostarted with session.auto_start = 1 in php.ini destroy it
+        // If the session was autostarted with session.auto_start = 1 in php.ini destroy it
         if (isset($_SESSION)) {
             session_destroy();
         }
@@ -88,19 +90,17 @@ class Session
         $_SESSION = array();
 
         // Destroy the session cookie
-        if (ini_get('session.use_cookies')) {
-            $params = session_get_cookie_params();
+        $params = session_get_cookie_params();
 
-            setcookie(
-                session_name(),
-                '',
-                time() - 42000,
-                $params['path'],
-                $params['domain'],
-                $params['secure'],
-                $params['httponly']
-            );
-        }
+        setcookie(
+            session_name(),
+            '',
+            time() - 42000,
+            $params['path'],
+            $params['domain'],
+            $params['secure'],
+            $params['httponly']
+        );
 
         // Destroy session data
         session_destroy();
@@ -126,5 +126,25 @@ class Session
     public function flashError($message)
     {
         $_SESSION['flash_error_message'] = $message;
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        $_SESSION[$offset] = $value;
+    }
+
+    public function offsetExists($offset)
+    {
+        return isset($_SESSION[$offset]);
+    }
+
+    public function offsetUnset($offset)
+    {
+        unset($_SESSION[$offset]);
+    }
+
+    public function offsetGet($offset)
+    {
+        return isset($_SESSION[$offset]) ? $_SESSION[$offset] : null;
     }
 }

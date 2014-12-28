@@ -1,6 +1,6 @@
 <section id="main" class="public-board">
 
-   <?= Helper\template('board/show', array(
+   <?= $this->render('board/show', array(
             'project' => $project,
             'swimlanes' => $swimlanes,
             'categories' => $categories,

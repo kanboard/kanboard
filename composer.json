@@ -15,7 +15,6 @@
     "autoload": {
         "psr-0": {"": "app/"},
         "files": [
-            "app/helpers.php",
             "app/functions.php"
         ]
     },

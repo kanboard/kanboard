@@ -23,7 +23,7 @@ class Config extends Base
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
         $params['values'] = $this->config->getAll();
         $params['errors'] = array();
-        $params['config_content_for_layout'] = $this->template->load($template, $params);
+        $params['config_content_for_layout'] = $this->template->render($template, $params);
 
         return $this->template->layout('config/layout', $params);
     }

@@ -17,6 +17,8 @@ use Symfony\Component\EventDispatcher\Event;
  * @package  controller
  * @author   Frederic Guillot
  *
+ * @property \Core\Session                 $session
+ * @property \Core\Template                $template
  * @property \Model\Acl                    $acl
  * @property \Model\Authentication         $authentication
  * @property \Model\Action                 $action
@@ -70,22 +72,6 @@ abstract class Base
     protected $response;
 
     /**
-     * Template instance
-     *
-     * @accesss protected
-     * @var \Core\Template
-     */
-    protected $template;
-
-    /**
-     * Session instance
-     *
-     * @accesss public
-     * @var \Core\Session
-     */
-    protected $session;
-
-    /**
      * Container instance
      *
      * @access private
@@ -104,8 +90,6 @@ abstract class Base
         $this->container = $container;
         $this->request = new Request;
         $this->response = new Response;
-        $this->session = new Session;
-        $this->template = new Template;
     }
 
     /**
@@ -265,7 +249,7 @@ abstract class Base
             $params['hide_remove_menu'] = true;
         }
 
-        $content = $this->template->load($template, $params);
+        $content = $this->template->render($template, $params);
         $params['task_content_for_layout'] = $content;
         $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
@@ -283,7 +267,7 @@ abstract class Base
      */
     protected function projectLayout($template, array $params)
     {
-        $content = $this->template->load($template, $params);
+        $content = $this->template->render($template, $params);
         $params['project_content_for_layout'] = $content;
         $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());

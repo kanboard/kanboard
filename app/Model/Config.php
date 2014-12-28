@@ -76,12 +76,13 @@ class Config extends Base
             return $value ?: $default_value;
         }
 
-        if (! isset($_SESSION['config'][$name])) {
-            $_SESSION['config'] = $this->getAll();
+        // Cache config in session
+        if (! isset($this->session['config'][$name])) {
+            $this->session['config'] = $this->getAll();
         }
 
-        if (! empty($_SESSION['config'][$name])) {
-            return $_SESSION['config'][$name];
+        if (isset($this->session['config'][$name])) {
+            return $this->session['config'][$name];
         }
 
         return $default_value;
@@ -126,7 +127,7 @@ class Config extends Base
      */
     public function reload()
     {
-        $_SESSION['config'] = $this->getAll();
+        $this->session['config'] = $this->getAll();
         $this->setupTranslations();
     }
 

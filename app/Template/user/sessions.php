@@ -17,9 +17,9 @@
     <tr>
         <td><?= dt('%B %e, %Y at %k:%M %p', $session['date_creation']) ?></td>
         <td><?= dt('%B %e, %Y at %k:%M %p', $session['expiration']) ?></td>
-        <td><?= Helper\escape($session['ip']) ?></td>
-        <td><?= Helper\escape(Helper\summary($session['user_agent'])) ?></td>
-        <td><?= Helper\a(t('Remove'), 'user', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true) ?></td>
+        <td><?= $this->e($session['ip']) ?></td>
+        <td><?= $this->e($this->summary($session['user_agent'])) ?></td>
+        <td><?= $this->a(t('Remove'), 'user', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true) ?></td>
     </tr>
     <?php endforeach ?>
     </table>

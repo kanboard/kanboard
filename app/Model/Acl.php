@@ -42,6 +42,7 @@ class Acl extends Base
         'category' => array('index', 'save', 'edit', 'update', 'confirm', 'remove'),
         'action' => array('index', 'event', 'params', 'create', 'confirm', 'remove'),
         'analytic' => array('tasks', 'users', 'cfd'),
+        'swimlane' => array('index', 'save', 'change', 'edit', 'update', 'confirm', 'remove', 'disable', 'enable', 'moveup', 'movedown'),
     );
 
     /**
@@ -96,7 +97,7 @@ class Acl extends Base
      */
     public function isAdminUser()
     {
-        return isset($_SESSION['user']['is_admin']) && $_SESSION['user']['is_admin'] === true;
+        return isset($this->session['user']['is_admin']) && $this->session['user']['is_admin'] === true;
     }
 
     /**
@@ -107,7 +108,7 @@ class Acl extends Base
      */
     public function isRegularUser()
     {
-        return isset($_SESSION['user']['is_admin']) && $_SESSION['user']['is_admin'] === false;
+        return isset($this->session['user']['is_admin']) && $this->session['user']['is_admin'] === false;
     }
 
     /**
@@ -118,7 +119,18 @@ class Acl extends Base
      */
     public function getUserId()
     {
-        return isset($_SESSION['user']['id']) ? (int) $_SESSION['user']['id'] : 0;
+        return isset($this->session['user']['id']) ? (int) $this->session['user']['id'] : 0;
+    }
+
+    /**
+     * Check if the given user_id is the connected user
+     *
+     * @param  integer   $user_id   User id
+     * @return boolean
+     */
+    public function isCurrentUser($user_id)
+    {
+        return $this->acl->getUserId() == $user_id;
     }
 
     /**
@@ -129,7 +141,7 @@ class Acl extends Base
      */
     public function isLogged()
     {
-        return ! empty($_SESSION['user']);
+        return ! empty($this->session['user']);
     }
 
     /**
@@ -142,10 +154,10 @@ class Acl extends Base
     public function isRememberMe($value = null)
     {
         if ($value !== null) {
-            $_SESSION['is_remember_me'] = $value;
+            $this->session['is_remember_me'] = $value;
         }
 
-        return empty($_SESSION['is_remember_me']) ? false : $_SESSION['is_remember_me'];
+        return empty($this->session['is_remember_me']) ? false : $this->session['is_remember_me'];
     }
 
     /**

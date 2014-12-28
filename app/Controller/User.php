@@ -76,7 +76,7 @@ class User extends Base
      */
     private function layout($template, array $params)
     {
-        $content = $this->template->load($template, $params);
+        $content = $this->template->render($template, $params);
         $params['user_content_for_layout'] = $content;
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
 

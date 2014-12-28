@@ -9,14 +9,14 @@
     </tr>
     <?php foreach ($categories as $category_id => $category_name): ?>
     <tr>
-        <td><?= Helper\escape($category_name) ?></td>
+        <td><?= $this->e($category_name) ?></td>
         <td>
             <ul>
                 <li>
-                    <?= Helper\a(t('Edit'), 'category', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
+                    <?= $this->a(t('Edit'), 'category', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
                 </li>
                 <li>
-                    <?= Helper\a(t('Remove'), 'category', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
+                    <?= $this->a(t('Remove'), 'category', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
                 </li>
             </ul>
         </td>
@@ -28,13 +28,13 @@
 <div class="page-header">
     <h2><?= t('Add a new category') ?></h2>
 </div>
-<form method="post" action="<?= Helper\u('category', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('category', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-    <?= Helper\form_csrf() ?>
-    <?= Helper\form_hidden('project_id', $values) ?>
+    <?= $this->formCsrf() ?>
+    <?= $this->formHidden('project_id', $values) ?>
 
-    <?= Helper\form_label(t('Category Name'), 'name') ?>
-    <?= Helper\form_text('name', $values, $errors, array('autofocus required')) ?>
+    <?= $this->formLabel(t('Category Name'), 'name') ?>
+    <?= $this->formText('name', $values, $errors, array('autofocus required')) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

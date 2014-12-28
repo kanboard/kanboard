@@ -1,12 +1,12 @@
 <section id="main">
 
-    <?= Helper\template('board/filters', array(
+    <?= $this->render('board/filters', array(
         'categories' => $categories,
         'users' => $users,
         'project' => $project,
     )) ?>
 
-    <?= Helper\template('board/show', array(
+    <?= $this->render('board/show', array(
             'project' => $project,
             'swimlanes' => $swimlanes,
             'categories' => $categories,

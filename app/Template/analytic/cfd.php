@@ -6,24 +6,24 @@
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
     <section id="analytic-cfd">
-        <div id="chart" data-url="<?= Helper\u('analytic', 'cfd', array('project_id' => $project['id'], 'from' => $values['from'], 'to' => $values['to'])) ?>"></div>
+        <div id="chart" data-url="<?= $this->u('analytic', 'cfd', array('project_id' => $project['id'], 'from' => $values['from'], 'to' => $values['to'])) ?>"></div>
     </section>
 <?php endif ?>
 
 <hr/>
 
-<form method="post" class="form-inline" action="<?= Helper\u('analytic', 'cfd', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" class="form-inline" action="<?= $this->u('analytic', 'cfd', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-    <?= Helper\form_csrf() ?>
+    <?= $this->formCsrf() ?>
 
     <div class="form-inline-group">
-        <?= Helper\form_label(t('Start Date'), 'from') ?>
-        <?= Helper\form_text('from', $values, array(), array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?>
+        <?= $this->formLabel(t('Start Date'), 'from') ?>
+        <?= $this->formText('from', $values, array(), array('required', 'placeholder="'.$this->inList($date_format, $date_formats).'"'), 'form-date') ?>
     </div>
 
     <div class="form-inline-group">
-        <?= Helper\form_label(t('End Date'), 'to') ?>
-        <?= Helper\form_text('to', $values, array(), array('required', 'placeholder="'.Helper\in_list($date_format, $date_formats).'"'), 'form-date') ?>
+        <?= $this->formLabel(t('End Date'), 'to') ?>
+        <?= $this->formText('to', $values, array(), array('required', 'placeholder="'.$this->inList($date_format, $date_formats).'"'), 'form-date') ?>
     </div>
 
     <div class="form-inline-group">
