@@ -2,6 +2,7 @@
     <h2><?= t('Edit a link') ?></h2>
 </div>
 
+<?php if (!empty($link_list)): ?>
 <form method="post" action="<?= Helper\u('tasklink', 'update', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>" autocomplete="off">
 
     <?= Helper\form_csrf() ?>
@@ -29,3 +30,8 @@
         <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
     </div>
 </form>
+<?php else: ?>
+<div class="alert alert-info">
+    You need to <?= Helper\a('add link labels', 'link', 'index', array('project_id' => $task['project_id'])) ?> to this project before to link this task to another one.
+</div>
+<?php endif ?>

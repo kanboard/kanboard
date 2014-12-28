@@ -185,32 +185,43 @@ class TaskLink extends Base
     }
 
     /**
-     * Duplicate links from a project to another one, must be executed inside a transaction
+     * Duplicate all links to another task
      *
-     * @author Antonio Rabelo
-     * @param integer $src_project_id
-     *            Source project id
-     * @return integer $dst_project_id Destination project id
-     * @return boolean
+     * @access public
+     * @param integer $src_task_id
+     *            Source task id
+     * @param integer $dst_task_id
+     *            Destination task id
+     * @return bool
      */
-    public function duplicate($src_project_id, $dst_project_id)
+    public function duplicate($src_task_id, $dst_task_id)
     {
-        $links = $this->db->table(self::TABLE)
-            ->columns('name')
-            ->eq('project_id', $src_project_id)
-            ->asc('name')
-            ->findAll();
-        
-        foreach ($links as $link) {
-            
-            $link['project_id'] = $dst_project_id;
-            
-            if (! $this->db->table(self::TABLE)->save($link)) {
-                return false;
+        return $this->db->transaction(function ($db) use($src_task_id, $dst_task_id)
+        {
+            $links = $db->table(self::TABLE)
+                ->columns('link_id', 'task_id', 'task_inverse_id')
+                ->eq('task_id', $src_task_id)
+                ->findAll();
+            foreach ($links as &$link) {
+                $link['task_id'] = $dst_task_id;
+                if (! $db->table(self::TABLE)
+                    ->save($link)) {
+                    return false;
+                }
             }
-        }
-        
-        return true;
+
+            $links = $db->table(self::TABLE)
+                ->columns('link_id', 'task_id', 'task_inverse_id')
+                ->eq('task_inverse_id', $src_task_id)
+                ->findAll();
+            foreach ($links as &$link) {
+                $link['task_inverse_id'] = $dst_task_id;
+                if (! $db->table(self::TABLE)
+                    ->save($link)) {
+                    return false;
+                }
+            }
+        });
     }
 
     /**
@@ -241,7 +252,8 @@ class TaskLink extends Base
      * Validate link modification
      *
      * @access public
-     * @param array $values Form values
+     * @param array $values
+     *            Form values
      * @return array $valid, $errors [0] = Success or not, [1] = List of errors
      */
     public function validateModification(array $values)
@@ -259,6 +271,7 @@ class TaskLink extends Base
         // TODO Add Validators\NotEquals in simple-validator
         if ($res[0] && $values['task_id'] == $values['task_inverse_id']) {
             $v->addError('task_inverse_id', t('A task can not be linked to itself.'));
+            $res[0] = false;
             $res[1] = $v->getErrors();
         }
         return $res;

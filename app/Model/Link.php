@@ -325,13 +325,7 @@ class Link extends Base
      */
     public function validateCreation(array $values)
     {
-        $rules = array(
-            new Validators\Required('project_id', t('The project id is required')),
-            new Validators\Required('name', t('The link name is required')),
-            new Validators\Required('name_inverse', t('The link inverse name is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+        $v = new Validator($values, $this->commonValidationRules());
 
         return array(
             $v->execute(),
@@ -349,10 +343,7 @@ class Link extends Base
     public function validateModification(array $values)
     {
         $rules = array(
-            new Validators\Required('id', t('The id is required')),
-            new Validators\Required('project_id', t('The project id is required')),
-            new Validators\Required('name', t('The link name is required')),
-            new Validators\Required('name_inverse', t('The link inverse name is required')),
+            new Validators\Required('id', t('The id is required'))
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -372,6 +363,8 @@ class Link extends Base
     private function commonValidationRules()
     {
         return array(
+            new Validators\Required('project_id', t('The project id is required')),
+            new Validators\Required('name', t('The link name is required')),
             new Validators\Integer('id', t('The id must be an integer')),
             new Validators\Integer('project_id', t('The project id must be an integer')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 150), 150),
