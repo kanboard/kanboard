@@ -1206,19 +1206,23 @@ tr td.task-orange,
     margin-top: 10px;
     color: #555;
 }/* dashboard */
-#dashboard table {
-    font-size: 0.9em;
-}
 
-.dashboard-left-column {
-    width: 55%;
-    float: left;
-}
+@media only screen and (min-width: 1366px) {
 
-.dashboard-right-column {
-    margin-left: 5%;
-    width: 40%;
-    float: left;
+    #dashboard table {
+        font-size: 0.9em;
+    }
+
+    .dashboard-left-column {
+        width: 55%;
+        float: left;
+    }
+
+    .dashboard-right-column {
+        margin-left: 5%;
+        width: 40%;
+        float: left;
+    }
 }
 
 .dashboard-project-stats span {
@@ -1228,7 +1232,7 @@ tr td.task-orange,
 }
 
 .dashboard-project-stats strong {
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .dashboard-table-link {

@@ -148,7 +148,7 @@ class App extends Base
      */
     private function getProjectPagination(array $project_ids, $paginate, $offset, $order, $direction)
     {
-        $limit = 5;
+        $limit = 10;
 
         if (! in_array($order, array('id', 'name'))) {
             $order = 'name';
