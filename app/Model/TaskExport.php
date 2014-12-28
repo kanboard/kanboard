@@ -24,10 +24,11 @@ class TaskExport extends Base
     public function export($project_id, $from, $to)
     {
         $tasks = $this->getTasks($project_id, $from, $to);
+        $swimlanes = $this->swimlane->getSwimlanesList($project_id);
         $results = array($this->getColumns());
 
         foreach ($tasks as &$task) {
-            $results[] = array_values($this->format($task));
+            $results[] = array_values($this->format($task, $swimlanes));
         }
 
         return $results;
@@ -50,6 +51,7 @@ class TaskExport extends Base
             projects.name AS project_name,
             tasks.is_active,
             project_has_categories.name AS category_name,
+            tasks.swimlane_id,
             columns.title AS column_title,
             tasks.position,
             tasks.color_id,
@@ -89,15 +91,18 @@ class TaskExport extends Base
      * Format the output of a task array
      *
      * @access public
-     * @param  array     $task    Task properties
+     * @param  array     $task        Task properties
+     * @param  array     $swimlanes   List of swimlanes
      * @return array
      */
-    public function format(array &$task)
+    public function format(array &$task, array &$swimlanes)
     {
         $colors = $this->color->getList();
 
         $task['is_active'] = $task['is_active'] == Task::STATUS_OPEN ? e('Open') : e('Closed');
         $task['color_id'] = $colors[$task['color_id']];
+        $task['score'] = $task['score'] ?: 0;
+        $task['swimlane_id'] = isset($swimlanes[$task['swimlane_id']]) ? $swimlanes[$task['swimlane_id']] : '?';
 
         $this->dateParser->format($task, array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'), 'Y-m-d');
 
@@ -117,6 +122,7 @@ class TaskExport extends Base
             e('Project'),
             e('Status'),
             e('Category'),
+            e('Swimlane'),
             e('Column'),
             e('Position'),
             e('Color'),

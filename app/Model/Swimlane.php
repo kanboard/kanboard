@@ -157,6 +157,27 @@ class Swimlane extends Base
     }
 
     /**
+     * Get list of all swimlanes
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return array
+     */
+    public function getSwimlanesList($project_id)
+    {
+        $swimlanes = $this->db->table(self::TABLE)
+                              ->eq('project_id', $project_id)
+                              ->orderBy('position', 'asc')
+                              ->listing('id', 'name');
+
+        $swimlanes[0] = $this->db->table(Project::TABLE)
+                                     ->eq('id', $project_id)
+                                     ->findOneColumn('default_swimlane');
+
+        return $swimlanes;
+    }
+
+    /**
      * Add a new swimlane
      *
      * @access public

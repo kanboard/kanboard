@@ -31,6 +31,21 @@ class SwimlaneTest extends Base
         $this->assertEquals('', $s->getNameById(23));
     }
 
+    public function testGetList()
+    {
+        $p = new Project($this->container);
+        $s = new Swimlane($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
+        $this->assertEquals(2, $s->create(1, 'Swimlane #2'));
+
+        $swimlanes = $s->getSwimlanesList(1);
+        $expected = array('Default swimlane', 'Swimlane #1', 'Swimlane #2');
+
+        $this->assertEquals($expected, $swimlanes);
+    }
+
     public function testRename()
     {
         $p = new Project($this->container);
