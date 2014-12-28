@@ -48,12 +48,9 @@
     </span>
     <?php endif ?>
 
-    &nbsp;-&nbsp;
-
-    <span class="task-board-user">
+    <span class="task-board-user <?= $this->acl->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
         <?= $this->a(
-            (! empty($task['owner_id']) ? t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned')) .
-            ( $this->acl->isCurrentUser($task['owner_id']) ? '&nbsp;<i class="fa fa-star"></i>' : ''),
+            (! empty($task['owner_id']) ? t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned')),
             'board',
             'changeAssignee',
             array('task_id' => $task['id']),
