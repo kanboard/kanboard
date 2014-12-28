@@ -63,10 +63,10 @@ class TaskLink extends Base
     {
         $sql = 'SELECT
             ' . self::TABLE . '.id,
-            ' . self::TABLE . '.task_inverse_id,
             ' . Link::TABLE . '.name AS name,
-            ' . Task::TABLE . '.title AS task_inverse_name,
+            ' . self::TABLE . '.task_inverse_id,
             ' . Category::TABLE . '.name AS task_inverse_category,
+            ' . Task::TABLE . '.title AS task_inverse_name,
             ' . Task::TABLE . '.is_active AS task_inverse_is_active
             FROM ' . self::TABLE . '
             LEFT JOIN ' . Link::TABLE . ' ON ' . Link::TABLE . '.id = link_id
@@ -201,6 +201,7 @@ class TaskLink extends Base
             $links = $db->table(self::TABLE)
                 ->columns('link_id', 'task_id', 'task_inverse_id')
                 ->eq('task_id', $src_task_id)
+                ->asc('id')
                 ->findAll();
             foreach ($links as &$link) {
                 $link['task_id'] = $dst_task_id;
@@ -213,6 +214,7 @@ class TaskLink extends Base
             $links = $db->table(self::TABLE)
                 ->columns('link_id', 'task_id', 'task_inverse_id')
                 ->eq('task_inverse_id', $src_task_id)
+                ->asc('id')
                 ->findAll();
             foreach ($links as &$link) {
                 $link['task_inverse_id'] = $dst_task_id;

@@ -253,7 +253,7 @@ class Project extends Base
             return false;
         }
 
-        foreach (array('board', 'category', 'projectPermission', 'action') as $model) {
+        foreach (array('board', 'category', 'projectPermission', 'action', 'link') as $model) {
 
             if (! $this->$model->duplicate($project_id, $clone_project_id)) {
                 $this->db->cancelTransaction();

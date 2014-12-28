@@ -40,6 +40,7 @@
     <form method="post" action="<?= Helper\u('tasklink', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off">
         <?= Helper\form_csrf() ?>
         <?= Helper\form_hidden('task_id', array('task_id' => $task['id'])) ?>
+        #<?= Helper\escape($task['id']) ?>
         <?= Helper\form_select('link_id', $link_list, array(), array(), 'required autofocus') ?>
         #<?= Helper\form_numeric('task_inverse_id', array(), array(), array('required', 'placeholder="'.t('Task id').'"', 'list="task_inverse_ids"')) ?>
         <datalist id="task_inverse_ids">
