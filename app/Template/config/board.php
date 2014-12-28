@@ -22,6 +22,10 @@
     <?= $this->formText('board_columns', $values, $errors) ?><br/>
     <p class="form-help"><?= t('Default values are "%s"', $default_columns) ?></p>
 
+    <?= $this->formLabel(t('Default categories for new projects (Comma-separated)'), 'project_categories') ?>
+    <?= $this->formText('project_categories', $values, $errors) ?><br/>
+    <p class="form-help"><?= t('Example: "Bug, Feature Request, Improvement"') ?></p>
+
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
     </div>

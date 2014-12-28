@@ -51,5 +51,8 @@ class ConfigTest extends Base
         $this->assertEquals('foo', $c->get('board_columns'));
         $this->assertEquals('foo', $c->get('board_columns', 'test'));
         $this->assertEquals('test', $c->get('empty_value', 'test'));
+
+        session_id('');
+        unset($this->container['session']);
     }
 }

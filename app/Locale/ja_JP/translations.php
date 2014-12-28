@@ -624,4 +624,6 @@ return array(
     // 'Unable to remove this swimlane.' => '',
     // 'Unable to update this swimlane.' => '',
     // 'Your swimlane have been created successfully.' => '',
+    // 'Example: "Bug, Feature Request, Improvement"' => '',
+    // 'Default categories for new projects (Comma-separated)' => '',
 );

@@ -624,4 +624,6 @@ return array(
     'Unable to remove this swimlane.' => '无法删除此泳道',
     'Unable to update this swimlane.' => '无法更新此泳道',
     'Your swimlane have been created successfully.' => '已经成功创建泳道。',
+    // 'Example: "Bug, Feature Request, Improvement"' => '',
+    // 'Default categories for new projects (Comma-separated)' => '',
 );

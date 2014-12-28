@@ -298,6 +298,8 @@ class Project extends Base
             $this->projectPermission->allowUser($project_id, $user_id);
         }
 
+        $this->category->createDefaultCategories($project_id);
+
         $this->db->closeTransaction();
 
         return (int) $project_id;

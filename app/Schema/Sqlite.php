@@ -5,7 +5,13 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 37;
+const VERSION = 38;
+
+function version_38($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('project_categories', ''));
+}
 
 function version_37($pdo)
 {

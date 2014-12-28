@@ -624,4 +624,6 @@ return array(
     'Unable to remove this swimlane.' => 'Impossible de supprimer cette swimlane.',
     'Unable to update this swimlane.' => 'Impossible de mettre à jour cette swimlane.',
     'Your swimlane have been created successfully.' => 'Votre swimlane a été créée avec succès.',
+    'Example: "Bug, Feature Request, Improvement"' => 'Exemple: « Incident, Demande de fonctionnalité, Amélioration »',
+    'Default categories for new projects (Comma-separated)' => 'Catégories par défaut pour les nouveaux projets (séparé par des virgules)',
 );

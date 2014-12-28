@@ -10,6 +10,8 @@ use Model\Task;
 use Model\TaskCreation;
 use Model\Acl;
 use Model\Board;
+use Model\Config;
+use Model\Category;
 
 class ProjectTest extends Base
 {
@@ -26,6 +28,64 @@ class ProjectTest extends Base
         $this->assertEquals(0, $project['is_private']);
         $this->assertEquals(time(), $project['last_modified']);
         $this->assertEmpty($project['token']);
+    }
+
+    public function testCreationWithDefaultCategories()
+    {
+        $p = new Project($this->container);
+        $c = new Config($this->container);
+        $cat = new Category($this->container);
+
+        // Multiple categories correctly formatted
+
+        $this->assertTrue($c->save(array('project_categories' => 'Test1, Test2')));
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
+
+        $project = $p->getById(1);
+        $this->assertNotEmpty($project);
+
+        $categories = $cat->getAll(1);
+        $this->assertNotEmpty($categories);
+        $this->assertEquals(2, count($categories));
+        $this->assertEquals('Test1', $categories[0]['name']);
+        $this->assertEquals('Test2', $categories[1]['name']);
+
+        // Single category
+
+        $this->assertTrue($c->save(array('project_categories' => 'Test1')));
+        $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
+
+        $project = $p->getById(2);
+        $this->assertNotEmpty($project);
+
+        $categories = $cat->getAll(2);
+        $this->assertNotEmpty($categories);
+        $this->assertEquals(1, count($categories));
+        $this->assertEquals('Test1', $categories[0]['name']);
+
+        // Multiple categories badly formatted
+
+        $this->assertTrue($c->save(array('project_categories' => 'ABC, , DEF 3,  ')));
+        $this->assertEquals(3, $p->create(array('name' => 'UnitTest3')));
+
+        $project = $p->getById(3);
+        $this->assertNotEmpty($project);
+
+        $categories = $cat->getAll(3);
+        $this->assertNotEmpty($categories);
+        $this->assertEquals(2, count($categories));
+        $this->assertEquals('ABC', $categories[0]['name']);
+        $this->assertEquals('DEF 3', $categories[1]['name']);
+
+        // No default categories
+        $this->assertTrue($c->save(array('project_categories' => '  ')));
+        $this->assertEquals(4, $p->create(array('name' => 'UnitTest4')));
+
+        $project = $p->getById(4);
+        $this->assertNotEmpty($project);
+
+        $categories = $cat->getAll(4);
+        $this->assertEmpty($categories);
     }
 
     public function testUpdateLastModifiedDate()
