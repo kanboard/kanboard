@@ -10,6 +10,10 @@ use Parsedown;
  *
  * @package core
  * @author  Frederic Guillot
+ *
+ * @property \Core\Session             $session
+ * @property \Model\Acl                $acl
+ * @property \Model\User               $user
  */
 class Helper
 {
@@ -501,14 +505,17 @@ class Helper
                     ->text($text);
 
         // Replace task #123 by a link to the task
-        $html = preg_replace_callback('!#(\d+)!i', function($matches) use ($link) { // TODO: Fix that
-            return a(
-                $matches[0],
-                $link['controller'],
-                $link['action'],
-                $link['params'] + array('task_id' => $matches[1])
-            );
-        }, $html);
+        if (preg_match_all('!#(\d+)!i', $html, $matches, PREG_SET_ORDER)) {
+
+            foreach ($matches as $match) {
+
+                $html = str_replace(
+                    $match[0],
+                    $this->a($match[0], $link['controller'], $link['action'], $link['params'] + array('task_id' => $match[1])),
+                    $html
+                );
+            }
+        }
 
         return $html;
     }
@@ -536,14 +543,7 @@ class Helper
      */
     public function flash($html)
     {
-        $data = '';
-
-        if (isset($_SESSION['flash_message'])) {
-            $data = sprintf($html, $this->e($_SESSION['flash_message']));
-            unset($_SESSION['flash_message']);
-        }
-
-        return $data;
+        return $this->flashMessage('flash_message', $html);
     }
 
     /**
@@ -554,11 +554,24 @@ class Helper
      */
     public function flashError($html)
     {
+        return $this->flashMessage('flash_error_message', $html);
+    }
+
+    /**
+     * Fetch and remove a flash session message
+     *
+     * @access private
+     * @param  string    $name    Message name
+     * @param  string    $html    HTML wrapper
+     * @return string
+     */
+    private function flashMessage($name, $html)
+    {
         $data = '';
 
-        if (isset($_SESSION['flash_error_message'])) {
-            $data = sprintf($html, $this->e($_SESSION['flash_error_message']));
-            unset($_SESSION['flash_error_message']);
+        if (isset($this->session[$name])) {
+            $data = sprintf($html, $this->e($this->session[$name]));
+            unset($this->session[$name]);
         }
 
         return $data;
