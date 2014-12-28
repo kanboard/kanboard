@@ -3,9 +3,7 @@
 namespace Model;
 
 use Core\Session;
-use Core\Translator;
 use Core\Template;
-use Event\NotificationListener;
 use Swift_Message;
 use Swift_Mailer;
 use Swift_TransportException;
@@ -29,8 +27,8 @@ class Notification extends Base
      * Get a list of people with notifications enabled
      *
      * @access public
-     * @param  integer   $project_id     Project id
-     * @param  array     $exlude_users   List of user_id to exclude
+     * @param  integer   $project_id      Project id
+     * @param  array     $exclude_users   List of user_id to exclude
      * @return array
      */
     public function getUsersWithNotification($project_id, array $exclude_users = array())
@@ -61,8 +59,8 @@ class Notification extends Base
      * Get the list of users to send the notification for a given project
      *
      * @access public
-     * @param  integer   $project_id     Project id
-     * @param  array     $exlude_users   List of user_id to exclude
+     * @param  integer   $project_id      Project id
+     * @param  array     $exclude_users   List of user_id to exclude
      * @return array
      */
     public function getUsersList($project_id, array $exclude_users = array())

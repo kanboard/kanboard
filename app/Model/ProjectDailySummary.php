@@ -2,8 +2,6 @@
 
 namespace Model;
 
-use Core\Template;
-
 /**
  * Project daily summary
  *

@@ -23,15 +23,15 @@ class WebhookSubscriber extends Base implements EventSubscriberInterface
 
     public function onTaskCreation(TaskEvent $event)
     {
-        $this->executeRequest('webhook_url_task_creation');
+        $this->executeRequest('webhook_url_task_creation', $event);
     }
 
     public function onTaskModification(TaskEvent $event)
     {
-        $this->executeRequest('webhook_url_task_modification');
+        $this->executeRequest('webhook_url_task_modification', $event);
     }
 
-    public function executeRequest($parameter)
+    public function executeRequest($parameter, TaskEvent $event)
     {
         $url = $this->config->get($parameter);
 

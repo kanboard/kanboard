@@ -16,7 +16,7 @@ class DatabaseProvider implements ServiceProviderInterface
     /**
      * Setup the database driver and execute schema migration
      *
-     * @return PicoDb\Database
+     * @return \PicoDb\Database
      */
     public function getInstance()
     {
@@ -49,7 +49,7 @@ class DatabaseProvider implements ServiceProviderInterface
     /**
      * Setup the Sqlite database driver
      *
-     * @return PicoDb\Database
+     * @return \PicoDb\Database
      */
     function getSqliteInstance()
     {
@@ -64,7 +64,7 @@ class DatabaseProvider implements ServiceProviderInterface
     /**
      * Setup the Mysql database driver
      *
-     * @return PicoDb\Database
+     * @return \PicoDb\Database
      */
     function getMysqlInstance()
     {
@@ -83,7 +83,7 @@ class DatabaseProvider implements ServiceProviderInterface
     /**
      * Setup the Postgres database driver
      *
-     * @return PicoDb\Database
+     * @return \PicoDb\Database
      */
     public function getPostgresInstance()
     {

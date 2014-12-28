@@ -2,8 +2,6 @@
 
 namespace Subscriber;
 
-use Event\TaskEvent;
-use Model\Task;
 use Pimple\Container;
 
 /**
@@ -11,6 +9,16 @@ use Pimple\Container;
  *
  * @package  subscriber
  * @author   Frederic Guillot
+ *
+ * @property \Model\Config                 $config
+ * @property \Model\Notification           $notification
+ * @property \Model\Project                $project
+ * @property \Model\ProjectPermission      $projectPermission
+ * @property \Model\ProjectAnalytic        $projectAnalytic
+ * @property \Model\ProjectDailySummary    $projectDailySummary
+ * @property \Model\Task                   $task
+ * @property \Model\TaskExport             $taskExport
+ * @property \Model\TaskFinder             $taskFinder
  */
 abstract class Base
 {

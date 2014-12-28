@@ -24,7 +24,7 @@ class TaskCreation extends Base
         $this->prepare($values);
         $task_id = $this->persist(Task::TABLE, $values);
 
-        if ($task_id) {
+        if ($task_id !== false) {
             $this->fireEvents($task_id, $values);
         }
 
