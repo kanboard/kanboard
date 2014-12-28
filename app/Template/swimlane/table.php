@@ -3,8 +3,8 @@
         <?php if (! isset($hide_position)): ?>
             <th><?= t('Position') ?></th>
         <?php endif ?>
-        <th class="column-70"><?= t('Name') ?></th>
-        <th><?= t('Actions') ?></th>
+        <th class="column-60"><?= t('Name') ?></th>
+        <th class="column-35"><?= t('Actions') ?></th>
     </tr>
     <?php foreach ($swimlanes as $swimlane): ?>
     <tr>

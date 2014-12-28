@@ -30,6 +30,15 @@
     td > input[type="text"] {
         max-width: 150px;
     }
+
+    .task-time-form label {
+        display: block;
+    }
+
+    .task-time-form input[type="submit"] {
+        margin-top: 10px;
+        display: block;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {

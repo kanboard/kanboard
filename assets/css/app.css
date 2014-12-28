@@ -156,6 +156,10 @@ th a:hover {
     width: 30%;
 }
 
+.column-35 {
+    width: 35%;
+}
+
 .column-40 {
     width: 40%;
 }
@@ -1153,6 +1157,7 @@ tr td.task-orange,
     border: 1px solid #ddd;
     color: #333;
     background-color: #fefefe;
+    overflow: auto;
 }
 
 .listing li {
@@ -1344,6 +1349,15 @@ tr td.task-orange,
 
     td > input[type="text"] {
         max-width: 150px;
+    }
+
+    .task-time-form label {
+        display: block;
+    }
+
+    .task-time-form input[type="submit"] {
+        margin-top: 10px;
+        display: block;
     }
 }
 

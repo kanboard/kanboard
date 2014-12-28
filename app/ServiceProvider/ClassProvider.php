@@ -27,7 +27,7 @@ class ClassProvider implements ServiceProviderInterface
             'Notification',
             'Project',
             'ProjectActivity',
-            'ProjectAnalytics',
+            'ProjectAnalytic',
             'ProjectDailySummary',
             'ProjectPaginator',
             'ProjectPermission',

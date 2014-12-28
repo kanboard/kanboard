@@ -7,8 +7,8 @@
 
     <table class="subtasks-table">
         <tr>
-            <th width="40%"><?= t('Title') ?></th>
-            <th><?= t('Status') ?></th>
+            <th class="column-40"><?= t('Title') ?></th>
+            <th class="column-15"><?= t('Status') ?></th>
             <th><?= t('Assignee') ?></th>
             <th><?= t('Time tracking') ?></th>
             <?php if (! isset($not_editable)): ?>
@@ -42,9 +42,14 @@
             </td>
             <?php if (! isset($not_editable)): ?>
                 <td>
-                    <?= $this->a(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
-                    <?= t('or') ?>
-                    <?= $this->a(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
+                    <ul>
+                        <li>
+                            <?= $this->a(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
+                        </li>
+                        <li>
+                            <?= $this->a(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
+                        </li>
+                    </ul>
                 </td>
             <?php endif ?>
         </tr>
