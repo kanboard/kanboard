@@ -3,7 +3,6 @@
 namespace Auth;
 
 use Core\Request;
-use Core\Security;
 
 /**
  * ReverseProxy backend

@@ -3,7 +3,6 @@
 namespace Model;
 
 use Core\Request;
-use Auth\Database;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 

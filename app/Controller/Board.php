@@ -2,10 +2,6 @@
 
 namespace Controller;
 
-use Model\Project as ProjectModel;
-use Model\User as UserModel;
-use Core\Security;
-
 /**
  * Board controller
  *

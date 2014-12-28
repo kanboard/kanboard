@@ -93,6 +93,7 @@ class TaskPosition extends Base
      *
      * @access private
      * @param  array       $columns          Sorted tasks
+     * @param  integer     $swimlane_id      Swimlane id
      * @return boolean
      */
     private function savePositions(array $columns, $swimlane_id)

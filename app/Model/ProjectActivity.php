@@ -69,13 +69,13 @@ class ProjectActivity extends Base
      * Get all events for the given projects list
      *
      * @access public
-     * @param  integer     $project_id      Project id
+     * @param  integer[]   $project_ids     Projects id
      * @param  integer     $limit           Maximum events number
      * @return array
      */
-    public function getProjects(array $projects, $limit = 50)
+    public function getProjects(array $project_ids, $limit = 50)
     {
-        if (empty($projects)) {
+        if (empty($project_ids)) {
             return array();
         }
 
@@ -85,7 +85,7 @@ class ProjectActivity extends Base
                                 User::TABLE.'.username AS author_username',
                                 User::TABLE.'.name AS author_name'
                            )
-                           ->in('project_id', $projects)
+                           ->in('project_id', $project_ids)
                            ->join(User::TABLE, 'id', 'creator_id')
                            ->desc('id')
                            ->limit($limit)

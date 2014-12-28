@@ -2,7 +2,6 @@
 
 namespace Model;
 
-use LogicException;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 

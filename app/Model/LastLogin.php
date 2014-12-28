@@ -32,7 +32,7 @@ class LastLogin extends Base
      * @param  integer  $user_id     User id
      * @param  string   $ip          IP Address
      * @param  string   $user_agent  User Agent
-     * @return array
+     * @return boolean
      */
     public function create($auth_type, $user_id, $ip, $user_agent)
     {

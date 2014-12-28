@@ -2,8 +2,6 @@
 
 namespace Model;
 
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
 use Core\Translator;
 use Core\Security;
 use Core\Session;

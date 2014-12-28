@@ -76,7 +76,6 @@ class TaskPaginator extends Base
      *
      * @access public
      * @param  integer   $project_id   Project id
-     * @param  array     $status       List of status id
      * @return integer
      */
     public function countClosedTasks($project_id)

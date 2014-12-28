@@ -2,7 +2,6 @@
 
 namespace Controller;
 
-use Model\Project as ProjectModel;
 use Model\SubTask as SubTaskModel;
 use Helper;
 
@@ -57,6 +56,11 @@ class App extends Base
      * Get tasks pagination
      *
      * @access public
+     * @param integer $user_id
+     * @param string $paginate
+     * @param integer $offset
+     * @param string $order
+     * @param string $direction
      */
     private function getTaskPagination($user_id, $paginate, $offset, $order, $direction)
     {
@@ -94,6 +98,11 @@ class App extends Base
      * Get subtasks pagination
      *
      * @access public
+     * @param integer $user_id
+     * @param string $paginate
+     * @param integer $offset
+     * @param string $order
+     * @param string $direction
      */
     private function getSubtaskPagination($user_id, $paginate, $offset, $order, $direction)
     {
@@ -132,8 +141,13 @@ class App extends Base
      * Get projects pagination
      *
      * @access public
+     * @param array $project_ids
+     * @param string $paginate
+     * @param integer $offset
+     * @param string $order
+     * @param string $direction
      */
-    private function getProjectPagination($project_ids, $paginate, $offset, $order, $direction)
+    private function getProjectPagination(array $project_ids, $paginate, $offset, $order, $direction)
     {
         $limit = 5;
 

@@ -24,7 +24,7 @@ class Board extends Base
      * Get Kanboard default columns
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getDefaultColumns()
     {

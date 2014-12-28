@@ -157,7 +157,7 @@ class ProjectPermission extends Base
      * @access public
      * @param  integer   $project_id   Project id
      * @param  integer   $user_id      User id
-     * @param  bool      $is_owner     Is user owner of the project
+     * @param  integer   $is_owner     Is user owner of the project
      * @return bool
      */
     public function setOwner($project_id, $user_id, $is_owner = 1)
@@ -165,7 +165,7 @@ class ProjectPermission extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
-                    ->eq('user_id', $user_id) 
+                    ->eq('user_id', $user_id)
                     ->update(array('is_owner' => $is_owner));
     }
 

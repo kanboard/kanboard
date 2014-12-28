@@ -211,7 +211,7 @@ class Swimlane extends Base
      *
      * @access public
      * @param  integer   $project_id
-     * @return bool
+     * @return integer
      */
     public function getLastPosition($project_id)
     {

@@ -2,8 +2,6 @@
 
 namespace Controller;
 
-use Model\Task as TaskModel;
-
 /**
  * Project controller
  *
@@ -249,7 +247,7 @@ class Project extends Base
 
         if ($valid) {
 
-            if ($this->projectPermission->allowUser($values['project_id'], $values['user_id'], $values['is_owner'])) {
+            if ($this->projectPermission->allowUser($values['project_id'], $values['user_id'])) {
                 $this->session->flash(t('Project updated successfully.'));
             }
             else {

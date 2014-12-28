@@ -3,9 +3,7 @@
 namespace Console;
 
 use Model\Project;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ProjectDailySummaryCalculation extends Base

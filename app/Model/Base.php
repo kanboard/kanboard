@@ -105,7 +105,7 @@ abstract class Base
      *
      * @access public
      * @param  array     $values    Input array
-     * @param  array     $keys      List of keys to remove
+     * @param  string[]  $keys      List of keys to remove
      */
     public function removeFields(array &$values, array $keys)
     {
@@ -120,8 +120,8 @@ abstract class Base
      * Force some fields to be at 0 if empty
      *
      * @access public
-     * @param  array     $values    Input array
-     * @param  array     $keys      List of keys
+     * @param  array        $values    Input array
+     * @param  string[]     $keys      List of keys
      */
     public function resetFields(array &$values, array $keys)
     {
@@ -136,8 +136,8 @@ abstract class Base
      * Force some fields to be integer
      *
      * @access public
-     * @param  array     $values    Input array
-     * @param  array     $keys      List of keys
+     * @param  array        $values    Input array
+     * @param  string[]     $keys      List of keys
      */
     public function convertIntegerFields(array &$values, array $keys)
     {

@@ -191,7 +191,6 @@ abstract class Base
      * Check if the event is compatible with the action
      *
      * @access public
-     * @param  array   $data   Event data dictionary
      * @return bool
      */
     public function hasCompatibleEvent()

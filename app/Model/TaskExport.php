@@ -108,7 +108,7 @@ class TaskExport extends Base
      * Get column titles
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getColumns()
     {
