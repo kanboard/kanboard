@@ -3,6 +3,7 @@
 namespace Auth;
 
 use Core\Request;
+use Event\AuthEvent;
 use Core\Security;
 
 /**
@@ -103,12 +104,9 @@ class RememberMe extends Base
                 $this->user->updateSession($this->user->getById($record['user_id']));
                 $this->acl->isRememberMe(true);
 
-                // Update last login infos
-                $this->lastLogin->create(
-                    self::AUTH_NAME,
-                    $this->acl->getUserId(),
-                    Request::getIpAddress(),
-                    Request::getUserAgent()
+                $this->container['dispatcher']->dispatch(
+                    'auth.success',
+                    new AuthEvent(self::AUTH_NAME, $this->acl->getUserId())
                 );
 
                 return true;

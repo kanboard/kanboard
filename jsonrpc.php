@@ -2,6 +2,10 @@
 
 require __DIR__.'/app/common.php';
 
+use Symfony\Component\EventDispatcher\Event;
+
+$container['dispatcher']->dispatch('api.bootstrap', new Event);
+
 $server = new JsonRPC\Server;
 $server->authentication(array('jsonrpc' => $container['config']->get('api_token')));
 

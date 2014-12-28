@@ -15,6 +15,3 @@ $container->register(new ServiceProvider\DatabaseProvider);
 $container->register(new ServiceProvider\ModelProvider);
 $container->register(new ServiceProvider\EventDispatcherProvider);
 $container->register(new ServiceProvider\MailerProvider);
-
-$container['config']->setupTranslations();
-$container['config']->setupTimezone();

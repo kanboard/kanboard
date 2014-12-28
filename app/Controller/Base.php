@@ -9,6 +9,7 @@ use Core\Response;
 use Core\Template;
 use Core\Session;
 use Model\LastLogin;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Base controller
@@ -140,6 +141,7 @@ abstract class Base
     {
         // Start the session
         $this->session->open(BASE_URL_DIRECTORY);
+        $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
 
         // HTTP secure headers
         $this->response->csp(array('style-src' => "'self' 'unsafe-inline'"));

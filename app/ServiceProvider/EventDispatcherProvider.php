@@ -4,18 +4,22 @@ namespace ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Subscriber\AuthSubscriber;
+use Subscriber\BootstrapSubscriber;
 use Subscriber\NotificationSubscriber;
 use Subscriber\ProjectActivitySubscriber;
 use Subscriber\ProjectDailySummarySubscriber;
 use Subscriber\ProjectModificationDateSubscriber;
 use Subscriber\WebhookSubscriber;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class EventDispatcherProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
         $container['dispatcher'] = new EventDispatcher;
+        $container['dispatcher']->addSubscriber(new BootstrapSubscriber($container));
+        $container['dispatcher']->addSubscriber(new AuthSubscriber($container));
         $container['dispatcher']->addSubscriber(new ProjectActivitySubscriber($container));
         $container['dispatcher']->addSubscriber(new ProjectDailySummarySubscriber($container));
         $container['dispatcher']->addSubscriber(new ProjectModificationDateSubscriber($container));
