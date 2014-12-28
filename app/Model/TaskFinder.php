@@ -74,17 +74,21 @@ class TaskFinder extends Base
      * @access public
      * @param  integer   $project_id      Project id
      * @param  integer   $status_id       Status id
+     * @param  integer   $exclude_id      Exclude this task id in the result
      * @param  integer   $limit           Number of tasks to list
      * @return array
      */
-    public function getList($project_id, $status_id = Task::STATUS_OPEN, $limit=50)
+    public function getList($project_id, $status_id = Task::STATUS_OPEN, $exclude_id=null, $limit=50)
     {
-        return $this->db
+        $sql = $this->db
                     ->table(Task::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('is_active', $status_id)
-                    ->limit($limit)
-                    ->listing('id', 'title');
+                    ->limit($limit);
+        if (null != $exclude_id) {
+            $sql->neq('id', $exclude_id);
+        }
+        return $sql->listing('id', 'title');
     }
 
     /**

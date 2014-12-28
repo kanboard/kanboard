@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Project as ProjectModel;
+use Model\Task as TaskModel;
 
 /**
  * Task controller
@@ -78,7 +79,7 @@ class Task extends Base
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'link_list' => $this->link->getList($task['project_id'], false),
-            'task_list' => $this->taskFinder->getList($task['project_id']),
+            'task_list' => $this->taskFinder->getList($task['project_id'], TaskModel::STATUS_OPEN, $task['id']),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $task['project_name'].' &gt; '.$task['title'],

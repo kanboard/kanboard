@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Model\Task;
 /**
  * TaskLink controller
  *
@@ -47,7 +48,7 @@ class Tasklink extends Base
             'values' => $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
-            'task_list' => $this->taskFinder->getAll($task['project_id']),
+            'task_list' => $this->taskFinder->getList($task['project_id'], Task::STATUS_OPEN, $task['id']),
             'task' => $task,
         )));
     }
@@ -64,7 +65,6 @@ class Tasklink extends Base
         list($valid, $errors) = $this->taskLink->validateCreation($values);
 
         if ($valid) {
-
             if ($this->taskLink->create($values)) {
                 $this->session->flash(t('Link added successfully.'));
                 if (isset($values['another_link']) && $values['another_link'] == 1) {
@@ -74,7 +74,7 @@ class Tasklink extends Base
                 $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
             }
             else {
-                $this->session->flashError(t('Unable to create your link.'));
+                $this->session->flashError(t('Unable to create your link: the linked task id doesn\'t exist.'));
             }
         }
 
@@ -95,7 +95,7 @@ class Tasklink extends Base
             'values' => empty($values) ? $taskLink : $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
-        	'task_list' => $this->taskFinder->getAll($task['project_id']),
+        	'task_list' => $this->taskFinder->getList($task['project_id'], Task::STATUS_OPEN, $task['id']),
             'link' => $taskLink,
             'task' => $task,
         )));
