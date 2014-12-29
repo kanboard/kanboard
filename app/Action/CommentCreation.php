@@ -2,7 +2,7 @@
 
 namespace Action;
 
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 
 /**
  * Create automatically a comment from a webhook

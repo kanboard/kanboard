@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Integration\GitlabWebhook;
+use Integration\GithubWebhook;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
@@ -79,6 +81,9 @@ class Action extends Base
             GithubWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE => t('Github issue assignee change'),
             GithubWebhook::EVENT_ISSUE_LABEL_CHANGE => t('Github issue label change'),
             GithubWebhook::EVENT_ISSUE_COMMENT => t('Github issue comment created'),
+            GitlabWebhook::EVENT_COMMIT => t('Gitlab commit received'),
+            GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
+            GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
         );
 
         asort($values);

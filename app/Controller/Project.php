@@ -52,7 +52,6 @@ class Project extends Base
         $this->response->html($this->projectLayout('project/show', array(
             'project' => $project,
             'stats' => $this->project->getStats($project['id']),
-            'webhook_token' => $this->config->get('webhook_token'),
             'title' => $project['name'],
         )));
     }
@@ -149,6 +148,22 @@ class Project extends Base
         $this->response->html($this->projectLayout('project/share', array(
             'project' => $project,
             'title' => t('Public access'),
+        )));
+    }
+
+    /**
+     * Integrations page
+     *
+     * @access public
+     */
+    public function integration()
+    {
+        $project = $this->getProjectManagement();
+
+        $this->response->html($this->projectLayout('project/integrations', array(
+            'project' => $project,
+            'title' => t('Integrations'),
+            'webhook_token' => $this->config->get('webhook_token'),
         )));
     }
 

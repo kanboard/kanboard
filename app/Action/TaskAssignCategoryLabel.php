@@ -2,7 +2,7 @@
 
 namespace Action;
 
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 
 /**
  * Set a category automatically according to a label

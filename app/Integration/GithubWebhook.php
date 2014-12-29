@@ -1,13 +1,14 @@
 <?php
 
-namespace Model;
+namespace Integration;
 
 use Event\GenericEvent;
+use Model\Task;
 
 /**
- * Github Webhook model
+ * Github Webhook
  *
- * @package  model
+ * @package  integration
  * @author   Frederic Guillot
  */
 class GithubWebhook extends Base
@@ -89,7 +90,7 @@ class GithubWebhook extends Base
                 continue;
             }
 
-            if ($task['is_active'] == Task::STATUS_OPEN) {
+            if ($task['is_active'] == Task::STATUS_OPEN && $task['project_id'] == $this->project_id) {
                 $this->container['dispatcher']->dispatch(
                     self::EVENT_COMMIT,
                     new GenericEvent(array('task_id' => $task_id) + $task)

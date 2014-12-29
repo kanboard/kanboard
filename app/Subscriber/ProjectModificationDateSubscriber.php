@@ -4,7 +4,7 @@ namespace Subscriber;
 
 use Event\GenericEvent;
 use Model\Task;
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ProjectModificationDateSubscriber extends Base implements EventSubscriberInterface

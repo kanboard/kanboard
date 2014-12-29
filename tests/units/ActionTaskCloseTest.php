@@ -7,7 +7,7 @@ use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 
 class ActionTaskCloseTest extends Base
 {

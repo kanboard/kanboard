@@ -29,6 +29,7 @@ use Pimple\Container;
  * @property \Model\ProjectPermission  $projectPermission
  * @property \Model\SubTask            $subTask
  * @property \Model\SubtaskHistory     $subtaskHistory
+ * @property \Model\Swimlane           $swimlane
  * @property \Model\Task               $task
  * @property \Model\TaskCreation       $taskCreation
  * @property \Model\TaskExport         $taskExport

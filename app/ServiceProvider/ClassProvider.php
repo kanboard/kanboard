@@ -22,7 +22,6 @@ class ClassProvider implements ServiceProviderInterface
             'Config',
             'DateParser',
             'File',
-            'GithubWebhook',
             'LastLogin',
             'Notification',
             'Project',
@@ -53,6 +52,10 @@ class ClassProvider implements ServiceProviderInterface
             'Template',
             'Session',
         ),
+        'Integration' => array(
+            'GitlabWebhook',
+            'GithubWebhook',
+        )
     );
 
     public function register(Container $container)

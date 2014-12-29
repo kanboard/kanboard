@@ -21,7 +21,7 @@ class Acl extends Base
         'task' => array('readonly'),
         'board' => array('readonly'),
         'project' => array('feed'),
-        'webhook' => array('task', 'github'),
+        'webhook' => array('task', 'github', 'gitlab'),
     );
 
     /**

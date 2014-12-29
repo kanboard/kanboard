@@ -10,6 +10,9 @@
             <?= $this->a(t('Public access'), 'project', 'share', array('project_id' => $project['id'])) ?>
         </li>
         <li>
+            <?= $this->a(t('Integrations'), 'project', 'integration', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
             <?= $this->a(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
         </li>
         <?php endif ?>

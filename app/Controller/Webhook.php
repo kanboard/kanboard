@@ -57,7 +57,27 @@ class Webhook extends Base
 
         $result = $this->githubWebhook->parsePayload(
             $this->request->getHeader('X-Github-Event'),
-            $this->request->getJson()
+            $this->request->getJson() ?: array()
+        );
+
+        echo $result ? 'PARSED' : 'IGNORED';
+    }
+
+    /**
+     * Handle Gitlab webhooks
+     *
+     * @access public
+     */
+    public function gitlab()
+    {
+        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
+            $this->response->text('Not Authorized', 401);
+        }
+
+        $this->gitlabWebhook->setProjectId($this->request->getIntegerParam('project_id'));
+
+        $result = $this->gitlabWebhook->parsePayload(
+            $this->request->getJson() ?: array()
         );
 
         echo $result ? 'PARSED' : 'IGNORED';

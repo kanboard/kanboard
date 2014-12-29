@@ -53,14 +53,3 @@
     </tr>
     <?php endforeach ?>
 </table>
-
-<?php if ($this->acl->isAdminUser()): ?>
-<div class="page-header">
-    <h2><?= t('Integration') ?></h2>
-</div>
-
-<h3><i class="fa fa-github fa-fw"></i><?= t('Github webhook') ?></h3>
-<input type="text" class="auto-select" readonly="readonly" value="<?= $this->getCurrentBaseUrl().$this->u('webhook', 'github', array('token' => $webhook_token, 'project_id' => $project['id'])) ?>"/><br/>
-<p class="form-help"><a href="http://kanboard.net/documentation/github-webhooks" target="_blank"><?= t('Help on Github webhook') ?></a></p>
-
-<?php endif ?>

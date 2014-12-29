@@ -10,10 +10,10 @@ use Model\TaskPosition;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Category;
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 
 class ActionTest extends Base
-{/*
+{
     public function testSingleAction()
     {
         $tp = new TaskPosition($this->container);
@@ -61,7 +61,7 @@ class ActionTest extends Base
         $this->assertEquals(4, $t1['column_id']);
         $this->assertEquals(0, $t1['is_active']);
     }
-*/
+
     public function testMultipleActions()
     {
         $tp = new TaskPosition($this->container);
