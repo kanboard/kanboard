@@ -175,6 +175,7 @@ Contributors:
 - [Oliver Bertuch](https://github.com/poikilotherm)
 - [Olivier Maridat](https://github.com/oliviermaridat)
 - [Peller Zoltan](https://github.com/PierP)
+- [Petja Touru](https://github.com/Petja)
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
 - [René Stoltenberg](https://github.com/rstoltenberg)
