@@ -3,34 +3,37 @@
 </div>
 
 <?php if ($project['is_everybody_allowed']): ?>
-    <div class="alert alert-info"><?= t('Everybody have access to this project.') ?></div>
+    <div class="alert"><?= t('Everybody have access to this project.') ?></div>
 <?php else: ?>
 
     <?php if (empty($users['allowed'])): ?>
         <div class="alert alert-error"><?= t('Nobody have access to this project.') ?></div>
     <?php else: ?>
-    <div class="alert alert-info">
-        <p><?= t('Only those users have access to this project:') ?></p>
-        <ul>
-        <?php foreach ($users['allowed'] as $user_id => $username): ?>
-            <li>
-                <strong><?= $this->e($username) ?></strong>
-                <?php $is_owner = array_key_exists($user_id, $users['owners']);
-                      if ($is_owner): ?> [owner] <?php endif ?>
-                <?php if ($project['is_private'] == 0): ?>
-                    <?php if ($is_owner): ?>
-                        (<a href=<?= $this->u('project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?> ><?= t('set user') ?></a>
-                    <?php else: ?>
-                        (<a href=<?= $this->u('project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?> ><?= t('set manager') ?></a>
-                    <?php endif ?>
-                    or
-                    <?= $this->a(t('revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?>)
-                <?php endif ?>
-            </li>
-        <?php endforeach ?>
-        </ul>
-        <p><?= t('Don\'t forget that administrators have access to everything.') ?></p>
-    </div>
+        <table>
+            <tr>
+                <th><?= t('User') ?></th>
+                <th><?= t('Role for this project') ?></th>
+                <th><?= t('Actions') ?></th>
+            </tr>
+            <?php foreach ($users['allowed'] as $user_id => $username): ?>
+            <tr>
+                <td><?= $this->e($username) ?></td>
+                <td><?= isset($users['owners'][$user_id]) ? t('Project manager') : t('Project member') ?></td>
+                <td>
+                    <ul>
+                        <li><?= $this->a(t('Revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?></li>
+                        <li>
+                            <?php if (isset($users['owners'][$user_id])): ?>
+                                <?= $this->a(t('Set project member'), 'project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?>
+                            <?php else: ?>
+                                <?= $this->a(t('Set project manager'), 'project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?>
+                            <?php endif ?>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <?php endforeach ?>
+        </table>
     <?php endif ?>
 
     <?php if ($project['is_private'] == 0 && ! empty($users['not_allowed'])): ?>
@@ -65,3 +68,10 @@
     </div>
 </form>
 <?php endif ?>
+
+<div class="alert alert-info">
+    <ul>
+        <li><?= t('A project manager can change the settings of the project and have more privileges than a standard user.') ?></li>
+        <li><?= t('Don\'t forget that administrators have access to everything.') ?></li>
+    </ul>
+</div>
