@@ -22,7 +22,7 @@ class ProjectActivity extends Base
      *
      * @var integer
      */
-    const MAX_EVENTS = 5000;
+    const MAX_EVENTS = 1000;
 
     /**
      * Add a new event for the project
@@ -43,7 +43,7 @@ class ProjectActivity extends Base
             'creator_id' => $creator_id,
             'event_name' => $event_name,
             'date_creation' => time(),
-            'data' => serialize($data),
+            'data' => json_encode($data),
         );
 
         $this->cleanup(self::MAX_EVENTS - 1);
@@ -91,7 +91,7 @@ class ProjectActivity extends Base
 
         foreach ($events as &$event) {
 
-            $event += unserialize($event['data']);
+            $event += $this->decode($event['data']);
             unset($event['data']);
 
             $event['author'] = $event['author_name'] ?: $event['author_username'];
@@ -173,5 +173,21 @@ class ProjectActivity extends Base
             default:
                 return '';
         }
+    }
+
+    /**
+     * Decode event data, supports unserialize() and json_decode()
+     *
+     * @access public
+     * @param  string   $data   Serialized data
+     * @return array
+     */
+    public function decode($data)
+    {
+        if ($data{0} === 'a') {
+            return unserialize($data);
+        }
+
+        return json_decode($data, true) ?: array();
     }
 }
