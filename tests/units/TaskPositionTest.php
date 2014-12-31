@@ -396,6 +396,7 @@ class TaskPositionTest extends Base
         $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(4, $tc->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(5, $tc->create(array('title' => 'Task #5', 'project_id' => 1, 'column_id' => 1)));
 
         // Move the task to the swimlane
         $this->assertTrue($tp->movePosition(1, 1, 2, 1, 1));
@@ -451,6 +452,40 @@ class TaskPositionTest extends Base
         $this->assertEquals(4, $task['id']);
         $this->assertEquals(1, $task['column_id']);
         $this->assertEquals(2, $task['position']);
+        $this->assertEquals(0, $task['swimlane_id']);
+
+        // Move the task 5 to the last column
+        $this->assertTrue($tp->movePosition(1, 5, 4, 1, 0));
+
+        // Check tasks position
+        $task = $tf->getById(1);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+        $this->assertEquals(1, $task['swimlane_id']);
+
+        $task = $tf->getById(2);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(1, $task['swimlane_id']);
+
+        $task = $tf->getById(3);
+        $this->assertEquals(3, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(0, $task['swimlane_id']);
+
+        $task = $tf->getById(4);
+        $this->assertEquals(4, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+        $this->assertEquals(0, $task['swimlane_id']);
+
+        $task = $tf->getById(5);
+        $this->assertEquals(5, $task['id']);
+        $this->assertEquals(4, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
         $this->assertEquals(0, $task['swimlane_id']);
     }
 

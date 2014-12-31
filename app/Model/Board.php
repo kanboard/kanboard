@@ -239,15 +239,15 @@ class Board extends Base
         $columns = $this->getColumns($project_id);
         $nb_columns = count($columns);
 
-        foreach ($swimlanes as &$swimlane) {
+        for ($i = 0, $ilen = count($swimlanes); $i < $ilen; $i++) {
 
-            foreach ($columns as &$column) {
-                $column['tasks'] = $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $column['id'], $swimlane['id']);
-                $column['nb_tasks'] = count($column['tasks']);
+            $swimlanes[$i]['columns'] = $columns;
+            $swimlanes[$i]['nb_columns'] = $nb_columns;
+
+            for ($j = 0; $j < $nb_columns; $j++) {
+                $swimlanes[$i]['columns'][$j]['tasks'] = $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $columns[$j]['id'], $swimlanes[$i]['id']);
+                $swimlanes[$i]['columns'][$j]['nb_tasks'] = count($swimlanes[$i]['columns'][$j]['tasks']);
             }
-
-            $swimlane['columns'] = $columns;
-            $swimlane['nb_columns'] = $nb_columns;
         }
 
         return $swimlanes;

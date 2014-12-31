@@ -51,9 +51,10 @@ class TaskCreation extends Base
             $values['color_id'] = $this->color->getDefaultColor();
         }
 
+        $values['swimlane_id'] = empty($values['swimlane_id']) ? 0 : $values['swimlane_id'];
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
-        $values['position'] = $this->taskFinder->countByColumnId($values['project_id'], $values['column_id']) + 1;
+        $values['position'] = $this->taskFinder->countByColumnAndSwimlaneId($values['project_id'], $values['column_id'], $values['swimlane_id']) + 1;
     }
 
     /**

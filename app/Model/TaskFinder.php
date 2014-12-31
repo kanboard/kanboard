@@ -230,6 +230,26 @@ class TaskFinder extends Base
     }
 
     /**
+     * Count the number of tasks for a given column and swimlane
+     *
+     * @access public
+     * @param  integer   $project_id     Project id
+     * @param  integer   $column_id      Column id
+     * @param  integer   $swimlane_id    Swimlane id
+     * @return integer
+     */
+    public function countByColumnAndSwimlaneId($project_id, $column_id, $swimlane_id)
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('column_id', $column_id)
+                    ->eq('swimlane_id', $swimlane_id)
+                    ->in('is_active', 1)
+                    ->count();
+    }
+
+    /**
      * Return true if the task exists
      *
      * @access public
