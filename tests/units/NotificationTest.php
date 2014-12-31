@@ -35,10 +35,10 @@ class NotificationTest extends Base
         $this->assertEmpty($n->getUsersWithNotification(1));
 
         // We allow all users to be member of our projects
-        $this->assertTrue($pp->allowUser(1, 1));
-        $this->assertTrue($pp->allowUser(1, 2));
-        $this->assertTrue($pp->allowUser(1, 3));
-        $this->assertTrue($pp->allowUser(1, 4));
+        $this->assertTrue($pp->addMember(1, 1));
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addMember(1, 3));
+        $this->assertTrue($pp->addMember(1, 4));
 
         $this->assertNotEmpty($pp->getMembers(1));
         $users = $n->getUsersWithNotification(1);
@@ -73,15 +73,15 @@ class NotificationTest extends Base
         $this->assertNotFalse($u->create(array('username' => 'user4')));
 
         // We allow all users to be member of our projects
-        $this->assertTrue($pp->allowUser(1, 1));
-        $this->assertTrue($pp->allowUser(1, 2));
-        $this->assertTrue($pp->allowUser(1, 3));
-        $this->assertTrue($pp->allowUser(1, 4));
+        $this->assertTrue($pp->addMember(1, 1));
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addMember(1, 3));
+        $this->assertTrue($pp->addMember(1, 4));
 
-        $this->assertTrue($pp->allowUser(2, 1));
-        $this->assertTrue($pp->allowUser(2, 2));
-        $this->assertTrue($pp->allowUser(2, 3));
-        $this->assertTrue($pp->allowUser(2, 4));
+        $this->assertTrue($pp->addMember(2, 1));
+        $this->assertTrue($pp->addMember(2, 2));
+        $this->assertTrue($pp->addMember(2, 3));
+        $this->assertTrue($pp->addMember(2, 4));
 
         $users = $n->getUsersList(1);
         $this->assertNotEmpty($users);

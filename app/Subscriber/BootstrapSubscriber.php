@@ -16,7 +16,7 @@ class BootstrapSubscriber extends Base implements EventSubscriberInterface
 
     public function setup()
     {
-        $this->container['config']->setupTranslations();
-        $this->container['config']->setupTimezone();
+        $this->config->setupTranslations();
+        $this->config->setupTimezone();
     }
 }

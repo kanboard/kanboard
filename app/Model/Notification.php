@@ -66,7 +66,7 @@ class Notification extends Base
     {
         // Exclude the connected user
         if (Session::isOpen()) {
-            $exclude_users[] = $this->acl->getUserId();
+            $exclude_users[] = $this->userSession->getId();
         }
 
         $users = $this->getUsersWithNotification($project_id, $exclude_users);

@@ -74,6 +74,7 @@
     }
 }
 
+#main .alert,
 .page .alert {
     margin-top: 10px;
 }

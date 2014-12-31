@@ -2,7 +2,7 @@
     <h2><?= t('Edit a comment') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->u('comment', 'update', array('task_id' => $task['id'], 'comment_id' => $comment['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('comment', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>" autocomplete="off">
 
     <?= $this->formCsrf() ?>
     <?= $this->formHidden('id', $values) ?>
@@ -30,6 +30,6 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Update') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
-        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
 </form>

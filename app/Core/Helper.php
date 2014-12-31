@@ -498,14 +498,14 @@ class Helper
      * @param  array     $link     Link parameters for replacement
      * @return string
      */
-    public function markdown($text, array $link = array('controller' => 'task', 'action' => 'show', 'params' => array()))
+    public function markdown($text, array $link = array())
     {
         $html = Parsedown::instance()
                     ->setMarkupEscaped(true) # escapes markup (HTML)
                     ->text($text);
 
         // Replace task #123 by a link to the task
-        if (preg_match_all('!#(\d+)!i', $html, $matches, PREG_SET_ORDER)) {
+        if (! empty($link) && preg_match_all('!#(\d+)!i', $html, $matches, PREG_SET_ORDER)) {
 
             foreach ($matches as $match) {
 

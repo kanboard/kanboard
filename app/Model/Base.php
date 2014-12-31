@@ -39,6 +39,7 @@ use Pimple\Container;
  * @property \Model\TaskValidator      $taskValidator
  * @property \Model\TimeTracking       $timeTracking
  * @property \Model\User               $user
+ * @property \Model\UserSession        $userSession
  * @property \Model\Webhook            $webhook
  */
 abstract class Base

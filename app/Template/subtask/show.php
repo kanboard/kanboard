@@ -21,7 +21,7 @@
             <td>
                 <?php if (! isset($not_editable)): ?>
                     <?= $this->a(trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['status_name']),
-                                 'subtask', 'toggleStatus', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
+                                 'subtask', 'toggleStatus', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
                 <?php else: ?>
                     <?= $this->render('subtask/icons', array('subtask' => $subtask)) . $this->e($subtask['status_name']) ?>
                 <?php endif ?>
@@ -57,7 +57,7 @@
     </table>
 
     <?php if (! isset($not_editable)): ?>
-        <form method="post" action="<?= $this->u('subtask', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off">
+        <form method="post" action="<?= $this->u('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
             <?= $this->formCsrf() ?>
             <?= $this->formHidden('task_id', array('task_id' => $task['id'])) ?>
             <?= $this->formText('title', array(), array(), array('required', 'placeholder="'.t('Type here to create a new sub-task').'"')) ?>

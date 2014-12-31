@@ -227,6 +227,7 @@ class SubTask extends Base
             $subtasks = $db->table(SubTask::TABLE)
                                  ->columns('title', 'time_estimated')
                                  ->eq('task_id', $src_task_id)
+                                 ->asc('id') // Explicit sorting for postgresql
                                  ->findAll();
 
             foreach ($subtasks as &$subtask) {

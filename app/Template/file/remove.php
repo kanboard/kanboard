@@ -8,8 +8,8 @@
     </p>
 
     <div class="form-actions">
-        <?= $this->a(t('Yes'), 'file', 'remove', array('task_id' => $task['id'], 'file_id' => $file['id']), true, 'btn btn-red') ?>
+        <?= $this->a(t('Yes'), 'file', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
 </div>

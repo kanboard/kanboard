@@ -2,7 +2,7 @@
     <h2><?= t('Edit the description') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->u('task', 'description', array('task_id' => $task['id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
 
     <?= $this->formCsrf() ?>
     <?= $this->formHidden('id', $values) ?>
@@ -32,7 +32,7 @@
         <?php if ($ajax): ?>
             <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
         <?php else: ?>
-            <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+            <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         <?php endif ?>
     </div>
 </form>

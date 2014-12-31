@@ -72,6 +72,7 @@ class TaskPosition extends Base
                           ->eq('column_id', $board_column_id)
                           ->neq('id', $task_id)
                           ->asc('position')
+                          ->asc('id') // Fix Postgresql unit test
                           ->findAllByColumn('id');
         }
 

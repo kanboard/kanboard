@@ -11,7 +11,7 @@ use Pimple\Container;
  * @package action
  * @author  Frederic Guillot
  *
- * @property \Model\Acl                $acl
+ * @property \Model\UserSession        $userSession
  * @property \Model\Comment            $comment
  * @property \Model\Task               $task
  * @property \Model\TaskCreation       $taskCreation

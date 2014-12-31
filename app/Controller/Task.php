@@ -126,9 +126,7 @@ class Task extends Base
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
-        $values['creator_id'] = $this->acl->getUserId();
-
-        $this->checkProjectPermissions($project['id']);
+        $values['creator_id'] = $this->userSession->getId();
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
@@ -207,7 +205,7 @@ class Task extends Base
                     $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
                 }
                 else {
-                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
                 }
             }
             else {
@@ -248,7 +246,7 @@ class Task extends Base
             $this->session->flashError(t('Unable to update your task.'));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
     }
 
     /**
@@ -270,7 +268,7 @@ class Task extends Base
                 $this->session->flashError(t('Unable to close this task.'));
             }
 
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
         }
 
         $this->response->html($this->taskLayout('task/close', array(
@@ -297,7 +295,7 @@ class Task extends Base
                 $this->session->flashError(t('Unable to open this task.'));
             }
 
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
         }
 
         $this->response->html($this->taskLayout('task/open', array(
@@ -352,10 +350,10 @@ class Task extends Base
 
             if ($task_id) {
                 $this->session->flash(t('Task created successfully.'));
-                $this->response->redirect('?controller=task&action=show&task_id='.$task_id);
+                $this->response->redirect('?controller=task&action=show&task_id='.$task_id.'&project_id='.$task['project_id']);
             } else {
                 $this->session->flashError(t('Unable to create this task.'));
-                $this->response->redirect('?controller=task&action=duplicate&task_id='.$task['id']);
+                $this->response->redirect('?controller=task&action=duplicate&task_id='.$task['id'].'&project_id='.$task['project_id']);
             }
         }
 
@@ -393,7 +391,7 @@ class Task extends Base
                     $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
                 }
                 else {
-                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
                 }
             }
         }
@@ -427,7 +425,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $task;
         $errors = array();
-        $projects_list = $this->projectPermission->getMemberProjects($this->acl->getUserId());
+        $projects_list = $this->projectPermission->getMemberProjects($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 
@@ -440,7 +438,7 @@ class Task extends Base
 
                 if ($this->taskDuplication->moveToProject($task['id'], $values['project_id'])) {
                     $this->session->flash(t('Task updated successfully.'));
-                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
                 }
                 else {
                     $this->session->flashError(t('Unable to update your task.'));
@@ -466,7 +464,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $task;
         $errors = array();
-        $projects_list = $this->projectPermission->getMemberProjects($this->acl->getUserId());
+        $projects_list = $this->projectPermission->getMemberProjects($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 
@@ -479,7 +477,7 @@ class Task extends Base
                 $task_id = $this->taskDuplication->duplicateToProject($task['id'], $values['project_id']);
                 if ($task_id) {
                     $this->session->flash(t('Task created successfully.'));
-                    $this->response->redirect('?controller=task&action=show&task_id='.$task_id);
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task_id.'&project_id='.$task['project_id']);
                 }
                 else {
                     $this->session->flashError(t('Unable to create your task.'));

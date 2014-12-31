@@ -51,6 +51,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\SubtaskHistory         $subtaskHistory
  * @property \Model\TimeTracking           $timeTracking
  * @property \Model\User                   $user
+ * @property \Model\UserSession            $userSession
  * @property \Model\Webhook                $webhook
  */
 abstract class Base
@@ -117,16 +118,12 @@ abstract class Base
     }
 
     /**
-     * Method executed before each action
+     * Send HTTP headers
      *
-     * @access public
+     * @access private
      */
-    public function beforeAction($controller, $action)
+    private function sendHeaders($action)
     {
-        // Start the session
-        $this->session->open(BASE_URL_DIRECTORY);
-        $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
-
         // HTTP secure headers
         $this->response->csp(array('style-src' => "'self' 'unsafe-inline'"));
         $this->response->nosniff();
@@ -140,8 +137,32 @@ abstract class Base
         if (ENABLE_HSTS) {
             $this->response->hsts();
         }
+    }
 
-        // Authentication
+    /**
+     * Method executed before each action
+     *
+     * @access public
+     */
+    public function beforeAction($controller, $action)
+    {
+        // Start the session
+        $this->session->open(BASE_URL_DIRECTORY);
+        $this->sendHeaders($action);
+        $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
+
+        if (! $this->acl->isPublicAction($controller, $action)) {
+            $this->handleAuthenticatedUser($controller, $action);
+        }
+    }
+
+    /**
+     * Check page access and authentication
+     *
+     * @access public
+     */
+    public function handleAuthenticatedUser($controller, $action)
+    {
         if (! $this->authentication->isAuthenticated($controller, $action)) {
 
             if ($this->request->isAjax()) {
@@ -151,9 +172,8 @@ abstract class Base
             $this->response->redirect('?controller=user&action=login&redirect_query='.urlencode($this->request->getQueryString()));
         }
 
-        // Check if the user is allowed to see this page
-        if (! $this->acl->isPageAccessAllowed($controller, $action)) {
-            $this->response->redirect('?controller=user&action=forbidden');
+        if (! $this->acl->isAllowed($controller, $action, $this->request->getIntegerParam('project_id', 0))) {
+            $this->forbidden();
         }
     }
 
@@ -198,33 +218,6 @@ abstract class Base
     }
 
     /**
-     * Check if the current user have access to the given project
-     *
-     * @access protected
-     * @param  integer   $project_id  Project id
-     */
-    protected function checkProjectPermissions($project_id)
-    {
-        if ($this->acl->isRegularUser() && ! $this->projectPermission->isUserAllowed($project_id, $this->acl->getUserId())) {
-            $this->forbidden();
-        }
-    }
-
-    /**
-     * Check if the current user is owner of the given project
-     *
-     * @access protected
-     * @param  integer   $project_id  Project id
-     */
-    protected function checkProjectOwnerPermissions($project_id)
-    {
-        if (! $this->acl->isAdminUser() &&
-            ! ($this->acl->isRegularUser() && $this->projectPermission->isOwner($project_id, $this->acl->getUserId()))) {
-            $this->forbidden();
-        }
-    }
-
-    /**
      * Redirection when there is no project in the database
      *
      * @access protected
@@ -252,7 +245,7 @@ abstract class Base
         $content = $this->template->render($template, $params);
         $params['task_content_for_layout'] = $content;
         $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
+        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
 
         return $this->template->layout('task/layout', $params);
     }
@@ -270,8 +263,7 @@ abstract class Base
         $content = $this->template->render($template, $params);
         $params['project_content_for_layout'] = $content;
         $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
-        $params['is_owner'] = $this->projectPermission->isOwner($params['project']['id'], $this->acl->getUserId());
+        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
 
         return $this->template->layout('project/layout', $params);
     }
@@ -286,11 +278,9 @@ abstract class Base
     {
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
-        if (! $task) {
+        if (! $task || $task['project_id'] != $this->request->getIntegerParam('project_id')) {
             $this->notfound();
         }
-
-        $this->checkProjectPermissions($task['project_id']);
 
         return $task;
     }
@@ -310,29 +300,6 @@ abstract class Base
         if (! $project) {
             $this->session->flashError(t('Project not found.'));
             $this->response->redirect('?controller=project');
-        }
-
-        $this->checkProjectPermissions($project['id']);
-
-        return $project;
-    }
-
-    /**
-     * Common method to get a project with administration rights
-     *
-     * @access protected
-     * @return array
-     */
-    protected function getProjectManagement()
-    {
-        $project = $this->project->getById($this->request->getIntegerParam('project_id'));
-
-        if (! $project) {
-            $this->notfound();
-        }
-
-        if ($this->acl->isRegularUser() && ! $this->projectPermission->adminAllowed($project['id'], $this->acl->getUserId())) {
-            $this->forbidden();
         }
 
         return $project;

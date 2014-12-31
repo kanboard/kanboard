@@ -48,6 +48,7 @@ class TaskExportTest extends Base
         }
 
         $rows = $e->export(1, strtotime('-1 day'), strtotime('+1 day'));
+
         $this->assertEquals($i, count($rows));
         $this->assertEquals('Task Id', $rows[0][0]);
         $this->assertEquals(1, $rows[1][0]);

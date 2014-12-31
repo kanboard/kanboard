@@ -34,7 +34,7 @@ class App extends Base
         $direction = $this->request->getStringParam('direction');
         $order = $this->request->getStringParam('order');
 
-        $user_id = $this->acl->getUserId();
+        $user_id = $this->userSession->getId();
         $projects = $this->projectPermission->getMemberProjects($user_id);
         $project_ids = array_keys($projects);
 
@@ -191,8 +191,9 @@ class App extends Base
             $this->response->html('<p>'.t('Nothing to preview...').'</p>');
         }
         else {
-            $this->response->html($this->template->markdown($payload['text']));
+            $this->response->html(
+                $this->template->markdown($payload['text'])
+            );
         }
     }
-
 }

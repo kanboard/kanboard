@@ -19,6 +19,7 @@ use Pimple\Container;
  * @property \Model\Task                   $task
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder
+ * @property \Model\UserSession            $userSession
  */
 abstract class Base
 {

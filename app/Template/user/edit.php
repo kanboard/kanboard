@@ -20,7 +20,7 @@
     <?= $this->formLabel(t('Default project'), 'default_project_id') ?>
     <?= $this->formSelect('default_project_id', $projects, $values, $errors) ?><br/>
 
-    <?php if ($this->acl->isAdminUser()): ?>
+    <?php if ($this->userSession->isAdmin()): ?>
         <?= $this->formCheckbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1 ? true : false) ?><br/>
     <?php endif ?>
 

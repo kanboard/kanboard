@@ -1,4 +1,4 @@
-<form method="post" action="<?= $this->u('task', 'time', array('task_id' => $values['id'])) ?>" class="form-inline task-time-form" autocomplete="off">
+<form method="post" action="<?= $this->u('task', 'time', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" class="form-inline task-time-form" autocomplete="off">
     <?= $this->formCsrf() ?>
     <?= $this->formHidden('id', $values) ?>
 

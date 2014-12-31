@@ -109,7 +109,7 @@ class Project extends Base
 
             foreach ($projects as $key => $project) {
 
-                if (! $this->projectPermission->isUserAllowed($project['id'], $this->acl->getUserId())) {
+                if (! $this->projectPermission->isUserAllowed($project['id'], $this->userSession->getId())) {
                     unset($projects[$key]);
                 }
             }
@@ -295,7 +295,7 @@ class Project extends Base
         }
 
         if ($add_user && $user_id) {
-            $this->projectPermission->allowUser($project_id, $user_id);
+            $this->projectPermission->addManager($project_id, $user_id);
         }
 
         $this->category->createDefaultCategories($project_id);

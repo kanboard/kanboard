@@ -13,7 +13,7 @@
     <?php foreach ($tasks as $task): ?>
     <tr>
         <td class="task-table task-<?= $task['color_id'] ?>">
-            <?= $this->a('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
+            <?= $this->a('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
             <?= $this->inList($task['column_id'], $columns) ?>
@@ -22,7 +22,7 @@
             <?= $this->inList($task['category_id'], $categories, '') ?>
         </td>
         <td>
-            <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
+            <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
             <?php if ($task['assignee_username']): ?>

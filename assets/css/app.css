@@ -523,9 +523,11 @@ a.btn-blue:focus,
     }
 }
 
+#main .alert,
 .page .alert {
     margin-top: 10px;
-}/* tooltip */
+}
+/* tooltip */
 .tooltip-arrow:after {
     background: #fff;
     border: 1px solid #aaaaaa;

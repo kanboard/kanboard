@@ -92,7 +92,7 @@ class ProjectPermission extends Base
      * @param  integer   $project_id   Project id
      * @return array
      */
-    public function getOwners($project_id)
+    public function getManagers($project_id)
     {
         $users = $this->db
             ->table(self::TABLE)
@@ -118,13 +118,13 @@ class ProjectPermission extends Base
         $users = array(
             'allowed' => array(),
             'not_allowed' => array(),
-            'owners' => array(),
+            'managers' => array(),
         );
 
         $all_users = $this->user->getList();
 
         $users['allowed'] = $this->getMembers($project_id);
-        $users['owners'] = $this->getOwners($project_id);
+        $users['managers'] = $this->getManagers($project_id);
 
         foreach ($all_users as $user_id => $username) {
 
@@ -137,14 +137,14 @@ class ProjectPermission extends Base
     }
 
     /**
-     * Allow a specific user for a given project
+     * Add a new project member
      *
      * @access public
      * @param  integer   $project_id   Project id
      * @param  integer   $user_id      User id
      * @return bool
      */
-    public function allowUser($project_id, $user_id)
+    public function addMember($project_id, $user_id)
     {
         return $this->db
                     ->table(self::TABLE)
@@ -152,7 +152,39 @@ class ProjectPermission extends Base
     }
 
     /**
-     * Make the specific user owner of the given project
+     * Remove a member
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @return bool
+     */
+    public function revokeMember($project_id, $user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('user_id', $user_id)
+                    ->remove();
+    }
+
+    /**
+     * Add a project manager
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $user_id      User id
+     * @return bool
+     */
+    public function addManager($project_id, $user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->save(array('project_id' => $project_id, 'user_id' => $user_id, 'is_owner' => 1));
+    }
+
+    /**
+     * Change the role of a member
      *
      * @access public
      * @param  integer   $project_id   Project id
@@ -160,30 +192,13 @@ class ProjectPermission extends Base
      * @param  integer   $is_owner     Is user owner of the project
      * @return bool
      */
-    public function setOwner($project_id, $user_id, $is_owner = 1)
+    public function changeRole($project_id, $user_id, $is_owner)
     {
         return $this->db
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
                     ->update(array('is_owner' => $is_owner));
-    }
-
-    /**
-     * Revoke a specific user for a given project
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @param  integer   $user_id      User id
-     * @return bool
-     */
-    public function revokeUser($project_id, $user_id)
-    {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->eq('user_id', $user_id)
-                    ->remove();
     }
 
     /**
@@ -200,29 +215,29 @@ class ProjectPermission extends Base
             return true;
         }
 
-        return (bool) $this->db
+        return $this->db
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
-                    ->count();
+                    ->count() === 1;
 	}
 
 	/**
-     * Check if a specific user is owner of a given project
+     * Check if a specific user is manager of a given project
      *
      * @access public
      * @param  integer   $project_id   Project id
      * @param  integer   $user_id      User id
      * @return bool
      */
-    public function isOwner($project_id, $user_id)
+    public function isManager($project_id, $user_id)
     {
-        return (bool) $this->db
+        return $this->db
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
                     ->eq('is_owner', 1)
-                    ->count();
+                    ->count() === 1;
     }
 
     /**
@@ -247,36 +262,11 @@ class ProjectPermission extends Base
      */
     public function isEverybodyAllowed($project_id)
     {
-        return (bool) $this->db
+        return $this->db
                     ->table(Project::TABLE)
                     ->eq('id', $project_id)
                     ->eq('is_everybody_allowed', 1)
-                    ->count();
-    }
-
-    /**
-     * Check if a specific user is allowed to manage a project
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @param  integer   $user_id      User id
-     * @return bool
-     */
-    public function adminAllowed($project_id, $user_id)
-    {
-        if ($this->user->isAdmin($user_id)) {
-            return true;
-        }
-
-        if ($this->isUserAllowed($project_id, $user_id) && $this->project->isPrivate($project_id)) {
-            return true;
-        }
-
-        if ($this->isOwner($project_id, $user_id)) {
-            return true;
-        }
-
-        return false;
+                    ->count() === 1;
     }
 
     /**
@@ -336,7 +326,7 @@ class ProjectPermission extends Base
         $users = $this->getMembers($project_from);
 
         foreach ($users as $user_id => $name) {
-            if (! $this->allowUser($project_to, $user_id)) {
+            if (! $this->addMember($project_to, $user_id)) { // TODO: Duplicate managers
                 return false;
             }
         }

@@ -46,6 +46,7 @@ class ClassProvider implements ServiceProviderInterface
             'TaskValidator',
             'TimeTracking',
             'User',
+            'UserSession',
             'Webhook',
         ),
         'Core' => array(

@@ -38,7 +38,7 @@ class Swimlane extends Base
      */
     public function index(array $values = array(), array $errors = array())
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $this->response->html($this->projectLayout('swimlane/index', array(
             'default_swimlane' => $this->swimlane->getDefault($project['id']),
@@ -58,7 +58,7 @@ class Swimlane extends Base
      */
     public function save()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->swimlane->validateCreation($values);
@@ -84,7 +84,7 @@ class Swimlane extends Base
      */
     public function change()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->swimlane->validateDefaultModification($values);
@@ -110,7 +110,7 @@ class Swimlane extends Base
      */
     public function edit(array $values = array(), array $errors = array())
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $swimlane = $this->getSwimlane($project['id']);
 
         $this->response->html($this->projectLayout('swimlane/edit', array(
@@ -128,7 +128,7 @@ class Swimlane extends Base
      */
     public function update()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->swimlane->validateModification($values);
@@ -154,7 +154,7 @@ class Swimlane extends Base
      */
     public function confirm()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $swimlane = $this->getSwimlane($project['id']);
 
         $this->response->html($this->projectLayout('swimlane/remove', array(
@@ -172,7 +172,7 @@ class Swimlane extends Base
     public function remove()
     {
         $this->checkCSRFParam();
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
 
         if ($this->swimlane->remove($project['id'], $swimlane_id)) {
@@ -192,7 +192,7 @@ class Swimlane extends Base
     public function disable()
     {
         $this->checkCSRFParam();
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
 
         if ($this->swimlane->disable($project['id'], $swimlane_id)) {
@@ -212,7 +212,7 @@ class Swimlane extends Base
     public function enable()
     {
         $this->checkCSRFParam();
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
 
         if ($this->swimlane->enable($project['id'], $swimlane_id)) {
@@ -232,7 +232,7 @@ class Swimlane extends Base
     public function moveup()
     {
         $this->checkCSRFParam();
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
 
         $this->swimlane->moveUp($project['id'], $swimlane_id);
@@ -247,7 +247,7 @@ class Swimlane extends Base
     public function movedown()
     {
         $this->checkCSRFParam();
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
 
         $this->swimlane->moveDown($project['id'], $swimlane_id);

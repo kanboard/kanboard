@@ -240,8 +240,8 @@ class TaskDuplicationTest extends Base
         // We create a new user for our project
         $user = new User($this->container);
         $this->assertNotFalse($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
-        $this->assertTrue($pp->allowUser(1, 2));
-        $this->assertTrue($pp->allowUser(2, 2));
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addMember(2, 2));
         $this->assertTrue($pp->isUserAllowed(1, 2));
         $this->assertTrue($pp->isUserAllowed(2, 2));
 
@@ -363,8 +363,8 @@ class TaskDuplicationTest extends Base
 
         // We create a new user for our project
         $this->assertNotFalse($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
-        $this->assertTrue($pp->allowUser(1, 2));
-        $this->assertTrue($pp->allowUser(2, 2));
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addMember(2, 2));
         $this->assertTrue($pp->isUserAllowed(1, 2));
         $this->assertTrue($pp->isUserAllowed(2, 2));
 
@@ -398,8 +398,8 @@ class TaskDuplicationTest extends Base
 
         // We create a new user for our project
         $this->assertNotFalse($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
-        $this->assertTrue($pp->allowUser(1, 2));
-        $this->assertTrue($pp->allowUser(2, 2));
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addMember(2, 2));
         $this->assertTrue($pp->isUserAllowed(1, 2));
         $this->assertTrue($pp->isUserAllowed(2, 2));
 

@@ -20,7 +20,7 @@ class Analytic extends Base
      */
     private function layout($template, array $params)
     {
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->acl->getUserId());
+        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
         $params['analytic_content_for_layout'] = $this->template->render($template, $params);
 
         return $this->template->layout('analytic/layout', $params);

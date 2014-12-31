@@ -1,12 +1,12 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <?php if ($this->acl->isAdminUser()): ?>
+            <?php if ($this->userSession->isAdmin()): ?>
                 <li><i class="fa fa-plus fa-fw"></i><?= $this->a(t('New project'), 'project', 'create') ?></li>
             <?php endif ?>
             <li><i class="fa fa-lock fa-fw"></i><?= $this->a(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
             <li><i class="fa fa-folder fa-fw"></i><?= $this->a(t('Project management'), 'project', 'index') ?></li>
-            <?php if ($this->acl->isAdminUser()): ?>
+            <?php if ($this->userSession->isAdmin()): ?>
                 <li><i class="fa fa-user fa-fw"></i><?= $this->a(t('User management'), 'user', 'index') ?></li>
                 <li><i class="fa fa-cog fa-fw"></i><?= $this->a(t('Settings'), 'config', 'index') ?></li>
             <?php endif ?>

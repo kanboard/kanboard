@@ -18,7 +18,7 @@
         <?= $this->render('comment/create', array(
                 'skip_cancel' => true,
                 'values' => array(
-                    'user_id' => $this->acl->getUserId(),
+                    'user_id' => $this->userSession->getId(),
                     'task_id' => $task['id'],
                 ),
                 'errors' => array(),

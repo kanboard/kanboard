@@ -48,46 +48,11 @@ class User extends Base
      */
     public function isAdmin($user_id)
     {
-        $result = $this->db
+        return $this->db
                     ->table(User::TABLE)
                     ->eq('id', $user_id)
                     ->eq('is_admin', 1)
-                    ->count();
-
-        return $result > 0;
-    }
-
-    /**
-     * Get the default project from the session
-     *
-     * @access public
-     * @return integer
-     */
-    public function getFavoriteProjectId()
-    {
-        return isset($this->session['user']['default_project_id']) ? $this->session['user']['default_project_id'] : 0;
-    }
-
-    /**
-     * Get the last seen project from the session
-     *
-     * @access public
-     * @return integer
-     */
-    public function getLastSeenProjectId()
-    {
-        return empty($this->session['last_show_project_id']) ? 0 : $this->session['last_show_project_id'];
-    }
-
-    /**
-     * Set the last seen project from the session
-     *
-     * @access public
-     * @@param integer    $project_id    Project id
-     */
-    public function storeLastSeenProjectId($project_id)
-    {
-        $this->session['last_show_project_id'] = (int) $project_id;
+                    ->count() === 1;
     }
 
     /**
@@ -287,7 +252,7 @@ class User extends Base
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
         // If the user is connected refresh his session
-        if (Session::isOpen() && $this->acl->getUserId() == $values['id']) {
+        if (Session::isOpen() && $this->userSession->getId() == $values['id']) {
             $this->updateSession();
         }
 
@@ -337,7 +302,7 @@ class User extends Base
     public function updateSession(array $user = array())
     {
         if (empty($user)) {
-            $user = $this->getById($this->acl->getUserId());
+            $user = $this->getById($this->userSession->getId());
         }
 
         if (isset($user['password'])) {

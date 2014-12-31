@@ -6,7 +6,7 @@
     <h3><i class="fa fa-google"></i> <?= t('Google Account') ?></h3>
 
     <p class="listing">
-    <?php if ($this->acl->isCurrentUser($user['id'])): ?>
+    <?php if ($this->userSession->isCurrentUser($user['id'])): ?>
         <?php if (empty($user['google_id'])): ?>
             <?= $this->a(t('Link my Google Account'), 'user', 'google', array(), true) ?>
         <?php else: ?>
@@ -22,7 +22,7 @@
     <h3><i class="fa fa-github"></i> <?= t('Github Account') ?></h3>
 
     <p class="listing">
-    <?php if ($this->acl->isCurrentUser($user['id'])): ?>
+    <?php if ($this->userSession->isCurrentUser($user['id'])): ?>
         <?php if (empty($user['github_id'])): ?>
             <?= $this->a(t('Link my GitHub Account'), 'user', 'github', array(), true) ?>
         <?php else: ?>

@@ -102,11 +102,10 @@ class RememberMe extends Base
 
                 // Create the session
                 $this->user->updateSession($this->user->getById($record['user_id']));
-                $this->acl->isRememberMe(true);
 
                 $this->container['dispatcher']->dispatch(
                     'auth.success',
-                    new AuthEvent(self::AUTH_NAME, $this->acl->getUserId())
+                    new AuthEvent(self::AUTH_NAME, $this->userSession->getId())
                 );
 
                 return true;

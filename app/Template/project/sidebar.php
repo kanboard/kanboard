@@ -5,7 +5,7 @@
             <?= $this->a(t('Summary'), 'project', 'show', array('project_id' => $project['id'])) ?>
         </li>
 
-        <?php if ($this->acl->isAdminUser() || $project['is_private']): ?>
+        <?php if ($this->acl->isManagerActionAllowed($project['id'])): ?>
         <li>
             <?= $this->a(t('Public access'), 'project', 'share', array('project_id' => $project['id'])) ?>
         </li>
@@ -15,27 +15,23 @@
         <li>
             <?= $this->a(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
         </li>
+        <li>
+            <?= $this->a(t('Edit board'), 'board', 'edit', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
+            <?= $this->a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
+            <?= $this->a(t('Swimlanes'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>
+        </li>
+        <?php if ($project['is_private'] == 0): ?>
+        <li>
+            <?= $this->a(t('User management'), 'project', 'users', array('project_id' => $project['id'])) ?>
+        </li>
         <?php endif ?>
-        <?php if ($this->acl->isAdminUser() || $is_owner || $project['is_private']): ?>
-            <li>
-                <?= $this->a(t('Edit board'), 'board', 'edit', array('project_id' => $project['id'])) ?>
-            </li>
-            <li>
-                <?= $this->a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
-            </li>
-            <li>
-                <?= $this->a(t('Swimlanes'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>
-            </li>
-            <?php if ($project['is_private'] == 0): ?>
-            <li>
-                <?= $this->a(t('User management'), 'project', 'users', array('project_id' => $project['id'])) ?>
-            </li>
-            <?php endif ?>
-            <li>
-                <?= $this->a(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
-            </li>
-        <?php endif ?>
-        <?php if ($this->acl->isAdminUser() || $project['is_private']): ?>
+        <li>
+            <?= $this->a(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
+        </li>
         <li>
             <?= $this->a(t('Duplicate'), 'project', 'duplicate', array('project_id' => $project['id']), true) ?>
         </li>
@@ -46,13 +42,15 @@
                 <?= $this->a(t('Enable'), 'project', 'enable', array('project_id' => $project['id']), true) ?>
             <?php endif ?>
         </li>
-        <li>
-            <?= $this->a(t('Remove'), 'project', 'remove', array('project_id' => $project['id'])) ?>
-        </li>
+        <?php if ($this->userSession->isAdmin()): ?>
+            <li>
+                <?= $this->a(t('Remove'), 'project', 'remove', array('project_id' => $project['id'])) ?>
+            </li>
+        <?php endif ?>
         <?php endif ?>
     </ul>
 
-    <?php if ($this->acl->isAdminUser() || $project['is_private']): ?>
+    <?php if ($this->acl->isManagerActionAllowed($project['id'])): ?>
     <h2><?= t('Exports') ?></h2>
     <ul>
         <li>

@@ -13,7 +13,7 @@ class HelperTest extends Base
         $this->assertEquals('<p>Test</p>', $h->markdown('Test'));
 
         $this->assertEquals(
-            '<p>Task <a href="?controller=task&amp;action=show&amp;task_id=123" class="" title="" >#123</a></p>',
+            '<p>Task #123</p>',
             $h->markdown('Task #123')
         );
 

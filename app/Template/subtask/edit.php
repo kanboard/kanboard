@@ -2,7 +2,7 @@
     <h2><?= t('Edit a sub-task') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->u('subtask', 'update', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('subtask', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>" autocomplete="off">
 
     <?= $this->formCsrf() ?>
 
@@ -27,6 +27,6 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
-        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
 </form>

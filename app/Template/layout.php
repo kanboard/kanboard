@@ -44,7 +44,7 @@
                     <?php endif ?>
                     <li>
                         <?= $this->a(t('Logout'), 'user', 'logout', array(), true) ?>
-                        <span class="username hide-tablet">(<?= $this->a($this->e($this->getFullname()), 'user', 'show', array('user_id' => $this->acl->getUserId())) ?>)</span>
+                        <span class="username hide-tablet">(<?= $this->a($this->e($this->getFullname()), 'user', 'show', array('user_id' => $this->userSession->getId())) ?>)</span>
                     </li>
                 </ul>
             </nav>

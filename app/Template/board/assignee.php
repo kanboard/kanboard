@@ -1,7 +1,7 @@
 <section id="main">
     <section>
         <h3><?= t('Change assignee for the task "%s"', $values['title']) ?></h3>
-        <form method="post" action="<?= $this->u('board', 'updateAssignee', array('task_id' => $values['id'])) ?>">
+        <form method="post" action="<?= $this->u('board', 'updateAssignee', array('task_id' => $values['id'], 'project_id' => $values['project_id'])) ?>">
 
             <?= $this->formCsrf() ?>
 

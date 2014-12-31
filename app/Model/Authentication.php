@@ -41,13 +41,8 @@ class Authentication extends Base
      */
     public function isAuthenticated($controller, $action)
     {
-        // If the action is public we don't need to do any checks
-        if ($this->acl->isPublicAction($controller, $action)) {
-            return true;
-        }
-
         // If the user is already logged it's ok
-        if ($this->acl->isLogged()) {
+        if ($this->userSession->isLogged()) {
 
             // We update each time the RememberMe cookie tokens
             if ($this->backend('rememberMe')->hasCookie()) {
@@ -117,7 +112,7 @@ class Authentication extends Base
                 if (! empty($values['remember_me'])) {
 
                     $credentials = $this->backend('rememberMe')
-                                        ->create($this->acl->getUserId(), Request::getIpAddress(), Request::getUserAgent());
+                                        ->create($this->userSession->getId(), Request::getIpAddress(), Request::getUserAgent());
 
                     $this->backend('rememberMe')->writeCookie($credentials['token'], $credentials['sequence'], $credentials['expiration']);
                 }

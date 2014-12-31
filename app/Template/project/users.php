@@ -18,15 +18,15 @@
             <?php foreach ($users['allowed'] as $user_id => $username): ?>
             <tr>
                 <td><?= $this->e($username) ?></td>
-                <td><?= isset($users['owners'][$user_id]) ? t('Project manager') : t('Project member') ?></td>
+                <td><?= isset($users['managers'][$user_id]) ? t('Project manager') : t('Project member') ?></td>
                 <td>
                     <ul>
                         <li><?= $this->a(t('Revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?></li>
                         <li>
-                            <?php if (isset($users['owners'][$user_id])): ?>
-                                <?= $this->a(t('Set project member'), 'project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?>
+                            <?php if (isset($users['managers'][$user_id])): ?>
+                                <?= $this->a(t('Set project member'), 'project', 'role', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?>
                             <?php else: ?>
-                                <?= $this->a(t('Set project manager'), 'project', 'setOwner', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?>
+                                <?= $this->a(t('Set project manager'), 'project', 'role', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?>
                             <?php endif ?>
                         </li>
                     </ul>

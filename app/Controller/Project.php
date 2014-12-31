@@ -17,7 +17,7 @@ class Project extends Base
      */
     public function index()
     {
-        $projects = $this->project->getAll($this->acl->isRegularUser());
+        $projects = $this->project->getAll(! $this->userSession->isAdmin());
         $nb_projects = count($projects);
         $active_projects = array();
         $inactive_projects = array();
@@ -32,7 +32,7 @@ class Project extends Base
         }
 
         $this->response->html($this->template->layout('project/index', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
             'active_projects' => $active_projects,
             'inactive_projects' => $inactive_projects,
             'nb_projects' => $nb_projects,
@@ -63,7 +63,7 @@ class Project extends Base
      */
     public function exportTasks()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $from = $this->request->getStringParam('from');
         $to = $this->request->getStringParam('to');
 
@@ -96,7 +96,7 @@ class Project extends Base
      */
     public function exportDailyProjectSummary()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $from = $this->request->getStringParam('from');
         $to = $this->request->getStringParam('to');
 
@@ -129,7 +129,7 @@ class Project extends Base
      */
     public function share()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $switch = $this->request->getStringParam('switch');
 
         if ($switch === 'enable' || $switch === 'disable') {
@@ -158,7 +158,7 @@ class Project extends Base
      */
     public function integration()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $this->response->html($this->projectLayout('project/integrations', array(
             'project' => $project,
@@ -174,7 +174,7 @@ class Project extends Base
      */
     public function edit(array $values = array(), array $errors = array())
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $this->response->html($this->projectLayout('project/edit', array(
             'values' => empty($values) ? $project : $values,
@@ -191,7 +191,7 @@ class Project extends Base
      */
     public function update()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $values = $this->request->getValues();
         list($valid, $errors) = $this->project->validateModification($values);
 
@@ -216,7 +216,7 @@ class Project extends Base
      */
     public function users()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $this->response->html($this->projectLayout('project/users', array(
             'project' => $project,
@@ -232,7 +232,7 @@ class Project extends Base
      */
     public function allowEverybody()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $values = $this->request->getValues() + array('is_everybody_allowed' => 0);
         list($valid,) = $this->projectPermission->validateProjectModification($values);
 
@@ -257,12 +257,11 @@ class Project extends Base
     public function allow()
     {
         $values = $this->request->getValues();
-        $this->checkProjectOwnerPermissions($values['project_id']);
         list($valid,) = $this->projectPermission->validateUserModification($values);
 
         if ($valid) {
 
-            if ($this->projectPermission->allowUser($values['project_id'], $values['user_id'])) {
+            if ($this->projectPermission->addMember($values['project_id'], $values['user_id'])) {
                 $this->session->flash(t('Project updated successfully.'));
             }
             else {
@@ -274,11 +273,11 @@ class Project extends Base
     }
 
     /**
-     * Set ownership for a specific user (admin only)
+     * Change the role of a project member
      *
      * @access public
      */
-    public function setOwner()
+    public function role()
     {
         $this->checkCSRFParam();
 
@@ -288,12 +287,11 @@ class Project extends Base
             'is_owner' => $this->request->getIntegerParam('is_owner'),
         );
 
-        $this->checkProjectOwnerPermissions($values['project_id']);
         list($valid,) = $this->projectPermission->validateUserModification($values);
 
         if ($valid) {
 
-            if ($this->projectPermission->setOwner($values['project_id'], $values['user_id'], $values['is_owner'])) {
+            if ($this->projectPermission->changeRole($values['project_id'], $values['user_id'], $values['is_owner'])) {
                 $this->session->flash(t('Project updated successfully.'));
             }
             else {
@@ -318,12 +316,11 @@ class Project extends Base
             'user_id' => $this->request->getIntegerParam('user_id'),
         );
 
-        $this->checkProjectOwnerPermissions($values['project_id']);
         list($valid,) = $this->projectPermission->validateUserModification($values);
 
         if ($valid) {
 
-            if ($this->projectPermission->revokeUser($values['project_id'], $values['user_id'])) {
+            if ($this->projectPermission->revokeMember($values['project_id'], $values['user_id'])) {
                 $this->session->flash(t('Project updated successfully.'));
             }
             else {
@@ -341,7 +338,7 @@ class Project extends Base
      */
     public function remove()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         if ($this->request->getStringParam('remove') === 'yes') {
 
@@ -370,7 +367,7 @@ class Project extends Base
      */
     public function duplicate()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         if ($this->request->getStringParam('duplicate') === 'yes') {
 
@@ -398,7 +395,7 @@ class Project extends Base
      */
     public function disable()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         if ($this->request->getStringParam('disable') === 'yes') {
 
@@ -426,7 +423,7 @@ class Project extends Base
      */
     public function enable()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         if ($this->request->getStringParam('enable') === 'yes') {
 
@@ -478,7 +475,7 @@ class Project extends Base
         $project = $this->getProject();
 
         $this->response->html($this->template->layout('project/activity', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
             'events' => $this->projectActivity->getProject($project['id']),
             'project' => $project,
             'title' => t('%s\'s activity', $project['name'])
@@ -507,7 +504,7 @@ class Project extends Base
         }
 
         $this->response->html($this->template->layout('project/search', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
             'tasks' => $tasks,
             'nb_tasks' => $nb_tasks,
             'pagination' => array(
@@ -550,7 +547,7 @@ class Project extends Base
         $nb_tasks = $this->taskPaginator->countClosedTasks($project['id']);
 
         $this->response->html($this->template->layout('project/tasks', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
             'pagination' => array(
                 'controller' => 'project',
                 'action' => 'tasks',
@@ -577,10 +574,10 @@ class Project extends Base
      */
     public function create(array $values = array(), array $errors = array())
     {
-        $is_private = $this->request->getIntegerParam('private', $this->acl->isRegularUser());
+        $is_private = $this->request->getIntegerParam('private', ! $this->userSession->isAdmin());
 
         $this->response->html($this->template->layout('project/new', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->acl->getUserId()),
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
             'values' => empty($values) ? array('is_private' => $is_private) : $values,
             'errors' => $errors,
             'title' => $is_private ? t('New private project') : t('New project'),
@@ -599,7 +596,7 @@ class Project extends Base
 
         if ($valid) {
 
-            $project_id = $this->project->create($values, $this->acl->getUserId(), true);
+            $project_id = $this->project->create($values, $this->userSession->getId(), true);
 
             if ($project_id) {
                 $this->session->flash(t('Your project have been created successfully.'));

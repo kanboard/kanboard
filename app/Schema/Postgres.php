@@ -5,7 +5,31 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 20;
+const VERSION = 21;
+
+function version_21($pdo)
+{
+    // Avoid some full table scans
+    $pdo->exec('CREATE INDEX users_admin_idx ON users(is_admin)');
+    $pdo->exec('CREATE INDEX columns_project_idx ON columns(project_id)');
+    $pdo->exec('CREATE INDEX tasks_project_idx ON tasks(project_id)');
+    $pdo->exec('CREATE INDEX swimlanes_project_idx ON swimlanes(project_id)');
+    $pdo->exec('CREATE INDEX categories_project_idx ON project_has_categories(project_id)');
+    $pdo->exec('CREATE INDEX subtasks_task_idx ON task_has_subtasks(task_id)');
+    $pdo->exec('CREATE INDEX files_task_idx ON task_has_files(task_id)');
+    $pdo->exec('CREATE INDEX comments_task_idx ON comments(task_id)');
+
+    // Set the ownership for all private projects
+    $rq = $pdo->prepare("SELECT id FROM projects WHERE is_private='1'");
+    $rq->execute();
+    $project_ids = $rq->fetchAll(PDO::FETCH_COLUMN, 0);
+
+    $rq = $pdo->prepare('UPDATE project_has_users SET is_owner=1 WHERE project_id=?');
+
+    foreach ($project_ids as $project_id) {
+        $rq->execute(array($project_id));
+    }
+}
 
 function version_20($pdo)
 {

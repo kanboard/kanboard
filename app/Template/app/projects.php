@@ -14,7 +14,7 @@
                 <?= $this->a('#'.$project['id'], 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link') ?>
             </td>
             <td>
-                <?php if ($this->projectPermission->adminAllowed($project['id'], $this->acl->getUserId())): ?>
+                <?php if ($this->projectPermission->isManager($project['id'], $this->userSession->getId())): ?>
                     <?= $this->a('<i class="fa fa-cog"></i>', 'project', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Settings')) ?>&nbsp;
                 <?php endif ?>
                 <?= $this->a($this->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>

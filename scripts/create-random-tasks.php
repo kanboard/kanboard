@@ -21,7 +21,7 @@ $project_id = $projectModel->create(array(
     'name' => 'Project #1'
 ));
 
-$permissionModel->allowUser($project_id, 1);
+$permissionModel->addMember($project_id, 1);
 
 for ($i = 0; $i <= 5; $i++) {
     $userModel->create(array(

@@ -9,12 +9,12 @@
         <?php if (! isset($preview)): ?>
         <ul class="comment-actions">
             <li><a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a></li>
-            <?php if ((! isset($not_editable) || ! $not_editable) && ($this->acl->isAdminUser() || $this->acl->isCurrentUser($comment['user_id']))): ?>
+            <?php if ((! isset($not_editable) || ! $not_editable) && ($this->userSession->isAdmin() || $this->userSession->isCurrentUser($comment['user_id']))): ?>
                 <li>
-                    <?= $this->a(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'comment_id' => $comment['id'])) ?>
+                    <?= $this->a(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                 </li>
                 <li>
-                    <?= $this->a(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'comment_id' => $comment['id'])) ?>
+                    <?= $this->a(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                 </li>
             <?php endif ?>
         </ul>
@@ -33,7 +33,16 @@
                     )
                 ) ?>
             <?php else: ?>
-                <?= $this->markdown($comment['comment']) ?>
+                <?= $this->markdown(
+                    $comment['comment'],
+                    array(
+                        'controller' => 'task',
+                        'action' => 'show',
+                        'params' => array(
+                            'project_id' => $project['id']
+                        )
+                    )
+                ) ?>
             <?php endif ?>
         </div>
 

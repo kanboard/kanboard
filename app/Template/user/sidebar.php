@@ -5,7 +5,7 @@
             <?= $this->a(t('Summary'), 'user', 'show', array('user_id' => $user['id'])) ?>
         </li>
 
-        <?php if ($this->acl->isAdminUser() || $this->acl->isCurrentUser($user['id'])): ?>
+        <?php if ($this->userSession->isAdmin() || $this->userSession->isCurrentUser($user['id'])): ?>
             <li>
                 <?= $this->a(t('Edit profile'), 'user', 'edit', array('user_id' => $user['id'])) ?>
             </li>
@@ -30,7 +30,7 @@
             </li>
         <?php endif ?>
 
-        <?php if ($this->acl->isAdminUser() && ! $this->acl->isCurrentUser($user['id'])): ?>
+        <?php if ($this->userSession->isAdmin() && ! $this->userSession->isCurrentUser($user['id'])): ?>
             <li>
                 <?= $this->a(t('Remove'), 'user', 'remove', array('user_id' => $user['id'])) ?>
             </li>

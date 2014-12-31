@@ -63,8 +63,8 @@ $server->bind('removeColumn', $container['board'], 'removeColumn');
  * Project permissions procedures
  */
 $server->bind('getMembers', $container['projectPermission'], 'getMembers');
-$server->bind('revokeUser', $container['projectPermission'], 'revokeUser');
-$server->bind('allowUser', $container['projectPermission'], 'allowUser');
+$server->bind('revokeUser', $container['projectPermission'], 'revokeMember');
+$server->bind('allowUser', $container['projectPermission'], 'addMember');
 
 /**
  * Task procedures

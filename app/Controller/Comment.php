@@ -24,7 +24,7 @@ class Comment extends Base
             $this->notfound();
         }
 
-        if (! $this->acl->isAdminUser() && $comment['user_id'] != $this->acl->getUserId()) {
+        if (! $this->userSession->isAdmin() && $comment['user_id'] != $this->userSession->getId()) {
             $this->response->html($this->template->layout('comment/forbidden', array(
                 'title' => t('Access Forbidden')
             )));
@@ -44,7 +44,7 @@ class Comment extends Base
 
         if (empty($values)) {
             $values = array(
-                'user_id' => $this->acl->getUserId(),
+                'user_id' => $this->userSession->getId(),
                 'task_id' => $task['id'],
             );
         }
@@ -78,7 +78,7 @@ class Comment extends Base
                 $this->session->flashError(t('Unable to create your comment.'));
             }
 
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comments');
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#comments');
         }
 
         $this->create($values, $errors);
@@ -125,7 +125,7 @@ class Comment extends Base
                 $this->session->flashError(t('Unable to update your comment.'));
             }
 
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comment-'.$comment['id']);
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#comment-'.$comment['id']);
         }
 
         $this->edit($values, $errors);
@@ -166,6 +166,6 @@ class Comment extends Base
             $this->session->flashError(t('Unable to remove this comment.'));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#comments');
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#comments');
     }
 }

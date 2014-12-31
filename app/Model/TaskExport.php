@@ -73,6 +73,7 @@ class TaskExport extends Base
             LEFT JOIN columns ON columns.id = tasks.column_id
             LEFT JOIN projects ON projects.id = tasks.project_id
             WHERE tasks.date_creation >= ? AND tasks.date_creation <= ? AND tasks.project_id = ?
+            ORDER BY tasks.id ASC
         ';
 
         if (! is_numeric($from)) {
