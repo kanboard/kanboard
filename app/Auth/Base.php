@@ -13,6 +13,7 @@ use Pimple\Container;
  * @property \Model\Acl                $acl
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\User               $user
+ * @property \Model\UserSession        $userSession
  */
 abstract class Base
 {

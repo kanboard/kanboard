@@ -574,7 +574,7 @@ class Project extends Base
      */
     public function create(array $values = array(), array $errors = array())
     {
-        $is_private = $this->request->getIntegerParam('private', ! $this->userSession->isAdmin());
+        $is_private = $this->request->getIntegerParam('private', $this->userSession->isAdmin() ? 0 : 1);
 
         $this->response->html($this->template->layout('project/new', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),

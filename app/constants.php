@@ -1,5 +1,8 @@
 <?php
 
+// Enable/disable debug
+defined('DEBUG') or define('DEBUG', false);
+
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
 

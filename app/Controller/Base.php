@@ -100,9 +100,11 @@ abstract class Base
      */
     public function __destruct()
     {
-        // foreach ($this->container['db']->getLogMessages() as $message) {
-        //     $this->container['logger']->addDebug($message);
-        // }
+        if (DEBUG) {
+            foreach ($this->container['db']->getLogMessages() as $message) {
+                $this->container['logger']->addDebug($message);
+            }
+        }
     }
 
     /**

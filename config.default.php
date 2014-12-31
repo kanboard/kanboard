@@ -1,5 +1,8 @@
 <?php
 
+// Enable/Disable debug
+define('DEBUG', false);
+
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
 
