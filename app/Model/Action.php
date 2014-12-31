@@ -140,9 +140,17 @@ class Action extends Base
     public function getAll()
     {
         $actions = $this->db->table(self::TABLE)->findAll();
+        $params = $this->db->table(self::TABLE_PARAMS)->findAll();
 
         foreach ($actions as &$action) {
-            $action['params'] = $this->db->table(self::TABLE_PARAMS)->eq('action_id', $action['id'])->findAll();
+
+            $action['params'] = array();
+
+            foreach ($params as $param) {
+                if ($param['action_id'] === $action['id']) {
+                    $action['params'][] = $param;
+                }
+            }
         }
 
         return $actions;
