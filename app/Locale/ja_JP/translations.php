@@ -182,7 +182,7 @@ return array(
     'Change assignee' => '担当を変更する',
     'Change assignee for the task "%s"' => 'タスク「%s」の担当を変更する',
     'Timezone' => 'タイムゾーン',
-    'Sorry, I didn\'t found this information in my database!' => 'データベース上で情報が見つかりませんでした！',
+    'Sorry, I didn\'t find this information in my database!' => 'データベース上で情報が見つかりませんでした！',
     'Page not found' => 'ページが見つかりません',
     'Complexity' => '複雑さ',
     'limit' => '制限',

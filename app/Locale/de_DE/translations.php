@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'Zuständigkeit ändern',
     'Change assignee for the task "%s"' => 'Zuständigkeit für diese Aufgabe ändern: "%s"',
     'Timezone' => 'Zeitzone',
-    'Sorry, I didn\'t found this information in my database!' => 'Diese Information wurde in der Datenbank nicht gefunden!',
+    'Sorry, I didn\'t find this information in my database!' => 'Diese Information wurde in der Datenbank nicht gefunden!',
     'Page not found' => 'Seite nicht gefunden',
     'Complexity' => 'Komplexität',
     'limit' => 'Limit',

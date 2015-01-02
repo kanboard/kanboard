@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'Zmień odpowiedzialną osobę',
     'Change assignee for the task "%s"' => 'Zmień odpowiedzialną osobę dla zadania "%s"',
     'Timezone' => 'Strefa czasowa',
-    'Sorry, I didn\'t found this information in my database!' => 'Niestety nie znaleziono tej informacji w bazie danych',
+    'Sorry, I didn\'t find this information in my database!' => 'Niestety nie znaleziono tej informacji w bazie danych',
     'Page not found' => 'Strona nie istnieje',
     'Complexity' => 'Poziom trudności',
     'limit' => 'limit',

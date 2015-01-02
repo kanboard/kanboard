@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'Ændre ansvarlig',
     'Change assignee for the task "%s"' => 'Ændre ansvarlig for opgaven: "%s"',
     'Timezone' => 'Tidszone',
-    'Sorry, I didn\'t found this information in my database!' => 'Denne information kunne ikke findes i databasen!',
+    'Sorry, I didn\'t find this information in my database!' => 'Denne information kunne ikke findes i databasen!',
     'Page not found' => 'Siden er ikke fundet',
     'Complexity' => 'Kompleksitet',
     'limit' => 'Begrænsning',

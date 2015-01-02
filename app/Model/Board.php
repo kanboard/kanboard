@@ -254,6 +254,23 @@ class Board extends Base
     }
 
     /**
+     * Get the total of tasks per column
+     *
+     * @access public
+     * @param  integer   $project_id
+     * @return array
+     */
+    public function getColumnStats($project_id)
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('is_active', 1)
+                    ->groupBy('column_id')
+                    ->listing('column_id', 'COUNT(*) AS total');
+    }
+
+    /**
      * Get the first column id for a given project
      *
      * @access public

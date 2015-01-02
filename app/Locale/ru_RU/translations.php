@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'Сменить назначенного',
     'Change assignee for the task "%s"' => 'Сменить назначенного для задачи « %s »',
     'Timezone' => 'Часовой пояс',
-    'Sorry, I didn\'t found this information in my database!' => 'К сожалению, информация в базе данных не найдена !',
+    'Sorry, I didn\'t find this information in my database!' => 'К сожалению, информация в базе данных не найдена !',
     'Page not found' => 'Страница не найдена',
     'Complexity' => 'Сложность',
     'limit' => 'лимит',

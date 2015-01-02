@@ -5,7 +5,7 @@
             <?= $this->a(t('Summary'), 'project', 'show', array('project_id' => $project['id'])) ?>
         </li>
 
-        <?php if ($this->acl->isManagerActionAllowed($project['id'])): ?>
+        <?php if ($this->isManager($project['id'])): ?>
         <li>
             <?= $this->a(t('Public access'), 'project', 'share', array('project_id' => $project['id'])) ?>
         </li>

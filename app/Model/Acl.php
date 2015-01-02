@@ -189,10 +189,6 @@ class Acl extends Base
 
     public function isManagerActionAllowed($project_id)
     {
-        if ($this->userSession->isAdmin()) {
-            return true;
-        }
-
         return $project_id > 0 && $this->projectPermission->isManager($project_id, $this->userSession->getId());
     }
 

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b36eeeb06a0ff9d55f2342792bd6e880",
+    "hash": "32ca2365366d59b6b6f4fc2b5af435a7",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -88,12 +88,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "682616b9accbfd719677ed0b3f478107cea2dacc"
+                "reference": "3ee555da2e2bda42b5d6aa9b231b534fd69db96c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/682616b9accbfd719677ed0b3f478107cea2dacc",
-                "reference": "682616b9accbfd719677ed0b3f478107cea2dacc",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/3ee555da2e2bda42b5d6aa9b231b534fd69db96c",
+                "reference": "3ee555da2e2bda42b5d6aa9b231b534fd69db96c",
                 "shasum": ""
             },
             "require": {
@@ -117,7 +117,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2014-12-31 17:44:58"
+            "time": "2015-01-02 22:00:06"
         },
         {
             "name": "fguillot/simple-validator",
@@ -155,6 +155,43 @@
             "description": "The most easy to use validator library for PHP :)",
             "homepage": "https://github.com/fguillot/simpleValidator",
             "time": "2014-11-25 22:58:14"
+        },
+        {
+            "name": "fguillot/simpleLogger",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fguillot/simpleLogger.git",
+                "reference": "81df5643931d97e0101b4757d9454dbcb13a3fa9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fguillot/simpleLogger/zipball/81df5643931d97e0101b4757d9454dbcb13a3fa9",
+                "reference": "81df5643931d97e0101b4757d9454dbcb13a3fa9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SimpleLogger": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frédéric Guillot"
+                }
+            ],
+            "description": "PHP library to write logs (compatible with PSR-3)",
+            "homepage": "https://github.com/fguillot/simpleLogger",
+            "time": "2015-01-02 03:40:21"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -256,78 +293,6 @@
                 "security"
             ],
             "time": "2014-09-05 15:19:58"
-        },
-        {
-            "name": "monolog/monolog",
-            "version": "1.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "ec3961874c43840e96da3a8a1ed20d8c73d7e5aa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/ec3961874c43840e96da3a8a1ed20d8c73d7e5aa",
-                "reference": "ec3961874c43840e96da3a8a1ed20d8c73d7e5aa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/log": "~1.0"
-            },
-            "provide": {
-                "psr/log-implementation": "1.0.0"
-            },
-            "require-dev": {
-                "aws/aws-sdk-php": "~2.4, >2.4.8",
-                "doctrine/couchdb": "~1.0@dev",
-                "graylog2/gelf-php": "~1.0",
-                "phpunit/phpunit": "~3.7.0",
-                "raven/raven": "~0.5",
-                "ruflin/elastica": "0.90.*",
-                "videlalvaro/php-amqplib": "~2.4"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
-                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
-                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mongo": "Allow sending log messages to a MongoDB server",
-                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "raven/raven": "Allow sending log messages to a Sentry server",
-                "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
-                "videlalvaro/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.11.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Monolog\\": "src/Monolog"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
-                }
-            ],
-            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
-            "homepage": "http://github.com/Seldaek/monolog",
-            "keywords": [
-                "log",
-                "logging",
-                "psr-3"
-            ],
-            "time": "2014-09-30 13:30:58"
         },
         {
             "name": "pimple/pimple",
@@ -637,7 +602,8 @@
         "swiftmailer/swiftmailer": 0,
         "fguillot/json-rpc": 20,
         "fguillot/picodb": 20,
-        "symfony/console": 0
+        "symfony/console": 0,
+        "fguillot/simplelogger": 20
     },
     "prefer-stable": false,
     "platform": [],

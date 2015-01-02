@@ -298,7 +298,11 @@ class ProjectPermission extends Base
      */
     public function getAllowedProjects($user_id)
     {
-        return $this->filterProjects($this->project->getListByStatus(Project::ACTIVE), $user_id, 'isUserAllowed');
+        if ($this->user->isAdmin($user_id)) {
+            return $this->project->getListByStatus(Project::ACTIVE);
+        }
+
+        return $this->getMemberProjects($user_id);
     }
 
     /**
@@ -310,7 +314,11 @@ class ProjectPermission extends Base
      */
     public function getMemberProjects($user_id)
     {
-        return $this->filterProjects($this->project->getListByStatus(Project::ACTIVE), $user_id, 'isMember');
+        return $this->db
+                    ->table(Project::TABLE)
+                    ->eq('user_id', $user_id)
+                    ->join(self::TABLE, 'project_id', 'id')
+                    ->listing('projects.id', 'name');
     }
 
     /**

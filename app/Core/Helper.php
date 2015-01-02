@@ -49,6 +49,22 @@ class Helper
     }
 
     /**
+     * Proxy cache helper for acl::isManagerActionAllowed()
+     *
+     * @access public
+     * @param  integer   $project_id
+     * @return boolean
+     */
+    public function isManager($project_id)
+    {
+        if ($this->userSession->isAdmin()) {
+            return true;
+        }
+
+        return $this->container['memoryCache']->proxy('acl', 'isManagerActionAllowed', $project_id);
+    }
+
+    /**
      * Return the user full name
      *
      * @param  array    $user   User properties

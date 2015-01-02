@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'Vaihda suorittajaa',
     'Change assignee for the task "%s"' => 'Vaihda suorittajaa tehtävälle %s',
     'Timezone' => 'Aikavyöhyke',
-    'Sorry, I didn\'t found this information in my database!' => 'Anteeksi, en löytänyt tätä tietoa tietokannastani',
+    'Sorry, I didn\'t find this information in my database!' => 'Anteeksi, en löytänyt tätä tietoa tietokannastani',
     'Page not found' => 'Sivua ei löydy',
     'Complexity' => 'Monimutkaisuus',
     'limit' => 'raja',

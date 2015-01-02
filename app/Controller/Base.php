@@ -101,9 +101,13 @@ abstract class Base
     public function __destruct()
     {
         if (DEBUG) {
+
             foreach ($this->container['db']->getLogMessages() as $message) {
-                $this->container['logger']->addDebug($message);
+                $this->container['logger']->debug($message);
             }
+
+            $this->container['logger']->debug('SQL_QUERIES={nb}', array('nb' => $this->container['db']->nb_queries));
+            $this->container['logger']->debug('RENDERING={time}', array('time' => microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']));
         }
     }
 

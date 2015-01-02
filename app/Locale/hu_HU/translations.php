@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'Felelős módosítása',
     'Change assignee for the task "%s"' => 'Feladat felelősének módosítása: "%s"',
     'Timezone' => 'Időzóna',
-    'Sorry, I didn\'t found this information in my database!' => 'Ez az információ nem található az adatbázisban!',
+    'Sorry, I didn\'t find this information in my database!' => 'Ez az információ nem található az adatbázisban!',
     'Page not found' => 'Az oldal nem található',
     'Complexity' => 'Bonyolultság',
     'limit' => 'határ',

@@ -199,6 +199,7 @@ class Action extends Base
      */
     public function remove($action_id)
     {
+        // $this->container['fileCache']->remove('proxy_action_getAll');
         return $this->db->table(self::TABLE)->eq('id', $action_id)->remove();
     }
 
@@ -242,6 +243,8 @@ class Action extends Base
 
         $this->db->closeTransaction();
 
+        // $this->container['fileCache']->remove('proxy_action_getAll');
+
         return true;
     }
 
@@ -252,7 +255,10 @@ class Action extends Base
      */
     public function attachEvents()
     {
-        foreach ($this->getAll() as $action) {
+        //$actions = $this->container['fileCache']->proxy('action', 'getAll');
+        $actions = $this->getAll();
+
+        foreach ($actions as $action) {
 
             $listener = $this->load($action['action_name'], $action['project_id'], $action['event_name']);
 
@@ -314,6 +320,8 @@ class Action extends Base
                 }
             }
         }
+
+        // $this->container['fileCache']->remove('proxy_action_getAll');
 
         return true;
     }

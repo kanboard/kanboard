@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'Cambiare la persona assegnata',
     'Change assignee for the task "%s"' => 'Cambiare la persona assegnata per il compito « %s »',
     'Timezone' => 'Fuso orario',
-    'Sorry, I didn\'t found this information in my database!' => 'Mi dispiace, non ho trovato questa informazione sulla base dati!',
+    'Sorry, I didn\'t find this information in my database!' => 'Mi dispiace, non ho trovato questa informazione sulla base dati!',
     'Page not found' => 'Pagina non trovata',
     // 'Complexity' => '',
     'limit' => 'limite',

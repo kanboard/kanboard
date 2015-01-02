@@ -182,7 +182,7 @@ return array(
     'Change assignee' => '变更负责人',
     'Change assignee for the task "%s"' => '更改任务"%s"的负责人',
     'Timezone' => '时区',
-    'Sorry, I didn\'t found this information in my database!' => '抱歉，无法在数据库中找到该信息！',
+    'Sorry, I didn\'t find this information in my database!' => '抱歉，无法在数据库中找到该信息！',
     'Page not found' => '页面未找到',
     'Complexity' => '复杂度',
     'limit' => '限制',

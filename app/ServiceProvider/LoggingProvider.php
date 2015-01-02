@@ -4,19 +4,19 @@ namespace ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\SyslogHandler;
+use SimpleLogger\Logger;
+use SimpleLogger\Syslog;
+use SimpleLogger\File;
 
 class LoggingProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
-        $logger = new Logger('app');
-        $logger->pushHandler(new SyslogHandler('kanboard', LOG_USER, Logger::INFO));
+        $logger = new Logger;
+        $logger->setLogger(new Syslog('kanboard'));
 
         if (DEBUG) {
-            $logger->pushHandler(new StreamHandler(__DIR__.'/../../data/debug.log', Logger::DEBUG));
+            $logger->setLogger(new File(__DIR__.'/../../data/debug.log'));
         }
 
         $container['logger'] = $logger;

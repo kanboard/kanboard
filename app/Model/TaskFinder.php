@@ -216,16 +216,15 @@ class TaskFinder extends Base
      * @access public
      * @param  integer   $project_id   Project id
      * @param  integer   $column_id    Column id
-     * @param  array     $status       List of status id
      * @return integer
      */
-    public function countByColumnId($project_id, $column_id, array $status = array(Task::STATUS_OPEN))
+    public function countByColumnId($project_id, $column_id)
     {
         return $this->db
                     ->table(Task::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
-                    ->in('is_active', $status)
+                    ->in('is_active', 1)
                     ->count();
     }
 

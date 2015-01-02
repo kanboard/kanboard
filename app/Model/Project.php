@@ -191,11 +191,12 @@ class Project extends Base
     public function getStats($project_id)
     {
         $stats = array();
-        $columns = $this->board->getColumns($project_id);
         $stats['nb_active_tasks'] = 0;
+        $columns = $this->board->getColumns($project_id);
+        $column_stats = $this->board->getColumnStats($project_id);
 
         foreach ($columns as &$column) {
-            $column['nb_active_tasks'] = $this->taskFinder->countByColumnId($project_id, $column['id']);
+            $column['nb_active_tasks'] = isset($column_stats[$column['id']]) ? $column_stats[$column['id']] : 0;
             $stats['nb_active_tasks'] += $column['nb_active_tasks'];
         }
 

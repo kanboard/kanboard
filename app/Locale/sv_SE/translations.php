@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'Ändra uppdragsinnehavare',
     'Change assignee for the task "%s"' => 'Ändra uppdragsinnehavare för uppgiften "%s"',
     'Timezone' => 'Tidszon',
-    'Sorry, I didn\'t found this information in my database!' => 'Informationen kunde inte hittas i databasen.',
+    'Sorry, I didn\'t find this information in my database!' => 'Informationen kunde inte hittas i databasen.',
     'Page not found' => 'Sidan hittas inte',
     'Complexity' => 'Ungefärligt antal timmar',
     'limit' => 'max',

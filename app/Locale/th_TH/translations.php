@@ -182,7 +182,7 @@ return array(
     'Change assignee' => 'เปลี่ยนการกำหนด',
     'Change assignee for the task "%s"' => 'เปลี่ยนการกำหนดสำหรับงาน « %s »',
     'Timezone' => 'เขตเวลา',
-    'Sorry, I didn\'t found this information in my database!' => 'เสียใจด้วย ไม่สามารถหาข้อมูลในฐานข้อมูลได้',
+    'Sorry, I didn\'t find this information in my database!' => 'เสียใจด้วย ไม่สามารถหาข้อมูลในฐานข้อมูลได้',
     'Page not found' => 'ไม่พบหน้า',
     'Complexity' => 'ความซับซ้อน',
     'limit' => 'จำกัด',

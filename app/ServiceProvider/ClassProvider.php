@@ -52,6 +52,8 @@ class ClassProvider implements ServiceProviderInterface
         'Core' => array(
             'Template',
             'Session',
+            'MemoryCache',
+            'FileCache',
         ),
         'Integration' => array(
             'GitlabWebhook',

@@ -63,7 +63,7 @@
     <?php endif ?>
 
     <div class="task-board-title">
-        <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
+        <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
     </div>
 
 <?php endif ?>

@@ -114,7 +114,7 @@ class Notification extends Base
             }
         }
         catch (Swift_TransportException $e) {
-            $this->container['logger']->addError($e->getMessage());
+            $this->container['logger']->error($e->getMessage());
         }
     }
 

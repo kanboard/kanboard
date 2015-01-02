@@ -48,7 +48,8 @@ class User extends Base
      */
     public function isAdmin($user_id)
     {
-        return $this->db
+        return $this->userSession->isAdmin() ||  // Avoid SQL query if connected
+               $this->db
                     ->table(User::TABLE)
                     ->eq('id', $user_id)
                     ->eq('is_admin', 1)
