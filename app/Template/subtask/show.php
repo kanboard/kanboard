@@ -44,10 +44,10 @@
                 <td>
                     <ul>
                         <li>
-                            <?= $this->a(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
+                            <?= $this->a(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
                         </li>
                         <li>
-                            <?= $this->a(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])) ?>
+                            <?= $this->a(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
                         </li>
                     </ul>
                 </td>

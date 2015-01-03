@@ -48,11 +48,17 @@ class TaskCreationTest extends Base
         $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(0, $tc->create(array('project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('project_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayNotHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayNotHasKey(Task::EVENT_CREATE.'.closure', $called);
+        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayHasKey(Task::EVENT_CREATE.'.closure', $called);
+
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals('Untitled', $task['title']);
+        $this->assertEquals(1, $task['project_id']);
     }
 
     public function testMinimum()

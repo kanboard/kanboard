@@ -198,11 +198,10 @@ class Board extends Base
      *
      * @access public
      */
-    public function edit()
+    public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
         $columns = $this->board->getColumns($project['id']);
-        $values = array();
 
         foreach ($columns as $column) {
             $values['title['.$column['id'].']'] = $column['title'];
@@ -210,7 +209,7 @@ class Board extends Base
         }
 
         $this->response->html($this->projectLayout('board/edit', array(
-            'errors' => array(),
+            'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
             'columns' => $columns,
             'project' => $project,
@@ -249,13 +248,7 @@ class Board extends Base
             }
         }
 
-        $this->response->html($this->projectLayout('board/edit', array(
-            'errors' => $errors,
-            'values' => $values + array('project_id' => $project['id']),
-            'columns' => $columns,
-            'project' => $project,
-            'title' => t('Edit board')
-        )));
+        $this->edit($values, $errors);
     }
 
     /**
@@ -287,13 +280,7 @@ class Board extends Base
             }
         }
 
-        $this->response->html($this->projectLayout('board/edit', array(
-            'errors' => $errors,
-            'values' => $values + $data,
-            'columns' => $columns,
-            'project' => $project,
-            'title' => t('Edit board')
-        )));
+        $this->edit($values, $errors);
     }
 
     /**

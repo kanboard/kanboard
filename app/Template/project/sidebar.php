@@ -24,7 +24,7 @@
         <li>
             <?= $this->a(t('Swimlanes'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>
         </li>
-        <?php if ($project['is_private'] == 0): ?>
+        <?php if ($this->userSession->isAdmin() || $project['is_private'] == 0): ?>
         <li>
             <?= $this->a(t('User management'), 'project', 'users', array('project_id' => $project['id'])) ?>
         </li>

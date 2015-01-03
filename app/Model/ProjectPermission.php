@@ -324,17 +324,29 @@ class ProjectPermission extends Base
     /**
      * Copy user access from a project to another one
      *
-     * @author Antonio Rabelo
-     * @param  integer    $project_from      Project Template
-     * @return integer    $project_to        Project that receives the copy
+     * @param  integer    $project_src       Project Template
+     * @return integer    $project_dst       Project that receives the copy
      * @return boolean
      */
-    public function duplicate($project_from, $project_to)
+    public function duplicate($project_src, $project_dst)
     {
-        $users = $this->getMembers($project_from);
+        $rows = $this->db
+                     ->table(self::TABLE)
+                     ->columns('project_id', 'user_id', 'is_owner')
+                     ->eq('project_id', $project_src)
+                     ->findAll();
 
-        foreach ($users as $user_id => $name) {
-            if (! $this->addMember($project_to, $user_id)) { // TODO: Duplicate managers
+        foreach ($rows as $row) {
+
+            $result = $this->db
+                           ->table(self::TABLE)
+                           ->save(array(
+                               'project_id' => $project_dst,
+                               'user_id' => $row['user_id'],
+                               'is_owner' => (int) $row['is_owner'], // (int) for postgres
+                           ));
+
+            if (! $result) {
                 return false;
             }
         }

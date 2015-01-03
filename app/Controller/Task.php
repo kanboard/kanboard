@@ -438,7 +438,7 @@ class Task extends Base
 
                 if ($this->taskDuplication->moveToProject($task['id'], $values['project_id'])) {
                     $this->session->flash(t('Task updated successfully.'));
-                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$values['project_id']);
                 }
                 else {
                     $this->session->flashError(t('Unable to update your task.'));
@@ -477,7 +477,7 @@ class Task extends Base
                 $task_id = $this->taskDuplication->duplicateToProject($task['id'], $values['project_id']);
                 if ($task_id) {
                     $this->session->flash(t('Task created successfully.'));
-                    $this->response->redirect('?controller=task&action=show&task_id='.$task_id.'&project_id='.$task['project_id']);
+                    $this->response->redirect('?controller=task&action=show&task_id='.$task_id.'&project_id='.$values['project_id']);
                 }
                 else {
                     $this->session->flashError(t('Unable to create your task.'));

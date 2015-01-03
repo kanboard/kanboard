@@ -39,7 +39,7 @@
                         'controller' => 'task',
                         'action' => 'show',
                         'params' => array(
-                            'project_id' => $project['id']
+                            'project_id' => $task['project_id']
                         )
                     )
                 ) ?>

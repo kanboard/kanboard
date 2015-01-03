@@ -13,12 +13,15 @@
             <tr>
                 <th><?= t('User') ?></th>
                 <th><?= t('Role for this project') ?></th>
-                <th><?= t('Actions') ?></th>
+                <?php if ($project['is_private'] == 0): ?>
+                    <th><?= t('Actions') ?></th>
+                <?php endif ?>
             </tr>
             <?php foreach ($users['allowed'] as $user_id => $username): ?>
             <tr>
                 <td><?= $this->e($username) ?></td>
                 <td><?= isset($users['managers'][$user_id]) ? t('Project manager') : t('Project member') ?></td>
+                <?php if ($project['is_private'] == 0): ?>
                 <td>
                     <ul>
                         <li><?= $this->a(t('Revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?></li>
@@ -31,6 +34,7 @@
                         </li>
                     </ul>
                 </td>
+                <?php endif ?>
             </tr>
             <?php endforeach ?>
         </table>

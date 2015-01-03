@@ -88,12 +88,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "3ee555da2e2bda42b5d6aa9b231b534fd69db96c"
+                "reference": "268b3389d2bc3c92ef749a63440d17bd75e2a628"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/3ee555da2e2bda42b5d6aa9b231b534fd69db96c",
-                "reference": "3ee555da2e2bda42b5d6aa9b231b534fd69db96c",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/268b3389d2bc3c92ef749a63440d17bd75e2a628",
+                "reference": "268b3389d2bc3c92ef749a63440d17bd75e2a628",
                 "shasum": ""
             },
             "require": {
@@ -117,7 +117,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2015-01-02 22:00:06"
+            "time": "2015-01-03 00:32:58"
         },
         {
             "name": "fguillot/simple-validator",

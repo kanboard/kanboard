@@ -21,6 +21,10 @@ class TaskCreation extends Base
      */
     public function create(array $values)
     {
+        if (! $this->project->exists($values['project_id'])) {
+            return 0;
+        }
+
         $this->prepare($values);
         $task_id = $this->persist(Task::TABLE, $values);
 
@@ -49,6 +53,10 @@ class TaskCreation extends Base
 
         if (empty($values['color_id'])) {
             $values['color_id'] = $this->color->getDefaultColor();
+        }
+
+        if (empty($values['title'])) {
+            $values['title'] = t('Untitled');
         }
 
         $values['swimlane_id'] = empty($values['swimlane_id']) ? 0 : $values['swimlane_id'];

@@ -26,10 +26,12 @@ class Api extends PHPUnit_Framework_TestCase
         }
 
         $service = new ServiceProvider\DatabaseProvider;
-        $service->getInstance();
 
-        $pdo->exec("UPDATE settings SET value='".API_KEY."' WHERE option='api_token'");
-        $pdo->exec("UPDATE settings SET value='Europe/Paris' WHERE option='application_timezone'");
+        $db = $service->getInstance();
+        $db->table('settings')->eq('option', 'api_token')->update(array('value' => API_KEY));
+        $db->table('settings')->eq('option', 'application_timezone')->update(array('value' => 'Europe/Paris'));
+        $db->closeConnection();
+
         $pdo = null;
     }
 

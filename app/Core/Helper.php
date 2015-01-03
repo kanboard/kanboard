@@ -14,6 +14,7 @@ use Parsedown;
  * @property \Core\Session             $session
  * @property \Model\Acl                $acl
  * @property \Model\User               $user
+ * @property \Model\UserSession        $userSession
  */
 class Helper
 {

@@ -10,7 +10,7 @@
     <p><strong><?= $this->e($subtask['title']) ?></strong></p>
 
     <div class="form-actions">
-        <?= $this->a(t('Yes'), 'subtask', 'remove', array('task_id' => $task['id'], 'subtask_id' => $subtask['id']), true, 'btn btn-red') ?>
+        <?= $this->a(t('Yes'), 'subtask', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id']), true, 'btn btn-red') ?>
         <?= t('or') ?>
         <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
