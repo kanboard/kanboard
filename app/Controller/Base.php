@@ -169,7 +169,7 @@ abstract class Base
      */
     public function handleAuthenticatedUser($controller, $action)
     {
-        if (! $this->authentication->isAuthenticated($controller, $action)) {
+        if (! $this->authentication->isAuthenticated()) {
 
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);

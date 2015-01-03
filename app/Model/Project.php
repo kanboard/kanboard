@@ -228,7 +228,7 @@ class Project extends Base
         );
 
         if (! $this->db->table(self::TABLE)->save($values)) {
-            return false;
+            return 0;
         }
 
         return $this->db->getConnection()->getLastId();

@@ -87,7 +87,7 @@ class Swimlane extends Base
         $project = $this->getProject();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->swimlane->validateDefaultModification($values);
+        list($valid,) = $this->swimlane->validateDefaultModification($values);
 
         if ($valid) {
 

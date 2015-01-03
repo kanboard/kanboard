@@ -35,11 +35,9 @@ class Authentication extends Base
      * Check if the current user is authenticated
      *
      * @access public
-     * @param  string    $controller    Controller
-     * @param  string    $action        Action name
      * @return bool
      */
-    public function isAuthenticated($controller, $action)
+    public function isAuthenticated()
     {
         // If the user is already logged it's ok
         if ($this->userSession->isLogged()) {

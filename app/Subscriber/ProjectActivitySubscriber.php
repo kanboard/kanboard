@@ -27,7 +27,7 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
         );
     }
 
-    public function execute(GenericEvent $event)
+    public function execute(GenericEvent $event, $event_name)
     {
         // Executed only when someone is logged
         if ($this->userSession->isLogged() && isset($event['task_id'])) {
@@ -38,7 +38,7 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
                 $values['task']['project_id'],
                 $values['task']['id'],
                 $this->userSession->getId(),
-                $event->getName(),
+                $event_name,
                 $values
             );
         }

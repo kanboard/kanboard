@@ -110,7 +110,7 @@ class Subtask extends Base
     public function update()
     {
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $this->getSubtask();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->subTask->validateModification($values);

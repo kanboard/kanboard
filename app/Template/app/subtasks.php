@@ -12,7 +12,7 @@
         <?php foreach ($subtasks as $subtask): ?>
         <tr>
             <td class="task-table task-<?= $subtask['color_id'] ?>">
-                <?= $this->a('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'])) ?>
+                <?= $this->a('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
                 <?= $this->a($this->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
@@ -21,7 +21,7 @@
                 <?= $this->e($subtask['status_name']) ?>
             </td>
             <td>
-                <?= $this->a($this->e($subtask['title']), 'task', 'show', array('task_id' => $subtask['task_id'])) ?>
+                <?= $this->a($this->e($subtask['title']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
         </tr>
         <?php endforeach ?>

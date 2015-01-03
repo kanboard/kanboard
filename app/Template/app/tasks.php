@@ -12,13 +12,13 @@
         <?php foreach ($tasks as $task): ?>
         <tr>
             <td class="task-table task-<?= $task['color_id'] ?>">
-                <?= $this->a('#'.$task['id'], 'task', 'show', array('task_id' => $task['id'])) ?>
+                <?= $this->a('#'.$task['id'], 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
             <td>
                 <?= $this->a($this->e($task['project_name']), 'board', 'show', array('project_id' => $task['project_id'])) ?>
             </td>
             <td>
-                <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'])) ?>
+                <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
             <td>
                 <?= dt('%B %e, %Y', $task['date_due']) ?>

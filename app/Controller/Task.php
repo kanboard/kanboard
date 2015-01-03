@@ -141,7 +141,7 @@ class Task extends Base
                     $this->response->redirect('?controller=task&action=create&'.http_build_query($values));
                 }
                 else {
-                    $this->response->redirect('?controller=board&action=show&project_id='.$values['project_id']);
+                    $this->response->redirect('?controller=board&action=show&project_id='.$project['id']);
                 }
             }
             else {
@@ -157,16 +157,20 @@ class Task extends Base
      *
      * @access public
      */
-    public function edit()
+    public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
         $ajax = $this->request->isAjax();
 
-        $this->dateParser->format($task, array('date_due'));
+        if (empty($values)) {
+            $values = $task;
+        }
+
+        $this->dateParser->format($values, array('date_due'));
 
         $params = array(
-            'values' => $task,
-            'errors' => array(),
+            'values' => $values,
+            'errors' => $errors,
             'task' => $task,
             'users_list' => $this->projectPermission->getMemberList($task['project_id']),
             'colors_list' => $this->color->getList(),
@@ -213,18 +217,7 @@ class Task extends Base
             }
         }
 
-        $this->response->html($this->taskLayout('task/edit', array(
-            'values' => $values,
-            'errors' => $errors,
-            'task' => $task,
-            'columns_list' => $this->board->getColumnsList($values['project_id']),
-            'users_list' => $this->projectPermission->getMemberList($values['project_id']),
-            'colors_list' => $this->color->getList(),
-            'categories_list' => $this->category->getList($values['project_id']),
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
-            'ajax' => $this->request->isAjax(),
-        )));
+        $this->edit($values, $errors);
     }
 
     /**

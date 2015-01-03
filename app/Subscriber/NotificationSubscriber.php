@@ -44,13 +44,13 @@ class NotificationSubscriber extends Base implements EventSubscriberInterface
         );
     }
 
-    public function execute(GenericEvent $event)
+    public function execute(GenericEvent $event, $event_name)
     {
         $values = $this->getTemplateData($event);
         $users = $this->notification->getUsersList($values['task']['project_id']);
 
         if ($users) {
-            $this->notification->sendEmails($this->templates[$event->getName()], $users, $values);
+            $this->notification->sendEmails($this->templates[$event_name], $users, $values);
         }
     }
 
