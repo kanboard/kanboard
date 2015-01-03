@@ -198,7 +198,7 @@ class ProjectPermission extends Base
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
-                    ->update(array('is_owner' => $is_owner));
+                    ->update(array('is_owner' => (int) $is_owner));
     }
 
     /**

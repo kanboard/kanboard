@@ -6,7 +6,7 @@
     </div>
     <section class="sidebar-container" id="task-section">
 
-        <?= $this->render('task/sidebar', array('task' => $task, 'hide_remove_menu' => isset($hide_remove_menu))) ?>
+        <?= $this->render('task/sidebar', array('task' => $task)) ?>
 
         <div class="sidebar-content">
             <?= $task_content_for_layout ?>

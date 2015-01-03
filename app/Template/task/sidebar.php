@@ -35,7 +35,7 @@
                 <?= $this->a(t('Open this task'), 'task', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             <?php endif ?>
         </li>
-        <?php if (! $hide_remove_menu): ?>
+        <?php if ($this->taskPermission->canRemoveTask($task)): ?>
         <li>
             <?= $this->a(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>

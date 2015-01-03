@@ -244,10 +244,6 @@ abstract class Base
      */
     protected function taskLayout($template, array $params)
     {
-        if (isset($params['task']) && $this->taskPermission->canRemoveTask($params['task']) === false) {
-            $params['hide_remove_menu'] = true;
-        }
-
         $content = $this->template->render($template, $params);
         $params['task_content_for_layout'] = $content;
         $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];

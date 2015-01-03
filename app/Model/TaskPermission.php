@@ -20,7 +20,7 @@ class TaskPermission extends Base
      */
     public function canRemoveTask(array $task)
     {
-        if ($this->userSession->isAdmin()) {
+        if ($this->userSession->isAdmin() || $this->projectPermission->isManager($task['project_id'], $this->userSession->getId())) {
             return true;
         }
         else if (isset($task['creator_id']) && $task['creator_id'] == $this->userSession->getId()) {

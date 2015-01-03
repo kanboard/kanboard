@@ -59,7 +59,6 @@ class AclTest extends Base
         $this->assertTrue($acl->isManagerAction('project', 'disable'));
         $this->assertTrue($acl->isManagerAction('category', 'index'));
         $this->assertTrue($acl->isManagerAction('project', 'users'));
-        $this->assertTrue($acl->isManagerAction('task', 'remove'));
         $this->assertFalse($acl->isManagerAction('app', 'index'));
     }
 
@@ -183,7 +182,8 @@ class AclTest extends Base
         $this->assertTrue($acl->isAllowed('project', 'show', 1));
         $this->assertFalse($acl->isAllowed('config', 'application', 1));
         $this->assertFalse($acl->isAllowed('project', 'users', 1));
-        $this->assertFalse($acl->isAllowed('task', 'remove', 1));
+        $this->assertTrue($acl->isAllowed('task', 'remove', 1));
+        $this->assertFalse($acl->isAllowed('task', 'remove', 2));
         $this->assertTrue($acl->isAllowed('app', 'index', 1));
     }
 
