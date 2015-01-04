@@ -61,6 +61,7 @@ Documentation
 - [Sharing boards and tasks](docs/sharing-projects.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
 - [Project permissions](docs/project-permissions.markdown)
+- [Swimlanes](docs/swimlanes.markdown)
 
 #### Working with tasks
 
