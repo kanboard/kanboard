@@ -94,30 +94,26 @@ class Calendar extends Base {
      */
     public function events() {
 
-        $project_id = $this->request->getIntegerParam('project_id');
-        $user_id = $this->request->getIntegerParam('user_id', -1);
+        $project_id  = $this->request->getIntegerParam('project_id');
+        $user_id     = $this->request->getIntegerParam('user_id', -1);
         $category_id = $this->request->getIntegerParam('category_id', -1);
-        $column_id = $this->request->getIntegerParam('column_id', -1);
-        $status_id = $this->request->getIntegerParam('status_id', -1);
+        $column_id   = $this->request->getIntegerParam('column_id', -1);
+        $status_id   = $this->request->getIntegerParam('status_id', -1);
 
-        if ($status_id == -1) {            
-            $tasks1 = $this->taskFinder->getAll($project_id, 1);
-            $tasks2 = $this->taskFinder->getAll($project_id, 0);
-            $tasks = array_merge($tasks1, $tasks2);            
-        } else {
-            $tasks = $this->taskFinder->getAll($project_id, $status_id);
-        }
-
+        $date_start = $this->request->getStringParam('start');
+        $date_parts = explode('-', $date_start);
+        $date_start = mktime(0, 0, 0, $date_parts[1], $date_parts[2], $date_parts[0]);
+        
+        $date_end   = $this->request->getStringParam('end');
+        $date_parts = explode('-', $date_end);
+        $date_end   = mktime(0, 0, 0, $date_parts[1], $date_parts[2], $date_parts[0]);
+        
+        $tasks = $this->taskFinder->getTaskForCalendar($project_id, $user_id, $category_id, $column_id, $status_id, $date_start, $date_end);
+        
         // List of events
         $event_array = array();
 
         foreach ($tasks as $task) {
-            if ($task['date_due'] > 0) {
-                if ($project_id == -1 || $task['project_id'] == $project_id) {
-                    if ($status_id == -1 || $task['is_active'] == $status_id) {
-                        if ($user_id == -1 || $task['owner_id'] == $user_id) {
-                            if ($category_id == -1 || $task['category_id'] == $category_id) {
-                                if ($column_id == -1 || $task['column_id'] == $column_id) {
                                     $json_event = array();
                                     $json_event['id'] = $task['id'];
                                     $json_event['title'] = '#' . $task['id'] . ': ' . $task['title'];
@@ -153,20 +149,7 @@ class Calendar extends Base {
                                     $json_event['textColor'] = 'black';
                                     $json_event['url'] = '?controller=task&action=show&task_id=' . $task['id'];
 
-                                    //additional fields:
-                                    /* $json_event['project_id'] = $task['project_id'];
-                                      $json_event['column_id'] = $task['column_id'];
-                                      $json_event['owner_id'] = $task['owner_id'];
-                                      $json_event['is_active'] = $task['is_active'];
-                                      $json_event['category_id'] = $task['category_id']; */
-
-                                    array_push($event_array, $json_event);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+                                    array_push($event_array, $json_event);    
         }
         echo json_encode($event_array);
     }

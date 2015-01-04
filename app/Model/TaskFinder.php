@@ -234,4 +234,46 @@ class TaskFinder extends Base
     {
         return $this->db->table(Task::TABLE)->eq('id', $task_id)->count() === 1;
     }
+    
+    /**
+     * Get filtered tasks for calendar
+     *
+     * @access public
+     * @param  integer    $project_id   Project id
+     * @param  integer    $user_id      User id
+     * @param  integer    $category_id  Category id
+     * @param  integer    $column_id    Column id
+     * @param  integer    $status_id    Status id
+     * @param  integer    $date_start   Date start
+     * @param  integer    $date_end     Date end
+     * @return array
+     */
+    public function getTaskForCalendar($project_id, $user_id, $category_id, $column_id, $status_id, $date_start, $date_end)
+    {        
+        $table = $this->db->table(Task::TABLE);
+        
+        if($project_id > 0){
+            $table->eq('project_id', $project_id);
+        }
+        
+        if($category_id >= 0){
+            $table->eq('category_id', $category_id);
+        }
+        
+        if($column_id > 0){
+            $table->eq('column_id', $column_id);
+        }
+        
+        if($status_id >= 0){
+            $table->eq('is_active', $status_id);
+        }
+        
+        if($user_id >= 0){
+            $table->eq('owner_id', $user_id);
+        }
+        
+        $table->gte('date_due', $date_start)->lte('date_due', $date_end);
+        
+        return $table->findAll();
+    }
 }
