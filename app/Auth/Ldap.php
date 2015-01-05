@@ -54,7 +54,7 @@ class Ldap extends Base
             }
 
             // We open the session
-            $this->user->updateSession($user);
+            $this->userSession->refresh($user);
             $this->container['dispatcher']->dispatch('auth.success', new AuthEvent(self::AUTH_NAME, $user['id']));
 
             return true;

@@ -25,24 +25,32 @@ class Config extends Base
      * Get available timezones
      *
      * @access public
+     * @param  boolean   $prepend  Prepend a default value
      * @return array
      */
-    public function getTimezones()
+    public function getTimezones($prepend = false)
     {
         $timezones = timezone_identifiers_list();
-        return array_combine(array_values($timezones), $timezones);
+        $listing = array_combine(array_values($timezones), $timezones);
+
+        if ($prepend) {
+            return array('' => t('Application default')) + $listing;
+        }
+
+        return $listing;
     }
 
     /**
      * Get available languages
      *
      * @access public
+     * @param  boolean   $prepend  Prepend a default value
      * @return array
      */
-    public function getLanguages()
+    public function getLanguages($prepend = false)
     {
         // Sorted by value
-        return array(
+        $languages = array(
             'da_DK' => 'Dansk',
             'de_DE' => 'Deutsch',
             'en_US' => 'English',
@@ -59,6 +67,12 @@ class Config extends Base
             'ja_JP' => '日本語',
             'th_TH' => 'ไทย',
         );
+
+        if ($prepend) {
+            return array('' => t('Application default')) + $languages;
+        }
+
+        return $languages;
     }
 
     /**
@@ -138,10 +152,11 @@ class Config extends Base
      */
     public function setupTranslations()
     {
-        $language = $this->get('application_language', 'en_US');
-
-        if ($language !== 'en_US') {
-            Translator::load($language);
+        if ($this->userSession->isLogged() && ! empty($this->session['user']['language'])) {
+            Translator::load($this->session['user']['language']);
+        }
+        else {
+            Translator::load($this->get('application_language', 'en_US'));
         }
     }
 
@@ -152,7 +167,12 @@ class Config extends Base
      */
     public function setupTimezone()
     {
-        date_default_timezone_set($this->get('application_timezone', 'UTC'));
+        if ($this->userSession->isLogged() && ! empty($this->session['user']['timezone'])) {
+            date_default_timezone_set($this->session['user']['timezone']);
+        }
+        else {
+            date_default_timezone_set($this->get('application_timezone', 'UTC'));
+        }
     }
 
     /**

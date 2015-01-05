@@ -644,4 +644,7 @@ return array(
     // 'Subtasks exportation for "%s"' => '',
     // 'Task Title' => '',
     // 'Untitled' => '',
+    // 'Application default' => '',
+    // 'Language:' => '',
+    // 'Timezone:' => '',
 );

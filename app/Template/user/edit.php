@@ -20,6 +20,12 @@
     <?= $this->formLabel(t('Default project'), 'default_project_id') ?>
     <?= $this->formSelect('default_project_id', $projects, $values, $errors) ?><br/>
 
+    <?= $this->formLabel(t('Timezone'), 'timezone') ?>
+    <?= $this->formSelect('timezone', $timezones, $values, $errors) ?><br/>
+
+    <?= $this->formLabel(t('Language'), 'language') ?>
+    <?= $this->formSelect('language', $languages, $values, $errors) ?><br/>
+
     <?php if ($this->userSession->isAdmin()): ?>
         <?= $this->formCheckbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1 ? true : false) ?><br/>
     <?php endif ?>

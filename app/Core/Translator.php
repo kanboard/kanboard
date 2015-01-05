@@ -181,5 +181,8 @@ class Translator
         if (file_exists($filename)) {
             self::$locales = require $filename;
         }
+        else {
+            self::$locales = array();
+        }
     }
 }

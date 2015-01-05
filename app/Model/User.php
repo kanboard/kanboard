@@ -254,7 +254,7 @@ class User extends Base
 
         // If the user is connected refresh his session
         if (Session::isOpen() && $this->userSession->getId() == $values['id']) {
-            $this->updateSession();
+            $this->userSession->refresh();
         }
 
         return $result;
@@ -292,30 +292,6 @@ class User extends Base
                 return false;
             }
         });
-    }
-
-    /**
-     * Update user session information
-     *
-     * @access public
-     * @param  array  $user  User data
-     */
-    public function updateSession(array $user = array())
-    {
-        if (empty($user)) {
-            $user = $this->getById($this->userSession->getId());
-        }
-
-        if (isset($user['password'])) {
-            unset($user['password']);
-        }
-
-        $user['id'] = (int) $user['id'];
-        $user['default_project_id'] = (int) $user['default_project_id'];
-        $user['is_admin'] = (bool) $user['is_admin'];
-        $user['is_ldap_user'] = (bool) $user['is_ldap_user'];
-
-        $this->session['user'] = $user;
     }
 
     /**

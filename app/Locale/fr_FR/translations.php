@@ -644,4 +644,7 @@ return array(
     'Subtasks exportation for "%s"' => 'Exportation des sous-tâches pour le projet « %s »',
     'Task Title' => 'Titre de la tâche',
     'Untitled' => 'Sans nom',
+    'Application default' => 'Valeur par défaut de l\'application',
+    'Language:' => 'Langue :',
+    'Timezone:' => 'Fuseau horaire :',
 );

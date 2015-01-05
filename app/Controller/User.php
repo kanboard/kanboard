@@ -151,6 +151,8 @@ class User extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $this->response->html($this->template->layout('user/new', array(
+            'timezones' => $this->config->getTimezones(true),
+            'languages' => $this->config->getLanguages(true),
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
             'projects' => $this->project->getList(),
             'errors' => $errors,
@@ -194,6 +196,8 @@ class User extends Base
         $this->response->html($this->layout('user/show', array(
             'projects' => $this->projectPermission->getAllowedProjects($user['id']),
             'user' => $user,
+            'timezones' => $this->config->getTimezones(true),
+            'languages' => $this->config->getLanguages(true),
         )));
     }
 
@@ -358,6 +362,8 @@ class User extends Base
             'errors' => $errors,
             'projects' => $this->projectPermission->filterProjects($this->project->getList(), $user['id']),
             'user' => $user,
+            'timezones' => $this->config->getTimezones(true),
+            'languages' => $this->config->getLanguages(true),
         )));
     }
 

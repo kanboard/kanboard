@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Core\Translator;
+
 /**
  * User Session
  *
@@ -10,6 +12,30 @@ namespace Model;
  */
 class UserSession extends Base
 {
+    /**
+     * Update user session information
+     *
+     * @access public
+     * @param  array  $user  User data
+     */
+    public function refresh(array $user = array())
+    {
+        if (empty($user)) {
+            $user = $this->user->getById($this->userSession->getId());
+        }
+
+        if (isset($user['password'])) {
+            unset($user['password']);
+        }
+
+        $user['id'] = (int) $user['id'];
+        $user['default_project_id'] = (int) $user['default_project_id'];
+        $user['is_admin'] = (bool) $user['is_admin'];
+        $user['is_ldap_user'] = (bool) $user['is_ldap_user'];
+
+        $this->session['user'] = $user;
+    }
+
     /**
      * Return true if the logged user is admin
      *

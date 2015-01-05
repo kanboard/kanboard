@@ -453,7 +453,7 @@ return array(
     'Notifications:' => 'Notificaciones:',
     // 'Notifications' => '',
     'Group:' => 'Grupo:',
-    'Regular user' => 'Usuario regular:',
+    'Regular user' => 'Usuario regular',
     'Account type:' => 'Tipo de Cuenta:',
     'Edit profile' => 'Editar perfil',
     'Change password' => 'Cambiar contraseña',
@@ -644,4 +644,7 @@ return array(
     // 'Subtasks exportation for "%s"' => '',
     // 'Task Title' => '',
     // 'Untitled' => '',
+    // 'Application default' => '',
+    // 'Language:' => '',
+    // 'Timezone:' => '',
 );

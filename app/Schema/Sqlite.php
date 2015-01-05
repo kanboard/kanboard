@@ -5,7 +5,13 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 39;
+const VERSION = 40;
+
+function version_40($pdo)
+{
+    $pdo->exec('ALTER TABLE users ADD COLUMN timezone TEXT');
+    $pdo->exec('ALTER TABLE users ADD COLUMN language TEXT');
+}
 
 function version_39($pdo)
 {

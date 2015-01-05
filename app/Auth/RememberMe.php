@@ -101,7 +101,7 @@ class RememberMe extends Base
                 );
 
                 // Create the session
-                $this->user->updateSession($this->user->getById($record['user_id']));
+                $this->userSession->refresh($this->user->getById($record['user_id']));
 
                 $this->container['dispatcher']->dispatch(
                     'auth.success',

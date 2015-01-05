@@ -37,7 +37,7 @@ class ReverseProxy extends Base
                 $user = $this->user->getByUsername($login);
             }
 
-            $this->user->updateSession($user);
+            $this->userSession->refresh($user);
             $this->container['dispatcher']->dispatch('auth.success', new AuthEvent(self::AUTH_NAME, $user['id']));
 
             return true;
