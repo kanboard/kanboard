@@ -637,4 +637,11 @@ return array(
     'Project manager' => 'Chef de projet',
     'Project member' => 'Membre du projet',
     'A project manager can change the settings of the project and have more privileges than a standard user.' => 'Un chef de projet peut changer les paramètres du projet et possède plus de privilèges qu\'un utilisateur standard.',
+    'Gitlab Issue' => 'Ticket Gitlab',
+    'Subtask Id' => 'Identifiant de la sous-tâche',
+    'Subtasks' => 'Sous-tâches',
+    'Subtasks Export' => 'Exportation des sous-tâches',
+    'Subtasks exportation for "%s"' => 'Exportation des sous-tâches pour le projet « %s »',
+    'Task Title' => 'Titre de la tâche',
+    'Untitled' => 'Sans nom',
 );

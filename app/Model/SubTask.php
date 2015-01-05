@@ -58,15 +58,11 @@ class SubTask extends Base
      */
     public function getStatusList()
     {
-        $status = array(
+        return array(
             self::STATUS_TODO => t('Todo'),
             self::STATUS_INPROGRESS => t('In progress'),
             self::STATUS_DONE => t('Done'),
         );
-
-        asort($status);
-
-        return $status;
     }
 
     /**

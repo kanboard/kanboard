@@ -54,10 +54,13 @@
     <h2><?= t('Exports') ?></h2>
     <ul>
         <li>
-            <?= $this->a(t('Tasks'), 'project', 'exportTasks', array('project_id' => $project['id'])) ?>
+            <?= $this->a(t('Tasks'), 'export', 'tasks', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <?= $this->a(t('Daily project summary'), 'project', 'exportDailyProjectSummary', array('project_id' => $project['id'])) ?>
+            <?= $this->a(t('Subtasks'), 'export', 'subtasks', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
+            <?= $this->a(t('Daily project summary'), 'export', 'summary', array('project_id' => $project['id'])) ?>
         </li>
     </ul>
     <?php endif ?>

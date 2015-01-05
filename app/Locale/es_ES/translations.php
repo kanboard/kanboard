@@ -637,4 +637,11 @@ return array(
     // 'Project manager' => '',
     // 'Project member' => '',
     // 'A project manager can change the settings of the project and have more privileges than a standard user.' => '',
+    // 'Gitlab Issue' => '',
+    // 'Subtask Id' => '',
+    // 'Subtasks' => '',
+    // 'Subtasks Export' => '',
+    // 'Subtasks exportation for "%s"' => '',
+    // 'Task Title' => '',
+    // 'Untitled' => '',
 );

@@ -50,7 +50,8 @@ class Acl extends Base
         'analytic' => '*',
         'board' => array('movecolumn', 'edit', 'update', 'add', 'remove'),
         'category' => '*',
-        'project' => array('edit', 'update', 'exporttasks', 'exportdailyprojectsummary', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
+        'export' => array('tasks', 'subtasks', 'summary'),
+        'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',
     );
 
@@ -179,7 +180,7 @@ class Acl extends Base
 
         // Check project member permissions
         if ($this->isMemberAction($controller, $action)) {
-            return $this->isMemberActionAllowed($project_id);
+            return $project_id > 0 && $this->projectPermission->isMember($project_id, $this->userSession->getId());
         }
 
         // Other applications actions are allowed
@@ -188,11 +189,10 @@ class Acl extends Base
 
     public function isManagerActionAllowed($project_id)
     {
-        return $project_id > 0 && $this->projectPermission->isManager($project_id, $this->userSession->getId());
-    }
+        if ($this->userSession->isAdmin()) {
+            return true;
+        }
 
-    public function isMemberActionAllowed($project_id)
-    {
-        return $project_id > 0 && $this->projectPermission->isMember($project_id, $this->userSession->getId());
+        return $project_id > 0 && $this->projectPermission->isManager($project_id, $this->userSession->getId());
     }
 }
