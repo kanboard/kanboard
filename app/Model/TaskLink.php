@@ -66,6 +66,7 @@ class TaskLink extends Base
             ' . self::TABLE . '.id,
             ' . Link::TABLE . '.name AS name,
             ' . self::TABLE . '.task_inverse_id,
+            ' . Task::TABLE . '.project_id AS task_inverse_project_id,
             ' . Category::TABLE . '.name AS task_inverse_category,
             ' . Task::TABLE . '.title AS task_inverse_name,
             ' . Task::TABLE . '.is_active AS task_inverse_is_active

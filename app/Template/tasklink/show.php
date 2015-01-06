@@ -25,9 +25,9 @@
                 <?php if (0 == $link['task_inverse_is_active']): ?><span class="task-closed"><?php endif ?>
                 <?= $this->e($link['task_inverse_category']) ?>
                 <?php if (! isset($not_editable)): ?>
-                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])), 'task', 'show', array('task_id' => $link['task_inverse_id'], 'project_id' => $task['project_id'])) ?>
+                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])), 'task', 'show', array('task_id' => $link['task_inverse_id'], 'project_id' => $link['task_inverse_project_id'])) ?>
                 <?php else: ?>
-                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])), 'task', 'readonly', array('task_id' => $link['task_inverse_id'], 'project_id' => $task['project_id'], 'token' => $project['token'])) ?>
+                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])), 'task', 'readonly', array('task_id' => $link['task_inverse_id'], 'project_id' => $link['task_inverse_project_id'], 'token' => $project['token'])) ?>
                 <?php endif ?>
                 <?php if (0 == $link['task_inverse_is_active']): ?></span><?php endif ?>
             </td>

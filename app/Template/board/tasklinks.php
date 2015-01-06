@@ -18,7 +18,7 @@ foreach ($links as $link): ?>
                     <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])),
                         'task', 
                         'show', 
-                        array('task_id' => $link['task_inverse_id'], 'project_id' => $task['project_id'])) ?>
+                        array('task_id' => $link['task_inverse_id'], 'project_id' => $link['task_inverse_project_id'])) ?>
                 </li>
 <?php endforeach ?>
             </ul>
