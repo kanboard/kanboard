@@ -6,8 +6,8 @@
     
     <table class="link-table">
         <tr>
-            <th><?= t('Link') ?></th>
-            <th width="70%"><?= t('Title') ?></th>
+            <th><?= t('Label') ?></th>
+            <th width="70%"><?= t('Task') ?></th>
             <?php if (! isset($not_editable)): ?>
                 <th><?= t('Actions') ?></th>
             <?php endif ?>
@@ -32,7 +32,6 @@
             </td>
             <?php endif ?>
         </tr>
-        
         <?php endforeach ?>
     </table>
 

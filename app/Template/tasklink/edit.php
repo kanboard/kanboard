@@ -10,10 +10,8 @@
     <?= Helper\form_hidden('id', $values) ?>
     <?= Helper\form_hidden('task_id', $values) ?>
 
-    <?= Helper\form_label(t('Link Type'), 'link_id') ?>
-    <?= Helper\form_select('link_id', $link_list, $values, $errors, 'required autofocus') ?><br/>
-
-    <?= Helper\form_label(t('Linked Task'), 'task_inverse_id') ?>
+    #<?= $task['id'] ?>
+    <?= Helper\form_select('link_id', $link_list, $values, $errors, 'required autofocus') ?>
     #<?= Helper\form_numeric('task_inverse_id', $values, $errors, array('required', 'placeholder="'.t('Task id').'"', 'list="task_inverse_ids"')) ?>
 	<datalist id="task_inverse_ids">
 	  <select>

@@ -30,9 +30,9 @@
 <form method="post" action="<?= Helper\u('link', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
 	<div class="alert alert-info">
 		<strong><?= t('Example:') ?></strong>
-		<i><?= t('#10 Follows #9') ?></i>
-		<?= t('and therefore') ?>
 		<i><?= t('#9 Precedes #10') ?></i>
+		<?= t('and therefore') ?>
+		<i><?= t('#10 Follows #9') ?></i>
 	</div>
     <?= Helper\form_csrf() ?>
     <?= Helper\form_hidden('project_id', $values) ?>
