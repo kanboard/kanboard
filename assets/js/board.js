@@ -154,7 +154,7 @@ Kanboard.Board = (function() {
                 "task_id": taskId,
                 "column_id": columnId,
                 "swimlane_id": swimlaneId,
-                "position": position,
+                "position": position
             }),
             success: function(data) {
                 $("#board").remove();

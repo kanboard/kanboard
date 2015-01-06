@@ -84,7 +84,7 @@ var Kanboard = (function() {
                 dataType: "html",
                 data: JSON.stringify({
                     "text": textarea.val()
-                }),
+                })
             });
 
             request.done(function(data) {
