@@ -22,7 +22,14 @@
                 <?php endif ?>
             </td>
             <td>
-                <?php if (0 == $link['task_inverse_is_active']): ?><span class="task-closed"><?php endif ?><?= Helper\escape($link['task_inverse_category']) ?> <?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' - '.trim(Helper\escape($link['task_inverse_name'])), 'task', '', array('task_id' => $link['task_inverse_id'], 'action' => 'show')) ?><?php if (0 == $link['task_inverse_is_active']): ?></span><?php endif ?>
+                <?php if (0 == $link['task_inverse_is_active']): ?><span class="task-closed"><?php endif ?>
+                <?= Helper\escape($link['task_inverse_category']) ?>
+                <?php if (! isset($not_editable)): ?>
+                    <?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' - '.trim(Helper\escape($link['task_inverse_name'])), 'task', 'show', array('task_id' => $link['task_inverse_id'])) ?>
+                <?php else: ?>
+                    <?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' - '.trim(Helper\escape($link['task_inverse_name'])), 'task', 'readonly', array('task_id' => $link['task_inverse_id'], 'token' => $project['token'])) ?>
+                <?php endif ?>
+                <?php if (0 == $link['task_inverse_is_active']): ?></span><?php endif ?>
             </td>
             <?php if (! isset($not_editable)): ?>
             <td>
