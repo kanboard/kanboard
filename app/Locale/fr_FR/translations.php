@@ -647,4 +647,5 @@ return array(
     'Application default' => 'Valeur par défaut de l\'application',
     'Language:' => 'Langue :',
     'Timezone:' => 'Fuseau horaire :',
+    'Next' => 'Suivant',
 );

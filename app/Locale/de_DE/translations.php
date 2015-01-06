@@ -512,7 +512,7 @@ return array(
     'Github issue assignee change' => 'Github Fehlerzuständigkeit geändert',
     'Github issue label change' => 'Github Fehlerkennzeichnung verändert',
     'Create a task from an external provider' => 'Eine Aufgabe durch einen externen Provider hinzufügen',
-    // 'Change the assignee based on an external username' => '',
+    'Change the assignee based on an external username' => 'Zuordnung ändern basierend auf externem Benutzernamen',
     'Change the category based on an external label' => 'Kategorie basierend auf einer externen Kennzeichnung ändern',
     'Reference' => 'Referenz',
     'Reference: %s' => 'Referenz: %s',
@@ -647,5 +647,5 @@ return array(
     'Application default' => 'Anwendungsstandard',
     'Language:' => 'Sprache:',
     'Timezone:' => 'Zeitzone:',
-    'Change the assignee based on an external username' => 'Zuordnung ändern basierend auf externem Benutzernamen',
+    // 'Next' => '',
 );
