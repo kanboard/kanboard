@@ -29,6 +29,7 @@ class TaskValidator extends Base
             new Validators\Integer('creator_id', t('This value must be an integer')),
             new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Integer('category_id', t('This value must be an integer')),
+            new Validators\Integer('swimlane_id', t('This value must be an integer')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
             new Validators\Date('date_due', t('Invalid date'), $this->dateParser->getDateFormats()),
             new Validators\Date('date_started', t('Invalid date'), $this->dateParser->getDateFormats()),

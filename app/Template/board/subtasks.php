@@ -1,13 +1,13 @@
 <section id="tooltip-subtasks">
 <?php foreach ($subtasks as $subtask): ?>
-    <?= Helper\a(
-        trim(Helper\template('subtask/icons', array('subtask' => $subtask))) . Helper\escape($subtask['title']),
+    <?= $this->a(
+        trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['title']),
         'board',
         'toggleSubtask',
-        array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'])
+        array('task_id' => $subtask['task_id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])
     ) ?>
 
-    <?= Helper\escape(empty($subtask['username']) ? '' : ' ['.Helper\get_username($subtask).']') ?>
+    <?= $this->e(empty($subtask['username']) ? '' : ' ['.$this->getFullname($subtask).']') ?>
 
     <br/>
 <?php endforeach ?>

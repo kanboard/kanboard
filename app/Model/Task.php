@@ -30,8 +30,10 @@ class Task extends Base
      *
      * @var string
      */
+    const EVENT_MOVE_PROJECT    = 'task.move.project';
     const EVENT_MOVE_COLUMN     = 'task.move.column';
     const EVENT_MOVE_POSITION   = 'task.move.position';
+    const EVENT_MOVE_SWIMLANE   = 'task.move.swimlane';
     const EVENT_UPDATE          = 'task.update';
     const EVENT_CREATE          = 'task.create';
     const EVENT_CLOSE           = 'task.close';

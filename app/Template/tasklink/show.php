@@ -18,24 +18,24 @@
             <td>
                 <?php if (null == $previous_link || $previous_link != $link['name']):
                     $previous_link = $link['name']; ?>
-                    <?= Helper\escape($link['name']) ?>
+                    <?= $this->e($link['name']) ?>
                 <?php endif ?>
             </td>
             <td>
                 <?php if (0 == $link['task_inverse_is_active']): ?><span class="task-closed"><?php endif ?>
-                <?= Helper\escape($link['task_inverse_category']) ?>
+                <?= $this->e($link['task_inverse_category']) ?>
                 <?php if (! isset($not_editable)): ?>
-                    <?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' - '.trim(Helper\escape($link['task_inverse_name'])), 'task', 'show', array('task_id' => $link['task_inverse_id'])) ?>
+                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])), 'task', 'show', array('task_id' => $link['task_inverse_id'], 'project_id' => $task['project_id'])) ?>
                 <?php else: ?>
-                    <?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' - '.trim(Helper\escape($link['task_inverse_name'])), 'task', 'readonly', array('task_id' => $link['task_inverse_id'], 'token' => $project['token'])) ?>
+                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])), 'task', 'readonly', array('task_id' => $link['task_inverse_id'], 'project_id' => $task['project_id'], 'token' => $project['token'])) ?>
                 <?php endif ?>
                 <?php if (0 == $link['task_inverse_is_active']): ?></span><?php endif ?>
             </td>
             <?php if (! isset($not_editable)): ?>
             <td>
-                <?= Helper\a(t('Edit'), 'tasklink', 'edit', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
+                <?= $this->a(t('Edit'), 'tasklink', 'edit', array('task_id' => $task['id'], 'link_id' => $link['id'], 'project_id' => $task['project_id'])) ?>
                 <?= t('or') ?>
-                <?= Helper\a(t('Remove'), 'tasklink', 'confirm', array('task_id' => $task['id'], 'link_id' => $link['id'])) ?>
+                <?= $this->a(t('Remove'), 'tasklink', 'confirm', array('task_id' => $task['id'], 'link_id' => $link['id'], 'project_id' => $task['project_id'])) ?>
             </td>
             <?php endif ?>
         </tr>
@@ -43,14 +43,14 @@
     </table>
 
     <?php if (! isset($not_editable) && !empty($link_list)): ?>
-    <form method="post" action="<?= Helper\u('tasklink', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off">
-        <?= Helper\form_csrf() ?>
-        <?= Helper\form_hidden('task_id', array('task_id' => $task['id'])) ?>
-        #<?= Helper\escape($task['id']) ?>
+    <form method="post" action="<?= $this->u('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+        <?= $this->formCsrf() ?>
+        <?= $this->formHidden('task_id', array('task_id' => $task['id'])) ?>
+        #<?= $this->e($task['id']) ?>
         &#160;
-        <?= Helper\form_select('link_id', $link_list, array(), array(), 'required autofocus') ?>
+        <?= $this->formSelect('link_id', $link_list, array(), array(), 'required autofocus') ?>
         &#160;
-        #<?= Helper\form_numeric('task_inverse_id', array(), array(), array('required', 'placeholder="'.t('Task id').'"', 'title="'.t('Linked task id').'"', 'list="task_inverse_ids"')) ?>
+        #<?= $this->formNumeric('task_inverse_id', array(), array(), array('required', 'placeholder="'.t('Task id').'"', 'title="'.t('Linked task id').'"', 'list="task_inverse_ids"')) ?>
         <datalist id="task_inverse_ids">
             <select>
                 <?php foreach ($task_list as $task_inverse_id => $task_inverse_title): ?>

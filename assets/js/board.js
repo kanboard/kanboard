@@ -21,7 +21,8 @@ Kanboard.Board = (function() {
                 board_save(
                     ui.item.attr('data-task-id'),
                     ui.item.parent().attr("data-column-id"),
-                    ui.item.index() + 1
+                    ui.item.index() + 1,
+                    ui.item.parent().attr('data-swimlane-id')
                 );
             }
         });
@@ -139,7 +140,7 @@ Kanboard.Board = (function() {
     }
 
     // Save and refresh the board
-    function board_save(taskId, columnId, position)
+    function board_save(taskId, columnId, position, swimlaneId)
     {
         board_unload_events();
 
@@ -152,7 +153,8 @@ Kanboard.Board = (function() {
             data: JSON.stringify({
                 "task_id": taskId,
                 "column_id": columnId,
-                "position": position,
+                "swimlane_id": swimlaneId,
+                "position": position
             }),
             success: function(data) {
                 $("#board").remove();
@@ -211,6 +213,14 @@ Kanboard.Board = (function() {
                 item.style.opacity = "0.2";
             }
         });
+        
+		// Save filter settings for active project to localStorage
+		if (typeof(Storage) !== "undefined") {
+		    var projectId = $('#board').data('project-id');
+			localStorage.setItem("filters_" + projectId + "_form-user_id", selectedUserId);
+			localStorage.setItem("filters_" + projectId + "_form-category_id", selectedCategoryId);
+			localStorage.setItem("filters_" + projectId + "_filter-due-date", ~~(filterDueDate));
+		}
     }
 
     // Load filter events
@@ -225,6 +235,22 @@ Kanboard.Board = (function() {
             filter_apply();
             e.preventDefault();
         });
+        
+		// Get and set filters from localStorage for active project
+		if (typeof(Storage) !== "undefined") {
+		    var projectId = $('#board').data('project-id');
+
+			$("#form-user_id").val(localStorage.getItem("filters_" + projectId + "_form-user_id") || -1);
+			$("#form-category_id").val(localStorage.getItem("filters_" + projectId + "_form-category_id") || -1);
+			
+			if (+localStorage.getItem("filters_" + projectId + "_filter-due-date")) {
+				$("#filter-due-date").addClass("filter-on");
+			} else {
+				$("#filter-due-date").removeClass("filter-on");
+			}
+			
+	    	filter_apply();
+		}
     }
 
     return {

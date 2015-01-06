@@ -1,7 +1,10 @@
 <?php
 
+// Enable/Disable debug
+define('DEBUG', false);
+
 // E-mail address for the "From" header (notifications)
-define('MAIL_FROM', 'notifications@kanboard.net');
+define('MAIL_FROM', 'notifications@kanboard.local');
 
 // Mail transport to use: "smtp", "sendmail" or "mail" (PHP mail function)
 define('MAIL_TRANSPORT', 'mail');
@@ -42,6 +45,9 @@ define('LDAP_PORT', 389);
 
 // By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
 define('LDAP_SSL_VERIFY', true);
+
+// Enable LDAP START_TLS
+define('LDAP_START_TLS', false);
 
 // LDAP bind type: "anonymous", "user" (use the given user/password from the form) and "proxy" (a specific user to browse the LDAP directory)
 define('LDAP_BIND_TYPE', 'anonymous');

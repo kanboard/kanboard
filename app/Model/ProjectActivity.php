@@ -2,9 +2,6 @@
 
 namespace Model;
 
-use Core\Template;
-use Event\ProjectActivityListener;
-
 /**
  * Project activity model
  *
@@ -25,7 +22,7 @@ class ProjectActivity extends Base
      *
      * @var integer
      */
-    const MAX_EVENTS = 5000;
+    const MAX_EVENTS = 1000;
 
     /**
      * Add a new event for the project
@@ -46,7 +43,7 @@ class ProjectActivity extends Base
             'creator_id' => $creator_id,
             'event_name' => $event_name,
             'date_creation' => time(),
-            'data' => serialize($data),
+            'data' => json_encode($data),
         );
 
         $this->cleanup(self::MAX_EVENTS - 1);
@@ -70,13 +67,13 @@ class ProjectActivity extends Base
      * Get all events for the given projects list
      *
      * @access public
-     * @param  integer     $project_id      Project id
+     * @param  integer[]   $project_ids     Projects id
      * @param  integer     $limit           Maximum events number
      * @return array
      */
-    public function getProjects(array $projects, $limit = 50)
+    public function getProjects(array $project_ids, $limit = 50)
     {
-        if (empty($projects)) {
+        if (empty($project_ids)) {
             return array();
         }
 
@@ -86,7 +83,7 @@ class ProjectActivity extends Base
                                 User::TABLE.'.username AS author_username',
                                 User::TABLE.'.name AS author_name'
                            )
-                           ->in('project_id', $projects)
+                           ->in('project_id', $project_ids)
                            ->join(User::TABLE, 'id', 'creator_id')
                            ->desc('id')
                            ->limit($limit)
@@ -94,7 +91,7 @@ class ProjectActivity extends Base
 
         foreach ($events as &$event) {
 
-            $event += unserialize($event['data']);
+            $event += $this->decode($event['data']);
             unset($event['data']);
 
             $event['author'] = $event['author_name'] ?: $event['author_username'];
@@ -127,34 +124,6 @@ class ProjectActivity extends Base
     }
 
     /**
-     * Attach events to be able to record the history
-     *
-     * @access public
-     */
-    public function attachEvents()
-    {
-        $events = array(
-            Task::EVENT_ASSIGNEE_CHANGE,
-            Task::EVENT_UPDATE,
-            Task::EVENT_CREATE,
-            Task::EVENT_CLOSE,
-            Task::EVENT_OPEN,
-            Task::EVENT_MOVE_COLUMN,
-            Task::EVENT_MOVE_POSITION,
-            Comment::EVENT_UPDATE,
-            Comment::EVENT_CREATE,
-            SubTask::EVENT_UPDATE,
-            SubTask::EVENT_CREATE,
-        );
-
-        $listener = new ProjectActivityListener($this->container);
-
-        foreach ($events as $event_name) {
-            $this->event->attach($event_name, $listener);
-        }
-    }
-
-    /**
      * Get the event html content
      *
      * @access public
@@ -163,8 +132,10 @@ class ProjectActivity extends Base
      */
     public function getContent(array $params)
     {
-        $tpl = new Template;
-        return $tpl->load('event/'.str_replace('.', '_', $params['event_name']), $params);
+        return $this->template->render(
+            'event/'.str_replace('.', '_', $params['event_name']),
+            $params
+        );
     }
 
     /**
@@ -202,5 +173,21 @@ class ProjectActivity extends Base
             default:
                 return '';
         }
+    }
+
+    /**
+     * Decode event data, supports unserialize() and json_decode()
+     *
+     * @access public
+     * @param  string   $data   Serialized data
+     * @return array
+     */
+    public function decode($data)
+    {
+        if ($data{0} === 'a') {
+            return unserialize($data);
+        }
+
+        return json_decode($data, true) ?: array();
     }
 }

@@ -26,7 +26,7 @@ class TaskPaginator extends Base
     {
         return $this->taskFinder->getQuery()
                     ->eq('project_id', $project_id)
-                    ->like('title', '%'.$search.'%')
+                    ->ilike('title', '%'.$search.'%')
                     ->offset($offset)
                     ->limit($limit)
                     ->orderBy($column, $direction)
@@ -45,7 +45,7 @@ class TaskPaginator extends Base
     {
         return $this->db->table(Task::TABLE)
                         ->eq('project_id', $project_id)
-                        ->like('title', '%'.$search.'%')
+                        ->ilike('title', '%'.$search.'%')
                         ->count();
     }
 
@@ -76,7 +76,6 @@ class TaskPaginator extends Base
      *
      * @access public
      * @param  integer   $project_id   Project id
-     * @param  array     $status       List of status id
      * @return integer
      */
     public function countClosedTasks($project_id)

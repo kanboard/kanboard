@@ -2,7 +2,7 @@
 
 namespace Auth;
 
-use Core\Request;
+use Event\AuthEvent;
 
 /**
  * LDAP model
@@ -54,15 +54,8 @@ class Ldap extends Base
             }
 
             // We open the session
-            $this->user->updateSession($user);
-
-            // Update login history
-            $this->lastLogin->create(
-                self::AUTH_NAME,
-                $user['id'],
-                Request::getIpAddress(),
-                Request::getUserAgent()
-            );
+            $this->userSession->refresh($user);
+            $this->container['dispatcher']->dispatch('auth.success', new AuthEvent(self::AUTH_NAME, $user['id']));
 
             return true;
         }
@@ -136,6 +129,12 @@ class Ldap extends Base
 
         ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
+        ldap_set_option($ldap, LDAP_OPT_NETWORK_TIMEOUT, 1);
+        ldap_set_option($ldap, LDAP_OPT_TIMELIMIT, 1);
+
+        if (LDAP_START_TLS && ! @ldap_start_tls($ldap)) {
+            die('Unable to use ldap_start_tls()');
+        }
 
         return $ldap;
     }

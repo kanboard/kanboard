@@ -24,7 +24,7 @@ class Board extends Base
      * Get Kanboard default columns
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getDefaultColumns()
     {
@@ -227,29 +227,47 @@ class Board extends Base
     }
 
     /**
-     * Get all columns and tasks for a given project
+     * Get all tasks sorted by columns and swimlanes
      *
      * @access public
      * @param  integer $project_id Project id
      * @return array
      */
-    public function get($project_id)
+    public function getBoard($project_id)
     {
+        $swimlanes = $this->swimlane->getSwimlanes($project_id);
         $columns = $this->getColumns($project_id);
-        $tasks = $this->taskFinder->getTasksOnBoard($project_id);
+        $nb_columns = count($columns);
 
-        foreach ($columns as &$column) {
+        for ($i = 0, $ilen = count($swimlanes); $i < $ilen; $i++) {
 
-            $column['tasks'] = array();
+            $swimlanes[$i]['columns'] = $columns;
+            $swimlanes[$i]['nb_columns'] = $nb_columns;
 
-            foreach ($tasks as &$task) {
-                if ($task['column_id'] == $column['id']) {
-                    $column['tasks'][] = $task;
-                }
+            for ($j = 0; $j < $nb_columns; $j++) {
+                $swimlanes[$i]['columns'][$j]['tasks'] = $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $columns[$j]['id'], $swimlanes[$i]['id']);
+                $swimlanes[$i]['columns'][$j]['nb_tasks'] = count($swimlanes[$i]['columns'][$j]['tasks']);
             }
         }
 
-        return $columns;
+        return $swimlanes;
+    }
+
+    /**
+     * Get the total of tasks per column
+     *
+     * @access public
+     * @param  integer   $project_id
+     * @return array
+     */
+    public function getColumnStats($project_id)
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('is_active', 1)
+                    ->groupBy('column_id')
+                    ->listing('column_id', 'COUNT(*) AS total');
     }
 
     /**

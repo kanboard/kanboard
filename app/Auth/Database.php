@@ -3,7 +3,7 @@
 namespace Auth;
 
 use Model\User;
-use Core\Request;
+use Event\AuthEvent;
 
 /**
  * Database authentication
@@ -33,18 +33,8 @@ class Database extends Base
         $user = $this->db->table(User::TABLE)->eq('username', $username)->eq('is_ldap_user', 0)->findOne();
 
         if ($user && password_verify($password, $user['password'])) {
-
-            // Update user session
-            $this->user->updateSession($user);
-
-            // Update login history
-            $this->lastLogin->create(
-                self::AUTH_NAME,
-                $user['id'],
-                Request::getIpAddress(),
-                Request::getUserAgent()
-            );
-
+            $this->userSession->refresh($user);
+            $this->container['dispatcher']->dispatch('auth.success', new AuthEvent(self::AUTH_NAME, $user['id']));
             return true;
         }
 

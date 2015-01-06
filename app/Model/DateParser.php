@@ -60,7 +60,7 @@ class DateParser extends Base
      * Return the list of supported date formats (for the parser)
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getDateFormats()
     {
@@ -103,7 +103,7 @@ class DateParser extends Base
      *
      * @access public
      * @param  array    $values   Database values
-     * @param  array    $fields   Date fields
+     * @param  string[] $fields   Date fields
      * @param  string   $format   Date format
      */
     public function format(array &$values, array $fields, $format = '')
@@ -128,7 +128,7 @@ class DateParser extends Base
      *
      * @access public
      * @param  array    $values   Database values
-     * @param  array    $fields   Date fields
+     * @param  string[] $fields   Date fields
      */
     public function convert(array &$values, array $fields)
     {

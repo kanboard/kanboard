@@ -1,27 +1,27 @@
 <div class="form-login">
 
     <?php if (isset($errors['login'])): ?>
-        <p class="alert alert-error"><?= Helper\escape($errors['login']) ?></p>
+        <p class="alert alert-error"><?= $this->e($errors['login']) ?></p>
     <?php endif ?>
 
-    <form method="post" action="<?= Helper\u('user', 'check', array('redirect_query' => urlencode($redirect_query))) ?>">
+    <form method="post" action="<?= $this->u('user', 'check', array('redirect_query' => urlencode($redirect_query))) ?>">
 
-        <?= Helper\form_csrf() ?>
+        <?= $this->formCsrf() ?>
 
-        <?= Helper\form_label(t('Username'), 'username') ?>
-        <?= Helper\form_text('username', $values, $errors, array('autofocus', 'required')) ?><br/>
+        <?= $this->formLabel(t('Username'), 'username') ?>
+        <?= $this->formText('username', $values, $errors, array('autofocus', 'required')) ?><br/>
 
-        <?= Helper\form_label(t('Password'), 'password') ?>
-        <?= Helper\form_password('password', $values, $errors, array('required')) ?>
+        <?= $this->formLabel(t('Password'), 'password') ?>
+        <?= $this->formPassword('password', $values, $errors, array('required')) ?>
 
-        <?= Helper\form_checkbox('remember_me', t('Remember Me'), 1) ?><br/>
+        <?= $this->formCheckbox('remember_me', t('Remember Me'), 1) ?><br/>
 
         <?php if (GOOGLE_AUTH): ?>
-            <?= Helper\a(t('Login with my Google Account'), 'user', 'google') ?>
+            <?= $this->a(t('Login with my Google Account'), 'user', 'google') ?>
         <?php endif ?>
 
         <?php if (GITHUB_AUTH): ?>
-            <?= Helper\a(t('Login with my GitHub Account'), 'user', 'gitHub') ?>
+            <?= $this->a(t('Login with my GitHub Account'), 'user', 'gitHub') ?>
         <?php endif ?>
 
         <div class="form-actions">

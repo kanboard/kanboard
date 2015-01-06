@@ -2,11 +2,12 @@
 
 require_once __DIR__.'/Base.php';
 
+use Event\GenericEvent;
 use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 
 class ActionTaskCloseTest extends Base
 {
@@ -45,7 +46,7 @@ class ActionTaskCloseTest extends Base
         );
 
         $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testBadProject()
@@ -60,7 +61,7 @@ class ActionTaskCloseTest extends Base
         );
 
         $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testBadColumn()
@@ -74,7 +75,7 @@ class ActionTaskCloseTest extends Base
             'column_id' => 3,
         );
 
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testExecute()
@@ -97,7 +98,7 @@ class ActionTaskCloseTest extends Base
         );
 
         // Our event should be executed
-        $this->assertTrue($action->execute($event));
+        $this->assertTrue($action->execute(new GenericEvent($event)));
 
         // Our task should be closed
         $task = $tf->getById(1);

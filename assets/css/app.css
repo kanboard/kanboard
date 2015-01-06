@@ -24,6 +24,7 @@ body {
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
 }
 
 ul.no-bullet li {
@@ -121,6 +122,10 @@ th a:hover {
     white-space: nowrap;
 }
 
+.table-fixed th {
+    overflow: hidden;
+}
+
 .table-fixed td {
     white-space: nowrap;
     overflow: hidden;
@@ -151,6 +156,10 @@ th a:hover {
     width: 30%;
 }
 
+.column-35 {
+    width: 35%;
+}
+
 .column-40 {
     width: 40%;
 }
@@ -179,7 +188,6 @@ label {
 input[type="number"],
 input[type="date"],
 input[type="email"],
-input[type="tel"],
 input[type="password"],
 input[type="text"] {
     color: #888;
@@ -198,7 +206,6 @@ input[type="text"] {
 input[type="number"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
-input[type="tel"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus,
 textarea:focus {
@@ -298,6 +305,10 @@ ul.form-errors li {
 
 .form-inline .form-required {
     display: none;
+}
+
+.form-inline-group {
+    display: inline;
 }
 
 input.form-date {
@@ -514,9 +525,11 @@ a.btn-blue:focus,
     }
 }
 
+#main .alert,
 .page .alert {
     margin-top: 10px;
-}/* tooltip */
+}
+/* tooltip */
 .tooltip-arrow:after {
     background: #fff;
     border: 1px solid #aaaaaa;
@@ -731,7 +744,12 @@ a.filter-on {
     height: 70px;
     margin-bottom: 10px;
 }
-/* project view */
+
+/* swimlanes */
+th.board-swimlane-title {
+    vertical-align: top;
+    text-align: right;
+}/* project view */
 .project-listing {
     max-width: 500px;
     margin-left: 30px;
@@ -799,6 +817,15 @@ div.task-board-recent {
 
 .task-board-user {
     font-size: 80%;
+}
+
+.task-board-current-user a {
+    text-decoration: underline;
+}
+
+.task-board-current-user a:focus,
+.task-board-current-user a:hover {
+    text-decoration: none;
 }
 
 a.task-board-nobody {
@@ -1146,6 +1173,7 @@ tr td.task-orange,
     border: 1px solid #ddd;
     color: #333;
     background-color: #fefefe;
+    overflow: auto;
 }
 
 .listing li {
@@ -1199,19 +1227,23 @@ tr td.task-orange,
     margin-top: 10px;
     color: #555;
 }/* dashboard */
-#dashboard table {
-    font-size: 0.9em;
-}
 
-.dashboard-left-column {
-    width: 55%;
-    float: left;
-}
+@media only screen and (min-width: 1280px) {
 
-.dashboard-right-column {
-    margin-left: 5%;
-    width: 40%;
-    float: left;
+    #dashboard table {
+        font-size: 0.9em;
+    }
+
+    .dashboard-left-column {
+        width: 55%;
+        float: left;
+    }
+
+    .dashboard-right-column {
+        margin-left: 5%;
+        width: 40%;
+        float: left;
+    }
 }
 
 .dashboard-project-stats span {
@@ -1221,7 +1253,7 @@ tr td.task-orange,
 }
 
 .dashboard-project-stats strong {
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .dashboard-table-link {
@@ -1258,17 +1290,21 @@ tr td.task-orange,
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
+    overflow: auto;
 }
 
 #popover-content {
-    position: fixed;
+    position: absolute;
     width: 70%;
     margin: 0 0 0 -35%;
     left: 50%;
     top: 5%;
     padding: 15px;
     background: #fff;
-}/* confirmation box */
+    overflow: scroll;
+    max-height: 83%;
+}
+/* confirmation box */
 .confirm {
     max-width: 700px;
     font-size: 1.1em;
@@ -1279,14 +1315,14 @@ tr td.task-orange,
 }
 
 .sidebar-content {
-    margin-left: 330px;
+    margin-left: 280px;
 }
 
 .sidebar {
     position: absolute;
     left: 0px;
     top: 0;
-    width: 250px;
+    max-width: 250px;
     padding: 10px;
     padding-top: 0;
     border: 1px solid #ddd;
@@ -1299,35 +1335,9 @@ tr td.task-orange,
     margin-left: 30px;
     line-height: 1.8em;
 }/* responsive design */
-@media only screen and (min-width : 769px) and (max-width : 1024px) {
+@media only screen and (max-width: 1024px) {
 
-    .hide-tablet {
-        display: none;
-    }
-
-    body {
-        font-size: 0.9em;
-    }
-
-    .project-menu {
-        font-size: 0.8em;
-    }
-
-    .task-board-title {
-        font-size: 1.5em;
-    }
-
-    .form-tab {
-        max-width: 662px;
-    }
-
-    input.form-date ~ div.form-help {
-        max-width: 150px;
-    }
-}
-
-@media only screen and (max-width : 768px) {
-
+    li.hide-tablet,
     .hide-tablet {
         display: none;
     }
@@ -1336,46 +1346,65 @@ tr td.task-orange,
         font-size: 0.85em;
     }
 
-    .logo,
-    .project-menu {
-        display: none;
-    }
-
-    nav li:first-child {
-        padding-left: 0;
-    }
-
-    .username {
-        display: block;
-        text-align: right;
-    }
-
-    .user-show-sidebar,
-    .project-show-sidebar,
-    .task-show-sidebar {
-        width: 200px;
-    }
-
-    .user-show-main,
-    .project-show-main,
-    .task-show-main {
-        margin-left: 230px;
-    }
-
-    table input[type="text"] {
-        width: 150px;
-    }
-
-    .task-score {
-        display: none;
-    }
-
-    .task-board-title {
-        font-size: 1.5em;
+    .sidebar-content {
+        margin-left: 255px;
     }
 
     .form-tab {
         max-width: 404px;
+    }
+
+    .form-inline-group input[type="submit"],
+    .form-inline-group label {
+        display: block;
+    }
+
+    .form-inline-group input[type="submit"] {
+        margin-top: 20px;
+    }
+
+    td > input[type="text"] {
+        max-width: 150px;
+    }
+
+    .task-time-form label {
+        display: block;
+    }
+
+    .task-time-form input[type="submit"] {
+        margin-top: 10px;
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+
+    body {
+        font-size: 0.7em;
+    }
+
+    header {
+        padding-bottom: 4px;
+    }
+
+    .sidebar {
+        max-width: 220px;
+    }
+
+    .sidebar-content {
+        margin-left: 225px;
+    }
+
+    div.chosen-container {
+        font-size: 0.9em;
+    }
+
+    input[type="number"],
+    input[type="date"],
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        height: 18px;
     }
 }
 /*!

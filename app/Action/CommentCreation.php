@@ -2,7 +2,7 @@
 
 namespace Action;
 
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 
 /**
  * Create automatically a comment from a webhook
@@ -16,7 +16,7 @@ class CommentCreation extends Base
      * Get the list of compatible events
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getCompatibleEvents()
     {
@@ -29,7 +29,7 @@ class CommentCreation extends Base
      * Get the required parameter for the action (defined by the user)
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getActionRequiredParameters()
     {

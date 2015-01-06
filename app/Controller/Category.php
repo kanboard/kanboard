@@ -14,7 +14,7 @@ class Category extends Base
      * Get the category (common method between actions)
      *
      * @access private
-     * @param $project_id
+     * @param  integer   $project_id
      * @return array
      */
     private function getCategory($project_id)
@@ -36,7 +36,7 @@ class Category extends Base
      */
     public function index(array $values = array(), array $errors = array())
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $this->response->html($this->projectLayout('category/index', array(
             'categories' => $this->category->getList($project['id'], false),
@@ -48,13 +48,13 @@ class Category extends Base
     }
 
     /**
-     * Validate and save a new project
+     * Validate and save a new category
      *
      * @access public
      */
     public function save()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->category->validateCreation($values);
@@ -80,7 +80,7 @@ class Category extends Base
      */
     public function edit(array $values = array(), array $errors = array())
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $category = $this->getCategory($project['id']);
 
         $this->response->html($this->projectLayout('category/edit', array(
@@ -98,7 +98,7 @@ class Category extends Base
      */
     public function update()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->category->validateModification($values);
@@ -124,7 +124,7 @@ class Category extends Base
      */
     public function confirm()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $category = $this->getCategory($project['id']);
 
         $this->response->html($this->projectLayout('category/remove', array(
@@ -142,7 +142,7 @@ class Category extends Base
     public function remove()
     {
         $this->checkCSRFParam();
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $category = $this->getCategory($project['id']);
 
         if ($this->category->remove($category['id'])) {

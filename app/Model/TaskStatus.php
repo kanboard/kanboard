@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Event\TaskEvent;
+
 /**
  * Task Status
  *
@@ -84,9 +86,9 @@ class TaskStatus extends Base
                         ));
 
         if ($result) {
-            $this->event->trigger(
+            $this->container['dispatcher']->dispatch(
                 $event,
-                array('task_id' => $task_id) + $this->taskFinder->getById($task_id)
+                new TaskEvent(array('task_id' => $task_id) + $this->taskFinder->getById($task_id))
             );
         }
 

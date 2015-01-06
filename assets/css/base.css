@@ -23,6 +23,7 @@ body {
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
 }
 
 ul.no-bullet li {

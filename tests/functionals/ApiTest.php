@@ -25,11 +25,13 @@ class Api extends PHPUnit_Framework_TestCase
             $pdo = new PDO('pgsql:host='.DB_HOSTNAME.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
         }
 
-        $service = new ServiceProvider\Database;
-        $service->getInstance();
+        $service = new ServiceProvider\DatabaseProvider;
 
-        $pdo->exec("UPDATE settings SET value='".API_KEY."' WHERE option='api_token'");
-        $pdo->exec("UPDATE settings SET value='Europe/Paris' WHERE option='application_timezone'");
+        $db = $service->getInstance();
+        $db->table('settings')->eq('option', 'api_token')->update(array('value' => API_KEY));
+        $db->table('settings')->eq('option', 'application_timezone')->update(array('value' => 'Europe/Paris'));
+        $db->closeConnection();
+
         $pdo = null;
     }
 
@@ -68,7 +70,9 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testCreateProject()
     {
-        $this->assertTrue($this->client->createProject('API test'));
+        $project_id = $this->client->createProject('API test');
+        $this->assertNotFalse($project_id);
+        $this->assertInternalType('int', $project_id);
     }
 
     public function testGetProjectById()
@@ -76,6 +80,21 @@ class Api extends PHPUnit_Framework_TestCase
         $project = $this->client->getProjectById(1);
         $this->assertNotEmpty($project);
         $this->assertEquals(1, $project['id']);
+    }
+
+    public function testGetProjectByName()
+    {
+        $project = $this->client->getProjectByName('API test');
+        $this->assertNotEmpty($project);
+        $this->assertEquals(1, $project['id']);
+
+        $project = $this->client->getProjectByName(array('name' => 'API test'));
+        $this->assertNotEmpty($project);
+        $this->assertEquals(1, $project['id']);
+
+        $project = $this->client->getProjectByName('None');
+        $this->assertEmpty($project);
+        $this->assertNull($project);
     }
 
     public function testUpdateProject()
@@ -99,7 +118,9 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $board = $this->client->getBoard(1);
         $this->assertTrue(is_array($board));
-        $this->assertEquals(4, count($board));
+        $this->assertEquals(1, count($board));
+        $this->assertEquals('Default swimlane', $board[0]['name']);
+        $this->assertEquals(4, count($board[0]['columns']));
     }
 
     public function testGetColumns()

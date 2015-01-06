@@ -2,7 +2,7 @@
 
 namespace Action;
 
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 
 /**
  * Open automatically a task

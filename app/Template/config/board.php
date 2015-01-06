@@ -2,25 +2,29 @@
     <h2><?= t('Board settings') ?></h2>
 </div>
 <section>
-<form method="post" action="<?= Helper\u('config', 'board') ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('config', 'board') ?>" autocomplete="off">
 
-    <?= Helper\form_csrf() ?>
+    <?= $this->formCsrf() ?>
 
-    <?= Helper\form_label(t('Task highlight period'), 'board_highlight_period') ?>
-    <?= Helper\form_number('board_highlight_period', $values, $errors) ?><br/>
+    <?= $this->formLabel(t('Task highlight period'), 'board_highlight_period') ?>
+    <?= $this->formNumber('board_highlight_period', $values, $errors) ?><br/>
     <p class="form-help"><?= t('Period (in second) to consider a task was modified recently (0 to disable, 2 days by default)') ?></p>
 
-    <?= Helper\form_label(t('Refresh interval for public board'), 'board_public_refresh_interval') ?>
-    <?= Helper\form_number('board_public_refresh_interval', $values, $errors) ?><br/>
+    <?= $this->formLabel(t('Refresh interval for public board'), 'board_public_refresh_interval') ?>
+    <?= $this->formNumber('board_public_refresh_interval', $values, $errors) ?><br/>
     <p class="form-help"><?= t('Frequency in second (60 seconds by default)') ?></p>
 
-    <?= Helper\form_label(t('Refresh interval for private board'), 'board_private_refresh_interval') ?>
-    <?= Helper\form_number('board_private_refresh_interval', $values, $errors) ?><br/>
+    <?= $this->formLabel(t('Refresh interval for private board'), 'board_private_refresh_interval') ?>
+    <?= $this->formNumber('board_private_refresh_interval', $values, $errors) ?><br/>
     <p class="form-help"><?= t('Frequency in second (0 to disable this feature, 10 seconds by default)') ?></p>
 
-    <?= Helper\form_label(t('Default columns for new projects (Comma-separated)'), 'board_columns') ?>
-    <?= Helper\form_text('board_columns', $values, $errors) ?><br/>
+    <?= $this->formLabel(t('Default columns for new projects (Comma-separated)'), 'board_columns') ?>
+    <?= $this->formText('board_columns', $values, $errors) ?><br/>
     <p class="form-help"><?= t('Default values are "%s"', $default_columns) ?></p>
+
+    <?= $this->formLabel(t('Default categories for new projects (Comma-separated)'), 'project_categories') ?>
+    <?= $this->formText('project_categories', $values, $errors) ?><br/>
+    <p class="form-help"><?= t('Example: "Bug, Feature Request, Improvement"') ?></p>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

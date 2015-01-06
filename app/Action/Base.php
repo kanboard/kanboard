@@ -2,9 +2,8 @@
 
 namespace Action;
 
+use Event\GenericEvent;
 use Pimple\Container;
-use Core\Listener;
-use Core\Tool;
 
 /**
  * Base class for automatic actions
@@ -12,7 +11,7 @@ use Core\Tool;
  * @package action
  * @author  Frederic Guillot
  *
- * @property \Model\Acl                $acl
+ * @property \Model\UserSession        $userSession
  * @property \Model\Comment            $comment
  * @property \Model\Task               $task
  * @property \Model\TaskCreation       $taskCreation
@@ -21,8 +20,16 @@ use Core\Tool;
  * @property \Model\TaskFinder         $taskFinder
  * @property \Model\TaskStatus         $taskStatus
  */
-abstract class Base implements Listener
+abstract class Base
 {
+    /**
+     * Flag for called listener
+     *
+     * @access private
+     * @var boolean
+     */
+    private $called = false;
+
     /**
      * Project id
      *
@@ -114,6 +121,7 @@ abstract class Base implements Listener
         $this->container = $container;
         $this->project_id = $project_id;
         $this->event_name = $event_name;
+        $this->called = false;
     }
 
     /**
@@ -136,7 +144,7 @@ abstract class Base implements Listener
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->container, $name);
+        return $this->container[$name];
     }
 
     /**
@@ -183,7 +191,6 @@ abstract class Base implements Listener
      * Check if the event is compatible with the action
      *
      * @access public
-     * @param  array   $data   Event data dictionary
      * @return bool
      */
     public function hasCompatibleEvent()
@@ -225,12 +232,20 @@ abstract class Base implements Listener
      * Execute the action
      *
      * @access public
-     * @param  array   $data   Event data dictionary
-     * @return bool            True if the action was executed or false when not executed
+     * @param  \Event\GenericEvent   $event   Event data dictionary
+     * @return bool                           True if the action was executed or false when not executed
      */
-    public function execute(array $data)
+    public function execute(GenericEvent $event)
     {
+        // Avoid infinite loop, a listener instance can be called only one time
+        if ($this->called) {
+            return false;
+        }
+
+        $data = $event->getAll();
+
         if ($this->isExecutable($data)) {
+            $this->called = true;
             return $this->doAction($data);
         }
 

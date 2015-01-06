@@ -1,5 +1,5 @@
 <section class="tooltip-large">
 <div class="markdown">
-    <?= Helper\markdown($task['description']) ?>
+    <?= $this->markdown($task['description']) ?>
 </div>
 </section>

@@ -7,11 +7,11 @@
         <?= t('Do you really want to remove this comment?') ?>
     </p>
 
-    <?= Helper\template('comment/show', array('comment' => $comment, 'task' => $task, 'preview' => true)) ?>
+    <?= $this->render('comment/show', array('comment' => $comment, 'task' => $task, 'preview' => true)) ?>
 
     <div class="form-actions">
-        <?= Helper\a(t('Yes'), 'comment', 'remove', array('task_id' => $task['id'], 'comment_id' => $comment['id']), true, 'btn btn-red') ?>
+        <?= $this->a(t('Yes'), 'comment', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
 </div>

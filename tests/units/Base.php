@@ -3,6 +3,10 @@
 require __DIR__.'/../../vendor/autoload.php';
 require __DIR__.'/../../app/constants.php';
 
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
+use Symfony\Component\Stopwatch\Stopwatch;
+
 date_default_timezone_set('UTC');
 
 abstract class Base extends PHPUnit_Framework_TestCase
@@ -23,8 +27,13 @@ abstract class Base extends PHPUnit_Framework_TestCase
         }
 
         $this->container = new Pimple\Container;
-        $this->container->register(new ServiceProvider\Database);
-        $this->container->register(new ServiceProvider\Event);
+        $this->container->register(new ServiceProvider\DatabaseProvider);
+        $this->container->register(new ServiceProvider\ClassProvider);
+
+        $this->container['dispatcher'] = new TraceableEventDispatcher(
+            new EventDispatcher,
+            new Stopwatch
+        );
     }
 
     public function tearDown()

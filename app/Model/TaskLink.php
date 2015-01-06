@@ -1,10 +1,10 @@
 <?php
 namespace Model;
 
+use Core\Helper;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use PDO;
-use Helper;
 
 /**
  * TaskLink model
@@ -241,12 +241,12 @@ class TaskLink extends Base
 
     public function isUniqueConstraintFailed()
     {
-        return Helper\search($this->db->getLogMessages(), 'UNIQUE') || Helper\search($this->db->getLogMessages(), 'Duplicata');
+        return $this->search($this->db->getLogMessages(), 'UNIQUE') || $this->search($this->db->getLogMessages(), 'Duplicata');
     }
 
     public function isForeignKeyConstraintFailed()
     {
-        return Helper\search($this->db->getLogMessages(), 'FOREIGN KEY');
+        return $this->search($this->db->getLogMessages(), 'FOREIGN KEY');
     }
 
     /**
@@ -319,5 +319,23 @@ class TaskLink extends Base
             new Validators\Integer('task_id', t('The task id must be an integer')),
             new Validators\Integer('task_inverse_id', t('The related task id must be an integer'))
         );
+    }
+    
+
+    /**
+     * Return true if needle is part of a string in the string haystack
+     *
+     * @param  array   $haystack    Haystack
+     * @param  string  $needle      Needle
+     * @return boolean
+     */
+    private function search($haystack, $needle)
+    {
+        foreach ($haystack as $entry) {
+            if (strstr($entry, $needle)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -60,3 +60,9 @@ a.filter-on {
     height: 70px;
     margin-bottom: 10px;
 }
+
+/* swimlanes */
+th.board-swimlane-title {
+    vertical-align: top;
+    text-align: right;
+}

@@ -37,11 +37,11 @@ class File extends Base
         $task = $this->getTask();
 
         if ($this->file->upload($task['project_id'], $task['id'], 'files') === true) {
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#attachments');
+            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#attachments');
         }
         else {
             $this->session->flashError(t('Unable to upload the file.'));
-            $this->response->redirect('?controller=file&action=create&task_id='.$task['id']);
+            $this->response->redirect('?controller=file&action=create&task_id='.$task['id'].'&project_id='.$task['project_id']);
         }
     }
 
@@ -61,7 +61,7 @@ class File extends Base
             $this->response->binary(file_get_contents($filename));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
     }
 
     /**
@@ -75,8 +75,9 @@ class File extends Base
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
         if ($file['task_id'] == $task['id']) {
-            $this->response->html($this->template->load('file/open', array(
-                'file' => $file
+            $this->response->html($this->template->render('file/open', array(
+                'file' => $file,
+                'task' => $task,
             )));
         }
     }
@@ -119,7 +120,7 @@ class File extends Base
             $this->session->flashError(t('Unable to remove this file.'));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id']);
+        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
     }
 
     /**

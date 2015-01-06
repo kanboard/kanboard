@@ -31,7 +31,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translated in 14 languages (Brazilian, Chinese, Danish, English, Finnish, French, German, Italian, Japanese, Polish, Russian, Spanish, Swedish, Thai)
+- Translated in 15 languages (Brazilian, Chinese, Danish, English, Finnish, French, German, Hungarian, Italian, Japanese, Polish, Russian, Spanish, Swedish, Thai)
 
 Known bugs and feature requests
 -------------------------------
@@ -61,6 +61,7 @@ Documentation
 - [Sharing boards and tasks](docs/sharing-projects.markdown)
 - [Automatic actions](docs/automatic-actions.markdown)
 - [Project permissions](docs/project-permissions.markdown)
+- [Swimlanes](docs/swimlanes.markdown)
 
 #### Working with tasks
 
@@ -146,11 +147,13 @@ Contributors:
 - [Ashish Kulkarni](https://github.com/ashkulz)
 - [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo
+- [Cluxter](https://github.com/cluxter)
 - [Cmer](https://github.com/chncsu)
 - [David-Norris](https://github.com/David-Norris)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
 - [Gavlepeter](https://github.com/gavlepeter)
+- [Jan Dittrich](https://github.com/jdittrich)
 - [Janne Mäntyharju](https://github.com/JanneMantyharju)
 - [Jesusaplsoft](https://github.com/jesusaplsoft)
 - [Karol J](https://github.com/dzudek)
@@ -163,6 +166,7 @@ Contributors:
 - [Matthieu Keller](https://github.com/maggick)
 - [Mauro Mariño](https://github.com/moromarino)
 - [Maxime](https://github.com/EpocDotFr)
+- [Mgro](https://github.com/mgro)
 - [Mihailov Vasilievic Filho](https://github.com/mihailov-vf)
 - [Moraxy](https://github.com/moraxy)
 - [Nala Ginrut](https://github.com/NalaGinrut)
@@ -172,12 +176,16 @@ Contributors:
 - [Null-Kelvin](https://github.com/Null-Kelvin)
 - [Oliver Bertuch](https://github.com/poikilotherm)
 - [Olivier Maridat](https://github.com/oliviermaridat)
+- [Peller Zoltan](https://github.com/PierP)
+- [Petja Touru](https://github.com/Petja)
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
+- [René Stoltenberg](https://github.com/rstoltenberg)
 - [Rzeka](https://github.com/rzeka)
 - [Sebastien Pacilly](https://github.com/spacilly)
 - [Sebastian Reese](https://github.com/ReeseSebastian)
 - [Sylvain Veyrié](https://github.com/turb)
+- [Timo](https://github.com/BlueTeck)
 - [Toomyem](https://github.com/Toomyem)
 - [Tony G. Bolaño](https://github.com/tonybolanyo)
 - [Torsten](https://github.com/misterfu)

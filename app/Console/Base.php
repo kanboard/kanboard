@@ -2,7 +2,6 @@
 
 namespace Console;
 
-use Core\Tool;
 use Pimple\Container;
 use Symfony\Component\Console\Command\Command;
 
@@ -17,6 +16,7 @@ use Symfony\Component\Console\Command\Command;
  * @property \Model\ProjectPermission      $projectPermission
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectDailySummary    $projectDailySummary
+ * @property \Model\SubtaskExport          $subtaskExport
  * @property \Model\Task                   $task
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder
@@ -52,6 +52,6 @@ abstract class Base extends Command
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->container, $name);
+        return $this->container[$name];
     }
 }

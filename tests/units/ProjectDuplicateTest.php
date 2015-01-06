@@ -79,6 +79,40 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals('C3', $categories[2]['name']);
     }
 
-    // TODO: test users
-    // TODO: test actions
+    public function testCloneProjectWithUsers()
+    {
+        $p = new Project($this->container);
+        $c = new Category($this->container);
+        $pp = new ProjectPermission($this->container);
+        $u = new User($this->container);
+
+        $this->assertEquals(2, $u->create(array('username' => 'unittest1', 'password' => 'unittest')));
+        $this->assertEquals(3, $u->create(array('username' => 'unittest2', 'password' => 'unittest')));
+        $this->assertEquals(4, $u->create(array('username' => 'unittest3', 'password' => 'unittest')));
+
+        $this->assertEquals(1, $p->create(array('name' => 'P1')));
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addMember(1, 4));
+        $this->assertTrue($pp->addManager(1, 3));
+        $this->assertTrue($pp->isMember(1, 2));
+        $this->assertTrue($pp->isMember(1, 3));
+        $this->assertTrue($pp->isMember(1, 4));
+        $this->assertFalse($pp->isManager(1, 2));
+        $this->assertTrue($pp->isManager(1, 3));
+        $this->assertFalse($pp->isManager(1, 4));
+
+        $this->assertEquals(2, $p->duplicate(1));
+
+        $project = $p->getById(2);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('P1 (Clone)', $project['name']);
+
+        $this->assertEquals(3, count($pp->getMembers(2)));
+        $this->assertTrue($pp->isMember(2, 2));
+        $this->assertTrue($pp->isMember(2, 3));
+        $this->assertTrue($pp->isMember(2, 4));
+        $this->assertFalse($pp->isManager(2, 2));
+        $this->assertTrue($pp->isManager(2, 3));
+        $this->assertFalse($pp->isManager(2, 4));
+    }
 }

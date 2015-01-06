@@ -10,7 +10,7 @@ use LogicException;
  * @package core
  * @author  Frederic Guillot
  */
-class Template
+class Template extends Helper
 {
     /**
      * Template path
@@ -20,18 +20,18 @@ class Template
     const PATH = 'app/Template/';
 
     /**
-     * Load a template
+     * Render a template
      *
      * Example:
      *
-     * $template->load('template_name', ['bla' => 'value']);
+     * $template->render('template_name', ['bla' => 'value']);
      *
      * @access public
      * @params string   $__template_name   Template name
      * @params array    $__template_args   Key/Value map of template variables
      * @return string
      */
-    public function load($__template_name, array $__template_args = array())
+    public function render($__template_name, array $__template_args = array())
     {
         $__template_file = self::PATH.$__template_name.'.php';
 
@@ -57,9 +57,9 @@ class Template
      */
     public function layout($template_name, array $template_args = array(), $layout_name = 'layout')
     {
-        return $this->load(
+        return $this->render(
             $layout_name,
-            $template_args + array('content_for_layout' => $this->load($template_name, $template_args))
+            $template_args + array('content_for_layout' => $this->render($template_name, $template_args))
         );
     }
 }

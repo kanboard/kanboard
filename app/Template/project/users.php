@@ -3,38 +3,53 @@
 </div>
 
 <?php if ($project['is_everybody_allowed']): ?>
-    <div class="alert alert-info"><?= t('Everybody have access to this project.') ?></div>
+    <div class="alert"><?= t('Everybody have access to this project.') ?></div>
 <?php else: ?>
 
     <?php if (empty($users['allowed'])): ?>
         <div class="alert alert-error"><?= t('Nobody have access to this project.') ?></div>
     <?php else: ?>
-    <div class="alert alert-info">
-        <p><?= t('Only those users have access to this project:') ?></p>
-        <ul>
-        <?php foreach ($users['allowed'] as $user_id => $username): ?>
-            <li>
-                <strong><?= Helper\escape($username) ?></strong>
+        <table>
+            <tr>
+                <th><?= t('User') ?></th>
+                <th><?= t('Role for this project') ?></th>
                 <?php if ($project['is_private'] == 0): ?>
-                    (<?= Helper\a(t('revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?>)
+                    <th><?= t('Actions') ?></th>
                 <?php endif ?>
-            </li>
-        <?php endforeach ?>
-        </ul>
-        <p><?= t('Don\'t forget that administrators have access to everything.') ?></p>
-    </div>
+            </tr>
+            <?php foreach ($users['allowed'] as $user_id => $username): ?>
+            <tr>
+                <td><?= $this->e($username) ?></td>
+                <td><?= isset($users['managers'][$user_id]) ? t('Project manager') : t('Project member') ?></td>
+                <?php if ($project['is_private'] == 0): ?>
+                <td>
+                    <ul>
+                        <li><?= $this->a(t('Revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?></li>
+                        <li>
+                            <?php if (isset($users['managers'][$user_id])): ?>
+                                <?= $this->a(t('Set project member'), 'project', 'role', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?>
+                            <?php else: ?>
+                                <?= $this->a(t('Set project manager'), 'project', 'role', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?>
+                            <?php endif ?>
+                        </li>
+                    </ul>
+                </td>
+                <?php endif ?>
+            </tr>
+            <?php endforeach ?>
+        </table>
     <?php endif ?>
 
     <?php if ($project['is_private'] == 0 && ! empty($users['not_allowed'])): ?>
         <hr/>
-        <form method="post" action="<?= Helper\u('project', 'allow', array('project_id' => $project['id'])) ?>" autocomplete="off">
+        <form method="post" action="<?= $this->u('project', 'allow', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-            <?= Helper\form_csrf() ?>
+            <?= $this->formCsrf() ?>
 
-            <?= Helper\form_hidden('project_id', array('project_id' => $project['id'])) ?>
+            <?= $this->formHidden('project_id', array('project_id' => $project['id'])) ?>
 
-            <?= Helper\form_label(t('User'), 'user_id') ?>
-            <?= Helper\form_select('user_id', $users['not_allowed']) ?><br/>
+            <?= $this->formLabel(t('User'), 'user_id') ?>
+            <?= $this->formSelect('user_id', $users['not_allowed']) ?><br/>
 
             <div class="form-actions">
                 <input type="submit" value="<?= t('Allow this user') ?>" class="btn btn-blue"/>
@@ -46,14 +61,21 @@
 
 <?php if ($project['is_private'] == 0): ?>
 <hr/>
-<form method="post" action="<?= Helper\u('project', 'allowEverybody', array('project_id' => $project['id'])) ?>">
-    <?= Helper\form_csrf() ?>
+<form method="post" action="<?= $this->u('project', 'allowEverybody', array('project_id' => $project['id'])) ?>">
+    <?= $this->formCsrf() ?>
 
-    <?= Helper\form_hidden('id', array('id' => $project['id'])) ?>
-    <?= Helper\form_checkbox('is_everybody_allowed', t('Allow everybody to access to this project'), 1, $project['is_everybody_allowed']) ?>
+    <?= $this->formHidden('id', array('id' => $project['id'])) ?>
+    <?= $this->formCheckbox('is_everybody_allowed', t('Allow everybody to access to this project'), 1, $project['is_everybody_allowed']) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
     </div>
 </form>
 <?php endif ?>
+
+<div class="alert alert-info">
+    <ul>
+        <li><?= t('A project manager can change the settings of the project and have more privileges than a standard user.') ?></li>
+        <li><?= t('Don\'t forget that administrators have access to everything.') ?></li>
+    </ul>
+</div>

@@ -33,6 +33,7 @@ Available commands:
  list                           Lists commands
 export
  export:daily-project-summary   Daily project summary CSV export (number of tasks per column and per day)
+ export:subtasks                Subtasks CSV export
  export:tasks                   Tasks CSV export
 notification
  notification:overdue-tasks     Send notifications for overdue tasks
@@ -42,6 +43,20 @@ projects
 
 Available commands
 ------------------
+
+### Subtasks CSV export
+
+Usage:
+
+```bash
+./kanboard export:subtasks <project_id> <start_date> <end_date>
+```
+
+Example:
+
+```bash
+./kanboard export:subtasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+```
 
 ### Tasks CSV export
 

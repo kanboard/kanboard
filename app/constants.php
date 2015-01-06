@@ -1,5 +1,8 @@
 <?php
 
+// Enable/disable debug
+defined('DEBUG') or define('DEBUG', false);
+
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
 
@@ -22,6 +25,7 @@ defined('DB_NAME') or define('DB_NAME', 'kanboard');
 defined('LDAP_AUTH') or define('LDAP_AUTH', false);
 defined('LDAP_SERVER') or define('LDAP_SERVER', '');
 defined('LDAP_PORT') or define('LDAP_PORT', 389);
+defined('LDAP_START_TLS') or define('LDAP_START_TLS', false);
 defined('LDAP_SSL_VERIFY') or define('LDAP_SSL_VERIFY', true);
 defined('LDAP_BIND_TYPE') or define('LDAP_BIND_TYPE', 'anonymous');
 defined('LDAP_USERNAME') or define('LDAP_USERNAME', null);
@@ -48,7 +52,7 @@ defined('REVERSE_PROXY_DEFAULT_ADMIN') or define('REVERSE_PROXY_DEFAULT_ADMIN', 
 defined('REVERSE_PROXY_DEFAULT_DOMAIN') or define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
 
 // Mail configuration
-defined('MAIL_FROM') or define('MAIL_FROM', 'notifications@kanboard.net');
+defined('MAIL_FROM') or define('MAIL_FROM', 'notifications@kanboard.local');
 defined('MAIL_TRANSPORT') or define('MAIL_TRANSPORT', 'mail');
 defined('MAIL_SMTP_HOSTNAME') or define('MAIL_SMTP_HOSTNAME', '');
 defined('MAIL_SMTP_PORT') or define('MAIL_SMTP_PORT', 25);

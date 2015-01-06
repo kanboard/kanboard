@@ -2,11 +2,12 @@
 
 require_once __DIR__.'/Base.php';
 
+use Event\GenericEvent;
 use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
-use Model\Acl;
+use Model\UserSession;
 
 class ActionTaskAssignCurrentUser extends Base
 {
@@ -22,7 +23,7 @@ class ActionTaskAssignCurrentUser extends Base
         );
 
         $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testBadColumn()
@@ -36,7 +37,7 @@ class ActionTaskAssignCurrentUser extends Base
             'column_id' => 3,
         );
 
-        $this->assertFalse($action->execute($event));
+        $this->assertFalse($action->execute(new GenericEvent($event)));
     }
 
     public function testExecute()
@@ -51,9 +52,9 @@ class ActionTaskAssignCurrentUser extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $a = new Acl($this->container);
+        $us = new UserSession($this->container);
 
-        $this->assertEquals(5, $a->getUserId());
+        $this->assertEquals(5, $us->getId());
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
 
@@ -65,7 +66,7 @@ class ActionTaskAssignCurrentUser extends Base
         );
 
         // Our event should be executed
-        $this->assertTrue($action->execute($event));
+        $this->assertTrue($action->execute(new GenericEvent($event)));
 
         // Our task should be assigned to the user 5 (from the session)
         $task = $tf->getById(1);

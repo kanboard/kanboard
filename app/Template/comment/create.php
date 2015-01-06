@@ -2,10 +2,10 @@
     <h2><?= t('Add a comment') ?></h2>
 </div>
 
-<form method="post" action="<?= Helper\u('comment', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off">
-    <?= Helper\form_csrf() ?>
-    <?= Helper\form_hidden('task_id', $values) ?>
-    <?= Helper\form_hidden('user_id', $values) ?>
+<form method="post" action="<?= $this->u('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <?= $this->formCsrf() ?>
+    <?= $this->formHidden('task_id', $values) ?>
+    <?= $this->formHidden('user_id', $values) ?>
 
     <div class="form-tabs">
         <ul class="form-tabs-nav">
@@ -17,7 +17,7 @@
             </li>
         </ul>
         <div class="write-area">
-            <?= Helper\form_textarea('comment', $values, $errors, array(! isset($skip_cancel) ? 'autofocus' : '', 'required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?>
+            <?= $this->formTextarea('comment', $values, $errors, array(! isset($skip_cancel) ? 'autofocus' : '', 'required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?>
         </div>
         <div class="preview-area">
             <div class="markdown"></div>
@@ -30,7 +30,7 @@
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?php if (! isset($skip_cancel)): ?>
             <?= t('or') ?>
-            <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+            <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         <?php endif ?>
     </div>
 </form>

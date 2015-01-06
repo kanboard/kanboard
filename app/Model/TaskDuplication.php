@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Event\TaskEvent;
+
 /**
  * Task Duplication
  *
@@ -27,6 +29,7 @@ class TaskDuplication extends Base
         'score',
         'category_id',
         'time_estimated',
+        'swimlane_id',
     );
 
     /**
@@ -79,10 +82,18 @@ class TaskDuplication extends Base
         $values['position'] = $this->taskFinder->countByColumnId($project_id, $values['column_id']) + 1;
         $values['owner_id'] = $task['owner_id'];
         $values['category_id'] = $task['category_id'];
+        $values['swimlane_id'] = $task['swimlane_id'];
 
         $this->checkDestinationProjectValues($values);
 
-        return $this->db->table(Task::TABLE)->eq('id', $task['id'])->update($values);
+        if ($this->db->table(Task::TABLE)->eq('id', $task['id'])->update($values)) {
+            $this->container['dispatcher']->dispatch(
+                Task::EVENT_MOVE_PROJECT,
+                new TaskEvent(array_merge($task, $values, array('task_id' => $task['id'])))
+            );
+        }
+
+        return true;
     }
 
     /**
@@ -100,8 +111,18 @@ class TaskDuplication extends Base
 
         // Check if the category exists for the destination project
         if ($values['category_id'] > 0) {
-            $category_name = $this->category->getNameById($values['category_id']);
-            $values['category_id'] = $this->category->getIdByName($values['project_id'], $category_name);
+            $values['category_id'] = $this->category->getIdByName(
+                $values['project_id'],
+                $this->category->getNameById($values['category_id'])
+            );
+        }
+
+        // Check if the swimlane exists for the destination project
+        if ($values['swimlane_id'] > 0) {
+            $values['swimlane_id'] = $this->swimlane->getIdByName(
+                $values['project_id'],
+                $this->swimlane->getNameById($values['swimlane_id'])
+            );
         }
     }
 

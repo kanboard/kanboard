@@ -14,5 +14,5 @@ for ($i = 0; $i < 100; $i++) {
         'name' => 'Project #'.$i
     ));
 
-    $permissionModel->allowUser($id, 1);
+    $permissionModel->addMember($id, 1);
 }

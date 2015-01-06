@@ -2,7 +2,7 @@
 
 namespace Action;
 
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
 
 /**
  * Assign a task to someone
@@ -64,7 +64,7 @@ class TaskAssignUser extends Base
             'owner_id' => $data['owner_id'],
         );
 
-        return $this->taskModification->update($values, false);
+        return $this->taskModification->update($values);
     }
 
     /**

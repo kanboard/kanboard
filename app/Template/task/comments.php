@@ -5,7 +5,7 @@
     </div>
 
     <?php foreach ($comments as $comment): ?>
-        <?= Helper\template('comment/show', array(
+        <?= $this->render('comment/show', array(
             'comment' => $comment,
             'task' => $task,
             'project' => $project,
@@ -15,10 +15,10 @@
     <?php endforeach ?>
 
     <?php if (! isset($not_editable)): ?>
-        <?= Helper\template('comment/create', array(
+        <?= $this->render('comment/create', array(
                 'skip_cancel' => true,
                 'values' => array(
-                    'user_id' => Helper\get_user_id(),
+                    'user_id' => $this->userSession->getId(),
                     'task_id' => $task['id'],
                 ),
                 'errors' => array(),

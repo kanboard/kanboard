@@ -4,7 +4,6 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Event\ProjectModificationDateListener;
 use Core\Security;
 
 /**
@@ -52,12 +51,12 @@ class Project extends Base
      * Get a project by the name
      *
      * @access public
-     * @param  string   $project_name    Project name
+     * @param  string     $name    Project name
      * @return array
      */
-    public function getByName($project_name)
+    public function getByName($name)
     {
-        return $this->db->table(self::TABLE)->eq('name', $project_name)->findOne();
+        return $this->db->table(self::TABLE)->eq('name', $name)->findOne();
     }
 
     /**
@@ -110,7 +109,7 @@ class Project extends Base
 
             foreach ($projects as $key => $project) {
 
-                if (! $this->projectPermission->isUserAllowed($project['id'], $this->acl->getUserId())) {
+                if (! $this->projectPermission->isUserAllowed($project['id'], $this->userSession->getId())) {
                     unset($projects[$key]);
                 }
             }
@@ -192,11 +191,12 @@ class Project extends Base
     public function getStats($project_id)
     {
         $stats = array();
-        $columns = $this->board->getColumns($project_id);
         $stats['nb_active_tasks'] = 0;
+        $columns = $this->board->getColumns($project_id);
+        $column_stats = $this->board->getColumnStats($project_id);
 
         foreach ($columns as &$column) {
-            $column['nb_active_tasks'] = $this->taskFinder->countByColumnId($project_id, $column['id']);
+            $column['nb_active_tasks'] = isset($column_stats[$column['id']]) ? $column_stats[$column['id']] : 0;
             $stats['nb_active_tasks'] += $column['nb_active_tasks'];
         }
 
@@ -228,7 +228,7 @@ class Project extends Base
         );
 
         if (! $this->db->table(self::TABLE)->save($values)) {
-            return false;
+            return 0;
         }
 
         return $this->db->getConnection()->getLastId();
@@ -296,8 +296,10 @@ class Project extends Base
         }
 
         if ($add_user && $user_id) {
-            $this->projectPermission->allowUser($project_id, $user_id);
+            $this->projectPermission->addManager($project_id, $user_id);
         }
+
+        $this->category->createDefaultCategories($project_id);
 
         $this->db->closeTransaction();
 
@@ -488,35 +490,5 @@ class Project extends Base
             $v->execute(),
             $v->getErrors()
         );
-    }
-
-    /**
-     * Attach events
-     *
-     * @access public
-     */
-    public function attachEvents()
-    {
-        $events = array(
-            Task::EVENT_CREATE_UPDATE,
-            Task::EVENT_CLOSE,
-            Task::EVENT_OPEN,
-            Task::EVENT_MOVE_COLUMN,
-            Task::EVENT_MOVE_POSITION,
-            Task::EVENT_ASSIGNEE_CHANGE,
-            GithubWebhook::EVENT_ISSUE_OPENED,
-            GithubWebhook::EVENT_ISSUE_CLOSED,
-            GithubWebhook::EVENT_ISSUE_REOPENED,
-            GithubWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE,
-            GithubWebhook::EVENT_ISSUE_LABEL_CHANGE,
-            GithubWebhook::EVENT_ISSUE_COMMENT,
-            GithubWebhook::EVENT_COMMIT,
-        );
-
-        $listener = new ProjectModificationDateListener($this->container);
-
-        foreach ($events as $event_name) {
-            $this->event->attach($event_name, $listener);
-        }
     }
 }

@@ -630,7 +630,7 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "getBoard",
-    "id": 1627282648,
+    "id": 827046470,
     "params": [
         1
     ]
@@ -642,58 +642,51 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1627282648,
+    "id": 827046470,
     "result": [
         {
-            "id": "1",
-            "title": "Backlog",
-            "position": "1",
-            "project_id": "1",
-            "task_limit": "0",
-            "tasks": []
-        },
-        {
-            "id": "2",
-            "title": "Ready",
-            "position": "2",
-            "project_id": "1",
-            "task_limit": "0",
-            "tasks": []
-        },
-        {
-            "id": "3",
-            "title": "Work in progress",
-            "position": "3",
-            "project_id": "1",
-            "task_limit": "0",
-            "tasks": [
+            "id": 0,
+            "name": "Default swimlane",
+            "columns": [
                 {
-                    "nb_comments": "0",
-                    "nb_files": "0",
-                    "nb_subtasks": "1",
-                    "nb_completed_subtasks": "0",
                     "id": "1",
-                    "title": "Task with comment",
-                    "description": "",
-                    "date_creation": "1410952872",
-                    "date_modification": "1410952872",
-                    "date_completed": null,
-                    "date_due": "0",
-                    "color_id": "red",
-                    "project_id": "1",
-                    "column_id": "3",
-                    "owner_id": "1",
-                    "creator_id": "0",
+                    "title": "Backlog",
                     "position": "1",
-                    "is_active": "1",
-                    "score": "0",
-                    "category_id": "0",
-                    "assignee_username": "admin",
-                    "assignee_name": null
+                    "project_id": "1",
+                    "task_limit": "0",
+                    "tasks": [],
+                    "nb_tasks": 0
+                },
+                {
+                    "id": "2",
+                    "title": "Ready",
+                    "position": "2",
+                    "project_id": "1",
+                    "task_limit": "0",
+                    "tasks": [],
+                    "nb_tasks": 0
+                },
+                {
+                    "id": "3",
+                    "title": "Work in progress",
+                    "position": "3",
+                    "project_id": "1",
+                    "task_limit": "0",
+                    "tasks": [],
+                    "nb_tasks": 0
+                },
+                {
+                    "id": "4",
+                    "title": "Done",
+                    "position": "4",
+                    "project_id": "1",
+                    "task_limit": "0",
+                    "tasks": [],
+                    "nb_tasks": 0
                 }
-            ]
-        },
-        ...
+            ],
+            "nb_columns": 4
+        }
     ]
 }
 ```
@@ -969,6 +962,7 @@ Response example:
     - **score** (integer, optional)
     - **date_due**: ISO8601 format (string, optional)
     - **category_id** (integer, optional)
+    - **swimelane_id** (integer, optional)
 - Result on success: **task_id**
 - Result on failure: **false**
 
@@ -1047,7 +1041,8 @@ Response example:
         "date_due": "0",
         "category_id": "0",
         "creator_id": "0",
-        "date_modification": "1409963206"
+        "date_modification": "1409963206",
+        "swimlane_id": 0
     }
 }
 ```
@@ -1098,7 +1093,8 @@ Response example:
             "date_due": "0",
             "category_id": "0",
             "creator_id": "0",
-            "date_modification": "1409961789"
+            "date_modification": "1409961789",
+            "swimlane_id": 0
         },
         {
             "id": "2",
@@ -1116,7 +1112,8 @@ Response example:
             "date_due": "0",
             "category_id": "0",
             "creator_id": "0",
-            "date_modification": "1409962115"
+            "date_modification": "1409962115",
+            "swimlane_id": 0
         },
         ...
     ]
@@ -1138,6 +1135,7 @@ Response example:
     - **score** (integer, optional)
     - **date_due**: ISO8601 format (string, optional)
     - **category_id** (integer, optional)
+    - **swimlane_id** (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
 

@@ -1,32 +1,32 @@
 <table class="table-fixed table-small">
     <tr>
-        <th class="column-8"><?= Helper\order(t('Id'), 'tasks.id', $pagination) ?></th>
-        <th class="column-8"><?= Helper\order(t('Column'), 'tasks.column_id', $pagination) ?></th>
-        <th class="column-8"><?= Helper\order(t('Category'), 'tasks.category_id', $pagination) ?></th>
-        <th><?= Helper\order(t('Title'), 'tasks.title', $pagination) ?></th>
-        <th class="column-10"><?= Helper\order(t('Assignee'), 'users.username', $pagination) ?></th>
-        <th class="column-10"><?= Helper\order(t('Due date'), 'tasks.date_due', $pagination) ?></th>
-        <th class="column-10"><?= Helper\order(t('Date created'), 'tasks.date_creation', $pagination) ?></th>
-        <th class="column-10"><?= Helper\order(t('Date completed'), 'tasks.date_completed', $pagination) ?></th>
-        <th class="column-5"><?= Helper\order(t('Status'), 'tasks.is_active', $pagination) ?></th>
+        <th class="column-8"><?= $this->order(t('Id'), 'tasks.id', $pagination) ?></th>
+        <th class="column-8"><?= $this->order(t('Column'), 'tasks.column_id', $pagination) ?></th>
+        <th class="column-8"><?= $this->order(t('Category'), 'tasks.category_id', $pagination) ?></th>
+        <th><?= $this->order(t('Title'), 'tasks.title', $pagination) ?></th>
+        <th class="column-10"><?= $this->order(t('Assignee'), 'users.username', $pagination) ?></th>
+        <th class="column-10"><?= $this->order(t('Due date'), 'tasks.date_due', $pagination) ?></th>
+        <th class="column-10"><?= $this->order(t('Date created'), 'tasks.date_creation', $pagination) ?></th>
+        <th class="column-10"><?= $this->order(t('Date completed'), 'tasks.date_completed', $pagination) ?></th>
+        <th class="column-5"><?= $this->order(t('Status'), 'tasks.is_active', $pagination) ?></th>
     </tr>
     <?php foreach ($tasks as $task): ?>
     <tr>
         <td class="task-table task-<?= $task['color_id'] ?>">
-            <?= Helper\a('#'.Helper\escape($task['id']), 'task', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
+            <?= $this->a('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
-            <?= Helper\in_list($task['column_id'], $columns) ?>
+            <?= $this->inList($task['column_id'], $columns) ?>
         </td>
         <td>
-            <?= Helper\in_list($task['category_id'], $categories, '') ?>
+            <?= $this->inList($task['category_id'], $categories, '') ?>
         </td>
         <td>
-            <?= Helper\a(Helper\escape($task['title']), 'task', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
+            <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
             <?php if ($task['assignee_username']): ?>
-                <?= Helper\escape($task['assignee_name'] ?: $task['assignee_username']) ?>
+                <?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>
             <?php else: ?>
                 <?= t('Unassigned') ?>
             <?php endif ?>
@@ -53,4 +53,4 @@
     <?php endforeach ?>
 </table>
 
-<?= Helper\paginate($pagination) ?>
+<?= $this->paginate($pagination) ?>

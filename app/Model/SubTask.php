@@ -2,6 +2,7 @@
 
 namespace Model;
 
+use Event\SubtaskEvent;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
@@ -57,15 +58,11 @@ class SubTask extends Base
      */
     public function getStatusList()
     {
-        $status = array(
+        return array(
             self::STATUS_TODO => t('Todo'),
             self::STATUS_INPROGRESS => t('In progress'),
             self::STATUS_DONE => t('Done'),
         );
-
-        asort($status);
-
-        return $status;
     }
 
     /**
@@ -146,7 +143,10 @@ class SubTask extends Base
         $subtask_id = $this->persist(self::TABLE, $values);
 
         if ($subtask_id) {
-            $this->event->trigger(self::EVENT_CREATE, array('id' => $subtask_id) + $values);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_CREATE,
+                new SubtaskEvent(array('id' => $subtask_id) + $values)
+            );
         }
 
         return $subtask_id;
@@ -165,7 +165,10 @@ class SubTask extends Base
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
         if ($result) {
-            $this->event->trigger(self::EVENT_UPDATE, $values);
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_UPDATE,
+                new SubtaskEvent($values)
+            );
         }
 
         return $result;
@@ -220,6 +223,7 @@ class SubTask extends Base
             $subtasks = $db->table(SubTask::TABLE)
                                  ->columns('title', 'time_estimated')
                                  ->eq('task_id', $src_task_id)
+                                 ->asc('id') // Explicit sorting for postgresql
                                  ->findAll();
 
             foreach ($subtasks as &$subtask) {

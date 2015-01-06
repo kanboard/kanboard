@@ -1,4 +1,4 @@
-<h2><?= Helper\escape($task['title']) ?> (#<?= $task['id'] ?>)</h2>
+<h2><?= $this->e($task['title']) ?> (#<?= $task['id'] ?>)</h2>
 
 <ul>
     <li>
@@ -14,7 +14,7 @@
 
 <?php if (! empty($task['description'])): ?>
     <h2><?= t('Description') ?></h2>
-    <?= Helper\markdown($task['description']) ?: t('There is no description.') ?>
+    <?= $this->markdown($task['description']) ?: t('There is no description.') ?>
 <?php endif ?>
 
-<?= Helper\template('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>
+<?= $this->render('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>

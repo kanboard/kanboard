@@ -15,26 +15,26 @@
 
     <?php foreach ($actions as $action): ?>
     <tr>
-        <td><?= Helper\in_list($action['event_name'], $available_events) ?></td>
-        <td><?= Helper\in_list($action['action_name'], $available_actions) ?></td>
+        <td><?= $this->inList($action['event_name'], $available_events) ?></td>
+        <td><?= $this->inList($action['action_name'], $available_actions) ?></td>
         <td>
             <ul>
             <?php foreach ($action['params'] as $param): ?>
                 <li>
-                    <?= Helper\in_list($param['name'], $available_params) ?> =
+                    <?= $this->inList($param['name'], $available_params) ?> =
                     <strong>
-                    <?php if (Helper\contains($param['name'], 'column_id')): ?>
-                        <?= Helper\in_list($param['value'], $columns_list) ?>
-                    <?php elseif (Helper\contains($param['name'], 'user_id')): ?>
-                        <?= Helper\in_list($param['value'], $users_list) ?>
-                    <?php elseif (Helper\contains($param['name'], 'project_id')): ?>
-                        <?= Helper\in_list($param['value'], $projects_list) ?>
-                    <?php elseif (Helper\contains($param['name'], 'color_id')): ?>
-                        <?= Helper\in_list($param['value'], $colors_list) ?>
-                    <?php elseif (Helper\contains($param['name'], 'category_id')): ?>
-                        <?= Helper\in_list($param['value'], $categories_list) ?>
-                    <?php elseif (Helper\contains($param['name'], 'label')): ?>
-                        <?= Helper\escape($param['value']) ?>
+                    <?php if ($this->contains($param['name'], 'column_id')): ?>
+                        <?= $this->inList($param['value'], $columns_list) ?>
+                    <?php elseif ($this->contains($param['name'], 'user_id')): ?>
+                        <?= $this->inList($param['value'], $users_list) ?>
+                    <?php elseif ($this->contains($param['name'], 'project_id')): ?>
+                        <?= $this->inList($param['value'], $projects_list) ?>
+                    <?php elseif ($this->contains($param['name'], 'color_id')): ?>
+                        <?= $this->inList($param['value'], $colors_list) ?>
+                    <?php elseif ($this->contains($param['name'], 'category_id')): ?>
+                        <?= $this->inList($param['value'], $categories_list) ?>
+                    <?php elseif ($this->contains($param['name'], 'label')): ?>
+                        <?= $this->e($param['value']) ?>
                     <?php endif ?>
                     </strong>
                 </li>
@@ -42,7 +42,7 @@
             </ul>
         </td>
         <td>
-            <?= Helper\a(t('Remove'), 'action', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id'])) ?>
+            <?= $this->a(t('Remove'), 'action', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id'])) ?>
         </td>
     </tr>
     <?php endforeach ?>
@@ -51,12 +51,12 @@
 <?php endif ?>
 
 <h3><?= t('Add an action') ?></h3>
-<form method="post" action="<?= Helper\u('action', 'event', array('project_id' => $project['id'])) ?>" class="listing">
-    <?= Helper\form_csrf() ?>
-    <?= Helper\form_hidden('project_id', $values) ?>
+<form method="post" action="<?= $this->u('action', 'event', array('project_id' => $project['id'])) ?>" class="listing">
+    <?= $this->formCsrf() ?>
+    <?= $this->formHidden('project_id', $values) ?>
 
-    <?= Helper\form_label(t('Action'), 'action_name') ?>
-    <?= Helper\form_select('action_name', $available_actions, $values) ?><br/>
+    <?= $this->formLabel(t('Action'), 'action_name') ?>
+    <?= $this->formSelect('action_name', $available_actions, $values) ?><br/>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Next step') ?>" class="btn btn-blue"/>

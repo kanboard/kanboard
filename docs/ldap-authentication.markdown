@@ -49,6 +49,9 @@ define('LDAP_PORT', 389);
 // By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
 define('LDAP_SSL_VERIFY', true);
 
+// Enable LDAP START_TLS
+define('LDAP_START_TLS', false);
+
 // LDAP bind type: "anonymous", "user" (use the given user/password from the form) and "proxy" (a specific user to browse the LDAP directory)
 define('LDAP_BIND_TYPE', 'anonymous');
 

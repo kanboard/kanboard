@@ -6,9 +6,18 @@
 
         <article class="markdown task-show-description">
             <?php if (! isset($is_public)): ?>
-                <?= Helper\markdown($task['description']) ?>
+                <?= $this->markdown(
+                    $task['description'],
+                    array(
+                        'controller' => 'task',
+                        'action' => 'show',
+                        'params' => array(
+                            'project_id' => $task['project_id']
+                        )
+                    )
+                ) ?>
             <?php else: ?>
-                <?= Helper\markdown(
+                <?= $this->markdown(
                     $task['description'],
                     array(
                         'controller' => 'task',

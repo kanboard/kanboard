@@ -5,6 +5,9 @@ require_once __DIR__.'/Base.php';
 use Model\Project;
 use Model\Board;
 use Model\Config;
+use Model\TaskCreation;
+use Model\TaskFinder;
+use Model\Swimlane;
 
 class BoardTest extends Base
 {
@@ -48,11 +51,101 @@ class BoardTest extends Base
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
-        $board = $b->get(1);
+        $board = $b->getBoard(1);
         $this->assertNotEmpty($board);
-        $this->assertEquals(4, count($board));
-        $this->assertTrue(array_key_exists('tasks', $board[2]));
-        $this->assertTrue(array_key_exists('title', $board[2]));
+        $this->assertEquals(1, count($board));
+        $this->assertEquals(4, count($board[0]));
+        $this->assertTrue(array_key_exists('name', $board[0]));
+        $this->assertTrue(array_key_exists('columns', $board[0]));
+        $this->assertTrue(array_key_exists('tasks', $board[0]['columns'][2]));
+        $this->assertTrue(array_key_exists('title', $board[0]['columns'][2]));
+    }
+
+    public function testGetBoardWithSwimlane()
+    {
+        $b = new Board($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $s = new Swimlane($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
+        $this->assertEquals(1, $s->create(1, 'test 1'));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 3)));
+        $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
+        $this->assertEquals(4, $tc->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 3)));
+        $this->assertEquals(5, $tc->create(array('title' => 'Task #5', 'project_id' => 1, 'column_id' => 4)));
+        $this->assertEquals(6, $tc->create(array('title' => 'Task #6', 'project_id' => 1, 'column_id' => 4, 'swimlane_id' => 1)));
+
+        $board = $b->getBoard(1);
+        $this->assertNotEmpty($board);
+        $this->assertEquals(2, count($board));
+        $this->assertEquals(4, count($board[0]));
+        $this->assertTrue(array_key_exists('name', $board[0]));
+        $this->assertTrue(array_key_exists('columns', $board[0]));
+        $this->assertTrue(array_key_exists('tasks', $board[0]['columns'][2]));
+        $this->assertTrue(array_key_exists('title', $board[0]['columns'][2]));
+
+        $task = $tf->getById(1);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(0, $task['swimlane_id']);
+        $this->assertEquals(1, $board[0]['columns'][0]['tasks'][0]['id']);
+        $this->assertEquals(1, $board[0]['columns'][0]['tasks'][0]['column_id']);
+        $this->assertEquals(1, $board[0]['columns'][0]['tasks'][0]['position']);
+        $this->assertEquals(0, $board[0]['columns'][0]['tasks'][0]['swimlane_id']);
+
+        $task = $tf->getById(2);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(3, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(0, $task['swimlane_id']);
+        $this->assertEquals(2, $board[0]['columns'][2]['tasks'][0]['id']);
+        $this->assertEquals(3, $board[0]['columns'][2]['tasks'][0]['column_id']);
+        $this->assertEquals(1, $board[0]['columns'][2]['tasks'][0]['position']);
+        $this->assertEquals(0, $board[0]['columns'][2]['tasks'][0]['swimlane_id']);
+
+        $task = $tf->getById(3);
+        $this->assertEquals(3, $task['id']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(1, $task['swimlane_id']);
+        $this->assertEquals(3, $board[1]['columns'][1]['tasks'][0]['id']);
+        $this->assertEquals(2, $board[1]['columns'][1]['tasks'][0]['column_id']);
+        $this->assertEquals(1, $board[1]['columns'][1]['tasks'][0]['position']);
+        $this->assertEquals(1, $board[1]['columns'][1]['tasks'][0]['swimlane_id']);
+
+        $task = $tf->getById(4);
+        $this->assertEquals(4, $task['id']);
+        $this->assertEquals(3, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+        $this->assertEquals(0, $task['swimlane_id']);
+        $this->assertEquals(4, $board[0]['columns'][2]['tasks'][1]['id']);
+        $this->assertEquals(3, $board[0]['columns'][2]['tasks'][1]['column_id']);
+        $this->assertEquals(2, $board[0]['columns'][2]['tasks'][1]['position']);
+        $this->assertEquals(0, $board[0]['columns'][2]['tasks'][1]['swimlane_id']);
+
+        $task = $tf->getById(5);
+        $this->assertEquals(5, $task['id']);
+        $this->assertEquals(4, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(0, $task['swimlane_id']);
+        $this->assertEquals(5, $board[0]['columns'][3]['tasks'][0]['id']);
+        $this->assertEquals(4, $board[0]['columns'][3]['tasks'][0]['column_id']);
+        $this->assertEquals(1, $board[0]['columns'][3]['tasks'][0]['position']);
+        $this->assertEquals(0, $board[0]['columns'][3]['tasks'][0]['swimlane_id']);
+
+        $task = $tf->getById(6);
+        $this->assertEquals(6, $task['id']);
+        $this->assertEquals(4, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(1, $task['swimlane_id']);
+        $this->assertEquals(6, $board[1]['columns'][3]['tasks'][0]['id']);
+        $this->assertEquals(4, $board[1]['columns'][3]['tasks'][0]['column_id']);
+        $this->assertEquals(1, $board[1]['columns'][3]['tasks'][0]['position']);
+        $this->assertEquals(1, $board[1]['columns'][3]['tasks'][0]['swimlane_id']);
     }
 
     public function testGetColumn()

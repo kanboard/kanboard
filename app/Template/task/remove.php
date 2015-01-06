@@ -4,12 +4,12 @@
 
 <div class="confirm">
     <p class="alert alert-info">
-        <?= t('Do you really want to remove this task: "%s"?', Helper\escape($task['title'])) ?>
+        <?= t('Do you really want to remove this task: "%s"?', $this->e($task['title'])) ?>
     </p>
 
     <div class="form-actions">
-        <?= Helper\a(t('Yes'), 'task', 'remove', array('task_id' => $task['id'], 'confirmation' => 'yes'), true, 'btn btn-red') ?>
+        <?= $this->a(t('Yes'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'confirmation' => 'yes'), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
 </div>

@@ -68,10 +68,10 @@ class Tasklink extends Base
             if ($this->taskLink->create($values)) {
                 $this->session->flash(t('Link added successfully.'));
                 if (isset($values['another_link']) && $values['another_link'] == 1) {
-                    $this->response->redirect('?controller=tasklink&action=create&task_id='.$task['id'].'&another_link=1');
+                    $this->response->redirect('?controller=tasklink&action=create&task_id='.$task['id'].'&project_id='.$task['project_id'].'&another_link=1');
                 }
                 
-                $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
+                $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#links');
             }
             else {
                 if ($this->taskLink->isUniqueConstraintFailed()) {
@@ -125,7 +125,7 @@ class Tasklink extends Base
         if ($valid) {
             if ($this->taskLink->update($values)) {
                 $this->session->flash(t('Link updated successfully.'));
-                $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
+                $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#links');
             }
             else {
                 if ($this->taskLink->isUniqueConstraintFailed()) {
@@ -171,11 +171,11 @@ class Tasklink extends Base
 
         if ($this->taskLink->remove($this->request->getIntegerParam('link_id'))) {
             $this->session->flash(t('Link removed successfully.'));
-        	$this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
+        	$this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#links');
         }
         else {
             $this->session->flashError(t('Unable to remove this link.'));
-	        $this->response->redirect('?controller=tasklink&action=confirm&task_id='.$task['id'].'&link_id='.$this->request->getIntegerParam('link_id'));
+	        $this->response->redirect('?controller=tasklink&action=confirm&task_id='.$task['id'].'&project_id='.$task['project_id'].'&link_id='.$this->request->getIntegerParam('link_id'));
         }
     }
 }

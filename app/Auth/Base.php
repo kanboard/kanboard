@@ -2,7 +2,6 @@
 
 namespace Auth;
 
-use Core\Tool;
 use Pimple\Container;
 
 /**
@@ -14,6 +13,7 @@ use Pimple\Container;
  * @property \Model\Acl                $acl
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\User               $user
+ * @property \Model\UserSession        $userSession
  */
 abstract class Base
 {
@@ -54,6 +54,6 @@ abstract class Base
      */
     public function __get($name)
     {
-        return Tool::loadModel($this->container, $name);
+        return $this->container[$name];
     }
 }

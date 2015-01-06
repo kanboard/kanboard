@@ -3,7 +3,7 @@
 namespace Model;
 
 /**
- * Acl model
+ * Access List
  *
  * @package  model
  * @author   Frederic Guillot
@@ -16,36 +16,59 @@ class Acl extends Base
      * @access private
      * @var array
      */
-    private $public_actions = array(
+    private $public_acl = array(
         'user' => array('login', 'check', 'google', 'github'),
         'task' => array('readonly'),
         'board' => array('readonly'),
         'project' => array('feed'),
-        'webhook' => array('task', 'github'),
+        'webhook' => '*',
     );
 
     /**
-     * Controllers and actions allowed for regular users
+     * Controllers and actions for project members
      *
      * @access private
      * @var array
      */
-    private $user_actions = array(
-        'app' => array('index', 'preview', 'status'),
-        'project' => array('index', 'show', 'exporttasks', 'exportdaily', 'share', 'edit', 'update', 'users', 'remove', 'duplicate', 'disable', 'enable', 'activity', 'search', 'tasks', 'create', 'save'),
-        'board' => array('index', 'show', 'save', 'check', 'changeassignee', 'updateassignee', 'changecategory', 'updatecategory', 'movecolumn', 'edit', 'update', 'add', 'confirm', 'remove', 'subtasks', 'togglesubtask', 'attachments', 'comments', 'description'),
-        'user' => array('edit', 'forbidden', 'logout', 'show', 'external', 'unlinkgoogle', 'unlinkgithub', 'sessions', 'removesession', 'last', 'notifications', 'password'),
-        'comment' => array('create', 'save', 'confirm', 'remove', 'update', 'edit', 'forbidden'),
-        'file' => array('create', 'save', 'download', 'confirm', 'remove', 'open', 'image'),
-        'subtask' => array('create', 'save', 'edit', 'update', 'confirm', 'remove', 'togglestatus'),
-        'task' => array('show', 'create', 'save', 'edit', 'update', 'close', 'open', 'duplicate', 'remove', 'description', 'move', 'copy', 'time'),
-        'category' => array('index', 'save', 'edit', 'update', 'confirm', 'remove'),
-        'action' => array('index', 'event', 'params', 'create', 'confirm', 'remove'),
-        'analytic' => array('tasks', 'users', 'cfd'),
+    private $member_acl = array(
+        'board' => '*',
+        'comment' => '*',
+        'file' => '*',
+        'project' => array('show', 'tasks', 'search', 'activity'),
+        'subtask' => '*',
+        'task' => '*',
     );
 
     /**
-     * Return true if the specified controller/action is allowed according to the given acl
+     * Controllers and actions for project managers
+     *
+     * @access private
+     * @var array
+     */
+    private $manager_acl = array(
+        'action' => '*',
+        'analytic' => '*',
+        'board' => array('movecolumn', 'edit', 'update', 'add', 'remove'),
+        'category' => '*',
+        'export' => array('tasks', 'subtasks', 'summary'),
+        'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
+        'swimlane' => '*',
+    );
+
+    /**
+     * Controllers and actions for admins
+     *
+     * @access private
+     * @var array
+     */
+    private $admin_acl = array(
+        'user' => array('index', 'create', 'save', 'remove'),
+        'config' => '*',
+        'project' => array('remove'),
+    );
+
+    /**
+     * Return true if the specified controller/action match the given acl
      *
      * @access public
      * @param  array    $acl          Acl list
@@ -53,13 +76,27 @@ class Acl extends Base
      * @param  string   $action       Action name
      * @return bool
      */
-    public function isAllowedAction(array $acl, $controller, $action)
+    public function matchAcl(array $acl, $controller, $action)
     {
-        if (isset($acl[$controller])) {
-            return in_array($action, $acl[$controller]);
+        $action = strtolower($action);
+        return isset($acl[$controller]) && $this->hasAction($action, $acl[$controller]);
+    }
+
+    /**
+     * Return true if the specified action is inside the list of actions
+     *
+     * @access public
+     * @param  string   $action       Action name
+     * @param  mixed    $action       Actions list
+     * @return bool
+     */
+    public function hasAction($action, $actions)
+    {
+        if (is_array($actions)) {
+            return in_array($action, $actions);
         }
 
-        return false;
+        return $actions === '*';
     }
 
     /**
@@ -72,94 +109,90 @@ class Acl extends Base
      */
     public function isPublicAction($controller, $action)
     {
-        return $this->isAllowedAction($this->public_actions, $controller, $action);
+        return $this->matchAcl($this->public_acl, $controller, $action);
     }
 
     /**
-     * Return true if the given action is allowed for a regular user
+     * Return true if the given action is for admins
      *
      * @access public
      * @param  string   $controller   Controller name
      * @param  string   $action       Action name
      * @return bool
      */
-    public function isUserAction($controller, $action)
+    public function isAdminAction($controller, $action)
     {
-        return $this->isAllowedAction($this->user_actions, $controller, $action);
+        return $this->matchAcl($this->admin_acl, $controller, $action);
     }
 
     /**
-     * Return true if the logged user is admin
+     * Return true if the given action is for project managers
      *
      * @access public
+     * @param  string   $controller   Controller name
+     * @param  string   $action       Action name
      * @return bool
      */
-    public function isAdminUser()
+    public function isManagerAction($controller, $action)
     {
-        return isset($_SESSION['user']['is_admin']) && $_SESSION['user']['is_admin'] === true;
+        return $this->matchAcl($this->manager_acl, $controller, $action);
     }
 
     /**
-     * Return true if the logged user is not admin
+     * Return true if the given action is for project members
      *
      * @access public
+     * @param  string   $controller   Controller name
+     * @param  string   $action       Action name
      * @return bool
      */
-    public function isRegularUser()
+    public function isMemberAction($controller, $action)
     {
-        return isset($_SESSION['user']['is_admin']) && $_SESSION['user']['is_admin'] === false;
+        return $this->matchAcl($this->member_acl, $controller, $action);
     }
 
     /**
-     * Get the connected user id
+     * Return true if the visitor is allowed to access to the given page
+     * We suppose the user already authenticated
      *
      * @access public
-     * @return integer
-     */
-    public function getUserId()
-    {
-        return isset($_SESSION['user']['id']) ? (int) $_SESSION['user']['id'] : 0;
-    }
-
-    /**
-     * Check is the user is connected
-     *
-     * @access public
+     * @param  string   $controller   Controller name
+     * @param  string   $action       Action name
+     * @param  integer  $project_id   Project id
      * @return bool
      */
-    public function isLogged()
+    public function isAllowed($controller, $action, $project_id = 0)
     {
-        return ! empty($_SESSION['user']);
-    }
-
-    /**
-     * Check is the user was authenticated with the RememberMe or set the value
-     *
-     * @access public
-     * @param  bool   $value   Set true if the user use the RememberMe
-     * @return bool
-     */
-    public function isRememberMe($value = null)
-    {
-        if ($value !== null) {
-            $_SESSION['is_remember_me'] = $value;
+        // If you are admin you have access to everything
+        if ($this->userSession->isAdmin()) {
+            return true;
         }
 
-        return empty($_SESSION['is_remember_me']) ? false : $_SESSION['is_remember_me'];
+        // If you access to an admin action, your are not allowed
+        if ($this->isAdminAction($controller, $action)) {
+            return false;
+        }
+
+        // Check project manager permissions
+        if ($this->isManagerAction($controller, $action)) {
+            return $this->isManagerActionAllowed($project_id);
+        }
+
+        // Check project member permissions
+        if ($this->isMemberAction($controller, $action)) {
+            return $project_id > 0 && $this->projectPermission->isMember($project_id, $this->userSession->getId());
+        }
+
+        // Other applications actions are allowed
+        return true;
     }
 
-    /**
-     * Check if an action is allowed for the logged user
-     *
-     * @access public
-     * @param  string   $controller   Controller name
-     * @param  string   $action       Action name
-     * @return bool
-     */
-    public function isPageAccessAllowed($controller, $action)
+    public function isManagerActionAllowed($project_id)
     {
-        return $this->isPublicAction($controller, $action) ||
-               $this->isAdminUser() ||
-               ($this->isRegularUser() && $this->isUserAction($controller, $action));
+        if ($this->userSession->isAdmin()) {
+            return true;
+        }
+
+        return $project_id > 0 && $this->projectPermission->isManager($project_id, $this->userSession->getId());
     }
 }

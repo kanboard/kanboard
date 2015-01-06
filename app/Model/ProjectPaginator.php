@@ -38,9 +38,10 @@ class ProjectPaginator extends Base
         foreach ($projects as &$project) {
 
             $project['columns'] = $this->board->getColumns($project['id']);
+            $stats = $this->board->getColumnStats($project['id']);
 
             foreach ($project['columns'] as &$column) {
-                $column['nb_tasks'] = $this->taskFinder->countByColumnId($project['id'], $column['id']);
+                $column['nb_tasks'] = isset($stats[$column['id']]) ? $stats[$column['id']] : 0;
             }
         }
 

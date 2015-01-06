@@ -5,9 +5,9 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 18;
+const VERSION = 23;
 
-function version_18($pdo)
+function version_23($pdo)
 {
     $pdo->exec("CREATE TABLE links
         (
@@ -29,6 +29,66 @@ function version_18($pdo)
             FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
         ) ENGINE=InnoDB CHARSET=utf8");
     $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, task_inverse_id)");
+}
+
+function version_22($pdo)
+{
+    $pdo->exec('ALTER TABLE users ADD COLUMN timezone VARCHAR(50)');
+    $pdo->exec('ALTER TABLE users ADD COLUMN language CHAR(5)');
+}
+
+function version_21($pdo)
+{
+    // Avoid some full table scans
+    $pdo->exec('CREATE INDEX users_admin_idx ON users(is_admin)');
+    $pdo->exec('CREATE INDEX columns_project_idx ON columns(project_id)');
+    $pdo->exec('CREATE INDEX tasks_project_idx ON tasks(project_id)');
+    $pdo->exec('CREATE INDEX swimlanes_project_idx ON swimlanes(project_id)');
+    $pdo->exec('CREATE INDEX categories_project_idx ON project_has_categories(project_id)');
+    $pdo->exec('CREATE INDEX subtasks_task_idx ON task_has_subtasks(task_id)');
+    $pdo->exec('CREATE INDEX files_task_idx ON task_has_files(task_id)');
+    $pdo->exec('CREATE INDEX comments_task_idx ON comments(task_id)');
+
+    // Set the ownership for all private projects
+    $rq = $pdo->prepare("SELECT id FROM projects WHERE is_private='1'");
+    $rq->execute();
+    $project_ids = $rq->fetchAll(PDO::FETCH_COLUMN, 0);
+
+    $rq = $pdo->prepare('UPDATE project_has_users SET is_owner=1 WHERE project_id=?');
+
+    foreach ($project_ids as $project_id) {
+        $rq->execute(array($project_id));
+    }
+}
+
+function version_20($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('project_categories', ''));
+}
+
+function version_19($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE swimlanes (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(200) NOT NULL,
+            position INTEGER DEFAULT 1,
+            is_active BOOLEAN DEFAULT '1',
+            project_id INTEGER,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            UNIQUE (name, project_id)
+        )
+    ");
+
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN swimlane_id INTEGER DEFAULT 0');
+    $pdo->exec("ALTER TABLE projects ADD COLUMN default_swimlane VARCHAR(200) DEFAULT '".t('Default swimlane')."'");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN show_default_swimlane BOOLEAN DEFAULT '1'");
+}
+
+function version_18($pdo)
+{
+    $pdo->exec("ALTER TABLE project_has_users ADD COLUMN is_owner BOOLEAN DEFAULT '0'");
 }
 
 function version_17($pdo)

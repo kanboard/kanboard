@@ -25,4 +25,4 @@ Creating a private prooject
 
 To create a new private project, click on the top menu **Projects** and click on the link **New private project**.
 
-Note: project names must be unique.
+Note: project names must be unique across the application.

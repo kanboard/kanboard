@@ -2,9 +2,6 @@
 
 namespace Model;
 
-use Core\Template;
-use Event\ProjectDailySummaryListener;
-
 /**
  * Project daily summary
  *
@@ -156,26 +153,5 @@ class ProjectDailySummary extends Base
         }
 
         return $metrics;
-    }
-
-    /**
-     * Attach events to be able to record the metrics
-     *
-     * @access public
-     */
-    public function attachEvents()
-    {
-        $events = array(
-            Task::EVENT_CREATE,
-            Task::EVENT_CLOSE,
-            Task::EVENT_OPEN,
-            Task::EVENT_MOVE_COLUMN,
-        );
-
-        $listener = new ProjectDailySummaryListener($this->container);
-
-        foreach ($events as $event_name) {
-            $this->event->attach($event_name, $listener);
-        }
     }
 }

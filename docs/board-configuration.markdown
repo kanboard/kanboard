@@ -34,3 +34,10 @@ It's useful if you always create projects with the same columns.
 Each column name must be separated by a comma.
 
 By default, Kanboard use those column names: Backlog, Ready, Work in progress and Done.
+
+### Default categories for new projects
+
+Categories are not global to the application but attached to a project.
+Each project can have different categories.
+
+However, if you always create the same categories for all your projects, you can define here the list of categories to create automatically.

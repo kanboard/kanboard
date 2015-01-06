@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Event\FileEvent;
+
 /**
  * File model
  *
@@ -89,7 +91,10 @@ class File extends Base
      */
     public function create($task_id, $name, $path, $is_image)
     {
-        $this->event->trigger(self::EVENT_CREATE, array('task_id' => $task_id, 'name' => $name));
+        $this->container['dispatcher']->dispatch(
+            self::EVENT_CREATE,
+            new FileEvent(array('task_id' => $task_id, 'name' => $name))
+        );
 
         return $this->db->table(self::TABLE)->save(array(
             'task_id' => $task_id,

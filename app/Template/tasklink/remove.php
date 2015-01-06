@@ -10,8 +10,8 @@
     </p>
 
     <div class="form-actions">
-        <?= Helper\a(t('Yes'), 'tasklink', 'remove', array('task_id' => $task['id'], 'link_id' => $link['id']), true, 'btn btn-red') ?>
+        <?= $this->a(t('Yes'), 'tasklink', 'remove', array('task_id' => $task['id'], 'link_id' => $link['id'], 'project_id' => $task['project_id']), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
 </div>

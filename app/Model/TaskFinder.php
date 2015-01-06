@@ -40,6 +40,7 @@ class TaskFinder extends Base
                 'tasks.color_id',
                 'tasks.project_id',
                 'tasks.column_id',
+                'tasks.swimlane_id',
                 'tasks.owner_id',
                 'tasks.creator_id',
                 'tasks.position',
@@ -56,13 +57,17 @@ class TaskFinder extends Base
      * Get all tasks shown on the board (sorted by position)
      *
      * @access public
-     * @param  integer    $project_id    Project id
+     * @param  integer    $project_id     Project id
+     * @param  integer    $column_id      Column id
+     * @param  integer    $swimlane_id    Swimlane id
      * @return array
      */
-    public function getTasksOnBoard($project_id)
+    public function getTasksByColumnAndSwimlane($project_id, $column_id, $swimlane_id = 0)
     {
         return $this->getQuery()
                     ->eq('project_id', $project_id)
+                    ->eq('column_id', $column_id)
+                    ->eq('swimlane_id', $swimlane_id)
                     ->eq('is_active', Task::STATUS_OPEN)
                     ->asc('tasks.position')
                     ->findAll();
@@ -192,6 +197,7 @@ class TaskFinder extends Base
             tasks.is_active,
             tasks.score,
             tasks.category_id,
+            tasks.swimlane_id,
             project_has_categories.name AS category_name,
             projects.name AS project_name,
             columns.title AS column_title,
@@ -235,16 +241,35 @@ class TaskFinder extends Base
      * @access public
      * @param  integer   $project_id   Project id
      * @param  integer   $column_id    Column id
-     * @param  array     $status       List of status id
      * @return integer
      */
-    public function countByColumnId($project_id, $column_id, array $status = array(Task::STATUS_OPEN))
+    public function countByColumnId($project_id, $column_id)
     {
         return $this->db
                     ->table(Task::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
-                    ->in('is_active', $status)
+                    ->in('is_active', 1)
+                    ->count();
+    }
+
+    /**
+     * Count the number of tasks for a given column and swimlane
+     *
+     * @access public
+     * @param  integer   $project_id     Project id
+     * @param  integer   $column_id      Column id
+     * @param  integer   $swimlane_id    Swimlane id
+     * @return integer
+     */
+    public function countByColumnAndSwimlaneId($project_id, $column_id, $swimlane_id)
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('column_id', $column_id)
+                    ->eq('swimlane_id', $swimlane_id)
+                    ->in('is_active', 1)
                     ->count();
     }
 

@@ -2,7 +2,8 @@
 
 namespace Model;
 
-use LogicException;
+use Integration\GitlabWebhook;
+use Integration\GithubWebhook;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
@@ -80,6 +81,9 @@ class Action extends Base
             GithubWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE => t('Github issue assignee change'),
             GithubWebhook::EVENT_ISSUE_LABEL_CHANGE => t('Github issue label change'),
             GithubWebhook::EVENT_ISSUE_COMMENT => t('Github issue comment created'),
+            GitlabWebhook::EVENT_COMMIT => t('Gitlab commit received'),
+            GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
+            GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
         );
 
         asort($values);
@@ -136,9 +140,17 @@ class Action extends Base
     public function getAll()
     {
         $actions = $this->db->table(self::TABLE)->findAll();
+        $params = $this->db->table(self::TABLE_PARAMS)->findAll();
 
         foreach ($actions as &$action) {
-            $action['params'] = $this->db->table(self::TABLE_PARAMS)->eq('action_id', $action['id'])->findAll();
+
+            $action['params'] = array();
+
+            foreach ($params as $param) {
+                if ($param['action_id'] === $action['id']) {
+                    $action['params'][] = $param;
+                }
+            }
         }
 
         return $actions;
@@ -187,6 +199,7 @@ class Action extends Base
      */
     public function remove($action_id)
     {
+        // $this->container['fileCache']->remove('proxy_action_getAll');
         return $this->db->table(self::TABLE)->eq('id', $action_id)->remove();
     }
 
@@ -230,6 +243,8 @@ class Action extends Base
 
         $this->db->closeTransaction();
 
+        // $this->container['fileCache']->remove('proxy_action_getAll');
+
         return true;
     }
 
@@ -240,7 +255,10 @@ class Action extends Base
      */
     public function attachEvents()
     {
-        foreach ($this->getAll() as $action) {
+        //$actions = $this->container['fileCache']->proxy('action', 'getAll');
+        $actions = $this->getAll();
+
+        foreach ($actions as $action) {
 
             $listener = $this->load($action['action_name'], $action['project_id'], $action['event_name']);
 
@@ -248,7 +266,7 @@ class Action extends Base
                 $listener->setParam($param['name'], $param['value']);
             }
 
-            $this->event->attach($action['event_name'], $listener);
+            $this->container['dispatcher']->addListener($action['event_name'], array($listener, 'execute'));
         }
     }
 
@@ -302,6 +320,8 @@ class Action extends Base
                 }
             }
         }
+
+        // $this->container['fileCache']->remove('proxy_action_getAll');
 
         return true;
     }

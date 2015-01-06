@@ -10,15 +10,15 @@ foreach ($links as $link): ?>
         </li>
         <?php endif ?>
         <?php $previous_link = $link['name']; ?>
-        <li><?= Helper\escape($link['name']) ?>
+        <li><?= $this->e($link['name']) ?>
             <ul>
     <?php endif ?>
                 <li<?php if (0 == $link['task_inverse_is_active']): ?> class="task-closed"><?php endif ?>>
-                    <?= Helper\escape($link['task_inverse_category']) ?>
-                    <?= Helper\a('#'.Helper\escape($link['task_inverse_id']).' - '.trim(Helper\escape($link['task_inverse_name'])),
+                    <?= $this->e($link['task_inverse_category']) ?>
+                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])),
                         'task', 
                         'show', 
-                        array('task_id' => $link['task_inverse_id'])) ?>
+                        array('task_id' => $link['task_inverse_id'], 'project_id' => $task['project_id'])) ?>
                 </li>
 <?php endforeach ?>
             </ul>

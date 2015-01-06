@@ -2,69 +2,32 @@
 
 require __DIR__.'/app/common.php';
 
-$models = array(
-    'Config',
-    'Project',
-    'ProjectPermission',
-    'Task',
-    'TaskCreation',
-    'TaskModification',
-    'TaskFinder',
-    'TaskPosition',
-    'TaskStatus',
-    'TaskValidator',
-    'User',
-    'Category',
-    'Comment',
-    'SubTask',
-    'Board',
-    'Action',
-    'Webhook',
-    'Notification',
-);
+use Symfony\Component\EventDispatcher\Event;
 
-$events = array(
-    'actionModel',
-    'projectModel',
-    'webhookModel',
-    'notificationModel',
-);
-
-foreach ($models as $model) {
-    $variable = lcfirst($model).'Model';
-    $class = '\Model\\'.$model;
-    $$variable = new $class($container);
-}
-
-foreach ($events as $class) {
-    $$class->attachEvents();
-}
-
-$configModel->setupTranslations();
-$configModel->setupTimezone();
+$container['dispatcher']->dispatch('api.bootstrap', new Event);
 
 $server = new JsonRPC\Server;
-$server->authentication(array('jsonrpc' => $configModel->get('api_token')));
+$server->authentication(array('jsonrpc' => $container['config']->get('api_token')));
 
 /**
  * Project procedures
  */
-$server->bind('getProjectById', $projectModel, 'getById');
-$server->bind('getProjectByName', $projectModel, 'getByName');
-$server->bind('getAllProjects', $projectModel, 'getAll');
-$server->bind('removeProject', $projectModel, 'remove');
-$server->bind('enableProject', $projectModel, 'enable');
-$server->bind('disableProject', $projectModel, 'disable');
-$server->bind('enableProjectPublicAccess', $projectModel, 'enablePublicAccess');
-$server->bind('disableProjectPublicAccess', $projectModel, 'disablePublicAccess');
+$server->bind('getProjectById', $container['project'], 'getById');
+$server->bind('getProjectByName', $container['project'], 'getByName');
+$server->bind('getAllProjects', $container['project'], 'getAll');
+$server->bind('removeProject', $container['project'], 'remove');
+$server->bind('enableProject', $container['project'], 'enable');
+$server->bind('disableProject', $container['project'], 'disable');
+$server->bind('enableProjectPublicAccess', $container['project'], 'enablePublicAccess');
+$server->bind('disableProjectPublicAccess', $container['project'], 'disablePublicAccess');
 
-$server->register('createProject', function($name) use ($projectModel) {
+$server->register('createProject', function($name) use ($container) {
     $values = array('name' => $name);
-    list($valid,) = $projectModel->validateCreation($values);
-    return $valid && $projectModel->create($values);
+    list($valid,) = $container['project']->validateCreation($values);
+    return $valid ? $container['project']->create($values) : false;
 });
 
-$server->register('updateProject', function($id, $name, $is_active = null, $is_public = null, $token = null) use ($projectModel) {
+$server->register('updateProject', function($id, $name, $is_active = null, $is_public = null, $token = null) use ($container) {
 
     $values = array(
         'id' => $id,
@@ -80,40 +43,40 @@ $server->register('updateProject', function($id, $name, $is_active = null, $is_p
         }
     }
 
-    list($valid,) = $projectModel->validateModification($values);
-    return $valid && $projectModel->update($values);
+    list($valid,) = $container['project']->validateModification($values);
+    return $valid && $container['project']->update($values);
 });
 
 /**
  * Board procedures
  */
-$server->bind('getBoard', $boardModel, 'get');
-$server->bind('getColumns', $boardModel, 'getColumns');
-$server->bind('getColumn', $boardModel, 'getColumn');
-$server->bind('moveColumnUp', $boardModel, 'moveUp');
-$server->bind('moveColumnDown', $boardModel, 'moveDown');
-$server->bind('updateColumn', $boardModel, 'updateColumn');
-$server->bind('addColumn', $boardModel, 'addColumn');
-$server->bind('removeColumn', $boardModel, 'removeColumn');
+$server->bind('getBoard', $container['board'], 'getBoard');
+$server->bind('getColumns', $container['board'], 'getColumns');
+$server->bind('getColumn', $container['board'], 'getColumn');
+$server->bind('moveColumnUp', $container['board'], 'moveUp');
+$server->bind('moveColumnDown', $container['board'], 'moveDown');
+$server->bind('updateColumn', $container['board'], 'updateColumn');
+$server->bind('addColumn', $container['board'], 'addColumn');
+$server->bind('removeColumn', $container['board'], 'removeColumn');
 
 /**
  * Project permissions procedures
  */
-$server->bind('getMembers', $projectPermissionModel, 'getMembers');
-$server->bind('revokeUser', $projectPermissionModel, 'revokeUser');
-$server->bind('allowUser', $projectPermissionModel, 'allowUser');
+$server->bind('getMembers', $container['projectPermission'], 'getMembers');
+$server->bind('revokeUser', $container['projectPermission'], 'revokeMember');
+$server->bind('allowUser', $container['projectPermission'], 'addMember');
 
 /**
  * Task procedures
  */
-$server->bind('getTask', $taskFinderModel, 'getById');
-$server->bind('getAllTasks', $taskFinderModel, 'getAll');
-$server->bind('openTask', $taskStatusModel, 'open');
-$server->bind('closeTask', $taskStatusModel, 'close');
-$server->bind('removeTask', $taskModel, 'remove');
-$server->bind('moveTaskPosition', $taskPositionModel, 'movePosition');
+$server->bind('getTask', $container['taskFinder'], 'getById');
+$server->bind('getAllTasks', $container['taskFinder'], 'getAll');
+$server->bind('openTask', $container['taskStatus'], 'open');
+$server->bind('closeTask', $container['taskStatus'], 'close');
+$server->bind('removeTask', $container['task'], 'remove');
+$server->bind('moveTaskPosition', $container['taskPosition'], 'movePosition');
 
-$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0) use ($taskCreationModel, $taskValidatorModel) {
+$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0) use ($container) {
 
     $values = array(
         'title' => $title,
@@ -126,18 +89,19 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
         'description' => $description,
         'category_id' => $category_id,
         'score' => $score,
+        'swimlane_id' => $swimlane_id,
     );
 
-    list($valid,) = $taskValidatorModel->validateCreation($values);
+    list($valid,) = $container['taskValidator']->validateCreation($values);
 
     if (! $valid) {
         return false;
     }
 
-    return $taskCreationModel->create($values);
+    return $container['taskCreation']->create($values);
 });
 
-$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null) use ($taskModificationModel, $taskValidatorModel) {
+$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null, $swimlane_id = null) use ($container) {
 
     $values = array(
         'id' => $id,
@@ -151,6 +115,7 @@ $server->register('updateTask', function($id, $title = null, $project_id = null,
         'description' => $description,
         'category_id' => $category_id,
         'score' => $score,
+        'swimlane_id' => $swimlane_id,
     );
 
     foreach ($values as $key => $value) {
@@ -159,19 +124,19 @@ $server->register('updateTask', function($id, $title = null, $project_id = null,
         }
     }
 
-    list($valid) = $taskValidatorModel->validateApiModification($values);
-    return $valid && $taskModificationModel->update($values);
+    list($valid) = $container['taskValidator']->validateApiModification($values);
+    return $valid && $container['taskModification']->update($values);
 });
 
 
 /**
  * User procedures
  */
-$server->bind('getUser', $userModel, 'getById');
-$server->bind('getAllUsers', $userModel, 'getAll');
-$server->bind('removeUser', $userModel, 'remove');
+$server->bind('getUser', $container['user'], 'getById');
+$server->bind('getAllUsers', $container['user'], 'getAll');
+$server->bind('removeUser', $container['user'], 'remove');
 
-$server->register('createUser', function($username, $password, $name = '', $email = '', $is_admin = 0, $default_project_id = 0) use ($userModel) {
+$server->register('createUser', function($username, $password, $name = '', $email = '', $is_admin = 0, $default_project_id = 0) use ($container) {
 
     $values = array(
         'username' => $username,
@@ -183,16 +148,16 @@ $server->register('createUser', function($username, $password, $name = '', $emai
         'default_project_id' => $default_project_id,
     );
 
-    list($valid,) = $userModel->validateCreation($values);
+    list($valid,) = $container['user']->validateCreation($values);
 
     if (! $valid) {
         return false;
     }
 
-    return $userModel->create($values);
+    return $container['user']->create($values);
 });
 
-$server->register('updateUser', function($id, $username = null, $name = null, $email = null, $is_admin = null, $default_project_id = null) use ($userModel) {
+$server->register('updateUser', function($id, $username = null, $name = null, $email = null, $is_admin = null, $default_project_id = null) use ($container) {
 
     $values = array(
         'id' => $id,
@@ -209,52 +174,52 @@ $server->register('updateUser', function($id, $username = null, $name = null, $e
         }
     }
 
-    list($valid,) = $userModel->validateApiModification($values);
-    return $valid && $userModel->update($values);
+    list($valid,) = $container['user']->validateApiModification($values);
+    return $valid && $container['user']->update($values);
 });
 
 /**
  * Category procedures
  */
-$server->bind('getCategory', $categoryModel, 'getById');
-$server->bind('getAllCategories', $categoryModel, 'getAll');
-$server->bind('removeCategory', $categoryModel, 'remove');
+$server->bind('getCategory', $container['category'], 'getById');
+$server->bind('getAllCategories', $container['category'], 'getAll');
+$server->bind('removeCategory', $container['category'], 'remove');
 
-$server->register('createCategory', function($project_id, $name) use ($categoryModel) {
+$server->register('createCategory', function($project_id, $name) use ($container) {
 
     $values = array(
         'project_id' => $project_id,
         'name' => $name,
     );
 
-    list($valid,) = $categoryModel->validateCreation($values);
+    list($valid,) = $container['category']->validateCreation($values);
 
     if (! $valid) {
         return false;
     }
 
-    return $categoryModel->create($values);
+    return $container['category']->create($values);
 });
 
-$server->register('updateCategory', function($id, $name) use ($categoryModel) {
+$server->register('updateCategory', function($id, $name) use ($container) {
 
     $values = array(
         'id' => $id,
         'name' => $name,
     );
 
-    list($valid,) = $categoryModel->validateModification($values);
-    return $valid && $categoryModel->update($values);
+    list($valid,) = $container['category']->validateModification($values);
+    return $valid && $container['category']->update($values);
 });
 
 /**
  * Comments procedures
  */
-$server->bind('getComment', $commentModel, 'getById');
-$server->bind('getAllComments', $commentModel, 'getAll');
-$server->bind('removeComment', $commentModel, 'remove');
+$server->bind('getComment', $container['comment'], 'getById');
+$server->bind('getAllComments', $container['comment'], 'getAll');
+$server->bind('removeComment', $container['comment'], 'remove');
 
-$server->register('createComment', function($task_id, $user_id, $content) use ($commentModel) {
+$server->register('createComment', function($task_id, $user_id, $content) use ($container) {
 
     $values = array(
         'task_id' => $task_id,
@@ -262,34 +227,34 @@ $server->register('createComment', function($task_id, $user_id, $content) use ($
         'comment' => $content,
     );
 
-    list($valid,) = $commentModel->validateCreation($values);
+    list($valid,) = $container['comment']->validateCreation($values);
 
     if (! $valid) {
         return false;
     }
 
-    return $commentModel->create($values);
+    return $container['comment']->create($values);
 });
 
-$server->register('updateComment', function($id, $content) use ($commentModel) {
+$server->register('updateComment', function($id, $content) use ($container) {
 
     $values = array(
         'id' => $id,
         'comment' => $content,
     );
 
-    list($valid,) = $commentModel->validateModification($values);
-    return $valid && $commentModel->update($values);
+    list($valid,) = $container['comment']->validateModification($values);
+    return $valid && $container['comment']->update($values);
 });
 
 /**
  * Subtask procedures
  */
-$server->bind('getSubtask', $subTaskModel, 'getById');
-$server->bind('getAllSubtasks', $subTaskModel, 'getAll');
-$server->bind('removeSubtask', $subTaskModel, 'remove');
+$server->bind('getSubtask', $container['subTask'], 'getById');
+$server->bind('getAllSubtasks', $container['subTask'], 'getAll');
+$server->bind('removeSubtask', $container['subTask'], 'remove');
 
-$server->register('createSubtask', function($task_id, $title, $user_id = 0, $time_estimated = 0, $time_spent = 0, $status = 0) use ($subTaskModel) {
+$server->register('createSubtask', function($task_id, $title, $user_id = 0, $time_estimated = 0, $time_spent = 0, $status = 0) use ($container) {
 
     $values = array(
         'title' => $title,
@@ -305,17 +270,16 @@ $server->register('createSubtask', function($task_id, $title, $user_id = 0, $tim
             unset($values[$key]);
         }
     }
-
-    list($valid,) = $subTaskModel->validateCreation($values);
+    list($valid,) = $container['subTask']->validateCreation($values);
 
     if (! $valid) {
         return false;
     }
 
-    return $subTaskModel->create($values);
+    return $container['subTask']->create($values);
 });
 
-$server->register('updateSubtask', function($id, $task_id, $title = null, $user_id = null, $time_estimated = null, $time_spent = null, $status = null) use ($subTaskModel) {
+$server->register('updateSubtask', function($id, $task_id, $title = null, $user_id = null, $time_estimated = null, $time_spent = null, $status = null) use ($container) {
 
     $values = array(
         'id' => $id,
@@ -333,15 +297,15 @@ $server->register('updateSubtask', function($id, $task_id, $title = null, $user_
         }
     }
 
-    list($valid,) = $subTaskModel->validateApiModification($values);
-    return $valid && $subTaskModel->update($values);
+    list($valid,) = $container['subTask']->validateApiModification($values);
+    return $valid && $container['subTask']->update($values);
 });
 
 /**
  * Application procedures
  */
-$server->register('getTimezone', function() use($configModel) {
-    return $configModel->get('application_timezone');
+$server->register('getTimezone', function() use ($container) {
+    return $container['config']->get('application_timezone');
 });
 
 /**

@@ -11,17 +11,31 @@ use Model\ProjectPermission;
 
 class TaskCreationTest extends Base
 {
+    public function onCreate($event)
+    {
+        $this->assertInstanceOf('Event\TaskEvent', $event);
+
+        $event_data = $event->getAll();
+        $this->assertNotEmpty($event_data);
+        $this->assertEquals(1, $event_data['task_id']);
+        $this->assertEquals('test', $event_data['title']);
+    }
+
     public function testNoProjectId()
     {
         $p = new Project($this->container);
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
+
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(0, $tc->create(array('title' => 'test', 'project_id' => 0)));
 
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayNotHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayNotHasKey(Task::EVENT_CREATE.'.closure', $called);
     }
 
     public function testNoTitle()
@@ -30,11 +44,21 @@ class TaskCreationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(0, $tc->create(array('project_id' => 1)));
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
 
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('project_id' => 1)));
+
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayHasKey(Task::EVENT_CREATE.'.closure', $called);
+
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals('Untitled', $task['title']);
+        $this->assertEquals(1, $task['project_id']);
     }
 
     public function testMinimum()
@@ -43,11 +67,15 @@ class TaskCreationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, array($this, 'onCreate'));
+
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
 
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE_UPDATE));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CREATE));
+        $called = $this->container['dispatcher']->getCalledListeners();
+        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayHasKey(Task::EVENT_CREATE.'.TaskCreationTest::onCreate', $called);
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);

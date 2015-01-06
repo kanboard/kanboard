@@ -2,7 +2,8 @@
 
 namespace Action;
 
-use Model\GithubWebhook;
+use Integration\GithubWebhook;
+use Integration\GitlabWebhook;
 
 /**
  * Create automatically a task from a webhook
@@ -22,6 +23,7 @@ class TaskCreation extends Base
     {
         return array(
             GithubWebhook::EVENT_ISSUE_OPENED,
+            GitlabWebhook::EVENT_ISSUE_OPENED,
         );
     }
 
@@ -63,7 +65,7 @@ class TaskCreation extends Base
             'project_id' => $data['project_id'],
             'title' => $data['title'],
             'reference' => $data['reference'],
-            'description' => $data['description'],
+            'description' => isset($data['description']) ? $data['description'] : '',
         ));
     }
 

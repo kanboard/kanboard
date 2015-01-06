@@ -3,9 +3,6 @@
 namespace Model;
 
 use Core\Session;
-use Core\Translator;
-use Core\Template;
-use Event\NotificationListener;
 use Swift_Message;
 use Swift_Mailer;
 use Swift_TransportException;
@@ -29,8 +26,8 @@ class Notification extends Base
      * Get a list of people with notifications enabled
      *
      * @access public
-     * @param  integer   $project_id     Project id
-     * @param  array     $exlude_users   List of user_id to exclude
+     * @param  integer   $project_id      Project id
+     * @param  array     $exclude_users   List of user_id to exclude
      * @return array
      */
     public function getUsersWithNotification($project_id, array $exclude_users = array())
@@ -61,15 +58,15 @@ class Notification extends Base
      * Get the list of users to send the notification for a given project
      *
      * @access public
-     * @param  integer   $project_id     Project id
-     * @param  array     $exlude_users   List of user_id to exclude
+     * @param  integer   $project_id      Project id
+     * @param  array     $exclude_users   List of user_id to exclude
      * @return array
      */
     public function getUsersList($project_id, array $exclude_users = array())
     {
         // Exclude the connected user
         if (Session::isOpen()) {
-            $exclude_users[] = $this->acl->getUserId();
+            $exclude_users[] = $this->userSession->getId();
         }
 
         $users = $this->getUsersWithNotification($project_id, $exclude_users);
@@ -91,37 +88,6 @@ class Notification extends Base
         }
 
         return $users;
-    }
-
-    /**
-     * Attach events
-     *
-     * @access public
-     */
-    public function attachEvents()
-    {
-        $events = array(
-            Task::EVENT_CREATE => 'task_creation',
-            Task::EVENT_UPDATE => 'task_update',
-            Task::EVENT_CLOSE => 'task_close',
-            Task::EVENT_OPEN => 'task_open',
-            Task::EVENT_MOVE_COLUMN => 'task_move_column',
-            Task::EVENT_MOVE_POSITION => 'task_move_position',
-            Task::EVENT_ASSIGNEE_CHANGE => 'task_assignee_change',
-            SubTask::EVENT_CREATE => 'subtask_creation',
-            SubTask::EVENT_UPDATE => 'subtask_update',
-            Comment::EVENT_CREATE => 'comment_creation',
-            Comment::EVENT_UPDATE => 'comment_update',
-            File::EVENT_CREATE => 'file_creation',
-        );
-
-        foreach ($events as $event_name => $template_name) {
-
-            $listener = new NotificationListener($this->container);
-            $listener->setTemplate($template_name);
-
-            $this->event->attach($event_name, $listener);
-        }
     }
 
     /**
@@ -148,7 +114,7 @@ class Notification extends Base
             }
         }
         catch (Swift_TransportException $e) {
-            $this->container['logger']->addError($e->getMessage());
+            $this->container['logger']->error($e->getMessage());
         }
     }
 
@@ -217,8 +183,10 @@ class Notification extends Base
      */
     public function getMailContent($template, array $data)
     {
-        $tpl = new Template;
-        return $tpl->load('notification/'.$template, $data + array('application_url' => $this->config->get('application_url')));
+        return $this->template->render(
+            'notification/'.$template,
+            $data + array('application_url' => $this->config->get('application_url'))
+        );
     }
 
     /**

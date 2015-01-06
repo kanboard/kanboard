@@ -2,22 +2,22 @@
     <h2><?= t('Application settings') ?></h2>
 </div>
 <section>
-<form method="post" action="<?= Helper\u('config', 'application') ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('config', 'application') ?>" autocomplete="off">
 
-    <?= Helper\form_csrf() ?>
+    <?= $this->formCsrf() ?>
 
-    <?= Helper\form_label(t('Application URL'), 'application_url') ?>
-    <?= Helper\form_text('application_url', $values, $errors, array('placeholder="http://example.kanboard.net/"')) ?><br/>
+    <?= $this->formLabel(t('Application URL'), 'application_url') ?>
+    <?= $this->formText('application_url', $values, $errors, array('placeholder="http://example.kanboard.net/"')) ?><br/>
     <p class="form-help"><?= t('Example: http://example.kanboard.net/ (used by email notifications)') ?></p>
 
-    <?= Helper\form_label(t('Language'), 'application_language') ?>
-    <?= Helper\form_select('application_language', $languages, $values, $errors) ?><br/>
+    <?= $this->formLabel(t('Language'), 'application_language') ?>
+    <?= $this->formSelect('application_language', $languages, $values, $errors) ?><br/>
 
-    <?= Helper\form_label(t('Timezone'), 'application_timezone') ?>
-    <?= Helper\form_select('application_timezone', $timezones, $values, $errors) ?><br/>
+    <?= $this->formLabel(t('Timezone'), 'application_timezone') ?>
+    <?= $this->formSelect('application_timezone', $timezones, $values, $errors) ?><br/>
 
-    <?= Helper\form_label(t('Date format'), 'application_date_format') ?>
-    <?= Helper\form_select('application_date_format', $date_formats, $values, $errors) ?><br/>
+    <?= $this->formLabel(t('Date format'), 'application_date_format') ?>
+    <?= $this->formSelect('application_date_format', $date_formats, $values, $errors) ?><br/>
     <p class="form-help"><?= t('ISO format is always accepted, example: "%s" and "%s"', date('Y-m-d'), date('Y_m_d')) ?></p>
 
     <div class="form-actions">

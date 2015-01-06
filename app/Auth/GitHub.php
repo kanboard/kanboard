@@ -2,7 +2,7 @@
 
 namespace Auth;
 
-use Core\Request;
+use Event\AuthEvent;
 use OAuth\Common\Storage\Session;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Uri\UriFactory;
@@ -35,18 +35,8 @@ class GitHub extends Base
         $user = $this->user->getByGitHubId($github_id);
 
         if ($user) {
-
-            // Create the user session
-            $this->user->updateSession($user);
-
-            // Update login history
-            $this->lastLogin->create(
-                self::AUTH_NAME,
-                $user['id'],
-                Request::getIpAddress(),
-                Request::getUserAgent()
-            );
-
+            $this->userSession->refresh($user);
+            $this->container['dispatcher']->dispatch('auth.success', new AuthEvent(self::AUTH_NAME, $user['id']));
             return true;
         }
 

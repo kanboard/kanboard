@@ -10,7 +10,8 @@ if (file_exists('config.php')) {
 require __DIR__.'/constants.php';
 
 $container = new Pimple\Container;
-$container->register(new ServiceProvider\Logging);
-$container->register(new ServiceProvider\Database);
-$container->register(new ServiceProvider\Event);
-$container->register(new ServiceProvider\Mailer);
+$container->register(new ServiceProvider\LoggingProvider);
+$container->register(new ServiceProvider\DatabaseProvider);
+$container->register(new ServiceProvider\ClassProvider);
+$container->register(new ServiceProvider\EventDispatcherProvider);
+$container->register(new ServiceProvider\MailerProvider);

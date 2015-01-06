@@ -40,6 +40,15 @@ div.task-board-recent {
     font-size: 80%;
 }
 
+.task-board-current-user a {
+    text-decoration: underline;
+}
+
+.task-board-current-user a:focus,
+.task-board-current-user a:hover {
+    text-decoration: none;
+}
+
 a.task-board-nobody {
     font-weight: normal;
     font-style: italic;

@@ -4,19 +4,21 @@ namespace ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use PicoDb\Database as Dbal;
+use PicoDb\Database;
 
-class Database implements ServiceProviderInterface
+class DatabaseProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
         $container['db'] = $this->getInstance();
+        $container['db']->stopwatch = DEBUG;
+        $container['db']->log_queries = DEBUG;
     }
 
     /**
      * Setup the database driver and execute schema migration
      *
-     * @return PicoDb\Database
+     * @return \PicoDb\Database
      */
     public function getInstance()
     {
@@ -49,13 +51,13 @@ class Database implements ServiceProviderInterface
     /**
      * Setup the Sqlite database driver
      *
-     * @return PicoDb\Database
+     * @return \PicoDb\Database
      */
     function getSqliteInstance()
     {
         require_once __DIR__.'/../Schema/Sqlite.php';
 
-        return new Dbal(array(
+        return new Database(array(
             'driver' => 'sqlite',
             'filename' => DB_FILENAME
         ));
@@ -64,13 +66,13 @@ class Database implements ServiceProviderInterface
     /**
      * Setup the Mysql database driver
      *
-     * @return PicoDb\Database
+     * @return \PicoDb\Database
      */
     function getMysqlInstance()
     {
         require_once __DIR__.'/../Schema/Mysql.php';
 
-        return new Dbal(array(
+        return new Database(array(
             'driver'   => 'mysql',
             'hostname' => DB_HOSTNAME,
             'username' => DB_USERNAME,
@@ -83,13 +85,13 @@ class Database implements ServiceProviderInterface
     /**
      * Setup the Postgres database driver
      *
-     * @return PicoDb\Database
+     * @return \PicoDb\Database
      */
     public function getPostgresInstance()
     {
         require_once __DIR__.'/../Schema/Postgres.php';
 
-        return new Dbal(array(
+        return new Database(array(
             'driver'   => 'postgres',
             'hostname' => DB_HOSTNAME,
             'username' => DB_USERNAME,

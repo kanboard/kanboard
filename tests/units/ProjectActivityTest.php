@@ -10,6 +10,17 @@ use Model\Project;
 
 class ProjectActivityTest extends Base
 {
+    public function testDecode()
+    {
+        $e = new ProjectActivity($this->container);
+        $input = array('test');
+        $serialized = serialize($input);
+        $json = json_encode($input);
+
+        $this->assertEquals($input, $e->decode($serialized));
+        $this->assertEquals($input, $e->decode($json));
+    }
+
     public function testCreation()
     {
         $e = new ProjectActivity($this->container);

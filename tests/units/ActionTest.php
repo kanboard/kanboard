@@ -10,46 +10,11 @@ use Model\TaskPosition;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Category;
+use Integration\GithubWebhook;
 
 class ActionTest extends Base
-{/*
-    public function testFetchActions()
-    {
-        $action = new Action($this->container);
-        $board = new Board($this->container);
-        $project = new Project($this->container);
-
-        $this->assertEquals(1, $project->create(array('name' => 'unit_test')));
-
-        // We should have nothing
-        $this->assertEmpty($action->getAll());
-        $this->assertEmpty($action->getAllByProject(1));
-
-        // We create a new action
-        $this->assertTrue($action->create(array(
-            'project_id' => 1,
-            'event_name' => Task::EVENT_MOVE_COLUMN,
-            'action_name' => 'TaskClose',
-            'params' => array(
-                'column_id' => 4,
-            )
-        )));
-
-        // We should have our action
-        $this->assertNotEmpty($action->getAll());
-        $this->assertEquals($action->getAll(), $action->getAllByProject(1));
-
-        $actions = $action->getAll();
-
-        $this->assertEquals(1, count($actions));
-        $this->assertEquals(1, $actions[0]['project_id']);
-        $this->assertEquals(Task::EVENT_MOVE_COLUMN, $actions[0]['event_name']);
-        $this->assertEquals('TaskClose', $actions[0]['action_name']);
-        $this->assertEquals('column_id', $actions[0]['params'][0]['name']);
-        $this->assertEquals(4, $actions[0]['params'][0]['value']);
-    }
-
-    public function testEventMoveColumn()
+{
+    public function testSingleAction()
     {
         $tp = new TaskPosition($this->container);
         $tc = new TaskCreation($this->container);
@@ -61,15 +26,6 @@ class ActionTest extends Base
         // We create a project
         $this->assertEquals(1, $project->create(array('name' => 'unit_test')));
 
-        // We create a task
-        $this->assertEquals(1, $tc->create(array(
-            'title' => 'unit_test',
-            'project_id' => 1,
-            'owner_id' => 1,
-            'color_id' => 'red',
-            'column_id' => 1,
-        )));
-
         // We create a new action
         $this->assertTrue($action->create(array(
             'project_id' => 1,
@@ -80,7 +36,16 @@ class ActionTest extends Base
             )
         )));
 
-        // We bind events
+        // We create a task
+        $this->assertEquals(1, $tc->create(array(
+            'title' => 'unit_test',
+            'project_id' => 1,
+            'owner_id' => 1,
+            'color_id' => 'red',
+            'column_id' => 1,
+        )));
+
+        // We attach events
         $action->attachEvents();
 
         // Our task should be open
@@ -91,87 +56,86 @@ class ActionTest extends Base
         // We move our task
         $tp->movePosition(1, 1, 4, 1);
 
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_COLUMN));
-        $this->assertFalse($this->container['event']->isEventTriggered(Task::EVENT_UPDATE));
-
         // Our task should be closed
         $t1 = $tf->getById(1);
         $this->assertEquals(4, $t1['column_id']);
         $this->assertEquals(0, $t1['is_active']);
     }
-*/
-    public function testExecuteMultipleActions()
+
+    public function testMultipleActions()
     {
         $tp = new TaskPosition($this->container);
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
-        $board = new Board($this->container);
-        $project = new Project($this->container);
-        $action = new Action($this->container);
+        $b = new Board($this->container);
+        $p = new Project($this->container);
+        $a = new Action($this->container);
+        $c = new Category($this->container);
+        $g = new GithubWebhook($this->container);
 
-        // We create 2 projects
-        $this->assertEquals(1, $project->create(array('name' => 'unit_test1')));
-        $this->assertEquals(2, $project->create(array('name' => 'unit_test2')));
+        // We create a project
+        $this->assertEquals(1, $p->create(array('name' => 'unit_test')));
+        $this->assertEquals(1, $c->create(array('name' => 'unit_test')));
 
-        // We create a task
-        $this->assertEquals(1, $tc->create(array(
-            'title' => 'unit_test',
+        // We create a new action
+        $this->assertTrue($a->create(array(
             'project_id' => 1,
-            'owner_id' => 1,
-            'color_id' => 'red',
-            'column_id' => 1,
+            'event_name' => GithubWebhook::EVENT_ISSUE_OPENED,
+            'action_name' => 'TaskCreation',
+            'params' => array()
         )));
 
-        // We create 2 actions
-        $this->assertTrue($action->create(array(
+        $this->assertTrue($a->create(array(
             'project_id' => 1,
-            'event_name' => Task::EVENT_CLOSE,
-            'action_name' => 'TaskDuplicateAnotherProject',
+            'event_name' => GithubWebhook::EVENT_ISSUE_LABEL_CHANGE,
+            'action_name' => 'TaskAssignCategoryLabel',
             'params' => array(
-                'column_id' => 4,
-                'project_id' => 2,
+                'label' => 'bug',
+                'category_id' => 1,
             )
         )));
 
-        $this->assertTrue($action->create(array(
+        $this->assertTrue($a->create(array(
             'project_id' => 1,
-            'event_name' => Task::EVENT_MOVE_COLUMN,
-            'action_name' => 'TaskClose',
+            'event_name' => Task::EVENT_CREATE_UPDATE,
+            'action_name' => 'TaskAssignColorCategory',
             'params' => array(
-                'column_id' => 4,
+                'color_id' => 'red',
+                'category_id' => 1,
             )
         )));
 
-        // We bind events
-        $action->attachEvents();
+        // We attach events
+        $a->attachEvents();
+        $g->setProjectId(1);
 
-        // Events should be attached
-        $this->assertTrue($this->container['event']->hasListener(Task::EVENT_CLOSE, 'Action\TaskDuplicateAnotherProject'));
-        $this->assertTrue($this->container['event']->hasListener(Task::EVENT_MOVE_COLUMN, 'Action\TaskClose'));
+        // We create a Github issue
+        $issue = array(
+            'number' => 123,
+            'title' => 'Bugs everywhere',
+            'body' => 'There is a bug!',
+            'html_url' => 'http://localhost/',
+        );
 
-        // Our task should be open, linked to the first project and in the first column
-        $t1 = $tf->getById(1);
-        $this->assertEquals(1, $t1['is_active']);
-        $this->assertEquals(1, $t1['column_id']);
-        $this->assertEquals(1, $t1['project_id']);
+        $this->assertTrue($g->handleIssueOpened($issue));
 
-        // We move our task
-        $tp->movePosition(1, 1, 4, 1);
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['is_active']);
+        $this->assertEquals(0, $task['category_id']);
+        $this->assertEquals('yellow', $task['color_id']);
 
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_MOVE_COLUMN));
-        $this->assertTrue($this->container['event']->isEventTriggered(Task::EVENT_CLOSE));
+        // We assign a label to our issue
+        $label = array(
+            'name' => 'bug',
+        );
 
-        // Our task should be closed
-        $t1 = $tf->getById(1);
-        $this->assertEquals(4, $t1['column_id']);
-        $this->assertEquals(0, $t1['is_active']);
+        $this->assertTrue($g->handleIssueLabeled($issue, $label));
 
-        // Our task should be duplicated to the 2nd project
-        $t2 = $tf->getById(2);
-        $this->assertNotEmpty($t2);
-        $this->assertNotEquals(4, $t2['column_id']);
-        $this->assertEquals(1, $t2['is_active']);
-        $this->assertEquals(2, $t2['project_id']);
-        $this->assertEquals('unit_test', $t2['title']);
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['is_active']);
+        $this->assertEquals(1, $task['category_id']);
+        $this->assertEquals('red', $task['color_id']);
     }
 }

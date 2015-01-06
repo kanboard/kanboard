@@ -51,7 +51,7 @@ class Link extends Base
      */
     public function index(array $values = array(), array $errors = array())
     {
-    	$project = $this->getProjectManagement();
+    	$project = $this->getProject();
     	$this->response->html($this->projectLayout('link/index', array(
     		'links' => $this->link->getMergedList($project['id']),
     		'values' => $values + array('project_id' => $project['id']),
@@ -68,7 +68,7 @@ class Link extends Base
      */
     public function save()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->link->validateCreation($values);
@@ -93,7 +93,7 @@ class Link extends Base
      */
     public function edit(array $values = array(), array $errors = array())
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
         $link = $this->getMergedLink();//($project['id']);
 
         $this->response->html($this->projectLayout('link/edit', array(
@@ -111,7 +111,7 @@ class Link extends Base
      */
     public function update()
     {
-        $project = $this->getProjectManagement();
+        $project = $this->getProject();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->link->validateModification($values);
@@ -137,7 +137,7 @@ class Link extends Base
      */
     public function confirm()
     {
-    	$project = $this->getProjectManagement();
+    	$project = $this->getProject();
     	$link = $this->getLink($project['id']);
     
     	$this->response->html($this->projectLayout('link/remove', array(
@@ -155,7 +155,7 @@ class Link extends Base
     public function remove()
     {
     	$this->checkCSRFParam();
-    	$project = $this->getProjectManagement();
+    	$project = $this->getProject();
     	$link = $this->getLink($project['id']);
     
     	if ($this->link->remove($link['id'])) {

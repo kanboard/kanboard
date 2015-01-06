@@ -9,6 +9,7 @@ use Model\TaskPermission;
 use Model\Project;
 use Model\Category;
 use Model\User;
+use Model\UserSession;
 
 class TaskPermissionTest extends Base
 {
@@ -19,6 +20,7 @@ class TaskPermissionTest extends Base
         $tp = new TaskPermission($this->container);
         $p = new Project($this->container);
         $u = new User($this->container);
+        $us = new UserSession($this->container);
 
         $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456')));
         $this->assertNotFalse($u->create(array('username' => 'toto2', 'password' => '123456')));
@@ -31,7 +33,7 @@ class TaskPermissionTest extends Base
         // User #1 can remove everything
         $user = $u->getbyId(1);
         $this->assertNotEmpty($user);
-        $u->updateSession($user);
+        $us->refresh($user);
 
         $task = $tf->getbyId(1);
         $this->assertNotEmpty($task);
@@ -40,7 +42,7 @@ class TaskPermissionTest extends Base
         // User #2 can't remove the task #1
         $user = $u->getbyId(2);
         $this->assertNotEmpty($user);
-        $u->updateSession($user);
+        $us->refresh($user);
 
         $task = $tf->getbyId(1);
         $this->assertNotEmpty($task);
@@ -49,7 +51,7 @@ class TaskPermissionTest extends Base
         // User #1 can remove everything
         $user = $u->getbyId(1);
         $this->assertNotEmpty($user);
-        $u->updateSession($user);
+        $us->refresh($user);
 
         $task = $tf->getbyId(2);
         $this->assertNotEmpty($task);
@@ -58,7 +60,7 @@ class TaskPermissionTest extends Base
         // User #2 can remove his own task
         $user = $u->getbyId(2);
         $this->assertNotEmpty($user);
-        $u->updateSession($user);
+        $us->refresh($user);
 
         $task = $tf->getbyId(2);
         $this->assertNotEmpty($task);
@@ -67,7 +69,7 @@ class TaskPermissionTest extends Base
         // User #1 can remove everything
         $user = $u->getbyId(1);
         $this->assertNotEmpty($user);
-        $u->updateSession($user);
+        $us->refresh($user);
 
         $task = $tf->getbyId(3);
         $this->assertNotEmpty($task);
@@ -76,7 +78,7 @@ class TaskPermissionTest extends Base
         // User #2 can't remove the task #3
         $user = $u->getbyId(2);
         $this->assertNotEmpty($user);
-        $u->updateSession($user);
+        $us->refresh($user);
 
         $task = $tf->getbyId(3);
         $this->assertNotEmpty($task);
@@ -85,7 +87,7 @@ class TaskPermissionTest extends Base
         // User #1 can remove everything
         $user = $u->getbyId(1);
         $this->assertNotEmpty($user);
-        $u->updateSession($user);
+        $us->refresh($user);
 
         $task = $tf->getbyId(4);
         $this->assertNotEmpty($task);
@@ -94,7 +96,7 @@ class TaskPermissionTest extends Base
         // User #2 can't remove the task #4
         $user = $u->getbyId(2);
         $this->assertNotEmpty($user);
-        $u->updateSession($user);
+        $us->refresh($user);
 
         $task = $tf->getbyId(4);
         $this->assertNotEmpty($task);

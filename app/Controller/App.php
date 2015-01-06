@@ -2,9 +2,7 @@
 
 namespace Controller;
 
-use Model\Project as ProjectModel;
 use Model\SubTask as SubTaskModel;
-use Helper;
 
 /**
  * Application controller
@@ -36,7 +34,7 @@ class App extends Base
         $direction = $this->request->getStringParam('direction');
         $order = $this->request->getStringParam('order');
 
-        $user_id = $this->acl->getUserId();
+        $user_id = $this->userSession->getId();
         $projects = $this->projectPermission->getMemberProjects($user_id);
         $project_ids = array_keys($projects);
 
@@ -57,6 +55,11 @@ class App extends Base
      * Get tasks pagination
      *
      * @access public
+     * @param integer $user_id
+     * @param string $paginate
+     * @param integer $offset
+     * @param string $order
+     * @param string $direction
      */
     private function getTaskPagination($user_id, $paginate, $offset, $order, $direction)
     {
@@ -94,6 +97,11 @@ class App extends Base
      * Get subtasks pagination
      *
      * @access public
+     * @param integer $user_id
+     * @param string $paginate
+     * @param integer $offset
+     * @param string $order
+     * @param string $direction
      */
     private function getSubtaskPagination($user_id, $paginate, $offset, $order, $direction)
     {
@@ -132,10 +140,15 @@ class App extends Base
      * Get projects pagination
      *
      * @access public
+     * @param array $project_ids
+     * @param string $paginate
+     * @param integer $offset
+     * @param string $order
+     * @param string $direction
      */
-    private function getProjectPagination($project_ids, $paginate, $offset, $order, $direction)
+    private function getProjectPagination(array $project_ids, $paginate, $offset, $order, $direction)
     {
-        $limit = 5;
+        $limit = 10;
 
         if (! in_array($order, array('id', 'name'))) {
             $order = 'name';
@@ -178,8 +191,9 @@ class App extends Base
             $this->response->html('<p>'.t('Nothing to preview...').'</p>');
         }
         else {
-            $this->response->html(Helper\markdown($payload['text']));
+            $this->response->html(
+                $this->template->markdown($payload['text'])
+            );
         }
     }
-
 }

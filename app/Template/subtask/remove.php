@@ -7,11 +7,11 @@
         <?= t('Do you really want to remove this sub-task?') ?>
     </p>
 
-    <p><strong><?= Helper\escape($subtask['title']) ?></strong></p>
+    <p><strong><?= $this->e($subtask['title']) ?></strong></p>
 
     <div class="form-actions">
-        <?= Helper\a(t('Yes'), 'subtask', 'remove', array('task_id' => $task['id'], 'subtask_id' => $subtask['id']), true, 'btn btn-red') ?>
+        <?= $this->a(t('Yes'), 'subtask', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id']), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= Helper\a(t('cancel'), 'task', 'show', array('task_id' => $task['id'])) ?>
+        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
 </div>

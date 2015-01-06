@@ -84,7 +84,7 @@ var Kanboard = (function() {
                 dataType: "html",
                 data: JSON.stringify({
                     "text": textarea.val()
-                }),
+                })
             });
 
             request.done(function(data) {
@@ -153,8 +153,13 @@ var Kanboard = (function() {
             $("#markdown-preview").click(Kanboard.MarkdownPreview);
             $("#markdown-write").click(Kanboard.MarkdownWriter);
 
-            // Check the session every 10s
-            window.setInterval(Kanboard.CheckSession, 10000);
+            // Check the session every 60s
+            window.setInterval(Kanboard.CheckSession, 60000);
+
+            // Auto-select input fields
+            $(".auto-select").focus(function() {
+                $(this).select();
+            });
         }
     };
 
