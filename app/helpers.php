@@ -244,6 +244,23 @@ function contains($haystack, $needle)
 }
 
 /**
+ * Return true if needle is part of a string in the string haystack
+ *
+ * @param  array   $haystack    Haystack
+ * @param  string  $needle      Needle
+ * @return boolean
+ */
+function search($haystack, $needle)
+{
+    foreach ($haystack as $entry) {
+        if (strstr($entry, $needle)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * Return a value from a dictionary
  *
  * @param  mixed   $id              Key

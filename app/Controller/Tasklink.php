@@ -74,7 +74,17 @@ class Tasklink extends Base
                 $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
             }
             else {
-                $this->session->flashError(t('Unable to create your link: the linked task id doesn\'t exist.'));
+                if ($this->taskLink->isUniqueConstraintFailed()) {
+                    $errors = array();
+                    $errors['task_inverse_id'] = array(t('the exact same link already exists'));
+                }
+                else if ($this->taskLink->isForeignKeyConstraintFailed()) {
+                    $errors = array();
+                    $errors['task_inverse_id'] = array(t('this linked task id doesn\'t exist'));
+                }
+                else {
+                    $this->session->flashError(t('Unable to create the link:').' '.t('the exact same link already exists').' '.t('or').' '.t('this linked task id doesn\'t exist'));
+                }
             }
         }
 
@@ -115,14 +125,22 @@ class Tasklink extends Base
         if ($valid) {
             if ($this->taskLink->update($values)) {
                 $this->session->flash(t('Link updated successfully.'));
+                $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
             }
             else {
-                $this->session->flashError(t('Unable to update your link.'));
+                if ($this->taskLink->isUniqueConstraintFailed()) {
+                    $errors = array();
+                    $errors['task_inverse_id'] = array(t('the exact same link already exists'));
+                }
+                else if ($this->taskLink->isForeignKeyConstraintFailed()) {
+                    $errors = array();
+                    $errors['task_inverse_id'] = array(t('this linked task id doesn\'t exist'));
+                }
+                else {
+                    $this->session->flashError(t('Unable to update the link:').' '.t('the exact same link already exists').' '.t('or').' '.t('this linked task id doesn\'t exist'));
+                }
             }
-
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'#links');
         }
-
         $this->edit($values, $errors);
     }
 

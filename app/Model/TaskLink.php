@@ -4,6 +4,7 @@ namespace Model;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use PDO;
+use Helper;
 
 /**
  * TaskLink model
@@ -124,13 +125,17 @@ class TaskLink extends Base
         list ($taskLink1, $taskLink2) = $this->prepare($values);
         $this->db->startTransaction();
         $res = $this->db->table(self::TABLE)->save($taskLink1);
-        $res *= $this->db->table(self::TABLE)->save($taskLink2);
+        if (! $res) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+        $res = $this->db->table(self::TABLE)->save($taskLink2);
         if (! $res) {
             $this->db->cancelTransaction();
             return false;
         }
         $this->db->closeTransaction();
-        return $res;
+        return true;
     }
 
     /**
@@ -148,7 +153,11 @@ class TaskLink extends Base
         $res = $this->db->table(self::TABLE)
             ->eq('id', $values['id'])
             ->save($taskLink1);
-        $res *= $this->db->table(self::TABLE)
+        if (! $res) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+        $res = $this->db->table(self::TABLE)
             ->eq('id', (0 == ($values['id'] % 2)) ? $values['id'] - 1 : $values['id'] + 1)
             ->save($taskLink2);
         if (! $res) {
@@ -156,7 +165,7 @@ class TaskLink extends Base
             return false;
         }
         $this->db->closeTransaction();
-        return $res;
+        return true;
     }
 
     /**
@@ -173,7 +182,11 @@ class TaskLink extends Base
         $res = $this->db->table(self::TABLE)
             ->eq('id', $id)
             ->remove();
-        $res *= $this->db->table(self::TABLE)
+        if (! $res) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+        $res = $this->db->table(self::TABLE)
             ->eq('id', (0 == ($id % 2)) ? $id - 1 : $id + 1)
             ->remove();
         if (! $res) {
@@ -181,7 +194,7 @@ class TaskLink extends Base
             return false;
         }
         $this->db->closeTransaction();
-        return $res;
+        return true;
     }
 
     /**
@@ -210,7 +223,7 @@ class TaskLink extends Base
                     return false;
                 }
             }
-
+            
             $links = $db->table(self::TABLE)
                 ->columns('link_id', 'task_id', 'task_inverse_id')
                 ->eq('task_inverse_id', $src_task_id)
@@ -224,6 +237,16 @@ class TaskLink extends Base
                 }
             }
         });
+    }
+
+    public function isUniqueConstraintFailed()
+    {
+        return Helper\search($this->db->getLogMessages(), 'UNIQUE') || Helper\search($this->db->getLogMessages(), 'Duplicata');
+    }
+
+    public function isForeignKeyConstraintFailed()
+    {
+        return Helper\search($this->db->getLogMessages(), 'FOREIGN KEY');
     }
 
     /**

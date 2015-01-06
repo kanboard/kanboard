@@ -5,7 +5,12 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 37;
+const VERSION = 38;
+
+function version_38($pdo)
+{
+    $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, task_inverse_id)");
+}
 
 function version_37($pdo)
 {
@@ -29,6 +34,7 @@ function version_37($pdo)
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
             FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
         ) ENGINE=InnoDB CHARSET=utf8");
+    $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, task_inverse_id)");
 }
 
 function version_36($pdo)
