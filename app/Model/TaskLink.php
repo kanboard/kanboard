@@ -266,7 +266,7 @@ class TaskLink extends Base
         );
         // TODO Add Validators\NotEquals in simple-validator
         if ($res[0] && $values['task_id'] == $values['task_inverse_id']) {
-            $v->addError('task_inverse_id', t('A task can not be linked to itself.'));
+            $v->addError('task_inverse_id', t('a task can not be linked to itself'));
             $res[0] = false;
             $res[1] = $v->getErrors();
         }
@@ -295,7 +295,7 @@ class TaskLink extends Base
         );
         // TODO Add Validators\NotEquals in simple-validator
         if ($res[0] && $values['task_id'] == $values['task_inverse_id']) {
-            $v->addError('task_inverse_id', t('A task can not be linked to itself.'));
+            $v->addError('task_inverse_id', t('a task can not be linked to itself'));
             $res[0] = false;
             $res[1] = $v->getErrors();
         }

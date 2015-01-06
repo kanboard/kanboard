@@ -83,7 +83,7 @@ class Tasklink extends Base
                     $errors['task_inverse_id'] = array(t('this linked task id doesn\'t exist'));
                 }
                 else {
-                    $this->session->flashError(t('Unable to create the link:').' '.t('the exact same link already exists').' '.t('or').' '.t('this linked task id doesn\'t exist'));
+                    $this->session->flashError(t('Unable to add the link:').' '.t('the exact same link already exists').' '.t('or').' '.t('this linked task id doesn\'t exist'));
                 }
             }
         }

@@ -75,7 +75,7 @@ class Link extends Base
 
         if ($valid) {
             if ($this->link->create($values)) {
-                $this->session->flash(t('Your link have been created successfully.'));
+                $this->session->flash(t('Link added successfully.'));
                 $this->response->redirect('?controller=link&action=index&project_id='.$project['id']);
             }
             else {
@@ -119,7 +119,7 @@ class Link extends Base
         if ($valid) {
 
             if ($this->link->update($values)) {
-                $this->session->flash(t('Your link have been updated successfully.'));
+                $this->session->flash(t('Link updated successfully.'));
                 $this->response->redirect('?controller=link&action=index&project_id='.$project['id']);
             }
             else {

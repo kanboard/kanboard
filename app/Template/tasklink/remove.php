@@ -4,9 +4,7 @@
 
 <div class="confirm">
     <p class="alert alert-info">
-        <?= t('Do you really want to remove this link with task ') ?>
-        <strong><?= Helper\escape('#'.$link['task_inverse_id']) ?></strong>
-        <?= t('?') ?>
+        <?= t('Do you really want to remove this link with task #%s?', $link['task_inverse_id']) ?>
         <br />
         
     </p>
