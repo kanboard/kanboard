@@ -376,7 +376,7 @@ return array(
     'Login with my GitHub Account' => '用Github账号登录',
     'Link my GitHub Account' => '链接GitHub账号',
     'Unlink my GitHub Account' => '取消GitHub账号链接',
-    'Created by %s' => '创建者：',
+    'Created by %s' => '创建者：%s',
     'Last modified on %B %e, %Y at %k:%M %p' => '最后修改：%Y/%m/%d/ %H:%M',
     'Tasks Export' => '任务导出',
     'Tasks exportation for "%s"' => '导出任务"%s"',
