@@ -25,6 +25,8 @@ List of available actions
 - Change the assignee based on an external username
 - Change the category based on an external label
 - Create a comment from an external provider
+- Close a task
+- Open a task
 
 Configuration on Github
 -----------------------

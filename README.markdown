@@ -76,6 +76,11 @@ Documentation
 - [Application settings](docs/application-configuration.markdown)
 - [Board settings](docs/board-configuration.markdown)
 
+### Integrations
+
+- [Github webhooks](docs/github-webhooks.markdown)
+- [Gitlab webhooks](docs/gitlab-webhooks.markdown)
+
 #### More
 
 - [Syntax guide](docs/syntax-guide.markdown)
@@ -106,10 +111,6 @@ Documentation
 - [Google authentication](docs/google-authentication.markdown)
 - [GitHub authentication](docs/github-authentication.markdown)
 - [Reverse proxy authentication](docs/reverse-proxy-authentication.markdown)
-
-### Integration
-
-- [Github webhooks](docs/github-webhooks.markdown)
 
 #### Developers and sysadmins
 
