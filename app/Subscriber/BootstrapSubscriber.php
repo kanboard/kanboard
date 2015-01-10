@@ -11,6 +11,7 @@ class BootstrapSubscriber extends Base implements EventSubscriberInterface
         return array(
             'session.bootstrap' => array('setup', 0),
             'api.bootstrap' => array('setup', 0),
+            'console.bootstrap' => array('setup', 0),
         );
     }
 
