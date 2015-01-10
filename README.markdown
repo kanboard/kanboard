@@ -150,6 +150,7 @@ Contributors:
 - Claudio Lobo
 - [Cluxter](https://github.com/cluxter)
 - [Cmer](https://github.com/chncsu)
+- [Cynthia Pereira](https://github.com/cynthiapereira)
 - [David-Norris](https://github.com/David-Norris)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
