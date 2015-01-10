@@ -1,7 +1,7 @@
 Update
 ======
 
-Important: **Always do a backup of your database before upgrading!**
+**Always make a backup of your database before upgrading!**
 
 From the archive (stable version)
 ---------------------------------

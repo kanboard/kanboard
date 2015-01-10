@@ -40,18 +40,6 @@ It's also possible to use a secure connection, TLS or SSL:
 define('MAIL_SMTP_ENCRYPTION', 'ssl'); // Valid values are "null", "ssl" or "tls"
 ```
 
-Here an example with Google:
-
-```php
-define('MAIL_SMTP_HOSTNAME', 'smtp.gmail.com');
-define('MAIL_SMTP_PORT', 465);
-define('MAIL_SMTP_USERNAME', 'my_account@gmail.com');
-define('MAIL_SMTP_PASSWORD', 'my google password');
-define('MAIL_SMTP_ENCRYPTION', 'ssl');
-```
-
-To use Google, you might need to allow Kanboard to use your Google account, see ["Allowing less secure apps to access your account"](https://support.google.com/accounts/answer/6010255) and ["My client isn't accepting my username and password"](https://support.google.com/mail/answer/14257).
-
 ### Sendmail configuration
 
 By default the sendmail command will be `/usr/sbin/sendmail -bs` but you can customize that in your config file.

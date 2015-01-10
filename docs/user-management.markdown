@@ -7,19 +7,24 @@ Type of users
 Kanboard use a basic permission system, there is two kind of users:
 
 - Administrators
-- Regular/Standard users
+- Standard users
 
 Administrator have access to everything. By example, they can add or remove projects.
 
-A standard user can't manage users and projects.
+There is also permissions defined at the project level, users can be seen as:
+
+- Project member
+- Project manager
+
+Project managers have more privileges than a simple user member.
 
 Add a new user
 --------------
 
 To add a new user, you must be administrator.
 
-1. Go to the top menu **users**
-2. On the left, you have a link **New user**
+1. From the dashboard, go to the menu **User Management**
+2. On the top, you have a link **New user**
 3. Fill the form and save
 
 When you create a new user, you have to specify those values:
