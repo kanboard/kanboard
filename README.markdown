@@ -76,6 +76,11 @@ Documentation
 - [Application settings](docs/application-configuration.markdown)
 - [Board settings](docs/board-configuration.markdown)
 
+### Integrations
+
+- [Github webhooks](docs/github-webhooks.markdown)
+- [Gitlab webhooks](docs/gitlab-webhooks.markdown)
+
 #### More
 
 - [Syntax guide](docs/syntax-guide.markdown)
@@ -106,10 +111,6 @@ Documentation
 - [Google authentication](docs/google-authentication.markdown)
 - [GitHub authentication](docs/github-authentication.markdown)
 - [Reverse proxy authentication](docs/reverse-proxy-authentication.markdown)
-
-### Integration
-
-- [Github webhooks](docs/github-webhooks.markdown)
 
 #### Developers and sysadmins
 
@@ -149,6 +150,7 @@ Contributors:
 - Claudio Lobo
 - [Cluxter](https://github.com/cluxter)
 - [Cmer](https://github.com/chncsu)
+- [Cynthia Pereira](https://github.com/cynthiapereira)
 - [David-Norris](https://github.com/David-Norris)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
@@ -166,6 +168,7 @@ Contributors:
 - [Matthieu Keller](https://github.com/maggick)
 - [Mauro Mariño](https://github.com/moromarino)
 - [Maxime](https://github.com/EpocDotFr)
+- [Mgro](https://github.com/mgro)
 - [Mihailov Vasilievic Filho](https://github.com/mihailov-vf)
 - [Moraxy](https://github.com/moraxy)
 - [Nala Ginrut](https://github.com/NalaGinrut)
@@ -184,6 +187,7 @@ Contributors:
 - [Sebastien Pacilly](https://github.com/spacilly)
 - [Sebastian Reese](https://github.com/ReeseSebastian)
 - [Sylvain Veyrié](https://github.com/turb)
+- [Timo](https://github.com/BlueTeck)
 - [Toomyem](https://github.com/Toomyem)
 - [Tony G. Bolaño](https://github.com/tonybolanyo)
 - [Torsten](https://github.com/misterfu)

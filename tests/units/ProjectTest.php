@@ -104,7 +104,7 @@ class ProjectTest extends Base
 
         $project = $p->getById(1);
         $this->assertNotEmpty($project);
-        $this->assertEquals($now + 1, $project['last_modified']);
+        $this->assertGreaterThan($now, $project['last_modified']);
     }
 
     public function testIsLastModified()
