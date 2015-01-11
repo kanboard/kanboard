@@ -5,7 +5,7 @@
         <li>
             (<strong>#<?= $task['id'] ?></strong>)
             <?php if ($application_url): ?>
-                <a href="<?= $application_url.'?controller=task&action=show&task_id='.$task['id'] ?>"><?= $this->e($task['title']) ?></a>
+                <a href="<?= $application_url.$this->u('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $this->e($task['title']) ?></a>
             <?php else: ?>
                 <?= $this->e($task['title']) ?>
             <?php endif ?>

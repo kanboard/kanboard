@@ -25,6 +25,8 @@ List of available actions
 - Change the assignee based on an external username
 - Change the category based on an external label
 - Create a comment from an external provider
+- Close a task
+- Open a task
 
 Configuration on Github
 -----------------------
@@ -33,7 +35,7 @@ Go to your project settings page, on the left choose "Webhooks & Services", then
 
 ![Github configuration](http://kanboard.net/screenshots/documentation/github-webhooks.png)
 
-- **Payload url**: This url is available on Kanboard, go to "projects", select your project, at the bottom of the page, you have a section Github webhooks, just copy and paste the link.
+- **Payload url**: Copy and paste the link from the Kanboard project settings (section **Integrations > Github**).
 - Select **"Send me everything"**
 
 ![Github webhook](http://kanboard.net/screenshots/documentation/kanboard-github-webhooks.png)

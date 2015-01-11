@@ -9,17 +9,22 @@ Each automatic action is defined like that:
 - An action linked to this event
 - Eventually there is some parameters to define
 
-Each project can have a different set of automatic actions, the configuration panel is located on the project listing page, just click on the link "Automatic actions".
+Each project can have a different set of automatic actions, the configuration panel is located on the project listing page, just click on the link **Automatic actions**.
 
-![Automatic action creation (step 1)](http://kanboard.net/screenshots/documentation/project-automatic-action-step1.png)
+Add a new action
+----------------
 
-To add a new automatic action, choose the event with an action and click on the button "Next Step", then specify action parameters and finish the process by clicking on the button "Save this action".
+### Choose an action
 
-![Automatic action creation (step 2)](http://kanboard.net/screenshots/documentation/project-automatic-action-step2.png)
+![Choose an action](http://kanboard.net/screenshots/documentation/project-automatic-action-step1.png)
 
-Each time an event occurs, the corresponding actions are executed.
+### Choose an event
 
-![Automatic actions](http://kanboard.net/screenshots/documentation/project-automatic-actions.png)
+![Choose an event](http://kanboard.net/screenshots/documentation/project-automatic-action-step2.png)
+
+### Define action parameters
+
+![Define parameters](http://kanboard.net/screenshots/documentation/project-automatic-action-step3.png)
 
 List of available events
 ------------------------
@@ -39,6 +44,9 @@ List of available events
 - Github issue assignee change
 - Github issue label change
 - Github issue comment created
+- Gitlab issue opened
+- Gitlab issue closed
+- Gitlab commit received
 
 List of available actions
 -------------------------
