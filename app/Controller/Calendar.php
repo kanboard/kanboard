@@ -41,7 +41,15 @@ class Calendar extends Base {
         $columns = array();
         $columns[-1] = t('All columns');
         $columns = array_replace($columns, $this->board->getColumnsList($project['id']));
-
+        
+        $swimlanes = array();
+        $swimlanes[-1] = t('All swimlanes');
+        $swimlanes = array_replace($swimlanes, $this->board->swimlane->getSwimlanesList($project['id']));
+        
+        $color = array();
+        $color[-1] = t('All colors');
+        $color = array_replace($color, $this->color->getList());
+        
         $projects = array();
         $projects[$project['id']] = $project['name'];
 
@@ -51,8 +59,11 @@ class Calendar extends Base {
                     'categories' => $this->category->getList($project['id'], true, true),
                     'projects' => $projects,
                     'columns' => $columns,
+                    'swimlanes' => $swimlanes,
+                    'color' => $color,
                     'status' => $status,
                     'dataurl' => '?controller=calendar&amp;action=events&amp;status_id=1&amp;project_id=' . $project['id'],
+                    'interval' => $this->config->get('board_private_refresh_interval'),
                     'title' => t('Task calendar for "%s"', $project['name']),
         )));
     }
@@ -97,7 +108,10 @@ class Calendar extends Base {
         $user_id     = $this->request->getIntegerParam('user_id', -1);
         $category_id = $this->request->getIntegerParam('category_id', -1);
         $column_id   = $this->request->getIntegerParam('column_id', -1);
+        $swimlane_id = $this->request->getIntegerParam('swimlane_id', -1);
+        $color_id    = $this->request->getStringParam('color_id', '-1');
         $status_id   = $this->request->getIntegerParam('status_id', -1);
+        
         $date_start = $this->request->getStringParam('start');
         $date_parts = explode('-', $date_start);
         $date_start = mktime(0, 0, 0, $date_parts[1], $date_parts[2], $date_parts[0]);
@@ -106,7 +120,7 @@ class Calendar extends Base {
         $date_parts = explode('-', $date_end);
         $date_end   = mktime(0, 0, 0, $date_parts[1], $date_parts[2], $date_parts[0]);
         
-        $tasks = $this->taskFinder->getTaskForCalendar($project_id, $user_id, $category_id, $column_id, $status_id, $date_start, $date_end);
+        $tasks = $this->taskFinder->getTaskForCalendar($project_id, $user_id, $category_id, $column_id, $swimlane_id, $status_id, $color_id, $date_start, $date_end);
         
         // List of events
         $event_array = array();
@@ -116,31 +130,9 @@ class Calendar extends Base {
                                     $json_event['title'] = '#' . $task['id'] . ': ' . $task['title'];
                                     $json_event['start'] = date('c', $task['date_due']);          //"start": "2014-09-09T16:00:00-05:00" 
                                     $json_event['end'] = date('c', $task['date_due']);
-                                    $json_event['allDay'] = true;
-                                    /* task colors */
-                                    // TODO: model for the future color picker
-                                    if ($task['color_id'] === 'blue') {
-                                        $json_event['backgroundColor'] = 'rgb(219, 235, 255)';
-                                        $json_event['borderColor'] = 'rgb(168, 207, 255)';
-                                    } elseif ($task['color_id'] === 'purple') {
-                                        $json_event['backgroundColor'] = 'rgb(223, 176, 255)';
-                                        $json_event['borderColor'] = 'rgb(205, 133, 254)';
-                                    } elseif ($task['color_id'] === 'grey') {
-                                        $json_event['backgroundColor'] = 'rgb(238, 238, 238)';
-                                        $json_event['borderColor'] = 'rgb(204, 204, 204)';
-                                    } elseif ($task['color_id'] === 'red') {
-                                        $json_event['backgroundColor'] = 'rgb(255, 187, 187)';
-                                        $json_event['borderColor'] = 'rgb(255, 151, 151)';
-                                    } elseif ($task['color_id'] === 'green') {
-                                        $json_event['backgroundColor'] = 'rgb(189, 244, 203)';
-                                        $json_event['borderColor'] = 'rgb(74, 227, 113)';
-                                    } elseif ($task['color_id'] === 'yellow') {
-                                        $json_event['backgroundColor'] = 'rgb(245, 247, 196)';
-                                        $json_event['borderColor'] = 'rgb(223, 227, 45)';
-                                    } elseif ($task['color_id'] === 'orange') {
-                                        $json_event['backgroundColor'] = 'rgb(255, 215, 179)';
-                                        $json_event['borderColor'] = 'rgb(255, 172, 98)';
-                                    }
+                                    $json_event['allDay'] = true;                                    
+                                    $json_event['backgroundColor'] = $this->color->getBackgroundColor($task['color_id']);
+                                    $json_event['borderColor'] = $this->color->getBorderColor($task['color_id']);                                    
                                     $json_event['textColor'] = 'black';
                                     $json_event['url'] = '?controller=task&action=show&task_id=' . $task['id'] . '&project_id=' . $task['project_id'];
                                     array_push($event_array, $json_event);    

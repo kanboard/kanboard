@@ -5,7 +5,7 @@
 
     <section id="calendar">
 
-    <div data-url="<?= $dataurl ?>" id="calendarurl"></div>
+    <div data-url="<?= $dataurl ?>" data-url_saved="" data-interval="<?= $interval ?>" id="calendarurl"></div>
     <div id="calendar"></div>
 
     </section>

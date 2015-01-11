@@ -12,7 +12,7 @@
     </div>
     <section class="sidebar-container">
 
-        <?= $this->render('calendar/sidebar', array('project' => $project, 'users' => $users, 'categories' => $categories, 'projects' => $projects, 'columns' => $columns, 'status' => $status)) ?>
+        <?= $this->render('calendar/sidebar', array('project' => $project, 'users' => $users, 'categories' => $categories, 'projects' => $projects, 'columns' => $columns, 'swimlanes' => $swimlanes, 'color' => $color, 'status' => $status)) ?>
 
         <div class="sidebar-content">
             <?= $analytic_content_for_layout ?>

@@ -696,4 +696,8 @@ return array(
     // 'Sat' => '',
     'Next' => 'Suivant',
     '#%d' => 'n˚%d',
+    // 'Filter by color' => '',
+    // 'Filter by swimlane' => '',
+    // 'All swimlanes' => '',
+    // 'All colors' => '',
 );

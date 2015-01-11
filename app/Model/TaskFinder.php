@@ -268,12 +268,14 @@ class TaskFinder extends Base
      * @param  integer    $user_id      User id
      * @param  integer    $category_id  Category id
      * @param  integer    $column_id    Column id
+     * @param  integer    $swimlane_id  Swimlane id
+     * @param  string     $color        Color
      * @param  integer    $status_id    Status id
      * @param  integer    $date_start   Date start
      * @param  integer    $date_end     Date end
      * @return array
      */
-    public function getTaskForCalendar($project_id, $user_id, $category_id, $column_id, $status_id, $date_start, $date_end)
+    public function getTaskForCalendar($project_id, $user_id, $category_id, $column_id, $swimlane_id, $status_id, $color_id, $date_start, $date_end)
     {        
         $table = $this->db->table(Task::TABLE);
         
@@ -285,8 +287,16 @@ class TaskFinder extends Base
             $table->eq('category_id', $category_id);
         }
         
+        if($color_id != -1 && $color_id != ""){
+            $table->eq('color_id', $color_id);
+        }
+        
         if($column_id > 0){
             $table->eq('column_id', $column_id);
+        }
+        
+        if($swimlane_id > 0){
+            $table->eq('swimlane_id', $swimlane_id);
         }
         
         if($status_id >= 0){

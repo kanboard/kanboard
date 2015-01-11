@@ -695,4 +695,8 @@ return array(
     'Language:' => 'Sprache:',
     'Timezone:' => 'Zeitzone:',
     'Next' => 'Nächste',
+    'Filter by color' => 'Farbe filtern',
+    'Filter by swimlane' => 'Swimlane filtern',
+    'All swimlanes' => 'Alle Swimlanes',
+    'All colors' => 'Alle Farben',
 );

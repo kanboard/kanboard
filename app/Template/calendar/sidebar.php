@@ -18,9 +18,17 @@
             <?= $this->formSelect('column_id', $columns) ?>
         </li>
         <li>
+            <?= t('Filter by swimlane') ?><br>
+            <?= $this->formSelect('swimlane_id', $swimlanes) ?>
+        </li>
+        <li>
+            <?= t('Filter by color') ?><br>
+            <?= $this->formSelect('color_id', $color) ?>
+        </li>
+        <li>
             <?= t('Filter by status') ?><br>
             <?= $this->formSelect('status_id', $status) ?>
-        </li>
+        </li>        
     </ul>
 </li>
 </ul>

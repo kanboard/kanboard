@@ -740,4 +740,8 @@ return array(
     'Language:' => 'Idioma',
     'Timezone:' => 'Fuso horário',
     'Next' => 'Próximo',
+    // 'Filter by color' => '',
+    // 'Filter by swimlane' => '',
+    // 'All swimlanes' => '',
+    // 'All colors' => '',
 );

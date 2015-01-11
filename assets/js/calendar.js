@@ -1,6 +1,8 @@
 // Calendar related functions
 $(document).ready(function () {
 
+    var checkInterval = null;
+
     $.getJSON('?controller=calendar&action=gettexts&project_id=' + $('#form-project_id').val(), function (data) {
 
         $('#calendar').fullCalendar({
@@ -34,19 +36,36 @@ $(document).ready(function () {
             buttonText: {today: data.today},
             dayNames: [data.Sunday, data.Monday, data.Tuesday, data.Wednesday, data.Thursday, data.Friday, data.Saturday],
             dayNamesShort: [data.Sun, data.Mon, data.Tue, data.Wed, data.Thu, data.Fri, data.Sat]
-
         });
 
         //init
         updateEvents();
         $('#form-project_id').prop("disabled", true);
         $("#form-status_id option[value='1']").attr('selected', true);
+        
+        var projectId = $('#form-project_id').val();
+        $("#form-user_id").val(localStorage.getItem("filters_" + projectId + "_form-user_id") || -1);
+        $("#form-category_id").val(localStorage.getItem("filters_" + projectId + "_form-category_id") || -1);
+        $("#form-column_id").val(localStorage.getItem("filters_" + projectId + "_form-column_id") || -1);
+        $("#form-swimlane_id").val(localStorage.getItem("filters_" + projectId + "_form-swimlane_id") || -1);
+        $("#form-color_id").val(localStorage.getItem("filters_" + projectId + "_form-color_id") || -1);
+        $("#form-status_id").val(localStorage.getItem("filters_" + projectId + "_form-status_id") || -1);
+        
+        // Automatic refresh
+        var interval = parseInt($("#calendarurl").attr("data-interval"));
+
+        if (interval > 0) {
+            checkInterval = window.setInterval(updateEvents, interval * 1000);
+        }
     });
 
     function updateEvents() {
         $('#calendar').fullCalendar('removeEvents');
-        $('#calendar').fullCalendar('removeEventSource', $('.Source').val());
+        //remove eventssource might be buggy, it might be not fully removed. so events are duplicated after changing the month
+        //i.e.: https://code.google.com/p/fullcalendar/issues/detail?id=678
+        $('#calendar').fullCalendar('removeEventSource', $("#calendarurl").attr("data-url_saved"));
         $('#calendar').fullCalendar('addEventSource', $("#calendarurl").attr("data-url"));
+        $("#calendarurl").attr("data-url_saved", $("#calendarurl").attr("data-url"));
     }
 
     function changeDataUrl(parameter, value) {
@@ -63,29 +82,52 @@ $(document).ready(function () {
         newUrl = decodeURIComponent(newUrl);
         $("#calendarurl").attr("data-url", newUrl);
     }
+    
+    function updateLocalStorage(parameter, value) {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("filters_" + $('#form-project_id').val() + "_form-" + parameter, value);
+        }
+    }
 
     $('#form-project_id').change(function () {
         changeDataUrl('project_id', $(this).val());
+        updateLocalStorage('project_id', $(this).val());
         updateEvents();
     });
 
     $('#form-user_id').change(function () {
         changeDataUrl('user_id', $(this).val());
+        updateLocalStorage('user_id', $(this).val());
         updateEvents();
     });
 
     $('#form-category_id').change(function () {
         changeDataUrl('category_id', $(this).val());
+        updateLocalStorage('category_id', $(this).val());
         updateEvents();
     });
 
     $('#form-column_id').change(function () {
         changeDataUrl('column_id', $(this).val());
+        updateLocalStorage('column_id', $(this).val());
         updateEvents();
     });
 
     $('#form-status_id').change(function () {
         changeDataUrl('status_id', $(this).val());
+        updateLocalStorage('status_id', $(this).val());
         updateEvents();
     });
+    
+    $('#form-swimlane_id').change(function () {
+        changeDataUrl('swimlane_id', $(this).val());
+        updateLocalStorage('swimlane_id', $(this).val());
+        updateEvents();
+    });
+    
+    $('#form-color_id').change(function () {
+        changeDataUrl('color_id', $(this).val());
+        updateLocalStorage('color_id', $(this).val());
+        updateEvents();
+    }); 
 });

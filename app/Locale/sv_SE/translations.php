@@ -791,4 +791,8 @@ return array(
     'Language:' => 'Språk',
     'Timezone:' => 'Tidszon',
     'Next' => 'Nästa',
+    // 'Filter by color' => '',
+    // 'Filter by swimlane' => '',
+    // 'All swimlanes' => '',
+    // 'All colors' => '',
 );

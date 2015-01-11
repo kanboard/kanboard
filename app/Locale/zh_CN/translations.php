@@ -694,5 +694,9 @@ return array(
     // 'Thu' => '',
     // 'Fri' => '',
     // 'Sat' => '',
-    // 'Next' => '',
+    // 'Next' => '',    
+    // 'Filter by color' => '',
+    // 'Filter by swimlane' => '',
+    // 'All swimlanes' => '',
+    // 'All colors' => '',
 );
