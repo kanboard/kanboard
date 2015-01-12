@@ -303,6 +303,8 @@ class Project extends Base
 
         $this->db->closeTransaction();
 
+        $this->link->createDefaultLinks($project_id);
+
         return (int) $project_id;
     }
 

@@ -29,6 +29,8 @@ function version_23($pdo)
             FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
         ) ENGINE=InnoDB CHARSET=utf8");
     $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, task_inverse_id)");
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('project_links', ''));
 }
 
 function version_22($pdo)

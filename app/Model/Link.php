@@ -264,7 +264,11 @@ class Link extends Base
         list ($link1, $link2) = $this->prepare($values);
         $this->db->startTransaction();
         $res = $this->db->table(self::TABLE)->save($link1);
-        $res *= $this->db->table(self::TABLE)->save($link2);
+        if (! $res) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+        $res = $this->db->table(self::TABLE)->save($link2);
         if (! $res) {
             $this->db->cancelTransaction();
             return false;
@@ -322,6 +326,25 @@ class Link extends Base
         }
         $this->db->closeTransaction();
         return $res;
+    }
+    
+    /**
+     * Create default links during project creation
+     *
+     * @access public
+     * @param  integer  $project_id
+     */
+    public function createDefaultLinks($project_id)
+    {
+        $linkStrs = explode(',', $this->config->get('project_links'));
+    
+        foreach ($linkStrs as $linkStr) {
+            $links = explode('|', trim($linkStr));
+            if (! empty($links) && 2 === count($links)) {
+                $link = array('project_id' => $project_id, 'name' => trim($links[0]), 'name_inverse' => trim($links[1]));
+                $this->create($link);
+            }
+        }
     }
 
     /**

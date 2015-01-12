@@ -28,6 +28,8 @@ function version_41($pdo)
             FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
         )");
     $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, task_inverse_id)");
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('project_links', ''));
 }
 
 function version_40($pdo)

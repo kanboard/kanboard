@@ -24,6 +24,7 @@ use Pimple\Container;
  * @property \Model\DateParser         $dateParser
  * @property \Model\File               $file
  * @property \Model\LastLogin          $lastLogin
+ * @property \Model\Link               $link
  * @property \Model\Notification       $notification
  * @property \Model\Project            $project
  * @property \Model\ProjectPermission  $projectPermission
