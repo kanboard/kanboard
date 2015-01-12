@@ -212,27 +212,27 @@ class TaskLink extends Base
     {
         return $this->db->transaction(function ($db) use($src_task_id, $dst_task_id)
         {
-            $links = $db->table(self::TABLE)
+            $links = $db->table(TaskLink::TABLE)
                 ->columns('link_id', 'task_id', 'task_inverse_id')
                 ->eq('task_id', $src_task_id)
                 ->asc('id')
                 ->findAll();
             foreach ($links as &$link) {
                 $link['task_id'] = $dst_task_id;
-                if (! $db->table(self::TABLE)
+                if (! $db->table(TaskLink::TABLE)
                     ->save($link)) {
                     return false;
                 }
             }
             
-            $links = $db->table(self::TABLE)
+            $links = $db->table(TaskLink::TABLE)
                 ->columns('link_id', 'task_id', 'task_inverse_id')
                 ->eq('task_inverse_id', $src_task_id)
                 ->asc('id')
                 ->findAll();
             foreach ($links as &$link) {
                 $link['task_inverse_id'] = $dst_task_id;
-                if (! $db->table(self::TABLE)
+                if (! $db->table(TaskLink::TABLE)
                     ->save($link)) {
                     return false;
                 }

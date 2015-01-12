@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\Task;
+use Model\Task AS TaskModel;
 /**
  * TaskLink controller
  *
@@ -105,7 +105,7 @@ class Tasklink extends Base
             'values' => empty($values) ? $taskLink : $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
-        	'task_list' => $this->taskFinder->getList($task['project_id'], Task::STATUS_OPEN, $task['id']),
+        	'task_list' => $this->taskFinder->getList($task['project_id'], TaskModel::STATUS_OPEN, $task['id']),
             'link' => $taskLink,
             'task' => $task,
         )));
