@@ -1,5 +1,6 @@
 {
     "require": {
+        "ext-mbstring": "*",
         "ircmaxell/password-compat": "1.0.3",
         "fguillot/simple-validator": "dev-master",
         "swiftmailer/swiftmailer": "@stable",
