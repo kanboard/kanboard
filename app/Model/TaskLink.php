@@ -56,8 +56,8 @@ class TaskLink extends Base
      * Return all links for a given task
      *
      * @access public
-     * @param integer $project_id
-     *            Project id
+     * @param integer $task_id
+     *            Task id
      * @return array
      */
     public function getAll($task_id)
@@ -173,8 +173,8 @@ class TaskLink extends Base
      * Remove a link
      *
      * @access public
-     * @param integer $link_id
-     *            Category id
+     * @param integer $id
+     *            Link id
      * @return bool
      */
     public function remove($id)
