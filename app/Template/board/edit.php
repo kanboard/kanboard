@@ -17,7 +17,7 @@
         <?php foreach ($columns as $column): ?>
         <tr>
             <td><?= $this->formLabel('#'.++$i, 'title['.$column['id'].']', array('title="column_id='.$column['id'].'"')) ?></td>
-            <td><?= $this->formText('title['.$column['id'].']', $values, $errors, array('required')) ?></td>
+            <td><?= $this->formText('title['.$column['id'].']', $values, $errors, array('required', 'maxlength="50"')) ?></td>
             <td><?= $this->formNumber('task_limit['.$column['id'].']', $values, $errors, array('placeholder="'.t('limit').'"')) ?></td>
             <td>
                 <ul>
@@ -53,7 +53,7 @@
     <?= $this->formHidden('project_id', $values) ?>
 
     <?= $this->formLabel(t('Title'), 'title') ?>
-    <?= $this->formText('title', $values, $errors, array('required')) ?>
+    <?= $this->formText('title', $values, $errors, array('required', 'maxlength="50"')) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Add this column') ?>" class="btn btn-blue"/>

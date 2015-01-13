@@ -7,7 +7,7 @@
     <?= $this->formHidden('id', $values) ?>
 
     <?= $this->formLabel(t('Name'), 'name') ?>
-    <?= $this->formText('name', $values, $errors, array('required')) ?>
+    <?= $this->formText('name', $values, $errors, array('required', 'maxlength="50"')) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
