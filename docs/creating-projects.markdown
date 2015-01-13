@@ -1,12 +1,15 @@
 Creating projects
 =================
 
-Kanboard can handle multiple projects.
+Kanboard can handle multiple projects. There are two kinds of project:
+
+- Project with mutliple users (you work in team)
+- Private project for a single user
 
 Creating projects for multiple users
 -------------------------------------
 
-- Only administrators can create and manage those projects
+- Only administrators can create those projects
 - User management is available
 
 From the dashboard, click on the link **New project**.
@@ -16,8 +19,8 @@ Then the form appears:
 
 It's very easy, you just have to find a name for your project!
 
-Creating a private prooject
----------------------------
+Creating a private project
+--------------------------
 
 - Everybody can create a private project
 - There is **NO** user management
