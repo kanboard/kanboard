@@ -307,14 +307,7 @@ class Project extends Base
 
             $this->checkCSRFParam();
 
-            $clone_project_id = $this->project->duplicate($project['id']);
-
-            if ($clone_project_id) {
-                // Find all task for source project and clone to target project
-                $tasks = $this->taskFinder->getAll($project['id']);
-                foreach($tasks as $task) {
-                    $this->taskDuplication->duplicateToProject($task['id'], $clone_project_id);
-                }
+            if ($this->project->duplicate($project['id'])) {
                 $this->session->flash(t('Project cloned successfully.'));
             } else {
                 $this->session->flashError(t('Unable to clone this project.'));
