@@ -21,5 +21,7 @@ Field description:
 - **Column**: The column where the task will be created, your task will be positioned at the bottom.
 - **Color**: Choose the color of the card.
 - **Complexity**: Used in agile project management (Scrum), the complexity or story points is a number that tells the team how hard the story is. Often, people use the fibonacci series.
-- **Due Date**: Overdue tasks will have a red due date and upcoming due dates will be black on the board. Several date format are accepted in addition to the date picker.
 - **Original Estimate**: Estimation in hours to complete the tasks.
+- **Due Date**: Overdue tasks will have a red due date and upcoming due dates will be black on the board. Several date format are accepted in addition to the date picker.
+
+With the preview link, you can see the task description converted from the Markdown syntax.

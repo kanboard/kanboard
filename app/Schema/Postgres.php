@@ -30,7 +30,7 @@ function version_21($pdo)
     $rq->execute();
     $project_ids = $rq->fetchAll(PDO::FETCH_COLUMN, 0);
 
-    $rq = $pdo->prepare('UPDATE project_has_users SET is_owner=1 WHERE project_id=?');
+    $rq = $pdo->prepare("UPDATE project_has_users SET is_owner='1' WHERE project_id=?");
 
     foreach ($project_ids as $project_id) {
         $rq->execute(array($project_id));

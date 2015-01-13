@@ -16,6 +16,8 @@ Official website: <http://kanboard.net>
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fguillot/kanboard/badges/quality-score.png?s=2b6490781608657cc8c43d02285bfafb4f489528)](https://scrutinizer-ci.com/g/fguillot/kanboard/)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 Features
 --------
 
@@ -97,6 +99,7 @@ Documentation
 - [Installation on Centos](docs/centos-installation.markdown)
 - [Installation on FreeBSD](docs/freebsd-installation.markdown)
 - [Installation on Windows Server with IIS](docs/windows-iis-installation.markdown)
+- [Installation on Heroku](docs/heroku.markdown)
 - [Example with Nginx + HTTPS + SPDY + PHP-FPM](docs/nginx-ssl-php-fpm.markdown)
 
 #### Database
@@ -150,6 +153,7 @@ Contributors:
 - Claudio Lobo
 - [Cluxter](https://github.com/cluxter)
 - [Cmer](https://github.com/chncsu)
+- [Cynthia Pereira](https://github.com/cynthiapereira)
 - [David-Norris](https://github.com/David-Norris)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
