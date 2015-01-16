@@ -1330,6 +1330,43 @@ Response example:
 }
 ```
 
+### createLdapUser
+
+- Purpose: **Create a new user authentified by LDAP**
+- Parameters:
+    - **username** (string, optional if email is set)
+    - **email** (string, optional if username is set)
+    - **is_admin** Set the value 1 for admins or 0 for regular users (integer, optional)
+    - **default_project_id** (integer, optional)
+- Result on success: **user_id**
+- Result on failure: **false**
+
+The user will only be created if a matching is found on the LDAP server.
+Username or email (or both) must be provided.
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "createLdapUser",
+    "id": 1518863034,
+    "params": {
+        "username": "biloute",
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1518863034,
+    "result": 22
+}
+```
+
 ### getUser
 
 - Purpose: **Get user information**

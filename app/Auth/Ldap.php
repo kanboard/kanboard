@@ -206,4 +206,52 @@ class Ldap extends Base
 
         return false;
     }
+
+    /**
+     * Retrieve info on LDAP user.
+     *
+     * @param resource $ldap      LDAP connection
+     * @param string   $username  Username
+     * @param string   $email     Email address
+     */
+    public function lookup($username = null, $email = null)
+    {
+        if ($username && $email)
+            $query = '(&('.sprintf(LDAP_USER_PATTERN, $username).')('.sprintf(LDAP_ACCOUNT_EMAIL, $email).')';
+        else if ($username)
+            $query = sprintf(LDAP_USER_PATTERN, $username);
+        else if ($email)
+            $query = '('.LDAP_ACCOUNT_EMAIL.'='.$email.')';
+        else
+            return false;
+
+        // Connect and attempt anonymous bind
+        $ldap = $this->connect();
+        if (!is_resource($ldap) || !$this->bind($ldap, null, null))
+            return false;
+
+        // Try to find user
+        $sr = @ldap_search($ldap, LDAP_ACCOUNT_BASE, $query, array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL, LDAP_ACCOUNT_ID));
+        if ($sr === false) {
+            return false;
+        }
+
+        $info = ldap_get_entries($ldap, $sr);
+
+        // User not found
+        if (count($info) == 0 || $info['count'] == 0) {
+            return false;
+        }
+
+        // User id not retrieved: LDAP_ACCOUNT_ID not properly configured
+        if (!$username && !isset($info[0][LDAP_ACCOUNT_ID][0])) {
+            return false;
+        }
+
+        return array(
+            'username' => isset($info[0][LDAP_ACCOUNT_ID][0]) ? $info[0][LDAP_ACCOUNT_ID][0] : $username,
+            'name' => isset($info[0][LDAP_ACCOUNT_FULLNAME][0]) ? $info[0][LDAP_ACCOUNT_FULLNAME][0] : '',
+            'email' => isset($info[0][LDAP_ACCOUNT_EMAIL][0]) ? $info[0][LDAP_ACCOUNT_EMAIL][0] : $email,
+        );
+    }
 }
