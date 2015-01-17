@@ -12,7 +12,7 @@
             <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>
         </li>
         <li>
-            <i class="fa fa-search"></i>
+            <i class="fa fa-search fa-fw"></i>
             <?= $this->a(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
         </li>
         <li>

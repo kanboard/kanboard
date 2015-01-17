@@ -1,7 +1,22 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <li><i class="fa fa-table fa-fw"></i><?= $this->a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?></li>
+            <li>
+                <i class="fa fa-table fa-fw"></i>
+                <?= $this->a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
+            </li>
+            <li>
+                <i class="fa fa-search fa-fw"></i>
+                <?= $this->a(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
+            </li>
+            <li>
+                <i class="fa fa-check-square-o fa-fw"></i>
+                <?= $this->a(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
+            </li>
+            <li>
+                <i class="fa fa-dashboard fa-fw"></i>
+                <?= $this->a(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
+            </li>
         </ul>
     </div>
     <section class="sidebar-container">
