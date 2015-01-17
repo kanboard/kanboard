@@ -39,6 +39,7 @@ class ClassProvider implements ServiceProviderInterface
             'TaskDuplication',
             'TaskExport',
             'TaskFinder',
+            'TaskFilter',
             'TaskModification',
             'TaskPaginator',
             'TaskPermission',
@@ -51,6 +52,7 @@ class ClassProvider implements ServiceProviderInterface
             'Webhook',
         ),
         'Core' => array(
+            'Helper',
             'Template',
             'Session',
             'MemoryCache',

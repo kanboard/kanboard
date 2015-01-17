@@ -23,13 +23,19 @@
             <i class="fa fa-dashboard fa-fw"></i>
             <?= $this->a(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
         </li>
+        <li>
+            <i class="fa fa-calendar fa-fw"></i>
+            <?= $this->a(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
+        </li>
         <?php if ($this->acl->isManagerActionAllowed($project['id'])): ?>
         <li>
             <i class="fa fa-line-chart fa-fw"></i>
             <?= $this->a(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
         </li>
-            <li><i class="fa fa-cog fa-fw"></i>
+        <li>
+            <i class="fa fa-cog fa-fw"></i>
             <?= $this->a(t('Configure'), 'project', 'show', array('project_id' => $project['id'])) ?>
+        </li>
         <?php endif ?>
     </ul>
 </div>

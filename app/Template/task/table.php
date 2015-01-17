@@ -12,7 +12,7 @@
     </tr>
     <?php foreach ($tasks as $task): ?>
     <tr>
-        <td class="task-table task-<?= $task['color_id'] ?>">
+        <td class="task-table color-<?= $task['color_id'] ?>">
             <?= $this->a('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>

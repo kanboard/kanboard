@@ -11,7 +11,7 @@
         </tr>
         <?php foreach ($subtasks as $subtask): ?>
         <tr>
-            <td class="task-table task-<?= $subtask['color_id'] ?>">
+            <td class="task-table color-<?= $subtask['color_id'] ?>">
                 <?= $this->a('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>

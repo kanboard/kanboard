@@ -17,6 +17,7 @@
                 <?php if ($this->isManager($project['id'])): ?>
                     <?= $this->a('<i class="fa fa-cog"></i>', 'project', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Settings')) ?>&nbsp;
                 <?php endif ?>
+                <?= $this->a('<i class="fa fa-calendar"></i>', 'calendar', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Calendar')) ?>&nbsp;
                 <?= $this->a($this->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
             </td>
             <td class="dashboard-project-stats">

@@ -168,6 +168,23 @@ class Response
     }
 
     /**
+     * Send a css response
+     *
+     * @access public
+     * @param  string   $data          Raw data
+     * @param  integer  $status_code   HTTP status code
+     */
+    public function css($data, $status_code = 200)
+    {
+        $this->status($status_code);
+
+        header('Content-Type: text/css; charset=utf-8');
+        echo $data;
+
+        exit;
+    }
+
+    /**
      * Send a binary response
      *
      * @access public

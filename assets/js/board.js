@@ -1,4 +1,3 @@
-// Board related functions
 Kanboard.Board = (function() {
 
     var checkInterval = null;
@@ -191,6 +190,7 @@ Kanboard.Board = (function() {
         var selectedUserId = $("#form-user_id").val();
         var selectedCategoryId = $("#form-category_id").val();
         var filterDueDate = $("#filter-due-date").hasClass("filter-on");
+	    var projectId = $('#board').data('project-id');
 
         $("[data-task-id]").each(function(index, item) {
 
@@ -214,43 +214,36 @@ Kanboard.Board = (function() {
             }
         });
         
-		// Save filter settings for active project to localStorage
-		if (typeof(Storage) !== "undefined") {
-		    var projectId = $('#board').data('project-id');
-			localStorage.setItem("filters_" + projectId + "_form-user_id", selectedUserId);
-			localStorage.setItem("filters_" + projectId + "_form-category_id", selectedCategoryId);
-			localStorage.setItem("filters_" + projectId + "_filter-due-date", ~~(filterDueDate));
-		}
+        // Save filter settings
+		Kanboard.SetStorageItem("board_filter_" + projectId + "_form-user_id", selectedUserId);
+		Kanboard.SetStorageItem("board_filter_" + projectId + "_form-category_id", selectedCategoryId);
+		Kanboard.SetStorageItem("board_filter_" + projectId + "_filter-due-date", ~~(filterDueDate));
     }
 
     // Load filter events
     function filter_load_events()
     {
+	    var projectId = $('#board').data('project-id');
+
         $("#form-user_id").change(filter_apply);
-
         $("#form-category_id").change(filter_apply);
-
         $("#filter-due-date").click(function(e) {
             $(this).toggleClass("filter-on");
             filter_apply();
             e.preventDefault();
         });
         
-		// Get and set filters from localStorage for active project
-		if (typeof(Storage) !== "undefined") {
-		    var projectId = $('#board').data('project-id');
-
-			$("#form-user_id").val(localStorage.getItem("filters_" + projectId + "_form-user_id") || -1);
-			$("#form-category_id").val(localStorage.getItem("filters_" + projectId + "_form-category_id") || -1);
-			
-			if (+localStorage.getItem("filters_" + projectId + "_filter-due-date")) {
-				$("#filter-due-date").addClass("filter-on");
-			} else {
-				$("#filter-due-date").removeClass("filter-on");
-			}
-			
-	    	filter_apply();
+        // Get and set filters from localStorage
+		$("#form-user_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-user_id") || -1);
+		$("#form-category_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-category_id") || -1);
+		
+		if (+Kanboard.GetStorageItem("board_filter_" + projectId + "_filter-due-date")) {
+			$("#filter-due-date").addClass("filter-on");
+		} else {
+			$("#filter-due-date").removeClass("filter-on");
 		}
+		
+    	filter_apply();
     }
 
     return {

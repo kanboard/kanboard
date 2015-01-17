@@ -65,6 +65,22 @@ var Kanboard = (function() {
             return true;
         },
 
+        // Save preferences in local storage
+        SetStorageItem: function(key, value) {
+            if (typeof(Storage) !== "undefined") {
+                localStorage.setItem(key, value);
+            }
+        },
+
+        GetStorageItem: function(key) {
+
+            if (typeof(Storage) !== "undefined") {
+                return localStorage.getItem(key);
+            }
+
+            return '';
+        },
+
         // Generate Markdown preview
         MarkdownPreview: function(e) {
 
