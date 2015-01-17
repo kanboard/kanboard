@@ -41,6 +41,16 @@ rm -rf data/*.sqlite \
        Dockerfile \
        composer.*
 
+find ./vendor -name doc -type d -exec rm -rf {} +;
+find ./vendor -name notes -type d -exec rm -rf {} +;
+find ./vendor -name test -type d -exec rm -rf {} +;
+find ./vendor -name tests -type d -exec rm -rf {} +;
+find ./vendor -name composer.json -delete
+find ./vendor -name phpunit.xml -delete
+find ./vendor -name .travis.yml -delete
+find ./vendor -name README.* -delete
+find ./vendor -name .gitignore -delete
+
 # Set the version number
 sed -i.bak s/master/$VERSION/g app/constants.php && rm -f app/*.bak
 

@@ -19,7 +19,7 @@ List of supported actions
 Configuration
 -------------
 
-[INSERT SCREENSHOT]
+![Github configuration](http://kanboard.net/screenshots/documentation/gitlab-webhooks.png)
 
 1. On Kanboard, go to the project settings and choose the section **Integrations**
 2. Copy the Gitlab webhook url

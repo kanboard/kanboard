@@ -11,7 +11,7 @@ There is only two constraints imposed by Kanban:
 Visualize your workflow
 -----------------------
 
-- Your work is visualized on a board, you have a clear overview of your project
+- Your work is displayed on a board, you have a clear overview of your project
 - Each column represent a step in your workflow
 
 Bring focus and avoid multitasking
