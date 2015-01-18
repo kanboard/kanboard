@@ -20,14 +20,13 @@
         </ul>
     </div>
     <section>
-    <?php if (empty($tasks)): ?>
+    <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No task') ?></p>
     <?php else: ?>
         <?= $this->render('task/table', array(
-            'tasks' => $tasks,
+            'paginator' => $paginator,
             'categories' => $categories,
             'columns' => $columns,
-            'pagination' => $pagination,
         )) ?>
     <?php endif ?>
     </section>

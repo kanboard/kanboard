@@ -51,7 +51,7 @@ class Project extends Base
 
         $this->response->html($this->projectLayout('project/show', array(
             'project' => $project,
-            'stats' => $this->project->getStats($project['id']),
+            'stats' => $this->project->getTaskStats($project['id']),
             'title' => $project['name'],
         )));
     }
@@ -425,38 +425,32 @@ class Project extends Base
     {
         $project = $this->getProject();
         $search = $this->request->getStringParam('search');
-        $direction = $this->request->getStringParam('direction', 'DESC');
-        $order = $this->request->getStringParam('order', 'tasks.id');
-        $offset = $this->request->getIntegerParam('offset', 0);
-        $tasks = array();
         $nb_tasks = 0;
-        $limit = 25;
+
+        $paginator = $this->paginator
+                ->setUrl('project', 'search', array('search' => $search, 'project_id' => $project['id']))
+                ->setMax(30)
+                ->setOrder('tasks.id')
+                ->setDirection('DESC');
 
         if ($search !== '') {
-            $tasks = $this->taskPaginator->searchTasks($project['id'], $search, $offset, $limit, $order, $direction);
-            $nb_tasks = $this->taskPaginator->countSearchTasks($project['id'], $search);
+
+            $paginator
+                ->setQuery($this->taskFinder->getSearchQuery($project['id'], $search))
+                ->calculate();
+
+            $nb_tasks = $paginator->getTotal();
         }
 
         $this->response->html($this->template->layout('project/search', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
-            'tasks' => $tasks,
-            'nb_tasks' => $nb_tasks,
-            'pagination' => array(
-                'controller' => 'project',
-                'action' => 'search',
-                'params' => array('search' => $search, 'project_id' => $project['id']),
-                'direction' => $direction,
-                'order' => $order,
-                'total' => $nb_tasks,
-                'offset' => $offset,
-                'limit' => $limit,
-            ),
             'values' => array(
                 'search' => $search,
                 'controller' => 'project',
                 'action' => 'search',
                 'project_id' => $project['id'],
             ),
+            'paginator' => $paginator,
             'project' => $project,
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
@@ -472,32 +466,21 @@ class Project extends Base
     public function tasks()
     {
         $project = $this->getProject();
-        $direction = $this->request->getStringParam('direction', 'DESC');
-        $order = $this->request->getStringParam('order', 'tasks.date_completed');
-        $offset = $this->request->getIntegerParam('offset', 0);
-        $limit = 25;
-
-        $tasks = $this->taskPaginator->closedTasks($project['id'], $offset, $limit, $order, $direction);
-        $nb_tasks = $this->taskPaginator->countClosedTasks($project['id']);
+        $paginator = $this->paginator
+                ->setUrl('project', 'tasks', array('project_id' => $project['id']))
+                ->setMax(30)
+                ->setOrder('tasks.id')
+                ->setDirection('DESC')
+                ->setQuery($this->taskFinder->getClosedTaskQuery($project['id']))
+                ->calculate();
 
         $this->response->html($this->template->layout('project/tasks', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
-            'pagination' => array(
-                'controller' => 'project',
-                'action' => 'tasks',
-                'params' => array('project_id' => $project['id']),
-                'direction' => $direction,
-                'order' => $order,
-                'total' => $nb_tasks,
-                'offset' => $offset,
-                'limit' => $limit,
-            ),
             'project' => $project,
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
-            'tasks' => $tasks,
-            'nb_tasks' => $nb_tasks,
-            'title' => t('Completed tasks for "%s"', $project['name']).' ('.$nb_tasks.')'
+            'paginator' => $paginator,
+            'title' => t('Completed tasks for "%s"', $project['name']).' ('.$paginator->getTotal().')'
         )));
     }
 

@@ -28,14 +28,13 @@
         <input type="submit" value="<?= t('Search') ?>" class="btn btn-blue"/>
     </form>
 
-    <?php if (empty($tasks) && ! empty($values['search'])): ?>
+    <?php if (! empty($values['search']) && $paginator->isEmpty()): ?>
         <p class="alert"><?= t('Nothing found.') ?></p>
-    <?php elseif (! empty($tasks)): ?>
+    <?php elseif (! $paginator->isEmpty()): ?>
         <?= $this->render('task/table', array(
-            'tasks' => $tasks,
+            'paginator' => $paginator,
             'categories' => $categories,
             'columns' => $columns,
-            'pagination' => $pagination,
         )) ?>
     <?php endif ?>
 

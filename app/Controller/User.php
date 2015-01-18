@@ -115,31 +115,19 @@ class User extends Base
      */
     public function index()
     {
-        $direction = $this->request->getStringParam('direction', 'ASC');
-        $order = $this->request->getStringParam('order', 'username');
-        $offset = $this->request->getIntegerParam('offset', 0);
-        $limit = 25;
-
-        $users = $this->user->paginate($offset, $limit, $order, $direction);
-        $nb_users = $this->user->count();
+        $paginator = $this->paginator
+                ->setUrl('user', 'index')
+                ->setMax(30)
+                ->setOrder('username')
+                ->setQuery($this->user->getQuery())
+                ->calculate();
 
         $this->response->html(
             $this->template->layout('user/index', array(
                 'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
                 'projects' => $this->project->getList(),
-                'nb_users' => $nb_users,
-                'users' => $users,
-                'title' => t('Users').' ('.$nb_users.')',
-                'pagination' => array(
-                    'controller' => 'user',
-                    'action' => 'index',
-                    'direction' => $direction,
-                    'order' => $order,
-                    'total' => $nb_users,
-                    'offset' => $offset,
-                    'limit' => $limit,
-                    'params' => array(),
-                ),
+                'title' => t('Users').' ('.$paginator->getTotal().')',
+                'paginator' => $paginator,
         )));
     }
 

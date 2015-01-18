@@ -462,73 +462,7 @@ class Helper
 
         $values += $params;
 
-        return '?'.http_build_query($values, '');
-    }
-
-    /**
-     * Pagination links
-     *
-     * @param  array    $pagination    Pagination information
-     * @return string
-     */
-    public function paginate(array $pagination)
-    {
-        extract($pagination);
-
-        if ($pagination['offset'] === 0 && ($total - $pagination['offset']) <= $limit) {
-            return '';
-        }
-
-        $html = '<div class="pagination">';
-        $html .= '<span class="pagination-previous">';
-
-        if ($pagination['offset'] > 0) {
-            $offset = $pagination['offset'] - $limit;
-            $html .= $this->a('&larr; '.t('Previous'), $controller, $action, $params + compact('offset', 'order', 'direction'));
-        }
-        else {
-            $html .= '&larr; '.t('Previous');
-        }
-
-        $html .= '</span>';
-        $html .= '<span class="pagination-next">';
-
-        if (($total - $pagination['offset']) > $limit) {
-            $offset = $pagination['offset'] + $limit;
-            $html .= $this->a(t('Next').' &rarr;', $controller, $action, $params + compact('offset', 'order', 'direction'));
-        }
-        else {
-            $html .= t('Next').' &rarr;';
-        }
-
-        $html .= '</span>';
-        $html .= '</div>';
-
-        return $html;
-    }
-
-    /**
-     * Column sorting (work with pagination)
-     *
-     * @param  string   $label         Column title
-     * @param  string   $column        SQL column name
-     * @param  array    $pagination    Pagination information
-     * @return string
-     */
-    public function order($label, $column, array $pagination)
-    {
-        extract($pagination);
-
-        $prefix = '';
-
-        if ($order === $column) {
-            $prefix = $direction === 'DESC' ? '&#9660; ' : '&#9650; ';
-            $direction = $direction === 'DESC' ? 'ASC' : 'DESC';
-        }
-
-        $order = $column;
-
-        return $prefix.$this->a($label, $controller, $action, $params + compact('offset', 'order', 'direction'));
+        return '?'.http_build_query($values);
     }
 
     /**

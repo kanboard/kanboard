@@ -13,12 +13,66 @@ use PDO;
 class TaskFinder extends Base
 {
     /**
-     * Common request to fetch a list of tasks
+     * Get query for closed tasks
+     *
+     * @access public
+     * @param  integer    $project_id    Project id
+     * @return \PicoDb\Table
+     */
+    public function getClosedTaskQuery($project_id)
+    {
+        return $this->getExtendedQuery()
+                    ->eq('project_id', $project_id)
+                    ->eq('is_active', Task::STATUS_CLOSED);
+    }
+
+    /**
+     * Get query for task search
+     *
+     * @access public
+     * @param  integer    $project_id    Project id
+     * @param  string     $search        Search terms
+     * @return \PicoDb\Table
+     */
+    public function getSearchQuery($project_id, $search)
+    {
+        return $this->getExtendedQuery()
+                    ->eq('project_id', $project_id)
+                    ->ilike('title', '%'.$search.'%');
+    }
+
+    /**
+     * Get query for assigned user tasks
+     *
+     * @access public
+     * @param  integer    $user_id       User id
+     * @return \PicoDb\Table
+     */
+    public function getUserQuery($user_id)
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->columns(
+                        'tasks.id',
+                        'tasks.title',
+                        'tasks.date_due',
+                        'tasks.date_creation',
+                        'tasks.project_id',
+                        'tasks.color_id',
+                        'projects.name AS project_name'
+                    )
+                    ->join(Project::TABLE, 'id', 'project_id')
+                    ->eq('tasks.owner_id', $user_id)
+                    ->eq('tasks.is_active', Task::STATUS_OPEN);
+    }
+
+    /**
+     * Extended query
      *
      * @access public
      * @return \PicoDb\Table
      */
-    public function getQuery()
+    public function getExtendedQuery()
     {
         return $this->db
             ->table(Task::TABLE)
@@ -62,7 +116,7 @@ class TaskFinder extends Base
      */
     public function getTasksByColumnAndSwimlane($project_id, $column_id, $swimlane_id = 0)
     {
-        return $this->getQuery()
+        return $this->getExtendedQuery()
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
                     ->eq('swimlane_id', $swimlane_id)
