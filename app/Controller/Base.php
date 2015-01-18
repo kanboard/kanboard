@@ -19,6 +19,9 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * @property \Core\Session                 $session
  * @property \Core\Template                $template
+ * @property \Core\Paginator               $paginator
+ * @property \Integration\GithubWebhook    $githubWebhook
+ * @property \Integration\GitlabWebhook    $gitlabWebhook
  * @property \Model\Acl                    $acl
  * @property \Model\Authentication         $authentication
  * @property \Model\Action                 $action
@@ -34,6 +37,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\Project                $project
  * @property \Model\ProjectPermission      $projectPermission
  * @property \Model\ProjectAnalytic        $projectAnalytic
+ * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectDailySummary    $projectDailySummary
  * @property \Model\SubTask                $subTask
  * @property \Model\Swimlane               $swimlane

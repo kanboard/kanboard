@@ -57,7 +57,7 @@ class Paginator
      * Sort by this column
      *
      * @access private
-     * @var integer
+     * @var string
      */
     private $order = '';
 
@@ -65,7 +65,7 @@ class Paginator
      * Sorting direction
      *
      * @access private
-     * @var integer
+     * @var string
      */
     private $direction = 'ASC';
 

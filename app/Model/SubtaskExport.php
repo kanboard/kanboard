@@ -86,9 +86,9 @@ class SubtaskExport extends Base
      * Get all subtasks for a given project
      *
      * @access public
-     * @param  integer   $task_id    Task id
-     * @param  mixed     $from       Start date (timestamp or user formatted date)
-     * @param  mixed     $to         End date (timestamp or user formatted date)
+     * @param  integer   $project_id    Project id
+     * @param  mixed     $from          Start date (timestamp or user formatted date)
+     * @param  mixed     $to            End date (timestamp or user formatted date)
      * @return array
      */
     public function getSubtasks($project_id, $from, $to)
