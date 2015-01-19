@@ -42,7 +42,7 @@ $ echo "DirectoryIndex index.php index.html" >> /usr/local/etc/apache24/Includes
 
 Then start Apache:
 
-```
+```bash
 $ service apache24 start
 ```
 
@@ -55,15 +55,16 @@ $ unzip kanboard-latest.zip
 $ chown -R www:www kanboard/data
 $ rm kanboard-latest.zip
 ```
-Go to http://Your.server.dom.ain/kanboard and enjoy!
+Go to http://your.server.domain.tld/kanboard and enjoy!
 
 Installing from ports
 ---------------------
 
 Generally 3 elements have to be installed:
+
 - Apache
 - mod_php for Apache
-- kanboard
+- Kanboard
 
 Fetch and extract ports...
 
@@ -73,12 +74,13 @@ $ portsnap extract
 ```
 
 or update already existing:
+
 ```bash
 $ portsnap fetch
 $ portsnap update
 ```
-More details regarding portsnap can be found in the [FreeBSD Handbook](https://www.freebsd.org/doc/handbook/ports-using.html).
 
+More details regarding portsnap can be found in the [FreeBSD Handbook](https://www.freebsd.org/doc/handbook/ports-using.html).
 
 Install Apache:
 
@@ -92,7 +94,8 @@ Enable Apache in your `/etc/rc.conf`:
 $ echo apache24_enable="YES" >> /etc/rc.conf
 ```
 
-Install mod_php for Apache
+Install mod_php for Apache:
+
 ```bash
 $ cd /usr/ports/www/mod_php5
 $ make install clean
@@ -107,6 +110,7 @@ $ cd if0-freebsd-kanboard-*/kanboard
 ```
 
 Choose proper type of the database (MySQL, Postgresql, SQLite), build port and install:
+
 ```bash
 $ make config
 $ make install clean
@@ -123,11 +127,11 @@ $ echo "DirectoryIndex index.php index.html" >> /usr/local/etc/apache24/Includes
 
 Then start Apache:
 
-```
+```bash
 $ service apache24 start
 ```
 
-Go to http://Your.server.dom.ain/kanboard and enjoy!
+Go to http://your.server.domain.tld/kanboard and enjoy!
 
 Please note!
 ------------
@@ -162,8 +166,9 @@ $ echo "DirectoryIndex index.php index.html" >> /usr/local/etc/apache24/Includes
 ```
 
 Then start Apache:
-```
+
+```bash
 $ service apache24 start
 ```
 
-Go to http://Your.server.dom.ain/kanboard and enjoy!
+Go to http://your.server.domain.tld/kanboard and enjoy!
