@@ -1,7 +1,6 @@
 {
     "require": {
         "ext-mbstring": "*",
-        "ircmaxell/password-compat": "1.0.3",
         "fguillot/simple-validator": "0.0.1",
         "swiftmailer/swiftmailer": "@stable",
         "fguillot/json-rpc": "0.0.1",
@@ -16,7 +15,8 @@
     "autoload": {
         "psr-0": {"": "app/"},
         "files": [
-            "app/functions.php"
+            "app/functions.php",
+            "app/Libs/password.php"
         ]
     },
     "require-dev": {

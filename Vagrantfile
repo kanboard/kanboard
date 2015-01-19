@@ -65,6 +65,11 @@ Vagrant.configure("2") do |config|
     m.vm.synced_folder ".", "/var/www/html", owner: "apache", group: "apache"
   end
 
+  config.vm.define "centos65" do |m|
+    m.vm.box = "chef/centos-6.5"
+    m.vm.synced_folder ".", "/var/www/html", owner: "apache", group: "apache"
+  end
+
   config.vm.define "freebsd10" do |m|
     m.vm.box = "chef/freebsd-10.0"
     m.vm.synced_folder ".", "/usr/local/www/apache24/data", type: "rsync", owner: "www", group: "www"
