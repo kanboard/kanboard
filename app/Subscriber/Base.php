@@ -11,15 +11,19 @@ use Pimple\Container;
  * @author   Frederic Guillot
  *
  * @property \Model\Config                 $config
+ * @property \Model\Comment                $comment
+ * @property \Model\LastLogin              $lastLogin
  * @property \Model\Notification           $notification
  * @property \Model\Project                $project
  * @property \Model\ProjectPermission      $projectPermission
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectDailySummary    $projectDailySummary
+ * @property \Model\SubTask                $subTask
  * @property \Model\Task                   $task
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder
  * @property \Model\UserSession            $userSession
+ * @property \Model\Webhook                $webhook
  */
 abstract class Base
 {

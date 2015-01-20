@@ -1,8 +1,8 @@
 #!/bin/bash
 
-css="base links title table form button alert tooltip header board project task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive font-awesome.min jquery-ui-1.10.4.custom chosen.min"
-js="jquery-1.11.1.min jquery-ui-1.10.4.custom.min jquery.ui.touch-punch.min chosen.jquery.min minify.min"
-minify="base board task analytic init"
+css="base links title table form button alert tooltip header board project task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive jquery-ui-1.10.4.custom chosen.min fullcalendar.min font-awesome.min"
+js="jquery-1.11.1.min jquery-ui-1.10.4.custom.min jquery.ui.touch-punch.min chosen.jquery.min moment.min fullcalendar.min minify.min"
+minify="base board calendar task analytic init"
 
 rm -f assets/js/minify* 2>/dev/null
 rm -f assets/js/app.js 2>/dev/null

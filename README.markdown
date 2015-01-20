@@ -16,6 +16,8 @@ Official website: <http://kanboard.net>
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fguillot/kanboard/badges/quality-score.png?s=2b6490781608657cc8c43d02285bfafb4f489528)](https://scrutinizer-ci.com/g/fguillot/kanboard/)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 Features
 --------
 
@@ -97,6 +99,7 @@ Documentation
 - [Installation on Centos](docs/centos-installation.markdown)
 - [Installation on FreeBSD](docs/freebsd-installation.markdown)
 - [Installation on Windows Server with IIS](docs/windows-iis-installation.markdown)
+- [Installation on Heroku](docs/heroku.markdown)
 - [Example with Nginx + HTTPS + SPDY + PHP-FPM](docs/nginx-ssl-php-fpm.markdown)
 
 #### Database
@@ -155,6 +158,7 @@ Contributors:
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
 - [Gavlepeter](https://github.com/gavlepeter)
+- [Iterate From 0](https://github.com/freebsd-kanboard)
 - [Jan Dittrich](https://github.com/jdittrich)
 - [Janne Mäntyharju](https://github.com/JanneMantyharju)
 - [Jesusaplsoft](https://github.com/jesusaplsoft)
@@ -169,6 +173,7 @@ Contributors:
 - [Mauro Mariño](https://github.com/moromarino)
 - [Maxime](https://github.com/EpocDotFr)
 - [Mgro](https://github.com/mgro)
+- [Michael Lüpkes](https://github.com/mluepkes)
 - [Mihailov Vasilievic Filho](https://github.com/mihailov-vf)
 - [Moraxy](https://github.com/moraxy)
 - [Nala Ginrut](https://github.com/NalaGinrut)

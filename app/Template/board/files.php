@@ -6,7 +6,7 @@
             $this->e($file['name']),
             'file',
             'download',
-            array('file_id' => $file['id'], 'task_id' => $file['task_id'])
+            array('file_id' => $file['id'], 'task_id' => $file['task_id'], 'project_id' => $task['project_id'])
         ) ?>
 
         <br/>

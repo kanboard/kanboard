@@ -14,7 +14,7 @@
     <?= $this->formHidden('project_id', $values) ?>
 
     <?= $this->formLabel(t('Name'), 'name') ?>
-    <?= $this->formText('name', $values, $errors, array('autofocus required')) ?>
+    <?= $this->formText('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
@@ -30,7 +30,7 @@
     <?= $this->formHidden('id', $default_swimlane) ?>
 
     <?= $this->formLabel(t('Rename'), 'default_swimlane') ?>
-    <?= $this->formText('default_swimlane', $default_swimlane, array(), array('autofocus required')) ?><br/>
+    <?= $this->formText('default_swimlane', $default_swimlane, array(), array('autofocus', 'required', 'maxlength="50"')) ?><br/>
 
     <?= $this->formCheckbox('show_default_swimlane', t('Show default swimlane'), 1, isset($default_swimlane['show_default_swimlane']) && $default_swimlane['show_default_swimlane'] == 1) ?>
 

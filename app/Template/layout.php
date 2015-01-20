@@ -14,6 +14,7 @@
             <?= $this->js('assets/js/app.js') ?>
         <?php endif ?>
 
+        <?= $this->css($this->u('app', 'colors'), false) ?>
         <?= $this->css('assets/css/app.css') ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">

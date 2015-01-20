@@ -10,7 +10,7 @@
     <?= $this->formHidden('task_id', $values) ?>
 
     <?= $this->formLabel(t('Title'), 'title') ?>
-    <?= $this->formText('title', $values, $errors, array('required autofocus')) ?><br/>
+    <?= $this->formText('title', $values, $errors, array('required', 'autofocus', 'maxlength="50"')) ?><br/>
 
     <?= $this->formLabel(t('Status'), 'status') ?>
     <?= $this->formSelect('status', $status_list, $values, $errors) ?><br/>

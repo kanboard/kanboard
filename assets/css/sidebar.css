@@ -13,6 +13,7 @@
     left: 0px;
     top: 0;
     max-width: 250px;
+    min-width: 200px;
     padding: 10px;
     padding-top: 0;
     border: 1px solid #ddd;

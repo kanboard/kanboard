@@ -1,6 +1,6 @@
 <?php if ($not_editable): ?>
 
-<div class="task-board task-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>">
+<div class="task-board color-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>">
 
     <?= $this->a('#'.$task['id'], 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
 
@@ -30,7 +30,7 @@
 
 <?php else: ?>
 
-<div class="task-board draggable-item task-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>"
+<div class="task-board draggable-item color-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>"
      data-task-id="<?= $task['id'] ?>"
      data-owner-id="<?= $task['owner_id'] ?>"
      data-category-id="<?= $task['category_id'] ?>"

@@ -13,6 +13,23 @@ use Event\TaskEvent;
 class TaskStatus extends Base
 {
     /**
+     * Return the list of statuses
+     *
+     * @access public
+     * @param  boolean   $prepend  Prepend default value
+     * @return array
+     */
+    public function getList($prepend = false)
+    {
+        $listing = $prepend ? array(-1 => t('All status')) : array();
+
+        return $listing + array(
+            Task::STATUS_OPEN => t('Open'),
+            Task::STATUS_CLOSED => t('Closed'),
+        );
+    }
+
+    /**
      * Return true if the task is closed
      *
      * @access public

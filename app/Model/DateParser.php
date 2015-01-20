@@ -99,6 +99,18 @@ class DateParser extends Base
     }
 
     /**
+     * Get a timetstamp from an ISO date format
+     *
+     * @access public
+     * @param  string   $date   Date format
+     * @return integer
+     */
+    public function getTimestampFromIsoFormat($date)
+    {
+        return $this->resetDateToMidnight(strtotime($date));
+    }
+
+    /**
      * Format date (form display)
      *
      * @access public

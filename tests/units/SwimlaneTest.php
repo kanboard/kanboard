@@ -40,7 +40,7 @@ class SwimlaneTest extends Base
         $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
         $this->assertEquals(2, $s->create(1, 'Swimlane #2'));
 
-        $swimlanes = $s->getSwimlanesList(1);
+        $swimlanes = $s->getList(1);
         $expected = array('Default swimlane', 'Swimlane #1', 'Swimlane #2');
 
         $this->assertEquals($expected, $swimlanes);
