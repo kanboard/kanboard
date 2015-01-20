@@ -48,7 +48,7 @@ class Tasklink extends Base
             'values' => $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
-            'task_list' => $this->taskFinder->getList($task['project_id'], Task::STATUS_OPEN, $task['id']),
+            'task_list' => $this->taskFinder->getList($task['project_id'], TaskModel::STATUS_OPEN, $task['id']),
             'task' => $task,
         )));
     }
@@ -74,17 +74,7 @@ class Tasklink extends Base
                 $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#links');
             }
             else {
-                if ($this->taskLink->isUniqueConstraintFailed()) {
-                    $errors = array();
-                    $errors['task_inverse_id'] = array(t('the exact same link already exists'));
-                }
-                else if ($this->taskLink->isForeignKeyConstraintFailed()) {
-                    $errors = array();
-                    $errors['task_inverse_id'] = array(t('this linked task id doesn\'t exist'));
-                }
-                else {
-                    $this->session->flashError(t('Unable to add the link:').' '.t('the exact same link already exists').' '.t('or').' '.t('this linked task id doesn\'t exist'));
-                }
+                $this->session->flashError(t('Unable to add the link.'));
             }
         }
 
@@ -128,17 +118,7 @@ class Tasklink extends Base
                 $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#links');
             }
             else {
-                if ($this->taskLink->isUniqueConstraintFailed()) {
-                    $errors = array();
-                    $errors['task_inverse_id'] = array(t('the exact same link already exists'));
-                }
-                else if ($this->taskLink->isForeignKeyConstraintFailed()) {
-                    $errors = array();
-                    $errors['task_inverse_id'] = array(t('this linked task id doesn\'t exist'));
-                }
-                else {
-                    $this->session->flashError(t('Unable to update the link:').' '.t('the exact same link already exists').' '.t('or').' '.t('this linked task id doesn\'t exist'));
-                }
+                $this->session->flashError(t('Unable to update the link.'));
             }
         }
         $this->edit($values, $errors);

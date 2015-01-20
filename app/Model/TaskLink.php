@@ -28,13 +28,19 @@ class TaskLink extends Base
      * @access public
      * @param integer $link_id
      *            Task link id
+     * @param integer $task_id
+     *            Task id
+     * @param integer $task_inverse_id
+     *            Inverse task id
      * @return boolean
      */
-    public function exists($link_id)
+    public function exists($link_id, $task_id, $task_inverse_id)
     {
         return $this->db->table(self::TABLE)
-            ->eq('id', $link_id)
-            ->count() > 0;
+            ->eq('link_id', $link_id)
+            ->eq('task_id', $task_id)
+            ->eq('task_inverse_id', $task_inverse_id)
+            ->count() === 1;
     }
 
     /**
@@ -240,16 +246,6 @@ class TaskLink extends Base
         });
     }
 
-    public function isUniqueConstraintFailed()
-    {
-        return $this->search($this->db->getLogMessages(), 'UNIQUE') || $this->search($this->db->getLogMessages(), 'Duplicata');
-    }
-
-    public function isForeignKeyConstraintFailed()
-    {
-        return $this->search($this->db->getLogMessages(), 'FOREIGN KEY');
-    }
-
     /**
      * Validate link creation
      *
@@ -265,12 +261,6 @@ class TaskLink extends Base
             $v->execute(),
             $v->getErrors()
         );
-        // TODO Add Validators\NotEquals in simple-validator
-        if ($res[0] && $values['task_id'] == $values['task_inverse_id']) {
-            $v->addError('task_inverse_id', t('a task can not be linked to itself'));
-            $res[0] = false;
-            $res[1] = $v->getErrors();
-        }
         return $res;
     }
 
@@ -287,19 +277,11 @@ class TaskLink extends Base
         $rules = array(
             new Validators\Required('id', t('The id is required'))
         );
-        
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-        
         $res = array(
             $v->execute(),
             $v->getErrors()
         );
-        // TODO Add Validators\NotEquals in simple-validator
-        if ($res[0] && $values['task_id'] == $values['task_inverse_id']) {
-            $v->addError('task_inverse_id', t('a task can not be linked to itself'));
-            $res[0] = false;
-            $res[1] = $v->getErrors();
-        }
         return $res;
     }
 
@@ -318,10 +300,12 @@ class TaskLink extends Base
             new Validators\Integer('id', t('The id must be an integer')),
             new Validators\Integer('link_id', t('The link id must be an integer')),
             new Validators\Integer('task_id', t('The task id must be an integer')),
-            new Validators\Integer('task_inverse_id', t('The related task id must be an integer'))
+            new Validators\Integer('task_inverse_id', t('The related task id must be an integer')),
+            new Validators\NotEquals('task_inverse_id', 'task_id', t('A task can not be linked to itself')),
+            new Validators\Exists('task_inverse_id', t('This linked task id doesn\'t exist'), $this->db->getConnection(), Task::TABLE, 'id'),
+            new Validators\Unique(array('task_inverse_id', 'link_id', 'task_id'), t('The exact same link already exists'), $this->db->getConnection(), self::TABLE),
         );
     }
-    
 
     /**
      * Return true if needle is part of a string in the string haystack
