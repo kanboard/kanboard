@@ -160,15 +160,16 @@ $server->register('createUser', function($username, $password, $name = '', $emai
 $server->register('createLdapUser', function($username = '', $email = '', $is_admin = 0, $default_project_id = 0) use ($container) {
 
     $ldap = new Auth\Ldap($container);
-    $res = $ldap->lookup($username, $email);
+    $user = $ldap->lookup($username, $email);
 
-    if (!$res)
+    if (! $user) {
         return false;
+    }
 
     $values = array(
-        'username' => $res['username'],
-        'name' => $res['name'],
-        'email' => $res['email'],
+        'username' => $user['username'],
+        'name' => $user['name'],
+        'email' => $user['email'],
         'is_ldap_user' => 1,
         'is_admin' => $is_admin,
         'default_project_id' => $default_project_id,
