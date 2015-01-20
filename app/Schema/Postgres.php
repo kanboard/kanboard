@@ -5,7 +5,33 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 22;
+const VERSION = 23;
+
+function version_23($pdo)
+{
+    $pdo->exec("CREATE TABLE links
+        (
+            id SERIAL PRIMARY KEY,
+            project_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            is_inverse INTEGER NOT NULL DEFAULT 0,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8");
+    $pdo->exec("CREATE TABLE task_has_links
+        (
+            id SERIAL PRIMARY KEY,
+            link_id INTEGER NOT NULL,
+            task_id INTEGER NOT NULL,
+            task_inverse_id INTEGER NOT NULL,
+            PRIMARY KEY(id),
+            FOREIGN KEY(link_id) REFERENCES links(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8");
+    $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, task_inverse_id)");
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('project_links', ''));
+}
 
 function version_22($pdo)
 {

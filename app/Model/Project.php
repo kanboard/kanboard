@@ -307,7 +307,7 @@ class Project extends Base
             return false;
         }
 
-        foreach (array('board', 'category', 'projectPermission', 'action') as $model) {
+        foreach (array('board', 'category', 'projectPermission', 'action', 'link') as $model) {
 
             if (! $this->$model->duplicate($project_id, $clone_project_id)) {
                 $this->db->cancelTransaction();
@@ -356,6 +356,8 @@ class Project extends Base
         $this->category->createDefaultCategories($project_id);
 
         $this->db->closeTransaction();
+
+        $this->link->createDefaultLinks($project_id);
 
         return (int) $project_id;
     }

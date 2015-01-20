@@ -596,6 +596,7 @@ class Helper
     {
         return strpos($haystack, $needle) !== false;
     }
+    
 
     /**
      * Return a value from a dictionary

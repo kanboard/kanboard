@@ -205,3 +205,8 @@ a.task-board-nobody {
     margin-bottom: 25px;
     padding: 3px;
 }
+
+.task-closed {
+    text-decoration: line-through;
+}
+

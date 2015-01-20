@@ -16,6 +16,13 @@
         'not_editable' => true
     )) ?>
 
+    <?= Helper\template('tasklink/show', array(
+        'task' => $task,
+        'links' => $links,
+        'project' => $project,
+        'not_editable' => true
+    )) ?>
+    
     <?= $this->render('task/comments', array(
         'task' => $task,
         'comments' => $comments,

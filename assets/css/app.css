@@ -231,6 +231,8 @@ textarea {
 
 select {
     max-width: 95%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 ::-webkit-input-placeholder {
@@ -591,6 +593,9 @@ div.ui-tooltip {
 
 .tooltip-large {
     width: 550px;
+}
+.tooltip-tasklinks ul{
+    padding-left: 13px;
 }/* header */
 header {
     margin-top: 10px;
@@ -2005,6 +2010,10 @@ body .ui-tooltip {
 .ui-corner-right,
 .ui-corner-br {
 	border-bottom-right-radius: 4px;
+}
+
+.task-closed {
+    text-decoration: line-through;
 }
 
 /* Overlays */
