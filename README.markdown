@@ -173,6 +173,7 @@ Contributors:
 - [Mauro Mariño](https://github.com/moromarino)
 - [Maxime](https://github.com/EpocDotFr)
 - [Mgro](https://github.com/mgro)
+- [Michael Lüpkes](https://github.com/mluepkes)
 - [Mihailov Vasilievic Filho](https://github.com/mihailov-vf)
 - [Moraxy](https://github.com/moraxy)
 - [Nala Ginrut](https://github.com/NalaGinrut)
