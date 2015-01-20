@@ -33,6 +33,9 @@
 </form>
 <?php else: ?>
 <div class="alert alert-info">
-    You need to <?= $this->a('add link labels', 'link', 'index', array('project_id' => $task['project_id'])) ?> to this project before to link this task to another one.
+    <?= t('You need to add link labels to this project before to link this task to another one.') ?>
+    <ul>
+        <li><?= $this->a(t('Add link labels'), 'link', 'index', array('project_id' => $task['project_id'])) ?></li>
+    </ul>
 </div>
 <?php endif ?>
