@@ -9,7 +9,7 @@
     <?= $this->formHidden('is_ldap_user', $values) ?>
 
     <?= $this->formLabel(t('Username'), 'username') ?>
-    <?= $this->formText('username', $values, $errors, array('required', $values['is_ldap_user'] == 1 ? 'readonly' : '')) ?><br/>
+    <?= $this->formText('username', $values, $errors, array('required', $values['is_ldap_user'] == 1 ? 'readonly' : '', 'maxlength="50"')) ?><br/>
 
     <?= $this->formLabel(t('Name'), 'name') ?>
     <?= $this->formText('name', $values, $errors) ?><br/>

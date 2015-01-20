@@ -10,7 +10,7 @@
         <?= $this->formCsrf() ?>
 
         <?= $this->formLabel(t('Username'), 'username') ?>
-        <?= $this->formText('username', $values, $errors, array('autofocus', 'required')) ?><br/>
+        <?= $this->formText('username', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?><br/>
 
         <?= $this->formLabel(t('Name'), 'name') ?>
         <?= $this->formText('name', $values, $errors) ?><br/>

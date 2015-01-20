@@ -17,7 +17,7 @@
 
     <div class="form-column">
         <?= $this->formLabel(t('Title'), 'title') ?>
-        <?= $this->formText('title', $values, $errors, array('autofocus', 'required'), 'form-input-large') ?><br/>
+        <?= $this->formText('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"'), 'form-input-large') ?><br/>
 
         <?= $this->formLabel(t('Description'), 'description') ?>
 

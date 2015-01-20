@@ -10,7 +10,7 @@
     <?= $this->formHidden('project_id', $values) ?>
 
     <?= $this->formLabel(t('Name'), 'name') ?>
-    <?= $this->formText('name', $values, $errors, array('autofocus required')) ?>
+    <?= $this->formText('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
