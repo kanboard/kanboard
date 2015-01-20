@@ -306,21 +306,4 @@ class TaskLink extends Base
             new Validators\Unique(array('task_inverse_id', 'link_id', 'task_id'), t('The exact same link already exists'), $this->db->getConnection(), self::TABLE),
         );
     }
-
-    /**
-     * Return true if needle is part of a string in the string haystack
-     *
-     * @param  array   $haystack    Haystack
-     * @param  string  $needle      Needle
-     * @return boolean
-     */
-    private function search($haystack, $needle)
-    {
-        foreach ($haystack as $entry) {
-            if (strstr($entry, $needle)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
