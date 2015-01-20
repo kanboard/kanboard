@@ -157,6 +157,26 @@ $server->register('createUser', function($username, $password, $name = '', $emai
     return $container['user']->create($values);
 });
 
+$server->register('createLdapUser', function($username = '', $email = '', $is_admin = 0, $default_project_id = 0) use ($container) {
+
+    $ldap = new Auth\Ldap($container);
+    $res = $ldap->lookup($username, $email);
+
+    if (!$res)
+        return false;
+
+    $values = array(
+        'username' => $res['username'],
+        'name' => $res['name'],
+        'email' => $res['email'],
+        'is_ldap_user' => 1,
+        'is_admin' => $is_admin,
+        'default_project_id' => $default_project_id,
+    );
+
+    return $container['user']->create($values);
+});
+
 $server->register('updateUser', function($id, $username = null, $name = null, $email = null, $is_admin = null, $default_project_id = null) use ($container) {
 
     $values = array(
