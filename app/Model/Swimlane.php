@@ -161,20 +161,20 @@ class Swimlane extends Base
      *
      * @access public
      * @param  integer   $project_id    Project id
+     * @param  boolean   $prepend       Prepend default value
      * @return array
      */
-    public function getSwimlanesList($project_id)
+    public function getList($project_id, $prepend = false)
     {
-        $swimlanes = $this->db->table(self::TABLE)
-                              ->eq('project_id', $project_id)
-                              ->orderBy('position', 'asc')
-                              ->listing('id', 'name');
+        $swimlanes = array();
+        $swimlanes[] = $this->db->table(Project::TABLE)->eq('id', $project_id)->findOneColumn('default_swimlane');
 
-        $swimlanes[0] = $this->db->table(Project::TABLE)
-                                     ->eq('id', $project_id)
-                                     ->findOneColumn('default_swimlane');
+        $swimlanes = array_merge(
+            $swimlanes,
+            $this->db->table(self::TABLE)->eq('project_id', $project_id)->orderBy('name', 'asc')->listing('id', 'name')
+        );
 
-        return $swimlanes;
+        return $prepend ? array(-1 => t('All swimlanes')) + $swimlanes : $swimlanes;
     }
 
     /**

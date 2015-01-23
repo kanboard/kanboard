@@ -7,22 +7,22 @@
         <?php endif ?>
     </div>
     <section>
-    <?php if (empty($users)): ?>
+    <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No user') ?></p>
     <?php else: ?>
         <table>
             <tr>
-                <th><?= $this->order(t('Id'), 'id', $pagination) ?></th>
-                <th><?= $this->order(t('Username'), 'username', $pagination) ?></th>
-                <th><?= $this->order(t('Name'), 'name', $pagination) ?></th>
-                <th><?= $this->order(t('Email'), 'email', $pagination) ?></th>
-                <th><?= $this->order(t('Administrator'), 'is_admin', $pagination) ?></th>
-                <th><?= $this->order(t('Default project'), 'default_project_id', $pagination) ?></th>
-                <th><?= $this->order(t('Notifications'), 'notifications_enabled', $pagination) ?></th>
+                <th><?= $paginator->order(t('Id'), 'id') ?></th>
+                <th><?= $paginator->order(t('Username'), 'username') ?></th>
+                <th><?= $paginator->order(t('Name'), 'name') ?></th>
+                <th><?= $paginator->order(t('Email'), 'email') ?></th>
+                <th><?= $paginator->order(t('Administrator'), 'is_admin') ?></th>
+                <th><?= $paginator->order(t('Default project'), 'default_project_id') ?></th>
+                <th><?= $paginator->order(t('Notifications'), 'notifications_enabled') ?></th>
                 <th><?= t('External accounts') ?></th>
-                <th><?= $this->order(t('Account type'), 'is_ldap_user', $pagination) ?></th>
+                <th><?= $paginator->order(t('Account type'), 'is_ldap_user') ?></th>
             </tr>
-            <?php foreach ($users as $user): ?>
+            <?php foreach ($paginator->getCollection() as $user): ?>
             <tr>
                 <td>
                     <?= $this->a('#'.$user['id'], 'user', 'show', array('user_id' => $user['id'])) ?>
@@ -66,7 +66,7 @@
             <?php endforeach ?>
         </table>
 
-        <?= $this->paginate($pagination) ?>
+        <?= $paginator ?>
     <?php endif ?>
     </section>
 </section>

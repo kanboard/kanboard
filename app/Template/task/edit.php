@@ -9,7 +9,7 @@
     <div class="form-column">
 
         <?= $this->formLabel(t('Title'), 'title') ?>
-        <?= $this->formText('title', $values, $errors, array('required')) ?><br/>
+        <?= $this->formText('title', $values, $errors, array('required', 'maxlength="200"')) ?><br/>
 
         <?= $this->formLabel(t('Description'), 'description') ?>
 

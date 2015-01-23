@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fb6eb8ebc1ba83b1b3a060f67d770ad3",
+    "hash": "b20bc90f39f04bf9d6828329d56cdc75",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -47,7 +47,7 @@
         },
         {
             "name": "fguillot/json-rpc",
-            "version": "dev-master",
+            "version": "v0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/JsonRPC.git",
@@ -84,16 +84,16 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "dev-master",
+            "version": "v0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "268b3389d2bc3c92ef749a63440d17bd75e2a628"
+                "reference": "f36d8e0191e2fa6f033baf94bc35ec6a00798bc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/268b3389d2bc3c92ef749a63440d17bd75e2a628",
-                "reference": "268b3389d2bc3c92ef749a63440d17bd75e2a628",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/f36d8e0191e2fa6f033baf94bc35ec6a00798bc0",
+                "reference": "f36d8e0191e2fa6f033baf94bc35ec6a00798bc0",
                 "shasum": ""
             },
             "require": {
@@ -117,11 +117,11 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2015-01-03 00:32:58"
+            "time": "2015-01-18 22:35:36"
         },
         {
             "name": "fguillot/simple-validator",
-            "version": "dev-master",
+            "version": "v0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleValidator.git",
@@ -158,7 +158,7 @@
         },
         {
             "name": "fguillot/simpleLogger",
-            "version": "dev-master",
+            "version": "v0.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleLogger.git",
@@ -192,45 +192,6 @@
             "description": "PHP library to write logs (compatible with PSR-3)",
             "homepage": "https://github.com/fguillot/simpleLogger",
             "time": "2015-01-02 03:40:21"
-        },
-        {
-            "name": "ircmaxell/password-compat",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ircmaxell/password_compat.git",
-                "reference": "1fc1521b5e9794ea77e4eca30717be9635f1d4f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ircmaxell/password_compat/zipball/1fc1521b5e9794ea77e4eca30717be9635f1d4f4",
-                "reference": "1fc1521b5e9794ea77e4eca30717be9635f1d4f4",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "lib/password.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anthony Ferrara",
-                    "email": "ircmaxell@ircmaxell.com",
-                    "homepage": "http://blog.ircmaxell.com"
-                }
-            ],
-            "description": "A compatibility library for the proposed simplified password hashing algorithm: https://wiki.php.net/rfc/password_hash",
-            "homepage": "https://github.com/ircmaxell/password_compat",
-            "keywords": [
-                "hashing",
-                "password"
-            ],
-            "time": "2013-04-30 19:58:08"
         },
         {
             "name": "lusitanian/oauth",
@@ -598,12 +559,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "fguillot/simple-validator": 20,
         "swiftmailer/swiftmailer": 0,
-        "fguillot/json-rpc": 20,
-        "fguillot/picodb": 20,
-        "symfony/console": 0,
-        "fguillot/simplelogger": 20
+        "symfony/console": 0
     },
     "prefer-stable": false,
     "platform": {

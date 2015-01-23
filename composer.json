@@ -1,22 +1,22 @@
 {
     "require": {
         "ext-mbstring": "*",
-        "ircmaxell/password-compat": "1.0.3",
-        "fguillot/simple-validator": "dev-master",
+        "fguillot/simple-validator": "0.0.1",
         "swiftmailer/swiftmailer": "@stable",
-        "fguillot/json-rpc": "dev-master",
-        "fguillot/picodb": "dev-master",
+        "fguillot/json-rpc": "0.0.1",
+        "fguillot/picodb": "0.0.1",
         "erusev/parsedown": "1.1.1",
         "lusitanian/oauth": "0.3.5",
         "pimple/pimple": "~3.0",
         "symfony/console": "@stable",
         "symfony/event-dispatcher": "~2.6",
-        "fguillot/simpleLogger": "dev-master"
+        "fguillot/simpleLogger": "0.0.1"
     },
     "autoload": {
         "psr-0": {"": "app/"},
         "files": [
-            "app/functions.php"
+            "app/functions.php",
+            "app/Libs/password.php"
         ]
     },
     "require-dev": {

@@ -148,10 +148,10 @@ class GitlabWebhook extends Base
      */
     public function handleIssueEvent(array $payload)
     {
-        switch ($payload['object_attributes']['state']) {
-            case 'opened':
+        switch ($payload['object_attributes']['action']) {
+            case 'open':
                 return $this->handleIssueOpened($payload['object_attributes']);
-            case 'closed':
+            case 'close':
                 return $this->handleIssueClosed($payload['object_attributes']);
         }
 

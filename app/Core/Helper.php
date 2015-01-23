@@ -104,9 +104,9 @@ class Helper
      * @param  string   $filename   Filename
      * @return string
      */
-    public function css($filename)
+    public function css($filename, $is_file = true)
     {
-        return '<link rel="stylesheet" href="'.$filename.'?'.filemtime($filename).'" media="screen">';
+        return '<link rel="stylesheet" href="'.$filename.($is_file ? '?'.filemtime($filename) : '').'" media="screen">';
     }
 
     /**
@@ -417,7 +417,7 @@ class Helper
     }
 
     /**
-     * URL query string
+     * Generate controller/action url for templates
      *
      * u('task', 'show', array('task_id' => $task_id))
      *
@@ -429,83 +429,40 @@ class Helper
      */
     public function u($controller, $action, array $params = array(), $csrf = false)
     {
-        $html = '?controller='.$controller.'&amp;action='.$action;
+        $values = array(
+            'controller' => $controller,
+            'action' => $action,
+        );
 
         if ($csrf) {
             $params['csrf_token'] = Security::getCSRFToken();
         }
 
-        foreach ($params as $key => $value) {
-            $html .= '&amp;'.$key.'='.$value;
-        }
+        $values += $params;
 
-        return $html;
+        return '?'.http_build_query($values, '', '&amp;');
     }
 
     /**
-     * Pagination links
+     * Generate controller/action url
      *
-     * @param  array    $pagination    Pagination information
+     * l('task', 'show', array('task_id' => $task_id))
+     *
+     * @param  string   $controller  Controller name
+     * @param  string   $action      Action name
+     * @param  array    $params      Url parameters
      * @return string
      */
-    public function paginate(array $pagination)
+    public function url($controller, $action, array $params = array())
     {
-        extract($pagination);
+        $values = array(
+            'controller' => $controller,
+            'action' => $action,
+        );
 
-        if ($pagination['offset'] === 0 && ($total - $pagination['offset']) <= $limit) {
-            return '';
-        }
+        $values += $params;
 
-        $html = '<div class="pagination">';
-        $html .= '<span class="pagination-previous">';
-
-        if ($pagination['offset'] > 0) {
-            $offset = $pagination['offset'] - $limit;
-            $html .= $this->a('&larr; '.t('Previous'), $controller, $action, $params + compact('offset', 'order', 'direction'));
-        }
-        else {
-            $html .= '&larr; '.t('Previous');
-        }
-
-        $html .= '</span>';
-        $html .= '<span class="pagination-next">';
-
-        if (($total - $pagination['offset']) > $limit) {
-            $offset = $pagination['offset'] + $limit;
-            $html .= $this->a(t('Next').' &rarr;', $controller, $action, $params + compact('offset', 'order', 'direction'));
-        }
-        else {
-            $html .= t('Next').' &rarr;';
-        }
-
-        $html .= '</span>';
-        $html .= '</div>';
-
-        return $html;
-    }
-
-    /**
-     * Column sorting (work with pagination)
-     *
-     * @param  string   $label         Column title
-     * @param  string   $column        SQL column name
-     * @param  array    $pagination    Pagination information
-     * @return string
-     */
-    public function order($label, $column, array $pagination)
-    {
-        extract($pagination);
-
-        $prefix = '';
-
-        if ($order === $column) {
-            $prefix = $direction === 'DESC' ? '&#9660; ' : '&#9650; ';
-            $direction = $direction === 'DESC' ? 'ASC' : 'DESC';
-        }
-
-        $order = $column;
-
-        return $prefix.$this->a($label, $controller, $action, $params + compact('offset', 'order', 'direction'));
+        return '?'.http_build_query($values);
     }
 
     /**
@@ -655,5 +612,56 @@ class Helper
         }
 
         return $default_value;
+    }
+
+    /**
+     * Get calendar translations
+     *
+     * @access public
+     * @return string
+     */
+    public function getCalendarTranslations()
+    {
+        return json_encode(array(
+            'Today' => t('Today'),
+            'Jan' => t('Jan'),
+            'Feb' => t('Feb'),
+            'Mar' => t('Mar'),
+            'Apr' => t('Apr'),
+            'May' => t('May'),
+            'Jun' => t('Jun'),
+            'Jul' => t('Jul'),
+            'Aug' => t('Aug'),
+            'Sep' => t('Sep'),
+            'Oct' => t('Oct'),
+            'Nov' => t('Nov'),
+            'Dec' => t('Dec'),
+            'January' => t('January'),
+            'February' => t('February'),
+            'March' => t('March'),
+            'April' => t('April'),
+            'May' => t('May'),
+            'June' => t('June'),
+            'July' => t('July'),
+            'August' => t('August'),
+            'September' => t('September'),
+            'October' => t('October'),
+            'November' => t('November'),
+            'December' => t('December'),
+            'Sunday' => t('Sunday'),
+            'Monday' => t('Monday'),
+            'Tuesday' => t('Tuesday'),
+            'Wednesday' => t('Wednesday'),
+            'Thursday' => t('Thursday'),
+            'Friday' => t('Friday'),
+            'Saturday' => t('Saturday'),
+            'Sun' => t('Sun'),
+            'Mon' => t('Mon'),
+            'Tue' => t('Tue'),
+            'Wed' => t('Wed'),
+            'Thu' => t('Thu'),
+            'Fri' => t('Fri'),
+            'Sat' => t('Sat'),
+        ));
     }
 }

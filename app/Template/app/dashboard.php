@@ -14,9 +14,9 @@
     </div>
     <section id="dashboard">
         <div class="dashboard-left-column">
-            <?= $this->render('app/projects', array('projects' => $projects, 'pagination' => $project_pagination)) ?>
-            <?= $this->render('app/tasks', array('tasks' => $tasks, 'pagination' => $task_pagination)) ?>
-            <?= $this->render('app/subtasks', array('subtasks' => $subtasks, 'pagination' => $subtask_pagination)) ?>
+            <?= $this->render('app/projects', array('paginator' => $project_paginator)) ?>
+            <?= $this->render('app/tasks', array('paginator' => $task_paginator)) ?>
+            <?= $this->render('app/subtasks', array('paginator' => $subtask_paginator)) ?>
         </div>
         <div class="dashboard-right-column">
             <h2><?= t('Activity stream') ?></h2>

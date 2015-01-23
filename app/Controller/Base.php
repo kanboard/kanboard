@@ -19,6 +19,9 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * @property \Core\Session                 $session
  * @property \Core\Template                $template
+ * @property \Core\Paginator               $paginator
+ * @property \Integration\GithubWebhook    $githubWebhook
+ * @property \Integration\GitlabWebhook    $gitlabWebhook
  * @property \Model\Acl                    $acl
  * @property \Model\Authentication         $authentication
  * @property \Model\Action                 $action
@@ -34,8 +37,10 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\Project                $project
  * @property \Model\ProjectPermission      $projectPermission
  * @property \Model\ProjectAnalytic        $projectAnalytic
+ * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectDailySummary    $projectDailySummary
  * @property \Model\SubTask                $subTask
+ * @property \Model\Swimlane               $swimlane
  * @property \Model\Task                   $task
  * @property \Model\TaskCreation           $taskCreation
  * @property \Model\TaskModification       $taskModification
@@ -43,6 +48,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\TaskHistory            $taskHistory
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder
+ * @property \Model\TaskFilter             $taskFilter
  * @property \Model\TaskPosition           $taskPosition
  * @property \Model\TaskPermission         $taskPermission
  * @property \Model\TaskStatus             $taskStatus

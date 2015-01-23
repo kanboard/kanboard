@@ -66,6 +66,48 @@ class SubTask extends Base
     }
 
     /**
+     * Add subtask status status to the resultset
+     *
+     * @access public
+     * @param  array    $subtasks   Subtasks
+     * @return array
+     */
+    public function addStatusName(array $subtasks)
+    {
+        $status = $this->getStatusList();
+
+        foreach ($subtasks as &$subtask) {
+            $subtask['status_name'] = $status[$subtask['status']];
+        }
+
+        return $subtasks;
+    }
+
+    /**
+     * Get the query to fetch subtasks assigned to a user
+     *
+     * @access public
+     * @param  integer    $user_id         User id
+     * @param  array      $status          List of status
+     * @return \PicoDb\Table
+     */
+    public function getUserQuery($user_id, array $status)
+    {
+        return $this->db->table(SubTask::TABLE)
+            ->columns(
+                SubTask::TABLE.'.*',
+                Task::TABLE.'.project_id',
+                Task::TABLE.'.color_id',
+                Project::TABLE.'.name AS project_name'
+            )
+            ->eq('user_id', $user_id)
+            ->in(SubTask::TABLE.'.status', $status)
+            ->join(Task::TABLE, 'id', 'task_id')
+            ->join(Project::TABLE, 'id', 'project_id', Task::TABLE)
+            ->filter(array($this, 'addStatusName'));
+    }
+
+    /**
      * Get all subtasks for a given task
      *
      * @access public
@@ -74,19 +116,14 @@ class SubTask extends Base
      */
     public function getAll($task_id)
     {
-        $status = $this->getStatusList();
-        $subtasks = $this->db->table(self::TABLE)
-                             ->eq('task_id', $task_id)
-                             ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
-                             ->join(User::TABLE, 'id', 'user_id')
-                             ->asc(self::TABLE.'.id')
-                             ->findAll();
-
-        foreach ($subtasks as &$subtask) {
-            $subtask['status_name'] = $status[$subtask['status']];
-        }
-
-        return $subtasks;
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('task_id', $task_id)
+                    ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
+                    ->join(User::TABLE, 'id', 'user_id')
+                    ->asc(self::TABLE.'.id')
+                    ->filter(array($this, 'addStatusName'))
+                    ->findAll();
     }
 
     /**
@@ -101,18 +138,13 @@ class SubTask extends Base
     {
         if ($more) {
 
-            $subtask = $this->db->table(self::TABLE)
-                             ->eq(self::TABLE.'.id', $subtask_id)
-                             ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
-                             ->join(User::TABLE, 'id', 'user_id')
-                             ->findOne();
-
-            if ($subtask) {
-                $status = $this->getStatusList();
-                $subtask['status_name'] = $status[$subtask['status']];
-            }
-
-            return $subtask;
+            return $this->db
+                        ->table(self::TABLE)
+                        ->eq(self::TABLE.'.id', $subtask_id)
+                        ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
+                        ->join(User::TABLE, 'id', 'user_id')
+                        ->filter(array($this, 'addStatusName'))
+                        ->findOne();
         }
 
         return $this->db->table(self::TABLE)->eq('id', $subtask_id)->findOne();

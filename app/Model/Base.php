@@ -23,6 +23,7 @@ use Pimple\Container;
  * @property \Model\Config             $config
  * @property \Model\DateParser         $dateParser
  * @property \Model\File               $file
+ * @property \Model\Helper             $helper
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\Notification       $notification
  * @property \Model\Project            $project

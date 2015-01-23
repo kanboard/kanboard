@@ -74,6 +74,11 @@ define('LDAP_ACCOUNT_FULLNAME', 'displayname');
 // Name of an attribute of the user account object which should be used as the email of the user.
 define('LDAP_ACCOUNT_EMAIL', 'mail');
 
+// Name of an attribute of the user account object which should be used as the id of the user.
+// Example for ActiveDirectory: 'samaccountname'
+// Example for OpenLDAP: 'uid'
+define('LDAP_ACCOUNT_ID', 'samaccountname');
+
 // Enable/disable Google authentication
 define('GOOGLE_AUTH', false);
 

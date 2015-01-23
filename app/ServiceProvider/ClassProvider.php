@@ -2,6 +2,7 @@
 
 namespace ServiceProvider;
 
+use Core\Paginator;
 use Model\Config;
 use Model\Project;
 use Model\Webhook;
@@ -28,10 +29,8 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectActivity',
             'ProjectAnalytic',
             'ProjectDailySummary',
-            'ProjectPaginator',
             'ProjectPermission',
             'SubTask',
-            'SubtaskPaginator',
             'SubtaskExport',
             'Swimlane',
             'Task',
@@ -39,8 +38,8 @@ class ClassProvider implements ServiceProviderInterface
             'TaskDuplication',
             'TaskExport',
             'TaskFinder',
+            'TaskFilter',
             'TaskModification',
-            'TaskPaginator',
             'TaskPermission',
             'TaskPosition',
             'TaskStatus',
@@ -51,10 +50,12 @@ class ClassProvider implements ServiceProviderInterface
             'Webhook',
         ),
         'Core' => array(
+            'Helper',
             'Template',
             'Session',
             'MemoryCache',
             'FileCache',
+            'Request',
         ),
         'Integration' => array(
             'GitlabWebhook',
@@ -75,5 +76,9 @@ class ClassProvider implements ServiceProviderInterface
                 };
             }
         }
+
+        $container['paginator'] = $container->factory(function ($c) {
+            return new Paginator($c);
+        });
     }
 }

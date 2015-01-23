@@ -258,16 +258,19 @@ class Board extends Base
      *
      * @access public
      * @param  integer   $project_id
+     * @param  boolean   $prepend       Prepend default value
      * @return array
      */
-    public function getColumnStats($project_id)
+    public function getColumnStats($project_id, $prepend = false)
     {
-        return $this->db
-                    ->table(Task::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->eq('is_active', 1)
-                    ->groupBy('column_id')
-                    ->listing('column_id', 'COUNT(*) AS total');
+        $listing = $this->db
+                        ->table(Task::TABLE)
+                        ->eq('project_id', $project_id)
+                        ->eq('is_active', 1)
+                        ->groupBy('column_id')
+                        ->listing('column_id', 'COUNT(*) AS total');
+
+        return $prepend ? array(-1 => t('All columns')) + $listing : $listing;
     }
 
     /**
@@ -287,11 +290,13 @@ class Board extends Base
      *
      * @access public
      * @param  integer  $project_id   Project id
+     * @param  boolean  $prepend      Prepend a default value
      * @return array
      */
-    public function getColumnsList($project_id)
+    public function getColumnsList($project_id, $prepend = false)
     {
-        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->listing('id', 'title');
+        $listing = $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->listing('id', 'title');
+        return $prepend ? array(-1 => t('All columns')) + $listing : $listing;
     }
 
     /**

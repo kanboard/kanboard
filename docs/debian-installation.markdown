@@ -24,8 +24,6 @@ rm kanboard-latest.zip
 Debian 6 (Squeeze)
 ------------------
 
-**Kanboard >= 1.0.10 require at least PHP 5.3.7 and Debian 6 provide PHP 5.3.3 by default**
-
 Install Apache and PHP:
 
 ```bash

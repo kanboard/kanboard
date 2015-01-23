@@ -95,7 +95,7 @@ class Project extends Base
     }
 
     /**
-     * Get all projects, optionaly fetch stats for each project and can check users permissions
+     * Get all projects
      *
      * @access public
      * @param  bool       $filter_permissions    If true, remove projects not allowed for the current user
@@ -188,7 +188,7 @@ class Project extends Base
      * @param  integer    $project_id    Project id
      * @return array
      */
-    public function getStats($project_id)
+    public function getTaskStats($project_id)
     {
         $stats = array();
         $stats['nb_active_tasks'] = 0;
@@ -205,6 +205,60 @@ class Project extends Base
         $stats['nb_inactive_tasks'] = $stats['nb_tasks'] - $stats['nb_active_tasks'];
 
         return $stats;
+    }
+
+    /**
+     * Get stats for each column of a project
+     *
+     * @access public
+     * @param  array    $project
+     * @return array
+     */
+    public function getColumnStats(array &$project)
+    {
+        $project['columns'] = $this->board->getColumns($project['id']);
+        $stats = $this->board->getColumnStats($project['id']);
+
+        foreach ($project['columns'] as &$column) {
+            $column['nb_tasks'] = isset($stats[$column['id']]) ? $stats[$column['id']] : 0;
+        }
+
+        return $project;
+    }
+
+    /**
+     * Apply column stats to a collection of projects (filter callback)
+     *
+     * @access public
+     * @param  array    $projects
+     * @return array
+     */
+    public function applyColumnStats(array $projects)
+    {
+        foreach ($projects as &$project) {
+            $this->getColumnStats($project);
+        }
+
+        return $projects;
+    }
+
+    /**
+     * Get project summary for a list of project
+     *
+     * @access public
+     * @param  array      $project_ids     List of project id
+     * @return \PicoDb\Table
+     */
+    public function getQueryColumnStats(array $project_ids)
+    {
+        if (empty($project_ids)) {
+            return $this->db->table(Project::TABLE)->limit(0);
+        }
+
+        return $this->db
+                    ->table(Project::TABLE)
+                    ->in('id', $project_ids)
+                    ->filter(array($this, 'applyColumnStats'));
     }
 
     /**

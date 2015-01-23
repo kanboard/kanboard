@@ -1,17 +1,17 @@
 <h2><?= t('My tasks') ?></h2>
-<?php if (empty($tasks)): ?>
+<?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>
     <table class="table-fixed">
         <tr>
-            <th class="column-8"><?= $this->order('Id', 'tasks.id', $pagination) ?></th>
-            <th class="column-20"><?= $this->order(t('Project'), 'project_name', $pagination) ?></th>
-            <th><?= $this->order(t('Task'), 'title', $pagination) ?></th>
-            <th class="column-20"><?= $this->order(t('Due date'), 'date_due', $pagination) ?></th>
+            <th class="column-8"><?= $paginator->order('Id', 'tasks.id') ?></th>
+            <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
+            <th><?= $paginator->order(t('Task'), 'title') ?></th>
+            <th class="column-20"><?= $paginator->order(t('Due date'), 'date_due') ?></th>
         </tr>
-        <?php foreach ($tasks as $task): ?>
+        <?php foreach ($paginator->getCollection() as $task): ?>
         <tr>
-            <td class="task-table task-<?= $task['color_id'] ?>">
+            <td class="task-table color-<?= $task['color_id'] ?>">
                 <?= $this->a('#'.$task['id'], 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
             <td>
@@ -27,5 +27,5 @@
         <?php endforeach ?>
     </table>
 
-    <?= $this->paginate($pagination) ?>
+    <?= $paginator ?>
 <?php endif ?>

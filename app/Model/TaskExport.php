@@ -24,7 +24,7 @@ class TaskExport extends Base
     public function export($project_id, $from, $to)
     {
         $tasks = $this->getTasks($project_id, $from, $to);
-        $swimlanes = $this->swimlane->getSwimlanesList($project_id);
+        $swimlanes = $this->swimlane->getList($project_id);
         $results = array($this->getColumns());
 
         foreach ($tasks as &$task) {

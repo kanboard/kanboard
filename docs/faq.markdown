@@ -45,14 +45,17 @@ The project [eAccelerator seems dead and not updated since 2012](https://github.
 We recommend to switch to the last version of PHP because it's bundled with [OPcache](http://php.net/manual/en/intro.opcache.php).
 
 
-Why the minimum requirement is PHP 5.3.7?
+Why the minimum requirement is PHP 5.3.3?
 -----------------------------------------
 
 Kanboard use the function `password_hash()` to crypt passwords but it's available only for PHP >= 5.5.
 
 However, there is a backport for [older versions of PHP](https://github.com/ircmaxell/password_compat#requirements).
-This library require at least PHP 5.3.7 to work correctly.
+This library require at least PHP 5.3.7 to work correctly. 
 
+Apparently, Centos and Debian backports security patches so PHP 5.3.3 should be ok.
+
+Kanboard v1.0.10 and v1.0.11 requires at least PHP 5.3.7 but this change has been reverted to be compatible with PHP 5.3.3 with Kanboard >= v1.0.12
 
 How to test Kanboard with the PHP built-in web server?
 ------------------------------------------------------

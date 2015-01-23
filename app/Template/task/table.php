@@ -1,18 +1,18 @@
 <table class="table-fixed table-small">
     <tr>
-        <th class="column-8"><?= $this->order(t('Id'), 'tasks.id', $pagination) ?></th>
-        <th class="column-8"><?= $this->order(t('Column'), 'tasks.column_id', $pagination) ?></th>
-        <th class="column-8"><?= $this->order(t('Category'), 'tasks.category_id', $pagination) ?></th>
-        <th><?= $this->order(t('Title'), 'tasks.title', $pagination) ?></th>
-        <th class="column-10"><?= $this->order(t('Assignee'), 'users.username', $pagination) ?></th>
-        <th class="column-10"><?= $this->order(t('Due date'), 'tasks.date_due', $pagination) ?></th>
-        <th class="column-10"><?= $this->order(t('Date created'), 'tasks.date_creation', $pagination) ?></th>
-        <th class="column-10"><?= $this->order(t('Date completed'), 'tasks.date_completed', $pagination) ?></th>
-        <th class="column-5"><?= $this->order(t('Status'), 'tasks.is_active', $pagination) ?></th>
+        <th class="column-8"><?= $paginator->order(t('Id'), 'tasks.id') ?></th>
+        <th class="column-8"><?= $paginator->order(t('Column'), 'tasks.column_id') ?></th>
+        <th class="column-8"><?= $paginator->order(t('Category'), 'tasks.category_id') ?></th>
+        <th><?= $paginator->order(t('Title'), 'tasks.title') ?></th>
+        <th class="column-10"><?= $paginator->order(t('Assignee'), 'users.username') ?></th>
+        <th class="column-10"><?= $paginator->order(t('Due date'), 'tasks.date_due') ?></th>
+        <th class="column-10"><?= $paginator->order(t('Date created'), 'tasks.date_creation') ?></th>
+        <th class="column-10"><?= $paginator->order(t('Date completed'), 'tasks.date_completed') ?></th>
+        <th class="column-5"><?= $paginator->order(t('Status'), 'tasks.is_active') ?></th>
     </tr>
-    <?php foreach ($tasks as $task): ?>
+    <?php foreach ($paginator->getCollection() as $task): ?>
     <tr>
-        <td class="task-table task-<?= $task['color_id'] ?>">
+        <td class="task-table color-<?= $task['color_id'] ?>">
             <?= $this->a('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
@@ -53,4 +53,4 @@
     <?php endforeach ?>
 </table>
 
-<?= $this->paginate($pagination) ?>
+<?= $paginator ?>
