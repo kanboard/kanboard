@@ -7,6 +7,9 @@ use Parsedown;
 
 class _ParsedownKanboard extends Parsedown
 {
+    private $link;
+    private $helper;
+    
     public function __construct($link, $helper) 
     {
         $this->link = $link;
@@ -18,7 +21,7 @@ class _ParsedownKanboard extends Parsedown
     protected function identifyTaskLink($Excerpt)
     {
         // Replace task #123 by a link to the task
-        if (preg_match('!#(\d+)!i', $Excerpt['text'], $matches))
+        if (!empty($this->link) && preg_match('!#(\d+)!i', $Excerpt['text'], $matches))
         {
             $url = $this->helper->u($this->link['controller'],
                                     $this->link['action'],
