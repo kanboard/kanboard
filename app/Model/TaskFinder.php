@@ -62,8 +62,9 @@ class TaskFinder extends Base
                         'projects.name AS project_name'
                     )
                     ->join(Project::TABLE, 'id', 'project_id')
-                    ->eq('tasks.owner_id', $user_id)
-                    ->eq('tasks.is_active', Task::STATUS_OPEN);
+                    ->eq(Task::TABLE.'.owner_id', $user_id)
+                    ->eq(Task::TABLE.'.is_active', Task::STATUS_OPEN)
+                    ->eq(Project::TABLE.'.is_active', Project::ACTIVE);
     }
 
     /**
