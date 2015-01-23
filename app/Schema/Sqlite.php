@@ -14,8 +14,7 @@ function version_41($pdo)
             id INTEGER PRIMARY KEY,
             project_id INTEGER NOT NULL,
             name TEXT NOT NULL,
-    		is_inverse INTEGER DEFAULT '0',
-            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+    		is_inverse INTEGER DEFAULT '0'
         )");
     $pdo->exec("CREATE TABLE task_has_links
         (
@@ -28,8 +27,17 @@ function version_41($pdo)
             FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
         )");
     $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, task_inverse_id)");
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('project_links', ''));
+    $rq = $pdo->prepare('INSERT INTO links (project_id, name, is_inverse) VALUES (?, ?, ?)');
+    $rq->execute(array(-1, 'relates to', 0));
+    $rq->execute(array(-1, 'relates to', 1));
+    $rq->execute(array(-1, 'blocks', 0));
+    $rq->execute(array(-1, 'is blocked by', 1));
+    $rq->execute(array(-1, 'duplicates', 0));
+    $rq->execute(array(-1, 'is duplicated by', 1));
+    $rq->execute(array(-1, 'is a child of', 0));
+    $rq->execute(array(-1, 'is a parent of', 1));
+    $rq->execute(array(-1, 'targets milestone', 0));
+    $rq->execute(array(-1, 'is a milestone of', 1));
 }
 
 function version_40($pdo)

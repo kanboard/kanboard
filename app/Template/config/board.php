@@ -26,10 +26,6 @@
     <?= $this->formText('project_categories', $values, $errors) ?><br/>
     <p class="form-help"><?= t('Example: "Bug, Feature Request, Improvement"') ?></p>
 
-    <?= $this->formLabel(t('Default links for new projects (Pipe and Comma-separated)'), 'project_links') ?>
-    <?= $this->formText('project_links', $values, $errors) ?><br/>
-    <p class="form-help"><?= t('Example: "precedes|follows, blocks|is blocked by, duplicates|is duplicated by, child of|parent of, targets milestone|milestone of, related to|related to"') ?></p>
-
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
     </div>

@@ -22,20 +22,17 @@ class Link extends Base
     const TABLE = 'links';
 
     /**
-     * Return true if a link exists for a given project
+     * Return true if a link exists
      *
      * @access public
      * @param integer $link_id
-     *            Category id
-     * @param integer $project_id
-     *            Project id
+     *            Link id
      * @return boolean
      */
-    public function exists($link_id, $project_id)
+    public function exists($link_id)
     {
         return $this->db->table(self::TABLE)
             ->eq('id', $link_id)
-            ->eq('project_id', $project_id)
             ->count() > 0;
     }
 
@@ -45,12 +42,18 @@ class Link extends Base
      * @access public
      * @param integer $link_id
      *            Link id
+     * @param integer $project_id
+     *            Specify a project id. Default: -1 to target all projects
      * @return array
      */
-    public function getById($link_id)
+    public function getById($link_id, $project_id=-1)
     {
         return $this->db->table(self::TABLE)
             ->eq('id', $link_id)
+            ->beginOr()
+            ->eq('project_id', -1)
+            ->eq('project_id', $project_id)
+            ->closeOr()
             ->findOne();
     }
 
@@ -60,16 +63,26 @@ class Link extends Base
      * @access public
      * @param integer $link_id
      *            Link id
+     * @param integer $project_id
+     *            Specify a project id. Default: -1 to target all projects
      * @return array
      */
-    public function getMergedById($link_id)
+    public function getMergedById($link_id, $project_id=-1)
     {
         $link_id2 = (0 == ($link_id % 2)) ? $link_id - 1 : $link_id + 1;
         $link = $this->db->table(self::TABLE)
             ->eq('id', $link_id)
+            ->beginOr()
+            ->eq('project_id', -1)
+            ->eq('project_id', $project_id)
+            ->closeOr()
             ->findOne();
         $link2 = $this->db->table(self::TABLE)
             ->eq('id', $link_id2)
+            ->beginOr()
+            ->eq('project_id', -1)
+            ->eq('project_id', $project_id)
+            ->closeOr()
             ->findOne();
         if (! $link || ! $link2) {
             return false;
@@ -90,7 +103,7 @@ class Link extends Base
      *
      * @access public
      * @param integer $link_id
-     *            Category id
+     *            Link id
      * @return string
      */
     public function getNameById($link_id)
@@ -101,39 +114,45 @@ class Link extends Base
     }
 
     /**
-     * Get a link id by the project and the name
+     * Get a link id by the name
      *
      * @access public
-     * @param integer $project_id
-     *            Project id
      * @param string $link_name
-     *            Category name
+     *            Link name
+     * @param integer $project_id
+     *            Specify a project id. Default: -1 to target all projects
      * @return integer
      */
-    public function getIdByName($project_id, $link_name)
+    public function getIdByName($link_name, $project_id=-1)
     {
         return (int) $this->db->table(self::TABLE)
+            ->beginOr()
+            ->eq('project_id', -1)
             ->eq('project_id', $project_id)
+            ->closeOr()
             ->eq('name', $link_name)
             ->findOneColumn('id');
     }
 
     /**
-     * Return the list of all links for a given project
+     * Return the list of all links
      *
      * @access public
      * @param integer $project_id
-     *            Project id
+     *            Specify a project id. Default: -1 to target all projects
      * @param bool $prepend_none
      *            If true, prepend to the list the value 'None'
      * @param bool $prepend_all
      *            If true, prepend to the list the value 'All'
      * @return array
      */
-    public function getList($project_id, $prepend_none = true, $prepend_all = false)
+    public function getList($project_id=-1, $prepend_none = true, $prepend_all = false)
     {
         $listing = $this->db->table(self::TABLE)
+            ->beginOr()
+            ->eq('project_id', -1)
             ->eq('project_id', $project_id)
+            ->closeOr()
             ->asc('id')
             ->listing('id', 'name');
         foreach($listing AS $id => $name) {
@@ -158,17 +177,20 @@ class Link extends Base
     }
 
     /**
-     * Return the list of all links (name + inverse name) for a given project
+     * Return the list of all links (name + inverse name)
      *
      * @access public
      * @param integer $project_id
-     *            Project id
+     *            Specify a project id. Default: -1 to target all projects
      * @return array
      */
-    public function getMergedList($project_id)
+    public function getMergedList($project_id=-1)
     {
         $listing = $this->db->table(self::TABLE)
+            ->beginOr()
+            ->eq('project_id', -1)
             ->eq('project_id', $project_id)
+            ->closeOr()
             ->asc('id')
             ->column('id', 'name')
             ->findAll();
@@ -228,12 +250,12 @@ class Link extends Base
     public function prepare(array &$values)
     {
         $link1 = array(
-            'project_id' => $values['project_id'],
+            'project_id' => isset($values['project_id']) ? $values['project_id'] : -1,
             'name' => $values['name'],
             'is_inverse' => 0
         );
         $link2 = array(
-            'project_id' => $values['project_id'],
+            'project_id' => isset($values['project_id']) ? $values['project_id'] : -1,
             'name' => $values['name_inverse'],
             'is_inverse' => 1
         );
@@ -327,25 +349,6 @@ class Link extends Base
         $this->db->closeTransaction();
         return $res;
     }
-    
-    /**
-     * Create default links during project creation
-     *
-     * @access public
-     * @param  integer  $project_id
-     */
-    public function createDefaultLinks($project_id)
-    {
-        $linkStrs = explode(',', $this->config->get('project_links'));
-    
-        foreach ($linkStrs as $linkStr) {
-            $links = explode('|', trim($linkStr));
-            if (! empty($links) && 2 === count($links)) {
-                $link = array('project_id' => $project_id, 'name' => trim($links[0]), 'name_inverse' => trim($links[1]));
-                $this->create($link);
-            }
-        }
-    }
 
     /**
      * Duplicate links from a project to another one, must be executed inside a transaction
@@ -402,7 +405,6 @@ class Link extends Base
         $rules = array(
             new Validators\Required('id', t('The id is required'))
         );
-        
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
         
         return array(
@@ -420,13 +422,13 @@ class Link extends Base
     private function commonValidationRules()
     {
         return array(
-            new Validators\Required('project_id', t('The project id is required')),
+            new Validators\Required('project_id', t('The project id required')),
             new Validators\Required('name', t('The link label is required')),
             new Validators\Required('name_inverse', t('The link inverse label is required')),
             new Validators\Integer('id', t('The link id must be an integer')),
             new Validators\Integer('project_id', t('The project id must be an integer')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 150), 150),
-            new Validators\MaxLength('name_inverse', t('The maximum length is %d characters', 150), 150)
+            new Validators\MaxLength('name', t('The maximum length is %d characters', 200), 200),
+            new Validators\MaxLength('name_inverse', t('The maximum length is %d characters', 200), 200)
         );
     }
 }
