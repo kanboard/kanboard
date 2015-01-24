@@ -5,7 +5,12 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 40;
+const VERSION = 41;
+
+function version_41($pdo)
+{
+	$pdo->exec('ALTER TABLE columns ADD COLUMN description TEXT');
+}
 
 function version_40($pdo)
 {
