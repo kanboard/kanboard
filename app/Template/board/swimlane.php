@@ -12,6 +12,12 @@
         <?php endif ?>
 
         <?= $this->e($column['title']) ?>
+        
+        <?php if (! empty($column['description'])): ?>
+            <span title="<?= t('Description') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'columndescription', array('column_id' => $column['id'], 'project_id' => $column['project_id'])) ?>">
+                <i class="fa fa-file-text-o"></i>
+            </span>
+        <?php endif ?>
 
         <?php if ($column['task_limit']): ?>
             <span title="<?= t('Task limit') ?>" class="task-limit">

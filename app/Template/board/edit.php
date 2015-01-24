@@ -11,6 +11,7 @@
         <tr>
             <th><?= t('Position') ?></th>
             <th><?= t('Column title') ?></th>
+            <th><?= t('Description') ?></th>
             <th><?= t('Task limit') ?></th>
             <th><?= t('Actions') ?></th>
         </tr>
@@ -18,6 +19,7 @@
         <tr>
             <td><?= $this->formLabel('#'.++$i, 'title['.$column['id'].']', array('title="column_id='.$column['id'].'"')) ?></td>
             <td><?= $this->formText('title['.$column['id'].']', $values, $errors, array('required', 'maxlength="50"')) ?></td>
+            <td><?= $this->formTextarea('description['.$column['id'].']', $values, $errors, array('placeholder="'.t('description').'"')) ?></td>
             <td><?= $this->formNumber('task_limit['.$column['id'].']', $values, $errors, array('placeholder="'.t('limit').'"')) ?></td>
             <td>
                 <ul>
@@ -54,6 +56,9 @@
 
     <?= $this->formLabel(t('Title'), 'title') ?>
     <?= $this->formText('title', $values, $errors, array('required', 'maxlength="50"')) ?>
+    <?= $this->formLabel(t('Description'), 'description') ?>
+    <?= $this->formTextarea('description', $values, $errors) ?>
+    <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Add this column') ?>" class="btn btn-blue"/>
