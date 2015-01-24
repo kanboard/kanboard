@@ -95,7 +95,7 @@ class Board extends Base
     public function duplicate($project_from, $project_to)
     {
         $columns = $this->db->table(Board::TABLE)
-                            ->columns('title', 'task_limit')
+                            ->columns('title', 'task_limit', 'description')
                             ->eq('project_id', $project_from)
                             ->asc('position')
                             ->findAll();
