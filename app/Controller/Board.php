@@ -205,6 +205,7 @@ class Board extends Base
 
         foreach ($columns as $column) {
             $values['title['.$column['id'].']'] = $column['title'];
+            $values['description['.$column['id'].']'] = $column['description'];
             $values['task_limit['.$column['id'].']'] = $column['task_limit'] ?: null;
         }
 
@@ -233,6 +234,7 @@ class Board extends Base
             $columns_list[$column['id']] = $column['title'];
             $values['title['.$column['id'].']'] = isset($data['title'][$column['id']]) ? $data['title'][$column['id']] : '';
             $values['task_limit['.$column['id'].']'] = isset($data['task_limit'][$column['id']]) ? $data['task_limit'][$column['id']] : 0;
+            $values['description['.$column['id'].']'] = isset($data['description'][$column['id']]) ? $data['description'][$column['id']] : '';
         }
 
         list($valid, $errors) = $this->board->validateModification($columns_list, $values);
@@ -271,7 +273,7 @@ class Board extends Base
 
         if ($valid) {
 
-            if ($this->board->addColumn($project['id'], $data['title'])) {
+            if ($this->board->addColumn($project['id'], $data['title'],$data['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
             }
@@ -449,7 +451,7 @@ class Board extends Base
     }
 
     /**
-     * Display the description
+     * Display task description
      *
      * @access public
      */
@@ -460,5 +462,19 @@ class Board extends Base
         $this->response->html($this->template->render('board/description', array(
             'task' => $task
         )));
+    }
+    
+    /**
+     * Display column description
+     *
+     * @access public
+     */
+    public function columndescription()
+    {
+    	$column = $this->getColumn();
+    
+    	$this->response->html($this->template->render('board/columndescription', array(
+    			'column' => $column
+    	)));
     }
 }
