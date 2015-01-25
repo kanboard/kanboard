@@ -3,7 +3,6 @@
 namespace Core;
 
 use Pimple\Container;
-use Parsedown;
 
 /**
  * Template helpers
@@ -474,24 +473,9 @@ class Helper
      */
     public function markdown($text, array $link = array())
     {
-        $html = Parsedown::instance()
-                    ->setMarkupEscaped(true) # escapes markup (HTML)
-                    ->text($text);
-
-        // Replace task #123 by a link to the task
-        if (! empty($link) && preg_match_all('!#(\d+)!i', $html, $matches, PREG_SET_ORDER)) {
-
-            foreach ($matches as $match) {
-
-                $html = str_replace(
-                    $match[0],
-                    $this->a($match[0], $link['controller'], $link['action'], $link['params'] + array('task_id' => $match[1])),
-                    $html
-                );
-            }
-        }
-
-        return $html;
+        $parser = new Markdown($link, $this);
+        $parser->setMarkupEscaped(true);
+        return $parser->text($text);
     }
 
     /**

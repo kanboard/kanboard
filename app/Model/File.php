@@ -20,13 +20,6 @@ class File extends Base
     const TABLE = 'task_has_files';
 
     /**
-     * Directory where are stored files
-     *
-     * @var string
-     */
-    const BASE_PATH = 'data/files/';
-
-    /**
      * Events
      *
      * @var string
@@ -56,7 +49,7 @@ class File extends Base
     {
         $file = $this->getbyId($file_id);
 
-        if (! empty($file) && @unlink(self::BASE_PATH.$file['path'])) {
+        if (! empty($file) && @unlink(FILES_DIR.$file['path'])) {
             return $this->db->table(self::TABLE)->eq('id', $file_id)->remove();
         }
 
@@ -152,14 +145,14 @@ class File extends Base
      */
     public function setup()
     {
-        if (! is_dir(self::BASE_PATH)) {
-            if (! mkdir(self::BASE_PATH, 0755, true)) {
-                die('Unable to create the upload directory: "'.self::BASE_PATH.'"');
+        if (! is_dir(FILES_DIR)) {
+            if (! mkdir(FILES_DIR, 0755, true)) {
+                die('Unable to create the upload directory: "'.FILES_DIR.'"');
             }
         }
 
-        if (! is_writable(self::BASE_PATH)) {
-            die('The directory "'.self::BASE_PATH.'" must be writeable by your webserver user');
+        if (! is_writable(FILES_DIR)) {
+            die('The directory "'.FILES_DIR.'" must be writeable by your webserver user');
         }
     }
 
@@ -187,15 +180,15 @@ class File extends Base
                     $uploaded_filename = $_FILES[$form_name]['tmp_name'][$key];
                     $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
 
-                    @mkdir(self::BASE_PATH.dirname($destination_filename), 0755, true);
+                    @mkdir(FILES_DIR.dirname($destination_filename), 0755, true);
 
-                    if (@move_uploaded_file($uploaded_filename, self::BASE_PATH.$destination_filename)) {
+                    if (@move_uploaded_file($uploaded_filename, FILES_DIR.$destination_filename)) {
 
                         $result[] = $this->create(
                             $task_id,
                             $original_filename,
                             $destination_filename,
-                            $this->isImage(self::BASE_PATH.$destination_filename)
+                            $this->isImage(FILES_DIR.$destination_filename)
                         );
                     }
                 }

@@ -110,7 +110,7 @@ class Config extends Base
      */
     public function getAll()
     {
-        return $this->db->table(self::TABLE)->listing('option', 'value');
+        return $this->db->hashtable(self::TABLE)->getAll('option', 'value');
     }
 
     /**
