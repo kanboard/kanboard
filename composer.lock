@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b20bc90f39f04bf9d6828329d56cdc75",
+    "hash": "a5f10d6c565a2a7b5b63650d550cabf2",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -84,16 +84,16 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "v0.0.1",
+            "version": "v0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "f36d8e0191e2fa6f033baf94bc35ec6a00798bc0"
+                "reference": "b3ef5f79e7e5e33729fdbf9c02c8a252a3d76b6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/f36d8e0191e2fa6f033baf94bc35ec6a00798bc0",
-                "reference": "f36d8e0191e2fa6f033baf94bc35ec6a00798bc0",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/b3ef5f79e7e5e33729fdbf9c02c8a252a3d76b6b",
+                "reference": "b3ef5f79e7e5e33729fdbf9c02c8a252a3d76b6b",
                 "shasum": ""
             },
             "require": {
@@ -117,7 +117,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2015-01-18 22:35:36"
+            "time": "2015-01-25 16:20:14"
         },
         {
             "name": "fguillot/simple-validator",
