@@ -33,6 +33,7 @@
 
         <div class="sidebar-content">
             <div id="calendar"
+                 data-project-id="<?= $project['id'] ?>"
                  data-save-url="<?= $this->u('calendar', 'save', array('project_id' => $project['id'])) ?>"
                  data-check-url="<?= $this->u('calendar', 'events', array('project_id' => $project['id'])) ?>"
                  data-check-interval="<?= $check_interval ?>"
