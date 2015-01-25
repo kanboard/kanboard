@@ -47,7 +47,7 @@ class Board extends Base
             $column_name = trim($column_name);
 
             if (! empty($column_name)) {
-                $columns[] = array('title' => $column_name, 'task_limit' => 0);
+                $columns[] = array('title' => $column_name, 'task_limit' => 0, 'description' => '');
             }
         }
 
