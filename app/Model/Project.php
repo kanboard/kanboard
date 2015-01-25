@@ -262,65 +262,6 @@ class Project extends Base
     }
 
     /**
-     * Create a project from another one.
-     *
-     * @author Antonio Rabelo
-     * @param  integer    $project_id      Project Id
-     * @return integer                     Cloned Project Id
-     */
-    public function createProjectFromAnotherProject($project_id)
-    {
-        $project = $this->getById($project_id);
-
-        $values = array(
-            'name' => $project['name'].' ('.t('Clone').')',
-            'is_active' => true,
-            'last_modified' => 0,
-            'token' => '',
-            'is_public' => 0,
-            'is_private' => empty($project['is_private']) ? 0 : 1,
-        );
-
-        if (! $this->db->table(self::TABLE)->save($values)) {
-            return 0;
-        }
-
-        return $this->db->getConnection()->getLastId();
-    }
-
-    /**
-     * Clone a project
-     *
-     * @author Antonio Rabelo
-     * @param  integer    $project_id  Project Id
-     * @return integer                 Cloned Project Id
-     */
-    public function duplicate($project_id)
-    {
-        $this->db->startTransaction();
-
-        // Get the cloned project Id
-        $clone_project_id = $this->createProjectFromAnotherProject($project_id);
-
-        if (! $clone_project_id) {
-            $this->db->cancelTransaction();
-            return false;
-        }
-
-        foreach (array('board', 'category', 'projectPermission', 'action') as $model) {
-
-            if (! $this->$model->duplicate($project_id, $clone_project_id)) {
-                $this->db->cancelTransaction();
-                return false;
-            }
-        }
-
-        $this->db->closeTransaction();
-
-        return (int) $clone_project_id;
-    }
-
-    /**
      * Create a project
      *
      * @access public
