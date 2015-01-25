@@ -258,6 +258,7 @@ class Project extends Base
         return $this->db
                     ->table(Project::TABLE)
                     ->in('id', $project_ids)
+                    ->eq('is_active', Project::ACTIVE)
                     ->filter(array($this, 'applyColumnStats'));
     }
 
