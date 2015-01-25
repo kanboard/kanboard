@@ -162,7 +162,7 @@ var Kanboard = (function() {
             });
 
             $("#board-selector").change(function() {
-                window.location = $(this).attr("data-board-url").replace(/%d/g, $(this).val());
+                window.location = $(this).attr("data-board-url").replace(/PROJECT_ID/g, $(this).val());
             });
 
             // Markdown Preview for textareas
