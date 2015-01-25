@@ -5,6 +5,37 @@ namespace Core;
 use Pimple\Container;
 use Parsedown;
 
+class _ParsedownKanboard extends Parsedown
+{
+    private $link;
+    private $helper;
+    
+    public function __construct($link, $helper) 
+    {
+        $this->link = $link;
+        $this->helper = $helper;
+        $this->SpanTypes['#'] []= 'TaskLink';
+        $this->spanMarkerList .= '#';
+    }
+
+    protected function identifyTaskLink($Excerpt)
+    {
+        // Replace task #123 by a link to the task
+        if (!empty($this->link) && preg_match('!#(\d+)!i', $Excerpt['text'], $matches))
+        {
+            $url = $this->helper->u($this->link['controller'],
+                                    $this->link['action'],
+                                    $this->link['params'] + array('task_id' => $matches[1]));
+            return array(
+                'extent' => strlen($matches[0]),
+                'element' => array(
+                    'name' => 'a',
+                    'text' => $matches[0],
+                    'attributes' => array('href' => $url)));
+        }
+    }
+}
+
 /**
  * Template helpers
  *
@@ -474,24 +505,9 @@ class Helper
      */
     public function markdown($text, array $link = array())
     {
-        $html = Parsedown::instance()
-                    ->setMarkupEscaped(true) # escapes markup (HTML)
-                    ->text($text);
-
-        // Replace task #123 by a link to the task
-        if (! empty($link) && preg_match_all('!#(\d+)!i', $html, $matches, PREG_SET_ORDER)) {
-
-            foreach ($matches as $match) {
-
-                $html = str_replace(
-                    $match[0],
-                    $this->a($match[0], $link['controller'], $link['action'], $link['params'] + array('task_id' => $match[1])),
-                    $html
-                );
-            }
-        }
-
-        return $html;
+        $parser = new _ParsedownKanboard($link, $this);
+        $parser->setMarkupEscaped(true); # escapes markup (HTML)
+        return $parser->text($text);
     }
 
     /**
