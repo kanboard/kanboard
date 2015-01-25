@@ -418,7 +418,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $task;
         $errors = array();
-        $projects_list = $this->projectPermission->getMemberProjects($this->userSession->getId());
+        $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 
@@ -457,7 +457,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $task;
         $errors = array();
-        $projects_list = $this->projectPermission->getMemberProjects($this->userSession->getId());
+        $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 

@@ -182,7 +182,7 @@ class Board extends Base
      */
     public function moveDown($project_id, $column_id)
     {
-        $columns = $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->listing('id', 'position');
+        $columns = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'position');
         $positions = array_flip($columns);
 
         if (isset($columns[$column_id]) && $columns[$column_id] < count($columns)) {
@@ -211,7 +211,7 @@ class Board extends Base
      */
     public function moveUp($project_id, $column_id)
     {
-        $columns = $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->listing('id', 'position');
+        $columns = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'position');
         $positions = array_flip($columns);
 
         if (isset($columns[$column_id]) && $columns[$column_id] > 1) {
@@ -268,11 +268,11 @@ class Board extends Base
     public function getColumnStats($project_id, $prepend = false)
     {
         $listing = $this->db
-                        ->table(Task::TABLE)
+                        ->hashtable(Task::TABLE)
                         ->eq('project_id', $project_id)
                         ->eq('is_active', 1)
                         ->groupBy('column_id')
-                        ->listing('column_id', 'COUNT(*) AS total');
+                        ->getAll('column_id', 'COUNT(*) AS total');
 
         return $prepend ? array(-1 => t('All columns')) + $listing : $listing;
     }
@@ -299,7 +299,7 @@ class Board extends Base
      */
     public function getColumnsList($project_id, $prepend = false)
     {
-        $listing = $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->listing('id', 'title');
+        $listing = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'title');
         return $prepend ? array(-1 => t('All columns')) + $listing : $listing;
     }
 

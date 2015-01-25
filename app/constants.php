@@ -2,6 +2,7 @@
 
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', false);
+defined('DEBUG_FILE') or define('DEBUG_FILE', 'data/debug.log');
 
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
@@ -64,3 +65,7 @@ defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/s
 
 // Enable or disable "Strict-Transport-Security" HTTP header
 defined('ENABLE_HSTS') or define('ENABLE_HSTS', true);
+
+// Default files directory
+defined('FILES_DIR') or define('FILES_DIR', 'data/files/');
+

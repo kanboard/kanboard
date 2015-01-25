@@ -4,7 +4,7 @@
         "fguillot/simple-validator": "0.0.1",
         "swiftmailer/swiftmailer": "@stable",
         "fguillot/json-rpc": "0.0.1",
-        "fguillot/picodb": "0.0.1",
+        "fguillot/picodb": "0.0.2",
         "erusev/parsedown": "1.1.1",
         "lusitanian/oauth": "0.3.5",
         "pimple/pimple": "~3.0",

@@ -31,7 +31,7 @@ class App extends Base
     {
         $status = array(SubTaskModel::STATUS_TODO, SubTaskModel::STATUS_INPROGRESS);
         $user_id = $this->userSession->getId();
-        $projects = $this->projectPermission->getMemberProjects($user_id);
+        $projects = $this->projectPermission->getActiveMemberProjects($user_id);
         $project_ids = array_keys($projects);
 
         $task_paginator = $this->paginator

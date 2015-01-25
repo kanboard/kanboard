@@ -128,10 +128,10 @@ class Project extends Base
     public function getList($prepend = true)
     {
         if ($prepend) {
-            return array(t('None')) + $this->db->table(self::TABLE)->asc('name')->listing('id', 'name');
+            return array(t('None')) + $this->db->hashtable(self::TABLE)->asc('name')->getAll('id', 'name');
         }
 
-        return $this->db->table(self::TABLE)->asc('name')->listing('id', 'name');
+        return $this->db->hashtable(self::TABLE)->asc('name')->getAll('id', 'name');
     }
 
     /**
@@ -160,10 +160,10 @@ class Project extends Base
     public function getListByStatus($status)
     {
         return $this->db
-                    ->table(self::TABLE)
+                    ->hashtable(self::TABLE)
                     ->asc('name')
                     ->eq('is_active', $status)
-                    ->listing('id', 'name');
+                    ->getAll('id', 'name');
     }
 
     /**
