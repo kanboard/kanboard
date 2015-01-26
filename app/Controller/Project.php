@@ -307,7 +307,7 @@ class Project extends Base
 
             $this->checkCSRFParam();
 
-            if ($this->project->duplicate($project['id'])) {
+            if ($this->projectDuplication->duplicate($project['id'])) {
                 $this->session->flash(t('Project cloned successfully.'));
             } else {
                 $this->session->flashError(t('Unable to clone this project.'));

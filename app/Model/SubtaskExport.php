@@ -94,11 +94,11 @@ class SubtaskExport extends Base
     public function getSubtasks($project_id, $from, $to)
     {
         if (! is_numeric($from)) {
-            $from = $this->dateParser->resetDateToMidnight($this->dateParser->getTimestamp($from));
+            $from = $this->dateParser->removeTimeFromTimestamp($this->dateParser->getTimestamp($from));
         }
 
         if (! is_numeric($to)) {
-            $to = $this->dateParser->resetDateToMidnight(strtotime('+1 day', $this->dateParser->getTimestamp($to)));
+            $to = $this->dateParser->removeTimeFromTimestamp(strtotime('+1 day', $this->dateParser->getTimestamp($to)));
         }
 
         return $this->db->table(SubTask::TABLE)

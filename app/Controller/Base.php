@@ -36,6 +36,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\Notification           $notification
  * @property \Model\Project                $project
  * @property \Model\ProjectPermission      $projectPermission
+ * @property \Model\ProjectDuplication     $projectDuplication
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectDailySummary    $projectDailySummary
