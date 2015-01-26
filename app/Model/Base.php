@@ -27,6 +27,7 @@ use Pimple\Container;
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\Notification       $notification
  * @property \Model\Project            $project
+ * @property \Model\ProjectDuplication $projectDuplication
  * @property \Model\ProjectPermission  $projectPermission
  * @property \Model\SubTask            $subTask
  * @property \Model\SubtaskHistory     $subtaskHistory
