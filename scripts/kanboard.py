@@ -92,6 +92,19 @@ class Kanboard():
     def _getId(self):
         self._id += 1
         return self._id
+
+    def getTimezone(self):
+        kid = self._getId()
+        params = {
+                 "jsonrpc": "2.0",
+                 "method": "getTimezone",
+                 "id" : kid,
+        }
+
+        response = requests.post(self.url, data=json.dumps(params), headers=self.headers, auth=(self.username, self.token))
+        assert response.ok
+        assert response.json()['id'] == kid
+        return response.json()['result']
         
     def createProject(self, name):
         kid = self._getId()   
@@ -546,7 +559,7 @@ class Kanboard():
         
         return response.json()['result']
     
-    def getAllTasks(self, project_id, status):
+    def getAllTasks(self, project_id, status_id):
         kid = self._getId()   
         params = {
                  "jsonrpc": "2.0",
@@ -554,7 +567,7 @@ class Kanboard():
                  "id" : kid,
                  "params": {
                         "project_id": project_id,
-                        "status": status
+                        "status_id": status_id
                  }
         }
         
