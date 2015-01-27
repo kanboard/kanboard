@@ -165,7 +165,7 @@ abstract class Base
         $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
 
         if (! $this->acl->isPublicAction($controller, $action)) {
-            $this->handleAuthentication($controller, $action);
+            $this->handleAuthentication();
             $this->handleAuthorization($controller, $action);
         }
     }
@@ -175,7 +175,7 @@ abstract class Base
      *
      * @access public
      */
-    public function handleAuthentication($controller, $action)
+    public function handleAuthentication()
     {
         if (! $this->authentication->isAuthenticated()) {
 
