@@ -173,6 +173,18 @@ class TaskFinder extends Base
     }
 
     /**
+     * Get project id for a given task
+     *
+     * @access public
+     * @param  integer   $task_id   Task id
+     * @return integer
+     */
+    public function getProjectId($task_id)
+    {
+        return (int) $this->db->table(Task::TABLE)->eq('id', $task_id)->findOneColumn('project_id') ?: 0;
+    }
+
+    /**
      * Fetch a task by the id
      *
      * @access public

@@ -7,6 +7,16 @@ echo "ServerName localhost" >> /etc/apache2/apache2.conf
 service apache2 restart
 rm -f /var/www/html/index.html
 date > /etc/vagrant_provisioned_at
+# install Composer
+curl -s https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+# install PHPUnit
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+sudo mv phpunit.phar /usr/local/bin/phpunit
+phpunit --version
+# Set kanboard dir as working dir
+echo "cd /var/www/html" >> /home/vagrant/.bashrc
 SCRIPT
 
 $script_mysql = <<SCRIPT
@@ -20,6 +30,16 @@ service mysql restart
 echo "create database kanboard;" | mysql -u root
 rm -f /var/www/html/index.html
 date > /etc/vagrant_provisioned_at
+# install Composer
+curl -s https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+# install PHPUnit
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+sudo mv phpunit.phar /usr/local/bin/phpunit
+phpunit --version
+# Set kanboard dir as working dir
+echo "cd /var/www/html" >> /home/vagrant/.bashrc
 SCRIPT
 
 $script_postgres = <<SCRIPT
@@ -32,6 +52,16 @@ service apache2 restart
 service postgresql restart
 rm -f /var/www/html/index.html
 date > /etc/vagrant_provisioned_at
+# install Composer
+curl -s https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+# install PHPUnit
+wget https://phar.phpunit.de/phpunit.phar
+chmod +x phpunit.phar
+sudo mv phpunit.phar /usr/local/bin/phpunit
+phpunit --version
+# Set kanboard dir as working dir
+echo "cd /var/www/html" >> /home/vagrant/.bashrc
 SCRIPT
 
 Vagrant.configure("2") do |config|

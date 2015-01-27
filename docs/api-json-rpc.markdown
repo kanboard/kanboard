@@ -1052,7 +1052,7 @@ Response example:
 - Purpose: **Get all available tasks**
 - Parameters:
     - **project_id** (integer, required)
-    - **status**: The value 1 for active tasks and 0 for inactive (integer, required)
+    - **status_id**: The value 1 for active tasks and 0 for inactive (integer, required)
 - Result on success: **List of tasks**
 - Result on failure: **false**
 
@@ -1065,7 +1065,7 @@ Request example to fetch all tasks on the board:
     "id": 133280317,
     "params": {
         "project_id": 1,
-        "status": 1
+        "status_id": 1
     }
 }
 ```
