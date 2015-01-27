@@ -185,7 +185,14 @@ abstract class Base
             $this->response->redirect('?controller=user&action=login&redirect_query='.urlencode($this->request->getQueryString()));
         }
 
-        if (! $this->acl->isAllowed($controller, $action, $this->request->getIntegerParam('project_id', 0))) {
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if ($project_id == 0) {
+            $task = $this->getTask();
+            $project_id = $task['project_id'];
+        }
+
+        if (! $this->acl->isAllowed($controller, $action, $project_id)) {
             $this->forbidden();
         }
     }
@@ -287,7 +294,7 @@ abstract class Base
     {
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
-        if (! $task || $task['project_id'] != $this->request->getIntegerParam('project_id')) {
+        if (! $task) {
             $this->notfound();
         }
 
