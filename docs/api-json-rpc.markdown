@@ -1879,7 +1879,7 @@ Response example:
 - Parameters:
     - **task_id** (integer, required)
     - **title** (integer, required)
-    - **assignee_id** (int, optional)
+    - **user_id** (int, optional)
     - **time_estimated** (int, optional)
     - **time_spent** (int, optional)
     - **status** (int, optional)
@@ -1996,7 +1996,7 @@ Response example:
     - **id** (integer, required)
     - **task_id** (integer, required)
     - **title** (integer, optional)
-    - **assignee_id** (integer, optional)
+    - **user_id** (integer, optional)
     - **time_estimated** (integer, optional)
     - **time_spent** (integer, optional)
     - **status** (integer, optional)
