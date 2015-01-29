@@ -85,7 +85,7 @@ class ProjectActivity extends Base
                            )
                            ->in('project_id', $project_ids)
                            ->join(User::TABLE, 'id', 'creator_id')
-                           ->desc('id')
+                           ->desc(self::TABLE.'.id')
                            ->limit($limit)
                            ->findAll();
 
