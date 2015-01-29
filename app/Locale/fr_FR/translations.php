@@ -669,7 +669,6 @@ return array(
     'February' => 'Février',
     'March' => 'Mars',
     'April' => 'Avril',
-    'May' => 'Mai',
     'June' => 'Juin',
     'July' => 'Juillet',
     'August' => 'Août',

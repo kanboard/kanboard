@@ -626,7 +626,7 @@ return array(
     'Your swimlane have been created successfully.' => 'Proces tworzony pomyślnie.',
     'Example: "Bug, Feature Request, Improvement"' => 'Przykład: "Błąd, Żądanie Funkcjonalnośći, Udoskonalenia"',
     'Default categories for new projects (Comma-separated)' => 'Domyślne kategorie dla nowych projektów (oddzielone przecinkiem)',
-    //'Gitlab commit received' => '',
+    // 'Gitlab commit received' => '',
     // 'Gitlab issue opened' => '',
     // 'Gitlab issue closed' => '',
     // 'Gitlab webhooks' => '',
@@ -699,5 +699,4 @@ return array(
     'All status' => 'Wszystkie statusy',
     'Add a comment logging moving the task between columns' => 'Dodaj komentarz dokumentujący przeniesienie zadania pomiędzy kolumnami',
     'Moved to column %s' => 'Przeniosiono do kolumny %s',
-
 );
