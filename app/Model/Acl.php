@@ -22,6 +22,7 @@ class Acl extends Base
         'board' => array('readonly'),
         'project' => array('feed'),
         'webhook' => '*',
+        'app' => array('colors'),
     );
 
     /**
