@@ -153,6 +153,7 @@ Contributors:
 - Claudio Lobo
 - [Cluxter](https://github.com/cluxter)
 - [Cmer](https://github.com/chncsu)
+- [Colin Williams](https://github.com/crwilliams)
 - [Cynthia Pereira](https://github.com/cynthiapereira)
 - [David-Norris](https://github.com/David-Norris)
 - [Esteban Monge](https://github.com/EstebanMonge)
@@ -173,6 +174,7 @@ Contributors:
 - [Matthieu Keller](https://github.com/maggick)
 - [Mauro Mariño](https://github.com/moromarino)
 - [Maxime](https://github.com/EpocDotFr)
+- [mfoucrier](https://github.com/mfoucrier)
 - [Mgro](https://github.com/mgro)
 - [Michael Lüpkes](https://github.com/mluepkes)
 - [Mihailov Vasilievic Filho](https://github.com/mihailov-vf)
@@ -188,6 +190,7 @@ Contributors:
 - [Oren Ben-Kiki](https://github.com/orenbenkiki) 
 - [Peller Zoltan](https://github.com/PierP)
 - [Petja Touru](https://github.com/Petja)
+- [Piotr Zęgota](https://github.com/ZegalPL)
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
 - [René Stoltenberg](https://github.com/rstoltenberg)
