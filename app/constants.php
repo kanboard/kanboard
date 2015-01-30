@@ -2,7 +2,7 @@
 
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', false);
-defined('DEBUG_FILE') or define('DEBUG_FILE', 'data/debug.log');
+defined('DEBUG_FILE') or define('DEBUG_FILE', __DIR__.'/../data/debug.log');
 
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');

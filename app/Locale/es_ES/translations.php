@@ -698,5 +698,5 @@ return array(
     'All colors' => 'Todos los colores',
     'All status' => 'Todos los estados',
     // 'Add a comment logging moving the task between columns' => '',
-     'Moved to column %s' => 'Movido a columna %s',
+    'Moved to column %s' => 'Movido a columna %s',
 );

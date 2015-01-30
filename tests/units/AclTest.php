@@ -37,6 +37,7 @@ class AclTest extends Base
         $acl = new Acl($this->container);
         $this->assertTrue($acl->isPublicAction('board', 'readonly'));
         $this->assertFalse($acl->isPublicAction('board', 'show'));
+        $this->assertTrue($acl->isPublicAction('app', 'colors'));
     }
 
     public function testAdminActions()
