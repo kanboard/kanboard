@@ -278,7 +278,7 @@ return array(
     'Remember Me' => 'Pamiętaj mnie',
     'Creation date' => 'Data utworzenia',
     'Filter by user' => 'Filtruj według użytkowników',
-    'Filter by due date' => 'Filtruj według użytkowników',
+    'Filter by due date' => 'Filtruj według terminów',
     'Everybody' => 'Wszyscy',
     'Open' => 'Otwarto',
     'Closed' => 'Zamknięto',
