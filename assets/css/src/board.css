@@ -66,3 +66,7 @@ th.board-swimlane-title {
     vertical-align: top;
     text-align: right;
 }
+
+.board-swimlane-showhide {
+    font-size: 70%;
+}
