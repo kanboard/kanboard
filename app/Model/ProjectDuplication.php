@@ -23,8 +23,8 @@ class ProjectDuplication extends Base
     {
         $suffix = ' ('.t('Clone').')';
 
-        if (strlen($name.$suffix) > 50) {
-            $name = substr($name, 0, 50 - strlen($suffix));
+        if (strlen($name.$suffix) > $max_length) {
+            $name = substr($name, 0, $max_length - strlen($suffix));
         }
 
         return $name.$suffix;
