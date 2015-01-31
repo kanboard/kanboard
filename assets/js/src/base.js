@@ -12,7 +12,7 @@ var Kanboard = (function() {
             return false;
         },
 
-        // Display a popup
+        // Open a popup on a link click
         Popover: function(e, callback) {
             e.preventDefault();
             e.stopPropagation();
@@ -24,28 +24,38 @@ var Kanboard = (function() {
             }
 
             if (link) {
-                $.get(link, function(content) {
-
-                    $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
-
-                    $("#popover-container").click(function() {
-                        $(this).remove();
-                    });
-
-                    $("#popover-content").click(function(e) {
-                        e.stopPropagation();
-                    });
-                    
-                    $(".close-popover").click(function(e) {
-                        e.preventDefault();
-                        $('#popover-container').remove();
-                    });
-
-                    if (callback) {
-                        callback();
-                    }
-                });
+                Kanboard.OpenPopover(link, callback);
             }
+        },
+
+        // Display a popup
+        OpenPopover: function(link, callback) {
+
+            $.get(link, function(content) {
+
+                $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+
+                $("#popover-container").click(function() {
+                    $(this).remove();
+                });
+
+                $("#popover-content").click(function(e) {
+                    e.stopPropagation();
+                });
+                
+                $(".close-popover").click(function(e) {
+                    e.preventDefault();
+                    $('#popover-container').remove();
+                });
+
+                Mousetrap.bind("esc", function() {
+                    $('#popover-container').remove();
+                });
+
+                if (callback) {
+                    callback();
+                }
+            });
         },
 
         // Return true if the page is visible
@@ -181,6 +191,10 @@ var Kanboard = (function() {
             $(".auto-select").focus(function() {
                 $(this).select();
             });
+
+            Mousetrap.bind("ctrl+enter", function() {
+                $("form").submit();
+            }); 
         }
     };
 

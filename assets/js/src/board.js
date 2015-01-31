@@ -7,6 +7,17 @@ Kanboard.Board = (function() {
         Kanboard.Popover(e, Kanboard.Init);
     }
 
+    function keyboard_shortcuts()
+    {
+        Mousetrap.bind("n", function() {
+
+            Kanboard.OpenPopover(
+                $(".task-creation-popover").attr('href'),
+                Kanboard.Init
+            );
+        });
+    }
+
     // Setup the board
     function board_load_events()
     {
@@ -250,6 +261,7 @@ Kanboard.Board = (function() {
         Init: function() {
             board_load_events();
             filter_load_events();
+            keyboard_shortcuts();
         }
     };
 
