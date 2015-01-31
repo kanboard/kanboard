@@ -322,6 +322,22 @@ class ProjectPermission extends Base
     }
 
     /**
+     * Return a list of project ids where the user is member
+     *
+     * @access public
+     * @param  integer   $user_id      User id
+     * @return []integer
+     */
+    public function getMemberProjectIds($user_id)
+    {
+        return $this->db
+                    ->table(Project::TABLE)
+                    ->eq('user_id', $user_id)
+                    ->join(self::TABLE, 'project_id', 'id')
+                    ->findAllByColumn('projects.id');
+    }
+
+    /**
      * Return a list of active projects where the user is member
      *
      * @access public
