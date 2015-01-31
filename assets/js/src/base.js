@@ -35,6 +35,11 @@ var Kanboard = (function() {
                     $("#popover-content").click(function(e) {
                         e.stopPropagation();
                     });
+                    
+                    $(".close-popover").click(function(e) {
+                        e.preventDefault();
+                        $('#popover-container').remove();
+                    });
 
                     if (callback) {
                         callback();

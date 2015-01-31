@@ -74,7 +74,7 @@
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-        <?= t('or') ?> <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $values['project_id'])) ?>
+        <?= t('or') ?> <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $values['project_id']), false, 'close-popover') ?>
     </div>
 </form>
 </section>
