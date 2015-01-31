@@ -1,6 +1,20 @@
 <tr>
     <?php if (! $hide_swimlane): ?>
-        <td width="10%"></td>
+       <th width="12%" >
+           <?php 
+           $task_count = 0;
+           foreach ($swimlane['columns'] as $column): 
+               $task_count += count ($column['tasks']);
+           endforeach ?>
+           <?php if ($task_count > 0): ?>
+           <span class="board-swimlane-showhide">
+               <a href="#" class="row_toggler board-swimlane-showhide" row_id="<?= $swimlane['id'] ?>">
+               <i class="fa fa-minus-circle hide_<?= $swimlane['id'] ?>"></i>
+               <i class="fa fa-plus-circle show_<?= $swimlane['id'] ?>" style="display:none"></i></a>
+               </span>
+           <?php endif ?>
+           <?= $this->e($swimlane['name']) ?>
+        </th>
     <?php endif ?>
 
     <?php foreach ($swimlane['columns'] as $column): ?>
@@ -25,11 +39,9 @@
     </th>
     <?php endforeach ?>
 </tr>
-<tr>
+<tr class="cell_<?= $swimlane['id'] ?>">
     <?php if (! $hide_swimlane): ?>
-        <th class="board-swimlane-title">
-            <?= $this->e($swimlane['name']) ?>
-        </th>
+        <th class="board-swimlane-title"></th>
     <?php endif ?>
 
     <?php foreach ($swimlane['columns'] as $column): ?>

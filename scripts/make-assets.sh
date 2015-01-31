@@ -3,7 +3,7 @@
 app_css="base links title table form button alert tooltip header board project task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive"
 vendor_css="jquery-ui-1.10.4.custom chosen.min fullcalendar.min font-awesome.min"
 
-app_js="base board calendar task analytic init"
+app_js="base board calendar task analytic swimlane init"
 vendor_js="jquery-1.11.1.min jquery-ui-1.10.4.custom.min jquery.ui.touch-punch.min chosen.jquery.min moment.min fullcalendar.min mousetrap.min app.min"
 
 function merge_css {
