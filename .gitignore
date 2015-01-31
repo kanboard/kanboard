@@ -56,4 +56,4 @@ Thumbs.db
 config.php
 data/files
 data/cache
-vendor
+/vendor
