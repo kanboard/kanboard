@@ -98,7 +98,7 @@
     <div class="task-board-icons">
 
         <?php if (! empty($task['nb_subtasks'])): ?>
-            <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100,0).'% Completed ' ?><?= $task['nb_completed_subtasks'].'/'.$task['nb_subtasks'] ?> <i class="fa fa-bars"></i></span>
+            <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?> <i class="fa fa-bars"></i></span>
         <?php endif ?>
 
         <?php if (! empty($task['nb_files'])): ?>
