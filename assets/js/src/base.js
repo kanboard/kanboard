@@ -194,7 +194,9 @@ var Kanboard = (function() {
 
             Mousetrap.bind("ctrl+enter", function() {
                 $("form").submit();
-            }); 
+            });
+
+            $('.dropdown').dropit();
         }
     };
 

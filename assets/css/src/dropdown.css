@@ -1,0 +1,69 @@
+/*
+ * Dropit v1.1.0
+ * http://dev7studios.com/dropit
+ *
+ * Copyright 2012, Dev7studios
+ * Free to use and abuse under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+
+/* These styles assume you are using ul and li */
+.dropit {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropit .dropit-trigger {
+    position: relative;
+}
+
+.dropit .dropit-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0; /* dropdown left or right */
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropit .dropit-open .dropit-submenu {
+    display: block;
+}
+
+.dropdown ul {
+    display: none; /* Hide before plugin loads */
+}
+
+.dropdown ul.dropit-submenu {
+    background-color: #fff;
+    border: 1px solid #b2b2b2;
+    padding: 6px 0;
+    margin: 3px 0 0 1px;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+       -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+}
+
+.dropdown ul.dropit-submenu li {
+    padding: 0;
+    margin: 0;
+    font-size: 1.1em;
+    display: block;
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+.page-header ul.dropdown {
+    display: inline;
+}
+
+.page-header a.dropdown-menu {
+    font-size: 1.1em;
+}
