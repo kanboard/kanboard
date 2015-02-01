@@ -243,10 +243,12 @@ class Board extends Base
 
             $swimlanes[$i]['columns'] = $columns;
             $swimlanes[$i]['nb_columns'] = $nb_columns;
+            $swimlanes[$i]['nb_tasks'] = 0;
 
             for ($j = 0; $j < $nb_columns; $j++) {
                 $swimlanes[$i]['columns'][$j]['tasks'] = $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $columns[$j]['id'], $swimlanes[$i]['id']);
                 $swimlanes[$i]['columns'][$j]['nb_tasks'] = count($swimlanes[$i]['columns'][$j]['tasks']);
+                $swimlanes[$i]['nb_tasks'] += $swimlanes[$i]['columns'][$j]['nb_tasks'];
             }
         }
 

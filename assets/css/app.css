@@ -1411,10 +1411,10 @@ a.filter-on {
 }
 
 /* swimlanes */
-th.board-swimlane-title {
-    vertical-align: top;
-    text-align: right;
-}/* task inside the board */
+#board th a.board-swimlane-toggle {
+    font-size: 0.95em;
+}
+/* task inside the board */
 .task-board {
     position: relative;
     margin-right: 5px;
