@@ -206,7 +206,7 @@ class BoardTest extends Base
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
         $this->assertNotFalse($b->addColumn(1, 'another column'));
-        $this->assertNotFalse($b->addColumn(1, 'one more', 3));
+        $this->assertNotFalse($b->addColumn(1, 'one more', 3, 'one more description'));
 
         $columns = $b->getColumns(1);
         $this->assertTrue(is_array($columns));
@@ -219,6 +219,7 @@ class BoardTest extends Base
         $this->assertEquals('one more', $columns[5]['title']);
         $this->assertEquals(3, $columns[5]['task_limit']);
         $this->assertEquals(6, $columns[5]['position']);
+        $this->assertEquals('one more description', $columns[5]['description']);
     }
 
     public function testMoveColumns()

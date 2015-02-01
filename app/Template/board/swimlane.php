@@ -25,8 +25,14 @@
             </div>
         <?php endif ?>
 
-        <?= $this->e($column['title']) ?>
-
+        <?php if (! empty($column['description'])): ?>
+            <span class="column-tooltip" title="<?= $this->e($column['description']) ?>">
+                <?= $this->e($column['title']) ?>
+            </span>
+        <?php else: ?>
+            <?= $this->e($column['title']) ?>
+        <?php endif ?>
+        
         <?php if ($column['task_limit']): ?>
             <span title="<?= t('Task limit') ?>" class="task-limit">
                 (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>/<?= $this->e($column['task_limit']) ?>)

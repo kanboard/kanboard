@@ -54,7 +54,7 @@ class TaskStatusTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals(Task::STATUS_OPEN, $task['is_active']);
         $this->assertEquals(0, $task['date_completed']);
-        $this->assertEquals(time(), $task['date_modification']);
+        $this->assertEquals(time(), $task['date_modification'], 1);
 
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertArrayHasKey('task.close.TaskStatusTest::onTaskClose', $called);

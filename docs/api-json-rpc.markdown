@@ -854,6 +854,7 @@ Response example:
     - **column_id** (integer, required)
     - **title** (string, required)
     - **task_limit** (integer, optional)
+    - **description** (string, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -889,6 +890,7 @@ Response example:
     - **project_id** (integer, required)
     - **title** (string, required)
     - **task_limit** (integer, optional)
+    - **description** (string, optional)
 - Result on success: **column_id**
 - Result on failure: **false**
 
