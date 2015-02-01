@@ -47,7 +47,7 @@ class Board extends Base
             $column_name = trim($column_name);
 
             if (! empty($column_name)) {
-                $columns[] = array('title' => $column_name, 'task_limit' => 0);
+                $columns[] = array('title' => $column_name, 'task_limit' => 0, 'description' => '');
             }
         }
 
@@ -73,6 +73,7 @@ class Board extends Base
                 'position' => ++$position,
                 'project_id' => $project_id,
                 'task_limit' => $column['task_limit'],
+            	'description' => $column['description'],
             );
 
             if (! $this->db->table(self::TABLE)->save($values)) {
@@ -94,7 +95,7 @@ class Board extends Base
     public function duplicate($project_from, $project_to)
     {
         $columns = $this->db->table(Board::TABLE)
-                            ->columns('title', 'task_limit')
+                            ->columns('title', 'task_limit', 'description')
                             ->eq('project_id', $project_from)
                             ->asc('position')
                             ->findAll();
@@ -108,16 +109,18 @@ class Board extends Base
      * @access public
      * @param  integer   $project_id    Project id
      * @param  string    $title         Column title
+     * @param  string    $description   Column description
      * @param  integer   $task_limit    Task limit
      * @return boolean|integer
      */
-    public function addColumn($project_id, $title, $task_limit = 0)
+    public function addColumn($project_id, $title, $description, $task_limit = 0)
     {
         $values = array(
             'project_id' => $project_id,
             'title' => $title,
             'task_limit' => $task_limit,
             'position' => $this->getLastColumnPosition($project_id) + 1,
+        	'description' => $description,
         );
 
         return $this->persist(self::TABLE, $values);
@@ -134,7 +137,7 @@ class Board extends Base
     {
         $columns = array();
 
-        foreach (array('title', 'task_limit') as $field) {
+        foreach (array('title', 'description', 'task_limit') as $field) {
             foreach ($values[$field] as $column_id => $value) {
                 $columns[$column_id][$field] = $value;
             }
@@ -143,7 +146,7 @@ class Board extends Base
         $this->db->startTransaction();
 
         foreach ($columns as $column_id => $values) {
-            $this->updateColumn($column_id, $values['title'], (int) $values['task_limit']);
+            $this->updateColumn($column_id, $values['title'], (int) $values['task_limit'], $values['description']);
         }
 
         $this->db->closeTransaction();
@@ -160,11 +163,12 @@ class Board extends Base
      * @param  integer   $task_limit    Task limit
      * @return boolean
      */
-    public function updateColumn($column_id, $title, $task_limit = 0)
+    public function updateColumn($column_id, $title, $task_limit = 0, $description = "")
     {
         return $this->db->table(self::TABLE)->eq('id', $column_id)->update(array(
             'title' => $title,
             'task_limit' => $task_limit,
+        	'description' => $description,
         ));
     }
 

@@ -39,7 +39,7 @@
 <div class="page-header">
     <h2><?= t('Board') ?></h2>
 </div>
-<table class="table-stripped">
+<table id="board" class="table-stripped">
     <tr>
         <th width="50%"><?= t('Column') ?></th>
         <th><?= t('Task limit') ?></th>
@@ -47,7 +47,14 @@
     </tr>
     <?php foreach ($stats['columns'] as $column): ?>
     <tr>
-        <td><?= $this->e($column['title']) ?></td>
+        <td>
+        <?= $this->e($column['title']) ?>
+        <?php if (! empty($column['description'])): ?>
+            <span title="<?= t('Description') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'columndescription', array('column_id' => $column['id'], 'project_id' => $column['project_id'])) ?>">
+                <i class="fa fa-file-text-o"></i>
+            </span>
+        <?php endif ?>
+        </td>
         <td><?= $column['task_limit'] ?: '∞' ?></td>
         <td><?= $column['nb_active_tasks'] ?></td>
     </tr>

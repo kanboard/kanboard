@@ -330,4 +330,23 @@ abstract class Base
 
         return $project;
     }
+    
+    /**
+     * Common method to get a column
+     *
+     * @access protected
+     * @param  integer      $column_id    Default column id
+     * @return array
+     */
+    protected function getColumn()
+    {
+    	$column_id = $this->request->getIntegerParam('column_id', $column_id);
+    	$column = $this->board->getColumn($column_id);
+    
+        if (! $column ) {
+            $this->notfound();
+        }
+    
+    	return $column;
+    }
 }
