@@ -54,7 +54,7 @@ class BoardTest extends Base
         $board = $b->getBoard(1);
         $this->assertNotEmpty($board);
         $this->assertEquals(1, count($board));
-        $this->assertEquals(4, count($board[0]));
+        $this->assertEquals(5, count($board[0]));
         $this->assertTrue(array_key_exists('name', $board[0]));
         $this->assertTrue(array_key_exists('columns', $board[0]));
         $this->assertTrue(array_key_exists('tasks', $board[0]['columns'][2]));
@@ -81,7 +81,8 @@ class BoardTest extends Base
         $board = $b->getBoard(1);
         $this->assertNotEmpty($board);
         $this->assertEquals(2, count($board));
-        $this->assertEquals(4, count($board[0]));
+        $this->assertEquals(5, count($board[0]));
+        $this->assertTrue(array_key_exists('nb_tasks', $board[0]));
         $this->assertTrue(array_key_exists('name', $board[0]));
         $this->assertTrue(array_key_exists('columns', $board[0]));
         $this->assertTrue(array_key_exists('tasks', $board[0]['columns'][2]));
