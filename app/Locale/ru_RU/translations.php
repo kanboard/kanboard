@@ -699,4 +699,5 @@ return array(
     // 'All status' => '',
     // 'Add a comment logging moving the task between columns' => '',
     // 'Moved to column %s' => '',
+    // 'Change description' => '',
 );

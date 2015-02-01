@@ -160,16 +160,7 @@ var Kanboard = (function() {
             }
         },
 
-        // Common init
         Init: function() {
-
-            // Datepicker
-            $(".form-date").datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                dateFormat: 'yy-mm-dd',
-                constrainInput: false
-            });
 
             // Project select box
             $("#board-selector").chosen({
@@ -180,23 +171,38 @@ var Kanboard = (function() {
                 window.location = $(this).attr("data-board-url").replace(/PROJECT_ID/g, $(this).val());
             });
 
+            // Check the session every 60s
+            window.setInterval(Kanboard.CheckSession, 60000);
+
+            Mousetrap.bind("ctrl+enter", function() {
+                $("form").submit();
+            });
+
+            Kanboard.InitAfterAjax();
+        },
+
+        InitAfterAjax: function() {
+            
+            // Datepicker
+            $(".form-date").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                dateFormat: 'yy-mm-dd',
+                constrainInput: false
+            });
+
             // Markdown Preview for textareas
             $("#markdown-preview").click(Kanboard.MarkdownPreview);
             $("#markdown-write").click(Kanboard.MarkdownWriter);
-
-            // Check the session every 60s
-            window.setInterval(Kanboard.CheckSession, 60000);
 
             // Auto-select input fields
             $(".auto-select").focus(function() {
                 $(this).select();
             });
 
-            Mousetrap.bind("ctrl+enter", function() {
-                $("form").submit();
-            });
-
-            $('.dropdown').dropit();
+            // Dropdown
+            $(".dropit-submenu").hide();
+            $('.dropdown').not(".dropit").dropit();
         }
     };
 

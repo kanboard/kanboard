@@ -30,6 +30,7 @@
                             <i class="fa fa-cog fa-fw"></i>
                             <?= $this->a(t('Configure'), 'project', 'show', array('project_id' => $project['id'])) ?>
                         </li>
+                        <?php endif ?>
                     </ul>
                 </li>
             </ul>
@@ -45,6 +46,5 @@
         <li>
             <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>
         </li>
-        <?php endif ?>
     </ul>
 </div>

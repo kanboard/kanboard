@@ -699,4 +699,5 @@ return array(
     'All status' => 'Todos os status',
     'Add a comment logging moving the task between columns' => 'Adicionar un comentário de log ao mover uma tarefa em outra coluna',
     'Moved to column %s' => 'Mover para a coluna %s',
+    // 'Change description' => '',
 );
