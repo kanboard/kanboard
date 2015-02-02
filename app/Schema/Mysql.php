@@ -5,9 +5,9 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 42;
+const VERSION = 43;
 
-function version_42($pdo)
+function version_43($pdo)
 {
     $pdo->exec("CREATE TABLE links
         (
@@ -32,6 +32,11 @@ function version_42($pdo)
     $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, task_inverse_id)");
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('project_links', ''));
+}
+
+function version_42($pdo)
+{
+    $pdo->exec('ALTER TABLE columns ADD COLUMN description TEXT');
 }
 
 function version_41($pdo)

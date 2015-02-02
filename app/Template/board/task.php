@@ -38,7 +38,18 @@
      data-task-url="<?= $this->u('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"
      title="<?= t('View this task') ?>">
 
-    <?= $this->a('#'.$task['id'], 'task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-edit-popover', t('Edit this task')) ?>
+    <ul class="dropdown">
+        <li>
+            <a href="#" class="dropdown-menu"><?= '#'.$task['id'] ?></a>
+            <ul>
+                <li><i class="fa fa-user"></i> <?= $this->a(t('Change assignee'), 'board', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'assignee-popover') ?></li>
+                <li><i class="fa fa-tag"></i> <?= $this->a(t('Change category'), 'board', 'changeCategory', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'category-popover') ?></li>
+                <li><i class="fa fa-align-left"></i> <?= $this->a(t('Change description'), 'task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-description-popover') ?></li>
+                <li><i class="fa fa-pencil-square-o"></i> <?= $this->a(t('Edit this task'), 'task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-edit-popover') ?></li>
+                <li><i class="fa fa-close"></i> <?= $this->a(t('Close this task'), 'task', 'close', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'confirmation' => 'yes', 'redirect' => 'board'), true) ?></li>
+            </li>
+        </li>
+    </ul>
 
     <?php if ($task['reference']): ?>
     <span class="task-board-reference" title="<?= t('Reference') ?>">
@@ -101,7 +112,7 @@
         <?php endif ?>
         
         <?php if (! empty($task['nb_subtasks'])): ?>
-            <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_completed_subtasks'].'/'.$task['nb_subtasks'] ?> <i class="fa fa-bars"></i></span>
+            <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?> <i class="fa fa-bars"></i></span>
         <?php endif ?>
 
         <?php if (! empty($task['nb_files'])): ?>
@@ -114,11 +125,7 @@
 
         <?php if (! empty($task['description'])): ?>
             <span title="<?= t('Description') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
-            <?php if (! isset($not_editable)): ?>
-                <a class="task-description-popover" href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"><i class="fa fa-file-text-o" data-href="?controller=task&amp;action=description&amp;task_id=<?= $task['id'] ?>"></i></a>
-            <?php else: ?>
                 <i class="fa fa-file-text-o"></i>
-            <?php endif ?>
             </span>
         <?php endif ?>
     </div>

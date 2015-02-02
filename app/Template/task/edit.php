@@ -59,7 +59,7 @@
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
         <?php if ($ajax): ?>
-            <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
+            <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
         <?php else: ?>
             <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         <?php endif ?>

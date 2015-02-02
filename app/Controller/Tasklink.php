@@ -44,7 +44,7 @@ class Tasklink extends Base
             );
         }
 
-        $this->response->html($this->taskLayout('tasklink/create', array(
+        $this->response->html($this->taskLayout('tasklink/edit', array(
             'values' => $values,
             'errors' => $errors,
             'link_list' => $this->link->getList($task['project_id'], false),
@@ -98,6 +98,7 @@ class Tasklink extends Base
         	'task_list' => $this->taskFinder->getList($task['project_id'], TaskModel::STATUS_OPEN, $task['id']),
             'link' => $taskLink,
             'task' => $task,
+            'edit' => true,
         )));
     }
 

@@ -171,7 +171,7 @@ class Swimlane extends Base
 
         $swimlanes = array_merge(
             $swimlanes,
-            $this->db->table(self::TABLE)->eq('project_id', $project_id)->orderBy('name', 'asc')->listing('id', 'name')
+            $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->orderBy('name', 'asc')->getAll('id', 'name')
         );
 
         return $prepend ? array(-1 => t('All swimlanes')) + $swimlanes : $swimlanes;
@@ -354,11 +354,11 @@ class Swimlane extends Base
      */
     public function moveDown($project_id, $swimlane_id)
     {
-        $swimlanes = $this->db->table(self::TABLE)
+        $swimlanes = $this->db->hashtable(self::TABLE)
                               ->eq('project_id', $project_id)
                               ->eq('is_active', self::ACTIVE)
                               ->asc('position')
-                              ->listing('id', 'position');
+                              ->getAll('id', 'position');
 
         $positions = array_flip($swimlanes);
 
@@ -388,11 +388,11 @@ class Swimlane extends Base
      */
     public function moveUp($project_id, $swimlane_id)
     {
-        $swimlanes = $this->db->table(self::TABLE)
+        $swimlanes = $this->db->hashtable(self::TABLE)
                               ->eq('project_id', $project_id)
                               ->eq('is_active', self::ACTIVE)
                               ->asc('position')
-                              ->listing('id', 'position');
+                              ->getAll('id', 'position');
 
         $positions = array_flip($swimlanes);
 

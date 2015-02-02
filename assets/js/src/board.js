@@ -4,7 +4,18 @@ Kanboard.Board = (function() {
 
     function on_popover(e)
     {
-        Kanboard.Popover(e, Kanboard.Init);
+        Kanboard.Popover(e, Kanboard.InitAfterAjax);
+    }
+
+    function keyboard_shortcuts()
+    {
+        Mousetrap.bind("n", function() {
+
+            Kanboard.OpenPopover(
+                $(".task-creation-popover").attr('href'),
+                Kanboard.InitAfterAjax
+            );
+        });
     }
 
     // Setup the board
@@ -27,10 +38,10 @@ Kanboard.Board = (function() {
         });
 
         // Assignee change
-        $(".assignee-popover").click(Kanboard.Popover);
+        $(".assignee-popover").click(on_popover);
 
         // Category change
-        $(".category-popover").click(Kanboard.Popover);
+        $(".category-popover").click(on_popover);
 
         // Task edit popover
         $(".task-edit-popover").click(on_popover);
@@ -39,7 +50,14 @@ Kanboard.Board = (function() {
         // Description popover
         $(".task-description-popover").click(on_popover);
 
-        // Tooltips
+        // Tooltip for column description
+        $(".column-tooltip").tooltip({
+            content: function(e) {
+                return $(this).attr("title");
+            }
+        });
+
+        // Tooltips for tasks
         $(".task-board-tooltip").tooltip({
             track: false,
             position: {
@@ -158,6 +176,7 @@ Kanboard.Board = (function() {
             success: function(data) {
                 $("#board").remove();
                 $("#main").append(data);
+                Kanboard.InitAfterAjax();
                 board_load_events();
                 filter_apply();
             }
@@ -175,6 +194,7 @@ Kanboard.Board = (function() {
                     200: function(data) {
                         $("#board").remove();
                         $("#main").append(data);
+                        Kanboard.InitAfterAjax();
                         board_unload_events();
                         board_load_events();
                         filter_apply();
@@ -250,6 +270,7 @@ Kanboard.Board = (function() {
         Init: function() {
             board_load_events();
             filter_load_events();
+            keyboard_shortcuts();
         }
     };
 

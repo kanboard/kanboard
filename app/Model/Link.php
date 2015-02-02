@@ -148,13 +148,13 @@ class Link extends Base
      */
     public function getList($project_id=-1, $prepend_none = true, $prepend_all = false)
     {
-        $listing = $this->db->table(self::TABLE)
+        $listing = $this->db->hashtable(self::TABLE)
             ->beginOr()
             ->eq('project_id', -1)
             ->eq('project_id', $project_id)
             ->closeOr()
             ->asc('id')
-            ->listing('id', 'name');
+            ->getAll('id', 'name');
         foreach($listing AS $id => $name) {
             if (0 != ($id%2)) {
                 $listing[$id] .= ' &raquo;';
@@ -223,9 +223,9 @@ class Link extends Base
      */
     public function getAll($prepend_none = false, $prepend_all = false)
     {
-        $listing = $this->db->table(self::TABLE)
+        $listing = $this->db->hashtable(self::TABLE)
             ->asc('name')
-            ->listing('id', 'name');
+            ->getAll('id', 'name');
         
         $prepend = array();
         

@@ -12,7 +12,7 @@ var Kanboard = (function() {
             return false;
         },
 
-        // Display a popup
+        // Open a popup on a link click
         Popover: function(e, callback) {
             e.preventDefault();
             e.stopPropagation();
@@ -24,23 +24,38 @@ var Kanboard = (function() {
             }
 
             if (link) {
-                $.get(link, function(content) {
-
-                    $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
-
-                    $("#popover-container").click(function() {
-                        $(this).remove();
-                    });
-
-                    $("#popover-content").click(function(e) {
-                        e.stopPropagation();
-                    });
-
-                    if (callback) {
-                        callback();
-                    }
-                });
+                Kanboard.OpenPopover(link, callback);
             }
+        },
+
+        // Display a popup
+        OpenPopover: function(link, callback) {
+
+            $.get(link, function(content) {
+
+                $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+
+                $("#popover-container").click(function() {
+                    $(this).remove();
+                });
+
+                $("#popover-content").click(function(e) {
+                    e.stopPropagation();
+                });
+                
+                $(".close-popover").click(function(e) {
+                    e.preventDefault();
+                    $('#popover-container').remove();
+                });
+
+                Mousetrap.bind("esc", function() {
+                    $('#popover-container').remove();
+                });
+
+                if (callback) {
+                    callback();
+                }
+            });
         },
 
         // Return true if the page is visible
@@ -145,9 +160,29 @@ var Kanboard = (function() {
             }
         },
 
-        // Common init
         Init: function() {
 
+            // Project select box
+            $("#board-selector").chosen({
+                width: 180
+            });
+
+            $("#board-selector").change(function() {
+                window.location = $(this).attr("data-board-url").replace(/PROJECT_ID/g, $(this).val());
+            });
+
+            // Check the session every 60s
+            window.setInterval(Kanboard.CheckSession, 60000);
+
+            Mousetrap.bind("ctrl+enter", function() {
+                $("form").submit();
+            });
+
+            Kanboard.InitAfterAjax();
+        },
+
+        InitAfterAjax: function() {
+            
             // Datepicker
             $(".form-date").datepicker({
                 showOtherMonths: true,
@@ -156,26 +191,18 @@ var Kanboard = (function() {
                 constrainInput: false
             });
 
-            // Project select box
-            $("#board-selector").chosen({
-                width: 180
-            });
-
-            $("#board-selector").change(function() {
-                window.location = $(this).attr("data-board-url").replace(/%d/g, $(this).val());
-            });
-
             // Markdown Preview for textareas
             $("#markdown-preview").click(Kanboard.MarkdownPreview);
             $("#markdown-write").click(Kanboard.MarkdownWriter);
-
-            // Check the session every 60s
-            window.setInterval(Kanboard.CheckSession, 60000);
 
             // Auto-select input fields
             $(".auto-select").focus(function() {
                 $(this).select();
             });
+
+            // Dropdown
+            $(".dropit-submenu").hide();
+            $('.dropdown').not(".dropit").dropit();
         }
     };
 

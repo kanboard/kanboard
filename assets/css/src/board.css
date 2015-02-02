@@ -62,7 +62,6 @@ a.filter-on {
 }
 
 /* swimlanes */
-th.board-swimlane-title {
-    vertical-align: top;
-    text-align: right;
+#board th a.board-swimlane-toggle {
+    font-size: 0.95em;
 }

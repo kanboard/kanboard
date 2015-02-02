@@ -697,4 +697,7 @@ return array(
     'All swimlanes' => 'Alle Swimlanes',
     'All colors' => 'Alle Farben',
     // 'All status' => '',
+    // 'Add a comment logging moving the task between columns' => '',
+    // 'Moved to column %s' => '',
+    // 'Change description' => '',
 );

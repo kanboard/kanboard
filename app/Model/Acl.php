@@ -22,6 +22,7 @@ class Acl extends Base
         'board' => array('readonly'),
         'project' => array('feed'),
         'webhook' => '*',
+        'app' => array('colors'),
     );
 
     /**
@@ -49,7 +50,7 @@ class Acl extends Base
     private $manager_acl = array(
         'action' => '*',
         'analytic' => '*',
-        'board' => array('movecolumn', 'edit', 'update', 'add', 'remove'),
+        'board' => array('movecolumn', 'edit', 'editcolumn', 'updatecolumn', 'add', 'remove'),
         'category' => '*',
         'export' => array('tasks', 'subtasks', 'summary'),
         'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),

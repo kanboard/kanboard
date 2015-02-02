@@ -92,6 +92,19 @@ class Kanboard():
     def _getId(self):
         self._id += 1
         return self._id
+
+    def getTimezone(self):
+        kid = self._getId()
+        params = {
+                 "jsonrpc": "2.0",
+                 "method": "getTimezone",
+                 "id" : kid,
+        }
+
+        response = requests.post(self.url, data=json.dumps(params), headers=self.headers, auth=(self.username, self.token))
+        assert response.ok
+        assert response.json()['id'] == kid
+        return response.json()['result']
         
     def createProject(self, name):
         kid = self._getId()   
@@ -546,7 +559,7 @@ class Kanboard():
         
         return response.json()['result']
     
-    def getAllTasks(self, project_id, status):
+    def getAllTasks(self, project_id, status_id):
         kid = self._getId()   
         params = {
                  "jsonrpc": "2.0",
@@ -554,7 +567,7 @@ class Kanboard():
                  "id" : kid,
                  "params": {
                         "project_id": project_id,
-                        "status": status
+                        "status_id": status_id
                  }
         }
         
@@ -975,7 +988,7 @@ class Kanboard():
         
         return response.json()['result']
     
-    def createSubtask(self, task_id, title, assignee_id=None, time_estimated=None, time_spent=None, status=None):
+    def createSubtask(self, task_id, title, user_id=None, time_estimated=None, time_spent=None, status=None):
         kid = self._getId()   
         params = {
                  "jsonrpc": "2.0",
@@ -988,8 +1001,8 @@ class Kanboard():
         }
         
         #optional parameters
-        if assignee_id is not None:
-            params['params']["assignee_id"] = assignee_id
+        if user_id is not None:
+            params['params']["user_id"] = user_id
         if time_estimated is not None:
             params['params']["time_estimated"] = time_estimated
         if time_spent is not None:
@@ -1040,7 +1053,7 @@ class Kanboard():
         
         return response.json()['result']
     
-    def updateSubtask(self, subtask_id, task_id, title=None, assignee_id=None, time_estimated=None, time_spent=None, status=None):
+    def updateSubtask(self, subtask_id, task_id, title=None, user_id=None, time_estimated=None, time_spent=None, status=None):
         kid = self._getId()   
         params = {
                  "jsonrpc": "2.0",
@@ -1055,8 +1068,8 @@ class Kanboard():
         #optional parameters        
         if title is not None:
             params['params']["title"] = title
-        if assignee_id is not None:
-            params['params']["assignee_id"] = assignee_id
+        if user_id is not None:
+            params['params']["user_id"] = user_id
         if time_estimated is not None:
             params['params']["time_estimated"] = time_estimated
         if time_spent is not None:

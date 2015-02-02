@@ -1,5 +1,5 @@
-<?= $this->js('assets/js/d3.v3.4.8.min.js') ?>
-<?= $this->js('assets/js/dimple.v2.1.0.min.js') ?>
+<?= $this->js('assets/js/vendor/d3.v3.4.8.min.js') ?>
+<?= $this->js('assets/js/vendor/dimple.v2.1.0.min.js') ?>
 
 <section id="main">
     <div class="page-header">

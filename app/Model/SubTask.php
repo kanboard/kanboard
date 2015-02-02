@@ -101,6 +101,7 @@ class SubTask extends Base
                 Project::TABLE.'.name AS project_name'
             )
             ->eq('user_id', $user_id)
+            ->eq(Project::TABLE.'.is_active', Project::ACTIVE)
             ->in(SubTask::TABLE.'.status', $status)
             ->join(Task::TABLE, 'id', 'task_id')
             ->join(Project::TABLE, 'id', 'project_id', Task::TABLE)

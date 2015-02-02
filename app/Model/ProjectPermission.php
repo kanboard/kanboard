@@ -315,10 +315,43 @@ class ProjectPermission extends Base
     public function getMemberProjects($user_id)
     {
         return $this->db
+                    ->hashtable(Project::TABLE)
+                    ->eq('user_id', $user_id)
+                    ->join(self::TABLE, 'project_id', 'id')
+                    ->getAll('projects.id', 'name');
+    }
+
+    /**
+     * Return a list of project ids where the user is member
+     *
+     * @access public
+     * @param  integer   $user_id      User id
+     * @return []integer
+     */
+    public function getMemberProjectIds($user_id)
+    {
+        return $this->db
                     ->table(Project::TABLE)
                     ->eq('user_id', $user_id)
                     ->join(self::TABLE, 'project_id', 'id')
-                    ->listing('projects.id', 'name');
+                    ->findAllByColumn('projects.id');
+    }
+
+    /**
+     * Return a list of active projects where the user is member
+     *
+     * @access public
+     * @param  integer   $user_id      User id
+     * @return array
+     */
+    public function getActiveMemberProjects($user_id)
+    {
+        return $this->db
+                    ->hashtable(Project::TABLE)
+                    ->eq('user_id', $user_id)
+                    ->eq(Project::TABLE.'.is_active', Project::ACTIVE)
+                    ->join(self::TABLE, 'project_id', 'id')
+                    ->getAll('projects.id', 'name');
     }
 
     /**

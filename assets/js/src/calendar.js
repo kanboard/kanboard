@@ -1,5 +1,7 @@
 Kanboard.Calendar = (function() {
 
+    var filter_storage_key = "";
+
     // Show the empty calendar
     function show_calendar()
     {
@@ -65,7 +67,7 @@ Kanboard.Calendar = (function() {
     // Restore saved filters
     function load_filters()
     {
-        var filters = Kanboard.GetStorageItem('calendar_filters');
+        var filters = Kanboard.GetStorageItem(filter_storage_key);
         
         if (filters !== "undefined" && filters !== "") {
             filters = JSON.parse(filters);
@@ -89,12 +91,13 @@ Kanboard.Calendar = (function() {
             filters[$(this).attr("name")] = $(this).val();
         });
         
-        Kanboard.SetStorageItem("calendar_filters", JSON.stringify(filters));
+        Kanboard.SetStorageItem(filter_storage_key, JSON.stringify(filters));
         refresh_calendar(filters);
     }
 
     return {
         Init: function() {
+            filter_storage_key = "calendar_filters_" + $("#calendar").data("project-id");
             show_calendar();
             load_filters();
         }

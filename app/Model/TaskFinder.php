@@ -63,8 +63,9 @@ class TaskFinder extends Base
                         'projects.name AS project_name'
                     )
                     ->join(Project::TABLE, 'id', 'project_id')
-                    ->eq('tasks.owner_id', $user_id)
-                    ->eq('tasks.is_active', Task::STATUS_OPEN);
+                    ->eq(Task::TABLE.'.owner_id', $user_id)
+                    ->eq(Task::TABLE.'.is_active', Task::STATUS_OPEN)
+                    ->eq(Project::TABLE.'.is_active', Project::ACTIVE);
     }
 
     /**
@@ -140,14 +141,14 @@ class TaskFinder extends Base
     public function getList($project_id, $status_id = Task::STATUS_OPEN, $exclude_id=null, $limit=50)
     {
         $sql = $this->db
-                    ->table(Task::TABLE)
+                    ->hashtable(Task::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('is_active', $status_id)
                     ->limit($limit);
         if (null != $exclude_id) {
             $sql->neq('id', $exclude_id);
         }
-        return $sql->listing('id', 'title');
+        return $sql->getAll('id', 'title');
     }
 
     /**
@@ -194,6 +195,18 @@ class TaskFinder extends Base
                     ->findAll();
 
         return $tasks;
+    }
+
+    /**
+     * Get project id for a given task
+     *
+     * @access public
+     * @param  integer   $task_id   Task id
+     * @return integer
+     */
+    public function getProjectId($task_id)
+    {
+        return (int) $this->db->table(Task::TABLE)->eq('id', $task_id)->findOneColumn('project_id') ?: 0;
     }
 
     /**

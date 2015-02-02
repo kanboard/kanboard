@@ -3,6 +3,12 @@
 // Enable/Disable debug
 define('DEBUG', false);
 
+// Debug file path
+define('DEBUG_FILE', __DIR__.'/data/debug.log');
+
+// Folder for uploaded files, don't forget the trailing slash
+define('FILES_DIR', 'data/files/');
+
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
 

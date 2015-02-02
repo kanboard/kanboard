@@ -29,4 +29,22 @@ class DateParserTest extends Base
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getTimestamp('2014_03_05')));
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getTimestamp('03/05/2014')));
     }
+
+    public function testConvert()
+    {
+        $d = new DateParser($this->container);
+
+        $values = array(
+            'date_due' => '2015-01-25',
+            'date_started' => '2015_01_25',
+        );
+
+        $d->convert($values, array('date_due', 'date_started'));
+
+        $this->assertEquals(mktime(0, 0, 0, 1, 25, 2015), $values['date_due']);
+        $this->assertEquals('2015-01-25', date('Y-m-d', $values['date_due']));
+
+        $this->assertEquals(mktime(0, 0, 0, 1, 25, 2015), $values['date_started']);
+        $this->assertEquals('2015-01-25', date('Y-m-d', $values['date_started']));
+    }
 }

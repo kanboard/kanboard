@@ -8,15 +8,31 @@
         </ul>
     </div>
     <section>
-    <?php if (empty($active_projects) && empty($inactive_projects)): ?>
-        <p class="alert"><?= t('No project') ?></p>
-    <?php else: ?>
+        <?php if ($paginator->isEmpty()): ?>
+            <p class="alert"><?= t('No project') ?></p>
+        <?php else: ?>
+            <table class="table-fixed">
+                <tr>
+                    <th class="column-8"><?= $paginator->order(t('Id'), 'id') ?></th>
+                    <th class="column-8"><?= $paginator->order(t('Status'), 'is_active') ?></th>
+                    <th class="column-20"><?= $paginator->order(t('Project'), 'name') ?></th>
+                    <th><?= t('Columns') ?></th>
+                </tr>
+                <?php foreach ($paginator->getCollection() as $project): ?>
+                <tr>
+                    <td>
+                        <?= $this->a('#'.$project['id'], 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link') ?>
+                    </td>
+                    <td>
+                        <?php if ($project['is_active']): ?>
+                            <?= t('Active') ?>
+                        <?php else: ?>
+                            <?= t('Inactive') ?>
+                        <?php endif ?>
+                    </td>
+                    <td>
+                        <?= $this->a('<i class="fa fa-table"></i>', 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Board')) ?>&nbsp;
 
-        <?php if (! empty($active_projects)): ?>
-            <h3><?= t('Active projects') ?></h3>
-            <ul class="project-listing">
-                <?php foreach ($active_projects as $project): ?>
-                    <li>
                         <?php if ($project['is_public']): ?>
                             <i class="fa fa-share-alt fa-fw"></i>
                         <?php endif ?>
@@ -24,25 +40,18 @@
                             <i class="fa fa-lock fa-fw"></i>
                         <?php endif ?>
                         <?= $this->a($this->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
-                    </li>
+                    </td>
+                    <td class="dashboard-project-stats">
+                        <?php foreach ($project['columns'] as $column): ?>
+                            <strong title="<?= t('Task count') ?>"><?= $column['nb_tasks'] ?></strong>
+                            <span><?= $this->e($column['title']) ?></span>
+                        <?php endforeach ?>
+                    </td>
+                </tr>
                 <?php endforeach ?>
-            </ul>
-        <?php endif ?>
+            </table>
 
-        <?php if (! empty($inactive_projects)): ?>
-            <h3><?= t('Inactive projects') ?></h3>
-            <ul class="project-listing">
-                <?php foreach ($inactive_projects as $project): ?>
-                    <li>
-                        <?php if ($project['is_private']): ?>
-                            <i class="fa fa-lock"></i>
-                        <?php endif ?>
-                        <?= $this->a($this->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
-                    </li>
-                <?php endforeach ?>
-            </ul>
+            <?= $paginator ?>
         <?php endif ?>
-
-    <?php endif ?>
     </section>
 </section>

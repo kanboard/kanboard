@@ -33,9 +33,10 @@
             </td>
             <?php if (! isset($not_editable)): ?>
             <td>
-                <?= $this->a(t('Edit'), 'tasklink', 'edit', array('task_id' => $task['id'], 'link_id' => $link['id'], 'project_id' => $task['project_id'])) ?>
-                <?= t('or') ?>
-                <?= $this->a(t('Remove'), 'tasklink', 'confirm', array('task_id' => $task['id'], 'link_id' => $link['id'], 'project_id' => $task['project_id'])) ?>
+                <ul>
+                    <li><?= $this->a(t('Edit'), 'tasklink', 'edit', array('task_id' => $task['id'], 'link_id' => $link['id'], 'project_id' => $task['project_id'])) ?></li>
+                    <li><?= $this->a(t('Remove'), 'tasklink', 'confirm', array('task_id' => $task['id'], 'link_id' => $link['id'], 'project_id' => $task['project_id'])) ?></li>
+                </ul>
             </td>
             <?php endif ?>
         </tr>
@@ -51,6 +52,7 @@
         <?= $this->formSelect('link_id', $link_list, array(), array(), 'required autofocus') ?>
         &#160;
         #<?= $this->formNumeric('task_inverse_id', array(), array(), array('required', 'placeholder="'.t('Task id').'"', 'title="'.t('Linked task id').'"', 'list="task_inverse_ids"')) ?>
+        <?php if (!empty($task_list)): ?>
         <datalist id="task_inverse_ids">
             <select>
                 <?php foreach ($task_list as $task_inverse_id => $task_inverse_title): ?>
@@ -58,6 +60,7 @@
                 <?php endforeach ?>
             </select>
         </datalist>
+        <?php endif ?>
         <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
     </form>
     <?php endif ?>

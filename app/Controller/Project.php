@@ -17,24 +17,25 @@ class Project extends Base
      */
     public function index()
     {
-        $projects = $this->project->getAll(! $this->userSession->isAdmin());
-        $nb_projects = count($projects);
-        $active_projects = array();
-        $inactive_projects = array();
-
-        foreach ($projects as $project) {
-            if ($project['is_active'] == 1) {
-                $active_projects[] = $project;
-            }
-            else {
-                $inactive_projects[] = $project;
-            }
+        if ($this->userSession->isAdmin()) {
+            $project_ids = $this->project->getAllIds();
         }
+        else {
+            $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
+        }
+        
+        $nb_projects = count($project_ids);
+
+        $paginator = $this->paginator
+            ->setUrl('project', 'index')
+            ->setMax(20)
+            ->setOrder('name')
+            ->setQuery($this->project->getQueryColumnStats($project_ids))
+            ->calculate();
 
         $this->response->html($this->template->layout('project/index', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
-            'active_projects' => $active_projects,
-            'inactive_projects' => $inactive_projects,
+            'paginator' => $paginator,
             'nb_projects' => $nb_projects,
             'title' => t('Projects').' ('.$nb_projects.')'
         )));
@@ -307,7 +308,7 @@ class Project extends Base
 
             $this->checkCSRFParam();
 
-            if ($this->project->duplicate($project['id'])) {
+            if ($this->projectDuplication->duplicate($project['id'])) {
                 $this->session->flash(t('Project cloned successfully.'));
             } else {
                 $this->session->flashError(t('Unable to clone this project.'));

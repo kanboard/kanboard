@@ -5,11 +5,11 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 41;
+const VERSION = 42;
 
-function version_41($pdo)
+function version_42($pdo)
 {
-    $pdo->exec("CREATE TABLE links
+	$pdo->exec("CREATE TABLE links
         (
             id INTEGER PRIMARY KEY,
             project_id INTEGER NOT NULL,
@@ -38,6 +38,11 @@ function version_41($pdo)
     $rq->execute(array(-1, 'is a parent of', 1));
     $rq->execute(array(-1, 'targets milestone', 0));
     $rq->execute(array(-1, 'is a milestone of', 1));
+}
+
+function version_41($pdo)
+{
+    $pdo->exec('ALTER TABLE columns ADD COLUMN description TEXT');
 }
 
 function version_40($pdo)

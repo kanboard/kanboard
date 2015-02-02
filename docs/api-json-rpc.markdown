@@ -854,6 +854,7 @@ Response example:
     - **column_id** (integer, required)
     - **title** (string, required)
     - **task_limit** (integer, optional)
+    - **description** (string, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -889,6 +890,7 @@ Response example:
     - **project_id** (integer, required)
     - **title** (string, required)
     - **task_limit** (integer, optional)
+    - **description** (string, optional)
 - Result on success: **column_id**
 - Result on failure: **false**
 
@@ -1052,7 +1054,7 @@ Response example:
 - Purpose: **Get all available tasks**
 - Parameters:
     - **project_id** (integer, required)
-    - **status**: The value 1 for active tasks and 0 for inactive (integer, required)
+    - **status_id**: The value 1 for active tasks and 0 for inactive (integer, required)
 - Result on success: **List of tasks**
 - Result on failure: **false**
 
@@ -1065,7 +1067,7 @@ Request example to fetch all tasks on the board:
     "id": 133280317,
     "params": {
         "project_id": 1,
-        "status": 1
+        "status_id": 1
     }
 }
 ```
@@ -1879,7 +1881,7 @@ Response example:
 - Parameters:
     - **task_id** (integer, required)
     - **title** (integer, required)
-    - **assignee_id** (int, optional)
+    - **user_id** (int, optional)
     - **time_estimated** (int, optional)
     - **time_spent** (int, optional)
     - **status** (int, optional)
@@ -1996,7 +1998,7 @@ Response example:
     - **id** (integer, required)
     - **task_id** (integer, required)
     - **title** (integer, optional)
-    - **assignee_id** (integer, optional)
+    - **user_id** (integer, optional)
     - **time_estimated** (integer, optional)
     - **time_spent** (integer, optional)
     - **status** (integer, optional)
