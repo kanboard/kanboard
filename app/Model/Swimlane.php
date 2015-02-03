@@ -183,7 +183,7 @@ class Swimlane extends Base
      * @access public
      * @param  integer   $project_id
      * @param  string    $name
-     * @return bool
+     * @return integer|boolean
      */
     public function create($project_id, $name)
     {
@@ -410,6 +410,37 @@ class Swimlane extends Base
         }
 
         return false;
+    }
+
+    /**
+     * Duplicate Swimlane to project
+     *
+     * @access public
+     * @param   integer    $project_from      Project Template
+     * @param   integer    $project_to        Project that receives the copy
+     * @return  integer|boolean
+     */
+
+    public function duplicate($project_from, $project_to)
+    {
+        $swimlanes = $this->getAll($project_from);
+
+        foreach ($swimlanes as $swimlane) {
+
+            unset($swimlane['id']);
+            $swimlane['project_id'] = $project_to;
+
+            if (! $this->db->table(self::TABLE)->save($swimlane)) {
+                return false;
+            }
+        }
+
+        $default_swimlane = $this->getDefault($project_from);
+        $default_swimlane['id'] = $project_to;
+
+        $this->updateDefault($default_swimlane);
+
+        return true;
     }
 
     /**

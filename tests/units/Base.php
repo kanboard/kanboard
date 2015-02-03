@@ -11,6 +11,8 @@ date_default_timezone_set('UTC');
 
 abstract class Base extends PHPUnit_Framework_TestCase
 {
+    protected $container;
+
     public function setUp()
     {
         if (DB_DRIVER === 'mysql') {

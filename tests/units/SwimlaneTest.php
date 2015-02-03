@@ -375,4 +375,34 @@ class SwimlaneTest extends Base
         $this->assertEquals(0, $swimlane['is_active']);
         $this->assertEquals(0, $swimlane['position']);
     }
+
+    public function testDuplicateSwimlane()
+    {
+        $p = new Project($this->container);
+        $s = new Swimlane($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'P1')));
+        $this->assertEquals(2, $p->create(array('name' => 'P2')));
+        $this->assertEquals(1, $s->create(1, 'S1'));
+        $this->assertEquals(2, $s->create(1, 'S2'));
+        $this->assertEquals(3, $s->create(1, 'S3'));
+
+        $default_swimlane1 = $s->getDefault(1);
+        $default_swimlane1['default_swimlane'] = 'New Default';
+
+        $this->assertTrue($s->updateDefault($default_swimlane1));
+
+        $this->assertTrue($s->duplicate(1, 2));
+
+        $swimlanes = $s->getAll(2);
+
+        $this->assertCount(3, $swimlanes);
+        $this->assertEquals(4, $swimlanes[0]['id']);
+        $this->assertEquals('S1', $swimlanes[0]['name']);
+        $this->assertEquals(5, $swimlanes[1]['id']);
+        $this->assertEquals('S2', $swimlanes[1]['name']);
+        $this->assertEquals(6, $swimlanes[2]['id']);
+        $this->assertEquals('S3', $swimlanes[2]['name']);
+        $this->assertEquals('New Default', $s->getDefault(2)['default_swimlane']);
+    }
 }
