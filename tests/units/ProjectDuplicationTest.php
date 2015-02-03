@@ -244,7 +244,8 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals('S2', $swimlanes[1]['name']);
         $this->assertEquals(6, $swimlanes[2]['id']);
         $this->assertEquals('S3', $swimlanes[2]['name']);
-        $this->assertEquals('New Default', $s->getDefault(2)['default_swimlane']);
+        $new_default = $s->getDefault(2);
+        $this->assertEquals('New Default', $new_default['default_swimlane']);
 
         // Check if Tasks have been duplicated
 
@@ -261,6 +262,7 @@ class ProjectDuplicationTest extends Base
         // Drop project
         unset($tasks);
         unset($swimlanes);
+        unset($new_default);
 
         $p->remove(2);
 
@@ -281,7 +283,8 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals('S2', $swimlanes[1]['name']);
         $this->assertEquals(6, $swimlanes[2]['id']);
         $this->assertEquals('S3', $swimlanes[2]['name']);
-        $this->assertEquals('New Default', $s->getDefault(2)['default_swimlane']);
+        $new_default = $s->getDefault(2);
+        $this->assertEquals('New Default', $new_default['default_swimlane']);
 
         // Check if Tasks have NOT been duplicated
         $this->assertCount(0, $tf->getAll(2));
@@ -289,6 +292,7 @@ class ProjectDuplicationTest extends Base
         // Drop project
         unset($tasks);
         unset($swimlanes);
+        unset($new_default);
 
         $p->remove(2);
 
