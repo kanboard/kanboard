@@ -403,6 +403,7 @@ class SwimlaneTest extends Base
         $this->assertEquals('S2', $swimlanes[1]['name']);
         $this->assertEquals(6, $swimlanes[2]['id']);
         $this->assertEquals('S3', $swimlanes[2]['name']);
-        $this->assertEquals('New Default', $s->getDefault(2)['default_swimlane']);
+        $new_default = $s->getDefault(2);
+        $this->assertEquals('New Default', $new_default['default_swimlane']);
     }
 }
