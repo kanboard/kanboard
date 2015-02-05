@@ -20,15 +20,14 @@
             <td><?= $this->e($subtask['title']) ?></td>
             <td>
                 <?php if (! isset($not_editable)): ?>
-                    <?= $this->a(trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['status_name']),
-                                 'subtask', 'toggleStatus', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
+                    <?= $this->toggleSubtaskStatus($subtask, 'task') ?>
                 <?php else: ?>
                     <?= $this->render('subtask/icons', array('subtask' => $subtask)) . $this->e($subtask['status_name']) ?>
                 <?php endif ?>
             </td>
             <td>
                 <?php if (! empty($subtask['username'])): ?>
-                    <?= $this->e($subtask['name'] ?: $subtask['username']) ?>
+                    <?= $this->a($this->e($subtask['name'] ?: $subtask['username']), 'user', 'show', array('user_id' => $subtask['user_id'])) ?>
                 <?php endif ?>
             </td>
             <td>

@@ -416,22 +416,6 @@ class Board extends Base
     }
 
     /**
-     * Change the status of a subtask from the mouseover
-     *
-     * @access public
-     */
-    public function toggleSubtask()
-    {
-        $task = $this->getTask();
-        $this->subTask->toggleStatus($this->request->getIntegerParam('subtask_id'));
-
-        $this->response->html($this->template->render('board/subtasks', array(
-            'subtasks' => $this->subTask->getAll($task['id']),
-            'task' => $task,
-        )));
-    }
-
-    /**
      * Display all attachments during the task mouseover
      *
      * @access public

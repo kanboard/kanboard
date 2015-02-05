@@ -5,7 +5,27 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 42;
+const VERSION = 43;
+
+function version_43($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('subtask_restriction', '0'));
+    $rq->execute(array('subtask_time_tracking', '0'));
+
+    $pdo->exec("
+        CREATE TABLE subtask_time_tracking (
+            id INT NOT NULL AUTO_INCREMENT,
+            user_id INT NOT NULL,
+            subtask_id INT NOT NULL,
+            start INT DEFAULT 0,
+            end INT DEFAULT 0,
+            PRIMARY KEY(id),
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(subtask_id) REFERENCES task_has_subtasks(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+}
 
 function version_42($pdo)
 {

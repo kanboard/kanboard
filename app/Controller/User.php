@@ -190,6 +190,29 @@ class User extends Base
     }
 
     /**
+     * Display timesheet
+     *
+     * @access public
+     */
+    public function timesheet()
+    {
+        $user = $this->getUser();
+
+        $subtask_paginator = $this->paginator
+            ->setUrl('user', 'timesheet', array('user_id' => $user['id'], 'pagination' => 'subtasks'))
+            ->setMax(20)
+            ->setOrder('start')
+            ->setDirection('DESC')
+            ->setQuery($this->subtaskTimeTracking->getUserQuery($user['id']))
+            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+
+        $this->response->html($this->layout('user/timesheet', array(
+            'subtask_paginator' => $subtask_paginator,
+            'user' => $user,
+        )));
+    }
+
+    /**
      * Display last connections
      *
      * @access public
@@ -450,7 +473,7 @@ class User extends Base
      *
      * @access public
      */
-    public function gitHub()
+    public function github()
     {
         $code = $this->request->getStringParam('code');
 
@@ -494,7 +517,7 @@ class User extends Base
      *
      * @access public
      */
-    public function unlinkGitHub()
+    public function unlinkGithub()
     {
         $this->checkCSRFParam();
 

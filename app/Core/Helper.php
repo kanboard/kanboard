@@ -244,7 +244,7 @@ class Helper
      */
     public function formRadio($name, $label, $value, $selected = false, $class = '')
     {
-        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->e($value).'" '.($selected ? 'selected="selected"' : '').'>'.$this->e($label).'</label>';
+        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->e($value).'" '.($selected ? 'selected="selected"' : '').'> '.$this->e($label).'</label>';
     }
 
     /**
@@ -647,5 +647,27 @@ class Helper
             'Fri' => t('Fri'),
             'Sat' => t('Sat'),
         ));
+    }
+
+    public function toggleSubtaskStatus(array $subtask, $redirect)
+    {
+        if ($subtask['status'] == 0 && isset($this->session['has_subtask_inprogress']) && $this->session['has_subtask_inprogress'] === true) {
+
+            return $this->a(
+                trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['status_name']),
+                'subtask',
+                'subtaskRestriction',
+                array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect),
+                false,
+                'popover-subtask-restriction'
+            );
+        }
+
+        return $this->a(
+            trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['status_name']),
+            'subtask',
+            'toggleStatus',
+            array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect)
+        );
     }
 }

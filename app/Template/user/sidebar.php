@@ -28,6 +28,9 @@
             <li>
                 <?= $this->a(t('Persistent connections'), 'user', 'sessions', array('user_id' => $user['id'])) ?>
             </li>
+            <li>
+                <?= $this->a(t('Time tracking'), 'user', 'timesheet', array('user_id' => $user['id'])) ?>
+            </li>
         <?php endif ?>
         
         <?php if ($this->userSession->isAdmin()): ?>

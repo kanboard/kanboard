@@ -107,7 +107,13 @@ Kanboard.Board = (function() {
                         e.preventDefault();
                         e.stopPropagation();
 
-                        $.get($(this).attr('href'), setTooltipContent);
+                        if ($(this).hasClass("popover-subtask-restriction")) {
+                            Kanboard.OpenPopover($(this).attr('href'));
+                            $(_this).tooltip('close');
+                        }
+                        else {
+                            $.get($(this).attr('href'), setTooltipContent);
+                        }
                     });
                 });
 

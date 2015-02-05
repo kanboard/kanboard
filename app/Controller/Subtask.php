@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+use Model\SubTask as SubtaskModel;
+
 /**
  * SubTask controller
  *
@@ -175,12 +177,86 @@ class Subtask extends Base
     public function toggleStatus()
     {
         $task = $this->getTask();
-        $subtask_id = $this->request->getIntegerParam('subtask_id');
+        $subtask = $this->getSubtask();
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
-        if (! $this->subTask->toggleStatus($subtask_id)) {
-            $this->session->flashError(t('Unable to update your sub-task.'));
+        $this->subTask->toggleStatus($subtask['id']);
+
+        if ($redirect === 'board') {
+
+            $this->session['has_subtask_inprogress'] = $this->subTask->hasSubtaskInProgress($this->userSession->getId());
+            
+            $this->response->html($this->template->render('board/subtasks', array(
+                'subtasks' => $this->subTask->getAll($task['id']),
+                'task' => $task,
+            )));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#subtasks');
+        $this->toggleRedirect($task, $redirect);
+    }
+
+    /**
+     * Handle subtask restriction (popover)
+     *
+     * @access public
+     */
+    public function subtaskRestriction()
+    {
+        $task = $this->getTask();
+        $subtask = $this->getSubtask();
+
+        $this->response->html($this->template->render('subtask/restriction_change_status', array(
+            'status_list' => array(
+                SubtaskModel::STATUS_TODO => t('Todo'),
+                SubtaskModel::STATUS_DONE => t('Done'),
+            ),
+            'subtask_inprogress' => $this->subTask->getSubtaskInProgress($this->userSession->getId()),
+            'subtask' => $subtask,
+            'task' => $task,
+            'redirect' => $this->request->getStringParam('redirect'),
+        )));
+    }
+
+    /**
+     * Change status of the in progress subtask and the other subtask
+     *
+     * @access public
+     */
+    public function changeRestrictionStatus()
+    {
+        $task = $this->getTask();
+        $subtask = $this->getSubtask();
+        $values = $this->request->getValues();
+
+        // Change status of the previous in progress subtask
+        $this->subTask->update(array(
+            'id' => $values['id'],
+            'status' => $values['status'],
+        ));
+
+        // Set the current subtask to in pogress
+        $this->subTask->update(array(
+            'id' => $subtask['id'],
+            'status' => SubtaskModel::STATUS_INPROGRESS,
+        ));
+
+        $this->toggleRedirect($task, $values['redirect']);
+    }
+
+    /**
+     * Redirect to the right page
+     *
+     * @access private
+     */
+    private function toggleRedirect(array $task, $redirect)
+    {
+        switch ($redirect) {
+            case 'board':
+                $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+            case 'dashboard':
+                $this->response->redirect($this->helper->url('app', 'index'));
+            default:
+                $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        }
     }
 }

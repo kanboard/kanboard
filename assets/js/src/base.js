@@ -178,6 +178,8 @@ var Kanboard = (function() {
                 $("form").submit();
             });
 
+            $(".popover-subtask-restriction").click(Kanboard.Popover);
+
             Kanboard.InitAfterAjax();
         },
 

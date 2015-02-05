@@ -701,4 +701,12 @@ return array(
     'Moved to column %s' => 'Mover para a coluna %s',
     // 'Change description' => '',
     // 'User dashboard' => '',
+    // 'Allow only one subtask in progress at the same time for a user' => '',
+    // 'Edit column "%s"' => '',
+    // 'Enable time tracking for subtasks' => '',
+    // 'Select the new status of the subtask: "%s"' => '',
+    // 'Subtask timesheet' => '',
+    // 'There is nothing to show.' => '',
+    // 'Time Tracking' => '',
+    // 'You already have one subtask in progress' => '',
 );

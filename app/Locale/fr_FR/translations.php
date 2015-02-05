@@ -701,4 +701,12 @@ return array(
     'Moved to column %s' => 'Tâche déplacée à la colonne %s',
     'Change description' => 'Changer la description',
     'User dashboard' => 'Tableau de bord de l\'utilisateur',
+    'Allow only one subtask in progress at the same time for a user' => 'Autoriser une seule sous-tâche en progrès en même temps pour un utilisateur',
+    'Edit column "%s"' => 'Modifier la colonne « %s »',
+    'Enable time tracking for subtasks' => 'Activer la feuille de temps pour les sous-tâches',
+    'Select the new status of the subtask: "%s"' => 'Selectionnez le nouveau statut de la sous-tâche : « %s »',
+    'Subtask timesheet' => 'Feuille de temps des sous-tâches',
+    'There is nothing to show.' => 'Il n\'y a rien à montrer',
+    'Time Tracking' => 'Feuille de temps',
+    'You already have one subtask in progress' => 'Vous avez déjà une sous-tâche en progrès',
 );
