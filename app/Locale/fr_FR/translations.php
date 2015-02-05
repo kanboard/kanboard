@@ -700,4 +700,5 @@ return array(
     'Add a comment logging moving the task between columns' => 'Ajouter un commentaire de log lorsqu\'une tâche est déplacée dans une autre colonne',
     'Moved to column %s' => 'Tâche déplacée à la colonne %s',
     'Change description' => 'Changer la description',
+    'User dashboard' => 'Tableau de bord de l\'utilisateur',
 );

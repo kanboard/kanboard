@@ -64,6 +64,7 @@ class Acl extends Base
      * @var array
      */
     private $admin_acl = array(
+        'app' => array('dashboard'),
         'user' => array('index', 'create', 'save', 'remove'),
         'config' => '*',
         'project' => array('remove'),

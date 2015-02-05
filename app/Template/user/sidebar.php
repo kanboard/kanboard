@@ -29,6 +29,12 @@
                 <?= $this->a(t('Persistent connections'), 'user', 'sessions', array('user_id' => $user['id'])) ?>
             </li>
         <?php endif ?>
+        
+        <?php if ($this->userSession->isAdmin()): ?>
+            <li>
+                <?= $this->a(t('User dashboard'), 'app', 'dashboard', array('user_id' => $user['id'])) ?>
+            </li>
+        <?php endif ?>
 
         <?php if ($this->userSession->isAdmin() && ! $this->userSession->isCurrentUser($user['id'])): ?>
             <li>

@@ -700,4 +700,5 @@ return array(
     // 'Add a comment logging moving the task between columns' => '',
     'Moved to column %s' => 'Movido a columna %s',
     // 'Change description' => '',
+    // 'User dashboard' => '',
 );
