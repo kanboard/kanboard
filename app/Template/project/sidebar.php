@@ -22,9 +22,6 @@
             <?= $this->a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <?= $this->a(t('Link management'), 'link', 'index', array('project_id' => $project['id'])) ?>
-        </li>
-        <li>
             <?= $this->a(t('Swimlanes'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <?php if ($this->userSession->isAdmin() || $project['is_private'] == 0): ?>

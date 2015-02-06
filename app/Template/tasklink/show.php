@@ -16,18 +16,18 @@
         foreach ($links as $link): ?>
         <tr>
             <td>
-                <?php if (null == $previous_link || $previous_link != $link['name']):
-                    $previous_link = $link['name']; ?>
-                    <?= $this->e($link['name']) ?>
+                <?php if (null == $previous_link || $previous_link != $link['label']):
+                    $previous_link = $link['label']; ?>
+                    <?= t($this->e($link['label'])) ?>
                 <?php endif ?>
             </td>
             <td>
                 <?php if (0 == $link['task_inverse_is_active']): ?><span class="task-closed"><?php endif ?>
                 <?= $this->e($link['task_inverse_category']) ?>
                 <?php if (! isset($not_editable)): ?>
-                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])), 'task', 'show', array('task_id' => $link['task_inverse_id'], 'project_id' => $link['task_inverse_project_id'])) ?>
+                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_title'])), 'task', 'show', array('task_id' => $link['task_inverse_id'], 'project_id' => $link['task_inverse_project_id'])) ?>
                 <?php else: ?>
-                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_name'])), 'task', 'readonly', array('task_id' => $link['task_inverse_id'], 'project_id' => $link['task_inverse_project_id'], 'token' => $project['token'])) ?>
+                    <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_title'])), 'task', 'readonly', array('task_id' => $link['task_inverse_id'], 'project_id' => $link['task_inverse_project_id'], 'token' => $project['token'])) ?>
                 <?php endif ?>
                 <?php if (0 == $link['task_inverse_is_active']): ?></span><?php endif ?>
             </td>
@@ -49,7 +49,7 @@
         <?= $this->formHidden('task_id', array('task_id' => $task['id'])) ?>
         #<?= $this->e($task['id']) ?>
         &#160;
-        <?= $this->formSelect('link_id', $link_list, array(), array(), 'required autofocus') ?>
+        <?= $this->formSelect('link_label_id', $link_list, array(), array(), 'required autofocus') ?>
         &#160;
         #<?= $this->formNumeric('task_inverse_id', array(), array(), array('required', 'placeholder="'.t('Task id').'"', 'title="'.t('Linked task id').'"', 'list="task_inverse_ids"')) ?>
         <?php if (!empty($task_list)): ?>

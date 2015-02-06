@@ -97,7 +97,7 @@
 <?php endif ?>
 
 
-<?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description']) || ! empty($task['nb_subtasks'] || ! empty($task['nb_links']))): ?>
+<?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description']) || ! empty($task['nb_subtasks']) || ! empty($task['nb_links'])): ?>
 <div class="task-board-footer">
 
     <?php if (! empty($task['date_due'])): ?>

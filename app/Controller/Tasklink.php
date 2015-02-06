@@ -20,11 +20,9 @@ class Tasklink extends Base
     private function getTaskLink()
     {
         $link = $this->taskLink->getById($this->request->getIntegerParam('link_id'));
-
         if (! $link) {
             $this->notfound();
         }
-
         return $link;
     }
 
@@ -47,7 +45,7 @@ class Tasklink extends Base
         $this->response->html($this->taskLayout('tasklink/edit', array(
             'values' => $values,
             'errors' => $errors,
-            'link_list' => $this->link->getList($task['project_id'], false),
+            'link_list' => $this->link->getLinkLabelList($task['project_id']),
             'task_list' => $this->taskFinder->getList($task['project_id'], TaskModel::STATUS_OPEN, $task['id']),
             'task' => $task,
         )));
@@ -94,7 +92,7 @@ class Tasklink extends Base
         $this->response->html($this->taskLayout('tasklink/edit', array(
             'values' => empty($values) ? $taskLink : $values,
             'errors' => $errors,
-            'link_list' => $this->link->getList($task['project_id'], false),
+            'link_list' => $this->link->getLinkLabelList($task['project_id'], false),
         	'task_list' => $this->taskFinder->getList($task['project_id'], TaskModel::STATUS_OPEN, $task['id']),
             'link' => $taskLink,
             'task' => $task,
@@ -149,14 +147,14 @@ class Tasklink extends Base
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
-
+        
         if ($this->taskLink->remove($this->request->getIntegerParam('link_id'))) {
             $this->session->flash(t('Link removed successfully.'));
         	$this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#links');
         }
         else {
             $this->session->flashError(t('Unable to remove this link.'));
-	        $this->response->redirect('?controller=tasklink&action=confirm&task_id='.$task['id'].'&project_id='.$task['project_id'].'&link_id='.$this->request->getIntegerParam('link_id'));
         }
+        $this->confirm();
     }
 }

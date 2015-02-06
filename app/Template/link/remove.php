@@ -5,11 +5,11 @@
 
     <div class="confirm">
         <p class="alert alert-info">
-            <?= t('Do you really want to remove this link: "%s"?', $link['name']) ?>
+            <?= t('Do you really want to remove this link: "%s"?', t($link[0]['label']).(isset($link[1]['label']) ? ' | '.t($link[1]['label']) : '')) ?>
         </p>
 
         <div class="form-actions">
-            <?= $this->a(t('Yes'), 'link', 'remove', array('project_id' => $project['id'], 'link_id' => $link['id']), true, 'btn btn-red') ?>
+            <?= $this->a(t('Yes'), 'link', 'remove', array('project_id' => $project['id'], 'link_id' => $link[0]['link_id']), true, 'btn btn-red') ?>
             <?= t('or') ?>
             <?= $this->a(t('cancel'), 'link', 'index', array('project_id' => $project['id'])) ?>
         </div>

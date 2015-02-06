@@ -13,12 +13,13 @@
 
     <?php if (isset($edit)): ?>
     <?= $this->formHidden('id', $values) ?>
+    <?= $this->formHidden('task_link_inverse_id', $values) ?>
     <?php endif ?>
     <?= $this->formHidden('task_id', $values) ?>
 
     #<?= $task['id'] ?>
     &#160;
-    <?= $this->formSelect('link_id', $link_list, $values, $errors, 'required autofocus') ?>
+    <?= $this->formSelect('link_label_id', $link_list, $values, $errors, 'required autofocus') ?>
     &#160;
     #<?= $this->formNumeric('task_inverse_id', $values, $errors, array('required', 'placeholder="'.t('Task id').'"', 'title="'.t('Linked task id').'"', 'list="task_inverse_ids"')) ?>
     <?php if (!empty($task_list)): ?>

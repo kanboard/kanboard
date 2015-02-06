@@ -37,31 +37,13 @@ class Link extends Base
     private function getLink()
     {
         $link = $this->link->getById($this->request->getIntegerParam('link_id'), $this->request->getIntegerParam('project_id', -1));
-        
         if (! $link) {
             $this->notfound();
         }
-        
+        $link['link_id'] = $link[0]['link_id'];
+        $link['project_id'] = $link[0]['project_id'];
         return $link;
     }
-
-    /**
-     * Get the current link and add the name of the inverse link
-     *
-     * @access private
-     * @return array
-     */
-    private function getMergedLink()
-    {
-        $link = $this->link->getMergedById($this->request->getIntegerParam('link_id'), $this->request->getIntegerParam('project_id', -1));
-        
-        if (! $link) {
-            $this->notfound();
-        }
-        
-        return $link;
-    }
-    
 
     /**
      * Method to get a project
@@ -72,14 +54,11 @@ class Link extends Base
      */
     protected function getProject($project_id = -1)
     {
+        $project = array('id' => $project_id);
         $project_id = $this->request->getIntegerParam('project_id', $project_id);
         if (-1 != $project_id) {
             $project = parent::getProject($project_id);
         }
-        else {
-            $project = array('id' => $project_id);
-        }
-    
         return $project;
     }
 
@@ -92,6 +71,8 @@ class Link extends Base
     {
         $project = $this->getProject();
         $values['project_id'] = $project['id'];
+        $values[] = array();
+        
         $this->response->html($this->layout('link/index', array(
             'links' => $this->link->getMergedList($project['id']),
             'values' => $values,
@@ -109,7 +90,7 @@ class Link extends Base
     public function save()
     {
         $values = $this->request->getValues();
-        list ($valid, $errors) = $this->link->validateCreation($values);
+        list($valid, $errors) = $this->link->validateCreation($values);
         
         if ($valid) {
             if ($this->link->create($values)) {
@@ -119,6 +100,9 @@ class Link extends Base
             else {
                 $this->session->flashError(t('Unable to create your link.'));
             }
+        }
+		if (!empty($values)) {
+        	$this->link->prepare($values);
         }
         $this->index($values, $errors);
     }
@@ -131,10 +115,9 @@ class Link extends Base
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $link = $this->getMergedLink();
         
         $this->response->html($this->layout('link/edit', array(
-            'values' => empty($values) ? $link : $values,
+            'values' => empty($values) ? $this->getLink() : $values,
             'errors' => $errors,
             'project' => $project,
             'edit' => true,
@@ -150,10 +133,9 @@ class Link extends Base
     public function update()
     {
         $values = $this->request->getValues();
-        list ($valid, $errors) = $this->link->validateModification($values);
+        list($valid, $errors) = $this->link->validateModification($values);
         
         if ($valid) {
-            
             if ($this->link->update($values)) {
                 $this->session->flash(t('Link updated successfully.'));
                 $this->response->redirect('?controller=link&action=index&project_id='.$values['project_id']);
@@ -162,7 +144,9 @@ class Link extends Base
                 $this->session->flashError(t('Unable to update your link.'));
             }
         }
-        
+        if (!empty($values)) {
+        	$this->link->prepare($values);
+        }
         $this->edit($values, $errors);
     }
 
@@ -193,13 +177,13 @@ class Link extends Base
         $this->checkCSRFParam();
         $link = $this->getLink();
         
-        if ($this->link->remove($link['id'])) {
+        if ($this->link->remove($link['link_id'])) {
             $this->session->flash(t('Link removed successfully.'));
+            $this->response->redirect('?controller=link&action=index&project_id='.$link['project_id']);
         }
         else {
             $this->session->flashError(t('Unable to remove this link.'));
         }
-        
-        $this->response->redirect('?controller=link&action=index&project_id='.$link['project_id']);
+        $this->confirm();
     }
 }

@@ -16,7 +16,7 @@
         'not_editable' => true
     )) ?>
 
-    <?= Helper\template('tasklink/show', array(
+    <?= $this->render('tasklink/show', array(
         'task' => $task,
         'links' => $links,
         'project' => $project,

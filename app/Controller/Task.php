@@ -78,7 +78,7 @@ class Task extends Base
             'timesheet' => $this->timeTracking->getTaskTimesheet($task, $subtasks),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
-            'link_list' => $this->link->getList($task['project_id'], false),
+            'link_list' => $this->link->getLinkLabelList($task['project_id'], false),
             'task_list' => $this->taskFinder->getList($task['project_id'], TaskModel::STATUS_OPEN, $task['id']),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),

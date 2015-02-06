@@ -1,4 +1,6 @@
-<?php if (! isset($edit)): ?>
+<section id="link-edit-section">
+<?php use Model\Link;
+if (! isset($edit)): ?>
     <h3><?= t('Add a new link label') ?></h3>
 <?php else: ?>
 <div class="page-header">
@@ -10,18 +12,30 @@
     <?= $this->formCsrf() ?>
 
     <?php if (isset($edit)): ?>
-    <?= $this->formHidden('id', $values) ?>
+        <?= $this->formHidden('link_id', $values) ?>
+        <?= $this->formHidden('id[0]', $values[0]) ?>
+        <?php if (isset($values[1])): ?>
+        <?= $this->formHidden('id[1]', $values[1]) ?>
+        <?php endif ?>
     <?php endif ?>
     <?= $this->formHidden('project_id', $values) ?>
 
-    <?= $this->formLabel(t('Link Label'), 'name') ?>
-    <?= $this->formText('name', $values, $errors, array('required', 'autofocus', 'placeholder="'.t('precedes').'"')) ?>
+    <?= $this->formLabel(t('Link Label'), 'label[0]') ?>
+    <?= $this->formText('label[0]', $values[0], $errors, array('required', 'autofocus', 'placeholder="'.t('precedes').'"')) ?> &raquo;
+    
+    <?= $this->formCheckbox('behaviour[0]', t('Bidrectional link label'), Link::BEHAVIOUR_BOTH, (isset($values[0]['behaviour']) && Link::BEHAVIOUR_BOTH == $values[0]['behaviour']), 'behaviour') ?>
 
-    <?= $this->formLabel(t('Link Inverse Label'), 'name_inverse') ?>
-    <?= $this->formText('name_inverse', $values, $errors, array('required', 'placeholder="'.t('follows').'"')) ?>
-
+    <div class="link-inverse-label">
+    <?= $this->formLabel(t('Link Inverse Label'), 'label[1]') ?>
+    &laquo; <?= $this->formText('label[1]', isset($values[1]) ? $values[1] : $values, $errors, array('placeholder="'.t('follows').'"')) ?>
+    </div>
+    
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <?php if (isset($edit)): ?>
+        <?= t('or') ?>
+        <?= $this->a(t('cancel'), 'link', 'index', array('project_id' => $project['id'])) ?>
+        <?php endif ?>
     </div>
     <?php if (! isset($edit)): ?>
     <div class="alert alert-info">
@@ -32,3 +46,4 @@
     </div>
     <?php endif ?>
 </form>
+</section>
