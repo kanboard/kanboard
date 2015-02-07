@@ -59,10 +59,11 @@ class ProjectDuplication extends Base
     /**
      * Clone a project with all settings
      *
-     * @param  integer    $project_id  Project Id
+     * @param  integer    $project_id       Project Id
+     * @param  array      $part_selection   Selection of optional project parts to duplicate. Possible options: 'swimlane', 'action', 'category', 'task'
      * @return integer                 Cloned Project Id
      */
-    public function duplicate($project_id)
+    public function duplicate($project_id, $part_selection = array('category', 'action'))
     {
         $this->db->startTransaction();
 
@@ -74,7 +75,14 @@ class ProjectDuplication extends Base
             return false;
         }
 
-        foreach (array('board', 'category', 'projectPermission', 'action') as $model) {
+        // Clone Columns, Categories, Permissions and Actions
+        $optional_parts = array('swimlane', 'action', 'category');
+        foreach (array('board', 'category', 'projectPermission', 'action', 'swimlane') as $model) {
+
+            // Skip if optional part has not been selected
+            if (in_array($model, $optional_parts) && ! in_array($model, $part_selection)) {
+                continue;
+            }
 
             if (! $this->$model->duplicate($project_id, $clone_project_id)) {
                 $this->db->cancelTransaction();
@@ -82,7 +90,20 @@ class ProjectDuplication extends Base
             }
         }
 
+
         $this->db->closeTransaction();
+
+        //* Clone Tasks if in $part_selection
+
+        if(in_array('task', $part_selection)) {
+            $tasks = $this->taskFinder->getAll($project_id);
+
+            foreach ($tasks as $task) {
+                if (!$this->taskDuplication->duplicateToProject($task['id'], $clone_project_id)) {
+                    return false;
+                }
+            }
+        }
 
         return (int) $clone_project_id;
     }

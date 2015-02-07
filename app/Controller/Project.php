@@ -297,7 +297,7 @@ class Project extends Base
     /**
      * Duplicate a project
      *
-     * @author Antonio Rabelo
+     * @author Antonio Rabelo & Michael Lüpkes
      * @access public
      */
     public function duplicate()
@@ -305,10 +305,8 @@ class Project extends Base
         $project = $this->getProject();
 
         if ($this->request->getStringParam('duplicate') === 'yes') {
-
-            $this->checkCSRFParam();
-
-            if ($this->projectDuplication->duplicate($project['id'])) {
+            $values = array_keys($this->request->getValues());
+            if ($this->projectDuplication->duplicate($project['id'], $values)) {
                 $this->session->flash(t('Project cloned successfully.'));
             } else {
                 $this->session->flashError(t('Unable to clone this project.'));

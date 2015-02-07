@@ -34,6 +34,7 @@ use Pimple\Container;
  * @property \Model\Swimlane           $swimlane
  * @property \Model\Task               $task
  * @property \Model\TaskCreation       $taskCreation
+ * @property \Model\TaskDuplication    $taskDuplication
  * @property \Model\TaskExport         $taskExport
  * @property \Model\TaskFinder         $taskFinder
  * @property \Model\TaskHistory        $taskHistory
