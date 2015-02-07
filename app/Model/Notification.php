@@ -127,7 +127,7 @@ class Notification extends Base
      */
     private function getStandardMailSubject($label, array $data)
     {
-        return e('[%s][%s] %s (#%d)', $data['task']['project_name'], $label, $data['task']['title'], $data['task']['id']);
+        return sprintf('[%s][%s] %s (#%d)', $data['task']['project_name'], $label, $data['task']['title'], $data['task']['id']);
     }
 
     /**
@@ -141,40 +141,40 @@ class Notification extends Base
     {
         switch ($template) {
             case 'file_creation':
-                $subject = $this->getStandardMailSubject('New attachment', $data);
+                $subject = $this->getStandardMailSubject(t('New attachment'), $data);
                 break;
             case 'comment_creation':
-                $subject = $this->getStandardMailSubject('New comment', $data);
+                $subject = $this->getStandardMailSubject(t('New comment'), $data);
                 break;
             case 'comment_update':
-                $subject = $this->getStandardMailSubject('Comment updated', $data);
+                $subject = $this->getStandardMailSubject(t('Comment updated'), $data);
                 break;
             case 'subtask_creation':
-                $subject = $this->getStandardMailSubject('New subtask', $data);
+                $subject = $this->getStandardMailSubject(t('New subtask'), $data);
                 break;
             case 'subtask_update':
-                $subject = $this->getStandardMailSubject('Subtask updated', $data);
+                $subject = $this->getStandardMailSubject(t('Subtask updated'), $data);
                 break;
             case 'task_creation':
-                $subject = $this->getStandardMailSubject('New task', $data);
+                $subject = $this->getStandardMailSubject(t('New task'), $data);
                 break;
             case 'task_update':
-                $subject = $this->getStandardMailSubject('Task updated', $data);
+                $subject = $this->getStandardMailSubject(t('Task updated'), $data);
                 break;
             case 'task_close':
-                $subject = $this->getStandardMailSubject('Task closed', $data);
+                $subject = $this->getStandardMailSubject(t('Task closed'), $data);
                 break;
             case 'task_open':
-                $subject = $this->getStandardMailSubject('Task opened', $data);
+                $subject = $this->getStandardMailSubject(t('Task opened'), $data);
                 break;
             case 'task_move_column':
-                $subject = $this->getStandardMailSubject('Column Change', $data);
+                $subject = $this->getStandardMailSubject(t('Column Change'), $data);
                 break;
             case 'task_move_position':
-                $subject = $this->getStandardMailSubject('Position Change', $data);
+                $subject = $this->getStandardMailSubject(t('Position Change'), $data);
                 break;
             case 'task_assignee_change':
-                $subject = $this->getStandardMailSubject('Assignee Change', $data);
+                $subject = $this->getStandardMailSubject(t('Assignee Change'), $data);
                 break;
             case 'task_due':
                 $subject = e('[%s][Due tasks]', $data['project']);

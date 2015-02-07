@@ -297,7 +297,8 @@ class Project extends Base
     /**
      * Duplicate a project
      *
-     * @author Antonio Rabelo & Michael Lüpkes
+     * @author Antonio Rabelo
+     * @author Michael Lüpkes
      * @access public
      */
     public function duplicate()

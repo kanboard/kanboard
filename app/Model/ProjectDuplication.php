@@ -61,7 +61,7 @@ class ProjectDuplication extends Base
      *
      * @param  integer    $project_id       Project Id
      * @param  array      $part_selection   Selection of optional project parts to duplicate. Possible options: 'swimlane', 'action', 'category', 'task'
-     * @return integer                 Cloned Project Id
+     * @return integer                      Cloned Project Id
      */
     public function duplicate($project_id, $part_selection = array('category', 'action'))
     {
@@ -90,16 +90,14 @@ class ProjectDuplication extends Base
             }
         }
 
-
         $this->db->closeTransaction();
 
-        //* Clone Tasks if in $part_selection
-
-        if(in_array('task', $part_selection)) {
+        // Clone Tasks if in $part_selection
+        if (in_array('task', $part_selection)) {
             $tasks = $this->taskFinder->getAll($project_id);
 
             foreach ($tasks as $task) {
-                if (!$this->taskDuplication->duplicateToProject($task['id'], $clone_project_id)) {
+                if (! $this->taskDuplication->duplicateToProject($task['id'], $clone_project_id)) {
                     return false;
                 }
             }

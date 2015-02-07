@@ -12,8 +12,8 @@
 
         <?= $this->formCheckbox('category', t('Categories'), 1, true) ?>
         <?= $this->formCheckbox('action', t('Actions'), 1, true) ?>
-        <?= $this->formCheckbox('swimlane', t('Swimlanes'), 1, true) ?>
-        <?= $this->formCheckbox('task', t('Tasks'), 1, true) ?>
+        <?= $this->formCheckbox('swimlane', t('Swimlanes'), 1, false) ?>
+        <?= $this->formCheckbox('task', t('Tasks'), 1, false) ?>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Duplicate') ?>" class="btn btn-red"/>
