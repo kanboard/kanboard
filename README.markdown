@@ -48,7 +48,7 @@ GNU Affero General Public License version 3: <http://www.gnu.org/licenses/agpl-3
 Related projects
 ----------------
 
-- [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon) [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
+- [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
 - [Wunderlist To Kanboard script by EpocDotFr](https://github.com/EpocDotFr/WunderlistToKanboard)
 
 Documentation
