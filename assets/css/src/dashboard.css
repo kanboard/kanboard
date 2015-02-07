@@ -18,6 +18,12 @@
     }
 }
 
+.dashboard-single-column {
+    width: 95%;
+    margin-left: 0;
+    float: none;
+}
+
 .dashboard-project-stats span {
     font-size: 0.75em;
     margin-right: 10px;

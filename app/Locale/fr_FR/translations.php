@@ -710,4 +710,9 @@ return array(
     'Time Tracking' => 'Feuille de temps',
     'You already have one subtask in progress' => 'Vous avez déjà une sous-tâche en progrès',
     'Which parts of the project do you want to duplicate?' => 'Quelles parties du projet voulez-vous dupliquer ?',
+    'Change dashboard view' => 'Changer la vue du tableau de bord',
+    'Show/hide activities' => 'Afficher/cacher les activités',
+    'Show/hide projects' => 'Afficher/cacher les projets',
+    'Show/hide subtasks' => 'Afficher/cacher les sous-tâches',
+    'Show/hide tasks' => 'Afficher/cacher les tâches',
 );

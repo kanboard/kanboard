@@ -708,4 +708,9 @@ return array(
     // 'Time Tracking' => '',
     // 'You already have one subtask in progress' => '',
     // 'Which parts of the project do you want to duplicate?' => '',
+    // 'Change dashboard view' => '',
+    // 'Show/hide activities' => '',
+    // 'Show/hide projects' => '',
+    // 'Show/hide subtasks' => '',
+    // 'Show/hide tasks' => '',
 );

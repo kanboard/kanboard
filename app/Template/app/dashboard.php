@@ -10,17 +10,34 @@
                 <li><i class="fa fa-user fa-fw"></i><?= $this->a(t('User management'), 'user', 'index') ?></li>
                 <li><i class="fa fa-cog fa-fw"></i><?= $this->a(t('Settings'), 'config', 'index') ?></li>
             <?php endif ?>
+            <li>
+                <ul class="dropdown">
+                    <li>
+                        <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Change dashboard view') ?></a>
+                        <ul>
+                            <li>
+                                <a href="#" class="dashboard-toggle" data-toggle="projects"><?= t('Show/hide projects') ?></a>
+                                <a href="#" class="dashboard-toggle" data-toggle="tasks"><?= t('Show/hide tasks') ?></a>
+                                <a href="#" class="dashboard-toggle" data-toggle="subtasks"><?= t('Show/hide subtasks') ?></a>
+                                <a href="#" class="dashboard-toggle" data-toggle="activities"><?= t('Show/hide activities') ?></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
     <section id="dashboard">
         <div class="dashboard-left-column">
-            <?= $this->render('app/projects', array('paginator' => $project_paginator)) ?>
-            <?= $this->render('app/tasks', array('paginator' => $task_paginator)) ?>
-            <?= $this->render('app/subtasks', array('paginator' => $subtask_paginator)) ?>
+            <div id="dashboard-projects"><?= $this->render('app/projects', array('paginator' => $project_paginator)) ?></div>
+            <div id="dashboard-tasks"><?= $this->render('app/tasks', array('paginator' => $task_paginator)) ?></div>
+            <div id="dashboard-subtasks"><?= $this->render('app/subtasks', array('paginator' => $subtask_paginator)) ?></div>
         </div>
         <div class="dashboard-right-column">
-            <h2><?= t('Activity stream') ?></h2>
-            <?= $this->render('project/events', array('events' => $events)) ?>
+            <div id="dashboard-activities">
+                <h2><?= t('Activity stream') ?></h2>
+                <?= $this->render('project/events', array('events' => $events)) ?>
+            </div>
         </div>
     </section>
 </section>

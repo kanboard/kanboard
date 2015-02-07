@@ -1840,6 +1840,12 @@ a.task-board-nobody {
     }
 }
 
+.dashboard-single-column {
+    width: 95%;
+    margin-left: 0;
+    float: none;
+}
+
 .dashboard-project-stats span {
     font-size: 0.75em;
     margin-right: 10px;
@@ -1904,6 +1910,7 @@ a.task-board-nobody {
     font-size: 1.1em;
 }/* sidebar */
 .sidebar-container {
+    margin-top: 10px;
     clear: both;
 }
 
