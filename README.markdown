@@ -150,6 +150,7 @@ Contributors:
 - [Aleix Pol](https://github.com/aleixpol)
 - [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
+- [Ashbike](https://github.com/ashbike)
 - [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo
 - [Cluxter](https://github.com/cluxter)
