@@ -26,3 +26,36 @@ How to update an existing translation?
 1. Open the translation file `app/Locale/xx_XX/translations.php`
 2. Missing translations are commented with `//` and the values are empty, just fill blank and remove the comment
 3. Check with your local installation of Kanboard and send a [pull-request](https://help.github.com/articles/using-pull-requests/)
+
+How to add new translated text in the application?
+--------------------------------------------------
+
+Translations are displayed with the following functions in the source code:
+
+- `t()`: escaped HTML text
+- `e()`: displayed with no escaping
+- `dt()`: date using `strftime()` formats
+
+Always use the english version in the source code.
+
+How to find missing translations in the applications?
+-----------------------------------------------------
+
+From a Unix shell run:
+
+```bash
+./scripts/find-strings.sh
+```
+
+All missing translations are displayed on the screen. Put that in the french locale and sync other locales (see below).
+
+How to synchronize translation files?
+-------------------------------------
+
+From a Unix shell run this command:
+
+```bash
+./scripts/sync-locales.php
+```
+
+The french translation is used a reference for other locales.
