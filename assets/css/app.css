@@ -1904,20 +1904,16 @@ a.task-board-nobody {
     font-size: 1.1em;
 }/* sidebar */
 .sidebar-container {
-    margin-top: 30px;
-    position: relative;
+    clear: both;
 }
 
 .sidebar-content {
-    margin-left: 280px;
+    margin-left: 23%;
 }
 
 .sidebar {
-    position: absolute;
-    left: 0px;
-    top: 0;
-    max-width: 250px;
-    min-width: 200px;
+    width: 20%;
+    float: left;
     padding: 10px;
     padding-top: 0;
     border: 1px solid #ddd;
@@ -1929,7 +1925,20 @@ a.task-board-nobody {
     list-style-type: square;
     margin-left: 30px;
     line-height: 1.8em;
-}/* responsive design */
+}
+
+@media only screen and (max-width: 767px) {
+    .sidebar {
+        width: 96.5%;
+        float: none;
+    }
+
+    .sidebar-content {
+        margin: 0;
+        margin-top: 20px;
+    }
+}
+/* responsive design */
 @media only screen and (max-width: 1024px) {
 
     li.hide-tablet,
@@ -1939,10 +1948,6 @@ a.task-board-nobody {
 
     body {
         font-size: 0.85em;
-    }
-
-    .sidebar-content {
-        margin-left: 255px;
     }
 
     .form-tab {
@@ -1974,20 +1979,8 @@ a.task-board-nobody {
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
 
-    body {
-        font-size: 0.7em;
-    }
-
     header {
         padding-bottom: 4px;
-    }
-
-    .sidebar {
-        max-width: 220px;
-    }
-
-    .sidebar-content {
-        margin-left: 225px;
     }
 
     div.chosen-container {
