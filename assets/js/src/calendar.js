@@ -16,6 +16,7 @@ Kanboard.Calendar = (function() {
                 center: 'title',
                 right: ''
             },
+            viewRender: load_filters,
             eventDrop: move_calendar_event,
             monthNames: [translations.January, translations.February, translations.March, translations.April, translations.May, translations.June, translations.July, translations.August, translations.September, translations.October, translations.November, translations.December],
             monthNamesShort: [translations.Jan, translations.Feb, translations.Mar, translations.Apr, translations.May, translations.Jun, translations.Jul, translations.Aug, translations.Sep, translations.Oct, translations.Nov, translations.Dec],
