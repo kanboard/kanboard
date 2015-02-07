@@ -33,13 +33,13 @@ class SubtaskTimeTracking extends Base
                         self::TABLE.'.subtask_id',
                         self::TABLE.'.end',
                         self::TABLE.'.start',
-                        SubTask::TABLE.'.task_id',
-                        SubTask::TABLE.'.title AS subtask_title',
+                        Subtask::TABLE.'.task_id',
+                        Subtask::TABLE.'.title AS subtask_title',
                         Task::TABLE.'.title AS task_title',
                         Task::TABLE.'.project_id'
                     )
-                    ->join(SubTask::TABLE, 'id', 'subtask_id')
-                    ->join(Task::TABLE, 'id', 'task_id', SubTask::TABLE)
+                    ->join(Subtask::TABLE, 'id', 'subtask_id')
+                    ->join(Task::TABLE, 'id', 'task_id', Subtask::TABLE)
                     ->eq(self::TABLE.'.user_id', $user_id);
     }
 

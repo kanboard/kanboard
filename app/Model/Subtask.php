@@ -12,7 +12,7 @@ use SimpleValidator\Validators;
  * @package  model
  * @author   Frederic Guillot
  */
-class SubTask extends Base
+class Subtask extends Base
 {
     /**
      * SQL table name
@@ -93,16 +93,16 @@ class SubTask extends Base
      */
     public function getUserQuery($user_id, array $status)
     {
-        return $this->db->table(SubTask::TABLE)
+        return $this->db->table(Subtask::TABLE)
             ->columns(
-                SubTask::TABLE.'.*',
+                Subtask::TABLE.'.*',
                 Task::TABLE.'.project_id',
                 Task::TABLE.'.color_id',
                 Project::TABLE.'.name AS project_name'
             )
             ->eq('user_id', $user_id)
             ->eq(Project::TABLE.'.is_active', Project::ACTIVE)
-            ->in(SubTask::TABLE.'.status', $status)
+            ->in(Subtask::TABLE.'.status', $status)
             ->join(Task::TABLE, 'id', 'task_id')
             ->join(Project::TABLE, 'id', 'project_id', Task::TABLE)
             ->filter(array($this, 'addStatusName'));
@@ -283,7 +283,7 @@ class SubTask extends Base
     {
         return $this->db->transaction(function ($db) use ($src_task_id, $dst_task_id) {
 
-            $subtasks = $db->table(SubTask::TABLE)
+            $subtasks = $db->table(Subtask::TABLE)
                                  ->columns('title', 'time_estimated')
                                  ->eq('task_id', $src_task_id)
                                  ->asc('id') // Explicit sorting for postgresql
@@ -293,7 +293,7 @@ class SubTask extends Base
 
                 $subtask['task_id'] = $dst_task_id;
 
-                if (! $db->table(SubTask::TABLE)->save($subtask)) {
+                if (! $db->table(Subtask::TABLE)->save($subtask)) {
                     return false;
                 }
             }

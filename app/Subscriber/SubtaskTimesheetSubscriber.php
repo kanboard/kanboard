@@ -3,7 +3,7 @@
 namespace Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Model\SubTask;
+use Model\Subtask;
 use Event\SubtaskEvent;
 
 class SubtaskTimesheetSubscriber extends Base implements EventSubscriberInterface
@@ -11,7 +11,7 @@ class SubtaskTimesheetSubscriber extends Base implements EventSubscriberInterfac
     public static function getSubscribedEvents()
     {
         return array(
-            SubTask::EVENT_UPDATE => array('log', 0),
+            Subtask::EVENT_UPDATE => array('log', 0),
         );
     }
 
@@ -19,9 +19,9 @@ class SubtaskTimesheetSubscriber extends Base implements EventSubscriberInterfac
     {
         if (isset($event['status'])) {
 
-            $subtask = $this->subTask->getById($event['id']);
+            $subtask = $this->subtask->getById($event['id']);
 
-            if ($subtask['status'] == SubTask::STATUS_INPROGRESS) {
+            if ($subtask['status'] == Subtask::STATUS_INPROGRESS) {
                 $this->subtaskTimeTracking->logStartTime($subtask['id'], $subtask['user_id']);
             }
             else {

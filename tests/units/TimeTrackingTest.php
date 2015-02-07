@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/Base.php';
 
-use Model\SubTask;
+use Model\Subtask;
 use Model\TaskModification;
 use Model\TaskCreation;
 use Model\TaskFinder;
@@ -17,7 +17,7 @@ class TimeTrackingTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $s = new SubTask($this->container);
+        $s = new Subtask($this->container);
         $ts = new TimeTracking($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));

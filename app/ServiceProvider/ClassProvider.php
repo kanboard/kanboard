@@ -31,7 +31,7 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectDuplication',
             'ProjectDailySummary',
             'ProjectPermission',
-            'SubTask',
+            'Subtask',
             'SubtaskExport',
             'SubtaskTimeTracking',
             'Swimlane',

@@ -18,7 +18,7 @@ use Pimple\Container;
  * @property \Model\ProjectPermission      $projectPermission
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectDailySummary    $projectDailySummary
- * @property \Model\SubTask                $subTask
+ * @property \Model\Subtask                $subtask
  * @property \Model\Task                   $task
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder

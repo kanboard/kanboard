@@ -5,7 +5,7 @@ namespace Subscriber;
 use Event\GenericEvent;
 use Model\Task;
 use Model\Comment;
-use Model\SubTask;
+use Model\Subtask;
 use Model\File;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -19,8 +19,8 @@ class NotificationSubscriber extends Base implements EventSubscriberInterface
         Task::EVENT_MOVE_COLUMN => 'task_move_column',
         Task::EVENT_MOVE_POSITION => 'task_move_position',
         Task::EVENT_ASSIGNEE_CHANGE => 'task_assignee_change',
-        SubTask::EVENT_CREATE => 'subtask_creation',
-        SubTask::EVENT_UPDATE => 'subtask_update',
+        Subtask::EVENT_CREATE => 'subtask_creation',
+        Subtask::EVENT_UPDATE => 'subtask_update',
         Comment::EVENT_CREATE => 'comment_creation',
         Comment::EVENT_UPDATE => 'comment_update',
         File::EVENT_CREATE => 'file_creation',
@@ -36,8 +36,8 @@ class NotificationSubscriber extends Base implements EventSubscriberInterface
             Task::EVENT_MOVE_COLUMN => array('execute', 0),
             Task::EVENT_MOVE_POSITION => array('execute', 0),
             Task::EVENT_ASSIGNEE_CHANGE => array('execute', 0),
-            SubTask::EVENT_CREATE => array('execute', 0),
-            SubTask::EVENT_UPDATE => array('execute', 0),
+            Subtask::EVENT_CREATE => array('execute', 0),
+            Subtask::EVENT_UPDATE => array('execute', 0),
             Comment::EVENT_CREATE => array('execute', 0),
             Comment::EVENT_UPDATE => array('execute', 0),
             File::EVENT_CREATE => array('execute', 0),
@@ -63,7 +63,7 @@ class NotificationSubscriber extends Base implements EventSubscriberInterface
                 $values['task'] = $this->taskFinder->getDetails($event['task_id']);
                 break;
             case 'Event\SubtaskEvent':
-                $values['subtask'] = $this->subTask->getById($event['id'], true);
+                $values['subtask'] = $this->subtask->getById($event['id'], true);
                 $values['task'] = $this->taskFinder->getDetails($event['task_id']);
                 break;
             case 'Event\FileEvent':

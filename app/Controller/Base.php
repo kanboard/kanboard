@@ -40,7 +40,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectDailySummary    $projectDailySummary
- * @property \Model\SubTask                $subTask
+ * @property \Model\Subtask                $subtask
  * @property \Model\Swimlane               $swimlane
  * @property \Model\Task                   $task
  * @property \Model\TaskCreation           $taskCreation
@@ -168,7 +168,7 @@ abstract class Base
             $this->handleAuthentication();
             $this->handleAuthorization($controller, $action);
 
-            $this->session['has_subtask_inprogress'] = $this->subTask->hasSubtaskInProgress($this->userSession->getId());
+            $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
         }
     }
 

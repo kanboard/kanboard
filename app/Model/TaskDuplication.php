@@ -158,7 +158,7 @@ class TaskDuplication extends Base
         $new_task_id = $this->taskCreation->create($values);
 
         if ($new_task_id) {
-            $this->subTask->duplicate($task_id, $new_task_id);
+            $this->subtask->duplicate($task_id, $new_task_id);
         }
 
         return $new_task_id;

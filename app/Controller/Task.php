@@ -35,7 +35,7 @@ class Task extends Base
         $this->response->html($this->template->layout('task/public', array(
             'project' => $project,
             'comments' => $this->comment->getAll($task['id']),
-            'subtasks' => $this->subTask->getAll($task['id']),
+            'subtasks' => $this->subtask->getAll($task['id']),
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
@@ -54,7 +54,7 @@ class Task extends Base
     public function show()
     {
         $task = $this->getTask();
-        $subtasks = $this->subTask->getAll($task['id']);
+        $subtasks = $this->subtask->getAll($task['id']);
 
         $values = array(
             'id' => $task['id'],

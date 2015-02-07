@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\SubTask as SubTaskModel;
+use Model\Subtask as SubTaskModel;
 
 /**
  * Application controller
@@ -55,7 +55,7 @@ class App extends Base
             ->setUrl('app', $action, array('pagination' => 'subtasks'))
             ->setMax(10)
             ->setOrder('tasks.id')
-            ->setQuery($this->subTask->getUserQuery($user_id, $status))
+            ->setQuery($this->subtask->getUserQuery($user_id, $status))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
         $project_paginator = $this->paginator
