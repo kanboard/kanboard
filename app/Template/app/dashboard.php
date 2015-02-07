@@ -17,8 +17,14 @@
                         <ul>
                             <li>
                                 <a href="#" class="dashboard-toggle" data-toggle="projects"><?= t('Show/hide projects') ?></a>
+                            </li>
+                            <li>
                                 <a href="#" class="dashboard-toggle" data-toggle="tasks"><?= t('Show/hide tasks') ?></a>
+                            </li>
+                            <li>
                                 <a href="#" class="dashboard-toggle" data-toggle="subtasks"><?= t('Show/hide subtasks') ?></a>
+                            </li>
+                            <li>
                                 <a href="#" class="dashboard-toggle" data-toggle="activities"><?= t('Show/hide activities') ?></a>
                             </li>
                         </ul>
