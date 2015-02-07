@@ -63,7 +63,7 @@ a.task-board-nobody {
 
 .task-board-category {
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: #000;
     border: 1px solid #555;
     border-radius: 4px;
@@ -73,13 +73,13 @@ a.task-board-nobody {
 }
 
 .task-board-footer {
-    height: 18px;
+    height: 20px;
 }
 
 .task-board-date {
     position: absolute;
     bottom: 0;
-    left: 5px;
+    left: 0;
     font-weight: bold;
     color: #000;
 }

@@ -205,6 +205,7 @@ class Board extends Base
 
         foreach ($columns as $column) {
             $values['title['.$column['id'].']'] = $column['title'];
+            $values['description['.$column['id'].']'] = $column['description'];
             $values['task_limit['.$column['id'].']'] = $column['task_limit'] ?: null;
         }
 
@@ -218,28 +219,39 @@ class Board extends Base
     }
 
     /**
-     * Validate and update a board
+     * Display a form to edit a board
      *
      * @access public
      */
-    public function update()
+    public function editColumn(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $columns = $this->board->getColumns($project['id']);
-        $data = $this->request->getValues();
-        $values = $columns_list = array();
+        $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
 
-        foreach ($columns as $column) {
-            $columns_list[$column['id']] = $column['title'];
-            $values['title['.$column['id'].']'] = isset($data['title'][$column['id']]) ? $data['title'][$column['id']] : '';
-            $values['task_limit['.$column['id'].']'] = isset($data['task_limit'][$column['id']]) ? $data['task_limit'][$column['id']] : 0;
-        }
+        $this->response->html($this->projectLayout('board/edit_column', array(
+            'errors' => $errors,
+            'values' => $values ?: $column,
+            'project' => $project,
+            'column' => $column,
+            'title' => t('Edit column "%s"', $column['title'])
+        )));
+    }
 
-        list($valid, $errors) = $this->board->validateModification($columns_list, $values);
+    /**
+     * Validate and update a column
+     *
+     * @access public
+     */
+    public function updateColumn()
+    {
+        $project = $this->getProject();
+        $values = $this->request->getValues();
+
+        list($valid, $errors) = $this->board->validateModification($values);
 
         if ($valid) {
 
-            if ($this->board->update($data)) {
+            if ($this->board->updateColumn($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
             }
@@ -248,7 +260,7 @@ class Board extends Base
             }
         }
 
-        $this->edit($values, $errors);
+        $this->editcolumn($values, $errors);
     }
 
     /**
@@ -271,7 +283,7 @@ class Board extends Base
 
         if ($valid) {
 
-            if ($this->board->addColumn($project['id'], $data['title'])) {
+            if ($this->board->addColumn($project['id'], $data['title'],$data['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
             }
@@ -404,22 +416,6 @@ class Board extends Base
     }
 
     /**
-     * Change the status of a subtask from the mouseover
-     *
-     * @access public
-     */
-    public function toggleSubtask()
-    {
-        $task = $this->getTask();
-        $this->subTask->toggleStatus($this->request->getIntegerParam('subtask_id'));
-
-        $this->response->html($this->template->render('board/subtasks', array(
-            'subtasks' => $this->subTask->getAll($task['id']),
-            'task' => $task,
-        )));
-    }
-
-    /**
      * Display all attachments during the task mouseover
      *
      * @access public
@@ -449,7 +445,7 @@ class Board extends Base
     }
 
     /**
-     * Display the description
+     * Display task description
      *
      * @access public
      */

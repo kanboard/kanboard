@@ -54,7 +54,7 @@ class BoardTest extends Base
         $board = $b->getBoard(1);
         $this->assertNotEmpty($board);
         $this->assertEquals(1, count($board));
-        $this->assertEquals(4, count($board[0]));
+        $this->assertEquals(5, count($board[0]));
         $this->assertTrue(array_key_exists('name', $board[0]));
         $this->assertTrue(array_key_exists('columns', $board[0]));
         $this->assertTrue(array_key_exists('tasks', $board[0]['columns'][2]));
@@ -81,7 +81,8 @@ class BoardTest extends Base
         $board = $b->getBoard(1);
         $this->assertNotEmpty($board);
         $this->assertEquals(2, count($board));
-        $this->assertEquals(4, count($board[0]));
+        $this->assertEquals(5, count($board[0]));
+        $this->assertTrue(array_key_exists('nb_tasks', $board[0]));
         $this->assertTrue(array_key_exists('name', $board[0]));
         $this->assertTrue(array_key_exists('columns', $board[0]));
         $this->assertTrue(array_key_exists('tasks', $board[0]['columns'][2]));
@@ -205,7 +206,7 @@ class BoardTest extends Base
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
         $this->assertNotFalse($b->addColumn(1, 'another column'));
-        $this->assertNotFalse($b->addColumn(1, 'one more', 3));
+        $this->assertNotFalse($b->addColumn(1, 'one more', 3, 'one more description'));
 
         $columns = $b->getColumns(1);
         $this->assertTrue(is_array($columns));
@@ -218,6 +219,7 @@ class BoardTest extends Base
         $this->assertEquals('one more', $columns[5]['title']);
         $this->assertEquals(3, $columns[5]['task_limit']);
         $this->assertEquals(6, $columns[5]['position']);
+        $this->assertEquals('one more description', $columns[5]['description']);
     }
 
     public function testMoveColumns()

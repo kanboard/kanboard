@@ -47,7 +47,7 @@ class Board extends Base
             $column_name = trim($column_name);
 
             if (! empty($column_name)) {
-                $columns[] = array('title' => $column_name, 'task_limit' => 0);
+                $columns[] = array('title' => $column_name, 'task_limit' => 0, 'description' => '');
             }
         }
 
@@ -73,6 +73,7 @@ class Board extends Base
                 'position' => ++$position,
                 'project_id' => $project_id,
                 'task_limit' => $column['task_limit'],
+                'description' => $column['description'],
             );
 
             if (! $this->db->table(self::TABLE)->save($values)) {
@@ -94,7 +95,7 @@ class Board extends Base
     public function duplicate($project_from, $project_to)
     {
         $columns = $this->db->table(Board::TABLE)
-                            ->columns('title', 'task_limit')
+                            ->columns('title', 'task_limit', 'description')
                             ->eq('project_id', $project_from)
                             ->asc('position')
                             ->findAll();
@@ -109,46 +110,20 @@ class Board extends Base
      * @param  integer   $project_id    Project id
      * @param  string    $title         Column title
      * @param  integer   $task_limit    Task limit
+     * @param  string    $description   Column description
      * @return boolean|integer
      */
-    public function addColumn($project_id, $title, $task_limit = 0)
+    public function addColumn($project_id, $title, $task_limit = 0, $description = '')
     {
         $values = array(
             'project_id' => $project_id,
             'title' => $title,
             'task_limit' => $task_limit,
             'position' => $this->getLastColumnPosition($project_id) + 1,
+        	'description' => $description,
         );
 
         return $this->persist(self::TABLE, $values);
-    }
-
-    /**
-     * Update columns
-     *
-     * @access public
-     * @param  array    $values   Form values
-     * @return boolean
-     */
-    public function update(array $values)
-    {
-        $columns = array();
-
-        foreach (array('title', 'task_limit') as $field) {
-            foreach ($values[$field] as $column_id => $value) {
-                $columns[$column_id][$field] = $value;
-            }
-        }
-
-        $this->db->startTransaction();
-
-        foreach ($columns as $column_id => $values) {
-            $this->updateColumn($column_id, $values['title'], (int) $values['task_limit']);
-        }
-
-        $this->db->closeTransaction();
-
-        return true;
     }
 
     /**
@@ -158,13 +133,15 @@ class Board extends Base
      * @param  integer   $column_id     Column id
      * @param  string    $title         Column title
      * @param  integer   $task_limit    Task limit
+     * @param  string    $description   Optional description
      * @return boolean
      */
-    public function updateColumn($column_id, $title, $task_limit = 0)
+    public function updateColumn($column_id, $title, $task_limit = 0, $description = '')
     {
         return $this->db->table(self::TABLE)->eq('id', $column_id)->update(array(
             'title' => $title,
             'task_limit' => $task_limit,
+            'description' => $description,
         ));
     }
 
@@ -243,10 +220,12 @@ class Board extends Base
 
             $swimlanes[$i]['columns'] = $columns;
             $swimlanes[$i]['nb_columns'] = $nb_columns;
+            $swimlanes[$i]['nb_tasks'] = 0;
 
             for ($j = 0; $j < $nb_columns; $j++) {
                 $swimlanes[$i]['columns'][$j]['tasks'] = $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $columns[$j]['id'], $swimlanes[$i]['id']);
                 $swimlanes[$i]['columns'][$j]['nb_tasks'] = count($swimlanes[$i]['columns'][$j]['tasks']);
+                $swimlanes[$i]['nb_tasks'] += $swimlanes[$i]['columns'][$j]['nb_tasks'];
             }
         }
 
@@ -367,22 +346,16 @@ class Board extends Base
      * Validate column modification
      *
      * @access public
-     * @param  array   $columns          Original columns List
      * @param  array   $values           Required parameters to update a column
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
-    public function validateModification(array $columns, array $values)
+    public function validateModification(array $values)
     {
-        $rules = array();
-
-        foreach ($columns as $column_id => $column_title) {
-            $rules[] = new Validators\Integer('task_limit['.$column_id.']', t('This value must be an integer'));
-            $rules[] = new Validators\GreaterThan('task_limit['.$column_id.']', t('This value must be greater than %d', 0), 0);
-            $rules[] = new Validators\Required('title['.$column_id.']', t('The title is required'));
-            $rules[] = new Validators\MaxLength('title['.$column_id.']', t('The maximum length is %d characters', 50), 50);
-        }
-
-        $v = new Validator($values, $rules);
+        $v = new Validator($values, array(
+            new Validators\Integer('task_limit', t('This value must be an integer')),
+            new Validators\Required('title', t('The title is required')),
+            new Validators\MaxLength('title', t('The maximum length is %d characters', 50), 50),
+        ));
 
         return array(
             $v->execute(),

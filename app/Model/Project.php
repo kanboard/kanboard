@@ -98,24 +98,22 @@ class Project extends Base
      * Get all projects
      *
      * @access public
-     * @param  bool       $filter_permissions    If true, remove projects not allowed for the current user
      * @return array
      */
-    public function getAll($filter_permissions = false)
+    public function getAll()
     {
-        $projects = $this->db->table(self::TABLE)->asc('name')->findAll();
+        return $this->db->table(self::TABLE)->asc('name')->findAll();
+    }
 
-        if ($filter_permissions) {
-
-            foreach ($projects as $key => $project) {
-
-                if (! $this->projectPermission->isUserAllowed($project['id'], $this->userSession->getId())) {
-                    unset($projects[$key]);
-                }
-            }
-        }
-
-        return $projects;
+    /**
+     * Get all project ids
+     *
+     * @access public
+     * @return array
+     */
+    public function getAllIds()
+    {
+        return $this->db->table(self::TABLE)->asc('name')->findAllByColumn('id');
     }
 
     /**

@@ -167,6 +167,8 @@ abstract class Base
         if (! $this->acl->isPublicAction($controller, $action)) {
             $this->handleAuthentication();
             $this->handleAuthorization($controller, $action);
+
+            $this->session['has_subtask_inprogress'] = $this->subTask->hasSubtaskInProgress($this->userSession->getId());
         }
     }
 

@@ -1,6 +1,20 @@
 <tr>
     <?php if (! $hide_swimlane): ?>
-        <td width="10%"></td>
+       <th>
+
+           <?php if ($swimlane['nb_tasks'] > 0): ?>
+                <a href="#" class="board-swimlane-toggle" data-swimlane-id="<?= $swimlane['id'] ?>">
+                    <i class="fa fa-minus-circle hide-icon-swimlane-<?= $swimlane['id'] ?>"></i>
+                    <i class="fa fa-plus-circle show-icon-swimlane-<?= $swimlane['id'] ?>" style="display: none"></i>
+                </a>
+           <?php endif ?>
+
+           <?= $this->e($swimlane['name']) ?>
+
+           <span title="<?= t('Task count') ?>" class="task-count">
+                (<span><?= $swimlane['nb_tasks'] ?></span>)
+            </span>
+        </th>
     <?php endif ?>
 
     <?php foreach ($swimlane['columns'] as $column): ?>
@@ -11,8 +25,14 @@
             </div>
         <?php endif ?>
 
-        <?= $this->e($column['title']) ?>
-
+        <?php if (! empty($column['description'])): ?>
+            <span class="column-tooltip" title="<?= $this->e($column['description']) ?>">
+                <?= $this->e($column['title']) ?>
+            </span>
+        <?php else: ?>
+            <?= $this->e($column['title']) ?>
+        <?php endif ?>
+        
         <?php if ($column['task_limit']): ?>
             <span title="<?= t('Task limit') ?>" class="task-limit">
                 (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>/<?= $this->e($column['task_limit']) ?>)
@@ -25,11 +45,10 @@
     </th>
     <?php endforeach ?>
 </tr>
-<tr>
+<tr class="swimlane-row-<?= $swimlane['id'] ?>">
+
     <?php if (! $hide_swimlane): ?>
-        <th class="board-swimlane-title">
-            <?= $this->e($swimlane['name']) ?>
-        </th>
+        <th></th>
     <?php endif ?>
 
     <?php foreach ($swimlane['columns'] as $column): ?>

@@ -4,7 +4,7 @@ Kanboard.Board = (function() {
 
     function on_popover(e)
     {
-        Kanboard.Popover(e, Kanboard.Init);
+        Kanboard.Popover(e, Kanboard.InitAfterAjax);
     }
 
     function keyboard_shortcuts()
@@ -13,7 +13,7 @@ Kanboard.Board = (function() {
 
             Kanboard.OpenPopover(
                 $(".task-creation-popover").attr('href'),
-                Kanboard.Init
+                Kanboard.InitAfterAjax
             );
         });
     }
@@ -38,10 +38,10 @@ Kanboard.Board = (function() {
         });
 
         // Assignee change
-        $(".assignee-popover").click(Kanboard.Popover);
+        $(".assignee-popover").click(on_popover);
 
         // Category change
-        $(".category-popover").click(Kanboard.Popover);
+        $(".category-popover").click(on_popover);
 
         // Task edit popover
         $(".task-edit-popover").click(on_popover);
@@ -50,7 +50,14 @@ Kanboard.Board = (function() {
         // Description popover
         $(".task-description-popover").click(on_popover);
 
-        // Tooltips
+        // Tooltip for column description
+        $(".column-tooltip").tooltip({
+            content: function(e) {
+                return $(this).attr("title");
+            }
+        });
+
+        // Tooltips for tasks
         $(".task-board-tooltip").tooltip({
             track: false,
             position: {
@@ -100,7 +107,13 @@ Kanboard.Board = (function() {
                         e.preventDefault();
                         e.stopPropagation();
 
-                        $.get($(this).attr('href'), setTooltipContent);
+                        if ($(this).hasClass("popover-subtask-restriction")) {
+                            Kanboard.OpenPopover($(this).attr('href'));
+                            $(_this).tooltip('close');
+                        }
+                        else {
+                            $.get($(this).attr('href'), setTooltipContent);
+                        }
                     });
                 });
 
@@ -169,6 +182,7 @@ Kanboard.Board = (function() {
             success: function(data) {
                 $("#board").remove();
                 $("#main").append(data);
+                Kanboard.InitAfterAjax();
                 board_load_events();
                 filter_apply();
             }
@@ -186,6 +200,7 @@ Kanboard.Board = (function() {
                     200: function(data) {
                         $("#board").remove();
                         $("#main").append(data);
+                        Kanboard.InitAfterAjax();
                         board_unload_events();
                         board_load_events();
                         filter_apply();

@@ -223,10 +223,40 @@ class SubTask extends Base
         $values = array(
             'id' => $subtask['id'],
             'status' => ($subtask['status'] + 1) % 3,
-            'task_id' => $subtask['task_id'],
         );
 
         return $this->update($values);
+    }
+
+    /**
+     * Get the subtask in progress for this user
+     *
+     * @access public
+     * @param  integer   $user_id
+     * @return array
+     */
+    public function getSubtaskInProgress($user_id)
+    {
+        return $this->db->table(self::TABLE)
+                        ->eq('status', self::STATUS_INPROGRESS)
+                        ->eq('user_id', $user_id)
+                        ->findOne();
+    }
+
+    /**
+     * Return true if the user have a subtask in progress
+     *
+     * @access public
+     * @param  integer   $user_id
+     * @return boolean
+     */
+    public function hasSubtaskInProgress($user_id)
+    {
+        return $this->config->get('subtask_restriction') == 1 &&
+               $this->db->table(self::TABLE)
+                        ->eq('status', self::STATUS_INPROGRESS)
+                        ->eq('user_id', $user_id)
+                        ->count() === 1;
     }
 
     /**

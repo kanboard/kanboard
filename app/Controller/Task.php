@@ -261,7 +261,11 @@ class Task extends Base
                 $this->session->flashError(t('Unable to close this task.'));
             }
 
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
+            if ($this->request->getStringParam('redirect') === 'board') {
+                $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+            }
+
+            $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
 
         $this->response->html($this->taskLayout('task/close', array(

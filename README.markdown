@@ -148,6 +148,7 @@ Contributors:
 
 - Alex Butum
 - [Aleix Pol](https://github.com/aleixpol)
+- [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
 - [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo

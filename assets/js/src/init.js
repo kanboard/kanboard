@@ -1,6 +1,6 @@
 // Initialization
-$(function() {
-
+jQuery(document).ready(function() {
+    
     Kanboard.Init();
 
     if (Kanboard.Exists("board")) {
