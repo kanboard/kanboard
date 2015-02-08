@@ -1,11 +1,14 @@
 /* sidebar */
 .sidebar-container {
     margin-top: 10px;
+    position: relative;
     clear: both;
 }
 
 .sidebar-content {
     margin-left: 23%;
+    width: 76%;
+    position: absolute;
 }
 
 .sidebar {
@@ -33,5 +36,6 @@
     .sidebar-content {
         margin: 0;
         margin-top: 20px;
+        width: 100%;
     }
 }

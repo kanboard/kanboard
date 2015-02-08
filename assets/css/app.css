@@ -1911,11 +1911,14 @@ a.task-board-nobody {
 /* sidebar */
 .sidebar-container {
     margin-top: 10px;
+    position: relative;
     clear: both;
 }
 
 .sidebar-content {
     margin-left: 23%;
+    width: 76%;
+    position: absolute;
 }
 
 .sidebar {
@@ -1943,6 +1946,7 @@ a.task-board-nobody {
     .sidebar-content {
         margin: 0;
         margin-top: 20px;
+        width: 100%;
     }
 }
 /* responsive design */
