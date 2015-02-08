@@ -25,7 +25,11 @@
 
         <title><?= isset($title) ? $this->e($title) : 'Kanboard' ?></title>
     </head>
-    <body data-status-url="<?= $this->u('app', 'status') ?>" data-login-url="<?= $this->u('user', 'login') ?>" data-js-lang="<?= $this->jsLang() ?>">
+    <body data-status-url="<?= $this->u('app', 'status') ?>"
+          data-login-url="<?= $this->u('user', 'login') ?>"
+          data-timezone="<?= $this->getTimezone() ?>"
+          data-js-lang="<?= $this->jsLang() ?>">
+          
     <?php if (isset($no_layout) && $no_layout): ?>
         <?= $content_for_layout ?>
     <?php else: ?>

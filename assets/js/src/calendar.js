@@ -70,6 +70,7 @@ Kanboard.Calendar = (function() {
             lang: $("body").data("js-lang"),
             editable: true,
             eventLimit: true,
+            defaultView: "agendaWeek",
             header: {
                 left: 'prev,next today',
                 center: 'title',

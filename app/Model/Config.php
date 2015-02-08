@@ -202,18 +202,28 @@ class Config extends Base
     }
 
     /**
+     * Get current timezone
+     *
+     * @access public
+     * @return string
+     */
+    public function getCurrentTimezone()
+    {
+        if ($this->userSession->isLogged() && ! empty($this->session['user']['timezone'])) {
+            return $this->session['user']['timezone'];
+        }
+
+        return $this->get('application_timezone', 'UTC');
+    }
+
+    /**
      * Set timezone
      *
      * @access public
      */
     public function setupTimezone()
     {
-        if ($this->userSession->isLogged() && ! empty($this->session['user']['timezone'])) {
-            date_default_timezone_set($this->session['user']['timezone']);
-        }
-        else {
-            date_default_timezone_set($this->get('application_timezone', 'UTC'));
-        }
+        date_default_timezone_set($this->getCurrentTimezone());
     }
 
     /**

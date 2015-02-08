@@ -611,6 +611,17 @@ class Helper
     }
 
     /**
+     * Get current timezone
+     *
+     * @access public
+     * @return string
+     */
+    public function getTimezone()
+    {
+        return $this->config->getCurrentTimezone();
+    }
+
+    /**
      * Get the link to toggle subtask status
      *
      * @access public
