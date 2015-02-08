@@ -76,6 +76,52 @@ class Config extends Base
     }
 
     /**
+     * Get javascript language code
+     *
+     * @access public
+     * @return string
+     */
+    public function getJsLanguageCode()
+    {
+        $languages = array(
+            'da_DK' => 'da',
+            'de_DE' => 'de',
+            'en_US' => 'en',
+            'es_ES' => 'es',
+            'fr_FR' => 'fr',
+            'it_IT' => 'it',
+            'hu_HU' => 'hu',
+            'pl_PL' => 'pl',
+            'pt_BR' => 'pt-br',
+            'ru_RU' => 'ru',
+            'fi_FI' => 'fi',
+            'sv_SE' => 'sv',
+            'zh_CN' => 'zh-cn',
+            'ja_JP' => 'ja',
+            'th_TH' => 'th',
+        );
+
+        $lang = $this->getCurrentLanguage();
+
+        return isset($languages[$lang]) ? $languages[$lang] : 'en';
+    }
+
+    /**
+     * Get current language
+     *
+     * @access public
+     * @return string
+     */
+    public function getCurrentLanguage()
+    {
+        if ($this->userSession->isLogged() && ! empty($this->session['user']['language'])) {
+            return $this->session['user']['language'];
+        }
+
+        return $this->get('application_language', 'en_US');
+    }
+
+    /**
      * Get a config variable from the session or the database
      *
      * @access public
@@ -152,12 +198,7 @@ class Config extends Base
      */
     public function setupTranslations()
     {
-        if ($this->userSession->isLogged() && ! empty($this->session['user']['language'])) {
-            Translator::load($this->session['user']['language']);
-        }
-        else {
-            Translator::load($this->get('application_language', 'en_US'));
-        }
+        Translator::load($this->getCurrentLanguage());
     }
 
     /**

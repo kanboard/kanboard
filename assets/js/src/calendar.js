@@ -9,20 +9,16 @@ Kanboard.Calendar = (function() {
         var translations = calendar.data("translations");
 
         calendar.fullCalendar({
+            lang: $("body").data("js-lang"),
             editable: true,
             eventLimit: true,
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: ''
+                right: 'month,agendaWeek,agendaDay'
             },
             viewRender: load_filters,
-            eventDrop: move_calendar_event,
-            monthNames: [translations.January, translations.February, translations.March, translations.April, translations.May, translations.June, translations.July, translations.August, translations.September, translations.October, translations.November, translations.December],
-            monthNamesShort: [translations.Jan, translations.Feb, translations.Mar, translations.Apr, translations.May, translations.Jun, translations.Jul, translations.Aug, translations.Sep, translations.Oct, translations.Nov, translations.Dec],
-            buttonText: {today: translations.Today},
-            dayNames: [translations.Sunday, translations.Monday, translations.Tuesday, translations.Wednesday, translations.Thursday, translations.Friday, translations.Saturday],
-            dayNamesShort: [translations.Sun, translations.Mon, translations.Tue, translations.Wed, translations.Thu, translations.Fri, translations.Sat]
+            eventDrop: move_calendar_event
         });
     }
 
@@ -70,7 +66,7 @@ Kanboard.Calendar = (function() {
     {
         var filters = Kanboard.GetStorageItem(filter_storage_key);
         
-        if (filters !== "undefined" && filters !== "") {
+        if (filters !== "") {
             filters = JSON.parse(filters);
 
             for (var filter in filters) {
@@ -96,12 +92,13 @@ Kanboard.Calendar = (function() {
         refresh_calendar(filters);
     }
 
-    return {
-        Init: function() {
+    jQuery(document).ready(function() {
+
+        if (Kanboard.Exists("calendar")) {
             filter_storage_key = "calendar_filters_" + $("#calendar").data("project-id");
             show_calendar();
             load_filters();
         }
-    };
+    });
 
 })();

@@ -74,6 +74,7 @@ select {
 
 .form-actions {
     margin-top: 20px;
+    clear: both;
 }
 
 input.form-error,
