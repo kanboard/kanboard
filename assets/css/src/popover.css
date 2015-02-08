@@ -7,6 +7,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
     overflow: auto;
+    z-index: 100;
 }
 
 #popover-content {
