@@ -44,3 +44,7 @@
 .dashboard-table-link:hover {
     color: #999;
 }
+
+#dashboard-calendar {
+    font-size: 0.85em;
+}

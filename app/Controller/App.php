@@ -68,10 +68,11 @@ class App extends Base
         $this->response->html($this->template->layout('app/dashboard', array(
             'title' => t('Dashboard'),
             'board_selector' => $this->projectPermission->getAllowedProjects($user_id),
-            'events' => $this->projectActivity->getProjects($project_ids, 10),
+            'events' => $this->projectActivity->getProjects($project_ids, 5),
             'task_paginator' => $task_paginator,
             'subtask_paginator' => $subtask_paginator,
             'project_paginator' => $project_paginator,
+            'user_id' => $user_id,
         )));
     }
 

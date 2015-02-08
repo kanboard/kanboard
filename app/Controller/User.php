@@ -190,6 +190,20 @@ class User extends Base
     }
 
     /**
+     * Display user calendar
+     *
+     * @access public
+     */
+    public function calendar()
+    {
+        $user = $this->getUser();
+
+        $this->response->html($this->layout('user/calendar', array(
+            'user' => $user,
+        )));
+    }
+
+    /**
      * Display timesheet
      *
      * @access public

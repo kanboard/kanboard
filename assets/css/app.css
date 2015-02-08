@@ -1866,7 +1866,10 @@ a.task-board-nobody {
 .dashboard-table-link:hover {
     color: #999;
 }
-/* datepicker */
+
+#dashboard-calendar {
+    font-size: 0.85em;
+}/* datepicker */
 #ui-datepicker-div {
     font-size: 0.8em;
 }

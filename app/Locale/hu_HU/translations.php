@@ -676,4 +676,6 @@ return array(
     // 'Show/hide subtasks' => '',
     // 'Show/hide tasks' => '',
     // 'Disable login form' => '',
+    // 'Show/hide calendar' => '',
+    // 'User calendar' => '',
 );

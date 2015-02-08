@@ -678,4 +678,6 @@ return array(
     'Show/hide subtasks' => 'Afficher/cacher les sous-tâches',
     'Show/hide tasks' => 'Afficher/cacher les tâches',
     'Disable login form' => 'Désactiver le formulaire d\'authentification',
+    'Show/hide calendar' => 'Afficher/cacher le calendrier',
+    'User calendar' => 'Calendrier de l\'utilisateur',
 );

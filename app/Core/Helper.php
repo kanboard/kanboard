@@ -12,6 +12,7 @@ use Pimple\Container;
  *
  * @property \Core\Session             $session
  * @property \Model\Acl                $acl
+ * @property \Model\Config             $config
  * @property \Model\User               $user
  * @property \Model\UserSession        $userSession
  */

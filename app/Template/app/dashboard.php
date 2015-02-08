@@ -25,6 +25,9 @@
                                 <a href="#" class="dashboard-toggle" data-toggle="subtasks"><?= t('Show/hide subtasks') ?></a>
                             </li>
                             <li>
+                                <a href="#" class="dashboard-toggle" data-toggle="calendar"><?= t('Show/hide calendar') ?></a>
+                            </li>
+                            <li>
                                 <a href="#" class="dashboard-toggle" data-toggle="activities"><?= t('Show/hide activities') ?></a>
                             </li>
                         </ul>
@@ -40,6 +43,13 @@
             <div id="dashboard-subtasks"><?= $this->render('app/subtasks', array('paginator' => $subtask_paginator)) ?></div>
         </div>
         <div class="dashboard-right-column">
+            <div id="dashboard-calendar">
+                <div id="user-calendar"
+                     data-check-url="<?= $this->u('calendar', 'user') ?>"
+                     data-user-id="<?= $user_id ?>"
+                >
+                </div>
+            </div>
             <div id="dashboard-activities">
                 <h2><?= t('Activity stream') ?></h2>
                 <?= $this->render('project/events', array('events' => $events)) ?>

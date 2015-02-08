@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+use Model\Task;
+
 /**
  * Project Calendar controller
  *
@@ -35,7 +37,7 @@ class Calendar extends Base
     }
 
     /**
-     * Get tasks to display on the calendar
+     * Get tasks to display on the calendar (project view)
      *
      * @access public
      */
@@ -52,8 +54,30 @@ class Calendar extends Base
                  ->filterByColor($this->request->getStringParam('color_id'))
                  ->filterByStatus($this->request->getIntegerParam('is_active', -1))
                  ->filterByDueDateRange(
-                    $this->request->getStringParam('start'),
-                    $this->request->getStringParam('end')
+                     $this->request->getStringParam('start'),
+                     $this->request->getStringParam('end')
+                 )
+                 ->toCalendarEvents()
+        );
+    }
+
+    /**
+     * Get tasks to display on the calendar (user view)
+     *
+     * @access public
+     */
+    public function user()
+    {
+        $user_id = $this->request->getIntegerParam('user_id');
+
+        $this->response->json(
+            $this->taskFilter
+                 ->create()
+                 ->filterByOwner($user_id)
+                 ->filterByStatus(Task::STATUS_OPEN)
+                 ->filterByDueDateRange(
+                     $this->request->getStringParam('start'),
+                     $this->request->getStringParam('end')
                  )
                  ->toCalendarEvents()
         );
