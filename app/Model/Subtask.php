@@ -176,9 +176,6 @@ class Subtask extends Base
         $subtask_id = $this->persist(self::TABLE, $values);
 
         if ($subtask_id) {
-
-            $this->updateTaskTimeTracking($values['task_id']);
-
             $this->container['dispatcher']->dispatch(
                 self::EVENT_CREATE,
                 new SubtaskEvent(array('id' => $subtask_id) + $values)
@@ -201,10 +198,6 @@ class Subtask extends Base
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
         if ($result) {
-
-            if (isset($values['task_id'])) {
-                $this->updateTaskTimeTracking($values['task_id']);
-            }
 
             $this->container['dispatcher']->dispatch(
                 self::EVENT_UPDATE,
@@ -231,6 +224,7 @@ class Subtask extends Base
         $values = array(
             'id' => $subtask['id'],
             'status' => ($subtask['status'] + 1) % 3,
+            'task_id' => $subtask['task_id'],
         );
 
         return $this->update($values);
@@ -265,37 +259,6 @@ class Subtask extends Base
                         ->eq('status', self::STATUS_INPROGRESS)
                         ->eq('user_id', $user_id)
                         ->count() === 1;
-    }
-
-    /**
-     * Update task time tracking based on subtasks time tracking
-     *
-     * @access public
-     * @param  integer   $task_id    Task id
-     * @return bool
-     */
-    public function updateTaskTimeTracking($task_id)
-    {
-        $result = $this->db
-                       ->table(self::TABLE)
-                       ->eq('task_id', $task_id)
-                       ->columns(
-                           'SUM(time_spent) AS total_spent',
-                           'SUM(time_estimated) AS total_estimated'
-                       )
-                       ->findOne();
-
-        if (empty($result['total_spent']) && empty($result['total_estimated'])) {
-            return true;
-        }
-
-        return $this->db
-                    ->table(Task::TABLE)
-                    ->eq('id', $task_id)
-                    ->update(array(
-                        'time_spent' => $result['total_spent'],
-                        'time_estimated' => $result['total_estimated'],
-                    ));
     }
 
     /**

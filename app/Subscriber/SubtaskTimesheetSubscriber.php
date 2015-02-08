@@ -11,21 +11,36 @@ class SubtaskTimesheetSubscriber extends Base implements EventSubscriberInterfac
     public static function getSubscribedEvents()
     {
         return array(
-            Subtask::EVENT_UPDATE => array('log', 0),
+            Subtask::EVENT_CREATE => array('updateTaskTime', 0),
+            Subtask::EVENT_UPDATE => array(
+                array('logStartEnd', 10),
+                array('updateTaskTime', 0),
+            )
         );
     }
 
-    public function log(SubtaskEvent $event)
+    public function updateTaskTime(SubtaskEvent $event)
     {
-        if (isset($event['status'])) {
+        if (isset($event['task_id'])) {
+            $this->subtaskTimeTracking->updateTaskTimeTracking($event['task_id']);
+        }
+    }
+
+    public function logStartEnd(SubtaskEvent $event)
+    {
+        if ($this->config->get('subtask_time_tracking') == 1 && isset($event['status'])) {
 
             $subtask = $this->subtask->getById($event['id']);
 
+            if (empty($subtask['user_id'])) {
+                return false;
+            }
+
             if ($subtask['status'] == Subtask::STATUS_INPROGRESS) {
-                $this->subtaskTimeTracking->logStartTime($subtask['id'], $subtask['user_id']);
+                return $this->subtaskTimeTracking->logStartTime($subtask['id'], $subtask['user_id']);
             }
             else {
-                $this->subtaskTimeTracking->logEndTime($subtask['id'], $subtask['user_id']);
+                return $this->subtaskTimeTracking->logEndTime($subtask['id'], $subtask['user_id']);
             }
         }
     }

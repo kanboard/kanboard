@@ -68,6 +68,8 @@ class SubtaskTimeTracking extends Base
      */
     public function logEndTime($subtask_id, $user_id)
     {
+        $this->updateSubtaskTimeSpent($subtask_id, $user_id);
+
         return $this->db
                     ->table(self::TABLE)
                     ->eq('subtask_id', $subtask_id)
@@ -76,5 +78,71 @@ class SubtaskTimeTracking extends Base
                     ->update(array(
                         'end' => time()
                     ));
+    }
+
+    /**
+     * Update task time tracking based on subtasks time tracking
+     *
+     * @access public
+     * @param  integer   $task_id    Task id
+     * @return bool
+     */
+    public function updateTaskTimeTracking($task_id)
+    {
+        $result = $this->calculateSubtaskTime($task_id); 
+
+        if (empty($result['total_spent']) && empty($result['total_estimated'])) {
+            return true;
+        }
+
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq('id', $task_id)
+                    ->update(array(
+                        'time_spent' => $result['total_spent'],
+                        'time_estimated' => $result['total_estimated'],
+                    ));
+    }
+
+    /**
+     * Sum time spent and time estimated for all subtasks
+     *
+     * @access public
+     * @param  integer   $task_id    Task id
+     * @return array
+     */
+    public function calculateSubtaskTime($task_id)
+    {
+        return $this->db
+                    ->table(Subtask::TABLE)
+                    ->eq('task_id', $task_id)
+                    ->columns(
+                        'SUM(time_spent) AS total_spent',
+                        'SUM(time_estimated) AS total_estimated'
+                    )
+                    ->findOne();
+    }
+
+    /**
+     * Update subtask time spent based on the punch clock table
+     *
+     * @access public
+     * @param  integer   $subtask_id
+     * @param  integer   $user_id
+     * @return bool
+     */
+    public function updateSubtaskTimeSpent($subtask_id, $user_id)
+    {
+        $start_time = $this->db
+                           ->table(self::TABLE)
+                           ->eq('subtask_id', $subtask_id)
+                           ->eq('user_id', $user_id)
+                           ->eq('end', 0)
+                           ->findOneColumn('start');
+
+        return $start_time &&
+               $this->db
+                    ->getConnection()
+                    ->exec('UPDATE '.Subtask::TABLE.' SET time_spent=time_spent+'.round((time() - $start_time) / 3600, 1).' WHERE id='.$subtask_id);
     }
 }
