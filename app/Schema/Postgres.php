@@ -5,7 +5,12 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 24;
+const VERSION = 25;
+
+function version_25($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN disable_login_form BOOLEAN DEFAULT '1'");
+}
 
 function version_24($pdo)
 {
@@ -13,17 +18,17 @@ function version_24($pdo)
     $rq->execute(array('subtask_restriction', '0'));
     $rq->execute(array('subtask_time_tracking', '0'));
 
-    $pdo->exec("
+    $pdo->exec('
         CREATE TABLE subtask_time_tracking (
             id SERIAL PRIMARY KEY,
-            user_id INTEGER NOT NULL,
-            subtask_id INTEGER NOT NULL,
-            start INTEGER DEFAULT 0,
-            end INTEGER DEFAULT 0,
+            "user_id" INTEGER NOT NULL,
+            "subtask_id" INTEGER NOT NULL,
+            "start" INTEGER DEFAULT 0,
+            "end" INTEGER DEFAULT 0,
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(subtask_id) REFERENCES task_has_subtasks(id) ON DELETE CASCADE
         )
-    ");
+    ');
 }
 
 function version_23($pdo)

@@ -5,7 +5,12 @@ namespace Schema;
 use PDO;
 use Core\Security;
 
-const VERSION = 43;
+const VERSION = 44;
+
+function version_44($pdo)
+{
+    $pdo->exec('ALTER TABLE users ADD COLUMN disable_login_form TINYINT(1) DEFAULT 0');
+}
 
 function version_43($pdo)
 {

@@ -713,4 +713,5 @@ return array(
     // 'Show/hide projects' => '',
     // 'Show/hide subtasks' => '',
     // 'Show/hide tasks' => '',
+    // 'Disable login form' => '',
 );

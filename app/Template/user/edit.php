@@ -26,9 +26,13 @@
     <?= $this->formLabel(t('Language'), 'language') ?>
     <?= $this->formSelect('language', $languages, $values, $errors) ?><br/>
 
-    <?php if ($this->userSession->isAdmin()): ?>
-        <?= $this->formCheckbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1 ? true : false) ?><br/>
-    <?php endif ?>
+    <div class="alert alert-error">
+        <?= $this->formCheckbox('disable_login_form', t('Disable login form'), 1, isset($values['disable_login_form']) && $values['disable_login_form'] == 1) ?><br/>
+
+        <?php if ($this->userSession->isAdmin()): ?>
+            <?= $this->formCheckbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1) ?><br/>
+        <?php endif ?>
+    </div>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

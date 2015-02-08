@@ -715,4 +715,5 @@ return array(
     'Show/hide projects' => 'Afficher/cacher les projets',
     'Show/hide subtasks' => 'Afficher/cacher les sous-tâches',
     'Show/hide tasks' => 'Afficher/cacher les tâches',
+    'Disable login form' => 'Désactiver le formulaire d\'authentification',
 );

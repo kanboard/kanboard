@@ -341,7 +341,7 @@ class User extends Base
 
         if ($this->request->isPost()) {
 
-            $values = $this->request->getValues();
+            $values = $this->request->getValues() + array('disable_login_form' => 0);
 
             if ($this->userSession->isAdmin()) {
                 $values += array('is_admin' => 0);

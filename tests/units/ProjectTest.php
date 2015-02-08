@@ -97,7 +97,7 @@ class ProjectTest extends Base
 
         $project = $p->getById(1);
         $this->assertNotEmpty($project);
-        $this->assertEquals($now, $project['last_modified']);
+        $this->assertEquals($now, $project['last_modified'], 'Wrong Timestamp', 1);
 
         sleep(1);
         $this->assertTrue($p->updateModificationDate(1));

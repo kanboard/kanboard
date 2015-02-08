@@ -66,6 +66,7 @@ class ReverseProxy extends Base
             'username' => $login,
             'is_admin' => REVERSE_PROXY_DEFAULT_ADMIN === $login,
             'is_ldap_user' => 1,
+            'disable_login_form' => 1,
         ));
     }
 }
