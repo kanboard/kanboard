@@ -1828,12 +1828,12 @@ a.task-board-nobody {
     }
 
     .dashboard-left-column {
-        width: 55%;
+        width: 58%;
         float: left;
     }
 
     .dashboard-right-column {
-        margin-left: 5%;
+        margin-left: 2%;
         width: 40%;
         float: left;
     }
