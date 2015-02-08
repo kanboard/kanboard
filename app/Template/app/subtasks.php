@@ -8,6 +8,7 @@
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
             <th class="column-15"><?= $paginator->order(t('Status'), 'status') ?></th>
             <th><?= $paginator->order(t('Subtask'), 'title') ?></th>
+            <th class="column-20"><?= t('Time tracking') ?></th>
         </tr>
         <?php foreach ($paginator->getCollection() as $subtask): ?>
         <tr>
@@ -22,6 +23,15 @@
             </td>
             <td>
                 <?= $this->a($this->e($subtask['title']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
+            </td>
+            <td>
+                <?php if (! empty($subtask['time_spent'])): ?>
+                    <strong><?= $this->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
+                <?php endif ?>
+
+                <?php if (! empty($subtask['time_estimated'])): ?>
+                    <strong><?= $this->e($subtask['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
+                <?php endif ?>
             </td>
         </tr>
         <?php endforeach ?>
