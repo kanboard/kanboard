@@ -36,6 +36,8 @@ abstract class Base extends PHPUnit_Framework_TestCase
             new EventDispatcher,
             new Stopwatch
         );
+
+        $this->container['db']->log_queries = true;
     }
 
     public function tearDown()

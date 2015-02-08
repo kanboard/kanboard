@@ -44,6 +44,21 @@ class SubtaskTimeTracking extends Base
     }
 
     /**
+     * Get all recorded time slots for a given user
+     *
+     * @access public
+     * @param  integer    $user_id       User id
+     * @return array
+     */
+    public function getUserTimesheet($user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('user_id', $user_id)
+                    ->findAll();
+    }
+
+    /**
      * Log start time
      *
      * @access public
@@ -140,9 +155,17 @@ class SubtaskTimeTracking extends Base
                            ->eq('end', 0)
                            ->findOneColumn('start');
 
+        $time_spent = $this->db
+                           ->table(Subtask::TABLE)
+                           ->eq('id', $subtask_id)
+                           ->findOneColumn('time_spent');
+
         return $start_time &&
                $this->db
-                    ->getConnection()
-                    ->exec('UPDATE '.Subtask::TABLE.' SET time_spent=time_spent+'.round((time() - $start_time) / 3600, 1).' WHERE id='.$subtask_id);
+                    ->table(Subtask::TABLE)
+                    ->eq('id', $subtask_id)
+                    ->update(array(
+                        'time_spent' => $time_spent + round((time() - $start_time) / 3600, 1)
+                    ));
     }
 }
