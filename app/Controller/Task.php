@@ -72,7 +72,6 @@ class Task extends Base
             'subtasks' => $subtasks,
             'task' => $task,
             'values' => $values,
-            'timesheet' => $this->timeTracking->getTaskTimesheet($task, $subtasks),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'date_format' => $this->config->get('application_date_format'),

@@ -919,7 +919,6 @@ select {
 }
 
 .form-actions {
-    clear: both;
     margin-top: 20px;
 }
 
@@ -1908,7 +1907,8 @@ a.task-board-nobody {
 .confirm {
     max-width: 700px;
     font-size: 1.1em;
-}/* sidebar */
+}
+/* sidebar */
 .sidebar-container {
     margin-top: 10px;
     clear: both;
