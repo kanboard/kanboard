@@ -514,6 +514,30 @@ Response example:
 }
 ```
 
+### getProjectActivity
+
+- Purpose: **Get Activityfeed for Project(s)**
+- Parameters:
+    - **project_ids** (integer array, required)
+    - **limit** (integer, optional)
+    - **start** (timestamp, optional)
+    - **end** (timestamp, optional)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getProjectActivity",
+    "id": 942472945,
+    "params": [
+        "project_ids": [1,2]
+    ]
+}
+```
+
 ### getMembers
 
 - Purpose: **Get members of a project**
@@ -1069,6 +1093,72 @@ Request example to fetch all tasks on the board:
         "project_id": 1,
         "status_id": 1
     }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 133280317,
+    "result": [
+        {
+            "id": "1",
+            "title": "Task #1",
+            "description": "",
+            "date_creation": "1409961789",
+            "color_id": "blue",
+            "project_id": "1",
+            "column_id": "2",
+            "owner_id": "1",
+            "position": "1",
+            "is_active": "1",
+            "date_completed": null,
+            "score": "0",
+            "date_due": "0",
+            "category_id": "0",
+            "creator_id": "0",
+            "date_modification": "1409961789",
+            "swimlane_id": 0
+        },
+        {
+            "id": "2",
+            "title": "Test",
+            "description": "",
+            "date_creation": "1409962115",
+            "color_id": "green",
+            "project_id": "1",
+            "column_id": "2",
+            "owner_id": "1",
+            "position": "2",
+            "is_active": "1",
+            "date_completed": null,
+            "score": "0",
+            "date_due": "0",
+            "category_id": "0",
+            "creator_id": "0",
+            "date_modification": "1409962115",
+            "swimlane_id": 0
+        },
+        ...
+    ]
+}
+```
+
+### getOverdueTasks
+
+- Purpose: **Get all overdue tasks**
+- Result on success: **List of tasks**
+- Result on failure: **false**
+
+Request example to fetch all tasks on the board:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getOverdueTasks",
+    "id": 133280317,
 }
 ```
 
