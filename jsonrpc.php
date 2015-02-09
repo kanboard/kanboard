@@ -20,6 +20,7 @@ $server->bind('enableProject', $container['project'], 'enable');
 $server->bind('disableProject', $container['project'], 'disable');
 $server->bind('enableProjectPublicAccess', $container['project'], 'enablePublicAccess');
 $server->bind('disableProjectPublicAccess', $container['project'], 'disablePublicAccess');
+$server->bind('getProjectActivity', $container['projectActivity'], 'getProjects');
 
 $server->register('createProject', function($name) use ($container) {
     $values = array('name' => $name);
@@ -71,6 +72,7 @@ $server->bind('allowUser', $container['projectPermission'], 'addMember');
  */
 $server->bind('getTask', $container['taskFinder'], 'getById');
 $server->bind('getAllTasks', $container['taskFinder'], 'getAll');
+$server->bind('getOverdueTasks', $container['taskFinder'], 'getOverdueTasks');
 $server->bind('openTask', $container['taskStatus'], 'open');
 $server->bind('closeTask', $container['taskStatus'], 'close');
 $server->bind('removeTask', $container['task'], 'remove');
