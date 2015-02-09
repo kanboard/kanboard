@@ -410,7 +410,7 @@ class Board extends Base
     {
         $task = $this->getTask();
         $this->response->html($this->template->render('board/subtasks', array(
-            'subtasks' => $this->subTask->getAll($task['id']),
+            'subtasks' => $this->subtask->getAll($task['id']),
             'task' => $task,
         )));
     }

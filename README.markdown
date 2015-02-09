@@ -45,6 +45,12 @@ License
 
 GNU Affero General Public License version 3: <http://www.gnu.org/licenses/agpl-3.0.txt>
 
+Related projects
+----------------
+
+- [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
+- [Wunderlist To Kanboard script by EpocDotFr](https://github.com/EpocDotFr/WunderlistToKanboard)
+
 Documentation
 -------------
 
@@ -80,6 +86,7 @@ Documentation
 
 ### Integrations
 
+- [Bitbucket webhooks](docs/bitbucket-webhooks.markdown)
 - [Github webhooks](docs/github-webhooks.markdown)
 - [Gitlab webhooks](docs/gitlab-webhooks.markdown)
 
@@ -130,6 +137,7 @@ Documentation
 - [Translations](docs/translations.markdown)
 - [Coding standards](docs/coding-standards.markdown)
 - [Running tests](docs/tests.markdown)
+- [Build assets](docs/assets.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.

@@ -5,7 +5,12 @@ namespace Schema;
 use Core\Security;
 use PDO;
 
-const VERSION = 42;
+const VERSION = 43;
+
+function version_43($pdo)
+{
+    $pdo->exec('ALTER TABLE users ADD COLUMN disable_login_form INTEGER DEFAULT 0');
+}
 
 function version_42($pdo)
 {

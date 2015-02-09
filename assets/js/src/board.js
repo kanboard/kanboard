@@ -272,12 +272,13 @@ Kanboard.Board = (function() {
     	filter_apply();
     }
 
-    return {
-        Init: function() {
+    jQuery(document).ready(function() {
+
+        if (Kanboard.Exists("board")) {
             board_load_events();
             filter_load_events();
             keyboard_shortcuts();
         }
-    };
+    });
 
 })();

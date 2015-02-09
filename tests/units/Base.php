@@ -11,6 +11,8 @@ date_default_timezone_set('UTC');
 
 abstract class Base extends PHPUnit_Framework_TestCase
 {
+    protected $container;
+
     public function setUp()
     {
         if (DB_DRIVER === 'mysql') {
@@ -34,6 +36,8 @@ abstract class Base extends PHPUnit_Framework_TestCase
             new EventDispatcher,
             new Stopwatch
         );
+
+        $this->container['db']->log_queries = true;
     }
 
     public function tearDown()

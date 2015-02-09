@@ -190,6 +190,20 @@ class User extends Base
     }
 
     /**
+     * Display user calendar
+     *
+     * @access public
+     */
+    public function calendar()
+    {
+        $user = $this->getUser();
+
+        $this->response->html($this->layout('user/calendar', array(
+            'user' => $user,
+        )));
+    }
+
+    /**
      * Display timesheet
      *
      * @access public
@@ -341,7 +355,7 @@ class User extends Base
 
         if ($this->request->isPost()) {
 
-            $values = $this->request->getValues();
+            $values = $this->request->getValues() + array('disable_login_form' => 0);
 
             if ($this->userSession->isAdmin()) {
                 $values += array('is_admin' => 0);

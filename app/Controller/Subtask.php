@@ -2,10 +2,10 @@
 
 namespace Controller;
 
-use Model\SubTask as SubtaskModel;
+use Model\Subtask as SubtaskModel;
 
 /**
- * SubTask controller
+ * Subtask controller
  *
  * @package  controller
  * @author   Frederic Guillot
@@ -20,7 +20,7 @@ class Subtask extends Base
      */
     private function getSubtask()
     {
-        $subtask = $this->subTask->getById($this->request->getIntegerParam('subtask_id'));
+        $subtask = $this->subtask->getById($this->request->getIntegerParam('subtask_id'));
 
         if (! $subtask) {
             $this->notfound();
@@ -63,11 +63,11 @@ class Subtask extends Base
         $task = $this->getTask();
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->subTask->validateCreation($values);
+        list($valid, $errors) = $this->subtask->validateCreation($values);
 
         if ($valid) {
 
-            if ($this->subTask->create($values)) {
+            if ($this->subtask->create($values)) {
                 $this->session->flash(t('Sub-task added successfully.'));
             }
             else {
@@ -98,7 +98,7 @@ class Subtask extends Base
             'values' => empty($values) ? $subtask : $values,
             'errors' => $errors,
             'users_list' => $this->projectPermission->getMemberList($task['project_id']),
-            'status_list' => $this->subTask->getStatusList(),
+            'status_list' => $this->subtask->getStatusList(),
             'subtask' => $subtask,
             'task' => $task,
         )));
@@ -115,11 +115,11 @@ class Subtask extends Base
         $this->getSubtask();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->subTask->validateModification($values);
+        list($valid, $errors) = $this->subtask->validateModification($values);
 
         if ($valid) {
 
-            if ($this->subTask->update($values)) {
+            if ($this->subtask->update($values)) {
                 $this->session->flash(t('Sub-task updated successfully.'));
             }
             else {
@@ -159,7 +159,7 @@ class Subtask extends Base
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        if ($this->subTask->remove($subtask['id'])) {
+        if ($this->subtask->remove($subtask['id'])) {
             $this->session->flash(t('Sub-task removed successfully.'));
         }
         else {
@@ -180,14 +180,14 @@ class Subtask extends Base
         $subtask = $this->getSubtask();
         $redirect = $this->request->getStringParam('redirect', 'task');
 
-        $this->subTask->toggleStatus($subtask['id']);
+        $this->subtask->toggleStatus($subtask['id']);
 
         if ($redirect === 'board') {
 
-            $this->session['has_subtask_inprogress'] = $this->subTask->hasSubtaskInProgress($this->userSession->getId());
+            $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
             
             $this->response->html($this->template->render('board/subtasks', array(
-                'subtasks' => $this->subTask->getAll($task['id']),
+                'subtasks' => $this->subtask->getAll($task['id']),
                 'task' => $task,
             )));
         }
@@ -210,7 +210,7 @@ class Subtask extends Base
                 SubtaskModel::STATUS_TODO => t('Todo'),
                 SubtaskModel::STATUS_DONE => t('Done'),
             ),
-            'subtask_inprogress' => $this->subTask->getSubtaskInProgress($this->userSession->getId()),
+            'subtask_inprogress' => $this->subtask->getSubtaskInProgress($this->userSession->getId()),
             'subtask' => $subtask,
             'task' => $task,
             'redirect' => $this->request->getStringParam('redirect'),
@@ -229,13 +229,13 @@ class Subtask extends Base
         $values = $this->request->getValues();
 
         // Change status of the previous in progress subtask
-        $this->subTask->update(array(
+        $this->subtask->update(array(
             'id' => $values['id'],
             'status' => $values['status'],
         ));
 
         // Set the current subtask to in pogress
-        $this->subTask->update(array(
+        $this->subtask->update(array(
             'id' => $subtask['id'],
             'status' => SubtaskModel::STATUS_INPROGRESS,
         ));

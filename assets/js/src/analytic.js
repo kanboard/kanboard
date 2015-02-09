@@ -1,20 +1,20 @@
 
 Kanboard.Analytic = (function() {
 
-    return {
-        Init: function() {
-
-            if (Kanboard.Exists("analytic-task-repartition")) {
-                Kanboard.Analytic.TaskRepartition.Init();
-            }
-            else if (Kanboard.Exists("analytic-user-repartition")) {
-                Kanboard.Analytic.UserRepartition.Init();
-            }
-            else if (Kanboard.Exists("analytic-cfd")) {
-                Kanboard.Analytic.CFD.Init();
-            }
+    jQuery(document).ready(function() {
+    
+        if (Kanboard.Exists("analytic-task-repartition")) {
+            Kanboard.Analytic.TaskRepartition.Init();
         }
-    };
+        else if (Kanboard.Exists("analytic-user-repartition")) {
+            Kanboard.Analytic.UserRepartition.Init();
+        }
+        else if (Kanboard.Exists("analytic-cfd")) {
+            Kanboard.Analytic.CFD.Init();
+        }
+    });
+
+    return {};
 
 })();
 

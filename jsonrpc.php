@@ -271,9 +271,9 @@ $server->register('updateComment', function($id, $content) use ($container) {
 /**
  * Subtask procedures
  */
-$server->bind('getSubtask', $container['subTask'], 'getById');
-$server->bind('getAllSubtasks', $container['subTask'], 'getAll');
-$server->bind('removeSubtask', $container['subTask'], 'remove');
+$server->bind('getSubtask', $container['subtask'], 'getById');
+$server->bind('getAllSubtasks', $container['subtask'], 'getAll');
+$server->bind('removeSubtask', $container['subtask'], 'remove');
 
 $server->register('createSubtask', function($task_id, $title, $user_id = 0, $time_estimated = 0, $time_spent = 0, $status = 0) use ($container) {
 
@@ -291,13 +291,13 @@ $server->register('createSubtask', function($task_id, $title, $user_id = 0, $tim
             unset($values[$key]);
         }
     }
-    list($valid,) = $container['subTask']->validateCreation($values);
+    list($valid,) = $container['subtask']->validateCreation($values);
 
     if (! $valid) {
         return false;
     }
 
-    return $container['subTask']->create($values);
+    return $container['subtask']->create($values);
 });
 
 $server->register('updateSubtask', function($id, $task_id, $title = null, $user_id = null, $time_estimated = null, $time_spent = null, $status = null) use ($container) {
@@ -318,8 +318,8 @@ $server->register('updateSubtask', function($id, $task_id, $title = null, $user_
         }
     }
 
-    list($valid,) = $container['subTask']->validateApiModification($values);
-    return $valid && $container['subTask']->update($values);
+    list($valid,) = $container['subtask']->validateApiModification($values);
+    return $valid && $container['subtask']->update($values);
 });
 
 /**

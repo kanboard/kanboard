@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\SubTask as SubTaskModel;
+use Model\Subtask as SubTaskModel;
 
 /**
  * Application controller
@@ -55,7 +55,7 @@ class App extends Base
             ->setUrl('app', $action, array('pagination' => 'subtasks'))
             ->setMax(10)
             ->setOrder('tasks.id')
-            ->setQuery($this->subTask->getUserQuery($user_id, $status))
+            ->setQuery($this->subtask->getUserQuery($user_id, $status))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
         $project_paginator = $this->paginator
@@ -68,10 +68,11 @@ class App extends Base
         $this->response->html($this->template->layout('app/dashboard', array(
             'title' => t('Dashboard'),
             'board_selector' => $this->projectPermission->getAllowedProjects($user_id),
-            'events' => $this->projectActivity->getProjects($project_ids, 10),
+            'events' => $this->projectActivity->getProjects($project_ids, 5),
             'task_paginator' => $task_paginator,
             'subtask_paginator' => $subtask_paginator,
             'project_paginator' => $project_paginator,
+            'user_id' => $user_id,
         )));
     }
 

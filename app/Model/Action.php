@@ -4,6 +4,7 @@ namespace Model;
 
 use Integration\GitlabWebhook;
 use Integration\GithubWebhook;
+use Integration\BitbucketWebhook;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
@@ -85,6 +86,7 @@ class Action extends Base
             GitlabWebhook::EVENT_COMMIT => t('Gitlab commit received'),
             GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
             GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
+            BitbucketWebhook::EVENT_COMMIT => t('Bitbucket commit received'),
         );
 
         asort($values);

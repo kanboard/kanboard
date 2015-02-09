@@ -162,9 +162,9 @@ class ProjectActivity extends Base
                 return t('%s moved the task #%d to the column "%s"', $event['author'], $event['task']['id'], $event['task']['column_title']);
             case Task::EVENT_MOVE_POSITION:
                 return t('%s moved the task #%d to the position %d in the column "%s"', $event['author'], $event['task']['id'], $event['task']['position'], $event['task']['column_title']);
-            case SubTask::EVENT_UPDATE:
+            case Subtask::EVENT_UPDATE:
                 return t('%s updated a subtask for the task #%d', $event['author'], $event['task']['id']);
-            case SubTask::EVENT_CREATE:
+            case Subtask::EVENT_CREATE:
                 return t('%s created a subtask for the task #%d', $event['author'], $event['task']['id']);
             case Comment::EVENT_UPDATE:
                 return t('%s updated a comment on the task #%d', $event['author'], $event['task']['id']);

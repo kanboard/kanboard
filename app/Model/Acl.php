@@ -38,7 +38,7 @@ class Acl extends Base
         'project' => array('show', 'tasks', 'search', 'activity'),
         'subtask' => '*',
         'task' => '*',
-        'calendar' => '*',
+        'calendar' => array('show', 'events', 'save'),
     );
 
     /**

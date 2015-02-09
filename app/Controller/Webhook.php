@@ -82,4 +82,22 @@ class Webhook extends Base
 
         echo $result ? 'PARSED' : 'IGNORED';
     }
+
+    /**
+     * Handle Bitbucket webhooks
+     *
+     * @access public
+     */
+    public function bitbucket()
+    {
+        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
+            $this->response->text('Not Authorized', 401);
+        }
+
+        $this->bitbucketWebhook->setProjectId($this->request->getIntegerParam('project_id'));
+
+        $result = $this->bitbucketWebhook->parsePayload(json_decode(@$_POST['payload'], true));
+
+        echo $result ? 'PARSED' : 'IGNORED';
+    }
 }
