@@ -56,11 +56,13 @@ class ProjectActivity extends Base
      * @access public
      * @param  integer     $project_id      Project id
      * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
      * @return array
      */
-    public function getProject($project_id, $limit = 50)
+    public function getProject($project_id, $limit = 50, $start = null, $end = null)
     {
-        return $this->getProjects(array($project_id), $limit);
+        return $this->getProjects(array($project_id), $limit, $start = null, $end = null);
     }
 
     /**
@@ -69,15 +71,17 @@ class ProjectActivity extends Base
      * @access public
      * @param  integer[]   $project_ids     Projects id
      * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
      * @return array
      */
-    public function getProjects(array $project_ids, $limit = 50)
+    public function getProjects(array $project_ids, $limit = 50, $start = null, $end = null)
     {
         if (empty($project_ids)) {
             return array();
         }
 
-        $events = $this->db->table(self::TABLE)
+        $query = $this->db->table(self::TABLE)
                            ->columns(
                                 self::TABLE.'.*',
                                 User::TABLE.'.username AS author_username',
@@ -86,8 +90,17 @@ class ProjectActivity extends Base
                            ->in('project_id', $project_ids)
                            ->join(User::TABLE, 'id', 'creator_id')
                            ->desc(self::TABLE.'.id')
-                           ->limit($limit)
-                           ->findAll();
+                           ->limit($limit);
+        
+        if(!is_null($start)){
+            $query->gte('date_creation', $start);
+        }
+        
+        if(!is_null($end)){
+            $query->lte('date_creation', $end);
+        }
+        
+        $events = $query->findAll();
 
         foreach ($events as &$event) {
 
