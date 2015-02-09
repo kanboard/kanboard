@@ -118,7 +118,7 @@ class Board extends Base
         $values = array(
             'project_id' => $project_id,
             'title' => $title,
-            'task_limit' => $task_limit,
+            'task_limit' => intval($task_limit),
             'position' => $this->getLastColumnPosition($project_id) + 1,
         	'description' => $description,
         );
@@ -140,7 +140,7 @@ class Board extends Base
     {
         return $this->db->table(self::TABLE)->eq('id', $column_id)->update(array(
             'title' => $title,
-            'task_limit' => $task_limit,
+            'task_limit' => intval($task_limit),
             'description' => $description,
         ));
     }

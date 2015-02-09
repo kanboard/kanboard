@@ -187,6 +187,13 @@ var Kanboard = (function() {
             Mousetrap.bind("ctrl+enter", function() {
                 $("form").submit();
             });
+            
+            // Tooltip for column description
+            $(".column-tooltip").tooltip({
+                content: function(e) {
+                    return '<div class="markdown">'+$(this).attr("title")+'</div>';
+                }
+            });
 
             $.datepicker.setDefaults($.datepicker.regional[$("body").data("js-lang")]);
 

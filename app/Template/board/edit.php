@@ -6,16 +6,20 @@
 <table>
     <tr>
         <th><?= t('Column title') ?></th>
-        <th><?= t('Description') ?></th>
         <th><?= t('Task limit') ?></th>
         <th><?= t('Actions') ?></th>
     </tr>
     <?php foreach ($columns as $column): ?>
     <tr>
-        <td class="column-30"><?= $this->e($column['title']) ?></td>
-        <td><?= $this->e($column['description']) ?></td>
+        <td class="column-60"><?= $this->e($column['title']) ?>
+         <?php if (! empty($column['description'])): ?>
+            <span class="column-tooltip" title="<?= $this->markdown($column['description']) ?>">     
+                <i class="fa fa-info-circle"></i>
+            </span>
+        <?php endif ?>
+        </td>
         <td class="column-10"><?= $this->e($column['task_limit']) ?></td>
-        <td class="column-20">
+        <td class="column-30">
             <ul>
                 <li>
                     <?= $this->a(t('Edit'), 'board', 'editColumn', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
@@ -48,8 +52,28 @@
 
     <?= $this->formLabel(t('Title'), 'title') ?>
     <?= $this->formText('title', $values, $errors, array('required', 'maxlength="50"')) ?>
+    
+    <?= $this->formLabel(t('Task limit'), 'task_limit') ?>
+    <?= $this->formNumber('task_limit', $values, $errors) ?>
+    
     <?= $this->formLabel(t('Description'), 'description') ?>
-    <?= $this->formTextarea('description', $values, $errors) ?>
+    
+    <div class="form-tabs">
+        <ul class="form-tabs-nav">
+            <li class="form-tab form-tab-selected">
+                <i class="fa fa-pencil-square-o fa-fw"></i><a id="markdown-write" href="#"><?= t('Write') ?></a>
+            </li>
+            <li class="form-tab">
+                <a id="markdown-preview" href="#"><i class="fa fa-eye fa-fw"></i><?= t('Preview') ?></a>
+            </li>
+        </ul>
+        <div class="write-area">
+          <?= $this->formTextarea('description', $values, $errors) ?>
+        </div>
+        <div class="preview-area">
+            <div class="markdown"></div>
+        </div>
+    </div>
     <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
     <div class="form-actions">
