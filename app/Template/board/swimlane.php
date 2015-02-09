@@ -24,13 +24,11 @@
                 <?= $this->a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'task-creation-popover', t('Add a new task')) ?>
             </div>
         <?php endif ?>
-
+        <?= $this->e($column['title']) ?>
         <?php if (! empty($column['description'])): ?>
-            <span class="column-tooltip" title="<?= $this->e($column['description']) ?>">
-                <?= $this->e($column['title']) ?>
+            <span class="column-tooltip pull-right" title="<?= $this->markdown($column['description']) ?>">     
+                <i class="fa fa-info-circle"></i>
             </span>
-        <?php else: ?>
-            <?= $this->e($column['title']) ?>
         <?php endif ?>
         
         <?php if ($column['task_limit']): ?>
