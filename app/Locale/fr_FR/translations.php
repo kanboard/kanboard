@@ -680,4 +680,7 @@ return array(
     'Disable login form' => 'Désactiver le formulaire d\'authentification',
     'Show/hide calendar' => 'Afficher/cacher le calendrier',
     'User calendar' => 'Calendrier de l\'utilisateur',
+    'Bitbucket commit received' => '« Commit » reçu via Bitbucket',
+    'Bitbucket webhooks' => 'Webhook Bitbucket',
+    'Help on Bitbucket webhooks' => 'Aide sur les webhooks Bitbucket',
 );

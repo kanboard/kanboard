@@ -86,6 +86,7 @@ Documentation
 
 ### Integrations
 
+- [Bitbucket webhooks](docs/bitbucket-webhooks.markdown)
 - [Github webhooks](docs/github-webhooks.markdown)
 - [Gitlab webhooks](docs/gitlab-webhooks.markdown)
 

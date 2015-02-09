@@ -678,4 +678,7 @@ return array(
     // 'Disable login form' => '',
     // 'Show/hide calendar' => '',
     // 'User calendar' => '',
+    // 'Bitbucket commit received' => '',
+    // 'Bitbucket webhooks' => '',
+    // 'Help on Bitbucket webhooks' => '',
 );

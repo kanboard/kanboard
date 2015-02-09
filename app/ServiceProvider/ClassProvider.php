@@ -62,6 +62,7 @@ class ClassProvider implements ServiceProviderInterface
         'Integration' => array(
             'GitlabWebhook',
             'GithubWebhook',
+            'BitbucketWebhook',
         )
     );
 
