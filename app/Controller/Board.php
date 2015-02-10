@@ -283,7 +283,7 @@ class Board extends Base
 
         if ($valid) {
 
-            if ($this->board->addColumn($project['id'], $data['title'],$data['description'])) {
+            if ($this->board->addColumn($project['id'], $data['title'],$data['task_limit'],$data['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
             }

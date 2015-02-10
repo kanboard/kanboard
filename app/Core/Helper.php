@@ -634,7 +634,7 @@ class Helper
         if ($subtask['status'] == 0 && isset($this->session['has_subtask_inprogress']) && $this->session['has_subtask_inprogress'] === true) {
 
             return $this->a(
-                trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['status_name']),
+                trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['title']),
                 'subtask',
                 'subtaskRestriction',
                 array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect),
@@ -644,7 +644,7 @@ class Helper
         }
 
         return $this->a(
-            trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['status_name']),
+            trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['title']),
             'subtask',
             'toggleStatus',
             array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect)

@@ -50,13 +50,6 @@ Kanboard.Board = (function() {
         // Description popover
         $(".task-description-popover").click(on_popover);
 
-        // Tooltip for column description
-        $(".column-tooltip").tooltip({
-            content: function(e) {
-                return $(this).attr("title");
-            }
-        });
-
         // Tooltips for tasks
         $(".task-board-tooltip").tooltip({
             track: false,
@@ -279,6 +272,7 @@ Kanboard.Board = (function() {
             filter_load_events();
             keyboard_shortcuts();
         }
+        
     });
 
 })();
