@@ -8,7 +8,6 @@
     <table class="subtasks-table">
         <tr>
             <th class="column-40"><?= t('Title') ?></th>
-            <th class="column-15"><?= t('Status') ?></th>
             <th><?= t('Assignee') ?></th>
             <th><?= t('Time tracking') ?></th>
             <?php if (! isset($not_editable)): ?>
@@ -17,7 +16,6 @@
         </tr>
         <?php foreach ($subtasks as $subtask): ?>
         <tr>
-            <td><?= $this->e($subtask['title']) ?></td>
             <td>
                 <?php if (! isset($not_editable)): ?>
                     <?= $this->toggleSubtaskStatus($subtask, 'task') ?>

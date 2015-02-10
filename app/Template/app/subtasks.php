@@ -6,7 +6,6 @@
         <tr>
             <th class="column-10"><?= $paginator->order('Id', 'tasks.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
-            <th class="column-15"><?= $paginator->order(t('Status'), 'status') ?></th>
             <th><?= $paginator->order(t('Subtask'), 'title') ?></th>
             <th class="column-20"><?= t('Time tracking') ?></th>
         </tr>
@@ -20,9 +19,6 @@
             </td>
             <td>
                 <?= $this->toggleSubtaskStatus($subtask, 'dashboard') ?>
-            </td>
-            <td>
-                <?= $this->a($this->e($subtask['title']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
                 <?php if (! empty($subtask['time_spent'])): ?>
