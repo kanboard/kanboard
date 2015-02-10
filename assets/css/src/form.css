@@ -176,6 +176,10 @@ input.form-input-large {
 }
 
 /* preview tabs */
+label + .form-tabs {
+    margin-top: 10px;
+}
+
 .form-tabs {
     width: 100%;
     max-width: 800px;

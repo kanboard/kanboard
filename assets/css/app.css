@@ -1022,6 +1022,10 @@ input.form-input-large {
 }
 
 /* preview tabs */
+label + .form-tabs {
+    margin-top: 10px;
+}
+
 .form-tabs {
     width: 100%;
     max-width: 800px;
@@ -1261,7 +1265,13 @@ div.ui-tooltip {
 
 .tooltip-large {
     width: 550px;
-}/* header */
+}
+
+.column-tooltip {
+	color: #999;
+	font-size: 0.95em;
+}
+/* header */
 header {
     margin-top: 10px;
     padding-bottom: 15px;

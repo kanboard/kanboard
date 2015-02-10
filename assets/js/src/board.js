@@ -272,7 +272,6 @@ Kanboard.Board = (function() {
             filter_load_events();
             keyboard_shortcuts();
         }
-        
     });
 
 })();

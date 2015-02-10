@@ -2,7 +2,6 @@
 
 namespace Integration;
 
-use Event\GenericEvent;
 use Event\TaskEvent;
 use Model\Task;
 

@@ -191,7 +191,7 @@ var Kanboard = (function() {
             // Tooltip for column description
             $(".column-tooltip").tooltip({
                 content: function(e) {
-                    return '<div class="markdown">'+$(this).attr("title")+'</div>';
+                    return '<div class="markdown">' + $(this).attr("title") + '</div>';
                 }
             });
 
