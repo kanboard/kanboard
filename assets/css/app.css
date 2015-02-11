@@ -1631,6 +1631,26 @@ a.task-board-nobody {
     margin-bottom: 25px;
     padding: 3px;
 }
+
+.task-days-age {
+	font-size: 0.8em; 
+	border: #888 1px solid; 
+	border-radius:2px;
+	padding:1px 4px 1px 2px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.task-days-incolumn {
+	font-size: 0.8em; 
+	border: #888 1px solid; 
+    border-left: none;
+    margin-left: -5px;
+	border-radius:2px;
+	padding:1px 2px 1px 4px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
 /* comments */
 .comment {
     margin-bottom: 20px;

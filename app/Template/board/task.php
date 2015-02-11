@@ -68,7 +68,10 @@
             t('Change assignee')
         ) ?>
     </span>
-
+    
+    <span title="<?= t('Task age in days')?>" class="task-days-age"><?= floor(time()/86400) - floor($task['date_creation']/86400)?>d</span>
+    <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= floor(time()/86400) - floor($task['date_moved']/86400)?>d</span>
+    
     <?php if ($task['score']): ?>
         <span class="task-score"><?= $this->e($task['score']) ?></span>
     <?php endif ?>
