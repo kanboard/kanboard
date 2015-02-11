@@ -551,7 +551,7 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getAllowedUsers",
+    "method": "getMembers",
     "id": 1944388643,
     "params": [
         1
