@@ -3,5 +3,6 @@
 <?= $this->render('task/show_description', array('task' => $task)) ?>
 <?= $this->render('subtask/show', array('task' => $task, 'subtasks' => $subtasks)) ?>
 <?= $this->render('task/timesheet', array('task' => $task)) ?>
+<?= $this->render('tasklink/show', array('task' => $task, 'links' => $links, 'link_list' => $link_list, 'task_list' => $task_list)) ?>
 <?= $this->render('file/show', array('task' => $task, 'files' => $files)) ?>
 <?= $this->render('task/comments', array('task' => $task, 'comments' => $comments, 'project' => $project)) ?>

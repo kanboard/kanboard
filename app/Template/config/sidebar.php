@@ -9,6 +9,11 @@
         </li>
         <li>
             <?= $this->a(t('Board settings'), 'config', 'board') ?>
+            <ul>
+            <li>
+                <?= $this->a(t('Links settings'), 'link', 'index') ?>
+            </li>
+            </ul>
         </li>
         <li>
             <?= $this->a(t('Webhooks'), 'config', 'webhook') ?>
