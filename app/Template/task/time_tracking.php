@@ -1,6 +1,4 @@
-<div class="page-header">
-    <h2><?= t('Time Tracking') ?></h2>
-</div>
+<?= $this->render('task/timesheet', array('task' => $task)) ?>
 
 <h3><?= t('Subtask timesheet') ?></h3>
 <?php if ($subtask_paginator->isEmpty()): ?>
@@ -8,15 +6,15 @@
 <?php else: ?>
     <table class="table-fixed">
         <tr>
-            <th class="column-20"><?= $subtask_paginator->order(t('Task'), 'task_title') ?></th>
-            <th class="column-20"><?= $subtask_paginator->order(t('Subtask'), 'subtask_title') ?></th>
+            <th class="column-20"><?= $subtask_paginator->order(t('User'), 'username') ?></th>
+            <th class="column-40"><?= $subtask_paginator->order(t('Subtask'), 'subtask_title') ?></th>
             <th><?= $subtask_paginator->order(t('Start'), 'start') ?></th>
             <th><?= $subtask_paginator->order(t('End'), 'end') ?></th>
         </tr>
         <?php foreach ($subtask_paginator->getCollection() as $record): ?>
         <tr>
-            <td><?= $this->a($this->e($record['task_title']), 'task', 'show', array('project_id' => $record['project_id'], 'task_id' => $record['task_id'])) ?></td>
-            <td><?= $this->a($this->e($record['subtask_title']), 'task', 'show', array('project_id' => $record['project_id'], 'task_id' => $record['task_id'])) ?></td>
+            <td><?= $this->a($this->e($record['user_fullname'] ?: $record['username']), 'user', 'show', array('user_id' => $record['user_id'])) ?></td>
+            <td><?= t($record['subtask_title']) ?></td>
             <td><?= dt('%B %e, %Y at %k:%M %p', $record['start']) ?></td>
             <td><?= dt('%B %e, %Y at %k:%M %p', $record['end']) ?></td>
         </tr>

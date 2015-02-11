@@ -488,4 +488,27 @@ class Task extends Base
             'projects_list' => $projects_list,
         )));
     }
+
+    /**
+     * Display the time tracking details
+     *
+     * @access public
+     */
+    public function timesheet()
+    {
+        $task = $this->getTask();
+
+        $subtask_paginator = $this->paginator
+            ->setUrl('task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
+            ->setMax(15)
+            ->setOrder('start')
+            ->setDirection('DESC')
+            ->setQuery($this->subtaskTimeTracking->getTaskQuery($task['id']))
+            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+
+        $this->response->html($this->taskLayout('task/time_tracking', array(
+            'task' => $task,
+            'subtask_paginator' => $subtask_paginator,
+        )));
+    }
 }

@@ -681,4 +681,6 @@ return array(
     'Bitbucket commit received' => '"Commit" recebido via Bitbucket',
     'Bitbucket webhooks' => 'Webhook Bitbucket',
     'Help on Bitbucket webhooks' => 'Ajuda sobre os webhooks Bitbucket',
+    // 'Start' => '',
+    // 'End' => '',
 );

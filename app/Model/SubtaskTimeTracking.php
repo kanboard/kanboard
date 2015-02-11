@@ -44,6 +44,35 @@ class SubtaskTimeTracking extends Base
     }
 
     /**
+     * Get query for task (pagination)
+     *
+     * @access public
+     * @param  integer    $task_id       Task id
+     * @return \PicoDb\Table
+     */
+    public function getTaskQuery($task_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->columns(
+                        self::TABLE.'.id',
+                        self::TABLE.'.subtask_id',
+                        self::TABLE.'.end',
+                        self::TABLE.'.start',
+                        self::TABLE.'.user_id',
+                        Subtask::TABLE.'.task_id',
+                        Subtask::TABLE.'.title AS subtask_title',
+                        Task::TABLE.'.project_id',
+                        User::TABLE.'.username',
+                        User::TABLE.'.name AS user_fullname'
+                    )
+                    ->join(Subtask::TABLE, 'id', 'subtask_id')
+                    ->join(Task::TABLE, 'id', 'task_id', Subtask::TABLE)
+                    ->join(User::TABLE, 'id', 'user_id', self::TABLE)
+                    ->eq(Task::TABLE.'.id', $task_id);
+    }
+
+    /**
      * Get all recorded time slots for a given user
      *
      * @access public
