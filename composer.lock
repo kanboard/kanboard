@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "671bd4694072aed17a542db8f08db217",
+    "hash": "7ccc1bcdeca71cacef30015aca5a483a",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -84,16 +84,16 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "v0.0.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "b3ef5f79e7e5e33729fdbf9c02c8a252a3d76b6b"
+                "reference": "3c7875c22195a6bc3937e8cb646a8589872521d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/b3ef5f79e7e5e33729fdbf9c02c8a252a3d76b6b",
-                "reference": "b3ef5f79e7e5e33729fdbf9c02c8a252a3d76b6b",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/3c7875c22195a6bc3937e8cb646a8589872521d1",
+                "reference": "3c7875c22195a6bc3937e8cb646a8589872521d1",
                 "shasum": ""
             },
             "require": {
@@ -117,20 +117,20 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2015-01-25 16:20:14"
+            "time": "2015-02-08 04:15:39"
         },
         {
             "name": "fguillot/simple-validator",
-            "version": "v0.0.1",
+            "version": "v0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleValidator.git",
-                "reference": "3bfa1ef0062906c83824ce8db1219914996d9bd4"
+                "reference": "9e9502c88ce239901c0fee12a1f504948342ab42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/3bfa1ef0062906c83824ce8db1219914996d9bd4",
-                "reference": "3bfa1ef0062906c83824ce8db1219914996d9bd4",
+                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/9e9502c88ce239901c0fee12a1f504948342ab42",
+                "reference": "9e9502c88ce239901c0fee12a1f504948342ab42",
                 "shasum": ""
             },
             "require": {
@@ -154,7 +154,7 @@
             ],
             "description": "The most easy to use validator library for PHP :)",
             "homepage": "https://github.com/fguillot/simpleValidator",
-            "time": "2014-11-25 22:58:14"
+            "time": "2015-01-21 02:00:33"
         },
         {
             "name": "fguillot/simpleLogger",
@@ -393,17 +393,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.6.3",
+            "version": "v2.6.4",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "6ac6491ff60c0e5a941db3ccdc75a07adbb61476"
+                "reference": "e44154bfe3e41e8267d7a3794cd9da9a51cfac34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/6ac6491ff60c0e5a941db3ccdc75a07adbb61476",
-                "reference": "6ac6491ff60c0e5a941db3ccdc75a07adbb61476",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/e44154bfe3e41e8267d7a3794cd9da9a51cfac34",
+                "reference": "e44154bfe3e41e8267d7a3794cd9da9a51cfac34",
                 "shasum": ""
             },
             "require": {
@@ -446,21 +446,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-06 17:50:02"
+            "time": "2015-01-25 04:39:26"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.6.3",
+            "version": "v2.6.4",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "40ff70cadea3785d83cac1c8309514b36113064e"
+                "reference": "f75989f3ab2743a82fe0b03ded2598a2b1546813"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/40ff70cadea3785d83cac1c8309514b36113064e",
-                "reference": "40ff70cadea3785d83cac1c8309514b36113064e",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/f75989f3ab2743a82fe0b03ded2598a2b1546813",
+                "reference": "f75989f3ab2743a82fe0b03ded2598a2b1546813",
                 "shasum": ""
             },
             "require": {
@@ -504,13 +504,13 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2015-01-05 14:28:40"
+            "time": "2015-02-01 16:10:57"
         }
     ],
     "packages-dev": [
         {
             "name": "symfony/stopwatch",
-            "version": "v2.6.3",
+            "version": "v2.6.4",
             "target-dir": "Symfony/Component/Stopwatch",
             "source": {
                 "type": "git",
@@ -560,9 +560,11 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "swiftmailer/swiftmailer": 0,
+        "fguillot/picodb": 20,
         "symfony/console": 0
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "ext-mbstring": "*"
     },

@@ -6,9 +6,9 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 24;
+const VERSION = 26;
 
-function version_24($pdo)
+function version_26($pdo)
 {
     $pdo->exec("CREATE TABLE link
         (
@@ -54,6 +54,30 @@ function version_24($pdo)
     $rq->execute(array(5, t('is a milestone of'), Link::BEHAVIOUR_RIGHT2LEFT));
     $rq->execute(array(6, t('fixes'), Link::BEHAVIOUR_LEFT2RIGTH));
     $rq->execute(array(6, t('is fixed by'), Link::BEHAVIOUR_RIGHT2LEFT));
+}
+
+function version_25($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN disable_login_form BOOLEAN DEFAULT '1'");
+}
+
+function version_24($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('subtask_restriction', '0'));
+    $rq->execute(array('subtask_time_tracking', '0'));
+
+    $pdo->exec('
+        CREATE TABLE subtask_time_tracking (
+            id SERIAL PRIMARY KEY,
+            "user_id" INTEGER NOT NULL,
+            "subtask_id" INTEGER NOT NULL,
+            "start" INTEGER DEFAULT 0,
+            "end" INTEGER DEFAULT 0,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(subtask_id) REFERENCES task_has_subtasks(id) ON DELETE CASCADE
+        )
+    ');
 }
 
 function version_23($pdo)

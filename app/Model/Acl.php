@@ -38,7 +38,7 @@ class Acl extends Base
         'project' => array('show', 'tasks', 'search', 'activity'),
         'subtask' => '*',
         'task' => '*',
-        'calendar' => '*',
+        'calendar' => array('show', 'events', 'save'),
     );
 
     /**
@@ -64,6 +64,7 @@ class Acl extends Base
      * @var array
      */
     private $admin_acl = array(
+        'app' => array('dashboard'),
         'user' => array('index', 'create', 'save', 'remove'),
         'config' => '*',
         'project' => array('remove'),

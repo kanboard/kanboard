@@ -2,8 +2,10 @@
 
 namespace Controller;
 
+use Model\Subtask as SubtaskModel;
+
 /**
- * SubTask controller
+ * Subtask controller
  *
  * @package  controller
  * @author   Frederic Guillot
@@ -18,7 +20,7 @@ class Subtask extends Base
      */
     private function getSubtask()
     {
-        $subtask = $this->subTask->getById($this->request->getIntegerParam('subtask_id'));
+        $subtask = $this->subtask->getById($this->request->getIntegerParam('subtask_id'));
 
         if (! $subtask) {
             $this->notfound();
@@ -61,11 +63,11 @@ class Subtask extends Base
         $task = $this->getTask();
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->subTask->validateCreation($values);
+        list($valid, $errors) = $this->subtask->validateCreation($values);
 
         if ($valid) {
 
-            if ($this->subTask->create($values)) {
+            if ($this->subtask->create($values)) {
                 $this->session->flash(t('Sub-task added successfully.'));
             }
             else {
@@ -96,7 +98,7 @@ class Subtask extends Base
             'values' => empty($values) ? $subtask : $values,
             'errors' => $errors,
             'users_list' => $this->projectPermission->getMemberList($task['project_id']),
-            'status_list' => $this->subTask->getStatusList(),
+            'status_list' => $this->subtask->getStatusList(),
             'subtask' => $subtask,
             'task' => $task,
         )));
@@ -113,11 +115,11 @@ class Subtask extends Base
         $this->getSubtask();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->subTask->validateModification($values);
+        list($valid, $errors) = $this->subtask->validateModification($values);
 
         if ($valid) {
 
-            if ($this->subTask->update($values)) {
+            if ($this->subtask->update($values)) {
                 $this->session->flash(t('Sub-task updated successfully.'));
             }
             else {
@@ -157,7 +159,7 @@ class Subtask extends Base
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        if ($this->subTask->remove($subtask['id'])) {
+        if ($this->subtask->remove($subtask['id'])) {
             $this->session->flash(t('Sub-task removed successfully.'));
         }
         else {
@@ -175,12 +177,86 @@ class Subtask extends Base
     public function toggleStatus()
     {
         $task = $this->getTask();
-        $subtask_id = $this->request->getIntegerParam('subtask_id');
+        $subtask = $this->getSubtask();
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
-        if (! $this->subTask->toggleStatus($subtask_id)) {
-            $this->session->flashError(t('Unable to update your sub-task.'));
+        $this->subtask->toggleStatus($subtask['id']);
+
+        if ($redirect === 'board') {
+
+            $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
+            
+            $this->response->html($this->template->render('board/subtasks', array(
+                'subtasks' => $this->subtask->getAll($task['id']),
+                'task' => $task,
+            )));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#subtasks');
+        $this->toggleRedirect($task, $redirect);
+    }
+
+    /**
+     * Handle subtask restriction (popover)
+     *
+     * @access public
+     */
+    public function subtaskRestriction()
+    {
+        $task = $this->getTask();
+        $subtask = $this->getSubtask();
+
+        $this->response->html($this->template->render('subtask/restriction_change_status', array(
+            'status_list' => array(
+                SubtaskModel::STATUS_TODO => t('Todo'),
+                SubtaskModel::STATUS_DONE => t('Done'),
+            ),
+            'subtask_inprogress' => $this->subtask->getSubtaskInProgress($this->userSession->getId()),
+            'subtask' => $subtask,
+            'task' => $task,
+            'redirect' => $this->request->getStringParam('redirect'),
+        )));
+    }
+
+    /**
+     * Change status of the in progress subtask and the other subtask
+     *
+     * @access public
+     */
+    public function changeRestrictionStatus()
+    {
+        $task = $this->getTask();
+        $subtask = $this->getSubtask();
+        $values = $this->request->getValues();
+
+        // Change status of the previous in progress subtask
+        $this->subtask->update(array(
+            'id' => $values['id'],
+            'status' => $values['status'],
+        ));
+
+        // Set the current subtask to in pogress
+        $this->subtask->update(array(
+            'id' => $subtask['id'],
+            'status' => SubtaskModel::STATUS_INPROGRESS,
+        ));
+
+        $this->toggleRedirect($task, $values['redirect']);
+    }
+
+    /**
+     * Redirect to the right page
+     *
+     * @access private
+     */
+    private function toggleRedirect(array $task, $redirect)
+    {
+        switch ($redirect) {
+            case 'board':
+                $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+            case 'dashboard':
+                $this->response->redirect($this->helper->url('app', 'index'));
+            default:
+                $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        }
     }
 }

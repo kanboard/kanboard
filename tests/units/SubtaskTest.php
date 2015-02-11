@@ -4,7 +4,7 @@ require_once __DIR__.'/Base.php';
 
 use Model\Task;
 use Model\TaskCreation;
-use Model\SubTask;
+use Model\Subtask;
 use Model\Project;
 use Model\Category;
 use Model\User;
@@ -14,7 +14,7 @@ class SubTaskTest extends Base
     public function testDuplicate()
     {
         $tc = new TaskCreation($this->container);
-        $s = new SubTask($this->container);
+        $s = new Subtask($this->container);
         $p = new Project($this->container);
 
         // We create a project

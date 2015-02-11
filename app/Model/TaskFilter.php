@@ -100,6 +100,7 @@ class TaskFilter extends Base
 
         foreach ($this->query->findAll() as $task) {
             $events[] = array(
+                'timezoneParam' => $this->config->getCurrentTimezone(),
                 'id' => $task['id'],
                 'title' => t('#%d', $task['id']).' '.$task['title'],
                 'start' => date('Y-m-d', $task['date_due']),

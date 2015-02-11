@@ -8,7 +8,6 @@
     <table class="subtasks-table">
         <tr>
             <th class="column-40"><?= t('Title') ?></th>
-            <th class="column-15"><?= t('Status') ?></th>
             <th><?= t('Assignee') ?></th>
             <th><?= t('Time tracking') ?></th>
             <?php if (! isset($not_editable)): ?>
@@ -17,18 +16,16 @@
         </tr>
         <?php foreach ($subtasks as $subtask): ?>
         <tr>
-            <td><?= $this->e($subtask['title']) ?></td>
             <td>
                 <?php if (! isset($not_editable)): ?>
-                    <?= $this->a(trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['status_name']),
-                                 'subtask', 'toggleStatus', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
+                    <?= $this->toggleSubtaskStatus($subtask, 'task') ?>
                 <?php else: ?>
                     <?= $this->render('subtask/icons', array('subtask' => $subtask)) . $this->e($subtask['status_name']) ?>
                 <?php endif ?>
             </td>
             <td>
                 <?php if (! empty($subtask['username'])): ?>
-                    <?= $this->e($subtask['name'] ?: $subtask['username']) ?>
+                    <?= $this->a($this->e($subtask['name'] ?: $subtask['username']), 'user', 'show', array('user_id' => $subtask['user_id'])) ?>
                 <?php endif ?>
             </td>
             <td>

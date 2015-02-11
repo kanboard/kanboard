@@ -32,8 +32,9 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectDuplication',
             'ProjectDailySummary',
             'ProjectPermission',
-            'SubTask',
+            'Subtask',
             'SubtaskExport',
+            'SubtaskTimeTracking',
             'Swimlane',
             'Task',
             'TaskCreation',
@@ -63,6 +64,7 @@ class ClassProvider implements ServiceProviderInterface
         'Integration' => array(
             'GitlabWebhook',
             'GithubWebhook',
+            'BitbucketWebhook',
         )
     );
 

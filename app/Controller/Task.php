@@ -36,7 +36,7 @@ class Task extends Base
         $this->response->html($this->template->layout('task/public', array(
             'project' => $project,
             'comments' => $this->comment->getAll($task['id']),
-            'subtasks' => $this->subTask->getAll($task['id']),
+            'subtasks' => $this->subtask->getAll($task['id']),
             'links' => $this->taskLink->getAll($task['id']),
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
@@ -56,7 +56,7 @@ class Task extends Base
     public function show()
     {
         $task = $this->getTask();
-        $subtasks = $this->subTask->getAll($task['id']);
+        $subtasks = $this->subtask->getAll($task['id']);
 
         $values = array(
             'id' => $task['id'],
@@ -75,7 +75,6 @@ class Task extends Base
             'links' => $this->taskLink->getAll($task['id']),
             'task' => $task,
             'values' => $values,
-            'timesheet' => $this->timeTracking->getTaskTimesheet($task, $subtasks),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'link_list' => $this->link->getLinkLabelList($task['project_id'], false),
@@ -492,6 +491,29 @@ class Task extends Base
             'errors' => $errors,
             'task' => $task,
             'projects_list' => $projects_list,
+        )));
+    }
+
+    /**
+     * Display the time tracking details
+     *
+     * @access public
+     */
+    public function timesheet()
+    {
+        $task = $this->getTask();
+
+        $subtask_paginator = $this->paginator
+            ->setUrl('task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
+            ->setMax(15)
+            ->setOrder('start')
+            ->setDirection('DESC')
+            ->setQuery($this->subtaskTimeTracking->getTaskQuery($task['id']))
+            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+
+        $this->response->html($this->taskLayout('task/time_tracking', array(
+            'task' => $task,
+            'subtask_paginator' => $subtask_paginator,
         )));
     }
 }

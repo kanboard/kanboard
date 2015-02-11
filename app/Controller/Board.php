@@ -283,7 +283,7 @@ class Board extends Base
 
         if ($valid) {
 
-            if ($this->board->addColumn($project['id'], $data['title'],$data['description'])) {
+            if ($this->board->addColumn($project['id'], $data['title'], $data['task_limit'], $data['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
             }
@@ -424,23 +424,7 @@ class Board extends Base
     {
         $task = $this->getTask();
         $this->response->html($this->template->render('board/subtasks', array(
-            'subtasks' => $this->subTask->getAll($task['id']),
-            'task' => $task,
-        )));
-    }
-
-    /**
-     * Change the status of a subtask from the mouseover
-     *
-     * @access public
-     */
-    public function toggleSubtask()
-    {
-        $task = $this->getTask();
-        $this->subTask->toggleStatus($this->request->getIntegerParam('subtask_id'));
-
-        $this->response->html($this->template->render('board/subtasks', array(
-            'subtasks' => $this->subTask->getAll($task['id']),
+            'subtasks' => $this->subtask->getAll($task['id']),
             'task' => $task,
         )));
     }

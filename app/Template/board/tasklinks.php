@@ -13,7 +13,7 @@ foreach ($links as $link): ?>
         <li><?= t($this->e($link['label'])) ?>
             <ul>
     <?php endif ?>
-                <li<?php if (0 == $link['task_inverse_is_active']): ?> class="task-closed"><?php endif ?>>
+                <li<?php if (0 == $link['task_inverse_is_active']): ?> class="task-closed"<?php endif ?>>
                     <?= $this->e($link['task_inverse_category']) ?>
                     <?= $this->a('#'.$this->e($link['task_inverse_id']).' - '.trim($this->e($link['task_inverse_title'])),
                         'task', 

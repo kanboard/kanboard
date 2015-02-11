@@ -4,6 +4,11 @@
         <li>
             <?= $this->a(t('Summary'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
+        <?php if ($task['time_estimated'] > 0 || $task['time_spent'] > 0): ?>
+        <li>
+            <?= $this->a(t('Time tracking'), 'task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <?php endif ?>
         <li>
             <?= $this->a(t('Edit the task'), 'task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>

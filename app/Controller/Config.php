@@ -38,7 +38,7 @@ class Config extends Base
     {
         if ($this->request->isPost()) {
 
-            $values = $this->request->getValues();
+            $values = $this->request->getValues() + array('subtask_restriction' => 0, 'subtask_time_tracking' => 0);
 
             if ($this->config->save($values)) {
                 $this->config->reload();

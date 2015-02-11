@@ -12,6 +12,7 @@ use Pimple\Container;
  *
  * @property \Core\Session             $session
  * @property \Model\Acl                $acl
+ * @property \Model\Config             $config
  * @property \Model\User               $user
  * @property \Model\UserSession        $userSession
  */
@@ -247,7 +248,7 @@ class Helper
      */
     public function formRadio($name, $label, $value, $selected = false, $class = '')
     {
-        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->e($value).'" '.($selected ? 'selected="selected"' : '').'>'.$this->e($label).'</label>';
+        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->e($value).'" '.($selected ? 'selected="selected"' : '').'> '.$this->e($label).'</label>';
     }
 
     /**
@@ -603,53 +604,54 @@ class Helper
     }
 
     /**
-     * Get calendar translations
+     * Get javascript language code
      *
      * @access public
      * @return string
      */
-    public function getCalendarTranslations()
+    public function jsLang()
     {
-        return json_encode(array(
-            'Today' => t('Today'),
-            'Jan' => t('Jan'),
-            'Feb' => t('Feb'),
-            'Mar' => t('Mar'),
-            'Apr' => t('Apr'),
-            'May' => t('May'),
-            'Jun' => t('Jun'),
-            'Jul' => t('Jul'),
-            'Aug' => t('Aug'),
-            'Sep' => t('Sep'),
-            'Oct' => t('Oct'),
-            'Nov' => t('Nov'),
-            'Dec' => t('Dec'),
-            'January' => t('January'),
-            'February' => t('February'),
-            'March' => t('March'),
-            'April' => t('April'),
-            'May' => t('May'),
-            'June' => t('June'),
-            'July' => t('July'),
-            'August' => t('August'),
-            'September' => t('September'),
-            'October' => t('October'),
-            'November' => t('November'),
-            'December' => t('December'),
-            'Sunday' => t('Sunday'),
-            'Monday' => t('Monday'),
-            'Tuesday' => t('Tuesday'),
-            'Wednesday' => t('Wednesday'),
-            'Thursday' => t('Thursday'),
-            'Friday' => t('Friday'),
-            'Saturday' => t('Saturday'),
-            'Sun' => t('Sun'),
-            'Mon' => t('Mon'),
-            'Tue' => t('Tue'),
-            'Wed' => t('Wed'),
-            'Thu' => t('Thu'),
-            'Fri' => t('Fri'),
-            'Sat' => t('Sat'),
-        ));
+        return $this->config->getJsLanguageCode();
+    }
+
+    /**
+     * Get current timezone
+     *
+     * @access public
+     * @return string
+     */
+    public function getTimezone()
+    {
+        return $this->config->getCurrentTimezone();
+    }
+
+    /**
+     * Get the link to toggle subtask status
+     *
+     * @access public
+     * @param  array   $subtask
+     * @param  string  $redirect
+     * @return string
+     */
+    public function toggleSubtaskStatus(array $subtask, $redirect)
+    {
+        if ($subtask['status'] == 0 && isset($this->session['has_subtask_inprogress']) && $this->session['has_subtask_inprogress'] === true) {
+
+            return $this->a(
+                trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['title']),
+                'subtask',
+                'subtaskRestriction',
+                array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect),
+                false,
+                'popover-subtask-restriction'
+            );
+        }
+
+        return $this->a(
+            trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['title']),
+            'subtask',
+            'toggleStatus',
+            array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect)
+        );
     }
 }

@@ -1,6 +1,10 @@
 // Common functions
 var Kanboard = (function() {
 
+    jQuery(document).ready(function() {
+        Kanboard.Init();
+    });
+
     return {
 
         // Return true if the element#id exists
@@ -174,9 +178,24 @@ var Kanboard = (function() {
             // Check the session every 60s
             window.setInterval(Kanboard.CheckSession, 60000);
 
+            $(".popover-subtask-restriction").click(Kanboard.Popover);
+
+            // Image preview for attachments
+            $(".file-popover").click(Kanboard.Popover);
+
+            // Keyboard shortcuts
             Mousetrap.bind("ctrl+enter", function() {
                 $("form").submit();
             });
+            
+            // Tooltip for column description
+            $(".column-tooltip").tooltip({
+                content: function(e) {
+                    return '<div class="markdown">' + $(this).attr("title") + '</div>';
+                }
+            });
+
+            $.datepicker.setDefaults($.datepicker.regional[$("body").data("js-lang")]);
 
             Kanboard.InitAfterAjax();
         },

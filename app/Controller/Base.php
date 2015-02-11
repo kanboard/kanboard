@@ -40,7 +40,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectDailySummary    $projectDailySummary
- * @property \Model\SubTask                $subTask
+ * @property \Model\Subtask                $subtask
  * @property \Model\Swimlane               $swimlane
  * @property \Model\Task                   $task
  * @property \Model\Link                   $link
@@ -58,6 +58,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\TaskLink               $taskLink
  * @property \Model\CommentHistory         $commentHistory
  * @property \Model\SubtaskHistory         $subtaskHistory
+ * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
  * @property \Model\TimeTracking           $timeTracking
  * @property \Model\User                   $user
  * @property \Model\UserSession            $userSession
@@ -169,6 +170,8 @@ abstract class Base
         if (! $this->acl->isPublicAction($controller, $action)) {
             $this->handleAuthentication();
             $this->handleAuthorization($controller, $action);
+
+            $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
         }
     }
 

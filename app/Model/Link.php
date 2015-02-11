@@ -420,6 +420,7 @@ class Link extends Base
      */
     private function commonValidationRules()
     {
+        // TODO Update simple-validator to support array in forms
         return array(
             new Validators\Required('project_id', t('The project id required')),
             // new Validators\Required('label[0]', t('The link label is required')),

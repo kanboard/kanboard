@@ -199,8 +199,8 @@ class Ldap extends Base
 
             return array(
                 'username' => $username,
-                'name' => isset($info[0][LDAP_ACCOUNT_FULLNAME][0]) ? $info[0][LDAP_ACCOUNT_FULLNAME][0] : '',
-                'email' => isset($info[0][LDAP_ACCOUNT_EMAIL][0]) ? $info[0][LDAP_ACCOUNT_EMAIL][0] : '',
+                'name' => $this->getFromInfo($info, LDAP_ACCOUNT_FULLNAME),
+                'email' => $this->getFromInfo($info, LDAP_ACCOUNT_EMAIL),
             );
         }
 
@@ -215,16 +215,8 @@ class Ldap extends Base
      */
     public function lookup($username = null, $email = null)
     {
-        if ($username && $email) {
-            $query = '(&('.sprintf(LDAP_USER_PATTERN, $username).')('.sprintf(LDAP_ACCOUNT_EMAIL, $email).')';
-        }
-        else if ($username) {
-            $query = sprintf(LDAP_USER_PATTERN, $username);
-        }
-        else if ($email) {
-            $query = '('.LDAP_ACCOUNT_EMAIL.'='.$email.')';
-        }
-        else {
+        $query = $this->getQuery($username, $email);
+        if ($query === false) {
             return false;
         }
 
@@ -253,9 +245,44 @@ class Ldap extends Base
         }
 
         return array(
-            'username' => isset($info[0][LDAP_ACCOUNT_ID][0]) ? $info[0][LDAP_ACCOUNT_ID][0] : $username,
-            'name' => isset($info[0][LDAP_ACCOUNT_FULLNAME][0]) ? $info[0][LDAP_ACCOUNT_FULLNAME][0] : '',
-            'email' => isset($info[0][LDAP_ACCOUNT_EMAIL][0]) ? $info[0][LDAP_ACCOUNT_EMAIL][0] : $email,
+            'username' => $this->getFromInfo($info, LDAP_ACCOUNT_ID, $username),
+            'name' => $this->getFromInfo($info, LDAP_ACCOUNT_FULLNAME),
+            'email' => $this->getFromInfo($info, LDAP_ACCOUNT_EMAIL, $email),
         );
+    }
+
+    /**
+     * Get the LDAP query to find a user
+     *
+     * @param string   $username  Username
+     * @param string   $email     Email address
+     */
+    private function getQuery($username, $email)
+    {
+        if ($username && $email) {
+            return '(&('.sprintf(LDAP_USER_PATTERN, $username).')('.sprintf(LDAP_ACCOUNT_EMAIL, $email).')';
+        }
+        else if ($username) {
+            return sprintf(LDAP_USER_PATTERN, $username);
+        }
+        else if ($email) {
+            return '('.LDAP_ACCOUNT_EMAIL.'='.$email.')';
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * Return a value from the LDAP info
+     *
+     * @param array    $info     LDAP info
+     * @param string   $key      Key
+     * @param string   $default  Default value if key not set in entry
+     * @return string
+     */
+    private function getFromInfo($info, $key, $default = '')
+    {
+         return isset($info[0][$key][0]) ? $info[0][$key][0] : $default;
     }
 }

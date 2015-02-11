@@ -50,13 +50,6 @@ Kanboard.Board = (function() {
         // Description popover
         $(".task-description-popover").click(on_popover);
 
-        // Tooltip for column description
-        $(".column-tooltip").tooltip({
-            content: function(e) {
-                return $(this).attr("title");
-            }
-        });
-
         // Tooltips for tasks
         $(".task-board-tooltip").tooltip({
             track: false,
@@ -107,7 +100,13 @@ Kanboard.Board = (function() {
                         e.preventDefault();
                         e.stopPropagation();
 
-                        $.get($(this).attr('href'), setTooltipContent);
+                        if ($(this).hasClass("popover-subtask-restriction")) {
+                            Kanboard.OpenPopover($(this).attr('href'));
+                            $(_this).tooltip('close');
+                        }
+                        else {
+                            $.get($(this).attr('href'), setTooltipContent);
+                        }
                     });
                 });
 
@@ -266,12 +265,13 @@ Kanboard.Board = (function() {
     	filter_apply();
     }
 
-    return {
-        Init: function() {
+    jQuery(document).ready(function() {
+
+        if (Kanboard.Exists("board")) {
             board_load_events();
             filter_load_events();
             keyboard_shortcuts();
         }
-    };
+    });
 
 })();

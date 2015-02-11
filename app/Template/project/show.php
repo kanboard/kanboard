@@ -41,15 +41,20 @@
 </div>
 <table class="table-stripped">
     <tr>
-        <th class="column-30"><?= t('Column') ?></th>
-        <th><?= t('Description') ?></th>
+        <th class="column-60"><?= t('Column') ?></th>
         <th class="column-20"><?= t('Task limit') ?></th>
         <th class="column-20"><?= t('Active tasks') ?></th>
     </tr>
     <?php foreach ($stats['columns'] as $column): ?>
     <tr>
-        <td><?= $this->e($column['title']) ?></td>
-        <td><?= $this->e($column['description']) ?></td>
+        <td>
+            <?= $this->e($column['title']) ?>
+            <?php if (! empty($column['description'])): ?>
+                <span class="column-tooltip" title="<?= $this->markdown($column['description']) ?>">
+                    <i class="fa fa-info-circle"></i>
+                </span>
+            <?php endif ?>
+        </td>
         <td><?= $column['task_limit'] ?: '∞' ?></td>
         <td><?= $column['nb_active_tasks'] ?></td>
     </tr>

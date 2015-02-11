@@ -190,6 +190,43 @@ class User extends Base
     }
 
     /**
+     * Display user calendar
+     *
+     * @access public
+     */
+    public function calendar()
+    {
+        $user = $this->getUser();
+
+        $this->response->html($this->layout('user/calendar', array(
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Display timesheet
+     *
+     * @access public
+     */
+    public function timesheet()
+    {
+        $user = $this->getUser();
+
+        $subtask_paginator = $this->paginator
+            ->setUrl('user', 'timesheet', array('user_id' => $user['id'], 'pagination' => 'subtasks'))
+            ->setMax(20)
+            ->setOrder('start')
+            ->setDirection('DESC')
+            ->setQuery($this->subtaskTimeTracking->getUserQuery($user['id']))
+            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+
+        $this->response->html($this->layout('user/timesheet', array(
+            'subtask_paginator' => $subtask_paginator,
+            'user' => $user,
+        )));
+    }
+
+    /**
      * Display last connections
      *
      * @access public
@@ -318,7 +355,7 @@ class User extends Base
 
         if ($this->request->isPost()) {
 
-            $values = $this->request->getValues();
+            $values = $this->request->getValues() + array('disable_login_form' => 0);
 
             if ($this->userSession->isAdmin()) {
                 $values += array('is_admin' => 0);
@@ -450,7 +487,7 @@ class User extends Base
      *
      * @access public
      */
-    public function gitHub()
+    public function github()
     {
         $code = $this->request->getStringParam('code');
 
@@ -494,7 +531,7 @@ class User extends Base
      *
      * @access public
      */
-    public function unlinkGitHub()
+    public function unlinkGithub()
     {
         $this->checkCSRFParam();
 

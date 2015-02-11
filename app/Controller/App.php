@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\SubTask as SubTaskModel;
+use Model\Subtask as SubTaskModel;
 
 /**
  * Application controller
@@ -23,33 +23,43 @@ class App extends Base
     }
 
     /**
+     * User dashboard view for admins
+     *
+     * @access public
+     */
+    public function dashboard()
+    {
+        $this->index($this->request->getIntegerParam('user_id'), 'dashboard');
+    }
+
+    /**
      * Dashboard for the current user
      *
      * @access public
      */
-    public function index()
+    public function index($user_id = 0, $action = 'index')
     {
         $status = array(SubTaskModel::STATUS_TODO, SubTaskModel::STATUS_INPROGRESS);
-        $user_id = $this->userSession->getId();
+        $user_id = $user_id ?: $this->userSession->getId();
         $projects = $this->projectPermission->getActiveMemberProjects($user_id);
         $project_ids = array_keys($projects);
 
         $task_paginator = $this->paginator
-            ->setUrl('app', 'index', array('pagination' => 'tasks'))
+            ->setUrl('app', $action, array('pagination' => 'tasks'))
             ->setMax(10)
             ->setOrder('tasks.id')
             ->setQuery($this->taskFinder->getUserQuery($user_id))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'tasks');
 
         $subtask_paginator = $this->paginator
-            ->setUrl('app', 'index', array('pagination' => 'subtasks'))
+            ->setUrl('app', $action, array('pagination' => 'subtasks'))
             ->setMax(10)
             ->setOrder('tasks.id')
-            ->setQuery($this->subTask->getUserQuery($user_id, $status))
+            ->setQuery($this->subtask->getUserQuery($user_id, $status))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
         $project_paginator = $this->paginator
-            ->setUrl('app', 'index', array('pagination' => 'projects'))
+            ->setUrl('app', $action, array('pagination' => 'projects'))
             ->setMax(10)
             ->setOrder('name')
             ->setQuery($this->project->getQueryColumnStats($project_ids))
@@ -58,10 +68,11 @@ class App extends Base
         $this->response->html($this->template->layout('app/dashboard', array(
             'title' => t('Dashboard'),
             'board_selector' => $this->projectPermission->getAllowedProjects($user_id),
-            'events' => $this->projectActivity->getProjects($project_ids, 10),
+            'events' => $this->projectActivity->getProjects($project_ids, 5),
             'task_paginator' => $task_paginator,
             'subtask_paginator' => $subtask_paginator,
             'project_paginator' => $project_paginator,
+            'user_id' => $user_id,
         )));
     }
 
