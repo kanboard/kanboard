@@ -14,33 +14,35 @@ function version_26($pdo)
 	/* Update tasks.date_moved from project_activities table if tasks.date_moved = null or 0.
 	 * We take max project_activities.date_creation where event_name in task.create','task.move.column
 	 * since creation date is always less than task moves
-	*/
+	 */
 	$pdo->exec("UPDATE tasks
-				SET date_moved = (
-			        SELECT md
+                SET date_moved = (
+                    SELECT md
                     FROM (
-                      SELECT task_id, max(date_creation) md
-                      FROM project_activities
-                      WHERE event_name IN ('task.create', 'task.move.column')
-                      GROUP BY task_id
-                      ) src
+                        SELECT task_id, max(date_creation) md
+                        FROM project_activities
+                        WHERE event_name IN ('task.create', 'task.move.column')
+                        GROUP BY task_id
+                    ) src
                     WHERE id = src.task_id
-                    )
+                )
                 WHERE (date_moved IS NULL OR date_moved = 0) AND id IN (
                     SELECT task_id
                     FROM (
-                      SELECT task_id, max(date_creation) md
-                      FROM project_activities
-                      WHERE event_name IN ('task.create', 'task.move.column')
-                      GROUP BY task_id
-                      ) src
-                    )
-            ");
+                        SELECT task_id, max(date_creation) md
+                        FROM project_activities
+                        WHERE event_name IN ('task.create', 'task.move.column')
+                        GROUP BY task_id
+                    ) src
+                )");
+
+    // If there is no activities for some tasks use the date_creation
+    $pdo->exec("UPDATE tasks SET date_moved = date_creation WHERE date_moved IS NULL OR date_moved = 0");
 }
 
 function version_25($pdo)
 {
-    $pdo->exec("ALTER TABLE users ADD COLUMN disable_login_form BOOLEAN DEFAULT '1'");
+    $pdo->exec("ALTER TABLE users ADD COLUMN disable_login_form BOOLEAN DEFAULT '0'");
 }
 
 function version_24($pdo)

@@ -683,4 +683,7 @@ return array(
     'Help on Bitbucket webhooks' => 'Ajuda sobre os webhooks Bitbucket',
     // 'Start' => '',
     // 'End' => '',
+    // 'Task age in days' => '',
+    // 'Days in this column' => '',
+    // '%dd' => '',
 );

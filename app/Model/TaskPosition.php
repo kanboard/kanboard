@@ -30,10 +30,11 @@ class TaskPosition extends Base
         $result = $this->calculateAndSave($project_id, $task_id, $column_id, $position, $swimlane_id);
 
         if ($result) {
+            
             if ($original_task['column_id'] != $column_id) {
-            	$this->db->table(Task::TABLE)->eq('id', $task_id)->update(array('date_moved' => time(),
-                    ));
+                $this->db->table(Task::TABLE)->eq('id', $task_id)->update(array('date_moved' => time()));
             }
+
             if ($original_task['swimlane_id'] != $swimlane_id) {
                 $this->calculateAndSave($project_id, 0, $column_id, 1, $original_task['swimlane_id']);
             }

@@ -102,7 +102,7 @@ class TaskFinder extends Base
                 'tasks.is_active',
                 'tasks.score',
                 'tasks.category_id',
-            	'tasks.date_moved',
+                'tasks.date_moved',
                 'users.username AS assignee_username',
                 'users.name AS assignee_name'
             )
@@ -243,7 +243,7 @@ class TaskFinder extends Base
             tasks.score,
             tasks.category_id,
             tasks.swimlane_id,
-        	tasks.date_moved,
+            tasks.date_moved,
             project_has_categories.name AS category_name,
             projects.name AS project_name,
             columns.title AS column_title,
