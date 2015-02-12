@@ -56,7 +56,7 @@ class User extends Base
 
         if ($valid) {
             if ($redirect_query !== '') {
-                $this->response->redirect('?'.$redirect_query);
+                $this->response->redirect('?'.urldecode($redirect_query));
             }
             else {
                 $this->response->redirect('?controller=app');
