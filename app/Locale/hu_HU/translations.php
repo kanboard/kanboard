@@ -164,7 +164,7 @@ return array(
     'Ready' => 'Kész',
     'Backlog' => 'Napló',
     'Work in progress' => 'Dolgozom',
-    'Done' => 'Kész',
+    'Done' => 'Csinált',
     'Application version:' => 'Alkalmazás verzió:',
     'Completed on %B %e, %Y at %k:%M %p' => 'Elkészült %Y.%m.%d %H:%M ..',
     '%B %e, %Y at %k:%M %p' => '%Y.%m.%d %H:%M',
