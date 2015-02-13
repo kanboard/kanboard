@@ -57,7 +57,7 @@
     </span>
     <?php endif ?>
 
-    <span class="task-board-user <?= $this->userSession->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
+    <span class="task-board-user extendedview  <?= $this->userSession->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
         <?= $this->a(
             (! empty($task['owner_id']) ? t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned')),
             'board',
@@ -69,11 +69,11 @@
         ) ?>
     </span>
     
-    <span title="<?= t('Task age in days')?>" class="task-days-age"><?= t('%dd', floor(time()/86400) - floor($task['date_creation']/86400)) ?></span>
-    <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= t('%dd', floor(time()/86400) - floor($task['date_moved']/86400)) ?></span>
+    <span title="<?= t('Task age in days')?>" class="task-days-age extendedview"><?= t('%dd', floor(time()/86400) - floor($task['date_creation']/86400)) ?></span>
+    <span title="<?= t('Days in this column')?>" class="task-days-incolumn extendedview"><?= t('%dd', floor(time()/86400) - floor($task['date_moved']/86400)) ?></span>
     
     <?php if ($task['score']): ?>
-        <span class="task-score"><?= $this->e($task['score']) ?></span>
+        <span class="task-score extendedview"><?= $this->e($task['score']) ?></span>
     <?php endif ?>
 
     <div class="task-board-title">
@@ -84,7 +84,7 @@
 
 
 <?php if ($task['category_id']): ?>
-<div class="task-board-category-container">
+<div class="task-board-category-container extendedview">
     <span class="task-board-category">
         <?= $this->a(
             $this->inList($task['category_id'], $categories),
@@ -101,7 +101,7 @@
 
 
 <?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description']) || ! empty($task['nb_subtasks'])): ?>
-<div class="task-board-footer">
+<div class="task-board-footer extendedview">
 
     <?php if (! empty($task['date_due'])): ?>
     <div class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
