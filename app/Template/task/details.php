@@ -60,6 +60,7 @@
             <?= t('Column on the board:') ?>
             <strong><?= $this->e($task['column_title']) ?></strong>
             (<?= $this->e($task['project_name']) ?>)
+            <?= dt('since %B %e, %Y at %k:%M %p', $task['date_moved']) ?>
         </li>
         <li><?= t('Task position:').' '.$this->e($task['position']) ?></li>
         <?php if ($task['category_name']): ?>
