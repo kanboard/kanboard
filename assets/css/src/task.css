@@ -225,3 +225,7 @@ a.task-board-nobody {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+
+.task-closed {
+    text-decoration: line-through;
+}

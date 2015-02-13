@@ -1,25 +1,27 @@
 {
-    "require": {
-        "ext-mbstring": "*",
-        "fguillot/simple-validator": "0.0.1",
-        "swiftmailer/swiftmailer": "@stable",
-        "fguillot/json-rpc": "0.0.1",
-        "fguillot/picodb": "dev-master",
-        "erusev/parsedown": "1.5.1",
-        "lusitanian/oauth": "0.3.5",
-        "pimple/pimple": "~3.0",
-        "symfony/console": "@stable",
-        "symfony/event-dispatcher": "~2.6",
-        "fguillot/simpleLogger": "0.0.1"
-    },
-    "autoload": {
-        "psr-0": {"": "app/"},
-        "files": [
-            "app/functions.php",
-            "app/Libs/password.php"
-        ]
-    },
-    "require-dev": {
-        "symfony/stopwatch": "~2.6"
-    }
+	"require" : {
+		"ext-mbstring" : "*",
+		"fguillot/simple-validator" : "0.0.2",
+		"swiftmailer/swiftmailer" : "@stable",
+		"fguillot/json-rpc" : "0.0.1",
+		"fguillot/picodb" : "dev-master",
+		"erusev/parsedown" : "1.5.1",
+		"lusitanian/oauth" : "0.3.5",
+		"pimple/pimple" : "~3.0",
+		"symfony/console" : "@stable",
+		"symfony/event-dispatcher" : "~2.6",
+		"fguillot/simpleLogger" : "0.0.1"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"" : "app/"
+		},
+		"files" : [
+			"app/functions.php",
+			"app/Libs/password.php"
+		]
+	},
+	"require-dev" : {
+		"symfony/stopwatch" : "~2.6"
+	}
 }

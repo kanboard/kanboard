@@ -901,6 +901,8 @@ textarea {
 
 select {
     max-width: 95%;
+    paddin-top: 5px;
+    paddin-bottom: 5px;
 }
 
 ::-webkit-input-placeholder {
@@ -1267,6 +1269,9 @@ div.ui-tooltip {
     width: 550px;
 }
 
+.tooltip-tasklinks ul{
+    padding-left: 13px;
+}
 .column-tooltip {
 	color: #999;
 	font-size: 0.95em;
@@ -1632,6 +1637,7 @@ a.task-board-nobody {
     padding: 3px;
 }
 
+<<<<<<< HEAD
 .task-days-age {
     font-size: 0.8em;
     border: #888 1px solid;
@@ -1651,6 +1657,12 @@ a.task-board-nobody {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+=======
+.task-closed {
+    text-decoration: line-through;
+}
+
+>>>>>>> 3ba416a8c3c0cbf9119f97de86eb447dbf8a18db
 /* comments */
 .comment {
     margin-bottom: 20px;

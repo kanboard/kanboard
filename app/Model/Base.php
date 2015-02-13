@@ -25,6 +25,7 @@ use Pimple\Container;
  * @property \Model\File                   $file
  * @property \Model\Helper                 $helper
  * @property \Model\LastLogin              $lastLogin
+ * @property \Model\Link                   $link
  * @property \Model\Notification           $notification
  * @property \Model\Project                $project
  * @property \Model\ProjectDuplication     $projectDuplication
@@ -38,6 +39,7 @@ use Pimple\Container;
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder
  * @property \Model\TaskHistory            $taskHistory
+ * @property \Model\TaskLink               $taskLink
  * @property \Model\TaskPosition           $taskPosition
  * @property \Model\TaskValidator          $taskValidator
  * @property \Model\TimeTracking           $timeTracking

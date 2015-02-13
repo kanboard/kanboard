@@ -100,7 +100,7 @@
 <?php endif ?>
 
 
-<?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description']) || ! empty($task['nb_subtasks'])): ?>
+<?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description']) || ! empty($task['nb_subtasks']) || ! empty($task['nb_links'])): ?>
 <div class="task-board-footer">
 
     <?php if (! empty($task['date_due'])): ?>
@@ -110,7 +110,10 @@
     <?php endif ?>
 
     <div class="task-board-icons">
-
+        <?php if (! empty($task['nb_links'])): ?>
+            <span title="<?= t('Links') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_links'] ?> <i class="fa fa-code-fork"></i></span>
+        <?php endif ?>
+        
         <?php if (! empty($task['nb_subtasks'])): ?>
             <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?> <i class="fa fa-bars"></i></span>
         <?php endif ?>

@@ -43,6 +43,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\Subtask                $subtask
  * @property \Model\Swimlane               $swimlane
  * @property \Model\Task                   $task
+ * @property \Model\Link                   $link
  * @property \Model\TaskCreation           $taskCreation
  * @property \Model\TaskModification       $taskModification
  * @property \Model\TaskDuplication        $taskDuplication
@@ -54,6 +55,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\TaskPermission         $taskPermission
  * @property \Model\TaskStatus             $taskStatus
  * @property \Model\TaskValidator          $taskValidator
+ * @property \Model\TaskLink               $taskLink
  * @property \Model\CommentHistory         $commentHistory
  * @property \Model\SubtaskHistory         $subtaskHistory
  * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking

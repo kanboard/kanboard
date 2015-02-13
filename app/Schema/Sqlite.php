@@ -4,8 +4,57 @@ namespace Schema;
 
 use Core\Security;
 use PDO;
+use Model\Link;
 
-const VERSION = 44;
+const VERSION = 45;
+
+function version_45($pdo)
+{
+    $pdo->exec("CREATE TABLE link
+        (
+            link_id INTEGER PRIMARY KEY,
+            project_id INTEGER NOT NULL DEFAULT -1
+        )");
+    $pdo->exec("CREATE TABLE link_label
+        (
+            id INTEGER PRIMARY KEY,
+            link_id INTEGER NOT NULL,
+            label TEXT NOT NULL,
+            behaviour INTEGER DEFAULT '2',
+            FOREIGN KEY(link_id) REFERENCES link(link_id) ON DELETE CASCADE
+        )");
+    $pdo->exec("CREATE TABLE task_has_links
+        (
+            id INTEGER PRIMARY KEY,
+            link_label_id INTEGER NOT NULL,
+            task_id INTEGER NOT NULL,
+            task_inverse_id INTEGER NOT NULL,
+            FOREIGN KEY(link_label_id) REFERENCES link_label(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )");
+    $pdo->exec("CREATE INDEX task_has_links_task_index ON task_has_links(task_id)");
+    $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_label_id, task_id, task_inverse_id)");
+    $rq = $pdo->prepare('INSERT INTO link (project_id) VALUES (?)');
+    $rq->execute(array(-1));
+    $rq->execute(array(-1));
+    $rq->execute(array(-1));
+    $rq->execute(array(-1));
+    $rq->execute(array(-1));
+    $rq->execute(array(-1));
+    $rq = $pdo->prepare('INSERT INTO link_label (link_id, label, behaviour) VALUES (?, ?, ?)');
+    $rq->execute(array(1, t('relates to'), Link::BEHAVIOUR_BOTH));
+    $rq->execute(array(2, t('blocks'), Link::BEHAVIOUR_LEFT2RIGTH));
+    $rq->execute(array(2, t('is blocked by'), Link::BEHAVIOUR_RIGHT2LEFT));
+    $rq->execute(array(3, t('duplicates'), Link::BEHAVIOUR_LEFT2RIGTH));
+    $rq->execute(array(3, t('is duplicated by'), Link::BEHAVIOUR_RIGHT2LEFT));
+    $rq->execute(array(4, t('is a child of'), Link::BEHAVIOUR_LEFT2RIGTH));
+    $rq->execute(array(4, t('is a parent of'), Link::BEHAVIOUR_RIGHT2LEFT));
+    $rq->execute(array(5, t('targets milestone'), Link::BEHAVIOUR_LEFT2RIGTH));
+    $rq->execute(array(5, t('is a milestone of'), Link::BEHAVIOUR_RIGHT2LEFT));
+    $rq->execute(array(6, t('fixes'), Link::BEHAVIOUR_LEFT2RIGTH));
+    $rq->execute(array(6, t('is fixed by'), Link::BEHAVIOUR_RIGHT2LEFT));
+}
 
 function version_44($pdo)
 {
@@ -66,7 +115,7 @@ function version_42($pdo)
 
 function version_41($pdo)
 {
-	$pdo->exec('ALTER TABLE columns ADD COLUMN description TEXT');
+    $pdo->exec('ALTER TABLE columns ADD COLUMN description TEXT');
 }
 
 function version_40($pdo)

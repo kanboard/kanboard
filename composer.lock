@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fdd9fc2aa1f8bdbc3e21d06ff0c7b184",
+    "hash": "7ccc1bcdeca71cacef30015aca5a483a",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -121,16 +121,16 @@
         },
         {
             "name": "fguillot/simple-validator",
-            "version": "v0.0.1",
+            "version": "v0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleValidator.git",
-                "reference": "3bfa1ef0062906c83824ce8db1219914996d9bd4"
+                "reference": "9e9502c88ce239901c0fee12a1f504948342ab42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/3bfa1ef0062906c83824ce8db1219914996d9bd4",
-                "reference": "3bfa1ef0062906c83824ce8db1219914996d9bd4",
+                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/9e9502c88ce239901c0fee12a1f504948342ab42",
+                "reference": "9e9502c88ce239901c0fee12a1f504948342ab42",
                 "shasum": ""
             },
             "require": {
@@ -154,7 +154,7 @@
             ],
             "description": "The most easy to use validator library for PHP :)",
             "homepage": "https://github.com/fguillot/simpleValidator",
-            "time": "2014-11-25 22:58:14"
+            "time": "2015-01-21 02:00:33"
         },
         {
             "name": "fguillot/simpleLogger",
@@ -564,6 +564,7 @@
         "symfony/console": 0
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "ext-mbstring": "*"
     },
