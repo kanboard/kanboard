@@ -79,7 +79,7 @@ a.task-board-nobody {
 .task-board-date {
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 1px;
     font-weight: bold;
     color: #000;
 }
@@ -226,6 +226,6 @@ a.task-board-nobody {
     border-bottom-right-radius: 3px;
 }
 
-.task-closed {
+.task-link-closed {
     text-decoration: line-through;
 }

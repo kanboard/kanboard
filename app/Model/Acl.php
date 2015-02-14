@@ -38,6 +38,7 @@ class Acl extends Base
         'project' => array('show', 'tasks', 'search', 'activity'),
         'subtask' => '*',
         'task' => '*',
+        'tasklink' => '*',
         'calendar' => array('show', 'events', 'save'),
     );
 
@@ -67,6 +68,7 @@ class Acl extends Base
         'app' => array('dashboard'),
         'user' => array('index', 'create', 'save', 'remove'),
         'config' => '*',
+        'link' => '*',
         'project' => array('remove'),
     );
 

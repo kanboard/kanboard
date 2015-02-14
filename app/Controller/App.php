@@ -2,7 +2,8 @@
 
 namespace Controller;
 
-use Model\Subtask as SubTaskModel;
+use Model\Subtask as SubtaskModel;
+use Model\Task as TaskModel;
 
 /**
  * Application controller
@@ -39,7 +40,7 @@ class App extends Base
      */
     public function index($user_id = 0, $action = 'index')
     {
-        $status = array(SubTaskModel::STATUS_TODO, SubTaskModel::STATUS_INPROGRESS);
+        $status = array(SubTaskModel::STATUS_TODO, SubtaskModel::STATUS_INPROGRESS);
         $user_id = $user_id ?: $this->userSession->getId();
         $projects = $this->projectPermission->getActiveMemberProjects($user_id);
         $project_ids = array_keys($projects);
@@ -88,11 +89,8 @@ class App extends Base
         if (empty($payload['text'])) {
             $this->response->html('<p>'.t('Nothing to preview...').'</p>');
         }
-        else {
-            $this->response->html(
-                $this->template->markdown($payload['text'])
-            );
-        }
+
+        $this->response->html($this->template->markdown($payload['text']));
     }
 
     /**
@@ -103,5 +101,22 @@ class App extends Base
     public function colors()
     {
         $this->response->css($this->color->getCss());
+    }
+
+    /**
+     * Task autocompletion (Ajax)
+     *
+     * @access public
+     */
+    public function autocomplete()
+    {
+        $this->response->json(
+            $this->taskFilter
+                 ->create()
+                 ->filterByProjects($this->projectPermission->getActiveMemberProjectIds($this->userSession->getId()))
+                 ->excludeTasks(array($this->request->getIntegerParam('exclude_task_id')))
+                 ->filterByTitle($this->request->getStringParam('term'))
+                 ->toAutoCompletion()
+        );
     }
 }

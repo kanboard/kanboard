@@ -141,7 +141,7 @@ abstract class Base
     private function sendHeaders($action)
     {
         // HTTP secure headers
-        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'"));
+        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => "'self' data:"));
         $this->response->nosniff();
         $this->response->xss();
 
@@ -201,7 +201,7 @@ abstract class Base
     {
         $project_id = $this->request->getIntegerParam('project_id');
         $task_id = $this->request->getIntegerParam('task_id');
-        
+
         // Allow urls without "project_id"
         if ($task_id > 0 && $project_id === 0) {
             $project_id = $this->taskFinder->getProjectId($task_id);

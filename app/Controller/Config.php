@@ -87,17 +87,12 @@ class Config extends Base
      *
      * @access public
      */
-    public function board(array $values = array(), array $errors = array())
+    public function board()
     {
         $this->common('board');
 
         $this->response->html($this->layout('config/board', array(
             'default_columns' => implode(', ', $this->board->getDefaultColumns()),
-            'links' => $this->link->getMergedList(),
-            'values' => $values + array(
-                'project_id' => -1
-            ),
-            'errors' => $errors,
             'title' => t('Settings').' &gt; '.t('Board settings'),
         )));
     }

@@ -155,9 +155,6 @@ class Helper
      */
     public function formValue($values, $name)
     {
-        if (false !== ($pos = strpos($name, '['))) {
-            $name = substr($name, 0, $pos);
-        }
         if (isset($values->$name)) {
             return 'value="'.$this->e($values->$name).'"';
         }
@@ -584,7 +581,6 @@ class Helper
     {
         return strpos($haystack, $needle) !== false;
     }
-    
 
     /**
      * Return a value from a dictionary

@@ -64,9 +64,10 @@ div.ui-tooltip {
     width: 550px;
 }
 
-.tooltip-tasklinks ul{
-    padding-left: 13px;
+.tooltip-tasklinks li {
+    list-style-type: none;
 }
+
 .column-tooltip {
 	color: #999;
 	font-size: 0.95em;

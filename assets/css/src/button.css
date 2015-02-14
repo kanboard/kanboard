@@ -52,3 +52,9 @@ a.btn-blue:focus,
     border-color: #2f5bb7;
     background: #357ae8;
 }
+
+.btn-blue:disabled {
+    color: #ccc;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+}

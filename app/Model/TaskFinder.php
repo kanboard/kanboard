@@ -3,7 +3,6 @@
 namespace Model;
 
 use PDO;
-use Model\TaskLink;
 
 /**
  * Task Finder model
@@ -129,29 +128,6 @@ class TaskFinder extends Base
                     ->eq('is_active', Task::STATUS_OPEN)
                     ->asc('tasks.position')
                     ->findAll();
-    }
-    
-    /**
-     * Get ids and names of all (limited by $limit) tasks for a given project and status
-     *
-     * @access public
-     * @param  integer   $project_id      Project id
-     * @param  integer   $status_id       Status id
-     * @param  integer   $exclude_id      Exclude this task id in the result
-     * @param  integer   $limit           Number of tasks to list
-     * @return array
-     */
-    public function getList($project_id, $status_id = Task::STATUS_OPEN, $exclude_id=null, $limit=50)
-    {
-        $sql = $this->db
-                    ->hashtable(Task::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->eq('is_active', $status_id)
-                    ->limit($limit);
-        if (null != $exclude_id) {
-            $sql->neq('id', $exclude_id);
-        }
-        return $sql->getAll('id', 'title');
     }
 
     /**

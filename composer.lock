@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7ccc1bcdeca71cacef30015aca5a483a",
+    "hash": "9c0c8b06745d54478604d80815b59b9b",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -121,16 +121,16 @@
         },
         {
             "name": "fguillot/simple-validator",
-            "version": "v0.0.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleValidator.git",
-                "reference": "9e9502c88ce239901c0fee12a1f504948342ab42"
+                "reference": "5ebdb6df4c5f3aa2539b633eb4ae94c9e8c4ada7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/9e9502c88ce239901c0fee12a1f504948342ab42",
-                "reference": "9e9502c88ce239901c0fee12a1f504948342ab42",
+                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/5ebdb6df4c5f3aa2539b633eb4ae94c9e8c4ada7",
+                "reference": "5ebdb6df4c5f3aa2539b633eb4ae94c9e8c4ada7",
                 "shasum": ""
             },
             "require": {
@@ -154,7 +154,7 @@
             ],
             "description": "The most easy to use validator library for PHP :)",
             "homepage": "https://github.com/fguillot/simpleValidator",
-            "time": "2015-01-21 02:00:33"
+            "time": "2015-02-14 21:04:14"
         },
         {
             "name": "fguillot/simpleLogger",
@@ -559,12 +559,12 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "fguillot/simple-validator": 20,
         "swiftmailer/swiftmailer": 0,
         "fguillot/picodb": 20,
         "symfony/console": 0
     },
     "prefer-stable": false,
-    "prefer-lowest": false,
     "platform": {
         "ext-mbstring": "*"
     },

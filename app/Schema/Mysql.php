@@ -10,59 +10,46 @@ const VERSION = 46;
 
 function version_46($pdo)
 {
-    $pdo->exec("CREATE TABLE link
-        (
-            link_id INT NOT NULL AUTO_INCREMENT,
-            project_id INT NOT NULL DEFAULT -1,
-            PRIMARY KEY(link_id)
-        ) ENGINE=InnoDB CHARSET=utf8");
-    $pdo->exec("CREATE TABLE link_label
-        (
-            id INT NOT NULL AUTO_INCREMENT,
-            link_id INT NOT NULL,
-            label TEXT NOT NULL,
-            behaviour INT DEFAULT 2,
-            PRIMARY KEY(id),
-            FOREIGN KEY(link_id) REFERENCES link(link_id) ON DELETE CASCADE
-        ) ENGINE=InnoDB CHARSET=utf8");
-    $pdo->exec("CREATE TABLE task_has_links
-        (
-            id INT NOT NULL AUTO_INCREMENT,
-            link_label_id INT NOT NULL,
-            task_id INT NOT NULL,
-            task_inverse_id INT NOT NULL,
-            PRIMARY KEY(id),
-            FOREIGN KEY(link_label_id) REFERENCES link_label(id) ON DELETE CASCADE,
-            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
-            FOREIGN KEY(task_inverse_id) REFERENCES tasks(id) ON DELETE CASCADE
-        ) ENGINE=InnoDB CHARSET=utf8");
+    $pdo->exec("CREATE TABLE links (
+        id INT NOT NULL AUTO_INCREMENT,
+        label VARCHAR(255) NOT NULL,
+        opposite_id INT DEFAULT 0,
+        PRIMARY KEY(id),
+        UNIQUE(label)
+    ) ENGINE=InnoDB CHARSET=utf8");
+
+    $pdo->exec("CREATE TABLE task_has_links (
+        id INT NOT NULL AUTO_INCREMENT,
+        link_id INT NOT NULL,
+        task_id INT NOT NULL,
+        opposite_task_id INT NOT NULL,
+        FOREIGN KEY(link_id) REFERENCES links(id) ON DELETE CASCADE,
+        FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+        FOREIGN KEY(opposite_task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+        PRIMARY KEY(id)
+    ) ENGINE=InnoDB CHARSET=utf8");
+
     $pdo->exec("CREATE INDEX task_has_links_task_index ON task_has_links(task_id)");
-    $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_label_id, task_id, task_inverse_id)");
-    $rq = $pdo->prepare('INSERT INTO link (project_id) VALUES (?)');
-    $rq->execute(array(-1));
-    $rq->execute(array(-1));
-    $rq->execute(array(-1));
-    $rq->execute(array(-1));
-    $rq->execute(array(-1));
-    $rq->execute(array(-1));
-    $rq = $pdo->prepare('INSERT INTO link_label (link_id, label, behaviour) VALUES (?, ?, ?)');
-    $rq->execute(array(1, t('relates to'), Link::BEHAVIOUR_BOTH));
-    $rq->execute(array(2, t('blocks'), Link::BEHAVIOUR_LEFT2RIGTH));
-    $rq->execute(array(2, t('is blocked by'), Link::BEHAVIOUR_RIGHT2LEFT));
-    $rq->execute(array(3, t('duplicates'), Link::BEHAVIOUR_LEFT2RIGTH));
-    $rq->execute(array(3, t('is duplicated by'), Link::BEHAVIOUR_RIGHT2LEFT));
-    $rq->execute(array(4, t('is a child of'), Link::BEHAVIOUR_LEFT2RIGTH));
-    $rq->execute(array(4, t('is a parent of'), Link::BEHAVIOUR_RIGHT2LEFT));
-    $rq->execute(array(5, t('targets milestone'), Link::BEHAVIOUR_LEFT2RIGTH));
-    $rq->execute(array(5, t('is a milestone of'), Link::BEHAVIOUR_RIGHT2LEFT));
-    $rq->execute(array(6, t('fixes'), Link::BEHAVIOUR_LEFT2RIGTH));
-    $rq->execute(array(6, t('is fixed by'), Link::BEHAVIOUR_RIGHT2LEFT));
+    $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, opposite_task_id)");
+
+    $rq = $pdo->prepare('INSERT INTO links (label, opposite_id) VALUES (?, ?)');
+    $rq->execute(array('relates to', 0));
+    $rq->execute(array('blocks', 3));
+    $rq->execute(array('is blocked by', 2));
+    $rq->execute(array('duplicates', 5));
+    $rq->execute(array('is duplicated by', 4));
+    $rq->execute(array('is a child of', 7));
+    $rq->execute(array('is a parent of', 6));
+    $rq->execute(array('targets milestone', 9));
+    $rq->execute(array('is a milestone of', 8));
+    $rq->execute(array('fixes', 11));
+    $rq->execute(array('is fixed by', 10));
 }
 
 function version_45($pdo)
 {
     $pdo->exec('ALTER TABLE tasks ADD COLUMN date_moved INT DEFAULT 0');
-    
+
     /* Update tasks.date_moved from project_activities table if tasks.date_moved = null or 0.
      * We take max project_activities.date_creation where event_name in task.create','task.move.column
      * since creation date is always less than task moves
@@ -174,7 +161,7 @@ function version_38($pdo)
     ");
 
     $pdo->exec('ALTER TABLE tasks ADD COLUMN swimlane_id INT DEFAULT 0');
-    $pdo->exec("ALTER TABLE projects ADD COLUMN default_swimlane VARCHAR(200) DEFAULT '".t('Default swimlane')."'");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN default_swimlane VARCHAR(200) DEFAULT 'Default swimlane'");
     $pdo->exec("ALTER TABLE projects ADD COLUMN show_default_swimlane INT DEFAULT 1");
 }
 

@@ -55,8 +55,6 @@ textarea {
 
 select {
     max-width: 95%;
-    paddin-top: 5px;
-    paddin-bottom: 5px;
 }
 
 ::-webkit-input-placeholder {

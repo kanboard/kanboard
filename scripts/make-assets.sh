@@ -1,10 +1,10 @@
 #!/bin/bash
 
 app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown"
-vendor_css="jquery-ui-1.10.4.custom chosen.min fullcalendar.min font-awesome.min"
+vendor_css="jquery-ui.min chosen.min fullcalendar.min font-awesome.min"
 
-app_js="base board calendar analytic link swimlane dashboard"
-vendor_js="jquery-1.11.1.min jquery-ui-1.10.4.custom.min jquery.ui.touch-punch.min chosen.jquery.min dropit.min moment.min fullcalendar.min mousetrap.min app.min"
+app_js="base board calendar analytic task swimlane dashboard"
+vendor_js="jquery-1.11.1.min jquery-ui.min jquery.ui.touch-punch.min chosen.jquery.min dropit.min moment.min fullcalendar.min mousetrap.min app.min"
 lang_js="da de es fi fr hu it ja pl pt-br ru sv th zh-cn"
 
 function merge_css {
@@ -13,7 +13,7 @@ function merge_css {
 
     rm -f $dst_file 2>/dev/null
     echo "/* DO NOT EDIT: auto-generated file */" > $dst_file
-    
+
     for file in $vendor_css; do cat "assets/css/vendor/${file}.css" >> $dst_file; done
     for file in $app_css; do cat "assets/css/src/${file}.css" >> $dst_file; done
 }
@@ -43,7 +43,7 @@ function merge_js {
     local dst_file="assets/js/app.js"
 
     rm -f $dst_file 2>/dev/null
-    
+
     for file in $vendor_js; do cat "assets/js/vendor/${file}.js" >> $dst_file; done
     for file in $lang_js; do cat "assets/js/vendor/lang/${file}.js" >> $dst_file; done
 

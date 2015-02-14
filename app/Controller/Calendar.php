@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\Task;
+use Model\Task as TaskModel;
 
 /**
  * Project Calendar controller
@@ -74,7 +74,7 @@ class Calendar extends Base
             $this->taskFilter
                  ->create()
                  ->filterByOwner($user_id)
-                 ->filterByStatus(Task::STATUS_OPEN)
+                 ->filterByStatus(TaskModel::STATUS_OPEN)
                  ->filterByDueDateRange(
                      $this->request->getStringParam('start'),
                      $this->request->getStringParam('end')

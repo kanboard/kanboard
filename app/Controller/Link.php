@@ -1,11 +1,13 @@
 <?php
+
 namespace Controller;
 
 /**
  * Link controller
  *
  * @package controller
- * @author Olivier Maridat
+ * @author  Olivier Maridat
+ * @author  Frederic Guillot
  */
 class Link extends Base
 {
@@ -21,13 +23,10 @@ class Link extends Base
     {
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
         $params['config_content_for_layout'] = $this->template->render($template, $params);
-    
-        if (isset($params['values']['project_id']) && -1 != $params['values']['project_id']) {
-            return $this->projectLayout($template, $params);
-        }
+
         return $this->template->layout('config/layout', $params);
     }
-    
+
     /**
      * Get the current link
      *
@@ -36,49 +35,27 @@ class Link extends Base
      */
     private function getLink()
     {
-        $link = $this->link->getById($this->request->getIntegerParam('link_id'), $this->request->getIntegerParam('project_id', -1));
+        $link = $this->link->getById($this->request->getIntegerParam('link_id'));
+
         if (! $link) {
             $this->notfound();
         }
-        $link['link_id'] = $link[0]['link_id'];
-        $link['project_id'] = $link[0]['project_id'];
+
         return $link;
     }
 
     /**
-     * Method to get a project
-     *
-     * @access protected
-     * @param  integer      $project_id    Default project id
-     * @return array
-     */
-    protected function getProject($project_id = -1)
-    {
-        $project = array('id' => $project_id);
-        $project_id = $this->request->getIntegerParam('project_id', $project_id);
-        if (-1 != $project_id) {
-            $project = parent::getProject($project_id);
-        }
-        return $project;
-    }
-
-    /**
-     * List of links for a given project
+     * List of links
      *
      * @access public
      */
     public function index(array $values = array(), array $errors = array())
     {
-        $project = $this->getProject();
-        $values['project_id'] = $project['id'];
-        $values[] = array();
-        
         $this->response->html($this->layout('link/index', array(
-            'links' => $this->link->getMergedList($project['id']),
+            'links' => $this->link->getMergedList(),
             'values' => $values,
             'errors' => $errors,
-            'project' => $project,
-            'title' => t('Settings').' &gt; '.t('Board\'s links settings'),
+            'title' => t('Settings').' &gt; '.t('Task\'s links'),
         )));
     }
 
@@ -91,19 +68,18 @@ class Link extends Base
     {
         $values = $this->request->getValues();
         list($valid, $errors) = $this->link->validateCreation($values);
-        
+
         if ($valid) {
-            if ($this->link->create($values)) {
+
+            if ($this->link->create($values['label'], $values['opposite_label'])) {
                 $this->session->flash(t('Link added successfully.'));
-                $this->response->redirect('?controller=link&action=index&project_id='.$values['project_id']);
+                $this->response->redirect($this->helper->url('link', 'index'));
             }
             else {
                 $this->session->flashError(t('Unable to create your link.'));
             }
         }
-		if (!empty($values)) {
-        	$this->link->prepare($values);
-        }
+
         $this->index($values, $errors);
     }
 
@@ -114,14 +90,15 @@ class Link extends Base
      */
     public function edit(array $values = array(), array $errors = array())
     {
-        $project = $this->getProject();
-        
+        $link = $this->getLink();
+        $link['label'] = t($link['label']);
+
         $this->response->html($this->layout('link/edit', array(
-            'values' => empty($values) ? $this->getLink() : $values,
+            'values' => $values ?: $link,
             'errors' => $errors,
-            'project' => $project,
-            'edit' => true,
-            'title' => t('Links')
+            'labels' => $this->link->getList($link['id']),
+            'link' => $link,
+            'title' => t('Link modification')
         )));
     }
 
@@ -134,19 +111,17 @@ class Link extends Base
     {
         $values = $this->request->getValues();
         list($valid, $errors) = $this->link->validateModification($values);
-        
+
         if ($valid) {
             if ($this->link->update($values)) {
                 $this->session->flash(t('Link updated successfully.'));
-                $this->response->redirect('?controller=link&action=index&project_id='.$values['project_id']);
+                $this->response->redirect($this->helper->url('link', 'index'));
             }
             else {
                 $this->session->flashError(t('Unable to update your link.'));
             }
         }
-        if (!empty($values)) {
-        	$this->link->prepare($values);
-        }
+
         $this->edit($values, $errors);
     }
 
@@ -157,11 +132,9 @@ class Link extends Base
      */
     public function confirm()
     {
-        $project = $this->getProject();
         $link = $this->getLink();
-        
+
         $this->response->html($this->layout('link/remove', array(
-            'project' => $project,
             'link' => $link,
             'title' => t('Remove a link')
         )));
@@ -176,14 +149,14 @@ class Link extends Base
     {
         $this->checkCSRFParam();
         $link = $this->getLink();
-        
-        if ($this->link->remove($link['link_id'])) {
+
+        if ($this->link->remove($link['id'])) {
             $this->session->flash(t('Link removed successfully.'));
-            $this->response->redirect('?controller=link&action=index&project_id='.$link['project_id']);
         }
         else {
             $this->session->flashError(t('Unable to remove this link.'));
         }
-        $this->confirm();
+
+        $this->response->redirect($this->helper->url('link', 'index'));
     }
 }
