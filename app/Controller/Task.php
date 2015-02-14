@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Model\Project as ProjectModel;
-use Model\Task as TaskModel;
 
 /**
  * Task controller

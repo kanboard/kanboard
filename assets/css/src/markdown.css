@@ -55,3 +55,10 @@
     margin-bottom: 10px;
     margin-left: 20px;
 }
+
+.markdown img {
+    display: block;
+    max-width: 80%;
+    margin-top: 10px;
+}
+

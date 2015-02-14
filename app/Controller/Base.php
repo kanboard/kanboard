@@ -143,7 +143,7 @@ abstract class Base
     private function sendHeaders($action)
     {
         // HTTP secure headers
-        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => "'self' data:"));
+        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '*'));
         $this->response->nosniff();
         $this->response->xss();
 
