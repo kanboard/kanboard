@@ -69,8 +69,8 @@
         ) ?>
     </span>
     
-    <span title="<?= t('Task age in days')?>" class="task-days-age"><?= t('%dd', floor(time()/86400) - floor($task['date_creation']/86400)) ?></span>
-    <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= t('%dd', floor(time()/86400) - floor($task['date_moved']/86400)) ?></span>
+    <span title="<?= t('Task age in days')?>" class="task-days-age"><?= getAgeShort ($task['date_creation']) ?></span>
+    <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= getAgeShort ($task['date_moved']) ?></span>
     
     <?php if ($task['score']): ?>
         <span class="task-score"><?= $this->e($task['score']) ?></span>
