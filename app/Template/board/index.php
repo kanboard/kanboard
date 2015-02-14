@@ -5,7 +5,7 @@
         'users' => $users,
         'project' => $project,
     )) ?>
-
+    <label><input type="checkbox" id="compactviewtoggler" /><?= t("Compact View") ?></label>
     <?= $this->render('board/show', array(
             'project' => $project,
             'swimlanes' => $swimlanes,

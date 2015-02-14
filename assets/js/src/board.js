@@ -272,6 +272,34 @@ Kanboard.Board = (function() {
             filter_load_events();
             keyboard_shortcuts();
         }
+        
+        board_set_viewmode ();
     });
+    
+    jQuery(document).ajaxComplete(function() {
+	// Turn on the compact view as per stored property
+        if (localStorage.getItem("compactview") == "1") {
+            $('.extendedview').css('display', 'none');
+            $('#compactviewtoggler').prop('checked', true);
+         }
+    });
+    
+    function board_set_viewmode () {
+	// Turn on the compact view as per stored property
+        if (localStorage.getItem("compactview") == "1") {
+            $('.extendedview').css('display', 'none');
+            $('#compactviewtoggler').prop('checked', true);
+         }
+        
+        $('#compactviewtoggler').on('change', function() { 
+    	    if (this.checked) {
+    	      $('.extendedview').css('display', 'none');
+    	      localStorage.setItem("compactview", "1");
+    	    } else {
+    	      $('.extendedview').css('display', 'inline');
+    	      localStorage.setItem("compactview", "");
+    	    }
+    	});
+    }
 
 })();
