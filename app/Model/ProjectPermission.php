@@ -326,7 +326,7 @@ class ProjectPermission extends Base
      *
      * @access public
      * @param  integer   $user_id      User id
-     * @return []integer
+     * @return array
      */
     public function getMemberProjectIds($user_id)
     {
@@ -342,7 +342,7 @@ class ProjectPermission extends Base
      *
      * @access public
      * @param  integer   $user_id      User id
-     * @return []integer
+     * @return array
      */
     public function getActiveMemberProjectIds($user_id)
     {

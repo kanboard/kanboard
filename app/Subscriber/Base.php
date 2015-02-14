@@ -10,6 +10,7 @@ use Pimple\Container;
  * @package  subscriber
  * @author   Frederic Guillot
  *
+ * @property \Model\Board                  $board
  * @property \Model\Config                 $config
  * @property \Model\Comment                $comment
  * @property \Model\LastLogin              $lastLogin

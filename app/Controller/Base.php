@@ -17,11 +17,13 @@ use Symfony\Component\EventDispatcher\Event;
  * @package  controller
  * @author   Frederic Guillot
  *
+ * @property \Core\Helper                  $helper
  * @property \Core\Session                 $session
  * @property \Core\Template                $template
  * @property \Core\Paginator               $paginator
  * @property \Integration\GithubWebhook    $githubWebhook
  * @property \Integration\GitlabWebhook    $gitlabWebhook
+ * @property \Integration\BitbucketWebhook $bitbucketWebhook
  * @property \Model\Acl                    $acl
  * @property \Model\Authentication         $authentication
  * @property \Model\Action                 $action

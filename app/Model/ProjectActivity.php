@@ -62,7 +62,7 @@ class ProjectActivity extends Base
      */
     public function getProject($project_id, $limit = 50, $start = null, $end = null)
     {
-        return $this->getProjects(array($project_id), $limit, $start = null, $end = null);
+        return $this->getProjects(array($project_id), $limit, $start, $end);
     }
 
     /**
@@ -91,15 +91,15 @@ class ProjectActivity extends Base
                            ->join(User::TABLE, 'id', 'creator_id')
                            ->desc(self::TABLE.'.id')
                            ->limit($limit);
-        
+
         if(!is_null($start)){
             $query->gte('date_creation', $start);
         }
-        
+
         if(!is_null($end)){
             $query->lte('date_creation', $end);
         }
-        
+
         $events = $query->findAll();
 
         foreach ($events as &$event) {
