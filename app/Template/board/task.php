@@ -20,10 +20,6 @@
     <?php endif ?>
     </span>
 
-    <?php if ($task['score']): ?>
-        <span class="task-score"><?= $this->e($task['score']) ?></span>
-    <?php endif ?>
-
     <div class="task-board-title">
         <?= $this->a($this->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
     </div>
@@ -59,7 +55,7 @@
 
     <span class="task-board-user <?= $this->userSession->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
         <?= $this->a(
-            (! empty($task['owner_id']) ? t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned')),
+            (! empty($task['owner_id']) ? ($task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned')),
             'board',
             'changeAssignee',
             array('task_id' => $task['id'], 'project_id' => $task['project_id']),
@@ -68,13 +64,9 @@
             t('Change assignee')
         ) ?>
     </span>
-    
-    <span title="<?= t('Task age in days')?>" class="task-days-age"><?= getAgeShort ($task['date_creation']) ?></span>
-    <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= getAgeShort ($task['date_moved']) ?></span>
-    
-    <?php if ($task['score']): ?>
-        <span class="task-score"><?= $this->e($task['score']) ?></span>
-    <?php endif ?>
+
+    <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->getTaskAge($task['date_creation']) ?></span>
+    <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->getTaskAge($task['date_moved']) ?></span>
 
     <div class="task-board-title">
         <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
@@ -99,40 +91,34 @@
 </div>
 <?php endif ?>
 
-
-<?php if (! empty($task['date_due']) || ! empty($task['nb_files']) || ! empty($task['nb_comments']) || ! empty($task['description']) || ! empty($task['nb_subtasks']) || ! empty($task['nb_links'])): ?>
-<div class="task-board-footer">
-
+<div class="task-board-icons">
     <?php if (! empty($task['date_due'])): ?>
-    <div class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
-        <i class="fa fa-calendar"></i>&nbsp;<?= dt('%b %e, %Y', $task['date_due']) ?>
-    </div>
+        <span class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
+            <i class="fa fa-calendar"></i>&nbsp;<?= dt('%b %e', $task['date_due']) ?>
+        </span>
     <?php endif ?>
 
-    <div class="task-board-icons">
-        <?php if (! empty($task['nb_links'])): ?>
-            <span title="<?= t('Links') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_links'] ?> <i class="fa fa-code-fork"></i></span>
-        <?php endif ?>
-        
-        <?php if (! empty($task['nb_subtasks'])): ?>
-            <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?> <i class="fa fa-bars"></i></span>
-        <?php endif ?>
+    <?php if (! empty($task['nb_links'])): ?>
+        <span title="<?= t('Links') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_links'] ?> <i class="fa fa-code-fork"></i></span>
+    <?php endif ?>
 
-        <?php if (! empty($task['nb_files'])): ?>
-            <span title="<?= t('Attachments') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'attachments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_files'] ?> <i class="fa fa-paperclip"></i></span>
-        <?php endif ?>
+    <?php if (! empty($task['nb_subtasks'])): ?>
+        <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?> <i class="fa fa-bars"></i></span>
+    <?php endif ?>
 
-        <?php if (! empty($task['nb_comments'])): ?>
-            <span title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'comments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_comments'] ?> <i class="fa fa-comment-o"></i></span>
-        <?php endif ?>
+    <?php if (! empty($task['nb_files'])): ?>
+        <span title="<?= t('Attachments') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'attachments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_files'] ?> <i class="fa fa-paperclip"></i></span>
+    <?php endif ?>
 
-        <?php if (! empty($task['description'])): ?>
-            <span title="<?= t('Description') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
-                <i class="fa fa-file-text-o"></i>
-            </span>
-        <?php endif ?>
-    </div>
+    <?php if (! empty($task['nb_comments'])): ?>
+        <span title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'comments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_comments'] ?> <i class="fa fa-comment-o"></i></span>
+    <?php endif ?>
+
+    <?php if (! empty($task['description'])): ?>
+        <span title="<?= t('Description') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+            <i class="fa fa-file-text-o"></i>
+        </span>
+    <?php endif ?>
 </div>
-<?php endif ?>
 
 </div>

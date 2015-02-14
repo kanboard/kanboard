@@ -721,4 +721,7 @@ return array(
     'fixes' => 'corrige',
     'is fixed by' => 'est corrigée par',
     'This task' => 'Cette tâche',
+    '<1h' => '<1h',
+    '%dh' => '%dh',
+    '%b %e' => '%e %b',
 );

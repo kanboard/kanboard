@@ -719,4 +719,7 @@ return array(
     // 'fixes' => '',
     // 'is fixed by' => '',
     // 'This task' => '',
+    // '<1h' => '',
+    // '%dh' => '',
+    // '%b %e' => '',
 );
