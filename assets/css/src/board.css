@@ -16,8 +16,14 @@ a.filter-on {
 }
 
 /* board table */
-#board {
-    table-layout: fixed;
+#board-container {
+    overflow-x: auto;
+}
+
+#board td,
+#board th {
+    min-width: 230px;
+    max-width: 230px;
 }
 
 #board th a {

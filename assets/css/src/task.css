@@ -36,6 +36,11 @@ a.task-board-collapsed-title {
     font-weight: normal;
 }
 
+.task-board .dropdown {
+    float: left;
+    margin-right: 5px;
+}
+
 .task-board-title {
     margin-top: 10px;
     font-size: 1.1em;

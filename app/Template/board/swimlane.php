@@ -2,7 +2,7 @@
     <?php if (! $hide_swimlane): ?>
        <th>
 
-           <?php if ($swimlane['nb_tasks'] > 0): ?>
+           <?php if (! $not_editable && $swimlane['nb_tasks'] > 0): ?>
                 <a href="#" class="board-swimlane-toggle" data-swimlane-id="<?= $swimlane['id'] ?>">
                     <i class="fa fa-minus-circle hide-icon-swimlane-<?= $swimlane['id'] ?>"></i>
                     <i class="fa fa-plus-circle show-icon-swimlane-<?= $swimlane['id'] ?>" style="display: none"></i>
@@ -18,7 +18,7 @@
     <?php endif ?>
 
     <?php foreach ($swimlane['columns'] as $column): ?>
-    <th>
+    <th class="board-column">
         <?php if (! $not_editable): ?>
             <div class="board-add-icon">
                 <?= $this->a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'task-creation-popover', t('Add a new task')) ?>

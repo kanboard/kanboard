@@ -740,8 +740,14 @@ a.filter-on {
 }
 
 /* board table */
-#board {
-    table-layout: fixed;
+#board-container {
+    overflow-x: auto;
+}
+
+#board td,
+#board th {
+    min-width: 230px;
+    max-width: 230px;
 }
 
 #board th a {
@@ -825,6 +831,11 @@ div.task-board-recent {
 
 a.task-board-collapsed-title {
     font-weight: normal;
+}
+
+.task-board .dropdown {
+    float: left;
+    margin-right: 5px;
 }
 
 .task-board-title {
@@ -1429,10 +1440,10 @@ a.task-board-nobody {
     position: absolute;
     left: 0;
     z-index: 1000;
-    min-width: 180px;
+    min-width: 230px;
     list-style: none;
     margin: 3px 0 0 1px;
-    padding: 6px 0;    
+    padding: 6px 0;
     background-color: #fff;
     border: 1px solid #b2b2b2;
     -webkit-border-radius: 3px;

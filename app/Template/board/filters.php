@@ -29,6 +29,11 @@
                             <i class="fa fa-calendar fa-fw"></i>
                             <?= $this->a(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
                         </li>
+                        <?php if ($project['is_public']): ?>
+                        <li>
+                            <i class="fa fa-share-alt fa-fw"></i> <?= $this->a(t('Public link'), 'board', 'readonly', array('token' => $project['token']), false, '', '', true) ?>
+                        </li>
+                        <?php endif ?>
                         <?php if ($this->acl->isManagerActionAllowed($project['id'])): ?>
                         <li>
                             <i class="fa fa-line-chart fa-fw"></i>

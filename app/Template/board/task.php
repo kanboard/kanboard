@@ -22,7 +22,7 @@
                     <li><i class="fa fa-align-left"></i> <?= $this->a(t('Change description'), 'task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-description-popover') ?></li>
                     <li><i class="fa fa-pencil-square-o"></i> <?= $this->a(t('Edit this task'), 'task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-edit-popover') ?></li>
                     <li><i class="fa fa-close"></i> <?= $this->a(t('Close this task'), 'task', 'close', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'confirmation' => 'yes', 'redirect' => 'board'), true) ?></li>
-                </li>
+                </ul>
             </li>
         </ul>
 
