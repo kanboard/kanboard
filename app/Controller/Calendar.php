@@ -41,24 +41,27 @@ class Calendar extends Base
      *
      * @access public
      */
-    public function events()
+    public function project()
     {
-        $this->response->json(
-            $this->taskFilter
-                 ->create()
-                 ->filterByProject($this->request->getIntegerParam('project_id'))
-                 ->filterByCategory($this->request->getIntegerParam('category_id', -1))
-                 ->filterByOwner($this->request->getIntegerParam('owner_id', -1))
-                 ->filterByColumn($this->request->getIntegerParam('column_id', -1))
-                 ->filterBySwimlane($this->request->getIntegerParam('swimlane_id', -1))
-                 ->filterByColor($this->request->getStringParam('color_id'))
-                 ->filterByStatus($this->request->getIntegerParam('is_active', -1))
-                 ->filterByDueDateRange(
-                     $this->request->getStringParam('start'),
-                     $this->request->getStringParam('end')
-                 )
-                 ->toCalendarEvents()
-        );
+        $project_id = $this->request->getIntegerParam('project_id');
+        $start = $this->request->getStringParam('start');
+        $end = $this->request->getStringParam('end');
+
+        $due_tasks = $this->taskFilter
+            ->create()
+            ->filterByProject($project_id)
+            ->filterByCategory($this->request->getIntegerParam('category_id', -1))
+            ->filterByOwner($this->request->getIntegerParam('owner_id', -1))
+            ->filterByColumn($this->request->getIntegerParam('column_id', -1))
+            ->filterBySwimlane($this->request->getIntegerParam('swimlane_id', -1))
+            ->filterByColor($this->request->getStringParam('color_id'))
+            ->filterByStatus($this->request->getIntegerParam('is_active', -1))
+            ->filterByDueDateRange($start, $end)
+            ->toCalendarEvents();
+
+        $subtask_timeslots = $this->subtaskTimeTracking->getProjectCalendarEvents($project_id, $start, $end);
+
+        $this->response->json(array_merge($due_tasks, $subtask_timeslots));
     }
 
     /**
@@ -69,18 +72,19 @@ class Calendar extends Base
     public function user()
     {
         $user_id = $this->request->getIntegerParam('user_id');
+        $start = $this->request->getStringParam('start');
+        $end = $this->request->getStringParam('end');
 
-        $this->response->json(
-            $this->taskFilter
-                 ->create()
-                 ->filterByOwner($user_id)
-                 ->filterByStatus(TaskModel::STATUS_OPEN)
-                 ->filterByDueDateRange(
-                     $this->request->getStringParam('start'),
-                     $this->request->getStringParam('end')
-                 )
-                 ->toCalendarEvents()
-        );
+        $due_tasks = $this->taskFilter
+                          ->create()
+                          ->filterByOwner($user_id)
+                          ->filterByStatus(TaskModel::STATUS_OPEN)
+                          ->filterByDueDateRange($start, $end)
+                          ->toCalendarEvents();
+
+        $subtask_timeslots = $this->subtaskTimeTracking->getUserCalendarEvents($user_id, $start, $end);
+
+        $this->response->json(array_merge($due_tasks, $subtask_timeslots));
     }
 
     /**

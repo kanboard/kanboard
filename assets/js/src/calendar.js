@@ -4,7 +4,7 @@ Kanboard.Calendar = (function() {
 
     // Save the new due date for a moved task
     function move_calendar_event(calendar_event)
-    {    
+    {
         $.ajax({
             cache: false,
             url: $("#calendar").data("save-url"),
@@ -22,12 +22,12 @@ Kanboard.Calendar = (function() {
     function show_user_calendar()
     {
         var calendar = $("#user-calendar");
-        var translations = calendar.data("translations");
 
         calendar.fullCalendar({
             lang: $("body").data("js-lang"),
             editable: false,
             eventLimit: true,
+            height: Kanboard.Exists("dashboard-calendar") ? 500 : "auto",
             defaultView: "agendaWeek",
             header: {
                 left: 'prev,next today',
@@ -39,7 +39,7 @@ Kanboard.Calendar = (function() {
     }
 
     // Refresh the calendar events
-    function refresh_user_calendar(filters)
+    function refresh_user_calendar()
     {
         var calendar = $("#user-calendar");
         var url = calendar.data("check-url");
@@ -47,7 +47,7 @@ Kanboard.Calendar = (function() {
             "start": calendar.fullCalendar('getView').start.format(),
             "end": calendar.fullCalendar('getView').end.format(),
             "user_id": calendar.data("user-id")
-        }
+        };
 
         for (var key in params) {
             url += "&" + key + "=" + params[key];
@@ -55,7 +55,7 @@ Kanboard.Calendar = (function() {
 
         $.getJSON(url, function(events) {
             calendar.fullCalendar('removeEvents');
-            calendar.fullCalendar('addEventSource', events);         
+            calendar.fullCalendar('addEventSource', events);
             calendar.fullCalendar('rerenderEvents');
         });
     }
@@ -64,13 +64,12 @@ Kanboard.Calendar = (function() {
     function show_project_calendar()
     {
         var calendar = $("#calendar");
-        var translations = calendar.data("translations");
 
         calendar.fullCalendar({
             lang: $("body").data("js-lang"),
             editable: true,
             eventLimit: true,
-            defaultView: "agendaWeek",
+            defaultView: "month",
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -89,7 +88,7 @@ Kanboard.Calendar = (function() {
         var params = {
             "start": calendar.fullCalendar('getView').start.format(),
             "end": calendar.fullCalendar('getView').end.format()
-        }
+        };
 
         jQuery.extend(params, filters);
 
@@ -99,7 +98,7 @@ Kanboard.Calendar = (function() {
 
         $.getJSON(url, function(events) {
             calendar.fullCalendar('removeEvents');
-            calendar.fullCalendar('addEventSource', events);         
+            calendar.fullCalendar('addEventSource', events);
             calendar.fullCalendar('rerenderEvents');
         });
     }
@@ -108,7 +107,7 @@ Kanboard.Calendar = (function() {
     function load_project_filters()
     {
         var filters = Kanboard.GetStorageItem(filter_storage_key);
-        
+
         if (filters !== "") {
             filters = JSON.parse(filters);
 
@@ -127,10 +126,10 @@ Kanboard.Calendar = (function() {
     {
         var filters = {};
 
-        $('.calendar-filter').each(function(index, element) {
+        $('.calendar-filter').each(function() {
             filters[$(this).attr("name")] = $(this).val();
         });
-        
+
         Kanboard.SetStorageItem(filter_storage_key, JSON.stringify(filters));
         refresh_project_calendar(filters);
     }

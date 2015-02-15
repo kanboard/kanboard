@@ -156,7 +156,7 @@ var Kanboard = (function() {
                     cache: false,
                     url: $("body").data("status-url"),
                     statusCode: {
-                        401: function(data) {
+                        401: function() {
                             window.location = $("body").data("login-url");
                         }
                     }
@@ -195,7 +195,7 @@ var Kanboard = (function() {
 
             // Tooltip for column description
             $(".column-tooltip").tooltip({
-                content: function(e) {
+                content: function() {
                     return '<div class="markdown">' + $(this).attr("title") + '</div>';
                 }
             });

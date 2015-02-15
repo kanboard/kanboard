@@ -39,7 +39,7 @@ class Acl extends Base
         'subtask' => '*',
         'task' => '*',
         'tasklink' => '*',
-        'calendar' => array('show', 'events', 'save'),
+        'calendar' => array('show', 'project', 'save'),
     );
 
     /**
