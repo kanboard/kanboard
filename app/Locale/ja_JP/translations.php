@@ -724,4 +724,9 @@ return array(
     // '%b %e' => '',
     // 'Expand tasks' => '',
     // 'Collapse tasks' => '',
+    // 'Expand/collapse tasks' => '',
+    // 'Close dialog box' => '',
+    // 'Submit a form' => '',
+    // 'Board view' => '',
+    // 'Keyboard shortcuts' => '',
 );

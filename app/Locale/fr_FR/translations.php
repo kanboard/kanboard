@@ -726,4 +726,9 @@ return array(
     '%b %e' => '%e %b',
     'Expand tasks' => 'Déplier les tâches',
     'Collapse tasks' => 'Replier les tâches',
+    'Expand/collapse tasks' => 'Plier/déplier les tâches',
+    'Close dialog box' => 'Fermer une boite de dialogue',
+    'Submit a form' => 'Enregistrer un formulaire',
+    'Board view' => 'Page du tableau',
+    'Keyboard shortcuts' => 'Raccourcis clavier',
 );

@@ -46,7 +46,7 @@ var Kanboard = (function() {
                 $("#popover-content").click(function(e) {
                     e.stopPropagation();
                 });
-                
+
                 $(".close-popover").click(function(e) {
                     e.preventDefault();
                     $('#popover-container').remove();
@@ -184,10 +184,10 @@ var Kanboard = (function() {
             $(".file-popover").click(Kanboard.Popover);
 
             // Keyboard shortcuts
-            Mousetrap.bind("ctrl+enter", function() {
+            Mousetrap.bind("mod+enter", function() {
                 $("form").submit();
             });
-            
+
             // Tooltip for column description
             $(".column-tooltip").tooltip({
                 content: function(e) {
@@ -201,7 +201,7 @@ var Kanboard = (function() {
         },
 
         InitAfterAjax: function() {
-            
+
             // Datepicker
             $(".form-date").datepicker({
                 showOtherMonths: true,
