@@ -731,4 +731,5 @@ return array(
     'Submit a form' => 'Enregistrer un formulaire',
     'Board view' => 'Page du tableau',
     'Keyboard shortcuts' => 'Raccourcis clavier',
+    'Open board switcher' => 'Ouvrir le sélecteur de tableau',
 );

@@ -188,6 +188,11 @@ var Kanboard = (function() {
                 $("form").submit();
             });
 
+            Mousetrap.bind("b", function(e) {
+                e.preventDefault();
+                $('#board-selector').trigger('chosen:open');
+            });
+
             // Tooltip for column description
             $(".column-tooltip").tooltip({
                 content: function(e) {

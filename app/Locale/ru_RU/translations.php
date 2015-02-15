@@ -729,4 +729,5 @@ return array(
     // 'Submit a form' => '',
     // 'Board view' => '',
     // 'Keyboard shortcuts' => '',
+    // 'Open board switcher' => '',
 );
