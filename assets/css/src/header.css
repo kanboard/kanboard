@@ -42,14 +42,23 @@ nav .active a {
     text-decoration: underline;
 }
 
-/* home icon */
-.home-link {
-    color: #eee;
+/* logo */
+.logo {
+    opacity: 0.3;
+    color: #d40000;
 }
 
-.home-link:focus,
-.home-link:hover {
-    color: #ccc;
+.logo span {
+    color: #333;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logo:focus span,
+.logo:hover span {
+    color: #d40000;
 }
 
 /* page header */

@@ -29,13 +29,13 @@
           data-login-url="<?= $this->u('user', 'login') ?>"
           data-timezone="<?= $this->getTimezone() ?>"
           data-js-lang="<?= $this->jsLang() ?>">
-          
+
     <?php if (isset($no_layout) && $no_layout): ?>
         <?= $content_for_layout ?>
     <?php else: ?>
         <header>
             <nav>
-                <h1><?= $this->a('<i class="fa fa-home fa-fw"></i>', 'app', 'index', array(), false, 'home-link', t('Dashboard')).' '.$this->summary($this->e($title)) ?></h1>
+                <h1><?= $this->a('K<span>B</span>', 'app', 'index', array(), false, 'logo', t('Dashboard')).' '.$this->summary($this->e($title)) ?></h1>
                 <ul>
                     <?php if (isset($board_selector) && ! empty($board_selector)): ?>
                     <li>
