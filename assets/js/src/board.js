@@ -16,6 +16,10 @@ Kanboard.Board = (function() {
                 Kanboard.InitAfterAjax
             );
         });
+
+        Mousetrap.bind("s", function() {
+            stack_toggle();
+        });
     }
 
     // Collapse/Expand tasks
@@ -24,13 +28,13 @@ Kanboard.Board = (function() {
         $(".filter-expand-link").click(function(e) {
             e.preventDefault();
             stack_expand();
-            Kanboard.SetStorageItem(stack_key(), "expanded")
+            Kanboard.SetStorageItem(stack_key(), "expanded");
         });
 
         $(".filter-collapse-link").click(function(e) {
             e.preventDefault();
             stack_collapse();
-            Kanboard.SetStorageItem(stack_key(), "collapsed")
+            Kanboard.SetStorageItem(stack_key(), "collapsed");
         });
 
         stack_show();
@@ -58,6 +62,20 @@ Kanboard.Board = (function() {
 
         $(".filter-expand").hide();
         $(".task-board-expanded").show();
+    }
+
+    function stack_toggle()
+    {
+        var state = Kanboard.GetStorageItem(stack_key()) || "expanded";
+
+        if (state === "expanded") {
+            stack_collapse();
+            Kanboard.SetStorageItem(stack_key(), "collapsed");
+        }
+        else {
+            stack_expand();
+            Kanboard.SetStorageItem(stack_key(), "expanded");
+        }
     }
 
     function stack_show()

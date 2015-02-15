@@ -6,6 +6,14 @@
                     <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
                     <ul>
                         <li>
+                            <span class="filter-collapse">
+                                <i class="fa fa-compress fa-fw"></i> <a href="#" class="filter-collapse-link"><?= t('Collapse tasks') ?></a>
+                            </span>
+                            <span class="filter-expand" style="display: none">
+                                <i class="fa fa-expand fa-fw"></i> <a href="#" class="filter-expand-link"><?= t('Expand tasks') ?></a>
+                            </span>
+                        </li>
+                        <li>
                             <i class="fa fa-search fa-fw"></i>
                             <?= $this->a(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
                         </li>
@@ -45,14 +53,6 @@
         </li>
         <li>
             <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>
-        </li>
-        <li>
-            <span class="filter-collapse">
-                <i class="fa fa-compress"></i> <a href="#" class="filter-collapse-link"><?= t('Collapse tasks') ?></a>
-            </span>
-            <span class="filter-expand" style="display: none">
-                <i class="fa fa-expand"></i> <a href="#" class="filter-expand-link"><?= t('Expand tasks') ?></a>
-            </span>
         </li>
     </ul>
 </div>
