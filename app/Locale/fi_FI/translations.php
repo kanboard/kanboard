@@ -730,4 +730,5 @@ return array(
     // 'Board view' => '',
     // 'Keyboard shortcuts' => '',
     // 'Open board switcher' => '',
+    // 'Application' => '',
 );

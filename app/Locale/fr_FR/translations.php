@@ -732,4 +732,5 @@ return array(
     'Board view' => 'Page du tableau',
     'Keyboard shortcuts' => 'Raccourcis clavier',
     'Open board switcher' => 'Ouvrir le sélecteur de tableau',
+    'Application' => 'Application',
 );
