@@ -44,8 +44,14 @@
             ) ?>
         </span>
 
-        <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->getTaskAge($task['date_creation']) ?></span>
-        <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->getTaskAge($task['date_moved']) ?></span>
+        <?php if ($task['score']): ?>
+            <span class="task-score"><?= $this->e($task['score']) ?></span>
+        <?php endif ?>
+
+        <div class="task-board-days">
+            <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->getTaskAge($task['date_creation']) ?></span>
+            <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->getTaskAge($task['date_moved']) ?></span>
+        </div>
 
         <div class="task-board-title">
             <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>

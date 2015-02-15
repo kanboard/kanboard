@@ -44,6 +44,10 @@
     font-size: 1.1em;
 }
 
+.page-header li.dropit-trigger {
+    padding: 0;
+}
+
 td li.dropit-trigger {
     margin: 0;
 }

@@ -1,4 +1,8 @@
 /* board filters */
+.board-filters {
+    font-size: 0.9em;
+}
+
 a.filter-on {
     font-weight: bold;
     color: #333;

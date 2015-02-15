@@ -43,6 +43,7 @@ a.task-board-collapsed-title {
 
 .task-board-title {
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 1.1em;
 }
 
@@ -109,35 +110,54 @@ a.task-board-nobody {
     color: #000;
 }
 
-.task-board-date-overdue {
+span.task-board-date-overdue {
     color: #D90000;
+    opacity: 1.0;
 }
 
 /* task score */
 .task-score {
     font-weight: bold;
     position: absolute;
+}
+
+.task-board .task-score {
     font-size: 1.6em;
-    right: 5px;
+    left: 2px;
+    bottom: 0;
+}
+
+.task-show-details .task-score {
     bottom: 5px;
+    right: 5px;
+    font-size: 2em;
 }
 
 /* task age */
-.task-days-age {
+.task-board-days {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    text-align: right;
+    opacity: 0.5;
     font-size: 0.8em;
-    border: #888 1px solid;
-    border-radius:2px;
+}
+
+.task-board-days:hover {
+    opacity: 1.0;
+}
+
+.task-days-age {
+    border: #666 1px solid;
     padding: 1px 4px 1px 2px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
 
 .task-days-incolumn {
-    font-size: 0.8em;
-    border: #888 1px solid;
+    border: #666 1px solid;
     border-left: none;
     margin-left: -5px;
-    border-radius:2px;
     padding: 1px 2px 1px 4px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -162,12 +182,6 @@ a.task-board-nobody {
 .task-show-details li {
     margin-left: 25px;
     list-style-type: circle;
-}
-
-.task-show-details .task-score {
-    font-size: 1.9em;
-    right: 10px;
-    bottom: 5px;
 }
 
 .task-show-section {
