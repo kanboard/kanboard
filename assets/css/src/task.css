@@ -26,6 +26,16 @@ div.task-board-recent {
     text-decoration: underline;
 }
 
+.task-board-collapsed {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+a.task-board-collapsed-title {
+    font-weight: normal;
+}
+
 .task-board-title {
     margin-top: 10px;
     font-size: 1.1em;

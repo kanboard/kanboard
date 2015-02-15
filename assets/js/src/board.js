@@ -18,6 +18,60 @@ Kanboard.Board = (function() {
         });
     }
 
+    // Collapse/Expand tasks
+    function stack_load_events()
+    {
+        $(".filter-expand-link").click(function(e) {
+            e.preventDefault();
+            stack_expand();
+            Kanboard.SetStorageItem(stack_key(), "expanded")
+        });
+
+        $(".filter-collapse-link").click(function(e) {
+            e.preventDefault();
+            stack_collapse();
+            Kanboard.SetStorageItem(stack_key(), "collapsed")
+        });
+
+        stack_show();
+    }
+
+    function stack_key()
+    {
+        var projectId = $('#board').data('project-id');
+        return "board_stacking_" + projectId;
+    }
+
+    function stack_collapse()
+    {
+        $(".filter-collapse").hide();
+        $(".task-board-collapsed").show();
+
+        $(".filter-expand").show();
+        $(".task-board-expanded").hide();
+    }
+
+    function stack_expand()
+    {
+        $(".filter-collapse").show();
+        $(".task-board-collapsed").hide();
+
+        $(".filter-expand").hide();
+        $(".task-board-expanded").show();
+    }
+
+    function stack_show()
+    {
+        var state = Kanboard.GetStorageItem(stack_key()) || "expanded";
+
+        if (state === "expanded") {
+            stack_expand();
+        }
+        else {
+            stack_collapse();
+        }
+    }
+
     // Setup the board
     function board_load_events()
     {
@@ -178,6 +232,7 @@ Kanboard.Board = (function() {
                 Kanboard.InitAfterAjax();
                 board_load_events();
                 filter_apply();
+                stack_show();
             }
         });
     }
@@ -197,6 +252,7 @@ Kanboard.Board = (function() {
                         board_unload_events();
                         board_load_events();
                         filter_apply();
+                        stack_show();
                     }
                 }
             });
@@ -232,7 +288,7 @@ Kanboard.Board = (function() {
                 item.style.opacity = "0.2";
             }
         });
-        
+
         // Save filter settings
 		Kanboard.SetStorageItem("board_filter_" + projectId + "_form-user_id", selectedUserId);
 		Kanboard.SetStorageItem("board_filter_" + projectId + "_form-category_id", selectedCategoryId);
@@ -251,17 +307,17 @@ Kanboard.Board = (function() {
             filter_apply();
             e.preventDefault();
         });
-        
+
         // Get and set filters from localStorage
 		$("#form-user_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-user_id") || -1);
 		$("#form-category_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-category_id") || -1);
-		
+
 		if (+Kanboard.GetStorageItem("board_filter_" + projectId + "_filter-due-date")) {
 			$("#filter-due-date").addClass("filter-on");
 		} else {
 			$("#filter-due-date").removeClass("filter-on");
 		}
-		
+
     	filter_apply();
     }
 
@@ -270,6 +326,7 @@ Kanboard.Board = (function() {
         if (Kanboard.Exists("board")) {
             board_load_events();
             filter_load_events();
+            stack_load_events();
             keyboard_shortcuts();
         }
     });

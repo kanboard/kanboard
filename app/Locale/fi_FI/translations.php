@@ -722,4 +722,6 @@ return array(
     // '<1h' => '',
     // '%dh' => '',
     // '%b %e' => '',
+    // 'Expand tasks' => '',
+    // 'Collapse tasks' => '',
 );

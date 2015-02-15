@@ -1,4 +1,3 @@
-
 <?php if (isset($not_editable)): ?>
     <table id="board">
 <?php else: ?>

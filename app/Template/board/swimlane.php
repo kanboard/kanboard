@@ -26,13 +26,13 @@
         <?php endif ?>
 
         <?= $this->e($column['title']) ?>
-        
+
         <?php if (! empty($column['description'])): ?>
-            <span class="column-tooltip pull-right" title="<?= $this->markdown($column['description']) ?>">     
+            <span class="column-tooltip pull-right" title="<?= $this->markdown($column['description']) ?>">
                 <i class="fa fa-info-circle"></i>
             </span>
         <?php endif ?>
-        
+
         <?php if ($column['task_limit']): ?>
             <span title="<?= t('Task limit') ?>" class="task-limit">
                 (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>/<?= $this->e($column['task_limit']) ?>)
@@ -65,7 +65,7 @@
         <?php endif ?>
 
         <?php foreach ($column['tasks'] as $task): ?>
-            <?= $this->render('board/task', array(
+            <?= $this->render($not_editable ? 'board/task_public' : 'board/task', array(
                 'project' => $project,
                 'task' => $task,
                 'categories' => $categories,

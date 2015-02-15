@@ -724,4 +724,6 @@ return array(
     '<1h' => '<1h',
     '%dh' => '%dh',
     '%b %e' => '%e %b',
+    'Expand tasks' => 'Déplier les tâches',
+    'Collapse tasks' => 'Replier les tâches',
 );

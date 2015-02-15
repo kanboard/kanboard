@@ -46,5 +46,13 @@
         <li>
             <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>
         </li>
+        <li>
+            <span class="filter-collapse">
+                <i class="fa fa-compress"></i> <a href="#" class="filter-collapse-link"><?= t('Collapse tasks') ?></a>
+            </span>
+            <span class="filter-expand" style="display: none">
+                <i class="fa fa-expand"></i> <a href="#" class="filter-expand-link"><?= t('Expand tasks') ?></a>
+            </span>
+        </li>
     </ul>
 </div>
