@@ -46,5 +46,8 @@
         <li>
             <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>
         </li>
+        <li>
+            <a href="#" id="filter-recent"><?= t('Filter recently updated') ?></a>
+        </li>
     </ul>
 </div>
