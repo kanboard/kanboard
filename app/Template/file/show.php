@@ -11,7 +11,7 @@
             <?= $this->a($this->e($file['name']), 'file', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
             <span class="task-show-file-actions">
                 <?php if ($file['is_image']): ?>
-                    <?= $this->a(t('open'), 'file', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'file-popover') ?>,
+                    <?= $this->a(t('open'), 'file', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>,
                 <?php endif ?>
                 <?= $this->a(t('remove'), 'file', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
             </span>

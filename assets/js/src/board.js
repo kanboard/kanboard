@@ -4,6 +4,9 @@ Kanboard.Board = (function() {
 
     function on_popover(e)
     {
+        e.preventDefault();
+        e.stopPropagation();
+
         Kanboard.Popover(e, Kanboard.InitAfterAjax);
     }
 
@@ -109,18 +112,13 @@ Kanboard.Board = (function() {
             }
         });
 
-        // Assignee change
-        $(".assignee-popover").click(on_popover);
+        // Task popover
+        $("#board").on("click", ".task-board-popover", on_popover);
 
-        // Category change
-        $(".category-popover").click(on_popover);
-
-        // Task edit popover
-        $(".task-edit-popover").click(on_popover);
-        $(".task-creation-popover").click(on_popover);
-
-        // Description popover
-        $(".task-description-popover").click(on_popover);
+        // Redirect to the task details page
+        $("#board").on("click", ".task-board", function() {
+            window.location = $(this).data("task-url");
+        });
 
         // Tooltips for tasks
         $(".task-board-tooltip").tooltip({
@@ -205,13 +203,6 @@ Kanboard.Board = (function() {
             }, 100);
         });
 
-        // Redirect to the task details page
-        $("[data-task-url]").each(function() {
-            $(this).click(function() {
-                window.location = $(this).attr("data-task-url");
-            });
-        });
-
         // Automatic refresh
         var interval = parseInt($("#board").attr("data-check-interval"));
 
@@ -223,7 +214,6 @@ Kanboard.Board = (function() {
     // Stop events
     function board_unload_events()
     {
-        $("[data-task-url]").off();
         clearInterval(checkInterval);
     }
 

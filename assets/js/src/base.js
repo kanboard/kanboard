@@ -178,11 +178,6 @@ var Kanboard = (function() {
             // Check the session every 60s
             window.setInterval(Kanboard.CheckSession, 60000);
 
-            $(".popover-subtask-restriction").click(Kanboard.Popover);
-
-            // Image preview for attachments
-            $(".file-popover").click(Kanboard.Popover);
-
             // Keyboard shortcuts
             Mousetrap.bind("mod+enter", function() {
                 $("form").submit();
@@ -206,6 +201,9 @@ var Kanboard = (function() {
         },
 
         InitAfterAjax: function() {
+
+            // Popover
+            $(document).on("click", ".popover", Kanboard.Popover);
 
             // Datepicker
             $(".form-date").datepicker({

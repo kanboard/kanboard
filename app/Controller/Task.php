@@ -251,6 +251,7 @@ class Task extends Base
     public function close()
     {
         $task = $this->getTask();
+        $redirect = $this->request->getStringParam('redirect');
 
         if ($this->request->getStringParam('confirmation') === 'yes') {
 
@@ -262,15 +263,23 @@ class Task extends Base
                 $this->session->flashError(t('Unable to close this task.'));
             }
 
-            if ($this->request->getStringParam('redirect') === 'board') {
+            if ($redirect === 'board') {
                 $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
             }
 
             $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
 
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->render('task/close', array(
+                'task' => $task,
+                'redirect' => $redirect,
+            )));
+        }
+
         $this->response->html($this->taskLayout('task/close', array(
             'task' => $task,
+            'redirect' => $redirect,
         )));
     }
 

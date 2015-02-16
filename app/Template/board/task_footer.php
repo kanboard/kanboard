@@ -7,7 +7,7 @@
             'changeCategory',
             array('task_id' => $task['id'], 'project_id' => $task['project_id']),
             false,
-            'category-popover',
+            'task-board-popover',
             t('Change category')
         ) ?>
     </span>
