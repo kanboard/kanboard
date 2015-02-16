@@ -15,7 +15,7 @@ Kanboard.Board = (function() {
         Mousetrap.bind("n", function() {
 
             Kanboard.OpenPopover(
-                $(".task-creation-popover").attr('href'),
+                $("#board").data("task-creation-url"),
                 Kanboard.InitAfterAjax
             );
         });

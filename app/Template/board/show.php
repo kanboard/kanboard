@@ -7,6 +7,7 @@
                data-check-interval="<?= $board_private_refresh_interval ?>"
                data-save-url="<?= $this->u('board', 'save', array('project_id' => $project['id'])) ?>"
                data-check-url="<?= $this->u('board', 'check', array('project_id' => $project['id'], 'timestamp' => time())) ?>"
+               data-task-creation-url="<?= $this->u('task', 'create', array('project_id' => $project['id'])) ?>"
         >
     <?php endif ?>
 

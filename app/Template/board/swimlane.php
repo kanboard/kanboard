@@ -21,7 +21,7 @@
     <th class="board-column">
         <?php if (! $not_editable): ?>
             <div class="board-add-icon">
-                <?= $this->a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'task-creation-popover', t('Add a new task')) ?>
+                <?= $this->a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'task-board-popover', t('Add a new task')) ?>
             </div>
         <?php endif ?>
 

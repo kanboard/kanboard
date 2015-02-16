@@ -939,7 +939,6 @@ span.task-board-date-overdue {
     position: absolute;
     right: 5px;
     top: 5px;
-    text-align: right;
     opacity: 0.5;
     font-size: 0.8em;
 }

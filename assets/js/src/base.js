@@ -179,7 +179,7 @@ var Kanboard = (function() {
             window.setInterval(Kanboard.CheckSession, 60000);
 
             // Keyboard shortcuts
-            Mousetrap.bind("mod+enter", function() {
+            Mousetrap.bindGlobal("mod+enter", function() {
                 $("form").submit();
             });
 
