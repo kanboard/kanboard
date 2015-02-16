@@ -218,18 +218,18 @@ Kanboard.Board = (function() {
             var categoryId = item.getAttribute("data-category-id");
 
             if (ownerId != selectedUserId && selectedUserId != -1) {
-                item.style.opacity = "0.2";
+                item.style.display = "none";
             }
             else {
-                item.style.opacity = "1.0";
+                item.style.display = "block";
             }
 
             if (filterDueDate && (dueDate == "" || dueDate == "0")) {
-                item.style.opacity = "0.2";
+                item.style.display = "none";
             }
 
             if (categoryId != selectedCategoryId && selectedCategoryId != -1) {
-                item.style.opacity = "0.2";
+                item.style.display = "none";
             }
         });
         
