@@ -169,7 +169,13 @@ class SubtaskTimeTracking extends Base
         $start_column = $this->db->escapeIdentifier('start');
         $end_column = $this->db->escapeIdentifier('end');
 
-        return "(($start_column >= '$start_time' AND $start_column <= '$end_time') OR ($start_column <= '$start_time' AND $end_column >= '$start_time'))";
+        $conditions = array(
+            "($start_column >= '$start_time' AND $start_column <= '$end_time')",
+            "($start_column <= '$start_time' AND $end_column >= '$start_time')",
+            "($start_column <= '$start_time' AND $end_column = '0')",
+        );
+
+        return '('.implode(' OR ', $conditions).')';
     }
 
     /**
