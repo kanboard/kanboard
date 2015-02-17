@@ -731,4 +731,6 @@ return array(
     // 'Keyboard shortcuts' => '',
     // 'Open board switcher' => '',
     // 'Application' => '',
+    // 'Filter recently updated' => '',
+    // 'since %B %e, %Y at %k:%M %p' => '',
 );

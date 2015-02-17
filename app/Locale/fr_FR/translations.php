@@ -733,4 +733,6 @@ return array(
     'Keyboard shortcuts' => 'Raccourcis clavier',
     'Open board switcher' => 'Ouvrir le sélecteur de tableau',
     'Application' => 'Application',
+    'Filter recently updated' => 'Filtrer récents',
+    'since %B %e, %Y at %k:%M %p' => 'depuis le %d/%m/%Y à %H:%M',
 );

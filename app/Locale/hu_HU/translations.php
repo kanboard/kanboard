@@ -731,4 +731,6 @@ return array(
     'Keyboard shortcuts' => 'Billentyű kombináció',
     'Open board switcher' => 'Tábla választó lenyitása',
     // 'Application' => '',
+    // 'Filter recently updated' => '',
+    // 'since %B %e, %Y at %k:%M %p' => '',
 );
