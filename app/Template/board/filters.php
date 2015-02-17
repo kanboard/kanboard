@@ -49,16 +49,17 @@
             </ul>
         </li>
         <li>
-            <?= $this->formSelect('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"')) ?>
+            <?= $this->formSelect('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
-            <?= $this->formSelect('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"')) ?>
+            <?= $this->formSelect('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
-            <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>
-        </li>
-        <li>
-            <a href="#" id="filter-recent"><?= t('Filter recently updated') ?></a>
+            <select id="more-filters" multiple data-placeholder="<?= t('More filters') ?>" class="apply-filters chosen-select">
+                <option value=""></option>
+                <option value="filter-due-date"><?= t('Filter by due date') ?></option>
+                <option value="filter-recent"><?= t('Filter recently updated') ?></option>
+            </select>
         </li>
     </ul>
 </div>

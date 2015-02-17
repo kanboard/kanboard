@@ -272,8 +272,8 @@ Kanboard.Board = (function() {
     {
         var selectedUserId = $("#form-user_id").val();
         var selectedCategoryId = $("#form-category_id").val();
-        var filterDueDate = $("#filter-due-date").hasClass("filter-on");
-        var filterRecent = $("#filter-recent").hasClass("filter-on");
+        var filterDueDate = $("#more-filters option[value=filter-due-date]").is(":selected")
+        var filterRecent = $("#more-filters option[value=filter-recent]").is(":selected")
 	    var projectId = $('#board').data('project-id');
 
         $("[data-task-id]").each(function(index, item) {
@@ -319,28 +319,16 @@ Kanboard.Board = (function() {
             width: "180px"
         });
 
-        $("#form-user_id").change(function(e) {
-            filter_apply();
-        });
-
         $("#form-category_id").chosen({
             width: "200px"
         });
 
-        $("#form-category_id").change(function(e) {
-            filter_apply();
+        $("#more-filters").chosen({
+            width: "30%"
         });
 
-        $("#filter-due-date").click(function(e) {
-            $(this).toggleClass("filter-on");
+        $(".apply-filters").change(function(e) {
             filter_apply();
-            e.preventDefault();
-        });
-
-        $("#filter-recent").click(function(e) {
-            $(this).toggleClass("filter-on");
-            filter_apply();
-            e.preventDefault();
         });
 
         // Get and set filters from localStorage
@@ -351,16 +339,14 @@ Kanboard.Board = (function() {
         $("#form-category_id").trigger("chosen:updated");
 
         if (+Kanboard.GetStorageItem("board_filter_" + projectId + "_filter-due-date")) {
-            $("#filter-due-date").addClass("filter-on");
-        } else {
-            $("#filter-due-date").removeClass("filter-on");
+            $("#more-filters option[value=filter-due-date]").attr("selected", true);
         }
 
         if (+Kanboard.GetStorageItem("board_filter_" + projectId + "_filter-recent")) {
-            $("#filter-recent").addClass("filter-on");
-        } else {
-            $("#filter-recent").removeClass("filter-on");
+            $("#more-filters option[value=filter-recent]").attr("selected", true);
         }
+
+        $("#more-filters").trigger("chosen:updated");
 
     	filter_apply();
     }

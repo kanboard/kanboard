@@ -278,7 +278,7 @@ return array(
     'Remember Me' => 'Connexion automatique',
     'Creation date' => 'Date de création',
     'Filter by user' => 'Filtrer par utilisateur',
-    'Filter by due date' => 'Filtrer par date d\'échéance',
+    'Filter by due date' => 'Avec une date d\'échéance',
     'Everybody' => 'Tout le monde',
     'Open' => 'Ouvert',
     'Closed' => 'Fermé',
@@ -733,6 +733,7 @@ return array(
     'Keyboard shortcuts' => 'Raccourcis clavier',
     'Open board switcher' => 'Ouvrir le sélecteur de tableau',
     'Application' => 'Application',
-    'Filter recently updated' => 'Filtrer récents',
+    'Filter recently updated' => 'Récemment modifié',
     'since %B %e, %Y at %k:%M %p' => 'depuis le %d/%m/%Y à %H:%M',
+    'More filters' => 'Plus de filtres',
 );

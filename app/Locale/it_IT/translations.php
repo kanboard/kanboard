@@ -733,4 +733,5 @@ return array(
     // 'Application' => '',
     // 'Filter recently updated' => '',
     // 'since %B %e, %Y at %k:%M %p' => '',
+    // 'More filters' => '',
 );
