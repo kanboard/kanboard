@@ -284,18 +284,18 @@ Kanboard.Board = (function() {
             var recent = item.matches(".task-board-recent");
 
             if (ownerId != selectedUserId && selectedUserId != -1) {
-                item.style.opacity = "0.2";
+                item.style.display = "none";
             }
             else {
-                item.style.opacity = "1.0";
+                item.style.display = "block";
             }
 
             if (filterDueDate && (dueDate == "" || dueDate == "0")) {
-                item.style.opacity = "0.2";
+                item.style.display = "none";
             }
 
             if (categoryId != selectedCategoryId && selectedCategoryId != -1) {
-                item.style.opacity = "0.2";
+                item.style.display = "none";
             }
 
             if (filterRecent && ! recent) {
