@@ -727,7 +727,7 @@ nav .active a {
     font-size: 0.9em;
 }
 
-a.filter-on {
+.filter-on {
     font-weight: bold;
     color: #333;
 }

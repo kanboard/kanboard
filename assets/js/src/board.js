@@ -273,6 +273,7 @@ Kanboard.Board = (function() {
         var selectedUserId = $("#form-user_id").val();
         var selectedCategoryId = $("#form-category_id").val();
         var filterDueDate = $("#filter-due-date").hasClass("filter-on");
+        var filterRecent = $("#filter-recent").hasClass("filter-on");
 	    var projectId = $('#board').data('project-id');
 
         $("[data-task-id]").each(function(index, item) {
@@ -280,6 +281,7 @@ Kanboard.Board = (function() {
             var ownerId = item.getAttribute("data-owner-id");
             var dueDate = item.getAttribute("data-due-date");
             var categoryId = item.getAttribute("data-category-id");
+            var recent = item.matches(".task-board-recent");
 
             if (ownerId != selectedUserId && selectedUserId != -1) {
                 item.style.opacity = "0.2";
@@ -295,12 +297,17 @@ Kanboard.Board = (function() {
             if (categoryId != selectedCategoryId && selectedCategoryId != -1) {
                 item.style.opacity = "0.2";
             }
+
+            if (filterRecent && ! recent) {
+                item.style.opacity = "0.2";
+            }
         });
 
         // Save filter settings
-		Kanboard.SetStorageItem("board_filter_" + projectId + "_form-user_id", selectedUserId);
-		Kanboard.SetStorageItem("board_filter_" + projectId + "_form-category_id", selectedCategoryId);
-		Kanboard.SetStorageItem("board_filter_" + projectId + "_filter-due-date", ~~(filterDueDate));
+        Kanboard.SetStorageItem("board_filter_" + projectId + "_form-user_id", selectedUserId);
+        Kanboard.SetStorageItem("board_filter_" + projectId + "_form-category_id", selectedCategoryId);
+        Kanboard.SetStorageItem("board_filter_" + projectId + "_filter-due-date", ~~(filterDueDate));
+        Kanboard.SetStorageItem("board_filter_" + projectId + "_filter-recent", ~~(filterRecent));
     }
 
     // Load filter events
@@ -308,23 +315,46 @@ Kanboard.Board = (function() {
     {
 	    var projectId = $('#board').data('project-id');
 
-        $("#form-user_id").change(filter_apply);
-        $("#form-category_id").change(filter_apply);
+        $("#form-user_id").change(function(e) {
+            $(this).parent().toggleClass("filter-on", $(this).val() != -1);
+            filter_apply();
+        });
+
+        $("#form-category_id").change(function(e) {
+            $(this).parent().toggleClass("filter-on", $(this).val() != -1);
+            filter_apply();
+        });
+
         $("#filter-due-date").click(function(e) {
             $(this).toggleClass("filter-on");
             filter_apply();
             e.preventDefault();
         });
 
-        // Get and set filters from localStorage
-		$("#form-user_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-user_id") || -1);
-		$("#form-category_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-category_id") || -1);
+        $("#filter-recent").click(function(e) {
+            $(this).toggleClass("filter-on");
+            filter_apply();
+            e.preventDefault();
+        });
 
-		if (+Kanboard.GetStorageItem("board_filter_" + projectId + "_filter-due-date")) {
-			$("#filter-due-date").addClass("filter-on");
-		} else {
-			$("#filter-due-date").removeClass("filter-on");
-		}
+        // Get and set filters from localStorage
+        $("#form-user_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-user_id") || -1);
+        $("#form-user_id").parent().toggleClass("filter-on", $("#form-user_id").val() != -1);
+
+        $("#form-category_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-category_id") || -1);
+        $("#form-category_id").parent().toggleClass("filter-on", $("#form-category_id").val() != -1);
+
+        if (+Kanboard.GetStorageItem("board_filter_" + projectId + "_filter-due-date")) {
+            $("#filter-due-date").addClass("filter-on");
+        } else {
+            $("#filter-due-date").removeClass("filter-on");
+        }
+
+        if (+Kanboard.GetStorageItem("board_filter_" + projectId + "_filter-recent")) {
+            $("#filter-recent").addClass("filter-on");
+        } else {
+            $("#filter-recent").removeClass("filter-on");
+        }
 
     	filter_apply();
     }
