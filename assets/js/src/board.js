@@ -299,7 +299,7 @@ Kanboard.Board = (function() {
             }
 
             if (filterRecent && ! recent) {
-                item.style.opacity = "0.2";
+                item.style.display = "none";
             }
         });
 
