@@ -49,12 +49,10 @@
             </ul>
         </li>
         <li>
-            <?= t('Filter by user') ?>
-            <?= $this->formSelect('user_id', $users) ?>
+            <?= $this->formSelect('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"')) ?>
         </li>
         <li>
-            <?= t('Filter by category') ?>
-            <?= $this->formSelect('category_id', $categories) ?>
+            <?= $this->formSelect('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"')) ?>
         </li>
         <li>
             <a href="#" id="filter-due-date"><?= t('Filter by due date') ?></a>

@@ -315,13 +315,19 @@ Kanboard.Board = (function() {
     {
 	    var projectId = $('#board').data('project-id');
 
+        $("#form-user_id").chosen({
+            width: "180px"
+        });
+
         $("#form-user_id").change(function(e) {
-            $(this).parent().toggleClass("filter-on", $(this).val() != -1);
             filter_apply();
         });
 
+        $("#form-category_id").chosen({
+            width: "200px"
+        });
+
         $("#form-category_id").change(function(e) {
-            $(this).parent().toggleClass("filter-on", $(this).val() != -1);
             filter_apply();
         });
 
@@ -339,10 +345,10 @@ Kanboard.Board = (function() {
 
         // Get and set filters from localStorage
         $("#form-user_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-user_id") || -1);
-        $("#form-user_id").parent().toggleClass("filter-on", $("#form-user_id").val() != -1);
+        $("#form-user_id").trigger("chosen:updated");
 
         $("#form-category_id").val(Kanboard.GetStorageItem("board_filter_" + projectId + "_form-category_id") || -1);
-        $("#form-category_id").parent().toggleClass("filter-on", $("#form-category_id").val() != -1);
+        $("#form-category_id").trigger("chosen:updated");
 
         if (+Kanboard.GetStorageItem("board_filter_" + projectId + "_filter-due-date")) {
             $("#filter-due-date").addClass("filter-on");

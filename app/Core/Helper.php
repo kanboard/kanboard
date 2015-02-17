@@ -221,9 +221,9 @@ class Helper
      * @param  string  $class    CSS class
      * @return string
      */
-    public function formSelect($name, array $options, array $values = array(), array $errors = array(), $class = '')
+    public function formSelect($name, array $options, array $values = array(), array $errors = array(), array $attributes = array(), $class = '')
     {
-        $html = '<select name="'.$name.'" id="form-'.$name.'" class="'.$class.'">';
+        $html = '<select name="'.$name.'" id="form-'.$name.'" class="'.$class.'" '.implode(' ', $attributes).'>';
 
         foreach ($options as $id => $value) {
 
