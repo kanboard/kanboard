@@ -7,7 +7,7 @@
     <table class="table-fixed">
         <tr>
             <th class="column-20"><?= $subtask_paginator->order(t('User'), 'username') ?></th>
-            <th class="column-40"><?= $subtask_paginator->order(t('Subtask'), 'subtask_title') ?></th>
+            <th class="column-30"><?= $subtask_paginator->order(t('Subtask'), 'subtask_title') ?></th>
             <th><?= $subtask_paginator->order(t('Start'), 'start') ?></th>
             <th><?= $subtask_paginator->order(t('End'), 'end') ?></th>
         </tr>

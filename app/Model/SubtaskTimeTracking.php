@@ -307,17 +307,13 @@ class SubtaskTimeTracking extends Base
                            ->eq('end', 0)
                            ->findOneColumn('start');
 
-        $time_spent = $this->db
-                           ->table(Subtask::TABLE)
-                           ->eq('id', $subtask_id)
-                           ->findOneColumn('time_spent');
+        $subtask = $this->subtask->getById($subtask_id);
 
         return $start_time &&
-               $this->db
-                    ->table(Subtask::TABLE)
-                    ->eq('id', $subtask_id)
-                    ->update(array(
-                        'time_spent' => $time_spent + round((time() - $start_time) / 3600, 1)
-                    ));
+               $this->subtask->update(array(      // Fire the event subtask.update
+                    'id' => $subtask['id'],
+                    'time_spent' => $subtask['time_spent'] + round((time() - $start_time) / 3600, 1),
+                    'task_id' => $subtask['task_id'],
+               ));
     }
 }
