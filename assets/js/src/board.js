@@ -165,7 +165,7 @@ Kanboard.Board = (function() {
                     tooltip.position(position);
 
                     // Toggle subtasks status
-                    $('#tooltip-subtasks a').click(function(e) {
+                    $('#tooltip-subtasks a').not(".popover").click(function(e) {
 
                         e.preventDefault();
                         e.stopPropagation();

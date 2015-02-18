@@ -666,7 +666,7 @@ class Helper
                 'subtaskRestriction',
                 array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect),
                 false,
-                'popover'
+                'popover task-board-popover'
             );
         }
 
