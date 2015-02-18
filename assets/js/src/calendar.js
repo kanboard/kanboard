@@ -5,9 +5,11 @@ Kanboard.Calendar = (function() {
     // Save the new due date for a moved task
     function move_calendar_event(calendar_event)
     {
+        var url = $("#calendar").data("save-url") || $("#user-calendar").data("save-url");
+
         $.ajax({
             cache: false,
-            url: $("#calendar").data("save-url"),
+            url: url,
             contentType: "application/json",
             type: "POST",
             processData: false,
@@ -25,7 +27,7 @@ Kanboard.Calendar = (function() {
 
         calendar.fullCalendar({
             lang: $("body").data("js-lang"),
-            editable: false,
+            editable: true,
             eventLimit: true,
             height: Kanboard.Exists("dashboard-calendar") ? 500 : "auto",
             defaultView: "agendaWeek",
@@ -34,7 +36,8 @@ Kanboard.Calendar = (function() {
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-            viewRender: refresh_user_calendar
+            viewRender: refresh_user_calendar,
+            eventDrop: move_calendar_event
         });
     }
 

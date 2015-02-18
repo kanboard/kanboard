@@ -47,6 +47,7 @@
                 <div id="user-calendar"
                      data-check-url="<?= $this->u('calendar', 'user') ?>"
                      data-user-id="<?= $user_id ?>"
+                     data-save-url="<?= $this->u('calendar', 'save') ?>"
                 >
                 </div>
             </div>
