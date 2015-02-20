@@ -1,7 +1,7 @@
 <?= $this->render('task/details', array('task' => $task, 'project' => $project)) ?>
 <?= $this->render('task/time', array('task' => $task, 'values' => $values, 'date_format' => $date_format, 'date_formats' => $date_formats)) ?>
 <?= $this->render('task/show_description', array('task' => $task)) ?>
-<?= $this->render('tasklink/show', array('task' => $task, 'links' => $links)) ?>
+<?= $this->render('tasklink/show', array('task' => $task, 'links' => $links, 'columns_list' => $columns_list)) ?>
 <?= $this->render('subtask/show', array('task' => $task, 'subtasks' => $subtasks)) ?>
 <?= $this->render('task/timesheet', array('task' => $task)) ?>
 <?= $this->render('file/show', array('task' => $task, 'files' => $files)) ?>
