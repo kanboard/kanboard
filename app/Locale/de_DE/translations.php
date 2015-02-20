@@ -685,7 +685,7 @@ return array(
     'End' => 'Ende',
     'Task age in days' => 'Aufgabenalter in Tagen',
     'Days in this column' => 'Tage in dieser Spalte',
-    // '%dd' => '',
+    '%dd' => '%dT',
     'Add a link' => 'Verbindung hinzufügen',
     'Add a new link' => 'Neue Verbindung hinzufügen',
     'Do you really want to remove this link: "%s"?' => 'Die Verbindung "%s" wirklich löschen?',
