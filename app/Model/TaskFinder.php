@@ -104,6 +104,7 @@ class TaskFinder extends Base
                 'tasks.score',
                 'tasks.category_id',
                 'tasks.date_moved',
+            	'tasks.tags',	
                 'users.username AS assignee_username',
                 'users.name AS assignee_name'
             )
@@ -245,6 +246,7 @@ class TaskFinder extends Base
             tasks.category_id,
             tasks.swimlane_id,
             tasks.date_moved,
+        	tasks.tags,
             project_has_categories.name AS category_name,
             projects.name AS project_name,
             columns.title AS column_title,
@@ -330,5 +332,28 @@ class TaskFinder extends Base
     public function exists($task_id)
     {
         return $this->db->table(Task::TABLE)->eq('id', $task_id)->count() === 1;
+    }
+    
+    /**
+     * Returns an array of all tags and their number of occurence. 
+     * Tags can only contain a-z,0-9,_,-,. and whitespace. Comma ',' is delimiter.
+     * All small.
+     *
+     * @access public
+     * @param  integer    $project_id   Project id
+     * @param  integer    $is_Active    Task::STATUS_OPEN or Task::STATUS_CLOSED
+     * @return array
+     */
+    public function countTags ($project_id, $is_active = Task::STATUS_OPEN) {
+    	$records = $this->$db->table(Task::TABLE)
+    	                ->equals('is_active', $is_active)
+    	                ->columns('tags')->findAll();
+    	
+    	// Merge all rows in single string. 
+    	foreach ($records as $record) {
+    		 $tmp.=($record['tags']);
+    	}
+    	// Count the tags. 
+    	return array_count_values(str_word_count($words, 1,Task::TAG_INCLUDE_CHARS));
     }
 }

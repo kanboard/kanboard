@@ -70,5 +70,9 @@ class TaskModification extends Base
         $this->convertIntegerFields($values, array('is_active'));
 
         $values['date_modification'] = time();
+        
+        // Sanitize comma delimited tags
+        $tagarray = tags_csv2array ($values['tags']);
+        $values['tags'] = tags_array2csv($tagarray);
     }
 }

@@ -1506,3 +1506,38 @@ td li.dropit-trigger {
 .task-board .dropit-submenu a:hover {
     text-decoration: none;
 }
+/* tag colors */
+.tag {
+   border: none; 
+   border-radius: 2px;
+   font-size: 80%;
+   font-weight: bold;
+   padding:3px 4px 3px 4px;
+   background-color: #888888;
+   color: #fff;
+}
+
+.tag.bug {
+   background-color: #D91E18;
+}
+
+.tag.feature {
+   background-color: #22A7F0;
+}
+
+.tag.enhancement {
+   background-color: #2574A9;
+}
+
+.tag.task {
+   background-color: #16A085;
+}
+
+.tag.doc {
+   background-color: #68C3A3;
+}
+
+.tag.support {
+   background-color: #F89406;
+}
+

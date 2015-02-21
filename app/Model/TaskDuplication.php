@@ -30,6 +30,7 @@ class TaskDuplication extends Base
         'category_id',
         'time_estimated',
         'swimlane_id',
+    	'tags',
     );
 
     /**

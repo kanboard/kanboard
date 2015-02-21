@@ -70,6 +70,9 @@
         <?= $this->formLabel(t('Due Date'), 'date_due') ?>
         <?= $this->formText('date_due', $values, $errors, array('placeholder="'.$this->inList($date_format, $date_formats).'"'), 'form-date') ?><br/>
         <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
+        
+        <?= $this->formLabel(t('Tags'), 'tags') ?>
+        <?= $this->formText('tags', $values, $errors, array()) ?><br/>
     </div>
 
     <div class="form-actions">

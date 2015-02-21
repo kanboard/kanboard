@@ -64,6 +64,10 @@ class TaskCreation extends Base
         $values['date_modification'] = $values['date_creation'];
         $values['date_moved'] = $values['date_creation'];
         $values['position'] = $this->taskFinder->countByColumnAndSwimlaneId($values['project_id'], $values['column_id'], $values['swimlane_id']) + 1;
+        
+         // Sanitize comma delimited tags
+        $tagarray = tags_csv2array ($values['tags']);
+        $values['tags'] = tags_array2csv($tagarray);
     }
 
     /**
