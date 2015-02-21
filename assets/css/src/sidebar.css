@@ -27,9 +27,20 @@
     line-height: 1.8em;
 }
 
+@media only screen and (max-width: 1024px) {
+    .sidebar {
+        width: 25%;
+    }
+
+    .sidebar-content {
+        margin-left: 30%;
+        width: 70%;
+    }
+}
+
 @media only screen and (max-width: 767px) {
     .sidebar {
-        width: 96.5%;
+        width: 95%;
         float: none;
     }
 

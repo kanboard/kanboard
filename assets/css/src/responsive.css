@@ -55,3 +55,11 @@
         height: 18px;
     }
 }
+
+@media only screen and (max-width: 640px) {
+
+    .hide-mobile {
+        display: none;
+    }
+}
+

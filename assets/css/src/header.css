@@ -93,3 +93,11 @@ nav .active a {
     padding-right: 10px;
     font-size: 0.9em;
 }
+
+@media only screen and (max-width: 640px) {
+
+    .page-header-mobile li {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
