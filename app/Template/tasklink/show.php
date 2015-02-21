@@ -5,7 +5,8 @@
 <table class="table-fixed" id="links">
     <tr>
         <th class="column-30"><?= t('Label') ?></th>
-        <th class="column-60"><?= t('Task') ?></th>
+        <th class="column-40"><?= t('Task') ?></th>
+        <th class="column-20"><?= t('Column') ?></th>
         <?php if (! isset($not_editable)): ?>
             <th><?= t('Action') ?></th>
         <?php endif ?>
@@ -22,6 +23,7 @@
                     $link['is_active'] ? '' : 'task-link-closed'
                 ) ?>
             </td>
+            <td><?= $columns_list[$link['column_id']] ?></td>
             <td>
                 <?= $this->a(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>

@@ -50,7 +50,8 @@ class TaskLink extends Base
                         Link::TABLE.'.label',
                         Task::TABLE.'.title',
                         Task::TABLE.'.is_active',
-                        Task::TABLE.'.project_id'
+                        Task::TABLE.'.project_id',
+                        Task::TABLE.'.column_id'
                     )
                     ->eq(self::TABLE.'.task_id', $task_id)
                     ->join(Link::TABLE, 'id', 'link_id')
