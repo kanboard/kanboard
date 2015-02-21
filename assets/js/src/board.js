@@ -281,7 +281,7 @@ Kanboard.Board = (function() {
             var ownerId = item.getAttribute("data-owner-id");
             var dueDate = item.getAttribute("data-due-date");
             var categoryId = item.getAttribute("data-category-id");
-            var recent = item.matches(".task-board-recent");
+            var recent = $(item).hasClass("task-board-recent");
 
             if (ownerId != selectedUserId && selectedUserId != -1) {
                 item.style.display = "none";
