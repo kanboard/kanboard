@@ -3,11 +3,6 @@
     font-size: 0.95em;
 }
 
-.filter-on {
-    font-weight: bold;
-    color: #333;
-}
-
 /* public board */
 .public-board {
     margin-top: 5px;
@@ -21,13 +16,13 @@
 
 /* board table */
 #board-container {
-    overflow-x: auto;
+    overflow-x: scroll;
+    padding-bottom: 150px; /* Space to avoid dropdown menu truncated */
 }
 
 #board td,
 #board th {
-    min-width: 230px;
-    max-width: 230px;
+    min-width: 240px;
 }
 
 #board th a {
