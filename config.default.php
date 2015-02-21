@@ -85,6 +85,10 @@ define('LDAP_ACCOUNT_EMAIL', 'mail');
 // Example for OpenLDAP: 'uid'
 define('LDAP_ACCOUNT_ID', 'samaccountname');
 
+// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
+// Set to true if you want to preserve the case
+define('LDAP_USERNAME_CASE_SENSITIVE', false);
+
 // Enable/disable Google authentication
 define('GOOGLE_AUTH', false);
 

@@ -76,6 +76,15 @@ define('LDAP_ACCOUNT_FULLNAME', 'displayname');
 
 // Name of an attribute of the user account object which should be used as the email of the user.
 define('LDAP_ACCOUNT_EMAIL', 'mail');
+
+// Name of an attribute of the user account object which should be used as the id of the user.
+// Example for ActiveDirectory: 'samaccountname'
+// Example for OpenLDAP: 'uid'
+define('LDAP_ACCOUNT_ID', 'samaccountname');
+
+// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
+// Set to true if you want to preserve the case
+define('LDAP_USERNAME_CASE_SENSITIVE', false);
 ```
 
 ### LDAP bind type

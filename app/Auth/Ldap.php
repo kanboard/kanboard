@@ -29,6 +29,7 @@ class Ldap extends Base
      */
     public function authenticate($username, $password)
     {
+        $username = LDAP_USERNAME_CASE_SENSITIVE ? $username : strtolower($username);
         $result = $this->findUser($username, $password);
 
         if (is_array($result)) {

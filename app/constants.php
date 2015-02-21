@@ -36,6 +36,7 @@ defined('LDAP_USER_PATTERN') or define('LDAP_USER_PATTERN', '');
 defined('LDAP_ACCOUNT_FULLNAME') or define('LDAP_ACCOUNT_FULLNAME', 'displayname');
 defined('LDAP_ACCOUNT_EMAIL') or define('LDAP_ACCOUNT_EMAIL', 'mail');
 defined('LDAP_ACCOUNT_ID') or define('LDAP_ACCOUNT_ID', '');
+defined('LDAP_USERNAME_CASE_SENSITIVE') or define('LDAP_USERNAME_CASE_SENSITIVE', false);
 
 // Google authentication
 defined('GOOGLE_AUTH') or define('GOOGLE_AUTH', false);
