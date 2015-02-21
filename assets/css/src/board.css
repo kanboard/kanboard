@@ -23,6 +23,7 @@
 #board td,
 #board th {
     min-width: 240px;
+    max-width: 240px;
 }
 
 #board th a {
