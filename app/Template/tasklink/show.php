@@ -23,7 +23,7 @@
                     $link['is_active'] ? '' : 'task-link-closed'
                 ) ?>
             </td>
-            <td><?= $columns_list[$link['column_id']] ?></td>
+            <td><?= $this->e($link['column_title']) ?></td>
             <td>
                 <?= $this->a(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
