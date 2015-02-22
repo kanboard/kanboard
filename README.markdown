@@ -73,10 +73,13 @@ Documentation
 - [Automatic actions](docs/automatic-actions.markdown)
 - [Project permissions](docs/project-permissions.markdown)
 - [Swimlanes](docs/swimlanes.markdown)
+- [Calendar](docs/calendar.markdown)
 
 #### Working with tasks
 
 - [Creating tasks](docs/creating-tasks.markdown)
+- [Task links](docs/task-links.markdown)
+- [Time tracking](docs/time-tracking.markdown)
 
 #### Working with users
 
@@ -84,8 +87,10 @@ Documentation
 
 #### Settings
 
+- [Keyboard shortcuts](docs/keyboard-shortcuts.markdown)
 - [Application settings](docs/application-configuration.markdown)
 - [Board settings](docs/board-configuration.markdown)
+- [Link settings](docs/link-labels.markdown)
 
 ### Integrations
 
