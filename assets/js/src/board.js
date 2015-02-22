@@ -23,6 +23,10 @@ Kanboard.Board = (function() {
         Mousetrap.bind("s", function() {
             stack_toggle();
         });
+        
+        Mousetrap.bind("c", function() {
+            compactview_toggle();
+        });
     }
 
     // Collapse/Expand tasks
@@ -351,6 +355,40 @@ Kanboard.Board = (function() {
     	filter_apply();
     }
 
+    // Toggle compact view. It will try to stuff all columns in the window
+    jQuery(document).on('click', ".compactview-toggle", function(e) {
+        e.preventDefault();
+        compactview_toggle();
+    });
+    
+    function compactview_toggle() {
+	var compactview = Kanboard.GetStorageItem("compactview");
+        if (compactview == '1') {
+            Kanboard.SetStorageItem("compactview",'0');
+        } else {
+	    Kanboard.SetStorageItem("compactview",'1');
+	}
+        compactview_reload ();
+    }
+    
+    function compactview_reload()
+    {
+	var compactview = Kanboard.GetStorageItem("compactview");
+	if (compactview == '1') {
+	    $('#board-container').css('overflow-x', 'hidden');
+	    $('#board th').css('min-width', '0');
+	    $('#board th').css('max-width', '0');
+	    $('#board td').css('min-width', '0');
+	    $('#board td').css('max-width', '0'); 
+	} else {
+	    $('#board-container').css('overflow-x', 'auto');
+	    $('#board th').css('min-width', '230px');
+	    $('#board th').css('max-width', '230px');
+	    $('#board td').css('min-width', '230px');
+	    $('#board td').css('max-width', '230px');
+	}
+    }
+    
     jQuery(document).ready(function() {
 
         if (Kanboard.Exists("board")) {
@@ -358,7 +396,13 @@ Kanboard.Board = (function() {
             filter_load_events();
             stack_load_events();
             keyboard_shortcuts();
+            compactview_reload();
         }
+    });
+    
+    // Reload the compactview states (shown/hidden) after an ajax call
+    jQuery(document).ajaxComplete(function() {
+	compactview_reload();
     });
 
 })();
