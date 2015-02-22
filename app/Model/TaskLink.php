@@ -50,11 +50,13 @@ class TaskLink extends Base
                         Link::TABLE.'.label',
                         Task::TABLE.'.title',
                         Task::TABLE.'.is_active',
-                        Task::TABLE.'.project_id'
+                        Task::TABLE.'.project_id',
+                        Board::TABLE.'.title AS column_title'
                     )
                     ->eq(self::TABLE.'.task_id', $task_id)
                     ->join(Link::TABLE, 'id', 'link_id')
                     ->join(Task::TABLE, 'id', 'opposite_task_id')
+                    ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
                     ->findAll();
     }
 

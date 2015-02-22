@@ -119,7 +119,7 @@ abstract class Base
             }
 
             $this->container['logger']->debug('SQL_QUERIES={nb}', array('nb' => $this->container['db']->nb_queries));
-            $this->container['logger']->debug('RENDERING={time}', array('time' => microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']));
+            $this->container['logger']->debug('RENDERING={time}', array('time' => microtime(true) - @$_SERVER['REQUEST_TIME_FLOAT']));
         }
     }
 

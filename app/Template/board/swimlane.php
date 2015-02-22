@@ -65,7 +65,7 @@
         <?php endif ?>
 
         <?php foreach ($column['tasks'] as $task): ?>
-            <?= $this->render($not_editable ? 'board/task_public' : 'board/task', array(
+            <?= $this->render($not_editable ? 'board/task_public' : 'board/task_private', array(
                 'project' => $project,
                 'task' => $task,
                 'categories' => $categories,

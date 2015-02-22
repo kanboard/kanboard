@@ -3,29 +3,15 @@
      data-owner-id="<?= $task['owner_id'] ?>"
      data-category-id="<?= $task['category_id'] ?>"
      data-due-date="<?= $task['date_due'] ?>"
-     data-task-url="<?= $this->u('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"
-     title="<?= t('View this task') ?>">
+     data-task-url="<?= $this->u('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+
+    <?= $this->render('board/task_menu', array('task' => $task)) ?>
 
     <div class="task-board-collapsed" style="display: none">
-        <?= $this->a('#'.$task['id'], 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-collapsed-id') ?>
         <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-collapsed-title') ?>
     </div>
 
     <div class="task-board-expanded">
-
-        <ul class="dropdown">
-            <li>
-                <a href="#" class="dropdown-menu"><?= '#'.$task['id'] ?></a>
-                <ul>
-                    <li><i class="fa fa-user"></i> <?= $this->a(t('Change assignee'), 'board', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
-                    <li><i class="fa fa-tag"></i> <?= $this->a(t('Change category'), 'board', 'changeCategory', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
-                    <li><i class="fa fa-align-left"></i> <?= $this->a(t('Change description'), 'task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
-                    <li><i class="fa fa-comment-o"></i> <?= $this->a(t('Add a comment'), 'comment', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
-                    <li><i class="fa fa-pencil-square-o"></i> <?= $this->a(t('Edit this task'), 'task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
-                    <li><i class="fa fa-close"></i> <?= $this->a(t('Close this task'), 'task', 'close', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => 'board'), false, 'task-board-popover') ?></li>
-                </ul>
-            </li>
-        </ul>
 
         <?php if ($task['reference']): ?>
         <span class="task-board-reference" title="<?= t('Reference') ?>">

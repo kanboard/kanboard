@@ -55,7 +55,7 @@
             <?= $this->formSelect('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
-            <select id="more-filters" multiple data-placeholder="<?= t('More filters') ?>" class="apply-filters chosen-select">
+            <select id="more-filters" multiple data-placeholder="<?= t('More filters') ?>" class="apply-filters chosen-select hide-mobile">
                 <option value=""></option>
                 <option value="filter-due-date"><?= t('Filter by due date') ?></option>
                 <option value="filter-recent"><?= t('Filter recently updated') ?></option>

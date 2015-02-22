@@ -235,7 +235,7 @@ Kanboard.Board = (function() {
                 "position": position
             }),
             success: function(data) {
-                $("#board").remove();
+                $("#board-container").remove();
                 $("#main").append(data);
                 Kanboard.InitAfterAjax();
                 board_load_events();
@@ -254,7 +254,7 @@ Kanboard.Board = (function() {
                 url: $("#board").attr("data-check-url"),
                 statusCode: {
                     200: function(data) {
-                        $("#board").remove();
+                        $("#board-container").remove();
                         $("#main").append(data);
                         Kanboard.InitAfterAjax();
                         board_unload_events();

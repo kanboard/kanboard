@@ -1,5 +1,5 @@
 <section id="main">
-    <div class="page-header">
+    <div class="page-header page-header-mobile">
         <ul>
             <?php if ($this->userSession->isAdmin()): ?>
                 <li><i class="fa fa-plus fa-fw"></i><?= $this->a(t('New project'), 'project', 'create') ?></li>

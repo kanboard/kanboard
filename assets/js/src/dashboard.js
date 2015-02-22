@@ -22,7 +22,7 @@ Kanboard.Dashboard = (function() {
         $("#dashboard-" + $(this).data("toggle")).toggle();
         hideColumns();
 
-        var sections = ["projects", "tasks", "subtasks", "activities"];
+        var sections = ["projects", "tasks", "subtasks", "activities", "calendar"];
         var state = {};
 
         for (var i = 0; i < sections.length; i++) {

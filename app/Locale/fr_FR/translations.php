@@ -691,7 +691,7 @@ return array(
     'Add a link' => 'Ajouter un lien',
     'Add a new link' => 'Ajouter un nouveau lien',
     'Do you really want to remove this link: "%s"?' => 'Voulez-vous vraiment supprimer ce lien : « %s » ?',
-    'Do you really want to remove this link with task #%d?' => 'Voulez-vous vraiment supprimer ce lien avec la tâche n°%s ?',
+    'Do you really want to remove this link with task #%d?' => 'Voulez-vous vraiment supprimer ce lien avec la tâche n°%d ?',
     'Field required' => 'Champ obligatoire',
     'Link added successfully.' => 'Lien créé avec succès.',
     'Link updated successfully.' => 'Lien mis à jour avec succès.',

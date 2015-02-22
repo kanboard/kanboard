@@ -90,6 +90,12 @@ Vagrant.configure("2") do |config|
     m.vm.synced_folder ".", "/var/www", owner: "www-data", group: "www-data"
   end
 
+  config.vm.define "debian6" do |m|
+    m.vm.box = "chef/debian-6.0.10"
+    m.vm.provision "shell", inline: $script_sqlite
+    m.vm.synced_folder ".", "/var/www", owner: "www-data", group: "www-data"
+  end
+
   config.vm.define "centos7" do |m|
     m.vm.box = "chef/centos-7.0"
     m.vm.synced_folder ".", "/var/www/html", owner: "apache", group: "apache"

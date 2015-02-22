@@ -722,14 +722,17 @@ nav .active a {
     padding-right: 10px;
     font-size: 0.9em;
 }
+
+@media only screen and (max-width: 640px) {
+
+    .page-header-mobile li {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
 /* board filters */
 .board-filters {
     font-size: 0.95em;
-}
-
-.filter-on {
-    font-weight: bold;
-    color: #333;
 }
 
 /* public board */
@@ -745,13 +748,14 @@ nav .active a {
 
 /* board table */
 #board-container {
-    overflow-x: auto;
+    overflow-x: scroll;
+    padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
 }
 
 #board td,
 #board th {
-    min-width: 230px;
-    max-width: 230px;
+    min-width: 240px;
+    max-width: 240px;
 }
 
 #board th a {
@@ -898,7 +902,7 @@ a.task-board-nobody {
 
 .task-board-icons span {
     opacity: 0.5;
-    margin-left: 5px;
+    margin-left: 2px;
 }
 
 .task-board-icons a:hover,
@@ -1374,9 +1378,20 @@ span.task-board-date-overdue {
     line-height: 1.8em;
 }
 
+@media only screen and (max-width: 1024px) {
+    .sidebar {
+        width: 25%;
+    }
+
+    .sidebar-content {
+        margin-left: 30%;
+        width: 70%;
+    }
+}
+
 @media only screen and (max-width: 767px) {
     .sidebar {
-        width: 96.5%;
+        width: 95%;
         float: none;
     }
 
@@ -1443,6 +1458,14 @@ span.task-board-date-overdue {
         height: 18px;
     }
 }
+
+@media only screen and (max-width: 640px) {
+
+    .hide-mobile {
+        display: none;
+    }
+}
+
 .dropdown {
     position: relative;
 }

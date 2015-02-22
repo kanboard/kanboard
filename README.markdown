@@ -48,6 +48,8 @@ GNU Affero General Public License version 3: <http://www.gnu.org/licenses/agpl-3
 Related projects
 ----------------
 
+- [CSV2Kanboard by @ashbike](https://github.com/ashbike/csv2kanboard)
+- [Kanboard for Yunohost by @mbugeia](https://github.com/mbugeia/kanboard_ynh)
 - [Trello import script by @matueranet](https://github.com/matueranet/kanboard-import-trello)
 - [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
 - [Wunderlist To Kanboard script by EpocDotFr](https://github.com/EpocDotFr/WunderlistToKanboard)
@@ -71,10 +73,13 @@ Documentation
 - [Automatic actions](docs/automatic-actions.markdown)
 - [Project permissions](docs/project-permissions.markdown)
 - [Swimlanes](docs/swimlanes.markdown)
+- [Calendar](docs/calendar.markdown)
 
 #### Working with tasks
 
 - [Creating tasks](docs/creating-tasks.markdown)
+- [Task links](docs/task-links.markdown)
+- [Time tracking](docs/time-tracking.markdown)
 
 #### Working with users
 
@@ -82,8 +87,10 @@ Documentation
 
 #### Settings
 
+- [Keyboard shortcuts](docs/keyboard-shortcuts.markdown)
 - [Application settings](docs/application-configuration.markdown)
 - [Board settings](docs/board-configuration.markdown)
+- [Link settings](docs/link-labels.markdown)
 
 ### Integrations
 
