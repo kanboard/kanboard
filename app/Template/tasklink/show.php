@@ -36,6 +36,7 @@
                     $link['is_active'] ? '' : 'task-link-closed'
                 ) ?>
             </td>
+            <td><?= $this->e($link['column_title']) ?></td>
         <?php endif ?>
     </tr>
     <?php endforeach ?>
