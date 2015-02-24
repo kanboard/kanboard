@@ -57,6 +57,11 @@ hr {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+#board-selector,
+.chosen-select {
+    min-height: 27px; /* Reserve some space to avoid re-layout due to chosen */
+}
 /* links */
 a {
     color: #3366CC;
@@ -733,6 +738,10 @@ nav .active a {
 /* board filters */
 .board-filters {
     font-size: 0.95em;
+}
+
+#more-filters {
+    display: none; /* Hide this filter initially, to avoid re-layout */
 }
 
 /* public board */
