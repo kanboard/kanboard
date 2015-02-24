@@ -61,6 +61,18 @@ $server->bind('addColumn', $container['board'], 'addColumn');
 $server->bind('removeColumn', $container['board'], 'removeColumn');
 
 /**
+ * Swimlane procedures
+ */
+$server->bind('getSwimlanes', $container['swimlane'], 'getSwimlanes');
+$server->bind('addSwimlane', $container['swimlane'], 'create');
+$server->bind('updateSwimlane', $container['swimlane'], 'rename');
+$server->bind('removeSwimlane', $container['swimlane'], 'remove');
+$server->bind('disableSwimlane', $container['swimlane'], 'disable');
+$server->bind('enableSwimlane', $container['swimlane'], 'enable');
+$server->bind('moveSwimlaneUp', $container['swimlane'], 'moveUp');
+$server->bind('moveSwimlaneDown', $container['swimlane'], 'moveDown');
+
+/**
  * Project permissions procedures
  */
 $server->bind('getMembers', $container['projectPermission'], 'getMembers');

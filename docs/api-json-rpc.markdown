@@ -973,6 +973,276 @@ Response example:
 }
 ```
 
+### getSwimlanes
+
+- Purpose: **Get the list of enabled swimlanes of a project**
+- Parameters:
+    - **project_id** (integer, required)
+- Result on success: **swimlane properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getSwimlanes",
+    "id": 1242049935,
+    "params": [
+        2
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1242049935,
+    "result": [
+        {
+            "id": "0",
+            "name": "Default"
+        },
+        {
+            "id": "2",
+            "name": "Version 7.0"
+        },
+    ]
+}
+```
+
+### moveSwimlaneUp
+
+- Purpose: **Move up the swimlane position**
+- Parameters:
+    - **project_id** (integer, required)
+    - **swimlane_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "moveSwimlaneUp",
+    "id": 99275573,
+    "params": [
+        1,
+        2
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 99275573,
+    "result": true
+}
+```
+
+### moveSwimlaneDown
+
+- Purpose: **Move down the swimlane position**
+- Parameters:
+    - **project_id** (integer, required)
+    - **swimlane_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "moveSwimlaneDown",
+    "id": 957090649,
+    "params": {
+        "project_id": 1,
+        "swimlane_id": 2
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 957090649,
+    "result": true
+}
+```
+
+### updateSwimlane
+
+- Purpose: **Update swimlane properties**
+- Parameters:
+    - **swimlane_id** (integer, required)
+    - **name** (string, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "updateSwimlane",
+    "id": 480740641,
+    "params": [
+        2,
+        "Version 4.1"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 480740641,
+    "result": true
+}
+```
+
+### addSwimlane
+
+- Purpose: **Add a new swimlane**
+- Parameters:
+    - **project_id** (integer, required)
+    - **name** (string, required)
+- Result on success: **swimlane_id**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "addSwimlane",
+    "id": 638544704,
+    "params": [
+        1,
+        "Version 1.0"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 638544704,
+    "result": 5
+}
+```
+
+### removeSwimlane
+
+- Purpose: **Remove a swimlane**
+- Parameters:
+    - **project_id** (integer, required)
+    - **swimlane_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "removeSwimlane",
+    "id": 1433237746,
+    "params": [
+        2,
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": true
+}
+```
+
+### disableSwimlane
+
+- Purpose: **Enable a swimlane**
+- Parameters:
+    - **project_id** (integer, required)
+    - **swimlane_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "disableSwimlane",
+    "id": 1433237746,
+    "params": [
+        2,
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": true
+}
+```
+
+### enableSwimlane
+
+- Purpose: **Enable a swimlane**
+- Parameters:
+    - **project_id** (integer, required)
+    - **swimlane_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "enableSwimlane",
+    "id": 1433237746,
+    "params": [
+        2,
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": true
+}
+```
 
 ### createTask
 
