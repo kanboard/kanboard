@@ -1,8 +1,8 @@
 <div class="page-header">
     <ul class="board-filters">
         <li>
-            <ul class="dropdown">
-                <li>
+            <span class="dropdown">
+                <span>
                     <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
                     <ul>
                         <li>
@@ -45,8 +45,8 @@
                         </li>
                         <?php endif ?>
                     </ul>
-                </li>
-            </ul>
+                </span>
+            </span>
         </li>
         <li>
             <?= $this->formSelect('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"'), 'apply-filters chosen-select') ?>

@@ -11,8 +11,8 @@
                 <li><i class="fa fa-cog fa-fw"></i><?= $this->a(t('Settings'), 'config', 'index') ?></li>
             <?php endif ?>
             <li>
-                <ul class="dropdown">
-                    <li>
+                <span class="dropdown">
+                    <span>
                         <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Change dashboard view') ?></a>
                         <ul>
                             <li>
@@ -31,8 +31,8 @@
                                 <a href="#" class="dashboard-toggle" data-toggle="activities"><?= t('Show/hide activities') ?></a>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </span>
+                </span>
             </li>
         </ul>
     </div>

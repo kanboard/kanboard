@@ -240,7 +240,7 @@ var Kanboard = (function() {
 
             // Dropdown
             $(".dropit-submenu").hide();
-            $('.dropdown').not(".dropit").dropit();
+            $('.dropdown').not(".dropit").dropit({ triggerParentEl : "span" });
         }
     };
 
