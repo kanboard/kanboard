@@ -91,3 +91,8 @@ How to install Kanboard on Yunohost?
 [YunoHost](https://yunohost.org/) is a server operating system aiming to make self-hosting accessible to everyone.
 
 There is a [package to install Kanboard on Yunohost easily](https://github.com/mbugeia/kanboard_ynh).
+
+
+Are there some tutorials about Kanboard in other languages?
+------------------------------------
+ - [German article series about Kanboard](http://demaya.de/wp/2014/07/kanboard-eine-jira-alternative-im-detail-installation/)
