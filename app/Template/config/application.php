@@ -10,6 +10,9 @@
     <?= $this->formText('application_url', $values, $errors, array('placeholder="http://example.kanboard.net/"')) ?><br/>
     <p class="form-help"><?= t('Example: http://example.kanboard.net/ (used by email notifications)') ?></p>
 
+    <?= $this->formLabel(t('Custom Stylesheet'), 'application_stylesheet') ?>
+    <?= $this->formTextarea('application_stylesheet', $values, $errors) ?><br/>
+
     <?= $this->formLabel(t('Language'), 'application_language') ?>
     <?= $this->formSelect('application_language', $languages, $values, $errors) ?><br/>
 

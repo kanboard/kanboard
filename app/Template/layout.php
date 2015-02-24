@@ -14,6 +14,10 @@
             <?= $this->js('assets/js/app.js') ?>
         <?php endif ?>
 
+        <?php if ($this->config->get('application_stylesheet') != null && ! empty($this->config->get('application_stylesheet'))): ?>
+            <?php echo '<style>'.$this->config->get('application_stylesheet').'</style>'; ?>
+        <?php endif ?>
+
         <?= $this->css($this->u('app', 'colors'), false) ?>
         <?= $this->css('assets/css/app.css') ?>
 
