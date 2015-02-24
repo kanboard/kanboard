@@ -60,3 +60,13 @@
     </tr>
     <?php endforeach ?>
 </table>
+
+<?php if (! empty($project['description'])): ?>
+    <div class="page-header">
+        <h2><?= t('Description') ?></h2>
+    </div>
+
+    <article class="markdown">
+        <?= $this->markdown($project['description']) ?>
+    </article>
+<?php endif ?>

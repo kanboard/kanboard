@@ -35,7 +35,13 @@
     <?php else: ?>
         <header>
             <nav>
-                <h1><?= $this->a('K<span>B</span>', 'app', 'index', array(), false, 'logo', t('Dashboard')).' '.$this->summary($this->e($title)) ?></h1>
+                <h1><?= $this->a('K<span>B</span>', 'app', 'index', array(), false, 'logo', t('Dashboard')).' '.$this->summary($this->e($title)) ?>
+                    <?php if (! empty($description)): ?>
+                        <span class="column-tooltip" title="<?= $this->markdown($description) ?>">
+                            <i class="fa fa-info-circle"></i>
+                        </span>
+                    <?php endif ?>
+                </h1>
                 <ul>
                     <?php if (isset($board_selector) && ! empty($board_selector)): ?>
                     <li>
