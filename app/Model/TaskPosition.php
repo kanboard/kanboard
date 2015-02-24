@@ -23,7 +23,7 @@ class TaskPosition extends Base
      * @param  integer    $swimlane_id       Swimlane id
      * @return boolean
      */
-    public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0)
+    public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0, $fire_events = true)
     {
         $original_task = $this->taskFinder->getById($task_id);
 
@@ -35,7 +35,8 @@ class TaskPosition extends Base
                 $this->calculateAndSave($project_id, 0, $column_id, 1, $original_task['swimlane_id']);
             }
 
-            $this->fireEvents($original_task, $column_id, $position, $swimlane_id);
+            if ($fire_events)
+                $this->fireEvents($original_task, $column_id, $position, $swimlane_id);
         }
 
         return $result;
