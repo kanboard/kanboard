@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 27;
+const VERSION = 28;
+
+function version_28($pdo)
+{
+    $pdo->exec('ALTER TABLE projects ADD COLUMN description TEXT');
+}
 
 function version_27($pdo)
 {

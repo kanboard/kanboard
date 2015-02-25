@@ -176,6 +176,7 @@ Response example:
 - Purpose: **Create a new project**
 - Parameters:
     - **name** (string, required)
+    - **description** (string, optional)
 - Result on success: **project_id**
 - Result on failure: **false**
 
@@ -235,7 +236,8 @@ Response example:
         "is_active": "1",
         "token": "",
         "last_modified": "1410263246",
-        "is_public": "0"
+        "is_public": "0",
+        "description": "A sample project"
     }
 }
 ```
@@ -273,7 +275,8 @@ Response example:
         "is_active": "1",
         "token": "",
         "last_modified": "0",
-        "is_public": "0"
+        "is_public": "0",
+        "description": "A sample project"
     }
 }
 ```
@@ -309,7 +312,8 @@ Response example:
             "is_active": "1",
             "token": "",
             "last_modified": "0",
-            "is_public": "0"
+            "is_public": "0",
+            "description": "PHP client project"
         },
         {
             "id": "1",
@@ -317,7 +321,8 @@ Response example:
             "is_active": "1",
             "token": "",
             "last_modified": "0",
-            "is_public": "0"
+            "is_public": "0",
+            "description": "Test project"
         }
     ]
 }
@@ -332,6 +337,7 @@ Response example:
     - **is_active** (integer, optional)
     - **token** (string, optional)
     - **is_public** (integer, optional)
+    - **description** (string, optional)
 - Result on success: **true**
 - Result on failure: **false**
 

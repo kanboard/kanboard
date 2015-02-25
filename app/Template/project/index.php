@@ -39,7 +39,13 @@
                         <?php if ($project['is_private']): ?>
                             <i class="fa fa-lock fa-fw"></i>
                         <?php endif ?>
+
                         <?= $this->a($this->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
+                        <?php if (! empty($project['description'])): ?>
+                            <span class="column-tooltip" title="<?= $this->markdown($project['description']) ?>">
+                                <i class="fa fa-info-circle"></i>
+                            </span>
+                        <?php endif ?>
                     </td>
                     <td class="dashboard-project-stats">
                         <?php foreach ($project['columns'] as $column): ?>
