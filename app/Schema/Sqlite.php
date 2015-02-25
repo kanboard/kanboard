@@ -6,7 +6,15 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 45;
+const VERSION = 46;
+
+function version_46($pdo)
+{
+
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('application_stylesheet', ''));
+
+}
 
 function version_45($pdo)
 {
@@ -252,7 +260,6 @@ function version_29($pdo)
     $rq->execute(array('webhook_token', $parameters['webhooks_token']));
     $rq->execute(array('api_token', $parameters['api_token']));
     $rq->execute(array('application_language', $parameters['language']));
-    $rq->execute(array('application_stylesheet', $parameters['custom_stylesheet']));
     $rq->execute(array('application_timezone', $parameters['timezone']));
     $rq->execute(array('application_url', defined('KANBOARD_URL') ? KANBOARD_URL : ''));
 
