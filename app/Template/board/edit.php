@@ -13,7 +13,7 @@
     <tr>
         <td class="column-60"><?= $this->e($column['title']) ?>
          <?php if (! empty($column['description'])): ?>
-            <span class="column-tooltip" title="<?= $this->markdown($column['description']) ?>">     
+            <span class="column-tooltip" title='<?= $this->markdown($column['description']) ?>'>
                 <i class="fa fa-info-circle"></i>
             </span>
         <?php endif ?>
@@ -52,12 +52,12 @@
 
     <?= $this->formLabel(t('Title'), 'title') ?>
     <?= $this->formText('title', $values, $errors, array('required', 'maxlength="50"')) ?>
-    
+
     <?= $this->formLabel(t('Task limit'), 'task_limit') ?>
     <?= $this->formNumber('task_limit', $values, $errors) ?>
-    
+
     <?= $this->formLabel(t('Description'), 'description') ?>
-    
+
     <div class="form-tabs">
         <div class="write-area">
           <?= $this->formTextarea('description', $values, $errors) ?>
