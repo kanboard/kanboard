@@ -14,6 +14,10 @@
                             </span>
                         </li>
                         <li>
+                            <i class="fa fa-th"></i>
+                            <a href="#" class="compactview-toggle"><?= t('Toggle view') ?></a>
+                        </li>
+                        <li>
                             <i class="fa fa-search fa-fw"></i>
                             <?= $this->a(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
                         </li>
