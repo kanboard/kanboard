@@ -22,19 +22,19 @@
     <?php endif ?>
 
     <?php if (! empty($task['nb_links'])): ?>
-        <span title="<?= t('Links') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_links'] ?> <i class="fa fa-code-fork"></i></span>
+        <span title="<?= t('Links') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-code-fork"></i>&nbsp;<?= $task['nb_links'] ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['nb_subtasks'])): ?>
-        <span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?> <i class="fa fa-bars"></i></span>
+		<span title="<?= t('Sub-Tasks') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-bars"></i>&nbsp;<?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['nb_files'])): ?>
-        <span title="<?= t('Attachments') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'attachments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_files'] ?> <i class="fa fa-paperclip"></i></span>
+        <span title="<?= t('Attachments') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'attachments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-paperclip"></i>&nbsp;<?= $task['nb_files'] ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['nb_comments'])): ?>
-        <span title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'comments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><?= $task['nb_comments'] ?> <i class="fa fa-comment-o"></i></span>
+        <span title="<?= p($task['nb_comments'], t('%d comment', $task['nb_comments']), t('%d comments', $task['nb_comments'])) ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'comments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-comment-o"></i>&nbsp;<?= $task['nb_comments'] ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['description'])): ?>
