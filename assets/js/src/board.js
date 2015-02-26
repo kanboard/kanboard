@@ -373,14 +373,12 @@ Kanboard.Board = (function() {
     
     function compactview_reload()
     {
-	var compactview = Kanboard.GetStorageItem("compactview");
-	$("#board-container,#board th,#board td").removeClass ();
-	if (compactview == '1') {
-	    $('#board-container').addClass ('board-container-compact');
-	    $("#board th,#board td").addClass ('board-column-compact');
+	if (Kanboard.GetStorageItem("compactview") == '1') {
+	    $("#board-container").removeClass ("board-container-wide").addClass ("board-container-compact");
+	    $("#board th,#board td").removeClass ("board-column-wide").addClass ("board-column-compact");
 	} else {
-	    $('#board-container').addClass ('board-container-wide');
-	    $("#board th,#board td").addClass ('board-column-wide');
+	    $("#board-container").removeClass ("board-container-compact").addClass ("board-container-wide");
+	    $("#board th,#board td").removeClass ("board-column-compact").addClass ("board-column-wide");
 	}
     }
     

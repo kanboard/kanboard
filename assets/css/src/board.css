@@ -24,7 +24,7 @@
 }
 
 /* Board container classes for wide/compact view */
-#board-container-wide {
+.board-container-wide {
     overflow-x: scroll;
     padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
 }
