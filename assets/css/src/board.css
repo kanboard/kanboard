@@ -20,14 +20,34 @@
 
 /* board table */
 #board-container {
+	/* Will set the style from JS depending upon wide/compact view */
+}
+
+/* Board container classes for wide/compact view */
+.board-container-wide {
     overflow-x: scroll;
+    padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
+}
+
+.board-container-compact {
+    overflow-x: hidden;
     padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
 }
 
 #board td,
 #board th {
+    /* Will set the style from JS depending upon wide/compact view */
+	}
+
+/* Board table column for wide/compact view */
+.board-column-wide {
     min-width: 240px;
     max-width: 240px;
+}
+
+.board-column-compact {
+    min-width: 0px;
+    max-width: 0px;
 }
 
 #board th a {
