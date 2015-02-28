@@ -734,4 +734,7 @@ return array(
     'Filter recently updated' => '过滤最近的更新',
     // 'since %B %e, %Y at %k:%M %p' => '',
     'More filters' => '更多过滤',
+    // 'Compact view' => '',
+    // 'Horizontal scrolling' => '',
+    // 'Compact/wide view' => '',
 );

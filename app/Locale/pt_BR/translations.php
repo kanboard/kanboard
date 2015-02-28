@@ -734,4 +734,7 @@ return array(
     'Filter recently updated' => 'Filtro recentemente atualizado',
     // 'since %B %e, %Y at %k:%M %p' => '',
     'More filters' => 'Mais filtros',
+    // 'Compact view' => '',
+    // 'Horizontal scrolling' => '',
+    // 'Compact/wide view' => '',
 );

@@ -46,6 +46,7 @@
     <ul>
         <li><?= t('New task') ?> = <strong>n</strong></li>
         <li><?= t('Expand/collapse tasks') ?> = <strong>s</strong></li>
+        <li><?= t('Compact/wide view') ?> = <strong>c</strong></li>
     </ul>
     <h3><?= t('Application') ?></h3>
     <ul>

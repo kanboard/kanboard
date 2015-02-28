@@ -736,4 +736,7 @@ return array(
     'Filter recently updated' => 'Récemment modifié',
     'since %B %e, %Y at %k:%M %p' => 'depuis le %d/%m/%Y à %H:%M',
     'More filters' => 'Plus de filtres',
+    'Compact view' => 'Vue compacte',
+    'Horizontal scrolling' => 'Défilement horizontal',
+    'Compact/wide view' => 'Basculer entre la vue compacte et étendue',
 );

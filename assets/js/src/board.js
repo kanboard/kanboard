@@ -23,7 +23,7 @@ Kanboard.Board = (function() {
         Mousetrap.bind("s", function() {
             stack_toggle();
         });
-        
+
         Mousetrap.bind("c", function() {
             compactview_toggle();
         });
@@ -245,11 +245,12 @@ Kanboard.Board = (function() {
                 board_load_events();
                 filter_apply();
                 stack_show();
+                compactview_reload();
             }
         });
     }
 
-    // Check if a board have been changed by someone else
+    // Check if the board have been changed by someone else
     function board_check()
     {
         if (Kanboard.IsVisible()) {
@@ -265,6 +266,7 @@ Kanboard.Board = (function() {
                         board_load_events();
                         filter_apply();
                         stack_show();
+                        compactview_reload();
                     }
                 }
             });
@@ -278,7 +280,7 @@ Kanboard.Board = (function() {
         var selectedCategoryId = $("#form-category_id").val();
         var filterDueDate = $("#more-filters option[value=filter-due-date]").is(":selected")
         var filterRecent = $("#more-filters option[value=filter-recent]").is(":selected")
-	    var projectId = $('#board').data('project-id');
+        var projectId = $('#board').data('project-id');
 
         $("[data-task-id]").each(function(index, item) {
 
@@ -317,7 +319,7 @@ Kanboard.Board = (function() {
     // Load filter events
     function filter_load_events()
     {
-	    var projectId = $('#board').data('project-id');
+        var projectId = $('#board').data('project-id');
 
         $("#form-user_id").chosen({
             width: "180px"
@@ -352,50 +354,55 @@ Kanboard.Board = (function() {
 
         $("#more-filters").trigger("chosen:updated");
 
-    	filter_apply();
+        filter_apply();
     }
 
-    // Toggle compact view. It will try to stuff all columns in the window
-    jQuery(document).on('click', ".compactview-toggle", function(e) {
-        e.preventDefault();
-        compactview_toggle();
-    });
-    
-    function compactview_toggle() {
-	var compactview = Kanboard.GetStorageItem("compactview");
-        if (compactview == '1') {
-            Kanboard.SetStorageItem("compactview",'0');
-        } else {
-	    Kanboard.SetStorageItem("compactview",'1');
-	}
-        compactview_reload ();
+    function compactview_load_events()
+    {
+        jQuery(document).on('click', ".filter-toggle-scrolling", function(e) {
+            e.preventDefault();
+            compactview_toggle();
+        });
+
+        compactview_reload();
     }
-    
+
+    function compactview_toggle()
+    {
+        var scrolling = Kanboard.GetStorageItem("horizontal_scroll") || 1;
+        Kanboard.SetStorageItem("horizontal_scroll", scrolling == 0 ? 1 : 0);
+        compactview_reload();
+    }
+
     function compactview_reload()
     {
-	if (Kanboard.GetStorageItem("compactview") == '1') {
-	    $("#board-container").removeClass ("board-container-wide").addClass ("board-container-compact");
-	    $("#board th,#board td").removeClass ("board-column-wide").addClass ("board-column-compact");
-	} else {
-	    $("#board-container").removeClass ("board-container-compact").addClass ("board-container-wide");
-	    $("#board th,#board td").removeClass ("board-column-compact").addClass ("board-column-wide");
-	}
+        if (Kanboard.GetStorageItem("horizontal_scroll") == 0) {
+
+            $(".filter-wide").show();
+            $(".filter-compact").hide();
+
+            $("#board-container").removeClass("board-container-wide").addClass("board-container-compact");
+            $("#board th,#board td").removeClass("board-column-wide").addClass("board-column-compact");
+        }
+        else {
+
+            $(".filter-wide").hide();
+            $(".filter-compact").show();
+
+            $("#board-container").removeClass("board-container-compact").addClass("board-container-wide");
+            $("#board th,#board td").removeClass("board-column-compact").addClass("board-column-wide");
+        }
     }
-    
+
     jQuery(document).ready(function() {
 
         if (Kanboard.Exists("board")) {
             board_load_events();
             filter_load_events();
             stack_load_events();
+            compactview_load_events();
             keyboard_shortcuts();
-            compactview_reload();
         }
-    });
-    
-    // Reload the compactview states (shown/hidden) after an ajax call
-    jQuery(document).ajaxComplete(function() {
-	compactview_reload();
     });
 
 })();

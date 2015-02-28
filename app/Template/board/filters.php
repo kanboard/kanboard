@@ -14,8 +14,12 @@
                             </span>
                         </li>
                         <li>
-                            <i class="fa fa-th"></i>
-                            <a href="#" class="compactview-toggle"><?= t('Toggle view') ?></a>
+                            <span class="filter-compact">
+                                <i class="fa fa-th fa-fw"></i> <a href="#" class="filter-toggle-scrolling"><?= t('Compact view') ?></a>
+                            </span>
+                            <span class="filter-wide" style="display: none">
+                                <i class="fa fa-arrows-h fa-fw"></i> <a href="#" class="filter-toggle-scrolling"><?= t('Horizontal scrolling') ?></a>
+                            </span>
                         </li>
                         <li>
                             <i class="fa fa-search fa-fw"></i>

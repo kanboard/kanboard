@@ -734,4 +734,7 @@ return array(
     'Filter recently updated' => 'Filter som uppdaterats nyligen',
     'since %B %e, %Y at %k:%M %p' => 'sedan %B %e, %Y at %k:%M %p',
     'More filters' => 'Fler filter',
+    // 'Compact view' => '',
+    // 'Horizontal scrolling' => '',
+    // 'Compact/wide view' => '',
 );

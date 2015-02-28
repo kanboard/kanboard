@@ -757,14 +757,27 @@ nav .active a {
 
 /* board table */
 #board-container {
-    overflow-x: scroll;
     padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
 }
 
-#board td,
-#board th {
+/* Board container classes for wide/compact view */
+.board-container-wide {
+    overflow-x: scroll;
+}
+
+.board-container-compact {
+    overflow-x: hidden;
+}
+
+/* Board table column for wide/compact view */
+.board-column-wide {
     min-width: 240px;
     max-width: 240px;
+}
+
+.board-column-compact {
+    min-width: 0px;
+    max-width: 0px;
 }
 
 #board th a {
