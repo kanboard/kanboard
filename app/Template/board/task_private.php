@@ -43,7 +43,9 @@
         <div class="task-board-title">
             <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </div>
-
+        
+        <?= $this->render('task/tags', array('task' => $task)) ?>
+        
         <?= $this->render('board/task_footer', array('task' => $task, 'categories' => $categories)) ?>
     </div>
 </div>

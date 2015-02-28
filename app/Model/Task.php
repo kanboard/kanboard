@@ -24,6 +24,13 @@ class Task extends Base
      */
     const STATUS_OPEN         = 1;
     const STATUS_CLOSED       = 0;
+    
+    /**
+     * Characters allowed in tag names in addition of a-z.
+     *
+     * @var integer
+     */
+    const TAG_INCLUDE_CHARS   = '0123456789_.- ';            
 
     /**
      * Events

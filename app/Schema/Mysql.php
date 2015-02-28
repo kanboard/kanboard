@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 47;
+const VERSION = 48;
+
+function version_48($pdo)
+{
+	$pdo->exec('ALTER TABLE tasks ADD COLUMN tags  VARCHAR(255)');
+}
 
 function version_47($pdo)
 {

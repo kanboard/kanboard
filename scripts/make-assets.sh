@@ -1,6 +1,6 @@
 #!/bin/bash
 
-app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown"
+app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown tags"
 vendor_css="jquery-ui.min chosen.min fullcalendar.min font-awesome.min"
 
 app_js="base board calendar analytic task swimlane dashboard"
