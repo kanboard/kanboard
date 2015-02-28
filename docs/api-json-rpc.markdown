@@ -1451,7 +1451,6 @@ Response example:
     "jsonrpc": "2.0",
     "id": 1433237746,
     "result": 14
-    ]
 }
 ```
 

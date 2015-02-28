@@ -211,7 +211,7 @@ class Action extends Base
      *
      * @access public
      * @param  array   $values  Required parameters to save an action
-     * @return bool             Success or not
+     * @return integer
      */
     public function create(array $values)
     {

@@ -82,58 +82,70 @@ $server->bind('moveSwimlaneDown', $container['swimlane'], 'moveDown');
 $server->bind('getAvailableActions', $container['action'], 'getAvailableActions');
 $server->bind('getAvailableEvents', $container['action'], 'getAvailableEvents');
 $server->bind('getCompatibleEvents', $container['action'], 'getCompatibleEvents');
+$server->bind('removeAction', $container['action'], 'remove');
+
 $server->register('getActions', function($project_id) use ($container) {
     $actions = $container['action']->getAllByProject($project_id);
-    foreach($actions as $index => $action) {
+
+    foreach ($actions as $index => $action) {
         $params = array();
-        foreach($action['params'] as $param)
+
+        foreach($action['params'] as $param) {
             $params[$param['name']] = $param['value'];
+        }
+
         $actions[$index]['params'] = $params;
     }
+
     return $actions;
 });
+
 $server->register('createAction', function($project_id, $event_name, $action_name, $params) use ($container) {
 
     $values = array(
         'project_id' => $project_id,
         'event_name' => $event_name,
         'action_name' => $action_name,
-        'params' => $params
+        'params' => $params,
     );
 
     list($valid,) = $container['action']->validateCreation($values);
+
     if (! $valid) {
         return false;
     }
 
-    //Check the action exists
+    // Check the action exists
     if (! isset($container['action']->getAvailableActions()[$action_name])) {
         return false;
     }
 
-    //Check the event
+    // Check the event
     $action = $container['action']->load($action_name, $project_id, $event_name);
+
     if (! in_array($event_name, $action->getCompatibleEvents())) {
         return false;
     }
 
     $required_params = $action->getActionRequiredParameters();
 
-    //Check missing parameters
-    foreach($required_params as $param => $value)
+    // Check missing parameters
+    foreach($required_params as $param => $value) {
         if (! isset($params[$param])) {
             return false;
         }
+    }
 
-    //Check extra parameters
-    foreach($params as $param => $value)
+    // Check extra parameters
+    foreach($params as $param => $value) {
         if (! isset($required_params[$param])) {
             return false;
         }
+    }
 
     return $container['action']->create($values);
 });
-$server->bind('removeAction', $container['action'], 'remove');
+
 
 /**
  * Project permissions procedures
