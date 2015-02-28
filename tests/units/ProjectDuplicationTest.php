@@ -156,7 +156,7 @@ class ProjectDuplicationTest extends Base
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
         
-        $this->assertTrue($a->create(array(
+        $this->assertEquals(1, $a->create(array(
             'project_id' => 1,
             'event_name' => Task::EVENT_MOVE_COLUMN,
             'action_name' => 'TaskAssignCurrentUser',
@@ -186,7 +186,7 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(2, $c->create(array('name' => 'C2', 'project_id' => 1)));
         $this->assertEquals(3, $c->create(array('name' => 'C3', 'project_id' => 1)));
         
-        $this->assertTrue($a->create(array(
+        $this->assertEquals(1, $a->create(array(
             'project_id' => 1,
             'event_name' => Task::EVENT_CREATE_UPDATE,
             'action_name' => 'TaskAssignColorCategory',

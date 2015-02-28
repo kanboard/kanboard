@@ -27,7 +27,7 @@ class ActionTest extends Base
         $this->assertEquals(1, $project->create(array('name' => 'unit_test')));
 
         // We create a new action
-        $this->assertTrue($action->create(array(
+        $this->assertEquals(1, $action->create(array(
             'project_id' => 1,
             'event_name' => Task::EVENT_MOVE_COLUMN,
             'action_name' => 'TaskClose',
@@ -78,14 +78,14 @@ class ActionTest extends Base
         $this->assertEquals(1, $c->create(array('name' => 'unit_test')));
 
         // We create a new action
-        $this->assertTrue($a->create(array(
+        $this->assertEquals(1, $a->create(array(
             'project_id' => 1,
             'event_name' => GithubWebhook::EVENT_ISSUE_OPENED,
             'action_name' => 'TaskCreation',
             'params' => array()
         )));
 
-        $this->assertTrue($a->create(array(
+        $this->assertEquals(2, $a->create(array(
             'project_id' => 1,
             'event_name' => GithubWebhook::EVENT_ISSUE_LABEL_CHANGE,
             'action_name' => 'TaskAssignCategoryLabel',
@@ -95,7 +95,7 @@ class ActionTest extends Base
             )
         )));
 
-        $this->assertTrue($a->create(array(
+        $this->assertEquals(3, $a->create(array(
             'project_id' => 1,
             'event_name' => Task::EVENT_CREATE_UPDATE,
             'action_name' => 'TaskAssignColorCategory',

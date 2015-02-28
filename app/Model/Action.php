@@ -248,7 +248,7 @@ class Action extends Base
 
         // $this->container['fileCache']->remove('proxy_action_getAll');
 
-        return true;
+        return $action_id;
     }
 
     /**

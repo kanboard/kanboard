@@ -1250,6 +1250,242 @@ Response example:
 }
 ```
 
+### getAvailableActions
+
+- Purpose: **Get list of available actions**
+- Parameters: none
+- Result on success: **list of actions**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getAvailableActions",
+    "id": 1433237746,
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": {
+        "TaskLogMoveAnotherColumn" : "Add a comment logging moving the task between columns",
+        "TaskAssignColorUser" : "Assign a color to a specific user",
+        "TaskAssignCategoryColor" : "Assign automatically a category based on a color",
+        "TaskAssignColorCategory" : "Assign automatically a color based on a category",
+        "TaskAssignSpecificUser" : "Assign the task to a specific user",
+        "TaskAssignCurrentUser" : "Assign the task to the person who does the action",
+        "TaskAssignUser" : "Change the assignee based on an external username",
+        "TaskAssignCategoryLabel" : "Change the category based on an external label",
+        "TaskClose" : "Close a task",
+        "CommentCreation" : "Create a comment from an external provider",
+        "TaskCreation" : "Create a task from an external provider",
+        "TaskDuplicateAnotherProject" : "Duplicate the task to another project",
+        "TaskMoveAnotherProject" : "Move the task to another project",
+        "TaskOpen" : "Open a task"
+    }
+}
+```
+
+### getAvailableEvents
+
+- Purpose: **Get list of available events**
+- Parameters: none
+- Result on success: **list of events**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getAvailableEvents",
+    "id": 1433237746,
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": {
+        "bitbucket.webhook.commit" : "Bitbucket commit received",
+        "task.close" : "Closing a task",
+        "github.webhook.commit" : "Github commit received",
+        "github.webhook.issue.assignee" : "Github issue assignee change",
+        "github.webhook.issue.closed" : "Github issue closed",
+        "github.webhook.issue.commented" : "Github issue comment created",
+        "github.webhook.issue.label" : "Github issue label change",
+        "github.webhook.issue.opened" : "Github issue opened",
+        "github.webhook.issue.reopened" : "Github issue reopened",
+        "gitlab.webhook.commit" : "Gitlab commit received",
+        "gitlab.webhook.issue.closed" : "Gitlab issue closed",
+        "gitlab.webhook.issue.opened" : "Gitlab issue opened",
+        "task.move.column" : "Move a task to another column",
+        "task.open" : "Open a closed task",
+        "task.assignee_change" : "Task assignee change",
+        "task.create" : "Task creation",
+        "task.create_update" : "Task creation or modification",
+        "task.update" : "Task modification"
+    }
+}
+```
+
+### getCompatibleEvents
+
+- Purpose: **Get list of events compatible with an action**
+- Parameters:
+    - **action_name** (string, required)
+- Result on success: **list of events**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getCompatibleEvents",
+    "id": 1433237746,
+    "params": [
+        "TaskAssignSpecificUser"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": {
+        "task.move.column" : "Move a task to another column",
+        "task.create_update" : "Task creation or modification",
+    }
+}
+```
+
+### getActions
+
+- Purpose: **Get list of actions for a project**
+- Parameters:
+    - **project_id** (integer, required)
+- Result on success: **list of actions info**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getActions",
+    "id": 1433237746,
+    "params": [
+        "1"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": [
+        {
+            "id" : "13",
+            "project_id" : "2",
+            "event_name" : "task.move.column",
+            "action_name" : "TaskAssignSpecificUser",
+            "params" : {
+                "column_id" : "5",
+                "user_id" : "1"
+            }
+        }
+    ]
+}
+```
+
+### createAction
+
+- Purpose: **Create an action**
+- Parameters:
+    - **project_id** (integer, required)
+    - **event_name** (string, required)
+    - **action_name** (string, required)
+    - **params** (list of string pairs, required)
+- Result on success: **action_id**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "createAction",
+    "id": 1433237746,
+    "params": {
+        "project_id" : "2",
+        "event_name" : "task.move.column",
+        "action_name" : "TaskAssignSpecificUser",
+        "params" : {
+            "column_id" : "3",
+            "user_id" : "2"
+        }
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": 14
+    ]
+}
+```
+
+### removeAction
+
+- Purpose: **Remove an action**
+- Parameters:
+    - **action_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getAvailableEvents",
+    "id": 1433237746,
+    "params": [
+        "2",
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1433237746,
+    "result": true
+}
+```
+
 ### createTask
 
 - Purpose: **Create a new task**
