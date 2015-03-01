@@ -5,7 +5,7 @@ vendor_css="jquery-ui.min chosen.min fullcalendar.min font-awesome.min"
 
 app_js="base board calendar analytic task swimlane dashboard"
 vendor_js="jquery-1.11.1.min jquery-ui.min jquery.ui.touch-punch.min chosen.jquery.min dropit.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min app.min"
-lang_js="da de es fi fr hu it ja pl pt-br ru sv th zh-cn"
+lang_js="da de es fi fr hu it ja pl pt-br ru sv th zh-cn tr"
 
 function merge_css {
 

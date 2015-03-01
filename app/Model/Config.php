@@ -63,10 +63,10 @@ class Config extends Base
             'ru_RU' => 'Русский',
             'fi_FI' => 'Suomi',
             'sv_SE' => 'Svenska',
+            'tr_TR' => 'Türkçe',
             'zh_CN' => '中文(简体)',
             'ja_JP' => '日本語',
             'th_TH' => 'ไทย',
-            'tr_TR' => 'Türkçe',
         );
 
         if ($prepend) {
