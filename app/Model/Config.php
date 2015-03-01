@@ -66,6 +66,7 @@ class Config extends Base
             'zh_CN' => '中文(简体)',
             'ja_JP' => '日本語',
             'th_TH' => 'ไทย',
+            'tr_TR' => 'Türkçe',
         );
 
         if ($prepend) {
@@ -99,6 +100,7 @@ class Config extends Base
             'zh_CN' => 'zh-cn',
             'ja_JP' => 'ja',
             'th_TH' => 'th',
+            'tr_TR' => 'tr',
         );
 
         $lang = $this->getCurrentLanguage();
