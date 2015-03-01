@@ -6,7 +6,13 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 47;
+const VERSION = 48;
+
+function version_48($pdo)
+{
+    $pdo->exec('RENAME TABLE task_has_files TO files');
+    $pdo->exec('RENAME TABLE task_has_subtasks TO subtasks');
+}
 
 function version_47($pdo)
 {

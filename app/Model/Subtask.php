@@ -19,7 +19,7 @@ class Subtask extends Base
      *
      * @var string
      */
-    const TABLE = 'task_has_subtasks';
+    const TABLE = 'subtasks';
 
     /**
      * Task "done" status

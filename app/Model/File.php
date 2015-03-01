@@ -17,7 +17,7 @@ class File extends Base
      *
      * @var string
      */
-    const TABLE = 'task_has_files';
+    const TABLE = 'files';
 
     /**
      * Events

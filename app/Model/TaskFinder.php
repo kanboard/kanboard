@@ -80,11 +80,11 @@ class TaskFinder extends Base
         return $this->db
             ->table(Task::TABLE)
             ->columns(
-                '(SELECT count(*) FROM comments WHERE task_id=tasks.id) AS nb_comments',
-                '(SELECT count(*) FROM task_has_files WHERE task_id=tasks.id) AS nb_files',
-                '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id) AS nb_subtasks',
-                '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id AND status=2) AS nb_completed_subtasks',
-                '(SELECT count(*) FROM ' . TaskLink::TABLE . ' WHERE ' . TaskLink::TABLE . '.task_id = tasks.id) AS nb_links',
+                '(SELECT count(*) FROM '.Comment::TABLE.' WHERE task_id=tasks.id) AS nb_comments',
+                '(SELECT count(*) FROM '.File::TABLE.' WHERE task_id=tasks.id) AS nb_files',
+                '(SELECT count(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id) AS nb_subtasks',
+                '(SELECT count(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
+                '(SELECT count(*) FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id) AS nb_links',
                 'tasks.id',
                 'tasks.reference',
                 'tasks.title',
