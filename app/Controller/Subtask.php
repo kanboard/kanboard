@@ -185,7 +185,7 @@ class Subtask extends Base
         if ($redirect === 'board') {
 
             $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
-            
+
             $this->response->html($this->template->render('board/subtasks', array(
                 'subtasks' => $this->subtask->getAll($task['id']),
                 'task' => $task,
@@ -258,5 +258,23 @@ class Subtask extends Base
             default:
                 $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
+    }
+
+    /**
+     * Move subtask position
+     *
+     * @access public
+     */
+    public function movePosition()
+    {
+        $this->checkCSRFParam();
+        $project_id = $this->request->getIntegerParam('project_id');
+        $task_id = $this->request->getIntegerParam('task_id');
+        $subtask_id = $this->request->getIntegerParam('subtask_id');
+        $direction = $this->request->getStringParam('direction');
+        $method = $direction === 'up' ? 'moveUp' : 'moveDown';
+
+        $this->subtask->$method($task_id, $subtask_id);
+        $this->response->redirect($this->helper->url('task', 'show', array('project_id' => $project_id, 'task_id' => $task_id)).'#subtasks');
     }
 }

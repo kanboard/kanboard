@@ -11,6 +11,78 @@ use Model\User;
 
 class SubTaskTest extends Base
 {
+    public function testMoveUp()
+    {
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1)));
+        $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1)));
+        $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 1)));
+
+        $subtask = $s->getById(1);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(1, $subtask['position']);
+
+        $subtask = $s->getById(2);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(2, $subtask['position']);
+
+        $subtask = $s->getById(3);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(3, $subtask['position']);
+
+        $this->assertTrue($s->moveUp(1, 2));
+
+        $subtask = $s->getById(1);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(2, $subtask['position']);
+
+        $subtask = $s->getById(2);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(1, $subtask['position']);
+
+        $subtask = $s->getById(3);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(3, $subtask['position']);
+
+        $this->assertFalse($s->moveUp(1, 2));
+    }
+
+    public function testMoveDown()
+    {
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1)));
+        $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1)));
+        $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 1)));
+
+        $this->assertTrue($s->moveDown(1, 1));
+
+        $subtask = $s->getById(1);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(2, $subtask['position']);
+
+        $subtask = $s->getById(2);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(1, $subtask['position']);
+
+        $subtask = $s->getById(3);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(3, $subtask['position']);
+
+        $this->assertFalse($s->moveDown(1, 3));
+    }
+
     public function testDuplicate()
     {
         $tc = new TaskCreation($this->container);
@@ -53,5 +125,8 @@ class SubTaskTest extends Base
 
         $this->assertEquals(0, $subtasks[0]['user_id']);
         $this->assertEquals(0, $subtasks[1]['user_id']);
+
+        $this->assertEquals(1, $subtasks[0]['position']);
+        $this->assertEquals(2, $subtasks[1]['position']);
     }
 }

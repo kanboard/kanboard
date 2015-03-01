@@ -20,7 +20,7 @@
                 <?php if (! isset($not_editable)): ?>
                     <?= $this->toggleSubtaskStatus($subtask, 'task') ?>
                 <?php else: ?>
-                    <?= $this->render('subtask/icons', array('subtask' => $subtask)) . $this->e($subtask['status_name']) ?>
+                    <?= $this->render('subtask/icons', array('subtask' => $subtask)) . $this->e($subtask['title']) ?>
                 <?php endif ?>
             </td>
             <td>
@@ -40,6 +40,16 @@
             <?php if (! isset($not_editable)): ?>
                 <td>
                     <ul>
+                        <?php if ($subtask['position'] > 1): ?>
+                            <li>
+                                <?= $this->a(t('Move Up'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'up'), true) ?>
+                            </li>
+                        <?php endif ?>
+                        <?php if ($subtask['position'] != 0 && $subtask['position'] != count($subtasks)): ?>
+                            <li>
+                                <?= $this->a(t('Move Down'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'down'), true) ?>
+                            </li>
+                        <?php endif ?>
                         <li>
                             <?= $this->a(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
                         </li>

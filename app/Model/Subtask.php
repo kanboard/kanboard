@@ -122,7 +122,7 @@ class Subtask extends Base
                     ->eq('task_id', $task_id)
                     ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
                     ->join(User::TABLE, 'id', 'user_id')
-                    ->asc(self::TABLE.'.id')
+                    ->asc(self::TABLE.'.position')
                     ->filter(array($this, 'addStatusName'))
                     ->findAll();
     }
@@ -164,6 +164,22 @@ class Subtask extends Base
     }
 
     /**
+     * Get the position of the last column for a given project
+     *
+     * @access public
+     * @param  integer  $task_id   Task id
+     * @return integer
+     */
+    public function getLastPosition($task_id)
+    {
+        return (int) $this->db
+                        ->table(self::TABLE)
+                        ->eq('task_id', $task_id)
+                        ->desc('position')
+                        ->findOneColumn('position');
+    }
+
+    /**
      * Create a new subtask
      *
      * @access public
@@ -173,6 +189,8 @@ class Subtask extends Base
     public function create(array $values)
     {
         $this->prepare($values);
+        $values['position'] = $this->getLastPosition($values['task_id']) + 1;
+
         $subtask_id = $this->persist(self::TABLE, $values);
 
         if ($subtask_id) {
@@ -206,6 +224,64 @@ class Subtask extends Base
         }
 
         return $result;
+    }
+
+    /**
+     * Move a subtask down, increment the position value
+     *
+     * @access public
+     * @param  integer  $task_id
+     * @param  integer  $subtask_id
+     * @return boolean
+     */
+    public function moveDown($task_id, $subtask_id)
+    {
+        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
+        $positions = array_flip($subtasks);
+
+        if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] < count($subtasks)) {
+
+            $position = ++$subtasks[$subtask_id];
+            $subtasks[$positions[$position]]--;
+
+            $this->db->startTransaction();
+            $this->db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position));
+            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $subtasks[$positions[$position]]));
+            $this->db->closeTransaction();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Move a subtask up, decrement the position value
+     *
+     * @access public
+     * @param  integer  $task_id
+     * @param  integer  $subtask_id
+     * @return boolean
+     */
+    public function moveUp($task_id, $subtask_id)
+    {
+        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
+        $positions = array_flip($subtasks);
+
+        if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] > 1) {
+
+            $position = --$subtasks[$subtask_id];
+            $subtasks[$positions[$position]]++;
+
+            $this->db->startTransaction();
+            $this->db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position));
+            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $subtasks[$positions[$position]]));
+            $this->db->closeTransaction();
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -286,9 +362,9 @@ class Subtask extends Base
         return $this->db->transaction(function ($db) use ($src_task_id, $dst_task_id) {
 
             $subtasks = $db->table(Subtask::TABLE)
-                                 ->columns('title', 'time_estimated')
+                                 ->columns('title', 'time_estimated', 'position')
                                  ->eq('task_id', $src_task_id)
-                                 ->asc('id') // Explicit sorting for postgresql
+                                 ->asc('position')
                                  ->findAll();
 
             foreach ($subtasks as &$subtask) {
