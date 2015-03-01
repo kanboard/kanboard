@@ -75,6 +75,9 @@
                 <?= t('Status is closed') ?>
             <?php endif ?>
         </li>
+        <li>
+            <?= t('Tags:') ?><?= $this->render('task/tags', array('task' => $task, 'project' => $project)) ?>
+        </li>
         <?php if ($project['is_public']): ?>
         <li>
             <?= $this->a(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
