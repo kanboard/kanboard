@@ -737,4 +737,5 @@ return array(
     'Compact view' => 'Ekrana sığdır',
     'Horizontal scrolling' => 'Geniş görünüm',
     'Compact/wide view' => 'Ekrana sığdır / Geniş görünüm',
+    // 'No results match:' => '',
 );

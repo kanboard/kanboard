@@ -168,7 +168,8 @@ var Kanboard = (function() {
 
             // Project select box
             $("#board-selector").chosen({
-                width: 180
+                width: 180,
+                no_results_text: $("#board-selector").data("notfound")
             });
 
             $("#board-selector").change(function() {

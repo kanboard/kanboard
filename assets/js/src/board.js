@@ -322,15 +322,18 @@ Kanboard.Board = (function() {
         var projectId = $('#board').data('project-id');
 
         $("#form-user_id").chosen({
-            width: "180px"
+            width: "180px",
+            no_results_text: $("#form-user_id").data("notfound")
         });
 
         $("#form-category_id").chosen({
-            width: "200px"
+            width: "200px",
+            no_results_text: $("#form-category_id").data("notfound")
         });
 
         $("#more-filters").chosen({
-            width: "30%"
+            width: "30%",
+            no_results_text: $("#more-filters").data("notfound")
         });
 
         $(".apply-filters").change(function(e) {

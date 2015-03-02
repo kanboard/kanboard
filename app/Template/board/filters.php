@@ -57,13 +57,13 @@
             </span>
         </li>
         <li>
-            <?= $this->formSelect('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"'), 'apply-filters chosen-select') ?>
+            <?= $this->formSelect('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"', 'data-notfound="'.t('No results match:').'"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
-            <?= $this->formSelect('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"'), 'apply-filters chosen-select') ?>
+            <?= $this->formSelect('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"', 'data-notfound="'.t('No results match:').'"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
-            <select id="more-filters" multiple data-placeholder="<?= t('More filters') ?>" class="apply-filters chosen-select hide-mobile">
+            <select id="more-filters" multiple data-placeholder="<?= t('More filters') ?>" data-notfound="<?= t('No results match:') ?>" class="apply-filters chosen-select hide-mobile">
                 <option value=""></option>
                 <option value="filter-due-date"><?= t('Filter by due date') ?></option>
                 <option value="filter-recent"><?= t('Filter recently updated') ?></option>

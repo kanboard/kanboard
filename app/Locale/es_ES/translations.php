@@ -737,4 +737,5 @@ return array(
     // 'Compact view' => '',
     // 'Horizontal scrolling' => '',
     // 'Compact/wide view' => '',
+    // 'No results match:' => '',
 );

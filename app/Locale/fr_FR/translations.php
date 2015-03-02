@@ -739,4 +739,5 @@ return array(
     'Compact view' => 'Vue compacte',
     'Horizontal scrolling' => 'Défilement horizontal',
     'Compact/wide view' => 'Basculer entre la vue compacte et étendue',
+    'No results match:' => 'Aucun résultat :',
 );
