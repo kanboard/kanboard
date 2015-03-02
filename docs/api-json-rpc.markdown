@@ -144,6 +144,32 @@ Array
 Procedures
 ----------
 
+### getVersion
+
+- Purpose: **Get the application version**
+- Parameters: none
+- Result: **version** (Example: 1.0.12, master)
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getVersion",
+    "id": 1661138292
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1661138292,
+    "result": "1.0.13"
+}
+```
+
 ### getTimezone
 
 - Purpose: **Get the application timezone**

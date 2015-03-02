@@ -39,7 +39,7 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $this->client = new JsonRPC\Client(API_URL);
         $this->client->authentication('jsonrpc', API_KEY);
-        //$this->client->debug = true;
+        // $this->client->debug = true;
     }
 
     private function getTaskId()
@@ -53,8 +53,12 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testGetTimezone()
     {
-        $timezone = $this->client->getTimezone();
-        $this->assertEquals('Europe/Paris', $timezone);
+        $this->assertEquals('Europe/Paris', $this->client->getTimezone());
+    }
+
+    public function testGetVersion()
+    {
+        $this->assertEquals('master', $this->client->getVersion());
     }
 
     public function testRemoveAll()

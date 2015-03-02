@@ -418,6 +418,10 @@ $server->register('getTimezone', function() use ($container) {
     return $container['config']->get('application_timezone');
 });
 
+$server->register('getVersion', function() use ($container) {
+    return APP_VERSION;
+});
+
 /**
  * Parse incoming requests
  */
