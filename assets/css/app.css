@@ -1551,3 +1551,35 @@ td li.dropit-trigger {
 .task-board .dropit-submenu a:hover {
     text-decoration: none;
 }
+.task-show-images {
+    list-style-type: none;
+}
+.task-show-images li img {
+    width: 100%;
+}
+.task-show-images li .img_container {
+    width: 250px;
+    height: 100px;            
+    overflow: hidden;
+}
+.task-show-images li {
+    padding: 10px;
+    overflow: auto;
+    width: 250px;
+    min-height: 120px;
+    display: inline-block;
+    vertical-align: top;
+}
+.task-show-images li p{
+    padding: 5px;
+    font-weight: bold;
+}
+.task-show-images li:hover {
+    background: #eee;
+}
+.task-show-image-actions {
+    margin-left: 5px;
+}
+.task-show-images li .img_container:hover {
+    height: 100%;
+}
