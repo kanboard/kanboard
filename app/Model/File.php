@@ -111,6 +111,38 @@ class File extends Base
             ->asc('name')
             ->findAll();
     }
+    
+    /**
+     * Get all images for a given task
+     *
+     * @access public
+     * @param  integer   $task_id    Task id
+     * @return array
+     */
+    public function getAllImages($task_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('task_id', $task_id)
+            ->eq('is_image', 1)
+            ->asc('name')
+            ->findAll();
+    }
+    
+    /**
+     * Get all files without images for a given task
+     *
+     * @access public
+     * @param  integer   $task_id    Task id
+     * @return array
+     */
+    public function getAllDocuments($task_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('task_id', $task_id)
+            ->eq('is_image', 0)
+            ->asc('name')
+            ->findAll();
+    }
 
     /**
      * Check if a filename is an image

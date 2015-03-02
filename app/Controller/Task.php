@@ -68,7 +68,8 @@ class Task extends Base
 
         $this->response->html($this->taskLayout('task/show', array(
             'project' => $this->project->getById($task['project_id']),
-            'files' => $this->file->getAll($task['id']),
+            'files' => $this->file->getAllDocuments($task['id']),
+            'images' => $this->file->getAllImages($task['id']),
             'comments' => $this->comment->getAll($task['id']),
             'subtasks' => $subtasks,
             'links' => $this->taskLink->getLinks($task['id']),
