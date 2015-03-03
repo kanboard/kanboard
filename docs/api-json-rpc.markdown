@@ -1045,6 +1045,95 @@ Response example:
 }
 ```
 
+### getAllSwimlanes
+
+- Purpose: **Get the list of all swimlanes of a project**
+- Parameters:
+    - **project_id** (integer, required)
+- Result on success: **swimlane properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getAllSwimlanes",
+    "id": 1242049935,
+    "params": [
+        2
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1242049935,
+    "result": [
+        {
+            "id": "0",
+            "name": "Default"
+        },
+        {
+            "id": "3",
+            "name": "Version 1.0",
+            "is_active" : "0",
+            "position" : 1,
+            "project_id" : 2
+        },
+        {
+            "id": "2",
+            "name": "Version 7.0",
+            "is_active" : "1"
+            "position" : 2,
+            "project_id" : 2
+        }
+    ]
+}
+```
+
+### getSwimlane
+
+- Purpose: **Get the a swimlane**
+- Parameters:
+    - **project_id** (integer, required)
+    - **name** (string, required)
+- Result on success: **swimlane properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getSwimlane",
+    "id": 1242049935,
+    "params": [
+        2,
+        "Version 1.0"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1242049935,
+    "result": {
+        "id": "3",
+        "name": "Version 1.0",
+        "is_active" : "0",
+        "position" : 2,
+        "project_id" : 2
+    }
+}
+```
+
 ### moveSwimlaneUp
 
 - Purpose: **Move up the swimlane position**

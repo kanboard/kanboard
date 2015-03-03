@@ -68,6 +68,8 @@ $server->bind('removeColumn', $container['board'], 'removeColumn');
  * Swimlane procedures
  */
 $server->bind('getSwimlanes', $container['swimlane'], 'getSwimlanes');
+$server->bind('getAllSwimlanes', $container['swimlane'], 'getAll');
+$server->bind('getSwimlane', $container['swimlane'], 'getByName');
 $server->bind('addSwimlane', $container['swimlane'], 'create');
 $server->bind('updateSwimlane', $container['swimlane'], 'rename');
 $server->bind('removeSwimlane', $container['swimlane'], 'remove');

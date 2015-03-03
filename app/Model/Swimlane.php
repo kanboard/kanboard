@@ -75,6 +75,22 @@ class Swimlane extends Base
     }
 
     /**
+     * Get a swimlane by the project and the name
+     *
+     * @access public
+     * @param  integer   $project_id      Project id
+     * @param  string    $name            Name
+     * @return integer
+     */
+    public function getByName($project_id, $name)
+    {
+        return $this->db->table(self::TABLE)
+                        ->eq('project_id', $project_id)
+                        ->eq('name', $name)
+                        ->findAll();
+    }
+
+    /**
      * Get default swimlane properties
      *
      * @access public
