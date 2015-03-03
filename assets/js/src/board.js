@@ -384,16 +384,14 @@ Kanboard.Board = (function() {
             $(".filter-wide").show();
             $(".filter-compact").hide();
 
-            $("#board-container").removeClass("board-container-wide").addClass("board-container-compact");
-            $("#board th,#board td").removeClass("board-column-wide").addClass("board-column-compact");
+            $("#board th").addClass("board-column-compact");
         }
         else {
 
             $(".filter-wide").hide();
             $(".filter-compact").show();
 
-            $("#board-container").removeClass("board-container-compact").addClass("board-container-wide");
-            $("#board th,#board td").removeClass("board-column-compact").addClass("board-column-wide");
+            $("#board th").removeClass("board-column-compact");
         }
     }
 

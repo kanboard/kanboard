@@ -635,9 +635,9 @@ div.ui-tooltip {
 /* header */
 header {
     margin-top: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 35px;
     clear: both;
-    border-bottom: 1px solid #dedede;
+    overflow: auto;
 }
 
 header h1 {
@@ -659,6 +659,15 @@ header li {
 header a {
     color: #777;
     text-decoration: none;
+}
+
+nav {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dedede;
+    z-index: -1;
 }
 
 nav .active a {
@@ -698,6 +707,7 @@ nav .active a {
 /* page header */
 .page-header {
     margin-bottom: 25px;
+    overflow: auto;
 }
 
 .page-header h2 {
@@ -738,6 +748,10 @@ nav .active a {
 /* board filters */
 .board-filters {
     font-size: 0.95em;
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    z-index: -1;
 }
 
 #more-filters {
@@ -757,27 +771,25 @@ nav .active a {
 
 /* board table */
 #board-container {
+    padding-top: 20px;
     padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
 }
 
-/* Board container classes for wide/compact view */
-.board-container-wide {
-    overflow-x: scroll;
+#board {
+    table-layout: fixed;
+    background-color: white;
 }
 
-.board-container-compact {
-    overflow-x: hidden;
+#board th {
+    width: 120px; /* Width of swimlane column */
 }
 
-/* Board table column for wide/compact view */
-.board-column-wide {
-    min-width: 240px;
-    max-width: 240px;
+#board th.board-column {
+    width: 240px; /* Width of other columns, in default [horizontal scrolling] view mode */
 }
 
-.board-column-compact {
-    min-width: 0px;
-    max-width: 0px;
+#board th.board-column.board-column-compact {
+    width: initial; /* Do not force the width of the columns in compact view mode */
 }
 
 #board th a {
