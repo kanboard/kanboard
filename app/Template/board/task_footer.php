@@ -1,5 +1,6 @@
 <?php if ($task['category_id']): ?>
 <div class="task-board-category-container">
+    <?php $description = isset($categories[$task['category_id']]) ? $this->e($categories[$task['category_id']]->description) : null; ?>
     <span class="task-board-category">
         <?= $this->a(
             $this->inList($task['category_id'], $categories),
@@ -7,8 +8,8 @@
             'changeCategory',
             array('task_id' => $task['id'], 'project_id' => $task['project_id']),
             false,
-            'task-board-popover',
-            t('Change category')
+            'task-board-popover' . ($description ? ' column-tooltip' : ''),
+            $description ? : t('Change category')
         ) ?>
     </span>
 </div>

@@ -6,6 +6,30 @@ use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
 /**
+ * Entry returned by getList
+ * It contains both name and description, and is implicitely convertible to string to maintain compatibility
+ * with code that expects a simpler string array.
+ *
+ * @package  model
+ * @author   Francois Ferrand
+ */
+class CategoryListEntry {
+    public $name;
+    public $description;
+
+    function __construct($name, $description = '')
+    {
+        $this->name = $name;
+        $this->description = $description;
+    }
+
+    function __toString()
+    {
+        return $this->name;
+    }
+}
+
+/**
  * Category model
  *
  * @package  model
@@ -84,10 +108,15 @@ class Category extends Base
      */
     public function getList($project_id, $prepend_none = true, $prepend_all = false)
     {
-        $listing = $this->db->hashtable(self::TABLE)
+        $categories = $this->db->table(self::TABLE)
             ->eq('project_id', $project_id)
             ->asc('name')
-            ->getAll('id', 'name');
+            ->columns('id', 'name', 'description')
+            ->findAll();
+
+        $listing = array();
+        foreach($categories as $category)
+            $listing[ $category['id'] ] = new CategoryListEntry($category['name'], $category['description']);
 
         $prepend = array();
 
