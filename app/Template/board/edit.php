@@ -13,7 +13,7 @@
     <tr>
         <td class="column-60"><?= $this->e($column['title']) ?>
          <?php if (! empty($column['description'])): ?>
-            <span class="column-tooltip" title='<?= $this->markdown($column['description']) ?>'>
+            <span class="column-tooltip" title='<?= $this->e($this->markdown($column['description'])) ?>'>
                 <i class="fa fa-info-circle"></i>
             </span>
         <?php endif ?>
