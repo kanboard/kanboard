@@ -79,8 +79,8 @@ class Swimlane extends Base
      *
      * @access public
      * @param  integer   $project_id      Project id
-     * @param  string    $name            Name
-     * @return integer
+     * @param  string    $name            Swimlane name
+     * @return array
      */
     public function getByName($project_id, $name)
     {

@@ -1080,16 +1080,16 @@ Response example:
         {
             "id": "3",
             "name": "Version 1.0",
-            "is_active" : "0",
-            "position" : 1,
-            "project_id" : 2
+            "is_active": "0",
+            "position": 1,
+            "project_id": 2
         },
         {
             "id": "2",
             "name": "Version 7.0",
-            "is_active" : "1"
-            "position" : 2,
-            "project_id" : 2
+            "is_active": "1",
+            "position": 2,
+            "project_id": 2
         }
     ]
 }
@@ -1127,9 +1127,9 @@ Response example:
     "result": {
         "id": "3",
         "name": "Version 1.0",
-        "is_active" : "0",
-        "position" : 2,
-        "project_id" : 2
+        "is_active": "0",
+        "position": 2,
+        "project_id": 2
     }
 }
 ```
