@@ -21,6 +21,7 @@ defined('DB_USERNAME') or define('DB_USERNAME', 'root');
 defined('DB_PASSWORD') or define('DB_PASSWORD', '');
 defined('DB_HOSTNAME') or define('DB_HOSTNAME', 'localhost');
 defined('DB_NAME') or define('DB_NAME', 'kanboard');
+defined('DB_PORT') or define('DB_PORT', null);
 
 // LDAP configuration
 defined('LDAP_AUTH') or define('LDAP_AUTH', false);

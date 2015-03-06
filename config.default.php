@@ -40,6 +40,9 @@ define('DB_HOSTNAME', 'localhost');
 // Mysql/Postgres database name
 define('DB_NAME', 'kanboard');
 
+// Mysql/Postgres custom port (null = default port)
+define('DB_PORT', null);
+
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', false);
 
