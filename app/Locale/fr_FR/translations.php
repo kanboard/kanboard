@@ -1,6 +1,8 @@
 <?php
 
 return array(
+    'number.decimals_separator' => ',',
+    'number.thousands_separator' => ' ',
     'None' => 'Aucun',
     'edit' => 'modifier',
     'Edit' => 'Modifier',
@@ -740,4 +742,15 @@ return array(
     'Horizontal scrolling' => 'Défilement horizontal',
     'Compact/wide view' => 'Basculer entre la vue compacte et étendue',
     'No results match:' => 'Aucun résultat :',
+    'Remove hourly rate' => 'Supprimer un taux horaire',
+    'Do you really want to remove this hourly rate?' => 'Voulez-vous vraiment supprimer ce taux horaire ?',
+    'Hourly rates' => 'Taux horaires',
+    'Hourly rate' => 'Taux horaire',
+    'Currency' => 'Devise',
+    'Effective date' => 'Date d\'effet',
+    'Add new rate' => 'Ajouter un nouveau taux horaire',
+    'Rate removed successfully.' => 'Taux horaire supprimé avec succès.',
+    'Unable to remove this rate.' => 'Impossible de supprimer ce taux horaire.',
+    'Unable to save the hourly rate.' => 'Impossible de sauvegarder ce taux horaire.',
+    'Hourly rate created successfully.' => 'Taux horaire créé avec succès.',
 );

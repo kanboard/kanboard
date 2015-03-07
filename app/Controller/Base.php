@@ -34,6 +34,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\Config                 $config
  * @property \Model\DateParser             $dateParser
  * @property \Model\File                   $file
+ * @property \Model\HourlyRate             $hourlyRate
  * @property \Model\LastLogin              $lastLogin
  * @property \Model\Notification           $notification
  * @property \Model\Project                $project

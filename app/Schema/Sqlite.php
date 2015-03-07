@@ -6,7 +6,19 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 48;
+const VERSION = 49;
+
+function version_49($pdo)
+{
+    $pdo->exec("CREATE TABLE hourly_rates (
+        id INTEGER PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        rate REAL DEFAULT 0,
+        date_effective INTEGER NOT NULL,
+        currency TEXT NOT NULL,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+    )");
+}
 
 function version_48($pdo)
 {

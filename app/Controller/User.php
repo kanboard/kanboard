@@ -69,12 +69,12 @@ class User extends Base
     /**
      * Common layout for user views
      *
-     * @access private
+     * @access protected
      * @param  string    $template   Template name
      * @param  array     $params     Template parameters
      * @return string
      */
-    private function layout($template, array $params)
+    protected function layout($template, array $params)
     {
         $content = $this->template->render($template, $params);
         $params['user_content_for_layout'] = $content;
@@ -90,10 +90,10 @@ class User extends Base
     /**
      * Common method to get the user
      *
-     * @access private
+     * @access protected
      * @return array
      */
-    private function getUser()
+    protected function getUser()
     {
         $user = $this->user->getById($this->request->getIntegerParam('user_id'));
 

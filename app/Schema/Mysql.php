@@ -6,7 +6,20 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 49;
+const VERSION = 50;
+
+function version_50($pdo)
+{
+    $pdo->exec("CREATE TABLE hourly_rates (
+        id INT NOT NULL AUTO_INCREMENT,
+        user_id INT NOT NULL,
+        rate FLOAT DEFAULT 0,
+        date_effective INTEGER NOT NULL,
+        currency TEXT NOT NULL,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+        PRIMARY KEY(id)
+    ) ENGINE=InnoDB CHARSET=utf8");
+}
 
 function version_49($pdo)
 {

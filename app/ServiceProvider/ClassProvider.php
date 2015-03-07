@@ -23,6 +23,7 @@ class ClassProvider implements ServiceProviderInterface
             'Config',
             'DateParser',
             'File',
+            'HourlyRate',
             'LastLogin',
             'Link',
             'Notification',

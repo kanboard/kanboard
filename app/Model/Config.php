@@ -22,6 +22,26 @@ class Config extends Base
     const TABLE = 'settings';
 
     /**
+     * Get available currencies
+     *
+     * @access public
+     * @return array
+     */
+    public function getCurrencies()
+    {
+        return array(
+            'USD' => t('USD - US Dollar'),
+            'EUR' => t('EUR - Euro'),
+            'GBP' => t('GBP - British Pound'),
+            'CAD' => t('CAD - Canadian Dollar'),
+            'AUD' => t('AUD - Australian Dollar'),
+            'NZD' => t('NZD - New Zealand Dollar'),
+            'INR' => t('INR - Indian Rupee'),
+            'JPY' => t('JPY - Japanese Yen'),
+        );
+    }
+
+    /**
      * Get available timezones
      *
      * @access public
