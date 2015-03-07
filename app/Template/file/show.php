@@ -12,7 +12,7 @@
                 <?php foreach ($images as $file): ?>
                     <li>
                         <div class="img_container">
-                            <img src="<?= $this->u('file', 'image', array('file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" alt="<?= $this->e($file['name']) ?>"/>
+                            <img src="<?= $this->u('file', 'imageThumbnail', array('width' => 250, 'file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" alt="<?= $this->e($file['name']) ?>"/>
                         </div>
                         <p>
                             <?= $this->e($file['name']) ?>
@@ -31,17 +31,20 @@
             <h3>
                 <?= t('Files') ?>
             </h3>
-            <ul class="task-show-files">
-                <?php foreach ($files as $file): ?>
-                    <li>
-                        <?= $this->a($this->e($file['name']), 'file', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
-                        <span class="task-show-file-actions">                            
-                            <i class="fa fa-trash"></i> <?= $this->a(t('remove'), 'file', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
-                        </span>
-                    </li>
-                <?php endforeach ?>
-            </ul>
-
+                <table class="task-show-file-table">
+                    <?php foreach ($files as $file): ?>
+                        <tr>
+                            <td><i class="fa <?= $this->file->get_icon($file['name']) ?> fa-fw"></i></td>
+                            <td>
+                                <?= $this->e($file['name']) ?>
+                            </td><td>
+                                <span class="task-show-file-actions">                            
+                                    <i class="fa fa-trash"></i> <?= $this->a(t('remove'), 'file', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                                    <i class="fa fa-download"></i> <?= $this->a(t('download'), 'file', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                                </span>
+                            </td></tr>
+                    <?php endforeach ?>
+                </table>
         </div>
     <?php endif
     ?>
