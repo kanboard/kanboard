@@ -33,6 +33,7 @@ class Config extends Base
             'USD' => t('USD - US Dollar'),
             'EUR' => t('EUR - Euro'),
             'GBP' => t('GBP - British Pound'),
+            'CHF' => t('CHF - Swiss Francs'),
             'CAD' => t('CAD - Canadian Dollar'),
             'AUD' => t('AUD - Australian Dollar'),
             'NZD' => t('NZD - New Zealand Dollar'),
