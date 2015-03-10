@@ -41,4 +41,24 @@
     </tr>
     <?php endforeach ?>
 </table>
+
+<?php if (! isset($not_editable) && isset($link_label_list)): ?>
+    <form action="<?= $this->u('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
+    
+        <?= $this->formCsrf() ?>
+        <?= $this->formHidden('task_id', array('task_id' => $task['id'])) ?>
+        <?= $this->formHidden('opposite_task_id', array()) ?>
+    
+        <?= $this->formSelect('link_id', $link_label_list, array(), array()) ?>
+    
+        <?= $this->formText(
+            'title',
+            array(),
+            array(),
+            array('required', 'data-dst-field="opposite_task_id"', 'data-search-url="'.$this->u('app', 'autocomplete', array('exclude_task_id' => $task['id'])).'"'),
+            'task-autocomplete') ?>
+    
+        <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
+    </form>
+<?php endif ?>
 <?php endif ?>
