@@ -57,6 +57,11 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\TaskPosition           $taskPosition
  * @property \Model\TaskPermission         $taskPermission
  * @property \Model\TaskStatus             $taskStatus
+ * @property \Model\Timetable              $timetable
+ * @property \Model\TimetableDay           $timetableDay
+ * @property \Model\TimetableWeek          $timetableWeek
+ * @property \Model\TimetableExtra         $timetableExtra
+ * @property \Model\TimetableOff           $timetableOff
  * @property \Model\TaskValidator          $taskValidator
  * @property \Model\TaskLink               $taskLink
  * @property \Model\CommentHistory         $commentHistory

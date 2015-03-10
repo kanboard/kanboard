@@ -8,7 +8,7 @@ namespace Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class HourlyRate extends User
+class Hourlyrate extends User
 {
     /**
      * Display rate and form

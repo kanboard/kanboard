@@ -58,6 +58,10 @@ th a:hover {
     text-overflow: ellipsis;
 }
 
+.table-stripped tr:nth-child(odd) td {
+    background: #fefefe;
+}
+
 .column-5 {
     width: 5%;
 }

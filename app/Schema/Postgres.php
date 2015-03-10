@@ -6,12 +6,54 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 31;
+const VERSION = 32;
+
+function version_32($pdo)
+{
+    $pdo->exec('CREATE TABLE timetable_day (
+        "id" SERIAL PRIMARY KEY,
+        "user_id" INTEGER NOT NULL,
+        "start" VARCHAR(5) NOT NULL,
+        "end" VARCHAR(5) NOT NULL,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+    )');
+
+    $pdo->exec('CREATE TABLE timetable_week (
+        "id" SERIAL PRIMARY KEY,
+        "user_id" INTEGER NOT NULL,
+        "day" INTEGER NOT NULL,
+        "start" VARCHAR(5) NOT NULL,
+        "end" VARCHAR(5) NOT NULL,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+    )');
+
+    $pdo->exec('CREATE TABLE timetable_off (
+        "id" SERIAL PRIMARY KEY,
+        "user_id" INTEGER NOT NULL,
+        "date" VARCHAR(10) NOT NULL,
+        "all_day" BOOLEAN DEFAULT \'0\',
+        "start" VARCHAR(5) DEFAULT 0,
+        "end" VARCHAR(5) DEFAULT 0,
+        "comment" TEXT,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+    )');
+
+    $pdo->exec('CREATE TABLE timetable_extra (
+        "id" SERIAL PRIMARY KEY,
+        "user_id" INTEGER NOT NULL,
+        "date" VARCHAR(10) NOT NULL,
+        "all_day" BOOLEAN DEFAULT \'0\',
+        "start" VARCHAR(5) DEFAULT 0,
+        "end" VARCHAR(5) DEFAULT 0,
+        "comment" TEXT,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+    )');
+}
 
 function version_31($pdo)
 {
     $pdo->exec("CREATE TABLE hourly_rates (
-        id SERIAL,
+        id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL,
         rate REAL DEFAULT 0,
         date_effective INTEGER NOT NULL,

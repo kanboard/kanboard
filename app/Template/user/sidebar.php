@@ -43,6 +43,9 @@
             <li>
                 <?= $this->a(t('Hourly rates'), 'hourlyrate', 'index', array('user_id' => $user['id'])) ?>
             </li>
+            <li>
+                <?= $this->a(t('Manage timetable'), 'timetable', 'index', array('user_id' => $user['id'])) ?>
+            </li>
         <?php endif ?>
 
         <?php if ($this->userSession->isAdmin() && ! $this->userSession->isCurrentUser($user['id'])): ?>
