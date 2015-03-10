@@ -242,6 +242,21 @@ var Kanboard = (function() {
             // Dropdown
             $(".dropit-submenu").hide();
             $('.dropdown').not(".dropit").dropit({ triggerParentEl : "span" });
+            
+            if ($(".task-autocomplete").length) {
+            	$(".task-autocomplete").siblings().find("input[type=submit]").attr('disabled','disabled');
+
+                $(".task-autocomplete").autocomplete({
+                    source: $(".task-autocomplete").data("search-url"),
+                    minLength: 2,
+                    select: function(event, ui) {
+                        var field = $(".task-autocomplete").data("dst-field");
+                        $("input[name=" + field + "]").val(ui.item.id);
+
+                        $(".task-autocomplete").siblings().find("input[type=submit]").removeAttr('disabled');
+                    }
+                });
+            }
         }
     };
 
