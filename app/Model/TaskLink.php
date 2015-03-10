@@ -4,6 +4,7 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
+use PicoDb\Table;
 
 /**
  * TaskLink model
@@ -57,6 +58,7 @@ class TaskLink extends Base
                     ->join(Link::TABLE, 'id', 'link_id')
                     ->join(Task::TABLE, 'id', 'opposite_task_id')
                     ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+                    ->orderBy(Link::TABLE.'.id ASC, '.Board::TABLE.'.position ASC, '.Task::TABLE.'.is_active DESC, '.Task::TABLE.'.id', Table::SORT_ASC)
                     ->findAll();
     }
 
