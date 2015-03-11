@@ -773,4 +773,6 @@ return array(
     // 'Remove time slot' => '',
     // 'Add new time slot' => '',
     // 'This timetable is used when the checkbox "all day" is checked for scheduled time off and overtime.' => '',
+    // 'Files' => '',
+    // 'Images' => '',
 );

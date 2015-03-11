@@ -111,7 +111,7 @@ class File extends Base
             ->asc('name')
             ->findAll();
     }
-    
+
     /**
      * Get all images for a given task
      *
@@ -127,7 +127,7 @@ class File extends Base
             ->asc('name')
             ->findAll();
     }
-    
+
     /**
      * Get all files without images for a given task
      *
@@ -153,76 +153,19 @@ class File extends Base
      */
     public function isImage($filename)
     {
-        $info = pathinfo($filename);
-        $extension = strtolower($info['extension']);
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
         switch ($extension) {
             case 'jpeg':
-            case 'jpg':                
-            case 'png':                
+            case 'jpg':
+            case 'png':
             case 'gif':
                 return true;
-                break;
-            default:
-                return false;
-                break;
         }
+
+        return false;
     }
 
-    /**
-     * get Font-Awesome Icon for file extension
-     *
-     * @access public
-     * @param  string   $filename   Filename
-     * @return string   Font-Awesome-Icon-Name
-     */
-    public function get_icon($filename){
-        $info = pathinfo($filename);
-        $extension = strtolower($info['extension']);
-        switch ($extension) {
-            case 'jpeg':
-            case 'jpg':                
-            case 'png':                
-            case 'gif':
-                $icon = 'fa-file-image-o';
-                break;
-            case 'xls':
-            case 'xlsx':
-                $icon = 'fa-file-excel-o';
-                break;
-            case 'doc':
-            case 'docx':
-                $icon = 'fa-file-word-o';
-                break;
-            case 'ppt':
-            case 'pptx':
-                $icon = 'fa-file-powerpoint-o';
-                break;
-            case 'zip':
-            case 'rar':
-                $icon = 'fa-archive-o';
-                break;
-            case 'mp3':
-                $icon = 'fa-audio-o';
-                break;
-            case 'avi':
-                $icon = 'fa-video-o';
-                break;
-            case 'php':
-            case 'html':
-            case 'css':
-                $icon = 'fa-code-o';
-                break;
-            case 'pdf':
-                $icon = 'fa-file-pdf-o';
-                break;
-            default:
-                $icon = 'fa-file-o';
-                break;
-        }
-        return $icon;
-    }
-    
     /**
      * Generate the path for a new filename
      *
