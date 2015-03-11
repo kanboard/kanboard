@@ -20,8 +20,8 @@ class File extends Base
         $task = $this->getTask();
 
         $this->response->html($this->taskLayout('file/new', array(
-            'task' => $task,
-            'max_size' => ini_get('upload_max_filesize'),
+                    'task' => $task,
+                    'max_size' => ini_get('upload_max_filesize'),
         )));
     }
 
@@ -74,8 +74,8 @@ class File extends Base
 
         if ($file['task_id'] == $task['id']) {
             $this->response->html($this->template->render('file/open', array(
-                'file' => $file,
-                'task' => $task,
+                        'file' => $file,
+                        'task' => $task,
             )));
         }
     }
@@ -101,6 +101,69 @@ class File extends Base
         }
     }
 
+    /**
+     * Return the file content (work only for images) resized
+     *
+     * @access public
+     */
+    public function imageThumbnail() {
+        $task = $this->getTask();
+        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+        $width_param = $this->request->getIntegerParam('width');
+        $height_param = $this->request->getIntegerParam('height');
+        $filename = FILES_DIR . $file['path'];
+
+        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
+
+            // Get new sizes
+            list($width, $height) = getimagesize($filename);
+            if ($width_param == 0 && $height_param == 0) {
+                $newwidth = 100;
+                $newheight = 100;
+            } elseif ($width_param > 0 && $height_param == 0) {
+                $newwidth = $width_param;
+                $newheight = floor($height * ( $width_param / $width ));
+            } elseif ($width_param == 0 && $height_param > 0) {
+                $newwidth = floor($width * ( $height_param / $height ));
+                $newheight = $height_param;
+            } else {
+                $newwidth = $width_param;
+                $newheight = $height_param;
+            }
+
+            // Load
+            $thumb = imagecreatetruecolor($newwidth, $newheight);
+
+            $info = pathinfo($file['name']);
+            $extension = strtolower($info['extension']);
+
+            switch ($extension) {
+                case 'jpeg':
+                case 'jpg':
+                    $source = imagecreatefromjpeg($filename);
+                    break;
+                case 'png':
+                    $source = imagecreatefrompng($filename);
+                    break;
+                case 'gif':
+                    $source = imagecreatefromgif($filename);
+                    break;
+                default:
+                    die('File "' . $filename . '" is not valid jpg, png or gif image.');
+                    break;
+            }
+
+            // Resize        
+            imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+            $metadata = getimagesize($filename);
+            if (isset($metadata['mime'])) {
+                $this->response->contentType($metadata['mime']);
+                imagejpeg($thumb);
+            }
+        }
+    }
+    
     /**
      * Remove a file
      *
@@ -132,8 +195,8 @@ class File extends Base
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
         $this->response->html($this->taskLayout('file/remove', array(
-            'task' => $task,
-            'file' => $file,
+                    'task' => $task,
+                    'file' => $file,
         )));
     }
 }

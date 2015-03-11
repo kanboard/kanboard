@@ -441,7 +441,8 @@ class Board extends Base
         $task = $this->getTask();
 
         $this->response->html($this->template->render('board/files', array(
-            'files' => $this->file->getAll($task['id']),
+            'files' => $this->file->getAllDocuments($task['id']),
+            'images' => $this->file->getAllImages($task['id']),
             'task' => $task,
         )));
     }
