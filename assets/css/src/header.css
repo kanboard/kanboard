@@ -1,9 +1,9 @@
 /* header */
 header {
     margin-top: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 35px;
     clear: both;
-    border-bottom: 1px solid #dedede;
+    overflow: auto;
 }
 
 header h1 {
@@ -25,6 +25,15 @@ header li {
 header a {
     color: #777;
     text-decoration: none;
+}
+
+nav {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dedede;
+    z-index: -1;
 }
 
 nav .active a {
@@ -64,6 +73,7 @@ nav .active a {
 /* page header */
 .page-header {
     margin-bottom: 25px;
+    overflow: auto;
 }
 
 .page-header h2 {
