@@ -33,7 +33,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translated in 16 languages (Brazilian, Chinese, Danish, English, Finnish, French, German, Hungarian, Italian, Japanese, Polish, Russian, Spanish, Swedish, Thai, Turkish)
+- Translated in 17 languages (Brazilian, Chinese, Danish, Dutch, English, Finnish, French, German, Hungarian, Italian, Japanese, Polish, Russian, Spanish, Swedish, Thai, Turkish)
 
 Known bugs and feature requests
 -------------------------------
@@ -179,6 +179,7 @@ Contributors:
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
 - [Gavlepeter](https://github.com/gavlepeter)
+- [Hendrik Stocker](https://github.com/hendrik-stoker)
 - [Iterate From 0](https://github.com/freebsd-kanboard)
 - [Jan Dittrich](https://github.com/jdittrich)
 - [Janne Mäntyharju](https://github.com/JanneMantyharju)
