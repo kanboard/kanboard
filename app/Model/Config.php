@@ -39,6 +39,7 @@ class Config extends Base
             'NZD' => t('NZD - New Zealand Dollar'),
             'INR' => t('INR - Indian Rupee'),
             'JPY' => t('JPY - Japanese Yen'),
+            'RSD' => t('RSD - Serbian dinar'),
         );
     }
 
@@ -82,6 +83,7 @@ class Config extends Base
             'pl_PL' => 'Polski',
             'pt_BR' => 'Português (Brasil)',
             'ru_RU' => 'Русский',
+            'sr_Latn_RS' => 'Srpski',
             'fi_FI' => 'Suomi',
             'sv_SE' => 'Svenska',
             'tr_TR' => 'Türkçe',
