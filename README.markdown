@@ -33,7 +33,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translated in 17 languages (Brazilian, Chinese, Danish, Dutch, English, Finnish, French, German, Hungarian, Italian, Japanese, Polish, Russian, Spanish, Swedish, Thai, Turkish)
+- Translated in 18 languages (Brazilian, Chinese, Danish, Dutch, English, Finnish, French, German, Hungarian, Italian, Japanese, Polish, Russian, Serbian, Spanish, Swedish, Thai, Turkish)
 
 Known bugs and feature requests
 -------------------------------
@@ -175,6 +175,7 @@ Contributors:
 - [Creador30](https://github.com/creador30)
 - [Cynthia Pereira](https://github.com/cynthiapereira)
 - [David-Norris](https://github.com/David-Norris)
+- [Draza (bdpsoft)](https://github.com/bdpsoft)
 - [Esteban Monge](https://github.com/EstebanMonge)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
