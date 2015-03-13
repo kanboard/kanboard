@@ -762,26 +762,27 @@ nav .active a {
 /* board table */
 #board-container {
     padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
-}
-
-/* Board container classes for wide/compact view */
-.board-container-wide {
     overflow-x: scroll;
 }
 
 .board-container-compact {
-    overflow-x: hidden;
+    overflow-x: initial;
 }
 
-/* Board table column for wide/compact view */
-.board-column-wide {
-    min-width: 240px;
-    max-width: 240px;
+#board {
+    table-layout: fixed;
 }
 
-.board-column-compact {
-    min-width: 0px;
-    max-width: 0px;
+#board th {
+    width: 120px; /* Width of swimlane column */
+}
+
+#board th.board-column {
+    width: 240px; /* Width of other columns, in default [horizontal scrolling] view mode */
+}
+
+#board th.board-column.board-column-compact {
+    width: initial; /* Do not force the width of the columns in compact view mode */
 }
 
 #board th a {
