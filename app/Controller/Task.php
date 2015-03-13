@@ -75,6 +75,7 @@ class Task extends Base
             'links' => $this->taskLink->getLinks($task['id']),
             'task' => $task,
             'values' => $values,
+            'link_label_list' => $this->link->getList(0, false),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'date_format' => $this->config->get('application_date_format'),
