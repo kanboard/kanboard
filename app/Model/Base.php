@@ -16,6 +16,7 @@ use Pimple\Container;
  * @property \Model\Action                 $action
  * @property \Model\Authentication         $authentication
  * @property \Model\Board                  $board
+ * @property \Model\Budget                 $budget
  * @property \Model\Category               $category
  * @property \Model\Comment                $comment
  * @property \Model\CommentHistory         $commentHistory

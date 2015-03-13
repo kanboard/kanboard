@@ -33,7 +33,10 @@
             <?= $this->a(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <?= $this->a(t('Duplicate'), 'project', 'duplicate', array('project_id' => $project['id']), true) ?>
+            <?= $this->a(t('Duplicate'), 'project', 'duplicate', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
+            <?= $this->a(t('Budget'), 'budget', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <li>
             <?php if ($project['is_active']): ?>

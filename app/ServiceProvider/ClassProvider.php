@@ -17,6 +17,7 @@ class ClassProvider implements ServiceProviderInterface
             'Action',
             'Authentication',
             'Board',
+            'Budget',
             'Category',
             'Color',
             'Comment',

@@ -56,6 +56,7 @@ class Acl extends Base
         'export' => array('tasks', 'subtasks', 'summary'),
         'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',
+        'budget' => '*',
     );
 
     /**

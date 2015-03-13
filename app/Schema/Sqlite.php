@@ -6,7 +6,19 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 50;
+const VERSION = 51;
+
+function version_51($pdo)
+{
+    $pdo->exec('CREATE TABLE budget_lines (
+        "id" INTEGER PRIMARY KEY,
+        "project_id" INTEGER NOT NULL,
+        "amount" REAL NOT NULL,
+        "date" TEXT NOT NULL,
+        "comment" TEXT,
+        FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+    )');
+}
 
 function version_50($pdo)
 {
