@@ -64,6 +64,10 @@ div.ui-tooltip {
     width: 550px;
 }
 
+.ui-tooltip-content .markdown p {
+    margin-bottom: 0px;
+}
+
 .tooltip-tasklinks li {
     list-style-type: none;
 }
