@@ -244,7 +244,7 @@ var Kanboard = (function() {
             $('.dropdown').not(".dropit").dropit({ triggerParentEl : "span" });
 
             if ($(".task-autocomplete").length) {
-            	$(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+//            	$(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
 
                 $(".task-autocomplete").autocomplete({
                     source: $(".task-autocomplete").data("search-url"),
@@ -253,7 +253,7 @@ var Kanboard = (function() {
                         var field = $(".task-autocomplete").data("dst-field");
                         $("input[name=" + field + "]").val(ui.item.id);
 
-                        $(".task-autocomplete").parent().find("input[type=submit]").removeAttr('disabled');
+//                        $(".task-autocomplete").parent().find("input[type=submit]").removeAttr('disabled');
                     }
                 });
             }

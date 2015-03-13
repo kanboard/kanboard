@@ -25,6 +25,7 @@
             </td>
             <td><?= $this->e($link['column_title']) ?></td>
             <td>
+                <li><?= $this->a(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
                 <?= $this->a(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
         <?php else: ?>
