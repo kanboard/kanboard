@@ -14,7 +14,7 @@ use Model\Task as TaskModel;
 class Calendar extends Base
 {
     /**
-     * Show calendar view
+     * Show calendar view for projects
      *
      * @access public
      */
@@ -59,9 +59,7 @@ class Calendar extends Base
             ->filterByDueDateRange($start, $end)
             ->toCalendarEvents();
 
-        $subtask_timeslots = $this->subtaskTimeTracking->getProjectCalendarEvents($project_id, $start, $end);
-
-        $this->response->json(array_merge($due_tasks, $subtask_timeslots));
+        $this->response->json($due_tasks);
     }
 
     /**

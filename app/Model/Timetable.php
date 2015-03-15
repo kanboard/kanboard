@@ -25,6 +25,82 @@ class Timetable extends Base
     private $timeoff;
 
     /**
+     * Get a set of events by using the intersection between the timetable and the time tracking data
+     *
+     * @access public
+     * @param  integer  $user_id
+     * @param  array    $events     Time tracking data
+     * @param  string   $start      ISO8601 date
+     * @param  string   $end        ISO8601 date
+     * @return array
+     */
+    public function calculateEventsIntersect($user_id, array $events, $start, $end)
+    {
+        $start_dt = new DateTime($start);
+        $start_dt->setTime(0, 0);
+
+        $end_dt = new DateTime($end);
+        $end_dt->setTime(23, 59);
+
+        $timetable = $this->calculate($user_id, $start_dt, $end_dt);
+
+        // The user has no timetable
+        if (empty($this->week)) {
+            return $events;
+        }
+
+        $results = array();
+
+        foreach ($events as $event) {
+            $results = array_merge($results, $this->calculateEventIntersect($event, $timetable));
+        }
+
+        return $results;
+    }
+
+    /**
+     * Get a serie of events based on the timetable and the provided event
+     *
+     * @access public
+     * @param  integer  $user_id
+     * @param  array    $events     Time tracking data
+     * @param  string   $start      ISO8601 date
+     * @param  string   $end        ISO8601 date
+     * @return array
+     */
+    public function calculateEventIntersect(array $event, array $timetable)
+    {
+        $events = array();
+
+        foreach ($timetable as $slot) {
+
+            $start_ts = $slot[0]->getTimestamp();
+            $end_ts = $slot[1]->getTimestamp();
+
+            if ($start_ts > $event['end']) {
+                break;
+            }
+
+            if ($event['start'] <= $start_ts) {
+                $event['start'] = $start_ts;
+            }
+
+            if ($event['start'] >= $start_ts && $event['start'] <= $end_ts) {
+
+                if ($event['end'] >= $end_ts) {
+                    $events[] = array_merge($event, array('end' => $end_ts));
+                }
+                else {
+                    $events[] = $event;
+                    break;
+                }
+            }
+        }
+
+        return $events;
+    }
+
+    /**
      * Calculate effective worked hours by taking into consideration the timetable
      *
      * @access public

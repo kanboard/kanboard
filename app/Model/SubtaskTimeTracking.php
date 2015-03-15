@@ -138,6 +138,8 @@ class SubtaskTimeTracking extends Base
                        ->addCondition($this->getCalendarCondition($start, $end))
                        ->findAll();
 
+        $result = $this->timetable->calculateEventsIntersect($user_id, $result, $start, $end);
+
         return $this->toCalendarEvents($result);
     }
 
