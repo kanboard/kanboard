@@ -21,6 +21,24 @@ class HourlyRate extends Base
     const TABLE = 'hourly_rates';
 
     /**
+     * Get all user rates for a given project
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return array
+     */
+    public function getAllByProject($project_id)
+    {
+        $members = $this->projectPermission->getMembers($project_id);
+
+        if (empty($members)) {
+            return array();
+        }
+
+        return $this->db->table(self::TABLE)->in('user_id', array_keys($members))->desc('date_effective')->findAll();
+    }
+
+    /**
      * Get all rates for a given user
      *
      * @access public

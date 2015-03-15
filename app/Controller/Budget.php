@@ -27,6 +27,30 @@ class Budget extends Base
     }
 
     /**
+     * Cost breakdown by users/subtasks/tasks
+     *
+     * @access public
+     */
+    public function breakdown()
+    {
+        $project = $this->getProject();
+
+        $paginator = $this->paginator
+            ->setUrl('budget', 'breakdown', array('project_id' => $project['id']))
+            ->setMax(30)
+            ->setOrder('start')
+            ->setDirection('DESC')
+            ->setQuery($this->budget->getBreakdown($project['id']))
+            ->calculate();
+
+        $this->response->html($this->projectLayout('budget/breakdown', array(
+            'paginator' => $paginator,
+            'project' => $project,
+            'title' => t('Budget')
+        )));
+    }
+
+    /**
      * Create budget lines
      *
      * @access public

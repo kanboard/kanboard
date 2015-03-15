@@ -46,6 +46,66 @@ class Budget extends Base
     }
 
     /**
+     * Get breakdown by tasks/subtasks/users
+     *
+     * @access public
+     * @param  integer    $project_id
+     * @return \PicoDb\Table
+     */
+    public function getBreakdown($project_id)
+    {
+        return $this->db
+                    ->table(SubtaskTimeTracking::TABLE)
+                    ->columns(
+                        SubtaskTimeTracking::TABLE.'.id',
+                        SubtaskTimeTracking::TABLE.'.user_id',
+                        SubtaskTimeTracking::TABLE.'.subtask_id',
+                        SubtaskTimeTracking::TABLE.'.start',
+                        SubtaskTimeTracking::TABLE.'.time_spent',
+                        Subtask::TABLE.'.task_id',
+                        Subtask::TABLE.'.title AS subtask_title',
+                        Task::TABLE.'.title AS task_title',
+                        Task::TABLE.'.project_id',
+                        User::TABLE.'.username',
+                        User::TABLE.'.name'
+                    )
+                    ->join(Subtask::TABLE, 'id', 'subtask_id')
+                    ->join(Task::TABLE, 'id', 'task_id', Subtask::TABLE)
+                    ->join(User::TABLE, 'id', 'user_id')
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->filter(array($this, 'applyUserRate'));
+    }
+
+    /**
+     * Filter callback to apply the rate according to the effective date
+     *
+     * @access public
+     * @param  array   $records
+     * @return array
+     */
+    public function applyUserRate(array $records)
+    {
+        $rates = $this->hourlyRate->getAllByProject($records[0]['project_id']);
+
+        foreach ($records as &$record) {
+
+            $hourly_price = 0;
+
+            foreach ($rates as $rate) {
+
+                if ($rate['user_id'] == $record['user_id'] && date('Y-m-d', $rate['date_effective']) <= date('Y-m-d', $record['start'])) {
+                    $hourly_price = $rate['rate'];
+                    break;
+                }
+            }
+
+            $record['cost'] = $hourly_price * $record['time_spent'];
+        }
+
+        return $records;
+    }
+
+    /**
      * Add a new budget line in the database
      *
      * @access public
