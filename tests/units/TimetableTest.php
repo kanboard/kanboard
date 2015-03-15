@@ -127,4 +127,127 @@ class TimetableTest extends Base
         $this->assertEquals($friday->format('Y-m-d').' 13:00', $timetable[4][0]->format('Y-m-d H:i'));
         $this->assertEquals($friday->format('Y-m-d').' 17:00', $timetable[4][1]->format('Y-m-d H:i'));
     }
+
+    public function testClosestTimeSlot()
+    {
+        $w = new TimetableWeek($this->container);
+        $t = new Timetable($this->container);
+
+        $this->assertNotFalse($w->create(1, 1, '09:30', '12:00'));
+        $this->assertNotFalse($w->create(1, 1, '13:00', '17:00'));
+        $this->assertNotFalse($w->create(1, 2, '09:30', '12:00'));
+        $this->assertNotFalse($w->create(1, 2, '13:00', '17:00'));
+
+        $monday = new DateTime('next Monday');
+        $tuesday = new DateTime('next Tuesday');
+
+        $timetable = $t->calculate(1, new DateTime('next Monday'), new DateTime('next Monday + 6 days'));
+        $this->assertNotEmpty($timetable);
+        $this->assertCount(4, $timetable);
+
+        // Start to work before timetable
+        $date = new DateTime('next Monday');
+        $date->setTime(5, 02);
+
+        $slot = $t->findClosestTimeSlot($date, $timetable);
+        $this->assertNotEmpty($slot);
+        $this->assertEquals($monday->format('Y-m-d').' 09:30', $slot[0]->format('Y-m-d H:i'));
+        $this->assertEquals($monday->format('Y-m-d').' 12:00', $slot[1]->format('Y-m-d H:i'));
+
+        // Start to work at the end of the timeslot
+        $date = new DateTime('next Monday');
+        $date->setTime(12, 02);
+
+        $slot = $t->findClosestTimeSlot($date, $timetable);
+        $this->assertNotEmpty($slot);
+        $this->assertEquals($monday->format('Y-m-d').' 09:30', $slot[0]->format('Y-m-d H:i'));
+        $this->assertEquals($monday->format('Y-m-d').' 12:00', $slot[1]->format('Y-m-d H:i'));
+
+        // Start to work at lunch time
+        $date = new DateTime('next Monday');
+        $date->setTime(12, 32);
+
+        $slot = $t->findClosestTimeSlot($date, $timetable);
+        $this->assertNotEmpty($slot);
+        $this->assertEquals($monday->format('Y-m-d').' 13:00', $slot[0]->format('Y-m-d H:i'));
+        $this->assertEquals($monday->format('Y-m-d').' 17:00', $slot[1]->format('Y-m-d H:i'));
+
+        // Start to work early in the morning
+        $date = new DateTime('next Tuesday');
+        $date->setTime(8, 02);
+
+        $slot = $t->findClosestTimeSlot($date, $timetable);
+        $this->assertNotEmpty($slot);
+        $this->assertEquals($tuesday->format('Y-m-d').' 09:30', $slot[0]->format('Y-m-d H:i'));
+        $this->assertEquals($tuesday->format('Y-m-d').' 12:00', $slot[1]->format('Y-m-d H:i'));
+    }
+
+    public function testCalculateDuration()
+    {
+        $w = new TimetableWeek($this->container);
+        $t = new Timetable($this->container);
+
+        $this->assertNotFalse($w->create(1, 1, '09:30', '12:00'));
+        $this->assertNotFalse($w->create(1, 1, '13:00', '17:00'));
+        $this->assertNotFalse($w->create(1, 2, '09:30', '12:00'));
+        $this->assertNotFalse($w->create(1, 2, '13:00', '17:00'));
+
+        // Different day
+        $start = new DateTime('next Monday');
+        $start->setTime(16, 02);
+
+        $end = new DateTime('next Tuesday');
+        $end->setTime(10, 03);
+
+        $this->assertEquals(1.5, $t->calculateEffectiveDuration(1, $start, $end));
+
+        // Same time slot
+        $start = new DateTime('next Monday');
+        $start->setTime(16, 02);
+
+        $end = new DateTime('next Monday');
+        $end->setTime(17, 03);
+
+        $this->assertEquals(1, $t->calculateEffectiveDuration(1, $start, $end));
+
+        // Intermediate time slot
+        $start = new DateTime('next Monday');
+        $start->setTime(10, 02);
+
+        $end = new DateTime('next Tuesday');
+        $end->setTime(16, 03);
+
+        $this->assertEquals(11.5, $t->calculateEffectiveDuration(1, $start, $end));
+
+        // Different day
+        $start = new DateTime('next Monday');
+        $start->setTime(9, 02);
+
+        $end = new DateTime('next Tuesday');
+        $end->setTime(10, 03);
+
+        $this->assertEquals(7, $t->calculateEffectiveDuration(1, $start, $end));
+
+        // Start before first time slot
+        $start = new DateTime('next Monday');
+        $start->setTime(5, 32);
+
+        $end = new DateTime('next Tuesday');
+        $end->setTime(11, 17);
+
+        $this->assertEquals(8.25, $t->calculateEffectiveDuration(1, $start, $end));
+    }
+
+    public function testCalculateDurationWithEmptyTimetable()
+    {
+        $t = new Timetable($this->container);
+
+        $start = new DateTime('next Monday');
+        $start->setTime(16, 02);
+
+        $end = new DateTime('next Monday');
+        $end->setTime(17, 03);
+
+        $this->assertEquals(1, $t->calculateEffectiveDuration(1, $start, $end));
+    }
 }

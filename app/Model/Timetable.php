@@ -25,6 +25,94 @@ class Timetable extends Base
     private $timeoff;
 
     /**
+     * Calculate effective worked hours by taking into consideration the timetable
+     *
+     * @access public
+     * @param  integer     $user_id
+     * @param  \DateTime   $start
+     * @param  \DateTime   $end
+     * @return float
+     */
+    public function calculateEffectiveDuration($user_id, DateTime $start, DateTime $end)
+    {
+        $end_timetable = clone($end);
+        $end_timetable->setTime(23, 59);
+
+        $timetable = $this->calculate($user_id, $start, $end_timetable);
+        $found_start = false;
+        $hours = 0;
+
+        // The user has no timetable
+        if (empty($this->week)) {
+            return $this->dateParser->getHours($start, $end);
+        }
+
+        foreach ($timetable as $slot) {
+
+            $isStartSlot = $this->dateParser->withinDateRange($start, $slot[0], $slot[1]);
+            $isEndSlot = $this->dateParser->withinDateRange($end, $slot[0], $slot[1]);
+
+            // Start and end are within the same time slot
+            if ($isStartSlot && $isEndSlot) {
+                return $this->dateParser->getHours($start, $end);
+            }
+
+            // We found the start slot
+            if (! $found_start && $isStartSlot) {
+                $found_start = true;
+                $hours = $this->dateParser->getHours($start, $slot[1]);
+            }
+            else if ($found_start) {
+
+                // We found the end slot
+                if ($isEndSlot) {
+                    $hours += $this->dateParser->getHours($slot[0], $end);
+                    break;
+                }
+                else {
+
+                    // Sum hours of the intermediate time slots
+                    $hours += $this->dateParser->getHours($slot[0], $slot[1]);
+                }
+            }
+        }
+
+        // The start date was not found in regular hours so we get the nearest time slot
+        if (! empty($timetable) && ! $found_start) {
+            $slot = $this->findClosestTimeSlot($start, $timetable);
+
+            if ($start < $slot[0]) {
+                return $this->calculateEffectiveDuration($user_id, $slot[0], $end);
+            }
+        }
+
+        return $hours;
+    }
+
+    /**
+     * Find the nearest time slot
+     *
+     * @access public
+     * @param  DateTime  $date
+     * @param  array     $timetable
+     * @return array
+     */
+    public function findClosestTimeSlot(DateTime $date, array $timetable)
+    {
+        $values = array();
+
+        foreach ($timetable as $slot) {
+            $t1 = abs($slot[0]->getTimestamp() - $date->getTimestamp());
+            $t2 = abs($slot[1]->getTimestamp() - $date->getTimestamp());
+
+            $values[] = min($t1, $t2);
+        }
+
+        asort($values);
+        return $timetable[key($values)];
+    }
+
+    /**
      * Get the timetable for a user for a given date range
      *
      * @access public

@@ -176,38 +176,35 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertEquals(7, $s->create(array('title' => 'subtask #7', 'task_id' => 2)));
         $this->assertEquals(8, $s->create(array('title' => 'subtask #8', 'task_id' => 2)));
 
-        // Create a couple of time slots
-        $now = time();
-
         // Slot start before and finish inside the calendar time range
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 1, 'start' => $now - 86400, 'end' => $now + 3600));
+        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 1, 'start' => strtotime('-1 day'), 'end' => strtotime('+1 hour')));
 
         // Slot start inside time range and finish after the time range
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 2, 'start' => $now + 3600, 'end' => $now + 2*86400));
+        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 2, 'start' => strtotime('+1 hour'), 'end' => strtotime('+2 days')));
 
         // Start before time range and finish inside time range
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 3, 'start' => $now - 86400, 'end' => $now + 1.5*86400));
+        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 3, 'start' => strtotime('-1 day'), 'end' => strtotime('+1.5 days')));
 
         // Start and finish inside time range
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 4, 'start' => $now + 3600, 'end' => $now + 2*3600));
+        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 4, 'start' => strtotime('+1 hour'), 'end' => strtotime('+2 hours')));
 
         // Start and finish after the time range
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 5, 'start' => $now + 2*86400, 'end' => $now + 3*86400));
+        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 5, 'start' => strtotime('+2 days'), 'end' => strtotime('+3 days')));
 
         // Start and finish before the time range
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 6, 'start' => $now - 2*86400, 'end' => $now - 86400));
+        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 6, 'start' => strtotime('-2 days'), 'end' => strtotime('-1 day')));
 
         // Start before time range and not finished
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 7, 'start' => $now - 86400));
+        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 7, 'start' => strtotime('-1 day')));
 
         // Start inside time range and not finish
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 8, 'start' => $now + 3200));
+        $this->container['db']->table(SubtaskTimeTracking::TABLE)->insert(array('user_id' => 1, 'subtask_id' => 8, 'start' => strtotime('+3200 seconds')));
 
         $timesheet = $st->getUserTimesheet(1);
         $this->assertNotEmpty($timesheet);
         $this->assertCount(8, $timesheet);
 
-        $events = $st->getUserCalendarEvents(1, date('Y-m-d', $now), date('Y-m-d', $now + 86400));
+        $events = $st->getUserCalendarEvents(1, date('Y-m-d'), date('Y-m-d', strtotime('+2 day')));
         $this->assertNotEmpty($events);
         $this->assertCount(6, $events);
         $this->assertEquals(1, $events[0]['subtask_id']);
@@ -217,14 +214,14 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertEquals(7, $events[4]['subtask_id']);
         $this->assertEquals(8, $events[5]['subtask_id']);
 
-        $events = $st->getProjectCalendarEvents(1, date('Y-m-d', $now), date('Y-m-d', $now + 86400));
+        $events = $st->getProjectCalendarEvents(1, date('Y-m-d'), date('Y-m-d', strtotime('+2 days')));
         $this->assertNotEmpty($events);
         $this->assertCount(3, $events);
         $this->assertEquals(1, $events[0]['subtask_id']);
         $this->assertEquals(2, $events[1]['subtask_id']);
         $this->assertEquals(3, $events[2]['subtask_id']);
 
-        $events = $st->getProjectCalendarEvents(2, date('Y-m-d', $now), date('Y-m-d', $now + 86400));
+        $events = $st->getProjectCalendarEvents(2, date('Y-m-d'), date('Y-m-d', strtotime('+2 days')));
         $this->assertNotEmpty($events);
         $this->assertCount(3, $events);
         $this->assertEquals(4, $events[0]['subtask_id']);

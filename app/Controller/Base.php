@@ -67,7 +67,6 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\CommentHistory         $commentHistory
  * @property \Model\SubtaskHistory         $subtaskHistory
  * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
- * @property \Model\TimeTracking           $timeTracking
  * @property \Model\User                   $user
  * @property \Model\UserSession            $userSession
  * @property \Model\Webhook                $webhook

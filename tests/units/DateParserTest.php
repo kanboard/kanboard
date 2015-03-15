@@ -6,6 +6,34 @@ use Model\DateParser;
 
 class DateParserTest extends Base
 {
+    public function testDateRange()
+    {
+        $d = new DateParser($this->container);
+
+        $this->assertTrue($d->withinDateRange(new DateTime('2015-03-14 15:30:00'), new DateTime('2015-03-14 15:00:00'), new DateTime('2015-03-14 16:00:00')));
+        $this->assertFalse($d->withinDateRange(new DateTime('2015-03-14 15:30:00'), new DateTime('2015-03-14 16:00:00'), new DateTime('2015-03-14 17:00:00')));
+    }
+
+    public function testRoundSeconds()
+    {
+        $d = new DateParser($this->container);
+        $this->assertEquals('16:30', date('H:i', $d->getRoundedSeconds(strtotime('16:28'))));
+        $this->assertEquals('16:00', date('H:i', $d->getRoundedSeconds(strtotime('16:02'))));
+        $this->assertEquals('16:15', date('H:i', $d->getRoundedSeconds(strtotime('16:14'))));
+        $this->assertEquals('17:00', date('H:i', $d->getRoundedSeconds(strtotime('16:58'))));
+    }
+
+    public function testGetHours()
+    {
+        $d = new DateParser($this->container);
+
+        $this->assertEquals(1, $d->getHours(new DateTime('2015-03-14 15:00:00'), new DateTime('2015-03-14 16:00:00')));
+        $this->assertEquals(2.5, $d->getHours(new DateTime('2015-03-14 15:00:00'), new DateTime('2015-03-14 17:30:00')));
+        $this->assertEquals(2.75, $d->getHours(new DateTime('2015-03-14 15:00:00'), new DateTime('2015-03-14 17:45:00')));
+        $this->assertEquals(3, $d->getHours(new DateTime('2015-03-14 14:57:00'), new DateTime('2015-03-14 17:58:00')));
+        $this->assertEquals(3, $d->getHours(new DateTime('2015-03-14 14:57:00'), new DateTime('2015-03-14 11:58:00')));
+    }
+
     public function testValidDate()
     {
         $d = new DateParser($this->container);

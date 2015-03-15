@@ -43,7 +43,7 @@ use Pimple\Container;
  * @property \Model\TaskLink               $taskLink
  * @property \Model\TaskPosition           $taskPosition
  * @property \Model\TaskValidator          $taskValidator
- * @property \Model\TimeTracking           $timeTracking
+ * @property \Model\Timetable              $timetable
  * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
  * @property \Model\User                   $user
  * @property \Model\UserSession            $userSession

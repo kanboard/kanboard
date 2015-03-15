@@ -6,7 +6,12 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 51;
+const VERSION = 52;
+
+function version_52($pdo)
+{
+    $pdo->exec("ALTER TABLE subtask_time_tracking ADD COLUMN time_spent REAL DEFAULT 0");
+}
 
 function version_51($pdo)
 {
