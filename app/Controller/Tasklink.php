@@ -38,13 +38,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
-        if (empty($values)) {
-            $values = array(
-                'task_id' => $task['id'],
-            );
-        }
-
-        if ($ajax) {
+        if ($ajax && empty($errors)) {
             $this->response->html($this->template->render('tasklink/create', array(
                 'values' => $values,
                 'errors' => $errors,
@@ -93,6 +87,56 @@ class Tasklink extends Base
 
         $this->create($values, $errors);
     }
+    
+
+    /**
+     * Edit form
+     *
+     * @access public
+     */
+    public function edit(array $values = array(), array $errors = array())
+    {
+        $task = $this->getTask();
+        if (empty($values)) {
+            $task_link = $this->getTaskLink();
+            $opposite_task = $this->taskFinder->getById($task_link['opposite_task_id']);
+            $task_link['title'] = $opposite_task['title'];
+        }
+        
+        $this->response->html($this->taskLayout('tasklink/edit', array(
+            'values' => !empty($values) ? $values : $task_link,
+            'errors' => $errors,
+            'task' => $task,
+            'labels' => $this->link->getList(0, false),
+            'title' => t('Edit link')
+        )));
+    }
+
+    /**
+     * Validation and update
+     *
+     * @access public
+     */
+    public function update()
+    {
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+
+        list($valid, $errors) = $this->taskLink->validateModification($values);
+
+        if ($valid) {
+
+            if ($this->taskLink->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
+                $this->session->flash(t('Link updated successfully.'));
+                $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+            }
+            else {
+                $this->session->flashError(t('Unable to update your link.'));
+            }
+        }
+    
+        $this->edit($values, $errors);
+    }
 
     /**
      * Confirmation dialog before removing a link
@@ -127,6 +171,6 @@ class Tasklink extends Base
             $this->session->flashError(t('Unable to remove this link.'));
         }
 
-        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
     }
 }
