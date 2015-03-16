@@ -8,7 +8,7 @@ namespace Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Timetableextra extends TimetableOff
+class Timetableextra extends Timetableoff
 {
     protected $model = 'timetableExtra';
     protected $controller_url = 'timetableextra';
