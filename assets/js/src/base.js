@@ -243,9 +243,13 @@ var Kanboard = (function() {
             $(".dropit-submenu").hide();
             $('.dropdown').not(".dropit").dropit({ triggerParentEl : "span" });
 
+            // Task id autocomplete
+            $('.task-autocomplete').css('display', 'inline');
+            $('.opposite_task_id_bloc').css('display', 'none');
+            if ($('.opposite_task_id').val() == "") {
+            	$(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+            }
             if ($(".task-autocomplete").length) {
-//            	$(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
-
                 $(".task-autocomplete").autocomplete({
                     source: $(".task-autocomplete").data("search-url"),
                     minLength: 2,
@@ -253,7 +257,7 @@ var Kanboard = (function() {
                         var field = $(".task-autocomplete").data("dst-field");
                         $("input[name=" + field + "]").val(ui.item.id);
 
-//                        $(".task-autocomplete").parent().find("input[type=submit]").removeAttr('disabled');
+                        $(".task-autocomplete").parent().find("input[type=submit]").removeAttr('disabled');
                     }
                 });
             }

@@ -2,13 +2,13 @@
 <div class="page-header">
     <h2><?= t('Links') ?></h2>
 </div>
-<table class="table-fixed" id="links">
+<table id="links">
     <tr>
-        <th class="column-30"><?= t('Label') ?></th>
-        <th class="column-40"><?= t('Task') ?></th>
+        <th class="column-20"><?= t('Label') ?></th>
+        <th class="column-50"><?= t('Task') ?></th>
         <th class="column-20"><?= t('Column') ?></th>
         <?php if (! isset($not_editable)): ?>
-            <th><?= t('Action') ?></th>
+            <th class="column-10"><?= t('Action') ?></th>
         <?php endif ?>
     </tr>
     <?php foreach ($links as $link): ?>
@@ -25,8 +25,10 @@
             </td>
             <td><?= $this->e($link['column_title']) ?></td>
             <td>
-                <li><?= $this->a(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
-                <?= $this->a(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <ul>
+                    <li><?= $this->a(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
+                    <li><?= $this->a(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
+                </ul>
             </td>
         <?php else: ?>
             <td>
@@ -48,15 +50,24 @@
     
         <?= $this->formCsrf() ?>
         <?= $this->formHidden('task_id', array('task_id' => $task['id'])) ?>
-        <?= $this->formHidden('opposite_task_id', array()) ?>
     
         <?= $this->formSelect('link_id', $link_label_list, array(), array()) ?>
     
+        <span class="opposite_task_id_bloc">
+            #<?= $this->formNumeric('opposite_task_id', array(), array(), array('required', 'placeholder="'.t('Task id').'"'), 'opposite_task_id') ?>
+        </span>
         <?= $this->formText(
             'title',
             array(),
             array(),
-            array('required', 'data-dst-field="opposite_task_id"', 'data-search-url="'.$this->u('app', 'autocomplete', array('exclude_task_id' => $task['id'])).'"'),
+            array(
+                'required',
+                'style="display:none"',
+                'placeholder="'.t('Start to type task title...').'"',
+                'title="'.t('Start to type task title...').'"',
+                'data-dst-field="opposite_task_id"',
+                'data-search-url="'.$this->u('app', 'autocomplete', array('exclude_task_id' => $task['id'])).'"'
+            ),
             'task-autocomplete') ?>
     
         <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>

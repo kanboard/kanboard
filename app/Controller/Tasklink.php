@@ -38,7 +38,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
-        if ($ajax) {
+        if ($ajax && empty($errors)) {
             $this->response->html($this->template->render('tasklink/create', array(
                 'values' => $values,
                 'errors' => $errors,
@@ -171,6 +171,6 @@ class Tasklink extends Base
             $this->session->flashError(t('Unable to remove this link.'));
         }
 
-        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
     }
 }
