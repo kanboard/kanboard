@@ -6,7 +6,13 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 52;
+const VERSION = 53;
+
+function version_53($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('application_stylesheet', ''));
+}
 
 function version_52($pdo)
 {
