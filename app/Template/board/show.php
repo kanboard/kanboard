@@ -1,8 +1,9 @@
 <div id="board-container">
     <?php if (isset($not_editable)): ?>
-        <table id="board">
+        <table id="board" class="board-project-<?= $project['id'] ?>">
     <?php else: ?>
         <table id="board"
+               class="board-project-<?= $project['id'] ?>"
                data-project-id="<?= $project['id'] ?>"
                data-check-interval="<?= $board_private_refresh_interval ?>"
                data-save-url="<?= $this->u('board', 'save', array('project_id' => $project['id'])) ?>"
