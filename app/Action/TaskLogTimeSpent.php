@@ -110,7 +110,6 @@ class TaskLogTimeSpent extends Base
                 ->offset(1)
                 ->findOneColumn('data');
             $data = json_decode($data);
-            print_r($data);
             $retval = ($data->task->column_id == $this->getParam('column_id'));
         }
         
