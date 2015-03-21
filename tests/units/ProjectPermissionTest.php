@@ -25,6 +25,22 @@ class ProjectPermissionTest extends Base
         $this->assertEquals(array(), $pp->getMembers(1));
         $this->assertEquals(array('Unassigned'), $pp->getMemberList(1));
 
+        $this->assertEmpty($pp->getMemberProjects(1));
+        $this->assertEmpty($pp->getMemberProjects(2));
+        $this->assertEmpty($pp->getMemberProjects(3));
+
+        $this->assertEmpty($pp->getMemberProjectIds(1));
+        $this->assertEmpty($pp->getMemberProjectIds(2));
+        $this->assertEmpty($pp->getMemberProjectIds(3));
+
+        $this->assertEmpty($pp->getActiveMemberProjectIds(1));
+        $this->assertEmpty($pp->getActiveMemberProjectIds(2));
+        $this->assertEmpty($pp->getActiveMemberProjectIds(3));
+
+        $this->assertEmpty($pp->getActiveMemberProjects(1));
+        $this->assertEmpty($pp->getActiveMemberProjects(2));
+        $this->assertEmpty($pp->getActiveMemberProjects(3));
+
         $this->assertTrue($p->update(array('id' => 1, 'is_everybody_allowed' => 1)));
         $this->assertTrue($pp->isEverybodyAllowed(1));
         $this->assertTrue($pp->isUserAllowed(1, 1));
@@ -32,6 +48,32 @@ class ProjectPermissionTest extends Base
         $this->assertTrue($pp->isUserAllowed(1, 3));
         $this->assertEquals(array('1' => 'admin', '2' => 'unittest#1', '3' => 'unittest#2'), $pp->getMembers(1));
         $this->assertEquals(array('Unassigned', '1' => 'admin', '2' => 'unittest#1', '3' => 'unittest#2'), $pp->getMemberList(1));
+
+        $this->assertNotEmpty($pp->getMemberProjects(1));
+        $this->assertNotEmpty($pp->getMemberProjects(2));
+        $this->assertNotEmpty($pp->getMemberProjects(3));
+
+        $this->assertNotEmpty($pp->getMemberProjectIds(1));
+        $this->assertNotEmpty($pp->getMemberProjectIds(2));
+        $this->assertNotEmpty($pp->getMemberProjectIds(3));
+
+        $this->assertNotEmpty($pp->getActiveMemberProjectIds(1));
+        $this->assertNotEmpty($pp->getActiveMemberProjectIds(2));
+        $this->assertNotEmpty($pp->getActiveMemberProjectIds(3));
+
+        $this->assertNotEmpty($pp->getActiveMemberProjects(1));
+        $this->assertNotEmpty($pp->getActiveMemberProjects(2));
+        $this->assertNotEmpty($pp->getActiveMemberProjects(3));
+
+        $this->assertTrue($p->disable(1));
+
+        $this->assertEmpty($pp->getActiveMemberProjectIds(1));
+        $this->assertEmpty($pp->getActiveMemberProjectIds(2));
+        $this->assertEmpty($pp->getActiveMemberProjectIds(3));
+
+        $this->assertEmpty($pp->getActiveMemberProjects(1));
+        $this->assertEmpty($pp->getActiveMemberProjects(2));
+        $this->assertEmpty($pp->getActiveMemberProjects(3));
     }
 
     public function testDisallowEverybody()
@@ -56,10 +98,22 @@ class ProjectPermissionTest extends Base
         $pp = new ProjectPermission($this->container);
         $user = new User($this->container);
 
-        $user->create(array('username' => 'unittest', 'password' => 'unittest'));
+        $this->assertNotFalse($user->create(array('username' => 'unittest', 'password' => 'unittest')));
 
         // We create a project
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+
+        $this->assertEmpty($pp->getMemberProjects(1));
+        $this->assertEmpty($pp->getMemberProjects(2));
+
+        $this->assertEmpty($pp->getMemberProjectIds(1));
+        $this->assertEmpty($pp->getMemberProjectIds(2));
+
+        $this->assertEmpty($pp->getActiveMemberProjectIds(1));
+        $this->assertEmpty($pp->getActiveMemberProjectIds(2));
+
+        $this->assertEmpty($pp->getActiveMemberProjects(1));
+        $this->assertEmpty($pp->getActiveMemberProjects(2));
 
         // We allow the admin user
         $this->assertTrue($pp->addMember(1, 1));
@@ -75,6 +129,18 @@ class ProjectPermissionTest extends Base
         $this->assertEquals(array('1' => 'admin', '2' => 'unittest'), $pp->getMembers(1));
         $this->assertTrue($pp->isUserAllowed(1, 1));
         $this->assertTrue($pp->isUserAllowed(1, 2));
+
+        $this->assertNotEmpty($pp->getMemberProjects(1));
+        $this->assertNotEmpty($pp->getMemberProjects(2));
+
+        $this->assertNotEmpty($pp->getMemberProjectIds(1));
+        $this->assertNotEmpty($pp->getMemberProjectIds(2));
+
+        $this->assertNotEmpty($pp->getActiveMemberProjectIds(1));
+        $this->assertNotEmpty($pp->getActiveMemberProjectIds(2));
+
+        $this->assertNotEmpty($pp->getActiveMemberProjects(1));
+        $this->assertNotEmpty($pp->getActiveMemberProjects(2));
     }
 
     public function testRevokeUser()
