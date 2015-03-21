@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Edit project') ?></h2>
 </div>
-<form method="post" action="<?= $this->u('project', 'update', array('project_id' => $values['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('project', 'update', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
     <?= $this->formCsrf() ?>
     <?= $this->formHidden('id', $values) ?>
@@ -29,6 +29,10 @@
         </ul>
     </div>
     <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
+
+    <?php if ($project['is_private'] == 1 && $this->userSession->isAdmin()): ?>
+        <?= $this->formCheckbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
+    <?php endif ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

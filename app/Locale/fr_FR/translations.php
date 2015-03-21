@@ -777,4 +777,5 @@ return array(
     'This timetable is used when the checkbox "all day" is checked for scheduled time off and overtime.' => 'Ces horaires sont utilisés lorsque la case « Toute la journée » est cochée pour les heures d\'absences ou supplémentaires programmées.',
     'Files' => 'Fichiers',
     'Images' => 'Images',
+    'Private project' => 'Projet privé',
 );
