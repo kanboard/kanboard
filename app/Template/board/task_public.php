@@ -18,10 +18,6 @@
     <?php endif ?>
     </span>
 
-    <?php if ($task['score']): ?>
-        <span class="task-score"><?= $this->e($task['score']) ?></span>
-    <?php endif ?>
-
     <div class="task-board-title">
         <?= $this->a($this->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
     </div>

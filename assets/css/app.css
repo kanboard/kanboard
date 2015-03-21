@@ -954,16 +954,14 @@ span.task-board-date-overdue {
 /* task score */
 .task-score {
     font-weight: bold;
-    position: absolute;
 }
 
 .task-board .task-score {
-    font-size: 1.6em;
-    left: 2px;
-    bottom: 0;
+    font-size: 1.1em;
 }
 
 .task-show-details .task-score {
+    position: absolute;
     bottom: 5px;
     right: 5px;
     font-size: 2em;
