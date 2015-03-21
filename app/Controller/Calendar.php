@@ -98,7 +98,7 @@ class Calendar extends Base
 
             $this->taskModification->update(array(
                 'id' => $values['task_id'],
-                'date_due' => $values['date_due'],
+                'date_due' => substr($values['date_due'], 0, 10),
             ));
         }
     }
