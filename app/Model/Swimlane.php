@@ -99,10 +99,16 @@ class Swimlane extends Base
      */
     public function getDefault($project_id)
     {
-        return $this->db->table(Project::TABLE)
-                        ->eq('id', $project_id)
-                        ->columns('id', 'default_swimlane', 'show_default_swimlane')
-                        ->findOne();
+        $result = $this->db->table(Project::TABLE)
+                       ->eq('id', $project_id)
+                       ->columns('id', 'default_swimlane', 'show_default_swimlane')
+                       ->findOne();
+
+        if ($result['default_swimlane'] === 'Default swimlane') {
+            $result['default_swimlane'] = t($result['default_swimlane']);
+        }
+
+        return $result;
     }
 
     /**
@@ -166,6 +172,11 @@ class Swimlane extends Base
                                      ->findOneColumn('default_swimlane');
 
         if ($default_swimlane) {
+
+            if ($default_swimlane === 'Default swimlane') {
+                $default_swimlane = t($default_swimlane);
+            }
+
             array_unshift($swimlanes, array('id' => 0, 'name' => $default_swimlane));
         }
 
@@ -183,14 +194,17 @@ class Swimlane extends Base
     public function getList($project_id, $prepend = false)
     {
         $swimlanes = array();
-        $swimlanes[] = $this->db->table(Project::TABLE)->eq('id', $project_id)->findOneColumn('default_swimlane');
+        $default = $this->db->table(Project::TABLE)->eq('id', $project_id)->eq('show_default_swimlane', 1)->findOneColumn('default_swimlane');
 
-        $swimlanes = array_merge(
-            $swimlanes,
-            $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->orderBy('name', 'asc')->getAll('id', 'name')
-        );
+        if ($prepend) {
+            $swimlanes[-1] = t('All swimlanes');
+        }
 
-        return $prepend ? array(-1 => t('All swimlanes')) + $swimlanes : $swimlanes;
+        if (! empty($default)) {
+            $swimlanes[0] = $default === 'Default swimlane' ? t($default) : $default;
+        }
+
+        return $swimlanes + $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->orderBy('position', 'asc')->getAll('id', 'name');
     }
 
     /**
