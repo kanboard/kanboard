@@ -18,7 +18,7 @@
         <?= $this->css('assets/css/app.css') ?>
 
         <?php if ($this->config->get('application_stylesheet')): ?>
-            <style><?= $this->e($this->config->get('application_stylesheet')) ?></style>
+            <style><?= $this->config->get('application_stylesheet') ?></style>
         <?php endif ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
