@@ -45,6 +45,8 @@ class Action extends Base
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
             'TaskMoveAnotherProject' => t('Move the task to another project'),
+            'TaskMoveColumnAssigned' => t('Move the task to another column when assigned to a user'),
+            'TaskMoveColumnUnAssigned' => t('Move the task to another column when assignee is cleared'),
             'TaskAssignColorUser' => t('Assign a color to a specific user'),
             'TaskAssignColorCategory' => t('Assign automatically a color based on a category'),
             'TaskAssignCategoryColor' => t('Assign automatically a category based on a color'),
