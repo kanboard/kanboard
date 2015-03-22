@@ -804,4 +804,8 @@ return array(
     // 'Unable to remove this budget line.' => '',
     // 'USD - US Dollar' => '',
     // 'Remaining' => '',
+    // 'Destination column' => '',
+    // 'Move the task to another column when assigned to a user' => '',
+    // 'Move the task to another column when assignee is cleared' => '',
+    // 'Source column' => '',
 );

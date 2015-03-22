@@ -34,8 +34,8 @@ class TaskMoveColumnUnAssigned extends Base
     public function getActionRequiredParameters()
     {
         return array(
-            'src_column_id' => t('From column'),
-            'dest_column_id' => t('To column')
+            'src_column_id' => t('Source column'),
+            'dest_column_id' => t('Destination column')
         );
     }
 
@@ -85,7 +85,6 @@ class TaskMoveColumnUnAssigned extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('src_column_id') &&
-               !$data['owner_id'];
+        return $data['column_id'] == $this->getParam('src_column_id') && ! $data['owner_id'];
     }
 }

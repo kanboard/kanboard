@@ -806,4 +806,8 @@ return array(
     'Unable to remove this budget line.' => 'Impossible de supprimer cette ligne budgétaire.',
     'USD - US Dollar' => 'USD - Dollar américain',
     'Remaining' => 'Restant',
+    'Destination column' => 'Colonne de destination',
+    'Move the task to another column when assigned to a user' => 'Déplacer la tâche dans une autre colonne lorsque celle-ci est assignée à quelqu\'un',
+    'Move the task to another column when assignee is cleared' => 'Déplacer la tâche dans une autre colonne lorsque celle-ci n\'est plus assignée',
+    'Source column' => 'Colonne d\'origine',
 );
