@@ -48,6 +48,10 @@
                             <?= $this->a(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
                         </li>
                         <li>
+                            <i class="fa fa-pie-chart fa-fw"></i>
+                            <?= $this->a(t('Budget'), 'budget', 'index', array('project_id' => $project['id'])) ?>
+                        </li>
+                        <li>
                             <i class="fa fa-cog fa-fw"></i>
                             <?= $this->a(t('Configure'), 'project', 'show', array('project_id' => $project['id'])) ?>
                         </li>

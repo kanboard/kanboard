@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use DateInterval;
+use DateTime;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
@@ -52,7 +54,7 @@ class Budget extends Base
      * @param  integer    $project_id
      * @return \PicoDb\Table
      */
-    public function getBreakdown($project_id)
+    public function getSubtaskBreakdown($project_id)
     {
         return $this->db
                     ->table(SubtaskTimeTracking::TABLE)
@@ -74,6 +76,53 @@ class Budget extends Base
                     ->join(User::TABLE, 'id', 'user_id')
                     ->eq(Task::TABLE.'.project_id', $project_id)
                     ->filter(array($this, 'applyUserRate'));
+    }
+
+    /**
+     * Gather necessary information to display the budget graph
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return array
+     */
+    public function getDailyBudgetBreakdown($project_id)
+    {
+        $out = array();
+        $in = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->gt('amount', 0)->asc('date')->getAll('date', 'amount');
+        $time_slots = $this->getSubtaskBreakdown($project_id)->findAll();
+
+        foreach ($time_slots as $slot) {
+            $date = date('Y-m-d', $slot['start']);
+
+            if (! isset($out[$date])) {
+                $out[$date] = 0;
+            }
+
+            $out[$date] += $slot['cost'];
+        }
+
+        $start = key($in) ?: key($out);
+        $end = new DateTime;
+        $left = 0;
+        $serie = array();
+
+        for ($today = new DateTime($start); $today <= $end; $today->add(new DateInterval('P1D'))) {
+
+            $date = $today->format('Y-m-d');
+            $today_in = isset($in[$date]) ? (int) $in[$date] : 0;
+            $today_out = isset($out[$date]) ? (int) $out[$date] : 0;
+            $left += $today_in;
+            $left -= $today_out;
+
+            $serie[] = array(
+                'date' => $date,
+                'in' => $today_in,
+                'out' => -$today_out,
+                'left' => $left,
+            );
+        }
+
+        return $serie;
     }
 
     /**
