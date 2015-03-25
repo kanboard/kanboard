@@ -129,4 +129,4 @@ define('ENABLE_HSTS', true);
 define('ENABLE_XFRAME', true);
 
 // Escape html inside markdown text
-define('MARKDOWN_ESCAPED', false);
+define('MARKDOWN_ESCAPED', true);
