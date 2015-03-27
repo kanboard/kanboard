@@ -808,4 +808,5 @@ return array(
     // 'Move the task to another column when assigned to a user' => '',
     // 'Move the task to another column when assignee is cleared' => '',
     // 'Source column' => '',
+    // 'Show subtask estimates in the user calendar' => '',
 );

@@ -6,7 +6,13 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 54;
+const VERSION = 55;
+
+function version_55($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('subtask_forecast', '0'));
+}
 
 function version_54($pdo)
 {

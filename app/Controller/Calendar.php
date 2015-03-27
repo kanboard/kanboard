@@ -82,7 +82,9 @@ class Calendar extends Base
 
         $subtask_timeslots = $this->subtaskTimeTracking->getUserCalendarEvents($user_id, $start, $end);
 
-        $this->response->json(array_merge($due_tasks, $subtask_timeslots));
+        $subtask_forcast = $this->config->get('subtask_forecast') == 1 ? $this->subtaskForecast->getCalendarEvents($user_id, $end) : array();
+
+        $this->response->json(array_merge($due_tasks, $subtask_timeslots, $subtask_forcast));
     }
 
     /**

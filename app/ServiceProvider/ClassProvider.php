@@ -36,6 +36,7 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectPermission',
             'Subtask',
             'SubtaskExport',
+            'SubtaskForecast',
             'SubtaskTimeTracking',
             'Swimlane',
             'Task',

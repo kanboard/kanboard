@@ -28,6 +28,7 @@
 
     <?= $this->formCheckbox('subtask_restriction', t('Allow only one subtask in progress at the same time for a user'), 1, $values['subtask_restriction'] == 1) ?>
     <?= $this->formCheckbox('subtask_time_tracking', t('Enable time tracking for subtasks'), 1, $values['subtask_time_tracking'] == 1) ?>
+    <?= $this->formCheckbox('subtask_forecast', t('Show subtask estimates in the user calendar'), 1, $values['subtask_forecast'] == 1) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

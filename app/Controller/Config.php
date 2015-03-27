@@ -41,7 +41,7 @@ class Config extends Base
             $values =  $this->request->getValues();
 
             if ($redirect === 'board') {
-                $values += array('subtask_restriction' => 0, 'subtask_time_tracking' => 0);
+                $values += array('subtask_restriction' => 0, 'subtask_time_tracking' => 0, 'subtask_forecast' => 0);
             }
 
             if ($this->config->save($values)) {

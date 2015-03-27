@@ -810,4 +810,5 @@ return array(
     'Move the task to another column when assigned to a user' => 'Déplacer la tâche dans une autre colonne lorsque celle-ci est assignée à quelqu\'un',
     'Move the task to another column when assignee is cleared' => 'Déplacer la tâche dans une autre colonne lorsque celle-ci n\'est plus assignée',
     'Source column' => 'Colonne d\'origine',
+    'Show subtask estimates in the user calendar' => 'Afficher le temps estimé des sous-tâches dans le calendrier utilisateur',
 );
