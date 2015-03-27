@@ -29,6 +29,7 @@ class SubtaskForecast extends Base
                     ->asc(Task::TABLE.'.position')
                     ->asc(Subtask::TABLE.'.position')
                     ->gt(Subtask::TABLE.'.time_estimated', 0)
+                    ->eq(Subtask::TABLE.'.status', Subtask::STATUS_TODO)
                     ->eq(Subtask::TABLE.'.user_id', $user_id)
                     ->findAll();
     }
