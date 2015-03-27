@@ -526,4 +526,19 @@ class Task extends Base
             'subtask_paginator' => $subtask_paginator,
         )));
     }
+
+    /**
+     * Display the task transitions
+     *
+     * @access public
+     */
+    public function transitions()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->taskLayout('task/transitions', array(
+            'task' => $task,
+            'transitions' => $this->transition->getAllByTask($task['id']),
+        )));
+    }
 }

@@ -809,4 +809,7 @@ return array(
     // 'Move the task to another column when assignee is cleared' => '',
     // 'Source column' => '',
     // 'Show subtask estimates in the user calendar' => '',
+    // 'Transitions' => '',
+    // 'Executer' => '',
+    // 'Time spent in the column' => '',
 );

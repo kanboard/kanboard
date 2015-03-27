@@ -6,7 +6,30 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 54;
+const VERSION = 55;
+
+function version_55($pdo)
+{
+    $pdo->exec('CREATE TABLE transitions (
+        "id" INTEGER PRIMARY KEY,
+        "user_id" INTEGER NOT NULL,
+        "project_id" INTEGER NOT NULL,
+        "task_id" INTEGER NOT NULL,
+        "src_column_id" INTEGER NOT NULL,
+        "dst_column_id" INTEGER NOT NULL,
+        "date" INTEGER NOT NULL,
+        "time_spent" INTEGER DEFAULT 0,
+        FOREIGN KEY(src_column_id) REFERENCES columns(id) ON DELETE CASCADE,
+        FOREIGN KEY(dst_column_id) REFERENCES columns(id) ON DELETE CASCADE,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+        FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+    )');
+
+    $pdo->exec("CREATE INDEX transitions_task_index ON transitions(task_id)");
+    $pdo->exec("CREATE INDEX transitions_project_index ON transitions(project_id)");
+    $pdo->exec("CREATE INDEX transitions_user_index ON transitions(user_id)");
+}
 
 function version_54($pdo)
 {

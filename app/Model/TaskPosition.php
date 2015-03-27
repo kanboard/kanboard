@@ -143,6 +143,9 @@ class TaskPosition extends Base
             'position' => $new_position,
             'column_id' => $new_column_id,
             'swimlane_id' => $new_swimlane_id,
+            'src_column_id' => $task['column_id'],
+            'dst_column_id' => $new_column_id,
+            'date_moved' => $task['date_moved'],
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {

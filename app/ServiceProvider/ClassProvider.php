@@ -56,6 +56,7 @@ class ClassProvider implements ServiceProviderInterface
             'TimetableWeek',
             'TimetableOff',
             'TimetableExtra',
+            'Transition',
             'User',
             'UserSession',
             'Webhook',
