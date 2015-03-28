@@ -20,6 +20,7 @@ use Symfony\Component\Console\Command\Command;
  * @property \Model\Task                   $task
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder
+ * @property \Model\Transition             $transition
  */
 abstract class Base extends Command
 {

@@ -72,4 +72,14 @@ class Export extends Base
     {
         $this->common('projectDailySummary', 'getAggregatedMetrics', t('Summary'), 'summary', t('Daily project summary export'));
     }
+
+    /**
+     * Transition export
+     *
+     * @access public
+     */
+    public function transitions()
+    {
+        $this->common('transition', 'export', t('Transitions'), 'transitions', t('Task transitions export'));
+    }
 }

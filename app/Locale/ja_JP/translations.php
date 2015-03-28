@@ -812,4 +812,7 @@ return array(
     // 'Transitions' => '',
     // 'Executer' => '',
     // 'Time spent in the column' => '',
+    // 'Task transitions' => '',
+    // 'Task transitions export' => '',
+    // 'This report contains all column moves for each task with the date, the user and the time spent for each transition.' => '',
 );

@@ -814,4 +814,7 @@ return array(
     'Transitions' => 'Transitions',
     'Executer' => 'Exécutant',
     'Time spent in the column' => 'Temps passé dans la colonne',
+    'Task transitions' => 'Transitions des tâches',
+    'Task transitions export' => 'Export des transitions des tâches',
+    'This report contains all column moves for each task with the date, the user and the time spent for each transition.' => 'Ce rapport contient tous les mouvements de colonne pour chaque tâche avec la date, l\'utilisateur et le temps passé pour chaque transition.',
 );

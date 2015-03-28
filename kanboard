@@ -14,4 +14,5 @@ $application->add(new Console\SubtaskExport($container));
 $application->add(new Console\TaskExport($container));
 $application->add(new Console\ProjectDailySummaryCalculation($container));
 $application->add(new Console\ProjectDailySummaryExport($container));
+$application->add(new Console\TransitionExport($container));
 $application->run();
