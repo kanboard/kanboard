@@ -111,15 +111,19 @@ class Budget extends Base
             $date = $today->format('Y-m-d');
             $today_in = isset($in[$date]) ? (int) $in[$date] : 0;
             $today_out = isset($out[$date]) ? (int) $out[$date] : 0;
-            $left += $today_in;
-            $left -= $today_out;
 
-            $serie[] = array(
-                'date' => $date,
-                'in' => $today_in,
-                'out' => -$today_out,
-                'left' => $left,
-            );
+            if ($today_in > 0 || $today_out > 0) {
+
+                $left += $today_in;
+                $left -= $today_out;
+
+                $serie[] = array(
+                    'date' => $date,
+                    'in' => $today_in,
+                    'out' => -$today_out,
+                    'left' => $left,
+                );
+            }
         }
 
         return $serie;
