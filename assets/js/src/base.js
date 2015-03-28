@@ -222,6 +222,11 @@ var Kanboard = (function() {
             // Popover
             $(document).on("click", ".popover", Kanboard.Popover);
 
+            // Autofocus fields (html5 autofocus works only with page onload)
+            $("input[autofocus]").each(function(index, element) {
+                $(this).focus();
+            })
+
             // Datepicker
             $(".form-date").datepicker({
                 showOtherMonths: true,
@@ -243,6 +248,7 @@ var Kanboard = (function() {
             $(".dropit-submenu").hide();
             $('.dropdown').not(".dropit").dropit({ triggerParentEl : "span" });
 
+            // Task auto-completion
             if ($(".task-autocomplete").length) {
             	$(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
 
