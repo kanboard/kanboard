@@ -22,7 +22,7 @@
         <tr>
             <td><?= $this->a($this->e($record['task_title']), 'task', 'show', array('project_id' => $project['id'], 'task_id' => $record['task_id'])) ?></td>
             <td><?= $this->a($this->e($record['subtask_title']), 'task', 'show', array('project_id' => $project['id'], 'task_id' => $record['task_id'])) ?></td>
-            <td><?= $this->e($record['name'] ?: $record['username']) ?></td>
+            <td><?= $this->a($this->e($record['name'] ?: $record['username']), 'user', 'show', array('user_id' => $record['user_id'])) ?></td>
             <td><?= n($record['cost']) ?></td>
             <td><?= n($record['time_spent']).' '.t('hours') ?></td>
             <td><?= dt('%B %e, %Y', $record['start']) ?></td>

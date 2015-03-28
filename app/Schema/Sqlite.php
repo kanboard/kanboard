@@ -6,7 +6,15 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 55;
+const VERSION = 56;
+
+function version_56($pdo)
+{
+    $pdo->exec('CREATE TABLE currencies ("currency" TEXT NOT NULL UNIQUE, "rate" REAL DEFAULT 0)');
+
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('application_currency', 'USD'));
+}
 
 function version_55($pdo)
 {

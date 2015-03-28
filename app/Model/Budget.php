@@ -147,7 +147,7 @@ class Budget extends Base
             foreach ($rates as $rate) {
 
                 if ($rate['user_id'] == $record['user_id'] && date('Y-m-d', $rate['date_effective']) <= date('Y-m-d', $record['start'])) {
-                    $hourly_price = $rate['rate'];
+                    $hourly_price = $this->currency->getPrice($rate['currency'], $rate['rate']);
                     break;
                 }
             }

@@ -22,6 +22,7 @@ class ClassProvider implements ServiceProviderInterface
             'Color',
             'Comment',
             'Config',
+            'Currency',
             'DateParser',
             'File',
             'HourlyRate',

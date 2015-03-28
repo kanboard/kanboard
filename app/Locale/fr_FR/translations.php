@@ -817,4 +817,12 @@ return array(
     'Task transitions' => 'Transitions des tâches',
     'Task transitions export' => 'Export des transitions des tâches',
     'This report contains all column moves for each task with the date, the user and the time spent for each transition.' => 'Ce rapport contient tous les mouvements de colonne pour chaque tâche avec la date, l\'utilisateur et le temps passé pour chaque transition.',
+    'Currency rates' => 'Taux de change des devises',
+    'Rate' => 'Taux',
+    'Change reference currency' => 'Changer la monnaie de référence',
+    'Add a new currency rate' => 'Ajouter un nouveau taux pour une devise',
+    'Currency rates are used to calculate project budget.' => 'Le cours des devises est utilisé pour calculer le budget des projets.',
+    'Reference currency' => 'Devise de référence',
+    'The currency rate have been added successfully.' => 'Le taux de change a été ajouté avec succès.',
+    'Unable to add this currency rate.' => 'Impossible d\'ajouter ce taux de change',
 );

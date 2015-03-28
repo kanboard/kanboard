@@ -6,7 +6,15 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 56;
+const VERSION = 57;
+
+function version_57($pdo)
+{
+    $pdo->exec('CREATE TABLE currencies (`currency` CHAR(3) NOT NULL UNIQUE, `rate` FLOAT DEFAULT 0) ENGINE=InnoDB CHARSET=utf8');
+
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('application_currency', 'USD'));
+}
 
 function version_56($pdo)
 {
@@ -115,7 +123,7 @@ function version_50($pdo)
         user_id INT NOT NULL,
         rate FLOAT DEFAULT 0,
         date_effective INTEGER NOT NULL,
-        currency TEXT NOT NULL,
+        currency CHAR(3) NOT NULL,
         FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
         PRIMARY KEY(id)
     ) ENGINE=InnoDB CHARSET=utf8");

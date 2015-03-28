@@ -815,4 +815,12 @@ return array(
     // 'Task transitions' => '',
     // 'Task transitions export' => '',
     // 'This report contains all column moves for each task with the date, the user and the time spent for each transition.' => '',
+    // 'Currency rates' => '',
+    // 'Rate' => '',
+    // 'Change reference currency' => '',
+    // 'Add a new currency rate' => '',
+    // 'Currency rates are used to calculate project budget.' => '',
+    // 'Reference currency' => '',
+    // 'The currency rate have been added successfully.' => '',
+    // 'Unable to add this currency rate.' => '',
 );
