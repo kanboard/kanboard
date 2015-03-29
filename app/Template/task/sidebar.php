@@ -5,6 +5,9 @@
             <?= $this->a(t('Summary'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li>
+            <?= $this->a(t('Activity stream'), 'task', 'activites', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <li>
             <?= $this->a(t('Transitions'), 'task', 'transitions', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php if ($task['time_estimated'] > 0 || $task['time_spent'] > 0): ?>

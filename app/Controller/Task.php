@@ -85,6 +85,22 @@ class Task extends Base
     }
 
     /**
+     * Display task activities
+     *
+     * @access public
+     */
+    public function activites()
+    {
+        $task = $this->getTask();
+        $this->response->html($this->taskLayout('task/events', array(   
+            'title' => $task['title'],
+            'task' => $task,
+            'ajax' => $this->request->isAjax(),
+            'events' => $this->projectActivity->getTasks([$task['id']]),
+        )));
+    }
+    
+    /**
      * Display a form to create a new task
      *
      * @access public
