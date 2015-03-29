@@ -47,8 +47,9 @@ class HttpClient
         }
 
         $headers = array(
-            'Connection: close',
             'User-Agent: '.self::HTTP_USER_AGENT,
+            'Content-Type: application/json',
+            'Connection: close',
         );
 
         $context = stream_context_create(array(

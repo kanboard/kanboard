@@ -6,7 +6,16 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 57;
+const VERSION = 58;
+
+function version_58($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_hipchat', '0'));
+    $rq->execute(array('integration_hipchat_api_url', 'https://api.hipchat.com'));
+    $rq->execute(array('integration_hipchat_room_id', ''));
+    $rq->execute(array('integration_hipchat_room_token', ''));
+}
 
 function version_57($pdo)
 {

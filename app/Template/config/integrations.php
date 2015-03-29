@@ -6,6 +6,22 @@
 
     <?= $this->formCsrf() ?>
 
+    <h3><img src="assets/img/hipchat-icon.png"/> <?= t('Hipchat') ?></h3>
+    <div class="listing">
+        <?= $this->formCheckbox('integration_hipchat', t('Send notifications to Hipchat'), 1, $values['integration_hipchat'] == 1) ?>
+
+        <?= $this->formLabel(t('API URL'), 'integration_hipchat_api_url') ?>
+        <?= $this->formText('integration_hipchat_api_url', $values, $errors) ?>
+
+        <?= $this->formLabel(t('Room API ID or name'), 'integration_hipchat_room_id') ?>
+        <?= $this->formText('integration_hipchat_room_id', $values, $errors) ?>
+
+        <?= $this->formLabel(t('Room notification token'), 'integration_hipchat_room_token') ?>
+        <?= $this->formText('integration_hipchat_room_token', $values, $errors) ?>
+
+        <p class="form-help"><a href="http://kanboard.net/documentation/hipchat" target="_blank"><?= t('Help on Hipchat integration') ?></a></p>
+    </div>
+
     <h3><i class="fa fa-slack fa-fw"></i>&nbsp;<?= t('Slack') ?></h3>
     <div class="listing">
         <?= $this->formCheckbox('integration_slack_webhook', t('Send notifications to a Slack channel'), 1, $values['integration_slack_webhook'] == 1) ?>

@@ -10,7 +10,7 @@ Example of notifications:
 
 This feature use the [Incoming webhook](https://api.slack.com/incoming-webhooks) system of Slack.
 
-### Configure Slack
+### Slack configuration
 
 ![Slack webhook creation](http://kanboard.net/screenshots/documentation/slack-add-incoming-webhook.png)
 
@@ -18,4 +18,4 @@ This feature use the [Incoming webhook](https://api.slack.com/incoming-webhooks)
 2. On the list of services, scroll-down and choose **DIY Integrations & Customizations > Incoming WebHooks**
 3. Copy the webhook url to the Kanboard settings page: **Settings > Integrations > Slack**
 
-
+Now, all Kanboard events will be sent to the Slack channel.

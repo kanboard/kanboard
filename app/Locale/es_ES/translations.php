@@ -827,4 +827,9 @@ return array(
     // 'Webhook URL' => '',
     // 'Help on Slack integration' => '',
     // '%s remove the assignee of the task %s' => '',
+    // 'Send notifications to Hipchat' => '',
+    // 'API URL' => '',
+    // 'Room API ID or name' => '',
+    // 'Room notification token' => '',
+    // 'Help on Hipchat integration' => '',
 );
