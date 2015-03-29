@@ -162,7 +162,13 @@ class ProjectActivity extends Base
     {
         switch ($event['event_name']) {
             case Task::EVENT_ASSIGNEE_CHANGE:
-                return t('%s change the assignee of the task #%d to %s', $event['author'], $event['task']['id'], $event['task']['assignee_name'] ?: $event['task']['assignee_username']);
+                $assignee = $event['task']['assignee_name'] ?: $event['task']['assignee_username'];
+
+                if (! empty($assignee)) {
+                    return t('%s change the assignee of the task #%d to %s', $event['author'], $event['task']['id'], $assignee);
+                }
+
+                return t('%s remove the assignee of the task %s', $event['author'], e('#%d', $event['task']['id']));
             case Task::EVENT_UPDATE:
                 return t('%s updated the task #%d', $event['author'], $event['task']['id']);
             case Task::EVENT_CREATE:

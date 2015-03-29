@@ -6,7 +6,14 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 57;
+const VERSION = 58;
+
+function version_58($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_slack_webhook', '0'));
+    $rq->execute(array('integration_slack_webhook_url', ''));
+}
 
 function version_57($pdo)
 {

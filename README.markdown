@@ -97,6 +97,7 @@ Documentation
 - [Bitbucket webhooks](docs/bitbucket-webhooks.markdown)
 - [Github webhooks](docs/github-webhooks.markdown)
 - [Gitlab webhooks](docs/gitlab-webhooks.markdown)
+- [Slack](docs/slack.markdown)
 
 #### More
 

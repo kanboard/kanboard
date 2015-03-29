@@ -823,4 +823,8 @@ return array(
     // 'Reference currency' => '',
     // 'The currency rate have been added successfully.' => '',
     // 'Unable to add this currency rate.' => '',
+    // 'Send notifications to a Slack channel' => '',
+    // 'Webhook URL' => '',
+    // 'Help on Slack integration' => '',
+    // '%s remove the assignee of the task %s' => '',
 );

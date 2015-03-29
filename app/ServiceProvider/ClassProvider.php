@@ -69,11 +69,13 @@ class ClassProvider implements ServiceProviderInterface
             'MemoryCache',
             'FileCache',
             'Request',
+            'HttpClient',
         ),
         'Integration' => array(
             'GitlabWebhook',
             'GithubWebhook',
             'BitbucketWebhook',
+            'SlackWebhook',
         )
     );
 

@@ -825,4 +825,8 @@ return array(
     'Reference currency' => 'Devise de référence',
     'The currency rate have been added successfully.' => 'Le taux de change a été ajouté avec succès.',
     'Unable to add this currency rate.' => 'Impossible d\'ajouter ce taux de change',
+    'Send notifications to a Slack channel' => 'Envoyer des notifications sur un channel Slack',
+    'Webhook URL' => 'URL du webhook',
+    'Help on Slack integration' => 'Aide sur l\'intégration avec Slack',
+    '%s remove the assignee of the task %s' => '%s a enlevé la personne assignée à la tâche %s',
 );

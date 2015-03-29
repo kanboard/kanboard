@@ -41,6 +41,15 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
                 $event_name,
                 $values
             );
+
+            if ($this->config->get('integration_slack_webhook') == 1) {
+                $this->slackWebhook->notify(
+                    $values['task']['project_id'],
+                    $values['task']['id'],
+                    $event_name,
+                    $values
+                );
+            }
         }
     }
 
