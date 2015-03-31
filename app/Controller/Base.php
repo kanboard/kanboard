@@ -153,7 +153,7 @@ abstract class Base
         $this->response->xss();
 
         // Allow the public board iframe inclusion
-        if ($action !== 'readonly') {
+        if (ENABLE_XFRAME && $action !== 'readonly') {
             $this->response->xframe();
         }
 

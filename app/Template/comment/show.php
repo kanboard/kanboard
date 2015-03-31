@@ -1,9 +1,11 @@
 <div class="comment <?= isset($preview) ? 'comment-preview' : '' ?>" id="comment-<?= $comment['id'] ?>">
 
     <p class="comment-title">
+        <?php if (! empty($comment['email'])): ?>
+            <?= $this->avatar($comment['email'], $comment['name'] ?: $comment['username']) ?>
+        <?php endif ?>
         <span class="comment-username"><?= $this->e($comment['name'] ?: $comment['username']) ?></span> @ <span class="comment-date"><?= dt('%B %e, %Y at %k:%M %p', $comment['date']) ?></span>
     </p>
-
     <div class="comment-inner">
 
         <?php if (! isset($preview)): ?>

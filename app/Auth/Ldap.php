@@ -261,7 +261,7 @@ class Ldap extends Base
     private function getQuery($username, $email)
     {
         if ($username && $email) {
-            return '(&('.sprintf(LDAP_USER_PATTERN, $username).')('.sprintf(LDAP_ACCOUNT_EMAIL, $email).')';
+            return '(&('.sprintf(LDAP_USER_PATTERN, $username).')('.LDAP_ACCOUNT_EMAIL.'='.$email.'))';
         }
         else if ($username) {
             return sprintf(LDAP_USER_PATTERN, $username);

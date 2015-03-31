@@ -85,6 +85,23 @@ class Task extends Base
     }
 
     /**
+     * Display task activities
+     *
+     * @access public
+     */
+    public function activites()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->taskLayout('task/activity', array(
+            'title' => $task['title'],
+            'task' => $task,
+            'ajax' => $this->request->isAjax(),
+            'events' => $this->projectActivity->getTask($task['id']),
+        )));
+    }
+
+    /**
      * Display a form to create a new task
      *
      * @access public
@@ -93,11 +110,12 @@ class Task extends Base
     {
         $project = $this->getProject();
         $method = $this->request->isAjax() ? 'render' : 'layout';
+        $swimlanes_list = $this->swimlane->getList($project['id']);
 
         if (empty($values)) {
 
             $values = array(
-                'swimlane_id' => $this->request->getIntegerParam('swimlane_id'),
+                'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
                 'column_id' => $this->request->getIntegerParam('column_id'),
                 'color_id' => $this->request->getStringParam('color_id'),
                 'owner_id' => $this->request->getIntegerParam('owner_id'),
@@ -114,6 +132,7 @@ class Task extends Base
             'users_list' => $this->projectPermission->getMemberList($project['id'], true, false, true),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
+            'swimlanes_list' => $swimlanes_list,
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $project['name'].' &gt; '.t('New task')
@@ -522,6 +541,21 @@ class Task extends Base
         $this->response->html($this->taskLayout('task/time_tracking', array(
             'task' => $task,
             'subtask_paginator' => $subtask_paginator,
+        )));
+    }
+
+    /**
+     * Display the task transitions
+     *
+     * @access public
+     */
+    public function transitions()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->taskLayout('task/transitions', array(
+            'task' => $task,
+            'transitions' => $this->transition->getAllByTask($task['id']),
         )));
     }
 }

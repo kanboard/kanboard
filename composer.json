@@ -1,5 +1,6 @@
 {
     "require" : {
+        "php": ">=5.3",
         "ext-mbstring" : "*",
         "fguillot/simple-validator" : "dev-master",
         "swiftmailer/swiftmailer" : "@stable",

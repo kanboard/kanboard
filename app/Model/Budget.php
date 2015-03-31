@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use DateInterval;
+use DateTime;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
@@ -52,7 +54,7 @@ class Budget extends Base
      * @param  integer    $project_id
      * @return \PicoDb\Table
      */
-    public function getBreakdown($project_id)
+    public function getSubtaskBreakdown($project_id)
     {
         return $this->db
                     ->table(SubtaskTimeTracking::TABLE)
@@ -77,6 +79,57 @@ class Budget extends Base
     }
 
     /**
+     * Gather necessary information to display the budget graph
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return array
+     */
+    public function getDailyBudgetBreakdown($project_id)
+    {
+        $out = array();
+        $in = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->gt('amount', 0)->asc('date')->getAll('date', 'amount');
+        $time_slots = $this->getSubtaskBreakdown($project_id)->findAll();
+
+        foreach ($time_slots as $slot) {
+            $date = date('Y-m-d', $slot['start']);
+
+            if (! isset($out[$date])) {
+                $out[$date] = 0;
+            }
+
+            $out[$date] += $slot['cost'];
+        }
+
+        $start = key($in) ?: key($out);
+        $end = new DateTime;
+        $left = 0;
+        $serie = array();
+
+        for ($today = new DateTime($start); $today <= $end; $today->add(new DateInterval('P1D'))) {
+
+            $date = $today->format('Y-m-d');
+            $today_in = isset($in[$date]) ? (int) $in[$date] : 0;
+            $today_out = isset($out[$date]) ? (int) $out[$date] : 0;
+
+            if ($today_in > 0 || $today_out > 0) {
+
+                $left += $today_in;
+                $left -= $today_out;
+
+                $serie[] = array(
+                    'date' => $date,
+                    'in' => $today_in,
+                    'out' => -$today_out,
+                    'left' => $left,
+                );
+            }
+        }
+
+        return $serie;
+    }
+
+    /**
      * Filter callback to apply the rate according to the effective date
      *
      * @access public
@@ -94,7 +147,7 @@ class Budget extends Base
             foreach ($rates as $rate) {
 
                 if ($rate['user_id'] == $record['user_id'] && date('Y-m-d', $rate['date_effective']) <= date('Y-m-d', $record['start'])) {
-                    $hourly_price = $rate['rate'];
+                    $hourly_price = $this->currency->getPrice($rate['currency'], $rate['rate']);
                     break;
                 }
             }

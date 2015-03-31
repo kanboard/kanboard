@@ -17,16 +17,16 @@ $ ./kanboard
 Kanboard version master
 
 Usage:
- [options] command [arguments]
+ command [options] [arguments]
 
 Options:
- --help (-h)           Display this help message.
- --quiet (-q)          Do not output any message.
- --verbose (-v|vv|vvv) Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
- --version (-V)        Display this application version.
- --ansi                Force ANSI output.
- --no-ansi             Disable ANSI output.
- --no-interaction (-n) Do not ask any interactive question.
+ --help (-h)           Display this help message
+ --quiet (-q)          Do not output any message
+ --verbose (-v|vv|vvv) Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+ --version (-V)        Display this application version
+ --ansi                Force ANSI output
+ --no-ansi             Disable ANSI output
+ --no-interaction (-n) Do not ask any interactive question
 
 Available commands:
  help                           Displays help for a command
@@ -35,6 +35,7 @@ export
  export:daily-project-summary   Daily project summary CSV export (number of tasks per column and per day)
  export:subtasks                Subtasks CSV export
  export:tasks                   Tasks CSV export
+ export:transitions             Task transitions CSV export
 notification
  notification:overdue-tasks     Send notifications for overdue tasks
 projects
@@ -43,20 +44,6 @@ projects
 
 Available commands
 ------------------
-
-### Subtasks CSV export
-
-Usage:
-
-```bash
-./kanboard export:subtasks <project_id> <start_date> <end_date>
-```
-
-Example:
-
-```bash
-./kanboard export:subtasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
-```
 
 ### Tasks CSV export
 
@@ -72,7 +59,49 @@ Example:
 ./kanboard export:tasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
-CSV data are sent to stdout.
+CSV data are sent to `stdout`.
+
+### Subtasks CSV export
+
+Usage:
+
+```bash
+./kanboard export:subtasks <project_id> <start_date> <end_date>
+```
+
+Example:
+
+```bash
+./kanboard export:subtasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+```
+
+### Task transitions CSV export
+
+Usage:
+
+```bash
+./kanboard export:transitions <project_id> <start_date> <end_date>
+```
+
+Example:
+
+```bash
+./kanboard export:transitions 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+```
+
+### Export daily summaries data in CSV
+
+The exported data will be printed on the standard output:
+
+```bash
+./kanboard export:daily-project-summary <project_id> <start_date> <end_date>
+```
+
+Example:
+
+```bash
+./kanboard export:daily-project-summary 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+```
 
 ### Send notifications for overdue tasks
 
@@ -110,18 +139,4 @@ $ ./kanboard projects:daily-summary
 Run calculation for Project #0
 Run calculation for Project #1
 Run calculation for Project #10
-```
-
-### Export daily summaries data in CSV
-
-The exported data will be printed on the standard output:
-
-```bash
-./kanboard export:daily-project-summary <project_id> <start_date> <end_date>
-```
-
-Example:
-
-```bash
-./kanboard export:daily-project-summary 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```

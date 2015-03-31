@@ -21,21 +21,24 @@ class TaskPosition extends Base
      * @param  integer    $column_id         Column id
      * @param  integer    $position          Position (must be >= 1)
      * @param  integer    $swimlane_id       Swimlane id
+     * @param  boolean    $fire_events       Fire events
      * @return boolean
      */
-    public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0)
+    public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0, $fire_events = true)
     {
         $original_task = $this->taskFinder->getById($task_id);
 
         $result = $this->calculateAndSave($project_id, $task_id, $column_id, $position, $swimlane_id);
 
         if ($result) {
-            
+
             if ($original_task['swimlane_id'] != $swimlane_id) {
                 $this->calculateAndSave($project_id, 0, $column_id, 1, $original_task['swimlane_id']);
             }
 
-            $this->fireEvents($original_task, $column_id, $position, $swimlane_id);
+            if ($fire_events) {
+                $this->fireEvents($original_task, $column_id, $position, $swimlane_id);
+            }
         }
 
         return $result;
@@ -140,6 +143,9 @@ class TaskPosition extends Base
             'position' => $new_position,
             'column_id' => $new_column_id,
             'swimlane_id' => $new_swimlane_id,
+            'src_column_id' => $task['column_id'],
+            'dst_column_id' => $new_column_id,
+            'date_moved' => $task['date_moved'],
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {

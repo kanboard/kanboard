@@ -316,7 +316,10 @@ class ProjectPermission extends Base
     {
         return $this->db
                     ->hashtable(Project::TABLE)
-                    ->eq('user_id', $user_id)
+                    ->beginOr()
+                    ->eq(self::TABLE.'.user_id', $user_id)
+                    ->eq(Project::TABLE.'.is_everybody_allowed', 1)
+                    ->closeOr()
                     ->join(self::TABLE, 'project_id', 'id')
                     ->getAll('projects.id', 'name');
     }
@@ -332,7 +335,10 @@ class ProjectPermission extends Base
     {
         return $this->db
                     ->table(Project::TABLE)
-                    ->eq('user_id', $user_id)
+                    ->beginOr()
+                    ->eq(self::TABLE.'.user_id', $user_id)
+                    ->eq(Project::TABLE.'.is_everybody_allowed', 1)
+                    ->closeOr()
                     ->join(self::TABLE, 'project_id', 'id')
                     ->findAllByColumn('projects.id');
     }
@@ -348,7 +354,10 @@ class ProjectPermission extends Base
     {
         return $this->db
                     ->table(Project::TABLE)
-                    ->eq('user_id', $user_id)
+                    ->beginOr()
+                    ->eq(self::TABLE.'.user_id', $user_id)
+                    ->eq(Project::TABLE.'.is_everybody_allowed', 1)
+                    ->closeOr()
                     ->eq(Project::TABLE.'.is_active', Project::ACTIVE)
                     ->join(self::TABLE, 'project_id', 'id')
                     ->findAllByColumn('projects.id');
@@ -365,7 +374,10 @@ class ProjectPermission extends Base
     {
         return $this->db
                     ->hashtable(Project::TABLE)
-                    ->eq('user_id', $user_id)
+                    ->beginOr()
+                    ->eq(self::TABLE.'.user_id', $user_id)
+                    ->eq(Project::TABLE.'.is_everybody_allowed', 1)
+                    ->closeOr()
                     ->eq(Project::TABLE.'.is_active', Project::ACTIVE)
                     ->join(self::TABLE, 'project_id', 'id')
                     ->getAll('projects.id', 'name');

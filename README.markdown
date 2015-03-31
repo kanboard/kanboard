@@ -97,6 +97,8 @@ Documentation
 - [Bitbucket webhooks](docs/bitbucket-webhooks.markdown)
 - [Github webhooks](docs/github-webhooks.markdown)
 - [Gitlab webhooks](docs/gitlab-webhooks.markdown)
+- [Hipchat](docs/hipchat.markdown)
+- [Slack](docs/slack.markdown)
 
 #### More
 
@@ -166,6 +168,7 @@ Contributors:
 - [Aleix Pol](https://github.com/aleixpol)
 - [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
+- [Christian González](https://github.com/nerdoc)
 - [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo
 - [Cluxter](https://github.com/cluxter)
@@ -218,14 +221,17 @@ Contributors:
 - [Rzeka](https://github.com/rzeka)
 - [Sebastien Pacilly](https://github.com/spacilly)
 - [Sebastian Reese](https://github.com/ReeseSebastian)
+- [Semyon Novikov](https://github.com/semka)
 - [Sylvain Veyrié](https://github.com/turb)
 - [Timo](https://github.com/BlueTeck)
+- [Tomáš Votruba](https://github.com/TomasVotruba)
 - [Toomyem](https://github.com/Toomyem)
 - [Tony G. Bolaño](https://github.com/tonybolanyo)
 - [Torsten](https://github.com/misterfu)
 - [Troloo](https://github.com/troloo)
 - [Typz](https://github.com/Typz)
 - [Vedovator](https://github.com/vedovator)
+- [Vladimir Babin](https://github.com/Chiliec)
 - [Ybarc](https://github.com/ybarc)
 - [Yuichi Murata](https://github.com/yuichi1004)
 

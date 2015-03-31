@@ -68,6 +68,11 @@ defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/s
 // Enable or disable "Strict-Transport-Security" HTTP header
 defined('ENABLE_HSTS') or define('ENABLE_HSTS', true);
 
+// Enable or disable "X-Frame-Options: DENY" HTTP header
+defined('ENABLE_XFRAME') or define('ENABLE_XFRAME', true);
+
 // Default files directory
 defined('FILES_DIR') or define('FILES_DIR', 'data/files/');
 
+// Escape html inside markdown text
+defined('MARKDOWN_ESCAPE_HTML') or define('MARKDOWN_ESCAPE_HTML', true);

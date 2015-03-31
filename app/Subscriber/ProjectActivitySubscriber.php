@@ -41,6 +41,33 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
                 $event_name,
                 $values
             );
+
+            $this->sendSlackNotification($event_name, $values);
+            $this->sendHipchatNotification($event_name, $values);
+        }
+    }
+
+    private function sendSlackNotification($event_name, array $values)
+    {
+        if ($this->config->get('integration_slack_webhook') == 1) {
+            $this->slackWebhook->notify(
+                $values['task']['project_id'],
+                $values['task']['id'],
+                $event_name,
+                $values
+            );
+        }
+    }
+
+    private function sendHipchatNotification($event_name, array $values)
+    {
+        if ($this->config->get('integration_hipchat') == 1) {
+            $this->hipchat->notify(
+                $values['task']['project_id'],
+                $values['task']['id'],
+                $event_name,
+                $values
+            );
         }
     }
 

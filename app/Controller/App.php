@@ -46,21 +46,21 @@ class App extends Base
         $project_ids = array_keys($projects);
 
         $task_paginator = $this->paginator
-            ->setUrl('app', $action, array('pagination' => 'tasks'))
+            ->setUrl('app', $action, array('pagination' => 'tasks', 'user_id' => $user_id))
             ->setMax(10)
             ->setOrder('tasks.id')
             ->setQuery($this->taskFinder->getUserQuery($user_id))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'tasks');
 
         $subtask_paginator = $this->paginator
-            ->setUrl('app', $action, array('pagination' => 'subtasks'))
+            ->setUrl('app', $action, array('pagination' => 'subtasks', 'user_id' => $user_id))
             ->setMax(10)
             ->setOrder('tasks.id')
             ->setQuery($this->subtask->getUserQuery($user_id, $status))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
         $project_paginator = $this->paginator
-            ->setUrl('app', $action, array('pagination' => 'projects'))
+            ->setUrl('app', $action, array('pagination' => 'projects', 'user_id' => $user_id))
             ->setMax(10)
             ->setOrder('name')
             ->setQuery($this->project->getQueryColumnStats($project_ids))

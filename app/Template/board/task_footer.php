@@ -42,4 +42,8 @@
             <i class="fa fa-file-text-o"></i>
         </span>
     <?php endif ?>
+
+    <?php if ($task['score']): ?>
+        <span class="task-score"><?= $this->e($task['score']) ?></span>
+    <?php endif ?>
 </div>

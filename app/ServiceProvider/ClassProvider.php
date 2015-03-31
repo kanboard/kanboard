@@ -22,6 +22,7 @@ class ClassProvider implements ServiceProviderInterface
             'Color',
             'Comment',
             'Config',
+            'Currency',
             'DateParser',
             'File',
             'HourlyRate',
@@ -36,6 +37,7 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectPermission',
             'Subtask',
             'SubtaskExport',
+            'SubtaskForecast',
             'SubtaskTimeTracking',
             'Swimlane',
             'Task',
@@ -55,6 +57,7 @@ class ClassProvider implements ServiceProviderInterface
             'TimetableWeek',
             'TimetableOff',
             'TimetableExtra',
+            'Transition',
             'User',
             'UserSession',
             'Webhook',
@@ -66,11 +69,14 @@ class ClassProvider implements ServiceProviderInterface
             'MemoryCache',
             'FileCache',
             'Request',
+            'HttpClient',
         ),
         'Integration' => array(
             'GitlabWebhook',
             'GithubWebhook',
             'BitbucketWebhook',
+            'Hipchat',
+            'SlackWebhook',
         )
     );
 

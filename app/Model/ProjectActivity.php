@@ -81,22 +81,68 @@ class ProjectActivity extends Base
             return array();
         }
 
-        $query = $this->db->table(self::TABLE)
-                           ->columns(
-                                self::TABLE.'.*',
-                                User::TABLE.'.username AS author_username',
-                                User::TABLE.'.name AS author_name'
-                           )
-                           ->in('project_id', $project_ids)
-                           ->join(User::TABLE, 'id', 'creator_id')
-                           ->desc(self::TABLE.'.id')
-                           ->limit($limit);
+        $query = $this
+                    ->db
+                    ->table(self::TABLE)
+                    ->columns(
+                        self::TABLE.'.*',
+                        User::TABLE.'.username AS author_username',
+                        User::TABLE.'.name AS author_name',
+                        User::TABLE.'.email'
+                    )
+                    ->in('project_id', $project_ids)
+                    ->join(User::TABLE, 'id', 'creator_id')
+                    ->desc(self::TABLE.'.id')
+                    ->limit($limit);
 
-        if(!is_null($start)){
+        return $this->getEvents($query, $start, $end);
+    }
+
+    /**
+     * Get all events for the given task
+     *
+     * @access public
+     * @param  integer     $task_id         Task id
+     * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
+     * @return array
+     */
+    public function getTask($task_id, $limit = 50, $start = null, $end = null)
+    {
+        $query = $this
+                    ->db
+                    ->table(self::TABLE)
+                    ->columns(
+                        self::TABLE.'.*',
+                        User::TABLE.'.username AS author_username',
+                        User::TABLE.'.name AS author_name',
+                        User::TABLE.'.email'
+                    )
+                    ->eq('task_id', $task_id)
+                    ->join(User::TABLE, 'id', 'creator_id')
+                    ->desc(self::TABLE.'.id')
+                    ->limit($limit);
+
+        return $this->getEvents($query, $start, $end);
+    }
+
+    /**
+     * Common function to return events
+     *
+     * @access public
+     * @param  \PicoDb\Table   $query           PicoDb Query
+     * @param  integer         $start           Timestamp of earliest activity
+     * @param  integer         $end             Timestamp of latest activity
+     * @return array
+     */
+    private function getEvents(\PicoDb\Table $query, $start, $end)
+    {
+        if (! is_null($start)){
             $query->gte('date_creation', $start);
         }
 
-        if(!is_null($end)){
+        if (! is_null($end)){
             $query->lte('date_creation', $end);
         }
 
@@ -162,7 +208,13 @@ class ProjectActivity extends Base
     {
         switch ($event['event_name']) {
             case Task::EVENT_ASSIGNEE_CHANGE:
-                return t('%s change the assignee of the task #%d to %s', $event['author'], $event['task']['id'], $event['task']['assignee_name'] ?: $event['task']['assignee_username']);
+                $assignee = $event['task']['assignee_name'] ?: $event['task']['assignee_username'];
+
+                if (! empty($assignee)) {
+                    return t('%s change the assignee of the task #%d to %s', $event['author'], $event['task']['id'], $assignee);
+                }
+
+                return t('%s remove the assignee of the task %s', $event['author'], e('#%d', $event['task']['id']));
             case Task::EVENT_UPDATE:
                 return t('%s updated the task #%d', $event['author'], $event['task']['id']);
             case Task::EVENT_CREATE:

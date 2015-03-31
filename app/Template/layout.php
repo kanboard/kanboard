@@ -17,6 +17,10 @@
         <?= $this->css($this->u('app', 'colors'), false) ?>
         <?= $this->css('assets/css/app.css') ?>
 
+        <?php if ($this->config->get('application_stylesheet')): ?>
+            <style><?= $this->config->get('application_stylesheet') ?></style>
+        <?php endif ?>
+
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
         <link rel="apple-touch-icon" sizes="72x72" href="assets/img/touch-icon-ipad.png">

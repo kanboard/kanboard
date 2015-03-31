@@ -23,7 +23,7 @@ class Project extends Base
         else {
             $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
         }
-        
+
         $nb_projects = count($project_ids);
 
         $paginator = $this->paginator
@@ -128,6 +128,11 @@ class Project extends Base
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+
+        if ($project['is_private'] == 1) {
+            $values += array('is_private' => 0);
+        }
+
         list($valid, $errors) = $this->project->validateModification($values);
 
         if ($valid) {

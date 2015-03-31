@@ -72,6 +72,7 @@ class Acl extends Base
         'link' => '*',
         'project' => array('remove'),
         'hourlyrate' => '*',
+        'currency' => '*',
     );
 
     /**

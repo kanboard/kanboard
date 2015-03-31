@@ -20,7 +20,7 @@ class Budget extends Base
         $project = $this->getProject();
 
         $this->response->html($this->projectLayout('budget/index', array(
-            'total' => $this->budget->getTotal($project['id']),
+            'daily_budget' => $this->budget->getDailyBudgetBreakdown($project['id']),
             'project' => $project,
             'title' => t('Budget')
         )));
@@ -40,7 +40,7 @@ class Budget extends Base
             ->setMax(30)
             ->setOrder('start')
             ->setDirection('DESC')
-            ->setQuery($this->budget->getBreakdown($project['id']))
+            ->setQuery($this->budget->getSubtaskBreakdown($project['id']))
             ->calculate();
 
         $this->response->html($this->projectLayout('budget/breakdown', array(

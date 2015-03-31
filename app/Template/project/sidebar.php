@@ -63,6 +63,9 @@
             <?= $this->a(t('Subtasks'), 'export', 'subtasks', array('project_id' => $project['id'])) ?>
         </li>
         <li>
+            <?= $this->a(t('Task transitions'), 'export', 'transitions', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
             <?= $this->a(t('Daily project summary'), 'export', 'summary', array('project_id' => $project['id'])) ?>
         </li>
     </ul>

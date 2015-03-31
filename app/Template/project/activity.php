@@ -23,6 +23,6 @@
         </ul>
     </div>
     <section>
-        <?= $this->render('project/events', array('events' => $events)) ?>
+        <?= $this->render('event/events', array('events' => $events)) ?>
     </section>
 </section>

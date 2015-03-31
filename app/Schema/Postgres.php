@@ -6,9 +6,9 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 35;
+const VERSION = 42;
 
-function version_35($pdo)
+function version_42($pdo)
 {
     $pdo->exec('ALTER TABLE task_has_links ADD COLUMN opposite_task_link_id INTEGER DEFAULT 0');
 
@@ -24,6 +24,71 @@ function version_35($pdo)
         $urq->execute(array($task_links[$i+1]['id'], $task_links[$i]['id']));
         $urq->execute(array($task_links[$i]['id'], $task_links[$i+1]['id']));
     }
+}
+
+function version_41($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_gravatar', '0'));
+}
+
+function version_40($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_hipchat', '0'));
+    $rq->execute(array('integration_hipchat_api_url', 'https://api.hipchat.com'));
+    $rq->execute(array('integration_hipchat_room_id', ''));
+    $rq->execute(array('integration_hipchat_room_token', ''));
+}
+
+function version_39($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_slack_webhook', '0'));
+    $rq->execute(array('integration_slack_webhook_url', ''));
+}
+
+function version_38($pdo)
+{
+    $pdo->exec('CREATE TABLE currencies ("currency" CHAR(3) NOT NULL UNIQUE, "rate" REAL DEFAULT 0)');
+
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('application_currency', 'USD'));
+}
+
+function version_37($pdo)
+{
+    $pdo->exec('CREATE TABLE transitions (
+        "id" SERIAL PRIMARY KEY,
+        "user_id" INTEGER NOT NULL,
+        "project_id" INTEGER NOT NULL,
+        "task_id" INTEGER NOT NULL,
+        "src_column_id" INTEGER NOT NULL,
+        "dst_column_id" INTEGER NOT NULL,
+        "date" INTEGER NOT NULL,
+        "time_spent" INTEGER DEFAULT 0,
+        FOREIGN KEY(src_column_id) REFERENCES columns(id) ON DELETE CASCADE,
+        FOREIGN KEY(dst_column_id) REFERENCES columns(id) ON DELETE CASCADE,
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+        FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+    )');
+
+    $pdo->exec("CREATE INDEX transitions_task_index ON transitions(task_id)");
+    $pdo->exec("CREATE INDEX transitions_project_index ON transitions(project_id)");
+    $pdo->exec("CREATE INDEX transitions_user_index ON transitions(user_id)");
+}
+
+function version_36($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('subtask_forecast', '0'));
+}
+
+function version_35($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('application_stylesheet', ''));
 }
 
 function version_34($pdo)
@@ -92,7 +157,7 @@ function version_31($pdo)
         user_id INTEGER NOT NULL,
         rate REAL DEFAULT 0,
         date_effective INTEGER NOT NULL,
-        currency TEXT NOT NULL,
+        currency CHAR(3) NOT NULL,
         FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
     )");
 }
