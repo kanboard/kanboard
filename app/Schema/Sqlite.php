@@ -6,7 +6,13 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 58;
+const VERSION = 59;
+
+function version_59($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_gravatar', '0'));
+}
 
 function version_58($pdo)
 {

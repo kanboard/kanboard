@@ -770,4 +770,21 @@ class Helper
 
         return 'fa-file-o';
     }
+
+    /**
+     * Display gravatar image
+     *
+     * @access public
+     * @param  string  $email
+     * @param  string  $alt
+     * @return string
+     */
+    public function avatar($email, $alt = '')
+    {
+        if (! empty($email) && $this->config->get('integration_gravatar') == 1) {
+            return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=25" alt="'.$this->e($alt).'" title="'.$this->e($alt).'">';
+        }
+
+        return '';
+    }
 }

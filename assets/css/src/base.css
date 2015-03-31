@@ -46,3 +46,8 @@ hr {
 .chosen-select {
     min-height: 27px; /* Reserve some space to avoid re-layout due to chosen */
 }
+
+.avatar {
+    float: left;
+    margin-right: 10px;
+}

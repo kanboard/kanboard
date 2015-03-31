@@ -1,3 +1,5 @@
+<?= $this->avatar($email, $author) ?>
+
 <p class="activity-title">
     <?php $assignee = $task['assignee_name'] ?: $task['assignee_username'] ?>
 

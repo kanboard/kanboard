@@ -85,18 +85,19 @@ class ProjectActivity extends Base
                            ->columns(
                                 self::TABLE.'.*',
                                 User::TABLE.'.username AS author_username',
-                                User::TABLE.'.name AS author_name'
+                                User::TABLE.'.name AS author_name',
+                                User::TABLE.'.email'
                            )
                            ->in('project_id', $project_ids)
                            ->join(User::TABLE, 'id', 'creator_id')
                            ->desc(self::TABLE.'.id')
                            ->limit($limit);
 
-        if(!is_null($start)){
+        if (!is_null($start)){
             $query->gte('date_creation', $start);
         }
 
-        if(!is_null($end)){
+        if (!is_null($end)){
             $query->lte('date_creation', $end);
         }
 

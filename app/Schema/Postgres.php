@@ -8,6 +8,12 @@ use Model\Link;
 
 const VERSION = 40;
 
+function version_41($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_gravatar', '0'));
+}
+
 function version_40($pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');

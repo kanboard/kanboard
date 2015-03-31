@@ -6,6 +6,11 @@
 
     <?= $this->formCsrf() ?>
 
+    <h3><?= t('Gravatar') ?></h3>
+    <div class="listing">
+        <?= $this->formCheckbox('integration_gravatar', t('Enable Gravatar images'), 1, $values['integration_gravatar'] == 1) ?>
+    </div>
+
     <h3><img src="assets/img/hipchat-icon.png"/> <?= t('Hipchat') ?></h3>
     <div class="listing">
         <?= $this->formCheckbox('integration_hipchat', t('Send notifications to Hipchat'), 1, $values['integration_hipchat'] == 1) ?>
