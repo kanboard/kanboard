@@ -50,52 +50,6 @@ class ProjectActivity extends Base
         return $this->db->table(self::TABLE)->insert($values);
     }
 
-     /**
-     * Get all events for the given task
-     *
-     * @access public
-     * @param  integer[]   $task_ids         Task ids
-     * @param  integer     $limit           Maximum events number
-     * @param  integer     $start           Timestamp of earliest activity
-     * @param  integer     $end             Timestamp of latest activity
-     * @return array
-     */
-    public function getTasks(array $task_ids, $limit = 50, $start = null, $end = null)
-    {
-        $query = $this->db->table(self::TABLE)
-                           ->columns(
-                                self::TABLE.'.*',
-                                User::TABLE.'.username AS author_username',
-                                User::TABLE.'.name AS author_name'
-                           )
-                           ->in('task_id', $task_ids)
-                           ->join(User::TABLE, 'id', 'creator_id')
-                           ->desc(self::TABLE.'.id')
-                           ->limit($limit);
-
-        if(!is_null($start)){
-            $query->gte('date_creation', $start);
-        }
-
-        if(!is_null($end)){
-            $query->lte('date_creation', $end);
-        }
-
-        $events = $query->findAll();
-
-        foreach ($events as &$event) {
-
-            $event += $this->decode($event['data']);
-            unset($event['data']);
-
-            $event['author'] = $event['author_name'] ?: $event['author_username'];
-            $event['event_title'] = $this->getTitle($event);
-            $event['event_content'] = $this->getContent($event);
-        }
-
-        return $events;
-    }
-    
     /**
      * Get all events for the given project
      *
@@ -127,23 +81,68 @@ class ProjectActivity extends Base
             return array();
         }
 
-        $query = $this->db->table(self::TABLE)
-                           ->columns(
-                                self::TABLE.'.*',
-                                User::TABLE.'.username AS author_username',
-                                User::TABLE.'.name AS author_name',
-                                User::TABLE.'.email'
-                           )
-                           ->in('project_id', $project_ids)
-                           ->join(User::TABLE, 'id', 'creator_id')
-                           ->desc(self::TABLE.'.id')
-                           ->limit($limit);
+        $query = $this
+                    ->db
+                    ->table(self::TABLE)
+                    ->columns(
+                        self::TABLE.'.*',
+                        User::TABLE.'.username AS author_username',
+                        User::TABLE.'.name AS author_name',
+                        User::TABLE.'.email'
+                    )
+                    ->in('project_id', $project_ids)
+                    ->join(User::TABLE, 'id', 'creator_id')
+                    ->desc(self::TABLE.'.id')
+                    ->limit($limit);
 
-        if (!is_null($start)){
+        return $this->getEvents($query, $start, $end);
+    }
+
+    /**
+     * Get all events for the given task
+     *
+     * @access public
+     * @param  integer     $task_id         Task id
+     * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
+     * @return array
+     */
+    public function getTask($task_id, $limit = 50, $start = null, $end = null)
+    {
+        $query = $this
+                    ->db
+                    ->table(self::TABLE)
+                    ->columns(
+                        self::TABLE.'.*',
+                        User::TABLE.'.username AS author_username',
+                        User::TABLE.'.name AS author_name',
+                        User::TABLE.'.email'
+                    )
+                    ->eq('task_id', $task_id)
+                    ->join(User::TABLE, 'id', 'creator_id')
+                    ->desc(self::TABLE.'.id')
+                    ->limit($limit);
+
+        return $this->getEvents($query, $start, $end);
+    }
+
+    /**
+     * Common function to return events
+     *
+     * @access public
+     * @param  \PicoDb\Table   $query           PicoDb Query
+     * @param  integer         $start           Timestamp of earliest activity
+     * @param  integer         $end             Timestamp of latest activity
+     * @return array
+     */
+    private function getEvents(\PicoDb\Table $query, $start, $end)
+    {
+        if (! is_null($start)){
             $query->gte('date_creation', $start);
         }
 
-        if (!is_null($end)){
+        if (! is_null($end)){
             $query->lte('date_creation', $end);
         }
 

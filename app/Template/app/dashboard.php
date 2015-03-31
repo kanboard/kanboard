@@ -53,7 +53,7 @@
             </div>
             <div id="dashboard-activities">
                 <h2><?= t('Activity stream') ?></h2>
-                <?= $this->render('project/events', array('events' => $events)) ?>
+                <?= $this->render('event/events', array('events' => $events)) ?>
             </div>
         </div>
     </section>
