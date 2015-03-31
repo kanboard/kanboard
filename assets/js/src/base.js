@@ -248,10 +248,13 @@ var Kanboard = (function() {
             $(".dropit-submenu").hide();
             $('.dropdown').not(".dropit").dropit({ triggerParentEl : "span" });
 
-            // Task auto-completion
+            // Task id autocomplete
+            $('.task-autocomplete').css('display', 'inline');
+            $('.opposite_task_id_bloc').css('display', 'none');
+            if ($('.opposite_task_id').val() == "") {
+                $(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+            }
             if ($(".task-autocomplete").length) {
-            	$(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
-
                 $(".task-autocomplete").autocomplete({
                     source: $(".task-autocomplete").data("search-url"),
                     minLength: 2,
