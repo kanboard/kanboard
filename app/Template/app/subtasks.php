@@ -6,6 +6,7 @@
         <tr>
             <th class="column-10"><?= $paginator->order('Id', 'tasks.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
+            <th><?= $paginator->order(t('Task'), 'task_name') ?></th>
             <th><?= $paginator->order(t('Subtask'), 'title') ?></th>
             <th class="column-20"><?= t('Time tracking') ?></th>
         </tr>
@@ -16,6 +17,9 @@
             </td>
             <td>
                 <?= $this->a($this->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
+            </td>
+            <td>
+                <?= $this->a($this->e($subtask['task_name']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
                 <?= $this->toggleSubtaskStatus($subtask, 'dashboard') ?>

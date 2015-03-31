@@ -98,6 +98,7 @@ class Subtask extends Base
                 Subtask::TABLE.'.*',
                 Task::TABLE.'.project_id',
                 Task::TABLE.'.color_id',
+                Task::TABLE.'.title AS task_name',
                 Project::TABLE.'.name AS project_name'
             )
             ->eq('user_id', $user_id)
