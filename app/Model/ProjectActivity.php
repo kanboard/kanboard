@@ -50,6 +50,52 @@ class ProjectActivity extends Base
         return $this->db->table(self::TABLE)->insert($values);
     }
 
+     /**
+     * Get all events for the given task
+     *
+     * @access public
+     * @param  integer[]   $task_ids         Task ids
+     * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
+     * @return array
+     */
+    public function getTasks(array $task_ids, $limit = 50, $start = null, $end = null)
+    {
+        $query = $this->db->table(self::TABLE)
+                           ->columns(
+                                self::TABLE.'.*',
+                                User::TABLE.'.username AS author_username',
+                                User::TABLE.'.name AS author_name'
+                           )
+                           ->in('task_id', $task_ids)
+                           ->join(User::TABLE, 'id', 'creator_id')
+                           ->desc(self::TABLE.'.id')
+                           ->limit($limit);
+
+        if(!is_null($start)){
+            $query->gte('date_creation', $start);
+        }
+
+        if(!is_null($end)){
+            $query->lte('date_creation', $end);
+        }
+
+        $events = $query->findAll();
+
+        foreach ($events as &$event) {
+
+            $event += $this->decode($event['data']);
+            unset($event['data']);
+
+            $event['author'] = $event['author_name'] ?: $event['author_username'];
+            $event['event_title'] = $this->getTitle($event);
+            $event['event_content'] = $this->getContent($event);
+        }
+
+        return $events;
+    }
+    
     /**
      * Get all events for the given project
      *
