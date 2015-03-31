@@ -202,12 +202,7 @@ class TaskLink extends Base
             new Validators\Required('opposite_task_id', t('Field required')),
             new Validators\Required('link_id', t('Field required')),
             new Validators\NotEquals('opposite_task_id', 'task_id', t('A task can not be linked to itself')),
-            new Validators\Exists('opposite_task_id', t('This linked task id doesn\'t exist'), $this->db->getConnection(), Task::TABLE, 'id'),
-            new Validators\Unique(array(
-                'link_id',
-                'opposite_task_id',
-                'task_id'
-            ), t('The exact same link already exists'), $this->db->getConnection(), self::TABLE)
+            new Validators\Exists('opposite_task_id', t('This linked task id doesn\'t exist'), $this->db->getConnection(), Task::TABLE, 'id')
         );
     }
 
