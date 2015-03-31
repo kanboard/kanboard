@@ -75,4 +75,4 @@ defined('ENABLE_XFRAME') or define('ENABLE_XFRAME', true);
 defined('FILES_DIR') or define('FILES_DIR', 'data/files/');
 
 // Escape html inside markdown text
-define('MARKDOWN_ESCAPED', true);
+defined('MARKDOWN_ESCAPE_HTML') or define('MARKDOWN_ESCAPE_HTML', true);

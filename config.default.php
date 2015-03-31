@@ -1,5 +1,7 @@
 <?php
 
+// Rename this file to config.php if you want to change the values
+
 // Enable/Disable debug
 define('DEBUG', false);
 
@@ -129,4 +131,4 @@ define('ENABLE_HSTS', true);
 define('ENABLE_XFRAME', true);
 
 // Escape html inside markdown text
-define('MARKDOWN_ESCAPED', true);
+define('MARKDOWN_ESCAPE_HTML', true);
