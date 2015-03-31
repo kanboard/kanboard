@@ -502,7 +502,7 @@ class Helper
     public function markdown($text, array $link = array())
     {
         $parser = new Markdown($link, $this);
-        $parser->setMarkupEscaped(true);
+        $parser->setMarkupEscaped(MARKDOWN_ESCAPED);
         return $parser->text($text);
     }
 
