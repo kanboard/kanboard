@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <h2><?= t('Actions') ?></h2>
+    <h2><?= t('Information') ?></h2>
     <ul>
         <li>
             <?= $this->a(t('Summary'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
@@ -15,6 +15,9 @@
             <?= $this->a(t('Time tracking'), 'task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php endif ?>
+    </ul>
+    <h2><?= t('Actions') ?></h2>
+    <ul>
         <li>
             <?= $this->a(t('Edit the task'), 'task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
