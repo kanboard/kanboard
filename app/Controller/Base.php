@@ -215,7 +215,7 @@ abstract class Base
                 $this->response->text('Not Authorized', 401);
             }
 
-            $this->response->redirect($this->helper->url('twofactor', 'code', array('user_id' => $user['id'])));
+            $this->response->redirect($this->helper->url('twofactor', 'code'));
         }
     }
 
