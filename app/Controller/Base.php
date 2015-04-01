@@ -207,10 +207,9 @@ abstract class Base
      */
     public function handle2FA($controller, $action)
     {
-        $controllers = array('twofactor', 'user');
-        $actions = array('code', 'check', 'logout');
+        $ignore = ($controller === 'twofactor' && in_array($action, array('code', 'check'))) || ($controller === 'user' && $action === 'logout');
 
-        if ($this->userSession->has2FA() && ! $this->userSession->check2FA() && ! in_array($controller, $controllers) && ! in_array($action, $actions)) {
+        if ($ignore === false && $this->userSession->has2FA() && ! $this->userSession->check2FA()) {
 
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);
