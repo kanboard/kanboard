@@ -6,7 +6,13 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 40;
+const VERSION = 42;
+
+function version_42($pdo)
+{
+    $pdo->exec('ALTER TABLE users ADD COLUMN twofactor_activated BOOLEAN DEFAULT \'0\'');
+    $pdo->exec('ALTER TABLE users ADD COLUMN twofactor_secret CHAR(16)');
+}
 
 function version_41($pdo)
 {

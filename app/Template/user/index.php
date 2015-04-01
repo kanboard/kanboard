@@ -17,6 +17,7 @@
                 <th><?= $paginator->order(t('Name'), 'name') ?></th>
                 <th><?= $paginator->order(t('Email'), 'email') ?></th>
                 <th><?= $paginator->order(t('Administrator'), 'is_admin') ?></th>
+                <th><?= $paginator->order(t('Two factor authentication'), 'twofactor_activated') ?></th>
                 <th><?= $paginator->order(t('Default project'), 'default_project_id') ?></th>
                 <th><?= $paginator->order(t('Notifications'), 'notifications_enabled') ?></th>
                 <th><?= t('External accounts') ?></th>
@@ -38,6 +39,9 @@
                 </td>
                 <td>
                     <?= $user['is_admin'] ? t('Yes') : t('No') ?>
+                </td>
+                <td>
+                    <?= $user['twofactor_activated'] ? t('Yes') : t('No') ?>
                 </td>
                 <td>
                     <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $this->e($projects[$user['default_project_id']]) : t('None'); ?>

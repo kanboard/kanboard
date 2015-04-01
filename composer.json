@@ -11,7 +11,8 @@
         "pimple/pimple" : "~3.0",
         "symfony/console" : "@stable",
         "symfony/event-dispatcher" : "~2.6",
-        "fguillot/simpleLogger" : "0.0.1"
+        "fguillot/simpleLogger" : "0.0.1",
+        "christian-riesen/otp": "1.4"
     },
     "autoload" : {
         "psr-0" : {

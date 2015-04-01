@@ -6,7 +6,13 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 59;
+const VERSION = 60;
+
+function version_60($pdo)
+{
+    $pdo->exec('ALTER TABLE users ADD COLUMN twofactor_activated INTEGER DEFAULT 0');
+    $pdo->exec('ALTER TABLE users ADD COLUMN twofactor_secret TEXT');
+}
 
 function version_59($pdo)
 {

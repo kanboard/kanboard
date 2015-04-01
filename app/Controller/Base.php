@@ -176,6 +176,7 @@ abstract class Base
 
         if (! $this->acl->isPublicAction($controller, $action)) {
             $this->handleAuthentication();
+            $this->handle2FA($controller, $action);
             $this->handleAuthorization($controller, $action);
 
             $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
@@ -196,6 +197,26 @@ abstract class Base
             }
 
             $this->response->redirect('?controller=user&action=login&redirect_query='.urlencode($this->request->getQueryString()));
+        }
+    }
+
+    /**
+     * Check 2FA
+     *
+     * @access public
+     */
+    public function handle2FA($controller, $action)
+    {
+        $controllers = array('twofactor', 'user');
+        $actions = array('code', 'check', 'logout');
+
+        if ($this->userSession->has2FA() && ! $this->userSession->check2FA() && ! in_array($controller, $controllers) && ! in_array($action, $actions)) {
+
+            if ($this->request->isAjax()) {
+                $this->response->text('Not Authorized', 401);
+            }
+
+            $this->response->redirect($this->helper->url('twofactor', 'code', array('user_id' => $user['id'])));
         }
     }
 

@@ -84,6 +84,7 @@ Documentation
 #### Working with users
 
 - [User management](docs/user-management.markdown)
+- [Two factor authentication](docs/2fa.markdown)
 
 #### Settings
 

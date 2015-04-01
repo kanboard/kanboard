@@ -60,7 +60,8 @@ class User extends Base
                         'is_ldap_user',
                         'notifications_enabled',
                         'google_id',
-                        'github_id'
+                        'github_id',
+                        'twofactor_activated'
                     );
     }
 
