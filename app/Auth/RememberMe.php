@@ -103,6 +103,9 @@ class RememberMe extends Base
                 // Create the session
                 $this->userSession->refresh($this->user->getById($record['user_id']));
 
+                // Do not ask 2FA for remember me session
+                $this->session['2fa_validated'] = true;
+
                 $this->container['dispatcher']->dispatch(
                     'auth.success',
                     new AuthEvent(self::AUTH_NAME, $this->userSession->getId())
