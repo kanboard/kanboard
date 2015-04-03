@@ -16,32 +16,32 @@ function version_60($pdo)
 
 function version_59($pdo)
 {
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('integration_gravatar', '0'));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('integration_gravatar', '0'));
 }
 
 function version_58($pdo)
 {
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('integration_hipchat', '0'));
-    $rq->execute(array('integration_hipchat_api_url', 'https://api.hipchat.com'));
-    $rq->execute(array('integration_hipchat_room_id', ''));
-    $rq->execute(array('integration_hipchat_room_token', ''));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('integration_hipchat', '0'));
+    $rquery->execute(array('integration_hipchat_api_url', 'https://api.hipchat.com'));
+    $rquery->execute(array('integration_hipchat_room_id', ''));
+    $rquery->execute(array('integration_hipchat_room_token', ''));
 }
 
 function version_57($pdo)
 {
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('integration_slack_webhook', '0'));
-    $rq->execute(array('integration_slack_webhook_url', ''));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('integration_slack_webhook', '0'));
+    $rquery->execute(array('integration_slack_webhook_url', ''));
 }
 
 function version_56($pdo)
 {
     $pdo->exec('CREATE TABLE currencies ("currency" TEXT NOT NULL UNIQUE, "rate" REAL DEFAULT 0)');
 
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('application_currency', 'USD'));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('application_currency', 'USD'));
 }
 
 function version_55($pdo)
@@ -69,14 +69,14 @@ function version_55($pdo)
 
 function version_54($pdo)
 {
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('subtask_forecast', '0'));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('subtask_forecast', '0'));
 }
 
 function version_53($pdo)
 {
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('application_stylesheet', ''));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('application_stylesheet', ''));
 }
 
 function version_52($pdo)
@@ -159,10 +159,10 @@ function version_48($pdo)
     $task_id = 0;
     $urq = $pdo->prepare('UPDATE subtasks SET position=? WHERE id=?');
 
-    $rq = $pdo->prepare('SELECT * FROM subtasks ORDER BY task_id, id ASC');
-    $rq->execute();
+    $rquery = $pdo->prepare('SELECT * FROM subtasks ORDER BY task_id, id ASC');
+    $rquery->execute();
 
-    foreach ($rq->fetchAll(PDO::FETCH_ASSOC) as $subtask) {
+    foreach ($rquery->fetchAll(PDO::FETCH_ASSOC) as $subtask) {
 
         if ($task_id != $subtask['task_id']) {
             $position = 1;
@@ -207,18 +207,18 @@ function version_45($pdo)
     $pdo->exec("CREATE INDEX task_has_links_task_index ON task_has_links(task_id)");
     $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, opposite_task_id)");
 
-    $rq = $pdo->prepare('INSERT INTO links (label, opposite_id) VALUES (?, ?)');
-    $rq->execute(array('relates to', 0));
-    $rq->execute(array('blocks', 3));
-    $rq->execute(array('is blocked by', 2));
-    $rq->execute(array('duplicates', 5));
-    $rq->execute(array('is duplicated by', 4));
-    $rq->execute(array('is a child of', 7));
-    $rq->execute(array('is a parent of', 6));
-    $rq->execute(array('targets milestone', 9));
-    $rq->execute(array('is a milestone of', 8));
-    $rq->execute(array('fixes', 11));
-    $rq->execute(array('is fixed by', 10));
+    $rquery = $pdo->prepare('INSERT INTO links (label, opposite_id) VALUES (?, ?)');
+    $rquery->execute(array('relates to', 0));
+    $rquery->execute(array('blocks', 3));
+    $rquery->execute(array('is blocked by', 2));
+    $rquery->execute(array('duplicates', 5));
+    $rquery->execute(array('is duplicated by', 4));
+    $rquery->execute(array('is a child of', 7));
+    $rquery->execute(array('is a parent of', 6));
+    $rquery->execute(array('targets milestone', 9));
+    $rquery->execute(array('is a milestone of', 8));
+    $rquery->execute(array('fixes', 11));
+    $rquery->execute(array('is fixed by', 10));
 }
 
 function version_44($pdo)
@@ -261,9 +261,9 @@ function version_43($pdo)
 
 function version_42($pdo)
 {
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('subtask_restriction', '0'));
-    $rq->execute(array('subtask_time_tracking', '0'));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('subtask_restriction', '0'));
+    $rquery->execute(array('subtask_time_tracking', '0'));
 
     $pdo->exec("
         CREATE TABLE subtask_time_tracking (
@@ -302,21 +302,21 @@ function version_39($pdo)
     $pdo->exec('CREATE INDEX comments_task_idx ON comments(task_id)');
 
     // Set the ownership for all private projects
-    $rq = $pdo->prepare('SELECT id FROM projects WHERE is_private=1');
-    $rq->execute();
-    $project_ids = $rq->fetchAll(PDO::FETCH_COLUMN, 0);
+    $rquery = $pdo->prepare('SELECT id FROM projects WHERE is_private=1');
+    $rquery->execute();
+    $project_ids = $rquery->fetchAll(PDO::FETCH_COLUMN, 0);
 
-    $rq = $pdo->prepare('UPDATE project_has_users SET is_owner=1 WHERE project_id=?');
+    $rquery = $pdo->prepare('UPDATE project_has_users SET is_owner=1 WHERE project_id=?');
 
     foreach ($project_ids as $project_id) {
-        $rq->execute(array($project_id));
+        $rquery->execute(array($project_id));
     }
 }
 
 function version_38($pdo)
 {
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('project_categories', ''));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('project_categories', ''));
 }
 
 function version_37($pdo)
@@ -401,8 +401,8 @@ function version_31($pdo)
 
 function version_30($pdo)
 {
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('application_date_format', 'm/d/Y'));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('application_date_format', 'm/d/Y'));
 }
 
 function version_29($pdo)
@@ -415,22 +415,22 @@ function version_29($pdo)
     ");
 
     // Migrate old config parameters
-    $rq = $pdo->prepare('SELECT * FROM config');
-    $rq->execute();
-    $parameters = $rq->fetch(PDO::FETCH_ASSOC);
+    $rquery = $pdo->prepare('SELECT * FROM config');
+    $rquery->execute();
+    $parameters = $rquery->fetch(PDO::FETCH_ASSOC);
 
-    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('board_highlight_period', defined('RECENT_TASK_PERIOD') ? RECENT_TASK_PERIOD : 48*60*60));
-    $rq->execute(array('board_public_refresh_interval', defined('BOARD_PUBLIC_CHECK_INTERVAL') ? BOARD_PUBLIC_CHECK_INTERVAL : 60));
-    $rq->execute(array('board_private_refresh_interval', defined('BOARD_CHECK_INTERVAL') ? BOARD_CHECK_INTERVAL : 10));
-    $rq->execute(array('board_columns', $parameters['default_columns']));
-    $rq->execute(array('webhook_url_task_creation', $parameters['webhooks_url_task_creation']));
-    $rq->execute(array('webhook_url_task_modification', $parameters['webhooks_url_task_modification']));
-    $rq->execute(array('webhook_token', $parameters['webhooks_token']));
-    $rq->execute(array('api_token', $parameters['api_token']));
-    $rq->execute(array('application_language', $parameters['language']));
-    $rq->execute(array('application_timezone', $parameters['timezone']));
-    $rq->execute(array('application_url', defined('KANBOARD_URL') ? KANBOARD_URL : ''));
+    $rquery = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rquery->execute(array('board_highlight_period', defined('RECENT_TASK_PERIOD') ? RECENT_TASK_PERIOD : 48*60*60));
+    $rquery->execute(array('board_public_refresh_interval', defined('BOARD_PUBLIC_CHECK_INTERVAL') ? BOARD_PUBLIC_CHECK_INTERVAL : 60));
+    $rquery->execute(array('board_private_refresh_interval', defined('BOARD_CHECK_INTERVAL') ? BOARD_CHECK_INTERVAL : 10));
+    $rquery->execute(array('board_columns', $parameters['default_columns']));
+    $rquery->execute(array('webhook_url_task_creation', $parameters['webhooks_url_task_creation']));
+    $rquery->execute(array('webhook_url_task_modification', $parameters['webhooks_url_task_modification']));
+    $rquery->execute(array('webhook_token', $parameters['webhooks_token']));
+    $rquery->execute(array('api_token', $parameters['api_token']));
+    $rquery->execute(array('application_language', $parameters['language']));
+    $rquery->execute(array('application_timezone', $parameters['timezone']));
+    $rquery->execute(array('application_url', defined('KANBOARD_URL') ? KANBOARD_URL : ''));
 
     $pdo->exec('DROP TABLE config');
 }
