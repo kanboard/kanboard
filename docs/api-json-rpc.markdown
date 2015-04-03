@@ -1390,6 +1390,7 @@ Response example:
     "id": 1433237746,
     "result": {
         "TaskLogMoveAnotherColumn" : "Add a comment logging moving the task between columns",
+        "TaskAssignColor" : "Assign a color to a task",
         "TaskAssignColorUser" : "Assign a color to a specific user",
         "TaskAssignCategoryColor" : "Assign automatically a category based on a color",
         "TaskAssignColorCategory" : "Assign automatically a color based on a category",
