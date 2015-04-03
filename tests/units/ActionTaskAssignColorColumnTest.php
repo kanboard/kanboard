@@ -8,11 +8,11 @@ use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
 
-class ActionTaskAssignColorTest extends Base
+class ActionTaskAssignColorColumnTest extends Base
 {
     public function testColorChange()
     {
-        $action = new Action\TaskAssignColor($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new Action\TaskAssignColorColumn($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $action->setParam('color_id', 'green');
 

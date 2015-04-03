@@ -847,4 +847,5 @@ return array(
     'Check my code' => 'Vérifier mon code',
     'Secret key: ' => 'Clé secrète : ',
     'Test your device' => 'Testez votre appareil',
+    'Assign a color when the task is moved to a specific column' => 'Assigner une couleur lorsque la tâche est déplacée dans une colonne spécifique',
 );

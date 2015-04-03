@@ -9,7 +9,7 @@ use Model\Task;
  *
  * @package action
  */
-class TaskAssignColor extends Base
+class TaskAssignColorColumn extends Base
 {
     /**
      * Get the list of compatible events
