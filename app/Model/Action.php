@@ -41,6 +41,7 @@ class Action extends Base
         $values = array(
             'TaskClose' => t('Close a task'),
             'TaskOpen' => t('Open a task'),
+            'TaskAssignColor' => t('Assign a color to a task'),
             'TaskAssignSpecificUser' => t('Assign the task to a specific user'),
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
