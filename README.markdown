@@ -195,6 +195,7 @@ Contributors:
 - [Lars Christian Schou](https://github.com/NegoZiatoR)
 - [Levlaz](https://github.com/levlaz)
 - [Lim Yuen Hoe](https://github.com/jasonmoofang)
+- [Manish Lad](https://github.com/manishlad)
 - [Mathgl67](https://github.com/mathgl67)
 - [Matthieu Keller](https://github.com/maggick)
 - [Mauro Mariño](https://github.com/moromarino)
