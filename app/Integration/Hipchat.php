@@ -17,7 +17,7 @@ class Hipchat extends Base
      * @param  integer     $project_id      Project id
      * @param  integer     $task_id         Task id
      * @param  string      $event_name      Event name
-     * @param  array       $data            Event data
+     * @param  array       $event           Event data
      */
     public function notify($project_id, $task_id, $event_name, array $event)
     {

@@ -22,7 +22,7 @@ class Subtask extends Base
     {
         $subtask = $this->subtask->getById($this->request->getIntegerParam('subtask_id'));
 
-        if (! $subtask) {
+        if (empty($subtask)) {
             $this->notfound();
         }
 

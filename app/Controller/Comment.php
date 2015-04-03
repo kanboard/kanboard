@@ -20,7 +20,7 @@ class Comment extends Base
     {
         $comment = $this->comment->getById($this->request->getIntegerParam('comment_id'));
 
-        if (! $comment) {
+        if (empty($comment)) {
             $this->notfound();
         }
 

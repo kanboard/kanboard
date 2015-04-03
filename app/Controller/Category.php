@@ -21,7 +21,7 @@ class Category extends Base
     {
         $category = $this->category->getById($this->request->getIntegerParam('category_id'));
 
-        if (! $category) {
+        if (empty($category)) {
             $this->session->flashError(t('Category not found.'));
             $this->response->redirect('?controller=category&action=index&project_id='.$project_id);
         }

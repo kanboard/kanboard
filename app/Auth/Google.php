@@ -35,7 +35,7 @@ class Google extends Base
     {
         $user = $this->user->getByGoogleId($google_id);
 
-        if ($user) {
+        if (! empty($user)) {
             $this->userSession->refresh($user);
             $this->container['dispatcher']->dispatch('auth.success', new AuthEvent(self::AUTH_NAME, $user['id']));
             return true;

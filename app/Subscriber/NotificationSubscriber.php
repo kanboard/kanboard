@@ -49,7 +49,7 @@ class NotificationSubscriber extends Base implements EventSubscriberInterface
         $values = $this->getTemplateData($event);
         $users = $this->notification->getUsersList($values['task']['project_id']);
 
-        if ($users) {
+        if (! empty($users)) {
             $this->notification->sendEmails($this->templates[$event_name], $users, $values);
         }
     }

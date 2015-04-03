@@ -21,7 +21,7 @@ class Tasklink extends Base
     {
         $link = $this->taskLink->getById($this->request->getIntegerParam('link_id'));
 
-        if (! $link) {
+        if (empty($link)) {
             $this->notfound();
         }
 

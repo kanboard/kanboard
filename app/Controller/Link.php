@@ -37,7 +37,7 @@ class Link extends Base
     {
         $link = $this->link->getById($this->request->getIntegerParam('link_id'));
 
-        if (! $link) {
+        if (empty($link)) {
             $this->notfound();
         }
 

@@ -62,10 +62,8 @@ class Timetable extends Base
      * Get a serie of events based on the timetable and the provided event
      *
      * @access public
-     * @param  integer  $user_id
-     * @param  array    $events     Time tracking data
-     * @param  string   $start      ISO8601 date
-     * @param  string   $end        ISO8601 date
+     * @param  array    $event
+     * @param  array    $timetable
      * @return array
      */
     public function calculateEventIntersect(array $event, array $timetable)

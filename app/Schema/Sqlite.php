@@ -157,6 +157,7 @@ function version_48($pdo)
     // Migrate all subtasks position
 
     $task_id = 0;
+    $position = 1;
     $urq = $pdo->prepare('UPDATE subtasks SET position=? WHERE id=?');
 
     $rq = $pdo->prepare('SELECT * FROM subtasks ORDER BY task_id, id ASC');
