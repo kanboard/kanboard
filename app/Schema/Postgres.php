@@ -11,6 +11,7 @@ const VERSION = 43;
 function version_43($pdo)
 {
     $pdo->exec("ALTER TABLE projects ADD etherpad TEXT NULL DEFAULT NULL;");
+    $pdo->exec("ALTER TABLE tasks ADD etherpad TEXT NULL DEFAULT NULL;");
 }
 
 function version_42($pdo)

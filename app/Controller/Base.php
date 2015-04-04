@@ -149,7 +149,7 @@ abstract class Base
     private function sendHeaders($controller, $action)
     {
         // The page have an IFRAME
-        if (($controller == 'project') && ($action = 'show')) {
+        if ((($controller == 'project') && ($action = 'show')) || (($controller == 'task') && ($action = 'show'))) {
             $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '*', 'frame-src' => '*', 'child-src' => '*'));
         } else {
             $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '*'));

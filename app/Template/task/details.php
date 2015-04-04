@@ -82,3 +82,13 @@
         <?php endif ?>
     </ul>
 </div>
+
+<?php if ($task['etherpad'] != null && ! empty($task['etherpad'])): ?>
+    <div class="page-header">
+        <h2><?= t('Etherpad') ?></h2>
+    </div>
+
+    <div class="etherpad">
+        <iframe src='<?php echo $task['etherpad'] ?>?alwaysShowChat=false&userName=<?php echo urlencode($this->getFullname()) ?>'></iframe>
+    </div>
+<?php endif ?>
