@@ -6,7 +6,12 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 60;
+const VERSION = 61;
+
+function version_61($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD etherpad TEXT NULL DEFAULT NULL;");
+}
 
 function version_60($pdo)
 {

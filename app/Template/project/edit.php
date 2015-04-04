@@ -30,6 +30,10 @@
     </div>
     <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
+    <?= $this->formLabel(t('Etherpad'), 'etherpad') ?>
+    <?= $this->formText('etherpad', $values, $errors) ?>
+    <p class="form-help"><?= t('Example: http://pad.example.com/mypad (full URL of the pad)') ?></p>
+
     <?php if ($project['is_private'] == 1 && $this->userSession->isAdmin()): ?>
         <?= $this->formCheckbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
     <?php endif ?>
