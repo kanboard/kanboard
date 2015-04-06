@@ -9,7 +9,7 @@ Requirements
 - A Postgresql server already installed and configured
 - The PHP extension `pdo_pgsql` installed (Debian/Ubuntu: `apt-get install php5-pgsql`)
 
-Note: Kanboard is tested with **Postgresql >= 9.4**
+Note: Kanboard is tested with **Postgresql 9.3 and 9.4**
 
 Configuration
 -------------
