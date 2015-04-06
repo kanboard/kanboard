@@ -801,7 +801,7 @@ return array(
     'Remove a budget line' => 'Supprimer une ligne budgétaire',
     'Remove budget line' => 'Supprimer une ligne budgétaire',
     'RSD - Serbian dinar' => 'RSD - Dinar serbe',
-    'The budget line have been created successfully.' => 'La ligne de budgétaire a été créee avec succès.',
+    'The budget line have been created successfully.' => 'La ligne de budgétaire a été créée avec succès.',
     'Unable to create the budget line.' => 'Impossible de créer cette ligne budgétaire.',
     'Unable to remove this budget line.' => 'Impossible de supprimer cette ligne budgétaire.',
     'USD - US Dollar' => 'USD - Dollar américain',
