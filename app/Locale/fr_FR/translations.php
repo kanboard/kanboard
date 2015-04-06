@@ -842,7 +842,7 @@ return array(
     'Code' => 'Code',
     'Two factor authentication' => 'Authentification à deux-facteurs',
     'Enable/disable two factor authentication' => 'Activer/désactiver l\'authentification à deux-facteurs',
-    'This QR Ccde contains the key URI: ' => 'Ce code QR contient l\'url de la clé : ',
+    'This QR code contains the key URI: ' => 'Ce code QR contient l\'url de la clé : ',
     'Save the secret key in your TOTP software (by example Google Authenticator or FreeOTP).' => 'Sauvegardez cette clé secrete dans votre logiciel TOTP (par exemple Google Authenticator ou FreeOTP).',
     'Check my code' => 'Vérifier mon code',
     'Secret key: ' => 'Clé secrète : ',

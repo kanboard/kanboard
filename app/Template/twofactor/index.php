@@ -17,7 +17,7 @@
     <p><?= t('Secret key: ') ?><strong><?= $this->e($user['twofactor_secret']) ?></strong> (base32)</p>
     <p><br/><img src="<?= $qrcode_url ?>"/><br/><br/></p>
     <p>
-        <?= t('This QR Ccde contains the key URI: ') ?><strong><?= $this->e($key_url) ?></strong>
+        <?= t('This QR code contains the key URI: ') ?><strong><?= $this->e($key_url) ?></strong>
         <br/><br/>
         <?= t('Save the secret key in your TOTP software (by example Google Authenticator or FreeOTP).') ?>
     </p>

@@ -840,7 +840,7 @@ return array(
     'Code' => '认证码',
     'Two factor authentication' => '双重认证',
     'Enable/disable two factor authentication' => '启用/禁用双重认证',
-    'This QR Ccde contains the key URI: ' => '此二维码包含密码 URI:',
+    'This QR code contains the key URI: ' => '此二维码包含密码 URI:',
     'Save the secret key in your TOTP software (by example Google Authenticator or FreeOTP).' => '将密码保存到 TOTP 软件(例如Google 认证或 FreeOTP)',
     'Check my code' => '检查我的认证码',
     'Secret key: ' => '密码：',
