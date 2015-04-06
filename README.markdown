@@ -97,6 +97,7 @@ Documentation
 - [Board settings](docs/board-configuration.markdown)
 - [Link settings](docs/link-labels.markdown)
 - [Currency rate](docs/currency-rate.markdown)
+- [Config file](docs/config.markdown)
 
 ### Integrations
 
