@@ -74,16 +74,20 @@ Documentation
 - [Project permissions](docs/project-permissions.markdown)
 - [Swimlanes](docs/swimlanes.markdown)
 - [Calendar](docs/calendar.markdown)
+- [Budget](docs/budget.markdown)
 
 #### Working with tasks
 
 - [Creating tasks](docs/creating-tasks.markdown)
 - [Task links](docs/task-links.markdown)
+- [Transitions](docs/transitions.markdown)
 - [Time tracking](docs/time-tracking.markdown)
 
 #### Working with users
 
 - [User management](docs/user-management.markdown)
+- [Hourly rate](docs/hourly-rate.markdown)
+- [Timetable](docs/timetable.markdown)
 - [Two factor authentication](docs/2fa.markdown)
 
 #### Settings
@@ -92,6 +96,7 @@ Documentation
 - [Application settings](docs/application-configuration.markdown)
 - [Board settings](docs/board-configuration.markdown)
 - [Link settings](docs/link-labels.markdown)
+- [Currency rate](docs/currency-rate.markdown)
 
 ### Integrations
 
