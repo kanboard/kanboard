@@ -474,7 +474,7 @@ return array(
     '%s moved the task %s to the position #%d in the column "%s"' => '%s flyt opgaven %s til positionen #%d i kolonnen "%s"',
     '%s moved the task %s to the column "%s"' => '%s flyttede opgaven %s til kolonnen "%s"',
     '%s created the task %s' => '%s oprettede opgaven %s',
-    '%s closed the task %s' => '',
+    // '%s closed the task %s' => '',
     '%s created a subtask for the task %s' => '%s oprettede en under-opgave for opgaven %s',
     '%s updated a subtask for the task %s' => '%s opdaterede en under-opgave for opgaven %s',
     'Assigned to %s with an estimate of %s/%sh' => 'Tildelt til %s med en estimering på %s/%sh',

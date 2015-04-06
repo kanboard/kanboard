@@ -717,7 +717,7 @@ return array(
     'is a child of' => 'наследник',
     'is a parent of' => 'родитель',
     'targets milestone' => 'часть этапа',
-    'is a milestone of' => '',
+    // 'is a milestone of' => '',
     'fixes' => 'исправляет',
     'is fixed by' => 'исправлено в',
     'This task' => 'Эта задача',

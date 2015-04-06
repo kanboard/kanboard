@@ -599,7 +599,7 @@ return array(
     'Daily project summary export' => 'Exportação diária do resumo do projeto',
     'Daily project summary export for "%s"' => 'Exportação diária do resumo do projeto para "%s"',
     'Exports' => 'Exportar',
-    'This export contains the number of tasks per column grouped per day.' => '',
+    // 'This export contains the number of tasks per column grouped per day.' => '',
     'Nothing to preview...' => 'Nada para pré-visualizar...',
     'Preview' => 'Pré-visualizar',
     'Write' => 'Escrever',

@@ -757,7 +757,7 @@ return array(
     'All day' => '全天',
     'Day' => '日期',
     'Manage timetable' => '管理时间表',
-    'Overtime timetable' => '',
+    // 'Overtime timetable' => '',
     'Time off timetable' => '加班时间表',
     'Timetable' => '时间表',
     'Work timetable' => '工作时间表',

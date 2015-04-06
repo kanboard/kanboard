@@ -15,7 +15,7 @@ function update_missing_locales(array $reference, $outdated_file)
 
     foreach ($reference as $key => $value) {
 
-        if (isset($outdated[$key])) {
+        if (! empty($outdated[$key])) {
             //$output .= "    '".str_replace("'", "\'", $key)."' => '".str_replace("'", "\'", $value)."',\n";
             $output .= "    '".str_replace("'", "\'", $key)."' => '".str_replace("'", "\'", $outdated[$key])."',\n";
         }
