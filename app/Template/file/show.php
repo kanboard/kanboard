@@ -4,14 +4,16 @@
     <div class="page-header">
         <h2><?= t('Attachments') ?></h2>
     </div>
-    <?php if (!empty($images)): ?>
+    <?php if (! empty($images)): ?>
         <h3><?= t('Images') ?></h3>
         <ul class="task-show-images">
             <?php foreach ($images as $file): ?>
                 <li>
+                    <?php if (function_exists('imagecreatetruecolor')): ?>
                     <div class="img_container">
                         <img src="<?= $this->u('file', 'thumbnail', array('width' => 250, 'file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" alt="<?= $this->e($file['name']) ?>"/>
                     </div>
+                    <?php endif ?>
                     <p>
                         <?= $this->e($file['name']) ?>
                     </p>
