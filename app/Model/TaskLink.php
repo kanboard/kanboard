@@ -51,12 +51,13 @@ class TaskLink extends Base
      * Get all links attached to a task
      *
      * @access public
-     * @param  integer   $task_id   Task id
+     * @param  integer   $task_id          Task id
+     * @param  bool      $group_by_label   Group links by label
      * @return array
      */
-    public function getLinks($task_id)
+    public function getAll($task_id, $group_by_label = true)
     {
-        return $this->db
+        $links = $this->db
                     ->table(self::TABLE)
                     ->columns(
                         self::TABLE.'.id',
@@ -65,14 +66,34 @@ class TaskLink extends Base
                         Task::TABLE.'.title',
                         Task::TABLE.'.is_active',
                         Task::TABLE.'.project_id',
+                        Task::TABLE.'.time_spent AS task_time_spent',
+                        Task::TABLE.'.time_estimated AS task_time_estimated',
+                        Task::TABLE.'.owner_id AS task_assignee_id',
+                        User::TABLE.'.username AS task_assignee_username',
+                        User::TABLE.'.name AS task_assignee_name',
                         Board::TABLE.'.title AS column_title'
                     )
                     ->eq(self::TABLE.'.task_id', $task_id)
                     ->join(Link::TABLE, 'id', 'link_id')
                     ->join(Task::TABLE, 'id', 'opposite_task_id')
                     ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+                    ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
                     ->orderBy(Link::TABLE.'.id ASC, '.Board::TABLE.'.position ASC, '.Task::TABLE.'.is_active DESC, '.Task::TABLE.'.id', Table::SORT_ASC)
                     ->findAll();
+
+        if ($group_by_label && !empty($links)) {
+            $groupedLinks = array();
+            $currentLabel = null;
+            foreach($links AS $link) {
+                if ($currentLabel != $link['label']) {
+                    $currentLabel = $link['label'];
+                    $groupedLinks[$currentLabel] = array();
+                }
+                $groupedLinks[$currentLabel][] = $link;
+            }
+            $links = $groupedLinks;
+        }
+        return $links;
     }
 
     /**

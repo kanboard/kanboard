@@ -724,7 +724,7 @@ return array(
     'is a child of' => 'est un enfant de',
     'is a parent of' => 'est un parent de',
     'targets milestone' => 'vise l\'étape importante',
-    'is a milestone of' => 'est une étape importante de',
+    'is a milestone of' => 'est une étape importante incluant',
     'fixes' => 'corrige',
     'is fixed by' => 'est corrigée par',
     'This task' => 'Cette tâche',
