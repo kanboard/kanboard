@@ -639,6 +639,13 @@ div.ui-tooltip {
 .tooltip-tasklinks li {
     list-style-type: none;
 }
+.tooltip-tasklinks h1 {
+    font-weight: bold;
+    font-size: 1em;
+    margin: 5px 0 2px 0;
+    padding: 0;
+    border-bottom: 1px dotted grey;
+}
 
 .column-tooltip {
 	color: #999;
@@ -1218,12 +1225,15 @@ span.task-board-date-overdue {
     height: 80px;
     width: 500px;
 }/* subtasks */
-.subtasks-table {
+.links-table,.subtasks-table {
     font-size: 0.85em;
 }
 
-.subtasks-table td {
+.links-table td,.subtasks-table td {
     vertical-align: middle;
+}
+.links-label {
+    font-size: 1.1em;
 }/* markdown content */
 .markdown {
     line-height: 1.4em;
