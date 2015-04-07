@@ -73,7 +73,7 @@ class Twofactor extends User
         }
 
         // Allow the user to test or disable the feature
-        $this->session['user']['twofactor_activated'] = false;
+        $_SESSION['user']['twofactor_activated'] = false;
 
         $this->session->flash(t('User updated successfully.'));
         $this->response->redirect($this->helper->url('twofactor', 'index', array('user_id' => $user['id'])));

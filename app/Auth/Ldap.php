@@ -36,7 +36,7 @@ class Ldap extends Base
 
             $user = $this->user->getByUsername($username);
 
-            if ($user) {
+            if (! empty($user)) {
 
                 // There is already a local user with that name
                 if ($user['is_ldap_user'] == 0) {
@@ -241,7 +241,7 @@ class Ldap extends Base
         }
 
         // User id not retrieved: LDAP_ACCOUNT_ID not properly configured
-        if (! $username && ! isset($info[0][LDAP_ACCOUNT_ID][0])) {
+        if (empty($username) && ! isset($info[0][LDAP_ACCOUNT_ID][0])) {
             return false;
         }
 

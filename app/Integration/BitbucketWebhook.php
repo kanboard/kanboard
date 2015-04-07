@@ -78,7 +78,7 @@ class BitbucketWebhook extends Base
 
         $task = $this->taskFinder->getById($task_id);
 
-        if (! $task) {
+        if (empty($task)) {
             return false;
         }
 

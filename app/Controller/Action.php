@@ -157,7 +157,7 @@ class Action extends Base
         $project = $this->getProject();
         $action = $this->action->getById($this->request->getIntegerParam('action_id'));
 
-        if ($action && $this->action->remove($action['id'])) {
+        if (! empty($action) && $this->action->remove($action['id'])) {
             $this->session->flash(t('Action removed successfully.'));
         } else {
             $this->session->flashError(t('Unable to remove this action.'));

@@ -10,6 +10,7 @@ use Pimple\Container;
  * @package  auth
  * @author   Frederic Guillot
  *
+ * @property \Core\Session             $session
  * @property \Model\Acl                $acl
  * @property \Model\LastLogin          $lastLogin
  * @property \Model\User               $user

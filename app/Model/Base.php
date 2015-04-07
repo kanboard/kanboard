@@ -44,6 +44,10 @@ use Pimple\Container;
  * @property \Model\TaskPosition           $taskPosition
  * @property \Model\TaskValidator          $taskValidator
  * @property \Model\Timetable              $timetable
+ * @property \Model\TimetableDay           $timetableDay
+ * @property \Model\TimetableExtra         $timetableExtra
+ * @property \Model\TimetableOff           $timetableOfff
+ * @property \Model\TimetableWeek          $timetableWeek
  * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
  * @property \Model\User                   $user
  * @property \Model\UserSession            $userSession

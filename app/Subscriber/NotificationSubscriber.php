@@ -47,10 +47,13 @@ class NotificationSubscriber extends Base implements EventSubscriberInterface
     public function execute(GenericEvent $event, $event_name)
     {
         $values = $this->getTemplateData($event);
-        $users = $this->notification->getUsersList($values['task']['project_id']);
 
-        if ($users) {
-            $this->notification->sendEmails($this->templates[$event_name], $users, $values);
+        if (isset($values['task']['project_id'])) {
+            $users = $this->notification->getUsersList($values['task']['project_id']);
+
+            if (! empty($users)) {
+                $this->notification->sendEmails($this->templates[$event_name], $users, $values);
+            }
         }
     }
 
@@ -64,11 +67,11 @@ class NotificationSubscriber extends Base implements EventSubscriberInterface
                 break;
             case 'Event\SubtaskEvent':
                 $values['subtask'] = $this->subtask->getById($event['id'], true);
-                $values['task'] = $this->taskFinder->getDetails($event['task_id']);
+                $values['task'] = $this->taskFinder->getDetails($values['subtask']['task_id']);
                 break;
             case 'Event\FileEvent':
                 $values['file'] = $event->getAll();
-                $values['task'] = $this->taskFinder->getDetails($event['task_id']);
+                $values['task'] = $this->taskFinder->getDetails($values['file']['task_id']);
                 break;
             case 'Event\CommentEvent':
                 $values['comment'] = $this->comment->getById($event['id']);

@@ -162,6 +162,7 @@ function version_49($pdo)
     $pdo->exec('ALTER TABLE subtasks ADD COLUMN position INTEGER DEFAULT 1');
 
     $task_id = 0;
+    $position = 1;
     $urq = $pdo->prepare('UPDATE subtasks SET position=? WHERE id=?');
 
     $rq = $pdo->prepare('SELECT * FROM subtasks ORDER BY task_id, id ASC');

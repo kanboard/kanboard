@@ -840,9 +840,10 @@ return array(
     // 'Code' => '',
     // 'Two factor authentication' => '',
     // 'Enable/disable two factor authentication' => '',
-    // 'This QR Ccde contains the key URI: ' => '',
+    // 'This QR code contains the key URI: ' => '',
     // 'Save the secret key in your TOTP software (by example Google Authenticator or FreeOTP).' => '',
     // 'Check my code' => '',
     // 'Secret key: ' => '',
     // 'Test your device' => '',
+    // 'Assign a color when the task is moved to a specific column' => '',
 );

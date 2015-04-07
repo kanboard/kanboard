@@ -117,7 +117,7 @@ class Board extends Base
         $project = $this->project->getByToken($token);
 
         // Token verification
-        if (! $project) {
+        if (empty($project)) {
             $this->forbidden(true);
         }
 
@@ -311,7 +311,7 @@ class Board extends Base
             $this->checkCSRFParam();
             $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
 
-            if ($column && $this->board->removeColumn($column['id'])) {
+            if (! empty($column) && $this->board->removeColumn($column['id'])) {
                 $this->session->flash(t('Column removed successfully.'));
             } else {
                 $this->session->flashError(t('Unable to remove this column.'));

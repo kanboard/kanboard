@@ -97,7 +97,7 @@ class User extends Base
     {
         $user = $this->user->getById($this->request->getIntegerParam('user_id'));
 
-        if (! $user) {
+        if (empty($user)) {
             $this->notfound();
         }
 

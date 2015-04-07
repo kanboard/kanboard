@@ -2,6 +2,7 @@
     "require" : {
         "php": ">=5.3",
         "ext-mbstring" : "*",
+        "ext-gd": "*",
         "fguillot/simple-validator" : "dev-master",
         "swiftmailer/swiftmailer" : "@stable",
         "fguillot/json-rpc" : "0.0.1",

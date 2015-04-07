@@ -10,6 +10,8 @@ use Pimple\Container;
  * @package  subscriber
  * @author   Frederic Guillot
  *
+ * @property \Integration\SlackWebhook     $slackWebhook
+ * @property \Integration\Hipchat          $hipchat
  * @property \Model\Board                  $board
  * @property \Model\Config                 $config
  * @property \Model\Comment                $comment

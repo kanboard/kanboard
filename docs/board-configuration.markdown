@@ -58,3 +58,9 @@ When this option is enabled, each time the status of a subtask is changed, the s
 - When the status changes to "done" then the end time is saved
 
 The time spent for the subtask and the task is also updated.
+
+### Show subtask estimates in the user calendar
+
+When enabled, assigned subtasks with the status "todo" and with a defined estimate value will be displayed on the user calendar.
+
+The user calender is available on the dashboard or from the user profile.

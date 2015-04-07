@@ -44,6 +44,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectDailySummary    $projectDailySummary
  * @property \Model\Subtask                $subtask
+ * @property \Model\SubtaskForecast        $subtaskForecast
  * @property \Model\Swimlane               $swimlane
  * @property \Model\Task                   $task
  * @property \Model\Link                   $link
@@ -336,7 +337,7 @@ abstract class Base
     {
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
-        if (! $task) {
+        if (empty($task)) {
             $this->notfound();
         }
 
@@ -355,7 +356,7 @@ abstract class Base
         $project_id = $this->request->getIntegerParam('project_id', $project_id);
         $project = $this->project->getById($project_id);
 
-        if (! $project) {
+        if (empty($project)) {
             $this->session->flashError(t('Project not found.'));
             $this->response->redirect('?controller=project');
         }

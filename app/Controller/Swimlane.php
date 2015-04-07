@@ -23,7 +23,7 @@ class Swimlane extends Base
     {
         $swimlane = $this->swimlane->getById($this->request->getIntegerParam('swimlane_id'));
 
-        if (! $swimlane) {
+        if (empty($swimlane)) {
             $this->session->flashError(t('Swimlane not found.'));
             $this->response->redirect('?controller=swimlane&action=index&project_id='.$project_id);
         }

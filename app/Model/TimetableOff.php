@@ -81,7 +81,7 @@ class TimetableOff extends Base
         $values = array(
             'user_id' => $user_id,
             'date' => $date,
-            'all_day' => $all_day,
+            'all_day' => (int) $all_day, // Postgres fix
             'start' => $all_day ? '' : $start,
             'end' => $all_day ? '' : $end,
             'comment' => $comment,

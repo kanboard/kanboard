@@ -32,7 +32,7 @@ class ReverseProxy extends Base
             $login = $_SERVER[REVERSE_PROXY_USER_HEADER];
             $user = $this->user->getByUsername($login);
 
-            if (! $user) {
+            if (empty($user)) {
                 $this->createUser($login);
                 $user = $this->user->getByUsername($login);
             }

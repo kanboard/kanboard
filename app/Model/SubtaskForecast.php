@@ -81,7 +81,13 @@ class SubtaskForecast extends Base
             $start = $slot[0]->getTimestamp();
 
             if ($slot[0] < $start_date) {
-                continue;
+
+                if (! $this->dateParser->withinDateRange($start_date, $slot[0], $slot[1])) {
+                    continue;
+                }
+
+                $interval = $this->dateParser->getHours(new DateTime, $slot[1]);
+                $start = time();
             }
 
             while ($offset < $total) {
