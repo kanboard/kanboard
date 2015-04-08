@@ -225,11 +225,31 @@ class Board extends Base
             for ($j = 0; $j < $nb_columns; $j++) {
                 $swimlanes[$i]['columns'][$j]['tasks'] = $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $columns[$j]['id'], $swimlanes[$i]['id']);
                 $swimlanes[$i]['columns'][$j]['nb_tasks'] = count($swimlanes[$i]['columns'][$j]['tasks']);
+                $swimlanes[$i]['columns'][$j]['score'] = $this->getColumnSum($swimlanes[$i]['columns'][$j]['tasks'], 'score');
                 $swimlanes[$i]['nb_tasks'] += $swimlanes[$i]['columns'][$j]['nb_tasks'];
             }
         }
 
         return $swimlanes;
+    }
+
+    /**
+     * Calculate the sum of the defined field for a list of tasks
+     *
+     * @access public
+     * @param  array   $tasks
+     * @param  string  $field
+     * @return integer
+     */
+    public function getColumnSum(array &$tasks, $field)
+    {
+        $sum = 0;
+
+        foreach ($tasks as $task) {
+            $sum += $task['score'];
+        }
+
+        return $sum;
     }
 
     /**

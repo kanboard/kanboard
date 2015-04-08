@@ -33,6 +33,12 @@
             </span>
         <?php endif ?>
 
+        <?php if (! empty($column['score'])): ?>
+            <span class="column-score pull-right" title="<?= t('Score') ?>">
+                <?= $column['score'] ?>&nbsp;
+            </span>
+        <?php endif ?>
+
         <?php if ($column['task_limit']): ?>
             <span title="<?= t('Task limit') ?>" class="task-limit">
                 (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>/<?= $this->e($column['task_limit']) ?>)
