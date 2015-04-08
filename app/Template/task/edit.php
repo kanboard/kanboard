@@ -53,6 +53,10 @@
         <?= $this->formLabel(t('Due Date'), 'date_due') ?>
         <?= $this->formText('date_due', $values, $errors, array('placeholder="'.$this->inList($date_format, $date_formats).'"'), 'form-date') ?><br/>
         <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
+
+        <?= $this->formLabel(t('Etherpad'), 'etherpad') ?>
+        <?= $this->formText('etherpad', $values, $errors) ?>
+        <p class="form-help"><?= t('Example: http://pad.example.com/mypad (full URL of the pad)') ?></p>
     </div>
 
     <div class="form-actions">

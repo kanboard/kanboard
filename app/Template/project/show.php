@@ -36,6 +36,16 @@
     <?php endif ?>
 </ul>
 
+<?php if ($project['etherpad'] != null && ! empty($project['etherpad'])): ?>
+    <div class="page-header">
+        <h2><?= t('Etherpad') ?></h2>
+    </div>
+
+    <div class="etherpad">
+        <iframe src='<?php echo $project['etherpad'] ?>?alwaysShowChat=false&userName=<?php echo urlencode($this->getFullname()) ?>'></iframe>
+    </div>
+<?php endif ?>
+
 <div class="page-header">
     <h2><?= t('Board') ?></h2>
 </div>

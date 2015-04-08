@@ -146,12 +146,19 @@ abstract class Base
      *
      * @access private
      */
-    private function sendHeaders($action)
+    private function sendHeaders($controller, $action)
     {
+        // The page have an IFRAME
+        if ((($controller == 'project') && ($action = 'show')) || (($controller == 'task') && ($action = 'show'))) {
+            $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '*', 'frame-src' => '*', 'child-src' => '*'));
+        } else {
+            $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '*'));
+        }
+
         // HTTP secure headers
-        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '*'));
         $this->response->nosniff();
         $this->response->xss();
+
 
         // Allow the public board iframe inclusion
         if (ENABLE_XFRAME && $action !== 'readonly') {
@@ -172,7 +179,7 @@ abstract class Base
     {
         // Start the session
         $this->session->open(BASE_URL_DIRECTORY);
-        $this->sendHeaders($action);
+        $this->sendHeaders($controller, $action);
         $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
 
         if (! $this->acl->isPublicAction($controller, $action)) {
