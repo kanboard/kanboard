@@ -91,18 +91,35 @@ class TaskLinkTest extends Base
 
     public function testValidation()
     {
+        // Create tasks
         $tl = new TaskLink($this->container);
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
+        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'B')));
+        
+        $links = $tl->getLinks(1);
+        $this->assertEmpty($links);
+        
+        $links = $tl->getLinks(2);
+        $this->assertEmpty($links);
 
-        $r = $tl->validateCreation(array('task_id' => 1, 'link_id' => 1, 'title' => 'a'));
+        // Check validation
+        $r = $tl->validateCreation(array('task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 2));
         $this->assertTrue($r[0]);
 
         $r = $tl->validateCreation(array('task_id' => 1, 'link_id' => 1));
         $this->assertFalse($r[0]);
 
-        $r = $tl->validateCreation(array('task_id' => 1, 'title' => 'a'));
+        $r = $tl->validateCreation(array('task_id' => 1, 'opposite_task_id' => 2));
         $this->assertFalse($r[0]);
 
-        $r = $tl->validateCreation(array('link_id' => 1, 'title' => 'a'));
+        $r = $tl->validateCreation(array('task_id' => 1, 'opposite_task_id' => 2));
+        $this->assertFalse($r[0]);
+
+        $r = $tl->validateCreation(array('task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 1));
         $this->assertFalse($r[0]);
     }
 }
