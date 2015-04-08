@@ -101,11 +101,18 @@ class Notification extends Base
     public function sendEmails($template, array $users, array $data)
     {
         try {
+
+            $author = '';
+
+            if (Session::isOpen()) {
+                $author = e('%s via Kanboard', $this->user->getFullname($this->session['user']));
+            }
+
             $mailer = Swift_Mailer::newInstance($this->container['mailer']);
 
             $message = Swift_Message::newInstance()
                             ->setSubject($this->getMailSubject($template, $data))
-                            ->setFrom(array(MAIL_FROM => 'Kanboard'))
+                            ->setFrom(array(MAIL_FROM => $author ?: 'Kanboard'))
                             ->setBody($this->getMailContent($template, $data), 'text/html');
 
             foreach ($users as $user) {

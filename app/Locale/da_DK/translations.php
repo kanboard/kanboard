@@ -846,4 +846,5 @@ return array(
     // 'Secret key: ' => '',
     // 'Test your device' => '',
     // 'Assign a color when the task is moved to a specific column' => '',
+    // '%s via Kanboard' => '',
 );

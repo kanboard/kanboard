@@ -846,4 +846,5 @@ return array(
     'Secret key: ' => 'Chave secreta:',
     'Test your device' => 'Teste o seu dispositivo',
     'Assign a color when the task is moved to a specific column' => 'Atribuir uma cor quando a tarefa é movida em uma coluna específica',
+    // '%s via Kanboard' => '',
 );
