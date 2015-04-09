@@ -6,7 +6,25 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 42;
+const VERSION = 43;
+
+function version_43($pdo)
+{
+    $pdo->exec('ALTER TABLE task_has_links ADD COLUMN opposite_task_link_id INTEGER DEFAULT 0');
+    
+    $urq = $pdo->prepare('UPDATE task_has_links SET opposite_task_link_id=? WHERE id=?');
+    
+    $rq = $pdo->prepare('SELECT tl1.*
+        FROM task_has_links tl1
+        ORDER BY tl1.id
+        ');
+    $rq->execute();
+    $task_links = $rq->fetchAll(PDO::FETCH_ASSOC);
+    for ($i=0; $i<count($task_links); ($i=$i+2)) {
+        $urq->execute(array($task_links[$i+1]['id'], $task_links[$i]['id']));
+        $urq->execute(array($task_links[$i]['id'], $task_links[$i+1]['id']));
+    }
+}
 
 function version_42($pdo)
 {

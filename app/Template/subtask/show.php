@@ -7,11 +7,11 @@
 
     <table class="subtasks-table">
         <tr>
-            <th class="column-40"><?= t('Title') ?></th>
+            <th class="column-50"><?= t('Title') ?></th>
             <th><?= t('Assignee') ?></th>
             <th><?= t('Time tracking') ?></th>
             <?php if (! isset($not_editable)): ?>
-                <th><?= t('Actions') ?></th>
+                <th class="column-10"><?= t('Actions') ?></th>
             <?php endif ?>
         </tr>
         <?php foreach ($subtasks as $subtask): ?>
