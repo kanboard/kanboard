@@ -6,7 +6,14 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 42;
+const VERSION = 43;
+
+function version_43($pdo)
+{
+    $pdo->exec('ALTER TABLE files ADD COLUMN date VARCHAR(10) NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE files ADD COLUMN user_id INT NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE files ADD COLUMN size FLOAT NOT NULL DEFAULT 0');
+}
 
 function version_42($pdo)
 {

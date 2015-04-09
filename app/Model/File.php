@@ -82,7 +82,7 @@ class File extends Base
      * @param  bool     $is_image   Image or not
      * @return bool
      */
-    public function create($task_id, $name, $path, $is_image)
+    public function create($task_id, $name, $path, $is_image, $size)
     {
         $this->container['dispatcher']->dispatch(
             self::EVENT_CREATE,
@@ -94,6 +94,9 @@ class File extends Base
             'name' => $name,
             'path' => $path,
             'is_image' => $is_image ? '1' : '0',
+            'size' => $size,
+            'user_id' => $this->userSession->getId(),
+            'date' => time(),    
         ));
     }
 
@@ -106,10 +109,24 @@ class File extends Base
      */
     public function getAll($task_id)
     {
-        return $this->db->table(self::TABLE)
+        return $this->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.id',
+                self::TABLE.'.name',
+                self::TABLE.'.path',
+                self::TABLE.'.is_image',
+                self::TABLE.'.task_id',
+                self::TABLE.'.date',
+                self::TABLE.'.user_id',
+                self::TABLE.'.size',
+                User::TABLE.'.username',
+                User::TABLE.'.name as user_name'
+            )    
+            ->join(User::TABLE, 'id', 'user_id')
             ->eq('task_id', $task_id)
-            ->asc('name')
-            ->findAll();
+            ->asc(self::TABLE.'.name')                
+            ->findAll(); 
     }
 
     /**
@@ -121,10 +138,24 @@ class File extends Base
      */
     public function getAllImages($task_id)
     {
-        return $this->db->table(self::TABLE)
+        return $this->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.id',
+                self::TABLE.'.name',
+                self::TABLE.'.path',
+                self::TABLE.'.is_image',
+                self::TABLE.'.task_id',
+                self::TABLE.'.date',
+                self::TABLE.'.user_id',
+                self::TABLE.'.size',
+                User::TABLE.'.username',
+                User::TABLE.'.name as user_name'
+            )
+            ->join(User::TABLE, 'id', 'user_id')
             ->eq('task_id', $task_id)
             ->eq('is_image', 1)
-            ->asc('name')
+            ->asc(self::TABLE.'.name')
             ->findAll();
     }
 
@@ -137,10 +168,24 @@ class File extends Base
      */
     public function getAllDocuments($task_id)
     {
-        return $this->db->table(self::TABLE)
+        return $this->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.id',
+                self::TABLE.'.name',
+                self::TABLE.'.path',
+                self::TABLE.'.is_image',
+                self::TABLE.'.task_id',
+                self::TABLE.'.date',
+                self::TABLE.'.user_id',
+                self::TABLE.'.size',
+                User::TABLE.'.username',
+                User::TABLE.'.name as user_name'
+            )
+            ->join(User::TABLE, 'id', 'user_id')
             ->eq('task_id', $task_id)
             ->eq('is_image', 0)
-            ->asc('name')
+            ->asc(self::TABLE.'.name')
             ->findAll();
     }
 
@@ -230,7 +275,8 @@ class File extends Base
                             $task_id,
                             $original_filename,
                             $destination_filename,
-                            $this->isImage($original_filename)
+                            $this->isImage($original_filename),
+                            $_FILES[$form_name]['size'][$key]    
                         );
                     }
                 }

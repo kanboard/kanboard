@@ -755,7 +755,7 @@ class Helper
                 return 'fa-file-powerpoint-o';
             case 'zip':
             case 'rar':
-                return 'fa-archive-o';
+                return 'fa-file-archive-o';
             case 'mp3':
                 return 'fa-audio-o';
             case 'avi':

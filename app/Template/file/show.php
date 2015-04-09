@@ -16,6 +16,9 @@
                     <?php endif ?>
                     <p>
                         <?= $this->e($file['name']) ?>
+                        <span class="column-tooltip" title='<?= $this->e(t('uploaded by').': '.$this->e($file['user_name'] ?: $file['username']).'<br>'.t('uploaded on').': '.dt('%B %e, %Y at %k:%M %p', $file['date']).'<br>'.t('size').': '.round($file['size']/1024/1024,2)).' MB' ?>'>
+                            <i class="fa fa-info-circle"></i>
+                        </span>
                     </p>
                     <span class="task-show-file-actions task-show-image-actions">
                         <i class="fa fa-eye"></i> <?= $this->a(t('open'), 'file', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
@@ -35,6 +38,9 @@
                     <td><i class="fa <?= $this->getFileIcon($file['name']) ?> fa-fw"></i></td>
                     <td>
                         <?= $this->e($file['name']) ?>
+                        <span class="column-tooltip" title='<?= $this->e(t('uploaded by').': '.$this->e($file['user_name'] ?: $file['username']).'<br>'.t('uploaded on').': '.dt('%B %e, %Y at %k:%M %p', $file['date']).'<br>'.t('size').': '.round($file['size']/1024/1024,2)).' MB' ?>'>
+                            <i class="fa fa-info-circle"></i>
+                        </span>
                     </td>
                     <td>
                         <span class="task-show-file-actions">
