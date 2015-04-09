@@ -112,29 +112,28 @@ class File extends Base
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
         $width_param = $this->request->getIntegerParam('width');
         $height_param = $this->request->getIntegerParam('height');
-        $resize_cut_param = $this->request->getIntegerParam('resize_cut');
         $filename = FILES_DIR.$file['path'];
 
         if ($file['task_id'] == $task['id'] && file_exists($filename)) {
 
             // Get new sizes
             list($width, $height) = getimagesize($filename);
-
-            if($resize_cut_param == 0){
-                //resize without cut
-                if ($width_param == 0 && $height_param == 0) {
-                    $newwidth = 100;
-                    $newheight = 100;
-                } elseif ($width_param > 0 && $height_param == 0) {
-                    $newwidth = $width_param;
-                    $newheight = floor($height * ($width_param / $width));
-                } elseif ($width_param == 0 && $height_param > 0) {
-                    $newwidth = floor($width * ($height_param / $height));
-                    $newheight = $height_param;
-                } else {
-                    $newwidth = $width_param;
-                    $newheight = $height_param;
-                }
+            
+            //default size
+            if ($width_param == 0 && $height_param == 0) {
+                $width_param = 100;
+                $height_param = 100;
+            }
+            
+            if ($width_param > 0 && $height_param == 0) {
+                $newwidth = $width_param;
+                $newheight = floor($height * ($width_param / $width));
+                $dest_y = 0;
+                $dest_x = 0;
+                $thumb = imagecreatetruecolor($newwidth, $newheight);
+            } elseif ($width_param == 0 && $height_param > 0) {
+                $newwidth = floor($width * ($height_param / $height));
+                $newheight = $height_param;
                 $dest_y = 0;
                 $dest_x = 0;
                 $thumb = imagecreatetruecolor($newwidth, $newheight);
@@ -142,23 +141,23 @@ class File extends Base
                 // resize and cut
                 $ratio_img = $width / $height;
                 $ratio_param = $width_param / $height_param;
-                
-                if($ratio_img < $ratio_param){
+
+                if($ratio_img <= $ratio_param){
                     $newwidth = $width_param;
                     $newheight = floor($height * ($width_param / $width));
-                    
+
                     $dest_y = ( $newheight - $height_param ) / 2 * (-1);
                     $dest_x = 0;
                 }elseif($ratio_img > $ratio_param){
                     $newwidth = floor($width * ($height_param / $height));
                     $newheight = $height_param;
-                    
+
                     $dest_y = 0;
-                    $dest_x = ( $newwidth - $width_param ) / 2;
+                    $dest_x = ( $newwidth - $width_param ) / 2 * (-1);
                 }             
                 $thumb = imagecreatetruecolor($width_param, $height_param);
-            }
-
+            }      
+                
             // Load            
             $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
