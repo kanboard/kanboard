@@ -272,9 +272,6 @@ span.task-board-date-overdue {
 .task-show-image-actions {
     margin-left: 5px;
 }
-.task-show-images li .img_container:hover {
-    height: 100%;
-}
 .task-show-file-table {
     width: auto;
 }
