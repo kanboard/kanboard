@@ -220,6 +220,7 @@ Contributors:
 - [Oliver Bertuch](https://github.com/poikilotherm)
 - [Olivier Maridat](https://github.com/oliviermaridat)
 - [Oren Ben-Kiki](https://github.com/orenbenkiki)
+- Paolo Mainieri
 - [Peller Zoltan](https://github.com/PierP)
 - [Petja Touru](https://github.com/Petja)
 - [Piotr Zęgota](https://github.com/ZegalPL)
