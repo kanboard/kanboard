@@ -62,7 +62,11 @@ hr {
 .chosen-select {
     min-height: 27px; /* Reserve some space to avoid re-layout due to chosen */
 }
-/* links */
+
+.avatar {
+    float: left;
+    margin-right: 10px;
+}/* links */
 a {
     color: #3366CC;
     border: none;
@@ -829,7 +833,9 @@ nav .active a {
     height: 70px;
     margin-bottom: 10px;
 }
-
+.swimlane-header {
+  background: #EEE;
+}
 /* swimlanes */
 #board th a.board-swimlane-toggle {
     font-size: 0.95em;
@@ -842,6 +848,14 @@ nav .active a {
     padding: 3px;
     font-size: 0.9em;
     word-wrap: break-word;
+	
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	 border-radius:5px;	
+	 
+	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);	 
 }
 
 div.task-board-recent {
@@ -913,6 +927,7 @@ a.task-board-nobody {
 }
 
 .task-board-category {
+	background: #FFF;
     font-weight: bold;
     font-size: 0.9em;
     color: #000;
