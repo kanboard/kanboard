@@ -189,29 +189,6 @@ var Kanboard = (function() {
                 $('#board-selector').trigger('chosen:open');
             });
 
-            // Tooltip for column description
-            $(".column-tooltip").tooltip({
-                content: function() {
-                    return '<div class="markdown">' + $(this).attr("title") + '</div>';
-                },
-                position: {
-                    my: 'left-20 top',
-                    at: 'center bottom+9',
-                    using: function(position, feedback) {
-
-                        $(this).css(position);
-
-                        var arrow_pos = feedback.target.left + feedback.target.width / 2 - feedback.element.left - 20;
-
-                        $("<div>")
-                            .addClass("tooltip-arrow")
-                            .addClass(feedback.vertical)
-                            .addClass(arrow_pos == 0 ? "align-left" : "align-right")
-                            .appendTo(this);
-                    }
-                }
-            });
-
             $.datepicker.setDefaults($.datepicker.regional[$("body").data("js-lang")]);
 
             Kanboard.InitAfterAjax();
@@ -263,6 +240,29 @@ var Kanboard = (function() {
                     }
                 });
             }
+
+            // Tooltip for column description
+            $(".column-tooltip").tooltip({
+                content: function() {
+                    return '<div class="markdown">' + $(this).attr("title") + '</div>';
+                },
+                position: {
+                    my: 'left-20 top',
+                    at: 'center bottom+9',
+                    using: function(position, feedback) {
+
+                        $(this).css(position);
+
+                        var arrow_pos = feedback.target.left + feedback.target.width / 2 - feedback.element.left - 20;
+
+                        $("<div>")
+                            .addClass("tooltip-arrow")
+                            .addClass(feedback.vertical)
+                            .addClass(arrow_pos == 0 ? "align-left" : "align-right")
+                            .appendTo(this);
+                    }
+                }
+            });
         }
     };
 
