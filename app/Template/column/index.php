@@ -22,20 +22,20 @@
         <td class="column-30">
             <ul>
                 <li>
-                    <?= $this->a(t('Edit'), 'board', 'editColumn', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
+                    <?= $this->a(t('Edit'), 'column', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
                 </li>
                 <?php if ($column['position'] != 1): ?>
                 <li>
-                    <?= $this->a(t('Move Up'), 'board', 'moveColumn', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'up'), true) ?>
+                    <?= $this->a(t('Move Up'), 'column', 'move', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'up'), true) ?>
                 </li>
                 <?php endif ?>
                 <?php if ($column['position'] != count($columns)): ?>
                 <li>
-                    <?= $this->a(t('Move Down'), 'board', 'moveColumn', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'down'), true) ?>
+                    <?= $this->a(t('Move Down'), 'column', 'move', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'down'), true) ?>
                 </li>
                 <?php endif ?>
                 <li>
-                    <?= $this->a(t('Remove'), 'board', 'remove', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
+                    <?= $this->a(t('Remove'), 'column', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
                 </li>
             </ul>
         </td>
@@ -44,7 +44,7 @@
 </table>
 
 <h3><?= t('Add a new column') ?></h3>
-<form method="post" action="<?= $this->u('board', 'add', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('column', 'create', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
     <?= $this->formCsrf() ?>
 

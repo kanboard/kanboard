@@ -16,7 +16,7 @@
             <?= $this->a(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <?= $this->a(t('Edit board'), 'board', 'edit', array('project_id' => $project['id'])) ?>
+            <?= $this->a(t('Edit board'), 'column', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <li>
             <?= $this->a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>

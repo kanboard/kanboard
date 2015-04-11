@@ -11,101 +11,6 @@ namespace Controller;
 class Board extends Base
 {
     /**
-     * Move a column down or up
-     *
-     * @access public
-     */
-    public function moveColumn()
-    {
-        $this->checkCSRFParam();
-        $project = $this->getProject();
-        $column_id = $this->request->getIntegerParam('column_id');
-        $direction = $this->request->getStringParam('direction');
-
-        if ($direction === 'up' || $direction === 'down') {
-            $this->board->{'move'.$direction}($project['id'], $column_id);
-        }
-
-        $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
-    }
-
-    /**
-     * Change a task assignee directly from the board
-     *
-     * @access public
-     */
-    public function changeAssignee()
-    {
-        $task = $this->getTask();
-        $project = $this->project->getById($task['project_id']);
-
-        $this->response->html($this->template->render('board/assignee', array(
-            'values' => $task,
-            'users_list' => $this->projectPermission->getMemberList($project['id']),
-            'project' => $project,
-        )));
-    }
-
-    /**
-     * Validate an assignee modification
-     *
-     * @access public
-     */
-    public function updateAssignee()
-    {
-        $values = $this->request->getValues();
-
-        list($valid,) = $this->taskValidator->validateAssigneeModification($values);
-
-        if ($valid && $this->taskModification->update($values)) {
-            $this->session->flash(t('Task updated successfully.'));
-        }
-        else {
-            $this->session->flashError(t('Unable to update your task.'));
-        }
-
-        $this->response->redirect('?controller=board&action=show&project_id='.$values['project_id']);
-    }
-
-    /**
-     * Change a task category directly from the board
-     *
-     * @access public
-     */
-    public function changeCategory()
-    {
-        $task = $this->getTask();
-        $project = $this->project->getById($task['project_id']);
-
-        $this->response->html($this->template->render('board/category', array(
-            'values' => $task,
-            'categories_list' => $this->category->getList($project['id']),
-            'project' => $project,
-        )));
-    }
-
-    /**
-     * Validate a category modification
-     *
-     * @access public
-     */
-    public function updateCategory()
-    {
-        $values = $this->request->getValues();
-
-        list($valid,) = $this->taskValidator->validateCategoryModification($values);
-
-        if ($valid && $this->taskModification->update($values)) {
-            $this->session->flash(t('Task updated successfully.'));
-        }
-        else {
-            $this->session->flashError(t('Unable to update your task.'));
-        }
-
-        $this->response->redirect('?controller=board&action=show&project_id='.$values['project_id']);
-    }
-
-    /**
      * Display the public version of a board
      * Access checked by a simple token, no user login, read only, auto-refresh
      *
@@ -198,138 +103,6 @@ class Board extends Base
             'board_selector' => $board_selector,
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->config->get('board_highlight_period'),
-        )));
-    }
-
-    /**
-     * Display a form to edit a board
-     *
-     * @access public
-     */
-    public function edit(array $values = array(), array $errors = array())
-    {
-        $project = $this->getProject();
-        $columns = $this->board->getColumns($project['id']);
-
-        foreach ($columns as $column) {
-            $values['title['.$column['id'].']'] = $column['title'];
-            $values['description['.$column['id'].']'] = $column['description'];
-            $values['task_limit['.$column['id'].']'] = $column['task_limit'] ?: null;
-        }
-
-        $this->response->html($this->projectLayout('board/edit', array(
-            'errors' => $errors,
-            'values' => $values + array('project_id' => $project['id']),
-            'columns' => $columns,
-            'project' => $project,
-            'title' => t('Edit board')
-        )));
-    }
-
-    /**
-     * Display a form to edit a board
-     *
-     * @access public
-     */
-    public function editColumn(array $values = array(), array $errors = array())
-    {
-        $project = $this->getProject();
-        $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
-
-        $this->response->html($this->projectLayout('board/edit_column', array(
-            'errors' => $errors,
-            'values' => $values ?: $column,
-            'project' => $project,
-            'column' => $column,
-            'title' => t('Edit column "%s"', $column['title'])
-        )));
-    }
-
-    /**
-     * Validate and update a column
-     *
-     * @access public
-     */
-    public function updateColumn()
-    {
-        $project = $this->getProject();
-        $values = $this->request->getValues();
-
-        list($valid, $errors) = $this->board->validateModification($values);
-
-        if ($valid) {
-
-            if ($this->board->updateColumn($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
-                $this->session->flash(t('Board updated successfully.'));
-                $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
-            }
-            else {
-                $this->session->flashError(t('Unable to update this board.'));
-            }
-        }
-
-        $this->editcolumn($values, $errors);
-    }
-
-    /**
-     * Validate and add a new column
-     *
-     * @access public
-     */
-    public function add()
-    {
-        $project = $this->getProject();
-        $columns = $this->board->getColumnsList($project['id']);
-        $data = $this->request->getValues();
-        $values = array();
-
-        foreach ($columns as $column_id => $column_title) {
-            $values['title['.$column_id.']'] = $column_title;
-        }
-
-        list($valid, $errors) = $this->board->validateCreation($data);
-
-        if ($valid) {
-
-            if ($this->board->addColumn($project['id'], $data['title'], $data['task_limit'], $data['description'])) {
-                $this->session->flash(t('Board updated successfully.'));
-                $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
-            }
-            else {
-                $this->session->flashError(t('Unable to update this board.'));
-            }
-        }
-
-        $this->edit($values, $errors);
-    }
-
-    /**
-     * Remove a column
-     *
-     * @access public
-     */
-    public function remove()
-    {
-        $project = $this->getProject();
-
-        if ($this->request->getStringParam('remove') === 'yes') {
-
-            $this->checkCSRFParam();
-            $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
-
-            if (! empty($column) && $this->board->removeColumn($column['id'])) {
-                $this->session->flash(t('Column removed successfully.'));
-            } else {
-                $this->session->flashError(t('Unable to remove this column.'));
-            }
-
-            $this->response->redirect('?controller=board&action=edit&project_id='.$project['id']);
-        }
-
-        $this->response->html($this->projectLayout('board/remove', array(
-            'column' => $this->board->getColumn($this->request->getIntegerParam('column_id')),
-            'project' => $project,
-            'title' => t('Remove a column from a board')
         )));
     }
 
@@ -485,5 +258,81 @@ class Board extends Base
         $this->response->html($this->template->render('board/description', array(
             'task' => $task
         )));
+    }
+
+    /**
+     * Change a task assignee directly from the board
+     *
+     * @access public
+     */
+    public function changeAssignee()
+    {
+        $task = $this->getTask();
+        $project = $this->project->getById($task['project_id']);
+
+        $this->response->html($this->template->render('board/assignee', array(
+            'values' => $task,
+            'users_list' => $this->projectPermission->getMemberList($project['id']),
+            'project' => $project,
+        )));
+    }
+
+    /**
+     * Validate an assignee modification
+     *
+     * @access public
+     */
+    public function updateAssignee()
+    {
+        $values = $this->request->getValues();
+
+        list($valid,) = $this->taskValidator->validateAssigneeModification($values);
+
+        if ($valid && $this->taskModification->update($values)) {
+            $this->session->flash(t('Task updated successfully.'));
+        }
+        else {
+            $this->session->flashError(t('Unable to update your task.'));
+        }
+
+        $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $values['project_id'])));
+    }
+
+    /**
+     * Change a task category directly from the board
+     *
+     * @access public
+     */
+    public function changeCategory()
+    {
+        $task = $this->getTask();
+        $project = $this->project->getById($task['project_id']);
+
+        $this->response->html($this->template->render('board/category', array(
+            'values' => $task,
+            'categories_list' => $this->category->getList($project['id']),
+            'project' => $project,
+        )));
+    }
+
+    /**
+     * Validate a category modification
+     *
+     * @access public
+     */
+    public function updateCategory()
+    {
+        $values = $this->request->getValues();
+
+        list($valid,) = $this->taskValidator->validateCategoryModification($values);
+
+        if ($valid && $this->taskModification->update($values)) {
+            $this->session->flash(t('Task updated successfully.'));
+        }
+        else {
+            $this->session->flashError(t('Unable to update your task.'));
+        }
+
+        $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $values['project_id'])));
     }
 }

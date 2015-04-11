@@ -51,8 +51,8 @@ class Acl extends Base
     private $manager_acl = array(
         'action' => '*',
         'analytic' => '*',
-        'board' => array('movecolumn', 'edit', 'editcolumn', 'updatecolumn', 'add', 'remove'),
         'category' => '*',
+        'column' => '*',
         'export' => array('tasks', 'subtasks', 'summary'),
         'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',

@@ -2,7 +2,7 @@
     <h2><?= t('Edit column "%s"', $column['title']) ?></h2>
 </div>
 
-<form method="post" action="<?= $this->u('board', 'updateColumn', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('column', 'update', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>" autocomplete="off">
 
     <?= $this->formCsrf() ?>
 
@@ -16,9 +16,9 @@
     <?= $this->formNumber('task_limit', $values, $errors) ?>
 
     <?= $this->formLabel(t('Description'), 'description') ?>
-    
+
     <div class="form-tabs">
-        
+
         <div class="write-area">
           <?= $this->formTextarea('description', $values, $errors) ?>
         </div>
