@@ -847,4 +847,7 @@ return array(
     'Test your device' => 'デバイスをテストする',
     // 'Assign a color when the task is moved to a specific column' => '',
     // '%s via Kanboard' => '',
+    // 'uploaded by: %s' => '',
+    // 'uploaded on: %s' => '',
+    // 'size: %s' => '',
 );

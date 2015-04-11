@@ -847,4 +847,7 @@ return array(
     'Test your device' => '测试设备',
     'Assign a color when the task is moved to a specific column' => '任务移动到指定栏目时设置颜色',
     // '%s via Kanboard' => '',
+    // 'uploaded by: %s' => '',
+    // 'uploaded on: %s' => '',
+    // 'size: %s' => '',
 );

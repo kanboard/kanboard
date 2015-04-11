@@ -80,6 +80,7 @@ class File extends Base
      * @param  string   $name       Filename
      * @param  string   $path       Path on the disk
      * @param  bool     $is_image   Image or not
+     * @param  integer  $size       File size
      * @return bool
      */
     public function create($task_id, $name, $path, $is_image, $size)
@@ -96,7 +97,7 @@ class File extends Base
             'is_image' => $is_image ? '1' : '0',
             'size' => $size,
             'user_id' => $this->userSession->getId(),
-            'date' => time(),    
+            'date' => time(),
         ));
     }
 
@@ -122,11 +123,11 @@ class File extends Base
                 self::TABLE.'.size',
                 User::TABLE.'.username',
                 User::TABLE.'.name as user_name'
-            )    
+            )
             ->join(User::TABLE, 'id', 'user_id')
             ->eq('task_id', $task_id)
-            ->asc(self::TABLE.'.name')                
-            ->findAll(); 
+            ->asc(self::TABLE.'.name')
+            ->findAll();
     }
 
     /**
@@ -276,7 +277,7 @@ class File extends Base
                             $original_filename,
                             $destination_filename,
                             $this->isImage($original_filename),
-                            $_FILES[$form_name]['size'][$key]    
+                            $_FILES[$form_name]['size'][$key]
                         );
                     }
                 }
@@ -284,5 +285,80 @@ class File extends Base
         }
 
         return count(array_unique($result)) === 1;
+    }
+
+    /**
+     * Generate a jpeg thumbnail from an image (output directly the image)
+     *
+     * @access public
+     * @param  string    $filename         Source image
+     * @param  integer   $resize_width     Desired image width
+     * @param  integer   $resize_height    Desired image height
+     */
+    public function generateThumbnail($filename, $resize_width, $resize_height)
+    {
+        $metadata = getimagesize($filename);
+        $src_width = $metadata[0];
+        $src_height = $metadata[1];
+        $dst_y = 0;
+        $dst_x = 0;
+
+        if (empty($metadata['mime'])) {
+            return;
+        }
+
+        if ($resize_width == 0 && $resize_height == 0) {
+            $resize_width = 100;
+            $resize_height = 100;
+        }
+
+        if ($resize_width > 0 && $resize_height == 0) {
+            $dst_width = $resize_width;
+            $dst_height = floor($src_height * ($resize_width / $src_width));
+            $dst_image = imagecreatetruecolor($dst_width, $dst_height);
+        }
+        elseif ($resize_width == 0 && $resize_height > 0) {
+            $dst_width = floor($src_width * ($resize_height / $src_height));
+            $dst_height = $resize_height;
+            $dst_image = imagecreatetruecolor($dst_width, $dst_height);
+        }
+        else {
+
+            $src_ratio = $src_width / $src_height;
+            $resize_ratio = $resize_width / $resize_height;
+
+            if ($src_ratio <= $resize_ratio) {
+                $dst_width = $resize_width;
+                $dst_height = floor($src_height * ($resize_width / $src_width));
+
+                $dst_y = ($dst_height - $resize_height) / 2 * (-1);
+            }
+            else {
+                $dst_width = floor($src_width * ($resize_height / $src_height));
+                $dst_height = $resize_height;
+
+                $dst_x = ($dst_width - $resize_width) / 2 * (-1);
+            }
+
+            $dst_image = imagecreatetruecolor($resize_width, $resize_height);
+        }
+
+        switch ($metadata['mime']) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $src_image = imagecreatefromjpeg($filename);
+                break;
+            case 'image/png':
+                $src_image = imagecreatefrompng($filename);
+                break;
+            case 'image/gif':
+                $src_image = imagecreatefromgif($filename);
+                break;
+            default:
+                return;
+        }
+
+        imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, 0, 0, $dst_width, $dst_height, $src_width, $src_height);
+        imagejpeg($dst_image);
     }
 }

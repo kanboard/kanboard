@@ -10,9 +10,9 @@ const VERSION = 61;
 
 function version_61($pdo)
 {
-    $pdo->exec('ALTER TABLE files ADD COLUMN date VARCHAR(10) NOT NULL DEFAULT 0');
-    $pdo->exec('ALTER TABLE files ADD COLUMN user_id INT NOT NULL DEFAULT 0');
-    $pdo->exec('ALTER TABLE files ADD COLUMN size FLOAT NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE files ADD COLUMN "date" INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE files ADD COLUMN "user_id" INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE files ADD COLUMN "size" INTEGER NOT NULL DEFAULT 0');
 }
 
 function version_60($pdo)

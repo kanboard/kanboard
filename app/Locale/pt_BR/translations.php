@@ -847,4 +847,7 @@ return array(
     'Test your device' => 'Teste o seu dispositivo',
     'Assign a color when the task is moved to a specific column' => 'Atribuir uma cor quando a tarefa é movida em uma coluna específica',
     // '%s via Kanboard' => '',
+    // 'uploaded by: %s' => '',
+    // 'uploaded on: %s' => '',
+    // 'size: %s' => '',
 );

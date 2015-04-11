@@ -16,7 +16,7 @@
                     <?php endif ?>
                     <p>
                         <?= $this->e($file['name']) ?>
-                        <span class="column-tooltip" title='<?= $this->e(t('uploaded by').': '.$this->e($file['user_name'] ?: $file['username']).'<br>'.t('uploaded on').': '.dt('%B %e, %Y at %k:%M %p', $file['date']).'<br>'.t('size').': '.round($file['size']/1024/1024,2)).' MB' ?>'>
+                        <span class="column-tooltip" title='<?= t('uploaded by: %s', $file['user_name'] ?: $file['username']).'<br>'.t('uploaded on: %s', dt('%B %e, %Y at %k:%M %p', $file['date'])).'<br>'.t('size: %s', $this->formatBytes($file['size'])) ?>'>
                             <i class="fa fa-info-circle"></i>
                         </span>
                     </p>
@@ -38,7 +38,7 @@
                     <td><i class="fa <?= $this->getFileIcon($file['name']) ?> fa-fw"></i></td>
                     <td>
                         <?= $this->e($file['name']) ?>
-                        <span class="column-tooltip" title='<?= $this->e(t('uploaded by').': '.$this->e($file['user_name'] ?: $file['username']).'<br>'.t('uploaded on').': '.dt('%B %e, %Y at %k:%M %p', $file['date']).'<br>'.t('size').': '.round($file['size']/1024/1024,2)).' MB' ?>'>
+                        <span class="column-tooltip" title='<?= t('uploaded by: %s', $file['user_name'] ?: $file['username']).'<br>'.t('uploaded on: %s', dt('%B %e, %Y at %k:%M %p', $file['date'])).'<br>'.t('size: %s', $this->formatBytes($file['size'])) ?>'>
                             <i class="fa fa-info-circle"></i>
                         </span>
                     </td>
