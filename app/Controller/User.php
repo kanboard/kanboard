@@ -11,62 +11,6 @@ namespace Controller;
 class User extends Base
 {
     /**
-     * Logout and destroy session
-     *
-     * @access public
-     */
-    public function logout()
-    {
-        $this->checkCSRFParam();
-        $this->authentication->backend('rememberMe')->destroy($this->userSession->getId());
-        $this->session->close();
-        $this->response->redirect('?controller=user&action=login');
-    }
-
-    /**
-     * Display the form login
-     *
-     * @access public
-     */
-    public function login(array $values = array(), array $errors = array())
-    {
-        if ($this->userSession->isLogged()) {
-            $this->response->redirect('?controller=app');
-        }
-
-        $this->response->html($this->template->layout('user/login', array(
-            'errors' => $errors,
-            'values' => $values,
-            'no_layout' => true,
-            'redirect_query' => $this->request->getStringParam('redirect_query'),
-            'title' => t('Login')
-        )));
-    }
-
-    /**
-     * Check credentials
-     *
-     * @access public
-     */
-    public function check()
-    {
-        $redirect_query = $this->request->getStringParam('redirect_query');
-        $values = $this->request->getValues();
-        list($valid, $errors) = $this->authentication->validateForm($values);
-
-        if ($valid) {
-            if ($redirect_query !== '') {
-                $this->response->redirect('?'.urldecode($redirect_query));
-            }
-            else {
-                $this->response->redirect('?controller=app');
-            }
-        }
-
-        $this->login($values, $errors);
-    }
-
-    /**
      * Common layout for user views
      *
      * @access protected
@@ -450,7 +394,7 @@ class User extends Base
                     $this->response->redirect('?controller=app');
                 }
                 else {
-                    $this->response->html($this->template->layout('user/login', array(
+                    $this->response->html($this->template->layout('auth/index', array(
                         'errors' => array('login' => t('Google authentication failed')),
                         'values' => array(),
                         'no_layout' => true,
@@ -512,7 +456,7 @@ class User extends Base
                     $this->response->redirect('?controller=app');
                 }
                 else {
-                    $this->response->html($this->template->layout('user/login', array(
+                    $this->response->html($this->template->layout('auth/index', array(
                         'errors' => array('login' => t('GitHub authentication failed')),
                         'values' => array(),
                         'no_layout' => true,

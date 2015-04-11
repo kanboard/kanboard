@@ -17,7 +17,8 @@ class Acl extends Base
      * @var array
      */
     private $public_acl = array(
-        'user' => array('login', 'check', 'google', 'github'),
+        'auth' => array('login', 'check'),
+        'user' => array('google', 'github'),
         'task' => array('readonly'),
         'board' => array('readonly'),
         'project' => array('feed'),

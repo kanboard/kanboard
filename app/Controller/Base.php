@@ -197,7 +197,7 @@ abstract class Base
                 $this->response->text('Not Authorized', 401);
             }
 
-            $this->response->redirect('?controller=user&action=login&redirect_query='.urlencode($this->request->getQueryString()));
+            $this->response->redirect($this->helper->url('auth', 'login', array('redirect_query' => urlencode($this->request->getQueryString()))));
         }
     }
 

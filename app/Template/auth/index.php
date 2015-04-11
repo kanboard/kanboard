@@ -4,7 +4,7 @@
         <p class="alert alert-error"><?= $this->e($errors['login']) ?></p>
     <?php endif ?>
 
-    <form method="post" action="<?= $this->u('user', 'check', array('redirect_query' => urlencode($redirect_query))) ?>">
+    <form method="post" action="<?= $this->u('auth', 'check', array('redirect_query' => $redirect_query)) ?>">
 
         <?= $this->formCsrf() ?>
 
