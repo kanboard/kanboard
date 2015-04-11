@@ -22,7 +22,7 @@ However, it's possible to use other methods, the SMTP protocol and Sendmail.
 
 ### SMTP configuration
 
-Rename the file `config.default.php` to `config.php` and set change these values:
+Rename the file `config.default.php` to `config.php` and change these values:
 
 ```php
 // We choose "smtp" as mail transport
@@ -81,14 +81,14 @@ Examples:
 - http://myserver/kanboard/
 - http://kanboard.mydomain.com/
 
-Don't forget the ending `/`.
+Don't forget the ending slash `/`.
 
 You need to define that manually because Kanboard cannot guess the URL from a command line script and some people have very specific configuration.
 
 Troubleshooting
 ---------------
 
-If no emails are sent and you are sure that everything is configured correctly:
+If no emails are send and you are sure that everything is configured correctly:
 
 - Check your spam folder
 - Enable the debug mode and check the debug file `data/debug.log`, you should see the exact error
