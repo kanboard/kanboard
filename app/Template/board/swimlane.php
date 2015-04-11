@@ -74,7 +74,8 @@
             <?= $this->render($not_editable ? 'board/task_public' : 'board/task_private', array(
                 'project' => $project,
                 'task' => $task,
-                'categories' => $categories,
+                'categories_listing' => $categories_listing,
+                'categories_description' => $categories_description,
                 'board_highlight_period' => $board_highlight_period,
                 'not_editable' => $not_editable,
             )) ?>

@@ -22,5 +22,10 @@
         <?= $this->a($this->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
     </div>
 
-    <?= $this->render('board/task_footer', array('task' => $task, 'categories' => $categories)) ?>
+    <?= $this->render('board/task_footer', array(
+        'task' => $task,
+        'categories_listing' => $categories_listing,
+        'categories_description' => $categories_description,
+        'not_editable' => $not_editable,
+    )) ?>
 </div>

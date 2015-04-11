@@ -1,15 +1,19 @@
-<?php if ($task['category_id']): ?>
+<?php if (! empty($task['category_id'])): ?>
 <div class="task-board-category-container">
     <span class="task-board-category">
-        <?= $this->a(
-            $this->inList($task['category_id'], $categories),
-            'board',
-            'changeCategory',
-            array('task_id' => $task['id'], 'project_id' => $task['project_id']),
-            false,
-            'task-board-popover',
-            t('Change category')
-        ) ?>
+        <?php if ($not_editable): ?>
+            <?= $this->inList($task['category_id'], $categories_listing) ?>
+        <?php else: ?>
+            <?= $this->a(
+                $this->inList($task['category_id'], $categories_listing),
+                'board',
+                'changeCategory',
+                array('task_id' => $task['id'], 'project_id' => $task['project_id']),
+                false,
+                'task-board-popover' . (isset($categories_description[$task['category_id']]) ? ' column-tooltip' : ''),
+                isset($categories_description[$task['category_id']]) ? $this->markdown($categories_description[$task['category_id']]) : t('Change category')
+            ) ?>
+        <?php endif ?>
     </span>
 </div>
 <?php endif ?>

@@ -121,11 +121,14 @@ class Board extends Base
             $this->forbidden(true);
         }
 
+        list($categories_listing, $categories_description) = $this->category->getBoardCategories($project['id']);
+
         // Display the board with a specific layout
         $this->response->html($this->template->layout('board/public', array(
             'project' => $project,
             'swimlanes' => $this->board->getBoard($project['id']),
-            'categories' => $this->category->getList($project['id'], false),
+            'categories_listing' => $categories_listing,
+            'categories_description' => $categories_description,
             'title' => $project['name'],
             'description' => $project['description'],
             'no_layout' => true,
@@ -181,12 +184,15 @@ class Board extends Base
 
         $this->userSession->storeLastSeenProjectId($project['id']);
 
+        list($categories_listing, $categories_description) = $this->category->getBoardCategories($project['id']);
+
         $this->response->html($this->template->layout('board/index', array(
             'users' => $this->projectPermission->getMemberList($project['id'], true, true),
             'projects' => $projects,
             'project' => $project,
             'swimlanes' => $this->board->getBoard($project['id']),
-            'categories' => $this->category->getList($project['id'], true, true),
+            'categories_listing' => $categories_listing,
+            'categories_description' => $categories_description,
             'title' => $project['name'],
             'description' => $project['description'],
             'board_selector' => $board_selector,
@@ -358,11 +364,14 @@ class Board extends Base
             return $this->response->status(400);
         }
 
+        list($categories_listing, $categories_description) = $this->category->getBoardCategories($project_id);
+
         $this->response->html(
             $this->template->render('board/show', array(
                 'project' => $this->project->getById($project_id),
                 'swimlanes' => $this->board->getBoard($project_id),
-                'categories' => $this->category->getList($project_id, false),
+                'categories_listing' => $categories_listing,
+                'categories_description' => $categories_description,
                 'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
                 'board_highlight_period' => $this->config->get('board_highlight_period'),
             )),
@@ -392,11 +401,14 @@ class Board extends Base
             return $this->response->status(304);
         }
 
+        list($categories_listing, $categories_description) = $this->category->getBoardCategories($project_id);
+
         $this->response->html(
             $this->template->render('board/show', array(
                 'project' => $this->project->getById($project_id),
                 'swimlanes' => $this->board->getBoard($project_id),
-                'categories' => $this->category->getList($project_id, false),
+                'categories_listing' => $categories_listing,
+                'categories_description' => $categories_description,
                 'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
                 'board_highlight_period' => $this->config->get('board_highlight_period'),
             ))

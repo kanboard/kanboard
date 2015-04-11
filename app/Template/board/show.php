@@ -21,7 +21,8 @@
                 'project' => $project,
                 'swimlane' => $swimlane,
                 'board_highlight_period' => $board_highlight_period,
-                'categories' => $categories,
+                'categories_listing' => $categories_listing,
+                'categories_description' => $categories_description,
                 'hide_swimlane' => count($swimlanes) === 1,
                 'not_editable' => isset($not_editable),
             )) ?>

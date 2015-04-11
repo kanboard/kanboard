@@ -40,6 +40,11 @@
             <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </div>
 
-        <?= $this->render('board/task_footer', array('task' => $task, 'categories' => $categories)) ?>
+        <?= $this->render('board/task_footer', array(
+                'task' => $task,
+                'categories_listing' => $categories_listing,
+                'categories_description' => $categories_description,
+                'not_editable' => $not_editable,
+        )) ?>
     </div>
 </div>
