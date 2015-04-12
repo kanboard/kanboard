@@ -40,6 +40,7 @@ class Config extends Base
             'INR' => t('INR - Indian Rupee'),
             'JPY' => t('JPY - Japanese Yen'),
             'RSD' => t('RSD - Serbian dinar'),
+            'SEK' => t('SEK - Swedish Krona'),
         );
     }
 

@@ -80,6 +80,7 @@ Documentation
 #### Working with tasks
 
 - [Creating tasks](docs/creating-tasks.markdown)
+- [Adding screenshots](docs/screenshots.markdown)
 - [Task links](docs/task-links.markdown)
 - [Transitions](docs/transitions.markdown)
 - [Time tracking](docs/time-tracking.markdown)

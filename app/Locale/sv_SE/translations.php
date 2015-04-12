@@ -802,7 +802,6 @@ return array(
     'The budget line have been created successfully.' => 'Budgetlinjen har skapats.',
     'Unable to create the budget line.' => 'Kunde inte skapa budgetlinjen.',
     'Unable to remove this budget line.' => 'Kunde inte ta bort budgetlinjen.',
-    'SEK - Swedish Krona' => 'SEK - Svensk Krona',
     'USD - US Dollar' => 'USD - Amerikanska Dollar',
     'Remaining' => 'Återstående',
     'Destination column' => 'Målkolumn',
@@ -854,4 +853,10 @@ return array(
     'Burndown chart for "%s"' => 'Burndown diagram för "%s"',
     'Burndown chart' => 'Burndown diagram',
     'This chart show the task complexity over the time (Work Remaining).' => 'Diagrammet visar uppgiftens svårighet över tid (återstående arbete).',
+    // 'Screenshot taken %s' => '',
+    // 'Add a screenshot' => '',
+    // 'Copy and paste images are only supported with Mozilla Firefox and Google Chrome.' => '',
+    // 'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => '',
+    // 'Screenshot uploaded successfully.' => '',
+    'SEK - Swedish Krona' => 'SEK - Svensk Krona',
 );

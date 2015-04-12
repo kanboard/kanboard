@@ -335,4 +335,19 @@ class Board extends Base
 
         $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $values['project_id'])));
     }
+
+    /**
+     * Screenshot popover
+     *
+     * @access public
+     */
+    public function screenshot()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->template->render('file/screenshot', array(
+            'task' => $task,
+            'redirect' => 'board',
+        )));
+    }
 }

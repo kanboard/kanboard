@@ -20,7 +20,7 @@
 
 /* board table */
 #board-container {
-    padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
+    padding-bottom: 200px; /* Space to avoid dropdown menu truncated */
     overflow-x: scroll;
 }
 

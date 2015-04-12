@@ -248,9 +248,9 @@ class File extends Base
      * Handle file upload
      *
      * @access public
-     * @param  integer $project_id Project id
-     * @param  integer $task_id Task id
-     * @param  string $form_name File form name
+     * @param  integer  $project_id    Project id
+     * @param  integer  $task_id       Task id
+     * @param  string   $form_name     File form name
      * @return bool
      */
     public function upload($project_id, $task_id, $form_name)
@@ -285,6 +285,38 @@ class File extends Base
         }
 
         return count(array_unique($result)) === 1;
+    }
+
+    /**
+     * Handle screenshot upload
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @param  integer  $task_id      Task id
+     * @param  string   $blob         Base64 encoded image
+     * @return bool
+     */
+    public function uploadScreenshot($project_id, $task_id, $blob)
+    {
+        $data = base64_decode($blob);
+
+        if (empty($data)) {
+            return false;
+        }
+
+        $original_filename = e('Screenshot taken %s', dt('%B %e, %Y at %k:%M %p', time()));
+        $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
+
+        @mkdir(FILES_DIR.dirname($destination_filename), 0755, true);
+        @file_put_contents(FILES_DIR.$destination_filename, $data);
+
+        return $this->create(
+            $task_id,
+            $original_filename,
+            $destination_filename,
+            true,
+            strlen($data)
+        );
     }
 
     /**

@@ -263,6 +263,11 @@ var Kanboard = (function() {
                     }
                 }
             });
+
+            // Screenshot
+            if (Kanboard.Exists("screenshot-zone")) {
+                Kanboard.Screenshot.Init();
+            }
         }
     };
 

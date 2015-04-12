@@ -37,6 +37,9 @@
             <?= $this->a(t('Attach a document'), 'file', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li>
+            <?= $this->a(t('Add a screenshot'), 'file', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <li>
             <?= $this->a(t('Duplicate'), 'task', 'duplicate', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li>

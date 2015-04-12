@@ -769,7 +769,7 @@ nav .active a {
 
 /* board table */
 #board-container {
-    padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
+    padding-bottom: 200px; /* Space to avoid dropdown menu truncated */
     overflow-x: scroll;
 }
 
@@ -1083,17 +1083,21 @@ span.task-board-date-overdue {
 .task-link-closed {
     text-decoration: line-through;
 }
+
 .task-show-images {
     list-style-type: none;
 }
+
 .task-show-images li img {
     width: 100%;
 }
+
 .task-show-images li .img_container {
     width: 250px;
     height: 100px;
     overflow: hidden;
 }
+
 .task-show-images li {
     padding: 10px;
     overflow: auto;
@@ -1102,20 +1106,44 @@ span.task-board-date-overdue {
     display: inline-block;
     vertical-align: top;
 }
+
 .task-show-images li p{
     padding: 5px;
     font-weight: bold;
 }
+
 .task-show-images li:hover {
     background: #eee;
 }
+
 .task-show-image-actions {
     margin-left: 5px;
 }
+
 .task-show-file-table {
     width: auto;
 }
-/* comments */
+
+/* screenshots */
+#screenshot-zone {
+    position: relative;
+    border: 2px dashed #ccc;
+    width: 90%;
+    height: 250px;
+    overflow: auto;
+}
+
+#screenshot-inner {
+    position: absolute;
+    left: 0;
+    bottom: 48%;
+    width: 100%;
+    text-align: center;
+}
+
+#screenshot-zone.screenshot-pasted {
+    border: 2px solid #333;
+}/* comments */
 .comment {
     margin-bottom: 20px;
 }
