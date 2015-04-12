@@ -105,7 +105,7 @@ class Notification extends Base
             $author = '';
 
             if (Session::isOpen()) {
-                $author = e('%s via Kanboard', $this->user->getFullname($this->session['user']));
+                $author = e('%s via Kanboard', $this->user->getFullname($_SESSION['user']));
             }
 
             $mailer = Swift_Mailer::newInstance($this->container['mailer']);
