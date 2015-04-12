@@ -59,7 +59,6 @@ class ProjectDailySummary extends Base
                         'total' => $db->table(Task::TABLE)
                                       ->eq('project_id', $project_id)
                                       ->eq('column_id', $column_id)
-                                      ->eq('is_active', Task::STATUS_OPEN)
                                       ->count()
                     ));
             }
