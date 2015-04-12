@@ -65,7 +65,7 @@ class Notification extends Base
     public function getUsersList($project_id, array $exclude_users = array())
     {
         // Exclude the connected user
-        if (Session::isOpen()) {
+        if (Session::isOpen() && $this->userSession->isLogged()) {
             $exclude_users[] = $this->userSession->getId();
         }
 
@@ -104,8 +104,8 @@ class Notification extends Base
 
             $author = '';
 
-            if (Session::isOpen()) {
-                $author = e('%s via Kanboard', $this->user->getFullname($_SESSION['user']));
+            if (Session::isOpen() && $this->userSession->isLogged()) {
+                $author = e('%s via Kanboard', $this->user->getFullname($this->session['user']));
             }
 
             $mailer = Swift_Mailer::newInstance($this->container['mailer']);
