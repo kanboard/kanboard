@@ -2,7 +2,7 @@
 Kanboard.Analytic = (function() {
 
     jQuery(document).ready(function() {
-    
+
         if (Kanboard.Exists("analytic-task-repartition")) {
             Kanboard.Analytic.TaskRepartition.Init();
         }
@@ -12,9 +12,59 @@ Kanboard.Analytic = (function() {
         else if (Kanboard.Exists("analytic-cfd")) {
             Kanboard.Analytic.CFD.Init();
         }
+        else if (Kanboard.Exists("analytic-burndown")) {
+            Kanboard.Analytic.Burndown.Init();
+        }
     });
 
     return {};
+
+})();
+
+Kanboard.Analytic.Burndown = (function() {
+
+    function fetchData()
+    {
+        jQuery.getJSON($("#chart").attr("data-url"), function(data) {
+            drawGraph(data.metrics, data.labels);
+        });
+    }
+
+    function drawGraph(metrics, labels)
+    {
+        var series = prepareSeries(metrics, labels);
+
+        var svg = dimple.newSvg("#chart", "100%", 380);
+        var chart = new dimple.chart(svg, series);
+
+        var x = chart.addCategoryAxis("x", labels['day']);
+        x.addOrderRule("Date");
+
+        chart.addMeasureAxis("y", labels['score']);
+        chart.addSeries(null, dimple.plot.line);
+
+        chart.draw();
+    }
+
+    function prepareSeries(metrics, labels)
+    {
+        var series = [];
+
+        for (var i = 0; i < metrics.length; i++) {
+
+            var row = {};
+            var score = parseInt(metrics[i]['score']);
+            row[labels['day']] = metrics[i]['day'];
+            row[labels['score']] = score;
+            series.push(row);
+        }
+
+        return series;
+    }
+
+    return {
+        Init: fetchData
+    };
 
 })();
 

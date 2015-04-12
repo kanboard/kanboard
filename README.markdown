@@ -75,6 +75,7 @@ Documentation
 - [Swimlanes](docs/swimlanes.markdown)
 - [Calendar](docs/calendar.markdown)
 - [Budget](docs/budget.markdown)
+- [Analytics](docs/analytics.markdown)
 
 #### Working with tasks
 

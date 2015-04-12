@@ -83,6 +83,8 @@ class ProjectAnalytic extends Base
             $metric['percentage'] = round(($metric['nb_tasks'] * 100) / $total, 2);
         }
 
+        ksort($metrics);
+
         return array_values($metrics);
     }
 }

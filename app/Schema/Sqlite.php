@@ -6,7 +6,12 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 62;
+const VERSION = 63;
+
+function version_63($pdo)
+{
+    $pdo->exec('ALTER TABLE project_daily_summaries ADD COLUMN score INTEGER NOT NULL DEFAULT 0');
+}
 
 function version_62($pdo)
 {

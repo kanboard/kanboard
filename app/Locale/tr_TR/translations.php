@@ -850,4 +850,7 @@ return array(
     // 'uploaded by: %s' => '',
     // 'uploaded on: %s' => '',
     // 'size: %s' => '',
+    // 'Burndown chart for "%s"' => '',
+    // 'Burndown chart' => '',
+    // 'This chart show the task complexity over the time (Work Remaining).' => '',
 );

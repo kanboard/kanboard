@@ -852,4 +852,7 @@ return array(
     'uploaded by: %s' => 'Télécharger par : %s',
     'uploaded on: %s' => 'Télécharger le : %s',
     'size: %s' => 'Taille : %s',
+    'Burndown chart for "%s"' => 'Graphique d\'avancement pour « %s »',
+    'Burndown chart' => 'Graphique d\'avancement',
+    'This chart show the task complexity over the time (Work Remaining).' => 'Ce graphique représente la complexité des tâches en fonction du temps (travail restant).',
 );

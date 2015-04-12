@@ -10,5 +10,8 @@
         <li>
             <?= $this->a(t('Cumulative flow diagram'), 'analytic', 'cfd', array('project_id' => $project['id'])) ?>
         </li>
+        <li>
+            <?= $this->a(t('Burndown chart'), 'analytic', 'burndown', array('project_id' => $project['id'])) ?>
+        </li>
     </ul>
 </div>
