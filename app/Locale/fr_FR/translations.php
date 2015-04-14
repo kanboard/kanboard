@@ -857,7 +857,6 @@ return array(
     'This chart show the task complexity over the time (Work Remaining).' => 'Ce graphique représente la complexité des tâches en fonction du temps (travail restant).',
     'Screenshot taken %s' => 'Capture d\'écran prise le %s',
     'Add a screenshot' => 'Ajouter une capture d\'écran',
-    'Copy and paste images are only supported with Mozilla Firefox and Google Chrome.' => 'Copier/coller des images est uniquement supporté par Mozilla Firefox et Google Chrome.',
     'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => 'Prenez une capture d\'écran et appuyez sur CTRL+V ou ⌘+V pour coller ici.',
     'Screenshot uploaded successfully.' => 'Capture d\'écran téléchargée avec succès.',
     'SEK - Swedish Krona' => 'SEK - Couronne suédoise',

@@ -190,12 +190,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "35c8d2d3f70b713f66e1dc14c1d6481abe5db3ac"
+                "reference": "bc75f3dab79bf6beb6e07b5ace0252e1d0d374fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/35c8d2d3f70b713f66e1dc14c1d6481abe5db3ac",
-                "reference": "35c8d2d3f70b713f66e1dc14c1d6481abe5db3ac",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/bc75f3dab79bf6beb6e07b5ace0252e1d0d374fa",
+                "reference": "bc75f3dab79bf6beb6e07b5ace0252e1d0d374fa",
                 "shasum": ""
             },
             "require": {
@@ -209,7 +209,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "WTFPL"
+                "MIT"
             ],
             "authors": [
                 {
@@ -219,7 +219,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2015-04-12 02:46:43"
+            "time": "2015-04-14 01:59:06"
         },
         {
             "name": "fguillot/simple-validator",
@@ -227,12 +227,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleValidator.git",
-                "reference": "41655dc7b9224395f5bb3b5623f6e428fe6d64e8"
+                "reference": "2f30078bb6e688cf123c150d58fda322792a1532"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/41655dc7b9224395f5bb3b5623f6e428fe6d64e8",
-                "reference": "41655dc7b9224395f5bb3b5623f6e428fe6d64e8",
+                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/2f30078bb6e688cf123c150d58fda322792a1532",
+                "reference": "2f30078bb6e688cf123c150d58fda322792a1532",
                 "shasum": ""
             },
             "require": {
@@ -250,13 +250,12 @@
             ],
             "authors": [
                 {
-                    "name": "Frédéric Guillot",
-                    "homepage": "http://fredericguillot.com"
+                    "name": "Frédéric Guillot"
                 }
             ],
             "description": "The most easy to use validator library for PHP :)",
             "homepage": "https://github.com/fguillot/simpleValidator",
-            "time": "2015-04-05 21:44:06"
+            "time": "2015-04-14 02:03:43"
         },
         {
             "name": "fguillot/simpleLogger",

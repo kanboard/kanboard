@@ -855,7 +855,6 @@ return array(
     'This chart show the task complexity over the time (Work Remaining).' => 'Diagrammet visar uppgiftens svårighet över tid (återstående arbete).',
     // 'Screenshot taken %s' => '',
     // 'Add a screenshot' => '',
-    // 'Copy and paste images are only supported with Mozilla Firefox and Google Chrome.' => '',
     // 'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => '',
     // 'Screenshot uploaded successfully.' => '',
     'SEK - Swedish Krona' => 'SEK - Svensk Krona',

@@ -22,5 +22,4 @@ On Mac OS X, you can use those shortcuts to take screenshots:
 
 There are also several third-party applications that can be used to take screenshots with annotations and shapes.
 
-Note: this feature **works only with Mozilla Firefox and Google Chrome**.
-If you use another browser, you have to upload an attachment manually.
+Note: This feature doesn't works with all browsers.

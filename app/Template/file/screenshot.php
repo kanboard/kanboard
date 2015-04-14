@@ -15,5 +15,3 @@
         <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>
 </form>
-
-<p class="alert alert-info"><?= t('Copy and paste images are only supported with Mozilla Firefox and Google Chrome.') ?></p>
