@@ -79,6 +79,7 @@ class DatabaseProvider implements ServiceProviderInterface
             'password' => DB_PASSWORD,
             'database' => DB_NAME,
             'charset'  => 'utf8',
+            'port'     => DB_PORT,
         ));
     }
 
@@ -97,6 +98,7 @@ class DatabaseProvider implements ServiceProviderInterface
             'username' => DB_USERNAME,
             'password' => DB_PASSWORD,
             'database' => DB_NAME,
+            'port'     => DB_PORT,
         ));
     }
 }

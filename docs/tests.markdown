@@ -53,6 +53,8 @@ Time: 9.05 seconds, Memory: 17.75Mb
 OK (74 tests, 6145 assertions)
 ```
 
+**NOTE:** PHPUnit is already included in the Vagrant environment
+
 ### Testing with Mysql
 
 You must have Mysql or MariaDb installed on localhost.

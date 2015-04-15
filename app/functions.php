@@ -63,6 +63,9 @@ function dt($format, $timestamp)
  * @todo   Improve this function
  * @return mixed
  */
-function p($value, $t1, $t2) {
+function p($value, $t1, $t2)
+{
     return $value > 1 ? $t2 : $t1;
 }
+
+

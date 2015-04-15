@@ -12,6 +12,7 @@ class ProjectDailySummarySubscriber extends Base implements EventSubscriberInter
     {
         return array(
             Task::EVENT_CREATE => array('execute', 0),
+            Task::EVENT_UPDATE => array('execute', 0),
             Task::EVENT_CLOSE => array('execute', 0),
             Task::EVENT_OPEN => array('execute', 0),
             Task::EVENT_MOVE_COLUMN => array('execute', 0),

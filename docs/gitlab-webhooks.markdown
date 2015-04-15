@@ -23,7 +23,7 @@ Configuration
 
 1. On Kanboard, go to the project settings and choose the section **Integrations**
 2. Copy the Gitlab webhook url
-3. On Gitlab, go to the project settings and go the section **Webhooks**
+3. On Gitlab, go to the project settings and go to the section **Webhooks**
 4. Check the boxes **Push Events** and **Issues Events**
 5. Paste the url and save
 

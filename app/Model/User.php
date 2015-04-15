@@ -29,6 +29,18 @@ class User extends Base
     const EVERYBODY_ID = -1;
 
     /**
+     * Return true if the user exists
+     *
+     * @access public
+     * @param  integer    $user_id   User id
+     * @return boolean
+     */
+    public function exists($user_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $user_id)->count() === 1;
+    }
+
+    /**
      * Get query to fetch all users
      *
      * @access public
@@ -48,7 +60,8 @@ class User extends Base
                         'is_ldap_user',
                         'notifications_enabled',
                         'google_id',
-                        'github_id'
+                        'github_id',
+                        'twofactor_activated'
                     );
     }
 

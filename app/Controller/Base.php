@@ -17,11 +17,13 @@ use Symfony\Component\EventDispatcher\Event;
  * @package  controller
  * @author   Frederic Guillot
  *
+ * @property \Core\Helper                  $helper
  * @property \Core\Session                 $session
  * @property \Core\Template                $template
  * @property \Core\Paginator               $paginator
  * @property \Integration\GithubWebhook    $githubWebhook
  * @property \Integration\GitlabWebhook    $gitlabWebhook
+ * @property \Integration\BitbucketWebhook $bitbucketWebhook
  * @property \Model\Acl                    $acl
  * @property \Model\Authentication         $authentication
  * @property \Model\Action                 $action
@@ -32,16 +34,20 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\Config                 $config
  * @property \Model\DateParser             $dateParser
  * @property \Model\File                   $file
+ * @property \Model\HourlyRate             $hourlyRate
  * @property \Model\LastLogin              $lastLogin
  * @property \Model\Notification           $notification
  * @property \Model\Project                $project
  * @property \Model\ProjectPermission      $projectPermission
+ * @property \Model\ProjectDuplication     $projectDuplication
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectDailySummary    $projectDailySummary
- * @property \Model\SubTask                $subTask
+ * @property \Model\Subtask                $subtask
+ * @property \Model\SubtaskForecast        $subtaskForecast
  * @property \Model\Swimlane               $swimlane
  * @property \Model\Task                   $task
+ * @property \Model\Link                   $link
  * @property \Model\TaskCreation           $taskCreation
  * @property \Model\TaskModification       $taskModification
  * @property \Model\TaskDuplication        $taskDuplication
@@ -52,10 +58,16 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\TaskPosition           $taskPosition
  * @property \Model\TaskPermission         $taskPermission
  * @property \Model\TaskStatus             $taskStatus
+ * @property \Model\Timetable              $timetable
+ * @property \Model\TimetableDay           $timetableDay
+ * @property \Model\TimetableWeek          $timetableWeek
+ * @property \Model\TimetableExtra         $timetableExtra
+ * @property \Model\TimetableOff           $timetableOff
  * @property \Model\TaskValidator          $taskValidator
+ * @property \Model\TaskLink               $taskLink
  * @property \Model\CommentHistory         $commentHistory
  * @property \Model\SubtaskHistory         $subtaskHistory
- * @property \Model\TimeTracking           $timeTracking
+ * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
  * @property \Model\User                   $user
  * @property \Model\UserSession            $userSession
  * @property \Model\Webhook                $webhook
@@ -113,7 +125,7 @@ abstract class Base
             }
 
             $this->container['logger']->debug('SQL_QUERIES={nb}', array('nb' => $this->container['db']->nb_queries));
-            $this->container['logger']->debug('RENDERING={time}', array('time' => microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']));
+            $this->container['logger']->debug('RENDERING={time}', array('time' => microtime(true) - @$_SERVER['REQUEST_TIME_FLOAT']));
         }
     }
 
@@ -137,12 +149,12 @@ abstract class Base
     private function sendHeaders($action)
     {
         // HTTP secure headers
-        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'"));
+        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '*'));
         $this->response->nosniff();
         $this->response->xss();
 
         // Allow the public board iframe inclusion
-        if ($action !== 'readonly') {
+        if (ENABLE_XFRAME && $action !== 'readonly') {
             $this->response->xframe();
         }
 
@@ -164,16 +176,20 @@ abstract class Base
         $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
 
         if (! $this->acl->isPublicAction($controller, $action)) {
-            $this->handleAuthenticatedUser($controller, $action);
+            $this->handleAuthentication();
+            $this->handle2FA($controller, $action);
+            $this->handleAuthorization($controller, $action);
+
+            $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
         }
     }
 
     /**
-     * Check page access and authentication
+     * Check authentication
      *
      * @access public
      */
-    public function handleAuthenticatedUser($controller, $action)
+    public function handleAuthentication()
     {
         if (! $this->authentication->isAuthenticated()) {
 
@@ -181,10 +197,45 @@ abstract class Base
                 $this->response->text('Not Authorized', 401);
             }
 
-            $this->response->redirect('?controller=user&action=login&redirect_query='.urlencode($this->request->getQueryString()));
+            $this->response->redirect($this->helper->url('auth', 'login', array('redirect_query' => urlencode($this->request->getQueryString()))));
+        }
+    }
+
+    /**
+     * Check 2FA
+     *
+     * @access public
+     */
+    public function handle2FA($controller, $action)
+    {
+        $ignore = ($controller === 'twofactor' && in_array($action, array('code', 'check'))) || ($controller === 'user' && $action === 'logout');
+
+        if ($ignore === false && $this->userSession->has2FA() && ! $this->userSession->check2FA()) {
+
+            if ($this->request->isAjax()) {
+                $this->response->text('Not Authorized', 401);
+            }
+
+            $this->response->redirect($this->helper->url('twofactor', 'code'));
+        }
+    }
+
+    /**
+     * Check page access and authorization
+     *
+     * @access public
+     */
+    public function handleAuthorization($controller, $action)
+    {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $task_id = $this->request->getIntegerParam('task_id');
+
+        // Allow urls without "project_id"
+        if ($task_id > 0 && $project_id === 0) {
+            $project_id = $this->taskFinder->getProjectId($task_id);
         }
 
-        if (! $this->acl->isAllowed($controller, $action, $this->request->getIntegerParam('project_id', 0))) {
+        if (! $this->acl->isAllowed($controller, $action, $project_id)) {
             $this->forbidden();
         }
     }
@@ -286,7 +337,7 @@ abstract class Base
     {
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
-        if (! $task || $task['project_id'] != $this->request->getIntegerParam('project_id')) {
+        if (empty($task)) {
             $this->notfound();
         }
 
@@ -305,7 +356,7 @@ abstract class Base
         $project_id = $this->request->getIntegerParam('project_id', $project_id);
         $project = $this->project->getById($project_id);
 
-        if (! $project) {
+        if (empty($project)) {
             $this->session->flashError(t('Project not found.'));
             $this->response->redirect('?controller=project');
         }

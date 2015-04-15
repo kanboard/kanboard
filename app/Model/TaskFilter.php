@@ -18,6 +18,24 @@ class TaskFilter extends Base
         return $this;
     }
 
+    public function excludeTasks(array $task_ids)
+    {
+        $this->query->notin('id', $task_ids);
+        return $this;
+    }
+
+    public function filterByTitle($title)
+    {
+        $this->query->ilike('title', '%'.$title.'%');
+        return $this;
+    }
+
+    public function filterByProjects(array $project_ids)
+    {
+        $this->query->in('project_id', $project_ids);
+        return $this;
+    }
+
     public function filterByProject($project_id)
     {
         if ($project_id > 0) {
@@ -94,12 +112,27 @@ class TaskFilter extends Base
         return $this->query->findAll();
     }
 
+    public function toAutoCompletion()
+    {
+        return $this->query->columns('id', 'title')->filter(function(array $results) {
+
+            foreach ($results as &$result) {
+                $result['value'] = $result['title'];
+                $result['label'] = '#'.$result['id'].' - '.$result['title'];
+            }
+
+            return $results;
+
+        })->findAll();
+    }
+
     public function toCalendarEvents()
     {
         $events = array();
 
         foreach ($this->query->findAll() as $task) {
             $events[] = array(
+                'timezoneParam' => $this->config->getCurrentTimezone(),
                 'id' => $task['id'],
                 'title' => t('#%d', $task['id']).' '.$task['title'],
                 'start' => date('Y-m-d', $task['date_due']),

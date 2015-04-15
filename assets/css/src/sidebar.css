@@ -1,0 +1,52 @@
+/* sidebar */
+.sidebar-container {
+    margin-top: 10px;
+    position: relative;
+    clear: both;
+}
+
+.sidebar-content {
+    margin-left: 23%;
+    width: 76%;
+    position: absolute;
+}
+
+.sidebar {
+    width: 20%;
+    float: left;
+    padding: 10px;
+    padding-top: 0;
+    border: 1px solid #ddd;
+    background: #fdfdfd;
+    border-radius: 5px;
+}
+
+.sidebar li {
+    list-style-type: square;
+    margin-left: 30px;
+    line-height: 1.8em;
+}
+
+@media only screen and (max-width: 1024px) {
+    .sidebar {
+        width: 25%;
+    }
+
+    .sidebar-content {
+        margin-left: 30%;
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .sidebar {
+        width: 95%;
+        float: none;
+    }
+
+    .sidebar-content {
+        margin: 0;
+        margin-top: 20px;
+        width: 100%;
+    }
+}

@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+use Model\Task as TaskModel;
+
 /**
  * Project Calendar controller
  *
@@ -12,7 +14,7 @@ namespace Controller;
 class Calendar extends Base
 {
     /**
-     * Show calendar view
+     * Show calendar view for projects
      *
      * @access public
      */
@@ -35,28 +37,54 @@ class Calendar extends Base
     }
 
     /**
-     * Get tasks to display on the calendar
+     * Get tasks to display on the calendar (project view)
      *
      * @access public
      */
-    public function events()
+    public function project()
     {
-        $this->response->json(
-            $this->taskFilter
-                 ->create()
-                 ->filterByProject($this->request->getIntegerParam('project_id'))
-                 ->filterByCategory($this->request->getIntegerParam('category_id', -1))
-                 ->filterByOwner($this->request->getIntegerParam('owner_id', -1))
-                 ->filterByColumn($this->request->getIntegerParam('column_id', -1))
-                 ->filterBySwimlane($this->request->getIntegerParam('swimlane_id', -1))
-                 ->filterByColor($this->request->getStringParam('color_id'))
-                 ->filterByStatus($this->request->getIntegerParam('is_active', -1))
-                 ->filterByDueDateRange(
-                    $this->request->getStringParam('start'),
-                    $this->request->getStringParam('end')
-                 )
-                 ->toCalendarEvents()
-        );
+        $project_id = $this->request->getIntegerParam('project_id');
+        $start = $this->request->getStringParam('start');
+        $end = $this->request->getStringParam('end');
+
+        $due_tasks = $this->taskFilter
+            ->create()
+            ->filterByProject($project_id)
+            ->filterByCategory($this->request->getIntegerParam('category_id', -1))
+            ->filterByOwner($this->request->getIntegerParam('owner_id', -1))
+            ->filterByColumn($this->request->getIntegerParam('column_id', -1))
+            ->filterBySwimlane($this->request->getIntegerParam('swimlane_id', -1))
+            ->filterByColor($this->request->getStringParam('color_id'))
+            ->filterByStatus($this->request->getIntegerParam('is_active', -1))
+            ->filterByDueDateRange($start, $end)
+            ->toCalendarEvents();
+
+        $this->response->json($due_tasks);
+    }
+
+    /**
+     * Get tasks to display on the calendar (user view)
+     *
+     * @access public
+     */
+    public function user()
+    {
+        $user_id = $this->request->getIntegerParam('user_id');
+        $start = $this->request->getStringParam('start');
+        $end = $this->request->getStringParam('end');
+
+        $due_tasks = $this->taskFilter
+                          ->create()
+                          ->filterByOwner($user_id)
+                          ->filterByStatus(TaskModel::STATUS_OPEN)
+                          ->filterByDueDateRange($start, $end)
+                          ->toCalendarEvents();
+
+        $subtask_timeslots = $this->subtaskTimeTracking->getUserCalendarEvents($user_id, $start, $end);
+
+        $subtask_forcast = $this->config->get('subtask_forecast') == 1 ? $this->subtaskForecast->getCalendarEvents($user_id, $end) : array();
+
+        $this->response->json(array_merge($due_tasks, $subtask_timeslots, $subtask_forcast));
     }
 
     /**
@@ -72,7 +100,7 @@ class Calendar extends Base
 
             $this->taskModification->update(array(
                 'id' => $values['task_id'],
-                'date_due' => $values['date_due'],
+                'date_due' => substr($values['date_due'], 0, 10),
             ));
         }
     }

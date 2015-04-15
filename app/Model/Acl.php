@@ -17,11 +17,13 @@ class Acl extends Base
      * @var array
      */
     private $public_acl = array(
-        'user' => array('login', 'check', 'google', 'github'),
+        'auth' => array('login', 'check'),
+        'user' => array('google', 'github'),
         'task' => array('readonly'),
         'board' => array('readonly'),
         'project' => array('feed'),
         'webhook' => '*',
+        'app' => array('colors'),
     );
 
     /**
@@ -37,7 +39,8 @@ class Acl extends Base
         'project' => array('show', 'tasks', 'search', 'activity'),
         'subtask' => '*',
         'task' => '*',
-        'calendar' => '*',
+        'tasklink' => '*',
+        'calendar' => array('show', 'project'),
     );
 
     /**
@@ -49,11 +52,12 @@ class Acl extends Base
     private $manager_acl = array(
         'action' => '*',
         'analytic' => '*',
-        'board' => array('movecolumn', 'edit', 'update', 'add', 'remove'),
         'category' => '*',
+        'column' => '*',
         'export' => array('tasks', 'subtasks', 'summary'),
         'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',
+        'budget' => '*',
     );
 
     /**
@@ -63,9 +67,13 @@ class Acl extends Base
      * @var array
      */
     private $admin_acl = array(
+        'app' => array('dashboard'),
         'user' => array('index', 'create', 'save', 'remove'),
         'config' => '*',
+        'link' => '*',
         'project' => array('remove'),
+        'hourlyrate' => '*',
+        'currency' => '*',
     );
 
     /**

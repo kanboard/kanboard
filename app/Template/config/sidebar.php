@@ -11,6 +11,15 @@
             <?= $this->a(t('Board settings'), 'config', 'board') ?>
         </li>
         <li>
+            <?= $this->a(t('Link settings'), 'link', 'index') ?>
+        </li>
+        <li>
+            <?= $this->a(t('Currency rates'), 'currency', 'index') ?>
+        </li>
+        <li>
+            <?= $this->a(t('Integrations'), 'config', 'integrations') ?>
+        </li>
+        <li>
             <?= $this->a(t('Webhooks'), 'config', 'webhook') ?>
         </li>
         <li>

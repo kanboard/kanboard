@@ -6,8 +6,9 @@
         <tr>
             <th class="column-10"><?= $paginator->order('Id', 'tasks.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
-            <th class="column-15"><?= $paginator->order(t('Status'), 'status') ?></th>
+            <th><?= $paginator->order(t('Task'), 'task_name') ?></th>
             <th><?= $paginator->order(t('Subtask'), 'title') ?></th>
+            <th class="column-20"><?= t('Time tracking') ?></th>
         </tr>
         <?php foreach ($paginator->getCollection() as $subtask): ?>
         <tr>
@@ -18,10 +19,19 @@
                 <?= $this->a($this->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->e($subtask['status_name']) ?>
+                <?= $this->a($this->e($subtask['task_name']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->a($this->e($subtask['title']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
+                <?= $this->toggleSubtaskStatus($subtask, 'dashboard') ?>
+            </td>
+            <td>
+                <?php if (! empty($subtask['time_spent'])): ?>
+                    <strong><?= $this->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
+                <?php endif ?>
+
+                <?php if (! empty($subtask['time_estimated'])): ?>
+                    <strong><?= $this->e($subtask['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
+                <?php endif ?>
             </td>
         </tr>
         <?php endforeach ?>

@@ -9,6 +9,8 @@ Several configurations are available:
 - Ubuntu 14.04 LTS with Kanboard/Postgresql
 - Debian 7.6 with Kanboard/Sqlite
 
+All Vagrant environments come with Composer and PHPunit pre-installed.
+
 To use those configurations, you have to install the **last version** of Virtualbox and Vagrant.
 
 Standard boxes can be download from [VagrantCloud](https://vagrantcloud.com):
@@ -24,7 +26,10 @@ If you want to test Kanboard on Ubuntu with Sqlite:
 vagrant up sqlite
 ```
 
+**NOTE:** If you downloaded the dev version from GitHub instead of the pre-packaged zip file, remember to SSH into your Vagrant environment and run ```composer install```.
+
 After the initialization, go to http://localhost:8001/.
+
 
 To test with Mysql:
 

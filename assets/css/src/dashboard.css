@@ -1,0 +1,50 @@
+/* dashboard */
+
+@media only screen and (min-width: 1280px) {
+
+    #dashboard table {
+        font-size: 0.9em;
+    }
+
+    .dashboard-left-column {
+        width: 58%;
+        float: left;
+    }
+
+    .dashboard-right-column {
+        margin-left: 2%;
+        width: 40%;
+        float: left;
+    }
+}
+
+.dashboard-single-column {
+    width: 95%;
+    margin-left: 0;
+    float: none;
+}
+
+.dashboard-project-stats span {
+    font-size: 0.75em;
+    margin-right: 10px;
+    color: #999;
+}
+
+.dashboard-project-stats strong {
+    font-size: 1.2em;
+}
+
+.dashboard-table-link {
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+}
+
+.dashboard-table-link:focus,
+.dashboard-table-link:hover {
+    color: #999;
+}
+
+#dashboard-calendar {
+    font-size: 0.85em;
+}

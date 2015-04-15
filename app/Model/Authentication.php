@@ -42,6 +42,13 @@ class Authentication extends Base
         // If the user is already logged it's ok
         if ($this->userSession->isLogged()) {
 
+            // Check if the user session match an existing user
+            if (! $this->user->exists($this->userSession->getId())) {
+                $this->backend('rememberMe')->destroy($this->userSession->getId());
+                $this->session->close();
+                return false;
+            }
+
             // We update each time the RememberMe cookie tokens
             if ($this->backend('rememberMe')->hasCookie()) {
                 $this->backend('rememberMe')->refresh();

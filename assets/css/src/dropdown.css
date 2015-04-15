@@ -1,0 +1,63 @@
+.dropdown {
+    position: relative;
+}
+
+.dropdown li {
+    list-style: none;
+}
+
+/* submenu */
+.dropdown ul {
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    min-width: 230px;
+    list-style: none;
+    margin: 3px 0 0 1px;
+    padding: 6px 0;
+    background-color: #fff;
+    border: 1px solid #b2b2b2;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+       -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+}
+
+.dropdown ul li {
+    padding: 0;
+    margin: 0;
+    font-size: 1.1em;
+    display: block;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.page-header ul.dropdown {
+    display: inline;
+}
+
+.page-header a.dropdown-menu {
+    font-size: 1.1em;
+}
+
+.page-header li.dropit-trigger {
+    padding: 0;
+}
+
+td li.dropit-trigger {
+    margin: 0;
+}
+
+.task-board .dropit-submenu a {
+    font-weight: normal;
+    text-decoration: underline;
+    font-size: 0.9em;
+}
+
+.task-board .dropit-submenu a:hover {
+    text-decoration: none;
+}

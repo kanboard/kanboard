@@ -1,0 +1,65 @@
+/* responsive design */
+@media only screen and (max-width: 1024px) {
+
+    li.hide-tablet,
+    .hide-tablet {
+        display: none;
+    }
+
+    body {
+        font-size: 0.85em;
+    }
+
+    .form-tab {
+        max-width: 404px;
+    }
+
+    .form-inline-group input[type="submit"],
+    .form-inline-group label {
+        display: block;
+    }
+
+    .form-inline-group input[type="submit"] {
+        margin-top: 20px;
+    }
+
+    td > input[type="text"] {
+        max-width: 150px;
+    }
+
+    .task-time-form label {
+        display: block;
+    }
+
+    .task-time-form input[type="submit"] {
+        margin-top: 10px;
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+
+    header {
+        padding-bottom: 4px;
+    }
+
+    div.chosen-container {
+        font-size: 0.9em;
+    }
+
+    input[type="number"],
+    input[type="date"],
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        height: 18px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+
+    .hide-mobile {
+        display: none;
+    }
+}
+

@@ -6,8 +6,11 @@ User settings
 
 To receive email notifications, users of Kanboard must have:
 
-- Activated notifications in the settings page
+- Activated notifications in their profile
 - Have a valid email address in their profile
+- Be member of the project that will trigger notifications
+
+Note: The logged user who performs the action doesn't receive any notifications, only other project members.
 
 Server settings
 ---------------
@@ -19,7 +22,7 @@ However, it's possible to use other methods, the SMTP protocol and Sendmail.
 
 ### SMTP configuration
 
-Create a blank `config.php` file or use the template `config.default.php` and set those values:
+Rename the file `config.default.php` to `config.php` and change these values:
 
 ```php
 // We choose "smtp" as mail transport
@@ -62,7 +65,7 @@ It's not possible to reply to this address.
 You can customize this address by changing the value of the constant `MAIL_FROM` in your config file.
 
 ```php
-define('MAIL_FROM', 'notifications@kanboard.net');
+define('MAIL_FROM', 'kanboard@mydomain.tld');
 ```
 
 That can be useful if your SMTP server configuration doesn't accept the default address.
@@ -78,6 +81,15 @@ Examples:
 - http://myserver/kanboard/
 - http://kanboard.mydomain.com/
 
-Don't forget the ending `/`.
+Don't forget the ending slash `/`.
 
-You need to define that manually because Kanboard can't guess the URL from a command line script and some people have very specific configuration.
+You need to define that manually because Kanboard cannot guess the URL from a command line script and some people have very specific configuration.
+
+Troubleshooting
+---------------
+
+If no emails are send and you are sure that everything is configured correctly:
+
+- Check your spam folder
+- Enable the debug mode and check the debug file `data/debug.log`, you should see the exact error
+- Be sure that your server or your hosting provider allow you to send emails

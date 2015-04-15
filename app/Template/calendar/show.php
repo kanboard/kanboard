@@ -33,10 +33,10 @@
 
         <div class="sidebar-content">
             <div id="calendar"
-                 data-save-url="<?= $this->u('calendar', 'save', array('project_id' => $project['id'])) ?>"
-                 data-check-url="<?= $this->u('calendar', 'events', array('project_id' => $project['id'])) ?>"
+                 data-project-id="<?= $project['id'] ?>"
+                 data-save-url="<?= $this->u('calendar', 'save') ?>"
+                 data-check-url="<?= $this->u('calendar', 'project', array('project_id' => $project['id'])) ?>"
                  data-check-interval="<?= $check_interval ?>"
-                 data-translations='<?= $this->getCalendarTranslations() ?>'
             >
             </div>
         </div>

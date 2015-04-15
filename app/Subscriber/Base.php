@@ -10,18 +10,23 @@ use Pimple\Container;
  * @package  subscriber
  * @author   Frederic Guillot
  *
+ * @property \Integration\SlackWebhook     $slackWebhook
+ * @property \Integration\Hipchat          $hipchat
+ * @property \Model\Board                  $board
  * @property \Model\Config                 $config
  * @property \Model\Comment                $comment
  * @property \Model\LastLogin              $lastLogin
  * @property \Model\Notification           $notification
  * @property \Model\Project                $project
  * @property \Model\ProjectPermission      $projectPermission
+ * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectDailySummary    $projectDailySummary
- * @property \Model\SubTask                $subTask
+ * @property \Model\Subtask                $subtask
  * @property \Model\Task                   $task
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder
+ * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
  * @property \Model\UserSession            $userSession
  * @property \Model\Webhook                $webhook
  */

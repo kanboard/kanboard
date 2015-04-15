@@ -16,7 +16,7 @@
             <?= $this->a(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <?= $this->a(t('Edit board'), 'board', 'edit', array('project_id' => $project['id'])) ?>
+            <?= $this->a(t('Edit board'), 'column', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <li>
             <?= $this->a(t('Category management'), 'category', 'index', array('project_id' => $project['id'])) ?>
@@ -33,7 +33,10 @@
             <?= $this->a(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <?= $this->a(t('Duplicate'), 'project', 'duplicate', array('project_id' => $project['id']), true) ?>
+            <?= $this->a(t('Duplicate'), 'project', 'duplicate', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
+            <?= $this->a(t('Budget'), 'budget', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <li>
             <?php if ($project['is_active']): ?>
@@ -58,6 +61,9 @@
         </li>
         <li>
             <?= $this->a(t('Subtasks'), 'export', 'subtasks', array('project_id' => $project['id'])) ?>
+        </li>
+        <li>
+            <?= $this->a(t('Task transitions'), 'export', 'transitions', array('project_id' => $project['id'])) ?>
         </li>
         <li>
             <?= $this->a(t('Daily project summary'), 'export', 'summary', array('project_id' => $project['id'])) ?>

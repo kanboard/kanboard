@@ -1,17 +1,43 @@
 <tr>
     <?php if (! $hide_swimlane): ?>
-        <td width="10%"></td>
+       <th>
+
+           <?php if (! $not_editable && $swimlane['nb_tasks'] > 0): ?>
+                <a href="#" class="board-swimlane-toggle" data-swimlane-id="<?= $swimlane['id'] ?>">
+                    <i class="fa fa-minus-circle hide-icon-swimlane-<?= $swimlane['id'] ?>"></i>
+                    <i class="fa fa-plus-circle show-icon-swimlane-<?= $swimlane['id'] ?>" style="display: none"></i>
+                </a>
+           <?php endif ?>
+
+           <?= $this->e($swimlane['name']) ?>
+
+           <span title="<?= t('Task count') ?>" class="task-count">
+                (<span><?= $swimlane['nb_tasks'] ?></span>)
+            </span>
+        </th>
     <?php endif ?>
 
     <?php foreach ($swimlane['columns'] as $column): ?>
-    <th>
+    <th class="board-column">
         <?php if (! $not_editable): ?>
             <div class="board-add-icon">
-                <?= $this->a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'task-creation-popover', t('Add a new task')) ?>
+                <?= $this->a('+', 'task', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'task-board-popover', t('Add a new task')) ?>
             </div>
         <?php endif ?>
 
         <?= $this->e($column['title']) ?>
+
+        <?php if (! $not_editable && ! empty($column['description'])): ?>
+            <span class="column-tooltip pull-right" title='<?= $this->e($this->markdown($column['description'])) ?>'>
+                <i class="fa fa-info-circle"></i>
+            </span>
+        <?php endif ?>
+
+        <?php if (! empty($column['score'])): ?>
+            <span class="column-score pull-right" title="<?= t('Score') ?>">
+                <?= $column['score'] ?>&nbsp;
+            </span>
+        <?php endif ?>
 
         <?php if ($column['task_limit']): ?>
             <span title="<?= t('Task limit') ?>" class="task-limit">
@@ -25,11 +51,10 @@
     </th>
     <?php endforeach ?>
 </tr>
-<tr>
+<tr class="swimlane-row-<?= $swimlane['id'] ?>">
+
     <?php if (! $hide_swimlane): ?>
-        <th class="board-swimlane-title">
-            <?= $this->e($swimlane['name']) ?>
-        </th>
+        <th></th>
     <?php endif ?>
 
     <?php foreach ($swimlane['columns'] as $column): ?>
@@ -46,10 +71,11 @@
         <?php endif ?>
 
         <?php foreach ($column['tasks'] as $task): ?>
-            <?= $this->render('board/task', array(
+            <?= $this->render($not_editable ? 'board/task_public' : 'board/task_private', array(
                 'project' => $project,
                 'task' => $task,
-                'categories' => $categories,
+                'categories_listing' => $categories_listing,
+                'categories_description' => $categories_description,
                 'board_highlight_period' => $board_highlight_period,
                 'not_editable' => $not_editable,
             )) ?>

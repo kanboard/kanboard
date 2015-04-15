@@ -1,3 +1,5 @@
+<?= $this->avatar($email, $author) ?>
+
 <p class="activity-title">
     <?= e('%s moved the task %s to the column "%s"',
             $this->e($author),

@@ -22,20 +22,21 @@ class Task extends Base
         $project = $this->project->getByToken($this->request->getStringParam('token'));
 
         // Token verification
-        if (! $project) {
+        if (empty($project)) {
             $this->forbidden(true);
         }
 
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
-        if (! $task) {
+        if (empty($task)) {
             $this->notfound(true);
         }
 
         $this->response->html($this->template->layout('task/public', array(
             'project' => $project,
             'comments' => $this->comment->getAll($task['id']),
-            'subtasks' => $this->subTask->getAll($task['id']),
+            'subtasks' => $this->subtask->getAll($task['id']),
+            'links' => $this->taskLink->getLinks($task['id']),
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
@@ -54,7 +55,7 @@ class Task extends Base
     public function show()
     {
         $task = $this->getTask();
-        $subtasks = $this->subTask->getAll($task['id']);
+        $subtasks = $this->subtask->getAll($task['id']);
 
         $values = array(
             'id' => $task['id'],
@@ -67,17 +68,36 @@ class Task extends Base
 
         $this->response->html($this->taskLayout('task/show', array(
             'project' => $this->project->getById($task['project_id']),
-            'files' => $this->file->getAll($task['id']),
+            'files' => $this->file->getAllDocuments($task['id']),
+            'images' => $this->file->getAllImages($task['id']),
             'comments' => $this->comment->getAll($task['id']),
             'subtasks' => $subtasks,
+            'links' => $this->taskLink->getLinks($task['id']),
             'task' => $task,
             'values' => $values,
-            'timesheet' => $this->timeTracking->getTaskTimesheet($task, $subtasks),
+            'link_label_list' => $this->link->getList(0, false),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $task['project_name'].' &gt; '.$task['title'],
+        )));
+    }
+
+    /**
+     * Display task activities
+     *
+     * @access public
+     */
+    public function activites()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->taskLayout('task/activity', array(
+            'title' => $task['title'],
+            'task' => $task,
+            'ajax' => $this->request->isAjax(),
+            'events' => $this->projectActivity->getTask($task['id']),
         )));
     }
 
@@ -90,11 +110,12 @@ class Task extends Base
     {
         $project = $this->getProject();
         $method = $this->request->isAjax() ? 'render' : 'layout';
+        $swimlanes_list = $this->swimlane->getList($project['id']);
 
         if (empty($values)) {
 
             $values = array(
-                'swimlane_id' => $this->request->getIntegerParam('swimlane_id'),
+                'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
                 'column_id' => $this->request->getIntegerParam('column_id'),
                 'color_id' => $this->request->getStringParam('color_id'),
                 'owner_id' => $this->request->getIntegerParam('owner_id'),
@@ -111,6 +132,7 @@ class Task extends Base
             'users_list' => $this->projectPermission->getMemberList($project['id'], true, false, true),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
+            'swimlanes_list' => $swimlanes_list,
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $project['name'].' &gt; '.t('New task')
@@ -250,6 +272,7 @@ class Task extends Base
     public function close()
     {
         $task = $this->getTask();
+        $redirect = $this->request->getStringParam('redirect');
 
         if ($this->request->getStringParam('confirmation') === 'yes') {
 
@@ -261,11 +284,23 @@ class Task extends Base
                 $this->session->flashError(t('Unable to close this task.'));
             }
 
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
+            if ($redirect === 'board') {
+                $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+            }
+
+            $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        }
+
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->render('task/close', array(
+                'task' => $task,
+                'redirect' => $redirect,
+            )));
         }
 
         $this->response->html($this->taskLayout('task/close', array(
             'task' => $task,
+            'redirect' => $redirect,
         )));
     }
 
@@ -418,7 +453,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $task;
         $errors = array();
-        $projects_list = $this->projectPermission->getMemberProjects($this->userSession->getId());
+        $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 
@@ -457,7 +492,7 @@ class Task extends Base
         $task = $this->getTask();
         $values = $task;
         $errors = array();
-        $projects_list = $this->projectPermission->getMemberProjects($this->userSession->getId());
+        $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 
@@ -483,6 +518,44 @@ class Task extends Base
             'errors' => $errors,
             'task' => $task,
             'projects_list' => $projects_list,
+        )));
+    }
+
+    /**
+     * Display the time tracking details
+     *
+     * @access public
+     */
+    public function timesheet()
+    {
+        $task = $this->getTask();
+
+        $subtask_paginator = $this->paginator
+            ->setUrl('task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
+            ->setMax(15)
+            ->setOrder('start')
+            ->setDirection('DESC')
+            ->setQuery($this->subtaskTimeTracking->getTaskQuery($task['id']))
+            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+
+        $this->response->html($this->taskLayout('task/time_tracking', array(
+            'task' => $task,
+            'subtask_paginator' => $subtask_paginator,
+        )));
+    }
+
+    /**
+     * Display the task transitions
+     *
+     * @access public
+     */
+    public function transitions()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->taskLayout('task/transitions', array(
+            'task' => $task,
+            'transitions' => $this->transition->getAllByTask($task['id']),
         )));
     }
 }

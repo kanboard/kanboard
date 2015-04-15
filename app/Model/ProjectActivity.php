@@ -56,11 +56,13 @@ class ProjectActivity extends Base
      * @access public
      * @param  integer     $project_id      Project id
      * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
      * @return array
      */
-    public function getProject($project_id, $limit = 50)
+    public function getProject($project_id, $limit = 50, $start = null, $end = null)
     {
-        return $this->getProjects(array($project_id), $limit);
+        return $this->getProjects(array($project_id), $limit, $start, $end);
     }
 
     /**
@@ -69,25 +71,82 @@ class ProjectActivity extends Base
      * @access public
      * @param  integer[]   $project_ids     Projects id
      * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
      * @return array
      */
-    public function getProjects(array $project_ids, $limit = 50)
+    public function getProjects(array $project_ids, $limit = 50, $start = null, $end = null)
     {
         if (empty($project_ids)) {
             return array();
         }
 
-        $events = $this->db->table(self::TABLE)
-                           ->columns(
-                                self::TABLE.'.*',
-                                User::TABLE.'.username AS author_username',
-                                User::TABLE.'.name AS author_name'
-                           )
-                           ->in('project_id', $project_ids)
-                           ->join(User::TABLE, 'id', 'creator_id')
-                           ->desc('id')
-                           ->limit($limit)
-                           ->findAll();
+        $query = $this
+                    ->db
+                    ->table(self::TABLE)
+                    ->columns(
+                        self::TABLE.'.*',
+                        User::TABLE.'.username AS author_username',
+                        User::TABLE.'.name AS author_name',
+                        User::TABLE.'.email'
+                    )
+                    ->in('project_id', $project_ids)
+                    ->join(User::TABLE, 'id', 'creator_id')
+                    ->desc(self::TABLE.'.id')
+                    ->limit($limit);
+
+        return $this->getEvents($query, $start, $end);
+    }
+
+    /**
+     * Get all events for the given task
+     *
+     * @access public
+     * @param  integer     $task_id         Task id
+     * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
+     * @return array
+     */
+    public function getTask($task_id, $limit = 50, $start = null, $end = null)
+    {
+        $query = $this
+                    ->db
+                    ->table(self::TABLE)
+                    ->columns(
+                        self::TABLE.'.*',
+                        User::TABLE.'.username AS author_username',
+                        User::TABLE.'.name AS author_name',
+                        User::TABLE.'.email'
+                    )
+                    ->eq('task_id', $task_id)
+                    ->join(User::TABLE, 'id', 'creator_id')
+                    ->desc(self::TABLE.'.id')
+                    ->limit($limit);
+
+        return $this->getEvents($query, $start, $end);
+    }
+
+    /**
+     * Common function to return events
+     *
+     * @access public
+     * @param  \PicoDb\Table   $query           PicoDb Query
+     * @param  integer         $start           Timestamp of earliest activity
+     * @param  integer         $end             Timestamp of latest activity
+     * @return array
+     */
+    private function getEvents(\PicoDb\Table $query, $start, $end)
+    {
+        if (! is_null($start)){
+            $query->gte('date_creation', $start);
+        }
+
+        if (! is_null($end)){
+            $query->lte('date_creation', $end);
+        }
+
+        $events = $query->findAll();
 
         foreach ($events as &$event) {
 
@@ -149,7 +208,13 @@ class ProjectActivity extends Base
     {
         switch ($event['event_name']) {
             case Task::EVENT_ASSIGNEE_CHANGE:
-                return t('%s change the assignee of the task #%d to %s', $event['author'], $event['task']['id'], $event['task']['assignee_name'] ?: $event['task']['assignee_username']);
+                $assignee = $event['task']['assignee_name'] ?: $event['task']['assignee_username'];
+
+                if (! empty($assignee)) {
+                    return t('%s change the assignee of the task #%d to %s', $event['author'], $event['task']['id'], $assignee);
+                }
+
+                return t('%s remove the assignee of the task %s', $event['author'], e('#%d', $event['task']['id']));
             case Task::EVENT_UPDATE:
                 return t('%s updated the task #%d', $event['author'], $event['task']['id']);
             case Task::EVENT_CREATE:
@@ -162,9 +227,9 @@ class ProjectActivity extends Base
                 return t('%s moved the task #%d to the column "%s"', $event['author'], $event['task']['id'], $event['task']['column_title']);
             case Task::EVENT_MOVE_POSITION:
                 return t('%s moved the task #%d to the position %d in the column "%s"', $event['author'], $event['task']['id'], $event['task']['position'], $event['task']['column_title']);
-            case SubTask::EVENT_UPDATE:
+            case Subtask::EVENT_UPDATE:
                 return t('%s updated a subtask for the task #%d', $event['author'], $event['task']['id']);
-            case SubTask::EVENT_CREATE:
+            case Subtask::EVENT_CREATE:
                 return t('%s created a subtask for the task #%d', $event['author'], $event['task']['id']);
             case Comment::EVENT_UPDATE:
                 return t('%s updated a comment on the task #%d', $event['author'], $event['task']['id']);

@@ -33,7 +33,7 @@ Features
 - Host anywhere (shared hosting, VPS, Raspberry Pi or localhost)
 - No external dependencies
 - **Super easy setup**, copy and paste files and you are done!
-- Translated in 15 languages (Brazilian, Chinese, Danish, English, Finnish, French, German, Hungarian, Italian, Japanese, Polish, Russian, Spanish, Swedish, Thai)
+- Translated in 18 languages (Brazilian, Chinese, Danish, Dutch, English, Finnish, French, German, Hungarian, Italian, Japanese, Polish, Russian, Serbian, Spanish, Swedish, Thai, Turkish)
 
 Known bugs and feature requests
 -------------------------------
@@ -44,6 +44,15 @@ License
 -------
 
 GNU Affero General Public License version 3: <http://www.gnu.org/licenses/agpl-3.0.txt>
+
+Related projects
+----------------
+
+- [CSV2Kanboard by @ashbike](https://github.com/ashbike/csv2kanboard)
+- [Kanboard for Yunohost by @mbugeia](https://github.com/mbugeia/kanboard_ynh)
+- [Trello import script by @matueranet](https://github.com/matueranet/kanboard-import-trello)
+- [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
+- [Wunderlist To Kanboard script by EpocDotFr](https://github.com/EpocDotFr/WunderlistToKanboard)
 
 Documentation
 -------------
@@ -64,24 +73,41 @@ Documentation
 - [Automatic actions](docs/automatic-actions.markdown)
 - [Project permissions](docs/project-permissions.markdown)
 - [Swimlanes](docs/swimlanes.markdown)
+- [Calendar](docs/calendar.markdown)
+- [Budget](docs/budget.markdown)
+- [Analytics](docs/analytics.markdown)
 
 #### Working with tasks
 
 - [Creating tasks](docs/creating-tasks.markdown)
+- [Adding screenshots](docs/screenshots.markdown)
+- [Task links](docs/task-links.markdown)
+- [Transitions](docs/transitions.markdown)
+- [Time tracking](docs/time-tracking.markdown)
 
 #### Working with users
 
 - [User management](docs/user-management.markdown)
+- [Hourly rate](docs/hourly-rate.markdown)
+- [Timetable](docs/timetable.markdown)
+- [Two factor authentication](docs/2fa.markdown)
 
 #### Settings
 
+- [Keyboard shortcuts](docs/keyboard-shortcuts.markdown)
 - [Application settings](docs/application-configuration.markdown)
 - [Board settings](docs/board-configuration.markdown)
+- [Link settings](docs/link-labels.markdown)
+- [Currency rate](docs/currency-rate.markdown)
+- [Config file](docs/config.markdown)
 
 ### Integrations
 
+- [Bitbucket webhooks](docs/bitbucket-webhooks.markdown)
 - [Github webhooks](docs/github-webhooks.markdown)
 - [Gitlab webhooks](docs/gitlab-webhooks.markdown)
+- [Hipchat](docs/hipchat.markdown)
+- [Slack](docs/slack.markdown)
 
 #### More
 
@@ -130,6 +156,7 @@ Documentation
 - [Translations](docs/translations.markdown)
 - [Coding standards](docs/coding-standards.markdown)
 - [Running tests](docs/tests.markdown)
+- [Build assets](docs/assets.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.
@@ -148,16 +175,24 @@ Contributors:
 
 - Alex Butum
 - [Aleix Pol](https://github.com/aleixpol)
+- [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
+- [Christian González](https://github.com/nerdoc)
 - [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo
 - [Cluxter](https://github.com/cluxter)
 - [Cmer](https://github.com/chncsu)
+- [Colin Williams](https://github.com/crwilliams)
+- [Crash5](https://github.com/crash5)
+- [Creador30](https://github.com/creador30)
 - [Cynthia Pereira](https://github.com/cynthiapereira)
 - [David-Norris](https://github.com/David-Norris)
+- [Draza (bdpsoft)](https://github.com/bdpsoft)
+- [Esteban Monge](https://github.com/EstebanMonge)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
 - [Gavlepeter](https://github.com/gavlepeter)
+- [Hendrik Stocker](https://github.com/hendrik-stoker)
 - [Iterate From 0](https://github.com/freebsd-kanboard)
 - [Jan Dittrich](https://github.com/jdittrich)
 - [Janne Mäntyharju](https://github.com/JanneMantyharju)
@@ -168,10 +203,12 @@ Contributors:
 - [Lars Christian Schou](https://github.com/NegoZiatoR)
 - [Levlaz](https://github.com/levlaz)
 - [Lim Yuen Hoe](https://github.com/jasonmoofang)
+- [Manish Lad](https://github.com/manishlad)
 - [Mathgl67](https://github.com/mathgl67)
 - [Matthieu Keller](https://github.com/maggick)
 - [Mauro Mariño](https://github.com/moromarino)
 - [Maxime](https://github.com/EpocDotFr)
+- [mfoucrier](https://github.com/mfoucrier)
 - [Mgro](https://github.com/mgro)
 - [Michael Lüpkes](https://github.com/mluepkes)
 - [Mihailov Vasilievic Filho](https://github.com/mihailov-vf)
@@ -179,27 +216,33 @@ Contributors:
 - [Nala Ginrut](https://github.com/NalaGinrut)
 - [Nekohayo](https://github.com/nekohayo)
 - [Nicolas Lœuillet](https://github.com/nicosomb)
+- [Norcnorc](https://github.com/norcnorc)
 - [Nramel](https://github.com/nramel)
 - [Null-Kelvin](https://github.com/Null-Kelvin)
 - [Oliver Bertuch](https://github.com/poikilotherm)
 - [Olivier Maridat](https://github.com/oliviermaridat)
-- [Oren Ben-Kiki](https://github.com/orenbenkiki) 
+- [Oren Ben-Kiki](https://github.com/orenbenkiki)
+- Paolo Mainieri
 - [Peller Zoltan](https://github.com/PierP)
 - [Petja Touru](https://github.com/Petja)
+- [Piotr Zęgota](https://github.com/ZegalPL)
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
 - [René Stoltenberg](https://github.com/rstoltenberg)
 - [Rzeka](https://github.com/rzeka)
 - [Sebastien Pacilly](https://github.com/spacilly)
 - [Sebastian Reese](https://github.com/ReeseSebastian)
+- [Semyon Novikov](https://github.com/semka)
 - [Sylvain Veyrié](https://github.com/turb)
 - [Timo](https://github.com/BlueTeck)
+- [Tomáš Votruba](https://github.com/TomasVotruba)
 - [Toomyem](https://github.com/Toomyem)
 - [Tony G. Bolaño](https://github.com/tonybolanyo)
 - [Torsten](https://github.com/misterfu)
 - [Troloo](https://github.com/troloo)
 - [Typz](https://github.com/Typz)
 - [Vedovator](https://github.com/vedovator)
+- [Vladimir Babin](https://github.com/Chiliec)
 - [Ybarc](https://github.com/ybarc)
 - [Yuichi Murata](https://github.com/yuichi1004)
 

@@ -1,0 +1,107 @@
+/* tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+}
+
+th,
+td {
+    border: 1px solid #eee;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+td {
+    vertical-align: top;
+}
+
+th {
+    background: #fbfbfb;
+    text-align: left;
+}
+
+td li {
+    margin-left: 20px;
+}
+
+.table-small {
+    font-size: 0.8em;
+}
+
+th a {
+    text-decoration: none;
+    color: #333;
+}
+
+th a:focus,
+th a:hover {
+    text-decoration: underline;
+}
+
+.table-fixed {
+    table-layout: fixed;
+    white-space: nowrap;
+}
+
+.table-fixed th {
+    overflow: hidden;
+}
+
+.table-fixed td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table-stripped tr:nth-child(odd) td {
+    background: #fefefe;
+}
+
+.column-5 {
+    width: 5%;
+}
+
+.column-8 {
+    width: 7.5%;
+}
+
+.column-10 {
+    width: 10%;
+}
+
+.column-15 {
+    width: 15%;
+}
+
+.column-20 {
+    width: 20%;
+}
+
+.column-30 {
+    width: 30%;
+}
+
+.column-35 {
+    width: 35%;
+}
+
+.column-40 {
+    width: 40%;
+}
+
+.column-50 {
+    width: 50%;
+}
+
+.column-60 {
+    width: 60%;
+}
+
+.column-70 {
+    width: 70%;
+}

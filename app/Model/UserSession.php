@@ -28,12 +28,39 @@ class UserSession extends Base
             unset($user['password']);
         }
 
+        if (isset($user['twofactor_secret'])) {
+            unset($user['twofactor_secret']);
+        }
+
         $user['id'] = (int) $user['id'];
         $user['default_project_id'] = (int) $user['default_project_id'];
         $user['is_admin'] = (bool) $user['is_admin'];
         $user['is_ldap_user'] = (bool) $user['is_ldap_user'];
+        $user['twofactor_activated'] = (bool) $user['twofactor_activated'];
 
         $this->session['user'] = $user;
+    }
+
+    /**
+     * Return true if the user has validated the 2FA key
+     *
+     * @access public
+     * @return bool
+     */
+    public function check2FA()
+    {
+        return isset($this->session['2fa_validated']) && $this->session['2fa_validated'] === true;
+    }
+
+    /**
+     * Return true if the user has 2FA enabled
+     *
+     * @access public
+     * @return bool
+     */
+    public function has2FA()
+    {
+        return isset($this->session['user']['twofactor_activated']) && $this->session['user']['twofactor_activated'] === true;
     }
 
     /**

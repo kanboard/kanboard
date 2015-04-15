@@ -2,7 +2,7 @@
     <h2><?= t('Add a comment') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->u('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => isset($ajax))) ?>" autocomplete="off">
     <?= $this->formCsrf() ?>
     <?= $this->formHidden('task_id', $values) ?>
     <?= $this->formHidden('user_id', $values) ?>
@@ -30,7 +30,11 @@
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?php if (! isset($skip_cancel)): ?>
             <?= t('or') ?>
-            <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php if (isset($ajax)): ?>
+                <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
+            <?php else: ?>
+                <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php endif ?>
         <?php endif ?>
     </div>
 </form>

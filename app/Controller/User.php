@@ -11,70 +11,14 @@ namespace Controller;
 class User extends Base
 {
     /**
-     * Logout and destroy session
-     *
-     * @access public
-     */
-    public function logout()
-    {
-        $this->checkCSRFParam();
-        $this->authentication->backend('rememberMe')->destroy($this->userSession->getId());
-        $this->session->close();
-        $this->response->redirect('?controller=user&action=login');
-    }
-
-    /**
-     * Display the form login
-     *
-     * @access public
-     */
-    public function login(array $values = array(), array $errors = array())
-    {
-        if ($this->userSession->isLogged()) {
-            $this->response->redirect('?controller=app');
-        }
-
-        $this->response->html($this->template->layout('user/login', array(
-            'errors' => $errors,
-            'values' => $values,
-            'no_layout' => true,
-            'redirect_query' => $this->request->getStringParam('redirect_query'),
-            'title' => t('Login')
-        )));
-    }
-
-    /**
-     * Check credentials
-     *
-     * @access public
-     */
-    public function check()
-    {
-        $redirect_query = $this->request->getStringParam('redirect_query');
-        $values = $this->request->getValues();
-        list($valid, $errors) = $this->authentication->validateForm($values);
-
-        if ($valid) {
-            if ($redirect_query !== '') {
-                $this->response->redirect('?'.$redirect_query);
-            }
-            else {
-                $this->response->redirect('?controller=app');
-            }
-        }
-
-        $this->login($values, $errors);
-    }
-
-    /**
      * Common layout for user views
      *
-     * @access private
+     * @access protected
      * @param  string    $template   Template name
      * @param  array     $params     Template parameters
      * @return string
      */
-    private function layout($template, array $params)
+    protected function layout($template, array $params)
     {
         $content = $this->template->render($template, $params);
         $params['user_content_for_layout'] = $content;
@@ -90,14 +34,14 @@ class User extends Base
     /**
      * Common method to get the user
      *
-     * @access private
+     * @access protected
      * @return array
      */
-    private function getUser()
+    protected function getUser()
     {
         $user = $this->user->getById($this->request->getIntegerParam('user_id'));
 
-        if (! $user) {
+        if (empty($user)) {
             $this->notfound();
         }
 
@@ -186,6 +130,43 @@ class User extends Base
             'user' => $user,
             'timezones' => $this->config->getTimezones(true),
             'languages' => $this->config->getLanguages(true),
+        )));
+    }
+
+    /**
+     * Display user calendar
+     *
+     * @access public
+     */
+    public function calendar()
+    {
+        $user = $this->getUser();
+
+        $this->response->html($this->layout('user/calendar', array(
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Display timesheet
+     *
+     * @access public
+     */
+    public function timesheet()
+    {
+        $user = $this->getUser();
+
+        $subtask_paginator = $this->paginator
+            ->setUrl('user', 'timesheet', array('user_id' => $user['id'], 'pagination' => 'subtasks'))
+            ->setMax(20)
+            ->setOrder('start')
+            ->setDirection('DESC')
+            ->setQuery($this->subtaskTimeTracking->getUserQuery($user['id']))
+            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+
+        $this->response->html($this->layout('user/timesheet', array(
+            'subtask_paginator' => $subtask_paginator,
+            'user' => $user,
         )));
     }
 
@@ -318,7 +299,7 @@ class User extends Base
 
         if ($this->request->isPost()) {
 
-            $values = $this->request->getValues();
+            $values = $this->request->getValues() + array('disable_login_form' => 0);
 
             if ($this->userSession->isAdmin()) {
                 $values += array('is_admin' => 0);
@@ -413,7 +394,7 @@ class User extends Base
                     $this->response->redirect('?controller=app');
                 }
                 else {
-                    $this->response->html($this->template->layout('user/login', array(
+                    $this->response->html($this->template->layout('auth/index', array(
                         'errors' => array('login' => t('Google authentication failed')),
                         'values' => array(),
                         'no_layout' => true,
@@ -450,7 +431,7 @@ class User extends Base
      *
      * @access public
      */
-    public function gitHub()
+    public function github()
     {
         $code = $this->request->getStringParam('code');
 
@@ -475,7 +456,7 @@ class User extends Base
                     $this->response->redirect('?controller=app');
                 }
                 else {
-                    $this->response->html($this->template->layout('user/login', array(
+                    $this->response->html($this->template->layout('auth/index', array(
                         'errors' => array('login' => t('GitHub authentication failed')),
                         'values' => array(),
                         'no_layout' => true,
@@ -494,7 +475,7 @@ class User extends Base
      *
      * @access public
      */
-    public function unlinkGitHub()
+    public function unlinkGithub()
     {
         $this->checkCSRFParam();
 

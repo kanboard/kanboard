@@ -4,6 +4,7 @@ namespace Model;
 
 use Integration\GitlabWebhook;
 use Integration\GithubWebhook;
+use Integration\BitbucketWebhook;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
@@ -44,6 +45,9 @@ class Action extends Base
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
             'TaskMoveAnotherProject' => t('Move the task to another project'),
+            'TaskMoveColumnAssigned' => t('Move the task to another column when assigned to a user'),
+            'TaskMoveColumnUnAssigned' => t('Move the task to another column when assignee is cleared'),
+            'TaskAssignColorColumn' => t('Assign a color when the task is moved to a specific column'),
             'TaskAssignColorUser' => t('Assign a color to a specific user'),
             'TaskAssignColorCategory' => t('Assign automatically a color based on a category'),
             'TaskAssignCategoryColor' => t('Assign automatically a category based on a color'),
@@ -85,6 +89,7 @@ class Action extends Base
             GitlabWebhook::EVENT_COMMIT => t('Gitlab commit received'),
             GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
             GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
+            BitbucketWebhook::EVENT_COMMIT => t('Bitbucket commit received'),
         );
 
         asort($values);
@@ -209,7 +214,7 @@ class Action extends Base
      *
      * @access public
      * @param  array   $values  Required parameters to save an action
-     * @return bool             Success or not
+     * @return boolean|integer
      */
     public function create(array $values)
     {
@@ -246,7 +251,7 @@ class Action extends Base
 
         // $this->container['fileCache']->remove('proxy_action_getAll');
 
-        return true;
+        return $action_id;
     }
 
     /**

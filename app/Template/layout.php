@@ -17,6 +17,10 @@
         <?= $this->css($this->u('app', 'colors'), false) ?>
         <?= $this->css('assets/css/app.css') ?>
 
+        <?php if ($this->config->get('application_stylesheet')): ?>
+            <style><?= $this->config->get('application_stylesheet') ?></style>
+        <?php endif ?>
+
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
         <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
         <link rel="apple-touch-icon" sizes="72x72" href="assets/img/touch-icon-ipad.png">
@@ -25,17 +29,27 @@
 
         <title><?= isset($title) ? $this->e($title) : 'Kanboard' ?></title>
     </head>
-    <body data-status-url="<?= $this->u('app', 'status') ?>" data-login-url="<?= $this->u('user', 'login') ?>">
+    <body data-status-url="<?= $this->u('app', 'status') ?>"
+          data-login-url="<?= $this->u('user', 'login') ?>"
+          data-timezone="<?= $this->getTimezone() ?>"
+          data-js-lang="<?= $this->jsLang() ?>">
+
     <?php if (isset($no_layout) && $no_layout): ?>
         <?= $content_for_layout ?>
     <?php else: ?>
         <header>
             <nav>
-                <h1><?= $this->a('<i class="fa fa-home fa-fw"></i>', 'app', 'index', array(), false, 'home-link', t('Dashboard')).' '.$this->summary($this->e($title)) ?></h1>
+                <h1><?= $this->a('K<span>B</span>', 'app', 'index', array(), false, 'logo', t('Dashboard')).' '.$this->summary($this->e($title)) ?>
+                    <?php if (! empty($description)): ?>
+                        <span class="column-tooltip" title='<?= $this->e($this->markdown($description)) ?>'>
+                            <i class="fa fa-info-circle"></i>
+                        </span>
+                    <?php endif ?>
+                </h1>
                 <ul>
                     <?php if (isset($board_selector) && ! empty($board_selector)): ?>
                     <li>
-                        <select id="board-selector" data-placeholder="<?= t('Display another project') ?>" data-board-url="<?= $this->u('board', 'show', array('project_id' => '%d')) ?>">
+                        <select id="board-selector" data-notfound="<?= t('No results match:') ?>" data-placeholder="<?= t('Display another project') ?>" data-board-url="<?= $this->u('board', 'show', array('project_id' => 'PROJECT_ID')) ?>">
                             <option value=""></option>
                             <?php foreach($board_selector as $board_id => $board_name): ?>
                                 <option value="<?= $board_id ?>"><?= $this->e($board_name) ?></option>
@@ -44,7 +58,7 @@
                     </li>
                     <?php endif ?>
                     <li>
-                        <?= $this->a(t('Logout'), 'user', 'logout', array(), true) ?>
+                        <?= $this->a(t('Logout'), 'auth', 'logout') ?>
                         <span class="username hide-tablet">(<?= $this->a($this->e($this->getFullname()), 'user', 'show', array('user_id' => $this->userSession->getId())) ?>)</span>
                     </li>
                 </ul>

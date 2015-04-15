@@ -122,7 +122,7 @@ class GitlabWebhook extends Base
 
         $task = $this->taskFinder->getById($task_id);
 
-        if (! $task) {
+        if (empty($task)) {
             return false;
         }
 
@@ -193,7 +193,7 @@ class GitlabWebhook extends Base
     {
         $task = $this->taskFinder->getByReference($issue['id']);
 
-        if ($task) {
+        if (! empty($task)) {
             $event = array(
                 'project_id' => $this->project_id,
                 'task_id' => $task['id'],

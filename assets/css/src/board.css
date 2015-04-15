@@ -1,0 +1,91 @@
+/* board filters */
+.board-filters {
+    font-size: 0.95em;
+}
+
+#more-filters {
+    display: none; /* Hide this filter initially, to avoid re-layout */
+}
+
+/* public board */
+.public-board {
+    margin-top: 5px;
+}
+
+.public-task {
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+/* board table */
+#board-container {
+    padding-bottom: 200px; /* Space to avoid dropdown menu truncated */
+    overflow-x: scroll;
+}
+
+.board-container-compact {
+    overflow-x: initial;
+}
+
+#board {
+    table-layout: fixed;
+}
+
+#board th {
+    width: 120px; /* Width of swimlane column */
+}
+
+#board th.board-column {
+    width: 240px; /* Width of other columns, in default [horizontal scrolling] view mode */
+}
+
+#board th.board-column.board-column-compact {
+    width: initial; /* Do not force the width of the columns in compact view mode */
+}
+
+#board th a {
+    text-decoration: none;
+    color: #3366CC;
+    font-size: 150%;
+}
+
+#board td {
+    vertical-align: top;
+}
+
+#board td.task-limit-warning {
+    background-color: #DF5353;
+}
+
+.board-add-icon {
+    float: left;
+    padding: 0 5px;
+}
+
+.board-add-icon a {
+    line-height: 70%;
+}
+
+.task-count {
+    color: #999;
+    font-weight: normal;
+}
+
+/* drag and drop */
+.draggable-item {
+    cursor: pointer;
+    user-select: none;
+}
+
+.draggable-placeholder {
+    border: 2px dashed #000;
+    background: #fafafa;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+/* swimlanes */
+#board th a.board-swimlane-toggle {
+    font-size: 0.95em;
+}

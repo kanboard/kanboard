@@ -86,7 +86,7 @@ class GithubWebhook extends Base
 
             $task = $this->taskFinder->getById($task_id);
 
-            if (! $task) {
+            if (empty($task)) {
                 continue;
             }
 
@@ -142,7 +142,7 @@ class GithubWebhook extends Base
         $task = $this->taskFinder->getByReference($payload['issue']['number']);
         $user = $this->user->getByUsername($payload['comment']['user']['login']);
 
-        if ($task && $user) {
+        if (! empty($task) && ! empty($user)) {
 
             $event = array(
                 'project_id' => $this->project_id,
@@ -198,7 +198,7 @@ class GithubWebhook extends Base
     {
         $task = $this->taskFinder->getByReference($issue['number']);
 
-        if ($task) {
+        if (! empty($task)) {
             $event = array(
                 'project_id' => $this->project_id,
                 'task_id' => $task['id'],
@@ -227,7 +227,7 @@ class GithubWebhook extends Base
     {
         $task = $this->taskFinder->getByReference($issue['number']);
 
-        if ($task) {
+        if (! empty($task)) {
             $event = array(
                 'project_id' => $this->project_id,
                 'task_id' => $task['id'],
@@ -257,7 +257,7 @@ class GithubWebhook extends Base
         $user = $this->user->getByUsername($issue['assignee']['login']);
         $task = $this->taskFinder->getByReference($issue['number']);
 
-        if ($user && $task) {
+        if (! empty($user) && ! empty($task)) {
 
             $event = array(
                 'project_id' => $this->project_id,
@@ -288,7 +288,7 @@ class GithubWebhook extends Base
     {
         $task = $this->taskFinder->getByReference($issue['number']);
 
-        if ($task) {
+        if (! empty($task)) {
 
             $event = array(
                 'project_id' => $this->project_id,
@@ -320,7 +320,7 @@ class GithubWebhook extends Base
     {
         $task = $this->taskFinder->getByReference($issue['number']);
 
-        if ($task) {
+        if (! empty($task)) {
 
             $event = array(
                 'project_id' => $this->project_id,
@@ -352,7 +352,7 @@ class GithubWebhook extends Base
     {
         $task = $this->taskFinder->getByReference($issue['number']);
 
-        if ($task) {
+        if (! empty($task)) {
 
             $event = array(
                 'project_id' => $this->project_id,

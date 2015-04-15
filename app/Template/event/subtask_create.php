@@ -1,3 +1,5 @@
+<?= $this->avatar($email, $author) ?>
+
 <p class="activity-title">
     <?= e('%s created a subtask for the task %s',
             $this->e($author),

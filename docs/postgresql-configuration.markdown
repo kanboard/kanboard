@@ -9,6 +9,8 @@ Requirements
 - A Postgresql server already installed and configured
 - The PHP extension `pdo_pgsql` installed (Debian/Ubuntu: `apt-get install php5-pgsql`)
 
+Note: Kanboard is tested with **Postgresql 9.3 and 9.4**
+
 Configuration
 -------------
 
@@ -20,7 +22,7 @@ CREATE DATABASE kanboard;
 
 ### Create a config file
 
-Inside our config file write those lines:
+The file `config.php` should contains those values:
 
 ```php
 <?php
@@ -35,4 +37,4 @@ define('DB_HOSTNAME', 'REPLACE_ME');
 define('DB_NAME', 'kanboard');
 ```
 
-Now, you are ready to use Postgresql.
+Note: You can also rename the template file `config.default.php` to `config.php`.

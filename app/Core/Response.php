@@ -212,24 +212,7 @@ class Response
         $policies['default-src'] = "'self'";
         $values = '';
 
-        foreach ($policies as $policy => $hosts) {
-
-            if (is_array($hosts)) {
-
-                $acl = '';
-
-                foreach ($hosts as &$host) {
-
-                    if ($host === '*' || $host === 'self' || strpos($host, 'http') === 0) {
-                        $acl .= $host.' ';
-                    }
-                }
-            }
-            else {
-
-                $acl = $hosts;
-            }
-
+        foreach ($policies as $policy => $acl) {
             $values .= $policy.' '.trim($acl).'; ';
         }
 

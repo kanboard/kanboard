@@ -2,7 +2,8 @@
 
 namespace Controller;
 
-use Model\SubTask as SubTaskModel;
+use Model\Subtask as SubtaskModel;
+use Model\Task as TaskModel;
 
 /**
  * Application controller
@@ -23,33 +24,43 @@ class App extends Base
     }
 
     /**
+     * User dashboard view for admins
+     *
+     * @access public
+     */
+    public function dashboard()
+    {
+        $this->index($this->request->getIntegerParam('user_id'), 'dashboard');
+    }
+
+    /**
      * Dashboard for the current user
      *
      * @access public
      */
-    public function index()
+    public function index($user_id = 0, $action = 'index')
     {
-        $status = array(SubTaskModel::STATUS_TODO, SubTaskModel::STATUS_INPROGRESS);
-        $user_id = $this->userSession->getId();
-        $projects = $this->projectPermission->getMemberProjects($user_id);
+        $status = array(SubTaskModel::STATUS_TODO, SubtaskModel::STATUS_INPROGRESS);
+        $user_id = $user_id ?: $this->userSession->getId();
+        $projects = $this->projectPermission->getActiveMemberProjects($user_id);
         $project_ids = array_keys($projects);
 
         $task_paginator = $this->paginator
-            ->setUrl('app', 'index', array('pagination' => 'tasks'))
+            ->setUrl('app', $action, array('pagination' => 'tasks', 'user_id' => $user_id))
             ->setMax(10)
             ->setOrder('tasks.id')
             ->setQuery($this->taskFinder->getUserQuery($user_id))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'tasks');
 
         $subtask_paginator = $this->paginator
-            ->setUrl('app', 'index', array('pagination' => 'subtasks'))
+            ->setUrl('app', $action, array('pagination' => 'subtasks', 'user_id' => $user_id))
             ->setMax(10)
             ->setOrder('tasks.id')
-            ->setQuery($this->subTask->getUserQuery($user_id, $status))
+            ->setQuery($this->subtask->getUserQuery($user_id, $status))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
         $project_paginator = $this->paginator
-            ->setUrl('app', 'index', array('pagination' => 'projects'))
+            ->setUrl('app', $action, array('pagination' => 'projects', 'user_id' => $user_id))
             ->setMax(10)
             ->setOrder('name')
             ->setQuery($this->project->getQueryColumnStats($project_ids))
@@ -58,10 +69,11 @@ class App extends Base
         $this->response->html($this->template->layout('app/dashboard', array(
             'title' => t('Dashboard'),
             'board_selector' => $this->projectPermission->getAllowedProjects($user_id),
-            'events' => $this->projectActivity->getProjects($project_ids, 10),
+            'events' => $this->projectActivity->getProjects($project_ids, 5),
             'task_paginator' => $task_paginator,
             'subtask_paginator' => $subtask_paginator,
             'project_paginator' => $project_paginator,
+            'user_id' => $user_id,
         )));
     }
 
@@ -77,11 +89,8 @@ class App extends Base
         if (empty($payload['text'])) {
             $this->response->html('<p>'.t('Nothing to preview...').'</p>');
         }
-        else {
-            $this->response->html(
-                $this->template->markdown($payload['text'])
-            );
-        }
+
+        $this->response->html($this->template->markdown($payload['text']));
     }
 
     /**
@@ -92,5 +101,22 @@ class App extends Base
     public function colors()
     {
         $this->response->css($this->color->getCss());
+    }
+
+    /**
+     * Task autocompletion (Ajax)
+     *
+     * @access public
+     */
+    public function autocomplete()
+    {
+        $this->response->json(
+            $this->taskFilter
+                 ->create()
+                 ->filterByProjects($this->projectPermission->getActiveMemberProjectIds($this->userSession->getId()))
+                 ->excludeTasks(array($this->request->getIntegerParam('exclude_task_id')))
+                 ->filterByTitle($this->request->getStringParam('term'))
+                 ->toAutoCompletion()
+        );
     }
 }

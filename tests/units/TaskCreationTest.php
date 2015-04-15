@@ -93,8 +93,8 @@ class TaskCreationTest extends Base
         $this->assertEquals('', $task['description']);
         $this->assertEquals('', $task['reference']);
 
-        $this->assertEquals(time(), $task['date_creation']);
-        $this->assertEquals(time(), $task['date_modification']);
+        $this->assertEquals(time(), $task['date_creation'], 'Wrong timestamp', 1);
+        $this->assertEquals(time(), $task['date_modification'], 'Wrog timestamp', 1);
         $this->assertEquals(0, $task['date_due']);
         $this->assertEquals(0, $task['date_completed']);
         $this->assertEquals(0, $task['date_started']);

@@ -1,0 +1,103 @@
+/* header */
+header {
+    margin-top: 10px;
+    padding-bottom: 15px;
+    clear: both;
+    border-bottom: 1px solid #dedede;
+}
+
+header h1 {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+header ul {
+    text-align: right;
+    font-size: 0.9em;
+}
+
+header li {
+    display: inline;
+    padding-left: 30px;
+}
+
+header a {
+    color: #777;
+    text-decoration: none;
+}
+
+nav .active a {
+    color: #333;
+    font-weight: bold;
+}
+
+/* username */
+.username a {
+    color: #000;
+}
+
+.username a:hover {
+    color: #DF5353;
+    text-decoration: underline;
+}
+
+/* logo */
+.logo {
+    opacity: 0.3;
+    color: #d40000;
+}
+
+.logo span {
+    color: #333;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logo:focus span,
+.logo:hover span {
+    color: #d40000;
+}
+
+/* page header */
+.page-header {
+    margin-bottom: 25px;
+}
+
+.page-header h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4em;
+    font-weight: bold;
+    border-bottom: 1px dotted #ccc;
+}
+
+.page-header h2 a {
+    color: #ddd;
+}
+
+.page-header h2 a:focus,
+.page-header h2 a:hover {
+    color: #333;
+}
+
+.page-header ul {
+    text-align: left;
+    margin-top: 5px;
+}
+
+.page-header li {
+    display: inline;
+    padding-right: 10px;
+    font-size: 0.9em;
+}
+
+@media only screen and (max-width: 640px) {
+
+    .page-header-mobile li {
+        display: block;
+        margin-bottom: 5px;
+    }
+}

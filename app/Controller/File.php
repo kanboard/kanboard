@@ -2,8 +2,6 @@
 
 namespace Controller;
 
-use Model\File as FileModel;
-
 /**
  * File controller
  *
@@ -12,6 +10,32 @@ use Model\File as FileModel;
  */
 class File extends Base
 {
+    /**
+     * Screenshot
+     *
+     * @access public
+     */
+    public function screenshot()
+    {
+        $task = $this->getTask();
+
+        if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot'))) {
+
+            $this->session->flash(t('Screenshot uploaded successfully.'));
+
+            if ($this->request->getStringParam('redirect') === 'board') {
+                $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+            }
+
+            $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        }
+
+        $this->response->html($this->taskLayout('file/screenshot', array(
+            'task' => $task,
+            'redirect' => 'task',
+        )));
+    }
+
     /**
      * File upload form
      *
@@ -36,13 +60,11 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        if ($this->file->upload($task['project_id'], $task['id'], 'files') === true) {
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#attachments');
-        }
-        else {
+        if (! $this->file->upload($task['project_id'], $task['id'], 'files')) {
             $this->session->flashError(t('Unable to upload the file.'));
-            $this->response->redirect('?controller=file&action=create&task_id='.$task['id'].'&project_id='.$task['project_id']);
         }
+
+        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**
@@ -54,14 +76,14 @@ class File extends Base
     {
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-        $filename = FileModel::BASE_PATH.$file['path'];
+        $filename = FILES_DIR.$file['path'];
 
         if ($file['task_id'] == $task['id'] && file_exists($filename)) {
             $this->response->forceDownload($file['name']);
             $this->response->binary(file_get_contents($filename));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
+        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**
@@ -91,7 +113,7 @@ class File extends Base
     {
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-        $filename = FileModel::BASE_PATH.$file['path'];
+        $filename = FILES_DIR.$file['path'];
 
         if ($file['task_id'] == $task['id'] && file_exists($filename)) {
             $metadata = getimagesize($filename);
@@ -100,6 +122,28 @@ class File extends Base
                 $this->response->contentType($metadata['mime']);
                 readfile($filename);
             }
+        }
+    }
+
+    /**
+     * Return image thumbnails
+     *
+     * @access public
+     */
+    public function thumbnail()
+    {
+        $task = $this->getTask();
+        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+        $filename = FILES_DIR.$file['path'];
+
+        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
+
+            $this->response->contentType('image/jpeg');
+            $this->file->generateThumbnail(
+                $filename,
+                $this->request->getIntegerParam('width'),
+                $this->request->getIntegerParam('height')
+            );
         }
     }
 
@@ -120,7 +164,7 @@ class File extends Base
             $this->session->flashError(t('Unable to remove this file.'));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
+        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**

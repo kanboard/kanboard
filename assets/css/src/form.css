@@ -1,0 +1,224 @@
+/* forms */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="number"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    color: #888;
+    border: 1px solid #ccc;
+    width: 300px;
+    max-width: 95%;
+    font-size: 1.0em;
+    height: 25px;
+    padding-bottom: 0;
+    font-family: sans-serif;
+    margin-top: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+    color: #000;
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+input.form-numeric,
+input[type="number"] {
+    width: 70px;
+}
+
+textarea {
+    border: 1px solid #ccc;
+    width: 400px;
+    max-width: 99%;
+    height: 200px;
+    font-size: 1.0em;
+    font-family: sans-serif;
+}
+
+select {
+    max-width: 95%;
+}
+
+::-webkit-input-placeholder {
+    color: #ddd;
+    padding-top: 2px;
+}
+
+::-ms-input-placeholder {
+    color: #ddd;
+    padding-top: 2px;
+}
+
+::-moz-placeholder {
+    color: #ddd;
+    padding-top: 2px;
+}
+
+.form-actions {
+    margin-top: 20px;
+    clear: both;
+}
+
+input.form-error,
+textarea.form-error {
+    border: 2px solid #b94a48;
+}
+
+input.form-error:focus,
+textarea.form-error:focus {
+    box-shadow: none;
+    border: 2px solid #b94a48;
+}
+
+.form-required {
+    color: red;
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+.form-errors {
+    color: #b94a48;
+    list-style-type: none;
+}
+
+ul.form-errors li {
+    margin-left: 0;
+}
+
+.form-help {
+    font-size: 0.8em;
+    color: brown;
+    margin-bottom: 15px;
+}
+
+.form-inline {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.form-inline label {
+    display: inline;
+}
+
+.form-inline input,
+.form-inline select {
+    margin: 0;
+    margin-right: 15px;
+}
+
+.form-inline .form-required {
+    display: none;
+}
+
+.form-inline-group {
+    display: inline;
+}
+
+input.form-date {
+    width: 150px;
+}
+
+input.form-input-large {
+    width: 400px;
+}
+
+.form-row {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.form-column {
+    float: left;
+    padding-right: 50px;
+}
+
+.form-column:first-child {
+    padding-left: 0;
+}
+
+.form-column ul {
+    margin-top: 15px;
+}
+
+.form-login {
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 8%;
+}
+
+.form-column li,
+.form-login li {
+    margin-left: 25px;
+    line-height: 25px;
+}
+
+.form-checkbox-group label {
+    display: inline;
+}
+
+/* preview tabs */
+label + .form-tabs {
+    margin-top: 10px;
+}
+
+.form-tabs {
+    width: 100%;
+    max-width: 800px;
+}
+
+.form-tabs-nav {
+    margin-bottom: 8px;
+}
+
+.form-tabs-nav li {
+    margin-left: 0;
+    display: inline;
+}
+
+.form-tab {
+    margin-right: 20px;
+}
+
+.form-tab a {
+    color: #ccc;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.form-tab a:focus,
+.form-tab a:hover {
+    color: #000;
+}
+
+.form-tab-selected a {
+    color: #333;
+}
+
+.preview-area {
+    border: 1px dashed #000;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 5px;
+    display: none;
+    overflow: auto;
+}

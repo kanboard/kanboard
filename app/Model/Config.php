@@ -22,6 +22,29 @@ class Config extends Base
     const TABLE = 'settings';
 
     /**
+     * Get available currencies
+     *
+     * @access public
+     * @return array
+     */
+    public function getCurrencies()
+    {
+        return array(
+            'USD' => t('USD - US Dollar'),
+            'EUR' => t('EUR - Euro'),
+            'GBP' => t('GBP - British Pound'),
+            'CHF' => t('CHF - Swiss Francs'),
+            'CAD' => t('CAD - Canadian Dollar'),
+            'AUD' => t('AUD - Australian Dollar'),
+            'NZD' => t('NZD - New Zealand Dollar'),
+            'INR' => t('INR - Indian Rupee'),
+            'JPY' => t('JPY - Japanese Yen'),
+            'RSD' => t('RSD - Serbian dinar'),
+            'SEK' => t('SEK - Swedish Krona'),
+        );
+    }
+
+    /**
      * Get available timezones
      *
      * @access public
@@ -58,11 +81,14 @@ class Config extends Base
             'fr_FR' => 'Français',
             'it_IT' => 'Italiano',
             'hu_HU' => 'Magyar',
+            'nl_NL' => 'Nederlands',
             'pl_PL' => 'Polski',
             'pt_BR' => 'Português (Brasil)',
             'ru_RU' => 'Русский',
+            'sr_Latn_RS' => 'Srpski',
             'fi_FI' => 'Suomi',
             'sv_SE' => 'Svenska',
+            'tr_TR' => 'Türkçe',
             'zh_CN' => '中文(简体)',
             'ja_JP' => '日本語',
             'th_TH' => 'ไทย',
@@ -73,6 +99,53 @@ class Config extends Base
         }
 
         return $languages;
+    }
+
+    /**
+     * Get javascript language code
+     *
+     * @access public
+     * @return string
+     */
+    public function getJsLanguageCode()
+    {
+        $languages = array(
+            'da_DK' => 'da',
+            'de_DE' => 'de',
+            'en_US' => 'en',
+            'es_ES' => 'es',
+            'fr_FR' => 'fr',
+            'it_IT' => 'it',
+            'hu_HU' => 'hu',
+            'pl_PL' => 'pl',
+            'pt_BR' => 'pt-br',
+            'ru_RU' => 'ru',
+            'fi_FI' => 'fi',
+            'sv_SE' => 'sv',
+            'zh_CN' => 'zh-cn',
+            'ja_JP' => 'ja',
+            'th_TH' => 'th',
+            'tr_TR' => 'tr',
+        );
+
+        $lang = $this->getCurrentLanguage();
+
+        return isset($languages[$lang]) ? $languages[$lang] : 'en';
+    }
+
+    /**
+     * Get current language
+     *
+     * @access public
+     * @return string
+     */
+    public function getCurrentLanguage()
+    {
+        if ($this->userSession->isLogged() && ! empty($this->session['user']['language'])) {
+            return $this->session['user']['language'];
+        }
+
+        return $this->get('application_language', 'en_US');
     }
 
     /**
@@ -110,7 +183,7 @@ class Config extends Base
      */
     public function getAll()
     {
-        return $this->db->table(self::TABLE)->listing('option', 'value');
+        return $this->db->hashtable(self::TABLE)->getAll('option', 'value');
     }
 
     /**
@@ -152,12 +225,22 @@ class Config extends Base
      */
     public function setupTranslations()
     {
-        if ($this->userSession->isLogged() && ! empty($this->session['user']['language'])) {
-            Translator::load($this->session['user']['language']);
+        Translator::load($this->getCurrentLanguage());
+    }
+
+    /**
+     * Get current timezone
+     *
+     * @access public
+     * @return string
+     */
+    public function getCurrentTimezone()
+    {
+        if ($this->userSession->isLogged() && ! empty($this->session['user']['timezone'])) {
+            return $this->session['user']['timezone'];
         }
-        else {
-            Translator::load($this->get('application_language', 'en_US'));
-        }
+
+        return $this->get('application_timezone', 'UTC');
     }
 
     /**
@@ -167,12 +250,7 @@ class Config extends Base
      */
     public function setupTimezone()
     {
-        if ($this->userSession->isLogged() && ! empty($this->session['user']['timezone'])) {
-            date_default_timezone_set($this->session['user']['timezone']);
-        }
-        else {
-            date_default_timezone_set($this->get('application_timezone', 'UTC'));
-        }
+        date_default_timezone_set($this->getCurrentTimezone());
     }
 
     /**

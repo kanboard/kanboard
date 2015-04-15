@@ -59,11 +59,14 @@ class TaskFinder extends Base
                         'tasks.date_creation',
                         'tasks.project_id',
                         'tasks.color_id',
+                        'tasks.time_spent',
+                        'tasks.time_estimated',
                         'projects.name AS project_name'
                     )
                     ->join(Project::TABLE, 'id', 'project_id')
-                    ->eq('tasks.owner_id', $user_id)
-                    ->eq('tasks.is_active', Task::STATUS_OPEN);
+                    ->eq(Task::TABLE.'.owner_id', $user_id)
+                    ->eq(Task::TABLE.'.is_active', Task::STATUS_OPEN)
+                    ->eq(Project::TABLE.'.is_active', Project::ACTIVE);
     }
 
     /**
@@ -77,10 +80,11 @@ class TaskFinder extends Base
         return $this->db
             ->table(Task::TABLE)
             ->columns(
-                '(SELECT count(*) FROM comments WHERE task_id=tasks.id) AS nb_comments',
-                '(SELECT count(*) FROM task_has_files WHERE task_id=tasks.id) AS nb_files',
-                '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id) AS nb_subtasks',
-                '(SELECT count(*) FROM task_has_subtasks WHERE task_id=tasks.id AND status=2) AS nb_completed_subtasks',
+                '(SELECT count(*) FROM '.Comment::TABLE.' WHERE task_id=tasks.id) AS nb_comments',
+                '(SELECT count(*) FROM '.File::TABLE.' WHERE task_id=tasks.id) AS nb_files',
+                '(SELECT count(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id) AS nb_subtasks',
+                '(SELECT count(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
+                '(SELECT count(*) FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id) AS nb_links',
                 'tasks.id',
                 'tasks.reference',
                 'tasks.title',
@@ -99,6 +103,7 @@ class TaskFinder extends Base
                 'tasks.is_active',
                 'tasks.score',
                 'tasks.category_id',
+                'tasks.date_moved',
                 'users.username AS assignee_username',
                 'users.name AS assignee_name'
             )
@@ -172,6 +177,18 @@ class TaskFinder extends Base
     }
 
     /**
+     * Get project id for a given task
+     *
+     * @access public
+     * @param  integer   $task_id   Task id
+     * @return integer
+     */
+    public function getProjectId($task_id)
+    {
+        return (int) $this->db->table(Task::TABLE)->eq('id', $task_id)->findOneColumn('project_id') ?: 0;
+    }
+
+    /**
      * Fetch a task by the id
      *
      * @access public
@@ -227,6 +244,7 @@ class TaskFinder extends Base
             tasks.score,
             tasks.category_id,
             tasks.swimlane_id,
+            tasks.date_moved,
             project_has_categories.name AS category_name,
             projects.name AS project_name,
             columns.title AS column_title,

@@ -42,8 +42,8 @@ class TaskStatusTest extends Base
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(Task::STATUS_CLOSED, $task['is_active']);
-        $this->assertEquals(time(), $task['date_completed']);
-        $this->assertEquals(time(), $task['date_modification']);
+        $this->assertEquals(time(), $task['date_completed'], 'Bad completion timestamp', 1);
+        $this->assertEquals(time(), $task['date_modification'], 'Bad modification timestamp', 1);
 
         // We open the task again
 
@@ -54,7 +54,7 @@ class TaskStatusTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals(Task::STATUS_OPEN, $task['is_active']);
         $this->assertEquals(0, $task['date_completed']);
-        $this->assertEquals(time(), $task['date_modification']);
+        $this->assertEquals(time(), $task['date_modification'], 1);
 
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertArrayHasKey('task.close.TaskStatusTest::onTaskClose', $called);

@@ -20,14 +20,18 @@ $server->bind('enableProject', $container['project'], 'enable');
 $server->bind('disableProject', $container['project'], 'disable');
 $server->bind('enableProjectPublicAccess', $container['project'], 'enablePublicAccess');
 $server->bind('disableProjectPublicAccess', $container['project'], 'disablePublicAccess');
+$server->bind('getProjectActivity', $container['projectActivity'], 'getProjects');
 
-$server->register('createProject', function($name) use ($container) {
-    $values = array('name' => $name);
+$server->register('createProject', function($name, $description = null) use ($container) {
+    $values = array(
+        'name' => $name,
+        'description' => $description
+    );
     list($valid,) = $container['project']->validateCreation($values);
     return $valid ? $container['project']->create($values) : false;
 });
 
-$server->register('updateProject', function($id, $name, $is_active = null, $is_public = null, $token = null) use ($container) {
+$server->register('updateProject', function($id, $name, $is_active = null, $is_public = null, $token = null, $description = null) use ($container) {
 
     $values = array(
         'id' => $id,
@@ -35,6 +39,7 @@ $server->register('updateProject', function($id, $name, $is_active = null, $is_p
         'is_active' => $is_active,
         'is_public' => $is_public,
         'token' => $token,
+        'description' => $description
     );
 
     foreach ($values as $key => $value) {
@@ -60,6 +65,91 @@ $server->bind('addColumn', $container['board'], 'addColumn');
 $server->bind('removeColumn', $container['board'], 'removeColumn');
 
 /**
+ * Swimlane procedures
+ */
+$server->bind('getSwimlanes', $container['swimlane'], 'getSwimlanes');
+$server->bind('getAllSwimlanes', $container['swimlane'], 'getAll');
+$server->bind('getSwimlane', $container['swimlane'], 'getByName');
+$server->bind('addSwimlane', $container['swimlane'], 'create');
+$server->bind('updateSwimlane', $container['swimlane'], 'rename');
+$server->bind('removeSwimlane', $container['swimlane'], 'remove');
+$server->bind('disableSwimlane', $container['swimlane'], 'disable');
+$server->bind('enableSwimlane', $container['swimlane'], 'enable');
+$server->bind('moveSwimlaneUp', $container['swimlane'], 'moveUp');
+$server->bind('moveSwimlaneDown', $container['swimlane'], 'moveDown');
+
+/**
+ * Actions procedures
+ */
+$server->bind('getAvailableActions', $container['action'], 'getAvailableActions');
+$server->bind('getAvailableEvents', $container['action'], 'getAvailableEvents');
+$server->bind('getCompatibleEvents', $container['action'], 'getCompatibleEvents');
+$server->bind('removeAction', $container['action'], 'remove');
+
+$server->register('getActions', function($project_id) use ($container) {
+    $actions = $container['action']->getAllByProject($project_id);
+
+    foreach ($actions as $index => $action) {
+        $params = array();
+
+        foreach($action['params'] as $param) {
+            $params[$param['name']] = $param['value'];
+        }
+
+        $actions[$index]['params'] = $params;
+    }
+
+    return $actions;
+});
+
+$server->register('createAction', function($project_id, $event_name, $action_name, $params) use ($container) {
+
+    $values = array(
+        'project_id' => $project_id,
+        'event_name' => $event_name,
+        'action_name' => $action_name,
+        'params' => $params,
+    );
+
+    list($valid,) = $container['action']->validateCreation($values);
+
+    if (! $valid) {
+        return false;
+    }
+
+    // Check the action exists
+    if (! isset($container['action']->getAvailableActions()[$action_name])) {
+        return false;
+    }
+
+    // Check the event
+    $action = $container['action']->load($action_name, $project_id, $event_name);
+
+    if (! in_array($event_name, $action->getCompatibleEvents())) {
+        return false;
+    }
+
+    $required_params = $action->getActionRequiredParameters();
+
+    // Check missing parameters
+    foreach($required_params as $param => $value) {
+        if (! isset($params[$param])) {
+            return false;
+        }
+    }
+
+    // Check extra parameters
+    foreach($params as $param => $value) {
+        if (! isset($required_params[$param])) {
+            return false;
+        }
+    }
+
+    return $container['action']->create($values);
+});
+
+
+/**
  * Project permissions procedures
  */
 $server->bind('getMembers', $container['projectPermission'], 'getMembers');
@@ -71,6 +161,7 @@ $server->bind('allowUser', $container['projectPermission'], 'addMember');
  */
 $server->bind('getTask', $container['taskFinder'], 'getById');
 $server->bind('getAllTasks', $container['taskFinder'], 'getAll');
+$server->bind('getOverdueTasks', $container['taskFinder'], 'getOverdueTasks');
 $server->bind('openTask', $container['taskStatus'], 'open');
 $server->bind('closeTask', $container['taskStatus'], 'close');
 $server->bind('removeTask', $container['task'], 'remove');
@@ -271,9 +362,9 @@ $server->register('updateComment', function($id, $content) use ($container) {
 /**
  * Subtask procedures
  */
-$server->bind('getSubtask', $container['subTask'], 'getById');
-$server->bind('getAllSubtasks', $container['subTask'], 'getAll');
-$server->bind('removeSubtask', $container['subTask'], 'remove');
+$server->bind('getSubtask', $container['subtask'], 'getById');
+$server->bind('getAllSubtasks', $container['subtask'], 'getAll');
+$server->bind('removeSubtask', $container['subtask'], 'remove');
 
 $server->register('createSubtask', function($task_id, $title, $user_id = 0, $time_estimated = 0, $time_spent = 0, $status = 0) use ($container) {
 
@@ -291,13 +382,13 @@ $server->register('createSubtask', function($task_id, $title, $user_id = 0, $tim
             unset($values[$key]);
         }
     }
-    list($valid,) = $container['subTask']->validateCreation($values);
+    list($valid,) = $container['subtask']->validateCreation($values);
 
     if (! $valid) {
         return false;
     }
 
-    return $container['subTask']->create($values);
+    return $container['subtask']->create($values);
 });
 
 $server->register('updateSubtask', function($id, $task_id, $title = null, $user_id = null, $time_estimated = null, $time_spent = null, $status = null) use ($container) {
@@ -318,8 +409,8 @@ $server->register('updateSubtask', function($id, $task_id, $title = null, $user_
         }
     }
 
-    list($valid,) = $container['subTask']->validateApiModification($values);
-    return $valid && $container['subTask']->update($values);
+    list($valid,) = $container['subtask']->validateApiModification($values);
+    return $valid && $container['subtask']->update($values);
 });
 
 /**
@@ -327,6 +418,10 @@ $server->register('updateSubtask', function($id, $task_id, $title = null, $user_
  */
 $server->register('getTimezone', function() use ($container) {
     return $container['config']->get('application_timezone');
+});
+
+$server->register('getVersion', function() use ($container) {
+    return APP_VERSION;
 });
 
 /**

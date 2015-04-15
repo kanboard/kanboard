@@ -3,7 +3,6 @@
 namespace Core;
 
 use Pimple\Container;
-use Parsedown;
 
 /**
  * Template helpers
@@ -13,6 +12,7 @@ use Parsedown;
  *
  * @property \Core\Session             $session
  * @property \Model\Acl                $acl
+ * @property \Model\Config             $config
  * @property \Model\User               $user
  * @property \Model\UserSession        $userSession
  */
@@ -47,6 +47,33 @@ class Helper
     public function __get($name)
     {
         return $this->container[$name];
+    }
+
+    /**
+     * Get the age of an item in quasi human readable format.
+     * It's in this format: <1h , NNh, NNd
+     *
+     * @access public
+     * @param  integer    $timestamp    Unix timestamp of the artifact for which age will be calculated
+     * @param  integer    $now          Compare with this timestamp (Default value is the current unix timestamp)
+     * @return string
+     */
+    public function getTaskAge($timestamp, $now = null)
+    {
+        if ($now === null) {
+            $now = time();
+        }
+
+        $diff = $now - $timestamp;
+
+        if ($diff < 3600) {
+            return t('<1h');
+        }
+        else if ($diff < 86400) {
+            return t('%dh', $diff / 3600);
+        }
+
+        return t('%dd', ($now - $timestamp) / 86400);
     }
 
     /**
@@ -194,9 +221,9 @@ class Helper
      * @param  string  $class    CSS class
      * @return string
      */
-    public function formSelect($name, array $options, array $values = array(), array $errors = array(), $class = '')
+    public function formSelect($name, array $options, array $values = array(), array $errors = array(), array $attributes = array(), $class = '')
     {
-        $html = '<select name="'.$name.'" id="form-'.$name.'" class="'.$class.'">';
+        $html = '<select name="'.$name.'" id="form-'.$name.'" class="'.$class.'" '.implode(' ', $attributes).'>';
 
         foreach ($options as $id => $value) {
 
@@ -245,7 +272,7 @@ class Helper
      */
     public function formRadio($name, $label, $value, $selected = false, $class = '')
     {
-        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->e($value).'" '.($selected ? 'selected="selected"' : '').'>'.$this->e($label).'</label>';
+        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->e($value).'" '.($selected ? 'selected="selected"' : '').'> '.$this->e($label).'</label>';
     }
 
     /**
@@ -474,24 +501,9 @@ class Helper
      */
     public function markdown($text, array $link = array())
     {
-        $html = Parsedown::instance()
-                    ->setMarkupEscaped(true) # escapes markup (HTML)
-                    ->text($text);
-
-        // Replace task #123 by a link to the task
-        if (! empty($link) && preg_match_all('!#(\d+)!i', $html, $matches, PREG_SET_ORDER)) {
-
-            foreach ($matches as $match) {
-
-                $html = str_replace(
-                    $match[0],
-                    $this->a($match[0], $link['controller'], $link['action'], $link['params'] + array('task_id' => $match[1])),
-                    $html
-                );
-            }
-        }
-
-        return $html;
+        $parser = new Markdown($link, $this);
+        $parser->setMarkupEscaped(MARKDOWN_ESCAPE_HTML);
+        return $parser->text($text);
     }
 
     /**
@@ -615,53 +627,164 @@ class Helper
     }
 
     /**
-     * Get calendar translations
+     * Get javascript language code
      *
      * @access public
      * @return string
      */
-    public function getCalendarTranslations()
+    public function jsLang()
     {
-        return json_encode(array(
-            'Today' => t('Today'),
-            'Jan' => t('Jan'),
-            'Feb' => t('Feb'),
-            'Mar' => t('Mar'),
-            'Apr' => t('Apr'),
-            'May' => t('May'),
-            'Jun' => t('Jun'),
-            'Jul' => t('Jul'),
-            'Aug' => t('Aug'),
-            'Sep' => t('Sep'),
-            'Oct' => t('Oct'),
-            'Nov' => t('Nov'),
-            'Dec' => t('Dec'),
-            'January' => t('January'),
-            'February' => t('February'),
-            'March' => t('March'),
-            'April' => t('April'),
-            'May' => t('May'),
-            'June' => t('June'),
-            'July' => t('July'),
-            'August' => t('August'),
-            'September' => t('September'),
-            'October' => t('October'),
-            'November' => t('November'),
-            'December' => t('December'),
-            'Sunday' => t('Sunday'),
-            'Monday' => t('Monday'),
-            'Tuesday' => t('Tuesday'),
-            'Wednesday' => t('Wednesday'),
-            'Thursday' => t('Thursday'),
-            'Friday' => t('Friday'),
-            'Saturday' => t('Saturday'),
-            'Sun' => t('Sun'),
-            'Mon' => t('Mon'),
-            'Tue' => t('Tue'),
-            'Wed' => t('Wed'),
-            'Thu' => t('Thu'),
-            'Fri' => t('Fri'),
-            'Sat' => t('Sat'),
-        ));
+        return $this->config->getJsLanguageCode();
+    }
+
+    /**
+     * Get current timezone
+     *
+     * @access public
+     * @return string
+     */
+    public function getTimezone()
+    {
+        return $this->config->getCurrentTimezone();
+    }
+
+    /**
+     * Get the link to toggle subtask status
+     *
+     * @access public
+     * @param  array   $subtask
+     * @param  string  $redirect
+     * @return string
+     */
+    public function toggleSubtaskStatus(array $subtask, $redirect)
+    {
+        if ($subtask['status'] == 0 && isset($this->session['has_subtask_inprogress']) && $this->session['has_subtask_inprogress'] === true) {
+
+            return $this->a(
+                trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['title']),
+                'subtask',
+                'subtaskRestriction',
+                array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect),
+                false,
+                'popover task-board-popover'
+            );
+        }
+
+        return $this->a(
+            trim($this->render('subtask/icons', array('subtask' => $subtask))) . $this->e($subtask['title']),
+            'subtask',
+            'toggleStatus',
+            array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect)
+        );
+    }
+
+    /**
+     * Get all hours for day
+     *
+     * @access public
+     * @return array
+     */
+    public function getDayHours()
+    {
+        $values = array();
+
+        foreach (range(0, 23) as $hour) {
+            foreach (array(0, 30) as $minute) {
+                $time = sprintf('%02d:%02d', $hour, $minute);
+                $values[$time] = $time;
+            }
+        }
+
+        return $values;
+    }
+
+    /**
+     * Get all days of a week
+     *
+     * @access public
+     * @return array
+     */
+    public function getWeekDays()
+    {
+        $values = array();
+
+        foreach (range(1, 7) as $day) {
+            $values[$day] = $this->getWeekDay($day);
+        }
+
+        return $values;
+    }
+
+    /**
+     * Get the localized day name from the day number
+     *
+     * @access public
+     * @param  integer   $day  Day number
+     * @return string
+     */
+    public function getWeekDay($day)
+    {
+        return dt('%A', strtotime('next Monday +'.($day - 1).' days'));
+    }
+
+    /**
+     * Get file icon
+     *
+     * @access public
+     * @param  string   $filename   Filename
+     * @return string               Font-Awesome-Icon-Name
+     */
+    public function getFileIcon($filename){
+
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+        switch ($extension) {
+            case 'jpeg':
+            case 'jpg':
+            case 'png':
+            case 'gif':
+                return 'fa-file-image-o';
+            case 'xls':
+            case 'xlsx':
+                return 'fa-file-excel-o';
+            case 'doc':
+            case 'docx':
+                return 'fa-file-word-o';
+            case 'ppt':
+            case 'pptx':
+                return 'fa-file-powerpoint-o';
+            case 'zip':
+            case 'rar':
+                return 'fa-file-archive-o';
+            case 'mp3':
+                return 'fa-audio-o';
+            case 'avi':
+                return 'fa-video-o';
+            case 'php':
+            case 'html':
+            case 'css':
+                return 'fa-code-o';
+            case 'pdf':
+                return 'fa-file-pdf-o';
+        }
+
+        return 'fa-file-o';
+    }
+
+    /**
+     * Display gravatar image
+     *
+     * @access public
+     * @param  string  $email
+     * @param  string  $alt
+     * @return string
+     */
+    public function avatar($email, $alt = '')
+    {
+        if (! empty($email) && $this->config->get('integration_gravatar') == 1) {
+            return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=25" alt="'.$this->e($alt).'" title="'.$this->e($alt).'">';
+        }
+
+        return '';
     }
 }

@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('About') ?></h2>
 </div>
-<section class="listing">
+<div class="listing">
     <ul>
         <li>
             <?= t('Official website:') ?>
@@ -12,12 +12,11 @@
             <strong><?= APP_VERSION ?></strong>
         </li>
     </ul>
-</section>
-
+</div>
 <div class="page-header">
     <h2><?= t('Database') ?></h2>
 </div>
-<section class="listing">
+<div class="listing">
     <ul>
         <li>
             <?= t('Database driver:') ?>
@@ -38,4 +37,21 @@
             </li>
         <?php endif ?>
     </ul>
-</section>
+</div>
+<div class="page-header">
+    <h2><?= t('Keyboard shortcuts') ?></h2>
+</div>
+<div class="listing">
+    <h3><?= t('Board view') ?></h3>
+    <ul>
+        <li><?= t('New task') ?> = <strong>n</strong></li>
+        <li><?= t('Expand/collapse tasks') ?> = <strong>s</strong></li>
+        <li><?= t('Compact/wide view') ?> = <strong>c</strong></li>
+    </ul>
+    <h3><?= t('Application') ?></h3>
+    <ul>
+        <li><?= t('Open board switcher') ?> = <strong>b</strong></li>
+        <li><?= t('Close dialog box') ?> = <strong>ESC</strong></li>
+        <li><?= t('Submit a form') ?> = <strong>CTRL+ENTER</strong> <?= t('or') ?> <strong>⌘+ENTER</strong></li>
+    </ul>
+</div>

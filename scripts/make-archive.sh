@@ -39,7 +39,8 @@ rm -rf data/*.sqlite \
        README.markdown \
        docs \
        Dockerfile \
-       composer.*
+       composer.* \
+       app.json
 
 find ./vendor -name doc -type d -exec rm -rf {} +;
 find ./vendor -name notes -type d -exec rm -rf {} +;

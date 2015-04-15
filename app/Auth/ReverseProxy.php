@@ -32,7 +32,7 @@ class ReverseProxy extends Base
             $login = $_SERVER[REVERSE_PROXY_USER_HEADER];
             $user = $this->user->getByUsername($login);
 
-            if (! $user) {
+            if (empty($user)) {
                 $this->createUser($login);
                 $user = $this->user->getByUsername($login);
             }
@@ -66,6 +66,7 @@ class ReverseProxy extends Base
             'username' => $login,
             'is_admin' => REVERSE_PROXY_DEFAULT_ADMIN === $login,
             'is_ldap_user' => 1,
+            'disable_login_form' => 1,
         ));
     }
 }

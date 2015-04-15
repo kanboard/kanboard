@@ -10,6 +10,7 @@ use Pimple\Container;
  * @package  integration
  * @author   Frederic Guillot
  *
+ * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\Task                   $task
  * @property \Model\TaskFinder             $taskFinder
  * @property \Model\User                   $user

@@ -47,13 +47,15 @@
 
     <div class="form-column">
         <?= $this->formHidden('project_id', $values) ?>
-        <?= $this->formHidden('swimlane_id', $values) ?>
 
         <?= $this->formLabel(t('Assignee'), 'owner_id') ?>
         <?= $this->formSelect('owner_id', $users_list, $values, $errors) ?><br/>
 
         <?= $this->formLabel(t('Category'), 'category_id') ?>
         <?= $this->formSelect('category_id', $categories_list, $values, $errors) ?><br/>
+
+        <?= $this->formLabel(t('Swimlane'), 'swimlane_id') ?>
+        <?= $this->formSelect('swimlane_id', $swimlanes_list, $values, $errors) ?><br/>
 
         <?= $this->formLabel(t('Column'), 'column_id') ?>
         <?= $this->formSelect('column_id', $columns_list, $values, $errors) ?><br/>
@@ -74,7 +76,7 @@
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-        <?= t('or') ?> <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $values['project_id'])) ?>
+        <?= t('or') ?> <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $values['project_id']), false, 'close-popover') ?>
     </div>
 </form>
 </section>
