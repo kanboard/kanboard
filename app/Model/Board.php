@@ -158,7 +158,7 @@ class Board extends Base
         $columns = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'position');
         $positions = array_flip($columns);
 
-        if (isset($columns[$column_id]) && $columns[$column_id] < count($columns)) {
+        if (isset($columns[$column_id]) && $columns[$column_id] < max($columns)) {
             // Increase the position, for as long as we don't find another column
             do {
                 $position = ++$columns[$column_id];
@@ -190,7 +190,7 @@ class Board extends Base
         $columns = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'position');
         $positions = array_flip($columns);
 
-        if (isset($columns[$column_id]) && $columns[$column_id] > 1) {
+        if (isset($columns[$column_id]) && $columns[$column_id] > min($columns)) {
             // Decrease the position, for as long as we don't find another column
             do {
                 $position = --$columns[$column_id];
