@@ -21,12 +21,22 @@ Kanboard have been tested on the following devices:
 - Mozilla Firefox
 - Safari
 - Google Chrome
-- Internet Explorer > 10
+- Internet Explorer 11
 
 ### Tablets
 
 - iPad (iOS)
-- Nexus 7 (Android)
+- Nexus 7 (Android/Chrome)
+
+
+I get a blank page after installing or upgrading Kanboard
+---------------------------------------------------------
+
+- Check if you have installed all requirements on your server
+- Check if the files have the correct permissions
+- If you use php-fpm and opcode caching, reload the process to be sure to clear the cache
+- Enable PHP error logging in your php.ini
+- Check the PHP and Apache error logs you should see the exact error
 
 
 Known issues with eAccelerator
@@ -94,5 +104,6 @@ There is a [package to install Kanboard on Yunohost easily](https://github.com/m
 
 
 Are there some tutorials about Kanboard in other languages?
-------------------------------------
- - [German article series about Kanboard](http://demaya.de/wp/2014/07/kanboard-eine-jira-alternative-im-detail-installation/)
+-----------------------------------------------------------
+
+- [German article series about Kanboard](http://demaya.de/wp/2014/07/kanboard-eine-jira-alternative-im-detail-installation/)

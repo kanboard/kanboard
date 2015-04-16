@@ -34,6 +34,8 @@ If SeLinux is enabled, be sure that the Apache user can write to the directory d
 chcon -R -t httpd_sys_content_rw_t /var/www/html/kanboard/data
 ```
 
+Be sure to configure your server to allow Kanboard to send emails and make external HTTP requests.
+
 You can also disable SeLinux if you don't need it.
 
 Centos 6.5

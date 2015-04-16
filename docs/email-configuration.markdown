@@ -93,3 +93,4 @@ If no emails are send and you are sure that everything is configured correctly:
 - Check your spam folder
 - Enable the debug mode and check the debug file `data/debug.log`, you should see the exact error
 - Be sure that your server or your hosting provider allow you to send emails
+- If you use SeLinux, allow PHP to send emails
