@@ -159,8 +159,11 @@ class Board extends Base
         $positions = array_flip($columns);
 
         if (isset($columns[$column_id]) && $columns[$column_id] < count($columns)) {
+            // Increase the position, for as long as we don't find another column
+            do {
+                $position = ++$columns[$column_id];
+            } while(!isset($positions[$position]));
 
-            $position = ++$columns[$column_id];
             $columns[$positions[$position]]--;
 
             $this->db->startTransaction();
@@ -188,8 +191,11 @@ class Board extends Base
         $positions = array_flip($columns);
 
         if (isset($columns[$column_id]) && $columns[$column_id] > 1) {
+            // Decrease the position, for as long as we don't find another column
+            do {
+                $position = --$columns[$column_id];
+            } while(!isset($positions[$position]));
 
-            $position = --$columns[$column_id];
             $columns[$positions[$position]]++;
 
             $this->db->startTransaction();
