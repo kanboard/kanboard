@@ -228,6 +228,46 @@ class Subtask extends Base
     }
 
     /**
+     * Get subtasks with consecutive positions
+     *
+     * If you remove a subtask, the positions are not anymore consecutives
+     *
+     * @access public
+     * @param  integer  $task_id
+     * @return array
+     */
+    public function getNormalizedPositions($task_id)
+    {
+        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
+        $position = 1;
+
+        foreach ($subtasks as $subtask_id => $subtask_position) {
+            $subtasks[$subtask_id] = $position++;
+        }
+
+        return $subtasks;
+    }
+
+    /**
+     * Save the new positions for a set of subtasks
+     *
+     * @access public
+     * @param  array   $subtasks    Hashmap of column_id/column_position
+     * @return boolean
+     */
+    public function savePositions(array $subtasks)
+    {
+        return $this->db->transaction(function ($db) use ($subtasks) {
+
+            foreach ($subtasks as $subtask_id => $position) {
+                if (! $db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position))) {
+                    return false;
+                }
+            }
+        });
+    }
+
+    /**
      * Move a subtask down, increment the position value
      *
      * @access public
@@ -237,7 +277,7 @@ class Subtask extends Base
      */
     public function moveDown($task_id, $subtask_id)
     {
-        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
+        $subtasks = $this->getNormalizedPositions($task_id);
         $positions = array_flip($subtasks);
 
         if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] < count($subtasks)) {
@@ -245,12 +285,7 @@ class Subtask extends Base
             $position = ++$subtasks[$subtask_id];
             $subtasks[$positions[$position]]--;
 
-            $this->db->startTransaction();
-            $this->db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position));
-            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $subtasks[$positions[$position]]));
-            $this->db->closeTransaction();
-
-            return true;
+            return $this->savePositions($subtasks);
         }
 
         return false;
@@ -266,7 +301,7 @@ class Subtask extends Base
      */
     public function moveUp($task_id, $subtask_id)
     {
-        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
+        $subtasks = $this->getNormalizedPositions($task_id);
         $positions = array_flip($subtasks);
 
         if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] > 1) {
@@ -274,12 +309,7 @@ class Subtask extends Base
             $position = --$subtasks[$subtask_id];
             $subtasks[$positions[$position]]++;
 
-            $this->db->startTransaction();
-            $this->db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position));
-            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $subtasks[$positions[$position]]));
-            $this->db->closeTransaction();
-
-            return true;
+            return $this->savePositions($subtasks);
         }
 
         return false;

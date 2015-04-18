@@ -1,4 +1,8 @@
 <?php if (! empty($subtasks)): ?>
+
+<?php $first_position = $subtasks[0]['position']; ?>
+<?php $last_position = $subtasks[count($subtasks) - 1]['position']; ?>
+
 <div id="subtasks" class="task-show-section">
 
     <div class="page-header">
@@ -40,12 +44,12 @@
             <?php if (! isset($not_editable)): ?>
                 <td>
                     <ul>
-                        <?php if ($subtask['position'] > 1): ?>
+                        <?php if ($subtask['position'] != $first_position): ?>
                             <li>
                                 <?= $this->a(t('Move Up'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'up'), true) ?>
                             </li>
                         <?php endif ?>
-                        <?php if ($subtask['position'] != 0 && $subtask['position'] != count($subtasks)): ?>
+                        <?php if ($subtask['position'] != $last_position): ?>
                             <li>
                                 <?= $this->a(t('Move Down'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'down'), true) ?>
                             </li>

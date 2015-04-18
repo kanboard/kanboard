@@ -24,6 +24,7 @@ class SubTaskTest extends Base
         $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1)));
         $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 1)));
 
+        // Check positions
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(1, $subtask['position']);
@@ -36,8 +37,10 @@ class SubTaskTest extends Base
         $this->assertNotEmpty($subtask);
         $this->assertEquals(3, $subtask['position']);
 
+        // Move up
         $this->assertTrue($s->moveUp(1, 2));
 
+        // Check positions
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(2, $subtask['position']);
@@ -50,7 +53,24 @@ class SubTaskTest extends Base
         $this->assertNotEmpty($subtask);
         $this->assertEquals(3, $subtask['position']);
 
+        // We can't move up #2
         $this->assertFalse($s->moveUp(1, 2));
+
+        // Test remove
+        $this->assertTrue($s->remove(1));
+        $this->assertTrue($s->moveUp(1, 3));
+
+        // Check positions
+        $subtask = $s->getById(1);
+        $this->assertEmpty($subtask);
+
+        $subtask = $s->getById(2);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(2, $subtask['position']);
+
+        $subtask = $s->getById(3);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(1, $subtask['position']);
     }
 
     public function testMoveDown()
@@ -66,8 +86,10 @@ class SubTaskTest extends Base
         $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1)));
         $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 1)));
 
+        // Move down #1
         $this->assertTrue($s->moveDown(1, 1));
 
+        // Check positions
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(2, $subtask['position']);
@@ -80,7 +102,24 @@ class SubTaskTest extends Base
         $this->assertNotEmpty($subtask);
         $this->assertEquals(3, $subtask['position']);
 
+        // We can't move down #3
         $this->assertFalse($s->moveDown(1, 3));
+
+        // Test remove
+        $this->assertTrue($s->remove(1));
+        $this->assertTrue($s->moveDown(1, 2));
+
+        // Check positions
+        $subtask = $s->getById(1);
+        $this->assertEmpty($subtask);
+
+        $subtask = $s->getById(2);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(2, $subtask['position']);
+
+        $subtask = $s->getById(3);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(1, $subtask['position']);
     }
 
     public function testDuplicate()
