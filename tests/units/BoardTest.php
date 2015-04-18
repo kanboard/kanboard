@@ -289,4 +289,84 @@ class BoardTest extends Base
         $this->assertEquals(4, $columns[3]['position']);
         $this->assertEquals($columns_id[3], $columns[3]['id']);
     }
+
+    public function testMoveUpAndRemoveColumn()
+    {
+        $p = new Project($this->container);
+        $b = new Board($this->container);
+
+        // We create a project
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
+
+        // We remove the second column
+        $this->assertTrue($b->removeColumn(2));
+
+        $columns = $b->getColumns(1);
+        $this->assertNotEmpty($columns);
+        $this->assertCount(3, $columns);
+
+        $this->assertEquals(1, $columns[0]['position']);
+        $this->assertEquals(3, $columns[1]['position']);
+        $this->assertEquals(4, $columns[2]['position']);
+
+        $this->assertEquals(1, $columns[0]['id']);
+        $this->assertEquals(3, $columns[1]['id']);
+        $this->assertEquals(4, $columns[2]['id']);
+
+        // We move up the second column
+        $this->assertTrue($b->moveUp(1, $columns[1]['id']));
+
+        // Check the new positions
+        $columns = $b->getColumns(1);
+        $this->assertNotEmpty($columns);
+        $this->assertCount(3, $columns);
+
+        $this->assertEquals(1, $columns[0]['position']);
+        $this->assertEquals(2, $columns[1]['position']);
+        $this->assertEquals(3, $columns[2]['position']);
+
+        $this->assertEquals(3, $columns[0]['id']);
+        $this->assertEquals(1, $columns[1]['id']);
+        $this->assertEquals(4, $columns[2]['id']);
+    }
+
+    public function testMoveDownAndRemoveColumn()
+    {
+        $p = new Project($this->container);
+        $b = new Board($this->container);
+
+        // We create a project
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
+
+        // We remove the second column
+        $this->assertTrue($b->removeColumn(2));
+
+        $columns = $b->getColumns(1);
+        $this->assertNotEmpty($columns);
+        $this->assertCount(3, $columns);
+
+        $this->assertEquals(1, $columns[0]['position']);
+        $this->assertEquals(3, $columns[1]['position']);
+        $this->assertEquals(4, $columns[2]['position']);
+
+        $this->assertEquals(1, $columns[0]['id']);
+        $this->assertEquals(3, $columns[1]['id']);
+        $this->assertEquals(4, $columns[2]['id']);
+
+        // We move up the second column
+        $this->assertTrue($b->moveDown(1, $columns[0]['id']));
+
+        // Check the new positions
+        $columns = $b->getColumns(1);
+        $this->assertNotEmpty($columns);
+        $this->assertCount(3, $columns);
+
+        $this->assertEquals(1, $columns[0]['position']);
+        $this->assertEquals(2, $columns[1]['position']);
+        $this->assertEquals(3, $columns[2]['position']);
+
+        $this->assertEquals(3, $columns[0]['id']);
+        $this->assertEquals(1, $columns[1]['id']);
+        $this->assertEquals(4, $columns[2]['id']);
+    }
 }

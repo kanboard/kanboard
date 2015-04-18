@@ -41,7 +41,7 @@ class ProjectActivityTest extends Base
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));
         $this->assertEquals(2, count($events));
-        $this->assertEquals(time(), $events[0]['date_creation']);
+        $this->assertEquals(time(), $events[0]['date_creation'], '', 1);
         $this->assertEquals(Task::EVENT_UPDATE, $events[0]['event_name']);
         $this->assertEquals(Task::EVENT_CLOSE, $events[1]['event_name']);
     }
