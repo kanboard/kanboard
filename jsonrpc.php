@@ -118,7 +118,9 @@ $server->register('createAction', function($project_id, $event_name, $action_nam
     }
 
     // Check the action exists
-    if (! isset($container['action']->getAvailableActions()[$action_name])) {
+    $actions = $container['action']->getAvailableActions();
+
+    if (! isset($actions[$action_name])) {
         return false;
     }
 
