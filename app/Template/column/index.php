@@ -24,12 +24,12 @@
                 <li>
                     <?= $this->a(t('Edit'), 'column', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
                 </li>
-                <?php if ($column['position'] != 1): ?>
+                <?php if ($column !== reset($columns)): ?>
                 <li>
                     <?= $this->a(t('Move Up'), 'column', 'move', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'up'), true) ?>
                 </li>
                 <?php endif ?>
-                <?php if ($column['position'] != count($columns)): ?>
+                <?php if ($column['position'] !== end($columns)): ?>
                 <li>
                     <?= $this->a(t('Move Down'), 'column', 'move', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'down'), true) ?>
                 </li>
