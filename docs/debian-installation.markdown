@@ -8,7 +8,7 @@ Install Apache and PHP:
 
 ```bash
 apt-get update
-apt-get install -y php5 php5-sqlite unzip
+apt-get install -y php5 php5-sqlite php5-gd unzip
 ```
 
 Install Kanboard:
@@ -28,7 +28,7 @@ Install Apache and PHP:
 
 ```bash
 apt-get update
-apt-get install -y libapache2-mod-php5 php5-sqlite unzip
+apt-get install -y libapache2-mod-php5 php5-sqlite php5-gd unzip
 ```
 
 Install Kanboard:
