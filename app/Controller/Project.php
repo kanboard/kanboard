@@ -95,10 +95,21 @@ class Project extends Base
     {
         $project = $this->getProject();
 
+        if ($this->request->isPost()) {
+            $params = $this->request->getValues();
+            $params += array('hipchat' => 0, 'slack' => 0);
+            $this->projectIntegration->saveParameters($project['id'], $params);
+        }
+
+        $values = $this->projectIntegration->getParameters($project['id']);
+        $values += array('hipchat_api_url' => 'https://api.hipchat.com');
+
         $this->response->html($this->projectLayout('project/integrations', array(
             'project' => $project,
             'title' => t('Integrations'),
             'webhook_token' => $this->config->get('webhook_token'),
+            'values' => $values,
+            'errors' => array(),
         )));
     }
 

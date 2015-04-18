@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Pimple\Container;
+
 /**
  * HTTP client
  *
@@ -32,15 +34,33 @@ class HttpClient
     const HTTP_USER_AGENT = 'Kanboard Webhook';
 
     /**
+     * Container instance
+     *
+     * @access protected
+     * @var \Pimple\Container
+     */
+    protected $container;
+
+    /**
+     * Constructor
+     *
+     * @access public
+     * @param  \Pimple\Container   $container
+     */
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
+
+    /**
      * Send a POST HTTP request
      *
-     * @static
      * @access public
      * @param  string  $url
      * @param  array   $data
      * @return string
      */
-    public static function post($url, array $data)
+    public function post($url, array $data)
     {
         if (empty($url)) {
             return '';
@@ -63,6 +83,14 @@ class HttpClient
             )
         ));
 
-        return @file_get_contents(trim($url), false, $context);
+        $response = @file_get_contents(trim($url), false, $context);
+
+        if (DEBUG) {
+            $this->container['logger']->debug($url);
+            $this->container['logger']->debug(var_export($data, true));
+            $this->container['logger']->debug($response);
+        }
+
+        return $response;
     }
 }

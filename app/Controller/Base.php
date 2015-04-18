@@ -43,6 +43,7 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectDailySummary    $projectDailySummary
+ * @property \Model\ProjectIntegration     $projectIntegration
  * @property \Model\Subtask                $subtask
  * @property \Model\SubtaskForecast        $subtaskForecast
  * @property \Model\Swimlane               $swimlane

@@ -6,7 +6,25 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 64;
+const VERSION = 65;
+
+function version_65($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_integrations (
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `project_id` INT NOT NULL UNIQUE,
+            `hipchat` TINYINT(1) DEFAULT 0,
+            `hipchat_api_url` VARCHAR(255) DEFAULT 'https://api.hipchat.com',
+            `hipchat_room_id` VARCHAR(255),
+            `hipchat_room_token` VARCHAR(255),
+            `slack` TINYINT(1) DEFAULT 0,
+            `slack_webhook_url` VARCHAR(255),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            PRIMARY KEY(id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+}
 
 function version_64($pdo)
 {

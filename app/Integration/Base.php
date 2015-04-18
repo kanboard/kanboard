@@ -11,6 +11,7 @@ use Pimple\Container;
  * @author   Frederic Guillot
  *
  * @property \Model\ProjectActivity        $projectActivity
+ * @property \Model\ProjectIntegration     $projectIntegration
  * @property \Model\Task                   $task
  * @property \Model\TaskFinder             $taskFinder
  * @property \Model\User                   $user
