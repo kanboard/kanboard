@@ -197,7 +197,7 @@ class Board extends Base
     {
         $task = $this->getTask();
         $this->response->html($this->template->render('board/tasklinks', array(
-            'links' => $this->taskLink->getLinks($task['id']),
+            'links' => $this->taskLink->getAll($task['id']),
             'task' => $task,
         )));
     }
