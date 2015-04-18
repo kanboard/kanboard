@@ -30,7 +30,7 @@
         <title><?= isset($title) ? $this->e($title) : 'Kanboard' ?></title>
     </head>
     <body data-status-url="<?= $this->u('app', 'status') ?>"
-          data-login-url="<?= $this->u('user', 'login') ?>"
+          data-login-url="<?= $this->u('auth', 'login') ?>"
           data-timezone="<?= $this->getTimezone() ?>"
           data-js-lang="<?= $this->jsLang() ?>">
 
