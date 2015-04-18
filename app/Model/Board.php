@@ -178,7 +178,7 @@ class Board extends Base
         return $this->db->transaction(function ($db) use ($columns) {
 
             foreach ($columns as $column_id => $position) {
-                if (! $db->table(self::TABLE)->eq('id', $column_id)->update(array('position' => $position))) {
+                if (! $db->table(Board::TABLE)->eq('id', $column_id)->update(array('position' => $position))) {
                     return false;
                 }
             }

@@ -260,7 +260,7 @@ class Subtask extends Base
         return $this->db->transaction(function ($db) use ($subtasks) {
 
             foreach ($subtasks as $subtask_id => $position) {
-                if (! $db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position))) {
+                if (! $db->table(Subtask::TABLE)->eq('id', $subtask_id)->update(array('position' => $position))) {
                     return false;
                 }
             }
