@@ -6,7 +6,13 @@
 
     <?= $this->formCsrf() ?>
 
-    <h3><?= t('Gravatar') ?></h3>
+    <h3><img src="assets/img/postmark-icon.png"/>&nbsp;<?= t('Postmark (incoming emails)') ?></h3>
+    <div class="listing">
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->getCurrentBaseUrl().$this->u('webhook', 'postmark', array('token' => $values['webhook_token'])) ?>"/><br/>
+    <p class="form-help"><a href="http://kanboard.net/documentation/postmark" target="_blank"><?= t('Help on Postmark integration') ?></a></p>
+    </div>
+
+    <h3><img src="assets/img/gravatar-icon.png"/>&nbsp;<?= t('Gravatar') ?></h3>
     <div class="listing">
         <?= $this->formCheckbox('integration_gravatar', t('Enable Gravatar images'), 1, $values['integration_gravatar'] == 1) ?>
     </div>

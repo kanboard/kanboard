@@ -15,6 +15,7 @@
                 <tr>
                     <th class="column-8"><?= $paginator->order(t('Id'), 'id') ?></th>
                     <th class="column-8"><?= $paginator->order(t('Status'), 'is_active') ?></th>
+                    <th class="column-8"><?= $paginator->order(t('Identifier'), 'identifier') ?></th>
                     <th class="column-20"><?= $paginator->order(t('Project'), 'name') ?></th>
                     <th><?= t('Columns') ?></th>
                 </tr>
@@ -29,6 +30,9 @@
                         <?php else: ?>
                             <?= t('Inactive') ?>
                         <?php endif ?>
+                    </td>
+                    <td>
+                        <?= $this->e($project['identifier']) ?>
                     </td>
                     <td>
                         <?= $this->a('<i class="fa fa-table"></i>', 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Board')) ?>&nbsp;

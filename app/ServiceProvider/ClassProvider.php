@@ -78,6 +78,7 @@ class ClassProvider implements ServiceProviderInterface
             'BitbucketWebhook',
             'Hipchat',
             'SlackWebhook',
+            'PostmarkWebhook',
         )
     );
 

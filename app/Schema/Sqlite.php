@@ -6,7 +6,12 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 64;
+const VERSION = 65;
+
+function version_65($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN identifier TEXT DEFAULT ''");
+}
 
 function version_64($pdo)
 {

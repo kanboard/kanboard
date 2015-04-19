@@ -100,4 +100,20 @@ class Webhook extends Base
 
         echo $result ? 'PARSED' : 'IGNORED';
     }
+
+    /**
+     * Handle Postmark webhooks
+     *
+     * @access public
+     */
+    public function postmark()
+    {
+        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
+            $this->response->text('Not Authorized', 401);
+        }
+
+        $result = $this->postmarkWebhook->parsePayload($this->request->getJson() ?: array());
+
+        echo $result ? 'PARSED' : 'IGNORED';
+    }
 }

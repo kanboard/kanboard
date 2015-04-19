@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "01ebe465ed3a59d8350670ebd4ef8793",
+    "hash": "1799891b06d5a8a516a48fefd429a3ed",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -355,6 +355,52 @@
                 "security"
             ],
             "time": "2014-09-05 15:19:58"
+        },
+        {
+            "name": "nickcernis/html-to-markdown",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nickcernis/html-to-markdown.git",
+                "reference": "7263d2ce65011b050fa7ecda0cbe09b23e84271d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nickcernis/html-to-markdown/zipball/7263d2ce65011b050fa7ecda0cbe09b23e84271d",
+                "reference": "7263d2ce65011b050fa7ecda0cbe09b23e84271d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "php": ">=5.3.3",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "HTML_To_Markdown.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Cernis",
+                    "email": "nick@cern.is",
+                    "homepage": "http://modernnerd.net"
+                }
+            ],
+            "description": "An HTML-to-markdown conversion helper for PHP",
+            "homepage": "https://github.com/nickcernis/html-to-markdown",
+            "keywords": [
+                "html",
+                "markdown"
+            ],
+            "time": "2015-02-22 12:59:02"
         },
         {
             "name": "pimple/pimple",
