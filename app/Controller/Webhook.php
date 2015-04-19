@@ -112,8 +112,20 @@ class Webhook extends Base
             $this->response->text('Not Authorized', 401);
         }
 
-        $result = $this->postmarkWebhook->parsePayload($this->request->getJson() ?: array());
+        echo $this->postmarkWebhook->parsePayload($this->request->getJson() ?: array()) ? 'PARSED' : 'IGNORED';
+    }
 
-        echo $result ? 'PARSED' : 'IGNORED';
+    /**
+     * Handle Mailgun webhooks
+     *
+     * @access public
+     */
+    public function mailgun()
+    {
+        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
+            $this->response->text('Not Authorized', 401);
+        }
+
+        echo $this->mailgunWebhook->parsePayload($_POST) ? 'PARSED' : 'IGNORED';
     }
 }

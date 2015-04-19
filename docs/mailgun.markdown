@@ -1,17 +1,17 @@
-Postmark
-========
+Mailgun
+=======
 
-You can use the service [Postmark](https://postmarkapp.com/) to create tasks directly by email.
+You can use the service [Mailgun](http://www.mailgun.com/) to create tasks directly by email.
 
-This integration works with the inbound email service of Postmark.
+This integration works with the inbound email service of Mailgun (routes).
 Kanboard use a webhook to handle incoming emails.
 
 Incoming emails workflow
 ------------------------
 
 1. You send an email to a specific address, by example **something+myproject@inbound.mydomain.tld**
-2. Your email is forwarded to Postmark SMTP servers
-3. Postmark call the Kanboard webhook with the email in JSON format
+2. Your email is forwarded to Mailgun SMTP servers
+3. Mailgun call the Kanboard webhook with the email in JSON format
 4. Kanboard parse the received email and create the task to the right project
 
 Note: New tasks are automatically created in the first column.
@@ -31,15 +31,21 @@ Security and requirements
 -------------------------
 
 - The Kanboard webhook is protected by a random token
-- The sender email address (From header) must match a Kanboard user
+- The sender email address must match a Kanboard user
 - The Kanboard project must have a unique identifier, by example **MYPROJECT**
 - The Kanboard user must be member of the project
 
-Postmark configuration
-----------------------
+Mailgun configuration
+---------------------
 
-- Follow the [official documentation about inbound email processing](http://developer.postmarkapp.com/developer-process-configure.html)
-- The Kanboard webhook url is displayed in **Settings > Integrations > Postmark**
+Create a new route in the web interface or via the API ([official documentation](https://documentation.mailgun.com/user_manual.html#routes)), here an example:
+
+```
+match_recipient("^kanboard\+(.*)@mydomain.tld$")
+forward("https://mykanboard/?controller=webhook&action=mailgun&token=mytoken")
+```
+
+The Kanboard webhook url is displayed in **Settings > Integrations > Mailgun**
 
 Kanboard configuration
 ----------------------
@@ -51,5 +57,5 @@ Kanboard configuration
 Troubleshootings
 ----------------
 
-- Test the webhook url from the Postmark console, you should have a status code `200 OK`
+- Test if your route match in the console
 - Double-check requirements mentioned above

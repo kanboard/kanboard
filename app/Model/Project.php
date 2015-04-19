@@ -68,6 +68,10 @@ class Project extends Base
      */
     public function getByIdentifier($identifier)
     {
+        if (empty($identifier)) {
+            return false;
+        }
+
         return $this->db->table(self::TABLE)->eq('identifier', strtoupper($identifier))->findOne();
     }
 

@@ -107,6 +107,7 @@ Documentation
 - [Github webhooks](docs/github-webhooks.markdown)
 - [Gitlab webhooks](docs/gitlab-webhooks.markdown)
 - [Hipchat](docs/hipchat.markdown)
+- [Mailgun](docs/mailgun.markdown)
 - [Slack](docs/slack.markdown)
 - [Postmark](docs/postmark.markdown)
 

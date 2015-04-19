@@ -6,6 +6,12 @@
 
     <?= $this->formCsrf() ?>
 
+    <h3><img src="assets/img/mailgun-icon.png"/>&nbsp;<?= t('Mailgun (incoming emails)') ?></h3>
+    <div class="listing">
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->getCurrentBaseUrl().$this->u('webhook', 'mailgun', array('token' => $values['webhook_token'])) ?>"/><br/>
+    <p class="form-help"><a href="http://kanboard.net/documentation/mailgun" target="_blank"><?= t('Help on Mailgun integration') ?></a></p>
+    </div>
+
     <h3><img src="assets/img/postmark-icon.png"/>&nbsp;<?= t('Postmark (incoming emails)') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->getCurrentBaseUrl().$this->u('webhook', 'postmark', array('token' => $values['webhook_token'])) ?>"/><br/>

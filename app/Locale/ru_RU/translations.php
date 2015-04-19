@@ -862,4 +862,6 @@ return array(
     // 'Identifier' => '',
     // 'Postmark (incoming emails)' => '',
     // 'Help on Postmark integration' => '',
+    // 'Mailgun (incoming emails)' => '',
+    // 'Help on Mailgun integration' => '',
 );
