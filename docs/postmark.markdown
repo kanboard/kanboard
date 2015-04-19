@@ -21,10 +21,6 @@ Email format
 
 - The local part of the email address must use the plus separator, by example **kanboard+project123**
 - The string defined after the plus sign must match a project identifier, by example **project123** is the identifier of the project **Project 123**
-
-Email format
-------------
-
 - The email subject becomes the task subject
 - The email body becomes the task description (Markdown format)
 
