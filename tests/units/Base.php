@@ -6,6 +6,8 @@ require __DIR__.'/../../app/constants.php';
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
+use SimpleLogger\Logger;
+use SimpleLogger\File;
 
 date_default_timezone_set('UTC');
 
@@ -38,6 +40,9 @@ abstract class Base extends PHPUnit_Framework_TestCase
         );
 
         $this->container['db']->log_queries = true;
+
+        $this->container['logger'] = new Logger;
+        $this->container['logger']->setLogger(new File('/dev/null'));
     }
 
     public function tearDown()

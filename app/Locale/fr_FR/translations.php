@@ -860,4 +860,8 @@ return array(
     'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => 'Prenez une capture d\'écran et appuyez sur CTRL+V ou ⌘+V pour coller ici.',
     'Screenshot uploaded successfully.' => 'Capture d\'écran téléchargée avec succès.',
     'SEK - Swedish Krona' => 'SEK - Couronne suédoise',
+    'The project identifier is an optional alphanumeric code used to identify your project.' => 'L\'identificateur du projet est un code alpha-numérique optionnel pour identifier votre projet.',
+    'Identifier' => 'Identificateur',
+    'Postmark (incoming emails)' => 'Postmark (emails entrants)',
+    'Help on Postmark integration' => 'Aide sur l\'intégration avec Postmark',
 );

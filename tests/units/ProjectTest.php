@@ -203,4 +203,57 @@ class ProjectTest extends Base
 
         $this->assertFalse($p->disablePublicAccess(123));
     }
+
+    public function testIdentifier()
+    {
+        $p = new Project($this->container);
+
+        // Creation
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1', 'identifier' => 'test1')));
+        $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
+
+        $project = $p->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('TEST1', $project['identifier']);
+
+        $project = $p->getById(2);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('', $project['identifier']);
+
+        // Update
+        $this->assertTrue($p->update(array('id' => '2', 'identifier' => 'test2')));
+
+        $project = $p->getById(2);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('TEST2', $project['identifier']);
+
+        $project = $p->getByIdentifier('test1');
+        $this->assertNotEmpty($project);
+        $this->assertEquals('TEST1', $project['identifier']);
+
+        // Validation rules
+        $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'TEST1'));
+        $this->assertFalse($r[0]);
+
+        $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'test1'));
+        $this->assertFalse($r[0]);
+
+        $r = $p->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'TEST1'));
+        $this->assertTrue($r[0]);
+
+        $r = $p->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'test3'));
+        $this->assertTrue($r[0]);
+
+        $r = $p->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => ''));
+        $this->assertTrue($r[0]);
+
+        $r = $p->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'TEST2'));
+        $this->assertFalse($r[0]);
+
+        $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'a-b-c'));
+        $this->assertFalse($r[0]);
+
+        $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'test 123'));
+        $this->assertFalse($r[0]);
+    }
 }

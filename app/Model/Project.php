@@ -60,6 +60,18 @@ class Project extends Base
     }
 
     /**
+     * Get a project by the identifier (code)
+     *
+     * @access public
+     * @param  string  $identifier
+     * @return array
+     */
+    public function getByIdentifier($identifier)
+    {
+        return $this->db->table(self::TABLE)->eq('identifier', strtoupper($identifier))->findOne();
+    }
+
+    /**
      * Fetch project data by using the token
      *
      * @access public
@@ -276,6 +288,10 @@ class Project extends Base
         $values['last_modified'] = time();
         $values['is_private'] = empty($values['is_private']) ? 0 : 1;
 
+        if (! empty($values['identifier'])) {
+            $values['identifier'] = strtoupper($values['identifier']);
+        }
+
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
             return false;
@@ -338,6 +354,10 @@ class Project extends Base
      */
     public function update(array $values)
     {
+        if (! empty($values['identifier'])) {
+            $values['identifier'] = strtoupper($values['identifier']);
+        }
+
         return $this->exists($values['id']) &&
                $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
     }
@@ -443,7 +463,10 @@ class Project extends Base
             new Validators\Integer('is_active', t('This value must be an integer')),
             new Validators\Required('name', t('The project name is required')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
+            new Validators\MaxLength('identifier', t('The maximum length is %d characters', 50), 50),
+            new Validators\AlphaNumeric('identifier', t('This value must be alphanumeric')) ,
             new Validators\Unique('name', t('This project must be unique'), $this->db->getConnection(), self::TABLE),
+            new Validators\Unique('identifier', t('The identifier must be unique'), $this->db->getConnection(), self::TABLE),
         );
     }
 
@@ -456,6 +479,10 @@ class Project extends Base
      */
     public function validateCreation(array $values)
     {
+        if (! empty($values['identifier'])) {
+            $values['identifier'] = strtoupper($values['identifier']);
+        }
+
         $v = new Validator($values, $this->commonValidationRules());
 
         return array(
@@ -473,6 +500,10 @@ class Project extends Base
      */
     public function validateModification(array $values)
     {
+        if (! empty($values['identifier'])) {
+            $values['identifier'] = strtoupper($values['identifier']);
+        }
+
         $rules = array(
             new Validators\Required('id', t('This value is required')),
         );

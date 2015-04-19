@@ -858,4 +858,8 @@ return array(
     // 'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => '',
     // 'Screenshot uploaded successfully.' => '',
     'SEK - Swedish Krona' => 'SEK - Svensk Krona',
+    // 'The project identifier is an optional alphanumeric code used to identify your project.' => '',
+    // 'Identifier' => '',
+    // 'Postmark (incoming emails)' => '',
+    // 'Help on Postmark integration' => '',
 );

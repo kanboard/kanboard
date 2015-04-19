@@ -13,7 +13,8 @@
         "symfony/console" : "@stable",
         "symfony/event-dispatcher" : "~2.6",
         "fguillot/simpleLogger" : "0.0.1",
-        "christian-riesen/otp": "1.4"
+        "christian-riesen/otp": "1.4",
+        "nickcernis/html-to-markdown": "2.2.1"
     },
     "autoload" : {
         "psr-0" : {

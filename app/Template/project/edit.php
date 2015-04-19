@@ -9,6 +9,10 @@
     <?= $this->formLabel(t('Name'), 'name') ?>
     <?= $this->formText('name', $values, $errors, array('required', 'maxlength="50"')) ?>
 
+    <?= $this->formLabel(t('Identifier'), 'identifier') ?>
+    <?= $this->formText('identifier', $values, $errors, array('maxlength="50"')) ?>
+    <p class="form-help"><?= t('The project identifier is an optional alphanumeric code used to identify your project.') ?></p>
+
     <?= $this->formLabel(t('Description'), 'description') ?>
 
     <div class="form-tabs">
