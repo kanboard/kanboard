@@ -150,6 +150,10 @@ class User extends Base
      */
     public function getByEmail($email)
     {
+        if (empty($email)) {
+            return false;
+        }
+
         return $this->db->table(self::TABLE)->eq('email', $email)->findOne();
     }
 

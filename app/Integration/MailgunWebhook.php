@@ -3,6 +3,7 @@
 namespace Integration;
 
 use HTML_To_Markdown;
+use Core\Tool;
 
 /**
  * Mailgun Webhook
@@ -21,7 +22,7 @@ class MailgunWebhook extends Base
      */
     public function parsePayload(array $payload)
     {
-        if (empty($payload['sender']) || empty($payload['subject']) || empty($payload['recipient']) || empty($payload['stripped-text'])) {
+        if (empty($payload['sender']) || empty($payload['subject']) || empty($payload['recipient'])) {
             return false;
         }
 
@@ -34,7 +35,7 @@ class MailgunWebhook extends Base
         }
 
         // The project must have a short name
-        $project = $this->project->getByIdentifier($this->getMailboxHash($payload['recipient']));
+        $project = $this->project->getByIdentifier(Tool::getMailboxHash($payload['recipient']));
 
         if (empty($project)) {
             $this->container['logger']->debug('MailgunWebhook: ignored => project not found');
@@ -48,12 +49,15 @@ class MailgunWebhook extends Base
         }
 
         // Get the Markdown contents
-        if (empty($payload['stripped-html'])) {
+        if (! empty($payload['stripped-html'])) {
+            $markdown = new HTML_To_Markdown($payload['stripped-html'], array('strip_tags' => true));
+            $description = $markdown->output();
+        }
+        else if (! empty($payload['stripped-text'])) {
             $description = $payload['stripped-text'];
         }
         else {
-            $markdown = new HTML_To_Markdown($payload['stripped-html'], array('strip_tags' => true));
-            $description = $markdown->output();
+            $description = '';
         }
 
         // Finally, we create the task
@@ -63,20 +67,5 @@ class MailgunWebhook extends Base
             'description' => $description,
             'creator_id' => $user['id'],
         ));
-    }
-
-    /**
-     * Get the project identifier
-     *
-     * @access public
-     * @param  string  $email
-     * @return string
-     */
-    public function getMailboxHash($email)
-    {
-        list($local_part,) = explode('@', $email);
-        list(,$identifier) = explode('+', $local_part);
-
-        return $identifier;
     }
 }

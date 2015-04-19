@@ -864,4 +864,6 @@ return array(
     // 'Help on Postmark integration' => '',
     // 'Mailgun (incoming emails)' => '',
     // 'Help on Mailgun integration' => '',
+    // 'Sendgrid (incoming emails)' => '',
+    // 'Help on Sendgrid integration' => '',
 );

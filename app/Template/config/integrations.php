@@ -12,6 +12,12 @@
     <p class="form-help"><a href="http://kanboard.net/documentation/mailgun" target="_blank"><?= t('Help on Mailgun integration') ?></a></p>
     </div>
 
+    <h3><img src="assets/img/sendgrid-icon.png"/>&nbsp;<?= t('Sendgrid (incoming emails)') ?></h3>
+    <div class="listing">
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->getCurrentBaseUrl().$this->u('webhook', 'sendgrid', array('token' => $values['webhook_token'])) ?>"/><br/>
+    <p class="form-help"><a href="http://kanboard.net/documentation/sendgrid" target="_blank"><?= t('Help on Sendgrid integration') ?></a></p>
+    </div>
+
     <h3><img src="assets/img/postmark-icon.png"/>&nbsp;<?= t('Postmark (incoming emails)') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->getCurrentBaseUrl().$this->u('webhook', 'postmark', array('token' => $values['webhook_token'])) ?>"/><br/>

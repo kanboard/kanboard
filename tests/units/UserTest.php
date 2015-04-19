@@ -10,6 +10,16 @@ use Model\Project;
 
 class UserTest extends Base
 {
+    public function testGetByEmail()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'user1', 'password' => '123456', 'email' => 'user1@localhost')));
+        $this->assertNotFalse($u->create(array('username' => 'user2', 'password' => '123456', 'email' => '')));
+
+        $this->assertNotEmpty($u->getByEmail('user1@localhost'));
+        $this->assertEmpty($u->getByEmail(''));
+    }
+
     public function testPassword()
     {
         $password = 'test123';

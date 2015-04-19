@@ -128,4 +128,18 @@ class Webhook extends Base
 
         echo $this->mailgunWebhook->parsePayload($_POST) ? 'PARSED' : 'IGNORED';
     }
+
+    /**
+     * Handle Sendgrid webhooks
+     *
+     * @access public
+     */
+    public function sendgrid()
+    {
+        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
+            $this->response->text('Not Authorized', 401);
+        }
+
+        echo $this->sendgridWebhook->parsePayload($_POST) ? 'PARSED' : 'IGNORED';
+    }
 }

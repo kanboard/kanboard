@@ -84,6 +84,7 @@ Documentation
 - [Task links](docs/task-links.markdown)
 - [Transitions](docs/transitions.markdown)
 - [Time tracking](docs/time-tracking.markdown)
+- [Create tasks by email](docs/create-tasks-by-email.markdown)
 
 #### Working with users
 
@@ -108,6 +109,7 @@ Documentation
 - [Gitlab webhooks](docs/gitlab-webhooks.markdown)
 - [Hipchat](docs/hipchat.markdown)
 - [Mailgun](docs/mailgun.markdown)
+- [Sendgrid](docs/sendgrid.markdown)
 - [Slack](docs/slack.markdown)
 - [Postmark](docs/postmark.markdown)
 

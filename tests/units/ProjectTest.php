@@ -231,6 +231,9 @@ class ProjectTest extends Base
         $this->assertNotEmpty($project);
         $this->assertEquals('TEST1', $project['identifier']);
 
+        $project = $p->getByIdentifier('');
+        $this->assertFalse($project);
+
         // Validation rules
         $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'TEST1'));
         $this->assertFalse($r[0]);
