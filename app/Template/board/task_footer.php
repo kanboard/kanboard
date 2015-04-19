@@ -1,4 +1,3 @@
-<?php if (! empty($task['category_id'])): ?>
 <div class="task-board-category-container">
     <span class="task-board-category">
         <?php if ($not_editable): ?>
@@ -16,7 +15,6 @@
         <?php endif ?>
     </span>
 </div>
-<?php endif ?>
 
 <div class="task-board-icons">
     <?php if (! empty($task['date_due'])): ?>
