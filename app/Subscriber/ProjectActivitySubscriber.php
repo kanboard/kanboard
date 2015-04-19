@@ -59,7 +59,7 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
 
     private function sendHipchatNotification($event_name, array $values)
     {
-        $this->hipchat->notify(
+        $this->hipchatWebhook->notify(
             $values['task']['project_id'],
             $values['task']['id'],
             $event_name,

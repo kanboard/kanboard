@@ -3,12 +3,12 @@
 namespace Integration;
 
 /**
- * Hipchat
+ * Hipchat webhook
  *
  * @package  integration
  * @author   Frederic Guillot
  */
-class Hipchat extends Base
+class HipchatWebhook extends Base
 {
     /**
      * Return true if Hipchat is enabled for this project or globally
