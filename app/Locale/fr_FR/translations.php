@@ -868,4 +868,6 @@ return array(
     'Help on Mailgun integration' => 'Aide sur l\'intégration avec Mailgun',
     'Sendgrid (incoming emails)' => 'Sendgrid (emails entrants)',
     'Help on Sendgrid integration' => 'Aide sur l\'intégration avec Sendgrid',
+    'Disable two factor authentication' => 'Désactiver l\'authentification à deux facteurs',
+    'Do you really want to disable the two factor authentication for this user: "%s"?' => 'Voulez-vous vraiment désactiver l\'authentification à deux facteurs pour cet utilisateur : « %s » ?',
 );

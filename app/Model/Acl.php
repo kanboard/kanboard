@@ -74,6 +74,7 @@ class Acl extends Base
         'project' => array('remove'),
         'hourlyrate' => '*',
         'currency' => '*',
+        'twofactor' => array('disable'),
     );
 
     /**

@@ -137,4 +137,31 @@ class Twofactor extends User
             'title' => t('Check two factor authentication code'),
         )));
     }
+
+    /**
+     * Disable 2FA for a user
+     *
+     * @access public
+     */
+    public function disable()
+    {
+        $user = $this->getUser();
+
+        if ($this->request->getStringParam('disable') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            $this->user->update(array(
+                'id' => $user['id'],
+                'twofactor_activated' => 0,
+                'twofactor_secret' => '',
+            ));
+
+            $this->response->redirect($this->helper->url('user', 'show', array('user_id' => $user['id'])));
+        }
+
+        $this->response->html($this->layout('twofactor/disable', array(
+            'user' => $user,
+        )));
+    }
 }

@@ -42,6 +42,10 @@
                 <li>
                     <?= $this->a(t('Two factor authentication'), 'twofactor', 'index', array('user_id' => $user['id'])) ?>
                 </li>
+            <?php elseif ($this->userSession->isAdmin() && $user['twofactor_activated'] == 1): ?>
+                <li>
+                    <?= $this->a(t('Two factor authentication'), 'twofactor', 'disable', array('user_id' => $user['id'])) ?>
+                </li>
             <?php endif ?>
 
             <li>
