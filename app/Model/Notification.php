@@ -3,6 +3,7 @@
 namespace Model;
 
 use Core\Session;
+use Core\Translator;
 use Swift_Message;
 use Swift_Mailer;
 use Swift_TransportException;
@@ -36,7 +37,7 @@ class Notification extends Base
 
             return $this->db
                         ->table(User::TABLE)
-                        ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email')
+                        ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email', User::TABLE.'.language')
                         ->eq('notifications_enabled', '1')
                         ->neq('email', '')
                         ->notin(User::TABLE.'.id', $exclude_users)
@@ -45,7 +46,7 @@ class Notification extends Base
 
         return $this->db
             ->table(ProjectPermission::TABLE)
-            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email')
+            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email', User::TABLE.'.language')
             ->join(User::TABLE, 'id', 'user_id')
             ->eq('project_id', $project_id)
             ->eq('notifications_enabled', '1')
@@ -110,19 +111,34 @@ class Notification extends Base
 
             $mailer = Swift_Mailer::newInstance($this->container['mailer']);
 
-            $message = Swift_Message::newInstance()
+            foreach ($users as $user) {
+
+                $this->container['logger']->debug('Send email notification to '.$user['username'].' lang='.$user['language']);
+
+                // Use the user language otherwise use the application language (do not use the session language)
+                if (! empty($user['language'])) {
+                    Translator::load($user['language']);
+                }
+                else {
+                    Translator::load($this->config->get('application_language', 'en_US'));
+                }
+
+                // Send the message
+                $message = Swift_Message::newInstance()
                             ->setSubject($this->getMailSubject($template, $data))
                             ->setFrom(array(MAIL_FROM => $author ?: 'Kanboard'))
-                            ->setBody($this->getMailContent($template, $data), 'text/html');
+                            ->setBody($this->getMailContent($template, $data), 'text/html')
+                            ->setTo(array($user['email'] => $user['name'] ?: $user['username']));
 
-            foreach ($users as $user) {
-                $message->setTo(array($user['email'] => $user['name'] ?: $user['username']));
                 $mailer->send($message);
             }
         }
         catch (Swift_TransportException $e) {
             $this->container['logger']->error($e->getMessage());
         }
+
+        // Restore locales
+        $this->config->setupTranslations();
     }
 
     /**

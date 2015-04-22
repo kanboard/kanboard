@@ -117,15 +117,17 @@ class Config extends Base
             'fr_FR' => 'fr',
             'it_IT' => 'it',
             'hu_HU' => 'hu',
+            'nl_NL' => 'nl',
             'pl_PL' => 'pl',
             'pt_BR' => 'pt-br',
             'ru_RU' => 'ru',
+            'sr_Latn_RS' => 'sr',
             'fi_FI' => 'fi',
             'sv_SE' => 'sv',
+            'tr_TR' => 'tr',
             'zh_CN' => 'zh-cn',
             'ja_JP' => 'ja',
             'th_TH' => 'th',
-            'tr_TR' => 'tr',
         );
 
         $lang = $this->getCurrentLanguage();
