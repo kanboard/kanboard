@@ -129,6 +129,7 @@ Documentation
 - [Installation on Centos](docs/centos-installation.markdown)
 - [Installation on FreeBSD](docs/freebsd-installation.markdown)
 - [Installation on Windows Server with IIS](docs/windows-iis-installation.markdown)
+- [Installation on Windows Server with Apache](docs/windows-apache-installation.markdown)
 - [Installation on Heroku](docs/heroku.markdown)
 - [Example with Nginx + HTTPS + SPDY + PHP-FPM](docs/nginx-ssl-php-fpm.markdown)
 
