@@ -2,7 +2,7 @@
     <h2><?= t('Add a comment') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->u('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => isset($ajax))) ?>" autocomplete="off">
+<form method="post" action="<?= $this->u('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => isset($ajax))) ?>" autocomplete="off" class="form-comment">
     <?= $this->formCsrf() ?>
     <?= $this->formHidden('task_id', $values) ?>
     <?= $this->formHidden('user_id', $values) ?>

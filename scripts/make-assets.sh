@@ -1,6 +1,6 @@
 #!/bin/bash
 
-print_css="print links table task board"
+print_css="print links table board task comment subtask markdown"
 app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown"
 vendor_css="jquery-ui.min chosen.min fullcalendar.min font-awesome.min"
 
