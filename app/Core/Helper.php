@@ -129,11 +129,13 @@ class Helper
      * Add a stylesheet asset
      *
      * @param  string   $filename   Filename
+     * @param  boolean  $is_file    Add file timestamp
+     * @param  string   $media      Media
      * @return string
      */
-    public function css($filename, $is_file = true)
+    public function css($filename, $is_file = true, $media = 'screen')
     {
-        return '<link rel="stylesheet" href="'.$filename.($is_file ? '?'.filemtime($filename) : '').'" media="screen">';
+        return '<link rel="stylesheet" href="'.$filename.($is_file ? '?'.filemtime($filename) : '').'" media="'.$media.'">';
     }
 
     /**

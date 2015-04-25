@@ -14,8 +14,9 @@
             <?= $this->js('assets/js/app.js') ?>
         <?php endif ?>
 
-        <?= $this->css($this->u('app', 'colors'), false) ?>
+        <?= $this->css($this->u('app', 'colors'), false, 'all') ?>
         <?= $this->css('assets/css/app.css') ?>
+        <?= $this->css('assets/css/print.css', true, 'print') ?>
 
         <?php if ($this->config->get('application_stylesheet')): ?>
             <style><?= $this->config->get('application_stylesheet') ?></style>

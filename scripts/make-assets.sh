@@ -1,5 +1,6 @@
 #!/bin/bash
 
+print_css="print links table task board"
 app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown"
 vendor_css="jquery-ui.min chosen.min fullcalendar.min font-awesome.min"
 
@@ -9,13 +10,21 @@ lang_js="da de es fi fr hu it ja nl pl pt-br ru sv sr th tr zh-cn"
 
 function merge_css {
 
-    local dst_file="assets/css/app.css"
+    local app_file="assets/css/app.css"
+    local print_file="assets/css/print.css"
 
-    rm -f $dst_file 2>/dev/null
-    echo "/* DO NOT EDIT: auto-generated file */" > $dst_file
+    rm -f $app_file 2>/dev/null
+    rm -f $print_file 2>/dev/null
+    echo "/* DO NOT EDIT: AUTO-GENERATED FILE */" > $app_file
+    echo "/************************************/" >> $app_file
+    echo "/* DO NOT EDIT: AUTO-GENERATED FILE */" > $print_file
+    echo "/************************************/" >> $print_file
 
-    for file in $vendor_css; do cat "assets/css/vendor/${file}.css" >> $dst_file; done
-    for file in $app_css; do cat "assets/css/src/${file}.css" >> $dst_file; done
+    for file in $vendor_css; do cat "assets/css/vendor/${file}.css" >> $app_file; done
+    for file in $vendor_css; do cat "assets/css/vendor/${file}.css" >> $print_file; done
+
+    for file in $app_css; do cat "assets/css/src/${file}.css" >> $app_file; done
+    for file in $print_css; do cat "assets/css/src/${file}.css" >> $print_file; done
 }
 
 function minify_js {
