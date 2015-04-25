@@ -28,6 +28,10 @@
     overflow-x: initial;
 }
 
+.board-container-compact #board {
+    table-layout: auto;
+}
+
 #board {
     table-layout: fixed;
 }
@@ -58,6 +62,7 @@
     background-color: #DF5353;
 }
 
+/* column header */
 .board-add-icon {
     float: left;
     padding: 0 5px;
