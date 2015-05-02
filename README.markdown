@@ -48,6 +48,7 @@ GNU Affero General Public License version 3: <http://www.gnu.org/licenses/agpl-3
 Related projects
 ----------------
 
+- [Kanboard Presenter by David Eberlein](https://github.com/davideberlein/kanboard-presenter)
 - [CSV2Kanboard by @ashbike](https://github.com/ashbike/csv2kanboard)
 - [Kanboard for Yunohost by @mbugeia](https://github.com/mbugeia/kanboard_ynh)
 - [Trello import script by @matueranet](https://github.com/matueranet/kanboard-import-trello)
