@@ -191,7 +191,7 @@ class GitlabWebhook extends Base
      */
     public function handleIssueClosed(array $issue)
     {
-        $task = $this->taskFinder->getByReference($issue['id']);
+        $task = $this->taskFinder->getByReference($this->project_id, $issue['id']);
 
         if (! empty($task)) {
             $event = array(

@@ -204,12 +204,13 @@ class TaskFinder extends Base
      * Fetch a task by the reference (external id)
      *
      * @access public
+     * @param  integer  $project_id  Project id
      * @param  string   $reference   Task reference
      * @return array
      */
-    public function getByReference($reference)
+    public function getByReference($project_id, $reference)
     {
-        return $this->db->table(Task::TABLE)->eq('reference', $reference)->findOne();
+        return $this->db->table(Task::TABLE)->eq('project_id', $project_id)->eq('reference', $reference)->findOne();
     }
 
     /**

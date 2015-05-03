@@ -88,8 +88,11 @@ class GitlabWebhookTest extends Base
 
         // Create a task with the issue reference
         $this->assertEquals(1, $tc->create(array('title' => 'A', 'project_id' => 1, 'reference' => 103361)));
-        $task = $tf->getByReference(103361);
+        $task = $tf->getByReference(1, 103361);
         $this->assertNotEmpty($task);
+
+        $task = $tf->getByReference(2, 103361);
+        $this->assertEmpty($task);
 
         $this->assertTrue($g->handleIssueClosed($event['object_attributes']));
 
