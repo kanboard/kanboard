@@ -25,6 +25,14 @@
         </span>
     <?php endif ?>
 
+    <?php if ($task['recurrence_status'] == \Model\Task::RECURE_STATUS_PENDING): ?>
+        <span title="<?= t('Recurrence') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-refresh fa-rotate-90"></i></span>
+    <?php endif ?>
+
+    <?php if ($task['recurrence_status'] == \Model\Task::RECURE_STATUS_PROCESSED): ?>
+        <span title="<?= t('Recurrence') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-refresh fa-rotate-90 fa-inverse"></i></span>
+    <?php endif ?>
+
     <?php if (! empty($task['nb_links'])): ?>
         <span title="<?= t('Links') ?>" class="task-board-tooltip" data-href="<?= $this->u('board', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-code-fork"></i>&nbsp;<?= $task['nb_links'] ?></span>
     <?php endif ?>

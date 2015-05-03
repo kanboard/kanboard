@@ -39,6 +39,14 @@ class TaskPosition extends Base
             if ($fire_events) {
                 $this->fireEvents($original_task, $column_id, $position, $swimlane_id);
             }
+
+            if ($original_task['column_id'] != $column_id
+                && $column_id == $this->board->getLastColumnPosition($project_id)
+                && $original_task['recurrence_status'] == Task::RECURE_STATUS_PENDING
+                && $original_task['recurrence_trigger'] == Task::RECURE_TRIGGER_MOVE)
+            {
+                $this->taskDuplication->createRecurrence($task_id);
+            }
         }
 
         return $result;

@@ -6,7 +6,18 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 66;
+const VERSION = 67;
+
+function version_67($pdo)
+{
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_status INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_trigger INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_factor INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_timeframe INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_basedate INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_parent INTEGER');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_child INTEGER');
+}
 
 function version_66($pdo)
 {

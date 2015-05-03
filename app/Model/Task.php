@@ -42,6 +42,40 @@ class Task extends Base
     const EVENT_ASSIGNEE_CHANGE = 'task.assignee_change';
 
     /**
+     * Recurrence: status
+     *
+     * @var integer
+     */
+    const RECURE_STATUS_NONE        = 0;
+    const RECURE_STATUS_PENDING     = 1;
+    const RECURE_STATUS_PROCESSED   = 2;
+
+    /**
+     * Recurrence: trigger
+     *
+     * @var integer
+     */
+    const RECURE_TRIGGER_MOVE   = 0;
+    const RECURE_TRIGGER_CLOSE  = 1;
+
+    /**
+     * Recurrence: timeframe
+     *
+     * @var integer
+     */
+    const RECURE_DAYS = 0;
+    const RECURE_MONTHS = 1;
+    const RECURE_YEARS = 2;
+
+    /**
+     * Recurrence: base date used to calculate new due date
+     *
+     * @var integer
+     */
+    const RECURE_BASEDATE_DUEDATE        = 0;
+    const RECURE_BASEDATE_TRIGGERDATE    = 1;
+
+    /**
      * Remove a task
      *
      * @access public
@@ -75,5 +109,62 @@ class Task extends Base
         }
 
         return 0;
+    }
+
+    /**
+     * Return the list user selectable recurrence status
+     *
+     * @access public
+     * @return array
+     */
+    public function getRecurrenceStatusList()
+    {
+        return array (
+            Task::RECURE_STATUS_NONE => t('No'),
+            Task::RECURE_STATUS_PENDING => t('Yes'),
+        );
+    }
+
+    /**
+     * Return the list recurrence triggers
+     *
+     * @access public
+     * @return array
+     */
+    public function getRecurrenceTriggerList()
+    {
+        return array (
+            Task::RECURE_TRIGGER_MOVE => t('When task is moved to last column'),
+            Task::RECURE_TRIGGER_CLOSE => t('When task is closed'),
+        );
+    }
+
+    /**
+     * Return the list options to calculate recurrence due date
+     *
+     * @access public
+     * @return array
+     */
+    public function getRecurrenceBasedateList()
+    {
+        return array (
+            Task::RECURE_BASEDATE_DUEDATE => t('Existing due date'),
+            Task::RECURE_BASEDATE_TRIGGERDATE => t('Action date'),
+        );
+    }
+
+    /**
+     * Return the list recurrence timeframes
+     *
+     * @access public
+     * @return array
+     */
+    public function getRecurrenceTimeframeList()
+    {
+        return array (
+            Task::RECURE_DAYS => t('Day(s)'),
+            Task::RECURE_MONTHS => t('Month(s)'),
+            Task::RECURE_YEARS => t('Year(s)'),
+        );
     }
 }
