@@ -1,7 +1,7 @@
 
 $script_sqlite = <<SCRIPT
 apt-get update
-apt-get install -y apache2 php5 php5-sqlite php5-xdebug
+apt-get install -y apache2 php5 php5-gd php5-curl php5-sqlite php5-xdebug
 apt-get clean -y
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 service apache2 restart
@@ -22,7 +22,7 @@ SCRIPT
 $script_mysql = <<SCRIPT
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y apache2 php5 php5-mysql php5-xdebug mysql-server mysql-client
+apt-get install -y apache2 php5 php5-gd php5-curl php5-mysql php5-xdebug mysql-server mysql-client
 apt-get clean -y
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 service apache2 restart
@@ -45,7 +45,7 @@ SCRIPT
 $script_postgres = <<SCRIPT
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y apache2 php5 php5-pgsql php5-xdebug postgresql postgresql-contrib
+apt-get install -y apache2 php5 php5-gd php5-curl php5-pgsql php5-xdebug postgresql postgresql-contrib
 apt-get clean -y
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 service apache2 restart
