@@ -55,8 +55,9 @@ class Task extends Base
      *
      * @var integer
      */
-    const RECURE_TRIGGER_MOVE   = 0;
-    const RECURE_TRIGGER_CLOSE  = 1;
+    const RECURE_TRIGGER_FIRST   = 0;
+    const RECURE_TRIGGER_LAST = 1;
+    const RECURE_TRIGGER_CLOSE  = 2;
 
     /**
      * Recurrence: timeframe
@@ -134,7 +135,8 @@ class Task extends Base
     public function getRecurrenceTriggerList()
     {
         return array (
-            Task::RECURE_TRIGGER_MOVE => t('When task is moved to last column'),
+            Task::RECURE_TRIGGER_FIRST => t('When task is moved from first column'),
+            Task::RECURE_TRIGGER_LAST => t('When task is moved to last column'),
             Task::RECURE_TRIGGER_CLOSE => t('When task is closed'),
         );
     }

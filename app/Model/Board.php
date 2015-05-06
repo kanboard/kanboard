@@ -315,6 +315,18 @@ class Board extends Base
     }
 
     /**
+     * Get the last column id for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return integer
+     */
+    public function getLastColumn($project_id)
+    {
+        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->desc('position')->findOneColumn('id');
+    }
+
+    /**
      * Get the list of columns sorted by position [ column_id => title ]
      *
      * @access public

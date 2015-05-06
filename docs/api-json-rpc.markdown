@@ -710,8 +710,10 @@ Response example:
                     "position": "1",
                     "project_id": "1",
                     "task_limit": "0",
+                    "description": "",
                     "tasks": [],
-                    "nb_tasks": 0
+                    "nb_tasks": 0,
+                    "score": 0
                 },
                 {
                     "id": "2",
@@ -719,8 +721,46 @@ Response example:
                     "position": "2",
                     "project_id": "1",
                     "task_limit": "0",
-                    "tasks": [],
-                    "nb_tasks": 0
+                    "description": "",
+                    "tasks": [
+                        {
+                            "nb_comments":"0",
+                            "nb_files":"0",
+                            "nb_subtasks":"0",
+                            "nb_completed_subtasks":"0",
+                            "nb_links":"0",
+                            "id":"2",
+                            "reference":"",
+                            "title":"Test",
+                            "description":"",
+                            "date_creation":"1430870507",
+                            "date_modification":"1430870507",
+                            "date_completed":null,
+                            "date_due":"0",
+                            "color_id":"yellow",
+                            "project_id":"1",
+                            "column_id":"2",
+                            "swimlane_id":"0",
+                            "owner_id":"0",
+                            "creator_id":"1",
+                            "position":"1",
+                            "is_active":"1",
+                            "score":"0",
+                            "category_id":"0",
+                            "date_moved":"1430870507",
+                            "recurrence_status":"0",
+                            "recurrence_trigger":"0",
+                            "recurrence_factor":"0",
+                            "recurrence_timeframe":"0",
+                            "recurrence_basedate":"0",
+                            "recurrence_parent":null,
+                            "recurrence_child":null,
+                            "assignee_username":null,
+                            "assignee_name":null
+                        }
+                    ],
+                    "nb_tasks": 1,
+                    "score": 0
                 },
                 {
                     "id": "3",
@@ -728,8 +768,46 @@ Response example:
                     "position": "3",
                     "project_id": "1",
                     "task_limit": "0",
-                    "tasks": [],
-                    "nb_tasks": 0
+                    "description": "",
+                    "tasks": [
+                        {
+                            "nb_comments":"0",
+                            "nb_files":"0",
+                            "nb_subtasks":"1",
+                            "nb_completed_subtasks":"0",
+                            "nb_links":"0",
+                            "id":"1",
+                            "reference":"",
+                            "title":"Task with comment",
+                            "description":"",
+                            "date_creation":"1430783188",
+                            "date_modification":"1430783188",
+                            "date_completed":null,
+                            "date_due":"0",
+                            "color_id":"red",
+                            "project_id":"1",
+                            "column_id":"3",
+                            "swimlane_id":"0",
+                            "owner_id":"1",
+                            "creator_id":"0",
+                            "position":"1",
+                            "is_active":"1",
+                            "score":"0",
+                            "category_id":"0",
+                            "date_moved":"1430783191",
+                            "recurrence_status":"0",
+                            "recurrence_trigger":"0",
+                            "recurrence_factor":"0",
+                            "recurrence_timeframe":"0",
+                            "recurrence_basedate":"0",
+                            "recurrence_parent":null,
+                            "recurrence_child":null,
+                            "assignee_username":"admin",
+                            "assignee_name":null
+                        }
+                    ],
+                    "nb_tasks": 1,
+                    "score": 0
                 },
                 {
                     "id": "4",
@@ -737,11 +815,14 @@ Response example:
                     "position": "4",
                     "project_id": "1",
                     "task_limit": "0",
+                    "description": "",
                     "tasks": [],
-                    "nb_tasks": 0
+                    "nb_tasks": 0,
+                    "score": 0
                 }
             ],
-            "nb_columns": 4
+            "nb_columns": 4,
+            "nb_tasks": 2
         }
     ]
 }
@@ -1609,13 +1690,18 @@ Response example:
     - **project_id** (integer, required)
     - **color_id** (string, optional)
     - **column_id** (integer, optional)
-    - **description** Markdown content (string, optional)
     - **owner_id** (integer, optional)
     - **creator_id** (integer, optional)
-    - **score** (integer, optional)
     - **date_due**: ISO8601 format (string, optional)
+    - **description** Markdown content (string, optional)
     - **category_id** (integer, optional)
-    - **swimelane_id** (integer, optional)
+    - **score** (integer, optional)
+    - **swimlane_id** (integer, optional)
+    - **recurrence_status**  (integer, optional)
+    - **recurrence_trigger**  (integer, optional)
+    - **recurrence_factor**  (integer, optional)
+    - **recurrence_timeframe**  (integer, optional)
+    - **recurrence_basedate**  (integer, optional)
 - Result on success: **task_id**
 - Result on failure: **false**
 
@@ -1636,7 +1722,12 @@ Request example:
         "title": "Test",
         "project_id": 1,
         "color_id": "green",
-        "column_id": 2
+        "column_id": 2,
+        "recurrence_status": 0,
+        "recurrence_trigger": 0,
+        "recurrence_factor": 0,
+        "recurrence_timeframe": 0,
+        "recurrence_basedate": 0
     }
 }
 ```
@@ -1695,8 +1786,20 @@ Response example:
         "category_id": "0",
         "creator_id": "0",
         "date_modification": "1409963206",
-        "swimlane_id": 0
-    }
+        "reference": "",
+        "date_started": null,
+        "time_spent": "0",
+        "time_estimated": "0",
+        "swimlane_id": "0",
+        "date_moved": "1430875287",
+        "recurrence_status": "0",
+        "recurrence_trigger": "0",
+        "recurrence_factor": "0",
+        "recurrence_timeframe": "0",
+        "recurrence_basedate": "0",
+        "recurrence_parent": null,
+        "recurrence_child": null
+        }
 }
 ```
 
@@ -1747,7 +1850,19 @@ Response example:
             "category_id": "0",
             "creator_id": "0",
             "date_modification": "1409961789",
-            "swimlane_id": 0
+            "reference": "",
+            "date_started": null,
+            "time_spent": "0",
+            "time_estimated": "0",
+            "swimlane_id": "0",
+            "date_moved": "1430783191",
+            "recurrence_status": "0",
+            "recurrence_trigger": "0",
+            "recurrence_factor": "0",
+            "recurrence_timeframe": "0",
+            "recurrence_basedate": "0",
+            "recurrence_parent": null,
+            "recurrence_child": null
         },
         {
             "id": "2",
@@ -1766,7 +1881,19 @@ Response example:
             "category_id": "0",
             "creator_id": "0",
             "date_modification": "1409962115",
-            "swimlane_id": 0
+            "reference": "",
+            "date_started": null,
+            "time_spent": "0",
+            "time_estimated": "0",
+            "swimlane_id": "0",
+            "date_moved": "1430783191",
+            "recurrence_status": "0",
+            "recurrence_trigger": "0",
+            "recurrence_factor": "0",
+            "recurrence_timeframe": "0",
+            "recurrence_basedate": "0",
+            "recurrence_parent": null,
+            "recurrence_child": null
         },
         ...
     ]
@@ -1785,7 +1912,7 @@ Request example to fetch all tasks on the board:
 {
     "jsonrpc": "2.0",
     "method": "getOverdueTasks",
-    "id": 133280317,
+    "id": 133280317
 }
 ```
 
@@ -1799,40 +1926,20 @@ Response example:
         {
             "id": "1",
             "title": "Task #1",
-            "description": "",
-            "date_creation": "1409961789",
-            "color_id": "blue",
+            "date_due": "1409961789",
             "project_id": "1",
-            "column_id": "2",
-            "owner_id": "1",
-            "position": "1",
-            "is_active": "1",
-            "date_completed": null,
-            "score": "0",
-            "date_due": "0",
-            "category_id": "0",
-            "creator_id": "0",
-            "date_modification": "1409961789",
-            "swimlane_id": 0
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
         },
         {
             "id": "2",
             "title": "Test",
-            "description": "",
-            "date_creation": "1409962115",
-            "color_id": "green",
+            "date_due": "1409962115",
             "project_id": "1",
-            "column_id": "2",
-            "owner_id": "1",
-            "position": "2",
-            "is_active": "1",
-            "date_completed": null,
-            "score": "0",
-            "date_due": "0",
-            "category_id": "0",
-            "creator_id": "0",
-            "date_modification": "1409962115",
-            "swimlane_id": 0
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
         },
         ...
     ]
@@ -1845,16 +1952,21 @@ Response example:
 - Parameters:
     - **id** (integer, required)
     - **title** (string, optional)
-    - **color_id** (string, optional)
     - **project_id** (integer, optional)
+    - **color_id** (string, optional)
     - **column_id** (integer, optional)
-    - **description** Markdown content (string, optional)
     - **owner_id** (integer, optional)
     - **creator_id** (integer, optional)
-    - **score** (integer, optional)
     - **date_due**: ISO8601 format (string, optional)
+    - **description** Markdown content (string, optional)
     - **category_id** (integer, optional)
+    - **score** (integer, optional)
     - **swimlane_id** (integer, optional)
+    - **recurrence_status**  (integer, optional)
+    - **recurrence_trigger**  (integer, optional)
+    - **recurrence_factor**  (integer, optional)
+    - **recurrence_timeframe**  (integer, optional)
+    - **recurrence_basedate**  (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
