@@ -57,6 +57,10 @@ select {
     max-width: 95%;
 }
 
+select:focus {
+    outline: 0;
+}
+
 ::-webkit-input-placeholder {
     color: #ddd;
     padding-top: 2px;

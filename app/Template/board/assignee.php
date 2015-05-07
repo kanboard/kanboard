@@ -9,7 +9,7 @@
             <?= $this->formHidden('project_id', $values) ?>
 
             <?= $this->formLabel(t('Assignee'), 'owner_id') ?>
-            <?= $this->formSelect('owner_id', $users_list, $values) ?><br/>
+            <?= $this->formSelect('owner_id', $users_list, $values, array(), array('autofocus')) ?><br/>
 
             <div class="form-actions">
                 <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

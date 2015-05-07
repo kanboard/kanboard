@@ -200,7 +200,7 @@ var Kanboard = (function() {
             $(document).on("click", ".popover", Kanboard.Popover);
 
             // Autofocus fields (html5 autofocus works only with page onload)
-            $("input[autofocus]").each(function(index, element) {
+            $("[autofocus]").each(function(index, element) {
                 $(this).focus();
             })
 
