@@ -11,6 +11,7 @@ if (getenv('DATABASE_URL')) {
     define('DB_USERNAME', $dbopts["user"]);
     define('DB_PASSWORD', $dbopts["pass"]);
     define('DB_HOSTNAME', $dbopts["host"]);
+    define('DB_PORT', isset($dbopts["port"]) ? $dbopts["port"] : null;
     define('DB_NAME', ltrim($dbopts["path"],'/'));
 }
 
