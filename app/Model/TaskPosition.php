@@ -39,19 +39,6 @@ class TaskPosition extends Base
             if ($fire_events) {
                 $this->fireEvents($original_task, $column_id, $position, $swimlane_id);
             }
-
-            if ($original_task['recurrence_status'] == Task::RECURE_STATUS_PENDING
-                && $original_task['column_id'] != $column_id
-                && (
-                ($original_task['column_id'] == $this->board->getFirstColumn($project_id)
-                    && $original_task['recurrence_trigger'] == Task::RECURE_TRIGGER_FIRST)
-                || ($column_id == $this->board->getLastColumn($project_id)
-                    && $original_task['recurrence_trigger'] == Task::RECURE_TRIGGER_LAST)
-                )
-            )
-            {
-                $this->taskDuplication->createRecurrence($task_id);
-            }
         }
 
         return $result;
@@ -159,6 +146,8 @@ class TaskPosition extends Base
             'src_column_id' => $task['column_id'],
             'dst_column_id' => $new_column_id,
             'date_moved' => $task['date_moved'],
+            'recurrence_status' => $task['recurrence_status'],
+            'recurrence_trigger' => $task['recurrence_trigger'],
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {

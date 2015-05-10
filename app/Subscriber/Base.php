@@ -24,6 +24,7 @@ use Pimple\Container;
  * @property \Model\ProjectDailySummary    $projectDailySummary
  * @property \Model\Subtask                $subtask
  * @property \Model\Task                   $task
+ * @property \Model\TaskDuplication        $taskDuplication
  * @property \Model\TaskExport             $taskExport
  * @property \Model\TaskFinder             $taskFinder
  * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking

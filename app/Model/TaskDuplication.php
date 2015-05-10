@@ -52,39 +52,40 @@ class TaskDuplication extends Base
     }
 
     /**
-     * Create task recurrence to the same project
+     * Duplicate recurring task
      *
      * @access public
      * @param  integer             $task_id      Task id
      * @return boolean|integer                   Recurrence task id
      */
-    public function createRecurrence($task_id)
+    public function duplicateRecurringTask($task_id)
     {
         $values = $this->copyFields($task_id);
 
-        if ($values['recurrence_status'] == Task::RECURE_STATUS_PENDING)
-        {
+        if ($values['recurrence_status'] == Task::RECURE_STATUS_PENDING) {
+
             $values['recurrence_parent'] = $task_id;
             $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
-            $this->recurrenceDateDue($values);
-            $recuretask = $this->save($task_id, $values);
+            $this->calculateRecurringTaskDueDate($values);
 
-            if ($recuretask)
-            {
-                $recurrenceStatusUpdate = $this->db
+            $recurring_task_id = $this->save($task_id, $values);
+
+            if ($recurring_task_id > 0) {
+
+                $parent_update = $this->db
                     ->table(Task::TABLE)
-                    ->eq('id',$task_id)
+                    ->eq('id', $task_id)
                     ->update(array(
                         'recurrence_status' => Task::RECURE_STATUS_PROCESSED,
-                        'recurrence_child' => $recuretask,
+                        'recurrence_child' => $recurring_task_id,
                     ));
 
-                if($recurrenceStatusUpdate)
-                {
-                    return $recuretask;
+                if ($parent_update) {
+                    return $recurring_task_id;
                 }
             }
         }
+
         return false;
     }
 
@@ -176,7 +177,7 @@ class TaskDuplication extends Base
      * @access private
      * @param  array      $values
      */
-    private function recurrenceDateDue(array &$values)
+    private function calculateRecurringTaskDueDate(array &$values)
     {
         if (! empty($values['date_due']) && $values['recurrence_factor'] != 0) {
 

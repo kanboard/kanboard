@@ -89,9 +89,7 @@ class TaskStatus extends Base
      */
     private function changeStatus($task_id, $status, $date_completed, $event)
     {
-        $task = $this->taskFinder->getById($task_id);
-
-        if (!$task['id']) {
+        if (! $this->taskFinder->exists($task_id)) {
             return false;
         }
 
@@ -109,13 +107,6 @@ class TaskStatus extends Base
                 $event,
                 new TaskEvent(array('task_id' => $task_id) + $this->taskFinder->getById($task_id))
             );
-
-            if ($status == Task::STATUS_CLOSED
-                && $task['recurrence_status'] == Task::RECURE_STATUS_PENDING
-                && $task['recurrence_trigger'] == Task::RECURE_TRIGGER_CLOSE)
-            {
-                $this->taskDuplication->createRecurrence($task_id);
-            }
         }
 
         return $result;
