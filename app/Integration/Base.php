@@ -15,6 +15,7 @@ use Pimple\Container;
  * @property \Model\Task                   $task
  * @property \Model\TaskFinder             $taskFinder
  * @property \Model\User                   $user
+ * @property \Model\Project                $project
  */
 abstract class Base
 {

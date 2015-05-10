@@ -46,7 +46,7 @@ use Pimple\Container;
  * @property \Model\Timetable              $timetable
  * @property \Model\TimetableDay           $timetableDay
  * @property \Model\TimetableExtra         $timetableExtra
- * @property \Model\TimetableOff           $timetableOfff
+ * @property \Model\TimetableOff           $timetableOff
  * @property \Model\TimetableWeek          $timetableWeek
  * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
  * @property \Model\User                   $user

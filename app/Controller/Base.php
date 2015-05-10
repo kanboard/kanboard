@@ -24,6 +24,9 @@ use Symfony\Component\EventDispatcher\Event;
  * @property \Integration\GithubWebhook    $githubWebhook
  * @property \Integration\GitlabWebhook    $gitlabWebhook
  * @property \Integration\BitbucketWebhook $bitbucketWebhook
+ * @property \Integration\PostmarkWebhook  $postmarkWebhook
+ * @property \Integration\SendgridWebhook  $sendgridWebhook
+ * @property \Integration\MailgunWebhook   $mailgunWebhook
  * @property \Model\Acl                    $acl
  * @property \Model\Authentication         $authentication
  * @property \Model\Action                 $action

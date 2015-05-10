@@ -405,7 +405,7 @@ class Project extends Base
         $project = $this->project->getByToken($token);
 
         // Token verification
-        if (! $project) {
+        if (empty($project)) {
             $this->forbidden(true);
         }
 
@@ -531,13 +531,12 @@ class Project extends Base
 
             $project_id = $this->project->create($values, $this->userSession->getId(), true);
 
-            if ($project_id) {
+            if ($project_id > 0) {
                 $this->session->flash(t('Your project have been created successfully.'));
                 $this->response->redirect('?controller=project&action=show&project_id='.$project_id);
             }
-            else {
-                $this->session->flashError(t('Unable to create your project.'));
-            }
+
+            $this->session->flashError(t('Unable to create your project.'));
         }
 
         $this->create($values, $errors);
