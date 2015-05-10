@@ -350,4 +350,21 @@ class Board extends Base
             'redirect' => 'board',
         )));
     }
+
+    /**
+     * Get recurrence information on mouseover
+     *
+     * @access public
+     */
+    public function recurrence()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->template->render('board/recurrence', array(
+            'task' => $task,
+            'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
+            'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
+            'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
+            )));
+    }
 }

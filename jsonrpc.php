@@ -169,7 +169,7 @@ $server->bind('closeTask', $container['taskStatus'], 'close');
 $server->bind('removeTask', $container['task'], 'remove');
 $server->bind('moveTaskPosition', $container['taskPosition'], 'movePosition');
 
-$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0) use ($container) {
+$server->register('createTask', function($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0, $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0, $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0, $recurrence_basedate = 0) use ($container) {
 
     $values = array(
         'title' => $title,
@@ -183,6 +183,11 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
         'category_id' => $category_id,
         'score' => $score,
         'swimlane_id' => $swimlane_id,
+        'recurrence_status' => $recurrence_status,
+        'recurrence_trigger' => $recurrence_trigger,
+        'recurrence_factor' => $recurrence_factor,
+        'recurrence_timeframe' => $recurrence_timeframe,
+        'recurrence_basedate' => $recurrence_basedate,
     );
 
     list($valid,) = $container['taskValidator']->validateCreation($values);
@@ -194,7 +199,7 @@ $server->register('createTask', function($title, $project_id, $color_id = '', $c
     return $container['taskCreation']->create($values);
 });
 
-$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null, $swimlane_id = null) use ($container) {
+$server->register('updateTask', function($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null, $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null, $swimlane_id = null, $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null, $recurrence_timeframe = null, $recurrence_basedate = null) use ($container) {
 
     $values = array(
         'id' => $id,
@@ -209,6 +214,11 @@ $server->register('updateTask', function($id, $title = null, $project_id = null,
         'category_id' => $category_id,
         'score' => $score,
         'swimlane_id' => $swimlane_id,
+        'recurrence_status' => $recurrence_status,
+        'recurrence_trigger' => $recurrence_trigger,
+        'recurrence_factor' => $recurrence_factor,
+        'recurrence_timeframe' => $recurrence_timeframe,
+        'recurrence_basedate' => $recurrence_basedate,
     );
 
     foreach ($values as $key => $value) {

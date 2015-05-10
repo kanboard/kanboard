@@ -30,6 +30,11 @@ class TaskDuplication extends Base
         'category_id',
         'time_estimated',
         'swimlane_id',
+        'recurrence_status',
+        'recurrence_trigger',
+        'recurrence_factor',
+        'recurrence_timeframe',
+        'recurrence_basedate',
     );
 
     /**
@@ -42,6 +47,43 @@ class TaskDuplication extends Base
     public function duplicate($task_id)
     {
         return $this->save($task_id, $this->copyFields($task_id));
+    }
+
+    /**
+     * Create task recurrence to the same project
+     *
+     * @access public
+     * @param  integer             $task_id      Task id
+     * @return boolean|integer                   Recurrence task id
+     */
+    public function createRecurrence($task_id)
+    {
+        $values = $this->copyFields($task_id);
+
+        if ($values['recurrence_status'] == Task::RECURE_STATUS_PENDING)
+        {
+            $values['recurrence_parent'] = $task_id;
+            $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
+            $this->recurrenceDateDue($values);
+            $recuretask = $this->save($task_id, $values);
+
+            if ($recuretask)
+            {
+                $recurrenceStatusUpdate = $this->db
+                    ->table(Task::TABLE)
+                    ->eq('id',$task_id)
+                    ->update(array(
+                        'recurrence_status' => Task::RECURE_STATUS_PROCESSED,
+                        'recurrence_child' => $recuretask,
+                    ));
+
+                if($recurrenceStatusUpdate)
+                {
+                    return $recuretask;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -123,6 +165,51 @@ class TaskDuplication extends Base
                 $values['project_id'],
                 $this->swimlane->getNameById($values['swimlane_id'])
             );
+        }
+    }
+
+    /**
+     * Calculate new due date for new recurrence task
+     *
+     * @access private
+     * @param  array      $values
+     */
+    private function recurrenceDateDue(&$values)
+    {
+        if ($values['date_due'] && $values['recurrence_factor'])
+        {
+            if ($values['recurrence_basedate'])
+            {
+                $values['date_due'] = time();
+            }
+
+            $factor = abs($values['recurrence_factor']);
+
+            if ($values['recurrence_factor'] < 0)
+            {
+                $subtract=TRUE;
+            }
+
+            switch ($values['recurrence_timeframe'])
+            {
+                case Task::RECURE_MONTHS:
+                    $interval = 'P' . $factor . 'M';
+                    break;
+                case Task::RECURE_YEARS:
+                    $interval = 'P' . $factor . 'Y';
+                    break;
+                default:
+                    $interval = 'P' . $factor . 'D';
+                    break;
+            }
+
+            $date_due = new \DateTime();
+
+            $date_due->setTimestamp($values['date_due']);
+
+            $subtract ? $date_due->sub(new \DateInterval($interval)) : $date_due->add(new \DateInterval($interval));
+
+            $values['date_due'] = $date_due->getTimestamp();
         }
     }
 
