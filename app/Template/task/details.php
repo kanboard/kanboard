@@ -80,43 +80,16 @@
             <?= $this->a(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
         </li>
         <?php endif ?>
-        <?php if ($task['recurrence_status'] == \Model\Task::RECURE_STATUS_NONE): ?>
+
+        <?php if (! isset($not_editable) && $task['recurrence_status'] != \Model\Task::RECURE_STATUS_NONE): ?>
         <li>
-            <?= t('No recurrent task is scheduled to generate') ?>
-        </li>
-        <?php endif ?>
-        <?php if ($task['recurrence_status'] != \Model\Task::RECURE_STATUS_NONE): ?>
-        <li>
-            <?php if ($task['recurrence_status'] == \Model\Task::RECURE_STATUS_PENDING): ?>
-            <?= t('Recurrent task is scheduled to generate') ?>
-            <?php endif ?>
-            <?php if ($task['recurrence_status'] == \Model\Task::RECURE_STATUS_PROCESSED): ?>
-            <?= t('Recurrent task has been generated') ?>
-            <?php endif ?>
-            <ul>
-                <li>
-                    <?= t('Trigger to generate recurrent task: %s', $recurrence_trigger_list[$task['recurrence_trigger']]) ?></stong>
-                </li>
-                <li>
-                    <?= t('Factor to calculate new due date: %s', $task['recurrence_factor']) ?></stong>
-                </li>
-                <li>
-                    <?= t('Timeframe to calculate new due date: %s', $recurrence_timeframe_list[$task['recurrence_timeframe']]) ?></stong>
-                </li>
-                <li>
-                    <?= t('Base date to calculate new due date: %s', $recurrence_basedate_list[$task['recurrence_basedate']]) ?></stong>
-                </li>
-            </ul>
-        </li>
-        <?php endif ?>
-        <?php if ($task['recurrence_parent']): ?>
-        <li>
-            <?= t('Recurrent task created by: %s', $task['recurrence_parent']) ?>
-        </li>
-        <?php endif ?>
-        <?php if ($task['recurrence_child']): ?>
-        <li>
-            <?= t('Created recurrent task: %s', $task['recurrence_child']) ?>
+            <strong><?= t('Recurring information') ?></strong>
+            <?= $this->render('task/recurring_info', array(
+                'task' => $task,
+                'recurrence_trigger_list' => $recurrence_trigger_list,
+                'recurrence_timeframe_list' => $recurrence_timeframe_list,
+                'recurrence_basedate_list' => $recurrence_basedate_list,
+            )) ?>
         </li>
         <?php endif ?>
     </ul>
