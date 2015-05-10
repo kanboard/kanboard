@@ -46,35 +46,35 @@ class Task extends Base
      *
      * @var integer
      */
-    const RECURE_STATUS_NONE        = 0;
-    const RECURE_STATUS_PENDING     = 1;
-    const RECURE_STATUS_PROCESSED   = 2;
+    const RECURRING_STATUS_NONE        = 0;
+    const RECURRING_STATUS_PENDING     = 1;
+    const RECURRING_STATUS_PROCESSED   = 2;
 
     /**
      * Recurrence: trigger
      *
      * @var integer
      */
-    const RECURE_TRIGGER_FIRST   = 0;
-    const RECURE_TRIGGER_LAST = 1;
-    const RECURE_TRIGGER_CLOSE  = 2;
+    const RECURRING_TRIGGER_FIRST_COLUMN  = 0;
+    const RECURRING_TRIGGER_LAST_COLUMN   = 1;
+    const RECURRING_TRIGGER_CLOSE         = 2;
 
     /**
      * Recurrence: timeframe
      *
      * @var integer
      */
-    const RECURE_DAYS = 0;
-    const RECURE_MONTHS = 1;
-    const RECURE_YEARS = 2;
+    const RECURRING_TIMEFRAME_DAYS    = 0;
+    const RECURRING_TIMEFRAME_MONTHS  = 1;
+    const RECURRING_TIMEFRAME_YEARS   = 2;
 
     /**
      * Recurrence: base date used to calculate new due date
      *
      * @var integer
      */
-    const RECURE_BASEDATE_DUEDATE        = 0;
-    const RECURE_BASEDATE_TRIGGERDATE    = 1;
+    const RECURRING_BASEDATE_DUEDATE      = 0;
+    const RECURRING_BASEDATE_TRIGGERDATE  = 1;
 
     /**
      * Remove a task
@@ -121,8 +121,8 @@ class Task extends Base
     public function getRecurrenceStatusList()
     {
         return array (
-            Task::RECURE_STATUS_NONE => t('No'),
-            Task::RECURE_STATUS_PENDING => t('Yes'),
+            Task::RECURRING_STATUS_NONE => t('No'),
+            Task::RECURRING_STATUS_PENDING => t('Yes'),
         );
     }
 
@@ -135,9 +135,9 @@ class Task extends Base
     public function getRecurrenceTriggerList()
     {
         return array (
-            Task::RECURE_TRIGGER_FIRST => t('When task is moved from first column'),
-            Task::RECURE_TRIGGER_LAST => t('When task is moved to last column'),
-            Task::RECURE_TRIGGER_CLOSE => t('When task is closed'),
+            Task::RECURRING_TRIGGER_FIRST_COLUMN => t('When task is moved from first column'),
+            Task::RECURRING_TRIGGER_LAST_COLUMN => t('When task is moved to last column'),
+            Task::RECURRING_TRIGGER_CLOSE => t('When task is closed'),
         );
     }
 
@@ -150,8 +150,8 @@ class Task extends Base
     public function getRecurrenceBasedateList()
     {
         return array (
-            Task::RECURE_BASEDATE_DUEDATE => t('Existing due date'),
-            Task::RECURE_BASEDATE_TRIGGERDATE => t('Action date'),
+            Task::RECURRING_BASEDATE_DUEDATE => t('Existing due date'),
+            Task::RECURRING_BASEDATE_TRIGGERDATE => t('Action date'),
         );
     }
 
@@ -164,9 +164,9 @@ class Task extends Base
     public function getRecurrenceTimeframeList()
     {
         return array (
-            Task::RECURE_DAYS => t('Day(s)'),
-            Task::RECURE_MONTHS => t('Month(s)'),
-            Task::RECURE_YEARS => t('Year(s)'),
+            Task::RECURRING_TIMEFRAME_DAYS => t('Day(s)'),
+            Task::RECURRING_TIMEFRAME_MONTHS => t('Month(s)'),
+            Task::RECURRING_TIMEFRAME_YEARS => t('Year(s)'),
         );
     }
 }

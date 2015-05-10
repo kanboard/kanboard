@@ -62,7 +62,7 @@ class TaskDuplication extends Base
     {
         $values = $this->copyFields($task_id);
 
-        if ($values['recurrence_status'] == Task::RECURE_STATUS_PENDING) {
+        if ($values['recurrence_status'] == Task::RECURRING_STATUS_PENDING) {
 
             $values['recurrence_parent'] = $task_id;
             $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
@@ -76,7 +76,7 @@ class TaskDuplication extends Base
                     ->table(Task::TABLE)
                     ->eq('id', $task_id)
                     ->update(array(
-                        'recurrence_status' => Task::RECURE_STATUS_PROCESSED,
+                        'recurrence_status' => Task::RECURRING_STATUS_PROCESSED,
                         'recurrence_child' => $recurring_task_id,
                     ));
 
@@ -181,7 +181,7 @@ class TaskDuplication extends Base
     {
         if (! empty($values['date_due']) && $values['recurrence_factor'] != 0) {
 
-            if ($values['recurrence_basedate'] == Task::RECURE_BASEDATE_TRIGGERDATE) {
+            if ($values['recurrence_basedate'] == Task::RECURRING_BASEDATE_TRIGGERDATE) {
                 $values['date_due'] = time();
             }
 
@@ -189,10 +189,10 @@ class TaskDuplication extends Base
             $subtract = $values['recurrence_factor'] < 0;
 
             switch ($values['recurrence_timeframe']) {
-                case Task::RECURE_MONTHS:
+                case Task::RECURRING_TIMEFRAME_MONTHS:
                     $interval = 'P' . $factor . 'M';
                     break;
-                case Task::RECURE_YEARS:
+                case Task::RECURRING_TIMEFRAME_YEARS:
                     $interval = 'P' . $factor . 'Y';
                     break;
                 default:

@@ -18,12 +18,12 @@ class RecurringTaskSubscriber extends Base implements EventSubscriberInterface
 
     public function onMove(TaskEvent $event)
     {
-        if ($event['recurrence_status'] == Task::RECURE_STATUS_PENDING) {
+        if ($event['recurrence_status'] == Task::RECURRING_STATUS_PENDING) {
 
-            if ($event['recurrence_trigger'] == Task::RECURE_TRIGGER_FIRST && $this->board->getFirstColumn($event['project_id']) == $event['src_column_id']) {
+            if ($event['recurrence_trigger'] == Task::RECURRING_TRIGGER_FIRST_COLUMN && $this->board->getFirstColumn($event['project_id']) == $event['src_column_id']) {
                 $this->taskDuplication->duplicateRecurringTask($event['task_id']);
             }
-            else if ($event['recurrence_trigger'] == Task::RECURE_TRIGGER_LAST && $this->board->getLastColumn($event['project_id']) == $event['dst_column_id']) {
+            else if ($event['recurrence_trigger'] == Task::RECURRING_TRIGGER_LAST_COLUMN && $this->board->getLastColumn($event['project_id']) == $event['dst_column_id']) {
                 $this->taskDuplication->duplicateRecurringTask($event['task_id']);
             }
         }
@@ -31,7 +31,7 @@ class RecurringTaskSubscriber extends Base implements EventSubscriberInterface
 
     public function onClose(TaskEvent $event)
     {
-        if ($event['recurrence_status'] == Task::RECURE_STATUS_PENDING && $event['recurrence_trigger'] == Task::RECURE_TRIGGER_CLOSE) {
+        if ($event['recurrence_status'] == Task::RECURRING_STATUS_PENDING && $event['recurrence_trigger'] == Task::RECURRING_TRIGGER_CLOSE) {
             $this->taskDuplication->duplicateRecurringTask($event['task_id']);
         }
     }

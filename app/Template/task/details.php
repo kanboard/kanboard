@@ -81,7 +81,7 @@
         </li>
         <?php endif ?>
 
-        <?php if (! isset($not_editable) && $task['recurrence_status'] != \Model\Task::RECURE_STATUS_NONE): ?>
+        <?php if (! isset($not_editable) && $task['recurrence_status'] != \Model\Task::RECURRING_STATUS_NONE): ?>
         <li>
             <strong><?= t('Recurring information') ?></strong>
             <?= $this->render('task/recurring_info', array(
