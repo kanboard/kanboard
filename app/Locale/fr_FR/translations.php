@@ -719,7 +719,7 @@ return array(
     'is a child of' => 'est un enfant de',
     'is a parent of' => 'est un parent de',
     'targets milestone' => 'vise l\'étape importante',
-    'is a milestone of' => 'est une étape importante de',
+    'is a milestone of' => 'est une étape importante incluant',
     'fixes' => 'corrige',
     'is fixed by' => 'est corrigée par',
     'This task' => 'Cette tâche',
@@ -870,4 +870,8 @@ return array(
     'Help on Sendgrid integration' => 'Aide sur l\'intégration avec Sendgrid',
     'Disable two factor authentication' => 'Désactiver l\'authentification à deux facteurs',
     'Do you really want to disable the two factor authentication for this user: "%s"?' => 'Voulez-vous vraiment désactiver l\'authentification à deux facteurs pour cet utilisateur : « %s » ?',
+    'Edit a link' => 'Modifier un lien',
+    'Start to type task title...' => 'Tappez le titre de la tâche...',
+    'A task cannot be linked to itself' => 'Une tâche ne peut être liée à elle-même',
+    'The exact same link already exists' => 'Un lien identique existe déjà',
 );

@@ -227,7 +227,10 @@ var Kanboard = (function() {
 
             // Task auto-completion
             if ($(".task-autocomplete").length) {
-            	$(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+
+                if ($('.opposite_task_id').val() == '') {
+                    $(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+                }
 
                 $(".task-autocomplete").autocomplete({
                     source: $(".task-autocomplete").data("search-url"),

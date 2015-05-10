@@ -1,11 +1,12 @@
 <div class="page-header">
-    <h2><?= t('Add a new link') ?></h2>
+    <h2><?= t('Edit a link') ?></h2>
 </div>
 
-<form action="<?= $this->u('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => isset($ajax))) ?>" method="post" autocomplete="off">
+<form action="<?= $this->u('tasklink', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'link_id' => $task_link['id'])) ?>" method="post" autocomplete="off">
 
     <?= $this->formCsrf() ?>
-    <?= $this->formHidden('task_id', array('task_id' => $task['id'])) ?>
+    <?= $this->formHidden('id', $values) ?>
+    <?= $this->formHidden('task_id', $values) ?>
     <?= $this->formHidden('opposite_task_id', $values) ?>
 
     <?= $this->formLabel(t('Label'), 'link_id') ?>
@@ -28,10 +29,6 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
-        <?php if (isset($ajax)): ?>
-            <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
-        <?php else: ?>
-            <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        <?php endif ?>
+        <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </div>
 </form>

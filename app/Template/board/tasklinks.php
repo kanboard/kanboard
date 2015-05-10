@@ -9,6 +9,9 @@
                 false,
                 $link['is_active'] ? '' : 'task-link-closed'
             ) ?>
+            <?php if (! empty($link['task_assignee_username'])): ?>
+                [<?= $this->e($link['task_assignee_name'] ?: $link['task_assignee_username']) ?>]
+            <?php endif ?>
         </li>
     <?php endforeach ?>
     </ul>

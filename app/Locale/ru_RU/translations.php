@@ -868,4 +868,8 @@ return array(
     // 'Help on Sendgrid integration' => '',
     'Disable two factor authentication' => 'Выключить двухфакторную авторизацию',
     'Do you really want to disable the two factor authentication for this user: "%s"?' => 'Вы действительно хотите выключить двухфакторную авторизацию для пользователя "%s"?',
+    // 'Edit a link' => '',
+    // 'Start to type task title...' => '',
+    // 'A task cannot be linked to itself' => '',
+    // 'The exact same link already exists' => '',
 );

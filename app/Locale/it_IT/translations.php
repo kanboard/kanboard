@@ -868,4 +868,8 @@ return array(
     // 'Help on Sendgrid integration' => '',
     // 'Disable two factor authentication' => '',
     // 'Do you really want to disable the two factor authentication for this user: "%s"?' => '',
+    // 'Edit a link' => '',
+    // 'Start to type task title...' => '',
+    // 'A task cannot be linked to itself' => '',
+    // 'The exact same link already exists' => '',
 );
