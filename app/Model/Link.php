@@ -55,8 +55,7 @@ class Link extends Base
      */
     public function getOppositeLinkId($link_id)
     {
-        $link = $this->getById($link_id);
-        return $link['opposite_id'] ?: $link_id;
+        return $this->db->table(self::TABLE)->eq('id', $link_id)->findOneColumn('opposite_id') ?: $link_id;
     }
 
     /**
