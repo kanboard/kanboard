@@ -85,6 +85,7 @@ Documentation
 - [Task links](docs/task-links.markdown)
 - [Transitions](docs/transitions.markdown)
 - [Time tracking](docs/time-tracking.markdown)
+- [Recurring tasks](docs/recurring-tasks.markdown)
 - [Create tasks by email](docs/create-tasks-by-email.markdown)
 
 #### Working with users
