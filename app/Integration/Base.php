@@ -12,6 +12,7 @@ use Pimple\Container;
  *
  * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectIntegration     $projectIntegration
+ * @property \Model\ProjectPermission      $projectPermission
  * @property \Model\Task                   $task
  * @property \Model\TaskFinder             $taskFinder
  * @property \Model\User                   $user

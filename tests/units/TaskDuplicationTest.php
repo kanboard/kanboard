@@ -483,4 +483,81 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
     }
+
+    public function testCalculateRecurringTaskDueDate()
+    {
+        $td = new TaskDuplication($this->container);
+
+        $values = array('date_due' => 0);
+        $td->calculateRecurringTaskDueDate($values);
+        $this->assertEquals(0, $values['date_due']);
+
+        $values = array('date_due' => 0, 'recurrence_factor' => 0, 'recurrence_basedate' => Task::RECURRING_BASEDATE_TRIGGERDATE, 'recurrence_timeframe' => Task::RECURRING_TIMEFRAME_DAYS);
+        $td->calculateRecurringTaskDueDate($values);
+        $this->assertEquals(0, $values['date_due']);
+
+        $values = array('date_due' => 1431291376, 'recurrence_factor' => 1, 'recurrence_basedate' => Task::RECURRING_BASEDATE_TRIGGERDATE, 'recurrence_timeframe' => Task::RECURRING_TIMEFRAME_DAYS);
+        $td->calculateRecurringTaskDueDate($values);
+        $this->assertEquals(time() + 86400, $values['date_due'], '', 1);
+
+        $values = array('date_due' => 1431291376, 'recurrence_factor' => -2, 'recurrence_basedate' => Task::RECURRING_BASEDATE_TRIGGERDATE, 'recurrence_timeframe' => Task::RECURRING_TIMEFRAME_DAYS);
+        $td->calculateRecurringTaskDueDate($values);
+        $this->assertEquals(time() - 2 * 86400, $values['date_due'], '', 1);
+
+        $values = array('date_due' => 1431291376, 'recurrence_factor' => 1, 'recurrence_basedate' => Task::RECURRING_BASEDATE_DUEDATE, 'recurrence_timeframe' => Task::RECURRING_TIMEFRAME_DAYS);
+        $td->calculateRecurringTaskDueDate($values);
+        $this->assertEquals(1431291376 + 86400, $values['date_due'], '', 1);
+
+        $values = array('date_due' => 1431291376, 'recurrence_factor' => -1, 'recurrence_basedate' => Task::RECURRING_BASEDATE_DUEDATE, 'recurrence_timeframe' => Task::RECURRING_TIMEFRAME_DAYS);
+        $td->calculateRecurringTaskDueDate($values);
+        $this->assertEquals(1431291376 - 86400, $values['date_due'], '', 1);
+
+        $values = array('date_due' => 1431291376, 'recurrence_factor' => 2, 'recurrence_basedate' => Task::RECURRING_BASEDATE_DUEDATE, 'recurrence_timeframe' => Task::RECURRING_TIMEFRAME_MONTHS);
+        $td->calculateRecurringTaskDueDate($values);
+        $this->assertEquals(1436561776, $values['date_due'], '', 1);
+
+        $values = array('date_due' => 1431291376, 'recurrence_factor' => 2, 'recurrence_basedate' => Task::RECURRING_BASEDATE_DUEDATE, 'recurrence_timeframe' => Task::RECURRING_TIMEFRAME_YEARS);
+        $td->calculateRecurringTaskDueDate($values);
+        $this->assertEquals(1494449776, $values['date_due'], '', 1);
+    }
+
+    public function testDuplicateRecurringTask()
+    {
+        $td = new TaskDuplication($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $c = new Category($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+
+        $this->assertEquals(1, $tc->create(array(
+            'title' => 'test',
+            'project_id' => 1,
+            'date_due' => 1436561776,
+            'recurrence_status' => Task::RECURRING_STATUS_PENDING,
+            'recurrence_trigger' => Task::RECURRING_TRIGGER_CLOSE,
+            'recurrence_factor' => 2,
+            'recurrence_timeframe' => Task::RECURRING_TIMEFRAME_DAYS,
+            'recurrence_basedate' => Task::RECURRING_BASEDATE_TRIGGERDATE,
+        )));
+
+        $this->assertEquals(2, $td->duplicateRecurringTask(1));
+
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(Task::RECURRING_STATUS_PROCESSED, $task['recurrence_status']);
+        $this->assertEquals(2, $task['recurrence_child']);
+        $this->assertEquals(1436561776, $task['date_due']);
+
+        $task = $tf->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(Task::RECURRING_STATUS_PENDING, $task['recurrence_status']);
+        $this->assertEquals(Task::RECURRING_TRIGGER_CLOSE, $task['recurrence_trigger']);
+        $this->assertEquals(Task::RECURRING_TIMEFRAME_DAYS, $task['recurrence_timeframe']);
+        $this->assertEquals(Task::RECURRING_BASEDATE_TRIGGERDATE, $task['recurrence_basedate']);
+        $this->assertEquals(1, $task['recurrence_parent']);
+        $this->assertEquals(2, $task['recurrence_factor']);
+        $this->assertEquals(strtotime('+2 days'), $task['date_due']);
+    }
 }

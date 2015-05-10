@@ -174,10 +174,10 @@ class TaskDuplication extends Base
     /**
      * Calculate new due date for new recurrence task
      *
-     * @access private
-     * @param  array      $values
+     * @access public
+     * @param  array   $values   Task fields
      */
-    private function calculateRecurringTaskDueDate(array &$values)
+    public function calculateRecurringTaskDueDate(array &$values)
     {
         if (! empty($values['date_due']) && $values['recurrence_factor'] != 0) {
 
