@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use DateTime;
+use DateInterval;
 use Event\TaskEvent;
 
 /**
@@ -174,24 +176,18 @@ class TaskDuplication extends Base
      * @access private
      * @param  array      $values
      */
-    private function recurrenceDateDue(&$values)
+    private function recurrenceDateDue(array &$values)
     {
-        if ($values['date_due'] && $values['recurrence_factor'])
-        {
-            if ($values['recurrence_basedate'])
-            {
+        if (! empty($values['date_due']) && $values['recurrence_factor'] != 0) {
+
+            if ($values['recurrence_basedate'] == Task::RECURE_BASEDATE_TRIGGERDATE) {
                 $values['date_due'] = time();
             }
 
             $factor = abs($values['recurrence_factor']);
+            $subtract = $values['recurrence_factor'] < 0;
 
-            if ($values['recurrence_factor'] < 0)
-            {
-                $subtract=TRUE;
-            }
-
-            switch ($values['recurrence_timeframe'])
-            {
+            switch ($values['recurrence_timeframe']) {
                 case Task::RECURE_MONTHS:
                     $interval = 'P' . $factor . 'M';
                     break;
@@ -200,14 +196,12 @@ class TaskDuplication extends Base
                     break;
                 default:
                     $interval = 'P' . $factor . 'D';
-                    break;
             }
 
-            $date_due = new \DateTime();
-
+            $date_due = new DateTime();
             $date_due->setTimestamp($values['date_due']);
 
-            $subtract ? $date_due->sub(new \DateInterval($interval)) : $date_due->add(new \DateInterval($interval));
+            $subtract ? $date_due->sub(new DateInterval($interval)) : $date_due->add(new DateInterval($interval));
 
             $values['date_due'] = $date_due->getTimestamp();
         }
