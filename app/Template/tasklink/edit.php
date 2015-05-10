@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Edit a link') ?></h2>
+    <h2><?= t('Edit link') ?></h2>
 </div>
 
 <form action="<?= $this->u('tasklink', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'link_id' => $task_link['id'])) ?>" method="post" autocomplete="off">
