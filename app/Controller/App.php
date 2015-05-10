@@ -110,13 +110,21 @@ class App extends Base
      */
     public function autocomplete()
     {
-        $this->response->json(
-            $this->taskFilter
-                 ->create()
-                 ->filterByProjects($this->projectPermission->getActiveMemberProjectIds($this->userSession->getId()))
-                 ->excludeTasks(array($this->request->getIntegerParam('exclude_task_id')))
-                 ->filterByTitle($this->request->getStringParam('term'))
-                 ->toAutoCompletion()
-        );
+        $search = $this->request->getStringParam('term');
+
+        $filter = $this->taskFilter
+            ->create()
+            ->filterByProjects($this->projectPermission->getActiveMemberProjectIds($this->userSession->getId()))
+            ->excludeTasks(array($this->request->getIntegerParam('exclude_task_id')));
+
+        // Search by task id or by title
+        if (ctype_digit($search)) {
+            $filter->filterById($search);
+        }
+        else {
+            $filter->filterByTitle($search);
+        }
+
+        $this->response->json($filter->toAutoCompletion());
     }
 }

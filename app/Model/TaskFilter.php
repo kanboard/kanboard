@@ -24,6 +24,15 @@ class TaskFilter extends Base
         return $this;
     }
 
+    public function filterById($task_id)
+    {
+        if ($task_id > 0) {
+            $this->query->eq('id', $task_id);
+        }
+
+        return $this;
+    }
+
     public function filterByTitle($title)
     {
         $this->query->ilike('title', '%'.$title.'%');

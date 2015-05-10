@@ -234,7 +234,7 @@ var Kanboard = (function() {
 
                 $(".task-autocomplete").autocomplete({
                     source: $(".task-autocomplete").data("search-url"),
-                    minLength: 2,
+                    minLength: 1,
                     select: function(event, ui) {
                         var field = $(".task-autocomplete").data("dst-field");
                         $("input[name=" + field + "]").val(ui.item.id);
