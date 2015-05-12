@@ -29,6 +29,32 @@
         <?= $this->formCheckbox('integration_gravatar', t('Enable Gravatar images'), 1, $values['integration_gravatar'] == 1) ?>
     </div>
 
+    <h3><img src="assets/img/jabber-icon.png"/> <?= t('Jabber (XMPP)') ?></h3>
+    <div class="listing">
+        <?= $this->formCheckbox('integration_jabber', t('Send notifications to Jabber'), 1, $values['integration_jabber'] == 1) ?>
+
+        <?= $this->formLabel(t('XMPP server address'), 'integration_jabber_server') ?>
+        <?= $this->formText('integration_jabber_server', $values, $errors, array('placeholder="tcp://myserver:5222"')) ?>
+        <p class="form-help"><?= t('The server address must use this format: "tcp://hostname:5222"') ?></p>
+
+        <?= $this->formLabel(t('Jabber domain'), 'integration_jabber_domain') ?>
+        <?= $this->formText('integration_jabber_domain', $values, $errors, array('placeholder="example.com"')) ?>
+
+        <?= $this->formLabel(t('Username'), 'integration_jabber_username') ?>
+        <?= $this->formText('integration_jabber_username', $values, $errors) ?>
+
+        <?= $this->formLabel(t('Password'), 'integration_jabber_password') ?>
+        <?= $this->formPassword('integration_jabber_password', $values, $errors) ?>
+
+        <?= $this->formLabel(t('Jabber nickname'), 'integration_jabber_nickname') ?>
+        <?= $this->formText('integration_jabber_nickname', $values, $errors) ?>
+
+        <?= $this->formLabel(t('Multi-user chat room'), 'integration_jabber_room') ?>
+        <?= $this->formText('integration_jabber_room', $values, $errors, array('placeholder="myroom@conference.example.com"')) ?>
+
+        <p class="form-help"><a href="http://kanboard.net/documentation/jabber" target="_blank"><?= t('Help on Jabber integration') ?></a></p>
+    </div>
+
     <h3><img src="assets/img/hipchat-icon.png"/> <?= t('Hipchat') ?></h3>
     <div class="listing">
         <?= $this->formCheckbox('integration_hipchat', t('Send notifications to Hipchat'), 1, $values['integration_hipchat'] == 1) ?>

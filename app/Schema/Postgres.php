@@ -6,7 +6,27 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 48;
+const VERSION = 49;
+
+function version_49($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_jabber', '0'));
+    $rq->execute(array('integration_jabber_server', ''));
+    $rq->execute(array('integration_jabber_domain', ''));
+    $rq->execute(array('integration_jabber_username', ''));
+    $rq->execute(array('integration_jabber_password', ''));
+    $rq->execute(array('integration_jabber_nickname', 'kanboard'));
+    $rq->execute(array('integration_jabber_room', ''));
+
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber INTEGER DEFAULT '0'");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_server TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_domain TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_username TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_password TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_nickname TEXT DEFAULT 'kanboard'");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_room TEXT DEFAULT ''");
+}
 
 function version_48($pdo)
 {

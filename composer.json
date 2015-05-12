@@ -1,8 +1,8 @@
 {
     "require" : {
-        "php": ">=5.3",
+        "php" : ">=5.3",
         "ext-mbstring" : "*",
-        "ext-gd": "*",
+        "ext-gd" : "*",
         "fguillot/simple-validator" : "dev-master",
         "swiftmailer/swiftmailer" : "@stable",
         "fguillot/json-rpc" : "0.0.1",
@@ -13,8 +13,9 @@
         "symfony/console" : "@stable",
         "symfony/event-dispatcher" : "~2.6",
         "fguillot/simpleLogger" : "0.0.1",
-        "christian-riesen/otp": "1.4",
-        "nickcernis/html-to-markdown": "2.2.1"
+        "christian-riesen/otp" : "1.4",
+        "nickcernis/html-to-markdown" : "2.2.1",
+        "fabiang/xmpp" : "0.6.1"
     },
     "autoload" : {
         "psr-0" : {

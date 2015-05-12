@@ -900,4 +900,12 @@ return array(
     // 'When task is moved from first column' => '',
     // 'When task is moved to last column' => '',
     // 'Year(s)' => '',
+    // 'Jabber (XMPP)' => '',
+    // 'Send notifications to Jabber' => '',
+    // 'XMPP server address' => '',
+    // 'Jabber domain' => '',
+    // 'Jabber nickname' => '',
+    // 'Multi-user chat room' => '',
+    // 'Help on Jabber integration' => '',
+    // 'The server address must use this format: "tcp://hostname:5222"' => '',
 );

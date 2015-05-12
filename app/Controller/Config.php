@@ -44,7 +44,7 @@ class Config extends Base
                 $values += array('subtask_restriction' => 0, 'subtask_time_tracking' => 0, 'subtask_forecast' => 0);
             }
             else if ($redirect === 'integrations') {
-                $values += array('integration_slack_webhook' => 0, 'integration_hipchat' => 0, 'integration_gravatar' => 0);
+                $values += array('integration_slack_webhook' => 0, 'integration_hipchat' => 0, 'integration_gravatar' => 0, 'integration_jabber' => 0);
             }
 
             if ($this->config->save($values)) {

@@ -902,4 +902,12 @@ return array(
     'When task is moved from first column' => 'Lorsque la tâche est déplacée en dehors de la première colonne',
     'When task is moved to last column' => 'Lorsque la tâche est déplacée dans la dernière colonne',
     'Year(s)' => 'Année(s)',
+    'Jabber (XMPP)' => 'Jabber (XMPP)',
+    'Send notifications to Jabber' => 'Envoyer les notifications vers Jabber',
+    'XMPP server address' => 'Adresse du serveur XMPP',
+    'Jabber domain' => 'Nom de domaine Jabber',
+    'Jabber nickname' => 'Pseudonyme Jabber',
+    'Multi-user chat room' => 'Salon de discussion multi-utilisateurs',
+    'Help on Jabber integration' => 'Aide sur l\'intégration avec Jabber',
+    'The server address must use this format: "tcp://hostname:5222"' => 'L\'adresse du serveur doit utiliser le format suivant : « tcp://hostname:5222 »',
 );

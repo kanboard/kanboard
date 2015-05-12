@@ -97,7 +97,7 @@ class Project extends Base
 
         if ($this->request->isPost()) {
             $params = $this->request->getValues();
-            $params += array('hipchat' => 0, 'slack' => 0);
+            $params += array('hipchat' => 0, 'slack' => 0, 'jabber' => 0);
             $this->projectIntegration->saveParameters($project['id'], $params);
         }
 

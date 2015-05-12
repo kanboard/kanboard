@@ -81,6 +81,7 @@ class ClassProvider implements ServiceProviderInterface
             'SendgridWebhook',
             'SlackWebhook',
             'PostmarkWebhook',
+            'Jabber',
         )
     );
 

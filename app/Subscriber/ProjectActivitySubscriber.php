@@ -42,29 +42,16 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
                 $values
             );
 
-            $this->sendSlackNotification($event_name, $values);
-            $this->sendHipchatNotification($event_name, $values);
+            // Send notifications to third-party services
+            foreach (array('slackWebhook', 'hipchatWebhook', 'jabber') as $model) {
+                $this->$model->notify(
+                    $values['task']['project_id'],
+                    $values['task']['id'],
+                    $event_name,
+                    $values
+                );
+            }
         }
-    }
-
-    private function sendSlackNotification($event_name, array $values)
-    {
-        $this->slackWebhook->notify(
-            $values['task']['project_id'],
-            $values['task']['id'],
-            $event_name,
-            $values
-        );
-    }
-
-    private function sendHipchatNotification($event_name, array $values)
-    {
-        $this->hipchatWebhook->notify(
-            $values['task']['project_id'],
-            $values['task']['id'],
-            $event_name,
-            $values
-        );
     }
 
     private function getValues(GenericEvent $event)

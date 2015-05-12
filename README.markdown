@@ -110,6 +110,7 @@ Documentation
 - [Github webhooks](docs/github-webhooks.markdown)
 - [Gitlab webhooks](docs/gitlab-webhooks.markdown)
 - [Hipchat](docs/hipchat.markdown)
+- [Jabber](docs/jabber.markdown)
 - [Mailgun](docs/mailgun.markdown)
 - [Sendgrid](docs/sendgrid.markdown)
 - [Slack](docs/slack.markdown)
