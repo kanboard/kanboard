@@ -3,6 +3,7 @@
 require_once __DIR__.'/Base.php';
 
 use Core\Helper;
+use Model\Config;
 
 class HelperTest extends Base
 {
@@ -29,5 +30,21 @@ class HelperTest extends Base
                 array('controller' => 'a', 'action' => 'b', 'params' => array('c' => 'd'))
             )
         );
+    }
+
+    public function testGetCurrentBaseUrl()
+    {
+        $h = new Helper($this->container);
+
+        $_SERVER['PHP_SELF'] = '/';
+        $_SERVER['SERVER_NAME'] = 'localhost';
+        $_SERVER['SERVER_PORT'] = 1234;
+
+        $this->assertEquals('http://localhost:1234/', $h->getCurrentBaseUrl());
+
+        $c = new Config($this->container);
+        $c->save(array('application_url' => 'https://mykanboard/'));
+        $this->assertEquals('https://mykanboard/', $c->get('application_url'));
+        $this->assertEquals('https://mykanboard/', $h->getCurrentBaseUrl());
     }
 }

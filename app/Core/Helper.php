@@ -515,6 +515,12 @@ class Helper
      */
     public function getCurrentBaseUrl()
     {
+        $application_url = $this->config->get('application_url');
+
+        if (! empty($application_url)) {
+            return $application_url;
+        }
+
         $self = str_replace('\\', '/', dirname($_SERVER['PHP_SELF']));
 
         $url = Request::isHTTPS() ? 'https://' : 'http://';
