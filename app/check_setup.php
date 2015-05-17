@@ -33,3 +33,8 @@ if (! extension_loaded('mbstring')) {
 if (! is_writable('data')) {
     die('The directory "data" must be writeable by your web server user');
 }
+
+// Fix wrong value for arg_separator.output, used by the function http_build_query()
+if (ini_get('arg_separator.output') === '&amp;') {
+    ini_set('arg_separator.output', '&');
+}

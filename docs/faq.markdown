@@ -5,7 +5,7 @@ Can you recommend a web hosting provider for Kanboard?
 ------------------------------------------------------
 
 Kanboard works well with any great VPS hosting provider such as [Digital Ocean](https://www.digitalocean.com/?refcode=4b541f47aae4),
-[Linode](https://www.linode.com) or [Gandi](https://www.gandi.net/).
+[Linode](https://www.linode.com/?r=4e381ac8a61116f40c60dc7438acc719610d8b11) or [Gandi](https://www.gandi.net/).
 
 To have the best performances, choose a provider with fast disk I/O because Kanboard use Sqlite by default.
 Avoid hosting providers that use a shared NFS mount point.
@@ -37,6 +37,29 @@ I get a blank page after installing or upgrading Kanboard
 - If you use php-fpm and opcode caching, reload the process to be sure to clear the cache
 - Enable PHP error logging in your php.ini
 - Check the PHP and Apache error logs you should see the exact error
+
+
+Page not found and the url seems wrong (&amp;)
+----------------------------------------------
+
+- The url looks like `/?controller=auth&amp;action=login&amp;redirect_query=` instead of `?controller=auth&action=login&redirect_query=`
+- Kanboard returns a "Page not found" error
+
+This issue come from your PHP configuration, the value of `arg_separator.output` is not the PHP's default, there is different ways to fix that:
+
+Change the value directly in your `php.ini` if you have the permission:
+
+```
+arg_separator.output = "&"
+```
+
+Override the value with a `.htaccess`:
+
+```
+php_value arg_separator.output "&"
+```
+
+Otherwise Kanboard will try to override the value directly in PHP.
 
 
 Known issues with eAccelerator
