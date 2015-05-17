@@ -39,7 +39,7 @@ I get a blank page after installing or upgrading Kanboard
 - Check the PHP and Apache error logs you should see the exact error
 
 
-Page not found and the url seems wrong (&amp;)
+Page not found and the url seems wrong (&amp;amp;)
 ----------------------------------------------
 
 - The url looks like `/?controller=auth&amp;action=login&amp;redirect_query=` instead of `?controller=auth&action=login&redirect_query=`
