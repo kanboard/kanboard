@@ -164,7 +164,7 @@ return array(
     'Unable to remove this user.' => 'Verwijderen van gebruikers niet gelukt.',
     'Board updated successfully.' => 'Board succesvol geupdate.',
     'Ready' => 'Klaar',
-    'Backlog' => 'En attente',
+    'Backlog' => 'Het wachten',
     'Work in progress' => 'In behandeling',
     'Done' => 'Afgewerkt',
     'Application version:' => 'Applicatie versie :',
