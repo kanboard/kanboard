@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/Base.php';
 
+use Core\Translator;
 use Subscriber\ProjectModificationDateSubscriber;
 use Model\Project;
 use Model\ProjectPermission;
@@ -15,6 +16,19 @@ use Model\Category;
 
 class ProjectTest extends Base
 {
+    public function testCreationForAllLanguages()
+    {
+        $c = new Config($this->container);
+        $p = new Project($this->container);
+
+        foreach ($c->getLanguages() as $locale => $language) {
+            Translator::load($locale);
+            $this->assertNotFalse($p->create(array('name' => 'UnitTest '.$locale)), 'Unable to create project with '.$locale.':'.$language);
+        }
+
+        Translator::load('en_US');
+    }
+
     public function testCreation()
     {
         $p = new Project($this->container);

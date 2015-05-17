@@ -166,7 +166,7 @@ return array(
     'Ready' => 'Klaar',
     'Backlog' => 'En attente',
     'Work in progress' => 'In behandeling',
-    'Done' => 'Klaar',
+    'Done' => 'Afgewerkt',
     'Application version:' => 'Applicatie versie :',
     'Completed on %B %e, %Y at %k:%M %p' => 'Voltooid op %d/%m/%Y à %H:%M',
     '%B %e, %Y at %k:%M %p' => '%d/%m/%Y op %H:%M',
