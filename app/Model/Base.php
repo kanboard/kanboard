@@ -162,4 +162,48 @@ abstract class Base
             }
         }
     }
+
+    /**
+     * Build SQL condition for a given time range
+     *
+     * @access protected
+     * @param  string   $start_time     Start timestamp
+     * @param  string   $end_time       End timestamp
+     * @param  string   $start_column   Start column name
+     * @param  string   $end_column     End column name
+     * @return string
+     */
+    protected function getCalendarCondition($start_time, $end_time, $start_column, $end_column)
+    {
+        $start_column = $this->db->escapeIdentifier($start_column);
+        $end_column = $this->db->escapeIdentifier($end_column);
+
+        $conditions = array(
+            "($start_column >= '$start_time' AND $start_column <= '$end_time')",
+            "($start_column <= '$start_time' AND $end_column >= '$start_time')",
+            "($start_column <= '$start_time' AND ($end_column = '0' OR $end_column IS NULL))",
+        );
+
+        return '('.implode(' OR ', $conditions).')';
+    }
+
+    /**
+     * Get common properties for task calendar events
+     *
+     * @access protected
+     * @param  array  $task
+     * @return array
+     */
+    protected function getTaskCalendarProperties(array &$task)
+    {
+        return array(
+            'timezoneParam' => $this->config->getCurrentTimezone(),
+            'id' => $task['id'],
+            'title' => t('#%d', $task['id']).' '.$task['title'],
+            'backgroundColor' => $this->color->getBackgroundColor($task['color_id']),
+            'borderColor' => $this->color->getBorderColor($task['color_id']),
+            'textColor' => 'black',
+            'url' => $this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
+        );
+    }
 }

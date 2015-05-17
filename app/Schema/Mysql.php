@@ -6,7 +6,22 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 68;
+const VERSION = 69;
+
+function version_69($pdo)
+{
+    $rq = $pdo->prepare("SELECT `value` FROM `settings` WHERE `option`='subtask_forecast'");
+    $rq->execute();
+    $result = $rq->fetch(PDO::FETCH_ASSOC);
+
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('calendar_user_subtasks_forecast', isset($result['subtask_forecast']) && $result['subtask_forecast'] == 1 ? 1 : 0));
+    $rq->execute(array('calendar_user_subtasks_time_tracking', 0));
+    $rq->execute(array('calendar_user_tasks', 'date_started'));
+    $rq->execute(array('calendar_project_tasks', 'date_started'));
+
+    $pdo->exec("DELETE FROM `settings` WHERE `option`='subtask_forecast'");
+}
 
 function version_68($pdo)
 {
@@ -20,12 +35,12 @@ function version_68($pdo)
     $rq->execute(array('integration_jabber_room', ''));
 
     $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber INTEGER DEFAULT '0'");
-    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_server TEXT DEFAULT ''");
-    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_domain TEXT DEFAULT ''");
-    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_username TEXT DEFAULT ''");
-    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_password TEXT DEFAULT ''");
-    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_nickname TEXT DEFAULT 'kanboard'");
-    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_room TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_server VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_domain VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_username VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_password VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_nickname VARCHAR(255) DEFAULT 'kanboard'");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_room VARCHAR(255) DEFAULT ''");
 }
 
 function version_67($pdo)

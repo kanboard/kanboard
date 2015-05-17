@@ -99,7 +99,9 @@ Documentation
 
 - [Keyboard shortcuts](docs/keyboard-shortcuts.markdown)
 - [Application settings](docs/application-configuration.markdown)
+- [Project settings](docs/project-configuration.markdown)
 - [Board settings](docs/board-configuration.markdown)
+- [Calendar settings](docs/calendar-configuration.markdown)
 - [Link settings](docs/link-labels.markdown)
 - [Currency rate](docs/currency-rate.markdown)
 - [Config file](docs/config.markdown)

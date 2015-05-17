@@ -6,7 +6,22 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 67;
+const VERSION = 68;
+
+function version_68($pdo)
+{
+    $rq = $pdo->prepare("SELECT value FROM settings WHERE option='subtask_forecast'");
+    $rq->execute();
+    $result = $rq->fetch(PDO::FETCH_ASSOC);
+
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('calendar_user_subtasks_forecast', isset($result['subtask_forecast']) && $result['subtask_forecast'] == 1 ? 1 : 0));
+    $rq->execute(array('calendar_user_subtasks_time_tracking', 0));
+    $rq->execute(array('calendar_user_tasks', 'date_started'));
+    $rq->execute(array('calendar_project_tasks', 'date_started'));
+
+    $pdo->exec("DELETE FROM settings WHERE option='subtask_forecast'");
+}
 
 function version_67($pdo)
 {

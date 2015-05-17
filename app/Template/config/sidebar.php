@@ -8,7 +8,13 @@
             <?= $this->a(t('Application settings'), 'config', 'application') ?>
         </li>
         <li>
+            <?= $this->a(t('Project settings'), 'config', 'project') ?>
+        </li>
+        <li>
             <?= $this->a(t('Board settings'), 'config', 'board') ?>
+        </li>
+        <li>
+            <?= $this->a(t('Calendar settings'), 'config', 'calendar') ?>
         </li>
         <li>
             <?= $this->a(t('Link settings'), 'link', 'index') ?>

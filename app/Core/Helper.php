@@ -274,7 +274,7 @@ class Helper
      */
     public function formRadio($name, $label, $value, $selected = false, $class = '')
     {
-        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->e($value).'" '.($selected ? 'selected="selected"' : '').'> '.$this->e($label).'</label>';
+        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->e($value).'" '.($selected ? 'checked="checked"' : '').'> '.$this->e($label).'</label>';
     }
 
     /**

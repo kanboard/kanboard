@@ -10,20 +10,59 @@ namespace Model;
  */
 class TaskFilter extends Base
 {
-    private $query;
+    /**
+     * Query
+     *
+     * @access public
+     * @var \PicoDb\Table
+     */
+    public $query;
 
+    /**
+     * Create a new query
+     *
+     * @access public
+     * @return TaskFilter
+     */
     public function create()
     {
         $this->query = $this->db->table(Task::TABLE);
         return $this;
     }
 
+    /**
+     * Clone the filter
+     *
+     * @access public
+     * @return TaskFilter
+     */
+    public function copy()
+    {
+        $filter = clone($this);
+        $filter->query = clone($this->query);
+        return $filter;
+    }
+
+    /**
+     * Exclude a list of task_id
+     *
+     * @access public
+     * @param  array  $task_ids
+     * @return TaskFilter
+     */
     public function excludeTasks(array $task_ids)
     {
         $this->query->notin('id', $task_ids);
         return $this;
     }
 
+    /**
+     * Filter by id
+     *
+     * @access public
+     * @param  integer  $task_id
+     * @return TaskFilter
+     */
     public function filterById($task_id)
     {
         if ($task_id > 0) {
@@ -33,18 +72,39 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by title
+     *
+     * @access public
+     * @param  string  $title
+     * @return TaskFilter
+     */
     public function filterByTitle($title)
     {
         $this->query->ilike('title', '%'.$title.'%');
         return $this;
     }
 
+    /**
+     * Filter by a list of project id
+     *
+     * @access public
+     * @param  array  $project_ids
+     * @return TaskFilter
+     */
     public function filterByProjects(array $project_ids)
     {
         $this->query->in('project_id', $project_ids);
         return $this;
     }
 
+    /**
+     * Filter by project id
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return TaskFilter
+     */
     public function filterByProject($project_id)
     {
         if ($project_id > 0) {
@@ -54,6 +114,13 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by category id
+     *
+     * @access public
+     * @param  integer  $category_id
+     * @return TaskFilter
+     */
     public function filterByCategory($category_id)
     {
         if ($category_id >= 0) {
@@ -63,6 +130,13 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by assignee
+     *
+     * @access public
+     * @param  integer  $owner_id
+     * @return TaskFilter
+     */
     public function filterByOwner($owner_id)
     {
         if ($owner_id >= 0) {
@@ -72,6 +146,13 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by color
+     *
+     * @access public
+     * @param  string  $color_id
+     * @return TaskFilter
+     */
     public function filterByColor($color_id)
     {
         if ($color_id !== '') {
@@ -81,6 +162,13 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by column
+     *
+     * @access public
+     * @param  integer $column_id
+     * @return TaskFilter
+     */
     public function filterByColumn($column_id)
     {
         if ($column_id >= 0) {
@@ -90,6 +178,13 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by swimlane
+     *
+     * @access public
+     * @param  integer  $swimlane_id
+     * @return TaskFilter
+     */
     public function filterBySwimlane($swimlane_id)
     {
         if ($swimlane_id >= 0) {
@@ -99,6 +194,13 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by status
+     *
+     * @access public
+     * @param  integer  $is_active
+     * @return TaskFilter
+     */
     public function filterByStatus($is_active)
     {
         if ($is_active >= 0) {
@@ -108,6 +210,14 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by due date (range)
+     *
+     * @access public
+     * @param  integer  $start
+     * @param  integer  $end
+     * @return TaskFilter
+     */
     public function filterByDueDateRange($start, $end)
     {
         $this->query->gte('date_due', $this->dateParser->getTimestampFromIsoFormat($start));
@@ -116,11 +226,63 @@ class TaskFilter extends Base
         return $this;
     }
 
+    /**
+     * Filter by start date (range)
+     *
+     * @access public
+     * @param  integer $start
+     * @param  integer $end
+     * @return TaskFilter
+     */
+    public function filterByStartDateRange($start, $end)
+    {
+        $this->query->addCondition($this->getCalendarCondition(
+            $this->dateParser->getTimestampFromIsoFormat($start),
+            $this->dateParser->getTimestampFromIsoFormat($end),
+            'date_started',
+            'date_completed'
+        ));
+
+        return $this;
+    }
+
+    /**
+     * Filter by creation date
+     *
+     * @access public
+     * @param  integer  $start
+     * @param  integer  $end
+     * @return TaskFilter
+     */
+    public function filterByCreationDateRange($start, $end)
+    {
+        $this->query->addCondition($this->getCalendarCondition(
+            $this->dateParser->getTimestampFromIsoFormat($start),
+            $this->dateParser->getTimestampFromIsoFormat($end),
+            'date_creation',
+            'date_completed'
+        ));
+
+        return $this;
+    }
+
+    /**
+     * Get all results of the filter
+     *
+     * @access public
+     * @return array
+     */
     public function findAll()
     {
         return $this->query->findAll();
     }
 
+    /**
+     * Format the results to the ajax autocompletion
+     *
+     * @access public
+     * @return array
+     */
     public function toAutoCompletion()
     {
         return $this->query->columns('id', 'title')->filter(function(array $results) {
@@ -135,22 +297,53 @@ class TaskFilter extends Base
         })->findAll();
     }
 
-    public function toCalendarEvents()
+    /**
+     * Transform results to calendar events
+     *
+     * @access public
+     * @param  string  $start_column    Column name for the start date
+     * @param  string  $end_column      Column name for the end date
+     * @return array
+     */
+    public function toDateTimeCalendarEvents($start_column, $end_column)
     {
         $events = array();
 
         foreach ($this->query->findAll() as $task) {
-            $events[] = array(
-                'timezoneParam' => $this->config->getCurrentTimezone(),
-                'id' => $task['id'],
-                'title' => t('#%d', $task['id']).' '.$task['title'],
-                'start' => date('Y-m-d', $task['date_due']),
-                'end' => date('Y-m-d', $task['date_due']),
-                'allday' => true,
-                'backgroundColor' => $this->color->getBackgroundColor($task['color_id']),
-                'borderColor' => $this->color->getBorderColor($task['color_id']),
-                'textColor' => 'black',
-                'url' => $this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
+
+            $events[] = array_merge(
+                $this->getTaskCalendarProperties($task),
+                array(
+                    'start' => date('Y-m-d\TH:i:s', $task[$start_column]),
+                    'end' => date('Y-m-d\TH:i:s', $task[$end_column] ?: time()),
+                    'editable' => false,
+                )
+            );
+        }
+
+        return $events;
+    }
+
+    /**
+     * Transform results to all day calendar events
+     *
+     * @access public
+     * @param  string    $column   Column name for the date
+     * @return array
+     */
+    public function toAllDayCalendarEvents($column = 'date_due')
+    {
+        $events = array();
+
+        foreach ($this->query->findAll() as $task) {
+
+            $events[] = array_merge(
+                $this->getTaskCalendarProperties($task),
+                array(
+                    'start' => date('Y-m-d', $task[$column]),
+                    'end' => date('Y-m-d', $task[$column]),
+                    'allday' => true,
+                )
             );
         }
 

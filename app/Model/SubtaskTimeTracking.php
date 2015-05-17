@@ -135,8 +135,13 @@ class SubtaskTimeTracking extends Base
     public function getUserCalendarEvents($user_id, $start, $end)
     {
         $result = $this->getUserQuery($user_id)
-                       ->addCondition($this->getCalendarCondition($start, $end))
-                       ->findAll();
+            ->addCondition($this->getCalendarCondition(
+                $this->dateParser->getTimestampFromIsoFormat($start),
+                $this->dateParser->getTimestampFromIsoFormat($end),
+                'start',
+                'end'
+            ))
+            ->findAll();
 
         $result = $this->timetable->calculateEventsIntersect($user_id, $result, $start, $end);
 
@@ -154,35 +159,17 @@ class SubtaskTimeTracking extends Base
      */
     public function getProjectCalendarEvents($project_id, $start, $end)
     {
-        $result = $this->getProjectQuery($project_id)
-                       ->addCondition($this->getCalendarCondition($start, $end))
-                       ->findAll();
+        $result = $this
+            ->getProjectQuery($project_id)
+            ->addCondition($this->getCalendarCondition(
+                $this->dateParser->getTimestampFromIsoFormat($start),
+                $this->dateParser->getTimestampFromIsoFormat($end),
+                'start',
+                'end'
+            ))
+            ->findAll();
 
         return $this->toCalendarEvents($result);
-    }
-
-    /**
-     * Get time slots that should be displayed in the calendar time range
-     *
-     * @access private
-     * @param  string   $start   ISO8601 start date
-     * @param  string   $end     ISO8601 end date
-     * @return string
-     */
-    private function getCalendarCondition($start, $end)
-    {
-        $start_time = $this->dateParser->getTimestampFromIsoFormat($start);
-        $end_time = $this->dateParser->getTimestampFromIsoFormat($end);
-        $start_column = $this->db->escapeIdentifier('start');
-        $end_column = $this->db->escapeIdentifier('end');
-
-        $conditions = array(
-            "($start_column >= '$start_time' AND $start_column <= '$end_time')",
-            "($start_column <= '$start_time' AND $end_column >= '$start_time')",
-            "($start_column <= '$start_time' AND $end_column = '0')",
-        );
-
-        return '('.implode(' OR ', $conditions).')';
     }
 
     /**

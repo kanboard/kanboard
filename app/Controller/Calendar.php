@@ -47,7 +47,8 @@ class Calendar extends Base
         $start = $this->request->getStringParam('start');
         $end = $this->request->getStringParam('end');
 
-        $due_tasks = $this->taskFilter
+        // Common filter
+        $filter = $this->taskFilter
             ->create()
             ->filterByProject($project_id)
             ->filterByCategory($this->request->getIntegerParam('category_id', -1))
@@ -55,11 +56,20 @@ class Calendar extends Base
             ->filterByColumn($this->request->getIntegerParam('column_id', -1))
             ->filterBySwimlane($this->request->getIntegerParam('swimlane_id', -1))
             ->filterByColor($this->request->getStringParam('color_id'))
-            ->filterByStatus($this->request->getIntegerParam('is_active', -1))
-            ->filterByDueDateRange($start, $end)
-            ->toCalendarEvents();
+            ->filterByStatus($this->request->getIntegerParam('is_active', -1));
 
-        $this->response->json($due_tasks);
+        // Tasks
+        if ($this->config->get('calendar_project_tasks', 'date_started') === 'date_creation') {
+            $events = $filter->copy()->filterByCreationDateRange($start, $end)->toDateTimeCalendarEvents('date_creation', 'date_completed');
+        }
+        else {
+            $events = $filter->copy()->filterByStartDateRange($start, $end)->toDateTimeCalendarEvents('date_started', 'date_completed');
+        }
+
+        // Tasks with due date
+        $events = array_merge($events, $filter->copy()->filterByDueDateRange($start, $end)->toAllDayCalendarEvents());
+
+        $this->response->json($events);
     }
 
     /**
@@ -72,19 +82,30 @@ class Calendar extends Base
         $user_id = $this->request->getIntegerParam('user_id');
         $start = $this->request->getStringParam('start');
         $end = $this->request->getStringParam('end');
+        $filter = $this->taskFilter->create()->filterByOwner($user_id)->filterByStatus(TaskModel::STATUS_OPEN);
 
-        $due_tasks = $this->taskFilter
-                          ->create()
-                          ->filterByOwner($user_id)
-                          ->filterByStatus(TaskModel::STATUS_OPEN)
-                          ->filterByDueDateRange($start, $end)
-                          ->toCalendarEvents();
+        // Task with due date
+        $events = $filter->copy()->filterByDueDateRange($start, $end)->toAllDayCalendarEvents();
 
-        $subtask_timeslots = $this->subtaskTimeTracking->getUserCalendarEvents($user_id, $start, $end);
+        // Tasks
+        if ($this->config->get('calendar_user_tasks', 'date_started') === 'date_creation') {
+            $events = array_merge($events, $filter->copy()->filterByCreationDateRange($start, $end)->toDateTimeCalendarEvents('date_creation', 'date_completed'));
+        }
+        else {
+            $events = array_merge($events, $filter->copy()->filterByStartDateRange($start, $end)->toDateTimeCalendarEvents('date_started', 'date_completed'));
+        }
 
-        $subtask_forcast = $this->config->get('subtask_forecast') == 1 ? $this->subtaskForecast->getCalendarEvents($user_id, $end) : array();
+        // Subtasks time tracking
+        if ($this->config->get('calendar_user_subtasks_time_tracking') == 1) {
+            $events = array_merge($events, $this->subtaskTimeTracking->getUserCalendarEvents($user_id, $start, $end));
+        }
 
-        $this->response->json(array_merge($due_tasks, $subtask_timeslots, $subtask_forcast));
+        // Subtask estimates
+        if ($this->config->get('calendar_user_subtasks_forecast') == 1) {
+            $events = array_merge($events, $this->subtaskForecast->getCalendarEvents($user_id, $end));
+        }
+
+        $this->response->json($events);
     }
 
     /**
