@@ -918,4 +918,5 @@ return array(
     'Show tasks based on the start date' => 'Afficher les tâches en fonction de la date de début',
     'Subtasks time tracking' => 'Suivi du temps par rapport aux sous-tâches',
     'User calendar view' => 'Vue en mode utilisateur du calendrier',
+    'Automatically update the start date' => 'Mettre à jour automatiquement la date de début',
 );

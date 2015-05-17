@@ -63,6 +63,7 @@ List of available actions
 - Change the assignee based on an external username
 - Change the category based on an external label
 - Create a comment from an external provider
+- Automatically update the start date
 
 Examples
 --------
@@ -71,46 +72,52 @@ Here are some examples used in the real life:
 
 ### When I move a task to the column "Done", automatically close this task
 
-- Choose the event: **Move a task to another column**
 - Choose the action: **Close the task**
+- Choose the event: **Move a task to another column**
 - Define the action parameter: **Column = Done** (this is the destination column)
 
 ### When I move a task to the column "To be validated", assign this task to a specific user
 
-- Choose the event: **Move a task to another column**
 - Choose the action: **Assign the task to a specific user**
+- Choose the event: **Move a task to another column**
 - Define the action parameters: **Column = To be validated** and **User = Bob** (Bob is our tester)
 
 ### When I move a task to the column "Work in progress", assign this task to the current user
 
-- Choose the event: **Move a task to another column**
 - Choose the action: **Assign the task to the person who does the action**
+- Choose the event: **Move a task to another column**
 - Define the action parameter: **Column = Work in progress**
 
 ### When a task is completed, duplicate this task to another project
 
 Let's say we have two projects "Customer orders" and "Production", once the order is validated, swap it to the "Production" project.
 
-- Choose the event: **Closing a task**
 - Choose the action: **Duplicate the task to another project**
+- Choose the event: **Closing a task**
 - Define the action parameters: **Column = Validated** and **Project = Production**
 
 ### When a task is moved to the last column, move the exact same task to another project
 
 Let's say we have two projects "Ideas" and "Development", once the idea is validated, swap it to the "Development" project.
 
-- Choose the event: **Move a task to another column**
 - Choose the action: **Move the task to another project**
+- Choose the event: **Move a task to another column**
 - Define the action parameters: **Column = Validated** and **Project = Development**
 
 ### I want to assign automatically a color to the user Bob
 
-- Choose the event: **Task assignee change**
 - Choose the action: **Assign a color to a specific user**
+- Choose the event: **Task assignee change**
 - Define the action parameters: **Color = Green** and **Assignee = Bob**
 
 ### I want to assign automatically a color to the defined category "Feature Request"
 
-- Choose the event: **Task creation or modification**
 - Choose the action: **Assign automatically a color based on a category**
+- Choose the event: **Task creation or modification**
 - Define the action parameters: **Color = Blue** and **Category = Feature Request**
+
+### I want to set the start date automatically when the task is moved to the column "Work in progress"
+
+- Choose the action: **Automatically update the start date**
+- Choose the event: **Move a task to another column**
+- Define the action parameters: **Column = Work in progress**

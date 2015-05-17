@@ -916,4 +916,5 @@ return array(
     // 'Show tasks based on the start date' => '',
     // 'Subtasks time tracking' => '',
     // 'User calendar view' => '',
+    // 'Automatically update the start date' => '',
 );

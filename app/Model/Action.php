@@ -56,6 +56,7 @@ class Action extends Base
             'TaskLogMoveAnotherColumn' => t('Add a comment logging moving the task between columns'),
             'TaskAssignUser' => t('Change the assignee based on an external username'),
             'TaskAssignCategoryLabel' => t('Change the category based on an external label'),
+            'TaskUpdateStartDate' => t('Automatically update the start date'),
         );
 
         asort($values);

@@ -5,12 +5,12 @@ namespace Action;
 use Model\Task;
 
 /**
- * Assign a color to a task
+ * Set the start date of task
  *
  * @package action
  * @author  Frederic Guillot
  */
-class TaskAssignColorColumn extends Base
+class TaskUpdateStartDate extends Base
 {
     /**
      * Get the list of compatible events
@@ -35,7 +35,6 @@ class TaskAssignColorColumn extends Base
     {
         return array(
             'column_id' => t('Column'),
-            'color_id' => t('Color'),
         );
     }
 
@@ -64,7 +63,7 @@ class TaskAssignColorColumn extends Base
     {
         $values = array(
             'id' => $data['task_id'],
-            'color_id' => $this->getParam('color_id'),
+            'date_started' => time(),
         );
 
         return $this->taskModification->update($values);
