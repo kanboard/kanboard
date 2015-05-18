@@ -15,7 +15,8 @@
         "fguillot/simpleLogger" : "0.0.1",
         "christian-riesen/otp" : "1.4",
         "nickcernis/html-to-markdown" : "2.2.1",
-        "fabiang/xmpp" : "0.6.1"
+        "fabiang/xmpp" : "0.6.1",
+        "eluceo/ical": "*"
     },
     "autoload" : {
         "psr-0" : {

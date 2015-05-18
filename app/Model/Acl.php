@@ -24,6 +24,7 @@ class Acl extends Base
         'project' => array('feed'),
         'webhook' => '*',
         'app' => array('colors'),
+        'ical' => '*',
     );
 
     /**

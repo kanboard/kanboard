@@ -2,6 +2,11 @@
 
 namespace Model;
 
+use DateTime;
+use Eluceo\iCal\Component\Calendar;
+use Eluceo\iCal\Component\Event;
+use Eluceo\iCal\Property\Event\Attendees;
+
 /**
  * Task Filter
  *
@@ -27,6 +32,17 @@ class TaskFilter extends Base
     public function create()
     {
         $this->query = $this->db->table(Task::TABLE);
+        $this->query->left(User::TABLE, 'ua', 'id', Task::TABLE, 'owner_id');
+        $this->query->left(User::TABLE, 'uc', 'id', Task::TABLE, 'creator_id');
+
+        $this->query->columns(
+            Task::TABLE.'.*',
+            'ua.email AS assignee_email',
+            'ua.username AS assignee_username',
+            'uc.email AS creator_email',
+            'uc.username AS creator_username'
+        );
+
         return $this;
     }
 
@@ -214,8 +230,8 @@ class TaskFilter extends Base
      * Filter by due date (range)
      *
      * @access public
-     * @param  integer  $start
-     * @param  integer  $end
+     * @param  string  $start
+     * @param  string  $end
      * @return TaskFilter
      */
     public function filterByDueDateRange($start, $end)
@@ -230,8 +246,8 @@ class TaskFilter extends Base
      * Filter by start date (range)
      *
      * @access public
-     * @param  integer $start
-     * @param  integer $end
+     * @param  string  $start
+     * @param  strings $end
      * @return TaskFilter
      */
     public function filterByStartDateRange($start, $end)
@@ -250,8 +266,8 @@ class TaskFilter extends Base
      * Filter by creation date
      *
      * @access public
-     * @param  integer  $start
-     * @param  integer  $end
+     * @param  string  $start
+     * @param  string  $end
      * @return TaskFilter
      */
     public function filterByCreationDateRange($start, $end)
@@ -348,5 +364,104 @@ class TaskFilter extends Base
         }
 
         return $events;
+    }
+
+    /**
+     * Transform results to ical events
+     *
+     * @access public
+     * @param  string                           $start_column    Column name for the start date
+     * @param  string                           $end_column      Column name for the end date
+     * @param  Eluceo\iCal\Component\Calendar   $vCalendar       Calendar object
+     * @return Eluceo\iCal\Component\Calendar
+     */
+    public function addDateTimeIcalEvents($start_column, $end_column, Calendar $vCalendar = null)
+    {
+        if ($vCalendar === null) {
+            $vCalendar = new Calendar('Kanboard');
+        }
+
+        foreach ($this->query->findAll() as $task) {
+
+            $start = new DateTime;
+            $start->setTimestamp($task[$start_column]);
+
+            $end = new DateTime;
+            $end->setTimestamp($task[$end_column] ?: time());
+
+            $vEvent = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-'.$start_column.'-'.$end_column);
+            $vEvent->setDtStart($start);
+            $vEvent->setDtEnd($end);
+
+            $vCalendar->addComponent($vEvent);
+        }
+
+        return $vCalendar;
+    }
+
+    /**
+     * Transform results to all day ical events
+     *
+     * @access public
+     * @param  string                             $column        Column name for the date
+     * @param  Eluceo\iCal\Component\Calendar     $vCalendar     Calendar object
+     * @return Eluceo\iCal\Component\Calendar
+     */
+    public function addAllDayIcalEvents($column = 'date_due', Calendar $vCalendar = null)
+    {
+        if ($vCalendar === null) {
+            $vCalendar = new Calendar('Kanboard');
+        }
+
+        foreach ($this->query->findAll() as $task) {
+
+            $date = new DateTime;
+            $date->setTimestamp($task[$column]);
+
+            $vEvent = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-'.$column);
+            $vEvent->setDtStart($date);
+            $vEvent->setDtEnd($date);
+            $vEvent->setNoTime(true);
+
+            $vCalendar->addComponent($vEvent);
+        }
+
+        return $vCalendar;
+    }
+
+    /**
+     * Get common events for task ical events
+     *
+     * @access protected
+     * @param  array   $task
+     * @param  string  $uid
+     * @return Eluceo\iCal\Component\Event
+     */
+    protected function getTaskIcalEvent(array &$task, $uid)
+    {
+        $dateCreation = new DateTime;
+        $dateCreation->setTimestamp($task['date_creation']);
+
+        $dateModif = new DateTime;
+        $dateModif->setTimestamp($task['date_modification']);
+
+        $vEvent = new Event($uid);
+        $vEvent->setCreated($dateCreation);
+        $vEvent->setModified($dateModif);
+        $vEvent->setUseTimezone(true);
+        $vEvent->setSummary(t('#%d', $task['id']).' '.$task['title']);
+        $vEvent->setUrl($this->helper->getCurrentBaseUrl().$this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+
+        if (! empty($task['creator_id'])) {
+            $vEvent->setOrganizer('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
+        }
+
+        if (! empty($task['owner_id'])) {
+            $attendees = new Attendees;
+            $attendees->add('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
+            $vEvent->setAttendees($attendees);
+        }
+
+        return $vEvent;
     }
 }
