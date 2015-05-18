@@ -917,4 +917,10 @@ return array(
     // 'Subtasks time tracking' => '',
     // 'User calendar view' => '',
     // 'Automatically update the start date' => '',
+    // 'iCalendar (iCal format, *.ics)' => '',
+    // 'Preferences' => '',
+    // 'Security' => '',
+    // 'Two factor authentication disabled' => '',
+    // 'Two factor authentication enabled' => '',
+    // 'Unable to update this user.' => '',
 );
