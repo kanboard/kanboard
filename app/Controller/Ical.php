@@ -2,7 +2,9 @@
 
 namespace Controller;
 
+use Model\TaskFilter;
 use Model\Task as TaskModel;
+use Eluceo\iCal\Component\Calendar as iCalendar;
 
 /**
  * iCalendar controller
@@ -12,6 +14,35 @@ use Model\Task as TaskModel;
  */
 class Ical extends Base
 {
+    /**
+     * Get user iCalendar
+     *
+     * @access public
+     */
+    public function user()
+    {
+        $token = $this->request->getStringParam('token');
+        $user = $this->user->getByToken($token);
+
+        // Token verification
+        if (empty($user)) {
+            $this->forbidden(true);
+        }
+
+        // Common filter
+        $filter = $this->taskFilter
+            ->create()
+            ->filterByOwner($user['id']);
+
+        // Calendar properties
+        $calendar = new iCalendar('Kanboard');
+        $calendar->setName($user['name'] ?: $user['username']);
+        $calendar->setDescription($user['name'] ?: $user['username']);
+        $calendar->setPublishedTTL('PT1H');
+
+        $this->renderCalendar($filter, $calendar);
+    }
+
     /**
      * Get project iCalendar
      *
@@ -27,24 +58,40 @@ class Ical extends Base
             $this->forbidden(true);
         }
 
-        $start = $this->request->getStringParam('start', strtotime('-1 month'));
-        $end = $this->request->getStringParam('end', strtotime('+2 months'));
-
         // Common filter
         $filter = $this->taskFilter
             ->create()
             ->filterByProject($project['id']);
 
+        // Calendar properties
+        $calendar = new iCalendar('Kanboard');
+        $calendar->setName($project['name']);
+        $calendar->setDescription($project['name']);
+        $calendar->setPublishedTTL('PT1H');
+
+        $this->renderCalendar($filter, $calendar);
+    }
+
+    /**
+     * Common method to render iCal events
+     *
+     * @access private
+     */
+    private function renderCalendar(TaskFilter $filter, iCalendar $calendar)
+    {
+        $start = $this->request->getStringParam('start', strtotime('-1 month'));
+        $end = $this->request->getStringParam('end', strtotime('+2 months'));
+
         // Tasks
         if ($this->config->get('calendar_project_tasks', 'date_started') === 'date_creation') {
-            $calendar = $filter->copy()->filterByCreationDateRange($start, $end)->addDateTimeIcalEvents('date_creation', 'date_completed');
+            $filter->copy()->filterByCreationDateRange($start, $end)->addDateTimeIcalEvents('date_creation', 'date_completed', $calendar);
         }
         else {
-            $calendar = $filter->copy()->filterByStartDateRange($start, $end)->addDateTimeIcalEvents('date_started', 'date_completed');
+            $filter->copy()->filterByStartDateRange($start, $end)->addDateTimeIcalEvents('date_started', 'date_completed', $calendar);
         }
 
         // Tasks with due date
-        $calendar = $filter->copy()->filterByDueDateRange($start, $end)->addAllDayIcalEvents('date_due', $calendar);
+        $filter->copy()->filterByDueDateRange($start, $end)->addAllDayIcalEvents('date_due', $calendar);
 
         $this->response->contentType('text/calendar; charset=utf-8');
         echo $calendar->render();

@@ -167,4 +167,29 @@ class UserTest extends Base
 
         $this->assertEmpty($p->getById(2));
     }
+
+    public function testEnableDisablePublicAccess()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456')));
+
+        $user = $u->getById(2);
+        $this->assertNotEmpty($user);
+        $this->assertEquals('toto', $user['username']);
+        $this->assertEmpty($user['token']);
+
+        $this->assertTrue($u->enablePublicAccess(2));
+
+        $user = $u->getById(2);
+        $this->assertNotEmpty($user);
+        $this->assertEquals('toto', $user['username']);
+        $this->assertNotEmpty($user['token']);
+
+        $this->assertTrue($u->disablePublicAccess(2));
+
+        $user = $u->getById(2);
+        $this->assertNotEmpty($user);
+        $this->assertEquals('toto', $user['username']);
+        $this->assertEmpty($user['token']);
+    }
 }

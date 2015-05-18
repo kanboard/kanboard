@@ -5,6 +5,7 @@ namespace Model;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Core\Session;
+use Core\Security;
 
 /**
  * User model
@@ -114,6 +115,10 @@ class User extends Base
      */
     public function getByGoogleId($google_id)
     {
+        if (empty($google_id)) {
+            return false;
+        }
+
         return $this->db->table(self::TABLE)->eq('google_id', $google_id)->findOne();
     }
 
@@ -126,6 +131,10 @@ class User extends Base
      */
     public function getByGitHubId($github_id)
     {
+        if (empty($github_id)) {
+            return false;
+        }
+
         return $this->db->table(self::TABLE)->eq('github_id', $github_id)->findOne();
     }
 
@@ -155,6 +164,22 @@ class User extends Base
         }
 
         return $this->db->table(self::TABLE)->eq('email', $email)->findOne();
+    }
+
+    /**
+     * Fetch user by using the token
+     *
+     * @access public
+     * @param  string   $token    Token
+     * @return array
+     */
+    public function getByToken($token)
+    {
+        if (empty($token)) {
+            return false;
+        }
+
+        return $this->db->table(self::TABLE)->eq('token', $token)->findOne();
     }
 
     /**
@@ -298,6 +323,36 @@ class User extends Base
                 return false;
             }
         });
+    }
+
+    /**
+     * Enable public access for a user
+     *
+     * @access public
+     * @param  integer   $user_id   User id
+     * @return bool
+     */
+    public function enablePublicAccess($user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('id', $user_id)
+                    ->save(array('token' => Security::generateToken()));
+    }
+
+    /**
+     * Disable public access for a user
+     *
+     * @access public
+     * @param  integer   $user_id    User id
+     * @return bool
+     */
+    public function disablePublicAccess($user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('id', $user_id)
+                    ->save(array('token' => ''));
     }
 
     /**

@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 69;
+const VERSION = 70;
+
+function version_70($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN token VARCHAR(255) DEFAULT ''");
+}
 
 function version_69($pdo)
 {

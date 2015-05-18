@@ -84,6 +84,10 @@ class Project extends Base
      */
     public function getByToken($token)
     {
+        if (empty($token)) {
+            return false;
+        }
+
         return $this->db->table(self::TABLE)->eq('token', $token)->eq('is_public', 1)->findOne();
     }
 

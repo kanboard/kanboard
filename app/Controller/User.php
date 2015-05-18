@@ -249,6 +249,35 @@ class User extends Base
     }
 
     /**
+     * Public access management
+     *
+     * @access public
+     */
+    public function share()
+    {
+        $user = $this->getUser();
+        $switch = $this->request->getStringParam('switch');
+
+        if ($switch === 'enable' || $switch === 'disable') {
+
+            $this->checkCSRFParam();
+
+            if ($this->user->{$switch.'PublicAccess'}($user['id'])) {
+                $this->session->flash(t('User updated successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to update this user.'));
+            }
+
+            $this->response->redirect($this->helper->url('user', 'share', array('user_id' => $user['id'])));
+        }
+
+        $this->response->html($this->layout('user/share', array(
+            'user' => $user,
+            'title' => t('Public access'),
+        )));
+    }
+
+    /**
      * Password modification
      *
      * @access public

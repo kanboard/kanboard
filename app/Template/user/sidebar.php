@@ -49,6 +49,9 @@
             <?php endif ?>
 
             <li>
+                <?= $this->a(t('Public access'), 'user', 'share', array('user_id' => $user['id'])) ?>
+            </li>
+            <li>
                 <?= $this->a(t('Email notifications'), 'user', 'notifications', array('user_id' => $user['id'])) ?>
             </li>
             <li>
