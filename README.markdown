@@ -117,6 +117,7 @@ Documentation
 - [Sendgrid](docs/sendgrid.markdown)
 - [Slack](docs/slack.markdown)
 - [Postmark](docs/postmark.markdown)
+- [iCalendar subscriptions](docs/ical.markdown)
 
 #### More
 

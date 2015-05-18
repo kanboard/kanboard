@@ -6,7 +6,7 @@
 
     <div class="listing">
         <ul class="no-bullet">
-            <li><strong><i class="fa fa-calendar"></i> <?= $this->a(t('iCalendar (iCal format, *.ics)'), 'ical', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
+            <li><strong><i class="fa fa-calendar"></i> <?= $this->a(t('iCal feed'), 'ical', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
         </ul>
     </div>
 

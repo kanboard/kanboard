@@ -919,7 +919,7 @@ return array(
     'Subtasks time tracking' => 'Suivi du temps par rapport aux sous-tâches',
     'User calendar view' => 'Vue en mode utilisateur du calendrier',
     'Automatically update the start date' => 'Mettre à jour automatiquement la date de début',
-    'iCalendar (iCal format, *.ics)' => 'iCalendar (format iCal, *.ics)',
+    'iCal feed' => 'Abonnement iCal',
     'Preferences' => 'Préférences',
     'Security' => 'Sécurité',
     'Two factor authentication disabled' => 'Authentification à deux facteurs désactivé',
