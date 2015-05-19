@@ -129,7 +129,9 @@ class Comment extends Base
                     ->eq('id', $values['id'])
                     ->update(array('comment' => $values['comment']));
 
-        $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new CommentEvent($values));
+        if ($result) {
+            $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new CommentEvent($values));
+        }
 
         return $result;
     }

@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Készítette',
     'Modification date' => 'Módosítás dátuma',
     'Completion date' => 'Befejezés határideje',
-    'Webhook URL for task creation' => 'Webhook URL a feladat létrehozásakor',
-    'Webhook URL for task modification' => 'Webhook URL a feladatot módosításakor',
     'Clone' => 'Másolat',
     'Clone Project' => 'Projekt másolása',
     'Project cloned successfully.' => 'A projekt sikeresen másolva.',

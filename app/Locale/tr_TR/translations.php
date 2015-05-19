@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Oluşturan',
     'Modification date' => 'Değişiklik tarihi',
     'Completion date' => 'Tamamlanma tarihi',
-    // 'Webhook URL for task creation' => '',
-    // 'Webhook URL for task modification' => '',
     'Clone' => 'Kopya oluştur',
     'Clone Project' => 'Projenin kopyasını oluştur',
     'Project cloned successfully.' => 'Proje kopyası başarıyla oluşturuldu.',

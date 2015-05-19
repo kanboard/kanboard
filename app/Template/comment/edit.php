@@ -7,6 +7,7 @@
     <?= $this->formCsrf() ?>
     <?= $this->formHidden('id', $values) ?>
     <?= $this->formHidden('task_id', $values) ?>
+    <?= $this->formHidden('user_id', $values) ?>
 
     <div class="form-tabs">
         <ul class="form-tabs-nav">

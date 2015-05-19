@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Autor',
     'Modification date' => 'Datum izmene',
     'Completion date' => 'Datum kompletiranja',
-    'Webhook URL for task creation' => 'Webhook URL zadatka za kreiranje',
-    'Webhook URL for task modification' => 'Webhook URL zadatka za izmenu',
     'Clone' => 'Iskopiraj',
     'Clone Project' => 'Iskopiraj projekat',
     'Project cloned successfully.' => 'Projekat uspešno iskopiran.',

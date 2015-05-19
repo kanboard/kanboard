@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Skaber',
     'Modification date' => 'Ændringsdato',
     'Completion date' => 'Afslutningsdato',
-    'Webhook URL for task creation' => 'Webhook URL for opgave oprettelse',
-    'Webhook URL for task modification' => 'Webhook URL opgave redigering',
     'Clone' => 'Kopier',
     'Clone Project' => 'Kopier projekt',
     'Project cloned successfully.' => 'Projektet er kopieret.',

@@ -389,8 +389,6 @@ return array(
     'Creator' => '创建者',
     'Modification date' => '修改日期',
     'Completion date' => '完成日期',
-    'Webhook URL for task creation' => '创建任务的Webhook URL',
-    'Webhook URL for task modification' => '修改任务的Webhook URL',
     'Clone' => '克隆',
     'Clone Project' => '复制项目',
     'Project cloned successfully.' => '成功复制项目。',

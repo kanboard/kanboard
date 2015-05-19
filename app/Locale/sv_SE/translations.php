@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Skapare',
     'Modification date' => 'Ändringsdatum',
     'Completion date' => 'Slutfört datum',
-    'Webhook URL for task creation' => 'Webhook URL för att skapa uppgift',
-    'Webhook URL for task modification' => 'Webhook URL för att ändra uppgift',
     'Clone' => 'Klona',
     'Clone Project' => 'Klona projekt',
     'Project cloned successfully.' => 'Projektet har klonats.',

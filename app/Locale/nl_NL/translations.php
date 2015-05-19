@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Aangemaakt door',
     'Modification date' => 'Wijzigingsdatum',
     'Completion date' => 'Afgerond op',
-    'Webhook URL for task creation' => 'Webhook URL voor aanmaken taak',
-    'Webhook URL for task modification' => 'Webhook URL voor wijzigen taak',
     'Clone' => 'Kloon',
     'Clone Project' => 'Project klonen',
     'Project cloned successfully.' => 'Project succesvol gekloond.',

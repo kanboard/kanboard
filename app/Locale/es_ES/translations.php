@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Creador',
     'Modification date' => 'Fecha de modificación',
     'Completion date' => 'Fecha de terminación',
-    'Webhook URL for task creation' => 'Disparador Web (Webhook) para la creación de tareas',
-    'Webhook URL for task modification' => 'Disparador Web (Webhook) para la modificación de tareas',
     'Clone' => 'Clonar',
     'Clone Project' => 'Clonar proyecto',
     'Project cloned successfully.' => 'Proyecto clonado correctamente',

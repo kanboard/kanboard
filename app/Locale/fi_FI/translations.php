@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Luonut',
     'Modification date' => 'Muokkauspäivä',
     'Completion date' => 'Valmistumispäivä',
-    'Webhook URL for task creation' => 'Webhook URL tehtävän luomiselle',
-    'Webhook URL for task modification' => 'Webhook URL tehtävän muokkaamiselle',
     'Clone' => 'Kahdenna',
     'Clone Project' => 'Kahdenna projekti',
     'Project cloned successfully.' => 'Projekti kahdennettu onnistuneesti',

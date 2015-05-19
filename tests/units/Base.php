@@ -11,6 +11,35 @@ use SimpleLogger\File;
 
 date_default_timezone_set('UTC');
 
+class FakeHttpClient
+{
+    private $url = '';
+    private $data = array();
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function toPrettyJson()
+    {
+        return json_encode($this->data, JSON_PRETTY_PRINT);
+    }
+
+    public function post($url, array $data)
+    {
+        $this->url = $url;
+        $this->data = $data;
+        //echo $this->toPrettyJson();
+        return true;
+    }
+}
+
 abstract class Base extends PHPUnit_Framework_TestCase
 {
     protected $container;
@@ -43,6 +72,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
 
         $this->container['logger'] = new Logger;
         $this->container['logger']->setLogger(new File('/dev/null'));
+        $this->container['httpClient'] = new FakeHttpClient;
     }
 
     public function tearDown()

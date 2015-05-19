@@ -389,8 +389,6 @@ return array(
     'Creator' => 'ผู้สร้าง',
     'Modification date' => 'วันที่แก้ไข',
     'Completion date' => 'วันที่เสร็จสิ้น',
-    'Webhook URL for task creation' => 'Webhook URL for task creation',
-    'Webhook URL for task modification' => 'Webhook URL for task modification',
     'Clone' => 'เลียนแบบ',
     // 'Clone Project' => '',
     'Project cloned successfully.' => 'เลียนแบบโปรเจคเรียบร้อยแล้ว',

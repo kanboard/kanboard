@@ -6,11 +6,8 @@
 
     <?= $this->formCsrf() ?>
 
-    <?= $this->formLabel(t('Webhook URL for task creation'), 'webhook_url_task_creation') ?>
-    <?= $this->formText('webhook_url_task_creation', $values, $errors) ?><br/>
-
-    <?= $this->formLabel(t('Webhook URL for task modification'), 'webhook_url_task_modification') ?>
-    <?= $this->formText('webhook_url_task_modification', $values, $errors) ?><br/>
+    <?= $this->formLabel(t('Webhook URL'), 'webhook_url') ?>
+    <?= $this->formText('webhook_url', $values, $errors) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

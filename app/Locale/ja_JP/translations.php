@@ -389,8 +389,6 @@ return array(
     'Creator' => '作成者',
     'Modification date' => '変更日',
     'Completion date' => '完了日',
-    'Webhook URL for task creation' => 'タスク作成の Webhook URL',
-    'Webhook URL for task modification' => 'タスク変更の Webhook URL',
     'Clone' => '複製',
     'Clone Project' => 'プロジェクトの複製',
     'Project cloned successfully.' => 'プロジェクトを複製しました。',

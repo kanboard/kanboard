@@ -389,8 +389,6 @@ return array(
     'Creator' => 'Автор',
     'Modification date' => 'Дата изменения',
     'Completion date' => 'Дата завершения',
-    'Webhook URL for task creation' => 'Webhook URL для создания задачи',
-    'Webhook URL for task modification' => 'Webhook URL для изменения задачи',
     'Clone' => 'Клонировать',
     'Clone Project' => 'Клонировать проект',
     'Project cloned successfully.' => 'Проект клонирован.',

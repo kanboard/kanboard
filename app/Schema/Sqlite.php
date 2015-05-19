@@ -6,7 +6,16 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 69;
+const VERSION = 70;
+
+function version_70($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('webhook_url', ''));
+
+    $pdo->exec("DELETE FROM settings WHERE option='webhook_url_task_creation'");
+    $pdo->exec("DELETE FROM settings WHERE option='webhook_url_task_modification'");
+}
 
 function version_69($pdo)
 {
