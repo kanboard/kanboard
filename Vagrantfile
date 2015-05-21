@@ -84,6 +84,12 @@ Vagrant.configure("2") do |config|
     m.vm.synced_folder ".", "/var/www/html", owner: "www-data", group: "www-data"
   end
 
+  config.vm.define "debian8" do |m|
+    m.vm.box = "debian/jessie64"
+    m.vm.provision "shell", inline: $script_sqlite
+    m.vm.synced_folder ".", "/var/www/html", owner: "www-data", group: "www-data"
+  end
+
   config.vm.define "debian7" do |m|
     m.vm.box = "chef/debian-7.6"
     m.vm.provision "shell", inline: $script_sqlite

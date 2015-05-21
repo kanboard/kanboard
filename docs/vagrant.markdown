@@ -8,6 +8,7 @@ Several configurations are available:
 - Ubuntu 14.04 LTS with Sqlite
 - Ubuntu 14.04 LTS with Mysql
 - Ubuntu 14.04 LTS with Postgresql
+- Debian 8 with sqlite
 - Debian 7.6 with Sqlite
 - Debian 6 with Sqlite
 - Centos 7 with Sqlite
@@ -22,6 +23,7 @@ Standard boxes can be downloaded from Vagrant:
 
 ```bash
 vagrant box add ubuntu/trusty64
+vagrant box add debian/jessie64
 vagrant box add chef/debian-7.6
 vagrant box add chef/debian-6.0.10
 vagrant box add chef/centos-7.0
@@ -54,6 +56,7 @@ Available boxes are:
 - `vagrant up sqlite`
 - `vagrant up mysql`
 - `vagrant up postgres`
+- `vagrant up debian8`
 - `vagrant up debian7`
 - `vagrant up debian6`
 - `vagrant up centos7`
