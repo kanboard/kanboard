@@ -774,7 +774,7 @@ nav .active a {
 
 /* board table */
 #board-container {
-    padding-bottom: 200px; /* Space to avoid dropdown menu truncated */
+    padding-bottom: 220px; /* Space to avoid dropdown menu truncated */
     overflow-x: scroll;
 }
 
