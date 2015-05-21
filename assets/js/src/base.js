@@ -166,6 +166,13 @@ var Kanboard = (function() {
 
         Init: function() {
 
+            // Chosen select
+            $(".chosen-select").chosen({
+                width: "200px",
+                no_results_text: $(".chosen-select").data("notfound"),
+                disable_search_threshold: 10
+            });
+
             // Project select box
             $("#board-selector").chosen({
                 width: 180,

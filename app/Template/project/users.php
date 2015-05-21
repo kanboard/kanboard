@@ -49,7 +49,7 @@
             <?= $this->formHidden('project_id', array('project_id' => $project['id'])) ?>
 
             <?= $this->formLabel(t('User'), 'user_id') ?>
-            <?= $this->formSelect('user_id', $users['not_allowed']) ?><br/>
+            <?= $this->formSelect('user_id', $users['not_allowed'], array(), array(), array('data-notfound="'.t('No results match:').'"'), 'chosen-select') ?><br/>
 
             <div class="form-actions">
                 <input type="submit" value="<?= t('Allow this user') ?>" class="btn btn-blue"/>
