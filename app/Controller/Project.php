@@ -140,7 +140,7 @@ class Project extends Base
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        if ($project['is_private'] == 1) {
+        if ($project['is_private'] == 1 && $this->userSession->isAdmin() && ! isset($values['is_private'])) {
             $values += array('is_private' => 0);
         }
 
