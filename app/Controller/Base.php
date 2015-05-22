@@ -212,7 +212,7 @@ abstract class Base
      */
     public function handle2FA($controller, $action)
     {
-        $ignore = ($controller === 'twofactor' && in_array($action, array('code', 'check'))) || ($controller === 'user' && $action === 'logout');
+        $ignore = ($controller === 'twofactor' && in_array($action, array('code', 'check'))) || ($controller === 'auth' && $action === 'logout');
 
         if ($ignore === false && $this->userSession->has2FA() && ! $this->userSession->check2FA()) {
 
