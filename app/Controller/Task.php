@@ -113,7 +113,7 @@ class Task extends Base
     {
         $project = $this->getProject();
         $method = $this->request->isAjax() ? 'render' : 'layout';
-        $swimlanes_list = $this->swimlane->getList($project['id']);
+        $swimlanes_list = $this->swimlane->getList($project['id'], false, true);
 
         if (empty($values)) {
 

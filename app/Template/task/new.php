@@ -54,8 +54,10 @@
         <?= $this->formLabel(t('Category'), 'category_id') ?>
         <?= $this->formSelect('category_id', $categories_list, $values, $errors) ?><br/>
 
+        <?php if (! (count($swimlanes_list) === 1 && key($swimlanes_list) === 0)): ?>
         <?= $this->formLabel(t('Swimlane'), 'swimlane_id') ?>
         <?= $this->formSelect('swimlane_id', $swimlanes_list, $values, $errors) ?><br/>
+        <?php endif ?>
 
         <?= $this->formLabel(t('Column'), 'column_id') ?>
         <?= $this->formSelect('column_id', $columns_list, $values, $errors) ?><br/>
