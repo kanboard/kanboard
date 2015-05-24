@@ -65,7 +65,7 @@ class SlackWebhook extends \Core\Base
 
             if ($this->config->get('application_url')) {
                 $payload['text'] .= ' - <'.$this->config->get('application_url');
-                $payload['text'] .= $this->helper->u('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id));
+                $payload['text'] .= $this->helper->url->href('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id));
                 $payload['text'] .= '|'.t('view the task on Kanboard').'>';
             }
 

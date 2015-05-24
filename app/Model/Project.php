@@ -64,7 +64,7 @@ class Project extends Base
      *
      * @access public
      * @param  string  $identifier
-     * @return array
+     * @return array|boolean
      */
     public function getByIdentifier($identifier)
     {
@@ -80,7 +80,7 @@ class Project extends Base
      *
      * @access public
      * @param  string   $token    Token
-     * @return array
+     * @return array|boolean
      */
     public function getByToken($token)
     {

@@ -323,7 +323,7 @@ class Project extends Base
 
         if ($this->request->getStringParam('duplicate') === 'yes') {
             $values = array_keys($this->request->getValues());
-            if ($this->projectDuplication->duplicate($project['id'], $values)) {
+            if ($this->projectDuplication->duplicate($project['id'], $values) !== false) {
                 $this->session->flash(t('Project cloned successfully.'));
             } else {
                 $this->session->flashError(t('Unable to clone this project.'));

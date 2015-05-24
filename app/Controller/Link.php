@@ -71,7 +71,7 @@ class Link extends Base
 
         if ($valid) {
 
-            if ($this->link->create($values['label'], $values['opposite_label'])) {
+            if ($this->link->create($values['label'], $values['opposite_label']) !== false) {
                 $this->session->flash(t('Link added successfully.'));
                 $this->response->redirect($this->helper->url->to('link', 'index'));
             }

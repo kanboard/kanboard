@@ -73,7 +73,7 @@ class HipchatWebhook extends \Core\Base
 
             if ($this->config->get('application_url')) {
                 $html .= '<br/><a href="'.$this->config->get('application_url');
-                $html .= $this->helper->u('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id)).'">';
+                $html .= $this->helper->url->href('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id)).'">';
                 $html .= t('view the task on Kanboard').'</a>';
             }
 

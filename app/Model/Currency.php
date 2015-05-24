@@ -35,7 +35,9 @@ class Currency extends Base
      * Calculate the price for the reference currency
      *
      * @access public
-     * @return array
+     * @param  string  $currency
+     * @param  double  $price
+     * @return double
      */
     public function getPrice($currency, $price)
     {
