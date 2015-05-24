@@ -125,7 +125,7 @@ class Link extends Base
 
         $label_id = $this->db->getConnection()->getLastId();
 
-        if ($opposite_label !== '') {
+        if (! empty($opposite_label)) {
 
             $this->db
                 ->table(self::TABLE)
@@ -144,7 +144,7 @@ class Link extends Base
 
         $this->db->closeTransaction();
 
-        return $label_id;
+        return (int) $label_id;
     }
 
     /**

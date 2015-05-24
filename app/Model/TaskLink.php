@@ -144,7 +144,7 @@ class TaskLink extends Base
 
         $this->db->closeTransaction();
 
-        return $task_link_id;
+        return (int) $task_link_id;
     }
 
     /**

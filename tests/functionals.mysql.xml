@@ -12,6 +12,6 @@
         <const name="DB_HOSTNAME" value="localhost" />
         <const name="DB_USERNAME" value="root" />
         <const name="DB_PASSWORD" value="" />
-        <const name="DB_PORT" value="3306" />
+        <const name="DB_PORT" value="" />
     </php>
 </phpunit>

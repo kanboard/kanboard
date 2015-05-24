@@ -4,25 +4,24 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 class Api extends PHPUnit_Framework_TestCase
 {
-    private $client;
+    private $client = null;
 
     public static function setUpBeforeClass()
     {
         if (DB_DRIVER === 'sqlite') {
             @unlink(DB_FILENAME);
-            $pdo = new PDO('sqlite:'.DB_FILENAME);
         }
         else if (DB_DRIVER === 'mysql') {
             $pdo = new PDO('mysql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
             $pdo->exec('DROP DATABASE '.DB_NAME);
             $pdo->exec('CREATE DATABASE '.DB_NAME);
-            $pdo = new PDO('mysql:host='.DB_HOSTNAME.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
+            $pdo = null;
         }
         else if (DB_DRIVER === 'postgres') {
             $pdo = new PDO('pgsql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
             $pdo->exec('DROP DATABASE '.DB_NAME);
             $pdo->exec('CREATE DATABASE '.DB_NAME.' WITH OWNER '.DB_USERNAME);
-            $pdo = new PDO('pgsql:host='.DB_HOSTNAME.';dbname='.DB_NAME, DB_USERNAME, DB_PASSWORD);
+            $pdo = null;
         }
 
         $service = new ServiceProvider\DatabaseProvider;
@@ -31,15 +30,13 @@ class Api extends PHPUnit_Framework_TestCase
         $db->table('settings')->eq('option', 'api_token')->update(array('value' => API_KEY));
         $db->table('settings')->eq('option', 'application_timezone')->update(array('value' => 'Europe/Paris'));
         $db->closeConnection();
-
-        $pdo = null;
     }
 
     public function setUp()
     {
         $this->client = new JsonRPC\Client(API_URL);
         $this->client->authentication('jsonrpc', API_KEY);
-        // $this->client->debug = true;
+        $this->client->debug = true;
     }
 
     private function getTaskId()
@@ -836,5 +833,105 @@ class Api extends PHPUnit_Framework_TestCase
         $actions = $this->client->getActions(1);
         $this->assertEmpty($actions);
         $this->assertCount(0, $actions);
+    }
+
+    public function testGetAllLinks()
+    {
+        $links = $this->client->getAllLinks();
+        $this->assertNotEmpty($links);
+        $this->assertArrayHasKey('id', $links[0]);
+        $this->assertArrayHasKey('label', $links[0]);
+        $this->assertArrayHasKey('opposite_id', $links[0]);
+    }
+
+    public function testGetOppositeLink()
+    {
+        $link = $this->client->getOppositeLinkId(1);
+        $this->assertEquals(1, $link);
+
+        $link = $this->client->getOppositeLinkId(2);
+        $this->assertEquals(3, $link);
+    }
+
+    public function testGetLinkByLabel()
+    {
+        $link = $this->client->getLinkByLabel('blocks');
+        $this->assertNotEmpty($link);
+        $this->assertEquals(2, $link['id']);
+        $this->assertEquals(3, $link['opposite_id']);
+    }
+
+    public function testGetLinkById()
+    {
+        $link = $this->client->getLinkById(4);
+        $this->assertNotEmpty($link);
+        $this->assertEquals(4, $link['id']);
+        $this->assertEquals(5, $link['opposite_id']);
+        $this->assertEquals('duplicates', $link['label']);
+    }
+
+    public function testCreateLink()
+    {
+        $link_id = $this->client->createLink(array('label' => 'test'));
+        $this->assertNotFalse($link_id);
+        $this->assertInternalType('int', $link_id);
+
+        $link_id = $this->client->createLink(array('label' => 'foo', 'opposite_label' => 'bar'));
+        $this->assertNotFalse($link_id);
+        $this->assertInternalType('int', $link_id);
+    }
+
+    public function testUpdateLink()
+    {
+        $link1 = $this->client->getLinkByLabel('bar');
+        $this->assertNotEmpty($link1);
+
+        $link2 = $this->client->getLinkByLabel('test');
+        $this->assertNotEmpty($link2);
+
+        $this->assertNotFalse($this->client->updateLink($link1['id'], $link2['id'], 'boo'));
+
+        $link = $this->client->getLinkById($link1['id']);
+        $this->assertNotEmpty($link);
+        $this->assertEquals($link2['id'], $link['opposite_id']);
+        $this->assertEquals('boo', $link['label']);
+
+        $this->assertTrue($this->client->removeLink($link1['id']));
+    }
+
+    public function testCreateTaskLink()
+    {
+        $task_id1 = $this->client->createTask(array('project_id' => 1, 'title' => 'A'));
+        $this->assertNotFalse($task_id1);
+
+        $task_id2 = $this->client->createTask(array('project_id' => 1, 'title' => 'B'));
+        $this->assertNotFalse($task_id2);
+
+        $task_id3 = $this->client->createTask(array('project_id' => 1, 'title' => 'C'));
+        $this->assertNotFalse($task_id3);
+
+        $task_link_id = $this->client->createTaskLink($task_id1, $task_id2, 1);
+        $this->assertNotFalse($task_link_id);
+
+        $task_link = $this->client->getTaskLinkById($task_link_id);
+        $this->assertNotEmpty($task_link);
+        $this->assertEquals($task_id1, $task_link['task_id']);
+        $this->assertEquals($task_id2, $task_link['opposite_task_id']);
+        $this->assertEquals(1, $task_link['link_id']);
+
+        $task_links = $this->client->getAllTaskLinks($task_id1);
+        $this->assertNotEmpty($task_links);
+        $this->assertCount(1, $task_links);
+
+        $this->assertTrue($this->client->updateTaskLink($task_link_id, $task_id1, $task_id3, 2));
+
+        $task_link = $this->client->getTaskLinkById($task_link_id);
+        $this->assertNotEmpty($task_link);
+        $this->assertEquals($task_id1, $task_link['task_id']);
+        $this->assertEquals($task_id3, $task_link['opposite_task_id']);
+        $this->assertEquals(2, $task_link['link_id']);
+
+        $this->assertTrue($this->client->removeTaskLink($task_link_id));
+        $this->assertEmpty($this->client->getAllTaskLinks($task_id1));
     }
 }
