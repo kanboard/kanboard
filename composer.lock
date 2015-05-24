@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d5e3dbbd2a1a260e2d0bfa0750d11754",
+    "hash": "3610e6ed82392eda9699a9332158c12e",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -260,16 +260,16 @@
         },
         {
             "name": "fguillot/json-rpc",
-            "version": "v0.0.1",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/JsonRPC.git",
-                "reference": "86e8339205616ad9b09d581957cc084a99c0ed27"
+                "reference": "ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/86e8339205616ad9b09d581957cc084a99c0ed27",
-                "reference": "86e8339205616ad9b09d581957cc084a99c0ed27",
+                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8",
+                "reference": "ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8",
                 "shasum": ""
             },
             "require": {
@@ -283,7 +283,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Unlicense"
+                "MIT"
             ],
             "authors": [
                 {
@@ -291,13 +291,13 @@
                     "homepage": "http://fredericguillot.com"
                 }
             ],
-            "description": "A simple Json-RPC client/server library that just works",
+            "description": "Simple Json-RPC client/server library that just works",
             "homepage": "https://github.com/fguillot/JsonRPC",
-            "time": "2014-11-22 20:32:14"
+            "time": "2015-05-20 15:08:40"
         },
         {
             "name": "fguillot/picodb",
-            "version": "dev-master",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
@@ -334,7 +334,7 @@
         },
         {
             "name": "fguillot/simple-validator",
-            "version": "dev-master",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleValidator.git",
@@ -822,9 +822,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "fguillot/simple-validator": 20,
         "swiftmailer/swiftmailer": 0,
-        "fguillot/picodb": 20,
         "symfony/console": 0
     },
     "prefer-stable": false,

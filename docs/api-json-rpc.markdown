@@ -360,9 +360,6 @@ Response example:
 - Parameters:
     - **id** (integer, required)
     - **name** (string, required)
-    - **is_active** (integer, optional)
-    - **token** (string, optional)
-    - **is_public** (integer, optional)
     - **description** (string, optional)
 - Result on success: **true**
 - Result on failure: **false**
@@ -548,13 +545,10 @@ Response example:
 
 ### getProjectActivity
 
-- Purpose: **Get Activityfeed for Project(s)**
+- Purpose: **Get activity stream for a project**
 - Parameters:
-    - **project_ids** (integer array, required)
-    - **limit** (integer, optional)
-    - **start** (timestamp, optional)
-    - **end** (timestamp, optional)
-- Result on success: **true**
+    - **project_id** (integer, required)
+- Result on success: **List of events**
 - Result on failure: **false**
 
 Request example:
@@ -563,6 +557,27 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "getProjectActivity",
+    "id": 942472945,
+    "params": [
+        "project_id": 1
+    ]
+}
+```
+
+### getProjectActivities
+
+- Purpose: **Get Activityfeed for Project(s)**
+- Parameters:
+    - **project_ids** (integer array, required)
+- Result on success: **List of events**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getProjectActivities",
     "id": 942472945,
     "params": [
         "project_ids": [1,2]
@@ -1086,23 +1101,23 @@ Response example:
 }
 ```
 
-### getSwimlanes
+### getDefaultSwimlane
 
-- Purpose: **Get the list of enabled swimlanes of a project**
+- Purpose: **Get the default swimlane for a project**
 - Parameters:
     - **project_id** (integer, required)
-- Result on success: **swimlane properties**
-- Result on failure: **null**
+- Result on success: **true**
+- Result on failure: **false**
 
 Request example:
 
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getSwimlanes",
-    "id": 1242049935,
+    "method": "getDefaultSwimlane",
+    "id": 898774713,
     "params": [
-        2
+        1
     ]
 }
 ```
@@ -1112,26 +1127,61 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1242049935,
+    "id": 898774713,
+    "result": {
+        "id": "1",
+        "default_swimlane": "Default swimlane",
+        "show_default_swimlane": "1"
+    }
+}
+```
+
+### getActiveSwimlanes
+
+- Purpose: **Get the list of enabled swimlanes of a project (include default swimlane if enabled)**
+- Parameters:
+    - **project_id** (integer, required)
+- Result on success: **List of swimlanes**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getActiveSwimlanes",
+    "id": 934789422,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 934789422,
     "result": [
         {
-            "id": "0",
-            "name": "Default"
+            "id": 0,
+            "name": "Default swimlane"
         },
         {
             "id": "2",
-            "name": "Version 7.0"
-        },
+            "name": "Swimlane A"
+        }
     ]
 }
 ```
 
 ### getAllSwimlanes
 
-- Purpose: **Get the list of all swimlanes of a project**
+- Purpose: **Get the list of all swimlanes of a project (enabled or disabled) and sorted by position**
 - Parameters:
     - **project_id** (integer, required)
-- Result on success: **swimlane properties**
+- Result on success: **List of swimlanes**
 - Result on failure: **null**
 
 Request example:
@@ -1140,9 +1190,9 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "getAllSwimlanes",
-    "id": 1242049935,
+    "id": 509791576,
     "params": [
-        2
+        1
     ]
 }
 ```
@@ -1152,25 +1202,21 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1242049935,
+    "id": 509791576,
     "result": [
         {
-            "id": "0",
-            "name": "Default"
-        },
-        {
-            "id": "3",
-            "name": "Version 1.0",
-            "is_active": "0",
-            "position": 1,
-            "project_id": 2
+            "id": "1",
+            "name": "Another swimlane",
+            "position": "1",
+            "is_active": "1",
+            "project_id": "1"
         },
         {
             "id": "2",
-            "name": "Version 7.0",
+            "name": "Swimlane A",
+            "position": "2",
             "is_active": "1",
-            "position": 2,
-            "project_id": 2
+            "project_id": "1"
         }
     ]
 }
@@ -1178,7 +1224,81 @@ Response example:
 
 ### getSwimlane
 
-- Purpose: **Get the a swimlane**
+- Purpose: **Get the a swimlane by id**
+- Parameters:
+    - **swimlane_id** (integer, required)
+- Result on success: **swimlane properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getSwimlane",
+    "id": 131071870,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 131071870,
+    "result": {
+        "id": "1",
+        "name": "Swimlane 1",
+        "position": "1",
+        "is_active": "1",
+        "project_id": "1"
+    }
+}
+```
+
+### getSwimlaneById
+
+- Purpose: **Get the a swimlane by id**
+- Parameters:
+    - **swimlane_id** (integer, required)
+- Result on success: **swimlane properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getSwimlaneById",
+    "id": 131071870,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 131071870,
+    "result": {
+        "id": "1",
+        "name": "Swimlane 1",
+        "position": "1",
+        "is_active": "1",
+        "project_id": "1"
+    }
+}
+```
+
+### getSwimlaneByName
+
+- Purpose: **Get the a swimlane by name**
 - Parameters:
     - **project_id** (integer, required)
     - **name** (string, required)
@@ -1190,11 +1310,11 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getSwimlane",
-    "id": 1242049935,
+    "method": "getSwimlaneByName",
+    "id": 824623567,
     "params": [
-        2,
-        "Version 1.0"
+        1,
+        "Swimlane 1"
     ]
 }
 ```
@@ -1204,13 +1324,13 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1242049935,
+    "id": 824623567,
     "result": {
-        "id": "3",
-        "name": "Version 1.0",
-        "is_active": "0",
-        "position": 2,
-        "project_id": 2
+        "id": "1",
+        "name": "Swimlane 1",
+        "position": "1",
+        "is_active": "1",
+        "project_id": "1"
     }
 }
 ```
@@ -1296,10 +1416,10 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "updateSwimlane",
-    "id": 480740641,
+    "id": 87102426,
     "params": [
-        2,
-        "Version 4.1"
+        "1",
+        "Another swimlane"
     ]
 }
 ```
@@ -1309,7 +1429,7 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 480740641,
+    "id": 87102426,
     "result": true
 }
 ```
@@ -1329,10 +1449,10 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "addSwimlane",
-    "id": 638544704,
+    "id": 849940086,
     "params": [
         1,
-        "Version 1.0"
+        "Swimlane 1"
     ]
 }
 ```
@@ -1342,8 +1462,8 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 638544704,
-    "result": 5
+    "id": 849940086,
+    "result": 1
 }
 ```
 
@@ -1448,7 +1568,7 @@ Response example:
 
 ### getAvailableActions
 
-- Purpose: **Get list of available actions**
+- Purpose: **Get list of available automatic actions**
 - Parameters: none
 - Result on success: **list of actions**
 - Result on failure: **false**
@@ -1459,7 +1579,7 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "getAvailableActions",
-    "id": 1433237746,
+    "id": 1217735483
 }
 ```
 
@@ -1468,30 +1588,33 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1433237746,
+    "id": 1217735483,
     "result": {
-        "TaskLogMoveAnotherColumn" : "Add a comment logging moving the task between columns",
-        "TaskAssignColorColumn" : "Assign a color when the task is moved to a specific column",
-        "TaskAssignColorUser" : "Assign a color to a specific user",
-        "TaskAssignCategoryColor" : "Assign automatically a category based on a color",
-        "TaskAssignColorCategory" : "Assign automatically a color based on a category",
-        "TaskAssignSpecificUser" : "Assign the task to a specific user",
-        "TaskAssignCurrentUser" : "Assign the task to the person who does the action",
-        "TaskAssignUser" : "Change the assignee based on an external username",
-        "TaskAssignCategoryLabel" : "Change the category based on an external label",
-        "TaskClose" : "Close a task",
-        "CommentCreation" : "Create a comment from an external provider",
-        "TaskCreation" : "Create a task from an external provider",
-        "TaskDuplicateAnotherProject" : "Duplicate the task to another project",
-        "TaskMoveAnotherProject" : "Move the task to another project",
-        "TaskOpen" : "Open a task"
+        "TaskLogMoveAnotherColumn": "Add a comment logging moving the task between columns",
+        "TaskAssignColorUser": "Assign a color to a specific user",
+        "TaskAssignColorColumn": "Assign a color when the task is moved to a specific column",
+        "TaskAssignCategoryColor": "Assign automatically a category based on a color",
+        "TaskAssignColorCategory": "Assign automatically a color based on a category",
+        "TaskAssignSpecificUser": "Assign the task to a specific user",
+        "TaskAssignCurrentUser": "Assign the task to the person who does the action",
+        "TaskUpdateStartDate": "Automatically update the start date",
+        "TaskAssignUser": "Change the assignee based on an external username",
+        "TaskAssignCategoryLabel": "Change the category based on an external label",
+        "TaskClose": "Close a task",
+        "CommentCreation": "Create a comment from an external provider",
+        "TaskCreation": "Create a task from an external provider",
+        "TaskDuplicateAnotherProject": "Duplicate the task to another project",
+        "TaskMoveColumnAssigned": "Move the task to another column when assigned to a user",
+        "TaskMoveColumnUnAssigned": "Move the task to another column when assignee is cleared",
+        "TaskMoveAnotherProject": "Move the task to another project",
+        "TaskOpen": "Open a task"
     }
 }
 ```
 
-### getAvailableEvents
+### getAvailableActionEvents
 
-- Purpose: **Get list of available events**
+- Purpose: **Get list of available events for actions**
 - Parameters: none
 - Result on success: **list of events**
 - Result on failure: **false**
@@ -1501,8 +1624,8 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getAvailableEvents",
-    "id": 1433237746,
+    "method": "getAvailableActionEvents",
+    "id": 2116665643
 }
 ```
 
@@ -1511,31 +1634,31 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1433237746,
+    "id": 2116665643,
     "result": {
-        "bitbucket.webhook.commit" : "Bitbucket commit received",
-        "task.close" : "Closing a task",
-        "github.webhook.commit" : "Github commit received",
-        "github.webhook.issue.assignee" : "Github issue assignee change",
-        "github.webhook.issue.closed" : "Github issue closed",
-        "github.webhook.issue.commented" : "Github issue comment created",
-        "github.webhook.issue.label" : "Github issue label change",
-        "github.webhook.issue.opened" : "Github issue opened",
-        "github.webhook.issue.reopened" : "Github issue reopened",
-        "gitlab.webhook.commit" : "Gitlab commit received",
-        "gitlab.webhook.issue.closed" : "Gitlab issue closed",
-        "gitlab.webhook.issue.opened" : "Gitlab issue opened",
-        "task.move.column" : "Move a task to another column",
-        "task.open" : "Open a closed task",
-        "task.assignee_change" : "Task assignee change",
-        "task.create" : "Task creation",
-        "task.create_update" : "Task creation or modification",
-        "task.update" : "Task modification"
+        "bitbucket.webhook.commit": "Bitbucket commit received",
+        "task.close": "Closing a task",
+        "github.webhook.commit": "Github commit received",
+        "github.webhook.issue.assignee": "Github issue assignee change",
+        "github.webhook.issue.closed": "Github issue closed",
+        "github.webhook.issue.commented": "Github issue comment created",
+        "github.webhook.issue.label": "Github issue label change",
+        "github.webhook.issue.opened": "Github issue opened",
+        "github.webhook.issue.reopened": "Github issue reopened",
+        "gitlab.webhook.commit": "Gitlab commit received",
+        "gitlab.webhook.issue.closed": "Gitlab issue closed",
+        "gitlab.webhook.issue.opened": "Gitlab issue opened",
+        "task.move.column": "Move a task to another column",
+        "task.open": "Open a closed task",
+        "task.assignee_change": "Task assignee change",
+        "task.create": "Task creation",
+        "task.create_update": "Task creation or modification",
+        "task.update": "Task modification"
     }
 }
 ```
 
-### getCompatibleEvents
+### getCompatibleActionEvents
 
 - Purpose: **Get list of events compatible with an action**
 - Parameters:
@@ -1548,10 +1671,10 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getCompatibleEvents",
-    "id": 1433237746,
+    "method": "getCompatibleActionEvents",
+    "id": 899370297,
     "params": [
-        "TaskAssignSpecificUser"
+        "TaskClose"
     ]
 }
 ```
@@ -1561,10 +1684,14 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1433237746,
+    "id": 899370297,
     "result": {
-        "task.move.column" : "Move a task to another column",
-        "task.create_update" : "Task creation or modification",
+        "bitbucket.webhook.commit": "Bitbucket commit received",
+        "github.webhook.commit": "Github commit received",
+        "github.webhook.issue.closed": "Github issue closed",
+        "gitlab.webhook.commit": "Gitlab commit received",
+        "gitlab.webhook.issue.closed": "Gitlab issue closed",
+        "task.move.column": "Move a task to another column"
     }
 }
 ```
@@ -1574,7 +1701,7 @@ Response example:
 - Purpose: **Get list of actions for a project**
 - Parameters:
     - **project_id** (integer, required)
-- Result on success: **list of actions info**
+- Result on success: **list of actions properties**
 - Result on failure: **false**
 
 Request example:
@@ -1618,7 +1745,7 @@ Response example:
     - **project_id** (integer, required)
     - **event_name** (string, required)
     - **action_name** (string, required)
-    - **params** (list of string pairs, required)
+    - **params** (key/value parameters, required)
 - Result on success: **action_id**
 - Result on failure: **false**
 
@@ -1664,10 +1791,10 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getAvailableEvents",
-    "id": 1433237746,
+    "method": "removeAction",
+    "id": 1510741671,
     "params": [
-        "2",
+        1
     ]
 }
 ```
@@ -1677,7 +1804,7 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1433237746,
+    "id": 1510741671,
     "result": true
 }
 ```

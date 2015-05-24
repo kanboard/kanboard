@@ -105,17 +105,64 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $project = $this->client->getProjectById(1);
         $this->assertNotEmpty($project);
-        $this->assertTrue($this->client->execute('updateProject', array('id' => 1, 'name' => 'API test 2', 'is_active' => 0)));
+        $this->assertTrue($this->client->execute('updateProject', array('id' => 1, 'name' => 'API test 2')));
 
         $project = $this->client->getProjectById(1);
         $this->assertEquals('API test 2', $project['name']);
-        $this->assertEquals(0, $project['is_active']);
 
-        $this->assertTrue($this->client->execute('updateProject', array('id' => 1, 'name' => 'API test', 'is_active' => 1)));
+        $this->assertTrue($this->client->execute('updateProject', array('id' => 1, 'name' => 'API test', 'description' => 'test')));
 
         $project = $this->client->getProjectById(1);
         $this->assertEquals('API test', $project['name']);
+        $this->assertEquals('test', $project['description']);
+    }
+
+    public function testDisableProject()
+    {
+        $this->assertTrue($this->client->disableProject(1));
+        $project = $this->client->getProjectById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(0, $project['is_active']);
+    }
+
+    public function testEnableProject()
+    {
+        $this->assertTrue($this->client->enableProject(1));
+        $project = $this->client->getProjectById(1);
+        $this->assertNotEmpty($project);
         $this->assertEquals(1, $project['is_active']);
+    }
+
+    public function testEnableProjectPublicAccess()
+    {
+        $this->assertTrue($this->client->enableProjectPublicAccess(1));
+        $project = $this->client->getProjectById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(1, $project['is_public']);
+        $this->assertNotEmpty($project['token']);
+    }
+
+    public function testDisableProjectPublicAccess()
+    {
+        $this->assertTrue($this->client->disableProjectPublicAccess(1));
+        $project = $this->client->getProjectById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(0, $project['is_public']);
+        $this->assertEmpty($project['token']);
+    }
+
+    public function testgetProjectActivities()
+    {
+        $activities = $this->client->getProjectActivities(array('project_ids' => array(1)));
+        $this->assertInternalType('array', $activities);
+        $this->assertCount(0, $activities);
+    }
+
+    public function testgetProjectActivity()
+    {
+        $activities = $this->client->getProjectActivity(1);
+        $this->assertInternalType('array', $activities);
+        $this->assertCount(0, $activities);
     }
 
     public function testGetBoard()
@@ -186,6 +233,127 @@ class Api extends PHPUnit_Framework_TestCase
         $columns = $this->client->getColumns(1);
         $this->assertTrue(is_array($columns));
         $this->assertEquals(4, count($columns));
+    }
+
+    public function testGetDefaultSwimlane()
+    {
+        $swimlane = $this->client->getDefaultSwimlane(1);
+        $this->assertNotEmpty($swimlane);
+        $this->assertEquals('Default swimlane', $swimlane['default_swimlane']);
+    }
+
+    public function testAddSwimlane()
+    {
+        $swimlane_id = $this->client->addSwimlane(1, 'Swimlane 1');
+        $this->assertNotFalse($swimlane_id);
+        $this->assertInternalType('int', $swimlane_id);
+
+        $swimlane = $this->client->getSwimlaneById($swimlane_id);
+        $this->assertNotEmpty($swimlane);
+        $this->assertInternalType('array', $swimlane);
+        $this->assertEquals('Swimlane 1', $swimlane['name']);
+    }
+
+    public function testGetSwimlane()
+    {
+        $swimlane = $this->client->getSwimlane(1);
+        $this->assertNotEmpty($swimlane);
+        $this->assertInternalType('array', $swimlane);
+        $this->assertEquals('Swimlane 1', $swimlane['name']);
+    }
+
+    public function testUpdateSwimlane()
+    {
+        $swimlane = $this->client->getSwimlaneByName(1, 'Swimlane 1');
+        $this->assertNotEmpty($swimlane);
+        $this->assertInternalType('array', $swimlane);
+        $this->assertEquals(1, $swimlane['id']);
+        $this->assertEquals('Swimlane 1', $swimlane['name']);
+
+        $this->assertTrue($this->client->updateSwimlane($swimlane['id'], 'Another swimlane'));
+
+        $swimlane = $this->client->getSwimlaneById($swimlane['id']);
+        $this->assertNotEmpty($swimlane);
+        $this->assertEquals('Another swimlane', $swimlane['name']);
+    }
+
+    public function testDisableSwimlane()
+    {
+        $this->assertTrue($this->client->disableSwimlane(1, 1));
+
+        $swimlane = $this->client->getSwimlaneById(1);
+        $this->assertNotEmpty($swimlane);
+        $this->assertEquals(0, $swimlane['is_active']);
+    }
+
+    public function testEnableSwimlane()
+    {
+        $this->assertTrue($this->client->enableSwimlane(1, 1));
+
+        $swimlane = $this->client->getSwimlaneById(1);
+        $this->assertNotEmpty($swimlane);
+        $this->assertEquals(1, $swimlane['is_active']);
+    }
+
+    public function testGetAllSwimlanes()
+    {
+        $this->assertNotFalse($this->client->addSwimlane(1, 'Swimlane A'));
+
+        $swimlanes = $this->client->getAllSwimlanes(1);
+        $this->assertNotEmpty($swimlanes);
+        $this->assertCount(2, $swimlanes);
+        $this->assertEquals('Another swimlane', $swimlanes[0]['name']);
+        $this->assertEquals('Swimlane A', $swimlanes[1]['name']);
+    }
+
+    public function testGetActiveSwimlane()
+    {
+        $this->assertTrue($this->client->disableSwimlane(1, 1));
+
+        $swimlanes = $this->client->getActiveSwimlanes(1);
+        $this->assertNotEmpty($swimlanes);
+        $this->assertCount(2, $swimlanes);
+        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
+        $this->assertEquals('Swimlane A', $swimlanes[1]['name']);
+    }
+
+    public function testMoveSwimlaneUp()
+    {
+        $this->assertTrue($this->client->enableSwimlane(1, 1));
+        $this->assertTrue($this->client->moveSwimlaneUp(1, 1));
+
+        $swimlanes = $this->client->getActiveSwimlanes(1);
+        $this->assertNotEmpty($swimlanes);
+        $this->assertCount(3, $swimlanes);
+        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
+        $this->assertEquals('Another swimlane', $swimlanes[1]['name']);
+        $this->assertEquals('Swimlane A', $swimlanes[2]['name']);
+
+        $this->assertTrue($this->client->moveSwimlaneUp(1, 2));
+
+        $swimlanes = $this->client->getActiveSwimlanes(1);
+        $this->assertNotEmpty($swimlanes);
+        $this->assertCount(3, $swimlanes);
+        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
+        $this->assertEquals('Swimlane A', $swimlanes[1]['name']);
+        $this->assertEquals('Another swimlane', $swimlanes[2]['name']);
+    }
+
+    public function testMoveSwimlaneDown()
+    {
+        $this->assertTrue($this->client->moveSwimlaneDown(1, 2));
+
+        $swimlanes = $this->client->getActiveSwimlanes(1);
+        $this->assertNotEmpty($swimlanes);
+        $this->assertCount(3, $swimlanes);
+        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
+        $this->assertEquals('Another swimlane', $swimlanes[1]['name']);
+        $this->assertEquals('Swimlane A', $swimlanes[2]['name']);
+    }
+
+    public function testRemoveSwimlane()
+    {
+        $this->assertTrue($this->client->removeSwimlane(1, 2));
     }
 
     public function testCreateTask()
@@ -614,5 +782,59 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->client->removeCategory(1));
         $this->assertFalse($this->client->removeCategory(1));
         $this->assertFalse($this->client->removeCategory(1111));
+    }
+
+    public function testGetAvailableActions()
+    {
+        $actions = $this->client->getAvailableActions();
+        $this->assertNotEmpty($actions);
+        $this->assertInternalType('array', $actions);
+        $this->assertArrayHasKey('TaskLogMoveAnotherColumn', $actions);
+    }
+
+    public function testGetAvailableActionEvents()
+    {
+        $events = $this->client->getAvailableActionEvents();
+        $this->assertNotEmpty($events);
+        $this->assertInternalType('array', $events);
+        $this->assertArrayHasKey('task.move.column', $events);
+    }
+
+    public function testGetCompatibleActionEvents()
+    {
+        $events = $this->client->getCompatibleActionEvents('TaskClose');
+        $this->assertNotEmpty($events);
+        $this->assertInternalType('array', $events);
+        $this->assertArrayHasKey('task.move.column', $events);
+    }
+
+    public function testCreateAction()
+    {
+        $action_id = $this->client->createAction(1, 'task.move.column', 'TaskClose', array('column_id' => 1));
+        $this->assertNotFalse($action_id);
+        $this->assertEquals(1, $action_id);
+    }
+
+    public function testGetActions()
+    {
+        $actions = $this->client->getActions(1);
+        $this->assertNotEmpty($actions);
+        $this->assertInternalType('array', $actions);
+        $this->assertCount(1, $actions);
+        $this->assertArrayHasKey('id', $actions[0]);
+        $this->assertArrayHasKey('project_id', $actions[0]);
+        $this->assertArrayHasKey('event_name', $actions[0]);
+        $this->assertArrayHasKey('action_name', $actions[0]);
+        $this->assertArrayHasKey('params', $actions[0]);
+        $this->assertArrayHasKey('column_id', $actions[0]['params']);
+    }
+
+    public function testRemoveAction()
+    {
+        $this->assertTrue($this->client->removeAction(1));
+
+        $actions = $this->client->getActions(1);
+        $this->assertEmpty($actions);
+        $this->assertCount(0, $actions);
     }
 }

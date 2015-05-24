@@ -87,7 +87,7 @@ class Swimlane extends Base
         return $this->db->table(self::TABLE)
                         ->eq('project_id', $project_id)
                         ->eq('name', $name)
-                        ->findAll();
+                        ->findOne();
     }
 
     /**
