@@ -92,7 +92,7 @@ class File extends Base
 
         return $this->db->table(self::TABLE)->save(array(
             'task_id' => $task_id,
-            'name' => $name,
+            'name' => substr($name, 0, 255),
             'path' => $path,
             'is_image' => $is_image ? '1' : '0',
             'size' => $size,

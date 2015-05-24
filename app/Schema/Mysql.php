@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 71;
+const VERSION = 72;
+
+function version_72($pdo)
+{
+    $pdo->exec('ALTER TABLE files MODIFY name VARCHAR(255)');
+}
 
 function version_71($pdo)
 {
