@@ -4,7 +4,7 @@ namespace Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class BootstrapSubscriber extends Base implements EventSubscriberInterface
+class BootstrapSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

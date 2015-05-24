@@ -6,7 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Model\Subtask;
 use Event\SubtaskEvent;
 
-class SubtaskTimesheetSubscriber extends Base implements EventSubscriberInterface
+class SubtaskTimesheetSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

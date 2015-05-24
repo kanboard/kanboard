@@ -23,7 +23,7 @@
 
             <td>
                 <?php if (! isset($not_editable)): ?>
-                    <?= $this->a(
+                    <?= $this->url->link(
                         $this->e('#'.$link['task_id'].' '.$link['title']),
                         'task',
                         'show',
@@ -32,7 +32,7 @@
                         $link['is_active'] ? '' : 'task-link-closed'
                     ) ?>
                 <?php else: ?>
-                    <?= $this->a(
+                    <?= $this->url->link(
                         $this->e('#'.$link['task_id'].' '.$link['title']),
                         'task',
                         'readonly',
@@ -56,7 +56,7 @@
             <td>
                 <?php if (! empty($link['task_assignee_username'])): ?>
                     <?php if (! isset($not_editable)): ?>
-                        <?= $this->a($this->e($link['task_assignee_name'] ?: $link['task_assignee_username']), 'user', 'show', array('user_id' => $link['task_assignee_id'])) ?>
+                        <?= $this->url->link($this->e($link['task_assignee_name'] ?: $link['task_assignee_username']), 'user', 'show', array('user_id' => $link['task_assignee_id'])) ?>
                     <?php else: ?>
                         <?= $this->e($link['task_assignee_name'] ?: $link['task_assignee_username']) ?>
                     <?php endif ?>
@@ -65,8 +65,8 @@
             <?php if (! isset($not_editable)): ?>
             <td>
                 <ul>
-                    <li><?= $this->a(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
-                    <li><?= $this->a(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
+                    <li><?= $this->url->link(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
+                    <li><?= $this->url->link(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
                 </ul>
             </td>
             <?php endif ?>
@@ -76,15 +76,15 @@
 </table>
 
 <?php if (! isset($not_editable) && isset($link_label_list)): ?>
-    <form action="<?= $this->u('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
+    <form action="<?= $this->url->href('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
 
-        <?= $this->formCsrf() ?>
-        <?= $this->formHidden('task_id', array('task_id' => $task['id'])) ?>
-        <?= $this->formHidden('opposite_task_id', array()) ?>
+        <?= $this->form->csrf() ?>
+        <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
+        <?= $this->form->hidden('opposite_task_id', array()) ?>
 
-        <?= $this->formSelect('link_id', $link_label_list, array(), array()) ?>
+        <?= $this->form->select('link_id', $link_label_list, array(), array()) ?>
 
-        <?= $this->formText(
+        <?= $this->form->text(
             'title',
             array(),
             array(),
@@ -93,7 +93,7 @@
                 'placeholder="'.t('Start to type task title...').'"',
                 'title="'.t('Start to type task title...').'"',
                 'data-dst-field="opposite_task_id"',
-                'data-search-url="'.$this->u('app', 'autocomplete', array('exclude_task_id' => $task['id'])).'"',
+                'data-search-url="'.$this->url->href('app', 'autocomplete', array('exclude_task_id' => $task['id'])).'"',
             ),
             'task-autocomplete') ?>
 

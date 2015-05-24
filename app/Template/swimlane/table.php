@@ -16,26 +16,26 @@
             <ul>
                 <?php if ($swimlane['position'] != 0 && $swimlane['position'] != 1): ?>
                     <li>
-                        <?= $this->a(t('Move Up'), 'swimlane', 'moveup', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
+                        <?= $this->url->link(t('Move Up'), 'swimlane', 'moveup', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                     </li>
                 <?php endif ?>
                 <?php if ($swimlane['position'] != 0 && $swimlane['position'] != count($swimlanes)): ?>
                     <li>
-                        <?= $this->a(t('Move Down'), 'swimlane', 'movedown', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
+                        <?= $this->url->link(t('Move Down'), 'swimlane', 'movedown', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                     </li>
                 <?php endif ?>
                 <li>
-                    <?= $this->a(t('Rename'), 'swimlane', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
+                    <?= $this->url->link(t('Rename'), 'swimlane', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
                 </li>
                 <li>
                     <?php if ($swimlane['is_active']): ?>
-                        <?= $this->a(t('Disable'), 'swimlane', 'disable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
+                        <?= $this->url->link(t('Disable'), 'swimlane', 'disable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                     <?php else: ?>
-                        <?= $this->a(t('Enable'), 'swimlane', 'enable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
+                        <?= $this->url->link(t('Enable'), 'swimlane', 'enable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                     <?php endif ?>
                 </li>
                 <li>
-                    <?= $this->a(t('Remove'), 'swimlane', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
+                    <?= $this->url->link(t('Remove'), 'swimlane', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
                 </li>
             </ul>
         </td>

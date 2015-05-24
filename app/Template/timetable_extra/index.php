@@ -21,7 +21,7 @@
         <td><?= $slot['end'] ?></td>
         <td><?= $this->e($slot['comment']) ?></td>
         <td>
-            <?= $this->a(t('Remove'), 'timetableextra', 'confirm', array('user_id' => $user['id'], 'slot_id' => $slot['id'])) ?>
+            <?= $this->url->link(t('Remove'), 'timetableextra', 'confirm', array('user_id' => $user['id'], 'slot_id' => $slot['id'])) ?>
         </td>
     </tr>
     <?php endforeach ?>
@@ -31,24 +31,24 @@
 
 <?php endif ?>
 
-<form method="post" action="<?= $this->u('timetableextra', 'save', array('user_id' => $user['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('timetableextra', 'save', array('user_id' => $user['id'])) ?>" autocomplete="off">
 
-    <?= $this->formHidden('user_id', $values) ?>
-    <?= $this->formCsrf() ?>
+    <?= $this->form->hidden('user_id', $values) ?>
+    <?= $this->form->csrf() ?>
 
-    <?= $this->formLabel(t('Day'), 'date') ?>
-    <?= $this->formText('date', $values, $errors, array('required'), 'form-date') ?>
+    <?= $this->form->label(t('Day'), 'date') ?>
+    <?= $this->form->text('date', $values, $errors, array('required'), 'form-date') ?>
 
-    <?= $this->formCheckbox('all_day', t('All day'), 1) ?>
+    <?= $this->form->checkbox('all_day', t('All day'), 1) ?>
 
-    <?= $this->formLabel(t('Start time'), 'start') ?>
-    <?= $this->formSelect('start', $this->getDayHours(), $values, $errors) ?>
+    <?= $this->form->label(t('Start time'), 'start') ?>
+    <?= $this->form->select('start', $this->datetime->getDayHours(), $values, $errors) ?>
 
-    <?= $this->formLabel(t('End time'), 'end') ?>
-    <?= $this->formSelect('end', $this->getDayHours(), $values, $errors) ?>
+    <?= $this->form->label(t('End time'), 'end') ?>
+    <?= $this->form->select('end', $this->datetime->getDayHours(), $values, $errors) ?>
 
-    <?= $this->formLabel(t('Comment'), 'comment') ?>
-    <?= $this->formText('comment', $values, $errors) ?>
+    <?= $this->form->label(t('Comment'), 'comment') ?>
+    <?= $this->form->text('comment', $values, $errors) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

@@ -6,7 +6,7 @@
 
 		<div class="comment-inner">
             <div class="markdown">
-                <?= $this->markdown($comment['comment']) ?>
+                <?= $this->text->markdown($comment['comment']) ?>
             </div>
         </div>
     <?php endforeach ?>

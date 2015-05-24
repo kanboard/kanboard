@@ -288,10 +288,10 @@ class Task extends Base
             }
 
             if ($redirect === 'board') {
-                $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
             }
 
-            $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
 
         if ($this->request->isAjax()) {

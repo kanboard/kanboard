@@ -21,8 +21,8 @@
 </div>
 <ul class="listing">
     <li><?= t('Default project:') ?> <strong><?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $this->e($projects[$user['default_project_id']]) : t('None') ?></strong></li>
-    <li><?= t('Timezone:') ?> <strong><?= $this->inList($user['timezone'], $timezones) ?></strong></li>
-    <li><?= t('Language:') ?> <strong><?= $this->inList($user['language'], $languages) ?></strong></li>
+    <li><?= t('Timezone:') ?> <strong><?= $this->text->in($user['timezone'], $timezones) ?></strong></li>
+    <li><?= t('Language:') ?> <strong><?= $this->text->in($user['language'], $languages) ?></strong></li>
     <li><?= t('Notifications:') ?> <strong><?= $user['notifications_enabled'] == 1 ? t('Enabled') : t('Disabled') ?></strong></li>
 </ul>
 
@@ -33,7 +33,7 @@
 
     <div class="listing">
         <ul class="no-bullet">
-            <li><strong><i class="fa fa-calendar"></i> <?= $this->a(t('iCal feed'), 'ical', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
+            <li><strong><i class="fa fa-calendar"></i> <?= $this->url->link(t('iCal feed'), 'ical', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
         </ul>
     </div>
 <?php endif ?>

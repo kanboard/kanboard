@@ -1,11 +1,11 @@
-<?= $this->js('assets/js/vendor/d3.v3.4.8.min.js') ?>
-<?= $this->js('assets/js/vendor/dimple.v2.1.2.min.js') ?>
+<?= $this->asset->js('assets/js/vendor/d3.v3.4.8.min.js') ?>
+<?= $this->asset->js('assets/js/vendor/dimple.v2.1.2.min.js') ?>
 
 <div class="page-header">
     <h2><?= t('Budget') ?></h2>
     <ul>
-        <li><?= $this->a(t('Budget lines'), 'budget', 'create', array('project_id' => $project['id'])) ?></li>
-        <li><?= $this->a(t('Cost breakdown'), 'budget', 'breakdown', array('project_id' => $project['id'])) ?></li>
+        <li><?= $this->url->link(t('Budget lines'), 'budget', 'create', array('project_id' => $project['id'])) ?></li>
+        <li><?= $this->url->link(t('Cost breakdown'), 'budget', 'breakdown', array('project_id' => $project['id'])) ?></li>
     </ul>
 </div>
 

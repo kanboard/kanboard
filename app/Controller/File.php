@@ -24,10 +24,10 @@ class File extends Base
             $this->session->flash(t('Screenshot uploaded successfully.'));
 
             if ($this->request->getStringParam('redirect') === 'board') {
-                $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
             }
 
-            $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
 
         $this->response->html($this->taskLayout('file/screenshot', array(
@@ -64,7 +64,7 @@ class File extends Base
             $this->session->flashError(t('Unable to upload the file.'));
         }
 
-        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**
@@ -83,7 +83,7 @@ class File extends Base
             $this->response->binary(file_get_contents($filename));
         }
 
-        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**
@@ -164,7 +164,7 @@ class File extends Base
             $this->session->flashError(t('Unable to remove this file.'));
         }
 
-        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**

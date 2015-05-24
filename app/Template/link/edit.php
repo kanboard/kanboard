@@ -2,20 +2,20 @@
     <h2><?= t('Link modification') ?></h2>
 </div>
 
-<form action="<?= $this->u('link', 'update', array('link_id' => $link['id'])) ?>" method="post" autocomplete="off">
+<form action="<?= $this->url->href('link', 'update', array('link_id' => $link['id'])) ?>" method="post" autocomplete="off">
 
-    <?= $this->formCsrf() ?>
-    <?= $this->formHidden('id', $values) ?>
+    <?= $this->form->csrf() ?>
+    <?= $this->form->hidden('id', $values) ?>
 
-    <?= $this->formLabel(t('Label'), 'label') ?>
-    <?= $this->formText('label', $values, $errors, array('required')) ?>
+    <?= $this->form->label(t('Label'), 'label') ?>
+    <?= $this->form->text('label', $values, $errors, array('required')) ?>
 
-    <?= $this->formLabel(t('Opposite label'), 'opposite_id') ?>
-    <?= $this->formSelect('opposite_id', $labels, $values, $errors) ?>
+    <?= $this->form->label(t('Opposite label'), 'opposite_id') ?>
+    <?= $this->form->select('opposite_id', $labels, $values, $errors) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
-        <?= $this->a(t('cancel'), 'link', 'index') ?>
+        <?= $this->url->link(t('cancel'), 'link', 'index') ?>
     </div>
 </form>

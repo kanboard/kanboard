@@ -23,37 +23,37 @@
                         </li>
                         <li>
                             <i class="fa fa-search fa-fw"></i>
-                            <?= $this->a(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
+                            <?= $this->url->link(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
                         </li>
                         <li>
                             <i class="fa fa-check-square-o fa-fw"></i>
-                            <?= $this->a(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
+                            <?= $this->url->link(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
                         </li>
                         <li>
                             <i class="fa fa-dashboard fa-fw"></i>
-                            <?= $this->a(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
+                            <?= $this->url->link(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
                         </li>
                         <li>
                             <i class="fa fa-calendar fa-fw"></i>
-                            <?= $this->a(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
+                            <?= $this->url->link(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
                         </li>
                         <?php if ($project['is_public']): ?>
                         <li>
-                            <i class="fa fa-share-alt fa-fw"></i> <?= $this->a(t('Public link'), 'board', 'readonly', array('token' => $project['token']), false, '', '', true) ?>
+                            <i class="fa fa-share-alt fa-fw"></i> <?= $this->url->link(t('Public link'), 'board', 'readonly', array('token' => $project['token']), false, '', '', true) ?>
                         </li>
                         <?php endif ?>
-                        <?php if ($this->acl->isManagerActionAllowed($project['id'])): ?>
+                        <?php if ($this->user->isManager($project['id'])): ?>
                         <li>
                             <i class="fa fa-line-chart fa-fw"></i>
-                            <?= $this->a(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
+                            <?= $this->url->link(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
                         </li>
                         <li>
                             <i class="fa fa-pie-chart fa-fw"></i>
-                            <?= $this->a(t('Budget'), 'budget', 'index', array('project_id' => $project['id'])) ?>
+                            <?= $this->url->link(t('Budget'), 'budget', 'index', array('project_id' => $project['id'])) ?>
                         </li>
                         <li>
                             <i class="fa fa-cog fa-fw"></i>
-                            <?= $this->a(t('Configure'), 'project', 'show', array('project_id' => $project['id'])) ?>
+                            <?= $this->url->link(t('Configure'), 'project', 'show', array('project_id' => $project['id'])) ?>
                         </li>
                         <?php endif ?>
                     </ul>
@@ -61,10 +61,10 @@
             </span>
         </li>
         <li>
-            <?= $this->formSelect('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"', 'data-notfound="'.t('No results match:').'"'), 'apply-filters chosen-select') ?>
+            <?= $this->form->select('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"', 'data-notfound="'.t('No results match:').'"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
-            <?= $this->formSelect('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"', 'data-notfound="'.t('No results match:').'"'), 'apply-filters chosen-select') ?>
+            <?= $this->form->select('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"', 'data-notfound="'.t('No results match:').'"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
             <select id="more-filters" multiple data-placeholder="<?= t('More filters') ?>" data-notfound="<?= t('No results match:') ?>" class="apply-filters hide-mobile">

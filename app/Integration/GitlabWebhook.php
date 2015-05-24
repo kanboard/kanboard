@@ -12,7 +12,7 @@ use Model\Task;
  * @package  integration
  * @author   Frederic Guillot
  */
-class GitlabWebhook extends Base
+class GitlabWebhook extends \Core\Base
 {
     /**
      * Events

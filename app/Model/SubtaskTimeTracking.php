@@ -196,7 +196,7 @@ class SubtaskTimeTracking extends Base
                 'backgroundColor' => $this->color->getBackgroundColor($row['color_id']),
                 'borderColor' => $this->color->getBorderColor($row['color_id']),
                 'textColor' => 'black',
-                'url' => $this->helper->url('task', 'show', array('task_id' => $row['task_id'], 'project_id' => $row['project_id'])),
+                'url' => $this->helper->url->to('task', 'show', array('task_id' => $row['task_id'], 'project_id' => $row['project_id'])),
                 'editable' => false,
             );
         }

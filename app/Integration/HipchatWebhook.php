@@ -8,7 +8,7 @@ namespace Integration;
  * @package  integration
  * @author   Frederic Guillot
  */
-class HipchatWebhook extends Base
+class HipchatWebhook extends \Core\Base
 {
     /**
      * Return true if Hipchat is enabled for this project or globally

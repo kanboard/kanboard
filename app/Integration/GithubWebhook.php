@@ -11,7 +11,7 @@ use Model\Task;
  * @package  integration
  * @author   Frederic Guillot
  */
-class GithubWebhook extends Base
+class GithubWebhook extends \Core\Base
 {
     /**
      * Events

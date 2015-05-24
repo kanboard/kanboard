@@ -86,17 +86,6 @@ class UserSession extends Base
     }
 
     /**
-     * Check if the given user_id is the connected user
-     *
-     * @param  integer   $user_id   User id
-     * @return boolean
-     */
-    public function isCurrentUser($user_id)
-    {
-        return $this->getId() == $user_id;
-    }
-
-    /**
      * Check is the user is connected
      *
      * @access public

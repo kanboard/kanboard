@@ -10,7 +10,7 @@ use HTML_To_Markdown;
  * @package  integration
  * @author   Frederic Guillot
  */
-class PostmarkWebhook extends Base
+class PostmarkWebhook extends \Core\Base
 {
     /**
      * Parse incoming email

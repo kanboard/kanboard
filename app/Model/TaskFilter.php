@@ -450,7 +450,7 @@ class TaskFilter extends Base
         $vEvent->setModified($dateModif);
         $vEvent->setUseTimezone(true);
         $vEvent->setSummary(t('#%d', $task['id']).' '.$task['title']);
-        $vEvent->setUrl($this->helper->getCurrentBaseUrl().$this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
 
         if (! empty($task['creator_id'])) {
             $vEvent->setOrganizer('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));

@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
-        <?php if ($this->userSession->isAdmin()): ?>
+        <?php if ($this->user->isAdmin()): ?>
         <ul>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->a(t('New user'), 'user', 'create') ?></li>
+            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New user'), 'user', 'create') ?></li>
         </ul>
         <?php endif ?>
     </div>
@@ -26,10 +26,10 @@
             <?php foreach ($paginator->getCollection() as $user): ?>
             <tr>
                 <td>
-                    <?= $this->a('#'.$user['id'], 'user', 'show', array('user_id' => $user['id'])) ?>
+                    <?= $this->url->link('#'.$user['id'], 'user', 'show', array('user_id' => $user['id'])) ?>
                 </td>
                 <td>
-                    <?= $this->a($this->e($user['username']), 'user', 'show', array('user_id' => $user['id'])) ?>
+                    <?= $this->url->link($this->e($user['username']), 'user', 'show', array('user_id' => $user['id'])) ?>
                 </td>
                 <td>
                     <?= $this->e($user['name']) ?>

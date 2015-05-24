@@ -1,9 +1,9 @@
 <?= $this->render('task/details', array(
     'task' => $task,
     'project' => $project,
-    'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
-    'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
-    'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
+    'recurrence_trigger_list' => $this->task->recurrenceTriggers(),
+    'recurrence_timeframe_list' => $this->task->recurrenceTimeframes(),
+    'recurrence_basedate_list' => $this->task->recurrenceBasedates(),
 )) ?>
 
 <?= $this->render('task/time', array('task' => $task, 'values' => $values, 'date_format' => $date_format, 'date_formats' => $date_formats)) ?>

@@ -18,8 +18,8 @@
         <td><?= dt('%B %e, %Y at %k:%M %p', $session['date_creation']) ?></td>
         <td><?= dt('%B %e, %Y at %k:%M %p', $session['expiration']) ?></td>
         <td><?= $this->e($session['ip']) ?></td>
-        <td><?= $this->e($this->summary($session['user_agent'])) ?></td>
-        <td><?= $this->a(t('Remove'), 'user', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true) ?></td>
+        <td><?= $this->e($this->text->truncate($session['user_agent'])) ?></td>
+        <td><?= $this->url->link(t('Remove'), 'user', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true) ?></td>
     </tr>
     <?php endforeach ?>
     </table>

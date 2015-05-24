@@ -2,7 +2,7 @@
 
     <?= $this->render('task/details', array('task' => $task, 'project' => $project, 'not_editable' => true)) ?>
 
-    <p class="pull-right"><?= $this->a(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?></p>
+    <p class="pull-right"><?= $this->url->link(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?></p>
 
     <?= $this->render('task/show_description', array(
         'task' => $task,

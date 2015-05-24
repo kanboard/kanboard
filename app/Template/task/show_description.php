@@ -6,7 +6,7 @@
 
         <article class="markdown task-show-description">
             <?php if (! isset($is_public)): ?>
-                <?= $this->markdown(
+                <?= $this->text->markdown(
                     $task['description'],
                     array(
                         'controller' => 'task',
@@ -17,7 +17,7 @@
                     )
                 ) ?>
             <?php else: ?>
-                <?= $this->markdown(
+                <?= $this->text->markdown(
                     $task['description'],
                     array(
                         'controller' => 'task',

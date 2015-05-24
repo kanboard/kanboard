@@ -14,7 +14,7 @@
         </tr>
         <?php foreach ($subtask_paginator->getCollection() as $record): ?>
         <tr>
-            <td><?= $this->a($this->e($record['user_fullname'] ?: $record['username']), 'user', 'show', array('user_id' => $record['user_id'])) ?></td>
+            <td><?= $this->url->link($this->e($record['user_fullname'] ?: $record['username']), 'user', 'show', array('user_id' => $record['user_id'])) ?></td>
             <td><?= t($record['subtask_title']) ?></td>
             <td><?= dt('%B %e, %Y at %k:%M %p', $record['start']) ?></td>
             <td><?= dt('%B %e, %Y at %k:%M %p', $record['end']) ?></td>

@@ -13,10 +13,10 @@
         <td>
             <ul>
                 <li>
-                    <?= $this->a(t('Edit'), 'category', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
+                    <?= $this->url->link(t('Edit'), 'category', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
                 </li>
                 <li>
-                    <?= $this->a(t('Remove'), 'category', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
+                    <?= $this->url->link(t('Remove'), 'category', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
                 </li>
             </ul>
         </td>
@@ -28,13 +28,13 @@
 <div class="page-header">
     <h2><?= t('Add a new category') ?></h2>
 </div>
-<form method="post" action="<?= $this->u('category', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('category', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-    <?= $this->formCsrf() ?>
-    <?= $this->formHidden('project_id', $values) ?>
+    <?= $this->form->csrf() ?>
+    <?= $this->form->hidden('project_id', $values) ?>
 
-    <?= $this->formLabel(t('Category Name'), 'name') ?>
-    <?= $this->formText('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
+    <?= $this->form->label(t('Category Name'), 'name') ?>
+    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

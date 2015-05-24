@@ -77,10 +77,10 @@ class Tasklink extends Base
                 $this->session->flash(t('Link added successfully.'));
 
                 if ($ajax) {
-                    $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
                 }
 
-                $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
             }
 
             $errors = array('title' => array(t('The exact same link already exists')));
@@ -132,7 +132,7 @@ class Tasklink extends Base
 
             if ($this->taskLink->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->session->flash(t('Link updated successfully.'));
-                $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
             }
 
             $this->session->flashError(t('Unable to update your link.'));
@@ -174,6 +174,6 @@ class Tasklink extends Base
             $this->session->flashError(t('Unable to remove this link.'));
         }
 
-        $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
     }
 }

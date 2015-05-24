@@ -3,11 +3,11 @@
         <ul>
             <li>
                 <i class="fa fa-table fa-fw"></i>
-                <?= $this->a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
                 <i class="fa fa-folder fa-fw"></i>
-                <?= $this->a(t('All projects'), 'project', 'index') ?>
+                <?= $this->url->link(t('All projects'), 'project', 'index') ?>
             </li>
         </ul>
     </div>

@@ -73,7 +73,7 @@ class Link extends Base
 
             if ($this->link->create($values['label'], $values['opposite_label'])) {
                 $this->session->flash(t('Link added successfully.'));
-                $this->response->redirect($this->helper->url('link', 'index'));
+                $this->response->redirect($this->helper->url->to('link', 'index'));
             }
             else {
                 $this->session->flashError(t('Unable to create your link.'));
@@ -115,7 +115,7 @@ class Link extends Base
         if ($valid) {
             if ($this->link->update($values)) {
                 $this->session->flash(t('Link updated successfully.'));
-                $this->response->redirect($this->helper->url('link', 'index'));
+                $this->response->redirect($this->helper->url->to('link', 'index'));
             }
             else {
                 $this->session->flashError(t('Unable to update your link.'));
@@ -157,6 +157,6 @@ class Link extends Base
             $this->session->flashError(t('Unable to remove this link.'));
         }
 
-        $this->response->redirect($this->helper->url('link', 'index'));
+        $this->response->redirect($this->helper->url->to('link', 'index'));
     }
 }

@@ -2,14 +2,13 @@
 
 require_once __DIR__.'/Base.php';
 
-use Core\Helper;
-use Model\Config;
+use Helper\Text;
 
-class HelperTest extends Base
+class TextHelperTest extends Base
 {
     public function testMarkdown()
     {
-        $h = new Helper($this->container);
+        $h = new Text($this->container);
 
         $this->assertEquals('<p>Test</p>', $h->markdown('Test'));
 
@@ -32,19 +31,34 @@ class HelperTest extends Base
         );
     }
 
-    public function testGetCurrentBaseUrl()
+    public function testFormatBytes()
     {
-        $h = new Helper($this->container);
+        $h = new Text($this->container);
 
-        $_SERVER['PHP_SELF'] = '/';
-        $_SERVER['SERVER_NAME'] = 'localhost';
-        $_SERVER['SERVER_PORT'] = 1234;
+        $this->assertEquals('1k', $h->bytes(1024));
+        $this->assertEquals('33.71k', $h->bytes(34520));
+    }
 
-        $this->assertEquals('http://localhost:1234/', $h->getCurrentBaseUrl());
+    public function testTruncate()
+    {
+        $h = new Text($this->container);
 
-        $c = new Config($this->container);
-        $c->save(array('application_url' => 'https://mykanboard/'));
-        $this->assertEquals('https://mykanboard/', $c->get('application_url'));
-        $this->assertEquals('https://mykanboard/', $h->getCurrentBaseUrl());
+        $this->assertEquals('abc', $h->truncate('abc'));
+        $this->assertEquals(str_repeat('a', 85).' [...]', $h->truncate(str_repeat('a', 200)));
+    }
+
+    public function testContains()
+    {
+        $h = new Text($this->container);
+
+        $this->assertTrue($h->contains('abc', 'b'));
+        $this->assertFalse($h->contains('abc', 'd'));
+    }
+
+    public function testInList()
+    {
+        $h = new Text($this->container);
+        $this->assertEquals('?', $h->in('a', array('b' => 'c')));
+        $this->assertEquals('c', $h->in('b', array('b' => 'c')));
     }
 }

@@ -1,24 +1,24 @@
 <div class="page-header">
     <h2><?= t('Timetable') ?></h2>
     <ul>
-        <li><?= $this->a(t('Day timetable'), 'timetableday', 'index', array('user_id' => $user['id'])) ?></li>
-        <li><?= $this->a(t('Week timetable'), 'timetableweek', 'index', array('user_id' => $user['id'])) ?></li>
-        <li><?= $this->a(t('Time off timetable'), 'timetableoff', 'index', array('user_id' => $user['id'])) ?></li>
-        <li><?= $this->a(t('Overtime timetable'), 'timetableextra', 'index', array('user_id' => $user['id'])) ?></li>
+        <li><?= $this->url->link(t('Day timetable'), 'timetableday', 'index', array('user_id' => $user['id'])) ?></li>
+        <li><?= $this->url->link(t('Week timetable'), 'timetableweek', 'index', array('user_id' => $user['id'])) ?></li>
+        <li><?= $this->url->link(t('Time off timetable'), 'timetableoff', 'index', array('user_id' => $user['id'])) ?></li>
+        <li><?= $this->url->link(t('Overtime timetable'), 'timetableextra', 'index', array('user_id' => $user['id'])) ?></li>
     </ul>
 </div>
 
 <form method="get" action="?" autocomplete="off" class="form-inline">
 
-    <?= $this->formHidden('controller', $values) ?>
-    <?= $this->formHidden('action', $values) ?>
-    <?= $this->formHidden('user_id', $values) ?>
+    <?= $this->form->hidden('controller', $values) ?>
+    <?= $this->form->hidden('action', $values) ?>
+    <?= $this->form->hidden('user_id', $values) ?>
 
-    <?= $this->formLabel(t('From'), 'from') ?>
-    <?= $this->formText('from', $values, array(), array(), 'form-date') ?>
+    <?= $this->form->label(t('From'), 'from') ?>
+    <?= $this->form->text('from', $values, array(), array(), 'form-date') ?>
 
-    <?= $this->formLabel(t('To'), 'to') ?>
-    <?= $this->formText('to', $values, array(), array(), 'form-date') ?>
+    <?= $this->form->label(t('To'), 'to') ?>
+    <?= $this->form->text('to', $values, array(), array(), 'form-date') ?>
 
     <input type="submit" value="<?= t('Execute') ?>" class="btn btn-blue"/>
 </form>

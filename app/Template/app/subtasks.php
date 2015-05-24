@@ -13,16 +13,16 @@
         <?php foreach ($paginator->getCollection() as $subtask): ?>
         <tr>
             <td class="task-table color-<?= $subtask['color_id'] ?>">
-                <?= $this->a('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
+                <?= $this->url->link('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->a($this->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
+                <?= $this->url->link($this->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->a($this->e($subtask['task_name']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
+                <?= $this->url->link($this->e($subtask['task_name']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->toggleSubtaskStatus($subtask, 'dashboard') ?>
+                <?= $this->subtask->toggleStatus($subtask, 'dashboard') ?>
             </td>
             <td>
                 <?php if (! empty($subtask['time_spent'])): ?>

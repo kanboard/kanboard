@@ -90,7 +90,7 @@ class App extends Base
             $this->response->html('<p>'.t('Nothing to preview...').'</p>');
         }
 
-        $this->response->html($this->template->markdown($payload['text']));
+        $this->response->html($this->helper->text->markdown($payload['text']));
     }
 
     /**

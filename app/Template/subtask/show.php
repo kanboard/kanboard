@@ -22,14 +22,14 @@
         <tr>
             <td>
                 <?php if (! isset($not_editable)): ?>
-                    <?= $this->toggleSubtaskStatus($subtask, 'task') ?>
+                    <?= $this->subtask->toggleStatus($subtask, 'task') ?>
                 <?php else: ?>
                     <?= $this->render('subtask/icons', array('subtask' => $subtask)) . $this->e($subtask['title']) ?>
                 <?php endif ?>
             </td>
             <td>
                 <?php if (! empty($subtask['username'])): ?>
-                    <?= $this->a($this->e($subtask['name'] ?: $subtask['username']), 'user', 'show', array('user_id' => $subtask['user_id'])) ?>
+                    <?= $this->url->link($this->e($subtask['name'] ?: $subtask['username']), 'user', 'show', array('user_id' => $subtask['user_id'])) ?>
                 <?php endif ?>
             </td>
             <td>
@@ -46,19 +46,19 @@
                     <ul>
                         <?php if ($subtask['position'] != $first_position): ?>
                             <li>
-                                <?= $this->a(t('Move Up'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'up'), true) ?>
+                                <?= $this->url->link(t('Move Up'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'up'), true) ?>
                             </li>
                         <?php endif ?>
                         <?php if ($subtask['position'] != $last_position): ?>
                             <li>
-                                <?= $this->a(t('Move Down'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'down'), true) ?>
+                                <?= $this->url->link(t('Move Down'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'down'), true) ?>
                             </li>
                         <?php endif ?>
                         <li>
-                            <?= $this->a(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
+                            <?= $this->url->link(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
                         </li>
                         <li>
-                            <?= $this->a(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
+                            <?= $this->url->link(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
                         </li>
                     </ul>
                 </td>
@@ -68,10 +68,10 @@
     </table>
 
     <?php if (! isset($not_editable)): ?>
-        <form method="post" action="<?= $this->u('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
-            <?= $this->formCsrf() ?>
-            <?= $this->formHidden('task_id', array('task_id' => $task['id'])) ?>
-            <?= $this->formText('title', array(), array(), array('required', 'placeholder="'.t('Type here to create a new sub-task').'"')) ?>
+        <form method="post" action="<?= $this->url->href('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+            <?= $this->form->csrf() ?>
+            <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
+            <?= $this->form->text('title', array(), array(), array('required', 'placeholder="'.t('Type here to create a new sub-task').'"')) ?>
             <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
         </form>
     <?php endif ?>

@@ -8,7 +8,7 @@ namespace Integration;
  * @package  integration
  * @author   Frederic Guillot
  */
-class SlackWebhook extends Base
+class SlackWebhook extends \Core\Base
 {
     /**
      * Return true if Slack is enabled for this project or globally

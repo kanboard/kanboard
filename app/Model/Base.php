@@ -9,51 +9,8 @@ use Pimple\Container;
  *
  * @package  model
  * @author   Frederic Guillot
- *
- * @property \Core\Session                 $session
- * @property \Core\Template                $template
- * @property \Model\Acl                    $acl
- * @property \Model\Action                 $action
- * @property \Model\Authentication         $authentication
- * @property \Model\Board                  $board
- * @property \Model\Budget                 $budget
- * @property \Model\Category               $category
- * @property \Model\Comment                $comment
- * @property \Model\CommentHistory         $commentHistory
- * @property \Model\Color                  $color
- * @property \Model\Config                 $config
- * @property \Model\DateParser             $dateParser
- * @property \Model\File                   $file
- * @property \Model\Helper                 $helper
- * @property \Model\LastLogin              $lastLogin
- * @property \Model\Link                   $link
- * @property \Model\Notification           $notification
- * @property \Model\Project                $project
- * @property \Model\ProjectDuplication     $projectDuplication
- * @property \Model\ProjectPermission      $projectPermission
- * @property \Model\Subtask                $subtask
- * @property \Model\SubtaskHistory         $subtaskHistory
- * @property \Model\Swimlane               $swimlane
- * @property \Model\Task                   $task
- * @property \Model\TaskCreation           $taskCreation
- * @property \Model\TaskDuplication        $taskDuplication
- * @property \Model\TaskExport             $taskExport
- * @property \Model\TaskFinder             $taskFinder
- * @property \Model\TaskHistory            $taskHistory
- * @property \Model\TaskLink               $taskLink
- * @property \Model\TaskPosition           $taskPosition
- * @property \Model\TaskValidator          $taskValidator
- * @property \Model\Timetable              $timetable
- * @property \Model\TimetableDay           $timetableDay
- * @property \Model\TimetableExtra         $timetableExtra
- * @property \Model\TimetableOff           $timetableOff
- * @property \Model\TimetableWeek          $timetableWeek
- * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
- * @property \Model\User                   $user
- * @property \Model\UserSession            $userSession
- * @property \Model\Webhook                $webhook
  */
-abstract class Base
+abstract class Base extends \Core\Base
 {
     /**
      * Database instance
@@ -62,14 +19,6 @@ abstract class Base
      * @var \PicoDb\Database
      */
     protected $db;
-
-    /**
-     * Container instance
-     *
-     * @access protected
-     * @var \Pimple\Container
-     */
-    protected $container;
 
     /**
      * Constructor
@@ -81,18 +30,6 @@ abstract class Base
     {
         $this->container = $container;
         $this->db = $this->container['db'];
-    }
-
-    /**
-     * Load automatically models
-     *
-     * @access public
-     * @param  string $name Model name
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        return $this->container[$name];
     }
 
     /**
@@ -203,7 +140,7 @@ abstract class Base
             'backgroundColor' => $this->color->getBackgroundColor($task['color_id']),
             'borderColor' => $this->color->getBorderColor($task['color_id']),
             'textColor' => 'black',
-            'url' => $this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
+            'url' => $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
         );
     }
 }

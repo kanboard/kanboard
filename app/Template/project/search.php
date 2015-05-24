@@ -3,28 +3,28 @@
         <ul>
             <li>
                 <i class="fa fa-table fa-fw"></i>
-                <?= $this->a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
                 <i class="fa fa-calendar fa-fw"></i>
-                <?= $this->a(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
                 <i class="fa fa-check-square-o fa-fw"></i>
-                <?= $this->a(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
             </li>
             <li>
                 <i class="fa fa-dashboard fa-fw"></i>
-                <?= $this->a(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
             </li>
         </ul>
     </div>
     <section>
     <form method="get" action="?" autocomplete="off">
-        <?= $this->formHidden('controller', $values) ?>
-        <?= $this->formHidden('action', $values) ?>
-        <?= $this->formHidden('project_id', $values) ?>
-        <?= $this->formText('search', $values, array(), array('autofocus', 'required', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
+        <?= $this->form->hidden('controller', $values) ?>
+        <?= $this->form->hidden('action', $values) ?>
+        <?= $this->form->hidden('project_id', $values) ?>
+        <?= $this->form->text('search', $values, array(), array('autofocus', 'required', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
         <input type="submit" value="<?= t('Search') ?>" class="btn btn-blue"/>
     </form>
 

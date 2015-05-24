@@ -77,7 +77,7 @@
         </li>
         <?php if ($project['is_public']): ?>
         <li>
-            <?= $this->a(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+            <?= $this->url->link(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
         </li>
         <?php endif ?>
 

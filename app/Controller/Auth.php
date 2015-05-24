@@ -18,7 +18,7 @@ class Auth extends Base
     public function login(array $values = array(), array $errors = array())
     {
         if ($this->userSession->isLogged()) {
-            $this->response->redirect($this->helper->url('app', 'index'));
+            $this->response->redirect($this->helper->url->to('app', 'index'));
         }
 
         $this->response->html($this->template->layout('auth/index', array(
@@ -47,7 +47,7 @@ class Auth extends Base
                 $this->response->redirect('?'.urldecode($redirect_query));
             }
 
-            $this->response->redirect($this->helper->url('app', 'index'));
+            $this->response->redirect($this->helper->url->to('app', 'index'));
         }
 
         $this->login($values, $errors);
@@ -62,6 +62,6 @@ class Auth extends Base
     {
         $this->authentication->backend('rememberMe')->destroy($this->userSession->getId());
         $this->session->close();
-        $this->response->redirect($this->helper->url('auth', 'login'));
+        $this->response->redirect($this->helper->url->to('auth', 'login'));
     }
 }

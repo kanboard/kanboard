@@ -24,12 +24,12 @@
 <hr/>
 <h3><?= t('Change reference currency') ?></h3>
 <?php endif ?>
-<form method="post" action="<?= $this->u('currency', 'reference') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('currency', 'reference') ?>" autocomplete="off">
 
-    <?= $this->formCsrf() ?>
+    <?= $this->form->csrf() ?>
 
-    <?= $this->formLabel(t('Reference currency'), 'application_currency') ?>
-    <?= $this->formSelect('application_currency', $currencies, $config_values, $errors) ?><br/>
+    <?= $this->form->label(t('Reference currency'), 'application_currency') ?>
+    <?= $this->form->select('application_currency', $currencies, $config_values, $errors) ?><br/>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
@@ -38,15 +38,15 @@
 
 <hr/>
 <h3><?= t('Add a new currency rate') ?></h3>
-<form method="post" action="<?= $this->u('currency', 'create') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('currency', 'create') ?>" autocomplete="off">
 
-    <?= $this->formCsrf() ?>
+    <?= $this->form->csrf() ?>
 
-    <?= $this->formLabel(t('Currency'), 'currency') ?>
-    <?= $this->formSelect('currency', $currencies, $values, $errors) ?><br/>
+    <?= $this->form->label(t('Currency'), 'currency') ?>
+    <?= $this->form->select('currency', $currencies, $values, $errors) ?><br/>
 
-    <?= $this->formLabel(t('Rate'), 'rate') ?>
-    <?= $this->formText('rate', $values, $errors, array(), 'form-numeric') ?><br/>
+    <?= $this->form->label(t('Rate'), 'rate') ?>
+    <?= $this->form->text('rate', $values, $errors, array(), 'form-numeric') ?><br/>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

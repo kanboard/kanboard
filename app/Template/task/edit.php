@@ -2,16 +2,16 @@
     <h2><?= t('Edit a task') ?></h2>
 </div>
 <section id="task-section">
-<form method="post" action="<?= $this->u('task', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('task', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
 
-    <?= $this->formCsrf() ?>
+    <?= $this->form->csrf() ?>
 
     <div class="form-column">
 
-        <?= $this->formLabel(t('Title'), 'title') ?>
-        <?= $this->formText('title', $values, $errors, array('required', 'maxlength="200"')) ?><br/>
+        <?= $this->form->label(t('Title'), 'title') ?>
+        <?= $this->form->text('title', $values, $errors, array('required', 'maxlength="200"')) ?><br/>
 
-        <?= $this->formLabel(t('Description'), 'description') ?>
+        <?= $this->form->label(t('Description'), 'description') ?>
 
         <div class="form-tabs">
             <ul class="form-tabs-nav">
@@ -23,7 +23,7 @@
                 </li>
             </ul>
             <div class="write-area">
-                <?= $this->formTextarea('description', $values, $errors, array('placeholder="'.t('Leave a description').'"')) ?>
+                <?= $this->form->textarea('description', $values, $errors, array('placeholder="'.t('Leave a description').'"')) ?>
             </div>
             <div class="preview-area">
                 <div class="markdown"></div>
@@ -35,23 +35,23 @@
     </div>
 
     <div class="form-column">
-        <?= $this->formHidden('id', $values) ?>
-        <?= $this->formHidden('project_id', $values) ?>
+        <?= $this->form->hidden('id', $values) ?>
+        <?= $this->form->hidden('project_id', $values) ?>
 
-        <?= $this->formLabel(t('Assignee'), 'owner_id') ?>
-        <?= $this->formSelect('owner_id', $users_list, $values, $errors) ?><br/>
+        <?= $this->form->label(t('Assignee'), 'owner_id') ?>
+        <?= $this->form->select('owner_id', $users_list, $values, $errors) ?><br/>
 
-        <?= $this->formLabel(t('Category'), 'category_id') ?>
-        <?= $this->formSelect('category_id', $categories_list, $values, $errors) ?><br/>
+        <?= $this->form->label(t('Category'), 'category_id') ?>
+        <?= $this->form->select('category_id', $categories_list, $values, $errors) ?><br/>
 
-        <?= $this->formLabel(t('Color'), 'color_id') ?>
-        <?= $this->formSelect('color_id', $colors_list, $values, $errors) ?><br/>
+        <?= $this->form->label(t('Color'), 'color_id') ?>
+        <?= $this->form->select('color_id', $colors_list, $values, $errors) ?><br/>
 
-        <?= $this->formLabel(t('Complexity'), 'score') ?>
-        <?= $this->formNumber('score', $values, $errors) ?><br/>
+        <?= $this->form->label(t('Complexity'), 'score') ?>
+        <?= $this->form->number('score', $values, $errors) ?><br/>
 
-        <?= $this->formLabel(t('Due Date'), 'date_due') ?>
-        <?= $this->formText('date_due', $values, $errors, array('placeholder="'.$this->inList($date_format, $date_formats).'"'), 'form-date') ?><br/>
+        <?= $this->form->label(t('Due Date'), 'date_due') ?>
+        <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"'), 'form-date') ?><br/>
         <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
     </div>
 
@@ -59,9 +59,9 @@
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
         <?php if ($ajax): ?>
-            <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
+            <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
         <?php else: ?>
-            <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         <?php endif ?>
     </div>
 </form>

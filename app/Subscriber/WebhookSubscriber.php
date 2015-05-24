@@ -11,7 +11,7 @@ use Model\File;
 use Model\Subtask;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class WebhookSubscriber extends Base implements EventSubscriberInterface
+class WebhookSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

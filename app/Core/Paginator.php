@@ -349,7 +349,7 @@ class Paginator
         $html = '<span class="pagination-previous">';
 
         if ($this->offset > 0) {
-            $html .= $this->container['helper']->a(
+            $html .= $this->container['helper']->url->link(
                 '&larr; '.t('Previous'),
                 $this->controller,
                 $this->action,
@@ -376,7 +376,7 @@ class Paginator
         $html = '<span class="pagination-next">';
 
         if (($this->total - $this->offset) > $this->limit) {
-            $html .= $this->container['helper']->a(
+            $html .= $this->container['helper']->url->link(
                 t('Next').' &rarr;',
                 $this->controller,
                 $this->action,
@@ -451,7 +451,7 @@ class Paginator
             $direction = $this->direction === 'DESC' ? 'ASC' : 'DESC';
         }
 
-        return $prefix.$this->container['helper']->a(
+        return $prefix.$this->container['helper']->url->link(
             $label,
             $this->controller,
             $this->action,

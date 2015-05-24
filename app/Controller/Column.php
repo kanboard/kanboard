@@ -57,7 +57,7 @@ class Column extends Base
 
             if ($this->board->addColumn($project['id'], $data['title'], $data['task_limit'], $data['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
-                $this->response->redirect($this->helper->url('column', 'index', array('project_id' => $project['id'])));
+                $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
             }
             else {
                 $this->session->flashError(t('Unable to update this board.'));
@@ -102,7 +102,7 @@ class Column extends Base
 
             if ($this->board->updateColumn($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
-                $this->response->redirect($this->helper->url('column', 'index', array('project_id' => $project['id'])));
+                $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
             }
             else {
                 $this->session->flashError(t('Unable to update this board.'));
@@ -128,7 +128,7 @@ class Column extends Base
             $this->board->{'move'.$direction}($project['id'], $column_id);
         }
 
-        $this->response->redirect($this->helper->url('column', 'index', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
     }
 
     /**
@@ -165,6 +165,6 @@ class Column extends Base
             $this->session->flashError(t('Unable to remove this column.'));
         }
 
-        $this->response->redirect($this->helper->url('column', 'index', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
     }
 }

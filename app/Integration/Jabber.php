@@ -14,7 +14,7 @@ use Fabiang\Xmpp\Protocol\Presence;
  * @package  integration
  * @author   Frederic Guillot
  */
-class Jabber extends Base
+class Jabber extends \Core\Base
 {
     /**
      * Return true if Jabber is enabled for this project or globally
@@ -82,7 +82,7 @@ class Jabber extends Base
 
             if ($this->config->get('application_url')) {
                 $payload .= ' '.$this->config->get('application_url');
-                $payload .= $this->helper->url('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id));
+                $payload .= $this->helper->url->to('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id));
             }
 
             $this->sendMessage($project_id, $payload);

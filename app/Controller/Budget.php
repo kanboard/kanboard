@@ -88,7 +88,7 @@ class Budget extends Base
 
             if ($this->budget->create($values['project_id'], $values['amount'], $values['comment'], $values['date'])) {
                 $this->session->flash(t('The budget line have been created successfully.'));
-                $this->response->redirect($this->helper->url('budget', 'create', array('project_id' => $project['id'])));
+                $this->response->redirect($this->helper->url->to('budget', 'create', array('project_id' => $project['id'])));
             }
             else {
                 $this->session->flashError(t('Unable to create the budget line.'));
@@ -130,6 +130,6 @@ class Budget extends Base
             $this->session->flashError(t('Unable to remove this budget line.'));
         }
 
-        $this->response->redirect($this->helper->url('budget', 'create', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('budget', 'create', array('project_id' => $project['id'])));
     }
 }

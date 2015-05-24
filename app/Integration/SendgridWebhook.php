@@ -11,7 +11,7 @@ use Core\Tool;
  * @package  integration
  * @author   Frederic Guillot
  */
-class SendgridWebhook extends Base
+class SendgridWebhook extends \Core\Base
 {
     /**
      * Parse incoming email

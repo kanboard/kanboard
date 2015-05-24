@@ -8,7 +8,7 @@ use Model\Comment;
 use Model\Subtask;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
+class ProjectActivitySubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

@@ -6,8 +6,8 @@
     <p class="alert alert-info"><?= t('Do you really want to remove this budget line?') ?></p>
 
     <div class="form-actions">
-        <?= $this->a(t('Yes'), 'budget', 'remove', array('project_id' => $project['id'], 'budget_id' => $budget_id), true, 'btn btn-red') ?>
+        <?= $this->url->link(t('Yes'), 'budget', 'remove', array('project_id' => $project['id'], 'budget_id' => $budget_id), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= $this->a(t('cancel'), 'budget', 'create', array('project_id' => $project['id'])) ?>
+        <?= $this->url->link(t('cancel'), 'budget', 'create', array('project_id' => $project['id'])) ?>
     </div>
 </div>

@@ -268,7 +268,7 @@ class User extends Base
                 $this->session->flashError(t('Unable to update this user.'));
             }
 
-            $this->response->redirect($this->helper->url('user', 'share', array('user_id' => $user['id'])));
+            $this->response->redirect($this->helper->url->to('user', 'share', array('user_id' => $user['id'])));
         }
 
         $this->response->html($this->layout('user/share', array(

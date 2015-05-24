@@ -6,12 +6,12 @@
 
     <div class="listing">
         <ul class="no-bullet">
-            <li><strong><i class="fa fa-calendar"></i> <?= $this->a(t('iCal feed'), 'ical', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
+            <li><strong><i class="fa fa-calendar"></i> <?= $this->url->link(t('iCal feed'), 'ical', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
         </ul>
     </div>
 
-    <?= $this->a(t('Disable public access'), 'user', 'share', array('user_id' => $user['id'], 'switch' => 'disable'), true, 'btn btn-red') ?>
+    <?= $this->url->link(t('Disable public access'), 'user', 'share', array('user_id' => $user['id'], 'switch' => 'disable'), true, 'btn btn-red') ?>
 
 <?php else: ?>
-    <?= $this->a(t('Enable public access'), 'user', 'share', array('user_id' => $user['id'], 'switch' => 'enable'), true, 'btn btn-blue') ?>
+    <?= $this->url->link(t('Enable public access'), 'user', 'share', array('user_id' => $user['id'], 'switch' => 'enable'), true, 'btn btn-blue') ?>
 <?php endif ?>

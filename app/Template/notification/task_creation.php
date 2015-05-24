@@ -37,7 +37,7 @@
 
 <?php if (! empty($task['description'])): ?>
     <h2><?= t('Description') ?></h2>
-    <?= $this->markdown($task['description']) ?>
+    <?= $this->text->markdown($task['description']) ?>
 <?php endif ?>
 
 <?= $this->render('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>

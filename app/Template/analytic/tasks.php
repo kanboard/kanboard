@@ -7,7 +7,7 @@
 <?php else: ?>
     <section id="analytic-task-repartition">
 
-    <div id="chart" data-url="<?= $this->u('analytic', 'tasks', array('project_id' => $project['id'])) ?>"></div>
+    <div id="chart" data-url="<?= $this->url->href('analytic', 'tasks', array('project_id' => $project['id'])) ?>"></div>
 
     <table>
         <tr>

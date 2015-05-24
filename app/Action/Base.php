@@ -10,17 +10,8 @@ use Pimple\Container;
  *
  * @package action
  * @author  Frederic Guillot
- *
- * @property \Model\UserSession        $userSession
- * @property \Model\Comment            $comment
- * @property \Model\Task               $task
- * @property \Model\TaskCreation       $taskCreation
- * @property \Model\TaskModification   $taskModification
- * @property \Model\TaskDuplication    $taskDuplication
- * @property \Model\TaskFinder         $taskFinder
- * @property \Model\TaskStatus         $taskStatus
  */
-abstract class Base
+abstract class Base extends \Core\Base
 {
     /**
      * Flag for called listener
@@ -133,18 +124,6 @@ abstract class Base
     public function __toString()
     {
         return get_called_class();
-    }
-
-    /**
-     * Load automatically models
-     *
-     * @access public
-     * @param  string $name Model name
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        return $this->container[$name];
     }
 
     /**

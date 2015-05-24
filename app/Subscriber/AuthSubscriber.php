@@ -6,7 +6,7 @@ use Core\Request;
 use Event\AuthEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AuthSubscriber extends Base implements EventSubscriberInterface
+class AuthSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

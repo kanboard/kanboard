@@ -6,7 +6,7 @@ use Event\TaskEvent;
 use Model\Task;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class TaskMovedDateSubscriber extends Base implements EventSubscriberInterface
+class TaskMovedDateSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

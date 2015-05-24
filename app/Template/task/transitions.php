@@ -18,7 +18,7 @@
             <td><?= dt('%B %e, %Y at %k:%M %p', $transition['date']) ?></td>
             <td><?= $this->e($transition['src_column']) ?></td>
             <td><?= $this->e($transition['dst_column']) ?></td>
-            <td><?= $this->a($this->e($transition['name'] ?: $transition['username']), 'user', 'show', array('user_id' => $transition['user_id'])) ?></td>
+            <td><?= $this->url->link($this->e($transition['name'] ?: $transition['username']), 'user', 'show', array('user_id' => $transition['user_id'])) ?></td>
             <td><?= n(round($transition['time_spent'] / 3600, 2)).' '.t('hours') ?></td>
         </tr>
         <?php endforeach ?>

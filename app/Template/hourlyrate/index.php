@@ -17,7 +17,7 @@
         <td><?= $rate['currency'] ?></td>
         <td><?= dt('%b %e, %Y', $rate['date_effective']) ?></td>
         <td>
-            <?= $this->a(t('Remove'), 'hourlyrate', 'confirm', array('user_id' => $user['id'], 'rate_id' => $rate['id'])) ?>
+            <?= $this->url->link(t('Remove'), 'hourlyrate', 'confirm', array('user_id' => $user['id'], 'rate_id' => $rate['id'])) ?>
         </td>
     </tr>
     <?php endforeach ?>
@@ -26,19 +26,19 @@
 <h3><?= t('Add new rate') ?></h3>
 <?php endif ?>
 
-<form method="post" action="<?= $this->u('hourlyrate', 'save', array('user_id' => $user['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('hourlyrate', 'save', array('user_id' => $user['id'])) ?>" autocomplete="off">
 
-    <?= $this->formHidden('user_id', $values) ?>
-    <?= $this->formCsrf() ?>
+    <?= $this->form->hidden('user_id', $values) ?>
+    <?= $this->form->csrf() ?>
 
-    <?= $this->formLabel(t('Hourly rate'), 'rate') ?>
-    <?= $this->formText('rate', $values, $errors, array('required'), 'form-numeric') ?>
+    <?= $this->form->label(t('Hourly rate'), 'rate') ?>
+    <?= $this->form->text('rate', $values, $errors, array('required'), 'form-numeric') ?>
 
-    <?= $this->formLabel(t('Currency'), 'currency') ?>
-    <?= $this->formSelect('currency', $currencies_list, $values, $errors, array('required')) ?>
+    <?= $this->form->label(t('Currency'), 'currency') ?>
+    <?= $this->form->select('currency', $currencies_list, $values, $errors, array('required')) ?>
 
-    <?= $this->formLabel(t('Effective date'), 'date_effective') ?>
-    <?= $this->formText('date_effective', $values, $errors, array('required'), 'form-date') ?>
+    <?= $this->form->label(t('Effective date'), 'date_effective') ?>
+    <?= $this->form->text('date_effective', $values, $errors, array('required'), 'form-date') ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

@@ -96,7 +96,7 @@ class Webhook extends Base
 
         $this->bitbucketWebhook->setProjectId($this->request->getIntegerParam('project_id'));
 
-        $result = $this->bitbucketWebhook->parsePayload(json_decode(@$_POST['payload'], true));
+        $result = $this->bitbucketWebhook->parsePayload(json_decode(@$_POST['payload'], true) ?: array());
 
         echo $result ? 'PARSED' : 'IGNORED';
     }

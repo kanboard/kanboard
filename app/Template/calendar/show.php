@@ -3,19 +3,19 @@
         <ul>
             <li>
                 <i class="fa fa-table fa-fw"></i>
-                <?= $this->a(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
                 <i class="fa fa-search fa-fw"></i>
-                <?= $this->a(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
             </li>
             <li>
                 <i class="fa fa-check-square-o fa-fw"></i>
-                <?= $this->a(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
             </li>
             <li>
                 <i class="fa fa-dashboard fa-fw"></i>
-                <?= $this->a(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
             </li>
         </ul>
     </div>
@@ -34,8 +34,8 @@
         <div class="sidebar-content">
             <div id="calendar"
                  data-project-id="<?= $project['id'] ?>"
-                 data-save-url="<?= $this->u('calendar', 'save') ?>"
-                 data-check-url="<?= $this->u('calendar', 'project', array('project_id' => $project['id'])) ?>"
+                 data-save-url="<?= $this->url->href('calendar', 'save') ?>"
+                 data-check-url="<?= $this->url->href('calendar', 'project', array('project_id' => $project['id'])) ?>"
                  data-check-interval="<?= $check_interval ?>"
             >
             </div>

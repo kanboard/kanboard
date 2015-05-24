@@ -11,7 +11,7 @@ use Core\Tool;
  * @package  integration
  * @author   Frederic Guillot
  */
-class MailgunWebhook extends Base
+class MailgunWebhook extends \Core\Base
 {
     /**
      * Parse incoming email

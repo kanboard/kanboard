@@ -11,7 +11,7 @@ use Model\Task;
  * @package  integration
  * @author   Frederic Guillot
  */
-class BitbucketWebhook extends Base
+class BitbucketWebhook extends \Core\Base
 {
     /**
      * Events

@@ -9,7 +9,7 @@ use Model\Subtask;
 use Model\File;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class NotificationSubscriber extends Base implements EventSubscriberInterface
+class NotificationSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     private $templates = array(
         Task::EVENT_CREATE => 'task_creation',
