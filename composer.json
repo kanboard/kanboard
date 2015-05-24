@@ -24,7 +24,7 @@
         },
         "files" : [
             "app/functions.php",
-            "app/Libs/password.php"
+            "app/Library/password.php"
         ]
     },
     "require-dev" : {
