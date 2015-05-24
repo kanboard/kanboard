@@ -68,7 +68,7 @@ class TaskFilter extends Base
      */
     public function excludeTasks(array $task_ids)
     {
-        $this->query->notin('id', $task_ids);
+        $this->query->notin(Task::TABLE.'.id', $task_ids);
         return $this;
     }
 
@@ -82,7 +82,7 @@ class TaskFilter extends Base
     public function filterById($task_id)
     {
         if ($task_id > 0) {
-            $this->query->eq('id', $task_id);
+            $this->query->eq(Task::TABLE.'.id', $task_id);
         }
 
         return $this;
