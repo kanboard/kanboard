@@ -36,7 +36,7 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $this->client = new JsonRPC\Client(API_URL);
         $this->client->authentication('jsonrpc', API_KEY);
-        $this->client->debug = true;
+        // $this->client->debug = true;
     }
 
     private function getTaskId()
@@ -933,5 +933,33 @@ class Api extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->client->removeTaskLink($task_link_id));
         $this->assertEmpty($this->client->getAllTaskLinks($task_id1));
+    }
+
+    public function testCreateFile()
+    {
+        $this->assertTrue($this->client->createFile(1, 1, 'My file', false, base64_encode('plain text file')));
+    }
+
+    public function testGetAllFiles()
+    {
+        $files = $this->client->getAllFiles(array('task_id' => 1));
+
+        $this->assertNotEmpty($files);
+        $this->assertCount(1, $files);
+        $this->assertEquals('My file', $files[0]['name']);
+
+        $file = $this->client->getFile($files[0]['id']);
+        $this->assertNotEmpty($file);
+        $this->assertEquals('My file', $file['name']);
+
+        $content = $this->client->downloadFile($file['id']);
+        $this->assertNotEmpty($content);
+        $this->assertEquals('plain text file', base64_decode($content));
+
+        $content = $this->client->downloadFile(1234567);
+        $this->assertEmpty($content);
+
+        $this->assertTrue($this->client->removeFile($file['id']));
+        $this->assertEmpty($this->client->getAllFiles(1));
     }
 }

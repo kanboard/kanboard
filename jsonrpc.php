@@ -9,6 +9,7 @@ $server->attach(new Api\App($container));
 $server->attach(new Api\Board($container));
 $server->attach(new Api\Category($container));
 $server->attach(new Api\Comment($container));
+$server->attach(new Api\File($container));
 $server->attach(new Api\Link($container));
 $server->attach(new Api\Project($container));
 $server->attach(new Api\ProjectPermission($container));

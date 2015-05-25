@@ -141,7 +141,7 @@ class TimetableTest extends Base
         $monday = new DateTime('next Monday');
         $tuesday = new DateTime('next Monday + 1 day');
 
-        $timetable = $t->calculate(1, new DateTime('Monday'), new DateTime('Monday + 6 days'));
+        $timetable = $t->calculate(1, new DateTime('next Monday'), new DateTime('next Monday + 6 days'));
         $this->assertNotEmpty($timetable);
         $this->assertCount(4, $timetable);
 

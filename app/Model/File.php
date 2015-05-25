@@ -96,7 +96,7 @@ class File extends Base
             'path' => $path,
             'is_image' => $is_image ? '1' : '0',
             'size' => $size,
-            'user_id' => $this->userSession->getId(),
+            'user_id' => $this->userSession->getId() ?: 0,
             'date' => time(),
         ));
     }
@@ -315,6 +315,39 @@ class File extends Base
             $original_filename,
             $destination_filename,
             true,
+            strlen($data)
+        );
+    }
+
+    /**
+     * Handle file upload (base64 encoded content)
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @param  integer  $task_id      Task id
+     * @param  string   $filename     Filename
+     * @param  bool     $is_image     Is image file?
+     * @param  string   $blob         Base64 encoded image
+     * @return bool
+     */
+    public function uploadContent($project_id, $task_id, $filename, $is_image, &$blob)
+    {
+        $data = base64_decode($blob);
+
+        if (empty($data)) {
+            return false;
+        }
+
+        $destination_filename = $this->generatePath($project_id, $task_id, $filename);
+
+        @mkdir(FILES_DIR.dirname($destination_filename), 0755, true);
+        @file_put_contents(FILES_DIR.$destination_filename, $data);
+
+        return $this->create(
+            $task_id,
+            $filename,
+            $destination_filename,
+            $is_image,
             strlen($data)
         );
     }
