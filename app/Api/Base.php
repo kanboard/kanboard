@@ -27,7 +27,7 @@ abstract class Base extends \Core\Base
         $this->container['dispatcher']->dispatch('api.bootstrap', new Event);
 
         if (! ($username === 'jsonrpc' && $password === $this->config->get('api_token'))) {
-            throw new AuthenticationFailure('Wrond credentials');
+            throw new AuthenticationFailure('Wrong credentials');
         }
     }
 }
