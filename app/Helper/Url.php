@@ -24,11 +24,12 @@ class Url extends \Core\Base
      * @param  boolean  $csrf        Add a CSRF token
      * @param  string   $class       CSS class attribute
      * @param  boolean  $new_tab     Open the link in a new tab
+     * @param  string   $anchor      Link Anchor
      * @return string
      */
-    public function link($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false)
+    public function link($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '')
     {
-        return '<a href="'.$this->href($controller, $action, $params, $csrf).'" class="'.$class.'" title="'.$title.'" '.($new_tab ? 'target="_blank"' : '').'>'.$label.'</a>';
+        return '<a href="'.$this->href($controller, $action, $params, $csrf, $anchor).'" class="'.$class.'" title="'.$title.'" '.($new_tab ? 'target="_blank"' : '').'>'.$label.'</a>';
     }
 
     /**
@@ -39,9 +40,10 @@ class Url extends \Core\Base
      * @param  string   $action      Action name
      * @param  array    $params      Url parameters
      * @param  boolean  $csrf        Add a CSRF token
+     * @param  string   $anchor      Link Anchor
      * @return string
      */
-    public function href($controller, $action, array $params = array(), $csrf = false)
+    public function href($controller, $action, array $params = array(), $csrf = false, $anchor = '')
     {
         $values = array(
             'controller' => $controller,
@@ -54,7 +56,7 @@ class Url extends \Core\Base
 
         $values += $params;
 
-        return '?'.http_build_query($values, '', '&amp;');
+        return '?'.http_build_query($values, '', '&amp;').(empty($anchor) ? '' : '#'.$anchor);
     }
 
     /**

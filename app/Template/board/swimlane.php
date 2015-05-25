@@ -1,19 +1,13 @@
-<tr>
+<tr id="swimlane-<?= $swimlane['id'] ?>">
     <?php if (! $hide_swimlane): ?>
        <th>
-
            <?php if (! $not_editable && $swimlane['nb_tasks'] > 0): ?>
                 <a href="#" class="board-swimlane-toggle" data-swimlane-id="<?= $swimlane['id'] ?>">
                     <i class="fa fa-minus-circle hide-icon-swimlane-<?= $swimlane['id'] ?>"></i>
                     <i class="fa fa-plus-circle show-icon-swimlane-<?= $swimlane['id'] ?>" style="display: none"></i>
                 </a>
+                <span class="board-swimlane-toggle-title show-icon-swimlane-<?= $swimlane['id'] ?>"><?= $this->e($swimlane['name']) ?></span>
            <?php endif ?>
-
-           <?= $this->e($swimlane['name']) ?>
-
-           <span title="<?= t('Task count') ?>" class="task-count">
-                (<span><?= $swimlane['nb_tasks'] ?></span>)
-            </span>
         </th>
     <?php endif ?>
 
@@ -54,7 +48,13 @@
 <tr class="swimlane-row-<?= $swimlane['id'] ?>">
 
     <?php if (! $hide_swimlane): ?>
-        <th></th>
+        <th class="board-swimlane-title">
+            <?= $this->e($swimlane['name']) ?>
+
+            <span title="<?= t('Task count') ?>" class="task-count">
+                (<span><?= $swimlane['nb_tasks'] ?></span>)
+            </span>
+        </th>
     <?php endif ?>
 
     <?php foreach ($swimlane['columns'] as $column): ?>

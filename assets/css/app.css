@@ -848,6 +848,15 @@ nav .active a {
 #board th a.board-swimlane-toggle {
     font-size: 0.95em;
 }
+
+.board-swimlane-toggle-title {
+    font-size: 0.85em;
+    display: none;
+}
+
+.board-swimlane-title {
+    vertical-align: top;
+}
 /* task inside the board */
 .task-board {
     position: relative;

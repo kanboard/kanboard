@@ -94,3 +94,12 @@
 #board th a.board-swimlane-toggle {
     font-size: 0.95em;
 }
+
+.board-swimlane-toggle-title {
+    font-size: 0.85em;
+    display: none;
+}
+
+.board-swimlane-title {
+    vertical-align: top;
+}
