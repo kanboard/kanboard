@@ -12,17 +12,39 @@ Almost the same thing as XML-RPC but with the JSON format.
 We use the [version 2 of the protocol](http://www.jsonrpc.org/specification).
 You must call the API with a `POST` HTTP request.
 
-Credentials
------------
+Authentication
+--------------
+
+### Default method (HTTP Basic)
 
 The API credentials are available on the settings page.
 
-- API end-point: `http://YOUR_SERVER/jsonrpc.php`
+- API end-point: `https://YOUR_SERVER/jsonrpc.php`
 - Username: `jsonrpc`
-- Password: Random token (API token on the settings page)
+- Password: API token on the settings page
 
 The API use the [HTTP Basic Authentication Scheme described in the RFC2617](http://www.ietf.org/rfc/rfc2617.txt).
-If there is an authentication error, you got an HTTP status code `401 Not Authorized`.
+If there is an authentication error, you will receive the HTTP status code `401 Not Authorized`.
+
+### Custom HTTP header
+
+You can use an alternative HTTP header for the authentication if your server have a very specific configuration.
+
+- The header name can be anything you want, by example `X-API-Auth`.
+- The header value is the `username:password` encoded in Base64.
+
+Configuration:
+
+1. Define your custom header in your `config.php`: `define('API_AUTHENTICATION_HEADER', 'X-API-Auth');`
+2. Encode the credentials in Base64, example with PHP `base64_encode('jsonrpc:19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929);`
+3. Test with curl:
+
+```bash
+curl \
+-H 'X-API-Auth: anNvbnJwYzoxOWZmZDk3MDlkMDNjZTUwNjc1YzNhNDNkMWM0OWMxYWMyMDdmNGJjNDVmMDZjNWIyNzAxZmJkZjg5Mjk=' \
+-d '{"jsonrpc": "2.0", "method": "getAllProjects", "id": 1}' \
+http://localhost/kanboard/jsonrpc.php
+```
 
 Examples
 --------

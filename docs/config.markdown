@@ -191,4 +191,7 @@ Various settings
 ```php
 // Escape html inside markdown text
 define('MARKDOWN_ESCAPE_HTML', true);
+
+// API alternative authentication header, the default is HTTP Basic Authentication defined in RFC2617
+define('API_AUTHENTICATION_HEADER', '');
 ```

@@ -76,3 +76,6 @@ defined('FILES_DIR') or define('FILES_DIR', 'data/files/');
 
 // Escape html inside markdown text
 defined('MARKDOWN_ESCAPE_HTML') or define('MARKDOWN_ESCAPE_HTML', true);
+
+// API alternative authentication header, the default is HTTP Basic Authentication defined in RFC2617
+defined('API_AUTHENTICATION_HEADER') or define('API_AUTHENTICATION_HEADER', '');
