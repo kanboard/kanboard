@@ -121,7 +121,7 @@ abstract class Base extends \Core\Base
             "($start_column <= '$start_time' AND ($end_column = '0' OR $end_column IS NULL))",
         );
 
-        return '('.implode(' OR ', $conditions).')';
+        return $start_column.' IS NOT NULL AND '.$start_column.' > 0 AND ('.implode(' OR ', $conditions).')';
     }
 
     /**
