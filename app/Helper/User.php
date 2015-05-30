@@ -11,6 +11,17 @@ namespace Helper;
 class User extends \Core\Base
 {
     /**
+     * Get user id
+     *
+     * @access public
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->userSession->getId();
+    }
+
+    /**
      * Get user profile
      *
      * @access public
