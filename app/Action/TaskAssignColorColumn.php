@@ -21,6 +21,7 @@ class TaskAssignColorColumn extends Base
     public function getCompatibleEvents()
     {
         return array(
+            Task::EVENT_CREATE,
             Task::EVENT_MOVE_COLUMN,
         );
     }

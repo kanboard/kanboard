@@ -240,7 +240,7 @@ return array(
     'Assign the task to a specific user' => 'Assigner la tâche à un utilisateur spécifique',
     'Assign the task to the person who does the action' => 'Assigner la tâche à la personne qui fait l\'action',
     'Duplicate the task to another project' => 'Dupliquer la tâche vers un autre projet',
-    'Move a task to another column' => 'Déplacement d\'une tâche vers un autre colonne',
+    'Move a task to another column' => 'Déplacement d\'une tâche vers une autre colonne',
     'Move a task to another position in the same column' => 'Déplacement d\'une tâche à une autre position mais dans la même colonne',
     'Task modification' => 'Modification d\'une tâche',
     'Task creation' => 'Création d\'une tâche',
