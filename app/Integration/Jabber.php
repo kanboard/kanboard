@@ -106,6 +106,7 @@ class Jabber extends \Core\Base
             $options->setUsername($params['username']);
             $options->setPassword($params['password']);
             $options->setTo($params['domain']);
+            $options->setLogger($this->container['logger']);
 
             $client = new Client($options);
 
