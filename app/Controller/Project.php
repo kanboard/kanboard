@@ -513,6 +513,7 @@ class Project extends Base
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
             'values' => empty($values) ? array('is_private' => $is_private) : $values,
             'errors' => $errors,
+            'is_private' => $is_private,
             'title' => $is_private ? t('New private project') : t('New project'),
         )));
     }

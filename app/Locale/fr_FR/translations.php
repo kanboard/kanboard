@@ -923,4 +923,5 @@ return array(
     'Two factor authentication disabled' => 'Authentification à deux facteurs désactivé',
     'Two factor authentication enabled' => 'Authentification à deux facteurs activée',
     'Unable to update this user.' => 'Impossible de mettre à jour cet utilisateur.',
+    'There is no user management for private projects.' => 'Il n\'y a pas de gestion d\'utilisateurs pour les projets privés.',
 );
