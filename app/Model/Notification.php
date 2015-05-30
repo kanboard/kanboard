@@ -114,6 +114,7 @@ class Notification extends Base
             foreach ($users as $user) {
 
                 $this->container['logger']->debug('Send email notification to '.$user['username'].' lang='.$user['language']);
+                $start_time = microtime(true);
 
                 // Use the user language otherwise use the application language (do not use the session language)
                 if (! empty($user['language'])) {
@@ -131,6 +132,8 @@ class Notification extends Base
                             ->setTo(array($user['email'] => $user['name'] ?: $user['username']));
 
                 $mailer->send($message);
+
+                $this->container['logger']->debug('Email sent in '.round(microtime(true) - $start_time, 6).' seconds');
             }
         }
         catch (Swift_TransportException $e) {
