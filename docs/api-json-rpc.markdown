@@ -163,6 +163,29 @@ Array
 )
 ```
 
+### Example with Ruby
+
+This example can be used with Kanboard configured with Reverse-Proxy authentication and the API configured with a custom authentication header:
+
+```ruby
+require 'faraday'
+
+conn = Faraday.new(:url => 'https://kanboard.example.com') do |faraday|
+    faraday.response :logger
+    faraday.headers['X-API-Auth'] = 'XXX'      # base64_encode('jsonrpc:API_KEY')
+    faraday.basic_auth(ENV['user'], ENV['pw']) # user/pass to get through basic auth
+    faraday.adapter Faraday.default_adapter    # make requests with Net::HTTP
+end
+
+response = conn.post do |req|
+    req.url '/jsonrpc.php'
+    req.headers['Content-Type'] = 'application/json'
+    req.body = '{ "jsonrpc": "2.0", "id": 1, "method": "getAllProjects" }'
+end
+
+puts response.body
+```
+
 Procedures
 ----------
 

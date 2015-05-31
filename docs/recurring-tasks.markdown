@@ -1,6 +1,8 @@
 Recurring tasks
 ===============
 
+To fit with the Kanban methodology, the recurring tasks are not based on a date but on board events.
+
 - Recurring tasks are duplicated to the first column of the board when the selected events occurs
 - The due date can be recalculated automatically
 - Each task records the task id of the parent task that created it and the child task created
