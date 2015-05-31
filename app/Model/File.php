@@ -304,7 +304,7 @@ class File extends Base
             return false;
         }
 
-        $original_filename = e('Screenshot taken %s', dt('%B %e, %Y at %k:%M %p', time()));
+        $original_filename = e('Screenshot taken %s', dt('%B %e, %Y at %k:%M %p', time())).'.png';
         $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
 
         @mkdir(FILES_DIR.dirname($destination_filename), 0755, true);
