@@ -10,7 +10,7 @@
                     </ul>
                 </span>
             </span>
-        </li>
+            </li>
             <li>
                 <i class="fa fa-table fa-fw"></i>
                 <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
@@ -21,12 +21,13 @@
             </li>
         </ul>
     </div>
-    <section class="sidebar-container">
-
-        <?= $this->render($sidebar_template, array('project' => $project)) ?>
-
-        <div class="sidebar-content">
-            <?= $project_content_for_layout ?>
-        </div>
-    </section>
+    <?php if ($paginator->isEmpty()): ?>
+        <p class="alert"><?= t('There is no completed tasks at the moment.') ?></p>
+    <?php else: ?>
+        <?= $this->render('task/table', array(
+            'paginator' => $paginator,
+            'categories' => $categories,
+            'columns' => $columns,
+        )) ?>
+    <?php endif ?>
 </section>

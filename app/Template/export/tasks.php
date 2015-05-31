@@ -4,6 +4,8 @@
     </h2>
 </div>
 
+<p class="alert alert-info"><?= t('This report contains all tasks information for the given date range.') ?></p>
+
 <form method="get" action="?" autocomplete="off">
 
     <?= $this->form->hidden('controller', $values) ?>

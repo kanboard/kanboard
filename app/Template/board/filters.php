@@ -21,41 +21,7 @@
                                 <i class="fa fa-arrows-h fa-fw"></i> <a href="#" class="filter-toggle-scrolling"><?= t('Horizontal scrolling') ?></a>
                             </span>
                         </li>
-                        <li>
-                            <i class="fa fa-search fa-fw"></i>
-                            <?= $this->url->link(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
-                        </li>
-                        <li>
-                            <i class="fa fa-check-square-o fa-fw"></i>
-                            <?= $this->url->link(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
-                        </li>
-                        <li>
-                            <i class="fa fa-dashboard fa-fw"></i>
-                            <?= $this->url->link(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
-                        </li>
-                        <li>
-                            <i class="fa fa-calendar fa-fw"></i>
-                            <?= $this->url->link(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
-                        </li>
-                        <?php if ($project['is_public']): ?>
-                        <li>
-                            <i class="fa fa-share-alt fa-fw"></i> <?= $this->url->link(t('Public link'), 'board', 'readonly', array('token' => $project['token']), false, '', '', true) ?>
-                        </li>
-                        <?php endif ?>
-                        <?php if ($this->user->isManager($project['id'])): ?>
-                        <li>
-                            <i class="fa fa-line-chart fa-fw"></i>
-                            <?= $this->url->link(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
-                        </li>
-                        <li>
-                            <i class="fa fa-pie-chart fa-fw"></i>
-                            <?= $this->url->link(t('Budget'), 'budget', 'index', array('project_id' => $project['id'])) ?>
-                        </li>
-                        <li>
-                            <i class="fa fa-cog fa-fw"></i>
-                            <?= $this->url->link(t('Configure'), 'project', 'show', array('project_id' => $project['id'])) ?>
-                        </li>
-                        <?php endif ?>
+                        <?= $this->render('project/dropdown', array('project' => $project)) ?>
                     </ul>
                 </span>
             </span>

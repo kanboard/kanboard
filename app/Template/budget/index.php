@@ -2,11 +2,7 @@
 <?= $this->asset->js('assets/js/vendor/dimple.v2.1.2.min.js') ?>
 
 <div class="page-header">
-    <h2><?= t('Budget') ?></h2>
-    <ul>
-        <li><?= $this->url->link(t('Budget lines'), 'budget', 'create', array('project_id' => $project['id'])) ?></li>
-        <li><?= $this->url->link(t('Cost breakdown'), 'budget', 'breakdown', array('project_id' => $project['id'])) ?></li>
-    </ul>
+    <h2><?= t('Budget overview') ?></h2>
 </div>
 
 <?php if (! empty($daily_budget)): ?>
@@ -32,4 +28,6 @@
     </tr>
     <?php endforeach ?>
 </table>
+<?php else: ?>
+    <p class="alert"><?= t('There is not enough data to show something.') ?></p>
 <?php endif ?>

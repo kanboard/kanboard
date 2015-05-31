@@ -23,7 +23,7 @@ class Budget extends Base
             'daily_budget' => $this->budget->getDailyBudgetBreakdown($project['id']),
             'project' => $project,
             'title' => t('Budget')
-        )));
+        ), 'budget/sidebar'));
     }
 
     /**
@@ -47,7 +47,7 @@ class Budget extends Base
             'paginator' => $paginator,
             'project' => $project,
             'title' => t('Budget')
-        )));
+        ), 'budget/sidebar'));
     }
 
     /**
@@ -68,8 +68,8 @@ class Budget extends Base
             'values' => $values + array('project_id' => $project['id']),
             'errors' => $errors,
             'project' => $project,
-            'title' => t('Budget')
-        )));
+            'title' => t('Budget lines')
+        ), 'budget/sidebar'));
     }
 
     /**
@@ -111,7 +111,7 @@ class Budget extends Base
             'project' => $project,
             'budget_id' => $this->request->getIntegerParam('budget_id'),
             'title' => t('Remove a budget line'),
-        )));
+        ), 'budget/sidebar'));
     }
 
     /**

@@ -2,20 +2,22 @@
     <div class="page-header">
         <ul>
             <li>
+            <span class="dropdown">
+                <span>
+                    <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
+                    <ul>
+                        <?= $this->render('project/dropdown', array('project' => $project)) ?>
+                    </ul>
+                </span>
+            </span>
+        </li>
+            <li>
                 <i class="fa fa-table fa-fw"></i>
                 <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
-                <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Search'), 'project', 'search', array('project_id' => $project['id'])) ?>
-            </li>
-            <li>
-                <i class="fa fa-check-square-o fa-fw"></i>
-                <?= $this->url->link(t('Completed tasks'), 'project', 'tasks', array('project_id' => $project['id'])) ?>
-            </li>
-            <li>
-                <i class="fa fa-dashboard fa-fw"></i>
-                <?= $this->url->link(t('Activity'), 'project', 'activity', array('project_id' => $project['id'])) ?>
+                <i class="fa fa-folder fa-fw"></i>
+                <?= $this->url->link(t('All projects'), 'project', 'index') ?>
             </li>
         </ul>
     </div>

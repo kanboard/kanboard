@@ -247,12 +247,13 @@ abstract class Base extends \Core\Base
      * @param  array     $params     Template parameters
      * @return string
      */
-    protected function projectLayout($template, array $params)
+    protected function projectLayout($template, array $params, $sidebar_template = 'project/sidebar')
     {
         $content = $this->template->render($template, $params);
         $params['project_content_for_layout'] = $content;
         $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
         $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $params['sidebar_template'] = $sidebar_template;
 
         return $this->template->layout('project/layout', $params);
     }
