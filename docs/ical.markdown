@@ -2,7 +2,7 @@ Syncing your calendars
 ======================
 
 Kanboard supports iCal feeds for projects and users.
-This feature allow you to import Kanboard tasks in almost any calendar program (by example Microsoft Outlook, Apple Calendar and Google Calendar).
+This feature allow you to import Kanboard tasks in almost any calendar program (by example Microsoft Outlook, Apple Calendar, Mozilla Thunderbird and Google Calendar).
 
 Calendar subscriptions are **read-only** access, you cannot create tasks from an external calendar software.
 The Calendar feed export follow the iCal standard.
@@ -34,6 +34,33 @@ Adding your Kanboard calendar to Apple Calendar
 - Don't forget to select the refresh frequency
 
 ![Edit iCal subscription](http://kanboard.net/screenshots/documentation/apple-calendar-edit-subscription.png)
+
+Adding your Kanboard calendar to Microsoft Outlook
+--------------------------------------------------
+
+![Outlook Add Internet Calendar](http://kanboard.net/screenshots/documentation/outlook-add-subscription.png)
+
+- Open Outlook
+- Select **Open Calendar > From Internet**
+- Copy and paste the iCal feed url from Kanboard
+
+![Outlook Edit Internet Calendar](http://kanboard.net/screenshots/documentation/outlook-edit-subscription.png)
+
+Adding your Kanboard calendar to Mozilla Thunderbird
+----------------------------------------------------
+
+- Install the Add-on **Lightning** to add the calendar support to Thunderbird
+- Click on **File > New Calendar**
+- In the dialog box, choose **On the Network**
+
+![Thunderbird Step 1](http://kanboard.net/screenshots/documentation/thunderbird-new-calendar-step1.png)
+
+- Choose the format iCalendar
+- Copy and paste the iCal feed url from Kanboard
+
+![Thunderbird Step 2](http://kanboard.net/screenshots/documentation/thunderbird-new-calendar-step2.png)
+
+- Choose the colors and other settings and finally save
 
 Adding your Kanboard calendar to Google Calendar
 ------------------------------------------------
