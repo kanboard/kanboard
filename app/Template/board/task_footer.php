@@ -58,4 +58,8 @@
     <?php if ($task['score']): ?>
         <span class="task-score"><?= $this->e($task['score']) ?></span>
     <?php endif ?>
+
+    <?php if (! empty($task['time_estimated'])): ?>
+        <strong><?= $this->e($task['time_estimated']).'h' ?> <?= t('estimated') ?></strong>
+    <?php endif ?>
 </div>

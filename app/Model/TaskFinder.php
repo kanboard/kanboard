@@ -111,6 +111,7 @@ class TaskFinder extends Base
                 'tasks.recurrence_basedate',
                 'tasks.recurrence_parent',
                 'tasks.recurrence_child',
+                'tasks.time_estimated',
                 'users.username AS assignee_username',
                 'users.name AS assignee_name'
             )
