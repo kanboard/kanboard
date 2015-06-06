@@ -112,7 +112,7 @@ class Webhook extends Base
             $this->response->text('Not Authorized', 401);
         }
 
-        echo $this->postmarkWebhook->parsePayload($this->request->getJson() ?: array()) ? 'PARSED' : 'IGNORED';
+        echo $this->postmark->receiveEmail($this->request->getJson() ?: array()) ? 'PARSED' : 'IGNORED';
     }
 
     /**

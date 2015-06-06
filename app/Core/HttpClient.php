@@ -2,22 +2,20 @@
 
 namespace Core;
 
-use Pimple\Container;
-
 /**
  * HTTP client
  *
  * @package  core
  * @author   Frederic Guillot
  */
-class HttpClient
+class HttpClient extends Base
 {
     /**
      * HTTP connection timeout in seconds
      *
      * @var integer
      */
-    const HTTP_TIMEOUT = 2;
+    const HTTP_TIMEOUT = 5;
 
     /**
      * Number of maximum redirections for the HTTP client
@@ -31,26 +29,7 @@ class HttpClient
      *
      * @var string
      */
-    const HTTP_USER_AGENT = 'Kanboard Webhook';
-
-    /**
-     * Container instance
-     *
-     * @access protected
-     * @var \Pimple\Container
-     */
-    protected $container;
-
-    /**
-     * Constructor
-     *
-     * @access public
-     * @param  \Pimple\Container   $container
-     */
-    public function __construct(Container $container)
-    {
-        $this->container = $container;
-    }
+    const HTTP_USER_AGENT = 'Kanboard';
 
     /**
      * Send a POST HTTP request
@@ -58,19 +37,20 @@ class HttpClient
      * @access public
      * @param  string  $url
      * @param  array   $data
+     * @param  array   $headers
      * @return string
      */
-    public function post($url, array $data)
+    public function post($url, array $data, array $headers = array())
     {
         if (empty($url)) {
             return '';
         }
 
-        $headers = array(
+        $headers = array_merge(array(
             'User-Agent: '.self::HTTP_USER_AGENT,
             'Content-Type: application/json',
             'Connection: close',
-        );
+        ), $headers);
 
         $context = stream_context_create(array(
             'http' => array(
@@ -83,12 +63,21 @@ class HttpClient
             )
         ));
 
-        $response = @file_get_contents(trim($url), false, $context);
+        $stream = @fopen(trim($url), 'r', false, $context);
+        $response = '';
+
+        if (is_resource($stream)) {
+            $response = stream_get_contents($stream);
+        }
+        else {
+            $this->container['logger']->error('HttpClient: request failed');
+        }
 
         if (DEBUG) {
-            $this->container['logger']->debug($url);
-            $this->container['logger']->debug(var_export($data, true));
-            $this->container['logger']->debug($response);
+            $this->container['logger']->debug('HttpClient: url='.$url);
+            $this->container['logger']->debug('HttpClient: payload='.var_export($data, true));
+            $this->container['logger']->debug('HttpClient: metadata='.var_export(@stream_get_meta_data($stream), true));
+            $this->container['logger']->debug('HttpClient: response='.$response);
         }
 
         return $response;

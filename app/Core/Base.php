@@ -11,6 +11,7 @@ use Pimple\Container;
  * @author  Frederic Guillot
  *
  * @property \Core\Helper                  $helper
+ * @property \Core\EmailClient             $emailClient
  * @property \Core\HttpClient              $httpClient
  * @property \Core\Paginator               $paginator
  * @property \Core\Request                 $request
@@ -22,9 +23,10 @@ use Pimple\Container;
  * @property \Integration\HipchatWebhook   $hipchatWebhook
  * @property \Integration\Jabber           $jabber
  * @property \Integration\MailgunWebhook   $mailgunWebhook
- * @property \Integration\PostmarkWebhook  $postmarkWebhook
+ * @property \Integration\Postmark         $postmark
  * @property \Integration\SendgridWebhook  $sendgridWebhook
  * @property \Integration\SlackWebhook     $slackWebhook
+ * @property \Integration\Smtp             $smtp
  * @property \Model\Acl                    $acl
  * @property \Model\Action                 $action
  * @property \Model\Authentication         $authentication

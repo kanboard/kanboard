@@ -4,9 +4,6 @@ namespace Model;
 
 use Core\Session;
 use Core\Translator;
-use Swift_Message;
-use Swift_Mailer;
-use Swift_TransportException;
 
 /**
  * Notification model
@@ -101,43 +98,22 @@ class Notification extends Base
      */
     public function sendEmails($template, array $users, array $data)
     {
-        try {
+        foreach ($users as $user) {
 
-            $author = '';
-
-            if (Session::isOpen() && $this->userSession->isLogged()) {
-                $author = e('%s via Kanboard', $this->user->getFullname($this->session['user']));
+            // Use the user language otherwise use the application language (do not use the session language)
+            if (! empty($user['language'])) {
+                Translator::load($user['language']);
+            }
+            else {
+                Translator::load($this->config->get('application_language', 'en_US'));
             }
 
-            $mailer = Swift_Mailer::newInstance($this->container['mailer']);
-
-            foreach ($users as $user) {
-
-                $this->container['logger']->debug('Send email notification to '.$user['username'].' lang='.$user['language']);
-                $start_time = microtime(true);
-
-                // Use the user language otherwise use the application language (do not use the session language)
-                if (! empty($user['language'])) {
-                    Translator::load($user['language']);
-                }
-                else {
-                    Translator::load($this->config->get('application_language', 'en_US'));
-                }
-
-                // Send the message
-                $message = Swift_Message::newInstance()
-                            ->setSubject($this->getMailSubject($template, $data))
-                            ->setFrom(array(MAIL_FROM => $author ?: 'Kanboard'))
-                            ->setBody($this->getMailContent($template, $data), 'text/html')
-                            ->setTo(array($user['email'] => $user['name'] ?: $user['username']));
-
-                $mailer->send($message);
-
-                $this->container['logger']->debug('Email sent in '.round(microtime(true) - $start_time, 6).' seconds');
-            }
-        }
-        catch (Swift_TransportException $e) {
-            $this->container['logger']->error($e->getMessage());
+            $this->emailClient->send(
+                $user['email'],
+                $user['name'] ?: $user['username'],
+                $this->getMailSubject($template, $data),
+                $this->getMailContent($template, $data)
+            );
         }
 
         // Restore locales
@@ -167,40 +143,40 @@ class Notification extends Base
     {
         switch ($template) {
             case 'file_creation':
-                $subject = $this->getStandardMailSubject(t('New attachment'), $data);
+                $subject = $this->getStandardMailSubject(e('New attachment'), $data);
                 break;
             case 'comment_creation':
-                $subject = $this->getStandardMailSubject(t('New comment'), $data);
+                $subject = $this->getStandardMailSubject(e('New comment'), $data);
                 break;
             case 'comment_update':
-                $subject = $this->getStandardMailSubject(t('Comment updated'), $data);
+                $subject = $this->getStandardMailSubject(e('Comment updated'), $data);
                 break;
             case 'subtask_creation':
-                $subject = $this->getStandardMailSubject(t('New subtask'), $data);
+                $subject = $this->getStandardMailSubject(e('New subtask'), $data);
                 break;
             case 'subtask_update':
-                $subject = $this->getStandardMailSubject(t('Subtask updated'), $data);
+                $subject = $this->getStandardMailSubject(e('Subtask updated'), $data);
                 break;
             case 'task_creation':
-                $subject = $this->getStandardMailSubject(t('New task'), $data);
+                $subject = $this->getStandardMailSubject(e('New task'), $data);
                 break;
             case 'task_update':
-                $subject = $this->getStandardMailSubject(t('Task updated'), $data);
+                $subject = $this->getStandardMailSubject(e('Task updated'), $data);
                 break;
             case 'task_close':
-                $subject = $this->getStandardMailSubject(t('Task closed'), $data);
+                $subject = $this->getStandardMailSubject(e('Task closed'), $data);
                 break;
             case 'task_open':
-                $subject = $this->getStandardMailSubject(t('Task opened'), $data);
+                $subject = $this->getStandardMailSubject(e('Task opened'), $data);
                 break;
             case 'task_move_column':
-                $subject = $this->getStandardMailSubject(t('Column Change'), $data);
+                $subject = $this->getStandardMailSubject(e('Column Change'), $data);
                 break;
             case 'task_move_position':
-                $subject = $this->getStandardMailSubject(t('Position Change'), $data);
+                $subject = $this->getStandardMailSubject(e('Position Change'), $data);
                 break;
             case 'task_assignee_change':
-                $subject = $this->getStandardMailSubject(t('Assignee Change'), $data);
+                $subject = $this->getStandardMailSubject(e('Assignee Change'), $data);
                 break;
             case 'task_due':
                 $subject = e('[%s][Due tasks]', $data['project']);

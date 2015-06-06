@@ -27,4 +27,3 @@ $container->register(new ServiceProvider\LoggingProvider);
 $container->register(new ServiceProvider\DatabaseProvider);
 $container->register(new ServiceProvider\ClassProvider);
 $container->register(new ServiceProvider\EventDispatcherProvider);
-$container->register(new ServiceProvider\MailerProvider);

@@ -64,6 +64,7 @@ class ClassProvider implements ServiceProviderInterface
             'Webhook',
         ),
         'Core' => array(
+            'EmailClient',
             'Helper',
             'HttpClient',
             'MemoryCache',
@@ -78,9 +79,10 @@ class ClassProvider implements ServiceProviderInterface
             'HipchatWebhook',
             'Jabber',
             'MailgunWebhook',
-            'PostmarkWebhook',
+            'Postmark',
             'SendgridWebhook',
             'SlackWebhook',
+            'Smtp',
         )
     );
 

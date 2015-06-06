@@ -5,13 +5,40 @@ namespace Integration;
 use HTML_To_Markdown;
 
 /**
- * Postmark Webhook
+ * Postmark integration
  *
  * @package  integration
  * @author   Frederic Guillot
  */
-class PostmarkWebhook extends \Core\Base
+class Postmark extends \Core\Base
 {
+    /**
+     * Send a HTML email
+     *
+     * @access public
+     * @param  string  $email
+     * @param  string  $name
+     * @param  string  $subject
+     * @param  string  $html
+     * @param  string  $author
+     */
+    public function sendEmail($email, $name, $subject, $html, $author)
+    {
+        $headers = array(
+            'Accept: application/json',
+            'X-Postmark-Server-Token: '.POSTMARK_API_TOKEN,
+        );
+
+        $payload = array(
+            'From' => sprintf('%s <%s>', $author, MAIL_FROM),
+            'To' => sprintf('%s <%s>', $name, $email),
+            'Subject' => $subject,
+            'HtmlBody' => $html,
+        );
+
+        $this->httpClient->post('https://api.postmarkapp.com/email', $payload, $headers);
+    }
+
     /**
      * Parse incoming email
      *
@@ -19,7 +46,7 @@ class PostmarkWebhook extends \Core\Base
      * @param  array   $payload   Incoming email
      * @return boolean
      */
-    public function parsePayload(array $payload)
+    public function receiveEmail(array $payload)
     {
         if (empty($payload['From']) || empty($payload['Subject']) || empty($payload['MailboxHash'])) {
             return false;
@@ -29,7 +56,7 @@ class PostmarkWebhook extends \Core\Base
         $user = $this->user->getByEmail($payload['From']);
 
         if (empty($user)) {
-            $this->container['logger']->debug('PostmarkWebhook: ignored => user not found');
+            $this->container['logger']->debug('Postmark: ignored => user not found');
             return false;
         }
 
@@ -37,13 +64,13 @@ class PostmarkWebhook extends \Core\Base
         $project = $this->project->getByIdentifier($payload['MailboxHash']);
 
         if (empty($project)) {
-            $this->container['logger']->debug('PostmarkWebhook: ignored => project not found');
+            $this->container['logger']->debug('Postmark: ignored => project not found');
             return false;
         }
 
         // The user must be member of the project
         if (! $this->projectPermission->isMember($project['id'], $user['id'])) {
-            $this->container['logger']->debug('PostmarkWebhook: ignored => user is not member of the project');
+            $this->container['logger']->debug('Postmark: ignored => user is not member of the project');
             return false;
         }
 

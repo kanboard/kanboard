@@ -64,6 +64,7 @@ defined('MAIL_SMTP_USERNAME') or define('MAIL_SMTP_USERNAME', '');
 defined('MAIL_SMTP_PASSWORD') or define('MAIL_SMTP_PASSWORD', '');
 defined('MAIL_SMTP_ENCRYPTION') or define('MAIL_SMTP_ENCRYPTION', null);
 defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
+defined('POSTMARK_API_TOKEN') or define('POSTMARK_API_TOKEN', '');
 
 // Enable or disable "Strict-Transport-Security" HTTP header
 defined('ENABLE_HSTS') or define('ENABLE_HSTS', true);

@@ -14,7 +14,7 @@ define('FILES_DIR', 'data/files/');
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
 
-// Mail transport to use: "smtp", "sendmail" or "mail" (PHP mail function)
+// Mail transport to use: "smtp", "sendmail", "mail" (PHP mail function), "postmark"
 define('MAIL_TRANSPORT', 'mail');
 
 // SMTP configuration to use when the "smtp" transport is chosen
@@ -26,6 +26,9 @@ define('MAIL_SMTP_ENCRYPTION', null); // Valid values are "null", "ssl" or "tls"
 
 // Sendmail command to use when the transport is "sendmail"
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
+
+// Postmark API token (used to send emails through their API)
+define('POSTMARK_API_TOKEN', '');
 
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');

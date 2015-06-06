@@ -15,6 +15,7 @@ class FakeHttpClient
 {
     private $url = '';
     private $data = array();
+    private $headers = array();
 
     public function getUrl()
     {
@@ -26,16 +27,21 @@ class FakeHttpClient
         return $this->data;
     }
 
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
     public function toPrettyJson()
     {
         return json_encode($this->data, JSON_PRETTY_PRINT);
     }
 
-    public function post($url, array $data)
+    public function post($url, array $data, array $headers = array())
     {
         $this->url = $url;
         $this->data = $data;
-        //echo $this->toPrettyJson();
+        $this->headers = $headers;
         return true;
     }
 }

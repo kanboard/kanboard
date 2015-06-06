@@ -12,6 +12,16 @@ To receive email notifications, users of Kanboard must have:
 
 Note: The logged user who performs the action doesn't receive any notifications, only other project members.
 
+Email transports
+----------------
+
+There are several email transports available:
+
+- SMTP
+- Sendmail
+- PHP native mail function
+- Postmark
+
 Server settings
 ---------------
 
@@ -55,6 +65,34 @@ define('MAIL_TRANSPORT', 'sendmail');
 
 // If you need to change the sendmail command, replace the value
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
+```
+
+### PHP native mail function
+
+This is the default configuration:
+
+```php
+define('MAIL_TRANSPORT', 'mail');
+```
+
+### Postmark HTTP API
+
+Postmark is a third-party email service.
+If you already use the Postmark integration to receive emails in Kanboard you can use the same provider to send email too.
+
+This system use their HTTP API instead of the SMTP protocol.
+
+Here are the required settings for this configuration:
+
+```php
+// We choose "postmark" as mail transport
+define('MAIL_TRANSPORT', 'postmark');
+
+// Copy and paste your Postmark API token
+define('POSTMARK_API_TOKEN', 'COPY HERE YOUR POSTMARK API TOKEN');
+
+// Be sure to use the Postmark configured sender email address
+define('MAIL_FROM', 'sender-address-configured-in-postmark@example.org');
 ```
 
 ### The sender email address
