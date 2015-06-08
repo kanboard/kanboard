@@ -11,7 +11,7 @@
 <?php endif ?>
 
 <section id="task-section">
-<form method="post" action="<?= $this->url->href('task', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('task', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off" enctype="multipart/form-data">
 
     <?= $this->form->csrf() ?>
 
@@ -40,6 +40,10 @@
 
         <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
+        <div class="form-file">
+            <input type="file" name="files[]" multiple />
+        </div>
+        
         <?php if (! isset($duplicate)): ?>
             <?= $this->form->checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>
         <?php endif ?>

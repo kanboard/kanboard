@@ -157,7 +157,9 @@ class Task extends Base
 
         if ($valid) {
 
-            if ($this->taskCreation->create($values)) {
+            $task_id = $this->taskCreation->create($values);
+            if ($task_id) {   
+                $this->file->upload($values['project_id'], $task_id, 'files');
                 $this->session->flash(t('Task created successfully.'));
 
                 if (isset($values['another_task']) && $values['another_task'] == 1) {
