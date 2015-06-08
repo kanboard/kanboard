@@ -105,7 +105,8 @@ class SubtaskTimeTracking extends Base
                     ->join(Subtask::TABLE, 'id', 'subtask_id')
                     ->join(Task::TABLE, 'id', 'task_id', Subtask::TABLE)
                     ->join(User::TABLE, 'id', 'user_id', self::TABLE)
-                    ->eq(Task::TABLE.'.project_id', $project_id);
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->asc(self::TABLE.'.id');
     }
 
     /**

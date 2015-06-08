@@ -6,7 +6,12 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 70;
+const VERSION = 71;
+
+function version_71($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN notifications_filter INTEGER DEFAULT 4");
+}
 
 function version_70($pdo)
 {

@@ -1,4 +1,4 @@
-<h2><?= t('List of due tasks for the project "%s"', $project) ?></h2>
+<h2><?= t('Overdue tasks for the project "%s"', $project_name) ?></h2>
 
 <ul>
     <?php foreach ($tasks as $task): ?>
@@ -16,5 +16,3 @@
         </li>
     <?php endforeach ?>
 </ul>
-
-<?= $this->render('notification/footer', array('task' => $task)) ?>

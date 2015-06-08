@@ -168,6 +168,8 @@ class TaskFinder extends Base
                         Task::TABLE.'.title',
                         Task::TABLE.'.date_due',
                         Task::TABLE.'.project_id',
+                        Task::TABLE.'.creator_id',
+                        Task::TABLE.'.owner_id',
                         Project::TABLE.'.name AS project_name',
                         User::TABLE.'.username AS assignee_username',
                         User::TABLE.'.name AS assignee_name'

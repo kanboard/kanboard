@@ -11,6 +11,22 @@ use SimpleLogger\File;
 
 date_default_timezone_set('UTC');
 
+class FakeEmailClient
+{
+    public $email;
+    public $name;
+    public $subject;
+    public $html;
+
+    public function send($email, $name, $subject, $html)
+    {
+        $this->email = $email;
+        $this->name = $name;
+        $this->subject = $subject;
+        $this->html = $html;
+    }
+}
+
 class FakeHttpClient
 {
     private $url = '';
@@ -79,6 +95,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container['logger'] = new Logger;
         $this->container['logger']->setLogger(new File('/dev/null'));
         $this->container['httpClient'] = new FakeHttpClient;
+        $this->container['emailClient'] = new FakeEmailClient;
     }
 
     public function tearDown()

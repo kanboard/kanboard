@@ -105,9 +105,11 @@ class User extends Base
 
         if ($valid) {
 
-            if ($this->user->create($values)) {
+            $user_id = $this->user->create($values);
+
+            if ($user_id !== false) {
                 $this->session->flash(t('User created successfully.'));
-                $this->response->redirect('?controller=user');
+                $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user_id)));
             }
             else {
                 $this->session->flashError(t('Unable to create your user.'));

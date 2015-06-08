@@ -40,6 +40,7 @@ class Task extends Base
     const EVENT_OPEN            = 'task.open';
     const EVENT_CREATE_UPDATE   = 'task.create_update';
     const EVENT_ASSIGNEE_CHANGE = 'task.assignee_change';
+    const EVENT_OVERDUE         = 'task.overdue';
 
     /**
      * Recurrence: status

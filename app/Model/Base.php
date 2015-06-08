@@ -143,4 +143,23 @@ abstract class Base extends \Core\Base
             'url' => $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
         );
     }
+
+    /**
+     * Group a collection of records by a column
+     *
+     * @access public
+     * @param  array   $collection
+     * @param  string  $column
+     * @return array
+     */
+    public function groupByColumn(array $collection, $column)
+    {
+        $result = array();
+
+        foreach ($collection as $item) {
+            $result[$item[$column]][] = $item;
+        }
+
+        return $result;
+    }
 }
