@@ -31,6 +31,9 @@ class EmailClient extends Base
         }
 
         switch (MAIL_TRANSPORT) {
+            case 'mailgun':
+                $this->mailgun->sendEmail($email, $name, $subject, $html, $author);
+                break;
             case 'postmark':
                 $this->postmark->sendEmail($email, $name, $subject, $html, $author);
                 break;

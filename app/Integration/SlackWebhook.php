@@ -69,7 +69,7 @@ class SlackWebhook extends \Core\Base
                 $payload['text'] .= '|'.t('view the task on Kanboard').'>';
             }
 
-            $this->httpClient->post($this->getWebhookUrl($project_id), $payload);
+            $this->httpClient->postJson($this->getWebhookUrl($project_id), $payload);
         }
     }
 }

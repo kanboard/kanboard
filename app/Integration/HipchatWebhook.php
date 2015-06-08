@@ -89,7 +89,7 @@ class HipchatWebhook extends \Core\Base
                 $params['room_token']
             );
 
-            $this->httpClient->post($url, $payload);
+            $this->httpClient->postJson($url, $payload);
         }
     }
 }

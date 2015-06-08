@@ -22,7 +22,7 @@ use Pimple\Container;
  * @property \Integration\GitlabWebhook    $gitlabWebhook
  * @property \Integration\HipchatWebhook   $hipchatWebhook
  * @property \Integration\Jabber           $jabber
- * @property \Integration\MailgunWebhook   $mailgunWebhook
+ * @property \Integration\Mailgun          $mailgun
  * @property \Integration\Postmark         $postmark
  * @property \Integration\SendgridWebhook  $sendgridWebhook
  * @property \Integration\SlackWebhook     $slackWebhook

@@ -53,7 +53,15 @@ class FakeHttpClient
         return json_encode($this->data, JSON_PRETTY_PRINT);
     }
 
-    public function post($url, array $data, array $headers = array())
+    public function postJson($url, array $data, array $headers = array())
+    {
+        $this->url = $url;
+        $this->data = $data;
+        $this->headers = $headers;
+        return true;
+    }
+
+    public function postForm($url, array $data, array $headers = array())
     {
         $this->url = $url;
         $this->data = $data;

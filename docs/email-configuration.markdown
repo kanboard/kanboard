@@ -20,6 +20,7 @@ There are several email transports available:
 - SMTP
 - Sendmail
 - PHP native mail function
+- Mailgun
 - Postmark
 
 Server settings
@@ -73,6 +74,26 @@ This is the default configuration:
 
 ```php
 define('MAIL_TRANSPORT', 'mail');
+```
+
+### Mailgun HTTP API
+
+You can use the HTTP API of Mailgun to send emails.
+
+Configuration:
+
+```php
+// We choose "mailgun" as mail transport
+define('MAIL_TRANSPORT', 'mailgun');
+
+// Mailgun API key
+define('MAILGUN_API_TOKEN', 'YOUR_API_KEY');
+
+// Mailgun domain name
+define('MAILGUN_DOMAIN', 'YOUR_DOMAIN_CONFIGURED_IN_MAILGUN');
+
+// Be sure to use the sender email address configured in Mailgun
+define('MAIL_FROM', 'sender-address-configured-in-postmark@example.org');
 ```
 
 ### Postmark HTTP API

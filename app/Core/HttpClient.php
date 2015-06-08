@@ -32,7 +32,7 @@ class HttpClient extends Base
     const HTTP_USER_AGENT = 'Kanboard';
 
     /**
-     * Send a POST HTTP request
+     * Send a POST HTTP request encoded in JSON
      *
      * @access public
      * @param  string  $url
@@ -40,17 +40,49 @@ class HttpClient extends Base
      * @param  array   $headers
      * @return string
      */
-    public function post($url, array $data, array $headers = array())
+    public function postJson($url, array $data, array $headers = array())
+    {
+        return $this->doRequest(
+            $url,
+            json_encode($data),
+            array_merge(array('Content-type: application/json'), $headers)
+        );
+    }
+
+    /**
+     * Send a POST HTTP request encoded in www-form-urlencoded
+     *
+     * @access public
+     * @param  string  $url
+     * @param  array   $data
+     * @param  array   $headers
+     * @return string
+     */
+    public function postForm($url, array $data, array $headers = array())
+    {
+        return $this->doRequest(
+            $url,
+            http_build_query($data),
+            array_merge(array('Content-type: application/x-www-form-urlencoded'), $headers)
+        );
+    }
+
+    /**
+     * Make the HTTP request
+     *
+     * @access private
+     * @param  string  $url
+     * @param  array   $content
+     * @param  array   $headers
+     * @return string
+     */
+    private function doRequest($url, $content, array $headers)
     {
         if (empty($url)) {
             return '';
         }
 
-        $headers = array_merge(array(
-            'User-Agent: '.self::HTTP_USER_AGENT,
-            'Content-Type: application/json',
-            'Connection: close',
-        ), $headers);
+        $headers = array_merge(array('User-Agent: '.self::HTTP_USER_AGENT, 'Connection: close'), $headers);
 
         $context = stream_context_create(array(
             'http' => array(
@@ -59,7 +91,7 @@ class HttpClient extends Base
                 'timeout' => self::HTTP_TIMEOUT,
                 'max_redirects' => self::HTTP_MAX_REDIRECTS,
                 'header' => implode("\r\n", $headers),
-                'content' => json_encode($data)
+                'content' => $content
             )
         ));
 
@@ -75,7 +107,7 @@ class HttpClient extends Base
 
         if (DEBUG) {
             $this->container['logger']->debug('HttpClient: url='.$url);
-            $this->container['logger']->debug('HttpClient: payload='.var_export($data, true));
+            $this->container['logger']->debug('HttpClient: payload='.$content);
             $this->container['logger']->debug('HttpClient: metadata='.var_export(@stream_get_meta_data($stream), true));
             $this->container['logger']->debug('HttpClient: response='.$response);
         }

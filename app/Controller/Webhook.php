@@ -126,7 +126,7 @@ class Webhook extends Base
             $this->response->text('Not Authorized', 401);
         }
 
-        echo $this->mailgunWebhook->parsePayload($_POST) ? 'PARSED' : 'IGNORED';
+        echo $this->mailgun->receiveEmail($_POST) ? 'PARSED' : 'IGNORED';
     }
 
     /**

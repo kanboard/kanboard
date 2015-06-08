@@ -36,7 +36,7 @@ class Postmark extends \Core\Base
             'HtmlBody' => $html,
         );
 
-        $this->httpClient->post('https://api.postmarkapp.com/email', $payload, $headers);
+        $this->httpClient->postJson('https://api.postmarkapp.com/email', $payload, $headers);
     }
 
     /**

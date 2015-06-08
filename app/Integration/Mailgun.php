@@ -6,13 +6,39 @@ use HTML_To_Markdown;
 use Core\Tool;
 
 /**
- * Mailgun Webhook
+ * Mailgun Integration
  *
  * @package  integration
  * @author   Frederic Guillot
  */
-class MailgunWebhook extends \Core\Base
+class Mailgun extends \Core\Base
 {
+    /**
+     * Send a HTML email
+     *
+     * @access public
+     * @param  string  $email
+     * @param  string  $name
+     * @param  string  $subject
+     * @param  string  $html
+     * @param  string  $author
+     */
+    public function sendEmail($email, $name, $subject, $html, $author)
+    {
+        $headers = array(
+            'Authorization: Basic '.base64_encode('api:'.MAILGUN_API_TOKEN)
+        );
+
+        $payload = array(
+            'from' => sprintf('%s <%s>', $author, MAIL_FROM),
+            'to' => sprintf('%s <%s>', $name, $email),
+            'subject' => $subject,
+            'html' => $html,
+        );
+
+        $this->httpClient->postForm('https://api.mailgun.net/v3/'.MAILGUN_DOMAIN.'/messages', $payload, $headers);
+    }
+
     /**
      * Parse incoming email
      *
@@ -20,7 +46,7 @@ class MailgunWebhook extends \Core\Base
      * @param  array   $payload   Incoming email
      * @return boolean
      */
-    public function parsePayload(array $payload)
+    public function receiveEmail(array $payload)
     {
         if (empty($payload['sender']) || empty($payload['subject']) || empty($payload['recipient'])) {
             return false;
@@ -30,7 +56,7 @@ class MailgunWebhook extends \Core\Base
         $user = $this->user->getByEmail($payload['sender']);
 
         if (empty($user)) {
-            $this->container['logger']->debug('MailgunWebhook: ignored => user not found');
+            $this->container['logger']->debug('Mailgun: ignored => user not found');
             return false;
         }
 
@@ -38,13 +64,13 @@ class MailgunWebhook extends \Core\Base
         $project = $this->project->getByIdentifier(Tool::getMailboxHash($payload['recipient']));
 
         if (empty($project)) {
-            $this->container['logger']->debug('MailgunWebhook: ignored => project not found');
+            $this->container['logger']->debug('Mailgun: ignored => project not found');
             return false;
         }
 
         // The user must be member of the project
         if (! $this->projectPermission->isMember($project['id'], $user['id'])) {
-            $this->container['logger']->debug('MailgunWebhook: ignored => user is not member of the project');
+            $this->container['logger']->debug('Mailgun: ignored => user is not member of the project');
             return false;
         }
 

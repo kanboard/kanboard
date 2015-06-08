@@ -30,7 +30,7 @@ class Webhook extends Base
                 $url .= '?token='.$token;
             }
 
-            return $this->httpClient->post($url, $values);
+            return $this->httpClient->postJson($url, $values);
         }
     }
 }

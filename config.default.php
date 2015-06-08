@@ -1,6 +1,8 @@
 <?php
 
-// Rename this file to config.php if you want to change the values
+/*******************************************************************/
+/* Rename this file to config.php if you want to change the values */
+/*******************************************************************/
 
 // Enable/Disable debug
 define('DEBUG', false);
@@ -14,7 +16,7 @@ define('FILES_DIR', 'data/files/');
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
 
-// Mail transport to use: "smtp", "sendmail", "mail" (PHP mail function), "postmark"
+// Mail transport available: "smtp", "sendmail", "mail" (PHP mail function), "postmark", "mailgun"
 define('MAIL_TRANSPORT', 'mail');
 
 // SMTP configuration to use when the "smtp" transport is chosen
@@ -29,6 +31,12 @@ define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 
 // Postmark API token (used to send emails through their API)
 define('POSTMARK_API_TOKEN', '');
+
+// Mailgun API key (used to send emails through their API)
+define('MAILGUN_API_TOKEN', '');
+
+// Mailgun domain name
+define('MAILGUN_DOMAIN', '');
 
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');
