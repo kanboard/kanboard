@@ -36,7 +36,7 @@ class File extends Base
         return '';
     }
 
-    public function createFile($project_id, $task_id, $filename, $is_image, &$blob)
+    public function createFile($project_id, $task_id, $filename, $is_image, $blob)
     {
         return $this->file->uploadContent($project_id, $task_id, $filename, $is_image, $blob);
     }
