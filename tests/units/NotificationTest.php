@@ -2,10 +2,16 @@
 
 require_once __DIR__.'/Base.php';
 
+use Model\TaskFinder;
+use Model\TaskCreation;
+use Model\Subtask;
+use Model\Comment;
 use Model\User;
+use Model\File;
 use Model\Project;
 use Model\ProjectPermission;
 use Model\Notification;
+use Subscriber\NotificationSubscriber;
 
 class NotificationTest extends Base
 {
@@ -230,7 +236,32 @@ class NotificationTest extends Base
     public function testGetMailContent()
     {
         $n = new Notification($this->container);
-        $this->assertNotEmpty($n->getMailContent('task.open', array('task' => array('id' => 2, 'title' => 'blah'))));
+        $p = new Project($this->container);
+        $tf = new TaskFinder($this->container);
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $c = new Comment($this->container);
+        $f = new File($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(1, $s->create(array('title' => 'test', 'task_id' => 1)));
+        $this->assertEquals(1, $c->create(array('comment' => 'test', 'task_id' => 1, 'user_id' => 1)));
+        $this->assertEquals(1, $f->create(1, 'test', 'blah', false, 123));
+
+        $task = $tf->getDetails(1);
+        $subtask = $s->getById(1, true);
+        $comment = $c->getById(1);
+        $file = $c->getById(1);
+
+        $this->assertNotEmpty($task);
+        $this->assertNotEmpty($subtask);
+        $this->assertNotEmpty($comment);
+        $this->assertNotEmpty($file);
+
+        foreach (Subscriber\NotificationSubscriber::getSubscribedEvents() as $event => $values) {
+            $this->assertNotEmpty($n->getMailContent($event, array('task' => $task, 'comment' => $comment, 'subtask' => $subtask, 'file' => $file)));
+        }
     }
 
     public function testGetEmailSubject()

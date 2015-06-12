@@ -9,14 +9,14 @@
         <strong><?= dt('Must be done before %B %e, %Y', $task['date_due']) ?></strong>
     </li>
     <?php endif ?>
-    <?php if ($task['creator_username']): ?>
+    <?php if (! empty($task['creator_username'])): ?>
     <li>
         <?= t('Created by %s', $task['creator_name'] ?: $task['creator_username']) ?>
     </li>
     <?php endif ?>
     <li>
         <strong>
-        <?php if ($task['assignee_username']): ?>
+        <?php if (! empty($task['assignee_username'])): ?>
             <?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?>
         <?php else: ?>
             <?= t('There is nobody assigned') ?>
@@ -28,7 +28,7 @@
         <strong><?= $this->e($task['column_title']) ?></strong>
     </li>
     <li><?= t('Task position:').' '.$this->e($task['position']) ?></li>
-    <?php if ($task['category_name']): ?>
+    <?php if (! empty($task['category_name'])): ?>
     <li>
         <?= t('Category:') ?> <strong><?= $this->e($task['category_name']) ?></strong>
     </li>
