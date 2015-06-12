@@ -2,7 +2,6 @@
 
 namespace Model;
 
-use Core\Session;
 use Core\Translator;
 
 /**

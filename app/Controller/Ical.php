@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Model\TaskFilter;
-use Model\Task as TaskModel;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 
 /**
