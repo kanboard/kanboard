@@ -548,7 +548,7 @@ class TaskDuplicationTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals(Task::RECURRING_STATUS_PROCESSED, $task['recurrence_status']);
         $this->assertEquals(2, $task['recurrence_child']);
-        $this->assertEquals(1436561776, $task['date_due']);
+        $this->assertEquals(1436561776, $task['date_due'], '', 2);
 
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
@@ -558,6 +558,6 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(Task::RECURRING_BASEDATE_TRIGGERDATE, $task['recurrence_basedate']);
         $this->assertEquals(1, $task['recurrence_parent']);
         $this->assertEquals(2, $task['recurrence_factor']);
-        $this->assertEquals(strtotime('+2 days'), $task['date_due']);
+        $this->assertEquals(strtotime('+2 days'), $task['date_due'], '', 2);
     }
 }
