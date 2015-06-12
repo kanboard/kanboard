@@ -281,47 +281,47 @@ class Notification extends Base
      * @param  array     $event_data  Event data
      * @return string
      */
-    public function getMailSubject($template, array $data)
+    public function getMailSubject($event_name, array $event_data)
     {
-        switch ($template) {
+        switch ($event_name) {
             case Task::EVENT_CREATE:
-                $subject = $this->getStandardMailSubject(e('New attachment'), $data);
+                $subject = $this->getStandardMailSubject(e('New attachment'), $event_data);
                 break;
             case Comment::EVENT_CREATE:
-                $subject = $this->getStandardMailSubject(e('New comment'), $data);
+                $subject = $this->getStandardMailSubject(e('New comment'), $event_data);
                 break;
             case Comment::EVENT_UPDATE:
-                $subject = $this->getStandardMailSubject(e('Comment updated'), $data);
+                $subject = $this->getStandardMailSubject(e('Comment updated'), $event_data);
                 break;
             case Subtask::EVENT_CREATE:
-                $subject = $this->getStandardMailSubject(e('New subtask'), $data);
+                $subject = $this->getStandardMailSubject(e('New subtask'), $event_data);
                 break;
             case Subtask::EVENT_UPDATE:
-                $subject = $this->getStandardMailSubject(e('Subtask updated'), $data);
+                $subject = $this->getStandardMailSubject(e('Subtask updated'), $event_data);
                 break;
             case Task::EVENT_CREATE:
-                $subject = $this->getStandardMailSubject(e('New task'), $data);
+                $subject = $this->getStandardMailSubject(e('New task'), $event_data);
                 break;
             case Task::EVENT_UPDATE:
-                $subject = $this->getStandardMailSubject(e('Task updated'), $data);
+                $subject = $this->getStandardMailSubject(e('Task updated'), $event_data);
                 break;
             case Task::EVENT_CLOSE:
-                $subject = $this->getStandardMailSubject(e('Task closed'), $data);
+                $subject = $this->getStandardMailSubject(e('Task closed'), $event_data);
                 break;
             case Task::EVENT_OPEN:
-                $subject = $this->getStandardMailSubject(e('Task opened'), $data);
+                $subject = $this->getStandardMailSubject(e('Task opened'), $event_data);
                 break;
             case Task::EVENT_MOVE_COLUMN:
-                $subject = $this->getStandardMailSubject(e('Column Change'), $data);
+                $subject = $this->getStandardMailSubject(e('Column Change'), $event_data);
                 break;
             case Task::EVENT_MOVE_POSITION:
-                $subject = $this->getStandardMailSubject(e('Position Change'), $data);
+                $subject = $this->getStandardMailSubject(e('Position Change'), $event_data);
                 break;
             case Task::EVENT_ASSIGNEE_CHANGE:
-                $subject = $this->getStandardMailSubject(e('Assignee Change'), $data);
+                $subject = $this->getStandardMailSubject(e('Assignee Change'), $event_data);
                 break;
             case Task::EVENT_OVERDUE:
-                $subject = e('[%s] Overdue tasks', $data['project_name']);
+                $subject = e('[%s] Overdue tasks', $event_data['project_name']);
                 break;
             default:
                 $subject = e('Notification');
