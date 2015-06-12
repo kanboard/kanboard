@@ -21,6 +21,7 @@ Contributors:
 - [David-Norris](https://github.com/David-Norris)
 - [Draza (bdpsoft)](https://github.com/bdpsoft)
 - [Esteban Monge](https://github.com/EstebanMonge)
+- [Federico Lazcano](https://github.com/lazki)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
 - [Gavlepeter](https://github.com/gavlepeter)
