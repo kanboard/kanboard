@@ -6,13 +6,39 @@ use HTML_To_Markdown;
 use Core\Tool;
 
 /**
- * Sendgrid Webhook
+ * Sendgrid Integration
  *
  * @package  integration
  * @author   Frederic Guillot
  */
-class SendgridWebhook extends \Core\Base
+class Sendgrid extends \Core\Base
 {
+    /**
+     * Send a HTML email
+     *
+     * @access public
+     * @param  string  $email
+     * @param  string  $name
+     * @param  string  $subject
+     * @param  string  $html
+     * @param  string  $author
+     */
+    public function sendEmail($email, $name, $subject, $html, $author)
+    {
+        $payload = array(
+            'api_user' => SENDGRID_API_USER,
+            'api_key' => SENDGRID_API_KEY,
+            'to' => $email,
+            'toname' => $name,
+            'from' => MAIL_FROM,
+            'fromname' => $author,
+            'html' => $html,
+            'subject' => $subject,
+        );
+
+        $this->httpClient->postForm('https://api.sendgrid.com/api/mail.send.json', $payload);
+    }
+
     /**
      * Parse incoming email
      *
@@ -20,7 +46,7 @@ class SendgridWebhook extends \Core\Base
      * @param  array   $payload   Incoming email
      * @return boolean
      */
-    public function parsePayload(array $payload)
+    public function receiveEmail(array $payload)
     {
         if (empty($payload['envelope']) || empty($payload['subject'])) {
             return false;

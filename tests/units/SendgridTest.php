@@ -2,18 +2,46 @@
 
 require_once __DIR__.'/Base.php';
 
-use Integration\SendgridWebhook;
+use Integration\Sendgrid;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
 use Model\ProjectPermission;
 use Model\User;
 
-class SendgridWebhookTest extends Base
+class SendgridTest extends Base
 {
+    public function testSendEmail()
+    {
+        $pm = new Sendgrid($this->container);
+        $pm->sendEmail('test@localhost', 'Me', 'Test', 'Content', 'Bob');
+
+        $this->assertEquals('https://api.sendgrid.com/api/mail.send.json', $this->container['httpClient']->getUrl());
+
+        $data = $this->container['httpClient']->getData();
+
+        $this->assertArrayHasKey('api_user', $data);
+        $this->assertArrayHasKey('api_key', $data);
+        $this->assertArrayHasKey('from', $data);
+        $this->assertArrayHasKey('fromname', $data);
+        $this->assertArrayHasKey('to', $data);
+        $this->assertArrayHasKey('toname', $data);
+        $this->assertArrayHasKey('subject', $data);
+        $this->assertArrayHasKey('html', $data);
+
+        $this->assertEquals('test@localhost', $data['to']);
+        $this->assertEquals('Me', $data['toname']);
+        $this->assertEquals('notifications@kanboard.local', $data['from']);
+        $this->assertEquals('Bob', $data['fromname']);
+        $this->assertEquals('Test', $data['subject']);
+        $this->assertEquals('Content', $data['html']);
+        $this->assertEquals('', $data['api_key']);
+        $this->assertEquals('', $data['api_user']);
+    }
+
     public function testHandlePayload()
     {
-        $w = new SendgridWebhook($this->container);
+        $w = new Sendgrid($this->container);
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new User($this->container);
@@ -26,22 +54,22 @@ class SendgridWebhookTest extends Base
         $this->assertEquals(2, $p->create(array('name' => 'test2', 'identifier' => 'TEST1')));
 
         // Empty payload
-        $this->assertFalse($w->parsePayload(array()));
+        $this->assertFalse($w->receiveEmail(array()));
 
         // Unknown user
-        $this->assertFalse($w->parsePayload(array(
+        $this->assertFalse($w->receiveEmail(array(
             'envelope' => '{"to":["a@b.c"],"from":"a.b.c"}',
             'subject' => 'Email task'
         )));
 
         // Project not found
-        $this->assertFalse($w->parsePayload(array(
+        $this->assertFalse($w->receiveEmail(array(
             'envelope' => '{"to":["a@b.c"],"from":"me@localhost"}',
             'subject' => 'Email task'
         )));
 
         // User is not member
-        $this->assertFalse($w->parsePayload(array(
+        $this->assertFalse($w->receiveEmail(array(
             'envelope' => '{"to":["something+test1@localhost"],"from":"me@localhost"}',
             'subject' => 'Email task'
         )));
@@ -49,7 +77,7 @@ class SendgridWebhookTest extends Base
         $this->assertTrue($pp->addMember(2, 2));
 
         // The task must be created
-        $this->assertTrue($w->parsePayload(array(
+        $this->assertTrue($w->receiveEmail(array(
             'envelope' => '{"to":["something+test1@localhost"],"from":"me@localhost"}',
             'subject' => 'Email task'
         )));
@@ -62,7 +90,7 @@ class SendgridWebhookTest extends Base
         $this->assertEquals(2, $task['creator_id']);
 
         // Html content
-        $this->assertTrue($w->parsePayload(array(
+        $this->assertTrue($w->receiveEmail(array(
             'envelope' => '{"to":["something+test1@localhost"],"from":"me@localhost"}',
             'subject' => 'Email task',
             'html' => '<strong>bold</strong> text',
@@ -76,7 +104,7 @@ class SendgridWebhookTest extends Base
         $this->assertEquals(2, $task['creator_id']);
 
         // Text content
-        $this->assertTrue($w->parsePayload(array(
+        $this->assertTrue($w->receiveEmail(array(
             'envelope' => '{"to":["something+test1@localhost"],"from":"me@localhost"}',
             'subject' => 'Email task',
             'text' => '**bold** text',
@@ -90,7 +118,7 @@ class SendgridWebhookTest extends Base
         $this->assertEquals(2, $task['creator_id']);
 
         // Text + html content
-        $this->assertTrue($w->parsePayload(array(
+        $this->assertTrue($w->receiveEmail(array(
             'envelope' => '{"to":["something+test1@localhost"],"from":"me@localhost"}',
             'subject' => 'Email task',
             'html' => '<strong>bold</strong> html',

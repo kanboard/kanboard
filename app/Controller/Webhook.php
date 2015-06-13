@@ -17,9 +17,7 @@ class Webhook extends Base
      */
     public function task()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
+        $this->checkWebhookToken();
 
         $defaultProject = $this->project->getFirst();
 
@@ -49,9 +47,7 @@ class Webhook extends Base
      */
     public function github()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
+        $this->checkWebhookToken();
 
         $this->githubWebhook->setProjectId($this->request->getIntegerParam('project_id'));
 
@@ -70,15 +66,10 @@ class Webhook extends Base
      */
     public function gitlab()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
+        $this->checkWebhookToken();
 
         $this->gitlabWebhook->setProjectId($this->request->getIntegerParam('project_id'));
-
-        $result = $this->gitlabWebhook->parsePayload(
-            $this->request->getJson() ?: array()
-        );
+        $result = $this->gitlabWebhook->parsePayload($this->request->getJson() ?: array());
 
         echo $result ? 'PARSED' : 'IGNORED';
     }
@@ -90,12 +81,9 @@ class Webhook extends Base
      */
     public function bitbucket()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
+        $this->checkWebhookToken();
 
         $this->bitbucketWebhook->setProjectId($this->request->getIntegerParam('project_id'));
-
         $result = $this->bitbucketWebhook->parsePayload(json_decode(@$_POST['payload'], true) ?: array());
 
         echo $result ? 'PARSED' : 'IGNORED';
@@ -108,10 +96,7 @@ class Webhook extends Base
      */
     public function postmark()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
-
+        $this->checkWebhookToken();
         echo $this->postmark->receiveEmail($this->request->getJson() ?: array()) ? 'PARSED' : 'IGNORED';
     }
 
@@ -122,10 +107,7 @@ class Webhook extends Base
      */
     public function mailgun()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
-
+        $this->checkWebhookToken();
         echo $this->mailgun->receiveEmail($_POST) ? 'PARSED' : 'IGNORED';
     }
 
@@ -136,10 +118,7 @@ class Webhook extends Base
      */
     public function sendgrid()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
-
-        echo $this->sendgridWebhook->parsePayload($_POST) ? 'PARSED' : 'IGNORED';
+        $this->checkWebhookToken();
+        echo $this->sendgrid->receiveEmail($_POST) ? 'PARSED' : 'IGNORED';
     }
 }

@@ -31,6 +31,9 @@ class EmailClient extends Base
         }
 
         switch (MAIL_TRANSPORT) {
+            case 'sendgrid':
+                $this->sendgrid->sendEmail($email, $name, $subject, $html, $author);
+                break;
             case 'mailgun':
                 $this->mailgun->sendEmail($email, $name, $subject, $html, $author);
                 break;

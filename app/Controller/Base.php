@@ -211,6 +211,18 @@ abstract class Base extends \Core\Base
     }
 
     /**
+     * Check webhook token
+     *
+     * @access protected
+     */
+    protected function checkWebhookToken()
+    {
+        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
+            $this->response->text('Not Authorized', 401);
+        }
+    }
+
+    /**
      * Redirection when there is no project in the database
      *
      * @access protected

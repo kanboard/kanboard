@@ -80,7 +80,7 @@ class ClassProvider implements ServiceProviderInterface
             'Jabber',
             'Mailgun',
             'Postmark',
-            'SendgridWebhook',
+            'Sendgrid',
             'SlackWebhook',
             'Smtp',
         )

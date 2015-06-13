@@ -22,6 +22,7 @@ There are several email transports available:
 - PHP native mail function
 - Mailgun
 - Postmark
+- Sendgrid
 
 Server settings
 ---------------
@@ -93,7 +94,7 @@ define('MAILGUN_API_TOKEN', 'YOUR_API_KEY');
 define('MAILGUN_DOMAIN', 'YOUR_DOMAIN_CONFIGURED_IN_MAILGUN');
 
 // Be sure to use the sender email address configured in Mailgun
-define('MAIL_FROM', 'sender-address-configured-in-postmark@example.org');
+define('MAIL_FROM', 'sender-address-configured-in-mailgun@example.org');
 ```
 
 ### Postmark HTTP API
@@ -114,6 +115,23 @@ define('POSTMARK_API_TOKEN', 'COPY HERE YOUR POSTMARK API TOKEN');
 
 // Be sure to use the Postmark configured sender email address
 define('MAIL_FROM', 'sender-address-configured-in-postmark@example.org');
+```
+
+### Sendgrid HTTP API
+
+You can use the HTTP API of Sendgrid to send emails.
+
+Configuration:
+
+```php
+// We choose "sendgrid" as mail transport
+define('MAIL_TRANSPORT', 'sendgrid');
+
+// Sendgrid username
+define('SENDGRID_API_USER', 'YOUR_SENDGRID_USERNAME');
+
+// Sendgrid password
+define('SENDGRID_API_KEY', 'YOUR_SENDGRID_PASSWORD');
 ```
 
 ### The sender email address

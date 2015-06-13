@@ -16,7 +16,7 @@ define('FILES_DIR', 'data/files/');
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
 
-// Mail transport available: "smtp", "sendmail", "mail" (PHP mail function), "postmark", "mailgun"
+// Mail transport available: "smtp", "sendmail", "mail" (PHP mail function), "postmark", "mailgun", "sendgrid"
 define('MAIL_TRANSPORT', 'mail');
 
 // SMTP configuration to use when the "smtp" transport is chosen
@@ -37,6 +37,10 @@ define('MAILGUN_API_TOKEN', '');
 
 // Mailgun domain name
 define('MAILGUN_DOMAIN', '');
+
+// Sendgrid API configuration
+define('SENDGRID_API_USER', '');
+define('SENDGRID_API_KEY', '');
 
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');

@@ -67,6 +67,8 @@ defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/s
 defined('POSTMARK_API_TOKEN') or define('POSTMARK_API_TOKEN', '');
 defined('MAILGUN_API_TOKEN') or define('MAILGUN_API_TOKEN', '');
 defined('MAILGUN_DOMAIN') or define('MAILGUN_DOMAIN', '');
+defined('SENDGRID_API_USER') or define('SENDGRID_API_USER', '');
+defined('SENDGRID_API_KEY') or define('SENDGRID_API_KEY', '');
 
 // Enable or disable "Strict-Transport-Security" HTTP header
 defined('ENABLE_HSTS') or define('ENABLE_HSTS', true);
