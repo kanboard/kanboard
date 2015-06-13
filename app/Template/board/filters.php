@@ -27,13 +27,13 @@
             </span>
         </li>
         <li>
-            <?= $this->form->select('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"', 'data-notfound="'.t('No results match:').'"'), 'apply-filters chosen-select') ?>
+            <?= $this->form->select('user_id', $users, array(), array(), array('data-placeholder="'.t('Filter by user').'"', 'data-notfound="'.t('No results match:').'"', 'tabindex=="-1"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
-            <?= $this->form->select('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"', 'data-notfound="'.t('No results match:').'"'), 'apply-filters chosen-select') ?>
+            <?= $this->form->select('category_id', $categories, array(), array(), array('data-placeholder="'.t('Filter by category').'"', 'data-notfound="'.t('No results match:').'"', 'tabindex=="-1"'), 'apply-filters chosen-select') ?>
         </li>
         <li>
-            <select id="more-filters" multiple data-placeholder="<?= t('More filters') ?>" data-notfound="<?= t('No results match:') ?>" class="apply-filters hide-mobile">
+            <select id="more-filters" multiple data-placeholder="<?= t('More filters') ?>" data-notfound="<?= t('No results match:') ?>" class="apply-filters hide-mobile" tabindex="-1">
                 <option value=""></option>
                 <option value="filter-due-date"><?= t('Filter by due date') ?></option>
                 <option value="filter-recent"><?= t('Filter recently updated') ?></option>

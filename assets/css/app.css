@@ -264,6 +264,7 @@ select {
 
 select:focus {
     outline: 0;
+    font-weight: bold;
 }
 
 ::-webkit-input-placeholder {
