@@ -1916,7 +1916,7 @@ Response example:
 
 ### getTask
 
-- Purpose: **Get task information**
+- Purpose: **Get task by the unique id**
 - Parameters:
     - **task_id** (integer, required)
 - Result on success: **task properties**
@@ -1972,6 +1972,69 @@ Response example:
         "recurrence_parent": null,
         "recurrence_child": null
         }
+}
+```
+
+### getTaskByReference
+
+- Purpose: **Get task by the external reference**
+- Parameters:
+    - **project_id** (integer, required)
+    - **reference** (string, required)
+- Result on success: **task properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getTaskByReference",
+    "id": 1992081213,
+    "params": {
+        "project_id": 1,
+        "reference": "TICKET-1234"
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1992081213,
+    "result": {
+        "id": "5",
+        "title": "Task with external ticket number",
+        "description": "[Link to my ticket](http:\/\/my-ticketing-system\/1234)",
+        "date_creation": "1434227446",
+        "color_id": "yellow",
+        "project_id": "1",
+        "column_id": "1",
+        "owner_id": "0",
+        "position": "4",
+        "is_active": "1",
+        "date_completed": null,
+        "score": "0",
+        "date_due": "0",
+        "category_id": "0",
+        "creator_id": "0",
+        "date_modification": "1434227446",
+        "reference": "TICKET-1234",
+        "date_started": null,
+        "time_spent": "0",
+        "time_estimated": "0",
+        "swimlane_id": "0",
+        "date_moved": "1434227446",
+        "recurrence_status": "0",
+        "recurrence_trigger": "0",
+        "recurrence_factor": "0",
+        "recurrence_timeframe": "0",
+        "recurrence_basedate": "0",
+        "recurrence_parent": null,
+        "recurrence_child": null
+    }
 }
 ```
 

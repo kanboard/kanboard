@@ -977,4 +977,29 @@ class Api extends PHPUnit_Framework_TestCase
         $files = $this->client->getAllFiles(array('task_id' => 1));
         $this->assertEmpty($files);
     }
+
+    public function testCreateTaskWithReference()
+    {
+        $task = array(
+            'title' => 'Task with external ticket number',
+            'reference' => 'TICKET-1234',
+            'project_id' => 1,
+            'description' => '[Link to my ticket](http://my-ticketing-system/1234)',
+        );
+
+        $task_id = $this->client->createTask($task);
+
+        $this->assertNotFalse($task_id);
+        $this->assertInternalType('int', $task_id);
+        $this->assertTrue($task_id > 0);
+    }
+
+    public function testGetTaskByReference()
+    {
+        $task = $this->client->getTaskByReference(array('project_id' => 1, 'reference' => 'TICKET-1234'));
+
+        $this->assertNotEmpty($task);
+        $this->assertEquals('Task with external ticket number', $task['title']);
+        $this->assertEquals('TICKET-1234', $task['reference']);
+    }
 }
