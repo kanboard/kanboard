@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="robots" content="noindex,nofollow">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <?php if (isset($board_public_refresh_interval)): ?>
             <meta http-equiv="refresh" content="<?= $board_public_refresh_interval ?>">
