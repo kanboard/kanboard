@@ -19,7 +19,7 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot'))) {
+        if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot')) !== false) {
 
             $this->session->flash(t('Screenshot uploaded successfully.'));
 

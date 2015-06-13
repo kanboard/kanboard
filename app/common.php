@@ -21,6 +21,7 @@ if (file_exists('config.php')) {
 }
 
 require __DIR__.'/constants.php';
+require __DIR__.'/check_setup.php';
 
 $container = new Pimple\Container;
 $container->register(new ServiceProvider\LoggingProvider);

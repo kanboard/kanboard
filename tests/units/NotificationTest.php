@@ -247,7 +247,7 @@ class NotificationTest extends Base
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
         $this->assertEquals(1, $s->create(array('title' => 'test', 'task_id' => 1)));
         $this->assertEquals(1, $c->create(array('comment' => 'test', 'task_id' => 1, 'user_id' => 1)));
-        $this->assertEquals(1, $f->create(1, 'test', 'blah', false, 123));
+        $this->assertEquals(1, $f->create(1, 'test', 'blah', 123));
 
         $task = $tf->getDetails(1);
         $subtask = $s->getById(1, true);

@@ -937,7 +937,7 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testCreateFile()
     {
-        $this->assertTrue($this->client->createFile(1, 1, 'My file', false, base64_encode('plain text file')));
+        $this->assertEquals(1, $this->client->createFile(1, 1, 'My file', base64_encode('plain text file')));
     }
 
     public function testGetAllFiles()
@@ -961,5 +961,20 @@ class Api extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->client->removeFile($file['id']));
         $this->assertEmpty($this->client->getAllFiles(1));
+    }
+
+    public function testRemoveAllFiles()
+    {
+        $this->assertEquals(1, $this->client->createFile(1, 1, 'My file 1', base64_encode('plain text file')));
+        $this->assertEquals(2, $this->client->createFile(1, 1, 'My file 2', base64_encode('plain text file')));
+
+        $files = $this->client->getAllFiles(array('task_id' => 1));
+        $this->assertNotEmpty($files);
+        $this->assertCount(2, $files);
+
+        $this->assertTrue($this->client->removeAllFiles(array('task_id' => 1)));
+
+        $files = $this->client->getAllFiles(array('task_id' => 1));
+        $this->assertEmpty($files);
     }
 }

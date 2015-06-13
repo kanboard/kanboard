@@ -3542,9 +3542,8 @@ Response example:
     - **project_id** (integer, required)
     - **task_id** (integer, required)
     - **filename** (integer, required)
-    - **is_image** (boolean, required)
     - **blob** File content encoded in base64 (string, required)
-- Result on success: **true**
+- Result on success: **file_id**
 - Result on failure: **false**
 - Note: **The maximum file size depends of your PHP configuration, this method should not be used to upload large files**
 
@@ -3554,12 +3553,11 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "createFile",
-    "id": 1035045925,
+    "id": 94500810,
     "params": [
         1,
         1,
         "My file",
-        false,
         "cGxhaW4gdGV4dCBmaWxl"
     ]
 }
@@ -3570,8 +3568,8 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1035045925,
-    "result": true
+    "id": 94500810,
+    "result": 1
 }
 ```
 
@@ -3717,6 +3715,37 @@ Response example:
 {
     "jsonrpc": "2.0",
     "id": 447036524,
+    "result": true
+}
+```
+
+### removeAllFiles
+
+- Purpose: **Remove all files associated to a task**
+- Parameters:
+    - **task_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "removeAllFiles",
+    "id": 593312993,
+    "params": {
+        "task_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 593312993,
     "result": true
 }
 ```
