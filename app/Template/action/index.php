@@ -7,16 +7,25 @@
 <h3><?= t('Defined actions') ?></h3>
 <table>
     <tr>
-        <th><?= t('Event name') ?></th>
-        <th><?= t('Action name') ?></th>
+        <th><?= t('Automatic actions') ?></th>
         <th><?= t('Action parameters') ?></th>
         <th><?= t('Action') ?></th>
     </tr>
 
     <?php foreach ($actions as $action): ?>
     <tr>
-        <td><?= $this->text->in($action['event_name'], $available_events) ?></td>
-        <td><?= $this->text->in($action['action_name'], $available_actions) ?></td>
+        <td>
+            <ul>
+                <li>
+                    <?= t('Event name') ?> =
+                    <strong><?= $this->text->in($action['event_name'], $available_events) ?></strong>
+                </li>
+                <li>
+                    <?= t('Action name') ?> =
+                    <strong><?= $this->text->in($action['action_name'], $available_actions) ?></strong>
+                </li>
+            <ul>
+        </td>
         <td>
             <ul>
             <?php foreach ($action['params'] as $param): ?>
