@@ -138,7 +138,7 @@ Task modification:
     "recurrence_basedate": "0",
     "recurrence_parent": null,
     "recurrence_child": null,
-    "task_id": "1"
+    "task_id": "1",
     "changes": {
       "category_id": "2"
     }
