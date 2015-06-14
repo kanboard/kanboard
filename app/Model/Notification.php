@@ -283,7 +283,7 @@ class Notification extends Base
     public function getMailSubject($event_name, array $event_data)
     {
         switch ($event_name) {
-            case Task::EVENT_CREATE:
+            case File::EVENT_CREATE:
                 $subject = $this->getStandardMailSubject(e('New attachment'), $event_data);
                 break;
             case Comment::EVENT_CREATE:
