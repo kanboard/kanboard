@@ -122,7 +122,7 @@ Task modification:
     "date_completed": null,
     "score": "0",
     "date_due": "0",
-    "category_id": "0",
+    "category_id": "2",
     "creator_id": "1",
     "date_modification": 1431991603,
     "reference": "",
@@ -139,9 +139,14 @@ Task modification:
     "recurrence_parent": null,
     "recurrence_child": null,
     "task_id": "1"
+    "changes": {
+      "category_id": "2"
+    }
   }
 }
 ```
+
+Task update events have a field called `changes` that contains updated values.
 
 Move a task to another column:
 
