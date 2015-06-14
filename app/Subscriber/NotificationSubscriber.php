@@ -20,6 +20,7 @@ class NotificationSubscriber extends \Core\Base implements EventSubscriberInterf
             Task::EVENT_OPEN => array('execute', 0),
             Task::EVENT_MOVE_COLUMN => array('execute', 0),
             Task::EVENT_MOVE_POSITION => array('execute', 0),
+            Task::EVENT_MOVE_SWIMLANE => array('execute', 0),
             Task::EVENT_ASSIGNEE_CHANGE => array('execute', 0),
             Subtask::EVENT_CREATE => array('execute', 0),
             Subtask::EVENT_UPDATE => array('execute', 0),

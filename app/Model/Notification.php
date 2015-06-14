@@ -268,7 +268,7 @@ class Notification extends Base
     {
         return $this->template->render(
             'notification/'.str_replace('.', '_', $event_name),
-            $event_data + array('application_url' => $this->config->get('application_url'), 'colors_list' => $this->color->getList())
+            $event_data + array('application_url' => $this->config->get('application_url'))
         );
     }
 
@@ -311,13 +311,16 @@ class Notification extends Base
                 $subject = $this->getStandardMailSubject(e('Task opened'), $event_data);
                 break;
             case Task::EVENT_MOVE_COLUMN:
-                $subject = $this->getStandardMailSubject(e('Column Change'), $event_data);
+                $subject = $this->getStandardMailSubject(e('Column change'), $event_data);
                 break;
             case Task::EVENT_MOVE_POSITION:
-                $subject = $this->getStandardMailSubject(e('Position Change'), $event_data);
+                $subject = $this->getStandardMailSubject(e('Position change'), $event_data);
+                break;
+            case Task::EVENT_MOVE_SWIMLANE:
+                $subject = $this->getStandardMailSubject(e('Swimlane change'), $event_data);
                 break;
             case Task::EVENT_ASSIGNEE_CHANGE:
-                $subject = $this->getStandardMailSubject(e('Assignee Change'), $event_data);
+                $subject = $this->getStandardMailSubject(e('Assignee change'), $event_data);
                 break;
             case Task::EVENT_OVERDUE:
                 $subject = e('[%s] Overdue tasks', $event_data['project_name']);

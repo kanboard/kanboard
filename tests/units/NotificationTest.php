@@ -260,7 +260,7 @@ class NotificationTest extends Base
         $this->assertNotEmpty($file);
 
         foreach (Subscriber\NotificationSubscriber::getSubscribedEvents() as $event => $values) {
-            $this->assertNotEmpty($n->getMailContent($event, array('task' => $task, 'comment' => $comment, 'subtask' => $subtask, 'file' => $file)));
+            $this->assertNotEmpty($n->getMailContent($event, array('task' => $task, 'comment' => $comment, 'subtask' => $subtask, 'file' => $file, 'changes' => array())));
         }
     }
 

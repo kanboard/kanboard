@@ -40,3 +40,12 @@
     margin-top: 10px;
     color: #555;
 }
+
+.activity-changes {
+    margin-top: 10px;
+    font-size: 0.85em;
+}
+
+.activity-changes ul {
+    margin-left: 25px;
+}

@@ -264,7 +264,6 @@ select {
 
 select:focus {
     outline: 0;
-    font-weight: bold;
 }
 
 ::-webkit-input-placeholder {
@@ -1369,7 +1368,17 @@ span.task-board-date-overdue {
 .activity-description .markdown {
     margin-top: 10px;
     color: #555;
-}/* dashboard */
+}
+
+.activity-changes {
+    margin-top: 10px;
+    font-size: 0.85em;
+}
+
+.activity-changes ul {
+    margin-left: 25px;
+}
+/* dashboard */
 
 @media only screen and (min-width: 1280px) {
 

@@ -37,6 +37,11 @@ class Task extends \Core\Base
         return t('%dd', ($now - $timestamp) / 86400);
     }
 
+    public function getColors()
+    {
+        return $this->color->getList();
+    }
+
     public function recurrenceTriggers()
     {
         return $this->task->getRecurrenceTriggerList();

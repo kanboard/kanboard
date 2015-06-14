@@ -20,6 +20,7 @@ class ProjectActivitySubscriber extends \Core\Base implements EventSubscriberInt
             Task::EVENT_OPEN => array('execute', 0),
             Task::EVENT_MOVE_COLUMN => array('execute', 0),
             Task::EVENT_MOVE_POSITION => array('execute', 0),
+            Task::EVENT_MOVE_SWIMLANE => array('execute', 0),
             Comment::EVENT_UPDATE => array('execute', 0),
             Comment::EVENT_CREATE => array('execute', 0),
             Subtask::EVENT_UPDATE => array('execute', 0),
@@ -58,6 +59,7 @@ class ProjectActivitySubscriber extends \Core\Base implements EventSubscriberInt
     {
         $values = array();
         $values['task'] = $this->taskFinder->getDetails($event['task_id']);
+        $values['changes'] = isset($event['changes']) ? $event['changes'] : array();
 
         switch (get_class($event)) {
             case 'Event\SubtaskEvent':

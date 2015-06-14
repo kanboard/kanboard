@@ -263,6 +263,7 @@ class TaskFinder extends Base
             tasks.recurrence_parent,
             tasks.recurrence_child,
             project_has_categories.name AS category_name,
+            swimlanes.name AS swimlane_name,
             projects.name AS project_name,
             columns.title AS column_title,
             users.username AS assignee_username,
@@ -275,6 +276,7 @@ class TaskFinder extends Base
             LEFT JOIN project_has_categories ON project_has_categories.id = tasks.category_id
             LEFT JOIN projects ON projects.id = tasks.project_id
             LEFT JOIN columns ON columns.id = tasks.column_id
+            LEFT JOIN swimlanes ON swimlanes.id = tasks.swimlane_id
             WHERE tasks.id = ?
         ';
 
