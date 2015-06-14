@@ -42,18 +42,37 @@ class TaskModification extends Base
      */
     public function fireEvents(array $task, array $new_values)
     {
+        $events = array();
         $event_data = array_merge($task, $new_values, array('task_id' => $task['id']));
 
-        if (isset($new_values['owner_id']) && $task['owner_id'] != $new_values['owner_id']) {
-            $events = array(Task::EVENT_ASSIGNEE_CHANGE);
+        // Values changed
+        $event_data['changes'] = array_diff_assoc($new_values, $task);
+        unset($event_data['changes']['date_modification']);
+
+        if ($this->isFieldModified('owner_id', $event_data['changes'])) {
+            $events[] = Task::EVENT_ASSIGNEE_CHANGE;
         }
         else {
-            $events = array(Task::EVENT_CREATE_UPDATE, Task::EVENT_UPDATE);
+            $events[] = Task::EVENT_CREATE_UPDATE;
+            $events[] = Task::EVENT_UPDATE;
         }
 
         foreach ($events as $event) {
             $this->container['dispatcher']->dispatch($event, new TaskEvent($event_data));
         }
+    }
+
+    /**
+     * Return true if the field is the only modified value
+     *
+     * @access public
+     * @param  string  $field
+     * @param  array   $changes
+     * @return boolean
+     */
+    public function isFieldModified($field, array $changes)
+    {
+        return isset($changes[$field]) && count($changes) === 1;
     }
 
     /**

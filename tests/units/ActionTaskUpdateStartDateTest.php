@@ -38,7 +38,7 @@ class ActionTaskUpdateStartDateTest extends Base
         // Our event should be executed
         $this->assertTrue($action->execute(new GenericEvent($event)));
 
-        // Our task should be closed
+        // Our task should be updated
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(time(), $task['date_started'], '', 2);

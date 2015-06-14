@@ -57,6 +57,7 @@ class Action extends Base
             'TaskAssignUser' => t('Change the assignee based on an external username'),
             'TaskAssignCategoryLabel' => t('Change the category based on an external label'),
             'TaskUpdateStartDate' => t('Automatically update the start date'),
+            'TaskMoveColumnCategoryChange' => t('Move the task to another column when the category is changed'),
         );
 
         asort($values);

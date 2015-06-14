@@ -222,12 +222,17 @@ abstract class Base extends \Core\Base
         }
 
         $data = $event->getAll();
+        $result = false;
 
         if ($this->isExecutable($data)) {
             $this->called = true;
-            return $this->doAction($data);
+            $result = $this->doAction($data);
         }
 
-        return false;
+        if (DEBUG) {
+            $this->container['logger']->debug(get_called_class().' => '.($result ? 'true' : 'false'));
+        }
+
+        return $result;
     }
 }

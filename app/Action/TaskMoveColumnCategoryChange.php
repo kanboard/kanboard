@@ -5,12 +5,12 @@ namespace Action;
 use Model\Task;
 
 /**
- * Move a task to another column when an assignee is cleared
+ * Move a task to another column when the category is changed
  *
  * @package action
  * @author  Francois Ferrand
  */
-class TaskMoveColumnUnAssigned extends Base
+class TaskMoveColumnCategoryChange extends Base
 {
     /**
      * Get the list of compatible events
@@ -21,7 +21,6 @@ class TaskMoveColumnUnAssigned extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_ASSIGNEE_CHANGE,
             Task::EVENT_UPDATE,
         );
     }
@@ -35,8 +34,8 @@ class TaskMoveColumnUnAssigned extends Base
     public function getActionRequiredParameters()
     {
         return array(
-            'src_column_id' => t('Source column'),
-            'dest_column_id' => t('Destination column')
+            'dest_column_id' => t('Destination column'),
+            'category_id' => t('Category'),
         );
     }
 
@@ -52,7 +51,7 @@ class TaskMoveColumnUnAssigned extends Base
             'task_id',
             'column_id',
             'project_id',
-            'owner_id'
+            'category_id',
         );
     }
 
@@ -72,8 +71,7 @@ class TaskMoveColumnUnAssigned extends Base
             $data['task_id'],
             $this->getParam('dest_column_id'),
             $original_task['position'],
-            $original_task['swimlane_id'],
-            false
+            $original_task['swimlane_id']
         );
     }
 
@@ -86,6 +84,6 @@ class TaskMoveColumnUnAssigned extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('src_column_id') && $data['owner_id'] == 0;
+        return $data['column_id'] != $this->getParam('dest_column_id') && $data['category_id'] == $this->getParam('category_id');
     }
 }
