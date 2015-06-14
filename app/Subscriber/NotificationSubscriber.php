@@ -41,6 +41,7 @@ class NotificationSubscriber extends \Core\Base implements EventSubscriberInterf
         switch (get_class($event)) {
             case 'Event\TaskEvent':
                 $values['task'] = $this->taskFinder->getDetails($event['task_id']);
+                $values['changes'] = isset($event['changes']) ? $event['changes'] : array();
                 break;
             case 'Event\SubtaskEvent':
                 $values['subtask'] = $this->subtask->getById($event['id'], true);

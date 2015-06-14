@@ -268,7 +268,7 @@ class Notification extends Base
     {
         return $this->template->render(
             'notification/'.str_replace('.', '_', $event_name),
-            $event_data + array('application_url' => $this->config->get('application_url'))
+            $event_data + array('application_url' => $this->config->get('application_url'), 'colors_list' => $this->color->getList())
         );
     }
 
