@@ -142,6 +142,22 @@ class Task extends Base
         )));
     }
 
+    function object_to_array($data)
+    {
+        if(is_array($data) || is_object($data))
+        {
+            $result = array();
+
+            foreach($data as $key => $value) {
+                $result[$key] = $this->object_to_array($value);
+            }
+
+            return $result;
+        }
+
+        return $data;
+    }
+
     /**
      * Validate and save a new task
      *
@@ -165,7 +181,10 @@ class Task extends Base
                 if (isset($values['another_task']) && $values['another_task'] == 1) {
                     unset($values['title']);
                     unset($values['description']);
-                    $this->response->redirect('?controller=task&action=create&'.http_build_query($values));
+                    $redirectUrl ='?controller=task&action=create&'.http_build_query($values);
+                    $jsonUrl = JSON.stringify($redirectUrl);
+                    $_POST[$jsonUrl];
+                    $this->response->redirect('?controller=board&action=show&project_id='.$project['id'].'&redirectUrl=true');
                 }
                 else {
                     $this->response->redirect('?controller=board&action=show&project_id='.$project['id']);
