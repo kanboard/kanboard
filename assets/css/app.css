@@ -785,8 +785,10 @@ nav .active a {
     overflow-x: initial;
 }
 
+@media all and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 .board-container-compact #board {
     table-layout: auto;
+}
 }
 
 #board {
