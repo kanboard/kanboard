@@ -51,10 +51,10 @@ class Text extends \Core\Base
      */
     public function truncate($value, $max_length = 85, $end = '[...]')
     {
-        $length = strlen($value);
+        $length = mb_strlen($value);
 
         if ($length > $max_length) {
-            return substr($value, 0, $max_length).' '.$end;
+            return mb_substr($value, 0, $max_length).' '.$end;
         }
 
         return $value;

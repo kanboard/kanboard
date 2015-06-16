@@ -2,13 +2,16 @@
 header {
     margin-top: 10px;
     padding-bottom: 15px;
-    clear: both;
     border-bottom: 1px solid #dedede;
 }
 
 header h1 {
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 75%;
     float: left;
 }
 
