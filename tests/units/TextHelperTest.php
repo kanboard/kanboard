@@ -39,16 +39,6 @@ class TextHelperTest extends Base
         $this->assertEquals('33.71k', $h->bytes(34520));
     }
 
-    public function testTruncate()
-    {
-        $h = new Text($this->container);
-
-        $this->assertEquals('abc', $h->truncate('abc'));
-        $this->assertEquals(str_repeat('a', 85).' [...]', $h->truncate(str_repeat('a', 200)));
-
-        $this->assertEquals('Настольная рекл [...]', $h->truncate('Настольная реклама в фудкорте ГЧ', 15));
-    }
-
     public function testContains()
     {
         $h = new Text($this->container);

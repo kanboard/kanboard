@@ -42,25 +42,6 @@ class Text extends \Core\Base
     }
 
     /**
-     * Truncate a long text
-     *
-     * @param  string    $value         Text
-     * @param  integer   $max_length    Max Length
-     * @param  string    $end           Text end
-     * @return string
-     */
-    public function truncate($value, $max_length = 85, $end = '[...]')
-    {
-        $length = mb_strlen($value);
-
-        if ($length > $max_length) {
-            return mb_substr($value, 0, $max_length).' '.$end;
-        }
-
-        return $value;
-    }
-
-    /**
      * Return true if needle is contained in the haystack
      *
      * @param  string   $haystack   Haystack
