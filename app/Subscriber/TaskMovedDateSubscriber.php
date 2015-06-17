@@ -12,6 +12,7 @@ class TaskMovedDateSubscriber extends \Core\Base implements EventSubscriberInter
     {
         return array(
             Task::EVENT_MOVE_COLUMN => array('execute', 0),
+            Task::EVENT_MOVE_SWIMLANE => array('execute', 0),
         );
     }
 

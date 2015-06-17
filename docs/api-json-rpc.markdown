@@ -2189,14 +2189,12 @@ Response example:
     - **title** (string, optional)
     - **project_id** (integer, optional)
     - **color_id** (string, optional)
-    - **column_id** (integer, optional)
     - **owner_id** (integer, optional)
     - **creator_id** (integer, optional)
     - **date_due**: ISO8601 format (string, optional)
     - **description** Markdown content (string, optional)
     - **category_id** (integer, optional)
     - **score** (integer, optional)
-    - **swimlane_id** (integer, optional)
     - **recurrence_status**  (integer, optional)
     - **recurrence_trigger**  (integer, optional)
     - **recurrence_factor**  (integer, optional)
@@ -2330,6 +2328,7 @@ Response example:
     - **task_id** (integer, required)
     - **column_id** (integer, required)
     - **position** (integer, required)
+    - **swimlane_id** (integer, optional, default=0)
 - Result on success: **true**
 - Result on failure: **false**
 

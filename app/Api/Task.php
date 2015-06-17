@@ -82,9 +82,9 @@ class Task extends Base
         return $valid ? $this->taskCreation->create($values) : false;
     }
 
-    public function updateTask($id, $title = null, $project_id = null, $color_id = null, $column_id = null, $owner_id = null,
+    public function updateTask($id, $title = null, $project_id = null, $color_id = null, $owner_id = null,
                                $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null,
-                               $swimlane_id = null, $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
+                               $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
                                $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null)
     {
         $values = array(
@@ -92,14 +92,12 @@ class Task extends Base
             'title' => $title,
             'project_id' => $project_id,
             'color_id' => $color_id,
-            'column_id' => $column_id,
             'owner_id' => $owner_id,
             'creator_id' => $creator_id,
             'date_due' => $date_due,
             'description' => $description,
             'category_id' => $category_id,
             'score' => $score,
-            'swimlane_id' => $swimlane_id,
             'recurrence_status' => $recurrence_status,
             'recurrence_trigger' => $recurrence_trigger,
             'recurrence_factor' => $recurrence_factor,

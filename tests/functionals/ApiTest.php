@@ -348,11 +348,6 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertEquals('Swimlane A', $swimlanes[2]['name']);
     }
 
-    public function testRemoveSwimlane()
-    {
-        $this->assertTrue($this->client->removeSwimlane(1, 2));
-    }
-
     public function testCreateTask()
     {
         $task = array(
@@ -408,6 +403,42 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertEmpty($tasks);
     }
 
+    public function testMoveTaskSwimlane()
+    {
+        $task_id = $this->getTaskId();
+
+        $task = $this->client->getTask($task_id);
+        $this->assertNotFalse($task);
+        $this->assertTrue(is_array($task));
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(0, $task['swimlane_id']);
+
+        $moved_timestamp = $task['date_moved'];
+        sleep(1);
+        $this->assertTrue($this->client->moveTaskPosition(1, $task_id, 4, 1, 2));
+
+        $task = $this->client->getTask($task_id);
+        $this->assertNotFalse($task);
+        $this->assertTrue(is_array($task));
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(4, $task['column_id']);
+        $this->assertEquals(2, $task['swimlane_id']);
+        $this->assertNotEquals($moved_timestamp, $task['date_moved']);
+    }
+
+    public function testRemoveSwimlane()
+    {
+        $this->assertTrue($this->client->removeSwimlane(1, 2));
+
+        $task = $this->client->getTask($this->getTaskId());
+        $this->assertNotFalse($task);
+        $this->assertTrue(is_array($task));
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(4, $task['column_id']);
+        $this->assertEquals(0, $task['swimlane_id']);
+    }
+
     public function testUpdateTask()
     {
         $task = $this->client->getTask(1);
@@ -415,7 +446,6 @@ class Api extends PHPUnit_Framework_TestCase
         $values = array();
         $values['id'] = $task['id'];
         $values['color_id'] = 'green';
-        $values['column_id'] = 1;
         $values['description'] = 'test';
         $values['date_due'] = '';
 
