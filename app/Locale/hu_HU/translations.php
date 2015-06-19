@@ -689,7 +689,7 @@ return array(
     'Add a link' => 'Hivatkozás hozzáadása',
     'Add a new link' => 'Új hivatkozás hozzáadása',
     'Do you really want to remove this link: "%s"?' => 'Biztos törölni akarja a hivatkozást: "%s"?',
-    'Do you really want to remove this link with task #%d?' => 'Biztos törölni akarja a(z) #%s. feladatra mutató hivatkozást?',
+    'Do you really want to remove this link with task #%d?' => 'Biztos törölni akarja a(z) #%d. feladatra mutató hivatkozást?',
     'Field required' => 'Kötelező mező',
     'Link added successfully.' => 'Hivatkozás sikeresen létrehozva.',
     'Link updated successfully.' => 'Hivatkozás sikeresen frissítve.',

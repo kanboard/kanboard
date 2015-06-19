@@ -612,7 +612,7 @@ return array(
     'Remove a swimlane' => 'Kulvarı sil',
     'Rename' => 'Yeniden adlandır',
     'Show default swimlane' => 'Varsayılan Kulvarı göster',
-    'Swimlane modification for the project "%s"' => '"% s" Projesi için Kulvar değişikliği',
+    'Swimlane modification for the project "%s"' => '"%s" Projesi için Kulvar değişikliği',
     'Swimlane not found.' => 'Kulvar bulunamadı',
     'Swimlane removed successfully.' => 'Kulvar başarıyla kaldırıldı.',
     'Swimlanes' => 'Kulvarlar',

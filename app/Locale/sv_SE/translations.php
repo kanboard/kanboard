@@ -847,7 +847,7 @@ return array(
     '%s via Kanboard' => '%s via Kanboard',
     'uploaded by: %s' => 'uppladdad av: %s',
     'uploaded on: %s' => 'uppladdad på: %s',
-    'size: %s' => 'storlek',
+    'size: %s' => 'storlek: %s',
     'Burndown chart for "%s"' => 'Burndown diagram för "%s"',
     'Burndown chart' => 'Burndown diagram',
     'This chart show the task complexity over the time (Work Remaining).' => 'Diagrammet visar uppgiftens svårighet över tid (återstående arbete).',

@@ -664,7 +664,7 @@ return array(
     'Allow only one subtask in progress at the same time for a user' => 'อนุญาตให้ทำงานย่อยได้เพียงงานเดียวต่อหนึ่งคนในเวลาเดียวกัน',
     'Edit column "%s"' => 'แก้ไขคอลัมน์ "%s"',
     'Enable time tracking for subtasks' => 'สามารถติดตามเวลาของงานย่อย',
-    'Select the new status of the subtask: "%s"' => 'เลือกสถานะใหม่ของงานย่อย',
+    'Select the new status of the subtask: "%s"' => 'เลือกสถานะใหม่ของงานย่อย: "%s"',
     'Subtask timesheet' => 'เวลางานย่อย',
     'There is nothing to show.' => 'ไม่มีที่ต้องแสดง',
     'Time Tracking' => 'ติดตามเวลา',

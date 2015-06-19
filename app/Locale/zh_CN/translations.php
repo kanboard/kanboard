@@ -720,7 +720,7 @@ return array(
     // 'is fixed by' => '',
     'This task' => '此任务',
     '<1h' => '<1h',
-    '%dh' => '%h',
+    '%dh' => '%dh',
     // '%b %e' => '',
     'Expand tasks' => '展开任务',
     'Collapse tasks' => '收缩任务',
