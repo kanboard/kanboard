@@ -247,7 +247,7 @@ class TaskFilter extends Base
      *
      * @access public
      * @param  string  $start
-     * @param  strings $end
+     * @param  string  $end
      * @return TaskFilter
      */
     public function filterByStartDateRange($start, $end)

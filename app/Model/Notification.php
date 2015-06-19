@@ -229,7 +229,7 @@ class Notification extends Base
      *
      * @access public
      * @param  integer   $project_id        Project id
-     * @param  array     $exclude_user_id   User id to exclude
+     * @param  integer   $exclude_user_id   User id to exclude
      * @return array
      */
     public function getUsersWithNotificationEnabled($project_id, $exclude_user_id = 0)

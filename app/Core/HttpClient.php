@@ -35,9 +35,9 @@ class HttpClient extends Base
      * Send a POST HTTP request encoded in JSON
      *
      * @access public
-     * @param  string  $url
-     * @param  array   $data
-     * @param  array   $headers
+     * @param  string     $url
+     * @param  array      $data
+     * @param  string[]   $headers
      * @return string
      */
     public function postJson($url, array $data, array $headers = array())
@@ -53,9 +53,9 @@ class HttpClient extends Base
      * Send a POST HTTP request encoded in www-form-urlencoded
      *
      * @access public
-     * @param  string  $url
-     * @param  array   $data
-     * @param  array   $headers
+     * @param  string     $url
+     * @param  array      $data
+     * @param  string[]   $headers
      * @return string
      */
     public function postForm($url, array $data, array $headers = array())
@@ -71,9 +71,9 @@ class HttpClient extends Base
      * Make the HTTP request
      *
      * @access private
-     * @param  string  $url
-     * @param  array   $content
-     * @param  array   $headers
+     * @param  string     $url
+     * @param  string     $content
+     * @param  string[]   $headers
      * @return string
      */
     private function doRequest($url, $content, array $headers)

@@ -17,6 +17,7 @@ use Pimple\Container;
  * @property \Core\Request                 $request
  * @property \Core\Session                 $session
  * @property \Core\Template                $template
+ * @property \Core\MemoryCache             $memoryCache
  * @property \Integration\BitbucketWebhook $bitbucketWebhook
  * @property \Integration\GithubWebhook    $githubWebhook
  * @property \Integration\GitlabWebhook    $gitlabWebhook
@@ -24,7 +25,7 @@ use Pimple\Container;
  * @property \Integration\Jabber           $jabber
  * @property \Integration\Mailgun          $mailgun
  * @property \Integration\Postmark         $postmark
- * @property \Integration\SendgridWebhook  $sendgridWebhook
+ * @property \Integration\Sendgrid         $sendgrid
  * @property \Integration\SlackWebhook     $slackWebhook
  * @property \Integration\Smtp             $smtp
  * @property \Model\Acl                    $acl

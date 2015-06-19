@@ -27,8 +27,8 @@ class Template extends Helper
      * $template->render('template_name', ['bla' => 'value']);
      *
      * @access public
-     * @params string   $__template_name   Template name
-     * @params array    $__template_args   Key/Value map of template variables
+     * @param  string   $__template_name   Template name
+     * @param  array    $__template_args   Key/Value map of template variables
      * @return string
      */
     public function render($__template_name, array $__template_args = array())
