@@ -9,6 +9,11 @@
             <strong><?= t('Reference: %s', $task['reference']) ?></strong>
         </li>
         <?php endif ?>
+        <?php if ($task['swimlane_id']): ?>
+        <li>
+            <?= t('Swimlane: %s ', $this->swimlane->getNameById($task['swimlane_id'])) ?>
+        </li>
+        <?php endif ?>
         <li>
             <?= dt('Created on %B %e, %Y at %k:%M %p', $task['date_creation']) ?>
         </li>
