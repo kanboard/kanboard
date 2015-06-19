@@ -2,9 +2,9 @@
 <feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
     <title><?= t('%s\'s activity', $project['name']) ?></title>
     <link rel="alternate" type="text/html" href="<?= $this->url->base() ?>"/>
-    <link rel="self" type="application/atom+xml" href="<?= $this->url->base().$this->url->href('project', 'feed', array('token' => $project['token'])) ?>"/>
+    <link rel="self" type="application/atom+xml" href="<?= $this->url->base().$this->url->href('feed', 'project', array('token' => $project['token'])) ?>"/>
     <updated><?= date(DATE_ATOM) ?></updated>
-    <id><?= $this->url->base() ?></id>
+    <id><?= $this->url->base().$this->url->href('feed', 'project', array('token' => $project['token'])) ?></id>
     <icon><?= $this->url->base() ?>assets/img/favicon.png</icon>
 
     <?php foreach ($events as $e): ?>

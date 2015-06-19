@@ -395,27 +395,6 @@ class Project extends Base
     }
 
     /**
-     * RSS feed for a project (public)
-     *
-     * @access public
-     */
-    public function feed()
-    {
-        $token = $this->request->getStringParam('token');
-        $project = $this->project->getByToken($token);
-
-        // Token verification
-        if (empty($project)) {
-            $this->forbidden(true);
-        }
-
-        $this->response->xml($this->template->render('project/feed', array(
-            'events' => $this->projectActivity->getProject($project['id']),
-            'project' => $project,
-        )));
-    }
-
-    /**
      * Display a form to create a new project
      *
      * @access public

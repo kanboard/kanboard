@@ -20,7 +20,7 @@
                 <?= $this->url->link(t('All projects'), 'project', 'index') ?>
             </li>
             <?php if ($project['is_public']): ?>
-                <li><i class="fa fa-rss-square fa-fw"></i><?= $this->url->link(t('RSS feed'), 'project', 'feed', array('token' => $project['token']), false, '', '', true) ?></li>
+                <li><i class="fa fa-rss-square fa-fw"></i><?= $this->url->link(t('RSS feed'), 'feed', 'project', array('token' => $project['token']), false, '', '', true) ?></li>
                 <li><i class="fa fa-calendar fa-fw"></i><?= $this->url->link(t('iCal feed'), 'ical', 'project', array('token' => $project['token'])) ?></li>
             <?php endif ?>
         </ul>

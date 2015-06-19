@@ -21,10 +21,10 @@ class Acl extends Base
         'user' => array('google', 'github'),
         'task' => array('readonly'),
         'board' => array('readonly'),
-        'project' => array('feed'),
-        'webhook' => '*',
         'app' => array('colors'),
+        'webhook' => '*',
         'ical' => '*',
+        'feed' => '*',
     );
 
     /**
