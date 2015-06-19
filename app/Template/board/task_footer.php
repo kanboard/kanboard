@@ -60,6 +60,6 @@
     <?php endif ?>
 
     <?php if (! empty($task['time_estimated'])): ?>
-        <strong><?= $this->e($task['time_estimated']).'h' ?> <?= t('estimated') ?></strong>
+        <span class="task-time-estimated" title="<?= t('Time estimated') ?>"><?= $this->e($task['time_estimated']).'h' ?></span>
     <?php endif ?>
 </div>

@@ -9,9 +9,9 @@
             <strong><?= t('Reference: %s', $task['reference']) ?></strong>
         </li>
         <?php endif ?>
-        <?php if ($task['swimlane_id']): ?>
+        <?php if (! empty($task['swimlane_name'])): ?>
         <li>
-            <?= t('Swimlane: %s ', $this->swimlane->getNameById($task['swimlane_id'])) ?>
+            <?= t('Swimlane: %s', $task['swimlane_name']) ?>
         </li>
         <?php endif ?>
         <li>
