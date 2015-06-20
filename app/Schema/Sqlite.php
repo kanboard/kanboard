@@ -6,7 +6,34 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 71;
+const VERSION = 72;
+
+function version_72($pdo)
+{
+    $pdo->exec(
+        'ALTER TABLE comments RENAME TO comments_bak'
+    );
+
+    $pdo->exec(
+        'CREATE TABLE comments (
+            id INTEGER PRIMARY KEY,
+            task_id INTEGER NOT NULL,
+            user_id INTEGER DEFAULT 0,
+            date_creation INTEGER NOT NULL,
+            comment TEXT NOT NULL,
+            reference VARCHAR(50),
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )'
+    );
+
+    $pdo->exec(
+        'INSERT INTO comments SELECT * FROM comments_bak'
+    );
+
+    $pdo->exec(
+        'DROP TABLE comments_bak'
+    );
+}
 
 function version_71($pdo)
 {

@@ -6,7 +6,15 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 74;
+const VERSION = 75;
+
+function version_75($pdo)
+{
+    $pdo->exec('ALTER TABLE comments DROP FOREIGN KEY comments_ibfk_2');
+    $pdo->exec('ALTER TABLE comments MODIFY task_id INT NOT NULL');
+    $pdo->exec('ALTER TABLE comments CHANGE COLUMN `user_id` `user_id` INT DEFAULT 0');
+    $pdo->exec('ALTER TABLE comments CHANGE COLUMN `date` `date_creation` INT NOT NULL');
+}
 
 function version_74($pdo)
 {

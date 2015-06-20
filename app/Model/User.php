@@ -302,8 +302,18 @@ class User extends Base
     {
         return $this->db->transaction(function ($db) use ($user_id) {
 
-            // All assigned tasks are now unassigned
+            // All assigned tasks are now unassigned (no foreign key)
             if (! $db->table(Task::TABLE)->eq('owner_id', $user_id)->update(array('owner_id' => 0))) {
+                return false;
+            }
+
+            // All assigned subtasks are now unassigned (no foreign key)
+            if (! $db->table(Subtask::TABLE)->eq('user_id', $user_id)->update(array('user_id' => 0))) {
+                return false;
+            }
+
+            // All comments are not assigned anymore (no foreign key)
+            if (! $db->table(Comment::TABLE)->eq('user_id', $user_id)->update(array('user_id' => 0))) {
                 return false;
             }
 

@@ -6,7 +6,16 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 54;
+const VERSION = 55;
+
+function version_55($pdo)
+{
+    $pdo->exec('ALTER TABLE comments DROP CONSTRAINT IF EXISTS comments_user_id_fkey');
+    $pdo->exec("ALTER TABLE comments ALTER COLUMN task_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE comments ALTER COLUMN user_id SET DEFAULT 0");
+    $pdo->exec('ALTER TABLE comments RENAME COLUMN "date" TO "date_creation"');
+    $pdo->exec("ALTER TABLE comments ALTER COLUMN date_creation SET NOT NULL");
+}
 
 function version_54($pdo)
 {

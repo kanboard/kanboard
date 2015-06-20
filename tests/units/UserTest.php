@@ -3,6 +3,8 @@
 require_once __DIR__.'/Base.php';
 
 use Model\User;
+use Model\Subtask;
+use Model\Comment;
 use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
@@ -133,10 +135,14 @@ class UserTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
+        $s = new Subtask($this->container);
+        $c = new Comment($this->container);
 
         $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'owner_id' => 2)));
+        $this->assertEquals(1, $s->create(array('title' => 'Subtask #1', 'user_id' => 2, 'task_id' => 1)));
+        $this->assertEquals(1, $c->create(array('comment' => 'foobar', 'user_id' => 2, 'task_id' => 1)));
 
         $task = $tf->getById(1);
         $this->assertEquals(1, $task['id']);
@@ -151,6 +157,16 @@ class UserTest extends Base
         $task = $tf->getById(1);
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(0, $task['owner_id']);
+
+        // Make sure that assigned subtasks are unassigned after removing the user
+        $subtask = $s->getById(1);
+        $this->assertEquals(1, $subtask['id']);
+        $this->assertEquals(0, $subtask['user_id']);
+
+        // Make sure that comments are not related to the user anymore
+        $comment = $c->getById(1);
+        $this->assertEquals(1, $comment['id']);
+        $this->assertEquals(0, $comment['user_id']);
 
         // Make sure that private projects are also removed
         $user_id1 = $u->create(array('username' => 'toto1', 'password' => '123456', 'name' => 'Toto'));
