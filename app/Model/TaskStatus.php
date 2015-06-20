@@ -62,6 +62,7 @@ class TaskStatus extends Base
      */
     public function close($task_id)
     {
+        $this->subtask->closeAll($task_id);
         return $this->changeStatus($task_id, Task::STATUS_CLOSED, time(), Task::EVENT_CLOSE);
     }
 
@@ -113,7 +114,7 @@ class TaskStatus extends Base
     }
 
     /**
-     * Check the status of task
+     * Check the status of a task
      *
      * @access private
      * @param  integer   $task_id   Task id

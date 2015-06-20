@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/Base.php';
 
+use Model\Subtask;
 use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
@@ -73,5 +74,28 @@ class TaskStatusTest extends Base
         $this->assertInstanceOf('Event\TaskEvent', $event);
         $this->assertArrayHasKey('task_id', $event);
         $this->assertNotEmpty($event['task_id']);
+    }
+
+    public function testThatAllSubtasksAreClosed()
+    {
+        $ts = new TaskStatus($this->container);
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1)));
+        $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1)));
+
+        $this->assertTrue($ts->close(1));
+
+        $subtasks = $s->getAll(1);
+        $this->assertNotEmpty($subtasks);
+
+        foreach ($subtasks as $subtask) {
+            $this->assertEquals(Subtask::STATUS_DONE, $subtask['status']);
+        }
     }
 }

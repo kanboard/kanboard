@@ -228,6 +228,18 @@ class Subtask extends Base
     }
 
     /**
+     * Close all subtasks of a task
+     *
+     * @access public
+     * @param  integer  $task_id
+     * @return boolean
+     */
+    public function closeAll($task_id)
+    {
+        return $this->db->table(self::TABLE)->eq('task_id', $task_id)->update(array('status' => self::STATUS_DONE));
+    }
+
+    /**
      * Get subtasks with consecutive positions
      *
      * If you remove a subtask, the positions are not anymore consecutives
