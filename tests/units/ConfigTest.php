@@ -17,6 +17,7 @@ class ConfigTest extends Base
         $this->assertEmpty($c->get('webhook_url_task_modification'));
         $this->assertEmpty($c->get('webhook_url_task_creation'));
         $this->assertEmpty($c->get('board_columns'));
+        $this->assertEmpty($c->get('application_url'));
 
         $this->assertNotEmpty($c->get('webhook_token'));
         $this->assertNotEmpty($c->get('api_token'));
@@ -54,5 +55,12 @@ class ConfigTest extends Base
 
         session_id('');
         unset($this->container['session']);
+    }
+
+    public function testSave()
+    {
+        $c = new Config($this->container);
+        $this->assertTrue($c->save(array('application_url' => 'http://localhost/')));
+        $this->assertEquals('http://localhost/', $c->get('application_url'));
     }
 }

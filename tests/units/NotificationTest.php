@@ -285,14 +285,18 @@ class NotificationTest extends Base
         $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
         $this->assertTrue($pp->addMember(1, 2));
 
+        $this->container['emailClient']->expects($this->once())
+            ->method('send')
+            ->with(
+                $this->equalTo('user1@here'),
+                $this->equalTo('user1'),
+                $this->equalTo('[test][Task opened] blah (#2)'),
+                $this->stringContains('blah')
+            );
+
         $n->sendNotifications('task.open', array('task' => array(
             'id' => 2, 'title' => 'blah', 'project_name' => 'test', 'project_id' => 1, 'owner_id' => 0, 'creator_id' => 2
         )));
-
-        $this->assertEquals('user1@here', $this->container['emailClient']->email);
-        $this->assertEquals('user1', $this->container['emailClient']->name);
-        $this->assertEquals('[test][Task opened] blah (#2)', $this->container['emailClient']->subject);
-        $this->assertNotEmpty($this->container['emailClient']->html);
     }
 
     public function testSendNotificationsToAnotherAssignee()
@@ -306,11 +310,11 @@ class NotificationTest extends Base
         $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
         $this->assertTrue($pp->addMember(1, 2));
 
+        $this->container['emailClient']->expects($this->never())->method('send');
+
         $n->sendNotifications('task.open', array('task' => array(
             'id' => 2, 'title' => 'blah', 'project_name' => 'test', 'project_id' => 1, 'owner_id' => 1, 'creator_id' => 1
         )));
-
-        $this->assertEmpty($this->container['emailClient']->email);
     }
 
     public function testSendNotificationsToNotMember()
@@ -323,10 +327,10 @@ class NotificationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
         $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
 
+        $this->container['emailClient']->expects($this->never())->method('send');
+
         $n->sendNotifications('task.open', array('task' => array(
             'id' => 2, 'title' => 'blah', 'project_name' => 'test', 'project_id' => 1, 'owner_id' => 0, 'creator_id' => 2
         )));
-
-        $this->assertEmpty($this->container['emailClient']->email);
     }
 }

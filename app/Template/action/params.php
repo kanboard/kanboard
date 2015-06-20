@@ -28,7 +28,7 @@
         <?php elseif ($this->text->contains($param_name, 'category_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->select('params['.$param_name.']', $categories_list, $values) ?><br/>
-        <?php elseif ($this->text->contains($param_name, 'label')): ?>
+        <?php else: ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->text('params['.$param_name.']', $values) ?>
         <?php endif ?>

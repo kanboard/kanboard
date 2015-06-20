@@ -42,7 +42,7 @@
                         <?= $this->text->in($param['value'], $colors_list) ?>
                     <?php elseif ($this->text->contains($param['name'], 'category_id')): ?>
                         <?= $this->text->in($param['value'], $categories_list) ?>
-                    <?php elseif ($this->text->contains($param['name'], 'label')): ?>
+                    <?php else: ?>
                         <?= $this->e($param['value']) ?>
                     <?php endif ?>
                     </strong>

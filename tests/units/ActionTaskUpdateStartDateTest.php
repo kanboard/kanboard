@@ -7,7 +7,6 @@ use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
-use Integration\GithubWebhook;
 
 class ActionTaskUpdateStartDateTest extends Base
 {

@@ -64,6 +64,7 @@ List of available actions
 - Change the category based on an external label
 - Create a comment from an external provider
 - Automatically update the start date
+- Send a task by email to someone
 
 Examples
 --------

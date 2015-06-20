@@ -58,6 +58,7 @@ class Action extends Base
             'TaskAssignCategoryLabel' => t('Change the category based on an external label'),
             'TaskUpdateStartDate' => t('Automatically update the start date'),
             'TaskMoveColumnCategoryChange' => t('Move the task to another column when the category is changed'),
+            'TaskEmail' => t('Send a task by email to someone'),
         );
 
         asort($values);
@@ -351,10 +352,13 @@ class Action extends Base
                 $categoryTemplate = $this->category->getById($param['value']);
                 $categoryFromNewProject = $this->db->table(Category::TABLE)->eq('project_id', $project_to)->eq('name', $categoryTemplate['name'])->findOne();
                 return $categoryFromNewProject['id'];
+            case 'src_column_id':
+            case 'dest_column_id':
             case 'column_id':
                 $boardTemplate = $this->board->getColumn($param['value']);
                 $boardFromNewProject = $this->db->table(Board::TABLE)->eq('project_id', $project_to)->eq('title', $boardTemplate['title'])->findOne();
                 return $boardFromNewProject['id'];
+            // TODO: Add user_id
             default:
                 return $param['value'];
         }

@@ -88,13 +88,7 @@ class Url extends \Core\Base
      */
     public function base()
     {
-        $application_url = $this->config->get('application_url');
-
-        if (! empty($application_url)) {
-            return $application_url;
-        }
-
-        return $this->server();
+        return $this->config->get('application_url') ?: $this->server();
     }
 
     /**

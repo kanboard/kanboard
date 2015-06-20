@@ -40,7 +40,7 @@ class ProjectTest extends Base
         $this->assertEquals(1, $project['is_active']);
         $this->assertEquals(0, $project['is_public']);
         $this->assertEquals(0, $project['is_private']);
-        $this->assertEquals(time(), $project['last_modified']);
+        $this->assertEquals(time(), $project['last_modified'], '', 1);
         $this->assertEmpty($project['token']);
     }
 
