@@ -58,7 +58,7 @@ class Category extends Base
     }
 
     /**
-     * Get a category id by the project and the name
+     * Get a category id by the category name and project id
      *
      * @access public
      * @param  integer   $project_id      Project id

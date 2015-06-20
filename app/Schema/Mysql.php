@@ -6,7 +6,42 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 73;
+const VERSION = 74;
+
+function version_74($pdo)
+{
+    $pdo->exec('ALTER TABLE project_has_categories MODIFY project_id INT NOT NULL');
+    $pdo->exec('ALTER TABLE project_has_categories MODIFY name VARCHAR(255) NOT NULL');
+
+    $pdo->exec('ALTER TABLE actions MODIFY project_id INT NOT NULL');
+    $pdo->exec('ALTER TABLE actions MODIFY event_name VARCHAR(50) NOT NULL');
+    $pdo->exec('ALTER TABLE actions MODIFY action_name VARCHAR(50) NOT NULL');
+
+    $pdo->exec('ALTER TABLE action_has_params MODIFY action_id INT NOT NULL');
+    $pdo->exec('ALTER TABLE action_has_params MODIFY name VARCHAR(50) NOT NULL');
+    $pdo->exec('ALTER TABLE action_has_params MODIFY value VARCHAR(50) NOT NULL');
+
+    $pdo->exec('ALTER TABLE files MODIFY name VARCHAR(255) NOT NULL');
+    $pdo->exec('ALTER TABLE files MODIFY task_id INT NOT NULL');
+
+    $pdo->exec('ALTER TABLE subtasks MODIFY title VARCHAR(255) NOT NULL');
+
+    $pdo->exec('ALTER TABLE tasks MODIFY project_id INT NOT NULL');
+    $pdo->exec('ALTER TABLE tasks MODIFY column_id INT NOT NULL');
+
+    $pdo->exec('ALTER TABLE columns MODIFY title VARCHAR(255) NOT NULL');
+    $pdo->exec('ALTER TABLE columns MODIFY project_id INT NOT NULL');
+
+    $pdo->exec('ALTER TABLE project_has_users MODIFY project_id INT NOT NULL');
+    $pdo->exec('ALTER TABLE project_has_users MODIFY user_id INT NOT NULL');
+
+    $pdo->exec('ALTER TABLE projects MODIFY name VARCHAR(255) NOT NULL UNIQUE');
+
+    $pdo->exec('ALTER TABLE users MODIFY username VARCHAR(50) NOT NULL');
+
+    $pdo->exec('ALTER TABLE user_has_notifications MODIFY project_id INT NOT NULL');
+    $pdo->exec('ALTER TABLE user_has_notifications MODIFY user_id INT NOT NULL');
+}
 
 function version_73($pdo)
 {

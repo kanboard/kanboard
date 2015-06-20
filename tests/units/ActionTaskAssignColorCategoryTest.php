@@ -38,8 +38,8 @@ class ActionTaskAssignColorCategory extends Base
         $c = new Category($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $c->create(array('name' => 'c1')));
-        $this->assertEquals(2, $c->create(array('name' => 'c2')));
+        $this->assertEquals(1, $c->create(array('name' => 'c1', 'project_id' => 1)));
+        $this->assertEquals(2, $c->create(array('name' => 'c2', 'project_id' => 1)));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'color_id' => 'green', 'category_id' => 2)));
 
         // We create an event but we don't do anything

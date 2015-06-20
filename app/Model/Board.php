@@ -377,6 +377,19 @@ class Board extends Base
     }
 
     /**
+     * Get a column id by the name
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  string   $title
+     * @return integer
+     */
+    public function getColumnIdByTitle($project_id, $title)
+    {
+        return (int) $this->db->table(self::TABLE)->eq('project_id', $project_id)->eq('title', $title)->findOneColumn('id');
+    }
+
+    /**
      * Get the position of the last column for a given project
      *
      * @access public

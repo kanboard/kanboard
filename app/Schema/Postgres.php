@@ -6,7 +6,43 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 53;
+const VERSION = 54;
+
+function version_54($pdo)
+{
+    $pdo->exec("ALTER TABLE project_has_categories ALTER COLUMN project_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE project_has_categories ALTER COLUMN name SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE actions ALTER COLUMN project_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE actions ALTER COLUMN event_name SET NOT NULL");
+    $pdo->exec("ALTER TABLE actions ALTER COLUMN action_name SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE action_has_params ALTER COLUMN action_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE action_has_params ALTER COLUMN name SET NOT NULL");
+    $pdo->exec("ALTER TABLE action_has_params ALTER COLUMN value SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE files ALTER COLUMN name SET NOT NULL");
+    $pdo->exec("ALTER TABLE files ALTER COLUMN task_id SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE subtasks ALTER COLUMN title SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN title SET NOT NULL");
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN project_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN column_id SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE columns ALTER COLUMN title SET NOT NULL");
+    $pdo->exec("ALTER TABLE columns ALTER COLUMN project_id SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE project_has_users ALTER COLUMN project_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE project_has_users ALTER COLUMN user_id SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE projects ALTER COLUMN name SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE users ALTER COLUMN username SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE user_has_notifications ALTER COLUMN user_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE user_has_notifications ALTER COLUMN user_id SET NOT NULL");
+}
 
 function version_53($pdo)
 {

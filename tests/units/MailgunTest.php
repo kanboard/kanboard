@@ -40,7 +40,7 @@ class MailgunTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
-        $this->assertEquals(2, $u->create(array('name' => 'me', 'email' => 'me@localhost')));
+        $this->assertEquals(2, $u->create(array('username' => 'me', 'email' => 'me@localhost')));
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'test2', 'identifier' => 'TEST1')));

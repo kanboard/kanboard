@@ -429,10 +429,10 @@ function version_37($pdo)
     $pdo->exec("
         CREATE TABLE swimlanes (
             id INTEGER PRIMARY KEY,
-            name TEXT,
+            name TEXT NOT NULL,
             position INTEGER DEFAULT 1,
             is_active INTEGER DEFAULT 1,
-            project_id INTEGER,
+            project_id INTEGER NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE (name, project_id)
         )
@@ -477,9 +477,9 @@ function version_33($pdo)
             id INTEGER PRIMARY KEY,
             date_creation INTEGER NOT NULL,
             event_name TEXT NOT NULL,
-            creator_id INTEGER,
-            project_id INTEGER,
-            task_id INTEGER,
+            creator_id INTEGE NOT NULL,
+            project_id INTEGER NOT NULL,
+            task_id INTEGER NOT NULL,
             data TEXT,
             FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
@@ -622,8 +622,8 @@ function version_23($pdo)
 
     $pdo->exec("
         CREATE TABLE user_has_notifications (
-            user_id INTEGER,
-            project_id INTEGER,
+            user_id INTEGER NOT NULL,
+            project_id INTEGER NOT NULL,
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE(project_id, user_id)
@@ -659,7 +659,7 @@ function version_18($pdo)
     $pdo->exec("
         CREATE TABLE task_has_subtasks (
             id INTEGER PRIMARY KEY,
-            title TEXT COLLATE NOCASE,
+            title TEXT COLLATE NOCASE NOT NULL,
             status INTEGER DEFAULT 0,
             time_estimated NUMERIC DEFAULT 0,
             time_spent NUMERIC DEFAULT 0,
@@ -675,10 +675,10 @@ function version_17($pdo)
     $pdo->exec("
         CREATE TABLE task_has_files (
             id INTEGER PRIMARY KEY,
-            name TEXT COLLATE NOCASE,
+            name TEXT COLLATE NOCASE NOT NULL,
             path TEXT,
             is_image INTEGER DEFAULT 0,
-            task_id INTEGER,
+            task_id INTEGER NOT NULL,
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
         )"
     );
@@ -689,8 +689,8 @@ function version_16($pdo)
     $pdo->exec("
         CREATE TABLE project_has_categories (
             id INTEGER PRIMARY KEY,
-            name TEXT COLLATE NOCASE,
-            project_id INT,
+            name TEXT COLLATE NOCASE NOT NULL,
+            project_id INTEGER NOT NULL,
             UNIQUE (project_id, name),
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
         )"
@@ -721,7 +721,7 @@ function version_12($pdo)
     $pdo->exec(
         'CREATE TABLE remember_me (
             id INTEGER PRIMARY KEY,
-            user_id INTEGER,
+            user_id INTEGER NOT NULL,
             ip TEXT,
             user_agent TEXT,
             token TEXT,
@@ -736,7 +736,7 @@ function version_12($pdo)
         'CREATE TABLE last_logins (
             id INTEGER PRIMARY KEY,
             auth_type TEXT,
-            user_id INTEGER,
+            user_id INTEGER NOT NULL,
             ip TEXT,
             user_agent TEXT,
             date_creation INTEGER,
@@ -779,9 +779,9 @@ function version_10($pdo)
     $pdo->exec(
         'CREATE TABLE actions (
             id INTEGER PRIMARY KEY,
-            project_id INTEGER,
-            event_name TEXT,
-            action_name TEXT,
+            project_id INTEGER NOT NULL,
+            event_name TEXT NOT NULL,
+            action_name TEXT NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
         )'
     );
@@ -789,9 +789,9 @@ function version_10($pdo)
     $pdo->exec(
         'CREATE TABLE action_has_params (
             id INTEGER PRIMARY KEY,
-            action_id INTEGER,
-            name TEXT,
-            value TEXT,
+            action_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            value TEXT NOT NULL,
             FOREIGN KEY(action_id) REFERENCES actions(id) ON DELETE CASCADE
         )'
     );
@@ -822,8 +822,8 @@ function version_7($pdo)
     $pdo->exec("
         CREATE TABLE project_has_users (
             id INTEGER PRIMARY KEY,
-            project_id INTEGER,
-            user_id INTEGER,
+            project_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             UNIQUE(project_id, user_id)
@@ -869,7 +869,7 @@ function version_1($pdo)
     $pdo->exec("
         CREATE TABLE users (
             id INTEGER PRIMARY KEY,
-            username TEXT,
+            username TEXT NOT NULL,
             password TEXT,
             is_admin INTEGER DEFAULT 0,
             default_project_id INTEGER DEFAULT 0
@@ -879,7 +879,7 @@ function version_1($pdo)
     $pdo->exec("
         CREATE TABLE projects (
             id INTEGER PRIMARY KEY,
-            name TEXT NOCASE UNIQUE,
+            name TEXT NOCASE NOT NULL UNIQUE,
             is_active INTEGER DEFAULT 1
         )
     ");
@@ -887,9 +887,9 @@ function version_1($pdo)
     $pdo->exec("
         CREATE TABLE columns (
             id INTEGER PRIMARY KEY,
-            title TEXT,
+            title TEXT NOT NULL,
             position INTEGER,
-            project_id INTEGER,
+            project_id INTEGER NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE (title, project_id)
         )

@@ -241,7 +241,7 @@ class ProjectPermissionTest extends Base
         $pp = new ProjectPermission($this->container);
 
         $user = new User($this->container);
-        $user->create(array('username' => 'unittest', 'password' => 'unittest'));
+        $this->assertNotFalse($user->create(array('username' => 'unittest', 'password' => 'unittest')));
 
         // We create project
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
