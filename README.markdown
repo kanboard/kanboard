@@ -44,6 +44,7 @@ Documentation
 Related projects
 ----------------
 
+- [Kanboard API python client by @freekoder](https://github.com/freekoder/kanboard-py)
 - [Kanboard Presenter by David Eberlein](https://github.com/davideberlein/kanboard-presenter)
 - [CSV2Kanboard by @ashbike](https://github.com/ashbike/csv2kanboard)
 - [Kanboard for Yunohost by @mbugeia](https://github.com/mbugeia/kanboard_ynh)
