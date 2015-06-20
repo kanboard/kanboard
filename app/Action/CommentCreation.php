@@ -45,7 +45,6 @@ class CommentCreation extends Base
     public function getEventRequiredParameters()
     {
         return array(
-            'reference',
             'comment',
             'user_id',
             'task_id',
@@ -62,7 +61,7 @@ class CommentCreation extends Base
     public function doAction(array $data)
     {
         return (bool) $this->comment->create(array(
-            'reference' => $data['reference'],
+            'reference' => isset($data['reference']) ? $data['reference'] : '',
             'comment' => $data['comment'],
             'task_id' => $data['task_id'],
             'user_id' => $data['user_id'],

@@ -198,7 +198,7 @@ Comment creation:
     "task_id": "1",
     "user_id": "1",
     "comment": "test",
-    "date": 1431991615
+    "date_creation": 1431991615
   }
 }
 ```

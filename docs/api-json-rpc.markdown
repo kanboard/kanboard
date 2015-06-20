@@ -2823,7 +2823,7 @@ Response example:
         "id": "1",
         "task_id": "1",
         "user_id": "1",
-        "date": "1410881970",
+        "date_creation": "1410881970",
         "comment": "Comment #1",
         "username": "admin",
         "name": null
@@ -2861,7 +2861,7 @@ Response example:
     "result": [
         {
             "id": "1",
-            "date": "1410882272",
+            "date_creation": "1410882272",
             "task_id": "1",
             "user_id": "1",
             "comment": "Comment #1",

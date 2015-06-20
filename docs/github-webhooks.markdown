@@ -82,7 +82,7 @@ When a task is created from a Github issue, the link to the issue is added to th
 - Choose the event: **Github issue assignee change**
 - Choose the action: **Change the assignee based on an external username**
 
-Note: The username must be the same between Github and Kanboard.
+Note: The username must be the same between Github and Kanboard and the user must be member of the project.
 
 ### Assign a category when an issue is tagged on Github
 
@@ -95,4 +95,5 @@ Note: The username must be the same between Github and Kanboard.
 - Choose the event: **Github issue comment created**
 - Choose the action: **Create a comment from an external provider**
 
-Note: The username of the comment author must be the same between Github and Kanboard and the task must exists before.
+If the username is the same between Github and Kanboard the comment author will be assigned, otherwise there is no author.
+The user also have to be member of the project in Kanboard.
