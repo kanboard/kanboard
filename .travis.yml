@@ -1,6 +1,7 @@
 language: php
 
 php:
+  - hhvm
   - 7.0
   - 5.6
   - 5.5
@@ -11,10 +12,11 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: 7.0
+    - php: hhvm
 
 before_script:
+  - phpenv config-add tests/php.ini
   - composer install
 
 script:
   - phpunit -c tests/units.sqlite.xml
-  

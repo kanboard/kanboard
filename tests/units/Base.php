@@ -9,8 +9,6 @@ use Symfony\Component\Stopwatch\Stopwatch;
 use SimpleLogger\Logger;
 use SimpleLogger\File;
 
-date_default_timezone_set('UTC');
-
 class FakeHttpClient
 {
     private $url = '';
