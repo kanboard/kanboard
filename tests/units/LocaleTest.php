@@ -22,8 +22,8 @@ class LocaleTest extends Base
 
                 foreach(array('%s', '%d') as $placeholder) {
                     $this->assertEquals(
-                        substr_count($k, '%s'),
-                        substr_count($v, '%s'),
+                        substr_count($k, $placeholder),
+                        substr_count($v, $placeholder),
                         'Incorrect number of ' . $placeholder . ' in ' . basename($file) .' translation of: ' . $k
                     );
                 }
