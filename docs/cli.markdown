@@ -36,6 +36,9 @@ export
  export:subtasks                Subtasks CSV export
  export:tasks                   Tasks CSV export
  export:transitions             Task transitions CSV export
+locale
+  locale:compare                Compare application translations with the fr_FR locale
+  locale:sync                   Synchronize all translations based on the fr_FR locale
 notification
  notification:overdue-tasks     Send notifications for overdue tasks
 projects

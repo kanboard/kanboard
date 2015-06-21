@@ -6,7 +6,7 @@ How to translate Kanboard to a new language?
 
 - Translations are stored inside the directory `app/Locale`
 - There is sub-directory for each language, by example for the French we have `fr_FR`, Italian `it_IT` etc...
-- A translation is a PHP file that return an Array with a key-value pairs
+- A translation is a PHP file that returns an Array with a key-value pairs
 - The key is the original text in english and the value is the translation for the corresponding language
 - **French translations are always up to date**
 - Always use the last version (branch master)
@@ -58,13 +58,14 @@ All formats are available in the [PHP documentation](http://php.net/sprintf).
 How to find missing translations in the applications?
 -----------------------------------------------------
 
-From a Unix shell run:
+From a terminal, run the following command:
 
 ```bash
-./scripts/find-strings.sh
+./kanboard locale:compare
 ```
 
-All missing translations are displayed on the screen. Put that in the french locale and sync other locales (see below).
+All missing and unused translations are displayed on the screen.
+Put that in the French locale and sync other locales (see below).
 
 How to synchronize translation files?
 -------------------------------------
