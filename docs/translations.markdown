@@ -72,7 +72,7 @@ How to synchronize translation files?
 From a Unix shell run this command:
 
 ```bash
-./scripts/sync-locales.php
+./kanboard locale:sync
 ```
 
-The french translation is used a reference for other locales.
+The French translation is used a reference for other locales.
