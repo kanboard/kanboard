@@ -4,6 +4,7 @@ namespace Action;
 
 use Integration\GithubWebhook;
 use Integration\GitlabWebhook;
+use Integration\BitbucketWebhook;
 
 /**
  * Create automatically a task from a webhook
@@ -24,6 +25,7 @@ class TaskCreation extends Base
         return array(
             GithubWebhook::EVENT_ISSUE_OPENED,
             GitlabWebhook::EVENT_ISSUE_OPENED,
+            BitbucketWebhook::EVENT_ISSUE_OPENED,
         );
     }
 

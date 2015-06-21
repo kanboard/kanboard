@@ -33,7 +33,7 @@ List of available events
 - Move a task to another position in the same column
 - Task modification
 - Task creation
-- Open a closed task
+- Reopen a task
 - Closing a task
 - Task creation or modification
 - Task assignee change
@@ -47,23 +47,35 @@ List of available events
 - Gitlab issue opened
 - Gitlab issue closed
 - Gitlab commit received
+- Bitbucket commit received
+- Bitbucket issue opened
+- Bitbucket issue closed
+- Bitbucket issue reopened
+- Bitbucket issue assignee change
+- Bitbucket issue comment created
 
 List of available actions
 -------------------------
 
 - Close the task
+- Open a task
 - Assign the task to a specific user
 - Assign the task to the person who does the action
 - Duplicate the task to another project
 - Move the task to another project
+- Move the task to another column when assigned to a user
+- Move the task to another column when assignee is cleared
+- Assign a color when the task is moved to a specific column
 - Assign a color to a specific user
 - Assign automatically a color based on a category
 - Assign automatically a category based on a color
+- Create a comment from an external provider
 - Create a task from an external provider
+- Add a comment log when moving the task between columns
 - Change the assignee based on an external username
 - Change the category based on an external label
-- Create a comment from an external provider
 - Automatically update the start date
+- Move the task to another column when the category is changed
 - Send a task by email to someone
 
 Examples

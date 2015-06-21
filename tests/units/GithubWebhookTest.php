@@ -359,6 +359,7 @@ class GithubWebhookTest extends Base
         $data = $event->getAll();
         $this->assertEquals(1, $data['project_id']);
         $this->assertEquals(3, $data['reference']);
+        $this->assertEquals('Test Webhook', $data['title']);
         $this->assertEquals("plop\n\n[Github Issue](https://github.com/kanboardapp/webhook/issues/3)", $data['description']);
     }
 

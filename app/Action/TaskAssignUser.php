@@ -3,6 +3,7 @@
 namespace Action;
 
 use Integration\GithubWebhook;
+use Integration\BitbucketWebhook;
 
 /**
  * Assign a task to someone
@@ -22,6 +23,7 @@ class TaskAssignUser extends Base
     {
         return array(
             GithubWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE,
+            BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE,
         );
     }
 

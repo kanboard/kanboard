@@ -25,6 +25,7 @@ class CommentCreation extends Base
         return array(
             GithubWebhook::EVENT_ISSUE_COMMENT,
             GithubWebhook::EVENT_COMMIT,
+            BitbucketWebhook::EVENT_ISSUE_COMMENT,
             BitbucketWebhook::EVENT_COMMIT,
             GitlabWebhook::EVENT_COMMIT,
         );

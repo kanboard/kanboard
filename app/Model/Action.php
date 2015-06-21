@@ -78,7 +78,7 @@ class Action extends Base
             Task::EVENT_MOVE_COLUMN => t('Move a task to another column'),
             Task::EVENT_UPDATE => t('Task modification'),
             Task::EVENT_CREATE => t('Task creation'),
-            Task::EVENT_OPEN => t('Open a closed task'),
+            Task::EVENT_OPEN => t('Reopen a task'),
             Task::EVENT_CLOSE => t('Closing a task'),
             Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
             Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
@@ -93,6 +93,11 @@ class Action extends Base
             GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
             GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
             BitbucketWebhook::EVENT_COMMIT => t('Bitbucket commit received'),
+            BitbucketWebhook::EVENT_ISSUE_OPENED => t('Bitbucket issue opened'),
+            BitbucketWebhook::EVENT_ISSUE_CLOSED => t('Bitbucket issue closed'),
+            BitbucketWebhook::EVENT_ISSUE_REOPENED => t('Bitbucket issue reopened'),
+            BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE => t('Bitbucket issue assignee change'),
+            BitbucketWebhook::EVENT_ISSUE_COMMENT => t('Bitbucket issue comment created'),
         );
 
         asort($values);

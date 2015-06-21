@@ -53,7 +53,7 @@ class Webhook extends Base
 
         $result = $this->githubWebhook->parsePayload(
             $this->request->getHeader('X-Github-Event'),
-            $this->request->getJson() ?: array()
+            $this->request->getJson()
         );
 
         echo $result ? 'PARSED' : 'IGNORED';
@@ -69,7 +69,7 @@ class Webhook extends Base
         $this->checkWebhookToken();
 
         $this->gitlabWebhook->setProjectId($this->request->getIntegerParam('project_id'));
-        $result = $this->gitlabWebhook->parsePayload($this->request->getJson() ?: array());
+        $result = $this->gitlabWebhook->parsePayload($this->request->getJson());
 
         echo $result ? 'PARSED' : 'IGNORED';
     }
@@ -84,7 +84,11 @@ class Webhook extends Base
         $this->checkWebhookToken();
 
         $this->bitbucketWebhook->setProjectId($this->request->getIntegerParam('project_id'));
-        $result = $this->bitbucketWebhook->parsePayload(json_decode(@$_POST['payload'], true) ?: array());
+
+        $result = $this->bitbucketWebhook->parsePayload(
+            $this->request->getHeader('X-Event-Key'),
+            $this->request->getJson()
+        );
 
         echo $result ? 'PARSED' : 'IGNORED';
     }
@@ -97,7 +101,7 @@ class Webhook extends Base
     public function postmark()
     {
         $this->checkWebhookToken();
-        echo $this->postmark->receiveEmail($this->request->getJson() ?: array()) ? 'PARSED' : 'IGNORED';
+        echo $this->postmark->receiveEmail($this->request->getJson()) ? 'PARSED' : 'IGNORED';
     }
 
     /**
