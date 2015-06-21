@@ -2,7 +2,9 @@
 
 namespace Action;
 
+use Integration\BitbucketWebhook;
 use Integration\GithubWebhook;
+use Integration\GitlabWebhook;
 
 /**
  * Create automatically a comment from a webhook
@@ -22,6 +24,9 @@ class CommentCreation extends Base
     {
         return array(
             GithubWebhook::EVENT_ISSUE_COMMENT,
+            GithubWebhook::EVENT_COMMIT,
+            BitbucketWebhook::EVENT_COMMIT,
+            GitlabWebhook::EVENT_COMMIT,
         );
     }
 
@@ -45,8 +50,6 @@ class CommentCreation extends Base
     public function getEventRequiredParameters()
     {
         return array(
-            'comment',
-            'user_id',
             'task_id',
         );
     }
@@ -62,9 +65,9 @@ class CommentCreation extends Base
     {
         return (bool) $this->comment->create(array(
             'reference' => isset($data['reference']) ? $data['reference'] : '',
-            'comment' => $data['comment'],
+            'comment' => empty($data['comment']) ? $data['commit_comment'] : $data['comment'],
             'task_id' => $data['task_id'],
-            'user_id' => $data['user_id'],
+            'user_id' => empty($data['user_id']) ? 0 : $data['user_id'],
         ));
     }
 
@@ -77,6 +80,6 @@ class CommentCreation extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return true;
+        return ! empty($data['comment']) || ! empty($data['commit_comment']);
     }
 }

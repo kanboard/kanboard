@@ -2,7 +2,7 @@
 
 namespace Integration;
 
-use Event\TaskEvent;
+use Event\GenericEvent;
 use Model\Task;
 
 /**
@@ -72,7 +72,7 @@ class BitbucketWebhook extends \Core\Base
     {
         $task_id = $this->task->getTaskIdFromText($commit['message']);
 
-        if (! $task_id) {
+        if (empty($task_id)) {
             return false;
         }
 
@@ -82,16 +82,20 @@ class BitbucketWebhook extends \Core\Base
             return false;
         }
 
-        if ($task['is_active'] == Task::STATUS_OPEN && $task['project_id'] == $this->project_id) {
-
-            $this->container['dispatcher']->dispatch(
-                self::EVENT_COMMIT,
-                new TaskEvent(array('task_id' => $task_id) + $task)
-            );
-
-            return true;
+        if ($task['project_id'] != $this->project_id) {
+            return false;
         }
 
-        return false;
+        $this->container['dispatcher']->dispatch(
+            self::EVENT_COMMIT,
+            new GenericEvent(array(
+                'task_id' => $task_id,
+                'commit_message' => $commit['message'],
+                'commit_url' => '',
+                'commit_comment' => $commit['message']."\n\n".t('Commit made by @%s on Bitbucket', $commit['author'])
+            ) + $task)
+        );
+
+        return true;
     }
 }

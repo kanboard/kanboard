@@ -21,7 +21,7 @@ class BitbucketWebhookTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $g->setProjectId(1);
 
-        $this->container['dispatcher']->addListener(BitbucketWebhook::EVENT_COMMIT, function() {});
+        $this->container['dispatcher']->addListener(BitbucketWebhook::EVENT_COMMIT, array($this, 'onCommit'));
 
         $event = json_decode($this->post_payload, true);
 
@@ -29,15 +29,15 @@ class BitbucketWebhookTest extends Base
         $this->assertFalse($g->handleCommit($event['commits'][0]));
 
         // Create task with the wrong id
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test1', 'project_id' => 1)));
         $this->assertFalse($g->handleCommit($event['commits'][1]));
 
         // Create task with the right id
-        $this->assertEquals(2, $tc->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'test2', 'project_id' => 1)));
         $this->assertTrue($g->handleCommit($event['commits'][1]));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(BitbucketWebhook::EVENT_COMMIT.'.closure', $called);
+        $this->assertArrayHasKey(BitbucketWebhook::EVENT_COMMIT.'.BitbucketWebhookTest::onCommit', $called);
     }
 
     public function testParsePayload()
@@ -61,5 +61,16 @@ class BitbucketWebhookTest extends Base
 
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertArrayHasKey(BitbucketWebhook::EVENT_COMMIT.'.closure', $called);
+    }
+
+    public function onCommit($event)
+    {
+        $data = $event->getAll();
+        $this->assertEquals(1, $data['project_id']);
+        $this->assertEquals(2, $data['task_id']);
+        $this->assertEquals('test2', $data['title']);
+        $this->assertEquals("Fix #2\n\n\nCommit made by @Frederic Guillot on Bitbucket", $data['commit_comment']);
+        $this->assertEquals("Fix #2\n", $data['commit_message']);
+        $this->assertEquals('', $data['commit_url']);
     }
 }

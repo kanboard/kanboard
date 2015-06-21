@@ -33,7 +33,7 @@ class GitlabWebhookTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $g->setProjectId(1);
 
-        $this->container['dispatcher']->addListener(GitlabWebhook::EVENT_COMMIT, function() {});
+        $this->container['dispatcher']->addListener(GitlabWebhook::EVENT_COMMIT, array($this, 'onCommit'));
 
         $event = json_decode($this->push_payload, true);
 
@@ -41,15 +41,15 @@ class GitlabWebhookTest extends Base
         $this->assertFalse($g->handleCommit($event['commits'][0]));
 
         // Create task with the wrong id
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test1', 'project_id' => 1)));
         $this->assertFalse($g->handleCommit($event['commits'][0]));
 
         // Create task with the right id
-        $this->assertEquals(2, $tc->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'test2', 'project_id' => 1)));
         $this->assertTrue($g->handleCommit($event['commits'][0]));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(GitlabWebhook::EVENT_COMMIT.'.closure', $called);
+        $this->assertArrayHasKey(GitlabWebhook::EVENT_COMMIT.'.GitlabWebhookTest::onCommit', $called);
     }
 
     public function testHandleIssueOpened()
@@ -115,5 +115,16 @@ class GitlabWebhookTest extends Base
         $this->assertEquals(1, $data['project_id']);
         $this->assertEquals(1, $data['task_id']);
         $this->assertEquals(103361, $data['reference']);
+    }
+
+    public function onCommit($event)
+    {
+        $data = $event->getAll();
+        $this->assertEquals(1, $data['project_id']);
+        $this->assertEquals(2, $data['task_id']);
+        $this->assertEquals('test2', $data['title']);
+        $this->assertEquals("Fix bug #2\n\n\n[Commit made by @Frédéric Guillot on Gitlab](https://gitlab.com/minicoders/kanboard/commit/b3caaee62ad27dc31497946065ac18299784aee4)", $data['commit_comment']);
+        $this->assertEquals("Fix bug #2\n", $data['commit_message']);
+        $this->assertEquals('https://gitlab.com/minicoders/kanboard/commit/b3caaee62ad27dc31497946065ac18299784aee4', $data['commit_url']);
     }
 }

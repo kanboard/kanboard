@@ -90,12 +90,19 @@ class GithubWebhook extends \Core\Base
                 continue;
             }
 
-            if ($task['project_id'] == $this->project_id) {
-                $this->container['dispatcher']->dispatch(
-                    self::EVENT_COMMIT,
-                    new GenericEvent(array('task_id' => $task_id) + $task)
-                );
+            if ($task['project_id'] != $this->project_id) {
+                continue;
             }
+
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_COMMIT,
+                new GenericEvent(array(
+                    'task_id' => $task_id,
+                    'commit_message' => $commit['message'],
+                    'commit_url' => $commit['url'],
+                    'commit_comment' => $commit['message']."\n\n[".t('Commit made by @%s on Github', $commit['author']['username']).']('.$commit['url'].')'
+                ) + $task)
+            );
         }
 
         return true;
