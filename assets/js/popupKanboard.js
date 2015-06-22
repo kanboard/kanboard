@@ -3,8 +3,33 @@
  */
 
 $( document ).ready(function() {
-    var redirectUrl = '<?php echo $jsonUrl ;?>';
-    console.log(redirectUrl);
-    //Kanboard.OpenPopover('?controller=task&action=create&project_id=1&category_id=0&column_id=1&color_id=yellow&score=&time_estimated=&date_due=&creator_id=1', Kanboard.InitAfterAjax);
-    //?controller=task&action=create&another_task=1&project_id=1&owner_id=1&category_id=0&column_id=1&color_id=yellow&score=&time_estimated=&date_due=&creator_id=1
+    var project_id = GetURLParameter('project_id');
+    var redirect = GetURLParameter('redirect');
+    var urlVariables = GetURLStrings('&redirect=true');
+    console.log(redirect);
+    console.log(project_id);
+    console.log(urlVariables[0]);
+    console.log(urlVariables[1]);
+    if (redirect == 'true') {
+        var popoverUrl = '?controller=task&action=create&project_id=' + project_id + urlVariables[1];
+        console.log(popoverUrl);
+        Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
+    }
 });
+
+function GetURLParameter(parameter) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == parameter) {
+            return sParameterName[1];
+        }
+    }
+}
+
+function GetURLStrings(parameter) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split(parameter);
+    return sURLVariables;
+}
