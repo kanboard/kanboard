@@ -65,31 +65,7 @@ class Analytic extends Base
      */
     public function cfd()
     {
-        $project = $this->getProject();
-        $values = $this->request->getValues();
-
-        $from = $this->request->getStringParam('from', date('Y-m-d', strtotime('-1week')));
-        $to = $this->request->getStringParam('to', date('Y-m-d'));
-
-        if (! empty($values)) {
-            $from = $values['from'];
-            $to = $values['to'];
-        }
-
-        $display_graph = $this->projectDailySummary->countDays($project['id'], $from, $to) >= 2;
-
-        $this->response->html($this->layout('analytic/cfd', array(
-            'values' => array(
-                'from' => $from,
-                'to' => $to,
-            ),
-            'display_graph' => $display_graph,
-            'metrics' => $display_graph ? $this->projectDailySummary->getAggregatedMetrics($project['id'], $from, $to) : array(),
-            'project' => $project,
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
-            'title' => t('Cumulative flow diagram for "%s"', $project['name']),
-        )));
+        $this->commonAggregateMetrics('analytic/cfd', 'total', 'Cumulative flow diagram for "%s"');
     }
 
     /**
@@ -98,6 +74,16 @@ class Analytic extends Base
      * @access public
      */
     public function burndown()
+    {
+        $this->commonAggregateMetrics('analytic/burndown', 'score', 'Burndown chart for "%s"');
+    }
+
+    /**
+     * Common method for CFD and Burdown chart
+     *
+     * @access private
+     */
+    private function commonAggregateMetrics($template, $column, $title)
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
@@ -112,17 +98,17 @@ class Analytic extends Base
 
         $display_graph = $this->projectDailySummary->countDays($project['id'], $from, $to) >= 2;
 
-        $this->response->html($this->layout('analytic/burndown', array(
+        $this->response->html($this->layout($template, array(
             'values' => array(
                 'from' => $from,
                 'to' => $to,
             ),
             'display_graph' => $display_graph,
-            'metrics' => $display_graph ? $this->projectDailySummary->getAggregatedMetrics($project['id'], $from, $to, 'score') : array(),
+            'metrics' => $display_graph ? $this->projectDailySummary->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
             'project' => $project,
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
-            'title' => t('Burndown chart for "%s"', $project['name']),
+            'title' => t($title, $project['name']),
         )));
     }
 }
