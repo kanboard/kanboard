@@ -1,5 +1,5 @@
-<?= $this->asset->js('assets/js/vendor/d3.v3.4.8.min.js') ?>
-<?= $this->asset->js('assets/js/vendor/dimple.v2.1.2.min.js') ?>
+<?= $this->asset->js('assets/js/vendor/d3.v3.min.js') ?>
+<?= $this->asset->js('assets/js/vendor/c3.min.js') ?>
 
 <div class="page-header">
     <h2><?= t('Budget overview') ?></h2>
@@ -8,7 +8,8 @@
 <?php if (! empty($daily_budget)): ?>
 <div id="budget-chart">
     <div id="chart"
-         data-serie='<?= json_encode($daily_budget) ?>'
+         data-date-format="<?= e('%%Y-%%m-%%d') ?>"
+         data-metrics='<?= json_encode($daily_budget) ?>'
          data-labels='<?= json_encode(array('in' => t('Budget line'), 'out' => t('Expenses'), 'left' => t('Remaining'), 'value' => t('Amount'), 'date' => t('Date'), 'type' => t('Type'))) ?>'></div>
 </div>
 <hr/>

@@ -3,10 +3,10 @@
 </div>
 
 <?php if (! $display_graph): ?>
-    <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
+    <p class="alert"><?= t('You need at least 2 days of data to show the chart.') ?></p>
 <?php else: ?>
     <section id="analytic-cfd">
-        <div id="chart" data-url="<?= $this->url->href('analytic', 'cfd', array('project_id' => $project['id'], 'from' => $values['from'], 'to' => $values['to'])) ?>"></div>
+        <div id="chart" data-metrics='<?= json_encode($metrics) ?>' data-date-format="<?= e('%%Y-%%m-%%d') ?>"></div>
     </section>
 <?php endif ?>
 

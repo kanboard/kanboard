@@ -943,4 +943,7 @@ return array(
     // 'New due date: %B %e, %Y' => '',
     // 'Start date changed: %B %e, %Y' => '',
     // '%k:%M %p' => '',
+    // '%%Y-%%m-%%d' => '',
+    // 'Total for all columns' => '',
+    // 'You need at least 2 days of data to show the chart.' => '',
 );

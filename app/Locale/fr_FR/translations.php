@@ -945,4 +945,7 @@ return array(
     'New due date: %B %e, %Y' => 'Nouvelle date d\'échéance : %d/%m/%Y',
     'Start date changed: %B %e, %Y' => 'Date de début modifiée : %d/%m/%Y',
     '%k:%M %p' => '%H:%M',
+    '%%Y-%%m-%%d' => '%%d/%%m/%%Y',
+    'Total for all columns' => 'Total pour toutes les colonnes',
+    'You need at least 2 days of data to show the chart.' => 'Vous avez besoin d\'au minimum 2 jours de données pour afficher le graphique.',
 );

@@ -149,9 +149,10 @@ class ProjectDailySummary extends Base
      * @param  integer    $project_id    Project id
      * @param  string     $from          Start date (ISO format YYYY-MM-DD)
      * @param  string     $to            End date
+     * @param  string     $column        Column to aggregate
      * @return array
      */
-    public function getAggregatedMetrics($project_id, $from, $to)
+    public function getAggregatedMetrics($project_id, $from, $to, $column = 'total')
     {
         $columns = $this->board->getColumnsList($project_id);
         $column_ids = array_keys($columns);
@@ -172,7 +173,7 @@ class ProjectDailySummary extends Base
                 $aggregates[$record['day']] = array($record['day']);
             }
 
-            $aggregates[$record['day']][$record['column_id']] = $record['total'];
+            $aggregates[$record['day']][$record['column_id']] = $record[$column];
         }
 
         // Aggregate by row

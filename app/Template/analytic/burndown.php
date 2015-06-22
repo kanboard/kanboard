@@ -6,7 +6,7 @@
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
     <section id="analytic-burndown">
-        <div id="chart" data-url="<?= $this->url->href('analytic', 'burndown', array('project_id' => $project['id'], 'from' => $values['from'], 'to' => $values['to'])) ?>"></div>
+        <div id="chart" data-metrics='<?= json_encode($metrics) ?>' data-date-format="<?= e('%%Y-%%m-%%d') ?>" data-label-total="<?= t('Total for all columns') ?>"></div>
     </section>
 <?php endif ?>
 
