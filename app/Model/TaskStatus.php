@@ -54,6 +54,18 @@ class TaskStatus extends Base
     }
 
     /**
+     * Mark a task flagged
+     *
+     * @access public
+     * @param  integer   $task_id   Task id
+     * @return boolean
+     */
+    public function flag($task_id)
+    {
+        return $this->changeStatus($task_id, Task::STATUS_OPEN, time(), Task::EVENT_FLAG);
+    }
+
+    /**
      * Mark a task closed
      *
      * @access public

@@ -354,6 +354,61 @@ class Task extends Base
     }
 
     /**
+     * Flag a task
+     *
+     * @access public
+     */
+    public function flag()
+    {
+        $task = $this->getTask();
+        $redirect = $this->request->getStringParam('redirect');
+
+        if ($this->request->getStringParam('confirmation') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            //check if the task is already flagged (EVENT_FLAG)
+
+            $values = array(
+                'id' => $task['id'],
+                'title' => $task['title'],
+                'color_id' => 'flagged'
+            );
+
+            list($valid, $errors) = $this->taskValidator->validateModification($values);
+
+            if ($valid) {
+
+                if ($this->taskModification->update($values)) {
+                    if ($this->taskStatus->flag($task['id'])) {
+                        $this->session->flash(t('Task flagged successfully.'));
+                    } else {
+                        $this->session->flashError(t('Unable to flag this task.'));
+                    }
+
+                    if ($redirect === 'board') {
+                        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+                    }
+
+                    $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+                }
+            }
+        }
+
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->render('task/flag', array(
+                'task' => $task,
+                'redirect' => $redirect,
+            )));
+        }
+
+        $this->response->html($this->taskLayout('task/flag', array(
+            'task' => $task,
+            'redirect' => $redirect,
+        )));
+    }
+
+    /**
      * Remove a task
      *
      * @access public

@@ -52,6 +52,11 @@ class Color extends Base
             'background' => 'rgb(238, 238, 238)',
             'border' => 'rgb(204, 204, 204)',
         ),
+        'flagged' => array(
+            'name' => 'flagged',
+            'background' => 'rgb(204, 0, 0)',
+            'border' => 'rgb(255, 151, 151)',
+        ),
     );
 
     /**
