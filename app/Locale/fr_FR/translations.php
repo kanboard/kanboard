@@ -912,7 +912,7 @@ return array(
     '%s moved the task %s to the swimlane "%s"' => '%s a déplacé la tâche %s dans la swimlane « %s »',
     'This report contains all subtasks information for the given date range.' => 'Ce rapport contient les informations de toutes les sous-tâches pour la période selectionnée.',
     'This report contains all tasks information for the given date range.' => 'Ce rapport contient les informations de toutes les tâches pour la période selectionnée.',
-    'Project activities for %s' => 'Activité du projet « %s »',
+    'Project activities for %s' => 'Activité des projets pour « %s »',
     'view the board on Kanboard' => 'voir la tableau sur Kanboard',
     'The task have been moved to the first swimlane' => 'La tâche a été déplacée dans la première swimlane',
     'The task have been moved to another swimlane:' => 'La tâche a été déplacée dans une autre swimlane :',
