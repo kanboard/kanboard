@@ -1,4 +1,4 @@
-<h2><?= t('My tasks') ?></h2>
+<h2><?= t('My tasks') ?> (<?= $paginator->getTotal() ?>)</h2>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>

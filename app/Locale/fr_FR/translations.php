@@ -501,7 +501,7 @@ return array(
     'Started on %B %e, %Y' => 'Commençé le %d/%m/%Y',
     'Start date' => 'Date de début',
     'Time estimated' => 'Temps estimé',
-    'There is nothing assigned to you.' => 'Aucune tâche assignée pour vous.',
+    'There is nothing assigned to you.' => 'Il n\'y a rien d\'assigné pour vous.',
     'My tasks' => 'Mes tâches',
     'Activity stream' => 'Flux d\'activité',
     'Dashboard' => 'Tableau de bord',
