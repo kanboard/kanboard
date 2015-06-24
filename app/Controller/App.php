@@ -94,16 +94,6 @@ class App extends Base
     }
 
     /**
-     * Colors stylesheet
-     *
-     * @access public
-     */
-    public function colors()
-    {
-        $this->response->css($this->color->getCss());
-    }
-
-    /**
      * Task autocompletion (Ajax)
      *
      * @access public

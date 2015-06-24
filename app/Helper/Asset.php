@@ -16,9 +16,9 @@ class Asset extends \Core\Base
      * @param  string   $filename   Filename
      * @return string
      */
-    public function js($filename)
+    public function js($filename, $async = false)
     {
-        return '<script type="text/javascript" src="'.$filename.'?'.filemtime($filename).'"></script>';
+        return '<script '.($async ? 'async' : '').' type="text/javascript" src="'.$filename.'?'.filemtime($filename).'"></script>';
     }
 
     /**
@@ -47,5 +47,16 @@ class Asset extends \Core\Base
         }
 
         return '';
+    }
+
+    /**
+     * Get CSS for task colors
+     *
+     * @access public
+     * @return string
+     */
+    public function colorCss()
+    {
+        return '<style>'.$this->color->getCss().'</style>';
     }
 }

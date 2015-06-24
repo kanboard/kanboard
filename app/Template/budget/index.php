@@ -1,6 +1,3 @@
-<?= $this->asset->js('assets/js/vendor/d3.v3.min.js') ?>
-<?= $this->asset->js('assets/js/vendor/c3.min.js') ?>
-
 <div class="page-header">
     <h2><?= t('Budget overview') ?></h2>
 </div>
@@ -32,3 +29,6 @@
 <?php else: ?>
     <p class="alert"><?= t('There is not enough data to show something.') ?></p>
 <?php endif ?>
+
+<?= $this->asset->js('assets/js/vendor/d3.v3.min.js') ?>
+<?= $this->asset->js('assets/js/vendor/c3.min.js') ?>

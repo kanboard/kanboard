@@ -12,12 +12,12 @@
         <?php endif ?>
 
         <?php if (! isset($not_editable)): ?>
-            <?= $this->asset->js('assets/js/app.js') ?>
+            <?= $this->asset->js('assets/js/app.js', true) ?>
         <?php endif ?>
 
-        <?= $this->asset->css($this->url->href('app', 'colors'), false, 'all') ?>
         <?= $this->asset->css('assets/css/app.css') ?>
         <?= $this->asset->css('assets/css/print.css', true, 'print') ?>
+        <?= $this->asset->colorCss() ?>
         <?= $this->asset->customCss() ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">

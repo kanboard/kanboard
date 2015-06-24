@@ -21,7 +21,6 @@ class Acl extends Base
         'user' => array('google', 'github'),
         'task' => array('readonly'),
         'board' => array('readonly'),
-        'app' => array('colors'),
         'webhook' => '*',
         'ical' => '*',
         'feed' => '*',
