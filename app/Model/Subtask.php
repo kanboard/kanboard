@@ -346,6 +346,10 @@ class Subtask extends Base
             'task_id' => $subtask['task_id'],
         );
 
+        if (empty($subtask['user_id']) && $this->userSession->isLogged()) {
+            $values['user_id'] = $this->userSession->getId();
+        }
+
         return $this->update($values);
     }
 
