@@ -156,7 +156,7 @@ class ProjectDailySummary extends Base
     {
         $columns = $this->board->getColumnsList($project_id);
         $column_ids = array_keys($columns);
-        $metrics = array(array(e('Date')) + $columns);
+        $metrics = array(array_merge(array(e('Date')), array_values($columns)));
         $aggregates = array();
 
         // Fetch metrics for the project
