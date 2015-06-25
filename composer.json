@@ -5,7 +5,7 @@
         "ext-gd" : "*",
         "christian-riesen/otp" : "1.4",
         "eluceo/ical": "*",
-        "erusev/parsedown" : "1.5.1",
+        "erusev/parsedown" : "1.5.3",
         "fabiang/xmpp" : "0.6.1",
         "fguillot/json-rpc" : "0.0.3",
         "fguillot/picodb" : "dev-master",
