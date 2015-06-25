@@ -316,7 +316,7 @@ class TaskFinder extends Base
                     ->table(Task::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
-                    ->in('is_active', 1)
+                    ->eq('is_active', 1)
                     ->count();
     }
 
@@ -336,7 +336,7 @@ class TaskFinder extends Base
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
                     ->eq('swimlane_id', $swimlane_id)
-                    ->in('is_active', 1)
+                    ->eq('is_active', 1)
                     ->count();
     }
 

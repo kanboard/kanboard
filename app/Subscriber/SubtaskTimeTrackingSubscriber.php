@@ -6,7 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Model\Subtask;
 use Event\SubtaskEvent;
 
-class SubtaskTimesheetSubscriber extends \Core\Base implements EventSubscriberInterface
+class SubtaskTimeTrackingSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
@@ -28,7 +28,7 @@ class SubtaskTimesheetSubscriber extends \Core\Base implements EventSubscriberIn
 
     public function logStartEnd(SubtaskEvent $event)
     {
-        if ($this->config->get('subtask_time_tracking') == 1 && isset($event['status'])) {
+        if (isset($event['status'])) {
 
             $subtask = $this->subtask->getById($event['id']);
 

@@ -301,7 +301,7 @@ class TaskFilter extends Base
      */
     public function toAutoCompletion()
     {
-        return $this->query->columns('id', 'title')->filter(function(array $results) {
+        return $this->query->columns('id', 'title')->callback(function(array $results) {
 
             foreach ($results as &$result) {
                 $result['value'] = $result['title'];

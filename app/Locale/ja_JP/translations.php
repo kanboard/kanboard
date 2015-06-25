@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'ユーザダッシュボード',
     'Allow only one subtask in progress at the same time for a user' => '一人のユーザにつき一つのタスクのみ進行中にできます',
     'Edit column "%s"' => 'カラム「%s」の編集',
-    'Enable time tracking for subtasks' => 'サブタスクのタイムトラッキングを有効',
     'Select the new status of the subtask: "%s"' => 'サブタスク「%s」のステータスを選択',
     'Subtask timesheet' => 'サブタスクタイムシート',
     'There is nothing to show.' => '何も表示するものがありません。',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

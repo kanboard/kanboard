@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Benutzer Dashboard',
     'Allow only one subtask in progress at the same time for a user' => 'Erlaube nur eine Teilaufgabe pro Benutzer zu bearbeiten',
     'Edit column "%s"' => 'Spalte "%s" bearbeiten',
-    'Enable time tracking for subtasks' => 'Aktiviere Zeiterfassung für Teilaufgaben',
     'Select the new status of the subtask: "%s"' => 'Wähle einen neuen Status für Teilaufgabe: "%s"',
     'Subtask timesheet' => 'Teilaufgaben Zeiterfassung',
     'There is nothing to show.' => 'Es ist nichts zum Anzeigen vorhanden.',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

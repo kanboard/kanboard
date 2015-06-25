@@ -256,7 +256,7 @@ class Subtask extends Base
             case 'dashboard':
                 $this->response->redirect($this->helper->url->to('app', 'index'));
             default:
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#subtasks');
         }
     }
 

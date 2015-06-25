@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Painel de Controle do usuário',
     'Allow only one subtask in progress at the same time for a user' => 'Permitir apenas uma subtarefa em andamento ao mesmo tempo para um usuário',
     'Edit column "%s"' => 'Editar a coluna "%s"',
-    'Enable time tracking for subtasks' => 'Ativar a gestão de tempo par a subtarefa',
     'Select the new status of the subtask: "%s"' => 'Selecionar um novo status para a subtarefa: "%s"',
     'Subtask timesheet' => 'Gestão de tempo das subtarefas',
     'There is nothing to show.' => 'Não há nada para mostrar',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

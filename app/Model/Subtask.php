@@ -78,6 +78,8 @@ class Subtask extends Base
 
         foreach ($subtasks as &$subtask) {
             $subtask['status_name'] = $status[$subtask['status']];
+            $subtask['timer_start_date'] = isset($subtask['timer_start_date']) ? $subtask['timer_start_date'] : 0;
+            $subtask['is_timer_started'] = ! empty($subtask['timer_start_date']);
         }
 
         return $subtasks;
@@ -101,12 +103,13 @@ class Subtask extends Base
                 Task::TABLE.'.title AS task_name',
                 Project::TABLE.'.name AS project_name'
             )
+            ->subquery($this->subtaskTimeTracking->getTimerQuery($user_id), 'timer_start_date')
             ->eq('user_id', $user_id)
             ->eq(Project::TABLE.'.is_active', Project::ACTIVE)
             ->in(Subtask::TABLE.'.status', $status)
             ->join(Task::TABLE, 'id', 'task_id')
             ->join(Project::TABLE, 'id', 'project_id', Task::TABLE)
-            ->filter(array($this, 'addStatusName'));
+            ->callback(array($this, 'addStatusName'));
     }
 
     /**
@@ -121,10 +124,15 @@ class Subtask extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->eq('task_id', $task_id)
-                    ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
+                    ->columns(
+                        self::TABLE.'.*',
+                        User::TABLE.'.username',
+                        User::TABLE.'.name'
+                    )
+                    ->subquery($this->subtaskTimeTracking->getTimerQuery($this->userSession->getId()), 'timer_start_date')
                     ->join(User::TABLE, 'id', 'user_id')
                     ->asc(self::TABLE.'.position')
-                    ->filter(array($this, 'addStatusName'))
+                    ->callback(array($this, 'addStatusName'))
                     ->findAll();
     }
 
@@ -144,8 +152,9 @@ class Subtask extends Base
                         ->table(self::TABLE)
                         ->eq(self::TABLE.'.id', $subtask_id)
                         ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
+                        ->subquery($this->subtaskTimeTracking->getTimerQuery($this->userSession->getId()), 'timer_start_date')
                         ->join(User::TABLE, 'id', 'user_id')
-                        ->filter(array($this, 'addStatusName'))
+                        ->callback(array($this, 'addStatusName'))
                         ->findOne();
         }
 

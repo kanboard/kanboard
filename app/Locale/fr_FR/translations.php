@@ -616,7 +616,6 @@ return array(
     'User dashboard' => 'Tableau de bord de l\'utilisateur',
     'Allow only one subtask in progress at the same time for a user' => 'Autoriser une seule sous-tâche en progrès en même temps pour un utilisateur',
     'Edit column "%s"' => 'Modifier la colonne « %s »',
-    'Enable time tracking for subtasks' => 'Activer la feuille de temps pour les sous-tâches',
     'Select the new status of the subtask: "%s"' => 'Selectionnez le nouveau statut de la sous-tâche : « %s »',
     'Subtask timesheet' => 'Feuille de temps des sous-tâches',
     'There is nothing to show.' => 'Il n\'y a rien à montrer.',
@@ -948,4 +947,8 @@ return array(
     '%%Y-%%m-%%d' => '%%d/%%m/%%Y',
     'Total for all columns' => 'Total pour toutes les colonnes',
     'You need at least 2 days of data to show the chart.' => 'Vous avez besoin d\'au minimum 2 jours de données pour afficher le graphique.',
+    '<15m' => '<15m',
+    '<30m' => '<30m',
+    'Stop timer' => 'Stopper le chrono',
+    'Start timer' => 'Démarrer le chrono',
 );

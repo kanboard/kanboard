@@ -20,6 +20,27 @@ class SubtaskTimeTracking extends Base
     const TABLE = 'subtask_time_tracking';
 
     /**
+     * Get query to check if a timer is started for the given user and subtask
+     *
+     * @access public
+     * @param  integer    $user_id   User id
+     * @return string
+     */
+    public function getTimerQuery($user_id)
+    {
+        return sprintf(
+            "SELECT %s FROM %s WHERE %s='%d' AND %s='0' AND %s=%s",
+            $this->db->escapeIdentifier('start'),
+            $this->db->escapeIdentifier(self::TABLE),
+            $this->db->escapeIdentifier('user_id'),
+            $user_id,
+            $this->db->escapeIdentifier('end'),
+            $this->db->escapeIdentifier('subtask_id'),
+            Subtask::TABLE.'.id'
+        );
+    }
+
+    /**
      * Get query for user timesheet (pagination)
      *
      * @access public
@@ -217,7 +238,7 @@ class SubtaskTimeTracking extends Base
     {
         return $this->db
                     ->table(self::TABLE)
-                    ->insert(array('subtask_id' => $subtask_id, 'user_id' => $user_id, 'start' => time()));
+                    ->insert(array('subtask_id' => $subtask_id, 'user_id' => $user_id, 'start' => time(), 'end' => 0));
     }
 
     /**

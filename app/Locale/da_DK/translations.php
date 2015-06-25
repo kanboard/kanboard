@@ -614,7 +614,6 @@ return array(
     // 'User dashboard' => '',
     // 'Allow only one subtask in progress at the same time for a user' => '',
     // 'Edit column "%s"' => '',
-    // 'Enable time tracking for subtasks' => '',
     // 'Select the new status of the subtask: "%s"' => '',
     // 'Subtask timesheet' => '',
     // 'There is nothing to show.' => '',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

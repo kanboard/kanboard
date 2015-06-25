@@ -6,6 +6,18 @@ use Helper\Datetime;
 
 class DatetimeHelperTest extends Base
 {
+    public function testAge()
+    {
+        $h = new Datetime($this->container);
+
+        $this->assertEquals('&lt;15m', $h->age(0, 30));
+        $this->assertEquals('&lt;30m', $h->age(0, 1000));
+        $this->assertEquals('&lt;1h', $h->age(0, 3000));
+        $this->assertEquals('~2h', $h->age(0, 2*3600));
+        $this->assertEquals('1d', $h->age(0, 30*3600));
+        $this->assertEquals('2d', $h->age(0, 65*3600));
+    }
+
     public function testGetDayHours()
     {
         $h = new Datetime($this->container);

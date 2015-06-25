@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Пользователь панели мониторинга',
     'Allow only one subtask in progress at the same time for a user' => 'Разрешена только одна подзадача в разработке одновременно для одного пользователя',
     'Edit column "%s"' => 'Редактировать колонку "%s"',
-    'Enable time tracking for subtasks' => 'Включить учет времени для подзадач',
     'Select the new status of the subtask: "%s"' => 'Выбрать новый статус для подзадачи: "%s"',
     'Subtask timesheet' => 'Табель времени подзадач',
     'There is nothing to show.' => 'Здесь ничего нет.',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

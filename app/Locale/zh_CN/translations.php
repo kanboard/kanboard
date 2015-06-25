@@ -614,7 +614,6 @@ return array(
     'User dashboard' => '用户仪表板',
     'Allow only one subtask in progress at the same time for a user' => '每用户同时仅有一个活动子任务',
     'Edit column "%s"' => '编辑栏目"%s"',
-    'Enable time tracking for subtasks' => '启用子任务的时间记录',
     'Select the new status of the subtask: "%s"' => '选择子任务的新状态："%s"',
     'Subtask timesheet' => '子任务时间',
     'There is nothing to show.' => '无内容。',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

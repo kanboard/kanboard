@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Panel użytkownika',
     'Allow only one subtask in progress at the same time for a user' => 'Zezwalaj na tylko jedno pod-zadanie o statusie "w trakcie" jednocześnie',
     'Edit column "%s"' => 'Zmień kolumnę "%s"',
-    'Enable time tracking for subtasks' => 'Włącz śledzenie czasu dla pod-zadań',
     'Select the new status of the subtask: "%s"' => 'Wybierz nowy status dla pod-zadania: "%s"',
     'Subtask timesheet' => 'Oś czasu pod-zadania',
     'There is nothing to show.' => 'Nie nic do wyświetlenia',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

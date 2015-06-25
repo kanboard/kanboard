@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'ผู้ใช้แดชบอร์ด',
     'Allow only one subtask in progress at the same time for a user' => 'อนุญาตให้ทำงานย่อยได้เพียงงานเดียวต่อหนึ่งคนในเวลาเดียวกัน',
     'Edit column "%s"' => 'แก้ไขคอลัมน์ "%s"',
-    'Enable time tracking for subtasks' => 'สามารถติดตามเวลาของงานย่อย',
     'Select the new status of the subtask: "%s"' => 'เลือกสถานะใหม่ของงานย่อย: "%s"',
     'Subtask timesheet' => 'เวลางานย่อย',
     'There is nothing to show.' => 'ไม่มีที่ต้องแสดง',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

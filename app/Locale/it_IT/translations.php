@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Bacheca utente',
     'Allow only one subtask in progress at the same time for a user' => 'Permetti un solo sotto-compito in progresso per utente nello stesso tempo',
     'Edit column "%s"' => 'Modifica la colonna "%s"',
-    'Enable time tracking for subtasks' => 'Abilita la gestione del tempo per i sotto-compiti',
     'Select the new status of the subtask: "%s"' => 'Selziona il nuovo status per il sotto-compito: "%s"',
     'Subtask timesheet' => 'Timesheet del sotto-compito',
     'There is nothing to show.' => 'Nulla da mostrare.',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

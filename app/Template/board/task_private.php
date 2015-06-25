@@ -32,8 +32,8 @@
         </span>
 
         <div class="task-board-days">
-            <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->task->age($task['date_creation']) ?></span>
-            <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->task->age($task['date_moved']) ?></span>
+            <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->datetime->age($task['date_creation']) ?></span>
+            <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->datetime->age($task['date_moved']) ?></span>
         </div>
 
         <div class="task-board-title">

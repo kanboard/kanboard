@@ -6,7 +6,12 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 72;
+const VERSION = 73;
+
+function version_73($pdo)
+{
+    $pdo->exec("DELETE FROM settings WHERE option='subtask_time_tracking'");
+}
 
 function version_72($pdo)
 {

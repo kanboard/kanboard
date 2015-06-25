@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Gebruiker dashboard',
     'Allow only one subtask in progress at the same time for a user' => 'Sta maximaal één subtaak in behandeling toe per gebruiker',
     'Edit column "%s"' => 'Kolom « %s » aanpassen',
-    'Enable time tracking for subtasks' => 'Activeer tijdschrijven voor subtaken',
     'Select the new status of the subtask: "%s"' => 'Selecteer nieuwe status voor subtaak : « %s »',
     'Subtask timesheet' => 'Subtaak timesheet',
     'There is nothing to show.' => 'Er is niets om te laten zijn.',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

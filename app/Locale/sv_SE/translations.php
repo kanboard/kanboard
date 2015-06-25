@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Användardashboard',
     'Allow only one subtask in progress at the same time for a user' => 'Tillåt endast en deluppgift igång samtidigt för en användare',
     'Edit column "%s"' => 'Ändra kolumn "%s"',
-    'Enable time tracking for subtasks' => 'Aktivera tidsbevakning för deluppgifter',
     'Select the new status of the subtask: "%s"' => 'Välj ny status för deluppgiften: "%s"',
     'Subtask timesheet' => 'Tidrapport för deluppgiften',
     'There is nothing to show.' => 'Det finns inget att visa',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

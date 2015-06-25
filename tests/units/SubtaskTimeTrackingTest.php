@@ -9,9 +9,61 @@ use Model\SubtaskTimeTracking;
 use Model\Project;
 use Model\Category;
 use Model\User;
+use Core\Session;
 
 class SubtaskTimeTrackingTest extends Base
 {
+    public function testGetTimerStatus()
+    {
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $st = new SubtaskTimeTracking($this->container);
+        $p = new Project($this->container);
+        $ss = new Session;
+
+        $ss['user'] = array('id' => 1);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1, 'user_id' => 1)));
+
+        // Nothing started
+        $subtasks = $s->getAll(1);
+        $this->assertNotEmpty($subtasks);
+        $this->assertEquals(0, $subtasks[0]['timer_start_date']);
+        $this->assertFalse($subtasks[0]['is_timer_started']);
+
+        $subtask = $s->getbyId(1, true);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(0, $subtask['timer_start_date']);
+        $this->assertFalse($subtask['is_timer_started']);
+
+        // Start the clock
+        $this->assertTrue($st->logStartTime(1, 1));
+
+        $subtasks = $s->getAll(1);
+        $this->assertNotEmpty($subtasks);
+        $this->assertEquals(time(), $subtasks[0]['timer_start_date'], '', 3);
+        $this->assertTrue($subtasks[0]['is_timer_started']);
+
+        $subtask = $s->getbyId(1, true);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(time(), $subtask['timer_start_date'], '', 3);
+        $this->assertTrue($subtask['is_timer_started']);
+
+        // Stop the clock
+        $this->assertTrue($st->logEndTime(1, 1));
+        $subtasks = $s->getAll(1);
+        $this->assertNotEmpty($subtasks);
+        $this->assertEquals(0, $subtasks[0]['timer_start_date']);
+        $this->assertFalse($subtasks[0]['is_timer_started']);
+
+        $subtask = $s->getbyId(1, true);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(0, $subtask['timer_start_date']);
+        $this->assertFalse($subtask['is_timer_started']);
+    }
+
     public function testLogStartTime()
     {
         $tc = new TaskCreation($this->container);

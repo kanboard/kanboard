@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4aed9321378ab6e96c0fd0170b379c38",
+    "hash": "c5913f9f57295aae111f3a29b385dafb",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -297,16 +297,16 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "v0.0.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "f65d11cb52de34e0fd236a34184ca1a310da244a"
+                "reference": "dd08649713c9d8330b3c5fa23220a11cb5da3e79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/f65d11cb52de34e0fd236a34184ca1a310da244a",
-                "reference": "f65d11cb52de34e0fd236a34184ca1a310da244a",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/dd08649713c9d8330b3c5fa23220a11cb5da3e79",
+                "reference": "dd08649713c9d8330b3c5fa23220a11cb5da3e79",
                 "shasum": ""
             },
             "require": {
@@ -330,7 +330,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2015-05-17 23:57:05"
+            "time": "2015-06-24 21:58:15"
         },
         {
             "name": "fguillot/simple-validator",
@@ -820,6 +820,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "fguillot/picodb": 20,
         "swiftmailer/swiftmailer": 0,
         "symfony/console": 0
     },

@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Felhasználói vezérlőpult',
     'Allow only one subtask in progress at the same time for a user' => 'Egyszerre csak egy folyamatban levő részfeladat engedélyezése a felhasználóknak',
     'Edit column "%s"' => 'Oszlop szerkesztés: %s',
-    'Enable time tracking for subtasks' => 'Idő követés engedélyezése a részfeladatokhoz',
     'Select the new status of the subtask: "%s"' => 'Részfeladat állapot változtatás: %s',
     'Subtask timesheet' => 'Részfeladat idővonal',
     'There is nothing to show.' => 'Nincs megjelenítendő adat.',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

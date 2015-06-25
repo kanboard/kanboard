@@ -614,7 +614,6 @@ return array(
     'User dashboard' => 'Kullanıcı Anasayfası',
     'Allow only one subtask in progress at the same time for a user' => 'Bir kullanıcı için aynı anda yalnızca bir alt göreve izin ver',
     'Edit column "%s"' => '"%s" sütununu değiştir',
-    'Enable time tracking for subtasks' => 'Alt görevler için zaman takibini etkinleştir',
     'Select the new status of the subtask: "%s"' => '"%s" alt görevi için yeni durum seçin.',
     'Subtask timesheet' => 'Alt görev için zaman takip tablosu',
     'There is nothing to show.' => 'Gösterilecek hiçbir şey yok.',
@@ -946,4 +945,8 @@ return array(
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',
+    // '<15m' => '',
+    // '<30m' => '',
+    // 'Stop timer' => '',
+    // 'Start timer' => '',
 );

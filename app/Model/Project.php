@@ -276,7 +276,7 @@ class Project extends Base
         return $this->db
                     ->table(Project::TABLE)
                     ->in('id', $project_ids)
-                    ->filter(array($this, 'applyColumnStats'));
+                    ->callback(array($this, 'applyColumnStats'));
     }
 
     /**
