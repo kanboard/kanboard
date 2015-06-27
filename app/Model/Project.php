@@ -111,7 +111,7 @@ class Project extends Base
      */
     public function isPrivate($project_id)
     {
-        return (bool) $this->db->table(self::TABLE)->eq('id', $project_id)->eq('is_private', 1)->count();
+        return $this->db->table(self::TABLE)->eq('id', $project_id)->eq('is_private', 1)->exists();
     }
 
     /**
@@ -305,7 +305,7 @@ class Project extends Base
             return false;
         }
 
-        $project_id = $this->db->getConnection()->getLastId();
+        $project_id = $this->db->getLastId();
 
         if (! $this->board->create($project_id, $this->board->getUserColumns())) {
             $this->db->cancelTransaction();
@@ -391,7 +391,7 @@ class Project extends Base
      */
     public function exists($project_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $project_id)->count() === 1;
+        return $this->db->table(self::TABLE)->eq('id', $project_id)->exists();
     }
 
     /**

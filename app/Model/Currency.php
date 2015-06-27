@@ -64,7 +64,7 @@ class Currency extends Base
      */
     public function create($currency, $rate)
     {
-        if ($this->db->table(self::TABLE)->eq('currency', $currency)->count() === 1) {
+        if ($this->db->table(self::TABLE)->eq('currency', $currency)->exists()) {
             return $this->update($currency, $rate);
         }
 

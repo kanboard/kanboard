@@ -133,7 +133,7 @@ class TaskLink extends Base
             'link_id' => $link_id,
         ));
 
-        $task_link_id = $this->db->getConnection()->getLastId();
+        $task_link_id = $this->db->getLastId();
 
         // Create the opposite task link
         $this->db->table(self::TABLE)->insert(array(

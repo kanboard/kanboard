@@ -390,7 +390,7 @@ class Subtask extends Base
                $this->db->table(self::TABLE)
                         ->eq('status', self::STATUS_INPROGRESS)
                         ->eq('user_id', $user_id)
-                        ->count() === 1;
+                        ->exists();
     }
 
     /**

@@ -80,7 +80,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
             new Stopwatch
         );
 
-        $this->container['db']->log_queries = true;
+        $this->container['db']->logQueries = true;
 
         $this->container['logger'] = new Logger;
         $this->container['logger']->setLogger(new File('/dev/null'));

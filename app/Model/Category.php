@@ -30,7 +30,7 @@ class Category extends Base
      */
     public function exists($category_id, $project_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $category_id)->eq('project_id', $project_id)->count() > 0;
+        return $this->db->table(self::TABLE)->eq('id', $category_id)->eq('project_id', $project_id)->exists();
     }
 
     /**

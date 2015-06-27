@@ -39,7 +39,7 @@ class ProjectIntegration extends Base
      */
     public function saveParameters($project_id, array $values)
     {
-        if ($this->db->table(self::TABLE)->eq('project_id', $project_id)->count() === 1) {
+        if ($this->db->table(self::TABLE)->eq('project_id', $project_id)->exists()) {
             return $this->db->table(self::TABLE)->eq('project_id', $project_id)->update($values);
         }
 
@@ -61,6 +61,6 @@ class ProjectIntegration extends Base
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq($option, $value)
-                    ->count() === 1;
+                    ->exists();
     }
 }

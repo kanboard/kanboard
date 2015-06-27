@@ -219,7 +219,7 @@ class ProjectPermission extends Base
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
-                    ->count() === 1;
+                    ->exists();
 	}
 
 	/**
@@ -237,7 +237,7 @@ class ProjectPermission extends Base
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
                     ->eq('is_owner', 1)
-                    ->count() === 1;
+                    ->exists();
     }
 
     /**
@@ -266,7 +266,7 @@ class ProjectPermission extends Base
                     ->table(Project::TABLE)
                     ->eq('id', $project_id)
                     ->eq('is_everybody_allowed', 1)
-                    ->count() === 1;
+                    ->exists();
     }
 
     /**

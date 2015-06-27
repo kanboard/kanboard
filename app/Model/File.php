@@ -105,7 +105,7 @@ class File extends Base
                 new FileEvent(array('task_id' => $task_id, 'name' => $name))
             );
 
-            return (int) $this->db->getConnection()->getLastId();
+            return (int) $this->db->getLastId();
         }
 
         return false;

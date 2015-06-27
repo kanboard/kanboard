@@ -241,7 +241,7 @@ class Action extends Base
             return false;
         }
 
-        $action_id = $this->db->getConnection()->getLastId();
+        $action_id = $this->db->getLastId();
 
         foreach ($values['params'] as $param_name => $param_value) {
 
@@ -329,7 +329,7 @@ class Action extends Base
                 continue;
             }
 
-            $action_id = $this->db->getConnection()->getLastId();
+            $action_id = $this->db->getLastId();
 
             if (! $this->duplicateParameters($dst_project_id, $action_id, $action['params'])) {
                 $this->container['logger']->debug('Action::duplicate => unable to copy parameters for '.$action['action_name']);

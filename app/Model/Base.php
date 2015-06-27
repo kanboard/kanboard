@@ -48,7 +48,7 @@ abstract class Base extends \Core\Base
                 return false;
             }
 
-            return (int) $db->getConnection()->getLastId();
+            return (int) $db->getLastId();
         });
     }
 

@@ -38,7 +38,7 @@ class User extends Base
      */
     public function exists($user_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $user_id)->count() === 1;
+        return $this->db->table(self::TABLE)->eq('id', $user_id)->exists();
     }
 
     /**
