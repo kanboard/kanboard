@@ -82,7 +82,7 @@ class TaskLink extends Base
                     ->join(Task::TABLE, 'id', 'opposite_task_id')
                     ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
                     ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
-                    ->orderBy(Link::TABLE.'.id ASC, '.Board::TABLE.'.position ASC, '.Task::TABLE.'.is_active DESC, '.Task::TABLE.'.id', Table::SORT_ASC)
+                    ->orderBy(Link::TABLE.'.id ASC, '.Board::TABLE.'.position DESC, '.Task::TABLE.'.is_active DESC, '.Task::TABLE.'.position ASC, '.Task::TABLE.'.id', Table::SORT_ASC)
                     ->findAll();
     }
 
