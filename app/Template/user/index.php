@@ -18,7 +18,6 @@
                 <th><?= $paginator->order(t('Email'), 'email') ?></th>
                 <th><?= $paginator->order(t('Administrator'), 'is_admin') ?></th>
                 <th><?= $paginator->order(t('Two factor authentication'), 'twofactor_activated') ?></th>
-                <th><?= $paginator->order(t('Default project'), 'default_project_id') ?></th>
                 <th><?= $paginator->order(t('Notifications'), 'notifications_enabled') ?></th>
                 <th><?= t('External accounts') ?></th>
                 <th><?= $paginator->order(t('Account type'), 'is_ldap_user') ?></th>

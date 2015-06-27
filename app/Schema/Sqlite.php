@@ -903,8 +903,7 @@ function version_1($pdo)
             id INTEGER PRIMARY KEY,
             username TEXT NOT NULL,
             password TEXT,
-            is_admin INTEGER DEFAULT 0,
-            default_project_id INTEGER DEFAULT 0
+            is_admin INTEGER DEFAULT 0
         )
     ");
 

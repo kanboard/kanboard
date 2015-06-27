@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 76;
+const VERSION = 77;
+
+function version_77($pdo)
+{
+    $pdo->exec('ALTER TABLE users DROP COLUMN `default_project_id`');
+}
 
 function version_76($pdo)
 {

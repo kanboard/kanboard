@@ -33,7 +33,6 @@ class UserSession extends Base
         }
 
         $user['id'] = (int) $user['id'];
-        $user['default_project_id'] = (int) $user['default_project_id'];
         $user['is_admin'] = (bool) $user['is_admin'];
         $user['is_ldap_user'] = (bool) $user['is_ldap_user'];
         $user['twofactor_activated'] = (bool) $user['twofactor_activated'];
@@ -94,38 +93,5 @@ class UserSession extends Base
     public function isLogged()
     {
         return ! empty($this->session['user']);
-    }
-
-    /**
-     * Get the last seen project from the session
-     *
-     * @access public
-     * @return integer
-     */
-    public function getLastSeenProjectId()
-    {
-        return empty($this->session['last_show_project_id']) ? 0 : $this->session['last_show_project_id'];
-    }
-
-    /**
-     * Get the default project from the session
-     *
-     * @access public
-     * @return integer
-     */
-    public function getFavoriteProjectId()
-    {
-        return isset($this->session['user']['default_project_id']) ? $this->session['user']['default_project_id'] : 0;
-    }
-
-    /**
-     * Set the last seen project from the session
-     *
-     * @access public
-     * @param integer    $project_id    Project id
-     */
-    public function storeLastSeenProjectId($project_id)
-    {
-        $this->session['last_show_project_id'] = (int) $project_id;
     }
 }

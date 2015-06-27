@@ -24,9 +24,6 @@
         <?= $this->form->label(t('Confirmation'), 'confirmation') ?>
         <?= $this->form->password('confirmation', $values, $errors, array('required')) ?><br/>
 
-        <?= $this->form->label(t('Default project'), 'default_project_id') ?>
-        <?= $this->form->select('default_project_id', $projects, $values, $errors) ?><br/>
-
         <?= $this->form->label(t('Timezone'), 'timezone') ?>
         <?= $this->form->select('timezone', $timezones, $values, $errors) ?><br/>
 

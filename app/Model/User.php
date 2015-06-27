@@ -57,7 +57,6 @@ class User extends Base
                         'name',
                         'email',
                         'is_admin',
-                        'default_project_id',
                         'is_ldap_user',
                         'notifications_enabled',
                         'google_id',
@@ -377,7 +376,6 @@ class User extends Base
             new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
             new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
             new Validators\Email('email', t('Email address invalid')),
-            new Validators\Integer('default_project_id', t('This value must be an integer')),
             new Validators\Integer('is_admin', t('This value must be an integer')),
         );
     }

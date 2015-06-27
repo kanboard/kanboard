@@ -27,7 +27,7 @@ class User extends Base
         return $this->user->remove($user_id);
     }
 
-    public function createUser($username, $password, $name = '', $email = '', $is_admin = 0, $default_project_id = 0)
+    public function createUser($username, $password, $name = '', $email = '', $is_admin = 0)
     {
         $values = array(
             'username' => $username,
@@ -36,7 +36,6 @@ class User extends Base
             'name' => $name,
             'email' => $email,
             'is_admin' => $is_admin,
-            'default_project_id' => $default_project_id,
         );
 
         list($valid,) = $this->user->validateCreation($values);
@@ -44,7 +43,7 @@ class User extends Base
         return $valid ? $this->user->create($values) : false;
     }
 
-    public function createLdapUser($username = '', $email = '', $is_admin = 0, $default_project_id = 0)
+    public function createLdapUser($username = '', $email = '', $is_admin = 0)
     {
         $ldap = new Ldap($this->container);
         $user = $ldap->lookup($username, $email);
@@ -59,13 +58,12 @@ class User extends Base
             'email' => $user['email'],
             'is_ldap_user' => 1,
             'is_admin' => $is_admin,
-            'default_project_id' => $default_project_id,
         );
 
         return $this->user->create($values);
     }
 
-    public function updateUser($id, $username = null, $name = null, $email = null, $is_admin = null, $default_project_id = null)
+    public function updateUser($id, $username = null, $name = null, $email = null, $is_admin = null)
     {
         $values = array(
             'id' => $id,
@@ -73,7 +71,6 @@ class User extends Base
             'name' => $name,
             'email' => $email,
             'is_admin' => $is_admin,
-            'default_project_id' => $default_project_id,
         );
 
         foreach ($values as $key => $value) {

@@ -2367,7 +2367,6 @@ Response example:
     - **name** (string, optional)
     - **email** (string, optional)
     - **is_admin** Set the value 1 for admins or 0 for regular users (integer, optional)
-    - **default_project_id** (integer, optional)
 - Result on success: **user_id**
 - Result on failure: **false**
 
@@ -2402,7 +2401,6 @@ Response example:
     - **username** (string, optional if email is set)
     - **email** (string, optional if username is set)
     - **is_admin** Set the value 1 for admins or 0 for regular users (integer, optional)
-    - **default_project_id** (integer, optional)
 - Result on success: **user_id**
 - Result on failure: **false**
 
@@ -2464,7 +2462,6 @@ Response example:
         "username": "biloute",
         "password": "$2y$10$dRs6pPoBu935RpmsrhmbjevJH5MgZ7Kr9QrnVINwwyZ3.MOwqg.0m",
         "is_admin": "0",
-        "default_project_id": "0",
         "is_ldap_user": "0",
         "name": "",
         "email": "",
@@ -2506,7 +2503,6 @@ Response example:
             "name": "",
             "email": "",
             "is_admin": "0",
-            "default_project_id": "0",
             "is_ldap_user": "0",
             "notifications_enabled": "0",
             "google_id": null,
@@ -2526,7 +2522,6 @@ Response example:
     - **name** (string, optional)
     - **email** (string, optional)
     - **is_admin** (integer, optional)
-    - **default_project_id** (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
 

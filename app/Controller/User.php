@@ -360,7 +360,6 @@ class User extends Base
         $this->response->html($this->layout('user/edit', array(
             'values' => $values,
             'errors' => $errors,
-            'projects' => $this->projectPermission->filterProjects($this->project->getList(), $user['id']),
             'user' => $user,
             'timezones' => $this->config->getTimezones(true),
             'languages' => $this->config->getLanguages(true),

@@ -45,35 +45,6 @@ class Board extends Base
     }
 
     /**
-     * Redirect the user to the default project
-     *
-     * @access public
-     */
-    public function index()
-    {
-        $last_seen_project_id = $this->userSession->getLastSeenProjectId();
-        $favorite_project_id = $this->userSession->getFavoriteProjectId();
-        $project_id = $last_seen_project_id ?: $favorite_project_id;
-
-        if (! $project_id) {
-            $projects = $this->projectPermission->getAllowedProjects($this->userSession->getId());
-
-            if (empty($projects)) {
-
-                if ($this->userSession->isAdmin()) {
-                    $this->redirectNoProject();
-                }
-
-                $this->forbidden();
-            }
-
-            $project_id = key($projects);
-        }
-
-        $this->show($project_id);
-    }
-
-    /**
      * Show a board for a given project
      *
      * @access public
@@ -86,8 +57,6 @@ class Board extends Base
 
         $board_selector = $projects;
         unset($board_selector[$project['id']]);
-
-        $this->userSession->storeLastSeenProjectId($project['id']);
 
         list($categories_listing, $categories_description) = $this->category->getBoardCategories($project['id']);
 
