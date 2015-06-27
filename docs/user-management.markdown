@@ -27,12 +27,12 @@ To add a new user, you must be administrator.
 2. On the top, you have a link **New user**
 3. Fill the form and save
 
-When you create a new user, you have to specify those values:
+![New user](http://kanboard.net/screenshots/documentation/new-user.png)
+
+When you create a new user, you have to specify at least those values:
 
 - **username**: This is the unique identifier of your user (login)
 - **password**: The password of your user must have at least 6 characters
-
-Eventually, you can choose to assign a default project to this user and allow him to be administrator.
 
 Edit users
 ----------

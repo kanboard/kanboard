@@ -77,7 +77,7 @@ select:focus {
 }
 
 .form-actions {
-    margin-top: 20px;
+    padding-top: 20px;
     clear: both;
 }
 

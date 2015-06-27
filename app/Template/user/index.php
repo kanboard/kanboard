@@ -43,9 +43,6 @@
                     <?= $user['twofactor_activated'] ? t('Yes') : t('No') ?>
                 </td>
                 <td>
-                    <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $this->e($projects[$user['default_project_id']]) : t('None'); ?>
-                </td>
-                <td>
                     <?php if ($user['notifications_enabled'] == 1): ?>
                         <?= t('Enabled') ?>
                     <?php else: ?>
