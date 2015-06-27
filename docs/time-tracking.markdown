@@ -21,18 +21,23 @@ Subtask time tracking
 ![Subtask time tracking](http://kanboard.net/screenshots/documentation/subtask-time-tracking.png)
 
 Subtasks also have the fields "time spent" and "time estimated".
-However, when you set a value for those fields, **the task time tracking values becomes the sum of all subtask values**.
 
-User time tracking
-------------------
+When you change the value of these fields, **the task time tracking values are updated automatically and becomes the sum of all subtask values**.
 
-In the board settings, you can enable subtasks time tracking for users.
+Kanboard records the time between each subtask status change in a separate table.
 
-Each time a subtask status change, the start time and the end time are saved in a seperate table automatically.
-The time spent is automatically calculated for tasks and subtasks when the subtask is completed.
+- Changing subtask status from **todo** to **in pogress** logs the start time
+- Changing subtask status from **in progress** to **done** logs the end time but also update the time spent of the subtask and the task
 
-- Changing subtask status from "todo" to "in pogress" logs the start time
-- Changing subtask status from "in progress" to "done" logs the end time but also update the time spent of the subtask and the task
+The breakdown of all records is visible in the task view page:
 
-The breakdown by user is also visible in the tasks details:
-I
+![Task timesheet](http://kanboard.net/screenshots/documentation/task-timesheet.png)
+
+For each subtask, the timer can be stopped/started at any time:
+
+![Subtask timer](http://kanboard.net/screenshots/documentation/subtask-timer.png)
+
+- The timer doesn't depends of the subtask status
+- Each time you start the timer a new record is created in the time tracking table
+- Each time you stop the clock the end date is recorded in the time tracking table
+- The calculated time spent is rounded to the nearest quarter

@@ -25,16 +25,19 @@ Using Kanboard
 ### Working with tasks
 
 - [Creating tasks](creating-tasks.markdown)
+- [Closing tasks](closing-tasks.markdown)
 - [Adding screenshots](screenshots.markdown)
 - [Task links](task-links.markdown)
 - [Transitions](transitions.markdown)
 - [Time tracking](time-tracking.markdown)
 - [Recurring tasks](recurring-tasks.markdown)
 - [Create tasks by email](create-tasks-by-email.markdown)
+- [Subtasks](subtasks.markdown)
 
 ### Working with users
 
 - [User management](user-management.markdown)
+- [Notifications](notifications.markdown)
 - [Hourly rate](hourly-rate.markdown)
 - [Timetable](timetable.markdown)
 - [Two factor authentication](2fa.markdown)
@@ -62,6 +65,7 @@ Using Kanboard
 - [Slack](slack.markdown)
 - [Postmark](postmark.markdown)
 - [iCalendar subscriptions](ical.markdown)
+- [RSS/Atom subscriptions](rss.markdown)
 - [Json-RPC API](api-json-rpc.markdown)
 - [Webhooks](webhooks.markdown)
 

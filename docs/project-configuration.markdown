@@ -29,11 +29,3 @@ If another subtask have the status "in progress", the user will see this dialog 
 
 ![Subtask user restriction](http://kanboard.net/screenshots/documentation/subtask-user-restriction.png)
 
-### Enable time tracking for subtasks
-
-When this option is enabled, each time the status of a subtask is changed, the start time and the end time are recorded in the database for the assignee.
-
-- When the status changes to "in progress" then the start time is saved
-- When the status changes to "done" then the end time is saved
-
-The time spent for the subtask and the task is also updated.
