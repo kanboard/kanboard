@@ -321,6 +321,8 @@ class TaskFilter extends Base
      */
     public function filterByDueDate($date)
     {
+        $this->query->neq('date_due', 0);
+        $this->query->notNull('date_due');
         return $this->filterWithOperator('date_due', $date, true);
     }
 

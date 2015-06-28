@@ -38,6 +38,8 @@ class TaskFilterTest extends Base
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'my task title is amazing', 'date_due' => $dp->getTimestampFromIsoFormat('+1 day'))));
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'Bob at work', 'date_due' => $dp->getTimestampFromIsoFormat('-1 day'))));
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'youpi', 'date_due' => $dp->getTimestampFromIsoFormat(time()))));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'no due date')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'due date at 0', 'date_due' => 0)));
 
         $tf->search('due:>'.date('Y-m-d'));
         $tasks = $tf->findAll();
