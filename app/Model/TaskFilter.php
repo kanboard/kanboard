@@ -56,6 +56,7 @@ class TaskFilter extends Base
     {
         $filter = clone($this);
         $filter->query = clone($this->query);
+        $filter->query->condition = clone($this->query->condition);
         return $filter;
     }
 
@@ -301,7 +302,7 @@ class TaskFilter extends Base
      */
     public function toAutoCompletion()
     {
-        return $this->query->columns('id', 'title')->callback(function(array $results) {
+        return $this->query->columns(Task::TABLE.'.id', Task::TABLE.'.title')->callback(function(array $results) {
 
             foreach ($results as &$result) {
                 $result['value'] = $result['title'];
