@@ -43,7 +43,6 @@ class Api extends PHPUnit_Framework_TestCase
     {
         $tasks = $this->client->getAllTasks(1, 1);
         $this->assertNotEmpty($tasks);
-        $this->assertEquals(1, count($tasks));
 
         return $tasks[0]['id'];
     }
@@ -967,12 +966,12 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testCreateFile()
     {
-        $this->assertEquals(1, $this->client->createFile(1, 1, 'My file', base64_encode('plain text file')));
+        $this->assertNotFalse($this->client->createFile(1, $this->getTaskId(), 'My file', base64_encode('plain text file')));
     }
 
     public function testGetAllFiles()
     {
-        $files = $this->client->getAllFiles(array('task_id' => 1));
+        $files = $this->client->getAllFiles(array('task_id' => $this->getTaskId()));
 
         $this->assertNotEmpty($files);
         $this->assertCount(1, $files);
@@ -995,16 +994,16 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testRemoveAllFiles()
     {
-        $this->assertEquals(1, $this->client->createFile(1, 1, 'My file 1', base64_encode('plain text file')));
-        $this->assertEquals(2, $this->client->createFile(1, 1, 'My file 2', base64_encode('plain text file')));
+        $this->assertNotFalse($this->client->createFile(1, $this->getTaskId(), 'My file 1', base64_encode('plain text file')));
+        $this->assertNotFalse($this->client->createFile(1, $this->getTaskId(), 'My file 2', base64_encode('plain text file')));
 
-        $files = $this->client->getAllFiles(array('task_id' => 1));
+        $files = $this->client->getAllFiles(array('task_id' => $this->getTaskId()));
         $this->assertNotEmpty($files);
         $this->assertCount(2, $files);
 
-        $this->assertTrue($this->client->removeAllFiles(array('task_id' => 1)));
+        $this->assertTrue($this->client->removeAllFiles(array('task_id' => $this->getTaskId())));
 
-        $files = $this->client->getAllFiles(array('task_id' => 1));
+        $files = $this->client->getAllFiles(array('task_id' => $this->getTaskId()));
         $this->assertEmpty($files);
     }
 
