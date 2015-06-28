@@ -24,6 +24,42 @@ class TaskFilter extends Base
     public $query;
 
     /**
+     * Apply filters according to the search input
+     *
+     * @access public
+     * @param  string   $input
+     * @return TaskFilter
+     */
+    public function search($input)
+    {
+        $tree = $this->lexer->map($this->lexer->tokenize($input));
+        $this->query = $this->taskFinder->getExtendedQuery();
+
+        if (empty($tree)) {
+            $this->query->addCondition('1 = 0');
+        }
+
+        foreach ($tree as $filter => $value) {
+            switch ($filter) {
+                case 'T_ASSIGNEE':
+                    $this->filterByAssignee($value);
+                    break;
+                case 'T_COLOR':
+                    $this->filterByColors($value);
+                    break;
+                case 'T_DUE':
+                    $this->filterByDueDate($value);
+                    break;
+                case 'T_TITLE':
+                    $this->filterByTitle($value);
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * Create a new query
      *
      * @access public
@@ -164,6 +200,35 @@ class TaskFilter extends Base
     }
 
     /**
+     * Filter by assignee names
+     *
+     * @access public
+     * @param  array    $values   List of assignees
+     * @return TaskFilter
+     */
+    public function filterByAssignee(array $values)
+    {
+        $this->query->beginOr();
+
+        foreach ($values as $assignee) {
+
+            switch ($assignee) {
+                case 'me':
+                    $this->query->eq('owner_id', $this->userSession->getId());
+                    break;
+                case 'nobody':
+                    $this->query->eq('owner_id', 0);
+                    break;
+                default:
+                    $this->query->ilike(User::TABLE.'.username', '%'.$assignee.'%');
+                    $this->query->ilike(User::TABLE.'.name', '%'.$assignee.'%');
+            }
+        }
+
+        $this->query->closeOr();
+    }
+
+    /**
      * Filter by color
      *
      * @access public
@@ -175,6 +240,26 @@ class TaskFilter extends Base
         if ($color_id !== '') {
             $this->query->eq('color_id', $color_id);
         }
+
+        return $this;
+    }
+
+    /**
+     * Filter by colors
+     *
+     * @access public
+     * @param  array   $colors
+     * @return TaskFilter
+     */
+    public function filterByColors(array $colors)
+    {
+        $this->query->beginOr();
+
+        foreach ($colors as $color) {
+            $this->filterByColor($this->color->find($color));
+        }
+
+        $this->query->closeOr();
 
         return $this;
     }
@@ -225,6 +310,18 @@ class TaskFilter extends Base
         }
 
         return $this;
+    }
+
+    /**
+     * Filter by due date
+     *
+     * @access public
+     * @param  string      $date      ISO8601 date format
+     * @return TaskFilter
+     */
+    public function filterByDueDate($date)
+    {
+        return $this->filterWithOperator('date_due', $date, true);
     }
 
     /**
@@ -292,6 +389,17 @@ class TaskFilter extends Base
     public function findAll()
     {
         return $this->query->findAll();
+    }
+
+    /**
+     * Get the PicoDb query
+     *
+     * @access public
+     * @return \PicoDb\Table
+     */
+    public function getQuery()
+    {
+        return $this->query;
     }
 
     /**
@@ -464,5 +572,37 @@ class TaskFilter extends Base
         }
 
         return $vEvent;
+    }
+
+    /**
+     * Filter with an operator
+     *
+     * @access public
+     * @param  string    $field
+     * @param  string    $value
+     * @param  boolean   $is_date
+     * @return TaskFilter
+     */
+    private function filterWithOperator($field, $value, $is_date)
+    {
+        $operators = array(
+            '<=' => 'lte',
+            '>=' => 'gte',
+            '<' => 'lt',
+            '>' => 'gt',
+        );
+
+        foreach ($operators as $operator => $method) {
+
+            if (strpos($value, $operator) === 0) {
+                $value = substr($value, strlen($operator));
+                $this->query->$method($field, $is_date ? $this->dateParser->getTimestampFromIsoFormat($value) : $value);
+                return $this;
+            }
+        }
+
+        $this->query->eq($field, $is_date ? $this->dateParser->getTimestampFromIsoFormat($value) : $value);
+
+        return $this;
     }
 }

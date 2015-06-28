@@ -100,6 +100,29 @@ class Color extends Base
     );
 
     /**
+     * Find a color id from the name or the id
+     *
+     * @access public
+     * @param  string  $color
+     * @return string
+     */
+    public function find($color)
+    {
+        $color = strtolower($color);
+
+        foreach ($this->default_colors as $color_id => $params) {
+            if ($color_id === $color) {
+                return $color_id;
+            }
+            else if ($color === strtolower($params['name'])) {
+                return $color_id;
+            }
+        }
+
+        return '';
+    }
+
+    /**
      * Get available colors
      *
      * @access public

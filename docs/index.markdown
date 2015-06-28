@@ -71,6 +71,7 @@ Using Kanboard
 
 ### More
 
+- [Search syntax](search.markdown)
 - [Command line interface](cli.markdown)
 - [Syntax guide](syntax-guide.markdown)
 - [Frequently asked questions](faq.markdown)

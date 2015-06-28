@@ -67,6 +67,7 @@ class ClassProvider implements ServiceProviderInterface
             'EmailClient',
             'Helper',
             'HttpClient',
+            'Lexer',
             'MemoryCache',
             'Request',
             'Session',

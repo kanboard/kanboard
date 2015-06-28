@@ -46,9 +46,11 @@ class Projectinfo extends Base
 
         if ($search !== '') {
 
-            $paginator
-                ->setQuery($this->taskFinder->getSearchQuery($project['id'], $search))
-                ->calculate();
+            // $paginator
+            //     ->setQuery($this->taskFinder->getSearchQuery($project['id'], $search))
+            //     ->calculate();
+
+            $paginator->setQuery($this->taskFilter->search($search)->filterByProject($project['id'])->getQuery())->calculate();
 
             $nb_tasks = $paginator->getTotal();
         }

@@ -1,0 +1,142 @@
+<?php
+
+namespace Core;
+
+/**
+ * Lexer
+ *
+ * @package  core
+ * @author   Frederic Guillot
+ */
+class Lexer
+{
+    /**
+     * Current position
+     *
+     * @access private
+     * @var integer
+     */
+    private $offset = 0;
+
+    /**
+     * Token map
+     *
+     * @access private
+     * @var array
+     */
+    private $tokenMap = array(
+        "/^(assignee:)/"                                 => 'T_ASSIGNEE',
+        "/^(color:)/"                                    => 'T_COLOR',
+        "/^(due:)/"                                      => 'T_DUE',
+        "/^(title:)/"                                    => 'T_TITLE',
+        "/^(\s+)/"                                       => 'T_WHITESPACE',
+        '/^([<=>]{0,2}[0-9]{4}-[0-9]{2}-[0-9]{2})/'      => 'T_DATE',
+        '/^(yesterday|tomorrow|today)/'                  => 'T_DATE',
+        '/^("(.*?)")/'                                   => 'T_STRING',
+        "/^(\w+)/"                                       => 'T_STRING',
+    );
+
+    /**
+     * Tokenize input string
+     *
+     * @access public
+     * @param  string  $input
+     * @return array
+     */
+    public function tokenize($input)
+    {
+        $tokens = array();
+        $this->offset = 0;
+
+        while (isset($input[$this->offset])) {
+
+            $result = $this->match(substr($input, $this->offset));
+
+            if ($result === false) {
+                return array();
+            }
+
+            $tokens[] = $result;
+        }
+
+        return $tokens;
+    }
+
+    /**
+     * Find a token that match and move the offset
+     *
+     * @access public
+     * @param  string  $string
+     * @return array|boolean
+     */
+    public function match($string)
+    {
+        foreach ($this->tokenMap as $pattern => $name) {
+            if (preg_match($pattern, $string, $matches)) {
+
+                $this->offset += strlen($matches[1]);
+
+                return array(
+                    'match' => trim($matches[1], '"'),
+                    'token' => $name,
+                );
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Change the output of tokenizer to be easily parsed by the database filter
+     *
+     * Example: ['T_ASSIGNEE' => ['user1', 'user2'], 'T_TITLE' => 'task title']
+     *
+     * @access public
+     * @param  array  $tokens
+     * @return array
+     */
+    public function map(array $tokens)
+    {
+        $map = array(
+            'T_TITLE' => '',
+        );
+
+        while (false !== ($token = current($tokens))) {
+
+            switch ($token['token']) {
+                case 'T_ASSIGNEE':
+                case 'T_COLOR':
+                    $next = next($tokens);
+
+                    if ($next !== false && $next['token'] === 'T_STRING') {
+                        $map[$token['token']][] = $next['match'];
+                    }
+
+                    break;
+
+                case 'T_DUE':
+                    $next = next($tokens);
+
+                    if ($next !== false && $next['token'] === 'T_DATE') {
+                        $map[$token['token']] = $next['match'];
+                    }
+
+                    break;
+
+                default:
+                    $map['T_TITLE'] .= $token['match'];
+                    break;
+            }
+
+            next($tokens);
+        }
+
+        $map['T_TITLE'] = trim($map['T_TITLE']);
+
+        if (empty($map['T_TITLE'])) {
+            unset($map['T_TITLE']);
+        }
+
+        return $map;
+    }
+}
