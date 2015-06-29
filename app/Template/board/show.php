@@ -29,5 +29,7 @@
                 <?php endif ?>
             <?php endforeach ?>
         </table>
+        <script src="../../../assets/js/vendor/jquery-1.11.1.min.js"></script>
+        <script src="../../../assets/js/app.js"></script>
         <script src="../../../assets/js/popupKanboard.js"></script>
 </div>
