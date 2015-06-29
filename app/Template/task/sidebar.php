@@ -11,13 +11,20 @@
             <?= $this->url->link(t('Transitions'), 'task', 'transitions', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php if ($task['time_estimated'] > 0 || $task['time_spent'] > 0): ?>
-        <li>
-            <?= $this->url->link(t('Time tracking'), 'task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
+            <li>
+                <?= $this->url->link(t('Time tracking'), 'task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            </li>
         <?php endif ?>
     </ul>
     <h2><?= t('Actions') ?></h2>
     <ul>
+        <li>
+            <?php if ($task['color_id'] == 'flagged'): ?>
+                <?= $this->url->link(t('Unflag this task'), 'task', 'flag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php else: ?>
+                <?= $this->url->link(t('Flag this task'), 'task', 'flag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php endif ?>
+        </li>
         <li>
             <?= $this->url->link(t('Edit the task'), 'task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
@@ -59,9 +66,9 @@
             <?php endif ?>
         </li>
         <?php if ($this->task->canRemove($task)): ?>
-        <li>
-            <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
+            <li>
+                <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            </li>
         <?php endif ?>
     </ul>
 </div>

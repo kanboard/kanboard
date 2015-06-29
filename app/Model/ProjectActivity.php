@@ -82,18 +82,18 @@ class ProjectActivity extends Base
         }
 
         $query = $this
-                    ->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        self::TABLE.'.*',
-                        User::TABLE.'.username AS author_username',
-                        User::TABLE.'.name AS author_name',
-                        User::TABLE.'.email'
-                    )
-                    ->in('project_id', $project_ids)
-                    ->join(User::TABLE, 'id', 'creator_id')
-                    ->desc(self::TABLE.'.id')
-                    ->limit($limit);
+            ->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.*',
+                User::TABLE.'.username AS author_username',
+                User::TABLE.'.name AS author_name',
+                User::TABLE.'.email'
+            )
+            ->in('project_id', $project_ids)
+            ->join(User::TABLE, 'id', 'creator_id')
+            ->desc(self::TABLE.'.id')
+            ->limit($limit);
 
         return $this->getEvents($query, $start, $end);
     }
@@ -111,18 +111,18 @@ class ProjectActivity extends Base
     public function getTask($task_id, $limit = 50, $start = null, $end = null)
     {
         $query = $this
-                    ->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        self::TABLE.'.*',
-                        User::TABLE.'.username AS author_username',
-                        User::TABLE.'.name AS author_name',
-                        User::TABLE.'.email'
-                    )
-                    ->eq('task_id', $task_id)
-                    ->join(User::TABLE, 'id', 'creator_id')
-                    ->desc(self::TABLE.'.id')
-                    ->limit($limit);
+            ->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.*',
+                User::TABLE.'.username AS author_username',
+                User::TABLE.'.name AS author_name',
+                User::TABLE.'.email'
+            )
+            ->eq('task_id', $task_id)
+            ->join(User::TABLE, 'id', 'creator_id')
+            ->desc(self::TABLE.'.id')
+            ->limit($limit);
 
         return $this->getEvents($query, $start, $end);
     }
@@ -223,6 +223,8 @@ class ProjectActivity extends Base
                 return t('%s closed the task #%d', $event['author'], $event['task']['id']);
             case Task::EVENT_OPEN:
                 return t('%s open the task #%d', $event['author'], $event['task']['id']);
+            case Task::EVENT_FLAG:
+                return t('%s flag the task #%d', $event['author'], $event['task']['id']);
             case Task::EVENT_MOVE_COLUMN:
                 return t('%s moved the task #%d to the column "%s"', $event['author'], $event['task']['id'], $event['task']['column_title']);
             case Task::EVENT_MOVE_POSITION:
