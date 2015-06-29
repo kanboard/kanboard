@@ -29,7 +29,7 @@ class Lexer
         "/^(color:)/"                                    => 'T_COLOR',
         "/^(due:)/"                                      => 'T_DUE',
         "/^(status:)/"                                   => 'T_STATUS',
-        "/^(title:)/"                                    => 'T_TITLE',
+        "/^(description:)/"                              => 'T_DESCRIPTION',
         "/^(\s+)/"                                       => 'T_WHITESPACE',
         '/^([<=>]{0,2}[0-9]{4}-[0-9]{2}-[0-9]{2})/'      => 'T_DATE',
         '/^(yesterday|tomorrow|today)/'                  => 'T_DATE',
@@ -117,6 +117,7 @@ class Lexer
 
                 case 'T_STATUS':
                 case 'T_DUE':
+                case 'T_DESCRIPTION':
                     $next = next($tokens);
 
                     if ($next !== false && ($next['token'] === 'T_DATE' || $next['token'] === 'T_STRING')) {

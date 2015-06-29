@@ -96,6 +96,26 @@ class LexerTest extends Base
         );
     }
 
+    public function testDescriptionQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'description:', 'token' => 'T_DESCRIPTION'), array('match' => 'my text search', 'token' => 'T_STRING')),
+            $lexer->tokenize('description:"my text search"')
+        );
+
+        $this->assertEquals(
+            array('T_DESCRIPTION' => 'my text search'),
+            $lexer->map($lexer->tokenize('description:"my text search"'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('description: '))
+        );
+    }
+
     public function testDueDateQuery()
     {
         $lexer = new Lexer;

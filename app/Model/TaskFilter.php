@@ -56,6 +56,9 @@ class TaskFilter extends Base
                 case 'T_STATUS':
                     $this->filterByStatusName($value);
                     break;
+                case 'T_DESCRIPTION':
+                    $this->filterByDescription($value);
+                    break;
             }
         }
 
@@ -135,9 +138,22 @@ class TaskFilter extends Base
      * @param  string  $title
      * @return TaskFilter
      */
+    public function filterByDescription($title)
+    {
+        $this->query->ilike(Task::TABLE.'.description', '%'.$title.'%');
+        return $this;
+    }
+
+    /**
+     * Filter by title
+     *
+     * @access public
+     * @param  string  $title
+     * @return TaskFilter
+     */
     public function filterByTitle($title)
     {
-        $this->query->ilike('title', '%'.$title.'%');
+        $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
         return $this;
     }
 
@@ -150,7 +166,7 @@ class TaskFilter extends Base
      */
     public function filterByProjects(array $project_ids)
     {
-        $this->query->in('project_id', $project_ids);
+        $this->query->in(Task::TABLE.'.project_id', $project_ids);
         return $this;
     }
 
@@ -164,7 +180,7 @@ class TaskFilter extends Base
     public function filterByProject($project_id)
     {
         if ($project_id > 0) {
-            $this->query->eq('project_id', $project_id);
+            $this->query->eq(Task::TABLE.'.project_id', $project_id);
         }
 
         return $this;
@@ -180,7 +196,7 @@ class TaskFilter extends Base
     public function filterByCategory($category_id)
     {
         if ($category_id >= 0) {
-            $this->query->eq('category_id', $category_id);
+            $this->query->eq(Task::TABLE.'.category_id', $category_id);
         }
 
         return $this;
@@ -196,7 +212,7 @@ class TaskFilter extends Base
     public function filterByOwner($owner_id)
     {
         if ($owner_id >= 0) {
-            $this->query->eq('owner_id', $owner_id);
+            $this->query->eq(Task::TABLE.'.owner_id', $owner_id);
         }
 
         return $this;
@@ -217,10 +233,10 @@ class TaskFilter extends Base
 
             switch ($assignee) {
                 case 'me':
-                    $this->query->eq('owner_id', $this->userSession->getId());
+                    $this->query->eq(Task::TABLE.'.owner_id', $this->userSession->getId());
                     break;
                 case 'nobody':
-                    $this->query->eq('owner_id', 0);
+                    $this->query->eq(Task::TABLE.'.owner_id', 0);
                     break;
                 default:
                     $this->query->ilike(User::TABLE.'.username', '%'.$assignee.'%');
@@ -241,7 +257,7 @@ class TaskFilter extends Base
     public function filterByColor($color_id)
     {
         if ($color_id !== '') {
-            $this->query->eq('color_id', $color_id);
+            $this->query->eq(Task::TABLE.'.color_id', $color_id);
         }
 
         return $this;
@@ -277,7 +293,7 @@ class TaskFilter extends Base
     public function filterByColumn($column_id)
     {
         if ($column_id >= 0) {
-            $this->query->eq('column_id', $column_id);
+            $this->query->eq(Task::TABLE.'.column_id', $column_id);
         }
 
         return $this;
@@ -293,7 +309,7 @@ class TaskFilter extends Base
     public function filterBySwimlane($swimlane_id)
     {
         if ($swimlane_id >= 0) {
-            $this->query->eq('swimlane_id', $swimlane_id);
+            $this->query->eq(Task::TABLE.'.swimlane_id', $swimlane_id);
         }
 
         return $this;
@@ -325,7 +341,7 @@ class TaskFilter extends Base
     public function filterByStatus($is_active)
     {
         if ($is_active >= 0) {
-            $this->query->eq('is_active', $is_active);
+            $this->query->eq(Task::TABLE.'.is_active', $is_active);
         }
 
         return $this;
@@ -340,10 +356,10 @@ class TaskFilter extends Base
      */
     public function filterByDueDate($date)
     {
-        $this->query->neq('date_due', '');
-        $this->query->neq('date_due', 0);
-        $this->query->notNull('date_due');
-        return $this->filterWithOperator('date_due', $date, true);
+        $this->query->neq(Task::TABLE.'.date_due', '');
+        $this->query->neq(Task::TABLE.'.date_due', 0);
+        $this->query->notNull(Task::TABLE.'.date_due');
+        return $this->filterWithOperator(Task::TABLE.'.date_due', $date, true);
     }
 
     /**

@@ -112,3 +112,9 @@ Operators supported:
 - Greater than or equal: **due:>=2015-06-29**
 - Lower than or equal: **due:<=2015-06-29**
 
+Search by description
+---------------------
+
+Attribute: **description**
+
+Example: `description:"text search"`

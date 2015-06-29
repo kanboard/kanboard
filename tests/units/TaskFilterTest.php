@@ -53,6 +53,27 @@ class TaskFilterTest extends Base
         $this->assertCount(1, $tasks);
     }
 
+    public function testSearchWithDescription()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2', 'description' => '**something to do**')));
+
+        $tf->search('description:"something"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+
+        $tf->search('description:"rainy day"');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+    }
+
     public function testSearchWithDueDate()
     {
         $dp = new DateParser($this->container);
