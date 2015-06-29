@@ -59,6 +59,9 @@ class TaskFilter extends Base
                 case 'T_DESCRIPTION':
                     $this->filterByDescription($value);
                     break;
+                case 'T_CATEGORY':
+                    $this->filterByCategoryName($value);
+                    break;
             }
         }
 
@@ -200,6 +203,30 @@ class TaskFilter extends Base
         }
 
         return $this;
+    }
+
+    /**
+     * Filter by category
+     *
+     * @access public
+     * @param  array    $values   List of assignees
+     * @return TaskFilter
+     */
+    public function filterByCategoryName(array $values)
+    {
+        $this->query->join(Category::TABLE, 'id', 'category_id');
+        $this->query->beginOr();
+
+        foreach ($values as $category) {
+            if ($category === 'none') {
+                $this->query->eq(Task::TABLE.'.category_id', 0);
+            }
+            else {
+                $this->query->eq(Category::TABLE.'.name', $category);
+            }
+        }
+
+        $this->query->closeOr();
     }
 
     /**

@@ -27,21 +27,6 @@ class TaskFinder extends Base
     }
 
     /**
-     * Get query for task search
-     *
-     * @access public
-     * @param  integer    $project_id    Project id
-     * @param  string     $search        Search terms
-     * @return \PicoDb\Table
-     */
-    public function getSearchQuery($project_id, $search)
-    {
-        return $this->getExtendedQuery()
-                    ->eq('project_id', $project_id)
-                    ->ilike('title', '%'.$search.'%');
-    }
-
-    /**
      * Get query for assigned user tasks
      *
      * @access public

@@ -118,3 +118,12 @@ Search by description
 Attribute: **description**
 
 Example: `description:"text search"`
+
+Search by category
+------------------
+
+Attribute: **category**
+
+- Find tasks with a specific category: `category:"Feature Request"`
+- Find all tasks that have those category: `category:"Bug" category:"Improvements"`
+- Find tasks with no category assigned: `category:none`

@@ -30,6 +30,7 @@ class Lexer
         "/^(due:)/"                                      => 'T_DUE',
         "/^(status:)/"                                   => 'T_STATUS',
         "/^(description:)/"                              => 'T_DESCRIPTION',
+        "/^(category:)/"                                 => 'T_CATEGORY',
         "/^(\s+)/"                                       => 'T_WHITESPACE',
         '/^([<=>]{0,2}[0-9]{4}-[0-9]{2}-[0-9]{2})/'      => 'T_DATE',
         '/^(yesterday|tomorrow|today)/'                  => 'T_DATE',
@@ -107,6 +108,7 @@ class Lexer
             switch ($token['token']) {
                 case 'T_ASSIGNEE':
                 case 'T_COLOR':
+                case 'T_CATEGORY':
                     $next = next($tokens);
 
                     if ($next !== false && $next['token'] === 'T_STRING') {

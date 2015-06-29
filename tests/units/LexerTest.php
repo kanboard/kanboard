@@ -66,6 +66,31 @@ class LexerTest extends Base
         );
     }
 
+    public function testCategoryQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'category:', 'token' => 'T_CATEGORY'), array('match' => 'Feature Request', 'token' => 'T_STRING')),
+            $lexer->tokenize('category:"Feature Request"')
+        );
+
+        $this->assertEquals(
+            array('T_CATEGORY' => array('Feature Request')),
+            $lexer->map($lexer->tokenize('category:"Feature Request"'))
+        );
+
+        $this->assertEquals(
+            array('T_CATEGORY' => array('Feature Request', 'Bug')),
+            $lexer->map($lexer->tokenize('category:"Feature Request" category:Bug'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('category: '))
+        );
+    }
+
     public function testStatusQuery()
     {
         $lexer = new Lexer;

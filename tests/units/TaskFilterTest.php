@@ -7,6 +7,7 @@ use Model\User;
 use Model\TaskFilter;
 use Model\TaskCreation;
 use Model\DateParser;
+use Model\Category;
 
 class TaskFilterTest extends Base
 {
@@ -70,6 +71,50 @@ class TaskFilterTest extends Base
         $this->assertEquals('task2', $tasks[0]['title']);
 
         $tf->search('description:"rainy day"');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+    }
+
+    public function testSearchWithCategory()
+    {
+        $p = new Project($this->container);
+        $c = new Category($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $c->create(array('name' => 'Feature request', 'project_id' => 1)));
+        $this->assertEquals(2, $c->create(array('name' => 'hé hé', 'project_id' => 1)));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2', 'category_id' => 1)));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task3', 'category_id' => 2)));
+
+        $tf->search('category:"Feature request"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+
+        $tf->search('category:"hé hé"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task3', $tasks[0]['title']);
+
+        $tf->search('category:"Feature request" category:"hé hé"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('task3', $tasks[1]['title']);
+
+        $tf->search('category:none');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+
+        $tf->search('category:"not found"');
         $tasks = $tf->findAll();
         $this->assertEmpty($tasks);
     }
