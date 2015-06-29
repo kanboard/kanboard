@@ -247,6 +247,39 @@ class Board extends Base
     }
 
     /**
+     * Change a task assignee to me from the task
+     *
+     * @access public
+     */
+    public function assignToMe()
+    {
+        $task = $this->getTask();
+
+        $assignee = $this->user->getByUsername($task['assignee_username']);
+        $sessionUser = $this->userSession->getId();
+
+        if ($assignee['id'] == $sessionUser) {
+            $this->session->flashError(t('The task is already assigned to you.'));
+        }
+        else {
+            $values = array(
+                'id' => $task['id'],
+                'project_id' => $task['project_id'],
+                'owner_id' => $sessionUser,
+            );
+
+            list($valid,) = $this->taskValidator->validateAssigneeModification($values);
+
+            if ($valid && $this->taskModification->update($values)) {
+                $this->session->flash(t('Task successfully assigned to you.'));
+            }
+            else {
+                $this->session->flashError(t('Unable to assign the task to you.'));
+            }
+        }
+    }
+
+    /**
      * Validate an assignee modification
      *
      * @access public
