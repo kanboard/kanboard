@@ -92,4 +92,29 @@ class Projectinfo extends Base
             'title' => t('Completed tasks for "%s"', $project['name']).' ('.$paginator->getTotal().')'
         )));
     }
+
+    /**
+     * List view of all incompleted tasks for a given project
+     *
+     * @access public
+     */
+    public function listView()
+    {
+        $project = $this->getProject();
+        $paginator = $this->paginator
+            ->setUrl('projectinfo', 'listView', array('project_id' => $project['id']))
+            ->setMax(30)
+            ->setOrder('tasks.id')
+            ->setDirection('DESC')
+            ->setQuery($this->taskFinder->getOpenTaskQuery($project['id']))
+            ->calculate();
+        $this->response->html($this->template->layout('projectinfo/listView', array(
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'project' => $project,
+            'columns' => $this->board->getColumnsList($project['id']),
+            'categories' => $this->category->getList($project['id'], false),
+            'paginator' => $paginator,
+            'title' => t('Completed tasks for "%s"', $project['name']).' ('.$paginator->getTotal().')'
+        )));
+    }
 }
