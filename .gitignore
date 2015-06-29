@@ -57,3 +57,5 @@ config.php
 data/files
 data/cache
 /vendor
+/nbproject/private/
+nbproject/
