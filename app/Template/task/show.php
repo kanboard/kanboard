@@ -14,4 +14,5 @@
 <?= $this->render('file/show', array('task' => $task, 'files' => $files, 'images' => $images)) ?>
 <?= $this->render('task/comments', array('task' => $task, 'comments' => $comments, 'project' => $project)) ?>
 
+<script src="../../../assets/js/vendor/jquery-1.11.1.min.js"></script>
 <script src="../../../assets/js/keyboardShortcuts.js"></script>

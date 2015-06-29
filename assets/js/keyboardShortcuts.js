@@ -19,10 +19,8 @@ $(document).keydown(function(e) {
     });
 
     Mousetrap.bind("b", function() {
-        var url = window.location.href;
-        var splittedUrl = url.split('?');
-        var boardUrl = splittedUrl[0] + '?controller=board&action=show&project_id=' + project_id + '#swimlane-0';
-        window.location.replace(boardUrl);
+        var url = window.location.origin + window.location.pathname +  '?controller=board&action=show&project_id=' + project_id + '#swimlane-0';
+        window.location.replace(url);
     });
 });
 
