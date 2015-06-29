@@ -142,6 +142,22 @@ class Task extends Base
         )));
     }
 
+    function object_to_array($data)
+    {
+        if(is_array($data) || is_object($data))
+        {
+            $result = array();
+
+            foreach($data as $key => $value) {
+                $result[$key] = $this->object_to_array($value);
+            }
+
+            return $result;
+        }
+
+        return $data;
+    }
+
     /**
      * Validate and save a new task
      *
@@ -157,13 +173,15 @@ class Task extends Base
 
         if ($valid) {
 
-            if ($this->taskCreation->create($values)) {
+            $task_id = $this->taskCreation->create($values);
+            if ($task_id) {   
+                $this->file->upload($values['project_id'], $task_id, 'files');
                 $this->session->flash(t('Task created successfully.'));
 
                 if (isset($values['another_task']) && $values['another_task'] == 1) {
                     unset($values['title']);
                     unset($values['description']);
-                    $this->response->redirect('?controller=task&action=create&'.http_build_query($values));
+                    $this->response->redirect('?controller=board&action=show&project_id='.$project['id'].'&redirect=true&category_id='.$values['category_id'].'&column_id='.$values['column_id'].'&color_id='.$values['color_id'].'&creator_id='.$values['creator_id']);
                 }
                 else {
                     $this->response->redirect('?controller=board&action=show&project_id='.$project['id']);
@@ -173,8 +191,9 @@ class Task extends Base
                 $this->session->flashError(t('Unable to create your task.'));
             }
         }
-
-        $this->create($values, $errors);
+        else {
+            $this->create($values, $errors);
+        }
     }
 
     /**

@@ -22,9 +22,9 @@
         </ul>
     </div>
     <?php if ($paginator->isEmpty()): ?>
-        <p class="alert"><?= t('There is no completed task at the moment.') ?></p>
+        <p class="alert"><?= t('There is no open task at the moment.') ?></p>
     <?php else: ?>
-        <?= $this->render('task/table', array(
+        <?= $this->render('task/listView', array(
             'paginator' => $paginator,
             'categories' => $categories,
             'columns' => $columns,
