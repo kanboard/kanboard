@@ -28,6 +28,7 @@ class Lexer
         "/^(assignee:)/"                                 => 'T_ASSIGNEE',
         "/^(color:)/"                                    => 'T_COLOR',
         "/^(due:)/"                                      => 'T_DUE',
+        "/^(status:)/"                                   => 'T_STATUS',
         "/^(title:)/"                                    => 'T_TITLE',
         "/^(\s+)/"                                       => 'T_WHITESPACE',
         '/^([<=>]{0,2}[0-9]{4}-[0-9]{2}-[0-9]{2})/'      => 'T_DATE',
@@ -114,10 +115,11 @@ class Lexer
 
                     break;
 
+                case 'T_STATUS':
                 case 'T_DUE':
                     $next = next($tokens);
 
-                    if ($next !== false && $next['token'] === 'T_DATE') {
+                    if ($next !== false && ($next['token'] === 'T_DATE' || $next['token'] === 'T_STRING')) {
                         $map[$token['token']] = $next['match'];
                     }
 

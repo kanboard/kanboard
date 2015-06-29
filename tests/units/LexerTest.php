@@ -66,6 +66,36 @@ class LexerTest extends Base
         );
     }
 
+    public function testStatusQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'status:', 'token' => 'T_STATUS'), array('match' => 'open', 'token' => 'T_STRING')),
+            $lexer->tokenize('status:open')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'status:', 'token' => 'T_STATUS'), array('match' => 'closed', 'token' => 'T_STRING')),
+            $lexer->tokenize('status:closed')
+        );
+
+        $this->assertEquals(
+            array('T_STATUS' => 'open'),
+            $lexer->map($lexer->tokenize('status:open'))
+        );
+
+        $this->assertEquals(
+            array('T_STATUS' => 'closed'),
+            $lexer->map($lexer->tokenize('status:closed'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('status: '))
+        );
+    }
+
     public function testDueDateQuery()
     {
         $lexer = new Lexer;

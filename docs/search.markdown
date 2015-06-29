@@ -12,6 +12,14 @@ This example will returns all tasks assigned to me with a due date for tomorrow 
 assigne:me due:tomorrow my title
 ```
 
+Search by status
+----------------
+
+Attribute: **status**
+
+- Query to find open tasks: `status:open`
+- Query to find closed tasks: `status:closed`
+
 Search by assignee
 ------------------
 

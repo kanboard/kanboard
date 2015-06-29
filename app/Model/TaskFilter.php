@@ -53,6 +53,9 @@ class TaskFilter extends Base
                 case 'T_TITLE':
                     $this->filterByTitle($value);
                     break;
+                case 'T_STATUS':
+                    $this->filterByStatusName($value);
+                    break;
             }
         }
 
@@ -297,6 +300,22 @@ class TaskFilter extends Base
     }
 
     /**
+     * Filter by status name
+     *
+     * @access public
+     * @param  string  $status
+     * @return TaskFilter
+     */
+    public function filterByStatusName($status)
+    {
+        if ($status === 'open' || $status === 'closed') {
+            $this->filterByStatus($status === 'open' ? Task::STATUS_OPEN : Task::STATUS_CLOSED);
+        }
+
+        return $this;
+    }
+
+    /**
      * Filter by status
      *
      * @access public
@@ -321,6 +340,7 @@ class TaskFilter extends Base
      */
     public function filterByDueDate($date)
     {
+        $this->query->neq('date_due', '');
         $this->query->neq('date_due', 0);
         $this->query->notNull('date_due');
         return $this->filterWithOperator('date_due', $date, true);
