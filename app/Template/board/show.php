@@ -29,4 +29,5 @@
         <?php endif ?>
     <?php endforeach ?>
     </table>
+    <script src="../../../assets/js/popupKanboard.js"></script>
 </div>

@@ -27,6 +27,35 @@ class TaskFinder extends Base
     }
 
     /**
+     * Get query for open tasks
+     *
+     * @access public
+     * @param  integer    $project_id    Project id
+     * @return \PicoDb\Table
+     */
+    public function getOpenTaskQuery($project_id)
+    {
+        return $this->getExtendedQuery()
+            ->eq('project_id', $project_id)
+            ->eq('is_active', Task::STATUS_OPEN);
+    }
+
+    /**
+     * Get query for task search
+     *
+     * @access public
+     * @param  integer    $project_id    Project id
+     * @param  string     $search        Search terms
+     * @return \PicoDb\Table
+     */
+    public function getSearchQuery($project_id, $search)
+    {
+        return $this->getExtendedQuery()
+                    ->eq('project_id', $project_id)
+                    ->ilike('title', '%'.$search.'%');
+    }
+
+    /**
      * Get query for assigned user tasks
      *
      * @access public
@@ -96,7 +125,6 @@ class TaskFinder extends Base
                 'tasks.recurrence_basedate',
                 'tasks.recurrence_parent',
                 'tasks.recurrence_child',
-                'tasks.time_estimated',
                 'users.username AS assignee_username',
                 'users.name AS assignee_name'
             )
@@ -249,7 +277,6 @@ class TaskFinder extends Base
             tasks.recurrence_parent,
             tasks.recurrence_child,
             project_has_categories.name AS category_name,
-            swimlanes.name AS swimlane_name,
             projects.name AS project_name,
             columns.title AS column_title,
             users.username AS assignee_username,
@@ -262,7 +289,6 @@ class TaskFinder extends Base
             LEFT JOIN project_has_categories ON project_has_categories.id = tasks.category_id
             LEFT JOIN projects ON projects.id = tasks.project_id
             LEFT JOIN columns ON columns.id = tasks.column_id
-            LEFT JOIN swimlanes ON swimlanes.id = tasks.swimlane_id
             WHERE tasks.id = ?
         ';
 
@@ -301,7 +327,7 @@ class TaskFinder extends Base
                     ->table(Task::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
-                    ->eq('is_active', 1)
+                    ->in('is_active', 1)
                     ->count();
     }
 
@@ -321,7 +347,7 @@ class TaskFinder extends Base
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
                     ->eq('swimlane_id', $swimlane_id)
-                    ->eq('is_active', 1)
+                    ->in('is_active', 1)
                     ->count();
     }
 
@@ -334,6 +360,6 @@ class TaskFinder extends Base
      */
     public function exists($task_id)
     {
-        return $this->db->table(Task::TABLE)->eq('id', $task_id)->exists();
+        return $this->db->table(Task::TABLE)->eq('id', $task_id)->count() === 1;
     }
 }
