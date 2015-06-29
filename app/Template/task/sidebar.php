@@ -20,7 +20,7 @@
     <ul>
         <li>
             <?php if ($task['color_id'] == 'flagged'): ?>
-                <?= $this->url->link(t('Unflag this task'), 'task', 'unflag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?= $this->url->link(t('Unflag this task'), 'task', 'flag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             <?php else: ?>
                 <?= $this->url->link(t('Flag this task'), 'task', 'flag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             <?php endif ?>

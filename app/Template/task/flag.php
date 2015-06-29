@@ -1,10 +1,20 @@
 <div class="page-header">
-    <h2><?= t('Flag this task') ?></h2>
+    <h2>
+        <?php if ($task['color_id'] == 'flagged'): ?>
+            <?= t('Unflag this task') ?>
+        <?php else: ?>
+            <?= t('Flag this task') ?>
+        <?php endif ?>
+    </h2>
 </div>
 
 <div class="confirm">
     <p class="alert alert-info">
-        <?= t('Do you really want to flag this task: "%s"?', $this->e($task['title'])) ?>
+        <?php if ($task['color_id'] == 'flagged'): ?>
+            <?= t('Do you really want to unflag this task: "%s"?', $this->e($task['title'])) ?>
+        <?php else: ?>
+            <?= t('Do you really want to flag this task: "%s"?', $this->e($task['title'])) ?>
+        <?php endif ?>
     </p>
 
     <div class="form-actions">

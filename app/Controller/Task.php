@@ -362,97 +362,57 @@ class Task extends Base
     {
         $task = $this->getTask();
         $redirect = $this->request->getStringParam('redirect');
-
         if ($this->request->getStringParam('confirmation') === 'yes') {
-
             $this->checkCSRFParam();
-
-            $values = array(
-                'id' => $task['id'],
-                'title' => $task['title'],
-                'color_id' => 'flagged'
-            );
-
-            list($valid, $errors) = $this->taskValidator->validateModification($values);
-
-            if ($valid) {
-
-                if ($this->taskModification->update($values)) {
-                    if ($this->taskStatus->flag($task['id'])) {
-                        $this->session->flash(t('Task flagged successfully.'));
-                    } else {
-                        $this->session->flashError(t('Unable to flag this task.'));
+            if ($task['color_id'] == 'flagged') {
+                $values = array(
+                    'id' => $task['id'],
+                    'title' => $task['title'],
+                    'color_id' => 'yellow'
+                );
+                list($valid, $errors) = $this->taskValidator->validateModification($values);
+                if ($valid) {
+                    if ($this->taskModification->update($values)) {
+                        if ($this->taskStatus->open($task['id'])) {
+                            $this->session->flash(t('Task unflagged successfully.'));
+                        } else {
+                            $this->session->flashError(t('Unable to unflag this task.'));
+                        }
+                        if ($redirect === 'board') {
+                            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+                        }
+                        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
                     }
-
-                    if ($redirect === 'board') {
-                        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+                }
+            }
+            else {
+                $values = array(
+                    'id' => $task['id'],
+                    'title' => $task['title'],
+                    'color_id' => 'flagged'
+                );
+                list($valid, $errors) = $this->taskValidator->validateModification($values);
+                if ($valid) {
+                    if ($this->taskModification->update($values)) {
+                        if ($this->taskStatus->flag($task['id'])) {
+                            $this->session->flash(t('Task flagged successfully.'));
+                        } else {
+                            $this->session->flashError(t('Unable to flag this task.'));
+                        }
+                        if ($redirect === 'board') {
+                            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+                        }
+                        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
                     }
-
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
                 }
             }
         }
-
         if ($this->request->isAjax()) {
             $this->response->html($this->template->render('task/flag', array(
                 'task' => $task,
                 'redirect' => $redirect,
             )));
         }
-
-        $this->response->html($this->taskLayout('task/flag', array(
-            'task' => $task,
-            'redirect' => $redirect,
-        )));
-
-    }
-
-    /**
-     * Unflag a task
-     *
-     * @access public
-     */
-    public function unflag()
-    {
-        $task = $this->getTask();
-        $redirect = $this->request->getStringParam('redirect');
-
-        if ($this->request->getStringParam('confirmation') === 'yes') {
-
-            $this->checkCSRFParam();
-
-            $values = array(
-                'id' => $task['id'],
-                'title' => $task['title'],
-                'color_id' => 'yellow'
-            );
-
-            list($valid, $errors) = $this->taskValidator->validateModification($values);
-
-            if ($valid) {
-
-                if ($this->taskModification->update($values)) {
-                    if ($this->taskStatus->open($task['id'])) {
-                        $this->session->flash(t('Task unflagged successfully.'));
-                    } else {
-                        $this->session->flashError(t('Unable to unflag this task.'));
-                    }
-                }
-                if ($redirect === 'board') {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                }
-
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
-            }
-        }
-
-        if ($this->request->isAjax()) {
-            $this->response->html($this->template->render('task/flag', array(
-                'task' => $task,
-                'redirect' => $redirect,
-            )));
-        }
-
         $this->response->html($this->taskLayout('task/flag', array(
             'task' => $task,
             'redirect' => $redirect,
