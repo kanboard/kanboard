@@ -8,7 +8,7 @@
 </li>
 <li>
     <i class="fa fa-check-square-o fa-fw"></i>
-    <?= $this->url->link(t('List view'), 'projectinfo', 'listView', array('project_id' => $project['id'])) ?>
+    <?= $this->url->link(t('Open tasks'), 'projectinfo', 'listView', array('project_id' => $project['id'])) ?>
 </li>
 <li>
     <i class="fa fa-dashboard fa-fw"></i>

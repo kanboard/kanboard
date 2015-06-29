@@ -114,7 +114,7 @@ class Projectinfo extends Base
             'columns' => $this->board->getColumnsList($project['id']),
             'categories' => $this->category->getList($project['id'], false),
             'paginator' => $paginator,
-            'title' => t('Completed tasks for "%s"', $project['name']).' ('.$paginator->getTotal().')'
+            'title' => t('Open tasks for "%s"', $project['name']).' ('.$paginator->getTotal().')'
         )));
     }
 }
