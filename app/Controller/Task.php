@@ -163,8 +163,7 @@ class Task extends Base
                 if (isset($values['another_task']) && $values['another_task'] == 1) {
                     unset($values['title']);
                     unset($values['description']);
-                    $this->response->redirect('?controller=task&action=create&'.http_build_query($values));
-                }
+                    $this->response->redirect('?controller=board&action=show&project_id='.$project['id'].'&redirect=true&category_id='.$values['category_id'].'&column_id='.$values['column_id'].'&color_id='.$values['color_id'].'&creator_id='.$values['creator_id']);                }
                 else {
                     $this->response->redirect('?controller=board&action=show&project_id='.$project['id']);
                 }
@@ -173,8 +172,9 @@ class Task extends Base
                 $this->session->flashError(t('Unable to create your task.'));
             }
         }
-
-        $this->create($values, $errors);
+        else {
+            $this->create($values, $errors);
+        }
     }
 
     /**
