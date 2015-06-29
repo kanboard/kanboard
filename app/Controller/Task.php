@@ -367,30 +367,56 @@ class Task extends Base
 
             $this->checkCSRFParam();
 
-            //check if the task is already flagged (EVENT_FLAG)
+            if ($task['color_id'] == 'flagged') {
+                $values = array(
+                    'id' => $task['id'],
+                    'title' => $task['title'],
+                    'color_id' => 'yellow'
+                );
 
-            $values = array(
-                'id' => $task['id'],
-                'title' => $task['title'],
-                'color_id' => 'flagged'
-            );
+                list($valid, $errors) = $this->taskValidator->validateModification($values);
 
-            list($valid, $errors) = $this->taskValidator->validateModification($values);
+                if ($valid) {
 
-            if ($valid) {
+                    if ($this->taskModification->update($values)) {
+                        if ($this->taskStatus->open($task['id'])) {
+                            $this->session->flash(t('Task unflagged successfully.'));
+                        } else {
+                            $this->session->flashError(t('Unable to unflag this task.'));
+                        }
 
-                if ($this->taskModification->update($values)) {
-                    if ($this->taskStatus->flag($task['id'])) {
-                        $this->session->flash(t('Task flagged successfully.'));
-                    } else {
-                        $this->session->flashError(t('Unable to flag this task.'));
+                        if ($redirect === 'board') {
+                            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+                        }
+
+                        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
                     }
+                }
+            }
+            else {
+                $values = array(
+                    'id' => $task['id'],
+                    'title' => $task['title'],
+                    'color_id' => 'flagged'
+                );
 
-                    if ($redirect === 'board') {
-                        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+                list($valid, $errors) = $this->taskValidator->validateModification($values);
+
+                if ($valid) {
+
+                    if ($this->taskModification->update($values)) {
+                        if ($this->taskStatus->flag($task['id'])) {
+                            $this->session->flash(t('Task flagged successfully.'));
+                        } else {
+                            $this->session->flashError(t('Unable to flag this task.'));
+                        }
+
+                        if ($redirect === 'board') {
+                            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+                        }
+
+                        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
                     }
-
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
                 }
             }
         }
