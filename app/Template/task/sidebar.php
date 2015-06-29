@@ -19,7 +19,11 @@
     <h2><?= t('Actions') ?></h2>
     <ul>
         <li>
-            <?= $this->url->link(t('Flag/Unflag this task'), 'task', 'flag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php if ($task['color_id'] == 'flagged'): ?>
+                <?= $this->url->link(t('Unflag this task'), 'task', 'unflag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php else: ?>
+                <?= $this->url->link(t('Flag this task'), 'task', 'flag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php endif ?>
         </li>
         <li>
             <?= $this->url->link(t('Edit the task'), 'task', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>

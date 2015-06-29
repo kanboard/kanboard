@@ -1,10 +1,10 @@
 <div class="page-header">
-    <h2><?= t('Flag/Unflag this task') ?></h2>
+    <h2><?= t('Flag this task') ?></h2>
 </div>
 
 <div class="confirm">
     <p class="alert alert-info">
-        <?= t('Do you really want to flag/unflag this task: "%s"?', $this->e($task['title'])) ?>
+        <?= t('Do you really want to flag this task: "%s"?', $this->e($task['title'])) ?>
     </p>
 
     <div class="form-actions">
