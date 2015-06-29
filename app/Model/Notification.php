@@ -311,6 +311,9 @@ class Notification extends Base
             case Task::EVENT_OPEN:
                 $subject = $this->getStandardMailSubject(e('Task opened'), $data);
                 break;
+            case Task::EVENT_FLAG:
+                $subject = $this->getStandardMailSubject(e('Task flagged'), $data);
+                break;
             case Task::EVENT_MOVE_COLUMN:
                 $subject = $this->getStandardMailSubject(e('Column Change'), $data);
                 break;

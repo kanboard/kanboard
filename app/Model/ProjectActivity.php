@@ -223,6 +223,8 @@ class ProjectActivity extends Base
                 return t('%s closed the task #%d', $event['author'], $event['task']['id']);
             case Task::EVENT_OPEN:
                 return t('%s open the task #%d', $event['author'], $event['task']['id']);
+            case Task::EVENT_FLAG:
+                return t('%s flag the task #%d', $event['author'], $event['task']['id']);
             case Task::EVENT_MOVE_COLUMN:
                 return t('%s moved the task #%d to the column "%s"', $event['author'], $event['task']['id'], $event['task']['column_title']);
             case Task::EVENT_MOVE_POSITION:

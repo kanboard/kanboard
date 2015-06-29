@@ -26,6 +26,7 @@ class TaskStatus extends Base
         return $listing + array(
             Task::STATUS_OPEN => t('Open'),
             Task::STATUS_CLOSED => t('Closed'),
+            Task::EVENT_FLAG => t('Flagged'),
         );
     }
 
@@ -54,18 +55,6 @@ class TaskStatus extends Base
     }
 
     /**
-     * Mark a task flagged
-     *
-     * @access public
-     * @param  integer   $task_id   Task id
-     * @return boolean
-     */
-    public function flag($task_id)
-    {
-        return $this->changeStatus($task_id, Task::STATUS_OPEN, time(), Task::EVENT_FLAG);
-    }
-
-    /**
      * Mark a task closed
      *
      * @access public
@@ -87,6 +76,18 @@ class TaskStatus extends Base
     public function open($task_id)
     {
         return $this->changeStatus($task_id, Task::STATUS_OPEN, 0, Task::EVENT_OPEN);
+    }
+
+    /**
+     * Mark a task flagged
+     *
+     * @access public
+     * @param  integer   $task_id   Task id
+     * @return boolean
+     */
+    public function flag($task_id)
+    {
+        return $this->changeStatus($task_id, Task::STATUS_OPEN, 0, Task::EVENT_FLAG);
     }
 
     /**
