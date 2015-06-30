@@ -17,9 +17,7 @@ class Webhook extends Base
      */
     public function task()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
+        $this->checkWebhookToken();
 
         $defaultProject = $this->project->getFirst();
 
@@ -49,15 +47,13 @@ class Webhook extends Base
      */
     public function github()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
+        $this->checkWebhookToken();
 
         $this->githubWebhook->setProjectId($this->request->getIntegerParam('project_id'));
 
         $result = $this->githubWebhook->parsePayload(
             $this->request->getHeader('X-Github-Event'),
-            $this->request->getJson() ?: array()
+            $this->request->getJson()
         );
 
         echo $result ? 'PARSED' : 'IGNORED';
@@ -70,15 +66,10 @@ class Webhook extends Base
      */
     public function gitlab()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
+        $this->checkWebhookToken();
 
         $this->gitlabWebhook->setProjectId($this->request->getIntegerParam('project_id'));
-
-        $result = $this->gitlabWebhook->parsePayload(
-            $this->request->getJson() ?: array()
-        );
+        $result = $this->gitlabWebhook->parsePayload($this->request->getJson());
 
         echo $result ? 'PARSED' : 'IGNORED';
     }
@@ -90,14 +81,48 @@ class Webhook extends Base
      */
     public function bitbucket()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
-            $this->response->text('Not Authorized', 401);
-        }
+        $this->checkWebhookToken();
 
         $this->bitbucketWebhook->setProjectId($this->request->getIntegerParam('project_id'));
 
-        $result = $this->bitbucketWebhook->parsePayload(json_decode(@$_POST['payload'], true));
+        $result = $this->bitbucketWebhook->parsePayload(
+            $this->request->getHeader('X-Event-Key'),
+            $this->request->getJson()
+        );
 
         echo $result ? 'PARSED' : 'IGNORED';
+    }
+
+    /**
+     * Handle Postmark webhooks
+     *
+     * @access public
+     */
+    public function postmark()
+    {
+        $this->checkWebhookToken();
+        echo $this->postmark->receiveEmail($this->request->getJson()) ? 'PARSED' : 'IGNORED';
+    }
+
+    /**
+     * Handle Mailgun webhooks
+     *
+     * @access public
+     */
+    public function mailgun()
+    {
+        $this->checkWebhookToken();
+        echo $this->mailgun->receiveEmail($_POST) ? 'PARSED' : 'IGNORED';
+    }
+
+    /**
+     * Handle Sendgrid webhooks
+     *
+     * @access public
+     */
+    public function sendgrid()
+    {
+        $this->checkWebhookToken();
+        echo $this->sendgrid->receiveEmail($_POST) ? 'PARSED' : 'IGNORED';
     }
 }

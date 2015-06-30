@@ -146,6 +146,46 @@ class Board extends Base
     }
 
     /**
+     * Get columns with consecutive positions
+     *
+     * If you remove a column, the positions are not anymore consecutives
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return array
+     */
+    public function getNormalizedColumnPositions($project_id)
+    {
+        $columns = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'position');
+        $position = 1;
+
+        foreach ($columns as $column_id => $column_position) {
+            $columns[$column_id] = $position++;
+        }
+
+        return $columns;
+    }
+
+    /**
+     * Save the new positions for a set of columns
+     *
+     * @access public
+     * @param  array   $columns    Hashmap of column_id/column_position
+     * @return boolean
+     */
+    public function saveColumnPositions(array $columns)
+    {
+        return $this->db->transaction(function ($db) use ($columns) {
+
+            foreach ($columns as $column_id => $position) {
+                if (! $db->table(Board::TABLE)->eq('id', $column_id)->update(array('position' => $position))) {
+                    return false;
+                }
+            }
+        });
+    }
+
+    /**
      * Move a column down, increment the column position value
      *
      * @access public
@@ -155,7 +195,7 @@ class Board extends Base
      */
     public function moveDown($project_id, $column_id)
     {
-        $columns = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'position');
+        $columns = $this->getNormalizedColumnPositions($project_id);
         $positions = array_flip($columns);
 
         if (isset($columns[$column_id]) && $columns[$column_id] < count($columns)) {
@@ -163,12 +203,7 @@ class Board extends Base
             $position = ++$columns[$column_id];
             $columns[$positions[$position]]--;
 
-            $this->db->startTransaction();
-            $this->db->table(self::TABLE)->eq('id', $column_id)->update(array('position' => $position));
-            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $columns[$positions[$position]]));
-            $this->db->closeTransaction();
-
-            return true;
+            return $this->saveColumnPositions($columns);
         }
 
         return false;
@@ -184,7 +219,7 @@ class Board extends Base
      */
     public function moveUp($project_id, $column_id)
     {
-        $columns = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'position');
+        $columns = $this->getNormalizedColumnPositions($project_id);
         $positions = array_flip($columns);
 
         if (isset($columns[$column_id]) && $columns[$column_id] > 1) {
@@ -192,12 +227,7 @@ class Board extends Base
             $position = --$columns[$column_id];
             $columns[$positions[$position]]++;
 
-            $this->db->startTransaction();
-            $this->db->table(self::TABLE)->eq('id', $column_id)->update(array('position' => $position));
-            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $columns[$positions[$position]]));
-            $this->db->closeTransaction();
-
-            return true;
+            return $this->saveColumnPositions($columns);
         }
 
         return false;
@@ -285,6 +315,18 @@ class Board extends Base
     }
 
     /**
+     * Get the last column id for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return integer
+     */
+    public function getLastColumn($project_id)
+    {
+        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->desc('position')->findOneColumn('id');
+    }
+
+    /**
      * Get the list of columns sorted by position [ column_id => title ]
      *
      * @access public
@@ -332,6 +374,19 @@ class Board extends Base
     public function getColumn($column_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $column_id)->findOne();
+    }
+
+    /**
+     * Get a column id by the name
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  string   $title
+     * @return integer
+     */
+    public function getColumnIdByTitle($project_id, $title)
+    {
+        return (int) $this->db->table(self::TABLE)->eq('project_id', $project_id)->eq('title', $title)->findOneColumn('id');
     }
 
     /**

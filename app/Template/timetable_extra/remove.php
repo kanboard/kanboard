@@ -6,8 +6,8 @@
     <p class="alert alert-info"><?= t('Do you really want to remove this time slot?') ?></p>
 
     <div class="form-actions">
-        <?= $this->a(t('Yes'), 'timetableextra', 'remove', array('user_id' => $user['id'], 'slot_id' => $slot_id), true, 'btn btn-red') ?>
+        <?= $this->url->link(t('Yes'), 'timetableextra', 'remove', array('user_id' => $user['id'], 'slot_id' => $slot_id), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= $this->a(t('cancel'), 'timetableextra', 'index', array('user_id' => $user['id'])) ?>
+        <?= $this->url->link(t('cancel'), 'timetableextra', 'index', array('user_id' => $user['id'])) ?>
     </div>
 </div>

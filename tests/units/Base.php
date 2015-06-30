@@ -6,8 +6,51 @@ require __DIR__.'/../../app/constants.php';
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
+use SimpleLogger\Logger;
+use SimpleLogger\File;
 
-date_default_timezone_set('UTC');
+class FakeHttpClient
+{
+    private $url = '';
+    private $data = array();
+    private $headers = array();
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    public function toPrettyJson()
+    {
+        return json_encode($this->data, JSON_PRETTY_PRINT);
+    }
+
+    public function postJson($url, array $data, array $headers = array())
+    {
+        $this->url = $url;
+        $this->data = $data;
+        $this->headers = $headers;
+        return true;
+    }
+
+    public function postForm($url, array $data, array $headers = array())
+    {
+        $this->url = $url;
+        $this->data = $data;
+        $this->headers = $headers;
+        return true;
+    }
+}
 
 abstract class Base extends PHPUnit_Framework_TestCase
 {
@@ -37,7 +80,12 @@ abstract class Base extends PHPUnit_Framework_TestCase
             new Stopwatch
         );
 
-        $this->container['db']->log_queries = true;
+        $this->container['db']->logQueries = true;
+
+        $this->container['logger'] = new Logger;
+        $this->container['logger']->setLogger(new File('/dev/null'));
+        $this->container['httpClient'] = new FakeHttpClient;
+        $this->container['emailClient'] = $this->getMockBuilder('EmailClient')->setMethods(array('send'))->getMock();
     }
 
     public function tearDown()

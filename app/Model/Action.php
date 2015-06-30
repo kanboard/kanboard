@@ -53,9 +53,12 @@ class Action extends Base
             'TaskAssignCategoryColor' => t('Assign automatically a category based on a color'),
             'CommentCreation' => t('Create a comment from an external provider'),
             'TaskCreation' => t('Create a task from an external provider'),
-            'TaskLogMoveAnotherColumn' => t('Add a comment logging moving the task between columns'),
+            'TaskLogMoveAnotherColumn' => t('Add a comment log when moving the task between columns'),
             'TaskAssignUser' => t('Change the assignee based on an external username'),
             'TaskAssignCategoryLabel' => t('Change the category based on an external label'),
+            'TaskUpdateStartDate' => t('Automatically update the start date'),
+            'TaskMoveColumnCategoryChange' => t('Move the task to another column when the category is changed'),
+            'TaskEmail' => t('Send a task by email to someone'),
         );
 
         asort($values);
@@ -75,7 +78,7 @@ class Action extends Base
             Task::EVENT_MOVE_COLUMN => t('Move a task to another column'),
             Task::EVENT_UPDATE => t('Task modification'),
             Task::EVENT_CREATE => t('Task creation'),
-            Task::EVENT_OPEN => t('Open a closed task'),
+            Task::EVENT_OPEN => t('Reopen a task'),
             Task::EVENT_CLOSE => t('Closing a task'),
             Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
             Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
@@ -90,6 +93,11 @@ class Action extends Base
             GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
             GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
             BitbucketWebhook::EVENT_COMMIT => t('Bitbucket commit received'),
+            BitbucketWebhook::EVENT_ISSUE_OPENED => t('Bitbucket issue opened'),
+            BitbucketWebhook::EVENT_ISSUE_CLOSED => t('Bitbucket issue closed'),
+            BitbucketWebhook::EVENT_ISSUE_REOPENED => t('Bitbucket issue reopened'),
+            BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE => t('Bitbucket issue assignee change'),
+            BitbucketWebhook::EVENT_ISSUE_COMMENT => t('Bitbucket issue comment created'),
         );
 
         asort($values);
@@ -173,7 +181,6 @@ class Action extends Base
         $params = array();
 
         foreach ($this->getAll() as $action) {
-
             $action = $this->load($action['action_name'], $action['project_id'], $action['event_name']);
             $params += $action->getActionRequiredParameters();
         }
@@ -191,7 +198,10 @@ class Action extends Base
     public function getById($action_id)
     {
         $action = $this->db->table(self::TABLE)->eq('id', $action_id)->findOne();
-        $action['params'] = $this->db->table(self::TABLE_PARAMS)->eq('action_id', $action_id)->findAll();
+
+        if (! empty($action)) {
+            $action['params'] = $this->db->table(self::TABLE_PARAMS)->eq('action_id', $action_id)->findAll();
+        }
 
         return $action;
     }
@@ -231,7 +241,7 @@ class Action extends Base
             return false;
         }
 
-        $action_id = $this->db->getConnection()->getLastId();
+        $action_id = $this->db->getLastId();
 
         foreach ($values['params'] as $param_name => $param_value) {
 
@@ -283,7 +293,7 @@ class Action extends Base
      * @param  string           $name         Action class name
      * @param  integer          $project_id   Project id
      * @param  string           $event        Event name
-     * @return \Core\Listener                 Action instance
+     * @return \Action\Base
      */
     public function load($name, $project_id, $event)
     {
@@ -292,67 +302,111 @@ class Action extends Base
     }
 
     /**
-     * Copy Actions and related Actions Parameters from a project to another one
+     * Copy actions from a project to another one (skip actions that cannot resolve parameters)
      *
      * @author Antonio Rabelo
-     * @param  integer    $project_from      Project Template
-     * @return integer    $project_to        Project that receives the copy
+     * @param  integer    $src_project_id      Source project id
+     * @return integer    $dst_project_id      Destination project id
      * @return boolean
      */
-    public function duplicate($project_from, $project_to)
+    public function duplicate($src_project_id, $dst_project_id)
     {
-        $actionTemplate = $this->action->getAllByProject($project_from);
+        $actions = $this->action->getAllByProject($src_project_id);
 
-        foreach ($actionTemplate as $action) {
+        foreach ($actions as $action) {
 
-            unset($action['id']);
-            $action['project_id'] = $project_to;
-            $actionParams = $action['params'];
-            unset($action['params']);
+            $this->db->startTransaction();
 
-            if (! $this->db->table(self::TABLE)->save($action)) {
-                return false;
+            $values = array(
+                'project_id' => $dst_project_id,
+                'event_name' => $action['event_name'],
+                'action_name' => $action['action_name'],
+            );
+
+            if (! $this->db->table(self::TABLE)->insert($values)) {
+                $this->container['logger']->debug('Action::duplicate => unable to create '.$action['action_name']);
+                $this->db->cancelTransaction();
+                continue;
             }
 
-            $action_clone_id = $this->db->getConnection()->getLastId();
+            $action_id = $this->db->getLastId();
 
-            foreach ($actionParams as $param) {
-                unset($param['id']);
-                $param['value'] = $this->resolveDuplicatedParameters($param, $project_to);
-                $param['action_id'] = $action_clone_id;
-
-                if (! $this->db->table(self::TABLE_PARAMS)->save($param)) {
-                    return false;
-                }
+            if (! $this->duplicateParameters($dst_project_id, $action_id, $action['params'])) {
+                $this->container['logger']->debug('Action::duplicate => unable to copy parameters for '.$action['action_name']);
+                $this->db->cancelTransaction();
+                continue;
             }
+
+            $this->db->closeTransaction();
         }
-
-        // $this->container['fileCache']->remove('proxy_action_getAll');
 
         return true;
     }
 
     /**
-     * Resolve type of action value from a project to the respective value in another project
+     * Duplicate action parameters
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  integer  $action_id
+     * @param  array    $params
+     * @return boolean
+     */
+    public function duplicateParameters($project_id, $action_id, array $params)
+    {
+        foreach ($params as $param) {
+
+            $value = $this->resolveParameters($param, $project_id);
+
+            if ($value === false) {
+                $this->container['logger']->debug('Action::duplicateParameters => unable to resolve '.$param['name'].'='.$param['value']);
+                return false;
+            }
+
+            $values = array(
+                'action_id' => $action_id,
+                'name' => $param['name'],
+                'value' => $value,
+            );
+
+            if (! $this->db->table(self::TABLE_PARAMS)->insert($values)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Resolve action parameter values according to another project
      *
      * @author Antonio Rabelo
-     * @param  integer    $param             An action parameter
-     * @return integer    $project_to        Project to find the corresponding values
-     * @return mixed                         The corresponding values from $project_to
+     * @access public
+     * @param  array      $param             Action parameter
+     * @param  integer    $project_id        Project to find the corresponding values
+     * @return mixed
      */
-    private function resolveDuplicatedParameters($param, $project_to)
+    public function resolveParameters(array $param, $project_id)
     {
-        switch($param['name']) {
+        switch ($param['name']) {
             case 'project_id':
-                return $project_to;
+                return $project_id;
             case 'category_id':
-                $categoryTemplate = $this->category->getById($param['value']);
-                $categoryFromNewProject = $this->db->table(Category::TABLE)->eq('project_id', $project_to)->eq('name', $categoryTemplate['name'])->findOne();
-                return $categoryFromNewProject['id'];
+                return $this->category->getIdByName($project_id, $this->category->getNameById($param['value'])) ?: false;
+            case 'src_column_id':
+            case 'dest_column_id':
+            case 'dst_column_id':
             case 'column_id':
-                $boardTemplate = $this->board->getColumn($param['value']);
-                $boardFromNewProject = $this->db->table(Board::TABLE)->eq('project_id', $project_to)->eq('title', $boardTemplate['title'])->findOne();
-                return $boardFromNewProject['id'];
+                $column = $this->board->getColumn($param['value']);
+
+                if (empty($column)) {
+                    return false;
+                }
+
+                return $this->board->getColumnIdByTitle($project_id, $column['title']) ?: false;
+            case 'user_id':
+            case 'owner_id':
+                return $this->projectPermission->isMember($project_id, $param['value']) ? $param['value'] : false;
             default:
                 return $param['value'];
         }

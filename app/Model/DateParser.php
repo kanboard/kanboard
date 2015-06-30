@@ -148,7 +148,7 @@ class DateParser extends Base
      */
     public function getTimestampFromIsoFormat($date)
     {
-        return $this->removeTimeFromTimestamp(strtotime($date));
+        return $this->removeTimeFromTimestamp(ctype_digit($date) ? $date : strtotime($date));
     }
 
     /**

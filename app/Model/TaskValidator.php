@@ -30,6 +30,13 @@ class TaskValidator extends Base
             new Validators\Integer('score', t('This value must be an integer')),
             new Validators\Integer('category_id', t('This value must be an integer')),
             new Validators\Integer('swimlane_id', t('This value must be an integer')),
+            new Validators\Integer('recurrence_child', t('This value must be an integer')),
+            new Validators\Integer('recurrence_parent', t('This value must be an integer')),
+            new Validators\Integer('recurrence_factor', t('This value must be an integer')),
+            new Validators\Integer('recurrence_timeframe', t('This value must be an integer')),
+            new Validators\Integer('recurrence_basedate', t('This value must be an integer')),
+            new Validators\Integer('recurrence_trigger', t('This value must be an integer')),
+            new Validators\Integer('recurrence_status', t('This value must be an integer')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
             new Validators\Date('date_due', t('Invalid date'), $this->dateParser->getDateFormats()),
             new Validators\Date('date_started', t('Invalid date'), $this->dateParser->getDateFormats()),
@@ -80,6 +87,28 @@ class TaskValidator extends Base
             $v->getErrors()
         );
     }
+
+    /**
+     * Validate edit recurrence
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateEditRecurrence(array $values)
+    {
+        $rules = array(
+            new Validators\Required('id', t('The id is required')),
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
 
     /**
      * Validate task modification (form)

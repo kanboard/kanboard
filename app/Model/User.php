@@ -5,6 +5,7 @@ namespace Model;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Core\Session;
+use Core\Security;
 
 /**
  * User model
@@ -37,7 +38,7 @@ class User extends Base
      */
     public function exists($user_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $user_id)->count() === 1;
+        return $this->db->table(self::TABLE)->eq('id', $user_id)->exists();
     }
 
     /**
@@ -56,7 +57,6 @@ class User extends Base
                         'name',
                         'email',
                         'is_admin',
-                        'default_project_id',
                         'is_ldap_user',
                         'notifications_enabled',
                         'google_id',
@@ -110,10 +110,14 @@ class User extends Base
      *
      * @access public
      * @param  string  $google_id  Google unique id
-     * @return array
+     * @return array|boolean
      */
     public function getByGoogleId($google_id)
     {
+        if (empty($google_id)) {
+            return false;
+        }
+
         return $this->db->table(self::TABLE)->eq('google_id', $google_id)->findOne();
     }
 
@@ -122,10 +126,14 @@ class User extends Base
      *
      * @access public
      * @param  string  $github_id  GitHub user id
-     * @return array
+     * @return array|boolean
      */
     public function getByGitHubId($github_id)
     {
+        if (empty($github_id)) {
+            return false;
+        }
+
         return $this->db->table(self::TABLE)->eq('github_id', $github_id)->findOne();
     }
 
@@ -139,6 +147,38 @@ class User extends Base
     public function getByUsername($username)
     {
         return $this->db->table(self::TABLE)->eq('username', $username)->findOne();
+    }
+
+    /**
+     * Get a specific user by the email address
+     *
+     * @access public
+     * @param  string  $email  Email
+     * @return array|boolean
+     */
+    public function getByEmail($email)
+    {
+        if (empty($email)) {
+            return false;
+        }
+
+        return $this->db->table(self::TABLE)->eq('email', $email)->findOne();
+    }
+
+    /**
+     * Fetch user by using the token
+     *
+     * @access public
+     * @param  string   $token    Token
+     * @return array|boolean
+     */
+    public function getByToken($token)
+    {
+        if (empty($token)) {
+            return false;
+        }
+
+        return $this->db->table(self::TABLE)->eq('token', $token)->findOne();
     }
 
     /**
@@ -261,8 +301,18 @@ class User extends Base
     {
         return $this->db->transaction(function ($db) use ($user_id) {
 
-            // All assigned tasks are now unassigned
+            // All assigned tasks are now unassigned (no foreign key)
             if (! $db->table(Task::TABLE)->eq('owner_id', $user_id)->update(array('owner_id' => 0))) {
+                return false;
+            }
+
+            // All assigned subtasks are now unassigned (no foreign key)
+            if (! $db->table(Subtask::TABLE)->eq('user_id', $user_id)->update(array('user_id' => 0))) {
+                return false;
+            }
+
+            // All comments are not assigned anymore (no foreign key)
+            if (! $db->table(Comment::TABLE)->eq('user_id', $user_id)->update(array('user_id' => 0))) {
                 return false;
             }
 
@@ -285,6 +335,36 @@ class User extends Base
     }
 
     /**
+     * Enable public access for a user
+     *
+     * @access public
+     * @param  integer   $user_id   User id
+     * @return bool
+     */
+    public function enablePublicAccess($user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('id', $user_id)
+                    ->save(array('token' => Security::generateToken()));
+    }
+
+    /**
+     * Disable public access for a user
+     *
+     * @access public
+     * @param  integer   $user_id    User id
+     * @return bool
+     */
+    public function disablePublicAccess($user_id)
+    {
+        return $this->db
+                    ->table(self::TABLE)
+                    ->eq('id', $user_id)
+                    ->save(array('token' => ''));
+    }
+
+    /**
      * Common validation rules
      *
      * @access private
@@ -296,7 +376,6 @@ class User extends Base
             new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
             new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
             new Validators\Email('email', t('Email address invalid')),
-            new Validators\Integer('default_project_id', t('This value must be an integer')),
             new Validators\Integer('is_admin', t('This value must be an integer')),
         );
     }

@@ -8,6 +8,7 @@ use Model\Task;
  * Assign a color to a task
  *
  * @package action
+ * @author  Frederic Guillot
  */
 class TaskAssignColorColumn extends Base
 {
@@ -20,6 +21,7 @@ class TaskAssignColorColumn extends Base
     public function getCompatibleEvents()
     {
         return array(
+            Task::EVENT_CREATE,
             Task::EVENT_MOVE_COLUMN,
         );
     }

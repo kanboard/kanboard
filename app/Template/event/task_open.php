@@ -1,9 +1,9 @@
-<?= $this->avatar($email, $author) ?>
+<?= $this->user->avatar($email, $author) ?>
 
 <p class="activity-title">
     <?= e('%s opened the task %s',
             $this->e($author),
-            $this->a(t('#%d', $task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']))
+            $this->url->link(t('#%d', $task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']))
         ) ?>
 </p>
 <p class="activity-description">

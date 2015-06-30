@@ -1,6 +1,6 @@
 <div class="task-board color-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>">
 
-    <?= $this->a('#'.$task['id'], 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
+    <?= $this->url->link('#'.$task['id'], 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
 
     <?php if ($task['reference']): ?>
     <span class="task-board-reference" title="<?= t('Reference') ?>">
@@ -19,7 +19,7 @@
     </span>
 
     <div class="task-board-title">
-        <?= $this->a($this->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
+        <?= $this->url->link($this->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
     </div>
 
     <?= $this->render('board/task_footer', array(

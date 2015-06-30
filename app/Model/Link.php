@@ -55,8 +55,7 @@ class Link extends Base
      */
     public function getOppositeLinkId($link_id)
     {
-        $link = $this->getById($link_id);
-        return $link['opposite_id'] ?: $link_id;
+        return $this->db->table(self::TABLE)->eq('id', $link_id)->findOneColumn('opposite_id') ?: $link_id;
     }
 
     /**
@@ -113,7 +112,7 @@ class Link extends Base
      * @access public
      * @param  string   $label
      * @param  string   $opposite_label
-     * @return boolean
+     * @return boolean|integer
      */
     public function create($label, $opposite_label = '')
     {
@@ -124,38 +123,28 @@ class Link extends Base
             return false;
         }
 
-        if ($opposite_label !== '') {
-            $this->createOpposite($opposite_label);
+        $label_id = $this->db->getLastId();
+
+        if (! empty($opposite_label)) {
+
+            $this->db
+                ->table(self::TABLE)
+                ->insert(array(
+                    'label' => $opposite_label,
+                    'opposite_id' => $label_id,
+                ));
+
+            $this->db
+                ->table(self::TABLE)
+                ->eq('id', $label_id)
+                ->update(array(
+                    'opposite_id' => $this->db->getLastId()
+                ));
         }
 
         $this->db->closeTransaction();
 
-        return true;
-    }
-
-    /**
-     * Create the opposite label (executed inside create() method)
-     *
-     * @access private
-     * @param  string   $label
-     */
-    private function createOpposite($label)
-    {
-        $label_id = $this->db->getConnection()->getLastId();
-
-        $this->db
-            ->table(self::TABLE)
-            ->insert(array(
-                'label' => $label,
-                'opposite_id' => $label_id,
-            ));
-
-        $this->db
-            ->table(self::TABLE)
-            ->eq('id', $label_id)
-            ->update(array(
-                'opposite_id' => $this->db->getConnection()->getLastId()
-            ));
+        return (int) $label_id;
     }
 
     /**

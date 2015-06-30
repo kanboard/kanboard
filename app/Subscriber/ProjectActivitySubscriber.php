@@ -8,7 +8,7 @@ use Model\Comment;
 use Model\Subtask;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
+class ProjectActivitySubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
@@ -20,6 +20,7 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
             Task::EVENT_OPEN => array('execute', 0),
             Task::EVENT_MOVE_COLUMN => array('execute', 0),
             Task::EVENT_MOVE_POSITION => array('execute', 0),
+            Task::EVENT_MOVE_SWIMLANE => array('execute', 0),
             Comment::EVENT_UPDATE => array('execute', 0),
             Comment::EVENT_CREATE => array('execute', 0),
             Subtask::EVENT_UPDATE => array('execute', 0),
@@ -42,32 +43,15 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
                 $values
             );
 
-            $this->sendSlackNotification($event_name, $values);
-            $this->sendHipchatNotification($event_name, $values);
-        }
-    }
-
-    private function sendSlackNotification($event_name, array $values)
-    {
-        if ($this->config->get('integration_slack_webhook') == 1) {
-            $this->slackWebhook->notify(
-                $values['task']['project_id'],
-                $values['task']['id'],
-                $event_name,
-                $values
-            );
-        }
-    }
-
-    private function sendHipchatNotification($event_name, array $values)
-    {
-        if ($this->config->get('integration_hipchat') == 1) {
-            $this->hipchat->notify(
-                $values['task']['project_id'],
-                $values['task']['id'],
-                $event_name,
-                $values
-            );
+            // Send notifications to third-party services
+            foreach (array('slackWebhook', 'hipchatWebhook', 'jabber') as $model) {
+                $this->$model->notify(
+                    $values['task']['project_id'],
+                    $values['task']['id'],
+                    $event_name,
+                    $values
+                );
+            }
         }
     }
 
@@ -75,6 +59,7 @@ class ProjectActivitySubscriber extends Base implements EventSubscriberInterface
     {
         $values = array();
         $values['task'] = $this->taskFinder->getDetails($event['task_id']);
+        $values['changes'] = isset($event['changes']) ? $event['changes'] : array();
 
         switch (get_class($event)) {
             case 'Event\SubtaskEvent':

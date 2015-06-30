@@ -10,10 +10,250 @@ use Model\TaskPosition;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Category;
+use Model\User;
+use Model\ProjectPermission;
 use Integration\GithubWebhook;
+use Integration\BitbucketWebhook;
 
 class ActionTest extends Base
 {
+    public function testGetActions()
+    {
+        $a = new Action($this->container);
+
+        $actions = $a->getAvailableActions();
+        $this->assertNotEmpty($actions);
+        $this->assertEquals('Add a comment log when moving the task between columns', current($actions));
+        $this->assertEquals('TaskLogMoveAnotherColumn', key($actions));
+    }
+
+    public function testGetEvents()
+    {
+        $a = new Action($this->container);
+
+        $events = $a->getAvailableEvents();
+        $this->assertNotEmpty($events);
+        $this->assertEquals('Bitbucket commit received', current($events));
+        $this->assertEquals(BitbucketWebhook::EVENT_COMMIT, key($events));
+    }
+
+    public function testGetCompatibleEvents()
+    {
+        $a = new Action($this->container);
+        $events = $a->getCompatibleEvents('TaskAssignSpecificUser');
+
+        $this->assertNotEmpty($events);
+        $this->assertCount(2, $events);
+        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE, $events);
+        $this->assertArrayHasKey(Task::EVENT_MOVE_COLUMN, $events);
+    }
+
+    public function testResolveDuplicatedParameters()
+    {
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $a = new Action($this->container);
+        $c = new Category($this->container);
+        $u = new User($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'P1')));
+        $this->assertEquals(2, $p->create(array('name' => 'P2')));
+
+        $this->assertEquals(1, $c->create(array('name' => 'C1', 'project_id' => 1)));
+
+        $this->assertEquals(2, $c->create(array('name' => 'C2', 'project_id' => 2)));
+        $this->assertEquals(3, $c->create(array('name' => 'C1', 'project_id' => 2)));
+
+        $this->assertEquals(2, $u->create(array('username' => 'unittest1')));
+        $this->assertEquals(3, $u->create(array('username' => 'unittest2')));
+
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addMember(1, 3));
+        $this->assertTrue($pp->addMember(2, 3));
+
+        // anything
+        $this->assertEquals('blah', $a->resolveParameters(array('name' => 'foobar', 'value' => 'blah'), 2));
+
+        // project_id
+        $this->assertEquals(2, $a->resolveParameters(array('name' => 'project_id', 'value' => 'blah'), 2));
+
+        // category_id
+        $this->assertEquals(3, $a->resolveParameters(array('name' => 'category_id', 'value' => 1), 2));
+        $this->assertFalse($a->resolveParameters(array('name' => 'category_id', 'value' => 0), 2));
+        $this->assertFalse($a->resolveParameters(array('name' => 'category_id', 'value' => 5), 2));
+
+        // column_id
+        $this->assertFalse($a->resolveParameters(array('name' => 'column_id', 'value' => 10), 2));
+        $this->assertFalse($a->resolveParameters(array('name' => 'column_id', 'value' => 0), 2));
+        $this->assertEquals(5, $a->resolveParameters(array('name' => 'column_id', 'value' => 1), 2));
+        $this->assertEquals(6, $a->resolveParameters(array('name' => 'dest_column_id', 'value' => 2), 2));
+        $this->assertEquals(7, $a->resolveParameters(array('name' => 'dst_column_id', 'value' => 3), 2));
+        $this->assertEquals(8, $a->resolveParameters(array('name' => 'src_column_id', 'value' => 4), 2));
+
+        // user_id
+        $this->assertFalse($a->resolveParameters(array('name' => 'user_id', 'value' => 10), 2));
+        $this->assertFalse($a->resolveParameters(array('name' => 'user_id', 'value' => 0), 2));
+        $this->assertFalse($a->resolveParameters(array('name' => 'user_id', 'value' => 2), 2));
+        $this->assertFalse($a->resolveParameters(array('name' => 'owner_id', 'value' => 2), 2));
+        $this->assertEquals(3, $a->resolveParameters(array('name' => 'user_id', 'value' => 3), 2));
+        $this->assertEquals(3, $a->resolveParameters(array('name' => 'owner_id', 'value' => 3), 2));
+    }
+
+    public function testDuplicateSuccess()
+    {
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $a = new Action($this->container);
+        $u = new User($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'P1')));
+        $this->assertEquals(2, $p->create(array('name' => 'P2')));
+
+        $this->assertEquals(2, $u->create(array('username' => 'unittest1')));
+        $this->assertEquals(3, $u->create(array('username' => 'unittest2')));
+
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addMember(1, 3));
+        $this->assertTrue($pp->addMember(2, 3));
+
+        $this->assertEquals(1, $a->create(array(
+            'project_id' => 1,
+            'event_name' => Task::EVENT_CREATE_UPDATE,
+            'action_name' => 'TaskAssignSpecificUser',
+            'params' => array(
+                'column_id' => 1,
+                'user_id' => 3,
+            )
+        )));
+
+        $action = $a->getById(1);
+        $this->assertNotEmpty($action);
+        $this->assertNotEmpty($action['params']);
+        $this->assertEquals(1, $action['project_id']);
+
+        $this->assertTrue($a->duplicate(1, 2));
+
+        $action = $a->getById(2);
+        $this->assertNotEmpty($action);
+        $this->assertNotEmpty($action['params']);
+        $this->assertEquals(2, $action['project_id']);
+        $this->assertEquals(Task::EVENT_CREATE_UPDATE, $action['event_name']);
+        $this->assertEquals('TaskAssignSpecificUser', $action['action_name']);
+        $this->assertEquals('column_id', $action['params'][0]['name']);
+        $this->assertEquals(5, $action['params'][0]['value']);
+        $this->assertEquals('user_id', $action['params'][1]['name']);
+        $this->assertEquals(3, $action['params'][1]['value']);
+    }
+
+    public function testDuplicateUnableToResolveParams()
+    {
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $a = new Action($this->container);
+        $u = new User($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'P1')));
+        $this->assertEquals(2, $p->create(array('name' => 'P2')));
+
+        $this->assertEquals(2, $u->create(array('username' => 'unittest1')));
+
+        $this->assertTrue($pp->addMember(1, 2));
+
+        $this->assertEquals(1, $a->create(array(
+            'project_id' => 1,
+            'event_name' => Task::EVENT_CREATE_UPDATE,
+            'action_name' => 'TaskAssignSpecificUser',
+            'params' => array(
+                'column_id' => 1,
+                'user_id' => 2,
+            )
+        )));
+
+        $action = $a->getById(1);
+        $this->assertNotEmpty($action);
+        $this->assertNotEmpty($action['params']);
+        $this->assertEquals(1, $action['project_id']);
+        $this->assertEquals('user_id', $action['params'][1]['name']);
+        $this->assertEquals(2, $action['params'][1]['value']);
+
+        $this->assertTrue($a->duplicate(1, 2));
+
+        $action = $a->getById(2);
+        $this->assertEmpty($action);
+    }
+
+    public function testDuplicateMixedResults()
+    {
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $a = new Action($this->container);
+        $u = new User($this->container);
+        $c = new Category($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'P1')));
+        $this->assertEquals(2, $p->create(array('name' => 'P2')));
+
+        $this->assertEquals(1, $c->create(array('name' => 'C1', 'project_id' => 1)));
+        $this->assertEquals(2, $c->create(array('name' => 'C2', 'project_id' => 2)));
+        $this->assertEquals(3, $c->create(array('name' => 'C1', 'project_id' => 2)));
+
+        $this->assertEquals(2, $u->create(array('username' => 'unittest1')));
+
+        $this->assertTrue($pp->addMember(1, 2));
+
+        $this->assertEquals(1, $a->create(array(
+            'project_id' => 1,
+            'event_name' => Task::EVENT_CREATE_UPDATE,
+            'action_name' => 'TaskAssignSpecificUser',
+            'params' => array(
+                'column_id' => 1,
+                'user_id' => 2,
+            )
+        )));
+
+        $action = $a->getById(1);
+        $this->assertNotEmpty($action);
+        $this->assertNotEmpty($action['params']);
+
+        $this->assertEquals(2, $a->create(array(
+            'project_id' => 1,
+            'event_name' => Task::EVENT_CREATE_UPDATE,
+            'action_name' => 'TaskAssignCategoryColor',
+            'params' => array(
+                'color_id' => 'blue',
+                'category_id' => 1,
+            )
+        )));
+
+        $action = $a->getById(2);
+        $this->assertNotEmpty($action);
+        $this->assertNotEmpty($action['params']);
+        $this->assertEquals('category_id', $action['params'][1]['name']);
+        $this->assertEquals(1, $action['params'][1]['value']);
+
+        $actions = $a->getAllByProject(1);
+        $this->assertNotEmpty($actions);
+        $this->assertCount(2, $actions);
+
+        $this->assertTrue($a->duplicate(1, 2));
+
+        $actions = $a->getAllByProject(2);
+        $this->assertNotEmpty($actions);
+        $this->assertCount(1, $actions);
+
+        $actions = $a->getAll();
+        $this->assertNotEmpty($actions);
+        $this->assertCount(3, $actions);
+
+        $action = $a->getById($actions[2]['id']);
+        $this->assertNotEmpty($action);
+        $this->assertNotEmpty($action['params']);
+        $this->assertEquals('color_id', $action['params'][0]['name']);
+        $this->assertEquals('blue', $action['params'][0]['value']);
+        $this->assertEquals('category_id', $action['params'][1]['name']);
+        $this->assertEquals(3, $action['params'][1]['value']);
+    }
+
     public function testSingleAction()
     {
         $tp = new TaskPosition($this->container);
@@ -70,12 +310,10 @@ class ActionTest extends Base
         $b = new Board($this->container);
         $p = new Project($this->container);
         $a = new Action($this->container);
-        $c = new Category($this->container);
         $g = new GithubWebhook($this->container);
 
         // We create a project
         $this->assertEquals(1, $p->create(array('name' => 'unit_test')));
-        $this->assertEquals(1, $c->create(array('name' => 'unit_test')));
 
         // We create a new action
         $this->assertEquals(1, $a->create(array(

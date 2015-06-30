@@ -15,7 +15,7 @@
         <td><?= $slot['start'] ?></td>
         <td><?= $slot['end'] ?></td>
         <td>
-            <?= $this->a(t('Remove'), 'timetableday', 'confirm', array('user_id' => $user['id'], 'slot_id' => $slot['id'])) ?>
+            <?= $this->url->link(t('Remove'), 'timetableday', 'confirm', array('user_id' => $user['id'], 'slot_id' => $slot['id'])) ?>
         </td>
     </tr>
     <?php endforeach ?>
@@ -24,16 +24,16 @@
 <h3><?= t('Add new time slot') ?></h3>
 <?php endif ?>
 
-<form method="post" action="<?= $this->u('timetableday', 'save', array('user_id' => $user['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('timetableday', 'save', array('user_id' => $user['id'])) ?>" autocomplete="off">
 
-    <?= $this->formHidden('user_id', $values) ?>
-    <?= $this->formCsrf() ?>
+    <?= $this->form->hidden('user_id', $values) ?>
+    <?= $this->form->csrf() ?>
 
-    <?= $this->formLabel(t('Start time'), 'start') ?>
-    <?= $this->formSelect('start', $this->getDayHours(), $values, $errors) ?>
+    <?= $this->form->label(t('Start time'), 'start') ?>
+    <?= $this->form->select('start', $this->datetime->getDayHours(), $values, $errors) ?>
 
-    <?= $this->formLabel(t('End time'), 'end') ?>
-    <?= $this->formSelect('end', $this->getDayHours(), $values, $errors) ?>
+    <?= $this->form->label(t('End time'), 'end') ?>
+    <?= $this->form->select('end', $this->datetime->getDayHours(), $values, $errors) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

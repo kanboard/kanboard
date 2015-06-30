@@ -42,7 +42,7 @@ class Hourlyrate extends User
 
             if ($this->hourlyRate->create($values['user_id'], $values['rate'], $values['currency'], $values['date_effective'])) {
                 $this->session->flash(t('Hourly rate created successfully.'));
-                $this->response->redirect($this->helper->url('hourlyrate', 'index', array('user_id' => $values['user_id'])));
+                $this->response->redirect($this->helper->url->to('hourlyrate', 'index', array('user_id' => $values['user_id'])));
             }
             else {
                 $this->session->flashError(t('Unable to save the hourly rate.'));
@@ -84,6 +84,6 @@ class Hourlyrate extends User
             $this->session->flash(t('Unable to remove this rate.'));
         }
 
-        $this->response->redirect($this->helper->url('hourlyrate', 'index', array('user_id' => $user['id'])));
+        $this->response->redirect($this->helper->url->to('hourlyrate', 'index', array('user_id' => $user['id'])));
     }
 }

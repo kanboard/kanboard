@@ -21,11 +21,15 @@ Select your project, then click on "Public access" and finally click on the butt
 
 ![Enable public access](http://kanboard.net/screenshots/documentation/project-enable-sharing.png)
 
-After that, you got the public link and the RSS feed.
-The activity feed is available only when the public access is activated.
+When the public access is enabled, a couple of links are generated:
+
+- Public board view
+- RSS feed subscription link
+- iCalendar subscription link
 
 ![Disable public access](http://kanboard.net/screenshots/documentation/project-disable-sharing.png)
 
 You can also disable the public access whenever you want.
+
 Each time, you enable or disable the public access a new random token is generated.
-The old link will not work anymore.
+The previous links will not work anymore.

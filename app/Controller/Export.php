@@ -40,7 +40,7 @@ class Export extends Base
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'project' => $project,
             'title' => $page_title,
-        )));
+        ), 'export/sidebar'));
     }
 
     /**

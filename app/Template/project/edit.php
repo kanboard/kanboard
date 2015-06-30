@@ -1,20 +1,28 @@
 <div class="page-header">
     <h2><?= t('Edit project') ?></h2>
 </div>
-<form method="post" action="<?= $this->u('project', 'update', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('project', 'update', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-    <?= $this->formCsrf() ?>
-    <?= $this->formHidden('id', $values) ?>
+    <?= $this->form->csrf() ?>
+    <?= $this->form->hidden('id', $values) ?>
 
-    <?= $this->formLabel(t('Name'), 'name') ?>
-    <?= $this->formText('name', $values, $errors, array('required', 'maxlength="50"')) ?>
+    <?= $this->form->label(t('Name'), 'name') ?>
+    <?= $this->form->text('name', $values, $errors, array('required', 'maxlength="50"')) ?>
 
-    <?= $this->formLabel(t('Description'), 'description') ?>
+    <?= $this->form->label(t('Identifier'), 'identifier') ?>
+    <?= $this->form->text('identifier', $values, $errors, array('maxlength="50"')) ?>
+    <p class="form-help"><?= t('The project identifier is an optional alphanumeric code used to identify your project.') ?></p>
+
+    <?php if ($this->user->isAdmin()): ?>
+        <?= $this->form->checkbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
+    <?php endif ?>
+
+    <?= $this->form->label(t('Description'), 'description') ?>
 
     <div class="form-tabs">
 
         <div class="write-area">
-          <?= $this->formTextarea('description', $values, $errors) ?>
+          <?= $this->form->textarea('description', $values, $errors) ?>
         </div>
         <div class="preview-area">
             <div class="markdown"></div>
@@ -29,10 +37,6 @@
         </ul>
     </div>
     <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
-
-    <?php if ($project['is_private'] == 1 && $this->userSession->isAdmin()): ?>
-        <?= $this->formCheckbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
-    <?php endif ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

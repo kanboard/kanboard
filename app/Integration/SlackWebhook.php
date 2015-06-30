@@ -8,8 +8,37 @@ namespace Integration;
  * @package  integration
  * @author   Frederic Guillot
  */
-class SlackWebhook extends Base
+class SlackWebhook extends \Core\Base
 {
+    /**
+     * Return true if Slack is enabled for this project or globally
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return boolean
+     */
+    public function isActivated($project_id)
+    {
+        return $this->config->get('integration_slack_webhook') == 1 || $this->projectIntegration->hasValue($project_id, 'slack', 1);
+    }
+
+    /**
+     * Get wehbook url
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return string
+     */
+    public function getWebhookUrl($project_id)
+    {
+        if ($this->config->get('integration_slack_webhook') == 1) {
+            return $this->config->get('integration_slack_webhook_url');
+        }
+
+        $options = $this->projectIntegration->getParameters($project_id);
+        return $options['slack_webhook_url'];
+    }
+
     /**
      * Send message to the incoming Slack webhook
      *
@@ -21,23 +50,26 @@ class SlackWebhook extends Base
      */
     public function notify($project_id, $task_id, $event_name, array $event)
     {
-        $project = $this->project->getbyId($project_id);
+        if ($this->isActivated($project_id)) {
 
-        $event['event_name'] = $event_name;
-        $event['author'] = $this->user->getFullname($this->session['user']);
+            $project = $this->project->getbyId($project_id);
 
-        $payload = array(
-            'text' => '*['.$project['name'].']* '.str_replace('&quot;', '"', $this->projectActivity->getTitle($event)),
-            'username' => 'Kanboard',
-            'icon_url' => 'http://kanboard.net/assets/img/favicon.png',
-        );
+            $event['event_name'] = $event_name;
+            $event['author'] = $this->user->getFullname($this->session['user']);
 
-        if ($this->config->get('application_url')) {
-            $payload['text'] .= ' - <'.$this->config->get('application_url');
-            $payload['text'] .= $this->helper->u('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id));
-            $payload['text'] .= '|'.t('view the task on Kanboard').'>';
+            $payload = array(
+                'text' => '*['.$project['name'].']* '.str_replace('&quot;', '"', $this->projectActivity->getTitle($event)).(isset($event['task']['title']) ? ' ('.$event['task']['title'].')' : ''),
+                'username' => 'Kanboard',
+                'icon_url' => 'http://kanboard.net/assets/img/favicon.png',
+            );
+
+            if ($this->config->get('application_url')) {
+                $payload['text'] .= ' - <'.$this->config->get('application_url');
+                $payload['text'] .= $this->helper->url->href('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id));
+                $payload['text'] .= '|'.t('view the task on Kanboard').'>';
+            }
+
+            $this->httpClient->postJson($this->getWebhookUrl($project_id), $payload);
         }
-
-        $this->httpClient->post($this->config->get('integration_slack_webhook_url'), $payload);
     }
 }

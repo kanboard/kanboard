@@ -57,6 +57,10 @@ select {
     max-width: 95%;
 }
 
+select:focus {
+    outline: 0;
+}
+
 ::-webkit-input-placeholder {
     color: #ddd;
     padding-top: 2px;
@@ -73,7 +77,7 @@ select {
 }
 
 .form-actions {
-    margin-top: 20px;
+    padding-top: 20px;
     clear: both;
 }
 

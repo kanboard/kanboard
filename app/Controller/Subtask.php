@@ -252,11 +252,11 @@ class Subtask extends Base
     {
         switch ($redirect) {
             case 'board':
-                $this->response->redirect($this->helper->url('board', 'show', array('project_id' => $task['project_id'])));
+                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
             case 'dashboard':
-                $this->response->redirect($this->helper->url('app', 'index'));
+                $this->response->redirect($this->helper->url->to('app', 'index'));
             default:
-                $this->response->redirect($this->helper->url('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#subtasks');
         }
     }
 
@@ -275,6 +275,6 @@ class Subtask extends Base
         $method = $direction === 'up' ? 'moveUp' : 'moveDown';
 
         $this->subtask->$method($task_id, $subtask_id);
-        $this->response->redirect($this->helper->url('task', 'show', array('project_id' => $project_id, 'task_id' => $task_id)).'#subtasks');
+        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $project_id, 'task_id' => $task_id)).'#subtasks');
     }
 }

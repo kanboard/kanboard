@@ -29,17 +29,4 @@ class UserSessionTest extends Base
         $s['user'] = array('is_admin' => true);
         $this->assertTrue($us->isAdmin());
     }
-
-    public function testLastSeenProject()
-    {
-        $us = new UserSession($this->container);
-
-        $this->assertEquals(0, $us->getLastSeenProjectId());
-
-        $us->storeLastSeenProjectId(33);
-        $this->assertEquals(33, $us->getLastSeenProjectId());
-
-        $us->storeLastSeenProjectId(66);
-        $this->assertEquals(66, $us->getLastSeenProjectId());
-    }
 }

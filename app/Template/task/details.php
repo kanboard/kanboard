@@ -9,6 +9,11 @@
             <strong><?= t('Reference: %s', $task['reference']) ?></strong>
         </li>
         <?php endif ?>
+        <?php if (! empty($task['swimlane_name'])): ?>
+        <li>
+            <?= t('Swimlane: %s', $task['swimlane_name']) ?>
+        </li>
+        <?php endif ?>
         <li>
             <?= dt('Created on %B %e, %Y at %k:%M %p', $task['date_creation']) ?>
         </li>
@@ -77,7 +82,19 @@
         </li>
         <?php if ($project['is_public']): ?>
         <li>
-            <?= $this->a(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+            <?= $this->url->link(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+        </li>
+        <?php endif ?>
+
+        <?php if (! isset($not_editable) && $task['recurrence_status'] != \Model\Task::RECURRING_STATUS_NONE): ?>
+        <li>
+            <strong><?= t('Recurring information') ?></strong>
+            <?= $this->render('task/recurring_info', array(
+                'task' => $task,
+                'recurrence_trigger_list' => $recurrence_trigger_list,
+                'recurrence_timeframe_list' => $recurrence_timeframe_list,
+                'recurrence_basedate_list' => $recurrence_basedate_list,
+            )) ?>
         </li>
         <?php endif ?>
     </ul>

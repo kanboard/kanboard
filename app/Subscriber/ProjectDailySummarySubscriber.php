@@ -6,7 +6,7 @@ use Event\TaskEvent;
 use Model\Task;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProjectDailySummarySubscriber extends Base implements EventSubscriberInterface
+class ProjectDailySummarySubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

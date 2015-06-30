@@ -1,4 +1,11 @@
-<?= $this->render('task/details', array('task' => $task, 'project' => $project)) ?>
+<?= $this->render('task/details', array(
+    'task' => $task,
+    'project' => $project,
+    'recurrence_trigger_list' => $this->task->recurrenceTriggers(),
+    'recurrence_timeframe_list' => $this->task->recurrenceTimeframes(),
+    'recurrence_basedate_list' => $this->task->recurrenceBasedates(),
+)) ?>
+
 <?= $this->render('task/time', array('task' => $task, 'values' => $values, 'date_format' => $date_format, 'date_formats' => $date_formats)) ?>
 <?= $this->render('task/show_description', array('task' => $task)) ?>
 <?= $this->render('tasklink/show', array('task' => $task, 'links' => $links, 'link_label_list' => $link_label_list)) ?>

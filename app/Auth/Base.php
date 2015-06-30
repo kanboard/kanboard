@@ -9,14 +9,8 @@ use Pimple\Container;
  *
  * @package  auth
  * @author   Frederic Guillot
- *
- * @property \Core\Session             $session
- * @property \Model\Acl                $acl
- * @property \Model\LastLogin          $lastLogin
- * @property \Model\User               $user
- * @property \Model\UserSession        $userSession
  */
-abstract class Base
+abstract class Base extends \Core\Base
 {
     /**
      * Database instance
@@ -25,14 +19,6 @@ abstract class Base
      * @var \PicoDb\Database
      */
     protected $db;
-
-    /**
-     * Container instance
-     *
-     * @access protected
-     * @var \Pimple\Container
-     */
-    protected $container;
 
     /**
      * Constructor
@@ -44,17 +30,5 @@ abstract class Base
     {
         $this->container = $container;
         $this->db = $this->container['db'];
-    }
-
-    /**
-     * Load automatically models
-     *
-     * @access public
-     * @param  string     $name    Model name
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        return $this->container[$name];
     }
 }

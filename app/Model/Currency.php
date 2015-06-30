@@ -35,7 +35,9 @@ class Currency extends Base
      * Calculate the price for the reference currency
      *
      * @access public
-     * @return array
+     * @param  string  $currency
+     * @param  double  $price
+     * @return double
      */
     public function getPrice($currency, $price)
     {
@@ -62,7 +64,7 @@ class Currency extends Base
      */
     public function create($currency, $rate)
     {
-        if ($this->db->table(self::TABLE)->eq('currency', $currency)->count() === 1) {
+        if ($this->db->table(self::TABLE)->eq('currency', $currency)->exists()) {
             return $this->update($currency, $rate);
         }
 

@@ -14,20 +14,23 @@ class Webhook extends Base
      * Call the external URL
      *
      * @access public
-     * @param  string   $url    URL to call
-     * @param  array    $task   Task data
+     * @param  array    $values   Event payload
      */
-    public function notify($url, array $task)
+    public function notify(array $values)
     {
+        $url = $this->config->get('webhook_url');
         $token = $this->config->get('webhook_token');
 
-        if (strpos($url, '?') !== false) {
-            $url .= '&token='.$token;
-        }
-        else {
-            $url .= '?token='.$token;
-        }
+        if (! empty($url)) {
 
-        return $this->httpClient->post($url, $task);
+            if (strpos($url, '?') !== false) {
+                $url .= '&token='.$token;
+            }
+            else {
+                $url .= '?token='.$token;
+            }
+
+            return $this->httpClient->postJson($url, $values);
+        }
     }
 }

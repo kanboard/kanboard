@@ -1,9 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Budget') ?></h2>
-    <ul>
-        <li><?= $this->a(t('Budget lines'), 'budget', 'create', array('project_id' => $project['id'])) ?></li>
-        <li><?= $this->a(t('Cost breakdown'), 'budget', 'breakdown', array('project_id' => $project['id'])) ?></li>
-    </ul>
+    <h2><?= t('Budget lines') ?></h2>
 </div>
 
 <?php if (! empty($lines)): ?>
@@ -20,7 +16,7 @@
         <td><?= dt('%B %e, %Y', strtotime($line['date'])) ?></td>
         <td><?= $this->e($line['comment']) ?></td>
         <td>
-            <?= $this->a(t('Remove'), 'budget', 'confirm', array('project_id' => $project['id'], 'budget_id' => $line['id'])) ?>
+            <?= $this->url->link(t('Remove'), 'budget', 'confirm', array('project_id' => $project['id'], 'budget_id' => $line['id'])) ?>
         </td>
     </tr>
     <?php endforeach ?>
@@ -29,21 +25,21 @@
 <h3><?= t('New budget line') ?></h3>
 <?php endif ?>
 
-<form method="post" action="<?= $this->u('budget', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('budget', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-    <?= $this->formCsrf() ?>
+    <?= $this->form->csrf() ?>
 
-    <?= $this->formHidden('id', $values) ?>
-    <?= $this->formHidden('project_id', $values) ?>
+    <?= $this->form->hidden('id', $values) ?>
+    <?= $this->form->hidden('project_id', $values) ?>
 
-    <?= $this->formLabel(t('Amount'), 'amount') ?>
-    <?= $this->formText('amount', $values, $errors, array('required'), 'form-numeric') ?>
+    <?= $this->form->label(t('Amount'), 'amount') ?>
+    <?= $this->form->text('amount', $values, $errors, array('required'), 'form-numeric') ?>
 
-    <?= $this->formLabel(t('Date'), 'date') ?>
-    <?= $this->formText('date', $values, $errors, array('required'), 'form-date') ?>
+    <?= $this->form->label(t('Date'), 'date') ?>
+    <?= $this->form->text('date', $values, $errors, array('required'), 'form-date') ?>
 
-    <?= $this->formLabel(t('Comment'), 'comment') ?>
-    <?= $this->formText('comment', $values, $errors) ?>
+    <?= $this->form->label(t('Comment'), 'comment') ?>
+    <?= $this->form->text('comment', $values, $errors) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

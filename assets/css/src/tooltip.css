@@ -68,11 +68,11 @@ div.ui-tooltip {
     margin-bottom: 0px;
 }
 
-.tooltip-tasklinks li {
-    list-style-type: none;
-}
-
 .column-tooltip {
 	color: #999;
 	font-size: 0.95em;
+}
+
+.ui-tooltip ul {
+    margin-left: 20px;
 }

@@ -21,9 +21,9 @@ class Acl extends Base
         'user' => array('google', 'github'),
         'task' => array('readonly'),
         'board' => array('readonly'),
-        'project' => array('feed'),
         'webhook' => '*',
-        'app' => array('colors'),
+        'ical' => '*',
+        'feed' => '*',
     );
 
     /**
@@ -36,10 +36,12 @@ class Acl extends Base
         'board' => '*',
         'comment' => '*',
         'file' => '*',
-        'project' => array('show', 'tasks', 'search', 'activity'),
+        'project' => array('show'),
+        'projectinfo' => array('tasks', 'search', 'activity'),
         'subtask' => '*',
         'task' => '*',
         'tasklink' => '*',
+        'timer' => '*',
         'calendar' => array('show', 'project'),
     );
 
@@ -74,6 +76,7 @@ class Acl extends Base
         'project' => array('remove'),
         'hourlyrate' => '*',
         'currency' => '*',
+        'twofactor' => array('disable'),
     );
 
     /**

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "01ebe465ed3a59d8350670ebd4ef8793",
+    "hash": "776660c2872a470ad420af02104aea45",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -109,17 +109,70 @@
             "time": "2015-02-12 09:11:49"
         },
         {
-            "name": "erusev/parsedown",
-            "version": "1.5.1",
+            "name": "eluceo/ical",
+            "version": "0.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/erusev/parsedown.git",
-                "reference": "9da19c1108c39df9b42adc42e39b8371070652d0"
+                "url": "https://github.com/markuspoerschke/iCal.git",
+                "reference": "0d79c35b9e5f7f1dcfb5315cc1e8507f74093083"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/9da19c1108c39df9b42adc42e39b8371070652d0",
-                "reference": "9da19c1108c39df9b42adc42e39b8371070652d0",
+                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/0d79c35b9e5f7f1dcfb5315cc1e8507f74093083",
+                "reference": "0d79c35b9e5f7f1dcfb5315cc1e8507f74093083",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Eluceo\\iCal": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maciej Łebkowski",
+                    "email": "m.lebkowski@gmail.com",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Markus Poerschke",
+                    "email": "markus@eluceo.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 2445 as best as possible.",
+            "homepage": "https://github.com/markuspoerschke/iCal",
+            "keywords": [
+                "calendar",
+                "iCalendar",
+                "ical",
+                "ics",
+                "php calendar"
+            ],
+            "time": "2015-02-21 23:14:47"
+        },
+        {
+            "name": "erusev/parsedown",
+            "version": "1.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a",
+                "reference": "b9e5228e92e5f5c17d7774cfb2de8e5e8362de1a",
                 "shasum": ""
             },
             "type": "library",
@@ -145,20 +198,78 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-01-24 13:01:47"
+            "time": "2015-04-29 20:22:24"
         },
         {
-            "name": "fguillot/json-rpc",
-            "version": "v0.0.1",
+            "name": "fabiang/xmpp",
+            "version": "0.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fguillot/JsonRPC.git",
-                "reference": "86e8339205616ad9b09d581957cc084a99c0ed27"
+                "url": "https://github.com/fabiang/xmpp.git",
+                "reference": "47fdbe4a60ef0e726c4aaf39d6eb57afd42915c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/86e8339205616ad9b09d581957cc084a99c0ed27",
-                "reference": "86e8339205616ad9b09d581957cc084a99c0ed27",
+                "url": "https://api.github.com/repos/fabiang/xmpp/zipball/47fdbe4a60ef0e726c4aaf39d6eb57afd42915c8",
+                "reference": "47fdbe4a60ef0e726c4aaf39d6eb57afd42915c8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "behat/behat": "~2.5",
+                "monolog/monolog": "~1.11",
+                "phpunit/phpunit": "~4.3",
+                "satooshi/php-coveralls": "~0.6"
+            },
+            "suggest": {
+                "psr/log-implementation": "Allows more advanced logging of the xmpp connection"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fabiang\\Xmpp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabian Grutschus",
+                    "email": "f.grutschus@lubyte.de",
+                    "homepage": "http://www.lubyte.de/",
+                    "role": "developer"
+                }
+            ],
+            "description": "Library for XMPP protocol (Jabber) connections",
+            "homepage": "https://github.com/fabiang/xmpp",
+            "keywords": [
+                "jabber",
+                "xmpp"
+            ],
+            "time": "2014-11-20 08:59:24"
+        },
+        {
+            "name": "fguillot/json-rpc",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fguillot/JsonRPC.git",
+                "reference": "ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8",
+                "reference": "ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +283,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Unlicense"
+                "MIT"
             ],
             "authors": [
                 {
@@ -180,22 +291,22 @@
                     "homepage": "http://fredericguillot.com"
                 }
             ],
-            "description": "A simple Json-RPC client/server library that just works",
+            "description": "Simple Json-RPC client/server library that just works",
             "homepage": "https://github.com/fguillot/JsonRPC",
-            "time": "2014-11-22 20:32:14"
+            "time": "2015-05-20 15:08:40"
         },
         {
             "name": "fguillot/picodb",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "35c8d2d3f70b713f66e1dc14c1d6481abe5db3ac"
+                "reference": "6d9e2314a7aa2893a49c7da7b66f7352bd6ea296"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/35c8d2d3f70b713f66e1dc14c1d6481abe5db3ac",
-                "reference": "35c8d2d3f70b713f66e1dc14c1d6481abe5db3ac",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/6d9e2314a7aa2893a49c7da7b66f7352bd6ea296",
+                "reference": "6d9e2314a7aa2893a49c7da7b66f7352bd6ea296",
                 "shasum": ""
             },
             "require": {
@@ -209,7 +320,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "WTFPL"
+                "MIT"
             ],
             "authors": [
                 {
@@ -219,20 +330,20 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2015-04-12 02:46:43"
+            "time": "2015-06-27 16:13:40"
         },
         {
             "name": "fguillot/simple-validator",
-            "version": "dev-master",
+            "version": "v0.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleValidator.git",
-                "reference": "41655dc7b9224395f5bb3b5623f6e428fe6d64e8"
+                "reference": "2f30078bb6e688cf123c150d58fda322792a1532"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/41655dc7b9224395f5bb3b5623f6e428fe6d64e8",
-                "reference": "41655dc7b9224395f5bb3b5623f6e428fe6d64e8",
+                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/2f30078bb6e688cf123c150d58fda322792a1532",
+                "reference": "2f30078bb6e688cf123c150d58fda322792a1532",
                 "shasum": ""
             },
             "require": {
@@ -250,26 +361,25 @@
             ],
             "authors": [
                 {
-                    "name": "Frédéric Guillot",
-                    "homepage": "http://fredericguillot.com"
+                    "name": "Frédéric Guillot"
                 }
             ],
             "description": "The most easy to use validator library for PHP :)",
             "homepage": "https://github.com/fguillot/simpleValidator",
-            "time": "2015-04-05 21:44:06"
+            "time": "2015-04-14 02:03:43"
         },
         {
             "name": "fguillot/simpleLogger",
-            "version": "v0.0.1",
+            "version": "v0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleLogger.git",
-                "reference": "81df5643931d97e0101b4757d9454dbcb13a3fa9"
+                "reference": "97bc14002f18d2fc18ee124c877ac3e55b3fa88b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleLogger/zipball/81df5643931d97e0101b4757d9454dbcb13a3fa9",
-                "reference": "81df5643931d97e0101b4757d9454dbcb13a3fa9",
+                "url": "https://api.github.com/repos/fguillot/simpleLogger/zipball/97bc14002f18d2fc18ee124c877ac3e55b3fa88b",
+                "reference": "97bc14002f18d2fc18ee124c877ac3e55b3fa88b",
                 "shasum": ""
             },
             "require": {
@@ -293,7 +403,7 @@
             ],
             "description": "PHP library to write logs (compatible with PSR-3)",
             "homepage": "https://github.com/fguillot/simpleLogger",
-            "time": "2015-01-02 03:40:21"
+            "time": "2015-05-30 19:25:09"
         },
         {
             "name": "lusitanian/oauth",
@@ -356,6 +466,52 @@
                 "security"
             ],
             "time": "2014-09-05 15:19:58"
+        },
+        {
+            "name": "nickcernis/html-to-markdown",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nickcernis/html-to-markdown.git",
+                "reference": "7263d2ce65011b050fa7ecda0cbe09b23e84271d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nickcernis/html-to-markdown/zipball/7263d2ce65011b050fa7ecda0cbe09b23e84271d",
+                "reference": "7263d2ce65011b050fa7ecda0cbe09b23e84271d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "php": ">=5.3.3",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "HTML_To_Markdown.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Cernis",
+                    "email": "nick@cern.is",
+                    "homepage": "http://modernnerd.net"
+                }
+            ],
+            "description": "An HTML-to-markdown conversion helper for PHP",
+            "homepage": "https://github.com/nickcernis/html-to-markdown",
+            "keywords": [
+                "html",
+                "markdown"
+            ],
+            "time": "2015-02-22 12:59:02"
         },
         {
             "name": "pimple/pimple",
@@ -443,23 +599,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.0",
+            "version": "v5.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f"
+                "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/31454f258f10329ae7c48763eb898a75c39e0a9f",
-                "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0697e6aa65c83edf97bb0f23d8763f94e3f11421",
+                "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1"
+                "mockery/mockery": "~0.9.1,<0.9.4"
             },
             "type": "library",
             "extra": {
@@ -488,28 +644,28 @@
             "description": "Swiftmailer, free feature-rich PHP mailer",
             "homepage": "http://swiftmailer.org",
             "keywords": [
+                "email",
                 "mail",
                 "mailer"
             ],
-            "time": "2015-03-14 06:06:39"
+            "time": "2015-06-06 14:19:39"
         },
         {
             "name": "symfony/console",
-            "version": "v2.6.6",
-            "target-dir": "Symfony/Component/Console",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "5b91dc4ed5eb08553f57f6df04c4730a73992667"
+                "reference": "564398bc1f33faf92fc2ec86859983d30eb81806"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/5b91dc4ed5eb08553f57f6df04c4730a73992667",
-                "reference": "5b91dc4ed5eb08553f57f6df04c4730a73992667",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/564398bc1f33faf92fc2ec86859983d30eb81806",
+                "reference": "564398bc1f33faf92fc2ec86859983d30eb81806",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "psr/log": "~1.0",
@@ -525,11 +681,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\Console\\": ""
                 }
             },
@@ -539,35 +695,34 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
                     "name": "Fabien Potencier",
                     "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony Console Component",
-            "homepage": "http://symfony.com",
-            "time": "2015-03-30 15:54:10"
+            "homepage": "https://symfony.com",
+            "time": "2015-06-10 15:30:22"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.6.6",
-            "target-dir": "Symfony/Component/EventDispatcher",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "70f7c8478739ad21e3deef0d977b38c77f1fb284"
+                "reference": "be3c5ff8d503c46768aeb78ce6333051aa6f26d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/70f7c8478739ad21e3deef0d977b38c77f1fb284",
-                "reference": "70f7c8478739ad21e3deef0d977b38c77f1fb284",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/be3c5ff8d503c46768aeb78ce6333051aa6f26d9",
+                "reference": "be3c5ff8d503c46768aeb78ce6333051aa6f26d9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "psr/log": "~1.0",
@@ -584,11 +739,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\EventDispatcher\\": ""
                 }
             },
@@ -598,37 +753,36 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
                     "name": "Fabien Potencier",
                     "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony EventDispatcher Component",
-            "homepage": "http://symfony.com",
-            "time": "2015-03-13 17:37:22"
+            "homepage": "https://symfony.com",
+            "time": "2015-06-08 09:37:21"
         }
     ],
     "packages-dev": [
         {
             "name": "symfony/stopwatch",
-            "version": "v2.6.6",
-            "target-dir": "Symfony/Component/Stopwatch",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Stopwatch.git",
-                "reference": "5f196e84b5640424a166d2ce9cca161ce1e9d912"
+                "reference": "c653f1985f6c2b7dbffd04d48b9c0a96aaef814b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/5f196e84b5640424a166d2ce9cca161ce1e9d912",
-                "reference": "5f196e84b5640424a166d2ce9cca161ce1e9d912",
+                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/c653f1985f6c2b7dbffd04d48b9c0a96aaef814b",
+                "reference": "c653f1985f6c2b7dbffd04d48b9c0a96aaef814b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "symfony/phpunit-bridge": "~2.7"
@@ -636,11 +790,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\Stopwatch\\": ""
                 }
             },
@@ -650,25 +804,23 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
                     "name": "Fabien Potencier",
                     "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony Stopwatch Component",
-            "homepage": "http://symfony.com",
-            "time": "2015-03-22 16:55:57"
+            "homepage": "https://symfony.com",
+            "time": "2015-06-04 20:11:48"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "fguillot/simple-validator": 20,
         "swiftmailer/swiftmailer": 0,
-        "fguillot/picodb": 20,
         "symfony/console": 0
     },
     "prefer-stable": false,

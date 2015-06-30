@@ -9,8 +9,7 @@ use Core\Translator;
  */
 function t()
 {
-    $t = new Translator;
-    return call_user_func_array(array($t, 'translate'), func_get_args());
+    return call_user_func_array(array(Translator::getInstance(), 'translate'), func_get_args());
 }
 
 /**
@@ -20,19 +19,7 @@ function t()
  */
 function e()
 {
-    $t = new Translator;
-    return call_user_func_array(array($t, 'translateNoEscaping'), func_get_args());
-}
-
-/**
- * Translate a currency
- *
- * @return string
- */
-function c($value)
-{
-    $t = new Translator;
-    return $t->currency($value);
+    return call_user_func_array(array(Translator::getInstance(), 'translateNoEscaping'), func_get_args());
 }
 
 /**
@@ -42,8 +29,7 @@ function c($value)
  */
 function n($value)
 {
-    $t = new Translator;
-    return $t->number($value);
+    return Translator::getInstance()->number($value);
 }
 
 /**
@@ -53,8 +39,7 @@ function n($value)
  */
 function dt($format, $timestamp)
 {
-    $t = new Translator;
-    return $t->datetime($format, $timestamp);
+    return Translator::getInstance()->datetime($format, $timestamp);
 }
 
 /**
@@ -67,5 +52,3 @@ function p($value, $t1, $t2)
 {
     return $value > 1 ? $t2 : $t1;
 }
-
-

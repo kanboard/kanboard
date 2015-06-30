@@ -1,14 +1,14 @@
 <section id="main">
     <div class="page-header page-header-mobile">
         <ul>
-            <?php if ($this->userSession->isAdmin()): ?>
-                <li><i class="fa fa-plus fa-fw"></i><?= $this->a(t('New project'), 'project', 'create') ?></li>
+            <?php if ($this->user->isAdmin()): ?>
+                <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'project', 'create') ?></li>
             <?php endif ?>
-            <li><i class="fa fa-lock fa-fw"></i><?= $this->a(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
-            <li><i class="fa fa-folder fa-fw"></i><?= $this->a(t('Project management'), 'project', 'index') ?></li>
-            <?php if ($this->userSession->isAdmin()): ?>
-                <li><i class="fa fa-user fa-fw"></i><?= $this->a(t('User management'), 'user', 'index') ?></li>
-                <li><i class="fa fa-cog fa-fw"></i><?= $this->a(t('Settings'), 'config', 'index') ?></li>
+            <li><i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
+            <li><i class="fa fa-folder fa-fw"></i><?= $this->url->link(t('Project management'), 'project', 'index') ?></li>
+            <?php if ($this->user->isAdmin()): ?>
+                <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('User management'), 'user', 'index') ?></li>
+                <li><i class="fa fa-cog fa-fw"></i><?= $this->url->link(t('Settings'), 'config', 'index') ?></li>
             <?php endif ?>
             <li>
                 <span class="dropdown">
@@ -45,9 +45,9 @@
         <div class="dashboard-right-column">
             <div id="dashboard-calendar">
                 <div id="user-calendar"
-                     data-check-url="<?= $this->u('calendar', 'user') ?>"
+                     data-check-url="<?= $this->url->href('calendar', 'user') ?>"
                      data-user-id="<?= $user_id ?>"
-                     data-save-url="<?= $this->u('calendar', 'save') ?>"
+                     data-save-url="<?= $this->url->href('calendar', 'save') ?>"
                 >
                 </div>
             </div>

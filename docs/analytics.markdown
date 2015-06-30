@@ -22,6 +22,8 @@ Cumulative flow diagram
 
 This chart show the number of tasks cumulatively for each column over the time.
 
+Note: You need to have at least 2 days of data to see the graph.
+
 Burndown chart
 --------------
 
@@ -31,3 +33,10 @@ The [burn down chart](http://en.wikipedia.org/wiki/Burn_down_chart) is available
 This chart is a graphical representation of work left to do versus time.
 
 Kanboard use the complexity or story point to generate this diagram.
+
+Don't forget to run the daily job for stats calculation
+-------------------------------------------------------
+
+To generate accurate analytics data, you should run the daily cronjob **project daily summaries** just before midnight.
+
+[Read the documentation about Kanboard CLI](http://kanboard.net/documentation/cli)

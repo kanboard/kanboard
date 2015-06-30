@@ -2,41 +2,44 @@
 
 namespace Subscriber;
 
+use Event\CommentEvent;
+use Event\GenericEvent;
 use Event\TaskEvent;
+use Model\Comment;
 use Model\Task;
+use Model\File;
+use Model\Subtask;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class WebhookSubscriber extends Base implements EventSubscriberInterface
+class WebhookSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         return array(
-            Task::EVENT_CREATE => array('onTaskCreation', 0),
-            Task::EVENT_UPDATE => array('onTaskModification', 0),
-            Task::EVENT_CLOSE => array('onTaskModification', 0),
-            Task::EVENT_OPEN => array('onTaskModification', 0),
-            Task::EVENT_MOVE_COLUMN => array('onTaskModification', 0),
-            Task::EVENT_MOVE_POSITION => array('onTaskModification', 0),
-            Task::EVENT_ASSIGNEE_CHANGE => array('onTaskModification', 0),
+            Task::EVENT_CREATE => array('execute', 0),
+            Task::EVENT_UPDATE => array('execute', 0),
+            Task::EVENT_CLOSE => array('execute', 0),
+            Task::EVENT_OPEN => array('execute', 0),
+            Task::EVENT_MOVE_COLUMN => array('execute', 0),
+            Task::EVENT_MOVE_POSITION => array('execute', 0),
+            Task::EVENT_ASSIGNEE_CHANGE => array('execute', 0),
+            Task::EVENT_MOVE_PROJECT => array('execute', 0),
+            Task::EVENT_MOVE_SWIMLANE => array('execute', 0),
+            Comment::EVENT_CREATE => array('execute', 0),
+            Comment::EVENT_UPDATE => array('execute', 0),
+            File::EVENT_CREATE => array('execute', 0),
+            Subtask::EVENT_CREATE => array('execute', 0),
+            Subtask::EVENT_UPDATE => array('execute', 0),
         );
     }
 
-    public function onTaskCreation(TaskEvent $event)
+    public function execute(GenericEvent $event, $event_name)
     {
-        $this->executeRequest('webhook_url_task_creation', $event);
-    }
+        $payload = array(
+            'event_name' => $event_name,
+            'event_data' => $event->getAll(),
+        );
 
-    public function onTaskModification(TaskEvent $event)
-    {
-        $this->executeRequest('webhook_url_task_modification', $event);
-    }
-
-    public function executeRequest($parameter, TaskEvent $event)
-    {
-        $url = $this->config->get($parameter);
-
-        if (! empty($url)) {
-            $this->webhook->notify($url, $event->getAll());
-        }
+        $this->webhook->notify($payload);
     }
 }

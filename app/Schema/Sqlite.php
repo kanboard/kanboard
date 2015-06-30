@@ -6,7 +6,126 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 63;
+const VERSION = 73;
+
+function version_73($pdo)
+{
+    $pdo->exec("DELETE FROM settings WHERE option='subtask_time_tracking'");
+}
+
+function version_72($pdo)
+{
+    $pdo->exec(
+        'ALTER TABLE comments RENAME TO comments_bak'
+    );
+
+    $pdo->exec(
+        'CREATE TABLE comments (
+            id INTEGER PRIMARY KEY,
+            task_id INTEGER NOT NULL,
+            user_id INTEGER DEFAULT 0,
+            date_creation INTEGER NOT NULL,
+            comment TEXT NOT NULL,
+            reference VARCHAR(50),
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )'
+    );
+
+    $pdo->exec(
+        'INSERT INTO comments SELECT * FROM comments_bak'
+    );
+
+    $pdo->exec(
+        'DROP TABLE comments_bak'
+    );
+}
+
+function version_71($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN notifications_filter INTEGER DEFAULT 4");
+}
+
+function version_70($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('webhook_url', ''));
+
+    $pdo->exec("DELETE FROM settings WHERE option='webhook_url_task_creation'");
+    $pdo->exec("DELETE FROM settings WHERE option='webhook_url_task_modification'");
+}
+
+function version_69($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN token TEXT DEFAULT ''");
+}
+
+function version_68($pdo)
+{
+    $rq = $pdo->prepare("SELECT value FROM settings WHERE option='subtask_forecast'");
+    $rq->execute();
+    $result = $rq->fetch(PDO::FETCH_ASSOC);
+
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('calendar_user_subtasks_forecast', isset($result['subtask_forecast']) && $result['subtask_forecast'] == 1 ? 1 : 0));
+    $rq->execute(array('calendar_user_subtasks_time_tracking', 0));
+    $rq->execute(array('calendar_user_tasks', 'date_started'));
+    $rq->execute(array('calendar_project_tasks', 'date_started'));
+
+    $pdo->exec("DELETE FROM settings WHERE option='subtask_forecast'");
+}
+
+function version_67($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_jabber', '0'));
+    $rq->execute(array('integration_jabber_server', ''));
+    $rq->execute(array('integration_jabber_domain', ''));
+    $rq->execute(array('integration_jabber_username', ''));
+    $rq->execute(array('integration_jabber_password', ''));
+    $rq->execute(array('integration_jabber_nickname', 'kanboard'));
+    $rq->execute(array('integration_jabber_room', ''));
+
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber INTEGER DEFAULT '0'");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_server TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_domain TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_username TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_password TEXT DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_nickname TEXT DEFAULT 'kanboard'");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_room TEXT DEFAULT ''");
+}
+
+function version_66($pdo)
+{
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_status INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_trigger INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_factor INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_timeframe INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_basedate INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_parent INTEGER');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_child INTEGER');
+}
+
+function version_65($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN identifier TEXT DEFAULT ''");
+}
+
+function version_64($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_integrations (
+            id INTEGER PRIMARY KEY,
+            project_id INTEGER NOT NULL UNIQUE,
+            hipchat INTEGER DEFAULT 0,
+            hipchat_api_url TEXT DEFAULT 'https://api.hipchat.com',
+            hipchat_room_id TEXT,
+            hipchat_room_token TEXT,
+            slack INTEGER DEFAULT 0,
+            slack_webhook_url TEXT,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )
+    ");
+}
 
 function version_63($pdo)
 {
@@ -342,10 +461,10 @@ function version_37($pdo)
     $pdo->exec("
         CREATE TABLE swimlanes (
             id INTEGER PRIMARY KEY,
-            name TEXT,
+            name TEXT NOT NULL,
             position INTEGER DEFAULT 1,
             is_active INTEGER DEFAULT 1,
-            project_id INTEGER,
+            project_id INTEGER NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE (name, project_id)
         )
@@ -390,9 +509,9 @@ function version_33($pdo)
             id INTEGER PRIMARY KEY,
             date_creation INTEGER NOT NULL,
             event_name TEXT NOT NULL,
-            creator_id INTEGER,
-            project_id INTEGER,
-            task_id INTEGER,
+            creator_id INTEGE NOT NULL,
+            project_id INTEGER NOT NULL,
+            task_id INTEGER NOT NULL,
             data TEXT,
             FOREIGN KEY(creator_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
@@ -535,8 +654,8 @@ function version_23($pdo)
 
     $pdo->exec("
         CREATE TABLE user_has_notifications (
-            user_id INTEGER,
-            project_id INTEGER,
+            user_id INTEGER NOT NULL,
+            project_id INTEGER NOT NULL,
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE(project_id, user_id)
@@ -572,7 +691,7 @@ function version_18($pdo)
     $pdo->exec("
         CREATE TABLE task_has_subtasks (
             id INTEGER PRIMARY KEY,
-            title TEXT COLLATE NOCASE,
+            title TEXT COLLATE NOCASE NOT NULL,
             status INTEGER DEFAULT 0,
             time_estimated NUMERIC DEFAULT 0,
             time_spent NUMERIC DEFAULT 0,
@@ -588,10 +707,10 @@ function version_17($pdo)
     $pdo->exec("
         CREATE TABLE task_has_files (
             id INTEGER PRIMARY KEY,
-            name TEXT COLLATE NOCASE,
+            name TEXT COLLATE NOCASE NOT NULL,
             path TEXT,
             is_image INTEGER DEFAULT 0,
-            task_id INTEGER,
+            task_id INTEGER NOT NULL,
             FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
         )"
     );
@@ -602,8 +721,8 @@ function version_16($pdo)
     $pdo->exec("
         CREATE TABLE project_has_categories (
             id INTEGER PRIMARY KEY,
-            name TEXT COLLATE NOCASE,
-            project_id INT,
+            name TEXT COLLATE NOCASE NOT NULL,
+            project_id INTEGER NOT NULL,
             UNIQUE (project_id, name),
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
         )"
@@ -634,7 +753,7 @@ function version_12($pdo)
     $pdo->exec(
         'CREATE TABLE remember_me (
             id INTEGER PRIMARY KEY,
-            user_id INTEGER,
+            user_id INTEGER NOT NULL,
             ip TEXT,
             user_agent TEXT,
             token TEXT,
@@ -649,7 +768,7 @@ function version_12($pdo)
         'CREATE TABLE last_logins (
             id INTEGER PRIMARY KEY,
             auth_type TEXT,
-            user_id INTEGER,
+            user_id INTEGER NOT NULL,
             ip TEXT,
             user_agent TEXT,
             date_creation INTEGER,
@@ -692,9 +811,9 @@ function version_10($pdo)
     $pdo->exec(
         'CREATE TABLE actions (
             id INTEGER PRIMARY KEY,
-            project_id INTEGER,
-            event_name TEXT,
-            action_name TEXT,
+            project_id INTEGER NOT NULL,
+            event_name TEXT NOT NULL,
+            action_name TEXT NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
         )'
     );
@@ -702,9 +821,9 @@ function version_10($pdo)
     $pdo->exec(
         'CREATE TABLE action_has_params (
             id INTEGER PRIMARY KEY,
-            action_id INTEGER,
-            name TEXT,
-            value TEXT,
+            action_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            value TEXT NOT NULL,
             FOREIGN KEY(action_id) REFERENCES actions(id) ON DELETE CASCADE
         )'
     );
@@ -735,8 +854,8 @@ function version_7($pdo)
     $pdo->exec("
         CREATE TABLE project_has_users (
             id INTEGER PRIMARY KEY,
-            project_id INTEGER,
-            user_id INTEGER,
+            project_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             UNIQUE(project_id, user_id)
@@ -782,17 +901,16 @@ function version_1($pdo)
     $pdo->exec("
         CREATE TABLE users (
             id INTEGER PRIMARY KEY,
-            username TEXT,
+            username TEXT NOT NULL,
             password TEXT,
-            is_admin INTEGER DEFAULT 0,
-            default_project_id INTEGER DEFAULT 0
+            is_admin INTEGER DEFAULT 0
         )
     ");
 
     $pdo->exec("
         CREATE TABLE projects (
             id INTEGER PRIMARY KEY,
-            name TEXT NOCASE UNIQUE,
+            name TEXT NOCASE NOT NULL UNIQUE,
             is_active INTEGER DEFAULT 1
         )
     ");
@@ -800,9 +918,9 @@ function version_1($pdo)
     $pdo->exec("
         CREATE TABLE columns (
             id INTEGER PRIMARY KEY,
-            title TEXT,
+            title TEXT NOT NULL,
             position INTEGER,
-            project_id INTEGER,
+            project_id INTEGER NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE (title, project_id)
         )

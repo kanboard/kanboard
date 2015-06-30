@@ -53,7 +53,7 @@ class ProjectDuplication extends Base
             return 0;
         }
 
-        return $this->db->getConnection()->getLastId();
+        return $this->db->getLastId();
     }
 
     /**

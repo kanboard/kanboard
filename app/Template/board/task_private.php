@@ -3,12 +3,12 @@
      data-owner-id="<?= $task['owner_id'] ?>"
      data-category-id="<?= $task['category_id'] ?>"
      data-due-date="<?= $task['date_due'] ?>"
-     data-task-url="<?= $this->u('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+     data-task-url="<?= $this->url->href('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
 
     <?= $this->render('board/task_menu', array('task' => $task)) ?>
 
     <div class="task-board-collapsed" style="display: none">
-        <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-collapsed-title') ?>
+        <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-collapsed-title') ?>
     </div>
 
     <div class="task-board-expanded">
@@ -19,8 +19,8 @@
         </span>
         <?php endif ?>
 
-        <span class="task-board-user <?= $this->userSession->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
-            <?= $this->a(
+        <span class="task-board-user <?= $this->user->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
+            <?= $this->url->link(
                 (! empty($task['owner_id']) ? ($task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned')),
                 'board',
                 'changeAssignee',
@@ -32,12 +32,12 @@
         </span>
 
         <div class="task-board-days">
-            <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->getTaskAge($task['date_creation']) ?></span>
-            <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->getTaskAge($task['date_moved']) ?></span>
+            <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->datetime->age($task['date_creation']) ?></span>
+            <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->datetime->age($task['date_moved']) ?></span>
         </div>
 
         <div class="task-board-title">
-            <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+            <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </div>
 
         <?= $this->render('board/task_footer', array(

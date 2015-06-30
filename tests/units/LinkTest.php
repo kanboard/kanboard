@@ -10,9 +10,9 @@ class LinkTest extends Base
     {
         $l = new Link($this->container);
 
-        $this->assertTrue($l->create('Link A'));
+        $this->assertNotFalse($l->create('Link A'));
         $this->assertFalse($l->create('Link A'));
-        $this->assertTrue($l->create('Link B', 'Link C'));
+        $this->assertNotFalse($l->create('Link B', 'Link C'));
 
         $links = $l->getAll();
         $this->assertNotEmpty($links);
@@ -34,6 +34,18 @@ class LinkTest extends Base
         $this->assertNotEmpty($link2['opposite_id']);
 
         $this->assertNotEquals($link1['opposite_id'], $link2['opposite_id']);
+    }
+
+    public function testGetOppositeLinkId()
+    {
+        $l = new Link($this->container);
+
+        $this->assertNotFalse($l->create('Link A'));
+        $this->assertNotFalse($l->create('Link B', 'Link C'));
+
+        $this->assertEquals(1, $l->getOppositeLinkId(1));
+        $this->assertEquals(3, $l->getOppositeLinkId(2));
+        $this->assertEquals(2, $l->getOppositeLinkId(3));
     }
 
     public function testUpdate()

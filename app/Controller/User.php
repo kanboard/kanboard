@@ -69,7 +69,6 @@ class User extends Base
         $this->response->html(
             $this->template->layout('user/index', array(
                 'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
-                'projects' => $this->project->getList(),
                 'title' => t('Users').' ('.$paginator->getTotal().')',
                 'paginator' => $paginator,
         )));
@@ -105,12 +104,19 @@ class User extends Base
 
         if ($valid) {
 
-            if ($this->user->create($values)) {
+            $project_id = empty($values['project_id']) ? 0 : $values['project_id'];
+            unset($values['project_id']);
+
+            $user_id = $this->user->create($values);
+
+            if ($user_id !== false) {
+                $this->projectPermission->addMember($project_id, $user_id);
                 $this->session->flash(t('User created successfully.'));
-                $this->response->redirect('?controller=user');
+                $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user_id)));
             }
             else {
                 $this->session->flashError(t('Unable to create your user.'));
+                $values['project_id'] = $project_id;
             }
         }
 
@@ -126,7 +132,6 @@ class User extends Base
     {
         $user = $this->getUser();
         $this->response->html($this->layout('user/show', array(
-            'projects' => $this->projectPermission->getAllowedProjects($user['id']),
             'user' => $user,
             'timezones' => $this->config->getTimezones(true),
             'languages' => $this->config->getLanguages(true),
@@ -228,7 +233,7 @@ class User extends Base
         }
 
         $this->response->html($this->layout('user/notifications', array(
-            'projects' => $this->projectPermission->getAllowedProjects($user['id']),
+            'projects' => $this->projectPermission->getMemberProjects($user['id']),
             'notifications' => $this->notification->readSettings($user['id']),
             'user' => $user,
         )));
@@ -245,6 +250,35 @@ class User extends Base
         $this->response->html($this->layout('user/external', array(
             'last_logins' => $this->lastLogin->getAll($user['id']),
             'user' => $user,
+        )));
+    }
+
+    /**
+     * Public access management
+     *
+     * @access public
+     */
+    public function share()
+    {
+        $user = $this->getUser();
+        $switch = $this->request->getStringParam('switch');
+
+        if ($switch === 'enable' || $switch === 'disable') {
+
+            $this->checkCSRFParam();
+
+            if ($this->user->{$switch.'PublicAccess'}($user['id'])) {
+                $this->session->flash(t('User updated successfully.'));
+            } else {
+                $this->session->flashError(t('Unable to update this user.'));
+            }
+
+            $this->response->redirect($this->helper->url->to('user', 'share', array('user_id' => $user['id'])));
+        }
+
+        $this->response->html($this->layout('user/share', array(
+            'user' => $user,
+            'title' => t('Public access'),
         )));
     }
 
@@ -329,7 +363,6 @@ class User extends Base
         $this->response->html($this->layout('user/edit', array(
             'values' => $values,
             'errors' => $errors,
-            'projects' => $this->projectPermission->filterProjects($this->project->getList(), $user['id']),
             'user' => $user,
             'timezones' => $this->config->getTimezones(true),
             'languages' => $this->config->getLanguages(true),

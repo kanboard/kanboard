@@ -1,0 +1,14 @@
+Closing tasks
+=============
+
+When a task is closed, they are hidden from the board. However, you can always access to the list of closed tasks from the board menu **Board > Actions > Completed tasks**.
+
+There are two different way to close a task, from the task dropdown menu on the board:
+
+![Close a task from dropdown menu](http://kanboard.net/screenshots/documentation/menu-close-task.png)
+
+Or from the task sidebar menu in the task detail view:
+
+![Close a task](http://kanboard.net/screenshots/documentation/closing-tasks.png)
+
+Note: When you close a task, all subtasks not completed will be changed to the status "Done".

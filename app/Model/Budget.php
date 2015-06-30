@@ -75,7 +75,7 @@ class Budget extends Base
                     ->join(Task::TABLE, 'id', 'task_id', Subtask::TABLE)
                     ->join(User::TABLE, 'id', 'user_id')
                     ->eq(Task::TABLE.'.project_id', $project_id)
-                    ->filter(array($this, 'applyUserRate'));
+                    ->callback(array($this, 'applyUserRate'));
     }
 
     /**

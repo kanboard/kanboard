@@ -2,28 +2,34 @@
     <h2><?= t('Actions') ?></h2>
     <ul>
         <li>
-            <?= $this->a(t('About'), 'config', 'index') ?>
+            <?= $this->url->link(t('About'), 'config', 'index') ?>
         </li>
         <li>
-            <?= $this->a(t('Application settings'), 'config', 'application') ?>
+            <?= $this->url->link(t('Application settings'), 'config', 'application') ?>
         </li>
         <li>
-            <?= $this->a(t('Board settings'), 'config', 'board') ?>
+            <?= $this->url->link(t('Project settings'), 'config', 'project') ?>
         </li>
         <li>
-            <?= $this->a(t('Link settings'), 'link', 'index') ?>
+            <?= $this->url->link(t('Board settings'), 'config', 'board') ?>
         </li>
         <li>
-            <?= $this->a(t('Currency rates'), 'currency', 'index') ?>
+            <?= $this->url->link(t('Calendar settings'), 'config', 'calendar') ?>
         </li>
         <li>
-            <?= $this->a(t('Integrations'), 'config', 'integrations') ?>
+            <?= $this->url->link(t('Link settings'), 'link', 'index') ?>
         </li>
         <li>
-            <?= $this->a(t('Webhooks'), 'config', 'webhook') ?>
+            <?= $this->url->link(t('Currency rates'), 'currency', 'index') ?>
         </li>
         <li>
-            <?= $this->a(t('API'), 'config', 'api') ?>
+            <?= $this->url->link(t('Integrations'), 'config', 'integrations') ?>
+        </li>
+        <li>
+            <?= $this->url->link(t('Webhooks'), 'config', 'webhook') ?>
+        </li>
+        <li>
+            <?= $this->url->link(t('API'), 'config', 'api') ?>
         </li>
     </ul>
 </div>

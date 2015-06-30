@@ -166,6 +166,13 @@ var Kanboard = (function() {
 
         Init: function() {
 
+            // Chosen select
+            $(".chosen-select").chosen({
+                width: "200px",
+                no_results_text: $(".chosen-select").data("notfound"),
+                disable_search_threshold: 10
+            });
+
             // Project select box
             $("#board-selector").chosen({
                 width: 180,
@@ -200,7 +207,7 @@ var Kanboard = (function() {
             $(document).on("click", ".popover", Kanboard.Popover);
 
             // Autofocus fields (html5 autofocus works only with page onload)
-            $("input[autofocus]").each(function(index, element) {
+            $("[autofocus]").each(function(index, element) {
                 $(this).focus();
             })
 
@@ -227,11 +234,14 @@ var Kanboard = (function() {
 
             // Task auto-completion
             if ($(".task-autocomplete").length) {
-            	$(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+
+                if ($('.opposite_task_id').val() == '') {
+                    $(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+                }
 
                 $(".task-autocomplete").autocomplete({
                     source: $(".task-autocomplete").data("search-url"),
-                    minLength: 2,
+                    minLength: 1,
                     select: function(event, ui) {
                         var field = $(".task-autocomplete").data("dst-field");
                         $("input[name=" + field + "]").val(ui.item.id);
@@ -263,6 +273,11 @@ var Kanboard = (function() {
                     }
                 }
             });
+
+            // Screenshot
+            if (Kanboard.Exists("screenshot-zone")) {
+                Kanboard.Screenshot.Init();
+            }
         }
     };
 

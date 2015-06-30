@@ -1,14 +1,17 @@
 /* header */
 header {
     margin-top: 10px;
-    padding-bottom: 15px;
-    clear: both;
+    padding-bottom: 10px;
     border-bottom: 1px solid #dedede;
 }
 
 header h1 {
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
     float: left;
 }
 

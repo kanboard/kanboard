@@ -3,7 +3,7 @@
 namespace Controller;
 
 /**
- * Project controller
+ * Project controller (Settings + creation/edition)
  *
  * @package  controller
  * @author   Frederic Guillot
@@ -95,10 +95,21 @@ class Project extends Base
     {
         $project = $this->getProject();
 
+        if ($this->request->isPost()) {
+            $params = $this->request->getValues();
+            $params += array('hipchat' => 0, 'slack' => 0, 'jabber' => 0);
+            $this->projectIntegration->saveParameters($project['id'], $params);
+        }
+
+        $values = $this->projectIntegration->getParameters($project['id']);
+        $values += array('hipchat_api_url' => 'https://api.hipchat.com');
+
         $this->response->html($this->projectLayout('project/integrations', array(
             'project' => $project,
             'title' => t('Integrations'),
             'webhook_token' => $this->config->get('webhook_token'),
+            'values' => $values,
+            'errors' => array(),
         )));
     }
 
@@ -129,7 +140,7 @@ class Project extends Base
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        if ($project['is_private'] == 1) {
+        if ($project['is_private'] == 1 && $this->userSession->isAdmin() && ! isset($values['is_private'])) {
             $values += array('is_private' => 0);
         }
 
@@ -312,7 +323,7 @@ class Project extends Base
 
         if ($this->request->getStringParam('duplicate') === 'yes') {
             $values = array_keys($this->request->getValues());
-            if ($this->projectDuplication->duplicate($project['id'], $values)) {
+            if ($this->projectDuplication->duplicate($project['id'], $values) !== false) {
                 $this->session->flash(t('Project cloned successfully.'));
             } else {
                 $this->session->flashError(t('Unable to clone this project.'));
@@ -384,112 +395,6 @@ class Project extends Base
     }
 
     /**
-     * RSS feed for a project (public)
-     *
-     * @access public
-     */
-    public function feed()
-    {
-        $token = $this->request->getStringParam('token');
-        $project = $this->project->getByToken($token);
-
-        // Token verification
-        if (! $project) {
-            $this->forbidden(true);
-        }
-
-        $this->response->xml($this->template->render('project/feed', array(
-            'events' => $this->projectActivity->getProject($project['id']),
-            'project' => $project,
-        )));
-    }
-
-    /**
-     * Activity page for a project
-     *
-     * @access public
-     */
-    public function activity()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->template->layout('project/activity', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
-            'events' => $this->projectActivity->getProject($project['id']),
-            'project' => $project,
-            'title' => t('%s\'s activity', $project['name'])
-        )));
-    }
-
-    /**
-     * Task search for a given project
-     *
-     * @access public
-     */
-    public function search()
-    {
-        $project = $this->getProject();
-        $search = $this->request->getStringParam('search');
-        $nb_tasks = 0;
-
-        $paginator = $this->paginator
-                ->setUrl('project', 'search', array('search' => $search, 'project_id' => $project['id']))
-                ->setMax(30)
-                ->setOrder('tasks.id')
-                ->setDirection('DESC');
-
-        if ($search !== '') {
-
-            $paginator
-                ->setQuery($this->taskFinder->getSearchQuery($project['id'], $search))
-                ->calculate();
-
-            $nb_tasks = $paginator->getTotal();
-        }
-
-        $this->response->html($this->template->layout('project/search', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
-            'values' => array(
-                'search' => $search,
-                'controller' => 'project',
-                'action' => 'search',
-                'project_id' => $project['id'],
-            ),
-            'paginator' => $paginator,
-            'project' => $project,
-            'columns' => $this->board->getColumnsList($project['id']),
-            'categories' => $this->category->getList($project['id'], false),
-            'title' => t('Search in the project "%s"', $project['name']).($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
-        )));
-    }
-
-    /**
-     * List of completed tasks for a given project
-     *
-     * @access public
-     */
-    public function tasks()
-    {
-        $project = $this->getProject();
-        $paginator = $this->paginator
-                ->setUrl('project', 'tasks', array('project_id' => $project['id']))
-                ->setMax(30)
-                ->setOrder('tasks.id')
-                ->setDirection('DESC')
-                ->setQuery($this->taskFinder->getClosedTaskQuery($project['id']))
-                ->calculate();
-
-        $this->response->html($this->template->layout('project/tasks', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
-            'project' => $project,
-            'columns' => $this->board->getColumnsList($project['id']),
-            'categories' => $this->category->getList($project['id'], false),
-            'paginator' => $paginator,
-            'title' => t('Completed tasks for "%s"', $project['name']).' ('.$paginator->getTotal().')'
-        )));
-    }
-
-    /**
      * Display a form to create a new project
      *
      * @access public
@@ -502,6 +407,7 @@ class Project extends Base
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
             'values' => empty($values) ? array('is_private' => $is_private) : $values,
             'errors' => $errors,
+            'is_private' => $is_private,
             'title' => $is_private ? t('New private project') : t('New project'),
         )));
     }
@@ -520,13 +426,12 @@ class Project extends Base
 
             $project_id = $this->project->create($values, $this->userSession->getId(), true);
 
-            if ($project_id) {
+            if ($project_id > 0) {
                 $this->session->flash(t('Your project have been created successfully.'));
                 $this->response->redirect('?controller=project&action=show&project_id='.$project_id);
             }
-            else {
-                $this->session->flashError(t('Unable to create your project.'));
-            }
+
+            $this->session->flashError(t('Unable to create your project.'));
         }
 
         $this->create($values, $errors);

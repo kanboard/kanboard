@@ -78,6 +78,8 @@ class Subtask extends Base
 
         foreach ($subtasks as &$subtask) {
             $subtask['status_name'] = $status[$subtask['status']];
+            $subtask['timer_start_date'] = isset($subtask['timer_start_date']) ? $subtask['timer_start_date'] : 0;
+            $subtask['is_timer_started'] = ! empty($subtask['timer_start_date']);
         }
 
         return $subtasks;
@@ -101,12 +103,13 @@ class Subtask extends Base
                 Task::TABLE.'.title AS task_name',
                 Project::TABLE.'.name AS project_name'
             )
+            ->subquery($this->subtaskTimeTracking->getTimerQuery($user_id), 'timer_start_date')
             ->eq('user_id', $user_id)
             ->eq(Project::TABLE.'.is_active', Project::ACTIVE)
             ->in(Subtask::TABLE.'.status', $status)
             ->join(Task::TABLE, 'id', 'task_id')
             ->join(Project::TABLE, 'id', 'project_id', Task::TABLE)
-            ->filter(array($this, 'addStatusName'));
+            ->callback(array($this, 'addStatusName'));
     }
 
     /**
@@ -121,10 +124,15 @@ class Subtask extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->eq('task_id', $task_id)
-                    ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
+                    ->columns(
+                        self::TABLE.'.*',
+                        User::TABLE.'.username',
+                        User::TABLE.'.name'
+                    )
+                    ->subquery($this->subtaskTimeTracking->getTimerQuery($this->userSession->getId()), 'timer_start_date')
                     ->join(User::TABLE, 'id', 'user_id')
                     ->asc(self::TABLE.'.position')
-                    ->filter(array($this, 'addStatusName'))
+                    ->callback(array($this, 'addStatusName'))
                     ->findAll();
     }
 
@@ -144,8 +152,9 @@ class Subtask extends Base
                         ->table(self::TABLE)
                         ->eq(self::TABLE.'.id', $subtask_id)
                         ->columns(self::TABLE.'.*', User::TABLE.'.username', User::TABLE.'.name')
+                        ->subquery($this->subtaskTimeTracking->getTimerQuery($this->userSession->getId()), 'timer_start_date')
                         ->join(User::TABLE, 'id', 'user_id')
-                        ->filter(array($this, 'addStatusName'))
+                        ->callback(array($this, 'addStatusName'))
                         ->findOne();
         }
 
@@ -228,6 +237,58 @@ class Subtask extends Base
     }
 
     /**
+     * Close all subtasks of a task
+     *
+     * @access public
+     * @param  integer  $task_id
+     * @return boolean
+     */
+    public function closeAll($task_id)
+    {
+        return $this->db->table(self::TABLE)->eq('task_id', $task_id)->update(array('status' => self::STATUS_DONE));
+    }
+
+    /**
+     * Get subtasks with consecutive positions
+     *
+     * If you remove a subtask, the positions are not anymore consecutives
+     *
+     * @access public
+     * @param  integer  $task_id
+     * @return array
+     */
+    public function getNormalizedPositions($task_id)
+    {
+        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
+        $position = 1;
+
+        foreach ($subtasks as $subtask_id => $subtask_position) {
+            $subtasks[$subtask_id] = $position++;
+        }
+
+        return $subtasks;
+    }
+
+    /**
+     * Save the new positions for a set of subtasks
+     *
+     * @access public
+     * @param  array   $subtasks    Hashmap of column_id/column_position
+     * @return boolean
+     */
+    public function savePositions(array $subtasks)
+    {
+        return $this->db->transaction(function ($db) use ($subtasks) {
+
+            foreach ($subtasks as $subtask_id => $position) {
+                if (! $db->table(Subtask::TABLE)->eq('id', $subtask_id)->update(array('position' => $position))) {
+                    return false;
+                }
+            }
+        });
+    }
+
+    /**
      * Move a subtask down, increment the position value
      *
      * @access public
@@ -237,7 +298,7 @@ class Subtask extends Base
      */
     public function moveDown($task_id, $subtask_id)
     {
-        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
+        $subtasks = $this->getNormalizedPositions($task_id);
         $positions = array_flip($subtasks);
 
         if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] < count($subtasks)) {
@@ -245,12 +306,7 @@ class Subtask extends Base
             $position = ++$subtasks[$subtask_id];
             $subtasks[$positions[$position]]--;
 
-            $this->db->startTransaction();
-            $this->db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position));
-            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $subtasks[$positions[$position]]));
-            $this->db->closeTransaction();
-
-            return true;
+            return $this->savePositions($subtasks);
         }
 
         return false;
@@ -266,7 +322,7 @@ class Subtask extends Base
      */
     public function moveUp($task_id, $subtask_id)
     {
-        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
+        $subtasks = $this->getNormalizedPositions($task_id);
         $positions = array_flip($subtasks);
 
         if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] > 1) {
@@ -274,12 +330,7 @@ class Subtask extends Base
             $position = --$subtasks[$subtask_id];
             $subtasks[$positions[$position]]++;
 
-            $this->db->startTransaction();
-            $this->db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position));
-            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $subtasks[$positions[$position]]));
-            $this->db->closeTransaction();
-
-            return true;
+            return $this->savePositions($subtasks);
         }
 
         return false;
@@ -303,6 +354,10 @@ class Subtask extends Base
             'status' => ($subtask['status'] + 1) % 3,
             'task_id' => $subtask['task_id'],
         );
+
+        if (empty($subtask['user_id']) && $this->userSession->isLogged()) {
+            $values['user_id'] = $this->userSession->getId();
+        }
 
         return $this->update($values);
     }
@@ -335,7 +390,7 @@ class Subtask extends Base
                $this->db->table(self::TABLE)
                         ->eq('status', self::STATUS_INPROGRESS)
                         ->eq('user_id', $user_id)
-                        ->count() === 1;
+                        ->exists();
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace Integration;
 
 use Event\GenericEvent;
-use Event\TaskEvent;
 use Model\Task;
 
 /**
@@ -12,7 +11,7 @@ use Model\Task;
  * @package  integration
  * @author   Frederic Guillot
  */
-class GitlabWebhook extends Base
+class GitlabWebhook extends \Core\Base
 {
     /**
      * Events
@@ -116,7 +115,7 @@ class GitlabWebhook extends Base
     {
         $task_id = $this->task->getTaskIdFromText($commit['message']);
 
-        if (! $task_id) {
+        if (empty($task_id)) {
             return false;
         }
 
@@ -126,17 +125,21 @@ class GitlabWebhook extends Base
             return false;
         }
 
-        if ($task['is_active'] == Task::STATUS_OPEN && $task['project_id'] == $this->project_id) {
-
-            $this->container['dispatcher']->dispatch(
-                self::EVENT_COMMIT,
-                new TaskEvent(array('task_id' => $task_id) + $task)
-            );
-
-            return true;
+        if ($task['project_id'] != $this->project_id) {
+            return false;
         }
 
-        return false;
+        $this->container['dispatcher']->dispatch(
+            self::EVENT_COMMIT,
+            new GenericEvent(array(
+                'task_id' => $task_id,
+                'commit_message' => $commit['message'],
+                'commit_url' => $commit['url'],
+                'commit_comment' => $commit['message']."\n\n[".t('Commit made by @%s on Gitlab', $commit['author']['name']).']('.$commit['url'].')'
+            ) + $task)
+        );
+
+        return true;
     }
 
     /**
@@ -191,7 +194,7 @@ class GitlabWebhook extends Base
      */
     public function handleIssueClosed(array $issue)
     {
-        $task = $this->taskFinder->getByReference($issue['id']);
+        $task = $this->taskFinder->getByReference($this->project_id, $issue['id']);
 
         if (! empty($task)) {
             $event = array(

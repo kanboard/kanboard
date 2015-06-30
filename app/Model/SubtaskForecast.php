@@ -96,7 +96,7 @@ class SubtaskForecast extends Base
                     'id' => $subtasks[$offset]['id'].'-'.$subtasks[$offset]['task_id'].'-'.$offset,
                     'subtask_id' => $subtasks[$offset]['id'],
                     'title' => t('#%d', $subtasks[$offset]['task_id']).' '.$subtasks[$offset]['title'],
-                    'url' => $this->helper->url('task', 'show', array('task_id' => $subtasks[$offset]['task_id'], 'project_id' => $subtasks[$offset]['project_id'])),
+                    'url' => $this->helper->url->to('task', 'show', array('task_id' => $subtasks[$offset]['task_id'], 'project_id' => $subtasks[$offset]['project_id'])),
                     'editable' => false,
                     'start' => date('Y-m-d\TH:i:s', $start),
                 );

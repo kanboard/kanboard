@@ -11,6 +11,32 @@ namespace Controller;
 class File extends Base
 {
     /**
+     * Screenshot
+     *
+     * @access public
+     */
+    public function screenshot()
+    {
+        $task = $this->getTask();
+
+        if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot')) !== false) {
+
+            $this->session->flash(t('Screenshot uploaded successfully.'));
+
+            if ($this->request->getStringParam('redirect') === 'board') {
+                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+            }
+
+            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        }
+
+        $this->response->html($this->taskLayout('file/screenshot', array(
+            'task' => $task,
+            'redirect' => 'task',
+        )));
+    }
+
+    /**
      * File upload form
      *
      * @access public
@@ -34,13 +60,11 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        if ($this->file->upload($task['project_id'], $task['id'], 'files') === true) {
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#attachments');
-        }
-        else {
+        if (! $this->file->upload($task['project_id'], $task['id'], 'files')) {
             $this->session->flashError(t('Unable to upload the file.'));
-            $this->response->redirect('?controller=file&action=create&task_id='.$task['id'].'&project_id='.$task['project_id']);
         }
+
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**
@@ -59,7 +83,7 @@ class File extends Base
             $this->response->binary(file_get_contents($filename));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**
@@ -140,7 +164,7 @@ class File extends Base
             $this->session->flashError(t('Unable to remove this file.'));
         }
 
-        $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 
     /**

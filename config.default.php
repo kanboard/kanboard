@@ -1,6 +1,8 @@
 <?php
 
-// Rename this file to config.php if you want to change the values
+/*******************************************************************/
+/* Rename this file to config.php if you want to change the values */
+/*******************************************************************/
 
 // Enable/Disable debug
 define('DEBUG', false);
@@ -14,7 +16,7 @@ define('FILES_DIR', 'data/files/');
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
 
-// Mail transport to use: "smtp", "sendmail" or "mail" (PHP mail function)
+// Mail transport available: "smtp", "sendmail", "mail" (PHP mail function), "postmark", "mailgun", "sendgrid"
 define('MAIL_TRANSPORT', 'mail');
 
 // SMTP configuration to use when the "smtp" transport is chosen
@@ -26,6 +28,19 @@ define('MAIL_SMTP_ENCRYPTION', null); // Valid values are "null", "ssl" or "tls"
 
 // Sendmail command to use when the transport is "sendmail"
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
+
+// Postmark API token (used to send emails through their API)
+define('POSTMARK_API_TOKEN', '');
+
+// Mailgun API key (used to send emails through their API)
+define('MAILGUN_API_TOKEN', '');
+
+// Mailgun domain name
+define('MAILGUN_DOMAIN', '');
+
+// Sendgrid API configuration
+define('SENDGRID_API_USER', '');
+define('SENDGRID_API_KEY', '');
 
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');
@@ -132,3 +147,6 @@ define('ENABLE_XFRAME', true);
 
 // Escape html inside markdown text
 define('MARKDOWN_ESCAPE_HTML', true);
+
+// API alternative authentication header, the default is HTTP Basic Authentication defined in RFC2617
+define('API_AUTHENTICATION_HEADER', '');

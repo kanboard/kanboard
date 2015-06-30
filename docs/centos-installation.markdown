@@ -7,7 +7,7 @@ Centos 7
 Install PHP and Apache:
 
 ```bash
-yum install -y php php-mbstring php-pdo unzip wget
+yum install -y php php-mbstring php-pdo php-gd unzip wget
 ```
 
 By default Centos 7 use PHP 5.4.16 and Apache 2.4.6.
@@ -34,6 +34,8 @@ If SeLinux is enabled, be sure that the Apache user can write to the directory d
 chcon -R -t httpd_sys_content_rw_t /var/www/html/kanboard/data
 ```
 
+Be sure to configure your server to allow Kanboard to send emails and make external HTTP requests.
+
 You can also disable SeLinux if you don't need it.
 
 Centos 6.5
@@ -42,7 +44,7 @@ Centos 6.5
 Install PHP and Apache:
 
 ```bash
-yum install -y php php-mbstring php-pdo unzip wget
+yum install -y php php-mbstring php-pdo php-gd unzip wget
 ```
 
 By default Centos 6.5 use PHP 5.3.3 and Apache 2.2.15.

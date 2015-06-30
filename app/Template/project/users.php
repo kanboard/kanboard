@@ -24,12 +24,12 @@
                 <?php if ($project['is_private'] == 0): ?>
                 <td>
                     <ul>
-                        <li><?= $this->a(t('Revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?></li>
+                        <li><?= $this->url->link(t('Revoke'), 'project', 'revoke', array('project_id' => $project['id'], 'user_id' => $user_id), true) ?></li>
                         <li>
                             <?php if (isset($users['managers'][$user_id])): ?>
-                                <?= $this->a(t('Set project member'), 'project', 'role', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?>
+                                <?= $this->url->link(t('Set project member'), 'project', 'role', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 0), true) ?>
                             <?php else: ?>
-                                <?= $this->a(t('Set project manager'), 'project', 'role', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?>
+                                <?= $this->url->link(t('Set project manager'), 'project', 'role', array('project_id' => $project['id'], 'user_id' => $user_id, 'is_owner' => 1), true) ?>
                             <?php endif ?>
                         </li>
                     </ul>
@@ -42,14 +42,14 @@
 
     <?php if ($project['is_private'] == 0 && ! empty($users['not_allowed'])): ?>
         <hr/>
-        <form method="post" action="<?= $this->u('project', 'allow', array('project_id' => $project['id'])) ?>" autocomplete="off">
+        <form method="post" action="<?= $this->url->href('project', 'allow', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-            <?= $this->formCsrf() ?>
+            <?= $this->form->csrf() ?>
 
-            <?= $this->formHidden('project_id', array('project_id' => $project['id'])) ?>
+            <?= $this->form->hidden('project_id', array('project_id' => $project['id'])) ?>
 
-            <?= $this->formLabel(t('User'), 'user_id') ?>
-            <?= $this->formSelect('user_id', $users['not_allowed']) ?><br/>
+            <?= $this->form->label(t('User'), 'user_id') ?>
+            <?= $this->form->select('user_id', $users['not_allowed'], array(), array(), array('data-notfound="'.t('No results match:').'"'), 'chosen-select') ?><br/>
 
             <div class="form-actions">
                 <input type="submit" value="<?= t('Allow this user') ?>" class="btn btn-blue"/>
@@ -61,11 +61,11 @@
 
 <?php if ($project['is_private'] == 0): ?>
 <hr/>
-<form method="post" action="<?= $this->u('project', 'allowEverybody', array('project_id' => $project['id'])) ?>">
-    <?= $this->formCsrf() ?>
+<form method="post" action="<?= $this->url->href('project', 'allowEverybody', array('project_id' => $project['id'])) ?>">
+    <?= $this->form->csrf() ?>
 
-    <?= $this->formHidden('id', array('id' => $project['id'])) ?>
-    <?= $this->formCheckbox('is_everybody_allowed', t('Allow everybody to access to this project'), 1, $project['is_everybody_allowed']) ?>
+    <?= $this->form->hidden('id', array('id' => $project['id'])) ?>
+    <?= $this->form->checkbox('is_everybody_allowed', t('Allow everybody to access to this project'), 1, $project['is_everybody_allowed']) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

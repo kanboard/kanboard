@@ -52,7 +52,75 @@ class Color extends Base
             'background' => 'rgb(238, 238, 238)',
             'border' => 'rgb(204, 204, 204)',
         ),
+        'brown' => array(
+            'name' => 'Brown',
+            'background' => '#d7ccc8',
+            'border' => '#4e342e',
+        ),
+        'deep_orange' => array(
+            'name' => 'Deep Orange',
+            'background' => '#ffab91',
+            'border' => '#e64a19',
+        ),
+        'dark_grey' => array(
+            'name' => 'Dark Grey',
+            'background' => '#cfd8dc',
+            'border' => '#455a64',
+        ),
+        'pink' => array(
+            'name' => 'Pink',
+            'background' => '#f48fb1',
+            'border' => '#d81b60',
+        ),
+        'teal' => array(
+            'name' => 'Teal',
+            'background' => '#80cbc4',
+            'border' => '#00695c',
+        ),
+        'cyan' => array(
+            'name' => 'Cyan',
+            'background' => '#b2ebf2',
+            'border' => '#00bcd4',
+        ),
+        'lime' => array(
+            'name' => 'Lime',
+            'background' => '#e6ee9c',
+            'border' => '#afb42b',
+        ),
+        'light_green' => array(
+            'name' => 'Light Green',
+            'background' => '#dcedc8',
+            'border' => '#689f38',
+        ),
+        'amber' => array(
+            'name' => 'Amber',
+            'background' => '#ffe082',
+            'border' => '#ffa000',
+        ),
     );
+
+    /**
+     * Find a color id from the name or the id
+     *
+     * @access public
+     * @param  string  $color
+     * @return string
+     */
+    public function find($color)
+    {
+        $color = strtolower($color);
+
+        foreach ($this->default_colors as $color_id => $params) {
+            if ($color_id === $color) {
+                return $color_id;
+            }
+            else if ($color === strtolower($params['name'])) {
+                return $color_id;
+            }
+        }
+
+        return '';
+    }
 
     /**
      * Get available colors
@@ -64,15 +132,11 @@ class Color extends Base
     {
         $listing = $prepend ? array('' => t('All colors')) : array();
 
-        return $listing + array(
-            'yellow' => t('Yellow'),
-            'blue' => t('Blue'),
-            'green' => t('Green'),
-            'purple' => t('Purple'),
-            'red' => t('Red'),
-            'orange' => t('Orange'),
-            'grey' => t('Grey'),
-        );
+        foreach ($this->default_colors as $color_id => $color) {
+            $listing[$color_id] = t($color['name']);
+        }
+
+        return $listing;
     }
 
     /**

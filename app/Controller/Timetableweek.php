@@ -52,7 +52,7 @@ class Timetableweek extends User
 
             if ($this->timetableWeek->create($values['user_id'], $values['day'], $values['start'], $values['end'])) {
                 $this->session->flash(t('Time slot created successfully.'));
-                $this->response->redirect($this->helper->url('timetableweek', 'index', array('user_id' => $values['user_id'])));
+                $this->response->redirect($this->helper->url->to('timetableweek', 'index', array('user_id' => $values['user_id'])));
             }
             else {
                 $this->session->flashError(t('Unable to save this time slot.'));
@@ -94,6 +94,6 @@ class Timetableweek extends User
             $this->session->flash(t('Unable to remove this time slot.'));
         }
 
-        $this->response->redirect($this->helper->url('timetableweek', 'index', array('user_id' => $user['id'])));
+        $this->response->redirect($this->helper->url->to('timetableweek', 'index', array('user_id' => $user['id'])));
     }
 }

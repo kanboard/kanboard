@@ -5,11 +5,13 @@
     <?php foreach ($events as $event): ?>
         <div class="activity-event">
             <p class="activity-datetime">
-                <?php if ($this->contains($event['event_name'], 'subtask')): ?>
+                <?php if ($this->text->contains($event['event_name'], 'subtask')): ?>
                     <i class="fa fa-tasks"></i>
-                <?php elseif ($this->contains($event['event_name'], 'task')): ?>
+                <?php elseif ($this->text->contains($event['event_name'], 'task.move')): ?>
+                    <i class="fa fa-arrows-alt"></i>
+                <?php elseif ($this->text->contains($event['event_name'], 'task')): ?>
                     <i class="fa fa-newspaper-o"></i>
-                <?php elseif ($this->contains($event['event_name'], 'comment')): ?>
+                <?php elseif ($this->text->contains($event['event_name'], 'comment')): ?>
                     <i class="fa fa-comments-o"></i>
                 <?php endif ?>
                 &nbsp;<?= dt('%B %e, %Y at %k:%M %p', $event['date_creation']) ?>

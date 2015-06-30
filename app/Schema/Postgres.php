@@ -6,7 +6,149 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 45;
+const VERSION = 57;
+
+function version_57($pdo)
+{
+    $pdo->exec('ALTER TABLE users DROP COLUMN "default_project_id"');
+}
+
+function version_56($pdo)
+{
+    $pdo->exec('DELETE FROM "settings" WHERE "option"=\'subtask_time_tracking\'');
+}
+
+function version_55($pdo)
+{
+    $pdo->exec('ALTER TABLE comments DROP CONSTRAINT IF EXISTS comments_user_id_fkey');
+    $pdo->exec("ALTER TABLE comments ALTER COLUMN task_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE comments ALTER COLUMN user_id SET DEFAULT 0");
+    $pdo->exec('ALTER TABLE comments RENAME COLUMN "date" TO "date_creation"');
+    $pdo->exec("ALTER TABLE comments ALTER COLUMN date_creation SET NOT NULL");
+}
+
+function version_54($pdo)
+{
+    $pdo->exec("ALTER TABLE project_has_categories ALTER COLUMN project_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE project_has_categories ALTER COLUMN name SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE actions ALTER COLUMN project_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE actions ALTER COLUMN event_name SET NOT NULL");
+    $pdo->exec("ALTER TABLE actions ALTER COLUMN action_name SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE action_has_params ALTER COLUMN action_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE action_has_params ALTER COLUMN name SET NOT NULL");
+    $pdo->exec("ALTER TABLE action_has_params ALTER COLUMN value SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE files ALTER COLUMN name SET NOT NULL");
+    $pdo->exec("ALTER TABLE files ALTER COLUMN task_id SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE subtasks ALTER COLUMN title SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN title SET NOT NULL");
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN project_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN column_id SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE columns ALTER COLUMN title SET NOT NULL");
+    $pdo->exec("ALTER TABLE columns ALTER COLUMN project_id SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE project_has_users ALTER COLUMN project_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE project_has_users ALTER COLUMN user_id SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE projects ALTER COLUMN name SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE users ALTER COLUMN username SET NOT NULL");
+
+    $pdo->exec("ALTER TABLE user_has_notifications ALTER COLUMN user_id SET NOT NULL");
+    $pdo->exec("ALTER TABLE user_has_notifications ALTER COLUMN user_id SET NOT NULL");
+}
+
+function version_53($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN notifications_filter INTEGER DEFAULT 4");
+}
+
+function version_52($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('webhook_url', ''));
+
+    $pdo->exec("DELETE FROM settings WHERE option='webhook_url_task_creation'");
+    $pdo->exec("DELETE FROM settings WHERE option='webhook_url_task_modification'");
+}
+
+function version_51($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN token VARCHAR(255) DEFAULT ''");
+}
+
+function version_50($pdo)
+{
+    $rq = $pdo->prepare("SELECT value FROM settings WHERE option='subtask_forecast'");
+    $rq->execute();
+    $result = $rq->fetch(PDO::FETCH_ASSOC);
+
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('calendar_user_subtasks_forecast', isset($result['subtask_forecast']) && $result['subtask_forecast'] == 1 ? 1 : 0));
+    $rq->execute(array('calendar_user_subtasks_time_tracking', 0));
+    $rq->execute(array('calendar_user_tasks', 'date_started'));
+    $rq->execute(array('calendar_project_tasks', 'date_started'));
+
+    $pdo->exec("DELETE FROM settings WHERE option='subtask_forecast'");
+}
+
+function version_49($pdo)
+{
+    $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
+    $rq->execute(array('integration_jabber', '0'));
+    $rq->execute(array('integration_jabber_server', ''));
+    $rq->execute(array('integration_jabber_domain', ''));
+    $rq->execute(array('integration_jabber_username', ''));
+    $rq->execute(array('integration_jabber_password', ''));
+    $rq->execute(array('integration_jabber_nickname', 'kanboard'));
+    $rq->execute(array('integration_jabber_room', ''));
+
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber INTEGER DEFAULT '0'");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_server VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_domain VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_username VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_password VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_nickname VARCHAR(255) DEFAULT 'kanboard'");
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_room VARCHAR(255) DEFAULT ''");
+}
+
+function version_48($pdo)
+{
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_status INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_trigger INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_factor INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_timeframe INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_basedate INTEGER NOT NULL DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_parent INTEGER');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_child INTEGER');
+}
+
+function version_47($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN identifier VARCHAR(50) DEFAULT ''");
+}
+
+function version_46($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_integrations (
+            id SERIAL PRIMARY KEY,
+            project_id INTEGER NOT NULL UNIQUE,
+            hipchat BOOLEAN DEFAULT '0',
+            hipchat_api_url VARCHAR(255) DEFAULT 'https://api.hipchat.com',
+            hipchat_room_id VARCHAR(255),
+            hipchat_room_token VARCHAR(255),
+            slack BOOLEAN DEFAULT '0',
+            slack_webhook_url VARCHAR(255),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )
+    ");
+}
 
 function version_45($pdo)
 {

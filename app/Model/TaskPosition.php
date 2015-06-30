@@ -146,6 +146,8 @@ class TaskPosition extends Base
             'src_column_id' => $task['column_id'],
             'dst_column_id' => $new_column_id,
             'date_moved' => $task['date_moved'],
+            'recurrence_status' => $task['recurrence_status'],
+            'recurrence_trigger' => $task['recurrence_trigger'],
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {

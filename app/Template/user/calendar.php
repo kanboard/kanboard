@@ -1,6 +1,6 @@
 <div id="user-calendar"
-     data-check-url="<?= $this->u('calendar', 'user') ?>"
+     data-check-url="<?= $this->url->href('calendar', 'user') ?>"
      data-user-id="<?= $user['id'] ?>"
-     data-save-url="<?= $this->u('calendar', 'save') ?>"
+     data-save-url="<?= $this->url->href('calendar', 'save') ?>"
 >
 </div>

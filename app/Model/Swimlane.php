@@ -87,7 +87,7 @@ class Swimlane extends Base
         return $this->db->table(self::TABLE)
                         ->eq('project_id', $project_id)
                         ->eq('name', $name)
-                        ->findAll();
+                        ->findOne();
     }
 
     /**
@@ -189,9 +189,10 @@ class Swimlane extends Base
      * @access public
      * @param  integer   $project_id    Project id
      * @param  boolean   $prepend       Prepend default value
+     * @param  boolean   $only_active   Return only active swimlanes
      * @return array
      */
-    public function getList($project_id, $prepend = false)
+    public function getList($project_id, $prepend = false, $only_active = false)
     {
         $swimlanes = array();
         $default = $this->db->table(Project::TABLE)->eq('id', $project_id)->eq('show_default_swimlane', 1)->findOneColumn('default_swimlane');
@@ -204,7 +205,11 @@ class Swimlane extends Base
             $swimlanes[0] = $default === 'Default swimlane' ? t($default) : $default;
         }
 
-        return $swimlanes + $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->orderBy('position', 'asc')->getAll('id', 'name');
+        return $swimlanes + $this->db->hashtable(self::TABLE)
+                                 ->eq('project_id', $project_id)
+                                 ->in('is_active', $only_active ? array(self::ACTIVE) : array(self::ACTIVE, self::INACTIVE))
+                                 ->orderBy('position', 'asc')
+                                 ->getAll('id', 'name');
     }
 
     /**

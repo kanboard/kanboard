@@ -11,7 +11,7 @@ use Model\Task;
  * @package  integration
  * @author   Frederic Guillot
  */
-class GithubWebhook extends Base
+class GithubWebhook extends \Core\Base
 {
     /**
      * Events
@@ -80,7 +80,7 @@ class GithubWebhook extends Base
 
             $task_id = $this->task->getTaskIdFromText($commit['message']);
 
-            if (! $task_id) {
+            if (empty($task_id)) {
                 continue;
             }
 
@@ -90,12 +90,19 @@ class GithubWebhook extends Base
                 continue;
             }
 
-            if ($task['is_active'] == Task::STATUS_OPEN && $task['project_id'] == $this->project_id) {
-                $this->container['dispatcher']->dispatch(
-                    self::EVENT_COMMIT,
-                    new GenericEvent(array('task_id' => $task_id) + $task)
-                );
+            if ($task['project_id'] != $this->project_id) {
+                continue;
             }
+
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_COMMIT,
+                new GenericEvent(array(
+                    'task_id' => $task_id,
+                    'commit_message' => $commit['message'],
+                    'commit_url' => $commit['url'],
+                    'commit_comment' => $commit['message']."\n\n[".t('Commit made by @%s on Github', $commit['author']['username']).']('.$commit['url'].')'
+                ) + $task)
+            );
         }
 
         return true;
@@ -139,16 +146,21 @@ class GithubWebhook extends Base
      */
     public function parseCommentIssueEvent(array $payload)
     {
-        $task = $this->taskFinder->getByReference($payload['issue']['number']);
-        $user = $this->user->getByUsername($payload['comment']['user']['login']);
+        $task = $this->taskFinder->getByReference($this->project_id, $payload['issue']['number']);
 
-        if (! empty($task) && ! empty($user)) {
+        if (! empty($task)) {
+
+            $user = $this->user->getByUsername($payload['comment']['user']['login']);
+
+            if (! empty($user) && ! $this->projectPermission->isMember($this->project_id, $user['id'])) {
+                $user = array();
+            }
 
             $event = array(
                 'project_id' => $this->project_id,
                 'reference' => $payload['comment']['id'],
-                'comment' => $payload['comment']['body'],
-                'user_id' => $user['id'],
+                'comment' => $payload['comment']['body']."\n\n[".t('By @%s on Github', $payload['comment']['user']['login']).']('.$payload['comment']['html_url'].')',
+                'user_id' => ! empty($user) ? $user['id'] : 0,
                 'task_id' => $task['id'],
             );
 
@@ -196,7 +208,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueClosed(array $issue)
     {
-        $task = $this->taskFinder->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($task)) {
             $event = array(
@@ -225,7 +237,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueReopened(array $issue)
     {
-        $task = $this->taskFinder->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($task)) {
             $event = array(
@@ -255,9 +267,9 @@ class GithubWebhook extends Base
     public function handleIssueAssigned(array $issue)
     {
         $user = $this->user->getByUsername($issue['assignee']['login']);
-        $task = $this->taskFinder->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
-        if (! empty($user) && ! empty($task)) {
+        if (! empty($user) && ! empty($task) && $this->projectPermission->isMember($this->project_id, $user['id'])) {
 
             $event = array(
                 'project_id' => $this->project_id,
@@ -286,7 +298,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueUnassigned(array $issue)
     {
-        $task = $this->taskFinder->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($task)) {
 
@@ -318,7 +330,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueLabeled(array $issue, array $label)
     {
-        $task = $this->taskFinder->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($task)) {
 
@@ -350,7 +362,7 @@ class GithubWebhook extends Base
      */
     public function handleIssueUnlabeled(array $issue, array $label)
     {
-        $task = $this->taskFinder->getByReference($issue['number']);
+        $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($task)) {
 

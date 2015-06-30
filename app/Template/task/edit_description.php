@@ -2,10 +2,10 @@
     <h2><?= t('Edit the description') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->u('task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
 
-    <?= $this->formCsrf() ?>
-    <?= $this->formHidden('id', $values) ?>
+    <?= $this->form->csrf() ?>
+    <?= $this->form->hidden('id', $values) ?>
 
     <div class="form-tabs">
         <ul class="form-tabs-nav">
@@ -17,7 +17,7 @@
             </li>
         </ul>
         <div class="write-area">
-            <?= $this->formTextarea('description', $values, $errors, array('autofocus', 'placeholder="'.t('Leave a description').'"'), 'description-textarea') ?>
+            <?= $this->form->textarea('description', $values, $errors, array('autofocus', 'placeholder="'.t('Leave a description').'"'), 'description-textarea') ?>
         </div>
         <div class="preview-area">
             <div class="markdown"></div>
@@ -30,9 +30,9 @@
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
         <?php if ($ajax): ?>
-            <?= $this->a(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
+            <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
         <?php else: ?>
-            <?= $this->a(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         <?php endif ?>
     </div>
 </form>

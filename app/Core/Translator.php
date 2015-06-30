@@ -27,6 +27,31 @@ class Translator
     private static $locales = array();
 
     /**
+     * Instance
+     *
+     * @static
+     * @access private
+     * @var Translator
+     */
+    private static $instance = null;
+
+    /**
+     * Get instance
+     *
+     * @static
+     * @access public
+     * @return Translator
+     */
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
      * Get a translation
      *
      * $translator->translate('I have %d kids', 5);

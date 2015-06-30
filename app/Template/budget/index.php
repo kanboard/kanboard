@@ -1,18 +1,12 @@
-<?= $this->js('assets/js/vendor/d3.v3.4.8.min.js') ?>
-<?= $this->js('assets/js/vendor/dimple.v2.1.2.min.js') ?>
-
 <div class="page-header">
-    <h2><?= t('Budget') ?></h2>
-    <ul>
-        <li><?= $this->a(t('Budget lines'), 'budget', 'create', array('project_id' => $project['id'])) ?></li>
-        <li><?= $this->a(t('Cost breakdown'), 'budget', 'breakdown', array('project_id' => $project['id'])) ?></li>
-    </ul>
+    <h2><?= t('Budget overview') ?></h2>
 </div>
 
 <?php if (! empty($daily_budget)): ?>
 <div id="budget-chart">
     <div id="chart"
-         data-serie='<?= json_encode($daily_budget) ?>'
+         data-date-format="<?= e('%%Y-%%m-%%d') ?>"
+         data-metrics='<?= json_encode($daily_budget) ?>'
          data-labels='<?= json_encode(array('in' => t('Budget line'), 'out' => t('Expenses'), 'left' => t('Remaining'), 'value' => t('Amount'), 'date' => t('Date'), 'type' => t('Type'))) ?>'></div>
 </div>
 <hr/>
@@ -32,4 +26,9 @@
     </tr>
     <?php endforeach ?>
 </table>
+<?php else: ?>
+    <p class="alert"><?= t('There is not enough data to show something.') ?></p>
 <?php endif ?>
+
+<?= $this->asset->js('assets/js/vendor/d3.v3.min.js') ?>
+<?= $this->asset->js('assets/js/vendor/c3.min.js') ?>

@@ -13,19 +13,25 @@
 }
 
 .public-task {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
     margin-top: 5px;
 }
 
 /* board table */
 #board-container {
-    padding-bottom: 180px; /* Space to avoid dropdown menu truncated */
+    padding-bottom: 220px; /* Space to avoid dropdown menu truncated */
     overflow-x: scroll;
 }
 
 .board-container-compact {
     overflow-x: initial;
+}
+
+@media all and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+.board-container-compact #board {
+    table-layout: auto;
+}
 }
 
 #board {
@@ -58,6 +64,7 @@
     background-color: #DF5353;
 }
 
+/* column header */
 .board-add-icon {
     float: left;
     padding: 0 5px;
@@ -88,4 +95,13 @@
 /* swimlanes */
 #board th a.board-swimlane-toggle {
     font-size: 0.95em;
+}
+
+.board-swimlane-toggle-title {
+    font-size: 0.85em;
+    display: none;
+}
+
+.board-swimlane-title {
+    vertical-align: top;
 }

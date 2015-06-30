@@ -219,7 +219,7 @@ class ProjectPermission extends Base
                     ->table(self::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
-                    ->count() === 1;
+                    ->exists();
 	}
 
 	/**
@@ -237,7 +237,7 @@ class ProjectPermission extends Base
                     ->eq('project_id', $project_id)
                     ->eq('user_id', $user_id)
                     ->eq('is_owner', 1)
-                    ->count() === 1;
+                    ->exists();
     }
 
     /**
@@ -266,7 +266,7 @@ class ProjectPermission extends Base
                     ->table(Project::TABLE)
                     ->eq('id', $project_id)
                     ->eq('is_everybody_allowed', 1)
-                    ->count() === 1;
+                    ->exists();
     }
 
     /**
@@ -290,7 +290,7 @@ class ProjectPermission extends Base
     }
 
     /**
-     * Return a list of allowed projects for a given user
+     * Return a list of allowed active projects for a given user
      *
      * @access public
      * @param  integer   $user_id      User id
@@ -302,7 +302,7 @@ class ProjectPermission extends Base
             return $this->project->getListByStatus(Project::ACTIVE);
         }
 
-        return $this->getMemberProjects($user_id);
+        return $this->getActiveMemberProjects($user_id);
     }
 
     /**

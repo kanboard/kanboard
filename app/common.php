@@ -11,6 +11,7 @@ if (getenv('DATABASE_URL')) {
     define('DB_USERNAME', $dbopts["user"]);
     define('DB_PASSWORD', $dbopts["pass"]);
     define('DB_HOSTNAME', $dbopts["host"]);
+    define('DB_PORT', isset($dbopts["port"]) ? $dbopts["port"] : null);
     define('DB_NAME', ltrim($dbopts["path"],'/'));
 }
 
@@ -20,10 +21,10 @@ if (file_exists('config.php')) {
 }
 
 require __DIR__.'/constants.php';
+require __DIR__.'/check_setup.php';
 
 $container = new Pimple\Container;
 $container->register(new ServiceProvider\LoggingProvider);
 $container->register(new ServiceProvider\DatabaseProvider);
 $container->register(new ServiceProvider\ClassProvider);
 $container->register(new ServiceProvider\EventDispatcherProvider);
-$container->register(new ServiceProvider\MailerProvider);

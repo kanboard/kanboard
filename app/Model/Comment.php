@@ -42,7 +42,7 @@ class Comment extends Base
             ->table(self::TABLE)
             ->columns(
                 self::TABLE.'.id',
-                self::TABLE.'.date',
+                self::TABLE.'.date_creation',
                 self::TABLE.'.task_id',
                 self::TABLE.'.user_id',
                 self::TABLE.'.comment',
@@ -51,7 +51,7 @@ class Comment extends Base
                 User::TABLE.'.email'
             )
             ->join(User::TABLE, 'id', 'user_id')
-            ->orderBy(self::TABLE.'.date', 'ASC')
+            ->orderBy(self::TABLE.'.date_creation', 'ASC')
             ->eq(self::TABLE.'.task_id', $task_id)
             ->findAll();
     }
@@ -71,7 +71,7 @@ class Comment extends Base
                 self::TABLE.'.id',
                 self::TABLE.'.task_id',
                 self::TABLE.'.user_id',
-                self::TABLE.'.date',
+                self::TABLE.'.date_creation',
                 self::TABLE.'.comment',
                 User::TABLE.'.username',
                 User::TABLE.'.name'
@@ -105,7 +105,7 @@ class Comment extends Base
      */
     public function create(array $values)
     {
-        $values['date'] = time();
+        $values['date_creation'] = time();
         $comment_id = $this->persist(self::TABLE, $values);
 
         if ($comment_id) {
@@ -129,7 +129,9 @@ class Comment extends Base
                     ->eq('id', $values['id'])
                     ->update(array('comment' => $values['comment']));
 
-        $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new CommentEvent($values));
+        if ($result) {
+            $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new CommentEvent($values));
+        }
 
         return $result;
     }
@@ -156,7 +158,6 @@ class Comment extends Base
     public function validateCreation(array $values)
     {
         $rules = array(
-            new Validators\Required('user_id', t('This value is required')),
             new Validators\Required('task_id', t('This value is required')),
         );
 

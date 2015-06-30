@@ -13,16 +13,16 @@
     <?php foreach ($paginator->getCollection() as $task): ?>
     <tr>
         <td class="task-table color-<?= $task['color_id'] ?>">
-            <?= $this->a('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+            <?= $this->url->link('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
-            <?= $this->inList($task['column_id'], $columns) ?>
+            <?= $this->text->in($task['column_id'], $columns) ?>
         </td>
         <td>
-            <?= $this->inList($task['category_id'], $categories, '') ?>
+            <?= $this->text->in($task['category_id'], $categories, '') ?>
         </td>
         <td>
-            <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+            <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
             <?php if ($task['assignee_username']): ?>

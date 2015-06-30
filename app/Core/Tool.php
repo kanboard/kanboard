@@ -31,4 +31,24 @@ class Tool
             fclose($fp);
         }
     }
+
+    /**
+     * Get the mailbox hash from an email address
+     *
+     * @static
+     * @access public
+     * @param  string  $email
+     * @return string
+     */
+    public static function getMailboxHash($email)
+    {
+        if (! strpos($email, '@') || ! strpos($email, '+')) {
+            return '';
+        }
+
+        list($local_part,) = explode('@', $email);
+        list(,$identifier) = explode('+', $local_part);
+
+        return $identifier;
+    }
 }

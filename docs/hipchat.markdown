@@ -1,6 +1,13 @@
 Hipchat integration
 ===================
 
+You can send notifications to Hipchat for all projects or only for specific projects.
+
+- To send notifications for all projects, go to **Settings > Integrations > Hipchat**
+- To send notifications for only some projects, go to **Project settings > Integrations > Hipchat**
+
+Each project can send notifications to a separate room.
+
 Send notifications to a room
 -----------------------------
 
@@ -23,9 +30,9 @@ This feature use the room notification token system of Hipchat.
 
 ![Hipchat settings](http://kanboard.net/screenshots/documentation/hipchat-settings.png)
 
-1. Go to **Settings > Integrations > Hipchat**
+1. Go to **Settings > Integrations > Hipchat** or **Project settings > Integrations > Hipchat**
 2. Replace the API url if you use the self-hosted version of Hipchat
 3. Set the room name or the room API ID
 4. Copy and paste the token generated previously
 
-Now, all Kanboard events will be sent to the Hipchat room.
+Now, Kanboard events will be sent to the Hipchat room.

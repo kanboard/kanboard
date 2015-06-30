@@ -6,7 +6,7 @@ use Event\TaskEvent;
 use Model\Task;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class TransitionSubscriber extends Base implements EventSubscriberInterface
+class TransitionSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

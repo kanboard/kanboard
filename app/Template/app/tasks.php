@@ -1,4 +1,4 @@
-<h2><?= t('My tasks') ?></h2>
+<h2><?= t('My tasks') ?> (<?= $paginator->getTotal() ?>)</h2>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>
@@ -13,13 +13,13 @@
         <?php foreach ($paginator->getCollection() as $task): ?>
         <tr>
             <td class="task-table color-<?= $task['color_id'] ?>">
-                <?= $this->a('#'.$task['id'], 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?= $this->url->link('#'.$task['id'], 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
             <td>
-                <?= $this->a($this->e($task['project_name']), 'board', 'show', array('project_id' => $task['project_id'])) ?>
+                <?= $this->url->link($this->e($task['project_name']), 'board', 'show', array('project_id' => $task['project_id'])) ?>
             </td>
             <td>
-                <?= $this->a($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
             <td>
                 <?php if (! empty($task['time_spent'])): ?>

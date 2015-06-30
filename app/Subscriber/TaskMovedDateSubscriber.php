@@ -6,12 +6,13 @@ use Event\TaskEvent;
 use Model\Task;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class TaskMovedDateSubscriber extends Base implements EventSubscriberInterface
+class TaskMovedDateSubscriber extends \Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         return array(
             Task::EVENT_MOVE_COLUMN => array('execute', 0),
+            Task::EVENT_MOVE_SWIMLANE => array('execute', 0),
         );
     }
 

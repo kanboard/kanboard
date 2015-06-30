@@ -1,0 +1,112 @@
+{
+    "issue": {
+        "type": "issue",
+        "links": {
+            "attachments": {
+                "href": "https://bitbucket.org/api/2.0/repositories/minicoders/test-webhook/issues/1/attachments"
+            },
+            "html": {
+                "href": "https://bitbucket.org/minicoders/test-webhook/issue/1/my-new-issue"
+            },
+            "comments": {
+                "href": "https://bitbucket.org/api/2.0/repositories/minicoders/test-webhook/issues/1/comments"
+            },
+            "vote": {
+                "href": "https://bitbucket.org/api/2.0/repositories/minicoders/test-webhook/issues/1/vote"
+            },
+            "watch": {
+                "href": "https://bitbucket.org/api/2.0/repositories/minicoders/test-webhook/issues/1/watch"
+            },
+            "self": {
+                "href": "https://bitbucket.org/api/2.0/repositories/minicoders/test-webhook/issues/1"
+            }
+        },
+        "component": null,
+        "updated_on": "2015-06-21T02:17:40.990654+00:00",
+        "reporter": {
+            "links": {
+                "html": {
+                    "href": "https://bitbucket.org/minicoders"
+                },
+                "avatar": {
+                    "href": "https://bitbucket.org/account/minicoders/avatar/32/"
+                },
+                "self": {
+                    "href": "https://bitbucket.org/api/2.0/users/minicoders"
+                }
+            },
+            "username": "minicoders",
+            "type": "user",
+            "display_name": "Frederic Guillot",
+            "uuid": "{fc59b45a-f68b-4fc1-ad1f-a17d4f17cd2c}"
+        },
+        "watches": 1,
+        "kind": "bug",
+        "edited_on": null,
+        "created_on": "2015-06-21T02:17:40.990654+00:00",
+        "milestone": null,
+        "version": null,
+        "state": "new",
+        "assignee": null,
+        "content": {
+            "raw": "**test**",
+            "markup": "markdown",
+            "html": "<p><strong>test</strong></p>"
+        },
+        "priority": "major",
+        "id": 1,
+        "votes": 0,
+        "title": "My new issue"
+    },
+    "repository": {
+        "links": {
+            "html": {
+                "href": "https://bitbucket.org/minicoders/test-webhook"
+            },
+            "avatar": {
+                "href": "https://bitbucket.org/minicoders/test-webhook/avatar/16/"
+            },
+            "self": {
+                "href": "https://bitbucket.org/api/2.0/repositories/minicoders/test-webhook"
+            }
+        },
+        "type": "repository",
+        "full_name": "minicoders/test-webhook",
+        "uuid": "{590fd9c4-0812-425e-8d72-ab08b4fd5735}",
+        "name": "test-webhook",
+        "owner": {
+            "links": {
+                "html": {
+                    "href": "https://bitbucket.org/minicoders"
+                },
+                "avatar": {
+                    "href": "https://bitbucket.org/account/minicoders/avatar/32/"
+                },
+                "self": {
+                    "href": "https://bitbucket.org/api/2.0/users/minicoders"
+                }
+            },
+            "username": "minicoders",
+            "type": "user",
+            "display_name": "Frederic Guillot",
+            "uuid": "{fc59b45a-f68b-4fc1-ad1f-a17d4f17cd2c}"
+        }
+    },
+    "actor": {
+        "links": {
+            "html": {
+                "href": "https://bitbucket.org/minicoders"
+            },
+            "avatar": {
+                "href": "https://bitbucket.org/account/minicoders/avatar/32/"
+            },
+            "self": {
+                "href": "https://bitbucket.org/api/2.0/users/minicoders"
+            }
+        },
+        "username": "minicoders",
+        "type": "user",
+        "display_name": "Frederic Guillot",
+        "uuid": "{fc59b45a-f68b-4fc1-ad1f-a17d4f17cd2c}"
+    }
+}

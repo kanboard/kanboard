@@ -25,14 +25,14 @@
         <?php if (DB_DRIVER === 'sqlite'): ?>
             <li>
                 <?= t('Database size:') ?>
-                <strong><?= $this->formatBytes($db_size) ?></strong>
+                <strong><?= $this->text->bytes($db_size) ?></strong>
             </li>
             <li>
-                <?= $this->a(t('Download the database'), 'config', 'downloadDb', array(), true) ?>&nbsp;
+                <?= $this->url->link(t('Download the database'), 'config', 'downloadDb', array(), true) ?>&nbsp;
                 <?= t('(Gzip compressed Sqlite file)') ?>
             </li>
             <li>
-                <?= $this->a(t('Optimize the database'), 'config', 'optimizeDb', array(), true) ?>&nbsp;
+                <?= $this->url->link(t('Optimize the database'), 'config', 'optimizeDb', array(), true) ?>&nbsp;
                 <?= t('(VACUUM command)') ?>
             </li>
         <?php endif ?>

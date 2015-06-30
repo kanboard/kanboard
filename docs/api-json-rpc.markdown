@@ -12,17 +12,39 @@ Almost the same thing as XML-RPC but with the JSON format.
 We use the [version 2 of the protocol](http://www.jsonrpc.org/specification).
 You must call the API with a `POST` HTTP request.
 
-Credentials
------------
+Authentication
+--------------
+
+### Default method (HTTP Basic)
 
 The API credentials are available on the settings page.
 
-- API end-point: `http://YOUR_SERVER/jsonrpc.php`
+- API end-point: `https://YOUR_SERVER/jsonrpc.php`
 - Username: `jsonrpc`
-- Password: Random token (API token on the settings page)
+- Password: API token on the settings page
 
 The API use the [HTTP Basic Authentication Scheme described in the RFC2617](http://www.ietf.org/rfc/rfc2617.txt).
-If there is an authentication error, you got an HTTP status code `401 Not Authorized`.
+If there is an authentication error, you will receive the HTTP status code `401 Not Authorized`.
+
+### Custom HTTP header
+
+You can use an alternative HTTP header for the authentication if your server have a very specific configuration.
+
+- The header name can be anything you want, by example `X-API-Auth`.
+- The header value is the `username:password` encoded in Base64.
+
+Configuration:
+
+1. Define your custom header in your `config.php`: `define('API_AUTHENTICATION_HEADER', 'X-API-Auth');`
+2. Encode the credentials in Base64, example with PHP `base64_encode('jsonrpc:19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929');`
+3. Test with curl:
+
+```bash
+curl \
+-H 'X-API-Auth: anNvbnJwYzoxOWZmZDk3MDlkMDNjZTUwNjc1YzNhNDNkMWM0OWMxYWMyMDdmNGJjNDVmMDZjNWIyNzAxZmJkZjg5Mjk=' \
+-d '{"jsonrpc": "2.0", "method": "getAllProjects", "id": 1}' \
+http://localhost/kanboard/jsonrpc.php
+```
 
 Examples
 --------
@@ -139,6 +161,29 @@ Array
         )
 
 )
+```
+
+### Example with Ruby
+
+This example can be used with Kanboard configured with Reverse-Proxy authentication and the API configured with a custom authentication header:
+
+```ruby
+require 'faraday'
+
+conn = Faraday.new(:url => 'https://kanboard.example.com') do |faraday|
+    faraday.response :logger
+    faraday.headers['X-API-Auth'] = 'XXX'      # base64_encode('jsonrpc:API_KEY')
+    faraday.basic_auth(ENV['user'], ENV['pw']) # user/pass to get through basic auth
+    faraday.adapter Faraday.default_adapter    # make requests with Net::HTTP
+end
+
+response = conn.post do |req|
+    req.url '/jsonrpc.php'
+    req.headers['Content-Type'] = 'application/json'
+    req.body = '{ "jsonrpc": "2.0", "id": 1, "method": "getAllProjects" }'
+end
+
+puts response.body
 ```
 
 Procedures
@@ -360,9 +405,6 @@ Response example:
 - Parameters:
     - **id** (integer, required)
     - **name** (string, required)
-    - **is_active** (integer, optional)
-    - **token** (string, optional)
-    - **is_public** (integer, optional)
     - **description** (string, optional)
 - Result on success: **true**
 - Result on failure: **false**
@@ -548,13 +590,10 @@ Response example:
 
 ### getProjectActivity
 
-- Purpose: **Get Activityfeed for Project(s)**
+- Purpose: **Get activity stream for a project**
 - Parameters:
-    - **project_ids** (integer array, required)
-    - **limit** (integer, optional)
-    - **start** (timestamp, optional)
-    - **end** (timestamp, optional)
-- Result on success: **true**
+    - **project_id** (integer, required)
+- Result on success: **List of events**
 - Result on failure: **false**
 
 Request example:
@@ -563,6 +602,27 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "getProjectActivity",
+    "id": 942472945,
+    "params": [
+        "project_id": 1
+    ]
+}
+```
+
+### getProjectActivities
+
+- Purpose: **Get Activityfeed for Project(s)**
+- Parameters:
+    - **project_ids** (integer array, required)
+- Result on success: **List of events**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getProjectActivities",
     "id": 942472945,
     "params": [
         "project_ids": [1,2]
@@ -710,8 +770,10 @@ Response example:
                     "position": "1",
                     "project_id": "1",
                     "task_limit": "0",
+                    "description": "",
                     "tasks": [],
-                    "nb_tasks": 0
+                    "nb_tasks": 0,
+                    "score": 0
                 },
                 {
                     "id": "2",
@@ -719,8 +781,46 @@ Response example:
                     "position": "2",
                     "project_id": "1",
                     "task_limit": "0",
-                    "tasks": [],
-                    "nb_tasks": 0
+                    "description": "",
+                    "tasks": [
+                        {
+                            "nb_comments":"0",
+                            "nb_files":"0",
+                            "nb_subtasks":"0",
+                            "nb_completed_subtasks":"0",
+                            "nb_links":"0",
+                            "id":"2",
+                            "reference":"",
+                            "title":"Test",
+                            "description":"",
+                            "date_creation":"1430870507",
+                            "date_modification":"1430870507",
+                            "date_completed":null,
+                            "date_due":"0",
+                            "color_id":"yellow",
+                            "project_id":"1",
+                            "column_id":"2",
+                            "swimlane_id":"0",
+                            "owner_id":"0",
+                            "creator_id":"1",
+                            "position":"1",
+                            "is_active":"1",
+                            "score":"0",
+                            "category_id":"0",
+                            "date_moved":"1430870507",
+                            "recurrence_status":"0",
+                            "recurrence_trigger":"0",
+                            "recurrence_factor":"0",
+                            "recurrence_timeframe":"0",
+                            "recurrence_basedate":"0",
+                            "recurrence_parent":null,
+                            "recurrence_child":null,
+                            "assignee_username":null,
+                            "assignee_name":null
+                        }
+                    ],
+                    "nb_tasks": 1,
+                    "score": 0
                 },
                 {
                     "id": "3",
@@ -728,8 +828,46 @@ Response example:
                     "position": "3",
                     "project_id": "1",
                     "task_limit": "0",
-                    "tasks": [],
-                    "nb_tasks": 0
+                    "description": "",
+                    "tasks": [
+                        {
+                            "nb_comments":"0",
+                            "nb_files":"0",
+                            "nb_subtasks":"1",
+                            "nb_completed_subtasks":"0",
+                            "nb_links":"0",
+                            "id":"1",
+                            "reference":"",
+                            "title":"Task with comment",
+                            "description":"",
+                            "date_creation":"1430783188",
+                            "date_modification":"1430783188",
+                            "date_completed":null,
+                            "date_due":"0",
+                            "color_id":"red",
+                            "project_id":"1",
+                            "column_id":"3",
+                            "swimlane_id":"0",
+                            "owner_id":"1",
+                            "creator_id":"0",
+                            "position":"1",
+                            "is_active":"1",
+                            "score":"0",
+                            "category_id":"0",
+                            "date_moved":"1430783191",
+                            "recurrence_status":"0",
+                            "recurrence_trigger":"0",
+                            "recurrence_factor":"0",
+                            "recurrence_timeframe":"0",
+                            "recurrence_basedate":"0",
+                            "recurrence_parent":null,
+                            "recurrence_child":null,
+                            "assignee_username":"admin",
+                            "assignee_name":null
+                        }
+                    ],
+                    "nb_tasks": 1,
+                    "score": 0
                 },
                 {
                     "id": "4",
@@ -737,11 +875,14 @@ Response example:
                     "position": "4",
                     "project_id": "1",
                     "task_limit": "0",
+                    "description": "",
                     "tasks": [],
-                    "nb_tasks": 0
+                    "nb_tasks": 0,
+                    "score": 0
                 }
             ],
-            "nb_columns": 4
+            "nb_columns": 4,
+            "nb_tasks": 2
         }
     ]
 }
@@ -1005,23 +1146,23 @@ Response example:
 }
 ```
 
-### getSwimlanes
+### getDefaultSwimlane
 
-- Purpose: **Get the list of enabled swimlanes of a project**
+- Purpose: **Get the default swimlane for a project**
 - Parameters:
     - **project_id** (integer, required)
-- Result on success: **swimlane properties**
-- Result on failure: **null**
+- Result on success: **true**
+- Result on failure: **false**
 
 Request example:
 
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getSwimlanes",
-    "id": 1242049935,
+    "method": "getDefaultSwimlane",
+    "id": 898774713,
     "params": [
-        2
+        1
     ]
 }
 ```
@@ -1031,26 +1172,61 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1242049935,
+    "id": 898774713,
+    "result": {
+        "id": "1",
+        "default_swimlane": "Default swimlane",
+        "show_default_swimlane": "1"
+    }
+}
+```
+
+### getActiveSwimlanes
+
+- Purpose: **Get the list of enabled swimlanes of a project (include default swimlane if enabled)**
+- Parameters:
+    - **project_id** (integer, required)
+- Result on success: **List of swimlanes**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getActiveSwimlanes",
+    "id": 934789422,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 934789422,
     "result": [
         {
-            "id": "0",
-            "name": "Default"
+            "id": 0,
+            "name": "Default swimlane"
         },
         {
             "id": "2",
-            "name": "Version 7.0"
-        },
+            "name": "Swimlane A"
+        }
     ]
 }
 ```
 
 ### getAllSwimlanes
 
-- Purpose: **Get the list of all swimlanes of a project**
+- Purpose: **Get the list of all swimlanes of a project (enabled or disabled) and sorted by position**
 - Parameters:
     - **project_id** (integer, required)
-- Result on success: **swimlane properties**
+- Result on success: **List of swimlanes**
 - Result on failure: **null**
 
 Request example:
@@ -1059,9 +1235,9 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "getAllSwimlanes",
-    "id": 1242049935,
+    "id": 509791576,
     "params": [
-        2
+        1
     ]
 }
 ```
@@ -1071,25 +1247,21 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1242049935,
+    "id": 509791576,
     "result": [
         {
-            "id": "0",
-            "name": "Default"
-        },
-        {
-            "id": "3",
-            "name": "Version 1.0",
-            "is_active": "0",
-            "position": 1,
-            "project_id": 2
+            "id": "1",
+            "name": "Another swimlane",
+            "position": "1",
+            "is_active": "1",
+            "project_id": "1"
         },
         {
             "id": "2",
-            "name": "Version 7.0",
+            "name": "Swimlane A",
+            "position": "2",
             "is_active": "1",
-            "position": 2,
-            "project_id": 2
+            "project_id": "1"
         }
     ]
 }
@@ -1097,7 +1269,81 @@ Response example:
 
 ### getSwimlane
 
-- Purpose: **Get the a swimlane**
+- Purpose: **Get the a swimlane by id**
+- Parameters:
+    - **swimlane_id** (integer, required)
+- Result on success: **swimlane properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getSwimlane",
+    "id": 131071870,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 131071870,
+    "result": {
+        "id": "1",
+        "name": "Swimlane 1",
+        "position": "1",
+        "is_active": "1",
+        "project_id": "1"
+    }
+}
+```
+
+### getSwimlaneById
+
+- Purpose: **Get the a swimlane by id**
+- Parameters:
+    - **swimlane_id** (integer, required)
+- Result on success: **swimlane properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getSwimlaneById",
+    "id": 131071870,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 131071870,
+    "result": {
+        "id": "1",
+        "name": "Swimlane 1",
+        "position": "1",
+        "is_active": "1",
+        "project_id": "1"
+    }
+}
+```
+
+### getSwimlaneByName
+
+- Purpose: **Get the a swimlane by name**
 - Parameters:
     - **project_id** (integer, required)
     - **name** (string, required)
@@ -1109,11 +1355,11 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getSwimlane",
-    "id": 1242049935,
+    "method": "getSwimlaneByName",
+    "id": 824623567,
     "params": [
-        2,
-        "Version 1.0"
+        1,
+        "Swimlane 1"
     ]
 }
 ```
@@ -1123,13 +1369,13 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1242049935,
+    "id": 824623567,
     "result": {
-        "id": "3",
-        "name": "Version 1.0",
-        "is_active": "0",
-        "position": 2,
-        "project_id": 2
+        "id": "1",
+        "name": "Swimlane 1",
+        "position": "1",
+        "is_active": "1",
+        "project_id": "1"
     }
 }
 ```
@@ -1215,10 +1461,10 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "updateSwimlane",
-    "id": 480740641,
+    "id": 87102426,
     "params": [
-        2,
-        "Version 4.1"
+        "1",
+        "Another swimlane"
     ]
 }
 ```
@@ -1228,7 +1474,7 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 480740641,
+    "id": 87102426,
     "result": true
 }
 ```
@@ -1248,10 +1494,10 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "addSwimlane",
-    "id": 638544704,
+    "id": 849940086,
     "params": [
         1,
-        "Version 1.0"
+        "Swimlane 1"
     ]
 }
 ```
@@ -1261,8 +1507,8 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 638544704,
-    "result": 5
+    "id": 849940086,
+    "result": 1
 }
 ```
 
@@ -1367,7 +1613,7 @@ Response example:
 
 ### getAvailableActions
 
-- Purpose: **Get list of available actions**
+- Purpose: **Get list of available automatic actions**
 - Parameters: none
 - Result on success: **list of actions**
 - Result on failure: **false**
@@ -1378,7 +1624,7 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "getAvailableActions",
-    "id": 1433237746,
+    "id": 1217735483
 }
 ```
 
@@ -1387,30 +1633,33 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1433237746,
+    "id": 1217735483,
     "result": {
-        "TaskLogMoveAnotherColumn" : "Add a comment logging moving the task between columns",
-        "TaskAssignColorColumn" : "Assign a color when the task is moved to a specific column",
-        "TaskAssignColorUser" : "Assign a color to a specific user",
-        "TaskAssignCategoryColor" : "Assign automatically a category based on a color",
-        "TaskAssignColorCategory" : "Assign automatically a color based on a category",
-        "TaskAssignSpecificUser" : "Assign the task to a specific user",
-        "TaskAssignCurrentUser" : "Assign the task to the person who does the action",
-        "TaskAssignUser" : "Change the assignee based on an external username",
-        "TaskAssignCategoryLabel" : "Change the category based on an external label",
-        "TaskClose" : "Close a task",
-        "CommentCreation" : "Create a comment from an external provider",
-        "TaskCreation" : "Create a task from an external provider",
-        "TaskDuplicateAnotherProject" : "Duplicate the task to another project",
-        "TaskMoveAnotherProject" : "Move the task to another project",
-        "TaskOpen" : "Open a task"
+        "TaskLogMoveAnotherColumn": "Add a comment logging moving the task between columns",
+        "TaskAssignColorUser": "Assign a color to a specific user",
+        "TaskAssignColorColumn": "Assign a color when the task is moved to a specific column",
+        "TaskAssignCategoryColor": "Assign automatically a category based on a color",
+        "TaskAssignColorCategory": "Assign automatically a color based on a category",
+        "TaskAssignSpecificUser": "Assign the task to a specific user",
+        "TaskAssignCurrentUser": "Assign the task to the person who does the action",
+        "TaskUpdateStartDate": "Automatically update the start date",
+        "TaskAssignUser": "Change the assignee based on an external username",
+        "TaskAssignCategoryLabel": "Change the category based on an external label",
+        "TaskClose": "Close a task",
+        "CommentCreation": "Create a comment from an external provider",
+        "TaskCreation": "Create a task from an external provider",
+        "TaskDuplicateAnotherProject": "Duplicate the task to another project",
+        "TaskMoveColumnAssigned": "Move the task to another column when assigned to a user",
+        "TaskMoveColumnUnAssigned": "Move the task to another column when assignee is cleared",
+        "TaskMoveAnotherProject": "Move the task to another project",
+        "TaskOpen": "Open a task"
     }
 }
 ```
 
-### getAvailableEvents
+### getAvailableActionEvents
 
-- Purpose: **Get list of available events**
+- Purpose: **Get list of available events for actions**
 - Parameters: none
 - Result on success: **list of events**
 - Result on failure: **false**
@@ -1420,8 +1669,8 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getAvailableEvents",
-    "id": 1433237746,
+    "method": "getAvailableActionEvents",
+    "id": 2116665643
 }
 ```
 
@@ -1430,31 +1679,31 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1433237746,
+    "id": 2116665643,
     "result": {
-        "bitbucket.webhook.commit" : "Bitbucket commit received",
-        "task.close" : "Closing a task",
-        "github.webhook.commit" : "Github commit received",
-        "github.webhook.issue.assignee" : "Github issue assignee change",
-        "github.webhook.issue.closed" : "Github issue closed",
-        "github.webhook.issue.commented" : "Github issue comment created",
-        "github.webhook.issue.label" : "Github issue label change",
-        "github.webhook.issue.opened" : "Github issue opened",
-        "github.webhook.issue.reopened" : "Github issue reopened",
-        "gitlab.webhook.commit" : "Gitlab commit received",
-        "gitlab.webhook.issue.closed" : "Gitlab issue closed",
-        "gitlab.webhook.issue.opened" : "Gitlab issue opened",
-        "task.move.column" : "Move a task to another column",
-        "task.open" : "Open a closed task",
-        "task.assignee_change" : "Task assignee change",
-        "task.create" : "Task creation",
-        "task.create_update" : "Task creation or modification",
-        "task.update" : "Task modification"
+        "bitbucket.webhook.commit": "Bitbucket commit received",
+        "task.close": "Closing a task",
+        "github.webhook.commit": "Github commit received",
+        "github.webhook.issue.assignee": "Github issue assignee change",
+        "github.webhook.issue.closed": "Github issue closed",
+        "github.webhook.issue.commented": "Github issue comment created",
+        "github.webhook.issue.label": "Github issue label change",
+        "github.webhook.issue.opened": "Github issue opened",
+        "github.webhook.issue.reopened": "Github issue reopened",
+        "gitlab.webhook.commit": "Gitlab commit received",
+        "gitlab.webhook.issue.closed": "Gitlab issue closed",
+        "gitlab.webhook.issue.opened": "Gitlab issue opened",
+        "task.move.column": "Move a task to another column",
+        "task.open": "Open a closed task",
+        "task.assignee_change": "Task assignee change",
+        "task.create": "Task creation",
+        "task.create_update": "Task creation or modification",
+        "task.update": "Task modification"
     }
 }
 ```
 
-### getCompatibleEvents
+### getCompatibleActionEvents
 
 - Purpose: **Get list of events compatible with an action**
 - Parameters:
@@ -1467,10 +1716,10 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getCompatibleEvents",
-    "id": 1433237746,
+    "method": "getCompatibleActionEvents",
+    "id": 899370297,
     "params": [
-        "TaskAssignSpecificUser"
+        "TaskClose"
     ]
 }
 ```
@@ -1480,10 +1729,14 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1433237746,
+    "id": 899370297,
     "result": {
-        "task.move.column" : "Move a task to another column",
-        "task.create_update" : "Task creation or modification",
+        "bitbucket.webhook.commit": "Bitbucket commit received",
+        "github.webhook.commit": "Github commit received",
+        "github.webhook.issue.closed": "Github issue closed",
+        "gitlab.webhook.commit": "Gitlab commit received",
+        "gitlab.webhook.issue.closed": "Gitlab issue closed",
+        "task.move.column": "Move a task to another column"
     }
 }
 ```
@@ -1493,7 +1746,7 @@ Response example:
 - Purpose: **Get list of actions for a project**
 - Parameters:
     - **project_id** (integer, required)
-- Result on success: **list of actions info**
+- Result on success: **list of actions properties**
 - Result on failure: **false**
 
 Request example:
@@ -1537,7 +1790,7 @@ Response example:
     - **project_id** (integer, required)
     - **event_name** (string, required)
     - **action_name** (string, required)
-    - **params** (list of string pairs, required)
+    - **params** (key/value parameters, required)
 - Result on success: **action_id**
 - Result on failure: **false**
 
@@ -1583,10 +1836,10 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "getAvailableEvents",
-    "id": 1433237746,
+    "method": "removeAction",
+    "id": 1510741671,
     "params": [
-        "2",
+        1
     ]
 }
 ```
@@ -1596,7 +1849,7 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 1433237746,
+    "id": 1510741671,
     "result": true
 }
 ```
@@ -1609,13 +1862,18 @@ Response example:
     - **project_id** (integer, required)
     - **color_id** (string, optional)
     - **column_id** (integer, optional)
-    - **description** Markdown content (string, optional)
     - **owner_id** (integer, optional)
     - **creator_id** (integer, optional)
-    - **score** (integer, optional)
     - **date_due**: ISO8601 format (string, optional)
+    - **description** Markdown content (string, optional)
     - **category_id** (integer, optional)
-    - **swimelane_id** (integer, optional)
+    - **score** (integer, optional)
+    - **swimlane_id** (integer, optional)
+    - **recurrence_status**  (integer, optional)
+    - **recurrence_trigger**  (integer, optional)
+    - **recurrence_factor**  (integer, optional)
+    - **recurrence_timeframe**  (integer, optional)
+    - **recurrence_basedate**  (integer, optional)
 - Result on success: **task_id**
 - Result on failure: **false**
 
@@ -1636,7 +1894,12 @@ Request example:
         "title": "Test",
         "project_id": 1,
         "color_id": "green",
-        "column_id": 2
+        "column_id": 2,
+        "recurrence_status": 0,
+        "recurrence_trigger": 0,
+        "recurrence_factor": 0,
+        "recurrence_timeframe": 0,
+        "recurrence_basedate": 0
     }
 }
 ```
@@ -1653,7 +1916,7 @@ Response example:
 
 ### getTask
 
-- Purpose: **Get task information**
+- Purpose: **Get task by the unique id**
 - Parameters:
     - **task_id** (integer, required)
 - Result on success: **task properties**
@@ -1695,7 +1958,82 @@ Response example:
         "category_id": "0",
         "creator_id": "0",
         "date_modification": "1409963206",
-        "swimlane_id": 0
+        "reference": "",
+        "date_started": null,
+        "time_spent": "0",
+        "time_estimated": "0",
+        "swimlane_id": "0",
+        "date_moved": "1430875287",
+        "recurrence_status": "0",
+        "recurrence_trigger": "0",
+        "recurrence_factor": "0",
+        "recurrence_timeframe": "0",
+        "recurrence_basedate": "0",
+        "recurrence_parent": null,
+        "recurrence_child": null
+        }
+}
+```
+
+### getTaskByReference
+
+- Purpose: **Get task by the external reference**
+- Parameters:
+    - **project_id** (integer, required)
+    - **reference** (string, required)
+- Result on success: **task properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getTaskByReference",
+    "id": 1992081213,
+    "params": {
+        "project_id": 1,
+        "reference": "TICKET-1234"
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1992081213,
+    "result": {
+        "id": "5",
+        "title": "Task with external ticket number",
+        "description": "[Link to my ticket](http:\/\/my-ticketing-system\/1234)",
+        "date_creation": "1434227446",
+        "color_id": "yellow",
+        "project_id": "1",
+        "column_id": "1",
+        "owner_id": "0",
+        "position": "4",
+        "is_active": "1",
+        "date_completed": null,
+        "score": "0",
+        "date_due": "0",
+        "category_id": "0",
+        "creator_id": "0",
+        "date_modification": "1434227446",
+        "reference": "TICKET-1234",
+        "date_started": null,
+        "time_spent": "0",
+        "time_estimated": "0",
+        "swimlane_id": "0",
+        "date_moved": "1434227446",
+        "recurrence_status": "0",
+        "recurrence_trigger": "0",
+        "recurrence_factor": "0",
+        "recurrence_timeframe": "0",
+        "recurrence_basedate": "0",
+        "recurrence_parent": null,
+        "recurrence_child": null
     }
 }
 ```
@@ -1747,7 +2085,19 @@ Response example:
             "category_id": "0",
             "creator_id": "0",
             "date_modification": "1409961789",
-            "swimlane_id": 0
+            "reference": "",
+            "date_started": null,
+            "time_spent": "0",
+            "time_estimated": "0",
+            "swimlane_id": "0",
+            "date_moved": "1430783191",
+            "recurrence_status": "0",
+            "recurrence_trigger": "0",
+            "recurrence_factor": "0",
+            "recurrence_timeframe": "0",
+            "recurrence_basedate": "0",
+            "recurrence_parent": null,
+            "recurrence_child": null
         },
         {
             "id": "2",
@@ -1766,7 +2116,19 @@ Response example:
             "category_id": "0",
             "creator_id": "0",
             "date_modification": "1409962115",
-            "swimlane_id": 0
+            "reference": "",
+            "date_started": null,
+            "time_spent": "0",
+            "time_estimated": "0",
+            "swimlane_id": "0",
+            "date_moved": "1430783191",
+            "recurrence_status": "0",
+            "recurrence_trigger": "0",
+            "recurrence_factor": "0",
+            "recurrence_timeframe": "0",
+            "recurrence_basedate": "0",
+            "recurrence_parent": null,
+            "recurrence_child": null
         },
         ...
     ]
@@ -1785,7 +2147,7 @@ Request example to fetch all tasks on the board:
 {
     "jsonrpc": "2.0",
     "method": "getOverdueTasks",
-    "id": 133280317,
+    "id": 133280317
 }
 ```
 
@@ -1799,40 +2161,20 @@ Response example:
         {
             "id": "1",
             "title": "Task #1",
-            "description": "",
-            "date_creation": "1409961789",
-            "color_id": "blue",
+            "date_due": "1409961789",
             "project_id": "1",
-            "column_id": "2",
-            "owner_id": "1",
-            "position": "1",
-            "is_active": "1",
-            "date_completed": null,
-            "score": "0",
-            "date_due": "0",
-            "category_id": "0",
-            "creator_id": "0",
-            "date_modification": "1409961789",
-            "swimlane_id": 0
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
         },
         {
             "id": "2",
             "title": "Test",
-            "description": "",
-            "date_creation": "1409962115",
-            "color_id": "green",
+            "date_due": "1409962115",
             "project_id": "1",
-            "column_id": "2",
-            "owner_id": "1",
-            "position": "2",
-            "is_active": "1",
-            "date_completed": null,
-            "score": "0",
-            "date_due": "0",
-            "category_id": "0",
-            "creator_id": "0",
-            "date_modification": "1409962115",
-            "swimlane_id": 0
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
         },
         ...
     ]
@@ -1845,16 +2187,19 @@ Response example:
 - Parameters:
     - **id** (integer, required)
     - **title** (string, optional)
-    - **color_id** (string, optional)
     - **project_id** (integer, optional)
-    - **column_id** (integer, optional)
-    - **description** Markdown content (string, optional)
+    - **color_id** (string, optional)
     - **owner_id** (integer, optional)
     - **creator_id** (integer, optional)
-    - **score** (integer, optional)
     - **date_due**: ISO8601 format (string, optional)
+    - **description** Markdown content (string, optional)
     - **category_id** (integer, optional)
-    - **swimlane_id** (integer, optional)
+    - **score** (integer, optional)
+    - **recurrence_status**  (integer, optional)
+    - **recurrence_trigger**  (integer, optional)
+    - **recurrence_factor**  (integer, optional)
+    - **recurrence_timeframe**  (integer, optional)
+    - **recurrence_basedate**  (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -1983,6 +2328,7 @@ Response example:
     - **task_id** (integer, required)
     - **column_id** (integer, required)
     - **position** (integer, required)
+    - **swimlane_id** (integer, optional, default=0)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -2021,7 +2367,6 @@ Response example:
     - **name** (string, optional)
     - **email** (string, optional)
     - **is_admin** Set the value 1 for admins or 0 for regular users (integer, optional)
-    - **default_project_id** (integer, optional)
 - Result on success: **user_id**
 - Result on failure: **false**
 
@@ -2056,7 +2401,6 @@ Response example:
     - **username** (string, optional if email is set)
     - **email** (string, optional if username is set)
     - **is_admin** Set the value 1 for admins or 0 for regular users (integer, optional)
-    - **default_project_id** (integer, optional)
 - Result on success: **user_id**
 - Result on failure: **false**
 
@@ -2118,7 +2462,6 @@ Response example:
         "username": "biloute",
         "password": "$2y$10$dRs6pPoBu935RpmsrhmbjevJH5MgZ7Kr9QrnVINwwyZ3.MOwqg.0m",
         "is_admin": "0",
-        "default_project_id": "0",
         "is_ldap_user": "0",
         "name": "",
         "email": "",
@@ -2160,7 +2503,6 @@ Response example:
             "name": "",
             "email": "",
             "is_admin": "0",
-            "default_project_id": "0",
             "is_ldap_user": "0",
             "notifications_enabled": "0",
             "google_id": null,
@@ -2180,7 +2522,6 @@ Response example:
     - **name** (string, optional)
     - **email** (string, optional)
     - **is_admin** (integer, optional)
-    - **default_project_id** (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -2477,7 +2818,7 @@ Response example:
         "id": "1",
         "task_id": "1",
         "user_id": "1",
-        "date": "1410881970",
+        "date_creation": "1410881970",
         "comment": "Comment #1",
         "username": "admin",
         "name": null
@@ -2515,7 +2856,7 @@ Response example:
     "result": [
         {
             "id": "1",
-            "date": "1410882272",
+            "date_creation": "1410882272",
             "task_id": "1",
             "user_id": "1",
             "comment": "Comment #1",
@@ -2591,7 +2932,6 @@ Response example:
 }
 ```
 
-
 ### createSubtask
 
 - Purpose: **Create a new subtask**
@@ -2637,6 +2977,8 @@ Response example:
 - Result on success: **subtask properties**
 - Result on failure: **null**
 
+Request example:
+
 ```json
 {
     "jsonrpc": "2.0",
@@ -2673,6 +3015,8 @@ Response example:
     - **task_id** (integer, required)
 - Result on success: **List of subtasks**
 - Result on failure: **false**
+
+Request example:
 
 ```json
 {
@@ -2722,7 +3066,7 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
-Request examples:
+Request example:
 
 ```json
 {
@@ -2757,6 +3101,8 @@ Response example:
 - Result on success: **true**
 - Result on failure: **false**
 
+Request example:
+
 ```json
 {
     "jsonrpc": "2.0",
@@ -2774,6 +3120,689 @@ Response example:
 {
     "jsonrpc": "2.0",
     "id": 1382487306,
+    "result": true
+}
+```
+
+### getAllLinks
+
+- Purpose: **Get the list of possible relations between tasks**
+- Parameters: none
+- Result on success: **List of links**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getAllLinks",
+    "id": 113057196
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 113057196,
+    "result": [
+        {
+            "id": "1",
+            "label": "relates to",
+            "opposite_id": "0"
+        },
+        {
+            "id": "2",
+            "label": "blocks",
+            "opposite_id": "3"
+        },
+        {
+            "id": "3",
+            "label": "is blocked by",
+            "opposite_id": "2"
+        },
+        {
+            "id": "4",
+            "label": "duplicates",
+            "opposite_id": "5"
+        },
+        {
+            "id": "5",
+            "label": "is duplicated by",
+            "opposite_id": "4"
+        },
+        {
+            "id": "6",
+            "label": "is a child of",
+            "opposite_id": "7"
+        },
+        {
+            "id": "7",
+            "label": "is a parent of",
+            "opposite_id": "6"
+        },
+        {
+            "id": "8",
+            "label": "targets milestone",
+            "opposite_id": "9"
+        },
+        {
+            "id": "9",
+            "label": "is a milestone of",
+            "opposite_id": "8"
+        },
+        {
+            "id": "10",
+            "label": "fixes",
+            "opposite_id": "11"
+        },
+        {
+            "id": "11",
+            "label": "is fixed by",
+            "opposite_id": "10"
+        }
+    ]
+}
+```
+
+### getOppositeLinkId
+
+- Purpose: **Get the opposite link id of a task link**
+- Parameters:
+    - **link_id** (integer, required)
+- Result on success: **link_id**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getOppositeLinkId",
+    "id": 407062448,
+    "params": [
+        2
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 407062448,
+    "result": "3"
+}
+```
+
+### getLinkByLabel
+
+- Purpose: **Get a link by label**
+- Parameters:
+    - **label** (integer, required)
+- Result on success: **link properties**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getLinkByLabel",
+    "id": 1796123316,
+    "params": [
+        "blocks"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1796123316,
+    "result": {
+        "id": "2",
+        "label": "blocks",
+        "opposite_id": "3"
+    }
+}
+```
+
+### getLinkById
+
+- Purpose: **Get a link by id**
+- Parameters:
+    - **link_id** (integer, required)
+- Result on success: **link properties**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getLinkById",
+    "id": 1190238402,
+    "params": [
+        4
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1190238402,
+    "result": {
+        "id": "4",
+        "label": "duplicates",
+        "opposite_id": "5"
+    }
+}
+```
+
+### createLink
+
+- Purpose: **Create a new task relation**
+- Parameters:
+    - **label** (integer, required)
+    - **opposite_label** (integer, optional)
+- Result on success: **link_id**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "createLink",
+    "id": 1040237496,
+    "params": [
+        "foo",
+        "bar"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1040237496,
+    "result": 13
+}
+```
+
+### updateLink
+
+- Purpose: **Update a link**
+- Parameters:
+    - **link_id** (integer, required)
+    - **opposite_link_id** (integer, required)
+    - **label** (string, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "updateLink",
+    "id": 2110446926,
+    "params": [
+        "14",
+        "12",
+        "boo"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2110446926,
+    "result": true
+}
+```
+
+### removeLink
+
+- Purpose: **Remove a link**
+- Parameters:
+    - **link_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "removeLink",
+    "id": 2136522739,
+    "params": [
+        "14"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2136522739,
+    "result": true
+}
+```
+
+### createTaskLink
+
+- Purpose: **Create a link between two tasks**
+- Parameters:
+    - **task_id** (integer, required)
+    - **opposite_task_id** (integer, required)
+    - **link_id** (integer, required)
+- Result on success: **task_link_id**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "createTaskLink",
+    "id": 509742912,
+    "params": [
+        2,
+        3,
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 509742912,
+    "result": 1
+}
+```
+
+### updateTaskLink
+
+- Purpose: **Update task link**
+- Parameters:
+    - **task_link_id** (integer, required)
+    - **task_id** (integer, required)
+    - **opposite_task_id** (integer, required)
+    - **link_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "updateTaskLink",
+    "id": 669037109,
+    "params": [
+        1,
+        2,
+        4,
+        2
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 669037109,
+    "result": true
+}
+```
+
+### getTaskLinkById
+
+- Purpose: **Get a task link**
+- Parameters:
+    - **task_link_id** (integer, required)
+- Result on success: **task link properties**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getTaskLinkById",
+    "id": 809885202,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 809885202,
+    "result": {
+        "id": "1",
+        "link_id": "1",
+        "task_id": "2",
+        "opposite_task_id": "3"
+    }
+}
+```
+
+### getAllTaskLinks
+
+- Purpose: **Get all links related to a task**
+- Parameters:
+    - **task_id** (integer, required)
+- Result on success: **list of task link**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getAllTaskLinks",
+    "id": 810848359,
+    "params": [
+        2
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 810848359,
+    "result": [
+        {
+            "id": "1",
+            "task_id": "3",
+            "label": "relates to",
+            "title": "B",
+            "is_active": "1",
+            "project_id": "1",
+            "task_time_spent": "0",
+            "task_time_estimated": "0",
+            "task_assignee_id": "0",
+            "task_assignee_username": null,
+            "task_assignee_name": null,
+            "column_title": "Backlog"
+        }
+    ]
+}
+```
+
+### removeTaskLink
+
+- Purpose: **Remove a link between two tasks**
+- Parameters:
+    - **task_link_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "removeTaskLink",
+    "id": 473028226,
+    "params": [
+        1
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 473028226,
+    "result": true
+}
+```
+
+### createFile
+
+- Purpose: **Create and upload a new task attachment**
+- Parameters:
+    - **project_id** (integer, required)
+    - **task_id** (integer, required)
+    - **filename** (integer, required)
+    - **blob** File content encoded in base64 (string, required)
+- Result on success: **file_id**
+- Result on failure: **false**
+- Note: **The maximum file size depends of your PHP configuration, this method should not be used to upload large files**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "createFile",
+    "id": 94500810,
+    "params": [
+        1,
+        1,
+        "My file",
+        "cGxhaW4gdGV4dCBmaWxl"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 94500810,
+    "result": 1
+}
+```
+
+### getAllFiles
+
+- Purpose: **Get all files attached to  task**
+- Parameters:
+    - **task_id** (integer, required)
+- Result on success: **list of files**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getAllFiles",
+    "id": 1880662820,
+    "params": {
+        "task_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1880662820,
+    "result": [
+        {
+            "id": "1",
+            "name": "My file",
+            "path": "1\/1\/0db4d0a897a4c852f6e12f0239d4805f7b4ab596",
+            "is_image": "0",
+            "task_id": "1",
+            "date": "1432509941",
+            "user_id": "0",
+            "size": "15",
+            "username": null,
+            "user_name": null
+        }
+    ]
+}
+```
+
+### getFile
+
+- Purpose: **Get file information**
+- Parameters:
+    - **file_id** (integer, required)
+- Result on success: **file properties**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getFile",
+    "id": 318676852,
+    "params": [
+        "1"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 318676852,
+    "result": {
+        "id": "1",
+        "name": "My file",
+        "path": "1\/1\/0db4d0a897a4c852f6e12f0239d4805f7b4ab596",
+        "is_image": "0",
+        "task_id": "1",
+        "date": "1432509941",
+        "user_id": "0",
+        "size": "15"
+    }
+}
+```
+
+### downloadFile
+
+- Purpose: **Download file contents (encoded in base64)**
+- Parameters:
+    - **file_id** (integer, required)
+- Result on success: **base64 encoded string**
+- Result on failure: **empty string**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "downloadFile",
+    "id": 235943344,
+    "params": [
+        "1"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 235943344,
+    "result": "cGxhaW4gdGV4dCBmaWxl"
+}
+```
+
+### removeFile
+
+- Purpose: **Remove file**
+- Parameters:
+    - **file_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "removeFile",
+    "id": 447036524,
+    "params": [
+        "1"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 447036524,
+    "result": true
+}
+```
+
+### removeAllFiles
+
+- Purpose: **Remove all files associated to a task**
+- Parameters:
+    - **task_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "removeAllFiles",
+    "id": 593312993,
+    "params": {
+        "task_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 593312993,
     "result": true
 }
 ```

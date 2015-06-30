@@ -36,7 +36,8 @@ rm -rf data/*.sqlite \
        tests \
        Vagrantfile \
        .*.yml \
-       README.markdown \
+       *.md \
+       *.markdown \
        docs \
        Dockerfile \
        composer.* \

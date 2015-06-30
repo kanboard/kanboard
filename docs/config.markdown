@@ -4,14 +4,14 @@ Config file
 You can customize the default settings of Kanboard by adding a file `config.php` at the project root.
 You can also rename the `config.default.php` and change the desired values.
 
-Enable/Disable debug
---------------------
+Enable/Disable debug mode
+-------------------------
 
 ```php
 define('DEBUG', false);
 ```
 
-The debug mode log all SQL queries and the time taken to generate pages.
+The debug mode logs all SQL queries and the time taken to generate pages.
 
 Debug file path
 ---------------
@@ -21,6 +21,7 @@ define('DEBUG_FILE', __DIR__.'/data/debug.log');
 ```
 
 All debug information are saved in this file.
+If you prefer to send logs to `stdout` or `stderr` replace the value by `php://stdout` or `php://stderr`.
 
 Folder for uploaded files
 -------------------------
@@ -191,4 +192,7 @@ Various settings
 ```php
 // Escape html inside markdown text
 define('MARKDOWN_ESCAPE_HTML', true);
+
+// API alternative authentication header, the default is HTTP Basic Authentication defined in RFC2617
+define('API_AUTHENTICATION_HEADER', '');
 ```

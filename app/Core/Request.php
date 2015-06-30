@@ -83,7 +83,7 @@ class Request
      */
     public function getJson()
     {
-        return json_decode($this->getBody(), true);
+        return json_decode($this->getBody(), true) ?: array();
     }
 
     /**

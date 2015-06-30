@@ -12,9 +12,10 @@ use Subscriber\ProjectActivitySubscriber;
 use Subscriber\ProjectDailySummarySubscriber;
 use Subscriber\ProjectModificationDateSubscriber;
 use Subscriber\WebhookSubscriber;
-use Subscriber\SubtaskTimesheetSubscriber;
+use Subscriber\SubtaskTimeTrackingSubscriber;
 use Subscriber\TaskMovedDateSubscriber;
 use Subscriber\TransitionSubscriber;
+use Subscriber\RecurringTaskSubscriber;
 
 class EventDispatcherProvider implements ServiceProviderInterface
 {
@@ -28,9 +29,10 @@ class EventDispatcherProvider implements ServiceProviderInterface
         $container['dispatcher']->addSubscriber(new ProjectModificationDateSubscriber($container));
         $container['dispatcher']->addSubscriber(new WebhookSubscriber($container));
         $container['dispatcher']->addSubscriber(new NotificationSubscriber($container));
-        $container['dispatcher']->addSubscriber(new SubtaskTimesheetSubscriber($container));
+        $container['dispatcher']->addSubscriber(new SubtaskTimeTrackingSubscriber($container));
         $container['dispatcher']->addSubscriber(new TaskMovedDateSubscriber($container));
         $container['dispatcher']->addSubscriber(new TransitionSubscriber($container));
+        $container['dispatcher']->addSubscriber(new RecurringTaskSubscriber($container));
 
         // Automatic actions
         $container['action']->attachEvents();

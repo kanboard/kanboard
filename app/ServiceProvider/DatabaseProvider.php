@@ -12,12 +12,13 @@ class DatabaseProvider implements ServiceProviderInterface
     {
         $container['db'] = $this->getInstance();
         $container['db']->stopwatch = DEBUG;
-        $container['db']->log_queries = DEBUG;
+        $container['db']->logQueries = DEBUG;
     }
 
     /**
      * Setup the database driver and execute schema migration
      *
+     * @access public
      * @return \PicoDb\Database
      */
     public function getInstance()
@@ -51,9 +52,10 @@ class DatabaseProvider implements ServiceProviderInterface
     /**
      * Setup the Sqlite database driver
      *
+     * @access private
      * @return \PicoDb\Database
      */
-    function getSqliteInstance()
+    private function getSqliteInstance()
     {
         require_once __DIR__.'/../Schema/Sqlite.php';
 
@@ -66,9 +68,10 @@ class DatabaseProvider implements ServiceProviderInterface
     /**
      * Setup the Mysql database driver
      *
+     * @access private
      * @return \PicoDb\Database
      */
-    function getMysqlInstance()
+    private function getMysqlInstance()
     {
         require_once __DIR__.'/../Schema/Mysql.php';
 
@@ -86,9 +89,10 @@ class DatabaseProvider implements ServiceProviderInterface
     /**
      * Setup the Postgres database driver
      *
+     * @access private
      * @return \PicoDb\Database
      */
-    public function getPostgresInstance()
+    private function getPostgresInstance()
     {
         require_once __DIR__.'/../Schema/Postgres.php';
 

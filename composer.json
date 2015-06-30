@@ -1,19 +1,22 @@
 {
     "require" : {
-        "php": ">=5.3",
+        "php" : ">=5.3",
         "ext-mbstring" : "*",
-        "ext-gd": "*",
-        "fguillot/simple-validator" : "dev-master",
-        "swiftmailer/swiftmailer" : "@stable",
-        "fguillot/json-rpc" : "0.0.1",
-        "fguillot/picodb" : "dev-master",
-        "erusev/parsedown" : "1.5.1",
+        "ext-gd" : "*",
+        "christian-riesen/otp" : "1.4",
+        "eluceo/ical": "*",
+        "erusev/parsedown" : "1.5.3",
+        "fabiang/xmpp" : "0.6.1",
+        "fguillot/json-rpc" : "0.0.3",
+        "fguillot/picodb" : "1.0.0",
+        "fguillot/simpleLogger" : "0.0.2",
+        "fguillot/simple-validator" : "0.0.3",
         "lusitanian/oauth" : "0.3.5",
+        "nickcernis/html-to-markdown" : "2.2.1",
         "pimple/pimple" : "~3.0",
+        "swiftmailer/swiftmailer" : "@stable",
         "symfony/console" : "@stable",
-        "symfony/event-dispatcher" : "~2.6",
-        "fguillot/simpleLogger" : "0.0.1",
-        "christian-riesen/otp": "1.4"
+        "symfony/event-dispatcher" : "~2.6"
     },
     "autoload" : {
         "psr-0" : {
@@ -21,7 +24,7 @@
         },
         "files" : [
             "app/functions.php",
-            "app/Libs/password.php"
+            "app/Library/password.php"
         ]
     },
     "require-dev" : {

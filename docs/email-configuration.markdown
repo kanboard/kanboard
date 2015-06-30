@@ -12,6 +12,18 @@ To receive email notifications, users of Kanboard must have:
 
 Note: The logged user who performs the action doesn't receive any notifications, only other project members.
 
+Email transports
+----------------
+
+There are several email transports available:
+
+- SMTP
+- Sendmail
+- PHP native mail function
+- Mailgun
+- Postmark
+- Sendgrid
+
 Server settings
 ---------------
 
@@ -57,6 +69,71 @@ define('MAIL_TRANSPORT', 'sendmail');
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 ```
 
+### PHP native mail function
+
+This is the default configuration:
+
+```php
+define('MAIL_TRANSPORT', 'mail');
+```
+
+### Mailgun HTTP API
+
+You can use the HTTP API of Mailgun to send emails.
+
+Configuration:
+
+```php
+// We choose "mailgun" as mail transport
+define('MAIL_TRANSPORT', 'mailgun');
+
+// Mailgun API key
+define('MAILGUN_API_TOKEN', 'YOUR_API_KEY');
+
+// Mailgun domain name
+define('MAILGUN_DOMAIN', 'YOUR_DOMAIN_CONFIGURED_IN_MAILGUN');
+
+// Be sure to use the sender email address configured in Mailgun
+define('MAIL_FROM', 'sender-address-configured-in-mailgun@example.org');
+```
+
+### Postmark HTTP API
+
+Postmark is a third-party email service.
+If you already use the Postmark integration to receive emails in Kanboard you can use the same provider to send email too.
+
+This system use their HTTP API instead of the SMTP protocol.
+
+Here are the required settings for this configuration:
+
+```php
+// We choose "postmark" as mail transport
+define('MAIL_TRANSPORT', 'postmark');
+
+// Copy and paste your Postmark API token
+define('POSTMARK_API_TOKEN', 'COPY HERE YOUR POSTMARK API TOKEN');
+
+// Be sure to use the Postmark configured sender email address
+define('MAIL_FROM', 'sender-address-configured-in-postmark@example.org');
+```
+
+### Sendgrid HTTP API
+
+You can use the HTTP API of Sendgrid to send emails.
+
+Configuration:
+
+```php
+// We choose "sendgrid" as mail transport
+define('MAIL_TRANSPORT', 'sendgrid');
+
+// Sendgrid username
+define('SENDGRID_API_USER', 'YOUR_SENDGRID_USERNAME');
+
+// Sendgrid password
+define('SENDGRID_API_KEY', 'YOUR_SENDGRID_PASSWORD');
+```
+
 ### The sender email address
 
 By default, emails will use the sender address `notifications@kanboard.local`.
@@ -93,3 +170,4 @@ If no emails are send and you are sure that everything is configured correctly:
 - Check your spam folder
 - Enable the debug mode and check the debug file `data/debug.log`, you should see the exact error
 - Be sure that your server or your hosting provider allow you to send emails
+- If you use SeLinux, allow PHP to send emails

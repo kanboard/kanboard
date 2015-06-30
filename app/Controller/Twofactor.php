@@ -76,7 +76,7 @@ class Twofactor extends User
         $_SESSION['user']['twofactor_activated'] = false;
 
         $this->session->flash(t('User updated successfully.'));
-        $this->response->redirect($this->helper->url('twofactor', 'index', array('user_id' => $user['id'])));
+        $this->response->redirect($this->helper->url->to('twofactor', 'index', array('user_id' => $user['id'])));
     }
 
     /**
@@ -99,7 +99,7 @@ class Twofactor extends User
             $this->session->flashError(t('The two factor authentication code is not valid.'));
         }
 
-        $this->response->redirect($this->helper->url('twofactor', 'index', array('user_id' => $user['id'])));
+        $this->response->redirect($this->helper->url->to('twofactor', 'index', array('user_id' => $user['id'])));
     }
 
     /**
@@ -118,11 +118,11 @@ class Twofactor extends User
         if (! empty($values['code']) && $otp->checkTotp(Base32::decode($user['twofactor_secret']), $values['code'])) {
             $this->session['2fa_validated'] = true;
             $this->session->flash(t('The two factor authentication code is valid.'));
-            $this->response->redirect($this->helper->url('app', 'index'));
+            $this->response->redirect($this->helper->url->to('app', 'index'));
         }
         else {
             $this->session->flashError(t('The two factor authentication code is not valid.'));
-            $this->response->redirect($this->helper->url('twofactor', 'code'));
+            $this->response->redirect($this->helper->url->to('twofactor', 'code'));
         }
     }
 
@@ -135,6 +135,33 @@ class Twofactor extends User
     {
         $this->response->html($this->template->layout('twofactor/check', array(
             'title' => t('Check two factor authentication code'),
+        )));
+    }
+
+    /**
+     * Disable 2FA for a user
+     *
+     * @access public
+     */
+    public function disable()
+    {
+        $user = $this->getUser();
+
+        if ($this->request->getStringParam('disable') === 'yes') {
+
+            $this->checkCSRFParam();
+
+            $this->user->update(array(
+                'id' => $user['id'],
+                'twofactor_activated' => 0,
+                'twofactor_secret' => '',
+            ));
+
+            $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
+        }
+
+        $this->response->html($this->layout('twofactor/disable', array(
+            'user' => $user,
         )));
     }
 }

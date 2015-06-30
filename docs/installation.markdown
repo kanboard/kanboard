@@ -6,7 +6,7 @@ Requirements
 
 - Apache or Nginx
 - PHP >= 5.3.7
-- PHP extensions required: mbstring and pdo_sqlite (don't forget to enable extensions)
+- PHP extensions required: mbstring, gd and pdo_sqlite (don't forget to enable extensions)
 - A modern web browser
 
 From the archive (stable version)

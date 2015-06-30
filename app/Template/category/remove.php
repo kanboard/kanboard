@@ -9,9 +9,9 @@
         </p>
 
         <div class="form-actions">
-            <?= $this->a(t('Yes'), 'category', 'remove', array('project_id' => $project['id'], 'category_id' => $category['id']), true, 'btn btn-red') ?>
+            <?= $this->url->link(t('Yes'), 'category', 'remove', array('project_id' => $project['id'], 'category_id' => $category['id']), true, 'btn btn-red') ?>
             <?= t('or') ?>
-            <?= $this->a(t('cancel'), 'category', 'index', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('cancel'), 'category', 'index', array('project_id' => $project['id'])) ?>
         </div>
     </div>
 </section>

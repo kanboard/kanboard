@@ -5,7 +5,7 @@ Can you recommend a web hosting provider for Kanboard?
 ------------------------------------------------------
 
 Kanboard works well with any great VPS hosting provider such as [Digital Ocean](https://www.digitalocean.com/?refcode=4b541f47aae4),
-[Linode](https://www.linode.com) or [Gandi](https://www.gandi.net/).
+[Linode](https://www.linode.com/?r=4e381ac8a61116f40c60dc7438acc719610d8b11) or [Gandi](https://www.gandi.net/).
 
 To have the best performances, choose a provider with fast disk I/O because Kanboard use Sqlite by default.
 Avoid hosting providers that use a shared NFS mount point.
@@ -21,12 +21,45 @@ Kanboard have been tested on the following devices:
 - Mozilla Firefox
 - Safari
 - Google Chrome
-- Internet Explorer > 10
+- Internet Explorer 11
 
 ### Tablets
 
 - iPad (iOS)
-- Nexus 7 (Android)
+- Nexus 7 (Android/Chrome)
+
+
+I get a blank page after installing or upgrading Kanboard
+---------------------------------------------------------
+
+- Check if you have installed all requirements on your server
+- Check if the files have the correct permissions
+- If you use php-fpm and opcode caching, reload the process to be sure to clear the cache
+- Enable PHP error logging in your php.ini
+- Check the PHP and Apache error logs you should see the exact error
+
+
+Page not found and the url seems wrong (&amp;amp;)
+----------------------------------------------
+
+- The url looks like `/?controller=auth&amp;action=login&amp;redirect_query=` instead of `?controller=auth&action=login&redirect_query=`
+- Kanboard returns a "Page not found" error
+
+This issue come from your PHP configuration, the value of `arg_separator.output` is not the PHP's default, there is different ways to fix that:
+
+Change the value directly in your `php.ini` if you have the permission:
+
+```
+arg_separator.output = "&"
+```
+
+Override the value with a `.htaccess`:
+
+```
+php_value arg_separator.output "&"
+```
+
+Otherwise Kanboard will try to override the value directly in PHP.
 
 
 Known issues with eAccelerator
@@ -94,5 +127,6 @@ There is a [package to install Kanboard on Yunohost easily](https://github.com/m
 
 
 Are there some tutorials about Kanboard in other languages?
-------------------------------------
- - [German article series about Kanboard](http://demaya.de/wp/2014/07/kanboard-eine-jira-alternative-im-detail-installation/)
+-----------------------------------------------------------
+
+- [German article series about Kanboard](http://demaya.de/wp/2014/07/kanboard-eine-jira-alternative-im-detail-installation/)

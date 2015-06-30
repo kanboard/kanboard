@@ -23,7 +23,7 @@ class Budget extends Base
             'daily_budget' => $this->budget->getDailyBudgetBreakdown($project['id']),
             'project' => $project,
             'title' => t('Budget')
-        )));
+        ), 'budget/sidebar'));
     }
 
     /**
@@ -47,7 +47,7 @@ class Budget extends Base
             'paginator' => $paginator,
             'project' => $project,
             'title' => t('Budget')
-        )));
+        ), 'budget/sidebar'));
     }
 
     /**
@@ -68,8 +68,8 @@ class Budget extends Base
             'values' => $values + array('project_id' => $project['id']),
             'errors' => $errors,
             'project' => $project,
-            'title' => t('Budget')
-        )));
+            'title' => t('Budget lines')
+        ), 'budget/sidebar'));
     }
 
     /**
@@ -88,7 +88,7 @@ class Budget extends Base
 
             if ($this->budget->create($values['project_id'], $values['amount'], $values['comment'], $values['date'])) {
                 $this->session->flash(t('The budget line have been created successfully.'));
-                $this->response->redirect($this->helper->url('budget', 'create', array('project_id' => $project['id'])));
+                $this->response->redirect($this->helper->url->to('budget', 'create', array('project_id' => $project['id'])));
             }
             else {
                 $this->session->flashError(t('Unable to create the budget line.'));
@@ -111,7 +111,7 @@ class Budget extends Base
             'project' => $project,
             'budget_id' => $this->request->getIntegerParam('budget_id'),
             'title' => t('Remove a budget line'),
-        )));
+        ), 'budget/sidebar'));
     }
 
     /**
@@ -130,6 +130,6 @@ class Budget extends Base
             $this->session->flashError(t('Unable to remove this budget line.'));
         }
 
-        $this->response->redirect($this->helper->url('budget', 'create', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('budget', 'create', array('project_id' => $project['id'])));
     }
 }

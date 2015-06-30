@@ -9,10 +9,10 @@
         </li>
         <li>
             <?= t('API endpoint:') ?>
-            <input type="text" class="auto-select" readonly="readonly" value="<?= $this->getCurrentBaseUrl().'jsonrpc.php' ?>">
+            <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().'jsonrpc.php' ?>">
         </li>
         <li>
-            <?= $this->a(t('Reset token'), 'config', 'token', array('type' => 'api'), true) ?>
+            <?= $this->url->link(t('Reset token'), 'config', 'token', array('type' => 'api'), true) ?>
         </li>
     </ul>
 </section>

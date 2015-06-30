@@ -27,21 +27,6 @@ class TaskFinder extends Base
     }
 
     /**
-     * Get query for task search
-     *
-     * @access public
-     * @param  integer    $project_id    Project id
-     * @param  string     $search        Search terms
-     * @return \PicoDb\Table
-     */
-    public function getSearchQuery($project_id, $search)
-    {
-        return $this->getExtendedQuery()
-                    ->eq('project_id', $project_id)
-                    ->ilike('title', '%'.$search.'%');
-    }
-
-    /**
      * Get query for assigned user tasks
      *
      * @access public
@@ -104,6 +89,14 @@ class TaskFinder extends Base
                 'tasks.score',
                 'tasks.category_id',
                 'tasks.date_moved',
+                'tasks.recurrence_status',
+                'tasks.recurrence_trigger',
+                'tasks.recurrence_factor',
+                'tasks.recurrence_timeframe',
+                'tasks.recurrence_basedate',
+                'tasks.recurrence_parent',
+                'tasks.recurrence_child',
+                'tasks.time_estimated',
                 'users.username AS assignee_username',
                 'users.name AS assignee_name'
             )
@@ -161,6 +154,8 @@ class TaskFinder extends Base
                         Task::TABLE.'.title',
                         Task::TABLE.'.date_due',
                         Task::TABLE.'.project_id',
+                        Task::TABLE.'.creator_id',
+                        Task::TABLE.'.owner_id',
                         Project::TABLE.'.name AS project_name',
                         User::TABLE.'.username AS assignee_username',
                         User::TABLE.'.name AS assignee_name'
@@ -204,12 +199,13 @@ class TaskFinder extends Base
      * Fetch a task by the reference (external id)
      *
      * @access public
+     * @param  integer  $project_id  Project id
      * @param  string   $reference   Task reference
      * @return array
      */
-    public function getByReference($reference)
+    public function getByReference($project_id, $reference)
     {
-        return $this->db->table(Task::TABLE)->eq('reference', $reference)->findOne();
+        return $this->db->table(Task::TABLE)->eq('project_id', $project_id)->eq('reference', $reference)->findOne();
     }
 
     /**
@@ -245,7 +241,15 @@ class TaskFinder extends Base
             tasks.category_id,
             tasks.swimlane_id,
             tasks.date_moved,
+            tasks.recurrence_status,
+            tasks.recurrence_trigger,
+            tasks.recurrence_factor,
+            tasks.recurrence_timeframe,
+            tasks.recurrence_basedate,
+            tasks.recurrence_parent,
+            tasks.recurrence_child,
             project_has_categories.name AS category_name,
+            swimlanes.name AS swimlane_name,
             projects.name AS project_name,
             columns.title AS column_title,
             users.username AS assignee_username,
@@ -258,6 +262,7 @@ class TaskFinder extends Base
             LEFT JOIN project_has_categories ON project_has_categories.id = tasks.category_id
             LEFT JOIN projects ON projects.id = tasks.project_id
             LEFT JOIN columns ON columns.id = tasks.column_id
+            LEFT JOIN swimlanes ON swimlanes.id = tasks.swimlane_id
             WHERE tasks.id = ?
         ';
 
@@ -296,7 +301,7 @@ class TaskFinder extends Base
                     ->table(Task::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
-                    ->in('is_active', 1)
+                    ->eq('is_active', 1)
                     ->count();
     }
 
@@ -316,7 +321,7 @@ class TaskFinder extends Base
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
                     ->eq('swimlane_id', $swimlane_id)
-                    ->in('is_active', 1)
+                    ->eq('is_active', 1)
                     ->count();
     }
 
@@ -329,6 +334,6 @@ class TaskFinder extends Base
      */
     public function exists($task_id)
     {
-        return $this->db->table(Task::TABLE)->eq('id', $task_id)->count() === 1;
+        return $this->db->table(Task::TABLE)->eq('id', $task_id)->exists();
     }
 }

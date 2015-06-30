@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
-        <?php if ($this->userSession->isAdmin()): ?>
+        <?php if ($this->user->isAdmin()): ?>
         <ul>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->a(t('New user'), 'user', 'create') ?></li>
+            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New user'), 'user', 'create') ?></li>
         </ul>
         <?php endif ?>
     </div>
@@ -18,7 +18,6 @@
                 <th><?= $paginator->order(t('Email'), 'email') ?></th>
                 <th><?= $paginator->order(t('Administrator'), 'is_admin') ?></th>
                 <th><?= $paginator->order(t('Two factor authentication'), 'twofactor_activated') ?></th>
-                <th><?= $paginator->order(t('Default project'), 'default_project_id') ?></th>
                 <th><?= $paginator->order(t('Notifications'), 'notifications_enabled') ?></th>
                 <th><?= t('External accounts') ?></th>
                 <th><?= $paginator->order(t('Account type'), 'is_ldap_user') ?></th>
@@ -26,10 +25,10 @@
             <?php foreach ($paginator->getCollection() as $user): ?>
             <tr>
                 <td>
-                    <?= $this->a('#'.$user['id'], 'user', 'show', array('user_id' => $user['id'])) ?>
+                    <?= $this->url->link('#'.$user['id'], 'user', 'show', array('user_id' => $user['id'])) ?>
                 </td>
                 <td>
-                    <?= $this->a($this->e($user['username']), 'user', 'show', array('user_id' => $user['id'])) ?>
+                    <?= $this->url->link($this->e($user['username']), 'user', 'show', array('user_id' => $user['id'])) ?>
                 </td>
                 <td>
                     <?= $this->e($user['name']) ?>
@@ -42,9 +41,6 @@
                 </td>
                 <td>
                     <?= $user['twofactor_activated'] ? t('Yes') : t('No') ?>
-                </td>
-                <td>
-                    <?= (isset($user['default_project_id']) && isset($projects[$user['default_project_id']])) ? $this->e($projects[$user['default_project_id']]) : t('None'); ?>
                 </td>
                 <td>
                     <?php if ($user['notifications_enabled'] == 1): ?>

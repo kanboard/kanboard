@@ -1,0 +1,25 @@
+Adding screenshots
+==================
+
+You can copy and paste images directly in Kanboard to save time.
+These images are uploaded as attachments to the task.
+
+This is especially useful for taking screenshots to describe an issue by example.
+
+You can add screenshots directly from the board by clicking on the dropdown menu or in the task view page.
+
+![Dropdown screenshot menu](http://kanboard.net/screenshots/documentation/dropdown-screenshot.png)
+
+To add a new image, take your screenshot and paste with CTRL+V or Command+V:
+
+![Screenshot page](http://kanboard.net/screenshots/documentation/task-screenshot.png)
+
+On Mac OS X, you can use those shortcuts to take screenshots:
+
+- Command-Control-Shift-3: Take a screenshot of the screen, and save it to the clipboard
+- Command-Control-Shift-4, then select an area: Take a screenshot of an area and save it to the clipboard
+- Command-Control-Shift-4, then space, then click a window: Take a screenshot of a window and save it to the clipboard
+
+There are also several third-party applications that can be used to take screenshots with annotations and shapes.
+
+**Note: This feature doesn't works with all browsers.**

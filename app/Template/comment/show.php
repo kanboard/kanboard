@@ -2,21 +2,26 @@
 
     <p class="comment-title">
         <?php if (! empty($comment['email'])): ?>
-            <?= $this->avatar($comment['email'], $comment['name'] ?: $comment['username']) ?>
+            <?= $this->user->avatar($comment['email'], $comment['name'] ?: $comment['username']) ?>
         <?php endif ?>
-        <span class="comment-username"><?= $this->e($comment['name'] ?: $comment['username']) ?></span> @ <span class="comment-date"><?= dt('%B %e, %Y at %k:%M %p', $comment['date']) ?></span>
+
+        <?php if (! empty($comment['username'])): ?>
+            <span class="comment-username"><?= $this->e($comment['name'] ?: $comment['username']) ?></span> @
+        <?php endif ?>
+
+        <span class="comment-date"><?= dt('%B %e, %Y at %k:%M %p', $comment['date_creation']) ?></span>
     </p>
     <div class="comment-inner">
 
         <?php if (! isset($preview)): ?>
         <ul class="comment-actions">
             <li><a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a></li>
-            <?php if ((! isset($not_editable) || ! $not_editable) && ($this->userSession->isAdmin() || $this->userSession->isCurrentUser($comment['user_id']))): ?>
+            <?php if ((! isset($not_editable) || ! $not_editable) && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
                 <li>
-                    <?= $this->a(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
+                    <?= $this->url->link(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                 </li>
                 <li>
-                    <?= $this->a(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
+                    <?= $this->url->link(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                 </li>
             <?php endif ?>
         </ul>
@@ -24,7 +29,7 @@
 
         <div class="markdown">
             <?php if (isset($is_public) && $is_public): ?>
-                <?= $this->markdown(
+                <?= $this->text->markdown(
                     $comment['comment'],
                     array(
                         'controller' => 'task',
@@ -35,7 +40,7 @@
                     )
                 ) ?>
             <?php else: ?>
-                <?= $this->markdown(
+                <?= $this->text->markdown(
                     $comment['comment'],
                     array(
                         'controller' => 'task',

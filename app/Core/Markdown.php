@@ -3,6 +3,7 @@
 namespace Core;
 
 use Parsedown;
+use Helper\Url;
 
 /**
  * Specific Markdown rules for Kanboard
@@ -15,8 +16,8 @@ class Markdown extends Parsedown
 {
     private $link;
     private $helper;
-    
-    public function __construct($link, Helper $helper) 
+
+    public function __construct($link, Url $helper)
     {
         $this->link = $link;
         $this->helper = $helper;
@@ -29,9 +30,12 @@ class Markdown extends Parsedown
         // Replace task #123 by a link to the task
         if (! empty($this->link) && preg_match('!#(\d+)!i', $Excerpt['text'], $matches)) {
 
-            $url = $this->helper->u($this->link['controller'],
-                                    $this->link['action'],
-                                    $this->link['params'] + array('task_id' => $matches[1]));
+            $url = $this->helper->href(
+                $this->link['controller'],
+                $this->link['action'],
+                $this->link['params'] + array('task_id' => $matches[1])
+            );
+
             return array(
                 'extent' => strlen($matches[0]),
                 'element' => array(
