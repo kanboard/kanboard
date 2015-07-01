@@ -103,7 +103,7 @@ class App extends Base
         $user = $this->getUser();
 
         $this->response->html($this->layout('app/overview', array(
-            'title' => t('Overview'),
+            'title' => t('Dashboard'),
             'project_paginator' => $this->getProjectPaginator($user['id'], 'index', 10),
             'task_paginator' => $this->getTaskPaginator($user['id'], 'index', 10),
             'subtask_paginator' => $this->getSubtaskPaginator($user['id'], 'index', 10),
