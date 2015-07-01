@@ -214,7 +214,6 @@ class TaskFilter extends Base
      */
     public function filterByCategoryName(array $values)
     {
-        $this->query->join(Category::TABLE, 'id', 'category_id');
         $this->query->beginOr();
 
         foreach ($values as $category) {

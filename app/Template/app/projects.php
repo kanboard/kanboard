@@ -4,7 +4,7 @@
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('Your are not member of any project.') ?></p>
 <?php else: ?>
-    <table class="table-fixed">
+    <table class="table-fixed table-small">
         <tr>
             <th class="column-8"><?= $paginator->order('Id', 'id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'name') ?></th>

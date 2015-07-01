@@ -347,7 +347,7 @@ input.form-date {
 }
 
 input.form-input-large {
-    width: 400px;
+    width: 450px;
 }
 
 .form-row {
@@ -1403,10 +1403,6 @@ span.task-board-date-overdue {
 .dashboard-table-link:focus,
 .dashboard-table-link:hover {
     color: #999;
-}
-
-#dashboard .sidebar-content {
-    font-size: 0.9em;
 }
 /* datepicker */
 #ui-datepicker-div {

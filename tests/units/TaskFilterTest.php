@@ -94,25 +94,30 @@ class TaskFilterTest extends Base
         $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
         $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('Feature request', $tasks[0]['category_name']);
 
         $tf->search('category:"hé hé"');
         $tasks = $tf->findAll();
         $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
         $this->assertEquals('task3', $tasks[0]['title']);
+        $this->assertEquals('hé hé', $tasks[0]['category_name']);
 
         $tf->search('category:"Feature request" category:"hé hé"');
         $tasks = $tf->findAll();
         $this->assertNotEmpty($tasks);
         $this->assertCount(2, $tasks);
         $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('Feature request', $tasks[0]['category_name']);
         $this->assertEquals('task3', $tasks[1]['title']);
+        $this->assertEquals('hé hé', $tasks[1]['category_name']);
 
         $tf->search('category:none');
         $tasks = $tf->findAll();
         $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
         $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('', $tasks[0]['category_name']);
 
         $tf->search('category:"not found"');
         $tasks = $tf->findAll();
