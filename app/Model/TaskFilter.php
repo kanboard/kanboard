@@ -62,6 +62,12 @@ class TaskFilter extends Base
                 case 'T_CATEGORY':
                     $this->filterByCategoryName($value);
                     break;
+                case 'T_PROJECT':
+                    $this->filterByProjectName($value);
+                    break;
+                case 'T_COLUMN':
+                    $this->filterByColumnName($value);
+                    break;
             }
         }
 
@@ -187,6 +193,29 @@ class TaskFilter extends Base
         }
 
         return $this;
+    }
+
+    /**
+     * Filter by project name
+     *
+     * @access public
+     * @param  array    $values   List of project name
+     * @return TaskFilter
+     */
+    public function filterByProjectName(array $values)
+    {
+        $this->query->beginOr();
+
+        foreach ($values as $project) {
+            if (ctype_digit($project)) {
+                $this->query->eq(Task::TABLE.'.project_id', $project);
+            }
+            else {
+                $this->query->ilike(Project::TABLE.'.name', $project);
+            }
+        }
+
+        $this->query->closeOr();
     }
 
     /**
@@ -326,6 +355,24 @@ class TaskFilter extends Base
     }
 
     /**
+     * Filter by column name
+     *
+     * @access public
+     * @param  array    $values   List of column name
+     * @return TaskFilter
+     */
+    public function filterByColumnName(array $values)
+    {
+        $this->query->beginOr();
+
+        foreach ($values as $project) {
+            $this->query->ilike(Board::TABLE.'.title', $project);
+        }
+
+        $this->query->closeOr();
+    }
+
+    /**
      * Filter by swimlane
      *
      * @access public
@@ -382,7 +429,6 @@ class TaskFilter extends Base
      */
     public function filterByDueDate($date)
     {
-        $this->query->neq(Task::TABLE.'.date_due', '');
         $this->query->neq(Task::TABLE.'.date_due', 0);
         $this->query->notNull(Task::TABLE.'.date_due');
         return $this->filterWithOperator(Task::TABLE.'.date_due', $date, true);
@@ -452,7 +498,7 @@ class TaskFilter extends Base
      */
     public function findAll()
     {
-        return $this->query->findAll();
+        return $this->query->asc(Task::TABLE.'.id')->findAll();
     }
 
     /**

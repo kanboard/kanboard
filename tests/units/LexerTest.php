@@ -91,6 +91,56 @@ class LexerTest extends Base
         );
     }
 
+    public function testColumnQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'column:', 'token' => 'T_COLUMN'), array('match' => 'Feature Request', 'token' => 'T_STRING')),
+            $lexer->tokenize('column:"Feature Request"')
+        );
+
+        $this->assertEquals(
+            array('T_COLUMN' => array('Feature Request')),
+            $lexer->map($lexer->tokenize('column:"Feature Request"'))
+        );
+
+        $this->assertEquals(
+            array('T_COLUMN' => array('Feature Request', 'Bug')),
+            $lexer->map($lexer->tokenize('column:"Feature Request" column:Bug'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('column: '))
+        );
+    }
+
+    public function testProjectQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'project:', 'token' => 'T_PROJECT'), array('match' => 'My project', 'token' => 'T_STRING')),
+            $lexer->tokenize('project:"My project"')
+        );
+
+        $this->assertEquals(
+            array('T_PROJECT' => array('My project')),
+            $lexer->map($lexer->tokenize('project:"My project"'))
+        );
+
+        $this->assertEquals(
+            array('T_PROJECT' => array('My project', 'plop')),
+            $lexer->map($lexer->tokenize('project:"My project" project:plop'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('project: '))
+        );
+    }
+
     public function testStatusQuery()
     {
         $lexer = new Lexer;

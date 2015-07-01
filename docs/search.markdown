@@ -127,3 +127,20 @@ Attribute: **category**
 - Find tasks with a specific category: `category:"Feature Request"`
 - Find all tasks that have those categories: `category:"Bug" category:"Improvements"`
 - Find tasks with no category assigned: `category:none`
+
+Search by project
+-----------------
+
+Attribute: **project**
+
+- Find tasks by project name: `project:"My project name"`
+- Find tasks by project id: `project:23`
+- Find tasks for several projects: `project:"My project A" project:"My project B"`
+
+Search by column
+----------------
+
+Attribute: **column**
+
+- Find tasks by column name: `column:"Work in progress"`
+- Find tasks for several columns: `column:"Backlog" column:ready`
