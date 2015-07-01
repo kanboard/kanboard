@@ -32,27 +32,6 @@ class User extends Base
     }
 
     /**
-     * Common method to get the user
-     *
-     * @access protected
-     * @return array
-     */
-    protected function getUser()
-    {
-        $user = $this->user->getById($this->request->getIntegerParam('user_id'));
-
-        if (empty($user)) {
-            $this->notfound();
-        }
-
-        if (! $this->userSession->isAdmin() && $this->userSession->getId() != $user['id']) {
-            $this->forbidden();
-        }
-
-        return $user;
-    }
-
-    /**
      * List all users
      *
      * @access public
@@ -135,20 +114,6 @@ class User extends Base
             'user' => $user,
             'timezones' => $this->config->getTimezones(true),
             'languages' => $this->config->getLanguages(true),
-        )));
-    }
-
-    /**
-     * Display user calendar
-     *
-     * @access public
-     */
-    public function calendar()
-    {
-        $user = $this->getUser();
-
-        $this->response->html($this->layout('user/calendar', array(
-            'user' => $user,
         )));
     }
 

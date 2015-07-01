@@ -1,4 +1,6 @@
-<h2><?= t('My subtasks') ?> (<?= $paginator->getTotal() ?>)</h2>
+<div class="page-header">
+    <h2><?= t('My subtasks') ?> (<?= $paginator->getTotal() ?>)</h2>
+</div>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>

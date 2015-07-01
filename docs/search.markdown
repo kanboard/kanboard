@@ -6,7 +6,7 @@ Kanboard use a simple query language for advanced search.
 Example of query
 ----------------
 
-This example will returns all tasks assigned to me with a due date for tomorrow and that have a title that contains "my title":
+This example will returns all tasks assigned to me with a due date for tomorrow and a title that contains "my title":
 
 ```
 assigne:me due:tomorrow my title
@@ -125,5 +125,5 @@ Search by category
 Attribute: **category**
 
 - Find tasks with a specific category: `category:"Feature Request"`
-- Find all tasks that have those category: `category:"Bug" category:"Improvements"`
+- Find all tasks that have those categories: `category:"Bug" category:"Improvements"`
 - Find tasks with no category assigned: `category:none`

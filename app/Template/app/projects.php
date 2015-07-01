@@ -1,4 +1,6 @@
-<h2><?= t('My projects') ?> (<?= $paginator->getTotal() ?>)</h2>
+<div class="page-header">
+    <h2><?= t('My projects') ?> (<?= $paginator->getTotal() ?>)</h2>
+</div>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('Your are not member of any project.') ?></p>
 <?php else: ?>

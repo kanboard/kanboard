@@ -306,4 +306,25 @@ abstract class Base extends \Core\Base
 
         return $project;
     }
+
+    /**
+     * Common method to get the user
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getUser()
+    {
+        $user = $this->user->getById($this->request->getIntegerParam('user_id', $this->userSession->getId()));
+
+        if (empty($user)) {
+            $this->notfound();
+        }
+
+        if (! $this->userSession->isAdmin() && $this->userSession->getId() != $user['id']) {
+            $this->forbidden();
+        }
+
+        return $user;
+    }
 }

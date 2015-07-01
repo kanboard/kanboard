@@ -29,8 +29,7 @@ Kanboard.Calendar = (function() {
             lang: $("body").data("js-lang"),
             editable: true,
             eventLimit: true,
-            height: Kanboard.Exists("dashboard-calendar") ? 500 : "auto",
-            defaultView: "agendaWeek",
+            defaultView: "month",
             header: {
                 left: 'prev,next today',
                 center: 'title',
