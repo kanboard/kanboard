@@ -2,16 +2,16 @@
 <div class="task-board-category-container">
     <span class="task-board-category">
         <?php if ($not_editable): ?>
-            <?= $this->text->in($task['category_id'], $categories_listing) ?>
+            <?= $this->e($task['category_name']) ?>
         <?php else: ?>
             <?= $this->url->link(
-                $this->text->in($task['category_id'], $categories_listing),
+                $this->e($task['category_name']),
                 'board',
                 'changeCategory',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,
-                'task-board-popover' . (isset($categories_description[$task['category_id']]) ? ' column-tooltip' : ''),
-                isset($categories_description[$task['category_id']]) ? $this->text->markdown($categories_description[$task['category_id']]) : t('Change category')
+                'task-board-popover' . (! empty($task['category_description']) ? ' column-tooltip' : ''),
+                ! empty($task['category_description']) ? $this->text->markdown($task['category_description']) : t('Change category')
             ) ?>
         <?php endif ?>
     </span>

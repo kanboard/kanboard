@@ -100,6 +100,7 @@ class TaskFinder extends Base
                 User::TABLE.'.username AS assignee_username',
                 User::TABLE.'.name AS assignee_name',
                 Category::TABLE.'.name AS category_name',
+                Category::TABLE.'.description AS category_description',
                 Board::TABLE.'.title AS column_name',
                 Project::TABLE.'.name AS project_name'
             )
