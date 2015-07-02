@@ -27,6 +27,20 @@ class TaskFinder extends Base
     }
 
     /**
+     * Get query for open tasks
+     *
+     * @access public
+     * @param  integer    $project_id    Project id
+     * @return \PicoDb\Table
+     */
+    public function getOpenTaskQuery($project_id)
+    {
+        return $this->getExtendedQuery()
+            ->eq('project_id', $project_id)
+            ->eq('is_active', Task::STATUS_OPEN);
+    }
+
+    /**
      * Get query for assigned user tasks
      *
      * @access public

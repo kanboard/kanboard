@@ -7,6 +7,10 @@
     <?= $this->url->link(t('Completed tasks'), 'projectinfo', 'tasks', array('project_id' => $project['id'])) ?>
 </li>
 <li>
+    <i class="fa fa-check-square-o fa-fw"></i>
+    <?= $this->url->link(t('Open tasks'), 'projectinfo', 'listView', array('project_id' => $project['id'])) ?>
+</li>
+<li>
     <i class="fa fa-dashboard fa-fw"></i>
     <?= $this->url->link(t('Activity'), 'projectinfo', 'activity', array('project_id' => $project['id'])) ?>
 </li>
