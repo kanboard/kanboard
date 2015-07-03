@@ -22,8 +22,8 @@ class TaskFinder extends Base
     public function getClosedTaskQuery($project_id)
     {
         return $this->getExtendedQuery()
-                    ->eq('project_id', $project_id)
-                    ->eq('is_active', Task::STATUS_CLOSED);
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->eq(Task::TABLE.'.is_active', Task::STATUS_CLOSED);
     }
 
     /**
