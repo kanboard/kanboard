@@ -185,16 +185,18 @@ var Kanboard = (function() {
             // Check the session every 60s
             window.setInterval(Kanboard.CheckSession, 60000);
 
-            // Keyboard shortcuts
+            // Submit form
             Mousetrap.bindGlobal("mod+enter", function() {
                 $("form").submit();
             });
 
+            // Open board selector
             Mousetrap.bind("b", function(e) {
                 e.preventDefault();
                 $('#board-selector').trigger('chosen:open');
             });
 
+            // Focus to the search box
             Mousetrap.bind("f", function(e) {
                 e.preventDefault();
 
@@ -205,10 +207,46 @@ var Kanboard = (function() {
                 }
             });
 
+            // Switch view mode for projects: go to the board
+            Mousetrap.bind("v b", function(e) {
+                var link = $(".view-board");
+
+                if (link.length) {
+                    window.location = link.attr('href');
+                }
+            });
+
+            // Switch view mode for projects: go to the calendar
+            Mousetrap.bind("v c", function(e) {
+                var link = $(".view-calendar");
+
+                if (link.length) {
+                    window.location = link.attr('href');
+                }
+            });
+
+            // Switch view mode for projects: go to the listing
+            Mousetrap.bind("v l", function(e) {
+                var link = $(".view-listing");
+
+                if (link.length) {
+                    window.location = link.attr('href');
+                }
+            });
+
+            // Place cursor at the end when focusing on the search box
             $(document).on("focus", "#form-search", function() {
                 $(this).val($(this).val());
             });
 
+            // Filter helper for search
+            $(document).on("click", ".filter-helper", function (e) {
+               e.preventDefault();
+               $("#form-search").val($(this).data("filter"));
+               $("form.search").submit();
+            });
+
+            // Datepicker translation
             $.datepicker.setDefaults($.datepicker.regional[$("body").data("js-lang")]);
 
             Kanboard.InitAfterAjax();
