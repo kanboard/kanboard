@@ -236,7 +236,9 @@ var Kanboard = (function() {
 
             // Place cursor at the end when focusing on the search box
             $(document).on("focus", "#form-search", function() {
-                $(this).val($(this).val());
+                if ($("#form-search")[0].setSelectionRange) {
+                   $('#form-search')[0].setSelectionRange($('#form-search').val().length, $('#form-search').val().length);
+                }
             });
 
             // Filter helper for search
