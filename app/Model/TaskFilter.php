@@ -68,6 +68,9 @@ class TaskFilter extends Base
                 case 'T_COLUMN':
                     $this->filterByColumnName($value);
                     break;
+                case 'T_REFERENCE':
+                    $this->filterByReference($value);
+                    break;
             }
         }
 
@@ -135,6 +138,22 @@ class TaskFilter extends Base
     {
         if ($task_id > 0) {
             $this->query->eq(Task::TABLE.'.id', $task_id);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Filter by reference
+     *
+     * @access public
+     * @param  string  $reference
+     * @return TaskFilter
+     */
+    public function filterByReference($reference)
+    {
+        if (! empty($reference)) {
+            $this->query->eq(Task::TABLE.'.reference', $reference);
         }
 
         return $this;

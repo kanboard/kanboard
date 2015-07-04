@@ -144,3 +144,10 @@ Attribute: **column**
 
 - Find tasks by column name: `column:"Work in progress"`
 - Find tasks for several columns: `column:"Backlog" column:ready`
+
+Search by external reference
+----------------------------
+
+The task reference is an external id of your task, by example a ticket number from another software.
+
+- Find tasks with a reference: `ref:1234` or `reference:TICKET-1234`

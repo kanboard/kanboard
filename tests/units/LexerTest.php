@@ -171,6 +171,36 @@ class LexerTest extends Base
         );
     }
 
+    public function testReferenceQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'ref:', 'token' => 'T_REFERENCE'), array('match' => '123', 'token' => 'T_STRING')),
+            $lexer->tokenize('ref:123')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'reference:', 'token' => 'T_REFERENCE'), array('match' => '456', 'token' => 'T_STRING')),
+            $lexer->tokenize('reference:456')
+        );
+
+        $this->assertEquals(
+            array('T_REFERENCE' => '123'),
+            $lexer->map($lexer->tokenize('reference:123'))
+        );
+
+        $this->assertEquals(
+            array('T_REFERENCE' => '456'),
+            $lexer->map($lexer->tokenize('ref:456'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('ref: '))
+        );
+    }
+
     public function testDescriptionQuery()
     {
         $lexer = new Lexer;
