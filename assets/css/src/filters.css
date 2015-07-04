@@ -1,0 +1,29 @@
+.views {
+    display: inline-block;
+}
+
+.views li {
+    border: 1px solid #eee;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.views li.active a {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.views li:first-child {
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.views li:last-child {
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

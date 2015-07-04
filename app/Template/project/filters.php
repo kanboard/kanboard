@@ -45,5 +45,4 @@
         <?= $this->form->hidden('action', $filters) ?>
         <?= $this->form->text('search', $filters, array(), array('placeholder="'.t('Filter').'"'), 'form-input-large') ?>
     </form>
-
 </div>

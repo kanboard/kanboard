@@ -52,13 +52,3 @@ hr {
     float: left;
     margin-right: 10px;
 }
-
-.views {
-    display: inline-block;
-}
-
-.views li.active a {
-    font-weight: bold;
-    color: #000;
-    text-decoration: none;
-}
