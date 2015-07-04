@@ -51,6 +51,7 @@
     <h3><?= t('Application') ?></h3>
     <ul>
         <li><?= t('Open board switcher') ?> = <strong>b</strong></li>
+        <li><?= t('Go to the search/filter box') ?> = <strong>f</strong></li>
         <li><?= t('Close dialog box') ?> = <strong>ESC</strong></li>
         <li><?= t('Submit a form') ?> = <strong>CTRL+ENTER</strong> <?= t('or') ?> <strong>⌘+ENTER</strong></li>
     </ul>

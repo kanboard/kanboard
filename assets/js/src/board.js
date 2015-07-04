@@ -13,7 +13,6 @@
     function keyboard_shortcuts()
     {
         Mousetrap.bind("n", function() {
-
             Kanboard.OpenPopover(
                 $("#board").data("task-creation-url"),
                 Kanboard.InitAfterAjax

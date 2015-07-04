@@ -195,6 +195,20 @@ var Kanboard = (function() {
                 $('#board-selector').trigger('chosen:open');
             });
 
+            Mousetrap.bind("f", function(e) {
+                e.preventDefault();
+
+                var input = document.getElementById("form-search");
+
+                if (input) {
+                    input.focus();
+                }
+            });
+
+            $(document).on("focus", "#form-search", function() {
+                $(this).val($(this).val());
+            });
+
             $.datepicker.setDefaults($.datepicker.regional[$("body").data("js-lang")]);
 
             Kanboard.InitAfterAjax();
