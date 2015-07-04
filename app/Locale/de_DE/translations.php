@@ -442,7 +442,7 @@ return array(
     '%s updated a subtask for the task %s' => '%s hat eine Teilaufgabe der Aufgabe %s verändert',
     'Assigned to %s with an estimate of %s/%sh' => 'An %s zugewiesen mit einer Schätzung von %s/%s Stunden',
     'Not assigned, estimate of %sh' => 'Nicht zugewiesen, Schätzung von %s Stunden',
-    '%s updated a comment on the task %s' => '%s hat einen Kommentat der Aufgabe %s aktualisiert',
+    '%s updated a comment on the task %s' => '%s hat einen Kommentar der Aufgabe %s aktualisiert',
     '%s commented the task %s' => '%s hat die Aufgabe %s kommentiert',
     '%s\'s activity' => '%s\'s Aktivität',
     'No activity.' => 'Keine Aktivität.',
