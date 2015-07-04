@@ -249,6 +249,11 @@ var Kanboard = (function() {
             // Datepicker translation
             $.datepicker.setDefaults($.datepicker.regional[$("body").data("js-lang")]);
 
+            // Alert box fadeout
+            $(".alert-fade-out").delay(4000).fadeOut(800, function() {
+                $(this).remove();
+            });
+
             Kanboard.InitAfterAjax();
         },
 
