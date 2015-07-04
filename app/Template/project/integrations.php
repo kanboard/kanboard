@@ -85,6 +85,8 @@
 
         <?= $this->form->label(t('Webhook URL'), 'slack_webhook_url') ?>
         <?= $this->form->text('slack_webhook_url', $values, $errors) ?>
+        <?= $this->form->label(t('Channel/Group/User (Optional)'), 'slack_webhook_channel') ?>
+        <?= $this->form->text('slack_webhook_channel', $values, $errors) ?>
 
         <p class="form-help"><a href="http://kanboard.net/documentation/slack" target="_blank"><?= t('Help on Slack integration') ?></a></p>
 
