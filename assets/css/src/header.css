@@ -97,10 +97,6 @@ nav .active a {
     font-size: 0.9em;
 }
 
-.page-header form {
-    display: inline;
-}
-
 @media only screen and (max-width: 640px) {
 
     .page-header-mobile li {

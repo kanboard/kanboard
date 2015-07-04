@@ -8,12 +8,15 @@
         </ul>
     </div>
 
-    <form method="get" action="?" autocomplete="off">
-        <?= $this->form->hidden('controller', $values) ?>
-        <?= $this->form->hidden('action', $values) ?>
-        <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'required', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
-        <input type="submit" value="<?= t('Search') ?>" class="btn btn-blue"/>
-    </form>
+    <div class="search">
+        <form method="get" action="?" class="search">
+            <?= $this->form->hidden('controller', $values) ?>
+            <?= $this->form->hidden('action', $values) ?>
+            <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
+        </form>
+
+        <?= $this->render('app/filters_helper') ?>
+    </div>
 
     <?php if (empty($values['search'])): ?>
         <div class="listing">
@@ -28,7 +31,7 @@
                 <li><?= t('Search by description: ') ?><strong>description:"Something to find"</strong></li>
                 <li><?= t('Search by due date: ') ?><strong>due:2015-07-01</strong></li>
             </ul>
-            <p><a href="http://kanboard.net/documentation/search" target="_blank"><?= t('More examples in the documentation') ?></a></p>
+            <p><i class="fa fa-external-link fa-fw"></i><a href="http://kanboard.net/documentation/search" target="_blank"><?= t('More examples in the documentation') ?></a></p>
         </div>
     <?php elseif (! empty($values['search']) && $paginator->isEmpty()): ?>
         <p class="alert"><?= t('Nothing found.') ?></p>
