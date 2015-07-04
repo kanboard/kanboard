@@ -51,7 +51,7 @@ var Kanboard = (function() {
                     $('#popover-container').remove();
                 });
 
-                Mousetrap.bind("esc", function() {
+                Mousetrap.bindGlobal("esc", function() {
                     $('#popover-container').remove();
                 });
 
