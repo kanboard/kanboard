@@ -36,6 +36,12 @@
     padding-right: 10px;
 }
 
+.page-header div.dropdown {
+    font-size: 0.9em;
+    padding-right: 10px;
+}
+
+.page-header div.dropdown,
 .page-header ul.dropdown {
     display: inline;
 }

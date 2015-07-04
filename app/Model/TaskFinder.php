@@ -13,20 +13,6 @@ use PDO;
 class TaskFinder extends Base
 {
     /**
-     * Get query for closed tasks
-     *
-     * @access public
-     * @param  integer    $project_id    Project id
-     * @return \PicoDb\Table
-     */
-    public function getClosedTaskQuery($project_id)
-    {
-        return $this->getExtendedQuery()
-                    ->eq(Task::TABLE.'.project_id', $project_id)
-                    ->eq(Task::TABLE.'.is_active', Task::STATUS_CLOSED);
-    }
-
-    /**
      * Get query for assigned user tasks
      *
      * @access public
@@ -142,8 +128,8 @@ class TaskFinder extends Base
     {
         return $this->db
                     ->table(Task::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->eq('is_active', $status_id)
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->eq(Task::TABLE.'.is_active', $status_id)
                     ->findAll();
     }
 

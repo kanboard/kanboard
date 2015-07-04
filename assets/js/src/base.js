@@ -1,4 +1,3 @@
-// Common functions
 var Kanboard = (function() {
 
     jQuery(document).ready(function() {

@@ -12,8 +12,12 @@
             </span>
         </li>
             <li>
-                <i class="fa fa-table fa-fw"></i>
+                <i class="fa fa-th fa-fw"></i>
                 <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
+            </li>
+            <li>
+                <i class="fa fa-calendar fa-fw"></i>
+                <?= $this->url->link(t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
                 <i class="fa fa-folder fa-fw"></i>

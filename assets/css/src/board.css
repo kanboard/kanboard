@@ -1,12 +1,3 @@
-/* board filters */
-.board-filters {
-    font-size: 0.95em;
-}
-
-#more-filters {
-    display: none; /* Hide this filter initially, to avoid re-layout */
-}
-
 /* public board */
 .public-board {
     margin-top: 5px;

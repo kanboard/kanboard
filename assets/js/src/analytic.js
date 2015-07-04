@@ -1,5 +1,4 @@
-
-Kanboard.Analytic = (function() {
+(function() {
 
     // CFD diagram
     function drawCfd()
@@ -184,7 +183,5 @@ Kanboard.Analytic = (function() {
             drawBudget();
         }
     });
-
-    return {};
 
 })();

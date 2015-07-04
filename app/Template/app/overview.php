@@ -1,7 +1,7 @@
 <form method="get" action="?" autocomplete="off">
     <?= $this->form->hidden('controller', array('controller' => 'search')) ?>
     <?= $this->form->hidden('action', array('controller' => 'index')) ?>
-    <?= $this->form->text('search', array(), array(), array('required', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
+    <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'form-input-large') ?>
     <input type="submit" value="<?= t('Search') ?>" class="btn btn-blue"/>
 </form>
 

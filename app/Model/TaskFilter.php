@@ -513,6 +513,23 @@ class TaskFilter extends Base
     }
 
     /**
+     * Get swimlanes and tasks to display the board
+     *
+     * @access public
+     * @return array
+     */
+    public function getBoard($project_id)
+    {
+        $tasks = $this->filterByProject($project_id)->query->asc(Task::TABLE.'.position')->findAll();
+
+        return $this->board->getBoard($project_id, function ($project_id, $column_id, $swimlane_id) use ($tasks) {
+            return array_filter($tasks, function(array $task) use ($column_id, $swimlane_id) {
+                return $task['column_id'] == $column_id && $task['swimlane_id'] == $swimlane_id;
+            });
+        });
+    }
+
+    /**
      * Format the results to the ajax autocompletion
      *
      * @access public
