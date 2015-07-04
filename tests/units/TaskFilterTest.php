@@ -27,6 +27,47 @@ class TaskFilterTest extends Base
         $this->assertEmpty($tf->search('search something')->findAll());
     }
 
+    public function testSearchById()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2')));
+
+        $tf->search('#2');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+
+        $tf->search('1');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+
+        $tf->search('something');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('#');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('#abcd');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('task1');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+    }
+
     public function testSearchWithReference()
     {
         $p = new Project($this->container);

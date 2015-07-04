@@ -40,6 +40,7 @@ class Lexer
         '/^(yesterday|tomorrow|today)/'                  => 'T_DATE',
         '/^("(.*?)")/'                                   => 'T_STRING',
         "/^(\w+)/"                                       => 'T_STRING',
+        "/^(#\d+)/"                                      => 'T_STRING',
     );
 
     /**

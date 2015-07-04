@@ -12,6 +12,12 @@ This example will returns all tasks assigned to me with a due date for tomorrow 
 assigne:me due:tomorrow my title
 ```
 
+Search by task id or title
+--------------------------
+
+- Search by task id: `#123` or `123`
+- Search by task title: anything that don't match any search attributes mentioned below
+
 Search by status
 ----------------
 

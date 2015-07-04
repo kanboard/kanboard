@@ -341,6 +341,11 @@ class LexerTest extends Base
         );
 
         $this->assertEquals(
+            array('T_TITLE' => '#123'),
+            $lexer->map($lexer->tokenize('#123'))
+        );
+
+        $this->assertEquals(
             array(),
             $lexer->map($lexer->tokenize('color:assignee:'))
         );

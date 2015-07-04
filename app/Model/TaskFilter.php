@@ -173,7 +173,7 @@ class TaskFilter extends Base
     }
 
     /**
-     * Filter by title
+     * Filter by title or id if the string is like #123 or an integer
      *
      * @access public
      * @param  string  $title
@@ -181,7 +181,16 @@ class TaskFilter extends Base
      */
     public function filterByTitle($title)
     {
-        $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
+        if (strlen($title) > 1 && $title{0} === '#' && ctype_digit(substr($title, 1))) {
+            $this->query->eq(Task::TABLE.'.id', substr($title, 1));
+        }
+        else if (ctype_digit($title)) {
+            $this->query->eq(Task::TABLE.'.id', $title);
+        }
+        else {
+            $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
+        }
+
         return $this;
     }
 
