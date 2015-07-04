@@ -15,9 +15,9 @@
             <?= $this->asset->js('assets/js/app.js', true) ?>
         <?php endif ?>
 
+        <?= $this->asset->colorCss() ?>
         <?= $this->asset->css('assets/css/app.css') ?>
         <?= $this->asset->css('assets/css/print.css', true, 'print') ?>
-        <?= $this->asset->colorCss() ?>
         <?= $this->asset->customCss() ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">

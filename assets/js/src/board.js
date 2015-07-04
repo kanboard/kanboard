@@ -106,6 +106,7 @@
             distance: 5,
             connectWith: ".column",
             placeholder: "draggable-placeholder",
+            items: ".draggable-item",
             stop: function(event, ui) {
                 board_save(
                     ui.item.attr('data-task-id'),

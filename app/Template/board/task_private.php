@@ -1,4 +1,7 @@
-<div class="task-board draggable-item color-<?= $task['color_id'] ?> <?= $task['date_modification'] > time() - $board_highlight_period ? 'task-board-recent' : '' ?>"
+<div class="
+        task-board
+        <?= $task['is_active'] == 1 ? 'draggable-item task-board-status-open '.($task['date_modification'] > (time() - $board_highlight_period) ? 'task-board-recent' : '') : 'task-board-status-closed' ?>
+        color-<?= $task['color_id'] ?>"
      data-task-id="<?= $task['id'] ?>"
      data-owner-id="<?= $task['owner_id'] ?>"
      data-category-id="<?= $task['category_id'] ?>"
@@ -31,10 +34,14 @@
             ) ?>
         </span>
 
+        <?php if ($task['is_active'] == 1): ?>
         <div class="task-board-days">
             <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->datetime->age($task['date_creation']) ?></span>
             <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->datetime->age($task['date_moved']) ?></span>
         </div>
+        <?php else: ?>
+            <div class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></div>
+        <?php endif ?>
 
         <div class="task-board-title">
             <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
