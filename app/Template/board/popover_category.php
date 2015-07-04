@@ -9,7 +9,7 @@
             <?= $this->form->hidden('project_id', $values) ?>
 
             <?= $this->form->label(t('Category'), 'category_id') ?>
-            <?= $this->form->select('category_id', $categories_list, $values) ?><br/>
+            <?= $this->form->select('category_id', $categories_list, $values, array(), array('autofocus')) ?><br/>
 
             <div class="form-actions">
                 <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
@@ -18,5 +18,4 @@
             </div>
         </form>
     </section>
-
 </section>
