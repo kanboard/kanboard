@@ -716,11 +716,11 @@ class TaskFilter extends Base
         $vEvent->setSummary(t('#%d', $task['id']).' '.$task['title']);
         $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
 
-        if (! empty($task['creator_id'])) {
-            $vEvent->setOrganizer('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
+        if (! empty($task['owner_id'])) {
+            $vEvent->setOrganizer('MAILTO:'.($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'));
         }
 
-        if (! empty($task['owner_id'])) {
+        if (! empty($task['creator_id'])) {
             $attendees = new Attendees;
             $attendees->add('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
             $vEvent->setAttendees($attendees);
