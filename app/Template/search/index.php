@@ -31,7 +31,7 @@
                 <li><?= t('Search by description: ') ?><strong>description:"Something to find"</strong></li>
                 <li><?= t('Search by due date: ') ?><strong>due:2015-07-01</strong></li>
             </ul>
-            <p><i class="fa fa-external-link fa-fw"></i><a href="http://kanboard.net/documentation/search" target="_blank"><?= t('More examples in the documentation') ?></a></p>
+            <p><i class="fa fa-external-link fa-fw"></i><a href="http://kanboard.net/documentation/search" target="_blank"><?= t('View advanced search syntax') ?></a></p>
         </div>
     <?php elseif (! empty($values['search']) && $paginator->isEmpty()): ?>
         <p class="alert"><?= t('Nothing found.') ?></p>

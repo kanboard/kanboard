@@ -1525,7 +1525,7 @@ span.task-board-date-overdue {
     position: absolute;
     left: 0;
     z-index: 1000;
-    min-width: 230px;
+    min-width: 300px;
     list-style: none;
     margin: 3px 0 0 1px;
     padding: 6px 0;
