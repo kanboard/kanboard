@@ -11,6 +11,11 @@
     <?= $this->render('board/task_menu', array('task' => $task)) ?>
 
     <div class="task-board-collapsed" style="display: none">
+        <?php if (! empty($task['assignee_username'])): ?>
+            <span title="<?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>">
+                <?= $this->e($this->user->getInitials($task['assignee_name'] ?: $task['assignee_username'])) ?>
+            </span> -
+        <?php endif ?>
         <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-collapsed-title') ?>
     </div>
 
