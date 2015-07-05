@@ -26,4 +26,20 @@ class Activity extends Base
             'title' => t('%s\'s activity', $project['name'])
         )));
     }
+
+    /**
+     * Display task activities
+     *
+     * @access public
+     */
+    public function task()
+    {
+        $task = $this->getTask();
+
+        $this->response->html($this->taskLayout('activity/task', array(
+            'title' => $task['title'],
+            'task' => $task,
+            'events' => $this->projectActivity->getTask($task['id']),
+        )));
+    }
 }

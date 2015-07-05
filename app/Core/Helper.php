@@ -12,7 +12,7 @@ use Pimple\Container;
  *
  * @property \Helper\App        $app
  * @property \Helper\Asset      $asset
- * @property \Helper\Datetime   $datetime
+ * @property \Helper\Dt         $dt
  * @property \Helper\File       $file
  * @property \Helper\Form       $form
  * @property \Helper\Subtask    $subtask
