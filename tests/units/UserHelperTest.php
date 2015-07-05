@@ -12,6 +12,5 @@ class UserHelperTest extends Base
 
         $this->assertEquals('CN', $h->getInitials('chuck norris'));
         $this->assertEquals('A', $h->getInitials('admin'));
-        $this->assertEquals('漢', $h->getInitials('漢字'));
     }
 }

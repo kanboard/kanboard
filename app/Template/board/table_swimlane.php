@@ -22,7 +22,7 @@
         <?= $this->e($column['title']) ?>
 
         <?php if (! $not_editable && ! empty($column['description'])): ?>
-            <span class="column-tooltip pull-right" title='<?= $this->e($this->text->markdown($column['description'])) ?>'>
+            <span class="tooltip pull-right" title='<?= $this->e($this->text->markdown($column['description'])) ?>'>
                 <i class="fa fa-info-circle"></i>
             </span>
         <?php endif ?>

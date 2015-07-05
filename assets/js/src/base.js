@@ -310,7 +310,7 @@ var Kanboard = (function() {
             }
 
             // Tooltip for column description
-            $(".column-tooltip").tooltip({
+            $(".tooltip").tooltip({
                 content: function() {
                     return '<div class="markdown">' + $(this).attr("title") + '</div>';
                 },
@@ -326,7 +326,7 @@ var Kanboard = (function() {
                         $("<div>")
                             .addClass("tooltip-arrow")
                             .addClass(feedback.vertical)
-                            .addClass(arrow_pos == 0 ? "align-left" : "align-right")
+                            .addClass(arrow_pos < 1 ? "align-left" : "align-right")
                             .appendTo(this);
                     }
                 }

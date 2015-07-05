@@ -46,7 +46,7 @@
 
                         <?= $this->url->link($this->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
                         <?php if (! empty($project['description'])): ?>
-                            <span class="column-tooltip" title='<?= $this->e($this->text->markdown($project['description'])) ?>'>
+                            <span class="tooltip" title='<?= $this->e($this->text->markdown($project['description'])) ?>'>
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         <?php endif ?>

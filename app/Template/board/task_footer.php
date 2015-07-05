@@ -10,7 +10,7 @@
                 'changeCategory',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,
-                'task-board-popover' . (! empty($task['category_description']) ? ' column-tooltip' : ''),
+                'task-board-popover' . (! empty($task['category_description']) ? ' tooltip' : ''),
                 ! empty($task['category_description']) ? $this->text->markdown($task['category_description']) : t('Change category')
             ) ?>
         <?php endif ?>
