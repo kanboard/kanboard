@@ -38,7 +38,7 @@ class SlackWebhook extends \Core\Base
         $options = $this->projectIntegration->getParameters($project_id);
         return $options['slack_webhook_url'];
     }
-    
+
     /**
      * Get optional Slack channel
      *
@@ -48,10 +48,10 @@ class SlackWebhook extends \Core\Base
      */
     public function getChannel($project_id)
     {
-    	if (!empty($this->config->get('integration_slack_webhook_channel'))) {
+    	if (! empty($this->config->get('integration_slack_webhook_channel'))) {
     		return $this->config->get('integration_slack_webhook_channel');
     	}
-    
+
     	$options = $this->projectIntegration->getParameters($project_id);
     	return $options['slack_webhook_channel'];
     }
@@ -85,9 +85,9 @@ class SlackWebhook extends \Core\Base
                 $payload['text'] .= $this->helper->url->href('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id));
                 $payload['text'] .= '|'.t('view the task on Kanboard').'>';
             }
-            
+
             $channel = $this->getChannel($project_id);
-            if (!empty($channel)) {
+            if (! empty($channel)) {
             	$payload['channel'] = $channel;
             }
 

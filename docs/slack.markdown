@@ -29,11 +29,10 @@ Now, Kanboard events will be sent to the Slack channel.
 
 ### Overriding Channel (Optional)
 
-Optnally you can override the channel, private group or send direct messages by filling up **Channel/Group/User** textbox. Leaving it empty will post to the channel configured during webhook configuration.
+Optionally you can override the channel, private group or send direct messages by filling up **Channel/Group/User** text box. Leaving it empty will post to the channel configured during webhook configuration.
 
 Examples:
 
-- #mychannel1 - Send message to channel 'mychannel1'
-- #myprivategroup1 - Send message to private group 'myprivategroup1' 
-- @anotheruser1 - Send message to user 'anotheruser1'
-
+- Send messages to another channel: **#mychannel1**
+- Send messages to a private group: **#myprivategroup1**
+- Send messages directly to someone: **@anotheruser1**
