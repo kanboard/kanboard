@@ -1,5 +1,8 @@
 Kanboard.Task = (function() {
 
+    var task_id = GetURLParameter('task_id');
+    var project_id = GetURLParameter('project_id');
+
     function keyboard_shortcuts()
     {
         Mousetrap.bind("i", function() {
@@ -22,11 +25,7 @@ Kanboard.Task = (function() {
     }
 
     jQuery(document).ready(function() {
-        console.log('Kanboard.Task controle');
-        if (Kanboard.Exists("task")) {
-            console.log('Kanboard.Task exists');
-            var task_id = GetURLParameter('task_id');
-            var project_id = GetURLParameter('project_id');
+        if (Kanboard.Exists("task-section")) {
             keyboard_shortcuts();
         }
     });
