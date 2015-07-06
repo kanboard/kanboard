@@ -45,21 +45,18 @@ class TaskAnalytic extends Base
      * @param  array   $task
      * @return array
      */
-    public function getAverageTimeByColumn(array $task)
+    public function getTimeSpentByColumn(array $task)
     {
         $result = array();
         $columns = $this->board->getColumnsList($task['project_id']);
-        $averages = $this->transition->getAverageTimeSpentByTask($task['id']);
+        $sums = $this->transition->getTimeSpentByTask($task['id']);
 
         foreach ($columns as $column_id => $column_title) {
 
-            $time_spent = 0;
+            $time_spent = isset($sums[$column_id]) ? $sums[$column_id] : 0;
 
-            if (empty($averages) && $task['column_id'] == $column_id) {
-                $time_spent = time() - $task['date_creation'];
-            }
-            else {
-                $time_spent = isset($averages[$column_id]) ? $averages[$column_id] : 0;
+            if ($task['column_id'] == $column_id) {
+                $time_spent += ($task['date_completed'] ?: time()) - $task['date_moved'];
             }
 
             $result[] = array(

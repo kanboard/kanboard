@@ -39,13 +39,13 @@ class Transition extends Base
     }
 
     /**
-     * Get average time spent by task for each column
+     * Get time spent by task for each column
      *
      * @access public
      * @param  integer  $task_id
      * @return array
      */
-    public function getAverageTimeSpentByTask($task_id)
+    public function getTimeSpentByTask($task_id)
     {
         return $this->db
                     ->hashtable(self::TABLE)

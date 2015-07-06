@@ -101,7 +101,7 @@ class Task extends Base
             'task' => $task,
             'lead_time' => $this->taskAnalytic->getLeadTime($task),
             'cycle_time' => $this->taskAnalytic->getCycleTime($task),
-            'column_averages' => $this->taskAnalytic->getAverageTimeByColumn($task),
+            'time_spent_columns' => $this->taskAnalytic->getTimeSpentByColumn($task),
         )));
     }
 
