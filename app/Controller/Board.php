@@ -255,7 +255,7 @@ class Board extends Base
     {
         $task = $this->getTask();
 
-        $assignee = $this->user->getByUsername($task['assignee_username']);
+        $assignee = $task['owner_id'];
         $sessionUser = $this->userSession->getId();
 
         if ($assignee['id'] == $sessionUser) {
