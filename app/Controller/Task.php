@@ -163,7 +163,7 @@ class Task extends Base
                 if (isset($values['another_task']) && $values['another_task'] == 1) {
                     unset($values['title']);
                     unset($values['description']);
-                    $this->response->redirect('?controller=task&action=create&'.http_build_query($values));
+                    $this->response->redirect('?controller=board&action=show&redirect=true&'.http_build_query($values));
                 }
                 else {
                     $this->response->redirect('?controller=board&action=show&project_id='.$project['id']);

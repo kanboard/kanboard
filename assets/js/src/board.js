@@ -1,5 +1,9 @@
 Kanboard.Board = (function() {
 
+    jQuery(document).ready(function() {
+        Kanboard.OpenRedirectPopoverAutomatically();
+    });
+
     var checkInterval = null;
 
     function on_popover(e)
