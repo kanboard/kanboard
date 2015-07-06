@@ -1,8 +1,10 @@
-<h2><?= t('My projects') ?> (<?= $paginator->getTotal() ?>)</h2>
+<div class="page-header">
+    <h2><?= t('My projects') ?> (<?= $paginator->getTotal() ?>)</h2>
+</div>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('Your are not member of any project.') ?></p>
 <?php else: ?>
-    <table class="table-fixed">
+    <table class="table-fixed table-small">
         <tr>
             <th class="column-8"><?= $paginator->order('Id', 'id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'name') ?></th>
@@ -22,7 +24,7 @@
 
                 <?= $this->url->link($this->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
                 <?php if (! empty($project['description'])): ?>
-                    <span class="column-tooltip" title='<?= $this->e($this->text->markdown($project['description'])) ?>'>
+                    <span class="tooltip" title='<?= $this->e($this->text->markdown($project['description'])) ?>'>
                         <i class="fa fa-info-circle"></i>
                     </span>
                 <?php endif ?>

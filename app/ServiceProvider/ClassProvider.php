@@ -42,6 +42,7 @@ class ClassProvider implements ServiceProviderInterface
             'SubtaskTimeTracking',
             'Swimlane',
             'Task',
+            'TaskAnalytic',
             'TaskCreation',
             'TaskDuplication',
             'TaskExport',

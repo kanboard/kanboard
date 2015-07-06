@@ -39,6 +39,22 @@ class Transition extends Base
     }
 
     /**
+     * Get time spent by task for each column
+     *
+     * @access public
+     * @param  integer  $task_id
+     * @return array
+     */
+    public function getTimeSpentByTask($task_id)
+    {
+        return $this->db
+                    ->hashtable(self::TABLE)
+                    ->groupBy('src_column_id')
+                    ->eq('task_id', $task_id)
+                    ->getAll('src_column_id', 'SUM(time_spent) AS time_spent');
+    }
+
+    /**
      * Get all transitions by task
      *
      * @access public

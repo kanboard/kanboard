@@ -193,11 +193,11 @@ class Color extends Base
         $buffer = '';
 
         foreach ($this->default_colors as $color => $values) {
-            $buffer .= 'td.color-'.$color.',';
             $buffer .= 'div.color-'.$color.' {';
             $buffer .= 'background-color: '.$values['background'].';';
             $buffer .= 'border-color: '.$values['border'];
             $buffer .= '}';
+            $buffer .= 'td.color-'.$color.' { background-color: '.$values['background'].'}';
         }
 
         return $buffer;

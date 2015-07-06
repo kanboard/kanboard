@@ -17,7 +17,7 @@
             </li>
         </ul>
         <div class="write-area">
-            <?= $this->form->textarea('description', $values, $errors, array('autofocus', 'placeholder="'.t('Leave a description').'"'), 'description-textarea') ?>
+            <?= $this->form->textarea('description', $values, $errors, array('autofocus', 'placeholder="'.t('Leave a description').'"'), 'task-show-description-textarea') ?>
         </div>
         <div class="preview-area">
             <div class="markdown"></div>

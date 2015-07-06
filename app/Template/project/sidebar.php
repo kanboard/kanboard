@@ -16,7 +16,7 @@
             <?= $this->url->link(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <?= $this->url->link(t('Edit board'), 'column', 'index', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('Columns'), 'column', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <li>
             <?= $this->url->link(t('Swimlanes'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>

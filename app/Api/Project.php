@@ -12,17 +12,17 @@ class Project extends Base
 {
     public function getProjectById($project_id)
     {
-        return $this->project->getById($project_id);
+        return $this->formatProject($this->project->getById($project_id));
     }
 
     public function getProjectByName($name)
     {
-        return $this->project->getByName($name);
+        return $this->formatProject($this->project->getByName($name));
     }
 
     public function getAllProjects()
     {
-        return $this->project->getAll();
+        return $this->formatProjects($this->project->getAll());
     }
 
     public function removeProject($project_id)
@@ -81,5 +81,29 @@ class Project extends Base
 
         list($valid,) = $this->project->validateModification($values);
         return $valid && $this->project->update($values);
+    }
+
+    private function formatProject($project)
+    {
+        if (! empty($project)) {
+            $project['url'] = array(
+                'board' => $this->helper->url->base().$this->helper->url->to('board', 'show', array('project_id' => $project['id'])),
+                'calendar' => $this->helper->url->base().$this->helper->url->to('calendar', 'show', array('project_id' => $project['id'])),
+                'list' => $this->helper->url->base().$this->helper->url->to('listing', 'show', array('project_id' => $project['id'])),
+            );
+        }
+
+        return $project;
+    }
+
+    private function formatProjects($projects)
+    {
+        if (! empty($projects)) {
+            foreach ($projects as &$project) {
+                $project = $this->formatProject($project);
+            }
+        }
+
+        return $projects;
     }
 }

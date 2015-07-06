@@ -13,7 +13,7 @@
     </tr>
     <?php foreach ($timetable as $slot): ?>
     <tr>
-        <td><?= $this->datetime->getWeekDay($slot['day']) ?></td>
+        <td><?= $this->dt->getWeekDay($slot['day']) ?></td>
         <td><?= $slot['start'] ?></td>
         <td><?= $slot['end'] ?></td>
         <td>
@@ -32,13 +32,13 @@
     <?= $this->form->csrf() ?>
 
     <?= $this->form->label(t('Day'), 'day') ?>
-    <?= $this->form->select('day', $this->datetime->getWeekDays(), $values, $errors) ?>
+    <?= $this->form->select('day', $this->dt->getWeekDays(), $values, $errors) ?>
 
     <?= $this->form->label(t('Start time'), 'start') ?>
-    <?= $this->form->select('start', $this->datetime->getDayHours(), $values, $errors) ?>
+    <?= $this->form->select('start', $this->dt->getDayHours(), $values, $errors) ?>
 
     <?= $this->form->label(t('End time'), 'end') ?>
-    <?= $this->form->select('end', $this->datetime->getDayHours(), $values, $errors) ?>
+    <?= $this->form->select('end', $this->dt->getDayHours(), $values, $errors) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

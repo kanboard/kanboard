@@ -38,22 +38,26 @@ class UrlHelperTest extends Base
     {
         $h = new Url($this->container);
 
+        $this->assertEquals('http://localhost/', $h->server());
+
         $_SERVER['PHP_SELF'] = '/';
-        $_SERVER['SERVER_NAME'] = 'localhost';
+        $_SERVER['SERVER_NAME'] = 'kb';
         $_SERVER['SERVER_PORT'] = 1234;
 
-        $this->assertEquals('http://localhost:1234/', $h->server());
+        $this->assertEquals('http://kb:1234/', $h->server());
     }
 
     public function testBase()
     {
         $h = new Url($this->container);
 
+        $this->assertEquals('http://localhost/', $h->base());
+
         $_SERVER['PHP_SELF'] = '/';
-        $_SERVER['SERVER_NAME'] = 'localhost';
+        $_SERVER['SERVER_NAME'] = 'kb';
         $_SERVER['SERVER_PORT'] = 1234;
 
-        $this->assertEquals('http://localhost:1234/', $h->base());
+        $this->assertEquals('http://kb:1234/', $h->base());
 
         $c = new Config($this->container);
         $c->save(array('application_url' => 'https://mykanboard/'));

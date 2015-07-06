@@ -17,12 +17,10 @@
             <p class="alert alert-error"><?= t('There is no column in your project!') ?></p>
             <?php break ?>
         <?php else: ?>
-            <?= $this->render('board/swimlane', array(
+            <?= $this->render('board/table_swimlane', array(
                 'project' => $project,
                 'swimlane' => $swimlane,
                 'board_highlight_period' => $board_highlight_period,
-                'categories_listing' => $categories_listing,
-                'categories_description' => $categories_description,
                 'hide_swimlane' => count($swimlanes) === 1,
                 'not_editable' => isset($not_editable),
             )) ?>

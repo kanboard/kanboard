@@ -3,7 +3,7 @@
 namespace Controller;
 
 /**
- * Project Anaytic controller
+ * Project Analytic controller
  *
  * @package  controller
  * @author   Frederic Guillot
@@ -24,6 +24,22 @@ class Analytic extends Base
         $params['content_for_sublayout'] = $this->template->render($template, $params);
 
         return $this->template->layout('analytic/layout', $params);
+    }
+
+    /**
+     * Show average time spent by column
+     *
+     * @access public
+     */
+    public function averageTimeByColumn()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->layout('analytic/avg_time_columns', array(
+            'project' => $project,
+            'metrics' => $this->projectAnalytic->getAverageTimeSpentByColumn($project['id']),
+            'title' => t('Average time spent into each column for "%s"', $project['name']),
+        )));
     }
 
     /**

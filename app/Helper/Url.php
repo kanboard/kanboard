@@ -99,6 +99,10 @@ class Url extends \Core\Base
      */
     public function server()
     {
+        if (empty($_SERVER['SERVER_NAME'])) {
+            return 'http://localhost/';
+        }
+
         $self = str_replace('\\', '/', dirname($_SERVER['PHP_SELF']));
 
         $url = Request::isHTTPS() ? 'https://' : 'http://';

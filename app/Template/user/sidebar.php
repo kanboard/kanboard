@@ -6,10 +6,7 @@
         </li>
         <?php if ($this->user->isAdmin()): ?>
             <li>
-                <?= $this->url->link(t('User dashboard'), 'app', 'dashboard', array('user_id' => $user['id'])) ?>
-            </li>
-            <li>
-                <?= $this->url->link(t('User calendar'), 'user', 'calendar', array('user_id' => $user['id'])) ?>
+                <?= $this->url->link(t('User dashboard'), 'app', 'index', array('user_id' => $user['id'])) ?>
             </li>
         <?php endif ?>
         <?php if ($this->user->isAdmin() || $this->user->isCurrentUser($user['id'])): ?>

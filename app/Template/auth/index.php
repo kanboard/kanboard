@@ -14,7 +14,7 @@
         <?= $this->form->label(t('Password'), 'password') ?>
         <?= $this->form->password('password', $values, $errors, array('required')) ?>
 
-        <?= $this->form->checkbox('remember_me', t('Remember Me'), 1) ?><br/>
+        <?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br/>
 
         <?php if (GOOGLE_AUTH): ?>
             <?= $this->url->link(t('Login with my Google Account'), 'user', 'google') ?>

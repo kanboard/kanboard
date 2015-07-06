@@ -37,7 +37,8 @@ class Acl extends Base
         'comment' => '*',
         'file' => '*',
         'project' => array('show'),
-        'projectinfo' => array('tasks', 'search', 'activity'),
+        'listing' => '*',
+        'activity' => '*',
         'subtask' => '*',
         'task' => '*',
         'tasklink' => '*',
@@ -69,7 +70,6 @@ class Acl extends Base
      * @var array
      */
     private $admin_acl = array(
-        'app' => array('dashboard'),
         'user' => array('index', 'create', 'save', 'remove'),
         'config' => '*',
         'link' => '*',

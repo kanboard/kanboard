@@ -15,9 +15,9 @@
             <?= $this->asset->js('assets/js/app.js', true) ?>
         <?php endif ?>
 
+        <?= $this->asset->colorCss() ?>
         <?= $this->asset->css('assets/css/app.css') ?>
         <?= $this->asset->css('assets/css/print.css', true, 'print') ?>
-        <?= $this->asset->colorCss() ?>
         <?= $this->asset->customCss() ?>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -40,7 +40,7 @@
             <nav>
                 <h1><?= $this->url->link('K<span>B</span>', 'app', 'index', array(), false, 'logo', t('Dashboard')).' '.$this->e($title) ?>
                     <?php if (! empty($description)): ?>
-                        <span class="column-tooltip" title='<?= $this->e($this->text->markdown($description)) ?>'>
+                        <span class="tooltip" title='<?= $this->e($this->text->markdown($description)) ?>'>
                             <i class="fa fa-info-circle"></i>
                         </span>
                     <?php endif ?>

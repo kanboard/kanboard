@@ -1,8 +1,10 @@
-<h2><?= t('My tasks') ?> (<?= $paginator->getTotal() ?>)</h2>
+<div class="page-header">
+    <h2><?= t('My tasks') ?> (<?= $paginator->getTotal() ?>)</h2>
+</div>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>
-    <table class="table-fixed">
+    <table class="table-fixed table-small">
         <tr>
             <th class="column-8"><?= $paginator->order('Id', 'tasks.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>

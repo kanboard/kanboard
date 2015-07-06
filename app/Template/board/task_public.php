@@ -24,8 +24,6 @@
 
     <?= $this->render('board/task_footer', array(
         'task' => $task,
-        'categories_listing' => $categories_listing,
-        'categories_description' => $categories_description,
         'not_editable' => $not_editable,
     )) ?>
 </div>

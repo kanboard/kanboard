@@ -1,7 +1,12 @@
 /* alerts */
+#main .alert,
+.page .alert {
+    margin-top: 10px;
+}
+
 .alert {
     padding: 8px 35px 8px 14px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #c09853;
     background-color: #fcf8e3;
     border: 1px solid #fbeed5;
@@ -39,42 +44,4 @@
 
 .alert li {
     margin-left: 25px;
-}
-
-/* fade out animation */
-.alert-fade-out {
-    animation: fadeOut 1s forwards;
-    -webkit-animation: fadeOut 1s forwards;
-    animation-delay: 7s;
-    -webkit-animation-delay: 7s;
-    cursor: pointer;
-}
-
-@-webkit-keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-        margin: 0;
-        padding: 0;
-        height: 0;
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-        margin: 0;
-        padding: 0;
-        height: 0;
-    }
-}
-
-#main .alert,
-.page .alert {
-    margin-top: 10px;
 }
