@@ -1,6 +1,9 @@
 <?php
+
 namespace Controller;
+
 use Model\Project as ProjectModel;
+
 /**
  * Task controller
  *
@@ -17,14 +20,18 @@ class Task extends Base
     public function readonly()
     {
         $project = $this->project->getByToken($this->request->getStringParam('token'));
+
         // Token verification
         if (empty($project)) {
             $this->forbidden(true);
         }
+
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
+
         if (empty($task)) {
             $this->notfound(true);
         }
+
         $this->response->html($this->template->layout('task/public', array(
             'project' => $project,
             'comments' => $this->comment->getAll($task['id']),
@@ -39,6 +46,7 @@ class Task extends Base
             'not_editable' => true,
         )));
     }
+
     /**
      * Show a task
      *
@@ -48,13 +56,16 @@ class Task extends Base
     {
         $task = $this->getTask();
         $subtasks = $this->subtask->getAll($task['id']);
+
         $values = array(
             'id' => $task['id'],
             'date_started' => $task['date_started'],
             'time_estimated' => $task['time_estimated'] ?: '',
             'time_spent' => $task['time_spent'] ?: '',
         );
+
         $this->dateParser->format($values, array('date_started'));
+
         $this->response->html($this->taskLayout('task/show', array(
             'project' => $this->project->getById($task['project_id']),
             'files' => $this->file->getAllDocuments($task['id']),
@@ -75,6 +86,7 @@ class Task extends Base
             'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
         )));
     }
+
     /**
      * Display task activities
      *
@@ -83,6 +95,7 @@ class Task extends Base
     public function activites()
     {
         $task = $this->getTask();
+
         $this->response->html($this->taskLayout('task/activity', array(
             'title' => $task['title'],
             'task' => $task,
@@ -90,6 +103,7 @@ class Task extends Base
             'events' => $this->projectActivity->getTask($task['id']),
         )));
     }
+
     /**
      * Display a form to create a new task
      *
@@ -100,7 +114,9 @@ class Task extends Base
         $project = $this->getProject();
         $method = $this->request->isAjax() ? 'render' : 'layout';
         $swimlanes_list = $this->swimlane->getList($project['id'], false, true);
+
         if (empty($values)) {
+
             $values = array(
                 'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
                 'column_id' => $this->request->getIntegerParam('column_id'),
@@ -109,6 +125,7 @@ class Task extends Base
                 'another_task' => $this->request->getIntegerParam('another_task'),
             );
         }
+
         $this->response->html($this->template->$method('task/new', array(
             'ajax' => $this->request->isAjax(),
             'errors' => $errors,
@@ -124,6 +141,7 @@ class Task extends Base
             'title' => $project['name'].' &gt; '.t('New task')
         )));
     }
+
     /**
      * Validate and save a new task
      *
@@ -134,12 +152,16 @@ class Task extends Base
         $project = $this->getProject();
         $values = $this->request->getValues();
         $values['creator_id'] = $this->userSession->getId();
+
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
+
         if ($valid) {
+
             $task_id = $this->taskCreation->create($values);
             if ($task_id) {
                 $this->file->upload($values['project_id'], $task_id, 'files');
                 $this->session->flash(t('Task created successfully.'));
+
                 if (isset($values['another_task']) && $values['another_task'] == 1) {
                     unset($values['title']);
                     unset($values['description']);
@@ -153,8 +175,10 @@ class Task extends Base
                 $this->session->flashError(t('Unable to create your task.'));
             }
         }
+
         $this->create($values, $errors);
     }
+
     /**
      * Display a form to edit a task
      *
@@ -164,10 +188,13 @@ class Task extends Base
     {
         $task = $this->getTask();
         $ajax = $this->request->isAjax();
+
         if (empty($values)) {
             $values = $task;
         }
+
         $this->dateParser->format($values, array('date_due'));
+
         $params = array(
             'values' => $values,
             'errors' => $errors,
@@ -179,6 +206,7 @@ class Task extends Base
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'ajax' => $ajax,
         );
+
         if ($ajax) {
             $this->response->html($this->template->render('task/edit', $params));
         }
@@ -186,6 +214,7 @@ class Task extends Base
             $this->response->html($this->taskLayout('task/edit', $params));
         }
     }
+
     /**
      * Validate and update a task
      *
@@ -195,10 +224,14 @@ class Task extends Base
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
+
         list($valid, $errors) = $this->taskValidator->validateModification($values);
+
         if ($valid) {
+
             if ($this->taskModification->update($values)) {
                 $this->session->flash(t('Task updated successfully.'));
+
                 if ($this->request->getIntegerParam('ajax')) {
                     $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
                 }
@@ -210,8 +243,10 @@ class Task extends Base
                 $this->session->flashError(t('Unable to update your task.'));
             }
         }
+
         $this->edit($values, $errors);
     }
+
     /**
      * Update time tracking information
      *
@@ -221,15 +256,19 @@ class Task extends Base
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
+
         list($valid,) = $this->taskValidator->validateTimeModification($values);
+
         if ($valid && $this->taskModification->update($values)) {
             $this->session->flash(t('Task updated successfully.'));
         }
         else {
             $this->session->flashError(t('Unable to update your task.'));
         }
+
         $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
     }
+
     /**
      * Hide a task
      *
@@ -239,29 +278,37 @@ class Task extends Base
     {
         $task = $this->getTask();
         $redirect = $this->request->getStringParam('redirect');
+
         if ($this->request->getStringParam('confirmation') === 'yes') {
+
             $this->checkCSRFParam();
+
             if ($this->taskStatus->close($task['id'])) {
                 $this->session->flash(t('Task closed successfully.'));
             } else {
                 $this->session->flashError(t('Unable to close this task.'));
             }
+
             if ($redirect === 'board') {
                 $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
             }
+
             $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
+
         if ($this->request->isAjax()) {
             $this->response->html($this->template->render('task/close', array(
                 'task' => $task,
                 'redirect' => $redirect,
             )));
         }
+
         $this->response->html($this->taskLayout('task/close', array(
             'task' => $task,
             'redirect' => $redirect,
         )));
     }
+
     /**
      * Open a task
      *
@@ -270,19 +317,25 @@ class Task extends Base
     public function open()
     {
         $task = $this->getTask();
+
         if ($this->request->getStringParam('confirmation') === 'yes') {
+
             $this->checkCSRFParam();
+
             if ($this->taskStatus->open($task['id'])) {
                 $this->session->flash(t('Task opened successfully.'));
             } else {
                 $this->session->flashError(t('Unable to open this task.'));
             }
+
             $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id']);
         }
+
         $this->response->html($this->taskLayout('task/open', array(
             'task' => $task,
         )));
     }
+
     /**
      * Remove a task
      *
@@ -291,22 +344,29 @@ class Task extends Base
     public function remove()
     {
         $task = $this->getTask();
+
         if (! $this->taskPermission->canRemoveTask($task)) {
             $this->forbidden();
         }
+
         if ($this->request->getStringParam('confirmation') === 'yes') {
+
             $this->checkCSRFParam();
+
             if ($this->task->remove($task['id'])) {
                 $this->session->flash(t('Task removed successfully.'));
             } else {
                 $this->session->flashError(t('Unable to remove this task.'));
             }
+
             $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
         }
+
         $this->response->html($this->taskLayout('task/remove', array(
             'task' => $task,
         )));
     }
+
     /**
      * Duplicate a task
      *
@@ -315,9 +375,12 @@ class Task extends Base
     public function duplicate()
     {
         $task = $this->getTask();
+
         if ($this->request->getStringParam('confirmation') === 'yes') {
+
             $this->checkCSRFParam();
             $task_id = $this->taskDuplication->duplicate($task['id']);
+
             if ($task_id) {
                 $this->session->flash(t('Task created successfully.'));
                 $this->response->redirect('?controller=task&action=show&task_id='.$task_id.'&project_id='.$task['project_id']);
@@ -326,10 +389,12 @@ class Task extends Base
                 $this->response->redirect('?controller=task&action=duplicate&task_id='.$task['id'].'&project_id='.$task['project_id']);
             }
         }
+
         $this->response->html($this->taskLayout('task/duplicate', array(
             'task' => $task,
         )));
     }
+
     /**
      * Edit description form
      *
@@ -339,16 +404,22 @@ class Task extends Base
     {
         $task = $this->getTask();
         $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
+
         if ($this->request->isPost()) {
+
             $values = $this->request->getValues();
+
             list($valid, $errors) = $this->taskValidator->validateDescriptionCreation($values);
+
             if ($valid) {
+
                 if ($this->taskModification->update($values)) {
                     $this->session->flash(t('Task updated successfully.'));
                 }
                 else {
                     $this->session->flashError(t('Unable to update your task.'));
                 }
+
                 if ($ajax) {
                     $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
                 }
@@ -361,12 +432,14 @@ class Task extends Base
             $values = $task;
             $errors = array();
         }
+
         $params = array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
             'ajax' => $ajax,
         );
+
         if ($ajax) {
             $this->response->html($this->template->render('task/edit_description', $params));
         }
@@ -374,6 +447,7 @@ class Task extends Base
             $this->response->html($this->taskLayout('task/edit_description', $params));
         }
     }
+
     /**
      * Edit recurrence form
      *
@@ -383,16 +457,22 @@ class Task extends Base
     {
         $task = $this->getTask();
         $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
+
         if ($this->request->isPost()) {
+
             $values = $this->request->getValues();
+
             list($valid, $errors) = $this->taskValidator->validateEditRecurrence($values);
+
             if ($valid) {
+
                 if ($this->taskModification->update($values)) {
                     $this->session->flash(t('Task updated successfully.'));
                 }
                 else {
                     $this->session->flashError(t('Unable to update your task.'));
                 }
+
                 if ($ajax) {
                     $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
                 }
@@ -405,6 +485,7 @@ class Task extends Base
             $values = $task;
             $errors = array();
         }
+
         $params = array(
             'values' => $values,
             'errors' => $errors,
@@ -415,6 +496,7 @@ class Task extends Base
             'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
             'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
         );
+
         if ($ajax) {
             $this->response->html($this->template->render('task/edit_recurrence', $params));
         }
@@ -422,6 +504,7 @@ class Task extends Base
             $this->response->html($this->taskLayout('task/edit_recurrence', $params));
         }
     }
+
     /**
      * Move a task to another project
      *
@@ -433,11 +516,16 @@ class Task extends Base
         $values = $task;
         $errors = array();
         $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
+
         unset($projects_list[$task['project_id']]);
+
         if ($this->request->isPost()) {
+
             $values = $this->request->getValues();
             list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
+
             if ($valid) {
+
                 if ($this->taskDuplication->moveToProject($task['id'], $values['project_id'])) {
                     $this->session->flash(t('Task updated successfully.'));
                     $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$values['project_id']);
@@ -447,6 +535,7 @@ class Task extends Base
                 }
             }
         }
+
         $this->response->html($this->taskLayout('task/move_project', array(
             'values' => $values,
             'errors' => $errors,
@@ -454,6 +543,7 @@ class Task extends Base
             'projects_list' => $projects_list,
         )));
     }
+
     /**
      * Duplicate a task to another project
      *
@@ -465,10 +555,14 @@ class Task extends Base
         $values = $task;
         $errors = array();
         $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
+
         unset($projects_list[$task['project_id']]);
+
         if ($this->request->isPost()) {
+
             $values = $this->request->getValues();
             list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
+
             if ($valid) {
                 $task_id = $this->taskDuplication->duplicateToProject($task['id'], $values['project_id']);
                 if ($task_id) {
@@ -480,6 +574,7 @@ class Task extends Base
                 }
             }
         }
+
         $this->response->html($this->taskLayout('task/duplicate_project', array(
             'values' => $values,
             'errors' => $errors,
@@ -487,6 +582,7 @@ class Task extends Base
             'projects_list' => $projects_list,
         )));
     }
+
     /**
      * Display the time tracking details
      *
@@ -495,6 +591,7 @@ class Task extends Base
     public function timesheet()
     {
         $task = $this->getTask();
+
         $subtask_paginator = $this->paginator
             ->setUrl('task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
             ->setMax(15)
@@ -502,11 +599,13 @@ class Task extends Base
             ->setDirection('DESC')
             ->setQuery($this->subtaskTimeTracking->getTaskQuery($task['id']))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+
         $this->response->html($this->taskLayout('task/time_tracking', array(
             'task' => $task,
             'subtask_paginator' => $subtask_paginator,
         )));
     }
+
     /**
      * Display the task transitions
      *
@@ -515,6 +614,7 @@ class Task extends Base
     public function transitions()
     {
         $task = $this->getTask();
+
         $this->response->html($this->taskLayout('task/transitions', array(
             'task' => $task,
             'transitions' => $this->transition->getAllByTask($task['id']),
