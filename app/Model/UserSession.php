@@ -94,4 +94,28 @@ class UserSession extends Base
     {
         return ! empty($this->session['user']);
     }
+
+    /**
+     * Get project filters from the session
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return string
+     */
+    public function getFilters($project_id)
+    {
+        return ! empty($_SESSION['filters'][$project_id]) ? $_SESSION['filters'][$project_id] : 'status:open';
+    }
+
+    /**
+     * Save project filters in the session
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  string   $filters
+     */
+    public function setFilters($project_id, $filters)
+    {
+        $_SESSION['filters'][$project_id] = $filters;
+    }
 }

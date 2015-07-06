@@ -26,3 +26,13 @@ This feature use the [Incoming webhook](https://api.slack.com/incoming-webhooks)
 3. Copy the webhook url to the Kanboard settings page: **Settings > Integrations > Slack** or **Project settings > Integrations > Slack**
 
 Now, Kanboard events will be sent to the Slack channel.
+
+### Overriding Channel (Optional)
+
+Optionally you can override the channel, private group or send direct messages by filling up **Channel/Group/User** text box. Leaving it empty will post to the channel configured during webhook configuration.
+
+Examples:
+
+- Send messages to another channel: **#mychannel1**
+- Send messages to a private group: **#myprivategroup1**
+- Send messages directly to someone: **@anotheruser1**

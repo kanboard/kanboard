@@ -1,5 +1,5 @@
 <?php if (empty($events)): ?>
-    <p class="alert"><?= t('No activity.') ?></p>
+    <p class="alert"><?= t('There is no activity yet.') ?></p>
 <?php else: ?>
 
     <?php foreach ($events as $event): ?>

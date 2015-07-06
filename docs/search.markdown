@@ -6,11 +6,17 @@ Kanboard use a simple query language for advanced search.
 Example of query
 ----------------
 
-This example will returns all tasks assigned to me with a due date for tomorrow and that have a title that contains "my title":
+This example will returns all tasks assigned to me with a due date for tomorrow and a title that contains "my title":
 
 ```
 assigne:me due:tomorrow my title
 ```
+
+Search by task id or title
+--------------------------
+
+- Search by task id: `#123` or `123`
+- Search by task title: anything that don't match any search attributes mentioned below
 
 Search by status
 ----------------
@@ -125,5 +131,29 @@ Search by category
 Attribute: **category**
 
 - Find tasks with a specific category: `category:"Feature Request"`
-- Find all tasks that have those category: `category:"Bug" category:"Improvements"`
+- Find all tasks that have those categories: `category:"Bug" category:"Improvements"`
 - Find tasks with no category assigned: `category:none`
+
+Search by project
+-----------------
+
+Attribute: **project**
+
+- Find tasks by project name: `project:"My project name"`
+- Find tasks by project id: `project:23`
+- Find tasks for several projects: `project:"My project A" project:"My project B"`
+
+Search by column
+----------------
+
+Attribute: **column**
+
+- Find tasks by column name: `column:"Work in progress"`
+- Find tasks for several columns: `column:"Backlog" column:ready`
+
+Search by external reference
+----------------------------
+
+The task reference is an external id of your task, by example a ticket number from another software.
+
+- Find tasks with a reference: `ref:1234` or `reference:TICKET-1234`

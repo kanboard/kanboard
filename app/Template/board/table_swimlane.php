@@ -22,7 +22,7 @@
         <?= $this->e($column['title']) ?>
 
         <?php if (! $not_editable && ! empty($column['description'])): ?>
-            <span class="column-tooltip pull-right" title='<?= $this->e($this->text->markdown($column['description'])) ?>'>
+            <span class="tooltip pull-right" title='<?= $this->e($this->text->markdown($column['description'])) ?>'>
                 <i class="fa fa-info-circle"></i>
             </span>
         <?php endif ?>
@@ -74,8 +74,6 @@
             <?= $this->render($not_editable ? 'board/task_public' : 'board/task_private', array(
                 'project' => $project,
                 'task' => $task,
-                'categories_listing' => $categories_listing,
-                'categories_description' => $categories_description,
                 'board_highlight_period' => $board_highlight_period,
                 'not_editable' => $not_editable,
             )) ?>

@@ -74,38 +74,6 @@ class Category extends Base
     }
 
     /**
-     * Prepare categories to be displayed on the board
-     *
-     * @access public
-     * @param  integer   $project_id
-     * @return array
-     */
-    public function getBoardCategories($project_id)
-    {
-        $descriptions = array();
-
-        $listing = array(
-            -1 => t('All categories'),
-            0 => t('No category'),
-        );
-
-        $categories = $this->db->table(self::TABLE)
-                               ->eq('project_id', $project_id)
-                               ->asc('name')
-                               ->findAll();
-
-        foreach ($categories as $category) {
-            $listing[$category['id']] = $category['name'];
-            $descriptions[$category['id']] = $category['description'];
-        }
-
-        return array(
-            $listing,
-            $descriptions,
-        );
-    }
-
-    /**
      * Return the list of all categories
      *
      * @access public

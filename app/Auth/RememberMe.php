@@ -119,31 +119,6 @@ class RememberMe extends Base
     }
 
     /**
-     * Update the database and the cookie with a new sequence
-     *
-     * @access public
-     */
-    public function refresh()
-    {
-        $credentials = $this->readCookie();
-
-        if ($credentials !== false) {
-
-            $record = $this->find($credentials['token'], $credentials['sequence']);
-
-            if ($record) {
-
-                // Update the sequence
-                $this->writeCookie(
-                    $record['token'],
-                    $this->update($record['token']),
-                    $record['expiration']
-                );
-            }
-        }
-    }
-
-    /**
      * Remove a session record
      *
      * @access public
@@ -197,9 +172,10 @@ class RememberMe extends Base
 
         $this->cleanup($user_id);
 
-        $this->db
-             ->table(self::TABLE)
-             ->insert(array(
+        $this
+            ->db
+            ->table(self::TABLE)
+            ->insert(array(
                 'user_id' => $user_id,
                 'ip' => $ip,
                 'user_agent' => $user_agent,
@@ -207,7 +183,7 @@ class RememberMe extends Base
                 'sequence' => $sequence,
                 'expiration' => $expiration,
                 'date_creation' => time(),
-             ));
+            ));
 
         return array(
             'token' => $token,

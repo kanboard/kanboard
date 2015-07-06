@@ -9,7 +9,12 @@
 }
 
 div.task-board-recent {
-    border: 1px solid #666;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+}
+
+div.task-board-status-closed {
+    user-select: none;
+    border: 1px dotted #555;
 }
 
 .task-table a,
@@ -132,6 +137,7 @@ span.task-board-date-overdue {
 }
 
 /* task age */
+.task-board-closed,
 .task-board-days {
     position: absolute;
     right: 5px;
@@ -218,7 +224,7 @@ span.task-board-date-overdue {
     padding-left: 20px;
 }
 
-.description-textarea {
+.task-show-description-textarea {
     width: 99%;
     max-width: 99%;
     height: 300px;
@@ -282,25 +288,4 @@ span.task-board-date-overdue {
 
 .task-show-file-table {
     width: auto;
-}
-
-/* screenshots */
-#screenshot-zone {
-    position: relative;
-    border: 2px dashed #ccc;
-    width: 90%;
-    height: 250px;
-    overflow: auto;
-}
-
-#screenshot-inner {
-    position: absolute;
-    left: 0;
-    bottom: 48%;
-    width: 100%;
-    text-align: center;
-}
-
-#screenshot-zone.screenshot-pasted {
-    border: 2px solid #333;
 }

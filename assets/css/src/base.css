@@ -20,10 +20,11 @@ body {
     padding-bottom: 20px;
     color: #333;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    -webkit-text-size-adjust: 100%;
+}
+
+.page {
+    clear: both;
 }
 
 ul.no-bullet li {

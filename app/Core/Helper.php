@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Pimple\Container;
+
 /**
  * Helper base class
  *
@@ -10,7 +12,7 @@ namespace Core;
  *
  * @property \Helper\App        $app
  * @property \Helper\Asset      $asset
- * @property \Helper\Datetime   $datetime
+ * @property \Helper\Dt         $dt
  * @property \Helper\File       $file
  * @property \Helper\Form       $form
  * @property \Helper\Subtask    $subtask
@@ -19,16 +21,34 @@ namespace Core;
  * @property \Helper\Url        $url
  * @property \Helper\User       $user
  */
-class Helper extends Base
+class Helper
 {
     /**
      * Helper instances
      *
-     * @static
      * @access private
      * @var array
      */
-    private static $helpers = array();
+    private $helpers = array();
+
+    /**
+     * Container instance
+     *
+     * @access protected
+     * @var \Pimple\Container
+     */
+    protected $container;
+
+    /**
+     * Constructor
+     *
+     * @access public
+     * @param  \Pimple\Container   $container
+     */
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * Load automatically helpers
@@ -39,12 +59,12 @@ class Helper extends Base
      */
     public function __get($name)
     {
-        if (! isset(self::$helpers[$name])) {
+        if (! isset($this->helpers[$name])) {
             $class = '\Helper\\'.ucfirst($name);
-            self::$helpers[$name] = new $class($this->container);
+            $this->helpers[$name] = new $class($this->container);
         }
 
-        return self::$helpers[$name];
+        return $this->helpers[$name];
     }
 
     /**

@@ -12,18 +12,14 @@
     position: absolute;
     left: 0;
     z-index: 1000;
-    min-width: 230px;
+    min-width: 300px;
     list-style: none;
     margin: 3px 0 0 1px;
     padding: 6px 0;
     background-color: #fff;
     border: 1px solid #b2b2b2;
-    -webkit-border-radius: 3px;
-       -moz-border-radius: 3px;
-            border-radius: 3px;
-    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-       -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-            box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+    border-radius: 3px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
 }
 
 .dropdown ul li {
@@ -36,6 +32,12 @@
     padding-right: 10px;
 }
 
+.page-header div.dropdown {
+    font-size: 0.9em;
+    padding-right: 10px;
+}
+
+.page-header div.dropdown,
 .page-header ul.dropdown {
     display: inline;
 }

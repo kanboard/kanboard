@@ -1,5 +1,4 @@
-
-Kanboard.Analytic = (function() {
+(function() {
 
     // CFD diagram
     function drawCfd()
@@ -166,6 +165,99 @@ Kanboard.Analytic = (function() {
         });
     }
 
+    // Draw chart for average time spent into each column
+    function drawAvgTimeColumn()
+    {
+        var metrics = $("#chart").data("metrics");
+        var plots = [$("#chart").data("label")];
+        var categories = [];
+
+        for (var column_id in metrics) {
+            plots.push(metrics[column_id].average);
+            categories.push(metrics[column_id].title);
+        }
+
+        c3.generate({
+            data: {
+                columns: [plots],
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5
+                }
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: categories
+                },
+                y: {
+                    tick: {
+                        format: formatDuration
+                    }
+                }
+            },
+            legend: {
+               show: false
+            }
+        });
+    }
+
+    // Draw chart for average time spent into each column
+    function drawTaskTimeColumn()
+    {
+        var metrics = $("#chart").data("metrics");
+        var plots = [$("#chart").data("label")];
+        var categories = [];
+
+        for (var i = 0; i < metrics.length; i++) {
+            plots.push(metrics[i].time_spent);
+            categories.push(metrics[i].title);
+        }
+
+        c3.generate({
+            data: {
+                columns: [plots],
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5
+                }
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: categories
+                },
+                y: {
+                    tick: {
+                        format: formatDuration
+                    }
+                }
+            },
+            legend: {
+               show: false
+            }
+        });
+    }
+
+    function formatDuration(d)
+    {
+        if (d >= 86400) {
+            return Math.round(d/86400) + "d";
+        }
+        else if (d >= 3600) {
+            return Math.round(d/3600) + "h";
+        }
+        else if (d >= 60) {
+            return Math.round(d/60) + "m";
+        }
+
+        return d + "s";
+    }
+
     jQuery(document).ready(function() {
 
         if (Kanboard.Exists("analytic-task-repartition")) {
@@ -183,8 +275,12 @@ Kanboard.Analytic = (function() {
         else if (Kanboard.Exists("budget-chart")) {
             drawBudget();
         }
+        else if (Kanboard.Exists("analytic-avg-time-column")) {
+            drawAvgTimeColumn();
+        }
+        else if (Kanboard.Exists("analytic-task-time-column")) {
+            drawTaskTimeColumn();
+        }
     });
-
-    return {};
 
 })();

@@ -8,9 +8,60 @@ use Model\TaskFilter;
 use Model\TaskCreation;
 use Model\DateParser;
 use Model\Category;
+use Model\Config;
 
 class TaskFilterTest extends Base
 {
+    public function testIcalEventsWithCreatorAndDueDate()
+    {
+        $dp = new DateParser($this->container);
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1', 'creator_id' => 1, 'date_due' => $dp->getTimestampFromIsoFormat('-2 days'))));
+
+        $events = $tf->create()->filterByDueDateRange(strtotime('-1 month'), strtotime('+1 month'))->addAllDayIcalEvents();
+        $ics = $events->render();
+
+        $this->assertContains('UID:task-#1-date_due', $ics);
+        $this->assertContains('DTSTART;TZID=UTC;VALUE=DATE:'.date('Ymd', strtotime('-2 days')), $ics);
+        $this->assertContains('DTEND;TZID=UTC;VALUE=DATE:'.date('Ymd', strtotime('-2 days')), $ics);
+        $this->assertContains('URL:http://localhost/?controller=task&action=show&task_id=1&project_id=1', $ics);
+        $this->assertContains('SUMMARY:#1 task1', $ics);
+        $this->assertContains('ATTENDEE:MAILTO:admin@kanboard.local', $ics);
+        $this->assertContains('X-MICROSOFT-CDO-ALLDAYEVENT:TRUE', $ics);
+    }
+
+    public function testIcalEventsWithAssigneeAndDueDate()
+    {
+        $dp = new DateParser($this->container);
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+        $u = new User($this->container);
+        $c = new Config($this->container);
+
+        $this->assertNotFalse($c->save(array('application_url' => 'http://kb/')));
+        $this->assertEquals('http://kb/', $c->get('application_url'));
+
+        $this->assertNotFalse($u->update(array('id' => 1, 'email' => 'bob@localhost')));
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1', 'owner_id' => 1, 'date_due' => $dp->getTimestampFromIsoFormat('+5 days'))));
+
+        $events = $tf->create()->filterByDueDateRange(strtotime('-1 month'), strtotime('+1 month'))->addAllDayIcalEvents();
+        $ics = $events->render();
+
+        $this->assertContains('UID:task-#1-date_due', $ics);
+        $this->assertContains('DTSTART;TZID=UTC;VALUE=DATE:'.date('Ymd', strtotime('+5 days')), $ics);
+        $this->assertContains('DTEND;TZID=UTC;VALUE=DATE:'.date('Ymd', strtotime('+5 days')), $ics);
+        $this->assertContains('URL:http://kb/?controller=task&action=show&task_id=1&project_id=1', $ics);
+        $this->assertContains('SUMMARY:#1 task1', $ics);
+        $this->assertContains('ORGANIZER:MAILTO:bob@localhost', $ics);
+        $this->assertContains('X-MICROSOFT-CDO-ALLDAYEVENT:TRUE', $ics);
+    }
+
     public function testSearchWithEmptyResult()
     {
         $dp = new DateParser($this->container);
@@ -25,6 +76,78 @@ class TaskFilterTest extends Base
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'youpi', 'date_due' => $dp->getTimestampFromIsoFormat(time()))));
 
         $this->assertEmpty($tf->search('search something')->findAll());
+    }
+
+    public function testSearchById()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2')));
+
+        $tf->search('#2');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+
+        $tf->search('1');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+
+        $tf->search('something');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('#');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('#abcd');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('task1');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+    }
+
+    public function testSearchWithReference()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2', 'reference' => 123)));
+
+        $tf->search('ref:123');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+
+        $tf->search('reference:123');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+
+        $tf->search('ref:plop');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('ref:');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
     }
 
     public function testSearchWithStatus()
@@ -94,27 +217,102 @@ class TaskFilterTest extends Base
         $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
         $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('Feature request', $tasks[0]['category_name']);
 
         $tf->search('category:"hé hé"');
         $tasks = $tf->findAll();
         $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
         $this->assertEquals('task3', $tasks[0]['title']);
+        $this->assertEquals('hé hé', $tasks[0]['category_name']);
 
         $tf->search('category:"Feature request" category:"hé hé"');
         $tasks = $tf->findAll();
         $this->assertNotEmpty($tasks);
         $this->assertCount(2, $tasks);
         $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('Feature request', $tasks[0]['category_name']);
         $this->assertEquals('task3', $tasks[1]['title']);
+        $this->assertEquals('hé hé', $tasks[1]['category_name']);
 
         $tf->search('category:none');
         $tasks = $tf->findAll();
         $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
         $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('', $tasks[0]['category_name']);
 
         $tf->search('category:"not found"');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+    }
+
+    public function testSearchWithProject()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'My project A')));
+        $this->assertEquals(2, $p->create(array('name' => 'My project B')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
+        $this->assertNotFalse($tc->create(array('project_id' => 2, 'title' => 'task2')));
+
+        $tf->search('project:"My project A"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('My project A', $tasks[0]['project_name']);
+
+        $tf->search('project:2');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('My project B', $tasks[0]['project_name']);
+
+        $tf->search('project:"My project A" project:"my project b"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('My project A', $tasks[0]['project_name']);
+        $this->assertEquals('task2', $tasks[1]['title']);
+        $this->assertEquals('My project B', $tasks[1]['project_name']);
+
+        $tf->search('project:"not found"');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+    }
+
+    public function testSearchWithColumn()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'My project A')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2', 'column_id' => 3)));
+
+        $tf->search('column:Backlog');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('Backlog', $tasks[0]['column_name']);
+
+        $tf->search('column:backlog column:"Work in progress"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('Backlog', $tasks[0]['column_name']);
+        $this->assertEquals('task2', $tasks[1]['title']);
+        $this->assertEquals('Work in progress', $tasks[1]['column_name']);
+
+        $tf->search('column:"not found"');
         $tasks = $tf->findAll();
         $this->assertEmpty($tasks);
     }

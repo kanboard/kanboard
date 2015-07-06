@@ -1,7 +1,7 @@
 <?php if (! $ajax): ?>
 <div class="page-header">
     <ul>
-        <li><i class="fa fa-table fa-fw"></i><?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $values['project_id'])) ?></li>
+        <li><i class="fa fa-th fa-fw"></i><?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $values['project_id'])) ?></li>
     </ul>
 </div>
 <?php else: ?>
