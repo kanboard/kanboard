@@ -9,24 +9,24 @@
                data-save-url="<?= $this->url->href('board', 'save', array('project_id' => $project['id'])) ?>"
                data-check-url="<?= $this->url->href('board', 'check', array('project_id' => $project['id'], 'timestamp' => time())) ?>"
                data-task-creation-url="<?= $this->url->href('task', 'create', array('project_id' => $project['id'])) ?>"
-            >
-            <?php endif ?>
+        >
+    <?php endif ?>
 
-            <?php foreach ($swimlanes as $swimlane): ?>
-                <?php if (empty($swimlane['columns'])): ?>
-                    <p class="alert alert-error"><?= t('There is no column in your project!') ?></p>
-                    <?php break ?>
-                <?php else: ?>
-                    <?= $this->render('board/swimlane', array(
-                        'project' => $project,
-                        'swimlane' => $swimlane,
-                        'board_highlight_period' => $board_highlight_period,
-                        'categories_listing' => $categories_listing,
-                        'categories_description' => $categories_description,
-                        'hide_swimlane' => count($swimlanes) === 1,
-                        'not_editable' => isset($not_editable),
-                    )) ?>
-                <?php endif ?>
-            <?php endforeach ?>
-        </table>
+    <?php foreach ($swimlanes as $swimlane): ?>
+        <?php if (empty($swimlane['columns'])): ?>
+            <p class="alert alert-error"><?= t('There is no column in your project!') ?></p>
+            <?php break ?>
+        <?php else: ?>
+            <?= $this->render('board/swimlane', array(
+                'project' => $project,
+                'swimlane' => $swimlane,
+                'board_highlight_period' => $board_highlight_period,
+                'categories_listing' => $categories_listing,
+                'categories_description' => $categories_description,
+                'hide_swimlane' => count($swimlanes) === 1,
+                'not_editable' => isset($not_editable),
+            )) ?>
+        <?php endif ?>
+    <?php endforeach ?>
+    </table>
 </div>
