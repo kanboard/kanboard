@@ -13,20 +13,6 @@ use PDO;
 class TaskFinder extends Base
 {
     /**
-     * Get query for closed tasks
-     *
-     * @access public
-     * @param  integer    $project_id    Project id
-     * @return \PicoDb\Table
-     */
-    public function getClosedTaskQuery($project_id)
-    {
-        return $this->getExtendedQuery()
-                    ->eq('project_id', $project_id)
-                    ->eq('is_active', Task::STATUS_CLOSED);
-    }
-
-    /**
      * Get query for assigned user tasks
      *
      * @access public
@@ -97,10 +83,17 @@ class TaskFinder extends Base
                 'tasks.recurrence_parent',
                 'tasks.recurrence_child',
                 'tasks.time_estimated',
-                'users.username AS assignee_username',
-                'users.name AS assignee_name'
+                User::TABLE.'.username AS assignee_username',
+                User::TABLE.'.name AS assignee_name',
+                Category::TABLE.'.name AS category_name',
+                Category::TABLE.'.description AS category_description',
+                Board::TABLE.'.title AS column_name',
+                Project::TABLE.'.name AS project_name'
             )
-            ->join(User::TABLE, 'id', 'owner_id');
+            ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
+            ->join(Category::TABLE, 'id', 'category_id', Task::TABLE)
+            ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+            ->join(Project::TABLE, 'id', 'project_id', Task::TABLE);
     }
 
     /**
@@ -115,11 +108,11 @@ class TaskFinder extends Base
     public function getTasksByColumnAndSwimlane($project_id, $column_id, $swimlane_id = 0)
     {
         return $this->getExtendedQuery()
-                    ->eq('project_id', $project_id)
-                    ->eq('column_id', $column_id)
-                    ->eq('swimlane_id', $swimlane_id)
-                    ->eq('is_active', Task::STATUS_OPEN)
-                    ->asc('tasks.position')
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->eq(Task::TABLE.'.column_id', $column_id)
+                    ->eq(Task::TABLE.'.swimlane_id', $swimlane_id)
+                    ->eq(Task::TABLE.'.is_active', Task::STATUS_OPEN)
+                    ->asc(Task::TABLE.'.position')
                     ->findAll();
     }
 
@@ -135,8 +128,8 @@ class TaskFinder extends Base
     {
         return $this->db
                     ->table(Task::TABLE)
-                    ->eq('project_id', $project_id)
-                    ->eq('is_active', $status_id)
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->eq(Task::TABLE.'.is_active', $status_id)
                     ->findAll();
     }
 

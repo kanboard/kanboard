@@ -49,11 +49,6 @@ class Authentication extends Base
                 return false;
             }
 
-            // We update each time the RememberMe cookie tokens
-            if ($this->backend('rememberMe')->hasCookie()) {
-                $this->backend('rememberMe')->refresh();
-            }
-
             return true;
         }
 

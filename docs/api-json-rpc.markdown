@@ -306,9 +306,19 @@ Response example:
         "name": "API test",
         "is_active": "1",
         "token": "",
-        "last_modified": "1410263246",
+        "last_modified": "1436119135",
         "is_public": "0",
-        "description": "A sample project"
+        "is_private": "0",
+        "is_everybody_allowed": "0",
+        "default_swimlane": "Default swimlane",
+        "show_default_swimlane": "1",
+        "description": "test",
+        "identifier": "",
+        "url": {
+            "board": "http:\/\/127.0.0.1:8000\/?controller=board&action=show&project_id=1",
+            "calendar": "http:\/\/127.0.0.1:8000\/?controller=calendar&action=show&project_id=1",
+            "list": "http:\/\/127.0.0.1:8000\/?controller=listing&action=show&project_id=1"
+        }
     }
 }
 ```
@@ -345,9 +355,19 @@ Response example:
         "name": "Test",
         "is_active": "1",
         "token": "",
-        "last_modified": "0",
+        "last_modified": "1436119135",
         "is_public": "0",
-        "description": "A sample project"
+        "is_private": "0",
+        "is_everybody_allowed": "0",
+        "default_swimlane": "Default swimlane",
+        "show_default_swimlane": "1",
+        "description": "test",
+        "identifier": "",
+        "url": {
+            "board": "http:\/\/127.0.0.1:8000\/?controller=board&action=show&project_id=1",
+            "calendar": "http:\/\/127.0.0.1:8000\/?controller=calendar&action=show&project_id=1",
+            "list": "http:\/\/127.0.0.1:8000\/?controller=listing&action=show&project_id=1"
+        }
     }
 }
 ```
@@ -366,7 +386,7 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "getAllProjects",
-    "id": 134982303
+    "id": 2134420212
 }
 ```
 
@@ -375,25 +395,26 @@ Response example:
 ```json
 {
     "jsonrpc": "2.0",
-    "id": 134982303,
+    "id": 2134420212,
     "result": [
         {
-            "id": "2",
-            "name": "PHP client",
-            "is_active": "1",
-            "token": "",
-            "last_modified": "0",
-            "is_public": "0",
-            "description": "PHP client project"
-        },
-        {
             "id": "1",
-            "name": "Test",
+            "name": "API test",
             "is_active": "1",
             "token": "",
-            "last_modified": "0",
+            "last_modified": "1436119570",
             "is_public": "0",
-            "description": "Test project"
+            "is_private": "0",
+            "is_everybody_allowed": "0",
+            "default_swimlane": "Default swimlane",
+            "show_default_swimlane": "1",
+            "description": null,
+            "identifier": "",
+            "url": {
+                "board": "http:\/\/127.0.0.1:8000\/?controller=board&action=show&project_id=1",
+                "calendar": "http:\/\/127.0.0.1:8000\/?controller=calendar&action=show&project_id=1",
+                "list": "http:\/\/127.0.0.1:8000\/?controller=listing&action=show&project_id=1"
+            }
         }
     ]
 }
@@ -1970,8 +1991,9 @@ Response example:
         "recurrence_timeframe": "0",
         "recurrence_basedate": "0",
         "recurrence_parent": null,
-        "recurrence_child": null
-        }
+        "recurrence_child": null,
+        "url": "http:\/\/127.0.0.1:8000\/?controller=task&action=show&task_id=1&project_id=1"
+    }
 }
 ```
 
@@ -2033,7 +2055,8 @@ Response example:
         "recurrence_timeframe": "0",
         "recurrence_basedate": "0",
         "recurrence_parent": null,
-        "recurrence_child": null
+        "recurrence_child": null,
+        "url": "http:\/\/127.0.0.1:8000\/?controller=task&action=show&task_id=5&project_id=1"
     }
 }
 ```
@@ -2097,7 +2120,8 @@ Response example:
             "recurrence_timeframe": "0",
             "recurrence_basedate": "0",
             "recurrence_parent": null,
-            "recurrence_child": null
+            "recurrence_child": null,
+            "url": "http:\/\/127.0.0.1:8000\/?controller=task&action=show&task_id=1&project_id=1"
         },
         {
             "id": "2",
@@ -2128,7 +2152,8 @@ Response example:
             "recurrence_timeframe": "0",
             "recurrence_basedate": "0",
             "recurrence_parent": null,
-            "recurrence_child": null
+            "recurrence_child": null,
+            "url": "http:\/\/127.0.0.1:8000\/?controller=task&action=show&task_id=2&project_id=1"
         },
         ...
     ]

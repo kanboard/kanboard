@@ -237,10 +237,11 @@ class Board extends Base
      * Get all tasks sorted by columns and swimlanes
      *
      * @access public
-     * @param  integer $project_id Project id
+     * @param  integer  $project_id
+     * @param  callable $callback
      * @return array
      */
-    public function getBoard($project_id)
+    public function getBoard($project_id, $callback = null)
     {
         $swimlanes = $this->swimlane->getSwimlanes($project_id);
         $columns = $this->getColumns($project_id);
@@ -253,7 +254,11 @@ class Board extends Base
             $swimlanes[$i]['nb_tasks'] = 0;
 
             for ($j = 0; $j < $nb_columns; $j++) {
-                $swimlanes[$i]['columns'][$j]['tasks'] = $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $columns[$j]['id'], $swimlanes[$i]['id']);
+
+                $column_id = $columns[$j]['id'];
+                $swimlane_id = $swimlanes[$i]['id'];
+
+                $swimlanes[$i]['columns'][$j]['tasks'] = $callback === null ? $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $column_id, $swimlane_id) : $callback($project_id, $column_id, $swimlane_id);
                 $swimlanes[$i]['columns'][$j]['nb_tasks'] = count($swimlanes[$i]['columns'][$j]['tasks']);
                 $swimlanes[$i]['columns'][$j]['score'] = $this->getColumnSum($swimlanes[$i]['columns'][$j]['tasks'], 'score');
                 $swimlanes[$i]['nb_tasks'] += $swimlanes[$i]['columns'][$j]['nb_tasks'];

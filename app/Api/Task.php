@@ -14,17 +14,17 @@ class Task extends Base
 {
     public function getTask($task_id)
     {
-        return $this->taskFinder->getById($task_id);
+        return $this->formatTask($this->taskFinder->getById($task_id));
     }
 
     public function getTaskByReference($project_id, $reference)
     {
-        return $this->taskFinder->getByReference($project_id, $reference);
+        return $this->formatTask($this->taskFinder->getByReference($project_id, $reference));
     }
 
     public function getAllTasks($project_id, $status_id = TaskModel::STATUS_OPEN)
     {
-        return $this->taskFinder->getAll($project_id, $status_id);
+        return $this->formatTasks($this->taskFinder->getAll($project_id, $status_id));
     }
 
     public function getOverdueTasks()
@@ -114,5 +114,25 @@ class Task extends Base
 
         list($valid) = $this->taskValidator->validateApiModification($values);
         return $valid && $this->taskModification->update($values);
+    }
+
+    private function formatTask($task)
+    {
+        if (! empty($task)) {
+            $task['url'] = $this->helper->url->base().$this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']));
+        }
+
+        return $task;
+    }
+
+    private function formatTasks($tasks)
+    {
+        if (! empty($tasks)) {
+            foreach ($tasks as &$task) {
+                $task = $this->formatTask($task);
+            }
+        }
+
+        return $tasks;
     }
 }

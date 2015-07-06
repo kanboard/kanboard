@@ -1,5 +1,6 @@
 <table class="table-fixed table-small">
     <tr>
+        <th class="column-8"><?= $paginator->order(t('Project'), 'tasks.project_id') ?></th>
         <th class="column-8"><?= $paginator->order(t('Id'), 'tasks.id') ?></th>
         <th class="column-8"><?= $paginator->order(t('Column'), 'tasks.column_id') ?></th>
         <th class="column-8"><?= $paginator->order(t('Category'), 'tasks.category_id') ?></th>
@@ -12,14 +13,17 @@
     </tr>
     <?php foreach ($paginator->getCollection() as $task): ?>
     <tr>
+        <td>
+            <?= $this->url->link($this->e($task['project_name']), 'board', 'show', array('project_id' => $task['project_id'])) ?>
+        </td>
         <td class="task-table color-<?= $task['color_id'] ?>">
             <?= $this->url->link('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
-            <?= $this->text->in($task['column_id'], $columns) ?>
+            <?= $this->e($task['column_name']) ?>
         </td>
         <td>
-            <?= $this->text->in($task['category_id'], $categories, '') ?>
+            <?= $this->e($task['category_name']) ?>
         </td>
         <td>
             <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>

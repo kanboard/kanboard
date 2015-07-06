@@ -58,6 +58,8 @@ abstract class Base extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        date_default_timezone_set('UTC');
+
         if (DB_DRIVER === 'mysql') {
             $pdo = new PDO('mysql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
             $pdo->exec('DROP DATABASE '.DB_NAME);

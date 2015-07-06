@@ -11,6 +11,24 @@ namespace Helper;
 class User extends \Core\Base
 {
     /**
+     * Get initials from a user
+     *
+     * @access public
+     * @param  string  $name
+     * @return string
+     */
+    public function getInitials($name)
+    {
+        $initials = '';
+
+        foreach (explode(' ', $name) as $string) {
+            $initials .= mb_substr($string, 0, 1);
+        }
+
+        return mb_strtoupper($initials);
+    }
+
+    /**
      * Get user id
      *
      * @access public

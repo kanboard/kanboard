@@ -35,7 +35,7 @@
                         <?= $this->e($project['identifier']) ?>
                     </td>
                     <td>
-                        <?= $this->url->link('<i class="fa fa-table"></i>', 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Board')) ?>&nbsp;
+                        <?= $this->url->link('<i class="fa fa-th"></i>', 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Board')) ?>&nbsp;
 
                         <?php if ($project['is_public']): ?>
                             <i class="fa fa-share-alt fa-fw"></i>
@@ -46,7 +46,7 @@
 
                         <?= $this->url->link($this->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
                         <?php if (! empty($project['description'])): ?>
-                            <span class="column-tooltip" title='<?= $this->e($this->text->markdown($project['description'])) ?>'>
+                            <span class="tooltip" title='<?= $this->e($this->text->markdown($project['description'])) ?>'>
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         <?php endif ?>

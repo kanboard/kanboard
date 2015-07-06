@@ -306,4 +306,54 @@ abstract class Base extends \Core\Base
 
         return $project;
     }
+
+    /**
+     * Common method to get the user
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getUser()
+    {
+        $user = $this->user->getById($this->request->getIntegerParam('user_id', $this->userSession->getId()));
+
+        if (empty($user)) {
+            $this->notfound();
+        }
+
+        if (! $this->userSession->isAdmin() && $this->userSession->getId() != $user['id']) {
+            $this->forbidden();
+        }
+
+        return $user;
+    }
+
+    /**
+     * Common method to get project filters
+     *
+     * @access protected
+     */
+    protected function getProjectFilters($controller, $action)
+    {
+        $project = $this->getProject();
+        $search = $this->request->getStringParam('search', $this->userSession->getFilters($project['id']));
+        $board_selector = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        unset($board_selector[$project['id']]);
+
+        $filters = array(
+            'controller' => $controller,
+            'action' => $action,
+            'project_id' => $project['id'],
+            'search' => $search,
+        );
+
+        $this->userSession->setFilters($project['id'], $search);
+
+        return array(
+            'project' => $project,
+            'board_selector' => $board_selector,
+            'filters' => $filters,
+            'title' => $project['name'],
+        );
+    }
 }

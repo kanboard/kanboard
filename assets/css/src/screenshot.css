@@ -1,0 +1,19 @@
+#screenshot-zone {
+    position: relative;
+    border: 2px dashed #ccc;
+    width: 90%;
+    height: 250px;
+    overflow: auto;
+}
+
+#screenshot-inner {
+    position: absolute;
+    left: 0;
+    bottom: 48%;
+    width: 100%;
+    text-align: center;
+}
+
+#screenshot-zone.screenshot-pasted {
+    border: 2px solid #333;
+}

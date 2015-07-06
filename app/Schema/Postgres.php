@@ -6,7 +6,13 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 57;
+const VERSION = 58;
+
+function version_58($pdo)
+{
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN slack_webhook_channel VARCHAR(255) DEFAULT ''");
+    $pdo->exec("INSERT INTO settings VALUES ('integration_slack_webhook_channel', '')");
+}
 
 function version_57($pdo)
 {

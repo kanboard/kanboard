@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/Base.php';
 
-use Helper\Datetime;
+use Helper\Dt;
 
 class DatetimeHelperTest extends Base
 {
     public function testAge()
     {
-        $h = new Datetime($this->container);
+        $h = new Dt($this->container);
 
         $this->assertEquals('&lt;15m', $h->age(0, 30));
         $this->assertEquals('&lt;30m', $h->age(0, 1000));
@@ -20,7 +20,7 @@ class DatetimeHelperTest extends Base
 
     public function testGetDayHours()
     {
-        $h = new Datetime($this->container);
+        $h = new Dt($this->container);
 
         $slots = $h->getDayHours();
 
@@ -36,7 +36,7 @@ class DatetimeHelperTest extends Base
 
     public function testGetWeekDays()
     {
-        $h = new Datetime($this->container);
+        $h = new Dt($this->container);
 
         $slots = $h->getWeekDays();
 
@@ -48,7 +48,7 @@ class DatetimeHelperTest extends Base
 
     public function testGetWeekDay()
     {
-        $h = new Datetime($this->container);
+        $h = new Dt($this->container);
 
         $this->assertEquals('Monday', $h->getWeekDay(1));
         $this->assertEquals('Sunday', $h->getWeekDay(7));
