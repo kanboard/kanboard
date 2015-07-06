@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "776660c2872a470ad420af02104aea45",
+    "hash": "1ef3f084b6c8651977b1bbc84d86cb69",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -260,16 +260,16 @@
         },
         {
             "name": "fguillot/json-rpc",
-            "version": "v0.0.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/JsonRPC.git",
-                "reference": "ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8"
+                "reference": "ac3ddcf8f74777d72b8044d6d128f41aabe292f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8",
-                "reference": "ef2f1aa1c07f0e3e8878c53b3a5fc81daedbebb8",
+                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/ac3ddcf8f74777d72b8044d6d128f41aabe292f2",
+                "reference": "ac3ddcf8f74777d72b8044d6d128f41aabe292f2",
                 "shasum": ""
             },
             "require": {
@@ -287,13 +287,12 @@
             ],
             "authors": [
                 {
-                    "name": "Frédéric Guillot",
-                    "homepage": "http://fredericguillot.com"
+                    "name": "Frédéric Guillot"
                 }
             ],
             "description": "Simple Json-RPC client/server library that just works",
             "homepage": "https://github.com/fguillot/JsonRPC",
-            "time": "2015-05-20 15:08:40"
+            "time": "2015-07-01 19:26:37"
         },
         {
             "name": "fguillot/picodb",
@@ -820,6 +819,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "fguillot/json-rpc": 20,
         "swiftmailer/swiftmailer": 0,
         "symfony/console": 0
     },

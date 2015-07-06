@@ -28,6 +28,11 @@ class TaskPosition extends Base
     {
         $original_task = $this->taskFinder->getById($task_id);
 
+        // Ignore closed tasks
+        if ($original_task['is_active'] == Task::STATUS_CLOSED) {
+            return true;
+        }
+
         $result = $this->calculateAndSave($project_id, $task_id, $column_id, $position, $swimlane_id);
 
         if ($result) {

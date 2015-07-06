@@ -1,18 +1,6 @@
 <li>
-    <i class="fa fa-search fa-fw"></i>
-    <?= $this->url->link(t('Search'), 'projectinfo', 'search', array('project_id' => $project['id'])) ?>
-</li>
-<li>
-    <i class="fa fa-check-square-o fa-fw"></i>
-    <?= $this->url->link(t('Completed tasks'), 'projectinfo', 'tasks', array('project_id' => $project['id'])) ?>
-</li>
-<li>
     <i class="fa fa-dashboard fa-fw"></i>
-    <?= $this->url->link(t('Activity'), 'projectinfo', 'activity', array('project_id' => $project['id'])) ?>
-</li>
-<li>
-    <i class="fa fa-calendar fa-fw"></i>
-    <?= $this->url->link(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
+    <?= $this->url->link(t('Activity'), 'activity', 'project', array('project_id' => $project['id'])) ?>
 </li>
 
 <?php if ($project['is_public']): ?>

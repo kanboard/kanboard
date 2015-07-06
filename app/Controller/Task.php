@@ -88,19 +88,20 @@ class Task extends Base
     }
 
     /**
-     * Display task activities
+     * Display task analytics
      *
      * @access public
      */
-    public function activites()
+    public function analytics()
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task/activity', array(
+        $this->response->html($this->taskLayout('task/analytics', array(
             'title' => $task['title'],
             'task' => $task,
-            'ajax' => $this->request->isAjax(),
-            'events' => $this->projectActivity->getTask($task['id']),
+            'lead_time' => $this->taskAnalytic->getLeadTime($task),
+            'cycle_time' => $this->taskAnalytic->getCycleTime($task),
+            'time_spent_columns' => $this->taskAnalytic->getTimeSpentByColumn($task),
         )));
     }
 

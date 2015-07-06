@@ -1,4 +1,4 @@
-Kanboard.Swimlane = (function() {
+(function() {
 
     // Expand a Swimlane via display attributes
     function expand(swimlaneId)

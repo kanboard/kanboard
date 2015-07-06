@@ -62,6 +62,15 @@ class TaskFilter extends Base
                 case 'T_CATEGORY':
                     $this->filterByCategoryName($value);
                     break;
+                case 'T_PROJECT':
+                    $this->filterByProjectName($value);
+                    break;
+                case 'T_COLUMN':
+                    $this->filterByColumnName($value);
+                    break;
+                case 'T_REFERENCE':
+                    $this->filterByReference($value);
+                    break;
             }
         }
 
@@ -135,6 +144,22 @@ class TaskFilter extends Base
     }
 
     /**
+     * Filter by reference
+     *
+     * @access public
+     * @param  string  $reference
+     * @return TaskFilter
+     */
+    public function filterByReference($reference)
+    {
+        if (! empty($reference)) {
+            $this->query->eq(Task::TABLE.'.reference', $reference);
+        }
+
+        return $this;
+    }
+
+    /**
      * Filter by title
      *
      * @access public
@@ -148,7 +173,7 @@ class TaskFilter extends Base
     }
 
     /**
-     * Filter by title
+     * Filter by title or id if the string is like #123 or an integer
      *
      * @access public
      * @param  string  $title
@@ -156,7 +181,16 @@ class TaskFilter extends Base
      */
     public function filterByTitle($title)
     {
-        $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
+        if (strlen($title) > 1 && $title{0} === '#' && ctype_digit(substr($title, 1))) {
+            $this->query->eq(Task::TABLE.'.id', substr($title, 1));
+        }
+        else if (ctype_digit($title)) {
+            $this->query->eq(Task::TABLE.'.id', $title);
+        }
+        else {
+            $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
+        }
+
         return $this;
     }
 
@@ -190,6 +224,29 @@ class TaskFilter extends Base
     }
 
     /**
+     * Filter by project name
+     *
+     * @access public
+     * @param  array    $values   List of project name
+     * @return TaskFilter
+     */
+    public function filterByProjectName(array $values)
+    {
+        $this->query->beginOr();
+
+        foreach ($values as $project) {
+            if (ctype_digit($project)) {
+                $this->query->eq(Task::TABLE.'.project_id', $project);
+            }
+            else {
+                $this->query->ilike(Project::TABLE.'.name', $project);
+            }
+        }
+
+        $this->query->closeOr();
+    }
+
+    /**
      * Filter by category id
      *
      * @access public
@@ -214,7 +271,6 @@ class TaskFilter extends Base
      */
     public function filterByCategoryName(array $values)
     {
-        $this->query->join(Category::TABLE, 'id', 'category_id');
         $this->query->beginOr();
 
         foreach ($values as $category) {
@@ -327,6 +383,24 @@ class TaskFilter extends Base
     }
 
     /**
+     * Filter by column name
+     *
+     * @access public
+     * @param  array    $values   List of column name
+     * @return TaskFilter
+     */
+    public function filterByColumnName(array $values)
+    {
+        $this->query->beginOr();
+
+        foreach ($values as $project) {
+            $this->query->ilike(Board::TABLE.'.title', $project);
+        }
+
+        $this->query->closeOr();
+    }
+
+    /**
      * Filter by swimlane
      *
      * @access public
@@ -383,7 +457,6 @@ class TaskFilter extends Base
      */
     public function filterByDueDate($date)
     {
-        $this->query->neq(Task::TABLE.'.date_due', '');
         $this->query->neq(Task::TABLE.'.date_due', 0);
         $this->query->notNull(Task::TABLE.'.date_due');
         return $this->filterWithOperator(Task::TABLE.'.date_due', $date, true);
@@ -453,7 +526,7 @@ class TaskFilter extends Base
      */
     public function findAll()
     {
-        return $this->query->findAll();
+        return $this->query->asc(Task::TABLE.'.id')->findAll();
     }
 
     /**
@@ -465,6 +538,23 @@ class TaskFilter extends Base
     public function getQuery()
     {
         return $this->query;
+    }
+
+    /**
+     * Get swimlanes and tasks to display the board
+     *
+     * @access public
+     * @return array
+     */
+    public function getBoard($project_id)
+    {
+        $tasks = $this->filterByProject($project_id)->query->asc(Task::TABLE.'.position')->findAll();
+
+        return $this->board->getBoard($project_id, function ($project_id, $column_id, $swimlane_id) use ($tasks) {
+            return array_filter($tasks, function(array $task) use ($column_id, $swimlane_id) {
+                return $task['column_id'] == $column_id && $task['swimlane_id'] == $swimlane_id;
+            });
+        });
     }
 
     /**
@@ -626,11 +716,11 @@ class TaskFilter extends Base
         $vEvent->setSummary(t('#%d', $task['id']).' '.$task['title']);
         $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
 
-        if (! empty($task['creator_id'])) {
-            $vEvent->setOrganizer('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
+        if (! empty($task['owner_id'])) {
+            $vEvent->setOrganizer('MAILTO:'.($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'));
         }
 
-        if (! empty($task['owner_id'])) {
+        if (! empty($task['creator_id'])) {
             $attendees = new Attendees;
             $attendees->add('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
             $vEvent->setAttendees($attendees);

@@ -2,16 +2,16 @@
 <div class="task-board-category-container">
     <span class="task-board-category">
         <?php if ($not_editable): ?>
-            <?= $this->text->in($task['category_id'], $categories_listing) ?>
+            <?= $this->e($task['category_name']) ?>
         <?php else: ?>
             <?= $this->url->link(
-                $this->text->in($task['category_id'], $categories_listing),
+                $this->e($task['category_name']),
                 'board',
                 'changeCategory',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,
-                'task-board-popover' . (isset($categories_description[$task['category_id']]) ? ' column-tooltip' : ''),
-                isset($categories_description[$task['category_id']]) ? $this->text->markdown($categories_description[$task['category_id']]) : t('Change category')
+                'task-board-popover' . (! empty($task['category_description']) ? ' tooltip' : ''),
+                ! empty($task['category_description']) ? $this->text->markdown($task['category_description']) : t('Change category')
             ) ?>
         <?php endif ?>
     </span>
@@ -21,7 +21,8 @@
 <div class="task-board-icons">
     <?php if (! empty($task['date_due'])): ?>
         <span class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
-            <i class="fa fa-calendar"></i>&nbsp;<?= dt('%b %e', $task['date_due']) ?>
+            <i class="fa fa-calendar"></i>
+            <?= (date('Y') === date('Y', $task['date_due']) ? dt('%b %e', $task['date_due']) : dt('%b %e %Y', $task['date_due'])) ?>
         </span>
     <?php endif ?>
 

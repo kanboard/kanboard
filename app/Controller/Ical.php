@@ -78,8 +78,8 @@ class Ical extends Base
      */
     private function renderCalendar(TaskFilter $filter, iCalendar $calendar)
     {
-        $start = $this->request->getStringParam('start', strtotime('-1 month'));
-        $end = $this->request->getStringParam('end', strtotime('+2 months'));
+        $start = $this->request->getStringParam('start', strtotime('-2 month'));
+        $end = $this->request->getStringParam('end', strtotime('+6 months'));
 
         // Tasks
         if ($this->config->get('calendar_project_tasks', 'date_started') === 'date_creation') {

@@ -26,14 +26,10 @@ class Board extends Base
             $this->forbidden(true);
         }
 
-        list($categories_listing, $categories_description) = $this->category->getBoardCategories($project['id']);
-
         // Display the board with a specific layout
-        $this->response->html($this->template->layout('board/public', array(
+        $this->response->html($this->template->layout('board/public_view', array(
             'project' => $project,
             'swimlanes' => $this->board->getBoard($project['id']),
-            'categories_listing' => $categories_listing,
-            'categories_description' => $categories_description,
             'title' => $project['name'],
             'description' => $project['description'],
             'no_layout' => true,
@@ -48,31 +44,17 @@ class Board extends Base
      * Show a board for a given project
      *
      * @access public
-     * @param  integer   $project_id    Default project id
      */
-    public function show($project_id = 0)
+    public function show()
     {
-        $project = $this->getProject($project_id);
-        $projects = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $params = $this->getProjectFilters('board', 'show');
 
-        $board_selector = $projects;
-        unset($board_selector[$project['id']]);
-
-        list($categories_listing, $categories_description) = $this->category->getBoardCategories($project['id']);
-
-        $this->response->html($this->template->layout('board/index', array(
-            'users' => $this->projectPermission->getMemberList($project['id'], true, true),
-            'projects' => $projects,
-            'project' => $project,
-            'swimlanes' => $this->board->getBoard($project['id']),
-            'categories_listing' => $categories_listing,
-            'categories_description' => $categories_description,
-            'title' => $project['name'],
-            'description' => $project['description'],
-            'board_selector' => $board_selector,
+        $this->response->html($this->template->layout('board/private_view', array(
+            'swimlanes' => $this->taskFilter->search($params['filters']['search'])->getBoard($params['project']['id']),
+            'description' => $params['project']['description'],
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->config->get('board_highlight_period'),
-        )));
+        ) + $params));
     }
 
     /**
@@ -106,14 +88,10 @@ class Board extends Base
             return $this->response->status(400);
         }
 
-        list($categories_listing, $categories_description) = $this->category->getBoardCategories($project_id);
-
         $this->response->html(
-            $this->template->render('board/show', array(
+            $this->template->render('board/table_container', array(
                 'project' => $this->project->getById($project_id),
-                'swimlanes' => $this->board->getBoard($project_id),
-                'categories_listing' => $categories_listing,
-                'categories_description' => $categories_description,
+                'swimlanes' => $this->taskFilter->search($this->userSession->getFilters($project_id))->getBoard($project_id),
                 'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
                 'board_highlight_period' => $this->config->get('board_highlight_period'),
             )),
@@ -143,14 +121,10 @@ class Board extends Base
             return $this->response->status(304);
         }
 
-        list($categories_listing, $categories_description) = $this->category->getBoardCategories($project_id);
-
         $this->response->html(
-            $this->template->render('board/show', array(
+            $this->template->render('board/table_container', array(
                 'project' => $this->project->getById($project_id),
-                'swimlanes' => $this->board->getBoard($project_id),
-                'categories_listing' => $categories_listing,
-                'categories_description' => $categories_description,
+                'swimlanes' => $this->taskFilter->search($this->userSession->getFilters($project_id))->getBoard($project_id),
                 'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
                 'board_highlight_period' => $this->config->get('board_highlight_period'),
             ))
@@ -165,7 +139,7 @@ class Board extends Base
     public function tasklinks()
     {
         $task = $this->getTask();
-        $this->response->html($this->template->render('board/tasklinks', array(
+        $this->response->html($this->template->render('board/tooltip_tasklinks', array(
             'links' => $this->taskLink->getAll($task['id']),
             'task' => $task,
         )));
@@ -179,7 +153,7 @@ class Board extends Base
     public function subtasks()
     {
         $task = $this->getTask();
-        $this->response->html($this->template->render('board/subtasks', array(
+        $this->response->html($this->template->render('board/tooltip_subtasks', array(
             'subtasks' => $this->subtask->getAll($task['id']),
             'task' => $task,
         )));
@@ -194,7 +168,7 @@ class Board extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->render('board/files', array(
+        $this->response->html($this->template->render('board/tooltip_files', array(
             'files' => $this->file->getAllDocuments($task['id']),
             'images' => $this->file->getAllImages($task['id']),
             'task' => $task,
@@ -210,7 +184,7 @@ class Board extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->render('board/comments', array(
+        $this->response->html($this->template->render('board/tooltip_comments', array(
             'comments' => $this->comment->getAll($task['id'])
         )));
     }
@@ -224,7 +198,7 @@ class Board extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->render('board/description', array(
+        $this->response->html($this->template->render('board/tooltip_description', array(
             'task' => $task
         )));
     }
@@ -239,7 +213,7 @@ class Board extends Base
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
 
-        $this->response->html($this->template->render('board/assignee', array(
+        $this->response->html($this->template->render('board/popover_assignee', array(
             'values' => $task,
             'users_list' => $this->projectPermission->getMemberList($project['id']),
             'project' => $project,
@@ -277,7 +251,7 @@ class Board extends Base
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
 
-        $this->response->html($this->template->render('board/category', array(
+        $this->response->html($this->template->render('board/popover_category', array(
             'values' => $task,
             'categories_list' => $this->category->getList($project['id']),
             'project' => $project,

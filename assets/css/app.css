@@ -37,10 +37,11 @@ body {
     padding-bottom: 20px;
     color: #333;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    -webkit-text-size-adjust: 100%;
+}
+
+.page {
+    clear: both;
 }
 
 ul.no-bullet li {
@@ -67,7 +68,8 @@ hr {
 .avatar {
     float: left;
     margin-right: 10px;
-}/* links */
+}
+/* links */
 a {
     color: #3366CC;
     border: none;
@@ -492,9 +494,14 @@ a.btn-blue:focus,
     background: #f7f7f7;
 }
 /* alerts */
+#main .alert,
+.page .alert {
+    margin-top: 10px;
+}
+
 .alert {
     padding: 8px 35px 8px 14px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #c09853;
     background-color: #fcf8e3;
     border: 1px solid #fbeed5;
@@ -532,44 +539,6 @@ a.btn-blue:focus,
 
 .alert li {
     margin-left: 25px;
-}
-
-/* fade out animation */
-.alert-fade-out {
-    animation: fadeOut 1s forwards;
-    -webkit-animation: fadeOut 1s forwards;
-    animation-delay: 7s;
-    -webkit-animation-delay: 7s;
-    cursor: pointer;
-}
-
-@-webkit-keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-        margin: 0;
-        padding: 0;
-        height: 0;
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-        margin: 0;
-        padding: 0;
-        height: 0;
-    }
-}
-
-#main .alert,
-.page .alert {
-    margin-top: 10px;
 }
 /* tooltip */
 .tooltip-arrow:after {
@@ -641,7 +610,7 @@ div.ui-tooltip {
     margin-bottom: 0px;
 }
 
-.column-tooltip {
+.tooltip .fa-info-circle {
 	color: #999;
 	font-size: 0.95em;
 }
@@ -717,7 +686,7 @@ nav .active a {
 
 /* page header */
 .page-header {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .page-header h2 {
@@ -755,15 +724,6 @@ nav .active a {
         margin-bottom: 5px;
     }
 }
-/* board filters */
-.board-filters {
-    font-size: 0.95em;
-}
-
-#more-filters {
-    display: none; /* Hide this filter initially, to avoid re-layout */
-}
-
 /* public board */
 .public-board {
     margin-top: 5px;
@@ -873,7 +833,12 @@ nav .active a {
 }
 
 div.task-board-recent {
-    border: 1px solid #666;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+}
+
+div.task-board-status-closed {
+    user-select: none;
+    border: 1px dotted #555;
 }
 
 .task-table a,
@@ -996,6 +961,7 @@ span.task-board-date-overdue {
 }
 
 /* task age */
+.task-board-closed,
 .task-board-days {
     position: absolute;
     right: 5px;
@@ -1082,7 +1048,7 @@ span.task-board-date-overdue {
     padding-left: 20px;
 }
 
-.description-textarea {
+.task-show-description-textarea {
     width: 99%;
     max-width: 99%;
     height: 300px;
@@ -1147,27 +1113,7 @@ span.task-board-date-overdue {
 .task-show-file-table {
     width: auto;
 }
-
-/* screenshots */
-#screenshot-zone {
-    position: relative;
-    border: 2px dashed #ccc;
-    width: 90%;
-    height: 250px;
-    overflow: auto;
-}
-
-#screenshot-inner {
-    position: absolute;
-    left: 0;
-    bottom: 48%;
-    width: 100%;
-    text-align: center;
-}
-
-#screenshot-zone.screenshot-pasted {
-    border: 2px solid #333;
-}/* comments */
+/* comments */
 .comment {
     margin-bottom: 20px;
 }
@@ -1384,31 +1330,6 @@ span.task-board-date-overdue {
     margin-left: 25px;
 }
 /* dashboard */
-
-@media only screen and (min-width: 1280px) {
-
-    #dashboard table {
-        font-size: 0.9em;
-    }
-
-    .dashboard-left-column {
-        width: 58%;
-        float: left;
-    }
-
-    .dashboard-right-column {
-        margin-left: 2%;
-        width: 40%;
-        float: left;
-    }
-}
-
-.dashboard-single-column {
-    width: 95%;
-    margin-left: 0;
-    float: none;
-}
-
 .dashboard-project-stats span {
     font-size: 0.75em;
     margin-right: 10px;
@@ -1429,10 +1350,7 @@ span.task-board-date-overdue {
 .dashboard-table-link:hover {
     color: #999;
 }
-
-#dashboard-calendar {
-    font-size: 0.85em;
-}/* datepicker */
+/* datepicker */
 #ui-datepicker-div {
     font-size: 0.8em;
 }
@@ -1607,18 +1525,14 @@ span.task-board-date-overdue {
     position: absolute;
     left: 0;
     z-index: 1000;
-    min-width: 230px;
+    min-width: 300px;
     list-style: none;
     margin: 3px 0 0 1px;
     padding: 6px 0;
     background-color: #fff;
     border: 1px solid #b2b2b2;
-    -webkit-border-radius: 3px;
-       -moz-border-radius: 3px;
-            border-radius: 3px;
-    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-       -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
-            box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+    border-radius: 3px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
 }
 
 .dropdown ul li {
@@ -1631,6 +1545,12 @@ span.task-board-date-overdue {
     padding-right: 10px;
 }
 
+.page-header div.dropdown {
+    font-size: 0.9em;
+    padding-right: 10px;
+}
+
+.page-header div.dropdown,
 .page-header ul.dropdown {
     display: inline;
 }
@@ -1656,3 +1576,79 @@ td li.dropit-trigger {
 .task-board .dropit-submenu a:hover {
     text-decoration: none;
 }
+#screenshot-zone {
+    position: relative;
+    border: 2px dashed #ccc;
+    width: 90%;
+    height: 250px;
+    overflow: auto;
+}
+
+#screenshot-inner {
+    position: absolute;
+    left: 0;
+    bottom: 48%;
+    width: 100%;
+    text-align: center;
+}
+
+#screenshot-zone.screenshot-pasted {
+    border: 2px solid #333;
+}.views {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.views li {
+    border: 1px solid #eee;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.views li.active a {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.views li:first-child {
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.views li:last-child {
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.filters {
+    display: inline-block;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 10px;
+}
+
+.filters ul {
+    font-size: 0.8em;
+}
+
+.page-header .filters ul {
+    font-size: 0.9em;
+}
+
+form.search {
+    display: inline;
+}
+
+div.search {
+    margin-bottom: 20px;
+}
+

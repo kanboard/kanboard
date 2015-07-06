@@ -63,6 +63,9 @@ class Api extends PHPUnit_Framework_TestCase
 
         if ($projects) {
             foreach ($projects as $project) {
+                $this->assertEquals('http://127.0.0.1:8000/?controller=board&action=show&project_id='.$project['id'], $project['url']['board']);
+                $this->assertEquals('http://127.0.0.1:8000/?controller=calendar&action=show&project_id='.$project['id'], $project['url']['calendar']);
+                $this->assertEquals('http://127.0.0.1:8000/?controller=listing&action=show&project_id='.$project['id'], $project['url']['list']);
                 $this->assertTrue($this->client->removeProject($project['id']));
             }
         }
@@ -80,6 +83,9 @@ class Api extends PHPUnit_Framework_TestCase
         $project = $this->client->getProjectById(1);
         $this->assertNotEmpty($project);
         $this->assertEquals(1, $project['id']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=board&action=show&project_id='.$project['id'], $project['url']['board']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=calendar&action=show&project_id='.$project['id'], $project['url']['calendar']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=listing&action=show&project_id='.$project['id'], $project['url']['list']);
     }
 
     public function testGetProjectByName()
@@ -87,6 +93,9 @@ class Api extends PHPUnit_Framework_TestCase
         $project = $this->client->getProjectByName('API test');
         $this->assertNotEmpty($project);
         $this->assertEquals(1, $project['id']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=board&action=show&project_id='.$project['id'], $project['url']['board']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=calendar&action=show&project_id='.$project['id'], $project['url']['calendar']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=listing&action=show&project_id='.$project['id'], $project['url']['list']);
 
         $project = $this->client->getProjectByName(array('name' => 'API test'));
         $this->assertNotEmpty($project);
@@ -95,6 +104,18 @@ class Api extends PHPUnit_Framework_TestCase
         $project = $this->client->getProjectByName('None');
         $this->assertEmpty($project);
         $this->assertNull($project);
+    }
+
+    public function testGetAllProjects()
+    {
+        $projects = $this->client->getAllProjects();
+        $this->assertNotEmpty($projects);
+
+        foreach ($projects as $project) {
+            $this->assertEquals('http://127.0.0.1:8000/?controller=board&action=show&project_id='.$project['id'], $project['url']['board']);
+            $this->assertEquals('http://127.0.0.1:8000/?controller=calendar&action=show&project_id='.$project['id'], $project['url']['calendar']);
+            $this->assertEquals('http://127.0.0.1:8000/?controller=listing&action=show&project_id='.$project['id'], $project['url']['list']);
+        }
     }
 
     public function testUpdateProject()
@@ -385,6 +406,7 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertNotFalse($task);
         $this->assertTrue(is_array($task));
         $this->assertEquals('Task #1', $task['title']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'], $task['url']);
     }
 
     public function testGetAllTasks()
@@ -394,6 +416,7 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertNotFalse($tasks);
         $this->assertTrue(is_array($tasks));
         $this->assertEquals('Task #1', $tasks[0]['title']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=task&action=show&task_id='.$tasks[0]['id'].'&project_id='.$tasks[0]['project_id'], $tasks[0]['url']);
 
         $tasks = $this->client->getAllTasks(2, 0);
 
@@ -1030,5 +1053,6 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($task);
         $this->assertEquals('Task with external ticket number', $task['title']);
         $this->assertEquals('TICKET-1234', $task['reference']);
+        $this->assertEquals('http://127.0.0.1:8000/?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'], $task['url']);
     }
 }

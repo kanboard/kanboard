@@ -91,6 +91,56 @@ class LexerTest extends Base
         );
     }
 
+    public function testColumnQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'column:', 'token' => 'T_COLUMN'), array('match' => 'Feature Request', 'token' => 'T_STRING')),
+            $lexer->tokenize('column:"Feature Request"')
+        );
+
+        $this->assertEquals(
+            array('T_COLUMN' => array('Feature Request')),
+            $lexer->map($lexer->tokenize('column:"Feature Request"'))
+        );
+
+        $this->assertEquals(
+            array('T_COLUMN' => array('Feature Request', 'Bug')),
+            $lexer->map($lexer->tokenize('column:"Feature Request" column:Bug'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('column: '))
+        );
+    }
+
+    public function testProjectQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'project:', 'token' => 'T_PROJECT'), array('match' => 'My project', 'token' => 'T_STRING')),
+            $lexer->tokenize('project:"My project"')
+        );
+
+        $this->assertEquals(
+            array('T_PROJECT' => array('My project')),
+            $lexer->map($lexer->tokenize('project:"My project"'))
+        );
+
+        $this->assertEquals(
+            array('T_PROJECT' => array('My project', 'plop')),
+            $lexer->map($lexer->tokenize('project:"My project" project:plop'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('project: '))
+        );
+    }
+
     public function testStatusQuery()
     {
         $lexer = new Lexer;
@@ -118,6 +168,36 @@ class LexerTest extends Base
         $this->assertEquals(
             array(),
             $lexer->map($lexer->tokenize('status: '))
+        );
+    }
+
+    public function testReferenceQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'ref:', 'token' => 'T_REFERENCE'), array('match' => '123', 'token' => 'T_STRING')),
+            $lexer->tokenize('ref:123')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'reference:', 'token' => 'T_REFERENCE'), array('match' => '456', 'token' => 'T_STRING')),
+            $lexer->tokenize('reference:456')
+        );
+
+        $this->assertEquals(
+            array('T_REFERENCE' => '123'),
+            $lexer->map($lexer->tokenize('reference:123'))
+        );
+
+        $this->assertEquals(
+            array('T_REFERENCE' => '456'),
+            $lexer->map($lexer->tokenize('ref:456'))
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('ref: '))
         );
     }
 
@@ -258,6 +338,11 @@ class LexerTest extends Base
         $this->assertEquals(
             array('T_TITLE' => 'my title'),
             $lexer->map($lexer->tokenize('my title '))
+        );
+
+        $this->assertEquals(
+            array('T_TITLE' => '#123'),
+            $lexer->map($lexer->tokenize('#123'))
         );
 
         $this->assertEquals(
