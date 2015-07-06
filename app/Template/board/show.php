@@ -1,7 +1,7 @@
 <div id="board-container">
     <?php if (isset($not_editable)): ?>
-    <table id="board" class="board-project-<?= $project['id'] ?>">
-        <?php else: ?>
+        <table id="board" class="board-project-<?= $project['id'] ?>">
+    <?php else: ?>
         <table id="board"
                class="board-project-<?= $project['id'] ?>"
                data-project-id="<?= $project['id'] ?>"
@@ -29,7 +29,4 @@
                 <?php endif ?>
             <?php endforeach ?>
         </table>
-        <script src="../../../assets/js/vendor/jquery-1.11.1.min.js"></script>
-        <script src="../../../assets/js/app.js"></script>
-        <script src="../../../assets/js/popupKanboard.js"></script>
 </div>
