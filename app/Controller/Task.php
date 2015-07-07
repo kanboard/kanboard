@@ -619,4 +619,16 @@ class Task extends Base
             'transitions' => $this->transition->getAllByTask($task['id']),
         )));
     }
+
+    /**
+     * Set automatically the start date
+     *
+     * @access public
+     */
+    public function start()
+    {
+        $task = $this->getTask();
+        $this->taskModification->update(array('id' => $task['id'], 'date_started' => time()));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+    }
 }

@@ -288,3 +288,12 @@ span.task-board-date-overdue {
 .task-show-file-table {
     width: auto;
 }
+
+.task-show-start-link {
+    color: #000;
+}
+
+.task-show-start-link:hover,
+.task-show-start-link:focus {
+    color: red;
+}
