@@ -3,7 +3,7 @@
     <?= $this->form->hidden('id', $values) ?>
 
     <?= $this->form->label(t('Start date'), 'date_started') ?>
-    <?= $this->form->text('date_started', $values, array(), array('placeholder="'.$this->text->in($date_format, $date_formats).'"'), 'form-date') ?>
+    <?= $this->form->text('date_started', $values, array(), array('placeholder="'.$this->text->in($date_format, $date_formats).'"'), 'form-datetime') ?>
 
     <?= $this->form->label(t('Time estimated'), 'time_estimated') ?>
     <?= $this->form->numeric('time_estimated', $values, array(), array('placeholder="'.t('hours').'"')) ?>

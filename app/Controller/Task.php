@@ -64,7 +64,7 @@ class Task extends Base
             'time_spent' => $task['time_spent'] ?: '',
         );
 
-        $this->dateParser->format($values, array('date_started'));
+        $this->dateParser->format($values, array('date_started'), 'Y-m-d H:i');
 
         $this->response->html($this->taskLayout('task/show', array(
             'project' => $this->project->getById($task['project_id']),
