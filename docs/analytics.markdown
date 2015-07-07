@@ -37,6 +37,6 @@ Kanboard use the complexity or story point to generate this diagram.
 Don't forget to run the daily job for stats calculation
 -------------------------------------------------------
 
-To generate accurate analytics data, you should run the daily cronjob **project daily summaries** just before midnight.
+To generate accurate analytics data, you should run the daily cronjob **project daily statistics** just before midnight.
 
-[Read the documentation about Kanboard CLI](http://kanboard.net/documentation/cli)
+[Read the documentation about Kanboard CLI](cli.markdown)

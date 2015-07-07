@@ -22,7 +22,8 @@ class ProjectDailySummarySubscriber extends \Core\Base implements EventSubscribe
     public function execute(TaskEvent $event)
     {
         if (isset($event['project_id'])) {
-            $this->projectDailySummary->updateTotals($event['project_id'], date('Y-m-d'));
+            $this->projectDailyColumnStats->updateTotals($event['project_id'], date('Y-m-d'));
+            $this->projectDailyStats->updateTotals($event['project_id'], date('Y-m-d'));
         }
     }
 }
