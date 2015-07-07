@@ -48,8 +48,10 @@ class SlackWebhook extends \Core\Base
      */
     public function getChannel($project_id)
     {
-    	if (! empty($this->config->get('integration_slack_webhook_channel'))) {
-    		return $this->config->get('integration_slack_webhook_channel');
+        $channel = $this->config->get('integration_slack_webhook_channel');
+
+        if (! empty($channel)) {
+            return $channel;
     	}
 
     	$options = $this->projectIntegration->getParameters($project_id);
