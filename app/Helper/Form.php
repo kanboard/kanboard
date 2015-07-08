@@ -53,7 +53,7 @@ class Form extends \Core\Base
 
         foreach ($options as $id => $value) {
 
-            $html .= '<option value="'.$this->helper->e($id).'"';
+            $html .= '<option class="color-'.$this->helper->e($id).'" value="'.$this->helper->e($id).'"';
 
             if (isset($values->$name) && $id == $values->$name) $html .= ' selected="selected"';
             if (isset($values[$name]) && $id == $values[$name]) $html .= ' selected="selected"';
