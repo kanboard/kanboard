@@ -152,7 +152,6 @@ class Task extends Base
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
-        $values['creator_id'] = $this->userSession->getId();
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
