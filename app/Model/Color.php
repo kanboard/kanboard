@@ -23,40 +23,40 @@ class Color extends Base
             'border' => 'rgb(223, 227, 45)',
 			'class' => 'Yellow',
         ),
-		'amber' => array(
+	'amber' => array(
             'name' => 'Amber',
             'background' => '#ffe082',
             'border' => '#ffa000',
 			'class' => '#ffe082',
-		),
-		'orange' => array(
+	),
+	'orange' => array(
             'name' => 'Orange',
             'background' => 'rgb(255, 215, 179)',
             'border' => 'rgb(255, 172, 98)',
 			'class' => '#FFD7B3',
-		),
+	),
         'deep_orange' => array(
             'name' => 'Deep Orange',
             'background' => '#ffab91',
             'border' => '#e64a19',
 			'class' => '#ffab91',
         ),
-		'red' => array(
+	'red' => array(
             'name' => 'Red',
             'background' => 'rgb(255, 187, 187)',
             'border' => 'rgb(255, 151, 151)',
 			'class' => '#ffab91',
-		),
-		'pink' => array(
+	),
+	'pink' => array(
             'name' => 'Pink',
             'background' => '#f48fb1',
             'border' => '#d81b60',
-		),        
-		'purple' => array(
+	),        
+	'purple' => array(
             'name' => 'Purple',
             'background' => 'rgb(223, 176, 255)',
             'border' => 'rgb(205, 133, 254)',
-		),
+	),
         'blue' => array(
             'name' => 'Blue',
             'background' => 'rgb(219, 235, 255)',
@@ -67,7 +67,7 @@ class Color extends Base
             'background' => '#b2ebf2',
             'border' => '#00bcd4',
         ), 
-		'teal' => array(
+	'teal' => array(
             'name' => 'Teal',
             'background' => '#80cbc4',
             'border' => '#00695c',
@@ -92,7 +92,7 @@ class Color extends Base
             'background' => '#d7ccc8',
             'border' => '#4e342e',
         ),
-		'dark_grey' => array(
+	'dark_grey' => array(
             'name' => 'Dark Grey',
             'background' => '#cfd8dc',
             'border' => '#455a64',
