@@ -41,7 +41,7 @@ class Comment extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
         if (empty($values)) {
             $values = array(
@@ -50,21 +50,19 @@ class Comment extends Base
             );
         }
 
-        if ($ajax) {
-            $this->response->html($this->template->render('comment/create', array(
-                'values' => $values,
-                'errors' => $errors,
-                'task' => $task,
-                'ajax' => $ajax,
-            )));
-        }
-
-        $this->response->html($this->taskLayout('comment/create', array(
+        $params = array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'title' => t('Add a comment'),
-        )));
+            'redirect' => $redirect,
+        );
+
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->render('comment/create', $params));
+        }
+        else {
+            $this->response->html($this->taskLayout('comment/create', $params));
+        }
     }
 
     /**
@@ -89,11 +87,12 @@ class Comment extends Base
                 $this->session->flashError(t('Unable to create your comment.'));
             }
 
-            if ($ajax) {
-                $this->response->redirect('?controller=board&action=show&project_id='.$task['project_id']);
-            }
-
-            $this->response->redirect('?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'].'#comments');
+            $redirect = $this->request->getStringParam('redirect', 'task');
+            $this->redirect(
+                $task,
+                $redirect,
+                '#comments'
+            );
         }
 
         $this->create($values, $errors);

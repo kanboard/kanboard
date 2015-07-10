@@ -10,6 +10,10 @@
     <div class="form-actions">
         <?= $this->url->link(t('Yes'), 'task', 'close', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'confirmation' => 'yes', 'redirect' => $redirect), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
+        <?php if (in_array($redirect, array('board', 'calendar', 'listing', 'roadmap'))): ?>
+            <?= $this->url->link(t('cancel'), $redirect, 'show', array('project_id' => $task['project_id'], false, 'close-popover')) ?>
+        <?php else: ?>
+            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => is_numeric($redirect) ? $redirect : $task['id'], 'project_id' => $task['project_id'])) ?>
+        <?php endif ?>
     </div>
 </div>

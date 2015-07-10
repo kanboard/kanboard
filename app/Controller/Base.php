@@ -356,4 +356,25 @@ abstract class Base extends \Core\Base
             'title' => $project['name'],
         );
     }
+
+    /**
+     * Common method to redirect the user after an action
+     *
+     * @param array   $task     Task data
+     * @param string  $redirect Type of redirection: empty to redirecto to the current task, board, roadmap, calendar or numeric value to redirect to a specific task
+     * @param string  $anchor   Optional anchor for default redirection (with the prefix #)
+     * @access protected
+     */
+    protected function redirect($task, $redirect='', $anchor='')
+    {
+        if (! empty($redirect)) {
+            if (in_array($redirect, array('board', 'calendar', 'listing', 'roadmap'))) {
+                $this->response->redirect($this->helper->url->to($redirect, 'show', array('project_id' => $task['project_id'])));
+            }
+            if (is_numeric($redirect)) {
+                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => intval($redirect), 'project_id' => $task['project_id'])).'#milestone');
+            }
+        }
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).$anchor);
+    }
 }

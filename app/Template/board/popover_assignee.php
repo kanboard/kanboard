@@ -1,7 +1,7 @@
 <section id="main">
     <section>
         <h3><?= t('Change assignee for the task "%s"', $values['title']) ?></h3>
-        <form method="post" action="<?= $this->url->href('board', 'updateAssignee', array('task_id' => $values['id'], 'project_id' => $values['project_id'])) ?>">
+        <form method="post" action="<?= $this->url->href('board', 'updateAssignee', array('task_id' => $values['id'], 'project_id' => $values['project_id'], 'redirect' => $redirect)) ?>">
 
             <?= $this->form->csrf() ?>
 
@@ -14,7 +14,11 @@
             <div class="form-actions">
                 <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
                 <?= t('or') ?>
-                <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $project['id']), false, 'close-popover') ?>
+                <?php if (in_array($redirect, array('board', 'calendar', 'listing', 'roadmap'))): ?>
+                    <?= $this->url->link(t('cancel'), $redirect, 'show', array('project_id' => $values['project_id'], false, 'close-popover')) ?>
+                <?php else: ?>
+                    <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => is_numeric($redirect) ? $redirect : $values['id'], 'project_id' => $values['project_id'])) ?>
+                <?php endif ?>
             </div>
         </form>
     </section>

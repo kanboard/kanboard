@@ -1,8 +1,9 @@
 <?php if (! empty($links)): ?>
+<div id="links" class="task-show-section">
 <div class="page-header">
     <h2><?= t('Links') ?></h2>
 </div>
-<table id="links">
+<table class="subtasks-table">
     <tr>
         <th class="column-20"><?= t('Label') ?></th>
         <th class="column-30"><?= t('Task') ?></th>
@@ -14,10 +15,10 @@
     </tr>
     <?php foreach ($links as $label => $grouped_links): ?>
         <?php $hide_td = false ?>
-        <?php foreach ($grouped_links as $link): ?>
+        <?php foreach ($grouped_links['links'] as $link): ?>
         <tr>
             <?php if (! $hide_td): ?>
-                <td rowspan="<?= count($grouped_links) ?>"><?= t('This task') ?> <strong><?= t($label) ?></strong></td>
+                <td rowspan="<?= count($grouped_links['links']) ?>"><?= t('This task') ?> <strong><?= t($label) ?></strong></td>
                 <?php $hide_td = true ?>
             <?php endif ?>
 
@@ -100,5 +101,5 @@
         <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
     </form>
 <?php endif ?>
-
+</div>
 <?php endif ?>

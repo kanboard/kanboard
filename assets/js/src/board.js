@@ -48,8 +48,8 @@
             }
         });
 
-        // Task popover
-        $("#board").on("click", ".task-board-popover", on_popover);
+        // Popover open for menu
+        $("#board").on("click", ".menu-popover", on_popover);
 
         // Redirect to the task details page
         $("#board").on("click", ".task-board", function() {
