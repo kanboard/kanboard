@@ -214,7 +214,11 @@ th a:hover {
 
 .column-70 {
     width: 70%;
-}/* forms */
+}
+.total {
+    text-align: right;
+}
+/* forms */
 form {
     margin-bottom: 20px;
 }
@@ -1130,6 +1134,21 @@ span.task-board-date-overdue {
 .task-show-start-link:hover,
 .task-show-start-link:focus {
     color: red;
+}
+
+/* links */
+.progress-bar {
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 99%;
+    margin: 2px auto;
+}
+
+.progress-bar .progress {
+    border-right: 1px solid black;
+    border-radius: 2px;
+    width: 0%;
+    text-align: left;
 }
 /* comments */
 .comment {

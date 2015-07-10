@@ -297,3 +297,18 @@ span.task-board-date-overdue {
 .task-show-start-link:focus {
     color: red;
 }
+
+/* links */
+.progress-bar {
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 99%;
+    margin: 2px auto;
+}
+
+.progress-bar .progress {
+    border-right: 1px solid black;
+    border-radius: 2px;
+    width: 0%;
+    text-align: left;
+}

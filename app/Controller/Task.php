@@ -27,6 +27,13 @@ class Task extends Base
         }
 
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
+        $subtasks = $this->subtask->getAll($task['id']);
+        $links = $this->taskLink->getAllGroupedByLabel($task['id']);
+        $milestonetasks = null;
+        if (isset($links[\Model\TaskLink::LABEL_ISMILESTONE])) {
+            $milestonetasks = $links[\Model\TaskLink::LABEL_ISMILESTONE];
+            unset($links[\Model\TaskLink::LABEL_ISMILESTONE]);
+        }
 
         if (empty($task)) {
             $this->notfound(true);
@@ -35,8 +42,9 @@ class Task extends Base
         $this->response->html($this->template->layout('task/public', array(
             'project' => $project,
             'comments' => $this->comment->getAll($task['id']),
-            'subtasks' => $this->subtask->getAll($task['id']),
-            'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
+            'milestonetasks' => $milestonetasks,
+            'subtasks' => $subtasks,
+            'links' => $links,
             'task' => $task,
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
@@ -56,6 +64,12 @@ class Task extends Base
     {
         $task = $this->getTask();
         $subtasks = $this->subtask->getAll($task['id']);
+        $links = $this->taskLink->getAllGroupedByLabel($task['id']);
+        $milestonetasks = null;
+        if (isset($links[\Model\TaskLink::LABEL_ISMILESTONE])) {
+            $milestonetasks = $links[\Model\TaskLink::LABEL_ISMILESTONE];
+            unset($links[\Model\TaskLink::LABEL_ISMILESTONE]);
+        }
 
         $values = array(
             'id' => $task['id'],
@@ -71,8 +85,9 @@ class Task extends Base
             'files' => $this->file->getAllDocuments($task['id']),
             'images' => $this->file->getAllImages($task['id']),
             'comments' => $this->comment->getAll($task['id']),
+            'milestonetasks' => $milestonetasks,
             'subtasks' => $subtasks,
-            'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
+            'links' => $links,
             'task' => $task,
             'values' => $values,
             'link_label_list' => $this->link->getList(0, false),

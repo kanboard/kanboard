@@ -22,6 +22,20 @@ class TaskLink extends Base
     const TABLE = 'task_has_links';
 
     /**
+     * Label of the link "is a milestone of"
+     * 
+     * @var string
+     */
+    const LABEL_ISMILESTONE = 'is a milestone of';
+
+    /**
+     * If of the link label "is a milestone of"
+     *
+     * @var string
+     */
+    const LABEL_ISMILESTONE_ID = 9;
+
+    /**
      * Get a task link
      *
      * @access public
@@ -52,11 +66,11 @@ class TaskLink extends Base
     }
 
     /**
-     * Get all links attached to a task
-     *
+     * Get all links attached to the given task
+     * 
      * @access public
      * @param  integer   $task_id   Task id
-     * @return array
+     * @return array     All links related to the given task, associated to their task data
      */
     public function getAll($task_id)
     {
@@ -69,6 +83,7 @@ class TaskLink extends Base
                         Task::TABLE.'.title',
                         Task::TABLE.'.is_active',
                         Task::TABLE.'.project_id',
+                        Task::TABLE.'.color_id',
                         Task::TABLE.'.time_spent AS task_time_spent',
                         Task::TABLE.'.time_estimated AS task_time_estimated',
                         Task::TABLE.'.owner_id AS task_assignee_id',
@@ -94,20 +109,28 @@ class TaskLink extends Base
      *
      * @access public
      * @param  integer   $task_id   Task id
-     * @return array
+     * @return array     All link labels related to the given task, associated to their task data and their total time tracking
      */
     public function getAllGroupedByLabel($task_id)
     {
         $links = $this->getAll($task_id);
         $result = array();
 
+        $current_label = null;
+        $current_cumul_spent = 0.;
         foreach ($links as $link) {
-
             if (! isset($result[$link['label']])) {
-                $result[$link['label']] = array();
+                $current_label = $link['label'];
+                $current_cumul_spent = 0.;
+                $result[$current_label] = array('time_spent' => 0, 'time_estimated' => 0, 'percentage' => 0, 'links' => array());
             }
-
-            $result[$link['label']][] = $link;
+            $result[$current_label]['links'][] = $link;
+            $result[$current_label]['time_spent'] += $link['task_time_spent'];
+            $result[$current_label]['time_estimated']+= $link['task_time_estimated'];
+            $current_cumul_spent += min($link['task_time_spent'], $link['task_time_estimated']);
+            if (0 != $result[$current_label]['time_estimated']) {
+                $result[$current_label]['percentage'] = $current_cumul_spent/$result[$current_label]['time_estimated'];
+            }
         }
 
         return $result;
