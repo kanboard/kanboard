@@ -16,27 +16,30 @@
     <tr>
         <td>
             <div class="task-board color-<?= $link['color_id'] ?>">
-                <div class="task-board-collapsed<?= ($link['is_active'] ? '' : ' task-link-closed') ?>">
                 <?php if (! isset($not_editable)): ?>
-                    <?= $this->url->link(
-                        $this->e('#'.$link['task_id'].' '.$link['title']),
-                        'task',
-                        'show',
-                        array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
-                        false,
-                        'task-board-collapsed-title'
-                    ) ?>
+                    <?= $this->render('board/task_menu', array('task' => array('id' => $link['task_id'], 'project_id' => $link['project_id'], 'is_active' => $link['is_active']), 'redirect' => $task['id'])) ?>
+                    <div class="task-board-collapsed<?= ($link['is_active'] ? '' : ' task-link-closed') ?>">
+                        <?= $this->url->link(
+                            $this->e($link['title']),
+                            'task',
+                            'show',
+                            array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
+                            false,
+                            'task-board-collapsed-title'
+                        ) ?>
+                    </div>
                 <?php else: ?>
-                <?= $this->url->link(
-                    $this->e('#'.$link['task_id'].' '.$link['title']),
-                    'task',
-                    'readonly',
-                    array('task_id' => $link['task_id'], 'token' => $project['token']),
-                    false,
-                    'task-board-collapsed-title'
-                ) ?>
+                    <div class="task-board-collapsed<?= ($link['is_active'] ? '' : ' task-link-closed') ?>">
+                        <?= $this->url->link(
+                            $this->e('#'.$link['task_id'].' '.$link['title']),
+                            'task',
+                            'readonly',
+                            array('task_id' => $link['task_id'], 'token' => $project['token']),
+                            false,
+                            'task-board-collapsed-title'
+                        ) ?>
+                    </div>
                 <?php endif ?>
-                </div>
             </div>
         </td>
         <td><?= $this->e($link['column_title']) ?></td>

@@ -19,6 +19,8 @@ var Kanboard = (function() {
         Popover: function(e, callback) {
             e.preventDefault();
             e.stopPropagation();
+            e.stopPropagation();
+            e.stopPropagation();
 
             var link = e.target.getAttribute("href");
 
@@ -165,6 +167,13 @@ var Kanboard = (function() {
 
         Init: function() {
 
+            // Popover open for menu
+            $(document).on("click", ".menu-popover", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                Kanboard.Popover(e, Kanboard.InitAfterAjax);
+            });
+            
             // Chosen select
             $(".chosen-select").chosen({
                 width: "200px",
@@ -260,9 +269,6 @@ var Kanboard = (function() {
         },
 
         InitAfterAjax: function() {
-
-            // Popover
-            $(document).on("click", ".popover", Kanboard.Popover);
 
             // Autofocus fields (html5 autofocus works only with page onload)
             $("[autofocus]").each(function(index, element) {

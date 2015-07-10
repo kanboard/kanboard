@@ -2,7 +2,7 @@
     <h2><?= t('Add a new link') ?></h2>
 </div>
 
-<form action="<?= $this->url->href('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => isset($ajax))) ?>" method="post" autocomplete="off">
+<form action="<?= $this->url->href('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => $redirect)) ?>" method="post" autocomplete="off">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
@@ -18,6 +18,7 @@
         $errors,
         array(
             'required',
+            'autofocus',
             'placeholder="'.t('Start to type task title...').'"',
             'title="'.t('Start to type task title...').'"',
             'data-dst-field="opposite_task_id"',
@@ -28,10 +29,10 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
-        <?php if (isset($ajax)): ?>
-            <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
+        <?php if (in_array($redirect, array('board', 'calendar', 'listing', 'roadmap'))): ?>
+            <?= $this->url->link(t('cancel'), $redirect, 'show', array('project_id' => $task['project_id'], false, 'close-popover')) ?>
         <?php else: ?>
-            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => is_numeric($redirect) ? $redirect : $task['id'], 'project_id' => $task['project_id'])) ?>
         <?php endif ?>
     </div>
 </form>

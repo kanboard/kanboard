@@ -2,7 +2,7 @@
     <h2><?= t('Edit the description') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->url->href('task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('task', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => $redirect)) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
@@ -29,10 +29,10 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
-        <?php if ($ajax): ?>
-            <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
+        <?php if (in_array($redirect, array('board', 'calendar', 'listing', 'roadmap'))): ?>
+            <?= $this->url->link(t('cancel'), $redirect, 'show', array('project_id' => $task['project_id'], false, 'close-popover')) ?>
         <?php else: ?>
-            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => is_numeric($redirect) ? $redirect : $task['id'], 'project_id' => $task['project_id'])) ?>
         <?php endif ?>
     </div>
 </form>

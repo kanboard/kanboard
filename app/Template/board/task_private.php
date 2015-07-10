@@ -8,7 +8,7 @@
      data-due-date="<?= $task['date_due'] ?>"
      data-task-url="<?= $this->url->href('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
 
-    <?= $this->render('board/task_menu', array('task' => $task)) ?>
+    <?= $this->render('board/task_menu', array('task' => $task, 'redirect' => 'board')) ?>
 
     <?php if ($this->board->isCollapsed($project['id'])): ?>
         <div class="task-board-collapsed">
@@ -37,7 +37,7 @@
                     'changeAssignee',
                     array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                     false,
-                    'task-board-popover',
+                    'menu-popover',
                     t('Change assignee')
                 ) ?>
             </span>
