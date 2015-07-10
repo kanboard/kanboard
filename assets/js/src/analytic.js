@@ -6,6 +6,9 @@
         var metrics = $("#chart").data("metrics");
         var columns = [];
         var groups = [];
+        var categories = [];
+        var inputFormat = d3.time.format("%Y-%m-%d");
+        var outputFormat = d3.time.format($("#chart").data("date-format"));
 
         for (var i = 0; i < metrics.length; i++) {
 
@@ -19,7 +22,12 @@
                     }
                 }
                 else {
+
                     columns[j].push(metrics[i][j]);
+
+                    if (j == 0) {
+                        categories.push(outputFormat(inputFormat.parse(metrics[i][j])));
+                    }
                 }
             }
         }
@@ -27,16 +35,13 @@
         c3.generate({
             data: {
                 columns: columns,
-                x: metrics[0][0],
                 type: 'area-spline',
                 groups: [groups]
             },
             axis: {
                 x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: $("#chart").data("date-format")
-                    }
+                    type: 'category',
+                    categories: categories
                 }
             }
         });
@@ -47,6 +52,9 @@
     {
         var metrics = $("#chart").data("metrics");
         var columns = [[$("#chart").data("label-total")]];
+        var categories = [];
+        var inputFormat = d3.time.format("%Y-%m-%d");
+        var outputFormat = d3.time.format($("#chart").data("date-format"));
 
         for (var i = 0; i < metrics.length; i++) {
 
@@ -66,21 +74,22 @@
 
                         columns[0][i] += metrics[i][j];
                     }
+
+                    if (j == 0) {
+                        categories.push(outputFormat(inputFormat.parse(metrics[i][j])));
+                    }
                 }
             }
         }
 
         c3.generate({
             data: {
-                columns: columns,
-                x: metrics[0][0]
+                columns: columns
             },
             axis: {
                 x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: $("#chart").data("date-format")
-                    }
+                    type: 'category',
+                    categories: categories
                 }
             }
         });
@@ -125,11 +134,13 @@
     // Draw budget chart
     function drawBudget()
     {
+        var categories = [];
         var metrics = $("#chart").data("metrics");
         var labels = $("#chart").data("labels");
+        var inputFormat = d3.time.format("%Y-%m-%d");
+        var outputFormat = d3.time.format($("#chart").data("date-format"));
 
         var columns = [
-            [labels["date"]],
             [labels["in"]],
             [labels["left"]],
             [labels["out"]]
@@ -141,25 +152,35 @@
         colors[labels["out"]] = '#DF3A01';
 
         for (var i = 0; i < metrics.length; i++) {
-            columns[0].push(metrics[i]["date"]);
-            columns[1].push(metrics[i]["in"]);
-            columns[2].push(metrics[i]["left"]);
-            columns[3].push(metrics[i]["out"]);
+            categories.push(outputFormat(inputFormat.parse(metrics[i]["date"])));
+            columns[0].push(metrics[i]["in"]);
+            columns[1].push(metrics[i]["left"]);
+            columns[2].push(metrics[i]["out"]);
         }
 
         c3.generate({
             data: {
-                x: columns[0][0],
                 columns: columns,
                 colors: colors,
                 type : 'bar'
             },
+            bar: {
+                width: {
+                    ratio: 0.25
+                }
+            },
+            grid: {
+                x: {
+                    show: true
+                },
+                y: {
+                    show: true
+                }
+            },
             axis: {
                 x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: $("#chart").data("date-format")
-                    }
+                    type: 'category',
+                    categories: categories
                 }
             }
         });
