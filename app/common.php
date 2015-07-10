@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
 // Automatically parse environment configuration (Heroku)
 if (getenv('DATABASE_URL')) {
