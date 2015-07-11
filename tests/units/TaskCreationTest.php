@@ -175,6 +175,28 @@ class TaskCreationTest extends Base
         $this->assertEquals(1, $task['creator_id']);
     }
 
+    public function testThatCreatorIsDefined()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+
+        $_SESSION = array();
+        $_SESSION['user']['id'] = 1;
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
+
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertNotFalse($task);
+
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(1, $task['creator_id']);
+
+        $_SESSION = array();
+    }
+
     public function testColumnId()
     {
         $p = new Project($this->container);
@@ -284,29 +306,35 @@ class TaskCreationTest extends Base
 
     public function testDateStarted()
     {
-        $date = '2014-11-23';
-        $timestamp = strtotime('+2days');
         $p = new Project($this->container);
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => $date)));
-        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => $timestamp)));
+
+        // Set only a date
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => '2014-11-24')));
 
         $task = $tf->getById(1);
-        $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
+        $this->assertEquals('2014-11-24 '.date('H:i'), date('Y-m-d H:i', $task['date_started']));
 
-        $this->assertEquals(1, $task['id']);
-        $this->assertEquals($date, date('Y-m-d', $task['date_started']));
+        // Set a datetime
+        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => '2014-11-24 16:25')));
 
         $task = $tf->getById(2);
-        $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
+        $this->assertEquals('2014-11-24 16:25', date('Y-m-d H:i', $task['date_started']));
 
-        $this->assertEquals(2, $task['id']);
-        $this->assertEquals($timestamp, $task['date_started']);
+        // Set a datetime
+        $this->assertEquals(3, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => '2014-11-24 6:25pm')));
+
+        $task = $tf->getById(3);
+        $this->assertEquals('2014-11-24 18:25', date('Y-m-d H:i', $task['date_started']));
+
+        // Set a timestamp
+        $this->assertEquals(4, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => time())));
+
+        $task = $tf->getById(4);
+        $this->assertEquals(time(), $task['date_started'], '', 1);
     }
 
     public function testTime()

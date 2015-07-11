@@ -6,7 +6,31 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 57;
+const VERSION = 59;
+
+function version_59($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_daily_stats (
+            id SERIAL PRIMARY KEY,
+            day CHAR(10) NOT NULL,
+            project_id INTEGER NOT NULL,
+            avg_lead_time INTEGER NOT NULL DEFAULT 0,
+            avg_cycle_time INTEGER NOT NULL DEFAULT 0,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )
+    ");
+
+    $pdo->exec('CREATE UNIQUE INDEX project_daily_stats_idx ON project_daily_stats(day, project_id)');
+
+    $pdo->exec('ALTER TABLE project_daily_summaries RENAME TO project_daily_column_stats');
+}
+
+function version_58($pdo)
+{
+    $pdo->exec("ALTER TABLE project_integrations ADD COLUMN slack_webhook_channel VARCHAR(255) DEFAULT ''");
+    $pdo->exec("INSERT INTO settings VALUES ('integration_slack_webhook_channel', '')");
+}
 
 function version_57($pdo)
 {

@@ -2,10 +2,10 @@
 
 print_css="print links table board task comment subtask markdown"
 app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown screenshot filters"
-vendor_css="jquery-ui.min chosen.min fullcalendar.min font-awesome.min c3.min"
+vendor_css="jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min"
 
 app_js="base board calendar analytic swimlane screenshot"
-vendor_js="jquery-1.11.1.min jquery-ui.min jquery.ui.touch-punch.min chosen.jquery.min dropit.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min app.min"
+vendor_js="jquery-1.11.1.min jquery-ui.min jquery-ui-timepicker-addon.min jquery.ui.touch-punch.min chosen.jquery.min dropit.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min app.min"
 lang_js="da de es fi fr hu it ja nl pl pt-br ru sv sr th tr zh-cn"
 
 function merge_css {

@@ -64,7 +64,7 @@ class Task extends Base
             'time_spent' => $task['time_spent'] ?: '',
         );
 
-        $this->dateParser->format($values, array('date_started'));
+        $this->dateParser->format($values, array('date_started'), 'Y-m-d H:i');
 
         $this->response->html($this->taskLayout('task/show', array(
             'project' => $this->project->getById($task['project_id']),
@@ -88,19 +88,20 @@ class Task extends Base
     }
 
     /**
-     * Display task activities
+     * Display task analytics
      *
      * @access public
      */
-    public function activites()
+    public function analytics()
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task/activity', array(
+        $this->response->html($this->taskLayout('task/analytics', array(
             'title' => $task['title'],
             'task' => $task,
-            'ajax' => $this->request->isAjax(),
-            'events' => $this->projectActivity->getTask($task['id']),
+            'lead_time' => $this->taskAnalytic->getLeadTime($task),
+            'cycle_time' => $this->taskAnalytic->getCycleTime($task),
+            'time_spent_columns' => $this->taskAnalytic->getTimeSpentByColumn($task),
         )));
     }
 
@@ -151,7 +152,6 @@ class Task extends Base
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
-        $values['creator_id'] = $this->userSession->getId();
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
@@ -617,5 +617,17 @@ class Task extends Base
             'task' => $task,
             'transitions' => $this->transition->getAllByTask($task['id']),
         )));
+    }
+
+    /**
+     * Set automatically the start date
+     *
+     * @access public
+     */
+    public function start()
+    {
+        $task = $this->getTask();
+        $this->taskModification->update(array('id' => $task['id'], 'date_started' => time()));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
     }
 }

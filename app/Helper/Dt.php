@@ -2,14 +2,34 @@
 
 namespace Helper;
 
+use DateTime;
+
 /**
  * DateTime helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class Datetime extends \Core\Base
+class Dt extends \Core\Base
 {
+    /**
+     * Get duration in seconds into human format
+     *
+     * @access public
+     * @param  integer  $seconds
+     * @return string
+     */
+    public function duration($seconds)
+    {
+        if ($seconds == 0) {
+            return 0;
+        }
+
+        $dtF = new DateTime("@0");
+        $dtT = new DateTime("@$seconds");
+        return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
+    }
+
     /**
      * Get the age of an item in quasi human readable format.
      * It's in this format: <1h , NNh, NNd

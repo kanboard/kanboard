@@ -7,6 +7,8 @@ This feature allow you to import Kanboard tasks in almost any calendar program (
 Calendar subscriptions are **read-only** access, you cannot create tasks from an external calendar software.
 The Calendar feed export follow the iCal standard.
 
+Note: Only tasks within the date range of -2 months to +6 months are exported to the iCalendar feed.
+
 Project calendars
 -----------------
 

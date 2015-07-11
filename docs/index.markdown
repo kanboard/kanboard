@@ -33,6 +33,7 @@ Using Kanboard
 - [Recurring tasks](recurring-tasks.markdown)
 - [Create tasks by email](create-tasks-by-email.markdown)
 - [Subtasks](subtasks.markdown)
+- [Analytics for tasks](analytics-tasks.markdown)
 
 ### Working with users
 

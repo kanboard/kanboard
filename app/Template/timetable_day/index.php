@@ -30,10 +30,10 @@
     <?= $this->form->csrf() ?>
 
     <?= $this->form->label(t('Start time'), 'start') ?>
-    <?= $this->form->select('start', $this->datetime->getDayHours(), $values, $errors) ?>
+    <?= $this->form->select('start', $this->dt->getDayHours(), $values, $errors) ?>
 
     <?= $this->form->label(t('End time'), 'end') ?>
-    <?= $this->form->select('end', $this->datetime->getDayHours(), $values, $errors) ?>
+    <?= $this->form->select('end', $this->dt->getDayHours(), $values, $errors) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

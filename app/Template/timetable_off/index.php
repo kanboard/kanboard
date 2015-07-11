@@ -42,10 +42,10 @@
     <?= $this->form->checkbox('all_day', t('All day'), 1) ?>
 
     <?= $this->form->label(t('Start time'), 'start') ?>
-    <?= $this->form->select('start', $this->datetime->getDayHours(), $values, $errors) ?>
+    <?= $this->form->select('start', $this->dt->getDayHours(), $values, $errors) ?>
 
     <?= $this->form->label(t('End time'), 'end') ?>
-    <?= $this->form->select('end', $this->datetime->getDayHours(), $values, $errors) ?>
+    <?= $this->form->select('end', $this->dt->getDayHours(), $values, $errors) ?>
 
     <?= $this->form->label(t('Comment'), 'comment') ?>
     <?= $this->form->text('comment', $values, $errors) ?>

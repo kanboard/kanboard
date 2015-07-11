@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <i class="fa fa-th fa-fw"></i>
-                <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $task['project_id']), false, '', '', false, 'swimlane-'.$task['swimlane_id']) ?>
+                <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $task['project_id']), false, '', '', false, $task['swimlane_id'] != 0 ? 'swimlane-'.$task['swimlane_id'] : '') ?>
             </li>
             <li>
                 <i class="fa fa-calendar fa-fw"></i>

@@ -310,4 +310,28 @@ class Board extends Base
             'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
         )));
     }
+
+    /**
+     * Enable collapsed mode
+     *
+     * @access public
+     */
+    public function collapse()
+    {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $this->userSession->setBoardDisplayMode($project_id, true);
+        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project_id)));
+    }
+
+    /**
+     * Enable expanded mode
+     *
+     * @access public
+     */
+    public function expand()
+    {
+        $project_id = $this->request->getIntegerParam('project_id');
+        $this->userSession->setBoardDisplayMode($project_id, false);
+        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project_id)));
+    }
 }

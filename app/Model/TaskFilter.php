@@ -118,7 +118,7 @@ class TaskFilter extends Base
      * Exclude a list of task_id
      *
      * @access public
-     * @param  array  $task_ids
+     * @param  integer[]  $task_ids
      * @return TaskFilter
      */
     public function excludeTasks(array $task_ids)
@@ -641,10 +641,10 @@ class TaskFilter extends Base
      * Transform results to ical events
      *
      * @access public
-     * @param  string                           $start_column    Column name for the start date
-     * @param  string                           $end_column      Column name for the end date
-     * @param  Eluceo\iCal\Component\Calendar   $vCalendar       Calendar object
-     * @return Eluceo\iCal\Component\Calendar
+     * @param  string     $start_column    Column name for the start date
+     * @param  string     $end_column      Column name for the end date
+     * @param  Calendar   $vCalendar       Calendar object
+     * @return Calendar
      */
     public function addDateTimeIcalEvents($start_column, $end_column, Calendar $vCalendar = null)
     {
@@ -674,9 +674,9 @@ class TaskFilter extends Base
      * Transform results to all day ical events
      *
      * @access public
-     * @param  string                             $column        Column name for the date
-     * @param  Eluceo\iCal\Component\Calendar     $vCalendar     Calendar object
-     * @return Eluceo\iCal\Component\Calendar
+     * @param  string       $column        Column name for the date
+     * @param  Calendar     $vCalendar     Calendar object
+     * @return Calendar
      */
     public function addAllDayIcalEvents($column = 'date_due', Calendar $vCalendar = null)
     {
@@ -706,7 +706,7 @@ class TaskFilter extends Base
      * @access protected
      * @param  array   $task
      * @param  string  $uid
-     * @return Eluceo\iCal\Component\Event
+     * @return Event
      */
     protected function getTaskIcalEvent(array &$task, $uid)
     {
@@ -723,11 +723,11 @@ class TaskFilter extends Base
         $vEvent->setSummary(t('#%d', $task['id']).' '.$task['title']);
         $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
 
-        if (! empty($task['creator_id'])) {
-            $vEvent->setOrganizer('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
+        if (! empty($task['owner_id'])) {
+            $vEvent->setOrganizer('MAILTO:'.($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'));
         }
 
-        if (! empty($task['owner_id'])) {
+        if (! empty($task['creator_id'])) {
             $attendees = new Attendees;
             $attendees->add('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
             $vEvent->setAttendees($attendees);

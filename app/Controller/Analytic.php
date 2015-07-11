@@ -3,7 +3,7 @@
 namespace Controller;
 
 /**
- * Project Anaytic controller
+ * Project Analytic controller
  *
  * @package  controller
  * @author   Frederic Guillot
@@ -24,6 +24,56 @@ class Analytic extends Base
         $params['content_for_sublayout'] = $this->template->render($template, $params);
 
         return $this->template->layout('analytic/layout', $params);
+    }
+
+    /**
+     * Show average Lead and Cycle time
+     *
+     * @access public
+     */
+    public function leadAndCycleTime()
+    {
+        $project = $this->getProject();
+        $values = $this->request->getValues();
+
+        $this->projectDailyStats->updateTotals($project['id'], date('Y-m-d'));
+
+        $from = $this->request->getStringParam('from', date('Y-m-d', strtotime('-1week')));
+        $to = $this->request->getStringParam('to', date('Y-m-d'));
+
+        if (! empty($values)) {
+            $from = $values['from'];
+            $to = $values['to'];
+        }
+
+        $this->response->html($this->layout('analytic/lead_cycle_time', array(
+            'values' => array(
+                'from' => $from,
+                'to' => $to,
+            ),
+            'project' => $project,
+            'average' => $this->projectAnalytic->getAverageLeadAndCycleTime($project['id']),
+            'metrics' => $this->projectDailyStats->getRawMetrics($project['id'], $from, $to),
+            'date_format' => $this->config->get('application_date_format'),
+            'date_formats' => $this->dateParser->getAvailableFormats(),
+            'title' => t('Lead and Cycle time for "%s"', $project['name']),
+        )));
+    }
+
+    /**
+     * Show average time spent by column
+     *
+     * @access public
+     */
+    public function averageTimeByColumn()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->layout('analytic/avg_time_columns', array(
+            'project' => $project,
+            'metrics' => $this->projectAnalytic->getAverageTimeSpentByColumn($project['id']),
+            'title' => t('Average time spent into each column for "%s"', $project['name']),
+        )));
     }
 
     /**
@@ -88,6 +138,8 @@ class Analytic extends Base
         $project = $this->getProject();
         $values = $this->request->getValues();
 
+        $this->projectDailyColumnStats->updateTotals($project['id'], date('Y-m-d'));
+
         $from = $this->request->getStringParam('from', date('Y-m-d', strtotime('-1week')));
         $to = $this->request->getStringParam('to', date('Y-m-d'));
 
@@ -96,7 +148,7 @@ class Analytic extends Base
             $to = $values['to'];
         }
 
-        $display_graph = $this->projectDailySummary->countDays($project['id'], $from, $to) >= 2;
+        $display_graph = $this->projectDailyColumnStats->countDays($project['id'], $from, $to) >= 2;
 
         $this->response->html($this->layout($template, array(
             'values' => array(
@@ -104,7 +156,7 @@ class Analytic extends Base
                 'to' => $to,
             ),
             'display_graph' => $display_graph,
-            'metrics' => $display_graph ? $this->projectDailySummary->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
+            'metrics' => $display_graph ? $this->projectDailyColumnStats->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
             'project' => $project,
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),

@@ -3,22 +3,22 @@
 namespace Model;
 
 /**
- * Project daily summary
+ * Project Daily Column Stats
  *
  * @package  model
  * @author   Frederic Guillot
  */
-class ProjectDailySummary extends Base
+class ProjectDailyColumnStats extends Base
 {
     /**
      * SQL table name
      *
      * @var string
      */
-    const TABLE = 'project_daily_summaries';
+    const TABLE = 'project_daily_column_stats';
 
     /**
-     * Update daily totals for the project
+     * Update daily totals for the project and foreach column
      *
      * "total" is the number open of tasks in the column
      * "score" is the sum of tasks score in the column
@@ -38,7 +38,7 @@ class ProjectDailySummary extends Base
 
                 // This call will fail if the record already exists
                 // (cross database driver hack for INSERT..ON DUPLICATE KEY UPDATE)
-                $db->table(ProjectDailySummary::TABLE)->insert(array(
+                $db->table(ProjectDailyColumnStats::TABLE)->insert(array(
                     'day' => $date,
                     'project_id' => $project_id,
                     'column_id' => $column_id,
@@ -46,7 +46,7 @@ class ProjectDailySummary extends Base
                     'score' => 0,
                 ));
 
-                $db->table(ProjectDailySummary::TABLE)
+                $db->table(ProjectDailyColumnStats::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
                     ->eq('day', $date)
@@ -95,19 +95,19 @@ class ProjectDailySummary extends Base
      */
     public function getRawMetrics($project_id, $from, $to)
     {
-        return $this->db->table(ProjectDailySummary::TABLE)
+        return $this->db->table(ProjectDailyColumnStats::TABLE)
                         ->columns(
-                            ProjectDailySummary::TABLE.'.column_id',
-                            ProjectDailySummary::TABLE.'.day',
-                            ProjectDailySummary::TABLE.'.total',
-                            ProjectDailySummary::TABLE.'.score',
+                            ProjectDailyColumnStats::TABLE.'.column_id',
+                            ProjectDailyColumnStats::TABLE.'.day',
+                            ProjectDailyColumnStats::TABLE.'.total',
+                            ProjectDailyColumnStats::TABLE.'.score',
                             Board::TABLE.'.title AS column_title'
                         )
                         ->join(Board::TABLE, 'id', 'column_id')
-                        ->eq(ProjectDailySummary::TABLE.'.project_id', $project_id)
+                        ->eq(ProjectDailyColumnStats::TABLE.'.project_id', $project_id)
                         ->gte('day', $from)
                         ->lte('day', $to)
-                        ->asc(ProjectDailySummary::TABLE.'.day')
+                        ->asc(ProjectDailyColumnStats::TABLE.'.day')
                         ->findAll();
     }
 
@@ -122,17 +122,17 @@ class ProjectDailySummary extends Base
      */
     public function getRawMetricsByDay($project_id, $from, $to)
     {
-        return $this->db->table(ProjectDailySummary::TABLE)
+        return $this->db->table(ProjectDailyColumnStats::TABLE)
                         ->columns(
-                            ProjectDailySummary::TABLE.'.day',
-                            'SUM('.ProjectDailySummary::TABLE.'.total) AS total',
-                            'SUM('.ProjectDailySummary::TABLE.'.score) AS score'
+                            ProjectDailyColumnStats::TABLE.'.day',
+                            'SUM('.ProjectDailyColumnStats::TABLE.'.total) AS total',
+                            'SUM('.ProjectDailyColumnStats::TABLE.'.score) AS score'
                         )
-                        ->eq(ProjectDailySummary::TABLE.'.project_id', $project_id)
+                        ->eq(ProjectDailyColumnStats::TABLE.'.project_id', $project_id)
                         ->gte('day', $from)
                         ->lte('day', $to)
-                        ->asc(ProjectDailySummary::TABLE.'.day')
-                        ->groupBy(ProjectDailySummary::TABLE.'.day')
+                        ->asc(ProjectDailyColumnStats::TABLE.'.day')
+                        ->groupBy(ProjectDailyColumnStats::TABLE.'.day')
                         ->findAll();
     }
 
@@ -160,7 +160,7 @@ class ProjectDailySummary extends Base
         $aggregates = array();
 
         // Fetch metrics for the project
-        $records = $this->db->table(ProjectDailySummary::TABLE)
+        $records = $this->db->table(ProjectDailyColumnStats::TABLE)
                             ->eq('project_id', $project_id)
                             ->gte('day', $from)
                             ->lte('day', $to)

@@ -56,6 +56,12 @@ class DateParserTest extends Base
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getTimestamp('2014-03-05')));
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getTimestamp('2014_03_05')));
         $this->assertEquals('2014-03-05', date('Y-m-d', $d->getTimestamp('03/05/2014')));
+        $this->assertEquals('2014-03-25 17:18', date('Y-m-d H:i', $d->getTimestamp('03/25/2014 5:18 pm')));
+        $this->assertEquals('2014-03-25 05:18', date('Y-m-d H:i', $d->getTimestamp('03/25/2014 5:18 am')));
+        $this->assertEquals('2014-03-25 05:18', date('Y-m-d H:i', $d->getTimestamp('03/25/2014 5:18am')));
+        $this->assertEquals('2014-03-25 23:14', date('Y-m-d H:i', $d->getTimestamp('03/25/2014 23:14')));
+        $this->assertEquals('2014-03-29 23:14', date('Y-m-d H:i', $d->getTimestamp('2014_03_29 23:14')));
+        $this->assertEquals('2014-03-29 23:14', date('Y-m-d H:i', $d->getTimestamp('2014-03-29 23:14')));
     }
 
     public function testConvert()

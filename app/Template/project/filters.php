@@ -5,12 +5,13 @@
             <ul>
                 <?php if (isset($is_board)): ?>
                 <li>
-                    <span class="filter-collapse">
-                        <i class="fa fa-compress fa-fw"></i> <a href="#" class="filter-collapse-link" title="<?= t('Keyboard shortcut: "%s"', 's') ?>"><?= t('Collapse tasks') ?></a>
-                    </span>
-                    <span class="filter-expand" style="display: none">
-                        <i class="fa fa-expand fa-fw"></i> <a href="#" class="filter-expand-link" title="<?= t('Keyboard shortcut: "%s"', 's') ?>"><?= t('Expand tasks') ?></a>
-                    </span>
+                    <?php if ($this->board->isCollapsed($project['id'])): ?>
+                        <i class="fa fa-expand fa-fw"></i>
+                        <?= $this->url->link(t('Expand tasks'), 'board', 'expand', array('project_id' => $project['id']), false, 'board-display-mode', t('Keyboard shortcut: "%s"', 's')) ?>
+                    <?php else: ?>
+                        <i class="fa fa-compress fa-fw"></i>
+                        <?= $this->url->link(t('Collapse tasks'), 'board', 'collapse', array('project_id' => $project['id']), false, 'board-display-mode', t('Keyboard shortcut: "%s"', 's')) ?>
+                    <?php endif ?>
                 </li>
                 <li>
                     <span class="filter-compact">

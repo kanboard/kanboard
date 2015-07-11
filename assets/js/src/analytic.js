@@ -6,6 +6,9 @@
         var metrics = $("#chart").data("metrics");
         var columns = [];
         var groups = [];
+        var categories = [];
+        var inputFormat = d3.time.format("%Y-%m-%d");
+        var outputFormat = d3.time.format($("#chart").data("date-format"));
 
         for (var i = 0; i < metrics.length; i++) {
 
@@ -19,7 +22,12 @@
                     }
                 }
                 else {
+
                     columns[j].push(metrics[i][j]);
+
+                    if (j == 0) {
+                        categories.push(outputFormat(inputFormat.parse(metrics[i][j])));
+                    }
                 }
             }
         }
@@ -27,16 +35,13 @@
         c3.generate({
             data: {
                 columns: columns,
-                x: metrics[0][0],
                 type: 'area-spline',
                 groups: [groups]
             },
             axis: {
                 x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: $("#chart").data("date-format")
-                    }
+                    type: 'category',
+                    categories: categories
                 }
             }
         });
@@ -47,6 +52,9 @@
     {
         var metrics = $("#chart").data("metrics");
         var columns = [[$("#chart").data("label-total")]];
+        var categories = [];
+        var inputFormat = d3.time.format("%Y-%m-%d");
+        var outputFormat = d3.time.format($("#chart").data("date-format"));
 
         for (var i = 0; i < metrics.length; i++) {
 
@@ -66,21 +74,22 @@
 
                         columns[0][i] += metrics[i][j];
                     }
+
+                    if (j == 0) {
+                        categories.push(outputFormat(inputFormat.parse(metrics[i][j])));
+                    }
                 }
             }
         }
 
         c3.generate({
             data: {
-                columns: columns,
-                x: metrics[0][0]
+                columns: columns
             },
             axis: {
                 x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: $("#chart").data("date-format")
-                    }
+                    type: 'category',
+                    categories: categories
                 }
             }
         });
@@ -125,11 +134,13 @@
     // Draw budget chart
     function drawBudget()
     {
+        var categories = [];
         var metrics = $("#chart").data("metrics");
         var labels = $("#chart").data("labels");
+        var inputFormat = d3.time.format("%Y-%m-%d");
+        var outputFormat = d3.time.format($("#chart").data("date-format"));
 
         var columns = [
-            [labels["date"]],
             [labels["in"]],
             [labels["left"]],
             [labels["out"]]
@@ -141,28 +152,176 @@
         colors[labels["out"]] = '#DF3A01';
 
         for (var i = 0; i < metrics.length; i++) {
-            columns[0].push(metrics[i]["date"]);
-            columns[1].push(metrics[i]["in"]);
-            columns[2].push(metrics[i]["left"]);
-            columns[3].push(metrics[i]["out"]);
+            categories.push(outputFormat(inputFormat.parse(metrics[i]["date"])));
+            columns[0].push(metrics[i]["in"]);
+            columns[1].push(metrics[i]["left"]);
+            columns[2].push(metrics[i]["out"]);
         }
 
         c3.generate({
             data: {
-                x: columns[0][0],
                 columns: columns,
                 colors: colors,
                 type : 'bar'
             },
+            bar: {
+                width: {
+                    ratio: 0.25
+                }
+            },
+            grid: {
+                x: {
+                    show: true
+                },
+                y: {
+                    show: true
+                }
+            },
             axis: {
                 x: {
-                    type: 'timeseries',
+                    type: 'category',
+                    categories: categories
+                }
+            }
+        });
+    }
+
+    // Draw chart for average time spent into each column
+    function drawAvgTimeColumn()
+    {
+        var metrics = $("#chart").data("metrics");
+        var plots = [$("#chart").data("label")];
+        var categories = [];
+
+        for (var column_id in metrics) {
+            plots.push(metrics[column_id].average);
+            categories.push(metrics[column_id].title);
+        }
+
+        c3.generate({
+            data: {
+                columns: [plots],
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5
+                }
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: categories
+                },
+                y: {
                     tick: {
-                        format: $("#chart").data("date-format")
+                        format: formatDuration
+                    }
+                }
+            },
+            legend: {
+               show: false
+            }
+        });
+    }
+
+    // Draw chart for average time spent into each column
+    function drawTaskTimeColumn()
+    {
+        var metrics = $("#chart").data("metrics");
+        var plots = [$("#chart").data("label")];
+        var categories = [];
+
+        for (var i = 0; i < metrics.length; i++) {
+            plots.push(metrics[i].time_spent);
+            categories.push(metrics[i].title);
+        }
+
+        c3.generate({
+            data: {
+                columns: [plots],
+                type: 'bar'
+            },
+            bar: {
+                width: {
+                    ratio: 0.5
+                }
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: categories
+                },
+                y: {
+                    tick: {
+                        format: formatDuration
+                    }
+                }
+            },
+            legend: {
+               show: false
+            }
+        });
+    }
+
+    // Draw lead and cycle time for the project
+    function drawLeadAndCycleTime()
+    {
+        var metrics = $("#chart").data("metrics");
+        var cycle = [$("#chart").data("label-cycle")];
+        var lead = [$("#chart").data("label-lead")];
+        var categories = [];
+
+        var types = {};
+        types[$("#chart").data("label-cycle")] = 'area';
+        types[$("#chart").data("label-lead")] = 'area-spline';
+
+        var colors = {};
+        colors[$("#chart").data("label-lead")] = '#afb42b';
+        colors[$("#chart").data("label-cycle")] = '#4e342e';
+
+        for (var i = 0; i < metrics.length; i++) {
+            cycle.push(parseInt(metrics[i].avg_cycle_time));
+            lead.push(parseInt(metrics[i].avg_lead_time));
+            categories.push(metrics[i].day);
+        }
+
+        c3.generate({
+            data: {
+                columns: [
+                    lead,
+                    cycle
+                ],
+                types: types,
+                colors: colors
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: categories
+                },
+                y: {
+                    tick: {
+                        format: formatDuration
                     }
                 }
             }
         });
+    }
+
+    function formatDuration(d)
+    {
+        if (d >= 86400) {
+            return Math.round(d/86400) + "d";
+        }
+        else if (d >= 3600) {
+            return Math.round(d/3600) + "h";
+        }
+        else if (d >= 60) {
+            return Math.round(d/60) + "m";
+        }
+
+        return d + "s";
     }
 
     jQuery(document).ready(function() {
@@ -181,6 +340,15 @@
         }
         else if (Kanboard.Exists("budget-chart")) {
             drawBudget();
+        }
+        else if (Kanboard.Exists("analytic-avg-time-column")) {
+            drawAvgTimeColumn();
+        }
+        else if (Kanboard.Exists("analytic-task-time-column")) {
+            drawTaskTimeColumn();
+        }
+        else if (Kanboard.Exists("analytic-lead-cycle-time")) {
+            drawLeadAndCycleTime();
         }
     });
 
