@@ -313,10 +313,11 @@ class TaskFilter extends Base
         $this->query->beginOr();
 
         foreach ($values as $assignee) {
-
+            $subtaskQuery = $this->buildSubtaskQuery();
             switch ($assignee) {
                 case 'me':
                     $this->query->eq(Task::TABLE.'.owner_id', $this->userSession->getId());
+                    $subtaskQuery->eq(Subtask::TABLE.'user_id',$this->userSession->getId() );
                     break;
                 case 'nobody':
                     $this->query->eq(Task::TABLE.'.owner_id', 0);
@@ -324,6 +325,12 @@ class TaskFilter extends Base
                 default:
                     $this->query->ilike(User::TABLE.'.username', '%'.$assignee.'%');
                     $this->query->ilike(User::TABLE.'.name', '%'.$assignee.'%');
+                    $subtaskQuery->ilike(User::TABLE.'.username', '%'.$assignee.'%');
+                    $subtaskQuery->ilike(User::TABLE.'.name', '%'.$assignee.'%');
+            }
+            if ($assignee != 'nobody'){
+                $subtasks = $subtaskQuery->findAll();
+                $this->addTasksWithFoundSubtask($subtasks);
             }
         }
 
@@ -760,4 +767,25 @@ class TaskFilter extends Base
 
         return $this;
     }
+    
+    private function buildSubtaskQuery(){
+        return $this->db->table(Subtask::TABLE)
+                ->columns(
+                    Subtask::TABLE.'.user_id',
+                    Subtask::TABLE.'.task_id',
+                    User::TABLE.'.name',
+                    User::TABLE.'.username')
+                ->join(User::TABLE, 'id', 'user_id', Subtask::TABLE)
+                ->beginOr()
+                ->eq(Subtask::TABLE.'.status', Subtask::STATUS_TODO)
+                ->eq(Subtask::TABLE.'.status', Subtask::STATUS_INPROGRESS)
+                ->closeOr();
+    }
+
+    private function addTasksWithFoundSubtask($subtasks) {
+        foreach ($subtasks as $subtask) {
+            $this->query->eq(Task::TABLE.'.id',$subtask['task_id']);
+        }
+    }
+
 }
