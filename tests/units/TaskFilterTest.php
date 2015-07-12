@@ -479,7 +479,7 @@ class TaskFilterTest extends Base
         $tf = new TaskFilter($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(2, $u->create(array('username' => 'bob', 'name' => 'Bob Ryan')));
+        $this->assertEquals(2, $u->create(array('username' => 'bob', 'name' => 'Paul Ryan')));
         $this->assertEquals(1,$tc->create(array('project_id' => 1, 'title' => 'my task title is awesome', 'owner_id' => 2)));
         $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1, 'status' => 1, 'another_subtask' => 'on',  'user_id' => 0)));        
         $this->assertEquals(2,$tc->create(array('project_id' => 1, 'title' => 'my task title is amazing', 'owner_id' => 0)));
