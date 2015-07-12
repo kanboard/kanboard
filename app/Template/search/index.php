@@ -9,7 +9,7 @@
     </div>
 
     <div class="search">
-        <form method="get" action="?" class="search">
+        <form method="get" action="<?= $this->url->dir() ?>" class="search">
             <?= $this->form->hidden('controller', $values) ?>
             <?= $this->form->hidden('action', $values) ?>
             <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>

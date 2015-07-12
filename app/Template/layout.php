@@ -20,11 +20,11 @@
         <?= $this->asset->css('assets/css/print.css', true, 'print') ?>
         <?= $this->asset->customCss() ?>
 
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
-        <link rel="apple-touch-icon" href="assets/img/touch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="assets/img/touch-icon-ipad.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="assets/img/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="assets/img/touch-icon-ipad-retina.png">
+        <link rel="icon" type="image/png" href="<?= $this->url->dir() ?>assets/img/favicon.png">
+        <link rel="apple-touch-icon" href="<?= $this->url->dir() ?>assets/img/touch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="<?= $this->url->dir() ?>assets/img/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="<?= $this->url->dir() ?>assets/img/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="<?= $this->url->dir() ?>assets/img/touch-icon-ipad-retina.png">
 
         <title><?= isset($title) ? $this->e($title) : 'Kanboard' ?></title>
     </head>

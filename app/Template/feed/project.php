@@ -2,15 +2,15 @@
 <feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
     <title><?= t('%s\'s activity', $project['name']) ?></title>
     <link rel="alternate" type="text/html" href="<?= $this->url->base() ?>"/>
-    <link rel="self" type="application/atom+xml" href="<?= $this->url->base().$this->url->href('feed', 'project', array('token' => $project['token'])) ?>"/>
+    <link rel="self" type="application/atom+xml" href="<?= $this->url->href('feed', 'project', array('token' => $project['token']), false, '', true) ?>"/>
     <updated><?= date(DATE_ATOM) ?></updated>
-    <id><?= $this->url->base().$this->url->href('feed', 'project', array('token' => $project['token'])) ?></id>
+    <id><?= $this->url->href('feed', 'project', array('token' => $project['token']), false, '', true) ?></id>
     <icon><?= $this->url->base() ?>assets/img/favicon.png</icon>
 
     <?php foreach ($events as $e): ?>
     <entry>
         <title type="text"><?= $e['event_title'] ?></title>
-        <link rel="alternate" href="<?= $this->url->base().$this->url->href('task', 'show', array('task_id' => $e['task_id'])) ?>"/>
+        <link rel="alternate" href="<?= $this->url->href('task', 'show', array('task_id' => $e['task_id']), false, '', true) ?>"/>
         <id><?= $e['id'].'-'.$e['event_name'].'-'.$e['task_id'].'-'.$e['date_creation'] ?></id>
         <published><?= date(DATE_ATOM, $e['date_creation']) ?></published>
         <updated><?= date(DATE_ATOM, $e['date_creation']) ?></updated>

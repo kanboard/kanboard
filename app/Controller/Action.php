@@ -46,7 +46,7 @@ class Action extends Base
         $values = $this->request->getValues();
 
         if (empty($values['action_name']) || empty($values['project_id'])) {
-            $this->response->redirect('?controller=action&action=index&project_id='.$project['id']);
+            $this->response->redirect($this->helper->url->to('action', 'index', array('project_id' => $project['id'])));
         }
 
         $this->response->html($this->projectLayout('action/event', array(
@@ -68,7 +68,7 @@ class Action extends Base
         $values = $this->request->getValues();
 
         if (empty($values['action_name']) || empty($values['project_id']) || empty($values['event_name'])) {
-            $this->response->redirect('?controller=action&action=index&project_id='.$project['id']);
+            $this->response->redirect($this->helper->url->to('action', 'index', array('project_id' => $project['id'])));
         }
 
         $action = $this->action->load($values['action_name'], $values['project_id'], $values['event_name']);
@@ -125,7 +125,7 @@ class Action extends Base
             }
         }
 
-        $this->response->redirect('?controller=action&action=index&project_id='.$project['id']);
+        $this->response->redirect($this->helper->url->to('action', 'index', array('project_id' => $project['id'])));
     }
 
     /**
@@ -163,6 +163,6 @@ class Action extends Base
             $this->session->flashError(t('Unable to remove this action.'));
         }
 
-        $this->response->redirect('?controller=action&action=index&project_id='.$project['id']);
+        $this->response->redirect($this->helper->url->to('action', 'index', array('project_id' => $project['id'])));
     }
 }

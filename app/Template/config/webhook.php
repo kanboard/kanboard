@@ -26,7 +26,7 @@
         </li>
         <li>
             <?= t('URL for task creation:') ?>
-            <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().$this->url->href('webhook', 'task', array('token' => $values['webhook_token'])) ?>">
+            <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'task', array('token' => $values['webhook_token']), false, '', true) ?>">
         </li>
         <li>
             <?= $this->url->link(t('Reset token'), 'config', 'token', array('type' => 'webhook'), true) ?>

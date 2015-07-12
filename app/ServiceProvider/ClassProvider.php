@@ -72,6 +72,7 @@ class ClassProvider implements ServiceProviderInterface
             'Lexer',
             'MemoryCache',
             'Request',
+            'Router',
             'Session',
             'Template',
         ),
