@@ -82,6 +82,7 @@ Technical details
 
 ### Installation
 
+- [Recommended configuration](recommended-configuration.markdown)
 - [Installation instructions](installation.markdown)
 - [Upgrade Kanboard to a new version](update.markdown)
 - [Installation on Ubuntu](ubuntu-installation.markdown)
@@ -97,6 +98,7 @@ Technical details
 ### Configuration
 
 - [Email configuration](email-configuration.markdown)
+- [URL rewriting](nice-urls.markdown)
 
 ### Database
 
