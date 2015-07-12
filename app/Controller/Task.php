@@ -454,7 +454,6 @@ class Task extends Base
     public function recurrence()
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
         if ($this->request->isPost()) {
 
@@ -471,12 +470,7 @@ class Task extends Base
                     $this->session->flashError(t('Unable to update your task.'));
                 }
 
-                if ($ajax) {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                }
-                else {
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-                }
+                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
             }
         }
         else {
@@ -488,19 +482,13 @@ class Task extends Base
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'ajax' => $ajax,
             'recurrence_status_list' => $this->task->getRecurrenceStatusList(),
             'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
             'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
             'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
         );
 
-        if ($ajax) {
-            $this->response->html($this->template->render('task/edit_recurrence', $params));
-        }
-        else {
-            $this->response->html($this->taskLayout('task/edit_recurrence', $params));
-        }
+        $this->response->html($this->taskLayout('task/edit_recurrence', $params));
     }
 
     /**
