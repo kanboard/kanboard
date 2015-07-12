@@ -92,9 +92,7 @@ if (ENABLE_URL_REWRITE) {
     // Board routes
     $container['router']->addRoute('board/:project_id', 'board', 'show', array('project_id'));
     $container['router']->addRoute('b/:project_id', 'board', 'show', array('project_id'));
-    $container['router']->addRoute('board/:project_id/:search', 'board', 'show', array('project_id', 'search'));
-    $container['router']->addRoute('board/collapse/:project_id', 'board', 'collapse', array('project_id'));
-    $container['router']->addRoute('board/expand/:project_id', 'board', 'expand', array('project_id'));
+    $container['router']->addRoute('board/:project_id/filter/:search', 'board', 'show', array('project_id', 'search'));
     $container['router']->addRoute('public/board/:token', 'board', 'readonly', array('token'));
 
     // Calendar routes
