@@ -88,15 +88,7 @@ class Board extends Base
             return $this->response->status(400);
         }
 
-        $this->response->html(
-            $this->template->render('board/table_container', array(
-                'project' => $this->project->getById($project_id),
-                'swimlanes' => $this->taskFilter->search($this->userSession->getFilters($project_id))->getBoard($project_id),
-                'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-                'board_highlight_period' => $this->config->get('board_highlight_period'),
-            )),
-            201
-        );
+        $this->response->html($this->renderBoard($project_id), 201);
     }
 
     /**
@@ -121,14 +113,7 @@ class Board extends Base
             return $this->response->status(304);
         }
 
-        $this->response->html(
-            $this->template->render('board/table_container', array(
-                'project' => $this->project->getById($project_id),
-                'swimlanes' => $this->taskFilter->search($this->userSession->getFilters($project_id))->getBoard($project_id),
-                'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-                'board_highlight_period' => $this->config->get('board_highlight_period'),
-            ))
-        );
+        $this->response->html($this->renderBoard($project_id));
     }
 
     /**
@@ -318,9 +303,7 @@ class Board extends Base
      */
     public function collapse()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $this->userSession->setBoardDisplayMode($project_id, true);
-        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project_id)));
+        $this->changeDisplayMode(true);
     }
 
     /**
@@ -330,8 +313,39 @@ class Board extends Base
      */
     public function expand()
     {
+        $this->changeDisplayMode(false);
+    }
+
+    /**
+     * Change display mode
+     *
+     * @access private
+     */
+    private function changeDisplayMode($mode)
+    {
         $project_id = $this->request->getIntegerParam('project_id');
-        $this->userSession->setBoardDisplayMode($project_id, false);
-        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project_id)));
+        $this->userSession->setBoardDisplayMode($project_id, $mode);
+
+        if ($this->request->isAjax()) {
+            $this->response->html($this->renderBoard($project_id));
+        }
+        else {
+            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project_id)));
+        }
+    }
+
+    /**
+     * Render board
+     *
+     * @access private
+     */
+    private function renderBoard($project_id)
+    {
+        return $this->template->render('board/table_container', array(
+            'project' => $this->project->getById($project_id),
+            'swimlanes' => $this->taskFilter->search($this->userSession->getFilters($project_id))->getBoard($project_id),
+            'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
+            'board_highlight_period' => $this->config->get('board_highlight_period'),
+        ));
     }
 }

@@ -20,7 +20,19 @@
         });
 
         Mousetrap.bind("s", function() {
-            window.location = $(".board-display-mode").attr("href");
+            $.ajax({
+                cache: false,
+                url: $('.filter-display-mode:not([style="display: none;"]) a').attr('href'),
+                success: function(data) {
+                    $("#board-container").remove();
+                    $("#main").append(data);
+                    Kanboard.InitAfterAjax();
+                    board_unload_events();
+                    board_load_events();
+                    compactview_reload();
+                    $('.filter-display-mode').toggle();
+                }
+            });
         });
 
         Mousetrap.bind("c", function() {

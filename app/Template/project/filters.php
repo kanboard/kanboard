@@ -5,13 +5,14 @@
             <ul>
                 <?php if (isset($is_board)): ?>
                 <li>
-                    <?php if ($this->board->isCollapsed($project['id'])): ?>
+                    <span class="filter-display-mode" <?= $this->board->isCollapsed($project['id']) ? '' : 'style="display: none;"' ?>>
                         <i class="fa fa-expand fa-fw"></i>
                         <?= $this->url->link(t('Expand tasks'), 'board', 'expand', array('project_id' => $project['id']), false, 'board-display-mode', t('Keyboard shortcut: "%s"', 's')) ?>
-                    <?php else: ?>
+                    </span>
+                    <span class="filter-display-mode" <?= $this->board->isCollapsed($project['id']) ? 'style="display: none;"' : '' ?>>
                         <i class="fa fa-compress fa-fw"></i>
                         <?= $this->url->link(t('Collapse tasks'), 'board', 'collapse', array('project_id' => $project['id']), false, 'board-display-mode', t('Keyboard shortcut: "%s"', 's')) ?>
-                    <?php endif ?>
+                    </span>
                 </li>
                 <li>
                     <span class="filter-compact">
