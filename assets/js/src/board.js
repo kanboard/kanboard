@@ -20,80 +20,24 @@
         });
 
         Mousetrap.bind("s", function() {
-            stack_toggle();
+            $.ajax({
+                cache: false,
+                url: $('.filter-display-mode:not([style="display: none;"]) a').attr('href'),
+                success: function(data) {
+                    $("#board-container").remove();
+                    $("#main").append(data);
+                    Kanboard.InitAfterAjax();
+                    board_unload_events();
+                    board_load_events();
+                    compactview_reload();
+                    $('.filter-display-mode').toggle();
+                }
+            });
         });
 
         Mousetrap.bind("c", function() {
             compactview_toggle();
         });
-    }
-
-    // Collapse/Expand tasks
-    function stack_load_events()
-    {
-        $(".filter-expand-link").click(function(e) {
-            e.preventDefault();
-            stack_expand();
-            Kanboard.SetStorageItem(stack_key(), "expanded");
-        });
-
-        $(".filter-collapse-link").click(function(e) {
-            e.preventDefault();
-            stack_collapse();
-            Kanboard.SetStorageItem(stack_key(), "collapsed");
-        });
-
-        stack_show();
-    }
-
-    function stack_key()
-    {
-        var projectId = $('#board').data('project-id');
-        return "board_stacking_" + projectId;
-    }
-
-    function stack_collapse()
-    {
-        $(".filter-collapse").hide();
-        $(".task-board-collapsed").show();
-
-        $(".filter-expand").show();
-        $(".task-board-expanded").hide();
-    }
-
-    function stack_expand()
-    {
-        $(".filter-collapse").show();
-        $(".task-board-collapsed").hide();
-
-        $(".filter-expand").hide();
-        $(".task-board-expanded").show();
-    }
-
-    function stack_toggle()
-    {
-        var state = Kanboard.GetStorageItem(stack_key()) || "expanded";
-
-        if (state === "expanded") {
-            stack_collapse();
-            Kanboard.SetStorageItem(stack_key(), "collapsed");
-        }
-        else {
-            stack_expand();
-            Kanboard.SetStorageItem(stack_key(), "expanded");
-        }
-    }
-
-    function stack_show()
-    {
-        var state = Kanboard.GetStorageItem(stack_key()) || "expanded";
-
-        if (state === "expanded") {
-            stack_expand();
-        }
-        else {
-            stack_collapse();
-        }
     }
 
     // Setup the board
@@ -243,7 +187,6 @@
                 $("#main").append(data);
                 Kanboard.InitAfterAjax();
                 board_load_events();
-                stack_show();
                 compactview_reload();
             }
         });
@@ -263,7 +206,6 @@
                         Kanboard.InitAfterAjax();
                         board_unload_events();
                         board_load_events();
-                        stack_show();
                         compactview_reload();
                     }
                 }
@@ -312,7 +254,6 @@
 
         if (Kanboard.Exists("board")) {
             board_load_events();
-            stack_load_events();
             compactview_load_events();
             keyboard_shortcuts();
         }

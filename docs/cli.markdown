@@ -13,36 +13,35 @@ Usage
 - Run the command `./kanboard`
 
 ```bash
-$ ./kanboard
 Kanboard version master
 
 Usage:
- command [options] [arguments]
+  command [options] [arguments]
 
 Options:
- --help (-h)           Display this help message
- --quiet (-q)          Do not output any message
- --verbose (-v|vv|vvv) Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
- --version (-V)        Display this application version
- --ansi                Force ANSI output
- --no-ansi             Disable ANSI output
- --no-interaction (-n) Do not ask any interactive question
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
 Available commands:
- help                           Displays help for a command
- list                           Lists commands
-export
- export:daily-project-summary   Daily project summary CSV export (number of tasks per column and per day)
- export:subtasks                Subtasks CSV export
- export:tasks                   Tasks CSV export
- export:transitions             Task transitions CSV export
-locale
-  locale:compare                Compare application translations with the fr_FR locale
-  locale:sync                   Synchronize all translations based on the fr_FR locale
-notification
- notification:overdue-tasks     Send notifications for overdue tasks
-projects
- projects:daily-summary         Calculate daily summary data for all projects
+  help                               Displays help for a command
+  list                               Lists commands
+ export
+  export:daily-project-column-stats  Daily project column stats CSV export (number of tasks per column and per day)
+  export:subtasks                    Subtasks CSV export
+  export:tasks                       Tasks CSV export
+  export:transitions                 Task transitions CSV export
+ locale
+  locale:compare                     Compare application translations with the fr_FR locale
+  locale:sync                        Synchronize all translations based on the fr_FR locale
+ notification
+  notification:overdue-tasks         Send notifications for overdue tasks
+ projects
+  projects:daily-stats               Calculate daily statistics for all projects
 ```
 
 Available commands
@@ -97,13 +96,13 @@ Example:
 The exported data will be printed on the standard output:
 
 ```bash
-./kanboard export:daily-project-summary <project_id> <start_date> <end_date>
+./kanboard export:daily-project-column-stats <project_id> <start_date> <end_date>
 ```
 
 Example:
 
 ```bash
-./kanboard export:daily-project-summary 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./kanboard export:daily-project-column-stats 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
 ### Send notifications for overdue tasks
@@ -133,12 +132,12 @@ Cronjob example:
 0 8 * * *  cd /path/to/kanboard && ./kanboard notification:overdue-tasks >/dev/null 2>&1
 ```
 
-### Run daily project summaries calculation
+### Run daily project stats calculation
 
-You can add a background task that calculate the daily project summaries everyday:
+You can add a background task to calculate the project statistics everyday:
 
 ```bash
-$ ./kanboard projects:daily-summary
+$ ./kanboard projects:daily-stats
 Run calculation for Project #0
 Run calculation for Project #1
 Run calculation for Project #10

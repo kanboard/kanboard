@@ -2,53 +2,151 @@
 
 namespace Core;
 
-use Pimple\Container;
-
 /**
  * Router class
  *
  * @package core
  * @author  Frederic Guillot
  */
-class Router
+class Router extends Base
 {
     /**
-     * Controller name
+     * Store routes for path lookup
      *
      * @access private
-     * @var string
+     * @var array
      */
-    private $controller = '';
+    private $paths = array();
 
     /**
-     * Action name
+     * Store routes for url lookup
      *
      * @access private
-     * @var string
+     * @var array
      */
-    private $action = '';
+    private $urls = array();
 
     /**
-     * Container instance
-     *
-     * @access private
-     * @var \Pimple\Container
-     */
-    private $container;
-
-    /**
-     * Constructor
+     * Get the path to compare patterns
      *
      * @access public
-     * @param  \Pimple\Container   $container     Container instance
-     * @param  string              $controller    Controller name
-     * @param  string              $action        Action name
+     * @param  string  $uri
+     * @param  string  $query_string
+     * @return string
      */
-    public function __construct(Container $container, $controller = '', $action = '')
+    public function getPath($uri, $query_string = '')
     {
-        $this->container = $container;
-        $this->controller = empty($_GET['controller']) ? $controller : $_GET['controller'];
-        $this->action = empty($_GET['action']) ? $action : $_GET['action'];
+        $path = substr($uri, strlen($this->helper->url->dir()));
+
+        if (! empty($query_string)) {
+            $path = substr($path, 0, - strlen($query_string) - 1);
+        }
+
+        if ($path{0} === '/') {
+            $path = substr($path, 1);
+        }
+
+        return $path;
+    }
+
+    /**
+     * Add route
+     *
+     * @access public
+     * @param  string   $path
+     * @param  string   $controller
+     * @param  string   $action
+     * @param  array    $params
+     */
+    public function addRoute($path, $controller, $action, array $params = array())
+    {
+        $pattern = explode('/', $path);
+
+        $this->paths[] = array(
+            'pattern' => $pattern,
+            'count' => count($pattern),
+            'controller' => $controller,
+            'action' => $action,
+        );
+
+        $this->urls[$controller][$action][] = array(
+            'path' => $path,
+            'params' => array_flip($params),
+            'count' => count($params),
+        );
+    }
+
+    /**
+     * Find a route according to the given path
+     *
+     * @access public
+     * @param  string   $path
+     * @return array
+     */
+    public function findRoute($path)
+    {
+        $parts = explode('/', $path);
+        $count = count($parts);
+
+        foreach ($this->paths as $route) {
+
+            if ($count === $route['count']) {
+
+                $params = array();
+
+                for ($i = 0; $i < $count; $i++) {
+
+                    if ($route['pattern'][$i]{0} === ':') {
+                        $params[substr($route['pattern'][$i], 1)] = $parts[$i];
+                    }
+                    else if ($route['pattern'][$i] !== $parts[$i]) {
+                        break;
+                    }
+                }
+
+                if ($i === $count) {
+                    $_GET = array_merge($_GET, $params);
+                    return array($route['controller'], $route['action']);
+                }
+            }
+        }
+
+        return array('app', 'index');
+    }
+
+    /**
+     * Find route url
+     *
+     * @access public
+     * @param  string   $controller
+     * @param  string   $action
+     * @param  array    $params
+     * @return string
+     */
+    public function findUrl($controller, $action, array $params = array())
+    {
+        if (! isset($this->urls[$controller][$action])) {
+            return '';
+        }
+
+        foreach ($this->urls[$controller][$action] as $pattern) {
+
+            if (array_diff_key($params, $pattern['params']) === array()) {
+                $url = $pattern['path'];
+                $i = 0;
+
+                foreach ($params as $variable => $value) {
+                    $url = str_replace(':'.$variable, $value, $url);
+                    $i++;
+                }
+
+                if ($i === $pattern['count']) {
+                    return $url;
+                }
+            }
+        }
+
+        return '';
     }
 
     /**
@@ -65,15 +163,42 @@ class Router
     }
 
     /**
-     * Load a controller and execute the action
+     * Find controller/action from the route table or from get arguments
      *
      * @access public
-     * @param  string $filename Controller filename
-     * @param  string $class Class name
-     * @param  string $method Method name
+     * @param  string  $uri
+     * @param  string  $query_string
+     * @return boolean
+     */
+    public function dispatch($uri, $query_string = '')
+    {
+        if (! empty($_GET['controller']) && ! empty($_GET['action'])) {
+            $controller = $this->sanitize($_GET['controller'], 'app');
+            $action = $this->sanitize($_GET['action'], 'index');
+        }
+        else {
+            list($controller, $action) = $this->findRoute($this->getPath($uri, $query_string));
+        }
+
+        return $this->load(
+            __DIR__.'/../Controller/'.ucfirst($controller).'.php',
+            $controller,
+            '\Controller\\'.ucfirst($controller),
+            $action
+        );
+    }
+
+    /**
+     * Load a controller and execute the action
+     *
+     * @access private
+     * @param  string $filename
+     * @param  string $controller
+     * @param  string $class
+     * @param  string $method
      * @return bool
      */
-    public function load($filename, $class, $method)
+    private function load($filename, $controller, $class, $method)
     {
         if (file_exists($filename)) {
 
@@ -84,28 +209,12 @@ class Router
             }
 
             $instance = new $class($this->container);
-            $instance->beforeAction($this->controller, $this->action);
+            $instance->beforeAction($controller, $method);
             $instance->$method();
 
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Find a route
-     *
-     * @access public
-     */
-    public function execute()
-    {
-        $this->controller = $this->sanitize($this->controller, 'app');
-        $this->action = $this->sanitize($this->action, 'index');
-        $filename = __DIR__.'/../Controller/'.ucfirst($this->controller).'.php';
-
-        if (! $this->load($filename, '\Controller\\'.$this->controller, $this->action)) {
-            die('Page not found!');
-        }
     }
 }

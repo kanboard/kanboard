@@ -10,25 +10,6 @@ Kanboard works well with any great VPS hosting provider such as [Digital Ocean](
 To have the best performances, choose a provider with fast disk I/O because Kanboard use Sqlite by default.
 Avoid hosting providers that use a shared NFS mount point.
 
-
-Which web browsers are supported?
----------------------------------
-
-Kanboard have been tested on the following devices:
-
-### Desktop
-
-- Mozilla Firefox
-- Safari
-- Google Chrome
-- Internet Explorer 11
-
-### Tablets
-
-- iPad (iOS)
-- Nexus 7 (Android/Chrome)
-
-
 I get a blank page after installing or upgrading Kanboard
 ---------------------------------------------------------
 

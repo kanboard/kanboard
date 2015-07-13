@@ -6,7 +6,26 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 78;
+const VERSION = 79;
+
+function version_79($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_daily_stats (
+            id INT NOT NULL AUTO_INCREMENT,
+            day CHAR(10) NOT NULL,
+            project_id INT NOT NULL,
+            avg_lead_time INT NOT NULL DEFAULT 0,
+            avg_cycle_time INT NOT NULL DEFAULT 0,
+            PRIMARY KEY(id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec('CREATE UNIQUE INDEX project_daily_stats_idx ON project_daily_stats(day, project_id)');
+
+    $pdo->exec('RENAME TABLE project_daily_summaries TO project_daily_column_stats');
+}
 
 function version_78($pdo)
 {

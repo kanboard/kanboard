@@ -101,7 +101,7 @@ abstract class Base extends \Core\Base
     public function beforeAction($controller, $action)
     {
         // Start the session
-        $this->session->open(BASE_URL_DIRECTORY);
+        $this->session->open($this->helper->url->dir());
         $this->sendHeaders($action);
         $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
 
@@ -223,17 +223,6 @@ abstract class Base extends \Core\Base
     }
 
     /**
-     * Redirection when there is no project in the database
-     *
-     * @access protected
-     */
-    protected function redirectNoProject()
-    {
-        $this->session->flash(t('There is no active project, the first step is to create a new project.'));
-        $this->response->redirect('?controller=project&action=create');
-    }
-
-    /**
      * Common layout for task views
      *
      * @access protected
@@ -301,7 +290,7 @@ abstract class Base extends \Core\Base
 
         if (empty($project)) {
             $this->session->flashError(t('Project not found.'));
-            $this->response->redirect('?controller=project');
+            $this->response->redirect($this->helper->url->to('project', 'index'));
         }
 
         return $project;
@@ -344,10 +333,10 @@ abstract class Base extends \Core\Base
             'controller' => $controller,
             'action' => $action,
             'project_id' => $project['id'],
-            'search' => $search,
+            'search' => urldecode($search),
         );
 
-        $this->userSession->setFilters($project['id'], $search);
+        $this->userSession->setFilters($project['id'], $filters['search']);
 
         return array(
             'project' => $project,

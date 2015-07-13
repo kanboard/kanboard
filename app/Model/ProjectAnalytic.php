@@ -89,6 +89,43 @@ class ProjectAnalytic extends Base
     }
 
     /**
+     * Get the average lead and cycle time
+     *
+     * @access public
+     * @param  integer   $project_id
+     * @return array
+     */
+    public function getAverageLeadAndCycleTime($project_id)
+    {
+        $stats = array(
+            'count' => 0,
+            'total_lead_time' => 0,
+            'total_cycle_time' => 0,
+            'avg_lead_time' => 0,
+            'avg_cycle_time' => 0,
+        );
+
+        $tasks = $this->db
+            ->table(Task::TABLE)
+            ->columns('date_completed', 'date_creation', 'date_started')
+            ->eq('project_id', $project_id)
+            ->desc('id')
+            ->limit(1000)
+            ->findAll();
+
+        foreach ($tasks as &$task) {
+            $stats['count']++;
+            $stats['total_lead_time'] += ($task['date_completed'] ?: time()) - $task['date_creation'];
+            $stats['total_cycle_time'] += empty($task['date_started']) ? 0 : ($task['date_completed'] ?: time()) - $task['date_started'];
+        }
+
+        $stats['avg_lead_time'] = (int) ($stats['total_lead_time'] / $stats['count']);
+        $stats['avg_cycle_time'] = (int) ($stats['total_cycle_time'] / $stats['count']);
+
+        return $stats;
+    }
+
+    /**
      * Get the average time spent into each column
      *
      * @access public

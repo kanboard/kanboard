@@ -32,6 +32,13 @@ define('FILES_DIR', 'data/files/');
 
 Don't forget the trailing slash.
 
+Enable/disable url rewrite
+--------------------------
+
+```php
+define('ENABLE_URL_REWRITE', false);
+```
+
 Email configuration
 -------------------
 

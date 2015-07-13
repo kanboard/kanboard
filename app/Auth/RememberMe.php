@@ -282,7 +282,7 @@ class RememberMe extends Base
             self::COOKIE_NAME,
             $this->encodeCookie($token, $sequence),
             $expiration,
-            BASE_URL_DIRECTORY,
+            $this->helper->url->dir(),
             null,
             Request::isHTTPS(),
             true
@@ -315,7 +315,7 @@ class RememberMe extends Base
             self::COOKIE_NAME,
             '',
             time() - 3600,
-            BASE_URL_DIRECTORY,
+            $this->helper->url->dir(),
             null,
             Request::isHTTPS(),
             true

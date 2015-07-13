@@ -33,6 +33,7 @@ Using Kanboard
 - [Recurring tasks](recurring-tasks.markdown)
 - [Create tasks by email](create-tasks-by-email.markdown)
 - [Subtasks](subtasks.markdown)
+- [Analytics for tasks](analytics-tasks.markdown)
 
 ### Working with users
 
@@ -81,6 +82,7 @@ Technical details
 
 ### Installation
 
+- [Recommended configuration](recommended-configuration.markdown)
 - [Installation instructions](installation.markdown)
 - [Upgrade Kanboard to a new version](update.markdown)
 - [Installation on Ubuntu](ubuntu-installation.markdown)
@@ -96,6 +98,7 @@ Technical details
 ### Configuration
 
 - [Email configuration](email-configuration.markdown)
+- [URL rewriting](nice-urls.markdown)
 
 ### Database
 
