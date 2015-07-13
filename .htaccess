@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    SetEnv HTTP_MOD_REWRITE On
+
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>

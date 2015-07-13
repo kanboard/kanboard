@@ -178,7 +178,7 @@ class User extends Base
         $this->checkCSRFParam();
         $user = $this->getUser();
         $this->authentication->backend('rememberMe')->remove($this->request->getIntegerParam('id'));
-        $this->response->redirect('?controller=user&action=sessions&user_id='.$user['id']);
+        $this->response->redirect($this->helper->url->to('user', 'session', array('user_id' => $user['id'])));
     }
 
     /**
@@ -194,7 +194,7 @@ class User extends Base
             $values = $this->request->getValues();
             $this->notification->saveSettings($user['id'], $values);
             $this->session->flash(t('User updated successfully.'));
-            $this->response->redirect('?controller=user&action=notifications&user_id='.$user['id']);
+            $this->response->redirect($this->helper->url->to('user', 'notifications', array('user_id' => $user['id'])));
         }
 
         $this->response->html($this->layout('user/notifications', array(
@@ -272,7 +272,7 @@ class User extends Base
                     $this->session->flashError(t('Unable to change the password.'));
                 }
 
-                $this->response->redirect('?controller=user&action=show&user_id='.$user['id']);
+                $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
             }
         }
 
@@ -321,7 +321,7 @@ class User extends Base
                     $this->session->flashError(t('Unable to update your user.'));
                 }
 
-                $this->response->redirect('?controller=user&action=show&user_id='.$user['id']);
+                $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
             }
         }
 
@@ -353,7 +353,7 @@ class User extends Base
                 $this->session->flashError(t('Unable to remove this user.'));
             }
 
-            $this->response->redirect('?controller=user');
+            $this->response->redirect($this->helper->url->to('user', 'index'));
         }
 
         $this->response->html($this->layout('user/remove', array(
@@ -386,10 +386,10 @@ class User extends Base
                         $this->session->flashError(t('Unable to link your Google Account.'));
                     }
 
-                    $this->response->redirect('?controller=user&action=external&user_id='.$this->userSession->getId());
+                    $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
                 }
                 else if ($this->authentication->backend('google')->authenticate($profile['id'])) {
-                    $this->response->redirect('?controller=app');
+                    $this->response->redirect($this->helper->url->to('app', 'index'));
                 }
                 else {
                     $this->response->html($this->template->layout('auth/index', array(
@@ -421,7 +421,7 @@ class User extends Base
             $this->session->flashError(t('Unable to unlink your Google Account.'));
         }
 
-        $this->response->redirect('?controller=user&action=external&user_id='.$this->userSession->getId());
+        $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
     }
 
     /**
@@ -448,10 +448,10 @@ class User extends Base
                         $this->session->flashError(t('Unable to link your GitHub Account.'));
                     }
 
-                    $this->response->redirect('?controller=user&action=external&user_id='.$this->userSession->getId());
+                    $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
                 }
                 else if ($this->authentication->backend('gitHub')->authenticate($profile['id'])) {
-                    $this->response->redirect('?controller=app');
+                    $this->response->redirect($this->helper->url->to('app', 'index'));
                 }
                 else {
                     $this->response->html($this->template->layout('auth/index', array(
@@ -486,6 +486,6 @@ class User extends Base
             $this->session->flashError(t('Unable to unlink your GitHub Account.'));
         }
 
-        $this->response->redirect('?controller=user&action=external&user_id='.$this->userSession->getId());
+        $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
     }
 }

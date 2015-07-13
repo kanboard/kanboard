@@ -3,11 +3,11 @@
 
 require __DIR__.'/../app/common.php';
 
-use Model\ProjectDailySummary;
+use Model\ProjectDailyColumnStats;
 use Model\TaskCreation;
 use Model\TaskPosition;
 
-$pds = new ProjectDailySummary($container);
+$pds = new ProjectDailyColumnStats($container);
 $taskCreation = new TaskCreation($container);
 $taskPosition = new TaskPosition($container);
 

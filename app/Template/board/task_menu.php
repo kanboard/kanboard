@@ -9,7 +9,6 @@
             <li><i class="fa fa-comment-o"></i> <?= $this->url->link(t('Add a comment'), 'comment', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
             <li><i class="fa fa-code-fork"></i> <?= $this->url->link(t('Add a link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
             <li><i class="fa fa-camera"></i> <?= $this->url->link(t('Add a screenshot'), 'board', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
-            <li><i class="fa fa-refresh fa-rotate-90"></i> <?= $this->url->link(t('Edit recurrence'), 'task', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-popover') ?></li>
             <li><i class="fa fa-close"></i> <?= $this->url->link(t('Close this task'), 'task', 'close', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => 'board'), false, 'task-board-popover') ?></li>
         </ul>
     </span>

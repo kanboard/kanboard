@@ -15,6 +15,36 @@ use Model\Swimlane;
 
 class TaskDuplicationTest extends Base
 {
+    public function testThatDuplicateDefineCreator()
+    {
+        $td = new TaskDuplication($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
+
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['position']);
+        $this->assertEquals(1, $task['project_id']);
+        $this->assertEquals(0, $task['creator_id']);
+
+        $_SESSION = array();
+        $_SESSION['user']['id'] = 1;
+
+        // We duplicate our task
+        $this->assertEquals(2, $td->duplicate(1));
+
+        // Check the values of the duplicated task
+        $task = $tf->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['creator_id']);
+
+        $_SESSION = array();
+    }
+
     public function testDuplicateSameProject()
     {
         $td = new TaskDuplication($this->container);

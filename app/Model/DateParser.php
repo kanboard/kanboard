@@ -85,8 +85,7 @@ class DateParser extends Base
      */
     public function getTimestamp($value)
     {
-        foreach ($this->getDateFormats() as $format) {
-
+        foreach ($this->getAllFormats() as $format) {
             $timestamp = $this->getValidDate($value, $format);
 
             if ($timestamp !== 0) {
@@ -95,6 +94,25 @@ class DateParser extends Base
         }
 
         return 0;
+    }
+
+    /**
+     * Get all combinations of date/time formats
+     *
+     * @access public
+     * @return []string
+     */
+    public function getAllFormats()
+    {
+        $formats = array();
+
+        foreach ($this->getDateFormats() as $date) {
+            foreach ($this->getTimeFormats() as $time) {
+                $formats[] = $date.' '.$time;
+            }
+        }
+
+        return array_merge($formats, $this->getDateFormats());
     }
 
     /**
@@ -109,6 +127,21 @@ class DateParser extends Base
             $this->config->get('application_date_format', 'm/d/Y'),
             'Y-m-d',
             'Y_m_d',
+        );
+    }
+
+    /**
+     * Return the list of supported time formats (for the parser)
+     *
+     * @access public
+     * @return string[]
+     */
+    public function getTimeFormats()
+    {
+        return array(
+            'H:i',
+            'g:i A',
+            'g:iA',
         );
     }
 
@@ -143,7 +176,7 @@ class DateParser extends Base
      * Get a timetstamp from an ISO date format
      *
      * @access public
-     * @param  string   $date   Date format
+     * @param  string   $date
      * @return integer
      */
     public function getTimestampFromIsoFormat($date)
@@ -166,7 +199,6 @@ class DateParser extends Base
         }
 
         foreach ($fields as $field) {
-
             if (! empty($values[$field])) {
                 $values[$field] = date($format, $values[$field]);
             }
@@ -180,15 +212,16 @@ class DateParser extends Base
      * Convert date (form input data)
      *
      * @access public
-     * @param  array    $values   Database values
-     * @param  string[] $fields   Date fields
+     * @param  array    $values     Database values
+     * @param  string[] $fields     Date fields
+     * @param  boolean  $keep_time  Keep time or not
      */
-    public function convert(array &$values, array $fields)
+    public function convert(array &$values, array $fields, $keep_time = false)
     {
         foreach ($fields as $field) {
-
             if (! empty($values[$field]) && ! is_numeric($values[$field])) {
-                $values[$field] = $this->removeTimeFromTimestamp($this->getTimestamp($values[$field]));
+                $timestamp = $this->getTimestamp($values[$field]);
+                $values[$field] = $keep_time ? $timestamp : $this->removeTimeFromTimestamp($timestamp);
             }
         }
     }

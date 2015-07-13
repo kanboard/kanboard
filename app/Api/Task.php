@@ -119,7 +119,7 @@ class Task extends Base
     private function formatTask($task)
     {
         if (! empty($task)) {
-            $task['url'] = $this->helper->url->base().$this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']));
+            $task['url'] = $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
         }
 
         return $task;

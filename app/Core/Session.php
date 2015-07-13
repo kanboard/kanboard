@@ -41,8 +41,6 @@ class Session implements ArrayAccess
      */
     public function open($base_path = '/')
     {
-        $base_path = str_replace('\\', '/', $base_path);
-        
         // HttpOnly and secure flags for session cookie
         session_set_cookie_params(
             self::SESSION_LIFETIME,

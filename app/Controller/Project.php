@@ -73,11 +73,12 @@ class Project extends Base
 
             if ($this->project->{$switch.'PublicAccess'}($project['id'])) {
                 $this->session->flash(t('Project updated successfully.'));
-            } else {
+            }
+            else {
                 $this->session->flashError(t('Unable to update this project.'));
             }
 
-            $this->response->redirect('?controller=project&action=share&project_id='.$project['id']);
+            $this->response->redirect($this->helper->url->to('project', 'share', array('project_id' => $project['id'])));
         }
 
         $this->response->html($this->projectLayout('project/share', array(
@@ -150,7 +151,7 @@ class Project extends Base
 
             if ($this->project->update($values)) {
                 $this->session->flash(t('Project updated successfully.'));
-                $this->response->redirect('?controller=project&action=edit&project_id='.$project['id']);
+                $this->response->redirect($this->helper->url->to('project', 'edit', array('project_id' => $project['id'])));
             }
             else {
                 $this->session->flashError(t('Unable to update this project.'));
@@ -197,7 +198,7 @@ class Project extends Base
             }
         }
 
-        $this->response->redirect('?controller=project&action=users&project_id='.$project['id']);
+        $this->response->redirect($this->helper->url->to('project', 'users', array('project_id' => $project['id'])));
     }
 
     /**
@@ -220,7 +221,7 @@ class Project extends Base
             }
         }
 
-        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
+        $this->response->redirect($this->helper->url->to('project', 'users', array('project_id' => $values['project_id'])));
     }
 
     /**
@@ -250,7 +251,7 @@ class Project extends Base
             }
         }
 
-        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
+        $this->response->redirect($this->helper->url->to('project', 'users', array('project_id' => $values['project_id'])));
     }
 
     /**
@@ -279,7 +280,7 @@ class Project extends Base
             }
         }
 
-        $this->response->redirect('?controller=project&action=users&project_id='.$values['project_id']);
+        $this->response->redirect($this->helper->url->to('project', 'users', array('project_id' => $values['project_id'])));
     }
 
     /**
@@ -301,7 +302,7 @@ class Project extends Base
                 $this->session->flashError(t('Unable to remove this project.'));
             }
 
-            $this->response->redirect('?controller=project');
+            $this->response->redirect($this->helper->url->to('project', 'index'));
         }
 
         $this->response->html($this->projectLayout('project/remove', array(
@@ -329,7 +330,7 @@ class Project extends Base
                 $this->session->flashError(t('Unable to clone this project.'));
             }
 
-            $this->response->redirect('?controller=project');
+            $this->response->redirect($this->helper->url->to('project', 'index'));
         }
 
         $this->response->html($this->projectLayout('project/duplicate', array(
@@ -357,7 +358,7 @@ class Project extends Base
                 $this->session->flashError(t('Unable to disable this project.'));
             }
 
-            $this->response->redirect('?controller=project&action=show&project_id='.$project['id']);
+            $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
         }
 
         $this->response->html($this->projectLayout('project/disable', array(
@@ -385,7 +386,7 @@ class Project extends Base
                 $this->session->flashError(t('Unable to activate this project.'));
             }
 
-            $this->response->redirect('?controller=project&action=show&project_id='.$project['id']);
+            $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
         }
 
         $this->response->html($this->projectLayout('project/enable', array(
@@ -428,7 +429,7 @@ class Project extends Base
 
             if ($project_id > 0) {
                 $this->session->flash(t('Your project have been created successfully.'));
-                $this->response->redirect('?controller=project&action=show&project_id='.$project_id);
+                $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
             }
 
             $this->session->flashError(t('Unable to create your project.'));

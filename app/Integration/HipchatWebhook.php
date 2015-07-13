@@ -72,8 +72,7 @@ class HipchatWebhook extends \Core\Base
             $html .= $this->projectActivity->getTitle($event);
 
             if ($this->config->get('application_url')) {
-                $html .= '<br/><a href="'.$this->config->get('application_url');
-                $html .= $this->helper->url->href('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id)).'">';
+                $html .= '<br/><a href="'.$this->helper->url->href('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id), false, '', true).'">';
                 $html .= t('view the task on Kanboard').'</a>';
             }
 

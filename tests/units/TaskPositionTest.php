@@ -11,49 +11,88 @@ use Model\Swimlane;
 
 class TaskPositionTest extends Base
 {
-    public function testCalculatePositionBadPosition()
+    public function testMoveTaskToWrongPosition()
     {
         $tp = new TaskPosition($this->container);
         $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
-        $this->assertFalse($tp->calculatePositions(1, 1, 2, 0));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+
+        // We move the task 2 to the position 0
+        $this->assertFalse($tp->movePosition(1, 1, 3, 0));
+
+        // Check tasks position
+        $task = $tf->getById(1);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+
+        $task = $tf->getById(2);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
     }
 
-    public function testCalculatePositionBadColumn()
+    public function testMoveTaskToGreaterPosition()
     {
         $tp = new TaskPosition($this->container);
         $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
-        $this->assertFalse($tp->calculatePositions(1, 1, 10, 1));
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+
+        // We move the task 2 to the position 42
+        $this->assertTrue($tp->movePosition(1, 1, 1, 42));
+
+        // Check tasks position
+        $task = $tf->getById(1);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(2, $task['position']);
+
+        $task = $tf->getById(2);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
     }
 
-    public function testCalculatePositions()
+    public function testMoveTaskToEmptyColumn()
     {
         $tp = new TaskPosition($this->container);
         $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
-        $positions = $tp->calculatePositions(1, 1, 2, 1);
-        $this->assertNotFalse($positions);
-        $this->assertNotEmpty($positions);
-        $this->assertEmpty($positions[1]);
-        $this->assertEmpty($positions[3]);
-        $this->assertEmpty($positions[4]);
-        $this->assertEquals(array(1), $positions[2]);
+        $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
+
+        // We move the task 2 to the column 3
+        $this->assertTrue($tp->movePosition(1, 1, 3, 1));
+
+        // Check tasks position
+        $task = $tf->getById(1);
+        $this->assertEquals(1, $task['id']);
+        $this->assertEquals(3, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
+
+        $task = $tf->getById(2);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['position']);
     }
 
-    public function testMoveTaskWithColumnThatNotChange()
+    public function testMoveTaskToAnotherColumn()
     {
         $tp = new TaskPosition($this->container);
         $tc = new TaskCreation($this->container);
@@ -113,40 +152,6 @@ class TaskPositionTest extends Base
         $task = $tf->getById(8);
         $this->assertEquals(8, $task['id']);
         $this->assertEquals(1, $task['column_id']);
-        $this->assertEquals(3, $task['position']);
-    }
-
-    public function testMoveTaskWithBadPreviousPosition()
-    {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $this->container['db']->table('tasks')->insert(array('title' => 'A', 'column_id' => 1, 'project_id' => 1, 'position' => 1)));
-
-        // Both tasks have the same position
-        $this->assertEquals(2, $this->container['db']->table('tasks')->insert(array('title' => 'B', 'column_id' => 2, 'project_id' => 1, 'position' => 1)));
-        $this->assertEquals(3, $this->container['db']->table('tasks')->insert(array('title' => 'C', 'column_id' => 2, 'project_id' => 1, 'position' => 1)));
-
-        // Move the first column to the last position of the 2nd column
-        $this->assertTrue($tp->movePosition(1, 1, 2, 3));
-
-        // Check tasks position
-        $task = $tf->getById(2);
-        $this->assertEquals(2, $task['id']);
-        $this->assertEquals(2, $task['column_id']);
-        $this->assertEquals(1, $task['position']);
-
-        $task = $tf->getById(3);
-        $this->assertEquals(3, $task['id']);
-        $this->assertEquals(2, $task['column_id']);
-        $this->assertEquals(2, $task['position']);
-
-        $task = $tf->getById(1);
-        $this->assertEquals(1, $task['id']);
-        $this->assertEquals(2, $task['column_id']);
         $this->assertEquals(3, $task['position']);
     }
 

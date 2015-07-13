@@ -4,7 +4,6 @@ namespace Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use PicoDb\Table;
 
 /**
  * TaskLink model
