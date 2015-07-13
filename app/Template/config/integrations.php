@@ -6,30 +6,30 @@
 
     <?= $this->form->csrf() ?>
 
-    <h3><img src="assets/img/mailgun-icon.png"/>&nbsp;<?= t('Mailgun (incoming emails)') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/mailgun-icon.png"/>&nbsp;<?= t('Mailgun (incoming emails)') ?></h3>
     <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().$this->url->href('webhook', 'mailgun', array('token' => $values['webhook_token'])) ?>"/><br/>
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'mailgun', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
     <p class="form-help"><a href="http://kanboard.net/documentation/mailgun" target="_blank"><?= t('Help on Mailgun integration') ?></a></p>
     </div>
 
-    <h3><img src="assets/img/sendgrid-icon.png"/>&nbsp;<?= t('Sendgrid (incoming emails)') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/sendgrid-icon.png"/>&nbsp;<?= t('Sendgrid (incoming emails)') ?></h3>
     <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().$this->url->href('webhook', 'sendgrid', array('token' => $values['webhook_token'])) ?>"/><br/>
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'sendgrid', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
     <p class="form-help"><a href="http://kanboard.net/documentation/sendgrid" target="_blank"><?= t('Help on Sendgrid integration') ?></a></p>
     </div>
 
-    <h3><img src="assets/img/postmark-icon.png"/>&nbsp;<?= t('Postmark (incoming emails)') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/postmark-icon.png"/>&nbsp;<?= t('Postmark (incoming emails)') ?></h3>
     <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().$this->url->href('webhook', 'postmark', array('token' => $values['webhook_token'])) ?>"/><br/>
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'postmark', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
     <p class="form-help"><a href="http://kanboard.net/documentation/postmark" target="_blank"><?= t('Help on Postmark integration') ?></a></p>
     </div>
 
-    <h3><img src="assets/img/gravatar-icon.png"/>&nbsp;<?= t('Gravatar') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/gravatar-icon.png"/>&nbsp;<?= t('Gravatar') ?></h3>
     <div class="listing">
         <?= $this->form->checkbox('integration_gravatar', t('Enable Gravatar images'), 1, $values['integration_gravatar'] == 1) ?>
     </div>
 
-    <h3><img src="assets/img/jabber-icon.png"/> <?= t('Jabber (XMPP)') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/jabber-icon.png"/> <?= t('Jabber (XMPP)') ?></h3>
     <div class="listing">
         <?= $this->form->checkbox('integration_jabber', t('Send notifications to Jabber'), 1, $values['integration_jabber'] == 1) ?>
 
@@ -55,7 +55,7 @@
         <p class="form-help"><a href="http://kanboard.net/documentation/jabber" target="_blank"><?= t('Help on Jabber integration') ?></a></p>
     </div>
 
-    <h3><img src="assets/img/hipchat-icon.png"/> <?= t('Hipchat') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/hipchat-icon.png"/> <?= t('Hipchat') ?></h3>
     <div class="listing">
         <?= $this->form->checkbox('integration_hipchat', t('Send notifications to Hipchat'), 1, $values['integration_hipchat'] == 1) ?>
 

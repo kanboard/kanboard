@@ -1,7 +1,7 @@
 <div class="search">
-    <form method="get" action="?" class="search">
+    <form method="get" action="<?= $this->url->dir() ?>" class="search">
         <?= $this->form->hidden('controller', array('controller' => 'search')) ?>
-        <?= $this->form->hidden('action', array('controller' => 'index')) ?>
+        <?= $this->form->hidden('action', array('action' => 'index')) ?>
         <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'form-input-large') ?>
     </form>
 

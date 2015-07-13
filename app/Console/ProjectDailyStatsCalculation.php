@@ -6,13 +6,13 @@ use Model\Project;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ProjectDailySummaryCalculation extends Base
+class ProjectDailyStatsCalculation extends Base
 {
     protected function configure()
     {
         $this
-            ->setName('projects:daily-summary')
-            ->setDescription('Calculate daily summary data for all projects');
+            ->setName('projects:daily-stats')
+            ->setDescription('Calculate daily statistics for all projects');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -21,7 +21,8 @@ class ProjectDailySummaryCalculation extends Base
 
         foreach ($projects as $project) {
             $output->writeln('Run calculation for '.$project['name']);
-            $this->projectDailySummary->updateTotals($project['id'], date('Y-m-d'));
+            $this->projectDailyColumnStats->updateTotals($project['id'], date('Y-m-d'));
+            $this->projectDailyStats->updateTotals($project['id'], date('Y-m-d'));
         }
     }
 }

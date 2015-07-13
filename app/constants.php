@@ -7,9 +7,6 @@ defined('DEBUG_FILE') or define('DEBUG_FILE', __DIR__.'/../data/debug.log');
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
 
-// Base directory
-define('BASE_URL_DIRECTORY', dirname($_SERVER['PHP_SELF']));
-
 // Database driver: sqlite, mysql or postgres
 defined('DB_DRIVER') or define('DB_DRIVER', 'sqlite');
 
@@ -84,3 +81,6 @@ defined('MARKDOWN_ESCAPE_HTML') or define('MARKDOWN_ESCAPE_HTML', true);
 
 // API alternative authentication header, the default is HTTP Basic Authentication defined in RFC2617
 defined('API_AUTHENTICATION_HEADER') or define('API_AUTHENTICATION_HEADER', '');
+
+// Enable/disable url rewrite
+defined('ENABLE_URL_REWRITE') or define('ENABLE_URL_REWRITE', isset($_SERVER['HTTP_MOD_REWRITE']));

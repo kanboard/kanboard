@@ -81,8 +81,7 @@ class Jabber extends \Core\Base
             $payload = '['.$project['name'].'] '.str_replace('&quot;', '"', $this->projectActivity->getTitle($event)).(isset($event['task']['title']) ? ' ('.$event['task']['title'].')' : '');
 
             if ($this->config->get('application_url')) {
-                $payload .= ' '.$this->config->get('application_url');
-                $payload .= $this->helper->url->to('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id));
+                $payload .= ' '.$this->helper->url->to('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id), false, '', true);
             }
 
             $this->sendMessage($project_id, $payload);

@@ -60,7 +60,7 @@ class Config extends Base
                 $this->session->flashError(t('Unable to save your settings.'));
             }
 
-            $this->response->redirect('?controller=config&action='.$redirect);
+            $this->response->redirect($this->helper->url->to('config', $redirect));
         }
     }
 
@@ -199,7 +199,7 @@ class Config extends Base
         $this->checkCSRFParam();
         $this->config->optimizeDatabase();
         $this->session->flash(t('Database optimization done.'));
-        $this->response->redirect('?controller=config');
+        $this->response->redirect($this->helper->url->to('config', 'index'));
     }
 
     /**
@@ -215,6 +215,6 @@ class Config extends Base
         $this->config->regenerateToken($type.'_token');
 
         $this->session->flash(t('Token regenerated.'));
-        $this->response->redirect('?controller=config&action='.$type);
+        $this->response->redirect($this->helper->url->to('config', $type));
     }
 }

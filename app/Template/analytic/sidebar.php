@@ -16,5 +16,8 @@
         <li>
             <?= $this->url->link(t('Average time into each column'), 'analytic', 'averageTimeByColumn', array('project_id' => $project['id'])) ?>
         </li>
+        <li>
+            <?= $this->url->link(t('Lead and cycle time'), 'analytic', 'leadAndCycleTime', array('project_id' => $project['id'])) ?>
+        </li>
     </ul>
 </div>
