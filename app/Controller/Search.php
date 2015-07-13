@@ -13,7 +13,7 @@ class Search extends Base
     public function index()
     {
         $projects = $this->projectPermission->getAllowedProjects($this->userSession->getId());
-        $search = $this->request->getStringParam('search');
+        $search = urldecode($this->request->getStringParam('search'));
         $nb_tasks = 0;
 
         $paginator = $this->paginator

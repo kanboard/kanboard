@@ -118,4 +118,28 @@ class UserSession extends Base
     {
         $_SESSION['filters'][$project_id] = $filters;
     }
+
+    /**
+     * Is board collapsed or expanded
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return boolean
+     */
+    public function isBoardCollapsed($project_id)
+    {
+        return ! empty($_SESSION['board_collapsed'][$project_id]) ? $_SESSION['board_collapsed'][$project_id] : false;
+    }
+
+    /**
+     * Set board display mode
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  boolean  $collapsed
+     */
+    public function setBoardDisplayMode($project_id, $collapsed)
+    {
+        $_SESSION['board_collapsed'][$project_id] = $collapsed;
+    }
 }

@@ -43,9 +43,10 @@ class TaskCreation extends Base
      */
     public function prepare(array &$values)
     {
-        $this->dateParser->convert($values, array('date_due', 'date_started'));
+        $this->dateParser->convert($values, array('date_due'));
+        $this->dateParser->convert($values, array('date_started'), true);
         $this->removeFields($values, array('another_task'));
-        $this->resetFields($values, array('owner_id', 'swimlane_id', 'date_due', 'score', 'category_id', 'time_estimated'));
+        $this->resetFields($values, array('creator_id', 'owner_id', 'swimlane_id', 'date_due', 'score', 'category_id', 'time_estimated'));
 
         if (empty($values['column_id'])) {
             $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
@@ -57,6 +58,10 @@ class TaskCreation extends Base
 
         if (empty($values['title'])) {
             $values['title'] = t('Untitled');
+        }
+
+        if ($this->userSession->isLogged()) {
+            $values['creator_id'] = $this->userSession->getId();
         }
 
         $values['swimlane_id'] = empty($values['swimlane_id']) ? 0 : $values['swimlane_id'];

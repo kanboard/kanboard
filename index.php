@@ -2,7 +2,6 @@
 
 require __DIR__.'/app/common.php';
 
-use Core\Router;
-
-$router = new Router($container);
-$router->execute();
+if (! $container['router']->dispatch($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING'])) {
+    die('Page not found!');
+}

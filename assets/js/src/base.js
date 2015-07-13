@@ -287,6 +287,15 @@ var Kanboard = (function() {
                 constrainInput: false
             });
 
+            // Datetime picker
+            $(".form-datetime").datetimepicker({
+                controlType: 'select',
+                oneLine: true,
+                dateFormat: 'yy-mm-dd',
+                // timeFormat: 'h:mm tt',
+                constrainInput: false
+            });
+
             // Markdown Preview for textareas
             $("#markdown-preview").click(Kanboard.MarkdownPreview);
             $("#markdown-write").click(Kanboard.MarkdownWriter);

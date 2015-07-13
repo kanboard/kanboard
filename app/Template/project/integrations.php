@@ -8,26 +8,26 @@
 
     <h3><i class="fa fa-github fa-fw"></i>&nbsp;<?= t('Github webhooks') ?></h3>
     <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().$this->url->href('webhook', 'github', array('token' => $webhook_token, 'project_id' => $project['id'])) ?>"/><br/>
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'github', array('token' => $webhook_token, 'project_id' => $project['id']), false, '', true) ?>"/><br/>
     <p class="form-help"><a href="http://kanboard.net/documentation/github-webhooks" target="_blank"><?= t('Help on Github webhooks') ?></a></p>
     </div>
 
 
-    <h3><img src="assets/img/gitlab-icon.png"/>&nbsp;<?= t('Gitlab webhooks') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/gitlab-icon.png"/>&nbsp;<?= t('Gitlab webhooks') ?></h3>
     <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().$this->url->href('webhook', 'gitlab', array('token' => $webhook_token, 'project_id' => $project['id'])) ?>"/><br/>
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'gitlab', array('token' => $webhook_token, 'project_id' => $project['id']), false, '', true) ?>"/><br/>
     <p class="form-help"><a href="http://kanboard.net/documentation/gitlab-webhooks" target="_blank"><?= t('Help on Gitlab webhooks') ?></a></p>
     </div>
 
 
     <h3><i class="fa fa-bitbucket fa-fw"></i>&nbsp;<?= t('Bitbucket webhooks') ?></h3>
     <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().$this->url->href('webhook', 'bitbucket', array('token' => $webhook_token, 'project_id' => $project['id'])) ?>"/><br/>
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'bitbucket', array('token' => $webhook_token, 'project_id' => $project['id']), false, '', true) ?>"/><br/>
     <p class="form-help"><a href="http://kanboard.net/documentation/bitbucket-webhooks" target="_blank"><?= t('Help on Bitbucket webhooks') ?></a></p>
     </div>
 
 
-    <h3><img src="assets/img/jabber-icon.png"/> <?= t('Jabber (XMPP)') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/jabber-icon.png"/> <?= t('Jabber (XMPP)') ?></h3>
     <div class="listing">
         <?= $this->form->checkbox('jabber', t('Send notifications to Jabber'), 1, isset($values['jabber']) && $values['jabber'] == 1) ?>
 
@@ -58,7 +58,7 @@
     </div>
 
 
-    <h3><img src="assets/img/hipchat-icon.png"/> <?= t('Hipchat') ?></h3>
+    <h3><img src="<?= $this->url->dir() ?>assets/img/hipchat-icon.png"/> <?= t('Hipchat') ?></h3>
     <div class="listing">
         <?= $this->form->checkbox('hipchat', t('Send notifications to Hipchat'), 1, isset($values['hipchat']) && $values['hipchat'] == 1) ?>
 

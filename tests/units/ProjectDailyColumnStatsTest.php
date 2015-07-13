@@ -3,17 +3,17 @@
 require_once __DIR__.'/Base.php';
 
 use Model\Project;
-use Model\ProjectDailySummary;
+use Model\ProjectDailyColumnStats;
 use Model\Task;
 use Model\TaskCreation;
 use Model\TaskStatus;
 
-class ProjectDailySummaryTest extends Base
+class ProjectDailyColumnStatsTest extends Base
 {
     public function testUpdateTotals()
     {
         $p = new Project($this->container);
-        $pds = new ProjectDailySummary($this->container);
+        $pds = new ProjectDailyColumnStats($this->container);
         $tc = new TaskCreation($this->container);
         $ts = new TaskStatus($this->container);
 

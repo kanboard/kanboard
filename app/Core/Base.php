@@ -48,7 +48,8 @@ use Pimple\Container;
  * @property \Model\ProjectActivity        $projectActivity
  * @property \Model\ProjectAnalytic        $projectAnalytic
  * @property \Model\ProjectDuplication     $projectDuplication
- * @property \Model\ProjectDailySummary    $projectDailySummary
+ * @property \Model\ProjectDailyColumnStats    $projectDailyColumnStats
+ * @property \Model\ProjectDailyStats      $projectDailyStats
  * @property \Model\ProjectIntegration     $projectIntegration
  * @property \Model\ProjectPermission      $projectPermission
  * @property \Model\Subtask                $subtask

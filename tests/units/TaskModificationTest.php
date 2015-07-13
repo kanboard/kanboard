@@ -202,15 +202,29 @@ class TaskModificationTest extends Base
         $task = $tf->getById(1);
         $this->assertEquals(0, $task['date_started']);
 
+        // Set only a date
         $this->assertTrue($tm->update(array('id' => 1, 'date_started' => '2014-11-24')));
 
         $task = $tf->getById(1);
-        $this->assertEquals('2014-11-24', date('Y-m-d', $task['date_started']));
+        $this->assertEquals('2014-11-24 '.date('H:i'), date('Y-m-d H:i', $task['date_started']));
 
+        // Set a datetime
+        $this->assertTrue($tm->update(array('id' => 1, 'date_started' => '2014-11-24 16:25')));
+
+        $task = $tf->getById(1);
+        $this->assertEquals('2014-11-24 16:25', date('Y-m-d H:i', $task['date_started']));
+
+        // Set a datetime
+        $this->assertTrue($tm->update(array('id' => 1, 'date_started' => '2014-11-24 6:25pm')));
+
+        $task = $tf->getById(1);
+        $this->assertEquals('2014-11-24 18:25', date('Y-m-d H:i', $task['date_started']));
+
+        // Set a timestamp
         $this->assertTrue($tm->update(array('id' => 1, 'date_started' => time())));
 
         $task = $tf->getById(1);
-        $this->assertEquals(date('Y-m-d'), date('Y-m-d', $task['date_started']));
+        $this->assertEquals(time(), $task['date_started'], '', 1);
     }
 
     public function testChangeTimeEstimated()

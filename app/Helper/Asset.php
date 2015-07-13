@@ -18,7 +18,7 @@ class Asset extends \Core\Base
      */
     public function js($filename, $async = false)
     {
-        return '<script '.($async ? 'async' : '').' type="text/javascript" src="'.$filename.'?'.filemtime($filename).'"></script>';
+        return '<script '.($async ? 'async' : '').' type="text/javascript" src="'.$this->helper->url->dir().$filename.'?'.filemtime($filename).'"></script>';
     }
 
     /**
@@ -31,7 +31,7 @@ class Asset extends \Core\Base
      */
     public function css($filename, $is_file = true, $media = 'screen')
     {
-        return '<link rel="stylesheet" href="'.$filename.($is_file ? '?'.filemtime($filename) : '').'" media="'.$media.'">';
+        return '<link rel="stylesheet" href="'.$this->helper->url->dir().$filename.($is_file ? '?'.filemtime($filename) : '').'" media="'.$media.'">';
     }
 
     /**
