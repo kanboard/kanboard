@@ -198,7 +198,7 @@ class Color extends Base
         $buffer = '';
 
         foreach ($this->default_colors as $color => $values) {
-            $buffer .= 'option.color-'.$color.',';
+            $buffer .= 'option.color-'.$color.' { background-color: '.$values['background'].'}';
             $buffer .= 'div.color-'.$color.' {';
             $buffer .= 'background-color: '.$values['background'].';';
             $buffer .= 'border-color: '.$values['border'];
