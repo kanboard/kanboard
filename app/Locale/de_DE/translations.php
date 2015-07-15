@@ -949,7 +949,7 @@ return array(
     'Closed tasks' => 'Abgeschlossene Aufgaben',
     'Open tasks' => 'Offene Aufgaben',
     'Not assigned' => 'Nicht zugewiesen',
-    'View advanced search syntax' => 'Zeige ',
+    'View advanced search syntax' => 'Zur erweiterten Suchsyntax',
     'Overview' => 'Überblick',
     // '%b %e %Y' => '',
     'Board/Calendar/List view' => 'Board-/Kalender-/Listen-Ansicht',
