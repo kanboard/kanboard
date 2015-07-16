@@ -17,7 +17,7 @@
         <?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br/>
 
         <?php if (GOOGLE_AUTH): ?>
-            <?= $this->url->link(t('Login with my Google Account'), 'user', 'google') ?>
+            <?= $this->url->link(t('Login with my Google Account'), 'oauth', 'google') ?>
         <?php endif ?>
 
         <?php if (GITHUB_AUTH): ?>

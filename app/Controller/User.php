@@ -362,69 +362,6 @@ class User extends Base
     }
 
     /**
-     * Google authentication
-     *
-     * @access public
-     */
-    public function google()
-    {
-        $code = $this->request->getStringParam('code');
-
-        if ($code) {
-
-            $profile = $this->authentication->backend('google')->getGoogleProfile($code);
-
-            if (is_array($profile)) {
-
-                // If the user is already logged, link the account otherwise authenticate
-                if ($this->userSession->isLogged()) {
-
-                    if ($this->authentication->backend('google')->updateUser($this->userSession->getId(), $profile)) {
-                        $this->session->flash(t('Your Google Account is linked to your profile successfully.'));
-                    }
-                    else {
-                        $this->session->flashError(t('Unable to link your Google Account.'));
-                    }
-
-                    $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
-                }
-                else if ($this->authentication->backend('google')->authenticate($profile['id'])) {
-                    $this->response->redirect($this->helper->url->to('app', 'index'));
-                }
-                else {
-                    $this->response->html($this->template->layout('auth/index', array(
-                        'errors' => array('login' => t('Google authentication failed')),
-                        'values' => array(),
-                        'no_layout' => true,
-                        'redirect_query' => '',
-                        'title' => t('Login')
-                    )));
-                }
-            }
-        }
-
-        $this->response->redirect($this->authentication->backend('google')->getAuthorizationUrl());
-    }
-
-    /**
-     * Unlink a Google account
-     *
-     * @access public
-     */
-    public function unlinkGoogle()
-    {
-        $this->checkCSRFParam();
-        if ($this->authentication->backend('google')->unlink($this->userSession->getId())) {
-            $this->session->flash(t('Your Google Account is not linked anymore to your profile.'));
-        }
-        else {
-            $this->session->flashError(t('Unable to unlink your Google Account.'));
-        }
-
-        $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
-    }
-
-    /**
      * GitHub authentication
      *
      * @access public

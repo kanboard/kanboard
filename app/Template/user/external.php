@@ -8,9 +8,9 @@
     <p class="listing">
     <?php if ($this->user->isCurrentUser($user['id'])): ?>
         <?php if (empty($user['google_id'])): ?>
-            <?= $this->url->link(t('Link my Google Account'), 'user', 'google', array(), true) ?>
+            <?= $this->url->link(t('Link my Google Account'), 'oauth', 'google', array(), true) ?>
         <?php else: ?>
-            <?= $this->url->link(t('Unlink my Google Account'), 'user', 'unlinkGoogle', array(), true) ?>
+            <?= $this->url->link(t('Unlink my Google Account'), 'oauth', 'unlink', array('backend' => 'google'), true) ?>
         <?php endif ?>
     <?php else: ?>
         <?= empty($user['google_id']) ? t('No account linked.') : t('Account linked.') ?>

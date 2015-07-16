@@ -18,12 +18,13 @@ class Acl extends Base
      */
     private $public_acl = array(
         'auth' => array('login', 'check'),
-        'user' => array('google', 'github'),
+        'user' => array('github'),
         'task' => array('readonly'),
         'board' => array('readonly'),
         'webhook' => '*',
         'ical' => '*',
         'feed' => '*',
+        'oauth' => array('google'),
     );
 
     /**
