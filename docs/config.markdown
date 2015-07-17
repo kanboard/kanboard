@@ -202,4 +202,7 @@ define('MARKDOWN_ESCAPE_HTML', true);
 
 // API alternative authentication header, the default is HTTP Basic Authentication defined in RFC2617
 define('API_AUTHENTICATION_HEADER', '');
+
+// Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
+define('HIDE_LOGIN_FORM', false);
 ```

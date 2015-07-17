@@ -84,3 +84,6 @@ defined('API_AUTHENTICATION_HEADER') or define('API_AUTHENTICATION_HEADER', '');
 
 // Enable/disable url rewrite
 defined('ENABLE_URL_REWRITE') or define('ENABLE_URL_REWRITE', isset($_SERVER['HTTP_MOD_REWRITE']));
+
+// Hide login form
+defined('HIDE_LOGIN_FORM') or define('HIDE_LOGIN_FORM', false);
