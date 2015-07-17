@@ -116,7 +116,6 @@ class Oauth extends Base
                 'errors' => array('login' => t('External authentication failed')),
                 'values' => array(),
                 'no_layout' => true,
-                'redirect_query' => '',
                 'title' => t('Login')
             )));
         }

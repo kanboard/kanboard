@@ -163,6 +163,17 @@ class Request
     }
 
     /**
+     * Returns uri
+     *
+     * @access public
+     * @return string
+     */
+    public function getUri()
+    {
+        return isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+    }
+
+    /**
      * Get the user agent
      *
      * @static

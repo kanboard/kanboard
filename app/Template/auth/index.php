@@ -5,7 +5,7 @@
     <?php endif ?>
 
     <?php if (! HIDE_LOGIN_FORM): ?>
-    <form method="post" action="<?= $this->url->href('auth', 'check', array('redirect_query' => $redirect_query)) ?>">
+    <form method="post" action="<?= $this->url->href('auth', 'check') ?>">
 
         <?= $this->form->csrf() ?>
 
@@ -16,8 +16,6 @@
         <?= $this->form->password('password', $values, $errors, array('required')) ?>
 
         <?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br/>
-
-
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Sign in') ?>" class="btn btn-blue"/>
