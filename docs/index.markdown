@@ -110,7 +110,7 @@ Technical details
 
 - [LDAP authentication](ldap-authentication.markdown)
 - [Google authentication](google-authentication.markdown)
-- [GitHub authentication](github-authentication.markdown)
+- [Github authentication](github-authentication.markdown)
 - [Reverse proxy authentication](reverse-proxy-authentication.markdown)
 
 ### Contributors
