@@ -21,6 +21,16 @@ class Oauth extends Base
     }
 
     /**
+     * Link or authenticate a Github account
+     *
+     * @access public
+     */
+    public function github()
+    {
+        $this->step1('github');
+    }
+
+    /**
      * Unlink external account
      *
      * @access public

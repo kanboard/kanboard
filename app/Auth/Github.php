@@ -5,19 +5,18 @@ namespace Auth;
 use Event\AuthEvent;
 
 /**
- * Google backend
+ * Github backend
  *
- * @package  auth
- * @author   Frederic Guillot
+ * @package auth
  */
-class Google extends Base
+class Github extends Base
 {
     /**
      * Backend name
      *
      * @var string
      */
-    const AUTH_NAME = 'Google';
+    const AUTH_NAME = 'Github';
 
     /**
      * OAuth2 instance
@@ -28,15 +27,15 @@ class Google extends Base
     private $service;
 
     /**
-     * Authenticate a Google user
+     * Authenticate a Github user
      *
      * @access public
-     * @param  string  $google_id   Google unique id
+     * @param  string  $github_id   Github user id
      * @return boolean
      */
-    public function authenticate($google_id)
+    public function authenticate($github_id)
     {
-        $user = $this->user->getByGoogleId($google_id);
+        $user = $this->user->getByGithubId($github_id);
 
         if (! empty($user)) {
             $this->userSession->refresh($user);
@@ -48,7 +47,7 @@ class Google extends Base
     }
 
     /**
-     * Unlink a Google account for a given user
+     * Unlink a Github account for a given user
      *
      * @access public
      * @param  integer   $user_id    User id
@@ -58,16 +57,16 @@ class Google extends Base
     {
         return $this->user->update(array(
             'id' => $user_id,
-            'google_id' => '',
+            'github_id' => '',
         ));
     }
 
     /**
-     * Update the user table based on the Google profile information
+     * Update the user table based on the Github profile information
      *
      * @access public
      * @param  integer   $user_id    User id
-     * @param  array     $profile    Google profile
+     * @param  array     $profile    Github profile
      * @return boolean
      */
     public function updateUser($user_id, array $profile)
@@ -76,7 +75,7 @@ class Google extends Base
 
         return $this->user->update(array(
             'id' => $user_id,
-            'google_id' => $profile['id'],
+            'github_id' => $profile['id'],
             'email' => $profile['email'] ?: $user['email'],
             'name' => $profile['name'] ?: $user['name'],
         ));
@@ -92,12 +91,12 @@ class Google extends Base
     {
         if (empty($this->service)) {
             $this->service = $this->oauth->createService(
-                GOOGLE_CLIENT_ID,
-                GOOGLE_CLIENT_SECRET,
-                $this->helper->url->to('oauth', 'google', array(), '', true),
-                'https://accounts.google.com/o/oauth2/auth',
-                'https://accounts.google.com/o/oauth2/token',
-                array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile')
+                GITHUB_CLIENT_ID,
+                GITHUB_CLIENT_SECRET,
+                $this->helper->url->to('oauth', 'github', array(), '', true),
+                'https://github.com/login/oauth/authorize',
+                'https://github.com/login/oauth/access_token',
+                array()
             );
         }
 
@@ -105,7 +104,7 @@ class Google extends Base
     }
 
     /**
-     * Get Google profile
+     * Get Github profile
      *
      * @access public
      * @param  string  $code
@@ -116,7 +115,7 @@ class Google extends Base
         $this->getService()->getAccessToken($code);
 
         return $this->httpClient->getJson(
-            'https://www.googleapis.com/oauth2/v1/userinfo',
+            'https://api.github.com/user',
             array($this->getService()->getAuthorizationHeader())
         );
     }

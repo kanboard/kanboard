@@ -122,13 +122,13 @@ class User extends Base
     }
 
     /**
-     * Get a specific user by the GitHub id
+     * Get a specific user by the Github id
      *
      * @access public
-     * @param  string  $github_id  GitHub user id
+     * @param  string  $github_id  Github user id
      * @return array|boolean
      */
-    public function getByGitHubId($github_id)
+    public function getByGithubId($github_id)
     {
         if (empty($github_id)) {
             return false;

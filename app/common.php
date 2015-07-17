@@ -115,4 +115,8 @@ if (ENABLE_URL_REWRITE) {
     // Ical routes
     $container['router']->addRoute('ical/project/:token', 'ical', 'project', array('token'));
     $container['router']->addRoute('ical/user/:token', 'ical', 'user', array('token'));
+
+    // Auth routes
+    $container['router']->addRoute('oauth/google', 'oauth', 'google');
+    $container['router']->addRoute('oauth/github', 'oauth', 'github');
 }

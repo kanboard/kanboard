@@ -16,12 +16,16 @@
 
         <?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br/>
 
-        <?php if (GOOGLE_AUTH): ?>
-            <?= $this->url->link(t('Login with my Google Account'), 'oauth', 'google') ?>
-        <?php endif ?>
+        <?php if (GOOGLE_AUTH || GITHUB_AUTH): ?>
+        <ul>
+            <?php if (GOOGLE_AUTH): ?>
+                <li><?= $this->url->link(t('Login with my Google Account'), 'oauth', 'google') ?></li>
+            <?php endif ?>
 
-        <?php if (GITHUB_AUTH): ?>
-            <?= $this->url->link(t('Login with my GitHub Account'), 'user', 'gitHub') ?>
+            <?php if (GITHUB_AUTH): ?>
+                <li><?= $this->url->link(t('Login with my Github Account'), 'oauth', 'gitHub') ?></li>
+            <?php endif ?>
+        </ul>
         <?php endif ?>
 
         <div class="form-actions">

@@ -41,7 +41,7 @@ defined('GOOGLE_AUTH') or define('GOOGLE_AUTH', false);
 defined('GOOGLE_CLIENT_ID') or define('GOOGLE_CLIENT_ID', '');
 defined('GOOGLE_CLIENT_SECRET') or define('GOOGLE_CLIENT_SECRET', '');
 
-// GitHub authentication
+// Github authentication
 defined('GITHUB_AUTH') or define('GITHUB_AUTH', false);
 defined('GITHUB_CLIENT_ID') or define('GITHUB_CLIENT_ID', '');
 defined('GITHUB_CLIENT_SECRET') or define('GITHUB_CLIENT_SECRET', '');
