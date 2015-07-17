@@ -9,12 +9,14 @@ List of supported events
 - Gitlab commit received
 - Gitlab issue opened
 - Gitlab issue closed
+- Gitlab issue comment created
 
 List of supported actions
 -------------------------
 
 - Create a task from an external provider
 - Close a task
+- Create a comment from an external provider
 
 Configuration
 -------------
@@ -53,3 +55,11 @@ When a task is created from a Gitlab issue, the link to the issue is added to th
 
 - Choose the event: **Gitlab issue closed**
 - Choose the action: **Close the task**
+
+### Create a comment on Kanboard when an issue is commented on Gitlab
+
+- Choose the event: **Gitlab issue comment created**
+- Choose the action: **Create a comment from an external provider**
+
+If the username is the same between Github and Kanboard the comment author will be assigned, otherwise there is no author.
+The user also have to be member of the project in Kanboard.

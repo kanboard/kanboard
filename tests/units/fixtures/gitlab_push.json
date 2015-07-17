@@ -1,0 +1,44 @@
+{
+    "object_kind": "push",
+    "before": "e4ec6156d208a45fc546fae73c28300b5af1692a",
+    "after": "48aafa75eef9ad253aa254b0c82c987a52ebea78",
+    "ref": "refs/heads/master",
+    "checkout_sha": "48aafa75eef9ad253aa254b0c82c987a52ebea78",
+    "message": null,
+    "user_id": 74067,
+    "user_name": "Fred",
+    "user_email": "f+gitlab@minicoders.com",
+    "project_id": 320820,
+    "repository": {
+        "name": "test-webhook",
+        "url": "git@gitlab.com:minicoders/test-webhook.git",
+        "description": "",
+        "homepage": "https://gitlab.com/minicoders/test-webhook",
+        "git_http_url": "https://gitlab.com/minicoders/test-webhook.git",
+        "git_ssh_url": "git@gitlab.com:minicoders/test-webhook.git",
+        "visibility_level": 0
+    },
+    "commits": [
+        {
+            "id": "48aafa75eef9ad253aa254b0c82c987a52ebea78",
+            "message": "Fix bug #2",
+            "timestamp": "2015-06-21T00:41:41+00:00",
+            "url": "https://gitlab.com/minicoders/test-webhook/commit/48aafa75eef9ad253aa254b0c82c987a52ebea78",
+            "author": {
+                "name": "Fred",
+                "email": "me@localhost"
+            }
+        },
+        {
+            "id": "e4ec6156d208a45fc546fae73c28300b5af1692a",
+            "message": "test",
+            "timestamp": "2015-06-21T00:35:55+00:00",
+            "url": "https://gitlab.com/localhost/test-webhook/commit/e4ec6156d208a45fc546fae73c28300b5af1692a",
+            "author": {
+                "name": "Fred",
+                "email": "me@localhost"
+            }
+        }
+    ],
+    "total_commits_count": 2
+}

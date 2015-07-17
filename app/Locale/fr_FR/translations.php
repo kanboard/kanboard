@@ -996,4 +996,6 @@ return array(
     'Remote user' => 'Utilisateur distant',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Les utilisateurs distants ne stockent pas leur mot de passe dans la base de données de  Kanboard, exemples : comptes LDAP, Github ou Google.',
     'If you check the box "Disallow login form", credentials entered in the login form will be ignored.' => 'Si vous cochez la case « Interdir le formulaire d\'authentification », les identifiants entrés dans le formulaire d\'authentification seront ignorés.',
+    'By @%s on Gitlab' => 'Par @%s sur Gitlab',
+    'Gitlab issue comment created' => 'Commentaire créé sur un ticket Gitlab',
 );

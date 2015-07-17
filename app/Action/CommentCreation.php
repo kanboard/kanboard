@@ -28,6 +28,7 @@ class CommentCreation extends Base
             BitbucketWebhook::EVENT_ISSUE_COMMENT,
             BitbucketWebhook::EVENT_COMMIT,
             GitlabWebhook::EVENT_COMMIT,
+            GitlabWebhook::EVENT_ISSUE_COMMENT,
         );
     }
 

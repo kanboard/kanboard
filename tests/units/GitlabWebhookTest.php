@@ -6,20 +6,18 @@ use Integration\GitlabWebhook;
 use Model\TaskCreation;
 use Model\TaskFinder;
 use Model\Project;
+use Model\ProjectPermission;
+use Model\User;
 
 class GitlabWebhookTest extends Base
 {
-    private $push_payload = '{"before":"9187f41ba34a2b40d41c50ed4b624ce374c5e583","after":"b3caaee62ad27dc31497946065ac18299784aee4","ref":"refs/heads/master","user_id":74067,"user_name":"Fred","project_id":124474,"repository":{"name":"kanboard","url":"git@gitlab.com:minicoders/kanboard.git","description":"Test repo","homepage":"https://gitlab.com/minicoders/kanboard"},"commits":[{"id":"b3caaee62ad27dc31497946065ac18299784aee4","message":"Fix bug #2\n","timestamp":"2014-12-28T20:31:48-05:00","url":"https://gitlab.com/minicoders/kanboard/commit/b3caaee62ad27dc31497946065ac18299784aee4","author":{"name":"Frédéric Guillot","email":"git@localhost"}}],"total_commits_count":1}';
-    private $issue_open_payload = '{"object_kind":"issue","user":{"name":"Fred","username":"minicoders","avatar_url":"https://secure.gravatar.com/avatar/3c44936e5a56f80711bff14987d2733f?s=40\u0026d=identicon"},"object_attributes":{"id":103356,"title":"Test Webhook","assignee_id":null,"author_id":74067,"project_id":124474,"created_at":"2014-12-29 01:24:24 UTC","updated_at":"2014-12-29 01:24:24 UTC","position":0,"branch_name":null,"description":"- test1\r\n- test2","milestone_id":null,"state":"opened","iid":1,"url":"https://gitlab.com/minicoders/kanboard/issues/1","action":"open"}}';
-    private $issue_closed_payload = '{"object_kind":"issue","user":{"name":"Fred","username":"minicoders","avatar_url":"https://secure.gravatar.com/avatar/3c44936e5a56f80711bff14987d2733f?s=40\u0026d=identicon"},"object_attributes":{"id":103361,"title":"uu","assignee_id":null,"author_id":74067,"project_id":124474,"created_at":"2014-12-29 01:28:44 UTC","updated_at":"2014-12-29 01:34:47 UTC","position":0,"branch_name":null,"description":"","milestone_id":null,"state":"closed","iid":4,"url":"https://gitlab.com/minicoders/kanboard/issues/4","action":"update"}}';
-
     public function testGetEventType()
     {
         $g = new GitlabWebhook($this->container);
 
-        $this->assertEquals(GitlabWebhook::TYPE_PUSH, $g->getType(json_decode($this->push_payload, true)));
-        $this->assertEquals(GitlabWebhook::TYPE_ISSUE, $g->getType(json_decode($this->issue_open_payload, true)));
-        $this->assertEquals(GitlabWebhook::TYPE_ISSUE, $g->getType(json_decode($this->issue_closed_payload, true)));
+        $this->assertEquals(GitlabWebhook::TYPE_PUSH, $g->getType(json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_push.json'), true)));
+        $this->assertEquals(GitlabWebhook::TYPE_ISSUE, $g->getType(json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_issue_opened.json'), true)));
+        $this->assertEquals(GitlabWebhook::TYPE_COMMENT, $g->getType(json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_comment_created.json'), true)));
         $this->assertEquals('', $g->getType(array()));
     }
 
@@ -35,7 +33,7 @@ class GitlabWebhookTest extends Base
 
         $this->container['dispatcher']->addListener(GitlabWebhook::EVENT_COMMIT, array($this, 'onCommit'));
 
-        $event = json_decode($this->push_payload, true);
+        $event = json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_push.json'), true);
 
         // No task
         $this->assertFalse($g->handleCommit($event['commits'][0]));
@@ -59,7 +57,7 @@ class GitlabWebhookTest extends Base
 
         $this->container['dispatcher']->addListener(GitlabWebhook::EVENT_ISSUE_OPENED, array($this, 'onOpen'));
 
-        $event = json_decode($this->issue_open_payload, true);
+        $event = json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_issue_opened.json'), true);
         $this->assertTrue($g->handleIssueOpened($event['object_attributes']));
 
         $called = $this->container['dispatcher']->getCalledListeners();
@@ -78,7 +76,7 @@ class GitlabWebhookTest extends Base
 
         $this->container['dispatcher']->addListener(GitlabWebhook::EVENT_ISSUE_CLOSED, array($this, 'onClose'));
 
-        $event = json_decode($this->issue_closed_payload, true);
+        $event = json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_issue_closed.json'), true);
 
         // Issue not there
         $this->assertFalse($g->handleIssueClosed($event['object_attributes']));
@@ -87,11 +85,11 @@ class GitlabWebhookTest extends Base
         $this->assertEmpty($called);
 
         // Create a task with the issue reference
-        $this->assertEquals(1, $tc->create(array('title' => 'A', 'project_id' => 1, 'reference' => 103361)));
-        $task = $tf->getByReference(1, 103361);
+        $this->assertEquals(1, $tc->create(array('title' => 'A', 'project_id' => 1, 'reference' => 355691)));
+        $task = $tf->getByReference(1, 355691);
         $this->assertNotEmpty($task);
 
-        $task = $tf->getByReference(2, 103361);
+        $task = $tf->getByReference(2, 355691);
         $this->assertEmpty($task);
 
         $this->assertTrue($g->handleIssueClosed($event['object_attributes']));
@@ -100,13 +98,76 @@ class GitlabWebhookTest extends Base
         $this->assertArrayHasKey(GitlabWebhook::EVENT_ISSUE_CLOSED.'.GitlabWebhookTest::onClose', $called);
     }
 
+    public function testCommentCreatedWithNoUser()
+    {
+        $this->container['dispatcher']->addListener(GitlabWebhook::EVENT_ISSUE_COMMENT, array($this, 'onCommentCreatedWithNoUser'));
+
+        $p = new Project($this->container);
+        $this->assertEquals(1, $p->create(array('name' => 'foobar')));
+
+        $tc = new TaskCreation($this->container);
+        $this->assertEquals(1, $tc->create(array('title' => 'boo', 'reference' => 355691, 'project_id' => 1)));
+
+        $g = new GitlabWebhook($this->container);
+        $g->setProjectId(1);
+
+        $this->assertNotFalse($g->parsePayload(
+            json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_comment_created.json'), true)
+        ));
+    }
+
+    public function testCommentCreatedWithNotMember()
+    {
+        $this->container['dispatcher']->addListener(GitlabWebhook::EVENT_ISSUE_COMMENT, array($this, 'onCommentCreatedWithNotMember'));
+
+        $p = new Project($this->container);
+        $this->assertEquals(1, $p->create(array('name' => 'foobar')));
+
+        $tc = new TaskCreation($this->container);
+        $this->assertEquals(1, $tc->create(array('title' => 'boo', 'reference' => 355691, 'project_id' => 1)));
+
+        $u = new User($this->container);
+        $this->assertEquals(2, $u->create(array('username' => 'minicoders')));
+
+        $g = new GitlabWebhook($this->container);
+        $g->setProjectId(1);
+
+        $this->assertNotFalse($g->parsePayload(
+            json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_comment_created.json'), true)
+        ));
+    }
+
+    public function testCommentCreatedWithUser()
+    {
+        $this->container['dispatcher']->addListener(GitlabWebhook::EVENT_ISSUE_COMMENT, array($this, 'onCommentCreatedWithUser'));
+
+        $p = new Project($this->container);
+        $this->assertEquals(1, $p->create(array('name' => 'foobar')));
+
+        $tc = new TaskCreation($this->container);
+        $this->assertEquals(1, $tc->create(array('title' => 'boo', 'reference' => 355691, 'project_id' => 1)));
+
+        $u = new User($this->container);
+        $this->assertEquals(2, $u->create(array('username' => 'minicoders')));
+
+        $pp = new ProjectPermission($this->container);
+        $this->assertTrue($pp->addMember(1, 2));
+
+        $g = new GitlabWebhook($this->container);
+        $g->setProjectId(1);
+
+        $this->assertNotFalse($g->parsePayload(
+            json_decode(file_get_contents(__DIR__.'/fixtures/gitlab_comment_created.json'), true)
+        ));
+    }
+
     public function onOpen($event)
     {
         $data = $event->getAll();
         $this->assertEquals(1, $data['project_id']);
-        $this->assertEquals(103356, $data['reference']);
-        $this->assertEquals('Test Webhook', $data['title']);
-        $this->assertEquals("- test1\r\n- test2\n\n[Gitlab Issue](https://gitlab.com/minicoders/kanboard/issues/1)", $data['description']);
+        $this->assertEquals(355691, $data['reference']);
+        $this->assertEquals('Bug', $data['title']);
+        $this->assertEquals("There is a bug somewhere.\r\n\r\nBye\n\n[Gitlab Issue](https://gitlab.com/minicoders/test-webhook/issues/1)", $data['description']);
     }
 
     public function onClose($event)
@@ -114,7 +175,7 @@ class GitlabWebhookTest extends Base
         $data = $event->getAll();
         $this->assertEquals(1, $data['project_id']);
         $this->assertEquals(1, $data['task_id']);
-        $this->assertEquals(103361, $data['reference']);
+        $this->assertEquals(355691, $data['reference']);
     }
 
     public function onCommit($event)
@@ -123,8 +184,38 @@ class GitlabWebhookTest extends Base
         $this->assertEquals(1, $data['project_id']);
         $this->assertEquals(2, $data['task_id']);
         $this->assertEquals('test2', $data['title']);
-        $this->assertEquals("Fix bug #2\n\n\n[Commit made by @Frédéric Guillot on Gitlab](https://gitlab.com/minicoders/kanboard/commit/b3caaee62ad27dc31497946065ac18299784aee4)", $data['commit_comment']);
-        $this->assertEquals("Fix bug #2\n", $data['commit_message']);
-        $this->assertEquals('https://gitlab.com/minicoders/kanboard/commit/b3caaee62ad27dc31497946065ac18299784aee4', $data['commit_url']);
+        $this->assertEquals("Fix bug #2\n\n[Commit made by @Fred on Gitlab](https://gitlab.com/minicoders/test-webhook/commit/48aafa75eef9ad253aa254b0c82c987a52ebea78)", $data['commit_comment']);
+        $this->assertEquals("Fix bug #2", $data['commit_message']);
+        $this->assertEquals('https://gitlab.com/minicoders/test-webhook/commit/48aafa75eef9ad253aa254b0c82c987a52ebea78', $data['commit_url']);
+    }
+
+    public function onCommentCreatedWithNoUser($event)
+    {
+        $data = $event->getAll();
+        $this->assertEquals(1, $data['project_id']);
+        $this->assertEquals(1, $data['task_id']);
+        $this->assertEquals(0, $data['user_id']);
+        $this->assertEquals(1642761, $data['reference']);
+        $this->assertEquals("Super comment!\n\n[By @minicoders on Gitlab](https://gitlab.com/minicoders/test-webhook/issues/1#note_1642761)", $data['comment']);
+    }
+
+    public function onCommentCreatedWithNotMember($event)
+    {
+        $data = $event->getAll();
+        $this->assertEquals(1, $data['project_id']);
+        $this->assertEquals(1, $data['task_id']);
+        $this->assertEquals(0, $data['user_id']);
+        $this->assertEquals(1642761, $data['reference']);
+        $this->assertEquals("Super comment!\n\n[By @minicoders on Gitlab](https://gitlab.com/minicoders/test-webhook/issues/1#note_1642761)", $data['comment']);
+    }
+
+    public function onCommentCreatedWithUser($event)
+    {
+        $data = $event->getAll();
+        $this->assertEquals(1, $data['project_id']);
+        $this->assertEquals(1, $data['task_id']);
+        $this->assertEquals(2, $data['user_id']);
+        $this->assertEquals(1642761, $data['reference']);
+        $this->assertEquals("Super comment!\n\n[By @minicoders on Gitlab](https://gitlab.com/minicoders/test-webhook/issues/1#note_1642761)", $data['comment']);
     }
 }

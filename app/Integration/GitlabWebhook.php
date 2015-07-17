@@ -21,14 +21,16 @@ class GitlabWebhook extends \Core\Base
     const EVENT_ISSUE_OPENED           = 'gitlab.webhook.issue.opened';
     const EVENT_ISSUE_CLOSED           = 'gitlab.webhook.issue.closed';
     const EVENT_COMMIT                 = 'gitlab.webhook.commit';
+    const EVENT_ISSUE_COMMENT          = 'gitlab.webhook.issue.commented';
 
     /**
      * Supported webhook events
      *
      * @var string
      */
-    const TYPE_PUSH  = 'push';
-    const TYPE_ISSUE = 'issue';
+    const TYPE_PUSH    = 'push';
+    const TYPE_ISSUE   = 'issue';
+    const TYPE_COMMENT = 'comment';
 
     /**
      * Project id
@@ -63,6 +65,8 @@ class GitlabWebhook extends \Core\Base
                 return $this->handlePushEvent($payload);
             case self::TYPE_ISSUE;
                 return $this->handleIssueEvent($payload);
+            case self::TYPE_COMMENT;
+                return $this->handleCommentEvent($payload);
         }
 
         return false;
@@ -77,15 +81,20 @@ class GitlabWebhook extends \Core\Base
      */
     public function getType(array $payload)
     {
-        if (isset($payload['object_kind']) && $payload['object_kind'] === 'issue') {
-            return self::TYPE_ISSUE;
+        if (empty($payload['object_kind'])) {
+            return '';
         }
 
-        if (isset($payload['commits'])) {
-            return self::TYPE_PUSH;
+        switch ($payload['object_kind']) {
+            case 'issue':
+                return self::TYPE_ISSUE;
+            case 'note':
+                return self::TYPE_COMMENT;
+            case 'push':
+                return self::TYPE_PUSH;
+            default:
+                return '';
         }
-
-        return '';
     }
 
     /**
@@ -205,6 +214,48 @@ class GitlabWebhook extends \Core\Base
 
             $this->container['dispatcher']->dispatch(
                 self::EVENT_ISSUE_CLOSED,
+                new GenericEvent($event)
+            );
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Parse comment issue events
+     *
+     * @access public
+     * @param  array   $payload   Event data
+     * @return boolean
+     */
+    public function handleCommentEvent(array $payload)
+    {
+        if (! isset($payload['issue'])) {
+            return false;
+        }
+
+        $task = $this->taskFinder->getByReference($this->project_id, $payload['issue']['id']);
+
+        if (! empty($task)) {
+
+            $user = $this->user->getByUsername($payload['user']['username']);
+
+            if (! empty($user) && ! $this->projectPermission->isMember($this->project_id, $user['id'])) {
+                $user = array();
+            }
+
+            $event = array(
+                'project_id' => $this->project_id,
+                'reference' => $payload['object_attributes']['id'],
+                'comment' => $payload['object_attributes']['note']."\n\n[".t('By @%s on Gitlab', $payload['user']['username']).']('.$payload['object_attributes']['url'].')',
+                'user_id' => ! empty($user) ? $user['id'] : 0,
+                'task_id' => $task['id'],
+            );
+
+            $this->container['dispatcher']->dispatch(
+                self::EVENT_ISSUE_COMMENT,
                 new GenericEvent($event)
             );
 
