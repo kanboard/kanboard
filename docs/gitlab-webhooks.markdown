@@ -21,12 +21,12 @@ List of supported actions
 Configuration
 -------------
 
-![Github configuration](http://kanboard.net/screenshots/documentation/gitlab-webhooks.png)
+![Gitlab configuration](http://kanboard.net/screenshots/documentation/gitlab-webhooks.png)
 
 1. On Kanboard, go to the project settings and choose the section **Integrations**
 2. Copy the Gitlab webhook url
 3. On Gitlab, go to the project settings and go to the section **Webhooks**
-4. Check the boxes **Push Events** and **Issues Events**
+4. Check the boxes **Push Events**, **Comments** and **Issues Events**
 5. Paste the url and save
 
 Examples
@@ -61,5 +61,5 @@ When a task is created from a Gitlab issue, the link to the issue is added to th
 - Choose the event: **Gitlab issue comment created**
 - Choose the action: **Create a comment from an external provider**
 
-If the username is the same between Github and Kanboard the comment author will be assigned, otherwise there is no author.
+If the username is the same between Gitlab and Kanboard the comment author will be assigned, otherwise there is no author.
 The user also have to be member of the project in Kanboard.
