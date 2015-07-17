@@ -70,7 +70,7 @@ class Acl extends Base
      * @var array
      */
     private $admin_acl = array(
-        'user' => array('index', 'create', 'save', 'remove'),
+        'user' => array('index', 'create', 'save', 'remove', 'authentication'),
         'config' => '*',
         'link' => '*',
         'project' => array('remove'),

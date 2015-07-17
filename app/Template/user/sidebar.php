@@ -58,6 +58,9 @@
 
         <?php if ($this->user->isAdmin()): ?>
             <li>
+                <?= $this->url->link(t('Edit Authentication'), 'user', 'authentication', array('user_id' => $user['id'])) ?>
+            </li>
+            <li>
                 <?= $this->url->link(t('Hourly rates'), 'hourlyrate', 'index', array('user_id' => $user['id'])) ?>
             </li>
             <li>

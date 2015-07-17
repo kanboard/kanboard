@@ -298,7 +298,7 @@ class User extends Base
 
         if ($this->request->isPost()) {
 
-            $values = $this->request->getValues() + array('disable_login_form' => 0);
+            $values = $this->request->getValues();
 
             if ($this->userSession->isAdmin()) {
                 $values += array('is_admin' => 0);
@@ -331,6 +331,44 @@ class User extends Base
             'user' => $user,
             'timezones' => $this->config->getTimezones(true),
             'languages' => $this->config->getLanguages(true),
+        )));
+    }
+
+    /**
+     * Display a form to edit authentication
+     *
+     * @access public
+     */
+    public function authentication()
+    {
+        $user = $this->getUser();
+        $values = $user;
+        $errors = array();
+
+        unset($values['password']);
+
+        if ($this->request->isPost()) {
+
+            $values = $this->request->getValues() + array('disable_login_form' => 0, 'is_ldap_user' => 0);
+            list($valid, $errors) = $this->user->validateModification($values);
+
+            if ($valid) {
+
+                if ($this->user->update($values)) {
+                    $this->session->flash(t('User updated successfully.'));
+                }
+                else {
+                    $this->session->flashError(t('Unable to update your user.'));
+                }
+
+                $this->response->redirect($this->helper->url->to('user', 'authentication', array('user_id' => $user['id'])));
+            }
+        }
+
+        $this->response->html($this->layout('user/authentication', array(
+            'values' => $values,
+            'errors' => $errors,
+            'user' => $user,
         )));
     }
 
