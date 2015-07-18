@@ -63,6 +63,7 @@ class TaskFinder extends Base
                 'tasks.date_creation',
                 'tasks.date_modification',
                 'tasks.date_completed',
+                'tasks.date_started',
                 'tasks.date_due',
                 'tasks.color_id',
                 'tasks.project_id',
