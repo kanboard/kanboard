@@ -996,4 +996,6 @@ return array(
     // 'If you check the box "Disallow login form", credentials entered in the login form will be ignored.' => '',
     // 'By @%s on Gitlab' => '',
     // 'Gitlab issue comment created' => '',
+    // 'New remote user' => '',
+    // 'New local user' => '',
 );

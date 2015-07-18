@@ -60,7 +60,9 @@ class User extends Base
      */
     public function create(array $values = array(), array $errors = array())
     {
-        $this->response->html($this->template->layout('user/new', array(
+        $is_remote = $this->request->getIntegerParam('remote') == 1 || (isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1);
+
+        $this->response->html($this->template->layout($is_remote ? 'user/create_remote' : 'user/create_local', array(
             'timezones' => $this->config->getTimezones(true),
             'languages' => $this->config->getLanguages(true),
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),

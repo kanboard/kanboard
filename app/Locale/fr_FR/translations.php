@@ -998,4 +998,6 @@ return array(
     'If you check the box "Disallow login form", credentials entered in the login form will be ignored.' => 'Si vous cochez la case « Interdir le formulaire d\'authentification », les identifiants entrés dans le formulaire d\'authentification seront ignorés.',
     'By @%s on Gitlab' => 'Par @%s sur Gitlab',
     'Gitlab issue comment created' => 'Commentaire créé sur un ticket Gitlab',
+    'New remote user' => 'Créer un utilisateur distant',
+    'New local user' => 'Créer un utilisateur local',
 );
