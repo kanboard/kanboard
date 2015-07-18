@@ -33,6 +33,7 @@ class Lexer
         "/^(category:)/"                                 => 'T_CATEGORY',
         "/^(column:)/"                                   => 'T_COLUMN',
         "/^(project:)/"                                  => 'T_PROJECT',
+        "/^(swimlane:)/"                                 => 'T_SWIMLANE',
         "/^(ref:)/"                                      => 'T_REFERENCE',
         "/^(reference:)/"                                => 'T_REFERENCE',
         "/^(\s+)/"                                       => 'T_WHITESPACE',
@@ -116,6 +117,7 @@ class Lexer
                 case 'T_CATEGORY':
                 case 'T_COLUMN':
                 case 'T_PROJECT':
+                case 'T_SWIMLANE':
                     $next = next($tokens);
 
                     if ($next !== false && $next['token'] === 'T_STRING') {

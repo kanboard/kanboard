@@ -71,6 +71,9 @@ class TaskFilter extends Base
                 case 'T_REFERENCE':
                     $this->filterByReference($value);
                     break;
+                case 'T_SWIMLANE':
+                    $this->filterBySwimlaneName($value);
+                    break;
             }
         }
 
@@ -240,6 +243,30 @@ class TaskFilter extends Base
             }
             else {
                 $this->query->ilike(Project::TABLE.'.name', $project);
+            }
+        }
+
+        $this->query->closeOr();
+    }
+
+    /**
+     * Filter by swimlane name
+     *
+     * @access public
+     * @param  array    $values   List of swimlane name
+     * @return TaskFilter
+     */
+    public function filterBySwimlaneName(array $values)
+    {
+        $this->query->beginOr();
+
+        foreach ($values as $swimlane) {
+            if ($swimlane === 'default') {
+                $this->query->eq(Task::TABLE.'.swimlane_id', 0);
+            }
+            else {
+                $this->query->ilike(Swimlane::TABLE.'.name', $swimlane);
+                $this->query->addCondition(Task::TABLE.'.swimlane_id=0 AND '.Project::TABLE.'.default_swimlane '.$this->db->getDriver()->getOperator('ILIKE')." '$swimlane'");
             }
         }
 

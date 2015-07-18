@@ -151,6 +151,15 @@ Attribute: **column**
 - Find tasks by column name: `column:"Work in progress"`
 - Find tasks for several columns: `column:"Backlog" column:ready`
 
+Search by swimlane
+------------------
+
+Attribute: **swimlane**
+
+- Find tasks by swimlane: `swimlane:"Version 42"`
+- Find tasks in the default swimlane: `swimlane:default`
+- Find tasks into several swimlanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
+
 Search by external reference
 ----------------------------
 

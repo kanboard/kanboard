@@ -9,6 +9,7 @@ use Model\TaskCreation;
 use Model\DateParser;
 use Model\Category;
 use Model\Config;
+use Model\Swimlane;
 
 class TaskFilterTest extends Base
 {
@@ -282,6 +283,64 @@ class TaskFilterTest extends Base
         $this->assertEquals('My project B', $tasks[1]['project_name']);
 
         $tf->search('project:"not found"');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+    }
+
+    public function testSearchWithSwimlane()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+        $s = new Swimlane($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'My project A')));
+        $this->assertEquals(1, $s->create(1, 'Version 1.1'));
+        $this->assertEquals(2, $s->create(1, 'Version 1.2'));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1', 'swimlane_id' => 1)));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2', 'swimlane_id' => 2)));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task3', 'swimlane_id' => 0)));
+
+        $tf->search('swimlane:"Version 1.1"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('Version 1.1', $tasks[0]['swimlane_name']);
+
+        $tf->search('swimlane:"versioN 1.2"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('Version 1.2', $tasks[0]['swimlane_name']);
+
+        $tf->search('swimlane:"Default swimlane"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task3', $tasks[0]['title']);
+        $this->assertEquals('Default swimlane', $tasks[0]['default_swimlane']);
+        $this->assertEquals('', $tasks[0]['swimlane_name']);
+
+        $tf->search('swimlane:default');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task3', $tasks[0]['title']);
+        $this->assertEquals('Default swimlane', $tasks[0]['default_swimlane']);
+        $this->assertEquals('', $tasks[0]['swimlane_name']);
+
+        $tf->search('swimlane:"Version 1.1" swimlane:"Version 1.2"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('Version 1.1', $tasks[0]['swimlane_name']);
+        $this->assertEquals('task2', $tasks[1]['title']);
+        $this->assertEquals('Version 1.2', $tasks[1]['swimlane_name']);
+
+        $tf->search('swimlane:"not found"');
         $tasks = $tf->findAll();
         $this->assertEmpty($tasks);
     }

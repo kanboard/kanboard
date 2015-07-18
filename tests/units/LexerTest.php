@@ -6,6 +6,31 @@ use Core\Lexer;
 
 class LexerTest extends Base
 {
+    public function testSwimlaneQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'swimlane:', 'token' => 'T_SWIMLANE'), array('match' => 'Version 42', 'token' => 'T_STRING')),
+            $lexer->tokenize('swimlane:"Version 42"')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'swimlane:', 'token' => 'T_SWIMLANE'), array('match' => 'v3', 'token' => 'T_STRING')),
+            $lexer->tokenize('swimlane:v3')
+        );
+
+        $this->assertEquals(
+            array('T_SWIMLANE' => array('v3')),
+            $lexer->map($lexer->tokenize('swimlane:v3'))
+        );
+
+        $this->assertEquals(
+            array('T_SWIMLANE' => array('Version 42', 'v3')),
+            $lexer->map($lexer->tokenize('swimlane:"Version 42" swimlane:v3'))
+        );
+    }
+
     public function testAssigneeQuery()
     {
         $lexer = new Lexer;
