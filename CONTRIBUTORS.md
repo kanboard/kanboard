@@ -36,6 +36,7 @@ Contributors:
 - [Kiswa](https://github.com/kiswa)
 - [Kralo](https://github.com/kralo)
 - [Lars Christian Schou](https://github.com/NegoZiatoR)
+- [Lesstat](https://github.com/Lesstat)
 - [Levlaz](https://github.com/levlaz)
 - [Lim Yuen Hoe](https://github.com/jasonmoofang)
 - [Manish Lad](https://github.com/manishlad)
@@ -56,6 +57,7 @@ Contributors:
 - [Null-Kelvin](https://github.com/Null-Kelvin)
 - [Olaf Lessenich](https://github.com/xai)
 - [Oliver Bertuch](https://github.com/poikilotherm)
+- [Oliver Jakoubek](https://github.com/jakoubek)
 - [Olivier Maridat](https://github.com/oliviermaridat)
 - [Oren Ben-Kiki](https://github.com/orenbenkiki)
 - Paolo Mainieri
@@ -80,6 +82,7 @@ Contributors:
 - [Typz](https://github.com/Typz)
 - [Vedovator](https://github.com/vedovator)
 - [Vladimir Babin](https://github.com/Chiliec)
+- [Yannick Ihmels](https://github.com/ihmels)
 - [Ybarc](https://github.com/ybarc)
 - [Yuichi Murata](https://github.com/yuichi1004)
 
