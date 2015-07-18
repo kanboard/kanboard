@@ -135,6 +135,9 @@ define('LDAP_ACCOUNT_ID', 'samaccountname');
 // By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
 // Set to true if you want to preserve the case
 define('LDAP_USERNAME_CASE_SENSITIVE', false);
+
+// Automatically create user account
+define('LDAP_ACCOUNT_CREATION', true);
 ```
 
 Google Authentication settings

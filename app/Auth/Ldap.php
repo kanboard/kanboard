@@ -46,7 +46,7 @@ class Ldap extends Base
             else {
 
                 // We create automatically a new user
-                if ($this->createUser($username, $result['name'], $result['email'])) {
+                if (LDAP_ACCOUNT_CREATION && $this->createUser($username, $result['name'], $result['email'])) {
                     $user = $this->user->getByUsername($username);
                 }
                 else {

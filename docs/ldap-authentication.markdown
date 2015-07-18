@@ -17,7 +17,7 @@ When the LDAP authentication is activated, the login process work like that:
 
 1. Try first to authenticate the user by using the database
 2. If the user is not found inside the database, a LDAP authentication is performed
-3. If the LDAP authentication is successful, a local user is created automatically with no password and marked as LDAP user.
+3. If the LDAP authentication is successful, by default a local user is created automatically with no password and marked as LDAP user.
 
 ### Differences between a local user and a LDAP user are the following:
 
@@ -85,6 +85,22 @@ define('LDAP_ACCOUNT_ID', 'samaccountname');
 // By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
 // Set to true if you want to preserve the case
 define('LDAP_USERNAME_CASE_SENSITIVE', false);
+
+// Automatically create user account
+define('LDAP_ACCOUNT_CREATION', true);
+```
+
+### Disable automatic account creation
+
+By default, Kanboard will create automatically a user account if nothing is found.
+
+You can disable this behavior if you prefer to create user accounts manually to restrict Kanboard to only some people.
+
+Just change the value of `LDAP_ACCOUNT_CREATION` to `false`:
+
+```php
+// Automatically create user account
+define('LDAP_ACCOUNT_CREATION', false);
 ```
 
 ### LDAP bind type
