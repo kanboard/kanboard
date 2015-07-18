@@ -851,7 +851,7 @@ return array(
     'Two factor authentication enabled' => 'Autenticación de dos factores habilitado',
     'Unable to update this user.' => 'Imposible actualizar este usuario.',
     'There is no user management for private projects.' => 'No hay gestión de usuarios para proyectos privados.',
-    'User that will receive the email' => 'Usuario que recibirá el correo'
+    'User that will receive the email' => 'Usuario que recibirá el correo',
     'Email subject' => 'Asunto del correo',
     'Date' => 'Fecha',
     // 'By @%s on Bitbucket' => '',
