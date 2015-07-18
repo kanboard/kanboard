@@ -16,7 +16,7 @@ use Symfony\Component\Console\Command\Command;
  * @property \Model\ProjectPermission          $projectPermission
  * @property \Model\ProjectAnalytic            $projectAnalytic
  * @property \Model\ProjectDailyColumnStats    $projectDailyColumnStats
- * @property \Model\ProjectDailyStats          $projectDailyColumnStats
+ * @property \Model\ProjectDailyStats          $projectDailyStats
  * @property \Model\SubtaskExport              $subtaskExport
  * @property \Model\Task                       $task
  * @property \Model\TaskExport                 $taskExport
