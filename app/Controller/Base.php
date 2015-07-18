@@ -67,6 +67,7 @@ abstract class Base extends \Core\Base
 
             $this->container['logger']->debug('SQL_QUERIES={nb}', array('nb' => $this->container['db']->nbQueries));
             $this->container['logger']->debug('RENDERING={time}', array('time' => microtime(true) - @$_SERVER['REQUEST_TIME_FLOAT']));
+            $this->container['logger']->debug('MEMORY='.$this->helper->text->bytes(memory_get_usage()));
             $this->container['logger']->debug('END_REQUEST='.$_SERVER['REQUEST_URI']);
         }
     }
