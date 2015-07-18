@@ -253,6 +253,26 @@ var Kanboard = (function() {
                $("form.search").submit();
             });
 
+            // Collapse sidebar
+            $(document).on("click", ".sidebar-collapse", function (e) {
+               e.preventDefault();
+               $(".sidebar-container").addClass("sidebar-collapsed");
+               $(".sidebar-expand").show();
+               $(".sidebar h2").hide();
+               $(".sidebar ul").hide();
+               $(".sidebar-collapse").hide();
+            });
+
+            // Expand sidebar
+            $(document).on("click", ".sidebar-expand", function (e) {
+               e.preventDefault();
+               $(".sidebar-container").removeClass("sidebar-collapsed");
+               $(".sidebar-collapse").show();
+               $(".sidebar h2").show();
+               $(".sidebar ul").show();
+               $(".sidebar-expand").hide();
+            });
+
             // Datepicker translation
             $.datepicker.setDefaults($.datepicker.regional[$("body").data("js-lang")]);
 
