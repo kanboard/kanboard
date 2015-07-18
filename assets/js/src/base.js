@@ -39,7 +39,7 @@ var Kanboard = (function() {
                 $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
 
                 $("#popover-container").click(function() {
-                    $(this).remove();
+                    Kanboard.ClosePopover();
                 });
 
                 $("#popover-content").click(function(e) {
@@ -48,17 +48,22 @@ var Kanboard = (function() {
 
                 $(".close-popover").click(function(e) {
                     e.preventDefault();
-                    $('#popover-container').remove();
+                    Kanboard.ClosePopover();
                 });
 
                 Mousetrap.bindGlobal("esc", function() {
-                    $('#popover-container').remove();
+                    Kanboard.ClosePopover();
                 });
 
                 if (callback) {
                     callback();
                 }
             });
+        },
+
+        ClosePopover: function() {
+            $('#popover-container').remove();
+            Kanboard.Screenshot.Destroy();
         },
 
         // Return true if the page is visible
