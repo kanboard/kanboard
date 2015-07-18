@@ -163,7 +163,11 @@ class Task extends Base
                 if (isset($values['another_task']) && $values['another_task'] == 1) {
                     unset($values['title']);
                     unset($values['description']);
-                    $this->response->redirect($this->helper->url->to('task', 'create', $values));
+                    $value = array(
+                        'redirect' => 'true'
+                    );
+                    $newValues = array_merge($value, $values);
+                    $this->response->redirect($this->helper->url->to('board', 'show', $newValues));
                 }
                 else {
                     $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])));

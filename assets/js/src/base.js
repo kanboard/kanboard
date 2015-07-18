@@ -61,6 +61,16 @@ var Kanboard = (function() {
             });
         },
 
+        // Display a popup automatically
+        OpenRedirectPopoverAutomatically: function() {
+            var redirect = GetURLParameter('redirect');
+            if (redirect != null) {
+                var urlVariables = GetURLStrings('redirect=true');
+                var popoverUrl = '?controller=task&action=create' + urlVariables[1];
+                Kanboard.OpenPopover(popoverUrl, Kanboard.InitAfterAjax);
+            }
+        },
+
         // Return true if the page is visible
         IsVisible: function() {
 
@@ -349,3 +359,20 @@ var Kanboard = (function() {
     };
 
 })();
+
+function GetURLParameter(parameter) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == parameter) {
+            return sParameterName[1];
+        }
+    }
+}
+
+function GetURLStrings(parameter) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split(parameter);
+    return sURLVariables;
+}
