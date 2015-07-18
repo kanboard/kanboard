@@ -8,6 +8,7 @@ use Model\TaskFilter;
 use Model\TaskCreation;
 use Model\DateParser;
 use Model\Category;
+use Model\Subtask;
 use Model\Config;
 use Model\Swimlane;
 
@@ -526,6 +527,35 @@ class TaskFilterTest extends Base
         $this->assertCount(2, $tasks);
         $this->assertEquals('my task title is amazing', $tasks[0]['title']);
         $this->assertEquals('Bob at work', $tasks[1]['title']);
+    }
+
+    public function testSearchWithAssigneeIncludingSubtasks()
+    {
+        $p = new Project($this->container);
+        $u = new User($this->container);
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(2, $u->create(array('username' => 'bob', 'name' => 'Paul Ryan')));
+        $this->assertEquals(1,$tc->create(array('project_id' => 1, 'title' => 'my task title is awesome', 'owner_id' => 2)));
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1, 'status' => 1, 'another_subtask' => 'on',  'user_id' => 0)));        
+        $this->assertEquals(2,$tc->create(array('project_id' => 1, 'title' => 'my task title is amazing', 'owner_id' => 0)));
+        $this->assertEquals(2, $s->create(array('title' => 'subtask #1', 'task_id' => 2, 'status' => 1, 'another_subtask' => 'on',  'user_id' => 2)));
+
+        $tf->search('assignee:bob');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('my task title is awesome', $tasks[0]['title']);
+        $this->assertEquals('my task title is amazing', $tasks[1]['title']);
+        
+        $tf->search('assignee:nobody');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('my task title is amazing', $tasks[0]['title']);        
     }
 
     public function testCopy()
