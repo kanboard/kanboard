@@ -104,6 +104,25 @@ class TaskFilter extends Base
     }
 
     /**
+     * Create a new subtask query
+     *
+     * @access public
+     * @return \PicoDb\Table
+     */
+    public function createSubtaskQuery()
+    {
+        return $this->db->table(Subtask::TABLE)
+            ->columns(
+                Subtask::TABLE.'.user_id',
+                Subtask::TABLE.'.task_id',
+                User::TABLE.'.name',
+                User::TABLE.'.username'
+            )
+            ->join(User::TABLE, 'id', 'user_id', Subtask::TABLE)
+            ->neq(Subtask::TABLE.'.status', Subtask::STATUS_DONE);
+    }
+
+    /**
      * Clone the filter
      *
      * @access public
@@ -340,11 +359,9 @@ class TaskFilter extends Base
         $this->query->beginOr();
 
         foreach ($values as $assignee) {
-            $subtaskQuery = $this->buildSubtaskQuery();
             switch ($assignee) {
                 case 'me':
                     $this->query->eq(Task::TABLE.'.owner_id', $this->userSession->getId());
-                    $subtaskQuery->eq(Subtask::TABLE.'.user_id',$this->userSession->getId() );
                     break;
                 case 'nobody':
                     $this->query->eq(Task::TABLE.'.owner_id', 0);
@@ -352,18 +369,43 @@ class TaskFilter extends Base
                 default:
                     $this->query->ilike(User::TABLE.'.username', '%'.$assignee.'%');
                     $this->query->ilike(User::TABLE.'.name', '%'.$assignee.'%');
-                    $subtaskQuery->beginOr();
-                    $subtaskQuery->ilike(User::TABLE.'.username', '%'.$assignee.'%');
-                    $subtaskQuery->ilike(User::TABLE.'.name', '%'.$assignee.'%');
-                    $subtaskQuery->closeOr();
-            }
-            if ($assignee != 'nobody'){
-                $subtasks = $subtaskQuery->findAll();
-                $this->addTasksWithFoundSubtask($subtasks);
             }
         }
 
+        $this->filterBySubtaskAssignee($values);
+
         $this->query->closeOr();
+
+        return $this;
+    }
+
+    /**
+     * Filter by subtask assignee names
+     *
+     * @access public
+     * @param  array    $values   List of assignees
+     * @return TaskFilter
+     */
+    public function filterBySubtaskAssignee(array $values)
+    {
+        $subtaskQuery = $this->createSubtaskQuery();
+        $subtaskQuery->beginOr();
+
+        foreach ($values as $assignee) {
+            if ($assignee === 'me') {
+                $subtaskQuery->eq(Subtask::TABLE.'.user_id', $this->userSession->getId());
+            }
+            else {
+                $subtaskQuery->ilike(User::TABLE.'.username', '%'.$assignee.'%');
+                $subtaskQuery->ilike(User::TABLE.'.name', '%'.$assignee.'%');
+            }
+        }
+
+        $subtaskQuery->closeOr();
+
+        $this->query->in(Task::TABLE.'.id', $subtaskQuery->findAllByColumn('task_id'));
+
+        return $this;
     }
 
     /**
@@ -796,23 +838,4 @@ class TaskFilter extends Base
 
         return $this;
     }
-    
-    private function buildSubtaskQuery(){
-        return $this->db->table(Subtask::TABLE)
-                ->columns(
-                    Subtask::TABLE.'.user_id',
-                    Subtask::TABLE.'.task_id',
-                    User::TABLE.'.name',
-                    User::TABLE.'.username')
-                ->join(User::TABLE, 'id', 'user_id', Subtask::TABLE)
-                ->neq(Subtask::TABLE.'.status', Subtask::STATUS_DONE);
-                
-    }
-
-    private function addTasksWithFoundSubtask($subtasks) {
-        foreach ($subtasks as $subtask) {
-            $this->query->eq(Task::TABLE.'.id',$subtask['task_id']);
-        }
-    }
-
 }

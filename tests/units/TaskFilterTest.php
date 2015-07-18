@@ -539,23 +539,42 @@ class TaskFilterTest extends Base
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(2, $u->create(array('username' => 'bob', 'name' => 'Paul Ryan')));
-        $this->assertEquals(1,$tc->create(array('project_id' => 1, 'title' => 'my task title is awesome', 'owner_id' => 2)));
-        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1, 'status' => 1, 'another_subtask' => 'on',  'user_id' => 0)));        
-        $this->assertEquals(2,$tc->create(array('project_id' => 1, 'title' => 'my task title is amazing', 'owner_id' => 0)));
-        $this->assertEquals(2, $s->create(array('title' => 'subtask #1', 'task_id' => 2, 'status' => 1, 'another_subtask' => 'on',  'user_id' => 2)));
+
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'task1', 'owner_id' => 2)));
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1, 'status' => 1, 'user_id' => 0)));
+
+        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'task2', 'owner_id' => 0)));
+        $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 2, 'status' => 1, 'user_id' => 2)));
+
+        $this->assertEquals(3, $tc->create(array('project_id' => 1, 'title' => 'task3', 'owner_id' => 0)));
+        $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 3, 'user_id' => 1)));
 
         $tf->search('assignee:bob');
         $tasks = $tf->findAll();
         $this->assertNotEmpty($tasks);
         $this->assertCount(2, $tasks);
-        $this->assertEquals('my task title is awesome', $tasks[0]['title']);
-        $this->assertEquals('my task title is amazing', $tasks[1]['title']);
-        
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('task2', $tasks[1]['title']);
+
+        $tf->search('assignee:"Paul Ryan"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('task2', $tasks[1]['title']);
+
         $tf->search('assignee:nobody');
         $tasks = $tf->findAll();
         $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('task3', $tasks[1]['title']);
+
+        $tf->search('assignee:admin');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
-        $this->assertEquals('my task title is amazing', $tasks[0]['title']);        
+        $this->assertEquals('task3', $tasks[0]['title']);
     }
 
     public function testCopy()

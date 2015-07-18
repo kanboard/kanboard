@@ -63,6 +63,8 @@ Query for my assigned tasks
 assignee:me
 ```
 
+Note: Results will also include subtasks assignee with the status todo or in progress.
+
 Search by color
 ---------------
 
@@ -125,6 +127,13 @@ Attribute: **description**
 
 Example: `description:"text search"`
 
+Search by external reference
+----------------------------
+
+The task reference is an external id of your task, by example a ticket number from another software.
+
+- Find tasks with a reference: `ref:1234` or `reference:TICKET-1234`
+
 Search by category
 ------------------
 
@@ -160,9 +169,3 @@ Attribute: **swimlane**
 - Find tasks in the default swimlane: `swimlane:default`
 - Find tasks into several swimlanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
 
-Search by external reference
-----------------------------
-
-The task reference is an external id of your task, by example a ticket number from another software.
-
-- Find tasks with a reference: `ref:1234` or `reference:TICKET-1234`
