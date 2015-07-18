@@ -28,6 +28,9 @@ class Lexer
         "/^(assignee:)/"                                 => 'T_ASSIGNEE',
         "/^(color:)/"                                    => 'T_COLOR',
         "/^(due:)/"                                      => 'T_DUE',
+        "/^(updated:)/"                                  => 'T_UPDATED',
+        "/^(modified:)/"                                 => 'T_UPDATED',
+        "/^(created:)/"                                  => 'T_CREATED',
         "/^(status:)/"                                   => 'T_STATUS',
         "/^(description:)/"                              => 'T_DESCRIPTION',
         "/^(category:)/"                                 => 'T_CATEGORY',
@@ -128,6 +131,8 @@ class Lexer
 
                 case 'T_STATUS':
                 case 'T_DUE':
+                case 'T_UPDATED':
+                case 'T_CREATED':
                 case 'T_DESCRIPTION':
                 case 'T_REFERENCE':
                     $next = next($tokens);

@@ -311,6 +311,71 @@ class LexerTest extends Base
         );
     }
 
+    public function testModifiedQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'modified:', 'token' => 'T_UPDATED'), array('match' => '2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('modified:2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'modified:', 'token' => 'T_UPDATED'), array('match' => '<2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('modified:<2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'modified:', 'token' => 'T_UPDATED'), array('match' => '>2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('modified:>2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'updated:', 'token' => 'T_UPDATED'), array('match' => '<=2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('updated:<=2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'updated:', 'token' => 'T_UPDATED'), array('match' => '>=2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('updated:>=2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'updated:', 'token' => 'T_UPDATED'), array('match' => 'yesterday', 'token' => 'T_DATE')),
+            $lexer->tokenize('updated:yesterday')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'updated:', 'token' => 'T_UPDATED'), array('match' => 'tomorrow', 'token' => 'T_DATE')),
+            $lexer->tokenize('updated:tomorrow')
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->tokenize('updated:#2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->tokenize('modified:01-05-1024')
+        );
+
+        $this->assertEquals(
+            array('T_UPDATED' => '2015-05-01'),
+            $lexer->map($lexer->tokenize('modified:2015-05-01'))
+        );
+
+        $this->assertEquals(
+            array('T_UPDATED' => '<2015-05-01'),
+            $lexer->map($lexer->tokenize('modified:<2015-05-01'))
+        );
+
+        $this->assertEquals(
+            array('T_UPDATED' => 'today'),
+            $lexer->map($lexer->tokenize('modified:today'))
+        );
+    }
+
     public function testMultipleCriterias()
     {
         $lexer = new Lexer;

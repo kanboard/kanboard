@@ -50,6 +50,12 @@ class TaskFilter extends Base
                 case 'T_DUE':
                     $this->filterByDueDate($value);
                     break;
+                case 'T_UPDATED':
+                    $this->filterByModificationDate($value);
+                    break;
+                case 'T_CREATED':
+                    $this->filterByCreationDate($value);
+                    break;
                 case 'T_TITLE':
                     $this->filterByTitle($value);
                     break;
@@ -580,6 +586,22 @@ class TaskFilter extends Base
      * Filter by creation date
      *
      * @access public
+     * @param  string      $date      ISO8601 date format
+     * @return TaskFilter
+     */
+    public function filterByCreationDate($date)
+    {
+        if ($date === 'recently') {
+            return $this->filterRecentlyDate(Task::TABLE.'.date_creation');
+        }
+
+        return $this->filterWithOperator(Task::TABLE.'.date_creation', $date, true);
+    }
+
+    /**
+     * Filter by creation date
+     *
+     * @access public
      * @param  string  $start
      * @param  string  $end
      * @return TaskFilter
@@ -594,6 +616,22 @@ class TaskFilter extends Base
         ));
 
         return $this;
+    }
+
+    /**
+     * Filter by modification date
+     *
+     * @access public
+     * @param  string      $date      ISO8601 date format
+     * @return TaskFilter
+     */
+    public function filterByModificationDate($date)
+    {
+        if ($date === 'recently') {
+            return $this->filterRecentlyDate(Task::TABLE.'.date_modification');
+        }
+
+        return $this->filterWithOperator(Task::TABLE.'.date_modification', $date, true);
     }
 
     /**
@@ -826,7 +864,6 @@ class TaskFilter extends Base
         );
 
         foreach ($operators as $operator => $method) {
-
             if (strpos($value, $operator) === 0) {
                 $value = substr($value, strlen($operator));
                 $this->query->$method($field, $is_date ? $this->dateParser->getTimestampFromIsoFormat($value) : $value);
@@ -834,7 +871,32 @@ class TaskFilter extends Base
             }
         }
 
-        $this->query->eq($field, $is_date ? $this->dateParser->getTimestampFromIsoFormat($value) : $value);
+        if ($is_date) {
+            $timestamp = $this->dateParser->getTimestampFromIsoFormat($value);
+            $this->query->gte($field, $timestamp);
+            $this->query->lte($field, $timestamp + 86399);
+        }
+        else {
+            $this->query->eq($field, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the board_highlight_period for the "recently" keyword
+     *
+     * @access private
+     * @param  string    $field
+     * @return TaskFilter
+     */
+    private function filterRecentlyDate($field)
+    {
+        $duration = $this->config->get('board_highlight_period', 0);
+
+        if ($duration > 0) {
+            $this->query->gte($field, time() - $duration);
+        }
 
         return $this;
     }
