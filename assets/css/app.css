@@ -1523,6 +1523,10 @@ span.task-board-date-overdue {
         margin-top: 10px;
         display: block;
     }
+
+    .page-header .form-input-large {
+        width: 300px;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
@@ -1541,6 +1545,10 @@ span.task-board-date-overdue {
     input[type="password"],
     input[type="text"] {
         height: 18px;
+    }
+
+    .page-header .form-input-large {
+        width: 300px;
     }
 }
 
@@ -1691,4 +1699,3 @@ form.search {
 div.search {
     margin-bottom: 20px;
 }
-
