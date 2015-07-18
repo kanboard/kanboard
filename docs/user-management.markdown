@@ -1,8 +1,8 @@
 User management
 ===============
 
-Type of users
--------------
+Group of users
+--------------
 
 Kanboard use a basic permission system, there is two kind of users:
 
@@ -18,21 +18,29 @@ There is also permissions defined at the project level, users can be seen as:
 
 Project managers have more privileges than a simple user member.
 
+Local and remote users
+----------------------
+
+- A local user is an account that use the database to store credentials. Local users use the login form for the authentication.
+- A remote user is an account that use an external system to store credentials. By example, it can be LDAP, Github or Google accounts. Authentication of these users can be done through the login form or not.
+
 Add a new user
 --------------
 
 To add a new user, you must be administrator.
 
 1. From the dashboard, go to the menu **User Management**
-2. On the top, you have a link **New user**
+2. On the top, you have a link **New local user** or **New remote user**
 3. Fill the form and save
 
 ![New user](http://kanboard.net/screenshots/documentation/new-user.png)
 
-When you create a new user, you have to specify at least those values:
+When you create a **local user**, you have to specify at least those values:
 
 - **username**: This is the unique identifier of your user (login)
 - **password**: The password of your user must have at least 6 characters
+
+For **remote users**, only the username is mandatory. You can also pre-link Github or Google accounts if you already know their unique id.
 
 Edit users
 ----------
