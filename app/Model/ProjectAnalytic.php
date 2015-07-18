@@ -119,8 +119,8 @@ class ProjectAnalytic extends Base
             $stats['total_cycle_time'] += empty($task['date_started']) ? 0 : ($task['date_completed'] ?: time()) - $task['date_started'];
         }
 
-        $stats['avg_lead_time'] = (int) ($stats['total_lead_time'] / $stats['count']);
-        $stats['avg_cycle_time'] = (int) ($stats['total_cycle_time'] / $stats['count']);
+        $stats['avg_lead_time'] = $stats['count'] > 0 ? (int) ($stats['total_lead_time'] / $stats['count']) : 0;
+        $stats['avg_cycle_time'] = $stats['count'] > 0 ? (int) ($stats['total_cycle_time'] / $stats['count']) : 0;
 
         return $stats;
     }
@@ -174,7 +174,7 @@ class ProjectAnalytic extends Base
 
         // Calculate average for each column
         foreach ($columns as $column_id => $column_title) {
-            $stats[$column_id]['average'] = (int) ($stats[$column_id]['time_spent'] / $stats[$column_id]['count']);
+            $stats[$column_id]['average'] = $stats[$column_id]['count'] > 0 ? (int) ($stats[$column_id]['time_spent'] / $stats[$column_id]['count']) : 0;
         }
 
         return $stats;
