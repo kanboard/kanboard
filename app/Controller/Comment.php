@@ -93,7 +93,7 @@ class Comment extends Base
                 $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
             }
 
-            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), 'comments');
+            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
         }
 
         $this->create($values, $errors);

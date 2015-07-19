@@ -15,7 +15,7 @@
 
 <?php if ($task['recurrence_status'] != \Model\Task::RECURRING_STATUS_PROCESSED): ?>
 
-    <form method="post" action="<?= $this->url->href('task', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <form method="post" action="<?= $this->url->href('taskmodification', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
 

@@ -1,4 +1,4 @@
-<?= $this->render('task/timesheet', array('task' => $task)) ?>
+<?= $this->render('task/time_tracking_summary', array('task' => $task)) ?>
 
 <h3><?= t('Subtask timesheet') ?></h3>
 <?php if ($subtask_paginator->isEmpty()): ?>
