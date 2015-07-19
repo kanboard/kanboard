@@ -29,7 +29,11 @@
             </td>
             <td>
                 <?php if (! empty($subtask['username'])): ?>
-                    <?= $this->url->link($this->e($subtask['name'] ?: $subtask['username']), 'user', 'show', array('user_id' => $subtask['user_id'])) ?>
+                    <?php if (! isset($not_editable)): ?>
+                        <?= $this->url->link($this->e($subtask['name'] ?: $subtask['username']), 'user', 'show', array('user_id' => $subtask['user_id'])) ?>
+                    <?php else: ?>
+                        <?= $this->e($subtask['name'] ?: $subtask['username']) ?>
+                    <?php endif ?>
                 <?php endif ?>
             </td>
             <td>
@@ -88,6 +92,8 @@
             <?= $this->form->csrf() ?>
             <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
             <?= $this->form->text('title', array(), array(), array('required', 'placeholder="'.t('Type here to create a new sub-task').'"')) ?>
+            <?= $this->form->numeric('time_estimated', array(), array(), array('placeholder="'.t('Original estimate').'"')) ?>
+            <?= $this->form->select('user_id', $users_list, array(), array(), array('placeholder="'.t('Assignee').'"')) ?>
             <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
         </form>
     <?php endif ?>
