@@ -273,6 +273,10 @@ var Kanboard = (function() {
                $(".sidebar-expand").hide();
             });
 
+            $("select.task-reload-project-destination").change(function() {
+                window.location = $(this).data("redirect").replace(/PROJECT_ID/g, $(this).val());
+            });
+
             // Datepicker translation
             $.datepicker.setDefaults($.datepicker.regional[$("body").data("js-lang")]);
 

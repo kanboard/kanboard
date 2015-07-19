@@ -1001,4 +1001,8 @@ return array(
     'New remote user' => 'Créer un utilisateur distant',
     'New local user' => 'Créer un utilisateur local',
     'Default task color' => 'Couleur par défaut des tâches',
+    'Hide sidebar' => 'Cacher la barre latérale',
+    'Expand sidebar' => 'Déplier la barre latérale',
+    'This feature does not work with all browsers.' => 'Cette fonctionnalité n\'est pas compatible avec tous les navigateurs',
+    'There is no destination project available.' => 'Il n\'y a pas de projet de destination disponible.',
 );

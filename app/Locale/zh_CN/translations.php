@@ -999,4 +999,8 @@ return array(
     // 'New remote user' => '',
     // 'New local user' => '',
     // 'Default task color' => '',
+    // 'Hide sidebar' => '',
+    // 'Expand sidebar' => '',
+    // 'This feature does not work with all browsers.' => '',
+    // 'There is no destination project available.' => '',
 );

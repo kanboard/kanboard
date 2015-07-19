@@ -89,6 +89,12 @@ if (ENABLE_URL_REWRITE) {
     $container['router']->addRoute('project/:project_id/swimlane/:swimlane_id/column/:column_id', 'task', 'create', array('project_id', 'swimlane_id', 'column_id'));
     $container['router']->addRoute('public/task/:task_id/:token', 'task', 'readonly', array('task_id', 'token'));
 
+    $container['router']->addRoute('project/:project_id/task/:task_id/duplicate', 'taskduplication', 'duplicate', array('task_id', 'project_id'));
+    $container['router']->addRoute('project/:project_id/task/:task_id/copy', 'taskduplication', 'copy', array('task_id', 'project_id'));
+    $container['router']->addRoute('project/:project_id/task/:task_id/copy/:dst_project_id', 'taskduplication', 'copy', array('task_id', 'project_id', 'dst_project_id'));
+    $container['router']->addRoute('project/:project_id/task/:task_id/move', 'taskduplication', 'move', array('task_id', 'project_id'));
+    $container['router']->addRoute('project/:project_id/task/:task_id/move/:dst_project_id', 'taskduplication', 'move', array('task_id', 'project_id', 'dst_project_id'));
+
     // Board routes
     $container['router']->addRoute('board/:project_id', 'board', 'show', array('project_id'));
     $container['router']->addRoute('b/:project_id', 'board', 'show', array('project_id'));

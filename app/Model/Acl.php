@@ -41,6 +41,7 @@ class Acl extends Base
         'activity' => '*',
         'subtask' => '*',
         'task' => '*',
+        'taskduplication' => '*',
         'tasklink' => '*',
         'timer' => '*',
         'calendar' => array('show', 'project'),

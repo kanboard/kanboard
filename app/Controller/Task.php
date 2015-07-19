@@ -367,34 +367,6 @@ class Task extends Base
     }
 
     /**
-     * Duplicate a task
-     *
-     * @access public
-     */
-    public function duplicate()
-    {
-        $task = $this->getTask();
-
-        if ($this->request->getStringParam('confirmation') === 'yes') {
-
-            $this->checkCSRFParam();
-            $task_id = $this->taskDuplication->duplicate($task['id']);
-
-            if ($task_id) {
-                $this->session->flash(t('Task created successfully.'));
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-            } else {
-                $this->session->flashError(t('Unable to create this task.'));
-                $this->response->redirect($this->helper->url->to('task', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-            }
-        }
-
-        $this->response->html($this->taskLayout('task/duplicate', array(
-            'task' => $task,
-        )));
-    }
-
-    /**
      * Edit description form
      *
      * @access public
@@ -490,84 +462,6 @@ class Task extends Base
         );
 
         $this->response->html($this->taskLayout('task/edit_recurrence', $params));
-    }
-
-    /**
-     * Move a task to another project
-     *
-     * @access public
-     */
-    public function move()
-    {
-        $task = $this->getTask();
-        $values = $task;
-        $errors = array();
-        $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
-
-        unset($projects_list[$task['project_id']]);
-
-        if ($this->request->isPost()) {
-
-            $values = $this->request->getValues();
-            list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
-
-            if ($valid) {
-
-                if ($this->taskDuplication->moveToProject($task['id'], $values['project_id'])) {
-                    $this->session->flash(t('Task updated successfully.'));
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-                }
-                else {
-                    $this->session->flashError(t('Unable to update your task.'));
-                }
-            }
-        }
-
-        $this->response->html($this->taskLayout('task/move_project', array(
-            'values' => $values,
-            'errors' => $errors,
-            'task' => $task,
-            'projects_list' => $projects_list,
-        )));
-    }
-
-    /**
-     * Duplicate a task to another project
-     *
-     * @access public
-     */
-    public function copy()
-    {
-        $task = $this->getTask();
-        $values = $task;
-        $errors = array();
-        $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
-
-        unset($projects_list[$task['project_id']]);
-
-        if ($this->request->isPost()) {
-
-            $values = $this->request->getValues();
-            list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
-
-            if ($valid) {
-                $task_id = $this->taskDuplication->duplicateToProject($task['id'], $values['project_id']);
-                if ($task_id) {
-                    $this->session->flash(t('Task created successfully.'));
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-                }
-                else {
-                    $this->session->flashError(t('Unable to create your task.'));
-                }
-            }
-        }
-
-        $this->response->html($this->taskLayout('task/duplicate_project', array(
-            'values' => $values,
-            'errors' => $errors,
-            'task' => $task,
-            'projects_list' => $projects_list,
-        )));
     }
 
     /**
