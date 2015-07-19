@@ -5,3 +5,7 @@ filter:
         - app/Schema/*
         - app/Template/*
         - app/Locale/*
+        - app/Library/*
+        - app/constants.php
+        - app/common.php
+        - app/check_setup.php

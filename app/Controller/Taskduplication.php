@@ -50,7 +50,7 @@ class Taskduplication extends Base
         if ($this->request->isPost()) {
 
             $values = $this->request->getValues();
-            list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
+            list($valid,) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid && $this->taskDuplication->moveToProject($task['id'],
                                                                 $values['project_id'],
@@ -81,7 +81,7 @@ class Taskduplication extends Base
         if ($this->request->isPost()) {
 
             $values = $this->request->getValues();
-            list($valid, $errors) = $this->taskValidator->validateProjectModification($values);
+            list($valid,) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid && $this->taskDuplication->duplicateToProject($task['id'],
                                                                 $values['project_id'],
@@ -104,6 +104,8 @@ class Taskduplication extends Base
      * Choose destination when move/copy task to another project
      *
      * @access private
+     * @param  array   $task
+     * @param  string  $template
      */
     private function chooseDestination(array $task, $template)
     {

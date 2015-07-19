@@ -281,7 +281,7 @@ class Board extends Base
         $sum = 0;
 
         foreach ($tasks as $task) {
-            $sum += $task['score'];
+            $sum += $task[$field];
         }
 
         return $sum;
