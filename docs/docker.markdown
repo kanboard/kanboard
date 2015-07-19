@@ -10,6 +10,7 @@ Use the automated build
 Every new commit on the repository trigger a new build on [Docker Hub](https://registry.hub.docker.com/u/kanboard/kanboard/).
 
 ```bash
+docker pull kanboard/kanboard
 docker run -d --name kanboard -p 80:80 -t kanboard/kanboard:latest
 ```
 
