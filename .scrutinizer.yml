@@ -1,7 +1,7 @@
 filter:
+    paths:
+        - app/*
     excluded_paths:
-        - 'vendor/*'
-        - 'tests/*'
-        - 'app/Schema/*'
-        - 'app/Template/*'
-        - 'scripts/*'
+        - app/Schema/*
+        - app/Template/*
+        - app/Locale/*
