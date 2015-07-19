@@ -6,6 +6,9 @@
 
     <?= $this->form->csrf() ?>
 
+    <?= $this->form->label(t('Default task color'), 'default_color') ?>
+    <?= $this->form->select('default_color', $colors, $values, $errors) ?>
+
     <?= $this->form->label(t('Default columns for new projects (Comma-separated)'), 'board_columns') ?>
     <?= $this->form->text('board_columns', $values, $errors) ?><br/>
     <p class="form-help"><?= t('Default values are "%s"', $default_columns) ?></p>

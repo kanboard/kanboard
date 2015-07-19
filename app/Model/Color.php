@@ -147,7 +147,7 @@ class Color extends Base
      */
     public function getDefaultColor()
     {
-        return 'yellow'; // TODO: make this parameter configurable
+        return $this->config->get('default_color', 'yellow');
     }
 
     /**

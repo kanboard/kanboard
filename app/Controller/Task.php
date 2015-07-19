@@ -122,7 +122,7 @@ class Task extends Base
             $values = array(
                 'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
                 'column_id' => $this->request->getIntegerParam('column_id'),
-                'color_id' => $this->request->getStringParam('color_id'),
+                'color_id' => $this->request->getStringParam('color_id', $this->color->getDefaultColor()),
                 'owner_id' => $this->request->getIntegerParam('owner_id'),
                 'another_task' => $this->request->getIntegerParam('another_task'),
             );

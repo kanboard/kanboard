@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 59;
+const VERSION = 60;
+
+function version_60($pdo)
+{
+    $pdo->exec("INSERT INTO settings VALUES ('default_color', 'yellow')");
+}
 
 function version_59($pdo)
 {

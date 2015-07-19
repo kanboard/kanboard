@@ -998,4 +998,5 @@ return array(
     // 'Gitlab issue comment created' => '',
     // 'New remote user' => '',
     // 'New local user' => '',
+    // 'Default task color' => '',
 );

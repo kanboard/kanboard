@@ -104,6 +104,7 @@ class Config extends Base
         $this->common('project');
 
         $this->response->html($this->layout('config/project', array(
+            'colors' => $this->color->getList(),
             'default_columns' => implode(', ', $this->board->getDefaultColumns()),
             'title' => t('Settings').' &gt; '.t('Project settings'),
         )));

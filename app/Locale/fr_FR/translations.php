@@ -1000,4 +1000,5 @@ return array(
     'Gitlab issue comment created' => 'Commentaire créé sur un ticket Gitlab',
     'New remote user' => 'Créer un utilisateur distant',
     'New local user' => 'Créer un utilisateur local',
+    'Default task color' => 'Couleur par défaut des tâches',
 );
