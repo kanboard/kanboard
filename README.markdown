@@ -11,7 +11,7 @@ Official website: <http://kanboard.net>
 - Minimalist software, focus only on essential features (Less is more)
 - Open source and self-hosted
 - Super simple installation
-- Translated in 18 languages
+- Translated in 19 languages
 - [List of features are available on the website](http://kanboard.net/features)
 
 [![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)

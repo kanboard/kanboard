@@ -61,6 +61,7 @@ Contributors:
 - [Olivier Maridat](https://github.com/oliviermaridat)
 - [Oren Ben-Kiki](https://github.com/orenbenkiki)
 - Paolo Mainieri
+- [Pavel Roušar](https://github.com/rousarp)
 - [Peller Zoltan](https://github.com/PierP)
 - [Petja Touru](https://github.com/Petja)
 - [Piotr Zęgota](https://github.com/ZegalPL)
