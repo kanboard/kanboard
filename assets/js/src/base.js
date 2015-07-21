@@ -6,6 +6,14 @@ var Kanboard = (function() {
 
     return {
 
+        ShowLoadingIcon: function() {
+            $("body").append('<span id="app-loading-icon">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>');
+        },
+
+        HideLoadingIcon: function() {
+            $("#app-loading-icon").remove();
+        },
+
         // Return true if the element#id exists
         Exists: function(id) {
             if (document.getElementById(id)) {

@@ -78,6 +78,12 @@ hr {
 #ui-datepicker-div {
     font-size: 0.8em;
 }
+
+#app-loading-icon {
+    position: fixed;
+    right: 3px;
+    bottom: 3px;
+}
 /* links */
 a {
     color: #3366CC;
