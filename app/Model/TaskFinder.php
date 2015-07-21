@@ -248,6 +248,7 @@ class TaskFinder extends Base
             project_has_categories.name AS category_name,
             swimlanes.name AS swimlane_name,
             projects.name AS project_name,
+            projects.default_swimlane,
             columns.title AS column_title,
             users.username AS assignee_username,
             users.name AS assignee_name,

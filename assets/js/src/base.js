@@ -273,8 +273,14 @@ var Kanboard = (function() {
                $(".sidebar-expand").hide();
             });
 
+            // Reload page when a destination project is changed
+            var reloading_project = false;
             $("select.task-reload-project-destination").change(function() {
-                window.location = $(this).data("redirect").replace(/PROJECT_ID/g, $(this).val());
+                if (! reloading_project) {
+                    $(".loading-icon").show();
+                    reloading_project = true;
+                    window.location = $(this).data("redirect").replace(/PROJECT_ID/g, $(this).val());
+                }
             });
 
             // Datepicker translation
