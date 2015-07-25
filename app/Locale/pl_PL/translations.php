@@ -1011,4 +1011,8 @@ return array(
     // 'no category' => '',
     // 'Current assignee: %s' => '',
     // 'not assigned' => '',
+    // 'Author:' => '',
+    // 'contributors' => '',
+    // 'License:' => '',
+    // 'License' => '',
 );

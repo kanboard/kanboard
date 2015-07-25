@@ -1013,4 +1013,8 @@ return array(
     'no category' => 'aucune catégorie',
     'Current assignee: %s' => 'Assigné actuel : %s',
     'not assigned' => 'non assigné',
+    'Author:' => 'Auteur :',
+    'contributors' => 'contributeurs',
+    'License:' => 'Licence :',
+    'License' => 'Licence',
 );

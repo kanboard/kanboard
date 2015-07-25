@@ -68,6 +68,7 @@ Bug fixes:
 
 * Screenshot dropdown: unexpected scroll down on the board view and focus lost when clicking on the drop zone
 * No creator when duplicating a task
+* Avoid the creation of multiple subtask timer for the same task and user
 
 Code refactoring:
 
@@ -88,3 +89,10 @@ Other:
 
 * Added automated Docker build
 * Remove edit recurrence from the task menu on the board
+* Switch to MIT License instead of AGPLv3
+
+Version 1.0.0 to 1.0.16
+-----------------------
+
+* See commit history and website news
+

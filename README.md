@@ -12,8 +12,9 @@ Official website: <http://kanboard.net>
 - Open source and self-hosted
 - Super simple installation
 - Translated in 19 languages
+- Distributed under [MIT License](LICENSE)
 - [List of features are available on the website](http://kanboard.net/features)
-- [ChangeLog](ChangeLog)
+- [Change Log](ChangeLog)
 
 [![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
 
@@ -25,11 +26,6 @@ Known bugs and feature requests
 -------------------------------
 
 - Bug tracker: <https://github.com/fguillot/kanboard/issues>
-
-License
--------
-
-- GNU Affero General Public License version 3: <http://www.gnu.org/licenses/agpl-3.0.txt>
 
 Authors
 -------
