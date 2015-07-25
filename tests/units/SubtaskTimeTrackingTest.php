@@ -13,6 +13,25 @@ use Core\Session;
 
 class SubtaskTimeTrackingTest extends Base
 {
+    public function testHasTimer()
+    {
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $st = new SubtaskTimeTracking($this->container);
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #2', 'task_id' => 1, 'user_id' => 1)));
+
+        $this->assertFalse($st->hasTimer(1, 1));
+        $this->assertTrue($st->logStartTime(1, 1));
+        $this->assertTrue($st->hasTimer(1, 1));
+        $this->assertFalse($st->logStartTime(1, 1));
+        $this->assertTrue($st->logEndTime(1, 1));
+        $this->assertFalse($st->hasTimer(1, 1));
+    }
+
     public function testGetTimerStatus()
     {
         $tc = new TaskCreation($this->container);

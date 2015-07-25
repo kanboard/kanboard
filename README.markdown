@@ -13,6 +13,7 @@ Official website: <http://kanboard.net>
 - Super simple installation
 - Translated in 19 languages
 - [List of features are available on the website](http://kanboard.net/features)
+- [ChangeLog](ChangeLog)
 
 [![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
 
