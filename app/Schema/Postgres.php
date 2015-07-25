@@ -6,7 +6,13 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 60;
+const VERSION = 61;
+
+function version_61($pdo)
+{
+    $pdo->exec("INSERT INTO settings VALUES ('subtask_time_tracking', '1')");
+    $pdo->exec("INSERT INTO settings VALUES ('cfd_include_closed_tasks', '1')");
+}
 
 function version_60($pdo)
 {

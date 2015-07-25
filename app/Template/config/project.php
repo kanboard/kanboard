@@ -18,6 +18,8 @@
     <p class="form-help"><?= t('Example: "Bug, Feature Request, Improvement"') ?></p>
 
     <?= $this->form->checkbox('subtask_restriction', t('Allow only one subtask in progress at the same time for a user'), 1, $values['subtask_restriction'] == 1) ?>
+    <?= $this->form->checkbox('subtask_time_tracking', t('Trigger automatically subtask time tracking'), 1, $values['subtask_time_tracking'] == 1) ?>
+    <?= $this->form->checkbox('cfd_include_closed_tasks', t('Include closed tasks in the cumulative flow diagram'), 1, $values['cfd_include_closed_tasks'] == 1) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

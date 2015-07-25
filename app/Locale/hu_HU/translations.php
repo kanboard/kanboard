@@ -1003,4 +1003,12 @@ return array(
     // 'Expand sidebar' => '',
     // 'This feature does not work with all browsers.' => '',
     // 'There is no destination project available.' => '',
+    // 'Trigger automatically subtask time tracking' => '',
+    // 'Include closed tasks in the cumulative flow diagram' => '',
+    // 'Current swimlane: %s' => '',
+    // 'Current column: %s' => '',
+    // 'Current category: %s' => '',
+    // 'no category' => '',
+    // 'Current assignee: %s' => '',
+    // 'not assigned' => '',
 );
