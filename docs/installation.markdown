@@ -5,8 +5,8 @@ Requirements
 ------------
 
 - Apache or Nginx
-- PHP >= 5.3.7
-- PHP extensions required: mbstring, gd and pdo_sqlite (don't forget to enable extensions)
+- PHP >= 5.3.3 (Kanboard is compatible with PHP 5.3, 5.4, 5.5, 5.6 and 7.0)
+- PHP extensions required: mbstring, gd and pdo_sqlite
 - A modern web browser
 
 From the archive (stable version)

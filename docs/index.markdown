@@ -10,6 +10,12 @@ Using Kanboard
 - [Kanban vs Todo Lists and Scrum](kanban-vs-todo-and-scrum.markdown)
 - [Usage examples](usage-examples.markdown)
 
+### Using the board
+
+- [Board, Calendar and List views](project-views.markdown)
+- [Collapsed and expended mode](board-collapsed-expanded.markdown)
+- [Horizontal scrolling and compact mode](board-horizontal-scrolling-and-compact-view.markdown)
+
 ### Working with projects
 
 - [Creating projects](creating-projects.markdown)
@@ -53,7 +59,6 @@ Using Kanboard
 - [Calendar settings](calendar-configuration.markdown)
 - [Link settings](link-labels.markdown)
 - [Currency rate](currency-rate.markdown)
-- [Config file](config.markdown)
 
 ### Integrations
 
@@ -98,6 +103,7 @@ Technical details
 
 ### Configuration
 
+- [Config file](config.markdown)
 - [Email configuration](email-configuration.markdown)
 - [URL rewriting](nice-urls.markdown)
 

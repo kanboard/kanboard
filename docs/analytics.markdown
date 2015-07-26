@@ -24,6 +24,7 @@ Cumulative flow diagram
 
 - This chart show the number of tasks cumulatively for each column over the time.
 - Everyday, the total number of tasks is recorded for each column.
+- If you would like to exclude closed tasks, change the [global project settings](project-configuration.markdown).
 
 Note: You need to have at least 2 days of data to see the graph.
 

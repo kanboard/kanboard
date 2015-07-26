@@ -6,7 +6,7 @@ You can use the service [Postmark](https://postmarkapp.com/) to create tasks dir
 This integration works with the inbound email service of Postmark.
 Kanboard use a webhook to handle incoming emails.
 
-The [incoming email workflow is described here](http://kanboard.net/documentation/email-tasks).
+The [incoming email workflow is described here](create-tasks-by-email.markdown).
 
 Postmark configuration
 ----------------------

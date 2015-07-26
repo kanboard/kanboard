@@ -34,3 +34,7 @@ Kanboard offer 3 different choices:
 - YYYY/MM/DD
 
 The [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format is always accepted (YYYY-MM-DD or YYYY_MM_DD).
+
+### Custom Stylesheet
+
+Write your own CSS to override or improve Kanboard default style.

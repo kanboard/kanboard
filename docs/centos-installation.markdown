@@ -28,17 +28,21 @@ chown -R apache:apache kanboard/data
 rm kanboard-latest.zip
 ```
 
-If SeLinux is enabled, be sure that the Apache user can write to the directory data:
+If SELinux is enabled, be sure that the Apache user can write to the directory data:
 
 ```bash
 chcon -R -t httpd_sys_content_rw_t /var/www/html/kanboard/data
 ```
 
-Be sure to configure your server to allow Kanboard to send emails and make external HTTP requests.
+Be sure to configure your server to allow Kanboard to send emails and make external network requests, by example with SELinux:
 
-You can also disable SeLinux if you don't need it.
+```bash
+setsebool -P httpd_can_network_connect=1
+```
 
-Centos 6.5
+Allowing external connections is necessary if you use LDAP, SMTP, Webhooks or any third-party integrations.
+
+Centos 6.x
 ----------
 
 Install PHP and Apache:
