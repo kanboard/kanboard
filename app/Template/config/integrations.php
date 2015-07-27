@@ -6,6 +6,18 @@
 
     <?= $this->form->csrf() ?>
 
+    <h3><i class="fa fa-google"></i> <?= t('Google Authentication') ?></h3>
+    <div class="listing">
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('oauth', 'google', array(), false, '', true) ?>"/><br/>
+    <p class="form-help"><a href="http://kanboard.net/documentation/google-authentication" target="_blank"><?= t('Help on Google authentication') ?></a></p>
+    </div>
+
+    <h3><i class="fa fa-github"></i> <?= t('Github Authentication') ?></h3>
+    <div class="listing">
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('oauth', 'github', array(), false, '', true) ?>"/><br/>
+    <p class="form-help"><a href="http://kanboard.net/documentation/github-authentication" target="_blank"><?= t('Help on Github authentication') ?></a></p>
+    </div>
+
     <h3><img src="<?= $this->url->dir() ?>assets/img/mailgun-icon.png"/>&nbsp;<?= t('Mailgun (incoming emails)') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'mailgun', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>

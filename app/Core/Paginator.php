@@ -313,7 +313,7 @@ class Paginator
             $this->page = 1;
         }
 
-        $this->offset = ($this->page - 1) * $this->limit;
+        $this->offset = (int) (($this->page - 1) * $this->limit);
 
         return $this;
     }

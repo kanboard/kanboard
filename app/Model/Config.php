@@ -74,6 +74,7 @@ class Config extends Base
     {
         // Sorted by value
         $languages = array(
+            'cs_CZ' => 'Čeština',
             'da_DK' => 'Dansk',
             'de_DE' => 'Deutsch',
             'en_US' => 'English',
@@ -110,6 +111,7 @@ class Config extends Base
     public function getJsLanguageCode()
     {
         $languages = array(
+            'cs_CZ' => 'cz',
             'da_DK' => 'da',
             'de_DE' => 'de',
             'en_US' => 'en',

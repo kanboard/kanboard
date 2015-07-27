@@ -8,7 +8,9 @@ use Model\TaskFilter;
 use Model\TaskCreation;
 use Model\DateParser;
 use Model\Category;
+use Model\Subtask;
 use Model\Config;
+use Model\Swimlane;
 
 class TaskFilterTest extends Base
 {
@@ -286,6 +288,64 @@ class TaskFilterTest extends Base
         $this->assertEmpty($tasks);
     }
 
+    public function testSearchWithSwimlane()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+        $s = new Swimlane($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'My project A')));
+        $this->assertEquals(1, $s->create(1, 'Version 1.1'));
+        $this->assertEquals(2, $s->create(1, 'Version 1.2'));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1', 'swimlane_id' => 1)));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2', 'swimlane_id' => 2)));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task3', 'swimlane_id' => 0)));
+
+        $tf->search('swimlane:"Version 1.1"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('Version 1.1', $tasks[0]['swimlane_name']);
+
+        $tf->search('swimlane:"versioN 1.2"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('Version 1.2', $tasks[0]['swimlane_name']);
+
+        $tf->search('swimlane:"Default swimlane"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task3', $tasks[0]['title']);
+        $this->assertEquals('Default swimlane', $tasks[0]['default_swimlane']);
+        $this->assertEquals('', $tasks[0]['swimlane_name']);
+
+        $tf->search('swimlane:default');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task3', $tasks[0]['title']);
+        $this->assertEquals('Default swimlane', $tasks[0]['default_swimlane']);
+        $this->assertEquals('', $tasks[0]['swimlane_name']);
+
+        $tf->search('swimlane:"Version 1.1" swimlane:"Version 1.2"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('Version 1.1', $tasks[0]['swimlane_name']);
+        $this->assertEquals('task2', $tasks[1]['title']);
+        $this->assertEquals('Version 1.2', $tasks[1]['swimlane_name']);
+
+        $tf->search('swimlane:"not found"');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+    }
+
     public function testSearchWithColumn()
     {
         $p = new Project($this->container);
@@ -467,6 +527,54 @@ class TaskFilterTest extends Base
         $this->assertCount(2, $tasks);
         $this->assertEquals('my task title is amazing', $tasks[0]['title']);
         $this->assertEquals('Bob at work', $tasks[1]['title']);
+    }
+
+    public function testSearchWithAssigneeIncludingSubtasks()
+    {
+        $p = new Project($this->container);
+        $u = new User($this->container);
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(2, $u->create(array('username' => 'bob', 'name' => 'Paul Ryan')));
+
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'task1', 'owner_id' => 2)));
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1, 'status' => 1, 'user_id' => 0)));
+
+        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'task2', 'owner_id' => 0)));
+        $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 2, 'status' => 1, 'user_id' => 2)));
+
+        $this->assertEquals(3, $tc->create(array('project_id' => 1, 'title' => 'task3', 'owner_id' => 0)));
+        $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 3, 'user_id' => 1)));
+
+        $tf->search('assignee:bob');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('task2', $tasks[1]['title']);
+
+        $tf->search('assignee:"Paul Ryan"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task1', $tasks[0]['title']);
+        $this->assertEquals('task2', $tasks[1]['title']);
+
+        $tf->search('assignee:nobody');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('task2', $tasks[0]['title']);
+        $this->assertEquals('task3', $tasks[1]['title']);
+
+        $tf->search('assignee:admin');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task3', $tasks[0]['title']);
     }
 
     public function testCopy()

@@ -1,7 +1,11 @@
 filter:
+    paths:
+        - app/*
     excluded_paths:
-        - 'vendor/*'
-        - 'tests/*'
-        - 'app/Schema/*'
-        - 'app/Template/*'
-        - 'scripts/*'
+        - app/Schema/*
+        - app/Template/*
+        - app/Locale/*
+        - app/Library/*
+        - app/constants.php
+        - app/common.php
+        - app/check_setup.php

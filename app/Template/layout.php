@@ -66,7 +66,7 @@
         <section class="page">
             <?= $this->app->flashMessage() ?>
             <?= $content_for_layout ?>
-         </section>
+        </section>
      <?php endif ?>
     </body>
 </html>

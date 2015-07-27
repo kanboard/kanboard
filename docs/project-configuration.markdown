@@ -29,3 +29,14 @@ If another subtask have the status "in progress", the user will see this dialog 
 
 ![Subtask user restriction](http://kanboard.net/screenshots/documentation/subtask-user-restriction.png)
 
+### Trigger automatically subtask time tracking
+
+- If enabled, when a subtask status is changed to "in progress", the timer will start automatically.
+- Disable this option if you don't use time tracking.
+
+### Include closed tasks in the cumulative flow diagram
+
+- If enabled, closed tasks will be included in the cumulative flow diagram.
+- If disabled, only open tasks will be included.
+- This option affect the column "total" of the table "project_daily_column_stats"
+

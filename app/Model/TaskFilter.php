@@ -50,6 +50,12 @@ class TaskFilter extends Base
                 case 'T_DUE':
                     $this->filterByDueDate($value);
                     break;
+                case 'T_UPDATED':
+                    $this->filterByModificationDate($value);
+                    break;
+                case 'T_CREATED':
+                    $this->filterByCreationDate($value);
+                    break;
                 case 'T_TITLE':
                     $this->filterByTitle($value);
                     break;
@@ -70,6 +76,9 @@ class TaskFilter extends Base
                     break;
                 case 'T_REFERENCE':
                     $this->filterByReference($value);
+                    break;
+                case 'T_SWIMLANE':
+                    $this->filterBySwimlaneName($value);
                     break;
             }
         }
@@ -98,6 +107,25 @@ class TaskFilter extends Base
         );
 
         return $this;
+    }
+
+    /**
+     * Create a new subtask query
+     *
+     * @access public
+     * @return \PicoDb\Table
+     */
+    public function createSubtaskQuery()
+    {
+        return $this->db->table(Subtask::TABLE)
+            ->columns(
+                Subtask::TABLE.'.user_id',
+                Subtask::TABLE.'.task_id',
+                User::TABLE.'.name',
+                User::TABLE.'.username'
+            )
+            ->join(User::TABLE, 'id', 'user_id', Subtask::TABLE)
+            ->neq(Subtask::TABLE.'.status', Subtask::STATUS_DONE);
     }
 
     /**
@@ -247,6 +275,30 @@ class TaskFilter extends Base
     }
 
     /**
+     * Filter by swimlane name
+     *
+     * @access public
+     * @param  array    $values   List of swimlane name
+     * @return TaskFilter
+     */
+    public function filterBySwimlaneName(array $values)
+    {
+        $this->query->beginOr();
+
+        foreach ($values as $swimlane) {
+            if ($swimlane === 'default') {
+                $this->query->eq(Task::TABLE.'.swimlane_id', 0);
+            }
+            else {
+                $this->query->ilike(Swimlane::TABLE.'.name', $swimlane);
+                $this->query->addCondition(Task::TABLE.'.swimlane_id=0 AND '.Project::TABLE.'.default_swimlane '.$this->db->getDriver()->getOperator('ILIKE')." '$swimlane'");
+            }
+        }
+
+        $this->query->closeOr();
+    }
+
+    /**
      * Filter by category id
      *
      * @access public
@@ -313,7 +365,6 @@ class TaskFilter extends Base
         $this->query->beginOr();
 
         foreach ($values as $assignee) {
-
             switch ($assignee) {
                 case 'me':
                     $this->query->eq(Task::TABLE.'.owner_id', $this->userSession->getId());
@@ -327,7 +378,40 @@ class TaskFilter extends Base
             }
         }
 
+        $this->filterBySubtaskAssignee($values);
+
         $this->query->closeOr();
+
+        return $this;
+    }
+
+    /**
+     * Filter by subtask assignee names
+     *
+     * @access public
+     * @param  array    $values   List of assignees
+     * @return TaskFilter
+     */
+    public function filterBySubtaskAssignee(array $values)
+    {
+        $subtaskQuery = $this->createSubtaskQuery();
+        $subtaskQuery->beginOr();
+
+        foreach ($values as $assignee) {
+            if ($assignee === 'me') {
+                $subtaskQuery->eq(Subtask::TABLE.'.user_id', $this->userSession->getId());
+            }
+            else {
+                $subtaskQuery->ilike(User::TABLE.'.username', '%'.$assignee.'%');
+                $subtaskQuery->ilike(User::TABLE.'.name', '%'.$assignee.'%');
+            }
+        }
+
+        $subtaskQuery->closeOr();
+
+        $this->query->in(Task::TABLE.'.id', $subtaskQuery->findAllByColumn('task_id'));
+
+        return $this;
     }
 
     /**
@@ -502,6 +586,22 @@ class TaskFilter extends Base
      * Filter by creation date
      *
      * @access public
+     * @param  string      $date      ISO8601 date format
+     * @return TaskFilter
+     */
+    public function filterByCreationDate($date)
+    {
+        if ($date === 'recently') {
+            return $this->filterRecentlyDate(Task::TABLE.'.date_creation');
+        }
+
+        return $this->filterWithOperator(Task::TABLE.'.date_creation', $date, true);
+    }
+
+    /**
+     * Filter by creation date
+     *
+     * @access public
      * @param  string  $start
      * @param  string  $end
      * @return TaskFilter
@@ -516,6 +616,22 @@ class TaskFilter extends Base
         ));
 
         return $this;
+    }
+
+    /**
+     * Filter by modification date
+     *
+     * @access public
+     * @param  string      $date      ISO8601 date format
+     * @return TaskFilter
+     */
+    public function filterByModificationDate($date)
+    {
+        if ($date === 'recently') {
+            return $this->filterRecentlyDate(Task::TABLE.'.date_modification');
+        }
+
+        return $this->filterWithOperator(Task::TABLE.'.date_modification', $date, true);
     }
 
     /**
@@ -748,7 +864,6 @@ class TaskFilter extends Base
         );
 
         foreach ($operators as $operator => $method) {
-
             if (strpos($value, $operator) === 0) {
                 $value = substr($value, strlen($operator));
                 $this->query->$method($field, $is_date ? $this->dateParser->getTimestampFromIsoFormat($value) : $value);
@@ -756,7 +871,32 @@ class TaskFilter extends Base
             }
         }
 
-        $this->query->eq($field, $is_date ? $this->dateParser->getTimestampFromIsoFormat($value) : $value);
+        if ($is_date) {
+            $timestamp = $this->dateParser->getTimestampFromIsoFormat($value);
+            $this->query->gte($field, $timestamp);
+            $this->query->lte($field, $timestamp + 86399);
+        }
+        else {
+            $this->query->eq($field, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the board_highlight_period for the "recently" keyword
+     *
+     * @access private
+     * @param  string    $field
+     * @return TaskFilter
+     */
+    private function filterRecentlyDate($field)
+    {
+        $duration = $this->config->get('board_highlight_period', 0);
+
+        if ($duration > 0) {
+            $this->query->gte($field, time() - $duration);
+        }
 
         return $this;
     }

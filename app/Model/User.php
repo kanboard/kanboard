@@ -122,13 +122,13 @@ class User extends Base
     }
 
     /**
-     * Get a specific user by the GitHub id
+     * Get a specific user by the Github id
      *
      * @access public
-     * @param  string  $github_id  GitHub user id
+     * @param  string  $github_id  Github user id
      * @return array|boolean
      */
-    public function getByGitHubId($github_id)
+    public function getByGithubId($github_id)
     {
         if (empty($github_id)) {
             return false;
@@ -377,6 +377,7 @@ class User extends Base
             new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
             new Validators\Email('email', t('Email address invalid')),
             new Validators\Integer('is_admin', t('This value must be an integer')),
+            new Validators\Integer('is_ldap_user', t('This value must be an integer')),
         );
     }
 
@@ -409,7 +410,12 @@ class User extends Base
             new Validators\Required('username', t('The username is required')),
         );
 
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules(), $this->commonPasswordValidationRules()));
+        if (isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1) {
+            $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+        }
+        else {
+            $v = new Validator($values, array_merge($rules, $this->commonValidationRules(), $this->commonPasswordValidationRules()));
+        }
 
         return array(
             $v->execute(),

@@ -18,6 +18,9 @@ use Pimple\Container;
  * @property \Core\Session                 $session
  * @property \Core\Template                $template
  * @property \Core\MemoryCache             $memoryCache
+ * @property \Core\OAuth2                  $oauth
+ * @property \Core\Router                  $router
+ * @property \Core\Lexer                   $lexer
  * @property \Integration\BitbucketWebhook $bitbucketWebhook
  * @property \Integration\GithubWebhook    $githubWebhook
  * @property \Integration\GitlabWebhook    $gitlabWebhook
@@ -58,6 +61,7 @@ use Pimple\Container;
  * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
  * @property \Model\Swimlane               $swimlane
  * @property \Model\Task                   $task
+ * @property \Model\TaskAnalytic           $taskAnalytic
  * @property \Model\TaskCreation           $taskCreation
  * @property \Model\TaskDuplication        $taskDuplication
  * @property \Model\TaskExport             $taskExport

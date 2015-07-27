@@ -3,6 +3,7 @@
 namespace ServiceProvider;
 
 use Core\Paginator;
+use Core\OAuth2;
 use Model\Config;
 use Model\Project;
 use Model\Webhook;
@@ -106,6 +107,10 @@ class ClassProvider implements ServiceProviderInterface
 
         $container['paginator'] = $container->factory(function ($c) {
             return new Paginator($c);
+        });
+
+        $container['oauth'] = $container->factory(function ($c) {
+            return new OAuth2($c);
         });
     }
 }

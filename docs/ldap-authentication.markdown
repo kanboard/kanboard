@@ -17,7 +17,7 @@ When the LDAP authentication is activated, the login process work like that:
 
 1. Try first to authenticate the user by using the database
 2. If the user is not found inside the database, a LDAP authentication is performed
-3. If the LDAP authentication is successful, a local user is created automatically with no password and marked as LDAP user.
+3. If the LDAP authentication is successful, by default a local user is created automatically with no password and marked as LDAP user.
 
 ### Differences between a local user and a LDAP user are the following:
 
@@ -33,59 +33,6 @@ Configuration
 
 You have to create a custom config file named `config.php` (you can also use the template `config.default.php`).
 This file must be stored in the root directory of Kanboard.
-
-### Available configuration parameters
-
-```php
-// Enable LDAP authentication (false by default)
-define('LDAP_AUTH', false);
-
-// LDAP server hostname
-define('LDAP_SERVER', '');
-
-// LDAP server port (389 by default)
-define('LDAP_PORT', 389);
-
-// By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
-define('LDAP_SSL_VERIFY', true);
-
-// Enable LDAP START_TLS
-define('LDAP_START_TLS', false);
-
-// LDAP bind type: "anonymous", "user" (use the given user/password from the form) and "proxy" (a specific user to browse the LDAP directory)
-define('LDAP_BIND_TYPE', 'anonymous');
-
-// LDAP username to connect with. null for anonymous bind (by default).
-// Or for user bind type, you can use a pattern like that %s@kanboard.local
-define('LDAP_USERNAME', null);
-
-// LDAP password to connect with. null for anonymous bind (by default).
-define('LDAP_PASSWORD', null);
-
-// LDAP account base, i.e. root of all user account
-// Example: ou=People,dc=example,dc=com
-define('LDAP_ACCOUNT_BASE', '');
-
-// LDAP query pattern to use when searching for a user account
-// Example for ActiveDirectory: '(&(objectClass=user)(sAMAccountName=%s))'
-// Example for OpenLDAP: 'uid=%s'
-define('LDAP_USER_PATTERN', '');
-
-// Name of an attribute of the user account object which should be used as the full name of the user.
-define('LDAP_ACCOUNT_FULLNAME', 'displayname');
-
-// Name of an attribute of the user account object which should be used as the email of the user.
-define('LDAP_ACCOUNT_EMAIL', 'mail');
-
-// Name of an attribute of the user account object which should be used as the id of the user.
-// Example for ActiveDirectory: 'samaccountname'
-// Example for OpenLDAP: 'uid'
-define('LDAP_ACCOUNT_ID', 'samaccountname');
-
-// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
-// Set to true if you want to preserve the case
-define('LDAP_USERNAME_CASE_SENSITIVE', false);
-```
 
 ### LDAP bind type
 
@@ -186,7 +133,7 @@ define('LDAP_ACCOUNT_EMAIL', 'mail');
 
 ### Example for OpenLDAP
 
-Here, our LDAP server is `myserver.example.com` and all users are stored in the hierarchy `ou=People,dc=example,dc=com`.
+Our LDAP server is `myserver.example.com` and all users are stored in the hierarchy `ou=People,dc=example,dc=com`.
 
 For this example with use the anonymous binding.
 
@@ -206,4 +153,82 @@ define('LDAP_ACCOUNT_FULLNAME', 'displayname');
 define('LDAP_ACCOUNT_EMAIL', 'mail');
 ```
 
-The `%s` is replaced by the username for the parameter `LDAP_USER_PATTERN`, so you can define a custom Distinguished Name.
+The `%s` is replaced by the username for the parameter `LDAP_USER_PATTERN`, so you can define a custom Distinguished Name (example: ` (&(objectClass=user)(uid=%s)(!(ou:dn::=trainees)))`).
+
+### Disable automatic account creation
+
+By default, Kanboard will create automatically a user account if nothing is found.
+
+You can disable this behavior if you prefer to create user accounts manually to restrict Kanboard to only some people.
+
+Just change the value of `LDAP_ACCOUNT_CREATION` to `false`:
+
+```php
+// Automatically create user account
+define('LDAP_ACCOUNT_CREATION', false);
+```
+
+### SELinux on RHEL-based like CentOS
+
+If SELinux is enabled, you have to allow Apache to reach out your LDAP server.
+
+- You can switch SELinux to the permissive mode or disable it (not recomemnded)
+- You can allow all network connections, by example `setsebool -P httpd_can_network_connect=1` or have a more restrictive rule
+
+In any case, refer to the official Redhat/Centos documentation.
+
+### Available configuration parameters
+
+```php
+// Enable LDAP authentication (false by default)
+define('LDAP_AUTH', false);
+
+// LDAP server hostname
+define('LDAP_SERVER', '');
+
+// LDAP server port (389 by default)
+define('LDAP_PORT', 389);
+
+// By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
+define('LDAP_SSL_VERIFY', true);
+
+// Enable LDAP START_TLS
+define('LDAP_START_TLS', false);
+
+// LDAP bind type: "anonymous", "user" (use the given user/password from the form) and "proxy" (a specific user to browse the LDAP directory)
+define('LDAP_BIND_TYPE', 'anonymous');
+
+// LDAP username to connect with. null for anonymous bind (by default).
+// Or for user bind type, you can use a pattern like that %s@kanboard.local
+define('LDAP_USERNAME', null);
+
+// LDAP password to connect with. null for anonymous bind (by default).
+define('LDAP_PASSWORD', null);
+
+// LDAP account base, i.e. root of all user account
+// Example: ou=People,dc=example,dc=com
+define('LDAP_ACCOUNT_BASE', '');
+
+// LDAP query pattern to use when searching for a user account
+// Example for ActiveDirectory: '(&(objectClass=user)(sAMAccountName=%s))'
+// Example for OpenLDAP: 'uid=%s'
+define('LDAP_USER_PATTERN', '');
+
+// Name of an attribute of the user account object which should be used as the full name of the user.
+define('LDAP_ACCOUNT_FULLNAME', 'displayname');
+
+// Name of an attribute of the user account object which should be used as the email of the user.
+define('LDAP_ACCOUNT_EMAIL', 'mail');
+
+// Name of an attribute of the user account object which should be used as the id of the user.
+// Example for ActiveDirectory: 'samaccountname'
+// Example for OpenLDAP: 'uid'
+define('LDAP_ACCOUNT_ID', 'samaccountname');
+
+// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
+// Set to true if you want to preserve the case
+define('LDAP_USERNAME_CASE_SENSITIVE', false);
+
+// Automatically create user account
+define('LDAP_ACCOUNT_CREATION', true);
+```

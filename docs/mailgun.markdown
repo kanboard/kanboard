@@ -6,7 +6,7 @@ You can use the service [Mailgun](http://www.mailgun.com/) to create tasks direc
 This integration works with the inbound email service of Mailgun (routes).
 Kanboard use a webhook to handle incoming emails.
 
-The [incoming email workflow is described here](http://kanboard.net/documentation/email-tasks).
+The [incoming email workflow is described here](create-tasks-by-email.markdown).
 
 Mailgun configuration
 ---------------------

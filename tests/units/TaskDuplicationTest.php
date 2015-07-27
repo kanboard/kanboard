@@ -174,6 +174,45 @@ class TaskDuplicationTest extends Base
         $this->assertEquals('test', $task['title']);
     }
 
+    public function testDuplicateAnotherProjectWithPredefinedCategory()
+    {
+        $td = new TaskDuplication($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $c = new Category($this->container);
+
+        // We create 2 projects
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(2, $p->create(array('name' => 'test2')));
+
+        $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
+        $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 2)));
+        $this->assertNotFalse($c->create(array('name' => 'Category #2', 'project_id' => 2)));
+        $this->assertTrue($c->exists(1, 1));
+        $this->assertTrue($c->exists(2, 2));
+        $this->assertTrue($c->exists(3, 2));
+
+        // We create a task
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'category_id' => 1)));
+
+        // We duplicate our task to the 2nd project with no category
+        $this->assertEquals(2, $td->duplicateToProject(1, 2, null, null, 0));
+
+        // Check the values of the duplicated task
+        $task = $tf->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(0, $task['category_id']);
+
+        // We duplicate our task to the 2nd project with a different category
+        $this->assertEquals(3, $td->duplicateToProject(1, 2, null, null, 3));
+
+        // Check the values of the duplicated task
+        $task = $tf->getById(3);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(3, $task['category_id']);
+    }
+
     public function testDuplicateAnotherProjectWithSwimlane()
     {
         $td = new TaskDuplication($this->container);
@@ -240,6 +279,57 @@ class TaskDuplicationTest extends Base
         $this->assertEquals('test', $task['title']);
     }
 
+    public function testDuplicateAnotherProjectWithPredefinedSwimlane()
+    {
+        $td = new TaskDuplication($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $s = new Swimlane($this->container);
+
+        // We create 2 projects
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(2, $p->create(array('name' => 'test2')));
+
+        $this->assertNotFalse($s->create(1, 'Swimlane #1'));
+        $this->assertNotFalse($s->create(2, 'Swimlane #1'));
+        $this->assertNotFalse($s->create(2, 'Swimlane #2'));
+
+        // We create a task
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
+
+        // We duplicate our task to the 2nd project
+        $this->assertEquals(2, $td->duplicateToProject(1, 2, 3));
+
+        // Check the values of the duplicated task
+        $task = $tf->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(3, $task['swimlane_id']);
+    }
+
+    public function testDuplicateAnotherProjectWithPredefinedColumn()
+    {
+        $td = new TaskDuplication($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+
+        // We create 2 projects
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(2, $p->create(array('name' => 'test2')));
+
+        // We create a task
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2)));
+
+        // We duplicate our task to the 2nd project with a different column
+        $this->assertEquals(2, $td->duplicateToProject(1, 2, null, 7));
+
+        // Check the values of the duplicated task
+        $task = $tf->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(7, $task['column_id']);
+    }
+
     public function testDuplicateAnotherProjectWithUser()
     {
         $td = new TaskDuplication($this->container);
@@ -295,6 +385,30 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals(5, $task['column_id']);
+    }
+
+    public function testDuplicateAnotherProjectWithPredefinedUser()
+    {
+        $td = new TaskDuplication($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+
+        // We create 2 projects
+        $this->assertEquals(1, $p->create(array('name' => 'test1')));
+        $this->assertEquals(2, $p->create(array('name' => 'test2')));
+
+        // We create a task
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2)));
+
+        // We duplicate our task to the 2nd project
+        $this->assertEquals(2, $td->duplicateToProject(1, 2, null, null, null, 1));
+
+        // Check the values of the duplicated task
+        $task = $tf->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['owner_id']);
     }
 
     public function onMoveProject($event)

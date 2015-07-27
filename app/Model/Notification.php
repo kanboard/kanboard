@@ -37,7 +37,6 @@ class Notification extends Base
     public function sendOverdueTaskNotifications()
     {
         $tasks = $this->taskFinder->getOverdueTasks();
-        $projects = array();
 
         foreach ($this->groupByColumn($tasks, 'project_id') as $project_id => $project_tasks) {
 
@@ -157,10 +156,9 @@ class Notification extends Base
      *
      * @access public
      * @param  array  $user
-     * @param  array  $event_data
      * @return boolean
      */
-    public function filterNone(array $user, array $event_data)
+    public function filterNone(array $user)
     {
         return $user['notifications_filter'] == self::FILTER_NONE;
     }

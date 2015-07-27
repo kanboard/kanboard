@@ -100,7 +100,7 @@ class DateParser extends Base
      * Get all combinations of date/time formats
      *
      * @access public
-     * @return []string
+     * @return string[]
      */
     public function getAllFormats()
     {

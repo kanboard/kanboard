@@ -6,7 +6,6 @@
     <?= $this->form->csrf() ?>
 
     <?= $this->form->hidden('id', $values) ?>
-    <?= $this->form->hidden('is_ldap_user', $values) ?>
 
     <?= $this->form->label(t('Username'), 'username') ?>
     <?= $this->form->text('username', $values, $errors, array('required', $values['is_ldap_user'] == 1 ? 'readonly' : '', 'maxlength="50"')) ?><br/>
@@ -23,13 +22,9 @@
     <?= $this->form->label(t('Language'), 'language') ?>
     <?= $this->form->select('language', $languages, $values, $errors) ?><br/>
 
-    <div class="alert alert-error">
-        <?= $this->form->checkbox('disable_login_form', t('Disable login form'), 1, isset($values['disable_login_form']) && $values['disable_login_form'] == 1) ?><br/>
-
-        <?php if ($this->user->isAdmin()): ?>
-            <?= $this->form->checkbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1) ?><br/>
-        <?php endif ?>
-    </div>
+    <?php if ($this->user->isAdmin()): ?>
+        <?= $this->form->checkbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1) ?><br/>
+    <?php endif ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

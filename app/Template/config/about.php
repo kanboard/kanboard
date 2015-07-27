@@ -11,8 +11,17 @@
             <?= t('Application version:') ?>
             <strong><?= APP_VERSION ?></strong>
         </li>
+        <li>
+            <?= t('Author:') ?>
+            <strong>Frédéric Guillot</strong> (<a href="https://github.com/fguillot/kanboard/blob/master/CONTRIBUTORS.md" target="_blank"><?= t('contributors') ?></a>)
+        </li>
+        <li>
+            <?= t('License:') ?>
+            <strong>MIT</strong>
+        </li>
     </ul>
 </div>
+
 <div class="page-header">
     <h2><?= t('Database') ?></h2>
 </div>
@@ -38,6 +47,7 @@
         <?php endif ?>
     </ul>
 </div>
+
 <div class="page-header">
     <h2><?= t('Keyboard shortcuts') ?></h2>
 </div>
@@ -61,4 +71,11 @@
         <li><?= t('Close dialog box') ?> = <strong>ESC</strong></li>
         <li><?= t('Submit a form') ?> = <strong>CTRL+ENTER</strong> <?= t('or') ?> <strong>⌘+ENTER</strong></li>
     </ul>
+</div>
+
+<div class="page-header">
+    <h2><?= t('License') ?></h2>
+</div>
+<div class="listing">
+<?= nl2br(file_get_contents('LICENSE')) ?>
 </div>

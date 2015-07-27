@@ -56,8 +56,8 @@ Pull-requests are always welcome, however to be accepted you have to follow thos
 - If you want to add a new feature, respect the philosophy behind Kanboard. **We focus on simplicity**, we don't want to have a bloated software.
 - The same apply for the user interface, **simplicity and efficiency**.
 - Send only one pull-request per feature or bug fix, your patch will be merged into one single commit in the master branch.
-- Make sure the [unit tests pass](http://kanboard.net/documentation/tests).
-- Respect the [coding standards](http://kanboard.net/documentation/coding-standards).
+- Make sure the [unit tests pass](tests.markdown).
+- Respect the [coding standards](coding-standards.makrdown).
 - Write maintainable code, avoid code duplication, use PHP good practices.
 
 In any case, if you are not sure about something open a new ticket.

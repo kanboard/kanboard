@@ -39,6 +39,8 @@ class AclTest extends Base
         $this->assertFalse($acl->isPublicAction('board', 'show'));
         $this->assertTrue($acl->isPublicAction('feed', 'project'));
         $this->assertTrue($acl->isPublicAction('feed', 'user'));
+        $this->assertTrue($acl->isPublicAction('oauth', 'github'));
+        $this->assertTrue($acl->isPublicAction('oauth', 'google'));
     }
 
     public function testAdminActions()

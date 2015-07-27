@@ -30,7 +30,9 @@ class ProjectDailyColumnStats extends Base
      */
     public function updateTotals($project_id, $date)
     {
-        return $this->db->transaction(function($db) use ($project_id, $date) {
+        $status = $this->config->get('cfd_include_closed_tasks') == 1 ? array(Task::STATUS_OPEN, Task::STATUS_CLOSED) : array(Task::STATUS_OPEN);
+
+        return $this->db->transaction(function($db) use ($project_id, $date, $status) {
 
             $column_ids = $db->table(Board::TABLE)->eq('project_id', $project_id)->findAllByColumn('id');
 
@@ -59,6 +61,7 @@ class ProjectDailyColumnStats extends Base
                         'total' => $db->table(Task::TABLE)
                                       ->eq('project_id', $project_id)
                                       ->eq('column_id', $column_id)
+                                      ->in('is_active', $status)
                                       ->count()
                     ));
             }

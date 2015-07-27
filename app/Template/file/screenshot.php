@@ -15,3 +15,5 @@
         <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>
 </form>
+
+<p class="alert alert-info"><?= t('This feature does not work with all browsers.') ?></p>

@@ -35,13 +35,14 @@ defined('LDAP_ACCOUNT_FULLNAME') or define('LDAP_ACCOUNT_FULLNAME', 'displayname
 defined('LDAP_ACCOUNT_EMAIL') or define('LDAP_ACCOUNT_EMAIL', 'mail');
 defined('LDAP_ACCOUNT_ID') or define('LDAP_ACCOUNT_ID', '');
 defined('LDAP_USERNAME_CASE_SENSITIVE') or define('LDAP_USERNAME_CASE_SENSITIVE', false);
+defined('LDAP_ACCOUNT_CREATION') or define('LDAP_ACCOUNT_CREATION', true);
 
 // Google authentication
 defined('GOOGLE_AUTH') or define('GOOGLE_AUTH', false);
 defined('GOOGLE_CLIENT_ID') or define('GOOGLE_CLIENT_ID', '');
 defined('GOOGLE_CLIENT_SECRET') or define('GOOGLE_CLIENT_SECRET', '');
 
-// GitHub authentication
+// Github authentication
 defined('GITHUB_AUTH') or define('GITHUB_AUTH', false);
 defined('GITHUB_CLIENT_ID') or define('GITHUB_CLIENT_ID', '');
 defined('GITHUB_CLIENT_SECRET') or define('GITHUB_CLIENT_SECRET', '');
@@ -84,3 +85,6 @@ defined('API_AUTHENTICATION_HEADER') or define('API_AUTHENTICATION_HEADER', '');
 
 // Enable/disable url rewrite
 defined('ENABLE_URL_REWRITE') or define('ENABLE_URL_REWRITE', isset($_SERVER['HTTP_MOD_REWRITE']));
+
+// Hide login form
+defined('HIDE_LOGIN_FORM') or define('HIDE_LOGIN_FORM', false);

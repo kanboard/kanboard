@@ -31,92 +31,60 @@ Search by assignee
 
 Attribute: **assignee**
 
-Query with the full name:
+- Query with the full name: `assignee:"Frederic Guillot"`
+- Query with the username: `assignee:fguillot`
+- Multiple assignee lookup: `assignee:user1 assignee:"John Doe"`
+- Query for unassigned tasks: `assignee:nobody`
+- Query for my assigned tasks: `assignee:me`
 
-```
-assignee:"Frederic Guillot"
-```
-
-Query with the username:
-
-```
-assignee:fguillot
-```
-
-Multiple assignee lookup:
-
-```
-assignee:user1 assignee:"John Doe"
-```
-
-Kanboard will search tasks assigned to the "user1" or "John Doe".
-
-Query for unassigned tasks:
-
-```
-assignee:nobody
-```
-
-Query for my assigned tasks
-
-```
-assignee:me
-```
+Note: Kanboard will also search in assigned subtasks with the status todo and in progress.
 
 Search by color
 ---------------
 
 Attribute: **color**
 
-Query to search by color id:
-
-```
-color:blue
-```
-
-Query to search by color name:
-
-```
-color:"Deep Orange"
-```
+- Query to search by color id: `color:blue`
+- Query to search by color name: `color:"Deep Orange"`
 
 Search by due date
 ------------------
 
 Attribute: **due**
 
-Query to search tasks due today:
-
-```
-due:today
-```
-
-Query to search tasks due tomorrow:
-
-```
-due:tomorrow
-```
-
-Query to search tasks due yesterday:
-
-```
-due:yesterday
-```
-
-Query to search tasks due with the exact date:
-
-```
-due:2015-06-29
-```
+- Search tasks due today: `due:today`
+- Search tasks due tomorrow: `due:tomorrow`
+- Search tasks due yesterday: `due:yesterday`
+- Search tasks due with the exact date: `due:2015-06-29`
 
 The date must use the ISO8601 format: **YYYY-MM-DD**.
 
-Operators supported:
+All string formats supported by the `strtotime()` function are supported, by example `next Thursday`, `-2 days`, `+2 months`, `tomorrow`, etc...
+
+Operators supported with a date:
 
 - Greater than: **due:>2015-06-29**
 - Lower than: **due:<2015-06-29**
 - Greater than or equal: **due:>=2015-06-29**
 - Lower than or equal: **due:<=2015-06-29**
+
+Search by modification date
+---------------------------
+
+Attribute: **modified** or **updated**
+
+The date formats are the same as the due date. 
+
+There is also a filter by recently modified tasks: `modified:recently`.
+
+This query will use the same value as the board highlight period configured in settings. 
+
+Search by creation date
+-----------------------
+
+Attribute: **created**
+
+Works in the same way as the modification date queries.
 
 Search by description
 ---------------------
@@ -124,6 +92,13 @@ Search by description
 Attribute: **description**
 
 Example: `description:"text search"`
+
+Search by external reference
+----------------------------
+
+The task reference is an external id of your task, by example a ticket number from another software.
+
+- Find tasks with a reference: `ref:1234` or `reference:TICKET-1234`
 
 Search by category
 ------------------
@@ -151,9 +126,12 @@ Attribute: **column**
 - Find tasks by column name: `column:"Work in progress"`
 - Find tasks for several columns: `column:"Backlog" column:ready`
 
-Search by external reference
-----------------------------
+Search by swimlane
+------------------
 
-The task reference is an external id of your task, by example a ticket number from another software.
+Attribute: **swimlane**
 
-- Find tasks with a reference: `ref:1234` or `reference:TICKET-1234`
+- Find tasks by swimlane: `swimlane:"Version 42"`
+- Find tasks in the default swimlane: `swimlane:default`
+- Find tasks into several swimlanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
+

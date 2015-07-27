@@ -117,7 +117,7 @@ class Action extends Base
 
         if ($valid) {
 
-            if ($this->action->create($values)) {
+            if ($this->action->create($values) !== false) {
                 $this->session->flash(t('Your automatic action have been created successfully.'));
             }
             else {

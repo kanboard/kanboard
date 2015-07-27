@@ -58,6 +58,9 @@
 
         <?php if ($this->user->isAdmin()): ?>
             <li>
+                <?= $this->url->link(t('Edit Authentication'), 'user', 'authentication', array('user_id' => $user['id'])) ?>
+            </li>
+            <li>
                 <?= $this->url->link(t('Hourly rates'), 'hourlyrate', 'index', array('user_id' => $user['id'])) ?>
             </li>
             <li>
@@ -71,4 +74,6 @@
             </li>
         <?php endif ?>
     </ul>
+    <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
+    <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>
 </div>

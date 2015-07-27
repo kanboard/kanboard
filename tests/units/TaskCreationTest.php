@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/Base.php';
 
+use Model\Config;
 use Model\Task;
 use Model\TaskCreation;
 use Model\TaskFinder;
@@ -382,5 +383,28 @@ class TaskCreationTest extends Base
         $this->assertNotEmpty($task);
         $this->assertNotFalse($task);
         $this->assertEquals(3, $task['score']);
+    }
+
+    public function testDefaultColor()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $c = new Config($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test1')));
+
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals('yellow', $task['color_id']);
+
+        $this->assertTrue($c->save(array('default_color' => 'orange')));
+
+        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'test2')));
+
+        $task = $tf->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals('orange', $task['color_id']);
     }
 }
