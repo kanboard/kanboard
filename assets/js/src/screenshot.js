@@ -5,20 +5,57 @@ Kanboard.Screenshot = (function() {
     // Setup event listener and workarounds
     function init()
     {
+        destroy();
+
         if (! window.Clipboard) {
 
             // Create a contenteditable element
             pasteCatcher = document.createElement("div");
-            pasteCatcher.setAttribute("contenteditable", "");
-            pasteCatcher.style.opacity = 0;
-            document.body.appendChild(pasteCatcher);
+            pasteCatcher.id = "screenshot-pastezone";
+            pasteCatcher.contentEditable = "true";
 
-            // Make sure it is always in focus
+            // Insert the content editable at the top to avoid scrolling down in the board view
+            pasteCatcher.style.opacity = 0;
+            pasteCatcher.style.position = "fixed";
+            pasteCatcher.style.top = 0;
+            pasteCatcher.style.right = 0;
+            pasteCatcher.style.width = 0;
+
+            document.body.insertBefore(pasteCatcher, document.body.firstChild);
+
+            // Set focus on the contenteditable element
             pasteCatcher.focus();
-            document.addEventListener("click", function() { pasteCatcher.focus(); });
+
+            // Set the focus when clicked anywhere in the document
+            document.addEventListener("click", setFocus);
+
+            // Set the focus when clicked in screenshot dropzone (popover)
+            document.getElementById("screenshot-zone").addEventListener("click", setFocus);
         }
 
         window.addEventListener("paste", pasteHandler);
+    }
+
+    // Set focus on the contentEditable element
+    function setFocus()
+    {
+        if (pasteCatcher !== null) {
+            pasteCatcher.focus();
+        }
+    }
+
+    // Destroy contenteditable
+    function destroy()
+    {
+        if (pasteCatcher != null) {
+            document.body.removeChild(pasteCatcher);
+        }
+        else if (document.getElementById("screenshot-pastezone")) {
+            document.body.removeChild(document.getElementById("screenshot-pastezone"));
+        }
+
+        document.removeEventListener("click", setFocus);
+        pasteCatcher = null;
     }
 
     // Paste event callback
@@ -60,7 +97,6 @@ Kanboard.Screenshot = (function() {
     function checkInput()
     {
         var child = pasteCatcher.childNodes[0];
-        pasteCatcher.innerHTML = "";
 
         if (child) {
             // If the user pastes an image, the src attribute
@@ -69,6 +105,8 @@ Kanboard.Screenshot = (function() {
                 createImage(child.src);
             }
         }
+
+        pasteCatcher.innerHTML = "";
     }
 
     // Creates a new image from a given source
@@ -84,9 +122,13 @@ Kanboard.Screenshot = (function() {
             $("input[name=screenshot]").val(sourceString);
         };
 
-        document.getElementById("screenshot-inner").style.display = "none";
-        document.getElementById("screenshot-zone").className = "screenshot-pasted";
-        document.getElementById("screenshot-zone").appendChild(pastedImage);
+        var zone = document.getElementById("screenshot-zone");
+        zone.innerHTML = "";
+        zone.className = "screenshot-pasted";
+        zone.appendChild(pastedImage);
+
+        destroy();
+        init();
     }
 
     jQuery(document).ready(function() {
@@ -97,6 +139,7 @@ Kanboard.Screenshot = (function() {
     });
 
     return {
-        Init: init
+        Init: init,
+        Destroy: destroy
     };
 })();

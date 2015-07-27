@@ -35,6 +35,10 @@
         margin-top: 10px;
         display: block;
     }
+
+    .page-header .form-input-large {
+        width: 300px;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
@@ -53,6 +57,10 @@
     input[type="password"],
     input[type="text"] {
         height: 18px;
+    }
+
+    .page-header .form-input-large {
+        width: 300px;
     }
 }
 

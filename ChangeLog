@@ -1,0 +1,96 @@
+Version 1.0.17
+--------------
+
+New features:
+
+* Added url rewrite and new routes
+* Added new search engine with advanced syntax
+* Added global search section
+* Added search form on the dashboard
+* Added new dashboard layout
+* Added new layout for board/calendar/list views
+* Added filters helper for search forms
+* Added settings option to disable subtask timer
+* Added settings option to include or exclude closed tasks into CFD
+* Added settings option to define the default task color
+* Added new config option to disable automatic creation of LDAP accounts
+* Added loading icon on board view
+* Prompt user when moving or duplicate a task to another project
+* Added current values when moving/duplicate a task to another project and add a loading icon
+* Added memory consumption in debug log
+* Added form to create remote user
+* Added edit form for user authentication
+* Added config option to hide login form
+* Display OAuth2 urls on integration page
+* Added keyboard shortcuts to switch between board/calendar/list view
+* Added keyboard shortcut to focus on the search box
+* Added Slack channel override
+* Added new report: Lead and cycle time for projects
+* Added new report: Average time spent into each column
+* Added task analytics
+* Added icon to set automatically the start date
+* Added datetime picker for start date
+
+Improvements:
+
+* Updated documentation
+* Display user initials when tasks are in collapsed mode
+* Show title in tooltip for collapsed tasks
+* Improve alert box fadeout to avoid an empty space
+* Set focus on the dropdown for category popover
+* Make escape keyboard shorcut global
+* Check the box remember me by default
+* Store redirect login url in session instead of using url parameter
+* Update Gitlab webhook
+* Do not rewrite remember me cookie for each request
+* Set the assignee as organizer for ical events
+* Increase date range for ics export
+* Reduce spacing on cards
+* Move board collapse/expand mode to server side to avoid board flickering
+* Use ajax requests for board collapse/expand
+* Do not set anchor for the default swimlane on the link back to board
+* Replace timeserie axis to category axis for charts
+* Hide task age in compact mode
+* Improve quick-add subtasks form
+* Reduce the size of the filter box for smaller screen
+* Added icon to hide/show sidebar
+* Update GitLab logo
+* Improve Dockerfile
+
+Translations:
+
+* Added Czech translation
+* Updated Spanish translation
+* Updated German Translation
+
+Bug fixes:
+
+* Screenshot dropdown: unexpected scroll down on the board view and focus lost when clicking on the drop zone
+* No creator when duplicating a task
+* Avoid the creation of multiple subtask timer for the same task and user
+
+Code refactoring:
+
+* Split task controller into smaller classes
+* Remove method Category::getBoardCategories()
+* Rewrite movePosition() to improve performances
+* Refactoring of Github and Google authentication
+
+Breaking changes:
+
+* New OAuth url for Google and Github authentication
+
+API:
+
+* Add urls in api response for tasks and projects
+
+Other:
+
+* Added automated Docker build
+* Remove edit recurrence from the task menu on the board
+* Switch to MIT License instead of AGPLv3
+
+Version 1.0.0 to 1.0.16
+-----------------------
+
+* See commit history and website news

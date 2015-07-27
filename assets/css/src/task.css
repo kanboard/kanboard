@@ -165,6 +165,10 @@ span.task-board-date-overdue {
     border-bottom-right-radius: 3px;
 }
 
+.board-container-compact .task-board-days {
+    display: none;
+}
+
 /* task view */
 .task-show-details {
     position: relative;

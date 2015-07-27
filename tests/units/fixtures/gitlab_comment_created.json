@@ -1,0 +1,46 @@
+{
+    "object_kind": "note",
+    "user": {
+        "name": "Fred",
+        "username": "minicoders",
+        "avatar_url": "https://secure.gravatar.com/avatar/3c44936e5a56f80711bff14987d2733f?s=40&d=identicon"
+    },
+    "project_id": 320820,
+    "repository": {
+        "name": "test-webhook",
+        "url": "git@gitlab.com:minicoders/test-webhook.git",
+        "description": "",
+        "homepage": "https://gitlab.com/minicoders/test-webhook"
+    },
+    "object_attributes": {
+        "id": 1642761,
+        "note": "Super comment!",
+        "noteable_type": "Issue",
+        "author_id": 74067,
+        "created_at": "2015-07-17 21:37:48 UTC",
+        "updated_at": "2015-07-17 21:37:48 UTC",
+        "project_id": 320820,
+        "attachment": null,
+        "line_code": null,
+        "commit_id": "",
+        "noteable_id": 355691,
+        "st_diff": null,
+        "system": false,
+        "url": "https://gitlab.com/minicoders/test-webhook/issues/1#note_1642761"
+    },
+    "issue": {
+        "id": 355691,
+        "title": "Bug",
+        "assignee_id": null,
+        "author_id": 74067,
+        "project_id": 320820,
+        "created_at": "2015-07-17 21:31:47 UTC",
+        "updated_at": "2015-07-17 21:37:48 UTC",
+        "position": 0,
+        "branch_name": null,
+        "description": "There is a bug somewhere.\r\n\r\nBye",
+        "milestone_id": null,
+        "state": "opened",
+        "iid": 1
+    }
+}

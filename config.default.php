@@ -109,6 +109,9 @@ define('LDAP_ACCOUNT_ID', 'samaccountname');
 // Set to true if you want to preserve the case
 define('LDAP_USERNAME_CASE_SENSITIVE', false);
 
+// Automatically create user account
+define('LDAP_ACCOUNT_CREATION', true);
+
 // Enable/disable Google authentication
 define('GOOGLE_AUTH', false);
 
@@ -154,3 +157,5 @@ define('API_AUTHENTICATION_HEADER', '');
 // Enable/disable url rewrite
 define('ENABLE_URL_REWRITE', false);
 
+// Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
+define('HIDE_LOGIN_FORM', false);

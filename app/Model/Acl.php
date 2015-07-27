@@ -18,12 +18,12 @@ class Acl extends Base
      */
     private $public_acl = array(
         'auth' => array('login', 'check'),
-        'user' => array('google', 'github'),
         'task' => array('readonly'),
         'board' => array('readonly'),
         'webhook' => '*',
         'ical' => '*',
         'feed' => '*',
+        'oauth' => array('google', 'github'),
     );
 
     /**
@@ -41,6 +41,10 @@ class Acl extends Base
         'activity' => '*',
         'subtask' => '*',
         'task' => '*',
+        'taskduplication' => '*',
+        'taskcreation' => '*',
+        'taskmodification' => '*',
+        'taskstatus' => '*',
         'tasklink' => '*',
         'timer' => '*',
         'calendar' => array('show', 'project'),
@@ -70,7 +74,7 @@ class Acl extends Base
      * @var array
      */
     private $admin_acl = array(
-        'user' => array('index', 'create', 'save', 'remove'),
+        'user' => array('index', 'create', 'save', 'remove', 'authentication'),
         'config' => '*',
         'link' => '*',
         'project' => array('remove'),

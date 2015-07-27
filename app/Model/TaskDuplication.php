@@ -93,15 +93,22 @@ class TaskDuplication extends Base
      * Duplicate a task to another project
      *
      * @access public
-     * @param  integer             $task_id         Task id
-     * @param  integer             $project_id      Project id
-     * @return boolean|integer                      Duplicated task id
+     * @param  integer    $task_id
+     * @param  integer    $project_id
+     * @param  integer    $swimlane_id
+     * @param  integer    $column_id
+     * @param  integer    $category_id
+     * @param  integer    $owner_id
+     * @return boolean|integer
      */
-    public function duplicateToProject($task_id, $project_id)
+    public function duplicateToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
     {
         $values = $this->copyFields($task_id);
         $values['project_id'] = $project_id;
-        $values['column_id'] = $this->board->getFirstColumn($project_id);
+        $values['column_id'] = $column_id !== null ? $column_id : $this->board->getFirstColumn($project_id);
+        $values['swimlane_id'] = $swimlane_id !== null ? $swimlane_id : $values['swimlane_id'];
+        $values['category_id'] = $category_id !== null ? $category_id : $values['category_id'];
+        $values['owner_id'] = $owner_id !== null ? $owner_id : $values['owner_id'];
 
         $this->checkDestinationProjectValues($values);
 
@@ -112,22 +119,26 @@ class TaskDuplication extends Base
      * Move a task to another project
      *
      * @access public
-     * @param  integer    $task_id              Task id
-     * @param  integer    $project_id           Project id
+     * @param  integer    $task_id
+     * @param  integer    $project_id
+     * @param  integer    $swimlane_id
+     * @param  integer    $column_id
+     * @param  integer    $category_id
+     * @param  integer    $owner_id
      * @return boolean
      */
-    public function moveToProject($task_id, $project_id)
+    public function moveToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
     {
         $task = $this->taskFinder->getById($task_id);
 
         $values = array();
         $values['is_active'] = 1;
         $values['project_id'] = $project_id;
-        $values['column_id'] = $this->board->getFirstColumn($project_id);
+        $values['column_id'] = $column_id !== null ? $column_id : $this->board->getFirstColumn($project_id);
         $values['position'] = $this->taskFinder->countByColumnId($project_id, $values['column_id']) + 1;
-        $values['owner_id'] = $task['owner_id'];
-        $values['category_id'] = $task['category_id'];
-        $values['swimlane_id'] = $task['swimlane_id'];
+        $values['swimlane_id'] = $swimlane_id !== null ? $swimlane_id : $task['swimlane_id'];
+        $values['category_id'] = $category_id !== null ? $category_id : $task['category_id'];
+        $values['owner_id'] = $owner_id !== null ? $owner_id : $task['owner_id'];
 
         $this->checkDestinationProjectValues($values);
 
@@ -144,10 +155,10 @@ class TaskDuplication extends Base
     /**
      * Check if the assignee and the category are available in the destination project
      *
-     * @access private
+     * @access public
      * @param  array      $values
      */
-    private function checkDestinationProjectValues(&$values)
+    public function checkDestinationProjectValues(array &$values)
     {
         // Check if the assigned user is allowed for the destination project
         if ($values['owner_id'] > 0 && ! $this->projectPermission->isUserAllowed($values['project_id'], $values['owner_id'])) {
@@ -169,6 +180,8 @@ class TaskDuplication extends Base
                 $this->swimlane->getNameById($values['swimlane_id'])
             );
         }
+
+        return $values;
     }
 
     /**

@@ -2,7 +2,7 @@
     <h2><?= t('Edit a task') ?></h2>
 </div>
 <section id="task-section">
-<form method="post" action="<?= $this->url->href('task', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('taskmodification', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -29,8 +29,6 @@
                 </li>
             </ul>
         </div>
-
-        <div class="form-help"><a href="http://kanboard.net/documentation/syntax-guide" target="_blank" rel="noreferrer"><?= t('Write your text in Markdown') ?></a></div>
 
     </div>
 

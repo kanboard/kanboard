@@ -168,9 +168,9 @@ th a:hover {
 }
 
 @media all and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-.board-container-compact #board {
-    table-layout: auto;
-}
+    .board-container-compact #board {
+        table-layout: auto;
+    }
 }
 
 #board {
@@ -409,6 +409,10 @@ span.task-board-date-overdue {
     padding: 1px 2px 1px 4px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+}
+
+.board-container-compact .task-board-days {
+    display: none;
 }
 
 /* task view */

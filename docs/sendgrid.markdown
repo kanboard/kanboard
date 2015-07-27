@@ -6,7 +6,7 @@ You can use the service [Sendgrid](https://sendgrid.com/) to create tasks direct
 This integration works with the [Parse API of Sendgrid](https://sendgrid.com/docs/API_Reference/Webhooks/parse.html).
 Kanboard use a webhook to handle incoming emails.
 
-The [incoming email workflow is described here](http://kanboard.net/documentation/email-tasks).
+The [incoming email workflow is described here](create-tasks-by-email.markdown).
 
 Sendgrid configuration
 ----------------------

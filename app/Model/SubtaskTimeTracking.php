@@ -29,7 +29,7 @@ class SubtaskTimeTracking extends Base
     public function getTimerQuery($user_id)
     {
         return sprintf(
-            "SELECT %s FROM %s WHERE %s='%d' AND %s='0' AND %s=%s",
+            "SELECT %s FROM %s WHERE %s='%d' AND %s='0' AND %s=%s LIMIT 1",
             $this->db->escapeIdentifier('start'),
             $this->db->escapeIdentifier(self::TABLE),
             $this->db->escapeIdentifier('user_id'),
@@ -227,6 +227,19 @@ class SubtaskTimeTracking extends Base
     }
 
     /**
+     * Return true if a timer is started for this use and subtask
+     *
+     * @access public
+     * @param  integer  $subtask_id
+     * @param  integer  $user_id
+     * @return boolean
+     */
+    public function hasTimer($subtask_id, $user_id)
+    {
+        return $this->db->table(self::TABLE)->eq('subtask_id', $subtask_id)->eq('user_id', $user_id)->eq('end', 0)->exists();
+    }
+
+    /**
      * Log start time
      *
      * @access public
@@ -236,9 +249,11 @@ class SubtaskTimeTracking extends Base
      */
     public function logStartTime($subtask_id, $user_id)
     {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->insert(array('subtask_id' => $subtask_id, 'user_id' => $user_id, 'start' => time(), 'end' => 0));
+        return
+            ! $this->hasTimer($subtask_id, $user_id) &&
+            $this->db
+                ->table(self::TABLE)
+                ->insert(array('subtask_id' => $subtask_id, 'user_id' => $user_id, 'start' => time(), 'end' => 0));
     }
 
     /**

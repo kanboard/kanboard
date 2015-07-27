@@ -1,0 +1,25 @@
+{
+    "object_kind": "issue",
+    "user": {
+        "name": "Fred",
+        "username": "minicoders",
+        "avatar_url": "https://secure.gravatar.com/avatar/3c44936e5a56f80711bff14987d2733f?s=40&d=identicon"
+    },
+    "object_attributes": {
+        "id": 355691,
+        "title": "Bug",
+        "assignee_id": null,
+        "author_id": 74067,
+        "project_id": 320820,
+        "created_at": "2015-07-17 21:31:47 UTC",
+        "updated_at": "2015-07-17 21:31:47 UTC",
+        "position": 0,
+        "branch_name": null,
+        "description": "There is a bug somewhere.\r\n\r\nBye",
+        "milestone_id": null,
+        "state": "opened",
+        "iid": 1,
+        "url": "https://gitlab.com/minicoders/test-webhook/issues/1",
+        "action": "open"
+    }
+}

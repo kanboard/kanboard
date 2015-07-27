@@ -1,14 +1,13 @@
 <table class="table-fixed table-small">
     <tr>
         <th class="column-8"><?= $paginator->order(t('Project'), 'tasks.project_id') ?></th>
-        <th class="column-8"><?= $paginator->order(t('Id'), 'tasks.id') ?></th>
-        <th class="column-8"><?= $paginator->order(t('Column'), 'tasks.column_id') ?></th>
-        <th class="column-8"><?= $paginator->order(t('Category'), 'tasks.category_id') ?></th>
+        <th class="column-5"><?= $paginator->order(t('Id'), 'tasks.id') ?></th>
+        <th class="column-10"><?= $paginator->order(t('Swimlane'), 'tasks.swimlane_id') ?></th>
+        <th class="column-10"><?= $paginator->order(t('Column'), 'tasks.column_id') ?></th>
+        <th class="column-10"><?= $paginator->order(t('Category'), 'tasks.category_id') ?></th>
         <th><?= $paginator->order(t('Title'), 'tasks.title') ?></th>
         <th class="column-10"><?= $paginator->order(t('Assignee'), 'users.username') ?></th>
         <th class="column-10"><?= $paginator->order(t('Due date'), 'tasks.date_due') ?></th>
-        <th class="column-10"><?= $paginator->order(t('Date created'), 'tasks.date_creation') ?></th>
-        <th class="column-10"><?= $paginator->order(t('Date completed'), 'tasks.date_completed') ?></th>
         <th class="column-5"><?= $paginator->order(t('Status'), 'tasks.is_active') ?></th>
     </tr>
     <?php foreach ($paginator->getCollection() as $task): ?>
@@ -18,6 +17,9 @@
         </td>
         <td class="task-table color-<?= $task['color_id'] ?>">
             <?= $this->url->link('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+        </td>
+        <td>
+            <?= $this->e($task['swimlane_name'] ?: $task['default_swimlane']) ?>
         </td>
         <td>
             <?= $this->e($task['column_name']) ?>
@@ -37,14 +39,6 @@
         </td>
         <td>
             <?= dt('%B %e, %Y', $task['date_due']) ?>
-        </td>
-        <td>
-            <?= dt('%B %e, %Y', $task['date_creation']) ?>
-        </td>
-        <td>
-            <?php if ($task['date_completed']): ?>
-                <?= dt('%B %e, %Y', $task['date_completed']) ?>
-            <?php endif ?>
         </td>
         <td>
             <?php if ($task['is_active'] == \Model\Task::STATUS_OPEN): ?>

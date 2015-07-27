@@ -30,4 +30,5 @@ Now, Kanboard events will be sent to the Jabber conference room.
 
 ## Troubleshooting
 
+- Enable the debug mode
 - All connection errors with the XMPP server are recorded in the log files `data/debug.log` or syslog

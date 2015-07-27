@@ -5,7 +5,7 @@ Server side
 -----------
 
 - Modern Linux/Unix operating system: **Ubuntu/Debian or FreeBSD**
-- Most recent version of PHP and Apache
+- Most recent version of PHP and Apache (Kanboard is compatible with PHP 5.3, 5.4, 5.5, 5.6 and 7.0)
 - Use the Sqlite database only when you have a disk with fast I/O (SSD disks) otherwise use Mysql or Postgresql
 
 Client side
@@ -22,7 +22,7 @@ The following configurations are tested with Kanboard but that doesn't mean all 
 
 - Ubuntu 14.04 LTS
 - Debian 6, 7 and 8
-- Centos 6.5 and 7.0
+- Centos 6.x and 7.0
 - Windows 2012 Server
 - Windows 2008 Server
 

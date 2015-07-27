@@ -6,6 +6,31 @@ use Core\Lexer;
 
 class LexerTest extends Base
 {
+    public function testSwimlaneQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'swimlane:', 'token' => 'T_SWIMLANE'), array('match' => 'Version 42', 'token' => 'T_STRING')),
+            $lexer->tokenize('swimlane:"Version 42"')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'swimlane:', 'token' => 'T_SWIMLANE'), array('match' => 'v3', 'token' => 'T_STRING')),
+            $lexer->tokenize('swimlane:v3')
+        );
+
+        $this->assertEquals(
+            array('T_SWIMLANE' => array('v3')),
+            $lexer->map($lexer->tokenize('swimlane:v3'))
+        );
+
+        $this->assertEquals(
+            array('T_SWIMLANE' => array('Version 42', 'v3')),
+            $lexer->map($lexer->tokenize('swimlane:"Version 42" swimlane:v3'))
+        );
+    }
+
     public function testAssigneeQuery()
     {
         $lexer = new Lexer;
@@ -283,6 +308,71 @@ class LexerTest extends Base
         $this->assertEquals(
             array('T_DUE' => 'today'),
             $lexer->map($lexer->tokenize('due:today'))
+        );
+    }
+
+    public function testModifiedQuery()
+    {
+        $lexer = new Lexer;
+
+        $this->assertEquals(
+            array(array('match' => 'modified:', 'token' => 'T_UPDATED'), array('match' => '2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('modified:2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'modified:', 'token' => 'T_UPDATED'), array('match' => '<2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('modified:<2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'modified:', 'token' => 'T_UPDATED'), array('match' => '>2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('modified:>2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'updated:', 'token' => 'T_UPDATED'), array('match' => '<=2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('updated:<=2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'updated:', 'token' => 'T_UPDATED'), array('match' => '>=2015-05-01', 'token' => 'T_DATE')),
+            $lexer->tokenize('updated:>=2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'updated:', 'token' => 'T_UPDATED'), array('match' => 'yesterday', 'token' => 'T_DATE')),
+            $lexer->tokenize('updated:yesterday')
+        );
+
+        $this->assertEquals(
+            array(array('match' => 'updated:', 'token' => 'T_UPDATED'), array('match' => 'tomorrow', 'token' => 'T_DATE')),
+            $lexer->tokenize('updated:tomorrow')
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->tokenize('updated:#2015-05-01')
+        );
+
+        $this->assertEquals(
+            array(),
+            $lexer->tokenize('modified:01-05-1024')
+        );
+
+        $this->assertEquals(
+            array('T_UPDATED' => '2015-05-01'),
+            $lexer->map($lexer->tokenize('modified:2015-05-01'))
+        );
+
+        $this->assertEquals(
+            array('T_UPDATED' => '<2015-05-01'),
+            $lexer->map($lexer->tokenize('modified:<2015-05-01'))
+        );
+
+        $this->assertEquals(
+            array('T_UPDATED' => 'today'),
+            $lexer->map($lexer->tokenize('modified:today'))
         );
     }
 

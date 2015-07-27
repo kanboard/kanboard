@@ -3,11 +3,6 @@
 namespace Auth;
 
 use Event\AuthEvent;
-use OAuth\Common\Storage\Session;
-use OAuth\Common\Consumer\Credentials;
-use OAuth\Common\Http\Uri\UriFactory;
-use OAuth\ServiceFactory;
-use OAuth\Common\Http\Exception\TokenResponseException;
 
 /**
  * Google backend
@@ -23,6 +18,14 @@ class Google extends Base
      * @var string
      */
     const AUTH_NAME = 'Google';
+
+    /**
+     * OAuth2 instance
+     *
+     * @access private
+     * @var \Core\OAuth2
+     */
+    private $service;
 
     /**
      * Authenticate a Google user
@@ -69,72 +72,52 @@ class Google extends Base
      */
     public function updateUser($user_id, array $profile)
     {
+        $user = $this->user->getById($user_id);
+
         return $this->user->update(array(
             'id' => $user_id,
             'google_id' => $profile['id'],
-            'email' => $profile['email'],
-            'name' => $profile['name'],
+            'email' => $profile['email'] ?: $user['email'],
+            'name' => $profile['name'] ?: $user['name'],
         ));
     }
 
     /**
-     * Get the Google service instance
+     * Get OAuth2 configured service
      *
      * @access public
-     * @return \OAuth\OAuth2\Service\Google
+     * @return \Core\OAuth2
      */
     public function getService()
     {
-        $uriFactory = new UriFactory();
-        $currentUri = $uriFactory->createFromSuperGlobalArray($_SERVER);
-        $currentUri->setQuery('controller=user&action=google');
+        if (empty($this->service)) {
+            $this->service = $this->oauth->createService(
+                GOOGLE_CLIENT_ID,
+                GOOGLE_CLIENT_SECRET,
+                $this->helper->url->to('oauth', 'google', array(), '', true),
+                'https://accounts.google.com/o/oauth2/auth',
+                'https://accounts.google.com/o/oauth2/token',
+                array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile')
+            );
+        }
 
-        $storage = new Session(false);
-
-        $credentials = new Credentials(
-            GOOGLE_CLIENT_ID,
-            GOOGLE_CLIENT_SECRET,
-            $currentUri->getAbsoluteUri()
-        );
-
-        $serviceFactory = new ServiceFactory();
-
-        return $serviceFactory->createService(
-            'google',
-            $credentials,
-            $storage,
-            array('userinfo_email', 'userinfo_profile')
-        );
+        return $this->service;
     }
 
     /**
-     * Get the authorization URL
+     * Get Google profile
      *
      * @access public
-     * @return \OAuth\Common\Http\Uri\Uri
+     * @param  string  $code
+     * @return array
      */
-    public function getAuthorizationUrl()
+    public function getProfile($code)
     {
-        return $this->getService()->getAuthorizationUri();
-    }
+        $this->getService()->getAccessToken($code);
 
-    /**
-     * Get Google profile information from the API
-     *
-     * @access public
-     * @param  string    $code   Google authorization code
-     * @return bool|array
-     */
-    public function getGoogleProfile($code)
-    {
-        try {
-
-            $googleService = $this->getService();
-            $googleService->requestAccessToken($code);
-            return json_decode($googleService->request('https://www.googleapis.com/oauth2/v1/userinfo'), true);
-        }
-        catch (TokenResponseException $e) {
-            return false;
-        }
+        return $this->httpClient->getJson(
+            'https://www.googleapis.com/oauth2/v1/userinfo',
+            array($this->getService()->getAuthorizationHeader())
+        );
     }
 }

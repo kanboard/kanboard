@@ -32,6 +32,20 @@ class HttpClient extends Base
     const HTTP_USER_AGENT = 'Kanboard';
 
     /**
+     * Send a GET HTTP request and parse JSON response
+     *
+     * @access public
+     * @param  string     $url
+     * @param  string[]   $headers
+     * @return array
+     */
+    public function getJson($url, array $headers = array())
+    {
+        $response = $this->doRequest('GET', $url, '', array_merge(array('Accept: application/json'), $headers));
+        return json_decode($response, true) ?: array();
+    }
+
+    /**
      * Send a POST HTTP request encoded in JSON
      *
      * @access public
@@ -43,6 +57,7 @@ class HttpClient extends Base
     public function postJson($url, array $data, array $headers = array())
     {
         return $this->doRequest(
+            'POST',
             $url,
             json_encode($data),
             array_merge(array('Content-type: application/json'), $headers)
@@ -61,6 +76,7 @@ class HttpClient extends Base
     public function postForm($url, array $data, array $headers = array())
     {
         return $this->doRequest(
+            'POST',
             $url,
             http_build_query($data),
             array_merge(array('Content-type: application/x-www-form-urlencoded'), $headers)
@@ -71,12 +87,13 @@ class HttpClient extends Base
      * Make the HTTP request
      *
      * @access private
+     * @param  string     $method
      * @param  string     $url
      * @param  string     $content
      * @param  string[]   $headers
      * @return string
      */
-    private function doRequest($url, $content, array $headers)
+    private function doRequest($method, $url, $content, array $headers)
     {
         if (empty($url)) {
             return '';
@@ -86,7 +103,7 @@ class HttpClient extends Base
 
         $context = stream_context_create(array(
             'http' => array(
-                'method' => 'POST',
+                'method' => $method,
                 'protocol_version' => 1.1,
                 'timeout' => self::HTTP_TIMEOUT,
                 'max_redirects' => self::HTTP_MAX_REDIRECTS,

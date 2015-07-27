@@ -78,6 +78,12 @@ hr {
 #ui-datepicker-div {
     font-size: 0.8em;
 }
+
+#app-loading-icon {
+    position: fixed;
+    right: 3px;
+    bottom: 3px;
+}
 /* links */
 a {
     color: #3366CC;
@@ -756,9 +762,9 @@ nav .active a {
 }
 
 @media all and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-.board-container-compact #board {
-    table-layout: auto;
-}
+    .board-container-compact #board {
+        table-layout: auto;
+    }
 }
 
 #board {
@@ -997,6 +1003,10 @@ span.task-board-date-overdue {
     padding: 1px 2px 1px 4px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+}
+
+.board-container-compact .task-board-days {
+    display: none;
 }
 
 /* task view */
@@ -1436,6 +1446,33 @@ span.task-board-date-overdue {
     line-height: 1.8em;
 }
 
+.sidebar-collapsed .sidebar {
+    width: 10px;
+    padding-bottom: 0;
+    float: none;
+}
+
+.sidebar-collapsed .sidebar-content {
+    margin: 0;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.sidebar-collapse {
+    text-align: right;
+}
+
+.sidebar-collapse a,
+.sidebar-expand a {
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar-collapse a:hover,
+.sidebar-expand a:hover {
+    color: #DF5353;
+}
+
 @media only screen and (max-width: 1024px) {
     .sidebar {
         width: 25%;
@@ -1455,7 +1492,7 @@ span.task-board-date-overdue {
 
     .sidebar-content {
         margin: 0;
-        margin-top: 20px;
+        margin-top: 15px;
         width: 100%;
     }
 }
@@ -1496,6 +1533,10 @@ span.task-board-date-overdue {
         margin-top: 10px;
         display: block;
     }
+
+    .page-header .form-input-large {
+        width: 300px;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
@@ -1514,6 +1555,10 @@ span.task-board-date-overdue {
     input[type="password"],
     input[type="text"] {
         height: 18px;
+    }
+
+    .page-header .form-input-large {
+        width: 300px;
     }
 }
 
@@ -1664,4 +1709,3 @@ form.search {
 div.search {
     margin-bottom: 20px;
 }
-

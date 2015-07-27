@@ -20,6 +20,8 @@
         });
 
         Mousetrap.bind("s", function() {
+            Kanboard.ShowLoadingIcon();
+
             $.ajax({
                 cache: false,
                 url: $('.filter-display-mode:not([style="display: none;"]) a').attr('href'),
@@ -31,6 +33,7 @@
                     board_load_events();
                     compactview_reload();
                     $('.filter-display-mode').toggle();
+                    Kanboard.HideLoadingIcon();
                 }
             });
         });
@@ -128,7 +131,7 @@
                     });
                 });
 
-                return '<i class="fa fa-refresh fa-spin fa-2x"></i>';
+                return '<i class="fa fa-spinner fa-spin"></i>';
             }
         }).on("mouseenter", function() {
 
@@ -169,6 +172,7 @@
     function board_save(taskId, columnId, position, swimlaneId)
     {
         board_unload_events();
+        Kanboard.ShowLoadingIcon();
 
         $.ajax({
             cache: false,
@@ -188,6 +192,7 @@
                 Kanboard.InitAfterAjax();
                 board_load_events();
                 compactview_reload();
+                Kanboard.HideLoadingIcon();
             }
         });
     }

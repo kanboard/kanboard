@@ -28,7 +28,7 @@ class SubtaskTimeTrackingSubscriber extends \Core\Base implements EventSubscribe
 
     public function logStartEnd(SubtaskEvent $event)
     {
-        if (isset($event['status'])) {
+        if (isset($event['status']) && $this->config->get('subtask_time_tracking') == 1) {
 
             $subtask = $this->subtask->getById($event['id']);
 

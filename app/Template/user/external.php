@@ -8,9 +8,9 @@
     <p class="listing">
     <?php if ($this->user->isCurrentUser($user['id'])): ?>
         <?php if (empty($user['google_id'])): ?>
-            <?= $this->url->link(t('Link my Google Account'), 'user', 'google', array(), true) ?>
+            <?= $this->url->link(t('Link my Google Account'), 'oauth', 'google', array(), true) ?>
         <?php else: ?>
-            <?= $this->url->link(t('Unlink my Google Account'), 'user', 'unlinkGoogle', array(), true) ?>
+            <?= $this->url->link(t('Unlink my Google Account'), 'oauth', 'unlink', array('backend' => 'google'), true) ?>
         <?php endif ?>
     <?php else: ?>
         <?= empty($user['google_id']) ? t('No account linked.') : t('Account linked.') ?>
@@ -24,9 +24,9 @@
     <p class="listing">
     <?php if ($this->user->isCurrentUser($user['id'])): ?>
         <?php if (empty($user['github_id'])): ?>
-            <?= $this->url->link(t('Link my GitHub Account'), 'user', 'github', array(), true) ?>
+            <?= $this->url->link(t('Link my Github Account'), 'oauth', 'github', array(), true) ?>
         <?php else: ?>
-            <?= $this->url->link(t('Unlink my GitHub Account'), 'user', 'unlinkGitHub', array(), true) ?>
+            <?= $this->url->link(t('Unlink my Github Account'), 'oauth', 'unlink', array('backend' => 'github'), true) ?>
         <?php endif ?>
     <?php else: ?>
         <?= empty($user['github_id']) ? t('No account linked.') : t('Account linked.') ?>

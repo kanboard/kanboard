@@ -63,6 +63,7 @@ class TaskFinder extends Base
                 'tasks.date_creation',
                 'tasks.date_modification',
                 'tasks.date_completed',
+                'tasks.date_started',
                 'tasks.date_due',
                 'tasks.color_id',
                 'tasks.project_id',
@@ -88,11 +89,14 @@ class TaskFinder extends Base
                 Category::TABLE.'.name AS category_name',
                 Category::TABLE.'.description AS category_description',
                 Board::TABLE.'.title AS column_name',
+                Swimlane::TABLE.'.name AS swimlane_name',
+                Project::TABLE.'.default_swimlane',
                 Project::TABLE.'.name AS project_name'
             )
             ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
             ->join(Category::TABLE, 'id', 'category_id', Task::TABLE)
             ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+            ->join(Swimlane::TABLE, 'id', 'swimlane_id', Task::TABLE)
             ->join(Project::TABLE, 'id', 'project_id', Task::TABLE);
     }
 
@@ -244,6 +248,7 @@ class TaskFinder extends Base
             project_has_categories.name AS category_name,
             swimlanes.name AS swimlane_name,
             projects.name AS project_name,
+            projects.default_swimlane,
             columns.title AS column_title,
             users.username AS assignee_username,
             users.name AS assignee_name,

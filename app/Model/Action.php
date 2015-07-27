@@ -94,6 +94,7 @@ class Action extends Base
             GitlabWebhook::EVENT_COMMIT => t('Gitlab commit received'),
             GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
             GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
+            GitlabWebhook::EVENT_ISSUE_COMMENT => t('Gitlab issue comment created'),
             BitbucketWebhook::EVENT_COMMIT => t('Bitbucket commit received'),
             BitbucketWebhook::EVENT_ISSUE_OPENED => t('Bitbucket issue opened'),
             BitbucketWebhook::EVENT_ISSUE_CLOSED => t('Bitbucket issue closed'),
@@ -217,7 +218,6 @@ class Action extends Base
      */
     public function remove($action_id)
     {
-        // $this->container['fileCache']->remove('proxy_action_getAll');
         return $this->db->table(self::TABLE)->eq('id', $action_id)->remove();
     }
 
@@ -261,8 +261,6 @@ class Action extends Base
 
         $this->db->closeTransaction();
 
-        // $this->container['fileCache']->remove('proxy_action_getAll');
-
         return $action_id;
     }
 
@@ -273,7 +271,6 @@ class Action extends Base
      */
     public function attachEvents()
     {
-        //$actions = $this->container['fileCache']->proxy('action', 'getAll');
         $actions = $this->getAll();
 
         foreach ($actions as $action) {
