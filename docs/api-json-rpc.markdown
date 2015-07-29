@@ -70,6 +70,9 @@ If there is an authentication error, you will receive the HTTP status code `401 
 - getMyProjectsList
 - getTimezone
 - getVersion
+- getDefaultTaskColor
+- getDefaultTaskColors
+- getColorList
 - getProjectById
 - getTask
 - getTaskByReference
