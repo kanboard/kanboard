@@ -186,7 +186,7 @@ class Subtask extends Base
 
             $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
 
-            $this->response->html($this->template->render('board/subtasks', array(
+            $this->response->html($this->template->render('board/tooltip_subtasks', array(
                 'subtasks' => $this->subtask->getAll($task['id']),
                 'task' => $task,
             )));
