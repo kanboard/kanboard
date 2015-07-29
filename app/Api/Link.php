@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Link extends Base
+class Link extends \Core\Base
 {
     /**
      * Get a link by id

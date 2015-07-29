@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "305f839bfc9c4acb5d9357e1174c42da",
+    "hash": "1c0cc116db3d03c38df0f0efa59e9df7",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -260,16 +260,16 @@
         },
         {
             "name": "fguillot/json-rpc",
-            "version": "v1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/JsonRPC.git",
-                "reference": "5a11f1414780a200f09b78d20ab72b5cee4faa95"
+                "reference": "050f046b1cae99210ae2fe64618831d3961f5bd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/5a11f1414780a200f09b78d20ab72b5cee4faa95",
-                "reference": "5a11f1414780a200f09b78d20ab72b5cee4faa95",
+                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/050f046b1cae99210ae2fe64618831d3961f5bd9",
+                "reference": "050f046b1cae99210ae2fe64618831d3961f5bd9",
                 "shasum": ""
             },
             "require": {
@@ -292,7 +292,7 @@
             ],
             "description": "Simple Json-RPC client/server library that just works",
             "homepage": "https://github.com/fguillot/JsonRPC",
-            "time": "2015-07-01 19:50:31"
+            "time": "2015-07-29 20:56:20"
         },
         {
             "name": "fguillot/picodb",
@@ -757,6 +757,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "fguillot/json-rpc": 20,
         "swiftmailer/swiftmailer": 0,
         "symfony/console": 0
     },

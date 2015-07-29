@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Category extends Base
+class Category extends \Core\Base
 {
     public function getCategory($category_id)
     {

@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Subtask extends Base
+class Subtask extends \Core\Base
 {
     public function getSubtask($subtask_id)
     {

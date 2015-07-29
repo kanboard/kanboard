@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Action extends Base
+class Action extends \Core\Base
 {
     public function getAvailableActions()
     {

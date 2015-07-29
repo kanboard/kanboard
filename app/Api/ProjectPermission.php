@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class ProjectPermission extends Base
+class ProjectPermission extends \Core\Base
 {
     public function getMembers($project_id)
     {

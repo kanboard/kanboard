@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Swimlane extends Base
+class Swimlane extends \Core\Base
 {
     public function getActiveSwimlanes($project_id)
     {

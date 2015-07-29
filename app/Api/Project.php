@@ -12,6 +12,7 @@ class Project extends Base
 {
     public function getProjectById($project_id)
     {
+        $this->checkProjectPermission($project_id);
         return $this->formatProject($this->project->getById($project_id));
     }
 
@@ -81,29 +82,5 @@ class Project extends Base
 
         list($valid,) = $this->project->validateModification($values);
         return $valid && $this->project->update($values);
-    }
-
-    private function formatProject($project)
-    {
-        if (! empty($project)) {
-            $project['url'] = array(
-                'board' => $this->helper->url->to('board', 'show', array('project_id' => $project['id']), '', true),
-                'calendar' => $this->helper->url->to('calendar', 'show', array('project_id' => $project['id']), '', true),
-                'list' => $this->helper->url->to('listing', 'show', array('project_id' => $project['id']), '', true),
-            );
-        }
-
-        return $project;
-    }
-
-    private function formatProjects($projects)
-    {
-        if (! empty($projects)) {
-            foreach ($projects as &$project) {
-                $project = $this->formatProject($project);
-            }
-        }
-
-        return $projects;
     }
 }

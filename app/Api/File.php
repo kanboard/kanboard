@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class File extends Base
+class File extends \Core\Base
 {
     public function getFile($file_id)
     {

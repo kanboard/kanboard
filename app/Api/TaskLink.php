@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class TaskLink extends Base
+class TaskLink extends \Core\Base
 {
     /**
      * Get a task link

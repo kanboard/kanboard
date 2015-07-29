@@ -4,7 +4,9 @@ require __DIR__.'/app/common.php';
 
 $server = new JsonRPC\Server;
 $server->setAuthenticationHeader(API_AUTHENTICATION_HEADER);
-$server->before('authentication');
+$server->before(array(new Api\Auth($container), 'checkCredentials'));
+
+$server->attach(new Api\Me($container));
 $server->attach(new Api\Action($container));
 $server->attach(new Api\App($container));
 $server->attach(new Api\Board($container));

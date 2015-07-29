@@ -14,16 +14,19 @@ class Task extends Base
 {
     public function getTask($task_id)
     {
+        $this->checkTaskPermission($task_id);
         return $this->formatTask($this->taskFinder->getById($task_id));
     }
 
     public function getTaskByReference($project_id, $reference)
     {
+        $this->checkProjectPermission($project_id);
         return $this->formatTask($this->taskFinder->getByReference($project_id, $reference));
     }
 
     public function getAllTasks($project_id, $status_id = TaskModel::STATUS_OPEN)
     {
+        $this->checkProjectPermission($project_id);
         return $this->formatTasks($this->taskFinder->getAll($project_id, $status_id));
     }
 
@@ -34,11 +37,13 @@ class Task extends Base
 
     public function openTask($task_id)
     {
+        $this->checkTaskPermission($task_id);
         return $this->taskStatus->open($task_id);
     }
 
     public function closeTask($task_id)
     {
+        $this->checkTaskPermission($task_id);
         return $this->taskStatus->close($task_id);
     }
 
@@ -49,6 +54,7 @@ class Task extends Base
 
     public function moveTaskPosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0)
     {
+        $this->checkProjectPermission($project_id);
         return $this->taskPosition->movePosition($project_id, $task_id, $column_id, $position, $swimlane_id);
     }
 
@@ -57,6 +63,8 @@ class Task extends Base
                                $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0,
                                $recurrence_basedate = 0, $reference = '')
     {
+        $this->checkProjectPermission($project_id);
+
         $values = array(
             'title' => $title,
             'project_id' => $project_id,
@@ -87,6 +95,8 @@ class Task extends Base
                                $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
                                $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null)
     {
+        $this->checkTaskPermission($id);
+
         $values = array(
             'id' => $id,
             'title' => $title,
@@ -114,25 +124,5 @@ class Task extends Base
 
         list($valid) = $this->taskValidator->validateApiModification($values);
         return $valid && $this->taskModification->update($values);
-    }
-
-    private function formatTask($task)
-    {
-        if (! empty($task)) {
-            $task['url'] = $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
-        }
-
-        return $task;
-    }
-
-    private function formatTasks($tasks)
-    {
-        if (! empty($tasks)) {
-            foreach ($tasks as &$task) {
-                $task = $this->formatTask($task);
-            }
-        }
-
-        return $tasks;
     }
 }

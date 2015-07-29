@@ -3,7 +3,7 @@
 namespace Api;
 
 use JsonRPC\AuthenticationFailure;
-use Symfony\Component\EventDispatcher\Event;
+use JsonRPC\AccessDeniedException;
 
 /**
  * Base class
@@ -13,21 +13,97 @@ use Symfony\Component\EventDispatcher\Event;
  */
 abstract class Base extends \Core\Base
 {
-    /**
-     * Check api credentials
-     *
-     * @access public
-     * @param  string  $username
-     * @param  string  $password
-     * @param  string  $class
-     * @param  string  $method
-     */
-    public function authentication($username, $password, $class, $method)
-    {
-        $this->container['dispatcher']->dispatch('api.bootstrap', new Event);
+    private $user_allowed_procedures = array(
+        'getMe',
+        'getMyDashboard',
+        'getMyActivityStream',
+        'createMyPrivateProject',
+        'getMyProjectsList',
+    );
 
-        if (! ($username === 'jsonrpc' && $password === $this->config->get('api_token'))) {
-            throw new AuthenticationFailure('Wrong credentials');
+    private $both_allowed_procedures = array(
+        'getTimezone',
+        'getVersion',
+        'getProjectById',
+        'getTask',
+        'getTaskByReference',
+        'getAllTasks',
+        'openTask',
+        'closeTask',
+        'moveTaskPosition',
+        'createTask',
+        'updateTask',
+        'getBoard',
+    );
+
+    public function checkProcedurePermission($is_user, $procedure)
+    {
+        $is_both_procedure = in_array($procedure, $this->both_allowed_procedures);
+        $is_user_procedure = in_array($procedure, $this->user_allowed_procedures);
+
+        if ($is_user && ! $is_both_procedure && ! $is_user_procedure) {
+            throw new AccessDeniedException('Permission denied');
         }
+        else if (! $is_user && ! $is_both_procedure && $is_user_procedure) {
+            throw new AccessDeniedException('Permission denied');
+        }
+    }
+
+    public function checkProjectPermission($project_id)
+    {
+        if ($this->userSession->isLogged() && ! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
+            throw new AccessDeniedException('Permission denied');
+        }
+    }
+
+    public function checkTaskPermission($task_id)
+    {
+        if ($this->userSession->isLogged()) {
+            $this->checkProjectPermission($this->taskFinder->getProjectId($task_id));
+        }
+    }
+
+    protected function formatTask($task)
+    {
+        if (! empty($task)) {
+            $task['url'] = $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
+        }
+
+        return $task;
+    }
+
+    protected function formatTasks($tasks)
+    {
+        if (! empty($tasks)) {
+            foreach ($tasks as &$task) {
+                $task = $this->formatTask($task);
+            }
+        }
+
+        return $tasks;
+    }
+
+    protected function formatProject($project)
+    {
+        if (! empty($project)) {
+            $project['url'] = array(
+                'board' => $this->helper->url->to('board', 'show', array('project_id' => $project['id']), '', true),
+                'calendar' => $this->helper->url->to('calendar', 'show', array('project_id' => $project['id']), '', true),
+                'list' => $this->helper->url->to('listing', 'show', array('project_id' => $project['id']), '', true),
+            );
+        }
+
+        return $project;
+    }
+
+    protected function formatProjects($projects)
+    {
+        if (! empty($projects)) {
+            foreach ($projects as &$project) {
+                $project = $this->formatProject($project);
+            }
+        }
+
+        return $projects;
     }
 }

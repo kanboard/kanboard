@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class App extends Base
+class App extends \Core\Base
 {
     public function getTimezone()
     {

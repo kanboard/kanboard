@@ -10,7 +10,7 @@ use Auth\Ldap;
  * @package  api
  * @author   Frederic Guillot
  */
-class User extends Base
+class User extends \Core\Base
 {
     public function getUser($user_id)
     {

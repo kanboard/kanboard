@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Comment extends Base
+class Comment extends \Core\Base
 {
     public function getComment($comment_id)
     {
