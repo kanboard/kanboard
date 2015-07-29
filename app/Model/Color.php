@@ -123,6 +123,22 @@ class Color extends Base
     }
 
     /**
+     * Get color properties
+     *
+     * @access public
+     * @param  string  $color_id
+     * @return array
+     */
+    public function getColorProperties($color_id)
+    {
+        if (isset($this->default_colors[$color_id])) {
+            return $this->default_colors[$color_id];
+        }
+
+        return $this->default_colors[$this->getDefaultColor()];
+    }
+
+    /**
      * Get available colors
      *
      * @access public
@@ -151,6 +167,17 @@ class Color extends Base
     }
 
     /**
+     * Get the default colors
+     *
+     * @access public
+     * @return array
+     */
+    public function getDefaultColors()
+    {
+        return $this->default_colors;
+    }
+
+    /**
      * Get Bordercolor from string
      *
      * @access public
@@ -159,11 +186,8 @@ class Color extends Base
      */
     public function getBorderColor($color_id)
     {
-        if (isset($this->default_colors[$color_id])) {
-            return $this->default_colors[$color_id]['border'];
-        }
-
-        return $this->default_colors[$this->getDefaultColor()]['border'];
+        $color = $this->getColorProperties($color_id);
+        return $color['border'];
     }
 
     /**
@@ -175,11 +199,8 @@ class Color extends Base
      */
     public function getBackgroundColor($color_id)
     {
-        if (isset($this->default_colors[$color_id])) {
-            return $this->default_colors[$color_id]['background'];
-        }
-
-        return $this->default_colors[$this->getDefaultColor()]['background'];
+        $color = $this->getColorProperties($color_id);
+        return $color['background'];
     }
 
     /**

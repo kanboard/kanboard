@@ -24,6 +24,9 @@ abstract class Base extends \Core\Base
     private $both_allowed_procedures = array(
         'getTimezone',
         'getVersion',
+        'getDefaultTaskColor',
+        'getDefaultTaskColors',
+        'getColorList',
         'getProjectById',
         'getTask',
         'getTaskByReference',
@@ -67,6 +70,7 @@ abstract class Base extends \Core\Base
     {
         if (! empty($task)) {
             $task['url'] = $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
+            $task['color'] = $this->color->getColorProperties($task['color_id']);
         }
 
         return $task;

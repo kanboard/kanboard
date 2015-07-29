@@ -97,6 +97,26 @@ class UserApi extends PHPUnit_Framework_TestCase
         $this->assertEquals('master', $this->user->getVersion());
     }
 
+    public function testGetDefaultColor()
+    {
+        $this->assertEquals('yellow', $this->user->getDefaultTaskColor());
+    }
+
+    public function testGetDefaultColors()
+    {
+        $colors = $this->user->getDefaultTaskColors();
+        $this->assertNotEmpty($colors);
+        $this->assertArrayHasKey('red', $colors);
+    }
+
+    public function testGetColorList()
+    {
+        $colors = $this->user->getColorList();
+        $this->assertNotEmpty($colors);
+        $this->assertArrayHasKey('red', $colors);
+        $this->assertEquals('Red', $colors['red']);
+    }
+
     public function testGetMe()
     {
         $profile = $this->user->getMe();
@@ -137,6 +157,11 @@ class UserApi extends PHPUnit_Framework_TestCase
         $task = $this->user->getTask(1);
         $this->assertNotEmpty($task);
         $this->assertEquals('my user title', $task['title']);
+        $this->assertEquals('yellow', $task['color_id']);
+        $this->assertArrayHasKey('color', $task);
+        $this->assertArrayHasKey('name', $task['color']);
+        $this->assertArrayHasKey('border', $task['color']);
+        $this->assertArrayHasKey('background', $task['color']);
     }
 
     /**

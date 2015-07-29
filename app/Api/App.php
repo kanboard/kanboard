@@ -19,4 +19,19 @@ class App extends \Core\Base
     {
         return APP_VERSION;
     }
+
+    public function getDefaultTaskColor()
+    {
+        return $this->color->getDefaultColor();
+    }
+
+    public function getDefaultTaskColors()
+    {
+        return $this->color->getDefaultColors();
+    }
+
+    public function getColorList()
+    {
+        return $this->color->getList();
+    }
 }
