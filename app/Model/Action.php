@@ -41,6 +41,7 @@ class Action extends Base
         $values = array(
             'TaskClose' => t('Close a task'),
             'TaskOpen' => t('Open a task'),
+            'TaskFlag' => t('Flag a task'),
             'TaskAssignSpecificUser' => t('Assign the task to a specific user'),
             'TaskAssignCurrentUser' => t('Assign the task to the person who does the action'),
             'TaskDuplicateAnotherProject' => t('Duplicate the task to another project'),
@@ -80,6 +81,7 @@ class Action extends Base
             Task::EVENT_CREATE => t('Task creation'),
             Task::EVENT_OPEN => t('Reopen a task'),
             Task::EVENT_CLOSE => t('Closing a task'),
+            Task::EVENT_FLAG => t('Flag a task'),
             Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
             Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
             GithubWebhook::EVENT_COMMIT => t('Github commit received'),

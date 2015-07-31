@@ -97,6 +97,11 @@ class Color extends Base
             'background' => '#ffe082',
             'border' => '#ffa000',
         ),
+        'flagged' => array(
+            'name' => 'Flagged',
+            'background' => '#CC0000',
+            'border' => '#CC0000',
+        ),
     );
 
     /**

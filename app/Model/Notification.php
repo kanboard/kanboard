@@ -200,7 +200,7 @@ class Notification extends Base
     public function filterBoth(array $user, array $event_data)
     {
         return $user['notifications_filter'] == self::FILTER_BOTH &&
-               ($event_data['task']['creator_id'] == $user['id'] || $event_data['task']['owner_id'] == $user['id']);
+        ($event_data['task']['creator_id'] == $user['id'] || $event_data['task']['owner_id'] == $user['id']);
     }
 
     /**
@@ -235,12 +235,12 @@ class Notification extends Base
         if ($this->projectPermission->isEverybodyAllowed($project_id)) {
 
             return $this->db
-                        ->table(User::TABLE)
-                        ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email', User::TABLE.'.language', User::TABLE.'.notifications_filter')
-                        ->eq('notifications_enabled', '1')
-                        ->neq('email', '')
-                        ->neq(User::TABLE.'.id', $exclude_user_id)
-                        ->findAll();
+                ->table(User::TABLE)
+                ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email', User::TABLE.'.language', User::TABLE.'.notifications_filter')
+                ->eq('notifications_enabled', '1')
+                ->neq('email', '')
+                ->neq(User::TABLE.'.id', $exclude_user_id)
+                ->findAll();
         }
 
         return $this->db
@@ -307,6 +307,9 @@ class Notification extends Base
                 break;
             case Task::EVENT_OPEN:
                 $subject = $this->getStandardMailSubject(e('Task opened'), $event_data);
+                break;
+            case Task::EVENT_FLAG:
+                $subject = $this->getStandardMailSubject(e('Task flagged'), $event_data);
                 break;
             case Task::EVENT_MOVE_COLUMN:
                 $subject = $this->getStandardMailSubject(e('Column change'), $event_data);

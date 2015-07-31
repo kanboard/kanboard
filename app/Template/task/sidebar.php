@@ -22,6 +22,13 @@
     <h2><?= t('Actions') ?></h2>
     <ul>
         <li>
+            <?php if ($task['color_id'] == 'flagged'): ?>
+                <?= $this->url->link(t('Unflag this task'), 'task', 'flag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php else: ?>
+                <?= $this->url->link(t('Flag this task'), 'task', 'flag', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?php endif ?>
+        </li>
+        <li>
             <?= $this->url->link(t('Edit the task'), 'taskmodification', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li>
@@ -62,9 +69,9 @@
             <?php endif ?>
         </li>
         <?php if ($this->task->canRemove($task)): ?>
-        <li>
-            <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
+            <li>
+                <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            </li>
         <?php endif ?>
     </ul>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>

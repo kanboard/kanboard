@@ -26,6 +26,7 @@ class TaskStatus extends Base
         return $listing + array(
             Task::STATUS_OPEN => t('Open'),
             Task::STATUS_CLOSED => t('Closed'),
+            Task::EVENT_FLAG => t('Flagged'),
         );
     }
 
@@ -79,6 +80,18 @@ class TaskStatus extends Base
     }
 
     /**
+     * Mark a task flagged
+     *
+     * @access public
+     * @param  integer   $task_id   Task id
+     * @return boolean
+     */
+    public function flag($task_id)
+    {
+        return $this->changeStatus($task_id, Task::STATUS_OPEN, 0, Task::EVENT_FLAG);
+    }
+
+    /**
      * Common method to change the status of task
      *
      * @access private
@@ -95,13 +108,13 @@ class TaskStatus extends Base
         }
 
         $result = $this->db
-                        ->table(Task::TABLE)
-                        ->eq('id', $task_id)
-                        ->update(array(
-                            'is_active' => $status,
-                            'date_completed' => $date_completed,
-                            'date_modification' => time(),
-                        ));
+            ->table(Task::TABLE)
+            ->eq('id', $task_id)
+            ->update(array(
+                'is_active' => $status,
+                'date_completed' => $date_completed,
+                'date_modification' => time(),
+            ));
 
         if ($result) {
             $this->container['dispatcher']->dispatch(
@@ -124,9 +137,9 @@ class TaskStatus extends Base
     private function checkStatus($task_id, $status)
     {
         return $this->db
-                    ->table(Task::TABLE)
-                    ->eq('id', $task_id)
-                    ->eq('is_active', $status)
-                    ->count() === 1;
+            ->table(Task::TABLE)
+            ->eq('id', $task_id)
+            ->eq('is_active', $status)
+            ->count() === 1;
     }
 }
