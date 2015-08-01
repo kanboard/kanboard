@@ -5,6 +5,7 @@ namespace Model;
 use Core\Request;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
+use Gregwar\Captcha\CaptchaBuilder;
 
 /**
  * Authentication model
@@ -75,15 +76,49 @@ class Authentication extends Base
      */
     public function authenticate($username, $password)
     {
-        // Try first the database auth and then LDAP if activated
-        if ($this->backend('database')->authenticate($username, $password)) {
+        if ($this->user->isLocked($username)) {
+            $this->container['logger']->error('Account locked: '.$username);
+            return false;
+        }
+        else if ($this->backend('database')->authenticate($username, $password)) {
+            $this->user->resetFailedLogin($username);
             return true;
         }
         else if (LDAP_AUTH && $this->backend('ldap')->authenticate($username, $password)) {
+            $this->user->resetFailedLogin($username);
             return true;
         }
 
+        $this->handleFailedLogin($username);
         return false;
+    }
+
+    /**
+     * Return true if the captcha must be shown
+     *
+     * @access public
+     * @param  string  $username
+     * @return boolean
+     */
+    public function hasCaptcha($username)
+    {
+        return $this->user->getFailedLogin($username) >= BRUTEFORCE_CAPTCHA;
+    }
+
+    /**
+     * Handle failed login
+     *
+     * @access public
+     * @param  string  $username
+     */
+    public function handleFailedLogin($username)
+    {
+        $this->user->incrementFailedLogin($username);
+
+        if ($this->user->getFailedLogin($username) >= BRUTEFORCE_LOCKDOWN) {
+            $this->container['logger']->critical('Locking account: '.$username);
+            $this->user->lock($username, BRUTEFORCE_LOCKDOWN_DURATION);
+        }
     }
 
     /**
@@ -95,27 +130,12 @@ class Authentication extends Base
      */
     public function validateForm(array $values)
     {
-        $v = new Validator($values, array(
-            new Validators\Required('username', t('The username is required')),
-            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
-            new Validators\Required('password', t('The password is required')),
-        ));
-
-        $result = $v->execute();
-        $errors = $v->getErrors();
+        list($result, $errors) = $this->validateFormCredentials($values);
 
         if ($result) {
 
-            if ($this->authenticate($values['username'], $values['password'])) {
-
-                // Setup the remember me feature
-                if (! empty($values['remember_me'])) {
-
-                    $credentials = $this->backend('rememberMe')
-                                        ->create($this->userSession->getId(), Request::getIpAddress(), Request::getUserAgent());
-
-                    $this->backend('rememberMe')->writeCookie($credentials['token'], $credentials['sequence'], $credentials['expiration']);
-                }
+            if ($this->validateFormCaptcha($values) && $this->authenticate($values['username'], $values['password'])) {
+                $this->createRememberMeSession($values);
             }
             else {
                 $result = false;
@@ -123,9 +143,62 @@ class Authentication extends Base
             }
         }
 
+        return array($result, $errors);
+    }
+
+    /**
+     * Validate credentials syntax
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateFormCredentials(array $values)
+    {
+        $v = new Validator($values, array(
+            new Validators\Required('username', t('The username is required')),
+            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
+            new Validators\Required('password', t('The password is required')),
+        ));
+
         return array(
-            $result,
-            $errors
+            $v->execute(),
+            $v->getErrors(),
         );
+    }
+
+    /**
+     * Validate captcha
+     *
+     * @access public
+     * @param  array   $values           Form values
+     * @return boolean
+     */
+    public function validateFormCaptcha(array $values)
+    {
+        if ($this->hasCaptcha($values['username'])) {
+            $builder = new CaptchaBuilder;
+            $builder->setPhrase($this->session['captcha']);
+            return $builder->testPhrase(isset($values['captcha']) ? $values['captcha'] : '');
+        }
+
+        return true;
+    }
+
+    /**
+     * Create remember me session if necessary
+     *
+     * @access private
+     * @param  array   $values           Form values
+     */
+    private function createRememberMeSession(array $values)
+    {
+        if (! empty($values['remember_me'])) {
+
+            $credentials = $this->backend('rememberMe')
+                                ->create($this->userSession->getId(), Request::getIpAddress(), Request::getUserAgent());
+
+            $this->backend('rememberMe')->writeCookie($credentials['token'], $credentials['sequence'], $credentials['expiration']);
+        }
     }
 }

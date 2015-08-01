@@ -365,6 +365,71 @@ class User extends Base
     }
 
     /**
+     * Get the number of failed login for the user
+     *
+     * @access public
+     * @param  string  $username
+     * @return integer
+     */
+    public function getFailedLogin($username)
+    {
+        return (int) $this->db->table(self::TABLE)->eq('username', $username)->findOneColumn('nb_failed_login');
+    }
+
+    /**
+     * Reset to 0 the counter of failed login
+     *
+     * @access public
+     * @param  string  $username
+     * @return boolean
+     */
+    public function resetFailedLogin($username)
+    {
+        return $this->db->table(self::TABLE)->eq('username', $username)->update(array('nb_failed_login' => 0, 'lock_expiration_date' => 0));
+    }
+
+    /**
+     * Increment failed login counter
+     *
+     * @access public
+     * @param  string  $username
+     * @return boolean
+     */
+    public function incrementFailedLogin($username)
+    {
+        return $this->db->execute('UPDATE '.self::TABLE.' SET nb_failed_login=nb_failed_login+1 WHERE username=?', array($username)) !== false;
+    }
+
+    /**
+     * Check if the account is locked
+     *
+     * @access public
+     * @param  string  $username
+     * @return boolean
+     */
+    public function isLocked($username)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('username', $username)
+            ->neq('lock_expiration_date', 0)
+            ->gte('lock_expiration_date', time())
+            ->exists();
+    }
+
+    /**
+     * Lock the account for the specified duration
+     *
+     * @access public
+     * @param  string   $username   Username
+     * @param  integer  $duration   Duration in minutes
+     * @return boolean
+     */
+    public function lock($username, $duration = 15)
+    {
+        return $this->db->table(self::TABLE)->eq('username', $username)->update(array('lock_expiration_date' => time() + $duration * 60));
+    }
+
+    /**
      * Common validation rules
      *
      * @access private

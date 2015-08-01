@@ -10,10 +10,16 @@
         <?= $this->form->csrf() ?>
 
         <?= $this->form->label(t('Username'), 'username') ?>
-        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required')) ?><br/>
+        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required')) ?>
 
         <?= $this->form->label(t('Password'), 'password') ?>
         <?= $this->form->password('password', $values, $errors, array('required')) ?>
+
+        <?php if ($captcha): ?>
+            <?= $this->form->label(t('Enter the text below'), 'captcha') ?>
+            <img src="<?= $this->url->href('auth', 'captcha') ?>"/>
+            <?= $this->form->text('captcha', $values, $errors, array('required')) ?>
+        <?php endif ?>
 
         <?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br/>
 

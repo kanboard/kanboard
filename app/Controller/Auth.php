@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+use Gregwar\Captcha\CaptchaBuilder;
+
 /**
  * Authentication controller
  *
@@ -22,6 +24,7 @@ class Auth extends Base
         }
 
         $this->response->html($this->template->layout('auth/index', array(
+            'captcha' => isset($values['username']) && $this->authentication->hasCaptcha($values['username']),
             'errors' => $errors,
             'values' => $values,
             'no_layout' => true,
@@ -63,5 +66,20 @@ class Auth extends Base
         $this->authentication->backend('rememberMe')->destroy($this->userSession->getId());
         $this->session->close();
         $this->response->redirect($this->helper->url->to('auth', 'login'));
+    }
+
+    /**
+     * Display captcha image
+     *
+     * @access public
+     */
+    public function captcha()
+    {
+        $this->response->contentType('image/jpeg');
+
+        $builder = new CaptchaBuilder;
+        $builder->build();
+        $this->session['captcha'] = $builder->getPhrase();
+        $builder->output();
     }
 }

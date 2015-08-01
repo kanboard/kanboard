@@ -196,6 +196,20 @@ define('ENABLE_HSTS', true);
 define('ENABLE_XFRAME', true);
 ```
 
+Bruteforce protection
+---------------------
+
+```php
+// Enable captcha after 3 authentication failure
+define('BRUTEFORCE_CAPTCHA', 3);
+
+// Lock the account after 6 authentication failure
+define('BRUTEFORCE_LOCKDOWN', 6);
+
+// Lock account duration in minute
+define('BRUTEFORCE_LOCKDOWN_DURATION', 15);
+```
+
 Various settings
 ----------------
 

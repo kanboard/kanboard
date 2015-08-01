@@ -6,7 +6,13 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 81;
+const VERSION = 82;
+
+function version_82($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN nb_failed_login INT DEFAULT 0");
+    $pdo->exec("ALTER TABLE users ADD COLUMN lock_expiration_date INT DEFAULT 0");
+}
 
 function version_81($pdo)
 {

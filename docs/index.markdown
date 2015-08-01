@@ -81,6 +81,7 @@ Using Kanboard
 - [Advanced Search Syntax](search.markdown)
 - [Command line interface](cli.markdown)
 - [Syntax guide](syntax-guide.markdown)
+- [Bruteforce protection](bruteforce-protection.markdown)
 - [Frequently asked questions](faq.markdown)
 
 Technical details

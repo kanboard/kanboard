@@ -159,3 +159,12 @@ define('ENABLE_URL_REWRITE', false);
 
 // Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
+
+// Enable captcha after 3 authentication failure
+define('BRUTEFORCE_CAPTCHA', 3);
+
+// Lock the account after 6 authentication failure
+define('BRUTEFORCE_LOCKDOWN', 6);
+
+// Lock account duration in minute
+define('BRUTEFORCE_LOCKDOWN_DURATION', 15);
