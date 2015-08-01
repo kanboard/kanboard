@@ -21,7 +21,9 @@
             <?= $this->form->text('captcha', $values, $errors, array('required')) ?>
         <?php endif ?>
 
-        <?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br/>
+        <?php if (REMEMBER_ME_AUTH): ?>
+            <?= $this->form->checkbox('remember_me', t('Remember Me'), 1, true) ?><br/>
+        <?php endif ?>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Sign in') ?>" class="btn btn-blue"/>

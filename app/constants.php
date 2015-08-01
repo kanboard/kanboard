@@ -53,6 +53,9 @@ defined('REVERSE_PROXY_USER_HEADER') or define('REVERSE_PROXY_USER_HEADER', 'REM
 defined('REVERSE_PROXY_DEFAULT_ADMIN') or define('REVERSE_PROXY_DEFAULT_ADMIN', '');
 defined('REVERSE_PROXY_DEFAULT_DOMAIN') or define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
 
+// Remember me authentication
+defined('REMEMBER_ME_AUTH') or define('REMEMBER_ME_AUTH', true);
+
 // Mail configuration
 defined('MAIL_FROM') or define('MAIL_FROM', 'notifications@kanboard.local');
 defined('MAIL_TRANSPORT') or define('MAIL_TRANSPORT', 'mail');

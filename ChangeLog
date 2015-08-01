@@ -7,6 +7,7 @@ New features:
 * Add new api procedures: getDefaultTaskColor(), getDefaultTaskColors() and getColorList()
 * Add user api access
 * Add config parameter to define session duration
+* Add config parameter to disable/enable RememberMe authentication
 
 Bug fixes:
 

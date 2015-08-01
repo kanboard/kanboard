@@ -142,6 +142,9 @@ define('REVERSE_PROXY_DEFAULT_ADMIN', '');
 // Default domain to use for setting the email address
 define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
 
+// Enable/disable remember me authentication
+define('REMEMBER_ME_AUTH', true);
+
 // Enable or disable "Strict-Transport-Security" HTTP header
 define('ENABLE_HSTS', true);
 

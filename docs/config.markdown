@@ -185,6 +185,14 @@ define('REVERSE_PROXY_DEFAULT_ADMIN', '');
 define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
 ```
 
+RememberMe Authentication settings
+----------------------------------
+
+```php
+// Enable/disable remember me authentication
+define('REMEMBER_ME_AUTH', true);
+```
+
 Secure HTTP headers settings
 ----------------------------
 

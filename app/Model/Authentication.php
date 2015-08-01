@@ -54,7 +54,7 @@ class Authentication extends Base
         }
 
         // We try first with the RememberMe cookie
-        if ($this->backend('rememberMe')->authenticate()) {
+        if (REMEMBER_ME_AUTH && $this->backend('rememberMe')->authenticate()) {
             return true;
         }
 
@@ -193,7 +193,7 @@ class Authentication extends Base
      */
     private function createRememberMeSession(array $values)
     {
-        if (! empty($values['remember_me'])) {
+        if (REMEMBER_ME_AUTH && ! empty($values['remember_me'])) {
 
             $credentials = $this->backend('rememberMe')
                                 ->create($this->userSession->getId(), Request::getIpAddress(), Request::getUserAgent());
