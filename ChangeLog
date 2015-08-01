@@ -12,6 +12,7 @@ New features:
 Improvements:
 
 * Enable support for Github Enterprise when using Github Authentication
+* Update iCalendar library to display organizer name
 
 Bug fixes:
 

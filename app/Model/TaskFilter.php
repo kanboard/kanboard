@@ -101,6 +101,7 @@ class TaskFilter extends Base
         $this->query->columns(
             Task::TABLE.'.*',
             'ua.email AS assignee_email',
+            'ua.name AS assignee_name',
             'ua.username AS assignee_username',
             'uc.email AS creator_email',
             'uc.username AS creator_username'
@@ -833,7 +834,7 @@ class TaskFilter extends Base
         $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
 
         if (! empty($task['owner_id'])) {
-            $vEvent->setOrganizer('MAILTO:'.($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'));
+            $vEvent->setOrganizer($task['assignee_name'] ?: $task['assignee_username'], $task['assignee_email']);
         }
 
         if (! empty($task['creator_id'])) {

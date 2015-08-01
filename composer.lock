@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d88040d41c5a7cfee8e6fcd9dbc4a591",
+    "hash": "aa2376c6b4ac36457adf8cf46f584fd9",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -110,16 +110,16 @@
         },
         {
             "name": "eluceo/ical",
-            "version": "0.7.0",
+            "version": "0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markuspoerschke/iCal.git",
-                "reference": "0d79c35b9e5f7f1dcfb5315cc1e8507f74093083"
+                "reference": "a291711851d1538e2726ffe95862aa5e340ddb9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/0d79c35b9e5f7f1dcfb5315cc1e8507f74093083",
-                "reference": "0d79c35b9e5f7f1dcfb5315cc1e8507f74093083",
+                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/a291711851d1538e2726ffe95862aa5e340ddb9a",
+                "reference": "a291711851d1538e2726ffe95862aa5e340ddb9a",
                 "shasum": ""
             },
             "require": {
@@ -159,7 +159,7 @@
                 "ics",
                 "php calendar"
             ],
-            "time": "2015-02-21 23:14:47"
+            "time": "2015-07-12 18:19:30"
         },
         {
             "name": "erusev/parsedown",

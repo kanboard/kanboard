@@ -60,7 +60,7 @@ class TaskFilterTest extends Base
         $this->assertContains('DTEND;TZID=UTC;VALUE=DATE:'.date('Ymd', strtotime('+5 days')), $ics);
         $this->assertContains('URL:http://kb/?controller=task&action=show&task_id=1&project_id=1', $ics);
         $this->assertContains('SUMMARY:#1 task1', $ics);
-        $this->assertContains('ORGANIZER:MAILTO:bob@localhost', $ics);
+        $this->assertContains('ORGANIZER;CN=admin:MAILTO:bob@localhost', $ics);
         $this->assertContains('X-MICROSOFT-CDO-ALLDAYEVENT:TRUE', $ics);
     }
 

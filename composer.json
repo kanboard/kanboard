@@ -4,7 +4,7 @@
         "ext-mbstring" : "*",
         "ext-gd" : "*",
         "christian-riesen/otp" : "1.4",
-        "eluceo/ical": "0.7.0",
+        "eluceo/ical": "0.8.0",
         "erusev/parsedown" : "1.5.3",
         "fabiang/xmpp" : "0.6.1",
         "fguillot/json-rpc" : "dev-master",
