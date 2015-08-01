@@ -168,3 +168,7 @@ define('BRUTEFORCE_LOCKDOWN', 6);
 
 // Lock account duration in minute
 define('BRUTEFORCE_LOCKDOWN_DURATION', 15);
+
+// Session duration in second (0 = until the browser is closed)
+// See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
+define('SESSION_DURATION', 0);

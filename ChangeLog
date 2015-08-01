@@ -6,6 +6,7 @@ New features:
 * Add login bruteforce protection with captcha and account lockdown
 * Add new api procedures: getDefaultTaskColor(), getDefaultTaskColors() and getColorList()
 * Add user api access
+* Add config parameter to define session duration
 
 Bug fixes:
 

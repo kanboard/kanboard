@@ -93,3 +93,7 @@ defined('HIDE_LOGIN_FORM') or define('HIDE_LOGIN_FORM', false);
 defined('BRUTEFORCE_CAPTCHA') or define('BRUTEFORCE_CAPTCHA', 3);
 defined('BRUTEFORCE_LOCKDOWN') or define('BRUTEFORCE_LOCKDOWN', 6);
 defined('BRUTEFORCE_LOCKDOWN_DURATION') or define('BRUTEFORCE_LOCKDOWN_DURATION', 15);
+
+// Session duration in second (0 = until the browser is closed)
+// See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
+defined('SESSION_DURATION') or define('SESSION_DURATION', 0);

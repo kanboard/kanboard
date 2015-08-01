@@ -13,15 +13,6 @@ use ArrayAccess;
 class Session implements ArrayAccess
 {
     /**
-     * Sesion lifetime
-     *
-     * http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
-     *
-     * @var integer
-     */
-    const SESSION_LIFETIME = 0; // Until the browser is closed
-
-    /**
      * Return true if the session is open
      *
      * @static
@@ -43,7 +34,7 @@ class Session implements ArrayAccess
     {
         // HttpOnly and secure flags for session cookie
         session_set_cookie_params(
-            self::SESSION_LIFETIME,
+            SESSION_DURATION,
             $base_path ?: '/',
             null,
             Request::isHTTPS(),
