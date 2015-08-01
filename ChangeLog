@@ -12,6 +12,7 @@ New features:
 Bug fixes:
 
 * Wrong template name for subtasks tooltip due to previous refactoring
+* Fix broken url for closed tasks in project view
 
 Version 1.0.17
 --------------
