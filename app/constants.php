@@ -46,6 +46,9 @@ defined('GOOGLE_CLIENT_SECRET') or define('GOOGLE_CLIENT_SECRET', '');
 defined('GITHUB_AUTH') or define('GITHUB_AUTH', false);
 defined('GITHUB_CLIENT_ID') or define('GITHUB_CLIENT_ID', '');
 defined('GITHUB_CLIENT_SECRET') or define('GITHUB_CLIENT_SECRET', '');
+defined('GITHUB_OAUTH_AUTHORIZE_URL') or define('GITHUB_OAUTH_AUTHORIZE_URL', 'https://github.com/login/oauth/authorize');
+defined('GITHUB_OAUTH_TOKEN_URL') or define('GITHUB_OAUTH_TOKEN_URL', 'https://github.com/login/oauth/access_token');
+defined('GITHUB_API_URL') or define('GITHUB_API_URL', 'https://api.github.com/');
 
 // Proxy authentication
 defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', false);

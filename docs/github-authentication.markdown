@@ -11,7 +11,7 @@ How does this work?
 
 The Github authentication in Kanboard uses the [OAuth 2.0](http://oauth.net/2/) protocol, so any user of Kanboard can be linked to a Github account.
 
-When that is done, they no longer need to manually login with their Kanboard account, but can simply automatically login with their Github account.
+That means you can use your Github account to connect to Kanboard.
 
 How to link a Github account
 ----------------------------
@@ -49,6 +49,23 @@ define('GITHUB_CLIENT_ID', 'YOUR_GITHUB_CLIENT_ID');
 
 // Github client secret key (Copy it from your settings -> Applications -> Developer applications)
 define('GITHUB_CLIENT_SECRET', 'YOUR_GITHUB_CLIENT_SECRET');
+```
+
+### Github Entreprise
+
+To use this authentication method with Github Enterprise you have to change the default urls.
+
+Replace these values by your self-hosted instance of Github:
+
+```php
+// Github oauth2 authorize url
+define('GITHUB_OAUTH_AUTHORIZE_URL', 'https://github.com/login/oauth/authorize');
+
+// Github oauth2 token url
+define('GITHUB_OAUTH_TOKEN_URL', 'https://github.com/login/oauth/access_token');
+
+// Github API url (don't forget the slash at the end)
+define('GITHUB_API_URL', 'https://api.github.com/');
 ```
 
 Notes

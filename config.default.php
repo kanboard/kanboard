@@ -130,6 +130,15 @@ define('GITHUB_CLIENT_ID', '');
 // GitHub client secret key (Copy it from your settings -> Applications -> Developer applications)
 define('GITHUB_CLIENT_SECRET', '');
 
+// Github oauth2 authorize url
+define('GITHUB_OAUTH_AUTHORIZE_URL', 'https://github.com/login/oauth/authorize');
+
+// Github oauth2 token url
+define('GITHUB_OAUTH_TOKEN_URL', 'https://github.com/login/oauth/access_token');
+
+// Github API url (don't forget the slash at the end)
+define('GITHUB_API_URL', 'https://api.github.com/');
+
 // Enable/disable the reverse proxy authentication
 define('REVERSE_PROXY_AUTH', false);
 

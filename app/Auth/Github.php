@@ -94,8 +94,8 @@ class Github extends Base
                 GITHUB_CLIENT_ID,
                 GITHUB_CLIENT_SECRET,
                 $this->helper->url->to('oauth', 'github', array(), '', true),
-                'https://github.com/login/oauth/authorize',
-                'https://github.com/login/oauth/access_token',
+                GITHUB_OAUTH_AUTHORIZE_URL,
+                GITHUB_OAUTH_TOKEN_URL,
                 array()
             );
         }
@@ -115,7 +115,7 @@ class Github extends Base
         $this->getService()->getAccessToken($code);
 
         return $this->httpClient->getJson(
-            'https://api.github.com/user',
+            GITHUB_API_URL.'user',
             array($this->getService()->getAuthorizationHeader())
         );
     }

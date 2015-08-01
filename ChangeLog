@@ -9,6 +9,10 @@ New features:
 * Add config parameter to define session duration
 * Add config parameter to disable/enable RememberMe authentication
 
+Improvements:
+
+* Enable support for Github Enterprise when using Github Authentication
+
 Bug fixes:
 
 * Wrong template name for subtasks tooltip due to previous refactoring
