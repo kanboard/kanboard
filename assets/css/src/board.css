@@ -33,11 +33,11 @@
     width: 120px; /* Width of swimlane column */
 }
 
-#board th.board-column {
+#board th.board-column-header {
     width: 240px; /* Width of other columns, in default [horizontal scrolling] view mode */
 }
 
-#board th.board-column.board-column-compact {
+#board th.board-column-header.board-column-compact {
     width: initial; /* Do not force the width of the columns in compact view mode */
 }
 
@@ -49,10 +49,6 @@
 
 #board td {
     vertical-align: top;
-}
-
-#board td.task-limit-warning {
-    background-color: #DF5353;
 }
 
 /* column header */
@@ -95,4 +91,14 @@
 
 .board-swimlane-title {
     vertical-align: top;
+}
+
+/* board task list */
+.board-task-list {
+    height: 500px;
+    overflow: auto;
+}
+
+.board-task-list-limit {
+    background-color: #DF5353;
 }

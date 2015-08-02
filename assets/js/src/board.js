@@ -43,11 +43,20 @@
         });
     }
 
+    function resize_column()
+    {
+        var position = $(".board-swimlane").position();
+        $(".board-task-list").height($(window).height() - position.top);
+    }
+
     // Setup the board
     function board_load_events()
     {
+        // Resize column height
+        resize_column();
+
         // Drag and drop
-        $(".column").sortable({
+        $(".board-task-list").sortable({
             delay: 300,
             distance: 5,
             connectWith: ".column",
@@ -261,6 +270,8 @@
             board_load_events();
             compactview_load_events();
             keyboard_shortcuts();
+
+            $(window).resize(resize_column);
         }
     });
 

@@ -1,4 +1,5 @@
 <tr id="swimlane-<?= $swimlane['id'] ?>">
+    <!-- swimlane toggle -->
     <?php if (! $hide_swimlane): ?>
        <th>
            <?php if (! $not_editable && $swimlane['nb_tasks'] > 0): ?>
@@ -11,8 +12,9 @@
         </th>
     <?php endif ?>
 
+    <!-- column header title -->
     <?php foreach ($swimlane['columns'] as $column): ?>
-    <th class="board-column">
+    <th class="board-column-header">
         <?php if (! $not_editable): ?>
             <div class="board-add-icon">
                 <?= $this->url->link('+', 'taskcreation', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'task-board-popover', t('Add a new task')) ?>
@@ -45,8 +47,9 @@
     </th>
     <?php endforeach ?>
 </tr>
-<tr class="swimlane-row-<?= $swimlane['id'] ?>">
+<tr class="board-swimlane swimlane-row-<?= $swimlane['id'] ?>">
 
+    <!-- swimlane title -->
     <?php if (! $hide_swimlane): ?>
         <th class="board-swimlane-title">
             <?= $this->e($swimlane['name']) ?>
@@ -57,27 +60,19 @@
         </th>
     <?php endif ?>
 
+    <!-- task list -->
     <?php foreach ($swimlane['columns'] as $column): ?>
-
-        <?php if ($not_editable): ?>
-            <td>
-        <?php else: ?>
-        <td
-            id="column-<?= $column['id'] ?>"
-            class="column <?= $column['task_limit'] && count($column['tasks']) > $column['task_limit'] ? 'task-limit-warning' : '' ?>"
-            data-column-id="<?= $column['id'] ?>"
-            data-swimlane-id="<?= $swimlane['id'] ?>"
-            data-task-limit="<?= $column['task_limit'] ?>">
-        <?php endif ?>
-
-        <?php foreach ($column['tasks'] as $task): ?>
-            <?= $this->render($not_editable ? 'board/task_public' : 'board/task_private', array(
-                'project' => $project,
-                'task' => $task,
-                'board_highlight_period' => $board_highlight_period,
-                'not_editable' => $not_editable,
-            )) ?>
-        <?php endforeach ?>
-    </td>
+        <td id="column-<?= $column['id'] ?>" class="<?= $column['task_limit'] && $column['nb_tasks'] > $column['task_limit'] ? 'board-task-list-limit' : '' ?>">
+            <div class="board-task-list" data-column-id="<?= $column['id'] ?>" data-swimlane-id="<?= $swimlane['id'] ?>" data-task-limit="<?= $column['task_limit'] ?>">
+                <?php foreach ($column['tasks'] as $task): ?>
+                    <?= $this->render($not_editable ? 'board/task_public' : 'board/task_private', array(
+                        'project' => $project,
+                        'task' => $task,
+                        'board_highlight_period' => $board_highlight_period,
+                        'not_editable' => $not_editable,
+                    )) ?>
+                <?php endforeach ?>
+            </div>
+        </td>
     <?php endforeach ?>
 </tr>

@@ -11,6 +11,8 @@ New features:
 
 Improvements:
 
+* Add column vertical scrolling
+* Set dynamically column height based on viewport size
 * Enable support for Github Enterprise when using Github Authentication
 * Update iCalendar library to display organizer name
 
