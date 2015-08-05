@@ -167,8 +167,10 @@ class ProjectAnalytic extends Base
             $sums[$task['column_id']] += ($task['date_completed'] ?: time()) - $task['date_moved'];
 
             foreach ($sums as $column_id => $time_spent) {
-                $stats[$column_id]['count']++;
-                $stats[$column_id]['time_spent'] += $time_spent;
+                if (isset($stats[$column_id])) {
+                    $stats[$column_id]['count']++;
+                    $stats[$column_id]['time_spent'] += $time_spent;
+                }
             }
         }
 

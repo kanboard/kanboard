@@ -37,7 +37,7 @@
                     'changeAssignee',
                     array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                     false,
-                    'task-board-popover',
+                    'popover',
                     t('Change assignee')
                 ) ?>
             </span>

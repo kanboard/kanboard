@@ -4,7 +4,7 @@ print_css="print links table board task comment subtask markdown"
 app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown screenshot filters"
 vendor_css="jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min"
 
-app_js="base board calendar analytic swimlane screenshot"
+app_js="Popover Tooltip Markdown Sidebar Search App Screenshot Calendar Board Swimlane TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart BudgetChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart Router"
 vendor_js="jquery-1.11.1.min jquery-ui.min jquery-ui-timepicker-addon.min jquery.ui.touch-punch.min chosen.jquery.min dropit.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min app.min"
 lang_js="da de es fi fr hu it ja nl pl pt-br ru sv sr th tr zh-cn"
 
@@ -34,7 +34,9 @@ function minify_js {
 
     rm -f $dst_file $tmp_file 2>/dev/null
 
+    echo "(function() { 'use strict';" > $tmp_file;
     for file in $app_js; do cat "assets/js/src/${file}.js" >> $tmp_file; done
+    echo "})();" >> $tmp_file;
 
     curl -s \
         -d compilation_level=SIMPLE_OPTIMIZATIONS \

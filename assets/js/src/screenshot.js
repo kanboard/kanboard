@@ -1,145 +1,131 @@
-Kanboard.Screenshot = (function() {
+function Screenshot() {
+    this.pasteCatcher = null;
+}
 
-    var pasteCatcher = null;
+Screenshot.prototype.execute = function() {
+    this.initialize();
+};
 
-    // Setup event listener and workarounds
-    function init()
-    {
-        destroy();
+// Setup event listener and workarounds
+Screenshot.prototype.initialize = function() {
+    this.destroy();
 
-        if (! window.Clipboard) {
+    if (! window.Clipboard) {
 
-            // Create a contenteditable element
-            pasteCatcher = document.createElement("div");
-            pasteCatcher.id = "screenshot-pastezone";
-            pasteCatcher.contentEditable = "true";
+        // Create a contenteditable element
+        this.pasteCatcher = document.createElement("div");
+        this.pasteCatcher.id = "screenshot-pastezone";
+        this.pasteCatcher.contentEditable = "true";
 
-            // Insert the content editable at the top to avoid scrolling down in the board view
-            pasteCatcher.style.opacity = 0;
-            pasteCatcher.style.position = "fixed";
-            pasteCatcher.style.top = 0;
-            pasteCatcher.style.right = 0;
-            pasteCatcher.style.width = 0;
+        // Insert the content editable at the top to avoid scrolling down in the board view
+        this.pasteCatcher.style.opacity = 0;
+        this.pasteCatcher.style.position = "fixed";
+        this.pasteCatcher.style.top = 0;
+        this.pasteCatcher.style.right = 0;
+        this.pasteCatcher.style.width = 0;
 
-            document.body.insertBefore(pasteCatcher, document.body.firstChild);
+        document.body.insertBefore(this.pasteCatcher, document.body.firstChild);
 
-            // Set focus on the contenteditable element
-            pasteCatcher.focus();
+        // Set focus on the contenteditable element
+        this.pasteCatcher.focus();
 
-            // Set the focus when clicked anywhere in the document
-            document.addEventListener("click", setFocus);
+        // Set the focus when clicked anywhere in the document
+        document.addEventListener("click", this.setFocus.bind(this));
 
-            // Set the focus when clicked in screenshot dropzone (popover)
-            document.getElementById("screenshot-zone").addEventListener("click", setFocus);
-        }
-
-        window.addEventListener("paste", pasteHandler);
+        // Set the focus when clicked in screenshot dropzone (popover)
+        document.getElementById("screenshot-zone").addEventListener("click", this.setFocus.bind(this));
     }
 
-    // Set focus on the contentEditable element
-    function setFocus()
-    {
-        if (pasteCatcher !== null) {
-            pasteCatcher.focus();
-        }
+    window.addEventListener("paste", this.pasteHandler.bind(this));
+};
+
+// Destroy contentEditable element
+Screenshot.prototype.destroy = function() {
+    if (this.pasteCatcher != null) {
+        document.body.removeChild(this.pasteCatcher);
+    }
+    else if (document.getElementById("screenshot-pastezone")) {
+        document.body.removeChild(document.getElementById("screenshot-pastezone"));
     }
 
-    // Destroy contenteditable
-    function destroy()
-    {
-        if (pasteCatcher != null) {
-            document.body.removeChild(pasteCatcher);
-        }
-        else if (document.getElementById("screenshot-pastezone")) {
-            document.body.removeChild(document.getElementById("screenshot-pastezone"));
-        }
+    document.removeEventListener("click", this.setFocus.bind(this));
+    this.pasteCatcher = null;
+};
 
-        document.removeEventListener("click", setFocus);
-        pasteCatcher = null;
+// Set focus on contentEditable element
+Screenshot.prototype.setFocus = function() {
+    if (this.pasteCatcher !== null) {
+        this.pasteCatcher.focus();
     }
+};
 
-    // Paste event callback
-    function pasteHandler(e)
-    {
-        // Firefox doesn't have the property e.clipboardData.items (only Chrome)
-        if (e.clipboardData && e.clipboardData.items) {
+// Paste event callback
+Screenshot.prototype.pasteHandler = function(e) {
+    // Firefox doesn't have the property e.clipboardData.items (only Chrome)
+    if (e.clipboardData && e.clipboardData.items) {
 
-            var items = e.clipboardData.items;
+        var items = e.clipboardData.items;
 
-            if (items) {
+        if (items) {
 
-                for (var i = 0; i < items.length; i++) {
+            for (var i = 0; i < items.length; i++) {
 
-                    // Find an image in pasted elements
-                    if (items[i].type.indexOf("image") !== -1) {
+                // Find an image in pasted elements
+                if (items[i].type.indexOf("image") !== -1) {
 
-                        var blob = items[i].getAsFile();
+                    var blob = items[i].getAsFile();
 
-                        // Get the image as base64 data
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            createImage(event.target.result);
-                        };
+                    // Get the image as base64 data
+                    var reader = new FileReader();
+                    var self = this;
+                    reader.onload = function(event) {
+                        self.createImage(event.target.result);
+                    };
 
-                        reader.readAsDataURL(blob);
-                    }
+                    reader.readAsDataURL(blob);
                 }
             }
         }
-        else {
+    }
+    else {
 
-            // Handle Firefox
-            setTimeout(checkInput, 100);
+        // Handle Firefox
+        setTimeout(this.checkInput.bind(this), 100);
+    }
+};
+
+// Parse the input in the paste catcher element
+Screenshot.prototype.checkInput = function() {
+    var child = this.pasteCatcher.childNodes[0];
+
+    if (child) {
+        // If the user pastes an image, the src attribute
+        // will represent the image as a base64 encoded string.
+        if (child.tagName === "IMG") {
+            this.createImage(child.src);
         }
     }
 
-    // Parse the input in the paste catcher element
-    function checkInput()
-    {
-        var child = pasteCatcher.childNodes[0];
+    pasteCatcher.innerHTML = "";
+};
 
-        if (child) {
-            // If the user pastes an image, the src attribute
-            // will represent the image as a base64 encoded string.
-            if (child.tagName === "IMG") {
-                createImage(child.src);
-            }
-        }
+// Creates a new image from a given source
+Screenshot.prototype.createImage = function(blob) {
+    var pastedImage = new Image();
+    pastedImage.src = blob;
 
-        pasteCatcher.innerHTML = "";
-    }
-
-    // Creates a new image from a given source
-    function createImage(blob)
-    {
-        var pastedImage = new Image();
-        pastedImage.src = blob;
-
-        // Send the image content to the form variable
-        pastedImage.onload = function() {
-            var sourceSplit = blob.split("base64,");
-            var sourceString = sourceSplit[1];
-            $("input[name=screenshot]").val(sourceString);
-        };
-
-        var zone = document.getElementById("screenshot-zone");
-        zone.innerHTML = "";
-        zone.className = "screenshot-pasted";
-        zone.appendChild(pastedImage);
-
-        destroy();
-        init();
-    }
-
-    jQuery(document).ready(function() {
-
-        if (Kanboard.Exists("screenshot-zone")) {
-            init();
-        }
-    });
-
-    return {
-        Init: init,
-        Destroy: destroy
+    // Send the image content to the form variable
+    pastedImage.onload = function() {
+        var sourceSplit = blob.split("base64,");
+        var sourceString = sourceSplit[1];
+        $("input[name=screenshot]").val(sourceString);
     };
-})();
+
+    var zone = document.getElementById("screenshot-zone");
+    zone.innerHTML = "";
+    zone.className = "screenshot-pasted";
+    zone.appendChild(pastedImage);
+
+    this.destroy();
+    this.initialize();
+};

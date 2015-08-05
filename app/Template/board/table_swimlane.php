@@ -17,7 +17,7 @@
     <th class="board-column-header">
         <?php if (! $not_editable): ?>
             <div class="board-add-icon">
-                <?= $this->url->link('+', 'taskcreation', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'task-board-popover', t('Add a new task')) ?>
+                <?= $this->url->link('+', 'taskcreation', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover', t('Add a new task')) ?>
             </div>
         <?php endif ?>
 
