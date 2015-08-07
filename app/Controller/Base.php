@@ -269,10 +269,15 @@ abstract class Base extends \Core\Base
      */
     protected function getTask()
     {
+        $project_id = $this->request->getIntegerParam('project_id');
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
         if (empty($task)) {
             $this->notfound();
+        }
+
+        if ($project_id !== 0 && $project_id != $task['project_id']) {
+            $this->forbidden();
         }
 
         return $task;
