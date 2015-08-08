@@ -730,7 +730,7 @@ nav .active a {
 .page-header li {
     display: inline;
     padding-right: 10px;
-    font-size: 0.9em;
+    font-size: 0.95em;
 }
 
 @media only screen and (max-width: 640px) {
@@ -753,7 +753,6 @@ nav .active a {
 
 /* board table */
 #board-container {
-    padding-bottom: 220px; /* Space to avoid dropdown menu truncated */
     overflow-x: scroll;
 }
 
@@ -1576,16 +1575,16 @@ span.task-board-date-overdue {
 }
 
 .dropdown {
+    display: inline;
     position: relative;
 }
 
-.dropdown li {
-    list-style: none;
-}
-
-/* submenu */
 .dropdown ul {
     display: none;
+}
+
+ul.dropdown-submenu-open {
+    display: block;
     position: absolute;
     left: 0;
     z-index: 1000;
@@ -1599,46 +1598,25 @@ span.task-board-date-overdue {
     box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
 }
 
-.dropdown ul li {
-    padding: 0;
-    margin: 0;
-    font-size: 1.1em;
+ul.dropdown-submenu-top {
+    bottom: 0;
+}
+
+.dropdown-submenu-open li {
     display: block;
-    line-height: 30px;
+    padding: 0;
     padding-left: 10px;
     padding-right: 10px;
-}
-
-.page-header div.dropdown {
-    font-size: 0.9em;
-    padding-right: 10px;
-}
-
-.page-header div.dropdown,
-.page-header ul.dropdown {
-    display: inline;
-}
-
-.page-header a.dropdown-menu {
-    font-size: 1.1em;
-}
-
-.page-header li.dropit-trigger {
-    padding: 0;
-}
-
-td li.dropit-trigger {
     margin: 0;
+    line-height: 30px;
 }
 
-.task-board .dropit-submenu a {
+.dropdown-submenu-open a {
     font-weight: normal;
-    text-decoration: underline;
-    font-size: 0.9em;
 }
 
-.task-board .dropit-submenu a:hover {
-    text-decoration: none;
+.page-header .dropdown {
+    padding-right: 10px;
 }
 #screenshot-zone {
     position: relative;

@@ -1,10 +1,11 @@
 function App() {
-    this.popover = new Popover(this);
     this.markdown = new Markdown();
     this.sidebar = new Sidebar();
     this.search = new Search();
-    this.tooltip = new Tooltip(this);
     this.swimlane = new Swimlane();
+    this.dropdown = new Dropdown();
+    this.tooltip = new Tooltip(this);
+    this.popover = new Popover(this);
     this.keyboardShortcuts();
     this.boardSelector();
     this.listen();
@@ -33,15 +34,12 @@ App.prototype.listen = function() {
     this.markdown.listen();
     this.sidebar.listen();
     this.tooltip.listen();
+    this.dropdown.listen();
     this.search.listen();
     this.search.focus();
     this.taskAutoComplete();
     this.datePicker();
     this.focus();
-
-    // Dropdown
-    $(".dropit-submenu").hide();
-    $('.dropdown').not(".dropit").dropit({ triggerParentEl : "span" });
 };
 
 App.prototype.focus = function() {
@@ -67,6 +65,8 @@ App.prototype.poll = function() {
 };
 
 App.prototype.keyboardShortcuts = function() {
+    var self = this;
+
     // Submit form
     Mousetrap.bindGlobal("mod+enter", function() {
         $("form").submit();
@@ -76,6 +76,12 @@ App.prototype.keyboardShortcuts = function() {
     Mousetrap.bind("b", function(e) {
         e.preventDefault();
         $('#board-selector').trigger('chosen:open');
+    });
+
+    // Close popover and dropdown
+    Mousetrap.bindGlobal("esc", function() {
+        self.popover.close();
+        self.dropdown.close();
     });
 };
 

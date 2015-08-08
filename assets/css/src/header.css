@@ -94,7 +94,7 @@ nav .active a {
 .page-header li {
     display: inline;
     padding-right: 10px;
-    font-size: 0.9em;
+    font-size: 0.95em;
 }
 
 @media only screen and (max-width: 640px) {

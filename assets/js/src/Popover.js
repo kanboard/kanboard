@@ -2,7 +2,6 @@ function Popover(app) {
     this.app = app;
     this.router = new Router();
     this.router.addRoute('screenshot-zone', Screenshot);
-    Mousetrap.bindGlobal("esc", this.close);
 }
 
 Popover.prototype.isOpen = function() {
@@ -11,6 +10,7 @@ Popover.prototype.isOpen = function() {
 
 Popover.prototype.open = function(link) {
     var self = this;
+    self.app.dropdown.close();
 
     $.get(link, function(content) {
         $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');

@@ -159,7 +159,6 @@ th a:hover {
 
 /* board table */
 #board-container {
-    padding-bottom: 220px; /* Space to avoid dropdown menu truncated */
     overflow-x: scroll;
 }
 
