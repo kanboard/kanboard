@@ -253,7 +253,7 @@ return array(
     'Remember Me' => 'Lembre-se de mim',
     'Creation date' => 'Data de criação',
     'Everybody' => 'Todos',
-    'Open' => 'Abrir',
+    'Open' => 'Aberto',
     'Closed' => 'Finalizado',
     'Search' => 'Pesquisar',
     'Nothing found.' => 'Nada encontrado.',
