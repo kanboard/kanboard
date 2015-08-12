@@ -84,6 +84,7 @@ class Config extends Base
             'hu_HU' => 'Magyar',
             'nl_NL' => 'Nederlands',
             'pl_PL' => 'Polski',
+            'pt_PT' => 'Português',
             'pt_BR' => 'Português (Brasil)',
             'ru_RU' => 'Русский',
             'sr_Latn_RS' => 'Srpski',
