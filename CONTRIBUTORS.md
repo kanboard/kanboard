@@ -20,6 +20,7 @@ Contributors:
 - [Cynthia Pereira](https://github.com/cynthiapereira)
 - [David-Norris](https://github.com/David-Norris)
 - [Draza (bdpsoft)](https://github.com/bdpsoft)
+- [Eskiso](https://github.com/eSkiSo)
 - [Esteban Monge](https://github.com/EstebanMonge)
 - [Fábio Hideki](https://github.com/fabiohxcx)
 - [Federico Lazcano](https://github.com/lazki)
