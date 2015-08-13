@@ -301,7 +301,6 @@ class SubtaskTimeTracking extends Base
                            ->findOneColumn('start');
 
         if ($start_time) {
-
             $start = new DateTime;
             $start->setTimestamp($start_time);
 
@@ -349,10 +348,9 @@ class SubtaskTimeTracking extends Base
         return $this->db
                     ->table(Task::TABLE)
                     ->eq('id', $task_id)
-                    ->update(array(
-                        'time_spent' => $result['total_spent'],
-                        'time_estimated' => $result['total_estimated'],
-                    ));
+                    ->sumColumn('time_spent', $result['total_spent'])
+                    ->sumColumn('time_estimated', $result['total_estimated'])
+                    ->update();
     }
 
     /**

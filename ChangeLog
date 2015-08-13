@@ -22,6 +22,7 @@ Bug fixes:
 * Wrong template name for subtasks tooltip due to previous refactoring
 * Fix broken url for closed tasks in project view
 * Fix permission issue when changing the url manually
+* Fix bug task estimate is reseted when using subtask timer
 
 Version 1.0.17
 --------------

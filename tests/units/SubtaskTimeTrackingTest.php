@@ -209,6 +209,9 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1, 'time_spent' => 2.2)));
         $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1, 'time_estimated' => 1)));
 
+        $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 2, 'time_spent' => 3.4)));
+        $this->assertEquals(4, $s->create(array('title' => 'subtask #4', 'task_id' => 2, 'time_estimated' => 1.25)));
+
         $st->updateTaskTimeTracking(1);
         $st->updateTaskTimeTracking(2);
 
@@ -219,8 +222,8 @@ class SubtaskTimeTrackingTest extends Base
 
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
-        $this->assertEquals(0.5, $task['time_spent'], 'Total spent', 0.01);
-        $this->assertEquals(1.5, $task['time_estimated'], 'Total estimated', 0.01);
+        $this->assertEquals(3.9, $task['time_spent'], 'Total spent', 0.01);
+        $this->assertEquals(2.75, $task['time_estimated'], 'Total estimated', 0.01);
     }
 
     public function testGetCalendarEvents()
