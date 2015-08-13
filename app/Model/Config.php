@@ -122,6 +122,7 @@ class Config extends Base
             'hu_HU' => 'hu',
             'nl_NL' => 'nl',
             'pl_PL' => 'pl',
+            'pt_PT' => 'pt',
             'pt_BR' => 'pt-br',
             'ru_RU' => 'ru',
             'sr_Latn_RS' => 'sr',
