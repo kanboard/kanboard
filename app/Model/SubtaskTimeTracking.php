@@ -340,17 +340,24 @@ class SubtaskTimeTracking extends Base
     public function updateTaskTimeTracking($task_id)
     {
         $result = $this->calculateSubtaskTime($task_id);
+        $values = array();
 
-        if (empty($result['total_spent']) && empty($result['total_estimated'])) {
+        if ($result['total_spent'] > 0) {
+            $values['time_spent'] = $result['total_spent'];
+        }
+
+        if ($result['total_estimated'] > 0) {
+            $values['time_estimated'] = $result['total_estimated'];
+        }
+
+        if (empty($values)) {
             return true;
         }
 
         return $this->db
                     ->table(Task::TABLE)
                     ->eq('id', $task_id)
-                    ->sumColumn('time_spent', $result['total_spent'])
-                    ->sumColumn('time_estimated', $result['total_estimated'])
-                    ->update();
+                    ->update($values);
     }
 
     /**
