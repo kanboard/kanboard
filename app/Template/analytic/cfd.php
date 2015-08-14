@@ -6,7 +6,7 @@
     <p class="alert"><?= t('You need at least 2 days of data to show the chart.') ?></p>
 <?php else: ?>
     <section id="analytic-cfd">
-        <div id="chart" data-metrics='<?= json_encode($metrics) ?>' data-date-format="<?= e('%%Y-%%m-%%d') ?>"></div>
+        <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>' data-date-format="<?= e('%%Y-%%m-%%d') ?>"></div>
     </section>
 <?php endif ?>
 

@@ -14,7 +14,7 @@
 <?php else: ?>
     <section id="analytic-lead-cycle-time">
 
-        <div id="chart" data-metrics='<?= json_encode($metrics) ?>' data-label-cycle="<?= t('Cycle Time') ?>" data-label-lead="<?= t('Lead Time') ?>"></div>
+        <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>' data-label-cycle="<?= t('Cycle Time') ?>" data-label-lead="<?= t('Lead Time') ?>"></div>
 
         <form method="post" class="form-inline" action="<?= $this->url->href('analytic', 'leadAndCycleTime', array('project_id' => $project['id'])) ?>" autocomplete="off">
 

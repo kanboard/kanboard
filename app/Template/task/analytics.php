@@ -10,7 +10,7 @@
 </div>
 
 <h3 id="analytic-task-time-column"><?= t('Time spent into each column') ?></h3>
-<div id="chart" data-metrics='<?= json_encode($time_spent_columns) ?>' data-label="<?= t('Time spent') ?>"></div>
+<div id="chart" data-metrics='<?= json_encode($time_spent_columns, JSON_HEX_APOS) ?>' data-label="<?= t('Time spent') ?>"></div>
 <table class="table-stripped">
     <tr>
         <th><?= t('Column') ?></th>

@@ -7,7 +7,7 @@
 <?php else: ?>
     <section id="analytic-task-repartition">
 
-    <div id="chart" data-metrics='<?= json_encode($metrics) ?>'></div>
+    <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>'></div>
 
     <table>
         <tr>

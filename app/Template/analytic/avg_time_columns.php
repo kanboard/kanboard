@@ -7,7 +7,7 @@
 <?php else: ?>
     <section id="analytic-avg-time-column">
 
-        <div id="chart" data-metrics='<?= json_encode($metrics) ?>' data-label="<?= t('Average time spent') ?>"></div>
+        <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>' data-label="<?= t('Average time spent') ?>"></div>
 
         <table class="table-stripped">
         <tr>
