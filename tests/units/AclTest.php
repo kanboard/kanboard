@@ -35,12 +35,18 @@ class AclTest extends Base
     public function testPublicActions()
     {
         $acl = new Acl($this->container);
+        $this->assertTrue($acl->isPublicAction('task', 'readonly'));
         $this->assertTrue($acl->isPublicAction('board', 'readonly'));
         $this->assertFalse($acl->isPublicAction('board', 'show'));
         $this->assertTrue($acl->isPublicAction('feed', 'project'));
         $this->assertTrue($acl->isPublicAction('feed', 'user'));
+        $this->assertTrue($acl->isPublicAction('ical', 'project'));
+        $this->assertTrue($acl->isPublicAction('ical', 'user'));
         $this->assertTrue($acl->isPublicAction('oauth', 'github'));
         $this->assertTrue($acl->isPublicAction('oauth', 'google'));
+        $this->assertTrue($acl->isPublicAction('auth', 'login'));
+        $this->assertTrue($acl->isPublicAction('auth', 'check'));
+        $this->assertTrue($acl->isPublicAction('auth', 'captcha'));
     }
 
     public function testAdminActions()
@@ -54,21 +60,32 @@ class AclTest extends Base
         $this->assertTrue($acl->isAdminAction('user', 'save'));
     }
 
-    public function testManagerActions()
+    public function testProjectAdminActions()
     {
         $acl = new Acl($this->container);
-        $this->assertFalse($acl->isManagerAction('board', 'readonly'));
-        $this->assertFalse($acl->isManagerAction('project', 'remove'));
-        $this->assertFalse($acl->isManagerAction('project', 'show'));
-        $this->assertTrue($acl->isManagerAction('project', 'disable'));
-        $this->assertTrue($acl->isManagerAction('category', 'index'));
-        $this->assertTrue($acl->isManagerAction('project', 'users'));
-        $this->assertFalse($acl->isManagerAction('app', 'index'));
+        $this->assertFalse($acl->isProjectAdminAction('config', 'save'));
+        $this->assertFalse($acl->isProjectAdminAction('user', 'index'));
+        $this->assertTrue($acl->isProjectAdminAction('project', 'remove'));
+    }
+
+    public function testProjectManagerActions()
+    {
+        $acl = new Acl($this->container);
+        $this->assertFalse($acl->isProjectManagerAction('board', 'readonly'));
+        $this->assertFalse($acl->isProjectManagerAction('project', 'remove'));
+        $this->assertFalse($acl->isProjectManagerAction('project', 'show'));
+        $this->assertTrue($acl->isProjectManagerAction('project', 'disable'));
+        $this->assertTrue($acl->isProjectManagerAction('category', 'index'));
+        $this->assertTrue($acl->isProjectManagerAction('project', 'users'));
+        $this->assertFalse($acl->isProjectManagerAction('app', 'index'));
     }
 
     public function testPageAccessNoSession()
     {
         $acl = new Acl($this->container);
+        $session = new Session;
+        $session = array();
+
         $this->assertFalse($acl->isAllowed('board', 'readonly'));
         $this->assertFalse($acl->isAllowed('task', 'show'));
         $this->assertFalse($acl->isAllowed('config', 'application'));
@@ -81,7 +98,6 @@ class AclTest extends Base
     {
         $acl = new Acl($this->container);
         $session = new Session;
-
         $session['user'] = array();
 
         $this->assertFalse($acl->isAllowed('board', 'readonly'));
@@ -106,15 +122,60 @@ class AclTest extends Base
         $this->assertTrue($acl->isAllowed('webhook', 'github'));
         $this->assertTrue($acl->isAllowed('task', 'show'));
         $this->assertTrue($acl->isAllowed('task', 'update'));
-        $this->assertTrue($acl->isAllowed('project', 'show'));
         $this->assertTrue($acl->isAllowed('config', 'application'));
+        $this->assertTrue($acl->isAllowed('project', 'show'));
         $this->assertTrue($acl->isAllowed('project', 'users'));
+        $this->assertTrue($acl->isAllowed('project', 'remove'));
         $this->assertTrue($acl->isAllowed('category', 'edit'));
         $this->assertTrue($acl->isAllowed('task', 'remove'));
         $this->assertTrue($acl->isAllowed('app', 'index'));
     }
 
-    public function testPageAccessManager()
+    public function testPageAccessProjectAdmin()
+    {
+        $acl = new Acl($this->container);
+        $p = new Project($this->container);
+        $pp = new ProjectPermission($this->container);
+        $u = new User($this->container);
+        $session = new Session;
+
+        // We create our user
+        $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
+
+        // We create a project and set our user as project manager
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->isMember(1, 2));
+        $this->assertFalse($pp->isManager(1, 2));
+
+        // We fake a session for him
+        $session['user'] = array(
+            'id' => 2,
+            'is_admin' => false,
+            'is_project_admin' => true,
+        );
+
+        $this->assertTrue($acl->isAllowed('board', 'readonly', 1));
+        $this->assertTrue($acl->isAllowed('task', 'readonly', 1));
+        $this->assertTrue($acl->isAllowed('webhook', 'github', 1));
+        $this->assertTrue($acl->isAllowed('task', 'show', 1));
+        $this->assertFalse($acl->isAllowed('task', 'show', 2));
+        $this->assertTrue($acl->isAllowed('task', 'update', 1));
+        $this->assertTrue($acl->isAllowed('project', 'show', 1));
+        $this->assertFalse($acl->isAllowed('config', 'application', 1));
+
+        $this->assertTrue($acl->isAllowed('project', 'users', 1));
+        $this->assertFalse($acl->isAllowed('project', 'users', 2));
+
+        $this->assertTrue($acl->isAllowed('project', 'remove', 1));
+        $this->assertFalse($acl->isAllowed('project', 'remove', 2));
+
+        $this->assertTrue($acl->isAllowed('category', 'edit', 1));
+        $this->assertTrue($acl->isAllowed('task', 'remove', 1));
+        $this->assertTrue($acl->isAllowed('app', 'index', 1));
+    }
+
+    public function testPageAccessProjectManager()
     {
         $acl = new Acl($this->container);
         $p = new Project($this->container);
@@ -144,8 +205,13 @@ class AclTest extends Base
         $this->assertTrue($acl->isAllowed('task', 'update', 1));
         $this->assertTrue($acl->isAllowed('project', 'show', 1));
         $this->assertFalse($acl->isAllowed('config', 'application', 1));
+
         $this->assertTrue($acl->isAllowed('project', 'users', 1));
         $this->assertFalse($acl->isAllowed('project', 'users', 2));
+
+        $this->assertFalse($acl->isAllowed('project', 'remove', 1));
+        $this->assertFalse($acl->isAllowed('project', 'remove', 2));
+
         $this->assertTrue($acl->isAllowed('category', 'edit', 1));
         $this->assertTrue($acl->isAllowed('task', 'remove', 1));
         $this->assertTrue($acl->isAllowed('app', 'index', 1));

@@ -4,7 +4,7 @@ Project permissions
 A project can have two kinds of people: **project managers** and **project members**.
 
 - Project managers can manage the configuration of the project and access to the reports.
-- Project members are standard users, they have less privileges.
+- Project members can only do basic operations (create or move tasks).
 
 When you create a new project, you are automatically assigned as a project manager.
 

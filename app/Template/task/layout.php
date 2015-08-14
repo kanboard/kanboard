@@ -9,7 +9,7 @@
                 <i class="fa fa-calendar fa-fw"></i>
                 <?= $this->url->link(t('Back to the calendar'), 'calendar', 'show', array('project_id' => $task['project_id'])) ?>
             </li>
-            <?php if ($this->user->isManager($task['project_id'])): ?>
+            <?php if ($this->user->isProjectManagementAllowed($task['project_id'])): ?>
             <li>
                 <i class="fa fa-cog fa-fw"></i>
                 <?= $this->url->link(t('Project settings'), 'project', 'show', array('project_id' => $task['project_id'])) ?>

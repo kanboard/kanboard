@@ -1,22 +1,45 @@
 User management
 ===============
 
-Group of users
---------------
+Roles at the application level
+------------------------------
 
-Kanboard use a basic permission system, there is two kind of users:
+Kanboard use a basic permission system, there are 3 type of users:
 
-- Administrators
-- Standard users
+### Administrators
 
-Administrator have access to everything. By example, they can add or remove projects.
+- Access to everything
 
-There is also permissions defined at the project level, users can be seen as:
+### Project Administrators
 
-- Project member
-- Project manager
+- Can create multi-users and private projects
+- Can convert multi-users and private projects
+- Can see only their own projects
+- Cannot change application settings
+- Cannot manage users
 
-Project managers have more privileges than a simple user member.
+### Standard Users
+
+- Can create only private projects
+- Can see only their own projects
+- Cannot remove projects
+
+Roles at the project level
+--------------------------
+
+These role are related to the project permission.
+
+### Project Managers
+
+- Can manage only their own projects
+- Can access to reports and budget section
+
+### Project Members
+
+- Can do any daily operations in their projects (create and move tasks...)
+- Cannot configure projects
+
+Note: Any "Standard User" can be promotted "Project Manager" for a given project, they don't necessary need to be "Project Administrator".
 
 Local and remote users
 ----------------------

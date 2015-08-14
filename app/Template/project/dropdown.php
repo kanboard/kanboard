@@ -9,7 +9,7 @@
 </li>
 <?php endif ?>
 
-<?php if ($this->user->isManager($project['id'])): ?>
+<?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
 <li>
     <i class="fa fa-line-chart fa-fw"></i>
     <?= $this->url->link(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>

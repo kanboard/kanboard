@@ -57,6 +57,7 @@ class User extends Base
                         'name',
                         'email',
                         'is_admin',
+                        'is_project_admin',
                         'is_ldap_user',
                         'notifications_enabled',
                         'google_id',
@@ -254,7 +255,7 @@ class User extends Base
         }
 
         $this->removeFields($values, array('confirmation', 'current_password'));
-        $this->resetFields($values, array('is_admin', 'is_ldap_user'));
+        $this->resetFields($values, array('is_admin', 'is_ldap_user', 'is_project_admin'));
     }
 
     /**
@@ -442,6 +443,7 @@ class User extends Base
             new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
             new Validators\Email('email', t('Email address invalid')),
             new Validators\Integer('is_admin', t('This value must be an integer')),
+            new Validators\Integer('is_project_admin', t('This value must be an integer')),
             new Validators\Integer('is_ldap_user', t('This value must be an integer')),
         );
     }

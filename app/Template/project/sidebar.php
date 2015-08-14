@@ -5,7 +5,7 @@
             <?= $this->url->link(t('Summary'), 'project', 'show', array('project_id' => $project['id'])) ?>
         </li>
 
-        <?php if ($this->user->isManager($project['id'])): ?>
+        <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
             <li>
                 <?= $this->url->link(t('Public access'), 'project', 'share', array('project_id' => $project['id'])) ?>
             </li>
@@ -42,7 +42,7 @@
                     <?= $this->url->link(t('Enable'), 'project', 'enable', array('project_id' => $project['id']), true) ?>
                 <?php endif ?>
             </li>
-            <?php if ($this->user->isAdmin()): ?>
+            <?php if ($this->user->isProjectAdministrationAllowed($project['id'])): ?>
                 <li>
                     <?= $this->url->link(t('Remove'), 'project', 'remove', array('project_id' => $project['id'])) ?>
                 </li>

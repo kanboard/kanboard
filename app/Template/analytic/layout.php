@@ -19,7 +19,7 @@
                 <i class="fa fa-calendar fa-fw"></i>
                 <?= $this->url->link(t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
             </li>
-            <?php if ($this->user->isManager($project['id'])): ?>
+            <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
             <li>
                 <i class="fa fa-cog fa-fw"></i>
                 <?= $this->url->link(t('Project settings'), 'project', 'show', array('project_id' => $project['id'])) ?>

@@ -303,12 +303,16 @@ class User extends Base
             $values = $this->request->getValues();
 
             if ($this->userSession->isAdmin()) {
-                $values += array('is_admin' => 0);
+                $values += array('is_admin' => 0, 'is_project_admin' => 0);
             }
             else {
-
+                // Regular users can't be admin
                 if (isset($values['is_admin'])) {
-                    unset($values['is_admin']); // Regular users can't be admin
+                    unset($values['is_admin']);
+                }
+
+                if (isset($values['is_project_admin'])) {
+                    unset($values['is_project_admin']);
                 }
             }
 

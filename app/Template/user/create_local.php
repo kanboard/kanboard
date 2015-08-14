@@ -39,6 +39,7 @@
 
             <?= $this->form->checkbox('notifications_enabled', t('Enable notifications'), 1, isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1 ? true : false) ?>
             <?= $this->form->checkbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1 ? true : false) ?>
+            <?= $this->form->checkbox('is_project_admin', t('Project Administrator'), 1, isset($values['is_project_admin']) && $values['is_project_admin'] == 1 ? true : false) ?>
         </div>
 
         <div class="form-actions">

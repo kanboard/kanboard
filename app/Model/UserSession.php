@@ -34,6 +34,7 @@ class UserSession extends Base
 
         $user['id'] = (int) $user['id'];
         $user['is_admin'] = (bool) $user['is_admin'];
+        $user['is_project_admin'] = (bool) $user['is_project_admin'];
         $user['is_ldap_user'] = (bool) $user['is_ldap_user'];
         $user['twofactor_activated'] = (bool) $user['twofactor_activated'];
 
@@ -71,6 +72,17 @@ class UserSession extends Base
     public function isAdmin()
     {
         return isset($this->session['user']['is_admin']) && $this->session['user']['is_admin'] === true;
+    }
+
+    /**
+     * Return true if the logged user is project admin
+     *
+     * @access public
+     * @return bool
+     */
+    public function isProjectAdmin()
+    {
+        return isset($this->session['user']['is_project_admin']) && $this->session['user']['is_project_admin'] === true;
     }
 
     /**

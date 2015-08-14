@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 62;
+const VERSION = 63;
+
+function version_63($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN is_project_admin INTEGER DEFAULT 0");
+}
 
 function version_62($pdo)
 {

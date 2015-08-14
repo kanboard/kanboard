@@ -141,8 +141,15 @@ class Project extends Base
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        if ($project['is_private'] == 1 && $this->userSession->isAdmin() && ! isset($values['is_private'])) {
-            $values += array('is_private' => 0);
+        if (isset($values['is_private'])) {
+            if (! $this->helper->user->isProjectAdministrationAllowed($project['id'])) {
+                unset($values['is_private']);
+            }
+        }
+        else if ($project['is_private'] == 1 && ! isset($values['is_private'])) {
+            if ($this->helper->user->isProjectAdministrationAllowed($project['id'])) {
+                $values += array('is_private' => 0);
+            }
         }
 
         list($valid, $errors) = $this->project->validateModification($values);
@@ -402,7 +409,7 @@ class Project extends Base
      */
     public function create(array $values = array(), array $errors = array())
     {
-        $is_private = $this->request->getIntegerParam('private', $this->userSession->isAdmin() ? 0 : 1);
+        $is_private = $this->request->getIntegerParam('private', $this->userSession->isAdmin() || $this->userSession->isProjectAdmin() ? 0 : 1);
 
         $this->response->html($this->template->layout('project/new', array(
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),

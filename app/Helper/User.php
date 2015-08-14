@@ -77,19 +77,44 @@ class User extends \Core\Base
     }
 
     /**
-     * Proxy cache helper for acl::isManagerActionAllowed()
+     * Return if the logged user is project admin
      *
      * @access public
-     * @param  integer   $project_id
      * @return boolean
      */
-    public function isManager($project_id)
+    public function isProjectAdmin()
+    {
+        return $this->userSession->isProjectAdmin();
+    }
+
+    /**
+     * Check for project administration actions access (Project Admin group)
+     *
+     * @access public
+     * @return boolean
+     */
+    public function isProjectAdministrationAllowed($project_id)
     {
         if ($this->userSession->isAdmin()) {
             return true;
         }
 
-        return $this->memoryCache->proxy('acl', 'isManagerActionAllowed', $project_id);
+        return $this->memoryCache->proxy('acl', 'handleProjectAdminPermissions', $project_id);
+    }
+
+    /**
+     * Check for project management actions access (Regular users who are Project Managers)
+     *
+     * @access public
+     * @return boolean
+     */
+    public function isProjectManagementAllowed($project_id)
+    {
+        if ($this->userSession->isAdmin()) {
+            return true;
+        }
+
+        return $this->memoryCache->proxy('acl', 'handleProjectManagerPermissions', $project_id);
     }
 
     /**

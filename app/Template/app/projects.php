@@ -16,7 +16,7 @@
                 <?= $this->url->link('#'.$project['id'], 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link') ?>
             </td>
             <td>
-                <?php if ($this->user->isManager($project['id'])): ?>
+                <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
                     <?= $this->url->link('<i class="fa fa-cog"></i>', 'project', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Settings')) ?>&nbsp;
                 <?php endif ?>
 

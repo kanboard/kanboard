@@ -112,6 +112,7 @@ class UserTest extends Base
         $u = new User($this->container);
         $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertNotFalse($u->create(array('username' => 'titi', 'is_ldap_user' => 1)));
+        $this->assertNotFalse($u->create(array('username' => 'papa', 'is_project_admin' => 1)));
         $this->assertFalse($u->create(array('username' => 'toto')));
 
         $user = $u->getById(1);
@@ -137,6 +138,13 @@ class UserTest extends Base
         $this->assertEquals('', $user['name']);
         $this->assertEquals(0, $user['is_admin']);
         $this->assertEquals(1, $user['is_ldap_user']);
+
+        $user = $u->getById(4);
+        $this->assertNotFalse($user);
+        $this->assertTrue(is_array($user));
+        $this->assertEquals('papa', $user['username']);
+        $this->assertEquals(0, $user['is_admin']);
+        $this->assertEquals(1, $user['is_project_admin']);
     }
 
     public function testUpdate()

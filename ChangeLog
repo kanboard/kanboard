@@ -3,6 +3,7 @@ Version 1.0.18 (unreleased)
 
 New features:
 
+* Add new role "Project Administrator"
 * Add login bruteforce protection with captcha and account lockdown
 * Add new api procedures: getDefaultTaskColor(), getDefaultTaskColors() and getColorList()
 * Add user api access

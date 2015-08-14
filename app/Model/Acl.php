@@ -32,7 +32,7 @@ class Acl extends Base
      * @access private
      * @var array
      */
-    private $member_acl = array(
+    private $project_member_acl = array(
         'board' => '*',
         'comment' => '*',
         'file' => '*',
@@ -56,15 +56,25 @@ class Acl extends Base
      * @access private
      * @var array
      */
-    private $manager_acl = array(
+    private $project_manager_acl = array(
         'action' => '*',
         'analytic' => '*',
         'category' => '*',
         'column' => '*',
-        'export' => array('tasks', 'subtasks', 'summary'),
+        'export' => '*',
         'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',
         'budget' => '*',
+    );
+
+    /**
+     * Controllers and actions for project admins
+     *
+     * @access private
+     * @var array
+     */
+    private $project_admin_acl = array(
+        'project' => array('remove'),
     );
 
     /**
@@ -77,8 +87,6 @@ class Acl extends Base
         'user' => array('index', 'create', 'save', 'remove', 'authentication'),
         'config' => '*',
         'link' => '*',
-        'project' => array('remove'),
-        'hourlyrate' => '*',
         'currency' => '*',
         'twofactor' => array('disable'),
     );
@@ -149,9 +157,22 @@ class Acl extends Base
      * @param  string   $action       Action name
      * @return bool
      */
-    public function isManagerAction($controller, $action)
+    public function isProjectManagerAction($controller, $action)
     {
-        return $this->matchAcl($this->manager_acl, $controller, $action);
+        return $this->matchAcl($this->project_manager_acl, $controller, $action);
+    }
+
+    /**
+     * Return true if the given action is for application managers
+     *
+     * @access public
+     * @param  string   $controller   Controller name
+     * @param  string   $action       Action name
+     * @return bool
+     */
+    public function isProjectAdminAction($controller, $action)
+    {
+        return $this->matchAcl($this->project_admin_acl, $controller, $action);
     }
 
     /**
@@ -162,9 +183,9 @@ class Acl extends Base
      * @param  string   $action       Action name
      * @return bool
      */
-    public function isMemberAction($controller, $action)
+    public function isProjectMemberAction($controller, $action)
     {
-        return $this->matchAcl($this->member_acl, $controller, $action);
+        return $this->matchAcl($this->project_member_acl, $controller, $action);
     }
 
     /**
@@ -189,13 +210,18 @@ class Acl extends Base
             return false;
         }
 
+        // Check project admin permissions
+        if ($this->isProjectAdminAction($controller, $action)) {
+            return $this->handleProjectAdminPermissions($project_id);
+        }
+
         // Check project manager permissions
-        if ($this->isManagerAction($controller, $action)) {
-            return $this->isManagerActionAllowed($project_id);
+        if ($this->isProjectManagerAction($controller, $action)) {
+            return $this->handleProjectManagerPermissions($project_id);
         }
 
         // Check project member permissions
-        if ($this->isMemberAction($controller, $action)) {
+        if ($this->isProjectMemberAction($controller, $action)) {
             return $project_id > 0 && $this->projectPermission->isMember($project_id, $this->userSession->getId());
         }
 
@@ -203,12 +229,43 @@ class Acl extends Base
         return true;
     }
 
-    public function isManagerActionAllowed($project_id)
+    /**
+     * Handle permission for project manager
+     *
+     * @access public
+     * @param integer $project_id
+     * @return boolean
+     */
+    public function handleProjectManagerPermissions($project_id)
     {
-        if ($this->userSession->isAdmin()) {
-            return true;
+        if ($project_id > 0) {
+            if ($this->userSession->isProjectAdmin()) {
+                return $this->projectPermission->isMember($project_id, $this->userSession->getId());
+            }
+
+            return $this->projectPermission->isManager($project_id, $this->userSession->getId());
         }
 
-        return $project_id > 0 && $this->projectPermission->isManager($project_id, $this->userSession->getId());
+        return false;
+    }
+
+    /**
+     * Handle permission for project admins
+     *
+     * @access public
+     * @param integer $project_id
+     * @return boolean
+     */
+    public function handleProjectAdminPermissions($project_id)
+    {
+        if (! $this->userSession->isProjectAdmin()) {
+            return false;
+        }
+
+        if ($project_id > 0) {
+            return $this->projectPermission->isMember($project_id, $this->userSession->getId());
+        }
+
+        return true;
     }
 }

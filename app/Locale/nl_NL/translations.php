@@ -1015,4 +1015,6 @@ return array(
     // 'contributors' => '',
     // 'License:' => '',
     // 'License' => '',
+    // 'Project Administrator' => '',
+    // 'Enter the text below' => '',
 );

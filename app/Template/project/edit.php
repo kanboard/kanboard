@@ -13,7 +13,7 @@
     <?= $this->form->text('identifier', $values, $errors, array('maxlength="50"')) ?>
     <p class="form-help"><?= t('The project identifier is an optional alphanumeric code used to identify your project.') ?></p>
 
-    <?php if ($this->user->isAdmin()): ?>
+    <?php if ($this->user->isAdmin() || $this->user->isProjectAdministrationAllowed($project['id'])): ?>
         <?= $this->form->checkbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
     <?php endif ?>
 

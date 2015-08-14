@@ -2632,6 +2632,7 @@ Response example:
     - **name** (string, optional)
     - **email** (string, optional)
     - **is_admin** Set the value 1 for admins or 0 for regular users (integer, optional)
+    - **is_project_admin** Set the value 1 for project admins or 0 for regular users (integer, optional)
 - Result on success: **user_id**
 - Result on failure: **false**
 
@@ -2666,6 +2667,7 @@ Response example:
     - **username** (string, optional if email is set)
     - **email** (string, optional if username is set)
     - **is_admin** Set the value 1 for admins or 0 for regular users (integer, optional)
+    - **is_project_admin** Set the value 1 for project admins or 0 for regular users (integer, optional)
 - Result on success: **user_id**
 - Result on failure: **false**
 
@@ -2787,6 +2789,7 @@ Response example:
     - **name** (string, optional)
     - **email** (string, optional)
     - **is_admin** (integer, optional)
+    - **is_project_admin** Set the value 1 for project admins or 0 for regular users (integer, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
