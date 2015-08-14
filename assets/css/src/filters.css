@@ -1,3 +1,8 @@
+.toolbar {
+    font-size: 0.9em;
+    padding-top: 5px;
+}
+
 .views {
     display: inline-block;
     margin-right: 10px;
@@ -9,6 +14,7 @@
     padding-right: 12px;
     padding-top: 5px;
     padding-bottom: 5px;
+    display: inline;
 }
 
 .views li.active a {

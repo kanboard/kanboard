@@ -65,6 +65,7 @@ class Acl extends Base
         'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',
         'budget' => '*',
+        'gantt' => '*',
     );
 
     /**

@@ -89,6 +89,7 @@ nav .active a {
 .page-header ul {
     text-align: left;
     margin-top: 5px;
+    display: inline-block;
 }
 
 .page-header li {

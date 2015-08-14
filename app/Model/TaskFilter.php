@@ -87,6 +87,38 @@ class TaskFilter extends Base
     }
 
     /**
+     * Prepare filter for Gantt chart
+     *
+     * @access public
+     * @return TaskFilter
+     */
+    public function gantt()
+    {
+        $this->query = $this->db->table(Task::TABLE);
+        $this->query->join(Board::TABLE, 'id', 'column_id', Task::TABLE);
+        $this->query->join(User::TABLE, 'id', 'owner_id', Task::TABLE);
+
+        $this->query->columns(
+            Task::TABLE.'.id',
+            Task::TABLE.'.title',
+            Task::TABLE.'.project_id',
+            Task::TABLE.'.column_id',
+            Task::TABLE.'.color_id',
+            Task::TABLE.'.date_started',
+            Task::TABLE.'.date_due',
+            Task::TABLE.'.date_creation',
+            Task::TABLE.'.is_active',
+            Task::TABLE.'.position',
+            Board::TABLE.'.position AS column_position',
+            Board::TABLE.'.title AS column_title',
+            User::TABLE.'.name AS assignee_name',
+            User::TABLE.'.username AS assignee_username'
+        );
+
+        return $this;
+    }
+
+    /**
      * Create a new query
      *
      * @access public
@@ -672,6 +704,50 @@ class TaskFilter extends Base
                 return $task['column_id'] == $column_id && $task['swimlane_id'] == $swimlane_id;
             });
         });
+    }
+
+    /**
+     * Format tasks to be displayed in the Gantt chart
+     *
+     * @access public
+     * @return array
+     */
+    public function toGanttBars()
+    {
+        $bars = array();
+        $columns = array();
+
+        foreach ($this->query->findAll() as $task) {
+            if (! isset($column_count[$task['project_id']])) {
+                $columns[$task['project_id']] = $this->board->getColumnsList($task['project_id']);
+            }
+
+            $start = $task['date_started'] ?: time();
+            $end = $task['date_due'] ?: $start;
+
+            $bars[] = array(
+                'id' => $task['id'],
+                'title' => $task['title'],
+                'start' => array(
+                    (int) date('Y', $start),
+                    (int) date('n', $start),
+                    (int) date('j', $start),
+                ),
+                'end' => array(
+                    (int) date('Y', $end),
+                    (int) date('n', $end),
+                    (int) date('j', $end),
+                ),
+                'column_title' => $task['column_title'],
+                'assignee' => $task['assignee_name'] ?: $task['assignee_username'],
+                'progress' => $this->task->getProgress($task, $columns[$task['project_id']]).'%',
+                'link' => $this->helper->url->href('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])),
+                'color' => $this->color->getColorProperties($task['color_id']),
+                'not_defined' => empty($task['date_due']) || empty($task['date_started']),
+            );
+        }
+
+        return $bars;
     }
 
     /**

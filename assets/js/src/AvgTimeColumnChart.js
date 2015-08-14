@@ -1,7 +1,8 @@
-function AvgTimeColumnChart() {
+function AvgTimeColumnChart(app) {
+    this.app = app;
 }
 
-AvgTimeColumnChart.prototype.execute = function(app) {
+AvgTimeColumnChart.prototype.execute = function() {
     var metrics = $("#chart").data("metrics");
     var plots = [$("#chart").data("label")];
     var categories = [];
@@ -28,7 +29,7 @@ AvgTimeColumnChart.prototype.execute = function(app) {
             },
             y: {
                 tick: {
-                    format: app.formatDuration
+                    format: this.app.formatDuration
                 }
             }
         },

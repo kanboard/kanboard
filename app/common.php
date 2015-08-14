@@ -126,6 +126,10 @@ if (ENABLE_URL_REWRITE) {
     $container['router']->addRoute('l/:project_id', 'listing', 'show', array('project_id'));
     $container['router']->addRoute('list/:project_id/:search', 'listing', 'show', array('project_id', 'search'));
 
+    // Gantt routes
+    $container['router']->addRoute('gantt/:project_id', 'gantt', 'project', array('project_id'));
+    $container['router']->addRoute('gantt/:project_id/sort/:sorting', 'gantt', 'project', array('project_id', 'sorting'));
+
     // Subtask routes
     $container['router']->addRoute('project/:project_id/task/:task_id/subtask/create', 'subtask', 'create', array('project_id', 'task_id'));
     $container['router']->addRoute('project/:project_id/task/:task_id/subtask/:subtask_id/remove', 'subtask', 'confirm', array('project_id', 'task_id', 'subtask_id'));

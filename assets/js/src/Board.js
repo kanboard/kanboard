@@ -1,10 +1,9 @@
-function Board() {
-    this.app = null;
+function Board(app) {
+    this.app = app;
     this.checkInterval = null;
 }
 
-Board.prototype.execute = function(app) {
-    this.app = app;
+Board.prototype.execute = function() {
     this.app.swimlane.refresh();
     this.app.swimlane.listen();
     this.poll();
@@ -33,7 +32,7 @@ Board.prototype.check = function() {
 
         $.ajax({
             cache: false,
-            url: $("#board").attr("data-check-url"),
+            url: $("#board").data("check-url"),
             statusCode: {
                 200: function(data) { self.refresh(data); },
                 304: function () { self.app.hideLoadingIcon(); }
@@ -47,7 +46,7 @@ Board.prototype.save = function(taskId, columnId, position, swimlaneId) {
 
     $.ajax({
         cache: false,
-        url: $("#board").attr("data-save-url"),
+        url: $("#board").data("save-url"),
         contentType: "application/json",
         type: "POST",
         processData: false,
@@ -65,7 +64,7 @@ Board.prototype.save = function(taskId, columnId, position, swimlaneId) {
 Board.prototype.refresh = function(data) {
     $("#board-container").replaceWith(data);
 
-    this.app.listen();
+    this.app.refresh();
     this.app.swimlane.refresh();
     this.app.swimlane.listen();
     this.resizeColumnHeight();

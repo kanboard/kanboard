@@ -1,0 +1,17 @@
+Gantt chart for projects
+========================
+
+The Gantt chart is available from the the action menu by project managers.
+
+![Gantt Chart](http://kanboard.net/screenshots/documentation/gantt-chart-project.png)
+
+- The **start date** and the **due date** of tasks are used to draw the chart
+- Tasks can be resized and moved horizontally with your mouse
+- There is no vertical drag and drop
+- The bar is the same color as the task
+- Each bar display a progression status in percentage, this percentage is calculated by using the column position on the board
+- To fit with the Kanban model, tasks can be ordered by the board positions or by start date
+- New tasks created from this view will be displayed on the board at the position 1 in the first column
+- Tasks are displayed in black when there is no start or due date defined
+
+![Task not defined](http://kanboard.net/screenshots/documentation/gantt-chart-not-defined.png)

@@ -1,7 +1,8 @@
-function LeadCycleTimeChart() {
+function LeadCycleTimeChart(app) {
+    this.app = app;
 }
 
-LeadCycleTimeChart.prototype.execute = function(app) {
+LeadCycleTimeChart.prototype.execute = function() {
     var metrics = $("#chart").data("metrics");
     var cycle = [$("#chart").data("label-cycle")];
     var lead = [$("#chart").data("label-lead")];
@@ -37,7 +38,7 @@ LeadCycleTimeChart.prototype.execute = function(app) {
             },
             y: {
                 tick: {
-                    format: app.formatDuration
+                    format: this.app.formatDuration
                 }
             }
         }

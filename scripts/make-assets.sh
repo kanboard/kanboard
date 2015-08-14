@@ -1,12 +1,12 @@
 #!/bin/bash
 
 print_css="print links table board task comment subtask markdown"
-app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown screenshot filters"
+app_css="base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown screenshot filters gantt"
 vendor_css="jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min"
 
-app_js="Popover Dropdown Tooltip Markdown Sidebar Search App Screenshot Calendar Board Swimlane TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart BudgetChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart Router"
+app_js="Popover Dropdown Tooltip Markdown Sidebar Search App Screenshot Calendar Board Swimlane Gantt TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart BudgetChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart Router"
 vendor_js="jquery-1.11.1.min jquery-ui.min jquery-ui-timepicker-addon.min chosen.jquery.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min app.min"
-lang_js="da de es fi fr hu it ja nl pl pt-br ru sv sr th tr zh-cn"
+lang_js="da de es fi fr hu it ja nl pl pt pt-br ru sv sr th tr zh-cn"
 
 function merge_css {
 

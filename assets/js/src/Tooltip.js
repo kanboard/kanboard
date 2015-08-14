@@ -8,6 +8,7 @@ Tooltip.prototype.listen = function() {
     $(".tooltip").tooltip({
         track: false,
         show: false,
+        hide: false,
         position: {
             my: 'left-20 top',
             at: 'center bottom+9',

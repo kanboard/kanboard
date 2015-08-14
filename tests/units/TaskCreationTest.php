@@ -289,20 +289,21 @@ class TaskCreationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_due' => $date)));
         $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_due' => $timestamp)));
+        $this->assertEquals(3, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_due' => '')));
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
-
         $this->assertEquals(1, $task['id']);
         $this->assertEquals($date, date('Y-m-d', $task['date_due']));
 
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
-
         $this->assertEquals(2, $task['id']);
         $this->assertEquals($timestamp, $task['date_due']);
+
+        $task = $tf->getById(3);
+        $this->assertEquals(3, $task['id']);
+        $this->assertEquals(0, $task['date_due']);
     }
 
     public function testDateStarted()
@@ -336,6 +337,11 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(4);
         $this->assertEquals(time(), $task['date_started'], '', 1);
+
+        // Set empty string
+        $this->assertEquals(5, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => '')));
+        $task = $tf->getById(5);
+        $this->assertEquals(0, $task['date_started']);
     }
 
     public function testTime()

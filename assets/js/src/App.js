@@ -8,7 +8,6 @@ function App() {
     this.popover = new Popover(this);
     this.keyboardShortcuts();
     this.boardSelector();
-    this.listen();
     this.poll();
 
     // Alert box fadeout
@@ -28,8 +27,6 @@ function App() {
 }
 
 App.prototype.listen = function() {
-    $(document).off();
-
     this.popover.listen();
     this.markdown.listen();
     this.sidebar.listen();
@@ -40,6 +37,11 @@ App.prototype.listen = function() {
     this.taskAutoComplete();
     this.datePicker();
     this.focus();
+};
+
+App.prototype.refresh = function() {
+    $(document).off();
+    this.listen();
 };
 
 App.prototype.focus = function() {

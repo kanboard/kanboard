@@ -2,8 +2,6 @@
 
 namespace Controller;
 
-use Model\Project as ProjectModel;
-
 /**
  * Task Creation controller
  *
@@ -38,7 +36,6 @@ class Taskcreation extends Base
             'ajax' => $this->request->isAjax(),
             'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
-            'projects_list' => $this->project->getListByStatus(ProjectModel::ACTIVE),
             'columns_list' => $this->board->getColumnsList($project['id']),
             'users_list' => $this->projectPermission->getMemberList($project['id'], true, false, true),
             'colors_list' => $this->color->getList(),

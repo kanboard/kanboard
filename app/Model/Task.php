@@ -121,7 +121,7 @@ class Task extends Base
      */
     public function getRecurrenceStatusList()
     {
-        return array (
+        return array(
             Task::RECURRING_STATUS_NONE => t('No'),
             Task::RECURRING_STATUS_PENDING => t('Yes'),
         );
@@ -135,7 +135,7 @@ class Task extends Base
      */
     public function getRecurrenceTriggerList()
     {
-        return array (
+        return array(
             Task::RECURRING_TRIGGER_FIRST_COLUMN => t('When task is moved from first column'),
             Task::RECURRING_TRIGGER_LAST_COLUMN => t('When task is moved to last column'),
             Task::RECURRING_TRIGGER_CLOSE => t('When task is closed'),
@@ -150,7 +150,7 @@ class Task extends Base
      */
     public function getRecurrenceBasedateList()
     {
-        return array (
+        return array(
             Task::RECURRING_BASEDATE_DUEDATE => t('Existing due date'),
             Task::RECURRING_BASEDATE_TRIGGERDATE => t('Action date'),
         );
@@ -164,10 +164,37 @@ class Task extends Base
      */
     public function getRecurrenceTimeframeList()
     {
-        return array (
+        return array(
             Task::RECURRING_TIMEFRAME_DAYS => t('Day(s)'),
             Task::RECURRING_TIMEFRAME_MONTHS => t('Month(s)'),
             Task::RECURRING_TIMEFRAME_YEARS => t('Year(s)'),
         );
+    }
+
+    /**
+     * Get task progress based on the column position
+     *
+     * @access public
+     * @param  array    $task
+     * @param  array    $columns
+     * @return integer
+     */
+    public function getProgress(array $task, array $columns)
+    {
+        if ($task['is_active'] == self::STATUS_CLOSED) {
+            return 100;
+        }
+
+        $position = 0;
+
+        foreach ($columns as $column_id => $column_title) {
+            if ($column_id == $task['column_id']) {
+                break;
+            }
+
+            $position++;
+        }
+
+        return (int) ($position * 100) / count($columns);
     }
 }

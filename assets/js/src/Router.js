@@ -10,7 +10,8 @@ Router.prototype.dispatch = function(app) {
     for (var id in this.routes) {
         if (document.getElementById(id)) {
             var controller = Object.create(this.routes[id].prototype);
-            controller.execute(app);
+            this.routes[id].apply(controller, [app]);
+            controller.execute();
             break;
         }
     }
@@ -30,5 +31,7 @@ jQuery(document).ready(function() {
     router.addRoute('analytic-avg-time-column', AvgTimeColumnChart);
     router.addRoute('analytic-task-time-column', TaskTimeColumnChart);
     router.addRoute('analytic-lead-cycle-time', LeadCycleTimeChart);
+    router.addRoute('gantt-chart', Gantt);
     router.dispatch(app);
+    app.listen();
 });
