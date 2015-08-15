@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\Task;
+use Model\Task as TaskModel;
 
 /**
  * Gantt controller
@@ -19,13 +19,13 @@ class Gantt extends Base
     {
         $project = $this->getProject();
         $sorting = $this->request->getStringParam('sorting', 'board');
-        $filter = $this->taskFilter->gantt()->filterByProject($project['id'])->filterByStatus(Task::STATUS_OPEN);
+        $filter = $this->taskFilter->gantt()->filterByProject($project['id'])->filterByStatus(TaskModel::STATUS_OPEN);
 
         if ($sorting === 'date') {
-            $filter->query->asc(Task::TABLE.'.date_started')->asc(Task::TABLE.'.date_creation');
+            $filter->query->asc(TaskModel::TABLE.'.date_started')->asc(TaskModel::TABLE.'.date_creation');
         }
         else {
-            $filter->query->asc('column_position')->asc(Task::TABLE.'.position');
+            $filter->query->asc('column_position')->asc(TaskModel::TABLE.'.position');
         }
 
         $this->response->html($this->template->layout('gantt/project', array(
