@@ -1,4 +1,5 @@
 language: php
+sudo: false
 
 php:
   - 7.0
@@ -7,14 +8,17 @@ php:
   - 5.4
   - 5.3
 
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgres
+
 matrix:
   fast_finish: true
-  allow_failures:
-    - php: 7.0
 
 before_script:
   - phpenv config-add tests/php.ini
   - composer install
 
 script:
-  - phpunit -c tests/units.sqlite.xml
+  - phpunit -c tests/units.$DB.xml
