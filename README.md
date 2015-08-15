@@ -48,3 +48,4 @@ Related projects
 - [Trello import script by @matueranet](https://github.com/matueranet/kanboard-import-trello)
 - [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
 - [Wunderlist To Kanboard script by EpocDotFr](https://github.com/EpocDotFr/WunderlistToKanboard)
+- [Python client script by @dzudek](https://gist.github.com/fguillot/84c70d4928eb1e0cb374)

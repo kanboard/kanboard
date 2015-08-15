@@ -20,6 +20,7 @@ Improvements:
 * Enable support for Github Enterprise when using Github Authentication
 * Update iCalendar library to display organizer name
 * Run automated unit tests with Sqlite/Mysql/Postgres on Travis-ci
+* Add Makefile and remove the scripts directory
 
 Bug fixes:
 
