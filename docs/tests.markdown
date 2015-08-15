@@ -63,7 +63,7 @@ By default, those credentials are used:
 
 - Hostname: **localhost**
 - Username: **root**
-- Password: nothing (blank)
+- Password: none
 - Database: **kanboard_unit_test**
 
 For each execution the database is dropped and created again.
@@ -96,7 +96,7 @@ By default, those credentials are used:
 
 - Hostname: **localhost**
 - Username: **postgres**
-- Password: **postgres**
+- Password: none
 - Database: **kanboard_unit_test**
 
 Be sure to allow the user `postgres` to create and drop databases.
@@ -158,25 +158,19 @@ Time: 1.72 seconds, Memory: 4.25Mb
 OK (42 tests, 160 assertions)
 ```
 
-Continuous Integration with Travis
-----------------------------------
+Continuous Integration with Travis-ci
+-------------------------------------
 
-After each commit pushed on the main repository, unit tests are executed across 4 different major versions of PHP.
+After each commit pushed on the main repository, unit tests are executed across 5 different versions of PHP:
 
-The Travis config file `.travis.yml` is located on the root directory of Kanboard:
+- PHP 7.0
+- PHP 5.6
+- PHP 5.5
+- PHP 5.4
+- PHP 5.3
 
-```yaml
-language: php
+Each version of PHP is tested against the 3 supported database: Sqlite, Mysql and Postgresql.
 
-php:
-  - "5.6"
-  - "5.5"
-  - "5.4"
-  - "5.3"
+That mean we run 15 jobs each time the repository is updated. The execution time is around 25 minutes.
 
-before_script: wget https://phar.phpunit.de/phpunit.phar
-script: php phpunit.phar -c tests/units.sqlite.xml
-```
-
-As you can see, tests are executed with PHP 5.3, 5.4, 5.5 and 5.6.
-However, only Sqlite unit tests are executed on Travis.
+The Travis config file `.travis.yml` is located on the root directory of Kanboard.
