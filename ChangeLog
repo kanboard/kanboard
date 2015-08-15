@@ -3,6 +3,7 @@ Version 1.0.18 (unreleased)
 
 New features:
 
+* Add hide/show columns
 * Add Gantt chart for projects
 * Add new role "Project Administrator"
 * Add login bruteforce protection with captcha and account lockdown

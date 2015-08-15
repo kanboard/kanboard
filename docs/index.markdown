@@ -13,8 +13,9 @@ Using Kanboard
 ### Using the board
 
 - [Board, Calendar and List views](project-views.markdown)
-- [Collapsed and expended mode](board-collapsed-expanded.markdown)
+- [Collapsed and expanded mode](board-collapsed-expanded.markdown)
 - [Horizontal scrolling and compact mode](board-horizontal-scrolling-and-compact-view.markdown)
+- [Show and hide columns](board-show-hide-columns.makrdown)
 
 ### Working with projects
 

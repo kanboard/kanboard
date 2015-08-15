@@ -6,12 +6,13 @@ function Board(app) {
 Board.prototype.execute = function() {
     this.app.swimlane.refresh();
     this.app.swimlane.listen();
+    this.restoreColumnViewMode();
+    this.compactView();
     this.poll();
     this.keyboardShortcuts();
     this.resizeColumnHeight();
     this.listen();
     this.dragAndDrop();
-    this.compactView();
 
     $(window).resize(this.resizeColumnHeight);
 };
@@ -72,6 +73,7 @@ Board.prototype.refresh = function(data) {
     this.listen();
     this.dragAndDrop();
     this.compactView();
+    this.restoreColumnViewMode();
 };
 
 Board.prototype.resizeColumnHeight = function() {
@@ -112,6 +114,10 @@ Board.prototype.listen = function() {
         e.preventDefault();
         self.toggleCompactView();
     });
+
+    $(document).on("click", ".board-column-title", function() {
+        self.toggleColumnViewMode($(this).data("column-id"));
+    });
 };
 
 Board.prototype.toggleCompactView = function() {
@@ -126,7 +132,7 @@ Board.prototype.compactView = function() {
         $(".filter-compact").hide();
 
         $("#board-container").addClass("board-container-compact");
-        $("#board th").addClass("board-column-compact");
+        $("#board th:not(.board-column-header-collapsed)").addClass("board-column-compact");
     }
     else {
         $(".filter-wide").hide();
@@ -149,6 +155,66 @@ Board.prototype.toggleCollapsedMode = function() {
             self.refresh(data);
         }
     });
+};
+
+Board.prototype.restoreColumnViewMode = function() {
+    var self = this;
+
+    $("tr:first th").each(function() {
+        var columnId = $(this).data('column-id');
+        if (localStorage.getItem("hidden_column_" + columnId)) {
+            self.hideColumn(columnId);
+        }
+    });
+};
+
+Board.prototype.toggleColumnViewMode = function(columnId) {
+    if (localStorage.getItem("hidden_column_" + columnId)) {
+        this.showColumn(columnId);
+    }
+    else {
+        this.hideColumn(columnId);
+    }
+};
+
+Board.prototype.hideColumn = function(columnId) {
+    $(".board-column-" + columnId + " .board-column-expanded").hide();
+    $(".board-column-" + columnId + " .board-column-collapsed").show();
+    $(".board-column-header-" + columnId + " .board-column-expanded").hide();
+    $(".board-column-header-" + columnId + " .board-column-collapsed").show();
+
+    $(".board-column-header-" + columnId).each(function() {
+        $(this).removeClass("board-column-compact");
+        $(this).addClass("board-column-header-collapsed");
+    });
+
+    $(".board-column-" + columnId ).each(function() {
+        $(this).addClass("board-column-task-collapsed");
+    });
+
+    $(".board-column-" + columnId + " .board-rotation").each(function() {
+        var position = $(".board-swimlane").position();
+        $(".board-column-task-collapsed").height($(window).height() - position.top);
+        $(this).css("width", $(".board-column-" + columnId + "").height());
+    });
+
+    localStorage.setItem("hidden_column_" + columnId, 1);
+};
+
+Board.prototype.showColumn = function(columnId) {
+    $(".board-column-" + columnId + " .board-column-expanded").show();
+    $(".board-column-" + columnId + " .board-column-collapsed").hide();
+    $(".board-column-header-" + columnId + " .board-column-expanded").show();
+    $(".board-column-header-" + columnId + " .board-column-collapsed").hide();
+
+    $(".board-column-header-" + columnId).removeClass("board-column-header-collapsed");
+    $(".board-column-" + columnId).removeClass("board-column-task-collapsed");
+
+    if (localStorage.getItem("horizontal_scroll") == 0) {
+        $(".board-column-header-" + columnId).addClass("board-column-compact");
+    }
+
+    localStorage.removeItem("hidden_column_" + columnId);
 };
 
 Board.prototype.keyboardShortcuts = function() {

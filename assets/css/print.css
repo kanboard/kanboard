@@ -162,6 +162,19 @@ th a:hover {
     overflow-x: scroll;
 }
 
+#board {
+    table-layout: fixed;
+}
+
+#board th.board-column-header {
+    width: 240px;
+}
+
+#board td {
+    vertical-align: top;
+}
+
+/* compact mode/horizontal scrolling */
 .board-container-compact {
     overflow-x: initial;
 }
@@ -172,30 +185,43 @@ th a:hover {
     }
 }
 
-#board {
-    table-layout: fixed;
-}
-
-#board th {
-    width: 120px; /* Width of swimlane column */
-}
-
-#board th.board-column-header {
-    width: 240px; /* Width of other columns, in default [horizontal scrolling] view mode */
-}
-
 #board th.board-column-header.board-column-compact {
     width: initial; /* Do not force the width of the columns in compact view mode */
 }
 
-#board th a {
-    text-decoration: none;
-    color: #3366CC;
-    font-size: 150%;
+/* show/hide column */
+.board-column-collapsed {
+    display: none;
 }
 
-#board td {
-    vertical-align: top;
+td.board-column-task-collapsed {
+    font-weight: bold;
+    background-color: #fbfbfb;
+}
+
+#board th.board-column-header-collapsed {
+    width: 28px;
+    min-width: 28px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.board-rotation-wrapper {
+    position: relative;
+    padding: 8px 4px;
+}
+
+.board-rotation {
+    min-width: 250px;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    transform-origin: 0 100%;
 }
 
 /* column header */
@@ -205,29 +231,33 @@ th a:hover {
 }
 
 .board-add-icon a {
+    text-decoration: none;
+    color: #3366CC;
+    font-size: 150%;
     line-height: 70%;
 }
 
-.task-count {
+.board-add-icon a:focus,
+.board-add-icon a:hover {
+    text-decoration: none;
+    color: red;
+}
+
+.board-column-header-task-count {
     color: #999;
     font-weight: normal;
 }
 
-/* drag and drop */
-.draggable-item {
-    cursor: pointer;
-    user-select: none;
-}
-
-.draggable-placeholder {
-    border: 2px dashed #000;
-    background: #fafafa;
-    height: 70px;
-    margin-bottom: 10px;
+th.board-column-header-collapsed .board-column-header-task-count {
+    font-size: 0.85em;
 }
 
 /* swimlanes */
-#board th a.board-swimlane-toggle {
+th.board-swimlane-header {
+    width: 120px;
+}
+
+a.board-swimlane-toggle {
     font-size: 0.95em;
 }
 
@@ -248,6 +278,19 @@ th a:hover {
 
 .board-task-list-limit {
     background-color: #DF5353;
+}
+
+/* drag and drop */
+.draggable-item {
+    cursor: pointer;
+    user-select: none;
+}
+
+.draggable-placeholder {
+    border: 2px dashed #000;
+    background: #fafafa;
+    height: 70px;
+    margin-bottom: 10px;
 }
 /* task inside the board */
 .task-board {
