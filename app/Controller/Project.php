@@ -30,7 +30,7 @@ class Project extends Base
             ->setUrl('project', 'index')
             ->setMax(20)
             ->setOrder('name')
-            ->setQuery($this->project->getQueryColumnStats($project_ids))
+            ->setQuery($this->project->getQueryProjectDetails($project_ids))
             ->calculate();
 
         $this->response->html($this->template->layout('project/index', array(

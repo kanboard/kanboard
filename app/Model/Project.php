@@ -261,6 +261,24 @@ class Project extends Base
     }
 
     /**
+     * Fetch more information for each project
+     *
+     * @access public
+     * @param  array    $projects
+     * @return array
+     */
+    public function applyProjectDetails(array $projects)
+    {
+        foreach ($projects as &$project) {
+            $this->getColumnStats($project);
+            $project['managers'] = $this->projectPermission->getManagers($project['id']);
+            $project['members'] = $this->projectPermission->getOnlyMembers($project['id']);
+        }
+
+        return $projects;
+    }
+
+    /**
      * Get project summary for a list of project
      *
      * @access public
@@ -277,6 +295,25 @@ class Project extends Base
                     ->table(Project::TABLE)
                     ->in('id', $project_ids)
                     ->callback(array($this, 'applyColumnStats'));
+    }
+
+    /**
+     * Get project details (users + columns) for a list of project
+     *
+     * @access public
+     * @param  array      $project_ids     List of project id
+     * @return \PicoDb\Table
+     */
+    public function getQueryProjectDetails(array $project_ids)
+    {
+        if (empty($project_ids)) {
+            return $this->db->table(Project::TABLE)->limit(0);
+        }
+
+        return $this->db
+                    ->table(Project::TABLE)
+                    ->in('id', $project_ids)
+                    ->callback(array($this, 'applyProjectDetails'));
     }
 
     /**

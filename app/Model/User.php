@@ -208,12 +208,19 @@ class User extends Base
      * List all users (key-value pairs with id/username)
      *
      * @access public
+     * @param  boolean  $prepend  Prepend "All users"
      * @return array
      */
-    public function getList()
+    public function getList($prepend = false)
     {
         $users = $this->db->table(self::TABLE)->columns('id', 'username', 'name')->findAll();
-        return $this->prepareList($users);
+        $listing = $this->prepareList($users);
+
+        if ($prepend) {
+            return array(User::EVERYBODY_ID => t('Everybody')) + $listing;
+        }
+
+        return $listing;
     }
 
     /**

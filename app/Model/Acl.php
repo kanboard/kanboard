@@ -76,6 +76,7 @@ class Acl extends Base
      */
     private $project_admin_acl = array(
         'project' => array('remove'),
+        'projectuser' => '*',
     );
 
     /**

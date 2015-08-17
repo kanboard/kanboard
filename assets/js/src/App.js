@@ -7,7 +7,7 @@ function App() {
     this.tooltip = new Tooltip(this);
     this.popover = new Popover(this);
     this.keyboardShortcuts();
-    this.boardSelector();
+    this.chosen();
     this.poll();
 
     // Alert box fadeout
@@ -144,20 +144,16 @@ App.prototype.taskAutoComplete = function() {
     }
 };
 
-App.prototype.boardSelector = function() {
+App.prototype.chosen = function() {
     $(".chosen-select").chosen({
-        width: "200px",
+        width: "180px",
         no_results_text: $(".chosen-select").data("notfound"),
         disable_search_threshold: 10
     });
 
-    $("#board-selector").chosen({
-        width: 180,
-        no_results_text: $("#board-selector").data("notfound")
-    });
-
-    $("#board-selector").change(function() {
-        window.location = $(this).attr("data-board-url").replace(/PROJECT_ID/g, $(this).val());
+    $(".select-auto-redirect").change(function() {
+        var regex = new RegExp($(this).data('redirect-regex'), 'g');
+        window.location = $(this).data('redirect-url').replace(regex, $(this).val());
     });
 };
 

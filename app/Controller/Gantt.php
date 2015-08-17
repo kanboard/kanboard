@@ -42,7 +42,7 @@ class Gantt extends Base
      */
     public function saveDate()
     {
-        $project = $this->getProject();
+        $this->getProject();
         $values = $this->request->getJson();
 
         $result = $this->taskModification->update(array(

@@ -66,18 +66,19 @@ class ProjectPermission extends Base
     }
 
     /**
-     * Get a list of people associated to the project
+     * Get a list of standard user members for a project
      *
      * @access public
      * @param  integer   $project_id   Project id
      * @return array
      */
-    public function getAssociatedUsers($project_id)
+    public function getOnlyMembers($project_id)
     {
         $users = $this->db
             ->table(self::TABLE)
             ->join(User::TABLE, 'id', 'user_id')
             ->eq('project_id', $project_id)
+            ->eq('is_owner', 0)
             ->asc('username')
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
             ->findAll();
@@ -107,6 +108,57 @@ class ProjectPermission extends Base
     }
 
     /**
+     * Get query for project users overview
+     *
+     * @access public
+     * @param  array    $project_ids
+     * @param  integer  $is_owner
+     * @return \PicoDb\Table
+     */
+    public function getQueryByRole(array $project_ids, $is_owner = 0)
+    {
+        if (empty($project_ids)) {
+            $project_ids = array(-1);
+        }
+
+        return $this
+            ->db
+            ->table(self::TABLE)
+            ->join(User::TABLE, 'id', 'user_id')
+            ->join(Project::TABLE, 'id', 'project_id')
+            ->eq(self::TABLE.'.is_owner', $is_owner)
+            ->eq(Project::TABLE.'.is_private', 0)
+            ->in(Project::TABLE.'.id', $project_ids)
+            ->columns(
+                User::TABLE.'.id',
+                User::TABLE.'.username',
+                User::TABLE.'.name',
+                Project::TABLE.'.name AS project_name',
+                Project::TABLE.'.id'
+            );
+    }
+
+    /**
+     * Get a list of people associated to the project
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return array
+     */
+    public function getAssociatedUsers($project_id)
+    {
+        $users = $this->db
+            ->table(self::TABLE)
+            ->join(User::TABLE, 'id', 'user_id')
+            ->eq('project_id', $project_id)
+            ->asc('username')
+            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
+            ->findAll();
+
+        return $this->user->prepareList($users);
+    }
+
+    /**
      * Get allowed and not allowed users for a project
      *
      * @access public
@@ -127,7 +179,6 @@ class ProjectPermission extends Base
         $users['managers'] = $this->getManagers($project_id);
 
         foreach ($all_users as $user_id => $username) {
-
             if (! isset($users['allowed'][$user_id])) {
                 $users['not_allowed'][$user_id] = $username;
             }
@@ -267,26 +318,6 @@ class ProjectPermission extends Base
                     ->eq('id', $project_id)
                     ->eq('is_everybody_allowed', 1)
                     ->exists();
-    }
-
-    /**
-     * Filter a list of projects for a given user
-     *
-     * @access public
-     * @param  array     $projects     Project list: ['project_id' => 'project_name']
-     * @param  integer   $user_id      User id
-     * @param  string    $filter       Method name to apply
-     * @return array
-     */
-    public function filterProjects(array $projects, $user_id, $filter = 'isUserAllowed')
-    {
-        foreach ($projects as $project_id => $project_name) {
-            if (! $this->$filter($project_id, $user_id)) {
-                unset($projects[$project_id]);
-            }
-        }
-
-        return $projects;
     }
 
     /**
