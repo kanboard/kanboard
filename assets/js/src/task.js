@@ -7,7 +7,6 @@ Kanboard.Task = (function() {
     {
         Mousetrap.bind("i", function() {
             var url = '/?controller=board&action=assignToMe&task_id=' + task_id + '&project_id=' + project_id;
-            console.log(url);
             $.ajax({
                 url: url,
                 type: "POST",
