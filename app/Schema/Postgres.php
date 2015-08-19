@@ -6,7 +6,13 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 63;
+const VERSION = 64;
+
+function version_64($pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN start_date CHAR(10) DEFAULT ''");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN end_date CHAR(10) DEFAULT ''");
+}
 
 function version_63($pdo)
 {

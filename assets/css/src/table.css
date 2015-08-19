@@ -62,6 +62,10 @@ th a:hover {
     background: #fefefe;
 }
 
+.column-3 {
+    width: 3%;
+}
+
 .column-5 {
     width: 5%;
 }
@@ -74,8 +78,16 @@ th a:hover {
     width: 10%;
 }
 
+.column-12 {
+    width: 12%;
+}
+
 .column-15 {
     width: 15%;
+}
+
+.column-18 {
+    width: 18%;
 }
 
 .column-20 {

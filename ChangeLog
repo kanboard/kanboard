@@ -11,6 +11,7 @@ New features:
 * Add user api access
 * Add config parameter to define session duration
 * Add config parameter to disable/enable RememberMe authentication
+* Add start/end date for projects
 * Add Portuguese (European) translation
 * Add Norwegian translation
 

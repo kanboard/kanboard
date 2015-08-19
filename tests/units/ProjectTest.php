@@ -44,6 +44,18 @@ class ProjectTest extends Base
         $this->assertEmpty($project['token']);
     }
 
+    public function testCreationWithStartAndDate()
+    {
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest', 'start_date' => '2015-01-01', 'end_date' => '2015-12-31')));
+
+        $project = $p->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('2015-01-01', $project['start_date']);
+        $this->assertEquals('2015-12-31', $project['end_date']);
+    }
+
     public function testCreationWithDefaultCategories()
     {
         $p = new Project($this->container);
