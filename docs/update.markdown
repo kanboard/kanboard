@@ -9,9 +9,10 @@ From the archive (stable version)
 1. Close your session (logout)
 2. Rename your actual Kanboard directory (to keep a backup)
 3. Uncompress the new archive and copy your `data` directory to the newly uncompressed directory.
-4. Make the directory `data` writeable by the web server user
-5. Login and check if everything is ok
-6. Remove the old Kanboard directory
+4. Copy your custom `config.php` (if you created one) to the root of the newly uncompressed directory.
+5. Make the directory `data` writeable by the web server user
+6. Login and check if everything is ok
+7. Remove the old Kanboard directory
 
 
 From the repository (development version)
