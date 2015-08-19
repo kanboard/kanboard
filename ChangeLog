@@ -12,6 +12,7 @@ New features:
 * Add config parameter to define session duration
 * Add config parameter to disable/enable RememberMe authentication
 * Add Portuguese (European) translation
+* Add Norwegian translation
 
 Improvements:
 

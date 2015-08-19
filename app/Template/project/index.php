@@ -57,7 +57,7 @@
                     </td>
                     <?php if ($this->user->isAdmin() || $this->user->isProjectAdmin()): ?>
                     <td>
-                        <ul>
+                        <ul class="no-bullet">
                         <?php foreach ($project['managers'] as $user_id => $user_name): ?>
                             <li><?= $this->url->link($this->e($user_name), 'projectuser', 'opens', array('user_id' => $user_id)) ?></li>
                         <?php endforeach ?>
@@ -67,7 +67,7 @@
                         <?php if ($project['is_everybody_allowed'] == 1): ?>
                             <?= t('Everybody') ?>
                         <?php else: ?>
-                            <ul>
+                            <ul class="no-bullet">
                             <?php foreach ($project['members'] as $user_id => $user_name): ?>
                                 <li><?= $this->url->link($this->e($user_name), 'projectuser', 'opens', array('user_id' => $user_id)) ?></li>
                             <?php endforeach ?>

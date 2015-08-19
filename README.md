@@ -11,7 +11,7 @@ Official website: <http://kanboard.net>
 - Minimalist software, focus only on essential features (Less is more)
 - Open source and self-hosted
 - Super simple installation
-- Translated in 20 languages
+- Translated in 21 languages
 - Distributed under [MIT License](LICENSE)
 - [List of features are available on the website](http://kanboard.net/features)
 - [Change Log](ChangeLog)

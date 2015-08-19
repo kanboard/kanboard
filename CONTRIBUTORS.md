@@ -19,6 +19,7 @@ Contributors:
 - [Creador30](https://github.com/creador30)
 - [Cynthia Pereira](https://github.com/cynthiapereira)
 - [David-Norris](https://github.com/David-Norris)
+- [Daniel Raknes](https://github.com/danielraknes)
 - [Draza (bdpsoft)](https://github.com/bdpsoft)
 - [Eskiso](https://github.com/eSkiSo)
 - [Esteban Monge](https://github.com/EstebanMonge)

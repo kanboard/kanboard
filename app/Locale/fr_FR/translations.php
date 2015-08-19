@@ -163,7 +163,7 @@ return array(
     '%B %e, %Y at %k:%M %p' => '%d/%m/%Y à %H:%M',
     'Date created' => 'Date de création',
     'Date completed' => 'Date de clôture',
-    'Id' => 'Identifiant',
+    'Id' => 'Id.',
     '%d closed tasks' => '%d tâches terminées',
     'No task for this project' => 'Aucune tâche pour ce projet',
     'Public link' => 'Lien public',
