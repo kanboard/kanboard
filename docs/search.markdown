@@ -15,8 +15,9 @@ assigne:me due:tomorrow my title
 Search by task id or title
 --------------------------
 
-- Search by task id: `#123` or `123`
-- Search by task title: anything that don't match any search attributes mentioned below
+- Search by task id: `#123`
+- Search by task id and task title: `123`
+- Search by task title: anything that don't match any search attributes
 
 Search by status
 ----------------

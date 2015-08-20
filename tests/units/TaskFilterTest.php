@@ -107,6 +107,7 @@ class TaskFilterTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task 43')));
 
         $tf->search('#2');
         $tasks = $tf->findAll();
@@ -137,6 +138,12 @@ class TaskFilterTest extends Base
         $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
         $this->assertEquals('task1', $tasks[0]['title']);
+
+        $tf->search('43');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('task 43', $tasks[0]['title']);
     }
 
     public function testSearchWithReference()

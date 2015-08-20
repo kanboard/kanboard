@@ -242,11 +242,11 @@ class TaskFilter extends Base
      */
     public function filterByTitle($title)
     {
-        if (strlen($title) > 1 && $title{0} === '#' && ctype_digit(substr($title, 1))) {
-            $this->query->eq(Task::TABLE.'.id', substr($title, 1));
-        }
-        else if (ctype_digit($title)) {
-            $this->query->eq(Task::TABLE.'.id', $title);
+        if (ctype_digit($title) || (strlen($title) > 1 && $title{0} === '#' && ctype_digit(substr($title, 1)))) {
+            $this->query->beginOr();
+            $this->query->eq(Task::TABLE.'.id', str_replace('#', '', $title));
+            $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
+            $this->query->closeOr();
         }
         else {
             $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');

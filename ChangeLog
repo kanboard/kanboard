@@ -17,6 +17,7 @@ New features:
 
 Improvements:
 
+* Add search in task title when using an integer only input
 * Show all tasks when using no search criteria
 * Add column vertical scrolling
 * Set dynamically column height based on viewport size
