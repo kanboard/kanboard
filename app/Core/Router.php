@@ -11,6 +11,22 @@ namespace Core;
 class Router extends Base
 {
     /**
+     * Controller
+     *
+     * @access private
+     * @var string
+     */
+    private $controller = '';
+
+    /**
+     * Action
+     *
+     * @access private
+     * @var string
+     */
+    private $action = '';
+
+    /**
      * Store routes for path lookup
      *
      * @access private
@@ -25,6 +41,28 @@ class Router extends Base
      * @var array
      */
     private $urls = array();
+
+    /**
+     * Get action
+     *
+     * @access public
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * Get controller
+     *
+     * @access public
+     * @return string
+     */
+    public function getController()
+    {
+        return $this->controller;
+    }
 
     /**
      * Get the path to compare patterns
@@ -207,6 +245,9 @@ class Router extends Base
             if (! method_exists($class, $method)) {
                 return false;
             }
+
+            $this->action = $method;
+            $this->controller = $controller;
 
             $instance = new $class($this->container);
             $instance->beforeAction($controller, $method);

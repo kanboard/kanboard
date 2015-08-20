@@ -11,6 +11,28 @@ namespace Helper;
 class App extends \Core\Base
 {
     /**
+     * Get router controller
+     *
+     * @access public
+     * @return string
+     */
+    public function getRouterController()
+    {
+        return $this->router->getController();
+    }
+
+    /**
+     * Get router action
+     *
+     * @access public
+     * @return string
+     */
+    public function getRouterAction()
+    {
+        return $this->router->getAction();
+    }
+
+    /**
      * Get javascript language code
      *
      * @access public

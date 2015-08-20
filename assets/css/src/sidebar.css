@@ -27,6 +27,17 @@
     line-height: 1.8em;
 }
 
+.sidebar li.active a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.sidebar li.active a:focus,
+.sidebar li.active a:hover {
+    text-decoration: underline;
+}
+
 .sidebar-collapsed .sidebar {
     width: 10px;
     padding-bottom: 0;

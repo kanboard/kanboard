@@ -16,7 +16,7 @@
     </div>
     <section class="sidebar-container">
 
-        <?= $this->render('project_user/sidebar', array('users' => $users, 'action' => $action, 'filter' => $filter)) ?>
+        <?= $this->render('project_user/sidebar', array('users' => $users, 'filter' => $filter)) ?>
 
         <div class="sidebar-content">
             <div class="page-header">

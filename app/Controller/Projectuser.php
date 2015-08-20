@@ -65,7 +65,6 @@ class Projectuser extends Base
         $this->response->html($this->layout('project_user/roles', array(
             'paginator' => $paginator,
             'title' => $title,
-            'action' => $action,
             'user_id' => $user_id,
             'users' => $users,
         )));
@@ -92,7 +91,6 @@ class Projectuser extends Base
         $this->response->html($this->layout('project_user/tasks', array(
             'paginator' => $paginator,
             'title' => $title,
-            'action' => $action,
             'user_id' => $user_id,
             'users' => $users,
         )));
