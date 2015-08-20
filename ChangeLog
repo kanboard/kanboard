@@ -17,6 +17,7 @@ New features:
 
 Improvements:
 
+* Show all tasks when using no search criteria
 * Add column vertical scrolling
 * Set dynamically column height based on viewport size
 * Enable support for Github Enterprise when using Github Authentication

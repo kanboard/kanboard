@@ -36,7 +36,7 @@ class TaskFilter extends Base
         $this->query = $this->taskFinder->getExtendedQuery();
 
         if (empty($tree)) {
-            $this->query->addCondition('1 = 0');
+            $this->filterByTitle($input);
         }
 
         foreach ($tree as $filter => $value) {

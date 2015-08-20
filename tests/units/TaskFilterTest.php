@@ -80,6 +80,24 @@ class TaskFilterTest extends Base
         $this->assertEmpty($tf->search('search something')->findAll());
     }
 
+    public function testSearchWithEmptyInput()
+    {
+        $dp = new DateParser($this->container);
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'my task title is awesome', 'date_due' => $dp->getTimestampFromIsoFormat('-2 days'))));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'my task title is amazing', 'date_due' => $dp->getTimestampFromIsoFormat('+1 day'))));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'Bob at work', 'date_due' => $dp->getTimestampFromIsoFormat('-1 day'))));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'youpi', 'date_due' => $dp->getTimestampFromIsoFormat(time()))));
+
+        $result = $tf->search('')->findAll();
+        $this->assertNotEmpty($result);
+        $this->assertCount(4, $result);
+    }
+
     public function testSearchById()
     {
         $p = new Project($this->container);
