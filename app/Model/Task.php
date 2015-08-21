@@ -195,6 +195,6 @@ class Task extends Base
             $position++;
         }
 
-        return (int) ($position * 100) / count($columns);
+        return round(($position * 100) / count($columns), 1);
     }
 }

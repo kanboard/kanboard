@@ -19,7 +19,7 @@ class Gantt extends Base
     {
         $project = $this->getProject();
         $sorting = $this->request->getStringParam('sorting', 'board');
-        $filter = $this->taskFilter->gantt()->filterByProject($project['id'])->filterByStatus(TaskModel::STATUS_OPEN);
+        $filter = $this->taskFilter->gantt()->filterByProject($project['id']);
 
         if ($sorting === 'date') {
             $filter->query->asc(TaskModel::TABLE.'.date_started')->asc(TaskModel::TABLE.'.date_creation');
