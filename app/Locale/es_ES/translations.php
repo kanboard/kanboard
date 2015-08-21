@@ -541,7 +541,7 @@ return array(
     'Daily project summary' => 'Sumario diario del proyecto',
     'Daily project summary export' => 'Exportar sumario diario del proyecto',
     'Daily project summary export for "%s"' => 'Exportar sumario diario del proyecto para "%s"',
-    'Exports' => 'Exportacionesr',
+    'Exports' => 'Exportaciones',
     'This export contains the number of tasks per column grouped per day.' => 'Esta exportación contiene el número de tereas por columna agrupada por día.',
     'Nothing to preview...' => 'Nada que previsualizar...',
     'Preview' => 'Previsualizar',
