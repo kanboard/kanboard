@@ -34,6 +34,7 @@ Contributors:
 - [Janne Mäntyharju](https://github.com/JanneMantyharju)
 - [Jean-François Magnier](https://github.com/lefakir)
 - [Jesusaplsoft](https://github.com/jesusaplsoft)
+- [Jesús Marín](https://github.com/alu0100502114)
 - [Karol J](https://github.com/dzudek)
 - [Kiswa](https://github.com/kiswa)
 - [Kralo](https://github.com/kralo)

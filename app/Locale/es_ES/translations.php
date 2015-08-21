@@ -951,7 +951,7 @@ return array(
     'Go to the search/filter box' => 'Ir a caja de buscar/filtrar',
     'There is no activity yet.' => 'Aún no hay actividades.',
     'No tasks found.' => 'No se ha hallado tarea alguna.',
-    'Keyboard shortcut: "%s"' => 'Atajo de teclado',
+    'Keyboard shortcut: "%s"' => 'Atajo de teclado: %s',
     'List' => 'Lista',
     'Filter' => 'Filtro',
     'Advanced search' => 'Búsqueda avanzada',
