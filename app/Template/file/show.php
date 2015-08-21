@@ -21,7 +21,7 @@
                         </span>
                     </p>
                     <span class="task-show-file-actions task-show-image-actions">
-                        <i class="fa fa-eye"></i> <?= $this->url->link(t('open'), 'file', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
+                        <i class="fa fa-eye"></i> <?= $this->url->link(t('open file'), 'file', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
                         <i class="fa fa-trash"></i> <?= $this->url->link(t('remove'), 'file', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                         <i class="fa fa-download"></i> <?= $this->url->link(t('download'), 'file', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                     </span>
