@@ -50,6 +50,8 @@ class Board extends Base
         $params = $this->getProjectFilters('board', 'show');
 
         $this->response->html($this->template->layout('board/private_view', array(
+            'categories_list' => $this->category->getList($params['project']['id'], false),
+            'users_list' => $this->projectPermission->getMemberList($params['project']['id'], false),
             'swimlanes' => $this->taskFilter->search($params['filters']['search'])->getBoard($params['project']['id']),
             'description' => $params['project']['description'],
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
@@ -112,6 +114,29 @@ class Board extends Base
         if (! $this->project->isModifiedSince($project_id, $timestamp)) {
             return $this->response->status(304);
         }
+
+        $this->response->html($this->renderBoard($project_id));
+    }
+
+    /**
+     * Reload the board with new filters
+     *
+     * @access public
+     */
+    public function reload()
+    {
+        if (! $this->request->isAjax()) {
+            return $this->response->status(403);
+        }
+
+        $project_id = $this->request->getIntegerParam('project_id');
+
+        if (! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
+            $this->response->text('Forbidden', 403);
+        }
+
+        $values = $this->request->getJson();
+        $this->userSession->setFilters($project_id, $values['search']);
 
         $this->response->html($this->renderBoard($project_id));
     }

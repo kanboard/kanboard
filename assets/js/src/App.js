@@ -1,7 +1,8 @@
 function App() {
+    this.board = new Board(this);
     this.markdown = new Markdown();
     this.sidebar = new Sidebar();
-    this.search = new Search();
+    this.search = new Search(this);
     this.swimlane = new Swimlane();
     this.dropdown = new Dropdown();
     this.tooltip = new Tooltip(this);

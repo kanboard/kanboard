@@ -1,4 +1,5 @@
-function Search() {
+function Search(app) {
+    this.app = app;
     this.keyboardShortcuts();
 }
 
@@ -12,11 +13,21 @@ Search.prototype.focus = function() {
 };
 
 Search.prototype.listen = function() {
+    var self = this;
+
     // Filter helper for search
     $(document).on("click", ".filter-helper", function (e) {
         e.preventDefault();
-        $("#form-search").val($(this).data("filter"));
-        $("form.search").submit();
+        var filter = $(this).data("filter");
+
+        $("#form-search").val(filter);
+
+        if ($('#board').length) {
+            self.app.board.reloadFilters(filter);
+        }
+        else {
+            $("form.search").submit();
+        }
     });
 };
 

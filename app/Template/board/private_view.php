@@ -3,6 +3,8 @@
     <?= $this->render('project/filters', array(
         'project' => $project,
         'filters' => $filters,
+        'categories_list' => $categories_list,
+        'users_list' => $users_list,
         'is_board' => true,
     )) ?>
 

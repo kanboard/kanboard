@@ -46,4 +46,30 @@
         <?= $this->form->text('search', $filters, array(), array('placeholder="'.t('Filter').'"'), 'form-input-large') ?>
     </form>
     <?= $this->render('app/filters_helper', array('reset' => 'status:open')) ?>
+
+    <?php if (isset($users_list)): ?>
+        <div class="dropdown filters">
+        <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Users') ?></a>
+        <ul>
+            <li><a href="#" class="filter-helper" data-filter="status:open"><?= t('All users') ?></a></li>
+            <li><a href="#" class="filter-helper" data-filter="status:open assignee:nobody"><?= t('Not assigned') ?></a></li>
+            <?php foreach ($users_list as $user): ?>
+                <li><a href="#" class="filter-helper" data-filter='status:open assignee:"<?= $this->e($user) ?>"'><?= $this->e($user) ?></a></li>
+            <?php endforeach ?>
+        </ul>
+        </div>
+    <?php endif ?>
+
+    <?php if (isset($categories_list) && ! empty($categories_list)): ?>
+        <div class="dropdown filters">
+        <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Categories') ?></a>
+        <ul>
+            <li><a href="#" class="filter-helper" data-filter="status:open"><?= t('All categories') ?></a></li>
+            <li><a href="#" class="filter-helper" data-filter="status:open category:none"><?= t('No category') ?></a></li>
+            <?php foreach ($categories_list as $category): ?>
+                <li><a href="#" class="filter-helper" data-filter='status:open category:"<?= $this->e($category) ?>"'><?= $this->e($category) ?></a></li>
+            <?php endforeach ?>
+        </ul>
+        </div>
+    <?php endif ?>
 </div>

@@ -25,6 +25,23 @@ Board.prototype.poll = function() {
     }
 };
 
+Board.prototype.reloadFilters = function(search) {
+    this.app.showLoadingIcon();
+
+    $.ajax({
+        cache: false,
+        url: $("#board").data("reload-url"),
+        contentType: "application/json",
+        type: "POST",
+        processData: false,
+        data: JSON.stringify({
+            search: search
+        }),
+        success: this.refresh.bind(this),
+        error: this.app.hideLoadingIcon.bind(this)
+    });
+};
+
 Board.prototype.check = function() {
     if (this.app.isVisible()) {
 
