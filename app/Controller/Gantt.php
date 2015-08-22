@@ -13,7 +13,46 @@ use Model\Task as TaskModel;
 class Gantt extends Base
 {
     /**
-     * Show Gantt chart for projects
+     * Show Gantt chart for all projects
+     */
+    public function projects()
+    {
+        if ($this->userSession->isAdmin()) {
+            $project_ids = $this->project->getAllIds();
+        }
+        else {
+            $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
+        }
+
+        $this->response->html($this->template->layout('gantt/projects', array(
+            'projects' => $this->project->getGanttBars($project_ids),
+            'title' => t('Gantt chart for all projects'),
+            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+        )));
+    }
+
+    /**
+     * Save new project start date and end date
+     */
+    public function saveProjectDate()
+    {
+        $values = $this->request->getJson();
+
+        $result = $this->project->update(array(
+            'id' => $values['id'],
+            'start_date' => $this->dateParser->getIsoDate(strtotime($values['start'])),
+            'end_date' => $this->dateParser->getIsoDate(strtotime($values['end'])),
+        ));
+
+        if (! $result) {
+            $this->response->json(array('message' => 'Unable to save project'), 400);
+        }
+
+        $this->response->json(array('message' => 'OK'), 201);
+    }
+
+    /**
+     * Show Gantt chart for one project
      */
     public function project()
     {
@@ -40,7 +79,7 @@ class Gantt extends Base
     /**
      * Save new task start date and due date
      */
-    public function saveDate()
+    public function saveTaskDate()
     {
         $this->getProject();
         $values = $this->request->getJson();

@@ -50,6 +50,36 @@ class ProjectPermission extends Base
     }
 
     /**
+     * Get a list of members and managers with a single SQL query
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return array
+     */
+    public function getProjectUsers($project_id)
+    {
+        $result = array(
+            'managers' => array(),
+            'members' => array(),
+        );
+
+        $users = $this->db
+            ->table(self::TABLE)
+            ->join(User::TABLE, 'id', 'user_id')
+            ->eq('project_id', $project_id)
+            ->asc('username')
+            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', self::TABLE.'.is_owner')
+            ->findAll();
+
+        foreach ($users as $user) {
+            $key = $user['is_owner'] == 1 ? 'managers' : 'members';
+            $result[$key][$user['id']] = $user['name'] ?: $user['username'];
+        }
+
+        return $result;
+    }
+
+    /**
      * Get a list of allowed people for a project
      *
      * @access public
@@ -63,27 +93,6 @@ class ProjectPermission extends Base
         }
 
         return $this->getAssociatedUsers($project_id);
-    }
-
-    /**
-     * Get a list of standard user members for a project
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @return array
-     */
-    public function getOnlyMembers($project_id)
-    {
-        $users = $this->db
-            ->table(self::TABLE)
-            ->join(User::TABLE, 'id', 'user_id')
-            ->eq('project_id', $project_id)
-            ->eq('is_owner', 0)
-            ->asc('username')
-            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
-            ->findAll();
-
-        return $this->user->prepareList($users);
     }
 
     /**

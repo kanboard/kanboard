@@ -1040,4 +1040,13 @@ return array(
     // 'Shared project' => '',
     // 'Project managers' => '',
     // 'Project members' => '',
+    // 'Gantt chart for all projects' => '',
+    // 'Projects list' => '',
+    // 'Gantt chart for this project' => '',
+    // 'Project board' => '',
+    // 'End date:' => '',
+    // 'There is no start date or end date for this project.' => '',
+    // 'Projects Gantt chart' => '',
+    // 'Start date: %s' => '',
+    // 'End date: %s' => '',
 );

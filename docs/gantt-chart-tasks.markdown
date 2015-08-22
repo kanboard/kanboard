@@ -1,7 +1,10 @@
-Gantt chart for projects
-========================
+Gantt chart for tasks
+======================
 
-The Gantt chart is available from the the action menu by project managers.
+The goal of this Gantt chart is to display a time based overview of the tasks for a given project.
+
+- The Gantt chart is available from the the action menu
+- Only project managers can access to this section
 
 ![Gantt Chart](http://kanboard.net/screenshots/documentation/gantt-chart-project.png)
 

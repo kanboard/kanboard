@@ -20,6 +20,14 @@
         <li><?= dt('Last modified on %B %e, %Y at %k:%M %p', $project['last_modified']) ?></li>
     <?php endif ?>
 
+    <?php if ($project['start_date']): ?>
+        <li><?= t('Start date: %s', $project['start_date']) ?></li>
+    <?php endif ?>
+
+    <?php if ($project['end_date']): ?>
+        <li><?= t('End date: %s', $project['end_date']) ?></li>
+    <?php endif ?>
+
     <?php if ($stats['nb_tasks'] > 0): ?>
 
         <?php if ($stats['nb_active_tasks'] > 0): ?>

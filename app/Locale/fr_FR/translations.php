@@ -1042,4 +1042,13 @@ return array(
     'Shared project' => 'Projet partagé',
     'Project managers' => 'Gestionnaires de projet',
     'Project members' => 'Membres de projet',
+    'Gantt chart for all projects' => 'Diagramme de Gantt pour tous les projets',
+    'Projects list' => 'List des projets',
+    'Gantt chart for this project' => 'Diagramme de Gantt pour ce projet',
+    'Project board' => 'Tableau du projet',
+    'End date:' => 'Date de fin :',
+    'There is no start date or end date for this project.' => 'Il n\'y a pas de date de début ou de date de fin pour ce projet.',
+    'Projects Gantt chart' => 'Diagramme de Gantt des projets',
+    'Start date: %s' => 'Date de début : %s',
+    'End date: %s' => 'Date de fin : %s',
 );

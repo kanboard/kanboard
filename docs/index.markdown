@@ -28,7 +28,8 @@ Using Kanboard
 - [Calendar](calendar.markdown)
 - [Budget](budget.markdown)
 - [Analytics](analytics.markdown)
-- [Gantt chart](gantt-chart.markdown)
+- [Gantt chart for tasks](gantt-chart-tasks.markdown)
+- [Gantt chart for projects](gantt-chart-projects.markdown)
 
 ### Working with tasks
 

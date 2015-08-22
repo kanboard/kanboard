@@ -726,6 +726,7 @@ class TaskFilter extends Base
             $end = $task['date_due'] ?: $start;
 
             $bars[] = array(
+                'type' => 'task',
                 'id' => $task['id'],
                 'title' => $task['title'],
                 'start' => array(

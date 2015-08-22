@@ -3,8 +3,9 @@ Version 1.0.18 (unreleased)
 
 New features:
 
+* Add users and categories filters on the board
 * Add hide/show columns
-* Add Gantt chart for projects
+* Add Gantt chart for projects and tasks
 * Add new role "Project Administrator"
 * Add login bruteforce protection with captcha and account lockdown
 * Add new api procedures: getDefaultTaskColor(), getDefaultTaskColors() and getColorList()

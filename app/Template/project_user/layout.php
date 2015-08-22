@@ -10,8 +10,14 @@
             </li>
             <li>
                 <i class="fa fa-folder fa-fw"></i>
-                <?= $this->url->link(t('All projects'), 'project', 'index') ?>
+                <?= $this->url->link(t('Projects list'), 'project', 'index') ?>
             </li>
+            <?php if ($this->user->isProjectAdmin() || $this->user->isAdmin()): ?>
+                <li>
+                    <i class="fa fa-sliders fa-fw"></i>
+                    <?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?>
+                </li>
+            <?php endif ?>
         </ul>
     </div>
     <section class="sidebar-container">

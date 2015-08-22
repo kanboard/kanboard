@@ -65,7 +65,7 @@ class Acl extends Base
         'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',
         'budget' => '*',
-        'gantt' => '*',
+        'gantt' => array('project', 'savetaskdate', 'task', 'savetask'),
     );
 
     /**
@@ -77,6 +77,7 @@ class Acl extends Base
     private $project_admin_acl = array(
         'project' => array('remove'),
         'projectuser' => '*',
+        'gantt' => array('projects', 'saveprojectdate'),
     );
 
     /**

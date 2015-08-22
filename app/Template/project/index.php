@@ -6,7 +6,8 @@
             <?php endif ?>
             <li><i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
             <?php if ($this->user->isProjectAdmin() || $this->user->isAdmin()): ?>
-                <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('Users overview'), 'projectuser', 'managers') ?></li>
+                <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'projectuser', 'managers') ?></li>
+                <li><i class="fa fa-sliders fa-fw"></i><?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?></li>
             <?php endif ?>
         </ul>
     </div>
