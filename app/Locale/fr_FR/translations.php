@@ -1051,4 +1051,7 @@ return array(
     'Projects Gantt chart' => 'Diagramme de Gantt des projets',
     'Start date: %s' => 'Date de début : %s',
     'End date: %s' => 'Date de fin : %s',
+    'Link type' => 'Type de lien',
+    'Change task color when using a specific task link' => 'Changer la couleur de la tâche lorsqu\'un lien spécifique est utilisé',
+    'Task link creation or modification' => 'Création ou modification d\'un lien sur une tâche',
 );

@@ -13,6 +13,7 @@ New features:
 * Add config parameter to define session duration
 * Add config parameter to disable/enable RememberMe authentication
 * Add start/end date for projects
+* Add new automated action to change task color based on the task link
 * Add Portuguese (European) translation
 * Add Norwegian translation
 

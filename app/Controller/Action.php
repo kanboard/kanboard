@@ -31,6 +31,7 @@ class Action extends Base
             'projects_list' => $this->project->getList(false),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
+            'links_list' => $this->link->getList(0, false),
             'title' => t('Automatic actions')
         )));
     }
@@ -89,6 +90,7 @@ class Action extends Base
             'projects_list' => $projects_list,
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
+            'links_list' => $this->link->getList(0, false),
             'project' => $project,
             'title' => t('Automatic actions')
         )));

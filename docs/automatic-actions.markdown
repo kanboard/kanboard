@@ -37,6 +37,7 @@ List of available events
 - Closing a task
 - Task creation or modification
 - Task assignee change
+- Task link created or updated
 - Github commit received
 - Github issue opened
 - Github issue closed
@@ -77,6 +78,7 @@ List of available actions
 - Automatically update the start date
 - Move the task to another column when the category is changed
 - Send a task by email to someone
+- Change task color when using a specific task link
 
 Examples
 --------

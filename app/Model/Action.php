@@ -59,6 +59,7 @@ class Action extends Base
             'TaskUpdateStartDate' => t('Automatically update the start date'),
             'TaskMoveColumnCategoryChange' => t('Move the task to another column when the category is changed'),
             'TaskEmail' => t('Send a task by email to someone'),
+            'TaskAssignColorLink' => t('Change task color when using a specific task link'),
         );
 
         asort($values);
@@ -75,6 +76,7 @@ class Action extends Base
     public function getAvailableEvents()
     {
         $values = array(
+            TaskLink::EVENT_CREATE_UPDATE => t('Task link creation or modification'),
             Task::EVENT_MOVE_COLUMN => t('Move a task to another column'),
             Task::EVENT_UPDATE => t('Task modification'),
             Task::EVENT_CREATE => t('Task creation'),
