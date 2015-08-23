@@ -15,12 +15,13 @@ New features:
 * Add start/end date for projects
 * Add new automated action to change task color based on the task link
 * Add milestone marker in board task
+* Add search in task title when using an integer only input
 * Add Portuguese (European) translation
 * Add Norwegian translation
 
 Improvements:
 
-* Add search in task title when using an integer only input
+* Adjust automatically the height of the placeholder during drag and drop
 * Show all tasks when using no search criteria
 * Add column vertical scrolling
 * Set dynamically column height based on viewport size

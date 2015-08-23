@@ -99,8 +99,8 @@ Board.prototype.resizeColumnHeight = function() {
             if ($(this).height() > 500) {
                 $(this).height(500);
             }
-            else if ($(this).height() == 0) {
-                $(this).height(75);
+            else {
+                $(this).css("min-height", 100);
             }
         });
     }
@@ -112,6 +112,7 @@ Board.prototype.resizeColumnHeight = function() {
 Board.prototype.dragAndDrop = function() {
     var self = this;
     $(".board-task-list").sortable({
+        forcePlaceholderSize: true,
         delay: 300,
         distance: 5,
         connectWith: ".board-task-list",
@@ -124,6 +125,9 @@ Board.prototype.dragAndDrop = function() {
                 ui.item.index() + 1,
                 ui.item.parent().attr('data-swimlane-id')
             );
+        },
+        start: function(event, ui) {
+            ui.placeholder.height(ui.item.height());
         }
     });
 };
