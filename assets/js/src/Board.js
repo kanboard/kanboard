@@ -100,7 +100,7 @@ Board.prototype.resizeColumnHeight = function() {
                 $(this).height(500);
             }
             else {
-                $(this).css("min-height", 100);
+                $(this).css("min-height", 320); // Min height is the height of the menu dropdown
             }
         });
     }
@@ -135,8 +135,10 @@ Board.prototype.dragAndDrop = function() {
 Board.prototype.listen = function() {
     var self = this;
 
-    $(document).on("click", ".task-board", function() {
-        window.location = $(this).data("task-url");
+    $(document).on("click", ".task-board", function(e) {
+        if (e.target.tagName != "A") {
+            window.location = $(this).data("task-url");
+        }
     });
 
     $(document).on('click', ".filter-toggle-scrolling", function(e) {
