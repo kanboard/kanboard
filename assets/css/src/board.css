@@ -124,7 +124,6 @@ a.board-swimlane-toggle {
 
 /* board task list */
 .board-task-list {
-    height: 500px;
     overflow: auto;
 }
 

@@ -94,10 +94,18 @@ Board.prototype.refresh = function(data) {
 };
 
 Board.prototype.resizeColumnHeight = function() {
-    var position = $(".board-swimlane").position();
-
-    if (position) {
-        $(".board-task-list").height($(window).height() - position.top);
+    if ($(".board-swimlane").length > 1) {
+        $(".board-task-list").each(function() {
+            if ($(this).height() > 500) {
+                $(this).height(500);
+            }
+            else if ($(this).height() == 0) {
+                $(this).height(75);
+            }
+        });
+    }
+    else {
+        $(".board-task-list").height($(window).height() - 145);
     }
 };
 
