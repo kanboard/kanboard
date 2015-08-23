@@ -106,7 +106,7 @@ Screenshot.prototype.checkInput = function() {
         }
     }
 
-    pasteCatcher.innerHTML = "";
+    this.pasteCatcher.innerHTML = "";
 };
 
 // Creates a new image from a given source

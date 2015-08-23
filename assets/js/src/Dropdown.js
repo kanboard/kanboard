@@ -18,7 +18,7 @@ Dropdown.prototype.listen = function() {
         if (! submenu.is(':visible')) {
             self.close();
 
-            if ($(this).offset().top + submenuHeight > $(window).height()) {
+            if ($(this).offset().top + submenuHeight - $(window).scrollTop() > $(window).height()) {
                 submenu.addClass('dropdown-submenu-open dropdown-submenu-top');
             }
             else {
