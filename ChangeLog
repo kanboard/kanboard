@@ -21,6 +21,7 @@ New features:
 
 Improvements:
 
+* Improve file attachments tooltip on the board
 * Adjust automatically the height of the placeholder during drag and drop
 * Show all tasks when using no search criteria
 * Add column vertical scrolling
