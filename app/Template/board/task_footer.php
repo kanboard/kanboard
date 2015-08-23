@@ -63,4 +63,10 @@
     <?php if (! empty($task['time_estimated'])): ?>
         <span class="task-time-estimated" title="<?= t('Time estimated') ?>"><?= $this->e($task['time_estimated']).'h' ?></span>
     <?php endif ?>
+
+    <?php if ($task['is_milestone'] == 1): ?>
+        <span title="<?= t('Milestone') ?>">
+            <i class="fa fa-flag"></i>
+        </span>
+    <?php endif ?>
 </div>
