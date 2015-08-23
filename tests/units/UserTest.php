@@ -51,7 +51,6 @@ class UserTest extends Base
     {
         $u = new User($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user1', 'password' => '123456', 'gitlab_id' => '1234')));
-        $this->assertNotFalse($u->create(array('username' => 'user2', 'password' => '123456', 'gitlab_id' => '')));
 
         $this->assertNotEmpty($u->getByGitlabId('1234'));
         $this->assertEmpty($u->getByGitlabId(''));
