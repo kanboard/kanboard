@@ -225,7 +225,7 @@ Board.prototype.hideColumn = function(columnId) {
 
     $(".board-column-" + columnId + " .board-rotation").each(function() {
         var position = $(".board-swimlane").position();
-        $(".board-column-task-collapsed").height($(window).height() - position.top);
+        // $(".board-column-task-collapsed").height($(window).height() - position.top);
         $(this).css("width", $(".board-column-" + columnId + "").height());
     });
 

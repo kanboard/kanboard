@@ -2,7 +2,7 @@
     <!-- swimlane toggle -->
     <?php if (! $hide_swimlane): ?>
        <th class="board-swimlane-header">
-           <?php if (! $not_editable && $swimlane['nb_tasks'] > 0): ?>
+           <?php if (! $not_editable): ?>
                 <a href="#" class="board-swimlane-toggle" data-swimlane-id="<?= $swimlane['id'] ?>">
                     <i class="fa fa-minus-circle hide-icon-swimlane-<?= $swimlane['id'] ?>"></i>
                     <i class="fa fa-plus-circle show-icon-swimlane-<?= $swimlane['id'] ?>" style="display: none"></i>
