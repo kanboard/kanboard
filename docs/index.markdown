@@ -122,6 +122,7 @@ Technical details
 - [LDAP authentication](ldap-authentication.markdown)
 - [Google authentication](google-authentication.markdown)
 - [Github authentication](github-authentication.markdown)
+- [Gitlab authentication](gitlab-authentication.markdown)
 - [Reverse proxy authentication](reverse-proxy-authentication.markdown)
 
 ### Contributors

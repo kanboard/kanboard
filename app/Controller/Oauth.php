@@ -31,6 +31,16 @@ class Oauth extends Base
     }
 
     /**
+     * Link or authenticate a Gitlab account
+     *
+     * @access public
+     */
+    public function gitlab()
+    {
+        $this->step1('gitlab');
+    }
+
+    /**
      * Unlink external account
      *
      * @access public

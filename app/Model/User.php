@@ -139,6 +139,22 @@ class User extends Base
     }
 
     /**
+     * Get a specific user by the Gitlab id
+     *
+     * @access public
+     * @param  string  $gitlab_id  Gitlab user id
+     * @return array|boolean
+     */
+    public function getByGitlabId($gitlab_id)
+    {
+        if (empty($gitlab_id)) {
+            return false;
+        }
+
+        return $this->db->table(self::TABLE)->eq('gitlab_id', $gitlab_id)->findOne();
+    }
+
+    /**
      * Get a specific user by the username
      *
      * @access public

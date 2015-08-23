@@ -47,6 +47,36 @@ class UserTest extends Base
         $this->assertEmpty($u->getByEmail(''));
     }
 
+    public function testGetByGitlabId()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'user1', 'password' => '123456', 'gitlab_id' => '1234')));
+        $this->assertNotFalse($u->create(array('username' => 'user2', 'password' => '123456', 'gitlab_id' => '')));
+
+        $this->assertNotEmpty($u->getByGitlabId('1234'));
+        $this->assertEmpty($u->getByGitlabId(''));
+    }
+
+    public function testGetByGithubId()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'user1', 'password' => '123456', 'github_id' => 'plop')));
+        $this->assertNotFalse($u->create(array('username' => 'user2', 'password' => '123456', 'github_id' => '')));
+
+        $this->assertNotEmpty($u->getByGithubId('plop'));
+        $this->assertEmpty($u->getByGithubId(''));
+    }
+
+    public function testGetByGoogleId()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'user1', 'password' => '123456', 'google_id' => '1234')));
+        $this->assertNotFalse($u->create(array('username' => 'user2', 'password' => '123456', 'google_id' => '')));
+
+        $this->assertNotEmpty($u->getByGoogleId('1234'));
+        $this->assertEmpty($u->getByGoogleId(''));
+    }
+
     public function testPassword()
     {
         $password = 'test123';

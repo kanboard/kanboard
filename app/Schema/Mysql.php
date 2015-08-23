@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 84;
+const VERSION = 85;
+
+function version_85($pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN gitlab_id INT");
+}
 
 function version_84($pdo)
 {

@@ -1054,4 +1054,12 @@ return array(
     'Link type' => 'Type de lien',
     'Change task color when using a specific task link' => 'Changer la couleur de la tâche lorsqu\'un lien spécifique est utilisé',
     'Task link creation or modification' => 'Création ou modification d\'un lien sur une tâche',
+    'Login with my Gitlab Account' => 'Se connecter avec mon compte Gitlab',
+    'Milestone' => 'Étape importante',
+    'Gitlab Authentication' => 'Authentification Gitlab',
+    'Help on Gitlab authentication' => 'Aide sur l\'authentification Gitlab',
+    'Gitlab Id' => 'Identifiant Gitlab',
+    'Gitlab Account' => 'Compte Gitlab',
+    'Link my Gitlab Account' => 'Lier mon compte Gitlab',
+    'Unlink my Gitlab Account' => 'Ne plus utiliser mon compte Gitlab',
 );

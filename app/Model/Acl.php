@@ -23,7 +23,7 @@ class Acl extends Base
         'webhook' => '*',
         'ical' => '*',
         'feed' => '*',
-        'oauth' => array('google', 'github'),
+        'oauth' => array('google', 'github', 'gitlab'),
     );
 
     /**

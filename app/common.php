@@ -146,6 +146,7 @@ if (ENABLE_URL_REWRITE) {
     // Auth routes
     $container['router']->addRoute('oauth/google', 'oauth', 'google');
     $container['router']->addRoute('oauth/github', 'oauth', 'github');
+    $container['router']->addRoute('oauth/gitlab', 'oauth', 'gitlab');
     $container['router']->addRoute('login', 'auth', 'login');
     $container['router']->addRoute('logout', 'auth', 'logout');
 }

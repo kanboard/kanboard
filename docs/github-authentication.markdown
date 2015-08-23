@@ -11,7 +11,7 @@ How does this work?
 
 The Github authentication in Kanboard uses the [OAuth 2.0](http://oauth.net/2/) protocol, so any user of Kanboard can be linked to a Github account.
 
-That means you can use your Github account to connect to Kanboard.
+That means you can use your Github account to login on Kanboard.
 
 How to link a Github account
 ----------------------------

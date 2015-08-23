@@ -18,6 +18,12 @@
     <p class="form-help"><a href="http://kanboard.net/documentation/github-authentication" target="_blank"><?= t('Help on Github authentication') ?></a></p>
     </div>
 
+    <h3><img src="<?= $this->url->dir() ?>assets/img/gitlab-icon.png"/>&nbsp;<?= t('Gitlab Authentication') ?></h3>
+    <div class="listing">
+    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('oauth', 'gitlab', array(), false, '', true) ?>"/><br/>
+    <p class="form-help"><a href="http://kanboard.net/documentation/gitlab-authentication" target="_blank"><?= t('Help on Gitlab authentication') ?></a></p>
+    </div>
+
     <h3><img src="<?= $this->url->dir() ?>assets/img/mailgun-icon.png"/>&nbsp;<?= t('Mailgun (incoming emails)') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'mailgun', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>

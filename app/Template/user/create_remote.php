@@ -25,6 +25,9 @@
 
             <?= $this->form->label(t('Github Id'), 'github_id') ?>
             <?= $this->form->password('github_id', $values, $errors) ?><br/>
+
+            <?= $this->form->label(t('Gitlab Id'), 'gitlab_id') ?>
+            <?= $this->form->password('gitlab_id', $values, $errors) ?><br/>
         </div>
 
         <div class="form-column">

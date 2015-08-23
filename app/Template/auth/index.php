@@ -15,7 +15,7 @@
         <?= $this->form->label(t('Password'), 'password') ?>
         <?= $this->form->password('password', $values, $errors, array('required')) ?>
 
-        <?php if ($captcha): ?>
+        <?php if (isset($captcha) && $captcha): ?>
             <?= $this->form->label(t('Enter the text below'), 'captcha') ?>
             <img src="<?= $this->url->href('auth', 'captcha') ?>"/>
             <?= $this->form->text('captcha', $values, $errors, array('required')) ?>
@@ -31,14 +31,18 @@
     </form>
     <?php endif ?>
 
-    <?php if (GOOGLE_AUTH || GITHUB_AUTH): ?>
+    <?php if (GOOGLE_AUTH || GITHUB_AUTH || GITLAB_AUTH): ?>
     <ul class="no-bullet">
         <?php if (GOOGLE_AUTH): ?>
             <li><?= $this->url->link(t('Login with my Google Account'), 'oauth', 'google') ?></li>
         <?php endif ?>
 
         <?php if (GITHUB_AUTH): ?>
-            <li><?= $this->url->link(t('Login with my Github Account'), 'oauth', 'gitHub') ?></li>
+            <li><?= $this->url->link(t('Login with my Github Account'), 'oauth', 'github') ?></li>
+        <?php endif ?>
+
+        <?php if (GITLAB_AUTH): ?>
+            <li><?= $this->url->link(t('Login with my Gitlab Account'), 'oauth', 'gitlab') ?></li>
         <?php endif ?>
     </ul>
     <?php endif ?>

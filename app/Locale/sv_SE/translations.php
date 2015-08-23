@@ -1052,4 +1052,12 @@ return array(
     // 'Link type' => '',
     // 'Change task color when using a specific task link' => '',
     // 'Task link creation or modification' => '',
+    // 'Login with my Gitlab Account' => '',
+    // 'Milestone' => '',
+    // 'Gitlab Authentication' => '',
+    // 'Help on Gitlab authentication' => '',
+    // 'Gitlab Id' => '',
+    // 'Gitlab Account' => '',
+    // 'Link my Gitlab Account' => '',
+    // 'Unlink my Gitlab Account' => '',
 );
