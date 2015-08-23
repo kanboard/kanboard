@@ -76,8 +76,8 @@ class Gitlab extends Base
         return $this->user->update(array(
             'id' => $user_id,
             'gitlab_id' => $profile['id'],
-            'email' => $profile['email'] ?: $user['email'],
-            'name' => $profile['name'] ?: $user['name'],
+            'email' => empty($user['email']) ? $profile['email'] : $user['email'],
+            'name' => empty($user['name']) ? $profile['name'] : $user['name'],
         ));
     }
 
