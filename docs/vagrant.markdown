@@ -28,7 +28,7 @@ vagrant box add chef/debian-7.6
 vagrant box add chef/debian-6.0.10
 vagrant box add chef/centos-7.0
 vagrant box add chef/centos-6.5
-vagrant box add chef/freebsd-10.0
+vagrant box add freebsd/FreeBSD-10.2-STABLE
 ```
 
 ### Example with Ubuntu and Sqlite

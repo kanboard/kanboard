@@ -7,7 +7,7 @@ Install from packages
 ```bash
 $ pkg update
 $ pkg upgrade
-$ pkg install apache24 mod_php5 kanboard
+$ pkg install apache24 mod_php56 kanboard
 ```
 
 Enable Apache in your `/etc/rc.conf`:
@@ -29,11 +29,19 @@ Then start Apache:
 $ service apache24 start
 ```
 
+Add symlink to Kanboard folder into your Apache docroot:
+
+```bash
+cd /usr/local/www/apache24/data
+ln -s /usr/local/www/kanboard
+```
+
 Go to http://your.server.domain.tld/kanboard and enjoy!
 
-*Note*:
-If you want to use additional features like LDAP integration etc.
+*Notes*:
+- If you want to use additional features like LDAP integration etc.
 please install proper PHP module using pkg.
+- You may have to adjust the permissions of the folder data
 
 Installing from ports
 ---------------------

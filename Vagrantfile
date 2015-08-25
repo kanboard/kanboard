@@ -113,8 +113,9 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "freebsd10" do |m|
-    m.vm.box = "chef/freebsd-10.0"
-    m.vm.synced_folder ".", "/usr/local/www/apache24/data", type: "rsync", owner: "www", group: "www"
+    m.vm.box = "freebsd/FreeBSD-10.2-STABLE"
+    m.vm.base_mac = "080027D14C66"
+    m.ssh.shell = "sh"
   end
 
   config.vm.network :forwarded_port, guest: 80, host: 8001
