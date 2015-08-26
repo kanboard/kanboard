@@ -228,7 +228,7 @@ class File extends Base
 
                 if ($error == UPLOAD_ERR_OK && $_FILES[$form_name]['size'][$key] > 0) {
 
-                    $original_filename = basename($_FILES[$form_name]['name'][$key]);
+                    $original_filename = $_FILES[$form_name]['name'][$key];
                     $uploaded_filename = $_FILES[$form_name]['tmp_name'][$key];
                     $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
 

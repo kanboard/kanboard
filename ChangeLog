@@ -40,6 +40,7 @@ Bug fixes:
 * Fix permission issue when changing the url manually
 * Fix bug task estimate is reseted when using subtask timer
 * Fix screenshot feature with Firefox 40
+* Fix bug when uploading files with cyrilic characters
 
 Version 1.0.17
 --------------
