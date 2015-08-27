@@ -17,6 +17,7 @@
     display: inline;
 }
 
+.menu-inline li.active a,
 .views li.active a {
     font-weight: bold;
     color: #000;

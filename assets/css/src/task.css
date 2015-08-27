@@ -301,3 +301,8 @@ span.task-board-date-overdue {
 .task-show-start-link:focus {
     color: red;
 }
+
+.flag-milestone {
+    color: green;
+}
+

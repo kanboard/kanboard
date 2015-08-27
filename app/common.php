@@ -113,18 +113,15 @@ if (ENABLE_URL_REWRITE) {
     // Board routes
     $container['router']->addRoute('board/:project_id', 'board', 'show', array('project_id'));
     $container['router']->addRoute('b/:project_id', 'board', 'show', array('project_id'));
-    $container['router']->addRoute('board/:project_id/filter/:search', 'board', 'show', array('project_id', 'search'));
     $container['router']->addRoute('public/board/:token', 'board', 'readonly', array('token'));
 
     // Calendar routes
     $container['router']->addRoute('calendar/:project_id', 'calendar', 'show', array('project_id'));
     $container['router']->addRoute('c/:project_id', 'calendar', 'show', array('project_id'));
-    $container['router']->addRoute('calendar/:project_id/:search', 'calendar', 'show', array('project_id', 'search'));
 
     // Listing routes
     $container['router']->addRoute('list/:project_id', 'listing', 'show', array('project_id'));
     $container['router']->addRoute('l/:project_id', 'listing', 'show', array('project_id'));
-    $container['router']->addRoute('list/:project_id/:search', 'listing', 'show', array('project_id', 'search'));
 
     // Gantt routes
     $container['router']->addRoute('gantt/:project_id', 'gantt', 'project', array('project_id'));

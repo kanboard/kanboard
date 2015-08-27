@@ -32,6 +32,8 @@ Search.prototype.listen = function() {
 };
 
 Search.prototype.keyboardShortcuts = function() {
+    var self = this;
+
     // Switch view mode for projects: go to the board
     Mousetrap.bind("v b", function(e) {
         var link = $(".view-board");
@@ -59,6 +61,15 @@ Search.prototype.keyboardShortcuts = function() {
         }
     });
 
+    // Switch view mode for projects: go to the gantt chart
+    Mousetrap.bind("v g", function(e) {
+        var link = $(".view-gantt");
+
+        if (link.length) {
+            window.location = link.attr('href');
+        }
+    });
+
     // Focus to the search field
     Mousetrap.bind("f", function(e) {
         e.preventDefault();
@@ -66,6 +77,19 @@ Search.prototype.keyboardShortcuts = function() {
 
         if (input) {
             input.focus();
+        }
+    });
+
+    // Reset to the search field
+    Mousetrap.bind("r", function(e) {
+        e.preventDefault();
+        $("#form-search").val("status:open");
+
+        if ($('#board').length) {
+            self.app.board.reloadFilters("status:open");
+        }
+        else {
+            $("form.search").submit();
         }
     });
 };

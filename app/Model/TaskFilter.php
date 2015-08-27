@@ -87,38 +87,6 @@ class TaskFilter extends Base
     }
 
     /**
-     * Prepare filter for Gantt chart
-     *
-     * @access public
-     * @return TaskFilter
-     */
-    public function gantt()
-    {
-        $this->query = $this->db->table(Task::TABLE);
-        $this->query->join(Board::TABLE, 'id', 'column_id', Task::TABLE);
-        $this->query->join(User::TABLE, 'id', 'owner_id', Task::TABLE);
-
-        $this->query->columns(
-            Task::TABLE.'.id',
-            Task::TABLE.'.title',
-            Task::TABLE.'.project_id',
-            Task::TABLE.'.column_id',
-            Task::TABLE.'.color_id',
-            Task::TABLE.'.date_started',
-            Task::TABLE.'.date_due',
-            Task::TABLE.'.date_creation',
-            Task::TABLE.'.is_active',
-            Task::TABLE.'.position',
-            Board::TABLE.'.position AS column_position',
-            Board::TABLE.'.title AS column_title',
-            User::TABLE.'.name AS assignee_name',
-            User::TABLE.'.username AS assignee_username'
-        );
-
-        return $this;
-    }
-
-    /**
      * Create a new query
      *
      * @access public
@@ -739,7 +707,7 @@ class TaskFilter extends Base
                     (int) date('n', $end),
                     (int) date('j', $end),
                 ),
-                'column_title' => $task['column_title'],
+                'column_title' => $task['column_name'],
                 'assignee' => $task['assignee_name'] ?: $task['assignee_username'],
                 'progress' => $this->task->getProgress($task, $columns[$task['project_id']]).'%',
                 'link' => $this->helper->url->href('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])),

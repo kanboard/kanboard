@@ -1,22 +1,12 @@
 <section id="main">
-    <div class="page-header">
+    <?= $this->render('project/filters', array(
+        'project' => $project,
+        'filters' => $filters,
+        'users_list' => $users_list,
+    )) ?>
+
+    <div class="menu-inline">
         <ul>
-            <li>
-            <span class="dropdown">
-                <span>
-                    <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
-                    <ul>
-                        <?= $this->render('project/dropdown', array('project' => $project)) ?>
-                    </ul>
-                </span>
-            </span>
-            </li>
-            <li>
-                <i class="fa fa-th fa-fw"></i>
-                <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
-            </li>
-        </ul>
-        <ul class="views toolbar">
             <li <?= $sorting === 'board' ? 'class="active"' : '' ?>>
                 <i class="fa fa-sort-numeric-asc fa-fw"></i>
                 <?= $this->url->link(t('Sort by position'), 'gantt', 'project', array('project_id' => $project['id'], 'sorting' => 'board')) ?>

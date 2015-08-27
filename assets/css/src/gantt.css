@@ -30,6 +30,7 @@ div.ganttview-hzheader-month {
     height: 20px;
     border-right: 1px solid #d0d0d0;
     line-height: 20px;
+    overflow: hidden;
 }
 
 div.ganttview-hzheader-day {

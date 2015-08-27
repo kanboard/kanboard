@@ -66,7 +66,7 @@
 
     <?php if ($task['is_milestone'] == 1): ?>
         <span title="<?= t('Milestone') ?>">
-            <i class="fa fa-flag"></i>
+            <i class="fa fa-flag flag-milestone"></i>
         </span>
     <?php endif ?>
 </div>

@@ -56,23 +56,21 @@ class Gantt extends Base
      */
     public function project()
     {
-        $project = $this->getProject();
+        $params = $this->getProjectFilters('gantt', 'project');
+        $filter = $this->taskFilter->search($params['filters']['search'])->filterByProject($params['project']['id']);
         $sorting = $this->request->getStringParam('sorting', 'board');
-        $filter = $this->taskFilter->gantt()->filterByProject($project['id']);
 
         if ($sorting === 'date') {
-            $filter->query->asc(TaskModel::TABLE.'.date_started')->asc(TaskModel::TABLE.'.date_creation');
+            $filter->getQuery()->asc(TaskModel::TABLE.'.date_started')->asc(TaskModel::TABLE.'.date_creation');
         }
         else {
-            $filter->query->asc('column_position')->asc(TaskModel::TABLE.'.position');
+            $filter->getQuery()->asc('column_position')->asc(TaskModel::TABLE.'.position');
         }
 
-        $this->response->html($this->template->layout('gantt/project', array(
+        $this->response->html($this->template->layout('gantt/project', $params + array(
+            'users_list' => $this->projectPermission->getMemberList($params['project']['id'], false),
             'sorting' => $sorting,
             'tasks' => $filter->toGanttBars(),
-            'project' => $project,
-            'title' => t('Gantt chart for %s', $project['name']),
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
         )));
     }
 

@@ -38,6 +38,12 @@
             <i class="fa fa-list fa-fw"></i>
             <?= $this->url->link(t('List'), 'listing', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-listing', t('Keyboard shortcut: "%s"', 'v l')) ?>
         </li>
+        <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
+        <li <?= $filters['controller'] === 'gantt' ? 'class="active"' : '' ?>>
+            <i class="fa fa-sliders fa-fw"></i>
+            <?= $this->url->link(t('Gantt'), 'gantt', 'project', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-gantt', t('Keyboard shortcut: "%s"', 'v g')) ?>
+        </li>
+        <?php endif ?>
     </ul>
     <form method="get" action="<?= $this->url->dir() ?>" class="search">
         <?= $this->form->hidden('controller', $filters) ?>
