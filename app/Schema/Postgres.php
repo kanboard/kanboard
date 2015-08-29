@@ -15,8 +15,8 @@ function version_65($pdo)
 
 function version_64($pdo)
 {
-    $pdo->exec("ALTER TABLE projects ADD COLUMN start_date CHAR(10) DEFAULT ''");
-    $pdo->exec("ALTER TABLE projects ADD COLUMN end_date CHAR(10) DEFAULT ''");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN start_date VARCHAR(10) DEFAULT ''");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN end_date VARCHAR(10) DEFAULT ''");
 }
 
 function version_63($pdo)

@@ -14,6 +14,20 @@ use Model\Swimlane;
 
 class TaskFilterTest extends Base
 {
+    public function testGetGanttbar()
+    {
+        $dp = new DateParser($this->container);
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1')));
+
+        $this->assertNotEmpty($tf->search('status:open')->toGanttBars());
+        $this->assertNotEmpty($p->getGanttBars(array(1)));
+    }
+
     public function testIcalEventsWithCreatorAndDueDate()
     {
         $dp = new DateParser($this->container);

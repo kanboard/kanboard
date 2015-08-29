@@ -127,6 +127,7 @@ class TaskFinder extends Base
                 Category::TABLE.'.name AS category_name',
                 Category::TABLE.'.description AS category_description',
                 Board::TABLE.'.title AS column_name',
+                Board::TABLE.'.position AS column_position',
                 Swimlane::TABLE.'.name AS swimlane_name',
                 Project::TABLE.'.default_swimlane',
                 Project::TABLE.'.name AS project_name'
