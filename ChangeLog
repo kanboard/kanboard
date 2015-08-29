@@ -22,7 +22,6 @@ New features:
 
 Improvements:
 
-* Add delay of 1.5s for draggable items on touch devices
 * Improve file attachments tooltip on the board
 * Adjust automatically the height of the placeholder during drag and drop
 * Show all tasks when using no search criteria

@@ -113,7 +113,7 @@ Board.prototype.dragAndDrop = function() {
     var self = this;
     $(".board-task-list").sortable({
         forcePlaceholderSize: true,
-        delay: $.support.touch ? 1500 : 300,
+        delay: 300,
         distance: 5,
         connectWith: ".board-task-list",
         placeholder: "draggable-placeholder",

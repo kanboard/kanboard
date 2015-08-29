@@ -268,7 +268,7 @@ Gantt.prototype.listenForBlockResize = function(startDate) {
     jQuery("div.ganttview-block", this.options.container).resizable({
         grid: this.options.cellWidth,
         handles: "e,w",
-        delay: $.support.touch ? 1500 : 300,
+        delay: 300,
         stop: function() {
             var block = jQuery(this);
             self.updateDataAndPosition(block, startDate);
@@ -283,7 +283,7 @@ Gantt.prototype.listenForBlockMove = function(startDate) {
 
     jQuery("div.ganttview-block", this.options.container).draggable({
         axis: "x",
-        delay: $.support.touch ? 1500 : 300,
+        delay: 300,
         grid: [this.options.cellWidth, this.options.cellWidth],
         stop: function() {
             var block = jQuery(this);
