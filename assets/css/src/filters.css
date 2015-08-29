@@ -62,3 +62,7 @@ form.search {
 div.search {
     margin-bottom: 20px;
 }
+
+.filter-dropdowns {
+    display: inline-block;
+}

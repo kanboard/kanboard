@@ -113,12 +113,13 @@ Board.prototype.dragAndDrop = function() {
     var self = this;
     $(".board-task-list").sortable({
         forcePlaceholderSize: true,
-        delay: 300,
+        delay: $.support.touch ? 1500 : 300,
         distance: 5,
         connectWith: ".board-task-list",
         placeholder: "draggable-placeholder",
         items: ".draggable-item",
         stop: function(event, ui) {
+            ui.item.removeClass("draggable-item-selected");
             self.save(
                 ui.item.attr('data-task-id'),
                 ui.item.parent().attr("data-column-id"),
@@ -127,6 +128,7 @@ Board.prototype.dragAndDrop = function() {
             );
         },
         start: function(event, ui) {
+            ui.item.addClass("draggable-item-selected");
             ui.placeholder.height(ui.item.height());
         }
     });
@@ -225,7 +227,6 @@ Board.prototype.hideColumn = function(columnId) {
 
     $(".board-column-" + columnId + " .board-rotation").each(function() {
         var position = $(".board-swimlane").position();
-        // $(".board-column-task-collapsed").height($(window).height() - position.top);
         $(this).css("width", $(".board-column-" + columnId + "").height());
     });
 

@@ -143,3 +143,7 @@ a.board-swimlane-toggle {
     height: 70px;
     margin-bottom: 10px;
 }
+
+div.draggable-item-selected {
+    border: 1px solid #000;
+}

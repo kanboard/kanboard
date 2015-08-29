@@ -1,4 +1,14 @@
-/* responsive design */
+@media only screen and (max-width: 1080px) {
+    div.filter-dropdowns .filters {
+        margin-left: 0;
+    }
+
+    div.filter-dropdowns {
+        display: block;
+        margin-top: 5px;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
 
     li.hide-tablet,
