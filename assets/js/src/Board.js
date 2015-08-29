@@ -111,7 +111,7 @@ Board.prototype.resizeColumnHeight = function() {
 
 Board.prototype.dragAndDrop = function() {
     var self = this;
-    $(".board-task-list").sortable({
+    var params = {
         forcePlaceholderSize: true,
         delay: 300,
         distance: 5,
@@ -131,7 +131,14 @@ Board.prototype.dragAndDrop = function() {
             ui.item.addClass("draggable-item-selected");
             ui.placeholder.height(ui.item.height());
         }
-    });
+    };
+
+    if ($.support.touch) {
+        $(".task-board-sort-handle").css("display", "inline");
+        params["handle"] = ".task-board-sort-handle";
+    }
+
+    $(".board-task-list").sortable(params);
 };
 
 Board.prototype.listen = function() {

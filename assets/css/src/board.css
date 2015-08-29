@@ -147,3 +147,8 @@ a.board-swimlane-toggle {
 div.draggable-item-selected {
     border: 1px solid #000;
 }
+
+.task-board-sort-handle {
+    float: left;
+    padding-right: 5px;
+}
