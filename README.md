@@ -1,14 +1,12 @@
 Kanboard
 ========
 
-Kanboard is a simple visual task board web application.
+Kanboard is a project management software that use the Kanban methodology.
 
 Official website: <http://kanboard.net>
 
-- Inspired by the [Kanban methodology](http://en.wikipedia.org/wiki/Kanban)
 - Get a visual and clear overview of your project
 - Multiple boards with the ability to drag and drop tasks
-- Minimalist software, focus only on essential features (Less is more)
 - Open source and self-hosted
 - Super simple installation
 - Translated in 21 languages

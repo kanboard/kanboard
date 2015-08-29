@@ -6,6 +6,7 @@
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="robots" content="noindex,nofollow">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="referrer" content="no-referrer">
 
         <?php if (isset($board_public_refresh_interval)): ?>
             <meta http-equiv="refresh" content="<?= $board_public_refresh_interval ?>">

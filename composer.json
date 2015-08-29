@@ -10,7 +10,7 @@
         "fguillot/json-rpc" : "1.0.1",
         "fguillot/picodb" : "1.0.1",
         "fguillot/simpleLogger" : "0.0.2",
-        "fguillot/simple-validator" : "0.0.3",
+        "fguillot/simple-validator" : "1.0.0",
         "nickcernis/html-to-markdown" : "2.2.1",
         "pimple/pimple" : "~3.0",
         "swiftmailer/swiftmailer" : "@stable",

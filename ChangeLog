@@ -30,6 +30,7 @@ Improvements:
 * Enable support for Github Enterprise when using Github Authentication
 * Update iCalendar library to display organizer name
 * Improve sidebar menus
+* Add no referrer policy in meta tags
 * Run automated unit tests with Sqlite/Mysql/Postgres on Travis-ci
 * Add Makefile and remove the scripts directory
 
