@@ -8,7 +8,7 @@ A project can have two kinds of people: **project managers** and **project membe
 
 When you create a new project, you are automatically assigned as a project manager.
 
-Kanboard administrators can access to everything but they are not necessary project members or managers. Those permissions are defined at the project level.
+Kanboard administrators can access to everything but they are not necessary project members or managers. **Those permissions are defined at the project level**.
 
 Permissions for each role
 -------------------------

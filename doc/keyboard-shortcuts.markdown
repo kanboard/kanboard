@@ -1,12 +1,15 @@
 Keyboard shortcuts
 ==================
 
-Board/Calendar/List view
-------------------------
+Keyboard shortcuts availability depends of the page you are presently.
 
-- Switch to the board view = **v b**
+Project views (Board, Calendar, List, Gantt)
+--------------------------------------------
+
+- Switch to the board view = **v b** (press on **v** then **b**)
 - Switch to the calendar view = **v c**
 - Switch to the list view = **v l**
+- Switch to the Gantt view = **v g**
 
 Board view
 ----------
@@ -19,6 +22,7 @@ Application
 -----------
 
 - Open board switcher = **b**
-- Go to the search/filter box = **f**
+- Go to the search box = **f**
+- Reset the search box = **r**
 - Close dialog box = **ESC**
 - Submit a form = **CTRL+ENTER** or **⌘+ENTER**

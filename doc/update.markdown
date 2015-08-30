@@ -6,7 +6,7 @@ Update
 From the archive (stable version)
 ---------------------------------
 
-1. Close your session (logout)
+1. Close all sessions (logout)
 2. Rename your actual Kanboard directory (to keep a backup)
 3. Uncompress the new archive and copy your `data` directory to the newly uncompressed directory.
 4. Copy your custom `config.php` (if you created one) to the root of the newly uncompressed directory.
@@ -18,7 +18,7 @@ From the archive (stable version)
 From the repository (development version)
 -----------------------------------------
 
-1. Close your session (logout)
+1. Close all sessions
 2. `git pull`
 3. `composer install`
 3. Login and check if everything is ok

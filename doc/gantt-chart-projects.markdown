@@ -6,6 +6,7 @@ The goal of this Gantt chart is to display an overview of all projects based on 
 - This Gantt chart is available in the project management section
 - Only project administrators and administrators can access to this section
 - Project administrators will see only projects where they are members
+- Private projects are not shown on this chart
 
 ![Gantt Chart for all projects](http://kanboard.net/screenshots/documentation/gantt-chart-all-projects.png)
 

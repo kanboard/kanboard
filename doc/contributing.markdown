@@ -57,7 +57,7 @@ Pull-requests are always welcome, however to be accepted you have to follow thos
 - The same apply for the user interface, **simplicity and efficiency**.
 - Send only one pull-request per feature or bug fix, your patch will be merged into one single commit in the master branch.
 - Make sure the [unit tests pass](tests.markdown).
-- Respect the [coding standards](coding-standards.makrdown).
+- Respect the [coding standards](coding-standards.markdown).
 - Write maintainable code, avoid code duplication, use PHP good practices.
 
 In any case, if you are not sure about something open a new ticket.

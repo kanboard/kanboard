@@ -27,11 +27,12 @@ The list contains all supported timezones by your web server.
 
 Input format used for date fields, by example the due date for tasks.
 
-Kanboard offer 3 different choices:
+Kanboard offer 4 different formats:
 
 - DD/MM/YYYY
 - MM/DD/YYYY (default)
 - YYYY/MM/DD
+- MM.DD.YYYY
 
 The [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format is always accepted (YYYY-MM-DD or YYYY_MM_DD).
 

@@ -69,7 +69,7 @@
     background: #fefefe;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 1.0em;
+    font-size: 1.1em;
     color: #555;
 }
 
@@ -88,4 +88,8 @@
     text-decoration: none;
     border-bottom: 1px solid #ccc;
     margin-bottom: 25px;
+}
+
+.documentation li {
+    line-height: 30px;
 }

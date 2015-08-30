@@ -1,7 +1,7 @@
 Horizontal scrolling and compact mode
 =====================================
 
-When the board can't fit on your screen, an horizontal scroll bar will appear at the bottom.
+When the board cannot fit on your screen, an horizontal scroll bar will appear at the bottom.
 
 However, it's possible to switch to the compact the view to display all columns in your screen.
 

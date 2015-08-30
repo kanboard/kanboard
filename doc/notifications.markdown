@@ -9,7 +9,7 @@ Kanboard is able to send notifications through several channels:
 - Slack
 
 Actually, Jabber/Hipchat/Slack notifications are sent to a room or group channel because they are configured at the project level.
-However, email notifications are sent to an individual.
+However, email notifications are sent to an individual person.
 
 User notifications
 ------------------

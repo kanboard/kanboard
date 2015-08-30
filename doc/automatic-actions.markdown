@@ -1,7 +1,7 @@
 Automatic Actions
 =================
 
-To minimize the user interaction, Kanboard support automatic actions.
+To minimize the user interaction, Kanboard support automated actions.
 
 Each automatic action is defined like that:
 
@@ -9,7 +9,7 @@ Each automatic action is defined like that:
 - An action linked to this event
 - Eventually there is some parameters to define
 
-Each project can have a different set of automatic actions, the configuration panel is located on the project listing page, just click on the link **Automatic actions**.
+Each project have a different set of automatic actions, the configuration panel is located on the project listing page, just click on the link **Automatic actions**.
 
 Add a new action
 ----------------
