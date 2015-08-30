@@ -169,6 +169,7 @@ class DateParser extends Base
             'm/d/Y' => date('m/d/Y'),
             'd/m/Y' => date('d/m/Y'),
             'Y/m/d' => date('Y/m/d'),
+            'd.m.Y' => date('d.m.Y'),
         );
     }
 
