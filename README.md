@@ -34,7 +34,7 @@ Authors
 Documentation
 -------------
 
-- [Read the documentation](docs/index.markdown)
+- [Read the documentation](doc/index.markdown)
 
 Related projects
 ----------------

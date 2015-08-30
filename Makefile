@@ -54,7 +54,6 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard/data/*
 	@ rm -rf ${BUILD_DIR}/kanboard/.git*
 	@ rm -rf ${BUILD_DIR}/kanboard/tests
-	@ rm -rf ${BUILD_DIR}/kanboard/docs
 	@ rm -rf ${BUILD_DIR}/kanboard/Makefile
 	@ rm -rf ${BUILD_DIR}/kanboard/Vagrantfile
 	@ rm -rf ${BUILD_DIR}/kanboard/Dockerfile

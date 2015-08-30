@@ -12,8 +12,7 @@
         <li><a href="#" class="filter-helper" data-filter="status:open assignee:nobody"><?= t('Not assigned') ?></a></li>
         <li><a href="#" class="filter-helper" data-filter="status:open category:none"><?= t('No category') ?></a></li>
         <li>
-            <i class="fa fa-external-link"></i>
-            <a href="http://kanboard.net/documentation/search" target="_blank"><?= t('View advanced search syntax') ?></a>
+            <?= $this->url->doc(t('View advanced search syntax'), 'search') ?>
         </li>
     </ul>
 </div>

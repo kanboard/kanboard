@@ -9,37 +9,37 @@
     <h3><i class="fa fa-google"></i> <?= t('Google Authentication') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('oauth', 'google', array(), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/google-authentication" target="_blank"><?= t('Help on Google authentication') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Google authentication'), 'google-authentication') ?></p>
     </div>
 
     <h3><i class="fa fa-github"></i> <?= t('Github Authentication') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('oauth', 'github', array(), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/github-authentication" target="_blank"><?= t('Help on Github authentication') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Github authentication'), 'github-authentication') ?></p>
     </div>
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/gitlab-icon.png"/>&nbsp;<?= t('Gitlab Authentication') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('oauth', 'gitlab', array(), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/gitlab-authentication" target="_blank"><?= t('Help on Gitlab authentication') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Gitlab authentication'), 'gitlab-authentication') ?></p>
     </div>
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/mailgun-icon.png"/>&nbsp;<?= t('Mailgun (incoming emails)') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'mailgun', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/mailgun" target="_blank"><?= t('Help on Mailgun integration') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Mailgun integration'), 'mailgun') ?></p>
     </div>
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/sendgrid-icon.png"/>&nbsp;<?= t('Sendgrid (incoming emails)') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'sendgrid', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/sendgrid" target="_blank"><?= t('Help on Sendgrid integration') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Sendgrid integration'), 'sendgrid') ?></p>
     </div>
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/postmark-icon.png"/>&nbsp;<?= t('Postmark (incoming emails)') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'postmark', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/postmark" target="_blank"><?= t('Help on Postmark integration') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Postmark integration'), 'postmark') ?></p>
     </div>
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/gravatar-icon.png"/>&nbsp;<?= t('Gravatar') ?></h3>
@@ -70,7 +70,7 @@
         <?= $this->form->label(t('Multi-user chat room'), 'integration_jabber_room') ?>
         <?= $this->form->text('integration_jabber_room', $values, $errors, array('placeholder="myroom@conference.example.com"')) ?>
 
-        <p class="form-help"><a href="http://kanboard.net/documentation/jabber" target="_blank"><?= t('Help on Jabber integration') ?></a></p>
+        <p class="form-help"><?= $this->url->doc(t('Help on Jabber integration'), 'jabber') ?></p>
     </div>
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/hipchat-icon.png"/> <?= t('Hipchat') ?></h3>
@@ -86,7 +86,7 @@
         <?= $this->form->label(t('Room notification token'), 'integration_hipchat_room_token') ?>
         <?= $this->form->text('integration_hipchat_room_token', $values, $errors) ?>
 
-        <p class="form-help"><a href="http://kanboard.net/documentation/hipchat" target="_blank"><?= t('Help on Hipchat integration') ?></a></p>
+        <p class="form-help"><?= $this->url->doc(t('Help on Hipchat integration'), 'hipchat') ?></p>
     </div>
 
     <h3><i class="fa fa-slack fa-fw"></i>&nbsp;<?= t('Slack') ?></h3>
@@ -98,7 +98,7 @@
         <?= $this->form->label(t('Channel/Group/User (Optional)'), 'integration_slack_webhook_channel') ?>
         <?= $this->form->text('integration_slack_webhook_channel', $values, $errors) ?>
 
-        <p class="form-help"><a href="http://kanboard.net/documentation/slack" target="_blank"><?= t('Help on Slack integration') ?></a></p>
+        <p class="form-help"><?= $this->url->doc(t('Help on Slack integration'), 'slack') ?></p>
     </div>
 
     <div class="form-actions">

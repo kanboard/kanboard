@@ -17,6 +17,19 @@ class Url extends \Core\Base
     private $directory = '';
 
     /**
+     * Helper to generate a link to the documentation
+     *
+     * @access public
+     * @param  string  $label
+     * @param  string  $file
+     * @return string
+     */
+    public function doc($label, $file)
+    {
+        return $this->link($label, 'doc', 'show', array('file' => $file), false, '', '', true);
+    }
+
+    /**
      * HTML Link tag
      *
      * @access public

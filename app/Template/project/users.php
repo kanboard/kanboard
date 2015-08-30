@@ -77,5 +77,6 @@
     <ul>
         <li><?= t('A project manager can change the settings of the project and have more privileges than a standard user.') ?></li>
         <li><?= t('Don\'t forget that administrators have access to everything.') ?></li>
+        <li><?= $this->url->doc(t('Help with project permissions'), 'project-permissions') ?></li>
     </ul>
 </div>

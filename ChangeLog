@@ -3,6 +3,7 @@ Version 1.0.18 (unreleased)
 
 New features:
 
+* Include documentation in the application
 * Add Gitlab authentication
 * Add users and categories filters on the board
 * Add hide/show columns

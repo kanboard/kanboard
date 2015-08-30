@@ -9,21 +9,21 @@
     <h3><i class="fa fa-github fa-fw"></i>&nbsp;<?= t('Github webhooks') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'github', array('token' => $webhook_token, 'project_id' => $project['id']), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/github-webhooks" target="_blank"><?= t('Help on Github webhooks') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Github webhooks'), 'github-webhooks') ?></p>
     </div>
 
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/gitlab-icon.png"/>&nbsp;<?= t('Gitlab webhooks') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'gitlab', array('token' => $webhook_token, 'project_id' => $project['id']), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/gitlab-webhooks" target="_blank"><?= t('Help on Gitlab webhooks') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Gitlab webhooks'), 'gitlab-webhooks') ?></p>
     </div>
 
 
     <h3><i class="fa fa-bitbucket fa-fw"></i>&nbsp;<?= t('Bitbucket webhooks') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'bitbucket', array('token' => $webhook_token, 'project_id' => $project['id']), false, '', true) ?>"/><br/>
-    <p class="form-help"><a href="http://kanboard.net/documentation/bitbucket-webhooks" target="_blank"><?= t('Help on Bitbucket webhooks') ?></a></p>
+    <p class="form-help"><?= $this->url->doc(t('Help on Bitbucket webhooks'), 'bitbucket-webhooks') ?></p>
     </div>
 
 
@@ -50,7 +50,7 @@
         <?= $this->form->label(t('Multi-user chat room'), 'jabber_room') ?>
         <?= $this->form->text('jabber_room', $values, $errors, array('placeholder="myroom@conference.example.com"')) ?>
 
-        <p class="form-help"><a href="http://kanboard.net/documentation/jabber" target="_blank"><?= t('Help on Jabber integration') ?></a></p>
+        <p class="form-help"><?= $this->url->doc(t('Help on Jabber integration'), 'jabber') ?></p>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
@@ -71,7 +71,7 @@
         <?= $this->form->label(t('Room notification token'), 'hipchat_room_token') ?>
         <?= $this->form->text('hipchat_room_token', $values, $errors) ?>
 
-        <p class="form-help"><a href="http://kanboard.net/documentation/hipchat" target="_blank"><?= t('Help on Hipchat integration') ?></a></p>
+        <p class="form-help"><?= $this->url->doc(t('Help on Hipchat integration'), 'hipchat') ?></a></p>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
@@ -88,7 +88,7 @@
         <?= $this->form->label(t('Channel/Group/User (Optional)'), 'slack_webhook_channel') ?>
         <?= $this->form->text('slack_webhook_channel', $values, $errors) ?>
 
-        <p class="form-help"><a href="http://kanboard.net/documentation/slack" target="_blank"><?= t('Help on Slack integration') ?></a></p>
+        <p class="form-help"><?= $this->url->doc(t('Help on Slack integration'), 'slack') ?></p>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

@@ -1062,4 +1062,11 @@ return array(
     'Gitlab Account' => 'Compte Gitlab',
     'Link my Gitlab Account' => 'Lier mon compte Gitlab',
     'Unlink my Gitlab Account' => 'Ne plus utiliser mon compte Gitlab',
+    'Documentation: %s' => 'Documentation : %s',
+    'Switch to the Gantt chart view' => 'Passer à la vue en diagramme de Gantt',
+    'Reset the search/filter box' => 'Réinitialiser le champ de recherche',
+    'Documentation' => 'Documentation',
+    'Table of contents' => 'Table des matières',
+    'Gantt' => 'Gantt',
+    'Help with project permissions' => 'Aide avec les permissions des projets',
 );

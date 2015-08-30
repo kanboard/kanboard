@@ -1060,4 +1060,11 @@ return array(
     // 'Gitlab Account' => '',
     // 'Link my Gitlab Account' => '',
     // 'Unlink my Gitlab Account' => '',
+    // 'Documentation: %s' => '',
+    // 'Switch to the Gantt chart view' => '',
+    // 'Reset the search/filter box' => '',
+    // 'Documentation' => '',
+    // 'Table of contents' => '',
+    // 'Gantt' => '',
+    // 'Help with project permissions' => '',
 );
