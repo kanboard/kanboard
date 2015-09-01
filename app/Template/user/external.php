@@ -34,7 +34,7 @@
     </p>
 <?php endif ?>
 
-<?php if (GITHUB_AUTH): ?>
+<?php if (GITLAB_AUTH): ?>
     <h3><img src="<?= $this->url->dir() ?>assets/img/gitlab-icon.png"/>&nbsp;<?= t('Gitlab Account') ?></h3>
 
     <p class="listing">
