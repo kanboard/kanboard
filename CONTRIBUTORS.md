@@ -67,6 +67,7 @@ Contributors:
 - [Pavel Roušar](https://github.com/rousarp)
 - [Peller Zoltan](https://github.com/PierP)
 - [Petja Touru](https://github.com/Petja)
+- [Pierre-Alexis de Solminihac](https://github.com/pa-de-solminihac)
 - [Piotr Zęgota](https://github.com/ZegalPL)
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
