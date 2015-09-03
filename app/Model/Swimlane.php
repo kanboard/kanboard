@@ -160,7 +160,7 @@ class Swimlane extends Base
     public function getSwimlanes($project_id)
     {
         $swimlanes = $this->db->table(self::TABLE)
-                              ->columns('id', 'name')
+                              ->columns('id', 'name', 'description')
                               ->eq('project_id', $project_id)
                               ->eq('is_active', self::ACTIVE)
                               ->orderBy('position', 'asc')
@@ -216,32 +216,30 @@ class Swimlane extends Base
      * Add a new swimlane
      *
      * @access public
-     * @param  integer   $project_id
-     * @param  string    $name
+     * @param  array    $values   Form values
      * @return integer|boolean
      */
-    public function create($project_id, $name)
+    public function create($values)
     {
-        return $this->persist(self::TABLE, array(
-            'project_id' => $project_id,
-            'name' => $name,
-            'position' => $this->getLastPosition($project_id),
-        ));
+        if (! $this->project->exists($values['project_id'])) {
+            return 0;
+        }
+        $values['position'] = $this->getLastPosition($values['project_id']);
+        return $this->persist(self::TABLE, $values);
     }
 
     /**
-     * Rename a swimlane
+     * Update a swimlane
      *
      * @access public
-     * @param  integer   $swimlane_id    Swimlane id
-     * @param  string    $name           Swimlane name
+     * @param  array    $values    Form values
      * @return bool
      */
-    public function rename($swimlane_id, $name)
+    public function update(array $values)
     {
         return $this->db->table(self::TABLE)
-                        ->eq('id', $swimlane_id)
-                        ->update(array('name' => $name));
+                        ->eq('id', $values['id'])
+                        ->update($values);
     }
 
     /**

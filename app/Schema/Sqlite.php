@@ -6,7 +6,12 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 81;
+const VERSION = 82;
+
+function version_82($pdo)
+{
+    $pdo->exec("ALTER TABLE swimlanes ADD COLUMN description TEXT");
+}
 
 function version_81($pdo)
 {

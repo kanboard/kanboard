@@ -225,8 +225,8 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
-        $this->assertNotFalse($s->create(1, 'Swimlane #1'));
-        $this->assertNotFalse($s->create(2, 'Swimlane #1'));
+        $this->assertNotFalse($s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertNotFalse($s->create(array('project_id' => 2, 'name' => 'Swimlane #1')));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
@@ -258,9 +258,9 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
-        $this->assertNotFalse($s->create(1, 'Swimlane #1'));
-        $this->assertNotFalse($s->create(2, 'Swimlane #2'));
-
+        $this->assertNotFalse($s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertNotFalse($s->create(array('project_id' => 2, 'name' => 'Swimlane #2')));
+        
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
 
@@ -291,9 +291,9 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
-        $this->assertNotFalse($s->create(1, 'Swimlane #1'));
-        $this->assertNotFalse($s->create(2, 'Swimlane #1'));
-        $this->assertNotFalse($s->create(2, 'Swimlane #2'));
+        $this->assertNotFalse($s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertNotFalse($s->create(array('project_id' => 2, 'name' => 'Swimlane #1')));
+        $this->assertNotFalse($s->create(array('project_id' => 2, 'name' => 'Swimlane #2')));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
@@ -574,8 +574,8 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
-        $this->assertNotFalse($s->create(1, 'Swimlane #1'));
-        $this->assertNotFalse($s->create(2, 'Swimlane #1'));
+        $this->assertNotFalse($s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertNotFalse($s->create(array('project_id' => 2, 'name' => 'Swimlane #1')));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
@@ -607,8 +607,8 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
-        $this->assertNotFalse($s->create(1, 'Swimlane #1'));
-        $this->assertNotFalse($s->create(2, 'Swimlane #2'));
+        $this->assertNotFalse($s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertNotFalse($s->create(array('project_id' => 2, 'name' => 'Swimlane #2')));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));

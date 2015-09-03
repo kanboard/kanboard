@@ -54,8 +54,8 @@ class TaskMovedDateSubscriberTest extends Base
         $now = time();
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $s->create(1, 'S1'));
-        $this->assertEquals(2, $s->create(1, 'S2'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'S1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'S2')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
         $task = $tf->getById(1);
