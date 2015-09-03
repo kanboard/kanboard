@@ -335,8 +335,8 @@ class TaskFilterTest extends Base
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'My project A')));
-        $this->assertEquals(1, $s->create(1, 'Version 1.1'));
-        $this->assertEquals(2, $s->create(1, 'Version 1.2'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Version 1.1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'Version 1.2')));
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task1', 'swimlane_id' => 1)));
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task2', 'swimlane_id' => 2)));
         $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'task3', 'swimlane_id' => 0)));

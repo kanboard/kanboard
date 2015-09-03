@@ -215,9 +215,9 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
 
         // create initial swimlanes
-        $this->assertEquals(1, $s->create(1, 'S1'));
-        $this->assertEquals(2, $s->create(1, 'S2'));
-        $this->assertEquals(3, $s->create(1, 'S3'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'S1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'S2')));
+        $this->assertEquals(3, $s->create(array('project_id' => 1, 'name' => 'S3')));
 
         $default_swimlane1 = $s->getDefault(1);
         $default_swimlane1['default_swimlane'] = 'New Default';
@@ -277,9 +277,9 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
 
         // create initial swimlanes
-        $this->assertEquals(1, $s->create(1, 'S1'));
-        $this->assertEquals(2, $s->create(1, 'S2'));
-        $this->assertEquals(3, $s->create(1, 'S3'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'S1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'S2')));
+        $this->assertEquals(3, $s->create(array('project_id' => 1, 'name' => 'S3')));
 
         $default_swimlane1 = $s->getDefault(1);
         $default_swimlane1['default_swimlane'] = 'New Default';
@@ -323,9 +323,9 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
 
         // create initial swimlanes
-        $this->assertEquals(1, $s->create(1, 'S1'));
-        $this->assertEquals(2, $s->create(1, 'S2'));
-        $this->assertEquals(3, $s->create(1, 'S3'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'S1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'S2')));
+        $this->assertEquals(3, $s->create(array('project_id' => 1, 'name' => 'S3')));
 
         $default_swimlane1 = $s->getDefault(1);
         $default_swimlane1['default_swimlane'] = 'New Default';

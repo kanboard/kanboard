@@ -25,7 +25,7 @@
                     </li>
                 <?php endif ?>
                 <li>
-                    <?= $this->url->link(t('Rename'), 'swimlane', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
+                    <?= $this->url->link(t('Edit'), 'swimlane', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
                 </li>
                 <li>
                     <?php if ($swimlane['is_active']): ?>

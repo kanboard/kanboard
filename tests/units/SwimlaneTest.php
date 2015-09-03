@@ -16,7 +16,7 @@ class SwimlaneTest extends Base
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
 
         $swimlanes = $s->getSwimlanes(1);
         $this->assertNotEmpty($swimlanes);
@@ -37,8 +37,8 @@ class SwimlaneTest extends Base
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
-        $this->assertEquals(2, $s->create(1, 'Swimlane #2'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'Swimlane #2')));
 
         $swimlanes = $s->getList(1);
         $expected = array('Default swimlane', 'Swimlane #1', 'Swimlane #2');
@@ -46,26 +46,26 @@ class SwimlaneTest extends Base
         $this->assertEquals($expected, $swimlanes);
     }
 
-    public function testRename()
+    public function testUpdate()
     {
         $p = new Project($this->container);
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
 
         $swimlane = $s->getById(1);
         $this->assertNotEmpty($swimlane);
         $this->assertEquals('Swimlane #1', $swimlane['name']);
 
-        $this->assertTrue($s->rename(1, 'foobar'));
+        $this->assertTrue($s->update(array('id' => 1, 'name' => 'foobar')));
 
         $swimlane = $s->getById(1);
         $this->assertNotEmpty($swimlane);
         $this->assertEquals('foobar', $swimlane['name']);
     }
 
-    public function testRenameDefaultSwimlane()
+    public function testUpdateDefaultSwimlane()
     {
         $p = new Project($this->container);
         $s = new Swimlane($this->container);
@@ -92,7 +92,7 @@ class SwimlaneTest extends Base
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
 
         $swimlane = $s->getById(1);
         $this->assertNotEmpty($swimlane);
@@ -110,7 +110,7 @@ class SwimlaneTest extends Base
         $this->assertEquals(1, $s->getLastPosition(1));
 
         // Create a new swimlane
-        $this->assertEquals(2, $s->create(1, 'Swimlane #2'));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'Swimlane #2')));
 
         $swimlane = $s->getById(2);
         $this->assertNotEmpty($swimlane);
@@ -134,7 +134,7 @@ class SwimlaneTest extends Base
         $tf = new TaskFinder($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'swimlane_id' => 1)));
 
         $task = $tf->getbyId(1);
@@ -156,9 +156,9 @@ class SwimlaneTest extends Base
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
-        $this->assertEquals(2, $s->create(1, 'Swimlane #2'));
-        $this->assertEquals(3, $s->create(1, 'Swimlane #3'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'Swimlane #2')));
+        $this->assertEquals(3, $s->create(array('project_id' => 1, 'name' => 'Swimlane #3')));
 
         $swimlane = $s->getById(1);
         $this->assertNotEmpty($swimlane);
@@ -216,10 +216,10 @@ class SwimlaneTest extends Base
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
-        $this->assertEquals(2, $s->create(1, 'Swimlane #2'));
-        $this->assertEquals(3, $s->create(1, 'Swimlane #3'));
-
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'Swimlane #2')));
+        $this->assertEquals(3, $s->create(array('project_id' => 1, 'name' => 'Swimlane #3')));
+        
         $swimlane = $s->getById(1);
         $this->assertNotEmpty($swimlane);
         $this->assertEquals(1, $swimlane['is_active']);
@@ -299,10 +299,10 @@ class SwimlaneTest extends Base
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertEquals(1, $s->create(1, 'Swimlane #1'));
-        $this->assertEquals(2, $s->create(1, 'Swimlane #2'));
-        $this->assertEquals(3, $s->create(1, 'Swimlane #3'));
-
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'Swimlane #2')));
+        $this->assertEquals(3, $s->create(array('project_id' => 1, 'name' => 'Swimlane #3')));
+        
         $swimlane = $s->getById(1);
         $this->assertNotEmpty($swimlane);
         $this->assertEquals(1, $swimlane['is_active']);
@@ -383,10 +383,10 @@ class SwimlaneTest extends Base
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
         $this->assertEquals(2, $p->create(array('name' => 'P2')));
-        $this->assertEquals(1, $s->create(1, 'S1'));
-        $this->assertEquals(2, $s->create(1, 'S2'));
-        $this->assertEquals(3, $s->create(1, 'S3'));
-
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'S1')));
+        $this->assertEquals(2, $s->create(array('project_id' => 1, 'name' => 'S2')));
+        $this->assertEquals(3, $s->create(array('project_id' => 1, 'name' => 'S3')));
+        
         $default_swimlane1 = $s->getDefault(1);
         $default_swimlane1['default_swimlane'] = 'New Default';
 

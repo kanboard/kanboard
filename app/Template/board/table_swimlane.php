@@ -65,6 +65,14 @@
 
             <div title="<?= t('Task count') ?>" class="board-column-header-task-count">
                 (<span><?= $swimlane['nb_tasks'] ?></span>)
+
+            <?php if (! empty($swimlane['description'])): ?>
+                <span title="<?= t('Description') ?>" class="tooltip" 
+                data-href="<?= $this->url->href('swimlane', 'description', array('swimlane_id' => $swimlane['id'], 'project_id' => $swimlane['project_id'])) ?>">
+                    <i class="fa fa-file-text-o"></i>
+                </span>
+            <?php endif ?>
+
             </div>
         </th>
     <?php endif ?>
