@@ -4,14 +4,15 @@ function Markdown() {
 Markdown.prototype.showPreview = function(e) {
     e.preventDefault();
 
-    var link = $(this);
-    var nav = $(this).closest("ul");
     var write = $(".write-area");
     var preview = $(".preview-area");
     var textarea = $("textarea");
 
+    $("#markdown-write").parent().removeClass("form-tab-selected");
+    $("#markdown-preview").parent().addClass("form-tab-selected");
+
     var request = $.ajax({
-        url: "?controller=app&action=preview", // TODO: remoe harcoded url
+        url: $("body").data("markdown-preview-url"),
         contentType: "application/json",
         type: "POST",
         processData: false,
@@ -22,9 +23,6 @@ Markdown.prototype.showPreview = function(e) {
     });
 
     request.done(function(data) {
-        nav.find("li").removeClass("form-tab-selected");
-        link.parent().addClass("form-tab-selected");
-
         preview.find(".markdown").html(data)
         preview.css("height", textarea.css("height"));
         preview.css("width", textarea.css("width"));
@@ -37,8 +35,8 @@ Markdown.prototype.showPreview = function(e) {
 Markdown.prototype.showWriter = function(e) {
     e.preventDefault();
 
-    $(this).closest("ul").find("li").removeClass("form-tab-selected")
-    $(this).parent().addClass("form-tab-selected");
+    $("#markdown-write").parent().addClass("form-tab-selected");
+    $("#markdown-preview").parent().removeClass("form-tab-selected");
 
     $(".write-area").show();
     $(".preview-area").hide();
