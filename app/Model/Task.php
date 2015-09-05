@@ -207,10 +207,14 @@ class Task extends Base
      */
     public function getProgressByCost(array $task)
     {
+        if ($task['is_active'] == self::STATUS_CLOSED) {
+            return 100;
+        }
+
         if (intval($task['time_estimated']) === 0) {
             return 0;
         }
 
-        return round(100 * $task['time_spent'] / $task['time_estimated']);
+        return min(100, round(100 * $task['time_spent'] / $task['time_estimated']));
     }
 }
