@@ -59,25 +59,29 @@ class Taskcreation extends Base
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
-        if ($valid) {
-
-            if ($this->taskCreation->create($values)) {
-                $this->session->flash(t('Task created successfully.'));
-
-                if (isset($values['another_task']) && $values['another_task'] == 1) {
-                    unset($values['title']);
-                    unset($values['description']);
-                    $this->response->redirect($this->helper->url->to('taskcreation', 'create', $values));
-                }
-                else {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])));
-                }
-            }
-            else {
-                $this->session->flashError(t('Unable to create your task.'));
-            }
+        if ($valid && $this->taskCreation->create($values)) {
+            $this->session->flash(t('Task created successfully.'));
+            $this->afterSave($project, $values);
+        }
+        else {
+            $this->session->flashError(t('Unable to create your task.'));
         }
 
         $this->create($values, $errors);
+    }
+
+    private function afterSave(array $project, array &$values)
+    {
+        if (isset($values['another_task']) && $values['another_task'] == 1) {
+            unset($values['title']);
+            unset($values['description']);
+
+            if (! $this->request->isAjax()) {
+                $this->response->redirect($this->helper->url->to('taskcreation', 'create', $values));
+            }
+        }
+        else {
+            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])));
+        }
     }
 }

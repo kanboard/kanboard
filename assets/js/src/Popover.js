@@ -15,7 +15,8 @@ Popover.prototype.open = function(link) {
     $.get(link, function(content) {
         $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
         self.router.dispatch();
-        self.app.listen();
+        self.app.refresh();
+        self.afterOpen();
     });
 };
 
@@ -47,4 +48,30 @@ Popover.prototype.listen = function() {
     $(document).on("click", ".close-popover", this.close.bind(this));
     $(document).on("click", "#popover-container", this.close.bind(this));
     $(document).on("click", "#popover-content", function(e) { e.stopPropagation(); });
+};
+
+Popover.prototype.afterOpen = function() {
+    var self = this;
+    var taskForm = $("#task-form");
+
+    if (taskForm) {
+        taskForm.on("submit", function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: taskForm.attr("action"),
+                data: taskForm.serialize(),
+                success: function(data, textStatus, request) {
+                    if (request.getResponseHeader("X-Ajax-Redirect")) {
+                        window.location = request.getResponseHeader("X-Ajax-Redirect");
+                    }
+                    else {
+                        $("#popover-content").html(data);
+                        self.afterOpen();
+                    }
+                }
+            });
+        });
+    }
 };

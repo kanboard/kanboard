@@ -66,7 +66,13 @@ class Response
      */
     public function redirect($url)
     {
-        header('Location: '.$url);
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+            header('X-Ajax-Redirect: '.$url);
+        }
+        else {
+            header('Location: '.$url);
+        }
+
         exit;
     }
 

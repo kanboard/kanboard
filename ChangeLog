@@ -7,6 +7,8 @@ New features:
 
 Improvements:
 
+* Creating another task stay in the popover (no full page refresh anymore)
+
 Bug fixes:
 
 * Fix typo in template that prevent the Gitlab oauth link to be displayed

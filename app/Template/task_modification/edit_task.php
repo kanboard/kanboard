@@ -1,8 +1,7 @@
 <div class="page-header">
     <h2><?= t('Edit a task') ?></h2>
 </div>
-<section id="task-section">
-<form method="post" action="<?= $this->url->href('taskmodification', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+<form id="task-form" method="post" action="<?= $this->url->href('taskmodification', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -63,4 +62,3 @@
         <?php endif ?>
     </div>
 </form>
-</section>

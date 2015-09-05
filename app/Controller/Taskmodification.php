@@ -126,11 +126,13 @@ class Taskmodification extends Base
         );
 
         if ($ajax) {
-            $this->response->html($this->template->render('task_modification/edit_task', $params));
+            $html = $this->template->render('task_modification/edit_task', $params);
         }
         else {
-            $this->response->html($this->taskLayout('task_modification/edit_task', $params));
+            $html = $this->taskLayout('task_modification/edit_task', $params);
         }
+
+        $this->response->html($html);
     }
 
     /**
@@ -145,24 +147,20 @@ class Taskmodification extends Base
 
         list($valid, $errors) = $this->taskValidator->validateModification($values);
 
-        if ($valid) {
+        if ($valid && $this->taskModification->update($values)) {
+            $this->session->flash(t('Task updated successfully.'));
 
-            if ($this->taskModification->update($values)) {
-                $this->session->flash(t('Task updated successfully.'));
-
-                if ($this->request->getIntegerParam('ajax')) {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                }
-                else {
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-                }
+            if ($this->request->isAjax()) {
+                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
             }
             else {
-                $this->session->flashError(t('Unable to update your task.'));
+                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
             }
         }
-
-        $this->edit($values, $errors);
+        else {
+            $this->session->flashError(t('Unable to update your task.'));
+            $this->edit($values, $errors);
+        }
     }
 
     /**

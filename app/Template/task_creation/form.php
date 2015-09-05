@@ -10,8 +10,7 @@
 </div>
 <?php endif ?>
 
-<section id="task-section">
-<form method="post" action="<?= $this->url->href('taskcreation', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
+<form id="task-form" method="post" action="<?= $this->url->href('taskcreation', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -81,4 +80,3 @@
         <?= t('or') ?> <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $values['project_id']), false, 'close-popover') ?>
     </div>
 </form>
-</section>
