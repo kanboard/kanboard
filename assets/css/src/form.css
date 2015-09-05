@@ -153,12 +153,8 @@ input.form-input-large {
 
 .form-column {
     float: left;
-    padding-right: 50px;
-    max-width: 50%;
-}
-
-.form-column:first-child {
-    padding-left: 0;
+    margin-right: 3%;
+    max-width: 47%;
 }
 
 .form-column ul {
