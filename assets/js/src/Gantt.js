@@ -71,7 +71,7 @@ Gantt.prototype.renderVerticalHeader = function() {
             .append("&nbsp;");
 
         if (this.data[i].type == "task") {
-            content.append(jQuery("<a>", {"href": this.data[i].link, "target": "_blank"}).append(this.data[i].title));
+            content.append(jQuery("<a>", {"href": this.data[i].link, "target": "_blank", "title": this.data[i].title}).append(this.data[i].title));
         }
         else {
             content

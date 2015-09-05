@@ -62,7 +62,7 @@ div.ganttview-vtheader-series-name {
     border-top: 1px solid #d0d0d0;
     font-size: 0.9em;
     text-overflow: ellipsis;
-    overflow: auto;
+    overflow: hidden;
     white-space: nowrap;
 }
 
