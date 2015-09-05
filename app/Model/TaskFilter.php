@@ -683,13 +683,8 @@ class TaskFilter extends Base
     public function toGanttBars()
     {
         $bars = array();
-        $columns = array();
 
         foreach ($this->query->findAll() as $task) {
-            if (! isset($column_count[$task['project_id']])) {
-                $columns[$task['project_id']] = $this->board->getColumnsList($task['project_id']);
-            }
-
             $start = $task['date_started'] ?: time();
             $end = $task['date_due'] ?: $start;
 
@@ -709,7 +704,7 @@ class TaskFilter extends Base
                 ),
                 'column_title' => $task['column_name'],
                 'assignee' => $task['assignee_name'] ?: $task['assignee_username'],
-                'progress' => $this->task->getProgress($task, $columns[$task['project_id']]).'%',
+                'progress' => $this->task->getProgressByCost($task) . '%',
                 'link' => $this->helper->url->href('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])),
                 'color' => $this->color->getColorProperties($task['color_id']),
                 'not_defined' => empty($task['date_due']) || empty($task['date_started']),

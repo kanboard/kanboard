@@ -197,4 +197,20 @@ class Task extends Base
 
         return round(($position * 100) / count($columns), 1);
     }
+
+    /**
+     * Get task progress based on time spent / time estimated
+     *
+     * @access public
+     * @param array $task
+     * @return float
+     */
+    public function getProgressByCost(array $task)
+    {
+        if (intval($task['time_estimated']) === 0) {
+            return 0;
+        }
+
+        return round(100 * $task['time_spent'] / $task['time_estimated']);
+    }
 }
