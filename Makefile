@@ -4,7 +4,7 @@ CSS_APP = $(addprefix assets/css/src/, $(addsuffix .css, base links title table 
 CSS_PRINT = $(addprefix assets/css/src/, $(addsuffix .css, print links table board task comment subtask markdown))
 CSS_VENDOR = $(addprefix assets/css/vendor/, $(addsuffix .css, jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min))
 
-JS_APP = $(addprefix assets/js/src/, $(addsuffix .js, Popover Dropdown Tooltip Markdown Sidebar Search App Screenshot Calendar Board Swimlane Gantt TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart BudgetChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart Router))
+JS_APP = $(addprefix assets/js/src/, $(addsuffix .js, Popover Dropdown Tooltip Markdown Sidebar Search App Screenshot Calendar Board Swimlane Gantt Task TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart BudgetChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart Router))
 JS_VENDOR = $(addprefix assets/js/vendor/, $(addsuffix .js, jquery-1.11.1.min jquery-ui.min jquery-ui-timepicker-addon.min jquery.ui.touch-punch.min chosen.jquery.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min))
 JS_LANG = $(addprefix assets/js/vendor/lang/, $(addsuffix .js, da de es fi fr hu it ja nl nb pl pt pt-br ru sv sr th tr zh-cn))
 

@@ -305,3 +305,29 @@ span.task-board-date-overdue {
 .flag-milestone {
     color: green;
 }
+
+/* color picker */
+.color-picker {
+    min-height: 35px;
+}
+
+.color-square {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.color-square:hover {
+    border-style: dotted;
+}
+
+div.color-square-selected {
+    border-width: 2px;
+    width: 28px;
+    height: 28px;
+    box-shadow: 3px 2px 10px 0 rgba(180,180,180,0.9);
+}

@@ -37,7 +37,7 @@
             </ul>
         </div>
 
-        <div class="form-help"><?= $this->url->doc(t('Write your text in Markdown'), 'syntax-guide') ?></div>
+        <?= $this->render('task/color_picker', array('colors_list' => $colors_list, 'values' => $values)) ?>
 
         <?php if (! isset($duplicate)): ?>
             <?= $this->form->checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>
@@ -60,9 +60,6 @@
 
         <?= $this->form->label(t('Column'), 'column_id') ?>
         <?= $this->form->select('column_id', $columns_list, $values, $errors, array('tabindex="6"')) ?><br/>
-
-        <?= $this->form->label(t('Color'), 'color_id') ?>
-        <?= $this->form->select('color_id', $colors_list, $values, $errors, array('tabindex="7"')) ?><br/>
 
         <?= $this->form->label(t('Complexity'), 'score') ?>
         <?= $this->form->number('score', $values, $errors, array('tabindex="8"')) ?><br/>

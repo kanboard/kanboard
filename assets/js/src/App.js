@@ -7,6 +7,7 @@ function App() {
     this.dropdown = new Dropdown();
     this.tooltip = new Tooltip(this);
     this.popover = new Popover(this);
+    this.task = new Task();
     this.keyboardShortcuts();
     this.chosen();
     this.poll();
@@ -34,6 +35,7 @@ App.prototype.listen = function() {
     this.tooltip.listen();
     this.dropdown.listen();
     this.search.listen();
+    this.task.listen();
     this.search.focus();
     this.taskAutoComplete();
     this.datePicker();

@@ -12,7 +12,6 @@
         <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"'), 'form-input-large') ?>
 
         <?= $this->form->label(t('Description'), 'description') ?>
-
         <div class="form-tabs">
             <div class="write-area">
                 <?= $this->form->textarea('description', $values, $errors, array('placeholder="'.t('Leave a description').'"', 'tabindex="2"')) ?>
@@ -29,6 +28,8 @@
                 </li>
             </ul>
         </div>
+
+        <?= $this->render('task/color_picker', array('colors_list' => $colors_list, 'values' => $values)) ?>
     </div>
 
     <div class="form-column">
@@ -43,17 +44,14 @@
             <?= $this->form->select('swimlane_id', $swimlanes_list, $values, $errors, array('tabindex="5"')) ?><br/>
         <?php endif ?>
 
-        <?= $this->form->label(t('Color'), 'color_id') ?>
-        <?= $this->form->select('color_id', $colors_list, $values, $errors, array('tabindex="7"')) ?><br/>
-
         <?= $this->form->label(t('Complexity'), 'score') ?>
-        <?= $this->form->number('score', $values, $errors, array('tabindex="8"')) ?><br/>
+        <?= $this->form->number('score', $values, $errors, array('tabindex="6"')) ?><br/>
 
         <?= $this->form->label(t('Start Date'), 'date_started') ?>
-        <?= $this->form->text('date_started', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="9"'), 'form-date') ?>
+        <?= $this->form->text('date_started', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="7"'), 'form-date') ?>
 
         <?= $this->form->label(t('Due Date'), 'date_due') ?>
-        <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="10"'), 'form-date') ?><br/>
+        <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="8"'), 'form-date') ?><br/>
         <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
     </div>
 

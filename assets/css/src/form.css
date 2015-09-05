@@ -154,6 +154,7 @@ input.form-input-large {
 .form-column {
     float: left;
     padding-right: 50px;
+    max-width: 50%;
 }
 
 .form-column:first-child {
@@ -190,8 +191,9 @@ label + .form-tabs {
     max-width: 800px;
 }
 
-.form-tabs-nav {
+ul.form-tabs-nav {
     margin-bottom: 8px;
+    margin-top: 0;
 }
 
 .form-tabs-nav li {

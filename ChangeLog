@@ -7,6 +7,7 @@ New features:
 
 Improvements:
 
+* Replace color dropdown by color picker in task forms
 * Creating another task stay in the popover (no full page refresh anymore)
 
 Bug fixes:
