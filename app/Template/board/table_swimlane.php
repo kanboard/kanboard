@@ -7,6 +7,20 @@
                     <i class="fa fa-minus-circle hide-icon-swimlane-<?= $swimlane['id'] ?>"></i>
                     <i class="fa fa-plus-circle show-icon-swimlane-<?= $swimlane['id'] ?>" style="display: none"></i>
                 </a>
+
+                <?php if (! empty($swimlane['description'])): ?>
+                    <span
+                        title="<?= t('Description') ?>"
+                        class="tooltip"
+                        data-href="<?= $this->url->href('board', 'swimlane', array('swimlane_id' => $swimlane['id'], 'project_id' => $project['id'])) ?>">
+                        <i class="fa fa-info-circle"></i>
+                    </span>
+                <?php endif ?>
+
+                <span title="<?= t('Task count') ?>" class="board-column-header-task-count swimlane-task-count-<?= $swimlane['id'] ?>">
+                    (<?= $swimlane['nb_tasks'] ?>)
+                </span>
+
                 <span class="board-swimlane-toggle-title show-icon-swimlane-<?= $swimlane['id'] ?>"><?= $this->e($swimlane['name']) ?></span>
            <?php endif ?>
         </th>
@@ -62,18 +76,6 @@
     <?php if (! $hide_swimlane): ?>
         <th class="board-swimlane-title">
             <?= $this->e($swimlane['name']) ?>
-
-            <div title="<?= t('Task count') ?>" class="board-column-header-task-count">
-                (<span><?= $swimlane['nb_tasks'] ?></span>)
-
-            <?php if (! empty($swimlane['description'])): ?>
-                <span title="<?= t('Description') ?>" class="tooltip" 
-                data-href="<?= $this->url->href('swimlane', 'description', array('swimlane_id' => $swimlane['id'], 'project_id' => $swimlane['project_id'])) ?>">
-                    <i class="fa fa-file-text-o"></i>
-                </span>
-            <?php endif ?>
-
-            </div>
         </th>
     <?php endif ?>
 

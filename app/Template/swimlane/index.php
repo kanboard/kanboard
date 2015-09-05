@@ -14,7 +14,7 @@
     <?= $this->form->hidden('project_id', $values) ?>
 
     <?= $this->form->label(t('Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
+    <?= $this->form->text('name', $values, $errors, array('required', 'maxlength="50"')) ?>
 
     <?= $this->form->label(t('Description'), 'description') ?>
 

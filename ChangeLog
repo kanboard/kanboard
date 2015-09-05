@@ -1,3 +1,16 @@
+Version 1.0.19 (unreleased)
+---------------------------
+
+New features:
+
+* Add swimlane description
+
+Improvements:
+
+Bug fixes:
+
+* Fix typo in template that prevent the Gitlab oauth link to be displayed
+
 Version 1.0.18
 --------------
 

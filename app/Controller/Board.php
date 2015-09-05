@@ -321,6 +321,18 @@ class Board extends Base
     }
 
     /**
+     * Display swimlane description in tooltip
+     *
+     * @access public
+     */
+    public function swimlane()
+    {
+        $project = $this->getProject();
+        $swimlane = $this->swimlane->getById($this->request->getIntegerParam('swimlane_id'));
+        $this->response->html($this->template->render('board/tooltip_description', array('task' => $swimlane)));
+    }
+
+    /**
      * Enable collapsed mode
      *
      * @access public

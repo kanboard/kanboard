@@ -1708,6 +1708,7 @@ Response example:
 - Parameters:
     - **swimlane_id** (integer, required)
     - **name** (string, required)
+    - **description** (string, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -1741,6 +1742,7 @@ Response example:
 - Parameters:
     - **project_id** (integer, required)
     - **name** (string, required)
+    - **description** (string, optional)
 - Result on success: **swimlane_id**
 - Result on failure: **false**
 

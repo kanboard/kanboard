@@ -24,6 +24,7 @@ Contributors:
 - [Eskiso](https://github.com/eSkiSo)
 - [Esteban Monge](https://github.com/EstebanMonge)
 - [Fábio Hideki](https://github.com/fabiohxcx)
+- [Fabiano Castro Pereira](https://github.com/fabiano-pereira)
 - [Federico Lazcano](https://github.com/lazki)
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)

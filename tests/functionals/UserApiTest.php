@@ -37,15 +37,15 @@ class UserApi extends PHPUnit_Framework_TestCase
     {
         $this->app = new JsonRPC\Client(API_URL);
         $this->app->authentication('jsonrpc', API_KEY);
-        $this->app->debug = true;
+        // $this->app->debug = true;
 
         $this->admin = new JsonRPC\Client(API_URL);
         $this->admin->authentication('admin', 'admin');
-        $this->admin->debug = true;
+        // $this->admin->debug = true;
 
         $this->user = new JsonRPC\Client(API_URL);
         $this->user->authentication('user', 'password');
-        $this->user->debug = true;
+        // $this->user->debug = true;
     }
 
     public function testCreateProject()

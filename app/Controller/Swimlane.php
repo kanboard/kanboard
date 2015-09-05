@@ -58,6 +58,7 @@ class Swimlane extends Base
      */
     public function save()
     {
+        $project = $this->getProject();
         $values = $this->request->getValues();
         list($valid, $errors) = $this->swimlane->validateCreation($values);
 
@@ -65,7 +66,7 @@ class Swimlane extends Base
 
             if ($this->swimlane->create($values)) {
                 $this->session->flash(t('Your swimlane have been created successfully.'));
-                $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $values['project_id'])));
+                $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project['id'])));
             }
             else {
                 $this->session->flashError(t('Unable to create your swimlane.'));
@@ -249,16 +250,5 @@ class Swimlane extends Base
 
         $this->swimlane->moveDown($project['id'], $swimlane_id);
         $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project['id'])));
-    }
-
-    /**
-     * Display swimlane description
-     *
-     * @access public
-     */
-    public function description()
-    {
-        $swimlane = $this->swimlane->getById($this->request->getIntegerParam('swimlane_id'));
-        $this->response->html($this->template->render('board/tooltip_description', array('task' => $swimlane)));
     }
 }
