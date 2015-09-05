@@ -70,7 +70,7 @@ class BoardTest extends Base
         $s = new Swimlane($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $s->create(1, 'test 1'));
+        $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'test 1')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 3)));
         $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
