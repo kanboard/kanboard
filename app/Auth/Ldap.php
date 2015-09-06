@@ -98,7 +98,7 @@ class Ldap extends Base
     {
         $ldap = $this->connect();
 
-        if (is_resource($ldap) && $this->bind($ldap, $username, $password)) {
+        if ($ldap !== false && $this->bind($ldap, $username, $password)) {
             return $this->search($ldap, $username, $password);
         }
 
@@ -108,13 +108,14 @@ class Ldap extends Base
     /**
      * LDAP connection
      *
-     * @access private
-     * @return resource    $ldap    LDAP connection
+     * @access public
+     * @return resource|boolean
      */
-    private function connect()
+    public function connect()
     {
         if (! function_exists('ldap_connect')) {
-            die('The PHP LDAP extension is required');
+            $this->logger->error('The PHP LDAP extension is required');
+            return false;
         }
 
         // Skip SSL certificate verification
@@ -124,8 +125,9 @@ class Ldap extends Base
 
         $ldap = ldap_connect(LDAP_SERVER, LDAP_PORT);
 
-        if (! is_resource($ldap)) {
-            die('Unable to connect to the LDAP server: "'.LDAP_SERVER.'"');
+        if ($ldap === false) {
+            $this->logger->error('Unable to connect to the LDAP server: "'.LDAP_SERVER.'"');
+            return false;
         }
 
         ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
@@ -134,7 +136,8 @@ class Ldap extends Base
         ldap_set_option($ldap, LDAP_OPT_TIMELIMIT, 1);
 
         if (LDAP_START_TLS && ! @ldap_start_tls($ldap)) {
-            die('Unable to use ldap_start_tls()');
+            $this->logger->error('Unable to use ldap_start_tls()');
+            return false;
         }
 
         return $ldap;
@@ -143,21 +146,24 @@ class Ldap extends Base
     /**
      * LDAP bind
      *
-     * @access private
-     * @param  resource  $ldap      LDAP connection
-     * @param  string    $username  Username
-     * @param  string    $password  Password
+     * @access public
+     * @param  resource  $ldap
+     * @param  string    $username
+     * @param  string    $password
+     * @param  string    $ldap_type
+     * @param  string    $ldap_username
+     * @param  string    $ldap_password
      * @return boolean
      */
-    private function bind($ldap, $username, $password)
+    public function bind($ldap, $username, $password, $ldap_type = LDAP_BIND_TYPE, $ldap_username = LDAP_USERNAME, $ldap_password = LDAP_PASSWORD)
     {
-        if (LDAP_BIND_TYPE === 'user') {
-            $ldap_username = sprintf(LDAP_USERNAME, $username);
+        if ($ldap_type === 'user') {
+            $ldap_username = sprintf($ldap_username, $username);
             $ldap_password = $password;
         }
-        else if (LDAP_BIND_TYPE === 'proxy') {
-            $ldap_username = LDAP_USERNAME;
-            $ldap_password = LDAP_PASSWORD;
+        else if ($ldap_type === 'proxy') {
+            $ldap_username = $ldap_username;
+            $ldap_password = $ldap_password;
         }
         else {
             $ldap_username = null;
@@ -191,13 +197,12 @@ class Ldap extends Base
         $info = ldap_get_entries($ldap, $sr);
 
         // User not found
-        if (count($info) == 0 || $info['count'] == 0) {
+        if (count($info) === 0 || $info['count'] == 0) {
             return false;
         }
 
         // We got our user
         if (@ldap_bind($ldap, $info[0]['dn'], $password)) {
-
             return array(
                 'username' => $username,
                 'name' => $this->getFromInfo($info, LDAP_ACCOUNT_FULLNAME),

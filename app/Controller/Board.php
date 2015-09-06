@@ -327,7 +327,7 @@ class Board extends Base
      */
     public function swimlane()
     {
-        $project = $this->getProject();
+        $this->getProject();
         $swimlane = $this->swimlane->getById($this->request->getIntegerParam('swimlane_id'));
         $this->response->html($this->template->render('board/tooltip_description', array('task' => $swimlane)));
     }
