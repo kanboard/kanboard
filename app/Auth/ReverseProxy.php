@@ -28,7 +28,6 @@ class ReverseProxy extends Base
     public function authenticate()
     {
         if (isset($_SERVER[REVERSE_PROXY_USER_HEADER])) {
-
             $login = $_SERVER[REVERSE_PROXY_USER_HEADER];
             $user = $this->user->getByUsername($login);
 

@@ -1,9 +1,6 @@
 <?php
 
 require __DIR__.'/../../vendor/autoload.php';
-
-define('LDAP_SERVER', 'my_ldap_server');
-
 require __DIR__.'/../../app/constants.php';
 
 use Symfony\Component\EventDispatcher\EventDispatcher;

@@ -77,4 +77,15 @@ archive:
 	@ cd ${dst} && if [ -L kanboard-latest.zip ]; then unlink kanboard-latest.zip; ln -s kanboard-${version}.zip kanboard-latest.zip; fi
 	@ rm -rf ${BUILD_DIR}/kanboard
 
+test-sqlite:
+	@ phpunit -c tests/units.sqlite.xml
+
+test-mysql:
+	@ phpunit -c tests/units.mysql.xml
+
+test-postgres:
+	@ phpunit -c tests/units.postgres.xml
+
+unittest: test-sqlite test-mysql test-postgres
+
 .PHONY: all
