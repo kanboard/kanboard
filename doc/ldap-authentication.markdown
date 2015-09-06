@@ -225,6 +225,17 @@ define('LDAP_ACCOUNT_EMAIL', 'mail');
 // Example for OpenLDAP: 'uid'
 define('LDAP_ACCOUNT_ID', 'samaccountname');
 
+// LDAP Attribute for group membership
+define('LDAP_ACCOUNT_MEMBEROF', 'memberof');
+
+// DN for administrators
+// Example: CN=Kanboard Admins,CN=Users,DC=kanboard,DC=local
+define('LDAP_GROUP_ADMIN_DN', '');
+
+// DN for project administrators
+// Example: CN=Kanboard Project Admins,CN=Users,DC=kanboard,DC=local
+define('LDAP_GROUP_PROJECT_ADMIN_DN', '');
+
 // By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
 // Set to true if you want to preserve the case
 define('LDAP_USERNAME_CASE_SENSITIVE', false);

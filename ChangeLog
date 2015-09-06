@@ -3,6 +3,7 @@ Version 1.0.19 (unreleased)
 
 New features:
 
+* Add LDAP group sync
 * Add swimlane description
 
 Improvements:

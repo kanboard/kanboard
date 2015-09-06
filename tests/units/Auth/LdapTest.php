@@ -155,6 +155,9 @@ class LdapTest extends \Base
             'username' => 'my_user',
             'name' => 'My user',
             'email' => 'user1@localhost',
+            'is_admin' => 0,
+            'is_project_admin' => 0,
+            'is_ldap_user' => 1,
         );
 
         self::$functions
@@ -164,7 +167,7 @@ class LdapTest extends \Base
                 $this->equalTo('my_ldap_connection'),
                 $this->equalTo('ou=People,dc=kanboard,dc=local'),
                 $this->equalTo('uid=my_user'),
-                $this->equalTo(array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL))
+                $this->equalTo($this->ldap->getProfileAttributes())
             )
             ->will($this->returnValue('my_result_identifier'));
 
@@ -187,7 +190,7 @@ class LdapTest extends \Base
             )
             ->will($this->returnValue(true));
 
-        $this->assertEquals($expected, $this->ldap->search('my_ldap_connection', 'my_user', 'my_password', 'ou=People,dc=kanboard,dc=local', 'uid=%s'));
+        $this->assertEquals($expected, $this->ldap->getProfile('my_ldap_connection', 'my_user', 'my_password', 'ou=People,dc=kanboard,dc=local', 'uid=%s'));
     }
 
     public function testSearchWithBadPassword()
@@ -218,7 +221,7 @@ class LdapTest extends \Base
                 $this->equalTo('my_ldap_connection'),
                 $this->equalTo('ou=People,dc=kanboard,dc=local'),
                 $this->equalTo('uid=my_user'),
-                $this->equalTo(array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL))
+                $this->equalTo($this->ldap->getProfileAttributes())
             )
             ->will($this->returnValue('my_result_identifier'));
 
@@ -241,7 +244,7 @@ class LdapTest extends \Base
             )
             ->will($this->returnValue(false));
 
-        $this->assertFalse($this->ldap->search('my_ldap_connection', 'my_user', 'my_password', 'ou=People,dc=kanboard,dc=local', 'uid=%s'));
+        $this->assertFalse($this->ldap->getProfile('my_ldap_connection', 'my_user', 'my_password', 'ou=People,dc=kanboard,dc=local', 'uid=%s'));
     }
 
     public function testSearchWithUserNotFound()
@@ -253,7 +256,7 @@ class LdapTest extends \Base
                 $this->equalTo('my_ldap_connection'),
                 $this->equalTo('ou=People,dc=kanboard,dc=local'),
                 $this->equalTo('uid=my_user'),
-                $this->equalTo(array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL))
+                $this->equalTo($this->ldap->getProfileAttributes())
             )
             ->will($this->returnValue('my_result_identifier'));
 
@@ -266,7 +269,7 @@ class LdapTest extends \Base
             )
             ->will($this->returnValue(array()));
 
-        $this->assertFalse($this->ldap->search('my_ldap_connection', 'my_user', 'my_password', 'ou=People,dc=kanboard,dc=local', 'uid=%s'));
+        $this->assertFalse($this->ldap->getProfile('my_ldap_connection', 'my_user', 'my_password', 'ou=People,dc=kanboard,dc=local', 'uid=%s'));
     }
 
     public function testSuccessfulAuthentication()
@@ -359,6 +362,8 @@ class LdapTest extends \Base
 
     public function testAuthenticationWithAutomaticAccountCreation()
     {
+        $ldap_profile = array('username' => 'user', 'name' => 'My user', 'email' => 'user@here');
+
         $this->container['userSession'] = $this
             ->getMockBuilder('\Model\UserSession')
             ->setConstructorArgs(array($this->container))
@@ -368,13 +373,13 @@ class LdapTest extends \Base
         $this->container['user'] = $this
             ->getMockBuilder('\Model\User')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getByUsername'))
+            ->setMethods(array('getByUsername', 'create'))
             ->getMock();
 
         $ldap = $this
             ->getMockBuilder('\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('findUser', 'createUser'))
+            ->setMethods(array('findUser'))
             ->getMock();
 
         $ldap
@@ -384,17 +389,7 @@ class LdapTest extends \Base
                 $this->equalTo('user'),
                 $this->equalTo('password')
             )
-            ->will($this->returnValue(array('username' => 'user', 'name' => 'My user', 'email' => 'user@here')));
-
-        $ldap
-            ->expects($this->at(1))
-            ->method('createUser')
-            ->with(
-                $this->equalTo('user'),
-                $this->equalTo('My user'),
-                $this->equalTo('user@here')
-            )
-            ->will($this->returnValue(true));
+            ->will($this->returnValue($ldap_profile));
 
         $this->container['user']
             ->expects($this->at(0))
@@ -406,6 +401,14 @@ class LdapTest extends \Base
 
         $this->container['user']
             ->expects($this->at(1))
+            ->method('create')
+            ->with(
+                $this->equalTo($ldap_profile)
+            )
+            ->will($this->returnValue(true));
+
+        $this->container['user']
+            ->expects($this->at(2))
             ->method('getByUsername')
             ->with(
                 $this->equalTo('user')
@@ -421,6 +424,8 @@ class LdapTest extends \Base
 
     public function testAuthenticationWithAutomaticAccountCreationFailed()
     {
+        $ldap_profile = array('username' => 'user', 'name' => 'My user', 'email' => 'user@here');
+
         $this->container['userSession'] = $this
             ->getMockBuilder('\Model\UserSession')
             ->setConstructorArgs(array($this->container))
@@ -430,13 +435,13 @@ class LdapTest extends \Base
         $this->container['user'] = $this
             ->getMockBuilder('\Model\User')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getByUsername'))
+            ->setMethods(array('getByUsername', 'create'))
             ->getMock();
 
         $ldap = $this
             ->getMockBuilder('\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('findUser', 'createUser'))
+            ->setMethods(array('findUser'))
             ->getMock();
 
         $ldap
@@ -446,25 +451,23 @@ class LdapTest extends \Base
                 $this->equalTo('user'),
                 $this->equalTo('password')
             )
-            ->will($this->returnValue(array('username' => 'user', 'name' => 'My user', 'email' => 'user@here')));
-
-        $ldap
-            ->expects($this->at(1))
-            ->method('createUser')
-            ->with(
-                $this->equalTo('user'),
-                $this->equalTo('My user'),
-                $this->equalTo('user@here')
-            )
-            ->will($this->returnValue(false));
+            ->will($this->returnValue($ldap_profile));
 
         $this->container['user']
-            ->expects($this->once())
+            ->expects($this->at(0))
             ->method('getByUsername')
             ->with(
                 $this->equalTo('user')
             )
             ->will($this->returnValue(null));
+
+        $this->container['user']
+            ->expects($this->at(1))
+            ->method('create')
+            ->with(
+                $this->equalTo($ldap_profile)
+            )
+            ->will($this->returnValue(false));
 
         $this->container['userSession']
             ->expects($this->never())

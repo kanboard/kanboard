@@ -46,7 +46,7 @@ class Ldap extends Base
             else {
 
                 // We create automatically a new user
-                if (LDAP_ACCOUNT_CREATION && $this->createUser($username, $result['name'], $result['email'])) {
+                if (LDAP_ACCOUNT_CREATION && $this->user->create($result) !== false) {
                     $user = $this->user->getByUsername($username);
                 }
                 else {
@@ -65,28 +65,6 @@ class Ldap extends Base
     }
 
     /**
-     * Create a new local user after the LDAP authentication
-     *
-     * @access public
-     * @param  string  $username    Username
-     * @param  string  $name        Name of the user
-     * @param  string  $email       Email address
-     * @return bool
-     */
-    public function createUser($username, $name, $email)
-    {
-        $values = array(
-            'username' => $username,
-            'name' => $name,
-            'email' => $email,
-            'is_admin' => 0,
-            'is_ldap_user' => 1,
-        );
-
-        return $this->user->create($values);
-    }
-
-    /**
      * Find the user from the LDAP server
      *
      * @access public
@@ -99,7 +77,7 @@ class Ldap extends Base
         $ldap = $this->connect();
 
         if ($ldap !== false && $this->bind($ldap, $username, $password)) {
-            return $this->search($ldap, $username, $password);
+            return $this->getProfile($ldap, $username, $password);
         }
 
         return false;
@@ -180,7 +158,7 @@ class Ldap extends Base
     }
 
     /**
-     * LDAP user lookup
+     * Get LDAP user profile
      *
      * @access public
      * @param  resource  $ldap
@@ -188,12 +166,11 @@ class Ldap extends Base
      * @param  string    $password
      * @param  string    $base_dn
      * @param  string    $user_pattern
-     * @param  array     $attributes
      * @return boolean|array
      */
-    public function search($ldap, $username, $password, $base_dn = LDAP_ACCOUNT_BASE, $user_pattern = LDAP_USER_PATTERN, array $attributes = array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL))
+    public function getProfile($ldap, $username, $password, $base_dn = LDAP_ACCOUNT_BASE, $user_pattern = LDAP_USER_PATTERN)
     {
-        $sr = ldap_search($ldap, $base_dn, sprintf($user_pattern, $username), $attributes);
+        $sr = ldap_search($ldap, $base_dn, sprintf($user_pattern, $username), $this->getProfileAttributes());
 
         if ($sr === false) {
             return false;
@@ -206,11 +183,62 @@ class Ldap extends Base
         }
 
         if (@ldap_bind($ldap, $entries[0]['dn'], $password)) {
-            return array(
-                'username' => $username,
-                'name' => $this->getEntry($entries, LDAP_ACCOUNT_FULLNAME),
-                'email' => $this->getEntry($entries, LDAP_ACCOUNT_EMAIL),
-            );
+            return $this->prepareProfile($ldap, $entries, $username);
+        }
+
+        return false;
+    }
+
+    /**
+     * Build user profile from LDAP information
+     *
+     * @access public
+     * @param  resource  $ldap
+     * @param  array     $entries
+     * @param  string    $username
+     * @return boolean|array
+     */
+    public function prepareProfile($ldap, array $entries, $username)
+    {
+        return array(
+            'username' => $username,
+            'name' => $this->getEntry($entries, LDAP_ACCOUNT_FULLNAME),
+            'email' => $this->getEntry($entries, LDAP_ACCOUNT_EMAIL),
+            'is_admin' => (int) $this->isMemberOf($this->getEntries($entries, LDAP_ACCOUNT_MEMBEROF), LDAP_GROUP_ADMIN_DN),
+            'is_project_admin' => (int) $this->isMemberOf($this->getEntries($entries, LDAP_ACCOUNT_MEMBEROF), LDAP_GROUP_PROJECT_ADMIN_DN),
+            'is_ldap_user' => 1,
+        );
+    }
+
+    /**
+     * Ge the list of attributes to fetch when reading the LDAP user entry
+     *
+     * @access public
+     * @return array
+     */
+    public function getProfileAttributes()
+    {
+        return array(LDAP_ACCOUNT_FULLNAME, LDAP_ACCOUNT_EMAIL, LDAP_ACCOUNT_MEMBEROF);
+    }
+
+    /**
+     * Check group membership
+     *
+     * @access public
+     * @param  array   $group_entries
+     * @param  string  $group_dn
+     * @return boolean
+     */
+    public function isMemberOf(array $group_entries, $group_dn)
+    {
+        if (! isset($group_entries['count']) || empty($group_dn)) {
+            return false;
+        }
+
+        for ($i = 0; $i < $group_entries['count']; $i++) {
+            if ($group_entries[$i] === $group_dn) {
+                return true;
+            }
         }
 
         return false;
@@ -286,7 +314,7 @@ class Ldap extends Base
     }
 
     /**
-     * Return a value from the LDAP info
+     * Return one entry from a list of entries
      *
      * @access private
      * @param  array    $entries     LDAP entries
@@ -297,5 +325,19 @@ class Ldap extends Base
     private function getEntry(array $entries, $key, $default = '')
     {
          return isset($entries[0][$key][0]) ? $entries[0][$key][0] : $default;
+    }
+
+    /**
+     * Return subset of entries
+     *
+     * @access private
+     * @param  array    $entries
+     * @param  string   $key
+     * @param  array    $default
+     * @return array
+     */
+    private function getEntries(array $entries, $key, $default = array())
+    {
+         return isset($entries[0][$key]) ? $entries[0][$key] : $default;
     }
 }
