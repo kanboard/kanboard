@@ -20,6 +20,7 @@ before_script:
   - phpenv config-add tests/php.ini
   - composer install
   - wget https://phar.phpunit.de/phpunit.phar
+  - php -i
 
 script:
   - php phpunit.phar -c tests/units.$DB.xml

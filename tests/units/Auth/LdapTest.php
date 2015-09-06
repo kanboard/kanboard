@@ -51,7 +51,7 @@ class LdapTest extends \Base
                 $this->equalTo('my_ldap_server'),
                 $this->equalTo(389)
             )
-            ->willReturn(true);
+            ->will($this->returnValue('my_ldap_resource'));
 
         $ldap = new Ldap($this->container);
         $this->assertNotFalse($ldap->connect());
@@ -66,7 +66,7 @@ class LdapTest extends \Base
                 $this->equalTo('my_ldap_server'),
                 $this->equalTo(389)
             )
-            ->willReturn(false);
+            ->will($this->returnValue(false));
 
         $ldap = new Ldap($this->container);
         $this->assertFalse($ldap->connect());
@@ -82,7 +82,7 @@ class LdapTest extends \Base
                 $this->equalTo(null),
                 $this->equalTo(null)
             )
-            ->willReturn(true);
+            ->will($this->returnValue(true));
 
         $ldap = new Ldap($this->container);
         $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password', 'anonymous'));
@@ -98,7 +98,7 @@ class LdapTest extends \Base
                 $this->equalTo('uid=my_user'),
                 $this->equalTo('my_password')
             )
-            ->willReturn(true);
+            ->will($this->returnValue(true));
 
         $ldap = new Ldap($this->container);
         $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password', 'user', 'uid=%s', 'something'));
@@ -114,7 +114,7 @@ class LdapTest extends \Base
                 $this->equalTo('someone'),
                 $this->equalTo('something')
             )
-            ->willReturn(true);
+            ->will($this->returnValue(true));
 
         $ldap = new Ldap($this->container);
         $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password', 'proxy', 'someone', 'something'));
