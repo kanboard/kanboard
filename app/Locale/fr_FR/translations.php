@@ -96,7 +96,7 @@ return array(
     'Edit a task' => 'Modifier une tâche',
     'Column' => 'Colonne',
     'Color' => 'Couleur',
-    'Assignee' => 'Personne assignée',
+    'Assignee' => 'Personne assigné',
     'Create another task' => 'Créer une autre tâche',
     'New task' => 'Nouvelle tâche',
     'Open a task' => 'Ouvrir une tâche',
