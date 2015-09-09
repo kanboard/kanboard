@@ -29,6 +29,7 @@ Contributors:
 - [Fengchao](https://github.com/fengchao)
 - [Floaltvater](https://github.com/floaltvater)
 - [Gavlepeter](https://github.com/gavlepeter)
+- [Goofy](https://github.com/goofy-bz)
 - [Hendrik Stocker](https://github.com/hendrik-stoker)
 - [Iterate From 0](https://github.com/freebsd-kanboard)
 - [Jan Dittrich](https://github.com/jdittrich)
