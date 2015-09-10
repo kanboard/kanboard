@@ -16,6 +16,7 @@ Bug fixes:
 
 * Fix typo in template that prevent the Gitlab oauth link to be displayed
 * Fix Markdown preview links focus
+* Avoid dropdown menu to be truncated inside a column with scrolling
 
 Version 1.0.18
 --------------

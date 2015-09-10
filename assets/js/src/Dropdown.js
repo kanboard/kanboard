@@ -11,26 +11,31 @@ Dropdown.prototype.listen = function() {
     $(document).on('click', '.dropdown-menu', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        self.close();
 
         var submenu = $(this).next('ul');
         var submenuHeight = 240;
+        var offset = $(this).offset();
+        var height = $(this).height();
 
-        if (! submenu.is(':visible')) {
-            self.close();
+        // Clone the submenu outside of the column to avoid clipping issue with overflow
+        $("body").append(jQuery("<div>", {"id": "dropdown"}));
+        submenu.clone().appendTo("#dropdown");
 
-            if ($(this).offset().top + submenuHeight - $(window).scrollTop() > $(window).height()) {
-                submenu.addClass('dropdown-submenu-open dropdown-submenu-top');
-            }
-            else {
-                submenu.addClass('dropdown-submenu-open');
-            }
+        var clone = $("#dropdown ul");
+        clone.css('left', offset.left);
+
+        if (offset.top + submenuHeight - $(window).scrollTop() > $(window).height()) {
+            clone.css('top', offset.top - submenuHeight - height);
         }
         else {
-            self.close();
+            clone.css('top', offset.top + height);
         }
+
+        clone.addClass('dropdown-submenu-open');
     });
 };
 
 Dropdown.prototype.close = function() {
-    $('.dropdown-submenu-open').removeClass('dropdown-submenu-open');
+    $("#dropdown").remove();
 };
