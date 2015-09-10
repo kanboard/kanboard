@@ -805,7 +805,7 @@ return array(
     'The identifier must be unique' => 'Идентификатор должен быть уникальным',
     'This linked task id doesn\'t exists' => 'Этот ID звязанной задачи не существует',
     'This value must be alphanumeric' => 'Это значение должно быть буквенно-цифровым',
-    'Edit recurrence' => 'Завершить повторение',
+    'Edit recurrence' => 'Редактировать циклы задачи',
     'Generate recurrent task' => 'Создать повторяющуюся задачу',
     'Trigger to generate recurrent task' => 'Триггер для генерации периодической задачи',
     'Factor to calculate new due date' => 'Коэффициент для рассчета новой даты',
