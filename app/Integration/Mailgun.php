@@ -2,7 +2,6 @@
 
 namespace Integration;
 
-use HTML_To_Markdown;
 use Core\Tool;
 
 /**
@@ -76,8 +75,7 @@ class Mailgun extends \Core\Base
 
         // Get the Markdown contents
         if (! empty($payload['stripped-html'])) {
-            $markdown = new HTML_To_Markdown($payload['stripped-html'], array('strip_tags' => true));
-            $description = $markdown->output();
+            $description = $this->htmlConverter->convert($payload['stripped-html']);
         }
         else if (! empty($payload['stripped-text'])) {
             $description = $payload['stripped-text'];

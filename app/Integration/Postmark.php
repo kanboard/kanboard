@@ -2,8 +2,6 @@
 
 namespace Integration;
 
-use HTML_To_Markdown;
-
 /**
  * Postmark integration
  *
@@ -76,8 +74,7 @@ class Postmark extends \Core\Base
 
         // Get the Markdown contents
         if (! empty($payload['HtmlBody'])) {
-            $markdown = new HTML_To_Markdown($payload['HtmlBody'], array('strip_tags' => true));
-            $description = $markdown->output();
+            $description = $this->htmlConverter->convert($payload['HtmlBody']);
         }
         else if (! empty($payload['TextBody'])) {
             $description = $payload['TextBody'];

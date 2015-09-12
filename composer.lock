@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "70930e0b92d7ff0208ed435fd3accd30",
+    "hash": "10de302e730ebc3076393a3a38d1964f",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -260,16 +260,16 @@
         },
         {
             "name": "fguillot/json-rpc",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/JsonRPC.git",
-                "reference": "9a117e964c4c6ad026da7ae1ca155f7686e3deaf"
+                "reference": "265cf039c2823f684349de78c0c03a597992bea9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/9a117e964c4c6ad026da7ae1ca155f7686e3deaf",
-                "reference": "9a117e964c4c6ad026da7ae1ca155f7686e3deaf",
+                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/265cf039c2823f684349de78c0c03a597992bea9",
+                "reference": "265cf039c2823f684349de78c0c03a597992bea9",
                 "shasum": ""
             },
             "require": {
@@ -292,20 +292,20 @@
             ],
             "description": "Simple Json-RPC client/server library that just works",
             "homepage": "https://github.com/fguillot/JsonRPC",
-            "time": "2015-08-07 22:31:21"
+            "time": "2015-09-12 16:27:13"
         },
         {
             "name": "fguillot/picodb",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "8a311523d114180e04a1e08ced6766f26d7ebbae"
+                "reference": "61f492c125d9195ce869447e2b2450adeb3b01d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/8a311523d114180e04a1e08ced6766f26d7ebbae",
-                "reference": "8a311523d114180e04a1e08ced6766f26d7ebbae",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/61f492c125d9195ce869447e2b2450adeb3b01d6",
+                "reference": "61f492c125d9195ce869447e2b2450adeb3b01d6",
                 "shasum": ""
             },
             "require": {
@@ -329,7 +329,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2015-08-13 01:44:29"
+            "time": "2015-08-27 23:33:16"
         },
         {
             "name": "fguillot/simple-validator",
@@ -453,31 +453,38 @@
             "time": "2015-05-13 06:34:33"
         },
         {
-            "name": "nickcernis/html-to-markdown",
-            "version": "2.2.1",
+            "name": "league/html-to-markdown",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nickcernis/html-to-markdown.git",
-                "reference": "7263d2ce65011b050fa7ecda0cbe09b23e84271d"
+                "url": "https://github.com/thephpleague/html-to-markdown.git",
+                "reference": "c496c27e01b9dce310e03afbcdf783347738f67b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nickcernis/html-to-markdown/zipball/7263d2ce65011b050fa7ecda0cbe09b23e84271d",
-                "reference": "7263d2ce65011b050fa7ecda0cbe09b23e84271d",
+                "url": "https://api.github.com/repos/thephpleague/html-to-markdown/zipball/c496c27e01b9dce310e03afbcdf783347738f67b",
+                "reference": "c496c27e01b9dce310e03afbcdf783347738f67b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "ext-dom": "*",
+                "ext-xml": "*",
+                "php": ">=5.3.3"
             },
             "require-dev": {
-                "php": ">=5.3.3",
-                "phpunit/phpunit": "4.*"
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
             "autoload": {
-                "classmap": [
-                    "HTML_To_Markdown.php"
-                ]
+                "psr-4": {
+                    "League\\HTMLToMarkdown\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -485,31 +492,38 @@
             ],
             "authors": [
                 {
+                    "name": "Colin O'Dell",
+                    "email": "colinodell@gmail.com",
+                    "homepage": "http://www.colinodell.com",
+                    "role": "Lead Developer"
+                },
+                {
                     "name": "Nick Cernis",
                     "email": "nick@cern.is",
-                    "homepage": "http://modernnerd.net"
+                    "homepage": "http://modernnerd.net",
+                    "role": "Original Author"
                 }
             ],
             "description": "An HTML-to-markdown conversion helper for PHP",
-            "homepage": "https://github.com/nickcernis/html-to-markdown",
+            "homepage": "https://github.com/thephpleague/html-to-markdown",
             "keywords": [
                 "html",
                 "markdown"
             ],
-            "time": "2015-02-22 12:59:02"
+            "time": "2015-09-01 22:39:54"
         },
         {
             "name": "pimple/pimple",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "3313af5935dbc560fab845b76a1ca351b47855af"
+                "reference": "a30f7d6e57565a2e1a316e1baf2a483f788b258a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/3313af5935dbc560fab845b76a1ca351b47855af",
-                "reference": "3313af5935dbc560fab845b76a1ca351b47855af",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/a30f7d6e57565a2e1a316e1baf2a483f788b258a",
+                "reference": "a30f7d6e57565a2e1a316e1baf2a483f788b258a",
                 "shasum": ""
             },
             "require": {
@@ -536,13 +550,13 @@
                     "email": "fabien@symfony.com"
                 }
             ],
-            "description": "Pimple is a simple Dependency Injection Container for PHP 5.3",
+            "description": "Pimple, a simple Dependency Injection Container",
             "homepage": "http://pimple.sensiolabs.org",
             "keywords": [
                 "container",
                 "dependency injection"
             ],
-            "time": "2015-07-30 09:57:46"
+            "time": "2015-09-11 15:10:35"
         },
         {
             "name": "psr/log",
@@ -637,16 +651,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.7.3",
+            "version": "v2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e"
+                "reference": "9ff9032151186bd66ecee727d728f1319f52d1d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/d6cf02fe73634c96677e428f840704bfbcaec29e",
-                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/9ff9032151186bd66ecee727d728f1319f52d1d8",
+                "reference": "9ff9032151186bd66ecee727d728f1319f52d1d8",
                 "shasum": ""
             },
             "require": {
@@ -690,20 +704,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-07-28 15:18:12"
+            "time": "2015-09-03 11:40:38"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.3",
+            "version": "v2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "9310b5f9a87ec2ea75d20fec0b0017c77c66dac3"
+                "reference": "b58c916f1db03a611b72dd702564f30ad8fe83fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
-                "reference": "9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/b58c916f1db03a611b72dd702564f30ad8fe83fa",
+                "reference": "b58c916f1db03a611b72dd702564f30ad8fe83fa",
                 "shasum": ""
             },
             "require": {
@@ -748,22 +762,22 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-18 19:21:56"
+            "time": "2015-08-24 07:13:45"
         }
     ],
     "packages-dev": [
         {
             "name": "symfony/stopwatch",
-            "version": "v2.7.3",
+            "version": "v2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Stopwatch.git",
-                "reference": "b07a866719bbac5294c67773340f97b871733310"
+                "reference": "abc61bac76fb10ffa2c6373d7932bc35190dbf3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/b07a866719bbac5294c67773340f97b871733310",
-                "reference": "b07a866719bbac5294c67773340f97b871733310",
+                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/abc61bac76fb10ffa2c6373d7932bc35190dbf3b",
+                "reference": "abc61bac76fb10ffa2c6373d7932bc35190dbf3b",
                 "shasum": ""
             },
             "require": {
@@ -799,15 +813,12 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2015-07-01 18:23:16"
+            "time": "2015-08-24 07:13:45"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "swiftmailer/swiftmailer": 0,
-        "symfony/console": 0
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

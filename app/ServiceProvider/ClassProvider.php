@@ -9,6 +9,7 @@ use Model\Project;
 use Model\Webhook;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use League\HTMLToMarkdown\HtmlConverter;
 
 class ClassProvider implements ServiceProviderInterface
 {
@@ -112,5 +113,9 @@ class ClassProvider implements ServiceProviderInterface
         $container['oauth'] = $container->factory(function ($c) {
             return new OAuth2($c);
         });
+
+        $container['htmlConverter'] = function($c) {
+            return new HtmlConverter(array('strip_tags' => true));
+        };
     }
 }
