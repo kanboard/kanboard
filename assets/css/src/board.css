@@ -11,7 +11,7 @@
 
 /* board table */
 #board-container {
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 #board {
