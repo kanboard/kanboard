@@ -11,6 +11,7 @@ Improvements:
 * Replace color dropdown by color picker in task forms
 * Creating another task stay in the popover (no full page refresh anymore)
 * Avoid scrollbar in Gantt chart for row title on Windows platform
+* Remove unnecessary margin for calendar header
 
 Bug fixes:
 

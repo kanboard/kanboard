@@ -7,6 +7,10 @@ table {
     font-size: 0.95em;
 }
 
+#calendar table {
+    margin-bottom: 0;
+}
+
 th,
 td {
     border: 1px solid #eee;
