@@ -28,4 +28,20 @@ abstract class PluginBase extends Base
     {
         return array();
     }
+
+    /**
+     * Listen on internal events
+     *
+     * @access public
+     * @param  string   $event
+     * @param  callable $callback
+     */
+    public function on($event, $callback)
+    {
+        $container = $this->container;
+
+        $this->container['dispatcher']->addListener($event, function() use ($container, $callback) {
+            call_user_func($callback, $container);
+        });
+    }
 }

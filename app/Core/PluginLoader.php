@@ -21,21 +21,14 @@ class PluginLoader extends Base
     const TABLE_SCHEMA = 'plugin_schema_versions';
 
     /**
-     * Plugin folder
-     *
-     * @var string
-     */
-    const PATH = __DIR__.'/../../plugins';
-
-    /**
      * Scan plugin folder and load plugins
      *
      * @access public
      */
     public function scan()
     {
-        if (file_exists(self::PATH)) {
-            $dir = new DirectoryIterator(self::PATH);
+        if (file_exists(__DIR__.'/../../plugins')) {
+            $dir = new DirectoryIterator(__DIR__.'/../../plugins');
 
             foreach ($dir as $fileinfo) {
                 if (! $fileinfo->isDot() && $fileinfo->isDir()) {

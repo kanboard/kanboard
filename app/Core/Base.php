@@ -35,7 +35,6 @@ use Pimple\Container;
  * @property \Model\Action                 $action
  * @property \Model\Authentication         $authentication
  * @property \Model\Board                  $board
- * @property \Model\Budget                 $budget
  * @property \Model\Category               $category
  * @property \Model\Color                  $color
  * @property \Model\Comment                $comment
@@ -43,7 +42,6 @@ use Pimple\Container;
  * @property \Model\Currency               $currency
  * @property \Model\DateParser             $dateParser
  * @property \Model\File                   $file
- * @property \Model\HourlyRate             $hourlyRate
  * @property \Model\LastLogin              $lastLogin
  * @property \Model\Link                   $link
  * @property \Model\Notification           $notification

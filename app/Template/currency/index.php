@@ -52,5 +52,3 @@
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
     </div>
 </form>
-
-<p class="alert alert-info"><?= t('Currency rates are used to calculate project budget.') ?></p>

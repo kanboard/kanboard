@@ -17,10 +17,6 @@
         <?= $this->url->link(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
     </li>
     <li>
-        <i class="fa fa-pie-chart fa-fw"></i>
-        <?= $this->url->link(t('Budget'), 'budget', 'index', array('project_id' => $project['id'])) ?>
-    </li>
-    <li>
         <i class="fa fa-download fa-fw"></i>
         <?= $this->url->link(t('Exports'), 'export', 'tasks', array('project_id' => $project['id'])) ?>
     </li>

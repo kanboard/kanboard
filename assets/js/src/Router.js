@@ -27,7 +27,6 @@ jQuery(document).ready(function() {
     router.addRoute('analytic-user-repartition', UserRepartitionChart);
     router.addRoute('analytic-cfd', CumulativeFlowDiagram);
     router.addRoute('analytic-burndown', BurndownChart);
-    router.addRoute('budget-chart', BudgetChart);
     router.addRoute('analytic-avg-time-column', AvgTimeColumnChart);
     router.addRoute('analytic-task-time-column', TaskTimeColumnChart);
     router.addRoute('analytic-lead-cycle-time', LeadCycleTimeChart);

@@ -62,9 +62,6 @@
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'authentication' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Edit Authentication'), 'user', 'authentication', array('user_id' => $user['id'])) ?>
             </li>
-            <li <?= $this->app->getRouterController() === 'hourlyrate' ? 'class="active"' : '' ?>>
-                <?= $this->url->link(t('Hourly rates'), 'hourlyrate', 'index', array('user_id' => $user['id'])) ?>
-            </li>
             <li <?= $this->app->getRouterController() === 'timetable' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Manage timetable'), 'timetable', 'index', array('user_id' => $user['id'])) ?>
             </li>
