@@ -7,6 +7,10 @@ New features:
 * Add swimlane description
 * New plugin system (alpha)
 
+Breaking changes:
+
+* Budget planning is now a plugin and it's not part of core
+
 Improvements:
 
 * Gantt chart: change bar color according to task progress

@@ -78,6 +78,7 @@ Using Kanboard
 - [RSS/Atom subscriptions](rss.markdown)
 - [Json-RPC API](api-json-rpc.markdown)
 - [Webhooks](webhooks.markdown)
+- [Plugins](plugins.markdown)
 
 ### More
 
@@ -104,6 +105,7 @@ Technical details
 - [Installation on Heroku](heroku.markdown)
 - [Example with Nginx + HTTPS + SPDY + PHP-FPM](nginx-ssl-php-fpm.markdown)
 - [Run Kanboard with Docker](docker.markdown)
+- [Run Kanboard with Vagrant](vagrant.markdown)
 
 ### Configuration
 
@@ -133,7 +135,6 @@ Technical details
 - [Coding standards](coding-standards.markdown)
 - [Running tests](tests.markdown)
 - [Build assets](assets.markdown)
-- [Run Kanboard with Vagrant](vagrant.markdown)
 
 The documentation is written in [Markdown](http://en.wikipedia.org/wiki/Markdown).
 If you want to improve the documentation, just send a pull-request.
