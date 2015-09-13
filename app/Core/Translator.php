@@ -15,7 +15,7 @@ class Translator
      *
      * @var string
      */
-    const PATH = 'app/Locale/';
+    const PATH = 'app/Locale';
 
     /**
      * Locale
@@ -196,18 +196,27 @@ class Translator
      * @static
      * @access public
      * @param  string   $language   Locale code: fr_FR
+     * @param  string   $path       Locale folder
      */
-    public static function load($language)
+    public static function load($language, $path = self::PATH)
     {
         setlocale(LC_TIME, $language.'.UTF-8', $language);
 
-        $filename = self::PATH.$language.DIRECTORY_SEPARATOR.'translations.php';
+        $filename = $path.DIRECTORY_SEPARATOR.$language.DIRECTORY_SEPARATOR.'translations.php';
 
         if (file_exists($filename)) {
-            self::$locales = require $filename;
+            self::$locales = array_merge(self::$locales, require($filename));
         }
-        else {
-            self::$locales = array();
-        }
+    }
+
+    /**
+     * Clear locales stored in memory
+     *
+     * @static
+     * @access public
+     */
+    public static function unload()
+    {
+        self::$locales = array();
     }
 }

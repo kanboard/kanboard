@@ -5,6 +5,7 @@ New features:
 
 * Add LDAP group sync
 * Add swimlane description
+* New plugin system (alpha)
 
 Improvements:
 

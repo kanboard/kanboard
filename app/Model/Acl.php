@@ -95,6 +95,18 @@ class Acl extends Base
     );
 
     /**
+     * Extend ACL rules
+     *
+     * @access public
+     * @param string $acl_name
+     * @param aray   $rules
+     */
+    public function extend($acl_name, array $rules)
+    {
+        $this->$acl_name = array_merge($this->$acl_name, $rules);
+    }
+
+    /**
      * Return true if the specified controller/action match the given acl
      *
      * @access public

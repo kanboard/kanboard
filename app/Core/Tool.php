@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Pimple\Container;
+
 /**
  * Tool class
  *
@@ -23,7 +25,6 @@ class Tool
         $fp = fopen($filename, 'w');
 
         if (is_resource($fp)) {
-
             foreach ($rows as $fields) {
                 fputcsv($fp, $fields);
             }
@@ -50,5 +51,25 @@ class Tool
         list(,$identifier) = explode('+', $local_part);
 
         return $identifier;
+    }
+
+    /**
+     * Build dependency injection container from an array
+     *
+     * @static
+     * @access public
+     * @param  Container  $container
+     * @param  array      $namespaces
+     */
+    public static function buildDIC(Container $container, array $namespaces)
+    {
+        foreach ($namespaces as $namespace => $classes) {
+            foreach ($classes as $name) {
+                $class = '\\'.$namespace.'\\'.$name;
+                $container[lcfirst($name)] = function ($c) use ($class) {
+                    return new $class($c);
+                };
+            }
+        }
     }
 }

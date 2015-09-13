@@ -213,49 +213,17 @@ class Router extends Base
         if (! empty($_GET['controller']) && ! empty($_GET['action'])) {
             $controller = $this->sanitize($_GET['controller'], 'app');
             $action = $this->sanitize($_GET['action'], 'index');
+            $plugin = ! empty($_GET['plugin']) ? $this->sanitize($_GET['plugin'], '') : '';
         }
         else {
-            list($controller, $action) = $this->findRoute($this->getPath($uri, $query_string));
+            list($controller, $action) = $this->findRoute($this->getPath($uri, $query_string)); // TODO: add plugin for routes
+            $plugin = '';
         }
 
-        return $this->load(
-            __DIR__.'/../Controller/'.ucfirst($controller).'.php',
-            $controller,
-            '\Controller\\'.ucfirst($controller),
-            $action
-        );
-    }
+        $class = empty($plugin) ? '\Controller\\'.ucfirst($controller) : '\Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($controller);
 
-    /**
-     * Load a controller and execute the action
-     *
-     * @access private
-     * @param  string $filename
-     * @param  string $controller
-     * @param  string $class
-     * @param  string $method
-     * @return bool
-     */
-    private function load($filename, $controller, $class, $method)
-    {
-        if (file_exists($filename)) {
-
-            require $filename;
-
-            if (! method_exists($class, $method)) {
-                return false;
-            }
-
-            $this->action = $method;
-            $this->controller = $controller;
-
-            $instance = new $class($this->container);
-            $instance->beforeAction($controller, $method);
-            $instance->$method();
-
-            return true;
-        }
-
-        return false;
+        $instance = new $class($this->container);
+        $instance->beforeAction($controller, $action);
+        $instance->$action();
     }
 }

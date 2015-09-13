@@ -19,6 +19,10 @@
         "gregwar/captcha": "1.*"
     },
     "autoload" : {
+        "classmap" : ["app/"],
+        "psr-4" : {
+            "Plugin\\": "plugins/"
+        },
         "psr-0" : {
             "" : "app/"
         },

@@ -4,6 +4,7 @@ namespace ServiceProvider;
 
 use Core\Paginator;
 use Core\OAuth2;
+use Core\Tool;
 use Model\Config;
 use Model\Project;
 use Model\Webhook;
@@ -94,17 +95,7 @@ class ClassProvider implements ServiceProviderInterface
 
     public function register(Container $container)
     {
-        foreach ($this->classes as $namespace => $classes) {
-
-            foreach ($classes as $name) {
-
-                $class = '\\'.$namespace.'\\'.$name;
-
-                $container[lcfirst($name)] = function ($c) use ($class) {
-                    return new $class($c);
-                };
-            }
-        }
+        Tool::buildDIC($container, $this->classes);
 
         $container['paginator'] = $container->factory(function ($c) {
             return new Paginator($c);

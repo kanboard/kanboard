@@ -24,5 +24,7 @@
         <li <?= $this->app->getRouterAction() === 'closed' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('Closed tasks'), 'projectuser', 'closed', $filter) ?>
         </li>
+
+        <?= $this->hook->render('project-user:sidebar') ?>
     </ul>
 </div>

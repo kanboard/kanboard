@@ -6,7 +6,17 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 82;
+const VERSION = 83;
+
+function version_83($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE plugin_schema_versions (
+            plugin TEXT NOT NULL PRIMARY KEY,
+            version INTEGER NOT NULL DEFAULT 0
+        )
+    ");
+}
 
 function version_82($pdo)
 {

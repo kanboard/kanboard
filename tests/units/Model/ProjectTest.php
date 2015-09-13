@@ -26,7 +26,7 @@ class ProjectTest extends Base
             $this->assertNotFalse($p->create(array('name' => 'UnitTest '.$locale)), 'Unable to create project with '.$locale.':'.$language);
         }
 
-        Translator::load('en_US');
+        Translator::unload();
     }
 
     public function testCreation()

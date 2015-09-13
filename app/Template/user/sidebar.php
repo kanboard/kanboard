@@ -20,6 +20,8 @@
                 <?= $this->url->link(t('Persistent connections'), 'user', 'sessions', array('user_id' => $user['id'])) ?>
             </li>
         <?php endif ?>
+
+        <?= $this->hook->render('user:sidebar:information') ?>
     </ul>
 
     <h2><?= t('Actions') ?></h2>
@@ -67,6 +69,8 @@
                 <?= $this->url->link(t('Manage timetable'), 'timetable', 'index', array('user_id' => $user['id'])) ?>
             </li>
         <?php endif ?>
+
+        <?= $this->hook->render('user:sidebar:actions', array('user' => $user)) ?>
 
         <?php if ($this->user->isAdmin() && ! $this->user->isCurrentUser($user['id'])): ?>
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'remove' ? 'class="active"' : '' ?>>

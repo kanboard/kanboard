@@ -18,6 +18,8 @@
             <?= $this->url->link(t('Time tracking'), 'task', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php endif ?>
+
+        <?= $this->hook->render('task:sidebar:information') ?>
     </ul>
     <h2><?= t('Actions') ?></h2>
     <ul>
@@ -66,6 +68,8 @@
             <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php endif ?>
+
+        <?= $this->hook->render('task:sidebar:actions') ?>
     </ul>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
     <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>

@@ -28,6 +28,8 @@
         <link rel="apple-touch-icon" sizes="144x144" href="<?= $this->url->dir() ?>assets/img/touch-icon-ipad-retina.png">
 
         <title><?= isset($title) ? $this->e($title) : 'Kanboard' ?></title>
+
+        <?= $this->hook->render('layout:head') ?>
     </head>
     <body data-status-url="<?= $this->url->href('app', 'status') ?>"
           data-login-url="<?= $this->url->href('auth', 'login') ?>"
@@ -38,43 +40,17 @@
     <?php if (isset($no_layout) && $no_layout): ?>
         <?= $content_for_layout ?>
     <?php else: ?>
-        <header>
-            <nav>
-                <h1><?= $this->url->link('K<span>B</span>', 'app', 'index', array(), false, 'logo', t('Dashboard')).' '.$this->e($title) ?>
-                    <?php if (! empty($description)): ?>
-                        <span class="tooltip" title='<?= $this->e($this->text->markdown($description)) ?>'>
-                            <i class="fa fa-info-circle"></i>
-                        </span>
-                    <?php endif ?>
-                </h1>
-                <ul>
-                    <?php if (isset($board_selector) && ! empty($board_selector)): ?>
-                    <li>
-                        <select id="board-selector"
-                                class="chosen-select select-auto-redirect"
-                                tabindex="-1"
-                                data-notfound="<?= t('No results match:') ?>"
-                                data-placeholder="<?= t('Display another project') ?>"
-                                data-redirect-regex="PROJECT_ID"
-                                data-redirect-url="<?= $this->url->href('board', 'show', array('project_id' => 'PROJECT_ID')) ?>">
-                            <option value=""></option>
-                            <?php foreach($board_selector as $board_id => $board_name): ?>
-                                <option value="<?= $board_id ?>"><?= $this->e($board_name) ?></option>
-                            <?php endforeach ?>
-                        </select>
-                    </li>
-                    <?php endif ?>
-                    <li>
-                        <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
-                        <span class="username hide-tablet">(<?= $this->user->getProfileLink() ?>)</span>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+        <?= $this->hook->render('layout:top') ?>
+        <?= $this->render('header', array(
+            'title' => $title,
+            'description' => isset($description) ? $description : '',
+            'board_selector' => $board_selector,
+        )) ?>
         <section class="page">
             <?= $this->app->flashMessage() ?>
             <?= $content_for_layout ?>
         </section>
+        <?= $this->hook->render('layout:bottom') ?>
      <?php endif ?>
     </body>
 </html>

@@ -290,4 +290,16 @@ class AclTest extends Base
         $this->assertFalse($acl->isAllowed('task', 'remove', 1));
         $this->assertTrue($acl->isAllowed('app', 'index', 1));
     }
+
+    public function testExtend()
+    {
+        $acl = new Acl($this->container);
+
+        $this->assertFalse($acl->isProjectManagerAction('plop', 'show'));
+
+        $acl->extend('project_manager_acl', array('plop' => '*'));
+
+        $this->assertTrue($acl->isProjectManagerAction('plop', 'show'));
+        $this->assertTrue($acl->isProjectManagerAction('swimlane', 'index'));
+    }
 }

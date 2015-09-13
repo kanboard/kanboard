@@ -13,11 +13,12 @@ use LogicException;
 class Template extends Helper
 {
     /**
-     * Template path
+     * List of template overrides
      *
-     * @var string
+     * @access private
+     * @var array
      */
-    const PATH = 'app/Template/';
+    private $overrides = array();
 
     /**
      * Render a template
@@ -33,16 +34,10 @@ class Template extends Helper
      */
     public function render($__template_name, array $__template_args = array())
     {
-        $__template_file = self::PATH.$__template_name.'.php';
-
-        if (! file_exists($__template_file)) {
-            throw new LogicException('Unable to load the template: "'.$__template_name.'"');
-        }
-
         extract($__template_args);
 
         ob_start();
-        include $__template_file;
+        include $this->getTemplateFile($__template_name);
         return ob_get_clean();
     }
 
@@ -61,5 +56,42 @@ class Template extends Helper
             $layout_name,
             $template_args + array('content_for_layout' => $this->render($template_name, $template_args))
         );
+    }
+
+    /**
+     * Define a new template override
+     *
+     * @access public
+     * @param  string  $original_template
+     * @param  string  $new_template
+     */
+    public function setTemplateOverride($original_template, $new_template)
+    {
+        $this->overrides[$original_template] = $new_template;
+    }
+
+    /**
+     * Find template filename
+     *
+     * Core template name: 'task/show'
+     * Plugin template name: 'myplugin:task/show'
+     *
+     * @access public
+     * @param  string  $template_name
+     * @return string
+     */
+    public function getTemplateFile($template_name)
+    {
+        $template_name = isset($this->overrides[$template_name]) ? $this->overrides[$template_name] : $template_name;
+
+        if (strpos($template_name, ':') !== false) {
+            list($plugin, $template) = explode(':', $template_name);
+            $path = __DIR__.'/../../plugins/'.ucfirst($plugin).'/Template/'.$template.'.php';
+        }
+        else {
+            $path = __DIR__.'/../Template/'.$template_name.'.php';
+        }
+
+        return $path;
     }
 }
