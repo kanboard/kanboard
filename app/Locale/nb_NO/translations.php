@@ -100,7 +100,7 @@ return array(
     'Create another task' => 'Opprett en annen oppgave',
     'New task' => 'Ny oppgave',
     'Open a task' => 'Åpne en oppgave',
-    'Do you really want to open this task: "%s"?' => 'Vil du åpe denne oppgaven: "%s"?',
+    'Do you really want to open this task: "%s"?' => 'Vil du åpne denne oppgaven: "%s"?',
     'Back to the board' => 'Tilbake til prosjektsiden',
     'Created on %B %e, %Y at %k:%M %p' => 'Opprettet %d.%m.%Y - %H:%M',
     'There is nobody assigned' => 'Mangler tildeling',
