@@ -19,6 +19,7 @@ Improvements:
 * Avoid scrollbar in Gantt chart for row title on Windows platform
 * Remove unnecessary margin for calendar header
 * Show localized documentation if available
+* Add event subtask.delete
 
 Bug fixes:
 

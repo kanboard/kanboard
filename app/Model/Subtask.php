@@ -49,6 +49,7 @@ class Subtask extends Base
      */
     const EVENT_UPDATE = 'subtask.update';
     const EVENT_CREATE = 'subtask.create';
+    const EVENT_DELETE = 'subtask.delete';
 
     /**
      * Get available status
@@ -174,6 +175,23 @@ class Subtask extends Base
     }
 
     /**
+     * Prepare data before insert
+     *
+     * @access public
+     * @param  array    $values    Form values
+     */
+    public function prepareCreation(array &$values)
+    {
+        $this->prepare($values);
+
+        $values['position'] = $this->getLastPosition($values['task_id']) + 1;
+        $values['status'] = isset($values['status']) ? $values['status'] : self::STATUS_TODO;
+        $values['time_estimated'] = isset($values['time_estimated']) ? $values['time_estimated'] : 0;
+        $values['time_spent'] = isset($values['time_spent']) ? $values['time_spent'] : 0;
+        $values['user_id'] = isset($values['user_id']) ? $values['user_id'] : 0;
+    }
+
+    /**
      * Get the position of the last column for a given project
      *
      * @access public
@@ -198,9 +216,7 @@ class Subtask extends Base
      */
     public function create(array $values)
     {
-        $this->prepare($values);
-        $values['position'] = $this->getLastPosition($values['task_id']) + 1;
-
+        $this->prepareCreation($values);
         $subtask_id = $this->persist(self::TABLE, $values);
 
         if ($subtask_id) {
@@ -223,14 +239,13 @@ class Subtask extends Base
     public function update(array $values)
     {
         $this->prepare($values);
+        $subtask = $this->getById($values['id']);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
         if ($result) {
-
-            $this->container['dispatcher']->dispatch(
-                self::EVENT_UPDATE,
-                new SubtaskEvent($values)
-            );
+            $event = $subtask;
+            $event['changes'] = array_diff_assoc($values, $subtask);
+            $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new SubtaskEvent($event));
         }
 
         return $result;
@@ -302,7 +317,6 @@ class Subtask extends Base
         $positions = array_flip($subtasks);
 
         if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] < count($subtasks)) {
-
             $position = ++$subtasks[$subtask_id];
             $subtasks[$positions[$position]]--;
 
@@ -402,7 +416,14 @@ class Subtask extends Base
      */
     public function remove($subtask_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $subtask_id)->remove();
+        $subtask = $this->getById($subtask_id);
+        $result = $this->db->table(self::TABLE)->eq('id', $subtask_id)->remove();
+
+        if ($result) {
+            $this->container['dispatcher']->dispatch(self::EVENT_DELETE, new SubtaskEvent($subtask));
+        }
+
+        return $result;
     }
 
     /**

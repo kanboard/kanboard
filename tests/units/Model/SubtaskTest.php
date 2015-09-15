@@ -13,6 +13,136 @@ use Model\UserSession;
 
 class SubTaskTest extends Base
 {
+    public function onSubtaskCreated($event)
+    {
+        $this->assertInstanceOf('Event\SubtaskEvent', $event);
+        $data = $event->getAll();
+
+        $this->assertArrayHasKey('id', $data);
+        $this->assertArrayHasKey('title', $data);
+        $this->assertArrayHasKey('status', $data);
+        $this->assertArrayHasKey('time_estimated', $data);
+        $this->assertArrayHasKey('time_spent', $data);
+        $this->assertArrayHasKey('status', $data);
+        $this->assertArrayHasKey('task_id', $data);
+        $this->assertArrayHasKey('user_id', $data);
+        $this->assertArrayHasKey('position', $data);
+        $this->assertNotEmpty($data['task_id']);
+        $this->assertNotEmpty($data['id']);
+    }
+
+    public function onSubtaskUpdated($event)
+    {
+        $this->assertInstanceOf('Event\SubtaskEvent', $event);
+        $data = $event->getAll();
+
+        $this->assertArrayHasKey('id', $data);
+        $this->assertArrayHasKey('title', $data);
+        $this->assertArrayHasKey('status', $data);
+        $this->assertArrayHasKey('time_estimated', $data);
+        $this->assertArrayHasKey('time_spent', $data);
+        $this->assertArrayHasKey('status', $data);
+        $this->assertArrayHasKey('task_id', $data);
+        $this->assertArrayHasKey('user_id', $data);
+        $this->assertArrayHasKey('position', $data);
+        $this->assertArrayHasKey('changes', $data);
+        $this->assertArrayHasKey('user_id', $data['changes']);
+        $this->assertArrayHasKey('status', $data['changes']);
+
+        $this->assertEquals(Subtask::STATUS_INPROGRESS, $data['changes']['status']);
+        $this->assertEquals(1, $data['changes']['user_id']);
+    }
+
+    public function onSubtaskDeleted($event)
+    {
+        $this->assertInstanceOf('Event\SubtaskEvent', $event);
+        $data = $event->getAll();
+
+        $this->assertArrayHasKey('id', $data);
+        $this->assertArrayHasKey('title', $data);
+        $this->assertArrayHasKey('status', $data);
+        $this->assertArrayHasKey('time_estimated', $data);
+        $this->assertArrayHasKey('time_spent', $data);
+        $this->assertArrayHasKey('status', $data);
+        $this->assertArrayHasKey('task_id', $data);
+        $this->assertArrayHasKey('user_id', $data);
+        $this->assertArrayHasKey('position', $data);
+        $this->assertNotEmpty($data['task_id']);
+        $this->assertNotEmpty($data['id']);
+    }
+
+    public function testCreation()
+    {
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->container['dispatcher']->addListener(Subtask::EVENT_CREATE, array($this, 'onSubtaskCreated'));
+
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1)));
+
+        $subtask = $s->getById(1);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(1, $subtask['id']);
+        $this->assertEquals(1, $subtask['task_id']);
+        $this->assertEquals('subtask #1', $subtask['title']);
+        $this->assertEquals(Subtask::STATUS_TODO, $subtask['status']);
+        $this->assertEquals(0, $subtask['time_estimated']);
+        $this->assertEquals(0, $subtask['time_spent']);
+        $this->assertEquals(0, $subtask['user_id']);
+        $this->assertEquals(1, $subtask['position']);
+    }
+
+    public function testModification()
+    {
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->container['dispatcher']->addListener(Subtask::EVENT_UPDATE, array($this, 'onSubtaskUpdated'));
+
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1)));
+        $this->assertTrue($s->update(array('id' => 1, 'user_id' => 1, 'status' => Subtask::STATUS_INPROGRESS)));
+
+        $subtask = $s->getById(1);
+        $this->assertNotEmpty($subtask);
+        $this->assertEquals(1, $subtask['id']);
+        $this->assertEquals(1, $subtask['task_id']);
+        $this->assertEquals('subtask #1', $subtask['title']);
+        $this->assertEquals(Subtask::STATUS_INPROGRESS, $subtask['status']);
+        $this->assertEquals(0, $subtask['time_estimated']);
+        $this->assertEquals(0, $subtask['time_spent']);
+        $this->assertEquals(1, $subtask['user_id']);
+        $this->assertEquals(1, $subtask['position']);
+    }
+
+    public function testRemove()
+    {
+        $tc = new TaskCreation($this->container);
+        $s = new Subtask($this->container);
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
+        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1)));
+
+        $this->container['dispatcher']->addListener(Subtask::EVENT_DELETE, array($this, 'onSubtaskDeleted'));
+
+        $subtask = $s->getById(1);
+        $this->assertNotEmpty($subtask);
+
+        $this->assertTrue($s->remove(1));
+
+        $subtask = $s->getById(1);
+        $this->assertEmpty($subtask);
+    }
+
     public function testToggleStatusWithoutSession()
     {
         $tc = new TaskCreation($this->container);
