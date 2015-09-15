@@ -27,7 +27,8 @@ ul.dropdown-submenu-open {
     padding: 0;
     padding-left: 10px;
     padding-right: 10px;
-    line-height: 33px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     font-size: 0.85em;
     border-bottom: 1px solid #f8f8f8;
 }
