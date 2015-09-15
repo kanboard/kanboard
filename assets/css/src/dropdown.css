@@ -36,6 +36,24 @@ ul.dropdown-submenu-open {
     border: none;
 }
 
+.dropdown-submenu-open li:hover {
+    background: #4078C0;
+    color: #fff;
+}
+
+.dropdown-submenu-open li:hover a {
+    color: #fff;
+}
+
+.dropdown-submenu-open a {
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-submenu-open a:focus {
+    text-decoration: underline;
+}
+
 .page-header .dropdown {
     padding-right: 10px;
 }
