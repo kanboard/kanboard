@@ -12,6 +12,7 @@ class SubtaskTimeTrackingSubscriber extends \Core\Base implements EventSubscribe
     {
         return array(
             Subtask::EVENT_CREATE => array('updateTaskTime', 0),
+            Subtask::EVENT_DELETE => array('updateTaskTime', 0),
             Subtask::EVENT_UPDATE => array(
                 array('logStartEnd', 10),
                 array('updateTaskTime', 0),

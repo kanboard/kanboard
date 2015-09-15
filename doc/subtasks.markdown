@@ -40,5 +40,5 @@ Subtask timer
 - Each time a subtask is in progress, the timer is also started. The timer can be started and stopped at any time.
 - The timer records the time spent on the subtask automatically. You can also change manually the value of the time spent field when you edit a subtask.
 - The time calculated is rounded to the nearest quarter. This information is recorded in a separate table.
-- The task time spent is updated automatically according to the sum of all subtasks time spent.
+- The task time spent and time estimated are updated automatically according to the sum of all subtasks.
 
