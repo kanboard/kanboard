@@ -22,4 +22,4 @@ On Mac OS X, you can use those shortcuts to take screenshots:
 
 There are also several third-party applications that can be used to take screenshots with annotations and shapes.
 
-**Note: This feature doesn't works with all browsers.** It doesn't work with Safari due to this bug: https://bugs.webkit.org/show_bug.cgi?id=49141
+**Note: This feature doesn't work with all browsers.** It doesn't work with Safari due to this bug: https://bugs.webkit.org/show_bug.cgi?id=49141
