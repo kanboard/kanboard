@@ -34,6 +34,12 @@ class Task extends Base
     {
         return $this->taskFinder->getOverdueTasks();
     }
+    
+    public function getOverdueTasksByProject($project_id)
+    {
+        $this->checkProjectPermission($project_id);
+        return $this->taskFinder->getOverdueTasksByProject($project_id);
+    }
 
     public function openTask($task_id)
     {

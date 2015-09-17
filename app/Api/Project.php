@@ -58,6 +58,7 @@ class Project extends Base
 
     public function getProjectActivity($project_id)
     {
+        $this->checkProjectPermission($project_id);
         return $this->projectActivity->getProject($project_id);
     }
 

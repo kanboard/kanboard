@@ -19,6 +19,7 @@ abstract class Base extends \Core\Base
         'getMyActivityStream',
         'createMyPrivateProject',
         'getMyProjectsList',
+        'getMyOverdueTasks',
     );
 
     private $both_allowed_procedures = array(
@@ -37,6 +38,8 @@ abstract class Base extends \Core\Base
         'createTask',
         'updateTask',
         'getBoard',
+        'getProjectActivity',
+        'getOverdueTasksByProject',
     );
 
     public function checkProcedurePermission($is_user, $procedure)

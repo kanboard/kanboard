@@ -7,6 +7,7 @@ New features:
 * Add swimlane description
 * New plugin system (alpha)
 * Added Bahasa Indonesia translation
+* Api changes:  new getMyOverdueTasks, new getOverdueTasksByProject, allow getProjectActivity for user-api
 
 Breaking changes:
 

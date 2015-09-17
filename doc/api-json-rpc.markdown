@@ -84,6 +84,8 @@ If there is an authentication error, you will receive the HTTP status code `401 
 - createTask
 - updateTask
 - getBoard
+- getProjectActivity
+- getMyOverdueTasks
 
 ### Custom HTTP header
 
@@ -2448,6 +2450,55 @@ Response example:
 }
 ```
 
+### getOverdueTasksByProject
+
+- Purpose: **Get all overdue tasks for a special project**
+- Result on success: **List of tasks**
+- Result on failure: **false**
+
+Request example to fetch all tasks on the board:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getOverdueTasksByProject",
+    "id": 133280317,
+    "params": {
+        "project_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 133280317,
+    "result": [
+        {
+            "id": "1",
+            "title": "Task #1",
+            "date_due": "1409961789",
+            "project_id": "1",
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
+        },
+        {
+            "id": "2",
+            "title": "Test",
+            "date_due": "1409962115",
+            "project_id": "1",
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
+        },
+        ...
+    ]
+}
+```
+
 ### updateTask
 
 - Purpose: **Update a task**
@@ -4364,5 +4415,50 @@ Response example:
     "result": {
         "2": "my project"
     }
+}
+```
+### getMyOverdueTasks
+
+- Purpose: **Get my overdue tasks**
+- Result on success: **List of tasks**
+- Result on failure: **false**
+
+Request example to fetch all tasks on the board:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getMyOverdueTasks",
+    "id": 133280317
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 133280317,
+    "result": [
+        {
+            "id": "1",
+            "title": "Task #1",
+            "date_due": "1409961789",
+            "project_id": "1",
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
+        },
+        {
+            "id": "2",
+            "title": "Test",
+            "date_due": "1409962115",
+            "project_id": "1",
+            "project_name": "Test",
+            "assignee_username":"admin",
+            "assignee_name": null
+        },
+        ...
+    ]
 }
 ```
