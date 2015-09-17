@@ -9,6 +9,17 @@ use Model\Project;
 
 class FileTest extends Base
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->container['objectStorage'] = $this
+            ->getMockBuilder('\Core\ObjectStorage\FileStorage')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('put', 'moveFile', 'remove'))
+            ->getMock();
+    }
+
     public function testCreation()
     {
         $p = new Project($this->container);
@@ -85,13 +96,32 @@ class FileTest extends Base
     public function testUploadScreenshot()
     {
         $p = new Project($this->container);
-        $f = new File($this->container);
         $tc = new TaskCreation($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
 
-        $this->assertEquals(1, $f->uploadScreenshot(1, 1, base64_encode('image data')));
+        $data = base64_encode('image data');
+
+        $f = $this
+            ->getMockBuilder('\Model\File')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('generateThumbnailFromData'))
+            ->getMock();
+
+        $this->container['objectStorage']
+            ->expects($this->once())
+            ->method('put')
+            ->with(
+                $this->stringContains('1/1/'),
+                $this->equalTo(base64_decode($data))
+            )
+            ->will($this->returnValue(true));
+
+        $f->expects($this->once())
+            ->method('generateThumbnailFromData');
+
+        $this->assertEquals(1, $f->uploadScreenshot(1, 1, $data));
 
         $file = $f->getById(1);
         $this->assertNotEmpty($file);
@@ -113,7 +143,18 @@ class FileTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
 
-        $this->assertEquals(1, $f->uploadContent(1, 1, 'my file.pdf', base64_encode('file data')));
+        $data = base64_encode('file data');
+
+        $this->container['objectStorage']
+            ->expects($this->once())
+            ->method('put')
+            ->with(
+                $this->stringContains('1/1/'),
+                $this->equalTo(base64_decode($data))
+            )
+            ->will($this->returnValue(true));
+
+        $this->assertEquals(1, $f->uploadContent(1, 1, 'my file.pdf', $data));
 
         $file = $f->getById(1);
         $this->assertNotEmpty($file);
@@ -170,9 +211,33 @@ class FileTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
 
-        $this->assertEquals(1, $f->create(1, 'B.pdf', '/tmp/foo', 10));
-        $this->assertEquals(2, $f->create(1, 'A.png', '/tmp/foo', 10));
-        $this->assertEquals(3, $f->create(1, 'D.doc', '/tmp/foo', 10));
+        $this->assertEquals(1, $f->create(1, 'B.pdf', '/tmp/foo1', 10));
+        $this->assertEquals(2, $f->create(1, 'A.png', '/tmp/foo2', 10));
+        $this->assertEquals(3, $f->create(1, 'D.doc', '/tmp/foo3', 10));
+
+        $this->container['objectStorage']
+            ->expects($this->at(0))
+            ->method('remove')
+            ->with(
+                $this->equalTo('/tmp/foo2')
+            )
+            ->will($this->returnValue(true));
+
+        $this->container['objectStorage']
+            ->expects($this->at(1))
+            ->method('remove')
+            ->with(
+                $this->equalTo('/tmp/foo1')
+            )
+            ->will($this->returnValue(true));
+
+        $this->container['objectStorage']
+            ->expects($this->at(2))
+            ->method('remove')
+            ->with(
+                $this->equalTo('/tmp/foo3')
+            )
+            ->will($this->returnValue(true));
 
         $this->assertTrue($f->remove(2));
 

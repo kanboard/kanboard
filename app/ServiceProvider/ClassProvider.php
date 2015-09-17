@@ -2,6 +2,7 @@
 
 namespace ServiceProvider;
 
+use Core\ObjectStorage\FileStorage;
 use Core\Paginator;
 use Core\OAuth2;
 use Core\Tool;
@@ -105,6 +106,10 @@ class ClassProvider implements ServiceProviderInterface
 
         $container['htmlConverter'] = function($c) {
             return new HtmlConverter(array('strip_tags' => true));
+        };
+
+        $container['objectStorage'] = function($c) {
+            return new FileStorage(FILES_DIR);
         };
     }
 }

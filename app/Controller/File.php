@@ -60,7 +60,7 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        if (! $this->file->upload($task['project_id'], $task['id'], 'files')) {
+        if (! $this->file->uploadFiles($task['project_id'], $task['id'], 'files')) {
             $this->session->flashError(t('Unable to upload the file.'));
         }
 
@@ -76,14 +76,13 @@ class File extends Base
     {
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-        $filename = FILES_DIR.$file['path'];
 
-        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
-            $this->response->forceDownload($file['name']);
-            $this->response->binary(file_get_contents($filename));
+        if ($file['task_id'] != $task['id']) {
+            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->forceDownload($file['name']);
+        $this->objectStorage->passthru($file['path']);
     }
 
     /**
@@ -113,16 +112,13 @@ class File extends Base
     {
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-        $filename = FILES_DIR.$file['path'];
 
-        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
-            $metadata = getimagesize($filename);
-
-            if (isset($metadata['mime'])) {
-                $this->response->contentType($metadata['mime']);
-                readfile($filename);
-            }
+        if ($file['task_id'] != $task['id']) {
+            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
+
+        $this->response->contentType($this->file->getImageMimeType($file['name']));
+        $this->objectStorage->passthru($file['path']);
     }
 
     /**
@@ -134,17 +130,13 @@ class File extends Base
     {
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
-        $filename = FILES_DIR.$file['path'];
 
-        if ($file['task_id'] == $task['id'] && file_exists($filename)) {
-
-            $this->response->contentType('image/jpeg');
-            $this->file->generateThumbnail(
-                $filename,
-                $this->request->getIntegerParam('width'),
-                $this->request->getIntegerParam('height')
-            );
+        if ($file['task_id'] != $task['id']) {
+            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
         }
+
+        $this->response->contentType('image/jpeg');
+        $this->objectStorage->passthru($this->file->getThumbnailPath($file['path']));
     }
 
     /**

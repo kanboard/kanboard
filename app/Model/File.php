@@ -3,6 +3,8 @@
 namespace Model;
 
 use Event\FileEvent;
+use Core\Tool;
+use Core\ObjectStorage\ObjectStorageException;
 
 /**
  * File model
@@ -47,14 +49,17 @@ class File extends Base
      */
     public function remove($file_id)
     {
-        $file = $this->getbyId($file_id);
+        try {
 
-        if (! empty($file)) {
-            @unlink(FILES_DIR.$file['path']);
-            return $this->db->table(self::TABLE)->eq('id', $file_id)->remove();
+            $file = $this->getbyId($file_id);
+            $this->objectStorage->remove($file['path']);
+
+            return $this->db->table(self::TABLE)->eq('id', $file['id'])->remove();
         }
-
-        return false;
+        catch (ObjectStorageException $e) {
+            $this->logger->error($e->getMessage());
+            return false;
+        }
     }
 
     /**
@@ -66,11 +71,11 @@ class File extends Base
      */
     public function removeAll($task_id)
     {
-        $files = $this->getAll($task_id);
+        $file_ids = $this->db->table(self::TABLE)->eq('task_id', $task_id)->asc('id')->findAllByColumn('id');
         $results = array();
 
-        foreach ($files as $file) {
-            $results[] = $this->remove($file['id']);
+        foreach ($file_ids as $file_id) {
+            $results[] = $this->remove($file_id);
         }
 
         return ! in_array(false, $results, true);
@@ -196,6 +201,30 @@ class File extends Base
     }
 
     /**
+     * Return the image mimetype based on the file extension
+     *
+     * @access public
+     * @param  $filename
+     * @return string
+     */
+    public function getImageMimeType($filename)
+    {
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+        switch ($extension) {
+            case 'jpeg':
+            case 'jpg':
+                return 'image/jpeg';
+            case 'png':
+                return 'image/png';
+            case 'gif':
+                return 'image/gif';
+            default:
+                return 'image/jpeg';
+        }
+    }
+
+    /**
      * Generate the path for a new filename
      *
      * @access public
@@ -210,6 +239,18 @@ class File extends Base
     }
 
     /**
+     * Generate the path for a thumbnails
+     *
+     * @access public
+     * @param  string  $key  Storage key
+     * @return string
+     */
+    public function getThumbnailPath($key)
+    {
+        return 'thumbnails'.DIRECTORY_SEPARATOR.$key;
+    }
+
+    /**
      * Handle file upload
      *
      * @access public
@@ -218,11 +259,13 @@ class File extends Base
      * @param  string   $form_name     File form name
      * @return bool
      */
-    public function upload($project_id, $task_id, $form_name)
+    public function uploadFiles($project_id, $task_id, $form_name)
     {
-        $results = array();
+        try {
 
-        if (! empty($_FILES[$form_name])) {
+            if (empty($_FILES[$form_name])) {
+                return false;
+            }
 
             foreach ($_FILES[$form_name]['error'] as $key => $error) {
 
@@ -232,22 +275,27 @@ class File extends Base
                     $uploaded_filename = $_FILES[$form_name]['tmp_name'][$key];
                     $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
 
-                    @mkdir(FILES_DIR.dirname($destination_filename), 0755, true);
-
-                    if (@move_uploaded_file($uploaded_filename, FILES_DIR.$destination_filename)) {
-
-                        $results[] = $this->create(
-                            $task_id,
-                            $original_filename,
-                            $destination_filename,
-                            $_FILES[$form_name]['size'][$key]
-                        );
+                    if ($this->isImage($original_filename)) {
+                        $this->generateThumbnailFromFile($uploaded_filename, $destination_filename);
                     }
+
+                    $this->objectStorage->moveUploadedFile($uploaded_filename, $destination_filename);
+
+                    $this->create(
+                        $task_id,
+                        $original_filename,
+                        $destination_filename,
+                        $_FILES[$form_name]['size'][$key]
+                    );
                 }
             }
-        }
 
-        return ! in_array(false, $results, true);
+            return true;
+        }
+        catch (ObjectStorageException $e) {
+            $this->logger->error($e->getMessage());
+            return false;
+        }
     }
 
     /**
@@ -261,129 +309,77 @@ class File extends Base
      */
     public function uploadScreenshot($project_id, $task_id, $blob)
     {
-        $data = base64_decode($blob);
-
-        if (empty($data)) {
-            return false;
-        }
-
         $original_filename = e('Screenshot taken %s', dt('%B %e, %Y at %k:%M %p', time())).'.png';
-        $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
-
-        @mkdir(FILES_DIR.dirname($destination_filename), 0755, true);
-        @file_put_contents(FILES_DIR.$destination_filename, $data);
-
-        return $this->create(
-            $task_id,
-            $original_filename,
-            $destination_filename,
-            strlen($data)
-        );
+        return $this->uploadContent($project_id, $task_id, $original_filename, $blob);
     }
 
     /**
      * Handle file upload (base64 encoded content)
      *
      * @access public
-     * @param  integer  $project_id   Project id
-     * @param  integer  $task_id      Task id
-     * @param  string   $filename     Filename
-     * @param  string   $blob         Base64 encoded image
+     * @param  integer  $project_id            Project id
+     * @param  integer  $task_id               Task id
+     * @param  string   $original_filename     Filename
+     * @param  string   $blob                  Base64 encoded file
      * @return bool|integer
      */
-    public function uploadContent($project_id, $task_id, $filename, $blob)
+    public function uploadContent($project_id, $task_id, $original_filename, $blob)
     {
-        $data = base64_decode($blob);
+        try {
 
-        if (empty($data)) {
+            $data = base64_decode($blob);
+
+            if (empty($data)) {
+                return false;
+            }
+
+            $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
+            $this->objectStorage->put($destination_filename, $data);
+
+            if ($this->isImage($original_filename)) {
+                $this->generateThumbnailFromData($destination_filename, $data);
+            }
+
+            return $this->create(
+                $task_id,
+                $original_filename,
+                $destination_filename,
+                strlen($data)
+            );
+        }
+        catch (ObjectStorageException $e) {
+            $this->logger->error($e->getMessage());
             return false;
         }
-
-        $destination_filename = $this->generatePath($project_id, $task_id, $filename);
-
-        @mkdir(FILES_DIR.dirname($destination_filename), 0755, true);
-        @file_put_contents(FILES_DIR.$destination_filename, $data);
-
-        return $this->create(
-            $task_id,
-            $filename,
-            $destination_filename,
-            strlen($data)
-        );
     }
 
     /**
-     * Generate a jpeg thumbnail from an image (output directly the image)
+     * Generate thumbnail from a blob
      *
      * @access public
-     * @param  string    $filename         Source image
-     * @param  integer   $resize_width     Desired image width
-     * @param  integer   $resize_height    Desired image height
+     * @param  string   $destination_filename
+     * @param  string   $data
      */
-    public function generateThumbnail($filename, $resize_width, $resize_height)
+    public function generateThumbnailFromData($destination_filename, &$data)
     {
-        $metadata = getimagesize($filename);
-        $src_width = $metadata[0];
-        $src_height = $metadata[1];
-        $dst_y = 0;
-        $dst_x = 0;
+        $temp_filename = tempnam(sys_get_temp_dir(), 'datafile');
 
-        if (empty($metadata['mime'])) {
-            return;
-        }
+        file_put_contents($temp_filename, $data);
+        $this->generateThumbnailFromFile($temp_filename, $destination_filename);
+        unlink($temp_filename);
+    }
 
-        if ($resize_width == 0 && $resize_height == 0) {
-            $resize_width = 100;
-            $resize_height = 100;
-        }
-
-        if ($resize_width > 0 && $resize_height == 0) {
-            $dst_width = $resize_width;
-            $dst_height = floor($src_height * ($resize_width / $src_width));
-            $dst_image = imagecreatetruecolor($dst_width, $dst_height);
-        }
-        elseif ($resize_width == 0 && $resize_height > 0) {
-            $dst_width = floor($src_width * ($resize_height / $src_height));
-            $dst_height = $resize_height;
-            $dst_image = imagecreatetruecolor($dst_width, $dst_height);
-        }
-        else {
-
-            $src_ratio = $src_width / $src_height;
-            $resize_ratio = $resize_width / $resize_height;
-
-            if ($src_ratio <= $resize_ratio) {
-                $dst_width = $resize_width;
-                $dst_height = floor($src_height * ($resize_width / $src_width));
-
-                $dst_y = ($dst_height - $resize_height) / 2 * (-1);
-            }
-            else {
-                $dst_width = floor($src_width * ($resize_height / $src_height));
-                $dst_height = $resize_height;
-
-                $dst_x = ($dst_width - $resize_width) / 2 * (-1);
-            }
-
-            $dst_image = imagecreatetruecolor($resize_width, $resize_height);
-        }
-
-        switch ($metadata['mime']) {
-            case 'image/jpeg':
-            case 'image/jpg':
-                $src_image = imagecreatefromjpeg($filename);
-                break;
-            case 'image/png':
-                $src_image = imagecreatefrompng($filename);
-                break;
-            case 'image/gif':
-                $src_image = imagecreatefromgif($filename);
-                break;
-            default:
-                return;
-        }
-
-        imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, 0, 0, $dst_width, $dst_height, $src_width, $src_height);
-        imagejpeg($dst_image);
+    /**
+     * Generate thumbnail from a blob
+     *
+     * @access public
+     * @param  string   $uploaded_filename
+     * @param  string   $destination_filename
+     */
+    public function generateThumbnailFromFile($uploaded_filename, $destination_filename)
+    {
+        $thumbnail_filename = tempnam(sys_get_temp_dir(), 'thumbnail');
+        Tool::generateThumbnail($uploaded_filename, $thumbnail_filename);
+        $this->objectStorage->moveFile($thumbnail_filename, $this->getThumbnailPath($destination_filename));
     }
 }
