@@ -3,9 +3,10 @@ Version 1.0.19 (unreleased)
 
 New features:
 
-* Add LDAP group sync
+* Added LDAP group sync
 * Add swimlane description
 * New plugin system (alpha)
+* Added Bahasa Indonesia translation
 
 Breaking changes:
 

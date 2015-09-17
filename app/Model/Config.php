@@ -75,6 +75,7 @@ class Config extends Base
     {
         // Sorted by value
         $languages = array(
+            'id_ID' => 'Bahasa Indonesia',
             'cs_CZ' => 'Čeština',
             'da_DK' => 'Dansk',
             'de_DE' => 'Deutsch',
@@ -96,7 +97,6 @@ class Config extends Base
             'zh_CN' => '中文(简体)',
             'ja_JP' => '日本語',
             'th_TH' => 'ไทย',
-            'id_ID' => 'Bahasa Indonesia',
         );
 
         if ($prepend) {
