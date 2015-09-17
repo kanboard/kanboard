@@ -211,19 +211,19 @@ class Router extends Base
     public function dispatch($uri, $query_string = '')
     {
         if (! empty($_GET['controller']) && ! empty($_GET['action'])) {
-            $controller = $this->sanitize($_GET['controller'], 'app');
-            $action = $this->sanitize($_GET['action'], 'index');
+            $this->controller = $this->sanitize($_GET['controller'], 'app');
+            $this->action = $this->sanitize($_GET['action'], 'index');
             $plugin = ! empty($_GET['plugin']) ? $this->sanitize($_GET['plugin'], '') : '';
         }
         else {
-            list($controller, $action) = $this->findRoute($this->getPath($uri, $query_string)); // TODO: add plugin for routes
+            list($this->controller, $this->action) = $this->findRoute($this->getPath($uri, $query_string)); // TODO: add plugin for routes
             $plugin = '';
         }
 
-        $class = empty($plugin) ? '\Controller\\'.ucfirst($controller) : '\Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($controller);
+        $class = empty($plugin) ? '\Controller\\'.ucfirst($this->controller) : '\Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($this->controller);
 
         $instance = new $class($this->container);
-        $instance->beforeAction($controller, $action);
-        $instance->$action();
+        $instance->beforeAction($this->controller, $this->action);
+        $instance->{$this->action}();
     }
 }
