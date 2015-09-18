@@ -20,6 +20,7 @@ abstract class Base extends \Core\Base
         'createMyPrivateProject',
         'getMyProjectsList',
         'getMyOverdueTasks',
+        'getMyProjects',
     );
 
     private $both_allowed_procedures = array(

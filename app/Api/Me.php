@@ -57,4 +57,9 @@ class Me extends Base
     {
         return $this->taskFinder->getOverdueTasksByUser($this->userSession->getId());
     }
+    
+    public function getMyProjects()
+    {
+        return $this->formatProjects($this->project->getAllByIds($this->projectPermission->getActiveMemberProjectIds($this->userSession->getId())));
+    }
 }
