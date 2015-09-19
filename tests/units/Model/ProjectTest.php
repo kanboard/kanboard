@@ -133,6 +133,17 @@ class ProjectTest extends Base
         $this->assertGreaterThan($now, $project['last_modified']);
     }
 
+    public function testGetAllIds()
+    {
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+
+        $this->assertEmpty($p->getAllByIds(array()));
+        $this->assertNotEmpty($p->getAllByIds(array(1, 2)));
+        $this->assertCount(1, $p->getAllByIds(array(1)));
+    }
+
     public function testIsLastModified()
     {
         $p = new Project($this->container);

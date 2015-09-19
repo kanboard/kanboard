@@ -177,6 +177,34 @@ class TaskFinder extends Base
     }
 
     /**
+     * Get overdue tasks query
+     *
+     * @access public
+     * @return \PicoDb\Table
+     */
+    public function getOverdueTasksQuery()
+    {
+        return $this->db->table(Task::TABLE)
+                    ->columns(
+                        Task::TABLE.'.id',
+                        Task::TABLE.'.title',
+                        Task::TABLE.'.date_due',
+                        Task::TABLE.'.project_id',
+                        Task::TABLE.'.creator_id',
+                        Task::TABLE.'.owner_id',
+                        Project::TABLE.'.name AS project_name',
+                        User::TABLE.'.username AS assignee_username',
+                        User::TABLE.'.name AS assignee_name'
+                    )
+                    ->join(Project::TABLE, 'id', 'project_id')
+                    ->join(User::TABLE, 'id', 'owner_id')
+                    ->eq(Project::TABLE.'.is_active', 1)
+                    ->eq(Task::TABLE.'.is_active', 1)
+                    ->neq(Task::TABLE.'.date_due', 0)
+                    ->lte(Task::TABLE.'.date_due', mktime(23, 59, 59));
+    }
+
+    /**
      * Get a list of overdue tasks for all projects
      *
      * @access public
@@ -184,91 +212,31 @@ class TaskFinder extends Base
      */
     public function getOverdueTasks()
     {
-        $tasks = $this->db->table(Task::TABLE)
-                    ->columns(
-                        Task::TABLE.'.id',
-                        Task::TABLE.'.title',
-                        Task::TABLE.'.date_due',
-                        Task::TABLE.'.project_id',
-                        Task::TABLE.'.creator_id',
-                        Task::TABLE.'.owner_id',
-                        Project::TABLE.'.name AS project_name',
-                        User::TABLE.'.username AS assignee_username',
-                        User::TABLE.'.name AS assignee_name'
-                    )
-                    ->join(Project::TABLE, 'id', 'project_id')
-                    ->join(User::TABLE, 'id', 'owner_id')
-                    ->eq(Project::TABLE.'.is_active', 1)
-                    ->eq(Task::TABLE.'.is_active', 1)
-                    ->neq(Task::TABLE.'.date_due', 0)
-                    ->lte(Task::TABLE.'.date_due', mktime(23, 59, 59))
-                    ->findAll();
-
-        return $tasks;
+        return $this->getOverdueTasksQuery()->findAll();
     }
-    
+
      /**
      * Get a list of overdue tasks by project
      *
      * @access public
+     * @param  integer $project_id
      * @return array
      */
     public function getOverdueTasksByProject($project_id)
     {
-        $tasks = $this->db->table(Task::TABLE)
-                    ->columns(
-                        Task::TABLE.'.id',
-                        Task::TABLE.'.title',
-                        Task::TABLE.'.date_due',
-                        Task::TABLE.'.project_id',
-                        Task::TABLE.'.creator_id',
-                        Task::TABLE.'.owner_id',
-                        Project::TABLE.'.name AS project_name',
-                        User::TABLE.'.username AS assignee_username',
-                        User::TABLE.'.name AS assignee_name'
-                    )
-                    ->join(Project::TABLE, 'id', 'project_id')
-                    ->join(User::TABLE, 'id', 'owner_id')
-                    ->eq(Project::TABLE.'.is_active', 1)
-                    ->eq(Task::TABLE.'.project_id', $project_id)
-                    ->eq(Task::TABLE.'.is_active', 1)
-                    ->neq(Task::TABLE.'.date_due', 0)
-                    ->lte(Task::TABLE.'.date_due', mktime(23, 59, 59))
-                    ->findAll();
-
-        return $tasks;
+        return $this->getOverdueTasksQuery()->eq(Task::TABLE.'.project_id', $project_id)->findAll();
     }
-    
+
      /**
      * Get a list of overdue tasks by user
      *
      * @access public
+     * @param  integer $user_id
      * @return array
      */
     public function getOverdueTasksByUser($user_id)
     {
-        $tasks = $this->db->table(Task::TABLE)
-                    ->columns(
-                        Task::TABLE.'.id',
-                        Task::TABLE.'.title',
-                        Task::TABLE.'.date_due',
-                        Task::TABLE.'.project_id',
-                        Task::TABLE.'.creator_id',
-                        Task::TABLE.'.owner_id',
-                        Project::TABLE.'.name AS project_name',
-                        User::TABLE.'.username AS assignee_username',
-                        User::TABLE.'.name AS assignee_name'
-                    )
-                    ->join(Project::TABLE, 'id', 'project_id')
-                    ->join(User::TABLE, 'id', 'owner_id')
-                    ->eq(Project::TABLE.'.is_active', 1)
-                    ->eq(Task::TABLE.'.owner_id', $user_id)
-                    ->eq(Task::TABLE.'.is_active', 1)
-                    ->neq(Task::TABLE.'.date_due', 0)
-                    ->lte(Task::TABLE.'.date_due', mktime(23, 59, 59))
-                    ->findAll();
-
-        return $tasks;
+        return $this->getOverdueTasksQuery()->eq(Task::TABLE.'.owner_id', $user_id)->findAll();
     }
 
     /**

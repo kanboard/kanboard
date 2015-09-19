@@ -1055,4 +1055,31 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertEquals('TICKET-1234', $task['reference']);
         $this->assertEquals('http://127.0.0.1:8000/?controller=task&action=show&task_id='.$task['id'].'&project_id='.$task['project_id'], $task['url']);
     }
+
+    public function testCreateOverdueTask()
+    {
+        $this->assertNotFalse($this->client->createTask(array(
+            'title' => 'overdue task',
+            'project_id' => 1,
+            'date_due' => date('Y-m-d', strtotime('-2days')),
+        )));
+    }
+
+    public function testGetOverdueTasksByProject()
+    {
+        $tasks = $this->client->getOverdueTasksByProject(1);
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('overdue task', $tasks[0]['title']);
+        $this->assertEquals('API test', $tasks[0]['project_name']);
+    }
+
+    public function testGetOverdueTasks()
+    {
+        $tasks = $this->client->getOverdueTasks();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('overdue task', $tasks[0]['title']);
+        $this->assertEquals('API test', $tasks[0]['project_name']);
+    }
 }

@@ -172,16 +172,20 @@ class Project extends Base
     {
         return $this->db->table(self::TABLE)->asc('name')->findAll();
     }
-    
+
     /**
      * Get all projects with given Ids
      *
      * @access public
-     * @param  integer[]   $project_ids     Projects id
+     * @param  integer[]   $project_ids
      * @return array
      */
-    public function getAllByIds($project_ids)
+    public function getAllByIds(array $project_ids)
     {
+        if (empty($project_ids)) {
+            return array();
+        }
+
         return $this->db->table(self::TABLE)->in('id', $project_ids)->asc('name')->findAll();
     }
 

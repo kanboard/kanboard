@@ -121,6 +121,7 @@ class UserApi extends PHPUnit_Framework_TestCase
     {
         $profile = $this->user->getMe();
         $this->assertNotEmpty($profile);
+        $this->assertEquals(2, $profile['id']);
         $this->assertEquals('user', $profile['username']);
     }
 
@@ -136,6 +137,18 @@ class UserApi extends PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey(1, $projects);
         $this->assertArrayHasKey(2, $projects);
         $this->assertEquals('my project', $projects[2]);
+    }
+
+    public function testGetMyProjects()
+    {
+        $projects = $this->user->getMyProjects();
+        $this->assertNotEmpty($projects);
+        $this->assertCount(1, $projects);
+        $this->assertEquals(2, $projects[0]['id']);
+        $this->assertEquals('my project', $projects[0]['name']);
+        $this->assertNotEmpty($projects[0]['url']['calendar']);
+        $this->assertNotEmpty($projects[0]['url']['board']);
+        $this->assertNotEmpty($projects[0]['url']['list']);
     }
 
     public function testGetProjectById()
@@ -170,6 +183,20 @@ class UserApi extends PHPUnit_Framework_TestCase
     public function testGetAdminTask()
     {
         $this->user->getTask(2);
+    }
+
+    /**
+     * @expectedException JsonRPC\AccessDeniedException
+     */
+    public function testGetProjectActivityDenied()
+    {
+        $this->user->getProjectActivity(1);
+    }
+
+    public function testGetProjectActivityAllowed()
+    {
+        $activity = $this->user->getProjectActivity(2);
+        $this->assertNotEmpty($activity);
     }
 
     public function testGetMyActivityStream()
@@ -221,5 +248,33 @@ class UserApi extends PHPUnit_Framework_TestCase
     public function testGetBoard()
     {
         $this->assertNotEmpty($this->user->getBoard(2));
+    }
+
+    public function testCreateOverdueTask()
+    {
+        $this->assertNotFalse($this->user->createTask(array(
+            'title' => 'overdue task',
+            'project_id' => 2,
+            'date_due' => date('Y-m-d', strtotime('-2days')),
+            'owner_id' => 2,
+        )));
+    }
+
+    public function testGetMyOverdueTasks()
+    {
+        $tasks = $this->user->getMyOverdueTasks();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('overdue task', $tasks[0]['title']);
+        $this->assertEquals('my project', $tasks[0]['project_name']);
+    }
+
+    public function testGetOverdueTasksByProject()
+    {
+        $tasks = $this->user->getOverdueTasksByProject(2);
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('overdue task', $tasks[0]['title']);
+        $this->assertEquals('my project', $tasks[0]['project_name']);
     }
 }

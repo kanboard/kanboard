@@ -7,7 +7,7 @@
         "eluceo/ical": "0.8.0",
         "erusev/parsedown" : "1.5.4",
         "fabiang/xmpp" : "0.6.1",
-        "fguillot/json-rpc" : "1.0.2",
+        "fguillot/json-rpc" : "1.0.3",
         "fguillot/picodb" : "1.0.2",
         "fguillot/simpleLogger" : "1.0.0",
         "fguillot/simple-validator" : "1.0.0",

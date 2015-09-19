@@ -19,8 +19,8 @@ abstract class Base extends \Core\Base
         'getMyActivityStream',
         'createMyPrivateProject',
         'getMyProjectsList',
-        'getMyOverdueTasks',
         'getMyProjects',
+        'getMyOverdueTasks',
     );
 
     private $both_allowed_procedures = array(
@@ -70,7 +70,7 @@ abstract class Base extends \Core\Base
         }
     }
 
-    protected function formatTask($task)
+    protected function formatTask(array $task)
     {
         if (! empty($task)) {
             $task['url'] = $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
@@ -80,7 +80,7 @@ abstract class Base extends \Core\Base
         return $task;
     }
 
-    protected function formatTasks($tasks)
+    protected function formatTasks(array $tasks)
     {
         if (! empty($tasks)) {
             foreach ($tasks as &$task) {
@@ -91,7 +91,7 @@ abstract class Base extends \Core\Base
         return $tasks;
     }
 
-    protected function formatProject($project)
+    protected function formatProject(array $project)
     {
         if (! empty($project)) {
             $project['url'] = array(
@@ -104,7 +104,7 @@ abstract class Base extends \Core\Base
         return $project;
     }
 
-    protected function formatProjects($projects)
+    protected function formatProjects(array $projects)
     {
         if (! empty($projects)) {
             foreach ($projects as &$project) {
