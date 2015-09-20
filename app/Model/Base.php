@@ -62,14 +62,30 @@ abstract class Base extends \Core\Base
     public function removeFields(array &$values, array $keys)
     {
         foreach ($keys as $key) {
-            if (isset($values[$key])) {
+            if (array_key_exists($key, $values)) {
                 unset($values[$key]);
             }
         }
     }
 
     /**
-     * Force some fields to be at 0 if empty
+     * Remove keys from an array if empty
+     *
+     * @access public
+     * @param  array     $values    Input array
+     * @param  string[]  $keys      List of keys to remove
+     */
+    public function removeEmptyFields(array &$values, array $keys)
+    {
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $values) && empty($values[$key])) {
+                unset($values[$key]);
+            }
+        }
+    }
+
+    /**
+     * Force fields to be at 0 if empty
      *
      * @access public
      * @param  array        $values    Input array

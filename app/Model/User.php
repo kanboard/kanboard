@@ -91,7 +91,7 @@ class User extends Base
                     ->table(User::TABLE)
                     ->eq('id', $user_id)
                     ->eq('is_admin', 1)
-                    ->count() === 1;
+                    ->exists();
     }
 
     /**
@@ -251,7 +251,7 @@ class User extends Base
         $result = array();
 
         foreach ($users as $user) {
-            $result[$user['id']] = $user['name'] ?: $user['username'];
+            $result[$user['id']] = $this->getFullname($user);
         }
 
         asort($result);
@@ -278,7 +278,9 @@ class User extends Base
         }
 
         $this->removeFields($values, array('confirmation', 'current_password'));
-        $this->resetFields($values, array('is_admin', 'is_ldap_user', 'is_project_admin'));
+        $this->resetFields($values, array('is_admin', 'is_ldap_user', 'is_project_admin', 'disable_login_form'));
+        $this->removeEmptyFields($values, array('gitlab_id'));
+        $this->convertIntegerFields($values, array('gitlab_id'));
     }
 
     /**

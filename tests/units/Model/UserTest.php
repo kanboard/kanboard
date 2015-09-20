@@ -76,6 +76,109 @@ class UserTest extends Base
         $this->assertEmpty($u->getByGoogleId(''));
     }
 
+    public function testGetByToken()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'user1', 'token' => 'random')));
+        $this->assertNotFalse($u->create(array('username' => 'user2', 'token' => '')));
+
+        $this->assertNotEmpty($u->getByToken('random'));
+        $this->assertEmpty($u->getByToken(''));
+    }
+
+    public function testGetByUsername()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'user1')));
+
+        $this->assertNotEmpty($u->getByUsername('user1'));
+        $this->assertEmpty($u->getByUsername('user2'));
+        $this->assertEmpty($u->getByUsername(''));
+    }
+
+    public function testExists()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'user1')));
+
+        $this->assertTrue($u->exists(1));
+        $this->assertTrue($u->exists(2));
+        $this->assertFalse($u->exists(3));
+    }
+
+    public function testCount()
+    {
+        $u = new User($this->container);
+        $this->assertNotFalse($u->create(array('username' => 'user1')));
+        $this->assertEquals(2, $u->count());
+    }
+
+    public function testGetAll()
+    {
+        $u = new User($this->container);
+        $this->assertEquals(2, $u->create(array('username' => 'you')));
+        $this->assertEquals(3, $u->create(array('username' => 'me', 'name' => 'Me')));
+
+        $users = $u->getAll();
+        $this->assertCount(3, $users);
+        $this->assertEquals('admin', $users[0]['username']);
+        $this->assertEquals('me', $users[1]['username']);
+        $this->assertEquals('you', $users[2]['username']);
+    }
+
+    public function testGetList()
+    {
+        $u = new User($this->container);
+        $this->assertEquals(2, $u->create(array('username' => 'you')));
+        $this->assertEquals(3, $u->create(array('username' => 'me', 'name' => 'Me too')));
+
+        $users = $u->getList();
+
+        $expected = array(
+            1 => 'admin',
+            3 => 'Me too',
+            2 => 'you',
+        );
+
+        $this->assertEquals($expected, $users);
+
+        $users = $u->getList(true);
+
+        $expected = array(
+            User::EVERYBODY_ID => 'Everybody',
+            1 => 'admin',
+            3 => 'Me too',
+            2 => 'you',
+        );
+
+        $this->assertEquals($expected, $users);
+    }
+
+    public function testGetFullname()
+    {
+        $u = new User($this->container);
+        $this->assertEquals(2, $u->create(array('username' => 'user1')));
+        $this->assertEquals(3, $u->create(array('username' => 'user2', 'name' => 'User #2')));
+
+        $user1 = $u->getById(2);
+        $user2 = $u->getById(3);
+
+        $this->assertNotEmpty($user1);
+        $this->assertNotEmpty($user2);
+
+        $this->assertEquals('user1', $u->getFullname($user1));
+        $this->assertEquals('User #2', $u->getFullname($user2));
+    }
+
+    public function testIsAdmin()
+    {
+        $u = new User($this->container);
+        $this->assertEquals(2, $u->create(array('username' => 'user1')));
+
+        $this->assertTrue($u->isAdmin(1));
+        $this->assertFalse($u->isAdmin(2));
+    }
+
     public function testPassword()
     {
         $password = 'test123';
@@ -134,15 +237,46 @@ class UserTest extends Base
 
         $u->prepare($input);
         $this->assertEquals(array('id' => 2, 'name' => 'me'), $input);
+
+        $input = array(
+            'gitlab_id' => '1234',
+        );
+
+        $u->prepare($input);
+        $this->assertEquals(array('gitlab_id' => 1234), $input);
+
+        $input = array(
+            'gitlab_id' => '',
+        );
+
+        $u->prepare($input);
+        $this->assertEquals(array(), $input);
+
+        $input = array(
+            'gitlab_id' => 'something',
+        );
+
+        $u->prepare($input);
+        $this->assertEquals(array('gitlab_id' => 0), $input);
+
+        $input = array(
+            'username' => 'something',
+            'password' => ''
+        );
+
+        $u->prepare($input);
+        $this->assertEquals(array('username' => 'something'), $input);
     }
 
     public function testCreate()
     {
         $u = new User($this->container);
-        $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
-        $this->assertNotFalse($u->create(array('username' => 'titi', 'is_ldap_user' => 1)));
-        $this->assertNotFalse($u->create(array('username' => 'papa', 'is_project_admin' => 1)));
-        $this->assertFalse($u->create(array('username' => 'toto')));
+        $this->assertEquals(2, $u->create(array('username' => 'user #1', 'password' => '123456', 'name' => 'User')));
+        $this->assertEquals(3, $u->create(array('username' => 'user #2', 'is_ldap_user' => 1)));
+        $this->assertEquals(4, $u->create(array('username' => 'user #3', 'is_project_admin' => 1)));
+        $this->assertEquals(5, $u->create(array('username' => 'user #4', 'gitlab_id' => '')));
+        $this->assertEquals(6, $u->create(array('username' => 'user #5', 'gitlab_id' => '1234')));
+        $this->assertFalse($u->create(array('username' => 'user #1')));
 
         $user = $u->getById(1);
         $this->assertNotFalse($user);
@@ -155,15 +289,15 @@ class UserTest extends Base
         $user = $u->getById(2);
         $this->assertNotFalse($user);
         $this->assertTrue(is_array($user));
-        $this->assertEquals('toto', $user['username']);
-        $this->assertEquals('Toto', $user['name']);
+        $this->assertEquals('user #1', $user['username']);
+        $this->assertEquals('User', $user['name']);
         $this->assertEquals(0, $user['is_admin']);
         $this->assertEquals(0, $user['is_ldap_user']);
 
         $user = $u->getById(3);
         $this->assertNotFalse($user);
         $this->assertTrue(is_array($user));
-        $this->assertEquals('titi', $user['username']);
+        $this->assertEquals('user #2', $user['username']);
         $this->assertEquals('', $user['name']);
         $this->assertEquals(0, $user['is_admin']);
         $this->assertEquals(1, $user['is_ldap_user']);
@@ -171,9 +305,21 @@ class UserTest extends Base
         $user = $u->getById(4);
         $this->assertNotFalse($user);
         $this->assertTrue(is_array($user));
-        $this->assertEquals('papa', $user['username']);
+        $this->assertEquals('user #3', $user['username']);
         $this->assertEquals(0, $user['is_admin']);
         $this->assertEquals(1, $user['is_project_admin']);
+
+        $user = $u->getById(5);
+        $this->assertNotFalse($user);
+        $this->assertTrue(is_array($user));
+        $this->assertEquals('user #4', $user['username']);
+        $this->assertEquals('', $user['gitlab_id']);
+
+        $user = $u->getById(6);
+        $this->assertNotFalse($user);
+        $this->assertTrue(is_array($user));
+        $this->assertEquals('user #5', $user['username']);
+        $this->assertEquals('1234', $user['gitlab_id']);
     }
 
     public function testUpdate()

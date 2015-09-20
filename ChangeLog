@@ -31,6 +31,7 @@ Bug fixes:
 * Fix Markdown preview links focus
 * Avoid dropdown menu to be truncated inside a column with scrolling
 * Deleting subtask doesn't update task time tracking
+* Fix Mysql error about gitlab_id when creating remote user
 
 Version 1.0.18
 --------------

@@ -21,13 +21,13 @@
             <?= $this->form->email('email', $values, $errors) ?><br/>
 
             <?= $this->form->label(t('Google Id'), 'google_id') ?>
-            <?= $this->form->password('google_id', $values, $errors) ?><br/>
+            <?= $this->form->text('google_id', $values, $errors) ?><br/>
 
             <?= $this->form->label(t('Github Id'), 'github_id') ?>
-            <?= $this->form->password('github_id', $values, $errors) ?><br/>
+            <?= $this->form->text('github_id', $values, $errors) ?><br/>
 
             <?= $this->form->label(t('Gitlab Id'), 'gitlab_id') ?>
-            <?= $this->form->password('gitlab_id', $values, $errors) ?><br/>
+            <?= $this->form->text('gitlab_id', $values, $errors) ?><br/>
         </div>
 
         <div class="form-column">
