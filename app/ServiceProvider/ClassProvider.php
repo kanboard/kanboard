@@ -72,11 +72,13 @@ class ClassProvider implements ServiceProviderInterface
             'Helper',
             'HttpClient',
             'Lexer',
-            'MemoryCache',
             'Request',
             'Router',
             'Session',
             'Template',
+        ),
+        'Core\Cache' => array(
+            'MemoryCache',
         ),
         'Integration' => array(
             'BitbucketWebhook',

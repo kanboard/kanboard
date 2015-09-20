@@ -24,6 +24,8 @@ Improvements:
 * Remove unnecessary margin for calendar header
 * Show localized documentation if available
 * Add event subtask.delete
+* Add abstract storage layer
+* Add abstract cache layer
 
 Bug fixes:
 

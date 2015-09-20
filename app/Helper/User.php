@@ -99,7 +99,7 @@ class User extends \Core\Base
             return true;
         }
 
-        return $this->memoryCache->proxy('acl', 'handleProjectAdminPermissions', $project_id);
+        return $this->memoryCache->proxy($this->container['acl'], 'handleProjectAdminPermissions', $project_id);
     }
 
     /**
@@ -114,7 +114,7 @@ class User extends \Core\Base
             return true;
         }
 
-        return $this->memoryCache->proxy('acl', 'handleProjectManagerPermissions', $project_id);
+        return $this->memoryCache->proxy($this->container['acl'], 'handleProjectManagerPermissions', $project_id);
     }
 
     /**
