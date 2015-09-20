@@ -55,7 +55,6 @@ use Pimple\Container;
  * @property \Model\ProjectPermission      $projectPermission
  * @property \Model\Subtask                $subtask
  * @property \Model\SubtaskExport          $subtaskExport
- * @property \Model\SubtaskForecast        $subtaskForecast
  * @property \Model\SubtaskTimeTracking    $subtaskTimeTracking
  * @property \Model\Swimlane               $swimlane
  * @property \Model\Task                   $task

@@ -19,7 +19,7 @@
         </li>
         <?php endif ?>
 
-        <?= $this->hook->render('task:sidebar:information') ?>
+        <?= $this->hook->render('template:task:sidebar:information') ?>
     </ul>
     <h2><?= t('Actions') ?></h2>
     <ul>
@@ -69,7 +69,7 @@
         </li>
         <?php endif ?>
 
-        <?= $this->hook->render('task:sidebar:actions') ?>
+        <?= $this->hook->render('template:task:sidebar:actions') ?>
     </ul>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
     <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>

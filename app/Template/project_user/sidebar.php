@@ -25,6 +25,6 @@
             <?= $this->url->link(t('Closed tasks'), 'projectuser', 'closed', $filter) ?>
         </li>
 
-        <?= $this->hook->render('project-user:sidebar') ?>
+        <?= $this->hook->render('template:project-user:sidebar') ?>
     </ul>
 </div>

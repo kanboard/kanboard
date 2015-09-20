@@ -10,8 +10,6 @@ namespace Helper;
  */
 class Hook extends \Core\Base
 {
-    private $hooks = array();
-
     /**
      * Render all attached hooks
      *
@@ -24,10 +22,8 @@ class Hook extends \Core\Base
     {
         $buffer = '';
 
-        foreach ($this->hooks as $name => $template) {
-            if ($hook === $name) {
-                $buffer .= $this->template->render($template, $variables);
-            }
+        foreach ($this->hook->getListeners($hook) as $template) {
+            $buffer .= $this->template->render($template, $variables);
         }
 
         return $buffer;
@@ -43,7 +39,7 @@ class Hook extends \Core\Base
      */
     public function attach($hook, $template)
     {
-        $this->hooks[$hook] = $template;
+        $this->hook->on($hook, $template);
         return $this;
     }
 }

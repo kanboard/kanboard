@@ -29,7 +29,7 @@
 
         <title><?= isset($title) ? $this->e($title) : 'Kanboard' ?></title>
 
-        <?= $this->hook->render('layout:head') ?>
+        <?= $this->hook->render('template:layout:head') ?>
     </head>
     <body data-status-url="<?= $this->url->href('app', 'status') ?>"
           data-login-url="<?= $this->url->href('auth', 'login') ?>"
@@ -40,7 +40,7 @@
     <?php if (isset($no_layout) && $no_layout): ?>
         <?= $content_for_layout ?>
     <?php else: ?>
-        <?= $this->hook->render('layout:top') ?>
+        <?= $this->hook->render('template:layout:top') ?>
         <?= $this->render('header', array(
             'title' => $title,
             'description' => isset($description) ? $description : '',
@@ -50,7 +50,7 @@
             <?= $this->app->flashMessage() ?>
             <?= $content_for_layout ?>
         </section>
-        <?= $this->hook->render('layout:bottom') ?>
+        <?= $this->hook->render('template:layout:bottom') ?>
      <?php endif ?>
     </body>
 </html>

@@ -9,7 +9,7 @@
 </li>
 <?php endif ?>
 
-<?= $this->hook->render('project:dropdown', array('project' => $project)) ?>
+<?= $this->hook->render('template:project:dropdown', array('project' => $project)) ?>
 
 <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
     <li>

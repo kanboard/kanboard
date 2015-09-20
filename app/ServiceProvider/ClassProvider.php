@@ -41,7 +41,6 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectPermission',
             'Subtask',
             'SubtaskExport',
-            'SubtaskForecast',
             'SubtaskTimeTracking',
             'Swimlane',
             'Task',
@@ -79,6 +78,9 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Core\Cache' => array(
             'MemoryCache',
+        ),
+        'Core\Plugin' => array(
+            'Hook',
         ),
         'Integration' => array(
             'BitbucketWebhook',

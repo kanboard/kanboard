@@ -10,9 +10,10 @@ New features:
 * Added API procedures: getMyOverdueTasks, getOverdueTasksByProject and GetMyProjects
 * Added user API access for procedure getProjectActivity()
 
-Breaking changes:
+Core functionalities moved to plugins:
 
-* Budget planning is now a plugin and it's not part of core
+* Budget planning: https://github.com/kanboard/plugin-budget
+* SubtaskForecast: https://github.com/kanboard/plugin-subtask-forecast
 
 Improvements:
 

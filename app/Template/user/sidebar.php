@@ -21,7 +21,7 @@
             </li>
         <?php endif ?>
 
-        <?= $this->hook->render('user:sidebar:information') ?>
+        <?= $this->hook->render('template:user:sidebar:information') ?>
     </ul>
 
     <h2><?= t('Actions') ?></h2>
@@ -67,7 +67,7 @@
             </li>
         <?php endif ?>
 
-        <?= $this->hook->render('user:sidebar:actions', array('user' => $user)) ?>
+        <?= $this->hook->render('template:user:sidebar:actions', array('user' => $user)) ?>
 
         <?php if ($this->user->isAdmin() && ! $this->user->isCurrentUser($user['id'])): ?>
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'remove' ? 'class="active"' : '' ?>>

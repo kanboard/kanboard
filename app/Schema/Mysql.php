@@ -166,7 +166,6 @@ function version_69($pdo)
     $result = $rq->fetch(PDO::FETCH_ASSOC);
 
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
-    $rq->execute(array('calendar_user_subtasks_forecast', isset($result['subtask_forecast']) && $result['subtask_forecast'] == 1 ? 1 : 0));
     $rq->execute(array('calendar_user_subtasks_time_tracking', 0));
     $rq->execute(array('calendar_user_tasks', 'date_started'));
     $rq->execute(array('calendar_project_tasks', 'date_started'));

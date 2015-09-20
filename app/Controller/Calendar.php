@@ -52,6 +52,12 @@ class Calendar extends Base
         // Tasks with due date
         $events = array_merge($events, $filter->copy()->filterByDueDateRange($start, $end)->toAllDayCalendarEvents());
 
+        $events = $this->hook->merge('controller:calendar:project:events', $events, array(
+            'project_id' => $project_id,
+            'start' => $start,
+            'end' => $end,
+        ));
+
         $this->response->json($events);
     }
 
@@ -83,10 +89,11 @@ class Calendar extends Base
             $events = array_merge($events, $this->subtaskTimeTracking->getUserCalendarEvents($user_id, $start, $end));
         }
 
-        // Subtask estimates
-        if ($this->config->get('calendar_user_subtasks_forecast') == 1) {
-            $events = array_merge($events, $this->subtaskForecast->getCalendarEvents($user_id, $end));
-        }
+        $events = $this->hook->merge('controller:calendar:user:events', $events, array(
+            'user_id' => $user_id,
+            'start' => $start,
+            'end' => $end,
+        ));
 
         $this->response->json($events);
     }

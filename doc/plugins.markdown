@@ -53,7 +53,7 @@ class Plugin extends Plugin\Base
 {
     public function initialize()
     {
-        $this->template->hook->attach('layout:head', 'theme:layout/head');
+        $this->template->hook->attach('template:layout:head', 'theme:layout/head');
     }
 }
 ```
@@ -65,7 +65,7 @@ The only required method is `initialize()`. This method is called for each reque
 Plugin methods
 --------------
 
-Available methods from `Plugin\Base`:
+Available methods from `Core\Plugin\Base`:
 
 - `initialize()`: Executed when the plugin is loaded
 - `getClasses()`: Return all classes that should be stored in the dependency injection container
@@ -79,6 +79,60 @@ This example will fetch the user #123:
 $this->user->getById(123);
 ```
 
+Application Hooks
+-----------------
+
+Hooks can extend, replace, filter data or change the default behavior. Each hook is identified with a unique name, example: `controller:calendar:user:events`
+
+### Listen on hook events
+
+In your `initialize()` method you need to call the method `on()` of the class `Core\Plugin\Hook`:
+
+```php
+$this->hook->on('hook_name', $callable);
+```
+
+The first argument is the name of the hook and the second is a PHP callable.
+
+### Merge hooks
+
+"Merge hooks" act in the same way as the function `array_merge`. The hook callback must return an array. This array will be merged with the default one.
+
+Example to add events in the user calendar:
+
+```php
+class Plugin extends Base
+{
+    public function initialize()
+    {
+        $container = $this->container;
+
+        $this->hook->on('controller:calendar:user:events', function($user_id, $start, $end) use ($container) {
+            $model = new SubtaskForecast($container);
+            return $model->getCalendarEvents($user_id, $end); // Return new events
+        });
+    }
+}
+```
+
+List of merge hooks:
+
+#### controller:calendar:project:events
+
+- Add more events to the project calendar
+- Arguments:
+    - `$project_id` (integer)
+    - `$start` Calendar start date (string, ISO-8601 format)
+    - `$end` Calendar` end date (string, ISO-8601 format)
+
+#### controller:calendar:user:events
+
+- Add more events to the user calendar
+- Arguments:
+    - `$user_id` (integer)
+    - `$start` Calendar start date (string, ISO-8601 format)
+    - `$end` Calendar end date (string, ISO-8601 format)
+
 Template hooks
 --------------
 
@@ -87,7 +141,7 @@ Template hooks allow to add new content in existing templates.
 Example to add new content in the dashboard sidebar:
 
 ```php
-$this->template->hook->attach('dashboard:sidebar', 'myplugin:dashboard/sidebar');
+$this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar');
 ```
 
 This call is usually defined in the `initialize()` method. 
@@ -106,18 +160,18 @@ Template name without prefix are core templates.
 
 List of template hooks:
 
-- `dashboard:sidebar`
-- `config:sidebar`
-- `export:sidebar`
-- `layout:head`
-- `layout:top`
-- `layout:bottom`
-- `project:dropdown`
-- `project-user:sidebar`
-- `task:sidebar:information`
-- `task:sidebar:actions`
-- `user:sidebar:information`
-- `user:sidebar:actions`
+- `template:dashboard:sidebar`
+- `template:config:sidebar`
+- `template:export:sidebar`
+- `template:layout:head`
+- `template:layout:top`
+- `template:layout:bottom`
+- `template:project:dropdown`
+- `template:project-user:sidebar`
+- `template:task:sidebar:information`
+- `template:task:sidebar:actions`
+- `template:user:sidebar:information`
+- `template:user:sidebar:actions`
 
 Other template hooks can be added if necessary, just ask on the issue tracker.
 

@@ -23,7 +23,6 @@
 
         <h4><?= t('Subtasks time tracking') ?></h4>
         <?= $this->form->checkbox('calendar_user_subtasks_time_tracking', t('Show subtasks based on the time tracking'), 1, $values['calendar_user_subtasks_time_tracking'] == 1) ?>
-        <?= $this->form->checkbox('calendar_user_subtasks_forecast', t('Show subtask estimates (forecast of future work)'), 1, $values['calendar_user_subtasks_forecast'] == 1) ?>
     </div>
 
     <div class="form-actions">
