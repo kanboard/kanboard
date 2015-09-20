@@ -47,6 +47,18 @@ class Hook
     }
 
     /**
+     * Return true if the hook is used
+     *
+     * @access public
+     * @param  string  $hook
+     * @return boolean
+     */
+    public function exists($hook)
+    {
+        return isset($this->hooks[$hook]);
+    }
+
+    /**
      * Merge listener results with input array
      *
      * @access public
@@ -66,5 +78,22 @@ class Hook
         }
 
         return $values;
+    }
+
+    /**
+     * Execute only first listener
+     *
+     * @access public
+     * @param  string  $hook
+     * @param  array   $params
+     * @return mixed
+     */
+    public function first($hook, array $params = array())
+    {
+        foreach ($this->getListeners($hook) as $listener) {
+            return call_user_func_array($listener, $params);
+        }
+
+        return null;
     }
 }

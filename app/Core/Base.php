@@ -70,11 +70,6 @@ use Pimple\Container;
  * @property \Model\TaskPosition           $taskPosition
  * @property \Model\TaskStatus             $taskStatus
  * @property \Model\TaskValidator          $taskValidator
- * @property \Model\Timetable              $timetable
- * @property \Model\TimetableDay           $timetableDay
- * @property \Model\TimetableExtra         $timetableExtra
- * @property \Model\TimetableOff           $timetableOff
- * @property \Model\TimetableWeek          $timetableWeek
  * @property \Model\Transition             $transition
  * @property \Model\User                   $user
  * @property \Model\UserSession            $userSession

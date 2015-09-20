@@ -314,48 +314,6 @@ function version_34($pdo)
     $pdo->exec("ALTER TABLE subtask_time_tracking ADD COLUMN time_spent REAL DEFAULT 0");
 }
 
-function version_32($pdo)
-{
-    $pdo->exec('CREATE TABLE timetable_day (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" INTEGER NOT NULL,
-        "start" VARCHAR(5) NOT NULL,
-        "end" VARCHAR(5) NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )');
-
-    $pdo->exec('CREATE TABLE timetable_week (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" INTEGER NOT NULL,
-        "day" INTEGER NOT NULL,
-        "start" VARCHAR(5) NOT NULL,
-        "end" VARCHAR(5) NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )');
-
-    $pdo->exec('CREATE TABLE timetable_off (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" INTEGER NOT NULL,
-        "date" VARCHAR(10) NOT NULL,
-        "all_day" BOOLEAN DEFAULT \'0\',
-        "start" VARCHAR(5) DEFAULT 0,
-        "end" VARCHAR(5) DEFAULT 0,
-        "comment" TEXT,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )');
-
-    $pdo->exec('CREATE TABLE timetable_extra (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" INTEGER NOT NULL,
-        "date" VARCHAR(10) NOT NULL,
-        "all_day" BOOLEAN DEFAULT \'0\',
-        "start" VARCHAR(5) DEFAULT 0,
-        "end" VARCHAR(5) DEFAULT 0,
-        "comment" TEXT,
-        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )');
-}
-
 function version_30($pdo)
 {
     $pdo->exec('ALTER TABLE subtasks ADD COLUMN position INTEGER DEFAULT 1');

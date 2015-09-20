@@ -94,6 +94,27 @@ $this->hook->on('hook_name', $callable);
 
 The first argument is the name of the hook and the second is a PHP callable.
 
+### Hooks executed only one time
+
+Some hooks can have only one listener:
+
+#### model:subtask-time-tracking:calculate:time-spent
+
+- Override time spent calculation when subtask timer is stopped
+- Arguments:
+    - `$user_id` (integer)
+    - `$start` (DateTime)
+    - `$end` (DateTime)
+
+#### model:subtask-time-tracking:calendar:events
+
+- Override subtask time tracking events to display the calendar
+- Arguments:
+    - `$user_id` (integer)
+    - `$events` (array)
+    - `$start` (string, ISO-8601 format)
+    - `$end` (string, ISO-8601 format)
+
 ### Merge hooks
 
 "Merge hooks" act in the same way as the function `array_merge`. The hook callback must return an array. This array will be merged with the default one.
@@ -313,5 +334,7 @@ Kanboard will compare the version defined in your schema and the version stored 
 Examples of plugins
 -------------------
 
-- Budget planning: https://github.com/kanboard/plugin-budget
-- Theme plugin sample: https://github.com/kanboard/plugin-example-theme
+- [Budget planning](https://github.com/kanboard/plugin-budget)
+- [User timetable](https://github.com/kanboard/plugin-timetable)
+- [Subtask Forecast](https://github.com/kanboard/plugin-subtask-forecast)
+- [Theme plugin sample](https://github.com/kanboard/plugin-example-theme)

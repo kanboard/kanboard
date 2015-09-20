@@ -14,6 +14,7 @@ Core functionalities moved to plugins:
 
 * Budget planning: https://github.com/kanboard/plugin-budget
 * SubtaskForecast: https://github.com/kanboard/plugin-subtask-forecast
+* Timetable: https://github.com/kanboard/plugin-timetable
 
 Improvements:
 
@@ -30,7 +31,7 @@ Improvements:
 
 Bug fixes:
 
-* Fix typo in template that prevent the Gitlab oauth link to be displayed
+* Fix typo in template that prevent the Gitlab OAuth link to be displayed
 * Fix Markdown preview links focus
 * Avoid dropdown menu to be truncated inside a column with scrolling
 * Deleting subtask doesn't update task time tracking

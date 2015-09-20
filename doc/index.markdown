@@ -26,7 +26,6 @@ Using Kanboard
 - [Project permissions](project-permissions.markdown)
 - [Swimlanes](swimlanes.markdown)
 - [Calendar](calendar.markdown)
-- [Budget](budget.markdown)
 - [Analytics](analytics.markdown)
 - [Gantt chart for tasks](gantt-chart-tasks.markdown)
 - [Gantt chart for projects](gantt-chart-projects.markdown)
@@ -49,8 +48,6 @@ Using Kanboard
 
 - [User management](user-management.markdown)
 - [Notifications](notifications.markdown)
-- [Hourly rate](hourly-rate.markdown)
-- [Timetable](timetable.markdown)
 - [Two factor authentication](2fa.markdown)
 
 ### Settings

@@ -67,7 +67,7 @@ class Loader extends \Core\Base
         $filename = __DIR__.'/../../../plugins/'.$plugin.'/Schema/'.ucfirst(DB_DRIVER).'.php';
 
         if (file_exists($filename)) {
-            require($filename);
+            require_once($filename);
             $this->migrateSchema($plugin);
         }
     }

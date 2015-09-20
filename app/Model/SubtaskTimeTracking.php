@@ -150,13 +150,14 @@ class SubtaskTimeTracking extends Base
      *
      * @access public
      * @param  integer   $user_id
-     * @param  integer   $start
-     * @param  integer   $end
+     * @param  string    $start      ISO-8601 format
+     * @param  string    $end
      * @return array
      */
     public function getUserCalendarEvents($user_id, $start, $end)
     {
-        $result = $this->getUserQuery($user_id)
+        $hook = 'model:subtask-time-tracking:calendar:events';
+        $events = $this->getUserQuery($user_id)
             ->addCondition($this->getCalendarCondition(
                 $this->dateParser->getTimestampFromIsoFormat($start),
                 $this->dateParser->getTimestampFromIsoFormat($end),
@@ -165,9 +166,16 @@ class SubtaskTimeTracking extends Base
             ))
             ->findAll();
 
-        $result = $this->timetable->calculateEventsIntersect($user_id, $result, $start, $end);
+        if ($this->hook->exists($hook)) {
+            $events = $this->hook->first($hook, array(
+                'user_id' => $user_id,
+                'events' => $events,
+                'start' => $start,
+                'end' => $end,
+            ));
+        }
 
-        return $this->toCalendarEvents($result);
+        return $this->toCalendarEvents($events);
     }
 
     /**
@@ -293,6 +301,7 @@ class SubtaskTimeTracking extends Base
      */
     public function getTimeSpent($subtask_id, $user_id)
     {
+        $hook = 'model:subtask-time-tracking:calculate:time-spent';
         $start_time = $this->db
                            ->table(self::TABLE)
                            ->eq('subtask_id', $subtask_id)
@@ -300,14 +309,23 @@ class SubtaskTimeTracking extends Base
                            ->eq('end', 0)
                            ->findOneColumn('start');
 
-        if ($start_time) {
-            $start = new DateTime;
-            $start->setTimestamp($start_time);
-
-            return $this->timetable->calculateEffectiveDuration($user_id, $start, new DateTime);
+        if (empty($start_time)) {
+            return 0;
         }
 
-        return 0;
+        $end = new DateTime;
+        $start = new DateTime;
+        $start->setTimestamp($start_time);
+
+        if ($this->hook->exists($hook)) {
+            return $this->hook->first($hook, array(
+                'user_id' => $user_id,
+                'start' => $start,
+                'end' => $end,
+            ));
+        }
+
+        return $this->dateParser->getHours($start, $end);
     }
 
     /**

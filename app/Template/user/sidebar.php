@@ -62,9 +62,6 @@
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'authentication' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Edit Authentication'), 'user', 'authentication', array('user_id' => $user['id'])) ?>
             </li>
-            <li <?= $this->app->getRouterController() === 'timetable' ? 'class="active"' : '' ?>>
-                <?= $this->url->link(t('Manage timetable'), 'timetable', 'index', array('user_id' => $user['id'])) ?>
-            </li>
         <?php endif ?>
 
         <?= $this->hook->render('template:user:sidebar:actions', array('user' => $user)) ?>

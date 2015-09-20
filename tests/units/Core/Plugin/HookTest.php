@@ -17,6 +17,16 @@ class HookTest extends Base
         $this->assertEquals(array('A', 'B'), $h->getListeners('myhook'));
     }
 
+    public function testExists()
+    {
+        $h = new Hook;
+        $this->assertFalse($h->exists('myhook'));
+
+        $h->on('myhook', 'A');
+
+        $this->assertTrue($h->exists('myhook'));
+    }
+
     public function testMergeWithNoBinding()
     {
         $h = new Hook;
@@ -58,5 +68,29 @@ class HookTest extends Base
         $result = $h->merge('myhook', $values);
         $this->assertEquals($expected, $result);
         $this->assertEquals($expected, $values);
+    }
+
+    public function testFirstWithNoBinding()
+    {
+        $h = new Hook;
+
+        $result = $h->first('myhook', array('p' => 2));
+        $this->assertEquals(null, $result);
+    }
+
+    public function testFirstWithMultipleBindings()
+    {
+        $h = new Hook;
+
+        $h->on('myhook', function($p) {
+            return $p + 1;
+        });
+
+        $h->on('myhook', function($p) {
+            return $p;
+        });
+
+        $result = $h->first('myhook', array('p' => 3));
+        $this->assertEquals(4, $result);
     }
 }
