@@ -206,7 +206,6 @@ class Router extends Base
      * @access public
      * @param  string  $uri
      * @param  string  $query_string
-     * @return boolean
      */
     public function dispatch($uri, $query_string = '')
     {

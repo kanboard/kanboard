@@ -45,6 +45,7 @@ class Loader extends \Core\Base
      * Load plugin
      *
      * @access public
+     * @param  string $plugin
      */
     public function load($plugin)
     {

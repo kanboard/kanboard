@@ -103,11 +103,11 @@ class ClassProvider implements ServiceProviderInterface
             return new OAuth2($c);
         });
 
-        $container['htmlConverter'] = function($c) {
+        $container['htmlConverter'] = function() {
             return new HtmlConverter(array('strip_tags' => true));
         };
 
-        $container['objectStorage'] = function($c) {
+        $container['objectStorage'] = function() {
             return new FileStorage(FILES_DIR);
         };
     }

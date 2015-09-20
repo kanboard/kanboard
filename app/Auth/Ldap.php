@@ -144,6 +144,7 @@ class Ldap extends Base
      * Get LDAP username pattern
      *
      * @access public
+     * @param  string  $username
      * @return string
      */
     public function getLdapUserPattern($username)

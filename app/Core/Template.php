@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use LogicException;
-
 /**
  * Template class
  *

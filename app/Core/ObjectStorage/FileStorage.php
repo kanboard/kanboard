@@ -85,7 +85,7 @@ class FileStorage implements ObjectStorageInterface
      * Move local file to object storage
      *
      * @access public
-     * @param  string  $filename
+     * @param  string  $src_filename
      * @param  string  $key
      * @return boolean
      */

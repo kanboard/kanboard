@@ -55,7 +55,7 @@ class Subtask extends Base
      * Get available status
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getStatusList()
     {
