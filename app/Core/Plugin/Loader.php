@@ -1,17 +1,18 @@
 <?php
 
-namespace Core;
+namespace Core\Plugin;
 
 use DirectoryIterator;
 use PDOException;
+use Core\Tool;
 
 /**
  * Plugin Loader
  *
- * @package  core
+ * @package  plugin
  * @author   Frederic Guillot
  */
-class PluginLoader extends Base
+class Loader extends \Core\Base
 {
     /**
      * Schema version table for plugins
@@ -27,8 +28,8 @@ class PluginLoader extends Base
      */
     public function scan()
     {
-        if (file_exists(__DIR__.'/../../plugins')) {
-            $dir = new DirectoryIterator(__DIR__.'/../../plugins');
+        if (file_exists(__DIR__.'/../../../plugins')) {
+            $dir = new DirectoryIterator(__DIR__.'/../../../plugins');
 
             foreach ($dir as $fileinfo) {
                 if (! $fileinfo->isDot() && $fileinfo->isDir()) {
@@ -63,7 +64,7 @@ class PluginLoader extends Base
      */
     public function loadSchema($plugin)
     {
-        $filename = __DIR__.'/../../plugins/'.$plugin.'/Schema/'.ucfirst(DB_DRIVER).'.php';
+        $filename = __DIR__.'/../../../plugins/'.$plugin.'/Schema/'.ucfirst(DB_DRIVER).'.php';
 
         if (file_exists($filename)) {
             require($filename);

@@ -1,14 +1,14 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+require_once __DIR__.'/../../Base.php';
 
-use Core\PluginLoader;
+use Core\Plugin\Loader;
 
-class PluginLoaderTest extends Base
+class LoaderTest extends Base
 {
     public function testGetSchemaVersion()
     {
-        $p = new PluginLoader($this->container);
+        $p = new Loader($this->container);
         $this->assertEquals(0, $p->getSchemaVersion('not_found'));
 
         $this->assertTrue($p->setSchemaVersion('plugin1', 1));

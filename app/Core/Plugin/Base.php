@@ -1,14 +1,14 @@
 <?php
 
-namespace Core;
+namespace Core\Plugin;
 
 /**
  * Plugin Base class
  *
- * @package  core
+ * @package  plugin
  * @author   Frederic Guillot
  */
-abstract class PluginBase extends Base
+abstract class Base extends \Core\Base
 {
     /**
      * Method called for each request

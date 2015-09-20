@@ -47,9 +47,9 @@ Example of `Plugin.php` file (`plugins/Foobar/Plugin.php`):
 
 namespace Plugin\Foobar;
 
-use Core\PluginBase;
+use Core\Plugin\Base;
 
-class Plugin extends PluginBase
+class Plugin extends Plugin\Base
 {
     public function initialize()
     {
@@ -58,14 +58,14 @@ class Plugin extends PluginBase
 }
 ```
 
-This file should contains a class `Plugin` defined under the namespace `Plugin\Yourplugin` and extends `Core\PluginBase`.
+This file should contains a class `Plugin` defined under the namespace `Plugin\Yourplugin` and extends `Core\Plugin\Base`.
 
 The only required method is `initialize()`. This method is called for each request when the plugin is loaded.
 
 Plugin methods
 --------------
 
-Available methods from `PluginBase`:
+Available methods from `Plugin\Base`:
 
 - `initialize()`: Executed when the plugin is loaded
 - `getClasses()`: Return all classes that should be stored in the dependency injection container
