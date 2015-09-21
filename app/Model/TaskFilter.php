@@ -11,6 +11,28 @@ namespace Model;
 class TaskFilter extends Base
 {
     /**
+     * Filters mapping
+     *
+     * @access private
+     * @var array
+     */
+    private $filters = array(
+        'T_ASSIGNEE' => 'filterByAssignee',
+        'T_COLOR' => 'filterByColors',
+        'T_DUE' => 'filterByDueDate',
+        'T_UPDATED' => 'filterByModificationDate',
+        'T_CREATED' => 'filterByCreationDate',
+        'T_TITLE' => 'filterByTitle',
+        'T_STATUS' => 'filterByStatusName',
+        'T_DESCRIPTION' => 'filterByDescription',
+        'T_CATEGORY' => 'filterByCategoryName',
+        'T_PROJECT' => 'filterByProjectName',
+        'T_COLUMN' => 'filterByColumnName',
+        'T_REFERENCE' => 'filterByReference',
+        'T_SWIMLANE' => 'filterBySwimlaneName',
+    );
+
+    /**
      * Query
      *
      * @access public
@@ -35,47 +57,8 @@ class TaskFilter extends Base
         }
 
         foreach ($tree as $filter => $value) {
-            switch ($filter) {
-                case 'T_ASSIGNEE':
-                    $this->filterByAssignee($value);
-                    break;
-                case 'T_COLOR':
-                    $this->filterByColors($value);
-                    break;
-                case 'T_DUE':
-                    $this->filterByDueDate($value);
-                    break;
-                case 'T_UPDATED':
-                    $this->filterByModificationDate($value);
-                    break;
-                case 'T_CREATED':
-                    $this->filterByCreationDate($value);
-                    break;
-                case 'T_TITLE':
-                    $this->filterByTitle($value);
-                    break;
-                case 'T_STATUS':
-                    $this->filterByStatusName($value);
-                    break;
-                case 'T_DESCRIPTION':
-                    $this->filterByDescription($value);
-                    break;
-                case 'T_CATEGORY':
-                    $this->filterByCategoryName($value);
-                    break;
-                case 'T_PROJECT':
-                    $this->filterByProjectName($value);
-                    break;
-                case 'T_COLUMN':
-                    $this->filterByColumnName($value);
-                    break;
-                case 'T_REFERENCE':
-                    $this->filterByReference($value);
-                    break;
-                case 'T_SWIMLANE':
-                    $this->filterBySwimlaneName($value);
-                    break;
-            }
+            $method = $this->filters[$filter];
+            $this->$method($value);
         }
 
         return $this;
