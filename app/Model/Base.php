@@ -121,26 +121,6 @@ abstract class Base extends \Core\Base
     }
 
     /**
-     * Get common properties for task calendar events
-     *
-     * @access protected
-     * @param  array  $task
-     * @return array
-     */
-    protected function getTaskCalendarProperties(array &$task)
-    {
-        return array(
-            'timezoneParam' => $this->config->getCurrentTimezone(),
-            'id' => $task['id'],
-            'title' => t('#%d', $task['id']).' '.$task['title'],
-            'backgroundColor' => $this->color->getBackgroundColor($task['color_id']),
-            'borderColor' => $this->color->getBorderColor($task['color_id']),
-            'textColor' => 'black',
-            'url' => $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
-        );
-    }
-
-    /**
      * Group a collection of records by a column
      *
      * @access public

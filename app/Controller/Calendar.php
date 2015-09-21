@@ -37,20 +37,20 @@ class Calendar extends Base
         $end = $this->request->getStringParam('end');
 
         // Common filter
-        $filter = $this->taskFilter
+        $filter = $this->taskFilterCalendarFormatter
             ->search($this->userSession->getFilters($project_id))
             ->filterByProject($project_id);
 
         // Tasks
         if ($this->config->get('calendar_project_tasks', 'date_started') === 'date_creation') {
-            $events = $filter->copy()->filterByCreationDateRange($start, $end)->toDateTimeCalendarEvents('date_creation', 'date_completed');
+            $events = $filter->copy()->filterByCreationDateRange($start, $end)->setColumns('date_creation', 'date_completed')->format();
         }
         else {
-            $events = $filter->copy()->filterByStartDateRange($start, $end)->toDateTimeCalendarEvents('date_started', 'date_completed');
+            $events = $filter->copy()->filterByStartDateRange($start, $end)->setColumns('date_started', 'date_completed')->format();
         }
 
         // Tasks with due date
-        $events = array_merge($events, $filter->copy()->filterByDueDateRange($start, $end)->toAllDayCalendarEvents());
+        $events = array_merge($events, $filter->copy()->filterByDueDateRange($start, $end)->setColumns('date_due')->setFullDay()->format());
 
         $events = $this->hook->merge('controller:calendar:project:events', $events, array(
             'project_id' => $project_id,
@@ -71,17 +71,17 @@ class Calendar extends Base
         $user_id = $this->request->getIntegerParam('user_id');
         $start = $this->request->getStringParam('start');
         $end = $this->request->getStringParam('end');
-        $filter = $this->taskFilter->create()->filterByOwner($user_id)->filterByStatus(TaskModel::STATUS_OPEN);
+        $filter = $this->taskFilterCalendarFormatter->create()->filterByOwner($user_id)->filterByStatus(TaskModel::STATUS_OPEN);
 
         // Task with due date
-        $events = $filter->copy()->filterByDueDateRange($start, $end)->toAllDayCalendarEvents();
+        $events = $filter->copy()->filterByDueDateRange($start, $end)->setColumns('date_due')->setFullDay()->format();
 
         // Tasks
         if ($this->config->get('calendar_user_tasks', 'date_started') === 'date_creation') {
-            $events = array_merge($events, $filter->copy()->filterByCreationDateRange($start, $end)->toDateTimeCalendarEvents('date_creation', 'date_completed'));
+            $events = array_merge($events, $filter->copy()->filterByCreationDateRange($start, $end)->setColumns('date_creation', 'date_completed')->format());
         }
         else {
-            $events = array_merge($events, $filter->copy()->filterByStartDateRange($start, $end)->toDateTimeCalendarEvents('date_started', 'date_completed'));
+            $events = array_merge($events, $filter->copy()->filterByStartDateRange($start, $end)->setColumns('date_started', 'date_completed')->format());
         }
 
         // Subtasks time tracking

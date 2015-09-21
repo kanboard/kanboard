@@ -213,7 +213,7 @@ class App extends Base
     {
         $search = $this->request->getStringParam('term');
 
-        $filter = $this->taskFilter
+        $filter = $this->taskFilterAutoCompleteFormatter
             ->create()
             ->filterByProjects($this->projectPermission->getActiveMemberProjectIds($this->userSession->getId()))
             ->excludeTasks(array($this->request->getIntegerParam('exclude_task_id')));
@@ -226,6 +226,6 @@ class App extends Base
             $filter->filterByTitle($search);
         }
 
-        $this->response->json($filter->toAutoCompletion());
+        $this->response->json($filter->format());
     }
 }

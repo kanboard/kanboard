@@ -61,6 +61,13 @@ class ClassProvider implements ServiceProviderInterface
             'UserSession',
             'Webhook',
         ),
+        'Formatter' => array(
+            'TaskFilterGanttFormatter',
+            'TaskFilterAutoCompleteFormatter',
+            'TaskFilterCalendarFormatter',
+            'TaskFilterICalendarFormatter',
+            'ProjectGanttFormatter',
+        ),
         'Core' => array(
             'EmailClient',
             'Helper',

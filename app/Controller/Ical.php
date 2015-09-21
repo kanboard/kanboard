@@ -29,7 +29,7 @@ class Ical extends Base
         }
 
         // Common filter
-        $filter = $this->taskFilter
+        $filter = $this->taskFilterICalendarFormatter
             ->create()
             ->filterByOwner($user['id']);
 
@@ -58,7 +58,7 @@ class Ical extends Base
         }
 
         // Common filter
-        $filter = $this->taskFilter
+        $filter = $this->taskFilterICalendarFormatter
             ->create()
             ->filterByProject($project['id']);
 
@@ -83,16 +83,31 @@ class Ical extends Base
 
         // Tasks
         if ($this->config->get('calendar_project_tasks', 'date_started') === 'date_creation') {
-            $filter->copy()->filterByCreationDateRange($start, $end)->addDateTimeIcalEvents('date_creation', 'date_completed', $calendar);
+            $filter
+                ->copy()
+                ->filterByCreationDateRange($start, $end)
+                ->setColumns('date_creation', 'date_completed')
+                ->setCalendar($calendar)
+                ->addDateTimeEvents();
         }
         else {
-            $filter->copy()->filterByStartDateRange($start, $end)->addDateTimeIcalEvents('date_started', 'date_completed', $calendar);
+            $filter
+                ->copy()
+                ->filterByStartDateRange($start, $end)
+                ->setColumns('date_started', 'date_completed')
+                ->setCalendar($calendar)
+                ->addDateTimeEvents($calendar);
         }
 
         // Tasks with due date
-        $filter->copy()->filterByDueDateRange($start, $end)->addAllDayIcalEvents('date_due', $calendar);
+        $filter
+            ->copy()
+            ->filterByDueDateRange($start, $end)
+            ->setColumns('date_due')
+            ->setCalendar($calendar)
+            ->addFullDayEvents($calendar);
 
         $this->response->contentType('text/calendar; charset=utf-8');
-        echo $calendar->render();
+        echo $filter->setCalendar($calendar)->format();
     }
 }

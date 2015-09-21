@@ -25,7 +25,7 @@ class Gantt extends Base
         }
 
         $this->response->html($this->template->layout('gantt/projects', array(
-            'projects' => $this->project->getGanttBars($project_ids),
+            'projects' => $this->projectGanttFormatter->filter($project_ids)->format(),
             'title' => t('Gantt chart for all projects'),
             'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
         )));
@@ -57,7 +57,7 @@ class Gantt extends Base
     public function project()
     {
         $params = $this->getProjectFilters('gantt', 'project');
-        $filter = $this->taskFilter->search($params['filters']['search'])->filterByProject($params['project']['id']);
+        $filter = $this->taskFilterGanttFormatter->search($params['filters']['search'])->filterByProject($params['project']['id']);
         $sorting = $this->request->getStringParam('sorting', 'board');
 
         if ($sorting === 'date') {
@@ -70,7 +70,7 @@ class Gantt extends Base
         $this->response->html($this->template->layout('gantt/project', $params + array(
             'users_list' => $this->projectPermission->getMemberList($params['project']['id'], false),
             'sorting' => $sorting,
-            'tasks' => $filter->toGanttBars(),
+            'tasks' => $filter->format(),
         )));
     }
 
