@@ -33,6 +33,10 @@ use Pimple\Container;
  * @property \Integration\Sendgrid                             $sendgrid
  * @property \Integration\SlackWebhook                         $slackWebhook
  * @property \Integration\Smtp                                 $smtp
+ * @property \Formatter\TaskFilterGanttFormatter               $taskFilterGanttFormatter
+ * @property \Formatter\TaskFilterAutoCompleteFormatter        $taskFilterAutoCompleteFormatter
+ * @property \Formatter\TaskFilterCalendarFormatter            $taskFilterCalendarFormatter
+ * @property \Formatter\TaskFilterICalendarFormatter           $taskFilterICalendarFormatter
  * @property \Model\Acl                                        $acl
  * @property \Model\Action                                     $action
  * @property \Model\Authentication                             $authentication
