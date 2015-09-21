@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Model\Subtask as SubtaskModel;
-use Model\Task as TaskModel;
 
 /**
  * Application controller
