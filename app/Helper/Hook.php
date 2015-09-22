@@ -11,6 +11,26 @@ namespace Helper;
 class Hook extends \Core\Base
 {
     /**
+     * Add assets JS or CSS
+     *
+     * @access public
+     * @param  string  $type
+     * @param  string  $hook
+     * @param  array   $variables
+     * @return string
+     */
+    public function asset($type, $hook)
+    {
+        $buffer = '';
+
+        foreach ($this->hook->getListeners($hook) as $file) {
+            $buffer .= $this->helper->asset->$type($file);
+        }
+
+        return $buffer;
+    }
+
+    /**
      * Render all attached hooks
      *
      * @access public

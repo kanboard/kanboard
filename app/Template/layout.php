@@ -21,6 +21,9 @@
         <?= $this->asset->css('assets/css/print.css', true, 'print') ?>
         <?= $this->asset->customCss() ?>
 
+        <?= $this->hook->asset('css', 'template:layout:css') ?>
+        <?= $this->hook->asset('js', 'template:layout:js') ?>
+
         <link rel="icon" type="image/png" href="<?= $this->url->dir() ?>assets/img/favicon.png">
         <link rel="apple-touch-icon" href="<?= $this->url->dir() ?>assets/img/touch-icon-iphone.png">
         <link rel="apple-touch-icon" sizes="72x72" href="<?= $this->url->dir() ?>assets/img/touch-icon-ipad.png">

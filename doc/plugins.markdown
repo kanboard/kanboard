@@ -154,6 +154,34 @@ List of merge hooks:
     - `$start` Calendar start date (string, ISO-8601 format)
     - `$end` Calendar end date (string, ISO-8601 format)
 
+Asset Hooks
+-----------
+
+Asset hooks can be used to add easily a new stylesheet or a new javascript file in the layout. You can use this feature to create a theme and override all Kanboard default styles.
+
+Example to add a new stylesheet:
+
+```php
+<?php
+
+namespace Plugin\Css;
+
+use Core\Plugin\Base;
+
+class Plugin extends Base
+{
+    public function initialize()
+    {
+        $this->hook->on('template:layout:css', 'plugins/Css/skin.css');
+    }
+}
+```
+
+List of asset Hooks:
+
+- `template:layout:css`
+- `template:layout:js`
+
 Template hooks
 --------------
 
@@ -338,3 +366,4 @@ Examples of plugins
 - [User timetable](https://github.com/kanboard/plugin-timetable)
 - [Subtask Forecast](https://github.com/kanboard/plugin-subtask-forecast)
 - [Theme plugin sample](https://github.com/kanboard/plugin-example-theme)
+- [CSS plugin sample](https://github.com/kanboard/plugin-example-css)
