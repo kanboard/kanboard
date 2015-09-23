@@ -29,3 +29,17 @@ Utiliser Kanboard
 - [Analytique](analytics.markdown)
 - [Diagramme de Gantt pour les tâches](gantt-chart-tasks.markdown)
 - [Diagramme de Gantt pour tous les projets](gantt-chart-projects.markdown)
+
+### Travailler avec les tâches
+
+- [Créer des tâches](creating-tasks.markdown)
+- [Fermer des tâches](closing-tasks.markdown)
+- [Dupliquer et déplacer des tâches](duplicate-move-tasks.markdown)
+- [Ajouter des captures d'écran](screenshots.markdown)
+- [Liens entre les tâches](task-links.markdown)
+- [Transitions](transitions.markdown)
+- [Suivi du temps](time-tracking.markdown)
+- [Tâches récurrentes](recurring-tasks.markdown)
+- [Créer des tâches par email](create-tasks-by-email.markdown)
+- [Sous-tâches](subtasks.markdown)
+- [Analytique des tâches](analytics-tasks.markdown)
