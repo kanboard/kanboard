@@ -27,6 +27,17 @@ class ActionTest extends Base
         $this->assertEquals('TaskLogMoveAnotherColumn', key($actions));
     }
 
+    public function testExtendActions()
+    {
+        $a = new Action($this->container);
+        $a->extendActions('MyClass', 'Description');
+
+        $actions = $a->getAvailableActions();
+        $this->assertNotEmpty($actions);
+        $this->assertContains('Description', $actions);
+        $this->assertArrayHasKey('MyClass', $actions);
+    }
+
     public function testGetEvents()
     {
         $a = new Action($this->container);
