@@ -5,7 +5,7 @@ Les transitions enregistrent tous les mouvements des tâches entre les colonnes
 
 ![Transitions](http://kanboard.net/screenshots/documentation/transitions.png)
 
-Accessible depuis la page des tâches, vous pouvez voir ces informations:
+Depuis la page des tâches, vous pouvez accéder à ces informations:
     
 - Date de l'action
 - Colonne d'origine
@@ -13,7 +13,7 @@ Accessible depuis la page des tâches, vous pouvez voir ces informations:
 - Exécuter (Pour l'utilisateur qui a déplacé la tâche) 
 - Temps passé sur la colonne d’origine
 
-Les données de la transition de la tâche peuvent aussi être exportées depuis la page des paramètres du projet
+Les données de transition entre les tâches peuvent aussi être exportées depuis la page des paramètres du projet
 
 ![Transitions Export](http://kanboard.net/screenshots/documentation/transitions-export.png)
 

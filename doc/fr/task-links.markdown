@@ -16,7 +16,7 @@ Les relations établies par défaut sont les suivantes :
 - **est un parent de** | est un enfant de
 - **vise les étapes importantes** | est une étape importante de
 - **est une étape importante de** | vise les étapes importantes
-- **correctifs** | st réglé par
+- **correctifs** | est réglé par
 - **est réglé par** | correctifs
 
 Ces étiquettes peuvent être modifiées dans les paramètres de l'application.

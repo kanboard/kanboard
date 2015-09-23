@@ -14,8 +14,8 @@ Le seul champ obligatoire est le titre.
 Description des champs :
 
 - **Titre** : le titre de votre tâche, tel qu'il sera affiché sur le tableau.
-- **Description** : vou spermet d'ajouter davantage d'informations sur la tâche. Le contenu peut être écrit en [Markdown](http://kanboard.net/documentation/syntax-guide).
-- **Créer une autre tâche** : Cochez cette case si vous souhaitez créer une tâche similaire (les champs seront pré-remplis).
+- **Description** : vous permet d'ajouter davantage d'informations sur la tâche. Le contenu peut être écrit en [Markdown](http://kanboard.net/documentation/syntax-guide).
+- **Créer une autre tâche** : cochez cette case si vous souhaitez créer une tâche similaire (les champs seront pré-remplis).
 - **Assigné** : la personne qui va travailler sur la tâche.
 - **Catégorie** : une seule catégorie peut être assignée à une tâche.
 - **Colonne** : la colonne dans laquelle la tâche sera créée. La tâche sera positionnée en bas de cette colonne.

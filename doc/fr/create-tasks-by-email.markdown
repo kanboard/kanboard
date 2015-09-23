@@ -1,7 +1,7 @@
 Créer des tâches par email
 =====================
 
-Vous pouvez créer des tâches directement en en voyant un courrier.
+Vous pouvez créer des tâches directement en envoyant un message.
 
 Pour le moment, Kanboard fonctionne avec 3 services externes :
 
@@ -18,7 +18,7 @@ Processus de réception du courrier entrant
 ------------------------
 
 1. Vous envoyez un mail à une adresse spécifique, par exemple **quelquechose+monprojet@inbound.mondomaine.tld**
-2. votre mail est envoyé sur les serveurs tiers SMTP
+2. Votre mail est envoyé sur les serveurs tiers SMTP
 3. Le fournisseur de SMTP appelle Kanboard via un webhook avec le mail en JSON ou aux formats multipart/form-data
 4. Kanboard analyse le mail reçu et crée la tâche dans le bon projet
 
@@ -32,7 +32,7 @@ Format du mail
 - le sujet de l'email devient le titre de la tâche
 - Le corps du message devient la description de la tâche (au format Markdown)
 
-Les courriers entrants peuvent être écrits aux formats .txt ou.HTML.
+Les courriers entrants peuvent être écrits aux formats .txt ou .HTML.
 **Kanboard peut convertir en Markdown les messages écrits en simple HTML**.
 
 Sécurité et prérequis

@@ -28,7 +28,7 @@ Quand vous cliquez sur le titre d'une sous-tâche son statut change :
 
 ![Sous-tâche en cours](http://kanboard.net/screenshots/documentation/subtask-status-inprogress.png)
 
-L'icône devant le titre est mise à jour en focntion du statut.
+L'icône devant le titre est mise à jour en fonction du statut.
 
 ![Sous-tâche effectuée](http://kanboard.net/screenshots/documentation/subtask-status-done.png)
 
@@ -39,5 +39,5 @@ Chrono des sous-tâches
 
 - À chaque fois qu'une sous-tâche est en cours de réalisation, le chronomètre est également démarré. Il peut être lancé et interrompu à tout moment.
 - Le chronomètre enregistre automatiquement le temps passé sur la sous-tâche. Vous pouvez aussi modifier manuellement la valeur du temps passé dans le champ adéquat quand vous modifiez une sous-tâche.
-- Le temps passé est arrondi au quart le plus proche. Cette information est enregistrée dans un tableau distinct.
+- Le temps passé est arrondi au quart d'heure le plus proche. Cette information est enregistrée dans un tableau distinct.
 - Le temps passé à la tâche ainsi que le temps estimé sont automatiquement mis à jour en fonction de la somme de toutes les sous-tâches.

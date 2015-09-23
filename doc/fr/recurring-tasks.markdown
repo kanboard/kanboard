@@ -3,14 +3,14 @@ Tâches récurrentes
 
 Pour convenir à ma méthodologie de Kanban, les tâches récurrentes ne sont pas basées sur une date mais sur les évènements du tableau.
 
-- Les tâches récurrentes sont dupliquée dans l apremière colonne du tableau quand les évènements sélectionnés se produisent
+- Les tâches récurrentes sont dupliquée dans la première colonne du tableau quand les évènements sélectionnés se produisent
 - La date d'échéance peut être automatiquement recalculée
 - Chaque tâche enregistre l'identifiant de tâche de la tâche parente qui l'a créée et la tâche enfant qui a été créée.
 
 Configuration
 -------------
 
-allez à la page de vue par tâches ou utilisez le menu déroulant du tableau, puis choisissez **Modifier la récurrence**.
+Allez à la page de vue par tâches ou utilisez le menu déroulant du tableau, puis choisissez **Modifier la récurrence**.
 
 ![Tâche récurrente](http://kanboard.net/screenshots/documentation/recurring-tasks.png)
 
