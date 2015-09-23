@@ -36,7 +36,7 @@ class SlackWebhook extends \Core\Base
         }
 
         $options = $this->projectIntegration->getParameters($project_id);
-        return $options['slack_webhook_url'];
+        return isset($options['slack_webhook_url']) ? $options['slack_webhook_url'] : '';
     }
 
     /**
@@ -52,14 +52,14 @@ class SlackWebhook extends \Core\Base
 
         if (! empty($channel)) {
             return $channel;
-    	}
+        }
 
-    	$options = $this->projectIntegration->getParameters($project_id);
-    	return $options['slack_webhook_channel'];
+        $options = $this->projectIntegration->getParameters($project_id);
+        return isset($options['slack_webhook_channel']) ? $options['slack_webhook_channel'] : '';
     }
 
     /**
-     * Send message to the incoming Slack webhook
+     * Send notification to Slack
      *
      * @access public
      * @param  integer     $project_id      Project id
@@ -76,23 +76,52 @@ class SlackWebhook extends \Core\Base
             $event['event_name'] = $event_name;
             $event['author'] = $this->user->getFullname($this->session['user']);
 
-            $payload = array(
-                'text' => '*['.$project['name'].']* '.str_replace('&quot;', '"', $this->projectActivity->getTitle($event)).(isset($event['task']['title']) ? ' ('.$event['task']['title'].')' : ''),
-                'username' => 'Kanboard',
-                'icon_url' => 'http://kanboard.net/assets/img/favicon.png',
-            );
+            $message = '*['.$project['name'].']* ';
+            $message .= str_replace('&quot;', '"', $this->projectActivity->getTitle($event));
+            $message .= isset($event['task']['title']) ? ' ('.$event['task']['title'].')' : '';
 
             if ($this->config->get('application_url')) {
-                $payload['text'] .= ' - <'.$this->helper->url->href('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id), false, '', true);
-                $payload['text'] .= '|'.t('view the task on Kanboard').'>';
+                $message .= ' - <'.$this->helper->url->href('task', 'show', array('task_id' => $task_id, 'project_id' => $project_id), false, '', true);
+                $message .= '|'.t('view the task on Kanboard').'>';
             }
 
-            $channel = $this->getChannel($project_id);
-            if (! empty($channel)) {
-            	$payload['channel'] = $channel;
-            }
-
-            $this->httpClient->postJson($this->getWebhookUrl($project_id), $payload);
+            $this->sendMessage($project_id, $message);
         }
+    }
+
+    /**
+     * Send message to Slack
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  string   $message
+     */
+    public function sendMessage($project_id, $message)
+    {
+        $payload = array(
+            'text' => $message,
+            'username' => 'Kanboard',
+            'icon_url' => 'http://kanboard.net/assets/img/favicon.png',
+        );
+
+        $this->sendPayload($project_id, $payload);
+    }
+
+    /**
+     * Send payload to Slack
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  array    $payload
+     */
+    public function sendPayload($project_id, array $payload)
+    {
+        $channel = $this->getChannel($project_id);
+
+        if (! empty($channel)) {
+            $payload['channel'] = $channel;
+        }
+
+        $this->httpClient->postJson($this->getWebhookUrl($project_id), $payload);
     }
 }
