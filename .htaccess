@@ -7,3 +7,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
 </IfModule>
+
+<FilesMatch "(kanboard|config.php|config.default.php)">
+    Deny from all
+</FilesMatch>

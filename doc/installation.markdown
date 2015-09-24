@@ -20,7 +20,14 @@ From the archive (stable version)
 6. Start to use the software
 7. Don't forget to change your password!
 
-Note: The folder data is the location where Kanboard stores uploaded files as well as the Sqlite database.
+The data folder is used to store:
+
+- Sqlite database: `db.sqlite`
+- Debug file: `debug.log` (if debug mode enabled)
+- Uploaded files: `files/*`
+- Image thumbnails: `files/thumbnails/*`
+
+People who are using a remote database (Mysql/Postgresql) and a remote file storage (Aws S3 or similar) don't necessary needs to have a persistent local data folder or to change the permissions.
 
 From the repository (development version)
 -----------------------------------------

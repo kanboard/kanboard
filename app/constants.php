@@ -4,6 +4,9 @@
 defined('DEBUG') or define('DEBUG', false);
 defined('DEBUG_FILE') or define('DEBUG_FILE', __DIR__.'/../data/debug.log');
 
+// Plugin directory
+defined('PLUGINS_DIR') or define('PLUGINS_DIR', __DIR__.'/../plugins');
+
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
 

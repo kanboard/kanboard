@@ -2,6 +2,8 @@
 
 namespace Api;
 
+use Core\ObjectStorage\ObjectStorageException;
+
 /**
  * File API controller
  *
@@ -22,15 +24,16 @@ class File extends \Core\Base
 
     public function downloadFile($file_id)
     {
-        $file = $this->file->getById($file_id);
+        try {
 
-        if (! empty($file)) {
+            $file = $this->file->getById($file_id);
 
-            $filename = FILES_DIR.$file['path'];
-
-            if (file_exists($filename)) {
-                return base64_encode(file_get_contents($filename));
+            if (! empty($file)) {
+                return base64_encode($this->objectStorage->get($file['path']));
             }
+        }
+        catch (ObjectStorageException $e) {
+            $this->logger->error($e->getMessage());
         }
 
         return '';

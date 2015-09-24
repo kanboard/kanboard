@@ -28,8 +28,8 @@ class Loader extends \Core\Base
      */
     public function scan()
     {
-        if (file_exists(__DIR__.'/../../../plugins')) {
-            $dir = new DirectoryIterator(__DIR__.'/../../../plugins');
+        if (file_exists(PLUGINS_DIR)) {
+            $dir = new DirectoryIterator(PLUGINS_DIR);
 
             foreach ($dir as $fileinfo) {
                 if (! $fileinfo->isDot() && $fileinfo->isDir()) {
@@ -65,7 +65,7 @@ class Loader extends \Core\Base
      */
     public function loadSchema($plugin)
     {
-        $filename = __DIR__.'/../../../plugins/'.$plugin.'/Schema/'.ucfirst(DB_DRIVER).'.php';
+        $filename = PLUGINS_DIR.'/'.$plugin.'/Schema/'.ucfirst(DB_DRIVER).'.php';
 
         if (file_exists($filename)) {
             require_once($filename);

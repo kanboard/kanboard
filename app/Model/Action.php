@@ -31,6 +31,28 @@ class Action extends Base
     const TABLE_PARAMS = 'action_has_params';
 
     /**
+     * Extended actions
+     *
+     * @access private
+     * @var array
+     */
+    private $actions = array();
+
+    /**
+     * Extend the list of default actions
+     *
+     * @access public
+     * @param  string  $className
+     * @param  string  $description
+     * @return Action
+     */
+    public function extendActions($className, $description)
+    {
+        $this->actions[$className] = $description;
+        return $this;
+    }
+
+    /**
      * Return the name and description of available actions
      *
      * @access public
@@ -61,6 +83,8 @@ class Action extends Base
             'TaskEmail' => t('Send a task by email to someone'),
             'TaskAssignColorLink' => t('Change task color when using a specific task link'),
         );
+
+        $values = array_merge($values, $this->actions);
 
         asort($values);
 
@@ -296,7 +320,7 @@ class Action extends Base
      */
     public function load($name, $project_id, $event)
     {
-        $className = '\Action\\'.$name;
+        $className = $name{0} !== '\\' ? '\Action\\'.$name : $name;
         return new $className($this->container, $project_id, $event);
     }
 

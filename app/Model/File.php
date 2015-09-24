@@ -54,6 +54,10 @@ class File extends Base
             $file = $this->getbyId($file_id);
             $this->objectStorage->remove($file['path']);
 
+            if ($file['is_image'] == 1) {
+                $this->objectStorage->remove($this->getThumbnailPath($file['path']));
+            }
+
             return $this->db->table(self::TABLE)->eq('id', $file['id'])->remove();
         }
         catch (ObjectStorageException $e) {

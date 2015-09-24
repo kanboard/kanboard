@@ -23,6 +23,14 @@ define('DEBUG_FILE', __DIR__.'/data/debug.log');
 All debug information are saved in this file.
 If you prefer to send logs to `stdout` or `stderr` replace the value by `php://stdout` or `php://stderr`.
 
+Plugins folder
+--------------
+
+```php
+// Plugin directory
+define('PLUGINS_DIR', 'data/plugins');
+```
+
 Folder for uploaded files
 -------------------------
 

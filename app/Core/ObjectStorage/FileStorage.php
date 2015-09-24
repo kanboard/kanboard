@@ -70,7 +70,7 @@ class FileStorage implements ObjectStorageInterface
      * @access public
      * @param  string  $key
      */
-    public function passthru($key)
+    public function output($key)
     {
         $filename = $this->path.DIRECTORY_SEPARATOR.$key;
 

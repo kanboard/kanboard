@@ -37,4 +37,38 @@ class HookHelperTest extends Base
         $h->attach('test', 'tpl2');
         $this->assertEquals('tpl1_contenttpl2_content', $h->render('test'));
     }
+
+    public function testAssetHooks()
+    {
+        $this->container['helper']->asset = $this
+            ->getMockBuilder('\Helper\Asset')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('css', 'js'))
+            ->getMock();
+
+        $this->container['helper']
+            ->asset
+            ->expects($this->at(0))
+            ->method('css')
+            ->with(
+                $this->equalTo('skin.css')
+            )
+            ->will($this->returnValue('<link rel="stylesheet" href="skin.css"></link>'));
+
+        $this->container['helper']
+            ->asset
+            ->expects($this->at(1))
+            ->method('js')
+            ->with(
+                $this->equalTo('skin.js')
+            )
+            ->will($this->returnValue('<script src="skin.js"></script>'));
+
+        $h = new Hook($this->container);
+        $h->attach('test1', 'skin.css');
+        $h->attach('test2', 'skin.js');
+
+        $this->assertContains('<link rel="stylesheet" href="skin.css"></link>', $h->asset('css', 'test1'));
+        $this->assertContains('<script src="skin.js"></script>', $h->asset('js', 'test2'));
+    }
 }

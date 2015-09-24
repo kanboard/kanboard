@@ -154,6 +154,34 @@ List of merge hooks:
     - `$start` Calendar start date (string, ISO-8601 format)
     - `$end` Calendar end date (string, ISO-8601 format)
 
+Asset Hooks
+-----------
+
+Asset hooks can be used to add easily a new stylesheet or a new javascript file in the layout. You can use this feature to create a theme and override all Kanboard default styles.
+
+Example to add a new stylesheet:
+
+```php
+<?php
+
+namespace Plugin\Css;
+
+use Core\Plugin\Base;
+
+class Plugin extends Base
+{
+    public function initialize()
+    {
+        $this->hook->on('template:layout:css', 'plugins/Css/skin.css');
+    }
+}
+```
+
+List of asset Hooks:
+
+- `template:layout:css`
+- `template:layout:js`
+
 Template hooks
 --------------
 
@@ -223,10 +251,47 @@ $this->on('session.bootstrap', function($container) {
 - The first argument is the event name
 - The second argument is a PHP callable function (closure or class method)
 
+Extend Automatic Actions
+------------------------
+
+To define a new automatic action with a plugin, you just need to call the method `extendActions()` from the class `Model\Action`, here an example:
+
+```php
+<?php
+
+namespace Plugin\AutomaticAction;
+
+use Core\Plugin\Base;
+
+class Plugin extends Base
+{
+    public function initialize()
+    {
+        $this->action->extendActions(
+            '\Plugin\AutomaticAction\Action\SendSlackMessage', // Use absolute namespace
+            t('Send a message to Slack when the task color change')
+        );
+    }
+}
+```
+
+- The first argument of the method `extendActions()` is the action class with the complete namespace path. **The namespace path must starts with a backslash** otherwise Kanboard will not be able to load your class.
+- The second argument is the description of your automatic action.
+
+The automatic action class must inherits from the class `Action\Base` and implements all abstract methods:
+
+- `getCompatibleEvents()`
+- `getActionRequiredParameters()`
+- `getEventRequiredParameters()`
+- `doAction(array $data)`
+- `hasRequiredCondition(array $data)`
+
+For more details you should take a look to existing automatic actions or this [plugin example](https://github.com/kanboard/plugin-example-automatic-action).
+
 Extend ACL
 ----------
 
-Kanboard use a custom access list for privilege separations. Your extension can add new rules:
+Kanboard use an access list for privilege separations. Your extension can add new rules:
 
 ```php
 $this->acl->extend('project_manager_acl', array('mycontroller' => '*'));
@@ -337,4 +402,6 @@ Examples of plugins
 - [Budget planning](https://github.com/kanboard/plugin-budget)
 - [User timetable](https://github.com/kanboard/plugin-timetable)
 - [Subtask Forecast](https://github.com/kanboard/plugin-subtask-forecast)
-- [Theme plugin sample](https://github.com/kanboard/plugin-example-theme)
+- [Automatic Action example](https://github.com/kanboard/plugin-example-automatic-action)
+- [Theme plugin example](https://github.com/kanboard/plugin-example-theme)
+- [CSS plugin example](https://github.com/kanboard/plugin-example-css)

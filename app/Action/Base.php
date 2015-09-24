@@ -127,6 +127,17 @@ abstract class Base extends \Core\Base
     }
 
     /**
+     * Get project id
+     *
+     * @access public
+     * @return integer
+     */
+    public function getProjectId()
+    {
+        return $this->project_id;
+    }
+
+    /**
      * Set an user defined parameter
      *
      * @access public

@@ -29,24 +29,7 @@ if (! extension_loaded('mbstring')) {
     die('PHP extension required: mbstring');
 }
 
-// Check if /data is writeable
-if (! is_writable('data')) {
-    die('The directory "data" must be writeable by your web server user');
-}
-
 // Fix wrong value for arg_separator.output, used by the function http_build_query()
 if (ini_get('arg_separator.output') === '&amp;') {
     ini_set('arg_separator.output', '&');
-}
-
-// Prepare folder for uploaded files
-if (! is_dir(FILES_DIR)) {
-    if (! mkdir(FILES_DIR, 0755, true)) {
-        die('Unable to create the upload directory: "'.FILES_DIR.'"');
-    }
-}
-
-// Check permissions for files folder
-if (! is_writable(FILES_DIR)) {
-    die('The directory "'.FILES_DIR.'" must be writeable by your webserver user');
 }
