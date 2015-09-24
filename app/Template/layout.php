@@ -47,7 +47,7 @@
         <?= $this->render('header', array(
             'title' => $title,
             'description' => isset($description) ? $description : '',
-            'board_selector' => $board_selector,
+            'board_selector' => isset($board_selector) ? $board_selector : array(),
         )) ?>
         <section class="page">
             <?= $this->app->flashMessage() ?>

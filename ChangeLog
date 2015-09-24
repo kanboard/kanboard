@@ -29,6 +29,11 @@ Improvements:
 * Add abstract storage layer
 * Add abstract cache layer
 
+Others:
+
+* Data directory permissions are not checked anymore
+* Data directory is not mandatory anymore for people that use a remote database and remote object storage
+
 Bug fixes:
 
 * Fix typo in template that prevent the Gitlab OAuth link to be displayed

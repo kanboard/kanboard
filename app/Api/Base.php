@@ -54,6 +54,8 @@ abstract class Base extends \Core\Base
         else if (! $is_user && ! $is_both_procedure && $is_user_procedure) {
             throw new AccessDeniedException('Permission denied');
         }
+
+        $this->logger->debug('API call: '.$procedure);
     }
 
     public function checkProjectPermission($project_id)
@@ -70,7 +72,7 @@ abstract class Base extends \Core\Base
         }
     }
 
-    protected function formatTask(array $task)
+    protected function formatTask($task)
     {
         if (! empty($task)) {
             $task['url'] = $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
@@ -80,7 +82,7 @@ abstract class Base extends \Core\Base
         return $task;
     }
 
-    protected function formatTasks(array $tasks)
+    protected function formatTasks($tasks)
     {
         if (! empty($tasks)) {
             foreach ($tasks as &$task) {
@@ -91,7 +93,7 @@ abstract class Base extends \Core\Base
         return $tasks;
     }
 
-    protected function formatProject(array $project)
+    protected function formatProject($project)
     {
         if (! empty($project)) {
             $project['url'] = array(
@@ -104,7 +106,7 @@ abstract class Base extends \Core\Base
         return $project;
     }
 
-    protected function formatProjects(array $projects)
+    protected function formatProjects($projects)
     {
         if (! empty($projects)) {
             foreach ($projects as &$project) {
