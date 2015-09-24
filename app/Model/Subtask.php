@@ -243,7 +243,7 @@ class Subtask extends Base
         $subtask = $this->getById($values['id']);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
-        if ($result && isset($options['quietly']) && $options['quietly']) {
+        if ($result && empty($options['quietly'])) {
             $event = $subtask;
             $event['changes'] = array_diff_assoc($values, $subtask);
             $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new SubtaskEvent($event));
