@@ -86,7 +86,7 @@ class File extends Base
             }
 
             $this->response->forceDownload($file['name']);
-            $this->objectStorage->passthru($file['path']);
+            $this->objectStorage->output($file['path']);
         }
         catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
@@ -128,7 +128,7 @@ class File extends Base
             }
 
             $this->response->contentType($this->file->getImageMimeType($file['name']));
-            $this->objectStorage->passthru($file['path']);
+            $this->objectStorage->output($file['path']);
         }
         catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
@@ -152,7 +152,7 @@ class File extends Base
             }
 
             $this->response->contentType('image/jpeg');
-            $this->objectStorage->passthru($this->file->getThumbnailPath($file['path']));
+            $this->objectStorage->output($this->file->getThumbnailPath($file['path']));
         }
         catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());

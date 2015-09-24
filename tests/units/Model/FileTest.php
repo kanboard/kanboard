@@ -227,12 +227,20 @@ class FileTest extends Base
             ->expects($this->at(1))
             ->method('remove')
             ->with(
-                $this->equalTo('/tmp/foo1')
+                $this->equalTo('thumbnails//tmp/foo2')
             )
             ->will($this->returnValue(true));
 
         $this->container['objectStorage']
             ->expects($this->at(2))
+            ->method('remove')
+            ->with(
+                $this->equalTo('/tmp/foo1')
+            )
+            ->will($this->returnValue(true));
+
+        $this->container['objectStorage']
+            ->expects($this->at(3))
             ->method('remove')
             ->with(
                 $this->equalTo('/tmp/foo3')

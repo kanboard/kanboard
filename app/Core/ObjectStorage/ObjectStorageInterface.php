@@ -35,7 +35,7 @@ interface ObjectStorageInterface
      * @access public
      * @param  string  $key
      */
-    public function passthru($key);
+    public function output($key);
 
     /**
      * Move local file to object storage
