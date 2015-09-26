@@ -29,9 +29,10 @@
             </span>
             <?php endif ?>
 
+            <?php if (! empty($task['owner_id'])): ?>
             <span class="task-board-user <?= $this->user->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
                 <?= $this->url->link(
-                    (! empty($task['owner_id']) ? ($task['assignee_name'] ?: $task['assignee_username']) : t('Nobody assigned')),
+                    $task['assignee_name'] ?: $task['assignee_username'],
                     'board',
                     'changeAssignee',
                     array('task_id' => $task['id'], 'project_id' => $task['project_id']),
@@ -40,6 +41,7 @@
                     t('Change assignee')
                 ) ?>
             </span>
+            <?php endif ?>
 
             <?php if ($task['is_active'] == 1): ?>
             <div class="task-board-days">
