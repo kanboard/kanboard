@@ -1012,4 +1012,8 @@ return array(
     'Table of contents' => 'Innholdsfortegnelse',
     'Gantt' => 'Gantt',
     'Help with project permissions' => 'Hjelp med prosjekttilganger',
+    // 'Author' => '',
+    // 'Version' => '',
+    // 'Plugins' => '',
+    // 'There is no plugin loaded.' => '',
 );

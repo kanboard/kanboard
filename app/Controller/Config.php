@@ -78,6 +78,19 @@ class Config extends Base
     }
 
     /**
+     * Display the plugin page
+     *
+     * @access public
+     */
+    public function plugins()
+    {
+        $this->response->html($this->layout('config/plugins', array(
+            'plugins' => $this->pluginLoader->plugins,
+            'title' => t('Settings').' &gt; '.t('Plugins'),
+        )));
+    }
+
+    /**
      * Display the application settings page
      *
      * @access public

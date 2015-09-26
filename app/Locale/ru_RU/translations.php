@@ -1012,4 +1012,8 @@ return array(
     'Table of contents' => 'Сожержание',
     'Gantt' => 'Гантт',
     'Help with project permissions' => 'Помощь с правами доступа по проекту',
+    // 'Author' => '',
+    // 'Version' => '',
+    // 'Plugins' => '',
+    // 'There is no plugin loaded.' => '',
 );

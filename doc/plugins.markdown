@@ -70,6 +70,10 @@ Available methods from `Core\Plugin\Base`:
 - `initialize()`: Executed when the plugin is loaded
 - `getClasses()`: Return all classes that should be stored in the dependency injection container
 - `on($event, $callback)`: Listen on internal events
+- `getPluginName()`: Get plugin name
+- `getPluginAuthor()`: Get plugin author
+- `getPluginVersion()`: Get plugin version
+- `getPluginDescription()`: Get plugin description
 
 Your plugin registration class also inherit from `Core\Base`, that means you can access to all classes and methods of Kanboard easily.
 

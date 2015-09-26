@@ -1012,4 +1012,8 @@ return array(
     'Table of contents' => 'Tabla de contenido',
     'Gantt' => 'Gantt',
     'Help with project permissions' => 'Ayuda con permisos del proyecto',
+    // 'Author' => '',
+    // 'Version' => '',
+    // 'Plugins' => '',
+    // 'There is no plugin loaded.' => '',
 );

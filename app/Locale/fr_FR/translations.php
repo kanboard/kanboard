@@ -1014,4 +1014,8 @@ return array(
     'Table of contents' => 'Table des matières',
     'Gantt' => 'Gantt',
     'Help with project permissions' => 'Aide avec les permissions des projets',
+    'Author' => 'Auteur',
+    'Version' => 'Version',
+    'Plugins' => 'Extensions',
+    'There is no plugin loaded.' => 'Il n\'y a aucune extension chargée.',
 );

@@ -1012,4 +1012,8 @@ return array(
     // 'Table of contents' => '',
     // 'Gantt' => '',
     // 'Help with project permissions' => '',
+    // 'Author' => '',
+    // 'Version' => '',
+    // 'Plugins' => '',
+    // 'There is no plugin loaded.' => '',
 );

@@ -4,6 +4,9 @@
         <li <?= $this->app->getRouterAction() === 'index' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('About'), 'config', 'index') ?>
         </li>
+        <li <?= $this->app->getRouterAction() === 'plugins' ? 'class="active"' : '' ?>>
+            <?= $this->url->link(t('Plugins'), 'config', 'plugins') ?>
+        </li>
         <li <?= $this->app->getRouterAction() === 'application' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('Application settings'), 'config', 'application') ?>
         </li>
