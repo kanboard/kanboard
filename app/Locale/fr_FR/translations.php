@@ -1018,4 +1018,6 @@ return array(
     'Version' => 'Version',
     'Plugins' => 'Extensions',
     'There is no plugin loaded.' => 'Il n\'y a aucune extension chargée.',
+    'Set maximum column height' => 'Définir la hauteur max. des colonnes',
+    'Remove maximum column height' => 'Enlever la hauteur max. des colonnes',
 );

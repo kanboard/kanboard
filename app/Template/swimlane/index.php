@@ -50,7 +50,7 @@
     <?= $this->form->hidden('id', $default_swimlane) ?>
 
     <?= $this->form->label(t('Rename'), 'default_swimlane') ?>
-    <?= $this->form->text('default_swimlane', $default_swimlane, array(), array('autofocus', 'required', 'maxlength="50"')) ?><br/>
+    <?= $this->form->text('default_swimlane', $default_swimlane, array(), array('required', 'maxlength="50"')) ?><br/>
 
     <?= $this->form->checkbox('show_default_swimlane', t('Show default swimlane'), 1, isset($default_swimlane['show_default_swimlane']) && $default_swimlane['show_default_swimlane'] == 1) ?>
 

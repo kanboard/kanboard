@@ -1016,4 +1016,6 @@ return array(
     // 'Version' => '',
     // 'Plugins' => '',
     // 'There is no plugin loaded.' => '',
+    // 'Set maximum column height' => '',
+    // 'Remove maximum column height' => '',
 );

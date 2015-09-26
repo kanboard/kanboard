@@ -8,13 +8,13 @@ Board.prototype.execute = function() {
     this.app.swimlane.listen();
     this.restoreColumnViewMode();
     this.compactView();
+    this.columnScrolling();
     this.poll();
     this.keyboardShortcuts();
-    this.resizeColumnHeight();
     this.listen();
     this.dragAndDrop();
 
-    $(window).resize(this.resizeColumnHeight);
+    $(window).resize(this.columnScrolling);
 };
 
 Board.prototype.poll = function() {
@@ -85,28 +85,12 @@ Board.prototype.refresh = function(data) {
     this.app.refresh();
     this.app.swimlane.refresh();
     this.app.swimlane.listen();
-    this.resizeColumnHeight();
+    this.columnScrolling();
     this.app.hideLoadingIcon();
     this.listen();
     this.dragAndDrop();
     this.compactView();
     this.restoreColumnViewMode();
-};
-
-Board.prototype.resizeColumnHeight = function() {
-    if ($(".board-swimlane").length > 1) {
-        $(".board-task-list").each(function() {
-            if ($(this).height() > 500) {
-                $(this).height(500);
-            }
-            else {
-                $(this).css("min-height", 320); // Min height is the height of the menu dropdown
-            }
-        });
-    }
-    else {
-        $(".board-task-list").height($(window).height() - 145);
-    }
 };
 
 Board.prototype.dragAndDrop = function() {
@@ -155,9 +139,56 @@ Board.prototype.listen = function() {
         self.toggleCompactView();
     });
 
+    $(document).on('click', ".filter-toggle-height", function(e) {
+        e.preventDefault();
+        self.toggleColumnScrolling();
+    });
+
     $(document).on("click", ".board-column-title", function() {
         self.toggleColumnViewMode($(this).data("column-id"));
     });
+};
+
+Board.prototype.toggleColumnScrolling = function() {
+    var scrolling = localStorage.getItem("column_scroll") || 1;
+    localStorage.setItem("column_scroll", scrolling == 0 ? 1 : 0);
+    this.columnScrolling();
+};
+
+Board.prototype.columnScrolling = function() {
+    if (localStorage.getItem("column_scroll") == 0) {
+        $(".filter-max-height").show();
+        $(".filter-min-height").hide();
+
+        $(".board-task-list").each(function() {
+            $(this).css("min-height", 80);
+            $(this).css("height", '');
+            $(".board-rotation-wrapper").css("min-height", '');
+        });
+    }
+    else {
+
+        $(".filter-max-height").hide();
+        $(".filter-min-height").show();
+
+        if ($(".board-swimlane").length > 1) {
+            $(".board-task-list").each(function() {
+                if ($(this).height() > 500) {
+                    $(this).css("height", 500);
+                }
+                else {
+                    $(this).css("min-height", 320); // Height of the dropdown menu
+                    $(".board-rotation-wrapper").css("min-height", 320);
+                }
+            });
+        }
+        else {
+            var height = $(window).height() - 145;
+
+            $(".board-task-list").css("height", height);
+            $(".board-rotation-wrapper").css("min-height", height);
+        }
+    }
 };
 
 Board.prototype.toggleCompactView = function() {
@@ -233,7 +264,6 @@ Board.prototype.hideColumn = function(columnId) {
     });
 
     $(".board-column-" + columnId + " .board-rotation").each(function() {
-        var position = $(".board-swimlane").position();
         $(this).css("width", $(".board-column-" + columnId + "").height());
     });
 

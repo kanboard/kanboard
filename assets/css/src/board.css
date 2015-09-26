@@ -61,10 +61,12 @@ td.board-column-task-collapsed {
 .board-rotation-wrapper {
     position: relative;
     padding: 8px 4px;
+    min-height: 150px;
+    overflow: auto;
 }
 
 .board-rotation {
-    min-width: 250px;
+    white-space: nowrap;
     -webkit-backface-visibility: hidden;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
@@ -77,6 +79,10 @@ td.board-column-task-collapsed {
 }
 
 /* column header */
+.board-column-title {
+    cursor: pointer;
+}
+
 .board-add-icon {
     float: left;
     padding: 0 5px;
@@ -125,6 +131,7 @@ a.board-swimlane-toggle {
 /* board task list */
 .board-task-list {
     overflow: auto;
+    min-height: 60px;
 }
 
 .board-task-list-limit {

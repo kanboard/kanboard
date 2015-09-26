@@ -4,8 +4,8 @@
        <th class="board-swimlane-header">
            <?php if (! $not_editable): ?>
                 <a href="#" class="board-swimlane-toggle" data-swimlane-id="<?= $swimlane['id'] ?>">
-                    <i class="fa fa-minus-circle hide-icon-swimlane-<?= $swimlane['id'] ?>"></i>
-                    <i class="fa fa-plus-circle show-icon-swimlane-<?= $swimlane['id'] ?>" style="display: none"></i>
+                    <i class="fa fa-chevron-circle-up hide-icon-swimlane-<?= $swimlane['id'] ?>"></i>
+                    <i class="fa fa-chevron-circle-down show-icon-swimlane-<?= $swimlane['id'] ?>" style="display: none"></i>
                 </a>
 
                 <?php if (! empty($swimlane['description'])): ?>
@@ -95,7 +95,7 @@
             <div class="board-column-collapsed">
                 <div class="board-rotation-wrapper">
                     <div class="board-column-title board-rotation" data-column-id="<?= $column['id'] ?>" title="<?= t('Show this column') ?>">
-                        <?= $this->e($column['title']) ?>
+                        <i class="fa fa-chevron-circle-up tooltip" title="<?= $this->e($column['title']) ?>"></i> <?= $this->e($column['title']) ?>
                     </div>
                 </div>
             </div>
