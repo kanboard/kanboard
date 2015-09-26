@@ -11,7 +11,7 @@
     <div class="task-board-sort-handle" style="display: none;"><i class="fa fa-arrows-alt"></i></div>
     <?= $this->render('board/task_menu', array('task' => $task)) ?>
 
-    <?php if ($this->board->isCollapsed($project['id'])): ?>
+    <?php if ($this->board->isCollapsed($task['project_id'])): ?>
         <div class="task-board-collapsed">
             <?php if (! empty($task['assignee_username'])): ?>
                 <span title="<?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>">

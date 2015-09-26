@@ -13,18 +13,34 @@
         >
     <?php endif ?>
 
-    <?php foreach ($swimlanes as $swimlane): ?>
+    <?php $nb_swimlanes = count($swimlanes) ?>
+    <?php foreach ($swimlanes as $index => $swimlane): ?>
         <?php if (empty($swimlane['columns'])): ?>
             <p class="alert alert-error"><?= t('There is no column in your project!') ?></p>
             <?php break ?>
         <?php else: ?>
-            <?= $this->render('board/table_swimlane', array(
+            <?php if ($index === 0): ?>
+                <?= $this->render('board/table_column', array(
+                    'swimlane' => $swimlane,
+                    'not_editable' => isset($not_editable),
+                )) ?>
+            <?php endif ?>
+
+            <?php if ($nb_swimlanes > 1): ?>
+                <?= $this->render('board/table_swimlane', array(
+                    'project' => $project,
+                    'swimlane' => $swimlane,
+                    'not_editable' => isset($not_editable),
+                )) ?>
+            <?php endif ?>
+
+            <?= $this->render('board/table_tasks', array(
                 'project' => $project,
                 'swimlane' => $swimlane,
-                'board_highlight_period' => $board_highlight_period,
-                'hide_swimlane' => count($swimlanes) === 1,
                 'not_editable' => isset($not_editable),
+                'board_highlight_period' => $board_highlight_period,
             )) ?>
+
         <?php endif ?>
     <?php endforeach ?>
     </table>

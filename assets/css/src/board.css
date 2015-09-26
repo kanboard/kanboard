@@ -111,21 +111,16 @@ th.board-column-header-collapsed .board-column-header-task-count {
 }
 
 /* swimlanes */
-th.board-swimlane-header {
-    width: 120px;
-}
-
 a.board-swimlane-toggle {
     font-size: 0.95em;
+    text-decoration: none;
 }
 
-.board-swimlane-toggle-title {
-    font-size: 0.85em;
-    display: none;
-}
-
-.board-swimlane-title {
-    vertical-align: top;
+a.board-swimlane-toggle:hover,
+a.board-swimlane-toggle:focus {
+    color: #000;
+    text-decoration: none;
+    border: none;
 }
 
 /* board task list */
