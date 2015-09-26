@@ -96,4 +96,17 @@ abstract class Base extends \Core\Base
     {
         return '?';
     }
+
+    /**
+     * Get plugin homepage
+     *
+     * This method should be overrided by your Plugin class
+     *
+     * @access public
+     * @return string
+     */
+    public function getPluginHomepage()
+    {
+        return '';
+    }
 }

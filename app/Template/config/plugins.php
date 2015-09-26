@@ -15,7 +15,13 @@
 
     <?php foreach($plugins as $plugin): ?>
     <tr>
-        <td><?= $this->e($plugin->getPluginName()) ?></td>
+        <td>
+            <?php if ($plugin->getPluginHomepage()): ?>
+                <a href="<?= $plugin->getPluginHomepage() ?>" target="_blank" rel="noreferrer"><?= $this->e($plugin->getPluginName()) ?></a>
+            <?php else: ?>
+                <?= $this->e($plugin->getPluginName()) ?>
+            <?php endif ?>
+        </td>
         <td><?= $this->e($plugin->getPluginAuthor()) ?></td>
         <td><?= $this->e($plugin->getPluginVersion()) ?></td>
         <td><?= $this->e($plugin->getPluginDescription()) ?></td>
