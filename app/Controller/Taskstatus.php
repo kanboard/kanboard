@@ -18,36 +18,8 @@ class Taskstatus extends Base
     public function close()
     {
         $task = $this->getTask();
-        $redirect = $this->request->getStringParam('redirect');
-
-        if ($this->request->getStringParam('confirmation') === 'yes') {
-
-            $this->checkCSRFParam();
-
-            if ($this->taskStatus->close($task['id'])) {
-                $this->session->flash(t('Task closed successfully.'));
-            } else {
-                $this->session->flashError(t('Unable to close this task.'));
-            }
-
-            if ($redirect === 'board') {
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            }
-
-            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
-        }
-
-        if ($this->request->isAjax()) {
-            $this->response->html($this->template->render('task_status/close', array(
-                'task' => $task,
-                'redirect' => $redirect,
-            )));
-        }
-
-        $this->response->html($this->taskLayout('task_status/close', array(
-            'task' => $task,
-            'redirect' => $redirect,
-        )));
+        $this->changeStatus($task, 'close', t('Task closed successfully.'), t('Unable to close this task.'));
+        $this->renderTemplate($task, 'task_status/close');
     }
 
     /**
@@ -58,22 +30,46 @@ class Taskstatus extends Base
     public function open()
     {
         $task = $this->getTask();
+        $redirect = $this->request->getStringParam('redirect');
 
+        $this->changeStatus($task, 'open', t('Task opened successfully.'), t('Unable to open this task.'));
+        $this->renderTemplate($task, 'task_status/open');
+    }
+
+    private function changeStatus(array $task, $method, $success_message, $failure_message)
+    {
         if ($this->request->getStringParam('confirmation') === 'yes') {
 
             $this->checkCSRFParam();
 
-            if ($this->taskStatus->open($task['id'])) {
-                $this->session->flash(t('Task opened successfully.'));
+            if ($this->taskStatus->$method($task['id'])) {
+                $this->session->flash($success_message);
             } else {
-                $this->session->flashError(t('Unable to open this task.'));
+                $this->session->flashError($failure_message);
             }
 
-            $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+            if ($this->request->getStringParam('redirect') === 'board') {
+                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+            }
+
+            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        }
+    }
+
+    private function renderTemplate(array $task, $template)
+    {
+        $redirect = $this->request->getStringParam('redirect');
+
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->render($template, array(
+                'task' => $task,
+                'redirect' => $redirect,
+            )));
         }
 
-        $this->response->html($this->taskLayout('task_status/open', array(
+        $this->response->html($this->taskLayout($template, array(
             'task' => $task,
+            'redirect' => $redirect,
         )));
     }
 }

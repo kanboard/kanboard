@@ -18,6 +18,7 @@ Core functionalities moved to plugins:
 
 Improvements:
 
+* Show "Open this task" in dropdown menu for closed tasks
 * Show assignee on card only when someone is assigned (hide nobody text)
 * Highlight selected item in dropdown menus
 * Gantt chart: change bar color according to task progress
