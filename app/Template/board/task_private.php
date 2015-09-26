@@ -9,10 +9,11 @@
      data-task-url="<?= $this->url->href('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
 
     <div class="task-board-sort-handle" style="display: none;"><i class="fa fa-arrows-alt"></i></div>
-    <?= $this->render('board/task_menu', array('task' => $task)) ?>
 
     <?php if ($this->board->isCollapsed($task['project_id'])): ?>
         <div class="task-board-collapsed">
+            <?= $this->render('board/task_menu', array('task' => $task)) ?>
+
             <?php if (! empty($task['assignee_username'])): ?>
                 <span title="<?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>">
                     <?= $this->e($this->user->getInitials($task['assignee_name'] ?: $task['assignee_username'])) ?>
@@ -22,6 +23,7 @@
         </div>
     <?php else: ?>
         <div class="task-board-expanded">
+            <?= $this->render('board/task_menu', array('task' => $task)) ?>
 
             <?php if ($task['reference']): ?>
             <span class="task-board-reference" title="<?= t('Reference') ?>">

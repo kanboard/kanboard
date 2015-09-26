@@ -31,10 +31,6 @@ div.task-board-status-closed {
     text-decoration: underline;
 }
 
-.task-board-expanded {
-    display: inline;
-}
-
 .task-board-collapsed {
     overflow: hidden;
     white-space: nowrap;
@@ -47,7 +43,6 @@ a.task-board-collapsed-title {
 }
 
 .task-board .dropdown {
-    margin-right: 5px;
     font-size: 1.1em;
 }
 
