@@ -41,9 +41,9 @@ class Customfilter extends Base
         $values = $this->request->getValues();
         $values['user_id'] = $this->userSession->getId();
         
-        //list($valid, $errors) = $this->customFilter->validateCreation($values);
+        list($valid, $errors) = $this->customFilter->validateCreation($values);
 
-        //if ($valid) {
+        if ($valid) {
 
             if ($this->customFilter->create($values)) {
                 $this->session->flash(t('Your custom filter have been created successfully.'));
@@ -52,7 +52,7 @@ class Customfilter extends Base
             else {
                 $this->session->flashError(t('Unable to create your custom filter.'));
             }
-       // }
+        }
 
         $this->index($values, $errors);
     }
@@ -70,8 +70,6 @@ class Customfilter extends Base
         $project_id = $this->request->getIntegerParam('project_id');
         $user_id = $this->request->getIntegerParam('user_id');
         
-        //$custom_filter = $this->customFilter->getCustomFilter($filter,$project_id,$user_id);
-
         if ($this->customFilter->remove($filter,$project_id,$user_id)) {
             $this->session->flash(t('Custom filter removed successfully.'));
         } else {
@@ -123,10 +121,9 @@ class Customfilter extends Base
                 $values += array('is_shared' => 0);
         }
         
-        //list($valid, $errors) = $this->customFilter->validateModification($values);
+        list($valid, $errors) = $this->customFilter->validateModification($values);
 
-        //if ($valid) {
-
+        if ($valid) {
             if ($this->customFilter->update($values,$filter_original)) {
                 $this->session->flash(t('Your custom filter have been updated successfully.'));
                 $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
@@ -134,7 +131,7 @@ class Customfilter extends Base
             else {
                 $this->session->flashError(t('Unable to update custom filter.'));
             }
-        //}
+        }
 
         $values['filter'] = $filter_original;
         $this->edit($values, $errors);

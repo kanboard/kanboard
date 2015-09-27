@@ -21,13 +21,12 @@ class CustomFilter extends Base
     const TABLE = 'custom_filters';
 
     /**
-     * Return the list of all shared custom filters for a specific project
+     * Get query to fetch custom filters
      *
      * @access public
-     * @param  integer   $project_id    Project id
-     * @return array
+     * @return \PicoDb\Table
      */
-    public function getAllShared($project_id)
+    public function getQuery()
     {
         return $this->db->table(self::TABLE)
                         ->columns(  User::TABLE.'.name as owner_name',
@@ -37,11 +36,23 @@ class CustomFilter extends Base
                                     self::TABLE.'.filter',
                                     self::TABLE.'.name',
                                     self::TABLE.'.is_shared'
-                                )
+                                )                                                
+                        ->asc(self::TABLE.'name')
+                        ->join(User::TABLE, 'id', 'user_id');                        
+    }
+    
+    /**
+     * Return the list of all shared custom filters for a specific project
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return array
+     */
+    public function getAllShared($project_id)
+    {   
+        return $this->getQuery()
                         ->eq('project_id', $project_id)
                         ->eq('is_shared', 1)
-                        ->asc(self::TABLE.'name')
-                        ->join(User::TABLE, 'id', 'user_id')
                         ->findAll();
     }
     
@@ -55,20 +66,10 @@ class CustomFilter extends Base
      */
     public function getAllPrivate($project_id, $user_id)
     {
-        return $this->db->table(self::TABLE)
-                ->columns(  User::TABLE.'.name as owner_name',
-                            User::TABLE.'.username as owner_username',
-                            self::TABLE.'.user_id',
-                            self::TABLE.'.project_id',
-                            self::TABLE.'.filter',
-                            self::TABLE.'.name',
-                            self::TABLE.'.is_shared'
-                        )
+        return $this->getQuery()
                 ->eq('project_id', $project_id)
                 ->eq('user_id', $user_id)
                 ->eq('is_shared', 0)
-                ->asc(self::TABLE.'name')
-                ->join(User::TABLE, 'id', 'user_id')
                 ->findAll();
     }
     
@@ -81,8 +82,7 @@ class CustomFilter extends Base
      * @return array
      */
     public function getAll($project_id, $user_id)
-    {
-        
+    {   
         $private = $this->getAllPrivate($project_id, $user_id);
         $shared = $this->getAllShared($project_id);
         return array_merge($private, $shared);

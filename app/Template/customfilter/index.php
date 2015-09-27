@@ -14,40 +14,25 @@
          <tr>
             <td><?= $cf['filter'] ?></td>
             <td><?= $cf['name'] ?></td>
-            <td><?= $cf['is_shared'] ?></td>
+            <td>
+            <?php if ($cf['is_shared'] == 1): ?>
+                <?= t('yes') ?>
+            <?php else: ?>
+                <?= t('no') ?>
+            <?php endif ?>
+            </td>
             <td><?= $this->e($cf['owner_name'] ?: $cf['owner_username']) ?></td>
             <td>
-            <?php if ($cf['user_id'] == $user_id || $this->user->isAdmin()): ?>
+                <?php if ($cf['user_id'] == $user_id || $this->user->isAdmin()): ?>
                     <ul>
                         <li><?= $this->url->link(t('Remove'), 'customFilter', 'remove', array('project_id' => $cf['project_id'], 'user_id' => $cf['user_id'], 'filter' => $cf['filter']),true) ?></li>
                         <li><?= $this->url->link(t('Edit'), 'customFilter', 'edit', array('project_id' => $cf['project_id'], 'user_id' => $cf['user_id'], 'filter' => $cf['filter']),true) ?></li>
                     </ul>
-            <?php endif ?>
+                <?php endif ?>
             </td>
         </tr>
     <?php endforeach ?>
     </table>
 </div>
 
-
-<div class="page-header">
-    <h2><?= t('Add a new filter') ?></h2>
-</div>
-<form method="post" action="<?= $this->url->href('customfilter', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
-
-    <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('project_id', $values) ?>
-    <?= $this->form->hidden('user_id', $values) ?>
-
-    <?= $this->form->label(t('Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="80"')) ?>
-    
-    <?= $this->form->label(t('Filter'), 'filter') ?>
-    <?= $this->form->text('filter', $values, $errors, array('autofocus', 'required', 'maxlength="80"')) ?>
-    
-    <?= $this->form->checkbox('is_shared', t('Share with other Members'), 1, 0) ?>
-
-    <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
-    </div>
-</form>
+<?= $this->render('customfilter/add', array('project' => $project, 'values' => $values, 'errors' => $errors)) ?>
