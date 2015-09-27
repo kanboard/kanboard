@@ -26,6 +26,7 @@ class ClassProvider implements ServiceProviderInterface
             'Comment',
             'Config',
             'Currency',
+            'CustomFilter',
             'DateParser',
             'File',
             'LastLogin',

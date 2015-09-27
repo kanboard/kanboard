@@ -29,6 +29,9 @@
                 <?= $this->url->link(t('Users'), 'project', 'users', array('project_id' => $project['id'])) ?>
             </li>
             <?php endif ?>
+            <li <?= $this->app->getRouterController() === 'customfilter' && $this->app->getRouterAction() === 'index' ? 'class="active"' : '' ?>>
+                <?= $this->url->link(t('Custom Filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
+            </li>
             <li <?= $this->app->getRouterController() === 'action' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
             </li>
