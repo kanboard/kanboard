@@ -4,7 +4,7 @@ Pour chaque projet, les tâches peuvent être visualisées dans différentes vue
 
 Vue Tableau
 ----------
-![Vue Tableau](http://kanboard.net/screenshots/documentation/board-view.png)
+![Vue Tableau](captures/kanboard-board.png)
 
 - Dans cette vue, il est possible de glisser-déposer facilement des tâches d'une colonne à l'autre.
 - Il est également possible d'utiliser le raccourci clavier **"v b"** pour afficher la vue Tableau.
