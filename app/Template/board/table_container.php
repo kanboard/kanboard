@@ -25,20 +25,24 @@
                 )) ?>
             <?php endif ?>
 
-            <?php if ($swimlane['nb_swimlanes'] > 1): ?>
-                <?= $this->render('board/table_swimlane', array(
+            <?php if (! ($swimlane['nb_tasks'] === 0 && isset($not_editable))): ?>
+
+                <?php if ($swimlane['nb_swimlanes'] > 1): ?>
+                    <?= $this->render('board/table_swimlane', array(
+                        'project' => $project,
+                        'swimlane' => $swimlane,
+                        'not_editable' => isset($not_editable),
+                    )) ?>
+                <?php endif ?>
+
+                <?= $this->render('board/table_tasks', array(
                     'project' => $project,
                     'swimlane' => $swimlane,
                     'not_editable' => isset($not_editable),
+                    'board_highlight_period' => $board_highlight_period,
                 )) ?>
-            <?php endif ?>
 
-            <?= $this->render('board/table_tasks', array(
-                'project' => $project,
-                'swimlane' => $swimlane,
-                'not_editable' => isset($not_editable),
-                'board_highlight_period' => $board_highlight_period,
-            )) ?>
+            <?php endif ?>
 
         <?php endif ?>
     <?php endforeach ?>

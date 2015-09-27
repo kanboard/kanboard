@@ -18,6 +18,7 @@ Core functionalities moved to plugins:
 
 Improvements:
 
+* Do not show empty swimlanes in public view
 * Change swimlane layout to save space on the screen
 * Add the possibility to set/unset max column height (column scrolling)
 * Show "Open this task" in dropdown menu for closed tasks
