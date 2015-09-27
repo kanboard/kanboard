@@ -31,7 +31,7 @@
 
             <?php if (! empty($column['score'])): ?>
                 <span class="pull-right" title="<?= t('Score') ?>">
-                    <?= $column['score'] ?>&nbsp;
+                    <?= $column['total_score'] ?>
                 </span>
             <?php endif ?>
 
