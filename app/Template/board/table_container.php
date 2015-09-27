@@ -13,7 +13,6 @@
         >
     <?php endif ?>
 
-    <?php $nb_swimlanes = count($swimlanes) ?>
     <?php foreach ($swimlanes as $index => $swimlane): ?>
         <?php if (empty($swimlane['columns'])): ?>
             <p class="alert alert-error"><?= t('There is no column in your project!') ?></p>
@@ -26,7 +25,7 @@
                 )) ?>
             <?php endif ?>
 
-            <?php if ($nb_swimlanes > 1): ?>
+            <?php if ($swimlane['nb_swimlanes'] > 1): ?>
                 <?= $this->render('board/table_swimlane', array(
                     'project' => $project,
                     'swimlane' => $swimlane,

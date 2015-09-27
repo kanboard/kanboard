@@ -1,7 +1,10 @@
 <!-- task row -->
 <tr class="board-swimlane swimlane-row-<?= $swimlane['id'] ?>">
     <?php foreach ($swimlane['columns'] as $column): ?>
-        <td class="board-column-<?= $column['id'] ?> <?= $column['task_limit'] && $column['nb_tasks'] > $column['task_limit'] ? 'board-task-list-limit' : '' ?>">
+        <td class="
+            board-column-<?= $column['id'] ?>
+            <?= $column['task_limit'] > 0 && $column['nb_tasks'] > $column['task_limit'] ? 'board-task-list-limit' : '' ?>
+            ">
 
             <!-- tasks list -->
             <div class="board-task-list board-column-expanded" data-column-id="<?= $column['id'] ?>" data-swimlane-id="<?= $swimlane['id'] ?>" data-task-limit="<?= $column['task_limit'] ?>">
