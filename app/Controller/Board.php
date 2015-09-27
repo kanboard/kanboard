@@ -136,7 +136,7 @@ class Board extends Base
         }
 
         $values = $this->request->getJson();
-        $this->userSession->setFilters($project_id, $values['search']);
+        $this->userSession->setFilters($project_id, empty($values['search']) ? '' : $values['search']);
 
         $this->response->html($this->renderBoard($project_id));
     }
