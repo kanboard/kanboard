@@ -19,7 +19,7 @@ Lorsque la limite de tâches est atteinte pour une colonne, l'arrière-plan devi
 Vue Agenda
 --------------
 
-![Vue Agenda](http://kanboard.net/screenshots/documentation/calendar-view.png)
+![Vue Agenda](captures/kanboard-vue-calendrier.png)
 
 - Dans cette vue, il est possible de voir les tâches avec des dates d'échéance.
 - Selon les paramètres, il est également possible de voir les tâches en cours.
@@ -29,7 +29,7 @@ Vue Agenda
 Vue Liste
 ----------
 
-![Vue liste](http://kanboard.net/screenshots/documentation/list-view.png)
+![Vue liste](captures/kanboard-vue-liste.png)
 
 - Dans cette vue, tous les résultats de votre recherche sont affichés dans un tableau.
 - Il est également possible d'utiliser le raccourci clavier **"v l"** pour afficher la vue Liste.
@@ -37,7 +37,7 @@ Vue Liste
 Vue Gantt
 ----------
 
-![Vue Gantt](http://kanboard.net/screenshots/documentation/gantt-view.png)
+![Vue Gantt](captures/kanboard-vue-gantt.png)
 
 - La vue Gantt affiche les tâches dans une fresque horizontale
 - Le diagramme utilise la date de début et la date d'échéance pour afficher les tâches
