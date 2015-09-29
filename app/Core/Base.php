@@ -23,6 +23,7 @@ use Pimple\Container;
  * @property \Core\ObjectStorage\ObjectStorageInterface        $objectStorage
  * @property \Core\Cache\Cache                                 $memoryCache
  * @property \Core\Plugin\Hook                                 $hook
+ * @property \Core\Plugin\Loader                               $pluginLoader
  * @property \Integration\BitbucketWebhook                     $bitbucketWebhook
  * @property \Integration\GithubWebhook                        $githubWebhook
  * @property \Integration\GitlabWebhook                        $gitlabWebhook

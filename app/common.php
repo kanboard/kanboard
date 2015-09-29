@@ -33,5 +33,4 @@ if (ENABLE_URL_REWRITE) {
     require __DIR__.'/routes.php';
 }
 
-$plugin = new Core\Plugin\Loader($container);
-$plugin->scan();
+$container['pluginLoader']->scan();

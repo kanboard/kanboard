@@ -22,6 +22,14 @@ class Loader extends \Core\Base
     const TABLE_SCHEMA = 'plugin_schema_versions';
 
     /**
+     * Plugin instances
+     *
+     * @access public
+     * @var array
+     */
+    public $plugins = array();
+
+    /**
      * Scan plugin folder and load plugins
      *
      * @access public
@@ -55,6 +63,7 @@ class Loader extends \Core\Base
         Tool::buildDic($this->container, $instance->getClasses());
 
         $instance->initialize();
+        $this->plugins[] = $instance;
     }
 
     /**

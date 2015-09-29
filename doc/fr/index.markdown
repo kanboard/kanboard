@@ -49,3 +49,13 @@ Utiliser Kanboard
 - [Gestion des utilisateurs](user-management.markdown)
 - [Notifications](notifications.markdown)
 - [Authentification à deux facteurs](2fa.markdown)
+
+### Paramètres
+
+- [Raccourcis clavier](keyboard-shortcuts.markdown)
+- [Paramètres de l'application](application-configuration.markdown)
+- [Paramètres du projet](project-configuration.markdown)
+- [Paramètres du tableau](board-configuration.markdown)
+- [Paramètres du calendrier](calendar-configuration.markdown)
+- [Paramètres du lien](link-labels.markdown)
+- [Taux de change](currency-rate.markdown)

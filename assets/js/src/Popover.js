@@ -21,11 +21,14 @@ Popover.prototype.open = function(link) {
 };
 
 Popover.prototype.close = function(e) {
-    if (e) {
-        e.preventDefault();
-    }
+    if (this.isOpen()) {
 
-    $('#popover-container').remove();
+        if (e) {
+            e.preventDefault();
+        }
+
+        $('#popover-container').remove();
+    }
 };
 
 Popover.prototype.onClick = function(e) {

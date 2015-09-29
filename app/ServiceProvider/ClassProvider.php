@@ -2,6 +2,7 @@
 
 namespace ServiceProvider;
 
+use Core\Plugin\Loader;
 use Core\ObjectStorage\FileStorage;
 use Core\Paginator;
 use Core\OAuth2;
@@ -117,5 +118,7 @@ class ClassProvider implements ServiceProviderInterface
         $container['objectStorage'] = function() {
             return new FileStorage(FILES_DIR);
         };
+
+        $container['pluginLoader'] = new Loader($container);
     }
 }
