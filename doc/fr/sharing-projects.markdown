@@ -19,7 +19,7 @@ Activer l'accès public
 
 Choisissez votre projet, puis cliquez sur « Accès public » et enfin sur le bouton « Activer l'accès public ».
 
-![Activer l'accès public](http://kanboard.net/screenshots/documentation/project-enable-sharing.png)
+![Activer l'accès public](captures/kanboard-acces-prive.png)
 
 Lorsque l'accès public est activé, plusieurs liens sont créés :
 
@@ -27,7 +27,7 @@ Lorsque l'accès public est activé, plusieurs liens sont créés :
 - Lien de souscription au fil RSS
 - Lien d'abonnement à iCalendar
 
-![Désactiver l'accès public](http://kanboard.net/screenshots/documentation/project-disable-sharing.png)
+![Désactiver l'accès public](captures/kanboard-acces-public.png)
 
 Vous pouvez désactiver l'accès public à tout moment.
 
