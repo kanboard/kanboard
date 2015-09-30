@@ -233,17 +233,17 @@ class Subtask extends Base
      * Update
      *
      * @access public
-     * @param  array    $values    Form values
-     * @param  array    $options   Additional options. If passed [quietly => true] - will not be called an event
+     * @param  array $values      Form values
+     * @param  bool  $fire_events If true, will be called an event
      * @return bool
      */
-    public function update(array $values, array $options = null)
+    public function update(array $values, $fire_events = true)
     {
         $this->prepare($values);
         $subtask = $this->getById($values['id']);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
-        if ($result && empty($options['quietly'])) {
+        if ($result && $fire_events) {
             $event = $subtask;
             $event['changes'] = array_diff_assoc($values, $subtask);
             $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new SubtaskEvent($event));

@@ -345,7 +345,7 @@ class SubtaskTimeTracking extends Base
             'id' => $subtask['id'],
             'time_spent' => $subtask['time_spent'] + $time_spent,
             'task_id' => $subtask['task_id'],
-        ), array('quietly' => true));
+        ), false);
     }
 
     /**
