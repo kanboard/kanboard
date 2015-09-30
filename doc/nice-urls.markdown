@@ -24,7 +24,7 @@ By default, Kanboard will check if the Apache mode rewrite is enabled.
 
 To avoid the automatic detection of url rewriting from the web server, you can enable this feature in your config file:
 
-```
+```php
 define('ENABLE_URL_REWRITE', true);
 ```
 
@@ -34,3 +34,47 @@ When this constant is at `true`:
 - If you use another web server than Apache, by example Nginx or Microsoft IIS, you have to configure yourself the url rewriting
 
 Note: Kanboard always fallback to old school urls when it's not configured, this configuration is optional.
+
+Nginx configuration example
+---------------------------
+
+In the section `server` of your Nginx config file you can use this example:
+
+```bash
+index index.php;
+
+location / {
+    try_files $uri $uri/ /index.php;
+
+    # If Kanboard is under a subfolder
+    # try_files $uri $uri/ /kanboard/index.php;
+}
+
+location ~ \.php$ {
+    try_files $uri =404;
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_index index.php;
+    include fastcgi_params;
+}
+
+# Deny access to the directory data
+location ~* /data {
+    deny all;
+    return 404;
+}
+
+# Deny access to .htaccess
+location ~ /\.ht {
+    deny all;
+    return 404;
+}
+```
+
+In your Kanboard `config.php`:
+
+```php
+define('ENABLE_URL_REWRITE', true);
+```
+
+Adapt the example above according to your own configuration.

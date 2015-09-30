@@ -252,16 +252,24 @@ class Board extends Base
             $swimlanes[$i]['columns'] = $columns;
             $swimlanes[$i]['nb_columns'] = $nb_columns;
             $swimlanes[$i]['nb_tasks'] = 0;
+            $swimlanes[$i]['nb_swimlanes'] = $ilen;
 
             for ($j = 0; $j < $nb_columns; $j++) {
 
                 $column_id = $columns[$j]['id'];
                 $swimlane_id = $swimlanes[$i]['id'];
 
+                if (! isset($swimlanes[0]['columns'][$j]['nb_column_tasks'])) {
+                    $swimlanes[0]['columns'][$j]['nb_column_tasks'] = 0;
+                    $swimlanes[0]['columns'][$j]['total_score'] = 0;
+                }
+
                 $swimlanes[$i]['columns'][$j]['tasks'] = $callback === null ? $this->taskFinder->getTasksByColumnAndSwimlane($project_id, $column_id, $swimlane_id) : $callback($project_id, $column_id, $swimlane_id);
                 $swimlanes[$i]['columns'][$j]['nb_tasks'] = count($swimlanes[$i]['columns'][$j]['tasks']);
                 $swimlanes[$i]['columns'][$j]['score'] = $this->getColumnSum($swimlanes[$i]['columns'][$j]['tasks'], 'score');
                 $swimlanes[$i]['nb_tasks'] += $swimlanes[$i]['columns'][$j]['nb_tasks'];
+                $swimlanes[0]['columns'][$j]['nb_column_tasks'] += $swimlanes[$i]['columns'][$j]['nb_tasks'];
+                $swimlanes[0]['columns'][$j]['total_score'] += $swimlanes[$i]['columns'][$j]['score'];
             }
         }
 

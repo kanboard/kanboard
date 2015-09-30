@@ -1012,4 +1012,10 @@ return array(
     'Table of contents' => 'Tabela de conteúdos',
     'Gantt' => 'Gantt',
     'Help with project permissions' => 'Ajuda com permissões de projecto',
+    // 'Author' => '',
+    // 'Version' => '',
+    // 'Plugins' => '',
+    // 'There is no plugin loaded.' => '',
+    // 'Set maximum column height' => '',
+    // 'Remove maximum column height' => '',
 );

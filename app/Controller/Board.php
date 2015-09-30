@@ -27,7 +27,7 @@ class Board extends Base
         }
 
         // Display the board with a specific layout
-        $this->response->html($this->template->layout('board/public_view', array(
+        $this->response->html($this->template->layout('board/view_public', array(
             'project' => $project,
             'swimlanes' => $this->board->getBoard($project['id']),
             'title' => $project['name'],
@@ -49,7 +49,7 @@ class Board extends Base
     {
         $params = $this->getProjectFilters('board', 'show');
 
-        $this->response->html($this->template->layout('board/private_view', array(
+        $this->response->html($this->template->layout('board/view_private', array(
             'categories_list' => $this->category->getList($params['project']['id'], false),
             'users_list' => $this->projectPermission->getMemberList($params['project']['id'], false),
             'swimlanes' => $this->taskFilter->search($params['filters']['search'])->getBoard($params['project']['id']),
@@ -136,7 +136,7 @@ class Board extends Base
         }
 
         $values = $this->request->getJson();
-        $this->userSession->setFilters($project_id, $values['search']);
+        $this->userSession->setFilters($project_id, empty($values['search']) ? '' : $values['search']);
 
         $this->response->html($this->renderBoard($project_id));
     }

@@ -39,7 +39,7 @@ These role are related to the project permission.
 - Can do any daily operations in their projects (create and move tasks...)
 - Cannot configure projects
 
-Note: Any "Standard User" can be promotted "Project Manager" for a given project, they don't necessary need to be "Project Administrator".
+Note: Any "Standard User" can be promoted "Project Manager" for a given project, they don't necessary need to be "Project Administrator".
 
 Local and remote users
 ----------------------

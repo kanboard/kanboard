@@ -61,10 +61,12 @@ td.board-column-task-collapsed {
 .board-rotation-wrapper {
     position: relative;
     padding: 8px 4px;
+    min-height: 150px;
+    overflow: auto;
 }
 
 .board-rotation {
-    min-width: 250px;
+    white-space: nowrap;
     -webkit-backface-visibility: hidden;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
@@ -77,6 +79,10 @@ td.board-column-task-collapsed {
 }
 
 /* column header */
+.board-column-title {
+    cursor: pointer;
+}
+
 .board-add-icon {
     float: left;
     padding: 0 5px;
@@ -105,26 +111,22 @@ th.board-column-header-collapsed .board-column-header-task-count {
 }
 
 /* swimlanes */
-th.board-swimlane-header {
-    width: 120px;
-}
-
 a.board-swimlane-toggle {
     font-size: 0.95em;
+    text-decoration: none;
 }
 
-.board-swimlane-toggle-title {
-    font-size: 0.85em;
-    display: none;
-}
-
-.board-swimlane-title {
-    vertical-align: top;
+a.board-swimlane-toggle:hover,
+a.board-swimlane-toggle:focus {
+    color: #000;
+    text-decoration: none;
+    border: none;
 }
 
 /* board task list */
 .board-task-list {
     overflow: auto;
+    min-height: 60px;
 }
 
 .board-task-list-limit {

@@ -16,9 +16,8 @@ Swimlane.prototype.expand = function(swimlaneId) {
     localStorage.setItem(this.getStorageKey(), JSON.stringify(swimlaneIds));
 
     $('.swimlane-row-' + swimlaneId).css('display', 'table-row');
-    $('.show-icon-swimlane-' + swimlaneId).css('display', 'none');
     $('.hide-icon-swimlane-' + swimlaneId).css('display', 'inline');
-    $('.swimlane-task-count-' + swimlaneId).css('display', 'inline');
+    $('.show-icon-swimlane-' + swimlaneId).css('display', 'none');
 };
 
 Swimlane.prototype.collapse = function(swimlaneId) {
@@ -30,9 +29,8 @@ Swimlane.prototype.collapse = function(swimlaneId) {
     }
 
     $('.swimlane-row-' + swimlaneId).css('display', 'none');
-    $('.show-icon-swimlane-' + swimlaneId).css('display', 'inline');
     $('.hide-icon-swimlane-' + swimlaneId).css('display', 'none');
-    $('.swimlane-task-count-' + swimlaneId).css('display', 'none');
+    $('.show-icon-swimlane-' + swimlaneId).css('display', 'inline');
 };
 
 Swimlane.prototype.isCollapsed = function(swimlaneId) {

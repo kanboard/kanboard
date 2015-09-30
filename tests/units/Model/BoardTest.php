@@ -54,11 +54,15 @@ class BoardTest extends Base
         $board = $b->getBoard(1);
         $this->assertNotEmpty($board);
         $this->assertEquals(1, count($board));
-        $this->assertEquals(5, count($board[0]));
-        $this->assertTrue(array_key_exists('name', $board[0]));
-        $this->assertTrue(array_key_exists('columns', $board[0]));
-        $this->assertTrue(array_key_exists('tasks', $board[0]['columns'][2]));
-        $this->assertTrue(array_key_exists('title', $board[0]['columns'][2]));
+        $this->assertEquals(6, count($board[0]));
+        $this->assertArrayHasKey('name', $board[0]);
+        $this->assertArrayHasKey('nb_tasks', $board[0]);
+        $this->assertArrayHasKey('columns', $board[0]);
+        $this->assertArrayHasKey('tasks', $board[0]['columns'][2]);
+        $this->assertArrayHasKey('nb_tasks', $board[0]['columns'][2]);
+        $this->assertArrayHasKey('title', $board[0]['columns'][2]);
+        $this->assertArrayHasKey('nb_column_tasks', $board[0]['columns'][0]);
+        $this->assertArrayHasKey('total_score', $board[0]['columns'][0]);
     }
 
     public function testGetBoardWithSwimlane()
@@ -75,18 +79,26 @@ class BoardTest extends Base
         $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 3)));
         $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
         $this->assertEquals(4, $tc->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 3)));
-        $this->assertEquals(5, $tc->create(array('title' => 'Task #5', 'project_id' => 1, 'column_id' => 4)));
-        $this->assertEquals(6, $tc->create(array('title' => 'Task #6', 'project_id' => 1, 'column_id' => 4, 'swimlane_id' => 1)));
+        $this->assertEquals(5, $tc->create(array('title' => 'Task #5', 'project_id' => 1, 'column_id' => 4, 'score' => 2)));
+        $this->assertEquals(6, $tc->create(array('title' => 'Task #6', 'project_id' => 1, 'column_id' => 4, 'score' => 3, 'swimlane_id' => 1)));
 
         $board = $b->getBoard(1);
         $this->assertNotEmpty($board);
         $this->assertEquals(2, count($board));
-        $this->assertEquals(5, count($board[0]));
-        $this->assertTrue(array_key_exists('nb_tasks', $board[0]));
-        $this->assertTrue(array_key_exists('name', $board[0]));
-        $this->assertTrue(array_key_exists('columns', $board[0]));
-        $this->assertTrue(array_key_exists('tasks', $board[0]['columns'][2]));
-        $this->assertTrue(array_key_exists('title', $board[0]['columns'][2]));
+        $this->assertEquals(6, count($board[0]));
+        $this->assertArrayHasKey('name', $board[0]);
+        $this->assertArrayHasKey('nb_tasks', $board[0]);
+        $this->assertArrayHasKey('columns', $board[0]);
+        $this->assertArrayHasKey('tasks', $board[0]['columns'][2]);
+        $this->assertArrayHasKey('nb_tasks', $board[0]['columns'][2]);
+        $this->assertArrayHasKey('title', $board[0]['columns'][2]);
+        $this->assertArrayHasKey('nb_column_tasks', $board[0]['columns'][0]);
+        $this->assertArrayNotHasKey('nb_column_tasks', $board[1]['columns'][0]);
+        $this->assertArrayNotHasKey('total_score', $board[1]['columns'][0]);
+        $this->assertArrayHasKey('score', $board[0]['columns'][3]);
+        $this->assertArrayHasKey('total_score', $board[0]['columns'][3]);
+        $this->assertEquals(2, $board[0]['columns'][3]['score']);
+        $this->assertEquals(5, $board[0]['columns'][3]['total_score']);
 
         $task = $tf->getById(1);
         $this->assertEquals(1, $task['id']);

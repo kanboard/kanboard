@@ -18,7 +18,13 @@ Search.prototype.listen = function() {
     // Filter helper for search
     $(document).on("click", ".filter-helper", function (e) {
         e.preventDefault();
+
         var filter = $(this).data("filter");
+        var appendFilter = $(this).data("append-filter");
+
+        if (appendFilter) {
+            filter = $("#form-search").val() + " " + appendFilter;
+        }
 
         $("#form-search").val(filter);
 

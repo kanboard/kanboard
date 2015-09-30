@@ -44,4 +44,69 @@ abstract class Base extends \Core\Base
             call_user_func($callback, $container);
         });
     }
+
+    /**
+     * Get plugin name
+     *
+     * This method should be overrided by your Plugin class
+     *
+     * @access public
+     * @return string
+     */
+    public function getPluginName()
+    {
+        return ucfirst(substr(get_called_class(), 7, -7));
+    }
+
+    /**
+     * Get plugin description
+     *
+     * This method should be overrided by your Plugin class
+     *
+     * @access public
+     * @return string
+     */
+    public function getPluginDescription()
+    {
+        return '';
+    }
+
+    /**
+     * Get plugin author
+     *
+     * This method should be overrided by your Plugin class
+     *
+     * @access public
+     * @return string
+     */
+    public function getPluginAuthor()
+    {
+        return '?';
+    }
+
+    /**
+     * Get plugin version
+     *
+     * This method should be overrided by your Plugin class
+     *
+     * @access public
+     * @return string
+     */
+    public function getPluginVersion()
+    {
+        return '?';
+    }
+
+    /**
+     * Get plugin homepage
+     *
+     * This method should be overrided by your Plugin class
+     *
+     * @access public
+     * @return string
+     */
+    public function getPluginHomepage()
+    {
+        return '';
+    }
 }

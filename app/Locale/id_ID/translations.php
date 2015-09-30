@@ -1012,4 +1012,10 @@ return array(
     'Table of contents' => 'Daftar isi',
     'Gantt' => 'Gantt',
     'Help with project permissions' => 'Bantuan dengan izin proyek',
+    // 'Author' => '',
+    // 'Version' => '',
+    // 'Plugins' => '',
+    // 'There is no plugin loaded.' => '',
+    // 'Set maximum column height' => '',
+    // 'Remove maximum column height' => '',
 );

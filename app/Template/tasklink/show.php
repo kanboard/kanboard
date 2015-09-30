@@ -6,6 +6,7 @@
     <tr>
         <th class="column-20"><?= t('Label') ?></th>
         <th class="column-30"><?= t('Task') ?></th>
+        <th class="column-20"><?= t('Project') ?></th>
         <th><?= t('Column') ?></th>
         <th><?= t('Assignee') ?></th>
         <?php if (! isset($not_editable)): ?>
@@ -52,6 +53,7 @@
                     <strong><?= $this->e($link['task_time_estimated']).'h' ?></strong> <?= t('estimated') ?>
                 <?php endif ?>
             </td>
+            <td><?= $this->e($link['project_name']) ?></td>
             <td><?= $this->e($link['column_title']) ?></td>
             <td>
                 <?php if (! empty($link['task_assignee_username'])): ?>

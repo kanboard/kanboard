@@ -3,6 +3,7 @@
     <?php foreach($links as $link): ?>
         <li>
             <strong><?= t($link['label']) ?></strong>
+            [<i><?= $link['project_name'] ?></i>]
             <?= $this->url->link(
                 $this->e('#'.$link['task_id'].' - '.$link['title']),
                 'task', 'show', array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
