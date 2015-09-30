@@ -608,7 +608,7 @@ return array(
     'Time Tracking' => 'Feuille de temps',
     'You already have one subtask in progress' => 'Vous avez déjà une sous-tâche en progrès',
     'Which parts of the project do you want to duplicate?' => 'Quelles parties du projet voulez-vous dupliquer ?',
-    'Disallow login form' => 'Interdir le formulaire d\'authentification',
+    'Disallow login form' => 'Interdire le formulaire d\'authentification',
     'Bitbucket commit received' => 'Commit reçu via Bitbucket',
     'Bitbucket webhooks' => 'Webhook Bitbucket',
     'Help on Bitbucket webhooks' => 'Aide sur les webhooks Bitbucket',
