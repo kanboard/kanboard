@@ -14,7 +14,7 @@ Créer des projets multi-utilisateurs
 
 Depuis le tableau principal, cliquez sur le lien **Nouveau projet** :
 
-![Formulaire de création de projet](http://kanboard.net/screenshots/documentation/project-creation-form.png)
+![Formulaire de création de projet](captures/kanboard-nouveauprojet.png)
 
 C'est vraiment très simple, il vous suffit de trouver un nom pour votre projet !
 
@@ -27,6 +27,6 @@ Créer un projet privé
 
 Depuis le tableau principal, cliquez sur le lien **Nouveau projet privé**.
 
-![Nouveau projet privé](http://kanboard.net/screenshots/documentation/new-private-project.png)
+![Nouveau projet privé](captures/kanboard-nouveauprojet-prive.png)
 
 Remarque : les noms de projets doivent être uniques dans toute l'application.

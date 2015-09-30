@@ -56,7 +56,7 @@ Pour ajouter un nouvel utilisateur, vous devez être administrateur.
 2. Dans la partie haute vous avez un lien **Créer un utilisateur local** ou **Créer un utilisateur distant**
 3. Informez les champs de saisie et enregistrez
 
-![Nouvel utilisateur](http://kanboard.net/screenshots/documentation/new-user.png)
+![Nouvel utilisateur](captures/kanboard-creer-utilisateur.png)
 
 Quand vous créez un **utilisateur local**, vous devez préciser au moins deux valeurs :
 
