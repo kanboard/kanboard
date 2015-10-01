@@ -51,6 +51,7 @@ Contributors:
 - [Matthieu Keller](https://github.com/maggick)
 - [Mauro Mariño](https://github.com/moromarino)
 - [Maxime](https://github.com/EpocDotFr)
+- [Max Kamashev](https://github.com/ukko)
 - [mfoucrier](https://github.com/mfoucrier)
 - [Mgro](https://github.com/mgro)
 - [Michael Lüpkes](https://github.com/mluepkes)
