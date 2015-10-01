@@ -3,12 +3,33 @@
 require_once __DIR__.'/../Base.php';
 
 use Model\Link;
+use Model\TaskFinder;
 use Model\TaskLink;
 use Model\TaskCreation;
 use Model\Project;
 
 class TaskLinkTest extends Base
 {
+    // Check postgres issue: "Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expression"
+    public function testGetTaskWithMultipleMilestoneLink()
+    {
+        $tf = new TaskFinder($this->container);
+        $tl = new TaskLink($this->container);
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
+        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'B')));
+        $this->assertEquals(3, $tc->create(array('project_id' => 1, 'title' => 'C')));
+
+        $this->assertNotFalse($tl->create(1, 2, 9));
+        $this->assertNotFalse($tl->create(1, 3, 9));
+
+        $task = $tf->getExtendedQuery()->findOne();
+        $this->assertNotEmpty($task);
+    }
+
     public function testCreateTaskLinkWithNoOpposite()
     {
         $tl = new TaskLink($this->container);
