@@ -17,7 +17,7 @@
     <?= $this->form->text('filter', $values, $errors, array('autofocus', 'required', 'maxlength="80"')) ?>
     
     <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
-        <?= $this->form->checkbox('is_shared', t('Share with all projectmembers'), 1, $values['is_shared'] == 1) ?>
+        <?= $this->form->checkbox('is_shared', t('Share with all project members'), 1, $values['is_shared'] == 1) ?>
     <?php endif ?>
 
     <div class="form-actions">

@@ -4,7 +4,7 @@
 </li>
 <li>
     <i class="fa fa-filter fa-fw"></i>&nbsp;
-    <?= $this->url->link(t('Custom Filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
+    <?= $this->url->link(t('Custom filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
 </li>
 
 <?php if ($project['is_public']): ?>
