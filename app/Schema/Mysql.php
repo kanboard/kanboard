@@ -16,7 +16,7 @@ function version_88($pdo)
             project_id INT NOT NULL,
             user_id INT NOT NULL,
             name VARCHAR(80) NOT NULL,
-            is_shared INT DEFAULT 0,
+            is_shared TINYINT(1) DEFAULT 0,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             PRIMARY KEY(filter, project_id, user_id)

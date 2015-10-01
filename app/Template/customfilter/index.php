@@ -1,3 +1,4 @@
+<?php if (! empty($custom_filters)): ?>
 <div class="page-header">
     <h2><?= t('Custom filters') ?></h2>
 </div>
@@ -34,5 +35,6 @@
     <?php endforeach ?>
     </table>
 </div>
+<?php endif ?>
 
 <?= $this->render('customfilter/add', array('project' => $project, 'values' => $values, 'errors' => $errors)) ?>

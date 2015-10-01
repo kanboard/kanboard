@@ -48,7 +48,6 @@ class Board extends Base
     public function show()
     {
         $params = $this->getProjectFilters('board', 'show');
-        
         $this->response->html($this->template->layout('board/private_view', array(
             'categories_list' => $this->category->getList($params['project']['id'], false),
             'users_list' => $this->projectPermission->getMemberList($params['project']['id'], false),

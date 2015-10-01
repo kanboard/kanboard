@@ -42,38 +42,6 @@ class CustomFilter extends Base
     }
     
     /**
-     * Return the list of all shared custom filters for a specific project
-     *
-     * @access public
-     * @param  integer   $project_id    Project id
-     * @return array
-     */
-    public function getAllShared($project_id)
-    {   
-        return $this->getQuery()
-                        ->eq('project_id', $project_id)
-                        ->eq('is_shared', 1)
-                        ->findAll();
-    }
-    
-    /**
-     * Return the list of all private custom filters for a user and project
-     *
-     * @access public
-     * @param  integer   $project_id    Project id
-     * @param  integer   $user_id       User id
-     * @return array
-     */
-    public function getAllPrivate($project_id, $user_id)
-    {
-        return $this->getQuery()
-                ->eq('project_id', $project_id)
-                ->eq('user_id', $user_id)
-                ->eq('is_shared', 0)
-                ->findAll();
-    }
-    
-    /**
      * Return the list of all allowed custom filters for a user and project
      *
      * @access public
@@ -83,9 +51,13 @@ class CustomFilter extends Base
      */
     public function getAll($project_id, $user_id)
     {   
-        $private = $this->getAllPrivate($project_id, $user_id);
-        $shared = $this->getAllShared($project_id);
-        return array_merge($private, $shared);
+        return $this->getQuery()
+                    ->beginOr()
+                    ->eq('is_shared', 1)
+                    ->eq('user_id', $user_id)
+                    ->closeOr()
+                    ->eq('project_id', $project_id)
+                    ->findAll();
     }
     
     /**

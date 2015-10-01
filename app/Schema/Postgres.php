@@ -16,7 +16,7 @@ function version_68($pdo)
             project_id INTEGER NOT NULL PRIMARY KEY,
             user_id INTEGER NOT NULL PRIMARY KEY,
             name VARCHAR(80) NOT NULL,
-            is_shared INTEGER DEFAULT 0
+            is_shared BOOLEAN DEFAULT '0',
         )
     ");
 }
