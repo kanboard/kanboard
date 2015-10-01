@@ -208,6 +208,11 @@ class Config extends Base
     {
         foreach ($values as $option => $value) {
 
+            // Be sure that a trailing slash is there for the url
+            if ($option === 'application_url' && ! empty($value) && substr($value, -1) !== '/') {
+                $value .= '/';
+            }
+
             $result = $this->db->table(self::TABLE)->eq('option', $option)->update(array('value' => $value));
 
             if (! $result) {

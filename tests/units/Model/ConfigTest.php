@@ -7,6 +7,20 @@ use Core\Session;
 
 class ConfigTest extends Base
 {
+    public function testSaveApplicationUrl()
+    {
+        $c = new Config($this->container);
+
+        $this->assertTrue($c->save(array('application_url' => 'http://localhost/')));
+        $this->assertEquals('http://localhost/', $c->get('application_url'));
+
+        $this->assertTrue($c->save(array('application_url' => 'http://localhost')));
+        $this->assertEquals('http://localhost/', $c->get('application_url'));
+
+        $this->assertTrue($c->save(array('application_url' => '')));
+        $this->assertEquals('', $c->get('application_url'));
+    }
+
     public function testDefaultValues()
     {
         $c = new Config($this->container);
@@ -55,12 +69,5 @@ class ConfigTest extends Base
 
         session_id('');
         unset($this->container['session']);
-    }
-
-    public function testSave()
-    {
-        $c = new Config($this->container);
-        $this->assertTrue($c->save(array('application_url' => 'http://localhost/')));
-        $this->assertEquals('http://localhost/', $c->get('application_url'));
     }
 }
