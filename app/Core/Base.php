@@ -46,6 +46,7 @@ use Pimple\Container;
  * @property \Model\Comment                                    $comment
  * @property \Model\Config                                     $config
  * @property \Model\Currency                                   $currency
+ * @property \Model\CustomFilter                               $customFilter
  * @property \Model\DateParser                                 $dateParser
  * @property \Model\File                                       $file
  * @property \Model\LastLogin                                  $lastLogin

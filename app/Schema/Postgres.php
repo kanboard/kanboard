@@ -6,7 +6,20 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 67;
+const VERSION = 68;
+
+function version_68($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE custom_filters (
+            filter VARCHAR(80) NOT NULL PRIMARY KEY,
+            project_id INTEGER NOT NULL PRIMARY KEY,
+            user_id INTEGER NOT NULL PRIMARY KEY,
+            name VARCHAR(80) NOT NULL,
+            is_shared BOOLEAN DEFAULT '0',
+        )
+    ");
+}
 
 function version_67($pdo)
 {

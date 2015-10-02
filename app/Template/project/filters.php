@@ -80,5 +80,16 @@
             </ul>
             </div>
         <?php endif ?>
+        
+        <?php if (isset($custom_filter_list) && ! empty($custom_filter_list)): ?>
+            <div class="dropdown filters">
+            <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Custom') ?></a>
+            <ul>
+                <?php foreach ($custom_filter_list as $custom_filter): ?>
+                    <li><a href="#" class="filter-helper" data-filter='<?= $this->e($custom_filter['filter']) ?>'><?= $this->e($custom_filter['name']) ?></a></li>
+                <?php endforeach ?>
+            </ul>
+            </div>
+        <?php endif ?>
     </div>
 </div>

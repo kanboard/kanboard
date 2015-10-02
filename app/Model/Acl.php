@@ -47,6 +47,7 @@ class Acl extends Base
         'taskstatus' => '*',
         'tasklink' => '*',
         'timer' => '*',
+        'customfilter' => '*',
         'calendar' => array('show', 'project'),
     );
 
