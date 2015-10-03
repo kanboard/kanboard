@@ -94,6 +94,9 @@ defined('ENABLE_HSTS') or define('ENABLE_HSTS', true);
 // Enable or disable "X-Frame-Options: DENY" HTTP header
 defined('ENABLE_XFRAME') or define('ENABLE_XFRAME', true);
 
+// Syslog
+defined('ENABLE_SYSLOG') or define('ENABLE_SYSLOG', true);
+
 // Default files directory
 defined('FILES_DIR') or define('FILES_DIR', 'data/files/');
 

@@ -192,6 +192,9 @@ define('ENABLE_HSTS', true);
 // Enable or disable "X-Frame-Options: DENY" HTTP header
 define('ENABLE_XFRAME', true);
 
+// Enable syslog logging
+define('ENABLE_SYSLOG', true);
+
 // Escape html inside markdown text
 define('MARKDOWN_ESCAPE_HTML', true);
 

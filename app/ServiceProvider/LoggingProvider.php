@@ -13,11 +13,13 @@ class LoggingProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
-        $syslog = new Syslog('kanboard');
-        $syslog->setLevel(LogLevel::ERROR);
-
         $logger = new Logger;
-        $logger->setLogger($syslog);
+
+        if (ENABLE_SYSLOG) {
+            $syslog = new Syslog('kanboard');
+            $syslog->setLevel(LogLevel::ERROR);
+            $logger->setLogger($syslog);
+        }
 
         if (DEBUG) {
             $logger->setLogger(new File(DEBUG_FILE));

@@ -57,6 +57,7 @@ Version 1.0.18
 
 New features:
 
+* Add config parameter to enable/disable Syslog
 * Include documentation in the application
 * Add Gitlab authentication
 * Add users and categories filters on the board

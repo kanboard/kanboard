@@ -223,6 +223,15 @@ define('ENABLE_HSTS', true);
 define('ENABLE_XFRAME', true);
 ```
 
+Logging
+-------
+
+```php
+// Enable syslog logging
+// Set to false to disable syslog
+define('ENABLE_SYSLOG', true);
+```
+
 Bruteforce protection
 ---------------------
 
