@@ -6,12 +6,13 @@
 .views {
     display: inline-block;
     margin-right: 10px;
+    font-size: 0.9em;
 }
 
 .views li {
     border: 1px solid #eee;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
     padding-top: 5px;
     padding-bottom: 5px;
     display: inline;
@@ -40,11 +41,9 @@
     display: inline-block;
     border: 1px solid #eee;
     border-radius: 5px;
-    padding-left: 10px;
+    padding: 5px;
     padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
 .filters ul {
@@ -64,5 +63,6 @@ div.search {
 }
 
 .filter-dropdowns {
+    font-size: 0.9em;
     display: inline-block;
 }
