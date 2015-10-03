@@ -19,6 +19,9 @@
         <li <?= $this->app->getRouterAction() === 'activity' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('My activity stream'), 'app', 'activity', array('user_id' => $user['id'])) ?>
         </li>
+        <li <?= $this->app->getRouterAction() === 'notifications' ? 'class="active"' : '' ?>>
+            <?= $this->url->link(t('My notifications'), 'app', 'notifications', array('user_id' => $user['id'])) ?>
+        </li>
         <?= $this->hook->render('template:dashboard:sidebar') ?>
     </ul>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>

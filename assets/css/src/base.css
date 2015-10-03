@@ -52,7 +52,6 @@ hr {
     margin-right: 10px;
 }
 
-/* datepicker */
 #ui-datepicker-div {
     font-size: 0.8em;
 }
@@ -62,3 +61,13 @@ hr {
     right: 3px;
     bottom: 3px;
 }
+
+.web-notification-icon {
+    color: #3366CC;
+}
+
+.web-notification-icon:focus,
+.web-notification-icon:hover {
+    color: #000;
+}
+

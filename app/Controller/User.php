@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+use Model\NotificationType;
+
 /**
  * User controller
  *
@@ -92,6 +94,11 @@ class User extends Base
 
             if ($user_id !== false) {
                 $this->projectPermission->addMember($project_id, $user_id);
+
+                if (! empty($values['notifications_enabled'])) {
+                    $this->notificationType->saveUserSelectedTypes($user_id, array(NotificationType::TYPE_EMAIL));
+                }
+
                 $this->session->flash(t('User created successfully.'));
                 $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user_id)));
             }
@@ -202,6 +209,8 @@ class User extends Base
         $this->response->html($this->layout('user/notifications', array(
             'projects' => $this->projectPermission->getMemberProjects($user['id']),
             'notifications' => $this->notification->readSettings($user['id']),
+            'types' => $this->notificationType->getTypes(),
+            'filters' => $this->notificationFilter->getFilters(),
             'user' => $user,
         )));
     }

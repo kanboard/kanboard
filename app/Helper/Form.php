@@ -104,6 +104,26 @@ class Form extends \Core\Base
     }
 
     /**
+     * Display a checkboxes group
+     *
+     * @access public
+     * @param  string  $name     Field name
+     * @param  array   $options  Options
+     * @param  array   $values   Form values
+     * @return string
+     */
+    public function checkboxes($name, array $options, array $values = array())
+    {
+        $html = '';
+
+        foreach ($options as $value => $label) {
+            $html .= $this->checkbox($name.'['.$value.']', $label, $value, isset($values[$name]) && in_array($value, $values[$name]));
+        }
+
+        return $html;
+    }
+
+    /**
      * Display a checkbox field
      *
      * @access public

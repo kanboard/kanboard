@@ -25,6 +25,10 @@
             </li>
             <?php endif ?>
             <li>
+                <?php if ($this->user->hasNotifications()): ?>
+                    <?= $this->url->link('<i class="fa fa-bell web-notification-icon"></i>', 'app', 'notifications', array('user_id' => $this->user->getId()), false, '', t('Unread notifications')) ?>
+                <?php endif ?>
+
                 <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
                 <span class="username hide-tablet">(<?= $this->user->getProfileLink() ?>)</span>
             </li>

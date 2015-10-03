@@ -173,10 +173,6 @@ input.form-input-large {
     line-height: 25px;
 }
 
-.form-checkbox-group label {
-    display: inline;
-}
-
 /* preview tabs */
 label + .form-tabs {
     margin-top: 10px;

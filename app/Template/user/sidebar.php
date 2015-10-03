@@ -51,7 +51,7 @@
                 <?= $this->url->link(t('Public access'), 'user', 'share', array('user_id' => $user['id'])) ?>
             </li>
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'notifications' ? 'class="active"' : '' ?>>
-                <?= $this->url->link(t('Email notifications'), 'user', 'notifications', array('user_id' => $user['id'])) ?>
+                <?= $this->url->link(t('Notifications'), 'user', 'notifications', array('user_id' => $user['id'])) ?>
             </li>
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'external' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('External accounts'), 'user', 'external', array('user_id' => $user['id'])) ?>

@@ -11,6 +11,17 @@ namespace Helper;
 class User extends \Core\Base
 {
     /**
+     * Return true if the logged user as unread notifications
+     *
+     * @access public
+     * @return boolean
+     */
+    public function hasNotifications()
+    {
+        return $this->webNotification->hasNotifications($this->userSession->getId());
+    }
+
+    /**
      * Get initials from a user
      *
      * @access public

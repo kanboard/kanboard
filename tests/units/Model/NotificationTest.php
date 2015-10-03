@@ -9,158 +9,75 @@ use Model\Comment;
 use Model\User;
 use Model\File;
 use Model\Project;
+use Model\Task;
 use Model\ProjectPermission;
 use Model\Notification;
+use Model\NotificationFilter;
+use Model\NotificationType;
 use Subscriber\NotificationSubscriber;
 
 class NotificationTest extends Base
 {
-    public function testFilterNone()
+    public function testEnableDisableNotification()
     {
         $u = new User($this->container);
+        $p = new Project($this->container);
         $n = new Notification($this->container);
+        $pp = new ProjectPermission($this->container);
 
-        $this->assertEquals(2, $u->create(array('username' => 'user1', 'notifications_filter' => Notification::FILTER_NONE)));
-        $this->assertTrue($n->filterNone($u->getById(2), array()));
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
+        $this->assertEquals(2, $u->create(array('username' => 'user1')));
+        $this->assertTrue($pp->addMember(1, 2));
 
-        $this->assertEquals(3, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_BOTH)));
-        $this->assertFalse($n->filterNone($u->getById(3), array()));
+        $this->assertEmpty($n->getUsersWithNotificationEnabled(1));
+        $n->enableNotification(2);
+        $this->assertNotEmpty($n->getUsersWithNotificationEnabled(1));
+        $n->disableNotification(2);
+        $this->assertEmpty($n->getUsersWithNotificationEnabled(1));
     }
 
-    public function testFilterCreator()
+    public function testReadWriteSettings()
     {
-        $u = new User($this->container);
-        $n = new Notification($this->container);
-
-        $this->assertEquals(2, $u->create(array('username' => 'user1', 'notifications_filter' => Notification::FILTER_CREATOR)));
-        $this->assertTrue($n->filterCreator($u->getById(2), array('task' => array('creator_id' => 2))));
-
-        $this->assertEquals(3, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_CREATOR)));
-        $this->assertFalse($n->filterCreator($u->getById(3), array('task' => array('creator_id' => 1))));
-
-        $this->assertEquals(4, $u->create(array('username' => 'user3', 'notifications_filter' => Notification::FILTER_NONE)));
-        $this->assertFalse($n->filterCreator($u->getById(4), array('task' => array('creator_id' => 2))));
-    }
-
-    public function testFilterAssignee()
-    {
-        $u = new User($this->container);
-        $n = new Notification($this->container);
-
-        $this->assertEquals(2, $u->create(array('username' => 'user1', 'notifications_filter' => Notification::FILTER_ASSIGNEE)));
-        $this->assertTrue($n->filterAssignee($u->getById(2), array('task' => array('owner_id' => 2))));
-
-        $this->assertEquals(3, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_ASSIGNEE)));
-        $this->assertFalse($n->filterAssignee($u->getById(3), array('task' => array('owner_id' => 1))));
-
-        $this->assertEquals(4, $u->create(array('username' => 'user3', 'notifications_filter' => Notification::FILTER_NONE)));
-        $this->assertFalse($n->filterAssignee($u->getById(4), array('task' => array('owner_id' => 2))));
-    }
-
-    public function testFilterBoth()
-    {
-        $u = new User($this->container);
-        $n = new Notification($this->container);
-
-        $this->assertEquals(2, $u->create(array('username' => 'user1', 'notifications_filter' => Notification::FILTER_BOTH)));
-        $this->assertTrue($n->filterBoth($u->getById(2), array('task' => array('owner_id' => 2, 'creator_id' => 1))));
-        $this->assertTrue($n->filterBoth($u->getById(2), array('task' => array('owner_id' => 0, 'creator_id' => 2))));
-
-        $this->assertEquals(3, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_BOTH)));
-        $this->assertFalse($n->filterBoth($u->getById(3), array('task' => array('owner_id' => 1, 'creator_id' => 1))));
-        $this->assertFalse($n->filterBoth($u->getById(3), array('task' => array('owner_id' => 2, 'creator_id' => 1))));
-
-        $this->assertEquals(4, $u->create(array('username' => 'user3', 'notifications_filter' => Notification::FILTER_NONE)));
-        $this->assertFalse($n->filterBoth($u->getById(4), array('task' => array('owner_id' => 2, 'creator_id' => 1))));
-    }
-
-    public function testFilterProject()
-    {
-        $u = new User($this->container);
         $n = new Notification($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
-        $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
 
-        // No project selected
-        $this->assertTrue($n->filterProject($u->getById(1), array()));
+        $n->saveSettings(1, array(
+            'notifications_enabled' => 1,
+            'notifications_filter' => NotificationFilter::FILTER_CREATOR,
+            'notification_types' => array(NotificationType::TYPE_EMAIL => 1),
+            'notification_projects' => array(),
+        ));
 
-        // User that select only some projects
-        $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_NONE)));
-        $n->saveSettings(2, array('notifications_enabled' => 1, 'projects' => array(2 => true)));
+        $settings = $n->readSettings(1);
+        $this->assertNotEmpty($settings);
+        $this->assertEquals(1, $settings['notifications_enabled']);
+        $this->assertEquals(NotificationFilter::FILTER_CREATOR, $settings['notifications_filter']);
+        $this->assertEquals(array(NotificationType::TYPE_EMAIL), $settings['notification_types']);
+        $this->assertEmpty($settings['notification_projects']);
 
-        $this->assertFalse($n->filterProject($u->getById(2), array('task' => array('project_id' => 1))));
-        $this->assertTrue($n->filterProject($u->getById(2), array('task' => array('project_id' => 2))));
-    }
+        $n->saveSettings(1, array(
+            'notifications_enabled' => 0,
+        ));
 
-    public function testFilterUserWithNoFilter()
-    {
-        $u = new User($this->container);
-        $n = new Notification($this->container);
-        $p = new Project($this->container);
+        $settings = $n->readSettings(1);
+        $this->assertNotEmpty($settings);
+        $this->assertEquals(0, $settings['notifications_enabled']);
 
-        $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_NONE)));
+        $n->saveSettings(1, array(
+            'notifications_enabled' => 1,
+            'notifications_filter' => NotificationFilter::FILTER_ASSIGNEE,
+            'notification_types' => array(NotificationType::TYPE_WEB => 1, NotificationType::TYPE_EMAIL => 1),
+            'notification_projects' => array(1 => 1),
+        ));
 
-        $this->assertTrue($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1))));
-    }
-
-    public function testFilterUserWithAssigneeFilter()
-    {
-        $u = new User($this->container);
-        $n = new Notification($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_ASSIGNEE)));
-
-        $this->assertTrue($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'owner_id' => 2))));
-        $this->assertFalse($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'owner_id' => 1))));
-    }
-
-    public function testFilterUserWithCreatorFilter()
-    {
-        $u = new User($this->container);
-        $n = new Notification($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_CREATOR)));
-
-        $this->assertTrue($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'creator_id' => 2))));
-        $this->assertFalse($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'creator_id' => 1))));
-    }
-
-    public function testFilterUserWithBothFilter()
-    {
-        $u = new User($this->container);
-        $n = new Notification($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_BOTH)));
-
-        $this->assertTrue($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'creator_id' => 2, 'owner_id' => 3))));
-        $this->assertTrue($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'creator_id' => 0, 'owner_id' => 2))));
-        $this->assertFalse($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'creator_id' => 4, 'owner_id' => 1))));
-        $this->assertFalse($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'creator_id' => 5, 'owner_id' => 0))));
-    }
-
-    public function testFilterUserWithBothFilterAndProjectSelected()
-    {
-        $u = new User($this->container);
-        $n = new Notification($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
-        $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
-
-        $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => Notification::FILTER_BOTH)));
-
-        $n->saveSettings(2, array('notifications_enabled' => 1, 'projects' => array(2 => true)));
-
-        $this->assertFalse($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'creator_id' => 2, 'owner_id' => 3))));
-        $this->assertFalse($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 1, 'creator_id' => 0, 'owner_id' => 2))));
-
-        $this->assertTrue($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 2, 'creator_id' => 2, 'owner_id' => 3))));
-        $this->assertTrue($n->shouldReceiveNotification($u->getById(2), array('task' => array('project_id' => 2, 'creator_id' => 0, 'owner_id' => 2))));
+        $settings = $n->readSettings(1);
+        $this->assertNotEmpty($settings);
+        $this->assertEquals(1, $settings['notifications_enabled']);
+        $this->assertEquals(NotificationFilter::FILTER_ASSIGNEE, $settings['notifications_filter']);
+        $this->assertEquals(array(NotificationType::TYPE_EMAIL, NotificationType::TYPE_WEB), $settings['notification_types']);
+        $this->assertEquals(array(1), $settings['notification_projects']);
     }
 
     public function testGetProjectMembersWithNotifications()
@@ -198,9 +115,10 @@ class NotificationTest extends Base
         $users = $n->getUsersWithNotificationEnabled(1);
 
         $this->assertNotEmpty($users);
-        $this->assertEquals(2, count($users));
+        $this->assertCount(3, $users);
         $this->assertEquals('user1@here', $users[0]['email']);
-        $this->assertEquals('user3@here', $users[1]['email']);
+        $this->assertEquals('', $users[1]['email']);
+        $this->assertEquals('user3@here', $users[2]['email']);
     }
 
     public function testGetUsersWithNotificationsWhenEverybodyAllowed()
@@ -228,109 +146,52 @@ class NotificationTest extends Base
         $users = $n->getUsersWithNotificationEnabled(1);
 
         $this->assertNotEmpty($users);
-        $this->assertEquals(2, count($users));
+        $this->assertCount(3, $users);
         $this->assertEquals('user1@here', $users[0]['email']);
-        $this->assertEquals('user3@here', $users[1]['email']);
+        $this->assertEquals('', $users[1]['email']);
+        $this->assertEquals('user3@here', $users[2]['email']);
     }
 
-    public function testGetMailContent()
+    public function testSendNotifications()
     {
+        $u = new User($this->container);
         $n = new Notification($this->container);
         $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $c = new Comment($this->container);
-        $f = new File($this->container);
+        $tf = new TaskFinder($this->container);
+        $pp = new ProjectPermission($this->container);
 
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1', 'is_everybody_allowed' => 1)));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
-        $this->assertEquals(1, $s->create(array('title' => 'test', 'task_id' => 1)));
-        $this->assertEquals(1, $c->create(array('comment' => 'test', 'task_id' => 1, 'user_id' => 1)));
-        $this->assertEquals(1, $f->create(1, 'test', 'blah', 123));
+        $this->assertTrue($u->update(array('id' => 1, 'email' => 'test@localhost')));
+        $this->assertTrue($pp->isEverybodyAllowed(1));
 
-        $task = $tf->getDetails(1);
-        $subtask = $s->getById(1, true);
-        $comment = $c->getById(1);
-        $file = $c->getById(1);
+        $n->saveSettings(1, array(
+            'notifications_enabled' => 1,
+            'notifications_filter' => NotificationFilter::FILTER_NONE,
+            'notification_types' => array(NotificationType::TYPE_WEB => 1, NotificationType::TYPE_EMAIL => 1),
+        ));
 
-        $this->assertNotEmpty($task);
-        $this->assertNotEmpty($subtask);
-        $this->assertNotEmpty($comment);
-        $this->assertNotEmpty($file);
+        $this->container['emailNotification'] = $this
+            ->getMockBuilder('\Model\EmailNotification')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('send'))
+            ->getMock();
 
-        foreach (Subscriber\NotificationSubscriber::getSubscribedEvents() as $event => $values) {
-            $this->assertNotEmpty($n->getMailContent($event, array('task' => $task, 'comment' => $comment, 'subtask' => $subtask, 'file' => $file, 'changes' => array())));
-        }
-    }
+        $this->container['webNotification'] = $this
+            ->getMockBuilder('\Model\WebNotification')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('send'))
+            ->getMock();
 
-    public function testGetEmailSubject()
-    {
-        $n = new Notification($this->container);
+        $this->container['emailNotification']
+            ->expects($this->once())
+            ->method('send');
 
-        $this->assertEquals(
-            '[test][Task opened] blah (#2)',
-            $n->getMailSubject('task.open', array('task' => array('id' => 2, 'title' => 'blah', 'project_name' => 'test')))
-        );
-    }
+        $this->container['webNotification']
+            ->expects($this->once())
+            ->method('send');
 
-    public function testSendNotificationsToCreator()
-    {
-        $u = new User($this->container);
-        $p = new Project($this->container);
-        $n = new Notification($this->container);
-        $pp = new ProjectPermission($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
-        $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
-        $this->assertTrue($pp->addMember(1, 2));
-
-        $this->container['emailClient']->expects($this->once())
-            ->method('send')
-            ->with(
-                $this->equalTo('user1@here'),
-                $this->equalTo('user1'),
-                $this->equalTo('[test][Task opened] blah (#2)'),
-                $this->stringContains('blah')
-            );
-
-        $n->sendNotifications('task.open', array('task' => array(
-            'id' => 2, 'title' => 'blah', 'project_name' => 'test', 'project_id' => 1, 'owner_id' => 0, 'creator_id' => 2
-        )));
-    }
-
-    public function testSendNotificationsToAnotherAssignee()
-    {
-        $u = new User($this->container);
-        $p = new Project($this->container);
-        $n = new Notification($this->container);
-        $pp = new ProjectPermission($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
-        $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
-        $this->assertTrue($pp->addMember(1, 2));
-
-        $this->container['emailClient']->expects($this->never())->method('send');
-
-        $n->sendNotifications('task.open', array('task' => array(
-            'id' => 2, 'title' => 'blah', 'project_name' => 'test', 'project_id' => 1, 'owner_id' => 1, 'creator_id' => 1
-        )));
-    }
-
-    public function testSendNotificationsToNotMember()
-    {
-        $u = new User($this->container);
-        $p = new Project($this->container);
-        $n = new Notification($this->container);
-        $pp = new ProjectPermission($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
-        $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
-
-        $this->container['emailClient']->expects($this->never())->method('send');
-
-        $n->sendNotifications('task.open', array('task' => array(
-            'id' => 2, 'title' => 'blah', 'project_name' => 'test', 'project_id' => 1, 'owner_id' => 0, 'creator_id' => 2
-        )));
+        $n->sendNotifications(Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
     }
 }

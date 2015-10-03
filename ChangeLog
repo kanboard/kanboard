@@ -3,8 +3,9 @@ Version 1.0.19 (unreleased)
 
 New features:
 
+* Added web notifications
 * Added LDAP group sync
-* Add swimlane description
+* Added swimlane description
 * New plugin system (alpha)
 * Added Bahasa Indonesia translation
 * Added API procedures: getMyOverdueTasks, getOverdueTasksByProject and GetMyProjects

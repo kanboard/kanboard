@@ -6,7 +6,44 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 88;
+const VERSION = 89;
+
+function version_89($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE user_has_unread_notifications (
+            id INT NOT NULL AUTO_INCREMENT,
+            user_id INT NOT NULL,
+            date_creation BIGINT NOT NULL,
+            event_name VARCHAR(50) NOT NULL,
+            event_data TEXT NOT NULL,
+            PRIMARY KEY(id),
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE user_has_notification_types (
+            id INT NOT NULL AUTO_INCREMENT,
+            user_id INT NOT NULL,
+            notification_type VARCHAR(50),
+            PRIMARY KEY(id),
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec('CREATE UNIQUE INDEX user_has_notification_types_user_idx ON user_has_notification_types(user_id, notification_type)');
+
+    // Migrate people who have notification enabled before
+    $rq = $pdo->prepare('SELECT id FROM users WHERE notifications_enabled=1');
+    $rq->execute();
+    $user_ids = $rq->fetchAll(PDO::FETCH_COLUMN, 0);
+
+    foreach ($user_ids as $user_id) {
+        $rq = $pdo->prepare('INSERT INTO user_has_notification_types (user_id, notification_type) VALUES (?, ?)');
+        $rq->execute(array($user_id, 'email'));
+    }
+}
 
 function version_88($pdo)
 {

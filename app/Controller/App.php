@@ -188,6 +188,22 @@ class App extends Base
     }
 
     /**
+     * My notifications
+     *
+     * @access public
+     */
+    public function notifications()
+    {
+        $user = $this->getUser();
+
+        $this->response->html($this->layout('app/notifications', array(
+            'title' => t('My notifications'),
+            'notifications' => $this->webNotification->getAll($user['id']),
+            'user' => $user,
+        )));
+    }
+
+    /**
      * Render Markdown text and reply with the HTML Code
      *
      * @access public

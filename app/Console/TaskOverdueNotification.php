@@ -19,7 +19,7 @@ class TaskOverdueNotification extends Base
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $tasks = $this->notification->sendOverdueTaskNotifications();
+        $tasks = $this->overdueNotification->sendOverdueTaskNotifications();
 
         if ($input->getOption('show')) {
             $this->showTable($output, $tasks);
