@@ -250,7 +250,7 @@ class UserTest extends Base
         );
 
         $u->prepare($input);
-        $this->assertEquals(array(), $input);
+        $this->assertEquals(array('gitlab_id' => null), $input);
 
         $input = array(
             'gitlab_id' => 'something',
@@ -325,8 +325,11 @@ class UserTest extends Base
     public function testUpdate()
     {
         $u = new User($this->container);
-        $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
+        $this->assertEquals(2, $u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
+        $this->assertEquals(3, $u->create(array('username' => 'plop', 'gitlab_id' => '123')));
+
         $this->assertTrue($u->update(array('id' => 2, 'username' => 'biloute')));
+        $this->assertTrue($u->update(array('id' => 3, 'gitlab_id' => '')));
 
         $user = $u->getById(2);
         $this->assertNotFalse($user);
@@ -335,6 +338,10 @@ class UserTest extends Base
         $this->assertEquals('Toto', $user['name']);
         $this->assertEquals(0, $user['is_admin']);
         $this->assertEquals(0, $user['is_ldap_user']);
+
+        $user = $u->getById(3);
+        $this->assertNotEmpty($user);
+        $this->assertEquals(null, $user['gitlab_id']);
     }
 
     public function testRemove()

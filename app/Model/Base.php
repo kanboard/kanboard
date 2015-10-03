@@ -97,6 +97,22 @@ abstract class Base extends \Core\Base
     }
 
     /**
+     * Force some fields to be null if empty
+     *
+     * @access public
+     * @param  array        $values    Input array
+     * @param  string[]     $keys      List of keys
+     */
+    public function convertNullFields(array &$values, array $keys)
+    {
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $values) && empty($values[$key])) {
+                $values[$key] = null;
+            }
+        }
+    }
+
+    /**
      * Build SQL condition for a given time range
      *
      * @access protected

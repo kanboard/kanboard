@@ -279,7 +279,7 @@ class User extends Base
 
         $this->removeFields($values, array('confirmation', 'current_password'));
         $this->resetFields($values, array('is_admin', 'is_ldap_user', 'is_project_admin', 'disable_login_form'));
-        $this->removeEmptyFields($values, array('gitlab_id'));
+        $this->convertNullFields($values, array('gitlab_id'));
         $this->convertIntegerFields($values, array('gitlab_id'));
     }
 

@@ -76,3 +76,8 @@ Kanboard uses these information from your Gitlab profile:
 - Gitlab unique id
 
 The Gitlab unique id is used to link the local user account and the Gitlab account.
+
+Known issues
+------------
+
+Gitlab OAuth will work only with url rewrite enabled. At the moment, Gitlab doesn't support callback url with query string parameters. See [Gitlab issue](https://gitlab.com/gitlab-org/gitlab-ce/issues/2443)
