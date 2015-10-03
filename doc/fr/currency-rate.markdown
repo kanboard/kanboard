@@ -1,10 +1,10 @@
 Taux de change des devises
 ==============
 
-Chaque utilisateur peut avoir un taux horaire prédéfini dans différentes devises
-Si vous avez à manipuler plusieurs devises, vous définissez ici le taux en fonction de la devise de référence
+Chaque utilisateur peut avoir un taux horaire prédéfini dans différentes devises.
+Si vous avez à manipuler plusieurs devises, vous pouvez définir ici le taux en fonction de la devise de référence.
 
-Cette fonctionnalité est utilisée pour le calculer le budget du projet
+Cette fonctionnalité est utilisée pour calculer le budget du projet.
 
 ![Currency Rate](http://kanboard.net/screenshots/documentation/currency-rate.png)
 
