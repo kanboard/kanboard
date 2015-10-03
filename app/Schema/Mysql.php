@@ -6,7 +6,24 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 87;
+const VERSION = 88;
+
+function version_88($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE custom_filters (
+            id INT NOT NULL AUTO_INCREMENT,
+            filter VARCHAR(100) NOT NULL,
+            project_id INT NOT NULL,
+            user_id INT NOT NULL,
+            name VARCHAR(100) NOT NULL,
+            is_shared TINYINT(1) DEFAULT 0,
+            PRIMARY KEY(id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+}
 
 function version_87($pdo)
 {

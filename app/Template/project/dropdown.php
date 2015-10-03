@@ -2,6 +2,10 @@
     <i class="fa fa-dashboard fa-fw"></i>&nbsp;
     <?= $this->url->link(t('Activity'), 'activity', 'project', array('project_id' => $project['id'])) ?>
 </li>
+<li>
+    <i class="fa fa-filter fa-fw"></i>&nbsp;
+    <?= $this->url->link(t('Custom filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
+</li>
 
 <?php if ($project['is_public']): ?>
 <li>

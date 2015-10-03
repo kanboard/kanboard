@@ -5,6 +5,7 @@
         'filters' => $filters,
         'categories_list' => $categories_list,
         'users_list' => $users_list,
+        'custom_filters_list' => $custom_filters_list,
         'is_board' => true,
     )) ?>
 
