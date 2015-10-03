@@ -6,7 +6,26 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 69;
+const VERSION = 70;
+
+function version_70($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN date_due TYPE BIGINT");
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN date_creation TYPE BIGINT");
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN date_completed TYPE BIGINT");
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN date_started TYPE BIGINT");
+    $pdo->exec("ALTER TABLE tasks ALTER COLUMN date_moved TYPE BIGINT");
+    $pdo->exec("ALTER TABLE comments ALTER COLUMN date_creation TYPE BIGINT");
+    $pdo->exec("ALTER TABLE last_logins ALTER COLUMN date_creation TYPE BIGINT");
+    $pdo->exec("ALTER TABLE project_activities ALTER COLUMN date_creation TYPE BIGINT");
+    $pdo->exec("ALTER TABLE projects ALTER COLUMN last_modified TYPE BIGINT");
+    $pdo->exec("ALTER TABLE remember_me ALTER COLUMN date_creation TYPE BIGINT");
+    $pdo->exec('ALTER TABLE files ALTER COLUMN "date" TYPE BIGINT');
+    $pdo->exec('ALTER TABLE transitions ALTER COLUMN "date" TYPE BIGINT');
+    $pdo->exec('ALTER TABLE subtask_time_tracking ALTER COLUMN "start" TYPE BIGINT');
+    $pdo->exec('ALTER TABLE subtask_time_tracking ALTER COLUMN "end" TYPE BIGINT');
+    $pdo->exec('ALTER TABLE users ALTER COLUMN "lock_expiration_date" TYPE BIGINT');
+}
 
 function version_69($pdo)
 {
@@ -33,7 +52,7 @@ function version_69($pdo)
     $pdo->exec('CREATE UNIQUE INDEX user_has_notification_types_user_idx ON user_has_notification_types(user_id, notification_type)');
 
     // Migrate people who have notification enabled before
-    $rq = $pdo->prepare('SELECT id FROM users WHERE notifications_enabled=1');
+    $rq = $pdo->prepare("SELECT id FROM users WHERE notifications_enabled='1'");
     $rq->execute();
     $user_ids = $rq->fetchAll(PDO::FETCH_COLUMN, 0);
 

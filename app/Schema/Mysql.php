@@ -6,7 +6,26 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 89;
+const VERSION = 90;
+
+function version_90($pdo)
+{
+    $pdo->exec("ALTER TABLE tasks MODIFY date_due BIGINT");
+    $pdo->exec("ALTER TABLE tasks MODIFY date_creation BIGINT");
+    $pdo->exec("ALTER TABLE tasks MODIFY date_completed BIGINT");
+    $pdo->exec("ALTER TABLE tasks MODIFY date_started BIGINT");
+    $pdo->exec("ALTER TABLE tasks MODIFY date_moved BIGINT");
+    $pdo->exec("ALTER TABLE comments MODIFY date_creation BIGINT");
+    $pdo->exec("ALTER TABLE last_logins MODIFY date_creation BIGINT");
+    $pdo->exec("ALTER TABLE project_activities MODIFY date_creation BIGINT");
+    $pdo->exec("ALTER TABLE projects MODIFY last_modified BIGINT");
+    $pdo->exec("ALTER TABLE remember_me MODIFY date_creation BIGINT");
+    $pdo->exec('ALTER TABLE files MODIFY `date` BIGINT');
+    $pdo->exec('ALTER TABLE transitions MODIFY `date` BIGINT');
+    $pdo->exec('ALTER TABLE subtask_time_tracking MODIFY `start` BIGINT');
+    $pdo->exec('ALTER TABLE subtask_time_tracking MODIFY `end` BIGINT');
+    $pdo->exec('ALTER TABLE users MODIFY `lock_expiration_date` BIGINT');
+}
 
 function version_89($pdo)
 {

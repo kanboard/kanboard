@@ -413,4 +413,18 @@ class TaskCreationTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals('orange', $task['color_id']);
     }
+
+    public function testDueDateYear2038TimestampBug()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_due' => strtotime('2050-01-10 12:30'))));
+
+        $task = $tf->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals('2050-01-10 12:30', date('Y-m-d H:i', $task['date_due']));
+    }
 }

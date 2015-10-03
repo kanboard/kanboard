@@ -54,6 +54,7 @@ Bug fixes:
 * Fix Mysql error about gitlab_id when creating remote user
 * Fix subtask timer bug (event called recursively)
 * Fix Postgres issue "Cardinality violation" when there is multiple "is_milestone_of" links
+* Fix issue with due date greater than year 2038
 
 Version 1.0.18
 --------------
