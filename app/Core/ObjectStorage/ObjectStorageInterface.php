@@ -25,7 +25,6 @@ interface ObjectStorageInterface
      * @access public
      * @param  string  $key
      * @param  string  $blob
-     * @return string
      */
     public function put($key, &$blob);
 

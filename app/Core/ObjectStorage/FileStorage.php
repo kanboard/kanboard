@@ -53,7 +53,6 @@ class FileStorage implements ObjectStorageInterface
      * @access public
      * @param  string  $key
      * @param  string  $blob
-     * @return string
      */
     public function put($key, &$blob)
     {
@@ -78,7 +77,7 @@ class FileStorage implements ObjectStorageInterface
             throw new ObjectStorageException('File not found: '.$filename);
         }
 
-        return readfile($filename);
+        readfile($filename);
     }
 
     /**
@@ -141,7 +140,7 @@ class FileStorage implements ObjectStorageInterface
      */
     private function createFolder($key)
     {
-        $folder = $this->path.DIRECTORY_SEPARATOR.dirname($key);
+        $folder = strpos($key, '/') !== false ? $this->path.DIRECTORY_SEPARATOR.dirname($key) : $this->path;
 
         if (! is_dir($folder) && ! mkdir($folder, 0755, true)) {
             throw new ObjectStorageException('Unable to create folder: '.$folder);
