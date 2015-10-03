@@ -50,17 +50,15 @@ class EmailNotificationTest extends Base
                 'file' => $file,
                 'changes' => array())
             ));
+
+            $this->assertNotEmpty($en->getMailSubject($event, array(
+                'task' => $task,
+                'comment' => $comment,
+                'subtask' => $subtask,
+                'file' => $file,
+                'changes' => array())
+            ));
         }
-    }
-
-    public function testGetEmailSubject()
-    {
-        $en = new EmailNotification($this->container);
-
-        $this->assertEquals(
-            '[test][Task opened] blah (#2)',
-            $en->getMailSubject(Task::EVENT_OPEN, array('task' => array('id' => 2, 'title' => 'blah', 'project_name' => 'test')))
-        );
     }
 
     public function testSendWithEmailAddress()

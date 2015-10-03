@@ -52,6 +52,9 @@ class WebNotificationTest extends Base
 
             $this->assertNotEmpty($title);
         }
+
+        $this->assertNotEmpty($wn->getTitleFromEvent(Task::EVENT_OVERDUE, array('tasks' => array(array('id' => 1)))));
+        $this->assertNotEmpty($wn->getTitleFromEvent('unkown', array()));
     }
 
     public function testHasNotification()

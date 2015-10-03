@@ -114,6 +114,30 @@ class TaskLinkTest extends Base
         $this->assertEquals(3, $opposite_task_link['link_id']);
     }
 
+    public function testGroupByLabel()
+    {
+        $tl = new TaskLink($this->container);
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+
+        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
+        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'B')));
+        $this->assertEquals(3, $tc->create(array('project_id' => 1, 'title' => 'C')));
+
+        $this->assertNotFalse($tl->create(1, 2, 2));
+        $this->assertNotFalse($tl->create(1, 3, 2));
+
+        $links = $tl->getAllGroupedByLabel(1);
+        $this->assertCount(1, $links);
+        $this->assertArrayHasKey('blocks', $links);
+        $this->assertCount(2, $links['blocks']);
+        $this->assertEquals('test', $links['blocks'][0]['project_name']);
+        $this->assertEquals('Backlog', $links['blocks'][0]['column_title']);
+        $this->assertEquals('blocks', $links['blocks'][0]['label']);
+    }
+
     public function testUpdate()
     {
         $tl = new TaskLink($this->container);
@@ -187,7 +211,7 @@ class TaskLinkTest extends Base
         $links = $tl->getAll(2);
         $this->assertEmpty($links);
 
-        // Check validation
+        // Check creation
         $r = $tl->validateCreation(array('task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 2));
         $this->assertTrue($r[0]);
 
@@ -201,6 +225,22 @@ class TaskLinkTest extends Base
         $this->assertFalse($r[0]);
 
         $r = $tl->validateCreation(array('task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 1));
+        $this->assertFalse($r[0]);
+
+        // Check modification
+        $r = $tl->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 2));
+        $this->assertTrue($r[0]);
+
+        $r = $tl->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1));
+        $this->assertFalse($r[0]);
+
+        $r = $tl->validateModification(array('id' => 1, 'task_id' => 1, 'opposite_task_id' => 2));
+        $this->assertFalse($r[0]);
+
+        $r = $tl->validateModification(array('id' => 1, 'task_id' => 1, 'opposite_task_id' => 2));
+        $this->assertFalse($r[0]);
+
+        $r = $tl->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 1));
         $this->assertFalse($r[0]);
     }
 }
