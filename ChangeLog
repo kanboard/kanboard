@@ -9,6 +9,8 @@ New features:
 * Added Bahasa Indonesia translation
 * Added API procedures: getMyOverdueTasks, getOverdueTasksByProject and GetMyProjects
 * Added user API access for procedure getProjectActivity()
+* Added config parameter to enable/disable Syslog
+* Added custom filters
 
 Core functionalities moved to plugins:
 
@@ -57,7 +59,6 @@ Version 1.0.18
 
 New features:
 
-* Add config parameter to enable/disable Syslog
 * Include documentation in the application
 * Add Gitlab authentication
 * Add users and categories filters on the board
