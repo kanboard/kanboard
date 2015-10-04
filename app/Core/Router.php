@@ -80,7 +80,7 @@ class Router extends Base
             $path = substr($path, 0, - strlen($query_string) - 1);
         }
 
-        if ($path{0} === '/') {
+        if (! empty($path) && $path{0} === '/') {
             $path = substr($path, 1);
         }
 
@@ -218,7 +218,6 @@ class Router extends Base
             list($this->controller, $this->action) = $this->findRoute($this->getPath($uri, $query_string)); // TODO: add plugin for routes
             $plugin = '';
         }
-
         $class = empty($plugin) ? '\Controller\\'.ucfirst($this->controller) : '\Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($this->controller);
 
         $instance = new $class($this->container);

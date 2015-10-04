@@ -45,7 +45,9 @@ class Session implements ArrayAccess
         ini_set('session.use_only_cookies', '1');
 
         // Enable strict mode
-        ini_set('session.use_strict_mode', '1');
+        if (version_compare(PHP_VERSION, '7.0.0') < 0) {
+            ini_set('session.use_strict_mode', '1');
+        }
 
         // Ensure session ID integrity
         ini_set('session.entropy_file', '/dev/urandom');
