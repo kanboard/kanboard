@@ -6,7 +6,14 @@ Kanboard is able to work indifferently with url rewriting enabled or not.
 - Example of URL rewritten: `/board/123`
 - Otherwise: `?controller=board&action=show&project_id=123`
 
-If you use Kanboard with Apache and with the mode rewrite enabled, nice urls will be used automatically.
+If you use Kanboard with Apache and with the mode rewrite enabled, nice urls will be used automatically.  
+In case you get a "404 Not Found", you might need to set at least the following overrides for your DocumentRoot to get the .htaccess files working:
+
+```sh
+<Directory /var/www/kanboard/>
+	AllowOverride FileInfo Options=All,MultiViews AuthConfig
+</Directory>
+```
 
 URL Shortcuts
 -------------
