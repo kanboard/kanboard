@@ -1,43 +1,9 @@
-# Compiled source #
-###################
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
-*.pyc
-
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-*.phar
-
-# Logs and databases #
-######################
-*.log
-*.sql
 *.sqlite
 *.sqlite-journal
-
-# IDE generated files #
-######################
 .buildpath
 .project
 /.settings/
 .idea
-
-# OS generated files #
-######################
 .DS_Store
 ehthumbs.db
 Icon?
@@ -46,13 +12,8 @@ Thumbs.db
 .*.swp
 *~
 *.out
-
-# Vagrant #
-###########
+*.log
 .vagrant
-
-# App specific #
-################
 config.php
 data/files
 data/cache
