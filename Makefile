@@ -88,4 +88,17 @@ test-postgres:
 
 unittest: test-sqlite test-mysql test-postgres
 
+sql:
+	@ pg_dump --schema-only --no-owner --file app/Schema/Sql/postgres.sql kanboard
+	@ mysqldump -uroot --quote-names --no-create-db --skip-comments --no-data --single-transaction kanboard | sed 's/ AUTO_INCREMENT=[0-9]*//g' > app/Schema/Sql/mysql.sql
+
+	@ php -r "echo 'INSERT INTO users (username, password, is_admin) VALUES (\'admin\', \''.password_hash('admin', PASSWORD_DEFAULT).'\', \'1\');';" | \
+	tee -a app/Schema/Sql/postgres.sql app/Schema/Sql/mysql.sql >/dev/null
+
+	@ let mysql_version=`echo 'select version from schema_version;' | mysql -N -uroot kanboard` ;\
+	echo "INSERT INTO schema_version VALUES ('$$mysql_version');" >> app/Schema/Sql/mysql.sql
+
+	@ let pg_version=`psql -U postgres -A -c 'copy(select version from schema_version) to stdout;' kanboard` ;\
+	echo "INSERT INTO schema_version VALUES ('$$pg_version');" >> app/Schema/Sql/postgres.sql
+
 .PHONY: all

@@ -38,3 +38,15 @@ define('DB_NAME', 'kanboard');
 ```
 
 Note: You can also rename the template file `config.default.php` to `config.php`.
+
+### Importing SQL dump (alternative method)
+
+The first time, Kanboard will run one by one each database migration and this process can take some time according to your configuration.
+
+To avoid any issues or potential timeouts you can initialize the database directly by importing the SQL schema:
+
+```bash
+psql -U postgres my_database < app/Schema/Sql/postgres.sql
+```
+
+The file `app/Schema/Sql/postgres.sql` is a sql dump that represent the last version of the database.
