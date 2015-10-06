@@ -313,7 +313,7 @@ return array(
     'Estimate:' => 'Schatting :',
     'Spent:' => 'Besteed :',
     'Do you really want to remove this sub-task?' => 'Weet u zeker dat u deze subtaak wil verwijderen ?',
-    'Remaining:' => 'Restant :',
+    'Remaining:' => 'Resterend :',
     'hours' => 'uren',
     'spent' => 'besteed',
     'estimated' => 'geschat',
