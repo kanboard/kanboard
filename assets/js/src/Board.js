@@ -231,7 +231,7 @@ Board.prototype.toggleCollapsedMode = function() {
 Board.prototype.restoreColumnViewMode = function() {
     var self = this;
 
-    $("tr:first th").each(function() {
+    $(".board-column-header").each(function() {
         var columnId = $(this).data('column-id');
         if (localStorage.getItem("hidden_column_" + columnId)) {
             self.hideColumn(columnId);

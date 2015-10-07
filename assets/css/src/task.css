@@ -1,7 +1,7 @@
 /* task inside the board */
 .task-board {
     position: relative;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     border: 1px solid #000;
     padding: 2px;
     font-size: 0.85em;
@@ -9,7 +9,7 @@
 }
 
 div.task-board-recent {
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 div.task-board-status-closed {

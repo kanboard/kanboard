@@ -15,7 +15,8 @@ Swimlane.prototype.expand = function(swimlaneId) {
 
     localStorage.setItem(this.getStorageKey(), JSON.stringify(swimlaneIds));
 
-    $('.swimlane-row-' + swimlaneId).css('display', 'table-row');
+    $('.board-swimlane-columns-' + swimlaneId).css('display', 'table-row');
+    $('.board-swimlane-tasks-' + swimlaneId).css('display', 'table-row');
     $('.hide-icon-swimlane-' + swimlaneId).css('display', 'inline');
     $('.show-icon-swimlane-' + swimlaneId).css('display', 'none');
 };
@@ -28,7 +29,8 @@ Swimlane.prototype.collapse = function(swimlaneId) {
         localStorage.setItem(this.getStorageKey(), JSON.stringify(swimlaneIds));
     }
 
-    $('.swimlane-row-' + swimlaneId).css('display', 'none');
+    $('.board-swimlane-columns-' + swimlaneId + ':not(:first-child)').css('display', 'none');
+    $('.board-swimlane-tasks-' + swimlaneId).css('display', 'none');
     $('.hide-icon-swimlane-' + swimlaneId).css('display', 'none');
     $('.show-icon-swimlane-' + swimlaneId).css('display', 'inline');
 };

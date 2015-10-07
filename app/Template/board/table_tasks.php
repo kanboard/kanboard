@@ -1,5 +1,5 @@
 <!-- task row -->
-<tr class="board-swimlane swimlane-row-<?= $swimlane['id'] ?>">
+<tr class="board-swimlane board-swimlane-tasks-<?= $swimlane['id'] ?>">
     <?php foreach ($swimlane['columns'] as $column): ?>
         <td class="
             board-column-<?= $column['id'] ?>
