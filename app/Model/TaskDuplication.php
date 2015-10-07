@@ -105,7 +105,7 @@ class TaskDuplication extends Base
     {
         $values = $this->copyFields($task_id);
         $values['project_id'] = $project_id;
-        $values['column_id'] = $column_id !== null ? $column_id : $this->board->getFirstColumn($project_id);
+        $values['column_id'] = $column_id !== null ? $column_id : $values['column_id'];
         $values['swimlane_id'] = $swimlane_id !== null ? $swimlane_id : $values['swimlane_id'];
         $values['category_id'] = $category_id !== null ? $category_id : $values['category_id'];
         $values['owner_id'] = $owner_id !== null ? $owner_id : $values['owner_id'];
@@ -134,7 +134,7 @@ class TaskDuplication extends Base
         $values = array();
         $values['is_active'] = 1;
         $values['project_id'] = $project_id;
-        $values['column_id'] = $column_id !== null ? $column_id : $this->board->getFirstColumn($project_id);
+        $values['column_id'] = $column_id !== null ? $column_id : $task['column_id'];
         $values['position'] = $this->taskFinder->countByColumnId($project_id, $values['column_id']) + 1;
         $values['swimlane_id'] = $swimlane_id !== null ? $swimlane_id : $task['swimlane_id'];
         $values['category_id'] = $category_id !== null ? $category_id : $task['category_id'];
@@ -179,6 +179,16 @@ class TaskDuplication extends Base
                 $values['project_id'],
                 $this->swimlane->getNameById($values['swimlane_id'])
             );
+        }
+
+        // Check if the column exists for the destination project
+        if ($values['column_id'] > 0) {
+            $values['column_id'] = $this->board->getColumnIdByTitle(
+                $values['project_id'],
+                $this->board->getColumnTitleById($values['column_id'])
+            );
+
+            $values['column_id'] = $values['column_id'] ?: $this->board->getFirstColumn($values['project_id']);
         }
 
         return $values;

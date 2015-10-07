@@ -133,7 +133,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(0, $task['swimlane_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
@@ -168,7 +168,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(2, $task['category_id']);
         $this->assertEquals(0, $task['swimlane_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
@@ -240,7 +240,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(2, $task['swimlane_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
@@ -273,7 +273,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(0, $task['swimlane_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
@@ -352,7 +352,7 @@ class TaskDuplicationTest extends Base
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
         $this->assertEquals(0, $task['owner_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
@@ -372,6 +372,7 @@ class TaskDuplicationTest extends Base
         $task = $tf->getById(3);
         $this->assertNotEmpty($task);
         $this->assertEquals(2, $task['position']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(2, $task['owner_id']);
         $this->assertEquals(2, $task['project_id']);
 
@@ -381,7 +382,7 @@ class TaskDuplicationTest extends Base
 
         $task = $tf->getById(5);
         $this->assertNotEmpty($task);
-        $this->assertEquals(3, $task['position']);
+        $this->assertEquals(1, $task['position']);
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals(5, $task['column_id']);
@@ -486,7 +487,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(2, $task['category_id']);
         $this->assertEquals(0, $task['swimlane_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
@@ -524,7 +525,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['owner_id']);
         $this->assertEquals(2, $task['project_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
     }
 
     public function testMoveAnotherProjectWithForbiddenUser()
@@ -559,7 +560,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(2, $task['project_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
     }
 
     public function testMoveAnotherProjectWithSwimlane()
@@ -589,7 +590,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(2, $task['swimlane_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);
@@ -622,7 +623,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(0, $task['swimlane_id']);
-        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals('test', $task['title']);

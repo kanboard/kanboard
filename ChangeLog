@@ -21,6 +21,7 @@ Core functionalities moved to plugins:
 
 Improvements:
 
+* Duplicate a project with tasks will copy the new tasks in the same columns
 * Offer alternative method to create Mysql and Postgres databases (import sql dump)
 * Make sure there is always a trailing slash for application_url
 * Do not show the checkbox "Show default swimlane" when there is no active swimlanes

@@ -403,6 +403,18 @@ class Board extends Base
     }
 
     /**
+     * Get a column title by the id
+     *
+     * @access public
+     * @param  integer  $column_id
+     * @return integer
+     */
+    public function getColumnTitleById($column_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->findOneColumn('title');
+    }
+
+    /**
      * Get the position of the last column for a given project
      *
      * @access public
