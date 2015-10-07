@@ -1899,4 +1899,45 @@ INSERT INTO settings (option, value) VALUES ('cfd_include_closed_tasks', '1');
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$ORQCf1YIxrkMyA9V1cphcOVZKckWumuZXig9hsk5I6EH1p1Z1pHsO', '1');INSERT INTO schema_version VALUES ('70');
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: links; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO links (id, label, opposite_id) VALUES (1, 'relates to', 0);
+INSERT INTO links (id, label, opposite_id) VALUES (2, 'blocks', 3);
+INSERT INTO links (id, label, opposite_id) VALUES (3, 'is blocked by', 2);
+INSERT INTO links (id, label, opposite_id) VALUES (4, 'duplicates', 5);
+INSERT INTO links (id, label, opposite_id) VALUES (5, 'is duplicated by', 4);
+INSERT INTO links (id, label, opposite_id) VALUES (6, 'is a child of', 7);
+INSERT INTO links (id, label, opposite_id) VALUES (7, 'is a parent of', 6);
+INSERT INTO links (id, label, opposite_id) VALUES (8, 'targets milestone', 9);
+INSERT INTO links (id, label, opposite_id) VALUES (9, 'is a milestone of', 8);
+INSERT INTO links (id, label, opposite_id) VALUES (10, 'fixes', 11);
+INSERT INTO links (id, label, opposite_id) VALUES (11, 'is fixed by', 10);
+
+
+--
+-- Name: links_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('links_id_seq', 11, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$ZkZIbCTR/OrzhRTOx.UZZeaInO85/1N/j4zxb7WCrNpO9hjFM1mUC', '1');INSERT INTO schema_version VALUES ('70');

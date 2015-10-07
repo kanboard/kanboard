@@ -91,9 +91,11 @@ unittest: test-sqlite test-mysql test-postgres
 sql:
 	@ pg_dump --schema-only --no-owner --file app/Schema/Sql/postgres.sql kanboard
 	@ pg_dump -d kanboard --column-inserts --data-only --table settings >> app/Schema/Sql/postgres.sql
+	@ pg_dump -d kanboard --column-inserts --data-only --table links >> app/Schema/Sql/postgres.sql
 
 	@ mysqldump -uroot --quote-names --no-create-db --skip-comments --no-data --single-transaction kanboard | sed 's/ AUTO_INCREMENT=[0-9]*//g' > app/Schema/Sql/mysql.sql
 	@ mysqldump -uroot --quote-names --no-create-info --skip-comments --no-set-names kanboard settings >> app/Schema/Sql/mysql.sql
+	@ mysqldump -uroot --quote-names --no-create-info --skip-comments --no-set-names kanboard links >> app/Schema/Sql/mysql.sql
 
 	@ php -r "echo 'INSERT INTO users (username, password, is_admin) VALUES (\'admin\', \''.password_hash('admin', PASSWORD_DEFAULT).'\', \'1\');';" | \
 	tee -a app/Schema/Sql/postgres.sql app/Schema/Sql/mysql.sql >/dev/null
