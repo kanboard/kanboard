@@ -21,6 +21,7 @@ Core functionalities moved to plugins:
 
 Improvements:
 
+* Include more shortcut links into the view "My projects"
 * Duplicate a project with tasks will copy the new tasks in the same columns
 * Offer alternative method to create Mysql and Postgres databases (import sql dump)
 * Make sure there is always a trailing slash for application_url
