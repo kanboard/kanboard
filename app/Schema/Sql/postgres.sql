@@ -1840,4 +1840,63 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$BBxt.HuQCFur7qhICY22i.A6OKyce0KGqmMEWq3JdGT4WcEKCBWP.', '1');INSERT INTO schema_version VALUES ('70');
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: settings; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO settings (option, value) VALUES ('board_highlight_period', '172800');
+INSERT INTO settings (option, value) VALUES ('board_public_refresh_interval', '60');
+INSERT INTO settings (option, value) VALUES ('board_private_refresh_interval', '10');
+INSERT INTO settings (option, value) VALUES ('board_columns', '');
+INSERT INTO settings (option, value) VALUES ('webhook_token', '94aa75d5d88c8e7084721c3a1c97c06630f494a31741f8cf3b6d9eadf6a1');
+INSERT INTO settings (option, value) VALUES ('api_token', '3f0a1683800e9104b6e8ec15cb254738eebf24028f2169546e17fa2a3801');
+INSERT INTO settings (option, value) VALUES ('application_language', 'en_US');
+INSERT INTO settings (option, value) VALUES ('application_timezone', 'UTC');
+INSERT INTO settings (option, value) VALUES ('application_url', '');
+INSERT INTO settings (option, value) VALUES ('application_date_format', 'm/d/Y');
+INSERT INTO settings (option, value) VALUES ('project_categories', '');
+INSERT INTO settings (option, value) VALUES ('subtask_restriction', '0');
+INSERT INTO settings (option, value) VALUES ('application_stylesheet', '');
+INSERT INTO settings (option, value) VALUES ('application_currency', 'USD');
+INSERT INTO settings (option, value) VALUES ('integration_slack_webhook', '0');
+INSERT INTO settings (option, value) VALUES ('integration_slack_webhook_url', '');
+INSERT INTO settings (option, value) VALUES ('integration_hipchat', '0');
+INSERT INTO settings (option, value) VALUES ('integration_hipchat_api_url', 'https://api.hipchat.com');
+INSERT INTO settings (option, value) VALUES ('integration_hipchat_room_id', '');
+INSERT INTO settings (option, value) VALUES ('integration_hipchat_room_token', '');
+INSERT INTO settings (option, value) VALUES ('integration_gravatar', '0');
+INSERT INTO settings (option, value) VALUES ('integration_jabber', '0');
+INSERT INTO settings (option, value) VALUES ('integration_jabber_server', '');
+INSERT INTO settings (option, value) VALUES ('integration_jabber_domain', '');
+INSERT INTO settings (option, value) VALUES ('integration_jabber_username', '');
+INSERT INTO settings (option, value) VALUES ('integration_jabber_password', '');
+INSERT INTO settings (option, value) VALUES ('integration_jabber_nickname', 'kanboard');
+INSERT INTO settings (option, value) VALUES ('integration_jabber_room', '');
+INSERT INTO settings (option, value) VALUES ('calendar_user_subtasks_time_tracking', '0');
+INSERT INTO settings (option, value) VALUES ('calendar_user_tasks', 'date_started');
+INSERT INTO settings (option, value) VALUES ('calendar_project_tasks', 'date_started');
+INSERT INTO settings (option, value) VALUES ('webhook_url', '');
+INSERT INTO settings (option, value) VALUES ('integration_slack_webhook_channel', '');
+INSERT INTO settings (option, value) VALUES ('default_color', 'yellow');
+INSERT INTO settings (option, value) VALUES ('subtask_time_tracking', '1');
+INSERT INTO settings (option, value) VALUES ('cfd_include_closed_tasks', '1');
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$ORQCf1YIxrkMyA9V1cphcOVZKckWumuZXig9hsk5I6EH1p1Z1pHsO', '1');INSERT INTO schema_version VALUES ('70');

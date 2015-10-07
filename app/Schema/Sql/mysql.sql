@@ -521,4 +521,23 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$BBxt.HuQCFur7qhICY22i.A6OKyce0KGqmMEWq3JdGT4WcEKCBWP.', '1');INSERT INTO schema_version VALUES ('90');
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+LOCK TABLES `settings` WRITE;
+/*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+INSERT INTO `settings` VALUES ('api_token','37d92e3bc7e2ede57948401870a1ab70d59265930853fd65954ca22a09ed'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('integration_hipchat','0'),('integration_hipchat_api_url','https://api.hipchat.com'),('integration_hipchat_room_id',''),('integration_hipchat_room_token',''),('integration_jabber','0'),('integration_jabber_domain',''),('integration_jabber_nickname','kanboard'),('integration_jabber_password',''),('integration_jabber_room',''),('integration_jabber_server',''),('integration_jabber_username',''),('integration_slack_webhook','0'),('integration_slack_webhook_channel',''),('integration_slack_webhook_url',''),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','4f0986fa4a12fab97e0f54615c40a87e74a1e0ac65a8486b0710b5ff6a8d'),('webhook_url','');
+/*!40000 ALTER TABLE `settings` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$ORQCf1YIxrkMyA9V1cphcOVZKckWumuZXig9hsk5I6EH1p1Z1pHsO', '1');INSERT INTO schema_version VALUES ('90');
