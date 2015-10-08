@@ -4,21 +4,28 @@ Notifications
 Kanboard is able to send notifications through several channels:
 
 - Email
+- Web
 - Jabber/XMPP
 - Hipchat
 - Slack
 
 Actually, Jabber/Hipchat/Slack notifications are sent to a room or group channel because they are configured at the project level.
-However, email notifications are sent to an individual person.
 
-User notifications
-------------------
+However, email or web notifications are sent to an individual person.
 
-Each user must enable the notifications in their profile: **User Profile > Email notifications**. It's disabled by default.
+Configuration
+-------------
 
-You need of course a valid email address in you profile and the application must be configured to send emails.
+Each user must enable the notifications in their profile: **User Profile > Notifications**. It's disabled by default.
+
+To receive email notifications you need a valid email address in you profile and the application must be configured to send emails.
 
 ![Notifications](http://kanboard.net/screenshots/documentation/notifications.png)
+
+You can choose your favorite notification method:
+
+- Emails
+- Web (see below)
 
 For each project your are member, you can choose to receive notifications for:
 
@@ -28,3 +35,17 @@ For each project your are member, you can choose to receive notifications for:
 - Only for tasks created by you and assigned to you
 
 You can also select only some projects, by default it's all projects where you are member.
+
+Web notifications
+-----------------
+
+Web notifications are available from the dashboard or from the icon at the top:
+
+![Web Notifications Icon](http://kanboard.net/screenshots/documentation/web-notifications-icon.png)
+
+Notifications are shown in a list, so you can mark individual notification as read or everything.
+
+![Web Notifications](http://kanboard.net/screenshots/documentation/web-notifications.png)
+
+In this way you can still get notified without having to receive emails.
+

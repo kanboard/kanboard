@@ -29,6 +29,7 @@ Using Kanboard
 - [Analytics](analytics.markdown)
 - [Gantt chart for tasks](gantt-chart-tasks.markdown)
 - [Gantt chart for projects](gantt-chart-projects.markdown)
+- [Custom filters](custom-filters.markdown)
 
 ### Working with tasks
 
