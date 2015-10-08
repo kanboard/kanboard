@@ -26,7 +26,7 @@ class Taskduplication extends Base
 
             if ($task_id > 0) {
                 $this->session->flash(t('Task created successfully.'));
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task_id)));
             } else {
                 $this->session->flashError(t('Unable to create this task.'));
                 $this->response->redirect($this->helper->url->to('taskduplication', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
@@ -83,15 +83,16 @@ class Taskduplication extends Base
             $values = $this->request->getValues();
             list($valid,) = $this->taskValidator->validateProjectModification($values);
 
-            if ($valid && $this->taskDuplication->duplicateToProject($task['id'],
-                                                                $values['project_id'],
-                                                                $values['swimlane_id'],
-                                                                $values['column_id'],
-                                                                $values['category_id'],
-                                                                $values['owner_id'])) {
+            if ($valid) {
+                $task_id = $this->taskDuplication->duplicateToProject(
+                    $task['id'], $values['project_id'], $values['swimlane_id'],
+                    $values['column_id'], $values['category_id'], $values['owner_id']
+                );
 
-                $this->session->flash(t('Task created successfully.'));
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+                if ($task_id > 0) {
+                    $this->session->flash(t('Task created successfully.'));
+                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task_id)));
+                }
             }
 
             $this->session->flashError(t('Unable to create your task.'));
