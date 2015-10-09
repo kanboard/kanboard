@@ -32,11 +32,13 @@
                     <?php if ($column['position'] != $first_position): ?>
                     <li>
                         <?= $this->url->link(t('Move Up'), 'column', 'move', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'up'), true) ?>
+                        <?= $this->url->link(t('Move Top'), 'column', 'move', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'top'), true) ?>
                     </li>
                     <?php endif ?>
                     <?php if ($column['position'] != $last_position): ?>
                     <li>
                         <?= $this->url->link(t('Move Down'), 'column', 'move', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'down'), true) ?>
+                        <?= $this->url->link(t('Move Bottom'), 'column', 'move', array('project_id' => $project['id'], 'column_id' => $column['id'], 'direction' => 'bottom'), true) ?>
                     </li>
                     <?php endif ?>
                     <li>

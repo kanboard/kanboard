@@ -210,6 +210,22 @@ class Board extends Base
     }
 
     /**
+     * Move a column to bottom
+     * 
+     * @access public
+     * @param integer $project_id Project id
+     * @param integer $column_id Column id
+     * @return boolean
+     */
+    public function moveBottom($project_id, $column_id)
+    {
+        while($columnPosition=$this->moveDown($project_id, $column_id)){
+            
+        }
+        return $columnPosition;
+    }
+    
+    /**
      * Move a column up, decrement the column position value
      *
      * @access public
@@ -232,6 +248,21 @@ class Board extends Base
 
         return false;
     }
+    /**
+     * Move a column to top
+     * 
+     * @access public
+     * @param integer $project_id Project id
+     * @param integer $column_id Column id
+     * @return boolean
+     */
+    public function moveTop($project_id, $column_id)
+    {
+        while($columnPosition=$this->moveUp($project_id, $column_id)){
+            
+        }
+        return $columnPosition;
+    }    
 
     /**
      * Get all tasks sorted by columns and swimlanes
