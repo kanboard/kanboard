@@ -255,6 +255,18 @@ Session
 define('SESSION_DURATION', 0);
 ```
 
+HTTP client proxy
+-----------------
+
+If external HTTP requests need to be sent through a proxy:
+
+```php
+define('HTTP_PROXY_HOSTNAME', '');
+define('HTTP_PROXY_PORT', '3128');
+define('HTTP_PROXY_USERNAME', '');
+define('HTTP_PROXY_PASSWORD', '');
+```
+
 Various settings
 ----------------
 

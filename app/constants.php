@@ -120,3 +120,10 @@ defined('BRUTEFORCE_LOCKDOWN_DURATION') or define('BRUTEFORCE_LOCKDOWN_DURATION'
 // Session duration in second (0 = until the browser is closed)
 // See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
 defined('SESSION_DURATION') or define('SESSION_DURATION', 0);
+
+// HTTP client proxy
+defined('HTTP_PROXY_HOSTNAME') or define('HTTP_PROXY_HOSTNAME', '');
+defined('HTTP_PROXY_PORT') or define('HTTP_PROXY_PORT', '3128');
+defined('HTTP_PROXY_USERNAME') or define('HTTP_PROXY_USERNAME', '');
+defined('HTTP_PROXY_PASSWORD') or define('HTTP_PROXY_PASSWORD', '');
+

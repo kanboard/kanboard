@@ -12,6 +12,7 @@ New features:
 * Added user API access for procedure getProjectActivity()
 * Added config parameter to enable/disable Syslog
 * Added custom filters
+* Added http client proxy support
 
 Core functionalities moved to plugins:
 

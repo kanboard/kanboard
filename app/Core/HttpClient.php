@@ -99,9 +99,18 @@ class HttpClient extends Base
             return '';
         }
 
-        $headers = array_merge(array('User-Agent: '.self::HTTP_USER_AGENT, 'Connection: close'), $headers);
+        $default_headers = array(
+            'User-Agent: '.self::HTTP_USER_AGENT,
+            'Connection: close',
+        );
 
-        $context = stream_context_create(array(
+        if (HTTP_PROXY_USERNAME) {
+            $default_headers[] = 'Proxy-Authorization: Basic '.base64_encode(HTTP_PROXY_USERNAME.':'.HTTP_PROXY_PASSWORD);
+        }
+
+        $headers = array_merge($default_headers, $headers);
+
+        $context = array(
             'http' => array(
                 'method' => $method,
                 'protocol_version' => 1.1,
@@ -110,9 +119,14 @@ class HttpClient extends Base
                 'header' => implode("\r\n", $headers),
                 'content' => $content
             )
-        ));
+        );
 
-        $stream = @fopen(trim($url), 'r', false, $context);
+        if (HTTP_PROXY_HOSTNAME) {
+            $context['http']['proxy'] = 'tcp://'.HTTP_PROXY_HOSTNAME.':'.HTTP_PROXY_PORT;
+            $context['http']['request_fulluri'] = true;
+        }
+
+        $stream = @fopen(trim($url), 'r', false, stream_context_create($context));
         $response = '';
 
         if (is_resource($stream)) {
