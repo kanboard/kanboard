@@ -4,8 +4,18 @@ How to run Kanboard with Docker?
 Kanboard can run easily with [Docker](https://www.docker.com).
 There is a `Dockerfile` in the repository to build your own container.
 
-Use the automated build
------------------------
+Use the stable version
+----------------------
+
+To fetch the latest stable release of Kanboard use the tag **stable**:
+
+```bash
+docker pull kanboard/kanboard
+docker run -d --name kanboard -p 80:80 -t kanboard/kanboard:stable
+```
+
+Use the development version (automated build)
+---------------------------------------------
 
 Every new commit on the repository trigger a new build on [Docker Hub](https://registry.hub.docker.com/u/kanboard/kanboard/).
 
@@ -45,3 +55,5 @@ References
 
 - [Official Kanboard images](https://registry.hub.docker.com/u/kanboard/kanboard/)
 - [Docker documentation](https://docs.docker.com/)
+- [Dockerfile stable version](https://github.com/kanboard/docker/blob/master/Dockerfile)
+- [Dockerfile dev version](https://github.com/fguillot/kanboard/blob/master/Dockerfile)
