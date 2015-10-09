@@ -18,3 +18,4 @@ $application->add(new Console\TransitionExport($container));
 $application->add(new Console\LocaleSync($container));
 $application->add(new Console\LocaleComparator($container));
 $application->run();
+?>
