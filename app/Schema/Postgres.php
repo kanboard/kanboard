@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 70;
+const VERSION = 71;
+
+function version_71($pdo)
+{
+    $pdo->exec("ALTER TABLE custom_filters ADD COLUMN append BOOLEAN DEFAULT '0'");
+}
 
 function version_70($pdo)
 {

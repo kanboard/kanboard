@@ -6,7 +6,12 @@ use Core\Security;
 use PDO;
 use Model\Link;
 
-const VERSION = 85;
+const VERSION = 86;
+
+function version_86($pdo)
+{
+    $pdo->exec("ALTER TABLE custom_filters ADD COLUMN append INTEGER DEFAULT 0");
+}
 
 function version_85($pdo)
 {

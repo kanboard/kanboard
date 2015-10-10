@@ -115,6 +115,10 @@ class Customfilter extends Base
         if (! isset($values['is_shared'])) {
             $values += array('is_shared' => 0);
         }
+        
+        if (! isset($values['append'])) {
+            $values += array('append' => 0);
+        }
 
         list($valid, $errors) = $this->customFilter->validateModification($values);
 
