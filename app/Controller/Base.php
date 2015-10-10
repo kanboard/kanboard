@@ -80,7 +80,7 @@ abstract class Base extends \Core\Base
     private function sendHeaders($action)
     {
         // HTTP secure headers
-        $this->response->csp(array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '* data:'));
+        $this->response->csp($this->container['cspRules']);
         $this->response->nosniff();
         $this->response->xss();
 

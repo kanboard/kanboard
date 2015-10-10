@@ -19,6 +19,17 @@ abstract class Base extends \Core\Base
     abstract public function initialize();
 
     /**
+     * Override default CSP rules
+     *
+     * @access public
+     * @param  array  $rules
+     */
+    public function setContentSecurityPolicy(array $rules)
+    {
+        $this->container['cspRules'] = $rules;
+    }
+
+    /**
      * Returns all classes that needs to be stored in the DI container
      *
      * @access public

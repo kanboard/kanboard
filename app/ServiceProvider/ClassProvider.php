@@ -126,5 +126,7 @@ class ClassProvider implements ServiceProviderInterface
         };
 
         $container['pluginLoader'] = new Loader($container);
+
+        $container['cspRules'] = array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '* data:');
     }
 }

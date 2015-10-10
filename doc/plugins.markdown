@@ -198,7 +198,7 @@ Example to add new content in the dashboard sidebar:
 $this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar');
 ```
 
-This call is usually defined in the `initialize()` method. 
+This call is usually defined in the `initialize()` method.
 The first argument is name of the hook and the second argument is the template name.
 
 Template names prefixed with the plugin name and colon indicate the location of the template.
@@ -328,6 +328,25 @@ $this->on('session.bootstrap', function($container) {
 ```
 
 The translations must be stored in `plugins/Myplugin/Locale/xx_XX/translations.php`.
+
+Override HTTP Content Security Policy
+-------------------------------------
+
+If you would like to replace the default HTTP Content Security Policy header, you can use the method `setContentSecurityPolicy()`:
+
+```php
+<?php
+
+namespace Plugin\Csp;
+
+class Plugin extends \Core\Plugin\Base
+{
+    public function initialize()
+    {
+        $this->setContentSecurityPolicy(array('script-src' => 'something'));
+    }
+}
+```
 
 Dependency Injection Container
 ------------------------------
