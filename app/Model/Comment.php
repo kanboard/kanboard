@@ -34,9 +34,10 @@ class Comment extends Base
      *
      * @access public
      * @param  integer  $task_id  Task id
+     * @param  string   $sorting  ASC/DESC
      * @return array
      */
-    public function getAll($task_id)
+    public function getAll($task_id, $sorting = 'ASC')
     {
         return $this->db
             ->table(self::TABLE)
@@ -51,7 +52,7 @@ class Comment extends Base
                 User::TABLE.'.email'
             )
             ->join(User::TABLE, 'id', 'user_id')
-            ->orderBy(self::TABLE.'.date_creation', 'ASC')
+            ->orderBy(self::TABLE.'.date_creation', $sorting)
             ->eq(self::TABLE.'.task_id', $task_id)
             ->findAll();
     }

@@ -183,4 +183,19 @@ class Comment extends Base
 
         $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
     }
+
+    /**
+     * Toggle comment sorting
+     *
+     * @access public
+     */
+    public function toggleSorting()
+    {
+        $task = $this->getTask();
+
+        $order = $this->userSession->getCommentSorting() === 'ASC' ? 'DESC' : 'ASC';
+        $this->userSession->setCommentSorting($order);
+
+        $this->response->redirect($this->helper->url->href('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'comments'));
+    }
 }

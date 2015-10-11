@@ -69,6 +69,20 @@
     max-width: 800px;
 }
 
+.comment-sorting {
+    font-size: 0.5em;
+}
+
+span.comment-sorting a {
+    color: #555;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+span.comment-sorting a:hover {
+    color: #aaa;
+}
+
 #comments .comment-textarea {
     height: 80px;
     width: 500px;
