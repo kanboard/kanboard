@@ -113,7 +113,7 @@ class Notification extends Base
      */
     public function saveSettings($user_id, array $values)
     {
-        // $this->db->startTransaction();
+        $this->db->startTransaction();
 
         if (isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1) {
             $this->enableNotification($user_id);
@@ -130,7 +130,7 @@ class Notification extends Base
             $this->disableNotification($user_id);
         }
 
-        // $this->db->closeTransaction();
+        $this->db->closeTransaction();
     }
 
     /**

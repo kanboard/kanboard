@@ -30,8 +30,6 @@ class Taskstatus extends Base
     public function open()
     {
         $task = $this->getTask();
-        $redirect = $this->request->getStringParam('redirect');
-
         $this->changeStatus($task, 'open', t('Task opened successfully.'), t('Unable to open this task.'));
         $this->renderTemplate($task, 'task_status/open');
     }
