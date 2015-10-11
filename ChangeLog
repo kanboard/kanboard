@@ -1,5 +1,5 @@
-Version 1.0.19 (unreleased)
----------------------------
+Version 1.0.19
+--------------
 
 New features:
 
@@ -44,6 +44,7 @@ Improvements:
 * Add event subtask.delete
 * Add abstract storage layer
 * Add abstract cache layer
+* Add Docker tag for stable version
 
 Others:
 
