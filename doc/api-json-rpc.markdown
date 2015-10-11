@@ -248,6 +248,46 @@ end
 puts response.body
 ```
 
+
+### Example with Java
+
+This is a basic example using Spring. For proper usage see [this link](http://spring.io/guides/gs/consuming-rest).
+
+```java
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
+
+public class ProjectService {
+
+    public void getAllProjects() throws UnsupportedEncodingException {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String url = "http://localhost/kanboard/jsonrpc.php";
+        String requestJson = "{\"jsonrpc\": \"2.0\", \"method\": \"getAllProjects\", \"id\": 1}";
+        String user = "jsonrpc";
+        String apiToken = "19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929";
+
+        // encode api token
+        byte[] xApiAuthTokenBytes = String.join(":", user, apiToken).getBytes("utf-8");
+        String xApiAuthToken = Base64.getEncoder().encodeToString(xApiAuthTokenBytes);
+
+        // consume request
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-API-Auth", xApiAuthToken);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
+        String answer = restTemplate.postForObject(url, entity, String.class);
+        System.out.println(answer);
+    }
+}
+```
+
 Procedures
 ----------
 
