@@ -34,6 +34,7 @@ use Pimple\Container;
  * @property \Integration\Sendgrid                             $sendgrid
  * @property \Integration\SlackWebhook                         $slackWebhook
  * @property \Integration\Smtp                                 $smtp
+ * @property \Formatter\ProjectGanttFormatter                  $projectGanttFormatter
  * @property \Formatter\TaskFilterGanttFormatter               $taskFilterGanttFormatter
  * @property \Formatter\TaskFilterAutoCompleteFormatter        $taskFilterAutoCompleteFormatter
  * @property \Formatter\TaskFilterCalendarFormatter            $taskFilterCalendarFormatter
@@ -53,6 +54,10 @@ use Pimple\Container;
  * @property \Model\LastLogin                                  $lastLogin
  * @property \Model\Link                                       $link
  * @property \Model\Notification                               $notification
+ * @property \Model\NotificationType                           $notificationType
+ * @property \Model\NotificationFilter                         $notificationFilter
+ * @property \Model\OverdueNotification                        $overdueNotification
+ * @property \Model\WebNotification                            $webNotification
  * @property \Model\Project                                    $project
  * @property \Model\ProjectActivity                            $projectActivity
  * @property \Model\ProjectAnalytic                            $projectAnalytic

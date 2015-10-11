@@ -16,7 +16,6 @@ class Hook extends \Core\Base
      * @access public
      * @param  string  $type
      * @param  string  $hook
-     * @param  array   $variables
      * @return string
      */
     public function asset($type, $hook)
