@@ -89,14 +89,15 @@ Search.prototype.keyboardShortcuts = function() {
     // Reset to the search field
     Mousetrap.bind("r", function(e) {
         e.preventDefault();
-        $("#form-search").val("status:open");
+        var reset = $(".filter-reset").data("filter");
+
+        $("#form-search").val(reset);
 
         if ($('#board').length) {
-            self.app.board.reloadFilters("status:open");
+            self.app.board.reloadFilters(reset);
         }
         else {
             $("form.search").submit();
         }
     });
 };
-
