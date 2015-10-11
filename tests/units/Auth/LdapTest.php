@@ -116,7 +116,16 @@ class LdapTest extends \Base
 
     public function testBindAnonymous()
     {
-        $ldap = new Ldap($this->container);
+        $ldap = $this
+            ->getMockBuilder('\Auth\Ldap')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('getLdapBindType'))
+            ->getMock();
+
+        $ldap
+            ->expects($this->any())
+            ->method('getLdapBindType')
+            ->will($this->returnValue('anonymous'));
 
         self::$functions
             ->expects($this->once())
@@ -128,7 +137,7 @@ class LdapTest extends \Base
             )
             ->will($this->returnValue(true));
 
-        $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password', 'anonymous'));
+        $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password'));
     }
 
     public function testBindUser()
@@ -136,13 +145,18 @@ class LdapTest extends \Base
         $ldap = $this
             ->getMockBuilder('\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getLdapUserPattern'))
+            ->setMethods(array('getLdapUsername', 'getLdapBindType'))
             ->getMock();
 
         $ldap
             ->expects($this->once())
-            ->method('getLdapUserPattern')
+            ->method('getLdapUsername')
             ->will($this->returnValue('uid=my_user'));
+
+        $ldap
+            ->expects($this->any())
+            ->method('getLdapBindType')
+            ->will($this->returnValue('user'));
 
         self::$functions
             ->expects($this->once())
@@ -154,7 +168,7 @@ class LdapTest extends \Base
             )
             ->will($this->returnValue(true));
 
-        $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password', 'user'));
+        $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password'));
     }
 
     public function testBindProxy()
@@ -162,7 +176,7 @@ class LdapTest extends \Base
         $ldap = $this
             ->getMockBuilder('\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getLdapUsername', 'getLdapPassword'))
+            ->setMethods(array('getLdapUsername', 'getLdapPassword', 'getLdapBindType'))
             ->getMock();
 
         $ldap
@@ -175,6 +189,11 @@ class LdapTest extends \Base
             ->method('getLdapPassword')
             ->will($this->returnValue('something'));
 
+        $ldap
+            ->expects($this->any())
+            ->method('getLdapBindType')
+            ->will($this->returnValue('proxy'));
+
         self::$functions
             ->expects($this->once())
             ->method('ldap_bind')
@@ -185,7 +204,7 @@ class LdapTest extends \Base
             )
             ->will($this->returnValue(true));
 
-        $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password', 'proxy'));
+        $this->assertTrue($ldap->bind('my_ldap_connection', 'my_user', 'my_password'));
     }
 
     public function testSearchSuccess()
