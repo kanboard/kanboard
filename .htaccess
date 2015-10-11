@@ -9,11 +9,18 @@
 </IfModule>
 
 <FilesMatch "(kanboard|config.php|config.default.php)">
-    <IfVersion >= 2.3>
-        Require all denied
-    </IfVersion>
-    <IfVersion < 2.3>
+    <IfModule mod_version.c>
+        <IfVersion >= 2.3>
+            Require all denied
+        </IfVersion>
+        <IfVersion < 2.3>
+            Order allow,deny
+            Deny from all
+        </IfVersion>
+    </IfModule>
+
+    <IfModule !mod_version.c>
         Order allow,deny
         Deny from all
-    </IfVersion>
+    </IfModule>
 </FilesMatch>
