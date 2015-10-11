@@ -5,15 +5,13 @@ Vagrant is used to test Kanboard in different environments.
 
 Several configurations are available:
 
-- Ubuntu 14.04 LTS with Sqlite
-- Ubuntu 14.04 LTS with Mysql
-- Ubuntu 14.04 LTS with Postgresql
-- Debian 8 with sqlite
-- Debian 7.6 with Sqlite
-- Debian 6 with Sqlite
-- Centos 7 with Sqlite
-- Centos 6.5 with Sqlite
-- Freebsd 10 with Sqlite
+- Ubuntu 14.04 LTS
+- Debian 8
+- Debian 7
+- Debian 6
+- Centos 7
+- Centos 6.7
+- Freebsd 10
 
 The installation process is not fully automated for all VM, manual configuration can be required.
 
@@ -24,10 +22,10 @@ Standard boxes can be downloaded from Vagrant:
 ```bash
 vagrant box add ubuntu/trusty64
 vagrant box add debian/jessie64
-vagrant box add chef/debian-7.6
-vagrant box add chef/debian-6.0.10
-vagrant box add chef/centos-7.0
-vagrant box add chef/centos-6.5
+vagrant box add debian/wheezy64
+vagrant box add bento/debian-6.0.10
+vagrant box add centos/7
+vagrant box add bento/centos-6.7
 vagrant box add freebsd/FreeBSD-10.2-STABLE
 ```
 
@@ -39,26 +37,28 @@ If you want to test Kanboard on Ubuntu with Sqlite:
 vagrant up sqlite
 ```
 
-Run composer:
+The current directory is synced to the Apache document root.
 
-```bash
-vagrant ssh sqlite
-cd /var/www/html          # change the path according to the chosen distribution
-sudo composer install
-```
+Composer dependencies have to be there, so if you didn't run `composer install` on your host machine you can also do it on the guest machine.
 
-After the initialization, go to **http://localhost:8001/**.
+Each box have its own TCP port:
 
-If you want to use Postgresql or Mysql, you have to configure Kanboard manually (`config.php`) and configure the database inside the virtual machine.
+- ubuntu: http://localhost:8001/
+- debian8: http://localhost:8002/
+- debian7: http://localhost:8003/
+- debian6: http://localhost:8004/
+- centos7: http://localhost:8005/
+- centos6: http://localhost:8006/
+- freebsd10: http://localhost:8007/
 
 Available boxes are:
 
-- `vagrant up sqlite`
-- `vagrant up mysql`
-- `vagrant up postgres`
+- `vagrant up ubuntu`
 - `vagrant up debian8`
 - `vagrant up debian7`
 - `vagrant up debian6`
 - `vagrant up centos7`
-- `vagrant up centos65`
+- `vagrant up centos6`
 - `vagrant up freebsd10`
+
+Any specific configuration have to done manually (Postgres or Mysql).
