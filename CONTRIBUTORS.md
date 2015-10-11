@@ -82,6 +82,7 @@ Contributors:
 - [Sebastian Reese](https://github.com/ReeseSebastian)
 - [Semyon Novikov](https://github.com/semka)
 - [Sylvain Veyrié](https://github.com/turb)
+- [Thomas Lutz](https://github.com/phoen1x)
 - [Timo](https://github.com/BlueTeck)
 - [Timotheus Pokorra](https://github.com/tpokorra)
 - [Tomáš Votruba](https://github.com/TomasVotruba)
