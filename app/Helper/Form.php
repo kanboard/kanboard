@@ -178,6 +178,23 @@ class Form extends \Core\Base
     }
 
     /**
+     * Display file field
+     *
+     * @access public
+     * @param  string  $name
+     * @param  array   $errors
+     * @param  boolean $multiple
+     * @return string
+     */
+    public function file($name, array $errors = array(), $multiple = false)
+    {
+        $html = '<input type="file" name="'.$name.'" id="form-'.$name.'" '.($multiple ? 'multiple' : '').'>';
+        $html .= $this->errorList($errors, $name);
+
+        return $html;
+    }
+
+    /**
      * Display a input field
      *
      * @access public

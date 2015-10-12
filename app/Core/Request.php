@@ -103,6 +103,18 @@ class Request
     }
 
     /**
+     * Get the path of an uploaded file
+     *
+     * @access public
+     * @param  string   $name   Form file name
+     * @return string
+     */
+    public function getFilePath($name)
+    {
+        return isset($_FILES[$name]['tmp_name']) ? $_FILES[$name]['tmp_name'] : '';
+    }
+
+    /**
      * Return true if the HTTP request is sent with the POST method
      *
      * @access public

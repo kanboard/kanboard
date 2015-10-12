@@ -1,9 +1,14 @@
 Version 1.0.20 (unreleased)
 ---------------------------
 
+New features:
+
+* Add users CSV import
+
 Improvements:
 
 * Allow to change comments sorting
+* Add the possibility to append or not custom filters
 
 Version 1.0.19
 --------------

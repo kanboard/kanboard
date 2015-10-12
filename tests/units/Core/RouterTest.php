@@ -10,11 +10,13 @@ class RouterTest extends Base
     {
         $r = new Router($this->container);
 
-        $this->assertEquals('plop', $r->sanitize('PloP', 'default'));
+        $this->assertEquals('PloP', $r->sanitize('PloP', 'default'));
         $this->assertEquals('default', $r->sanitize('', 'default'));
         $this->assertEquals('default', $r->sanitize('123-AB', 'default'));
         $this->assertEquals('default', $r->sanitize('R&D', 'default'));
-        $this->assertEquals('default', $r->sanitize('Test123', 'default'));
+        $this->assertEquals('Test123', $r->sanitize('Test123', 'default'));
+        $this->assertEquals('Test_123', $r->sanitize('Test_123', 'default'));
+        $this->assertEquals('userImport', $r->sanitize('userImport', 'default'));
     }
 
     public function testPath()

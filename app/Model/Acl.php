@@ -88,6 +88,7 @@ class Acl extends Base
      */
     private $admin_acl = array(
         'user' => array('index', 'create', 'save', 'remove', 'authentication'),
+        'userimport' => '*',
         'config' => '*',
         'link' => '*',
         'currency' => '*',
@@ -117,6 +118,7 @@ class Acl extends Base
      */
     public function matchAcl(array $acl, $controller, $action)
     {
+        $controller = strtolower($controller);
         $action = strtolower($action);
         return isset($acl[$controller]) && $this->hasAction($action, $acl[$controller]);
     }

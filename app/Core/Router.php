@@ -197,7 +197,7 @@ class Router extends Base
      */
     public function sanitize($value, $default_value)
     {
-        return ! ctype_alpha($value) || empty($value) ? $default_value : strtolower($value);
+        return ! preg_match('/^[a-zA-Z_0-9]+$/', $value) ? $default_value : $value;
     }
 
     /**
@@ -218,6 +218,7 @@ class Router extends Base
             list($this->controller, $this->action) = $this->findRoute($this->getPath($uri, $query_string)); // TODO: add plugin for routes
             $plugin = '';
         }
+
         $class = empty($plugin) ? '\Controller\\'.ucfirst($this->controller) : '\Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($this->controller);
 
         $instance = new $class($this->container);

@@ -4,10 +4,10 @@
         <ul>
             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New local user'), 'user', 'create') ?></li>
             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
+            <li><i class="fa fa-upload fa-fw"></i><?= $this->url->link(t('Import'), 'userImport', 'step1') ?></li>
         </ul>
         <?php endif ?>
     </div>
-    <section>
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No user') ?></p>
     <?php else: ?>
@@ -62,5 +62,4 @@
 
         <?= $paginator ?>
     <?php endif ?>
-    </section>
 </section>

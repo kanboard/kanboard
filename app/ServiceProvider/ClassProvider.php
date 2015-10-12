@@ -65,6 +65,7 @@ class ClassProvider implements ServiceProviderInterface
             'TaskValidator',
             'Transition',
             'User',
+            'UserImport',
             'UserSession',
             'Webhook',
         ),

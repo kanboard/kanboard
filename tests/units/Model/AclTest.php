@@ -17,6 +17,7 @@ class AclTest extends Base
             'controller3' => '*',
             'controller5' => '-',
             'controller6' => array(),
+            'controllera' => '*',
         );
 
         $acl = new Acl($this->container);
@@ -30,6 +31,8 @@ class AclTest extends Base
         $this->assertFalse($acl->matchAcl($acl_rules, 'controller4', 'anything'));
         $this->assertFalse($acl->matchAcl($acl_rules, 'controller5', 'anything'));
         $this->assertFalse($acl->matchAcl($acl_rules, 'controller6', 'anything'));
+        $this->assertTrue($acl->matchAcl($acl_rules, 'ControllerA', 'anything'));
+        $this->assertTrue($acl->matchAcl($acl_rules, 'controllera', 'anything'));
     }
 
     public function testPublicActions()

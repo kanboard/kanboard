@@ -87,8 +87,9 @@ class Response
     {
         $this->status($status_code);
         $this->nocache();
+
         header('Content-Type: text/csv');
-        Tool::csv($data);
+        Csv::output($data);
         exit;
     }
 
