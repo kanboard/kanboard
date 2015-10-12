@@ -45,6 +45,9 @@
                     <?= $this->url->link(t('Enable'), 'project', 'enable', array('project_id' => $project['id']), true) ?>
                 <?php endif ?>
             </li>
+            <li <?= $this->app->getRouterController() === 'taskImport' && $this->app->getRouterAction() === 'step1' ? 'class="active"' : '' ?>>
+                <?= $this->url->link(t('Import'), 'taskImport', 'step1', array('project_id' => $project['id'])) ?>
+            </li>
             <?php if ($this->user->isProjectAdministrationAllowed($project['id'])): ?>
                 <li <?= $this->app->getRouterController() === 'project' && $this->app->getRouterAction() === 'remove' ? 'class="active"' : '' ?>>
                     <?= $this->url->link(t('Remove'), 'project', 'remove', array('project_id' => $project['id'])) ?>

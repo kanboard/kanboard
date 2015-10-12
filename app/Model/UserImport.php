@@ -78,7 +78,7 @@ class UserImport extends Base
         $row['username'] = strtolower($row['username']);
 
         foreach (array('is_admin', 'is_project_admin', 'is_ldap_user') as $field) {
-            $row[$field] = csv::getBooleanValue($row[$field]);
+            $row[$field] = Csv::getBooleanValue($row[$field]);
         }
 
         $this->removeEmptyFields($row, array('password', 'email', 'name'));

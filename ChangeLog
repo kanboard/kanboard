@@ -3,7 +3,7 @@ Version 1.0.20 (unreleased)
 
 New features:
 
-* Add users CSV import
+* Add CSV import for users and tasks
 
 Improvements:
 

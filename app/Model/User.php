@@ -167,6 +167,18 @@ class User extends Base
     }
 
     /**
+     * Get user_id by username
+     *
+     * @access public
+     * @param  string  $username  Username
+     * @return array
+     */
+    public function getIdByUsername($username)
+    {
+        return $this->db->table(self::TABLE)->eq('username', $username)->findOneColumn('id');
+    }
+
+    /**
      * Get a specific user by the email address
      *
      * @access public

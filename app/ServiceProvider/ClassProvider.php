@@ -63,6 +63,7 @@ class ClassProvider implements ServiceProviderInterface
             'TaskPosition',
             'TaskStatus',
             'TaskValidator',
+            'TaskImport',
             'Transition',
             'User',
             'UserImport',
