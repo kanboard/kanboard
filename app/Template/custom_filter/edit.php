@@ -19,7 +19,7 @@
     <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
         <?= $this->form->checkbox('is_shared', t('Share with all project members'), 1, $values['is_shared'] == 1) ?>
     <?php else: ?>
-        <?= $this->form->hidden('is_shared', $values) ?>       
+        <?= $this->form->hidden('is_shared', $values) ?>
     <?php endif ?>
     
     <?= $this->form->checkbox('append', t('Append filter (instead of replacement)'), 1, $values['append'] == 1) ?>
