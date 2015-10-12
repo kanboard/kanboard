@@ -21,7 +21,9 @@
     <?php else: ?>
         <?= $this->form->hidden('is_shared', $values) ?>
     <?php endif ?>
-
+    
+    <?= $this->form->checkbox('append', t('Append filter (instead of replacement)'), 1, $values['append'] == 1) ?>
+    
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
         <?= t('or') ?>

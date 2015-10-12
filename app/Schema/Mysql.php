@@ -6,7 +6,12 @@ use PDO;
 use Core\Security;
 use Model\Link;
 
-const VERSION = 90;
+const VERSION = 91;
+
+function version_91($pdo)
+{
+    $pdo->exec("ALTER TABLE custom_filters ADD COLUMN append TINYINT(1) DEFAULT 0");
+}
 
 function version_90($pdo)
 {

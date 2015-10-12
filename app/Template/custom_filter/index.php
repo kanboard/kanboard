@@ -8,6 +8,7 @@
             <th><?= t('Name') ?></th>
             <th><?= t('Filter') ?></th>
             <th><?= t('Shared') ?></th>
+            <th><?= t('Append/Replace') ?></th>
             <th><?= t('Owner') ?></th>
             <th><?= t('Actions') ?></th>
         </tr>
@@ -20,6 +21,13 @@
                 <?= t('Yes') ?>
             <?php else: ?>
                 <?= t('No') ?>
+            <?php endif ?>
+            </td>
+            <td>
+            <?php if ($filter['append'] == 1): ?>
+                <?= t('Append') ?>
+            <?php else: ?>
+                <?= t('Replace') ?>
             <?php endif ?>
             </td>
             <td><?= $this->e($filter['owner_name'] ?: $filter['owner_username']) ?></td>

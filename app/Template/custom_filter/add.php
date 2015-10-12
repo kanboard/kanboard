@@ -15,6 +15,8 @@
     <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
         <?= $this->form->checkbox('is_shared', t('Share with all project members'), 1) ?>
     <?php endif ?>
+    
+    <?= $this->form->checkbox('append', t('Append filter (instead of replacement)'), 1) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
