@@ -15,7 +15,6 @@ Popover.prototype.open = function(link) {
     $.get(link, function(content) {
         $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
         self.router.dispatch();
-        self.app.refresh();
         self.afterOpen();
     });
 };
