@@ -7,6 +7,7 @@ Contributors:
 
 - Alex Butum
 - [Aleix Pol](https://github.com/aleixpol)
+- [Ally Raza](https://github.com/alirz23)
 - [Anjar Febrianto](https://github.com/Lasut)
 - [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
