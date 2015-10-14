@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * ProjectPermission API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class ProjectPermission extends \Core\Base
+class ProjectPermission extends \Kanboard\Core\Base
 {
     public function getMembers($project_id)
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
-use Auth\Ldap;
+use Kanboard\Auth\Ldap;
 
 /**
  * User API controller
@@ -10,7 +10,7 @@ use Auth\Ldap;
  * @package  api
  * @author   Frederic Guillot
  */
-class User extends \Core\Base
+class User extends \Kanboard\Core\Base
 {
     public function getUser($user_id)
     {

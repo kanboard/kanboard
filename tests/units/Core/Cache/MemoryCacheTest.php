@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../../Base.php';
 
-use Core\Cache\MemoryCache;
+use Kanboard\Core\Cache\MemoryCache;
 
 class MemoryCacheTest extends Base
 {

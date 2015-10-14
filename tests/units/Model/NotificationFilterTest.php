@@ -2,10 +2,10 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\User;
-use Model\Project;
-use Model\NotificationFilter;
-use Model\Notification;
+use Kanboard\Model\User;
+use Kanboard\Model\Project;
+use Kanboard\Model\NotificationFilter;
+use Kanboard\Model\Notification;
 
 class NotificationFilterTest extends Base
 {

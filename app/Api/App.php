@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * App API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class App extends \Core\Base
+class App extends \Kanboard\Core\Base
 {
     public function getTimezone()
     {

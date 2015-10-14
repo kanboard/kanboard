@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
-use Model\NotificationType;
+use Kanboard\Model\NotificationType;
 
 /**
  * User controller

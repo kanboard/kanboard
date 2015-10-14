@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Kanboard\Core;
 
 use ArrayAccess;
 

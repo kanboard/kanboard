@@ -1,8 +1,8 @@
 <?php
 
-namespace Formatter;
+namespace Kanboard\Formatter;
 
-use Model\TaskFilter;
+use Kanboard\Model\TaskFilter;
 
 /**
  * Common class to handle calendar events

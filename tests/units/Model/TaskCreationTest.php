@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Config;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\TaskStatus;
-use Model\Project;
-use Model\ProjectPermission;
+use Kanboard\Model\Config;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskStatus;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
 
 class TaskCreationTest extends Base
 {
     public function onCreate($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
 
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);

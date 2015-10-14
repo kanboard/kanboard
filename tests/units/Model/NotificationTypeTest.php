@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\NotificationType;
+use Kanboard\Model\NotificationType;
 
 class NotificationTypeTest extends Base
 {

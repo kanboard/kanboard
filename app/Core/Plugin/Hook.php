@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Plugin;
+namespace Kanboard\Core\Plugin;
 
 /**
  * Plugin Hooks Handler

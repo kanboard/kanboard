@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\ObjectStorage;
+namespace Kanboard\Core\ObjectStorage;
 
 require_once __DIR__.'/../Base.php';
 
@@ -146,7 +146,7 @@ class FileStorageTest extends \Base
     }
 
     /**
-     * @expectedException \Core\ObjectStorage\ObjectStorageException
+     * @expectedException \Kanboard\Core\ObjectStorage\ObjectStorageException
      */
     public function testPutWhenNotAbleToCreateFolder()
     {
@@ -196,7 +196,7 @@ class FileStorageTest extends \Base
     }
 
     /**
-     * @expectedException \Core\ObjectStorage\ObjectStorageException
+     * @expectedException \Kanboard\Core\ObjectStorage\ObjectStorageException
      */
     public function testGetWithFileNotFound()
     {

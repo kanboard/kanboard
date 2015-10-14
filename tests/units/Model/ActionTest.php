@@ -2,18 +2,18 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Action;
-use Model\Project;
-use Model\Board;
-use Model\Task;
-use Model\TaskPosition;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Category;
-use Model\User;
-use Model\ProjectPermission;
-use Integration\GithubWebhook;
-use Integration\BitbucketWebhook;
+use Kanboard\Model\Action;
+use Kanboard\Model\Project;
+use Kanboard\Model\Board;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskPosition;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Category;
+use Kanboard\Model\User;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Integration\GithubWebhook;
+use Kanboard\Integration\BitbucketWebhook;
 
 class ActionTest extends Base
 {

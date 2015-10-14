@@ -2,17 +2,18 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Action\TaskMoveAnotherProject;
 
-class TaskMoveAnotherProject extends Base
+class TaskMoveAnotherProjectTest extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskMoveAnotherProject($this->container, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskMoveAnotherProject($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -27,7 +28,7 @@ class TaskMoveAnotherProject extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskMoveAnotherProject($this->container, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskMoveAnotherProject($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -41,7 +42,7 @@ class TaskMoveAnotherProject extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskMoveAnotherProject($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskMoveAnotherProject($this->container, 1, Task::EVENT_MOVE_COLUMN);
 
         // We create a task in the first column
         $tc = new TaskCreation($this->container);

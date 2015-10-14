@@ -1,6 +1,6 @@
 <?php
 
-namespace Integration;
+namespace Kanboard\Integration;
 
 /**
  * Slack Webhook
@@ -8,7 +8,7 @@ namespace Integration;
  * @package  integration
  * @author   Frederic Guillot
  */
-class SlackWebhook extends \Core\Base
+class SlackWebhook extends \Kanboard\Core\Base
 {
     /**
      * Return true if Slack is enabled for this project or globally

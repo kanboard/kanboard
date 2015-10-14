@@ -1,15 +1,15 @@
 <?php
 
-namespace Subscriber;
+namespace Kanboard\Subscriber;
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\Comment;
-use Model\Subtask;
-use Model\File;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\Comment;
+use Kanboard\Model\Subtask;
+use Kanboard\Model\File;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class NotificationSubscriber extends \Core\Base implements EventSubscriberInterface
+class NotificationSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
@@ -40,19 +40,19 @@ class NotificationSubscriber extends \Core\Base implements EventSubscriberInterf
         $values = array();
 
         switch (get_class($event)) {
-            case 'Event\TaskEvent':
+            case 'Kanboard\Event\TaskEvent':
                 $values['task'] = $this->taskFinder->getDetails($event['task_id']);
                 $values['changes'] = isset($event['changes']) ? $event['changes'] : array();
                 break;
-            case 'Event\SubtaskEvent':
+            case 'Kanboard\Event\SubtaskEvent':
                 $values['subtask'] = $this->subtask->getById($event['id'], true);
                 $values['task'] = $this->taskFinder->getDetails($values['subtask']['task_id']);
                 break;
-            case 'Event\FileEvent':
+            case 'Kanboard\Event\FileEvent':
                 $values['file'] = $event->getAll();
                 $values['task'] = $this->taskFinder->getDetails($values['file']['task_id']);
                 break;
-            case 'Event\CommentEvent':
+            case 'Kanboard\Event\CommentEvent':
                 $values['comment'] = $this->comment->getById($event['id']);
                 $values['task'] = $this->taskFinder->getDetails($values['comment']['task_id']);
                 break;

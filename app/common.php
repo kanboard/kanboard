@@ -24,10 +24,10 @@ require __DIR__.'/constants.php';
 require __DIR__.'/check_setup.php';
 
 $container = new Pimple\Container;
-$container->register(new ServiceProvider\LoggingProvider);
-$container->register(new ServiceProvider\DatabaseProvider);
-$container->register(new ServiceProvider\ClassProvider);
-$container->register(new ServiceProvider\EventDispatcherProvider);
+$container->register(new Kanboard\ServiceProvider\LoggingProvider);
+$container->register(new Kanboard\ServiceProvider\DatabaseProvider);
+$container->register(new Kanboard\ServiceProvider\ClassProvider);
+$container->register(new Kanboard\ServiceProvider\EventDispatcherProvider);
 
 if (ENABLE_URL_REWRITE) {
     require __DIR__.'/routes.php';

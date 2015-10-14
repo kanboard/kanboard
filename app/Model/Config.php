@@ -1,10 +1,10 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Core\Translator;
-use Core\Security;
-use Core\Session;
+use Kanboard\Core\Translator;
+use Kanboard\Core\Security;
+use Kanboard\Core\Session;
 
 /**
  * Config model

@@ -1,8 +1,8 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Core\Request;
+use Kanboard\Core\Request;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Gregwar\Captcha\CaptchaBuilder;
@@ -25,7 +25,7 @@ class Authentication extends Base
     public function backend($name)
     {
         if (! isset($this->container[$name])) {
-            $class = '\Auth\\'.ucfirst($name);
+            $class = '\Kanboard\Auth\\'.ucfirst($name);
             $this->container[$name] = new $class($this->container);
         }
 

@@ -2,14 +2,14 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\TaskPermission;
-use Model\Project;
-use Model\Category;
-use Model\User;
-use Model\UserSession;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskPermission;
+use Kanboard\Model\Project;
+use Kanboard\Model\Category;
+use Kanboard\Model\User;
+use Kanboard\Model\UserSession;
 
 class TaskPermissionTest extends Base
 {

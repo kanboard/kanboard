@@ -1,9 +1,9 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Model\GithubWebhook;
-use Model\Task;
+use Kanboard\Model\GithubWebhook;
+use Kanboard\Model\Task;
 
 /**
  * Add a log of the triggering event to the task description.
@@ -60,7 +60,7 @@ class TaskLogMoveAnotherColumn extends Base
         if (! $this->userSession->isLogged()) {
             return false;
         }
-        
+
         $column = $this->board->getColumn($data['column_id']);
 
         return (bool) $this->comment->create(array(

@@ -2,18 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\TaskLinkEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\TaskLink;
-use Model\Project;
+use Kanboard\Event\TaskLinkEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskLink;
+use Kanboard\Model\Project;
+use Kanboard\Action\TaskAssignColorLink;
 
 class TaskAssignColorLinkTest extends Base
 {
     public function testExecute()
     {
-        $action = new Action\TaskAssignColorLink($this->container, 1, TaskLink::EVENT_CREATE_UPDATE);
+        $action = new TaskAssignColorLink($this->container, 1, TaskLink::EVENT_CREATE_UPDATE);
         $action->setParam('link_id', 2);
         $action->setParam('color_id', 'green');
 

@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../../Base.php';
 
-use Core\Plugin\Hook;
+use Kanboard\Core\Plugin\Hook;
 
 class HookTest extends Base
 {

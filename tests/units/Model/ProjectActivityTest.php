@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\TaskFinder;
-use Model\TaskCreation;
-use Model\ProjectActivity;
-use Model\Project;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\ProjectActivity;
+use Kanboard\Model\Project;
 
 class ProjectActivityTest extends Base
 {

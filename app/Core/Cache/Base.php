@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Cache;
+namespace Kanboard\Core\Cache;
 
 /**
  * Base class for cache drivers

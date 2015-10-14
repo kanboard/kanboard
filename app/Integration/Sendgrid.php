@@ -1,8 +1,8 @@
 <?php
 
-namespace Integration;
+namespace Kanboard\Integration;
 
-use Core\Tool;
+use Kanboard\Core\Tool;
 
 /**
  * Sendgrid Integration
@@ -10,7 +10,7 @@ use Core\Tool;
  * @package  integration
  * @author   Frederic Guillot
  */
-class Sendgrid extends \Core\Base
+class Sendgrid extends \Kanboard\Core\Base
 {
     /**
      * Send a HTML email

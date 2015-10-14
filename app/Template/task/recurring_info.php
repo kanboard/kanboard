@@ -1,7 +1,7 @@
 <ul>
-    <?php if ($task['recurrence_status'] == \Model\Task::RECURRING_STATUS_PENDING): ?>
+    <?php if ($task['recurrence_status'] == \Kanboard\Model\Task::RECURRING_STATUS_PENDING): ?>
         <li><?= t('Recurrent task is scheduled to be generated') ?></li>
-    <?php elseif ($task['recurrence_status'] == \Model\Task::RECURRING_STATUS_PROCESSED): ?>
+    <?php elseif ($task['recurrence_status'] == \Kanboard\Model\Task::RECURRING_STATUS_PROCESSED): ?>
         <li><?= t('Recurrent task has been generated:') ?>
             <ul>
                 <li>

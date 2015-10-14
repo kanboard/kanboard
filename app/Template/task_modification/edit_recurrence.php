@@ -2,7 +2,7 @@
     <h2><?= t('Edit recurrence') ?></h2>
 </div>
 
-<?php if ($task['recurrence_status'] != \Model\Task::RECURRING_STATUS_NONE): ?>
+<?php if ($task['recurrence_status'] != \Kanboard\Model\Task::RECURRING_STATUS_NONE): ?>
 <div class="listing">
     <?= $this->render('task/recurring_info', array(
         'task' => $task,
@@ -13,7 +13,7 @@
 </div>
 <?php endif ?>
 
-<?php if ($task['recurrence_status'] != \Model\Task::RECURRING_STATUS_PROCESSED): ?>
+<?php if ($task['recurrence_status'] != \Kanboard\Model\Task::RECURRING_STATUS_PROCESSED): ?>
 
     <form method="post" action="<?= $this->url->href('taskmodification', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 

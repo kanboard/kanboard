@@ -2,8 +2,8 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Core\Session;
-use Model\UserSession;
+use Kanboard\Core\Session;
+use Kanboard\Model\UserSession;
 
 class UserSessionTest extends Base
 {

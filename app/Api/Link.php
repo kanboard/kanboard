@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * Link API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Link extends \Core\Base
+class Link extends \Kanboard\Core\Base
 {
     /**
      * Get a link by id

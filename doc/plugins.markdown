@@ -45,9 +45,9 @@ Example of `Plugin.php` file (`plugins/Foobar/Plugin.php`):
 ```php
 <?php
 
-namespace Plugin\Foobar;
+namespace Kanboard\Plugin\Foobar;
 
-use Core\Plugin\Base;
+use Kanboard\Core\Plugin\Base;
 
 class Plugin extends Plugin\Base
 {
@@ -58,14 +58,14 @@ class Plugin extends Plugin\Base
 }
 ```
 
-This file should contains a class `Plugin` defined under the namespace `Plugin\Yourplugin` and extends `Core\Plugin\Base`.
+This file should contains a class `Plugin` defined under the namespace `Kanboard\Plugin\Yourplugin` and extends `Kanboard\Core\Plugin\Base`.
 
 The only required method is `initialize()`. This method is called for each request when the plugin is loaded.
 
 Plugin methods
 --------------
 
-Available methods from `Core\Plugin\Base`:
+Available methods from `Kanboard\Core\Plugin\Base`:
 
 - `initialize()`: Executed when the plugin is loaded
 - `getClasses()`: Return all classes that should be stored in the dependency injection container
@@ -76,7 +76,7 @@ Available methods from `Core\Plugin\Base`:
 - `getPluginDescription()`: Should return plugin description
 - `getPluginHomepage()`: Should return plugin Homepage (link)
 
-Your plugin registration class also inherit from `Core\Base`, that means you can access to all classes and methods of Kanboard easily.
+Your plugin registration class also inherit from `Kanboard\Core\Base`, that means you can access to all classes and methods of Kanboard easily.
 
 This example will fetch the user #123:
 
@@ -91,7 +91,7 @@ Hooks can extend, replace, filter data or change the default behavior. Each hook
 
 ### Listen on hook events
 
-In your `initialize()` method you need to call the method `on()` of the class `Core\Plugin\Hook`:
+In your `initialize()` method you need to call the method `on()` of the class `Kanboard\Core\Plugin\Hook`:
 
 ```php
 $this->hook->on('hook_name', $callable);
@@ -169,9 +169,9 @@ Example to add a new stylesheet:
 ```php
 <?php
 
-namespace Plugin\Css;
+namespace Kanboard\Plugin\Css;
 
-use Core\Plugin\Base;
+use Kanboard\Core\Plugin\Base;
 
 class Plugin extends Base
 {
@@ -264,16 +264,16 @@ To define a new automatic action with a plugin, you just need to call the method
 ```php
 <?php
 
-namespace Plugin\AutomaticAction;
+namespace Kanboard\Plugin\AutomaticAction;
 
-use Core\Plugin\Base;
+use Kanboard\Core\Plugin\Base;
 
 class Plugin extends Base
 {
     public function initialize()
     {
         $this->action->extendActions(
-            '\Plugin\AutomaticAction\Action\SendSlackMessage', // Use absolute namespace
+            '\Kanboard\Plugin\AutomaticAction\Action\SendSlackMessage', // Use absolute namespace
             t('Send a message to Slack when the task color change')
         );
     }
@@ -337,9 +337,11 @@ If you would like to replace the default HTTP Content Security Policy header, yo
 ```php
 <?php
 
-namespace Plugin\Csp;
+namespace Kanboard\Plugin\Csp;
 
-class Plugin extends \Core\Plugin\Base
+use Kanboard\Core\Plugin\Base;
+
+class Plugin extends Base
 {
     public function initialize()
     {
@@ -398,7 +400,7 @@ Each file contains all migrations, here an example for Sqlite:
 ```php
 <?php
 
-namespace Plugin\Something\Schema;
+namespace Kanboard\Plugin\Something\Schema;
 
 const VERSION = 1;
 

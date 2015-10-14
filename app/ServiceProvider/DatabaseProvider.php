@@ -1,6 +1,6 @@
 <?php
 
-namespace ServiceProvider;
+namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

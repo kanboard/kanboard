@@ -1,8 +1,8 @@
 <?php
 
-namespace Formatter;
+namespace Kanboard\Formatter;
 
-use Model\Project;
+use Kanboard\Model\Project;
 
 /**
  * Gantt chart formatter for projects

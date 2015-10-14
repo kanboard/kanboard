@@ -2,17 +2,17 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\TaskFinder;
-use Model\TaskCreation;
-use Model\Subtask;
-use Model\Comment;
-use Model\User;
-use Model\File;
-use Model\Project;
-use Model\Task;
-use Model\ProjectPermission;
-use Model\EmailNotification;
-use Subscriber\NotificationSubscriber;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\Subtask;
+use Kanboard\Model\Comment;
+use Kanboard\Model\User;
+use Kanboard\Model\File;
+use Kanboard\Model\Project;
+use Kanboard\Model\Task;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\EmailNotification;
+use Kanboard\Subscriber\NotificationSubscriber;
 
 class EmailNotificationTest extends Base
 {
@@ -42,7 +42,7 @@ class EmailNotificationTest extends Base
         $this->assertNotEmpty($comment);
         $this->assertNotEmpty($file);
 
-        foreach (Subscriber\NotificationSubscriber::getSubscribedEvents() as $event => $values) {
+        foreach (NotificationSubscriber::getSubscribedEvents() as $event => $values) {
             $this->assertNotEmpty($en->getMailContent($event, array(
                 'task' => $task,
                 'comment' => $comment,
@@ -74,7 +74,7 @@ class EmailNotificationTest extends Base
         $this->assertTrue($u->update(array('id' => 1, 'email' => 'test@localhost')));
 
         $this->container['emailClient'] = $this
-            ->getMockBuilder('\Core\EmailClient')
+            ->getMockBuilder('\Kanboard\Core\EmailClient')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('send'))
             ->getMock();
@@ -104,7 +104,7 @@ class EmailNotificationTest extends Base
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
         $this->container['emailClient'] = $this
-            ->getMockBuilder('\Core\EmailClient')
+            ->getMockBuilder('\Kanboard\Core\EmailClient')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('send'))
             ->getMock();

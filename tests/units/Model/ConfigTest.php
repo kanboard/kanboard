@@ -2,8 +2,8 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Config;
-use Core\Session;
+use Kanboard\Model\Config;
+use Kanboard\Core\Session;
 
 class ConfigTest extends Base
 {

@@ -2,16 +2,16 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskDuplication;
-use Model\TaskFinder;
-use Model\TaskStatus;
-use Model\Project;
-use Model\ProjectPermission;
-use Model\Category;
-use Model\User;
-use Model\Swimlane;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskDuplication;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskStatus;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\Category;
+use Kanboard\Model\User;
+use Kanboard\Model\Swimlane;
 
 class TaskDuplicationTest extends Base
 {
@@ -414,7 +414,7 @@ class TaskDuplicationTest extends Base
 
     public function onMoveProject($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
 
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);

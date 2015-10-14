@@ -2,8 +2,8 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\User;
-use Model\Authentication;
+use Kanboard\Model\User;
+use Kanboard\Model\Authentication;
 
 class AuthenticationTest extends Base
 {

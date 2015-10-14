@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * Board API controller

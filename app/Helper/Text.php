@@ -1,8 +1,8 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
-use Core\Markdown;
+use Kanboard\Core\Markdown;
 
 /**
  * Text helpers
@@ -10,7 +10,7 @@ use Core\Markdown;
  * @package helper
  * @author  Frederic Guillot
  */
-class Text extends \Core\Base
+class Text extends \Kanboard\Core\Base
 {
     /**
      * Markdown transformation

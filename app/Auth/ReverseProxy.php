@@ -1,8 +1,8 @@
 <?php
 
-namespace Auth;
+namespace Kanboard\Auth;
 
-use Event\AuthEvent;
+use Kanboard\Event\AuthEvent;
 
 /**
  * ReverseProxy backend

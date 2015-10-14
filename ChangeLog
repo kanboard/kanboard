@@ -1,6 +1,10 @@
 Version 1.0.20 (unreleased)
 ---------------------------
 
+Breaking changes:
+
+- Add namespace Kanboard
+
 New features:
 
 * Add CSV import for users and tasks

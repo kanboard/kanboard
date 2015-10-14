@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Kanboard\Core;
 
 /**
  * Router class
@@ -219,7 +219,8 @@ class Router extends Base
             $plugin = '';
         }
 
-        $class = empty($plugin) ? '\Controller\\'.ucfirst($this->controller) : '\Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($this->controller);
+        $class = '\Kanboard\\';
+        $class .= empty($plugin) ? 'Controller\\'.ucfirst($this->controller) : 'Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($this->controller);
 
         $instance = new $class($this->container);
         $instance->beforeAction($this->controller, $this->action);

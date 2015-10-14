@@ -1,8 +1,8 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Event\TaskEvent;
+use Kanboard\Event\TaskEvent;
 
 /**
  * Task Status

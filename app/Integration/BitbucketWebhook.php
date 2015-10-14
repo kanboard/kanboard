@@ -1,9 +1,9 @@
 <?php
 
-namespace Integration;
+namespace Kanboard\Integration;
 
-use Event\GenericEvent;
-use Model\Task;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
 
 /**
  * Bitbucket Webhook
@@ -11,7 +11,7 @@ use Model\Task;
  * @package  integration
  * @author   Frederic Guillot
  */
-class BitbucketWebhook extends \Core\Base
+class BitbucketWebhook extends \Kanboard\Core\Base
 {
     /**
      * Events

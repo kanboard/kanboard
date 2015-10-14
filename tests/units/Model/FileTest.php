@@ -2,10 +2,10 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\File;
-use Model\TaskCreation;
-use Model\Project;
+use Kanboard\Model\Task;
+use Kanboard\Model\File;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\Project;
 
 class FileTest extends Base
 {
@@ -14,7 +14,7 @@ class FileTest extends Base
         parent::setUp();
 
         $this->container['objectStorage'] = $this
-            ->getMockBuilder('\Core\ObjectStorage\FileStorage')
+            ->getMockBuilder('\Kanboard\Core\ObjectStorage\FileStorage')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('put', 'moveFile', 'remove'))
             ->getMock();
@@ -104,7 +104,7 @@ class FileTest extends Base
         $data = base64_encode('image data');
 
         $f = $this
-            ->getMockBuilder('\Model\File')
+            ->getMockBuilder('\Kanboard\Model\File')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('generateThumbnailFromData'))
             ->getMock();

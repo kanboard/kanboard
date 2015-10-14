@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Core\Template;
+use Kanboard\Core\Template;
 
 class TemplateTest extends Base
 {

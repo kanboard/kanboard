@@ -1,11 +1,11 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Core\Session;
-use Core\Security;
+use Kanboard\Core\Session;
+use Kanboard\Core\Security;
 
 /**
  * User model

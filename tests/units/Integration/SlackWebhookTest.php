@@ -2,9 +2,9 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Integration\SlackWebhook;
-use Model\Project;
-use Model\Task;
+use Kanboard\Integration\SlackWebhook;
+use Kanboard\Model\Project;
+use Kanboard\Model\Task;
 
 class SlackWebhookTest extends Base
 {
@@ -13,7 +13,7 @@ class SlackWebhookTest extends Base
         $slack = new SlackWebhook($this->container);
 
         $this->container['config'] = $this
-            ->getMockBuilder('\Model\Config')
+            ->getMockBuilder('\Kanboard\Model\Config')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'get',
@@ -34,7 +34,7 @@ class SlackWebhookTest extends Base
         $slack = new SlackWebhook($this->container);
 
         $this->container['config'] = $this
-            ->getMockBuilder('\Model\Config')
+            ->getMockBuilder('\Kanboard\Model\Config')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'get',
@@ -42,7 +42,7 @@ class SlackWebhookTest extends Base
             ->getMock();
 
         $this->container['projectIntegration'] = $this
-            ->getMockBuilder('\Model\ProjectIntegration')
+            ->getMockBuilder('\Kanboard\Model\ProjectIntegration')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'hasValue',
@@ -73,7 +73,7 @@ class SlackWebhookTest extends Base
         $slack = new SlackWebhook($this->container);
 
         $this->container['config'] = $this
-            ->getMockBuilder('\Model\Config')
+            ->getMockBuilder('\Kanboard\Model\Config')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'get',
@@ -81,7 +81,7 @@ class SlackWebhookTest extends Base
             ->getMock();
 
         $this->container['projectIntegration'] = $this
-            ->getMockBuilder('\Model\ProjectIntegration')
+            ->getMockBuilder('\Kanboard\Model\ProjectIntegration')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'hasValue',
@@ -112,7 +112,7 @@ class SlackWebhookTest extends Base
         $slack = new SlackWebhook($this->container);
 
         $this->container['config'] = $this
-            ->getMockBuilder('\Model\Config')
+            ->getMockBuilder('\Kanboard\Model\Config')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'get',
@@ -133,7 +133,7 @@ class SlackWebhookTest extends Base
         $slack = new SlackWebhook($this->container);
 
         $this->container['config'] = $this
-            ->getMockBuilder('\Model\Config')
+            ->getMockBuilder('\Kanboard\Model\Config')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'get',
@@ -141,7 +141,7 @@ class SlackWebhookTest extends Base
             ->getMock();
 
         $this->container['projectIntegration'] = $this
-            ->getMockBuilder('\Model\ProjectIntegration')
+            ->getMockBuilder('\Kanboard\Model\ProjectIntegration')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'getParameters',
@@ -168,7 +168,7 @@ class SlackWebhookTest extends Base
         $slack = new SlackWebhook($this->container);
 
         $this->container['config'] = $this
-            ->getMockBuilder('\Model\Config')
+            ->getMockBuilder('\Kanboard\Model\Config')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'get',
@@ -195,7 +195,7 @@ class SlackWebhookTest extends Base
         $slack = new SlackWebhook($this->container);
 
         $this->container['config'] = $this
-            ->getMockBuilder('\Model\Config')
+            ->getMockBuilder('\Kanboard\Model\Config')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'get',
@@ -203,7 +203,7 @@ class SlackWebhookTest extends Base
             ->getMock();
 
         $this->container['projectIntegration'] = $this
-            ->getMockBuilder('\Model\ProjectIntegration')
+            ->getMockBuilder('\Kanboard\Model\ProjectIntegration')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'getParameters',
@@ -228,7 +228,7 @@ class SlackWebhookTest extends Base
     public function testSendPayloadWithChannel()
     {
         $this->container['httpClient'] = $this
-            ->getMockBuilder('\Core\HttpClient')
+            ->getMockBuilder('\Kanboard\Core\HttpClient')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'postJson',
@@ -236,7 +236,7 @@ class SlackWebhookTest extends Base
             ->getMock();
 
         $slack = $this
-            ->getMockBuilder('\Integration\SlackWebhook')
+            ->getMockBuilder('\Kanboard\Integration\SlackWebhook')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'getChannel',
@@ -274,7 +274,7 @@ class SlackWebhookTest extends Base
     public function testSendPayloadWithoutChannel()
     {
         $this->container['httpClient'] = $this
-            ->getMockBuilder('\Core\HttpClient')
+            ->getMockBuilder('\Kanboard\Core\HttpClient')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'postJson',
@@ -282,7 +282,7 @@ class SlackWebhookTest extends Base
             ->getMock();
 
         $slack = $this
-            ->getMockBuilder('\Integration\SlackWebhook')
+            ->getMockBuilder('\Kanboard\Integration\SlackWebhook')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'getChannel',
@@ -328,7 +328,7 @@ class SlackWebhookTest extends Base
         );
 
         $slack = $this
-            ->getMockBuilder('\Integration\SlackWebhook')
+            ->getMockBuilder('\Kanboard\Integration\SlackWebhook')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'sendPayload',
@@ -357,7 +357,7 @@ class SlackWebhookTest extends Base
         $this->assertTrue($this->container['config']->save(array('integration_slack_webhook' => 1)));
 
         $slack = $this
-            ->getMockBuilder('\Integration\SlackWebhook')
+            ->getMockBuilder('\Kanboard\Integration\SlackWebhook')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array(
                 'sendMessage',

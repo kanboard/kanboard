@@ -2,20 +2,20 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\TaskCreation;
-use Model\Subtask;
-use Model\Project;
-use Model\Category;
-use Model\User;
-use Core\Session;
-use Model\UserSession;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\Subtask;
+use Kanboard\Model\Project;
+use Kanboard\Model\Category;
+use Kanboard\Model\User;
+use Kanboard\Core\Session;
+use Kanboard\Model\UserSession;
 
 class SubTaskTest extends Base
 {
     public function onSubtaskCreated($event)
     {
-        $this->assertInstanceOf('Event\SubtaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\SubtaskEvent', $event);
         $data = $event->getAll();
 
         $this->assertArrayHasKey('id', $data);
@@ -33,7 +33,7 @@ class SubTaskTest extends Base
 
     public function onSubtaskUpdated($event)
     {
-        $this->assertInstanceOf('Event\SubtaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\SubtaskEvent', $event);
         $data = $event->getAll();
 
         $this->assertArrayHasKey('id', $data);
@@ -55,7 +55,7 @@ class SubTaskTest extends Base
 
     public function onSubtaskDeleted($event)
     {
-        $this->assertInstanceOf('Event\SubtaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\SubtaskEvent', $event);
         $data = $event->getAll();
 
         $this->assertArrayHasKey('id', $data);

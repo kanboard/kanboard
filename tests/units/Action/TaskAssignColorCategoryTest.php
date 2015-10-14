@@ -2,18 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
-use Model\Category;
-use Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Model\Category;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Action\TaskAssignColorCategory;
 
-class TaskAssignColorCategory extends Base
+class TaskAssignColorCategoryTest extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignColorCategory($this->container, 3, Task::EVENT_CREATE_UPDATE);
+        $action = new TaskAssignColorCategory($this->container, 3, Task::EVENT_CREATE_UPDATE);
 
         $event = array(
             'project_id' => 2,
@@ -27,7 +28,7 @@ class TaskAssignColorCategory extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignColorCategory($this->container, 1, Task::EVENT_CREATE_UPDATE);
+        $action = new TaskAssignColorCategory($this->container, 1, Task::EVENT_CREATE_UPDATE);
         $action->setParam('category_id', 1);
         $action->setParam('color_id', 'blue');
 

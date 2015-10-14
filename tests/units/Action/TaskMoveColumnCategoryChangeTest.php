@@ -2,19 +2,20 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
-use Model\Category;
-use Integration\GithubWebhook;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Model\Category;
+use Kanboard\Integration\GithubWebhook;
+use Kanboard\Action\TaskMoveColumnCategoryChange;
 
 class TaskMoveColumnCategoryChangeTest extends Base
 {
     public function testExecute()
     {
-        $action = new Action\TaskMoveColumnCategoryChange($this->container, 1, Task::EVENT_UPDATE);
+        $action = new TaskMoveColumnCategoryChange($this->container, 1, Task::EVENT_UPDATE);
         $action->setParam('dest_column_id', 3);
         $action->setParam('category_id', 1);
 

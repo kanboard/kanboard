@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * Action API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Action extends \Core\Base
+class Action extends \Kanboard\Core\Base
 {
     public function getAvailableActions()
     {

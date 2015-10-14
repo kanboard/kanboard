@@ -1,9 +1,9 @@
 <?php
 
-namespace Formatter;
+namespace Kanboard\Formatter;
 
-use Model\Task;
-use Model\TaskFilter;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskFilter;
 
 /**
  * Autocomplete formatter for task filter

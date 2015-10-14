@@ -1,6 +1,6 @@
 <?php
 
-namespace ServiceProvider;
+namespace Kanboard\ServiceProvider;
 
 use Psr\Log\LogLevel;
 use Pimple\Container;

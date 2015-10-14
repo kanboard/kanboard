@@ -1,10 +1,10 @@
 <?php
 
-namespace Auth;
+namespace Kanboard\Auth;
 
-use Core\Request;
-use Event\AuthEvent;
-use Core\Security;
+use Kanboard\Core\Request;
+use Kanboard\Event\AuthEvent;
+use Kanboard\Core\Security;
 
 /**
  * RememberMe model

@@ -1,8 +1,8 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Event\GenericEvent;
+use Kanboard\Event\GenericEvent;
 use Pimple\Container;
 
 /**
@@ -11,7 +11,7 @@ use Pimple\Container;
  * @package action
  * @author  Frederic Guillot
  */
-abstract class Base extends \Core\Base
+abstract class Base extends \Kanboard\Core\Base
 {
     /**
      * Flag for called listener

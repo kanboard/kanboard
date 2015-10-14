@@ -2,9 +2,9 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Project;
-use Model\ProjectPermission;
-use Model\User;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\User;
 
 class ProjectPermissionTest extends Base
 {

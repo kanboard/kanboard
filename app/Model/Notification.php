@@ -1,8 +1,8 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Core\Translator;
+use Kanboard\Core\Translator;
 
 /**
  * Notification model

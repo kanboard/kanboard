@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
 use DateTime;
 
@@ -10,7 +10,7 @@ use DateTime;
  * @package helper
  * @author  Frederic Guillot
  */
-class Dt extends \Core\Base
+class Dt extends \Kanboard\Core\Base
 {
     /**
      * Get duration in seconds into human format

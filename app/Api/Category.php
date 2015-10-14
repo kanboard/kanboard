@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * Category API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Category extends \Core\Base
+class Category extends \Kanboard\Core\Base
 {
     public function getCategory($category_id)
     {

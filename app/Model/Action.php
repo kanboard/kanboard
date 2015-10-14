@@ -1,10 +1,10 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Integration\GitlabWebhook;
-use Integration\GithubWebhook;
-use Integration\BitbucketWebhook;
+use Kanboard\Integration\GitlabWebhook;
+use Kanboard\Integration\GithubWebhook;
+use Kanboard\Integration\BitbucketWebhook;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
@@ -320,7 +320,7 @@ class Action extends Base
      */
     public function load($name, $project_id, $event)
     {
-        $className = $name{0} !== '\\' ? '\Action\\'.$name : $name;
+        $className = $name{0} !== '\\' ? '\Kanboard\Action\\'.$name : $name;
         return new $className($this->container, $project_id, $event);
     }
 

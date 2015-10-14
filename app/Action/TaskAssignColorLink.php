@@ -1,8 +1,8 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Model\TaskLink;
+use Kanboard\Model\TaskLink;
 
 /**
  * Assign a color to a specific task link

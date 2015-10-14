@@ -1,6 +1,6 @@
 <?php
 
-namespace Integration;
+namespace Kanboard\Integration;
 
 use Exception;
 use Fabiang\Xmpp\Options;
@@ -14,7 +14,7 @@ use Fabiang\Xmpp\Protocol\Presence;
  * @package  integration
  * @author   Frederic Guillot
  */
-class Jabber extends \Core\Base
+class Jabber extends \Kanboard\Core\Base
 {
     /**
      * Return true if Jabber is enabled for this project or globally

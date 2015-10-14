@@ -2,10 +2,10 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Formatter\TaskFilterGanttFormatter;
-use Model\Project;
-use Model\TaskCreation;
-use Model\DateParser;
+use Kanboard\Formatter\TaskFilterGanttFormatter;
+use Kanboard\Model\Project;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\DateParser;
 
 class TaskFilterGanttFormatterTest extends Base
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
 /**
  * Project Analytic controller

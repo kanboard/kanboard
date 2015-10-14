@@ -1,12 +1,12 @@
 <?php
 
-namespace Subscriber;
+namespace Kanboard\Subscriber;
 
-use Event\TaskEvent;
-use Model\Task;
+use Kanboard\Event\TaskEvent;
+use Kanboard\Model\Task;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class TransitionSubscriber extends \Core\Base implements EventSubscriberInterface
+class TransitionSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

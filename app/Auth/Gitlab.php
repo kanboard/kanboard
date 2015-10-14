@@ -1,8 +1,8 @@
 <?php
 
-namespace Auth;
+namespace Kanboard\Auth;
 
-use Event\AuthEvent;
+use Kanboard\Event\AuthEvent;
 
 /**
  * Gitlab backend
@@ -22,7 +22,7 @@ class Gitlab extends Base
      * OAuth2 instance
      *
      * @access private
-     * @var \Core\OAuth2
+     * @var \Kanboard\Core\OAuth2
      */
     private $service;
 
@@ -85,7 +85,7 @@ class Gitlab extends Base
      * Get OAuth2 configured service
      *
      * @access public
-     * @return \Core\OAuth2
+     * @return KanboardCore\OAuth2
      */
     public function getService()
     {

@@ -2,8 +2,8 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Helper\Asset;
-use Model\Config;
+use Kanboard\Helper\Asset;
+use Kanboard\Model\Config;
 
 class AssetHelperTest extends Base
 {

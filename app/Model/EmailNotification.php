@@ -1,8 +1,8 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Core\NotificationInterface;
+use Kanboard\Core\NotificationInterface;
 
 /**
  * Email Notification model

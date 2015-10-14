@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\DateParser;
+use Kanboard\Model\DateParser;
 
 class DateParserTest extends Base
 {

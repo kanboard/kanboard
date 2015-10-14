@@ -1,8 +1,8 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Core\Csv;
+use Kanboard\Core\Csv;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 

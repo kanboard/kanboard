@@ -1,9 +1,9 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Integration\GithubWebhook;
-use Integration\BitbucketWebhook;
+use Kanboard\Integration\GithubWebhook;
+use Kanboard\Integration\BitbucketWebhook;
 
 /**
  * Open automatically a task

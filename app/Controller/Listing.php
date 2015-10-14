@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
-use Model\Task as TaskModel;
+use Kanboard\Model\Task as TaskModel;
 
 /**
  * List view controller

@@ -1,9 +1,9 @@
 <?php
 
-namespace Auth;
+namespace Kanboard\Auth;
 
-use Model\User;
-use Event\AuthEvent;
+use Kanboard\Model\User;
+use Kanboard\Event\AuthEvent;
 
 /**
  * Database authentication

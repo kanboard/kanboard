@@ -1,17 +1,17 @@
 <?php
 
-namespace Subscriber;
+namespace Kanboard\Subscriber;
 
-use Event\CommentEvent;
-use Event\GenericEvent;
-use Event\TaskEvent;
-use Model\Comment;
-use Model\Task;
-use Model\File;
-use Model\Subtask;
+use Kanboard\Event\CommentEvent;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Event\TaskEvent;
+use Kanboard\Model\Comment;
+use Kanboard\Model\Task;
+use Kanboard\Model\File;
+use Kanboard\Model\Subtask;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class WebhookSubscriber extends \Core\Base implements EventSubscriberInterface
+class WebhookSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

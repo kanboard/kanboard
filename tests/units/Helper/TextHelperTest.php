@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Helper\Text;
+use Kanboard\Helper\Text;
 
 class TextHelperTest extends Base
 {

@@ -2,9 +2,9 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Project;
-use Model\User;
-use Model\CustomFilter;
+use Kanboard\Model\Project;
+use Kanboard\Model\User;
+use Kanboard\Model\CustomFilter;
 
 class CustomFilterTest extends Base
 {

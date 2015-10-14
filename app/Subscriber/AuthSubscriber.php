@@ -1,12 +1,12 @@
 <?php
 
-namespace Subscriber;
+namespace Kanboard\Subscriber;
 
-use Core\Request;
-use Event\AuthEvent;
+use Kanboard\Core\Request;
+use Kanboard\Event\AuthEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AuthSubscriber extends \Core\Base implements EventSubscriberInterface
+class AuthSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

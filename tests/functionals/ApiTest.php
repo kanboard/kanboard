@@ -24,7 +24,7 @@ class Api extends PHPUnit_Framework_TestCase
             $pdo = null;
         }
 
-        $service = new ServiceProvider\DatabaseProvider;
+        $service = new Kanboard\ServiceProvider\DatabaseProvider;
 
         $db = $service->getInstance();
         $db->table('settings')->eq('option', 'api_token')->update(array('value' => API_KEY));

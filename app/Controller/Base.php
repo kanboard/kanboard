@@ -1,14 +1,14 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
 use Pimple\Container;
-use Core\Security;
-use Core\Request;
-use Core\Response;
-use Core\Template;
-use Core\Session;
-use Model\LastLogin;
+use Kanboard\Core\Security;
+use Kanboard\Core\Request;
+use Kanboard\Core\Response;
+use Kanboard\Core\Template;
+use Kanboard\Core\Session;
+use Kanboard\Model\LastLogin;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -17,13 +17,13 @@ use Symfony\Component\EventDispatcher\Event;
  * @package  controller
  * @author   Frederic Guillot
  */
-abstract class Base extends \Core\Base
+abstract class Base extends \Kanboard\Core\Base
 {
     /**
      * Request instance
      *
      * @accesss protected
-     * @var \Core\Request
+     * @var \Kanboard\Core\Request
      */
     protected $request;
 
@@ -31,7 +31,7 @@ abstract class Base extends \Core\Base
      * Response instance
      *
      * @accesss protected
-     * @var \Core\Response
+     * @var \Kanboard\Core\Response
      */
     protected $response;
 

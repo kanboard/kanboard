@@ -1,9 +1,9 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
-use Model\Subtask as SubtaskModel;
-use Model\Task as TaskModel;
+use Kanboard\Model\Subtask as SubtaskModel;
+use Kanboard\Model\Task as TaskModel;
 
 /**
  * Me API controller

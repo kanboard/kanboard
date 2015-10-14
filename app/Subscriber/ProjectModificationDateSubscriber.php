@@ -1,12 +1,12 @@
 <?php
 
-namespace Subscriber;
+namespace Kanboard\Subscriber;
 
-use Event\GenericEvent;
-use Model\Task;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProjectModificationDateSubscriber extends \Core\Base implements EventSubscriberInterface
+class ProjectModificationDateSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

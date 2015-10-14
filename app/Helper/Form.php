@@ -1,8 +1,8 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
-use Core\Security;
+use Kanboard\Core\Security;
 
 /**
  * Form helpers
@@ -10,7 +10,7 @@ use Core\Security;
  * @package helper
  * @author  Frederic Guillot
  */
-class Form extends \Core\Base
+class Form extends \Kanboard\Core\Base
 {
     /**
      * Hidden CSRF token field

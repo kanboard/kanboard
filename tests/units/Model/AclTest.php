@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Core\Session;
-use Model\Acl;
-use Model\Project;
-use Model\ProjectPermission;
-use Model\User;
+use Kanboard\Core\Session;
+use Kanboard\Model\Acl;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\User;
 
 class AclTest extends Base
 {

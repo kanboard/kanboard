@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
-use Core\ObjectStorage\ObjectStorageException;
+use Kanboard\Core\ObjectStorage\ObjectStorageException;
 
 /**
  * File controller

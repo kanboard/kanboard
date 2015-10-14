@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Subtask;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\TaskStatus;
-use Model\Project;
-use Model\ProjectPermission;
+use Kanboard\Model\Subtask;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskStatus;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
 
 class TaskStatusTest extends Base
 {
@@ -64,14 +64,14 @@ class TaskStatusTest extends Base
 
     public function onTaskOpen($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
         $this->assertArrayHasKey('task_id', $event);
         $this->assertNotEmpty($event['task_id']);
     }
 
     public function onTaskClose($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
         $this->assertArrayHasKey('task_id', $event);
         $this->assertNotEmpty($event['task_id']);
     }

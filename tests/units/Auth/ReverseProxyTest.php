@@ -2,8 +2,8 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Auth\ReverseProxy;
-use Model\User;
+use Kanboard\Auth\ReverseProxy;
+use Kanboard\Model\User;
 
 class ReverseProxyTest extends Base
 {

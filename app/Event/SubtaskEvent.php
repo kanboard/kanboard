@@ -1,6 +1,6 @@
 <?php
 
-namespace Event;
+namespace Kanboard\Event;
 
 class SubtaskEvent extends GenericEvent
 {

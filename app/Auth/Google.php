@@ -1,8 +1,8 @@
 <?php
 
-namespace Auth;
+namespace Kanboard\Auth;
 
-use Event\AuthEvent;
+use Kanboard\Event\AuthEvent;
 
 /**
  * Google backend
@@ -23,7 +23,7 @@ class Google extends Base
      * OAuth2 instance
      *
      * @access private
-     * @var \Core\OAuth2
+     * @var \Kanboard\Core\OAuth2
      */
     private $service;
 
@@ -86,7 +86,7 @@ class Google extends Base
      * Get OAuth2 configured service
      *
      * @access public
-     * @return \Core\OAuth2
+     * @return KanboardCore\OAuth2
      */
     public function getService()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 use JsonRPC\AuthenticationFailure;
 use Symfony\Component\EventDispatcher\Event;

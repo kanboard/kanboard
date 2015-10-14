@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Core\Csv;
+use Kanboard\Core\Csv;
 
 class CsvTest extends Base
 {

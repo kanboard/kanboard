@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
-use Model\TaskFilter;
+use Kanboard\Model\TaskFilter;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 
 /**

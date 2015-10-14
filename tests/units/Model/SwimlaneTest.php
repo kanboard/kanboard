@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Project;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Swimlane;
+use Kanboard\Model\Project;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Swimlane;
 
 class SwimlaneTest extends Base
 {

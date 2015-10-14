@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 use JsonRPC\AuthenticationFailure;
 use JsonRPC\AccessDeniedException;
@@ -11,7 +11,7 @@ use JsonRPC\AccessDeniedException;
  * @package  api
  * @author   Frederic Guillot
  */
-abstract class Base extends \Core\Base
+abstract class Base extends \Kanboard\Core\Base
 {
     private $user_allowed_procedures = array(
         'getMe',

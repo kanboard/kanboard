@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * TaskLink API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class TaskLink extends \Core\Base
+class TaskLink extends \Kanboard\Core\Base
 {
     /**
      * Get a task link

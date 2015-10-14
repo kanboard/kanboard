@@ -2,17 +2,18 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Action\TaskUpdateStartDate;
 
 class TaskUpdateStartDateTest extends Base
 {
     public function testExecute()
     {
-        $action = new Action\TaskUpdateStartDate($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskUpdateStartDate($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
 
         // We create a task in the first column

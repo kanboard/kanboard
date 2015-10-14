@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
 /**
  * Task helpers
@@ -8,7 +8,7 @@ namespace Helper;
  * @package helper
  * @author  Frederic Guillot
  */
-class Task extends \Core\Base
+class Task extends \Kanboard\Core\Base
 {
     public function getColors()
     {

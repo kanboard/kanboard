@@ -1,6 +1,6 @@
 <?php
 
-namespace Console;
+namespace Kanboard\Console;
 
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;

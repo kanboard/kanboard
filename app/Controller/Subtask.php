@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
-use Model\Subtask as SubtaskModel;
+use Kanboard\Model\Subtask as SubtaskModel;
 
 /**
  * Subtask controller

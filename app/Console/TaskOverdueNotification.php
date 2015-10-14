@@ -1,6 +1,6 @@
 <?php
 
-namespace Console;
+namespace Kanboard\Console;
 
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;

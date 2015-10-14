@@ -2,14 +2,14 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Helper\Hook;
+use Kanboard\Helper\Hook;
 
 class HookHelperTest extends Base
 {
     public function testMultipleHooks()
     {
         $this->container['template'] = $this
-            ->getMockBuilder('\Core\Template')
+            ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('render'))
             ->getMock();
@@ -41,7 +41,7 @@ class HookHelperTest extends Base
     public function testAssetHooks()
     {
         $this->container['helper']->asset = $this
-            ->getMockBuilder('\Helper\Asset')
+            ->getMockBuilder('\Kanboard\Helper\Asset')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('css', 'js'))
             ->getMock();

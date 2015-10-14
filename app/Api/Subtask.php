@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * Subtask API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Subtask extends \Core\Base
+class Subtask extends \Kanboard\Core\Base
 {
     public function getSubtask($subtask_id)
     {

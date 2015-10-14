@@ -1,8 +1,8 @@
 <?php
 
-namespace Integration;
+namespace Kanboard\Integration;
 
-use Core\Tool;
+use Kanboard\Core\Tool;
 
 /**
  * Mailgun Integration
@@ -10,7 +10,7 @@ use Core\Tool;
  * @package  integration
  * @author   Frederic Guillot
  */
-class Mailgun extends \Core\Base
+class Mailgun extends \Kanboard\Core\Base
 {
     /**
      * Send a HTML email

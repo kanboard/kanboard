@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
 /**
  * Board Helper
@@ -8,7 +8,7 @@ namespace Helper;
  * @package helper
  * @author  Frederic Guillot
  */
-class Board extends \Core\Base
+class Board extends \Kanboard\Core\Base
 {
     /**
      * Return true if tasks are collapsed

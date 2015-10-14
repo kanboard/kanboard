@@ -126,4 +126,3 @@ defined('HTTP_PROXY_HOSTNAME') or define('HTTP_PROXY_HOSTNAME', '');
 defined('HTTP_PROXY_PORT') or define('HTTP_PROXY_PORT', '3128');
 defined('HTTP_PROXY_USERNAME') or define('HTTP_PROXY_USERNAME', '');
 defined('HTTP_PROXY_PASSWORD') or define('HTTP_PROXY_PASSWORD', '');
-

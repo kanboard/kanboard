@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
 /**
  * Subtask helpers
@@ -8,7 +8,7 @@ namespace Helper;
  * @package helper
  * @author  Frederic Guillot
  */
-class Subtask extends \Core\Base
+class Subtask extends \Kanboard\Core\Base
 {
     /**
      * Get the link to toggle subtask status

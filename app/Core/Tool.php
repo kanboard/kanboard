@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Kanboard\Core;
 
 use Pimple\Container;
 
@@ -44,7 +44,7 @@ class Tool
     {
         foreach ($namespaces as $namespace => $classes) {
             foreach ($classes as $name) {
-                $class = '\\'.$namespace.'\\'.$name;
+                $class = '\\Kanboard\\'.$namespace.'\\'.$name;
                 $container[lcfirst($name)] = function ($c) use ($class) {
                     return new $class($c);
                 };

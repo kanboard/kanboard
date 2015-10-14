@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
 /**
  * Template Hook helpers
@@ -8,7 +8,7 @@ namespace Helper;
  * @package helper
  * @author  Frederic Guillot
  */
-class Hook extends \Core\Base
+class Hook extends \Kanboard\Core\Base
 {
     /**
      * Add assets JS or CSS

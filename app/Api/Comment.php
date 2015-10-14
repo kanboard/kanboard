@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * Comment API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Comment extends \Core\Base
+class Comment extends \Kanboard\Core\Base
 {
     public function getComment($comment_id)
     {

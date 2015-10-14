@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
-use Model\Swimlane as SwimlaneModel;
+use Kanboard\Model\Swimlane as SwimlaneModel;
 
 /**
  * Swimlanes

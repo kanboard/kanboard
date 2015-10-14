@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
-use Core\Csv;
+use Kanboard\Core\Csv;
 
 /**
  * User Import controller

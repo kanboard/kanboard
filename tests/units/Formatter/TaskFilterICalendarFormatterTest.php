@@ -3,15 +3,15 @@
 require_once __DIR__.'/../Base.php';
 
 use Eluceo\iCal\Component\Calendar;
-use Formatter\TaskFilterICalendarFormatter;
-use Model\Project;
-use Model\User;
-use Model\TaskCreation;
-use Model\DateParser;
-use Model\Category;
-use Model\Subtask;
-use Model\Config;
-use Model\Swimlane;
+use Kanboard\Formatter\TaskFilterICalendarFormatter;
+use Kanboard\Model\Project;
+use Kanboard\Model\User;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\DateParser;
+use Kanboard\Model\Category;
+use Kanboard\Model\Subtask;
+use Kanboard\Model\Config;
+use Kanboard\Model\Swimlane;
 
 class TaskFilterICalendarFormatterTest extends Base
 {

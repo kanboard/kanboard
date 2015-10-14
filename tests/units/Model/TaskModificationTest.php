@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskModification;
-use Model\TaskFinder;
-use Model\TaskStatus;
-use Model\Project;
-use Model\ProjectPermission;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskModification;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskStatus;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
 
 class TaskModificationTest extends Base
 {
     public function onCreateUpdate($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
 
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
@@ -24,7 +24,7 @@ class TaskModificationTest extends Base
 
     public function onUpdate($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
 
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
@@ -34,7 +34,7 @@ class TaskModificationTest extends Base
 
     public function onAssigneeChange($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
 
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
 /**
  * File helpers
@@ -8,7 +8,7 @@ namespace Helper;
  * @package helper
  * @author  Frederic Guillot
  */
-class File extends \Core\Base
+class File extends \Kanboard\Core\Base
 {
     /**
      * Get file icon

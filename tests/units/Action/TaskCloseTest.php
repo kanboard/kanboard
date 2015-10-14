@@ -2,18 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
-use Integration\GithubWebhook;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Integration\GithubWebhook;
+use Kanboard\Action\TaskClose;
 
 class TaskCloseTest extends Base
 {
     public function testExecutable()
     {
-        $action = new Action\TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -24,7 +25,7 @@ class TaskCloseTest extends Base
 
         $this->assertTrue($action->isExecutable($event));
 
-        $action = new Action\TaskClose($this->container, 3, GithubWebhook::EVENT_COMMIT);
+        $action = new TaskClose($this->container, 3, GithubWebhook::EVENT_COMMIT);
 
         $event = array(
             'project_id' => 3,
@@ -36,7 +37,7 @@ class TaskCloseTest extends Base
 
     public function testBadEvent()
     {
-        $action = new Action\TaskClose($this->container, 3, Task::EVENT_UPDATE);
+        $action = new TaskClose($this->container, 3, Task::EVENT_UPDATE);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -51,7 +52,7 @@ class TaskCloseTest extends Base
 
     public function testBadProject()
     {
-        $action = new Action\TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -66,7 +67,7 @@ class TaskCloseTest extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -80,7 +81,7 @@ class TaskCloseTest extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskClose($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskClose($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
 
         // We create a task in the first column

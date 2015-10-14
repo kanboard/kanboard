@@ -1,12 +1,12 @@
 <?php
 
-namespace Subscriber;
+namespace Kanboard\Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Model\Subtask;
-use Event\SubtaskEvent;
+use Kanboard\Model\Subtask;
+use Kanboard\Event\SubtaskEvent;
 
-class SubtaskTimeTrackingSubscriber extends \Core\Base implements EventSubscriberInterface
+class SubtaskTimeTrackingSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Subscriber;
+namespace Kanboard\Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class BootstrapSubscriber extends \Core\Base implements EventSubscriberInterface
+class BootstrapSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

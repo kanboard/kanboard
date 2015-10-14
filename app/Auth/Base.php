@@ -1,6 +1,6 @@
 <?php
 
-namespace Auth;
+namespace Kanboard\Auth;
 
 use Pimple\Container;
 
@@ -10,7 +10,7 @@ use Pimple\Container;
  * @package  auth
  * @author   Frederic Guillot
  */
-abstract class Base extends \Core\Base
+abstract class Base extends \Kanboard\Core\Base
 {
     /**
      * Database instance

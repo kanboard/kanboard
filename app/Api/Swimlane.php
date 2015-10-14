@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
 /**
  * Swimlane API controller
@@ -8,7 +8,7 @@ namespace Api;
  * @package  api
  * @author   Frederic Guillot
  */
-class Swimlane extends \Core\Base
+class Swimlane extends \Kanboard\Core\Base
 {
     public function getActiveSwimlanes($project_id)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
 use Pimple\Container;
 
@@ -10,7 +10,7 @@ use Pimple\Container;
  * @package  model
  * @author   Frederic Guillot
  */
-abstract class Base extends \Core\Base
+abstract class Base extends \Kanboard\Core\Base
 {
     /**
      * Save a record in the database

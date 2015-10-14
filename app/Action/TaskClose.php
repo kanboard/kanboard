@@ -1,11 +1,11 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Integration\GitlabWebhook;
-use Integration\GithubWebhook;
-use Integration\BitbucketWebhook;
-use Model\Task;
+use Kanboard\Integration\GitlabWebhook;
+use Kanboard\Integration\GithubWebhook;
+use Kanboard\Integration\BitbucketWebhook;
+use Kanboard\Model\Task;
 
 /**
  * Close automatically a task

@@ -1,14 +1,14 @@
 <?php
 
-namespace Subscriber;
+namespace Kanboard\Subscriber;
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\Comment;
-use Model\Subtask;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\Comment;
+use Kanboard\Model\Subtask;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProjectActivitySubscriber extends \Core\Base implements EventSubscriberInterface
+class ProjectActivitySubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {

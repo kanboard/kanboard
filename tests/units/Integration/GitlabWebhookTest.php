@@ -2,12 +2,12 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Integration\GitlabWebhook;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
-use Model\ProjectPermission;
-use Model\User;
+use Kanboard\Integration\GitlabWebhook;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\User;
 
 class GitlabWebhookTest extends Base
 {

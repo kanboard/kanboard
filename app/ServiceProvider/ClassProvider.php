@@ -1,15 +1,15 @@
 <?php
 
-namespace ServiceProvider;
+namespace Kanboard\ServiceProvider;
 
-use Core\Plugin\Loader;
-use Core\ObjectStorage\FileStorage;
-use Core\Paginator;
-use Core\OAuth2;
-use Core\Tool;
-use Model\Config;
-use Model\Project;
-use Model\Webhook;
+use Kanboard\Core\Plugin\Loader;
+use Kanboard\Core\ObjectStorage\FileStorage;
+use Kanboard\Core\Paginator;
+use Kanboard\Core\OAuth2;
+use Kanboard\Core\Tool;
+use Kanboard\Model\Config;
+use Kanboard\Model\Project;
+use Kanboard\Model\Webhook;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use League\HTMLToMarkdown\HtmlConverter;

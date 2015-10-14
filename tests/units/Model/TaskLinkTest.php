@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Link;
-use Model\TaskFinder;
-use Model\TaskLink;
-use Model\TaskCreation;
-use Model\Project;
+use Kanboard\Model\Link;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskLink;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\Project;
 
 class TaskLinkTest extends Base
 {

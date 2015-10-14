@@ -2,12 +2,12 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\TaskPosition;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
-use Model\Swimlane;
-use Subscriber\TaskMovedDateSubscriber;
+use Kanboard\Model\TaskPosition;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Model\Swimlane;
+use Kanboard\Subscriber\TaskMovedDateSubscriber;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class TaskMovedDateSubscriberTest extends Base

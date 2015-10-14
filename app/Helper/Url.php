@@ -1,9 +1,9 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
-use Core\Request;
-use Core\Security;
+use Kanboard\Core\Request;
+use Kanboard\Core\Security;
 
 /**
  * Url helpers
@@ -11,7 +11,7 @@ use Core\Security;
  * @package helper
  * @author  Frederic Guillot
  */
-class Url extends \Core\Base
+class Url extends \Kanboard\Core\Base
 {
     private $base = '';
     private $directory = '';

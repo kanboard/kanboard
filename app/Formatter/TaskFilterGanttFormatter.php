@@ -1,8 +1,8 @@
 <?php
 
-namespace Formatter;
+namespace Kanboard\Formatter;
 
-use Model\TaskFilter;
+use Kanboard\Model\TaskFilter;
 
 /**
  * Gantt chart formatter for task filter

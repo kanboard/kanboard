@@ -2,18 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\Comment;
-use Model\Project;
-use Integration\GithubWebhook;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\Comment;
+use Kanboard\Model\Project;
+use Kanboard\Integration\GithubWebhook;
+use Kanboard\Action\CommentCreation;
 
 class CommentCreationTest extends Base
 {
     public function testWithoutRequiredParams()
     {
-        $action = new Action\CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
+        $action = new CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
 
         // We create a task in the first column
         $tc = new TaskCreation($this->container);
@@ -38,7 +39,7 @@ class CommentCreationTest extends Base
 
     public function testWithCommitMessage()
     {
-        $action = new Action\CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
+        $action = new CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
 
         // We create a task in the first column
         $tc = new TaskCreation($this->container);
@@ -66,7 +67,7 @@ class CommentCreationTest extends Base
 
     public function testWithUser()
     {
-        $action = new Action\CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
+        $action = new CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
 
         // We create a task in the first column
         $tc = new TaskCreation($this->container);
@@ -95,7 +96,7 @@ class CommentCreationTest extends Base
 
     public function testWithNoUser()
     {
-        $action = new Action\CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
+        $action = new CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
 
         // We create a task in the first column
         $tc = new TaskCreation($this->container);

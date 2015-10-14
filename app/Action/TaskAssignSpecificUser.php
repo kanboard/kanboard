@@ -1,8 +1,8 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Model\Task;
+use Kanboard\Model\Task;
 
 /**
  * Assign a task to a specific user

@@ -1,6 +1,6 @@
 <?php
 
-namespace Formatter;
+namespace Kanboard\Formatter;
 
 use DateTime;
 use Eluceo\iCal\Component\Calendar;

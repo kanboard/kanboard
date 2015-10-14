@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Plugin;
+namespace Kanboard\Core\Plugin;
 
 /**
  * Plugin Base class
@@ -8,7 +8,7 @@ namespace Core\Plugin;
  * @package  plugin
  * @author   Frederic Guillot
  */
-abstract class Base extends \Core\Base
+abstract class Base extends \Kanboard\Core\Base
 {
     /**
      * Method called for each request

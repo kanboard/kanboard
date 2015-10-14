@@ -1,6 +1,6 @@
 <?php
 
-namespace Integration;
+namespace Kanboard\Integration;
 
 /**
  * Postmark integration
@@ -8,7 +8,7 @@ namespace Integration;
  * @package  integration
  * @author   Frederic Guillot
  */
-class Postmark extends \Core\Base
+class Postmark extends \Kanboard\Core\Base
 {
     /**
      * Send a HTML email

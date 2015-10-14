@@ -2,17 +2,18 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Action\TaskAssignSpecificUser;
 
-class TaskAssignSpecificUser extends Base
+class TaskAssignSpecificUserTest extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignSpecificUser($this->container, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskAssignSpecificUser($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -27,7 +28,7 @@ class TaskAssignSpecificUser extends Base
 
     public function testBadColumn()
     {
-        $action = new Action\TaskAssignSpecificUser($this->container, 3, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskAssignSpecificUser($this->container, 3, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 5);
 
         $event = array(
@@ -41,7 +42,7 @@ class TaskAssignSpecificUser extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignSpecificUser($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskAssignSpecificUser($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $action->setParam('user_id', 1);
 

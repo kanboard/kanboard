@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
 /**
  * Subtask Export

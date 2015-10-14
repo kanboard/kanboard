@@ -1,6 +1,6 @@
 <?php
 
-namespace Auth;
+namespace Kanboard\Auth;
 
 require_once __DIR__.'/../Base.php';
 
@@ -67,7 +67,7 @@ class LdapTest extends \Base
     public function testConnectSuccess()
     {
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getLdapServer'))
             ->getMock();
@@ -92,7 +92,7 @@ class LdapTest extends \Base
     public function testConnectFailure()
     {
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getLdapServer'))
             ->getMock();
@@ -117,7 +117,7 @@ class LdapTest extends \Base
     public function testBindAnonymous()
     {
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getLdapBindType'))
             ->getMock();
@@ -143,7 +143,7 @@ class LdapTest extends \Base
     public function testBindUser()
     {
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getLdapUsername', 'getLdapBindType'))
             ->getMock();
@@ -174,7 +174,7 @@ class LdapTest extends \Base
     public function testBindProxy()
     {
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getLdapUsername', 'getLdapPassword', 'getLdapBindType'))
             ->getMock();
@@ -238,7 +238,7 @@ class LdapTest extends \Base
         );
 
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getLdapUserPattern', 'getLdapBaseDn'))
             ->getMock();
@@ -308,7 +308,7 @@ class LdapTest extends \Base
         );
 
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getLdapUserPattern', 'getLdapBaseDn'))
             ->getMock();
@@ -359,7 +359,7 @@ class LdapTest extends \Base
     public function testSearchWithUserNotFound()
     {
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getLdapUserPattern', 'getLdapBaseDn'))
             ->getMock();
@@ -400,19 +400,19 @@ class LdapTest extends \Base
     public function testSuccessfulAuthentication()
     {
         $this->container['userSession'] = $this
-            ->getMockBuilder('\Model\UserSession')
+            ->getMockBuilder('\Kanboard\Model\UserSession')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('refresh'))
             ->getMock();
 
         $this->container['user'] = $this
-            ->getMockBuilder('\Model\User')
+            ->getMockBuilder('\Kanboard\Model\User')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getByUsername'))
             ->getMock();
 
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('findUser'))
             ->getMock();
@@ -444,19 +444,19 @@ class LdapTest extends \Base
     public function testAuthenticationWithExistingLocalUser()
     {
         $this->container['userSession'] = $this
-            ->getMockBuilder('\Model\UserSession')
+            ->getMockBuilder('\Kanboard\Model\UserSession')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('refresh'))
             ->getMock();
 
         $this->container['user'] = $this
-            ->getMockBuilder('\Model\User')
+            ->getMockBuilder('\Kanboard\Model\User')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getByUsername'))
             ->getMock();
 
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('findUser'))
             ->getMock();
@@ -490,19 +490,19 @@ class LdapTest extends \Base
         $ldap_profile = array('username' => 'user', 'name' => 'My user', 'email' => 'user@here');
 
         $this->container['userSession'] = $this
-            ->getMockBuilder('\Model\UserSession')
+            ->getMockBuilder('\Kanboard\Model\UserSession')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('refresh'))
             ->getMock();
 
         $this->container['user'] = $this
-            ->getMockBuilder('\Model\User')
+            ->getMockBuilder('\Kanboard\Model\User')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getByUsername', 'create'))
             ->getMock();
 
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('findUser'))
             ->getMock();
@@ -552,19 +552,19 @@ class LdapTest extends \Base
         $ldap_profile = array('username' => 'user', 'name' => 'My user', 'email' => 'user@here');
 
         $this->container['userSession'] = $this
-            ->getMockBuilder('\Model\UserSession')
+            ->getMockBuilder('\Kanboard\Model\UserSession')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('refresh'))
             ->getMock();
 
         $this->container['user'] = $this
-            ->getMockBuilder('\Model\User')
+            ->getMockBuilder('\Kanboard\Model\User')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getByUsername', 'create'))
             ->getMock();
 
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('findUser'))
             ->getMock();
@@ -637,7 +637,7 @@ class LdapTest extends \Base
         );
 
         $ldap = $this
-            ->getMockBuilder('\Auth\Ldap')
+            ->getMockBuilder('\Kanboard\Auth\Ldap')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('connect', 'getLdapUserPattern', 'getLdapBaseDn', 'getLdapAccountId'))
             ->getMock();

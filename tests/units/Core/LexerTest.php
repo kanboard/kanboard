@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Core\Lexer;
+use Kanboard\Core\Lexer;
 
 class LexerTest extends Base
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Core;
+namespace Kanboard\Core;
 
 use Parsedown;
-use Helper\Url;
+use Kanboard\Helper\Url;
 
 /**
  * Specific Markdown rules for Kanboard

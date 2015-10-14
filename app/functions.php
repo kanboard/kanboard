@@ -1,6 +1,6 @@
 <?php
 
-use Core\Translator;
+use Kanboard\Core\Translator;
 
 /**
  * Translate a string

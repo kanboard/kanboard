@@ -1,10 +1,10 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Integration\BitbucketWebhook;
-use Integration\GithubWebhook;
-use Integration\GitlabWebhook;
+use Kanboard\Integration\BitbucketWebhook;
+use Kanboard\Integration\GithubWebhook;
+use Kanboard\Integration\GitlabWebhook;
 
 /**
  * Create automatically a comment from a webhook

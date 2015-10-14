@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../../Base.php';
 
-use Core\Plugin\Loader;
+use Kanboard\Core\Plugin\Loader;
 
 class LoaderTest extends Base
 {

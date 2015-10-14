@@ -1,10 +1,10 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Event\FileEvent;
-use Core\Tool;
-use Core\ObjectStorage\ObjectStorageException;
+use Kanboard\Event\FileEvent;
+use Kanboard\Core\Tool;
+use Kanboard\Core\ObjectStorage\ObjectStorageException;
 
 /**
  * File model

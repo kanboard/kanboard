@@ -1,6 +1,6 @@
 <?php
 
-namespace Helper;
+namespace Kanboard\Helper;
 
 /**
  * Assets helpers
@@ -8,7 +8,7 @@ namespace Helper;
  * @package helper
  * @author  Frederic Guillot
  */
-class Asset extends \Core\Base
+class Asset extends \Kanboard\Core\Base
 {
     /**
      * Add a Javascript asset

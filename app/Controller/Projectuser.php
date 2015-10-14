@@ -1,9 +1,9 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
-use Model\User as UserModel;
-use Model\Task as TaskModel;
+use Kanboard\Model\User as UserModel;
+use Kanboard\Model\Task as TaskModel;
 
 /**
  * Project User overview

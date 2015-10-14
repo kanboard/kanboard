@@ -2,14 +2,14 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\Board;
-use Model\TaskStatus;
-use Model\TaskPosition;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
-use Model\Swimlane;
+use Kanboard\Model\Task;
+use Kanboard\Model\Board;
+use Kanboard\Model\TaskStatus;
+use Kanboard\Model\TaskPosition;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Model\Swimlane;
 
 class TaskPositionTest extends Base
 {
@@ -597,7 +597,7 @@ class TaskPositionTest extends Base
 
     public function onMoveColumn($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
 
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
@@ -609,7 +609,7 @@ class TaskPositionTest extends Base
 
     public function onMovePosition($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
 
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
@@ -621,7 +621,7 @@ class TaskPositionTest extends Base
 
     public function onMoveSwimlane($event)
     {
-        $this->assertInstanceOf('Event\TaskEvent', $event);
+        $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
 
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);

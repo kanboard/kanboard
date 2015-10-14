@@ -2,12 +2,12 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Project;
-use Model\Board;
-use Model\Config;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Swimlane;
+use Kanboard\Model\Project;
+use Kanboard\Model\Board;
+use Kanboard\Model\Config;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Swimlane;
 
 class BoardTest extends Base
 {

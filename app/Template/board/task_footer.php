@@ -26,11 +26,11 @@
         </span>
     <?php endif ?>
 
-    <?php if ($task['recurrence_status'] == \Model\Task::RECURRING_STATUS_PENDING): ?>
+    <?php if ($task['recurrence_status'] == \Kanboard\Model\Task::RECURRING_STATUS_PENDING): ?>
         <span title="<?= t('Recurrence') ?>" class="tooltip" data-href="<?= $this->url->href('board', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-refresh fa-rotate-90"></i></span>
     <?php endif ?>
 
-    <?php if ($task['recurrence_status'] == \Model\Task::RECURRING_STATUS_PROCESSED): ?>
+    <?php if ($task['recurrence_status'] == \Kanboard\Model\Task::RECURRING_STATUS_PROCESSED): ?>
         <span title="<?= t('Recurrence') ?>" class="tooltip" data-href="<?= $this->url->href('board', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-refresh fa-rotate-90 fa-inverse"></i></span>
     <?php endif ?>
 

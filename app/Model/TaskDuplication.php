@@ -1,10 +1,10 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
 use DateTime;
 use DateInterval;
-use Event\TaskEvent;
+use Kanboard\Event\TaskEvent;
 
 /**
  * Task Duplication

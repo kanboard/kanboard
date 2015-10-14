@@ -21,10 +21,8 @@
     "autoload" : {
         "classmap" : ["app/"],
         "psr-4" : {
-            "Plugin\\": "plugins/"
-        },
-        "psr-0" : {
-            "" : "app/"
+            "Kanboard\\Plugin\\": "plugins/",
+            "Kanboard\\" : "app/"
         },
         "files" : [
             "app/functions.php",

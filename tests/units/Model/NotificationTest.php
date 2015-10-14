@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\TaskFinder;
-use Model\TaskCreation;
-use Model\Subtask;
-use Model\Comment;
-use Model\User;
-use Model\File;
-use Model\Project;
-use Model\Task;
-use Model\ProjectPermission;
-use Model\Notification;
-use Model\NotificationFilter;
-use Model\NotificationType;
-use Subscriber\NotificationSubscriber;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\Subtask;
+use Kanboard\Model\Comment;
+use Kanboard\Model\User;
+use Kanboard\Model\File;
+use Kanboard\Model\Project;
+use Kanboard\Model\Task;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\Notification;
+use Kanboard\Model\NotificationFilter;
+use Kanboard\Model\NotificationType;
+use Kanboard\Subscriber\NotificationSubscriber;
 
 class NotificationTest extends Base
 {
@@ -173,13 +173,13 @@ class NotificationTest extends Base
         ));
 
         $this->container['emailNotification'] = $this
-            ->getMockBuilder('\Model\EmailNotification')
+            ->getMockBuilder('\Kanboard\Model\EmailNotification')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('send'))
             ->getMock();
 
         $this->container['webNotification'] = $this
-            ->getMockBuilder('\Model\WebNotification')
+            ->getMockBuilder('\Kanboard\Model\WebNotification')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('send'))
             ->getMock();

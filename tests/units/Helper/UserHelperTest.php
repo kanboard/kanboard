@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Helper\User;
-use Model\Project;
-use Model\ProjectPermission;
-use Model\User as UserModel;
-use Core\Session;
+use Kanboard\Helper\User;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\User as UserModel;
+use Kanboard\Core\Session;
 
 class UserHelperTest extends Base
 {

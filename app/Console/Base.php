@@ -1,6 +1,6 @@
 <?php
 
-namespace Console;
+namespace Kanboard\Console;
 
 use Pimple\Container;
 use Symfony\Component\Console\Command\Command;

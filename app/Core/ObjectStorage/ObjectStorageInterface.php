@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\ObjectStorage;
+namespace Kanboard\Core\ObjectStorage;
 
 /**
  * Object Storage Interface

@@ -1,8 +1,8 @@
 <?php
 
-namespace Api;
+namespace Kanboard\Api;
 
-use Model\Task as TaskModel;
+use Kanboard\Model\Task as TaskModel;
 
 /**
  * Task API controller
@@ -34,7 +34,7 @@ class Task extends Base
     {
         return $this->taskFinder->getOverdueTasks();
     }
-    
+
     public function getOverdueTasksByProject($project_id)
     {
         $this->checkProjectPermission($project_id);

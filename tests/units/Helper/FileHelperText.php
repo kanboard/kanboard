@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Helper\File;
+use Kanboard\Helper\File;
 
 class FileHelperTest extends Base
 {

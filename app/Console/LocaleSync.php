@@ -1,6 +1,6 @@
 <?php
 
-namespace Console;
+namespace Kanboard\Console;
 
 use DirectoryIterator;
 use Symfony\Component\Console\Input\InputInterface;

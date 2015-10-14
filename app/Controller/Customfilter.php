@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Kanboard\Controller;
 
 /**
  * Custom Filter management
@@ -115,7 +115,7 @@ class Customfilter extends Base
         if (! isset($values['is_shared'])) {
             $values += array('is_shared' => 0);
         }
-        
+
         if (! isset($values['append'])) {
             $values += array('append' => 0);
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Integration;
+namespace Kanboard\Integration;
 
 use Swift_Message;
 use Swift_Mailer;
@@ -15,7 +15,7 @@ use Swift_TransportException;
  * @package  integration
  * @author   Frederic Guillot
  */
-class Smtp extends \Core\Base
+class Smtp extends \Kanboard\Core\Base
 {
     /**
      * Send a HTML email

@@ -1,8 +1,8 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Integration\GithubWebhook;
+use Kanboard\Integration\GithubWebhook;
 
 /**
  * Set a category automatically according to a label

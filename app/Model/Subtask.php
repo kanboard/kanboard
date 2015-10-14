@@ -1,8 +1,8 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Event\SubtaskEvent;
+use Kanboard\Event\SubtaskEvent;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 

@@ -2,8 +2,8 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Helper\Url;
-use Model\Config;
+use Kanboard\Helper\Url;
+use Kanboard\Model\Config;
 
 class UrlHelperTest extends Base
 {

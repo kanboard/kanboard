@@ -2,17 +2,18 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Action\TaskAssignColorColumn;
 
 class TaskAssignColorColumnTest extends Base
 {
     public function testColorChange()
     {
-        $action = new Action\TaskAssignColorColumn($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskAssignColorColumn($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $action->setParam('color_id', 'green');
 

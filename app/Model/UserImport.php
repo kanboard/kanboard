@@ -1,10 +1,10 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Core\Csv;
+use Kanboard\Core\Csv;
 
 /**
  * User Import

@@ -1,6 +1,6 @@
 <?php
 
-namespace Event;
+namespace Kanboard\Event;
 
 use ArrayAccess;
 use Symfony\Component\EventDispatcher\Event as BaseEvent;

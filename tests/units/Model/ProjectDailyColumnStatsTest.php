@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Project;
-use Model\ProjectDailyColumnStats;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskStatus;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectDailyColumnStats;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskStatus;
 
 class ProjectDailyColumnStatsTest extends Base
 {

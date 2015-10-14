@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Link;
+use Kanboard\Model\Link;
 
 class LinkTest extends Base
 {

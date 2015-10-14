@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Core\OAuth2;
+use Kanboard\Core\OAuth2;
 
 class OAuth2Test extends Base
 {

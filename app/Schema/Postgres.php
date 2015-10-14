@@ -3,8 +3,8 @@
 namespace Schema;
 
 use PDO;
-use Core\Security;
-use Model\Link;
+use Kanboard\Core\Security;
+use Kanboard\Model\Link;
 
 const VERSION = 71;
 

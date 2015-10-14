@@ -2,9 +2,9 @@
 
 namespace Schema;
 
-use Core\Security;
+use Kanboard\Core\Security;
 use PDO;
-use Model\Link;
+use Kanboard\Model\Link;
 
 const VERSION = 86;
 

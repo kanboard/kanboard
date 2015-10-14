@@ -1,6 +1,6 @@
 <?php
 
-namespace Integration;
+namespace Kanboard\Integration;
 
 /**
  * Hipchat webhook
@@ -8,7 +8,7 @@ namespace Integration;
  * @package  integration
  * @author   Frederic Guillot
  */
-class HipchatWebhook extends \Core\Base
+class HipchatWebhook extends \Kanboard\Core\Base
 {
     /**
      * Return true if Hipchat is enabled for this project or globally

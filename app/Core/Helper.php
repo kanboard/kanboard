@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Kanboard\Core;
 
 use Pimple\Container;
 
@@ -60,7 +60,7 @@ class Helper
     public function __get($name)
     {
         if (! isset($this->helpers[$name])) {
-            $class = '\Helper\\'.ucfirst($name);
+            $class = '\Kanboard\Helper\\'.ucfirst($name);
             $this->helpers[$name] = new $class($this->container);
         }
 

@@ -2,18 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Event\GenericEvent;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
-use Model\User;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Model\User;
+use Kanboard\Action\TaskEmail;
 
 class TaskEmailTest extends Base
 {
     public function testNoEmail()
     {
-        $action = new Action\TaskEmail($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskEmail($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $action->setParam('user_id', 1);
         $action->setParam('subject', 'My email subject');
@@ -43,7 +44,7 @@ class TaskEmailTest extends Base
 
     public function testWrongColumn()
     {
-        $action = new Action\TaskEmail($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskEmail($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $action->setParam('user_id', 1);
         $action->setParam('subject', 'My email subject');
@@ -73,7 +74,7 @@ class TaskEmailTest extends Base
 
     public function testMoveColumn()
     {
-        $action = new Action\TaskEmail($this->container, 1, Task::EVENT_MOVE_COLUMN);
+        $action = new TaskEmail($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
         $action->setParam('user_id', 1);
         $action->setParam('subject', 'My email subject');
@@ -111,7 +112,7 @@ class TaskEmailTest extends Base
 
     public function testTaskClose()
     {
-        $action = new Action\TaskEmail($this->container, 1, Task::EVENT_CLOSE);
+        $action = new TaskEmail($this->container, 1, Task::EVENT_CLOSE);
         $action->setParam('column_id', 2);
         $action->setParam('user_id', 1);
         $action->setParam('subject', 'My email subject');

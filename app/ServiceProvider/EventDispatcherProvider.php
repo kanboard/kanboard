@@ -1,21 +1,21 @@
 <?php
 
-namespace ServiceProvider;
+namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Subscriber\AuthSubscriber;
-use Subscriber\BootstrapSubscriber;
-use Subscriber\NotificationSubscriber;
-use Subscriber\ProjectActivitySubscriber;
-use Subscriber\ProjectDailySummarySubscriber;
-use Subscriber\ProjectModificationDateSubscriber;
-use Subscriber\WebhookSubscriber;
-use Subscriber\SubtaskTimeTrackingSubscriber;
-use Subscriber\TaskMovedDateSubscriber;
-use Subscriber\TransitionSubscriber;
-use Subscriber\RecurringTaskSubscriber;
+use Kanboard\Subscriber\AuthSubscriber;
+use Kanboard\Subscriber\BootstrapSubscriber;
+use Kanboard\Subscriber\NotificationSubscriber;
+use Kanboard\Subscriber\ProjectActivitySubscriber;
+use Kanboard\Subscriber\ProjectDailySummarySubscriber;
+use Kanboard\Subscriber\ProjectModificationDateSubscriber;
+use Kanboard\Subscriber\WebhookSubscriber;
+use Kanboard\Subscriber\SubtaskTimeTrackingSubscriber;
+use Kanboard\Subscriber\TaskMovedDateSubscriber;
+use Kanboard\Subscriber\TransitionSubscriber;
+use Kanboard\Subscriber\RecurringTaskSubscriber;
 
 class EventDispatcherProvider implements ServiceProviderInterface
 {

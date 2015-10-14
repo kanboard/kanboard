@@ -1,8 +1,8 @@
 <?php
 
-namespace Model;
+namespace Kanboard\Model;
 
-use Event\CommentEvent;
+use Kanboard\Event\CommentEvent;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 

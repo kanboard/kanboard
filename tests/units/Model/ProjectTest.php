@@ -2,17 +2,17 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Core\Translator;
-use Subscriber\ProjectModificationDateSubscriber;
-use Model\Project;
-use Model\ProjectPermission;
-use Model\User;
-use Model\Task;
-use Model\TaskCreation;
-use Model\Acl;
-use Model\Board;
-use Model\Config;
-use Model\Category;
+use Kanboard\Core\Translator;
+use Kanboard\Subscriber\ProjectModificationDateSubscriber;
+use Kanboard\Model\Project;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\User;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\Acl;
+use Kanboard\Model\Board;
+use Kanboard\Model\Config;
+use Kanboard\Model\Category;
 
 class ProjectTest extends Base
 {
@@ -165,7 +165,7 @@ class ProjectTest extends Base
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.Subscriber\ProjectModificationDateSubscriber::execute', $called);
+        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.Kanboard\Subscriber\ProjectModificationDateSubscriber::execute', $called);
 
         $project = $p->getById(1);
         $this->assertNotEmpty($project);

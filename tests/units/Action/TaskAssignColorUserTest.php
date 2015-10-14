@@ -2,17 +2,18 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
-use Model\Project;
-use Event\GenericEvent;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\Project;
+use Kanboard\Event\GenericEvent;
+use Kanboard\Action\TaskAssignColorUser;
 
-class TaskAssignColorUser extends Base
+class TaskAssignColorUserTest extends Base
 {
     public function testBadProject()
     {
-        $action = new Action\TaskAssignColorUser($this->container, 3, Task::EVENT_CREATE);
+        $action = new TaskAssignColorUser($this->container, 3, Task::EVENT_CREATE);
 
         $event = array(
             'project_id' => 2,
@@ -26,7 +27,7 @@ class TaskAssignColorUser extends Base
 
     public function testExecute()
     {
-        $action = new Action\TaskAssignColorUser($this->container, 1, Task::EVENT_ASSIGNEE_CHANGE);
+        $action = new TaskAssignColorUser($this->container, 1, Task::EVENT_ASSIGNEE_CHANGE);
         $action->setParam('user_id', 1);
         $action->setParam('color_id', 'blue');
 

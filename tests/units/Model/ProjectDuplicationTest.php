@@ -2,16 +2,16 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Model\Action;
-use Model\Project;
-use Model\Category;
-use Model\ProjectPermission;
-use Model\ProjectDuplication;
-use Model\User;
-use Model\Swimlane;
-use Model\Task;
-use Model\TaskCreation;
-use Model\TaskFinder;
+use Kanboard\Model\Action;
+use Kanboard\Model\Project;
+use Kanboard\Model\Category;
+use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\ProjectDuplication;
+use Kanboard\Model\User;
+use Kanboard\Model\Swimlane;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
 
 class ProjectDuplicationTest extends Base
 {

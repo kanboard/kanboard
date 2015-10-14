@@ -2,9 +2,9 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Core\Session;
-use Helper\App;
-use Model\Config;
+use Kanboard\Core\Session;
+use Kanboard\Helper\App;
+use Kanboard\Model\Config;
 
 class AppHelperTest extends Base
 {

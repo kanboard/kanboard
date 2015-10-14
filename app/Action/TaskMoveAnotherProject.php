@@ -1,8 +1,8 @@
 <?php
 
-namespace Action;
+namespace Kanboard\Action;
 
-use Model\Task;
+use Kanboard\Model\Task;
 
 /**
  * Move a task to another project
