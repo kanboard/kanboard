@@ -1,21 +1,21 @@
 <?php
 
-namespace Kanboard\Integration;
+namespace Kanboard\Core\Mail\Transport;
 
 use Swift_Message;
 use Swift_Mailer;
 use Swift_MailTransport;
-use Swift_SendmailTransport;
-use Swift_SmtpTransport;
 use Swift_TransportException;
+use Kanboard\Core\Base;
+use Kanboard\Core\Mail\ClientInterface;
 
 /**
- * Smtp
+ * PHP Mail Handler
  *
- * @package  integration
+ * @package  transport
  * @author   Frederic Guillot
  */
-class Smtp extends \Kanboard\Core\Base
+class Mail extends Base implements ClientInterface
 {
     /**
      * Send a HTML email
@@ -40,32 +40,18 @@ class Smtp extends \Kanboard\Core\Base
             Swift_Mailer::newInstance($this->getTransport())->send($message);
         }
         catch (Swift_TransportException $e) {
-            $this->container['logger']->error($e->getMessage());
+            $this->logger->error($e->getMessage());
         }
     }
 
     /**
      * Get SwiftMailer transport
      *
-     * @access private
+     * @access protected
      * @return \Swift_Transport
      */
-    private function getTransport()
+    protected function getTransport()
     {
-        switch (MAIL_TRANSPORT) {
-            case 'smtp':
-                $transport = Swift_SmtpTransport::newInstance(MAIL_SMTP_HOSTNAME, MAIL_SMTP_PORT);
-                $transport->setUsername(MAIL_SMTP_USERNAME);
-                $transport->setPassword(MAIL_SMTP_PASSWORD);
-                $transport->setEncryption(MAIL_SMTP_ENCRYPTION);
-                break;
-            case 'sendmail':
-                $transport = Swift_SendmailTransport::newInstance(MAIL_SENDMAIL_COMMAND);
-                break;
-            default:
-                $transport = Swift_MailTransport::newInstance();
-        }
-
-        return $transport;
+        return Swift_MailTransport::newInstance();
     }
 }

@@ -3,6 +3,7 @@
 namespace Kanboard\ServiceProvider;
 
 use Kanboard\Core\Plugin\Loader;
+use Kanboard\Core\Mail\Client as EmailClient;
 use Kanboard\Core\ObjectStorage\FileStorage;
 use Kanboard\Core\Paginator;
 use Kanboard\Core\OAuth2;
@@ -78,7 +79,6 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectGanttFormatter',
         ),
         'Core' => array(
-            'EmailClient',
             'Helper',
             'HttpClient',
             'Lexer',
@@ -99,11 +99,7 @@ class ClassProvider implements ServiceProviderInterface
             'GitlabWebhook',
             'HipchatWebhook',
             'Jabber',
-            'Mailgun',
-            'Postmark',
-            'Sendgrid',
             'SlackWebhook',
-            'Smtp',
         )
     );
 
@@ -125,6 +121,14 @@ class ClassProvider implements ServiceProviderInterface
 
         $container['objectStorage'] = function() {
             return new FileStorage(FILES_DIR);
+        };
+
+        $container['emailClient'] = function($container) {
+            $mailer = new EmailClient($container);
+            $mailer->setTransport('smtp', '\Kanboard\Core\Mail\Transport\Smtp');
+            $mailer->setTransport('sendmail', '\Kanboard\Core\Mail\Transport\Sendmail');
+            $mailer->setTransport('mail', '\Kanboard\Core\Mail\Transport\Mail');
+            return $mailer;
         };
 
         $container['pluginLoader'] = new Loader($container);

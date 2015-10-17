@@ -3,7 +3,8 @@ Version 1.0.20 (unreleased)
 
 Breaking changes:
 
-- Add namespace Kanboard
+- Add namespace Kanboard (update your plugins)
+- Move Mailgun, Sendgrid and Postmark to plugins
 
 New features:
 
@@ -13,6 +14,7 @@ Improvements:
 
 * Allow to change comments sorting
 * Add the possibility to append or not custom filters
+* Make mail transports pluggable
 
 Version 1.0.19
 --------------

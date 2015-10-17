@@ -66,7 +66,7 @@ abstract class Base extends \Kanboard\Core\Base
      */
     public function getPluginName()
     {
-        return ucfirst(substr(get_called_class(), 7, -7));
+        return ucfirst(substr(get_called_class(), 16, -7));
     }
 
     /**

@@ -74,7 +74,7 @@ class EmailNotificationTest extends Base
         $this->assertTrue($u->update(array('id' => 1, 'email' => 'test@localhost')));
 
         $this->container['emailClient'] = $this
-            ->getMockBuilder('\Kanboard\Core\EmailClient')
+            ->getMockBuilder('\Kanboard\Core\Mail\Client')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('send'))
             ->getMock();
@@ -104,7 +104,7 @@ class EmailNotificationTest extends Base
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
         $this->container['emailClient'] = $this
-            ->getMockBuilder('\Kanboard\Core\EmailClient')
+            ->getMockBuilder('\Kanboard\Core\Mail\Client')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('send'))
             ->getMock();

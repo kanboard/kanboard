@@ -6,6 +6,8 @@
 
     <?= $this->form->csrf() ?>
 
+    <?= $this->hook->render('template:config:integrations', array('values' => $values)) ?>
+
     <h3><i class="fa fa-google"></i> <?= t('Google Authentication') ?></h3>
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('oauth', 'google', array(), false, '', true) ?>"/><br/>
@@ -22,24 +24,6 @@
     <div class="listing">
     <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('oauth', 'gitlab', array(), false, '', true) ?>"/><br/>
     <p class="form-help"><?= $this->url->doc(t('Help on Gitlab authentication'), 'gitlab-authentication') ?></p>
-    </div>
-
-    <h3><img src="<?= $this->url->dir() ?>assets/img/mailgun-icon.png"/>&nbsp;<?= t('Mailgun (incoming emails)') ?></h3>
-    <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'mailgun', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
-    <p class="form-help"><?= $this->url->doc(t('Help on Mailgun integration'), 'mailgun') ?></p>
-    </div>
-
-    <h3><img src="<?= $this->url->dir() ?>assets/img/sendgrid-icon.png"/>&nbsp;<?= t('Sendgrid (incoming emails)') ?></h3>
-    <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'sendgrid', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
-    <p class="form-help"><?= $this->url->doc(t('Help on Sendgrid integration'), 'sendgrid') ?></p>
-    </div>
-
-    <h3><img src="<?= $this->url->dir() ?>assets/img/postmark-icon.png"/>&nbsp;<?= t('Postmark (incoming emails)') ?></h3>
-    <div class="listing">
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('webhook', 'postmark', array('token' => $values['webhook_token']), false, '', true) ?>"/><br/>
-    <p class="form-help"><?= $this->url->doc(t('Help on Postmark integration'), 'postmark') ?></p>
     </div>
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/gravatar-icon.png"/>&nbsp;<?= t('Gravatar') ?></h3>

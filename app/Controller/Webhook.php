@@ -92,37 +92,4 @@ class Webhook extends Base
 
         echo $result ? 'PARSED' : 'IGNORED';
     }
-
-    /**
-     * Handle Postmark webhooks
-     *
-     * @access public
-     */
-    public function postmark()
-    {
-        $this->checkWebhookToken();
-        echo $this->postmark->receiveEmail($this->request->getJson()) ? 'PARSED' : 'IGNORED';
-    }
-
-    /**
-     * Handle Mailgun webhooks
-     *
-     * @access public
-     */
-    public function mailgun()
-    {
-        $this->checkWebhookToken();
-        echo $this->mailgun->receiveEmail($_POST) ? 'PARSED' : 'IGNORED';
-    }
-
-    /**
-     * Handle Sendgrid webhooks
-     *
-     * @access public
-     */
-    public function sendgrid()
-    {
-        $this->checkWebhookToken();
-        echo $this->sendgrid->receiveEmail($_POST) ? 'PARSED' : 'IGNORED';
-    }
 }

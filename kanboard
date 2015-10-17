@@ -5,16 +5,24 @@ require __DIR__.'/app/common.php';
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\EventDispatcher\Event;
+use Kanboard\Console\TaskOverdueNotification;
+use Kanboard\Console\SubtaskExport;
+use Kanboard\Console\TaskExport;
+use Kanboard\Console\ProjectDailyStatsCalculation;
+use Kanboard\Console\ProjectDailyColumnStatsExport;
+use Kanboard\Console\TransitionExport;
+use Kanboard\Console\LocaleSync;
+use Kanboard\Console\LocaleComparator;
 
 $container['dispatcher']->dispatch('console.bootstrap', new Event);
 
 $application = new Application('Kanboard', APP_VERSION);
-$application->add(new Console\TaskOverdueNotification($container));
-$application->add(new Console\SubtaskExport($container));
-$application->add(new Console\TaskExport($container));
-$application->add(new Console\ProjectDailyStatsCalculation($container));
-$application->add(new Console\ProjectDailyColumnStatsExport($container));
-$application->add(new Console\TransitionExport($container));
-$application->add(new Console\LocaleSync($container));
-$application->add(new Console\LocaleComparator($container));
+$application->add(new TaskOverdueNotification($container));
+$application->add(new SubtaskExport($container));
+$application->add(new TaskExport($container));
+$application->add(new ProjectDailyStatsCalculation($container));
+$application->add(new ProjectDailyColumnStatsExport($container));
+$application->add(new TransitionExport($container));
+$application->add(new LocaleSync($container));
+$application->add(new LocaleComparator($container));
 $application->run();

@@ -11,7 +11,7 @@ use Pimple\Container;
  * @author  Frederic Guillot
  *
  * @property \Kanboard\Core\Helper                                      $helper
- * @property \Kanboard\Core\EmailClient                                 $emailClient
+ * @property \Kanboard\Core\Mail\Client                                 $emailClient
  * @property \Kanboard\Core\HttpClient                                  $httpClient
  * @property \Kanboard\Core\Paginator                                   $paginator
  * @property \Kanboard\Core\Request                                     $request
@@ -29,11 +29,7 @@ use Pimple\Container;
  * @property \Kanboard\Integration\GitlabWebhook                        $gitlabWebhook
  * @property \Kanboard\Integration\HipchatWebhook                       $hipchatWebhook
  * @property \Kanboard\Integration\Jabber                               $jabber
- * @property \Kanboard\Integration\Mailgun                              $mailgun
- * @property \Kanboard\Integration\Postmark                             $postmark
- * @property \Kanboard\Integration\Sendgrid                             $sendgrid
  * @property \Kanboard\Integration\SlackWebhook                         $slackWebhook
- * @property \Kanboard\Integration\Smtp                                 $smtp
  * @property \Kanboard\Formatter\ProjectGanttFormatter                  $projectGanttFormatter
  * @property \Kanboard\Formatter\TaskFilterGanttFormatter               $taskFilterGanttFormatter
  * @property \Kanboard\Formatter\TaskFilterAutoCompleteFormatter        $taskFilterAutoCompleteFormatter
