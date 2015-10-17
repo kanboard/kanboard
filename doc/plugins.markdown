@@ -7,10 +7,11 @@ Plugins are useful to extend the core functionalities of Kanboard, adding featur
 
 Plugin creators should specify explicitly the compatible versions of Kanboard. Internal code of Kanboard may change over the time and your plugin must be tested with new versions.
 
-- [Plugin Registration](plugin-registration.markdown)
-- [Plugin Hooks](plugin-hooks.markdown)
-- [Plugin Overrides](plugin-overrides.markdown)
-- [Plugin Schema Migrations](plugin-schema-migrations.markdown)
+- [Creating your plugin](plugin-registration.markdown)
+- [Using plugin hooks](plugin-hooks.markdown)
+- [Override default application behaviors](plugin-overrides.markdown)
+- [Add schema migrations for plugins](plugin-schema-migrations.markdown)
+- [Add mail transports](plugin-mail-transports.markdown)
 
 Examples of plugins
 -------------------
