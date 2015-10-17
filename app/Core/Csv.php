@@ -131,7 +131,7 @@ class Csv
      *
      * @access public
      * @param  string    $filename
-     * @param  \Closure  $callback   Example: function(array $row, $line_number)
+     * @param  callable  $callback   Example: function(array $row, $line_number)
      * @return Csv
      */
     public function read($filename, $callback)

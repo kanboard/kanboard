@@ -16,7 +16,7 @@ class UserNotificationTypeTest extends Base
         $this->assertEquals(array('email' => 'Email', 'web' => 'Web'), $nt->getTypes());
     }
 
-    public function testGetUserNotificationTypes()
+    public function testGetSelectedTypes()
     {
         $nt = new UserNotificationType($this->container);
         $types = $nt->getSelectedTypes(1);

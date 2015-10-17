@@ -13,7 +13,7 @@ use Pimple\Container;
 abstract class NotificationType extends Base
 {
     /**
-     * Mail transport instances
+     * Container
      *
      * @access private
      * @var \Pimple\Container
@@ -21,12 +21,20 @@ abstract class NotificationType extends Base
     private $classes;
 
     /**
-     * Mail transport instances
+     * Notification type labels
      *
      * @access private
      * @var array
      */
     private $labels = array();
+
+    /**
+     * Hidden notification types
+     *
+     * @access private
+     * @var array
+     */
+    private $hiddens = array();
 
     /**
      * Constructor
@@ -47,15 +55,24 @@ abstract class NotificationType extends Base
      * @param  string  $type
      * @param  string  $label
      * @param  string  $class
+     * @param  boolean $hidden
+     * @return NotificationType
      */
-    public function setType($type, $label, $class)
+    public function setType($type, $label, $class, $hidden = false)
     {
         $container = $this->container;
-        $this->labels[$type] = $label;
+
+        if ($hidden) {
+            $this->hiddens[] = $type;
+        } else {
+            $this->labels[$type] = $label;
+        }
 
         $this->classes[$type] = function () use ($class, $container) {
             return new $class($container);
         };
+
+        return $this;
     }
 
     /**
@@ -79,5 +96,16 @@ abstract class NotificationType extends Base
     public function getTypes()
     {
         return $this->labels;
+    }
+
+    /**
+     * Get all hidden notification types
+     *
+     * @access public
+     * @return array
+     */
+    public function getHiddenTypes()
+    {
+        return $this->hiddens;
     }
 }

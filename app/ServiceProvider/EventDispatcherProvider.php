@@ -11,7 +11,6 @@ use Kanboard\Subscriber\NotificationSubscriber;
 use Kanboard\Subscriber\ProjectActivitySubscriber;
 use Kanboard\Subscriber\ProjectDailySummarySubscriber;
 use Kanboard\Subscriber\ProjectModificationDateSubscriber;
-use Kanboard\Subscriber\WebhookSubscriber;
 use Kanboard\Subscriber\SubtaskTimeTrackingSubscriber;
 use Kanboard\Subscriber\TaskMovedDateSubscriber;
 use Kanboard\Subscriber\TransitionSubscriber;
@@ -27,7 +26,6 @@ class EventDispatcherProvider implements ServiceProviderInterface
         $container['dispatcher']->addSubscriber(new ProjectActivitySubscriber($container));
         $container['dispatcher']->addSubscriber(new ProjectDailySummarySubscriber($container));
         $container['dispatcher']->addSubscriber(new ProjectModificationDateSubscriber($container));
-        $container['dispatcher']->addSubscriber(new WebhookSubscriber($container));
         $container['dispatcher']->addSubscriber(new NotificationSubscriber($container));
         $container['dispatcher']->addSubscriber(new SubtaskTimeTrackingSubscriber($container));
         $container['dispatcher']->addSubscriber(new TaskMovedDateSubscriber($container));

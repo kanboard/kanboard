@@ -20,8 +20,6 @@ class OverdueNotification extends Base
         $tasks = $this->taskFinder->getOverdueTasks();
 
         foreach ($this->groupByColumn($tasks, 'project_id') as $project_id => $project_tasks) {
-
-            // Get the list of users that should receive notifications for each projects
             $users = $this->userNotification->getUsersWithNotificationEnabled($project_id);
 
             foreach ($users as $user) {

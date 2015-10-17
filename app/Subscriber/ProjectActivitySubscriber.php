@@ -61,10 +61,10 @@ class ProjectActivitySubscriber extends \Kanboard\Core\Base implements EventSubs
         $values['changes'] = isset($event['changes']) ? $event['changes'] : array();
 
         switch (get_class($event)) {
-            case 'Event\SubtaskEvent':
+            case 'Kanboard\Event\SubtaskEvent':
                 $values['subtask'] = $this->subtask->getById($event['id'], true);
                 break;
-            case 'Event\CommentEvent':
+            case 'Kanboard\Event\CommentEvent':
                 $values['comment'] = $this->comment->getById($event['id']);
                 break;
         }

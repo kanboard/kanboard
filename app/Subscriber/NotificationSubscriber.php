@@ -32,17 +32,25 @@ class NotificationSubscriber extends \Kanboard\Core\Base implements EventSubscri
 
     public function execute(GenericEvent $event, $event_name)
     {
-        $this->userNotification->sendNotifications($event_name, $this->getEventData($event));
+        $event_data = $this->getEventData($event);
+
+        if (! empty($event_data)) {
+            $this->userNotification->sendNotifications($event_name, $event_data);
+            $this->projectNotification->sendNotifications($event_data['task']['project_id'], $event_name, $event_data);
+        }
     }
 
     public function getEventData(GenericEvent $event)
     {
         $values = array();
 
+        if (! empty($event['changes'])) {
+            $values['changes'] = $event['changes'];
+        }
+
         switch (get_class($event)) {
             case 'Kanboard\Event\TaskEvent':
                 $values['task'] = $this->taskFinder->getDetails($event['task_id']);
-                $values['changes'] = isset($event['changes']) ? $event['changes'] : array();
                 break;
             case 'Kanboard\Event\SubtaskEvent':
                 $values['subtask'] = $this->subtask->getById($event['id'], true);

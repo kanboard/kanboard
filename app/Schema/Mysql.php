@@ -6,7 +6,21 @@ use PDO;
 use Kanboard\Core\Security;
 use Kanboard\Model\Link;
 
-const VERSION = 91;
+const VERSION = 92;
+
+function version_92($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_has_notification_types (
+            id INT NOT NULL AUTO_INCREMENT,
+            project_id INT NOT NULL,
+            notification_type VARCHAR(50),
+            PRIMARY KEY(id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+            UNIQUE(project_id, notification_type),
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+}
 
 function version_91($pdo)
 {

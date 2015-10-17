@@ -2,6 +2,9 @@
 
 namespace Kanboard\ServiceProvider;
 
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
+use League\HTMLToMarkdown\HtmlConverter;
 use Kanboard\Core\Plugin\Loader;
 use Kanboard\Core\Mail\Client as EmailClient;
 use Kanboard\Core\ObjectStorage\FileStorage;
@@ -9,9 +12,7 @@ use Kanboard\Core\Paginator;
 use Kanboard\Core\OAuth2;
 use Kanboard\Core\Tool;
 use Kanboard\Model\UserNotificationType;
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
-use League\HTMLToMarkdown\HtmlConverter;
+use Kanboard\Model\ProjectNotificationType;
 
 class ClassProvider implements ServiceProviderInterface
 {
@@ -39,6 +40,7 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectDailyStats',
             'ProjectIntegration',
             'ProjectPermission',
+            'ProjectNotification',
             'Subtask',
             'SubtaskExport',
             'SubtaskTimeTracking',
@@ -65,7 +67,6 @@ class ClassProvider implements ServiceProviderInterface
             'UserNotificationType',
             'UserNotificationFilter',
             'UserUnreadNotification',
-            'Webhook',
         ),
         'Formatter' => array(
             'TaskFilterGanttFormatter',
@@ -132,6 +133,12 @@ class ClassProvider implements ServiceProviderInterface
             $type = new UserNotificationType($container);
             $type->setType('email', t('Email'), '\Kanboard\Notification\Mail');
             $type->setType('web', t('Web'), '\Kanboard\Notification\Web');
+            return $type;
+        };
+
+        $container['projectNotificationType'] = function ($container) {
+            $type = new ProjectNotificationType($container);
+            $type->setType('webhook', t('Webhook'), '\Kanboard\Notification\Webhook', true);
             return $type;
         };
 
