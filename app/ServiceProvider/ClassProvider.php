@@ -29,7 +29,6 @@ class ClassProvider implements ServiceProviderInterface
             'Config',
             'Currency',
             'CustomFilter',
-            'DateParser',
             'File',
             'LastLogin',
             'Link',
@@ -79,6 +78,7 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectGanttFormatter',
         ),
         'Core' => array(
+            'DateParser',
             'Helper',
             'HttpClient',
             'Lexer',

@@ -1,13 +1,13 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Core;
 
 use DateTime;
 
 /**
- * Date parser model
+ * Date Parser
  *
- * @package  model
+ * @package  core
  * @author   Frederic Guillot
  */
 class DateParser extends Base

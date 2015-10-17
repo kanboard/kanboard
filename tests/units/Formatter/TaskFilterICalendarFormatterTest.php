@@ -7,7 +7,7 @@ use Kanboard\Formatter\TaskFilterICalendarFormatter;
 use Kanboard\Model\Project;
 use Kanboard\Model\User;
 use Kanboard\Model\TaskCreation;
-use Kanboard\Model\DateParser;
+use Kanboard\Core\DateParser;
 use Kanboard\Model\Category;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Config;
