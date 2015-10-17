@@ -6,21 +6,19 @@ class LocaleTest extends Base
 {
     public function testLocales()
     {
-        foreach(glob('app/Locale/*') as $file) {
-
+        foreach (glob('app/Locale/*') as $file) {
             $locale = require($file . '/translations.php');
 
-            foreach($locale as $k => $v) {
-
-                if (strpos($k,'%B %e, %Y') !== false) {
+            foreach ($locale as $k => $v) {
+                if (strpos($k, '%B %e, %Y') !== false) {
                     continue;
                 }
 
-                if (strpos($k,'%b %e, %Y') !== false) {
+                if (strpos($k, '%b %e, %Y') !== false) {
                     continue;
                 }
 
-                foreach(array('%s', '%d') as $placeholder) {
+                foreach (array('%s', '%d') as $placeholder) {
                     $this->assertEquals(
                         substr_count($k, $placeholder),
                         substr_count($v, $placeholder),

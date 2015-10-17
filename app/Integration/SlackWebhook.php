@@ -70,7 +70,6 @@ class SlackWebhook extends \Kanboard\Core\Base
     public function notify($project_id, $task_id, $event_name, array $event)
     {
         if ($this->isActivated($project_id)) {
-
             $project = $this->project->getbyId($project_id);
 
             $event['event_name'] = $event_name;

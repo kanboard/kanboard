@@ -50,7 +50,6 @@ class File extends Base
     public function remove($file_id)
     {
         try {
-
             $file = $this->getbyId($file_id);
             $this->objectStorage->remove($file['path']);
 
@@ -59,8 +58,7 @@ class File extends Base
             }
 
             return $this->db->table(self::TABLE)->eq('id', $file['id'])->remove();
-        }
-        catch (ObjectStorageException $e) {
+        } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
             return false;
         }
@@ -108,7 +106,6 @@ class File extends Base
         ));
 
         if ($result) {
-
             $this->container['dispatcher']->dispatch(
                 self::EVENT_CREATE,
                 new FileEvent(array('task_id' => $task_id, 'name' => $name))
@@ -266,15 +263,12 @@ class File extends Base
     public function uploadFiles($project_id, $task_id, $form_name)
     {
         try {
-
             if (empty($_FILES[$form_name])) {
                 return false;
             }
 
             foreach ($_FILES[$form_name]['error'] as $key => $error) {
-
                 if ($error == UPLOAD_ERR_OK && $_FILES[$form_name]['size'][$key] > 0) {
-
                     $original_filename = $_FILES[$form_name]['name'][$key];
                     $uploaded_filename = $_FILES[$form_name]['tmp_name'][$key];
                     $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
@@ -295,8 +289,7 @@ class File extends Base
             }
 
             return true;
-        }
-        catch (ObjectStorageException $e) {
+        } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
             return false;
         }
@@ -330,7 +323,6 @@ class File extends Base
     public function uploadContent($project_id, $task_id, $original_filename, $blob)
     {
         try {
-
             $data = base64_decode($blob);
 
             if (empty($data)) {
@@ -350,8 +342,7 @@ class File extends Base
                 $destination_filename,
                 strlen($data)
             );
-        }
-        catch (ObjectStorageException $e) {
+        } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
             return false;
         }

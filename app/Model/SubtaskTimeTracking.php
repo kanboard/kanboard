@@ -214,7 +214,6 @@ class SubtaskTimeTracking extends Base
         $events = array();
 
         foreach ($rows as $row) {
-
             $user = isset($row['username']) ? ' ('.($row['user_fullname'] ?: $row['username']).')' : '';
 
             $events[] = array(

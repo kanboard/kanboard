@@ -239,12 +239,11 @@ class Board extends Base
     {
         $values = $this->request->getValues();
 
-        list($valid,) = $this->taskValidator->validateAssigneeModification($values);
+        list($valid, ) = $this->taskValidator->validateAssigneeModification($values);
 
         if ($valid && $this->taskModification->update($values)) {
             $this->session->flash(t('Task updated successfully.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to update your task.'));
         }
 
@@ -277,12 +276,11 @@ class Board extends Base
     {
         $values = $this->request->getValues();
 
-        list($valid,) = $this->taskValidator->validateCategoryModification($values);
+        list($valid, ) = $this->taskValidator->validateCategoryModification($values);
 
         if ($valid && $this->taskModification->update($values)) {
             $this->session->flash(t('Task updated successfully.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to update your task.'));
         }
 
@@ -365,8 +363,7 @@ class Board extends Base
 
         if ($this->request->isAjax()) {
             $this->response->html($this->renderBoard($project_id));
-        }
-        else {
+        } else {
             $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project_id)));
         }
     }

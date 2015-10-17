@@ -23,7 +23,6 @@ class Search extends Base
                 ->setDirection('DESC');
 
         if ($search !== '') {
-
             $query = $this
                 ->taskFilter
                 ->search($search)

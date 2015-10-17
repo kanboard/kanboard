@@ -54,12 +54,10 @@ class Currency extends Base
         list($valid, $errors) = $this->currency->validate($values);
 
         if ($valid) {
-
             if ($this->currency->create($values['currency'], $values['rate'])) {
                 $this->session->flash(t('The currency rate have been added successfully.'));
                 $this->response->redirect($this->helper->url->to('currency', 'index'));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to add this currency rate.'));
             }
         }
@@ -79,8 +77,7 @@ class Currency extends Base
         if ($this->config->save($values)) {
             $this->config->reload();
             $this->session->flash(t('Settings saved successfully.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to save your settings.'));
         }
 

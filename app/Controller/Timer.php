@@ -24,8 +24,7 @@ class Timer extends Base
 
         if ($timer === 'start') {
             $this->subtaskTimeTracking->logStartTime($subtask_id, $this->userSession->getId());
-        }
-        else if ($timer === 'stop') {
+        } elseif ($timer === 'stop') {
             $this->subtaskTimeTracking->logEndTime($subtask_id, $this->userSession->getId());
             $this->subtaskTimeTracking->updateTaskTimeTracking($task_id);
         }

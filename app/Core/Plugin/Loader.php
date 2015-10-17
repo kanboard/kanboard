@@ -94,7 +94,6 @@ class Loader extends \Kanboard\Core\Base
         $current_version = $this->getSchemaVersion($plugin);
 
         try {
-
             $this->db->startTransaction();
             $this->db->getDriver()->disableForeignKeys();
 
@@ -109,8 +108,7 @@ class Loader extends \Kanboard\Core\Base
             $this->db->getDriver()->enableForeignKeys();
             $this->db->closeTransaction();
             $this->setSchemaVersion($plugin, $i - 1);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $this->db->cancelTransaction();
             $this->db->getDriver()->enableForeignKeys();
             die('Unable to migrate schema for the plugin: '.$plugin.' => '.$e->getMessage());

@@ -25,14 +25,12 @@ class File extends \Kanboard\Core\Base
     public function downloadFile($file_id)
     {
         try {
-
             $file = $this->file->getById($file_id);
 
             if (! empty($file)) {
                 return base64_encode($this->objectStorage->get($file['path']));
             }
-        }
-        catch (ObjectStorageException $e) {
+        } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
         }
 

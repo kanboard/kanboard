@@ -60,7 +60,6 @@ abstract class Base extends \Kanboard\Core\Base
     public function __destruct()
     {
         if (DEBUG) {
-
             foreach ($this->container['db']->getLogMessages() as $message) {
                 $this->container['logger']->debug($message);
             }
@@ -123,7 +122,6 @@ abstract class Base extends \Kanboard\Core\Base
     public function handleAuthentication()
     {
         if (! $this->authentication->isAuthenticated()) {
-
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);
             }
@@ -143,7 +141,6 @@ abstract class Base extends \Kanboard\Core\Base
         $ignore = ($controller === 'twofactor' && in_array($action, array('code', 'check'))) || ($controller === 'auth' && $action === 'logout');
 
         if ($ignore === false && $this->userSession->has2FA() && ! $this->userSession->check2FA()) {
-
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);
             }

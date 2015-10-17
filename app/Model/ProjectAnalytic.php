@@ -24,7 +24,6 @@ class ProjectAnalytic extends Base
         $columns = $this->board->getColumns($project_id);
 
         foreach ($columns as $column) {
-
             $nb_tasks = $this->taskFinder->countByColumnId($project_id, $column['id']);
             $total += $nb_tasks;
 
@@ -60,7 +59,6 @@ class ProjectAnalytic extends Base
         $users = $this->projectPermission->getMemberList($project_id);
 
         foreach ($tasks as $task) {
-
             $user = isset($users[$task['owner_id']]) ? $users[$task['owner_id']] : $users[0];
             $total++;
 

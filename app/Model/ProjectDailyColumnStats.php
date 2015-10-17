@@ -32,7 +32,7 @@ class ProjectDailyColumnStats extends Base
     {
         $status = $this->config->get('cfd_include_closed_tasks') == 1 ? array(Task::STATUS_OPEN, Task::STATUS_CLOSED) : array(Task::STATUS_OPEN);
 
-        return $this->db->transaction(function($db) use ($project_id, $date, $status) {
+        return $this->db->transaction(function ($db) use ($project_id, $date, $status) {
 
             $column_ids = $db->table(Board::TABLE)->eq('project_id', $project_id)->findAllByColumn('id');
 
@@ -171,7 +171,6 @@ class ProjectDailyColumnStats extends Base
 
         // Aggregate by day
         foreach ($records as $record) {
-
             if (! isset($aggregates[$record['day']])) {
                 $aggregates[$record['day']] = array($record['day']);
             }
@@ -181,7 +180,6 @@ class ProjectDailyColumnStats extends Base
 
         // Aggregate by row
         foreach ($aggregates as $aggregate) {
-
             $row = array($aggregate[0]);
 
             foreach ($column_ids as $column_id) {

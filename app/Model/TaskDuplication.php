@@ -63,7 +63,6 @@ class TaskDuplication extends Base
         $values = $this->copyFields($task_id);
 
         if ($values['recurrence_status'] == Task::RECURRING_STATUS_PENDING) {
-
             $values['recurrence_parent'] = $task_id;
             $values['column_id'] = $this->board->getFirstColumn($values['project_id']);
             $this->calculateRecurringTaskDueDate($values);
@@ -71,7 +70,6 @@ class TaskDuplication extends Base
             $recurring_task_id = $this->save($task_id, $values);
 
             if ($recurring_task_id > 0) {
-
                 $parent_update = $this->db
                     ->table(Task::TABLE)
                     ->eq('id', $task_id)
@@ -203,7 +201,6 @@ class TaskDuplication extends Base
     public function calculateRecurringTaskDueDate(array &$values)
     {
         if (! empty($values['date_due']) && $values['recurrence_factor'] != 0) {
-
             if ($values['recurrence_basedate'] == Task::RECURRING_BASEDATE_TRIGGERDATE) {
                 $values['date_due'] = time();
             }

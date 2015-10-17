@@ -28,8 +28,8 @@ class TaskCreationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function () {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function () {});
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(0, $tc->create(array('title' => 'test', 'project_id' => 0)));
@@ -45,8 +45,8 @@ class TaskCreationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function () {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function () {});
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1)));
@@ -68,7 +68,7 @@ class TaskCreationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function () {});
         $this->container['dispatcher']->addListener(Task::EVENT_CREATE, array($this, 'onCreate'));
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));

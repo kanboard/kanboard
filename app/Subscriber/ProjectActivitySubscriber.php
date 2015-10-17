@@ -32,7 +32,6 @@ class ProjectActivitySubscriber extends \Kanboard\Core\Base implements EventSubs
     {
         // Executed only when someone is logged
         if ($this->userSession->isLogged() && isset($event['task_id'])) {
-
             $values = $this->getValues($event);
 
             $this->projectActivity->createEvent(

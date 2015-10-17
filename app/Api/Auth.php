@@ -29,11 +29,9 @@ class Auth extends Base
         if ($username !== 'jsonrpc' && ! $this->authentication->hasCaptcha($username) && $this->authentication->authenticate($username, $password)) {
             $this->checkProcedurePermission(true, $method);
             $this->userSession->refresh($this->user->getByUsername($username));
-        }
-        else if ($username === 'jsonrpc' && $password === $this->config->get('api_token')) {
+        } elseif ($username === 'jsonrpc' && $password === $this->config->get('api_token')) {
             $this->checkProcedurePermission(false, $method);
-        }
-        else {
+        } else {
             throw new AuthenticationFailure('Wrong credentials');
         }
     }

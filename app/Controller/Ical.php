@@ -89,8 +89,7 @@ class Ical extends Base
                 ->setColumns('date_creation', 'date_completed')
                 ->setCalendar($calendar)
                 ->addDateTimeEvents();
-        }
-        else {
+        } else {
             $filter
                 ->copy()
                 ->filterByStartDateRange($start, $end)

@@ -88,7 +88,6 @@ class RememberMe extends Base
         $credentials = $this->readCookie();
 
         if ($credentials !== false) {
-
             $record = $this->find($credentials['token'], $credentials['sequence']);
 
             if ($record) {
@@ -144,7 +143,6 @@ class RememberMe extends Base
         $credentials = $this->readCookie();
 
         if ($credentials !== false) {
-
             $this->deleteCookie();
 
             $this->db

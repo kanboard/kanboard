@@ -272,9 +272,7 @@ class TaskPositionTest extends Base
         $task_per_column = 5;
 
         foreach (array(1, 2, 3, 4) as $column_id) {
-
             for ($i = 1; $i <= $task_per_column; $i++, $counter++) {
-
                 $task = array(
                     'title' => 'Task #'.$i.'-'.$column_id,
                     'project_id' => 1,

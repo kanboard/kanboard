@@ -112,15 +112,15 @@ class ClassProvider implements ServiceProviderInterface
             return new OAuth2($c);
         });
 
-        $container['htmlConverter'] = function() {
+        $container['htmlConverter'] = function () {
             return new HtmlConverter(array('strip_tags' => true));
         };
 
-        $container['objectStorage'] = function() {
+        $container['objectStorage'] = function () {
             return new FileStorage(FILES_DIR);
         };
 
-        $container['emailClient'] = function($container) {
+        $container['emailClient'] = function ($container) {
             $mailer = new EmailClient($container);
             $mailer->setTransport('smtp', '\Kanboard\Core\Mail\Transport\Smtp');
             $mailer->setTransport('sendmail', '\Kanboard\Core\Mail\Transport\Sendmail');
@@ -128,7 +128,7 @@ class ClassProvider implements ServiceProviderInterface
             return $mailer;
         };
 
-        $container['userNotificationType'] = function($container) {
+        $container['userNotificationType'] = function ($container) {
             $type = new UserNotificationType($container);
             $type->setType('email', t('Email'), '\Kanboard\Notification\Mail');
             $type->setType('web', t('Web'), '\Kanboard\Notification\Web');

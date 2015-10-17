@@ -411,7 +411,6 @@ function version_49($pdo)
     $rq->execute();
 
     foreach ($rq->fetchAll(PDO::FETCH_ASSOC) as $subtask) {
-
         if ($task_id != $subtask['task_id']) {
             $position = 1;
             $task_id = $subtask['task_id'];

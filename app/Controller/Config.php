@@ -37,7 +37,6 @@ class Config extends Base
     private function common($redirect)
     {
         if ($this->request->isPost()) {
-
             $values =  $this->request->getValues();
 
             switch ($redirect) {
@@ -55,8 +54,7 @@ class Config extends Base
             if ($this->config->save($values)) {
                 $this->config->reload();
                 $this->session->flash(t('Settings saved successfully.'));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to save your settings.'));
             }
 

@@ -46,8 +46,7 @@ class Customfilter extends Base
             if ($this->customFilter->create($values)) {
                 $this->session->flash(t('Your custom filter have been created successfully.'));
                 $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to create your custom filter.'));
             }
         }
@@ -126,8 +125,7 @@ class Customfilter extends Base
             if ($this->customFilter->update($values)) {
                 $this->session->flash(t('Your custom filter have been updated successfully.'));
                 $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to update custom filter.'));
             }
         }

@@ -127,17 +127,13 @@ class Router extends Base
         $count = count($parts);
 
         foreach ($this->paths as $route) {
-
             if ($count === $route['count']) {
-
                 $params = array();
 
                 for ($i = 0; $i < $count; $i++) {
-
                     if ($route['pattern'][$i]{0} === ':') {
                         $params[substr($route['pattern'][$i], 1)] = $parts[$i];
-                    }
-                    else if ($route['pattern'][$i] !== $parts[$i]) {
+                    } elseif ($route['pattern'][$i] !== $parts[$i]) {
                         break;
                     }
                 }
@@ -168,7 +164,6 @@ class Router extends Base
         }
 
         foreach ($this->urls[$controller][$action] as $pattern) {
-
             if (array_diff_key($params, $pattern['params']) === array()) {
                 $url = $pattern['path'];
                 $i = 0;
@@ -213,8 +208,7 @@ class Router extends Base
             $this->controller = $this->sanitize($_GET['controller'], 'app');
             $this->action = $this->sanitize($_GET['action'], 'index');
             $plugin = ! empty($_GET['plugin']) ? $this->sanitize($_GET['plugin'], '') : '';
-        }
-        else {
+        } else {
             list($this->controller, $this->action) = $this->findRoute($this->getPath($uri, $query_string)); // TODO: add plugin for routes
             $plugin = '';
         }

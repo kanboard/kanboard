@@ -359,7 +359,6 @@ function version_48($pdo)
     $rq->execute();
 
     foreach ($rq->fetchAll(PDO::FETCH_ASSOC) as $subtask) {
-
         if ($task_id != $subtask['task_id']) {
             $position = 1;
             $task_id = $subtask['task_id'];
@@ -419,13 +418,13 @@ function version_45($pdo)
 
 function version_44($pdo)
 {
-	$pdo->exec('ALTER TABLE tasks ADD COLUMN date_moved INTEGER DEFAULT 0');
+    $pdo->exec('ALTER TABLE tasks ADD COLUMN date_moved INTEGER DEFAULT 0');
 
-	/* Update tasks.date_moved from project_activities table if tasks.date_moved = null or 0.
-	 * We take max project_activities.date_creation where event_name in task.create','task.move.column
-	 * since creation date is always less than task moves
-	 */
-	$pdo->exec("UPDATE tasks
+    /* Update tasks.date_moved from project_activities table if tasks.date_moved = null or 0.
+     * We take max project_activities.date_creation where event_name in task.create','task.move.column
+     * since creation date is always less than task moves
+     */
+    $pdo->exec("UPDATE tasks
                 SET date_moved = (
                     SELECT md
                     FROM (

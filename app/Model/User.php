@@ -280,11 +280,9 @@ class User extends Base
     public function prepare(array &$values)
     {
         if (isset($values['password'])) {
-
             if (! empty($values['password'])) {
                 $values['password'] = \password_hash($values['password'], PASSWORD_BCRYPT);
-            }
-            else {
+            } else {
                 unset($values['password']);
             }
         }
@@ -516,8 +514,7 @@ class User extends Base
 
         if (isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1) {
             $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-        }
-        else {
+        } else {
             $v = new Validator($values, array_merge($rules, $this->commonValidationRules(), $this->commonPasswordValidationRules()));
         }
 
@@ -591,8 +588,7 @@ class User extends Base
             // Check password
             if ($this->authentication->authenticate($this->session['user']['username'], $values['current_password'])) {
                 return array(true, array());
-            }
-            else {
+            } else {
                 return array(false, array('current_password' => array(t('Wrong password'))));
             }
         }

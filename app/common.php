@@ -4,7 +4,6 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 // Automatically parse environment configuration (Heroku)
 if (getenv('DATABASE_URL')) {
-
     $dbopts = parse_url(getenv('DATABASE_URL'));
 
     define('DB_DRIVER', $dbopts['scheme']);

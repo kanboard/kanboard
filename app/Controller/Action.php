@@ -115,14 +115,12 @@ class Action extends Base
      */
     private function doCreation(array $project, array $values)
     {
-        list($valid,) = $this->action->validateCreation($values);
+        list($valid, ) = $this->action->validateCreation($values);
 
         if ($valid) {
-
             if ($this->action->create($values) !== false) {
                 $this->session->flash(t('Your automatic action have been created successfully.'));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to create your automatic action.'));
             }
         }

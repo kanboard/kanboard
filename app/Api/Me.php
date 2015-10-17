@@ -45,7 +45,7 @@ class Me extends Base
             'is_private' => 1,
         );
 
-        list($valid,) = $this->project->validateCreation($values);
+        list($valid, ) = $this->project->validateCreation($values);
         return $valid ? $this->project->create($values, $this->userSession->getId(), true) : false;
     }
 

@@ -44,7 +44,6 @@ class LastLogin extends Base
                             ->findAllByColumn('id');
 
         if (count($connections) >= self::NB_LOGINS) {
-
             $this->db->table(self::TABLE)
                      ->eq('user_id', $user_id)
                      ->notin('id', array_slice($connections, 0, self::NB_LOGINS - 1))

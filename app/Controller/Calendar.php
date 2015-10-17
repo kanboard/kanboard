@@ -44,8 +44,7 @@ class Calendar extends Base
         // Tasks
         if ($this->config->get('calendar_project_tasks', 'date_started') === 'date_creation') {
             $events = $filter->copy()->filterByCreationDateRange($start, $end)->setColumns('date_creation', 'date_completed')->format();
-        }
-        else {
+        } else {
             $events = $filter->copy()->filterByStartDateRange($start, $end)->setColumns('date_started', 'date_completed')->format();
         }
 
@@ -79,8 +78,7 @@ class Calendar extends Base
         // Tasks
         if ($this->config->get('calendar_user_tasks', 'date_started') === 'date_creation') {
             $events = array_merge($events, $filter->copy()->filterByCreationDateRange($start, $end)->setColumns('date_creation', 'date_completed')->format());
-        }
-        else {
+        } else {
             $events = array_merge($events, $filter->copy()->filterByStartDateRange($start, $end)->setColumns('date_started', 'date_completed')->format());
         }
 
@@ -106,7 +104,6 @@ class Calendar extends Base
     public function save()
     {
         if ($this->request->isAjax() && $this->request->isPost()) {
-
             $values = $this->request->getJson();
 
             $this->taskModification->update(array(

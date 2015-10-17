@@ -113,8 +113,7 @@ class Color extends Base
         foreach ($this->default_colors as $color_id => $params) {
             if ($color_id === $color) {
                 return $color_id;
-            }
-            else if ($color === strtolower($params['name'])) {
+            } elseif ($color === strtolower($params['name'])) {
                 return $color_id;
             }
         }

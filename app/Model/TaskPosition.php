@@ -41,11 +41,9 @@ class TaskPosition extends Base
 
         if ($task['swimlane_id'] != $swimlane_id) {
             $result = $this->saveSwimlaneChange($project_id, $task_id, $position, $task['column_id'], $column_id, $task['swimlane_id'], $swimlane_id);
-        }
-        else if ($task['column_id'] != $column_id) {
+        } elseif ($task['column_id'] != $column_id) {
             $result = $this->saveColumnChange($project_id, $task_id, $position, $swimlane_id, $task['column_id'], $column_id);
-        }
-        else if ($task['position'] != $position) {
+        } elseif ($task['position'] != $position) {
             $result = $this->savePositionChange($project_id, $task_id, $position, $column_id, $swimlane_id);
         }
 
@@ -224,11 +222,9 @@ class TaskPosition extends Base
 
         if ($task['swimlane_id'] != $new_swimlane_id) {
             $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_SWIMLANE, new TaskEvent($event_data));
-        }
-        else if ($task['column_id'] != $new_column_id) {
+        } elseif ($task['column_id'] != $new_column_id) {
             $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_COLUMN, new TaskEvent($event_data));
-        }
-        else if ($task['position'] != $new_position) {
+        } elseif ($task['position'] != $new_position) {
             $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_POSITION, new TaskEvent($event_data));
         }
     }

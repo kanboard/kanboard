@@ -22,11 +22,9 @@ class Webhook extends Base
         $token = $this->config->get('webhook_token');
 
         if (! empty($url)) {
-
             if (strpos($url, '?') !== false) {
                 $url .= '&token='.$token;
-            }
-            else {
+            } else {
                 $url .= '?token='.$token;
             }
 

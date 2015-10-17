@@ -52,8 +52,7 @@ class Oauth extends Base
 
         if ($this->authentication->backend($backend)->unlink($this->userSession->getId())) {
             $this->session->flash(t('Your external account is not linked anymore to your profile.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to unlink your external account.'));
         }
 
@@ -71,8 +70,7 @@ class Oauth extends Base
 
         if (! empty($code)) {
             $this->step2($backend, $code);
-        }
-        else {
+        } else {
             $this->response->redirect($this->authentication->backend($backend)->getService()->getAuthorizationUrl());
         }
     }
@@ -102,8 +100,7 @@ class Oauth extends Base
     {
         if (empty($profile)) {
             $this->session->flashError(t('External authentication failed'));
-        }
-        else {
+        } else {
             $this->session->flash(t('Your external account is linked to your profile successfully.'));
             $this->authentication->backend($backend)->updateUser($this->userSession->getId(), $profile);
         }
@@ -120,8 +117,7 @@ class Oauth extends Base
     {
         if (! empty($profile) && $this->authentication->backend($backend)->authenticate($profile['id'])) {
             $this->response->redirect($this->helper->url->to('app', 'index'));
-        }
-        else {
+        } else {
             $this->response->html($this->template->layout('auth/index', array(
                 'errors' => array('login' => t('External authentication failed')),
                 'values' => array(),

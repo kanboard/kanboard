@@ -51,8 +51,7 @@ class UserNotification extends Base
         // Use the user language otherwise use the application language (do not use the session language)
         if (! empty($user['language'])) {
             Translator::load($user['language']);
-        }
-        else {
+        } else {
             Translator::load($this->config->get('application_language', 'en_US'));
         }
 
@@ -123,8 +122,7 @@ class UserNotification extends Base
             $this->userNotificationFilter->saveFilter($user_id, $filter);
             $this->userNotificationFilter->saveSelectedProjects($user_id, $projects);
             $this->userNotificationType->saveSelectedTypes($user_id, $types);
-        }
-        else {
+        } else {
             $this->disableNotification($user_id);
         }
 

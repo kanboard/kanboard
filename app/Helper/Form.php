@@ -52,11 +52,14 @@ class Form extends \Kanboard\Core\Base
         $html = '<select name="'.$name.'" id="form-'.$name.'" class="'.$class.'" '.implode(' ', $attributes).'>';
 
         foreach ($options as $id => $value) {
-
             $html .= '<option value="'.$this->helper->e($id).'"';
 
-            if (isset($values->$name) && $id == $values->$name) $html .= ' selected="selected"';
-            if (isset($values[$name]) && $id == $values[$name]) $html .= ' selected="selected"';
+            if (isset($values->$name) && $id == $values->$name) {
+                $html .= ' selected="selected"';
+            }
+            if (isset($values[$name]) && $id == $values[$name]) {
+                $html .= ' selected="selected"';
+            }
 
             $html .= '>'.$this->helper->e($value).'</option>';
         }
@@ -328,7 +331,6 @@ class Form extends \Kanboard\Core\Base
         $html = '';
 
         if (isset($errors[$name])) {
-
             $html .= '<ul class="form-errors">';
 
             foreach ($errors[$name] as $error) {

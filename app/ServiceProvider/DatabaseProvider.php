@@ -42,8 +42,7 @@ class DatabaseProvider implements ServiceProviderInterface
 
         if ($db->schema()->check(\Schema\VERSION)) {
             return $db;
-        }
-        else {
+        } else {
             $errors = $db->getLogMessages();
             die('Unable to migrate database schema: <br/><br/><strong>'.(isset($errors[0]) ? $errors[0] : 'Unknown error').'</strong>');
         }

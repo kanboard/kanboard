@@ -68,7 +68,7 @@
             <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('My filters') ?></a>
             <ul>
                 <?php foreach ($custom_filters_list as $filter): ?>
-                    <li><a href="#" class="filter-helper" data-<?php if($filter['append']): ?><?= 'append-' ?><?php endif ?>filter='<?= $this->e($filter['filter']) ?>'><?= $this->e($filter['name']) ?></a></li>
+                    <li><a href="#" class="filter-helper" data-<?php if ($filter['append']): ?><?= 'append-' ?><?php endif ?>filter='<?= $this->e($filter['filter']) ?>'><?= $this->e($filter['name']) ?></a></li>
                 <?php endforeach ?>
             </ul>
             </div>

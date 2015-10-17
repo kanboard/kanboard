@@ -60,7 +60,6 @@ class Lexer
         $this->offset = 0;
 
         while (isset($input[$this->offset])) {
-
             $result = $this->match(substr($input, $this->offset));
 
             if ($result === false) {
@@ -84,7 +83,6 @@ class Lexer
     {
         foreach ($this->tokenMap as $pattern => $name) {
             if (preg_match($pattern, $string, $matches)) {
-
                 $this->offset += strlen($matches[1]);
 
                 return array(
@@ -113,7 +111,6 @@ class Lexer
         );
 
         while (false !== ($token = current($tokens))) {
-
             switch ($token['token']) {
                 case 'T_ASSIGNEE':
                 case 'T_COLOR':

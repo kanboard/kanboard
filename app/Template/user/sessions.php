@@ -13,7 +13,7 @@
         <th><?= t('User agent') ?></th>
         <th class="column-10"><?= t('Action') ?></th>
     </tr>
-    <?php foreach($sessions as $session): ?>
+    <?php foreach ($sessions as $session): ?>
     <tr>
         <td><?= dt('%B %e, %Y at %k:%M %p', $session['date_creation']) ?></td>
         <td><?= dt('%B %e, %Y at %k:%M %p', $session['expiration']) ?></td>

@@ -39,7 +39,7 @@ class User extends \Kanboard\Core\Base
             'is_project_admin' => $is_project_admin,
         );
 
-        list($valid,) = $this->user->validateCreation($values);
+        list($valid, ) = $this->user->validateCreation($values);
         return $valid ? $this->user->create($values) : false;
     }
 
@@ -81,7 +81,7 @@ class User extends \Kanboard\Core\Base
             }
         }
 
-        list($valid,) = $this->user->validateApiModification($values);
+        list($valid, ) = $this->user->validateApiModification($values);
         return $valid && $this->user->update($values);
     }
 }

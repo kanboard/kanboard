@@ -31,9 +31,7 @@ class ProjectGanttFormatter extends Project implements FormatterInterface
     {
         if (empty($project_ids)) {
             $this->projects = array();
-        }
-        else {
-
+        } else {
             $this->projects = $this->db
                 ->table(self::TABLE)
                 ->asc('start_date')

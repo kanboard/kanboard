@@ -1,5 +1,5 @@
 <table class="table-small">
-    <?php foreach($files as $file): ?>
+    <?php foreach ($files as $file): ?>
     <tr>
         <th>
             <i class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></i>

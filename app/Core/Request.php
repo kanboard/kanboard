@@ -218,11 +218,8 @@ class Request
         );
 
         foreach ($keys as $key) {
-
             if (isset($_SERVER[$key])) {
-
                 foreach (explode(',', $_SERVER[$key]) as $ip_address) {
-
                     $ip_address = trim($ip_address);
 
                     if ($only_public) {
@@ -231,9 +228,7 @@ class Request
                         if (filter_var($ip_address, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
                             return $ip_address;
                         }
-                    }
-                    else {
-
+                    } else {
                         return $ip_address;
                     }
                 }

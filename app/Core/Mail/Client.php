@@ -87,7 +87,7 @@ class Client extends Base
     {
         $container = $this->container;
 
-        $this->transports[$transport] = function() use ($class, $container) {
+        $this->transports[$transport] = function () use ($class, $container) {
             return new $class($container);
         };
 

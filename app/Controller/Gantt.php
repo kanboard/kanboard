@@ -19,8 +19,7 @@ class Gantt extends Base
     {
         if ($this->userSession->isAdmin()) {
             $project_ids = $this->project->getAllIds();
-        }
-        else {
+        } else {
             $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
         }
 
@@ -62,8 +61,7 @@ class Gantt extends Base
 
         if ($sorting === 'date') {
             $filter->getQuery()->asc(TaskModel::TABLE.'.date_started')->asc(TaskModel::TABLE.'.date_creation');
-        }
-        else {
+        } else {
             $filter->getQuery()->asc('column_position')->asc(TaskModel::TABLE.'.position');
         }
 
@@ -134,14 +132,12 @@ class Gantt extends Base
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
         if ($valid) {
-
             $task_id = $this->taskCreation->create($values);
 
             if ($task_id !== false) {
                 $this->session->flash(t('Task created successfully.'));
                 $this->response->redirect($this->helper->url->to('gantt', 'project', array('project_id' => $project['id'])));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to create your task.'));
             }
         }

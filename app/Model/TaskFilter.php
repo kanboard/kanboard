@@ -193,8 +193,7 @@ class TaskFilter extends Base
             $this->query->eq(Task::TABLE.'.id', str_replace('#', '', $title));
             $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
             $this->query->closeOr();
-        }
-        else {
+        } else {
             $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
         }
 
@@ -244,8 +243,7 @@ class TaskFilter extends Base
         foreach ($values as $project) {
             if (ctype_digit($project)) {
                 $this->query->eq(Task::TABLE.'.project_id', $project);
-            }
-            else {
+            } else {
                 $this->query->ilike(Project::TABLE.'.name', $project);
             }
         }
@@ -267,8 +265,7 @@ class TaskFilter extends Base
         foreach ($values as $swimlane) {
             if ($swimlane === 'default') {
                 $this->query->eq(Task::TABLE.'.swimlane_id', 0);
-            }
-            else {
+            } else {
                 $this->query->ilike(Swimlane::TABLE.'.name', $swimlane);
                 $this->query->addCondition(Task::TABLE.'.swimlane_id=0 AND '.Project::TABLE.'.default_swimlane '.$this->db->getDriver()->getOperator('ILIKE')." '$swimlane'");
             }
@@ -307,8 +304,7 @@ class TaskFilter extends Base
         foreach ($values as $category) {
             if ($category === 'none') {
                 $this->query->eq(Task::TABLE.'.category_id', 0);
-            }
-            else {
+            } else {
                 $this->query->eq(Category::TABLE.'.name', $category);
             }
         }
@@ -379,8 +375,7 @@ class TaskFilter extends Base
         foreach ($values as $assignee) {
             if ($assignee === 'me') {
                 $subtaskQuery->eq(Subtask::TABLE.'.user_id', $this->userSession->getId());
-            }
-            else {
+            } else {
                 $subtaskQuery->ilike(User::TABLE.'.username', '%'.$assignee.'%');
                 $subtaskQuery->ilike(User::TABLE.'.name', '%'.$assignee.'%');
             }
@@ -646,7 +641,7 @@ class TaskFilter extends Base
         $tasks = $this->filterByProject($project_id)->query->asc(Task::TABLE.'.position')->findAll();
 
         return $this->board->getBoard($project_id, function ($project_id, $column_id, $swimlane_id) use ($tasks) {
-            return array_filter($tasks, function(array $task) use ($column_id, $swimlane_id) {
+            return array_filter($tasks, function (array $task) use ($column_id, $swimlane_id) {
                 return $task['column_id'] == $column_id && $task['swimlane_id'] == $swimlane_id;
             });
         });
@@ -682,8 +677,7 @@ class TaskFilter extends Base
             $timestamp = $this->dateParser->getTimestampFromIsoFormat($value);
             $this->query->gte($field, $timestamp);
             $this->query->lte($field, $timestamp + 86399);
-        }
-        else {
+        } else {
             $this->query->eq($field, $value);
         }
 

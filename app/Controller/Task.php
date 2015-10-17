@@ -156,7 +156,6 @@ class Task extends Base
         }
 
         if ($this->request->getStringParam('confirmation') === 'yes') {
-
             $this->checkCSRFParam();
 
             if ($this->task->remove($task['id'])) {

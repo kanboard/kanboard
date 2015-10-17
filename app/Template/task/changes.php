@@ -3,7 +3,6 @@
         <?php
 
         foreach ($changes as $field => $value) {
-
             switch ($field) {
                 case 'title':
                     echo '<li>'.t('New title: %s', $task['title']).'</li>';
@@ -11,16 +10,14 @@
                 case 'owner_id':
                     if (empty($task['owner_id'])) {
                         echo '<li>'.t('The task is not assigned anymore').'</li>';
-                    }
-                    else {
+                    } else {
                         echo '<li>'.t('New assignee: %s', $task['assignee_name'] ?: $task['assignee_username']).'</li>';
                     }
                     break;
                 case 'category_id':
                     if (empty($task['category_id'])) {
                         echo '<li>'.t('There is no category now').'</li>';
-                    }
-                    else {
+                    } else {
                         echo '<li>'.t('New category: %s', $task['category_name']).'</li>';
                     }
                     break;
@@ -33,8 +30,7 @@
                 case 'date_due':
                     if (empty($task['date_due'])) {
                         echo '<li>'.t('The due date have been removed').'</li>';
-                    }
-                    else {
+                    } else {
                         echo '<li>'.dt('New due date: %B %e, %Y', $task['date_due']).'</li>';
                     }
                     break;

@@ -22,8 +22,7 @@ class TaskPermission extends Base
     {
         if ($this->userSession->isAdmin() || $this->projectPermission->isManager($task['project_id'], $this->userSession->getId())) {
             return true;
-        }
-        else if (isset($task['creator_id']) && $task['creator_id'] == $this->userSession->getId()) {
+        } elseif (isset($task['creator_id']) && $task['creator_id'] == $this->userSession->getId()) {
             return true;
         }
 

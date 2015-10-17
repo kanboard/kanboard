@@ -43,7 +43,6 @@ class Auth extends Base
         list($valid, $errors) = $this->authentication->validateForm($values);
 
         if ($valid) {
-
             if (! empty($this->session['login_redirect']) && ! filter_var($this->session['login_redirect'], FILTER_VALIDATE_URL)) {
                 $redirect = $this->session['login_redirect'];
                 unset($this->session['login_redirect']);

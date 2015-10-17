@@ -355,8 +355,7 @@ class Paginator
                 $this->action,
                 $this->getUrlParams($this->page - 1, $this->order, $this->direction)
             );
-        }
-        else {
+        } else {
             $html .= '&larr; '.t('Previous');
         }
 
@@ -382,8 +381,7 @@ class Paginator
                 $this->action,
                 $this->getUrlParams($this->page + 1, $this->order, $this->direction)
             );
-        }
-        else {
+        } else {
             $html .= t('Next').' &rarr;';
         }
 

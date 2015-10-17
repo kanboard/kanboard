@@ -77,7 +77,6 @@ class GithubWebhook extends \Kanboard\Core\Base
     public function parsePushEvent(array $payload)
     {
         foreach ($payload['commits'] as $commit) {
-
             $task_id = $this->task->getTaskIdFromText($commit['message']);
 
             if (empty($task_id)) {
@@ -149,7 +148,6 @@ class GithubWebhook extends \Kanboard\Core\Base
         $task = $this->taskFinder->getByReference($this->project_id, $payload['issue']['number']);
 
         if (! empty($task)) {
-
             $user = $this->user->getByUsername($payload['comment']['user']['login']);
 
             if (! empty($user) && ! $this->projectPermission->isMember($this->project_id, $user['id'])) {
@@ -270,7 +268,6 @@ class GithubWebhook extends \Kanboard\Core\Base
         $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($user) && ! empty($task) && $this->projectPermission->isMember($this->project_id, $user['id'])) {
-
             $event = array(
                 'project_id' => $this->project_id,
                 'task_id' => $task['id'],
@@ -301,7 +298,6 @@ class GithubWebhook extends \Kanboard\Core\Base
         $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($task)) {
-
             $event = array(
                 'project_id' => $this->project_id,
                 'task_id' => $task['id'],
@@ -333,7 +329,6 @@ class GithubWebhook extends \Kanboard\Core\Base
         $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($task)) {
-
             $event = array(
                 'project_id' => $this->project_id,
                 'task_id' => $task['id'],
@@ -365,7 +360,6 @@ class GithubWebhook extends \Kanboard\Core\Base
         $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
         if (! empty($task)) {
-
             $event = array(
                 'project_id' => $this->project_id,
                 'task_id' => $task['id'],

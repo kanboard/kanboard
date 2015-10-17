@@ -72,7 +72,6 @@ class Jabber extends \Kanboard\Core\Base
     public function notify($project_id, $task_id, $event_name, array $event)
     {
         if ($this->isActivated($project_id)) {
-
             $project = $this->project->getbyId($project_id);
 
             $event['event_name'] = $event_name;
@@ -98,7 +97,6 @@ class Jabber extends \Kanboard\Core\Base
     public function sendMessage($project_id, $payload)
     {
         try {
-
             $params = $this->getParameters($project_id);
 
             $options = new Options($params['server']);
@@ -121,8 +119,7 @@ class Jabber extends \Kanboard\Core\Base
             $client->send($message);
 
             $client->disconnect();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $this->container['logger']->error('Jabber error: '.$e->getMessage());
         }
     }

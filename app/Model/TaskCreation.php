@@ -31,7 +31,6 @@ class TaskCreation extends Base
         $task_id = $this->persist(Task::TABLE, $values);
 
         if ($task_id !== false) {
-
             if ($position > 0 && $values['position'] > 1) {
                 $this->taskPosition->movePosition($values['project_id'], $task_id, $values['column_id'], $position, $values['swimlane_id'], false);
             }

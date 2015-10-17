@@ -36,8 +36,7 @@ class Projectuser extends Base
 
         if ($this->userSession->isAdmin()) {
             $project_ids = $this->project->getAllIds();
-        }
-        else {
+        } else {
             $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
         }
 

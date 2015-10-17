@@ -29,7 +29,7 @@ class ProjectDailyStats extends Base
     {
         $lead_cycle_time = $this->projectAnalytic->getAverageLeadAndCycleTime($project_id);
 
-        return $this->db->transaction(function($db) use ($project_id, $date, $lead_cycle_time) {
+        return $this->db->transaction(function ($db) use ($project_id, $date, $lead_cycle_time) {
 
             // This call will fail if the record already exists
             // (cross database driver hack for INSERT..ON DUPLICATE KEY UPDATE)

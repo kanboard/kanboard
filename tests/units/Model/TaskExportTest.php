@@ -30,7 +30,6 @@ class TaskExportTest extends Base
         $this->assertNotFalse($c->create(array('name' => 'Category #3', 'project_id' => 1)));
 
         for ($i = 1; $i <= 100; $i++) {
-
             $task = array(
                 'title' => 'Task #'.$i,
                 'project_id' => 1,

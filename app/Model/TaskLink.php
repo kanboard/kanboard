@@ -112,7 +112,6 @@ class TaskLink extends Base
         $result = array();
 
         foreach ($links as $link) {
-
             if (! isset($result[$link['label']])) {
                 $result[$link['label']] = array();
             }

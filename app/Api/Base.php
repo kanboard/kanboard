@@ -50,8 +50,7 @@ abstract class Base extends \Kanboard\Core\Base
 
         if ($is_user && ! $is_both_procedure && ! $is_user_procedure) {
             throw new AccessDeniedException('Permission denied');
-        }
-        else if (! $is_user && ! $is_both_procedure && $is_user_procedure) {
+        } elseif (! $is_user && ! $is_both_procedure && $is_user_procedure) {
             throw new AccessDeniedException('Permission denied');
         }
 

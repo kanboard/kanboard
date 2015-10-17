@@ -18,7 +18,7 @@
                         data-redirect-regex="PROJECT_ID"
                         data-redirect-url="<?= $this->url->href('board', 'show', array('project_id' => 'PROJECT_ID')) ?>">
                     <option value=""></option>
-                    <?php foreach($board_selector as $board_id => $board_name): ?>
+                    <?php foreach ($board_selector as $board_id => $board_name): ?>
                         <option value="<?= $board_id ?>"><?= $this->e($board_name) ?></option>
                     <?php endforeach ?>
                 </select>

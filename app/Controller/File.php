@@ -22,7 +22,6 @@ class File extends Base
         $task = $this->getTask();
 
         if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot')) !== false) {
-
             $this->session->flash(t('Screenshot uploaded successfully.'));
 
             if ($this->request->getStringParam('redirect') === 'board') {
@@ -77,7 +76,6 @@ class File extends Base
     public function download()
     {
         try {
-
             $task = $this->getTask();
             $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
@@ -87,8 +85,7 @@ class File extends Base
 
             $this->response->forceDownload($file['name']);
             $this->objectStorage->output($file['path']);
-        }
-        catch (ObjectStorageException $e) {
+        } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
         }
     }
@@ -119,7 +116,6 @@ class File extends Base
     public function image()
     {
         try {
-
             $task = $this->getTask();
             $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
@@ -129,8 +125,7 @@ class File extends Base
 
             $this->response->contentType($this->file->getImageMimeType($file['name']));
             $this->objectStorage->output($file['path']);
-        }
-        catch (ObjectStorageException $e) {
+        } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
         }
     }
@@ -143,7 +138,6 @@ class File extends Base
     public function thumbnail()
     {
         try {
-
             $task = $this->getTask();
             $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
@@ -153,8 +147,7 @@ class File extends Base
 
             $this->response->contentType('image/jpeg');
             $this->objectStorage->output($this->file->getThumbnailPath($file['path']));
-        }
-        catch (ObjectStorageException $e) {
+        } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
         }
     }

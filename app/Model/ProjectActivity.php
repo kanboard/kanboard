@@ -138,18 +138,17 @@ class ProjectActivity extends Base
      */
     private function getEvents(\PicoDb\Table $query, $start, $end)
     {
-        if (! is_null($start)){
+        if (! is_null($start)) {
             $query->gte('date_creation', $start);
         }
 
-        if (! is_null($end)){
+        if (! is_null($end)) {
             $query->lte('date_creation', $end);
         }
 
         $events = $query->findAll();
 
         foreach ($events as &$event) {
-
             $event += $this->decode($event['data']);
             unset($event['data']);
 
@@ -170,7 +169,6 @@ class ProjectActivity extends Base
     public function cleanup($max)
     {
         if ($this->db->table(self::TABLE)->count() > $max) {
-
             $this->db->execute('
                 DELETE FROM '.self::TABLE.'
                 WHERE id <= (

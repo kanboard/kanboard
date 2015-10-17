@@ -11,7 +11,7 @@ use Kanboard\Model\User;
 use Kanboard\Core\Session;
 use Kanboard\Model\UserSession;
 
-class SubTaskTest extends Base
+class SubtaskTest extends Base
 {
     public function onSubtaskCreated($event)
     {

@@ -31,7 +31,7 @@ class Webhook extends Base
             'category_id' => $this->request->getIntegerParam('category_id'),
         );
 
-        list($valid,) = $this->taskValidator->validateCreation($values);
+        list($valid, ) = $this->taskValidator->validateCreation($values);
 
         if ($valid && $this->taskCreation->create($values)) {
             $this->response->text('OK');

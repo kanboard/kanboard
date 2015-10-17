@@ -36,7 +36,7 @@ class Subtask extends \Kanboard\Core\Base
             'status' => $status,
         );
 
-        list($valid,) = $this->subtask->validateCreation($values);
+        list($valid, ) = $this->subtask->validateCreation($values);
         return $valid ? $this->subtask->create($values) : false;
     }
 
@@ -58,7 +58,7 @@ class Subtask extends \Kanboard\Core\Base
             }
         }
 
-        list($valid,) = $this->subtask->validateApiModification($values);
+        list($valid, ) = $this->subtask->validateApiModification($values);
         return $valid && $this->subtask->update($values);
     }
 }

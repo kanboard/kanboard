@@ -72,7 +72,7 @@ class Link extends \Kanboard\Core\Base
             'opposite_label' => $opposite_label,
         );
 
-        list($valid,) = $this->link->validateCreation($values);
+        list($valid, ) = $this->link->validateCreation($values);
         return $valid ? $this->link->create($label, $opposite_label) : false;
     }
 
@@ -93,7 +93,7 @@ class Link extends \Kanboard\Core\Base
             'label' => $label,
         );
 
-        list($valid,) = $this->link->validateModification($values);
+        list($valid, ) = $this->link->validateModification($values);
         return $valid && $this->link->update($values);
     }
 

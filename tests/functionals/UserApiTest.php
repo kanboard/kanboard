@@ -12,14 +12,12 @@ class UserApi extends PHPUnit_Framework_TestCase
     {
         if (DB_DRIVER === 'sqlite') {
             @unlink(DB_FILENAME);
-        }
-        else if (DB_DRIVER === 'mysql') {
+        } elseif (DB_DRIVER === 'mysql') {
             $pdo = new PDO('mysql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
             $pdo->exec('DROP DATABASE '.DB_NAME);
             $pdo->exec('CREATE DATABASE '.DB_NAME);
             $pdo = null;
-        }
-        else if (DB_DRIVER === 'postgres') {
+        } elseif (DB_DRIVER === 'postgres') {
             $pdo = new PDO('pgsql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
             $pdo->exec('DROP DATABASE '.DB_NAME);
             $pdo->exec('CREATE DATABASE '.DB_NAME.' WITH OWNER '.DB_USERNAME);

@@ -52,11 +52,9 @@ class Dt extends \Kanboard\Core\Base
         }
         if ($diff < 1200) {
             return t('<30m');
-        }
-        else if ($diff < 3600) {
+        } elseif ($diff < 3600) {
             return t('<1h');
-        }
-        else if ($diff < 86400) {
+        } elseif ($diff < 86400) {
             return '~'.t('%dh', $diff / 3600);
         }
 

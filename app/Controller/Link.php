@@ -70,12 +70,10 @@ class Link extends Base
         list($valid, $errors) = $this->link->validateCreation($values);
 
         if ($valid) {
-
             if ($this->link->create($values['label'], $values['opposite_label']) !== false) {
                 $this->session->flash(t('Link added successfully.'));
                 $this->response->redirect($this->helper->url->to('link', 'index'));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to create your link.'));
             }
         }
@@ -116,8 +114,7 @@ class Link extends Base
             if ($this->link->update($values)) {
                 $this->session->flash(t('Link updated successfully.'));
                 $this->response->redirect($this->helper->url->to('link', 'index'));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to update your link.'));
             }
         }
@@ -152,8 +149,7 @@ class Link extends Base
 
         if ($this->link->remove($link['id'])) {
             $this->session->flash(t('Link removed successfully.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to remove this link.'));
         }
 

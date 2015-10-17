@@ -17,8 +17,8 @@ class File extends \Kanboard\Core\Base
      * @param  string   $filename   Filename
      * @return string               Font-Awesome-Icon-Name
      */
-    public function icon($filename){
-
+    public function icon($filename)
+    {
         $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
         switch ($extension) {

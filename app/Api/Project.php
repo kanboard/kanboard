@@ -69,7 +69,7 @@ class Project extends Base
             'description' => $description
         );
 
-        list($valid,) = $this->project->validateCreation($values);
+        list($valid, ) = $this->project->validateCreation($values);
         return $valid ? $this->project->create($values) : false;
     }
 
@@ -81,7 +81,7 @@ class Project extends Base
             'description' => $description
         );
 
-        list($valid,) = $this->project->validateModification($values);
+        list($valid, ) = $this->project->validateModification($values);
         return $valid && $this->project->update($values);
     }
 }

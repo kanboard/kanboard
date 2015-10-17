@@ -66,11 +66,9 @@ class Subtask extends Base
         list($valid, $errors) = $this->subtask->validateCreation($values);
 
         if ($valid) {
-
             if ($this->subtask->create($values)) {
                 $this->session->flash(t('Sub-task added successfully.'));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to create your sub-task.'));
             }
 
@@ -118,11 +116,9 @@ class Subtask extends Base
         list($valid, $errors) = $this->subtask->validateModification($values);
 
         if ($valid) {
-
             if ($this->subtask->update($values)) {
                 $this->session->flash(t('Sub-task updated successfully.'));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to update your sub-task.'));
             }
 
@@ -161,8 +157,7 @@ class Subtask extends Base
 
         if ($this->subtask->remove($subtask['id'])) {
             $this->session->flash(t('Sub-task removed successfully.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to remove this sub-task.'));
         }
 
@@ -183,7 +178,6 @@ class Subtask extends Base
         $this->subtask->toggleStatus($subtask['id']);
 
         if ($redirect === 'board') {
-
             $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
 
             $this->response->html($this->template->render('board/tooltip_subtasks', array(

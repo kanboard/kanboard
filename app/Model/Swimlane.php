@@ -142,8 +142,7 @@ class Swimlane extends Base
 
         if ($status == self::ACTIVE) {
             $query->asc('position');
-        }
-        else {
+        } else {
             $query->asc('name');
         }
 
@@ -172,7 +171,6 @@ class Swimlane extends Base
                                      ->findOneColumn('default_swimlane');
 
         if ($default_swimlane) {
-
             if ($default_swimlane === 'Default swimlane') {
                 $default_swimlane = t($default_swimlane);
             }
@@ -396,7 +394,6 @@ class Swimlane extends Base
         $positions = array_flip($swimlanes);
 
         if (isset($swimlanes[$swimlane_id]) && $swimlanes[$swimlane_id] < count($swimlanes)) {
-
             $position = ++$swimlanes[$swimlane_id];
             $swimlanes[$positions[$position]]--;
 
@@ -430,7 +427,6 @@ class Swimlane extends Base
         $positions = array_flip($swimlanes);
 
         if (isset($swimlanes[$swimlane_id]) && $swimlanes[$swimlane_id] > 1) {
-
             $position = --$swimlanes[$swimlane_id];
             $swimlanes[$positions[$position]]++;
 
@@ -459,7 +455,6 @@ class Swimlane extends Base
         $swimlanes = $this->getAll($project_from);
 
         foreach ($swimlanes as $swimlane) {
-
             unset($swimlane['id']);
             $swimlane['project_id'] = $project_to;
 

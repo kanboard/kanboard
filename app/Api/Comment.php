@@ -33,7 +33,7 @@ class Comment extends \Kanboard\Core\Base
             'comment' => $content,
         );
 
-        list($valid,) = $this->comment->validateCreation($values);
+        list($valid, ) = $this->comment->validateCreation($values);
 
         return $valid ? $this->comment->create($values) : false;
     }
@@ -45,7 +45,7 @@ class Comment extends \Kanboard\Core\Base
             'comment' => $content,
         );
 
-        list($valid,) = $this->comment->validateModification($values);
+        list($valid, ) = $this->comment->validateModification($values);
         return $valid && $this->comment->update($values);
     }
 }

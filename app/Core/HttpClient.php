@@ -131,8 +131,7 @@ class HttpClient extends Base
 
         if (is_resource($stream)) {
             $response = stream_get_contents($stream);
-        }
-        else {
+        } else {
             $this->container['logger']->error('HttpClient: request failed');
         }
 

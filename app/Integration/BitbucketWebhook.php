@@ -80,7 +80,6 @@ class BitbucketWebhook extends \Kanboard\Core\Base
         $task = $this->taskFinder->getByReference($this->project_id, $payload['issue']['id']);
 
         if (! empty($task)) {
-
             $user = $this->user->getByUsername($payload['actor']['username']);
 
             if (! empty($user) && ! $this->projectPermission->isMember($this->project_id, $user['id'])) {
@@ -147,8 +146,7 @@ class BitbucketWebhook extends \Kanboard\Core\Base
 
         if (isset($payload['changes']['status'])) {
             return $this->handleStatusChange($task, $payload);
-        }
-        else if (isset($payload['changes']['assignee'])) {
+        } elseif (isset($payload['changes']['assignee'])) {
             return $this->handleAssigneeChange($task, $payload);
         }
 

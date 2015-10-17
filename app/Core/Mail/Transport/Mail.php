@@ -30,7 +30,6 @@ class Mail extends Base implements ClientInterface
     public function sendEmail($email, $name, $subject, $html, $author)
     {
         try {
-
             $message = Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom(array(MAIL_FROM => $author))
@@ -38,8 +37,7 @@ class Mail extends Base implements ClientInterface
                 ->setTo(array($email => $name));
 
             Swift_Mailer::newInstance($this->getTransport())->send($message);
-        }
-        catch (Swift_TransportException $e) {
+        } catch (Swift_TransportException $e) {
             $this->logger->error($e->getMessage());
         }
     }

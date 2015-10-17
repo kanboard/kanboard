@@ -43,7 +43,6 @@ class Board extends Base
         $columns = array();
 
         foreach ($column_names as $column_name) {
-
             $column_name = trim($column_name);
 
             if (! empty($column_name)) {
@@ -67,7 +66,6 @@ class Board extends Base
         $position = 0;
 
         foreach ($columns as $column) {
-
             $values = array(
                 'title' => $column['title'],
                 'position' => ++$position,
@@ -120,7 +118,7 @@ class Board extends Base
             'title' => $title,
             'task_limit' => intval($task_limit),
             'position' => $this->getLastColumnPosition($project_id) + 1,
-        	'description' => $description,
+            'description' => $description,
         );
 
         return $this->persist(self::TABLE, $values);
@@ -199,7 +197,6 @@ class Board extends Base
         $positions = array_flip($columns);
 
         if (isset($columns[$column_id]) && $columns[$column_id] < count($columns)) {
-
             $position = ++$columns[$column_id];
             $columns[$positions[$position]]--;
 
@@ -223,7 +220,6 @@ class Board extends Base
         $positions = array_flip($columns);
 
         if (isset($columns[$column_id]) && $columns[$column_id] > 1) {
-
             $position = --$columns[$column_id];
             $columns[$positions[$position]]++;
 
@@ -248,14 +244,12 @@ class Board extends Base
         $nb_columns = count($columns);
 
         for ($i = 0, $ilen = count($swimlanes); $i < $ilen; $i++) {
-
             $swimlanes[$i]['columns'] = $columns;
             $swimlanes[$i]['nb_columns'] = $nb_columns;
             $swimlanes[$i]['nb_tasks'] = 0;
             $swimlanes[$i]['nb_swimlanes'] = $ilen;
 
             for ($j = 0; $j < $nb_columns; $j++) {
-
                 $column_id = $columns[$j]['id'];
                 $swimlane_id = $swimlanes[$i]['id'];
 

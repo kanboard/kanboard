@@ -25,7 +25,6 @@ class LocaleComparator extends Base
         $it->rewind();
 
         while ($it->valid()) {
-
             if (! $it->isDot() && substr($it->key(), -4) === '.php') {
                 $strings = array_merge($strings, $this->search($it->key()));
             }
@@ -72,7 +71,7 @@ class LocaleComparator extends Base
             $strings = array_merge($strings, $matches[1]);
         }
 
-        array_walk($strings, function(&$value) {
+        array_walk($strings, function (&$value) {
             $value = trim($value, "'");
             $value = str_replace("\'", "'", $value);
         });

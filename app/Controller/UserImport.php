@@ -47,8 +47,7 @@ class UserImport extends Base
 
         if ($this->userImport->counter > 0) {
             $this->session->flash(t('%d user(s) have been imported successfully.', $this->userImport->counter));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Nothing have been imported!'));
         }
 

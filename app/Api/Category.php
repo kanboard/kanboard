@@ -32,7 +32,7 @@ class Category extends \Kanboard\Core\Base
             'name' => $name,
         );
 
-        list($valid,) = $this->category->validateCreation($values);
+        list($valid, ) = $this->category->validateCreation($values);
         return $valid ? $this->category->create($values) : false;
     }
 
@@ -43,7 +43,7 @@ class Category extends \Kanboard\Core\Base
             'name' => $name,
         );
 
-        list($valid,) = $this->category->validateModification($values);
+        list($valid, ) = $this->category->validateModification($values);
         return $valid && $this->category->update($values);
     }
 }

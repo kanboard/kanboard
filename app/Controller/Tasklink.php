@@ -72,7 +72,6 @@ class Tasklink extends Base
         list($valid, $errors) = $this->taskLink->validateCreation($values);
 
         if ($valid) {
-
             if ($this->taskLink->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->session->flash(t('Link added successfully.'));
 
@@ -129,7 +128,6 @@ class Tasklink extends Base
         list($valid, $errors) = $this->taskLink->validateModification($values);
 
         if ($valid) {
-
             if ($this->taskLink->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->session->flash(t('Link updated successfully.'));
                 $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
@@ -162,15 +160,14 @@ class Tasklink extends Base
      *
      * @access public
      */
-	public function remove()
+    public function remove()
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
 
         if ($this->taskLink->remove($this->request->getIntegerParam('link_id'))) {
             $this->session->flash(t('Link removed successfully.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to remove this link.'));
         }
 

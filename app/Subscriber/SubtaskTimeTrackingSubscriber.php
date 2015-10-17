@@ -30,7 +30,6 @@ class SubtaskTimeTrackingSubscriber extends \Kanboard\Core\Base implements Event
     public function logStartEnd(SubtaskEvent $event)
     {
         if (isset($event['status']) && $this->config->get('subtask_time_tracking') == 1) {
-
             $subtask = $this->subtask->getById($event['id']);
 
             if (empty($subtask['user_id'])) {
@@ -39,8 +38,7 @@ class SubtaskTimeTrackingSubscriber extends \Kanboard\Core\Base implements Event
 
             if ($subtask['status'] == Subtask::STATUS_INPROGRESS) {
                 return $this->subtaskTimeTracking->logStartTime($subtask['id'], $subtask['user_id']);
-            }
-            else {
+            } else {
                 return $this->subtaskTimeTracking->logEndTime($subtask['id'], $subtask['user_id']);
             }
         }

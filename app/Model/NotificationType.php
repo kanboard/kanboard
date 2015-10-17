@@ -53,7 +53,7 @@ abstract class NotificationType extends Base
         $container = $this->container;
         $this->labels[$type] = $label;
 
-        $this->classes[$type] = function() use ($class, $container) {
+        $this->classes[$type] = function () use ($class, $container) {
             return new $class($container);
         };
     }

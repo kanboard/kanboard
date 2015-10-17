@@ -29,7 +29,6 @@ class Markdown extends Parsedown
     {
         // Replace task #123 by a link to the task
         if (! empty($this->link) && preg_match('!#(\d+)!i', $Excerpt['text'], $matches)) {
-
             $url = $this->helper->href(
                 $this->link['controller'],
                 $this->link['action'],

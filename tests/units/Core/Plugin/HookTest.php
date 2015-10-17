@@ -42,11 +42,11 @@ class HookTest extends Base
         $values = array('A', 'B');
         $expected = array('A', 'B', 'c', 'D');
 
-        $h->on('myhook', function($p) {
+        $h->on('myhook', function ($p) {
             return array($p);
         });
 
-        $h->on('myhook', function() {
+        $h->on('myhook', function () {
             return array('D');
         });
 
@@ -61,7 +61,7 @@ class HookTest extends Base
         $values = array('A', 'B');
         $expected = array('A', 'B');
 
-        $h->on('myhook', function() {
+        $h->on('myhook', function () {
             return 'string';
         });
 
@@ -82,11 +82,11 @@ class HookTest extends Base
     {
         $h = new Hook;
 
-        $h->on('myhook', function($p) {
+        $h->on('myhook', function ($p) {
             return $p + 1;
         });
 
-        $h->on('myhook', function($p) {
+        $h->on('myhook', function ($p) {
             return $p;
         });
 

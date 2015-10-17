@@ -12,7 +12,7 @@
         <th class="column-15"><?= t('IP address') ?></th>
         <th><?= t('User agent') ?></th>
     </tr>
-    <?php foreach($last_logins as $login): ?>
+    <?php foreach ($last_logins as $login): ?>
     <tr>
         <td><?= dt('%B %e, %Y at %k:%M %p', $login['date_creation']) ?></td>
         <td><?= $this->e($login['auth_type']) ?></td>

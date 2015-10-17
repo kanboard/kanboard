@@ -63,8 +63,7 @@ class Twofactor extends User
                 'twofactor_activated' => 1,
                 'twofactor_secret' => GoogleAuthenticator::generateRandom(),
             ));
-        }
-        else {
+        } else {
             $this->user->update(array(
                 'id' => $user['id'],
                 'twofactor_activated' => 0,
@@ -94,8 +93,7 @@ class Twofactor extends User
 
         if (! empty($values['code']) && $otp->checkTotp(Base32::decode($user['twofactor_secret']), $values['code'])) {
             $this->session->flash(t('The two factor authentication code is valid.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('The two factor authentication code is not valid.'));
         }
 
@@ -119,8 +117,7 @@ class Twofactor extends User
             $this->session['2fa_validated'] = true;
             $this->session->flash(t('The two factor authentication code is valid.'));
             $this->response->redirect($this->helper->url->to('app', 'index'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('The two factor authentication code is not valid.'));
             $this->response->redirect($this->helper->url->to('twofactor', 'code'));
         }
@@ -148,7 +145,6 @@ class Twofactor extends User
         $user = $this->getUser();
 
         if ($this->request->getStringParam('disable') === 'yes') {
-
             $this->checkCSRFParam();
 
             $this->user->update(array(

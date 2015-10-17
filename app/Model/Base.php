@@ -22,7 +22,7 @@ abstract class Base extends \Kanboard\Core\Base
      */
     public function persist($table, array $values)
     {
-        return $this->db->transaction(function($db) use ($table, $values) {
+        return $this->db->transaction(function ($db) use ($table, $values) {
 
             if (! $db->table($table)->save($values)) {
                 return false;

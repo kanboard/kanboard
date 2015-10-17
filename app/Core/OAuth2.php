@@ -86,7 +86,6 @@ class OAuth2 extends Base
     public function getAccessToken($code)
     {
         if (empty($this->accessToken) && ! empty($code)) {
-
             $params = array(
                 'code' => $code,
                 'client_id' => $this->clientId,

@@ -26,8 +26,8 @@ class Tool
             return '';
         }
 
-        list($local_part,) = explode('@', $email);
-        list(,$identifier) = explode('+', $local_part);
+        list($local_part, ) = explode('@', $email);
+        list(, $identifier) = explode('+', $local_part);
 
         return $identifier;
     }
@@ -83,14 +83,11 @@ class Tool
             $dst_width = $resize_width;
             $dst_height = floor($src_height * ($resize_width / $src_width));
             $dst_image = imagecreatetruecolor($dst_width, $dst_height);
-        }
-        elseif ($resize_width == 0 && $resize_height > 0) {
+        } elseif ($resize_width == 0 && $resize_height > 0) {
             $dst_width = floor($src_width * ($resize_height / $src_height));
             $dst_height = $resize_height;
             $dst_image = imagecreatetruecolor($dst_width, $dst_height);
-        }
-        else {
-
+        } else {
             $src_ratio = $src_width / $src_height;
             $resize_ratio = $resize_width / $resize_height;
 
@@ -99,8 +96,7 @@ class Tool
                 $dst_height = floor($src_height * ($resize_width / $src_width));
 
                 $dst_y = ($dst_height - $resize_height) / 2 * (-1);
-            }
-            else {
+            } else {
                 $dst_width = floor($src_width * ($resize_height / $src_height));
                 $dst_height = $resize_height;
 

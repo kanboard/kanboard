@@ -248,7 +248,7 @@ class BitbucketWebhookTest extends Base
 
     public function testIssueAssignedWithNoPermission()
     {
-        $this->container['dispatcher']->addListener(BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE, function() {});
+        $this->container['dispatcher']->addListener(BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE, function () {});
 
         $p = new Project($this->container);
         $this->assertEquals(1, $p->create(array('name' => 'foobar')));
@@ -272,7 +272,7 @@ class BitbucketWebhookTest extends Base
 
     public function testIssueAssignedWithNoUser()
     {
-        $this->container['dispatcher']->addListener(BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE, function() {});
+        $this->container['dispatcher']->addListener(BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE, function () {});
 
         $p = new Project($this->container);
         $this->assertEquals(1, $p->create(array('name' => 'foobar')));
@@ -293,7 +293,7 @@ class BitbucketWebhookTest extends Base
 
     public function testIssueAssignedWithNoTask()
     {
-        $this->container['dispatcher']->addListener(BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE, function() {});
+        $this->container['dispatcher']->addListener(BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE, function () {});
 
         $p = new Project($this->container);
         $this->assertEquals(1, $p->create(array('name' => 'foobar')));

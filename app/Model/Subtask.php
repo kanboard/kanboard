@@ -148,7 +148,6 @@ class Subtask extends Base
     public function getById($subtask_id, $more = false)
     {
         if ($more) {
-
             return $this->db
                         ->table(self::TABLE)
                         ->eq(self::TABLE.'.id', $subtask_id)
@@ -341,7 +340,6 @@ class Subtask extends Base
         $positions = array_flip($subtasks);
 
         if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] > 1) {
-
             $position = --$subtasks[$subtask_id];
             $subtasks[$positions[$position]]++;
 
@@ -446,7 +444,6 @@ class Subtask extends Base
                                  ->findAll();
 
             foreach ($subtasks as &$subtask) {
-
                 $subtask['task_id'] = $dst_task_id;
 
                 if (! $db->table(Subtask::TABLE)->save($subtask)) {

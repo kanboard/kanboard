@@ -54,12 +54,10 @@ class Column extends Base
         list($valid, $errors) = $this->board->validateCreation($data);
 
         if ($valid) {
-
             if ($this->board->addColumn($project['id'], $data['title'], $data['task_limit'], $data['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to update this board.'));
             }
         }
@@ -99,12 +97,10 @@ class Column extends Base
         list($valid, $errors) = $this->board->validateModification($values);
 
         if ($valid) {
-
             if ($this->board->updateColumn($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
                 $this->session->flash(t('Board updated successfully.'));
                 $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to update this board.'));
             }
         }
@@ -160,8 +156,7 @@ class Column extends Base
 
         if (! empty($column) && $this->board->removeColumn($column['id'])) {
             $this->session->flash(t('Column removed successfully.'));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to remove this column.'));
         }
 

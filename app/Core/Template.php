@@ -85,8 +85,7 @@ class Template extends Helper
         if (strpos($template_name, ':') !== false) {
             list($plugin, $template) = explode(':', $template_name);
             $path = __DIR__.'/../../plugins/'.ucfirst($plugin).'/Template/'.$template.'.php';
-        }
-        else {
+        } else {
             $path = __DIR__.'/../Template/'.$template_name.'.php';
         }
 

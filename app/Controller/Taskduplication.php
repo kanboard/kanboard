@@ -20,7 +20,6 @@ class Taskduplication extends Base
         $task = $this->getTask();
 
         if ($this->request->getStringParam('confirmation') === 'yes') {
-
             $this->checkCSRFParam();
             $task_id = $this->taskDuplication->duplicate($task['id']);
 
@@ -48,9 +47,8 @@ class Taskduplication extends Base
         $task = $this->getTask();
 
         if ($this->request->isPost()) {
-
             $values = $this->request->getValues();
-            list($valid,) = $this->taskValidator->validateProjectModification($values);
+            list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid && $this->taskDuplication->moveToProject($task['id'],
                                                                 $values['project_id'],
@@ -58,7 +56,6 @@ class Taskduplication extends Base
                                                                 $values['column_id'],
                                                                 $values['category_id'],
                                                                 $values['owner_id'])) {
-
                 $this->session->flash(t('Task updated successfully.'));
                 $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task['id'])));
             }
@@ -79,9 +76,8 @@ class Taskduplication extends Base
         $task = $this->getTask();
 
         if ($this->request->isPost()) {
-
             $values = $this->request->getValues();
-            list($valid,) = $this->taskValidator->validateProjectModification($values);
+            list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid) {
                 $task_id = $this->taskDuplication->duplicateToProject(
@@ -125,8 +121,7 @@ class Taskduplication extends Base
 
             $values = $this->taskDuplication->checkDestinationProjectValues($task);
             $values['project_id'] = $dst_project_id;
-        }
-        else {
+        } else {
             $swimlanes_list = array();
             $columns_list = array();
             $categories_list = array();

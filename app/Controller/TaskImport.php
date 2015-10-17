@@ -53,8 +53,7 @@ class TaskImport extends Base
 
         if ($this->taskImport->counter > 0) {
             $this->session->flash(t('%d task(s) have been imported successfully.', $this->taskImport->counter));
-        }
-        else {
+        } else {
             $this->session->flashError(t('Nothing have been imported!'));
         }
 

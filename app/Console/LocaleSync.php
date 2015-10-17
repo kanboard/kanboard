@@ -23,9 +23,7 @@ class LocaleSync extends Base
         $reference = include $reference_file;
 
         foreach (new DirectoryIterator('app/Locale') as $fileInfo) {
-
             if (! $fileInfo->isDot() && $fileInfo->isDir() && $fileInfo->getFilename() !== self::REF_LOCALE) {
-
                 $filename = 'app/Locale/'.$fileInfo->getFilename().'/translations.php';
                 echo $fileInfo->getFilename().' ('.$filename.')'.PHP_EOL;
 
@@ -42,11 +40,9 @@ class LocaleSync extends Base
         $output .= 'return array('.PHP_EOL;
 
         foreach ($reference as $key => $value) {
-
             if (! empty($outdated[$key])) {
                 $output .= "    '".str_replace("'", "\'", $key)."' => '".str_replace("'", "\'", $outdated[$key])."',\n";
-            }
-            else {
+            } else {
                 $output .= "    // '".str_replace("'", "\'", $key)."' => '',\n";
             }
         }

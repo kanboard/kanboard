@@ -184,8 +184,7 @@ class Translator
     {
         if (isset(self::$locales[$identifier])) {
             return self::$locales[$identifier];
-        }
-        else {
+        } else {
             return $default;
         }
     }

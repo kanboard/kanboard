@@ -13,7 +13,7 @@
             <th><?= t('Description') ?></th>
         </tr>
 
-    <?php foreach($plugins as $plugin): ?>
+    <?php foreach ($plugins as $plugin): ?>
     <tr>
         <td>
             <?php if ($plugin->getPluginHomepage()): ?>

@@ -60,12 +60,10 @@ class Category extends Base
         list($valid, $errors) = $this->category->validateCreation($values);
 
         if ($valid) {
-
             if ($this->category->create($values)) {
                 $this->session->flash(t('Your category have been created successfully.'));
                 $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to create your category.'));
             }
         }
@@ -104,12 +102,10 @@ class Category extends Base
         list($valid, $errors) = $this->category->validateModification($values);
 
         if ($valid) {
-
             if ($this->category->update($values)) {
                 $this->session->flash(t('Your category have been updated successfully.'));
                 $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));
-            }
-            else {
+            } else {
                 $this->session->flashError(t('Unable to update your category.'));
             }
         }

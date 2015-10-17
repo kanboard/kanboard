@@ -35,10 +35,9 @@ class Action extends \Kanboard\Core\Base
         $actions = $this->action->getAllByProject($project_id);
 
         foreach ($actions as $index => $action) {
-
             $params = array();
 
-            foreach($action['params'] as $param) {
+            foreach ($action['params'] as $param) {
                 $params[$param['name']] = $param['value'];
             }
 
@@ -57,7 +56,7 @@ class Action extends \Kanboard\Core\Base
             'params' => $params,
         );
 
-        list($valid,) = $this->action->validateCreation($values);
+        list($valid, ) = $this->action->validateCreation($values);
 
         if (! $valid) {
             return false;
@@ -80,14 +79,14 @@ class Action extends \Kanboard\Core\Base
         $required_params = $action->getActionRequiredParameters();
 
         // Check missing parameters
-        foreach($required_params as $param => $value) {
+        foreach ($required_params as $param => $value) {
             if (! isset($params[$param])) {
                 return false;
             }
         }
 
         // Check extra parameters
-        foreach($params as $param => $value) {
+        foreach ($params as $param => $value) {
             if (! isset($required_params[$param])) {
                 return false;
             }

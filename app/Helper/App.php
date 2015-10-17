@@ -68,8 +68,7 @@ class App extends \Kanboard\Core\Base
             $html = '<div class="alert alert-success alert-fade-out">'.$this->helper->e($this->session['flash_message']).'</div>';
             unset($this->session['flash_message']);
             unset($this->session['flash_error_message']);
-        }
-        else if (isset($this->session['flash_error_message'])) {
+        } elseif (isset($this->session['flash_error_message'])) {
             $html = '<div class="alert alert-error">'.$this->helper->e($this->session['flash_error_message']).'</div>';
             unset($this->session['flash_message']);
             unset($this->session['flash_error_message']);

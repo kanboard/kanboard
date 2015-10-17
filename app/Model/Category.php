@@ -128,7 +128,6 @@ class Category extends Base
         $categories = explode(',', $this->config->get('project_categories'));
 
         foreach ($categories as $category) {
-
             $category = trim($category);
 
             if (! empty($category)) {
@@ -204,7 +203,6 @@ class Category extends Base
                                ->findAll();
 
         foreach ($categories as $category) {
-
             $category['project_id'] = $dst_project_id;
 
             if (! $this->db->table(self::TABLE)->save($category)) {

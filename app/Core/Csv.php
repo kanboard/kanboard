@@ -93,7 +93,8 @@ class Csv
     {
         if (! empty($value)) {
             $value = trim(strtolower($value));
-            return $value === '1' || $value{0} === 't' ? 1 : 0;
+            return $value === '1' || $value{0}
+            === 't' ? 1 : 0;
         }
 
         return 0;
@@ -187,8 +188,7 @@ class Csv
         foreach ($this->columns as $sql_name => $csv_name) {
             if (isset($row[$index])) {
                 $line[$sql_name] = $row[$index];
-            }
-            else {
+            } else {
                 $line[$sql_name] = '';
             }
 

@@ -51,7 +51,7 @@ abstract class Base extends \Kanboard\Core\Base
     {
         $container = $this->container;
 
-        $this->container['dispatcher']->addListener($event, function() use ($container, $callback) {
+        $this->container['dispatcher']->addListener($event, function () use ($container, $callback) {
             call_user_func($callback, $container);
         });
     }

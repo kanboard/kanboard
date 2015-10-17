@@ -91,7 +91,7 @@ class Task extends Base
             'reference' => $reference,
         );
 
-        list($valid,) = $this->taskValidator->validateCreation($values);
+        list($valid, ) = $this->taskValidator->validateCreation($values);
 
         return $valid ? $this->taskCreation->create($values) : false;
     }

@@ -214,8 +214,7 @@ class DateParser extends Base
         foreach ($fields as $field) {
             if (! empty($values[$field])) {
                 $values[$field] = date($format, $values[$field]);
-            }
-            else {
+            } else {
                 $values[$field] = '';
             }
         }

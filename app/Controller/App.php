@@ -236,8 +236,7 @@ class App extends Base
         // Search by task id or by title
         if (ctype_digit($search)) {
             $filter->filterById($search);
-        }
-        else {
+        } else {
             $filter->filterByTitle($search);
         }
 

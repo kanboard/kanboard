@@ -184,7 +184,6 @@ class Action extends Base
         $params = $this->db->table(self::TABLE_PARAMS)->findAll();
 
         foreach ($actions as &$action) {
-
             $action['params'] = array();
 
             foreach ($params as $param) {
@@ -270,7 +269,6 @@ class Action extends Base
         $action_id = $this->db->getLastId();
 
         foreach ($values['params'] as $param_name => $param_value) {
-
             $action_param = array(
                 'action_id' => $action_id,
                 'name' => $param_name,
@@ -298,7 +296,6 @@ class Action extends Base
         $actions = $this->getAll();
 
         foreach ($actions as $action) {
-
             $listener = $this->load($action['action_name'], $action['project_id'], $action['event_name']);
 
             foreach ($action['params'] as $param) {
@@ -320,7 +317,8 @@ class Action extends Base
      */
     public function load($name, $project_id, $event)
     {
-        $className = $name{0} !== '\\' ? '\Kanboard\Action\\'.$name : $name;
+        $className = $name{0}
+        !== '\\' ? '\Kanboard\Action\\'.$name : $name;
         return new $className($this->container, $project_id, $event);
     }
 
@@ -337,7 +335,6 @@ class Action extends Base
         $actions = $this->action->getAllByProject($src_project_id);
 
         foreach ($actions as $action) {
-
             $this->db->startTransaction();
 
             $values = array(
@@ -378,7 +375,6 @@ class Action extends Base
     public function duplicateParameters($project_id, $action_id, array $params)
     {
         foreach ($params as $param) {
-
             $value = $this->resolveParameters($param, $project_id);
 
             if ($value === false) {

@@ -1,6 +1,6 @@
 <div class="tooltip-tasklinks">
     <ul>
-    <?php foreach($links as $link): ?>
+    <?php foreach ($links as $link): ?>
         <li>
             <strong><?= t($link['label']) ?></strong>
             [<i><?= $link['project_name'] ?></i>]

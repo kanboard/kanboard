@@ -56,12 +56,10 @@ class UserImport extends Base
             if ($this->user->create($row)) {
                 $this->logger->debug('UserImport: imported successfully line '.$line_number);
                 $this->counter++;
-            }
-            else {
+            } else {
                 $this->logger->error('UserImport: creation error at line '.$line_number);
             }
-        }
-        else {
+        } else {
             $this->logger->error('UserImport: validation error at line '.$line_number);
         }
     }

@@ -22,7 +22,6 @@ class Taskcreation extends Base
         $swimlanes_list = $this->swimlane->getList($project['id'], false, true);
 
         if (empty($values)) {
-
             $values = array(
                 'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
                 'column_id' => $this->request->getIntegerParam('column_id'),
@@ -62,8 +61,7 @@ class Taskcreation extends Base
         if ($valid && $this->taskCreation->create($values)) {
             $this->session->flash(t('Task created successfully.'));
             $this->afterSave($project, $values);
-        }
-        else {
+        } else {
             $this->session->flashError(t('Unable to create your task.'));
         }
 
@@ -79,8 +77,7 @@ class Taskcreation extends Base
             if (! $this->request->isAjax()) {
                 $this->response->redirect($this->helper->url->to('taskcreation', 'create', $values));
             }
-        }
-        else {
+        } else {
             $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])));
         }
     }

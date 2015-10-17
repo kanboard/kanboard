@@ -46,7 +46,6 @@ class Mail extends Base implements NotificationInterface
      */
     public function notifyProject(array $project, $event_name, array $event_data)
     {
-
     }
 
     /**

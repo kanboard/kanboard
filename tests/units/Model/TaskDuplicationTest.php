@@ -75,8 +75,8 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(2, $task['category_id']);
         $this->assertEquals(4.4, $task['time_spent']);
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function () {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function () {});
 
         // We duplicate our task
         $this->assertEquals(2, $td->duplicate(1));
@@ -117,8 +117,8 @@ class TaskDuplicationTest extends Base
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1, 'category_id' => 1)));
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function() {});
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function() {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function () {});
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function () {});
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $td->duplicateToProject(1, 2));
