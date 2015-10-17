@@ -238,6 +238,8 @@ class ProjectActivity extends Base
                 return t('%s updated a comment on the task #%d', $event['author'], $event['task']['id']);
             case Comment::EVENT_CREATE:
                 return t('%s commented on the task #%d', $event['author'], $event['task']['id']);
+            case File::EVENT_CREATE:
+                return t('%s attached a file to the task #%d', $event['author'], $event['task']['id']);
             default:
                 return '';
         }

@@ -49,7 +49,7 @@ class Webhook extends Base implements NotificationInterface
                 'event_data' => $event_data,
             );
 
-            return $this->httpClient->postJson($url, $payload);
+            $this->httpClient->postJson($url, $payload);
         }
     }
 }

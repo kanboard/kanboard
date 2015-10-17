@@ -8,7 +8,6 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Kanboard\Subscriber\AuthSubscriber;
 use Kanboard\Subscriber\BootstrapSubscriber;
 use Kanboard\Subscriber\NotificationSubscriber;
-use Kanboard\Subscriber\ProjectActivitySubscriber;
 use Kanboard\Subscriber\ProjectDailySummarySubscriber;
 use Kanboard\Subscriber\ProjectModificationDateSubscriber;
 use Kanboard\Subscriber\SubtaskTimeTrackingSubscriber;
@@ -23,7 +22,6 @@ class EventDispatcherProvider implements ServiceProviderInterface
         $container['dispatcher'] = new EventDispatcher;
         $container['dispatcher']->addSubscriber(new BootstrapSubscriber($container));
         $container['dispatcher']->addSubscriber(new AuthSubscriber($container));
-        $container['dispatcher']->addSubscriber(new ProjectActivitySubscriber($container));
         $container['dispatcher']->addSubscriber(new ProjectDailySummarySubscriber($container));
         $container['dispatcher']->addSubscriber(new ProjectModificationDateSubscriber($container));
         $container['dispatcher']->addSubscriber(new NotificationSubscriber($container));

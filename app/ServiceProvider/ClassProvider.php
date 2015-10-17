@@ -138,7 +138,8 @@ class ClassProvider implements ServiceProviderInterface
 
         $container['projectNotificationType'] = function ($container) {
             $type = new ProjectNotificationType($container);
-            $type->setType('webhook', t('Webhook'), '\Kanboard\Notification\Webhook', true);
+            $type->setType('webhook', 'Webhook', '\Kanboard\Notification\Webhook', true);
+            $type->setType('activity_stream', 'ActivityStream', '\Kanboard\Notification\ActivityStream', true);
             return $type;
         };
 
