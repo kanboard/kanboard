@@ -198,7 +198,7 @@ class App extends Base
 
         $this->response->html($this->layout('app/notifications', array(
             'title' => t('My notifications'),
-            'notifications' => $this->webNotification->getAll($user['id']),
+            'notifications' => $this->userUnreadNotification->getAll($user['id']),
             'user' => $user,
         )));
     }

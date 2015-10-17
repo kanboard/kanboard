@@ -32,7 +32,7 @@ class NotificationSubscriber extends \Kanboard\Core\Base implements EventSubscri
 
     public function execute(GenericEvent $event, $event_name)
     {
-        $this->notification->sendNotifications($event_name, $this->getEventData($event));
+        $this->userNotification->sendNotifications($event_name, $this->getEventData($event));
     }
 
     public function getEventData(GenericEvent $event)

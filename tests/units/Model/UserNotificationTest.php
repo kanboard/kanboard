@@ -11,18 +11,18 @@ use Kanboard\Model\File;
 use Kanboard\Model\Project;
 use Kanboard\Model\Task;
 use Kanboard\Model\ProjectPermission;
-use Kanboard\Model\Notification;
-use Kanboard\Model\NotificationFilter;
-use Kanboard\Model\NotificationType;
-use Kanboard\Subscriber\NotificationSubscriber;
+use Kanboard\Model\UserNotification;
+use Kanboard\Model\UserNotificationFilter;
+use Kanboard\Model\UserNotificationType;
+use Kanboard\Subscriber\UserNotificationSubscriber;
 
-class NotificationTest extends Base
+class UserNotificationTest extends Base
 {
     public function testEnableDisableNotification()
     {
         $u = new User($this->container);
         $p = new Project($this->container);
-        $n = new Notification($this->container);
+        $n = new UserNotification($this->container);
         $pp = new ProjectPermission($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
@@ -38,23 +38,23 @@ class NotificationTest extends Base
 
     public function testReadWriteSettings()
     {
-        $n = new Notification($this->container);
+        $n = new UserNotification($this->container);
         $p = new Project($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
         $n->saveSettings(1, array(
             'notifications_enabled' => 1,
-            'notifications_filter' => NotificationFilter::FILTER_CREATOR,
-            'notification_types' => array(NotificationType::TYPE_EMAIL => 1),
+            'notifications_filter' => UserNotificationFilter::FILTER_CREATOR,
+            'notification_types' => array('email' => 1),
             'notification_projects' => array(),
         ));
 
         $settings = $n->readSettings(1);
         $this->assertNotEmpty($settings);
         $this->assertEquals(1, $settings['notifications_enabled']);
-        $this->assertEquals(NotificationFilter::FILTER_CREATOR, $settings['notifications_filter']);
-        $this->assertEquals(array(NotificationType::TYPE_EMAIL), $settings['notification_types']);
+        $this->assertEquals(UserNotificationFilter::FILTER_CREATOR, $settings['notifications_filter']);
+        $this->assertEquals(array('email'), $settings['notification_types']);
         $this->assertEmpty($settings['notification_projects']);
 
         $n->saveSettings(1, array(
@@ -67,16 +67,16 @@ class NotificationTest extends Base
 
         $n->saveSettings(1, array(
             'notifications_enabled' => 1,
-            'notifications_filter' => NotificationFilter::FILTER_ASSIGNEE,
-            'notification_types' => array(NotificationType::TYPE_WEB => 1, NotificationType::TYPE_EMAIL => 1),
+            'notifications_filter' => UserNotificationFilter::FILTER_ASSIGNEE,
+            'notification_types' => array('web' => 1, 'email' => 1),
             'notification_projects' => array(1 => 1),
         ));
 
         $settings = $n->readSettings(1);
         $this->assertNotEmpty($settings);
         $this->assertEquals(1, $settings['notifications_enabled']);
-        $this->assertEquals(NotificationFilter::FILTER_ASSIGNEE, $settings['notifications_filter']);
-        $this->assertEquals(array(NotificationType::TYPE_EMAIL, NotificationType::TYPE_WEB), $settings['notification_types']);
+        $this->assertEquals(UserNotificationFilter::FILTER_ASSIGNEE, $settings['notifications_filter']);
+        $this->assertEquals(array('email', 'web'), $settings['notification_types']);
         $this->assertEquals(array(1), $settings['notification_projects']);
     }
 
@@ -84,7 +84,7 @@ class NotificationTest extends Base
     {
         $u = new User($this->container);
         $p = new Project($this->container);
-        $n = new Notification($this->container);
+        $n = new UserNotification($this->container);
         $pp = new ProjectPermission($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
@@ -125,7 +125,7 @@ class NotificationTest extends Base
     {
         $u = new User($this->container);
         $p = new Project($this->container);
-        $n = new Notification($this->container);
+        $n = new UserNotification($this->container);
         $pp = new ProjectPermission($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1', 'is_everybody_allowed' => 1)));
@@ -155,7 +155,7 @@ class NotificationTest extends Base
     public function testSendNotifications()
     {
         $u = new User($this->container);
-        $n = new Notification($this->container);
+        $n = new UserNotification($this->container);
         $p = new Project($this->container);
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
@@ -168,29 +168,30 @@ class NotificationTest extends Base
 
         $n->saveSettings(1, array(
             'notifications_enabled' => 1,
-            'notifications_filter' => NotificationFilter::FILTER_NONE,
-            'notification_types' => array(NotificationType::TYPE_WEB => 1, NotificationType::TYPE_EMAIL => 1),
+            'notifications_filter' => UserNotificationFilter::FILTER_NONE,
+            'notification_types' => array('web' => 1, 'email' => 1),
         ));
 
-        $this->container['emailNotification'] = $this
-            ->getMockBuilder('\Kanboard\Model\EmailNotification')
-            ->setConstructorArgs(array($this->container))
-            ->setMethods(array('send'))
+        $notifier = $this
+            ->getMockBuilder('Stdclass')
+            ->setMethods(array('notifyUser'))
             ->getMock();
 
-        $this->container['webNotification'] = $this
-            ->getMockBuilder('\Kanboard\Model\WebNotification')
-            ->setConstructorArgs(array($this->container))
-            ->setMethods(array('send'))
-            ->getMock();
+        $notifier
+            ->expects($this->exactly(2))
+            ->method('notifyUser');
 
-        $this->container['emailNotification']
-            ->expects($this->once())
-            ->method('send');
+        $this->container['userNotificationType']
+            ->expects($this->at(0))
+            ->method('getType')
+            ->with($this->equalTo('email'))
+            ->will($this->returnValue($notifier));
 
-        $this->container['webNotification']
-            ->expects($this->once())
-            ->method('send');
+        $this->container['userNotificationType']
+            ->expects($this->at(1))
+            ->method('getType')
+            ->with($this->equalTo('web'))
+            ->will($this->returnValue($notifier));
 
         $n->sendNotifications(Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
     }

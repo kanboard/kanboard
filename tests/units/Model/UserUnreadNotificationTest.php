@@ -10,14 +10,14 @@ use Kanboard\Model\User;
 use Kanboard\Model\File;
 use Kanboard\Model\Task;
 use Kanboard\Model\Project;
-use Kanboard\Model\WebNotification;
+use Kanboard\Model\UserUnreadNotification;
 use Kanboard\Subscriber\NotificationSubscriber;
 
-class WebNotificationTest extends Base
+class UserUnreadNotificationTest extends Base
 {
     public function testGetTitle()
     {
-        $wn = new WebNotification($this->container);
+        $wn = new UserUnreadNotification($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -59,7 +59,7 @@ class WebNotificationTest extends Base
 
     public function testHasNotification()
     {
-        $wn = new WebNotification($this->container);
+        $wn = new UserUnreadNotification($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -70,14 +70,14 @@ class WebNotificationTest extends Base
 
         $this->assertFalse($wn->hasNotifications(1));
 
-        $wn->send($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertTrue($wn->hasNotifications(1));
     }
 
     public function testMarkAllAsRead()
     {
-        $wn = new WebNotification($this->container);
+        $wn = new UserUnreadNotification($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -86,7 +86,7 @@ class WebNotificationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
-        $wn->send($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertTrue($wn->hasNotifications(1));
         $this->assertTrue($wn->markAllAsRead(1));
@@ -97,7 +97,7 @@ class WebNotificationTest extends Base
 
     public function testMarkAsRead()
     {
-        $wn = new WebNotification($this->container);
+        $wn = new UserUnreadNotification($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -106,7 +106,7 @@ class WebNotificationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
-        $wn->send($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertTrue($wn->hasNotifications(1));
 
@@ -119,7 +119,7 @@ class WebNotificationTest extends Base
 
     public function testGetAll()
     {
-        $wn = new WebNotification($this->container);
+        $wn = new UserUnreadNotification($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -128,8 +128,8 @@ class WebNotificationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
-        $wn->send($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
-        $wn->send($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertEmpty($wn->getAll(2));
 

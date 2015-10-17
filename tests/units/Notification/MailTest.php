@@ -11,14 +11,14 @@ use Kanboard\Model\File;
 use Kanboard\Model\Project;
 use Kanboard\Model\Task;
 use Kanboard\Model\ProjectPermission;
-use Kanboard\Model\EmailNotification;
+use Kanboard\Notification\Mail;
 use Kanboard\Subscriber\NotificationSubscriber;
 
-class EmailNotificationTest extends Base
+class MailTest extends Base
 {
     public function testGetMailContent()
     {
-        $en = new EmailNotification($this->container);
+        $en = new Mail($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -63,7 +63,7 @@ class EmailNotificationTest extends Base
 
     public function testSendWithEmailAddress()
     {
-        $en = new EmailNotification($this->container);
+        $en = new Mail($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -89,12 +89,12 @@ class EmailNotificationTest extends Base
                 $this->stringContains('test')
             );
 
-        $en->send($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $en->notifyUser($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
     }
 
     public function testSendWithoutEmailAddress()
     {
-        $en = new EmailNotification($this->container);
+        $en = new Mail($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -113,6 +113,6 @@ class EmailNotificationTest extends Base
             ->expects($this->never())
             ->method('send');
 
-        $en->send($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $en->notifyUser($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
     }
 }

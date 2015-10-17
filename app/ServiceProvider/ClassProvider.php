@@ -8,9 +8,7 @@ use Kanboard\Core\ObjectStorage\FileStorage;
 use Kanboard\Core\Paginator;
 use Kanboard\Core\OAuth2;
 use Kanboard\Core\Tool;
-use Kanboard\Model\Config;
-use Kanboard\Model\Project;
-use Kanboard\Model\Webhook;
+use Kanboard\Model\UserNotificationType;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use League\HTMLToMarkdown\HtmlConverter;
@@ -32,12 +30,7 @@ class ClassProvider implements ServiceProviderInterface
             'File',
             'LastLogin',
             'Link',
-            'Notification',
-            'NotificationType',
-            'NotificationFilter',
             'OverdueNotification',
-            'WebNotification',
-            'EmailNotification',
             'Project',
             'ProjectActivity',
             'ProjectAnalytic',
@@ -68,6 +61,10 @@ class ClassProvider implements ServiceProviderInterface
             'User',
             'UserImport',
             'UserSession',
+            'UserNotification',
+            'UserNotificationType',
+            'UserNotificationFilter',
+            'UserUnreadNotification',
             'Webhook',
         ),
         'Formatter' => array(
@@ -129,6 +126,13 @@ class ClassProvider implements ServiceProviderInterface
             $mailer->setTransport('sendmail', '\Kanboard\Core\Mail\Transport\Sendmail');
             $mailer->setTransport('mail', '\Kanboard\Core\Mail\Transport\Mail');
             return $mailer;
+        };
+
+        $container['userNotificationType'] = function($container) {
+            $type = new UserNotificationType($container);
+            $type->setType('email', t('Email'), '\Kanboard\Notification\Mail');
+            $type->setType('web', t('Web'), '\Kanboard\Notification\Web');
+            return $type;
         };
 
         $container['pluginLoader'] = new Loader($container);

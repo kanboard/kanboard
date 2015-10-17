@@ -1,26 +1,30 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Notification;
 
-use Kanboard\Core\NotificationInterface;
+use Kanboard\Core\Base;
+use Kanboard\Model\Task;
+use Kanboard\Model\File;
+use Kanboard\Model\Comment;
+use Kanboard\Model\Subtask;
 
 /**
- * Email Notification model
+ * Email Notification
  *
- * @package  model
+ * @package  notification
  * @author   Frederic Guillot
  */
-class EmailNotification extends Base implements NotificationInterface
+class Mail extends Base implements NotificationInterface
 {
     /**
-     * Send email notification to someone
+     * Send notification to a user
      *
      * @access public
      * @param  array     $user
      * @param  string    $event_name
      * @param  array     $event_data
      */
-    public function send(array $user, $event_name, array $event_data)
+    public function notifyUser(array $user, $event_name, array $event_data)
     {
         if (! empty($user['email'])) {
             $this->emailClient->send(
@@ -30,6 +34,19 @@ class EmailNotification extends Base implements NotificationInterface
                 $this->getMailContent($event_name, $event_data)
             );
         }
+    }
+
+    /**
+     * Send notification to a project
+     *
+     * @access public
+     * @param  array     $project
+     * @param  string    $event_name
+     * @param  array     $event_data
+     */
+    public function notifyProject(array $project, $event_name, array $event_data)
+    {
+
     }
 
     /**

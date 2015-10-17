@@ -96,7 +96,7 @@ class User extends Base
                 $this->projectPermission->addMember($project_id, $user_id);
 
                 if (! empty($values['notifications_enabled'])) {
-                    $this->notificationType->saveUserSelectedTypes($user_id, array(NotificationType::TYPE_EMAIL));
+                    $this->userNotificationType->saveSelectedTypes($user_id, array(NotificationType::TYPE_EMAIL));
                 }
 
                 $this->session->flash(t('User created successfully.'));
@@ -201,16 +201,16 @@ class User extends Base
 
         if ($this->request->isPost()) {
             $values = $this->request->getValues();
-            $this->notification->saveSettings($user['id'], $values);
+            $this->userNotification->saveSettings($user['id'], $values);
             $this->session->flash(t('User updated successfully.'));
             $this->response->redirect($this->helper->url->to('user', 'notifications', array('user_id' => $user['id'])));
         }
 
         $this->response->html($this->layout('user/notifications', array(
             'projects' => $this->projectPermission->getMemberProjects($user['id']),
-            'notifications' => $this->notification->readSettings($user['id']),
-            'types' => $this->notificationType->getTypes(),
-            'filters' => $this->notificationFilter->getFilters(),
+            'notifications' => $this->userNotification->readSettings($user['id']),
+            'types' => $this->userNotificationType->getTypes(),
+            'filters' => $this->userNotificationFilter->getFilters(),
             'user' => $user,
         )));
     }

@@ -8,7 +8,7 @@
     <ul>
         <li>
             <i class="fa fa-check-square-o fa-fw"></i>
-            <?= $this->url->link(t('Mark all as read'), 'webnotification', 'flush', array('user_id' => $user['id'])) ?>
+            <?= $this->url->link(t('Mark all as read'), 'webNotification', 'flush', array('user_id' => $user['id'])) ?>
         </li>
     </ul>
 </div>
@@ -53,7 +53,7 @@
             </td>
             <td>
                 <i class="fa fa-check fa-fw"></i>
-                <?= $this->url->link(t('Mark as read'), 'webnotification', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'])) ?>
+                <?= $this->url->link(t('Mark as read'), 'webNotification', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'])) ?>
             </td>
         </tr>
         <?php endforeach ?>

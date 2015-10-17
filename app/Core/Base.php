@@ -49,11 +49,11 @@ use Pimple\Container;
  * @property \Kanboard\Model\File                                       $file
  * @property \Kanboard\Model\LastLogin                                  $lastLogin
  * @property \Kanboard\Model\Link                                       $link
- * @property \Kanboard\Model\Notification                               $notification
- * @property \Kanboard\Model\NotificationType                           $notificationType
- * @property \Kanboard\Model\NotificationFilter                         $notificationFilter
+ * @property \Kanboard\Model\UserNotification                           $userNotification
+ * @property \Kanboard\Model\UserNotificationType                       $userNotificationType
+ * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
+ * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
  * @property \Kanboard\Model\OverdueNotification                        $overdueNotification
- * @property \Kanboard\Model\WebNotification                            $webNotification
  * @property \Kanboard\Model\Project                                    $project
  * @property \Kanboard\Model\ProjectActivity                            $projectActivity
  * @property \Kanboard\Model\ProjectAnalytic                            $projectAnalytic

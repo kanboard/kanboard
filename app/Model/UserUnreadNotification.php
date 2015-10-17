@@ -2,15 +2,13 @@
 
 namespace Kanboard\Model;
 
-use Kanboard\Core\NotificationInterface;
-
 /**
- * Web Notification model
+ * User Unread Notification
  *
  * @package  model
  * @author   Frederic Guillot
  */
-class WebNotification extends Base implements NotificationInterface
+class UserUnreadNotification extends Base
 {
     /**
      * SQL table name
@@ -23,14 +21,14 @@ class WebNotification extends Base implements NotificationInterface
      * Add unread notification to someone
      *
      * @access public
-     * @param  array     $user
+     * @param  integer   $user_id
      * @param  string    $event_name
      * @param  array     $event_data
      */
-    public function send(array $user, $event_name, array $event_data)
+    public function create($user_id, $event_name, array $event_data)
     {
         $this->db->table(self::TABLE)->insert(array(
-            'user_id' => $user['id'],
+            'user_id' => $user_id,
             'date_creation' => time(),
             'event_name' => $event_name,
             'event_data' => json_encode($event_data),

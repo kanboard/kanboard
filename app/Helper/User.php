@@ -18,7 +18,7 @@ class User extends \Kanboard\Core\Base
      */
     public function hasNotifications()
     {
-        return $this->webNotification->hasNotifications($this->userSession->getId());
+        return $this->userUnreadNotification->hasNotifications($this->userSession->getId());
     }
 
     /**

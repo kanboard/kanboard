@@ -3,12 +3,12 @@
 namespace Kanboard\Model;
 
 /**
- * Notification Filter model
+ * User Notification Filter
  *
  * @package  model
  * @author   Frederic Guillot
  */
-class NotificationFilter extends Base
+class UserNotificationFilter extends Base
 {
     /**
      * SQL table name
@@ -50,7 +50,7 @@ class NotificationFilter extends Base
      * @param  integer  $user_id
      * @return integer
      */
-    public function getUserSelectedFilter($user_id)
+    public function getSelectedFilter($user_id)
     {
         return $this->db->table(User::TABLE)->eq('id', $user_id)->findOneColumn('notifications_filter');
     }
@@ -62,7 +62,7 @@ class NotificationFilter extends Base
      * @param  integer  $user_id
      * @param  string   $filter
      */
-    public function saveUserFilter($user_id, $filter)
+    public function saveFilter($user_id, $filter)
     {
         $this->db->table(User::TABLE)->eq('id', $user_id)->update(array(
             'notifications_filter' => $filter,
@@ -76,7 +76,7 @@ class NotificationFilter extends Base
      * @param  integer  $user_id
      * @return array
      */
-    public function getUserSelectedProjects($user_id)
+    public function getSelectedProjects($user_id)
     {
         return $this->db->table(self::PROJECT_TABLE)->eq('user_id', $user_id)->findAllByColumn('project_id');
     }
@@ -88,7 +88,7 @@ class NotificationFilter extends Base
      * @param  integer    $user_id
      * @param  integer[]  $project_ids
      */
-    public function saveUserSelectedProjects($user_id, array $project_ids)
+    public function saveSelectedProjects($user_id, array $project_ids)
     {
         $this->db->table(self::PROJECT_TABLE)->eq('user_id', $user_id)->remove();
 
@@ -188,7 +188,7 @@ class NotificationFilter extends Base
      */
     public function filterProject(array $user, array $event_data)
     {
-        $projects = $this->getUserSelectedProjects($user['id']);
+        $projects = $this->getSelectedProjects($user['id']);
 
         if (! empty($projects)) {
             return in_array($event_data['task']['project_id'], $projects);

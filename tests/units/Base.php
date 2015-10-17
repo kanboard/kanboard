@@ -88,6 +88,12 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container['logger']->setLogger(new File('/dev/null'));
         $this->container['httpClient'] = new FakeHttpClient;
         $this->container['emailClient'] = $this->getMockBuilder('EmailClient')->setMethods(array('send'))->getMock();
+
+        $this->container['userNotificationType'] = $this
+            ->getMockBuilder('\Kanboard\Model\UserNotificationType')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('getType'))
+            ->getMock();
     }
 
     public function tearDown()

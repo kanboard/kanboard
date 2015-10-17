@@ -22,7 +22,7 @@ class OverdueNotification extends Base
         foreach ($this->groupByColumn($tasks, 'project_id') as $project_id => $project_tasks) {
 
             // Get the list of users that should receive notifications for each projects
-            $users = $this->notification->getUsersWithNotificationEnabled($project_id);
+            $users = $this->userNotification->getUsersWithNotificationEnabled($project_id);
 
             foreach ($users as $user) {
                 $this->sendUserOverdueTaskNotifications($user, $project_tasks);
@@ -44,13 +44,13 @@ class OverdueNotification extends Base
         $user_tasks = array();
 
         foreach ($tasks as $task) {
-            if ($this->notificationFilter->shouldReceiveNotification($user, array('task' => $task))) {
+            if ($this->userNotificationFilter->shouldReceiveNotification($user, array('task' => $task))) {
                 $user_tasks[] = $task;
             }
         }
 
         if (! empty($user_tasks)) {
-            $this->notification->sendUserNotification(
+            $this->userNotification->sendUserNotification(
                 $user,
                 Task::EVENT_OVERDUE,
                 array('tasks' => $user_tasks, 'project_name' => $tasks[0]['project_name'])

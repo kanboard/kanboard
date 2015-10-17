@@ -5,12 +5,12 @@ namespace Kanboard\Model;
 use Kanboard\Core\Translator;
 
 /**
- * Notification model
+ * User Notification
  *
  * @package  model
  * @author   Frederic Guillot
  */
-class Notification extends Base
+class UserNotification extends Base
 {
     /**
      * Send notifications to people
@@ -22,12 +22,11 @@ class Notification extends Base
     public function sendNotifications($event_name, array $event_data)
     {
         $logged_user_id = $this->userSession->isLogged() ? $this->userSession->getId() : 0;
-        $users = $this->notification->getUsersWithNotificationEnabled($event_data['task']['project_id'], $logged_user_id);
+        $users = $this->getUsersWithNotificationEnabled($event_data['task']['project_id'], $logged_user_id);
 
         if (! empty($users)) {
-
             foreach ($users as $user) {
-                if ($this->notificationFilter->shouldReceiveNotification($user, $event_data)) {
+                if ($this->userNotificationFilter->shouldReceiveNotification($user, $event_data)) {
                     $this->sendUserNotification($user, $event_name, $event_data);
                 }
             }
@@ -57,9 +56,8 @@ class Notification extends Base
             Translator::load($this->config->get('application_language', 'en_US'));
         }
 
-        foreach ($this->notificationType->getUserSelectedTypes($user['id']) as $type) {
-            $className = strtolower($type).'Notification';
-            $this->$className->send($user, $event_name, $event_data);
+        foreach ($this->userNotificationType->getSelectedTypes($user['id']) as $type) {
+            $this->userNotificationType->getType($type)->notifyUser($user, $event_name, $event_data);
         }
     }
 
@@ -118,13 +116,13 @@ class Notification extends Base
         if (isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1) {
             $this->enableNotification($user_id);
 
-            $filter = empty($values['notifications_filter']) ? NotificationFilter::FILTER_BOTH : $values['notifications_filter'];
+            $filter = empty($values['notifications_filter']) ? UserNotificationFilter::FILTER_BOTH : $values['notifications_filter'];
             $projects = empty($values['notification_projects']) ? array() : array_keys($values['notification_projects']);
             $types = empty($values['notification_types']) ? array() : array_keys($values['notification_types']);
 
-            $this->notificationFilter->saveUserFilter($user_id, $filter);
-            $this->notificationFilter->saveUserSelectedProjects($user_id, $projects);
-            $this->notificationType->saveUserSelectedTypes($user_id, $types);
+            $this->userNotificationFilter->saveFilter($user_id, $filter);
+            $this->userNotificationFilter->saveSelectedProjects($user_id, $projects);
+            $this->userNotificationType->saveSelectedTypes($user_id, $types);
         }
         else {
             $this->disableNotification($user_id);
@@ -143,8 +141,8 @@ class Notification extends Base
     public function readSettings($user_id)
     {
         $values = $this->db->table(User::TABLE)->eq('id', $user_id)->columns('notifications_enabled', 'notifications_filter')->findOne();
-        $values['notification_types'] = $this->notificationType->getUserSelectedTypes($user_id);
-        $values['notification_projects'] = $this->notificationFilter->getUserSelectedProjects($user_id);
+        $values['notification_types'] = $this->userNotificationType->getSelectedTypes($user_id);
+        $values['notification_projects'] = $this->userNotificationFilter->getSelectedProjects($user_id);
         return $values;
     }
 
