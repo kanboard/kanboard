@@ -15,6 +15,7 @@ Improvements:
 * Allow to change comments sorting
 * Add the possibility to append or not custom filters
 * Make mail transports pluggable
+* Add Task, User and Project metadata for plugin creators
 
 Version 1.0.19
 --------------

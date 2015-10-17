@@ -41,6 +41,7 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectIntegration',
             'ProjectPermission',
             'ProjectNotification',
+            'ProjectMetadata',
             'Subtask',
             'SubtaskExport',
             'SubtaskTimeTracking',
@@ -59,6 +60,7 @@ class ClassProvider implements ServiceProviderInterface
             'TaskStatus',
             'TaskValidator',
             'TaskImport',
+            'TaskMetadata',
             'Transition',
             'User',
             'UserImport',
@@ -67,6 +69,7 @@ class ClassProvider implements ServiceProviderInterface
             'UserNotificationType',
             'UserNotificationFilter',
             'UserUnreadNotification',
+            'UserMetadata',
         ),
         'Formatter' => array(
             'TaskFilterGanttFormatter',

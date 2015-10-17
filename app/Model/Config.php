@@ -12,15 +12,8 @@ use Kanboard\Core\Session;
  * @package  model
  * @author   Frederic Guillot
  */
-class Config extends Base
+class Config extends Setting
 {
-    /**
-     * SQL table name
-     *
-     * @var string
-     */
-    const TABLE = 'settings';
-
     /**
      * Get available currencies
      *
@@ -170,8 +163,7 @@ class Config extends Base
     public function get($name, $default_value = '')
     {
         if (! Session::isOpen()) {
-            $value = $this->db->table(self::TABLE)->eq('option', $name)->findOneColumn('value');
-            return $value ?: $default_value;
+            return $this->getOption($name, $default_value);
         }
 
         // Cache config in session
@@ -184,43 +176,6 @@ class Config extends Base
         }
 
         return $default_value;
-    }
-
-    /**
-     * Get all settings
-     *
-     * @access public
-     * @return array
-     */
-    public function getAll()
-    {
-        return $this->db->hashtable(self::TABLE)->getAll('option', 'value');
-    }
-
-    /**
-     * Save settings in the database
-     *
-     * @access public
-     * @param  $values  array   Settings values
-     * @return boolean
-     */
-    public function save(array $values)
-    {
-        foreach ($values as $option => $value) {
-
-            // Be sure that a trailing slash is there for the url
-            if ($option === 'application_url' && ! empty($value) && substr($value, -1) !== '/') {
-                $value .= '/';
-            }
-
-            $result = $this->db->table(self::TABLE)->eq('option', $option)->update(array('value' => $value));
-
-            if (! $result) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -310,8 +265,21 @@ class Config extends Base
      */
     public function regenerateToken($option)
     {
-        return $this->db->table(self::TABLE)
-                 ->eq('option', $option)
-                 ->update(array('value' => Security::generateToken()));
+        $this->save(array($option => Security::generateToken()));
+    }
+
+    /**
+     * Prepare data before save
+     *
+     * @access public
+     * @return array
+     */
+    public function prepare(array $values)
+    {
+        if (! empty($values['application_url']) && substr($values['application_url'], -1) !== '/') {
+            $values['application_url'] = $values['application_url'].'/';
+        }
+
+        return $values;
     }
 }

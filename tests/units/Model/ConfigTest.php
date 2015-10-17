@@ -7,6 +7,31 @@ use Kanboard\Core\Session;
 
 class ConfigTest extends Base
 {
+    public function testCRUDOperations()
+    {
+        $c = new Config($this->container);
+
+        $this->assertTrue($c->save(array('key1' => 'value1')));
+        $this->assertTrue($c->save(array('key1' => 'value2')));
+        $this->assertTrue($c->save(array('key2' => 'value2')));
+
+        $this->assertEquals('value2', $c->getOption('key1'));
+        $this->assertEquals('value2', $c->getOption('key2'));
+        $this->assertEquals('', $c->getOption('key3'));
+        $this->assertEquals('default', $c->getOption('key3', 'default'));
+
+        $this->assertTrue($c->exists('key1'));
+        $this->assertFalse($c->exists('key3'));
+
+        $this->assertTrue($c->save(array('key1' => 'value1')));
+
+        $this->assertArrayHasKey('key1', $c->getAll());
+        $this->assertArrayHasKey('key2', $c->getAll());
+
+        $this->assertContains('value1', $c->getAll());
+        $this->assertContains('value2', $c->getAll());
+    }
+
     public function testSaveApplicationUrl()
     {
         $c = new Config($this->container);

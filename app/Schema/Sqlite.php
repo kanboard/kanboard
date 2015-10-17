@@ -6,7 +6,40 @@ use Kanboard\Core\Security;
 use PDO;
 use Kanboard\Model\Link;
 
-const VERSION = 87;
+const VERSION = 88;
+
+function version_88($pdo)
+{
+    $pdo->exec("
+        CREATE TABLE user_has_metadata (
+            user_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            value TEXT DEFAULT '',
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            UNIQUE(user_id, name)
+        )
+    ");
+
+    $pdo->exec("
+        CREATE TABLE project_has_metadata (
+            project_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            value TEXT DEFAULT '',
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            UNIQUE(project_id, name)
+        )
+    ");
+
+    $pdo->exec("
+        CREATE TABLE task_has_metadata (
+            task_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            value TEXT DEFAULT '',
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            UNIQUE(task_id, name)
+        )
+    ");
+}
 
 function version_87($pdo)
 {
@@ -14,7 +47,7 @@ function version_87($pdo)
         CREATE TABLE project_has_notification_types (
             id INTEGER PRIMARY KEY,
             project_id INTEGER NOT NULL,
-            notification_type TEXT,
+            notification_type TEXT NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE(project_id, notification_type)
         )
