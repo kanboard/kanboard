@@ -4,6 +4,7 @@ namespace Kanboard\Core\Plugin;
 
 use DirectoryIterator;
 use PDOException;
+use RuntimeException;
 use Kanboard\Core\Tool;
 
 /**
@@ -111,7 +112,7 @@ class Loader extends \Kanboard\Core\Base
         } catch (PDOException $e) {
             $this->db->cancelTransaction();
             $this->db->getDriver()->enableForeignKeys();
-            die('Unable to migrate schema for the plugin: '.$plugin.' => '.$e->getMessage());
+            throw new RuntimeException('Unable to migrate schema for the plugin: '.$plugin.' => '.$e->getMessage());
         }
     }
 

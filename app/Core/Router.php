@@ -2,6 +2,8 @@
 
 namespace Kanboard\Core;
 
+use RuntimeException;
+
 /**
  * Router class
  *
@@ -215,6 +217,10 @@ class Router extends Base
 
         $class = '\Kanboard\\';
         $class .= empty($plugin) ? 'Controller\\'.ucfirst($this->controller) : 'Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($this->controller);
+
+        if (! class_exists($class) || ! method_exists($class, $this->action)) {
+            throw new RuntimeException('Controller or method not found for the given url!');
+        }
 
         $instance = new $class($this->container);
         $instance->beforeAction($this->controller, $this->action);

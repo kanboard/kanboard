@@ -49,10 +49,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\File                                       $file
  * @property \Kanboard\Model\LastLogin                                  $lastLogin
  * @property \Kanboard\Model\Link                                       $link
- * @property \Kanboard\Model\UserNotification                           $userNotification
- * @property \Kanboard\Model\UserNotificationType                       $userNotificationType
- * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
- * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
  * @property \Kanboard\Model\OverdueNotification                        $overdueNotification
  * @property \Kanboard\Model\Project                                    $project
  * @property \Kanboard\Model\ProjectActivity                            $projectActivity
@@ -71,6 +67,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskCreation                               $taskCreation
  * @property \Kanboard\Model\TaskDuplication                            $taskDuplication
  * @property \Kanboard\Model\TaskExport                                 $taskExport
+ * @property \Kanboard\Model\TaskImport                                 $taskImport
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder
  * @property \Kanboard\Model\TaskFilter                                 $taskFilter
  * @property \Kanboard\Model\TaskLink                                   $taskLink
@@ -81,6 +78,11 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskValidator                              $taskValidator
  * @property \Kanboard\Model\Transition                                 $transition
  * @property \Kanboard\Model\User                                       $user
+ * @property \Kanboard\Model\UserImport                                 $userImport
+ * @property \Kanboard\Model\UserNotification                           $userNotification
+ * @property \Kanboard\Model\UserNotificationType                       $userNotificationType
+ * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
+ * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
  * @property \Kanboard\Model\UserSession                                $userSession
  * @property \Kanboard\Model\Webhook                                    $webhook
  * @property \Psr\Log\LoggerInterface                                   $logger
