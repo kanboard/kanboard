@@ -120,7 +120,7 @@ abstract class NotificationType extends Base
     {
         $classes = $this->classes;
 
-        return array_filter($types, function($type) use ($classes) {
+        return array_filter($types, function ($type) use ($classes) {
             return isset($classes[$type]);
         });
     }

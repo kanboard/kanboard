@@ -2,6 +2,8 @@
 
 namespace Kanboard\ServiceProvider;
 
+use LogicException;
+use RuntimeException;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use PicoDb\Database;
@@ -27,24 +29,21 @@ class DatabaseProvider implements ServiceProviderInterface
             case 'sqlite':
                 $db = $this->getSqliteInstance();
                 break;
-
             case 'mysql':
                 $db = $this->getMysqlInstance();
                 break;
-
             case 'postgres':
                 $db = $this->getPostgresInstance();
                 break;
-
             default:
-                die('Database driver not supported');
+                throw new LogicException('Database driver not supported');
         }
 
         if ($db->schema()->check(\Schema\VERSION)) {
             return $db;
         } else {
             $errors = $db->getLogMessages();
-            die('Unable to migrate database schema: <br/><br/><strong>'.(isset($errors[0]) ? $errors[0] : 'Unknown error').'</strong>');
+            throw new RuntimeException('Unable to migrate database schema: '.(isset($errors[0]) ? $errors[0] : 'Unknown error'));
         }
     }
 
