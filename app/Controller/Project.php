@@ -89,25 +89,46 @@ class Project extends Base
      *
      * @access public
      */
-    public function integration()
+    public function integrations()
     {
         $project = $this->getProject();
 
         if ($this->request->isPost()) {
-            $params = $this->request->getValues();
-            $params += array('hipchat' => 0, 'slack' => 0, 'jabber' => 0);
-            $this->projectIntegration->saveParameters($project['id'], $params);
+            $this->projectMetadata->save($project['id'], $this->request->getValues());
+            $this->session->flash(t('Project updated successfully.'));
+            $this->response->redirect($this->helper->url->to('project', 'integrations', array('project_id' => $project['id'])));
         }
-
-        $values = $this->projectIntegration->getParameters($project['id']);
-        $values += array('hipchat_api_url' => 'https://api.hipchat.com');
 
         $this->response->html($this->projectLayout('project/integrations', array(
             'project' => $project,
             'title' => t('Integrations'),
             'webhook_token' => $this->config->get('webhook_token'),
-            'values' => $values,
+            'values' => $this->projectMetadata->getAll($project['id']),
             'errors' => array(),
+        )));
+    }
+
+    /**
+     * Display project notifications
+     *
+     * @access public
+     */
+    public function notifications()
+    {
+        $project = $this->getProject();
+
+        if ($this->request->isPost()) {
+            $values = $this->request->getValues();
+            $this->projectNotification->saveSettings($project['id'], $values);
+            $this->session->flash(t('Project updated successfully.'));
+            $this->response->redirect($this->helper->url->to('project', 'notifications', array('project_id' => $project['id'])));
+        }
+
+        $this->response->html($this->projectLayout('project/notifications', array(
+            'notifications' => $this->projectNotification->readSettings($project['id']),
+            'types' => $this->projectNotificationType->getTypes(),
+            'project' => $project,
+            'title' => t('Notifications'),
         )));
     }
 

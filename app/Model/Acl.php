@@ -64,7 +64,7 @@ class Acl extends Base
         'column' => '*',
         'export' => '*',
         'taskimport' => '*',
-        'project' => array('edit', 'update', 'share', 'integration', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
+        'project' => array('edit', 'update', 'share', 'integrations', 'notifications', 'users', 'alloweverybody', 'allow', 'setowner', 'revoke', 'duplicate', 'disable', 'enable'),
         'swimlane' => '*',
         'gantt' => array('project', 'savetaskdate', 'task', 'savetask'),
     );

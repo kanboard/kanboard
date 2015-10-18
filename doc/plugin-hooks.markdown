@@ -134,6 +134,8 @@ List of template hooks:
 - `template:dashboard:sidebar`
 - `template:config:sidebar`
 - `template:config:integrations`
+- `template:project:integrations`
+- `template:user:integrations`
 - `template:export:sidebar`
 - `template:layout:head`
 - `template:layout:top`

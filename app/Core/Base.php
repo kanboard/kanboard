@@ -27,9 +27,6 @@ use Pimple\Container;
  * @property \Kanboard\Integration\BitbucketWebhook                     $bitbucketWebhook
  * @property \Kanboard\Integration\GithubWebhook                        $githubWebhook
  * @property \Kanboard\Integration\GitlabWebhook                        $gitlabWebhook
- * @property \Kanboard\Integration\HipchatWebhook                       $hipchatWebhook
- * @property \Kanboard\Integration\Jabber                               $jabber
- * @property \Kanboard\Integration\SlackWebhook                         $slackWebhook
  * @property \Kanboard\Formatter\ProjectGanttFormatter                  $projectGanttFormatter
  * @property \Kanboard\Formatter\TaskFilterGanttFormatter               $taskFilterGanttFormatter
  * @property \Kanboard\Formatter\TaskFilterAutoCompleteFormatter        $taskFilterAutoCompleteFormatter
@@ -49,6 +46,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\File                                       $file
  * @property \Kanboard\Model\LastLogin                                  $lastLogin
  * @property \Kanboard\Model\Link                                       $link
+ * @property \Kanboard\Model\Notification                               $notification
  * @property \Kanboard\Model\OverdueNotification                        $overdueNotification
  * @property \Kanboard\Model\Project                                    $project
  * @property \Kanboard\Model\ProjectActivity                            $projectActivity
@@ -56,7 +54,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectDuplication                         $projectDuplication
  * @property \Kanboard\Model\ProjectDailyColumnStats                    $projectDailyColumnStats
  * @property \Kanboard\Model\ProjectDailyStats                          $projectDailyStats
- * @property \Kanboard\Model\ProjectIntegration                         $projectIntegration
+ * @property \Kanboard\Model\ProjectMetadata                            $projectMetadata
  * @property \Kanboard\Model\ProjectPermission                          $projectPermission
  * @property \Kanboard\Model\Subtask                                    $subtask
  * @property \Kanboard\Model\SubtaskExport                              $subtaskExport
@@ -76,6 +74,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskPosition                               $taskPosition
  * @property \Kanboard\Model\TaskStatus                                 $taskStatus
  * @property \Kanboard\Model\TaskValidator                              $taskValidator
+ * @property \Kanboard\Model\TaskMetadata                               $taskMetadata
  * @property \Kanboard\Model\Transition                                 $transition
  * @property \Kanboard\Model\User                                       $user
  * @property \Kanboard\Model\UserImport                                 $userImport
@@ -84,6 +83,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
  * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
  * @property \Kanboard\Model\UserSession                                $userSession
+ * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \League\HTMLToMarkdown\HtmlConverter                       $htmlConverter

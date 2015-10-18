@@ -4,14 +4,9 @@ Notifications
 Kanboard is able to send notifications through several channels:
 
 - Email
-- Web
-- Jabber/XMPP
-- Hipchat
-- Slack
+- Web (List of unread messages)
 
-Actually, Jabber/Hipchat/Slack notifications are sent to a room or group channel because they are configured at the project level.
-
-However, email or web notifications are sent to an individual person.
+External plugins allow you to send notifications to Slack, Hipchat, Jabber or any chat system.
 
 Configuration
 -------------

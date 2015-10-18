@@ -153,7 +153,7 @@ class ProjectActivity extends Base
             unset($event['data']);
 
             $event['author'] = $event['author_name'] ?: $event['author_username'];
-            $event['event_title'] = $this->getTitle($event);
+            $event['event_title'] = $this->notification->getTitleWithAuthor($event['author'], $event['event_name'], $event);
             $event['event_content'] = $this->getContent($event);
         }
 
@@ -193,56 +193,6 @@ class ProjectActivity extends Base
             'event/'.str_replace('.', '_', $params['event_name']),
             $params
         );
-    }
-
-    /**
-     * Get the event title (translated)
-     *
-     * @access public
-     * @param  array     $event    Event properties
-     * @return string
-     */
-    public function getTitle(array $event)
-    {
-        switch ($event['event_name']) {
-            case Task::EVENT_ASSIGNEE_CHANGE:
-                $assignee = $event['task']['assignee_name'] ?: $event['task']['assignee_username'];
-
-                if (! empty($assignee)) {
-                    return t('%s change the assignee of the task #%d to %s', $event['author'], $event['task']['id'], $assignee);
-                }
-
-                return t('%s remove the assignee of the task %s', $event['author'], e('#%d', $event['task']['id']));
-            case Task::EVENT_UPDATE:
-                return t('%s updated the task #%d', $event['author'], $event['task']['id']);
-            case Task::EVENT_CREATE:
-                return t('%s created the task #%d', $event['author'], $event['task']['id']);
-            case Task::EVENT_CLOSE:
-                return t('%s closed the task #%d', $event['author'], $event['task']['id']);
-            case Task::EVENT_OPEN:
-                return t('%s open the task #%d', $event['author'], $event['task']['id']);
-            case Task::EVENT_MOVE_COLUMN:
-                return t('%s moved the task #%d to the column "%s"', $event['author'], $event['task']['id'], $event['task']['column_title']);
-            case Task::EVENT_MOVE_POSITION:
-                return t('%s moved the task #%d to the position %d in the column "%s"', $event['author'], $event['task']['id'], $event['task']['position'], $event['task']['column_title']);
-            case Task::EVENT_MOVE_SWIMLANE:
-                if ($event['task']['swimlane_id'] == 0) {
-                    return t('%s moved the task #%d to the first swimlane', $event['author'], $event['task']['id']);
-                }
-                return t('%s moved the task #%d to the swimlane "%s"', $event['author'], $event['task']['id'], $event['task']['swimlane_name']);
-            case Subtask::EVENT_UPDATE:
-                return t('%s updated a subtask for the task #%d', $event['author'], $event['task']['id']);
-            case Subtask::EVENT_CREATE:
-                return t('%s created a subtask for the task #%d', $event['author'], $event['task']['id']);
-            case Comment::EVENT_UPDATE:
-                return t('%s updated a comment on the task #%d', $event['author'], $event['task']['id']);
-            case Comment::EVENT_CREATE:
-                return t('%s commented on the task #%d', $event['author'], $event['task']['id']);
-            case File::EVENT_CREATE:
-                return t('%s attached a file to the task #%d', $event['author'], $event['task']['id']);
-            default:
-                return '';
-        }
     }
 
     /**

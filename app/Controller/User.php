@@ -214,6 +214,28 @@ class User extends Base
     }
 
     /**
+     * Display user integrations
+     *
+     * @access public
+     */
+    public function integrations()
+    {
+        $user = $this->getUser();
+
+        if ($this->request->isPost()) {
+            $values = $this->request->getValues();
+            $this->userMetadata->save($user['id'], $values);
+            $this->session->flash(t('User updated successfully.'));
+            $this->response->redirect($this->helper->url->to('user', 'integrations', array('user_id' => $user['id'])));
+        }
+
+        $this->response->html($this->layout('user/integrations', array(
+            'user' => $user,
+            'values' => $this->userMetadata->getall($user['id']),
+        )));
+    }
+
+    /**
      * Display external accounts
      *
      * @access public

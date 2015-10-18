@@ -56,6 +56,9 @@
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'external' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('External accounts'), 'user', 'external', array('user_id' => $user['id'])) ?>
             </li>
+            <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'integrations' ? 'class="active"' : '' ?>>
+                <?= $this->url->link(t('Integrations'), 'user', 'integrations', array('user_id' => $user['id'])) ?>
+            </li>
         <?php endif ?>
 
         <?php if ($this->user->isAdmin()): ?>

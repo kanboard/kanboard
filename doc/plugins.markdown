@@ -12,10 +12,14 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 - [Override default application behaviors](plugin-overrides.markdown)
 - [Add schema migrations for plugins](plugin-schema-migrations.markdown)
 - [Add mail transports](plugin-mail-transports.markdown)
+- [Add notification types](plugin-notifications.markdown)
 
 Examples of plugins
 -------------------
 
+- [Slack](https://github.com/kanboard/plugin-slack)
+- [Hipchat](https://github.com/kanboard/plugin-hipchat)
+- [Jabber](https://github.com/kanboard/plugin-jabber)
 - [Sendgrid](https://github.com/kanboard/plugin-sendgrid)
 - [Mailgun](https://github.com/kanboard/plugin-mailgun)
 - [Postmark](https://github.com/kanboard/plugin-postmark)

@@ -35,7 +35,6 @@ class ActivityStream extends Base implements NotificationInterface
     public function notifyProject(array $project, $event_name, array $event_data)
     {
         if ($this->userSession->isLogged()) {
-
             $this->projectActivity->createEvent(
                 $project['id'],
                 $event_data['task']['id'],
@@ -43,16 +42,6 @@ class ActivityStream extends Base implements NotificationInterface
                 $event_name,
                 $event_data
             );
-
-            // TODO: need to be moved to external plugins
-            foreach (array('slackWebhook', 'hipchatWebhook', 'jabber') as $model) {
-                $this->$model->notify(
-                    $project['id'],
-                    $event_data['task']['id'],
-                    $event_name,
-                    $event_data
-                );
-            }
         }
     }
 }

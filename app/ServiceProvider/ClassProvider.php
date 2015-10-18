@@ -31,6 +31,7 @@ class ClassProvider implements ServiceProviderInterface
             'File',
             'LastLogin',
             'Link',
+            'Notification',
             'OverdueNotification',
             'Project',
             'ProjectActivity',
@@ -38,7 +39,6 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectDuplication',
             'ProjectDailyColumnStats',
             'ProjectDailyStats',
-            'ProjectIntegration',
             'ProjectPermission',
             'ProjectNotification',
             'ProjectMetadata',
@@ -98,9 +98,6 @@ class ClassProvider implements ServiceProviderInterface
             'BitbucketWebhook',
             'GithubWebhook',
             'GitlabWebhook',
-            'HipchatWebhook',
-            'Jabber',
-            'SlackWebhook',
         )
     );
 

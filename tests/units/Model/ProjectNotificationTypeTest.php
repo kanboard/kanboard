@@ -32,10 +32,15 @@ class ProjectNotificationTypeTest extends Base
 
         // Hidden type
         $nt->setType('baz', 'Baz', 'Something3', true);
-        $this->assertEquals(array('baz'), $nt->getSelectedTypes(1));
+        $this->assertEmpty($nt->getSelectedTypes(1));
 
-        // User defined types
+        // User defined types but not registered
         $this->assertTrue($nt->saveSelectedTypes(1, array('foo', 'bar')));
-        $this->assertEquals(array('baz', 'bar', 'foo'), $nt->getSelectedTypes(1));
+        $this->assertEmpty($nt->getSelectedTypes(1));
+
+        // User defined types and registered
+        $nt->setType('bar', 'Bar', 'Something4');
+        $nt->setType('foo', 'Foo', 'Something3');
+        $this->assertEquals(array('bar', 'foo'), $nt->getSelectedTypes(1));
     }
 }

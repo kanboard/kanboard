@@ -44,7 +44,7 @@ class Config extends Base
                     $values += array('subtask_restriction' => 0, 'subtask_time_tracking' => 0, 'cfd_include_closed_tasks' => 0);
                     break;
                 case 'integrations':
-                    $values += array('integration_slack_webhook' => 0, 'integration_hipchat' => 0, 'integration_gravatar' => 0, 'integration_jabber' => 0);
+                    $values += array('integration_gravatar' => 0);
                     break;
                 case 'calendar':
                     $values += array('calendar_user_subtasks_time_tracking' => 0);

@@ -26,13 +26,13 @@ class ProjectNotificationType extends NotificationType
      */
     public function getSelectedTypes($project_id)
     {
-        $selectedTypes = $this->db
+        $types = $this->db
             ->table(self::TABLE)
             ->eq('project_id', $project_id)
             ->asc('notification_type')
             ->findAllByColumn('notification_type');
 
-        return array_merge($this->getHiddenTypes(), $selectedTypes);
+        return $this->filterTypes($types);
     }
 
     /**
@@ -52,6 +52,6 @@ class ProjectNotificationType extends NotificationType
             $results[] = $this->db->table(self::TABLE)->insert(array('project_id' => $project_id, 'notification_type' => $type));
         }
 
-        return ! in_array(false, $results);
+        return ! in_array(false, $results, true);
     }
 }

@@ -108,4 +108,20 @@ abstract class NotificationType extends Base
     {
         return $this->hiddens;
     }
+
+    /**
+     * Keep only loaded notification types
+     *
+     * @access public
+     * @param  string[] $types
+     * @return array
+     */
+    public function filterTypes(array $types)
+    {
+        $classes = $this->classes;
+
+        return array_filter($types, function($type) use ($classes) {
+            return isset($classes[$type]);
+        });
+    }
 }

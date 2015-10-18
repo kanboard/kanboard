@@ -50,6 +50,22 @@ class UserNotificationTest extends Base
             'notification_projects' => array(),
         ));
 
+        $this->container['userNotificationType']
+            ->expects($this->at(0))
+            ->method('getSelectedTypes')
+            ->will($this->returnValue(array('email')));
+
+        $this->container['userNotificationType']
+            ->expects($this->at(1))
+            ->method('getSelectedTypes')
+            ->will($this->returnValue(array('email')));
+
+        $this->container['userNotificationType']
+            ->expects($this->at(2))
+            ->method('getSelectedTypes')
+            ->with($this->equalTo(1))
+            ->will($this->returnValue(array('email', 'web')));
+
         $settings = $n->readSettings(1);
         $this->assertNotEmpty($settings);
         $this->assertEquals(1, $settings['notifications_enabled']);
@@ -183,12 +199,17 @@ class UserNotificationTest extends Base
 
         $this->container['userNotificationType']
             ->expects($this->at(0))
+            ->method('getSelectedTypes')
+            ->will($this->returnValue(array('email', 'web')));
+
+        $this->container['userNotificationType']
+            ->expects($this->at(1))
             ->method('getType')
             ->with($this->equalTo('email'))
             ->will($this->returnValue($notifier));
 
         $this->container['userNotificationType']
-            ->expects($this->at(1))
+            ->expects($this->at(2))
             ->method('getType')
             ->with($this->equalTo('web'))
             ->will($this->returnValue($notifier));

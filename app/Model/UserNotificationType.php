@@ -26,7 +26,8 @@ class UserNotificationType extends NotificationType
      */
     public function getSelectedTypes($user_id)
     {
-        return $this->db->table(self::TABLE)->eq('user_id', $user_id)->asc('notification_type')->findAllByColumn('notification_type');
+        $types = $this->db->table(self::TABLE)->eq('user_id', $user_id)->asc('notification_type')->findAllByColumn('notification_type');
+        return $this->filterTypes($types);
     }
 
     /**
@@ -46,6 +47,6 @@ class UserNotificationType extends NotificationType
             $results[] = $this->db->table(self::TABLE)->insert(array('user_id' => $user_id, 'notification_type' => $type));
         }
 
-        return ! in_array(false, $results);
+        return ! in_array(false, $results, true);
     }
 }

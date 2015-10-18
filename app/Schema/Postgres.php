@@ -39,6 +39,23 @@ function version_73($pdo)
             UNIQUE(task_id, name)
         )
     ");
+
+    $pdo->exec("DROP TABLE project_integrations");
+
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_jabber'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_jabber_server'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_jabber_domain'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_jabber_username'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_jabber_password'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_jabber_nickname'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_jabber_room'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_hipchat'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_hipchat_api_url'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_hipchat_room_id'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_hipchat_room_token'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_slack_webhook'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_slack_webhook_url'");
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='integration_slack_webhook_channel'");
 }
 
 function version_72($pdo)
