@@ -97,8 +97,7 @@ Board.prototype.dragAndDrop = function() {
     var self = this;
     var params = {
         forcePlaceholderSize: true,
-        delay: 300,
-        distance: 5,
+        tolerance: "pointer",
         connectWith: ".board-task-list",
         placeholder: "draggable-placeholder",
         items: ".draggable-item",
