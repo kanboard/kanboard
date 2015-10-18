@@ -66,7 +66,7 @@ function version_92($pdo)
             project_id INT NOT NULL,
             notification_type VARCHAR(50) NOT NULL,
             PRIMARY KEY(id),
-            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE(project_id, notification_type)
         ) ENGINE=InnoDB CHARSET=utf8
     ");
@@ -74,7 +74,7 @@ function version_92($pdo)
 
 function version_91($pdo)
 {
-    $pdo->exec("ALTER TABLE custom_filters ADD COLUMN append TINYINT(1) DEFAULT 0");
+    $pdo->exec("ALTER TABLE custom_filters ADD COLUMN `append` TINYINT(1) DEFAULT 0");
 }
 
 function version_90($pdo)
