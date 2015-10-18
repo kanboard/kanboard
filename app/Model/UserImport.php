@@ -68,7 +68,7 @@ class UserImport extends Base
      * Format row before validation
      *
      * @access public
-     * @param  array   $data
+     * @param  array   $row
      * @return array
      */
     public function prepare(array $row)
