@@ -4,6 +4,7 @@ CSS_APP = $(addprefix assets/css/src/, $(addsuffix .css, base links title table 
 CSS_PRINT = $(addprefix assets/css/src/, $(addsuffix .css, print links table board task comment subtask markdown))
 CSS_VENDOR = $(addprefix assets/css/vendor/, $(addsuffix .css, jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min))
 
+JS_READONLY_APP = $(addprefix assets/js/src/, $(addsuffix .js, Tooltip ReadonlyAppRouter))
 JS_APP = $(addprefix assets/js/src/, $(addsuffix .js, Popover Dropdown Tooltip Markdown Sidebar Search App Screenshot Calendar Board Swimlane Gantt Task TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart Router))
 JS_VENDOR = $(addprefix assets/js/vendor/, $(addsuffix .js, jquery-1.11.3.min jquery-ui.min jquery-ui-timepicker-addon.min jquery.ui.touch-punch.min chosen.jquery.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min))
 JS_LANG = $(addprefix assets/js/vendor/lang/, $(addsuffix .js, da de es fi fr hu id it ja nl nb pl pt pt-br ru sv sr th tr zh-cn))
@@ -34,6 +35,15 @@ vendor.js:
 	@ cat ${JS_VENDOR} > vendor.js
 	@ cat ${JS_LANG} >> vendor.js
 
+app-readonly.js:
+	@ rm -f assets/js/app-readonly.js
+	@ echo "(function() { 'use strict';" > tmp.js
+	@ cat ${JS_READONLY_APP} >> tmp.js
+	@ echo "})();" >> tmp.js
+	@ yuicompressor --charset utf-8 --type js -o tmp.js tmp.js
+	@ cat vendor.js tmp.js >> assets/js/app-readonly.js
+	@ rm -f tmp.js
+
 app.js:
 	@ rm -f assets/js/app.js
 	@ echo "(function() { 'use strict';" > tmp.js
@@ -43,7 +53,7 @@ app.js:
 	@ cat vendor.js tmp.js >> assets/js/app.js
 	@ rm -f tmp.js
 
-js: vendor.js app.js
+js: vendor.js app-readonly.js app.js
 	@ rm -f vendor.js
 
 archive:

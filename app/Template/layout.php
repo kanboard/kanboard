@@ -14,6 +14,8 @@
 
         <?php if (! isset($not_editable)): ?>
             <?= $this->asset->js('assets/js/app.js') ?>
+        <?php else: ?>
+            <?= $this->asset->js('assets/js/app-readonly.js') ?>
         <?php endif ?>
 
         <?= $this->asset->colorCss() ?>
