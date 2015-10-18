@@ -62,7 +62,7 @@ td.board-column-task-collapsed {
     position: relative;
     padding: 8px 4px;
     min-height: 150px;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .board-rotation {

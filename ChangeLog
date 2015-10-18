@@ -4,7 +4,7 @@ Version 1.0.20 (unreleased)
 Breaking changes:
 
 - Add namespace Kanboard (update your plugins)
-- Move Mailgun, Sendgrid and Postmark to plugins
+- Move Mailgun, Sendgrid, Postmark, Slack, Hipchat and Jabber to plugins
 
 New features:
 
@@ -16,6 +16,7 @@ Improvements:
 * Add the possibility to append or not custom filters
 * Make mail transports pluggable
 * Add Task, User and Project metadata for plugin creators
+* Do not show scroll-bars when a column is collapsed (IE)
 
 Version 1.0.19
 --------------
