@@ -67,7 +67,7 @@ function version_92($pdo)
             notification_type VARCHAR(50) NOT NULL,
             PRIMARY KEY(id),
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
-            UNIQUE(project_id, notification_type),
+            UNIQUE(project_id, notification_type)
         ) ENGINE=InnoDB CHARSET=utf8
     ");
 }
