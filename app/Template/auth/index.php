@@ -1,5 +1,7 @@
 <div class="form-login">
 
+    <?= $this->hook->render('template:auth:login-form:before') ?>
+
     <?php if (isset($errors['login'])): ?>
         <p class="alert alert-error"><?= $this->e($errors['login']) ?></p>
     <?php endif ?>
@@ -30,6 +32,8 @@
         </div>
     </form>
     <?php endif ?>
+
+    <?= $this->hook->render('template:auth:login-form:after') ?>
 
     <?php if (GOOGLE_AUTH || GITHUB_AUTH || GITLAB_AUTH): ?>
     <ul class="no-bullet">

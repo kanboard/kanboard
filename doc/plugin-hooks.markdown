@@ -131,6 +131,8 @@ Template name without prefix are core templates.
 
 List of template hooks:
 
+- `template:auth:login-form:before`
+- `template:auth:login-form:after`
 - `template:dashboard:sidebar`
 - `template:config:sidebar`
 - `template:config:integrations`

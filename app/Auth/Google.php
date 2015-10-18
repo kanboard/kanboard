@@ -2,6 +2,7 @@
 
 namespace Kanboard\Auth;
 
+use Kanboard\Core\Base;
 use Kanboard\Event\AuthEvent;
 
 /**

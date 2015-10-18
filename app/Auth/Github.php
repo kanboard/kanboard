@@ -2,6 +2,7 @@
 
 namespace Kanboard\Auth;
 
+use Kanboard\Core\Base;
 use Kanboard\Event\AuthEvent;
 
 /**
@@ -85,7 +86,7 @@ class Github extends Base
      * Get OAuth2 configured service
      *
      * @access public
-     * @return KanboardCore\OAuth2
+     * @return Kanboard\Core\OAuth2
      */
     public function getService()
     {
