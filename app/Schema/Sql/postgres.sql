@@ -177,7 +177,8 @@ CREATE TABLE custom_filters (
     project_id integer NOT NULL,
     user_id integer NOT NULL,
     name character varying(100) NOT NULL,
-    is_shared boolean DEFAULT false
+    is_shared boolean DEFAULT false,
+    append boolean DEFAULT false
 );
 
 
@@ -420,6 +421,47 @@ ALTER SEQUENCE project_has_categories_id_seq OWNED BY project_has_categories.id;
 
 
 --
+-- Name: project_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE project_has_metadata (
+    project_id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    value character varying(255) DEFAULT ''::character varying
+);
+
+
+--
+-- Name: project_has_notification_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE project_has_notification_types (
+    id integer NOT NULL,
+    project_id integer NOT NULL,
+    notification_type character varying(50) NOT NULL
+);
+
+
+--
+-- Name: project_has_notification_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE project_has_notification_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_has_notification_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE project_has_notification_types_id_seq OWNED BY project_has_notification_types.id;
+
+
+--
 -- Name: project_has_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -448,49 +490,6 @@ CREATE SEQUENCE project_has_users_id_seq
 --
 
 ALTER SEQUENCE project_has_users_id_seq OWNED BY project_has_users.id;
-
-
---
--- Name: project_integrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE project_integrations (
-    id integer NOT NULL,
-    project_id integer NOT NULL,
-    hipchat boolean DEFAULT false,
-    hipchat_api_url character varying(255) DEFAULT 'https://api.hipchat.com'::character varying,
-    hipchat_room_id character varying(255),
-    hipchat_room_token character varying(255),
-    slack boolean DEFAULT false,
-    slack_webhook_url character varying(255),
-    jabber integer DEFAULT 0,
-    jabber_server character varying(255) DEFAULT ''::character varying,
-    jabber_domain character varying(255) DEFAULT ''::character varying,
-    jabber_username character varying(255) DEFAULT ''::character varying,
-    jabber_password character varying(255) DEFAULT ''::character varying,
-    jabber_nickname character varying(255) DEFAULT 'kanboard'::character varying,
-    jabber_room character varying(255) DEFAULT ''::character varying,
-    slack_webhook_channel character varying(255) DEFAULT ''::character varying
-);
-
-
---
--- Name: project_integrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE project_integrations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: project_integrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE project_integrations_id_seq OWNED BY project_integrations.id;
 
 
 --
@@ -721,6 +720,17 @@ ALTER SEQUENCE task_has_links_id_seq OWNED BY task_has_links.id;
 
 
 --
+-- Name: task_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE task_has_metadata (
+    task_id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    value character varying(255) DEFAULT ''::character varying
+);
+
+
+--
 -- Name: task_has_subtasks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -828,6 +838,17 @@ CREATE SEQUENCE transitions_id_seq
 --
 
 ALTER SEQUENCE transitions_id_seq OWNED BY transitions.id;
+
+
+--
+-- Name: user_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_has_metadata (
+    user_id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    value character varying(255) DEFAULT ''::character varying
+);
 
 
 --
@@ -1038,14 +1059,14 @@ ALTER TABLE ONLY project_has_categories ALTER COLUMN id SET DEFAULT nextval('pro
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY project_has_users ALTER COLUMN id SET DEFAULT nextval('project_has_users_id_seq'::regclass);
+ALTER TABLE ONLY project_has_notification_types ALTER COLUMN id SET DEFAULT nextval('project_has_notification_types_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY project_integrations ALTER COLUMN id SET DEFAULT nextval('project_integrations_id_seq'::regclass);
+ALTER TABLE ONLY project_has_users ALTER COLUMN id SET DEFAULT nextval('project_has_users_id_seq'::regclass);
 
 
 --
@@ -1254,6 +1275,30 @@ ALTER TABLE ONLY project_has_categories
 
 
 --
+-- Name: project_has_metadata_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY project_has_metadata
+    ADD CONSTRAINT project_has_metadata_project_id_name_key UNIQUE (project_id, name);
+
+
+--
+-- Name: project_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY project_has_notification_types
+    ADD CONSTRAINT project_has_notification_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: project_has_notification_types_project_id_notification_type_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY project_has_notification_types
+    ADD CONSTRAINT project_has_notification_types_project_id_notification_type_key UNIQUE (project_id, notification_type);
+
+
+--
 -- Name: project_has_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1267,22 +1312,6 @@ ALTER TABLE ONLY project_has_users
 
 ALTER TABLE ONLY project_has_users
     ADD CONSTRAINT project_has_users_project_id_user_id_key UNIQUE (project_id, user_id);
-
-
---
--- Name: project_integrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY project_integrations
-    ADD CONSTRAINT project_integrations_pkey PRIMARY KEY (id);
-
-
---
--- Name: project_integrations_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY project_integrations
-    ADD CONSTRAINT project_integrations_project_id_key UNIQUE (project_id);
 
 
 --
@@ -1358,6 +1387,14 @@ ALTER TABLE ONLY task_has_links
 
 
 --
+-- Name: task_has_metadata_task_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY task_has_metadata
+    ADD CONSTRAINT task_has_metadata_task_id_name_key UNIQUE (task_id, name);
+
+
+--
 -- Name: task_has_subtasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1379,6 +1416,14 @@ ALTER TABLE ONLY tasks
 
 ALTER TABLE ONLY transitions
     ADD CONSTRAINT transitions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_has_metadata_user_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_has_metadata
+    ADD CONSTRAINT user_has_metadata_user_id_name_key UNIQUE (user_id, name);
 
 
 --
@@ -1643,6 +1688,22 @@ ALTER TABLE ONLY project_has_categories
 
 
 --
+-- Name: project_has_metadata_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY project_has_metadata
+    ADD CONSTRAINT project_has_metadata_project_id_fkey FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+
+--
+-- Name: project_has_notification_types_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY project_has_notification_types
+    ADD CONSTRAINT project_has_notification_types_project_id_fkey FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+
+--
 -- Name: project_has_users_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1656,14 +1717,6 @@ ALTER TABLE ONLY project_has_users
 
 ALTER TABLE ONLY project_has_users
     ADD CONSTRAINT project_has_users_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
-
-
---
--- Name: project_integrations_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY project_integrations
-    ADD CONSTRAINT project_integrations_project_id_fkey FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
 
 
 --
@@ -1731,6 +1784,14 @@ ALTER TABLE ONLY task_has_links
 
 
 --
+-- Name: task_has_metadata_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY task_has_metadata
+    ADD CONSTRAINT task_has_metadata_task_id_fkey FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
+
+
+--
 -- Name: task_has_subtasks_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1795,6 +1856,14 @@ ALTER TABLE ONLY transitions
 
 
 --
+-- Name: user_has_metadata_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_has_metadata
+    ADD CONSTRAINT user_has_metadata_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: user_has_notification_types_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1831,8 +1900,8 @@ ALTER TABLE ONLY user_has_unread_notifications
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM f;
-GRANT ALL ON SCHEMA public TO f;
+REVOKE ALL ON SCHEMA public FROM fred;
+GRANT ALL ON SCHEMA public TO fred;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
@@ -1861,8 +1930,8 @@ INSERT INTO settings (option, value) VALUES ('board_highlight_period', '172800')
 INSERT INTO settings (option, value) VALUES ('board_public_refresh_interval', '60');
 INSERT INTO settings (option, value) VALUES ('board_private_refresh_interval', '10');
 INSERT INTO settings (option, value) VALUES ('board_columns', '');
-INSERT INTO settings (option, value) VALUES ('webhook_token', '94aa75d5d88c8e7084721c3a1c97c06630f494a31741f8cf3b6d9eadf6a1');
-INSERT INTO settings (option, value) VALUES ('api_token', '3f0a1683800e9104b6e8ec15cb254738eebf24028f2169546e17fa2a3801');
+INSERT INTO settings (option, value) VALUES ('webhook_token', '29877f0b69d230e57bee9d02e0aa9034a69f7a2c0ba1e3b5d3b390241f36');
+INSERT INTO settings (option, value) VALUES ('api_token', '5682955e965bd0cd7618559a25131fe6094d9fff3bb56c31291d64991353');
 INSERT INTO settings (option, value) VALUES ('application_language', 'en_US');
 INSERT INTO settings (option, value) VALUES ('application_timezone', 'UTC');
 INSERT INTO settings (option, value) VALUES ('application_url', '');
@@ -1871,25 +1940,11 @@ INSERT INTO settings (option, value) VALUES ('project_categories', '');
 INSERT INTO settings (option, value) VALUES ('subtask_restriction', '0');
 INSERT INTO settings (option, value) VALUES ('application_stylesheet', '');
 INSERT INTO settings (option, value) VALUES ('application_currency', 'USD');
-INSERT INTO settings (option, value) VALUES ('integration_slack_webhook', '0');
-INSERT INTO settings (option, value) VALUES ('integration_slack_webhook_url', '');
-INSERT INTO settings (option, value) VALUES ('integration_hipchat', '0');
-INSERT INTO settings (option, value) VALUES ('integration_hipchat_api_url', 'https://api.hipchat.com');
-INSERT INTO settings (option, value) VALUES ('integration_hipchat_room_id', '');
-INSERT INTO settings (option, value) VALUES ('integration_hipchat_room_token', '');
 INSERT INTO settings (option, value) VALUES ('integration_gravatar', '0');
-INSERT INTO settings (option, value) VALUES ('integration_jabber', '0');
-INSERT INTO settings (option, value) VALUES ('integration_jabber_server', '');
-INSERT INTO settings (option, value) VALUES ('integration_jabber_domain', '');
-INSERT INTO settings (option, value) VALUES ('integration_jabber_username', '');
-INSERT INTO settings (option, value) VALUES ('integration_jabber_password', '');
-INSERT INTO settings (option, value) VALUES ('integration_jabber_nickname', 'kanboard');
-INSERT INTO settings (option, value) VALUES ('integration_jabber_room', '');
 INSERT INTO settings (option, value) VALUES ('calendar_user_subtasks_time_tracking', '0');
 INSERT INTO settings (option, value) VALUES ('calendar_user_tasks', 'date_started');
 INSERT INTO settings (option, value) VALUES ('calendar_project_tasks', 'date_started');
 INSERT INTO settings (option, value) VALUES ('webhook_url', '');
-INSERT INTO settings (option, value) VALUES ('integration_slack_webhook_channel', '');
 INSERT INTO settings (option, value) VALUES ('default_color', 'yellow');
 INSERT INTO settings (option, value) VALUES ('subtask_time_tracking', '1');
 INSERT INTO settings (option, value) VALUES ('cfd_include_closed_tasks', '1');
@@ -1940,4 +1995,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$ZkZIbCTR/OrzhRTOx.UZZeaInO85/1N/j4zxb7WCrNpO9hjFM1mUC', '1');INSERT INTO schema_version VALUES ('70');
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$fDbO.nKAjDxm70DyghADCuqIhF919BAkRTAq0bARDTGwcxZscqIZq', '1');INSERT INTO schema_version VALUES ('73');

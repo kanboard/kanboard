@@ -87,6 +87,7 @@ CREATE TABLE `custom_filters` (
   `user_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `is_shared` tinyint(1) DEFAULT '0',
+  `append` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
   KEY `user_id` (`user_id`),
@@ -213,6 +214,29 @@ CREATE TABLE `project_has_categories` (
   CONSTRAINT `project_has_categories_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `project_has_metadata`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `project_has_metadata` (
+  `project_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `value` varchar(255) DEFAULT '',
+  UNIQUE KEY `project_id` (`project_id`,`name`),
+  CONSTRAINT `project_has_metadata_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `project_has_notification_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `project_has_notification_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
+  `notification_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `project_id` (`project_id`,`notification_type`),
+  CONSTRAINT `project_has_notification_types_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `project_has_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -226,31 +250,6 @@ CREATE TABLE `project_has_users` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `project_has_users_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
   CONSTRAINT `project_has_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-DROP TABLE IF EXISTS `project_integrations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `project_integrations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `project_id` int(11) NOT NULL,
-  `hipchat` tinyint(1) DEFAULT '0',
-  `hipchat_api_url` varchar(255) DEFAULT 'https://api.hipchat.com',
-  `hipchat_room_id` varchar(255) DEFAULT NULL,
-  `hipchat_room_token` varchar(255) DEFAULT NULL,
-  `slack` tinyint(1) DEFAULT '0',
-  `slack_webhook_url` varchar(255) DEFAULT NULL,
-  `jabber` int(11) DEFAULT '0',
-  `jabber_server` varchar(255) DEFAULT '',
-  `jabber_domain` varchar(255) DEFAULT '',
-  `jabber_username` varchar(255) DEFAULT '',
-  `jabber_password` varchar(255) DEFAULT '',
-  `jabber_nickname` varchar(255) DEFAULT 'kanboard',
-  `jabber_room` varchar(255) DEFAULT '',
-  `slack_webhook_channel` varchar(255) DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `project_id` (`project_id`),
-  CONSTRAINT `project_integrations_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `projects`;
@@ -376,6 +375,17 @@ CREATE TABLE `task_has_links` (
   CONSTRAINT `task_has_links_ibfk_3` FOREIGN KEY (`opposite_task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `task_has_metadata`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `task_has_metadata` (
+  `task_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `value` varchar(255) DEFAULT '',
+  UNIQUE KEY `task_id` (`task_id`,`name`),
+  CONSTRAINT `task_has_metadata_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -441,6 +451,17 @@ CREATE TABLE `transitions` (
   CONSTRAINT `transitions_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `transitions_ibfk_4` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
   CONSTRAINT `transitions_ibfk_5` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `user_has_metadata`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_has_metadata` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `value` varchar(255) DEFAULT '',
+  UNIQUE KEY `user_id` (`user_id`,`name`),
+  CONSTRAINT `user_has_metadata_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `user_has_notification_types`;
@@ -530,7 +551,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES ('api_token','37d92e3bc7e2ede57948401870a1ab70d59265930853fd65954ca22a09ed'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('integration_hipchat','0'),('integration_hipchat_api_url','https://api.hipchat.com'),('integration_hipchat_room_id',''),('integration_hipchat_room_token',''),('integration_jabber','0'),('integration_jabber_domain',''),('integration_jabber_nickname','kanboard'),('integration_jabber_password',''),('integration_jabber_room',''),('integration_jabber_server',''),('integration_jabber_username',''),('integration_slack_webhook','0'),('integration_slack_webhook_channel',''),('integration_slack_webhook_url',''),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','4f0986fa4a12fab97e0f54615c40a87e74a1e0ac65a8486b0710b5ff6a8d'),('webhook_url','');
+INSERT INTO `settings` VALUES ('api_token','ccff8d37146322410479c8c6707cdaddde840af28ccbd6fbb5a7d7908844'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','7a9d4cd8c7fc4d52c60f01b775d4f2bd6e186d2e44f5b3723157b8eb372b'),('webhook_url','');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -559,4 +580,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$ZkZIbCTR/OrzhRTOx.UZZeaInO85/1N/j4zxb7WCrNpO9hjFM1mUC', '1');INSERT INTO schema_version VALUES ('90');
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$fDbO.nKAjDxm70DyghADCuqIhF919BAkRTAq0bARDTGwcxZscqIZq', '1');INSERT INTO schema_version VALUES ('93');
