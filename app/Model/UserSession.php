@@ -2,8 +2,6 @@
 
 namespace Kanboard\Model;
 
-use Kanboard\Core\Translator;
-
 /**
  * User Session
  *

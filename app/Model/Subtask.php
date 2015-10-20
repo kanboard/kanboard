@@ -352,8 +352,6 @@ class Subtask extends Base
     /**
      * Change the status of subtask
      *
-     * Todo -> In progress -> Done -> Todo -> etc...
-     *
      * @access public
      * @param  integer  $subtask_id
      * @return bool

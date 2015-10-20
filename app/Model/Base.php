@@ -2,8 +2,6 @@
 
 namespace Kanboard\Model;
 
-use Pimple\Container;
-
 /**
  * Base model class
  *

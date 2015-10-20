@@ -6,9 +6,6 @@ use Pimple\Container;
 use Kanboard\Core\Security;
 use Kanboard\Core\Request;
 use Kanboard\Core\Response;
-use Kanboard\Core\Template;
-use Kanboard\Core\Session;
-use Kanboard\Model\LastLogin;
 use Symfony\Component\EventDispatcher\Event;
 
 /**

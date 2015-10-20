@@ -3,7 +3,6 @@
 namespace Kanboard\Api;
 
 use Kanboard\Model\Subtask as SubtaskModel;
-use Kanboard\Model\Task as TaskModel;
 
 /**
  * Me API controller

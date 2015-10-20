@@ -41,14 +41,3 @@ function dt($format, $timestamp)
 {
     return Translator::getInstance()->datetime($format, $timestamp);
 }
-
-/**
- * Handle plurals, return $t2 if $value > 1
- *
- * @todo   Improve this function
- * @return mixed
- */
-function p($value, $t1, $t2)
-{
-    return $value > 1 ? $t2 : $t1;
-}

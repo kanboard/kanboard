@@ -1,4 +1,11 @@
 {
+    "name": "fguillot/kanboard",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frédéric Guillot"
+        }
+    ],
     "require" : {
         "php" : ">=5.3",
         "ext-mbstring" : "*",

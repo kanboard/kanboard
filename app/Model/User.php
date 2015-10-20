@@ -2,6 +2,7 @@
 
 namespace Kanboard\Model;
 
+use PicoDb\Database;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Kanboard\Core\Session;
@@ -335,7 +336,7 @@ class User extends Base
      */
     public function remove($user_id)
     {
-        return $this->db->transaction(function ($db) use ($user_id) {
+        return $this->db->transaction(function (Database $db) use ($user_id) {
 
             // All assigned tasks are now unassigned (no foreign key)
             if (! $db->table(Task::TABLE)->eq('owner_id', $user_id)->update(array('owner_id' => 0))) {

@@ -3,7 +3,6 @@
 namespace Kanboard\Integration;
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\Task;
 
 /**
  * Bitbucket Webhook

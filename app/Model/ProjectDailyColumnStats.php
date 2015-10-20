@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use PicoDb\Database;
+
 /**
  * Project Daily Column Stats
  *
@@ -32,7 +34,7 @@ class ProjectDailyColumnStats extends Base
     {
         $status = $this->config->get('cfd_include_closed_tasks') == 1 ? array(Task::STATUS_OPEN, Task::STATUS_CLOSED) : array(Task::STATUS_OPEN);
 
-        return $this->db->transaction(function ($db) use ($project_id, $date, $status) {
+        return $this->db->transaction(function (Database $db) use ($project_id, $date, $status) {
 
             $column_ids = $db->table(Board::TABLE)->eq('project_id', $project_id)->findAllByColumn('id');
 

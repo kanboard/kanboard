@@ -2,7 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\GithubWebhook;
 use Kanboard\Model\Task;
 
 /**

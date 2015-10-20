@@ -4,11 +4,10 @@ namespace Schema;
 
 use PDO;
 use Kanboard\Core\Security;
-use Kanboard\Model\Link;
 
 const VERSION = 93;
 
-function version_93($pdo)
+function version_93(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE user_has_metadata (
@@ -58,7 +57,7 @@ function version_93($pdo)
     $pdo->exec("DELETE FROM settings WHERE `option`='integration_slack_webhook_channel'");
 }
 
-function version_92($pdo)
+function version_92(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE project_has_notification_types (
@@ -72,12 +71,12 @@ function version_92($pdo)
     ");
 }
 
-function version_91($pdo)
+function version_91(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE custom_filters ADD COLUMN `append` TINYINT(1) DEFAULT 0");
 }
 
-function version_90($pdo)
+function version_90(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE tasks MODIFY date_due BIGINT");
     $pdo->exec("ALTER TABLE tasks MODIFY date_creation BIGINT");
@@ -96,7 +95,7 @@ function version_90($pdo)
     $pdo->exec('ALTER TABLE users MODIFY `lock_expiration_date` BIGINT');
 }
 
-function version_89($pdo)
+function version_89(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE user_has_unread_notifications (
@@ -133,7 +132,7 @@ function version_89($pdo)
     }
 }
 
-function version_88($pdo)
+function version_88(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE custom_filters (
@@ -150,7 +149,7 @@ function version_88($pdo)
     ");
 }
 
-function version_87($pdo)
+function version_87(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE plugin_schema_versions (
@@ -161,45 +160,45 @@ function version_87($pdo)
     ");
 }
 
-function version_86($pdo)
+function version_86(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE swimlanes ADD COLUMN description TEXT");
 }
 
-function version_85($pdo)
+function version_85(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN gitlab_id INT");
 }
 
-function version_84($pdo)
+function version_84(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE projects ADD COLUMN start_date VARCHAR(10) DEFAULT ''");
     $pdo->exec("ALTER TABLE projects ADD COLUMN end_date VARCHAR(10) DEFAULT ''");
 }
 
-function version_83($pdo)
+function version_83(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN is_project_admin INT DEFAULT 0");
 }
 
-function version_82($pdo)
+function version_82(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN nb_failed_login INT DEFAULT 0");
     $pdo->exec("ALTER TABLE users ADD COLUMN lock_expiration_date INT DEFAULT 0");
 }
 
-function version_81($pdo)
+function version_81(PDO $pdo)
 {
     $pdo->exec("INSERT INTO settings VALUES ('subtask_time_tracking', '1')");
     $pdo->exec("INSERT INTO settings VALUES ('cfd_include_closed_tasks', '1')");
 }
 
-function version_80($pdo)
+function version_80(PDO $pdo)
 {
     $pdo->exec("INSERT INTO settings VALUES ('default_color', 'yellow')");
 }
 
-function version_79($pdo)
+function version_79(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE project_daily_stats (
@@ -218,23 +217,23 @@ function version_79($pdo)
     $pdo->exec('RENAME TABLE project_daily_summaries TO project_daily_column_stats');
 }
 
-function version_78($pdo)
+function version_78(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE project_integrations ADD COLUMN slack_webhook_channel VARCHAR(255) DEFAULT ''");
     $pdo->exec("INSERT INTO settings VALUES ('integration_slack_webhook_channel', '')");
 }
 
-function version_77($pdo)
+function version_77(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE users DROP COLUMN `default_project_id`');
 }
 
-function version_76($pdo)
+function version_76(PDO $pdo)
 {
     $pdo->exec("DELETE FROM `settings` WHERE `option`='subtask_time_tracking'");
 }
 
-function version_75($pdo)
+function version_75(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE comments DROP FOREIGN KEY comments_ibfk_2');
     $pdo->exec('ALTER TABLE comments MODIFY task_id INT NOT NULL');
@@ -242,7 +241,7 @@ function version_75($pdo)
     $pdo->exec('ALTER TABLE comments CHANGE COLUMN `date` `date_creation` INT NOT NULL');
 }
 
-function version_74($pdo)
+function version_74(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE project_has_categories MODIFY project_id INT NOT NULL');
     $pdo->exec('ALTER TABLE project_has_categories MODIFY name VARCHAR(255) NOT NULL');
@@ -277,17 +276,17 @@ function version_74($pdo)
     $pdo->exec('ALTER TABLE user_has_notifications MODIFY user_id INT NOT NULL');
 }
 
-function version_73($pdo)
+function version_73(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN notifications_filter INT DEFAULT 4");
 }
 
-function version_72($pdo)
+function version_72(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE files MODIFY name VARCHAR(255)');
 }
 
-function version_71($pdo)
+function version_71(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO `settings` VALUES (?, ?)');
     $rq->execute(array('webhook_url', ''));
@@ -296,17 +295,13 @@ function version_71($pdo)
     $pdo->exec("DELETE FROM `settings` WHERE `option`='webhook_url_task_modification'");
 }
 
-function version_70($pdo)
+function version_70(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN token VARCHAR(255) DEFAULT ''");
 }
 
-function version_69($pdo)
+function version_69(PDO $pdo)
 {
-    $rq = $pdo->prepare("SELECT `value` FROM `settings` WHERE `option`='subtask_forecast'");
-    $rq->execute();
-    $result = $rq->fetch(PDO::FETCH_ASSOC);
-
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('calendar_user_subtasks_time_tracking', 0));
     $rq->execute(array('calendar_user_tasks', 'date_started'));
@@ -315,7 +310,7 @@ function version_69($pdo)
     $pdo->exec("DELETE FROM `settings` WHERE `option`='subtask_forecast'");
 }
 
-function version_68($pdo)
+function version_68(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('integration_jabber', '0'));
@@ -335,7 +330,7 @@ function version_68($pdo)
     $pdo->exec("ALTER TABLE project_integrations ADD COLUMN jabber_room VARCHAR(255) DEFAULT ''");
 }
 
-function version_67($pdo)
+function version_67(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_status INTEGER NOT NULL DEFAULT 0');
     $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_trigger INTEGER NOT NULL DEFAULT 0');
@@ -346,12 +341,12 @@ function version_67($pdo)
     $pdo->exec('ALTER TABLE tasks ADD COLUMN recurrence_child INTEGER');
 }
 
-function version_66($pdo)
+function version_66(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE projects ADD COLUMN identifier VARCHAR(50) DEFAULT ''");
 }
 
-function version_65($pdo)
+function version_65(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE project_integrations (
@@ -369,36 +364,36 @@ function version_65($pdo)
     ");
 }
 
-function version_64($pdo)
+function version_64(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE project_daily_summaries ADD COLUMN score INT NOT NULL DEFAULT 0');
 }
 
-function version_63($pdo)
+function version_63(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE project_has_categories ADD COLUMN description TEXT');
 }
 
-function version_62($pdo)
+function version_62(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE files ADD COLUMN `date` INT NOT NULL DEFAULT 0');
     $pdo->exec('ALTER TABLE files ADD COLUMN `user_id` INT NOT NULL DEFAULT 0');
     $pdo->exec('ALTER TABLE files ADD COLUMN `size` INT NOT NULL DEFAULT 0');
 }
 
-function version_61($pdo)
+function version_61(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE users ADD COLUMN twofactor_activated TINYINT(1) DEFAULT 0');
     $pdo->exec('ALTER TABLE users ADD COLUMN twofactor_secret CHAR(16)');
 }
 
-function version_60($pdo)
+function version_60(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('integration_gravatar', '0'));
 }
 
-function version_59($pdo)
+function version_59(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('integration_hipchat', '0'));
@@ -407,14 +402,14 @@ function version_59($pdo)
     $rq->execute(array('integration_hipchat_room_token', ''));
 }
 
-function version_58($pdo)
+function version_58(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('integration_slack_webhook', '0'));
     $rq->execute(array('integration_slack_webhook_url', ''));
 }
 
-function version_57($pdo)
+function version_57(PDO $pdo)
 {
     $pdo->exec('CREATE TABLE currencies (`currency` CHAR(3) NOT NULL UNIQUE, `rate` FLOAT DEFAULT 0) ENGINE=InnoDB CHARSET=utf8');
 
@@ -422,7 +417,7 @@ function version_57($pdo)
     $rq->execute(array('application_currency', 'USD'));
 }
 
-function version_56($pdo)
+function version_56(PDO $pdo)
 {
     $pdo->exec('CREATE TABLE transitions (
         `id` INT NOT NULL AUTO_INCREMENT,
@@ -446,24 +441,24 @@ function version_56($pdo)
     $pdo->exec("CREATE INDEX transitions_user_index ON transitions(user_id)");
 }
 
-function version_55($pdo)
+function version_55(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('subtask_forecast', '0'));
 }
 
-function version_54($pdo)
+function version_54(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('application_stylesheet', ''));
 }
 
-function version_53($pdo)
+function version_53(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE subtask_time_tracking ADD COLUMN time_spent FLOAT DEFAULT 0");
 }
 
-function version_49($pdo)
+function version_49(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE subtasks ADD COLUMN position INTEGER DEFAULT 1');
 
@@ -485,18 +480,18 @@ function version_49($pdo)
     }
 }
 
-function version_48($pdo)
+function version_48(PDO $pdo)
 {
     $pdo->exec('RENAME TABLE task_has_files TO files');
     $pdo->exec('RENAME TABLE task_has_subtasks TO subtasks');
 }
 
-function version_47($pdo)
+function version_47(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE projects ADD COLUMN description TEXT');
 }
 
-function version_46($pdo)
+function version_46(PDO $pdo)
 {
     $pdo->exec("CREATE TABLE links (
         id INT NOT NULL AUTO_INCREMENT,
@@ -534,7 +529,7 @@ function version_46($pdo)
     $rq->execute(array('is fixed by', 10));
 }
 
-function version_45($pdo)
+function version_45(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE tasks ADD COLUMN date_moved INT DEFAULT 0');
 
@@ -567,12 +562,12 @@ function version_45($pdo)
     $pdo->exec("UPDATE tasks SET date_moved = date_creation WHERE date_moved IS NULL OR date_moved = 0");
 }
 
-function version_44($pdo)
+function version_44(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE users ADD COLUMN disable_login_form TINYINT(1) DEFAULT 0');
 }
 
-function version_43($pdo)
+function version_43(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('subtask_restriction', '0'));
@@ -592,18 +587,18 @@ function version_43($pdo)
     ");
 }
 
-function version_42($pdo)
+function version_42(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE columns ADD COLUMN description TEXT');
 }
 
-function version_41($pdo)
+function version_41(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE users ADD COLUMN timezone VARCHAR(50)');
     $pdo->exec('ALTER TABLE users ADD COLUMN language CHAR(5)');
 }
 
-function version_40($pdo)
+function version_40(PDO $pdo)
 {
     // Avoid some full table scans
     $pdo->exec('CREATE INDEX users_admin_idx ON users(is_admin)');
@@ -627,13 +622,13 @@ function version_40($pdo)
     }
 }
 
-function version_39($pdo)
+function version_39(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('project_categories', ''));
 }
 
-function version_38($pdo)
+function version_38(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE swimlanes (
@@ -653,17 +648,17 @@ function version_38($pdo)
     $pdo->exec("ALTER TABLE projects ADD COLUMN show_default_swimlane INT DEFAULT 1");
 }
 
-function version_37($pdo)
+function version_37(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE project_has_users ADD COLUMN is_owner TINYINT(1) DEFAULT '0'");
 }
 
-function version_36($pdo)
+function version_36(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE tasks MODIFY title VARCHAR(255) NOT NULL');
 }
 
-function version_35($pdo)
+function version_35(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE project_daily_summaries (
@@ -681,12 +676,12 @@ function version_35($pdo)
     $pdo->exec('CREATE UNIQUE INDEX project_daily_column_stats_idx ON project_daily_summaries(day, project_id, column_id)');
 }
 
-function version_34($pdo)
+function version_34(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE projects ADD COLUMN is_everybody_allowed TINYINT(1) DEFAULT '0'");
 }
 
-function version_33($pdo)
+function version_33(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE project_activities (
@@ -709,7 +704,7 @@ function version_33($pdo)
     $pdo->exec('DROP TABLE subtask_has_events');
 }
 
-function version_32($pdo)
+function version_32(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE tasks ADD COLUMN date_started INTEGER");
     $pdo->exec("ALTER TABLE tasks ADD COLUMN time_spent FLOAT DEFAULT 0");
@@ -719,18 +714,18 @@ function version_32($pdo)
     $pdo->exec("ALTER TABLE task_has_subtasks MODIFY time_spent FLOAT");
 }
 
-function version_31($pdo)
+function version_31(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE projects ADD COLUMN is_private TINYINT(1) DEFAULT '0'");
 }
 
-function version_30($pdo)
+function version_30(PDO $pdo)
 {
     $rq = $pdo->prepare('INSERT INTO settings VALUES (?, ?)');
     $rq->execute(array('application_date_format', 'm/d/Y'));
 }
 
-function version_29($pdo)
+function version_29(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE settings (
@@ -760,7 +755,7 @@ function version_29($pdo)
     $pdo->exec('DROP TABLE config');
 }
 
-function version_28($pdo)
+function version_28(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE tasks ADD COLUMN reference VARCHAR(50) DEFAULT ''");
     $pdo->exec("ALTER TABLE comments ADD COLUMN reference VARCHAR(50) DEFAULT ''");
@@ -769,17 +764,17 @@ function version_28($pdo)
     $pdo->exec('CREATE INDEX comments_reference_idx ON comments(reference)');
 }
 
-function version_27($pdo)
+function version_27(PDO $pdo)
 {
     $pdo->exec('CREATE UNIQUE INDEX users_username_idx ON users(username)');
 }
 
-function version_26($pdo)
+function version_26(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE config ADD COLUMN default_columns VARCHAR(255) DEFAULT ''");
 }
 
-function version_25($pdo)
+function version_25(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE task_has_events (
@@ -834,12 +829,12 @@ function version_25($pdo)
     ");
 }
 
-function version_24($pdo)
+function version_24(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE projects ADD COLUMN is_public TINYINT(1) DEFAULT '0'");
 }
 
-function version_23($pdo)
+function version_23(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN notifications_enabled TINYINT(1) DEFAULT '0'");
 
@@ -854,30 +849,30 @@ function version_23($pdo)
     ");
 }
 
-function version_22($pdo)
+function version_22(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE config ADD COLUMN webhooks_url_task_modification VARCHAR(255)");
     $pdo->exec("ALTER TABLE config ADD COLUMN webhooks_url_task_creation VARCHAR(255)");
 }
 
-function version_21($pdo)
+function version_21(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE tasks ADD COLUMN creator_id INTEGER DEFAULT '0'");
     $pdo->exec("ALTER TABLE tasks ADD COLUMN date_modification INTEGER DEFAULT '0'");
 }
 
-function version_20($pdo)
+function version_20(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN github_id VARCHAR(30)");
 }
 
-function version_19($pdo)
+function version_19(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE config ADD COLUMN api_token VARCHAR(255) DEFAULT ''");
     $pdo->exec("UPDATE config SET api_token='".Security::generateToken()."'");
 }
 
-function version_18($pdo)
+function version_18(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE task_has_subtasks (
@@ -894,7 +889,7 @@ function version_18($pdo)
     );
 }
 
-function version_17($pdo)
+function version_17(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE task_has_files (
@@ -909,7 +904,7 @@ function version_17($pdo)
     );
 }
 
-function version_16($pdo)
+function version_16(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE project_has_categories (
@@ -925,24 +920,24 @@ function version_16($pdo)
     $pdo->exec("ALTER TABLE tasks ADD COLUMN category_id INT DEFAULT 0");
 }
 
-function version_15($pdo)
+function version_15(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE projects ADD COLUMN last_modified INT DEFAULT 0");
 }
 
-function version_14($pdo)
+function version_14(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN name VARCHAR(255)");
     $pdo->exec("ALTER TABLE users ADD COLUMN email VARCHAR(255)");
     $pdo->exec("ALTER TABLE users ADD COLUMN google_id VARCHAR(30)");
 }
 
-function version_13($pdo)
+function version_13(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE users ADD COLUMN is_ldap_user TINYINT(1) DEFAULT 0");
 }
 
-function version_12($pdo)
+function version_12(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE remember_me (
@@ -974,7 +969,7 @@ function version_12($pdo)
     );
 }
 
-function version_1($pdo)
+function version_1(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE config (
