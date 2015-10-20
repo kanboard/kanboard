@@ -4,6 +4,7 @@ namespace Kanboard\Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
+use PicoDb\Database;
 
 /**
  * Board model
@@ -173,7 +174,7 @@ class Board extends Base
      */
     public function saveColumnPositions(array $columns)
     {
-        return $this->db->transaction(function ($db) use ($columns) {
+        return $this->db->transaction(function (Database $db) use ($columns) {
 
             foreach ($columns as $column_id => $position) {
                 if (! $db->table(Board::TABLE)->eq('id', $column_id)->update(array('position' => $position))) {

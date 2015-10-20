@@ -2,6 +2,7 @@
 
 namespace Kanboard\Model;
 
+use PicoDb\Database;
 use Kanboard\Event\SubtaskEvent;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
@@ -293,7 +294,7 @@ class Subtask extends Base
      */
     public function savePositions(array $subtasks)
     {
-        return $this->db->transaction(function ($db) use ($subtasks) {
+        return $this->db->transaction(function (Database $db) use ($subtasks) {
 
             foreach ($subtasks as $subtask_id => $position) {
                 if (! $db->table(Subtask::TABLE)->eq('id', $subtask_id)->update(array('position' => $position))) {
@@ -433,7 +434,7 @@ class Subtask extends Base
      */
     public function duplicate($src_task_id, $dst_task_id)
     {
-        return $this->db->transaction(function ($db) use ($src_task_id, $dst_task_id) {
+        return $this->db->transaction(function (Database $db) use ($src_task_id, $dst_task_id) {
 
             $subtasks = $db->table(Subtask::TABLE)
                                  ->columns('title', 'time_estimated', 'position')
