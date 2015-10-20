@@ -36,6 +36,7 @@ App.prototype.listen = function() {
     this.dropdown.listen();
     this.search.listen();
     this.task.listen();
+    this.swimlane.listen();
     this.search.focus();
     this.taskAutoComplete();
     this.datePicker();
@@ -124,6 +125,8 @@ App.prototype.datePicker = function() {
         // timeFormat: 'h:mm tt',
         constrainInput: false
     });
+
+    $(".hasDatepicker").on("blur", function(e) { $(this).datepicker("hide"); });
 };
 
 App.prototype.taskAutoComplete = function() {

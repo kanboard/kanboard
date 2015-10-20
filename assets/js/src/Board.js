@@ -5,7 +5,6 @@ function Board(app) {
 
 Board.prototype.execute = function() {
     this.app.swimlane.refresh();
-    this.app.swimlane.listen();
     this.restoreColumnViewMode();
     this.compactView();
     this.columnScrolling();
@@ -84,7 +83,6 @@ Board.prototype.refresh = function(data) {
 
     this.app.refresh();
     this.app.swimlane.refresh();
-    this.app.swimlane.listen();
     this.columnScrolling();
     this.app.hideLoadingIcon();
     this.listen();
