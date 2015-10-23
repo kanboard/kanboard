@@ -18,6 +18,10 @@ Improvements:
 * Add Task, User and Project metadata for plugin creators
 * Do not show scroll-bars when a column is collapsed (IE)
 
+Bug fixes:
+
+* People should not see any tasks during a search when they are not associated to a project
+
 Version 1.0.19
 --------------
 

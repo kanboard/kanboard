@@ -22,7 +22,7 @@ class Search extends Base
                 ->setOrder('tasks.id')
                 ->setDirection('DESC');
 
-        if ($search !== '') {
+        if ($search !== '' && ! empty($projects)) {
             $query = $this
                 ->taskFilter
                 ->search($search)

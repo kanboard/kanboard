@@ -227,10 +227,15 @@ class App extends Base
     public function autocomplete()
     {
         $search = $this->request->getStringParam('term');
+        $projects = $this->projectPermission->getActiveMemberProjectIds($this->userSession->getId());
+
+        if (empty($projects)) {
+            $this->response->json(array());
+        }
 
         $filter = $this->taskFilterAutoCompleteFormatter
             ->create()
-            ->filterByProjects($this->projectPermission->getActiveMemberProjectIds($this->userSession->getId()))
+            ->filterByProjects($projects)
             ->excludeTasks(array($this->request->getIntegerParam('exclude_task_id')));
 
         // Search by task id or by title
