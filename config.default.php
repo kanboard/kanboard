@@ -8,13 +8,13 @@
 define('DEBUG', false);
 
 // Debug file path
-define('DEBUG_FILE', __DIR__.'/data/debug.log');
+define('DEBUG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
 
 // Plugins directory
-define('PLUGINS_DIR', 'data/plugins');
+define('PLUGINS_DIR', 'data'.DIRECTORY_SEPARATOR.'plugins');
 
 // Folder for uploaded files, don't forget the trailing slash
-define('FILES_DIR', 'data/files/');
+define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR);
 
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
@@ -225,4 +225,3 @@ define('HTTP_PROXY_HOSTNAME', '');
 define('HTTP_PROXY_PORT', '3128');
 define('HTTP_PROXY_USERNAME', '');
 define('HTTP_PROXY_PASSWORD', '');
-

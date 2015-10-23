@@ -84,9 +84,10 @@ class Template extends Helper
 
         if (strpos($template_name, ':') !== false) {
             list($plugin, $template) = explode(':', $template_name);
-            $path = __DIR__.'/../../plugins/'.ucfirst($plugin).'/Template/'.$template.'.php';
+            $path = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'plugins';
+            $path .= DIRECTORY_SEPARATOR.ucfirst($plugin).DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.$template.'.php';
         } else {
-            $path = __DIR__.'/../Template/'.$template_name.'.php';
+            $path = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.$template_name.'.php';
         }
 
         return $path;

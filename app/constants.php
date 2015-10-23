@@ -2,10 +2,10 @@
 
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', false);
-defined('DEBUG_FILE') or define('DEBUG_FILE', __DIR__.'/../data/debug.log');
+defined('DEBUG_FILE') or define('DEBUG_FILE', __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
 
 // Plugin directory
-defined('PLUGINS_DIR') or define('PLUGINS_DIR', __DIR__.'/../plugins');
+defined('PLUGINS_DIR') or define('PLUGINS_DIR', __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'plugins');
 
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', 'master');
@@ -14,7 +14,7 @@ defined('APP_VERSION') or define('APP_VERSION', 'master');
 defined('DB_DRIVER') or define('DB_DRIVER', 'sqlite');
 
 // Sqlite configuration
-defined('DB_FILENAME') or define('DB_FILENAME', 'data/db.sqlite');
+defined('DB_FILENAME') or define('DB_FILENAME', 'data'.DIRECTORY_SEPARATOR.'db.sqlite');
 
 // Mysql/Postgres configuration
 defined('DB_USERNAME') or define('DB_USERNAME', 'root');
@@ -93,7 +93,7 @@ defined('ENABLE_XFRAME') or define('ENABLE_XFRAME', true);
 defined('ENABLE_SYSLOG') or define('ENABLE_SYSLOG', true);
 
 // Default files directory
-defined('FILES_DIR') or define('FILES_DIR', 'data/files/');
+defined('FILES_DIR') or define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR);
 
 // Escape html inside markdown text
 defined('MARKDOWN_ESCAPE_HTML') or define('MARKDOWN_ESCAPE_HTML', true);

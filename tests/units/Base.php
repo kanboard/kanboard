@@ -84,7 +84,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container['db']->logQueries = true;
 
         $this->container['logger'] = new Logger;
-        $this->container['logger']->setLogger(new File('/dev/null'));
+        $this->container['logger']->setLogger(new File($this->isWindows() ? 'NUL' : '/dev/null'));
         $this->container['httpClient'] = new FakeHttpClient;
         $this->container['emailClient'] = $this->getMockBuilder('EmailClient')->setMethods(array('send'))->getMock();
 
@@ -98,5 +98,10 @@ abstract class Base extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->container['db']->closeConnection();
+    }
+
+    public function isWindows()
+    {
+        return substr(PHP_OS, 0, 3) === 'WIN';
     }
 }

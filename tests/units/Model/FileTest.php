@@ -89,7 +89,7 @@ class FileTest extends Base
     {
         $f = new File($this->container);
 
-        $this->assertStringStartsWith('12/34/', $f->generatePath(12, 34, 'test.png'));
+        $this->assertStringStartsWith('12'.DIRECTORY_SEPARATOR.'34'.DIRECTORY_SEPARATOR, $f->generatePath(12, 34, 'test.png'));
         $this->assertNotEquals($f->generatePath(12, 34, 'test1.png'), $f->generatePath(12, 34, 'test2.png'));
     }
 
@@ -113,7 +113,7 @@ class FileTest extends Base
             ->expects($this->once())
             ->method('put')
             ->with(
-                $this->stringContains('1/1/'),
+                $this->stringContains('1'.DIRECTORY_SEPARATOR.'1'.DIRECTORY_SEPARATOR),
                 $this->equalTo(base64_decode($data))
             )
             ->will($this->returnValue(true));
@@ -126,7 +126,7 @@ class FileTest extends Base
         $file = $f->getById(1);
         $this->assertNotEmpty($file);
         $this->assertStringStartsWith('Screenshot taken ', $file['name']);
-        $this->assertStringStartsWith('1/1/', $file['path']);
+        $this->assertStringStartsWith('1'.DIRECTORY_SEPARATOR.'1'.DIRECTORY_SEPARATOR, $file['path']);
         $this->assertEquals(1, $file['is_image']);
         $this->assertEquals(1, $file['task_id']);
         $this->assertEquals(time(), $file['date'], '', 2);
@@ -149,7 +149,7 @@ class FileTest extends Base
             ->expects($this->once())
             ->method('put')
             ->with(
-                $this->stringContains('1/1/'),
+                $this->stringContains('1'.DIRECTORY_SEPARATOR.'1'.DIRECTORY_SEPARATOR),
                 $this->equalTo(base64_decode($data))
             )
             ->will($this->returnValue(true));
@@ -159,7 +159,7 @@ class FileTest extends Base
         $file = $f->getById(1);
         $this->assertNotEmpty($file);
         $this->assertEquals('my file.pdf', $file['name']);
-        $this->assertStringStartsWith('1/1/', $file['path']);
+        $this->assertStringStartsWith('1'.DIRECTORY_SEPARATOR.'1'.DIRECTORY_SEPARATOR, $file['path']);
         $this->assertEquals(0, $file['is_image']);
         $this->assertEquals(1, $file['task_id']);
         $this->assertEquals(time(), $file['date'], '', 2);
@@ -211,15 +211,15 @@ class FileTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
 
-        $this->assertEquals(1, $f->create(1, 'B.pdf', '/tmp/foo1', 10));
-        $this->assertEquals(2, $f->create(1, 'A.png', '/tmp/foo2', 10));
-        $this->assertEquals(3, $f->create(1, 'D.doc', '/tmp/foo3', 10));
+        $this->assertEquals(1, $f->create(1, 'B.pdf', DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'foo1', 10));
+        $this->assertEquals(2, $f->create(1, 'A.png', DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'foo2', 10));
+        $this->assertEquals(3, $f->create(1, 'D.doc', DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'foo3', 10));
 
         $this->container['objectStorage']
             ->expects($this->at(0))
             ->method('remove')
             ->with(
-                $this->equalTo('/tmp/foo2')
+                $this->equalTo(DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'foo2')
             )
             ->will($this->returnValue(true));
 
@@ -227,7 +227,7 @@ class FileTest extends Base
             ->expects($this->at(1))
             ->method('remove')
             ->with(
-                $this->equalTo('thumbnails//tmp/foo2')
+                $this->equalTo('thumbnails'.DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'foo2')
             )
             ->will($this->returnValue(true));
 
@@ -235,7 +235,7 @@ class FileTest extends Base
             ->expects($this->at(2))
             ->method('remove')
             ->with(
-                $this->equalTo('/tmp/foo1')
+                $this->equalTo(DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'foo1')
             )
             ->will($this->returnValue(true));
 
@@ -243,7 +243,7 @@ class FileTest extends Base
             ->expects($this->at(3))
             ->method('remove')
             ->with(
-                $this->equalTo('/tmp/foo3')
+                $this->equalTo(DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.'foo3')
             )
             ->will($this->returnValue(true));
 
