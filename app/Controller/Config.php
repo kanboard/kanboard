@@ -39,6 +39,7 @@ class Config extends Base
         if ($this->request->isPost()) {
             $values =  $this->request->getValues();
 
+            $storing_model = $this->config;
             switch ($redirect) {
                 case 'project':
                     $values += array('subtask_restriction' => 0, 'subtask_time_tracking' => 0, 'cfd_include_closed_tasks' => 0);
@@ -49,9 +50,12 @@ class Config extends Base
                 case 'calendar':
                     $values += array('calendar_user_subtasks_time_tracking' => 0);
                     break;
+                case 'color':
+                    $storing_model = $this->color;
+                    break;
             }
 
-            if ($this->config->save($values)) {
+            if ($storing_model->save($values)) {
                 $this->config->reload();
                 $this->session->flash(t('Settings saved successfully.'));
             } else {
@@ -118,6 +122,28 @@ class Config extends Base
             'colors' => $this->color->getList(),
             'default_columns' => implode(', ', $this->board->getDefaultColumns()),
             'title' => t('Settings').' &gt; '.t('Project settings'),
+        )));
+    }
+
+    /**
+     * Display the color settings page
+     *
+     * @access public
+     */
+    public function color()
+    {
+        $this->common('color');
+
+        $colors = $this->color->getColors(false);
+        foreach ($colors as $color_id => &$color) {
+            $color[$color_id.'_name'] = $color['name'];
+            $color[$color_id.'_background'] = $color['background'];
+            $color[$color_id.'_border'] = $color['border'];
+        }
+
+        $this->response->html($this->layout('config/color', array(
+            'colors' => $colors,
+            'title' => t('Settings').' &gt; '.t('Custom colors'),
         )));
     }
 

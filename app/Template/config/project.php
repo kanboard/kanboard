@@ -8,6 +8,9 @@
 
     <?= $this->form->label(t('Default task color'), 'default_color') ?>
     <?= $this->form->select('default_color', $colors, $values, $errors) ?>
+    <? if (count($colors) < 16) { ?>
+        <p class="form-help"><?= t('Colors you defined as unselectable cannot be set as default task color.') ?></p>
+    <? } ?>
 
     <?= $this->form->label(t('Default columns for new projects (Comma-separated)'), 'board_columns') ?>
     <?= $this->form->text('board_columns', $values, $errors) ?><br/>
