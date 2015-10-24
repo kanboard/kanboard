@@ -18,6 +18,7 @@ Improvements:
 * Add the possibility to append or not custom filters
 * Make mail transports pluggable
 * Do not show scroll-bars when a column is collapsed on Windows systems
+* Regenerate thumbnails if missing
 
 Bug fixes:
 

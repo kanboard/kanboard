@@ -109,7 +109,7 @@ class File extends Base
     }
 
     /**
-     * Return the file content (work only for images)
+     * Display image
      *
      * @access public
      */
@@ -119,36 +119,38 @@ class File extends Base
             $task = $this->getTask();
             $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
-            if ($file['task_id'] != $task['id']) {
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+            if ($file['task_id'] == $task['id']) {
+                $this->response->contentType($this->file->getImageMimeType($file['name']));
+                $this->objectStorage->output($file['path']);
             }
-
-            $this->response->contentType($this->file->getImageMimeType($file['name']));
-            $this->objectStorage->output($file['path']);
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
         }
     }
 
     /**
-     * Return image thumbnails
+     * Display image thumbnails
      *
      * @access public
      */
     public function thumbnail()
     {
+        $this->response->contentType('image/jpeg');
+
         try {
             $task = $this->getTask();
             $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
-            if ($file['task_id'] != $task['id']) {
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+            if ($file['task_id'] == $task['id']) {
+                $this->objectStorage->output($this->file->getThumbnailPath($file['path']));
             }
-
-            $this->response->contentType('image/jpeg');
-            $this->objectStorage->output($this->file->getThumbnailPath($file['path']));
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
+
+            // Try to generate thumbnail on the fly for images uploaded before Kanboard < 1.0.19
+            $data = $this->objectStorage->get($file['path']);
+            $this->file->generateThumbnailFromData($file['path'], $data);
+            $this->objectStorage->output($this->file->getThumbnailPath($file['path']));
         }
     }
 
