@@ -21,6 +21,7 @@ Improvements:
 Bug fixes:
 
 * People should not see any tasks during a search when they are not associated to a project
+* Avoid to disable the default swimlane during renaming when there is no other activated swimlane
 
 Version 1.0.19
 --------------

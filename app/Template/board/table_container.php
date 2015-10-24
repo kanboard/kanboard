@@ -1,6 +1,6 @@
 <div id="board-container">
     <?php if (empty($swimlanes) || empty($swimlanes[0]['nb_columns'])): ?>
-        <p class="alert alert-error"><?= t('There is no column in your project!') ?></p>
+        <p class="alert alert-error"><?= t('There is no column or swimlane activated in your project!') ?></p>
     <?php else: ?>
 
         <?php if (isset($not_editable)): ?>
