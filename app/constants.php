@@ -93,7 +93,7 @@ defined('ENABLE_XFRAME') or define('ENABLE_XFRAME', true);
 defined('ENABLE_SYSLOG') or define('ENABLE_SYSLOG', true);
 
 // Default files directory
-defined('FILES_DIR') or define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR);
+defined('FILES_DIR') or define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files');
 
 // Escape html inside markdown text
 defined('MARKDOWN_ESCAPE_HTML') or define('MARKDOWN_ESCAPE_HTML', true);

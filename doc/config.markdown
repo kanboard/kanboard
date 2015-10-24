@@ -35,10 +35,8 @@ Folder for uploaded files
 -------------------------
 
 ```php
-define('FILES_DIR', 'data/files/');
+define('FILES_DIR', 'data/files');
 ```
-
-Don't forget the trailing slash.
 
 Enable/disable url rewrite
 --------------------------

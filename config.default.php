@@ -14,7 +14,7 @@ define('DEBUG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'deb
 define('PLUGINS_DIR', 'data'.DIRECTORY_SEPARATOR.'plugins');
 
 // Folder for uploaded files, don't forget the trailing slash
-define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR);
+define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files');
 
 // E-mail address for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
