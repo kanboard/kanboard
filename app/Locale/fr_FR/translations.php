@@ -955,7 +955,7 @@ return array(
     'NOK - Norwegian Krone' => 'NOK - Couronne norvégienne',
     'Show this column' => 'Montrer cette colonne',
     'Hide this column' => 'Cacher cette colonne',
-    'open file' => 'ouvrir un fichier',
+    'open file' => 'ouvrir le fichier',
     'End date' => 'Date de fin',
     'Users overview' => 'Vue d\'ensemble des utilisateurs',
     'Managers' => 'Gérants',
