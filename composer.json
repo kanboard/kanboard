@@ -1,5 +1,6 @@
 {
     "name": "fguillot/kanboard",
+    "description": "Kanban project management software",
     "license": "MIT",
     "authors": [
         {

@@ -13,7 +13,7 @@ define('DEBUG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'deb
 // Plugins directory
 define('PLUGINS_DIR', 'data'.DIRECTORY_SEPARATOR.'plugins');
 
-// Folder for uploaded files, don't forget the trailing slash
+// Folder for uploaded files
 define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files');
 
 // E-mail address for the "From" header (notifications)
