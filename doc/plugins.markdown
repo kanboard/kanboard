@@ -13,6 +13,7 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 - [Add schema migrations for plugins](plugin-schema-migrations.markdown)
 - [Add mail transports](plugin-mail-transports.markdown)
 - [Add notification types](plugin-notifications.markdown)
+- [Attach metadata to users, tasks and projects](plugin-metadata.markdown)
 
 Examples of plugins
 -------------------

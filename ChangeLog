@@ -10,14 +10,14 @@ Breaking changes:
 New features:
 
 * Add CSV import for users and tasks
+* Add Task, User and Project metadata for plugin creators
 
 Improvements:
 
 * Allow to change comments sorting
 * Add the possibility to append or not custom filters
 * Make mail transports pluggable
-* Add Task, User and Project metadata for plugin creators
-* Do not show scroll-bars when a column is collapsed (IE)
+* Do not show scroll-bars when a column is collapsed on Windows systems
 
 Bug fixes:
 
