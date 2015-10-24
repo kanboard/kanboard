@@ -44,7 +44,10 @@ class Authentication extends Base
         if ($this->userSession->isLogged()) {
 
             // Check if the user session match an existing user
-            if (! $this->user->exists($this->userSession->getId())) {
+            $userNotFound = ! $this->user->exists($this->userSession->getId());
+            $reverseProxyWrongUser = REVERSE_PROXY_AUTH && $this->backend('reverseProxy')->getUsername() !== $_SESSION['user']['username'];
+
+            if ($userNotFound || $reverseProxyWrongUser) {
                 $this->backend('rememberMe')->destroy($this->userSession->getId());
                 $this->session->close();
                 return false;

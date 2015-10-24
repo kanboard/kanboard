@@ -5,6 +5,7 @@ Breaking changes:
 
 - Add namespace Kanboard (update your plugins)
 - Move Mailgun, Sendgrid, Postmark, Slack, Hipchat and Jabber to plugins
+- ReverseProxy authentication check for each request that the username match the user session
 
 New features:
 

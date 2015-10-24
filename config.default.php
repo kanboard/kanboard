@@ -150,7 +150,7 @@ define('GITHUB_OAUTH_AUTHORIZE_URL', 'https://github.com/login/oauth/authorize')
 // Github oauth2 token url
 define('GITHUB_OAUTH_TOKEN_URL', 'https://github.com/login/oauth/access_token');
 
-// Github API url (don't forget the slash at the end)
+// Github API url (don't forget the trailing slash)
 define('GITHUB_API_URL', 'https://api.github.com/');
 
 // Enable/disable Gitlab authentication
@@ -168,7 +168,7 @@ define('GITLAB_OAUTH_AUTHORIZE_URL', 'https://gitlab.com/oauth/authorize');
 // Gitlab oauth2 token url
 define('GITLAB_OAUTH_TOKEN_URL', 'https://gitlab.com/oauth/token');
 
-// Gitlab API url endpoint (don't forget the slash at the end)
+// Gitlab API url endpoint (don't forget the trailing slash)
 define('GITLAB_API_URL', 'https://gitlab.com/api/v3/');
 
 // Enable/disable the reverse proxy authentication
