@@ -11,6 +11,7 @@ use Kanboard\Core\ObjectStorage\FileStorage;
 use Kanboard\Core\Paginator;
 use Kanboard\Core\OAuth2;
 use Kanboard\Core\Tool;
+use Kanboard\Core\Http\Client as HttpClient;
 use Kanboard\Model\UserNotificationType;
 use Kanboard\Model\ProjectNotificationType;
 
@@ -81,13 +82,14 @@ class ClassProvider implements ServiceProviderInterface
         'Core' => array(
             'DateParser',
             'Helper',
-            'HttpClient',
             'Lexer',
+            'Session',
+            'Template',
+        ),
+        'Core\Http' => array(
             'Request',
             'Response',
             'Router',
-            'Session',
-            'Template',
         ),
         'Core\Cache' => array(
             'MemoryCache',
@@ -116,6 +118,10 @@ class ClassProvider implements ServiceProviderInterface
         $container['oauth'] = $container->factory(function ($c) {
             return new OAuth2($c);
         });
+
+        $container['httpClient'] = function ($c) {
+            return new HttpClient($c);
+        };
 
         $container['htmlConverter'] = function () {
             return new HtmlConverter(array('strip_tags' => true));

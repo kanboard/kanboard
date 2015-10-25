@@ -3,6 +3,7 @@
 namespace Kanboard\Core;
 
 use ArrayAccess;
+use Kanboard\Core\Http\Request;
 
 /**
  * Session class

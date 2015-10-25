@@ -1,14 +1,16 @@
 <?php
 
-namespace Kanboard\Core;
+namespace Kanboard\Core\Http;
+
+use Kanboard\Core\Base;
 
 /**
  * HTTP client
  *
- * @package  core
+ * @package  http
  * @author   Frederic Guillot
  */
-class HttpClient extends Base
+class Client extends Base
 {
     /**
      * HTTP connection timeout in seconds
@@ -99,6 +101,36 @@ class HttpClient extends Base
             return '';
         }
 
+        $stream = @fopen(trim($url), 'r', false, stream_context_create($this->getContext($method, $content, $headers)));
+        $response = '';
+
+        if (is_resource($stream)) {
+            $response = stream_get_contents($stream);
+        } else {
+            $this->logger->error('HttpClient: request failed');
+        }
+
+        if (DEBUG) {
+            $this->logger->debug('HttpClient: url='.$url);
+            $this->logger->debug('HttpClient: payload='.$content);
+            $this->logger->debug('HttpClient: metadata='.var_export(@stream_get_meta_data($stream), true));
+            $this->logger->debug('HttpClient: response='.$response);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Get stream context
+     *
+     * @access private
+     * @param  string     $method
+     * @param  string     $content
+     * @param  string[]   $headers
+     * @return array
+     */
+    private function getContext($method, $content, array $headers)
+    {
         $default_headers = array(
             'User-Agent: '.self::HTTP_USER_AGENT,
             'Connection: close',
@@ -126,22 +158,6 @@ class HttpClient extends Base
             $context['http']['request_fulluri'] = true;
         }
 
-        $stream = @fopen(trim($url), 'r', false, stream_context_create($context));
-        $response = '';
-
-        if (is_resource($stream)) {
-            $response = stream_get_contents($stream);
-        } else {
-            $this->container['logger']->error('HttpClient: request failed');
-        }
-
-        if (DEBUG) {
-            $this->container['logger']->debug('HttpClient: url='.$url);
-            $this->container['logger']->debug('HttpClient: payload='.$content);
-            $this->container['logger']->debug('HttpClient: metadata='.var_export(@stream_get_meta_data($stream), true));
-            $this->container['logger']->debug('HttpClient: response='.$response);
-        }
-
-        return $response;
+        return $context;
     }
 }

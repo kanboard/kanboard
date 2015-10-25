@@ -1,11 +1,13 @@
 <?php
 
-namespace Kanboard\Core;
+namespace Kanboard\Core\Http;
+
+use Kanboard\Core\Base;
 
 /**
  * Request class
  *
- * @package  core
+ * @package  http
  * @author   Frederic Guillot
  */
 class Request extends Base

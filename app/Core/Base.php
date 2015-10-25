@@ -12,18 +12,20 @@ use Pimple\Container;
  *
  * @property \Kanboard\Core\Helper                                      $helper
  * @property \Kanboard\Core\Mail\Client                                 $emailClient
- * @property \Kanboard\Core\HttpClient                                  $httpClient
  * @property \Kanboard\Core\Paginator                                   $paginator
- * @property \Kanboard\Core\Request                                     $request
+ * @property \Kanboard\Core\Http\Client                                 $httpClient
+ * @property \Kanboard\Core\Http\Request                                $request
+ * @property \Kanboard\Core\Http\Router                                 $router
+ * @property \Kanboard\Core\Http\Response                               $response
  * @property \Kanboard\Core\Session                                     $session
  * @property \Kanboard\Core\Template                                    $template
  * @property \Kanboard\Core\OAuth2                                      $oauth
- * @property \Kanboard\Core\Router                                      $router
  * @property \Kanboard\Core\Lexer                                       $lexer
  * @property \Kanboard\Core\ObjectStorage\ObjectStorageInterface        $objectStorage
  * @property \Kanboard\Core\Cache\Cache                                 $memoryCache
  * @property \Kanboard\Core\Plugin\Hook                                 $hook
  * @property \Kanboard\Core\Plugin\Loader                               $pluginLoader
+ * @property \Kanboard\Core\Security\Token                              $token
  * @property \Kanboard\Integration\BitbucketWebhook                     $bitbucketWebhook
  * @property \Kanboard\Integration\GithubWebhook                        $githubWebhook
  * @property \Kanboard\Integration\GitlabWebhook                        $gitlabWebhook

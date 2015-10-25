@@ -2,7 +2,7 @@
 
 namespace Kanboard\Subscriber;
 
-use Kanboard\Core\Request;
+use Kanboard\Core\Http\Request;
 use Kanboard\Event\AuthEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

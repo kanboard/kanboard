@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+require_once __DIR__.'/../../Base.php';
 
-use Kanboard\Core\Router;
+use Kanboard\Core\Http\Router;
 
 class RouterTest extends Base
 {

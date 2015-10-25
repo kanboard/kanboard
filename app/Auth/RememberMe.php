@@ -3,7 +3,7 @@
 namespace Kanboard\Auth;
 
 use Kanboard\Core\Base;
-use Kanboard\Core\Request;
+use Kanboard\Core\Http\Request;
 use Kanboard\Event\AuthEvent;
 use Kanboard\Core\Security\Token;
 

@@ -2,7 +2,7 @@
 
 namespace Kanboard\Helper;
 
-use Kanboard\Core\Request;
+use Kanboard\Core\Http\Request;
 use Kanboard\Core\Base;
 
 /**

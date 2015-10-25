@@ -1,13 +1,14 @@
 <?php
 
-namespace Kanboard\Core;
+namespace Kanboard\Core\Http;
 
 use RuntimeException;
+use Kanboard\Core\Base;
 
 /**
  * Router class
  *
- * @package core
+ * @package http
  * @author  Frederic Guillot
  */
 class Router extends Base
