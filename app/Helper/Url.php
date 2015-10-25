@@ -3,7 +3,7 @@
 namespace Kanboard\Helper;
 
 use Kanboard\Core\Request;
-use Kanboard\Core\Security;
+use Kanboard\Core\Base;
 
 /**
  * Url helpers
@@ -11,7 +11,7 @@ use Kanboard\Core\Security;
  * @package helper
  * @author  Frederic Guillot
  */
-class Url extends \Kanboard\Core\Base
+class Url extends Base
 {
     private $base = '';
     private $directory = '';
@@ -158,7 +158,7 @@ class Url extends \Kanboard\Core\Base
         }
 
         if ($csrf) {
-            $qs['csrf_token'] = Security::getCSRFToken();
+            $qs['csrf_token'] = $this->token->getCSRFToken();
         }
 
         if (! empty($qs)) {

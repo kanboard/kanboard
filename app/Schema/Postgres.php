@@ -3,7 +3,7 @@
 namespace Schema;
 
 use PDO;
-use Kanboard\Core\Security;
+use Kanboard\Core\Security\Token;
 
 const VERSION = 73;
 
@@ -994,6 +994,6 @@ function version_1(PDO $pdo)
     $pdo->exec("
         INSERT INTO config
         (webhooks_token, api_token)
-        VALUES ('".Security::generateToken()."', '".Security::generateToken()."')
+        VALUES ('".Token::getToken()."', '".Token::getToken()."')
     ");
 }

@@ -3,9 +3,6 @@
 namespace Kanboard\Controller;
 
 use Pimple\Container;
-use Kanboard\Core\Security;
-use Kanboard\Core\Request;
-use Kanboard\Core\Response;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -17,22 +14,6 @@ use Symfony\Component\EventDispatcher\Event;
 abstract class Base extends \Kanboard\Core\Base
 {
     /**
-     * Request instance
-     *
-     * @accesss protected
-     * @var \Kanboard\Core\Request
-     */
-    protected $request;
-
-    /**
-     * Response instance
-     *
-     * @accesss protected
-     * @var \Kanboard\Core\Response
-     */
-    protected $response;
-
-    /**
      * Constructor
      *
      * @access public
@@ -41,11 +22,9 @@ abstract class Base extends \Kanboard\Core\Base
     public function __construct(Container $container)
     {
         $this->container = $container;
-        $this->request = new Request;
-        $this->response = new Response;
 
         if (DEBUG) {
-            $this->container['logger']->debug('START_REQUEST='.$_SERVER['REQUEST_URI']);
+            $this->logger->debug('START_REQUEST='.$_SERVER['REQUEST_URI']);
         }
     }
 
@@ -57,14 +36,14 @@ abstract class Base extends \Kanboard\Core\Base
     public function __destruct()
     {
         if (DEBUG) {
-            foreach ($this->container['db']->getLogMessages() as $message) {
-                $this->container['logger']->debug($message);
+            foreach ($this->db->getLogMessages() as $message) {
+                $this->logger->debug($message);
             }
 
-            $this->container['logger']->debug('SQL_QUERIES={nb}', array('nb' => $this->container['db']->nbQueries));
-            $this->container['logger']->debug('RENDERING={time}', array('time' => microtime(true) - @$_SERVER['REQUEST_TIME_FLOAT']));
-            $this->container['logger']->debug('MEMORY='.$this->helper->text->bytes(memory_get_usage()));
-            $this->container['logger']->debug('END_REQUEST='.$_SERVER['REQUEST_URI']);
+            $this->logger->debug('SQL_QUERIES={nb}', array('nb' => $this->container['db']->nbQueries));
+            $this->logger->debug('RENDERING={time}', array('time' => microtime(true) - @$_SERVER['REQUEST_TIME_FLOAT']));
+            $this->logger->debug('MEMORY='.$this->helper->text->bytes(memory_get_usage()));
+            $this->logger->debug('END_REQUEST='.$_SERVER['REQUEST_URI']);
         }
     }
 
@@ -201,7 +180,7 @@ abstract class Base extends \Kanboard\Core\Base
      */
     protected function checkCSRFParam()
     {
-        if (! Security::validateCSRFToken($this->request->getStringParam('csrf_token'))) {
+        if (! $this->token->validateCSRFToken($this->request->getStringParam('csrf_token'))) {
             $this->forbidden();
         }
     }

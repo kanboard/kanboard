@@ -8,7 +8,7 @@ namespace Kanboard\Core;
  * @package  core
  * @author   Frederic Guillot
  */
-class Response
+class Response extends Base
 {
     /**
      * Send no cache headers

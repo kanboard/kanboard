@@ -8,7 +8,7 @@ namespace Kanboard\Core;
  * @package  core
  * @author   Frederic Guillot
  */
-class Request
+class Request extends Base
 {
     /**
      * Get URL string parameter
@@ -57,7 +57,8 @@ class Request
      */
     public function getValues()
     {
-        if (! empty($_POST) && Security::validateCSRFFormToken($_POST)) {
+        if (! empty($_POST) && ! empty($_POST['csrf_token']) && $this->token->validateCSRFToken($_POST['csrf_token'])) {
+            unset($_POST['csrf_token']);
             return $_POST;
         }
 

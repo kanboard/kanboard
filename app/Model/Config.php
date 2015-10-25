@@ -3,7 +3,7 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Translator;
-use Kanboard\Core\Security;
+use Kanboard\Core\Security\Token;
 use Kanboard\Core\Session;
 
 /**
@@ -265,7 +265,7 @@ class Config extends Setting
      */
     public function regenerateToken($option)
     {
-        $this->save(array($option => Security::generateToken()));
+        $this->save(array($option => Token::getToken()));
     }
 
     /**

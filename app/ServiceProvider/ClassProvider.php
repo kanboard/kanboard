@@ -84,6 +84,7 @@ class ClassProvider implements ServiceProviderInterface
             'HttpClient',
             'Lexer',
             'Request',
+            'Response',
             'Router',
             'Session',
             'Template',
@@ -93,6 +94,9 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Core\Plugin' => array(
             'Hook',
+        ),
+        'Core\Security' => array(
+            'Token',
         ),
         'Integration' => array(
             'BitbucketWebhook',

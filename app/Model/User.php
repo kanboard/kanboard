@@ -6,7 +6,7 @@ use PicoDb\Database;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Kanboard\Core\Session;
-use Kanboard\Core\Security;
+use Kanboard\Core\Security\Token;
 
 /**
  * User model
@@ -383,7 +383,7 @@ class User extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->eq('id', $user_id)
-                    ->save(array('token' => Security::generateToken()));
+                    ->save(array('token' => Token::getToken()));
     }
 
     /**

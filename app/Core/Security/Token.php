@@ -1,14 +1,16 @@
 <?php
 
-namespace Kanboard\Core;
+namespace Kanboard\Core\Security;
+
+use Kanboard\Core\Base;
 
 /**
- * Security class
+ * Token Handler
  *
- * @package  core
+ * @package  security
  * @author   Frederic Guillot
  */
-class Security
+class Token extends Base
 {
     /**
      * Generate a random token with different methods: openssl or /dev/urandom or fallback to uniqid()
@@ -17,7 +19,7 @@ class Security
      * @access public
      * @return string  Random token
      */
-    public static function generateToken()
+    public static function getToken()
     {
         if (function_exists('openssl_random_pseudo_bytes')) {
             return bin2hex(\openssl_random_pseudo_bytes(30));
@@ -31,18 +33,16 @@ class Security
     /**
      * Generate and store a CSRF token in the current session
      *
-     * @static
      * @access public
      * @return string  Random token
      */
-    public static function getCSRFToken()
+    public function getCSRFToken()
     {
-        $nonce = self::generateToken();
-
-        if (empty($_SESSION['csrf_tokens'])) {
+        if (! isset($_SESSION['csrf_tokens'])) {
             $_SESSION['csrf_tokens'] = array();
         }
 
+        $nonce = self::getToken();
         $_SESSION['csrf_tokens'][$nonce] = true;
 
         return $nonce;
@@ -51,33 +51,14 @@ class Security
     /**
      * Check if the token exists for the current session (a token can be used only one time)
      *
-     * @static
      * @access public
      * @param  string   $token   CSRF token
      * @return bool
      */
-    public static function validateCSRFToken($token)
+    public function validateCSRFToken($token)
     {
         if (isset($_SESSION['csrf_tokens'][$token])) {
             unset($_SESSION['csrf_tokens'][$token]);
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if the token used in a form is correct and then remove the value
-     *
-     * @static
-     * @access public
-     * @param  array    $values   Form values
-     * @return bool
-     */
-    public static function validateCSRFFormToken(array &$values)
-    {
-        if (! empty($values['csrf_token']) && self::validateCSRFToken($values['csrf_token'])) {
-            unset($values['csrf_token']);
             return true;
         }
 

@@ -4,7 +4,7 @@ namespace Kanboard\Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Kanboard\Core\Security;
+use Kanboard\Core\Security\Token;
 
 /**
  * Project model
@@ -491,7 +491,7 @@ class Project extends Base
                $this->db
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
-                    ->save(array('is_public' => 1, 'token' => Security::generateToken()));
+                    ->save(array('is_public' => 1, 'token' => Token::getToken()));
     }
 
     /**

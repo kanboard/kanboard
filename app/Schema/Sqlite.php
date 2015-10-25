@@ -2,7 +2,7 @@
 
 namespace Schema;
 
-use Kanboard\Core\Security;
+use Kanboard\Core\Security\Token;
 use PDO;
 
 const VERSION = 88;
@@ -799,7 +799,7 @@ function version_20(PDO $pdo)
 function version_19(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE config ADD COLUMN api_token TEXT DEFAULT ''");
-    $pdo->exec("UPDATE config SET api_token='".Security::generateToken()."'");
+    $pdo->exec("UPDATE config SET api_token='".Token::getToken()."'");
 }
 
 function version_18(PDO $pdo)
@@ -1068,6 +1068,6 @@ function version_1(PDO $pdo)
     $pdo->exec("
         INSERT INTO config
         (webhooks_token)
-        VALUES ('".Security::generateToken()."')
+        VALUES ('".Token::getToken()."')
     ");
 }
