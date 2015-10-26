@@ -116,6 +116,46 @@ class LexerTest extends Base
         );
     }
 
+    public function testLinkQuery()
+    {
+        $lexer = new Lexer;
+    
+        $this->assertEquals(
+            array(array('match' => 'link:', 'token' => 'T_LINK'), array('match' => 'is a milestone of', 'token' => 'T_STRING')),
+            $lexer->tokenize('link:"is a milestone of"')
+            );
+
+        $this->assertEquals(
+            array('T_LINK' => array('is a milestone of')),
+            $lexer->map($lexer->tokenize('link:"is a milestone of"'))
+            );
+
+        $this->assertEquals(
+            array('T_LINK' => array('9')),
+            $lexer->map($lexer->tokenize('link:9'))
+            );
+
+        $this->assertEquals(
+            array('T_LINK' => array('9')),
+            $lexer->map($lexer->tokenize('link:"9"'))
+            );
+
+        $this->assertEquals(
+            array('T_LINK' => array('is a milestone of', 'fixes')),
+            $lexer->map($lexer->tokenize('link:"is a milestone of" link:fixes'))
+            );
+
+        $this->assertEquals(
+            array('T_LINK' => array('is a milestone of', '8')),
+            $lexer->map($lexer->tokenize('link:"is a milestone of" link:8'))
+            );
+
+        $this->assertEquals(
+            array(),
+            $lexer->map($lexer->tokenize('link: '))
+            );
+    }
+
     public function testColumnQuery()
     {
         $lexer = new Lexer;
