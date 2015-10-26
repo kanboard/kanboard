@@ -73,6 +73,7 @@ class Action extends Base
             'TaskAssignColorUser' => t('Assign a color to a specific user'),
             'TaskAssignColorCategory' => t('Assign automatically a color based on a category'),
             'TaskAssignCategoryColor' => t('Assign automatically a category based on a color'),
+            'TaskAssignCategoryLink' => t('Assign automatically a category based on a link'),
             'CommentCreation' => t('Create a comment from an external provider'),
             'TaskCreation' => t('Create a task from an external provider'),
             'TaskLogMoveAnotherColumn' => t('Add a comment log when moving the task between columns'),
