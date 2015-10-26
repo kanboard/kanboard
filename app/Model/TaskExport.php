@@ -57,7 +57,7 @@ class TaskExport extends Base
             tasks.color_id,
             tasks.date_due,
             creators.username AS creator_username,
-            users.username AS assignee_username,
+            users.name AS assignee_username,
             tasks.score,
             tasks.title,
             tasks.date_creation,
