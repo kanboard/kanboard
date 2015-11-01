@@ -202,7 +202,7 @@ define('MARKDOWN_ESCAPE_HTML', true);
 define('API_AUTHENTICATION_HEADER', '');
 
 // set specific UUID for build automation
-define('API_AUTHENTICATION_TOKEN', '19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929');
+// define('API_AUTHENTICATION_TOKEN', '19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929');
 
 // Enable/disable url rewrite
 define('ENABLE_URL_REWRITE', false);
