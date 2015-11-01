@@ -31,6 +31,8 @@ class Auth extends Base
             $this->userSession->refresh($this->user->getByUsername($username));
         } elseif ($username === 'jsonrpc' && $password === $this->config->get('api_token')) {
             $this->checkProcedurePermission(false, $method);
+        } elseif (defined('API_AUTHENTICATION_TOKEN') && $username === 'jsonrpc' && $password === API_AUTHENTICATION_TOKEN) {
+            $this->checkProcedurePermission(false, $method);
         } else {
             throw new AuthenticationFailure('Wrong credentials');
         }
