@@ -11,7 +11,7 @@ use Kanboard\Event\AuthEvent;
  * @package  auth
  * @author   Sylvain Veyrié
  */
-class ReverseProxy extends Base
+class ReverseProxy extends Ldap
 {
     /**
      * Backend name
@@ -71,13 +71,18 @@ class ReverseProxy extends Base
         if (REVERSE_PROXY_DEFAULT_DOMAIN !== '' && empty($email)) {
             $email = $login.'@'.REVERSE_PROXY_DEFAULT_DOMAIN;
         }
-
-        return $this->user->create(array(
+        $result=array(
             'email' => $email,
             'username' => $login,
             'is_admin' => REVERSE_PROXY_DEFAULT_ADMIN === $login,
             'is_ldap_user' => 1,
             'disable_login_form' => 1,
-        ));
+        );
+        if (LDAP_ACCOUNT_CREATION ) {
+            $result=$this->lookup($login);
+            $result[ 'is_admin']=0;
+            $result[ 'is_ldap_user']=1;
+        }
+        return $this->user->create($result);
     }
 }
