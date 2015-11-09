@@ -14,12 +14,14 @@ class TaskOverdueNotification extends Base
         $this
             ->setName('notification:overdue-tasks')
             ->setDescription('Send notifications for overdue tasks')
-            ->addOption('show', null, InputOption::VALUE_NONE, 'Show sent overdue tasks');
+            ->addOption('show', null, InputOption::VALUE_NONE, 'Show sent overdue tasks')
+            ->addOption('group', null, InputOption::VALUE_NONE, 'Group all overdue tasks in one email')
+            ->addOption('admin', null, InputOption::VALUE_NONE, 'Send all overdue tasks to project admin');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $tasks = $this->overdueNotification->sendOverdueTaskNotifications();
+        $tasks = $this->overdueNotification->sendOverdueTaskNotifications($input);
 
         if ($input->getOption('show')) {
             $this->showTable($output, $tasks);
