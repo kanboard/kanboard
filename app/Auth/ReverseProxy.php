@@ -66,7 +66,7 @@ class ReverseProxy extends Ldap
      */
     private function createUser($login)
     {
-        if (LDAP_ACCOUNT_CREATION ) {
+        if (LDAP_ACCOUNT_CREATION && is_array($this->lookup($login)) ) {
             $result=$this->lookup($login);
         }
         else {
