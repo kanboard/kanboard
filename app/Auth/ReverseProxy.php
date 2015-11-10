@@ -66,22 +66,21 @@ class ReverseProxy extends Ldap
      */
     private function createUser($login)
     {
-        $email = strpos($login, '@') !== false ? $login : '';
-
-        if (REVERSE_PROXY_DEFAULT_DOMAIN !== '' && empty($email)) {
-            $email = $login.'@'.REVERSE_PROXY_DEFAULT_DOMAIN;
-        }
-        $result=array(
-            'email' => $email,
-            'username' => $login,
-            'is_admin' => REVERSE_PROXY_DEFAULT_ADMIN === $login,
-            'is_ldap_user' => 1,
-            'disable_login_form' => 1,
-        );
         if (LDAP_ACCOUNT_CREATION ) {
             $result=$this->lookup($login);
-            $result[ 'is_admin']=0;
-            $result[ 'is_ldap_user']=1;
+        }
+        else {
+            $email = strpos($login, '@') !== false ? $login : '';
+            if (REVERSE_PROXY_DEFAULT_DOMAIN !== '' && empty($email)) {
+                $email = $login.'@'.REVERSE_PROXY_DEFAULT_DOMAIN;
+            }
+            $result=array(
+                'email' => $email,
+                'username' => $login,
+                'is_admin' => REVERSE_PROXY_DEFAULT_ADMIN === $login,
+                'is_ldap_user' => 1,
+                'disable_login_form' => 1,
+                );
         }
         return $this->user->create($result);
     }
