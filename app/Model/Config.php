@@ -108,7 +108,7 @@ class Config extends Setting
     public function getJsLanguageCode()
     {
         $languages = array(
-            'cs_CZ' => 'cz',
+            'cs_CZ' => 'cs',
             'da_DK' => 'da',
             'de_DE' => 'de',
             'en_US' => 'en',
