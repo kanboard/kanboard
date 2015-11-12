@@ -125,8 +125,6 @@ App.prototype.datePicker = function() {
         // timeFormat: 'h:mm tt',
         constrainInput: false
     });
-
-    $(".hasDatepicker").on("blur", function(e) { $(this).datepicker("hide"); });
 };
 
 App.prototype.taskAutoComplete = function() {

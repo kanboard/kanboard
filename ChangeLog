@@ -4,6 +4,7 @@ Version 1.0.21 (unreleased)
 Bug fixes:
 
 * cs_CZ display the wrong locale in datetime picker
+* Datepicker is closed on blur event
 
 Version 1.0.20
 --------------
