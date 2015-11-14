@@ -4,6 +4,7 @@ namespace Kanboard\Core\Plugin;
 
 use DirectoryIterator;
 use PDOException;
+use LogicException;
 use RuntimeException;
 use Kanboard\Core\Tool;
 
@@ -59,6 +60,11 @@ class Loader extends \Kanboard\Core\Base
     public function load($plugin)
     {
         $class = '\Kanboard\Plugin\\'.$plugin.'\\Plugin';
+
+        if (! class_exists($class)) {
+            throw new LogicException('Unable to load this plugin class '.$class);
+        }
+
         $instance = new $class($this->container);
 
         Tool::buildDic($this->container, $instance->getClasses());

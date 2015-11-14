@@ -1,6 +1,10 @@
 Version 1.0.21 (unreleased)
 ---------------------------
 
+Improvements:
+
+* Improve error handling of plugins
+
 Bug fixes:
 
 * Loading cs_CZ locale display the wrong language in datetime picker
