@@ -3,6 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Model\NotificationType;
+use Kanboard\Notification\Mail as MailNotification;
 
 /**
  * User controller
@@ -95,7 +96,7 @@ class User extends Base
                 $this->projectPermission->addMember($project_id, $user_id);
 
                 if (! empty($values['notifications_enabled'])) {
-                    $this->userNotificationType->saveSelectedTypes($user_id, array(NotificationType::TYPE_EMAIL));
+                    $this->userNotificationType->saveSelectedTypes($user_id, array(MailNotification::TYPE));
                 }
 
                 $this->session->flash(t('User created successfully.'));

@@ -17,6 +17,13 @@ use Kanboard\Model\Subtask;
 class Mail extends Base implements NotificationInterface
 {
     /**
+     * Notification type
+     *
+     * @var string
+     */
+    const TYPE = 'email';
+
+    /**
      * Send notification to a user
      *
      * @access public

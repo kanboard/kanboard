@@ -14,6 +14,8 @@ use Kanboard\Core\Tool;
 use Kanboard\Core\Http\Client as HttpClient;
 use Kanboard\Model\UserNotificationType;
 use Kanboard\Model\ProjectNotificationType;
+use Kanboard\Notification\Mail as MailNotification;
+use Kanboard\Notification\Web as WebNotification;
 
 class ClassProvider implements ServiceProviderInterface
 {
@@ -141,8 +143,8 @@ class ClassProvider implements ServiceProviderInterface
 
         $container['userNotificationType'] = function ($container) {
             $type = new UserNotificationType($container);
-            $type->setType('email', t('Email'), '\Kanboard\Notification\Mail');
-            $type->setType('web', t('Web'), '\Kanboard\Notification\Web');
+            $type->setType(MailNotification::TYPE, t('Email'), '\Kanboard\Notification\Mail');
+            $type->setType(WebNotification::TYPE, t('Web'), '\Kanboard\Notification\Web');
             return $type;
         };
 

@@ -13,6 +13,13 @@ use Kanboard\Core\Base;
 class Web extends Base implements NotificationInterface
 {
     /**
+     * Notification type
+     *
+     * @var string
+     */
+    const TYPE = 'web';
+
+    /**
      * Send notification to a user
      *
      * @access public

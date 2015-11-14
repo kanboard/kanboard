@@ -10,6 +10,7 @@ Bug fixes:
 * Loading cs_CZ locale display the wrong language in datetime picker
 * Datepicker is closed unexpectedly on blur event
 * Fix bug in daily project summary CSV export
+* Fix PHP error when adding a new user with email notification enabled
 
 Version 1.0.20
 --------------
