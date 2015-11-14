@@ -3,6 +3,7 @@
 namespace Kanboard\Core\Http;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Csv;
 
 /**
  * Response class

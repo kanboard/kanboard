@@ -3,8 +3,9 @@ Version 1.0.21 (unreleased)
 
 Bug fixes:
 
-* cs_CZ display the wrong locale in datetime picker
-* Datepicker is closed on blur event
+* Loading cs_CZ locale display the wrong language in datetime picker
+* Datepicker is closed unexpectedly on blur event
+* Fix bug in daily project summary CSV export
 
 Version 1.0.20
 --------------
