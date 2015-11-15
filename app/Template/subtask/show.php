@@ -1,5 +1,3 @@
-<?php if (! empty($subtasks)): ?>
-
 <?php $first_position = $subtasks[0]['position']; ?>
 <?php $last_position = $subtasks[count($subtasks) - 1]['position']; ?>
 
@@ -9,6 +7,7 @@
         <h2><?= t('Sub-Tasks') ?></h2>
     </div>
 
+    <?php if (! empty($subtasks)): ?>
     <table class="subtasks-table">
         <tr>
             <th class="column-40"><?= t('Title') ?></th>
@@ -86,6 +85,7 @@
         </tr>
         <?php endforeach ?>
     </table>
+    <?php endif ?>
 
     <?php if (! isset($not_editable)): ?>
         <form method="post" action="<?= $this->url->href('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
@@ -99,4 +99,3 @@
     <?php endif ?>
 
 </div>
-<?php endif ?>
