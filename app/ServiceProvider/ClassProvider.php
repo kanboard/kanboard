@@ -85,7 +85,6 @@ class ClassProvider implements ServiceProviderInterface
             'DateParser',
             'Helper',
             'Lexer',
-            'Session',
             'Template',
         ),
         'Core\Http' => array(
@@ -158,5 +157,7 @@ class ClassProvider implements ServiceProviderInterface
         $container['pluginLoader'] = new Loader($container);
 
         $container['cspRules'] = array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '* data:');
+
+        return $container;
     }
 }

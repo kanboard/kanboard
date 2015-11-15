@@ -10,6 +10,9 @@ use Pimple\Container;
  * @package core
  * @author  Frederic Guillot
  *
+ * @property \Kanboard\Core\Session\SessionManager                      $sessionManager
+ * @property \Kanboard\Core\Session\SessionStorage                      $sessionStorage
+ * @property \Kanboard\Core\Session\FlashMessage                        $flash
  * @property \Kanboard\Core\Helper                                      $helper
  * @property \Kanboard\Core\Mail\Client                                 $emailClient
  * @property \Kanboard\Core\Paginator                                   $paginator
@@ -17,7 +20,6 @@ use Pimple\Container;
  * @property \Kanboard\Core\Http\Request                                $request
  * @property \Kanboard\Core\Http\Router                                 $router
  * @property \Kanboard\Core\Http\Response                               $response
- * @property \Kanboard\Core\Session                                     $session
  * @property \Kanboard\Core\Template                                    $template
  * @property \Kanboard\Core\OAuth2                                      $oauth
  * @property \Kanboard\Core\Lexer                                       $lexer

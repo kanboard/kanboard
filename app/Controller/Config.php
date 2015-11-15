@@ -53,9 +53,9 @@ class Config extends Base
 
             if ($this->config->save($values)) {
                 $this->config->reload();
-                $this->session->flash(t('Settings saved successfully.'));
+                $this->flash->success(t('Settings saved successfully.'));
             } else {
-                $this->session->flashError(t('Unable to save your settings.'));
+                $this->flash->failure(t('Unable to save your settings.'));
             }
 
             $this->response->redirect($this->helper->url->to('config', $redirect));
@@ -210,7 +210,7 @@ class Config extends Base
     {
         $this->checkCSRFParam();
         $this->config->optimizeDatabase();
-        $this->session->flash(t('Database optimization done.'));
+        $this->flash->success(t('Database optimization done.'));
         $this->response->redirect($this->helper->url->to('config', 'index'));
     }
 
@@ -226,7 +226,7 @@ class Config extends Base
         $this->checkCSRFParam();
         $this->config->regenerateToken($type.'_token');
 
-        $this->session->flash(t('Token regenerated.'));
+        $this->flash->success(t('Token regenerated.'));
         $this->response->redirect($this->helper->url->to('config', $type));
     }
 }

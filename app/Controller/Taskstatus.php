@@ -40,9 +40,9 @@ class Taskstatus extends Base
             $this->checkCSRFParam();
 
             if ($this->taskStatus->$method($task['id'])) {
-                $this->session->flash($success_message);
+                $this->flash->success($success_message);
             } else {
-                $this->session->flashError($failure_message);
+                $this->flash->failure($failure_message);
             }
 
             if ($this->request->getStringParam('redirect') === 'board') {

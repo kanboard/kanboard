@@ -4,7 +4,7 @@ namespace Kanboard\Model;
 
 use Kanboard\Core\Translator;
 use Kanboard\Core\Security\Token;
-use Kanboard\Core\Session;
+use Kanboard\Core\Session\SessionManager;
 
 /**
  * Config model
@@ -145,8 +145,8 @@ class Config extends Setting
      */
     public function getCurrentLanguage()
     {
-        if ($this->userSession->isLogged() && ! empty($this->session['user']['language'])) {
-            return $this->session['user']['language'];
+        if ($this->userSession->isLogged() && ! empty($this->sessionStorage->user['language'])) {
+            return $this->sessionStorage->user['language'];
         }
 
         return $this->get('application_language', 'en_US');
@@ -162,17 +162,17 @@ class Config extends Setting
      */
     public function get($name, $default_value = '')
     {
-        if (! Session::isOpen()) {
+        if (! SessionManager::isOpen()) {
             return $this->getOption($name, $default_value);
         }
 
         // Cache config in session
-        if (! isset($this->session['config'][$name])) {
-            $this->session['config'] = $this->getAll();
+        if (! isset($this->sessionStorage->config[$name])) {
+            $this->sessionStorage->config = $this->getAll();
         }
 
-        if (! empty($this->session['config'][$name])) {
-            return $this->session['config'][$name];
+        if (! empty($this->sessionStorage->config[$name])) {
+            return $this->sessionStorage->config[$name];
         }
 
         return $default_value;
@@ -185,7 +185,7 @@ class Config extends Setting
      */
     public function reload()
     {
-        $this->session['config'] = $this->getAll();
+        $this->sessionStorage->config = $this->getAll();
         $this->setupTranslations();
     }
 
@@ -207,8 +207,8 @@ class Config extends Setting
      */
     public function getCurrentTimezone()
     {
-        if ($this->userSession->isLogged() && ! empty($this->session['user']['timezone'])) {
-            return $this->session['user']['timezone'];
+        if ($this->userSession->isLogged() && ! empty($this->sessionStorage->user['timezone'])) {
+            return $this->sessionStorage->user['timezone'];
         }
 
         return $this->get('application_timezone', 'UTC');

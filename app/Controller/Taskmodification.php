@@ -35,9 +35,9 @@ class Taskmodification extends Base
         list($valid, ) = $this->taskValidator->validateTimeModification($values);
 
         if ($valid && $this->taskModification->update($values)) {
-            $this->session->flash(t('Task updated successfully.'));
+            $this->flash->success(t('Task updated successfully.'));
         } else {
-            $this->session->flashError(t('Unable to update your task.'));
+            $this->flash->failure(t('Unable to update your task.'));
         }
 
         $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
@@ -60,9 +60,9 @@ class Taskmodification extends Base
 
             if ($valid) {
                 if ($this->taskModification->update($values)) {
-                    $this->session->flash(t('Task updated successfully.'));
+                    $this->flash->success(t('Task updated successfully.'));
                 } else {
-                    $this->session->flashError(t('Unable to update your task.'));
+                    $this->flash->failure(t('Unable to update your task.'));
                 }
 
                 if ($ajax) {
@@ -140,7 +140,7 @@ class Taskmodification extends Base
         list($valid, $errors) = $this->taskValidator->validateModification($values);
 
         if ($valid && $this->taskModification->update($values)) {
-            $this->session->flash(t('Task updated successfully.'));
+            $this->flash->success(t('Task updated successfully.'));
 
             if ($this->request->isAjax()) {
                 $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
@@ -148,7 +148,7 @@ class Taskmodification extends Base
                 $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
             }
         } else {
-            $this->session->flashError(t('Unable to update your task.'));
+            $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);
         }
     }
@@ -169,9 +169,9 @@ class Taskmodification extends Base
 
             if ($valid) {
                 if ($this->taskModification->update($values)) {
-                    $this->session->flash(t('Task updated successfully.'));
+                    $this->flash->success(t('Task updated successfully.'));
                 } else {
-                    $this->session->flashError(t('Unable to update your task.'));
+                    $this->flash->failure(t('Unable to update your task.'));
                 }
 
                 $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));

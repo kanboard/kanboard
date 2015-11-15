@@ -8,6 +8,8 @@ use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
 use SimpleLogger\Logger;
 use SimpleLogger\File;
+use Kanboard\Core\Session\FlashMessage;
+use Kanboard\Core\Session\SessionStorage;
 
 class FakeHttpClient
 {
@@ -93,6 +95,12 @@ abstract class Base extends PHPUnit_Framework_TestCase
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getType', 'getSelectedTypes'))
             ->getMock();
+
+        $this->container['sessionStorage'] = new SessionStorage;
+
+        $this->container['flash'] = function($c) {
+            return new FlashMessage($c);
+        };
     }
 
     public function tearDown()

@@ -119,9 +119,9 @@ class Action extends Base
 
         if ($valid) {
             if ($this->action->create($values) !== false) {
-                $this->session->flash(t('Your automatic action have been created successfully.'));
+                $this->flash->success(t('Your automatic action have been created successfully.'));
             } else {
-                $this->session->flashError(t('Unable to create your automatic action.'));
+                $this->flash->failure(t('Unable to create your automatic action.'));
             }
         }
 
@@ -158,9 +158,9 @@ class Action extends Base
         $action = $this->action->getById($this->request->getIntegerParam('action_id'));
 
         if (! empty($action) && $this->action->remove($action['id'])) {
-            $this->session->flash(t('Action removed successfully.'));
+            $this->flash->success(t('Action removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this action.'));
+            $this->flash->failure(t('Unable to remove this action.'));
         }
 
         $this->response->redirect($this->helper->url->to('action', 'index', array('project_id' => $project['id'])));

@@ -59,10 +59,10 @@ class Taskcreation extends Base
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
         if ($valid && $this->taskCreation->create($values)) {
-            $this->session->flash(t('Task created successfully.'));
+            $this->flash->success(t('Task created successfully.'));
             $this->afterSave($project, $values);
         } else {
-            $this->session->flashError(t('Unable to create your task.'));
+            $this->flash->failure(t('Unable to create your task.'));
         }
 
         $this->create($values, $errors);

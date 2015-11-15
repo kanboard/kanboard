@@ -51,7 +51,7 @@ class Client extends Base
         $author = 'Kanboard';
 
         if ($this->userSession->isLogged()) {
-            $author = e('%s via Kanboard', $this->user->getFullname($this->session['user']));
+            $author = e('%s via Kanboard', $this->helper->user->getFullname());
         }
 
         $this->getTransport(MAIL_TRANSPORT)->sendEmail($email, $name, $subject, $html, $author);

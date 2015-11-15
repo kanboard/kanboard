@@ -6,7 +6,6 @@ use Kanboard\Helper\User;
 use Kanboard\Model\Project;
 use Kanboard\Model\ProjectPermission;
 use Kanboard\Model\User as UserModel;
-use Kanboard\Core\Session;
 
 class UserHelperTest extends Base
 {
@@ -24,7 +23,6 @@ class UserHelperTest extends Base
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new UserModel($this->container);
-        $session = new Session;
 
         // We create our user
         $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
@@ -36,7 +34,7 @@ class UserHelperTest extends Base
         $this->assertFalse($pp->isManager(1, 2));
 
         // We fake a session for him
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
             'is_project_admin' => true,
@@ -51,7 +49,6 @@ class UserHelperTest extends Base
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new UserModel($this->container);
-        $session = new Session;
 
         // We create our user
         $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
@@ -63,7 +60,7 @@ class UserHelperTest extends Base
         $this->assertFalse($pp->isManager(1, 2));
 
         // We fake a session for him
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
             'is_project_admin' => false,
@@ -78,7 +75,6 @@ class UserHelperTest extends Base
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new UserModel($this->container);
-        $session = new Session;
 
         // We create our user
         $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
@@ -90,7 +86,7 @@ class UserHelperTest extends Base
         $this->assertTrue($pp->isManager(1, 2));
 
         // We fake a session for him
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
             'is_project_admin' => false,
@@ -105,7 +101,6 @@ class UserHelperTest extends Base
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new UserModel($this->container);
-        $session = new Session;
 
         // We create our user
         $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
@@ -117,7 +112,7 @@ class UserHelperTest extends Base
         $this->assertFalse($pp->isManager(1, 2));
 
         // We fake a session for him
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
             'is_project_admin' => true,
@@ -132,7 +127,6 @@ class UserHelperTest extends Base
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new UserModel($this->container);
-        $session = new Session;
 
         // We create our user
         $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
@@ -144,7 +138,7 @@ class UserHelperTest extends Base
         $this->assertFalse($pp->isManager(1, 2));
 
         // We fake a session for him
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
             'is_project_admin' => false,
@@ -159,7 +153,6 @@ class UserHelperTest extends Base
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new UserModel($this->container);
-        $session = new Session;
 
         // We create our user
         $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
@@ -171,7 +164,7 @@ class UserHelperTest extends Base
         $this->assertTrue($pp->isManager(1, 2));
 
         // We fake a session for him
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
             'is_project_admin' => false,

@@ -43,19 +43,16 @@ class TaskAssignCurrentUserTest extends Base
 
     public function testExecute()
     {
+        $this->container['sessionStorage']->user = array('id' => 5);
+
         $action = new TaskAssignCurrentUser($this->container, 1, Task::EVENT_MOVE_COLUMN);
         $action->setParam('column_id', 2);
-        $_SESSION = array(
-            'user' => array('id' => 5)
-        );
 
         // We create a task in the first column
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $us = new UserSession($this->container);
 
-        $this->assertEquals(5, $us->getId());
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
 

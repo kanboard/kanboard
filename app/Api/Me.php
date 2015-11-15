@@ -14,7 +14,7 @@ class Me extends Base
 {
     public function getMe()
     {
-        return $this->session['user'];
+        return $this->sessionStorage->user;
     }
 
     public function getMyDashboard()

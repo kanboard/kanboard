@@ -82,9 +82,9 @@ class Comment extends Base
 
         if ($valid) {
             if ($this->comment->create($values)) {
-                $this->session->flash(t('Comment added successfully.'));
+                $this->flash->success(t('Comment added successfully.'));
             } else {
-                $this->session->flashError(t('Unable to create your comment.'));
+                $this->flash->failure(t('Unable to create your comment.'));
             }
 
             if ($ajax) {
@@ -131,9 +131,9 @@ class Comment extends Base
 
         if ($valid) {
             if ($this->comment->update($values)) {
-                $this->session->flash(t('Comment updated successfully.'));
+                $this->flash->success(t('Comment updated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to update your comment.'));
+                $this->flash->failure(t('Unable to update your comment.'));
             }
 
             $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comment-'.$comment['id']));
@@ -171,9 +171,9 @@ class Comment extends Base
         $comment = $this->getComment();
 
         if ($this->comment->remove($comment['id'])) {
-            $this->session->flash(t('Comment removed successfully.'));
+            $this->flash->success(t('Comment removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this comment.'));
+            $this->flash->failure(t('Unable to remove this comment.'));
         }
 
         $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));

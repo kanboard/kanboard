@@ -44,10 +44,10 @@ class Customfilter extends Base
 
         if ($valid) {
             if ($this->customFilter->create($values)) {
-                $this->session->flash(t('Your custom filter have been created successfully.'));
+                $this->flash->success(t('Your custom filter have been created successfully.'));
                 $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to create your custom filter.'));
+                $this->flash->failure(t('Unable to create your custom filter.'));
             }
         }
 
@@ -68,9 +68,9 @@ class Customfilter extends Base
         $this->checkPermission($project, $filter);
 
         if ($this->customFilter->remove($filter['id'])) {
-            $this->session->flash(t('Custom filter removed successfully.'));
+            $this->flash->success(t('Custom filter removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this custom filter.'));
+            $this->flash->failure(t('Unable to remove this custom filter.'));
         }
 
         $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
@@ -123,10 +123,10 @@ class Customfilter extends Base
 
         if ($valid) {
             if ($this->customFilter->update($values)) {
-                $this->session->flash(t('Your custom filter have been updated successfully.'));
+                $this->flash->success(t('Your custom filter have been updated successfully.'));
                 $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to update custom filter.'));
+                $this->flash->failure(t('Unable to update custom filter.'));
             }
         }
 

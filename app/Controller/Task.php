@@ -159,9 +159,9 @@ class Task extends Base
             $this->checkCSRFParam();
 
             if ($this->task->remove($task['id'])) {
-                $this->session->flash(t('Task removed successfully.'));
+                $this->flash->success(t('Task removed successfully.'));
             } else {
-                $this->session->flashError(t('Unable to remove this task.'));
+                $this->flash->failure(t('Unable to remove this task.'));
             }
 
             $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));

@@ -62,18 +62,17 @@ class App extends \Kanboard\Core\Base
      */
     public function flashMessage()
     {
-        $html = '';
+        $success_message = $this->flash->getMessage('success');
+        $failure_message = $this->flash->getMessage('failure');
 
-        if (isset($this->session['flash_message'])) {
-            $html = '<div class="alert alert-success alert-fade-out">'.$this->helper->e($this->session['flash_message']).'</div>';
-            unset($this->session['flash_message']);
-            unset($this->session['flash_error_message']);
-        } elseif (isset($this->session['flash_error_message'])) {
-            $html = '<div class="alert alert-error">'.$this->helper->e($this->session['flash_error_message']).'</div>';
-            unset($this->session['flash_message']);
-            unset($this->session['flash_error_message']);
+        if (! empty($success_message)) {
+            return '<div class="alert alert-success alert-fade-out">'.$this->helper->e($success_message).'</div>';
         }
 
-        return $html;
+        if (! empty($failure_message)) {
+            return '<div class="alert alert-error">'.$this->helper->e($failure_message).'</div>';
+        }
+
+        return '';
     }
 }

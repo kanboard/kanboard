@@ -5,7 +5,7 @@ namespace Kanboard\Model;
 use PicoDb\Database;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Kanboard\Core\Session;
+use Kanboard\Core\Session\SessionManager;
 use Kanboard\Core\Security\Token;
 
 /**
@@ -320,8 +320,8 @@ class User extends Base
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
         // If the user is connected refresh his session
-        if (Session::isOpen() && $this->userSession->getId() == $values['id']) {
-            $this->userSession->refresh();
+        if (SessionManager::isOpen() && $this->userSession->getId() == $values['id']) {
+            $this->userSession->initialize($this->getById($this->userSession->getId()));
         }
 
         return $result;
@@ -587,7 +587,7 @@ class User extends Base
         if ($v->execute()) {
 
             // Check password
-            if ($this->authentication->authenticate($this->session['user']['username'], $values['current_password'])) {
+            if ($this->authentication->authenticate($this->userSession->getUsername(), $values['current_password'])) {
                 return array(true, array());
             } else {
                 return array(false, array('current_password' => array(t('Wrong password'))));

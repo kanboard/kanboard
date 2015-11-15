@@ -72,9 +72,9 @@ class Twofactor extends User
         }
 
         // Allow the user to test or disable the feature
-        $_SESSION['user']['twofactor_activated'] = false;
+        $this->userSession->disable2FA();
 
-        $this->session->flash(t('User updated successfully.'));
+        $this->flash->success(t('User updated successfully.'));
         $this->response->redirect($this->helper->url->to('twofactor', 'index', array('user_id' => $user['id'])));
     }
 
@@ -92,9 +92,9 @@ class Twofactor extends User
         $values = $this->request->getValues();
 
         if (! empty($values['code']) && $otp->checkTotp(Base32::decode($user['twofactor_secret']), $values['code'])) {
-            $this->session->flash(t('The two factor authentication code is valid.'));
+            $this->flash->success(t('The two factor authentication code is valid.'));
         } else {
-            $this->session->flashError(t('The two factor authentication code is not valid.'));
+            $this->flash->failure(t('The two factor authentication code is not valid.'));
         }
 
         $this->response->redirect($this->helper->url->to('twofactor', 'index', array('user_id' => $user['id'])));
@@ -114,11 +114,11 @@ class Twofactor extends User
         $values = $this->request->getValues();
 
         if (! empty($values['code']) && $otp->checkTotp(Base32::decode($user['twofactor_secret']), $values['code'])) {
-            $this->session['2fa_validated'] = true;
-            $this->session->flash(t('The two factor authentication code is valid.'));
+            $this->sessionStorage->postAuth['validated'] = true;
+            $this->flash->success(t('The two factor authentication code is valid.'));
             $this->response->redirect($this->helper->url->to('app', 'index'));
         } else {
-            $this->session->flashError(t('The two factor authentication code is not valid.'));
+            $this->flash->failure(t('The two factor authentication code is not valid.'));
             $this->response->redirect($this->helper->url->to('twofactor', 'code'));
         }
     }

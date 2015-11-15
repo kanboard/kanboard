@@ -55,10 +55,10 @@ class Column extends Base
 
         if ($valid) {
             if ($this->board->addColumn($project['id'], $data['title'], $data['task_limit'], $data['description'])) {
-                $this->session->flash(t('Board updated successfully.'));
+                $this->flash->success(t('Board updated successfully.'));
                 $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to update this board.'));
+                $this->flash->failure(t('Unable to update this board.'));
             }
         }
 
@@ -98,10 +98,10 @@ class Column extends Base
 
         if ($valid) {
             if ($this->board->updateColumn($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
-                $this->session->flash(t('Board updated successfully.'));
+                $this->flash->success(t('Board updated successfully.'));
                 $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to update this board.'));
+                $this->flash->failure(t('Unable to update this board.'));
             }
         }
 
@@ -155,9 +155,9 @@ class Column extends Base
         $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
 
         if (! empty($column) && $this->board->removeColumn($column['id'])) {
-            $this->session->flash(t('Column removed successfully.'));
+            $this->flash->success(t('Column removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this column.'));
+            $this->flash->failure(t('Unable to remove this column.'));
         }
 
         $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));

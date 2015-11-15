@@ -99,10 +99,10 @@ class User extends Base
                     $this->userNotificationType->saveSelectedTypes($user_id, array(MailNotification::TYPE));
                 }
 
-                $this->session->flash(t('User created successfully.'));
+                $this->flash->success(t('User created successfully.'));
                 $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user_id)));
             } else {
-                $this->session->flashError(t('Unable to create your user.'));
+                $this->flash->failure(t('Unable to create your user.'));
                 $values['project_id'] = $project_id;
             }
         }
@@ -201,7 +201,7 @@ class User extends Base
         if ($this->request->isPost()) {
             $values = $this->request->getValues();
             $this->userNotification->saveSettings($user['id'], $values);
-            $this->session->flash(t('User updated successfully.'));
+            $this->flash->success(t('User updated successfully.'));
             $this->response->redirect($this->helper->url->to('user', 'notifications', array('user_id' => $user['id'])));
         }
 
@@ -226,7 +226,7 @@ class User extends Base
         if ($this->request->isPost()) {
             $values = $this->request->getValues();
             $this->userMetadata->save($user['id'], $values);
-            $this->session->flash(t('User updated successfully.'));
+            $this->flash->success(t('User updated successfully.'));
             $this->response->redirect($this->helper->url->to('user', 'integrations', array('user_id' => $user['id'])));
         }
 
@@ -264,9 +264,9 @@ class User extends Base
             $this->checkCSRFParam();
 
             if ($this->user->{$switch.'PublicAccess'}($user['id'])) {
-                $this->session->flash(t('User updated successfully.'));
+                $this->flash->success(t('User updated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to update this user.'));
+                $this->flash->failure(t('Unable to update this user.'));
             }
 
             $this->response->redirect($this->helper->url->to('user', 'share', array('user_id' => $user['id'])));
@@ -295,9 +295,9 @@ class User extends Base
 
             if ($valid) {
                 if ($this->user->update($values)) {
-                    $this->session->flash(t('Password modified successfully.'));
+                    $this->flash->success(t('Password modified successfully.'));
                 } else {
-                    $this->session->flashError(t('Unable to change the password.'));
+                    $this->flash->failure(t('Unable to change the password.'));
                 }
 
                 $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
@@ -344,9 +344,9 @@ class User extends Base
 
             if ($valid) {
                 if ($this->user->update($values)) {
-                    $this->session->flash(t('User updated successfully.'));
+                    $this->flash->success(t('User updated successfully.'));
                 } else {
-                    $this->session->flashError(t('Unable to update your user.'));
+                    $this->flash->failure(t('Unable to update your user.'));
                 }
 
                 $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
@@ -381,9 +381,9 @@ class User extends Base
 
             if ($valid) {
                 if ($this->user->update($values)) {
-                    $this->session->flash(t('User updated successfully.'));
+                    $this->flash->success(t('User updated successfully.'));
                 } else {
-                    $this->session->flashError(t('Unable to update your user.'));
+                    $this->flash->failure(t('Unable to update your user.'));
                 }
 
                 $this->response->redirect($this->helper->url->to('user', 'authentication', array('user_id' => $user['id'])));
@@ -410,9 +410,9 @@ class User extends Base
             $this->checkCSRFParam();
 
             if ($this->user->remove($user['id'])) {
-                $this->session->flash(t('User removed successfully.'));
+                $this->flash->success(t('User removed successfully.'));
             } else {
-                $this->session->flashError(t('Unable to remove this user.'));
+                $this->flash->failure(t('Unable to remove this user.'));
             }
 
             $this->response->redirect($this->helper->url->to('user', 'index'));

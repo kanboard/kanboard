@@ -182,8 +182,7 @@ class TaskCreationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
-        $_SESSION = array();
-        $_SESSION['user']['id'] = 1;
+        $this->container['sessionStorage']->user = array('id' => 1);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
@@ -194,8 +193,6 @@ class TaskCreationTest extends Base
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(1, $task['creator_id']);
-
-        $_SESSION = array();
     }
 
     public function testColumnId()

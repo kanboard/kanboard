@@ -24,10 +24,10 @@ class Taskduplication extends Base
             $task_id = $this->taskDuplication->duplicate($task['id']);
 
             if ($task_id > 0) {
-                $this->session->flash(t('Task created successfully.'));
+                $this->flash->success(t('Task created successfully.'));
                 $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task_id)));
             } else {
-                $this->session->flashError(t('Unable to create this task.'));
+                $this->flash->failure(t('Unable to create this task.'));
                 $this->response->redirect($this->helper->url->to('taskduplication', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
             }
         }
@@ -56,11 +56,11 @@ class Taskduplication extends Base
                                                                 $values['column_id'],
                                                                 $values['category_id'],
                                                                 $values['owner_id'])) {
-                $this->session->flash(t('Task updated successfully.'));
+                $this->flash->success(t('Task updated successfully.'));
                 $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task['id'])));
             }
 
-            $this->session->flashError(t('Unable to update your task.'));
+            $this->flash->failure(t('Unable to update your task.'));
         }
 
         $this->chooseDestination($task, 'task_duplication/move');
@@ -86,12 +86,12 @@ class Taskduplication extends Base
                 );
 
                 if ($task_id > 0) {
-                    $this->session->flash(t('Task created successfully.'));
+                    $this->flash->success(t('Task created successfully.'));
                     $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task_id)));
                 }
             }
 
-            $this->session->flashError(t('Unable to create your task.'));
+            $this->flash->failure(t('Unable to create your task.'));
         }
 
         $this->chooseDestination($task, 'task_duplication/copy');

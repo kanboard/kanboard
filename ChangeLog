@@ -5,6 +5,11 @@ Improvements:
 
 * Improve error handling of plugins
 
+Internal code refactoring:
+
+* Rewrite of session management
+* Move some classes to a new namespace Kanboard\Core\Http
+
 Bug fixes:
 
 * Loading cs_CZ locale display the wrong language in datetime picker

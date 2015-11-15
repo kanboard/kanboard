@@ -43,9 +43,11 @@ class Auth extends Base
         list($valid, $errors) = $this->authentication->validateForm($values);
 
         if ($valid) {
-            if (! empty($this->session['login_redirect']) && ! filter_var($this->session['login_redirect'], FILTER_VALIDATE_URL)) {
-                $redirect = $this->session['login_redirect'];
-                unset($this->session['login_redirect']);
+            if (isset($this->sessionStorage->redirectAfterLogin)
+                && ! empty($this->sessionStorage->redirectAfterLogin)
+                && ! filter_var($this->sessionStorage->redirectAfterLogin, FILTER_VALIDATE_URL)) {
+                $redirect = $this->sessionStorage->redirectAfterLogin;
+                unset($this->sessionStorage->redirectAfterLogin);
                 $this->response->redirect($redirect);
             }
 
@@ -63,7 +65,7 @@ class Auth extends Base
     public function logout()
     {
         $this->authentication->backend('rememberMe')->destroy($this->userSession->getId());
-        $this->session->close();
+        $this->sessionManager->close();
         $this->response->redirect($this->helper->url->to('auth', 'login'));
     }
 
@@ -78,7 +80,7 @@ class Auth extends Base
 
         $builder = new CaptchaBuilder;
         $builder->build();
-        $this->session['captcha'] = $builder->getPhrase();
+        $this->sessionStorage->captcha = $builder->getPhrase();
         $builder->output();
     }
 }
