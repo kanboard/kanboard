@@ -22,6 +22,9 @@
         <li <?= $this->app->getRouterController() === 'link' && $this->app->getRouterAction() === 'index' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('Link settings'), 'link', 'index') ?>
         </li>
+        <li <?= $this->app->getRouterAction() === 'color' ? 'class="active"' : '' ?>>
+            <?= $this->url->link(t('Custom colors'), 'config', 'color') ?>
+        </li>
         <li <?= $this->app->getRouterController() === 'currency' && $this->app->getRouterAction() === 'index' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('Currency rates'), 'currency', 'index') ?>
         </li>

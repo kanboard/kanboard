@@ -5,7 +5,21 @@ namespace Schema;
 use PDO;
 use Kanboard\Core\Security\Token;
 
-const VERSION = 73;
+const VERSION = 74;
+
+function version_74(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE colors (
+            color_id VARCHAR(50) NOT NULL,
+            name VARCHAR(30) NOT NULL,
+            background VARCHAR(25) NOT NULL,
+            border VARCHAR(25) NOT NULL,
+            is_usable SMALLINT NOT NULL DEFAULT '1',
+            position SMALLINT NOT NULL DEFAULT 0
+        )
+    ");
+}
 
 function version_73(PDO $pdo)
 {

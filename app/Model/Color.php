@@ -11,6 +11,13 @@ namespace Kanboard\Model;
 class Color extends Base
 {
     /**
+     * SQL table name for custom colors
+     *
+     * @var string
+     */
+    const TABLE = 'colors';
+
+    /**
      * Default colors
      *
      * @access private
@@ -100,6 +107,15 @@ class Color extends Base
     );
 
     /**
+     * Colors used in the app, since defaults can be overriden in the database.
+     * Each color also contains bool 'is_usable' array key.
+     *
+     * @access private
+     * @var array
+     */
+    private $colors = null;
+
+    /**
      * Find a color id from the name or the id
      *
      * @access public
@@ -108,9 +124,12 @@ class Color extends Base
      */
     public function find($color)
     {
+        if (!$this->colors) {
+            $this->loadColors();
+        }
         $color = strtolower($color);
 
-        foreach ($this->default_colors as $color_id => $params) {
+        foreach ($this->colors as $color_id => $params) {
             if ($color_id === $color) {
                 return $color_id;
             } elseif ($color === strtolower($params['name'])) {
@@ -130,11 +149,14 @@ class Color extends Base
      */
     public function getColorProperties($color_id)
     {
-        if (isset($this->default_colors[$color_id])) {
-            return $this->default_colors[$color_id];
+        if (!$this->colors) {
+            $this->loadColors();
+        }
+        if (isset($this->colors[$color_id])) {
+            return $this->colors[$color_id];
         }
 
-        return $this->default_colors[$this->getDefaultColor()];
+        return $this->colors[$this->getDefaultColor()];
     }
 
     /**
@@ -145,10 +167,15 @@ class Color extends Base
      */
     public function getList($prepend = false)
     {
+        if (!$this->colors) {
+            $this->loadColors();
+        }
         $listing = $prepend ? array('' => t('All colors')) : array();
 
-        foreach ($this->default_colors as $color_id => $color) {
-            $listing[$color_id] = t($color['name']);
+        foreach ($this->colors as $color_id => $color) {
+            if ($color['is_usable']) {
+                $listing[$color_id] = t($color['name']);
+            }
         }
 
         return $listing;
@@ -174,6 +201,30 @@ class Color extends Base
     public function getDefaultColors()
     {
         return $this->default_colors;
+    }
+
+    /**
+     * Get the app colors
+     *
+     * @access public
+     * @param  bool   $only_usable_colors  Wether return only a list of the usable colors or all of them (for control panel).
+     * @return array
+     */
+    public function getColors($only_usable_colors = true)
+    {
+        if (!$this->colors) {
+            $this->loadColors();
+        }
+        if (!$only_usable_colors) {
+            return $this->colors;
+        }
+        $usable_colors = array();
+        foreach ($this->colors as $color_id => $values) {
+            if ($values['is_usable']) {
+                $usable_colors[$color_id] = $values;
+            }
+        }
+        return $usable_colors;
     }
 
     /**
@@ -210,16 +261,102 @@ class Color extends Base
      */
     public function getCss()
     {
+        if (!$this->colors) {
+            $this->loadColors();
+        }
         $buffer = '';
 
-        foreach ($this->default_colors as $color => $values) {
+        foreach ($this->colors as $color => $values) {
             $buffer .= 'div.color-'.$color.' {';
             $buffer .= 'background-color: '.$values['background'].';';
-            $buffer .= 'border-color: '.$values['border'];
+            $buffer .= 'border-color: '.$values['border'].' !important';
             $buffer .= '}';
             $buffer .= 'td.color-'.$color.' { background-color: '.$values['background'].'}';
         }
 
         return $buffer;
+    }
+
+    /**
+     * Load colors from database, and if none exist, add default ones.
+     *
+     * @access private
+     * @return void
+     */
+    private function loadColors()
+    {
+        if ($this->colors && !empty($this->colors)) {
+            return;
+        }
+
+        $colors = $this->db->table(self::TABLE)->asc('position')->findAll();
+        if (empty($colors)) {
+            $this->populateTableWithDefaults();
+            $colors = $this->db->table(self::TABLE)->asc('position')->findAll();
+        }
+
+        $this->colors = array();
+        foreach ($colors as $color) {
+            $color['is_usable'] = intval($color['is_usable']) > 0;
+            $this->colors[$color['color_id']] = $color;
+        }
+    }
+
+    /**
+     * Store default colors in the database as default values.
+     *
+     * @access private
+     * @return void
+     */
+    private function populateTableWithDefaults()
+    {
+        $position = 1;
+        foreach ($this->default_colors as $color_id => $values) {
+            $values['color_id'] = $color_id;
+            $values['is_usable'] = 1;
+            $values['position'] = $position;
+
+            $this->db->table(self::TABLE)->save($values);
+
+            $position++;
+        }
+    }
+
+    /**
+     * Update color data. The abormal expected format of the input
+     * is due to the way HTML forms work in the framework, and this
+     * method is used to process form at Settings / Custom colors.
+     *
+     * @access public
+     * @param  array    $values
+     */
+    public function save(array $values)
+    {
+        if (!$this->colors) {
+            $this->loadColors();
+        }
+
+        $results = array();
+        $this->db->startTransaction();
+        foreach ($this->default_colors as $color_id => $defval) {
+            if (!isset($values[$color_id.'_name'])) {
+                continue;
+            }
+            $color = array(
+                'name' => $values[$color_id.'_name'],
+                'is_usable' => isset($values[$color_id.'_is_usable']) ? 1 : 0,
+                'background' => $values[$color_id.'_background'],
+                'border' => $values[$color_id.'_border']
+            );
+
+            $results[] = $this->db->table(self::TABLE)->eq('color_id', $color_id)->save($color);
+        }
+
+        $this->db->closeTransaction();
+
+        // Force a refetch.
+        $this->colors = null;
+
+        return ! in_array(false, $results, true);
     }
 }

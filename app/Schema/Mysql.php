@@ -5,7 +5,22 @@ namespace Schema;
 use PDO;
 use Kanboard\Core\Security\Token;
 
-const VERSION = 93;
+const VERSION = 94;
+
+function version_94(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE colors (
+            color_id VARCHAR(50) NOT NULL COMMENT 'Backwards compatible format with Kanboard color IDs.',
+            name VARCHAR(30) NOT NULL COMMENT 'Name shown. Can be changed to semantics: Important, Idea...',
+            background VARCHAR(25) NOT NULL COMMENT 'Any valid HTML way of representing color.',
+            border VARCHAR(25) NOT NULL COMMENT 'Any valid HTML way of representing color.',
+            is_usable TINYINT(1) NOT NULL DEFAULT '1',
+            position TINYINT NOT NULL DEFAULT '0' COMMENT 'Used to sort colors in the same order as before in task view.',
+            PRIMARY KEY(color_id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+}
 
 function version_93(PDO $pdo)
 {

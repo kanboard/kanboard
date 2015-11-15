@@ -221,3 +221,23 @@ ul.form-tabs-nav {
     display: none;
     overflow: auto;
 }
+
+.color-settings {
+    border:0;
+}
+
+.color-settings input {
+    margin:0;
+}
+
+.color-settings input[type=text] {
+    width:150px;
+}
+
+.color-settings .square {
+    display:inline-block;
+    width:30px;
+    height:30px;
+    margin:0 5px 5px 0;
+    border:1px solid #000;
+}
