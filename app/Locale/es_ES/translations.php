@@ -1064,4 +1064,5 @@ return array(
     'Duplicates are not imported' => 'Los duplicados no son importados',
     'Usernames must be lowercase and unique' => 'Los nombres de usuario deben ser únicos y contener sólo minúsculas',
     'Passwords will be encrypted if present' => 'Las contraseñas serán cifradas si es que existen',
+    // '%s attached a new file to the task %s' => '',
 );

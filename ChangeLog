@@ -16,6 +16,7 @@ Bug fixes:
 * Datepicker is closed unexpectedly on blur event
 * Fix bug in daily project summary CSV export
 * Fix PHP error when adding a new user with email notification enabled
+* Add missing template for activity stream to show event "file.create"
 
 Version 1.0.20
 --------------
