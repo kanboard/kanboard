@@ -1066,6 +1066,7 @@ return array(
     'Duplicates are not imported' => 'Les doublons ne sont pas importés',
     'Usernames must be lowercase and unique' => 'Les noms d\'utilisateurs doivent être en minuscule et unique',
     'Passwords will be encrypted if present' => 'Les mots de passe seront chiffrés si présent',
-    'Assign automatically a category based on a color' => 'Assigner automatiquement une catégorie par rapport à un lien',
     '%s attached a new file to the task %s' => '%s a attaché un nouveau fichier à la tâche %s',
+    'Link type' => 'Type de lien',
+    'Assign automatically a category based on a link' => 'Assigner automatiquement une catégorie en fonction d\'un lien',
 );

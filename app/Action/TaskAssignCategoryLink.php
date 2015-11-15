@@ -9,6 +9,7 @@ use Kanboard\Model\TaskLink;
  *
  * @package action
  * @author  Olivier Maridat
+ * @author  Frederic Guillot
  */
 class TaskAssignCategoryLink extends Base
 {
@@ -35,7 +36,7 @@ class TaskAssignCategoryLink extends Base
     {
         return array(
             'category_id' => t('Category'),
-            'link_id' => t('Link id'),
+            'link_id' => t('Link type'),
         );
     }
 
@@ -79,6 +80,11 @@ class TaskAssignCategoryLink extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['link_id'] == $this->getParam('link_id');
+        if ($data['link_id'] == $this->getParam('link_id')) {
+            $task = $this->taskFinder->getById($data['task_id']);
+            return empty($task['category_id']);
+        }
+
+        return false;
     }
 }

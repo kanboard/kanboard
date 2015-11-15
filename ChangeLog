@@ -1,6 +1,10 @@
 Version 1.0.21 (unreleased)
 ---------------------------
 
+New features:
+
+* New automatic action: Assign a category based on a link
+
 Improvements:
 
 * Improve error handling of plugins
