@@ -2,7 +2,6 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Model\NotificationType;
 use Kanboard\Notification\Mail as MailNotification;
 
 /**
