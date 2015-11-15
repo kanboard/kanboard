@@ -8,6 +8,7 @@ New features:
 Improvements:
 
 * Improve error handling of plugins
+* Use PHP7 function random_bytes() to generate tokens if available
 
 Internal code refactoring:
 
