@@ -1026,7 +1026,7 @@ function version_1(PDO $pdo)
     $pdo->exec("
         CREATE TABLE projects (
             id INTEGER PRIMARY KEY,
-            name TEXT NOCASE NOT NULL UNIQUE,
+            name TEXT NOCASE NOT NULL,
             is_active INTEGER DEFAULT 1
         )
     ");

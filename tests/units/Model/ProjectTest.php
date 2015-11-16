@@ -44,6 +44,14 @@ class ProjectTest extends Base
         $this->assertEmpty($project['token']);
     }
 
+    public function testCreationWithDuplicateName()
+    {
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertEquals(2, $p->create(array('name' => 'UnitTest')));
+    }
+
     public function testCreationWithStartAndDate()
     {
         $p = new Project($this->container);

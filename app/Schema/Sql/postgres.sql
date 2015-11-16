@@ -1315,14 +1315,6 @@ ALTER TABLE ONLY project_has_users
 
 
 --
--- Name: projects_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY projects
-    ADD CONSTRAINT projects_name_key UNIQUE (name);
-
-
---
 -- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1930,8 +1922,8 @@ INSERT INTO settings (option, value) VALUES ('board_highlight_period', '172800')
 INSERT INTO settings (option, value) VALUES ('board_public_refresh_interval', '60');
 INSERT INTO settings (option, value) VALUES ('board_private_refresh_interval', '10');
 INSERT INTO settings (option, value) VALUES ('board_columns', '');
-INSERT INTO settings (option, value) VALUES ('webhook_token', '29877f0b69d230e57bee9d02e0aa9034a69f7a2c0ba1e3b5d3b390241f36');
-INSERT INTO settings (option, value) VALUES ('api_token', '5682955e965bd0cd7618559a25131fe6094d9fff3bb56c31291d64991353');
+INSERT INTO settings (option, value) VALUES ('webhook_token', 'ca57fbbc9e17d00a1ca8c2e45d8dc5d1b54ede740f72709bae2e8de26fbd');
+INSERT INTO settings (option, value) VALUES ('api_token', 'bc20677f12faa32d9426af9a31041b8576c13f4ab54b641bae955112ae79');
 INSERT INTO settings (option, value) VALUES ('application_language', 'en_US');
 INSERT INTO settings (option, value) VALUES ('application_timezone', 'UTC');
 INSERT INTO settings (option, value) VALUES ('application_url', '');
@@ -1995,4 +1987,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$fDbO.nKAjDxm70DyghADCuqIhF919BAkRTAq0bARDTGwcxZscqIZq', '1');INSERT INTO schema_version VALUES ('73');
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$4/2e1E1VIeZVc5PhRHQJmuOBI/UV7H73hRyH60IvpTpY05G9tD49W', '1');INSERT INTO schema_version VALUES ('74');

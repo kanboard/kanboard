@@ -5,7 +5,12 @@ namespace Schema;
 use PDO;
 use Kanboard\Core\Security\Token;
 
-const VERSION = 73;
+const VERSION = 74;
+
+function version_74(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE projects DROP CONSTRAINT IF EXISTS projects_name_key');
+}
 
 function version_73(PDO $pdo)
 {

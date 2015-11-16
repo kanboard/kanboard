@@ -1,6 +1,12 @@
 Version 1.0.21 (unreleased)
 ---------------------------
 
+Breaking changes:
+
+* Projects with duplicate name are now allowed:
+    For Postgres and Mysql the unique constraint is removed by database migration
+    However Sqlite does not support alter table, only new databases will have the unique constraint removed
+
 New features:
 
 * New automatic action: Assign a category based on a link
@@ -28,9 +34,9 @@ Version 1.0.20
 
 Breaking changes:
 
-- Add namespace Kanboard (update your plugins)
-- Move Mailgun, Sendgrid, Postmark, Slack, Hipchat and Jabber to plugins
-- ReverseProxy authentication check for each request that the username match the user session
+* Add namespace Kanboard (update your plugins)
+* Move Mailgun, Sendgrid, Postmark, Slack, Hipchat and Jabber to plugins
+* ReverseProxy authentication check for each request that the username match the user session
 
 New features:
 

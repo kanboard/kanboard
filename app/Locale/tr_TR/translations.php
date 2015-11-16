@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'Kod gerekli',
     'The project id is required' => 'Proje kodu gerekli',
     'The project name is required' => 'Proje adı gerekli',
-    'This project must be unique' => 'Bu projenin tekil olması gerekli',
     'The title is required' => 'Başlık gerekli',
     'Settings saved successfully.' => 'Ayarlar başarıyla kaydedildi.',
     'Unable to save your settings.' => 'Ayarlarınız kaydedilemedi.',
@@ -1065,4 +1064,5 @@ return array(
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
     // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
 );

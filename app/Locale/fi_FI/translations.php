@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'ID vaaditaan',
     'The project id is required' => 'Projektin ID on pakollinen',
     'The project name is required' => 'Projektin nimi on pakollinen',
-    'This project must be unique' => 'Projektin nimi täytyy olla uniikki',
     'The title is required' => 'Otsikko vaaditaan',
     'Settings saved successfully.' => 'Asetukset tallennettu onnistuneesti.',
     'Unable to save your settings.' => 'Asetusten tallentaminen epäonnistui.',
@@ -1065,4 +1064,5 @@ return array(
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
     // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
 );

@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'Id\'et er krævet',
     'The project id is required' => 'Projektets id er krævet',
     'The project name is required' => 'Projektets navn er krævet',
-    'This project must be unique' => 'Projektets navn skal være unikt',
     'The title is required' => 'Titel er krævet',
     'Settings saved successfully.' => 'Indstillinger gemt.',
     'Unable to save your settings.' => 'Indstillinger kunne ikke gemmes.',
@@ -1065,4 +1064,5 @@ return array(
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
     // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
 );

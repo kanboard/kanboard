@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'L\'identifiant est obligatoire',
     'The project id is required' => 'L\'identifiant du projet est obligatoire',
     'The project name is required' => 'Le nom du projet est obligatoire',
-    'This project must be unique' => 'Le nom du projet doit être unique',
     'The title is required' => 'Le titre est obligatoire',
     'Settings saved successfully.' => 'Paramètres sauvegardés avec succès.',
     'Unable to save your settings.' => 'Impossible de sauvegarder vos réglages.',

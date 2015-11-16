@@ -5,7 +5,13 @@ namespace Schema;
 use PDO;
 use Kanboard\Core\Security\Token;
 
-const VERSION = 93;
+const VERSION = 94;
+
+function version_94(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` DROP INDEX `name`');
+    $pdo->exec('ALTER TABLE `projects` DROP INDEX `name_2`');
+}
 
 function version_93(PDO $pdo)
 {

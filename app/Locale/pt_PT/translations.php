@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'O ID é obrigatório',
     'The project id is required' => 'O ID do projecto é obrigatório',
     'The project name is required' => 'O nome do projecto é obrigatório',
-    'This project must be unique' => 'Este projecto deve ser único',
     'The title is required' => 'O título é obrigatório',
     'Settings saved successfully.' => 'Configurações guardadas com sucesso.',
     'Unable to save your settings.' => 'Não é possível guardar as suas configurações.',
@@ -1065,4 +1064,5 @@ return array(
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
     // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
 );

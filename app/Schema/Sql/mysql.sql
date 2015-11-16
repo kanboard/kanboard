@@ -270,9 +270,7 @@ CREATE TABLE `projects` (
   `identifier` varchar(50) DEFAULT '',
   `start_date` varchar(10) DEFAULT '',
   `end_date` varchar(10) DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `name_2` (`name`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `remember_me`;
@@ -551,7 +549,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES ('api_token','ccff8d37146322410479c8c6707cdaddde840af28ccbd6fbb5a7d7908844'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','7a9d4cd8c7fc4d52c60f01b775d4f2bd6e186d2e44f5b3723157b8eb372b'),('webhook_url','');
+INSERT INTO `settings` VALUES ('api_token','3783f814662e83f1ebe9ada40314f93a6e75688fe7e04a3820e4078966f0'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','c95cf0a67507ca68cc93f717bb78ac5dfaf0c73d38ab159fc73038aa19d9'),('webhook_url','');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -580,4 +578,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$fDbO.nKAjDxm70DyghADCuqIhF919BAkRTAq0bARDTGwcxZscqIZq', '1');INSERT INTO schema_version VALUES ('93');
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$4/2e1E1VIeZVc5PhRHQJmuOBI/UV7H73hRyH60IvpTpY05G9tD49W', '1');INSERT INTO schema_version VALUES ('94');

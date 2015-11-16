@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'ID je vyžadováno',
     'The project id is required' => 'ID projektu je vyžadováno',
     'The project name is required' => 'Jméno projektu je vyžadováno',
-    'This project must be unique' => 'Jméno projektu musí být jedinečné',
     'The title is required' => 'Nadpis je vyžadován',
     'Settings saved successfully.' => 'Nastavení bylo úspěšně uloženo',
     'Unable to save your settings.' => 'Vaše nastavení nelze uložit.',
@@ -1065,4 +1064,5 @@ return array(
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
     // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
 );
