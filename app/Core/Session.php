@@ -56,7 +56,7 @@ class Session implements ArrayAccess
         ini_set('session.hash_bits_per_character', 6);
 
         // If the session was autostarted with session.auto_start = 1 in php.ini destroy it
-        if (isset($_SESSION)) {
+        if (isset($_SESSION) && session_status() == PHP_SESSION_ACTIVE) {
             session_destroy();
         }
 
