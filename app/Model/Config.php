@@ -35,6 +35,7 @@ class Config extends Setting
             'RSD' => t('RSD - Serbian dinar'),
             'SEK' => t('SEK - Swedish Krona'),
             'NOK' => t('NOK - Norwegian Krone'),
+            'BAM' => t('BAM - Konvertibile Mark'),
         );
     }
 
@@ -68,6 +69,7 @@ class Config extends Setting
     {
         // Sorted by value
         $languages = array(
+            'bs_BA' => 'Bosanski',
             'id_ID' => 'Bahasa Indonesia',
             'cs_CZ' => 'Čeština',
             'da_DK' => 'Dansk',
@@ -108,6 +110,7 @@ class Config extends Setting
     public function getJsLanguageCode()
     {
         $languages = array(
+            'bs_BA' => 'ba',
             'cs_CZ' => 'cz',
             'da_DK' => 'da',
             'de_DE' => 'de',
