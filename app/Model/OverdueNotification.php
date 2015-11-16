@@ -32,9 +32,9 @@ class OverdueNotification extends Base
                 foreach ($users as $user) {
                     foreach ($project_tasks as $task) {
                         if ($this->userNotificationFilter->shouldReceiveNotification($user, array('task' => $task))) {
-                            $user_tasks[$task['owner_id']][] = $task;
-                            $user_by_task[$task['owner_id']][] = $user;
-                            $projects[$task['project_id']] = $task['project_name'];
+                            $user_tasks[$user['id']][] = $task;
+                            $user_by_task[$user['id']][] = $user;
+                            $projects[$user['id']][$task['project_id']] = $task['project_name'];
                         }
                     }
                 }
@@ -118,7 +118,7 @@ class OverdueNotification extends Base
             $this->userNotification->sendUserNotification(
                 $user_by_task[$user_id][0],
                 Task::EVENT_OVERDUE,
-                array('tasks' => $tasks, 'project_name' => implode(", ", $projects))
+                array('tasks' => $tasks, 'project_name' => implode(", ", $projects[$user_id]))
             );
         }
     }
@@ -142,7 +142,6 @@ class OverdueNotification extends Base
                     Task::EVENT_OVERDUE,
                     array('tasks' => $overdue_tasks[$project_id], 'project_name' => $projects[$project_id])
                 );
-
             }
         }
     }
