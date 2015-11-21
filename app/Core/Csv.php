@@ -93,8 +93,7 @@ class Csv
     {
         if (! empty($value)) {
             $value = trim(strtolower($value));
-            return $value === '1' || $value{0}
-            === 't' ? 1 : 0;
+            return $value === '1' || $value{0} === 't' ? 1 : 0;
         }
 
         return 0;
@@ -164,10 +163,14 @@ class Csv
      */
     public function write($filename, array $rows)
     {
-        $file = new SplFileObject($filename, 'w');
+        $fp = fopen($filename, 'w');
 
-        foreach ($rows as $row) {
-            $file->fputcsv($row, $this->delimiter, $this->enclosure);
+        if (is_resource($fp)) {
+            foreach ($rows as $row) {
+                fputcsv($fp, $row, $this->delimiter, $this->enclosure);
+            }
+
+            fclose($fp);
         }
 
         return $this;

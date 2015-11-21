@@ -29,6 +29,7 @@ Bug fixes:
 * Fix PHP error when adding a new user with email notification enabled
 * Add missing template for activity stream to show event "file.create"
 * Fix wrong value for PLUGINS_DIR in config.default.php
+* Make CSV export compatible with PHP 5.3
 
 Version 1.0.20
 --------------
