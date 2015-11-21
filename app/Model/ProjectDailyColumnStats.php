@@ -34,40 +34,51 @@ class ProjectDailyColumnStats extends Base
     {
         $status = $this->config->get('cfd_include_closed_tasks') == 1 ? array(Task::STATUS_OPEN, Task::STATUS_CLOSED) : array(Task::STATUS_OPEN);
 
-        return $this->db->transaction(function (Database $db) use ($project_id, $date, $status) {
+        $this->db->startTransaction();
 
-            $column_ids = $db->table(Board::TABLE)->eq('project_id', $project_id)->findAllByColumn('id');
+        $column_ids = $this->db->table(Board::TABLE)->eq('project_id', $project_id)->findAllByColumn('id');
 
-            foreach ($column_ids as $column_id) {
+        foreach ($column_ids as $column_id) {
 
-                // This call will fail if the record already exists
-                // (cross database driver hack for INSERT..ON DUPLICATE KEY UPDATE)
-                $db->table(ProjectDailyColumnStats::TABLE)->insert(array(
-                    'day' => $date,
-                    'project_id' => $project_id,
-                    'column_id' => $column_id,
-                    'total' => 0,
-                    'score' => 0,
-                ));
+            $exists = $this->db->table(ProjectDailyColumnStats::TABLE)
+                ->eq('project_id', $project_id)
+                ->eq('column_id', $column_id)
+                ->eq('day', $date)
+                ->exists();
 
-                $db->table(ProjectDailyColumnStats::TABLE)
+            $score = $this->db->table(Task::TABLE)
+                ->eq('project_id', $project_id)
+                ->eq('column_id', $column_id)
+                ->eq('is_active', Task::STATUS_OPEN)
+                ->sum('score');
+
+            $total = $this->db->table(Task::TABLE)
+                ->eq('project_id', $project_id)
+                ->eq('column_id', $column_id)
+                ->in('is_active', $status)
+                ->count();
+
+            if ($exists) {
+                $this->db->table(ProjectDailyColumnStats::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
                     ->eq('day', $date)
-                    ->update(array(
-                        'score' => $db->table(Task::TABLE)
-                                      ->eq('project_id', $project_id)
-                                      ->eq('column_id', $column_id)
-                                      ->eq('is_active', Task::STATUS_OPEN)
-                                      ->sum('score'),
-                        'total' => $db->table(Task::TABLE)
-                                      ->eq('project_id', $project_id)
-                                      ->eq('column_id', $column_id)
-                                      ->in('is_active', $status)
-                                      ->count()
-                    ));
+                    ->update(array('score' => $score, 'total' => $total));
+
+            } else {
+                $this->db->table(ProjectDailyColumnStats::TABLE)->insert(array(
+                    'day' => $date,
+                    'project_id' => $project_id,
+                    'column_id' => $column_id,
+                    'total' => $total,
+                    'score' => $score,
+                ));
             }
-        });
+        }
+
+        $this->db->closeTransaction();
+
+        return true;
     }
 
     /**

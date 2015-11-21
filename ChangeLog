@@ -18,6 +18,7 @@ Improvements:
 * Use PHP7 function random_bytes() to generate tokens if available
 * CSV task export show the assignee name in addition to the assignee username
 * Add new hooks for plugins
+* Remove workaround for "INSERT ON DUPLICATE KEY UPDATE..."
 
 Internal code refactoring:
 

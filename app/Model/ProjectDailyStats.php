@@ -29,27 +29,35 @@ class ProjectDailyStats extends Base
      */
     public function updateTotals($project_id, $date)
     {
+        $this->db->startTransaction();
+
         $lead_cycle_time = $this->projectAnalytic->getAverageLeadAndCycleTime($project_id);
 
-        return $this->db->transaction(function (Database $db) use ($project_id, $date, $lead_cycle_time) {
+        $exists = $this->db->table(ProjectDailyStats::TABLE)
+            ->eq('day', $date)
+            ->eq('project_id', $project_id)
+            ->exists();
 
-            // This call will fail if the record already exists
-            // (cross database driver hack for INSERT..ON DUPLICATE KEY UPDATE)
-            $db->table(ProjectDailyStats::TABLE)->insert(array(
-                'day' => $date,
-                'project_id' => $project_id,
-                'avg_lead_time' => 0,
-                'avg_cycle_time' => 0,
-            ));
-
-            $db->table(ProjectDailyStats::TABLE)
+        if ($exists) {
+            $this->db->table(ProjectDailyStats::TABLE)
                 ->eq('project_id', $project_id)
                 ->eq('day', $date)
                 ->update(array(
                     'avg_lead_time' => $lead_cycle_time['avg_lead_time'],
                     'avg_cycle_time' => $lead_cycle_time['avg_cycle_time'],
                 ));
-        });
+        } else {
+            $this->db->table(ProjectDailyStats::TABLE)->insert(array(
+                'day' => $date,
+                'project_id' => $project_id,
+                'avg_lead_time' => $lead_cycle_time['avg_lead_time'],
+                'avg_cycle_time' => $lead_cycle_time['avg_cycle_time'],
+            ));
+        }
+
+        $this->db->closeTransaction();
+
+        return true;
     }
 
     /**
