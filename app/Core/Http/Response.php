@@ -47,6 +47,8 @@ class Response extends Base
     public function forceDownload($filename)
     {
         header('Content-Disposition: attachment; filename="'.$filename.'"');
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Type: application/octet-stream');
     }
 
     /**

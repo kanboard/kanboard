@@ -31,6 +31,7 @@ Bug fixes:
 * Add missing template for activity stream to show event "file.create"
 * Fix wrong value for PLUGINS_DIR in config.default.php
 * Make CSV export compatible with PHP 5.3
+* Avoid Safari to append .html at the end of downloaded files
 
 Version 1.0.20
 --------------
