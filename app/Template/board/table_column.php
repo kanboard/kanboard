@@ -5,7 +5,7 @@
 
         <!-- column in collapsed mode -->
         <div class="board-column-collapsed">
-            <span title="<?= t('Task count') ?>" class="board-column-header-task-count" title="<?= t('Show this column') ?>">
+            <span class="board-column-header-task-count" title="<?= t('Show this column') ?>">
                 <span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>
             </span>
         </div>

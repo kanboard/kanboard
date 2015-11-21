@@ -34,6 +34,12 @@ Dropdown.prototype.listen = function() {
 
         clone.addClass('dropdown-submenu-open');
     });
+
+    $(document).on('click', '.dropdown-submenu-open li', function(e) {
+        if ($(e.target).is('li')) {
+            $(this).find('a:visible')[0].click(); // Calling native click() not the jQuery one
+        }
+    });
 };
 
 Dropdown.prototype.close = function() {

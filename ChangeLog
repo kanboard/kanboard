@@ -13,6 +13,7 @@ New features:
 
 Improvements:
 
+* Dropdown menu entry are now clickable outside of the html link
 * Improve error handling of plugins
 * Use PHP7 function random_bytes() to generate tokens if available
 * CSV task export show the assignee name in addition to the assignee username

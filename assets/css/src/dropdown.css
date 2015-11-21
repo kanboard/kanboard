@@ -31,6 +31,7 @@ ul.dropdown-submenu-open {
     padding-bottom: 8px;
     font-size: 0.85em;
     border-bottom: 1px solid #f8f8f8;
+    cursor: pointer;
 }
 
 .dropdown-submenu-open li:last-child {
