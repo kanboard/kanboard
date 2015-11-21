@@ -1,4 +1,6 @@
 <div class="page-header">
+    <?= $this->hook->render('template:project:header:before', array('project' => $project)) ?>
+
     <div class="dropdown">
         <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
         <ul>
@@ -98,4 +100,6 @@
             </div>
         <?php endif ?>
     </div>
+
+    <?= $this->hook->render('template:project:header:after', array('project' => $project)) ?>
 </div>

@@ -142,7 +142,9 @@ List of template hooks:
 - `template:layout:head`
 - `template:layout:top`
 - `template:layout:bottom`
-- `template:project:dropdown`
+- `template:project:dropdown`: "Actions" menu on left in different project views
+- `template:project:header:before`
+- `template:project:header:after`
 - `template:project-user:sidebar`
 - `template:task:sidebar:information`
 - `template:task:sidebar:actions`
