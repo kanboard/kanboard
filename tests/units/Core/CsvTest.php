@@ -41,7 +41,7 @@ class CsvTest extends Base
 
         unlink($filename);
 
-        $this->expectOutputString('"Column A","Column B"'.PHP_EOL.'"value a","value b"'.PHP_EOL, $csv->output($rows));
+        $this->expectOutputString('"Column A","Column B"'."\n".'"value a","value b"'."\n", $csv->output($rows));
     }
 
     public function readRow(array $row, $line)
