@@ -29,12 +29,12 @@ class ProjectDailyStatsTest extends Base
         $metrics = $pds->getRawMetrics(1, date('Y-m-d', strtotime('-1days')), date('Y-m-d'));
         $expected = array(
             array(
-                'day' => '2015-11-20',
+                'day' => date('Y-m-d', strtotime('-1days')),
                 'avg_lead_time' => 0,
                 'avg_cycle_time' => 43200,
             ),
             array(
-                'day' => '2015-11-21',
+                'day' => date('Y-m-d'),
                 'avg_lead_time' => 0,
                 'avg_cycle_time' => 43200,
             )

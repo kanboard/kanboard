@@ -1068,4 +1068,7 @@ return array(
     '%s attached a new file to the task %s' => '%s a attaché un nouveau fichier à la tâche %s',
     'Link type' => 'Type de lien',
     'Assign automatically a category based on a link' => 'Assigner automatiquement une catégorie en fonction d\'un lien',
+    'BAM - Konvertibile Mark' => 'BAM - Mark convertible',
+    'Assignee Username' => 'Utilisateur assigné',
+    'Assignee Name' => 'Nom de l\'assigné',
 );

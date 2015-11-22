@@ -1065,4 +1065,7 @@ return array(
     'Passwords will be encrypted if present' => 'Las contraseñas serán cifradas si es que existen',
     // '%s attached a new file to the task %s' => '',
     // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );
