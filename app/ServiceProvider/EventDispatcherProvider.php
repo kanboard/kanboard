@@ -32,5 +32,7 @@ class EventDispatcherProvider implements ServiceProviderInterface
 
         // Automatic actions
         $container['action']->attachEvents();
+
+        return $container;
     }
 }

@@ -70,7 +70,7 @@ class Export extends Base
      */
     public function summary()
     {
-        $this->common('ProjectDailyColumnStats', 'getAggregatedMetrics', t('Summary'), 'summary', t('Daily project summary export'));
+        $this->common('projectDailyColumnStats', 'getAggregatedMetrics', t('Summary'), 'summary', t('Daily project summary export'));
     }
 
     /**

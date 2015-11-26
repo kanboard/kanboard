@@ -52,9 +52,9 @@ class TaskImport extends Base
         $csv->read($filename, array($this->taskImport, 'import'));
 
         if ($this->taskImport->counter > 0) {
-            $this->session->flash(t('%d task(s) have been imported successfully.', $this->taskImport->counter));
+            $this->flash->success(t('%d task(s) have been imported successfully.', $this->taskImport->counter));
         } else {
-            $this->session->flashError(t('Nothing have been imported!'));
+            $this->flash->failure(t('Nothing have been imported!'));
         }
 
         $this->response->redirect($this->helper->url->to('taskImport', 'step1', array('project_id' => $project['id'])));

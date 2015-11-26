@@ -31,8 +31,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $task['project_id']);
         $this->assertEquals(0, $task['creator_id']);
 
-        $_SESSION = array();
-        $_SESSION['user']['id'] = 1;
+        $this->container['sessionStorage']->user = array('id' => 1);
 
         // We duplicate our task
         $this->assertEquals(2, $td->duplicate(1));
@@ -41,8 +40,6 @@ class TaskDuplicationTest extends Base
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
         $this->assertEquals(1, $task['creator_id']);
-
-        $_SESSION = array();
     }
 
     public function testDuplicateSameProject()

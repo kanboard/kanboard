@@ -135,10 +135,10 @@ class Gantt extends Base
             $task_id = $this->taskCreation->create($values);
 
             if ($task_id !== false) {
-                $this->session->flash(t('Task created successfully.'));
+                $this->flash->success(t('Task created successfully.'));
                 $this->response->redirect($this->helper->url->to('gantt', 'project', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to create your task.'));
+                $this->flash->failure(t('Unable to create your task.'));
             }
         }
 

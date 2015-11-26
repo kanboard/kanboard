@@ -11,7 +11,7 @@ define('DEBUG', false);
 define('DEBUG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
 
 // Plugins directory
-define('PLUGINS_DIR', 'data'.DIRECTORY_SEPARATOR.'plugins');
+define('PLUGINS_DIR', 'plugins');
 
 // Folder for uploaded files
 define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files');

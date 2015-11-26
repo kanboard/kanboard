@@ -51,9 +51,9 @@ class Oauth extends Base
         $this->checkCSRFParam();
 
         if ($this->authentication->backend($backend)->unlink($this->userSession->getId())) {
-            $this->session->flash(t('Your external account is not linked anymore to your profile.'));
+            $this->flash->success(t('Your external account is not linked anymore to your profile.'));
         } else {
-            $this->session->flashError(t('Unable to unlink your external account.'));
+            $this->flash->failure(t('Unable to unlink your external account.'));
         }
 
         $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
@@ -99,9 +99,9 @@ class Oauth extends Base
     private function link($backend, $profile)
     {
         if (empty($profile)) {
-            $this->session->flashError(t('External authentication failed'));
+            $this->flash->failure(t('External authentication failed'));
         } else {
-            $this->session->flash(t('Your external account is linked to your profile successfully.'));
+            $this->flash->success(t('Your external account is linked to your profile successfully.'));
             $this->authentication->backend($backend)->updateUser($this->userSession->getId(), $profile);
         }
 

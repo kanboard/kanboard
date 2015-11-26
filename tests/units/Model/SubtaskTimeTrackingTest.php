@@ -9,7 +9,6 @@ use Kanboard\Model\SubtaskTimeTracking;
 use Kanboard\Model\Project;
 use Kanboard\Model\Category;
 use Kanboard\Model\User;
-use Kanboard\Core\Session;
 
 class SubtaskTimeTrackingTest extends Base
 {
@@ -38,9 +37,8 @@ class SubtaskTimeTrackingTest extends Base
         $s = new Subtask($this->container);
         $st = new SubtaskTimeTracking($this->container);
         $p = new Project($this->container);
-        $ss = new Session;
 
-        $ss['user'] = array('id' => 1);
+        $this->container['sessionStorage']->user = array('id' => 1);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));

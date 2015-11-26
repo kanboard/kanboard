@@ -45,11 +45,11 @@ class Authentication extends Base
 
             // Check if the user session match an existing user
             $userNotFound = ! $this->user->exists($this->userSession->getId());
-            $reverseProxyWrongUser = REVERSE_PROXY_AUTH && $this->backend('reverseProxy')->getUsername() !== $_SESSION['user']['username'];
+            $reverseProxyWrongUser = REVERSE_PROXY_AUTH && $this->backend('reverseProxy')->getUsername() !== $this->userSession->getUsername();
 
             if ($userNotFound || $reverseProxyWrongUser) {
                 $this->backend('rememberMe')->destroy($this->userSession->getId());
-                $this->session->close();
+                $this->sessionManager->close();
                 return false;
             }
 
@@ -176,8 +176,12 @@ class Authentication extends Base
     public function validateFormCaptcha(array $values)
     {
         if ($this->hasCaptcha($values['username'])) {
+            if (! isset($this->sessionStorage->captcha)) {
+                return false;
+            }
+
             $builder = new CaptchaBuilder;
-            $builder->setPhrase($this->session['captcha']);
+            $builder->setPhrase($this->sessionStorage->captcha);
             return $builder->testPhrase(isset($values['captcha']) ? $values['captcha'] : '');
         }
 

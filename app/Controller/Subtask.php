@@ -67,9 +67,9 @@ class Subtask extends Base
 
         if ($valid) {
             if ($this->subtask->create($values)) {
-                $this->session->flash(t('Sub-task added successfully.'));
+                $this->flash->success(t('Sub-task added successfully.'));
             } else {
-                $this->session->flashError(t('Unable to create your sub-task.'));
+                $this->flash->failure(t('Unable to create your sub-task.'));
             }
 
             if (isset($values['another_subtask']) && $values['another_subtask'] == 1) {
@@ -117,9 +117,9 @@ class Subtask extends Base
 
         if ($valid) {
             if ($this->subtask->update($values)) {
-                $this->session->flash(t('Sub-task updated successfully.'));
+                $this->flash->success(t('Sub-task updated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to update your sub-task.'));
+                $this->flash->failure(t('Unable to update your sub-task.'));
             }
 
             $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'));
@@ -156,9 +156,9 @@ class Subtask extends Base
         $subtask = $this->getSubtask();
 
         if ($this->subtask->remove($subtask['id'])) {
-            $this->session->flash(t('Sub-task removed successfully.'));
+            $this->flash->success(t('Sub-task removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this sub-task.'));
+            $this->flash->failure(t('Unable to remove this sub-task.'));
         }
 
         $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'));
@@ -178,7 +178,7 @@ class Subtask extends Base
         $this->subtask->toggleStatus($subtask['id']);
 
         if ($redirect === 'board') {
-            $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
+            $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
 
             $this->response->html($this->template->render('board/tooltip_subtasks', array(
                 'subtasks' => $this->subtask->getAll($task['id']),

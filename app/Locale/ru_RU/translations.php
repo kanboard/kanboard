@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'Необходим ID',
     'The project id is required' => 'Необходим ID проекта',
     'The project name is required' => 'Необходимо имя проекта',
-    'This project must be unique' => 'Проект должен быть уникальным',
     'The title is required' => 'Необходим заголовок',
     'Settings saved successfully.' => 'Параметры успешно сохранены.',
     'Unable to save your settings.' => 'Невозможно сохранить параметры.',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );

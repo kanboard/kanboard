@@ -11,17 +11,13 @@ namespace Kanboard\Model;
 class UserSession extends Base
 {
     /**
-     * Update user session information
+     * Update user session
      *
      * @access public
-     * @param  array  $user  User data
+     * @param  array  $user
      */
-    public function refresh(array $user = array())
+    public function initialize(array $user)
     {
-        if (empty($user)) {
-            $user = $this->user->getById($this->userSession->getId());
-        }
-
         if (isset($user['password'])) {
             unset($user['password']);
         }
@@ -31,12 +27,13 @@ class UserSession extends Base
         }
 
         $user['id'] = (int) $user['id'];
-        $user['is_admin'] = (bool) $user['is_admin'];
-        $user['is_project_admin'] = (bool) $user['is_project_admin'];
-        $user['is_ldap_user'] = (bool) $user['is_ldap_user'];
-        $user['twofactor_activated'] = (bool) $user['twofactor_activated'];
+        $user['is_admin'] = isset($user['is_admin']) ? (bool) $user['is_admin'] : false;
+        $user['is_project_admin'] = isset($user['is_project_admin']) ? (bool) $user['is_project_admin'] : false;
+        $user['is_ldap_user'] = isset($user['is_ldap_user']) ? (bool) $user['is_ldap_user'] : false;
+        $user['twofactor_activated'] = isset($user['twofactor_activated']) ? (bool) $user['twofactor_activated'] : false;
 
-        $this->session['user'] = $user;
+        $this->sessionStorage->user = $user;
+        $this->sessionStorage->postAuth = array('validated' => false);
     }
 
     /**
@@ -47,7 +44,7 @@ class UserSession extends Base
      */
     public function check2FA()
     {
-        return isset($this->session['2fa_validated']) && $this->session['2fa_validated'] === true;
+        return isset($this->sessionStorage->postAuth['validated']) && $this->sessionStorage->postAuth['validated'] === true;
     }
 
     /**
@@ -58,7 +55,17 @@ class UserSession extends Base
      */
     public function has2FA()
     {
-        return isset($this->session['user']['twofactor_activated']) && $this->session['user']['twofactor_activated'] === true;
+        return isset($this->sessionStorage->user['twofactor_activated']) && $this->sessionStorage->user['twofactor_activated'] === true;
+    }
+
+    /**
+     * Disable 2FA for the current session
+     *
+     * @access public
+     */
+    public function disable2FA()
+    {
+        $this->sessionStorage->user['twofactor_activated'] = false;
     }
 
     /**
@@ -69,7 +76,7 @@ class UserSession extends Base
      */
     public function isAdmin()
     {
-        return isset($this->session['user']['is_admin']) && $this->session['user']['is_admin'] === true;
+        return isset($this->sessionStorage->user['is_admin']) && $this->sessionStorage->user['is_admin'] === true;
     }
 
     /**
@@ -80,7 +87,7 @@ class UserSession extends Base
      */
     public function isProjectAdmin()
     {
-        return isset($this->session['user']['is_project_admin']) && $this->session['user']['is_project_admin'] === true;
+        return isset($this->sessionStorage->user['is_project_admin']) && $this->sessionStorage->user['is_project_admin'] === true;
     }
 
     /**
@@ -91,7 +98,18 @@ class UserSession extends Base
      */
     public function getId()
     {
-        return isset($this->session['user']['id']) ? (int) $this->session['user']['id'] : 0;
+        return isset($this->sessionStorage->user['id']) ? (int) $this->sessionStorage->user['id'] : 0;
+    }
+
+    /**
+     * Get username
+     *
+     * @access public
+     * @return integer
+     */
+    public function getUsername()
+    {
+        return isset($this->sessionStorage->user['username']) ? $this->sessionStorage->user['username'] : '';
     }
 
     /**
@@ -102,7 +120,7 @@ class UserSession extends Base
      */
     public function isLogged()
     {
-        return ! empty($this->session['user']);
+        return isset($this->sessionStorage->user) && ! empty($this->sessionStorage->user);
     }
 
     /**
@@ -114,7 +132,7 @@ class UserSession extends Base
      */
     public function getFilters($project_id)
     {
-        return ! empty($_SESSION['filters'][$project_id]) ? $_SESSION['filters'][$project_id] : 'status:open';
+        return ! empty($this->sessionStorage->filters[$project_id]) ? $this->sessionStorage->filters[$project_id] : 'status:open';
     }
 
     /**
@@ -126,7 +144,7 @@ class UserSession extends Base
      */
     public function setFilters($project_id, $filters)
     {
-        $_SESSION['filters'][$project_id] = $filters;
+        $this->sessionStorage->filters[$project_id] = $filters;
     }
 
     /**
@@ -138,7 +156,7 @@ class UserSession extends Base
      */
     public function isBoardCollapsed($project_id)
     {
-        return ! empty($_SESSION['board_collapsed'][$project_id]) ? $_SESSION['board_collapsed'][$project_id] : false;
+        return ! empty($this->sessionStorage->boardCollapsed[$project_id]) ? $this->sessionStorage->boardCollapsed[$project_id] : false;
     }
 
     /**
@@ -146,11 +164,11 @@ class UserSession extends Base
      *
      * @access public
      * @param  integer  $project_id
-     * @param  boolean  $collapsed
+     * @param  boolean  $is_collapsed
      */
-    public function setBoardDisplayMode($project_id, $collapsed)
+    public function setBoardDisplayMode($project_id, $is_collapsed)
     {
-        $_SESSION['board_collapsed'][$project_id] = $collapsed;
+        $this->sessionStorage->boardCollapsed[$project_id] = $is_collapsed;
     }
 
     /**
@@ -161,7 +179,7 @@ class UserSession extends Base
      */
     public function setCommentSorting($order)
     {
-        $this->session['comment_sorting'] = $order;
+        $this->sessionStorage->commentSorting = $order;
     }
 
     /**
@@ -172,6 +190,6 @@ class UserSession extends Base
      */
     public function getCommentSorting()
     {
-        return $this->session['comment_sorting'] ?: 'ASC';
+        return empty($this->sessionStorage->commentSorting) ? 'ASC' : $this->sessionStorage->commentSorting;
     }
 }

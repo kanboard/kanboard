@@ -70,9 +70,9 @@ class Project extends Base
             $this->checkCSRFParam();
 
             if ($this->project->{$switch.'PublicAccess'}($project['id'])) {
-                $this->session->flash(t('Project updated successfully.'));
+                $this->flash->success(t('Project updated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to update this project.'));
+                $this->flash->failure(t('Unable to update this project.'));
             }
 
             $this->response->redirect($this->helper->url->to('project', 'share', array('project_id' => $project['id'])));
@@ -95,7 +95,7 @@ class Project extends Base
 
         if ($this->request->isPost()) {
             $this->projectMetadata->save($project['id'], $this->request->getValues());
-            $this->session->flash(t('Project updated successfully.'));
+            $this->flash->success(t('Project updated successfully.'));
             $this->response->redirect($this->helper->url->to('project', 'integrations', array('project_id' => $project['id'])));
         }
 
@@ -120,7 +120,7 @@ class Project extends Base
         if ($this->request->isPost()) {
             $values = $this->request->getValues();
             $this->projectNotification->saveSettings($project['id'], $values);
-            $this->session->flash(t('Project updated successfully.'));
+            $this->flash->success(t('Project updated successfully.'));
             $this->response->redirect($this->helper->url->to('project', 'notifications', array('project_id' => $project['id'])));
         }
 
@@ -173,10 +173,10 @@ class Project extends Base
 
         if ($valid) {
             if ($this->project->update($values)) {
-                $this->session->flash(t('Project updated successfully.'));
+                $this->flash->success(t('Project updated successfully.'));
                 $this->response->redirect($this->helper->url->to('project', 'edit', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to update this project.'));
+                $this->flash->failure(t('Unable to update this project.'));
             }
         }
 
@@ -212,9 +212,9 @@ class Project extends Base
 
         if ($valid) {
             if ($this->project->update($values)) {
-                $this->session->flash(t('Project updated successfully.'));
+                $this->flash->success(t('Project updated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to update this project.'));
+                $this->flash->failure(t('Unable to update this project.'));
             }
         }
 
@@ -233,9 +233,9 @@ class Project extends Base
 
         if ($valid) {
             if ($this->projectPermission->addMember($values['project_id'], $values['user_id'])) {
-                $this->session->flash(t('Project updated successfully.'));
+                $this->flash->success(t('Project updated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to update this project.'));
+                $this->flash->failure(t('Unable to update this project.'));
             }
         }
 
@@ -261,9 +261,9 @@ class Project extends Base
 
         if ($valid) {
             if ($this->projectPermission->changeRole($values['project_id'], $values['user_id'], $values['is_owner'])) {
-                $this->session->flash(t('Project updated successfully.'));
+                $this->flash->success(t('Project updated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to update this project.'));
+                $this->flash->failure(t('Unable to update this project.'));
             }
         }
 
@@ -288,9 +288,9 @@ class Project extends Base
 
         if ($valid) {
             if ($this->projectPermission->revokeMember($values['project_id'], $values['user_id'])) {
-                $this->session->flash(t('Project updated successfully.'));
+                $this->flash->success(t('Project updated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to update this project.'));
+                $this->flash->failure(t('Unable to update this project.'));
             }
         }
 
@@ -310,9 +310,9 @@ class Project extends Base
             $this->checkCSRFParam();
 
             if ($this->project->remove($project['id'])) {
-                $this->session->flash(t('Project removed successfully.'));
+                $this->flash->success(t('Project removed successfully.'));
             } else {
-                $this->session->flashError(t('Unable to remove this project.'));
+                $this->flash->failure(t('Unable to remove this project.'));
             }
 
             $this->response->redirect($this->helper->url->to('project', 'index'));
@@ -338,9 +338,9 @@ class Project extends Base
         if ($this->request->getStringParam('duplicate') === 'yes') {
             $values = array_keys($this->request->getValues());
             if ($this->projectDuplication->duplicate($project['id'], $values) !== false) {
-                $this->session->flash(t('Project cloned successfully.'));
+                $this->flash->success(t('Project cloned successfully.'));
             } else {
-                $this->session->flashError(t('Unable to clone this project.'));
+                $this->flash->failure(t('Unable to clone this project.'));
             }
 
             $this->response->redirect($this->helper->url->to('project', 'index'));
@@ -365,9 +365,9 @@ class Project extends Base
             $this->checkCSRFParam();
 
             if ($this->project->disable($project['id'])) {
-                $this->session->flash(t('Project disabled successfully.'));
+                $this->flash->success(t('Project disabled successfully.'));
             } else {
-                $this->session->flashError(t('Unable to disable this project.'));
+                $this->flash->failure(t('Unable to disable this project.'));
             }
 
             $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
@@ -392,9 +392,9 @@ class Project extends Base
             $this->checkCSRFParam();
 
             if ($this->project->enable($project['id'])) {
-                $this->session->flash(t('Project activated successfully.'));
+                $this->flash->success(t('Project activated successfully.'));
             } else {
-                $this->session->flashError(t('Unable to activate this project.'));
+                $this->flash->failure(t('Unable to activate this project.'));
             }
 
             $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
@@ -438,11 +438,11 @@ class Project extends Base
             $project_id = $this->project->create($values, $this->userSession->getId(), true);
 
             if ($project_id > 0) {
-                $this->session->flash(t('Your project have been created successfully.'));
+                $this->flash->success(t('Your project have been created successfully.'));
                 $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
             }
 
-            $this->session->flashError(t('Unable to create your project.'));
+            $this->flash->failure(t('Unable to create your project.'));
         }
 
         $this->create($values, $errors);

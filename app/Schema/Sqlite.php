@@ -5,7 +5,42 @@ namespace Schema;
 use Kanboard\Core\Security\Token;
 use PDO;
 
-const VERSION = 88;
+const VERSION = 89;
+
+function version_90(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_has_groups (
+            group_id INTEGER NOT NULL,
+            project_id INTEGER NOT NULL,
+            role TEXT NOT NULL,
+            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            UNIQUE(group_id, project_id)
+        )
+    ");
+}
+
+function version_89(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE groups (
+            id INTEGER PRIMARY KEY,
+            external_id TEXT DEFAULT '',
+            name TEXT NOCASE NOT NULL UNIQUE
+        )
+    ");
+
+    $pdo->exec("
+        CREATE TABLE group_has_users (
+            group_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
+            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            UNIQUE(group_id, user_id)
+        )
+    ");
+}
 
 function version_88(PDO $pdo)
 {
@@ -1026,7 +1061,7 @@ function version_1(PDO $pdo)
     $pdo->exec("
         CREATE TABLE projects (
             id INTEGER PRIMARY KEY,
-            name TEXT NOCASE NOT NULL UNIQUE,
+            name TEXT NOCASE NOT NULL,
             is_active INTEGER DEFAULT 1
         )
     ");

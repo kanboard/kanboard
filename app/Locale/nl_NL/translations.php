@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'Het id is verplicht',
     'The project id is required' => 'Het project id is verplicht',
     'The project name is required' => 'De projectnaam is verplicht',
-    'This project must be unique' => 'Dit project moet uniek zijn',
     'The title is required' => 'De titel is verplicht',
     'Settings saved successfully.' => 'Instellingen succesvol opgeslagen.',
     'Unable to save your settings.' => 'Instellingen opslaan niet gelukt.',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );

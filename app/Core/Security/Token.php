@@ -21,8 +21,10 @@ class Token extends Base
      */
     public static function getToken()
     {
-        if (function_exists('openssl_random_pseudo_bytes')) {
-            return bin2hex(\openssl_random_pseudo_bytes(30));
+        if (function_exists('random_bytes')) {
+            return bin2hex(random_bytes(30));
+        } elseif (function_exists('openssl_random_pseudo_bytes')) {
+            return bin2hex(openssl_random_pseudo_bytes(30));
         } elseif (ini_get('open_basedir') === '' && strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
             return hash('sha256', file_get_contents('/dev/urandom', false, null, 0, 30));
         }
@@ -38,12 +40,12 @@ class Token extends Base
      */
     public function getCSRFToken()
     {
-        if (! isset($_SESSION['csrf_tokens'])) {
-            $_SESSION['csrf_tokens'] = array();
+        if (! isset($this->sessionStorage->csrf)) {
+            $this->sessionStorage->csrf = array();
         }
 
         $nonce = self::getToken();
-        $_SESSION['csrf_tokens'][$nonce] = true;
+        $this->sessionStorage->csrf[$nonce] = true;
 
         return $nonce;
     }
@@ -57,8 +59,8 @@ class Token extends Base
      */
     public function validateCSRFToken($token)
     {
-        if (isset($_SESSION['csrf_tokens'][$token])) {
-            unset($_SESSION['csrf_tokens'][$token]);
+        if (isset($this->sessionStorage->csrf[$token])) {
+            unset($this->sessionStorage->csrf[$token]);
             return true;
         }
 

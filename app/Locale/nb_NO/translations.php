@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'Id\'en er pøøkrevet',
     'The project id is required' => 'Prosjektet-id er påkrevet',
     'The project name is required' => 'Prosjektnavn er påkrevet',
-    'This project must be unique' => 'Prosjektnavnet skal være unikt',
     'The title is required' => 'Tittel er pårevet',
     'Settings saved successfully.' => 'Innstillinger lagret.',
     'Unable to save your settings.' => 'Innstillinger kunne ikke lagres.',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );

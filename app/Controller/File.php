@@ -22,7 +22,7 @@ class File extends Base
         $task = $this->getTask();
 
         if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot')) !== false) {
-            $this->session->flash(t('Screenshot uploaded successfully.'));
+            $this->flash->success(t('Screenshot uploaded successfully.'));
 
             if ($this->request->getStringParam('redirect') === 'board') {
                 $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
@@ -62,7 +62,7 @@ class File extends Base
         $task = $this->getTask();
 
         if (! $this->file->uploadFiles($task['project_id'], $task['id'], 'files')) {
-            $this->session->flashError(t('Unable to upload the file.'));
+            $this->flash->failure(t('Unable to upload the file.'));
         }
 
         $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
@@ -166,9 +166,9 @@ class File extends Base
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
         if ($file['task_id'] == $task['id'] && $this->file->remove($file['id'])) {
-            $this->session->flash(t('File removed successfully.'));
+            $this->flash->success(t('File removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this file.'));
+            $this->flash->failure(t('Unable to remove this file.'));
         }
 
         $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));

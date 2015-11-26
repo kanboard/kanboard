@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'Az ID-t (azonosítót) meg kell adni',
     'The project id is required' => 'A projekt ID-t (azonosítót) meg kell adni',
     'The project name is required' => 'A projekt nevét meg kell adni',
-    'This project must be unique' => 'A projekt nevének egyedinek kell lennie',
     'The title is required' => 'A címet meg kell adni',
     'Settings saved successfully.' => 'A beállítások sikeresen mentve.',
     'Unable to save your settings.' => 'A beállítások mentése sikertelen.',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );

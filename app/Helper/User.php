@@ -136,7 +136,7 @@ class User extends \Kanboard\Core\Base
      */
     public function getFullname(array $user = array())
     {
-        return $this->user->getFullname(empty($user) ? $_SESSION['user'] : $user);
+        return $this->user->getFullname(empty($user) ? $this->sessionStorage->user : $user);
     }
 
     /**

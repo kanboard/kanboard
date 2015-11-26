@@ -73,7 +73,7 @@ class Tasklink extends Base
 
         if ($valid) {
             if ($this->taskLink->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
-                $this->session->flash(t('Link added successfully.'));
+                $this->flash->success(t('Link added successfully.'));
 
                 if ($ajax) {
                     $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
@@ -83,7 +83,7 @@ class Tasklink extends Base
             }
 
             $errors = array('title' => array(t('The exact same link already exists')));
-            $this->session->flashError(t('Unable to create your link.'));
+            $this->flash->failure(t('Unable to create your link.'));
         }
 
         $this->create($values, $errors);
@@ -129,11 +129,11 @@ class Tasklink extends Base
 
         if ($valid) {
             if ($this->taskLink->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
-                $this->session->flash(t('Link updated successfully.'));
+                $this->flash->success(t('Link updated successfully.'));
                 $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
             }
 
-            $this->session->flashError(t('Unable to update your link.'));
+            $this->flash->failure(t('Unable to update your link.'));
         }
 
         $this->edit($values, $errors);
@@ -166,9 +166,9 @@ class Tasklink extends Base
         $task = $this->getTask();
 
         if ($this->taskLink->remove($this->request->getIntegerParam('link_id'))) {
-            $this->session->flash(t('Link removed successfully.'));
+            $this->flash->success(t('Link removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this link.'));
+            $this->flash->failure(t('Unable to remove this link.'));
         }
 
         $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');

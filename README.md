@@ -9,7 +9,7 @@ Official website: <http://kanboard.net>
 - Multiple boards with the ability to drag and drop tasks
 - Open source and self-hosted
 - Super simple installation
-- Translated in 22 languages
+- Translated in 23 languages
 - Distributed under [MIT License](LICENSE)
 - [List of features are available on the website](http://kanboard.net/features)
 - [Change Log](ChangeLog)
@@ -39,11 +39,12 @@ Documentation
 Related projects
 ----------------
 
+List of plugins: http://kanboard.net/plugins
+
 - [Kanboard API python client by @freekoder](https://github.com/freekoder/kanboard-py)
 - [Kanboard Presenter by David Eberlein](https://github.com/davideberlein/kanboard-presenter)
 - [CSV2Kanboard by @ashbike](https://github.com/ashbike/csv2kanboard)
 - [Kanboard for Yunohost by @mbugeia](https://github.com/mbugeia/kanboard_ynh)
 - [Trello import script by @matueranet](https://github.com/matueranet/kanboard-import-trello)
 - [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
-- [Wunderlist To Kanboard script by EpocDotFr](https://github.com/EpocDotFr/WunderlistToKanboard)
 - [Python client script by @dzudek](https://gist.github.com/fguillot/84c70d4928eb1e0cb374)

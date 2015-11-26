@@ -5,7 +5,33 @@ namespace Schema;
 use PDO;
 use Kanboard\Core\Security\Token;
 
-const VERSION = 73;
+const VERSION = 75;
+
+function version_75(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE groups (
+            id SERIAL PRIMARY KEY,
+            external_id VARCHAR(255) DEFAULT '',
+            name VARCHAR(100) NOT NULL UNIQUE
+        )
+    ");
+
+    $pdo->exec("
+        CREATE TABLE group_has_users (
+            group_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
+            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            UNIQUE(group_id, user_id)
+        )
+    ");
+}
+
+function version_74(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE projects DROP CONSTRAINT IF EXISTS projects_name_key');
+}
 
 function version_73(PDO $pdo)
 {

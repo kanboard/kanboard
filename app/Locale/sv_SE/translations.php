@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'Aktuellt ID måste anges',
     'The project id is required' => 'Projekt-ID måste anges',
     'The project name is required' => 'Ett projektnamn måste anges',
-    'This project must be unique' => 'Detta projekt måste vara unikt',
     'The title is required' => 'En titel måste anges.',
     'Settings saved successfully.' => 'Inställningarna har sparats.',
     'Unable to save your settings.' => 'Kunde inte spara dina ändringar',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );

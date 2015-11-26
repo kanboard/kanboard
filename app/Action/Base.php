@@ -241,7 +241,7 @@ abstract class Base extends \Kanboard\Core\Base
         }
 
         if (DEBUG) {
-            $this->container['logger']->debug(get_called_class().' => '.($result ? 'true' : 'false'));
+            $this->logger->debug(get_called_class().' => '.($result ? 'true' : 'false'));
         }
 
         return $result;

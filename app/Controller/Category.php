@@ -22,7 +22,7 @@ class Category extends Base
         $category = $this->category->getById($this->request->getIntegerParam('category_id'));
 
         if (empty($category)) {
-            $this->session->flashError(t('Category not found.'));
+            $this->flash->failure(t('Category not found.'));
             $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project_id)));
         }
 
@@ -61,10 +61,10 @@ class Category extends Base
 
         if ($valid) {
             if ($this->category->create($values)) {
-                $this->session->flash(t('Your category have been created successfully.'));
+                $this->flash->success(t('Your category have been created successfully.'));
                 $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to create your category.'));
+                $this->flash->failure(t('Unable to create your category.'));
             }
         }
 
@@ -103,10 +103,10 @@ class Category extends Base
 
         if ($valid) {
             if ($this->category->update($values)) {
-                $this->session->flash(t('Your category have been updated successfully.'));
+                $this->flash->success(t('Your category have been updated successfully.'));
                 $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to update your category.'));
+                $this->flash->failure(t('Unable to update your category.'));
             }
         }
 
@@ -142,9 +142,9 @@ class Category extends Base
         $category = $this->getCategory($project['id']);
 
         if ($this->category->remove($category['id'])) {
-            $this->session->flash(t('Category removed successfully.'));
+            $this->flash->success(t('Category removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this category.'));
+            $this->flash->failure(t('Unable to remove this category.'));
         }
 
         $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));

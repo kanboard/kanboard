@@ -46,9 +46,9 @@ class UserImport extends Base
         $csv->read($filename, array($this->userImport, 'import'));
 
         if ($this->userImport->counter > 0) {
-            $this->session->flash(t('%d user(s) have been imported successfully.', $this->userImport->counter));
+            $this->flash->success(t('%d user(s) have been imported successfully.', $this->userImport->counter));
         } else {
-            $this->session->flashError(t('Nothing have been imported!'));
+            $this->flash->failure(t('Nothing have been imported!'));
         }
 
         $this->response->redirect($this->helper->url->to('userImport', 'step1'));

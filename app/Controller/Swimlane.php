@@ -24,7 +24,7 @@ class Swimlane extends Base
         $swimlane = $this->swimlane->getById($this->request->getIntegerParam('swimlane_id'));
 
         if (empty($swimlane)) {
-            $this->session->flashError(t('Swimlane not found.'));
+            $this->flash->failure(t('Swimlane not found.'));
             $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project_id)));
         }
 
@@ -64,10 +64,10 @@ class Swimlane extends Base
 
         if ($valid) {
             if ($this->swimlane->create($values)) {
-                $this->session->flash(t('Your swimlane have been created successfully.'));
+                $this->flash->success(t('Your swimlane have been created successfully.'));
                 $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to create your swimlane.'));
+                $this->flash->failure(t('Unable to create your swimlane.'));
             }
         }
 
@@ -88,10 +88,10 @@ class Swimlane extends Base
 
         if ($valid) {
             if ($this->swimlane->updateDefault($values)) {
-                $this->session->flash(t('The default swimlane have been updated successfully.'));
+                $this->flash->success(t('The default swimlane have been updated successfully.'));
                 $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to update this swimlane.'));
+                $this->flash->failure(t('Unable to update this swimlane.'));
             }
         }
 
@@ -130,10 +130,10 @@ class Swimlane extends Base
 
         if ($valid) {
             if ($this->swimlane->update($values)) {
-                $this->session->flash(t('Swimlane updated successfully.'));
+                $this->flash->success(t('Swimlane updated successfully.'));
                 $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project['id'])));
             } else {
-                $this->session->flashError(t('Unable to update this swimlane.'));
+                $this->flash->failure(t('Unable to update this swimlane.'));
             }
         }
 
@@ -169,9 +169,9 @@ class Swimlane extends Base
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
 
         if ($this->swimlane->remove($project['id'], $swimlane_id)) {
-            $this->session->flash(t('Swimlane removed successfully.'));
+            $this->flash->success(t('Swimlane removed successfully.'));
         } else {
-            $this->session->flashError(t('Unable to remove this swimlane.'));
+            $this->flash->failure(t('Unable to remove this swimlane.'));
         }
 
         $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project['id'])));
@@ -189,9 +189,9 @@ class Swimlane extends Base
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
 
         if ($this->swimlane->disable($project['id'], $swimlane_id)) {
-            $this->session->flash(t('Swimlane updated successfully.'));
+            $this->flash->success(t('Swimlane updated successfully.'));
         } else {
-            $this->session->flashError(t('Unable to update this swimlane.'));
+            $this->flash->failure(t('Unable to update this swimlane.'));
         }
 
         $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project['id'])));
@@ -209,9 +209,9 @@ class Swimlane extends Base
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
 
         if ($this->swimlane->enable($project['id'], $swimlane_id)) {
-            $this->session->flash(t('Swimlane updated successfully.'));
+            $this->flash->success(t('Swimlane updated successfully.'));
         } else {
-            $this->session->flashError(t('Unable to update this swimlane.'));
+            $this->flash->failure(t('Unable to update this swimlane.'));
         }
 
         $this->response->redirect($this->helper->url->to('swimlane', 'index', array('project_id' => $project['id'])));

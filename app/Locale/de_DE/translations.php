@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'Die ID ist anzugeben',
     'The project id is required' => 'Die Projekt ID ist anzugeben',
     'The project name is required' => 'Der Projektname ist anzugeben',
-    'This project must be unique' => 'Der Projektname muss eindeutig sein',
     'The title is required' => 'Der Titel ist anzugeben',
     'Settings saved successfully.' => 'Einstellungen erfolgreich gespeichert.',
     'Unable to save your settings.' => 'Speichern der Einstellungen nicht möglich.',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );

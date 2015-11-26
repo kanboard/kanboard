@@ -2,7 +2,6 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Core\Session;
 use Kanboard\Model\Acl;
 use Kanboard\Model\Project;
 use Kanboard\Model\ProjectPermission;
@@ -86,8 +85,6 @@ class AclTest extends Base
     public function testPageAccessNoSession()
     {
         $acl = new Acl($this->container);
-        $session = new Session;
-        $session = array();
 
         $this->assertFalse($acl->isAllowed('board', 'readonly'));
         $this->assertFalse($acl->isAllowed('task', 'show'));
@@ -100,8 +97,7 @@ class AclTest extends Base
     public function testPageAccessEmptySession()
     {
         $acl = new Acl($this->container);
-        $session = new Session;
-        $session['user'] = array();
+        $this->container['sessionStorage']->user = array();
 
         $this->assertFalse($acl->isAllowed('board', 'readonly'));
         $this->assertFalse($acl->isAllowed('task', 'show'));
@@ -114,9 +110,7 @@ class AclTest extends Base
     public function testPageAccessAdminUser()
     {
         $acl = new Acl($this->container);
-        $session = new Session;
-
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'is_admin' => true,
         );
 
@@ -140,7 +134,6 @@ class AclTest extends Base
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new User($this->container);
-        $session = new Session;
 
         // We create our user
         $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
@@ -152,7 +145,7 @@ class AclTest extends Base
         $this->assertFalse($pp->isManager(1, 2));
 
         // We fake a session for him
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
             'is_project_admin' => true,
@@ -184,7 +177,6 @@ class AclTest extends Base
         $p = new Project($this->container);
         $pp = new ProjectPermission($this->container);
         $u = new User($this->container);
-        $session = new Session;
 
         // We create our user
         $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
@@ -195,7 +187,7 @@ class AclTest extends Base
         $this->assertTrue($pp->isManager(1, 2));
 
         // We fake a session for him
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
         );
@@ -237,9 +229,7 @@ class AclTest extends Base
         $this->assertTrue($pp->isMember(1, 2));
         $this->assertFalse($pp->isManager(1, 2));
 
-        $session = new Session;
-
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
         );
@@ -276,9 +266,7 @@ class AclTest extends Base
         $this->assertFalse($pp->isMember(1, 2));
         $this->assertFalse($pp->isManager(1, 2));
 
-        $session = new Session;
-
-        $session['user'] = array(
+        $this->container['sessionStorage']->user = array(
             'id' => 2,
             'is_admin' => false,
         );

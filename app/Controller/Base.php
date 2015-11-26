@@ -76,8 +76,7 @@ abstract class Base extends \Kanboard\Core\Base
      */
     public function beforeAction($controller, $action)
     {
-        // Start the session
-        $this->session->open($this->helper->url->dir());
+        $this->sessionManager->open();
         $this->sendHeaders($action);
         $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
 
@@ -86,7 +85,7 @@ abstract class Base extends \Kanboard\Core\Base
             $this->handle2FA($controller, $action);
             $this->handleAuthorization($controller, $action);
 
-            $this->session['has_subtask_inprogress'] = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
+            $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
         }
     }
 
@@ -102,7 +101,7 @@ abstract class Base extends \Kanboard\Core\Base
                 $this->response->text('Not Authorized', 401);
             }
 
-            $this->session['login_redirect'] = $this->request->getUri();
+            $this->sessionStorage->redirectAfterLogin = $this->request->getUri();
             $this->response->redirect($this->helper->url->to('auth', 'login'));
         }
     }
@@ -269,7 +268,7 @@ abstract class Base extends \Kanboard\Core\Base
         $project = $this->project->getById($project_id);
 
         if (empty($project)) {
-            $this->session->flashError(t('Project not found.'));
+            $this->flash->failure(t('Project not found.'));
             $this->response->redirect($this->helper->url->to('project', 'index'));
         }
 

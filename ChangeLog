@@ -1,11 +1,60 @@
+Version 1.0.22 (unreleased)
+---------------------------
+
+New features:
+
+* User groups (Teams)
+* Pluggable authentication and authorization system (Work in progress)
+* Add new project role Viewer (Work in progress)
+* Assign project permissions to a group (Work in progress)
+
+Version 1.0.21
+--------------
+
+Breaking changes:
+
+* Projects with duplicate name are now allowed:
+    For Postgres and Mysql the unique constraint is removed by database migration
+    However Sqlite does not support alter table, only new databases will have the unique constraint removed
+
+New features:
+
+* New automatic action: Assign a category based on a link
+* Added Bosnian translation
+
+Improvements:
+
+* Dropdown menu entry are now clickable outside of the html link
+* Improve error handling of plugins
+* Use PHP7 function random_bytes() to generate tokens if available
+* CSV task export show the assignee name in addition to the assignee username
+* Add new hooks for plugins
+* Remove workaround for "INSERT ON DUPLICATE KEY UPDATE..."
+
+Internal code refactoring:
+
+* Rewrite of session management
+* Move some classes to a new namespace Kanboard\Core\Http
+
+Bug fixes:
+
+* Loading cs_CZ locale display the wrong language in datetime picker
+* Datepicker is closed unexpectedly on blur event
+* Fix bug in daily project summary CSV export
+* Fix PHP error when adding a new user with email notification enabled
+* Add missing template for activity stream to show event "file.create"
+* Fix wrong value for PLUGINS_DIR in config.default.php
+* Make CSV export compatible with PHP 5.3
+* Avoid Safari to append .html at the end of downloaded files
+
 Version 1.0.20
 --------------
 
 Breaking changes:
 
-- Add namespace Kanboard (update your plugins)
-- Move Mailgun, Sendgrid, Postmark, Slack, Hipchat and Jabber to plugins
-- ReverseProxy authentication check for each request that the username match the user session
+* Add namespace Kanboard (update your plugins)
+* Move Mailgun, Sendgrid, Postmark, Slack, Hipchat and Jabber to plugins
+* ReverseProxy authentication check for each request that the username match the user session
 
 New features:
 

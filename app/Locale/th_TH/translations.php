@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'ต้องการไอดี',
     'The project id is required' => 'ต้องการไอดีโปรเจค',
     'The project name is required' => 'ต้องการชื่อโปรเจค',
-    'This project must be unique' => 'ชื่อโปรเจคต้องไม่ซ้ำ',
     'The title is required' => 'ต้องการหัวเรื่อง',
     'Settings saved successfully.' => 'บันทึกการตั้งค่าเรียบร้อยแล้ว',
     'Unable to save your settings.' => 'ไม่สามารถบันทึกการตั้งค่าได้',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );

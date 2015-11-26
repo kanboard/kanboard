@@ -5,6 +5,7 @@
             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New local user'), 'user', 'create') ?></li>
             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
             <li><i class="fa fa-upload fa-fw"></i><?= $this->url->link(t('Import'), 'userImport', 'step1') ?></li>
+            <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'group', 'index') ?></li>
         </ul>
         <?php endif ?>
     </div>

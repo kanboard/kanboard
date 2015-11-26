@@ -8,7 +8,6 @@ use Kanboard\Model\Subtask;
 use Kanboard\Model\Project;
 use Kanboard\Model\Category;
 use Kanboard\Model\User;
-use Kanboard\Core\Session;
 use Kanboard\Model\UserSession;
 
 class SubtaskTest extends Base
@@ -190,7 +189,6 @@ class SubtaskTest extends Base
         $tc = new TaskCreation($this->container);
         $s = new Subtask($this->container);
         $p = new Project($this->container);
-        $ss = new Session;
         $us = new UserSession($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
@@ -205,7 +203,7 @@ class SubtaskTest extends Base
         $this->assertEquals(1, $subtask['task_id']);
 
         // Set the current logged user
-        $ss['user'] = array('id' => 1);
+        $this->container['sessionStorage']->user = array('id' => 1);
 
         $this->assertTrue($s->toggleStatus(1));
 

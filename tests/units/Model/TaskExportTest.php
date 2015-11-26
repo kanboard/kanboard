@@ -51,7 +51,7 @@ class TaskExportTest extends Base
         $this->assertEquals($i, count($rows));
         $this->assertEquals('Task Id', $rows[0][0]);
         $this->assertEquals(1, $rows[1][0]);
-        $this->assertEquals('Task #'.($i - 1), $rows[$i - 1][12]);
+        $this->assertEquals('Task #'.($i - 1), $rows[$i - 1][13]);
         $this->assertTrue(in_array($rows[$i - 1][4], array('Default swimlane', 'S1', 'S2')));
     }
 }

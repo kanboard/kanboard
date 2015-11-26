@@ -39,6 +39,7 @@ class Tool
      * @access public
      * @param  Container  $container
      * @param  array      $namespaces
+     * @return Container
      */
     public static function buildDIC(Container $container, array $namespaces)
     {
@@ -50,6 +51,8 @@ class Tool
                 };
             }
         }
+
+        return $container;
     }
 
     /**

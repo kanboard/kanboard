@@ -26,5 +26,7 @@ class LoggingProvider implements ServiceProviderInterface
         }
 
         $container['logger'] = $logger;
+
+        return $container;
     }
 }

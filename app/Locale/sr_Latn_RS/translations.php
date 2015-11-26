@@ -124,7 +124,6 @@ return array(
     'The id is required' => 'ID  je obavezan',
     'The project id is required' => 'ID projekta  je obavezan',
     'The project name is required' => 'Naziv projekta je obavezan',
-    'This project must be unique' => 'Projekat mora biti jedinstven',
     'The title is required' => 'Naslov je obavezan',
     'Settings saved successfully.' => 'Podešavanja uspešno snimljena.',
     'Unable to save your settings.' => 'Nemoguće snimanje podešavanja.',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );

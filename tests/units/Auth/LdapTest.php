@@ -402,7 +402,7 @@ class LdapTest extends \Base
         $this->container['userSession'] = $this
             ->getMockBuilder('\Kanboard\Model\UserSession')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('refresh'))
+            ->setMethods(array('initialize'))
             ->getMock();
 
         $this->container['user'] = $this
@@ -436,7 +436,7 @@ class LdapTest extends \Base
 
         $this->container['userSession']
             ->expects($this->once())
-            ->method('refresh');
+            ->method('initialize');
 
         $this->assertTrue($ldap->authenticate('user', 'password'));
     }
@@ -446,7 +446,7 @@ class LdapTest extends \Base
         $this->container['userSession'] = $this
             ->getMockBuilder('\Kanboard\Model\UserSession')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('refresh'))
+            ->setMethods(array('initialize'))
             ->getMock();
 
         $this->container['user'] = $this
@@ -480,7 +480,7 @@ class LdapTest extends \Base
 
         $this->container['userSession']
             ->expects($this->never())
-            ->method('refresh');
+            ->method('initialize');
 
         $this->assertFalse($ldap->authenticate('user', 'password'));
     }
@@ -492,7 +492,7 @@ class LdapTest extends \Base
         $this->container['userSession'] = $this
             ->getMockBuilder('\Kanboard\Model\UserSession')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('refresh'))
+            ->setMethods(array('initialize'))
             ->getMock();
 
         $this->container['user'] = $this
@@ -542,7 +542,7 @@ class LdapTest extends \Base
 
         $this->container['userSession']
             ->expects($this->once())
-            ->method('refresh');
+            ->method('initialize');
 
         $this->assertTrue($ldap->authenticate('user', 'password'));
     }
@@ -554,7 +554,7 @@ class LdapTest extends \Base
         $this->container['userSession'] = $this
             ->getMockBuilder('\Kanboard\Model\UserSession')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('refresh'))
+            ->setMethods(array('initialize'))
             ->getMock();
 
         $this->container['user'] = $this
@@ -596,7 +596,7 @@ class LdapTest extends \Base
 
         $this->container['userSession']
             ->expects($this->never())
-            ->method('refresh');
+            ->method('initialize');
 
         $this->assertFalse($ldap->authenticate('user', 'password'));
     }

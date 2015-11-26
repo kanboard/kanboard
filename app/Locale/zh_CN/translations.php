@@ -124,7 +124,6 @@ return array(
     'The id is required' => '需要指定id',
     'The project id is required' => '需要指定项目id',
     'The project name is required' => '需要指定项目名称',
-    'This project must be unique' => '项目名称必须唯一',
     'The title is required' => '需要指定标题',
     'Settings saved successfully.' => '设置成功保存。',
     'Unable to save your settings.' => '无法保存你的设置。',
@@ -1064,4 +1063,9 @@ return array(
     // 'Duplicates are not imported' => '',
     // 'Usernames must be lowercase and unique' => '',
     // 'Passwords will be encrypted if present' => '',
+    // '%s attached a new file to the task %s' => '',
+    // 'Assign automatically a category based on a link' => '',
+    // 'BAM - Konvertibile Mark' => '',
+    // 'Assignee Username' => '',
+    // 'Assignee Name' => '',
 );
