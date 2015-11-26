@@ -5,7 +5,29 @@ namespace Schema;
 use PDO;
 use Kanboard\Core\Security\Token;
 
-const VERSION = 94;
+const VERSION = 95;
+
+function version_95(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE groups (
+            id INT NOT NULL AUTO_INCREMENT,
+            external_id VARCHAR(255) DEFAULT '',
+            name VARCHAR(100) NOT NULL UNIQUE,
+            PRIMARY KEY(id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE group_has_users (
+            group_id INT NOT NULL,
+            user_id INT NOT NULL,
+            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            UNIQUE(group_id, user_id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+}
 
 function version_94(PDO $pdo)
 {

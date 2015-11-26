@@ -32,6 +32,8 @@ class ClassProvider implements ServiceProviderInterface
             'Currency',
             'CustomFilter',
             'File',
+            'Group',
+            'GroupMember',
             'LastLogin',
             'Link',
             'Notification',
