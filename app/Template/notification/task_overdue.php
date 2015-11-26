@@ -2,11 +2,11 @@
 
 <table style="border: 1px solid silver;" cellpadding=5 cellspacing=1>
     <tr style="background-color:silver">
-        <th>ID</th>
-        <th>Title</th>
-        <th>Due date</th>
-        <th>Project name</th>
-        <th>Assignee</th>
+        <th><?= t('ID') ?></th>
+        <th><?= t('Title') ?></th>
+        <th><?= t('Due date') ?></th>
+        <th><?= t('Project name') ?></th>
+        <th><?= t('Assignee') ?></th>
     </tr>
 
     <?php 

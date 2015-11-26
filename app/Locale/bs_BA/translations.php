@@ -809,7 +809,7 @@ return array(
     'view the board on Kanboard' => 'pregled ploče na Kanboard-u',
     'The task have been moved to the first swimlane' => 'Zadatak je premješten u prvu swimline traku',
     'The task have been moved to another swimlane:' => 'Zadatak je premješten u drugu swimline traku',
-    'Overdue tasks for the project "%s"' => 'Zadaci u kašnjenju za projekat "%s"',
+    'Overdue tasks for the project(s) "%s"' => 'Zadaci u kašnjenju za projekat/te "%s"',
     'New title: %s' => 'Novi naslov: %s',
     'The task is not assigned anymore' => 'Zadatak nema više izvršioca',
     'New assignee: %s' => 'Novi izvršilac: %s',
@@ -1068,4 +1068,9 @@ return array(
     'BAM - Konvertibile Mark' => 'BAM - Konvertibilna marka',
     'Assignee Username' => 'Dodijeli korisničkom imenu',
     'Assignee Name' => 'Dodijeli imeenu',
+    'Group all overdue tasks in one email' => 'Grupiši sve zakašnjele zadatke u jedan email',
+    'Send all overdue tasks to project admin' => 'Pošalji sve zakašnjele zadatke projekt administratorima',
+    'ID' => 'ID',
+    'Project name' => 'Ime projekta',
+    
 );
