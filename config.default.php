@@ -32,19 +32,6 @@ define('MAIL_SMTP_ENCRYPTION', null); // Valid values are "null", "ssl" or "tls"
 // Sendmail command to use when the transport is "sendmail"
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 
-// Postmark API token (used to send emails through their API)
-define('POSTMARK_API_TOKEN', '');
-
-// Mailgun API key (used to send emails through their API)
-define('MAILGUN_API_TOKEN', '');
-
-// Mailgun domain name
-define('MAILGUN_DOMAIN', '');
-
-// Sendgrid API configuration
-define('SENDGRID_API_USER', '');
-define('SENDGRID_API_KEY', '');
-
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');
 

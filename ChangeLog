@@ -4,6 +4,7 @@ Version 1.0.22 (unreleased)
 New features:
 
 * User groups (Teams)
+* Add generic LDAP client library
 * Pluggable authentication and authorization system (Work in progress)
 * Add new project role Viewer (Work in progress)
 * Assign project permissions to a group (Work in progress)
