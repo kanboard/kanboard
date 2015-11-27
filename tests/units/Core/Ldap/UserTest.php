@@ -1,10 +1,10 @@
 <?php
 
+namespace Kanboard\Core\Ldap;
+
 require_once __DIR__.'/../../Base.php';
 
-use Kanboard\Core\Ldap\User;
-
-class UserTest extends Base
+class UserTest extends \Base
 {
     public function testGetProfile()
     {
