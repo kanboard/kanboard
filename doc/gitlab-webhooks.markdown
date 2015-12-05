@@ -56,6 +56,11 @@ When a task is created from a Gitlab issue, the link to the issue is added to th
 - Choose the event: **Gitlab issue closed**
 - Choose the action: **Close the task**
 
+### Reopen a Kanboard task when a closed issue is reopened on Gitlab
+
+- Choose the event: **Gitlab issue reopened**
+- Choose the action: **Open a task**
+
 ### Create a comment on Kanboard when an issue is commented on Gitlab
 
 - Choose the event: **Gitlab issue comment created**

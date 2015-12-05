@@ -3,6 +3,7 @@
 namespace Kanboard\Action;
 
 use Kanboard\Integration\GithubWebhook;
+use Kanboard\Integration\GitlabWebhook;
 use Kanboard\Integration\BitbucketWebhook;
 
 /**
@@ -23,6 +24,7 @@ class TaskOpen extends Base
     {
         return array(
             GithubWebhook::EVENT_ISSUE_REOPENED,
+            GitlabWebhook::EVENT_ISSUE_REOPENED,
             BitbucketWebhook::EVENT_ISSUE_REOPENED,
         );
     }
