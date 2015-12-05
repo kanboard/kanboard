@@ -136,3 +136,11 @@ Attribute: **swimlane**
 - Find tasks in the default swimlane: `swimlane:default`
 - Find tasks into several swimlanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
 
+Search by task link
+------------------
+
+Attribute: **link**
+
+- Find tasks by link name: `link:"is a milestone of"`
+- Find tasks into several links: `link:"is a milestone of" link:"relates to"`
+

@@ -844,7 +844,7 @@ return array(
     'Stop timer' => 'Остановить таймер',
     'Start timer' => 'Запустить таймер',
     'Add project member' => 'Добавить номер проекта',
-    'Enable notifications' => 'Отключить уведомления',
+    'Enable notifications' => 'Включить уведомления',
     'My activity stream' => 'Лента моей активности',
     'My calendar' => 'Мой календарь',
     'Search tasks' => 'Поиск задачи',

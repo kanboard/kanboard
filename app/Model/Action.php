@@ -118,6 +118,7 @@ class Action extends Base
             GithubWebhook::EVENT_ISSUE_COMMENT => t('Github issue comment created'),
             GitlabWebhook::EVENT_COMMIT => t('Gitlab commit received'),
             GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
+            GitlabWebhook::EVENT_ISSUE_REOPENED => t('Gitlab issue reopened'),
             GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
             GitlabWebhook::EVENT_ISSUE_COMMENT => t('Gitlab issue comment created'),
             BitbucketWebhook::EVENT_COMMIT => t('Bitbucket commit received'),

@@ -6,6 +6,7 @@ use Kanboard\Model\Project;
 use Kanboard\Model\User;
 use Kanboard\Model\TaskFilter;
 use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskLink;
 use Kanboard\Core\DateParser;
 use Kanboard\Model\Category;
 use Kanboard\Model\Subtask;
@@ -550,6 +551,65 @@ class TaskFilterTest extends Base
         $this->assertNotEmpty($tasks);
         $this->assertCount(1, $tasks);
         $this->assertEquals('task3', $tasks[0]['title']);
+    }
+
+    public function testSearchWithLink()
+    {
+        $p = new Project($this->container);
+        $u = new User($this->container);
+        $tc = new TaskCreation($this->container);
+        $tl = new TaskLink($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(2, $u->create(array('username' => 'bob', 'name' => 'Bob Ryan')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'my task title is awesome', 'color_id' => 'light_green')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'my task title is amazing', 'color_id' => 'blue')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'Bob at work')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'I have a bad feeling about that')));
+        $this->assertEquals(1, $tl->create(1, 2, 9)); // #1 is a milestone of #2
+        $this->assertEquals(3, $tl->create(2, 1, 2)); // #2 blocks #1
+        $this->assertEquals(5, $tl->create(3, 2, 2)); // #3 blocks #2
+
+        $tf->search('link:"is a milestone of"');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('my task title is awesome', $tasks[0]['title']);
+
+        $tf->search('link:"is a milestone of" amazing');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('link:"unknown"');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('link:unknown');
+        $tasks = $tf->findAll();
+        $this->assertEmpty($tasks);
+
+        $tf->search('link:blocks amazing');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('my task title is amazing', $tasks[0]['title']);
+
+        $tf->search('link:"is a milestone of" link:blocks');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(3, $tasks);
+        $this->assertEquals('my task title is awesome', $tasks[0]['title']);
+        $this->assertEquals('my task title is amazing', $tasks[1]['title']);
+        $this->assertEquals('Bob at work', $tasks[2]['title']);
+
+        $tf->search('link:"is a milestone of" link:blocks link:unknown');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(3, $tasks);
+        $this->assertEquals('my task title is awesome', $tasks[0]['title']);
+        $this->assertEquals('my task title is amazing', $tasks[1]['title']);
+        $this->assertEquals('Bob at work', $tasks[2]['title']);
     }
 
     public function testCopy()

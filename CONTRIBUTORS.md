@@ -73,6 +73,8 @@ Contributors:
 - Paolo Mainieri
 - [Pavel Roušar](https://github.com/rousarp)
 - [Peller Zoltan](https://github.com/PierP)
+- [Perburn](https://github.com/perburn)
+- [Peripatetic-sojourner](https://github.com/peripatetic-sojourner)
 - [Petja Touru](https://github.com/Petja)
 - [Pierre-Alexis de Solminihac](https://github.com/pa-de-solminihac)
 - [Piotr Zęgota](https://github.com/ZegalPL)
