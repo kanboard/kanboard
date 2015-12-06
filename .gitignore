@@ -13,6 +13,7 @@ Thumbs.db
 *~
 *.out
 *.log
+.composer.lock
 .vagrant
 config.php
 data/files
