@@ -71,7 +71,7 @@ class AuthenticationManager extends Base
         if ($this->userSession->isLogged() ) {
             foreach ($this->filterProviders('SessionCheckProviderInterface') as $provider) {
                 if (! $provider->isValidSession()) {
-                    unset($this->sessionStorage->user);
+                    $this->sessionStorage->flush();
                     $this->preAuthentication();
                     return false;
                 }

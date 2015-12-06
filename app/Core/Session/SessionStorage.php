@@ -62,6 +62,21 @@ class SessionStorage
     }
 
     /**
+     * Flush session data
+     *
+     * @access public
+     */
+    public function flush()
+    {
+        $session = get_object_vars($this);
+        unset($session['storage']);
+
+        foreach (array_keys($session) as $property) {
+            unset($this->$property);
+        }
+    }
+
+    /**
      * Copy class properties to external storage
      *
      * @access public
