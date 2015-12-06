@@ -34,18 +34,18 @@ class User
     }
 
     /**
-     * Get user profile (helper)
+     * Get user profile
      *
      * @static
      * @access public
      * @param  Client    $client
-     * @param  string    $query
+     * @param  string    $username
      * @return array
      */
-    public static function getUser(Client $client, $query)
+    public static function getUser(Client $client, $username)
     {
         $self = new self(new Query($client));
-        return $self->find($query);
+        return $self->find($self->getLdapUserPattern($username));
     }
 
     /**
@@ -203,5 +203,21 @@ class User
         }
 
         return LDAP_USER_BASE_DN;
+    }
+
+    /**
+     * Get LDAP user pattern
+     *
+     * @access public
+     * @param  string  $username
+     * @return string
+     */
+    public function getLdapUserPattern($username)
+    {
+        if (! LDAP_USER_FILTER) {
+            throw new LogicException('LDAP user filter empty, check the parameter LDAP_USER_FILTER');
+        }
+
+        return sprintf(LDAP_USER_FILTER, $username);
     }
 }

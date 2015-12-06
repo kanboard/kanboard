@@ -52,6 +52,6 @@ define('LDAP_GROUP_FILTER', '(&(objectClass=group)(sAMAccountName=%s*))');
 With the filter given as example above, Kanboard will search for groups that match the query.
 If the end-user type the text "My group" in the auto-complete box, Kanboard will return all groups that match the pattern: `(&(objectClass=group)(sAMAccountName=My group*))`.
 
-Note that the special characters ***** is import here, otherwise an exact match will be done.
+Note that the special characters `*` is important here, otherwise an exact match will be done.
 
 [More examples of LDAP filters for Active Directory](http://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)

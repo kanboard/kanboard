@@ -81,7 +81,7 @@ Examples:
 
 Other examples of [filters for Active Directory](http://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)
 
-By example you can filter access to Kanboard from the user filter:
+Example to filter access to Kanboard:
 
 `(&(objectClass=user)(sAMAccountName=%s)(memberOf=CN=Kanboard Users,CN=Users,DC=kanboard,DC=local))`
 

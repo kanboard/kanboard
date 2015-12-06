@@ -8,7 +8,7 @@
     <?= $this->form->hidden('id', $values) ?>
 
     <?= $this->form->label(t('Username'), 'username') ?>
-    <?= $this->form->text('username', $values, $errors, array('required', $values['is_ldap_user'] == 1 ? 'readonly' : '', 'maxlength="50"')) ?>
+    <?= $this->form->text('username', $values, $errors, array('required', isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1 ? 'readonly' : '', 'maxlength="50"')) ?>
 
     <?= $this->form->label(t('Name'), 'name') ?>
     <?= $this->form->text('name', $values, $errors) ?>

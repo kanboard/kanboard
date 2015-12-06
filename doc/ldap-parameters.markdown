@@ -28,4 +28,6 @@ Here are the list of available LDAP parameters:
 | `LDAP_GROUP_FILTER`             | Empty          | LDAP group filter (Example: "(&(objectClass=group)(sAMAccountName=%s*))")   |
 | `LDAP_GROUP_ATTRIBUTE_NAME`     | cn             | LDAP attribute for the group name  |
 
+Notes:
+
 - LDAP attributes must be in lowercase

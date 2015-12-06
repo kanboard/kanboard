@@ -46,10 +46,11 @@ Using Kanboard
 - [Subtasks](subtasks.markdown)
 - [Analytics for tasks](analytics-tasks.markdown)
 
-### Working with users
+### Working with users and groups
 
 - [Roles](roles.markdown)
 - [User Types](user-types.markdown)
+- [Group management](groups.markdown)
 - [User management](user-management.markdown)
 - [Notifications](notifications.markdown)
 - [Two factor authentication](2fa.markdown)

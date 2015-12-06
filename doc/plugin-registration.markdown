@@ -175,26 +175,3 @@ The automatic action class must inherits from the class `Kanboard\Action\Base` a
 - `hasRequiredCondition(array $data)`
 
 For more details you should take a look to existing automatic actions or this [plugin example](https://github.com/kanboard/plugin-example-automatic-action).
-
-Extend ACL
-----------
-
-Kanboard use an access list for privilege separations. Your extension can add new rules:
-
-```php
-$this->acl->extend('project_manager_acl', array('mycontroller' => '*'));
-```
-
-- The first argument is the ACL name
-- The second argument are the new rules
-    + Syntax to include only some actions: `array('controller' => array('action1', 'action2'))`
-    + Syntax to include all actions of a controller: `array('controller' => '*')`
-    + Everything is lowercase
-
-List of ACL:
-
-- `public_acl`: Public access without authentication
-- `project_member_acl`: Project member access
-- `project_manager_acl`: Project manager access
-- `project_admin_acl`: Project Admins
-- `admin_acl`: Administrators
