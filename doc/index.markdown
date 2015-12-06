@@ -118,6 +118,7 @@ Technical details
 
 - [LDAP authentication](ldap-authentication.markdown)
 - [LDAP group sync](ldap-group-sync.markdown)
+- [LDAP parameters](ldap-parameters.markdown)
 - [Google authentication](google-authentication.markdown)
 - [Github authentication](github-authentication.markdown)
 - [Gitlab authentication](gitlab-authentication.markdown)
