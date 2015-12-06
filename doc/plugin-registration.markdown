@@ -85,7 +85,7 @@ Plugin Translations
 Plugin can be translated in the same way the rest of the application. You must load the translations yourself when the session is created:
 
 ```php
-$this->on('session.bootstrap', function($container) {
+$this->on('app.bootstrap', function($container) {
     Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
 });
 ```
@@ -126,12 +126,12 @@ $this->container['hourlyRate']->getAll();
 Keys of the containers are unique across the application. If you override an existing class you will change the default behavior.
 
 Event Listening
-----------------
+---------------
 
 Kanboard use internal events and your plugin can listen and perform actions on these events.
 
 ```php
-$this->on('session.bootstrap', function($container) {
+$this->on('app.bootstrap', function($container) {
     // Do something
 });
 ```

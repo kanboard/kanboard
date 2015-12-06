@@ -13,7 +13,7 @@ For each HTTP request:
     1. Fetch user role for this project
     2. Grant/Denied access based on the project access map
 
-Extending access Map
+Extending Access Map
 --------------------
 
 The Access List (ACL) is based on the controller class name and the method name.

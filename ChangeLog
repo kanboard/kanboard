@@ -12,11 +12,12 @@ Breaking changes:
     - createUser
     - createLdapUser
     - updateUser
+* Event removed: "session.bootstrap" use "app.boostrap" instead
 
 New features:
 
 * Add pluggable authentication and authorization system (Work in progress)
-* Add groups (teams)
+* Add groups (teams/organization)
 * Add LDAP groups synchronization
 * Add project groups permissions
 * Add new project role Viewer (Work in progress)
