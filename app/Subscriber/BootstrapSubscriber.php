@@ -30,6 +30,7 @@ class BootstrapSubscriber extends \Kanboard\Core\Base implements EventSubscriber
             $this->logger->debug('RENDERING={time}', array('time' => microtime(true) - $this->request->getStartTime()));
             $this->logger->debug('MEMORY='.$this->helper->text->bytes(memory_get_usage()));
             $this->logger->debug('URI='.$this->request->getUri());
+            $this->logger->debug('###############################################');
         }
     }
 }
