@@ -19,6 +19,7 @@ Using Kanboard
 
 ### Working with projects
 
+- [project-types](project-types.markdown)
 - [Creating projects](creating-projects.markdown)
 - [Editing projects](editing-projects.markdown)
 - [Sharing boards and tasks](sharing-projects.markdown)
@@ -47,6 +48,7 @@ Using Kanboard
 
 ### Working with users
 
+- [Roles](roles.markdown)
 - [User management](user-management.markdown)
 - [Notifications](notifications.markdown)
 - [Two factor authentication](2fa.markdown)
