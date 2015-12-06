@@ -1,7 +1,7 @@
 Kanboard
 ========
 
-Kanboard is a project management software that use the Kanban methodology.
+Kanboard is a project management software that uses the Kanban methodology.
 
 Official website: <http://kanboard.net>
 
