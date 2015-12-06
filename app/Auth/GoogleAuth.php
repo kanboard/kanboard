@@ -116,10 +116,10 @@ class GoogleAuth extends Base implements OAuthAuthenticationProviderInterface
     /**
      * Get Google profile
      *
-     * @access private
+     * @access public
      * @return array
      */
-    private function getProfile()
+    public function getProfile()
     {
         $this->getService()->getAccessToken($this->code);
 

@@ -75,7 +75,7 @@ class Group extends Base
      */
     public function search($input)
     {
-        return $this->db->table(self::TABLE)->ilike('name', '%'.$input.'%')->findAll();
+        return $this->db->table(self::TABLE)->ilike('name', '%'.$input.'%')->asc('name')->findAll();
     }
 
     /**

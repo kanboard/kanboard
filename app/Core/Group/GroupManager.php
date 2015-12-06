@@ -66,6 +66,6 @@ class GroupManager
             }
         }
 
-        return $result;
+        return array_values($result);
     }
 }

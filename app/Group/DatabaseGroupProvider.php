@@ -39,7 +39,7 @@ class DatabaseGroupProvider implements GroupProviderInterface
      */
     public function getInternalId()
     {
-        return $this->group['id'];
+        return (int) $this->group['id'];
     }
 
     /**

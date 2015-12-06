@@ -116,10 +116,10 @@ class GitlabAuth extends Base implements OAuthAuthenticationProviderInterface
     /**
      * Get Gitlab profile
      *
-     * @access private
+     * @access public
      * @return array
      */
-    private function getProfile()
+    public function getProfile()
     {
         $this->getService()->getAccessToken($this->code);
 
