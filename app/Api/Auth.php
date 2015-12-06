@@ -60,6 +60,21 @@ class Auth extends Base
      */
     private function isAppAuthenticated($username, $password)
     {
-        return $username === 'jsonrpc' && $password === $this->config->get('api_token');
+        return $username === 'jsonrpc' && $password === $this->getApiToken();
+    }
+
+    /**
+     * Get API Token
+     *
+     * @access private
+     * @return string
+     */
+    private function getApiToken()
+    {
+        if (defined('API_AUTHENTICATION_TOKEN')) {
+            return API_AUTHENTICATION_TOKEN;
+        }
+
+        return $this->config->get('api_token');
     }
 }

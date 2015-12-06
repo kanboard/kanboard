@@ -23,6 +23,7 @@ New features:
 * Add new project role Viewer (Work in progress)
 * Add generic LDAP client library
 * Add search query attribute for task link
+* Add the possibility to define API token in config file
 
 Version 1.0.21
 --------------
