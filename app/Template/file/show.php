@@ -9,11 +9,9 @@
         <ul class="task-show-images">
             <?php foreach ($images as $file): ?>
                 <li>
-                    <?php if (function_exists('imagecreatetruecolor')): ?>
                     <div class="img_container">
                         <img src="<?= $this->url->href('file', 'thumbnail', array('file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" alt="<?= $this->e($file['name']) ?>"/>
                     </div>
-                    <?php endif ?>
                     <p>
                         <?= $this->e($file['name']) ?>
                         <span class="tooltip" title='<?= t('uploaded by: %s', $file['user_name'] ?: $file['username']).'<br>'.t('uploaded on: %s', dt('%B %e, %Y at %k:%M %p', $file['date'])).'<br>'.t('size: %s', $this->text->bytes($file['size'])) ?>'>
@@ -22,7 +20,9 @@
                     </p>
                     <span class="task-show-file-actions task-show-image-actions">
                         <i class="fa fa-eye"></i> <?= $this->url->link(t('open file'), 'file', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
-                        <i class="fa fa-trash"></i> <?= $this->url->link(t('remove'), 'file', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                        <?php if ($this->user->hasProjectAccess('file', 'remove', $task['project_id'])): ?>
+                            <i class="fa fa-trash"></i> <?= $this->url->link(t('remove'), 'file', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                        <?php endif ?>
                         <i class="fa fa-download"></i> <?= $this->url->link(t('download'), 'file', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                     </span>
                 </li>
@@ -44,7 +44,9 @@
                     </td>
                     <td>
                         <span class="task-show-file-actions">
-                            <i class="fa fa-trash"></i> <?= $this->url->link(t('remove'), 'file', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                            <?php if ($this->user->hasProjectAccess('file', 'remove', $task['project_id'])): ?>
+                                <i class="fa fa-trash"></i> <?= $this->url->link(t('remove'), 'file', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                            <?php endif ?>
                             <i class="fa fa-download"></i> <?= $this->url->link(t('download'), 'file', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                         </span>
                     </td>

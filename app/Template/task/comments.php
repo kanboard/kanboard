@@ -15,12 +15,12 @@
             'comment' => $comment,
             'task' => $task,
             'project' => $project,
-            'not_editable' => isset($not_editable) && $not_editable,
+            'editable' => $editable,
             'is_public' => isset($is_public) && $is_public,
         )) ?>
     <?php endforeach ?>
 
-    <?php if (! isset($not_editable)): ?>
+    <?php if ($editable): ?>
         <?= $this->render('comment/create', array(
             'skip_cancel' => true,
             'values' => array(

@@ -16,7 +16,7 @@
         <?php if (! isset($preview)): ?>
         <ul class="comment-actions">
             <li><a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a></li>
-            <?php if ((! isset($not_editable) || ! $not_editable) && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
+            <?php if ($editable && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
                 <li>
                     <?= $this->url->link(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                 </li>
