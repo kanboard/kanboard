@@ -42,7 +42,7 @@ class RouteProvider implements ServiceProviderInterface
             // Project routes
             $container['router']->addRoute('projects', 'project', 'index');
             $container['router']->addRoute('project/create', 'project', 'create');
-            $container['router']->addRoute('project/create/:private', 'project', 'create', array('private'));
+            $container['router']->addRoute('project/create/private', 'project', 'createPrivate');
             $container['router']->addRoute('project/:project_id', 'project', 'show', array('project_id'));
             $container['router']->addRoute('p/:project_id', 'project', 'show', array('project_id'));
             $container['router']->addRoute('project/:project_id/customer-filter', 'customfilter', 'index', array('project_id'));
@@ -137,6 +137,21 @@ class RouteProvider implements ServiceProviderInterface
             // Ical routes
             $container['router']->addRoute('ical/project/:token', 'ical', 'project', array('token'));
             $container['router']->addRoute('ical/user/:token', 'ical', 'user', array('token'));
+
+            // Users
+            $container['router']->addRoute('users', 'user', 'index');
+            $container['router']->addRoute('user/show/:user_id', 'user', 'show', array('user_id'));
+            $container['router']->addRoute('user/show/:user_id/timesheet', 'user', 'timesheet', array('user_id'));
+            $container['router']->addRoute('user/show/:user_id/last-logins', 'user', 'last', array('user_id'));
+            $container['router']->addRoute('user/show/:user_id/sessions', 'user', 'sessions', array('user_id'));
+            $container['router']->addRoute('user/:user_id/edit', 'user', 'edit', array('user_id'));
+            $container['router']->addRoute('user/:user_id/password', 'user', 'password', array('user_id'));
+            $container['router']->addRoute('user/:user_id/share', 'user', 'share', array('user_id'));
+            $container['router']->addRoute('user/:user_id/notifications', 'user', 'notifications', array('user_id'));
+            $container['router']->addRoute('user/:user_id/accounts', 'user', 'external', array('user_id'));
+            $container['router']->addRoute('user/:user_id/integrations', 'user', 'integrations', array('user_id'));
+            $container['router']->addRoute('user/:user_id/authentication', 'user', 'authentication', array('user_id'));
+            $container['router']->addRoute('user/:user_id/2fa', 'twofactor', 'index', array('user_id'));
 
             // Auth routes
             $container['router']->addRoute('oauth/google', 'oauth', 'google');
