@@ -33,7 +33,7 @@ class Entries
      * Get all entries
      *
      * @access public
-     * @return []Entry
+     * @return Entry[]
      */
     public function getAll()
     {

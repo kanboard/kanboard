@@ -172,9 +172,9 @@ class ProjectGroupRole extends Base
 
         foreach ($rows as $row) {
             $result = $this->db->table(self::TABLE)->save(array(
-               'project_id' => $project_dst_id,
-               'group_id' => $row['group_id'],
-               'role' => $row['role'],
+                'project_id' => $project_dst_id,
+                'group_id' => $row['group_id'],
+                'role' => $row['role'],
             ));
 
             if (! $result) {

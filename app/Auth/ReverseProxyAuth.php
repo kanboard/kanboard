@@ -67,7 +67,7 @@ class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterfac
      * Get user object
      *
      * @access public
-     * @return null|ReverseProxyUserProvider
+     * @return ReverseProxyUserProvider
      */
     public function getUser()
     {

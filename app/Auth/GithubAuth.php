@@ -84,7 +84,7 @@ class GithubAuth extends Base implements OAuthAuthenticationProviderInterface
      * Get user object
      *
      * @access public
-     * @return null|GithubUserProvider
+     * @return GithubUserProvider
      */
     public function getUser()
     {

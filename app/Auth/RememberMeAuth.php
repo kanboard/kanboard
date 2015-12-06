@@ -66,7 +66,7 @@ class RememberMeAuth extends Base implements PreAuthenticationProviderInterface
      * Get user object
      *
      * @access public
-     * @return null|DatabaseUserProvider
+     * @return DatabaseUserProvider
      */
     public function getUser()
     {

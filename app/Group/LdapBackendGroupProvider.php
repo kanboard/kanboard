@@ -22,7 +22,7 @@ class LdapBackendGroupProvider extends Base implements GroupBackendProviderInter
      *
      * @access public
      * @param  string $input
-     * @return []LdapGroupProvider
+     * @return LdapGroupProvider[]
      */
     public function find($input)
     {

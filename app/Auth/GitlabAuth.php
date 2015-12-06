@@ -84,7 +84,7 @@ class GitlabAuth extends Base implements OAuthAuthenticationProviderInterface
      * Get user object
      *
      * @access public
-     * @return null|GitlabUserProvider
+     * @return GitlabUserProvider
      */
     public function getUser()
     {

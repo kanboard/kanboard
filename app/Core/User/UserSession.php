@@ -114,7 +114,7 @@ class UserSession extends Base
      * Get username
      *
      * @access public
-     * @return integer
+     * @return string
      */
     public function getUsername()
     {
