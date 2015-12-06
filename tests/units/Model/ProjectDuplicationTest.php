@@ -5,13 +5,14 @@ require_once __DIR__.'/../Base.php';
 use Kanboard\Model\Action;
 use Kanboard\Model\Project;
 use Kanboard\Model\Category;
-use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\ProjectUserRole;
 use Kanboard\Model\ProjectDuplication;
 use Kanboard\Model\User;
 use Kanboard\Model\Swimlane;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
+use Kanboard\Core\Security\Role;
 
 class ProjectDuplicationTest extends Base
 {
@@ -72,10 +73,10 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(0, $project['is_public']);
         $this->assertEmpty($project['token']);
 
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
 
-        $this->assertEquals(array(1 => 'admin'), $pp->getMembers(1));
-        $this->assertEquals(array(1 => 'admin'), $pp->getMembers(2));
+        $this->assertEquals(array(1 => 'admin'), $pp->getAssignableUsers(1));
+        $this->assertEquals(array(1 => 'admin'), $pp->getAssignableUsers(2));
     }
 
     public function testCloneProjectWithCategories()
@@ -114,7 +115,7 @@ class ProjectDuplicationTest extends Base
     {
         $p = new Project($this->container);
         $c = new Category($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
         $u = new User($this->container);
         $pd = new ProjectDuplication($this->container);
 
@@ -123,15 +124,12 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(4, $u->create(array('username' => 'unittest3', 'password' => 'unittest')));
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->addMember(1, 4));
-        $this->assertTrue($pp->addManager(1, 3));
-        $this->assertTrue($pp->isMember(1, 2));
-        $this->assertTrue($pp->isMember(1, 3));
-        $this->assertTrue($pp->isMember(1, 4));
-        $this->assertFalse($pp->isManager(1, 2));
-        $this->assertTrue($pp->isManager(1, 3));
-        $this->assertFalse($pp->isManager(1, 4));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 4, Role::PROJECT_MANAGER));
+        $this->assertEquals(Role::PROJECT_MEMBER, $pp->getUserRole(1, 2));
+        $this->assertEquals(Role::PROJECT_MEMBER, $pp->getUserRole(1, 3));
+        $this->assertEquals(Role::PROJECT_MANAGER, $pp->getUserRole(1, 4));
 
         $this->assertEquals(2, $pd->duplicate(1));
 
@@ -139,13 +137,10 @@ class ProjectDuplicationTest extends Base
         $this->assertNotEmpty($project);
         $this->assertEquals('P1 (Clone)', $project['name']);
 
-        $this->assertEquals(3, count($pp->getMembers(2)));
-        $this->assertTrue($pp->isMember(2, 2));
-        $this->assertTrue($pp->isMember(2, 3));
-        $this->assertTrue($pp->isMember(2, 4));
-        $this->assertFalse($pp->isManager(2, 2));
-        $this->assertTrue($pp->isManager(2, 3));
-        $this->assertFalse($pp->isManager(2, 4));
+        $this->assertEquals(3, count($pp->getUsers(2)));
+        $this->assertEquals(Role::PROJECT_MEMBER, $pp->getUserRole(2, 2));
+        $this->assertEquals(Role::PROJECT_MEMBER, $pp->getUserRole(2, 3));
+        $this->assertEquals(Role::PROJECT_MANAGER, $pp->getUserRole(2, 4));
     }
 
     public function testCloneProjectWithActionTaskAssignCurrentUser()

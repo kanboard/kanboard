@@ -24,7 +24,7 @@ class Auth extends Base
         }
 
         $this->response->html($this->template->layout('auth/index', array(
-            'captcha' => isset($values['username']) && $this->authentication->hasCaptcha($values['username']),
+            'captcha' => ! empty($values['username']) && $this->userLocking->hasCaptcha($values['username']),
             'errors' => $errors,
             'values' => $values,
             'no_layout' => true,
@@ -40,18 +40,11 @@ class Auth extends Base
     public function check()
     {
         $values = $this->request->getValues();
+        $this->sessionStorage->hasRememberMe = ! empty($values['remember_me']);
         list($valid, $errors) = $this->authentication->validateForm($values);
 
         if ($valid) {
-            if (isset($this->sessionStorage->redirectAfterLogin)
-                && ! empty($this->sessionStorage->redirectAfterLogin)
-                && ! filter_var($this->sessionStorage->redirectAfterLogin, FILTER_VALIDATE_URL)) {
-                $redirect = $this->sessionStorage->redirectAfterLogin;
-                unset($this->sessionStorage->redirectAfterLogin);
-                $this->response->redirect($redirect);
-            }
-
-            $this->response->redirect($this->helper->url->to('app', 'index'));
+            $this->redirectAfterLogin();
         }
 
         $this->login($values, $errors);
@@ -64,7 +57,6 @@ class Auth extends Base
      */
     public function logout()
     {
-        $this->authentication->backend('rememberMe')->destroy($this->userSession->getId());
         $this->sessionManager->close();
         $this->response->redirect($this->helper->url->to('auth', 'login'));
     }
@@ -82,5 +74,21 @@ class Auth extends Base
         $builder->build();
         $this->sessionStorage->captcha = $builder->getPhrase();
         $builder->output();
+    }
+
+    /**
+     * Redirect the user after the authentication
+     *
+     * @access private
+     */
+    private function redirectAfterLogin()
+    {
+        if (isset($this->sessionStorage->redirectAfterLogin) && ! empty($this->sessionStorage->redirectAfterLogin) && ! filter_var($this->sessionStorage->redirectAfterLogin, FILTER_VALIDATE_URL)) {
+            $redirect = $this->sessionStorage->redirectAfterLogin;
+            unset($this->sessionStorage->redirectAfterLogin);
+            $this->response->redirect($redirect);
+        }
+
+        $this->response->redirect($this->helper->url->to('app', 'index'));
     }
 }

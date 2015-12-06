@@ -218,6 +218,46 @@ CREATE TABLE files (
 
 
 --
+-- Name: group_has_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE group_has_users (
+    group_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+--
+-- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE groups (
+    id integer NOT NULL,
+    external_id character varying(255) DEFAULT ''::character varying,
+    name character varying(100) NOT NULL
+);
+
+
+--
+-- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
+
+
+--
 -- Name: last_logins; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -421,6 +461,17 @@ ALTER SEQUENCE project_has_categories_id_seq OWNED BY project_has_categories.id;
 
 
 --
+-- Name: project_has_groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE project_has_groups (
+    group_id integer NOT NULL,
+    project_id integer NOT NULL,
+    role character varying(25) NOT NULL
+);
+
+
+--
 -- Name: project_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -466,30 +517,10 @@ ALTER SEQUENCE project_has_notification_types_id_seq OWNED BY project_has_notifi
 --
 
 CREATE TABLE project_has_users (
-    id integer NOT NULL,
     project_id integer NOT NULL,
     user_id integer NOT NULL,
-    is_owner boolean DEFAULT false
+    role character varying(25) DEFAULT 'project-viewer'::character varying NOT NULL
 );
-
-
---
--- Name: project_has_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE project_has_users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: project_has_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE project_has_users_id_seq OWNED BY project_has_users.id;
 
 
 --
@@ -931,7 +962,6 @@ CREATE TABLE users (
     id integer NOT NULL,
     username character varying(50) NOT NULL,
     password character varying(255),
-    is_admin boolean DEFAULT false,
     is_ldap_user boolean DEFAULT false,
     name character varying(255),
     email character varying(255),
@@ -947,8 +977,8 @@ CREATE TABLE users (
     notifications_filter integer DEFAULT 4,
     nb_failed_login integer DEFAULT 0,
     lock_expiration_date bigint DEFAULT 0,
-    is_project_admin boolean DEFAULT false,
-    gitlab_id integer
+    gitlab_id integer,
+    role character varying(25) DEFAULT 'app-user'::character varying NOT NULL
 );
 
 
@@ -1017,6 +1047,13 @@ ALTER TABLE ONLY files ALTER COLUMN id SET DEFAULT nextval('task_has_files_id_se
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY last_logins ALTER COLUMN id SET DEFAULT nextval('last_logins_id_seq'::regclass);
 
 
@@ -1060,13 +1097,6 @@ ALTER TABLE ONLY project_has_categories ALTER COLUMN id SET DEFAULT nextval('pro
 --
 
 ALTER TABLE ONLY project_has_notification_types ALTER COLUMN id SET DEFAULT nextval('project_has_notification_types_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY project_has_users ALTER COLUMN id SET DEFAULT nextval('project_has_users_id_seq'::regclass);
 
 
 --
@@ -1203,6 +1233,30 @@ ALTER TABLE ONLY custom_filters
 
 
 --
+-- Name: group_has_users_group_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY group_has_users
+    ADD CONSTRAINT group_has_users_group_id_user_id_key UNIQUE (group_id, user_id);
+
+
+--
+-- Name: groups_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY groups
+    ADD CONSTRAINT groups_name_key UNIQUE (name);
+
+
+--
+-- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY groups
+    ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: last_logins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1275,6 +1329,14 @@ ALTER TABLE ONLY project_has_categories
 
 
 --
+-- Name: project_has_groups_group_id_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY project_has_groups
+    ADD CONSTRAINT project_has_groups_group_id_project_id_key UNIQUE (group_id, project_id);
+
+
+--
 -- Name: project_has_metadata_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1296,14 +1358,6 @@ ALTER TABLE ONLY project_has_notification_types
 
 ALTER TABLE ONLY project_has_notification_types
     ADD CONSTRAINT project_has_notification_types_project_id_notification_type_key UNIQUE (project_id, notification_type);
-
-
---
--- Name: project_has_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY project_has_users
-    ADD CONSTRAINT project_has_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -1570,13 +1624,6 @@ CREATE UNIQUE INDEX user_has_notification_types_user_idx ON user_has_notificatio
 
 
 --
--- Name: users_admin_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX users_admin_idx ON users USING btree (is_admin);
-
-
---
 -- Name: users_username_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1613,6 +1660,22 @@ ALTER TABLE ONLY columns
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_task_id_fkey FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
+
+
+--
+-- Name: group_has_users_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY group_has_users
+    ADD CONSTRAINT group_has_users_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE CASCADE;
+
+
+--
+-- Name: group_has_users_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY group_has_users
+    ADD CONSTRAINT group_has_users_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 
 --
@@ -1677,6 +1740,22 @@ ALTER TABLE ONLY project_daily_column_stats
 
 ALTER TABLE ONLY project_has_categories
     ADD CONSTRAINT project_has_categories_project_id_fkey FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+
+--
+-- Name: project_has_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY project_has_groups
+    ADD CONSTRAINT project_has_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE CASCADE;
+
+
+--
+-- Name: project_has_groups_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY project_has_groups
+    ADD CONSTRAINT project_has_groups_project_id_fkey FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
 
 
 --
@@ -1922,8 +2001,7 @@ INSERT INTO settings (option, value) VALUES ('board_highlight_period', '172800')
 INSERT INTO settings (option, value) VALUES ('board_public_refresh_interval', '60');
 INSERT INTO settings (option, value) VALUES ('board_private_refresh_interval', '10');
 INSERT INTO settings (option, value) VALUES ('board_columns', '');
-INSERT INTO settings (option, value) VALUES ('webhook_token', 'ca57fbbc9e17d00a1ca8c2e45d8dc5d1b54ede740f72709bae2e8de26fbd');
-INSERT INTO settings (option, value) VALUES ('api_token', 'bc20677f12faa32d9426af9a31041b8576c13f4ab54b641bae955112ae79');
+INSERT INTO settings (option, value) VALUES ('webhook_token', '2e3e9c804be85c221394727a142e6e45f1f3bfaa3ab85576d5d555ea661a');
 INSERT INTO settings (option, value) VALUES ('application_language', 'en_US');
 INSERT INTO settings (option, value) VALUES ('application_timezone', 'UTC');
 INSERT INTO settings (option, value) VALUES ('application_url', '');
@@ -1940,6 +2018,7 @@ INSERT INTO settings (option, value) VALUES ('webhook_url', '');
 INSERT INTO settings (option, value) VALUES ('default_color', 'yellow');
 INSERT INTO settings (option, value) VALUES ('subtask_time_tracking', '1');
 INSERT INTO settings (option, value) VALUES ('cfd_include_closed_tasks', '1');
+INSERT INTO settings (option, value) VALUES ('api_token', '19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929');
 
 
 --
@@ -1987,4 +2066,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$4/2e1E1VIeZVc5PhRHQJmuOBI/UV7H73hRyH60IvpTpY05G9tD49W', '1');INSERT INTO schema_version VALUES ('74');
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$fe3.kkCOOiOxf21QW0tEUOCo5hsL19ct4YUumL.xxTnKKMbJCUb/y', '1');INSERT INTO schema_version VALUES ('77');

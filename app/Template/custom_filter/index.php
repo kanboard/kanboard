@@ -32,7 +32,7 @@
             </td>
             <td><?= $this->e($filter['owner_name'] ?: $filter['owner_username']) ?></td>
             <td>
-                <?php if ($filter['user_id'] == $this->user->getId() || $this->user->isProjectManagementAllowed($project['id'])): ?>
+                <?php if ($filter['user_id'] == $this->user->getId() || $this->user->hasProjectAccess('customfilter', 'edit', $project['id'])): ?>
                     <ul>
                         <li><?= $this->url->link(t('Remove'), 'customfilter', 'remove', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id']), true) ?></li>
                         <li><?= $this->url->link(t('Edit'), 'customfilter', 'edit', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id'])) ?></li>

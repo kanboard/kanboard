@@ -2,8 +2,6 @@
 
 namespace Kanboard\Model;
 
-use PicoDb\Database;
-
 /**
  * Project Daily Stats
  *

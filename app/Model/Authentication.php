@@ -2,7 +2,6 @@
 
 namespace Kanboard\Model;
 
-use Kanboard\Core\Http\Request;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Gregwar\Captcha\CaptchaBuilder;
@@ -16,113 +15,6 @@ use Gregwar\Captcha\CaptchaBuilder;
 class Authentication extends Base
 {
     /**
-     * Load automatically an authentication backend
-     *
-     * @access public
-     * @param  string   $name    Backend class name
-     * @return mixed
-     */
-    public function backend($name)
-    {
-        if (! isset($this->container[$name])) {
-            $class = '\Kanboard\Auth\\'.ucfirst($name);
-            $this->container[$name] = new $class($this->container);
-        }
-
-        return $this->container[$name];
-    }
-
-    /**
-     * Check if the current user is authenticated
-     *
-     * @access public
-     * @return bool
-     */
-    public function isAuthenticated()
-    {
-        // If the user is already logged it's ok
-        if ($this->userSession->isLogged()) {
-
-            // Check if the user session match an existing user
-            $userNotFound = ! $this->user->exists($this->userSession->getId());
-            $reverseProxyWrongUser = REVERSE_PROXY_AUTH && $this->backend('reverseProxy')->getUsername() !== $this->userSession->getUsername();
-
-            if ($userNotFound || $reverseProxyWrongUser) {
-                $this->backend('rememberMe')->destroy($this->userSession->getId());
-                $this->sessionManager->close();
-                return false;
-            }
-
-            return true;
-        }
-
-        // We try first with the RememberMe cookie
-        if (REMEMBER_ME_AUTH && $this->backend('rememberMe')->authenticate()) {
-            return true;
-        }
-
-        // Then with the ReverseProxy authentication
-        if (REVERSE_PROXY_AUTH && $this->backend('reverseProxy')->authenticate()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Authenticate a user by different methods
-     *
-     * @access public
-     * @param  string  $username  Username
-     * @param  string  $password  Password
-     * @return boolean
-     */
-    public function authenticate($username, $password)
-    {
-        if ($this->user->isLocked($username)) {
-            $this->container['logger']->error('Account locked: '.$username);
-            return false;
-        } elseif ($this->backend('database')->authenticate($username, $password)) {
-            $this->user->resetFailedLogin($username);
-            return true;
-        } elseif (LDAP_AUTH && $this->backend('ldap')->authenticate($username, $password)) {
-            $this->user->resetFailedLogin($username);
-            return true;
-        }
-
-        $this->handleFailedLogin($username);
-        return false;
-    }
-
-    /**
-     * Return true if the captcha must be shown
-     *
-     * @access public
-     * @param  string  $username
-     * @return boolean
-     */
-    public function hasCaptcha($username)
-    {
-        return $this->user->getFailedLogin($username) >= BRUTEFORCE_CAPTCHA;
-    }
-
-    /**
-     * Handle failed login
-     *
-     * @access public
-     * @param  string  $username
-     */
-    public function handleFailedLogin($username)
-    {
-        $this->user->incrementFailedLogin($username);
-
-        if ($this->user->getFailedLogin($username) >= BRUTEFORCE_LOCKDOWN) {
-            $this->container['logger']->critical('Locking account: '.$username);
-            $this->user->lock($username, BRUTEFORCE_LOCKDOWN_DURATION);
-        }
-    }
-
-    /**
      * Validate user login form
      *
      * @access public
@@ -131,14 +23,14 @@ class Authentication extends Base
      */
     public function validateForm(array $values)
     {
-        list($result, $errors) = $this->validateFormCredentials($values);
+        $result = false;
+        $errors = array();
 
-        if ($result) {
-            if ($this->validateFormCaptcha($values) && $this->authenticate($values['username'], $values['password'])) {
-                $this->createRememberMeSession($values);
-            } else {
-                $result = false;
-                $errors['login'] = t('Bad username or password');
+        foreach (array('validateFields', 'validateLocking', 'validateCaptcha', 'validateCredentials') as $method) {
+            list($result, $errors) = $this->$method($values);
+
+            if (! $result) {
+                break;
             }
         }
 
@@ -148,11 +40,11 @@ class Authentication extends Base
     /**
      * Validate credentials syntax
      *
-     * @access public
+     * @access private
      * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
-    public function validateFormCredentials(array $values)
+    private function validateFields(array $values)
     {
         $v = new Validator($values, array(
             new Validators\Required('username', t('The username is required')),
@@ -167,40 +59,72 @@ class Authentication extends Base
     }
 
     /**
-     * Validate captcha
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return boolean
-     */
-    public function validateFormCaptcha(array $values)
-    {
-        if ($this->hasCaptcha($values['username'])) {
-            if (! isset($this->sessionStorage->captcha)) {
-                return false;
-            }
-
-            $builder = new CaptchaBuilder;
-            $builder->setPhrase($this->sessionStorage->captcha);
-            return $builder->testPhrase(isset($values['captcha']) ? $values['captcha'] : '');
-        }
-
-        return true;
-    }
-
-    /**
-     * Create remember me session if necessary
+     * Validate user locking
      *
      * @access private
      * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
-    private function createRememberMeSession(array $values)
+    private function validateLocking(array $values)
     {
-        if (REMEMBER_ME_AUTH && ! empty($values['remember_me'])) {
-            $credentials = $this->backend('rememberMe')
-                                ->create($this->userSession->getId(), Request::getIpAddress(), Request::getUserAgent());
+        $result = true;
+        $errors = array();
 
-            $this->backend('rememberMe')->writeCookie($credentials['token'], $credentials['sequence'], $credentials['expiration']);
+        if ($this->userLocking->isLocked($values['username'])) {
+            $result = false;
+            $errors['login'] = t('Your account is locked for %d minutes', BRUTEFORCE_LOCKDOWN_DURATION);
+            $this->logger->error('Account locked: '.$values['username']);
         }
+
+        return array($result, $errors);
+    }
+
+    /**
+     * Validate password syntax
+     *
+     * @access private
+     * @param  array   $values           Form values
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    private function validateCredentials(array $values)
+    {
+        $result = true;
+        $errors = array();
+
+        if (! $this->authenticationManager->passwordAuthentication($values['username'], $values['password'])) {
+            $result = false;
+            $errors['login'] = t('Bad username or password');
+        }
+
+        return array($result, $errors);
+    }
+
+    /**
+     * Validate captcha
+     *
+     * @access private
+     * @param  array   $values           Form values
+     * @return boolean
+     */
+    private function validateCaptcha(array $values)
+    {
+        $result = true;
+        $errors = array();
+
+        if ($this->userLocking->hasCaptcha($values['username'])) {
+            if (! isset($this->sessionStorage->captcha)) {
+                $result = false;
+            } else {
+                $builder = new CaptchaBuilder;
+                $builder->setPhrase($this->sessionStorage->captcha);
+                $result = $builder->testPhrase(isset($values['captcha']) ? $values['captcha'] : '');
+
+                if (! $result) {
+                    $errors['login'] = t('Invalid captcha');
+                }
+            }
+        }
+
+        return array($result, $errors);;
     }
 }

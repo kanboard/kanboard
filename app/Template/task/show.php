@@ -6,7 +6,10 @@
     'recurrence_basedate_list' => $this->task->recurrenceBasedates(),
 )) ?>
 
-<?= $this->render('task_modification/edit_time', array('task' => $task, 'values' => $values, 'date_format' => $date_format, 'date_formats' => $date_formats)) ?>
+<?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $project['id'])): ?>
+    <?= $this->render('task_modification/edit_time', array('task' => $task, 'values' => $values, 'date_format' => $date_format, 'date_formats' => $date_formats)) ?>
+<?php endif ?>
+
 <?= $this->render('task/description', array('task' => $task)) ?>
 <?= $this->render('tasklink/show', array('task' => $task, 'links' => $links, 'link_label_list' => $link_label_list)) ?>
 <?= $this->render('subtask/show', array('task' => $task, 'subtasks' => $subtasks, 'project' => $project, 'users_list' => isset($users_list) ? $users_list : array())) ?>

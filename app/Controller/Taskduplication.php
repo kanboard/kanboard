@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Model\Project as ProjectModel;
+
 /**
  * Task Duplication controller
  *
@@ -107,7 +109,7 @@ class Taskduplication extends Base
     private function chooseDestination(array $task, $template)
     {
         $values = array();
-        $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
+        $projects_list = $this->projectUserRole->getProjectsByUser($this->userSession->getId(), array(ProjectModel::ACTIVE));
 
         unset($projects_list[$task['project_id']]);
 
@@ -117,7 +119,7 @@ class Taskduplication extends Base
             $swimlanes_list = $this->swimlane->getList($dst_project_id, false, true);
             $columns_list = $this->board->getColumnsList($dst_project_id);
             $categories_list = $this->category->getList($dst_project_id);
-            $users_list = $this->projectPermission->getMemberList($dst_project_id);
+            $users_list = $this->projectUserRole->getAssignableUsersList($dst_project_id);
 
             $values = $this->taskDuplication->checkDestinationProjectValues($task);
             $values['project_id'] = $dst_project_id;

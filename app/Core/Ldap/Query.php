@@ -11,6 +11,14 @@ namespace Kanboard\Core\Ldap;
 class Query
 {
     /**
+     * LDAP client
+     *
+     * @access private
+     * @var Client
+     */
+    private $client = null;
+
+    /**
      * Query result
      *
      * @access private
@@ -22,31 +30,30 @@ class Query
      * Constructor
      *
      * @access public
-     * @param  array  $entries
+     * @param  Client $client
      */
-    public function __construct(array $entries = array())
+    public function __construct(Client $client)
     {
-        $this->entries = $entries;
+        $this->client = $client;
     }
 
     /**
      * Execute query
      *
      * @access public
-     * @param  resource  $ldap
      * @param  string    $baseDn
      * @param  string    $filter
      * @param  array     $attributes
      * @return Query
      */
-    public function execute($ldap, $baseDn, $filter, array $attributes)
+    public function execute($baseDn, $filter, array $attributes)
     {
-        $sr = ldap_search($ldap, $baseDn, $filter, $attributes);
+        $sr = ldap_search($this->client->getConnection(), $baseDn, $filter, $attributes);
         if ($sr === false) {
             return $this;
         }
 
-        $entries = ldap_get_entries($ldap, $sr);
+        $entries = ldap_get_entries($this->client->getConnection(), $sr);
         if ($entries === false || count($entries) === 0 || $entries['count'] == 0) {
             return $this;
         }
@@ -68,28 +75,13 @@ class Query
     }
 
     /**
-     * Return subset of entries
+     * Get LDAP Entries
      *
      * @access public
-     * @param  string   $key
-     * @param  mixed    $default
-     * @return array
+     * @return Entities
      */
-    public function getAttribute($key, $default = null)
+    public function getEntries()
     {
-        return isset($this->entries[0][$key]) ? $this->entries[0][$key] : $default;
-    }
-
-    /**
-     * Return one entry from a list of entries
-     *
-     * @access public
-     * @param  string   $key         Key
-     * @param  string   $default     Default value if key not set in entry
-     * @return string
-     */
-    public function getAttributeValue($key, $default = '')
-    {
-        return isset($this->entries[0][$key][0]) ? $this->entries[0][$key][0] : $default;
+        return new Entries($this->entries);
     }
 }

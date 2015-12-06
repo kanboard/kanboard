@@ -12,7 +12,7 @@
 
         <!-- column in expanded mode -->
         <div class="board-column-expanded">
-            <?php if (! $not_editable): ?>
+            <?php if (! $not_editable && $this->user->hasProjectAccess('taskcreation', 'create', $column['project_id'])): ?>
                 <div class="board-add-icon">
                     <?= $this->url->link('+', 'taskcreation', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover', t('Add a new task')) ?>
                 </div>

@@ -19,7 +19,7 @@
     <?= $this->form->label(t('End date'), 'end_date') ?>
     <?= $this->form->text('end_date', $values, $errors, array('maxlength="10"'), 'form-date') ?>
 
-    <?php if ($this->user->isAdmin() || $this->user->isProjectAdministrationAllowed($project['id'])): ?>
+    <?php if ($this->user->hasProjectAccess('project', 'create', $project['id'])): ?>
         <?= $this->form->checkbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
     <?php endif ?>
 

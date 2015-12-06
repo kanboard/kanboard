@@ -65,8 +65,8 @@ class GroupMember extends Base
      * Add user to a group
      *
      * @access public
-     * @param integer $group_id
-     * @param integer $user_id
+     * @param  integer $group_id
+     * @param  integer $user_id
      * @return boolean
      */
     public function addUser($group_id, $user_id)
@@ -81,8 +81,8 @@ class GroupMember extends Base
      * Remove user from a group
      *
      * @access public
-     * @param integer $group_id
-     * @param integer $user_id
+     * @param  integer $group_id
+     * @param  integer $user_id
      * @return boolean
      */
     public function removeUser($group_id, $user_id)
@@ -91,5 +91,21 @@ class GroupMember extends Base
             ->eq('group_id', $group_id)
             ->eq('user_id', $user_id)
             ->remove();
+    }
+
+    /**
+     * Check if a user is member
+     *
+     * @access public
+     * @param  integer $group_id
+     * @param  integer $user_id
+     * @return boolean
+     */
+    public function isMember($group_id, $user_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('group_id', $group_id)
+            ->eq('user_id', $user_id)
+            ->exists();
     }
 }

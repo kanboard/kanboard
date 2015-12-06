@@ -3,7 +3,6 @@
 namespace Kanboard\Core\Session;
 
 use Kanboard\Core\Base;
-use Kanboard\Core\Http\Request;
 
 /**
  * Session Manager
@@ -13,6 +12,13 @@ use Kanboard\Core\Http\Request;
  */
 class SessionManager extends Base
 {
+    /**
+     * Event names
+     *
+     * @var string
+     */
+    const EVENT_DESTROY = 'session.destroy';
+
     /**
      * Return true if the session is open
      *
@@ -41,7 +47,7 @@ class SessionManager extends Base
         session_name('KB_SID');
         session_start();
 
-        $this->container['sessionStorage']->setStorage($_SESSION);
+        $this->sessionStorage->setStorage($_SESSION);
     }
 
     /**
@@ -51,6 +57,8 @@ class SessionManager extends Base
      */
     public function close()
     {
+        $this->dispatcher->dispatch(self::EVENT_DESTROY);
+
         // Destroy the session cookie
         $params = session_get_cookie_params();
 
@@ -80,7 +88,7 @@ class SessionManager extends Base
             SESSION_DURATION,
             $this->helper->url->dir() ?: '/',
             null,
-            Request::isHTTPS(),
+            $this->request->isHTTPS(),
             true
         );
 

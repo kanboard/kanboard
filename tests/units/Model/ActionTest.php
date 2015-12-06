@@ -11,9 +11,10 @@ use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\Category;
 use Kanboard\Model\User;
-use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\ProjectUserRole;
 use Kanboard\Integration\GithubWebhook;
 use Kanboard\Integration\BitbucketWebhook;
+use Kanboard\Core\Security\Role;
 
 class ActionTest extends Base
 {
@@ -62,7 +63,7 @@ class ActionTest extends Base
     public function testResolveDuplicatedParameters()
     {
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
         $a = new Action($this->container);
         $c = new Category($this->container);
         $u = new User($this->container);
@@ -78,9 +79,9 @@ class ActionTest extends Base
         $this->assertEquals(2, $u->create(array('username' => 'unittest1')));
         $this->assertEquals(3, $u->create(array('username' => 'unittest2')));
 
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->addMember(1, 3));
-        $this->assertTrue($pp->addMember(2, 3));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(2, 3, Role::PROJECT_MEMBER));
 
         // anything
         $this->assertEquals('blah', $a->resolveParameters(array('name' => 'foobar', 'value' => 'blah'), 2));
@@ -113,7 +114,7 @@ class ActionTest extends Base
     public function testDuplicateSuccess()
     {
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
         $a = new Action($this->container);
         $u = new User($this->container);
 
@@ -123,9 +124,9 @@ class ActionTest extends Base
         $this->assertEquals(2, $u->create(array('username' => 'unittest1')));
         $this->assertEquals(3, $u->create(array('username' => 'unittest2')));
 
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->addMember(1, 3));
-        $this->assertTrue($pp->addMember(2, 3));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(2, 3, Role::PROJECT_MEMBER));
 
         $this->assertEquals(1, $a->create(array(
             'project_id' => 1,
@@ -159,7 +160,7 @@ class ActionTest extends Base
     public function testDuplicateUnableToResolveParams()
     {
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
         $a = new Action($this->container);
         $u = new User($this->container);
 
@@ -168,7 +169,7 @@ class ActionTest extends Base
 
         $this->assertEquals(2, $u->create(array('username' => 'unittest1')));
 
-        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
 
         $this->assertEquals(1, $a->create(array(
             'project_id' => 1,
@@ -196,7 +197,7 @@ class ActionTest extends Base
     public function testDuplicateMixedResults()
     {
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
         $a = new Action($this->container);
         $u = new User($this->container);
         $c = new Category($this->container);
@@ -210,7 +211,7 @@ class ActionTest extends Base
 
         $this->assertEquals(2, $u->create(array('username' => 'unittest1')));
 
-        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
 
         $this->assertEquals(1, $a->create(array(
             'project_id' => 1,

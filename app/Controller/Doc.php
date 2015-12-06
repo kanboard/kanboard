@@ -53,7 +53,7 @@ class Doc extends Base
         }
 
         $this->response->html($this->template->layout('doc/show', $this->readFile($filename) + array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
         )));
     }
 }

@@ -16,17 +16,17 @@ class Authorization
      * @access private
      * @var AccessMap
      */
-    private $acl;
+    private $accessMap;
 
     /**
      * Constructor
      *
      * @access public
-     * @param  AccessMap  $acl
+     * @param  AccessMap  $accessMap
      */
-    public function __construct(AccessMap $acl)
+    public function __construct(AccessMap $accessMap)
     {
-        $this->acl = $acl;
+        $this->accessMap = $accessMap;
     }
 
     /**
@@ -40,7 +40,7 @@ class Authorization
      */
     public function isAllowed($controller, $method, $role)
     {
-        $roles = $this->acl->getRoles($controller, $method);
+        $roles = $this->accessMap->getRoles($controller, $method);
         return in_array($role, $roles);
     }
 }

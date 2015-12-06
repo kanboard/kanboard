@@ -20,7 +20,7 @@ class Config extends Base
      */
     private function layout($template, array $params)
     {
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
         $params['values'] = $this->config->getAll();
         $params['errors'] = array();
         $params['config_content_for_layout'] = $this->template->render($template, $params);

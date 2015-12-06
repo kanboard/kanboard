@@ -2,8 +2,7 @@
 
 namespace Kanboard\Controller;
 
-use Pimple\Container;
-use Symfony\Component\EventDispatcher\Event;
+use Kanboard\Core\Security\Role;
 
 /**
  * Base controller
@@ -14,36 +13,22 @@ use Symfony\Component\EventDispatcher\Event;
 abstract class Base extends \Kanboard\Core\Base
 {
     /**
-     * Constructor
-     *
-     * @access public
-     * @param  \Pimple\Container   $container
-     */
-    public function __construct(Container $container)
-    {
-        $this->container = $container;
-
-        if (DEBUG) {
-            $this->logger->debug('START_REQUEST='.$_SERVER['REQUEST_URI']);
-        }
-    }
-
-    /**
-     * Destructor
+     * Method executed before each action
      *
      * @access public
      */
-    public function __destruct()
+    public function beforeAction($controller, $action)
     {
-        if (DEBUG) {
-            foreach ($this->db->getLogMessages() as $message) {
-                $this->logger->debug($message);
-            }
+        $this->sessionManager->open();
+        $this->dispatcher->dispatch('app.bootstrap');
+        $this->sendHeaders($action);
+        $this->authenticationManager->checkCurrentSession();
 
-            $this->logger->debug('SQL_QUERIES={nb}', array('nb' => $this->container['db']->nbQueries));
-            $this->logger->debug('RENDERING={time}', array('time' => microtime(true) - @$_SERVER['REQUEST_TIME_FLOAT']));
-            $this->logger->debug('MEMORY='.$this->helper->text->bytes(memory_get_usage()));
-            $this->logger->debug('END_REQUEST='.$_SERVER['REQUEST_URI']);
+        if (! $this->applicationAuthorization->isAllowed($controller, $action, Role::APP_PUBLIC)) {
+            $this->handleAuthentication();
+            $this->handlePostAuthentication($controller, $action);
+            $this->checkApplicationAuthorization($controller, $action);
+            $this->checkProjectAuthorization($controller, $action);
         }
     }
 
@@ -70,33 +55,13 @@ abstract class Base extends \Kanboard\Core\Base
     }
 
     /**
-     * Method executed before each action
-     *
-     * @access public
-     */
-    public function beforeAction($controller, $action)
-    {
-        $this->sessionManager->open();
-        $this->sendHeaders($action);
-        $this->container['dispatcher']->dispatch('session.bootstrap', new Event);
-
-        if (! $this->acl->isPublicAction($controller, $action)) {
-            $this->handleAuthentication();
-            $this->handle2FA($controller, $action);
-            $this->handleAuthorization($controller, $action);
-
-            $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
-        }
-    }
-
-    /**
      * Check authentication
      *
-     * @access public
+     * @access private
      */
-    public function handleAuthentication()
+    private function handleAuthentication()
     {
-        if (! $this->authentication->isAuthenticated()) {
+        if (! $this->userSession->isLogged() && ! $this->authenticationManager->preAuthentication()) {
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);
             }
@@ -107,15 +72,15 @@ abstract class Base extends \Kanboard\Core\Base
     }
 
     /**
-     * Check 2FA
+     * Handle Post-Authentication (2FA)
      *
-     * @access public
+     * @access private
      */
-    public function handle2FA($controller, $action)
+    private function handlePostAuthentication($controller, $action)
     {
         $ignore = ($controller === 'twofactor' && in_array($action, array('code', 'check'))) || ($controller === 'auth' && $action === 'logout');
 
-        if ($ignore === false && $this->userSession->has2FA() && ! $this->userSession->check2FA()) {
+        if ($ignore === false && $this->userSession->hasPostAuthentication() && ! $this->userSession->isPostAuthenticationValidated()) {
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);
             }
@@ -125,11 +90,23 @@ abstract class Base extends \Kanboard\Core\Base
     }
 
     /**
-     * Check page access and authorization
+     * Check application authorization
      *
-     * @access public
+     * @access private
      */
-    public function handleAuthorization($controller, $action)
+    private function checkApplicationAuthorization($controller, $action)
+    {
+        if (! $this->helper->user->hasAccess($controller, $action)) {
+            $this->forbidden();
+        }
+    }
+
+    /**
+     * Check project authorization
+     *
+     * @access private
+     */
+    private function checkProjectAuthorization($controller, $action)
     {
         $project_id = $this->request->getIntegerParam('project_id');
         $task_id = $this->request->getIntegerParam('task_id');
@@ -139,7 +116,7 @@ abstract class Base extends \Kanboard\Core\Base
             $project_id = $this->taskFinder->getProjectId($task_id);
         }
 
-        if (! $this->acl->isAllowed($controller, $action, $project_id)) {
+        if ($project_id > 0 && ! $this->helper->user->hasProjectAccess($controller, $action, $project_id)) {
             $this->forbidden();
         }
     }
@@ -147,10 +124,10 @@ abstract class Base extends \Kanboard\Core\Base
     /**
      * Application not found page (404 error)
      *
-     * @access public
+     * @access protected
      * @param  boolean   $no_layout   Display the layout or not
      */
-    public function notfound($no_layout = false)
+    protected function notfound($no_layout = false)
     {
         $this->response->html($this->template->layout('app/notfound', array(
             'title' => t('Page not found'),
@@ -161,11 +138,15 @@ abstract class Base extends \Kanboard\Core\Base
     /**
      * Application forbidden page
      *
-     * @access public
+     * @access protected
      * @param  boolean   $no_layout   Display the layout or not
      */
-    public function forbidden($no_layout = false)
+    protected function forbidden($no_layout = false)
     {
+        if ($this->request->isAjax()) {
+            $this->response->text('Not Authorized', 401);
+        }
+
         $this->response->html($this->template->layout('app/forbidden', array(
             'title' => t('Access Forbidden'),
             'no_layout' => $no_layout,
@@ -209,7 +190,7 @@ abstract class Base extends \Kanboard\Core\Base
         $content = $this->template->render($template, $params);
         $params['task_content_for_layout'] = $content;
         $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
 
         return $this->template->layout('task/layout', $params);
     }
@@ -227,7 +208,7 @@ abstract class Base extends \Kanboard\Core\Base
         $content = $this->template->render($template, $params);
         $params['project_content_for_layout'] = $content;
         $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
         $params['sidebar_template'] = $sidebar_template;
 
         return $this->template->layout('project/layout', $params);
@@ -300,12 +281,15 @@ abstract class Base extends \Kanboard\Core\Base
      * Common method to get project filters
      *
      * @access protected
+     * @param  string $controller
+     * @param  string $action
+     * @return array
      */
     protected function getProjectFilters($controller, $action)
     {
         $project = $this->getProject();
         $search = $this->request->getStringParam('search', $this->userSession->getFilters($project['id']));
-        $board_selector = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $board_selector = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
         unset($board_selector[$project['id']]);
 
         $filters = array(

@@ -1,6 +1,6 @@
 <div class="
         task-board
-        <?= $task['is_active'] == 1 ? 'draggable-item task-board-status-open '.($task['date_modification'] > (time() - $board_highlight_period) ? 'task-board-recent' : '') : 'task-board-status-closed' ?>
+        <?= $task['is_active'] == 1 ? ($this->user->hasProjectAccess('board', 'save', $task['project_id']) ? 'draggable-item ' : '').'task-board-status-open '.($task['date_modification'] > (time() - $board_highlight_period) ? 'task-board-recent' : '') : 'task-board-status-closed' ?>
         color-<?= $task['color_id'] ?>"
      data-task-id="<?= $task['id'] ?>"
      data-owner-id="<?= $task['owner_id'] ?>"
@@ -12,7 +12,11 @@
 
     <?php if ($this->board->isCollapsed($task['project_id'])): ?>
         <div class="task-board-collapsed">
-            <?= $this->render('board/task_menu', array('task' => $task)) ?>
+            <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+                <?= $this->render('board/task_menu', array('task' => $task)) ?>
+            <?php else: ?>
+                <strong><?= '#'.$task['id'] ?></strong>
+            <?php endif ?>
 
             <?php if (! empty($task['assignee_username'])): ?>
                 <span title="<?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>">
@@ -23,7 +27,11 @@
         </div>
     <?php else: ?>
         <div class="task-board-expanded">
-            <?= $this->render('board/task_menu', array('task' => $task)) ?>
+            <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+                <?= $this->render('board/task_menu', array('task' => $task)) ?>
+            <?php else: ?>
+                <strong><?= '#'.$task['id'] ?></strong>
+            <?php endif ?>
 
             <?php if ($task['reference']): ?>
             <span class="task-board-reference" title="<?= t('Reference') ?>">

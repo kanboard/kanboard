@@ -1,7 +1,7 @@
 <section id="main">
     <div class="page-header page-header-mobile">
         <ul>
-            <?php if ($this->user->isProjectAdmin() || $this->user->isAdmin()): ?>
+            <?php if ($this->user->hasAccess('project', 'create')): ?>
                 <li>
                     <i class="fa fa-plus fa-fw"></i>
                     <?= $this->url->link(t('New project'), 'project', 'create') ?>
@@ -9,7 +9,7 @@
             <?php endif ?>
             <li>
                 <i class="fa fa-lock fa-fw"></i>
-                <?= $this->url->link(t('New private project'), 'project', 'create', array('private' => 1)) ?>
+                <?= $this->url->link(t('New private project'), 'project', 'createPrivate') ?>
             </li>
             <li>
                 <i class="fa fa-search fa-fw"></i>
@@ -19,7 +19,7 @@
                 <i class="fa fa-folder fa-fw"></i>
                 <?= $this->url->link(t('Project management'), 'project', 'index') ?>
             </li>
-            <?php if ($this->user->isAdmin()): ?>
+            <?php if ($this->user->hasAccess('user', 'index')): ?>
                 <li>
                     <i class="fa fa-user fa-fw"></i>
                     <?= $this->url->link(t('User management'), 'user', 'index') ?>

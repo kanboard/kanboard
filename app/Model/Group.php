@@ -44,6 +44,18 @@ class Group extends Base
     }
 
     /**
+     * Get a specific group by external id
+     *
+     * @access public
+     * @param  integer $external_id
+     * @return array
+     */
+    public function getByExternalId($external_id)
+    {
+        return $this->getQuery()->eq('external_id', $external_id)->findOne();
+    }
+
+    /**
      * Get all groups
      *
      * @access public
@@ -52,6 +64,18 @@ class Group extends Base
     public function getAll()
     {
         return $this->getQuery()->asc('name')->findAll();
+    }
+
+    /**
+     * Search groups by name
+     *
+     * @access public
+     * @param  string  $input
+     * @return array
+     */
+    public function search($input)
+    {
+        return $this->db->table(self::TABLE)->ilike('name', '%'.$input.'%')->asc('name')->findAll();
     }
 
     /**

@@ -17,7 +17,7 @@ class Oauth extends Base
      */
     public function google()
     {
-        $this->step1('google');
+        $this->step1('Google');
     }
 
     /**
@@ -27,7 +27,7 @@ class Oauth extends Base
      */
     public function github()
     {
-        $this->step1('github');
+        $this->step1('Github');
     }
 
     /**
@@ -37,7 +37,7 @@ class Oauth extends Base
      */
     public function gitlab()
     {
-        $this->step1('gitlab');
+        $this->step1('Gitlab');
     }
 
     /**
@@ -45,12 +45,12 @@ class Oauth extends Base
      *
      * @access public
      */
-    public function unlink($backend = '')
+    public function unlink()
     {
-        $backend = $this->request->getStringParam('backend', $backend);
+        $backend = $this->request->getStringParam('backend');
         $this->checkCSRFParam();
 
-        if ($this->authentication->backend($backend)->unlink($this->userSession->getId())) {
+        if ($this->authenticationManager->getProvider($backend)->unlink($this->userSession->getId())) {
             $this->flash->success(t('Your external account is not linked anymore to your profile.'));
         } else {
             $this->flash->failure(t('Unable to unlink your external account.'));
@@ -63,15 +63,16 @@ class Oauth extends Base
      * Redirect to the provider if no code received
      *
      * @access private
+     * @param string $provider
      */
-    private function step1($backend)
+    private function step1($provider)
     {
         $code = $this->request->getStringParam('code');
 
         if (! empty($code)) {
-            $this->step2($backend, $code);
+            $this->step2($provider, $code);
         } else {
-            $this->response->redirect($this->authentication->backend($backend)->getService()->getAuthorizationUrl());
+            $this->response->redirect($this->authenticationManager->getProvider($provider)->getService()->getAuthorizationUrl());
         }
     }
 
@@ -79,30 +80,35 @@ class Oauth extends Base
      * Link or authenticate the user
      *
      * @access private
+     * @param string $provider
+     * @param string $code
      */
-    private function step2($backend, $code)
+    private function step2($provider, $code)
     {
-        $profile = $this->authentication->backend($backend)->getProfile($code);
+        $this->authenticationManager->getProvider($provider)->setCode($code);
 
         if ($this->userSession->isLogged()) {
-            $this->link($backend, $profile);
+            $this->link($provider);
         }
 
-        $this->authenticate($backend, $profile);
+        $this->authenticate($provider);
     }
 
     /**
      * Link the account
      *
      * @access private
+     * @param string $provider
      */
-    private function link($backend, $profile)
+    private function link($provider)
     {
-        if (empty($profile)) {
+        $authProvider = $this->authenticationManager->getProvider($provider);
+
+        if (! $authProvider->authenticate()) {
             $this->flash->failure(t('External authentication failed'));
         } else {
+            $this->userProfile->assign($this->userSession->getId(), $authProvider->getUser());
             $this->flash->success(t('Your external account is linked to your profile successfully.'));
-            $this->authentication->backend($backend)->updateUser($this->userSession->getId(), $profile);
         }
 
         $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
@@ -112,10 +118,11 @@ class Oauth extends Base
      * Authenticate the account
      *
      * @access private
+     * @param string $provider
      */
-    private function authenticate($backend, $profile)
+    private function authenticate($provider)
     {
-        if (! empty($profile) && $this->authentication->backend($backend)->authenticate($profile['id'])) {
+        if ($this->authenticationManager->oauthAuthentication($provider)) {
             $this->response->redirect($this->helper->url->to('app', 'index'));
         } else {
             $this->response->html($this->template->layout('auth/index', array(

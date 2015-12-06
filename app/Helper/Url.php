@@ -2,7 +2,6 @@
 
 namespace Kanboard\Helper;
 
-use Kanboard\Core\Http\Request;
 use Kanboard\Core\Base;
 
 /**
@@ -125,7 +124,7 @@ class Url extends Base
             return 'http://localhost/';
         }
 
-        $url = Request::isHTTPS() ? 'https://' : 'http://';
+        $url = $this->request->isHTTPS() ? 'https://' : 'http://';
         $url .= $_SERVER['SERVER_NAME'];
         $url .= $_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443 ? '' : ':'.$_SERVER['SERVER_PORT'];
         $url .= $this->dir() ?: '/';

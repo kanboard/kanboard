@@ -14,7 +14,7 @@ use Kanboard\Console\TransitionExport;
 use Kanboard\Console\LocaleSync;
 use Kanboard\Console\LocaleComparator;
 
-$container['dispatcher']->dispatch('console.bootstrap', new Event);
+$container['dispatcher']->dispatch('app.bootstrap', new Event);
 
 $application = new Application('Kanboard', APP_VERSION);
 $application->add(new TaskOverdueNotification($container));

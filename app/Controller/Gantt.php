@@ -20,13 +20,13 @@ class Gantt extends Base
         if ($this->userSession->isAdmin()) {
             $project_ids = $this->project->getAllIds();
         } else {
-            $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
+            $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
         }
 
         $this->response->html($this->template->layout('gantt/projects', array(
             'projects' => $this->projectGanttFormatter->filter($project_ids)->format(),
             'title' => t('Gantt chart for all projects'),
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
         )));
     }
 
@@ -66,7 +66,7 @@ class Gantt extends Base
         }
 
         $this->response->html($this->template->layout('gantt/project', $params + array(
-            'users_list' => $this->projectPermission->getMemberList($params['project']['id'], false),
+            'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
             'sorting' => $sorting,
             'tasks' => $filter->format(),
         )));
@@ -109,7 +109,7 @@ class Gantt extends Base
                 'column_id' => $this->board->getFirstColumn($project['id']),
                 'position' => 1
             ),
-            'users_list' => $this->projectPermission->getMemberList($project['id'], true, false, true),
+            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id'], true, false, true),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'swimlanes_list' => $this->swimlane->getList($project['id'], false, true),

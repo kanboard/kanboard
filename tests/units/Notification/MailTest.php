@@ -10,7 +10,6 @@ use Kanboard\Model\User;
 use Kanboard\Model\File;
 use Kanboard\Model\Project;
 use Kanboard\Model\Task;
-use Kanboard\Model\ProjectPermission;
 use Kanboard\Notification\Mail;
 use Kanboard\Subscriber\NotificationSubscriber;
 

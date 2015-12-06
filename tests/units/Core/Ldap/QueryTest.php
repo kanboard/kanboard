@@ -17,6 +17,7 @@ function ldap_get_entries($link_identifier, $result_identifier)
 class QueryTest extends \Base
 {
     public static $functions;
+    private $client;
 
     public function setUp()
     {
@@ -27,6 +28,13 @@ class QueryTest extends \Base
             ->setMethods(array(
                 'ldap_search',
                 'ldap_get_entries',
+            ))
+            ->getMock();
+
+        $this->client = $this
+            ->getMockBuilder('\Kanboard\Core\Ldap\Client')
+            ->setMethods(array(
+                'getConnection',
             ))
             ->getMock();
     }
@@ -58,6 +66,11 @@ class QueryTest extends \Base
             )
         );
 
+        $this->client
+            ->expects($this->any())
+            ->method('getConnection')
+            ->will($this->returnValue('my_ldap_resource'));
+
         self::$functions
             ->expects($this->once())
             ->method('ldap_search')
@@ -78,20 +91,25 @@ class QueryTest extends \Base
             )
             ->will($this->returnValue($entries));
 
-        $query = new Query;
-        $query->execute('my_ldap_resource', 'ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));
+        $query = new Query($this->client);
+        $query->execute('ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));
         $this->assertTrue($query->hasResult());
 
-        $this->assertEquals('My user', $query->getAttributeValue('displayname'));
-        $this->assertEquals('user1@localhost', $query->getAttributeValue('mail'));
-        $this->assertEquals('', $query->getAttributeValue('not_found'));
+        $this->assertEquals('My user', $query->getEntries()->getFirstEntry()->getFirstValue('displayname'));
+        $this->assertEquals('user1@localhost', $query->getEntries()->getFirstEntry()->getFirstValue('mail'));
+        $this->assertEquals('', $query->getEntries()->getFirstEntry()->getFirstValue('not_found'));
 
-        $this->assertEquals('uid=my_user,ou=People,dc=kanboard,dc=local', $query->getAttribute('dn'));
-        $this->assertEquals(null, $query->getAttribute('missing'));
+        $this->assertEquals('uid=my_user,ou=People,dc=kanboard,dc=local', $query->getEntries()->getFirstEntry()->getDn());
+        $this->assertEquals('', $query->getEntries()->getFirstEntry()->getFirstValue('missing'));
     }
 
     public function testExecuteQueryNotFound()
     {
+        $this->client
+            ->expects($this->any())
+            ->method('getConnection')
+            ->will($this->returnValue('my_ldap_resource'));
+
         self::$functions
             ->expects($this->once())
             ->method('ldap_search')
@@ -112,13 +130,18 @@ class QueryTest extends \Base
             )
             ->will($this->returnValue(array()));
 
-        $query = new Query;
-        $query->execute('my_ldap_resource', 'ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));
+        $query = new Query($this->client);
+        $query->execute('ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));
         $this->assertFalse($query->hasResult());
     }
 
     public function testExecuteQueryFailed()
     {
+        $this->client
+            ->expects($this->once())
+            ->method('getConnection')
+            ->will($this->returnValue('my_ldap_resource'));
+
         self::$functions
             ->expects($this->once())
             ->method('ldap_search')
@@ -130,8 +153,8 @@ class QueryTest extends \Base
             )
             ->will($this->returnValue(false));
 
-        $query = new Query;
-        $query->execute('my_ldap_resource', 'ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));
+        $query = new Query($this->client);
+        $query->execute('ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));
         $this->assertFalse($query->hasResult());
     }
 }

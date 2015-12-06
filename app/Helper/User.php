@@ -65,6 +65,7 @@ class User extends \Kanboard\Core\Base
             array('user_id' => $this->userSession->getId())
         );
     }
+
     /**
      * Check if the given user_id is the connected user
      *
@@ -88,44 +89,77 @@ class User extends \Kanboard\Core\Base
     }
 
     /**
-     * Return if the logged user is project admin
+     * Get role name
      *
      * @access public
-     * @return boolean
+     * @param  string  $role
+     * @return string
      */
-    public function isProjectAdmin()
+    public function getRoleName($role = '')
     {
-        return $this->userSession->isProjectAdmin();
+        return $this->role->getRoleName($role ?: $this->userSession->getRole());
     }
 
     /**
-     * Check for project administration actions access (Project Admin group)
+     * Check application access
      *
-     * @access public
-     * @return boolean
+     * @param  string  $controller
+     * @param  string  $action
+     * @return bool
      */
-    public function isProjectAdministrationAllowed($project_id)
+    public function hasAccess($controller, $action)
+    {
+        $key = 'app_access:'.$controller.$action;
+        $result = $this->memoryCache->get($key);
+
+        if ($result === null) {
+            $result = $this->applicationAuthorization->isAllowed($controller, $action, $this->userSession->getRole());
+            $this->memoryCache->set($key, $result);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Check project access
+     *
+     * @param  string  $controller
+     * @param  string  $action
+     * @param  integer $project_id
+     * @return bool
+     */
+    public function hasProjectAccess($controller, $action, $project_id)
     {
         if ($this->userSession->isAdmin()) {
             return true;
         }
 
-        return $this->memoryCache->proxy($this->container['acl'], 'handleProjectAdminPermissions', $project_id);
+        if (! $this->hasAccess($controller, $action)) {
+            return false;
+        }
+
+        $key = 'project_access:'.$controller.$action.$project_id;
+        $result = $this->memoryCache->get($key);
+
+        if ($result === null) {
+            $role = $this->getProjectUserRole($project_id);
+            $result = $this->projectAuthorization->isAllowed($controller, $action, $role);
+            $this->memoryCache->set($key, $result);
+        }
+
+        return $result;
     }
 
     /**
-     * Check for project management actions access (Regular users who are Project Managers)
+     * Get project role for the current user
      *
      * @access public
-     * @return boolean
+     * @param  integer $project_id
+     * @return string
      */
-    public function isProjectManagementAllowed($project_id)
+    public function getProjectUserRole($project_id)
     {
-        if ($this->userSession->isAdmin()) {
-            return true;
-        }
-
-        return $this->memoryCache->proxy($this->container['acl'], 'handleProjectManagerPermissions', $project_id);
+        return $this->memoryCache->proxy($this->projectUserRole, 'getUserRole', $project_id, $this->userSession->getId());
     }
 
     /**

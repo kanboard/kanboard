@@ -19,7 +19,7 @@
         <td><?= dt('%B %e, %Y at %k:%M %p', $session['expiration']) ?></td>
         <td><?= $this->e($session['ip']) ?></td>
         <td><?= $this->e($session['user_agent']) ?></td>
-        <td><?= $this->url->link(t('Remove'), 'user', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true) ?></td>
+        <td><?= $this->url->link(t('Remove'), 'User', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true) ?></td>
     </tr>
     <?php endforeach ?>
     </table>

@@ -8,7 +8,7 @@ use Kanboard\Model\Subtask;
 use Kanboard\Model\Project;
 use Kanboard\Model\Category;
 use Kanboard\Model\User;
-use Kanboard\Model\UserSession;
+use Kanboard\Core\User\UserSession;
 
 class SubtaskTest extends Base
 {

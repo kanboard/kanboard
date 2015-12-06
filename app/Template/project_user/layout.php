@@ -1,7 +1,7 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <?php if ($this->user->isProjectAdmin() || $this->user->isAdmin()): ?>
+            <?php if ($this->user->hasAccess('project', 'create')): ?>
                 <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'project', 'create') ?></li>
             <?php endif ?>
             <li>
@@ -12,7 +12,7 @@
                 <i class="fa fa-folder fa-fw"></i>
                 <?= $this->url->link(t('Projects list'), 'project', 'index') ?>
             </li>
-            <?php if ($this->user->isProjectAdmin() || $this->user->isAdmin()): ?>
+            <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
                 <li>
                     <i class="fa fa-sliders fa-fw"></i>
                     <?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?>

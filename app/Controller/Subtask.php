@@ -48,7 +48,7 @@ class Subtask extends Base
         $this->response->html($this->taskLayout('subtask/create', array(
             'values' => $values,
             'errors' => $errors,
-            'users_list' => $this->projectPermission->getMemberList($task['project_id']),
+            'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
             'task' => $task,
         )));
     }
@@ -95,7 +95,7 @@ class Subtask extends Base
         $this->response->html($this->taskLayout('subtask/edit', array(
             'values' => empty($values) ? $subtask : $values,
             'errors' => $errors,
-            'users_list' => $this->projectPermission->getMemberList($task['project_id']),
+            'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
             'status_list' => $this->subtask->getStatusList(),
             'subtask' => $subtask,
             'task' => $task,

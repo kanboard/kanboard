@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Security\Role;
+
 /**
  * Custom Filter management
  *
@@ -137,7 +139,7 @@ class Customfilter extends Base
     {
         $user_id = $this->userSession->getId();
 
-        if ($filter['user_id'] != $user_id && (! $this->projectPermission->isManager($project['id'], $user_id) || ! $this->userSession->isAdmin())) {
+        if ($filter['user_id'] != $user_id && ($this->projectUserRole->getUserRole($project['id'], $user_id) === Role::PROJECT_MANAGER || ! $this->userSession->isAdmin())) {
             $this->forbidden();
         }
     }

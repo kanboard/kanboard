@@ -65,6 +65,10 @@ define('LDAP_SSL_VERIFY', true);
 // Enable LDAP START_TLS
 define('LDAP_START_TLS', false);
 
+// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
+// Set to true if you want to preserve the case
+define('LDAP_USERNAME_CASE_SENSITIVE', false);
+
 // LDAP bind type: "anonymous", "user" or "proxy"
 define('LDAP_BIND_TYPE', 'anonymous');
 
@@ -75,43 +79,56 @@ define('LDAP_USERNAME', null);
 // LDAP password to use for proxy mode
 define('LDAP_PASSWORD', null);
 
-// LDAP account base, i.e. root of all user account
-// Example: ou=People,dc=example,dc=com
-define('LDAP_ACCOUNT_BASE', '');
+// LDAP DN for users
+// Example for ActiveDirectory: CN=Users,DC=kanboard,DC=local
+// Example for OpenLDAP: ou=People,dc=example,dc=com
+define('LDAP_USER_BASE_DN', '');
 
-// LDAP query pattern to use when searching for a user account
+// LDAP pattern to use when searching for a user account
 // Example for ActiveDirectory: '(&(objectClass=user)(sAMAccountName=%s))'
 // Example for OpenLDAP: 'uid=%s'
-define('LDAP_USER_PATTERN', '');
+define('LDAP_USER_FILTER', '');
 
-// Name of an attribute of the user account object which should be used as the full name of the user
-define('LDAP_ACCOUNT_FULLNAME', 'displayname');
-
-// Name of an attribute of the user account object which should be used as the email of the user
-define('LDAP_ACCOUNT_EMAIL', 'mail');
-
-// Name of an attribute of the user account object which should be used as the id of the user. (optional)
+// LDAP attribute for username
 // Example for ActiveDirectory: 'samaccountname'
 // Example for OpenLDAP: 'uid'
-define('LDAP_ACCOUNT_ID', '');
+define('LDAP_USER_ATTRIBUTE_USERNAME', 'uid');
 
-// LDAP Attribute for group membership
-define('LDAP_ACCOUNT_MEMBEROF', 'memberof');
+// LDAP attribute for user full name
+// Example for ActiveDirectory: 'displayname'
+// Example for OpenLDAP: 'cn'
+define('LDAP_USER_ATTRIBUTE_FULLNAME', 'cn');
 
-// DN for administrators
-// Example: CN=Kanboard Admins,CN=Users,DC=kanboard,DC=local
+// LDAP attribute for user email
+define('LDAP_USER_ATTRIBUTE_EMAIL', 'mail');
+
+// LDAP attribute to find groups in user profile
+define('LDAP_USER_ATTRIBUTE_GROUPS', 'memberof');
+
+// Allow automatic LDAP user creation
+define('LDAP_USER_CREATION', true);
+
+// LDAP DN for administrators
+// Example: CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local
 define('LDAP_GROUP_ADMIN_DN', '');
 
-// DN for project administrators
-// Example: CN=Kanboard Project Admins,CN=Users,DC=kanboard,DC=local
-define('LDAP_GROUP_PROJECT_ADMIN_DN', '');
+// LDAP DN for managers
+// Example: CN=Kanboard Managers,CN=Users,DC=kanboard,DC=local
+define('LDAP_GROUP_MANAGER_DN', '');
 
-// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
-// Set to true if you want to preserve the case
-define('LDAP_USERNAME_CASE_SENSITIVE', false);
+// Enable LDAP group provider for project permissions
+// The end-user will be able to browse LDAP groups from the user interface and allow access to specified projects
+define('LDAP_GROUP_PROVIDER', false);
 
-// Automatically create user account
-define('LDAP_ACCOUNT_CREATION', true);
+// LDAP Base DN for groups
+define('LDAP_GROUP_BASE_DN', '');
+
+// LDAP group filter
+// Example for ActiveDirectory: (&(objectClass=group)(sAMAccountName=%s*))
+define('LDAP_GROUP_FILTER', '');
+
+// LDAP attribute for the group name
+define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
 // Enable/disable Google authentication
 define('GOOGLE_AUTH', false);

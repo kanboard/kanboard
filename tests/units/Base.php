@@ -75,8 +75,11 @@ abstract class Base extends PHPUnit_Framework_TestCase
         }
 
         $this->container = new Pimple\Container;
+        $this->container->register(new Kanboard\ServiceProvider\AuthenticationProvider);
         $this->container->register(new Kanboard\ServiceProvider\DatabaseProvider);
         $this->container->register(new Kanboard\ServiceProvider\ClassProvider);
+        $this->container->register(new Kanboard\ServiceProvider\NotificationProvider);
+        $this->container->register(new Kanboard\ServiceProvider\RouteProvider);
 
         $this->container['dispatcher'] = new TraceableEventDispatcher(
             new EventDispatcher,

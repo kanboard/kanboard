@@ -6,7 +6,6 @@ use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\Project;
-use Kanboard\Model\ProjectPermission;
 use Kanboard\Model\Category;
 use Kanboard\Model\User;
 

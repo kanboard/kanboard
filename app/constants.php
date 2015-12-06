@@ -27,21 +27,29 @@ defined('DB_PORT') or define('DB_PORT', null);
 defined('LDAP_AUTH') or define('LDAP_AUTH', false);
 defined('LDAP_SERVER') or define('LDAP_SERVER', '');
 defined('LDAP_PORT') or define('LDAP_PORT', 389);
-defined('LDAP_START_TLS') or define('LDAP_START_TLS', false);
 defined('LDAP_SSL_VERIFY') or define('LDAP_SSL_VERIFY', true);
+defined('LDAP_START_TLS') or define('LDAP_START_TLS', false);
+defined('LDAP_USERNAME_CASE_SENSITIVE') or define('LDAP_USERNAME_CASE_SENSITIVE', false);
+
 defined('LDAP_BIND_TYPE') or define('LDAP_BIND_TYPE', 'anonymous');
 defined('LDAP_USERNAME') or define('LDAP_USERNAME', null);
 defined('LDAP_PASSWORD') or define('LDAP_PASSWORD', null);
-defined('LDAP_ACCOUNT_BASE') or define('LDAP_ACCOUNT_BASE', '');
-defined('LDAP_USER_PATTERN') or define('LDAP_USER_PATTERN', '');
-defined('LDAP_ACCOUNT_FULLNAME') or define('LDAP_ACCOUNT_FULLNAME', 'displayname');
-defined('LDAP_ACCOUNT_EMAIL') or define('LDAP_ACCOUNT_EMAIL', 'mail');
-defined('LDAP_ACCOUNT_ID') or define('LDAP_ACCOUNT_ID', '');
-defined('LDAP_ACCOUNT_MEMBEROF') or define('LDAP_ACCOUNT_MEMBEROF', 'memberof');
-defined('LDAP_ACCOUNT_CREATION') or define('LDAP_ACCOUNT_CREATION', true);
+
+defined('LDAP_USER_BASE_DN') or define('LDAP_USER_BASE_DN', '');
+defined('LDAP_USER_FILTER') or define('LDAP_USER_FILTER', '');
+defined('LDAP_USER_ATTRIBUTE_USERNAME') or define('LDAP_USER_ATTRIBUTE_USERNAME', 'uid');
+defined('LDAP_USER_ATTRIBUTE_FULLNAME') or define('LDAP_USER_ATTRIBUTE_FULLNAME', 'cn');
+defined('LDAP_USER_ATTRIBUTE_EMAIL') or define('LDAP_USER_ATTRIBUTE_EMAIL', 'mail');
+defined('LDAP_USER_ATTRIBUTE_GROUPS') or define('LDAP_USER_ATTRIBUTE_GROUPS', 'memberof');
+defined('LDAP_USER_CREATION') or define('LDAP_USER_CREATION', true);
+
 defined('LDAP_GROUP_ADMIN_DN') or define('LDAP_GROUP_ADMIN_DN', '');
-defined('LDAP_GROUP_PROJECT_ADMIN_DN') or define('LDAP_GROUP_PROJECT_ADMIN_DN', '');
-defined('LDAP_USERNAME_CASE_SENSITIVE') or define('LDAP_USERNAME_CASE_SENSITIVE', false);
+defined('LDAP_GROUP_MANAGER_DN') or define('LDAP_GROUP_MANAGER_DN', '');
+
+defined('LDAP_GROUP_PROVIDER') or define('LDAP_GROUP_PROVIDER', false);
+defined('LDAP_GROUP_BASE_DN') or define('LDAP_GROUP_BASE_DN', '');
+defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', '');
+defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
 // Google authentication
 defined('GOOGLE_AUTH') or define('GOOGLE_AUTH', false);

@@ -4,6 +4,7 @@ namespace Kanboard\Model;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
+use Kanboard\Core\Security\Role;
 use Kanboard\Core\Csv;
 
 /**
@@ -36,7 +37,7 @@ class UserImport extends Base
             'email'            => 'Email',
             'name'             => 'Full Name',
             'is_admin'         => 'Administrator',
-            'is_project_admin' => 'Project Administrator',
+            'is_manager'       => 'Manager',
             'is_ldap_user'     => 'Remote User',
         );
     }
@@ -75,9 +76,20 @@ class UserImport extends Base
     {
         $row['username'] = strtolower($row['username']);
 
-        foreach (array('is_admin', 'is_project_admin', 'is_ldap_user') as $field) {
+        foreach (array('is_admin', 'is_manager', 'is_ldap_user') as $field) {
             $row[$field] = Csv::getBooleanValue($row[$field]);
         }
+
+        if ($row['is_admin'] == 1) {
+            $row['role'] = Role::APP_ADMIN;
+        } elseif ($row['is_manager'] == 1) {
+            $row['role'] = Role::APP_MANAGER;
+        } else {
+            $row['role'] = Role::APP_USER;
+        }
+
+        unset($row['is_admin']);
+        unset($row['is_manager']);
 
         $this->removeEmptyFields($row, array('password', 'email', 'name'));
 
@@ -98,8 +110,6 @@ class UserImport extends Base
             new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), User::TABLE, 'id'),
             new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
             new Validators\Email('email', t('Email address invalid')),
-            new Validators\Integer('is_admin', t('This value must be an integer')),
-            new Validators\Integer('is_project_admin', t('This value must be an integer')),
             new Validators\Integer('is_ldap_user', t('This value must be an integer')),
         ));
 

@@ -1,11 +1,9 @@
 <section id="main">
     <div class="page-header">
-        <?php if ($this->user->isAdmin()): ?>
         <ul>
             <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'user', 'index') ?></li>
             <li><i class="fa fa-user-plus fa-fw"></i><?= $this->url->link(t('New group'), 'group', 'create') ?></li>
         </ul>
-        <?php endif ?>
     </div>
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('There is no group.') ?></p>
@@ -31,7 +29,7 @@
                 <td>
                     <ul>
                         <li><?= $this->url->link(t('Add group member'), 'group', 'associate', array('group_id' => $group['id'])) ?></li>
-                        <li><?= $this->url->link(t('Users'), 'group', 'users', array('group_id' => $group['id'])) ?></li>
+                        <li><?= $this->url->link(t('Members'), 'group', 'users', array('group_id' => $group['id'])) ?></li>
                         <li><?= $this->url->link(t('Edit'), 'group', 'edit', array('group_id' => $group['id'])) ?></li>
                         <li><?= $this->url->link(t('Remove'), 'group', 'confirm', array('group_id' => $group['id'])) ?></li>
                     </ul>

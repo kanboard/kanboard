@@ -4,8 +4,67 @@ namespace Schema;
 
 use PDO;
 use Kanboard\Core\Security\Token;
+use Kanboard\Core\Security\Role;
 
-const VERSION = 95;
+const VERSION = 97;
+
+function version_97(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE `users` ADD COLUMN `role` VARCHAR(25) NOT NULL DEFAULT '".Role::APP_USER."'");
+
+    $rq = $pdo->prepare('SELECT * FROM `users`');
+    $rq->execute();
+    $rows = $rq->fetchAll(PDO::FETCH_ASSOC) ?: array();
+
+    $rq = $pdo->prepare('UPDATE `users` SET `role`=? WHERE `id`=?');
+
+    foreach ($rows as $row) {
+        $role = Role::APP_USER;
+
+        if ($row['is_admin'] == 1) {
+            $role = Role::APP_ADMIN;
+        } else if ($row['is_project_admin']) {
+            $role = Role::APP_MANAGER;
+        }
+
+        $rq->execute(array($role, $row['id']));
+    }
+
+    $pdo->exec('ALTER TABLE `users` DROP COLUMN `is_admin`');
+    $pdo->exec('ALTER TABLE `users` DROP COLUMN `is_project_admin`');
+}
+
+function version_96(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_has_groups (
+            `group_id` INT NOT NULL,
+            `project_id` INT NOT NULL,
+            `role` VARCHAR(25) NOT NULL,
+            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            UNIQUE(group_id, project_id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("ALTER TABLE `project_has_users` ADD COLUMN `role` VARCHAR(25) NOT NULL DEFAULT '".Role::PROJECT_VIEWER."'");
+
+    $rq = $pdo->prepare('SELECT * FROM project_has_users');
+    $rq->execute();
+    $rows = $rq->fetchAll(PDO::FETCH_ASSOC) ?: array();
+
+    $rq = $pdo->prepare('UPDATE `project_has_users` SET `role`=? WHERE `id`=?');
+
+    foreach ($rows as $row) {
+        $rq->execute(array(
+            $row['is_owner'] == 1 ? Role::PROJECT_MANAGER : Role::PROJECT_MEMBER,
+            $row['id'],
+        ));
+    }
+
+    $pdo->exec('ALTER TABLE `project_has_users` DROP COLUMN `is_owner`');
+    $pdo->exec('ALTER TABLE `project_has_users` DROP COLUMN `id`');
+}
 
 function version_95(PDO $pdo)
 {

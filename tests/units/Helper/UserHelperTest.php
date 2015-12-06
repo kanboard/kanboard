@@ -4,172 +4,227 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Helper\User;
 use Kanboard\Model\Project;
-use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\ProjectUserRole;
 use Kanboard\Model\User as UserModel;
+use Kanboard\Core\Security\Role;
 
 class UserHelperTest extends Base
 {
     public function testInitials()
     {
-        $h = new User($this->container);
+        $helper = new User($this->container);
 
-        $this->assertEquals('CN', $h->getInitials('chuck norris'));
-        $this->assertEquals('A', $h->getInitials('admin'));
+        $this->assertEquals('CN', $helper->getInitials('chuck norris'));
+        $this->assertEquals('A', $helper->getInitials('admin'));
     }
 
-    public function testIsProjectAdministrationAllowedForProjectAdmin()
+    public function testGetRoleName()
     {
-        $h = new User($this->container);
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $u = new UserModel($this->container);
-
-        // We create our user
-        $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
-
-        // We create a project and set our user as project manager
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->isMember(1, 2));
-        $this->assertFalse($pp->isManager(1, 2));
-
-        // We fake a session for him
-        $this->container['sessionStorage']->user = array(
-            'id' => 2,
-            'is_admin' => false,
-            'is_project_admin' => true,
-        );
-
-        $this->assertTrue($h->isProjectAdministrationAllowed(1));
+        $helper = new User($this->container);
+        $this->assertEquals('Administrator', $helper->getRoleName(Role::APP_ADMIN));
+        $this->assertEquals('Manager', $helper->getRoleName(Role::APP_MANAGER));
+        $this->assertEquals('Project Viewer', $helper->getRoleName(Role::PROJECT_VIEWER));
     }
 
-    public function testIsProjectAdministrationAllowedForProjectMember()
+    public function testHasAccessForAdmins()
     {
-        $h = new User($this->container);
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $u = new UserModel($this->container);
+        $helper = new User($this->container);
 
-        // We create our user
-        $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
-
-        // We create a project and set our user as project member
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->isMember(1, 2));
-        $this->assertFalse($pp->isManager(1, 2));
-
-        // We fake a session for him
         $this->container['sessionStorage']->user = array(
             'id' => 2,
-            'is_admin' => false,
-            'is_project_admin' => false,
+            'role' => Role::APP_ADMIN,
         );
 
-        $this->assertFalse($h->isProjectAdministrationAllowed(1));
+        $this->assertTrue($helper->hasAccess('user', 'create'));
+        $this->assertTrue($helper->hasAccess('project', 'create'));
+        $this->assertTrue($helper->hasAccess('project', 'createPrivate'));
     }
 
-    public function testIsProjectAdministrationAllowedForProjectManager()
+    public function testHasAccessForManagers()
     {
-        $h = new User($this->container);
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $u = new UserModel($this->container);
+        $helper = new User($this->container);
 
-        // We create our user
-        $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
-
-        // We create a project and set our user as project member
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertTrue($pp->addManager(1, 2));
-        $this->assertTrue($pp->isMember(1, 2));
-        $this->assertTrue($pp->isManager(1, 2));
-
-        // We fake a session for him
         $this->container['sessionStorage']->user = array(
             'id' => 2,
-            'is_admin' => false,
-            'is_project_admin' => false,
+            'role' => Role::APP_MANAGER,
         );
 
-        $this->assertFalse($h->isProjectAdministrationAllowed(1));
+        $this->assertFalse($helper->hasAccess('user', 'create'));
+        $this->assertTrue($helper->hasAccess('project', 'create'));
+        $this->assertTrue($helper->hasAccess('project', 'createPrivate'));
     }
 
-    public function testIsProjectManagementAllowedForProjectAdmin()
+    public function testHasAccessForUsers()
     {
-        $h = new User($this->container);
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $u = new UserModel($this->container);
+        $helper = new User($this->container);
 
-        // We create our user
-        $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
-
-        // We create a project and set our user as project manager
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->isMember(1, 2));
-        $this->assertFalse($pp->isManager(1, 2));
-
-        // We fake a session for him
         $this->container['sessionStorage']->user = array(
             'id' => 2,
-            'is_admin' => false,
-            'is_project_admin' => true,
+            'role' => Role::APP_USER,
         );
 
-        $this->assertTrue($h->isProjectManagementAllowed(1));
+        $this->assertFalse($helper->hasAccess('user', 'create'));
+        $this->assertFalse($helper->hasAccess('project', 'create'));
+        $this->assertTrue($helper->hasAccess('project', 'createPrivate'));
     }
 
-    public function testIsProjectManagementAllowedForProjectMember()
+    public function testHasProjectAccessForAdmins()
     {
-        $h = new User($this->container);
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $u = new UserModel($this->container);
+        $helper = new User($this->container);
+        $project = new Project($this->container);
 
-        // We create our user
-        $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
-
-        // We create a project and set our user as project member
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->isMember(1, 2));
-        $this->assertFalse($pp->isManager(1, 2));
-
-        // We fake a session for him
         $this->container['sessionStorage']->user = array(
             'id' => 2,
-            'is_admin' => false,
-            'is_project_admin' => false,
+            'role' => Role::APP_ADMIN,
         );
 
-        $this->assertFalse($h->isProjectManagementAllowed(1));
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+
+        $this->assertTrue($helper->hasProjectAccess('project', 'edit', 1));
+        $this->assertTrue($helper->hasProjectAccess('board', 'show', 1));
     }
 
-    public function testIsProjectManagementAllowedForProjectManager()
+    public function testHasProjectAccessForManagers()
     {
-        $h = new User($this->container);
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $u = new UserModel($this->container);
+        $helper = new User($this->container);
+        $project = new Project($this->container);
 
-        // We create our user
-        $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
-
-        // We create a project and set our user as project member
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertTrue($pp->addManager(1, 2));
-        $this->assertTrue($pp->isMember(1, 2));
-        $this->assertTrue($pp->isManager(1, 2));
-
-        // We fake a session for him
         $this->container['sessionStorage']->user = array(
             'id' => 2,
-            'is_admin' => false,
-            'is_project_admin' => false,
+            'role' => Role::APP_MANAGER,
         );
 
-        $this->assertTrue($h->isProjectManagementAllowed(1));
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+
+        $this->assertFalse($helper->hasProjectAccess('project', 'edit', 1));
+        $this->assertFalse($helper->hasProjectAccess('board', 'show', 1));
+    }
+
+    public function testHasProjectAccessForUsers()
+    {
+        $helper = new User($this->container);
+        $project = new Project($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+
+        $this->assertFalse($helper->hasProjectAccess('project', 'edit', 1));
+        $this->assertFalse($helper->hasProjectAccess('board', 'show', 1));
+    }
+
+    public function testHasProjectAccessForAppManagerAndProjectManagers()
+    {
+        $helper = new User($this->container);
+        $user = new UserModel($this->container);
+        $project = new Project($this->container);
+        $projectUserRole = new ProjectUserRole($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_MANAGER,
+        );
+
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $user->create(array('username' => 'user')));
+        $this->assertTrue($projectUserRole->addUser(1, 2, Role::PROJECT_MANAGER));
+
+        $this->assertTrue($helper->hasProjectAccess('project', 'edit', 1));
+        $this->assertTrue($helper->hasProjectAccess('board', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('task', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('taskcreation', 'save', 1));
+
+        $this->assertFalse($helper->hasProjectAccess('project', 'edit', 2));
+        $this->assertFalse($helper->hasProjectAccess('board', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('task', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('taskcreation', 'save', 2));
+    }
+
+    public function testHasProjectAccessForProjectManagers()
+    {
+        $helper = new User($this->container);
+        $user = new UserModel($this->container);
+        $project = new Project($this->container);
+        $projectUserRole = new ProjectUserRole($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $user->create(array('username' => 'user')));
+        $this->assertTrue($projectUserRole->addUser(1, 2, Role::PROJECT_MANAGER));
+
+        $this->assertTrue($helper->hasProjectAccess('project', 'edit', 1));
+        $this->assertTrue($helper->hasProjectAccess('board', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('task', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('taskcreation', 'save', 1));
+
+        $this->assertFalse($helper->hasProjectAccess('project', 'edit', 2));
+        $this->assertFalse($helper->hasProjectAccess('board', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('task', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('taskcreation', 'save', 2));
+    }
+
+    public function testHasProjectAccessForProjectMembers()
+    {
+        $helper = new User($this->container);
+        $user = new UserModel($this->container);
+        $project = new Project($this->container);
+        $projectUserRole = new ProjectUserRole($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $user->create(array('username' => 'user')));
+        $this->assertTrue($projectUserRole->addUser(1, 2, Role::PROJECT_MEMBER));
+
+        $this->assertFalse($helper->hasProjectAccess('project', 'edit', 1));
+        $this->assertTrue($helper->hasProjectAccess('board', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('task', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('taskcreation', 'save', 1));
+
+        $this->assertFalse($helper->hasProjectAccess('project', 'edit', 2));
+        $this->assertFalse($helper->hasProjectAccess('board', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('task', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('taskcreation', 'save', 2));
+    }
+
+    public function testHasProjectAccessForProjectViewers()
+    {
+        $helper = new User($this->container);
+        $user = new UserModel($this->container);
+        $project = new Project($this->container);
+        $projectUserRole = new ProjectUserRole($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $user->create(array('username' => 'user')));
+        $this->assertTrue($projectUserRole->addUser(1, 2, Role::PROJECT_VIEWER));
+
+        $this->assertFalse($helper->hasProjectAccess('project', 'edit', 1));
+        $this->assertTrue($helper->hasProjectAccess('board', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('task', 'show', 1));
+        $this->assertFalse($helper->hasProjectAccess('taskcreation', 'save', 1));
+
+        $this->assertFalse($helper->hasProjectAccess('project', 'edit', 2));
+        $this->assertFalse($helper->hasProjectAccess('board', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('task', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('taskcreation', 'save', 2));
     }
 }

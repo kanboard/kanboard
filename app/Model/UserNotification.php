@@ -155,7 +155,7 @@ class UserNotification extends Base
     private function getProjectMembersWithNotificationEnabled($project_id, $exclude_user_id)
     {
         return $this->db
-            ->table(ProjectPermission::TABLE)
+            ->table(ProjectUserRole::TABLE)
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email', User::TABLE.'.language', User::TABLE.'.notifications_filter')
             ->join(User::TABLE, 'id', 'user_id')
             ->eq('project_id', $project_id)
