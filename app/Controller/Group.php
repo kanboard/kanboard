@@ -194,7 +194,7 @@ class Group extends Base
         $this->response->html($this->template->layout('group/dissociate', array(
             'group' => $group,
             'user' => $user,
-            'title' => t('Remove a user from group "%s', $group['name']),
+            'title' => t('Remove user from group "%s"', $group['name']),
         )));
     }
 
