@@ -43,7 +43,7 @@ namespace Kanboard\Plugin\Foobar;
 
 use Kanboard\Core\Plugin\Base;
 
-class Plugin extends Plugin\Base
+class Plugin extends Base
 {
     public function initialize()
     {
@@ -71,7 +71,7 @@ Available methods from `Kanboard\Core\Plugin\Base`:
 - `getPluginHomepage()`: Should return plugin Homepage (link)
 - `setContentSecurityPolicy(array $rules)`: Override default HTTP CSP rules
 
-Your plugin registration class also inherit from `Kanboard\Core\Base`, that means you can access to all classes and methods of Kanboard easily.
+Your plugin registration class can also inherit from Kanboard\Core\Base, that way you can access all classes and methods of Kanboard easily.
 
 This example will fetch the user #123:
 
