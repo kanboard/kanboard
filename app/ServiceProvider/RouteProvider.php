@@ -162,6 +162,24 @@ class RouteProvider implements ServiceProviderInterface
             $container['router']->addRoute('group/:group_id/members', 'group', 'users', array('group_id'));
             $container['router']->addRoute('group/:group_id/remove', 'group', 'confirm', array('group_id'));
 
+            // Config
+            $container['router']->addRoute('settings', 'config', 'index');
+            $container['router']->addRoute('settings/plugins', 'config', 'plugins');
+            $container['router']->addRoute('settings/application', 'config', 'application');
+            $container['router']->addRoute('settings/project', 'config', 'project');
+            $container['router']->addRoute('settings/project', 'config', 'project');
+            $container['router']->addRoute('settings/board', 'config', 'board');
+            $container['router']->addRoute('settings/calendar', 'config', 'calendar');
+            $container['router']->addRoute('settings/integrations', 'config', 'integrations');
+            $container['router']->addRoute('settings/webhook', 'config', 'webhook');
+            $container['router']->addRoute('settings/api', 'config', 'api');
+            $container['router']->addRoute('settings/links', 'link', 'index');
+            $container['router']->addRoute('settings/currencies', 'currency', 'index');
+
+            // Doc
+            $container['router']->addRoute('documentation/:file', 'doc', 'show', array('file'));
+            $container['router']->addRoute('documentation', 'doc', 'show');
+
             // Auth routes
             $container['router']->addRoute('oauth/google', 'oauth', 'google');
             $container['router']->addRoute('oauth/github', 'oauth', 'github');
