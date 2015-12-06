@@ -21,12 +21,17 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
 
 // Check extension: PDO
 if (! extension_loaded('pdo_sqlite') && ! extension_loaded('pdo_mysql') && ! extension_loaded('pdo_pgsql')) {
-    throw new Exception('PHP extension required: pdo_sqlite or pdo_mysql or pdo_pgsql');
+    throw new Exception('PHP extension required: "pdo_sqlite" or "pdo_mysql" or "pdo_pgsql"');
 }
 
 // Check extension: mbstring
 if (! extension_loaded('mbstring')) {
-    throw new Exception('PHP extension required: mbstring');
+    throw new Exception('PHP extension required: "mbstring"');
+}
+
+// Check extension: gd
+if (! extension_loaded('gd')) {
+    throw new Exception('PHP extension required: "gd"');
 }
 
 // Fix wrong value for arg_separator.output, used by the function http_build_query()
