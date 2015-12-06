@@ -20,7 +20,7 @@ class Activity extends Base
         $project = $this->getProject();
 
         $this->response->html($this->template->layout('activity/project', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'events' => $this->projectActivity->getProject($project['id']),
             'project' => $project,
             'title' => t('%s\'s activity', $project['name'])

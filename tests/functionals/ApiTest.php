@@ -504,6 +504,21 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertTrue($user_id > 0);
     }
 
+    public function testCreateManagerUser()
+    {
+        $user = array(
+            'username' => 'manager',
+            'name' => 'Manager',
+            'password' => '123456',
+            'role' => 'app-manager'
+        );
+
+        $user_id = $this->client->execute('createUser', $user);
+        $this->assertNotFalse($user_id);
+        $this->assertInternalType('int', $user_id);
+        $this->assertTrue($user_id > 0);
+    }
+
     /**
      * @expectedException InvalidArgumentException
      */
@@ -523,6 +538,10 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertNotFalse($user);
         $this->assertTrue(is_array($user));
         $this->assertEquals('toto', $user['username']);
+
+        $user = $this->client->getUser(3);
+        $this->assertNotEmpty($user);
+        $this->assertEquals('app-manager', $user['role']);
 
         $this->assertNull($this->client->getUser(2222));
     }

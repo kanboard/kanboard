@@ -1,11 +1,9 @@
 <section id="main">
     <div class="page-header">
-        <?php if ($this->user->isAdmin()): ?>
         <ul>
             <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'group', 'index') ?></li>
             <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('View group members'), 'group', 'users', array('group_id' => $group['id'])) ?></li>
         </ul>
-        <?php endif ?>
     </div>
     <div class="confirm">
         <p class="alert alert-info"><?= t('Do you really want to remove this group: "%s"?', $group['name']) ?></p>

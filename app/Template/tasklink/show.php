@@ -95,9 +95,9 @@
                 'placeholder="'.t('Start to type task title...').'"',
                 'title="'.t('Start to type task title...').'"',
                 'data-dst-field="opposite_task_id"',
-                'data-search-url="'.$this->url->href('app', 'autocomplete', array('exclude_task_id' => $task['id'])).'"',
+                'data-search-url="'.$this->url->href('TaskHelper', 'autocomplete', array('exclude_task_id' => $task['id'])).'"',
             ),
-            'task-autocomplete') ?>
+            'autocomplete') ?>
 
         <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
     </form>

@@ -20,7 +20,7 @@ class Project extends Base
         if ($this->userSession->isAdmin()) {
             $project_ids = $this->project->getAllIds();
         } else {
-            $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
+            $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
         }
 
         $nb_projects = count($project_ids);
@@ -33,7 +33,7 @@ class Project extends Base
             ->calculate();
 
         $this->response->html($this->template->layout('project/index', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'paginator' => $paginator,
             'nb_projects' => $nb_projects,
             'title' => t('Projects').' ('.$nb_projects.')'
@@ -160,11 +160,11 @@ class Project extends Base
         $values = $this->request->getValues();
 
         if (isset($values['is_private'])) {
-            if (! $this->helper->user->isProjectAdministrationAllowed($project['id'])) {
+            if (! $this->helper->user->hasProjectAccess('project', 'create', $project['id'])) {
                 unset($values['is_private']);
             }
         } elseif ($project['is_private'] == 1 && ! isset($values['is_private'])) {
-            if ($this->helper->user->isProjectAdministrationAllowed($project['id'])) {
+            if ($this->helper->user->hasProjectAccess('project', 'create', $project['id'])) {
                 $values += array('is_private' => 0);
             }
         }
@@ -181,120 +181,6 @@ class Project extends Base
         }
 
         $this->edit($values, $errors);
-    }
-
-    /**
-     * Users list for the selected project
-     *
-     * @access public
-     */
-    public function users()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->projectLayout('project/users', array(
-            'project' => $project,
-            'users' => $this->projectPermission->getAllUsers($project['id']),
-            'title' => t('Edit project access list')
-        )));
-    }
-
-    /**
-     * Allow everybody
-     *
-     * @access public
-     */
-    public function allowEverybody()
-    {
-        $project = $this->getProject();
-        $values = $this->request->getValues() + array('is_everybody_allowed' => 0);
-        list($valid, ) = $this->projectPermission->validateProjectModification($values);
-
-        if ($valid) {
-            if ($this->project->update($values)) {
-                $this->flash->success(t('Project updated successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to update this project.'));
-            }
-        }
-
-        $this->response->redirect($this->helper->url->to('project', 'users', array('project_id' => $project['id'])));
-    }
-
-    /**
-     * Allow a specific user (admin only)
-     *
-     * @access public
-     */
-    public function allow()
-    {
-        $values = $this->request->getValues();
-        list($valid, ) = $this->projectPermission->validateUserModification($values);
-
-        if ($valid) {
-            if ($this->projectPermission->addMember($values['project_id'], $values['user_id'])) {
-                $this->flash->success(t('Project updated successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to update this project.'));
-            }
-        }
-
-        $this->response->redirect($this->helper->url->to('project', 'users', array('project_id' => $values['project_id'])));
-    }
-
-    /**
-     * Change the role of a project member
-     *
-     * @access public
-     */
-    public function role()
-    {
-        $this->checkCSRFParam();
-
-        $values = array(
-            'project_id' => $this->request->getIntegerParam('project_id'),
-            'user_id' => $this->request->getIntegerParam('user_id'),
-            'is_owner' => $this->request->getIntegerParam('is_owner'),
-        );
-
-        list($valid, ) = $this->projectPermission->validateUserModification($values);
-
-        if ($valid) {
-            if ($this->projectPermission->changeRole($values['project_id'], $values['user_id'], $values['is_owner'])) {
-                $this->flash->success(t('Project updated successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to update this project.'));
-            }
-        }
-
-        $this->response->redirect($this->helper->url->to('project', 'users', array('project_id' => $values['project_id'])));
-    }
-
-    /**
-     * Revoke user access (admin only)
-     *
-     * @access public
-     */
-    public function revoke()
-    {
-        $this->checkCSRFParam();
-
-        $values = array(
-            'project_id' => $this->request->getIntegerParam('project_id'),
-            'user_id' => $this->request->getIntegerParam('user_id'),
-        );
-
-        list($valid, ) = $this->projectPermission->validateUserModification($values);
-
-        if ($valid) {
-            if ($this->projectPermission->revokeMember($values['project_id'], $values['user_id'])) {
-                $this->flash->success(t('Project updated successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to update this project.'));
-            }
-        }
-
-        $this->response->redirect($this->helper->url->to('project', 'users', array('project_id' => $values['project_id'])));
     }
 
     /**
@@ -413,15 +299,26 @@ class Project extends Base
      */
     public function create(array $values = array(), array $errors = array())
     {
-        $is_private = $this->request->getIntegerParam('private', $this->userSession->isAdmin() || $this->userSession->isProjectAdmin() ? 0 : 1);
+        $is_private = isset($values['is_private']) && $values['is_private'] == 1;
 
         $this->response->html($this->template->layout('project/new', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
-            'values' => empty($values) ? array('is_private' => $is_private) : $values,
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
+            'values' => $values,
             'errors' => $errors,
             'is_private' => $is_private,
             'title' => $is_private ? t('New private project') : t('New project'),
         )));
+    }
+
+    /**
+     * Display a form to create a private project
+     *
+     * @access public
+     */
+    public function createPrivate(array $values = array(), array $errors = array())
+    {
+        $values['is_private'] = 1;
+        $this->create($values, $errors);
     }
 
     /**

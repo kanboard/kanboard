@@ -76,7 +76,7 @@ class Task extends Base
             'link_label_list' => $this->link->getList(0, false),
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
-            'users_list' => $this->projectPermission->getMemberList($task['project_id'], true, false, false),
+            'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id'], true, false, false),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $task['project_name'].' &gt; '.$task['title'],

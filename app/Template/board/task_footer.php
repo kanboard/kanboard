@@ -27,31 +27,31 @@
     <?php endif ?>
 
     <?php if ($task['recurrence_status'] == \Kanboard\Model\Task::RECURRING_STATUS_PENDING): ?>
-        <span title="<?= t('Recurrence') ?>" class="tooltip" data-href="<?= $this->url->href('board', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-refresh fa-rotate-90"></i></span>
+        <span title="<?= t('Recurrence') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-refresh fa-rotate-90"></i></span>
     <?php endif ?>
 
     <?php if ($task['recurrence_status'] == \Kanboard\Model\Task::RECURRING_STATUS_PROCESSED): ?>
-        <span title="<?= t('Recurrence') ?>" class="tooltip" data-href="<?= $this->url->href('board', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-refresh fa-rotate-90 fa-inverse"></i></span>
+        <span title="<?= t('Recurrence') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-refresh fa-rotate-90 fa-inverse"></i></span>
     <?php endif ?>
 
     <?php if (! empty($task['nb_links'])): ?>
-        <span title="<?= t('Links') ?>" class="tooltip" data-href="<?= $this->url->href('board', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-code-fork"></i>&nbsp;<?= $task['nb_links'] ?></span>
+        <span title="<?= t('Links') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-code-fork"></i>&nbsp;<?= $task['nb_links'] ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['nb_subtasks'])): ?>
-		<span title="<?= t('Sub-Tasks') ?>" class="tooltip" data-href="<?= $this->url->href('board', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-bars"></i>&nbsp;<?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?></span>
+		<span title="<?= t('Sub-Tasks') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'subtasks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-bars"></i>&nbsp;<?= round($task['nb_completed_subtasks']/$task['nb_subtasks']*100, 0).'%' ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['nb_files'])): ?>
-        <span title="<?= t('Attachments') ?>" class="tooltip" data-href="<?= $this->url->href('board', 'attachments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-paperclip"></i>&nbsp;<?= $task['nb_files'] ?></span>
+        <span title="<?= t('Attachments') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'attachments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-paperclip"></i>&nbsp;<?= $task['nb_files'] ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['nb_comments'])): ?>
-        <span title="<?= $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments']) ?>" class="tooltip" data-href="<?= $this->url->href('board', 'comments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-comment-o"></i>&nbsp;<?= $task['nb_comments'] ?></span>
+        <span title="<?= $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments']) ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'comments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-comment-o"></i>&nbsp;<?= $task['nb_comments'] ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['description'])): ?>
-        <span title="<?= t('Description') ?>" class="tooltip" data-href="<?= $this->url->href('board', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+        <span title="<?= t('Description') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
             <i class="fa fa-file-text-o"></i>
         </span>
     <?php endif ?>

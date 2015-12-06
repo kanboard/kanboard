@@ -7,7 +7,7 @@ use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\Project;
-use Kanboard\Model\UserSession;
+use Kanboard\Core\User\UserSession;
 use Kanboard\Action\TaskAssignCurrentUser;
 
 class TaskAssignCurrentUserTest extends Base

@@ -49,6 +49,13 @@ class ClientTest extends \Base
         self::$functions = null;
     }
 
+    public function testGetLdapServerNotConfigured()
+    {
+        $this->setExpectedException('\LogicException');
+        $ldap = new Client;
+        $ldap->getLdapServer();
+    }
+
     public function testConnectSuccess()
     {
         self::$functions
@@ -61,7 +68,8 @@ class ClientTest extends \Base
             ->will($this->returnValue('my_ldap_resource'));
 
         $ldap = new Client;
-        $this->assertEquals('my_ldap_resource', $ldap->getConnection('my_ldap_server'));
+        $ldap->open('my_ldap_server');
+        $this->assertEquals('my_ldap_resource', $ldap->getConnection());
     }
 
     public function testConnectFailure()
@@ -78,7 +86,8 @@ class ClientTest extends \Base
         $this->setExpectedException('\Kanboard\Core\Ldap\ClientException');
 
         $ldap = new Client;
-        $this->assertNotEquals('my_ldap_resource', $ldap->getConnection('my_ldap_server'));
+        $ldap->open('my_ldap_server');
+        $this->assertNotEquals('my_ldap_resource', $ldap->getConnection());
     }
 
     public function testConnectSuccessWithTLS()
@@ -101,7 +110,8 @@ class ClientTest extends \Base
             ->will($this->returnValue(true));
 
         $ldap = new Client;
-        $this->assertEquals('my_ldap_resource', $ldap->getConnection('my_ldap_server', 389, true));
+        $ldap->open('my_ldap_server', 389, true);
+        $this->assertEquals('my_ldap_resource', $ldap->getConnection());
     }
 
     public function testConnectFailureWithTLS()
@@ -126,7 +136,8 @@ class ClientTest extends \Base
         $this->setExpectedException('\Kanboard\Core\Ldap\ClientException');
 
         $ldap = new Client;
-        $this->assertNotEquals('my_ldap_resource', $ldap->getConnection('my_ldap_server', 389, true));
+        $ldap->open('my_ldap_server', 389, true);
+        $this->assertNotEquals('my_ldap_resource', $ldap->getConnection());
     }
 
     public function testAnonymousAuthenticationSuccess()
@@ -134,13 +145,10 @@ class ClientTest extends \Base
         self::$functions
             ->expects($this->once())
             ->method('ldap_bind')
-            ->with(
-                $this->equalTo('my_ldap_resource')
-            )
             ->will($this->returnValue(true));
 
         $ldap = new Client;
-        $this->assertTrue($ldap->useAnonymousAuthentication('my_ldap_resource'));
+        $this->assertTrue($ldap->useAnonymousAuthentication());
     }
 
     public function testAnonymousAuthenticationFailure()
@@ -148,19 +156,25 @@ class ClientTest extends \Base
         self::$functions
             ->expects($this->once())
             ->method('ldap_bind')
-            ->with(
-                $this->equalTo('my_ldap_resource')
-            )
             ->will($this->returnValue(false));
 
         $this->setExpectedException('\Kanboard\Core\Ldap\ClientException');
 
         $ldap = new Client;
-        $ldap->useAnonymousAuthentication('my_ldap_resource');
+        $ldap->useAnonymousAuthentication();
     }
 
     public function testUserAuthenticationSuccess()
     {
+        self::$functions
+            ->expects($this->once())
+            ->method('ldap_connect')
+            ->with(
+                $this->equalTo('my_ldap_server'),
+                $this->equalTo(389)
+            )
+            ->will($this->returnValue('my_ldap_resource'));
+
         self::$functions
             ->expects($this->once())
             ->method('ldap_bind')
@@ -172,11 +186,21 @@ class ClientTest extends \Base
             ->will($this->returnValue(true));
 
         $ldap = new Client;
-        $this->assertTrue($ldap->authenticate('my_ldap_resource', 'my_ldap_user', 'my_ldap_password'));
+        $ldap->open('my_ldap_server');
+        $this->assertTrue($ldap->authenticate('my_ldap_user', 'my_ldap_password'));
     }
 
     public function testUserAuthenticationFailure()
     {
+        self::$functions
+            ->expects($this->once())
+            ->method('ldap_connect')
+            ->with(
+                $this->equalTo('my_ldap_server'),
+                $this->equalTo(389)
+            )
+            ->will($this->returnValue('my_ldap_resource'));
+
         self::$functions
             ->expects($this->once())
             ->method('ldap_bind')
@@ -190,6 +214,7 @@ class ClientTest extends \Base
         $this->setExpectedException('\Kanboard\Core\Ldap\ClientException');
 
         $ldap = new Client;
-        $ldap->authenticate('my_ldap_resource', 'my_ldap_user', 'my_ldap_password');
+        $ldap->open('my_ldap_server');
+        $ldap->authenticate('my_ldap_user', 'my_ldap_password');
     }
 }

@@ -22,7 +22,7 @@ class App extends Base
      */
     private function layout($template, array $params)
     {
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
         $params['content_for_sublayout'] = $this->template->render($template, $params);
 
         return $this->template->layout('app/layout', $params);
@@ -42,7 +42,7 @@ class App extends Base
             ->setUrl('app', $action, array('pagination' => 'projects', 'user_id' => $user_id))
             ->setMax($max)
             ->setOrder('name')
-            ->setQuery($this->project->getQueryColumnStats($this->projectPermission->getActiveMemberProjectIds($user_id)))
+            ->setQuery($this->project->getQueryColumnStats($this->projectPermission->getActiveProjectIds($user_id)))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'projects');
     }
 
@@ -169,7 +169,7 @@ class App extends Base
 
         $this->response->html($this->layout('app/activity', array(
             'title' => t('My activity stream'),
-            'events' => $this->projectActivity->getProjects($this->projectPermission->getActiveMemberProjectIds($user['id']), 100),
+            'events' => $this->projectActivity->getProjects($this->projectPermission->getActiveProjectIds($user['id']), 100),
             'user' => $user,
         )));
     }
@@ -201,50 +201,5 @@ class App extends Base
             'notifications' => $this->userUnreadNotification->getAll($user['id']),
             'user' => $user,
         )));
-    }
-
-    /**
-     * Render Markdown text and reply with the HTML Code
-     *
-     * @access public
-     */
-    public function preview()
-    {
-        $payload = $this->request->getJson();
-
-        if (empty($payload['text'])) {
-            $this->response->html('<p>'.t('Nothing to preview...').'</p>');
-        }
-
-        $this->response->html($this->helper->text->markdown($payload['text']));
-    }
-
-    /**
-     * Task autocompletion (Ajax)
-     *
-     * @access public
-     */
-    public function autocomplete()
-    {
-        $search = $this->request->getStringParam('term');
-        $projects = $this->projectPermission->getActiveMemberProjectIds($this->userSession->getId());
-
-        if (empty($projects)) {
-            $this->response->json(array());
-        }
-
-        $filter = $this->taskFilterAutoCompleteFormatter
-            ->create()
-            ->filterByProjects($projects)
-            ->excludeTasks(array($this->request->getIntegerParam('exclude_task_id')));
-
-        // Search by task id or by title
-        if (ctype_digit($search)) {
-            $filter->filterById($search);
-        } else {
-            $filter->filterByTitle($search);
-        }
-
-        $this->response->json($filter->format());
     }
 }

@@ -1,13 +1,27 @@
 Version 1.0.22 (unreleased)
 ---------------------------
 
+Breaking changes:
+
+* LDAP configuration parameters changes (See documentation)
+* SQL table changes:
+    - "users" table: added new column "role" and removed columns "is_admin" and "is_project_admin"
+    - "project_has_users" table: replace column "is_owner" by column "role"
+    - Sqlite does not support alter table, old columns still there but unused
+* API procedure changes:
+    - createUser
+    - createLdapUser
+    - updateUser
+
 New features:
 
-* User groups (Teams)
-* Add generic LDAP client library
-* Pluggable authentication and authorization system (Work in progress)
+* Add pluggable authentication and authorization system (Work in progress)
+* Add groups (teams)
+* Add LDAP groups synchronization
+* Add project groups permissions
 * Add new project role Viewer (Work in progress)
-* Assign project permissions to a group (Work in progress)
+* Add generic LDAP client library
+* Add search query attribute for task link
 
 Version 1.0.21
 --------------
@@ -15,8 +29,8 @@ Version 1.0.21
 Breaking changes:
 
 * Projects with duplicate name are now allowed:
-    For Postgres and Mysql the unique constraint is removed by database migration
-    However Sqlite does not support alter table, only new databases will have the unique constraint removed
+    - For Postgres and Mysql the unique constraint is removed by database migration
+    - However Sqlite does not support alter table, only new databases will have the unique constraint removed
 
 New features:
 

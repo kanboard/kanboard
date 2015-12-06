@@ -5,29 +5,43 @@ namespace Kanboard\Core;
 use Pimple\Container;
 
 /**
- * Base class
+ * Base Class
  *
  * @package core
  * @author  Frederic Guillot
  *
- * @property \Kanboard\Core\Session\SessionManager                      $sessionManager
- * @property \Kanboard\Core\Session\SessionStorage                      $sessionStorage
- * @property \Kanboard\Core\Session\FlashMessage                        $flash
- * @property \Kanboard\Core\Helper                                      $helper
- * @property \Kanboard\Core\Mail\Client                                 $emailClient
- * @property \Kanboard\Core\Paginator                                   $paginator
+ * @property \Kanboard\Core\Cache\MemoryCache                           $memoryCache
+ * @property \Kanboard\Core\Group\GroupManager                          $groupManager
  * @property \Kanboard\Core\Http\Client                                 $httpClient
+ * @property \Kanboard\Core\Http\OAuth2                                 $oauth
+ * @property \Kanboard\Core\Http\RememberMeCookie                       $rememberMeCookie
  * @property \Kanboard\Core\Http\Request                                $request
- * @property \Kanboard\Core\Http\Router                                 $router
  * @property \Kanboard\Core\Http\Response                               $response
- * @property \Kanboard\Core\Template                                    $template
- * @property \Kanboard\Core\OAuth2                                      $oauth
- * @property \Kanboard\Core\Lexer                                       $lexer
+ * @property \Kanboard\Core\Http\Router                                 $router
+ * @property \Kanboard\Core\Mail\Client                                 $emailClient
  * @property \Kanboard\Core\ObjectStorage\ObjectStorageInterface        $objectStorage
- * @property \Kanboard\Core\Cache\Cache                                 $memoryCache
  * @property \Kanboard\Core\Plugin\Hook                                 $hook
  * @property \Kanboard\Core\Plugin\Loader                               $pluginLoader
+ * @property \Kanboard\Core\Security\AccessMap                          $projectAccessMap
+ * @property \Kanboard\Core\Security\AuthenticationManager              $authenticationManager
+ * @property \Kanboard\Core\Security\AccessMap                          $applicationAccessMap
+ * @property \Kanboard\Core\Security\AccessMap                          $projectAccessMap
+ * @property \Kanboard\Core\Security\Authorization                      $applicationAuthorization
+ * @property \Kanboard\Core\Security\Authorization                      $projectAuthorization
+ * @property \Kanboard\Core\Security\Role                               $role
  * @property \Kanboard\Core\Security\Token                              $token
+ * @property \Kanboard\Core\Session\FlashMessage                        $flash
+ * @property \Kanboard\Core\Session\SessionManager                      $sessionManager
+ * @property \Kanboard\Core\Session\SessionStorage                      $sessionStorage
+ * @property \Kanboard\Core\User\GroupSync                              $groupSync
+ * @property \Kanboard\Core\User\UserProfile                            $userProfile
+ * @property \Kanboard\Core\User\UserSync                               $userSync
+ * @property \Kanboard\Core\User\UserSession                            $userSession
+ * @property \Kanboard\Core\DateParser                                  $dateParser
+ * @property \Kanboard\Core\Helper                                      $helper
+ * @property \Kanboard\Core\Lexer                                       $lexer
+ * @property \Kanboard\Core\Paginator                                   $paginator
+ * @property \Kanboard\Core\Template                                    $template
  * @property \Kanboard\Integration\BitbucketWebhook                     $bitbucketWebhook
  * @property \Kanboard\Integration\GithubWebhook                        $githubWebhook
  * @property \Kanboard\Integration\GitlabWebhook                        $gitlabWebhook
@@ -36,7 +50,8 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\TaskFilterAutoCompleteFormatter        $taskFilterAutoCompleteFormatter
  * @property \Kanboard\Formatter\TaskFilterCalendarFormatter            $taskFilterCalendarFormatter
  * @property \Kanboard\Formatter\TaskFilterICalendarFormatter           $taskFilterICalendarFormatter
- * @property \Kanboard\Model\Acl                                        $acl
+ * @property \Kanboard\Formatter\UserFilterAutoCompleteFormatter        $userFilterAutoCompleteFormatter
+ * @property \Kanboard\Formatter\GroupAutoCompleteFormatter             $groupAutoCompleteFormatter
  * @property \Kanboard\Model\Action                                     $action
  * @property \Kanboard\Model\Authentication                             $authentication
  * @property \Kanboard\Model\Board                                      $board
@@ -46,8 +61,9 @@ use Pimple\Container;
  * @property \Kanboard\Model\Config                                     $config
  * @property \Kanboard\Model\Currency                                   $currency
  * @property \Kanboard\Model\CustomFilter                               $customFilter
- * @property \Kanboard\Model\DateParser                                 $dateParser
  * @property \Kanboard\Model\File                                       $file
+ * @property \Kanboard\Model\Group                                      $group
+ * @property \Kanboard\Model\GroupMember                                $groupMember
  * @property \Kanboard\Model\LastLogin                                  $lastLogin
  * @property \Kanboard\Model\Link                                       $link
  * @property \Kanboard\Model\Notification                               $notification
@@ -60,8 +76,11 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectDailyStats                          $projectDailyStats
  * @property \Kanboard\Model\ProjectMetadata                            $projectMetadata
  * @property \Kanboard\Model\ProjectPermission                          $projectPermission
+ * @property \Kanboard\Model\ProjectUserRole                            $projectUserRole
+ * @property \Kanboard\Model\ProjectGroupRole                           $projectGroupRole
  * @property \Kanboard\Model\ProjectNotification                        $projectNotification
  * @property \Kanboard\Model\ProjectNotificationType                    $projectNotificationType
+ * @property \Kanboard\Model\RememberMeSession                          $rememberMeSession
  * @property \Kanboard\Model\Subtask                                    $subtask
  * @property \Kanboard\Model\SubtaskExport                              $subtaskExport
  * @property \Kanboard\Model\SubtaskTimeTracking                        $subtaskTimeTracking
@@ -84,16 +103,17 @@ use Pimple\Container;
  * @property \Kanboard\Model\Transition                                 $transition
  * @property \Kanboard\Model\User                                       $user
  * @property \Kanboard\Model\UserImport                                 $userImport
+ * @property \Kanboard\Model\UserLocking                                $userLocking
  * @property \Kanboard\Model\UserNotification                           $userNotification
  * @property \Kanboard\Model\UserNotificationType                       $userNotificationType
  * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
  * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
- * @property \Kanboard\Model\UserSession                                $userSession
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \League\HTMLToMarkdown\HtmlConverter                       $htmlConverter
  * @property \PicoDb\Database                                           $db
+ * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher
  */
 abstract class Base
 {

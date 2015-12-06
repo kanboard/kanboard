@@ -16,7 +16,7 @@
     <?= $this->form->label(t('Filter'), 'filter') ?>
     <?= $this->form->text('filter', $values, $errors, array('required', 'maxlength="100"')) ?>
 
-    <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
+    <?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
         <?= $this->form->checkbox('is_shared', t('Share with all project members'), 1, $values['is_shared'] == 1) ?>
     <?php else: ?>
         <?= $this->form->hidden('is_shared', $values) ?>

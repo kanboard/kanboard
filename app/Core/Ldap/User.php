@@ -2,8 +2,12 @@
 
 namespace Kanboard\Core\Ldap;
 
+use LogicException;
+use Kanboard\Core\Security\Role;
+use Kanboard\User\LdapUserProvider;
+
 /**
- * LDAP User
+ * LDAP User Finder
  *
  * @package ldap
  * @author  Frederic Guillot
@@ -24,72 +28,70 @@ class User
      * @access public
      * @param  Query   $query
      */
-    public function __construct(Query $query = null)
+    public function __construct(Query $query)
     {
-        $this->query = $query ?: new Query;
+        $this->query = $query;
     }
 
     /**
-     * Get user profile
+     * Get user profile (helper)
      *
+     * @static
      * @access public
-     * @param  resource  $ldap
-     * @param  string    $baseDn
+     * @param  Client    $client
      * @param  string    $query
      * @return array
      */
-    public function getProfile($ldap, $baseDn, $query)
+    public static function getUser(Client $client, $query)
     {
-        $this->query->execute($ldap, $baseDn, $query, $this->getAttributes());
-        $profile = array();
+        $self = new self(new Query($client));
+        return $self->find($query);
+    }
+
+    /**
+     * Find user
+     *
+     * @access public
+     * @param  string    $query
+     * @return null|LdapUserProvider
+     */
+    public function find($query)
+    {
+        $this->query->execute($this->getBasDn(), $query, $this->getAttributes());
+        $user = null;
 
         if ($this->query->hasResult()) {
-            $profile = $this->prepareProfile();
+            $user = $this->build();
         }
 
-        return $profile;
+        return $user;
     }
 
     /**
      * Build user profile
      *
-     * @access private
-     * @return boolean|array
+     * @access protected
+     * @return LdapUserProvider
      */
-    private function prepareProfile()
+    protected function build()
     {
-        return array(
-            'ldap_id' => $this->query->getAttribute('dn', ''),
-            'username' => $this->query->getAttributeValue($this->getAttributeUsername()),
-            'name' => $this->query->getAttributeValue($this->getAttributeName()),
-            'email' => $this->query->getAttributeValue($this->getAttributeEmail()),
-            'is_admin' => (int) $this->isMemberOf($this->query->getAttribute($this->getAttributeGroup(), array()), $this->getGroupAdminDn()),
-            'is_project_admin' => (int) $this->isMemberOf($this->query->getAttribute($this->getAttributeGroup(), array()), $this->getGroupProjectAdminDn()),
-            'is_ldap_user' => 1,
+        $entry = $this->query->getEntries()->getFirstEntry();
+        $role = Role::APP_USER;
+
+        if ($entry->hasValue($this->getAttributeGroup(), $this->getGroupAdminDn())) {
+            $role = Role::APP_ADMIN;
+        } elseif ($entry->hasValue($this->getAttributeGroup(), $this->getGroupManagerDn())) {
+            $role = Role::APP_MANAGER;
+        }
+
+        return new LdapUserProvider(
+            $entry->getDn(),
+            $entry->getFirstValue($this->getAttributeUsername()),
+            $entry->getFirstValue($this->getAttributeName()),
+            $entry->getFirstValue($this->getAttributeEmail()),
+            $role,
+            $entry->getAll($this->getAttributeGroup())
         );
-    }
-
-    /**
-     * Check group membership
-     *
-     * @access public
-     * @param  array   $group_entries
-     * @param  string  $group_dn
-     * @return boolean
-     */
-    public function isMemberOf(array $group_entries, $group_dn)
-    {
-        if (! isset($group_entries['count']) || empty($group_dn)) {
-            return false;
-        }
-
-        for ($i = 0; $i < $group_entries['count']; $i++) {
-            if ($group_entries[$i] === $group_dn) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -118,7 +120,26 @@ class User
      */
     public function getAttributeUsername()
     {
-        return LDAP_ACCOUNT_ID;
+        if (! LDAP_USER_ATTRIBUTE_USERNAME) {
+            throw new LogicException('LDAP username attribute empty, check the parameter LDAP_USER_ATTRIBUTE_USERNAME');
+        }
+
+        return LDAP_USER_ATTRIBUTE_USERNAME;
+    }
+
+    /**
+     * Get LDAP user name attribute
+     *
+     * @access public
+     * @return string
+     */
+    public function getAttributeName()
+    {
+        if (! LDAP_USER_ATTRIBUTE_FULLNAME) {
+            throw new LogicException('LDAP full name attribute empty, check the parameter LDAP_USER_ATTRIBUTE_FULLNAME');
+        }
+
+        return LDAP_USER_ATTRIBUTE_FULLNAME;
     }
 
     /**
@@ -129,18 +150,11 @@ class User
      */
     public function getAttributeEmail()
     {
-        return LDAP_ACCOUNT_EMAIL;
-    }
+        if (! LDAP_USER_ATTRIBUTE_EMAIL) {
+            throw new LogicException('LDAP email attribute empty, check the parameter LDAP_USER_ATTRIBUTE_EMAIL');
+        }
 
-    /**
-     * Get LDAP account name attribute
-     *
-     * @access public
-     * @return string
-     */
-    public function getAttributeName()
-    {
-        return LDAP_ACCOUNT_FULLNAME;
+        return LDAP_USER_ATTRIBUTE_EMAIL;
     }
 
     /**
@@ -151,7 +165,7 @@ class User
      */
     public function getAttributeGroup()
     {
-        return LDAP_ACCOUNT_MEMBEROF;
+        return LDAP_USER_ATTRIBUTE_GROUPS;
     }
 
     /**
@@ -166,13 +180,28 @@ class User
     }
 
     /**
-     * Get LDAP project admin group DN
+     * Get LDAP application manager group DN
      *
      * @access public
      * @return string
      */
-    public function getGroupProjectAdminDn()
+    public function getGroupManagerDn()
     {
-        return LDAP_GROUP_PROJECT_ADMIN_DN;
+        return LDAP_GROUP_MANAGER_DN;
+    }
+
+    /**
+     * Get LDAP user base DN
+     *
+     * @access public
+     * @return string
+     */
+    public function getBasDn()
+    {
+        if (! LDAP_USER_BASE_DN) {
+            throw new LogicException('LDAP user base DN empty, check the parameter LDAP_USER_BASE_DN');
+        }
+
+        return LDAP_USER_BASE_DN;
     }
 }

@@ -41,7 +41,7 @@
                 <li <?= $this->app->getRouterController() === 'twofactor' && $this->app->getRouterAction() === 'index' ? 'class="active"' : '' ?>>
                     <?= $this->url->link(t('Two factor authentication'), 'twofactor', 'index', array('user_id' => $user['id'])) ?>
                 </li>
-            <?php elseif ($this->user->isAdmin() && $user['twofactor_activated'] == 1): ?>
+            <?php elseif ($this->user->hasAccess('twofactor', 'disable') && $user['twofactor_activated'] == 1): ?>
                 <li <?= $this->app->getRouterController() === 'twofactor' && $this->app->getRouterAction() === 'disable' ? 'class="active"' : '' ?>>
                     <?= $this->url->link(t('Two factor authentication'), 'twofactor', 'disable', array('user_id' => $user['id'])) ?>
                 </li>
@@ -61,7 +61,7 @@
             </li>
         <?php endif ?>
 
-        <?php if ($this->user->isAdmin()): ?>
+        <?php if ($this->user->hasAccess('user', 'authentication')): ?>
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'authentication' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Edit Authentication'), 'user', 'authentication', array('user_id' => $user['id'])) ?>
             </li>
@@ -69,7 +69,7 @@
 
         <?= $this->hook->render('template:user:sidebar:actions', array('user' => $user)) ?>
 
-        <?php if ($this->user->isAdmin() && ! $this->user->isCurrentUser($user['id'])): ?>
+        <?php if ($this->user->hasAccess('user', 'remove') && ! $this->user->isCurrentUser($user['id'])): ?>
             <li <?= $this->app->getRouterController() === 'user' && $this->app->getRouterAction() === 'remove' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Remove'), 'user', 'remove', array('user_id' => $user['id'])) ?>
             </li>

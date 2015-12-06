@@ -4,6 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Model\User as UserModel;
 use Kanboard\Model\Task as TaskModel;
+use Kanboard\Core\Security\Role;
 
 /**
  * Project User overview
@@ -23,7 +24,7 @@ class Projectuser extends Base
      */
     private function layout($template, array $params)
     {
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
         $params['content_for_sublayout'] = $this->template->render($template, $params);
         $params['filter'] = array('user_id' => $params['user_id']);
 
@@ -37,17 +38,17 @@ class Projectuser extends Base
         if ($this->userSession->isAdmin()) {
             $project_ids = $this->project->getAllIds();
         } else {
-            $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
+            $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
         }
 
         return array($user_id, $project_ids, $this->user->getList(true));
     }
 
-    private function role($is_owner, $action, $title, $title_user)
+    private function role($role, $action, $title, $title_user)
     {
         list($user_id, $project_ids, $users) = $this->common();
 
-        $query = $this->projectPermission->getQueryByRole($project_ids, $is_owner)->callback(array($this->project, 'applyColumnStats'));
+        $query = $this->projectPermission->getQueryByRole($project_ids, $role)->callback(array($this->project, 'applyColumnStats'));
 
         if ($user_id !== UserModel::EVERYBODY_ID) {
             $query->eq(UserModel::TABLE.'.id', $user_id);
@@ -101,7 +102,7 @@ class Projectuser extends Base
      */
     public function managers()
     {
-        $this->role(1, 'managers', t('People who are project managers'), 'Projects where "%s" is manager');
+        $this->role(Role::PROJECT_MANAGER, 'managers', t('People who are project managers'), 'Projects where "%s" is manager');
     }
 
     /**
@@ -110,7 +111,7 @@ class Projectuser extends Base
      */
     public function members()
     {
-        $this->role(0, 'members', t('People who are project members'), 'Projects where "%s" is member');
+        $this->role(ROLE::PROJECT_MEMBER, 'members', t('People who are project members'), 'Projects where "%s" is member');
     }
 
     /**

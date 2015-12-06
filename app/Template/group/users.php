@@ -1,11 +1,9 @@
 <section id="main">
     <div class="page-header">
-        <?php if ($this->user->isAdmin()): ?>
         <ul>
             <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'group', 'index') ?></li>
             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('Add group member'), 'group', 'associate', array('group_id' => $group['id'])) ?></li>
         </ul>
-        <?php endif ?>
     </div>
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('There is no user in this group.') ?></p>

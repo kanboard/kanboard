@@ -1,10 +1,11 @@
 
 <div id="subtasks" class="task-show-section">
-    <div class="page-header">
-        <h2><?= t('Sub-Tasks') ?></h2>
-    </div>
 
     <?php if (! empty($subtasks)): ?>
+        <div class="page-header">
+            <h2><?= t('Sub-Tasks') ?></h2>
+        </div>
+
         <?php $first_position = $subtasks[0]['position']; ?>
         <?php $last_position = $subtasks[count($subtasks) - 1]['position']; ?>
         <table class="subtasks-table">
@@ -86,7 +87,13 @@
         </table>
     <?php endif ?>
 
-    <?php if (! isset($not_editable)): ?>
+    <?php if (! isset($not_editable) && $this->user->hasProjectAccess('subtask', 'save', $task['project_id'])): ?>
+
+        <?php if (empty($subtasks)): ?>
+            <div class="page-header">
+                <h2><?= t('Sub-Tasks') ?></h2>
+            </div>
+        <?php endif ?>
         <form method="post" action="<?= $this->url->href('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
             <?= $this->form->csrf() ?>
             <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>

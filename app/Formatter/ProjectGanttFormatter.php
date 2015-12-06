@@ -79,7 +79,7 @@ class ProjectGanttFormatter extends Project implements FormatterInterface
                 'gantt_link' => $this->helper->url->href('gantt', 'project', array('project_id' => $project['id'])),
                 'color' => $color,
                 'not_defined' => empty($project['start_date']) || empty($project['end_date']),
-                'users' => $this->projectPermission->getProjectUsers($project['id']),
+                'users' => $this->projectUserRole->getAllUsersGroupedByRole($project['id']),
             );
         }
 

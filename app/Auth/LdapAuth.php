@@ -1,0 +1,187 @@
+<?php
+
+namespace Kanboard\Auth;
+
+use LogicException;
+use Kanboard\Core\Base;
+use Kanboard\Core\Ldap\Client as LdapClient;
+use Kanboard\Core\Ldap\ClientException as LdapException;
+use Kanboard\Core\Ldap\User as LdapUser;
+use Kanboard\Core\Security\PasswordAuthenticationProviderInterface;
+
+/**
+ * LDAP Authentication Provider
+ *
+ * @package  auth
+ * @author   Frederic Guillot
+ */
+class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
+{
+    /**
+     * User properties
+     *
+     * @access private
+     * @var \Kanboard\User\LdapUserProvider
+     */
+    private $user = null;
+
+    /**
+     * Username
+     *
+     * @access private
+     * @var string
+     */
+    private $username = '';
+
+    /**
+     * Password
+     *
+     * @access private
+     * @var string
+     */
+    private $password = '';
+
+    /**
+     * Get authentication provider name
+     *
+     * @access public
+     * @return string
+     */
+    public function getName()
+    {
+        return 'LDAP';
+    }
+
+    /**
+     * Authenticate the user
+     *
+     * @access public
+     * @return boolean
+     */
+    public function authenticate()
+    {
+        try {
+
+            $ldap = LdapClient::connect($this->getLdapUsername(), $this->getLdapPassword());
+            $user = LdapUser::getUser($ldap, $this->getLdapUserPattern());
+
+            if ($user === null) {
+                $this->logger->info('User not found in LDAP server');
+                return false;
+            }
+
+            if ($user->getUsername() === '') {
+                throw new LogicException('Username not found in LDAP profile, check the parameter LDAP_USER_ATTRIBUTE_USERNAME');
+            }
+
+            if ($ldap->authenticate($user->getDn(), $this->password)) {
+                $this->user = $user;
+                return true;
+            }
+
+        } catch (LdapException $e) {
+            $this->logger->error($e->getMessage());
+        }
+
+        return false;
+    }
+
+    /**
+     * Get user object
+     *
+     * @access public
+     * @return \Kanboard\User\LdapUserProvider
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set username
+     *
+     * @access public
+     * @param  string $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * Set password
+     *
+     * @access public
+     * @param  string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * Get LDAP user pattern
+     *
+     * @access public
+     * @return string
+     */
+    public function getLdapUserPattern()
+    {
+        if (! LDAP_USER_FILTER) {
+            throw new LogicException('LDAP user filter empty, check the parameter LDAP_USER_FILTER');
+        }
+
+        return sprintf(LDAP_USER_FILTER, $this->username);
+    }
+
+    /**
+     * Get LDAP username (proxy auth)
+     *
+     * @access public
+     * @return string
+     */
+    public function getLdapUsername()
+    {
+        switch ($this->getLdapBindType()) {
+            case 'proxy':
+                return LDAP_USERNAME;
+            case 'user':
+                return sprintf(LDAP_USERNAME, $this->username);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Get LDAP password (proxy auth)
+     *
+     * @access public
+     * @return string
+     */
+    public function getLdapPassword()
+    {
+        switch ($this->getLdapBindType()) {
+            case 'proxy':
+                return LDAP_PASSWORD;
+            case 'user':
+                return $this->password;
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Get LDAP bind type
+     *
+     * @access public
+     * @return integer
+     */
+    public function getLdapBindType()
+    {
+        if (LDAP_BIND_TYPE !== 'user' && LDAP_BIND_TYPE !== 'proxy' && LDAP_BIND_TYPE !== 'anonymous') {
+            throw new LogicException('Wrong value for the parameter LDAP_BIND_TYPE');
+        }
+
+        return LDAP_BIND_TYPE;
+    }
+}

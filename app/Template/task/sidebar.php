@@ -21,6 +21,7 @@
 
         <?= $this->hook->render('template:task:sidebar:information') ?>
     </ul>
+    <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
     <h2><?= t('Actions') ?></h2>
     <ul>
         <li <?= $this->app->getRouterController() === 'taskmodification' && $this->app->getRouterAction() === 'edit' ? 'class="active"' : '' ?>>
@@ -71,6 +72,7 @@
 
         <?= $this->hook->render('template:task:sidebar:actions') ?>
     </ul>
+    <?php endif ?>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
     <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>
 </div>

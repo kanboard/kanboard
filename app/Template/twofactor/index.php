@@ -15,10 +15,16 @@
 <?php if ($user['twofactor_activated'] == 1): ?>
 <div class="listing">
     <p><?= t('Secret key: ') ?><strong><?= $this->e($user['twofactor_secret']) ?></strong> (base32)</p>
-    <p><br/><img src="<?= $qrcode_url ?>"/><br/><br/></p>
+
+    <?php if (! empty($qrcode_url)): ?>
+        <p><br/><img src="<?= $qrcode_url ?>"/><br/><br/></p>
+    <?php endif ?>
+
     <p>
-        <?= t('This QR code contains the key URI: ') ?><strong><?= $this->e($key_url) ?></strong>
-        <br/><br/>
+        <?php if (! empty($key_url)): ?>
+            <?= t('This QR code contains the key URI: ') ?><strong><?= $this->e($key_url) ?></strong>
+            <br/><br/>
+        <?php endif ?>
         <?= t('Save the secret key in your TOTP software (by example Google Authenticator or FreeOTP).') ?>
     </p>
 </div>

@@ -10,7 +10,7 @@
         <?php if (empty($user['google_id'])): ?>
             <?= $this->url->link(t('Link my Google Account'), 'oauth', 'google', array(), true) ?>
         <?php else: ?>
-            <?= $this->url->link(t('Unlink my Google Account'), 'oauth', 'unlink', array('backend' => 'google'), true) ?>
+            <?= $this->url->link(t('Unlink my Google Account'), 'oauth', 'unlink', array('backend' => 'Google'), true) ?>
         <?php endif ?>
     <?php else: ?>
         <?= empty($user['google_id']) ? t('No account linked.') : t('Account linked.') ?>
@@ -26,7 +26,7 @@
         <?php if (empty($user['github_id'])): ?>
             <?= $this->url->link(t('Link my Github Account'), 'oauth', 'github', array(), true) ?>
         <?php else: ?>
-            <?= $this->url->link(t('Unlink my Github Account'), 'oauth', 'unlink', array('backend' => 'github'), true) ?>
+            <?= $this->url->link(t('Unlink my Github Account'), 'oauth', 'unlink', array('backend' => 'Github'), true) ?>
         <?php endif ?>
     <?php else: ?>
         <?= empty($user['github_id']) ? t('No account linked.') : t('Account linked.') ?>
@@ -42,7 +42,7 @@
         <?php if (empty($user['gitlab_id'])): ?>
             <?= $this->url->link(t('Link my Gitlab Account'), 'oauth', 'gitlab', array(), true) ?>
         <?php else: ?>
-            <?= $this->url->link(t('Unlink my Gitlab Account'), 'oauth', 'unlink', array('backend' => 'gitlab'), true) ?>
+            <?= $this->url->link(t('Unlink my Gitlab Account'), 'oauth', 'unlink', array('backend' => 'Gitlab'), true) ?>
         <?php endif ?>
     <?php else: ?>
         <?= empty($user['gitlab_id']) ? t('No account linked.') : t('Account linked.') ?>

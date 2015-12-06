@@ -1,7 +1,7 @@
 <section id="main">
     <section>
         <h3><?= t('Change category for the task "%s"', $values['title']) ?></h3>
-        <form method="post" action="<?= $this->url->href('board', 'updateCategory', array('task_id' => $values['id'], 'project_id' => $values['project_id'])) ?>">
+        <form method="post" action="<?= $this->url->href('BoardPopover', 'updateCategory', array('task_id' => $values['id'], 'project_id' => $values['project_id'])) ?>">
 
             <?= $this->form->csrf() ?>
 

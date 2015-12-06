@@ -5,6 +5,7 @@ namespace Kanboard\Model;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Kanboard\Core\Security\Token;
+use Kanboard\Core\Security\Role;
 
 /**
  * Project model
@@ -287,7 +288,7 @@ class Project extends Base
     {
         foreach ($projects as &$project) {
             $this->getColumnStats($project);
-            $project = array_merge($project, $this->projectPermission->getProjectUsers($project['id']));
+            $project = array_merge($project, $this->projectUserRole->getAllUsersGroupedByRole($project['id']));
         }
 
         return $projects;
@@ -365,7 +366,7 @@ class Project extends Base
         }
 
         if ($add_user && $user_id) {
-            $this->projectPermission->addManager($project_id, $user_id);
+            $this->projectUserRole->addUser($project_id, $user_id, Role::PROJECT_MANAGER);
         }
 
         $this->category->createDefaultCategories($project_id);

@@ -1,7 +1,7 @@
 <section id="main">
     <section>
         <h3><?= t('Change assignee for the task "%s"', $values['title']) ?></h3>
-        <form method="post" action="<?= $this->url->href('board', 'updateAssignee', array('task_id' => $values['id'], 'project_id' => $values['project_id'])) ?>">
+        <form method="post" action="<?= $this->url->href('BoardPopover', 'updateAssignee', array('task_id' => $values['id'], 'project_id' => $values['project_id'])) ?>">
 
             <?= $this->form->csrf() ?>
 

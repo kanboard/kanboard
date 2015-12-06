@@ -8,7 +8,6 @@ use Kanboard\Model\TaskModification;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\TaskStatus;
 use Kanboard\Model\Project;
-use Kanboard\Model\ProjectPermission;
 
 class TaskModificationTest extends Base
 {

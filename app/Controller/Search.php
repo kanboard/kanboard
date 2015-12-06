@@ -12,7 +12,7 @@ class Search extends Base
 {
     public function index()
     {
-        $projects = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+        $projects = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
         $search = urldecode($this->request->getStringParam('search'));
         $nb_tasks = 0;
 

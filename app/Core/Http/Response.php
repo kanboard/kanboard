@@ -257,7 +257,7 @@ class Response extends Base
      */
     public function hsts()
     {
-        if (Request::isHTTPS()) {
+        if ($this->request->isHTTPS()) {
             header('Strict-Transport-Security: max-age=31536000');
         }
     }

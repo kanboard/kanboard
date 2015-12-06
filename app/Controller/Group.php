@@ -25,7 +25,7 @@ class Group extends Base
             ->calculate();
 
         $this->response->html($this->template->layout('group/index', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'title' => t('Groups').' ('.$paginator->getTotal().')',
             'paginator' => $paginator,
         )));
@@ -49,7 +49,7 @@ class Group extends Base
             ->calculate();
 
         $this->response->html($this->template->layout('group/users', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'title' => t('Members of %s', $group['name']).' ('.$paginator->getTotal().')',
             'paginator' => $paginator,
             'group' => $group,
@@ -64,7 +64,7 @@ class Group extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $this->response->html($this->template->layout('group/create', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'errors' => $errors,
             'values' => $values,
             'title' => t('New group')
@@ -105,7 +105,7 @@ class Group extends Base
         }
 
         $this->response->html($this->template->layout('group/edit', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'errors' => $errors,
             'values' => $values,
             'title' => t('Edit group')
@@ -149,7 +149,7 @@ class Group extends Base
         }
 
         $this->response->html($this->template->layout('group/associate', array(
-            'board_selector' => $this->projectPermission->getAllowedProjects($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'users' => $this->user->prepareList($this->groupMember->getNotMembers($group_id)),
             'group' => $group,
             'errors' => $errors,

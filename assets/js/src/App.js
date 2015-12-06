@@ -8,6 +8,7 @@ function App() {
     this.tooltip = new Tooltip(this);
     this.popover = new Popover(this);
     this.task = new Task();
+    this.project = new Project();
     this.keyboardShortcuts();
     this.chosen();
     this.poll();
@@ -29,6 +30,7 @@ function App() {
 }
 
 App.prototype.listen = function() {
+    this.project.listen();
     this.popover.listen();
     this.markdown.listen();
     this.sidebar.listen();
@@ -38,7 +40,7 @@ App.prototype.listen = function() {
     this.task.listen();
     this.swimlane.listen();
     this.search.focus();
-    this.taskAutoComplete();
+    this.autoComplete();
     this.datePicker();
     this.focus();
 };
@@ -127,25 +129,30 @@ App.prototype.datePicker = function() {
     });
 };
 
-App.prototype.taskAutoComplete = function() {
-    // Task auto-completion
-    if ($(".task-autocomplete").length) {
+App.prototype.autoComplete = function() {
+    $(".autocomplete").each(function() {
+        var input = $(this);
+        var field = input.data("dst-field");
+        var extraField = input.data("dst-extra-field");
 
-        if ($('.opposite_task_id').val() == '') {
-            $(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+        if ($('#form-' + field).val() == '') {
+            input.parent().find("input[type=submit]").attr('disabled','disabled');
         }
 
-        $(".task-autocomplete").autocomplete({
-            source: $(".task-autocomplete").data("search-url"),
+        input.autocomplete({
+            source: input.data("search-url"),
             minLength: 1,
             select: function(event, ui) {
-                var field = $(".task-autocomplete").data("dst-field");
                 $("input[name=" + field + "]").val(ui.item.id);
 
-                $(".task-autocomplete").parent().find("input[type=submit]").removeAttr('disabled');
+                if (extraField) {
+                    $("input[name=" + extraField + "]").val(ui.item[extraField]);
+                }
+
+                input.parent().find("input[type=submit]").removeAttr('disabled');
             }
         });
-    }
+    });
 };
 
 App.prototype.chosen = function() {

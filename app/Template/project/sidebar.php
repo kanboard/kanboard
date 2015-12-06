@@ -8,7 +8,7 @@
             <?= $this->url->link(t('Custom filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
         </li>
 
-        <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
             <li <?= $this->app->getRouterController() === 'project' && $this->app->getRouterAction() === 'share' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Public access'), 'project', 'share', array('project_id' => $project['id'])) ?>
             </li>
@@ -30,9 +30,9 @@
             <li <?= $this->app->getRouterController() === 'category' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Categories'), 'category', 'index', array('project_id' => $project['id'])) ?>
             </li>
-            <?php if ($this->user->isAdmin() || $project['is_private'] == 0): ?>
-            <li <?= $this->app->getRouterController() === 'project' && $this->app->getRouterAction() === 'users' ? 'class="active"' : '' ?>>
-                <?= $this->url->link(t('Users'), 'project', 'users', array('project_id' => $project['id'])) ?>
+            <?php if ($project['is_private'] == 0): ?>
+            <li <?= $this->app->getRouterController() === 'project' && $this->app->getRouterAction() === 'permissions' ? 'class="active"' : '' ?>>
+                <?= $this->url->link(t('Permissions'), 'ProjectPermission', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php endif ?>
             <li <?= $this->app->getRouterController() === 'action' ? 'class="active"' : '' ?>>
@@ -51,7 +51,7 @@
             <li <?= $this->app->getRouterController() === 'taskImport' && $this->app->getRouterAction() === 'step1' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Import'), 'taskImport', 'step1', array('project_id' => $project['id'])) ?>
             </li>
-            <?php if ($this->user->isProjectAdministrationAllowed($project['id'])): ?>
+            <?php if ($this->user->hasProjectAccess('project', 'remove', $project['id'])): ?>
                 <li <?= $this->app->getRouterController() === 'project' && $this->app->getRouterAction() === 'remove' ? 'class="active"' : '' ?>>
                     <?= $this->url->link(t('Remove'), 'project', 'remove', array('project_id' => $project['id'])) ?>
                 </li>

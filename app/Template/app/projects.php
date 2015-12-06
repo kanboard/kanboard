@@ -22,7 +22,7 @@
                 <?php endif ?>
             </td>
             <td>
-                <?php if ($this->user->isProjectManagementAllowed($project['id'])): ?>
+                <?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
                     <?= $this->url->link('<i class="fa fa-sliders fa-fw"></i>', 'gantt', 'project', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Gantt chart')) ?>
                 <?php endif ?>
 

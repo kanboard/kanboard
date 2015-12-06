@@ -36,7 +36,7 @@ class Taskcreation extends Base
             'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
             'columns_list' => $this->board->getColumnsList($project['id']),
-            'users_list' => $this->projectPermission->getMemberList($project['id'], true, false, true),
+            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id'], true, false, true),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'swimlanes_list' => $swimlanes_list,

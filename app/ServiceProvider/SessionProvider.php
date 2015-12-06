@@ -8,8 +8,21 @@ use Kanboard\Core\Session\SessionManager;
 use Kanboard\Core\Session\SessionStorage;
 use Kanboard\Core\Session\FlashMessage;
 
+/**
+ * Session Provider
+ *
+ * @package serviceProvider
+ * @author  Frederic Guillot
+ */
 class SessionProvider implements ServiceProviderInterface
 {
+    /**
+     * Register providers
+     *
+     * @access public
+     * @param  \Pimple\Container $container
+     * @return \Pimple\Container
+     */
     public function register(Container $container)
     {
         $container['sessionStorage'] = function() {

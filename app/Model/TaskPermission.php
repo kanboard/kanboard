@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Security\Role;
+
 /**
  * Task permission model
  *
@@ -20,7 +22,7 @@ class TaskPermission extends Base
      */
     public function canRemoveTask(array $task)
     {
-        if ($this->userSession->isAdmin() || $this->projectPermission->isManager($task['project_id'], $this->userSession->getId())) {
+        if ($this->userSession->isAdmin() || $this->projectUserRole->getUserRole($task['project_id'], $this->userSession->getId()) === Role::PROJECT_MANAGER) {
             return true;
         } elseif (isset($task['creator_id']) && $task['creator_id'] == $this->userSession->getId()) {
             return true;

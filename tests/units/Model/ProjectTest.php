@@ -5,7 +5,6 @@ require_once __DIR__.'/../Base.php';
 use Kanboard\Core\Translator;
 use Kanboard\Subscriber\ProjectModificationDateSubscriber;
 use Kanboard\Model\Project;
-use Kanboard\Model\ProjectPermission;
 use Kanboard\Model\User;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
