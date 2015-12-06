@@ -153,6 +153,15 @@ class RouteProvider implements ServiceProviderInterface
             $container['router']->addRoute('user/:user_id/authentication', 'user', 'authentication', array('user_id'));
             $container['router']->addRoute('user/:user_id/2fa', 'twofactor', 'index', array('user_id'));
 
+            // Groups
+            $container['router']->addRoute('groups', 'group', 'index');
+            $container['router']->addRoute('groups/create', 'group', 'create');
+            $container['router']->addRoute('group/:group_id/associate', 'group', 'associate', array('group_id'));
+            $container['router']->addRoute('group/:group_id/dissociate/:user_id', 'group', 'dissociate', array('group_id', 'user_id'));
+            $container['router']->addRoute('group/:group_id/edit', 'group', 'edit', array('group_id'));
+            $container['router']->addRoute('group/:group_id/members', 'group', 'users', array('group_id'));
+            $container['router']->addRoute('group/:group_id/remove', 'group', 'confirm', array('group_id'));
+
             // Auth routes
             $container['router']->addRoute('oauth/google', 'oauth', 'google');
             $container['router']->addRoute('oauth/github', 'oauth', 'github');
