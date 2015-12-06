@@ -3,7 +3,6 @@
 namespace Kanboard\User;
 
 use Kanboard\Core\User\UserProviderInterface;
-use Kanboard\Core\Security\Role;
 
 /**
  * OAuth User Provider

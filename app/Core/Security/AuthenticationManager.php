@@ -4,7 +4,6 @@ namespace Kanboard\Core\Security;
 
 use LogicException;
 use Kanboard\Core\Base;
-use Kanboard\Core\User\UserProviderInterface;
 use Kanboard\Event\AuthFailureEvent;
 use Kanboard\Event\AuthSuccessEvent;
 

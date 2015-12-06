@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Security\Role;
+
 /**
  * Custom Filter management
  *

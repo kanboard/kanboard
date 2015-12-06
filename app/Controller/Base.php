@@ -2,7 +2,6 @@
 
 namespace Kanboard\Controller;
 
-use Pimple\Container;
 use Kanboard\Core\Security\Role;
 
 /**

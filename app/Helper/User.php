@@ -2,8 +2,6 @@
 
 namespace Kanboard\Helper;
 
-use Kanboard\Core\Security\Role;
-
 /**
  * User helpers
  *

@@ -2,7 +2,7 @@
 
 namespace Kanboard\Api;
 
-use Kanboard\Auth\Ldap;
+use LogicException;
 use Kanboard\Core\Security\Role;
 use Kanboard\Core\Ldap\Client as LdapClient;
 use Kanboard\Core\Ldap\ClientException as LdapException;

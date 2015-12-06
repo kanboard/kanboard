@@ -3,7 +3,6 @@
 namespace Kanboard\Core\Session;
 
 use Kanboard\Core\Base;
-use Kanboard\Core\Http\Request;
 
 /**
  * Session Manager
