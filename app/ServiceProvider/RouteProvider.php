@@ -151,6 +151,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['router']->addRoute('user/:user_id/accounts', 'user', 'external', array('user_id'));
             $container['router']->addRoute('user/:user_id/integrations', 'user', 'integrations', array('user_id'));
             $container['router']->addRoute('user/:user_id/authentication', 'user', 'authentication', array('user_id'));
+            $container['router']->addRoute('user/:user_id/remove', 'user', 'remove', array('user_id'));
             $container['router']->addRoute('user/:user_id/2fa', 'twofactor', 'index', array('user_id'));
 
             // Groups
