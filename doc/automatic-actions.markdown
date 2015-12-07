@@ -6,17 +6,17 @@ To minimize the user interaction, Kanboard support automated actions.
 Each automatic action is defined like that:
 
 - An event to listen
-- An action linked to this event
+- Action linked to this event
 - Eventually there is some parameters to define
 
-Each project have a different set of automatic actions, the configuration panel is located on the project listing page, just click on the link **Automatic actions**.
+Each project has a different set of automatic actions, the configuration panel is located on the project listing page, just click on the link **Automatic actions**.
 
 Add a new action
 ----------------
 
 ### Choose an action
 
-![Choose an action](http://kanboard.net/screenshots/documentation/project-automatic-action-step1.png)
+![Choose action](http://kanboard.net/screenshots/documentation/project-automatic-action-step1.png)
 
 ### Choose an event
 
@@ -66,8 +66,8 @@ List of available actions
 - Move the task to another project
 - Move the task to another column when assigned to a user
 - Move the task to another column when assignee is cleared
-- Assign a color when the task is moved to a specific column
-- Assign a color to a specific user
+- Assign color when the task is moved to a specific column
+- Assign color to a specific user
 - Assign automatically a color based on a category
 - Assign automatically a category based on a color
 - Create a comment from an external provider
@@ -83,13 +83,13 @@ List of available actions
 Examples
 --------
 
-Here are some examples used in the real life:
+Here are some examples used in real life:
 
 ### When I move a task to the column "Done", automatically close this task
 
-- Choose the action: **Close the task**
+- Choose action: **Close the task**
 - Choose the event: **Move a task to another column**
-- Define the action parameter: **Column = Done** (this is the destination column)
+- Define action parameter: **Column = Done** (this is the destination column)
 
 ### When I move a task to the column "To be validated", assign this task to a specific user
 
@@ -99,40 +99,40 @@ Here are some examples used in the real life:
 
 ### When I move a task to the column "Work in progress", assign this task to the current user
 
-- Choose the action: **Assign the task to the person who does the action**
+- Choose action: **Assign the task to the person who does the action**
 - Choose the event: **Move a task to another column**
-- Define the action parameter: **Column = Work in progress**
+- Define action parameter: **Column = Work in progress**
 
 ### When a task is completed, duplicate this task to another project
 
 Let's say we have two projects "Customer orders" and "Production", once the order is validated, swap it to the "Production" project.
 
-- Choose the action: **Duplicate the task to another project**
+- Choose action: **Duplicate the task to another project**
 - Choose the event: **Closing a task**
-- Define the action parameters: **Column = Validated** and **Project = Production**
+- Define action parameters: **Column = Validated** and **Project = Production**
 
 ### When a task is moved to the last column, move the exact same task to another project
 
 Let's say we have two projects "Ideas" and "Development", once the idea is validated, swap it to the "Development" project.
 
-- Choose the action: **Move the task to another project**
+- Choose action: **Move the task to another project**
 - Choose the event: **Move a task to another column**
-- Define the action parameters: **Column = Validated** and **Project = Development**
+- Define action parameters: **Column = Validated** and **Project = Development**
 
 ### I want to assign automatically a color to the user Bob
 
-- Choose the action: **Assign a color to a specific user**
+- Choose action: **Assign a color to a specific user**
 - Choose the event: **Task assignee change**
-- Define the action parameters: **Color = Green** and **Assignee = Bob**
+- Define action parameters: **Color = Green** and **Assignee = Bob**
 
-### I want to assign automatically a color to the defined category "Feature Request"
+### I want to assign a color automatically to the defined category "Feature Request"
 
-- Choose the action: **Assign automatically a color based on a category**
+- Choose action: **Assign automatically a color based on a category**
 - Choose the event: **Task creation or modification**
-- Define the action parameters: **Color = Blue** and **Category = Feature Request**
+- Define action parameters: **Color = Blue** and **Category = Feature Request**
 
 ### I want to set the start date automatically when the task is moved to the column "Work in progress"
 
-- Choose the action: **Automatically update the start date**
+- Choose action: **Automatically update the start date**
 - Choose the event: **Move a task to another column**
-- Define the action parameters: **Column = Work in progress**
+- Define action parameters: **Column = Work in progress**

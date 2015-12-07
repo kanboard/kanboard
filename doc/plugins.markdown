@@ -5,7 +5,7 @@ Note: The plugin API is **considered alpha** at the moment.
 
 Plugins are useful to extend the core functionalities of Kanboard, adding features, creating themes or changing the default behavior.
 
-Plugin creators should specify explicitly the compatible versions of Kanboard. Internal code of Kanboard may change over the time and your plugin must be tested with new versions. Always check the [ChangeLog](https://github.com/fguillot/kanboard/blob/master/ChangeLog) for breaking changes.
+Plugin creators should specify explicitly the compatible versions of Kanboard. Internal code of Kanboard may change over time and your plugin must be tested with new versions. Always check the [ChangeLog](https://github.com/fguillot/kanboard/blob/master/ChangeLog) for breaking changes.
 
 - [Creating your plugin](plugin-registration.markdown)
 - [Using plugin hooks](plugin-hooks.markdown)
@@ -32,7 +32,7 @@ Examples of plugins
 - [Postmark](https://github.com/kanboard/plugin-postmark)
 - [Amazon S3](https://github.com/kanboard/plugin-s3)
 - [Budget planning](https://github.com/kanboard/plugin-budget)
-- [User timetable](https://github.com/kanboard/plugin-timetable)
+- [User timetables](https://github.com/kanboard/plugin-timetable)
 - [Subtask Forecast](https://github.com/kanboard/plugin-subtask-forecast)
 - [Automatic Action example](https://github.com/kanboard/plugin-example-automatic-action)
 - [Theme plugin example](https://github.com/kanboard/plugin-example-theme)

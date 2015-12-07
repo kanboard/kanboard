@@ -18,6 +18,6 @@ Roles assignation is available from **Project Settings > Permissions**:
 ![Project Permissions](screenshots/project-permissions.png)
 
 If you choose to allow everybody, all Kanboard users will be considered Project Member.
-That also means there is no role management anymore. Permissions per user or per group cannot be applied.
+That also means there is no role management anymore. Permission per user or per group cannot be applied.
 
-Private projects cannot define permissions.
+Private projects cannot define permission.

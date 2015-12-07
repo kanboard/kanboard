@@ -13,7 +13,7 @@ There are two different calendars in Kanboard:
 Project calendar
 ----------------
 
-This calendar show tasks with defined due date and tasks based on the creation date or the start date.
+This calendar shows tasks with defined due date and tasks based on the creation date or the start date.
 
 ### Show tasks based on the creation date
 
@@ -30,13 +30,13 @@ This calendar show tasks with defined due date and tasks based on the creation d
 User calendar
 -------------
 
-This calendar show only tasks assigned to the user and optionally subtasks information.
+This calendar shows only tasks assigned to the user and optionally sub-tasks information.
 
-### Show subtasks based on the time tracking
+### Show sub-tasks based on the time tracking
 
-- Display subtasks in the calendar from the information recorded in the time tracking table.
+- Display sub-tasks in the calendar from the information recorded in the time tracking table.
 - The intersection with the user timetable is also calculated.
 
-### Show subtask estimates (forecast of future work)
+### Show sub-task estimates (forecast of future work)
 
-- Display the estimate of future work for subtasks in status "todo" and with a defined "estimate" value.
+- Display the estimate of future work for sub-tasks in status "todo" and with a defined "estimate" value.

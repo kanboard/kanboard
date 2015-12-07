@@ -1,7 +1,7 @@
 LDAP Configuration Parameters
 =============================
 
-Here are the list of available LDAP parameters:
+Here is the list of available LDAP parameters:
 
 | Parameter                       | Default value  | Description                                    |
 |---------------------------------|----------------|------------------------------------------------|

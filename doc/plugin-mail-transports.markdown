@@ -8,12 +8,12 @@ By default Kanboard supports 3 standards mail transports:
 - Sendmail command
 
 With the plugin API you can add a driver for any email provider.
-By example, your plugin can add a mail transport for a provider that uses an HTTP API.
+For example, your plugin can add a mail transport for a provider that uses an HTTP API.
 
 Implementation
 --------------
 
-Your plugin must implements the interface `Kanboard\Core\Mail\ClientInterface` and extends from `Kanboard\Core\Base`.
+Your plugin must implement the interface `Kanboard\Core\Mail\ClientInterface` and extends from `Kanboard\Core\Base`.
 
 The only method you need to implement is `sendEmail()`:
 
@@ -40,7 +40,7 @@ To register your new mail transport, use the method `setTransport($transport, $c
 $this->emailClient->setTransport('myprovider', '\Kanboard\Plugin\MyProvider\MyEmailHandler');
 ```
 
-The second argument contains the absolute namespace of your concrete class.
+The second argument contains the absolute name space of your concrete class.
 
 Examples of mail transport plugins
 ----------------------------------

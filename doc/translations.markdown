@@ -5,19 +5,19 @@ How to translate Kanboard to a new language?
 --------------------------------------------
 
 - Translations are stored inside the directory `app/Locale`
-- There is sub-directory for each language, by example for the French we have `fr_FR`, Italian `it_IT` etc...
+- There is subdirectory for each language, for example in French we have `fr_FR`, Italian `it_IT` etc.
 - A translation is a PHP file that returns an Array with a key-value pairs
-- The key is the original text in english and the value is the translation for the corresponding language
+- The key is the original text in English and the value is the translation of the corresponding language
 - **French translations are always up to date**
 - Always use the last version (branch master)
 
 ### Create a new translation:
 
-1. Make a new directory: `app/Locale/xx_XX` by example `app/Locale/fr_CA` for French Canadian
+1. Make a new directory: `app/Locale/xx_XX` for example `app/Locale/fr_CA` for French Canadian
 2. Create a new file for the translation: `app/Locale/xx_XX/translations.php`
 3. Use the content of the French locales and replace the values
 4. Inside the file `app/Model/Config.php`, add a new entry for your translation inside the function `getLanguages()`
-5. Check with your local installation of Kanboard if everything is ok
+5. Check with your local installation of Kanboard if everything is OK
 6. Send a [pull-request with Github](https://help.github.com/articles/using-pull-requests/)
 
 How to update an existing translation?
@@ -32,7 +32,7 @@ How to add new translated text in the application?
 
 Translations are displayed with the following functions in the source code:
 
-- `t()`: dispaly text with HTML escaping
+- `t()`: display text with HTML escaping
 - `e()`: display text without HTML escaping
 - `dt()`: display date and time using the `strftime()` function formats
 
@@ -42,7 +42,7 @@ Always use the english version in the source code.
 
 Date strings use the function `strftime()` to format the date.
 
-By example, the original English version can be defined like that `Created on %B %e, %Y at %k:%M %p` and that will output something like that `Created on January 11, 2015 at 15:19 PM`. The French version can be modified to display a different format, `Créé le %d/%m/%Y à %H:%M` and the result will be `Créé le 11/01/2015 à 15:19`.
+For example, the original English version can be defined like that `Created on %B %e, %Y at %k:%M %p` and that will output something like that `Created on January 11, 2015 at 15:19 PM`. The French version can be modified to display a different format, `Créé le %d/%m/%Y à %H:%M` and the result will be `Créé le 11/01/2015 à 15:19`.
 
 All formats are available in the [PHP documentation](http://php.net/strftime).
 
@@ -76,4 +76,4 @@ From a Unix shell run this command:
 ./kanboard locale:sync
 ```
 
-The French translation is used a reference for other locales.
+The French translation is used a reference to other locales.

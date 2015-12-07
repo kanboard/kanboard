@@ -11,23 +11,23 @@ Go to the menu **Settings**, then choose **Application settings** on the left.
 ### Application URL
 
 This parameter is used for email notifications.
-The email footer will contains a link to the Kanboard task.
+The email footer will contain a link to the Kanboard task.
 
 ### Language
 
 The application language can be changed at anytime.
 The language will be set for all users.
 
-### Timezone
+### Time zone
 
-By default, Kanboard use UTC as timezone, but you can define your own timezone.
-The list contains all supported timezones by your web server.
+By default, Kanboard use UTC as time zone, but you can define your own time zone.
+The list contains all supported time zones by your web server.
 
 ### Date format
 
-Input format used for date fields, by example the due date for tasks.
+Input format used for date fields, for examples the due date for tasks.
 
-Kanboard offer 4 different formats:
+Kanboard offers 4 different formats:
 
 - DD/MM/YYYY
 - MM/DD/YYYY (default)

@@ -24,13 +24,13 @@ Those interfaces are defined in the namepsace `Kanboard\Core\Security`:
 - `Kanboard\Core\Security\PasswordAuthenticationProviderInterface`
 - `Kanboard\Core\Security\OAuthAuthenticationProviderInterface`
 
-The only requirement is to implement the interfaces, you class can be written the way you want and located anywhere on disk.
+The only requirement is to implement the interfaces, you class can be written the way you want and located anywhere on the disk.
 
 User Provider
 -------------
 
-When the authentication is successful, your driver must return an object that represent the user.
-This object must implements the interface `Kanboard\Core\User\UserProviderInterface`.
+When the authentication is successful, your driver must return an object that represents the user.
+This object must implement the interface `Kanboard\Core\User\UserProviderInterface`.
 
 Example of authentication plugins
 ---------------------------------

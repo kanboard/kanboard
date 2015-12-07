@@ -1,12 +1,12 @@
 URL rewriting
 =============
 
-Kanboard is able to work indifferently with url rewriting enabled or not.
+Kanboard is able to work indifferently with URL rewriting enabled or not.
 
 - Example of URL rewritten: `/board/123`
 - Otherwise: `?controller=board&action=show&project_id=123`
 
-If you use Kanboard with Apache and with the mode rewrite enabled, nice urls will be used automatically.  
+If you use Kanboard with Apache and with the mode rewrite enabled, nice URLs will be used automatically.
 In case you get a "404 Not Found", you might need to set at least the following overrides for your DocumentRoot to get the .htaccess files working:
 
 ```sh
@@ -29,7 +29,7 @@ Configuration
 
 By default, Kanboard will check if the Apache mode rewrite is enabled.
 
-To avoid the automatic detection of url rewriting from the web server, you can enable this feature in your config file:
+To avoid the automatic detection of URL rewriting from the web server, you can enable this feature in your config file:
 
 ```php
 define('ENABLE_URL_REWRITE', true);
@@ -38,9 +38,9 @@ define('ENABLE_URL_REWRITE', true);
 When this constant is at `true`:
 
 - URLs generated from command line tools will be also converted
-- If you use another web server than Apache, by example Nginx or Microsoft IIS, you have to configure yourself the url rewriting
+- If you use another web server than Apache, by example Nginx or Microsoft IIS, you have to configure yourself the URL rewriting
 
-Note: Kanboard always fallback to old school urls when it's not configured, this configuration is optional.
+Note: Kanboard always fallback to old school URLs when it's not configured, this configuration is optional.
 
 Nginx configuration example
 ---------------------------

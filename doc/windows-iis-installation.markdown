@@ -23,13 +23,13 @@ extension=php_openssl.dll
 extension=php_pdo_sqlite.dll
 ```
 
-Set the timezone:
+Set the time zone:
 
 ```ini
 date.timezone = America/Montreal
 ```
 
-The list of supported timezones can be found in the [PHP documentation](http://php.net/manual/en/timezones.america.php).
+The list of supported time zones can be found in the [PHP documentation](http://php.net/manual/en/timezones.america.php).
 
 Check if PHP runs correctly:
 
@@ -56,7 +56,7 @@ Kanboard installation
 ---------------------
 
 - Download the zip file
-- Uncompress the archive in `C:\inetpub\wwwroot\kanboard` by example
+- Decompress the archive in `C:\inetpub\wwwroot\kanboard` by example
 - Make sure the directory `data` is writable by the IIS user
 - Open your web browser to use Kanboard http://localhost/kanboard/
 - The default credentials are **admin/admin**

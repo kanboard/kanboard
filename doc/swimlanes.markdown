@@ -1,8 +1,8 @@
-Swimlanes
-=========
+Swim lanes
+==========
 
 Swimlanes are horizontal separations in your board.
-By example, it's useful to separate software releases, divide your tasks in different products, teams or what ever you want.
+By example, it's useful to separate software releases, divide your tasks in different products, teams or whatever you want.
 
 Board with swimlanes
 --------------------

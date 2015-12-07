@@ -13,11 +13,11 @@ Requirements
 Workflow
 --------
 
-When the LDAP authentication is activated, the login process work like that:
+When the LDAP authentication is activated, the login process works like that:
 
 1. Try first to authenticate the user by using the database
 2. If the user is not found inside the database, a LDAP authentication is performed
-3. If the LDAP authentication is successful, by default a local user is created automatically with no password and marked as LDAP user.
+3. If the LDAP authentication is successful, by default a local user is created automatically with no password and marked as LDAP users.
 
 The full name and the email address are automatically fetched from the LDAP server.
 
@@ -56,7 +56,7 @@ define('LDAP_PASSWORD', 'my proxy password');
 
 This method uses the credentials provided by the end-user.
 
-By example, Microsoft Active Directory doesn't allow anonymous browsing by default and if you don't want to use a proxy user you can use this method.
+For example, Microsoft Active Directory doesn't allow anonymous browsing by default and if you don't want to use a proxy user you can use this method.
 
 ```php
 define('LDAP_BIND_TYPE', 'user');
@@ -85,7 +85,7 @@ Example to filter access to Kanboard:
 
 `(&(objectClass=user)(sAMAccountName=%s)(memberOf=CN=Kanboard Users,CN=Users,DC=kanboard,DC=local))`
 
-This example allow only people member of the group "Kanboard Users" to connect to Kanboard.
+This example allows only people members of the group "Kanboard Users" to connect to Kanboard.
 
 Example for Microsoft Active Directory
 --------------------------------------
@@ -156,7 +156,7 @@ define('LDAP_USER_FILTER', 'uid=%s');
 Disable automatic account creation
 -----------------------------------
 
-By default, Kanboard will create automatically a user account if nothing is found.
+By default, Kanboard will create a user account automatically if nothing is found.
 
 You can disable this behavior if you prefer to create user accounts manually to restrict Kanboard to only some people.
 
@@ -174,11 +174,11 @@ Troubleshootings
 
 If SELinux is enabled, you have to allow Apache to reach out your LDAP server.
 
-- You can switch SELinux to the permissive mode or disable it (not recomemnded)
+- You can switch SELinux to the permissive mode or disable it (not recommended)
 - You can allow all network connections, by example `setsebool -P httpd_can_network_connect=1` or have a more restrictive rule
 
 In any case, refer to the official Redhat/Centos documentation.
 
 ### Enable debug mode
 
-If you are not able to setup correctly the LDAP authentication you can [enable the debug mode](config.markdown) and watch log files.
+If you are not able to setup correctly the LDAP authentication, you can [enable the debug mode](config.markdown) and watch log files.

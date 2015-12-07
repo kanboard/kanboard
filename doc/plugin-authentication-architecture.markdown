@@ -16,7 +16,7 @@ Kanboard supports natively the TOTP standard.
 Authentication Interfaces
 -------------------------
 
-To have a pluggable system, auhentication drivers must implement a set of interfaces:
+To have a pluggable system, authentication drivers must implement a set of interfaces:
 
 | Interface                                | Role                                                             |
 |------------------------------------------|------------------------------------------------------------------|
@@ -44,7 +44,7 @@ For each HTTP request:
 1. If the user session is already open, execute registered providers that implements `SessionCheckProviderInterface`
 2. Execute all providers that implements `PreAuthenticationProviderInterface`
 3. If the end-user submit the login form, providers that implements `PasswordAuthenticationProviderInterface` are executed
-4. If the end-user want to use OAuth2, the selected provider will be executed
+4. If the end-user wants to use OAuth2, the selected provider will be executed
 5. After a successful authentication, the last registered `PostAuthenticationProviderInterface` will be used
 6. Synchronize user information if necessary
 
@@ -57,7 +57,7 @@ Events triggered:
 
 Each time a failure event occurs, the counter of failed logins is incremented.
 
-The user account can be locked down for the configured period of time and a captcha can be shown to avoid bruteforce attacks.
+The user account can be locked down for the configured period of time and a captcha can be shown to avoid brute force attacks.
 
 User Provider Interface
 -----------------------
@@ -95,5 +95,5 @@ User Local Synchronization
 User information can be automatically synced with the local database.
 
 - If the method `getInternalId()` return a value no synchronization is performed
-- The methods `getExternalIdColumn()` and `getExternalId()` must returns a value to sync the user
+- The methods `getExternalIdColumn()` and `getExternalId()` must return a value to sync the user
 - Properties that returns an empty string won't be synced

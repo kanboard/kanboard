@@ -17,13 +17,13 @@ Go to the task view and choose **Duplicate to another project**.
 
 ![Task Duplication Another Project](http://kanboard.net/screenshots/documentation/task-duplication-another-project.png)
 
-Only projects where you are member will be shown in the dropdown.
+Only projects where you are members will be shown in the drop-down.
 
 Before to copy the tasks, Kanboard will ask you the destination properties that are not common between the source and destination project.
 
 Basically, you need to define:
 
-- The destination swimlane
+- The destination swim lane
 - The column
 - The category
 - The assignee

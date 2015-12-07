@@ -14,7 +14,7 @@ Group Provider Workflow
 
 1. The end-user start to type the group name in the auto-complete field
 2. The `GroupManager` class will execute the query across all registered group providers
-3. Results are merged an returned to the user interface
+3. Results are merged and returned to the user interface
 4. After selecting a group, the information of the group are synced to the local database if necessary
 
 Group Provider Interface
@@ -35,7 +35,7 @@ Group Backend Provider Interface
 
 Interface to implement: `Kanboard\Core\Group\GroupBackendProviderInterface`.
 
-This interface require only one method: `find($input)`.
+This interface requires only one method: `find($input)`.
 The argument `$input` is the text entered from the user interface.
 
 This method must return a list of `GroupProviderInterface`, this is the result of the search.

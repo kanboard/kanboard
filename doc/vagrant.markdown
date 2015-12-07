@@ -41,7 +41,7 @@ The current directory is synced to the Apache document root.
 
 Composer dependencies have to be there, so if you didn't run `composer install` on your host machine you can also do it on the guest machine.
 
-Each box have its own TCP port:
+Each box has its own TCP port:
 
 - ubuntu: http://localhost:8001/
 - debian8: http://localhost:8002/
@@ -61,4 +61,4 @@ Available boxes are:
 - `vagrant up centos6`
 - `vagrant up freebsd10`
 
-Any specific configuration have to done manually (Postgres or Mysql).
+Any specific configuration has to be done manually (Postgres or Mysql).

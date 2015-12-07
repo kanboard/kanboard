@@ -40,7 +40,7 @@ Be sure to configure your server to allow Kanboard to send emails and make exter
 setsebool -P httpd_can_network_connect=1
 ```
 
-Allowing external connections is necessary if you use LDAP, SMTP, Webhooks or any third-party integrations.
+Allowing external connections is necessary if you use LDAP, SMTP, Web hooks or any third-party integration.
 
 Centos 6.x
 ----------

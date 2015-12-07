@@ -29,12 +29,12 @@ define('LDAP_GROUP_MANAGER_DN', 'CN=Kanboard Managers,CN=Users,DC=kanboard,DC=lo
 Automatically load LDAP groups for project permissions
 ------------------------------------------------------
 
-This feature allow you to sync automatically LDAP groups with Kanboard groups.
+This feature allows you to sync automatically LDAP groups with Kanboard groups.
 Each group can have a different project role assigned.
 
 On the project permissions page, people can enter groups in the auto-complete field and Kanboard can search for groups with any provider enabled.
 
-If the group doesn't exists in the local database, it will be automatically synced.
+If the group doesn't exist in the local database, it will be automatically synced.
 
 - `LDAP_GROUP_PROVIDER`: Enable the LDAP group provider
 - `LDAP_GROUP_BASE_DN`: Distinguished names to find groups in LDAP directory
@@ -50,7 +50,7 @@ define('LDAP_GROUP_FILTER', '(&(objectClass=group)(sAMAccountName=%s*))');
 ```
 
 With the filter given as example above, Kanboard will search for groups that match the query.
-If the end-user type the text "My group" in the auto-complete box, Kanboard will return all groups that match the pattern: `(&(objectClass=group)(sAMAccountName=My group*))`.
+If the end-user enter the text "My group" in the auto-complete box, Kanboard will return all groups that match the pattern: `(&(objectClass=group)(sAMAccountName=My group*))`.
 
 Note that the special characters `*` is important here, otherwise an exact match will be done.
 

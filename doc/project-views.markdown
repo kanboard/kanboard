@@ -1,9 +1,11 @@
-Board, Calendar and List views
+Board, Calendar and List Views
 ==============================
 
-For each project, tasks can be visualized with several views: **Board, Calendar, List and Gantt**. Each view show the result of the filter box at the top. The search engine use the [advanced syntax](search.markdown).
+For each project, tasks can be visualized with several views: **Board, Calendar, List and Gantt**.
+Each view shows the result of the filter box at the top.
+The search engine uses the [advanced syntax](search.markdown).
 
-Board view
+Board View
 ----------
 
 ![Board view](http://kanboard.net/screenshots/documentation/board-view.png)
@@ -17,8 +19,8 @@ Board view
 When the task limit is reached for a column, the background becomes red. That means there are too many tasks in progress at the same time.
 
 [Learn more about board configuration](board-configuration.markdown)
- 
-Calendar view
+
+Calendar View
 --------------
 
 ![Calendar view](http://kanboard.net/screenshots/documentation/calendar-view.png)
@@ -28,19 +30,19 @@ Calendar view
 - You can also use the keyboard shortcut **"v c"** to switch to the calendar view.
 - [Learn more about calendar configuration](calendar-configuration.markdown)
 
-List view
-----------
+List View
+---------
 
 ![List view](http://kanboard.net/screenshots/documentation/list-view.png)
 
 - With this view all results of your search are displayed in a table.
 - You can also use the keyboard shortcut **"v l"** to switch to the list view.
 
-Gantt view
+Gantt View
 ----------
 
 ![Gantt view](http://kanboard.net/screenshots/documentation/gantt-view.png)
 
-- The Gantt view display tasks on a horizontal timeline
+- The Gantt view displays tasks on a horizontal timeline
 - The start date and the due date are used to display the chart
-- For a quick access, use the keyboard shortcut: **v g**
+- For quick access, use the keyboard shortcut: **v g**

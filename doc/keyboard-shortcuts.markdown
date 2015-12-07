@@ -25,4 +25,4 @@ Application
 - Go to the search box = **f**
 - Reset the search box = **r**
 - Close dialog box = **ESC**
-- Submit a form = **CTRL+ENTER** or **⌘+ENTER**
+- Submit form = **CTRL+ENTER** or **⌘+ENTER**

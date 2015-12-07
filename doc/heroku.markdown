@@ -10,7 +10,7 @@ Requirements
 ------------
 
 - Heroku account, you can use a free account
-- Heroku command line tool installed
+- Heroku command line tools installed
 
 Manual instructions
 -------------------
@@ -35,4 +35,5 @@ heroku open
 Limitations
 -----------
 
-The storage on Heroku is ephemeral, that means uploaded files through Kanboard are not persistent after a reboot.
+The storage of Heroku is ephemeral, that means uploaded files through Kanboard are not persistent after a reboot.
+We may want to install a plugin to store your files in a cloud storage provider like [Amazon S3](https://github.com/kanboard/plugin-s3).

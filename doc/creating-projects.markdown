@@ -1,9 +1,9 @@
-Creating projects
+Creating Projects
 =================
 
-Kanboard can handle multiple projects. There are two kinds of project:
+Kanboard can handle multiple projects. There are two kinds of projects:
 
-- Project with mutliple users (you work in team)
+- Team projects
 - Private project for a single user
 
 Creating projects for multiple users

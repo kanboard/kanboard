@@ -81,7 +81,7 @@ Using Kanboard
 - [Advanced Search Syntax](search.markdown)
 - [Command line interface](cli.markdown)
 - [Syntax guide](syntax-guide.markdown)
-- [Bruteforce protection](bruteforce-protection.markdown)
+- [Brute force protection](bruteforce-protection.markdown)
 - [Frequently asked questions](faq.markdown)
 
 Technical details
@@ -99,7 +99,6 @@ Technical details
 - [Installation on Windows Server with IIS](windows-iis-installation.markdown)
 - [Installation on Windows Server with Apache](windows-apache-installation.markdown)
 - [Installation on Heroku](heroku.markdown)
-- [Example with Nginx + HTTPS + SPDY + PHP-FPM](nginx-ssl-php-fpm.markdown)
 - [Run Kanboard with Docker](docker.markdown)
 - [Run Kanboard with Vagrant](vagrant.markdown)
 

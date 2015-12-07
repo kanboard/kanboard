@@ -28,9 +28,9 @@ Configuration
 ![Bitbucket configuration](http://kanboard.net/screenshots/documentation/bitbucket-webhooks.png)
 
 1. On Kanboard, go to the project settings and choose the section **Integrations**
-2. Copy the Bitbucket webhook url
+2. Copy the Bitbucket webhook URL
 3. On Bitbucket, go to the project settings and go to the section **Webhooks**
-4. Choose a title for your webhook and paste the Kanboard url
+4. Choose a title for your webhook and paste the Kanboard URL
 
 Examples
 --------
@@ -38,7 +38,7 @@ Examples
 ### Close a Kanboard task when a commit pushed to Bitbucket
 
 - Choose the event: **Bitbucket commit received**
-- Choose the action: **Close the task**
+- Choose action: **Close the task**
 
 When one or more commits are sent to Bitbucket, Kanboard will receive the information, each commit message with a task number included will be closed.
 
@@ -50,6 +50,6 @@ Example:
 ### Add comment when a commit received
 
 - Choose the event: **Bitbucket commit received**
-- Choose the action: **Create a comment from an external provider**
+- Choose action: **Create a comment from an external provider**
 
-The comment will contains the commit message and the url to the commit.
+The comment will contain the commit message and the URL to the commit.

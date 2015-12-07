@@ -1,7 +1,7 @@
 Project Types
 =============
 
-There are two kind of projects:
+There are two kinds of projects:
 
 | Type              | Description                                                           |
 |-------------------|-----------------------------------------------------------------------|

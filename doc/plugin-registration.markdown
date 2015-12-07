@@ -25,7 +25,7 @@ plugins
     └── Test          <= Unit tests
 ```
 
-Only the registration file `Plugin.php` is required. Other folders are optionals.
+Only the registration file `Plugin.php` is required. Other folders are optional.
 
 The first letter of the plugin name must be capitalized.
 
@@ -52,7 +52,7 @@ class Plugin extends Base
 }
 ```
 
-This file should contains a class `Plugin` defined under the namespace `Kanboard\Plugin\Yourplugin` and extends `Kanboard\Core\Plugin\Base`.
+This file should contain a class `Plugin` defined under the namespace `Kanboard\Plugin\Yourplugin` and extends `Kanboard\Core\Plugin\Base`.
 
 The only required method is `initialize()`. This method is called for each request when the plugin is loaded.
 
@@ -95,7 +95,7 @@ The translations must be stored in `plugins/Myplugin/Locale/xx_XX/translations.p
 Dependency Injection Container
 ------------------------------
 
-Kanboard use Pimple, a simple PHP Dependency Injection Container. However, Kanboard can register any class in the container easily.
+Kanboard uses Pimple, a simple PHP Dependency Injection Container. However, Kanboard can register any class in the container easily.
 
 Those classes are available everywhere in the application and only one instance is created.
 
@@ -123,7 +123,7 @@ $this->budget->getDailyBudgetBreakdown(456);
 $this->container['hourlyRate']->getAll();
 ```
 
-Keys of the containers are unique across the application. If you override an existing class you will change the default behavior.
+Keys of the containers are unique across the application. If you override an existing class, you will change the default behavior.
 
 Event Listening
 ---------------
@@ -166,7 +166,7 @@ class Plugin extends Base
 - The first argument of the method `extendActions()` is the action class with the complete namespace path. **The namespace path must starts with a backslash** otherwise Kanboard will not be able to load your class.
 - The second argument is the description of your automatic action.
 
-The automatic action class must inherits from the class `Kanboard\Action\Base` and implements all abstract methods:
+The automatic action class must inherit from the class `Kanboard\Action\Base` and implements all abstract methods:
 
 - `getCompatibleEvents()`
 - `getActionRequiredParameters()`

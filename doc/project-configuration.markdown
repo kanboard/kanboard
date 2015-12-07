@@ -1,4 +1,4 @@
-Project settings
+Project Settings
 ================
 
 Go to the menu **Settings**, then choose **Project settings** on the left.
@@ -38,5 +38,5 @@ If another subtask have the status "in progress", the user will see this dialog 
 
 - If enabled, closed tasks will be included in the cumulative flow diagram.
 - If disabled, only open tasks will be included.
-- This option affect the column "total" of the table "project_daily_column_stats"
+- This option affects the column "total" of the table "project_daily_column_stats"
 

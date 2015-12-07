@@ -17,14 +17,14 @@ Extending Access Map
 --------------------
 
 The Access List (ACL) is based on the controller class name and the method name.
-The list of access are handled by the class `Kanboard\Core\Security\AccessMap`.
+The list of access is handled by the class `Kanboard\Core\Security\AccessMap`.
 
 There are two access map: one for the application and another one for projects.
 
 - Application access map: `$this->applicationAccessMap`
 - Project access map: `$this->projectAccessMap`
 
-Example to define a new policy from your plugin:
+Examples to define a new policy from your plugin:
 
 ```php
 // All methods of the class MyController:

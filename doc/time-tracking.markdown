@@ -13,7 +13,7 @@ Tasks have two fields:
 - Time estimated
 - Time spent
 
-These values represents hours of work and have to be set manually.
+These values represent hours of work and have to be set manually.
 
 Subtask time tracking
 ---------------------
@@ -37,7 +37,7 @@ For each subtask, the timer can be stopped/started at any time:
 
 ![Subtask timer](http://kanboard.net/screenshots/documentation/subtask-timer.png)
 
-- The timer doesn't depends of the subtask status
+- The timer doesn't depend of the subtask status
 - Each time you start the timer a new record is created in the time tracking table
 - Each time you stop the clock the end date is recorded in the time tracking table
 - The calculated time spent is rounded to the nearest quarter
