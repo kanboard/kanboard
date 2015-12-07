@@ -16,14 +16,15 @@ Breaking changes:
 
 New features:
 
-* Add pluggable authentication and authorization system (Work in progress)
+* Add pluggable authentication and authorization system (full rewrite)
 * Add groups (teams/organization)
 * Add LDAP groups synchronization
 * Add project groups permissions
-* Add new project role Viewer (Work in progress)
+* Add new project role Viewer
 * Add generic LDAP client library
 * Add search query attribute for task link
 * Add the possibility to define API token in config file
+* Add capability to reopen Gitlab issues
 
 Version 1.0.21
 --------------
