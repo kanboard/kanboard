@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return array(
     'number.decimals_separator' => ',',
