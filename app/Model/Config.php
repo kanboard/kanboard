@@ -35,7 +35,7 @@ class Config extends Setting
             'RSD' => t('RSD - Serbian dinar'),
             'SEK' => t('SEK - Swedish Krona'),
             'NOK' => t('NOK - Norwegian Krone'),
-            'BAM' => t('BAM - Konvertibile Mark'),
+            'BAM' => t('BAM - Konvertible Mark'),
         );
     }
 

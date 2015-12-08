@@ -1048,7 +1048,7 @@ return array(
     'Passwords will be encrypted if present' => 'Šifra će biti kriptovana',
     // '%s attached a new file to the task %s' => '',
     'Assign automatically a category based on a link' => 'Automatsko pridruživanje kategorije bazirano na vezi',
-    'BAM - Konvertibile Mark' => 'BAM - Konvertibilna marka',
+    'BAM - Konvertible Mark' => 'BAM - Konvertibilna marka',
     // 'Assignee Username' => '',
     // 'Assignee Name' => '',
     // 'Groups' => '',

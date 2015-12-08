@@ -1048,7 +1048,7 @@ return array(
     // 'Passwords will be encrypted if present' => '',
     // '%s attached a new file to the task %s' => '',
     // 'Assign automatically a category based on a link' => '',
-    // 'BAM - Konvertibile Mark' => '',
+    // 'BAM - Konvertible Mark' => '',
     // 'Assignee Username' => '',
     // 'Assignee Name' => '',
     // 'Groups' => '',

@@ -1048,7 +1048,7 @@ return array(
     'Passwords will be encrypted if present' => 'Senhas serão encriptadas se presentes',
     '%s attached a new file to the task %s' => '%s anexou um novo ficheiro à tarefa %s',
     'Assign automatically a category based on a link' => 'Assignar automáticamente a categoria baseada num link',
-    'BAM - Konvertibile Mark' => 'BAM - Marca Conversível',
+    'BAM - Konvertible Mark' => 'BAM - Marca Conversível',
     'Assignee Username' => 'Utilizador do Assignado',
     'Assignee Name' => 'Nome do Assignado',
     // 'Groups' => '',
