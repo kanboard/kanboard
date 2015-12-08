@@ -179,4 +179,44 @@ class ProjectAnalytic extends Base
 
         return $stats;
     }
+
+
+    public function getHoursByStatus($project_id)
+    {
+        $stats = array();
+        $columns = $this->board->getColumnsList($project_id);
+
+        // Get the time spent of the last move for each tasks
+        $tasks = $this->db
+            ->table(Task::TABLE)
+            ->columns('id', 'time_estimated', 'time_spent', 'is_active')
+            ->eq('project_id', $project_id)
+            ->desc('id')
+            ->limit(1000)
+            ->findAll();
+
+        // Init values
+        $stats['closed'] = array(
+                'time_spent' => 0,
+                'time_estimated' => 0,
+            );
+	$stats['open'] = array(
+                'time_spent' => 0,
+                'time_estimated' => 0,
+            );
+
+
+        // Get time spent foreach task/column and take into account the last move
+        foreach ($tasks as &$task) {
+            if ($task['is_active']) {
+                $stats['open']['time_estimated'] += $task['time_estimated'];
+                $stats['open']['time_spent'] += $task['time_spent'];
+            } else {
+                $stats['closed']['time_estimated'] += $task['time_estimated'];
+                $stats['closed']['time_spent'] += $task['time_spent'];
+            }
+        }
+
+        return $stats;
+    }
 }

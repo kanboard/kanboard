@@ -122,6 +122,7 @@ class TaskFinder extends Base
                 'tasks.recurrence_parent',
                 'tasks.recurrence_child',
                 'tasks.time_estimated',
+                'tasks.time_spent',
                 User::TABLE.'.username AS assignee_username',
                 User::TABLE.'.name AS assignee_name',
                 Category::TABLE.'.name AS category_name',
