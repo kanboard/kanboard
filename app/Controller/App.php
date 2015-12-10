@@ -3,6 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Model\Subtask as SubtaskModel;
+use Kanboard\Model\Project;
 
 /**
  * Application controller
@@ -80,6 +81,25 @@ class App extends Base
             ->setOrder('tasks.id')
             ->setQuery($this->subtask->getUserQuery($user_id, array(SubTaskModel::STATUS_TODO, SubtaskModel::STATUS_INPROGRESS)))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+    }
+
+    /**
+     * Get activity pagination
+     *
+     * @access private
+     * @param  integer  $user_id
+     * @param  string   $action
+     * @param  integer  $max
+     */
+    private function getActivityPaginator($user_id, $action, $max)
+    {
+        $events =  $this->paginator
+            ->setUrl('app', $action, array('pagination' => 'activity', 'user_id' => $user_id))
+            ->setMax($max)
+            ->setQuery($this->projectActivity->getUserQuery($user_id, array(Project::ACTIVE)))
+            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'activity');
+
+        return $events;
     }
 
     /**
@@ -169,7 +189,7 @@ class App extends Base
 
         $this->response->html($this->layout('app/activity', array(
             'title' => t('My activity stream'),
-            'events' => $this->projectActivity->getProjects($this->projectPermission->getActiveProjectIds($user['id']), 100),
+            'events' => $this->getActivityPaginator($user['id'], 'activity', 10),
             'user' => $user,
         )));
     }

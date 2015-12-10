@@ -51,6 +51,57 @@ class ProjectActivity extends Base
     }
 
     /**
+     * Reorganize data parameters in Event list
+     *
+     * @access public
+     * @param  array    $events   Events
+     * @return array
+     */
+    public function reorganizeDataParameters(array $events)
+    {
+        foreach ($events as &$event) {
+            $event += $this->decode($event['data']);
+            unset($event['data']);
+
+            $event['author'] = $event['author_name'] ?: $event['author_username'];
+            $event['event_title'] = $this->notification->getTitleWithAuthor($event['author'], $event['event_name'], $event);
+            $event['event_content'] = $this->getContent($event);
+        }
+
+        return $events;
+    }
+
+    /**
+     * Get the query to fetch activities events for for the given projects list
+     *
+     * @access public
+     * @param  integer    $user_id      User id
+     * @param  array      $status       List of status
+     * @return \PicoDb\Table
+     */
+    public function getUserQuery($user_id, array $status)
+    {
+        $project_ids = $this->projectPermission->getActiveProjectIds($user_id);
+        if (empty($project_ids)) {
+            return array();
+        }
+
+        return $this
+                ->db
+                ->table(self::TABLE)
+                ->columns(
+                    self::TABLE.'.*',
+                    User::TABLE.'.username AS author_username',
+                    User::TABLE.'.name AS author_name',
+                    User::TABLE.'.email'
+                )
+                ->in('project_id', $project_ids)
+                ->join(User::TABLE, 'id', 'creator_id')
+                ->desc(self::TABLE.'.id')
+                ->callback(array($this, 'reorganizeDataParameters'));
+    }
+
+    /**
      * Get all events for the given project
      *
      * @access public
