@@ -831,7 +831,7 @@ return array(
     'Start timer' => 'Pokreni tajmer',
     'Add project member' => 'Dodaj člana projekta',
     'Enable notifications' => 'Omogući obavještenja',
-    'My activity stream' => 'Tok mojih aktivnosti',
+    'My activity stream' => 'Tok aktivnosti',
     'My calendar' => 'Moj kalendar',
     'Search tasks' => 'Pretraga zadataka',
     'Back to the calendar' => 'Vrati na kalendar',
