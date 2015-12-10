@@ -548,7 +548,7 @@ CREATE TABLE `users` (
   `github_id` varchar(30) DEFAULT NULL,
   `notifications_enabled` tinyint(1) DEFAULT '0',
   `timezone` varchar(50) DEFAULT NULL,
-  `language` char(5) DEFAULT NULL,
+  `language` varchar(5) DEFAULT NULL,
   `disable_login_form` tinyint(1) DEFAULT '0',
   `twofactor_activated` tinyint(1) DEFAULT '0',
   `twofactor_secret` char(16) DEFAULT NULL,
@@ -610,4 +610,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$fe3.kkCOOiOxf21QW0tEUOCo5hsL19ct4YUumL.xxTnKKMbJCUb/y', '1');INSERT INTO schema_version VALUES ('97');
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$/kXBPSpWZHnF6potELbOmuih3XlwgWHQr7dAVDHpIo96wVB22OtkO', '1');INSERT INTO schema_version VALUES ('98');

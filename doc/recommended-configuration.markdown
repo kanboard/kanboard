@@ -4,9 +4,9 @@ Recommended Configuration
 Server side
 -----------
 
-- Modern Linux/Unix operating system: **Ubuntu/Debian or FreeBSD**
-- Most recent version of PHP and Apache (Kanboard is compatible with PHP 5.3, 5.4, 5.5, 5.6 and 7.0)
-- Use the Sqlite database only when you have a disk with fast I/O (SSD disks) otherwise use Mysql or Postgresql
+- Modern Linux/Unix operating systems: **Ubuntu/Debian or FreeBSD**
+- The most recent version of PHP and Apache (Kanboard is compatible with PHP 5.3, 5.4, 5.5, 5.6 and 7.0)
+- Use Sqlite database only when you have a disk with fast I/O (SSD disks) otherwise use Mysql or Postgresql
 
 Client side
 -----------

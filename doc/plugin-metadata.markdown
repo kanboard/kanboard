@@ -4,8 +4,8 @@ Metadata
 You can attach metadata for each project, task and user.
 Metadata are custom fields, it's a key/value table.
 
-By example your plugin can store external information for a task or new settings for a project.
-Basically that allow you to exend the default fields without having to create new tables.
+For example your plugin can store external information for a task or new settings for a project.
+Basically that allow you to extend the default fields without having to create new tables.
 
 Attach metadata to tasks
 ------------------------

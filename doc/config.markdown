@@ -2,7 +2,7 @@ Config file
 ===========
 
 You can customize the default settings of Kanboard by adding a file `config.php` at the project root.
-You can also rename the `config.default.php` and change the desired values.
+You can also rename the file `config.default.php` to `config.php` and change the desired values.
 
 Enable/Disable debug mode
 -------------------------
@@ -102,59 +102,76 @@ define('LDAP_SERVER', '');
 // LDAP server port (389 by default)
 define('LDAP_PORT', 389);
 
-// By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification.
+// By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification
 define('LDAP_SSL_VERIFY', true);
 
 // Enable LDAP START_TLS
 define('LDAP_START_TLS', false);
 
-// LDAP bind type: "anonymous", "user" (use the given user/password from the form) and "proxy" (a specific user to browse the LDAP directory)
-define('LDAP_BIND_TYPE', 'anonymous');
-
-// LDAP username to connect with. null for anonymous bind (by default).
-// Or for user bind type, you can use a pattern: %s@kanboard.local
-define('LDAP_USERNAME', null);
-
-// LDAP password to connect with. null for anonymous bind (by default).
-define('LDAP_PASSWORD', null);
-
-// LDAP account base, i.e. root of all user account
-// Example: ou=People,dc=example,dc=com
-define('LDAP_ACCOUNT_BASE', '');
-
-// LDAP query pattern to use when searching for a user account
-// Example for ActiveDirectory: '(&(objectClass=user)(sAMAccountName=%s))'
-// Example for OpenLDAP: 'uid=%s'
-define('LDAP_USER_PATTERN', '');
-
-// Name of an attribute of the user account object which should be used as the full name of the user.
-define('LDAP_ACCOUNT_FULLNAME', 'displayname');
-
-// Name of an attribute of the user account object which should be used as the email of the user.
-define('LDAP_ACCOUNT_EMAIL', 'mail');
-
-// Name of an attribute of the user account object which should be used as the id of the user.
-// Example for ActiveDirectory: 'samaccountname'
-// Example for OpenLDAP: 'uid'
-define('LDAP_ACCOUNT_ID', 'samaccountname');
-
-// LDAP Attribute for group membership
-define('LDAP_ACCOUNT_MEMBEROF', 'memberof');
-
-// DN for administrators
-// Example: CN=Kanboard Admins,CN=Users,DC=kanboard,DC=local
-define('LDAP_GROUP_ADMIN_DN', '');
-
-// DN for project administrators
-// Example: CN=Kanboard Project Admins,CN=Users,DC=kanboard,DC=local
-define('LDAP_GROUP_PROJECT_ADMIN_DN', '');
-
 // By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
 // Set to true if you want to preserve the case
 define('LDAP_USERNAME_CASE_SENSITIVE', false);
 
-// Automatically create user account
-define('LDAP_ACCOUNT_CREATION', true);
+// LDAP bind type: "anonymous", "user" or "proxy"
+define('LDAP_BIND_TYPE', 'anonymous');
+
+// LDAP username to use with proxy mode
+// LDAP username pattern to use with user mode
+define('LDAP_USERNAME', null);
+
+// LDAP password to use for proxy mode
+define('LDAP_PASSWORD', null);
+
+// LDAP DN for users
+// Example for ActiveDirectory: CN=Users,DC=kanboard,DC=local
+// Example for OpenLDAP: ou=People,dc=example,dc=com
+define('LDAP_USER_BASE_DN', '');
+
+// LDAP pattern to use when searching for a user account
+// Example for ActiveDirectory: '(&(objectClass=user)(sAMAccountName=%s))'
+// Example for OpenLDAP: 'uid=%s'
+define('LDAP_USER_FILTER', '');
+
+// LDAP attribute for username
+// Example for ActiveDirectory: 'samaccountname'
+// Example for OpenLDAP: 'uid'
+define('LDAP_USER_ATTRIBUTE_USERNAME', 'uid');
+
+// LDAP attribute for user full name
+// Example for ActiveDirectory: 'displayname'
+// Example for OpenLDAP: 'cn'
+define('LDAP_USER_ATTRIBUTE_FULLNAME', 'cn');
+
+// LDAP attribute for user email
+define('LDAP_USER_ATTRIBUTE_EMAIL', 'mail');
+
+// LDAP attribute to find groups in user profile
+define('LDAP_USER_ATTRIBUTE_GROUPS', 'memberof');
+
+// Allow automatic LDAP user creation
+define('LDAP_USER_CREATION', true);
+
+// LDAP DN for administrators
+// Example: CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local
+define('LDAP_GROUP_ADMIN_DN', '');
+
+// LDAP DN for managers
+// Example: CN=Kanboard Managers,CN=Users,DC=kanboard,DC=local
+define('LDAP_GROUP_MANAGER_DN', '');
+
+// Enable LDAP group provider for project permissions
+// The end-user will be able to browse LDAP groups from the user interface and allow access to specified projects
+define('LDAP_GROUP_PROVIDER', false);
+
+// LDAP Base DN for groups
+define('LDAP_GROUP_BASE_DN', '');
+
+// LDAP group filter
+// Example for ActiveDirectory: (&(objectClass=group)(sAMAccountName=%s*))
+define('LDAP_GROUP_FILTER', '');
+
+// LDAP attribute for the group name
+define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 ```
 
 Google Authentication settings
@@ -277,4 +294,7 @@ define('API_AUTHENTICATION_HEADER', '');
 
 // Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
+
+// Override API token stored in the database, useful for automated tests
+define('API_AUTHENTICATION_TOKEN', 'My unique API Token');
 ```

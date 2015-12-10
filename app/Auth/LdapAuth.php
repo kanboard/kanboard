@@ -23,7 +23,7 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
      * @access private
      * @var \Kanboard\User\LdapUserProvider
      */
-    private $user = null;
+    private $userInfo = null;
 
     /**
      * Username
@@ -62,8 +62,8 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
     {
         try {
 
-            $ldap = LdapClient::connect($this->getLdapUsername(), $this->getLdapPassword());
-            $user = LdapUser::getUser($ldap, $this->getLdapUserPattern());
+            $client = LdapClient::connect($this->getLdapUsername(), $this->getLdapPassword());
+            $user = LdapUser::getUser($client, $this->username);
 
             if ($user === null) {
                 $this->logger->info('User not found in LDAP server');
@@ -74,8 +74,8 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
                 throw new LogicException('Username not found in LDAP profile, check the parameter LDAP_USER_ATTRIBUTE_USERNAME');
             }
 
-            if ($ldap->authenticate($user->getDn(), $this->password)) {
-                $this->user = $user;
+            if ($client->authenticate($user->getDn(), $this->password)) {
+                $this->userInfo = $user;
                 return true;
             }
 
@@ -94,7 +94,7 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
      */
     public function getUser()
     {
-        return $this->user;
+        return $this->userInfo;
     }
 
     /**
@@ -117,21 +117,6 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
     public function setPassword($password)
     {
         $this->password = $password;
-    }
-
-    /**
-     * Get LDAP user pattern
-     *
-     * @access public
-     * @return string
-     */
-    public function getLdapUserPattern()
-    {
-        if (! LDAP_USER_FILTER) {
-            throw new LogicException('LDAP user filter empty, check the parameter LDAP_USER_FILTER');
-        }
-
-        return sprintf(LDAP_USER_FILTER, $this->username);
     }
 
     /**

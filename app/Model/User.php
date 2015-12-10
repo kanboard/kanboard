@@ -289,7 +289,7 @@ class User extends Base
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
 
         // If the user is connected refresh his session
-        if (SessionManager::isOpen() && $this->userSession->getId() == $values['id']) {
+        if ($this->userSession->getId() == $values['id']) {
             $this->userSession->initialize($this->getById($this->userSession->getId()));
         }
 

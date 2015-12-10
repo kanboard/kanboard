@@ -77,6 +77,31 @@ archive:
 	@ cd ${dst} && if [ -L kanboard-latest.zip ]; then unlink kanboard-latest.zip; ln -s kanboard-${version}.zip kanboard-latest.zip; fi
 	@ rm -rf ${BUILD_DIR}/kanboard
 
+test-archive:
+	@ echo "Build archive with tests: version=${version}, destination=${dst}"
+	@ rm -rf ${BUILD_DIR}/kanboard ${BUILD_DIR}/kanboard-*.zip
+	@ cd ${BUILD_DIR} && git clone --depth 1 -q https://github.com/fguillot/kanboard.git
+	@ cd ${BUILD_DIR}/kanboard && composer --prefer-dist --optimize-autoloader --quiet install
+	@ rm -rf ${BUILD_DIR}/kanboard/data/*
+	@ rm -rf ${BUILD_DIR}/kanboard/.git*
+	@ rm -rf ${BUILD_DIR}/kanboard/.*.yml
+	@ rm -rf ${BUILD_DIR}/kanboard/*.md
+	@ rm -rf ${BUILD_DIR}/kanboard/*.markdown
+	@ rm -rf ${BUILD_DIR}/kanboard/*.lock
+	@ rm -rf ${BUILD_DIR}/kanboard/*.json
+	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name notes -type d -exec rm -rf {} +;
+	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name test -type d -exec rm -rf {} +;
+	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name tests -type d -exec rm -rf {} +;
+	@ find ${BUILD_DIR}/kanboard/vendor -name composer.json -delete
+	@ find ${BUILD_DIR}/kanboard/vendor -name phpunit.xml -delete
+	@ find ${BUILD_DIR}/kanboard/vendor -name .travis.yml -delete
+	@ find ${BUILD_DIR}/kanboard/vendor -name README.* -delete
+	@ find ${BUILD_DIR}/kanboard/vendor -name .gitignore -delete
+	@ cd ${BUILD_DIR}/kanboard && sed -i.bak s/master/${version}/g app/constants.php && rm -f app/*.bak
+	@ cd ${BUILD_DIR} && zip -r kanboard-${version}.zip kanboard > /dev/null
+	@ cd ${BUILD_DIR} && mv kanboard-${version}.zip ${dst}
+	@ rm -rf ${BUILD_DIR}/kanboard
+
 test-sqlite:
 	@ phpunit -c tests/units.sqlite.xml
 

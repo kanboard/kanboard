@@ -86,7 +86,7 @@
         </li>
         <?php endif ?>
 
-        <?php if (! isset($not_editable) && $task['recurrence_status'] != \Kanboard\Model\Task::RECURRING_STATUS_NONE): ?>
+        <?php if ($editable && $task['recurrence_status'] != \Kanboard\Model\Task::RECURRING_STATUS_NONE): ?>
         <li>
             <strong><?= t('Recurring information') ?></strong>
             <?= $this->render('task/recurring_info', array(

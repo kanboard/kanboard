@@ -3,7 +3,7 @@ Upgrade Kanboard to a new version
 
 Upgrading Kanboard to a newer version is seamless.
 The process can be summarized to simply copy your data folder to the new Kanboard folder.
-Kanboard will run automatically database migrations for you.
+Kanboard will run database migrations automatically for you.
 
 Important things to do before updating
 --------------------------------------
@@ -15,7 +15,7 @@ Important things to do before updating
 From the archive (stable version)
 ---------------------------------
 
-1. Uncompress the new archive
+1. Decompress the new archive
 2. Copy the content of your data folder into the newly uncompressed directory
 3. Copy your custom `config.php` if you have one
 4. Copy your plugins if necessary

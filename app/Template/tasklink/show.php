@@ -9,7 +9,7 @@
         <th class="column-20"><?= t('Project') ?></th>
         <th><?= t('Column') ?></th>
         <th><?= t('Assignee') ?></th>
-        <?php if (! isset($not_editable)): ?>
+        <?php if ($editable): ?>
             <th><?= t('Action') ?></th>
         <?php endif ?>
     </tr>
@@ -23,12 +23,12 @@
             <?php endif ?>
 
             <td>
-                <?php if (! isset($not_editable)): ?>
+                <?php if ($is_public): ?>
                     <?= $this->url->link(
                         $this->e('#'.$link['task_id'].' '.$link['title']),
                         'task',
-                        'show',
-                        array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
+                        'readonly',
+                        array('task_id' => $link['task_id'], 'token' => $project['token']),
                         false,
                         $link['is_active'] ? '' : 'task-link-closed'
                     ) ?>
@@ -36,8 +36,8 @@
                     <?= $this->url->link(
                         $this->e('#'.$link['task_id'].' '.$link['title']),
                         'task',
-                        'readonly',
-                        array('task_id' => $link['task_id'], 'token' => $project['token']),
+                        'show',
+                        array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
                         false,
                         $link['is_active'] ? '' : 'task-link-closed'
                     ) ?>
@@ -57,14 +57,14 @@
             <td><?= $this->e($link['column_title']) ?></td>
             <td>
                 <?php if (! empty($link['task_assignee_username'])): ?>
-                    <?php if (! isset($not_editable)): ?>
+                    <?php if ($editable): ?>
                         <?= $this->url->link($this->e($link['task_assignee_name'] ?: $link['task_assignee_username']), 'user', 'show', array('user_id' => $link['task_assignee_id'])) ?>
                     <?php else: ?>
                         <?= $this->e($link['task_assignee_name'] ?: $link['task_assignee_username']) ?>
                     <?php endif ?>
                 <?php endif ?>
             </td>
-            <?php if (! isset($not_editable)): ?>
+            <?php if ($editable): ?>
             <td>
                 <ul>
                     <li><?= $this->url->link(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
@@ -77,7 +77,7 @@
     <?php endforeach ?>
 </table>
 
-<?php if (! isset($not_editable) && isset($link_label_list)): ?>
+<?php if ($editable && isset($link_label_list)): ?>
     <form action="<?= $this->url->href('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
 
         <?= $this->form->csrf() ?>

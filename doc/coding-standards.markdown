@@ -11,7 +11,7 @@ PHP code
 - Always write PHPdoc comments for methods and class properties
 - Coding style: [PSR-1](http://www.php-fig.org/psr/psr-1/) and [PSR-2](http://www.php-fig.org/psr/psr-2/)
 
-Javascript code
+JavaScript code
 ---------------
 
 - Indentation: 4 spaces

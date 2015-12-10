@@ -27,7 +27,7 @@ The data folder is used to store:
 - Uploaded files: `files/*`
 - Image thumbnails: `files/thumbnails/*`
 
-People who are using a remote database (Mysql/Postgresql) and a remote file storage (Aws S3 or similar) don't necessary needs to have a persistent local data folder or to change the permissions.
+People who are using a remote database (Mysql/Postgresql) and a remote file storage (Aws S3 or similar) don't necessarily need to have a persistent local data folder or to change the permission.
 
 From the repository (development version)
 -----------------------------------------

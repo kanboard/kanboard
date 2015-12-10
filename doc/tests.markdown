@@ -1,5 +1,5 @@
-How to run units and functionals tests?
-=======================================
+How to run units and functional tests?
+======================================
 
 [PHPUnit](https://phpunit.de/) is used to run automatic tests on Kanboard.
 
@@ -31,7 +31,7 @@ Running unit tests
 
 ### Testing with Sqlite
 
-Sqlite tests use a in-memory database, nothing is written on the filesystem.
+Sqlite tests use a in-memory database, nothing is written on the file system.
 
 The config file is `tests/units.sqlite.xml`.
 From your Kanboard directory, run the command `phpunit -c tests/units.sqlite.xml`.

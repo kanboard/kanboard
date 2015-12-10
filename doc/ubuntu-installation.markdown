@@ -11,7 +11,7 @@ sudo apt-get update
 sudo apt-get install -y php5 php5-sqlite unzip
 ```
 
-In case your webserver was running restart to make sure the php modules are reloaded
+In case your web server was running restart to make sure the php modules are reloaded
 
 ```bash
 service apache2 restart

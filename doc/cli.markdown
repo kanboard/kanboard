@@ -1,7 +1,7 @@
 Command Line Interface
 ======================
 
-Kanboard provide a simple command line interface that can be used from any Unix terminal.
+Kanboard provides a simple command line interface that can be used from any Unix terminal.
 This tool can be used only on the local machine.
 
 This feature is useful to run commands outside the web server process by example running a huge report.
@@ -134,7 +134,7 @@ Cronjob example:
 
 ### Run daily project stats calculation
 
-You can add a background task to calculate the project statistics everyday:
+You can add a background task to calculate the project statistics every day:
 
 ```bash
 $ ./kanboard projects:daily-stats

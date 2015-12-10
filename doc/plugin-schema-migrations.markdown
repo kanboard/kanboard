@@ -1,7 +1,8 @@
 Plugin Schema Migrations
 ========================
 
-Kanboard execute database migrations automatically for you. Migrations must be stored in a folder **Schema** and the filename must be the same as the database driver:
+Kanboard executes database migrations automatically for you.
+Migrations must be stored in a folder **Schema** and the filename must be the same as the database driver:
 
 ```bash
 Schema
@@ -31,7 +32,7 @@ function version_1($pdo)
 ```
 
 - The constant `VERSION` is the last version of your schema
-- Each function is a migration `version_1()`, `version_2()`, etc...
+- Each function is a migration `version_1()`, `version_2()`, etc.
 - A `PDO` instance is passed as first argument
 - Everything is executed inside a transaction, if something doesn't work a rollback is performed and the error is displayed to the user
 

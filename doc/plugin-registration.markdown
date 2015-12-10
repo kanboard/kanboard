@@ -25,7 +25,7 @@ plugins
     └── Test          <= Unit tests
 ```
 
-Only the registration file `Plugin.php` is required. Other folders are optionals.
+Only the registration file `Plugin.php` is required. Other folders are optional.
 
 The first letter of the plugin name must be capitalized.
 
@@ -43,7 +43,7 @@ namespace Kanboard\Plugin\Foobar;
 
 use Kanboard\Core\Plugin\Base;
 
-class Plugin extends Plugin\Base
+class Plugin extends Base
 {
     public function initialize()
     {
@@ -52,7 +52,7 @@ class Plugin extends Plugin\Base
 }
 ```
 
-This file should contains a class `Plugin` defined under the namespace `Kanboard\Plugin\Yourplugin` and extends `Kanboard\Core\Plugin\Base`.
+This file should contain a class `Plugin` defined under the namespace `Kanboard\Plugin\Yourplugin` and extends `Kanboard\Core\Plugin\Base`.
 
 The only required method is `initialize()`. This method is called for each request when the plugin is loaded.
 
@@ -71,7 +71,7 @@ Available methods from `Kanboard\Core\Plugin\Base`:
 - `getPluginHomepage()`: Should return plugin Homepage (link)
 - `setContentSecurityPolicy(array $rules)`: Override default HTTP CSP rules
 
-Your plugin registration class also inherit from `Kanboard\Core\Base`, that means you can access to all classes and methods of Kanboard easily.
+Your plugin registration class can also inherit from Kanboard\Core\Base, that way you can access all classes and methods of Kanboard easily.
 
 This example will fetch the user #123:
 
@@ -85,7 +85,7 @@ Plugin Translations
 Plugin can be translated in the same way the rest of the application. You must load the translations yourself when the session is created:
 
 ```php
-$this->on('session.bootstrap', function($container) {
+$this->on('app.bootstrap', function($container) {
     Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
 });
 ```
@@ -95,7 +95,7 @@ The translations must be stored in `plugins/Myplugin/Locale/xx_XX/translations.p
 Dependency Injection Container
 ------------------------------
 
-Kanboard use Pimple, a simple PHP Dependency Injection Container. However, Kanboard can register any class in the container easily.
+Kanboard uses Pimple, a simple PHP Dependency Injection Container. However, Kanboard can register any class in the container easily.
 
 Those classes are available everywhere in the application and only one instance is created.
 
@@ -123,15 +123,15 @@ $this->budget->getDailyBudgetBreakdown(456);
 $this->container['hourlyRate']->getAll();
 ```
 
-Keys of the containers are unique across the application. If you override an existing class you will change the default behavior.
+Keys of the containers are unique across the application. If you override an existing class, you will change the default behavior.
 
 Event Listening
-----------------
+---------------
 
 Kanboard use internal events and your plugin can listen and perform actions on these events.
 
 ```php
-$this->on('session.bootstrap', function($container) {
+$this->on('app.bootstrap', function($container) {
     // Do something
 });
 ```
@@ -166,7 +166,7 @@ class Plugin extends Base
 - The first argument of the method `extendActions()` is the action class with the complete namespace path. **The namespace path must starts with a backslash** otherwise Kanboard will not be able to load your class.
 - The second argument is the description of your automatic action.
 
-The automatic action class must inherits from the class `Kanboard\Action\Base` and implements all abstract methods:
+The automatic action class must inherit from the class `Kanboard\Action\Base` and implements all abstract methods:
 
 - `getCompatibleEvents()`
 - `getActionRequiredParameters()`
@@ -175,26 +175,3 @@ The automatic action class must inherits from the class `Kanboard\Action\Base` a
 - `hasRequiredCondition(array $data)`
 
 For more details you should take a look to existing automatic actions or this [plugin example](https://github.com/kanboard/plugin-example-automatic-action).
-
-Extend ACL
-----------
-
-Kanboard use an access list for privilege separations. Your extension can add new rules:
-
-```php
-$this->acl->extend('project_manager_acl', array('mycontroller' => '*'));
-```
-
-- The first argument is the ACL name
-- The second argument are the new rules
-    + Syntax to include only some actions: `array('controller' => array('action1', 'action2'))`
-    + Syntax to include all actions of a controller: `array('controller' => '*')`
-    + Everything is lowercase
-
-List of ACL:
-
-- `public_acl`: Public access without authentication
-- `project_member_acl`: Project member access
-- `project_manager_acl`: Project manager access
-- `project_admin_acl`: Project Admins
-- `admin_acl`: Administrators

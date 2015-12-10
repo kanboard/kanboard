@@ -969,7 +969,7 @@ CREATE TABLE users (
     github_id character varying(30),
     notifications_enabled boolean DEFAULT false,
     timezone character varying(50),
-    language character(5),
+    language character varying(5),
     disable_login_form boolean DEFAULT false,
     twofactor_activated boolean DEFAULT false,
     twofactor_secret character(16),
@@ -2066,4 +2066,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$fe3.kkCOOiOxf21QW0tEUOCo5hsL19ct4YUumL.xxTnKKMbJCUb/y', '1');INSERT INTO schema_version VALUES ('77');
+INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$/kXBPSpWZHnF6potELbOmuih3XlwgWHQr7dAVDHpIo96wVB22OtkO', '1');INSERT INTO schema_version VALUES ('78');

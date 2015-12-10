@@ -25,7 +25,7 @@ class Plugin extends Base
 Template Overrides
 ------------------
 
-Any templates defined in the core can be overrided. By example, you can redefine the default layout or change email notifications.
+Any templates defined in the core can be overridden. For example, you can redefine the default layout or change email notifications.
 
 Example of template override:
 

@@ -35,4 +35,26 @@ class SessionStorageTest extends Base
         $storage = null;
         $this->assertEquals(array('something' => array('a' => 'c'), 'd' => 'e'), $session);
     }
+
+    public function testFlush()
+    {
+        $session = array('d' => 'e');
+
+        $storage = new SessionStorage();
+        $storage->setStorage($session);
+        $storage->something = array('a' => 'b');
+
+        $this->assertEquals(array('a' => 'b'), $storage->something);
+        $this->assertEquals('e', $storage->d);
+
+        $storage->flush();
+
+        $this->assertFalse(isset($storage->d));
+        $this->assertFalse(isset($storage->something));
+
+        $storage->foo = 'bar';
+
+        $storage = null;
+        $this->assertEquals(array('foo' => 'bar'), $session);
+    }
 }

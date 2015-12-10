@@ -68,10 +68,11 @@ class AuthenticationManager extends Base
      */
     public function checkCurrentSession()
     {
-        if ($this->userSession->isLogged() ) {
+        if ($this->userSession->isLogged()) {
             foreach ($this->filterProviders('SessionCheckProviderInterface') as $provider) {
                 if (! $provider->isValidSession()) {
-                    unset($this->sessionStorage->user);
+                    $this->logger->debug('Invalidate session for '.$this->userSession->getUsername());
+                    $this->sessionStorage->flush();
                     $this->preAuthentication();
                     return false;
                 }

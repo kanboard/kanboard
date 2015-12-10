@@ -8,7 +8,7 @@ To receive email notifications, users of Kanboard must have:
 
 - Activated notifications in their profile
 - Have a valid email address in their profile
-- Be member of the project that will trigger notifications
+- Be a member of the project that will trigger notifications
 
 Note: The logged user who performs the action doesn't receive any notifications, only other project members.
 
@@ -26,7 +26,7 @@ Server settings
 ---------------
 
 By default, Kanboard will use the bundled PHP mail function to send emails.
-Usually that require no configuration if your server can already send emails.
+Usually that requires no configuration if your server can already send emails.
 
 However, it's possible to use other methods, the SMTP protocol and Sendmail.
 
@@ -101,14 +101,14 @@ Examples:
 
 Don't forget the ending slash `/`.
 
-You need to define that manually because Kanboard cannot guess the URL from a command line script and some people have very specific configuration.
+You need to define that manually because Kanboard cannot guess the URL from a command line script and some people have a very specific configuration.
 
 Troubleshooting
 ---------------
 
-If no emails are send and you are sure that everything is configured correctly:
+If no emails are sent and you are sure that everything is configured correctly:
 
 - Check your spam folder
 - Enable the debug mode and check the debug file `data/debug.log`, you should see the exact error
-- Be sure that your server or your hosting provider allow you to send emails
+- Be sure that your server or your hosting provider allows you to send emails
 - If you use SeLinux, allow PHP to send emails

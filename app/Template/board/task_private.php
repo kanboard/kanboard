@@ -41,15 +41,19 @@
 
             <?php if (! empty($task['owner_id'])): ?>
             <span class="task-board-user <?= $this->user->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
-                <?= $this->url->link(
-                    $task['assignee_name'] ?: $task['assignee_username'],
-                    'board',
-                    'changeAssignee',
-                    array('task_id' => $task['id'], 'project_id' => $task['project_id']),
-                    false,
-                    'popover',
-                    t('Change assignee')
-                ) ?>
+                <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+                    <?= $this->url->link(
+                        $task['assignee_name'] ?: $task['assignee_username'],
+                        'BoardPopover',
+                        'changeAssignee',
+                        array('task_id' => $task['id'], 'project_id' => $task['project_id']),
+                        false,
+                        'popover',
+                        t('Change assignee')
+                    ) ?>
+                <?php else: ?>
+                    <?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>
+                <?php endif ?>
             </span>
             <?php endif ?>
 

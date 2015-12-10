@@ -16,13 +16,13 @@ $this->hook->on('hook_name', $callable);
 
 The first argument is the name of the hook and the second is a PHP callable.
 
-### Hooks executed only one time
+### Hooks executed only once
 
 Some hooks can have only one listener:
 
 #### model:subtask-time-tracking:calculate:time-spent
 
-- Override time spent calculation when subtask timer is stopped
+- Override time spent calculation when sub-task timer is stopped
 - Arguments:
     - `$user_id` (integer)
     - `$start` (DateTime)
@@ -58,7 +58,7 @@ class Plugin extends Base
 }
 ```
 
-List of merge hooks:
+List of merging hooks:
 
 #### controller:calendar:project:events
 
@@ -79,7 +79,7 @@ List of merge hooks:
 Asset Hooks
 -----------
 
-Asset hooks can be used to add easily a new stylesheet or a new javascript file in the layout. You can use this feature to create a theme and override all Kanboard default styles.
+Asset hooks can be used to add a new stylesheet easily or a new JavaScript file in the layout. You can use this feature to create a theme and override all Kanboard default styles.
 
 Example to add a new stylesheet:
 
@@ -127,7 +127,7 @@ Example with `myplugin:dashboard/sidebar`:
 - On the filesystem, the plugin will be located here: `plugins\Myplugin\Template\dashboard\sidebar.php`
 - Templates are written in pure PHP (don't forget to escape data)
 
-Template name without prefix are core templates.
+Template names without prefix are core templates.
 
 List of template hooks:
 
@@ -151,4 +151,4 @@ List of template hooks:
 - `template:user:sidebar:information`
 - `template:user:sidebar:actions`
 
-Other template hooks can be added if necessary, just ask on the issue tracker.
+Another template hooks can be added if necessary, just ask on the issue tracker.

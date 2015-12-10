@@ -1,7 +1,7 @@
 Task Links
 ==========
 
-Tasks can be linked together with predefined relationships:
+Tasks can be linked together with pre-defined relationships:
 
 ![Task Links](http://kanboard.net/screenshots/documentation/task-links.png)
 
