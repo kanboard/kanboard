@@ -96,7 +96,7 @@ class App extends Base
         $events =  $this->paginator
             ->setUrl('app', $action, array('pagination' => 'activity', 'user_id' => $user_id))
             ->setMax($max)
-            ->setQuery($this->projectActivity->getUserQuery($user_id, array(Project::ACTIVE)))
+            ->setQuery($this->projectActivity->getUserQuery($user_id))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'activity');
 
         return $events;

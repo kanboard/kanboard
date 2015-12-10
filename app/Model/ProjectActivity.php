@@ -76,14 +76,15 @@ class ProjectActivity extends Base
      *
      * @access public
      * @param  integer    $user_id      User id
-     * @param  array      $status       List of status
      * @return \PicoDb\Table
      */
-    public function getUserQuery($user_id, array $status)
+    public function getUserQuery($user_id)
     {
         $project_ids = $this->projectPermission->getActiveProjectIds($user_id);
         if (empty($project_ids)) {
-            return array();
+            return $this
+                    ->db
+                    ->table(self::TABLE)->eq(self::TABLE.'.id', -1);
         }
 
         return $this
