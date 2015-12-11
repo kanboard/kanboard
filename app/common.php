@@ -16,6 +16,8 @@ if (getenv('DATABASE_URL')) {
 
 if (file_exists('config.php')) {
     require 'config.php';
+} elseif (file_exists('data'.DIRECTORY_SEPARATOR.'config.php')) {
+    require 'data'.DIRECTORY_SEPARATOR.'config.php';
 }
 
 require __DIR__.'/constants.php';

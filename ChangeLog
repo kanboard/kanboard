@@ -25,6 +25,7 @@ New features:
 * Add search query attribute for task link
 * Add the possibility to define API token in config file
 * Add capability to reopen Gitlab issues
+* Try to load config.php from /data if not available
 
 Version 1.0.21
 --------------
