@@ -108,6 +108,12 @@ class RouteProvider implements ServiceProviderInterface
             $container['router']->addRoute('project/:project_id/task/:task_id/move', 'taskduplication', 'move', array('task_id', 'project_id'));
             $container['router']->addRoute('project/:project_id/task/:task_id/move/:dst_project_id', 'taskduplication', 'move', array('task_id', 'project_id', 'dst_project_id'));
 
+            // Exports
+            $container['router']->addRoute('export/tasks/:project_id', 'export', 'tasks', array('project_id'));
+            $container['router']->addRoute('export/subtasks/:project_id', 'export', 'subtasks', array('project_id'));
+            $container['router']->addRoute('export/transitions/:project_id', 'export', 'transitions', array('project_id'));
+            $container['router']->addRoute('export/summary/:project_id', 'export', 'summary', array('project_id'));
+
             // Board routes
             $container['router']->addRoute('board/:project_id', 'board', 'show', array('project_id'));
             $container['router']->addRoute('b/:project_id', 'board', 'show', array('project_id'));
