@@ -53,6 +53,10 @@ class AuthSubscriber extends Base implements EventSubscriberInterface
             $userAgent
         );
 
+        if ($event->getAuthType() === 'RememberMe') {
+            $this->userSession->validatePostAuthentication();
+        }
+
         $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
 
         if (isset($this->sessionStorage->hasRememberMe) && $this->sessionStorage->hasRememberMe) {
