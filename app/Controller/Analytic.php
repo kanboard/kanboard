@@ -168,6 +168,12 @@ class Analytic extends Base
         )));
     }
 
+    /**
+     * Show comparison between actual and estimated hours chart
+     *
+     * @access public
+     */
+
     public function compareHours()
     {
         $project = $this->getProject();

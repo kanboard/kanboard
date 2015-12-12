@@ -180,13 +180,18 @@ class ProjectAnalytic extends Base
         return $stats;
     }
 
-
+    /**
+     * Get the time spent and estimated into each status
+     *
+     * @access public
+     * @param  integer   $project_id
+     * @return array
+     */
     public function getHoursByStatus($project_id)
     {
         $stats = array();
-        $columns = $this->board->getColumnsList($project_id);
 
-        // Get the time spent of the last move for each tasks
+        // Get the times related to each task
         $tasks = $this->db
             ->table(Task::TABLE)
             ->columns('id', 'time_estimated', 'time_spent', 'is_active')
@@ -206,7 +211,7 @@ class ProjectAnalytic extends Base
             );
 
 
-        // Get time spent foreach task/column and take into account the last move
+        // Add times spent and estimated to each status
         foreach ($tasks as &$task) {
             if ($task['is_active']) {
                 $stats['open']['time_estimated'] += $task['time_estimated'];
