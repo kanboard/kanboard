@@ -17,6 +17,7 @@ class BootstrapSubscriber extends \Kanboard\Core\Base implements EventSubscriber
     {
         $this->config->setupTranslations();
         $this->config->setupTimezone();
+        $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
     }
 
     public function __destruct()
