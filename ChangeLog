@@ -13,6 +13,7 @@ Breaking changes:
     - createLdapUser
     - updateUser
 * Event removed: "session.bootstrap" use "app.boostrap" instead
+* Change arguments for API procedure "updateTask"
 
 New features:
 

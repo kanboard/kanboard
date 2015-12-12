@@ -366,6 +366,33 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertEquals('Swimlane A', $swimlanes[2]['name']);
     }
 
+    public function testCreateTaskWithWrongMember()
+    {
+        $task = array(
+            'title' => 'Task #1',
+            'color_id' => 'blue',
+            'owner_id' => 1,
+            'project_id' => 1,
+            'column_id' => 2,
+        );
+
+        $task_id = $this->client->createTask($task);
+
+        $this->assertFalse($task_id);
+    }
+
+    public function testGetAllowedUsers()
+    {
+        $users = $this->client->getMembers(1);
+        $this->assertNotFalse($users);
+        $this->assertEquals(array(), $users);
+    }
+
+    public function testAddMember()
+    {
+        $this->assertTrue($this->client->allowUser(1, 1));
+    }
+
     public function testCreateTask()
     {
         $task = array(
@@ -573,20 +600,13 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertEquals('titi@localhost', $user['email']);
     }
 
-    public function testGetAllowedUsers()
-    {
-        $users = $this->client->getMembers(1);
-        $this->assertNotFalse($users);
-        $this->assertEquals(array(), $users);
-    }
-
     public function testAllowedUser()
     {
         $this->assertTrue($this->client->allowUser(1, 2));
 
         $users = $this->client->getMembers(1);
         $this->assertNotFalse($users);
-        $this->assertEquals(array(2 => 'Titi'), $users);
+        $this->assertEquals(array(1 => 'admin', 2 => 'Titi'), $users);
     }
 
     public function testRevokeUser()
@@ -595,7 +615,7 @@ class Api extends PHPUnit_Framework_TestCase
 
         $users = $this->client->getMembers(1);
         $this->assertNotFalse($users);
-        $this->assertEquals(array(), $users);
+        $this->assertEquals(array(1 => 'admin'), $users);
     }
 
     public function testCreateComment()

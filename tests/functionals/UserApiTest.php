@@ -163,6 +163,12 @@ class UserApi extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, $this->admin->createTask('my admin title', 1));
     }
 
+    public function testCreateTaskWithWrongMember()
+    {
+        $this->assertFalse($this->user->createTask(array('title' => 'something', 'project_id' => 2, 'owner_id' => 1)));
+        $this->assertFalse($this->app->createTask(array('title' => 'something', 'project_id' => 1, 'owner_id' => 2)));
+    }
+
     public function testGetTask()
     {
         $task = $this->user->getTask(1);
@@ -216,6 +222,11 @@ class UserApi extends PHPUnit_Framework_TestCase
     public function testMoveTaskPosition()
     {
         $this->assertTrue($this->user->moveTaskPosition(2, 1, 2, 1));
+    }
+
+    public function testUpdateTaskWithWrongMember()
+    {
+        $this->assertFalse($this->user->updateTask(array('id' => 1, 'title' => 'new title', 'reference' => 'test', 'owner_id' => 1)));
     }
 
     public function testUpdateTask()
