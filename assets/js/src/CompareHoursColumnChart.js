@@ -14,7 +14,6 @@ CompareHoursColumnChart.prototype.execute = function() {
         categories.push(status);
     }
 
-    console.log(spent);
     c3.generate({
         data: {
             columns: [spent, estimated],

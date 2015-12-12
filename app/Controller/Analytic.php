@@ -188,6 +188,7 @@ class Analytic extends Base
             'project' => $project,
             'paginator' => $paginator,
             'metrics' => $stats,
+            'title' => t('Compare hours for "%s"', $project['name']),
         ))); 
     }
 }
