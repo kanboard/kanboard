@@ -185,7 +185,7 @@ Gantt.prototype.addBlocks = function(slider, start) {
 
         var block = jQuery("<div>", {
             "class": "ganttview-block tooltip" + (this.options.allowMoves ? " ganttview-block-movable" : ""),
-            "title": this.getBarTooltip(this.data[i]),
+            "title": this.getBarTooltip(series),
             "css": {
                 "width": ((size * this.options.cellWidth) - 9) + "px",
                 "margin-left": (offset * this.options.cellWidth) + "px"
@@ -193,23 +193,25 @@ Gantt.prototype.addBlocks = function(slider, start) {
         }).append(text);
 
         if (size >= 2) {
-            text.append(this.data[i].progress);
+            text.append(series.progress);
         }
 
-        block.data("record", this.data[i]);
-        this.setBarColor(block, this.data[i]);
+        block.data("record", series);
+        this.setBarColor(block, series);
 
-        block.append(jQuery("<div>", {
-            "css": {
-                "z-index": 0,
-                "position": "absolute",
-                "top": 0,
-                "bottom": 0,
-                "background-color": series.color.border,
-                "width": series.progress,
-                "opacity": 0.4
-            }
-        }));
+        if (series.progress != "0%") {
+            block.append(jQuery("<div>", {
+                "css": {
+                    "z-index": 0,
+                    "position": "absolute",
+                    "top": 0,
+                    "bottom": 0,
+                    "background-color": series.color.border,
+                    "width": series.progress,
+                    "opacity": 0.4
+                }
+            }));
+        }
 
         jQuery(rows[rowIdx]).append(block);
         rowIdx = rowIdx + 1;
