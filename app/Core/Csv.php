@@ -93,7 +93,7 @@ class Csv
     {
         if (! empty($value)) {
             $value = trim(strtolower($value));
-            return $value === '1' || $value{0} === 't' ? 1 : 0;
+            return $value === '1' || $value{0} === 't' || $value{0} === 'y' ? 1 : 0;
         }
 
         return 0;
