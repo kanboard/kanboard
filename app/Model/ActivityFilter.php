@@ -328,6 +328,7 @@ class ActivityFilter extends Base
 
         $this->query->closeOr();
     }
+
     /**
      * Get the PicoDb query
      *
