@@ -911,7 +911,7 @@ return array(
     'Current column: %s' => 'Bieżąca kolumna: %s',
     'Current category: %s' => 'Bieżąca kategoria: %s',
     'no category' => 'brak kategorii',
-    'Current assignee: %s' => '',
+    //'Current assignee: %s' => '',
     'not assigned' => 'Brak osoby odpowiedzialnej',
     'Author:' => 'Autor',
     'contributors' => 'współautorzy',
