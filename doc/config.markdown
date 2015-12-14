@@ -1,7 +1,7 @@
 Config file
 ===========
 
-You can customize the default settings of Kanboard by adding a file `config.php` at the project root.
+You can customize the default settings of Kanboard by adding a file `config.php` at the project root or in the `data` folder.
 You can also rename the file `config.default.php` to `config.php` and change the desired values.
 
 Enable/Disable debug mode

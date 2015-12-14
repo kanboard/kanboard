@@ -71,6 +71,14 @@ class Task extends Base
     {
         $this->checkProjectPermission($project_id);
 
+        if ($owner_id !== 0 && ! $this->projectPermission->isMember($project_id, $owner_id)) {
+            return false;
+        }
+
+        if ($this->userSession->isLogged()) {
+            $creator_id = $this->userSession->getId();
+        }
+
         $values = array(
             'title' => $title,
             'project_id' => $project_id,
@@ -96,20 +104,28 @@ class Task extends Base
         return $valid ? $this->taskCreation->create($values) : false;
     }
 
-    public function updateTask($id, $title = null, $project_id = null, $color_id = null, $owner_id = null,
-                               $creator_id = null, $date_due = null, $description = null, $category_id = null, $score = null,
+    public function updateTask($id, $title = null, $color_id = null, $owner_id = null,
+                               $date_due = null, $description = null, $category_id = null, $score = null,
                                $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
                                $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null)
     {
         $this->checkTaskPermission($id);
 
+        $project_id = $this->taskFinder->getProjectId($id);
+
+        if ($project_id === 0) {
+            return false;
+        }
+
+        if ($owner_id !== null && ! $this->projectPermission->isMember($project_id, $owner_id)) {
+            return false;
+        }
+
         $values = array(
             'id' => $id,
             'title' => $title,
-            'project_id' => $project_id,
             'color_id' => $color_id,
             'owner_id' => $owner_id,
-            'creator_id' => $creator_id,
             'date_due' => $date_due,
             'description' => $description,
             'category_id' => $category_id,
