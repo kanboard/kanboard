@@ -866,6 +866,8 @@ return array(
     'Search by category: ' => 'Pretraga po kategoriji: ',
     'Search by description: ' => 'Pretraga po opisu: ',
     'Search by due date: ' => 'Pretraga po datumu završetka: ',
+    'Search by creation date: ' => 'Pretraga po datumu kreiranja: ',
+    'Search by status: ' => 'Pretraga po statusu: ',
     'Lead and Cycle time for "%s"' => 'Vrijeme upravljanje i vremenski ciklus za "%s"',
     'Average time spent into each column for "%s"' => 'Prosjek utrošenog vremena u svakoj koloni za "%s"',
     'Average time spent into each column' => 'Prosjek utrošenog vrmena u svakoj koloni',

@@ -868,6 +868,8 @@ return array(
     'Search by category: ' => 'Rechercher par catégorie : ',
     'Search by description: ' => 'Rechercher par description : ',
     'Search by due date: ' => 'Rechercher par date d\'échéance : ',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     'Lead and Cycle time for "%s"' => 'Lead et cycle time pour « %s »',
     'Average time spent into each column for "%s"' => 'Temps passé moyen dans chaque colonne pour « %s »',
     'Average time spent into each column' => 'Temps moyen passé dans chaque colonne',

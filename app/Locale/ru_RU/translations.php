@@ -866,6 +866,8 @@ return array(
     'Search by category: ' => 'Поиск по категориям: ',
     'Search by description: ' => 'Поиск по описанию: ',
     'Search by due date: ' => 'Поиск по дате завершения: ',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     'Lead and Cycle time for "%s"' => 'Затраченное время и время цикла для "%s"',
     'Average time spent into each column for "%s"' => 'Затрачено времени в среднем в каждой колонке для "%s"',
     'Average time spent into each column' => 'Затрачено времени в среднем в каждой колонке',

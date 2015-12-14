@@ -866,6 +866,8 @@ return array(
     'Search by category: ' => 'Pesquisar por categoria: ',
     'Search by description: ' => 'Pesquisar por descrição: ',
     'Search by due date: ' => 'Pesquisar por data de vencimento: ',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     'Lead and Cycle time for "%s"' => 'Tempo de Espera e Ciclo para "%s"',
     'Average time spent into each column for "%s"' => 'Tempo médio gasto em cada coluna para "%s"',
     'Average time spent into each column' => 'Tempo médio gasto em cada coluna',

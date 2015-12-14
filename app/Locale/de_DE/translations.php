@@ -866,6 +866,8 @@ return array(
     'Search by category: ' => 'Suche nach Kategorie: ',
     'Search by description: ' => 'Suche nach Beschreibung: ',
     'Search by due date: ' => 'Suche nach Fälligkeitsdatum: ',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     'Lead and Cycle time for "%s"' => 'Durchlauf und Zykluszeit für "%s"',
     'Average time spent into each column for "%s"' => 'Durchschnittliche Zeit in jeder Spalte für "%s"',
     'Average time spent into each column' => 'Durchschnittszeit in jeder Spalte',

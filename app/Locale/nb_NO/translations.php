@@ -866,6 +866,8 @@ return array(
     'Search by category: ' => 'Søk etter kategori',
     'Search by description: ' => 'Søk etter beskrivelse',
     'Search by due date: ' => 'Søk etter frist',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     // 'Lead and Cycle time for "%s"' => '',
     // 'Average time spent into each column for "%s"' => '',
     // 'Average time spent into each column' => '',

@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Model\ProjectActivity;
 /**
  * Search controller
  *
@@ -45,6 +46,44 @@ class Search extends Base
             ),
             'paginator' => $paginator,
             'title' => t('Search tasks').($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
+        )));
+    }   
+
+    public function activity()
+    {
+        $projects = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
+        $search = urldecode($this->request->getStringParam('search'));
+        $nb_activities = 0;
+
+        $paginator = $this->paginator
+                ->setUrl('search', 'activity', array('search' => $search))
+                ->setMax(30)
+                ->setOrder(ProjectActivity::TABLE.'.id')
+                ->setDirection('DESC');
+
+        if ($search !== '' && ! empty($projects)) {
+            $query = $this
+                ->activityFilter
+                ->search($search)
+                ->filterByProjects(array_keys($projects))
+                ->getQuery();
+
+            $paginator
+                ->setQuery($query)
+                ->calculate();
+
+            $nb_activities = $paginator->getTotal();
+        }
+        
+        $this->response->html($this->template->layout('search/activity', array(
+            'board_selector' => $projects,
+            'values' => array(
+                'search' => $search,
+                'controller' => 'search',
+                'action' => 'activity',
+            ),
+            'paginator' => $paginator,
+            'title' => t('Search activities').($nb_activities > 0 ? ' ('.$nb_activities.')' : '')
         )));
     }
 }

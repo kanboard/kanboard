@@ -17,6 +17,8 @@ class ClassProvider implements ServiceProviderInterface
     private $classes = array(
         'Model' => array(
             'Action',
+            'ActivityFilter',
+            'ActivityFinder',
             'Authentication',
             'Board',
             'Category',

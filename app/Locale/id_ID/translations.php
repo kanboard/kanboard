@@ -866,6 +866,8 @@ return array(
     'Search by category: ' => 'Pencarian berdasarkan kategori : ',
     'Search by description: ' => 'Pencarian berdasarkan deskripsi : ',
     'Search by due date: ' => 'Pencarian berdasarkan tanggal jatuh tempo : ',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     'Lead and Cycle time for "%s"' => 'Memimpin dan Siklus waktu untuk « %s »',
     'Average time spent into each column for "%s"' => 'Rata-rata waktu yang dihabiskan dalam setiap kolom untuk « %s »',
     'Average time spent into each column' => 'Rata-rata waktu yang dihabiskan dalam setiap kolom',
