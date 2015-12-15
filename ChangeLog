@@ -1,3 +1,10 @@
+Version 1.0.23 (unreleased)
+---------------------------
+
+Bug fixes:
+
+- Fix wrong constant name that cause a PHP error in project management section
+
 Version 1.0.22
 --------------
 

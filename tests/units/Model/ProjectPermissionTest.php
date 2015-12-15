@@ -13,6 +13,72 @@ use Kanboard\Core\Security\Role;
 
 class ProjectPermissionTest extends Base
 {
+    public function testGetQueryByRole()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
+        $this->assertEquals(3, $projectModel->create(array('name' => 'Project 3')));
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user 3')));
+        $this->assertEquals(5, $userModel->create(array('username' => 'user 4')));
+
+        $this->assertTrue($userRoleModel->addUser(1, 2, Role::PROJECT_MANAGER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MANAGER));
+        $this->assertTrue($userRoleModel->addUser(1, 4, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 5, Role::PROJECT_MEMBER));
+
+        $this->assertTrue($userRoleModel->addUser(2, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(2, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(2, 5, Role::PROJECT_MANAGER));
+
+        $this->assertTrue($userRoleModel->addUser(3, 4, Role::PROJECT_MANAGER));
+        $this->assertTrue($userRoleModel->addUser(3, 5, Role::PROJECT_VIEWER));
+
+        $this->assertEmpty($projectPermission->getQueryByRole(array(), Role::PROJECT_MANAGER)->findAll());
+
+        $users = $projectPermission->getQueryByRole(array(1, 2), Role::PROJECT_MANAGER)->findAll();
+        $this->assertCount(3, $users);
+        $this->assertEquals('user 1', $users[0]['username']);
+        $this->assertEquals('Project 1', $users[0]['project_name']);
+        $this->assertEquals('user 2', $users[1]['username']);
+        $this->assertEquals('Project 1', $users[1]['project_name']);
+        $this->assertEquals('user 4', $users[2]['username']);
+        $this->assertEquals('Project 2', $users[2]['project_name']);
+
+        $users = $projectPermission->getQueryByRole(array(1), Role::PROJECT_MANAGER)->findAll();
+        $this->assertCount(2, $users);
+        $this->assertEquals('user 1', $users[0]['username']);
+        $this->assertEquals('Project 1', $users[0]['project_name']);
+        $this->assertEquals('user 2', $users[1]['username']);
+        $this->assertEquals('Project 1', $users[1]['project_name']);
+
+        $users = $projectPermission->getQueryByRole(array(1, 2, 3), Role::PROJECT_MEMBER)->findAll();
+        $this->assertCount(4, $users);
+        $this->assertEquals('user 3', $users[0]['username']);
+        $this->assertEquals('Project 1', $users[0]['project_name']);
+        $this->assertEquals('user 4', $users[1]['username']);
+        $this->assertEquals('Project 1', $users[1]['project_name']);
+        $this->assertEquals('user 1', $users[2]['username']);
+        $this->assertEquals('Project 2', $users[2]['project_name']);
+        $this->assertEquals('user 2', $users[3]['username']);
+        $this->assertEquals('Project 2', $users[3]['project_name']);
+
+        $users = $projectPermission->getQueryByRole(array(1, 2, 3), Role::PROJECT_VIEWER)->findAll();
+        $this->assertCount(1, $users);
+        $this->assertEquals('user 4', $users[0]['username']);
+        $this->assertEquals('Project 3', $users[0]['project_name']);
+    }
+
     public function testDuplicate()
     {
         $userModel = new User($this->container);
