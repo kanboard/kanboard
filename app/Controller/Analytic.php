@@ -1,6 +1,7 @@
 <?php
 
 namespace Kanboard\Controller;
+use Kanboard\Model\Task as TaskModel;
 
 /**
  * Project Analytic controller
@@ -165,5 +166,35 @@ class Analytic extends Base
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => t($title, $project['name']),
         )));
+    }
+
+    /**
+     * Show comparison between actual and estimated hours chart
+     *
+     * @access public
+     */
+
+    public function compareHours()
+    {
+        $project = $this->getProject();
+	$params = $this->getProjectFilters('analytic', 'compareHours');
+        $query = $this->taskFilter->search('status:all')->filterByProject($params['project']['id'])->getQuery();
+
+
+        $paginator = $this->paginator
+            ->setUrl('analytics', 'compare_hours')
+            ->setMax(30)
+            ->setOrder(TaskModel::TABLE.'.id')
+            ->setQuery($query)
+            ->calculate();
+ 
+        $stats = $this->projectAnalytic->getHoursByStatus($project['id']);
+
+        $this->response->html($this->layout('analytic/compare_hours', array(
+            'project' => $project,
+            'paginator' => $paginator,
+            'metrics' => $stats,
+            'title' => t('Compare hours for "%s"', $project['name']),
+        ))); 
     }
 }

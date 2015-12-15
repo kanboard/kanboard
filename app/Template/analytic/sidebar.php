@@ -19,6 +19,9 @@
         <li <?= $this->app->getRouterAction() === 'leadandcycletime' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('Lead and cycle time'), 'analytic', 'leadAndCycleTime', array('project_id' => $project['id'])) ?>
         </li>
+        <li <?= $this->app->getRouterAction() === 'comparehours' ? 'class="active"' : '' ?>>
+            <?= $this->url->link(t('Compare hours'), 'analytic', 'compareHours', array('project_id' => $project['id'])) ?>
+        </li>
     </ul>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
     <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>
