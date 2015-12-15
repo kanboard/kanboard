@@ -42,7 +42,7 @@ class Group extends Base
         $group = $this->group->getById($group_id);
 
         $paginator = $this->paginator
-            ->setUrl('group', 'users')
+            ->setUrl('group', 'users', array('group_id' => $group_id))
             ->setMax(30)
             ->setOrder('username')
             ->setQuery($this->groupMember->getQuery($group_id))
