@@ -14,6 +14,10 @@ class CsvTest extends Base
         $this->assertEquals(1, Csv::getBooleanValue('TRUE'));
         $this->assertEquals(1, Csv::getBooleanValue('true'));
         $this->assertEquals(1, Csv::getBooleanValue('T'));
+        $this->assertEquals(1, Csv::getBooleanValue('Y'));
+        $this->assertEquals(1, Csv::getBooleanValue('y'));
+        $this->assertEquals(1, Csv::getBooleanValue('yes'));
+        $this->assertEquals(1, Csv::getBooleanValue('Yes'));
 
         $this->assertEquals(0, Csv::getBooleanValue('0'));
         $this->assertEquals(0, Csv::getBooleanValue('123'));

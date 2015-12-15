@@ -28,10 +28,10 @@ class ProjectPermission extends Base
 
         return $this
             ->db
-            ->table(self::TABLE)
+            ->table(ProjectUserRole::TABLE)
             ->join(User::TABLE, 'id', 'user_id')
             ->join(Project::TABLE, 'id', 'project_id')
-            ->eq(self::TABLE.'.role', $role)
+            ->eq(ProjectUserRole::TABLE.'.role', $role)
             ->eq(Project::TABLE.'.is_private', 0)
             ->in(Project::TABLE.'.id', $project_ids)
             ->columns(
@@ -88,7 +88,7 @@ class ProjectPermission extends Base
      */
     public function isMember($project_id, $user_id)
     {
-        return in_array($this->projectUserRole->getUSerRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER));
+        return in_array($this->projectUserRole->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER));
     }
 
     /**

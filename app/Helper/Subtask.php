@@ -25,7 +25,7 @@ class Subtask extends \Kanboard\Core\Base
             return trim($this->template->render('subtask/icons', array('subtask' => $subtask))) . $this->helper->e($subtask['title']);
         }
 
-        if ($subtask['status'] == 0 && isset($this->sessionStorage->hasSubtaskInProgress) && $this->sessionStorage->hasSubtaskInProgress === true) {
+        if ($subtask['status'] == 0 && isset($this->sessionStorage->hasSubtaskInProgress) && $this->sessionStorage->hasSubtaskInProgress) {
             return $this->helper->url->link(
                 trim($this->template->render('subtask/icons', array('subtask' => $subtask))) . $this->helper->e($subtask['title']),
                 'subtask',
