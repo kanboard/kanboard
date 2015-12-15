@@ -173,21 +173,19 @@ class Analytic extends Base
      *
      * @access public
      */
-
     public function compareHours()
     {
         $project = $this->getProject();
-	$params = $this->getProjectFilters('analytic', 'compareHours');
+        $params = $this->getProjectFilters('analytic', 'compareHours');
         $query = $this->taskFilter->search('status:all')->filterByProject($params['project']['id'])->getQuery();
 
-
         $paginator = $this->paginator
-            ->setUrl('analytics', 'compare_hours')
+            ->setUrl('analytic', 'compareHours', array('project_id' => $project['id']))
             ->setMax(30)
             ->setOrder(TaskModel::TABLE.'.id')
             ->setQuery($query)
             ->calculate();
- 
+
         $stats = $this->projectAnalytic->getHoursByStatus($project['id']);
 
         $this->response->html($this->layout('analytic/compare_hours', array(
@@ -195,6 +193,6 @@ class Analytic extends Base
             'paginator' => $paginator,
             'metrics' => $stats,
             'title' => t('Compare hours for "%s"', $project['name']),
-        ))); 
+        )));
     }
 }

@@ -28,11 +28,6 @@ CompareHoursColumnChart.prototype.execute = function() {
             x: {
                 type: 'category',
                 categories: categories
-            },
-            y: {
-                tick: {
-                    format: this.app.formatDuration
-                }
             }
         },
         legend: {

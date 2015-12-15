@@ -1,6 +1,10 @@
 Version 1.0.23 (unreleased)
 ---------------------------
 
+New features:
+
+- Add report to compare working hours between open and closed tasks
+
 Bug fixes:
 
 - Fix wrong constant name that cause a PHP error in project management section

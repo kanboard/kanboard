@@ -202,14 +202,14 @@ class ProjectAnalytic extends Base
 
         // Init values
         $stats['closed'] = array(
-                'time_spent' => 0,
-                'time_estimated' => 0,
-            );
-	$stats['open'] = array(
-                'time_spent' => 0,
-                'time_estimated' => 0,
-            );
+            'time_spent' => 0,
+            'time_estimated' => 0,
+        );
 
+        $stats['open'] = array(
+            'time_spent' => 0,
+            'time_estimated' => 0,
+        );
 
         // Add times spent and estimated to each status
         foreach ($tasks as &$task) {
