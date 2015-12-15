@@ -57,6 +57,13 @@ class RouteProvider implements ServiceProviderInterface
             $container['router']->addRoute('project/:project_id/permissions', 'ProjectPermission', 'index', array('project_id'));
             $container['router']->addRoute('project/:project_id/import', 'taskImport', 'step1', array('project_id'));
 
+            // ProjectUser routes
+            $container['router']->addRoute('projects/managers/:user_id', 'projectuser', 'managers', array('user_id'));
+            $container['router']->addRoute('projects/members/:user_id', 'projectuser', 'members', array('user_id'));
+            $container['router']->addRoute('projects/tasks/:user_id/opens', 'projectuser', 'opens', array('user_id'));
+            $container['router']->addRoute('projects/tasks/:user_id/closed', 'projectuser', 'closed', array('user_id'));
+            $container['router']->addRoute('projects/managers', 'projectuser', 'managers');
+
             // Action routes
             $container['router']->addRoute('project/:project_id/actions', 'action', 'index', array('project_id'));
             $container['router']->addRoute('project/:project_id/action/:action_id/confirm', 'action', 'confirm', array('project_id', 'action_id'));
