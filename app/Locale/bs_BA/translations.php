@@ -480,7 +480,7 @@ return array(
     'Time estimated' => 'Procijenjeno vrijeme',
     'There is nothing assigned to you.' => 'Ništa vam nije dodijeljeno',
     'My tasks' => 'Moji zadaci',
-    'Activity stream' => 'Spisak aktivnosti',
+    'Activity stream' => 'Tok aktivnosti',
     'Dashboard' => 'Panel',
     'Confirmation' => 'Potvrda',
     'Allow everybody to access to this project' => 'Dozvoli svima pristup ovom projektu',

@@ -75,10 +75,13 @@ class ProjectActivity extends Base
      * Get the query to fetch activities events for for the given projects list
      *
      * @access public
-     * @param  integer    $user_id      User id
+     * @param  integer     $user_id         User id
+     * @param  integer     $limit           Maximum events number
+     * @param  integer     $start           Timestamp of earliest activity
+     * @param  integer     $end             Timestamp of latest activity
      * @return \PicoDb\Table
      */
-    public function getUserQuery($user_id)
+    public function getUserQuery($user_id, $limit = 50, $start = null, $end = null)
     {
         $project_ids = $this->projectPermission->getActiveProjectIds($user_id);
         if (empty($project_ids)) {
@@ -87,7 +90,7 @@ class ProjectActivity extends Base
                     ->table(self::TABLE)->eq(self::TABLE.'.id', -1);
         }
 
-        return $this
+        $query =  $this
                 ->db
                 ->table(self::TABLE)
                 ->columns(
@@ -99,7 +102,17 @@ class ProjectActivity extends Base
                 ->in('project_id', $project_ids)
                 ->join(User::TABLE, 'id', 'creator_id')
                 ->desc(self::TABLE.'.id')
-                ->callback(array($this, 'reorganizeDataParameters'));
+                ->limit($limit);
+
+        if (! is_null($start)) {
+            $query->gte('date_creation', $start);
+        }
+
+        if (! is_null($end)) {
+            $query->lte('date_creation', $end);
+        }
+
+        return $query->callback(array($this, 'reorganizeDataParameters'));
     }
 
     /**
@@ -110,7 +123,7 @@ class ProjectActivity extends Base
      * @param  integer     $limit           Maximum events number
      * @param  integer     $start           Timestamp of earliest activity
      * @param  integer     $end             Timestamp of latest activity
-     * @return array
+     * @return \PicoDb\Table
      */
     public function getProject($project_id, $limit = 50, $start = null, $end = null)
     {
@@ -125,29 +138,39 @@ class ProjectActivity extends Base
      * @param  integer     $limit           Maximum events number
      * @param  integer     $start           Timestamp of earliest activity
      * @param  integer     $end             Timestamp of latest activity
-     * @return array
+     * @return \PicoDb\Table
      */
     public function getProjects(array $project_ids, $limit = 50, $start = null, $end = null)
     {
         if (empty($project_ids)) {
-            return array();
+            return $this
+                    ->db
+                    ->table(self::TABLE)->eq(self::TABLE.'.id', -1);
         }
 
         $query = $this
-                    ->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        self::TABLE.'.*',
-                        User::TABLE.'.username AS author_username',
-                        User::TABLE.'.name AS author_name',
-                        User::TABLE.'.email'
-                    )
-                    ->in('project_id', $project_ids)
-                    ->join(User::TABLE, 'id', 'creator_id')
-                    ->desc(self::TABLE.'.id')
-                    ->limit($limit);
+                ->db
+                ->table(self::TABLE)
+                ->columns(
+                    self::TABLE.'.*',
+                    User::TABLE.'.username AS author_username',
+                    User::TABLE.'.name AS author_name',
+                    User::TABLE.'.email'
+                )
+                ->in('project_id', $project_ids)
+                ->join(User::TABLE, 'id', 'creator_id')
+                ->desc(self::TABLE.'.id')
+                ->limit($limit);
 
-        return $this->getEvents($query, $start, $end);
+        if (! is_null($start)) {
+            $query->gte('date_creation', $start);
+        }
+
+        if (! is_null($end)) {
+            $query->lte('date_creation', $end);
+        }
+
+        return $query->callback(array($this, 'reorganizeDataParameters'));
     }
 
     /**
@@ -158,7 +181,7 @@ class ProjectActivity extends Base
      * @param  integer     $limit           Maximum events number
      * @param  integer     $start           Timestamp of earliest activity
      * @param  integer     $end             Timestamp of latest activity
-     * @return array
+     * @return \PicoDb\Table
      */
     public function getTask($task_id, $limit = 50, $start = null, $end = null)
     {
@@ -176,20 +199,6 @@ class ProjectActivity extends Base
                     ->desc(self::TABLE.'.id')
                     ->limit($limit);
 
-        return $this->getEvents($query, $start, $end);
-    }
-
-    /**
-     * Common function to return events
-     *
-     * @access public
-     * @param  \PicoDb\Table   $query           PicoDb Query
-     * @param  integer         $start           Timestamp of earliest activity
-     * @param  integer         $end             Timestamp of latest activity
-     * @return array
-     */
-    private function getEvents(\PicoDb\Table $query, $start, $end)
-    {
         if (! is_null($start)) {
             $query->gte('date_creation', $start);
         }
@@ -198,18 +207,7 @@ class ProjectActivity extends Base
             $query->lte('date_creation', $end);
         }
 
-        $events = $query->findAll();
-
-        foreach ($events as &$event) {
-            $event += $this->decode($event['data']);
-            unset($event['data']);
-
-            $event['author'] = $event['author_name'] ?: $event['author_username'];
-            $event['event_title'] = $this->notification->getTitleWithAuthor($event['author'], $event['event_name'], $event);
-            $event['event_content'] = $this->getContent($event);
-        }
-
-        return $events;
+        return $query->callback(array($this, 'reorganizeDataParameters'));
     }
 
     /**
