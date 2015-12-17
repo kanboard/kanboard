@@ -122,7 +122,7 @@ sql:
 	@ mysqldump -uroot --quote-names --no-create-info --skip-comments --no-set-names kanboard settings >> app/Schema/Sql/mysql.sql
 	@ mysqldump -uroot --quote-names --no-create-info --skip-comments --no-set-names kanboard links >> app/Schema/Sql/mysql.sql
 
-	@ php -r "echo 'INSERT INTO users (username, password, is_admin) VALUES (\'admin\', \''.password_hash('admin', PASSWORD_DEFAULT).'\', \'1\');';" | \
+	@ php -r "echo 'INSERT INTO users (username, password, role) VALUES (\'admin\', \''.password_hash('admin', PASSWORD_DEFAULT).'\', \'app-admin\');';" | \
 	tee -a app/Schema/Sql/postgres.sql app/Schema/Sql/mysql.sql >/dev/null
 
 	@ let mysql_version=`echo 'select version from schema_version;' | mysql -N -uroot kanboard` ;\
