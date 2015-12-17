@@ -25,12 +25,13 @@ class Comment extends \Kanboard\Core\Base
         return $this->comment->remove($comment_id);
     }
 
-    public function createComment($task_id, $user_id, $content)
+    public function createComment($task_id, $user_id, $content, $reference = '')
     {
         $values = array(
             'task_id' => $task_id,
             'user_id' => $user_id,
             'comment' => $content,
+            'reference' => $reference,
         );
 
         list($valid, ) = $this->comment->validateCreation($values);
