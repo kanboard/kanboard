@@ -58,6 +58,28 @@ class User extends Base
     }
 
     /**
+     * Public user profile
+     *
+     * @access public
+     */
+    public function profile()
+    {
+        $user = $this->user->getById($this->request->getIntegerParam('user_id'));
+
+        if (empty($user)) {
+            $this->notfound();
+        }
+
+        $this->response->html(
+            $this->template->layout('user/profile', array(
+                'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
+                'title' => $user['name'] ?: $user['username'],
+                'user' => $user,
+            )
+        ));
+    }
+
+    /**
      * Display a form to create a new user
      *
      * @access public

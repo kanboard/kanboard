@@ -93,3 +93,13 @@
 .documentation li {
     line-height: 30px;
 }
+
+.user-mention-link {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.user-mention-link:hover {
+    color: #555;
+}

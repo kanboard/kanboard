@@ -3,14 +3,15 @@
 namespace Kanboard\Helper;
 
 use Kanboard\Core\Markdown;
+use Kanboard\Core\Base;
 
 /**
- * Text helpers
+ * Text Helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class Text extends \Kanboard\Core\Base
+class Text extends Base
 {
     /**
      * Markdown transformation
@@ -21,7 +22,7 @@ class Text extends \Kanboard\Core\Base
      */
     public function markdown($text, array $link = array())
     {
-        $parser = new Markdown($link, $this->helper->url);
+        $parser = new Markdown($this->container, $link);
         $parser->setMarkupEscaped(MARKDOWN_ESCAPE_HTML);
         return $parser->text($text);
     }
