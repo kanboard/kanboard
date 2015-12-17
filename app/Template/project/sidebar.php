@@ -33,7 +33,7 @@
                 <?= $this->url->link(t('Categories'), 'category', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($project['is_private'] == 0): ?>
-            <li <?= $this->app->getRouterController() === 'project' && $this->app->getRouterAction() === 'permissions' ? 'class="active"' : '' ?>>
+            <li <?= $this->app->getRouterController() === 'ProjectPermission' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Permissions'), 'ProjectPermission', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php endif ?>
