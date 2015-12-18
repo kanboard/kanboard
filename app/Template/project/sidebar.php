@@ -33,7 +33,7 @@
                 <?= $this->url->link(t('Categories'), 'category', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($project['is_private'] == 0): ?>
-            <li <?= $this->app->getRouterController() === 'project' && $this->app->getRouterAction() === 'permissions' ? 'class="active"' : '' ?>>
+            <li <?= $this->app->getRouterController() === 'ProjectPermission' ? 'class="active"' : '' ?>>
                 <?= $this->url->link(t('Permissions'), 'ProjectPermission', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php endif ?>
@@ -60,7 +60,7 @@
             <?php endif ?>
         <?php endif ?>
 
-        <?= $this->hook->render('template:project:sidebar') ?>
+        <?= $this->hook->render('template:project:sidebar', array('project' => $project)) ?>
     </ul>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
     <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>
