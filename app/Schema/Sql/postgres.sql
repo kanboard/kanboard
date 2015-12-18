@@ -2001,7 +2001,8 @@ INSERT INTO settings (option, value) VALUES ('board_highlight_period', '172800')
 INSERT INTO settings (option, value) VALUES ('board_public_refresh_interval', '60');
 INSERT INTO settings (option, value) VALUES ('board_private_refresh_interval', '10');
 INSERT INTO settings (option, value) VALUES ('board_columns', '');
-INSERT INTO settings (option, value) VALUES ('webhook_token', '2e3e9c804be85c221394727a142e6e45f1f3bfaa3ab85576d5d555ea661a');
+INSERT INTO settings (option, value) VALUES ('webhook_token', '686b427497298001641d9d300d53b0b23da6a4a2cc0ce17d24d346219fca');
+INSERT INTO settings (option, value) VALUES ('api_token', '3387e930ebe3984d59eac1fb07bb112916c846cfe2f01b513349c24fc045');
 INSERT INTO settings (option, value) VALUES ('application_language', 'en_US');
 INSERT INTO settings (option, value) VALUES ('application_timezone', 'UTC');
 INSERT INTO settings (option, value) VALUES ('application_url', '');
@@ -2018,7 +2019,6 @@ INSERT INTO settings (option, value) VALUES ('webhook_url', '');
 INSERT INTO settings (option, value) VALUES ('default_color', 'yellow');
 INSERT INTO settings (option, value) VALUES ('subtask_time_tracking', '1');
 INSERT INTO settings (option, value) VALUES ('cfd_include_closed_tasks', '1');
-INSERT INTO settings (option, value) VALUES ('api_token', '19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929');
 
 
 --
@@ -2066,4 +2066,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$/kXBPSpWZHnF6potELbOmuih3XlwgWHQr7dAVDHpIo96wVB22OtkO', '1');INSERT INTO schema_version VALUES ('78');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$EIYcgiDba33chGTqlP4cYeXSF7WC5RJPr8eMGsx.8gVT1Q4OUgkay', 'app-admin');INSERT INTO schema_version VALUES ('78');
