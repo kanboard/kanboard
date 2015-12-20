@@ -153,6 +153,7 @@ class RouteProvider implements ServiceProviderInterface
 
             // Users
             $container['router']->addRoute('users', 'user', 'index');
+            $container['router']->addRoute('user/profile/:user_id', 'user', 'profile', array('user_id'));
             $container['router']->addRoute('user/show/:user_id', 'user', 'show', array('user_id'));
             $container['router']->addRoute('user/show/:user_id/timesheet', 'user', 'timesheet', array('user_id'));
             $container['router']->addRoute('user/show/:user_id/last-logins', 'user', 'last', array('user_id'));

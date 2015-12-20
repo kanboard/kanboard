@@ -581,7 +581,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES ('api_token','af33e30de765b4eb6ac9eea6243e8edac9acfe7afb9df3c3d7e6eff696f9'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','280c9d5ea16323d0edb1bbf9409ffbc7c23bfd65ae0a1a00fe7236d11536'),('webhook_url','');
+INSERT INTO `settings` VALUES ('api_token','a5ee9b5e8a97d1da2b725d5f3d66caec8b5fe195968c33f8081badd17c35'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','bb74b2b3d79f562520d1f495b6c0c1f9ff1d996d1d60374fd67b47637239'),('webhook_url','');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -610,4 +610,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, is_admin) VALUES ('admin', '$2y$10$/kXBPSpWZHnF6potELbOmuih3XlwgWHQr7dAVDHpIo96wVB22OtkO', '1');INSERT INTO schema_version VALUES ('98');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$EIYcgiDba33chGTqlP4cYeXSF7WC5RJPr8eMGsx.8gVT1Q4OUgkay', 'app-admin');INSERT INTO schema_version VALUES ('98');

@@ -33,7 +33,7 @@ class Project extends Base
             ->calculate();
 
         $this->response->html($this->template->layout('project/index', array(
-            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
             'paginator' => $paginator,
             'nb_projects' => $nb_projects,
             'title' => t('Projects').' ('.$nb_projects.')'
@@ -302,7 +302,7 @@ class Project extends Base
         $is_private = isset($values['is_private']) && $values['is_private'] == 1;
 
         $this->response->html($this->template->layout('project/new', array(
-            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
             'values' => $values,
             'errors' => $errors,
             'is_private' => $is_private,

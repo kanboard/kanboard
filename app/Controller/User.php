@@ -26,7 +26,7 @@ class User extends Base
     {
         $content = $this->template->render($template, $params);
         $params['user_content_for_layout'] = $content;
-        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
 
         if (isset($params['user'])) {
             $params['title'] = ($params['user']['name'] ?: $params['user']['username']).' (#'.$params['user']['id'].')';
@@ -51,10 +51,32 @@ class User extends Base
 
         $this->response->html(
             $this->template->layout('user/index', array(
-                'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
+                'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
                 'title' => t('Users').' ('.$paginator->getTotal().')',
                 'paginator' => $paginator,
         )));
+    }
+
+    /**
+     * Public user profile
+     *
+     * @access public
+     */
+    public function profile()
+    {
+        $user = $this->user->getById($this->request->getIntegerParam('user_id'));
+
+        if (empty($user)) {
+            $this->notfound();
+        }
+
+        $this->response->html(
+            $this->template->layout('user/profile', array(
+                'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+                'title' => $user['name'] ?: $user['username'],
+                'user' => $user,
+            )
+        ));
     }
 
     /**
@@ -70,7 +92,7 @@ class User extends Base
             'timezones' => $this->config->getTimezones(true),
             'languages' => $this->config->getLanguages(true),
             'roles' => $this->role->getApplicationRoles(),
-            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
             'projects' => $this->project->getList(),
             'errors' => $errors,
             'values' => $values + array('role' => Role::APP_USER),
