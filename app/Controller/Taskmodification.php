@@ -98,10 +98,20 @@ class Taskmodification extends Base
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
+        $links = $this->taskFinder->taskLink->getParentTask($task['id']);
+
         $ajax = $this->request->isAjax();
 
         if (empty($values)) {
             $values = $task;
+
+            if(!empty($links)) {
+                $values['parent_title'] = "#" . $links[0]['task_id'] . " - " . $links[0]['title'];
+                $values['task_link_id'] = $links[0]['id'];
+                $values['task_id'] = $task['id'];
+                $values['opposite_task_id'] = $links[0]['task_id'];
+                $values['link_id'] = $links[0]['link_id'];
+            }
         }
 
         $this->dateParser->format($values, array('date_due'));
@@ -141,7 +151,6 @@ class Taskmodification extends Base
 
         if ($valid && $this->taskModification->update($values)) {
             $this->flash->success(t('Task updated successfully.'));
-
             if ($this->request->isAjax()) {
                 $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
             } else {

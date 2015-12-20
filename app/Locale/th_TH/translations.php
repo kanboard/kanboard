@@ -310,6 +310,7 @@ return array(
     'estimated' => 'ประมาณ',
     'Sub-Tasks' => 'งานย่อย',
     'Add a sub-task' => 'เพิ่มงานย่อย',
+    // 'Add a child task' => '',
     // 'Original estimate' => '',
     'Create another sub-task' => 'สร้างงานย่อยอื่น',
     'Time spent' => 'ใช้เวลา',

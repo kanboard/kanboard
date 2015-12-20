@@ -310,6 +310,7 @@ return array(
     'estimated' => 'becsült',
     'Sub-Tasks' => 'Részfeladatok',
     'Add a sub-task' => 'Részfeladat létrehozása',
+    // 'Add a child task' => '',
     'Original estimate' => 'Eredeti időbecslés',
     'Create another sub-task' => 'További részfeladat létrehozása',
     'Time spent' => 'Eltöltött idő',

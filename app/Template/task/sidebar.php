@@ -36,6 +36,9 @@
         <li <?= $this->app->getRouterController() === 'subtask' && $this->app->getRouterAction() === 'create' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
+        <li <?= $this->app->getRouterController() === 'taskcreation' && $this->app->getRouterAction() === 'create' ? 'class="active"' : '' ?>>
+            <?= $this->url->link(t('Add a child task'), 'taskcreation', 'create', array('opposite_task_id' => $task['id'], 'project_id' => $task['project_id'], 'link_id' => 6, 'parent_title' => '#' . $task['id'] . ' - ' . $task['title'], 'readonly' => 'yes'), false, 'popover') ?>
+        </li>
         <li <?= $this->app->getRouterController() === 'tasklink' && $this->app->getRouterAction() === 'create' ? 'class="active"' : '' ?>>
             <?= $this->url->link(t('Add a link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>

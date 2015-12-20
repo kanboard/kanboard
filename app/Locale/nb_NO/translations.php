@@ -310,6 +310,7 @@ return array(
     'estimated' => 'estimat',
     'Sub-Tasks' => 'Deloppgave',
     'Add a sub-task' => 'Legg til en  deloppgave',
+    // 'Add a child task' => '',
     'Original estimate' => 'Original estimering',
     'Create another sub-task' => 'Legg til en ny deloppgave',
     'Time spent' => 'Tidsforbruk',

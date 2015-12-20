@@ -310,6 +310,7 @@ return array(
     'estimated' => 'tahmini',
     'Sub-Tasks' => 'Alt Görev',
     'Add a sub-task' => 'Alt görev ekle',
+    // 'Add a child task' => '',
     // 'Original estimate' => '',
     'Create another sub-task' => 'Başka bir alt görev daha oluştur',
     // 'Time spent' => '',

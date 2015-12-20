@@ -310,6 +310,7 @@ return array(
     'estimated' => 'estimado',
     'Sub-Tasks' => 'Sub-Tareas',
     'Add a sub-task' => 'Añadir una sub-tarea',
+    // 'Add a child task' => '',
     'Original estimate' => 'Estimado Original',
     'Create another sub-task' => 'Crear otra sub-tarea',
     'Time spent' => 'Tiempo Transcurrido',

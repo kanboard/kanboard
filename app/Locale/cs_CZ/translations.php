@@ -310,6 +310,7 @@ return array(
     'estimated' => 'odhadnuto',
     'Sub-Tasks' => 'Dílčí úkoly',
     'Add a sub-task' => 'Přidat dílčí úkol',
+    // 'Add a child task' => '',
     'Original estimate' => 'Časový odhad',
     'Create another sub-task' => 'Vytvořit další dílčí úkol',
     'Time spent' => 'Strávený čas',

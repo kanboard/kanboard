@@ -310,6 +310,7 @@ return array(
     'estimated' => 'estimoitu',
     'Sub-Tasks' => 'Alitehtävät',
     'Add a sub-task' => 'Lisää alitehtävä',
+    // 'Add a child task' => '',
     'Original estimate' => 'Alkuperäinen estimaatti',
     'Create another sub-task' => 'Lisää toinen alitehtävä',
     'Time spent' => 'Käytetty aika',

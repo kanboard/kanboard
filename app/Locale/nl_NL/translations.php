@@ -310,6 +310,7 @@ return array(
     'estimated' => 'geschat',
     'Sub-Tasks' => 'Subtaken',
     'Add a sub-task' => 'Subtaak toevoegen',
+    // 'Add a child task' => '',
     'Original estimate' => 'Orginele schatting',
     'Create another sub-task' => 'Nog een subtaak toevoegen',
     'Time spent' => 'Tijd besteed',

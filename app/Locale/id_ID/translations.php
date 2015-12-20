@@ -310,6 +310,7 @@ return array(
     'estimated' => 'perkiraan',
     'Sub-Tasks' => 'Sub-tugas',
     'Add a sub-task' => 'Tambahkan sub-tugas',
+    // 'Add a child task' => '',
     'Original estimate' => 'Perkiraan semula',
     'Create another sub-task' => 'Tambahkan sub-tugas lainnya',
     'Time spent' => 'Waktu yang dihabiskan',

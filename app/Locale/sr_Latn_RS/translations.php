@@ -310,6 +310,7 @@ return array(
     'estimated' => 'procenjeno',
     'Sub-Tasks' => 'Pod-zadaci',
     'Add a sub-task' => 'Dodaj pod-zadatak',
+    // 'Add a child task' => '',
     'Original estimate' => 'Originalna procena',
     'Create another sub-task' => 'Dodaj novi pod-zadatak',
     'Time spent' => 'Utrošeno vreme',

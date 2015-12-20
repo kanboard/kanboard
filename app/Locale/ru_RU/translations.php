@@ -310,6 +310,7 @@ return array(
     'estimated' => 'расчетное',
     'Sub-Tasks' => 'Подзадачи',
     'Add a sub-task' => 'Добавить подзадачу',
+    // 'Add a child task' => '',
     'Original estimate' => 'Запланировано',
     'Create another sub-task' => 'Создать другую подзадачу',
     'Time spent' => 'Времени затрачено',

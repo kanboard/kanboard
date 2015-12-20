@@ -310,6 +310,7 @@ return array(
     'estimated' => '予測',
     'Sub-Tasks' => 'サブタスク',
     'Add a sub-task' => 'サブタスクを追加する',
+    // 'Add a child task' => '',
     'Original estimate' => '初期の予測',
     'Create another sub-task' => '続けて別のサブタスクを追加する',
     'Time spent' => '経過時間',

@@ -28,6 +28,10 @@ class Taskcreation extends Base
                 'color_id' => $this->request->getStringParam('color_id', $this->color->getDefaultColor()),
                 'owner_id' => $this->request->getIntegerParam('owner_id'),
                 'another_task' => $this->request->getIntegerParam('another_task'),
+                'opposite_task_id' => $this->request->getIntegerParam('opposite_task_id'),
+                'link_id' => $this->request->getIntegerParam('link_id'),
+                'parent_title' => $this->request->getStringParam('parent_title'),
+                'readonly' => $this->request->getStringParam('readonly'),
             );
         }
 

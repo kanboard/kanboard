@@ -310,6 +310,7 @@ return array(
     'estimated' => '评估',
     'Sub-Tasks' => '子任务',
     'Add a sub-task' => '添加子任务',
+    // 'Add a child task' => '',
     'Original estimate' => '初步预估',
     'Create another sub-task' => '创建另一个子任务',
     'Time spent' => '时间花费',
