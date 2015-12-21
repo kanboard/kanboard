@@ -1102,4 +1102,6 @@ return array(
     'Enter group name...' => 'Geben Sie den Gruppennamen ein...',
     'Role:' => 'Rolle:',
     'Project members' => 'Projektmitglieder',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

@@ -1102,4 +1102,6 @@ return array(
     'Enter group name...' => 'Unesi ime grupe...',
     'Role:' => 'Uloga:',
     'Project members' => 'Članovi projekta',
+    'Activity until yesterday' => 'Aktivnosti do jucer',
+    'Activity until today' => 'Aktivnosti do danas',
 );
