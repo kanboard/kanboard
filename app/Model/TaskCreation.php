@@ -28,7 +28,6 @@ class TaskCreation extends Base
         $position = empty($values['position']) ? 0 : $values['position'];
 
         $opposite_task_id = $values['opposite_task_id'];
-        $link_id = $values['link_id'];
 
         $this->prepare($values);
         $task_id = $this->persist(Task::TABLE, $values);
@@ -39,7 +38,7 @@ class TaskCreation extends Base
             }
 
             if(!empty($opposite_task_id)) {
-                $this->taskLink->create($task_id, $opposite_task_id, $link_id);
+                $this->taskLink->create($task_id, $opposite_task_id, TaskLink::RELATION_IS_A_PARENT_OF);
             }
             
             $this->fireEvents($task_id, $values);

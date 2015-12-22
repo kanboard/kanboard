@@ -23,8 +23,23 @@ class TaskModification extends Base
     {
         $original_task = $this->taskFinder->getById($values['id']);
 
-        if(array_key_exists('opposite_task_id', $values)) {
-            $this->taskLink->update($values['task_link_id'], $values['task_id'], $values['opposite_task_id'], $values['link_id']);
+        if(array_key_exists('opposite_task_id', $values) &&
+            is_numeric($values['opposite_task_id'])) {
+
+            $parent_task = $this->taskLink->getParentTask($values['task_id']);
+
+            /**
+             * If this task is child task update current values otherwise create new relation
+             */
+            if(empty($parent_task)) {
+                if(!$this->taskLink->create($values['id'], $values['opposite_task_id'], TaskLink::RELATION_IS_A_PARENT_OF)) {
+                    return false;
+                }
+            } else {
+                if(!$this->taskLink->update($values['task_link_id'], $values['id'], $values['opposite_task_id'], TaskLink::RELATION_IS_A_PARENT_OF)) {
+                    return false;
+                }
+            }
         }
 
         $this->prepare($values);
