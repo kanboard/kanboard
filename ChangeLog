@@ -10,6 +10,7 @@ Bug fixes:
 
 - Fix wrong constant name that cause a PHP error in project management section
 - Fix pagination in group members listing
+- Avoid PHP error when enabling LDAP group provider with PHP < 5.5
 
 Version 1.0.22
 --------------
