@@ -2,14 +2,27 @@
 
 namespace Kanboard\Helper;
 
+use Kanboard\Core\Base;
+
 /**
  * Application helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class App extends \Kanboard\Core\Base
+class App extends Base
 {
+    /**
+     * Get plugin name from route
+     *
+     * @access public
+     * @return string
+     */
+    public function getPluginName()
+    {
+        return $this->router->getPlugin();
+    }
+
     /**
      * Get router controller
      *

@@ -103,8 +103,8 @@ class Url extends Base
      */
     public function dir()
     {
-        if (empty($this->directory) && isset($_SERVER['REQUEST_METHOD'])) {
-            $this->directory = str_replace('\\', '/', dirname($_SERVER['PHP_SELF']));
+        if ($this->directory === '' && $this->request->getMethod() !== '') {
+            $this->directory = str_replace('\\', '/', dirname($this->request->getServerVariable('PHP_SELF')));
             $this->directory = $this->directory !== '/' ? $this->directory.'/' : '/';
             $this->directory = str_replace('//', '/', $this->directory);
         }
@@ -120,13 +120,13 @@ class Url extends Base
      */
     public function server()
     {
-        if (empty($_SERVER['SERVER_NAME'])) {
+        if ($this->request->getServerVariable('SERVER_NAME') === '') {
             return 'http://localhost/';
         }
 
         $url = $this->request->isHTTPS() ? 'https://' : 'http://';
-        $url .= $_SERVER['SERVER_NAME'];
-        $url .= $_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443 ? '' : ':'.$_SERVER['SERVER_PORT'];
+        $url .= $this->request->getServerVariable('SERVER_NAME');
+        $url .= $this->request->getServerVariable('SERVER_PORT') == 80 || $this->request->getServerVariable('SERVER_PORT') == 443 ? '' : ':'.$this->request->getServerVariable('SERVER_PORT');
         $url .= $this->dir() ?: '/';
 
         return $url;
@@ -147,13 +147,15 @@ class Url extends Base
      */
     private function build($separator, $controller, $action, array $params = array(), $csrf = false, $anchor = '', $absolute = false)
     {
-        $path = $this->router->findUrl($controller, $action, $params);
+        $path = $this->route->findUrl($controller, $action, $params);
         $qs = array();
 
         if (empty($path)) {
             $qs['controller'] = $controller;
             $qs['action'] = $action;
             $qs += $params;
+        } else {
+            unset($params['plugin']);
         }
 
         if ($csrf) {

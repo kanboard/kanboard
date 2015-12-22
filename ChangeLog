@@ -3,7 +3,8 @@ Version 1.0.23 (unreleased)
 
 New features:
 
-- Add report to compare working hours between open and closed tasks
+- Added report to compare working hours between open and closed tasks
+- Added the possiblity to define custom routes from plugins
 
 Bug fixes:
 

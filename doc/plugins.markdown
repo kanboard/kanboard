@@ -11,6 +11,7 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 - [Using plugin hooks](plugin-hooks.markdown)
 - [Override default application behaviors](plugin-overrides.markdown)
 - [Add schema migrations for plugins](plugin-schema-migrations.markdown)
+- [Custom routes](plugin-routes.markdown)
 - [Add mail transports](plugin-mail-transports.markdown)
 - [Add notification types](plugin-notifications.markdown)
 - [Attach metadata to users, tasks and projects](plugin-metadata.markdown)
