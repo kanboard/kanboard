@@ -24,7 +24,7 @@ class Projectuser extends Base
      */
     private function layout($template, array $params)
     {
-        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
         $params['content_for_sublayout'] = $this->template->render($template, $params);
         $params['filter'] = array('user_id' => $params['user_id']);
 

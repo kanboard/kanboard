@@ -21,7 +21,7 @@ class Analytic extends Base
      */
     private function layout($template, array $params)
     {
-        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
         $params['content_for_sublayout'] = $this->template->render($template, $params);
 
         return $this->template->layout('analytic/layout', $params);

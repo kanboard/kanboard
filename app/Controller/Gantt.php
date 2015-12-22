@@ -26,7 +26,7 @@ class Gantt extends Base
         $this->response->html($this->template->layout('gantt/projects', array(
             'projects' => $this->projectGanttFormatter->filter($project_ids)->format(),
             'title' => t('Gantt chart for all projects'),
-            'board_selector' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
+            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
         )));
     }
 

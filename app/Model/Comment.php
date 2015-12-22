@@ -203,6 +203,7 @@ class Comment extends Base
             new Validators\Integer('id', t('This value must be an integer')),
             new Validators\Integer('task_id', t('This value must be an integer')),
             new Validators\Integer('user_id', t('This value must be an integer')),
+            new Validators\MaxLength('reference', t('The maximum length is %d characters', 50), 50),
             new Validators\Required('comment', t('Comment is required'))
         );
     }
