@@ -27,7 +27,7 @@ class TaskCreation extends Base
 
         $position = empty($values['position']) ? 0 : $values['position'];
 
-        $opposite_task_id = $values['opposite_task_id'];
+        $opposite_task_id = (isset($values['opposite_task_id']) && is_numeric($values['opposite_task_id']) ? $values['opposite_task_id'] : null);
 
         $this->prepare($values);
         $task_id = $this->persist(Task::TABLE, $values);
@@ -37,7 +37,7 @@ class TaskCreation extends Base
                 $this->taskPosition->movePosition($values['project_id'], $task_id, $values['column_id'], $position, $values['swimlane_id'], false);
             }
 
-            if(!empty($opposite_task_id)) {
+            if(!is_null($opposite_task_id)) {
                 $this->taskLink->create($task_id, $opposite_task_id, TaskLink::RELATION_IS_A_PARENT_OF);
             }
             

@@ -58,7 +58,7 @@ class Activity extends Base
 
         $this->response->html($this->template->layout('activity/project', array(
             'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
-            'events' => $this->projectActivity->getProject($project['id']),
+            'events' => $this->getActivityPaginatorByProject($project['id']),
             'project' => $project,
             'title' => t('%s\'s activity', $project['name'])
         )));
