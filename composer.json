@@ -16,7 +16,7 @@
         "erusev/parsedown" : "1.6.0",
         "fabiang/xmpp" : "0.6.1",
         "fguillot/json-rpc" : "1.0.3",
-        "fguillot/picodb" : "1.0.3",
+        "fguillot/picodb" : "dev-master",
         "fguillot/simpleLogger" : "1.0.0",
         "fguillot/simple-validator" : "1.0.0",
         "league/html-to-markdown" : "~4.0",
