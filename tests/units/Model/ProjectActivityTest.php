@@ -7,9 +7,6 @@ use Kanboard\Model\TaskFinder;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\ProjectActivity;
 use Kanboard\Model\Project;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\Comment;
-use Kanboard\Model\File;
 
 class ProjectActivityTest extends Base
 {
@@ -39,10 +36,11 @@ class ProjectActivityTest extends Base
         $this->assertTrue($e->createEvent(1, 2, 1, Task::EVENT_UPDATE, array('task' => $tf->getById(2))));
         $this->assertFalse($e->createEvent(1, 1, 0, Task::EVENT_OPEN, array('task' => $tf->getbyId(1))));
 
-        $events = $e->getProject(1);
+        $query = $e->getProject(1);
+        $events = $query->findAll();
 
-        $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));
+        $this->assertNotEmpty($events);
         $this->assertEquals(2, count($events));
         $this->assertEquals(time(), $events[0]['date_creation'], '', 1);
         $this->assertEquals(Task::EVENT_UPDATE, $events[0]['event_name']);
@@ -65,7 +63,8 @@ class ProjectActivityTest extends Base
             $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_UPDATE, array('task' => $tf->getbyId(1))));
         }
 
-        $events = $e->getProject(1);
+        $query = $e->getProject(1);
+        $events = $query->findAll();
 
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));
@@ -95,7 +94,8 @@ class ProjectActivityTest extends Base
         $this->assertEquals($nb_events, $this->container['db']->table('project_activities')->count());
         $e->cleanup($max);
 
-        $events = $e->getProject(1);
+        $query = $e->getProject(1);
+        $events = $query->findAll();
 
         $this->assertNotEmpty($events);
         $this->assertTrue(is_array($events));

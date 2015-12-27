@@ -23,6 +23,25 @@ class TaskModification extends Base
     {
         $original_task = $this->taskFinder->getById($values['id']);
 
+        if(array_key_exists('opposite_task_id', $values) &&
+            is_numeric($values['opposite_task_id'])) {
+
+            $parent_task = $this->taskLink->getParentTask($values['task_id']);
+
+            /**
+             * If this task is child task update current values otherwise create new relation
+             */
+            if(empty($parent_task)) {
+                if(!$this->taskLink->create($values['id'], $values['opposite_task_id'], TaskLink::RELATION_IS_A_PARENT_OF)) {
+                    return false;
+                }
+            } else {
+                if(!$this->taskLink->update($values['task_link_id'], $values['id'], $values['opposite_task_id'], TaskLink::RELATION_IS_A_PARENT_OF)) {
+                    return false;
+                }
+            }
+        }
+
         $this->prepare($values);
         $result = $this->db->table(Task::TABLE)->eq('id', $original_task['id'])->update($values);
 
@@ -84,7 +103,7 @@ class TaskModification extends Base
     {
         $this->dateParser->convert($values, array('date_due'));
         $this->dateParser->convert($values, array('date_started'), true);
-        $this->removeFields($values, array('another_task', 'id'));
+        $this->removeFields($values, array('another_task', 'id', 'task_link_id', 'task_id', 'opposite_task_id', 'link_id', 'parent_title'));
         $this->resetFields($values, array('date_due', 'date_started', 'score', 'category_id', 'time_estimated', 'time_spent'));
         $this->convertIntegerFields($values, array('is_active', 'recurrence_status', 'recurrence_trigger', 'recurrence_factor', 'recurrence_timeframe', 'recurrence_basedate'));
 

@@ -310,6 +310,7 @@ return array(
     'estimated' => 'estimat',
     'Sub-Tasks' => 'Deloppgave',
     'Add a sub-task' => 'Legg til en  deloppgave',
+    // 'Add a child task' => '',
     'Original estimate' => 'Original estimering',
     'Create another sub-task' => 'Legg til en ny deloppgave',
     'Time spent' => 'Tidsforbruk',
@@ -866,6 +867,8 @@ return array(
     'Search by category: ' => 'Søk etter kategori',
     'Search by description: ' => 'Søk etter beskrivelse',
     'Search by due date: ' => 'Søk etter frist',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     // 'Lead and Cycle time for "%s"' => '',
     // 'Average time spent into each column for "%s"' => '',
     // 'Average time spent into each column' => '',
@@ -1099,4 +1102,6 @@ return array(
     // 'Enter group name...' => '',
     // 'Role:' => '',
     'Project members' => 'Prosjektmedlemmer',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

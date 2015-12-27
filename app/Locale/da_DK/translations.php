@@ -310,6 +310,7 @@ return array(
     'estimated' => 'estimeret',
     'Sub-Tasks' => 'Under-opgave',
     'Add a sub-task' => 'Tilføj en under-opgave',
+    // 'Add a child task' => '',
     'Original estimate' => 'Original estimering',
     'Create another sub-task' => 'Tilføj endnu en under-opgave',
     'Time spent' => 'Tidsforbrug',
@@ -866,6 +867,8 @@ return array(
     // 'Search by category: ' => '',
     // 'Search by description: ' => '',
     // 'Search by due date: ' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     // 'Lead and Cycle time for "%s"' => '',
     // 'Average time spent into each column for "%s"' => '',
     // 'Average time spent into each column' => '',
@@ -1099,4 +1102,6 @@ return array(
     // 'Enter group name...' => '',
     // 'Role:' => '',
     // 'Project members' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

@@ -310,6 +310,7 @@ return array(
     'estimated' => 'geschätzt',
     'Sub-Tasks' => 'Teilaufgaben',
     'Add a sub-task' => 'Teilaufgabe anlegen',
+    // 'Add a child task' => '',
     'Original estimate' => 'Geschätzter Aufwand',
     'Create another sub-task' => 'Weitere Teilaufgabe anlegen',
     'Time spent' => 'Aufgewendete Zeit',
@@ -866,6 +867,8 @@ return array(
     'Search by category: ' => 'Suche nach Kategorie: ',
     'Search by description: ' => 'Suche nach Beschreibung: ',
     'Search by due date: ' => 'Suche nach Fälligkeitsdatum: ',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     'Lead and Cycle time for "%s"' => 'Durchlauf und Zykluszeit für "%s"',
     'Average time spent into each column for "%s"' => 'Durchschnittliche Zeit in jeder Spalte für "%s"',
     'Average time spent into each column' => 'Durchschnittszeit in jeder Spalte',
@@ -1099,4 +1102,6 @@ return array(
     'Enter group name...' => 'Geben Sie den Gruppennamen ein...',
     'Role:' => 'Rolle:',
     'Project members' => 'Projektmitglieder',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

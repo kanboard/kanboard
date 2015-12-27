@@ -310,6 +310,7 @@ return array(
     'estimated' => 'geschat',
     'Sub-Tasks' => 'Subtaken',
     'Add a sub-task' => 'Subtaak toevoegen',
+    // 'Add a child task' => '',
     'Original estimate' => 'Orginele schatting',
     'Create another sub-task' => 'Nog een subtaak toevoegen',
     'Time spent' => 'Tijd besteed',
@@ -866,6 +867,8 @@ return array(
     // 'Search by category: ' => '',
     // 'Search by description: ' => '',
     // 'Search by due date: ' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     // 'Lead and Cycle time for "%s"' => '',
     // 'Average time spent into each column for "%s"' => '',
     // 'Average time spent into each column' => '',
@@ -1099,4 +1102,6 @@ return array(
     // 'Enter group name...' => '',
     // 'Role:' => '',
     // 'Project members' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

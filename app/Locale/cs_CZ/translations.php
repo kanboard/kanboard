@@ -310,6 +310,7 @@ return array(
     'estimated' => 'odhadnuto',
     'Sub-Tasks' => 'Dílčí úkoly',
     'Add a sub-task' => 'Přidat dílčí úkol',
+    // 'Add a child task' => '',
     'Original estimate' => 'Časový odhad',
     'Create another sub-task' => 'Vytvořit další dílčí úkol',
     'Time spent' => 'Strávený čas',
@@ -866,6 +867,8 @@ return array(
     'Search by category: ' => 'Hledat podle kategorie: ',
     'Search by description: ' => 'Hledat podle popisu: ',
     'Search by due date: ' => 'Hledat podle termínu: ',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     'Lead and Cycle time for "%s"' => 'Dodací lhůta a doba cyklu pro "%s"',
     'Average time spent into each column for "%s"' => 'Průměrná doba strávená v každé fázi pro "%s"',
     'Average time spent into each column' => 'Průměrná doba strávená v každé fázi',
@@ -1099,4 +1102,6 @@ return array(
     // 'Enter group name...' => '',
     // 'Role:' => '',
     // 'Project members' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

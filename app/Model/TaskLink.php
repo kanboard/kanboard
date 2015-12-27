@@ -30,6 +30,23 @@ class TaskLink extends Base
     const EVENT_CREATE_UPDATE = 'tasklink.create_update';
 
     /**
+     * Relations
+     * 
+     * @var integer
+     */
+    const RELATION_RELATES_TO           = 0;
+    const RELATION_IS_BLOCKED_BY        = 2;
+    const RELATION_BLOCKS               = 3;
+    const RELATION_IS_DUPLICATED_BY     = 4;
+    const RELATION_DUPLICATES           = 5;
+    const RELATION_IS_A_PARENT_OF       = 6;
+    const RELATION_IS_CHILD_OF          = 7;
+    const RELATION_IS_MILESTONE_OF      = 8;
+    const RELATION_TARGETS_MILETSONE    = 9;
+    const RELATION_IS_FIXED_BY          = 10;
+    const RELATION_FIXES                = 11;
+
+    /**
      * Get a task link
      *
      * @access public
@@ -64,15 +81,18 @@ class TaskLink extends Base
      *
      * @access public
      * @param  integer   $task_id   Task id
+     * @param  integer   $link_id   Relation id
+     * 
      * @return array
      */
-    public function getAll($task_id)
+    public function getAll($task_id, $link_id=null)
     {
-        return $this->db
+        $db = $this->db
                     ->table(self::TABLE)
                     ->columns(
                         self::TABLE.'.id',
                         self::TABLE.'.opposite_task_id AS task_id',
+                        self::TABLE.'.link_id',
                         Link::TABLE.'.label',
                         Task::TABLE.'.title',
                         Task::TABLE.'.is_active',
@@ -95,8 +115,27 @@ class TaskLink extends Base
                     ->desc(Board::TABLE.'.position')
                     ->desc(Task::TABLE.'.is_active')
                     ->asc(Task::TABLE.'.position')
-                    ->asc(Task::TABLE.'.id')
-                    ->findAll();
+                    ->asc(Task::TABLE.'.id');
+        
+        if(!is_null($link_id)) {
+            $db->eq(self::TABLE.'.link_id', $link_id);
+        }
+
+        return $db->findAll();
+    }
+    
+
+    /**
+     * Get parent task
+     *
+     * @access public
+     * @param  integer   $task_id   Task id
+     * 
+     * @return array
+     */
+    public function getParentTask($task_id) 
+    {
+        return $this->getAll($task_id, self::RELATION_IS_A_PARENT_OF);
     }
 
     /**

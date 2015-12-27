@@ -310,6 +310,7 @@ return array(
     'estimated' => '予測',
     'Sub-Tasks' => 'サブタスク',
     'Add a sub-task' => 'サブタスクを追加する',
+    // 'Add a child task' => '',
     'Original estimate' => '初期の予測',
     'Create another sub-task' => '続けて別のサブタスクを追加する',
     'Time spent' => '経過時間',
@@ -866,6 +867,8 @@ return array(
     // 'Search by category: ' => '',
     // 'Search by description: ' => '',
     // 'Search by due date: ' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     // 'Lead and Cycle time for "%s"' => '',
     // 'Average time spent into each column for "%s"' => '',
     // 'Average time spent into each column' => '',
@@ -1099,4 +1102,6 @@ return array(
     // 'Enter group name...' => '',
     // 'Role:' => '',
     // 'Project members' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

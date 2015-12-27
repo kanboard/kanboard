@@ -36,6 +36,9 @@
         <li <?= $this->app->checkMenuSelection('subtask', 'create') ?>>
             <?= $this->url->link(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
+        <li <?= $this->app->checkMenuSelection('taskcreation', 'create') ?>>
+            <?= $this->url->link(t('Add a child task'), 'taskcreation', 'create', array('opposite_task_id' => $task['id'], 'project_id' => $task['project_id'], 'parent_title' => '#' . $task['id'] . ' - ' . $task['title'], 'readonly' => 'yes'), false, 'popover') ?>
+        </li>
         <li <?= $this->app->checkMenuSelection('tasklink', 'create') ?>>
             <?= $this->url->link(t('Add a link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
@@ -70,7 +73,7 @@
         </li>
         <?php endif ?>
 
-        <?= $this->hook->render('template:task:sidebar:actions') ?>
+        <?= $this->hook->render('template:task:sidebar:actions', array('task' => $task)) ?>
     </ul>
     <?php endif ?>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>

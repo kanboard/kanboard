@@ -310,6 +310,7 @@ return array(
     'estimated' => '评估',
     'Sub-Tasks' => '子任务',
     'Add a sub-task' => '添加子任务',
+    // 'Add a child task' => '',
     'Original estimate' => '初步预估',
     'Create another sub-task' => '创建另一个子任务',
     'Time spent' => '时间花费',
@@ -866,6 +867,8 @@ return array(
     // 'Search by category: ' => '',
     // 'Search by description: ' => '',
     // 'Search by due date: ' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     // 'Lead and Cycle time for "%s"' => '',
     // 'Average time spent into each column for "%s"' => '',
     // 'Average time spent into each column' => '',
@@ -1099,4 +1102,6 @@ return array(
     // 'Enter group name...' => '',
     // 'Role:' => '',
     // 'Project members' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

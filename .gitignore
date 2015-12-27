@@ -13,9 +13,11 @@ Thumbs.db
 *~
 *.out
 *.log
+.composer.lock
 .vagrant
 config.php
 data/files
 data/cache
 /vendor
+/nbproject/
 *.bak

@@ -27,6 +27,8 @@ class TaskCreation extends Base
 
         $position = empty($values['position']) ? 0 : $values['position'];
 
+        $opposite_task_id = (isset($values['opposite_task_id']) && is_numeric($values['opposite_task_id']) ? $values['opposite_task_id'] : null);
+
         $this->prepare($values);
         $task_id = $this->persist(Task::TABLE, $values);
 
@@ -35,6 +37,10 @@ class TaskCreation extends Base
                 $this->taskPosition->movePosition($values['project_id'], $task_id, $values['column_id'], $position, $values['swimlane_id'], false);
             }
 
+            if(!is_null($opposite_task_id)) {
+                $this->taskLink->create($task_id, $opposite_task_id, TaskLink::RELATION_IS_A_PARENT_OF);
+            }
+            
             $this->fireEvents($task_id, $values);
         }
 
@@ -51,7 +57,7 @@ class TaskCreation extends Base
     {
         $this->dateParser->convert($values, array('date_due'));
         $this->dateParser->convert($values, array('date_started'), true);
-        $this->removeFields($values, array('another_task'));
+        $this->removeFields($values, array('another_task', 'opposite_task_id', 'link_id', 'parent_title'));
         $this->resetFields($values, array('date_started', 'creator_id', 'owner_id', 'swimlane_id', 'date_due', 'score', 'category_id', 'time_estimated'));
 
         if (empty($values['column_id'])) {

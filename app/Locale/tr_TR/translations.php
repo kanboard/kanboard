@@ -310,6 +310,7 @@ return array(
     'estimated' => 'tahmini',
     'Sub-Tasks' => 'Alt Görev',
     'Add a sub-task' => 'Alt görev ekle',
+    // 'Add a child task' => '',
     // 'Original estimate' => '',
     'Create another sub-task' => 'Başka bir alt görev daha oluştur',
     // 'Time spent' => '',
@@ -866,6 +867,8 @@ return array(
     // 'Search by category: ' => '',
     // 'Search by description: ' => '',
     // 'Search by due date: ' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     // 'Lead and Cycle time for "%s"' => '',
     // 'Average time spent into each column for "%s"' => '',
     // 'Average time spent into each column' => '',
@@ -1099,4 +1102,6 @@ return array(
     // 'Enter group name...' => '',
     // 'Role:' => '',
     // 'Project members' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

@@ -46,6 +46,8 @@
 
     <div class="form-column">
         <?= $this->form->hidden('project_id', $values) ?>
+        <?= $this->form->hidden('opposite_task_id', $values) ?>
+        <?= $this->form->hidden('link_id', $values) ?>
 
         <?= $this->form->label(t('Assignee'), 'owner_id') ?>
         <?= $this->form->select('owner_id', $users_list, $values, $errors, array('tabindex="3"')) ?><br/>
@@ -70,6 +72,20 @@
         <?= $this->form->label(t('Due Date'), 'date_due') ?>
         <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="10"'), 'form-date') ?><br/>
         <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
+
+        <?= $this->form->label(t('Parent task'), 'parent_title') ?>
+        <?= $this->form->text(
+            'parent_title',
+            $values,
+            $errors,
+            array(
+                ($values['readonly']) ? 'readonly' : '',
+                'placeholder="'.t('Start to type task title...').'"',
+                'title="'.t('Start to type task title...').'"',
+                'data-dst-field="opposite_task_id"',
+                'data-search-url="'.$this->url->href('TaskHelper', 'autocomplete').'"',
+            ),
+            'autocomplete') ?>
     </div>
 
     <div class="form-actions">

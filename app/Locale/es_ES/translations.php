@@ -310,6 +310,7 @@ return array(
     'estimated' => 'estimado',
     'Sub-Tasks' => 'Sub-Tareas',
     'Add a sub-task' => 'Añadir una sub-tarea',
+    // 'Add a child task' => '',
     'Original estimate' => 'Estimado Original',
     'Create another sub-task' => 'Crear otra sub-tarea',
     'Time spent' => 'Tiempo Transcurrido',
@@ -866,6 +867,8 @@ return array(
     'Search by category: ' => 'Buscar por categoría: ',
     'Search by description: ' => 'Buscar por descripción: ',
     'Search by due date: ' => 'Buscar por fecha de entrega: ',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => '',
     'Lead and Cycle time for "%s"' => 'Plazo de Entrega y Ciclo para "%s"',
     'Average time spent into each column for "%s"' => 'Tiempo medio empleado en cada columna para "%s"',
     'Average time spent into each column' => 'Tiempo medio empleado en cada columna',
@@ -1099,4 +1102,6 @@ return array(
     // 'Enter group name...' => '',
     // 'Role:' => '',
     'Project members' => 'Miembros de proyecto',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
 );

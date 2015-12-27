@@ -69,6 +69,7 @@ class Config extends Setting
     {
         // Sorted by value
         $languages = array(
+            'bs_BA' => 'Bosanski',
             'id_ID' => 'Bahasa Indonesia',
             'bs_BA' => 'Bosanski',
             'cs_CZ' => 'Čeština',
@@ -110,7 +111,8 @@ class Config extends Setting
     public function getJsLanguageCode()
     {
         $languages = array(
-            'cs_CZ' => 'cs',
+            'bs_BA' => 'ba',
+            'cs_CZ' => 'cz',
             'da_DK' => 'da',
             'de_DE' => 'de',
             'en_US' => 'en',
