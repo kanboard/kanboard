@@ -12,16 +12,16 @@
 
     <br/><br/>
     <ul>
-        <li <?= $this->app->getRouterAction() === 'managers' ? 'class="active"' : '' ?>>
+        <li <?= $this->app->checkMenuSelection('projectuser', 'managers') ?>>
             <?= $this->url->link(t('Project managers'), 'projectuser', 'managers', $filter) ?>
         </li>
-        <li <?= $this->app->getRouterAction() === 'members' ? 'class="active"' : '' ?>>
+        <li <?= $this->app->checkMenuSelection('projectuser', 'members') ?>>
             <?= $this->url->link(t('Project members'), 'projectuser', 'members', $filter) ?>
         </li>
-        <li <?= $this->app->getRouterAction() === 'opens' ? 'class="active"' : '' ?>>
+        <li <?= $this->app->checkMenuSelection('projectuser', 'opens') ?>>
             <?= $this->url->link(t('Open tasks'), 'projectuser', 'opens', $filter) ?>
         </li>
-        <li <?= $this->app->getRouterAction() === 'closed' ? 'class="active"' : '' ?>>
+        <li <?= $this->app->checkMenuSelection('projectuser', 'closed') ?>>
             <?= $this->url->link(t('Closed tasks'), 'projectuser', 'closed', $filter) ?>
         </li>
 

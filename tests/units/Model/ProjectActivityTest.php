@@ -36,10 +36,12 @@ class ProjectActivityTest extends Base
         $this->assertTrue($e->createEvent(1, 2, 1, Task::EVENT_UPDATE, array('task' => $tf->getById(2))));
         $this->assertFalse($e->createEvent(1, 1, 0, Task::EVENT_OPEN, array('task' => $tf->getbyId(1))));
 
-        $events = $e->getProject(1);
+        $query = $e->getProject(1);
+        $events = $query->findAll();
 
+        $this->assertTrue(is_array($events));
         $this->assertNotEmpty($events);
-        $this->assertEquals(2, $events->count());
+        $this->assertEquals(2, count($events));
         $this->assertEquals(time(), $events[0]['date_creation'], '', 1);
         $this->assertEquals(Task::EVENT_UPDATE, $events[0]['event_name']);
         $this->assertEquals(Task::EVENT_CLOSE, $events[1]['event_name']);
@@ -61,10 +63,12 @@ class ProjectActivityTest extends Base
             $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_UPDATE, array('task' => $tf->getbyId(1))));
         }
 
-        $events = $e->getProject(1);
+        $query = $e->getProject(1);
+        $events = $query->findAll();
 
         $this->assertNotEmpty($events);
-        $this->assertEquals(50, $events->count());
+        $this->assertTrue(is_array($events));
+        $this->assertEquals(50, count($events));
         $this->assertEquals('admin', $events[0]['author']);
         $this->assertNotEmpty($events[0]['event_title']);
         $this->assertNotEmpty($events[0]['event_content']);
@@ -90,10 +94,12 @@ class ProjectActivityTest extends Base
         $this->assertEquals($nb_events, $this->container['db']->table('project_activities')->count());
         $e->cleanup($max);
 
-        $events = $e->getProject(1);
+        $query = $e->getProject(1);
+        $events = $query->findAll();
 
         $this->assertNotEmpty($events);
-        $this->assertEquals($max, $events->count());
+        $this->assertTrue(is_array($events));
+        $this->assertEquals($max, count($events));
         $this->assertEquals(100, $events[0]['id']);
         $this->assertEquals(99, $events[1]['id']);
         $this->assertEquals(86, $events[14]['id']);

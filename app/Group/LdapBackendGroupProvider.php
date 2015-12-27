@@ -45,7 +45,7 @@ class LdapBackendGroupProvider extends Base implements GroupBackendProviderInter
      */
     public function getLdapGroupPattern($input)
     {
-        if (empty(LDAP_GROUP_FILTER)) {
+        if (LDAP_GROUP_FILTER === '') {
             throw new LogicException('LDAP group filter empty, check the parameter LDAP_GROUP_FILTER');
         }
 

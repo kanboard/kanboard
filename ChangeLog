@@ -3,12 +3,18 @@ Version 1.0.23 (unreleased)
 
 New features:
 
-- Add report to compare working hours between open and closed tasks
+- Added report to compare working hours between open and closed tasks
+- Added the possiblity to define custom routes from plugins
+
+Improvements:
+
+- Improving performance during task position change (3 times faster than before)
 
 Bug fixes:
 
 - Fix wrong constant name that cause a PHP error in project management section
 - Fix pagination in group members listing
+- Avoid PHP error when enabling LDAP group provider with PHP < 5.5
 
 Version 1.0.22
 --------------
