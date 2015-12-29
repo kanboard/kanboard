@@ -20,7 +20,6 @@
         "christian-riesen/otp" : "1.4",
         "eluceo/ical": "0.8.0",
         "erusev/parsedown" : "1.6.0",
-        "fabiang/xmpp" : "0.6.1",
         "fguillot/json-rpc" : "1.0.3",
         "fguillot/picodb" : "dev-master",
         "fguillot/simpleLogger" : "1.0.0",
