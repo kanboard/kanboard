@@ -74,6 +74,10 @@ class Notification extends Base
                 return e('%s commented on the task #%d', $event_author, $event_data['task']['id']);
             case File::EVENT_CREATE:
                 return e('%s attached a file to the task #%d', $event_author, $event_data['task']['id']);
+            case Task::EVENT_USER_MENTION:
+                return e('%s mentioned you in the task #%d', $event_author, $event_data['task']['id']);
+            case Comment::EVENT_USER_MENTION:
+                return e('%s mentioned you in a comment on the task #%d', $event_author, $event_data['task']['id']);
             default:
                 return e('Notification');
         }
@@ -91,52 +95,40 @@ class Notification extends Base
     {
         switch ($event_name) {
             case File::EVENT_CREATE:
-                $title = e('New attachment on task #%d: %s', $event_data['file']['task_id'], $event_data['file']['name']);
-                break;
+                return e('New attachment on task #%d: %s', $event_data['file']['task_id'], $event_data['file']['name']);
             case Comment::EVENT_CREATE:
-                $title = e('New comment on task #%d', $event_data['comment']['task_id']);
-                break;
+                return e('New comment on task #%d', $event_data['comment']['task_id']);
             case Comment::EVENT_UPDATE:
-                $title = e('Comment updated on task #%d', $event_data['comment']['task_id']);
-                break;
+                return e('Comment updated on task #%d', $event_data['comment']['task_id']);
             case Subtask::EVENT_CREATE:
-                $title = e('New subtask on task #%d', $event_data['subtask']['task_id']);
-                break;
+                return e('New subtask on task #%d', $event_data['subtask']['task_id']);
             case Subtask::EVENT_UPDATE:
-                $title = e('Subtask updated on task #%d', $event_data['subtask']['task_id']);
-                break;
+                return e('Subtask updated on task #%d', $event_data['subtask']['task_id']);
             case Task::EVENT_CREATE:
-                $title = e('New task #%d: %s', $event_data['task']['id'], $event_data['task']['title']);
-                break;
+                return e('New task #%d: %s', $event_data['task']['id'], $event_data['task']['title']);
             case Task::EVENT_UPDATE:
-                $title = e('Task updated #%d', $event_data['task']['id']);
-                break;
+                return e('Task updated #%d', $event_data['task']['id']);
             case Task::EVENT_CLOSE:
-                $title = e('Task #%d closed', $event_data['task']['id']);
-                break;
+                return e('Task #%d closed', $event_data['task']['id']);
             case Task::EVENT_OPEN:
-                $title = e('Task #%d opened', $event_data['task']['id']);
-                break;
+                return e('Task #%d opened', $event_data['task']['id']);
             case Task::EVENT_MOVE_COLUMN:
-                $title = e('Column changed for task #%d', $event_data['task']['id']);
-                break;
+                return e('Column changed for task #%d', $event_data['task']['id']);
             case Task::EVENT_MOVE_POSITION:
-                $title = e('New position for task #%d', $event_data['task']['id']);
-                break;
+                return e('New position for task #%d', $event_data['task']['id']);
             case Task::EVENT_MOVE_SWIMLANE:
-                $title = e('Swimlane changed for task #%d', $event_data['task']['id']);
-                break;
+                return e('Swimlane changed for task #%d', $event_data['task']['id']);
             case Task::EVENT_ASSIGNEE_CHANGE:
-                $title = e('Assignee changed on task #%d', $event_data['task']['id']);
-                break;
+                return e('Assignee changed on task #%d', $event_data['task']['id']);
             case Task::EVENT_OVERDUE:
                 $nb = count($event_data['tasks']);
-                $title = $nb > 1 ? e('%d overdue tasks', $nb) : e('Task #%d is overdue', $event_data['tasks'][0]['id']);
-                break;
+                return $nb > 1 ? e('%d overdue tasks', $nb) : e('Task #%d is overdue', $event_data['tasks'][0]['id']);
+            case Task::EVENT_USER_MENTION:
+                return e('You were mentioned in the task #%d', $event_data['task']['id']);
+            case Comment::EVENT_USER_MENTION:
+                return e('You were mentioned in a comment on the task #%d', $event_data['task']['id']);
             default:
-                $title = e('Notification');
+                return e('Notification');
         }
-
-        return $title;
     }
 }

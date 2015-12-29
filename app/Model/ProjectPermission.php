@@ -86,9 +86,22 @@ class ProjectPermission extends Base
      * @param  integer  $user_id
      * @return boolean
      */
-    public function isMember($project_id, $user_id)
+    public function isAssignable($project_id, $user_id)
     {
         return in_array($this->projectUserRole->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER));
+    }
+
+    /**
+     * Return true if the user is member
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  integer  $user_id
+     * @return boolean
+     */
+    public function isMember($project_id, $user_id)
+    {
+        return in_array($this->projectUserRole->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER, Role::PROJECT_VIEWER));
     }
 
     /**

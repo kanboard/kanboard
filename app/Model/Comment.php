@@ -26,8 +26,9 @@ class Comment extends Base
      *
      * @var string
      */
-    const EVENT_UPDATE = 'comment.update';
-    const EVENT_CREATE = 'comment.create';
+    const EVENT_UPDATE       = 'comment.update';
+    const EVENT_CREATE       = 'comment.create';
+    const EVENT_USER_MENTION = 'comment.user.mention';
 
     /**
      * Get all comments for a given task
@@ -110,7 +111,9 @@ class Comment extends Base
         $comment_id = $this->persist(self::TABLE, $values);
 
         if ($comment_id) {
-            $this->container['dispatcher']->dispatch(self::EVENT_CREATE, new CommentEvent(array('id' => $comment_id) + $values));
+            $event = new CommentEvent(array('id' => $comment_id) + $values);
+            $this->dispatcher->dispatch(self::EVENT_CREATE, $event);
+            $this->userMention->fireEvents($values['comment'], self::EVENT_USER_MENTION, $event);
         }
 
         return $comment_id;

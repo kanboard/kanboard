@@ -128,6 +128,43 @@ class ProjectPermissionTest extends Base
         $this->assertFalse($projectPermission->isUserAllowed(2, 5));
     }
 
+    public function testIsAssignable()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user 3')));
+        $this->assertEquals(5, $userModel->create(array('username' => 'user 4')));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
+
+        $this->assertEquals(1, $groupModel->create('Group A'));
+
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_VIEWER));
+
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 4, Role::PROJECT_MANAGER));
+
+        $this->assertFalse($projectPermission->isAssignable(1, 2));
+        $this->assertTrue($projectPermission->isAssignable(1, 3));
+        $this->assertTrue($projectPermission->isAssignable(1, 4));
+        $this->assertFalse($projectPermission->isAssignable(1, 5));
+
+        $this->assertFalse($projectPermission->isAssignable(2, 2));
+        $this->assertFalse($projectPermission->isAssignable(2, 3));
+        $this->assertFalse($projectPermission->isAssignable(2, 4));
+        $this->assertFalse($projectPermission->isAssignable(2, 5));
+    }
+
     public function testIsMember()
     {
         $userModel = new User($this->container);
@@ -154,7 +191,7 @@ class ProjectPermissionTest extends Base
         $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
         $this->assertTrue($userRoleModel->addUser(1, 4, Role::PROJECT_MANAGER));
 
-        $this->assertFalse($projectPermission->isMember(1, 2));
+        $this->assertTrue($projectPermission->isMember(1, 2));
         $this->assertTrue($projectPermission->isMember(1, 3));
         $this->assertTrue($projectPermission->isMember(1, 4));
         $this->assertFalse($projectPermission->isMember(1, 5));

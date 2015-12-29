@@ -427,7 +427,7 @@ class Action extends Base
                 return $this->board->getColumnIdByTitle($project_id, $column['title']) ?: false;
             case 'user_id':
             case 'owner_id':
-                return $this->projectPermission->isMember($project_id, $param['value']) ? $param['value'] : false;
+                return $this->projectPermission->isAssignable($project_id, $param['value']) ? $param['value'] : false;
             default:
                 return $param['value'];
         }

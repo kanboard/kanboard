@@ -71,7 +71,7 @@ class Task extends Base
     {
         $this->checkProjectPermission($project_id);
 
-        if ($owner_id !== 0 && ! $this->projectPermission->isMember($project_id, $owner_id)) {
+        if ($owner_id !== 0 && ! $this->projectPermission->isAssignable($project_id, $owner_id)) {
             return false;
         }
 
@@ -117,7 +117,7 @@ class Task extends Base
             return false;
         }
 
-        if ($owner_id !== null && ! $this->projectPermission->isMember($project_id, $owner_id)) {
+        if ($owner_id !== null && ! $this->projectPermission->isAssignable($project_id, $owner_id)) {
             return false;
         }
 

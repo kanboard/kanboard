@@ -273,7 +273,7 @@ class GitlabWebhook extends \Kanboard\Core\Base
         if (! empty($task)) {
             $user = $this->user->getByUsername($payload['user']['username']);
 
-            if (! empty($user) && ! $this->projectPermission->isMember($this->project_id, $user['id'])) {
+            if (! empty($user) && ! $this->projectPermission->isAssignable($this->project_id, $user['id'])) {
                 $user = array();
             }
 

@@ -67,6 +67,7 @@ class ClassProvider implements ServiceProviderInterface
             'User',
             'UserImport',
             'UserLocking',
+            'UserMention',
             'UserNotification',
             'UserNotificationFilter',
             'UserUnreadNotification',
