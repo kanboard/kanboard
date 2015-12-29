@@ -876,6 +876,7 @@ return array(
     'Average cycle time: ' => 'Tiempo Medio de Ciclo: ',
     'Cycle Time' => 'Tiempo de Ciclo',
     'Lead Time' => 'Plazo de Entrega',
+	'Compare hours' => 'Comparar Tiempo estimado vs Tiempo real',
     'This chart show the average lead and cycle time for the last %d tasks over the time.' => 'Esta gráfica muestra el plazo medio de entrega y de ciclo para las %d últimas tareas transcurridas.',
     'Average time into each column' => 'Tiempo medio en cada columna',
     'Lead and cycle time' => 'Plazo de entrega y de ciclo',
