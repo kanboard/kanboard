@@ -20,7 +20,7 @@
             <?= $this->url->link(t('Lead and cycle time'), 'analytic', 'leadAndCycleTime', array('project_id' => $project['id'])) ?>
         </li>
         <li <?= $this->app->checkMenuSelection('analytic', 'compareHours') ?>>
-            <?= $this->url->link(t('Compare hours'), 'analytic', 'compareHours', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('Estimated vs actual time'), 'analytic', 'compareHours', array('project_id' => $project['id'])) ?>
         </li>
     </ul>
     <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
