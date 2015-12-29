@@ -106,6 +106,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('Taskmodification', '*', Role::PROJECT_MEMBER);
         $acl->add('Taskstatus', '*', Role::PROJECT_MEMBER);
         $acl->add('Timer', '*', Role::PROJECT_MEMBER);
+        $acl->add('UserHelper', array('mention'), Role::PROJECT_MEMBER);
 
         return $acl;
     }

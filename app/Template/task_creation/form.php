@@ -22,7 +22,16 @@
 
         <div class="form-tabs">
             <div class="write-area">
-                <?= $this->form->textarea('description', $values, $errors, array('placeholder="'.t('Leave a description').'"', 'tabindex="2"')) ?>
+                <?= $this->form->textarea(
+                    'description',
+                    $values,
+                    $errors,
+                    array(
+                        'placeholder="'.t('Leave a description').'"',
+                        'tabindex="2"',
+                        'data-mention-search-url="'.$this->url->href('UserHelper', 'mention', array('project_id' => $values['project_id'])).'"'
+                    )
+                ) ?>
             </div>
             <div class="preview-area">
                 <div class="markdown"></div>

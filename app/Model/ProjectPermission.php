@@ -44,6 +44,25 @@ class ProjectPermission extends Base
     }
 
     /**
+     * Get all usernames (fetch users from groups)
+     *
+     * @access public
+     * @param  integer $project_id
+     * @param  string  $input
+     * @return array
+     */
+    public function findUsernames($project_id, $input)
+    {
+        $userMembers = $this->projectUserRoleFilter->create()->filterByProjectId($project_id)->startWithUsername($input)->findAll('username');
+        $groupMembers = $this->projectGroupRoleFilter->create()->filterByProjectId($project_id)->startWithUsername($input)->findAll('username');
+        $members = array_unique(array_merge($userMembers, $groupMembers));
+
+        sort($members);
+
+        return $members;
+    }
+
+    /**
      * Return true if everybody is allowed for the project
      *
      * @access public

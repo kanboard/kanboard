@@ -3,6 +3,7 @@ Version 1.0.23 (unreleased)
 
 New features:
 
+- Added support of user mentions (@username)
 - Added report to compare working hours between open and closed tasks
 - Added the possiblity to define custom routes from plugins
 

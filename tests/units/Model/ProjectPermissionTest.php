@@ -13,6 +13,33 @@ use Kanboard\Core\Security\Role;
 
 class ProjectPermissionTest extends Base
 {
+    public function testFindByUsernames()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermissionModel = new ProjectPermission($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
+
+        $this->assertEquals(1, $groupModel->create('Group A'));
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MANAGER));
+
+        $this->assertEquals(array('user1', 'user2'), $projectPermissionModel->findUsernames(1, 'us'));
+        $this->assertEmpty($projectPermissionModel->findUsernames(1, 'a'));
+        $this->assertEmpty($projectPermissionModel->findUsernames(2, 'user'));
+    }
+
     public function testGetQueryByRole()
     {
         $userModel = new User($this->container);
