@@ -123,7 +123,7 @@ class TaskPosition extends Base
         return $this->db->table(Task::TABLE)
             ->eq('id', $task_id)
             ->eq('is_active', 1)
-            ->update(array('position' => $position, 'column_id' => $column_id, 'swimlane_id' => $swimlane_id));
+            ->update(array('position' => $position, 'column_id' => $column_id, 'swimlane_id' => $swimlane_id, 'date_modification' => time()));
     }
 
     /**
