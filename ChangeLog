@@ -6,6 +6,7 @@ New features:
 - Added support of user mentions (@username)
 - Added report to compare working hours between open and closed tasks
 - Added the possiblity to define custom routes from plugins
+- Added new method to remove metadata
 
 Improvements:
 

@@ -30,6 +30,11 @@ class ProjectMetadataTest extends Base
 
         $this->assertEquals(array('key1' => 'value2'), $pm->getAll(1));
         $this->assertEquals(array('key1' => 'value1', 'key2' => 'value2'), $pm->getAll(2));
+
+        $this->assertTrue($pm->remove(2, 'key1'));
+        $this->assertFalse($pm->remove(2, 'key1'));
+
+        $this->assertEquals(array('key2' => 'value2'), $pm->getAll(2));
     }
 
     public function testAutomaticRemove()
