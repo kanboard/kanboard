@@ -180,7 +180,7 @@ Board.prototype.columnScrolling = function() {
             });
         }
         else {
-            var height = $(window).height() - 145;
+            var height = $(window).height() - 170;
 
             $(".board-task-list").css("height", height);
             $(".board-rotation-wrapper").css("min-height", height);

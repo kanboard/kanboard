@@ -10,6 +10,7 @@ New features:
 Improvements:
 
 - Improving performance during task position change (SQL queries are 3 times faster than before)
+- Do not show window scrollbars when individual column scrolling is enabled
 
 Bug fixes:
 
