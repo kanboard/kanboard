@@ -95,4 +95,27 @@ abstract class Metadata extends Base
 
         return ! in_array(false, $results, true);
     }
+
+    /**
+     * Remove a metadata
+     *
+     * @access public
+     * @param  integer $entity_id
+	 * @param  string  $name
+     * @return bool
+     */
+    public function remove($entity_id, $name)
+    {
+
+	$this->db->startTransaction();
+
+        if (! $this->db->table(static::TABLE)->eq($this->getEntityKey(), $entity_id)->eq('name', $name)->remove()) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+
+        $this->db->closeTransaction();
+
+        return true;
+    }
 }
