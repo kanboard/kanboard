@@ -9,10 +9,11 @@ New features:
 
 Improvements:
 
-- Improving performance during task position change (3 times faster than before)
+- Improving performance during task position change (SQL queries are 3 times faster than before)
 
 Bug fixes:
 
+- Fix compatiblity issue with FreeBSD for session.hash_function parameter
 - Fix wrong constant name that cause a PHP error in project management section
 - Fix pagination in group members listing
 - Avoid PHP error when enabling LDAP group provider with PHP < 5.5
