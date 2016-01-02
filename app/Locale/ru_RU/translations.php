@@ -1099,7 +1099,7 @@ return array(
     'Enter group name...' => 'Введите имя группы...',
     'Role:' => 'Роль:',
     'Project members' => 'Участники проекта',
-	'Compare hours for "%s"' => 'Сравнить часы для "%s"',
+    'Compare hours for "%s"' => 'Сравнить часы для "%s"',
     '%s mentioned you in the task #%d' => '%s упомянул вас в задаче #%d',
     '%s mentioned you in a comment on the task #%d' => '%s упомянул вас в комментарии к задаче #%d',
     'You were mentioned in the task #%d' => 'Вы упомянуты в задаче #%d',
