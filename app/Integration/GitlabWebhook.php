@@ -144,7 +144,7 @@ class GitlabWebhook extends \Kanboard\Core\Base
                 'task_id' => $task_id,
                 'commit_message' => $commit['message'],
                 'commit_url' => $commit['url'],
-                'commit_comment' => $commit['message']."\n\n[".t('Commit made by @%s on Gitlab', $commit['author']['name']).']('.$commit['url'].')'
+                'comment' => $commit['message']."\n\n[".t('Commit made by @%s on Gitlab', $commit['author']['name']).']('.$commit['url'].')'
             ) + $task)
         );
 

@@ -165,7 +165,7 @@ class ProjectDuplicationTest extends Base
         $this->assertNotEmpty($actions);
         $this->assertEquals('TaskAssignCurrentUser', $actions[0]['action_name']);
         $this->assertNotEmpty($actions[0]['params']);
-        $this->assertEquals(6, $actions[0]['params'][0]['value']);
+        $this->assertEquals(6, $actions[0]['params']['column_id']);
     }
 
     public function testCloneProjectWithActionTaskAssignColorCategory()
@@ -195,8 +195,8 @@ class ProjectDuplicationTest extends Base
         $this->assertNotEmpty($actions);
         $this->assertEquals('TaskAssignColorCategory', $actions[0]['action_name']);
         $this->assertNotEmpty($actions[0]['params']);
-        $this->assertEquals('blue', $actions[0]['params'][0]['value']);
-        $this->assertEquals(5, $actions[0]['params'][1]['value']);
+        $this->assertEquals('blue', $actions[0]['params']['color_id']);
+        $this->assertEquals(5, $actions[0]['params']['category_id']);
     }
 
     public function testCloneProjectWithSwimlanesAndTasks()

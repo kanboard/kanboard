@@ -3,7 +3,6 @@
 namespace Kanboard\Action;
 
 use Kanboard\Event\GenericEvent;
-use Pimple\Container;
 
 /**
  * Base class for automatic actions
@@ -13,6 +12,14 @@ use Pimple\Container;
  */
 abstract class Base extends \Kanboard\Core\Base
 {
+    /**
+     * Extended events
+     *
+     * @access private
+     * @var array
+     */
+    private $compatibleEvents = array();
+
     /**
      * Flag for called listener
      *
@@ -27,7 +34,7 @@ abstract class Base extends \Kanboard\Core\Base
      * @access private
      * @var integer
      */
-    private $project_id = 0;
+    private $projectId = 0;
 
     /**
      * User parameters
@@ -38,20 +45,25 @@ abstract class Base extends \Kanboard\Core\Base
     private $params = array();
 
     /**
-     * Attached event name
+     * Get automatic action name
      *
-     * @access protected
-     * @var string
+     * @final
+     * @access public
+     * @return string
      */
-    protected $event_name = '';
+    final public function getName()
+    {
+        return '\\'.get_called_class();
+    }
 
     /**
-     * Container instance
+     * Get automatic action description
      *
-     * @access protected
-     * @var \Pimple\Container
+     * @abstract
+     * @access public
+     * @return string
      */
-    protected $container;
+    abstract public function getDescription();
 
     /**
      * Execute the action
@@ -100,22 +112,6 @@ abstract class Base extends \Kanboard\Core\Base
     abstract public function hasRequiredCondition(array $data);
 
     /**
-     * Constructor
-     *
-     * @access public
-     * @param  \Pimple\Container   $container        Container
-     * @param  integer             $project_id       Project id
-     * @param  string              $event_name       Attached event name
-     */
-    public function __construct(Container $container, $project_id, $event_name)
-    {
-        $this->container = $container;
-        $this->project_id = $project_id;
-        $this->event_name = $event_name;
-        $this->called = false;
-    }
-
-    /**
      * Return class information
      *
      * @access public
@@ -123,7 +119,19 @@ abstract class Base extends \Kanboard\Core\Base
      */
     public function __toString()
     {
-        return get_called_class();
+        return $this->getName();
+    }
+
+    /**
+     * Set project id
+     *
+     * @access public
+     * @return Base
+     */
+    public function setProjectId($project_id)
+    {
+        $this->projectId = $project_id;
+        return $this;
     }
 
     /**
@@ -134,7 +142,7 @@ abstract class Base extends \Kanboard\Core\Base
      */
     public function getProjectId()
     {
-        return $this->project_id;
+        return $this->projectId;
     }
 
     /**
@@ -143,10 +151,12 @@ abstract class Base extends \Kanboard\Core\Base
      * @access public
      * @param  string  $name    Parameter name
      * @param  mixed   $value   Value
+     * @param  Base
      */
     public function setParam($name, $value)
     {
         $this->params[$name] = $value;
+        return $this;
     }
 
     /**
@@ -154,24 +164,25 @@ abstract class Base extends \Kanboard\Core\Base
      *
      * @access public
      * @param  string  $name            Parameter name
-     * @param  mixed   $default_value   Default value
+     * @param  mixed   $default         Default value
      * @return mixed
      */
-    public function getParam($name, $default_value = null)
+    public function getParam($name, $default = null)
     {
-        return isset($this->params[$name]) ? $this->params[$name] : $default_value;
+        return isset($this->params[$name]) ? $this->params[$name] : $default;
     }
 
     /**
      * Check if an action is executable (right project and required parameters)
      *
      * @access public
-     * @param  array   $data   Event data dictionary
-     * @return bool            True if the action is executable
+     * @param  array   $data
+     * @param  string  $eventName
+     * @return bool
      */
-    public function isExecutable(array $data)
+    public function isExecutable(array $data, $eventName)
     {
-        return $this->hasCompatibleEvent() &&
+        return $this->hasCompatibleEvent($eventName) &&
                $this->hasRequiredProject($data) &&
                $this->hasRequiredParameters($data) &&
                $this->hasRequiredCondition($data);
@@ -181,11 +192,12 @@ abstract class Base extends \Kanboard\Core\Base
      * Check if the event is compatible with the action
      *
      * @access public
+     * @param  string  $eventName
      * @return bool
      */
-    public function hasCompatibleEvent()
+    public function hasCompatibleEvent($eventName)
     {
-        return in_array($this->event_name, $this->getCompatibleEvents());
+        return in_array($eventName, $this->getEvents());
     }
 
     /**
@@ -197,7 +209,7 @@ abstract class Base extends \Kanboard\Core\Base
      */
     public function hasRequiredProject(array $data)
     {
-        return isset($data['project_id']) && $data['project_id'] == $this->project_id;
+        return isset($data['project_id']) && $data['project_id'] == $this->getProjectId();
     }
 
     /**
@@ -222,10 +234,11 @@ abstract class Base extends \Kanboard\Core\Base
      * Execute the action
      *
      * @access public
-     * @param  \Event\GenericEvent   $event   Event data dictionary
-     * @return bool                           True if the action was executed or false when not executed
+     * @param  \Kanboard\Event\GenericEvent   $event
+     * @param  string                         $eventName
+     * @return bool
      */
-    public function execute(GenericEvent $event)
+    public function execute(GenericEvent $event, $eventName)
     {
         // Avoid infinite loop, a listener instance can be called only one time
         if ($this->called) {
@@ -235,15 +248,38 @@ abstract class Base extends \Kanboard\Core\Base
         $data = $event->getAll();
         $result = false;
 
-        if ($this->isExecutable($data)) {
+        if ($this->isExecutable($data, $eventName)) {
             $this->called = true;
             $result = $this->doAction($data);
         }
 
-        if (DEBUG) {
-            $this->logger->debug(get_called_class().' => '.($result ? 'true' : 'false'));
-        }
+        $this->logger->debug('AutomaticAction '.$this->getName().' => '.($result ? 'true' : 'false'));
 
         return $result;
+    }
+
+    /**
+     * Register a new event for the automatic action
+     *
+     * @access public
+     * @param  string $event
+     * @param  string $description
+     */
+    public function addEvent($event, $description)
+    {
+        $this->eventManager->register($event, $description);
+        $this->compatibleEvents[] = $event;
+        return $this;
+    }
+
+    /**
+     * Get all compatible events of an automatic action
+     *
+     * @access public
+     * @return array
+     */
+    public function getEvents()
+    {
+        return array_unique(array_merge($this->getCompatibleEvents(), $this->compatibleEvents));
     }
 }

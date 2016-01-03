@@ -875,7 +875,7 @@ class Api extends PHPUnit_Framework_TestCase
         $actions = $this->client->getAvailableActions();
         $this->assertNotEmpty($actions);
         $this->assertInternalType('array', $actions);
-        $this->assertArrayHasKey('TaskLogMoveAnotherColumn', $actions);
+        $this->assertArrayHasKey('\Kanboard\Action\TaskClose', $actions);
     }
 
     public function testGetAvailableActionEvents()
@@ -888,7 +888,7 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testGetCompatibleActionEvents()
     {
-        $events = $this->client->getCompatibleActionEvents('TaskClose');
+        $events = $this->client->getCompatibleActionEvents('\Kanboard\Action\TaskCloseColumn');
         $this->assertNotEmpty($events);
         $this->assertInternalType('array', $events);
         $this->assertArrayHasKey('task.move.column', $events);
@@ -896,7 +896,7 @@ class Api extends PHPUnit_Framework_TestCase
 
     public function testCreateAction()
     {
-        $action_id = $this->client->createAction(1, 'task.move.column', 'TaskClose', array('column_id' => 1));
+        $action_id = $this->client->createAction(1, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => 1));
         $this->assertNotFalse($action_id);
         $this->assertEquals(1, $action_id);
     }

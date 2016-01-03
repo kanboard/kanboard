@@ -15,6 +15,17 @@ use Kanboard\Integration\GitlabWebhook;
 class CommentCreation extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Create a comment from an external provider');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -67,9 +78,9 @@ class CommentCreation extends Base
     {
         return (bool) $this->comment->create(array(
             'reference' => isset($data['reference']) ? $data['reference'] : '',
-            'comment' => empty($data['comment']) ? $data['commit_comment'] : $data['comment'],
+            'comment' => $data['comment'],
             'task_id' => $data['task_id'],
-            'user_id' => empty($data['user_id']) ? 0 : $data['user_id'],
+            'user_id' => isset($data['user_id']) && $this->projectPermission->isAssignable($this->getProjectId(), $data['user_id']) ? $data['user_id'] : 0,
         ));
     }
 
@@ -82,6 +93,6 @@ class CommentCreation extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return ! empty($data['comment']) || ! empty($data['commit_comment']);
+        return ! empty($data['comment']);
     }
 }

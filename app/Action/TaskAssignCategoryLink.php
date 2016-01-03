@@ -14,6 +14,17 @@ use Kanboard\Model\TaskLink;
 class TaskAssignCategoryLink extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Assign automatically a category based on a link');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -65,7 +76,7 @@ class TaskAssignCategoryLink extends Base
     {
         $values = array(
             'id' => $data['task_id'],
-            'category_id' => isset($data['category_id']) ? $data['category_id'] : $this->getParam('category_id'),
+            'category_id' => $this->getParam('category_id'),
         );
 
         return $this->taskModification->update($values);

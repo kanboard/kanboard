@@ -17,6 +17,7 @@ class ClassProvider implements ServiceProviderInterface
     private $classes = array(
         'Model' => array(
             'Action',
+            'ActionParameter',
             'Authentication',
             'Board',
             'Category',
@@ -89,6 +90,9 @@ class ClassProvider implements ServiceProviderInterface
             'Helper',
             'Lexer',
             'Template',
+        ),
+        'Core\Event' => array(
+            'EventManager',
         ),
         'Core\Http' => array(
             'Request',

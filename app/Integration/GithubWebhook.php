@@ -98,7 +98,7 @@ class GithubWebhook extends \Kanboard\Core\Base
                     'task_id' => $task_id,
                     'commit_message' => $commit['message'],
                     'commit_url' => $commit['url'],
-                    'commit_comment' => $commit['message']."\n\n[".t('Commit made by @%s on Github', $commit['author']['username']).']('.$commit['url'].')'
+                    'comment' => $commit['message']."\n\n[".t('Commit made by @%s on Github', $commit['author']['username']).']('.$commit['url'].')'
                 ) + $task)
             );
         }

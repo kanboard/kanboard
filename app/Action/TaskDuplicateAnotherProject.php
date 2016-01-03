@@ -13,6 +13,17 @@ use Kanboard\Model\Task;
 class TaskDuplicateAnotherProject extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Duplicate the task to another project');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -51,7 +62,6 @@ class TaskDuplicateAnotherProject extends Base
         return array(
             'task_id',
             'column_id',
-            'project_id',
         );
     }
 
@@ -65,7 +75,6 @@ class TaskDuplicateAnotherProject extends Base
     public function doAction(array $data)
     {
         $destination_column_id = $this->board->getFirstColumn($this->getParam('project_id'));
-
         return (bool) $this->taskDuplication->duplicateToProject($data['task_id'], $this->getParam('project_id'), null, $destination_column_id);
     }
 

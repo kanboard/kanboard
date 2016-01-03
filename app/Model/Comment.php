@@ -75,6 +75,7 @@ class Comment extends Base
                 self::TABLE.'.user_id',
                 self::TABLE.'.date_creation',
                 self::TABLE.'.comment',
+                self::TABLE.'.reference',
                 User::TABLE.'.username',
                 User::TABLE.'.name'
             )

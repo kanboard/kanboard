@@ -20,7 +20,8 @@ class TaskAssignCategoryLinkTest extends Base
         $p = new Project($this->container);
         $c = new Category($this->container);
 
-        $action = new TaskAssignCategoryLink($this->container, 1, TaskLink::EVENT_CREATE_UPDATE);
+        $action = new TaskAssignCategoryLink($this->container);
+        $action->setProjectId(1);
         $action->setParam('category_id', 1);
         $action->setParam('link_id', 2);
 
@@ -28,30 +29,28 @@ class TaskAssignCategoryLinkTest extends Base
         $this->assertEquals(1, $c->create(array('name' => 'C1', 'project_id' => 1)));
         $this->assertEquals(1, $tc->create(array('title' => 'T1', 'project_id' => 1)));
 
-        $task = $tf->getById(1);
-        $this->assertEquals(0, $task['category_id']);
-
-        $event = array(
+        $event = new TaskLinkEvent(array(
             'project_id' => 1,
             'task_id' => 1,
             'opposite_task_id' => 2,
             'link_id' => 2,
-        );
+        ));
 
-        $this->assertTrue($action->execute(new TaskLinkEvent($event)));
+        $this->assertTrue($action->execute($event, TaskLink::EVENT_CREATE_UPDATE));
 
         $task = $tf->getById(1);
         $this->assertEquals(1, $task['category_id']);
     }
 
-    public function testThatLinkDontMatch()
+    public function testWhenLinkDontMatch()
     {
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
 
-        $action = new TaskAssignCategoryLink($this->container, 1, TaskLink::EVENT_CREATE_UPDATE);
+        $action = new TaskAssignCategoryLink($this->container);
+        $action->setProjectId(1);
         $action->setParam('category_id', 1);
         $action->setParam('link_id', 1);
 
@@ -59,14 +58,14 @@ class TaskAssignCategoryLinkTest extends Base
         $this->assertEquals(1, $c->create(array('name' => 'C1', 'project_id' => 1)));
         $this->assertEquals(1, $tc->create(array('title' => 'T1', 'project_id' => 1)));
 
-        $event = array(
+        $event = new TaskLinkEvent(array(
             'project_id' => 1,
             'task_id' => 1,
             'opposite_task_id' => 2,
             'link_id' => 2,
-        );
+        ));
 
-        $this->assertFalse($action->execute(new TaskLinkEvent($event)));
+        $this->assertFalse($action->execute($event, TaskLink::EVENT_CREATE_UPDATE));
     }
 
     public function testThatExistingCategoryWillNotChange()
@@ -76,7 +75,8 @@ class TaskAssignCategoryLinkTest extends Base
         $p = new Project($this->container);
         $c = new Category($this->container);
 
-        $action = new TaskAssignCategoryLink($this->container, 1, TaskLink::EVENT_CREATE_UPDATE);
+        $action = new TaskAssignCategoryLink($this->container);
+        $action->setProjectId(1);
         $action->setParam('category_id', 2);
         $action->setParam('link_id', 2);
 
@@ -85,13 +85,13 @@ class TaskAssignCategoryLinkTest extends Base
         $this->assertEquals(2, $c->create(array('name' => 'C2', 'project_id' => 1)));
         $this->assertEquals(1, $tc->create(array('title' => 'T1', 'project_id' => 1, 'category_id' => 1)));
 
-        $event = array(
+        $event = new TaskLinkEvent(array(
             'project_id' => 1,
             'task_id' => 1,
             'opposite_task_id' => 2,
             'link_id' => 2,
-        );
+        ));
 
-        $this->assertFalse($action->execute(new TaskLinkEvent($event)));
+        $this->assertFalse($action->execute($event, TaskLink::EVENT_CREATE_UPDATE));
     }
 }

@@ -13,6 +13,17 @@ use Kanboard\Model\Task;
 class TaskAssignColorColumn extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Assign a color when the task is moved to a specific column');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public

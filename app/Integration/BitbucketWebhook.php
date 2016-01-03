@@ -303,7 +303,7 @@ class BitbucketWebhook extends \Kanboard\Core\Base
                 'task_id' => $task_id,
                 'commit_message' => $commit['message'],
                 'commit_url' => $commit['links']['html']['href'],
-                'commit_comment' => $commit['message']."\n\n[".t('Commit made by @%s on Bitbucket', $actor['display_name']).']('.$commit['links']['html']['href'].')',
+                'comment' => $commit['message']."\n\n[".t('Commit made by @%s on Bitbucket', $actor['display_name']).']('.$commit['links']['html']['href'].')',
             ) + $task)
         );
 

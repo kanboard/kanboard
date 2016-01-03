@@ -221,7 +221,7 @@ class GitlabWebhookTest extends Base
         $this->assertEquals(1, $data['project_id']);
         $this->assertEquals(2, $data['task_id']);
         $this->assertEquals('test2', $data['title']);
-        $this->assertEquals("Fix bug #2\n\n[Commit made by @Fred on Gitlab](https://gitlab.com/minicoders/test-webhook/commit/48aafa75eef9ad253aa254b0c82c987a52ebea78)", $data['commit_comment']);
+        $this->assertEquals("Fix bug #2\n\n[Commit made by @Fred on Gitlab](https://gitlab.com/minicoders/test-webhook/commit/48aafa75eef9ad253aa254b0c82c987a52ebea78)", $data['comment']);
         $this->assertEquals("Fix bug #2", $data['commit_message']);
         $this->assertEquals('https://gitlab.com/minicoders/test-webhook/commit/48aafa75eef9ad253aa254b0c82c987a52ebea78', $data['commit_url']);
     }

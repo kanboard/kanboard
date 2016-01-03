@@ -15,6 +15,17 @@ use Kanboard\Integration\BitbucketWebhook;
 class TaskOpen extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Open a task');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public

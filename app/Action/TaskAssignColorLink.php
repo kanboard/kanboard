@@ -13,6 +13,17 @@ use Kanboard\Model\TaskLink;
 class TaskAssignColorLink extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Change task color when using a specific task link');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public

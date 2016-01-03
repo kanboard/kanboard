@@ -5,13 +5,24 @@ namespace Kanboard\Action;
 use Kanboard\Model\Task;
 
 /**
- * Add a log of the triggering event to the task description.
+ * Assign a task to the logged user on column change
  *
  * @package action
- * @author  Oren Ben-Kiki
+ * @author  Frederic Guillot
  */
-class TaskLogMoveAnotherColumn extends Base
+class TaskAssignCurrentUserColumn extends Base
 {
+    /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Assign the task to the person who does the action when the column is changed');
+    }
+
     /**
      * Get the list of compatible events
      *
@@ -33,7 +44,9 @@ class TaskLogMoveAnotherColumn extends Base
      */
     public function getActionRequiredParameters()
     {
-        return array('column_id' => t('Column'));
+        return array(
+            'column_id' => t('Column'),
+        );
     }
 
     /**
@@ -44,11 +57,14 @@ class TaskLogMoveAnotherColumn extends Base
      */
     public function getEventRequiredParameters()
     {
-        return array('task_id', 'column_id');
+        return array(
+            'task_id',
+            'column_id',
+        );
     }
 
     /**
-     * Execute the action (append to the task description).
+     * Execute the action
      *
      * @access public
      * @param  array   $data   Event data dictionary
@@ -60,13 +76,12 @@ class TaskLogMoveAnotherColumn extends Base
             return false;
         }
 
-        $column = $this->board->getColumn($data['column_id']);
+        $values = array(
+            'id' => $data['task_id'],
+            'owner_id' => $this->userSession->getId(),
+        );
 
-        return (bool) $this->comment->create(array(
-            'comment' => t('Moved to column %s', $column['title']),
-            'task_id' => $data['task_id'],
-            'user_id' => $this->userSession->getId(),
-        ));
+        return $this->taskModification->update($values);
     }
 
     /**

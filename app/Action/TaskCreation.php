@@ -15,6 +15,17 @@ use Kanboard\Integration\BitbucketWebhook;
 class TaskCreation extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Create a task from an external provider');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public

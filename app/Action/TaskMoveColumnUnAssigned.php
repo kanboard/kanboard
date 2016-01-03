@@ -13,6 +13,17 @@ use Kanboard\Model\Task;
 class TaskMoveColumnUnAssigned extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Move the task to another column when assignee is cleared');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -51,7 +62,6 @@ class TaskMoveColumnUnAssigned extends Base
         return array(
             'task_id',
             'column_id',
-            'project_id',
             'owner_id'
         );
     }
