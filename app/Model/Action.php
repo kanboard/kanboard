@@ -34,10 +34,8 @@ class Action extends Base
 
         if (! empty($project_ids)) {
             $actions = $this->db->table(self::TABLE)->in('project_id', $project_ids)->findAll();
-
-            foreach ($actions as &$action) {
-                $action['params'] = $this->actionParameter->getAll($action['id']);
-            }
+            $params = $this->actionParameter->getAllByActions(array_column($actions, 'id'));
+            $this->attachParamsToActions($actions, $params);
         }
 
         return $actions;
@@ -53,12 +51,8 @@ class Action extends Base
     public function getAllByProject($project_id)
     {
         $actions = $this->db->table(self::TABLE)->eq('project_id', $project_id)->findAll();
-
-        foreach ($actions as &$action) {
-            $action['params'] = $this->actionParameter->getAll($action['id']);
-        }
-
-        return $actions;
+        $params = $this->actionParameter->getAllByActions(array_column($actions, 'id'));
+        return $this->attachParamsToActions($actions, $params);
     }
 
     /**
@@ -70,12 +64,8 @@ class Action extends Base
     public function getAll()
     {
         $actions = $this->db->table(self::TABLE)->findAll();
-
-        foreach ($actions as &$action) {
-            $action['params'] = $this->actionParameter->getAll($action['id']);
-        }
-
-        return $actions;
+        $params = $this->actionParameter->getAll();
+        return $this->attachParamsToActions($actions, $params);
     }
 
     /**
@@ -90,10 +80,27 @@ class Action extends Base
         $action = $this->db->table(self::TABLE)->eq('id', $action_id)->findOne();
 
         if (! empty($action)) {
-            $action['params'] = $this->actionParameter->getAll($action_id);
+            $action['params'] = $this->actionParameter->getAllByAction($action_id);
         }
 
         return $action;
+    }
+
+    /**
+     * Attach parameters to actions
+     *
+     * @access private
+     * @param  array  &$actions
+     * @param  array  &$params
+     * @return array
+     */
+    private function attachParamsToActions(array &$actions, array &$params)
+    {
+        foreach ($actions as &$action) {
+            $action['params'] = isset($params[$action['id']]) ? $params[$action['id']] : array();
+        }
+
+        return $actions;
     }
 
     /**

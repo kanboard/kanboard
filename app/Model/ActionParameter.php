@@ -24,10 +24,53 @@ class ActionParameter extends Base
      * Get all action params
      *
      * @access public
+     * @return array
+     */
+    public function getAll()
+    {
+        $params = $this->db->table(self::TABLE)->findAll();
+        return $this->toDictionary($params);
+    }
+
+    /**
+     * Get all params for a list of actions
+     *
+     * @access public
+     * @param  array $action_ids
+     * @return array
+     */
+    public function getAllByActions(array $action_ids)
+    {
+        $params = $this->db->table(self::TABLE)->in('action_id', $action_ids)->findAll();
+        return $this->toDictionary($params);
+    }
+
+    /**
+     * Build params dictionary
+     *
+     * @access private
+     * @param  array  $params
+     * @return array
+     */
+    private function toDictionary(array $params)
+    {
+        $result = array();
+
+        foreach ($params as $param) {
+            $result[$param['action_id']][$param['name']] = $param['value'];
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get all action params for a given action
+     *
+     * @access public
      * @param  integer $action_id
      * @return array
      */
-    public function getAll($action_id)
+    public function getAllByAction($action_id)
     {
         return $this->db->hashtable(self::TABLE)->eq('action_id', $action_id)->getAll('name', 'value');
     }

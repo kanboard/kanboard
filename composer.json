@@ -26,6 +26,7 @@
         "fguillot/simple-validator" : "1.0.0",
         "league/html-to-markdown" : "~4.0",
         "pimple/pimple" : "~3.0",
+        "ramsey/array_column": "@stable",
         "swiftmailer/swiftmailer" : "~5.4",
         "symfony/console" : "~2.7",
         "symfony/event-dispatcher" : "~2.7",
