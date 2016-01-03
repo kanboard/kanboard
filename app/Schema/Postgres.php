@@ -6,7 +6,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 79;
+const VERSION = 80;
+
+function version_80(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "actions" ALTER COLUMN "action_name" TYPE VARCHAR(255)');
+}
 
 function version_79(PDO $pdo)
 {
