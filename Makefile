@@ -102,6 +102,9 @@ test-archive:
 	@ cd ${BUILD_DIR} && mv kanboard-${version}.zip ${dst}
 	@ rm -rf ${BUILD_DIR}/kanboard
 
+test-sqlite-coverage:
+	@ phpunit --coverage-html /tmp/coverage --whitelist app/ -c tests/units.sqlite.xml
+
 test-sqlite:
 	@ phpunit -c tests/units.sqlite.xml
 
