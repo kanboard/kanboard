@@ -1116,4 +1116,7 @@ return array(
     'Estimated Time' => 'Temps estimé',
     'Actual Time' => 'Temps actuel',
     'Estimated vs actual time' => 'Temps estimé vs actuel',
+    'RUB - Russian Ruble' => 'RUB - Rouble russe',
+    'Assign the task to the person who does the action when the column is changed' => 'Assigner la tâche à la personne qui fait l\'action lorsque la colonne est changée',
+    'Close a task in a specific column' => 'Fermer une tâche dans une colonne specifique',
 );
