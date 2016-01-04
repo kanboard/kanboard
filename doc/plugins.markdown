@@ -14,6 +14,7 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 - [Custom routes](plugin-routes.markdown)
 - [Add mail transports](plugin-mail-transports.markdown)
 - [Add notification types](plugin-notifications.markdown)
+- [Add automatic actions](plugin-automatic-actions.markdown)
 - [Attach metadata to users, tasks and projects](plugin-metadata.markdown)
 - [Authentication architecture](plugin-authentication-architecture.markdown)
 - [Authentication plugin registration](plugin-authentication.markdown)
