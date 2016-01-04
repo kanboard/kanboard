@@ -9,6 +9,7 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 
 - [Creating your plugin](plugin-registration.markdown)
 - [Using plugin hooks](plugin-hooks.markdown)
+- [Events](plugin-events.markdown)
 - [Override default application behaviors](plugin-overrides.markdown)
 - [Add schema migrations for plugins](plugin-schema-migrations.markdown)
 - [Custom routes](plugin-routes.markdown)

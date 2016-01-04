@@ -124,17 +124,3 @@ $this->container['hourlyRate']->getAll();
 ```
 
 Keys of the containers are unique across the application. If you override an existing class, you will change the default behavior.
-
-Event Listening
----------------
-
-Kanboard use internal events and your plugin can listen and perform actions on these events.
-
-```php
-$this->on('app.bootstrap', function($container) {
-    // Do something
-});
-```
-
-- The first argument is the event name
-- The second argument is a PHP callable function (closure or class method)
