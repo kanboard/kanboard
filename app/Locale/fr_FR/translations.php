@@ -475,7 +475,7 @@ return array(
     'This project is private' => 'Ce projet est privé',
     'Type here to create a new sub-task' => 'Créer une sous-tâche en écrivant le titre ici',
     'Add' => 'Ajouter',
-    'Estimated time: %s hours' => 'Temps estimé: %s hours',
+    'Estimated time: %s hours' => 'Temps estimé: %s heures',
     'Time spent: %s hours' => 'Temps passé : %s heures',
     'Started on %B %e, %Y' => 'Commençé le %d/%m/%Y',
     'Start date' => 'Date de début',
