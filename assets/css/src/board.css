@@ -16,6 +16,7 @@
 
 #board {
     table-layout: fixed;
+    margin-bottom: 0;
 }
 
 #board th.board-column-header {

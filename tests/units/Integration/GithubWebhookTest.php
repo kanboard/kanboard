@@ -453,7 +453,7 @@ class GithubWebhookTest extends Base
         $this->assertEquals(1, $data['project_id']);
         $this->assertEquals(1, $data['task_id']);
         $this->assertEquals('boo', $data['title']);
-        $this->assertEquals("Update README to fix #1\n\n[Commit made by @fguillot on Github](https://github.com/kanboardapp/webhook/commit/98dee3e49ee7aa66ffec1f761af93da5ffd711f6)", $data['commit_comment']);
+        $this->assertEquals("Update README to fix #1\n\n[Commit made by @fguillot on Github](https://github.com/kanboardapp/webhook/commit/98dee3e49ee7aa66ffec1f761af93da5ffd711f6)", $data['comment']);
         $this->assertEquals('Update README to fix #1', $data['commit_message']);
         $this->assertEquals('https://github.com/kanboardapp/webhook/commit/98dee3e49ee7aa66ffec1f761af93da5ffd711f6', $data['commit_url']);
     }

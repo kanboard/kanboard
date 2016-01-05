@@ -1,16 +1,32 @@
 Version 1.0.23 (unreleased)
 ---------------------------
 
+Breaking changes:
+
+* Plugin API changes for Automatic Actions
+* Automatic Action to close a task doesn't have the column parameter anymore (use the action "Close a task in a specific column")
+* Action name stored in the database is now the absolute class name
+
 New features:
 
-- Added report to compare working hours between open and closed tasks
-- Added the possiblity to define custom routes from plugins
+* Added support of user mentions (@username)
+* Added report to compare working hours between open and closed tasks
+* Added the possiblity to define custom routes from plugins
+* Added new method to remove metadata
+
+Improvements:
+
+* Improving performance during task position change (SQL queries are 3 times faster than before)
+* Do not show window scrollbars when individual column scrolling is enabled
+* Automatic Actions code improvements and unit tests
+* Increase action name column length in actions table
 
 Bug fixes:
 
-- Fix wrong constant name that cause a PHP error in project management section
-- Fix pagination in group members listing
-- Avoid PHP error when enabling LDAP group provider with PHP < 5.5
+* Fix compatiblity issue with FreeBSD for session.hash_function parameter
+* Fix wrong constant name that cause a PHP error in project management section
+* Fix pagination in group members listing
+* Avoid PHP error when enabling LDAP group provider with PHP < 5.5
 
 Version 1.0.22
 --------------

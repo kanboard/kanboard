@@ -2,72 +2,54 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Task;
+use Kanboard\Event\GenericEvent;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\Project;
-use Kanboard\Event\GenericEvent;
+use Kanboard\Model\Task;
 use Kanboard\Action\TaskAssignColorUser;
 
 class TaskAssignColorUserTest extends Base
 {
-    public function testBadProject()
+    public function testChangeColor()
     {
-        $action = new TaskAssignColorUser($this->container, 3, Task::EVENT_CREATE);
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
 
-        $event = array(
-            'project_id' => 2,
-            'task_id' => 3,
-            'column_id' => 5,
-        );
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-        $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute(new GenericEvent($event)));
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'owner_id' => 1));
+
+        $action = new TaskAssignColorUser($this->container);
+        $action->setProjectId(1);
+        $action->setParam('color_id', 'red');
+        $action->setParam('user_id', 1);
+
+        $this->assertTrue($action->execute($event, Task::EVENT_ASSIGNEE_CHANGE));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals('red', $task['color_id']);
     }
 
-    public function testExecute()
+    public function testWithWrongUser()
     {
-        $action = new TaskAssignColorUser($this->container, 1, Task::EVENT_ASSIGNEE_CHANGE);
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'owner_id' => 2));
+
+        $action = new TaskAssignColorUser($this->container);
+        $action->setProjectId(1);
+        $action->setParam('color_id', 'red');
         $action->setParam('user_id', 1);
-        $action->setParam('color_id', 'blue');
 
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1, 'color_id' => 'green')));
-
-        // We change the assignee
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'owner_id' => 5,
-        );
-
-        // Our event should NOT be executed
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-
-        // Our task should be assigned to nobody and have the green color
-        $task = $tf->getById(1);
-        $this->assertNotEmpty($task);
-        $this->assertEquals(0, $task['owner_id']);
-        $this->assertEquals('green', $task['color_id']);
-
-        // We change the assignee
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'owner_id' => 1,
-        );
-
-        // Our event should be executed
-        $this->assertTrue($action->execute(new GenericEvent($event)));
-
-        // Our task should be assigned to nobody and have the blue color
-        $task = $tf->getById(1);
-        $this->assertNotEmpty($task);
-        $this->assertEquals(0, $task['owner_id']);
-        $this->assertEquals('blue', $task['color_id']);
+        $this->assertFalse($action->execute($event, Task::EVENT_ASSIGNEE_CHANGE));
     }
 }

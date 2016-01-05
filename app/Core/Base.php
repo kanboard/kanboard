@@ -10,7 +10,9 @@ use Pimple\Container;
  * @package core
  * @author  Frederic Guillot
  *
+ * @property \Kanboard\Core\Action\ActionManager                        $actionManager
  * @property \Kanboard\Core\Cache\MemoryCache                           $memoryCache
+ * @property \Kanboard\Core\Event\EventManager                          $eventManager
  * @property \Kanboard\Core\Group\GroupManager                          $groupManager
  * @property \Kanboard\Core\Http\Client                                 $httpClient
  * @property \Kanboard\Core\Http\OAuth2                                 $oauth
@@ -54,6 +56,7 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\UserFilterAutoCompleteFormatter        $userFilterAutoCompleteFormatter
  * @property \Kanboard\Formatter\GroupAutoCompleteFormatter             $groupAutoCompleteFormatter
  * @property \Kanboard\Model\Action                                     $action
+ * @property \Kanboard\Model\ActionParameter                            $actionParameter
  * @property \Kanboard\Model\Authentication                             $authentication
  * @property \Kanboard\Model\Board                                      $board
  * @property \Kanboard\Model\Category                                   $category

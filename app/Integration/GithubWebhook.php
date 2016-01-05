@@ -98,7 +98,7 @@ class GithubWebhook extends \Kanboard\Core\Base
                     'task_id' => $task_id,
                     'commit_message' => $commit['message'],
                     'commit_url' => $commit['url'],
-                    'commit_comment' => $commit['message']."\n\n[".t('Commit made by @%s on Github', $commit['author']['username']).']('.$commit['url'].')'
+                    'comment' => $commit['message']."\n\n[".t('Commit made by @%s on Github', $commit['author']['username']).']('.$commit['url'].')'
                 ) + $task)
             );
         }
@@ -149,7 +149,7 @@ class GithubWebhook extends \Kanboard\Core\Base
         if (! empty($task)) {
             $user = $this->user->getByUsername($payload['comment']['user']['login']);
 
-            if (! empty($user) && ! $this->projectPermission->isMember($this->project_id, $user['id'])) {
+            if (! empty($user) && ! $this->projectPermission->isAssignable($this->project_id, $user['id'])) {
                 $user = array();
             }
 
@@ -266,7 +266,7 @@ class GithubWebhook extends \Kanboard\Core\Base
         $user = $this->user->getByUsername($issue['assignee']['login']);
         $task = $this->taskFinder->getByReference($this->project_id, $issue['number']);
 
-        if (! empty($user) && ! empty($task) && $this->projectPermission->isMember($this->project_id, $user['id'])) {
+        if (! empty($user) && ! empty($task) && $this->projectPermission->isAssignable($this->project_id, $user['id'])) {
             $event = array(
                 'project_id' => $this->project_id,
                 'task_id' => $task['id'],

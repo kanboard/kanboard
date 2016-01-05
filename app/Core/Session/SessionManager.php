@@ -100,7 +100,7 @@ class SessionManager extends Base
         ini_set('session.use_strict_mode', '1');
 
         // Better session hash
-        ini_set('session.hash_function', 'sha512');
+        ini_set('session.hash_function', '1'); // 'sha512' is not compatible with FreeBSD, only MD5 '0' and SHA-1 '1' seems to work
         ini_set('session.hash_bits_per_character', 6);
 
         // Set an additional entropy

@@ -3,73 +3,51 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\Project;
-use Kanboard\Core\User\UserSession;
+use Kanboard\Model\Task;
 use Kanboard\Action\TaskAssignCurrentUser;
 
 class TaskAssignCurrentUserTest extends Base
 {
-    public function testBadProject()
+    public function testChangeUser()
     {
-        $action = new TaskAssignCurrentUser($this->container, 3, Task::EVENT_CREATE);
-        $action->setParam('column_id', 5);
+        $this->container['sessionStorage']->user = array('id' => 1);
 
-        $event = array(
-            'project_id' => 2,
-            'task_id' => 3,
-            'column_id' => 5,
-        );
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
 
-        $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-    }
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-    public function testBadColumn()
-    {
-        $action = new TaskAssignCurrentUser($this->container, 3, Task::EVENT_CREATE);
-        $action->setParam('column_id', 5);
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1));
 
-        $event = array(
-            'project_id' => 3,
-            'task_id' => 3,
-            'column_id' => 3,
-        );
+        $action = new TaskAssignCurrentUser($this->container);
+        $action->setProjectId(1);
 
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-    }
+        $this->assertTrue($action->execute($event, Task::EVENT_CREATE));
 
-    public function testExecute()
-    {
-        $this->container['sessionStorage']->user = array('id' => 5);
-
-        $action = new TaskAssignCurrentUser($this->container, 1, Task::EVENT_MOVE_COLUMN);
-        $action->setParam('column_id', 2);
-
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'column_id' => 2,
-        );
-
-        // Our event should be executed
-        $this->assertTrue($action->execute(new GenericEvent($event)));
-
-        // Our task should be assigned to the user 5 (from the session)
-        $task = $tf->getById(1);
+        $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(1, $task['id']);
-        $this->assertEquals(5, $task['owner_id']);
+        $this->assertEquals(1, $task['owner_id']);
+    }
+
+    public function testWithNoUserSession()
+    {
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1));
+
+        $action = new TaskAssignCurrentUser($this->container);
+        $action->setProjectId(1);
+
+        $this->assertFalse($action->execute($event, Task::EVENT_CREATE));
     }
 }

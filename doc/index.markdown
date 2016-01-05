@@ -45,6 +45,7 @@ Using Kanboard
 - [Create tasks by email](create-tasks-by-email.markdown)
 - [Subtasks](subtasks.markdown)
 - [Analytics for tasks](analytics-tasks.markdown)
+- [User mentions](user-mentions.markdown)
 
 ### Working with users and groups
 

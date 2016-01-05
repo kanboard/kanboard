@@ -144,7 +144,7 @@ class GitlabWebhook extends \Kanboard\Core\Base
                 'task_id' => $task_id,
                 'commit_message' => $commit['message'],
                 'commit_url' => $commit['url'],
-                'commit_comment' => $commit['message']."\n\n[".t('Commit made by @%s on Gitlab', $commit['author']['name']).']('.$commit['url'].')'
+                'comment' => $commit['message']."\n\n[".t('Commit made by @%s on Gitlab', $commit['author']['name']).']('.$commit['url'].')'
             ) + $task)
         );
 
@@ -273,7 +273,7 @@ class GitlabWebhook extends \Kanboard\Core\Base
         if (! empty($task)) {
             $user = $this->user->getByUsername($payload['user']['username']);
 
-            if (! empty($user) && ! $this->projectPermission->isMember($this->project_id, $user['id'])) {
+            if (! empty($user) && ! $this->projectPermission->isAssignable($this->project_id, $user['id'])) {
                 $user = array();
             }
 

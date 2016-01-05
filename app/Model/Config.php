@@ -36,6 +36,7 @@ class Config extends Setting
             'SEK' => t('SEK - Swedish Krona'),
             'NOK' => t('NOK - Norwegian Krone'),
             'BAM' => t('BAM - Konvertible Mark'),
+            'RUB' => t('RUB - Russian Ruble'),
         );
     }
 

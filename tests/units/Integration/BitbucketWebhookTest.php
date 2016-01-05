@@ -319,7 +319,7 @@ class BitbucketWebhookTest extends Base
         $this->assertEquals(1, $data['project_id']);
         $this->assertEquals(2, $data['task_id']);
         $this->assertEquals('test2', $data['title']);
-        $this->assertEquals("Test another commit #2\n\n\n[Commit made by @Frederic Guillot on Bitbucket](https://bitbucket.org/minicoders/test-webhook/commits/824059cce7667d3f8d8780cc707391be821e0ea6)", $data['commit_comment']);
+        $this->assertEquals("Test another commit #2\n\n\n[Commit made by @Frederic Guillot on Bitbucket](https://bitbucket.org/minicoders/test-webhook/commits/824059cce7667d3f8d8780cc707391be821e0ea6)", $data['comment']);
         $this->assertEquals("Test another commit #2\n", $data['commit_message']);
         $this->assertEquals('https://bitbucket.org/minicoders/test-webhook/commits/824059cce7667d3f8d8780cc707391be821e0ea6', $data['commit_url']);
     }

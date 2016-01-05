@@ -3,60 +3,84 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Project;
 use Kanboard\Model\Category;
-use Kanboard\Integration\GithubWebhook;
+use Kanboard\Model\Task;
+use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\Project;
 use Kanboard\Action\TaskMoveColumnCategoryChange;
 
 class TaskMoveColumnCategoryChangeTest extends Base
 {
-    public function testExecute()
+    public function testSuccess()
     {
-        $action = new TaskMoveColumnCategoryChange($this->container, 1, Task::EVENT_UPDATE);
-        $action->setParam('dest_column_id', 3);
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
+        $categoryModel = new Category($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
+        $this->assertEquals(1, $categoryModel->create(array('name' => 'c1', 'project_id' => 1)));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 1, 'category_id' => 1));
+
+        $action = new TaskMoveColumnCategoryChange($this->container);
+        $action->setProjectId(1);
         $action->setParam('category_id', 1);
+        $action->setParam('dest_column_id', 2);
 
-        $this->assertEquals(3, $action->getParam('dest_column_id'));
-        $this->assertEquals(1, $action->getParam('category_id'));
+        $this->assertTrue($action->execute($event, Task::EVENT_UPDATE));
 
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $c = new Category($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $c->create(array('name' => 'bug', 'project_id' => 1)));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-
-        // No category should be assigned + column_id=1
-        $task = $tf->getById(1);
+        $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEmpty($task['category_id']);
-        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals('test', $task['title']);
+        $this->assertEquals(2, $task['column_id']);
+    }
 
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'task_id' => 1,
-            'column_id' => 1,
-            'project_id' => 1,
-            'category_id' => 1,
-        );
+    public function testWithWrongColumn()
+    {
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
+        $categoryModel = new Category($this->container);
 
-        // Our event should be executed
-        $this->assertTrue($action->hasCompatibleEvent());
-        $this->assertTrue($action->hasRequiredProject($event));
-        $this->assertTrue($action->hasRequiredParameters($event));
-        $this->assertTrue($action->hasRequiredCondition($event));
-        $this->assertTrue($action->isExecutable($event));
-        $this->assertTrue($action->execute(new GenericEvent($event)));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
+        $this->assertEquals(1, $categoryModel->create(array('name' => 'c1', 'project_id' => 1)));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-        // Our task should be moved to the other column
-        $task = $tf->getById(1);
-        $this->assertNotEmpty($task);
-        $this->assertEquals(3, $task['column_id']);
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 2, 'category_id' => 1));
+
+        $action = new TaskMoveColumnCategoryChange($this->container);
+        $action->setProjectId(1);
+        $action->setParam('category_id', 1);
+        $action->setParam('dest_column_id', 2);
+
+        $this->assertFalse($action->execute($event, Task::EVENT_UPDATE));
+    }
+
+    public function testWithWrongCategory()
+    {
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
+        $categoryModel = new Category($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
+        $this->assertEquals(1, $categoryModel->create(array('name' => 'c1', 'project_id' => 1)));
+        $this->assertEquals(2, $categoryModel->create(array('name' => 'c2', 'project_id' => 1)));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 1, 'category_id' => 2));
+
+        $action = new TaskMoveColumnCategoryChange($this->container);
+        $action->setProjectId(1);
+        $action->setParam('category_id', 1);
+        $action->setParam('dest_column_id', 2);
+
+        $this->assertFalse($action->execute($event, Task::EVENT_UPDATE));
     }
 }

@@ -28,24 +28,24 @@
         </td>
         <td>
             <ul>
-            <?php foreach ($action['params'] as $param): ?>
+            <?php foreach ($action['params'] as $param_name => $param_value): ?>
                 <li>
-                    <?= $this->text->in($param['name'], $available_params) ?> =
+                    <?= $this->text->in($param_name, $available_params[$action['action_name']]) ?> =
                     <strong>
-                    <?php if ($this->text->contains($param['name'], 'column_id')): ?>
-                        <?= $this->text->in($param['value'], $columns_list) ?>
-                    <?php elseif ($this->text->contains($param['name'], 'user_id')): ?>
-                        <?= $this->text->in($param['value'], $users_list) ?>
-                    <?php elseif ($this->text->contains($param['name'], 'project_id')): ?>
-                        <?= $this->text->in($param['value'], $projects_list) ?>
-                    <?php elseif ($this->text->contains($param['name'], 'color_id')): ?>
-                        <?= $this->text->in($param['value'], $colors_list) ?>
-                    <?php elseif ($this->text->contains($param['name'], 'category_id')): ?>
-                        <?= $this->text->in($param['value'], $categories_list) ?>
-                    <?php elseif ($this->text->contains($param['name'], 'link_id')): ?>
-                        <?= $this->text->in($param['value'], $links_list) ?>
+                    <?php if ($this->text->contains($param_name, 'column_id')): ?>
+                        <?= $this->text->in($param_value, $columns_list) ?>
+                    <?php elseif ($this->text->contains($param_name, 'user_id')): ?>
+                        <?= $this->text->in($param_value, $users_list) ?>
+                    <?php elseif ($this->text->contains($param_name, 'project_id')): ?>
+                        <?= $this->text->in($param_value, $projects_list) ?>
+                    <?php elseif ($this->text->contains($param_name, 'color_id')): ?>
+                        <?= $this->text->in($param_value, $colors_list) ?>
+                    <?php elseif ($this->text->contains($param_name, 'category_id')): ?>
+                        <?= $this->text->in($param_value, $categories_list) ?>
+                    <?php elseif ($this->text->contains($param_name, 'link_id')): ?>
+                        <?= $this->text->in($param_value, $links_list) ?>
                     <?php else: ?>
-                        <?= $this->e($param['value']) ?>
+                        <?= $this->e($param_value) ?>
                     <?php endif ?>
                     </strong>
                 </li>

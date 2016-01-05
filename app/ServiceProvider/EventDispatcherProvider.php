@@ -30,9 +30,6 @@ class EventDispatcherProvider implements ServiceProviderInterface
         $container['dispatcher']->addSubscriber(new TransitionSubscriber($container));
         $container['dispatcher']->addSubscriber(new RecurringTaskSubscriber($container));
 
-        // Automatic actions
-        $container['action']->attachEvents();
-
         return $container;
     }
 }

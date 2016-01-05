@@ -147,7 +147,7 @@ class Router extends Base
         }
 
         $instance = new $class($this->container);
-        $instance->beforeAction($this->controller, $this->action);
+        $instance->beforeAction();
         $instance->{$this->action}();
         return $instance;
     }

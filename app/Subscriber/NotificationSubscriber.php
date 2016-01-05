@@ -2,6 +2,7 @@
 
 namespace Kanboard\Subscriber;
 
+use Kanboard\Core\Base;
 use Kanboard\Event\GenericEvent;
 use Kanboard\Model\Task;
 use Kanboard\Model\Comment;
@@ -9,34 +10,40 @@ use Kanboard\Model\Subtask;
 use Kanboard\Model\File;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class NotificationSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
+class NotificationSubscriber extends Base implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         return array(
-            Task::EVENT_CREATE => array('execute', 0),
-            Task::EVENT_UPDATE => array('execute', 0),
-            Task::EVENT_CLOSE => array('execute', 0),
-            Task::EVENT_OPEN => array('execute', 0),
-            Task::EVENT_MOVE_COLUMN => array('execute', 0),
-            Task::EVENT_MOVE_POSITION => array('execute', 0),
-            Task::EVENT_MOVE_SWIMLANE => array('execute', 0),
-            Task::EVENT_ASSIGNEE_CHANGE => array('execute', 0),
-            Subtask::EVENT_CREATE => array('execute', 0),
-            Subtask::EVENT_UPDATE => array('execute', 0),
-            Comment::EVENT_CREATE => array('execute', 0),
-            Comment::EVENT_UPDATE => array('execute', 0),
-            File::EVENT_CREATE => array('execute', 0),
+            Task::EVENT_USER_MENTION => 'handleEvent',
+            Task::EVENT_CREATE => 'handleEvent',
+            Task::EVENT_UPDATE => 'handleEvent',
+            Task::EVENT_CLOSE => 'handleEvent',
+            Task::EVENT_OPEN => 'handleEvent',
+            Task::EVENT_MOVE_COLUMN => 'handleEvent',
+            Task::EVENT_MOVE_POSITION => 'handleEvent',
+            Task::EVENT_MOVE_SWIMLANE => 'handleEvent',
+            Task::EVENT_ASSIGNEE_CHANGE => 'handleEvent',
+            Subtask::EVENT_CREATE => 'handleEvent',
+            Subtask::EVENT_UPDATE => 'handleEvent',
+            Comment::EVENT_CREATE => 'handleEvent',
+            Comment::EVENT_UPDATE => 'handleEvent',
+            Comment::EVENT_USER_MENTION => 'handleEvent',
+            File::EVENT_CREATE => 'handleEvent',
         );
     }
 
-    public function execute(GenericEvent $event, $event_name)
+    public function handleEvent(GenericEvent $event, $event_name)
     {
         $event_data = $this->getEventData($event);
 
         if (! empty($event_data)) {
-            $this->userNotification->sendNotifications($event_name, $event_data);
-            $this->projectNotification->sendNotifications($event_data['task']['project_id'], $event_name, $event_data);
+            if (! empty($event['mention'])) {
+                $this->userNotification->sendUserNotification($event['mention'], $event_name, $event_data);
+            } else {
+                $this->userNotification->sendNotifications($event_name, $event_data);
+                $this->projectNotification->sendNotifications($event_data['task']['project_id'], $event_name, $event_data);
+            }
         }
     }
 

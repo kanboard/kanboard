@@ -33,4 +33,5 @@ $container->register(new Kanboard\ServiceProvider\ClassProvider);
 $container->register(new Kanboard\ServiceProvider\EventDispatcherProvider);
 $container->register(new Kanboard\ServiceProvider\GroupProvider);
 $container->register(new Kanboard\ServiceProvider\RouteProvider);
+$container->register(new Kanboard\ServiceProvider\ActionProvider);
 $container->register(new Kanboard\ServiceProvider\PluginProvider);
