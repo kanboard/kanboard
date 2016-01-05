@@ -21,18 +21,12 @@ class UserNotification extends Base
      */
     public function sendNotifications($event_name, array $event_data)
     {
-        $logged_user_id = $this->userSession->isLogged() ? $this->userSession->getId() : 0;
-        $users = $this->getUsersWithNotificationEnabled($event_data['task']['project_id'], $logged_user_id);
+        $users = $this->getUsersWithNotificationEnabled($event_data['task']['project_id'], $this->userSession->getId());
 
-        if (! empty($users)) {
-            foreach ($users as $user) {
-                if ($this->userNotificationFilter->shouldReceiveNotification($user, $event_data)) {
-                    $this->sendUserNotification($user, $event_name, $event_data);
-                }
+        foreach ($users as $user) {
+            if ($this->userNotificationFilter->shouldReceiveNotification($user, $event_data)) {
+                $this->sendUserNotification($user, $event_name, $event_data);
             }
-
-            // Restore locales
-            $this->config->setupTranslations();
         }
     }
 
@@ -58,6 +52,9 @@ class UserNotification extends Base
         foreach ($this->userNotificationType->getSelectedTypes($user['id']) as $type) {
             $this->userNotificationType->getType($type)->notifyUser($user, $event_name, $event_data);
         }
+
+        // Restore locales
+        $this->config->setupTranslations();
     }
 
     /**

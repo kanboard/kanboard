@@ -121,6 +121,10 @@ class Mail extends Base implements NotificationInterface
             case Task::EVENT_ASSIGNEE_CHANGE:
                 $subject = $this->getStandardMailSubject(e('Assignee change'), $event_data);
                 break;
+            case Task::EVENT_USER_MENTION:
+            case Comment::EVENT_USER_MENTION:
+                $subject = $this->getStandardMailSubject(e('Mentioned'), $event_data);
+                break;
             case Task::EVENT_OVERDUE:
                 $subject = e('[%s] Overdue tasks', $event_data['project_name']);
                 break;

@@ -4,92 +4,53 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Event\GenericEvent;
 use Kanboard\Model\Task;
-use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Project;
 use Kanboard\Action\TaskDuplicateAnotherProject;
 
 class TaskDuplicateAnotherProjectTest extends Base
 {
-    public function testBadProject()
+    public function testSuccess()
     {
-        $action = new TaskDuplicateAnotherProject($this->container, 3, Task::EVENT_MOVE_COLUMN);
-        $action->setParam('column_id', 5);
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
 
-        $event = array(
-            'project_id' => 2,
-            'task_id' => 3,
-            'column_id' => 5,
-        );
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-        $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-    }
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 2));
 
-    public function testBadColumn()
-    {
-        $action = new TaskDuplicateAnotherProject($this->container, 3, Task::EVENT_MOVE_COLUMN);
-        $action->setParam('column_id', 5);
-
-        $event = array(
-            'project_id' => 3,
-            'task_id' => 3,
-            'column_id' => 3,
-        );
-
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-    }
-
-    public function testExecute()
-    {
-        $action = new TaskDuplicateAnotherProject($this->container, 1, Task::EVENT_MOVE_COLUMN);
-
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $this->assertEquals(1, $p->create(array('name' => 'project 1')));
-        $this->assertEquals(2, $p->create(array('name' => 'project 2')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'column_id' => 2,
-        );
-
-        // Our event should NOT be executed because we define the same project
-        $action->setParam('column_id', 2);
-        $action->setParam('project_id', 1);
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-
-        // Our task should be assigned to the project 1
-        $task = $tf->getById(1);
-        $this->assertNotEmpty($task);
-        $this->assertEquals(1, $task['project_id']);
-
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'column_id' => 2,
-        );
-
-        // Our event should be executed because we define a different project
-        $action->setParam('column_id', 2);
+        $action = new TaskDuplicateAnotherProject($this->container);
+        $action->setProjectId(1);
         $action->setParam('project_id', 2);
-        $this->assertTrue($action->hasRequiredCondition($event));
-        $this->assertTrue($action->execute(new GenericEvent($event)));
+        $action->setParam('column_id', 2);
 
-        // Our task should be assigned to the project 1
-        $task = $tf->getById(1);
-        $this->assertNotEmpty($task);
-        $this->assertEquals(1, $task['project_id']);
+        $this->assertTrue($action->execute($event, Task::EVENT_CLOSE));
 
-        // We should have another task assigned to the project 2
-        $task = $tf->getById(2);
+        $task = $taskFinderModel->getById(2);
         $this->assertNotEmpty($task);
+        $this->assertEquals('test', $task['title']);
         $this->assertEquals(2, $task['project_id']);
+    }
+
+    public function testWithWrongColumn()
+    {
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
+
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 3));
+
+        $action = new TaskDuplicateAnotherProject($this->container);
+        $action->setProjectId(1);
+        $action->setParam('project_id', 2);
+        $action->setParam('column_id', 2);
+
+        $this->assertFalse($action->execute($event, Task::EVENT_CLOSE));
     }
 }

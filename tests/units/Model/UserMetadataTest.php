@@ -29,5 +29,10 @@ class UserMetadataTest extends Base
 
         $this->assertEquals(array('key1' => 'value2'), $m->getAll(1));
         $this->assertEquals(array('key1' => 'value1', 'key2' => 'value2'), $m->getAll(2));
+
+        $this->assertTrue($m->remove(2, 'key1'));
+        $this->assertFalse($m->remove(2, 'key1'));
+
+        $this->assertEquals(array('key2' => 'value2'), $m->getAll(2));
     }
 }

@@ -17,7 +17,17 @@
             </li>
         </ul>
         <div class="write-area">
-            <?= $this->form->textarea('description', $values, $errors, array('autofocus', 'placeholder="'.t('Leave a description').'"'), 'task-show-description-textarea') ?>
+            <?= $this->form->textarea(
+                'description',
+                $values,
+                $errors,
+                array(
+                    'autofocus',
+                    'placeholder="'.t('Leave a description').'"',
+                    'data-mention-search-url="'.$this->url->href('UserHelper', 'mention', array('project_id' => $task['project_id'])).'"'
+                ),
+                'task-show-description-textarea'
+            ) ?>
         </div>
         <div class="preview-area">
             <div class="markdown"></div>

@@ -44,6 +44,25 @@ class ProjectPermission extends Base
     }
 
     /**
+     * Get all usernames (fetch users from groups)
+     *
+     * @access public
+     * @param  integer $project_id
+     * @param  string  $input
+     * @return array
+     */
+    public function findUsernames($project_id, $input)
+    {
+        $userMembers = $this->projectUserRoleFilter->create()->filterByProjectId($project_id)->startWithUsername($input)->findAll('username');
+        $groupMembers = $this->projectGroupRoleFilter->create()->filterByProjectId($project_id)->startWithUsername($input)->findAll('username');
+        $members = array_unique(array_merge($userMembers, $groupMembers));
+
+        sort($members);
+
+        return $members;
+    }
+
+    /**
      * Return true if everybody is allowed for the project
      *
      * @access public
@@ -86,9 +105,22 @@ class ProjectPermission extends Base
      * @param  integer  $user_id
      * @return boolean
      */
-    public function isMember($project_id, $user_id)
+    public function isAssignable($project_id, $user_id)
     {
         return in_array($this->projectUserRole->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER));
+    }
+
+    /**
+     * Return true if the user is member
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  integer  $user_id
+     * @return boolean
+     */
+    public function isMember($project_id, $user_id)
+    {
+        return in_array($this->projectUserRole->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER, Role::PROJECT_VIEWER));
     }
 
     /**

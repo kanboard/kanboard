@@ -13,6 +13,17 @@ use Kanboard\Model\Task;
 class TaskAssignCurrentUser extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Assign the task to the person who does the action');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -22,7 +33,6 @@ class TaskAssignCurrentUser extends Base
     {
         return array(
             Task::EVENT_CREATE,
-            Task::EVENT_MOVE_COLUMN,
         );
     }
 
@@ -34,9 +44,7 @@ class TaskAssignCurrentUser extends Base
      */
     public function getActionRequiredParameters()
     {
-        return array(
-            'column_id' => t('Column'),
-        );
+        return array();
     }
 
     /**
@@ -49,7 +57,6 @@ class TaskAssignCurrentUser extends Base
     {
         return array(
             'task_id',
-            'column_id',
         );
     }
 
@@ -83,6 +90,6 @@ class TaskAssignCurrentUser extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id');
+        return true;
     }
 }

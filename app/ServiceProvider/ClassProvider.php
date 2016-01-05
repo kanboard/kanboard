@@ -17,6 +17,7 @@ class ClassProvider implements ServiceProviderInterface
     private $classes = array(
         'Model' => array(
             'Action',
+            'ActionParameter',
             'Authentication',
             'Board',
             'Category',
@@ -42,7 +43,9 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectNotification',
             'ProjectMetadata',
             'ProjectGroupRole',
+            'ProjectGroupRoleFilter',
             'ProjectUserRole',
+            'ProjectUserRoleFilter',
             'RememberMeSession',
             'Subtask',
             'SubtaskExport',
@@ -67,6 +70,7 @@ class ClassProvider implements ServiceProviderInterface
             'User',
             'UserImport',
             'UserLocking',
+            'UserMention',
             'UserNotification',
             'UserNotificationFilter',
             'UserUnreadNotification',
@@ -86,6 +90,9 @@ class ClassProvider implements ServiceProviderInterface
             'Helper',
             'Lexer',
             'Template',
+        ),
+        'Core\Event' => array(
+            'EventManager',
         ),
         'Core\Http' => array(
             'Request',

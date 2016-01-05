@@ -17,7 +17,18 @@
             </li>
         </ul>
         <div class="write-area">
-            <?= $this->form->textarea('comment', $values, $errors, array(! isset($skip_cancel) ? 'autofocus' : '', 'required', 'placeholder="'.t('Leave a comment').'"'), 'comment-textarea') ?>
+            <?= $this->form->textarea(
+                'comment',
+                $values,
+                $errors,
+                array(
+                    ! isset($skip_cancel) ? 'autofocus' : '',
+                    'required',
+                    'placeholder="'.t('Leave a comment').'"',
+                    'data-mention-search-url="'.$this->url->href('UserHelper', 'mention', array('project_id' => $task['project_id'])).'"',
+                ),
+                'comment-textarea'
+            ) ?>
         </div>
         <div class="preview-area">
             <div class="markdown"></div>

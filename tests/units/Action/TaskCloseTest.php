@@ -3,107 +3,49 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\Project;
-use Kanboard\Integration\GithubWebhook;
 use Kanboard\Action\TaskClose;
 
 class TaskCloseTest extends Base
 {
-    public function testExecutable()
+    public function testClose()
     {
-        $action = new TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
-        $action->setParam('column_id', 5);
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
 
-        $event = array(
-            'project_id' => 3,
-            'task_id' => 3,
-            'column_id' => 5,
-        );
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-        $this->assertTrue($action->isExecutable($event));
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1));
 
-        $action = new TaskClose($this->container, 3, GithubWebhook::EVENT_COMMIT);
+        $action = new TaskClose($this->container);
+        $action->setProjectId(1);
+        $action->addEvent('test.event', 'Test Event');
 
-        $event = array(
-            'project_id' => 3,
-            'task_id' => 3,
-        );
+        $this->assertTrue($action->execute($event, 'test.event'));
 
-        $this->assertTrue($action->isExecutable($event));
-    }
-
-    public function testBadEvent()
-    {
-        $action = new TaskClose($this->container, 3, Task::EVENT_UPDATE);
-        $action->setParam('column_id', 5);
-
-        $event = array(
-            'project_id' => 3,
-            'task_id' => 3,
-            'column_id' => 5,
-        );
-
-        $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-    }
-
-    public function testBadProject()
-    {
-        $action = new TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
-        $action->setParam('column_id', 5);
-
-        $event = array(
-            'project_id' => 2,
-            'task_id' => 3,
-            'column_id' => 5,
-        );
-
-        $this->assertFalse($action->isExecutable($event));
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-    }
-
-    public function testBadColumn()
-    {
-        $action = new TaskClose($this->container, 3, Task::EVENT_MOVE_COLUMN);
-        $action->setParam('column_id', 5);
-
-        $event = array(
-            'project_id' => 3,
-            'task_id' => 3,
-            'column_id' => 3,
-        );
-
-        $this->assertFalse($action->execute(new GenericEvent($event)));
-    }
-
-    public function testExecute()
-    {
-        $action = new TaskClose($this->container, 1, Task::EVENT_MOVE_COLUMN);
-        $action->setParam('column_id', 2);
-
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'column_id' => 2,
-        );
-
-        // Our event should be executed
-        $this->assertTrue($action->execute(new GenericEvent($event)));
-
-        // Our task should be closed
-        $task = $tf->getById(1);
+        $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(0, $task['is_active']);
+    }
+
+    public function testWithNoTaskId()
+    {
+        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+
+        $event = new GenericEvent(array('project_id' => 1));
+
+        $action = new TaskClose($this->container);
+        $action->setProjectId(1);
+        $action->addEvent('test.event', 'Test Event');
+
+        $this->assertFalse($action->execute($event, 'test.event'));
     }
 }

@@ -13,6 +13,17 @@ use Kanboard\Model\Task;
 class TaskAssignCategoryColor extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Assign automatically a category based on a color');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public

@@ -52,11 +52,11 @@ class ProjectUserRole extends Base
             ->getAll(Project::TABLE.'.id', Project::TABLE.'.name');
 
         $groupProjects = $this->projectGroupRole->getProjectsByUser($user_id, $status);
-        $groups = $userProjects + $groupProjects;
+        $projects = $userProjects + $groupProjects;
 
-        asort($groups);
+        asort($projects);
 
-        return $groups;
+        return $projects;
     }
 
     /**

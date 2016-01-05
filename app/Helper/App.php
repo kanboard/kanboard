@@ -13,6 +13,30 @@ use Kanboard\Core\Base;
 class App extends Base
 {
     /**
+     * Make sidebar menu active
+     *
+     * @access public
+     * @param  string $controller
+     * @param  string $action
+     * @param  string $plugin
+     * @return string
+     */
+    public function checkMenuSelection($controller, $action = '', $plugin = '')
+    {
+        $result = strtolower($this->getRouterController()) === strtolower($controller);
+
+        if ($result && $action !== '') {
+            $result = strtolower($this->getRouterAction()) === strtolower($action);
+        }
+
+        if ($result && $plugin !== '') {
+            $result = strtolower($this->getPluginName()) === strtolower($plugin);
+        }
+
+        return $result ? 'class="active"' : '';
+    }
+
+    /**
      * Get plugin name from route
      *
      * @access public

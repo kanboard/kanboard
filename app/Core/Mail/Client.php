@@ -45,19 +45,21 @@ class Client extends Base
      */
     public function send($email, $name, $subject, $html)
     {
-        $this->container['logger']->debug('Sending email to '.$email.' ('.MAIL_TRANSPORT.')');
+        if (! empty($email)) {
+            $this->logger->debug('Sending email to '.$email.' ('.MAIL_TRANSPORT.')');
 
-        $start_time = microtime(true);
-        $author = 'Kanboard';
+            $start_time = microtime(true);
+            $author = 'Kanboard';
 
-        if ($this->userSession->isLogged()) {
-            $author = e('%s via Kanboard', $this->helper->user->getFullname());
-        }
+            if ($this->userSession->isLogged()) {
+                $author = e('%s via Kanboard', $this->helper->user->getFullname());
+            }
 
-        $this->getTransport(MAIL_TRANSPORT)->sendEmail($email, $name, $subject, $html, $author);
+            $this->getTransport(MAIL_TRANSPORT)->sendEmail($email, $name, $subject, $html, $author);
 
-        if (DEBUG) {
-            $this->logger->debug('Email sent in '.round(microtime(true) - $start_time, 6).' seconds');
+            if (DEBUG) {
+                $this->logger->debug('Email sent in '.round(microtime(true) - $start_time, 6).' seconds');
+            }
         }
 
         return $this;

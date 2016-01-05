@@ -106,7 +106,7 @@ class TaskPositionTest extends Base
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 1)));
 
-        // We move the task 2 to the column 3
+        // We move the task 1 to the column 3
         $this->assertTrue($tp->movePosition(1, 1, 3, 1));
 
         // Check tasks position
@@ -235,7 +235,7 @@ class TaskPositionTest extends Base
         $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(4, $tc->create(array('title' => 'Task #4', 'project_id' => 1, 'column_id' => 1)));
 
-        // Move the last task to the bottom
+        // Move the first task to the bottom
         $this->assertTrue($tp->movePosition(1, 1, 1, 4));
 
         // Check tasks position

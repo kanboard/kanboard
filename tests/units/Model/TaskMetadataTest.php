@@ -33,5 +33,10 @@ class TaskMetadataTest extends Base
 
         $this->assertEquals(array('key1' => 'value2'), $tm->getAll(1));
         $this->assertEquals(array('key1' => 'value1', 'key2' => 'value2'), $tm->getAll(2));
+
+        $this->assertTrue($tm->remove(2, 'key1'));
+        $this->assertFalse($tm->remove(2, 'key1'));
+
+        $this->assertEquals(array('key2' => 'value2'), $tm->getAll(2));
     }
 }

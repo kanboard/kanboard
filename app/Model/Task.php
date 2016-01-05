@@ -41,6 +41,7 @@ class Task extends Base
     const EVENT_CREATE_UPDATE   = 'task.create_update';
     const EVENT_ASSIGNEE_CHANGE = 'task.assignee_change';
     const EVENT_OVERDUE         = 'task.overdue';
+    const EVENT_USER_MENTION    = 'task.user.mention';
 
     /**
      * Recurrence: status
