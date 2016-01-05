@@ -1101,7 +1101,7 @@ return array(
     'Group Name' => 'Nom du groupe',
     'Enter group name...' => 'Entrez le nom du groupe...',
     'Role:' => 'Rôle :',
-    'Project members' => 'Membres du project',
+    'Project members' => 'Membres du projet',
     'Compare hours for "%s"' => 'Comparer les heures pour « %s »',
     '%s mentioned you in the task #%d' => '%s vous a mentionné dans la tâche n°%d',
     '%s mentioned you in a comment on the task #%d' => '%s vous a mentionné dans un commentaire de la tâche n°%d',
