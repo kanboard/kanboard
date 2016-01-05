@@ -190,7 +190,7 @@ abstract class Base extends \Kanboard\Core\Base
         $content = $this->template->render($template, $params);
         $params['task_content_for_layout'] = $content;
         $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];
-        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
 
         return $this->template->layout('task/layout', $params);
     }
@@ -208,7 +208,7 @@ abstract class Base extends \Kanboard\Core\Base
         $content = $this->template->render($template, $params);
         $params['project_content_for_layout'] = $content;
         $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
-        $params['board_selector'] = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
+        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
         $params['sidebar_template'] = $sidebar_template;
 
         return $this->template->layout('project/layout', $params);
@@ -289,7 +289,7 @@ abstract class Base extends \Kanboard\Core\Base
     {
         $project = $this->getProject();
         $search = $this->request->getStringParam('search', $this->userSession->getFilters($project['id']));
-        $board_selector = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
+        $board_selector = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
         unset($board_selector[$project['id']]);
 
         $filters = array(

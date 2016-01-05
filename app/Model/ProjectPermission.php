@@ -100,7 +100,7 @@ class ProjectPermission extends Base
      */
     public function getActiveProjectIds($user_id)
     {
-        return array_keys($this->projectUserRole->getProjectsByUser($user_id, array(Project::ACTIVE)));
+        return array_keys($this->projectUserRole->getActiveProjectsByUser($user_id));
     }
 
     /**
