@@ -5,7 +5,7 @@
         <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'form-input-large') ?>
     </form>
     <?php
-	    $project = array();
+        $project = array();
         $project['id'] = '0';
     ?>
     <?= $this->render('app/filters_helper', array('project' => $project)) ?>
