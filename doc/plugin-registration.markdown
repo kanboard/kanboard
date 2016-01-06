@@ -82,7 +82,7 @@ $this->user->getById(123);
 Plugin Translations
 -------------------
 
-Plugin can be translated in the same way the rest of the application. You must load the translations yourself when the session is created:
+Plugin can be translated in the same way as the rest of the application. You must load the translations yourself when the session is created:
 
 ```php
 $this->on('app.bootstrap', function($container) {
@@ -90,7 +90,9 @@ $this->on('app.bootstrap', function($container) {
 });
 ```
 
-The translations must be stored in `plugins/Myplugin/Locale/xx_XX/translations.php`.
+The translations must be stored in the file `plugins/Myplugin/Locale/xx_XX/translations.php` (replace xx_XX by the language code fr_FR, en_US...).
+
+Translations are stored in a dictionary, if you would like to override an existing string, you just need to use the same key in your translation file.
 
 Dependency Injection Container
 ------------------------------

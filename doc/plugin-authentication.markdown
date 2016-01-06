@@ -37,3 +37,4 @@ Example of authentication plugins
 
 - [Authentication providers included in Kanboard](https://github.com/fguillot/kanboard/tree/master/app/Auth)
 - [Reverse-Proxy Authentication with LDAP support](https://github.com/kanboard/plugin-reverse-proxy-ldap)
+- [SMS Two-Factor Authentication](https://github.com/kanboard/plugin-sms-2fa)

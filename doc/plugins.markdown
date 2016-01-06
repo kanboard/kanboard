@@ -26,6 +26,7 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 Examples of plugins
 -------------------
 
+- [SMS Two-Factor Authentication](https://github.com/kanboard/plugin-sms-2fa)
 - [Reverse-Proxy Authentication with LDAP support](https://github.com/kanboard/plugin-reverse-proxy-ldap)
 - [Slack](https://github.com/kanboard/plugin-slack)
 - [Hipchat](https://github.com/kanboard/plugin-hipchat)
