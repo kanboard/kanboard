@@ -11,12 +11,27 @@ namespace Kanboard\Core\Security;
 interface PostAuthenticationProviderInterface extends AuthenticationProviderInterface
 {
     /**
+     * Called only one time before to prompt the user for pin code
+     *
+     * @access public
+     */
+    public function beforeCode();
+
+    /**
      * Set user pin-code
      *
      * @access public
      * @param  string $code
      */
     public function setCode($code);
+
+    /**
+     * Generate secret if necessary
+     *
+     * @access public
+     * @return string
+     */
+    public function generateSecret();
 
     /**
      * Set secret token (fetched from user profile)
