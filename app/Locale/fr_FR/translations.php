@@ -1117,8 +1117,8 @@ return array(
     'RUB - Russian Ruble' => 'RUB - Rouble russe',
     'Assign the task to the person who does the action when the column is changed' => 'Assigner la tâche à la personne qui fait l\'action lorsque la colonne est changée',
     'Close a task in a specific column' => 'Fermer une tâche dans une colonne specifique',
-    'Time-based One-time Password Algorithm' => '',
-    'Two-Factor Provider: ' => 'Fournisseur d\'authentification à deux facteurs :',
+    'Time-based One-time Password Algorithm' => 'Mot de passe à usage unique basé sur le temps',
+    'Two-Factor Provider: ' => 'Fournisseur d\'authentification à deux facteurs : ',
     'Disable two-factor authentication' => 'Désactiver l\'authentification à deux-facteurs',
     'Enable two-factor authentication' => 'Activer l\'authentification à deux-facteurs',
 );
