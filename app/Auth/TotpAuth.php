@@ -19,18 +19,18 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
     /**
      * User pin code
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $code = '';
+    protected $code = '';
 
     /**
      * Private key
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $secret = '';
+    protected $secret = '';
 
     /**
      * Get authentication provider name

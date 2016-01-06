@@ -25,18 +25,18 @@ class GitlabAuth extends Base implements OAuthAuthenticationProviderInterface
     /**
      * OAuth2 instance
      *
-     * @access private
+     * @access protected
      * @var \Kanboard\Core\Http\OAuth2
      */
-    private $service;
+    protected $service;
 
     /**
      * OAuth2 code
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $code = '';
+    protected $code = '';
 
     /**
      * Get authentication provider name

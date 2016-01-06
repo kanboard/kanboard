@@ -19,26 +19,26 @@ class DatabaseAuth extends Base implements PasswordAuthenticationProviderInterfa
     /**
      * User properties
      *
-     * @access private
+     * @access protected
      * @var array
      */
-    private $userInfo = array();
+    protected $userInfo = array();
 
     /**
      * Username
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $username = '';
+    protected $username = '';
 
     /**
      * Password
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $password = '';
+    protected $password = '';
 
     /**
      * Get authentication provider name

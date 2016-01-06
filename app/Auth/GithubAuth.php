@@ -17,26 +17,26 @@ class GithubAuth extends Base implements OAuthAuthenticationProviderInterface
     /**
      * User properties
      *
-     * @access private
+     * @access protected
      * @var \Kanboard\User\GithubUserProvider
      */
-    private $userInfo = null;
+    protected $userInfo = null;
 
     /**
      * OAuth2 instance
      *
-     * @access private
+     * @access protected
      * @var \Kanboard\Core\Http\OAuth2
      */
-    private $service;
+    protected $service;
 
     /**
      * OAuth2 code
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $code = '';
+    protected $code = '';
 
     /**
      * Get authentication provider name
