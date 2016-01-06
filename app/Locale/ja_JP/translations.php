@@ -688,9 +688,7 @@ return array(
     'The two factor authentication code is valid.' => '2 段認証コードは有効です。',
     'Code' => 'コード',
     'Two factor authentication' => '2 段認証',
-    'Enable/disable two factor authentication' => '2 段認証の有効／無効',
     'This QR code contains the key URI: ' => 'この QR　コードが URI キーを含んでいます: ',
-    'Save the secret key in your TOTP software (by example Google Authenticator or FreeOTP).' => '秘密鍵を TOTP ソフトに保存 (Google Authenticator や FreeOTP など)',
     'Check my code' => '自分のコードをチェック',
     'Secret key: ' => '秘密鍵: ',
     'Test your device' => 'デバイスをテストする',
@@ -1116,4 +1114,8 @@ return array(
     // 'RUB - Russian Ruble' => '',
     // 'Assign the task to the person who does the action when the column is changed' => '',
     // 'Close a task in a specific column' => '',
+    // 'Time-based One-time Password Algorithm' => '',
+    // 'Two-Factor Provider: ' => '',
+    // 'Disable two-factor authentication' => '',
+    // 'Enable two-factor authentication' => '',
 );

@@ -688,9 +688,7 @@ return array(
     'The two factor authentication code is valid.' => 'Il codice di autenticazione a due fattori è valido',
     'Code' => 'Codice',
     'Two factor authentication' => 'Autenticazione a due fattori',
-    'Enable/disable two factor authentication' => 'Abilita/disabilita autenticazione a due fattori',
     'This QR code contains the key URI: ' => 'Questo QR code contiene l\'URI: ',
-    'Save the secret key in your TOTP software (by example Google Authenticator or FreeOTP).' => 'Salva la chiave privata nel tuo software TOTP (per esempio Google Authenticator oppure FreeOTP).',
     'Check my code' => 'Controlla il mio codice',
     'Secret key: ' => 'Chiave privata:',
     'Test your device' => 'Testa il tuo dispositivo',
@@ -1116,4 +1114,8 @@ return array(
     // 'RUB - Russian Ruble' => '',
     // 'Assign the task to the person who does the action when the column is changed' => '',
     // 'Close a task in a specific column' => '',
+    // 'Time-based One-time Password Algorithm' => '',
+    // 'Two-Factor Provider: ' => '',
+    // 'Disable two-factor authentication' => '',
+    // 'Enable two-factor authentication' => '',
 );

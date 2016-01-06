@@ -688,9 +688,7 @@ return array(
     'The two factor authentication code is valid.' => '双重认证码正确。',
     'Code' => '认证码',
     'Two factor authentication' => '双重认证',
-    'Enable/disable two factor authentication' => '启用/禁用双重认证',
     'This QR code contains the key URI: ' => '此二维码包含密码 URI:',
-    'Save the secret key in your TOTP software (by example Google Authenticator or FreeOTP).' => '将密码保存到 TOTP 软件(例如Google 认证或 FreeOTP)',
     'Check my code' => '检查我的认证码',
     'Secret key: ' => '密码：',
     'Test your device' => '测试设备',
@@ -1116,4 +1114,8 @@ return array(
     // 'RUB - Russian Ruble' => '',
     // 'Assign the task to the person who does the action when the column is changed' => '',
     // 'Close a task in a specific column' => '',
+    // 'Time-based One-time Password Algorithm' => '',
+    // 'Two-Factor Provider: ' => '',
+    // 'Disable two-factor authentication' => '',
+    // 'Enable two-factor authentication' => '',
 );
