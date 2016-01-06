@@ -63,6 +63,10 @@
     </form>
 
     <div class="filter-dropdowns">
+    <?php
+	    $project = array();
+        $project['id'] = '0';
+    ?>
         <?= $this->render('app/filters_helper', array('reset' => 'status:open', 'project' => $project)) ?>
 
         <?php if (isset($custom_filters_list) && ! empty($custom_filters_list)): ?>
