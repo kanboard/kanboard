@@ -15,7 +15,7 @@
             <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
         </form>
 
-        <?= $this->render('app/filters_helper') ?>
+        <?= $this->render('app/filters_helper', array('project' => $project)) ?>
     </div>
 
     <?php if (empty($values['search'])): ?>
