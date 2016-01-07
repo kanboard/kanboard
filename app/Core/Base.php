@@ -107,6 +107,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\User                                       $user
  * @property \Kanboard\Model\UserImport                                 $userImport
  * @property \Kanboard\Model\UserLocking                                $userLocking
+ * @property \Kanboard\Model\UserMention                                $userMention
  * @property \Kanboard\Model\UserNotification                           $userNotification
  * @property \Kanboard\Model\UserNotificationType                       $userNotificationType
  * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
