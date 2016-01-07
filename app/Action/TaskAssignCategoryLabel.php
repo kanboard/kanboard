@@ -2,8 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\GithubWebhook;
-
 /**
  * Set a category automatically according to a label
  *
@@ -31,9 +29,7 @@ class TaskAssignCategoryLabel extends Base
      */
     public function getCompatibleEvents()
     {
-        return array(
-            GithubWebhook::EVENT_ISSUE_LABEL_CHANGE,
-        );
+        return array();
     }
 
     /**

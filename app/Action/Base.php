@@ -265,9 +265,12 @@ abstract class Base extends \Kanboard\Core\Base
      * @param  string $event
      * @param  string $description
      */
-    public function addEvent($event, $description)
+    public function addEvent($event, $description = '')
     {
-        $this->eventManager->register($event, $description);
+        if ($description !== '') {
+            $this->eventManager->register($event, $description);
+        }
+
         $this->compatibleEvents[] = $event;
         return $this;
     }

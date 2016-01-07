@@ -69,7 +69,6 @@ Using Kanboard
 ### Integrations
 
 - [Bitbucket webhooks](bitbucket-webhooks.markdown)
-- [Github webhooks](github-webhooks.markdown)
 - [Gitlab webhooks](gitlab-webhooks.markdown)
 - [iCalendar subscriptions](ical.markdown)
 - [RSS/Atom subscriptions](rss.markdown)
@@ -118,7 +117,7 @@ Technical details
 ### Authentication
 
 - [LDAP authentication](ldap-authentication.markdown)
-- [LDAP group sync](ldap-group-sync.markdown)
+- [LDAP group synchronization](ldap-group-sync.markdown)
 - [LDAP parameters](ldap-parameters.markdown)
 - [Google authentication](google-authentication.markdown)
 - [Github authentication](github-authentication.markdown)

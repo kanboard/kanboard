@@ -41,25 +41,6 @@ class Webhook extends Base
     }
 
     /**
-     * Handle Github webhooks
-     *
-     * @access public
-     */
-    public function github()
-    {
-        $this->checkWebhookToken();
-
-        $this->githubWebhook->setProjectId($this->request->getIntegerParam('project_id'));
-
-        $result = $this->githubWebhook->parsePayload(
-            $this->request->getHeader('X-Github-Event'),
-            $this->request->getJson()
-        );
-
-        echo $result ? 'PARSED' : 'IGNORED';
-    }
-
-    /**
      * Handle Gitlab webhooks
      *
      * @access public

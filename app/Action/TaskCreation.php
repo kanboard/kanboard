@@ -2,7 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\GithubWebhook;
 use Kanboard\Integration\GitlabWebhook;
 use Kanboard\Integration\BitbucketWebhook;
 
@@ -34,7 +33,6 @@ class TaskCreation extends Base
     public function getCompatibleEvents()
     {
         return array(
-            GithubWebhook::EVENT_ISSUE_OPENED,
             GitlabWebhook::EVENT_ISSUE_OPENED,
             BitbucketWebhook::EVENT_ISSUE_OPENED,
         );

@@ -3,7 +3,6 @@
 namespace Kanboard\Action;
 
 use Kanboard\Integration\BitbucketWebhook;
-use Kanboard\Integration\GithubWebhook;
 use Kanboard\Integration\GitlabWebhook;
 
 /**
@@ -34,8 +33,6 @@ class CommentCreation extends Base
     public function getCompatibleEvents()
     {
         return array(
-            GithubWebhook::EVENT_ISSUE_COMMENT,
-            GithubWebhook::EVENT_COMMIT,
             BitbucketWebhook::EVENT_ISSUE_COMMENT,
             BitbucketWebhook::EVENT_COMMIT,
             GitlabWebhook::EVENT_COMMIT,
