@@ -2,8 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\BitbucketWebhook;
-
 /**
  * Assign a task to someone
  *
@@ -31,9 +29,7 @@ class TaskAssignUser extends Base
      */
     public function getCompatibleEvents()
     {
-        return array(
-            BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE,
-        );
+        return array();
     }
 
     /**

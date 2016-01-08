@@ -3,7 +3,6 @@
 namespace Kanboard\Action;
 
 use Kanboard\Integration\GitlabWebhook;
-use Kanboard\Integration\BitbucketWebhook;
 
 /**
  * Create automatically a task from a webhook
@@ -34,7 +33,6 @@ class TaskCreation extends Base
     {
         return array(
             GitlabWebhook::EVENT_ISSUE_OPENED,
-            BitbucketWebhook::EVENT_ISSUE_OPENED,
         );
     }
 

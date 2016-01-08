@@ -3,7 +3,6 @@
 namespace Kanboard\Action;
 
 use Kanboard\Integration\GitlabWebhook;
-use Kanboard\Integration\BitbucketWebhook;
 
 /**
  * Open automatically a task
@@ -34,7 +33,6 @@ class TaskOpen extends Base
     {
         return array(
             GitlabWebhook::EVENT_ISSUE_REOPENED,
-            BitbucketWebhook::EVENT_ISSUE_REOPENED,
         );
     }
 

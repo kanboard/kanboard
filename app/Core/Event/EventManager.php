@@ -3,7 +3,6 @@
 namespace Kanboard\Core\Event;
 
 use Kanboard\Integration\GitlabWebhook;
-use Kanboard\Integration\BitbucketWebhook;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskLink;
 
@@ -59,12 +58,6 @@ class EventManager
             GitlabWebhook::EVENT_ISSUE_REOPENED => t('Gitlab issue reopened'),
             GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
             GitlabWebhook::EVENT_ISSUE_COMMENT => t('Gitlab issue comment created'),
-            BitbucketWebhook::EVENT_COMMIT => t('Bitbucket commit received'),
-            BitbucketWebhook::EVENT_ISSUE_OPENED => t('Bitbucket issue opened'),
-            BitbucketWebhook::EVENT_ISSUE_CLOSED => t('Bitbucket issue closed'),
-            BitbucketWebhook::EVENT_ISSUE_REOPENED => t('Bitbucket issue reopened'),
-            BitbucketWebhook::EVENT_ISSUE_ASSIGNEE_CHANGE => t('Bitbucket issue assignee change'),
-            BitbucketWebhook::EVENT_ISSUE_COMMENT => t('Bitbucket issue comment created'),
         );
 
         $events = array_merge($events, $this->events);

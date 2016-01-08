@@ -54,23 +54,4 @@ class Webhook extends Base
 
         echo $result ? 'PARSED' : 'IGNORED';
     }
-
-    /**
-     * Handle Bitbucket webhooks
-     *
-     * @access public
-     */
-    public function bitbucket()
-    {
-        $this->checkWebhookToken();
-
-        $this->bitbucketWebhook->setProjectId($this->request->getIntegerParam('project_id'));
-
-        $result = $this->bitbucketWebhook->parsePayload(
-            $this->request->getHeader('X-Event-Key'),
-            $this->request->getJson()
-        );
-
-        echo $result ? 'PARSED' : 'IGNORED';
-    }
 }

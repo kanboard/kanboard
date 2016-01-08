@@ -45,7 +45,6 @@ use Pimple\Container;
  * @property \Kanboard\Core\Lexer                                       $lexer
  * @property \Kanboard\Core\Paginator                                   $paginator
  * @property \Kanboard\Core\Template                                    $template
- * @property \Kanboard\Integration\BitbucketWebhook                     $bitbucketWebhook
  * @property \Kanboard\Integration\GitlabWebhook                        $gitlabWebhook
  * @property \Kanboard\Formatter\ProjectGanttFormatter                  $projectGanttFormatter
  * @property \Kanboard\Formatter\TaskFilterGanttFormatter               $taskFilterGanttFormatter

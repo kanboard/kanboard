@@ -68,7 +68,6 @@ Using Kanboard
 
 ### Integrations
 
-- [Bitbucket webhooks](bitbucket-webhooks.markdown)
 - [Gitlab webhooks](gitlab-webhooks.markdown)
 - [iCalendar subscriptions](ical.markdown)
 - [RSS/Atom subscriptions](rss.markdown)

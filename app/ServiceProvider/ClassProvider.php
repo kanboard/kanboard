@@ -116,7 +116,6 @@ class ClassProvider implements ServiceProviderInterface
             'UserProfile',
         ),
         'Integration' => array(
-            'BitbucketWebhook',
             'GitlabWebhook',
         )
     );

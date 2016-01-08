@@ -3,7 +3,6 @@
 namespace Kanboard\Action;
 
 use Kanboard\Integration\GitlabWebhook;
-use Kanboard\Integration\BitbucketWebhook;
 use Kanboard\Model\Task;
 
 /**
@@ -36,8 +35,6 @@ class TaskClose extends Base
         return array(
             GitlabWebhook::EVENT_COMMIT,
             GitlabWebhook::EVENT_ISSUE_CLOSED,
-            BitbucketWebhook::EVENT_COMMIT,
-            BitbucketWebhook::EVENT_ISSUE_CLOSED,
         );
     }
 
