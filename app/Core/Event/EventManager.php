@@ -2,7 +2,6 @@
 
 namespace Kanboard\Core\Event;
 
-use Kanboard\Integration\GitlabWebhook;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskLink;
 
@@ -53,11 +52,6 @@ class EventManager
             Task::EVENT_CLOSE => t('Closing a task'),
             Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
             Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
-            GitlabWebhook::EVENT_COMMIT => t('Gitlab commit received'),
-            GitlabWebhook::EVENT_ISSUE_OPENED => t('Gitlab issue opened'),
-            GitlabWebhook::EVENT_ISSUE_REOPENED => t('Gitlab issue reopened'),
-            GitlabWebhook::EVENT_ISSUE_CLOSED => t('Gitlab issue closed'),
-            GitlabWebhook::EVENT_ISSUE_COMMENT => t('Gitlab issue comment created'),
         );
 
         $events = array_merge($events, $this->events);

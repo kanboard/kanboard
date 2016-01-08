@@ -2,8 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\GitlabWebhook;
-
 /**
  * Create automatically a comment from a webhook
  *
@@ -31,10 +29,7 @@ class CommentCreation extends Base
      */
     public function getCompatibleEvents()
     {
-        return array(
-            GitlabWebhook::EVENT_COMMIT,
-            GitlabWebhook::EVENT_ISSUE_COMMENT,
-        );
+        return array();
     }
 
     /**

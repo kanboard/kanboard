@@ -39,19 +39,4 @@ class Webhook extends Base
 
         $this->response->text('FAILED');
     }
-
-    /**
-     * Handle Gitlab webhooks
-     *
-     * @access public
-     */
-    public function gitlab()
-    {
-        $this->checkWebhookToken();
-
-        $this->gitlabWebhook->setProjectId($this->request->getIntegerParam('project_id'));
-        $result = $this->gitlabWebhook->parsePayload($this->request->getJson());
-
-        echo $result ? 'PARSED' : 'IGNORED';
-    }
 }

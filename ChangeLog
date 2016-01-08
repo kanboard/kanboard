@@ -8,6 +8,7 @@ Breaking changes:
 * Action name stored in the database is now the absolute class name
 * Core functionalities moved to external plugins:
     - Github Webhook: https://github.com/kanboard/plugin-github-webhook
+    - Gitlab Webhook: https://github.com/kanboard/plugin-gitlab-webhook
     - Bitbucket Webhook: https://github.com/kanboard/plugin-bitbucket-webhook
 
 New features:

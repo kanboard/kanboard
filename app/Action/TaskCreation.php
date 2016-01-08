@@ -2,8 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\GitlabWebhook;
-
 /**
  * Create automatically a task from a webhook
  *
@@ -31,9 +29,7 @@ class TaskCreation extends Base
      */
     public function getCompatibleEvents()
     {
-        return array(
-            GitlabWebhook::EVENT_ISSUE_OPENED,
-        );
+        return array();
     }
 
     /**

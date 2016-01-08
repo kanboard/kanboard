@@ -114,9 +114,6 @@ class ClassProvider implements ServiceProviderInterface
             'UserSync',
             'UserSession',
             'UserProfile',
-        ),
-        'Integration' => array(
-            'GitlabWebhook',
         )
     );
 

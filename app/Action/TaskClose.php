@@ -2,7 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\GitlabWebhook;
 use Kanboard\Model\Task;
 
 /**
@@ -32,10 +31,7 @@ class TaskClose extends Base
      */
     public function getCompatibleEvents()
     {
-        return array(
-            GitlabWebhook::EVENT_COMMIT,
-            GitlabWebhook::EVENT_ISSUE_CLOSED,
-        );
+        return array();
     }
 
     /**

@@ -68,7 +68,6 @@ Using Kanboard
 
 ### Integrations
 
-- [Gitlab webhooks](gitlab-webhooks.markdown)
 - [iCalendar subscriptions](ical.markdown)
 - [RSS/Atom subscriptions](rss.markdown)
 - [Json-RPC API](api-json-rpc.markdown)
