@@ -113,7 +113,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
  * @property \Psr\Log\LoggerInterface                                   $logger
- * @property \League\HTMLToMarkdown\HtmlConverter                       $htmlConverter
  * @property \PicoDb\Database                                           $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher
  */

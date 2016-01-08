@@ -4,7 +4,6 @@ namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use League\HTMLToMarkdown\HtmlConverter;
 use Kanboard\Core\Mail\Client as EmailClient;
 use Kanboard\Core\ObjectStorage\FileStorage;
 use Kanboard\Core\Paginator;
@@ -131,10 +130,6 @@ class ClassProvider implements ServiceProviderInterface
 
         $container['httpClient'] = function ($c) {
             return new HttpClient($c);
-        };
-
-        $container['htmlConverter'] = function () {
-            return new HtmlConverter(array('strip_tags' => true));
         };
 
         $container['objectStorage'] = function () {

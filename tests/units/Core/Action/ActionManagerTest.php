@@ -34,8 +34,8 @@ class ActionManagerTest extends Base
     public function testGetAvailableActions()
     {
         $actionManager = new ActionManager($this->container);
-        $actionTaskClose1 = new TaskClose($this->container);
-        $actionTaskClose2 = new TaskClose($this->container);
+        $actionTaskClose1 = new TaskCloseColumn($this->container);
+        $actionTaskClose2 = new TaskCloseColumn($this->container);
         $actionTaskUpdateStartDate = new TaskUpdateStartDate($this->container);
 
         $actionManager

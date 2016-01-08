@@ -24,7 +24,6 @@
         "fguillot/picodb" : "dev-master",
         "fguillot/simpleLogger" : "1.0.0",
         "fguillot/simple-validator" : "1.0.0",
-        "league/html-to-markdown" : "~4.0",
         "paragonie/random_compat": "@stable",
         "pimple/pimple" : "~3.0",
         "ramsey/array_column": "@stable",
