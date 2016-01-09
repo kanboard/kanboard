@@ -15,7 +15,7 @@ New features:
 
 * Added support of user mentions (@username)
 * Added report to compare working hours between open and closed tasks
-* Added the possiblity to define custom routes from plugins
+* Added the possibility to define custom routes from plugins
 * Added new method to remove metadata
 
 Improvements:
@@ -28,8 +28,8 @@ Improvements:
 
 Bug fixes:
 
-* Fix compatiblity issue with FreeBSD for session.hash_function parameter
-* Fix wrong constant name that cause a PHP error in project management section
+* Fix compatibility issue with FreeBSD for session.hash_function parameter
+* Fix wrong constant name that causes a PHP error in project management section
 * Fix pagination in group members listing
 * Avoid PHP error when enabling LDAP group provider with PHP < 5.5
 
