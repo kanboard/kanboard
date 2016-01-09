@@ -87,7 +87,7 @@ Technical details
 
 ### Installation
 
-- [Recommended configuration](recommended-configuration.markdown)
+- [Requirements](requirements.markdown)
 - [Installation instructions](installation.markdown)
 - [Upgrade Kanboard to a new version](update.markdown)
 - [Installation on Ubuntu](ubuntu-installation.markdown)

@@ -15,7 +15,6 @@ PHP installation
 Edit the `php.ini`, uncomment these PHP modules:
 
 ```ini
-extension=php_curl.dll
 extension=php_gd2.dll
 extension=php_ldap.dll
 extension=php_mbstring.dll
