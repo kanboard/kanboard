@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7d258b9944c5787dd1054bfc9f6ad5e",
-    "content-hash": "1bc9b74a680511d8489c0ae172f1ad8d",
+    "hash": "b332807723e0000bb534941a15bafbb0",
+    "content-hash": "0ab11c95dc92ccabd766253dc026f108",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -239,7 +239,7 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "dev-master",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
@@ -859,7 +859,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "fguillot/picodb": 20,
         "paragonie/random_compat": 0,
         "ramsey/array_column": 0
     },
