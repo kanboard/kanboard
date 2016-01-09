@@ -32,6 +32,7 @@ class ClassProvider implements ServiceProviderInterface
             'Link',
             'Notification',
             'OverdueNotification',
+            'PasswordReset',
             'Project',
             'ProjectActivity',
             'ProjectAnalytic',
@@ -83,6 +84,9 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectGanttFormatter',
             'UserFilterAutoCompleteFormatter',
             'GroupAutoCompleteFormatter',
+        ),
+        'Validator' => array(
+            'PasswordResetValidator',
         ),
         'Core' => array(
             'DateParser',

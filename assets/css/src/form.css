@@ -173,6 +173,12 @@ input.form-input-large {
     line-height: 25px;
 }
 
+.form-login h2 {
+    margin-bottom: 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
 /* preview tabs */
 label + .form-tabs {
     margin-top: 10px;
@@ -220,4 +226,13 @@ ul.form-tabs-nav {
     margin-bottom: 5px;
     display: none;
     overflow: auto;
+}
+
+.reset-password {
+    margin-top: 20px;
+}
+
+.reset-password a {
+    font-size: 0.8em;
+    color: #999;
 }

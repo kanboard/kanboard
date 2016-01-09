@@ -6,7 +6,25 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 92;
+const VERSION = 93;
+
+function version_93(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE password_reset (
+            token TEXT PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            date_expiration INTEGER NOT NULL,
+            date_creation INTEGER NOT NULL,
+            ip TEXT NOT NULL,
+            user_agent TEXT NOT NULL,
+            is_active INTEGER NOT NULL,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    ");
+
+    $pdo->exec("INSERT INTO settings VALUES ('password_reset', '1')");
+}
 
 function version_92(PDO $pdo)
 {

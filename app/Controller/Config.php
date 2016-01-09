@@ -40,6 +40,9 @@ class Config extends Base
             $values =  $this->request->getValues();
 
             switch ($redirect) {
+                case 'application':
+                    $values += array('password_reset' => 0);
+                    break;
                 case 'project':
                     $values += array('subtask_restriction' => 0, 'subtask_time_tracking' => 0, 'cfd_include_closed_tasks' => 0);
                     break;

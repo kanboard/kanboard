@@ -19,6 +19,9 @@
             <li <?= $this->app->checkMenuSelection('user', 'sessions') ?>>
                 <?= $this->url->link(t('Persistent connections'), 'user', 'sessions', array('user_id' => $user['id'])) ?>
             </li>
+            <li <?= $this->app->checkMenuSelection('user', 'passwordReset') ?>>
+                <?= $this->url->link(t('Password reset history'), 'user', 'passwordReset', array('user_id' => $user['id'])) ?>
+            </li>
         <?php endif ?>
 
         <?= $this->hook->render('template:user:sidebar:information') ?>

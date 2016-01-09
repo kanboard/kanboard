@@ -6,7 +6,25 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 100;
+const VERSION = 101;
+
+function version_101(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE password_reset (
+            token VARCHAR(80) PRIMARY KEY,
+            user_id INT NOT NULL,
+            date_expiration INT NOT NULL,
+            date_creation INT NOT NULL,
+            ip VARCHAR(45) NOT NULL,
+            user_agent VARCHAR(255) NOT NULL,
+            is_active TINYINT(1) NOT NULL,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("INSERT INTO settings VALUES ('password_reset', '1')");
+}
 
 function version_100(PDO $pdo)
 {
@@ -1063,7 +1081,7 @@ function version_12(PDO $pdo)
         CREATE TABLE remember_me (
             id INT NOT NULL AUTO_INCREMENT,
             user_id INT,
-            ip VARCHAR(40),
+            ip VARCHAR(45),
             user_agent VARCHAR(255),
             token VARCHAR(255),
             sequence VARCHAR(255),
@@ -1079,7 +1097,7 @@ function version_12(PDO $pdo)
             id INT NOT NULL AUTO_INCREMENT,
             auth_type VARCHAR(25),
             user_id INT,
-            ip VARCHAR(40),
+            ip VARCHAR(45),
             user_agent VARCHAR(255),
             date_creation INT,
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,

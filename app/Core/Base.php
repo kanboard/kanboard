@@ -69,6 +69,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\Link                                       $link
  * @property \Kanboard\Model\Notification                               $notification
  * @property \Kanboard\Model\OverdueNotification                        $overdueNotification
+ * @property \Kanboard\Model\PasswordReset                              $passwordReset
  * @property \Kanboard\Model\Project                                    $project
  * @property \Kanboard\Model\ProjectActivity                            $projectActivity
  * @property \Kanboard\Model\ProjectAnalytic                            $projectAnalytic
@@ -112,6 +113,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
+ * @property \Kanboard\Validator\PasswordResetValidator                 $passwordResetValidator
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \PicoDb\Database                                           $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher

@@ -173,6 +173,20 @@ class User extends Base
     }
 
     /**
+     * Display last password reset
+     *
+     * @access public
+     */
+    public function passwordReset()
+    {
+        $user = $this->getUser();
+        $this->response->html($this->layout('user/password_reset', array(
+            'tokens' => $this->passwordReset->getAll($user['id']),
+            'user' => $user,
+        )));
+    }
+
+    /**
      * Display last connections
      *
      * @access public

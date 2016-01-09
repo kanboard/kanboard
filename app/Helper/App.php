@@ -13,6 +13,18 @@ use Kanboard\Core\Base;
 class App extends Base
 {
     /**
+     * Get config variable
+     *
+     * @access public
+     * @param  string $param
+     * @return mixed
+     */
+    public function config($param)
+    {
+        return $this->config->get($param);
+    }
+
+    /**
      * Make sidebar menu active
      *
      * @access public

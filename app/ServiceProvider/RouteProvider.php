@@ -205,6 +205,10 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('oauth/gitlab', 'oauth', 'gitlab');
             $container['route']->addRoute('login', 'auth', 'login');
             $container['route']->addRoute('logout', 'auth', 'logout');
+
+            // PasswordReset
+            $container['route']->addRoute('forgot-password', 'PasswordReset', 'create');
+            $container['route']->addRoute('forgot-password/change/:token', 'PasswordReset', 'change');
         }
 
         return $container;
