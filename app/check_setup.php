@@ -19,19 +19,24 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
     }
 }
 
-// Check extension: PDO
-if (! extension_loaded('pdo_sqlite') && ! extension_loaded('pdo_mysql') && ! extension_loaded('pdo_pgsql')) {
-    throw new Exception('PHP extension required: "pdo_sqlite" or "pdo_mysql" or "pdo_pgsql"');
+// Check PDO extensions
+if (DB_DRIVER === 'sqlite' && ! extension_loaded('pdo_sqlite')) {
+    throw new Exception('PHP extension required: "pdo_sqlite"');
 }
 
-// Check extension: mbstring
-if (! extension_loaded('mbstring')) {
-    throw new Exception('PHP extension required: "mbstring"');
+if (DB_DRIVER === 'mysql' && ! extension_loaded('pdo_mysql')) {
+    throw new Exception('PHP extension required: "pdo_mysql"');
 }
 
-// Check extension: gd
-if (! extension_loaded('gd')) {
-    throw new Exception('PHP extension required: "gd"');
+if (DB_DRIVER === 'postgres' && ! extension_loaded('pdo_pgsql')) {
+    throw new Exception('PHP extension required: "pdo_pgsql"');
+}
+
+// Check other extensions
+foreach (array('gd', 'mbstring', 'hash', 'openssl', 'json', 'hash', 'ctype', 'filter', 'session') as $ext) {
+    if (! extension_loaded($ext)) {
+        throw new Exception('PHP extension required: "'.$ext.'"');
+    }
 }
 
 // Fix wrong value for arg_separator.output, used by the function http_build_query()

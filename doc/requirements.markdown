@@ -68,6 +68,8 @@ Kanboard is pre-configured to work with Apache (URL rewriting).
 | openssl                    |                               |
 | json                       |                               |
 | hash                       |                               |
+| ctype                      |                               |
+| session                    |                               |
 | ldap                       | Only for LDAP authentication  |
 | Zend OPcache               | Recommended                   |
 
