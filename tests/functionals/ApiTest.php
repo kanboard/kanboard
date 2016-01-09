@@ -875,7 +875,7 @@ class Api extends PHPUnit_Framework_TestCase
         $actions = $this->client->getAvailableActions();
         $this->assertNotEmpty($actions);
         $this->assertInternalType('array', $actions);
-        $this->assertArrayHasKey('\Kanboard\Action\TaskClose', $actions);
+        $this->assertArrayHasKey('\Kanboard\Action\TaskCloseColumn', $actions);
     }
 
     public function testGetAvailableActionEvents()
