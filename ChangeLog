@@ -5,6 +5,10 @@ New features:
 
 * Forgot Password
 
+Bug fixes:
+
+* Automatic action listeners were using the same instance
+
 Version 1.0.23
 --------------
 

@@ -127,7 +127,8 @@ class ActionManager extends Base
         }
 
         foreach ($actions as $action) {
-            $listener = $this->getAction($action['action_name'])->setProjectId($action['project_id']);
+            $listener = clone $this->getAction($action['action_name']);
+            $listener->setProjectId($action['project_id']);
 
             foreach ($action['params'] as $param_name => $param_value) {
                 $listener->setParam($param_name, $param_value);
