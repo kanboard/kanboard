@@ -1,14 +1,14 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Validator;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
 /**
- * Task validator model
+ * Task Validator
  *
- * @package  model
+ * @package  validator
  * @author   Frederic Guillot
  */
 class TaskValidator extends Base
