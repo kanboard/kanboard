@@ -169,7 +169,7 @@ class Project extends Base
             }
         }
 
-        list($valid, $errors) = $this->project->validateModification($values);
+        list($valid, $errors) = $this->projectValidator->validateModification($values);
 
         if ($valid) {
             if ($this->project->update($values)) {
@@ -329,7 +329,7 @@ class Project extends Base
     public function save()
     {
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->project->validateCreation($values);
+        list($valid, $errors) = $this->projectValidator->validateCreation($values);
 
         if ($valid) {
             $project_id = $this->project->create($values, $this->userSession->getId(), true);

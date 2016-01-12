@@ -86,6 +86,7 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Validator' => array(
             'PasswordResetValidator',
+            'ProjectValidator',
             'SubtaskValidator',
             'SwimlaneValidator',
             'TaskValidator',
