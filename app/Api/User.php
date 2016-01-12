@@ -42,7 +42,7 @@ class User extends \Kanboard\Core\Base
             'role' => $role,
         );
 
-        list($valid, ) = $this->user->validateCreation($values);
+        list($valid, ) = $this->userValidator->validateCreation($values);
         return $valid ? $this->user->create($values) : false;
     }
 
@@ -94,7 +94,7 @@ class User extends \Kanboard\Core\Base
             }
         }
 
-        list($valid, ) = $this->user->validateApiModification($values);
+        list($valid, ) = $this->userValidator->validateApiModification($values);
         return $valid && $this->user->update($values);
     }
 }

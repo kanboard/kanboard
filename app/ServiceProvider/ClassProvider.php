@@ -87,6 +87,7 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Validator' => array(
             'PasswordResetValidator',
+            'UserValidator',
         ),
         'Core' => array(
             'DateParser',
