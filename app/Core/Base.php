@@ -113,6 +113,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
  * @property \Kanboard\Validator\PasswordResetValidator                 $passwordResetValidator
+ * @property \Kanboard\Validator\SwimlaneValidator                      $swimlaneValidator
  * @property \Kanboard\Validator\TaskLinkValidator                      $taskLinkValidator
  * @property \Kanboard\Validator\TaskValidator                          $taskValidator
  * @property \Kanboard\Validator\UserValidator                          $userValidator

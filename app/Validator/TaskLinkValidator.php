@@ -7,7 +7,7 @@ use SimpleValidator\Validators;
 use Kanboard\Model\Task;
 
 /**
- * TaskLink Validator
+ * Task Link Validator
  *
  * @package  validator
  * @author   Frederic Guillot
