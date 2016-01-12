@@ -3,9 +3,6 @@
 namespace Kanboard\Model;
 
 use PicoDb\Database;
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
-use Kanboard\Core\Session\SessionManager;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 

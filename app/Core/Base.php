@@ -100,7 +100,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskPermission                             $taskPermission
  * @property \Kanboard\Model\TaskPosition                               $taskPosition
  * @property \Kanboard\Model\TaskStatus                                 $taskStatus
- * @property \Kanboard\Model\TaskValidator                              $taskValidator
  * @property \Kanboard\Model\TaskMetadata                               $taskMetadata
  * @property \Kanboard\Model\Transition                                 $transition
  * @property \Kanboard\Model\User                                       $user
@@ -114,6 +113,9 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
  * @property \Kanboard\Validator\PasswordResetValidator                 $passwordResetValidator
+ * @property \Kanboard\Validator\TaskLinkValidator                      $taskLinkValidator
+ * @property \Kanboard\Validator\TaskValidator                          $taskValidator
+ * @property \Kanboard\Validator\UserValidator                          $userValidator
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \PicoDb\Database                                           $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher

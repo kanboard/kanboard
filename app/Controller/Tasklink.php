@@ -69,7 +69,7 @@ class Tasklink extends Base
         $values = $this->request->getValues();
         $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
-        list($valid, $errors) = $this->taskLink->validateCreation($values);
+        list($valid, $errors) = $this->taskLinkValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->taskLink->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
@@ -125,7 +125,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->taskLink->validateModification($values);
+        list($valid, $errors) = $this->taskLinkValidator->validateModification($values);
 
         if ($valid) {
             if ($this->taskLink->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
