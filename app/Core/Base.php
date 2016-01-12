@@ -79,6 +79,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectMetadata                            $projectMetadata
  * @property \Kanboard\Model\ProjectPermission                          $projectPermission
  * @property \Kanboard\Model\ProjectUserRole                            $projectUserRole
+ * @property \Kanboard\Model\projectUserRoleFilter                      $projectUserRoleFilter
  * @property \Kanboard\Model\ProjectGroupRole                           $projectGroupRole
  * @property \Kanboard\Model\ProjectNotification                        $projectNotification
  * @property \Kanboard\Model\ProjectNotificationType                    $projectNotificationType

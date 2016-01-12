@@ -73,7 +73,6 @@ class PasswordResetValidator extends Base
      */
     protected function validateCaptcha(array $values)
     {
-        $result = true;
         $errors = array();
 
         if (! isset($this->sessionStorage->captcha)) {
