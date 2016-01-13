@@ -8,7 +8,7 @@ New features:
 
 Improvements:
 
-* Add dropdown menu for subtasks, categories, swimlanes, columns, custom filters and groups
+* Add dropdown menu for subtasks, categories, swimlanes, columns, custom filters, task links and groups
 * Add new template hooks
 
 Bug fixes:
