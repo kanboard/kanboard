@@ -10,21 +10,23 @@
     <h3><?= t('Change columns') ?></h3>
     <table>
         <tr>
-            <th><?= t('Column title') ?></th>
-            <th><?= t('Task limit') ?></th>
-            <th><?= t('Actions') ?></th>
+            <th class="column-70"><?= t('Column title') ?></th>
+            <th class="column-25"><?= t('Task limit') ?></th>
+            <th class="column-5"><?= t('Actions') ?></th>
         </tr>
         <?php foreach ($columns as $column): ?>
         <tr>
-            <td class="column-60"><?= $this->e($column['title']) ?>
+            <td><?= $this->e($column['title']) ?>
              <?php if (! empty($column['description'])): ?>
                 <span class="tooltip" title='<?= $this->e($this->text->markdown($column['description'])) ?>'>
                     <i class="fa fa-info-circle"></i>
                 </span>
             <?php endif ?>
             </td>
-            <td class="column-10"><?= $this->e($column['task_limit']) ?></td>
-            <td class="column-30">
+            <td><?= $this->e($column['task_limit']) ?></td>
+            <td>
+                <div class="dropdown">
+                <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
                         <?= $this->url->link(t('Edit'), 'column', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
@@ -43,6 +45,7 @@
                         <?= $this->url->link(t('Remove'), 'column', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
                     </li>
                 </ul>
+                </div>
             </td>
         </tr>
         <?php endforeach ?>
