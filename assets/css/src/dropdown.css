@@ -67,6 +67,11 @@ ul.dropdown-submenu-open {
     padding-right: 10px;
 }
 
+.dropdown-menu-link-icon {
+    color: #333;
+    text-decoration: none;
+}
+
 /* textarea dropdown */
 .textarea-dropdown {
     list-style: none;

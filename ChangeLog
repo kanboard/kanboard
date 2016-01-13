@@ -5,6 +5,10 @@ New features:
 
 * Forgot Password
 
+Improvements:
+
+* Add dropdown menu for subtasks
+
 Bug fixes:
 
 * Automatic action listeners were using the same instance
