@@ -9,7 +9,7 @@ Official website: <http://kanboard.net>
 - Multiple boards with the ability to drag and drop tasks
 - Open source and self-hosted
 - Super simple installation
-- Translated in 23 languages
+- Translated in 24 languages
 - Distributed under [MIT License](LICENSE)
 - [List of features are available on the website](http://kanboard.net/features)
 - [Change Log](ChangeLog)

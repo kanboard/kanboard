@@ -63,6 +63,7 @@ Contributors:
 - [Michael Lüpkes](https://github.com/mluepkes)
 - [Mihailov Vasilievic Filho](https://github.com/mihailov-vf)
 - [Moraxy](https://github.com/moraxy)
+- [Muhaimin](https://github.com/infacq)
 - [Nala Ginrut](https://github.com/NalaGinrut)
 - [Nekohayo](https://github.com/nekohayo)
 - [Nicolas Lœuillet](https://github.com/nicosomb)
