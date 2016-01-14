@@ -15,10 +15,10 @@ class DatabaseUserProvider implements UserProviderInterface
     /**
      * User properties
      *
-     * @access private
+     * @access protected
      * @var array
      */
-    private $user = array();
+    protected $user = array();
 
     /**
      * Constructor

@@ -17,10 +17,10 @@ class User
     /**
      * Query
      *
-     * @access private
+     * @access protected
      * @var Query
      */
-    private $query;
+    protected $query;
 
     /**
      * Constructor
@@ -44,7 +44,8 @@ class User
      */
     public static function getUser(Client $client, $username)
     {
-        $self = new self(new Query($client));
+        $className = get_called_class();
+        $self = new $className(new Query($client));
         return $self->find($self->getLdapUserPattern($username));
     }
 

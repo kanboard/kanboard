@@ -16,10 +16,10 @@ class ReverseProxyUserProvider implements UserProviderInterface
     /**
      * Username
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $username = '';
+    protected $username = '';
 
     /**
      * Constructor
