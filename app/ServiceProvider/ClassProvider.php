@@ -85,6 +85,8 @@ class ClassProvider implements ServiceProviderInterface
             'GroupAutoCompleteFormatter',
         ),
         'Validator' => array(
+            'ActionValidator',
+            'ColumnValidator',
             'PasswordResetValidator',
             'ProjectValidator',
             'SubtaskValidator',

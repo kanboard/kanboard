@@ -113,6 +113,8 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
+ * @property \Kanboard\Validator\ActionValidator                        $actionValidator
+ * @property \Kanboard\Validator\ColumnValidator                        $columnValidator
  * @property \Kanboard\Validator\PasswordResetValidator                 $passwordResetValidator
  * @property \Kanboard\Validator\ProjectValidator                       $projectValidator
  * @property \Kanboard\Validator\SubtaskValidator                       $subtaskValidator
