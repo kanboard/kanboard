@@ -33,6 +33,7 @@ class BoardTest extends Base
         $input = '   column #1  , column #2, ';
 
         $this->assertTrue($c->save(array('board_columns' => $input)));
+        $this->container['memoryCache']->flush();
         $this->assertEquals($input, $c->get('board_columns'));
 
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));

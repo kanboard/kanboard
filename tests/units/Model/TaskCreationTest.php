@@ -402,6 +402,7 @@ class TaskCreationTest extends Base
         $this->assertEquals('yellow', $task['color_id']);
 
         $this->assertTrue($c->save(array('default_color' => 'orange')));
+        $this->container['memoryCache']->flush();
 
         $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'test2')));
 

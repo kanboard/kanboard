@@ -117,6 +117,7 @@ class UrlHelperTest extends Base
 
         $c = new Config($this->container);
         $c->save(array('application_url' => 'https://mykanboard/'));
+        $this->container['memoryCache']->flush();
 
         $h = new Url($this->container);
         $this->assertEquals('https://mykanboard/', $c->get('application_url'));
