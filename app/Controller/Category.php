@@ -57,7 +57,7 @@ class Category extends Base
         $project = $this->getProject();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->category->validateCreation($values);
+        list($valid, $errors) = $this->categoryValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->category->create($values)) {
@@ -99,7 +99,7 @@ class Category extends Base
         $project = $this->getProject();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->category->validateModification($values);
+        list($valid, $errors) = $this->categoryValidator->validateModification($values);
 
         if ($valid) {
             if ($this->category->update($values)) {

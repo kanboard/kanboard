@@ -1,18 +1,18 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Validator;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Gregwar\Captcha\CaptchaBuilder;
 
 /**
- * Authentication model
+ * Authentication Validator
  *
- * @package  model
+ * @package  validator
  * @author   Frederic Guillot
  */
-class Authentication extends Base
+class AuthValidator extends Base
 {
     /**
      * Validate user login form

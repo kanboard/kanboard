@@ -42,7 +42,7 @@ class Customfilter extends Base
         $values = $this->request->getValues();
         $values['user_id'] = $this->userSession->getId();
 
-        list($valid, $errors) = $this->customFilter->validateCreation($values);
+        list($valid, $errors) = $this->customFilterValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->customFilter->create($values)) {
@@ -121,7 +121,7 @@ class Customfilter extends Base
             $values += array('append' => 0);
         }
 
-        list($valid, $errors) = $this->customFilter->validateModification($values);
+        list($valid, $errors) = $this->customFilterValidator->validateModification($values);
 
         if ($valid) {
             if ($this->customFilter->update($values)) {

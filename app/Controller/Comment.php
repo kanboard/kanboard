@@ -78,7 +78,7 @@ class Comment extends Base
         $values = $this->request->getValues();
         $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
-        list($valid, $errors) = $this->comment->validateCreation($values);
+        list($valid, $errors) = $this->commentValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->comment->create($values)) {
@@ -127,7 +127,7 @@ class Comment extends Base
         $comment = $this->getComment();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->comment->validateModification($values);
+        list($valid, $errors) = $this->commentValidator->validateModification($values);
 
         if ($valid) {
             if ($this->comment->update($values)) {

@@ -39,7 +39,7 @@ class Auth extends Base
     {
         $values = $this->request->getValues();
         $this->sessionStorage->hasRememberMe = ! empty($values['remember_me']);
-        list($valid, $errors) = $this->authentication->validateForm($values);
+        list($valid, $errors) = $this->authValidator->validateForm($values);
 
         if ($valid) {
             $this->redirectAfterLogin();

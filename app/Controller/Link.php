@@ -67,7 +67,7 @@ class Link extends Base
     public function save()
     {
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->link->validateCreation($values);
+        list($valid, $errors) = $this->linkValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->link->create($values['label'], $values['opposite_label']) !== false) {
@@ -108,7 +108,7 @@ class Link extends Base
     public function update()
     {
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->link->validateModification($values);
+        list($valid, $errors) = $this->linkValidator->validateModification($values);
 
         if ($valid) {
             if ($this->link->update($values)) {

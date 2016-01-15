@@ -79,7 +79,7 @@ class Group extends Base
     public function save()
     {
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->group->validateCreation($values);
+        list($valid, $errors) = $this->groupValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->group->create($values['name']) !== false) {
@@ -120,7 +120,7 @@ class Group extends Base
     public function update()
     {
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->group->validateModification($values);
+        list($valid, $errors) = $this->groupValidator->validateModification($values);
 
         if ($valid) {
             if ($this->group->update($values) !== false) {

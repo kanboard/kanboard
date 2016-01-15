@@ -2,9 +2,6 @@
 
 namespace Kanboard\Model;
 
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
-
 /**
  * Currency
  *
@@ -82,25 +79,5 @@ class Currency extends Base
     public function update($currency, $rate)
     {
         return $this->db->table(self::TABLE)->eq('currency', $currency)->update(array('rate' => $rate));
-    }
-
-    /**
-     * Validate
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validate(array $values)
-    {
-        $v = new Validator($values, array(
-            new Validators\Required('currency', t('Field required')),
-            new Validators\Required('rate', t('Field required')),
-        ));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
     }
 }

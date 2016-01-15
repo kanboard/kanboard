@@ -17,7 +17,6 @@ class ClassProvider implements ServiceProviderInterface
         'Model' => array(
             'Action',
             'ActionParameter',
-            'Authentication',
             'Board',
             'Category',
             'Color',
@@ -86,7 +85,14 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Validator' => array(
             'ActionValidator',
+            'AuthValidator',
+            'CategoryValidator',
             'ColumnValidator',
+            'CommentValidator',
+            'CurrencyValidator',
+            'CustomFilterValidator',
+            'GroupValidator',
+            'LinkValidator',
             'PasswordResetValidator',
             'ProjectValidator',
             'SubtaskValidator',
