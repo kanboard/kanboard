@@ -10,6 +10,7 @@ Improvements:
 
 * Add dropdown menu for subtasks, categories, swimlanes, columns, custom filters, task links and groups
 * Add new template hooks
+* Application settings are not cached anymore in the session
 
 Bug fixes:
 

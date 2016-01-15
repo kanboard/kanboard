@@ -38,7 +38,7 @@ class Currency extends Base
             'values' => $values,
             'errors' => $errors,
             'rates' => $this->currency->getAll(),
-            'currencies' => $this->config->getCurrencies(),
+            'currencies' => $this->currency->getCurrencies(),
             'title' => t('Settings').' &gt; '.t('Currency rates'),
         )));
     }

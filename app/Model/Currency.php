@@ -18,6 +18,32 @@ class Currency extends Base
     const TABLE = 'currencies';
 
     /**
+     * Get available application currencies
+     *
+     * @access public
+     * @return array
+     */
+    public function getCurrencies()
+    {
+        return array(
+            'USD' => t('USD - US Dollar'),
+            'EUR' => t('EUR - Euro'),
+            'GBP' => t('GBP - British Pound'),
+            'CHF' => t('CHF - Swiss Francs'),
+            'CAD' => t('CAD - Canadian Dollar'),
+            'AUD' => t('AUD - Australian Dollar'),
+            'NZD' => t('NZD - New Zealand Dollar'),
+            'INR' => t('INR - Indian Rupee'),
+            'JPY' => t('JPY - Japanese Yen'),
+            'RSD' => t('RSD - Serbian dinar'),
+            'SEK' => t('SEK - Swedish Krona'),
+            'NOK' => t('NOK - Norwegian Krone'),
+            'BAM' => t('BAM - Konvertible Mark'),
+            'RUB' => t('RUB - Russian Ruble'),
+        );
+    }
+
+    /**
      * Get all currency rates
      *
      * @access public

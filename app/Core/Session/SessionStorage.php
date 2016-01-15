@@ -8,7 +8,6 @@ namespace Kanboard\Core\Session;
  * @package  session
  * @author   Frederic Guillot
  *
- * @property array  $config
  * @property array  $user
  * @property array  $flash
  * @property array  $csrf

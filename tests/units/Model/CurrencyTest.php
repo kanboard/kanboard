@@ -6,6 +6,13 @@ use Kanboard\Model\Currency;
 
 class CurrencyTest extends Base
 {
+    public function testGetCurrencies()
+    {
+        $currencyModel = new Currency($this->container);
+        $currencies = $currencyModel->getCurrencies();
+        $this->assertArrayHasKey('EUR', $currencies);
+    }
+
     public function testGetAll()
     {
         $currencyModel = new Currency($this->container);
