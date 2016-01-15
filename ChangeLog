@@ -15,6 +15,7 @@ Bug fixes:
 
 * Automatic action listeners were using the same instance
 * Fix wrong link for category in task footer
+* Unable to set currency rate with Postgres database
 
 Version 1.0.23
 --------------

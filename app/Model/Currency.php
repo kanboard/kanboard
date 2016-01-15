@@ -42,7 +42,7 @@ class Currency extends Base
         $reference = $this->config->get('application_currency', 'USD');
 
         if ($reference !== $currency) {
-            $rates = $rates === null ? $this->db->hashtable(self::TABLE)->getAll('currency', 'rate') : array();
+            $rates = $rates === null ? $this->db->hashtable(self::TABLE)->getAll('currency', 'rate') : $rates;
             $rate = isset($rates[$currency]) ? $rates[$currency] : 1;
 
             return $rate * $price;
@@ -65,7 +65,7 @@ class Currency extends Base
             return $this->update($currency, $rate);
         }
 
-        return $this->persist(self::TABLE, compact('currency', 'rate'));
+        return $this->db->table(self::TABLE)->insert(array('currency' => $currency, 'rate' => $rate));
     }
 
     /**
