@@ -37,8 +37,6 @@ class Analytic extends Base
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        $this->projectDailyStats->updateTotals($project['id'], date('Y-m-d'));
-
         $from = $this->request->getStringParam('from', date('Y-m-d', strtotime('-1week')));
         $to = $this->request->getStringParam('to', date('Y-m-d'));
 
@@ -53,7 +51,7 @@ class Analytic extends Base
                 'to' => $to,
             ),
             'project' => $project,
-            'average' => $this->projectAnalytic->getAverageLeadAndCycleTime($project['id']),
+            'average' => $this->averageLeadCycleTimeAnalytic->build($project['id']),
             'metrics' => $this->projectDailyStats->getRawMetrics($project['id'], $from, $to),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
@@ -72,7 +70,7 @@ class Analytic extends Base
 
         $this->response->html($this->layout('analytic/avg_time_columns', array(
             'project' => $project,
-            'metrics' => $this->projectAnalytic->getAverageTimeSpentByColumn($project['id']),
+            'metrics' => $this->averageTimeSpentColumnAnalytic->build($project['id']),
             'title' => t('Average time spent into each column for "%s"', $project['name']),
         )));
     }

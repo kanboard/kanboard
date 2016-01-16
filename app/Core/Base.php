@@ -13,6 +13,8 @@ use Pimple\Container;
  * @property \Kanboard\Analytic\TaskDistributionAnalytic                $taskDistributionAnalytic
  * @property \Kanboard\Analytic\UserDistributionAnalytic                $userDistributionAnalytic
  * @property \Kanboard\Analytic\EstimatedTimeComparisonAnalytic         $estimatedTimeComparisonAnalytic
+ * @property \Kanboard\Analytic\AverageLeadCycleTimeAnalytic            $averageLeadCycleTimeAnalytic
+ * @property \Kanboard\Analytic\AverageTimeSpentColumnAnalytic          $averageTimeSpentColumnAnalytic
  * @property \Kanboard\Core\Action\ActionManager                        $actionManager
  * @property \Kanboard\Core\Cache\MemoryCache                           $memoryCache
  * @property \Kanboard\Core\Event\EventManager                          $eventManager

@@ -18,6 +18,8 @@ class ClassProvider implements ServiceProviderInterface
             'TaskDistributionAnalytic',
             'UserDistributionAnalytic',
             'EstimatedTimeComparisonAnalytic',
+            'AverageLeadCycleTimeAnalytic',
+            'AverageTimeSpentColumnAnalytic',
         ),
         'Model' => array(
             'Action',
@@ -39,7 +41,6 @@ class ClassProvider implements ServiceProviderInterface
             'PasswordReset',
             'Project',
             'ProjectActivity',
-            'ProjectAnalytic',
             'ProjectDuplication',
             'ProjectDailyColumnStats',
             'ProjectDailyStats',

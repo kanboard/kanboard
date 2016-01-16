@@ -29,7 +29,7 @@ class ProjectDailyStats extends Base
     {
         $this->db->startTransaction();
 
-        $lead_cycle_time = $this->projectAnalytic->getAverageLeadAndCycleTime($project_id);
+        $lead_cycle_time = $this->averageLeadCycleTimeAnalytic->build($project_id);
 
         $exists = $this->db->table(ProjectDailyStats::TABLE)
             ->eq('day', $date)
