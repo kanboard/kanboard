@@ -6,7 +6,7 @@ Kanboard est capable d'envoyer des notifications via différents canaux :
 - Email
 - Web (Liste de message non lus)
 
-Vous pouvez ajouter d'autres cannaux an ajoutant des extensions comme par exemple Hipchat, Slack ou encore Jabber.
+Vous pouvez ajouter d'autres canaux en ajoutant des extensions comme par exemple Hipchat, Slack ou encore Jabber.
 
 Configuration
 --------------
@@ -34,12 +34,12 @@ Vous pouvez aussi sélectionner certain projets, par défaut tous les projets do
 Notifications web
 -----------------
 
-Les notifications web sont accéssibles depuis le tableau de bord ou depuis l'icône en haut de la page :
+Les notifications web sont accessibles depuis le tableau de bord ou depuis l'icône en haut de la page :
 
 ![Icône des notifications web](http://kanboard.net/screenshots/documentation/web-notifications-icon.png)
 
-Les notifications sont affichés sous forme de liste. Vous pouvez marquer comme lu chacune d'entre-elle ou toutes en même temps.
+Les notifications sont affichées sous forme de liste. Vous pouvez marquer comme lu chacune d'entre-elle ou toutes en même temps.
 
 ![Notifications web](http://kanboard.net/screenshots/documentation/web-notifications.png)
 
-Avec cette méthode vous pouvez quand même rester avertis de ce que se passe sans pour autant être innonder d'emails.
+Avec cette méthode vous pouvez quand même rester avertis de ce que se passe sans pour autant être inondé d'emails.
