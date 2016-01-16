@@ -11,82 +11,6 @@ namespace Kanboard\Model;
 class ProjectAnalytic extends Base
 {
     /**
-     * Get tasks repartition
-     *
-     * @access public
-     * @param  integer   $project_id    Project id
-     * @return array
-     */
-    public function getTaskRepartition($project_id)
-    {
-        $metrics = array();
-        $total = 0;
-        $columns = $this->board->getColumns($project_id);
-
-        foreach ($columns as $column) {
-            $nb_tasks = $this->taskFinder->countByColumnId($project_id, $column['id']);
-            $total += $nb_tasks;
-
-            $metrics[] = array(
-                'column_title' => $column['title'],
-                'nb_tasks' => $nb_tasks,
-            );
-        }
-
-        if ($total === 0) {
-            return array();
-        }
-
-        foreach ($metrics as &$metric) {
-            $metric['percentage'] = round(($metric['nb_tasks'] * 100) / $total, 2);
-        }
-
-        return $metrics;
-    }
-
-    /**
-     * Get users repartition
-     *
-     * @access public
-     * @param  integer   $project_id
-     * @return array
-     */
-    public function getUserRepartition($project_id)
-    {
-        $metrics = array();
-        $total = 0;
-        $tasks = $this->taskFinder->getAll($project_id);
-        $users = $this->projectUserRole->getAssignableUsersList($project_id);
-
-        foreach ($tasks as $task) {
-            $user = isset($users[$task['owner_id']]) ? $users[$task['owner_id']] : $users[0];
-            $total++;
-
-            if (! isset($metrics[$user])) {
-                $metrics[$user] = array(
-                    'nb_tasks' => 0,
-                    'percentage' => 0,
-                    'user' => $user,
-                );
-            }
-
-            $metrics[$user]['nb_tasks']++;
-        }
-
-        if ($total === 0) {
-            return array();
-        }
-
-        foreach ($metrics as &$metric) {
-            $metric['percentage'] = round(($metric['nb_tasks'] * 100) / $total, 2);
-        }
-
-        ksort($metrics);
-
-        return array_values($metrics);
-    }
-
-    /**
      * Get the average lead and cycle time
      *
      * @access public
@@ -175,51 +99,6 @@ class ProjectAnalytic extends Base
         // Calculate average for each column
         foreach ($columns as $column_id => $column_title) {
             $stats[$column_id]['average'] = $stats[$column_id]['count'] > 0 ? (int) ($stats[$column_id]['time_spent'] / $stats[$column_id]['count']) : 0;
-        }
-
-        return $stats;
-    }
-
-    /**
-     * Get the time spent and estimated into each status
-     *
-     * @access public
-     * @param  integer   $project_id
-     * @return array
-     */
-    public function getHoursByStatus($project_id)
-    {
-        $stats = array();
-
-        // Get the times related to each task
-        $tasks = $this->db
-            ->table(Task::TABLE)
-            ->columns('id', 'time_estimated', 'time_spent', 'is_active')
-            ->eq('project_id', $project_id)
-            ->desc('id')
-            ->limit(1000)
-            ->findAll();
-
-        // Init values
-        $stats['closed'] = array(
-            'time_spent' => 0,
-            'time_estimated' => 0,
-        );
-
-        $stats['open'] = array(
-            'time_spent' => 0,
-            'time_estimated' => 0,
-        );
-
-        // Add times spent and estimated to each status
-        foreach ($tasks as &$task) {
-            if ($task['is_active']) {
-                $stats['open']['time_estimated'] += $task['time_estimated'];
-                $stats['open']['time_spent'] += $task['time_spent'];
-            } else {
-                $stats['closed']['time_estimated'] += $task['time_estimated'];
-                $stats['closed']['time_spent'] += $task['time_spent'];
-            }
         }
 
         return $stats;

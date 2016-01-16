@@ -4,8 +4,8 @@
 
 <div class="listing">
     <ul>
-        <li><?= t('Estimated hours: ').'<strong>'.$this->e($metrics['open']['time_estimated']+$metrics['open']['time_estimated']) ?></strong></li>
-        <li><?= t('Actual hours: ').'<strong>'.$this->e($metrics['open']['time_spent']+$metrics['closed']['time_spent']) ?></strong></li>
+        <li><?= t('Estimated hours: ').'<strong>'.$this->e($metrics['open']['time_estimated'] + $metrics['closed']['time_estimated']) ?></strong></li>
+        <li><?= t('Actual hours: ').'<strong>'.$this->e($metrics['open']['time_spent'] + $metrics['closed']['time_spent']) ?></strong></li>
     </ul>
 </div>
 
@@ -13,7 +13,12 @@
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
 <section id="analytic-compare-hours">
-    <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS)?>' data-label-spent="<?= t('Hours Spent') ?>" data-label-estimated="<?= t('Hours Estimated') ?>"></div>
+    <div id="chart"
+        data-metrics='<?= json_encode($metrics, JSON_HEX_APOS)?>'
+        data-label-spent="<?= t('Hours Spent') ?>"
+        data-label-estimated="<?= t('Hours Estimated') ?>"
+        data-label-closed="<?= t('Closed') ?>"
+        data-label-open="<?= t('Open') ?>"></div>
 
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No tasks found.') ?></p>

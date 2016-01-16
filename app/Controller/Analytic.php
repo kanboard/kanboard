@@ -88,7 +88,7 @@ class Analytic extends Base
 
         $this->response->html($this->layout('analytic/tasks', array(
             'project' => $project,
-            'metrics' => $this->projectAnalytic->getTaskRepartition($project['id']),
+            'metrics' => $this->taskDistributionAnalytic->build($project['id']),
             'title' => t('Task repartition for "%s"', $project['name']),
         )));
     }
@@ -104,7 +104,7 @@ class Analytic extends Base
 
         $this->response->html($this->layout('analytic/users', array(
             'project' => $project,
-            'metrics' => $this->projectAnalytic->getUserRepartition($project['id']),
+            'metrics' => $this->userDistributionAnalytic->build($project['id']),
             'title' => t('User repartition for "%s"', $project['name']),
         )));
     }
@@ -177,7 +177,7 @@ class Analytic extends Base
     {
         $project = $this->getProject();
         $params = $this->getProjectFilters('analytic', 'compareHours');
-        $query = $this->taskFilter->search('status:all')->filterByProject($params['project']['id'])->getQuery();
+        $query = $this->taskFilter->create()->filterByProject($params['project']['id'])->getQuery();
 
         $paginator = $this->paginator
             ->setUrl('analytic', 'compareHours', array('project_id' => $project['id']))
@@ -186,12 +186,10 @@ class Analytic extends Base
             ->setQuery($query)
             ->calculate();
 
-        $stats = $this->projectAnalytic->getHoursByStatus($project['id']);
-
         $this->response->html($this->layout('analytic/compare_hours', array(
             'project' => $project,
             'paginator' => $paginator,
-            'metrics' => $stats,
+            'metrics' => $this->estimatedTimeComparisonAnalytic->build($project['id']),
             'title' => t('Compare hours for "%s"', $project['name']),
         )));
     }

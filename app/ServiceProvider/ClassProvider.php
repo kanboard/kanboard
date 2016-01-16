@@ -14,6 +14,11 @@ use Kanboard\Core\Http\Client as HttpClient;
 class ClassProvider implements ServiceProviderInterface
 {
     private $classes = array(
+        'Analytic' => array(
+            'TaskDistributionAnalytic',
+            'UserDistributionAnalytic',
+            'EstimatedTimeComparisonAnalytic',
+        ),
         'Model' => array(
             'Action',
             'ActionParameter',

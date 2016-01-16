@@ -10,6 +10,9 @@ use Pimple\Container;
  * @package core
  * @author  Frederic Guillot
  *
+ * @property \Kanboard\Analytic\TaskDistributionAnalytic                $taskDistributionAnalytic
+ * @property \Kanboard\Analytic\UserDistributionAnalytic                $userDistributionAnalytic
+ * @property \Kanboard\Analytic\EstimatedTimeComparisonAnalytic         $estimatedTimeComparisonAnalytic
  * @property \Kanboard\Core\Action\ActionManager                        $actionManager
  * @property \Kanboard\Core\Cache\MemoryCache                           $memoryCache
  * @property \Kanboard\Core\Event\EventManager                          $eventManager
