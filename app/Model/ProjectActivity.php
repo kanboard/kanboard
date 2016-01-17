@@ -169,14 +169,8 @@ class ProjectActivity extends Base
     public function cleanup($max)
     {
         if ($this->db->table(self::TABLE)->count() > $max) {
-            $this->db->execute('
-                DELETE FROM '.self::TABLE.'
-                WHERE id <= (
-                    SELECT id FROM (
-                        SELECT id FROM '.self::TABLE.' ORDER BY id DESC LIMIT 1 OFFSET '.$max.'
-                    ) foo
-                )'
-            );
+            $subquery = $this->db->table(self::TABLE)->desc('id')->limit($max)->columns('id');
+            $this->db->table(self::TABLE)->notInSubquery('id', $subquery)->remove();
         }
     }
 

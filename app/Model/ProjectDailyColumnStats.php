@@ -159,7 +159,7 @@ class ProjectDailyColumnStats extends Base
      * @param  string  $day
      * @param  string  $column_id
      * @param  string  $field
-     * @return array
+     * @return integer
      */
     private function findValueInMetrics(array &$metrics, $day, $column_id, $field)
     {

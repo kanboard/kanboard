@@ -87,9 +87,10 @@ class ProjectActivityTest extends Base
 
         $max = 15;
         $nb_events = 100;
+        $task = $tf->getbyId(1);
 
         for ($i = 0; $i < $nb_events; $i++) {
-            $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $tf->getbyId(1))));
+            $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $task)));
         }
 
         $this->assertEquals($nb_events, $this->container['db']->table('project_activities')->count());
@@ -98,20 +99,9 @@ class ProjectActivityTest extends Base
         $events = $e->getProject(1);
 
         $this->assertNotEmpty($events);
-        $this->assertTrue(is_array($events));
-        $this->assertEquals($max, count($events));
+        $this->assertCount($max, $events);
         $this->assertEquals(100, $events[0]['id']);
         $this->assertEquals(99, $events[1]['id']);
         $this->assertEquals(86, $events[14]['id']);
-
-        // Cleanup during task creation
-
-        $nb_events = ProjectActivity::MAX_EVENTS + 10;
-
-        for ($i = 0; $i < $nb_events; $i++) {
-            $this->assertTrue($e->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $tf->getbyId(1))));
-        }
-
-        $this->assertEquals(ProjectActivity::MAX_EVENTS, $this->container['db']->table('project_activities')->count());
     }
 }
