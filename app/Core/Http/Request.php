@@ -157,6 +157,18 @@ class Request extends Base
     }
 
     /**
+     * Get info of an uploaded file
+     *
+     * @access public
+     * @param  string   $name   Form file name
+     * @return array
+     */
+    public function getFileInfo($name)
+    {
+        return isset($this->files[$name]) ? $this->files[$name] : array();
+    }
+
+    /**
      * Return HTTP method
      *
      * @access public
