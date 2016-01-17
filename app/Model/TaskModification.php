@@ -52,7 +52,7 @@ class TaskModification extends Base
 
         if ($this->isFieldModified('owner_id', $event_data['changes'])) {
             $events[] = Task::EVENT_ASSIGNEE_CHANGE;
-        } else {
+        } elseif (! empty($event_data['changes'])) {
             $events[] = Task::EVENT_CREATE_UPDATE;
             $events[] = Task::EVENT_UPDATE;
         }
