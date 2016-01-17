@@ -119,7 +119,13 @@ abstract class Base extends \Kanboard\Core\Base
      */
     public function __toString()
     {
-        return $this->getName();
+        $params = array();
+
+        foreach ($this->params as $key => $value) {
+            $params[] = $key.'='.var_export($value, true);
+        }
+
+        return $this->getName().'('.implode('|', $params).'])';
     }
 
     /**
@@ -246,16 +252,17 @@ abstract class Base extends \Kanboard\Core\Base
         }
 
         $data = $event->getAll();
-        $result = false;
+        $executable = $this->isExecutable($data, $eventName);
+        $executed = false;
 
-        if ($this->isExecutable($data, $eventName)) {
+        if ($executable) {
             $this->called = true;
-            $result = $this->doAction($data);
+            $executed = $this->doAction($data);
         }
 
-        $this->logger->debug('AutomaticAction '.$this->getName().' => '.($result ? 'true' : 'false'));
+        $this->logger->debug($this.' ['.$eventName.'] => executable='.var_export($executable, true).' exec_success='.var_export($executed, true));
 
-        return $result;
+        return $executed;
     }
 
     /**

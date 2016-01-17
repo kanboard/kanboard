@@ -177,11 +177,14 @@ class TaskPosition extends Base
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {
-            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_SWIMLANE, new TaskEvent($event_data));
+            $this->logger->debug('Event fired: '.Task::EVENT_MOVE_SWIMLANE);
+            $this->dispatcher->dispatch(Task::EVENT_MOVE_SWIMLANE, new TaskEvent($event_data));
         } elseif ($task['column_id'] != $new_column_id) {
-            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_COLUMN, new TaskEvent($event_data));
+            $this->logger->debug('Event fired: '.Task::EVENT_MOVE_COLUMN);
+            $this->dispatcher->dispatch(Task::EVENT_MOVE_COLUMN, new TaskEvent($event_data));
         } elseif ($task['position'] != $new_position) {
-            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_POSITION, new TaskEvent($event_data));
+            $this->logger->debug('Event fired: '.Task::EVENT_MOVE_POSITION);
+            $this->dispatcher->dispatch(Task::EVENT_MOVE_POSITION, new TaskEvent($event_data));
         }
     }
 }

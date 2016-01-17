@@ -113,10 +113,8 @@ class TaskStatus extends Base
                         ));
 
         if ($result) {
-            $this->container['dispatcher']->dispatch(
-                $event,
-                new TaskEvent(array('task_id' => $task_id) + $this->taskFinder->getById($task_id))
-            );
+            $this->logger->debug('Event fired: '.$event);
+            $this->dispatcher->dispatch($event, new TaskEvent(array('task_id' => $task_id) + $this->taskFinder->getById($task_id)));
         }
 
         return $result;
