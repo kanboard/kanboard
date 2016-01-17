@@ -108,9 +108,12 @@ Board.prototype.dragAndDrop = function() {
         placeholder: "draggable-placeholder",
         items: ".draggable-item",
         stop: function(event, ui) {
+            var taskId = ui.item.attr('data-task-id');
             ui.item.removeClass("draggable-item-selected");
+            self.changeTaskState(taskId);
+
             self.save(
-                ui.item.attr('data-task-id'),
+                taskId,
                 ui.item.parent().attr("data-column-id"),
                 ui.item.index() + 1,
                 ui.item.parent().attr('data-swimlane-id')
@@ -128,6 +131,12 @@ Board.prototype.dragAndDrop = function() {
     }
 
     $(".board-task-list").sortable(params);
+};
+
+Board.prototype.changeTaskState = function(taskId) {
+    var task = $("div[data-task-id=" + taskId + "]");
+    task.addClass('task-board-saving-state');
+    task.find('.task-board-saving-icon').show();
 };
 
 Board.prototype.listen = function() {
