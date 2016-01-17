@@ -16,6 +16,7 @@ Improvements:
 * Reduce the number of SQL queries for project daily column stats
 * Remove event subscriber to update date_moved field
 * Make sure that some event subscribers are not executed multiple times
+* Show rendering time of individual templates when debug mode is enabled
 
 Bug fixes:
 
