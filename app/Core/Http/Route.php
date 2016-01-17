@@ -2,7 +2,6 @@
 
 namespace Kanboard\Core\Http;
 
-use RuntimeException;
 use Kanboard\Core\Base;
 
 /**

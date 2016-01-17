@@ -40,7 +40,7 @@ class User
      * @access public
      * @param  Client    $client
      * @param  string    $username
-     * @return array
+     * @return LdapUserProvider
      */
     public static function getUser(Client $client, $username)
     {

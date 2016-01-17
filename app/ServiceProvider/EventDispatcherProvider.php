@@ -11,7 +11,6 @@ use Kanboard\Subscriber\NotificationSubscriber;
 use Kanboard\Subscriber\ProjectDailySummarySubscriber;
 use Kanboard\Subscriber\ProjectModificationDateSubscriber;
 use Kanboard\Subscriber\SubtaskTimeTrackingSubscriber;
-use Kanboard\Subscriber\TaskMovedDateSubscriber;
 use Kanboard\Subscriber\TransitionSubscriber;
 use Kanboard\Subscriber\RecurringTaskSubscriber;
 

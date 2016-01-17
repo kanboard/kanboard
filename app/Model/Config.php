@@ -4,7 +4,6 @@ namespace Kanboard\Model;
 
 use Kanboard\Core\Translator;
 use Kanboard\Core\Security\Token;
-use Kanboard\Core\Session\SessionManager;
 
 /**
  * Config model

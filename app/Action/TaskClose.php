@@ -2,8 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
-
 /**
  * Close automatically a task
  *

@@ -28,7 +28,7 @@ class ProjectUserRole extends Base
      */
     public function getActiveProjectsByUser($user_id)
     {
-        return $this->getProjectsByUser($user_id, $status = array(Project::ACTIVE));
+        return $this->getProjectsByUser($user_id, array(Project::ACTIVE));
     }
 
     /**

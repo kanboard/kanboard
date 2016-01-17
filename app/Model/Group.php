@@ -2,9 +2,6 @@
 
 namespace Kanboard\Model;
 
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
-
 /**
  * Group Model
  *
