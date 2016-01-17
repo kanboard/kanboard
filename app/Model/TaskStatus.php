@@ -62,6 +62,32 @@ class TaskStatus extends Base
     }
 
     /**
+     * Close multiple tasks
+     *
+     * @access public
+     * @param  array   $task_ids
+     */
+    public function closeMultipleTasks(array $task_ids)
+    {
+        foreach ($task_ids as $task_id) {
+            $this->close($task_id);
+        }
+    }
+
+    /**
+     * Close all tasks within a column/swimlane
+     *
+     * @access public
+     * @param  integer $swimlane_id
+     * @param  integer $column_id
+     */
+    public function closeTasksBySwimlaneAndColumn($swimlane_id, $column_id)
+    {
+        $task_ids = $this->db->table(Task::TABLE)->eq('swimlane_id', $swimlane_id)->eq('column_id', $column_id)->findAllByColumn('id');
+        $this->closeMultipleTasks($task_ids);
+    }
+
+    /**
      * Common method to change the status of task
      *
      * @access private

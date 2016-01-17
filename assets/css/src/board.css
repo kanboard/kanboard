@@ -80,8 +80,8 @@ td.board-column-task-collapsed {
 }
 
 /* column header */
-.board-column-title {
-    cursor: pointer;
+.board-column-title .dropdown-menu {
+    text-decoration: none;
 }
 
 .board-add-icon {

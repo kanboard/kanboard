@@ -141,7 +141,7 @@ Board.prototype.listen = function() {
         self.toggleColumnScrolling();
     });
 
-    $(document).on("click", ".board-column-title", function() {
+    $(document).on("click", ".board-toggle-column-view", function() {
         self.toggleColumnViewMode($(this).data("column-id"));
     });
 };

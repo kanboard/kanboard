@@ -4,6 +4,7 @@ Version 1.0.24 (unreleased)
 New features:
 
 * Forgot Password
+* Add dropdown menu on each board column title to close all tasks
 * Add Malay language
 
 Improvements:

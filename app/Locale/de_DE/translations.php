@@ -1098,4 +1098,8 @@ return array(
     'Creation' => 'Erstellung',
     'Expiration' => 'Ablauf',
     'Password reset history' => 'Verlauf Passwortrücksetzung',
+    // 'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => '',
+    // 'Do you really want to close all tasks of this column?' => '',
+    // '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '',
+    // 'Close all tasks of this column' => '',
 );

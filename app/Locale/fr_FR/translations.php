@@ -1101,4 +1101,8 @@ return array(
     'Creation' => 'Création',
     'Expiration' => 'Expiration',
     'Password reset history' => 'Historique de la réinitialisation du mot de passe',
+    'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Toutes les tâches de la colonne « %s » et de la swimlane « %s » ont été fermées avec succès.',
+    'Do you really want to close all tasks of this column?' => 'Voulez-vous vraiment fermer toutes les tâches de cette colonne ?',
+    '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d tâche(s) dans la colonne « %s » et la swimlane « %s » seront fermées.',
+    'Close all tasks of this column' => 'Fermer toutes les tâches de cette colonne',
 );

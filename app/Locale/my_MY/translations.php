@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'number.decimals_separator' => '.',
     'number.thousands_separator' => ',',
@@ -682,7 +683,7 @@ return array(
     'This chart show the task complexity over the time (Work Remaining).' => 'Grafik ini menunjukkan kompleksitas tugas dari waktu ke waktu (Sisa Pekerjaan).',
     'Screenshot taken %s' => 'Screenshot diambil %s',
     'Add a screenshot' => 'Tambah screenshot',
-    'Take a screenshot and press CTRL+V or ?+V to paste here.' => 'Mengambil screenshot dan tekan CTRL + V atau ? + V untuk paste di sini.',
+    // 'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => '',
     'Screenshot uploaded successfully.' => 'Screenshot berhasil diunggah.',
     'SEK - Swedish Krona' => 'SEK - Krona Swedia',
     'The project identifier is an optional alphanumeric code used to identify your project.' => 'Identifier projek adalah kode alfanumerik opsional digunakan untuk mengidentifikasi projek Anda.',
@@ -1093,8 +1094,12 @@ return array(
     // 'Change Password' => '',
     // 'To reset your password click on this link:' => '',
     // 'Last Password Reset' => '',
-    //'The password has never been reinitialized.' => 'Kata laluan tidak pernah ',
+    // 'The password has never been reinitialized.' => '',
     'Creation' => 'Ciptaan',
     'Expiration' => 'Jangka hayat',
     'Password reset history' => 'Sirah tetap semula kata laluan',
+    // 'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => '',
+    // 'Do you really want to close all tasks of this column?' => '',
+    // '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '',
+    // 'Close all tasks of this column' => '',
 );
