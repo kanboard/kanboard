@@ -60,7 +60,7 @@ class Response extends Base
     public function status($status_code)
     {
         header('Status: '.$status_code);
-        header($_SERVER['SERVER_PROTOCOL'].' '.$status_code);
+        header($this->request->getServerVariable('SERVER_PROTOCOL').' '.$status_code);
     }
 
     /**
@@ -71,7 +71,7 @@ class Response extends Base
      */
     public function redirect($url)
     {
-        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+        if ($this->request->getServerVariable('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest') {
             header('X-Ajax-Redirect: '.$url);
         } else {
             header('Location: '.$url);
