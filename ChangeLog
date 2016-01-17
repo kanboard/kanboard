@@ -12,6 +12,7 @@ Improvements:
 * Add dropdown menu for subtasks, categories, swimlanes, columns, custom filters, task links and groups
 * Add new template hooks
 * Application settings are not cached anymore in the session
+* Do not check board status during task move
 * Move validators to a separate namespace
 * Improve and write unit tests for reports
 * Reduce the number of SQL queries for project daily column stats

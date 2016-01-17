@@ -1,6 +1,7 @@
 function Board(app) {
     this.app = app;
     this.checkInterval = null;
+    this.savingInProgress = false;
 }
 
 Board.prototype.execute = function() {
@@ -42,8 +43,7 @@ Board.prototype.reloadFilters = function(search) {
 };
 
 Board.prototype.check = function() {
-    if (this.app.isVisible()) {
-
+    if (this.app.isVisible() && ! this.savingInProgress) {
         var self = this;
         this.app.showLoadingIcon();
 
@@ -59,7 +59,9 @@ Board.prototype.check = function() {
 };
 
 Board.prototype.save = function(taskId, columnId, position, swimlaneId) {
+    var self = this;
     this.app.showLoadingIcon();
+    this.savingInProgress = true;
 
     $.ajax({
         cache: false,
@@ -73,8 +75,14 @@ Board.prototype.save = function(taskId, columnId, position, swimlaneId) {
             "swimlane_id": swimlaneId,
             "position": position
         }),
-        success: this.refresh.bind(this),
-        error: this.app.hideLoadingIcon.bind(this)
+        success: function(data) {
+            self.refresh(data);
+            this.savingInProgress = false;
+        },
+        error: function() {
+            self.app.hideLoadingIcon();
+            this.savingInProgress = false;
+        }
     });
 };
 
