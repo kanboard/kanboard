@@ -14,7 +14,8 @@ Improvements:
 * Move validators to a separate namespace
 * Improve and write unit tests for reports
 * Reduce the number of SQL queries for project daily column stats
-* Remove subscriber to update date_moved field
+* Remove event subscriber to update date_moved field
+* Make sure that some event subscribers are not executed multiple times
 
 Bug fixes:
 
