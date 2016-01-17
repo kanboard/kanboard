@@ -23,7 +23,7 @@ class SubtaskTimeTrackingSubscriber extends BaseSubscriber implements EventSubsc
     public function updateTaskTime(SubtaskEvent $event)
     {
         if (isset($event['task_id'])) {
-            $this->logger->debug('Subscriber executed: '.__CLASS__.'::'.__METHOD__);
+            $this->logger->debug('Subscriber executed: '.__METHOD__);
             $this->subtaskTimeTracking->updateTaskTimeTracking($event['task_id']);
         }
     }
@@ -31,7 +31,7 @@ class SubtaskTimeTrackingSubscriber extends BaseSubscriber implements EventSubsc
     public function logStartEnd(SubtaskEvent $event)
     {
         if (isset($event['status']) && $this->config->get('subtask_time_tracking') == 1) {
-            $this->logger->debug('Subscriber executed: '.__CLASS__.'::'.__METHOD__);
+            $this->logger->debug('Subscriber executed: '.__METHOD__);
             $subtask = $this->subtask->getById($event['id']);
 
             if (empty($subtask['user_id'])) {

@@ -15,7 +15,7 @@ class BootstrapSubscriber extends BaseSubscriber implements EventSubscriberInter
 
     public function execute()
     {
-        $this->logger->debug('Subscriber executed: '.__CLASS__.'::'.__METHOD__);
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
         $this->config->setupTranslations();
         $this->config->setupTimezone();
         $this->actionManager->attachEvents();

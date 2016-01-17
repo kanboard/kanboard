@@ -22,7 +22,7 @@ class ProjectDailySummarySubscriber extends BaseSubscriber implements EventSubsc
     public function execute(TaskEvent $event)
     {
         if (isset($event['project_id']) && !$this->isExecuted()) {
-            $this->logger->debug('Subscriber executed: '.__CLASS__.'::'.__METHOD__);
+            $this->logger->debug('Subscriber executed: '.__METHOD__);
             $this->projectDailyColumnStats->updateTotals($event['project_id'], date('Y-m-d'));
             $this->projectDailyStats->updateTotals($event['project_id'], date('Y-m-d'));
         }

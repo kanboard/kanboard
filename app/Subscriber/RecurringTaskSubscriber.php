@@ -18,7 +18,7 @@ class RecurringTaskSubscriber extends BaseSubscriber implements EventSubscriberI
 
     public function onMove(TaskEvent $event)
     {
-        $this->logger->debug('Subscriber executed: '.__CLASS__.'::'.__METHOD__);
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
 
         if ($event['recurrence_status'] == Task::RECURRING_STATUS_PENDING) {
             if ($event['recurrence_trigger'] == Task::RECURRING_TRIGGER_FIRST_COLUMN && $this->board->getFirstColumn($event['project_id']) == $event['src_column_id']) {
@@ -31,7 +31,7 @@ class RecurringTaskSubscriber extends BaseSubscriber implements EventSubscriberI
 
     public function onClose(TaskEvent $event)
     {
-        $this->logger->debug('Subscriber executed: '.__CLASS__.'::'.__METHOD__);
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
 
         if ($event['recurrence_status'] == Task::RECURRING_STATUS_PENDING && $event['recurrence_trigger'] == Task::RECURRING_TRIGGER_CLOSE) {
             $this->taskDuplication->duplicateRecurringTask($event['task_id']);

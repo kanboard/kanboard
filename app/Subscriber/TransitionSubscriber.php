@@ -17,7 +17,7 @@ class TransitionSubscriber extends BaseSubscriber implements EventSubscriberInte
 
     public function execute(TaskEvent $event)
     {
-        $this->logger->debug('Subscriber executed: '.__CLASS__.'::'.__METHOD__);
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
 
         $user_id = $this->userSession->getId();
 

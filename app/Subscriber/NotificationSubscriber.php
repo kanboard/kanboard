@@ -35,7 +35,7 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
     public function handleEvent(GenericEvent $event, $event_name)
     {
         if (! $this->isExecuted($event_name)) {
-            $this->logger->debug('Subscriber executed: '.__CLASS__.'::'.__METHOD__);
+            $this->logger->debug('Subscriber executed: '.__METHOD__);
             $event_data = $this->getEventData($event);
 
             if (! empty($event_data)) {
