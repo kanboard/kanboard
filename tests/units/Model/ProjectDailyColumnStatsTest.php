@@ -11,6 +11,39 @@ use Kanboard\Model\TaskStatus;
 
 class ProjectDailyColumnStatsTest extends Base
 {
+    public function testUpdateTotalsWithScoreAtNull()
+    {
+        $projectModel = new Project($this->container);
+        $projectDailyColumnStats = new ProjectDailyColumnStats($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+
+        $projectDailyColumnStats->updateTotals(1, '2016-01-16');
+
+        $task = $this->container['db']->table(Task::TABLE)->findOne();
+        $this->assertNull($task['score']);
+
+        $stats = $this->container['db']->table(ProjectDailyColumnStats::TABLE)
+            ->asc('day')
+            ->asc('column_id')
+            ->columns('day', 'project_id', 'column_id', 'total', 'score')
+            ->findAll();
+
+        $expected = array(
+            array(
+                'day' => '2016-01-16',
+                'project_id' => 1,
+                'column_id' => 1,
+                'total' => 1,
+                'score' => 0,
+            ),
+        );
+
+        $this->assertEquals($expected, $stats);
+    }
+
     public function testUpdateTotals()
     {
         $projectModel = new Project($this->container);

@@ -186,15 +186,11 @@ class ProjectDailyColumnStats extends Base
         $columns = array();
 
         foreach ($totals as $column_id => $total) {
-            $columns[$column_id] = array('total' => $total);
+            $columns[$column_id] = array('total' => $total, 'score' => 0);
         }
 
         foreach ($scores as $column_id => $score) {
-            if (isset($columns[$column_id])) {
-                $columns[$column_id]['score'] = $score;
-            } else {
-                $columns[$column_id] = array('score' => $score);
-            }
+            $columns[$column_id]['score'] = (int) $score;
         }
 
         return $columns;
@@ -213,6 +209,7 @@ class ProjectDailyColumnStats extends Base
             ->columns('column_id', 'SUM(score) AS score')
             ->eq('project_id', $project_id)
             ->eq('is_active', Task::STATUS_OPEN)
+            ->notNull('score')
             ->groupBy('column_id')
             ->findAll();
 
