@@ -30,7 +30,9 @@ class AverageLeadCycleTimeAnalytic extends Base
             'avg_cycle_time' => 0,
         );
 
-        foreach ($this->getTasks($project_id) as &$task) {
+        $tasks = $this->getTasks($project_id);
+
+        foreach ($tasks as &$task) {
             $stats['count']++;
             $stats['total_lead_time'] += $this->calculateLeadTime($task);
             $stats['total_cycle_time'] += $this->calculateCycleTime($task);

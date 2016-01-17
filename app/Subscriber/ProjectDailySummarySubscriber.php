@@ -11,11 +11,11 @@ class ProjectDailySummarySubscriber extends \Kanboard\Core\Base implements Event
     public static function getSubscribedEvents()
     {
         return array(
-            Task::EVENT_CREATE => array('execute', 0),
-            Task::EVENT_UPDATE => array('execute', 0),
+            Task::EVENT_CREATE_UPDATE => array('execute', 0),
             Task::EVENT_CLOSE => array('execute', 0),
             Task::EVENT_OPEN => array('execute', 0),
             Task::EVENT_MOVE_COLUMN => array('execute', 0),
+            Task::EVENT_MOVE_SWIMLANE => array('execute', 0),
         );
     }
 
