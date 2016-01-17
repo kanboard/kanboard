@@ -77,7 +77,7 @@ class TaskUpdateStartDate extends Base
             'date_started' => time(),
         );
 
-        return $this->taskModification->update($values);
+        return $this->taskModification->update($values, false);
     }
 
     /**
