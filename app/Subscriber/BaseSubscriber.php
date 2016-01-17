@@ -21,19 +21,19 @@ class BaseSubscriber extends Base
     private $called = array();
 
     /**
-     * Check if a method has been executed
+     * Check if a listener has been executed
      *
      * @access public
-     * @param  string  $method
+     * @param  string  $key
      * @return boolean
      */
-    public function isExecuted($method = '')
+    public function isExecuted($key = '')
     {
-        if (isset($this->called[$method])) {
+        if (isset($this->called[$key])) {
             return true;
         }
 
-        $this->called[$method] = true;
+        $this->called[$key] = true;
 
         return false;
     }
