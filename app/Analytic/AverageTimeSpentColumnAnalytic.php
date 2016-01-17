@@ -63,7 +63,9 @@ class AverageTimeSpentColumnAnalytic extends Base
      */
     private function processTasks(array &$stats, $project_id)
     {
-        foreach ($this->getTasks($project_id) as &$task) {
+        $tasks = $this->getTasks($project_id);
+
+        foreach ($tasks as &$task) {
             foreach ($this->getTaskTimeByColumns($task) as $column_id => $time_spent) {
                 if (isset($stats[$column_id])) {
                     $stats[$column_id]['count']++;
