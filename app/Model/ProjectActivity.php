@@ -168,9 +168,11 @@ class ProjectActivity extends Base
      */
     public function cleanup($max)
     {
-        if ($this->db->table(self::TABLE)->count() > $max) {
-            $subquery = $this->db->table(self::TABLE)->desc('id')->limit($max)->columns('id');
-            $this->db->table(self::TABLE)->notInSubquery('id', $subquery)->remove();
+        $total = $this->db->table(self::TABLE)->count();
+
+        if ($total > $max) {
+            $ids = $this->db->table(self::TABLE)->asc('id')->limit($total - $max)->findAllByColumn('id');
+            $this->db->table(self::TABLE)->in('id', $ids)->remove();
         }
     }
 
