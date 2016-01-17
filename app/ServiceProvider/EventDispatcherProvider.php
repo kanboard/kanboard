@@ -26,7 +26,6 @@ class EventDispatcherProvider implements ServiceProviderInterface
         $container['dispatcher']->addSubscriber(new ProjectModificationDateSubscriber($container));
         $container['dispatcher']->addSubscriber(new NotificationSubscriber($container));
         $container['dispatcher']->addSubscriber(new SubtaskTimeTrackingSubscriber($container));
-        $container['dispatcher']->addSubscriber(new TaskMovedDateSubscriber($container));
         $container['dispatcher']->addSubscriber(new TransitionSubscriber($container));
         $container['dispatcher']->addSubscriber(new RecurringTaskSubscriber($container));
 
