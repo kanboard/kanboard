@@ -35,12 +35,7 @@ class PasswordResetValidator extends Base
      */
     public function validateModification(array $values)
     {
-        $v = new Validator($values, array(
-            new Validators\Required('password', t('The password is required')),
-            new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
-            new Validators\Required('confirmation', t('The confirmation is required')),
-            new Validators\Equals('password', 'confirmation', t('Passwords don\'t match')),
-        ));
+        $v = new Validator($values, $this->commonPasswordValidationRules());
 
         return array(
             $v->execute(),
@@ -78,7 +73,6 @@ class PasswordResetValidator extends Base
      */
     protected function validateCaptcha(array $values)
     {
-        $result = true;
         $errors = array();
 
         if (! isset($this->sessionStorage->captcha)) {

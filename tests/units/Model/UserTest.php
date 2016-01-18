@@ -391,36 +391,4 @@ class UserTest extends Base
         $this->assertEquals('toto', $user['username']);
         $this->assertEmpty($user['token']);
     }
-
-    public function testValidatePasswordModification()
-    {
-        $u = new User($this->container);
-
-        $this->container['sessionStorage']->user = array(
-            'id' => 1,
-            'role' => Role::APP_ADMIN,
-            'username' => 'admin',
-        );
-
-        $result = $u->validatePasswordModification(array());
-        $this->assertFalse($result[0]);
-
-        $result = $u->validatePasswordModification(array('id' => 1));
-        $this->assertFalse($result[0]);
-
-        $result = $u->validatePasswordModification(array('id' => 1, 'password' => '123456'));
-        $this->assertFalse($result[0]);
-
-        $result = $u->validatePasswordModification(array('id' => 1, 'password' => '123456', 'confirmation' => 'wrong'));
-        $this->assertFalse($result[0]);
-
-        $result = $u->validatePasswordModification(array('id' => 1, 'password' => '123456', 'confirmation' => '123456'));
-        $this->assertFalse($result[0]);
-
-        $result = $u->validatePasswordModification(array('id' => 1, 'password' => '123456', 'confirmation' => '123456', 'current_password' => 'wrong'));
-        $this->assertFalse($result[0]);
-
-        $result = $u->validatePasswordModification(array('id' => 1, 'password' => '123456', 'confirmation' => '123456', 'current_password' => 'admin'));
-        $this->assertTrue($result[0]);
-    }
 }

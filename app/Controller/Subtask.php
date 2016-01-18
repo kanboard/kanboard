@@ -63,7 +63,7 @@ class Subtask extends Base
         $task = $this->getTask();
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->subtask->validateCreation($values);
+        list($valid, $errors) = $this->subtaskValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->subtask->create($values)) {
@@ -113,7 +113,7 @@ class Subtask extends Base
         $this->getSubtask();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->subtask->validateModification($values);
+        list($valid, $errors) = $this->subtaskValidator->validateModification($values);
 
         if ($valid) {
             if ($this->subtask->update($values)) {

@@ -63,7 +63,6 @@ class ClassProvider implements ServiceProviderInterface
             'TaskPermission',
             'TaskPosition',
             'TaskStatus',
-            'TaskValidator',
             'TaskImport',
             'TaskMetadata',
             'Transition',
@@ -87,6 +86,12 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Validator' => array(
             'PasswordResetValidator',
+            'ProjectValidator',
+            'SubtaskValidator',
+            'SwimlaneValidator',
+            'TaskValidator',
+            'TaskLinkValidator',
+            'UserValidator',
         ),
         'Core' => array(
             'DateParser',

@@ -79,6 +79,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectMetadata                            $projectMetadata
  * @property \Kanboard\Model\ProjectPermission                          $projectPermission
  * @property \Kanboard\Model\ProjectUserRole                            $projectUserRole
+ * @property \Kanboard\Model\projectUserRoleFilter                      $projectUserRoleFilter
  * @property \Kanboard\Model\ProjectGroupRole                           $projectGroupRole
  * @property \Kanboard\Model\ProjectNotification                        $projectNotification
  * @property \Kanboard\Model\ProjectNotificationType                    $projectNotificationType
@@ -100,7 +101,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskPermission                             $taskPermission
  * @property \Kanboard\Model\TaskPosition                               $taskPosition
  * @property \Kanboard\Model\TaskStatus                                 $taskStatus
- * @property \Kanboard\Model\TaskValidator                              $taskValidator
  * @property \Kanboard\Model\TaskMetadata                               $taskMetadata
  * @property \Kanboard\Model\Transition                                 $transition
  * @property \Kanboard\Model\User                                       $user
@@ -114,6 +114,12 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
  * @property \Kanboard\Validator\PasswordResetValidator                 $passwordResetValidator
+ * @property \Kanboard\Validator\ProjectValidator                       $projectValidator
+ * @property \Kanboard\Validator\SubtaskValidator                       $subtaskValidator
+ * @property \Kanboard\Validator\SwimlaneValidator                      $swimlaneValidator
+ * @property \Kanboard\Validator\TaskLinkValidator                      $taskLinkValidator
+ * @property \Kanboard\Validator\TaskValidator                          $taskValidator
+ * @property \Kanboard\Validator\UserValidator                          $userValidator
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \PicoDb\Database                                           $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher

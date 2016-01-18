@@ -60,7 +60,7 @@ class Swimlane extends Base
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->swimlane->validateCreation($values);
+        list($valid, $errors) = $this->swimlaneValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->swimlane->create($values)) {
@@ -84,7 +84,7 @@ class Swimlane extends Base
         $project = $this->getProject();
 
         $values = $this->request->getValues() + array('show_default_swimlane' => 0);
-        list($valid, ) = $this->swimlane->validateDefaultModification($values);
+        list($valid, ) = $this->swimlaneValidator->validateDefaultModification($values);
 
         if ($valid) {
             if ($this->swimlane->updateDefault($values)) {
@@ -126,7 +126,7 @@ class Swimlane extends Base
         $project = $this->getProject();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->swimlane->validateModification($values);
+        list($valid, $errors) = $this->swimlaneValidator->validateModification($values);
 
         if ($valid) {
             if ($this->swimlane->update($values)) {

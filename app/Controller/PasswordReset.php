@@ -67,7 +67,7 @@ class PasswordReset extends Base
     /**
      * Set the new password
      */
-    public function update(array $values = array(), array $errors = array())
+    public function update()
     {
         $this->checkActivation();
 
