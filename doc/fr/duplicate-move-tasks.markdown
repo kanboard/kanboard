@@ -4,7 +4,7 @@ Dupliquer et déplacer des tâches
 Dupliquer une tâche dans le même projet
 --------------------------------------
 
-Allez à la vue des par tâche et choisissez **Dupliquer** sur la gauche.
+Allez à la vue par tâche et choisissez **Dupliquer** sur la gauche.
 
 ![Duplication de tâche](http://kanboard.net/screenshots/documentation/task-duplication.png)
 
