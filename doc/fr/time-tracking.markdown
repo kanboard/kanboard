@@ -1,7 +1,7 @@
 Suivi du temps
 =============
 
-Les information de la feuille de suivi du temps peuvent être définies au niveau des tâches ou des sous-tâches 
+Les informations de la feuille de suivi du temps peuvent être définies au niveau des tâches ou des sous-tâches 
 
 Suivi de temps des tâches 
 ------------------
