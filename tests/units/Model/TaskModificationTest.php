@@ -41,6 +41,24 @@ class TaskModificationTest extends Base
         $this->assertEquals(1, $event_data['owner_id']);
     }
 
+    public function testThatNoEventAreFiredWhenNoChanges()
+    {
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tm = new TaskModification($this->container);
+        $tf = new TaskFinder($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
+
+        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, array($this, 'onCreateUpdate'));
+        $this->container['dispatcher']->addListener(Task::EVENT_UPDATE, array($this, 'onUpdate'));
+
+        $this->assertTrue($tm->update(array('id' => 1, 'title' => 'test')));
+
+        $this->assertEmpty($this->container['dispatcher']->getCalledListeners());
+    }
+
     public function testChangeTitle()
     {
         $p = new Project($this->container);

@@ -150,5 +150,7 @@ List of template hooks:
 - `template:task:sidebar:actions`
 - `template:user:sidebar:information`
 - `template:user:sidebar:actions`
+- `template:app:filters-helper:before`
+- `template:app:filters-helper:after`
 
 Another template hooks can be added if necessary, just ask on the issue tracker.

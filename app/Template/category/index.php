@@ -5,12 +5,14 @@
 <table>
     <tr>
         <th><?= t('Category Name') ?></th>
-        <th><?= t('Actions') ?></th>
+        <th class="column-8"><?= t('Actions') ?></th>
     </tr>
     <?php foreach ($categories as $category_id => $category_name): ?>
     <tr>
         <td><?= $this->e($category_name) ?></td>
         <td>
+            <div class="dropdown">
+            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
             <ul>
                 <li>
                     <?= $this->url->link(t('Edit'), 'category', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
@@ -19,6 +21,7 @@
                     <?= $this->url->link(t('Remove'), 'category', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
                 </li>
             </ul>
+            </div>
         </td>
     </tr>
     <?php endforeach ?>

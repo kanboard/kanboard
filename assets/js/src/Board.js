@@ -1,6 +1,7 @@
 function Board(app) {
     this.app = app;
     this.checkInterval = null;
+    this.savingInProgress = false;
 }
 
 Board.prototype.execute = function() {
@@ -42,8 +43,7 @@ Board.prototype.reloadFilters = function(search) {
 };
 
 Board.prototype.check = function() {
-    if (this.app.isVisible()) {
-
+    if (this.app.isVisible() && ! this.savingInProgress) {
         var self = this;
         this.app.showLoadingIcon();
 
@@ -59,7 +59,9 @@ Board.prototype.check = function() {
 };
 
 Board.prototype.save = function(taskId, columnId, position, swimlaneId) {
+    var self = this;
     this.app.showLoadingIcon();
+    this.savingInProgress = true;
 
     $.ajax({
         cache: false,
@@ -73,8 +75,14 @@ Board.prototype.save = function(taskId, columnId, position, swimlaneId) {
             "swimlane_id": swimlaneId,
             "position": position
         }),
-        success: this.refresh.bind(this),
-        error: this.app.hideLoadingIcon.bind(this)
+        success: function(data) {
+            self.refresh(data);
+            this.savingInProgress = false;
+        },
+        error: function() {
+            self.app.hideLoadingIcon();
+            this.savingInProgress = false;
+        }
     });
 };
 
@@ -100,9 +108,12 @@ Board.prototype.dragAndDrop = function() {
         placeholder: "draggable-placeholder",
         items: ".draggable-item",
         stop: function(event, ui) {
+            var taskId = ui.item.attr('data-task-id');
             ui.item.removeClass("draggable-item-selected");
+            self.changeTaskState(taskId);
+
             self.save(
-                ui.item.attr('data-task-id'),
+                taskId,
                 ui.item.parent().attr("data-column-id"),
                 ui.item.index() + 1,
                 ui.item.parent().attr('data-swimlane-id')
@@ -120,6 +131,12 @@ Board.prototype.dragAndDrop = function() {
     }
 
     $(".board-task-list").sortable(params);
+};
+
+Board.prototype.changeTaskState = function(taskId) {
+    var task = $("div[data-task-id=" + taskId + "]");
+    task.addClass('task-board-saving-state');
+    task.find('.task-board-saving-icon').show();
 };
 
 Board.prototype.listen = function() {
@@ -141,7 +158,7 @@ Board.prototype.listen = function() {
         self.toggleColumnScrolling();
     });
 
-    $(document).on("click", ".board-column-title", function() {
+    $(document).on("click", ".board-toggle-column-view", function() {
         self.toggleColumnViewMode($(this).data("column-id"));
     });
 };

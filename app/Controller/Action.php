@@ -116,7 +116,7 @@ class Action extends Base
      */
     private function doCreation(array $project, array $values)
     {
-        list($valid, ) = $this->action->validateCreation($values);
+        list($valid, ) = $this->actionValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->action->create($values) !== false) {

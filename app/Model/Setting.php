@@ -47,10 +47,12 @@ abstract class Setting extends Base
      */
     public function getOption($name, $default = '')
     {
-        return $this->db
+        $value = $this->db
             ->table(self::TABLE)
             ->eq('option', $name)
-            ->findOneColumn('value') ?: $default;
+            ->findOneColumn('value');
+
+        return $value === null || $value === false || $value === '' ? $default : $value;
     }
 
     /**

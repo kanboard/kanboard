@@ -29,29 +29,16 @@ class ProjectDailyStats extends Base
     {
         $this->db->startTransaction();
 
-        $lead_cycle_time = $this->projectAnalytic->getAverageLeadAndCycleTime($project_id);
+        $lead_cycle_time = $this->averageLeadCycleTimeAnalytic->build($project_id);
 
-        $exists = $this->db->table(ProjectDailyStats::TABLE)
-            ->eq('day', $date)
-            ->eq('project_id', $project_id)
-            ->exists();
+        $this->db->table(self::TABLE)->eq('day', $date)->eq('project_id', $project_id)->remove();
 
-        if ($exists) {
-            $this->db->table(ProjectDailyStats::TABLE)
-                ->eq('project_id', $project_id)
-                ->eq('day', $date)
-                ->update(array(
-                    'avg_lead_time' => $lead_cycle_time['avg_lead_time'],
-                    'avg_cycle_time' => $lead_cycle_time['avg_cycle_time'],
-                ));
-        } else {
-            $this->db->table(ProjectDailyStats::TABLE)->insert(array(
-                'day' => $date,
-                'project_id' => $project_id,
-                'avg_lead_time' => $lead_cycle_time['avg_lead_time'],
-                'avg_cycle_time' => $lead_cycle_time['avg_cycle_time'],
-            ));
-        }
+        $this->db->table(self::TABLE)->insert(array(
+            'day' => $date,
+            'project_id' => $project_id,
+            'avg_lead_time' => $lead_cycle_time['avg_lead_time'],
+            'avg_cycle_time' => $lead_cycle_time['avg_cycle_time'],
+        ));
 
         $this->db->closeTransaction();
 
@@ -70,11 +57,11 @@ class ProjectDailyStats extends Base
     public function getRawMetrics($project_id, $from, $to)
     {
         return $this->db->table(self::TABLE)
-                        ->columns('day', 'avg_lead_time', 'avg_cycle_time')
-                        ->eq(self::TABLE.'.project_id', $project_id)
-                        ->gte('day', $from)
-                        ->lte('day', $to)
-                        ->asc(self::TABLE.'.day')
-                        ->findAll();
+            ->columns('day', 'avg_lead_time', 'avg_cycle_time')
+            ->eq('project_id', $project_id)
+            ->gte('day', $from)
+            ->lte('day', $to)
+            ->asc('day')
+            ->findAll();
     }
 }

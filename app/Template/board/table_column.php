@@ -24,8 +24,26 @@
                 </span>
             <?php endif ?>
 
-            <span class="board-column-title" data-column-id="<?= $column['id'] ?>" title="<?= t('Hide this column') ?>">
-                <?= $this->e($column['title']) ?>
+            <span class="board-column-title">
+                <?php if ($not_editable): ?>
+                    <?= $this->e($column['title']) ?>
+                <?php else: ?>
+                    <span class="dropdown">
+                        <a href="#" class="dropdown-menu"><?= $this->e($column['title']) ?> <i class="fa fa-caret-down"></i></a>
+                        <ul>
+                            <li>
+                                <i class="fa fa-minus-square fa-fw"></i>
+                                <a href="#" class="board-toggle-column-view" data-column-id="<?= $column['id'] ?>"><?= t('Hide this column') ?></a>
+                            </li>
+                            <?php if ($this->user->hasProjectAccess('BoardPopover', 'closeColumnTasks', $column['project_id']) && $column['nb_tasks'] > 0): ?>
+                                <li>
+                                    <i class="fa fa-close fa-fw"></i>
+                                    <?= $this->url->link(t('Close all tasks of this column'), 'BoardPopover', 'confirmCloseColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                                </li>
+                            <?php endif ?>
+                        </ul>
+                    </span>
+                <?php endif ?>
             </span>
 
             <?php if (! $not_editable && ! empty($column['description'])): ?>

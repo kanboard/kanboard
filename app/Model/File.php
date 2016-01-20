@@ -263,14 +263,16 @@ class File extends Base
     public function uploadFiles($project_id, $task_id, $form_name)
     {
         try {
-            if (empty($_FILES[$form_name])) {
+            $file = $this->request->getFileInfo($form_name);
+
+            if (empty($file)) {
                 return false;
             }
 
-            foreach ($_FILES[$form_name]['error'] as $key => $error) {
-                if ($error == UPLOAD_ERR_OK && $_FILES[$form_name]['size'][$key] > 0) {
-                    $original_filename = $_FILES[$form_name]['name'][$key];
-                    $uploaded_filename = $_FILES[$form_name]['tmp_name'][$key];
+            foreach ($file['error'] as $key => $error) {
+                if ($error == UPLOAD_ERR_OK && $file['size'][$key] > 0) {
+                    $original_filename = $file['name'][$key];
+                    $uploaded_filename = $file['tmp_name'][$key];
                     $destination_filename = $this->generatePath($project_id, $task_id, $original_filename);
 
                     if ($this->isImage($original_filename)) {
@@ -283,7 +285,7 @@ class File extends Base
                         $task_id,
                         $original_filename,
                         $destination_filename,
-                        $_FILES[$form_name]['size'][$key]
+                        $file['size'][$key]
                     );
                 }
             }

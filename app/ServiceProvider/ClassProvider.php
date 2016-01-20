@@ -14,10 +14,16 @@ use Kanboard\Core\Http\Client as HttpClient;
 class ClassProvider implements ServiceProviderInterface
 {
     private $classes = array(
+        'Analytic' => array(
+            'TaskDistributionAnalytic',
+            'UserDistributionAnalytic',
+            'EstimatedTimeComparisonAnalytic',
+            'AverageLeadCycleTimeAnalytic',
+            'AverageTimeSpentColumnAnalytic',
+        ),
         'Model' => array(
             'Action',
             'ActionParameter',
-            'Authentication',
             'Board',
             'Category',
             'Color',
@@ -35,7 +41,6 @@ class ClassProvider implements ServiceProviderInterface
             'PasswordReset',
             'Project',
             'ProjectActivity',
-            'ProjectAnalytic',
             'ProjectDuplication',
             'ProjectDailyColumnStats',
             'ProjectDailyStats',
@@ -85,6 +90,15 @@ class ClassProvider implements ServiceProviderInterface
             'GroupAutoCompleteFormatter',
         ),
         'Validator' => array(
+            'ActionValidator',
+            'AuthValidator',
+            'CategoryValidator',
+            'ColumnValidator',
+            'CommentValidator',
+            'CurrencyValidator',
+            'CustomFilterValidator',
+            'GroupValidator',
+            'LinkValidator',
             'PasswordResetValidator',
             'ProjectValidator',
             'SubtaskValidator',

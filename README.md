@@ -1,6 +1,10 @@
 Kanboard
 ========
 
+[![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fguillot/kanboard/badges/quality-score.png?s=2b6490781608657cc8c43d02285bfafb4f489528)](https://scrutinizer-ci.com/g/fguillot/kanboard/)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5e50750e-fc62-4a1f-b02a-71991123a2a7/mini.png)](https://insight.sensiolabs.com/projects/5e50750e-fc62-4a1f-b02a-71991123a2a7)
+
 Kanboard is a project management software that uses the Kanban methodology.
 
 Official website: <http://kanboard.net>
@@ -9,14 +13,10 @@ Official website: <http://kanboard.net>
 - Multiple boards with the ability to drag and drop tasks
 - Open source and self-hosted
 - Super simple installation
-- Translated in 23 languages
+- Translated in 24 languages
 - Distributed under [MIT License](LICENSE)
 - [List of features are available on the website](http://kanboard.net/features)
 - [Change Log](ChangeLog)
-
-[![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
-
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fguillot/kanboard/badges/quality-score.png?s=2b6490781608657cc8c43d02285bfafb4f489528)](https://scrutinizer-ci.com/g/fguillot/kanboard/)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 

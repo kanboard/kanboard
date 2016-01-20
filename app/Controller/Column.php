@@ -51,7 +51,7 @@ class Column extends Base
             $values['title['.$column_id.']'] = $column_title;
         }
 
-        list($valid, $errors) = $this->board->validateCreation($data);
+        list($valid, $errors) = $this->columnValidator->validateCreation($data);
 
         if ($valid) {
             if ($this->board->addColumn($project['id'], $data['title'], $data['task_limit'], $data['description'])) {
@@ -94,7 +94,7 @@ class Column extends Base
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->board->validateModification($values);
+        list($valid, $errors) = $this->columnValidator->validateModification($values);
 
         if ($valid) {
             if ($this->board->updateColumn($values['id'], $values['title'], $values['task_limit'], $values['description'])) {

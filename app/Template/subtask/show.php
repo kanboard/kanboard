@@ -13,7 +13,7 @@
                 <th><?= t('Assignee') ?></th>
                 <th><?= t('Time tracking') ?></th>
                 <?php if ($editable): ?>
-                    <th><?= t('Actions') ?></th>
+                    <th class="column-5"></th>
                 <?php endif ?>
             </tr>
             <?php foreach ($subtasks as $subtask): ?>
@@ -61,6 +61,8 @@
                 </td>
                 <?php if ($editable): ?>
                     <td>
+                        <div class="dropdown">
+                        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                         <ul>
                             <?php if ($subtask['position'] != $first_position): ?>
                                 <li>
@@ -79,6 +81,7 @@
                                 <?= $this->url->link(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
                             </li>
                         </ul>
+                        </div>
                     </td>
                 <?php endif ?>
             </tr>
@@ -87,7 +90,6 @@
     <?php endif ?>
 
     <?php if ($editable && $this->user->hasProjectAccess('subtask', 'save', $task['project_id'])): ?>
-
         <?php if (empty($subtasks)): ?>
             <div class="page-header">
                 <h2><?= t('Sub-Tasks') ?></h2>

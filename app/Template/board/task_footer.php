@@ -6,7 +6,7 @@
         <?php else: ?>
             <?= $this->url->link(
                 $this->e($task['category_name']),
-                'board',
+                'boardPopover',
                 'changeCategory',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,

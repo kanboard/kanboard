@@ -86,6 +86,7 @@ class ProjectTest extends Base
         // Single category
 
         $this->assertTrue($c->save(array('project_categories' => 'Test1')));
+        $this->container['memoryCache']->flush();
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
 
         $project = $p->getById(2);
@@ -99,6 +100,7 @@ class ProjectTest extends Base
         // Multiple categories badly formatted
 
         $this->assertTrue($c->save(array('project_categories' => 'ABC, , DEF 3,  ')));
+        $this->container['memoryCache']->flush();
         $this->assertEquals(3, $p->create(array('name' => 'UnitTest3')));
 
         $project = $p->getById(3);
@@ -112,6 +114,7 @@ class ProjectTest extends Base
 
         // No default categories
         $this->assertTrue($c->save(array('project_categories' => '  ')));
+        $this->container['memoryCache']->flush();
         $this->assertEquals(4, $p->create(array('name' => 'UnitTest4')));
 
         $project = $p->getById(4);

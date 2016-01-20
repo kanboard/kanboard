@@ -3,7 +3,6 @@
 namespace Kanboard\Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Kanboard\Core\Base;
 use Kanboard\Core\Security\AuthenticationManager;
 use Kanboard\Core\Session\SessionManager;
 use Kanboard\Event\AuthSuccessEvent;
@@ -15,7 +14,7 @@ use Kanboard\Event\AuthFailureEvent;
  * @package subscriber
  * @author  Frederic Guillot
  */
-class AuthSubscriber extends Base implements EventSubscriberInterface
+class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
 {
     /**
      * Get event listeners
@@ -41,6 +40,8 @@ class AuthSubscriber extends Base implements EventSubscriberInterface
      */
     public function afterLogin(AuthSuccessEvent $event)
     {
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
+
         $userAgent = $this->request->getUserAgent();
         $ipAddress = $this->request->getIpAddress();
 
@@ -70,6 +71,7 @@ class AuthSubscriber extends Base implements EventSubscriberInterface
      */
     public function afterLogout()
     {
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
         $credentials = $this->rememberMeCookie->read();
 
         if ($credentials !== false) {
@@ -90,6 +92,7 @@ class AuthSubscriber extends Base implements EventSubscriberInterface
      */
     public function onLoginFailure(AuthFailureEvent $event)
     {
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
         $username = $event->getUsername();
 
         if (! empty($username)) {

@@ -6,13 +6,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Kanboard\Model\Subtask;
 use Kanboard\Event\SubtaskEvent;
 
-class SubtaskTimeTrackingSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
+class SubtaskTimeTrackingSubscriber extends BaseSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         return array(
-            Subtask::EVENT_CREATE => array('updateTaskTime', 0),
-            Subtask::EVENT_DELETE => array('updateTaskTime', 0),
+            Subtask::EVENT_CREATE => 'updateTaskTime',
+            Subtask::EVENT_DELETE => 'updateTaskTime',
             Subtask::EVENT_UPDATE => array(
                 array('logStartEnd', 10),
                 array('updateTaskTime', 0),
@@ -23,6 +23,7 @@ class SubtaskTimeTrackingSubscriber extends \Kanboard\Core\Base implements Event
     public function updateTaskTime(SubtaskEvent $event)
     {
         if (isset($event['task_id'])) {
+            $this->logger->debug('Subscriber executed: '.__METHOD__);
             $this->subtaskTimeTracking->updateTaskTimeTracking($event['task_id']);
         }
     }
@@ -30,6 +31,7 @@ class SubtaskTimeTrackingSubscriber extends \Kanboard\Core\Base implements Event
     public function logStartEnd(SubtaskEvent $event)
     {
         if (isset($event['status']) && $this->config->get('subtask_time_tracking') == 1) {
+            $this->logger->debug('Subscriber executed: '.__METHOD__);
             $subtask = $this->subtask->getById($event['id']);
 
             if (empty($subtask['user_id'])) {

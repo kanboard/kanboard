@@ -1,18 +1,18 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Validator;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Gregwar\Captcha\CaptchaBuilder;
 
 /**
- * Authentication model
+ * Authentication Validator
  *
- * @package  model
+ * @package  validator
  * @author   Frederic Guillot
  */
-class Authentication extends Base
+class AuthValidator extends Base
 {
     /**
      * Validate user login form
@@ -23,28 +23,17 @@ class Authentication extends Base
      */
     public function validateForm(array $values)
     {
-        $result = false;
-        $errors = array();
-
-        foreach (array('validateFields', 'validateLocking', 'validateCaptcha', 'validateCredentials') as $method) {
-            list($result, $errors) = $this->$method($values);
-
-            if (! $result) {
-                break;
-            }
-        }
-
-        return array($result, $errors);
+        return $this->executeValidators(array('validateFields', 'validateLocking', 'validateCaptcha', 'validateCredentials'), $values);
     }
 
     /**
      * Validate credentials syntax
      *
-     * @access private
+     * @access protected
      * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
-    private function validateFields(array $values)
+    protected function validateFields(array $values)
     {
         $v = new Validator($values, array(
             new Validators\Required('username', t('The username is required')),
@@ -61,11 +50,11 @@ class Authentication extends Base
     /**
      * Validate user locking
      *
-     * @access private
+     * @access protected
      * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
-    private function validateLocking(array $values)
+    protected function validateLocking(array $values)
     {
         $result = true;
         $errors = array();
@@ -82,11 +71,11 @@ class Authentication extends Base
     /**
      * Validate password syntax
      *
-     * @access private
+     * @access protected
      * @param  array   $values           Form values
      * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
      */
-    private function validateCredentials(array $values)
+    protected function validateCredentials(array $values)
     {
         $result = true;
         $errors = array();
@@ -102,11 +91,11 @@ class Authentication extends Base
     /**
      * Validate captcha
      *
-     * @access private
+     * @access protected
      * @param  array   $values           Form values
      * @return boolean
      */
-    private function validateCaptcha(array $values)
+    protected function validateCaptcha(array $values)
     {
         $result = true;
         $errors = array();

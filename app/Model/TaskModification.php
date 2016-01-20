@@ -17,16 +17,17 @@ class TaskModification extends Base
      *
      * @access public
      * @param  array     $values
+     * @param  boolean   $fire_events
      * @return boolean
      */
-    public function update(array $values)
+    public function update(array $values, $fire_events = true)
     {
         $original_task = $this->taskFinder->getById($values['id']);
 
         $this->prepare($values);
         $result = $this->db->table(Task::TABLE)->eq('id', $original_task['id'])->update($values);
 
-        if ($result) {
+        if ($fire_events && $result) {
             $this->fireEvents($original_task, $values);
         }
 
@@ -51,13 +52,14 @@ class TaskModification extends Base
 
         if ($this->isFieldModified('owner_id', $event_data['changes'])) {
             $events[] = Task::EVENT_ASSIGNEE_CHANGE;
-        } else {
+        } elseif (! empty($event_data['changes'])) {
             $events[] = Task::EVENT_CREATE_UPDATE;
             $events[] = Task::EVENT_UPDATE;
         }
 
         foreach ($events as $event) {
-            $this->container['dispatcher']->dispatch($event, new TaskEvent($event_data));
+            $this->logger->debug('Event fired: '.$event);
+            $this->dispatcher->dispatch($event, new TaskEvent($event_data));
         }
     }
 

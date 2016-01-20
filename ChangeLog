@@ -4,10 +4,30 @@ Version 1.0.24 (unreleased)
 New features:
 
 * Forgot Password
+* Add dropdown menu on each board column title to close all tasks
+* Add Malay language
+
+Improvements:
+
+* Show in user interface the saving state of the task
+* Add dropdown menu for subtasks, categories, swimlanes, columns, custom filters, task links and groups
+* Add new template hooks
+* Application settings are not cached anymore in the session
+* Do not check board status during task move
+* Move validators to a separate namespace
+* Improve and write unit tests for reports
+* Reduce the number of SQL queries for project daily column stats
+* Remove event subscriber to update date_moved field
+* Make sure that some event subscribers are not executed multiple times
+* Show rendering time of individual templates when debug mode is enabled
+* Make sure that no events are fired if nothing have been modified in the task
 
 Bug fixes:
 
 * Automatic action listeners were using the same instance
+* Fix wrong link for category in task footer
+* Unable to set currency rate with Postgres database
+* Avoid automatic actions that change the color to fire subsequent events
 
 Version 1.0.23
 --------------

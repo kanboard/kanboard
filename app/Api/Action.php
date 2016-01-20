@@ -44,7 +44,7 @@ class Action extends \Kanboard\Core\Base
             'params' => $params,
         );
 
-        list($valid, ) = $this->action->validateCreation($values);
+        list($valid, ) = $this->actionValidator->validateCreation($values);
 
         if (! $valid) {
             return false;

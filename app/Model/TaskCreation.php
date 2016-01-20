@@ -88,6 +88,9 @@ class TaskCreation extends Base
     {
         $event = new TaskEvent(array('task_id' => $task_id) + $values);
 
+        $this->logger->debug('Event fired: '.Task::EVENT_CREATE_UPDATE);
+        $this->logger->debug('Event fired: '.Task::EVENT_CREATE);
+
         $this->dispatcher->dispatch(Task::EVENT_CREATE_UPDATE, $event);
         $this->dispatcher->dispatch(Task::EVENT_CREATE, $event);
 

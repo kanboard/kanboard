@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
+use Kanboard\Model\Swimlane;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
@@ -11,6 +12,41 @@ use Kanboard\Model\Project;
 
 class TaskStatusTest extends Base
 {
+    public function testCloseBySwimlaneAndColumn()
+    {
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinder($this->container);
+        $ts = new TaskStatus($this->container);
+        $p = new Project($this->container);
+        $s = new Swimlane($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'test')));
+        $this->assertEquals(1, $s->create(array('name' => 'test', 'project_id' => 1)));
+        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(3, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2)));
+        $this->assertEquals(4, $tc->create(array('title' => 'test', 'project_id' => 1, 'swimlane_id' => 1)));
+
+        $this->assertEquals(2, $tf->countByColumnAndSwimlaneId(1, 1, 0));
+        $this->assertEquals(1, $tf->countByColumnAndSwimlaneId(1, 1, 1));
+        $this->assertEquals(1, $tf->countByColumnAndSwimlaneId(1, 2, 0));
+
+        $ts->closeTasksBySwimlaneAndColumn(0, 1);
+        $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 1, 0));
+        $this->assertEquals(1, $tf->countByColumnAndSwimlaneId(1, 1, 1));
+        $this->assertEquals(1, $tf->countByColumnAndSwimlaneId(1, 2, 0));
+
+        $ts->closeTasksBySwimlaneAndColumn(1, 1);
+        $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 1, 0));
+        $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 1, 1));
+        $this->assertEquals(1, $tf->countByColumnAndSwimlaneId(1, 2, 0));
+
+        $ts->closeTasksBySwimlaneAndColumn(0, 2);
+        $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 1, 0));
+        $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 1, 1));
+        $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 2, 0));
+    }
+
     public function testStatus()
     {
         $tc = new TaskCreation($this->container);

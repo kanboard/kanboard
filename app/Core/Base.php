@@ -10,6 +10,11 @@ use Pimple\Container;
  * @package core
  * @author  Frederic Guillot
  *
+ * @property \Kanboard\Analytic\TaskDistributionAnalytic                $taskDistributionAnalytic
+ * @property \Kanboard\Analytic\UserDistributionAnalytic                $userDistributionAnalytic
+ * @property \Kanboard\Analytic\EstimatedTimeComparisonAnalytic         $estimatedTimeComparisonAnalytic
+ * @property \Kanboard\Analytic\AverageLeadCycleTimeAnalytic            $averageLeadCycleTimeAnalytic
+ * @property \Kanboard\Analytic\AverageTimeSpentColumnAnalytic          $averageTimeSpentColumnAnalytic
  * @property \Kanboard\Core\Action\ActionManager                        $actionManager
  * @property \Kanboard\Core\Cache\MemoryCache                           $memoryCache
  * @property \Kanboard\Core\Event\EventManager                          $eventManager
@@ -54,7 +59,6 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\GroupAutoCompleteFormatter             $groupAutoCompleteFormatter
  * @property \Kanboard\Model\Action                                     $action
  * @property \Kanboard\Model\ActionParameter                            $actionParameter
- * @property \Kanboard\Model\Authentication                             $authentication
  * @property \Kanboard\Model\Board                                      $board
  * @property \Kanboard\Model\Category                                   $category
  * @property \Kanboard\Model\Color                                      $color
@@ -113,6 +117,16 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
  * @property \Kanboard\Model\Webhook                                    $webhook
+ * @property \Kanboard\Validator\ActionValidator                        $actionValidator
+ * @property \Kanboard\Validator\AuthValidator                          $authValidator
+ * @property \Kanboard\Validator\ColumnValidator                        $columnValidator
+ * @property \Kanboard\Validator\CategoryValidator                      $categoryValidator
+ * @property \Kanboard\Validator\ColumnValidator                        $columnValidator
+ * @property \Kanboard\Validator\CommentValidator                       $commentValidator
+ * @property \Kanboard\Validator\CurrencyValidator                      $currencyValidator
+ * @property \Kanboard\Validator\CustomFilterValidator                  $customFilterValidator
+ * @property \Kanboard\Validator\GroupValidator                         $groupValidator
+ * @property \Kanboard\Validator\LinkValidator                          $linkValidator
  * @property \Kanboard\Validator\PasswordResetValidator                 $passwordResetValidator
  * @property \Kanboard\Validator\ProjectValidator                       $projectValidator
  * @property \Kanboard\Validator\SubtaskValidator                       $subtaskValidator

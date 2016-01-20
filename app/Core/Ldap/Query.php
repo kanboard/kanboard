@@ -13,18 +13,18 @@ class Query
     /**
      * LDAP client
      *
-     * @access private
+     * @access protected
      * @var Client
      */
-    private $client = null;
+    protected $client = null;
 
     /**
      * Query result
      *
-     * @access private
+     * @access protected
      * @var array
      */
-    private $entries = array();
+    protected $entries = array();
 
     /**
      * Constructor

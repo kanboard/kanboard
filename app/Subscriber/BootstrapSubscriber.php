@@ -3,9 +3,8 @@
 namespace Kanboard\Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Kanboard\Core\Base;
 
-class BootstrapSubscriber extends Base implements EventSubscriberInterface
+class BootstrapSubscriber extends BaseSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
@@ -16,6 +15,7 @@ class BootstrapSubscriber extends Base implements EventSubscriberInterface
 
     public function execute()
     {
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
         $this->config->setupTranslations();
         $this->config->setupTimezone();
         $this->actionManager->attachEvents();
