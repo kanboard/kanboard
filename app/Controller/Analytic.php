@@ -35,7 +35,17 @@ class Analytic extends Base
     public function leadAndCycleTime()
     {
         $project = $this->getProject();
-        list($from, $to) = $this->getDates();
+        $values = $this->request->getValues();
+
+        $this->projectDailyStats->updateTotals($project['id'], date('Y-m-d'));
+
+        $from = $this->request->getStringParam('from', date('Y-m-d', strtotime('-1week')));
+        $to = $this->request->getStringParam('to', date('Y-m-d'));
+
+        if (! empty($values)) {
+            $from = $values['from'];
+            $to = $values['to'];
+        }
 
         $this->response->html($this->layout('analytic/lead_cycle_time', array(
             'values' => array(
@@ -43,37 +53,11 @@ class Analytic extends Base
                 'to' => $to,
             ),
             'project' => $project,
-            'average' => $this->averageLeadCycleTimeAnalytic->build($project['id']),
+            'average' => $this->projectAnalytic->getAverageLeadAndCycleTime($project['id']),
             'metrics' => $this->projectDailyStats->getRawMetrics($project['id'], $from, $to),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => t('Lead and Cycle time for "%s"', $project['name']),
-        )));
-    }
-
-    /**
-     * Show comparison between actual and estimated hours chart
-     *
-     * @access public
-     */
-    public function compareHours()
-    {
-        $project = $this->getProject();
-        $params = $this->getProjectFilters('analytic', 'compareHours');
-        $query = $this->taskFilter->create()->filterByProject($params['project']['id'])->getQuery();
-
-        $paginator = $this->paginator
-            ->setUrl('analytic', 'compareHours', array('project_id' => $project['id']))
-            ->setMax(30)
-            ->setOrder(TaskModel::TABLE.'.id')
-            ->setQuery($query)
-            ->calculate();
-
-        $this->response->html($this->layout('analytic/compare_hours', array(
-            'project' => $project,
-            'paginator' => $paginator,
-            'metrics' => $this->estimatedTimeComparisonAnalytic->build($project['id']),
-            'title' => t('Compare hours for "%s"', $project['name']),
         )));
     }
 
@@ -88,7 +72,7 @@ class Analytic extends Base
 
         $this->response->html($this->layout('analytic/avg_time_columns', array(
             'project' => $project,
-            'metrics' => $this->averageTimeSpentColumnAnalytic->build($project['id']),
+            'metrics' => $this->projectAnalytic->getAverageTimeSpentByColumn($project['id']),
             'title' => t('Average time spent into each column for "%s"', $project['name']),
         )));
     }
@@ -101,11 +85,32 @@ class Analytic extends Base
     public function tasks()
     {
         $project = $this->getProject();
+        $swimlane_id = $this->request->getIntegerParam('swimlane_id');
+        $metrics = $this->projectAnalytic->getTaskRepartition($project['id'], $swimlane_id);
+        $closed['count'] = 0;
+        $closedtasks = $this->taskFinder->getAll($project['id'], 0);
+
+        if ($swimlane_id > 0){
+            foreach ($closedtasks as $closedtask) {
+                $closed['count'] += ($closedtask['swimlane_id'] == $swimlane_id) ? 1 : 0;
+            }
+        }
+        else{
+                 $closed['count'] = count($closedtasks);
+        }    
+        $closed['total'] = 0;
+        foreach ($metrics as $metric) {
+            $closed['total'] += $metric['nb_tasks'];
+        }
+        $closed['percentage'] = round(($closed['count'] * 100) / $closed['total'], 2);
 
         $this->response->html($this->layout('analytic/tasks', array(
             'project' => $project,
-            'metrics' => $this->taskDistributionAnalytic->build($project['id']),
+            'metrics' => $metrics,
             'title' => t('Task repartition for "%s"', $project['name']),
+            'swimlanes' => $this->swimlane->getAll($project['id']),
+            'swimlaneActive' => $this->swimlane->getNameById($swimlane_id),
+            'closed' => $closed,
         )));
     }
 
@@ -120,7 +125,7 @@ class Analytic extends Base
 
         $this->response->html($this->layout('analytic/users', array(
             'project' => $project,
-            'metrics' => $this->userDistributionAnalytic->build($project['id']),
+            'metrics' => $this->projectAnalytic->getUserRepartition($project['id']),
             'title' => t('User repartition for "%s"', $project['name']),
         )));
     }
@@ -156,7 +161,17 @@ class Analytic extends Base
     private function commonAggregateMetrics($template, $column, $title)
     {
         $project = $this->getProject();
-        list($from, $to) = $this->getDates();
+        $values = $this->request->getValues();
+
+        $this->projectDailyColumnStats->updateTotals($project['id'], date('Y-m-d'));
+
+        $from = $this->request->getStringParam('from', date('Y-m-d', strtotime('-1week')));
+        $to = $this->request->getStringParam('to', date('Y-m-d'));
+
+        if (! empty($values)) {
+            $from = $values['from'];
+            $to = $values['to'];
+        }
 
         $display_graph = $this->projectDailyColumnStats->countDays($project['id'], $from, $to) >= 2;
 
@@ -174,18 +189,31 @@ class Analytic extends Base
         )));
     }
 
-    private function getDates()
+    /**
+     * Show comparison between actual and estimated hours chart
+     *
+     * @access public
+     */
+    public function compareHours()
     {
-        $values = $this->request->getValues();
+        $project = $this->getProject();
+        $params = $this->getProjectFilters('analytic', 'compareHours');
+        $query = $this->taskFilter->search('status:all')->filterByProject($params['project']['id'])->getQuery();
 
-        $from = $this->request->getStringParam('from', date('Y-m-d', strtotime('-1week')));
-        $to = $this->request->getStringParam('to', date('Y-m-d'));
+        $paginator = $this->paginator
+            ->setUrl('analytic', 'compareHours', array('project_id' => $project['id']))
+            ->setMax(30)
+            ->setOrder(TaskModel::TABLE.'.id')
+            ->setQuery($query)
+            ->calculate();
 
-        if (! empty($values)) {
-            $from = $values['from'];
-            $to = $values['to'];
-        }
+        $stats = $this->projectAnalytic->getHoursByStatus($project['id']);
 
-        return array($from, $to);
+        $this->response->html($this->layout('analytic/compare_hours', array(
+            'project' => $project,
+            'paginator' => $paginator,
+            'metrics' => $stats,
+            'title' => t('Compare hours for "%s"', $project['name']),
+        )));
     }
 }
