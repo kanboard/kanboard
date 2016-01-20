@@ -1098,8 +1098,8 @@ return array(
     'Creation' => 'Criação',
     'Expiration' => 'Expiração',
     'Password reset history' => 'Histórico da redefinição da password',
-    // 'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => '',
-    // 'Do you really want to close all tasks of this column?' => '',
-    // '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '',
-    // 'Close all tasks of this column' => '',
+    'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Todas as tarefas na coluna "%s" e na swimlane "%s" foram fechadas com successo.',
+    'Do you really want to close all tasks of this column?' => 'Tem a certeza que quer fechar todas as tarefas nesta coluna?',
+    '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d tarefa(s) na coluna "%s" e na swimlane "%s" serão fechadas.',
+    'Close all tasks of this column' => 'Fechar todas as tarefas nesta coluna',
 );
