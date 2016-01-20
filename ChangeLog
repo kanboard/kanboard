@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Handle notification for group members attached to a project
 * Return the highest role for a project when a user is member of multiple groups
 * Show in user interface the saving state of the task
 * Add dropdown menu for subtasks, categories, swimlanes, columns, custom filters, task links and groups
