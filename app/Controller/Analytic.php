@@ -101,11 +101,32 @@ class Analytic extends Base
     public function tasks()
     {
         $project = $this->getProject();
+        $swimlane_id = $this->request->getIntegerParam('swimlane_id');
+        $metrics = $this->taskDistributionAnalytic->build($project['id'], $swimlane_id);
+        $closed['count'] = 0;
+        $closedtasks = $this->taskFinder->getAll($project['id'], 0);
+
+        if ($swimlane_id > 0){
+            foreach ($closedtasks as $closedtask) {
+                $closed['count'] += ($closedtask['swimlane_id'] == $swimlane_id) ? 1 : 0;
+            }
+        }
+        else{
+                 $closed['count'] = count($closedtasks);
+        }    
+        $closed['total'] = 0;
+        foreach ($metrics as $metric) {
+            $closed['total'] += $metric['nb_tasks'];
+        }
+        $closed['percentage'] = round(($closed['count'] * 100) / $closed['total'], 2);
 
         $this->response->html($this->layout('analytic/tasks', array(
             'project' => $project,
-            'metrics' => $this->taskDistributionAnalytic->build($project['id']),
+            'metrics' => $metrics,
             'title' => t('Task repartition for "%s"', $project['name']),
+            'swimlanes' => $this->swimlane->getAll($project['id']),
+            'swimlaneActive' => $this->swimlane->getNameById($swimlane_id),
+            'closed' => $closed,
         )));
     }
 
