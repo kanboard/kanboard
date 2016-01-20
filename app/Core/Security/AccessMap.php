@@ -87,6 +87,26 @@ class AccessMap
     }
 
     /**
+     * Get the highest role from a list
+     *
+     * @access public
+     * @param  array  $roles
+     * @return string
+     */
+    public function getHighestRole(array $roles)
+    {
+        $rank = array();
+
+        foreach ($roles as $role) {
+            $rank[$role] = count($this->getRoleHierarchy($role));
+        }
+
+        asort($rank);
+
+        return key($rank);
+    }
+
+    /**
      * Add new access rules
      *
      * @access public

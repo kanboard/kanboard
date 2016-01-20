@@ -9,6 +9,8 @@ New features:
 
 Improvements:
 
+* Handle notification for group members attached to a project
+* Return the highest role for a project when a user is member of multiple groups
 * Show in user interface the saving state of the task
 * Add dropdown menu for subtasks, categories, swimlanes, columns, custom filters, task links and groups
 * Add new template hooks
@@ -21,6 +23,7 @@ Improvements:
 * Make sure that some event subscribers are not executed multiple times
 * Show rendering time of individual templates when debug mode is enabled
 * Make sure that no events are fired if nothing have been modified in the task
+* Add unit tests for LastLogin
 
 Bug fixes:
 

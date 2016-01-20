@@ -48,11 +48,13 @@ class ProjectGroupRole extends Base
      */
     public function getUserRole($project_id, $user_id)
     {
-        return $this->db->table(self::TABLE)
+        $roles = $this->db->table(self::TABLE)
             ->join(GroupMember::TABLE, 'group_id', 'group_id', self::TABLE)
             ->eq(GroupMember::TABLE.'.user_id', $user_id)
             ->eq(self::TABLE.'.project_id', $project_id)
-            ->findOneColumn('role');
+            ->findAllByColumn('role');
+
+        return $this->projectAccessMap->getHighestRole($roles);
     }
 
     /**
@@ -99,10 +101,10 @@ class ProjectGroupRole extends Base
      */
     public function getAssignableUsers($project_id)
     {
-        return $this->db->table(self::TABLE)
+        return $this->db->table(User::TABLE)
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
-            ->join(GroupMember::TABLE, 'group_id', 'group_id', self::TABLE)
-            ->join(User::TABLE, 'id', 'user_id', GroupMember::TABLE)
+            ->join(GroupMember::TABLE, 'user_id', 'id', User::TABLE)
+            ->join(self::TABLE, 'group_id', 'group_id', GroupMember::TABLE)
             ->eq(self::TABLE.'.project_id', $project_id)
             ->in(self::TABLE.'.role', array(Role::PROJECT_MANAGER, Role::PROJECT_MEMBER))
             ->asc(User::TABLE.'.username')

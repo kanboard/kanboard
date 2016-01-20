@@ -337,4 +337,27 @@ class ProjectGroupRoleTest extends Base
         $projects = $groupRoleModel->getProjectsByUser(5, array(Project::INACTIVE));
         $this->assertCount(0, $projects);
     }
+
+    public function testUserInMultipleGroupsShouldReturnHighestRole()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'My user')));
+
+        $this->assertEquals(1, $groupModel->create('Group A'));
+        $this->assertEquals(2, $groupModel->create('Group B'));
+
+        $this->assertTrue($groupMemberModel->addUser(1, 1));
+        $this->assertTrue($groupMemberModel->addUser(2, 1));
+
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_MEMBER));
+        $this->assertTrue($groupRoleModel->addGroup(1, 2, Role::PROJECT_MANAGER));
+
+        $this->assertEquals(Role::PROJECT_MANAGER, $groupRoleModel->getUserRole(1, 1));
+    }
 }

@@ -10,7 +10,7 @@ Depuis la page des tâches, vous pouvez accéder à ces informations:
 - Date de l'action
 - Colonne d'origine
 - Colonne de destination
-- Exécuter (Pour l'utilisateur qui a déplacé la tâche) 
+- Exécutant (Pour l'utilisateur qui a déplacé la tâche) 
 - Temps passé sur la colonne d’origine
 
 Les données de transition entre les tâches peuvent aussi être exportées depuis la page des paramètres du projet

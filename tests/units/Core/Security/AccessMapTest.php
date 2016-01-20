@@ -17,6 +17,20 @@ class AccessMapTest extends Base
         $this->assertEquals(array('user', 'admin', 'manager'), $acl->getRoleHierarchy('user'));
     }
 
+    public function testGetHighestRole()
+    {
+        $acl = new AccessMap;
+        $acl->setRoleHierarchy('manager', array('member', 'viewer'));
+        $acl->setRoleHierarchy('member', array('viewer'));
+
+        $this->assertEquals('manager', $acl->getHighestRole(array('viewer', 'manager', 'member')));
+        $this->assertEquals('manager', $acl->getHighestRole(array('viewer', 'manager')));
+        $this->assertEquals('manager', $acl->getHighestRole(array('manager', 'member')));
+        $this->assertEquals('member', $acl->getHighestRole(array('viewer', 'member')));
+        $this->assertEquals('member', $acl->getHighestRole(array('member')));
+        $this->assertEquals('viewer', $acl->getHighestRole(array('viewer')));
+    }
+
     public function testAddRulesAndGetRoles()
     {
         $acl = new AccessMap;
