@@ -71,7 +71,17 @@ class UserNotification extends Base
             return $this->getEverybodyWithNotificationEnabled($exclude_user_id);
         }
 
-        return $this->getProjectMembersWithNotificationEnabled($project_id, $exclude_user_id);
+        $users = array();
+        $members = $this->getProjectUserMembersWithNotificationEnabled($project_id, $exclude_user_id);
+        $groups = $this->getProjectGroupMembersWithNotificationEnabled($project_id, $exclude_user_id);
+
+        foreach (array_merge($members, $groups) as $user) {
+            if (! isset($users[$user['id']])) {
+                $users[$user['id']] = $user;
+            }
+        }
+
+        return array_values($users);
     }
 
     /**
@@ -142,14 +152,14 @@ class UserNotification extends Base
     }
 
     /**
-     * Get a list of project members with notification enabled
+     * Get a list of group members with notification enabled
      *
      * @access private
      * @param  integer   $project_id        Project id
      * @param  integer   $exclude_user_id   User id to exclude
      * @return array
      */
-    private function getProjectMembersWithNotificationEnabled($project_id, $exclude_user_id)
+    private function getProjectUserMembersWithNotificationEnabled($project_id, $exclude_user_id)
     {
         return $this->db
             ->table(ProjectUserRole::TABLE)
@@ -157,6 +167,19 @@ class UserNotification extends Base
             ->join(User::TABLE, 'id', 'user_id')
             ->eq('project_id', $project_id)
             ->eq('notifications_enabled', '1')
+            ->neq(User::TABLE.'.id', $exclude_user_id)
+            ->findAll();
+    }
+
+    private function getProjectGroupMembersWithNotificationEnabled($project_id, $exclude_user_id)
+    {
+        return $this->db
+            ->table(ProjectGroupRole::TABLE)
+            ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email', User::TABLE.'.language', User::TABLE.'.notifications_filter')
+            ->join(GroupMember::TABLE, 'group_id', 'group_id', ProjectGroupRole::TABLE)
+            ->join(User::TABLE, 'id', 'user_id', GroupMember::TABLE)
+            ->eq(ProjectGroupRole::TABLE.'.project_id', $project_id)
+            ->eq(User::TABLE.'.notifications_enabled', '1')
             ->neq(User::TABLE.'.id', $exclude_user_id)
             ->findAll();
     }
