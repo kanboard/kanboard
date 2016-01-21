@@ -78,12 +78,13 @@ nav .active a {
 }
 
 .page-header h2 a {
-    color: #ddd;
+    color: #333;
+    text-decoration: none;
 }
 
 .page-header h2 a:focus,
 .page-header h2 a:hover {
-    color: #333;
+    color: #aaa;
 }
 
 .page-header ul {
