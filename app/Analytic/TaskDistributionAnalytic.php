@@ -19,21 +19,14 @@ class TaskDistributionAnalytic extends Base
      * @param  integer   $project_id    Project id
      * @return array
      */
-    public function build($project_id, $swimlane_id = 0)
+    public function build($project_id)
     {
         $metrics = array();
         $total = 0;
         $columns = $this->board->getColumns($project_id);
 
         foreach ($columns as $column) {
-            if ($swimlane_id === 0) {
-                $nb_tasks = $this->taskFinder->countByColumnId($project_id, $column['id']);
-            }
-			else
-            {
-                $nb_tasks = $this->taskFinder->countByColumnAndSwimlaneId($project_id, $column['id'], $swimlane_id);
-            }
-
+            $nb_tasks = $this->taskFinder->countByColumnId($project_id, $column['id']);
             $total += $nb_tasks;
 
             $metrics[] = array(
