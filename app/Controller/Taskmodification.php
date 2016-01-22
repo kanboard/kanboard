@@ -99,6 +99,8 @@ class Taskmodification extends Base
     {
         $task = $this->getTask();
         $ajax = $this->request->isAjax();
+        $project = $this->getProject();
+        $swimlanes_list = $this->swimlane->getList($project['id'], false, true);
 
         if (empty($values)) {
             $values = $task;
@@ -113,6 +115,7 @@ class Taskmodification extends Base
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($task['project_id']),
+            'swimlanes_list' => $swimlanes_list,
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
             'ajax' => $ajax,

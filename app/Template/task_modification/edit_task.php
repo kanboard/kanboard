@@ -50,8 +50,16 @@
         <?= $this->form->label(t('Category'), 'category_id') ?>
         <?= $this->form->select('category_id', $categories_list, $values, $errors, array('tabindex="4"')) ?><br/>
 
+        <?php if (! (count($swimlanes_list) === 1 && key($swimlanes_list) === 0)): ?>
+        <?= $this->form->label(t('Swimlane'), 'swimlane_id') ?>
+        <?= $this->form->select('swimlane_id', $swimlanes_list, $values, $errors, array('tabindex="5"')) ?><br/>
+        <?php endif ?>
+
         <?= $this->form->label(t('Complexity'), 'score') ?>
         <?= $this->form->number('score', $values, $errors, array('tabindex="6"')) ?><br/>
+
+        <?= $this->form->label(t('Original estimate'), 'time_estimated') ?>
+        <?= $this->form->numeric('time_estimated', $values, $errors, array('tabindex="9"')) ?> <?= t('hours') ?><br/>
 
         <?= $this->form->label(t('Due Date'), 'date_due') ?>
         <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="7"'), 'form-date') ?><br/>
