@@ -3,6 +3,9 @@
         <?= $task['is_active'] == 1 ? ($this->user->hasProjectAccess('board', 'save', $task['project_id']) ? 'draggable-item ' : '').'task-board-status-open '.($task['date_modification'] > (time() - $board_highlight_period) ? 'task-board-recent' : '') : 'task-board-status-closed' ?>
         color-<?= $task['color_id'] ?>"
      data-task-id="<?= $task['id'] ?>"
+     data-column-id="<?= $task['column_id'] ?>"
+     data-swimlane-id="<?= $task['swimlane_id'] ?>"
+     data-position="<?= $task['position'] ?>"
      data-owner-id="<?= $task['owner_id'] ?>"
      data-category-id="<?= $task['category_id'] ?>"
      data-due-date="<?= $task['date_due'] ?>"

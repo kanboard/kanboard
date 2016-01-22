@@ -108,16 +108,22 @@ Board.prototype.dragAndDrop = function() {
         placeholder: "draggable-placeholder",
         items: ".draggable-item",
         stop: function(event, ui) {
-            var taskId = ui.item.attr('data-task-id');
-            ui.item.removeClass("draggable-item-selected");
-            self.changeTaskState(taskId);
+            var task = ui.item;
+            var taskId = task.attr('data-task-id');
+            var taskPosition = task.attr('data-position');
+            var taskColumnId = task.attr('data-column-id');
+            var taskSwimlaneId = task.attr('data-swimlane-id');
 
-            self.save(
-                taskId,
-                ui.item.parent().attr("data-column-id"),
-                ui.item.index() + 1,
-                ui.item.parent().attr('data-swimlane-id')
-            );
+            var newColumnId = task.parent().attr("data-column-id");
+            var newSwimlaneId = task.parent().attr('data-swimlane-id');
+            var newPosition = task.index() + 1;
+
+            task.removeClass("draggable-item-selected");
+
+            if (newColumnId != taskColumnId || newSwimlaneId != taskSwimlaneId || newPosition != taskPosition) {
+                self.changeTaskState(taskId);
+                self.save(taskId, newColumnId, newPosition, newSwimlaneId);
+            }
         },
         start: function(event, ui) {
             ui.item.addClass("draggable-item-selected");
