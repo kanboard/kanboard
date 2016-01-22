@@ -338,16 +338,16 @@ abstract class Base extends \Kanboard\Core\Base
      * Common method to redirect the user after an action
      *
      * @param array   $task     Task data
-     * @param string  $redirect Type of redirection: 'board', 'gantt' or 'listing' to redirect to the given project view, empty to redirect to the current task, numeric value to redirect to a specific task
+     * @param string  $redirect Type of redirection: 'app', 'board', 'gantt' or 'listing' to redirect to the given project view, empty to redirect to the current task, numeric value to redirect to a specific task
      * @param string  $anchor   Optional anchor for default redirection (without the prefix #)
      * @access protected
      * @return Redirect to the relevant page
      */
     protected function redirect($task, $redirect='', $anchor='')
     {
-        $actions = array('board' => 'show', 'gantt' => 'project', 'listing' => 'show');
+        $actions = array('app' => 'index', 'board' => 'show', 'gantt' => 'project', 'listing' => 'show');
 
-        if (in_array($redirect, array('board', 'gantt', 'listing'))) {
+        if (in_array($redirect, array('app', 'board', 'gantt', 'listing'))) {
             $this->response->redirect($this->helper->url->to($redirect, $actions[$redirect], array('project_id' => $task['project_id']), $anchor));
         }
         if (is_numeric($redirect)) {

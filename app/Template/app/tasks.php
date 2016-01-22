@@ -12,10 +12,15 @@
             <th class="column-20"><?= t('Time tracking') ?></th>
             <th class="column-20"><?= $paginator->order(t('Due date'), 'date_due') ?></th>
         </tr>
+        <?php $taskmodificationEdit = array(); ?>
         <?php foreach ($paginator->getCollection() as $task): ?>
         <tr>
             <td class="task-table color-<?= $task['color_id'] ?>">
-                <?= $this->url->link('#'.$task['id'], 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?php if ((isset($taskmodificationEdit[$task['project_id']]) && $taskmodificationEdit[$task['project_id']]) || ($taskmodificationEdit[$task['project_id']] = $this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id']))): ?>
+                    <?= $this->render('board/task_menu', array('task' => $task, 'redirect' => 'app')) ?>
+                <?php else: ?>
+                    <?= $this->url->link('#'.$task['id'], 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?php endif ?>
             </td>
             <td>
                 <?= $this->url->link($this->e($task['project_name']), 'board', 'show', array('project_id' => $task['project_id'])) ?>

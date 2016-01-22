@@ -101,6 +101,7 @@ class Subtask extends Base
                 Task::TABLE.'.project_id',
                 Task::TABLE.'.color_id',
                 Task::TABLE.'.title AS task_name',
+                Task::TABLE.'.is_active AS is_active',
                 Project::TABLE.'.name AS project_name'
             )
             ->subquery($this->subtaskTimeTracking->getTimerQuery($user_id), 'timer_start_date')
