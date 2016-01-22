@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Always show the search box in board selector
 * Replace logout link by a dropdown menu
 * Handle notification for group members attached to a project
 * Return the highest role for a project when a user is member of multiple groups

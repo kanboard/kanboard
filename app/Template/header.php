@@ -19,6 +19,7 @@
                 <select id="board-selector"
                         class="chosen-select select-auto-redirect"
                         tabindex="-1"
+                        data-search-threshold="0"
                         data-notfound="<?= t('No results match:') ?>"
                         data-placeholder="<?= t('Display another project') ?>"
                         data-redirect-regex="PROJECT_ID"

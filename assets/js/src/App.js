@@ -156,10 +156,18 @@ App.prototype.autoComplete = function() {
 };
 
 App.prototype.chosen = function() {
-    $(".chosen-select").chosen({
-        width: "180px",
-        no_results_text: $(".chosen-select").data("notfound"),
-        disable_search_threshold: 10
+    $(".chosen-select").each(function() {
+        var searchThreshold = $(this).data("search-threshold");
+
+        if (searchThreshold === undefined) {
+            searchThreshold = 10;
+        }
+
+        $(this).chosen({
+            width: "180px",
+            no_results_text: $(this).data("notfound"),
+            disable_search_threshold: searchThreshold
+        });
     });
 
     $(".select-auto-redirect").change(function() {
