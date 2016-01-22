@@ -948,7 +948,7 @@ return array(
     'Your custom filter have been updated successfully.' => 'Özel filtreleriniz başarıyla güncellendi.',
     'Unable to update custom filter.' => 'Özel filtre güncellenemiyor.',
     'Web' => 'İnternet',
-    'New attachment on task #%d: %s' => '#%d görevinde yeni dosya: %s'
+    'New attachment on task #%d: %s' => '#%d görevinde yeni dosya: %s',
     'New comment on task #%d' => '#%d görevinde yeni yorum',
     'Comment updated on task #%d' => '#%d görevinde yorum güncellendi',
     'New subtask on task #%d' => '#%d görevinde yeni alt görev',
@@ -1039,7 +1039,7 @@ return array(
     'Project Manager' => 'Proje yöneticisi',
     'Project Member' => 'Proje üyesi',
     'Project Viewer' => 'Proje izleyicisi',
-    'Your account is locked for %d minutes' => 'Hesabınız % dakika boyunca kilitlendi',
+    'Your account is locked for %d minutes' => 'Hesabınız %d dakika boyunca kilitlendi',
     'Invalid captcha' => 'Geçersiz captcha',
     'The name must be unique' => 'İsim tekil olmalı',
     'View all groups' => 'Tüm grupları görüntüle',
