@@ -8,12 +8,12 @@ Board.prototype.execute = function() {
     this.app.swimlane.refresh();
     this.restoreColumnViewMode();
     this.compactView();
-    this.columnScrolling();
     this.poll();
     this.keyboardShortcuts();
     this.listen();
     this.dragAndDrop();
 
+    $(window).on("load", this.columnScrolling);
     $(window).resize(this.columnScrolling);
 };
 
@@ -91,12 +91,12 @@ Board.prototype.refresh = function(data) {
 
     this.app.refresh();
     this.app.swimlane.refresh();
-    this.columnScrolling();
     this.app.hideLoadingIcon();
     this.listen();
     this.dragAndDrop();
     this.compactView();
     this.restoreColumnViewMode();
+    this.columnScrolling();
 };
 
 Board.prototype.dragAndDrop = function() {
@@ -108,16 +108,22 @@ Board.prototype.dragAndDrop = function() {
         placeholder: "draggable-placeholder",
         items: ".draggable-item",
         stop: function(event, ui) {
-            var taskId = ui.item.attr('data-task-id');
-            ui.item.removeClass("draggable-item-selected");
-            self.changeTaskState(taskId);
+            var task = ui.item;
+            var taskId = task.attr('data-task-id');
+            var taskPosition = task.attr('data-position');
+            var taskColumnId = task.attr('data-column-id');
+            var taskSwimlaneId = task.attr('data-swimlane-id');
 
-            self.save(
-                taskId,
-                ui.item.parent().attr("data-column-id"),
-                ui.item.index() + 1,
-                ui.item.parent().attr('data-swimlane-id')
-            );
+            var newColumnId = task.parent().attr("data-column-id");
+            var newSwimlaneId = task.parent().attr('data-swimlane-id');
+            var newPosition = task.index() + 1;
+
+            task.removeClass("draggable-item-selected");
+
+            if (newColumnId != taskColumnId || newSwimlaneId != taskSwimlaneId || newPosition != taskPosition) {
+                self.changeTaskState(taskId);
+                self.save(taskId, newColumnId, newPosition, newSwimlaneId);
+            }
         },
         start: function(event, ui) {
             ui.item.addClass("draggable-item-selected");
@@ -164,21 +170,34 @@ Board.prototype.listen = function() {
 };
 
 Board.prototype.toggleColumnScrolling = function() {
-    var scrolling = localStorage.getItem("column_scroll") || 1;
+    var scrolling = localStorage.getItem("column_scroll");
+
+    if (scrolling == undefined) {
+        scrolling = 1;
+    }
+
     localStorage.setItem("column_scroll", scrolling == 0 ? 1 : 0);
     this.columnScrolling();
 };
 
 Board.prototype.columnScrolling = function() {
     if (localStorage.getItem("column_scroll") == 0) {
+        var height = 80;
+
         $(".filter-max-height").show();
         $(".filter-min-height").hide();
+        $(".board-rotation-wrapper").css("min-height", '');
 
         $(".board-task-list").each(function() {
-            $(this).css("min-height", 80);
-            $(this).css("height", '');
-            $(".board-rotation-wrapper").css("min-height", '');
+            var columnHeight = $(this).height();
+
+            if (columnHeight > height) {
+                height = columnHeight;
+            }
         });
+
+        $(".board-task-list").css("min-height", height);
+        $(".board-task-list").css("height", '');
     }
     else {
 

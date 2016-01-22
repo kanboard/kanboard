@@ -9,6 +9,10 @@ New features:
 
 Improvements:
 
+* Avoid to send XHR request when a task has not moved after a drag and drop
+* Set maximum dropzone height when the individual column scrolling is disabled
+* Always show the search box in board selector
+* Replace logout link by a dropdown menu
 * Handle notification for group members attached to a project
 * Return the highest role for a project when a user is member of multiple groups
 * Show in user interface the saving state of the task
@@ -23,6 +27,7 @@ Improvements:
 * Make sure that some event subscribers are not executed multiple times
 * Show rendering time of individual templates when debug mode is enabled
 * Make sure that no events are fired if nothing have been modified in the task
+* Make dashboard section title clickable
 * Add unit tests for LastLogin
 
 Bug fixes:

@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('My projects') ?> (<?= $paginator->getTotal() ?>)</h2>
+    <h2><?= $this->url->link(t('My projects'), 'app', 'projects', array('user_id' => $user['id'])) ?> (<?= $paginator->getTotal() ?>)</h2>
 </div>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('Your are not member of any project.') ?></p>

@@ -35,19 +35,9 @@ nav .active a {
     font-weight: bold;
 }
 
-/* username */
-.username a {
-    color: #000;
-}
-
-.username a:hover {
-    color: #DF5353;
-    text-decoration: underline;
-}
-
 /* logo */
-.logo {
-    opacity: 0.3;
+.logo a {
+    opacity: 0.5;
     color: #d40000;
 }
 
@@ -55,12 +45,13 @@ nav .active a {
     color: #333;
 }
 
-.logo:hover {
+.logo a:hover {
     opacity: 0.8;
+    color: #333;
 }
 
-.logo:focus span,
-.logo:hover span {
+.logo a:focus span,
+.logo a:hover span {
     color: #d40000;
 }
 
@@ -78,12 +69,13 @@ nav .active a {
 }
 
 .page-header h2 a {
-    color: #ddd;
+    color: #333;
+    text-decoration: none;
 }
 
 .page-header h2 a:focus,
 .page-header h2 a:hover {
-    color: #333;
+    color: #aaa;
 }
 
 .page-header ul {
@@ -104,7 +96,6 @@ nav .active a {
 }
 
 @media only screen and (max-width: 640px) {
-
     .page-header-mobile li {
         display: block;
         margin-bottom: 5px;

@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('My subtasks') ?> (<?= $paginator->getTotal() ?>)</h2>
+    <h2><?= $this->url->link(t('My subtasks'), 'app', 'subtasks', array('user_id' => $user['id'])) ?> (<?= $paginator->getTotal() ?>)</h2>
 </div>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>

@@ -35,6 +35,10 @@ ul.dropdown-submenu-open {
     cursor: pointer;
 }
 
+.dropdown-submenu-open li.no-hover {
+    cursor: default;
+}
+
 .textarea-dropdown li:last-child,
 .dropdown-submenu-open li:last-child {
     border: none;
@@ -42,7 +46,7 @@ ul.dropdown-submenu-open {
 
 .textarea-dropdown .active,
 .textarea-dropdown li:hover,
-.dropdown-submenu-open li:hover {
+.dropdown-submenu-open li:not(.no-hover):hover {
     background: #4078C0;
     color: #fff;
 }
