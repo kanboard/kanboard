@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Set maximum dropzone height when the individual column scrolling is disabled
 * Always show the search box in board selector
 * Replace logout link by a dropdown menu
 * Handle notification for group members attached to a project

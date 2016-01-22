@@ -8,12 +8,12 @@ Board.prototype.execute = function() {
     this.app.swimlane.refresh();
     this.restoreColumnViewMode();
     this.compactView();
-    this.columnScrolling();
     this.poll();
     this.keyboardShortcuts();
     this.listen();
     this.dragAndDrop();
 
+    $(window).on("load", this.columnScrolling);
     $(window).resize(this.columnScrolling);
 };
 
@@ -91,12 +91,12 @@ Board.prototype.refresh = function(data) {
 
     this.app.refresh();
     this.app.swimlane.refresh();
-    this.columnScrolling();
     this.app.hideLoadingIcon();
     this.listen();
     this.dragAndDrop();
     this.compactView();
     this.restoreColumnViewMode();
+    this.columnScrolling();
 };
 
 Board.prototype.dragAndDrop = function() {
@@ -164,21 +164,34 @@ Board.prototype.listen = function() {
 };
 
 Board.prototype.toggleColumnScrolling = function() {
-    var scrolling = localStorage.getItem("column_scroll") || 1;
+    var scrolling = localStorage.getItem("column_scroll");
+
+    if (scrolling == undefined) {
+        scrolling = 1;
+    }
+
     localStorage.setItem("column_scroll", scrolling == 0 ? 1 : 0);
     this.columnScrolling();
 };
 
 Board.prototype.columnScrolling = function() {
     if (localStorage.getItem("column_scroll") == 0) {
+        var height = 80;
+
         $(".filter-max-height").show();
         $(".filter-min-height").hide();
+        $(".board-rotation-wrapper").css("min-height", '');
 
         $(".board-task-list").each(function() {
-            $(this).css("min-height", 80);
-            $(this).css("height", '');
-            $(".board-rotation-wrapper").css("min-height", '');
+            var columnHeight = $(this).height();
+
+            if (columnHeight > height) {
+                height = columnHeight;
+            }
         });
+
+        $(".board-task-list").css("min-height", height);
+        $(".board-task-list").css("height", '');
     }
     else {
 
