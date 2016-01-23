@@ -146,7 +146,7 @@ abstract class Base extends \Kanboard\Core\Base
     protected function forbidden($no_layout = false)
     {
         if ($this->request->isAjax()) {
-            $this->response->text('Not Authorized', 401);
+            $this->response->text('Access Forbidden', 403);
         }
 
         $this->response->html($this->template->layout('app/forbidden', array(

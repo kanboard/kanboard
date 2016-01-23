@@ -73,10 +73,6 @@ class Board extends Base
             return $this->response->status(403);
         }
 
-        if (! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
-            $this->response->text('Forbidden', 403);
-        }
-
         $values = $this->request->getJson();
 
         $result =$this->taskPosition->movePosition(
@@ -101,22 +97,18 @@ class Board extends Base
      */
     public function check()
     {
-        if (! $this->request->isAjax()) {
-            return $this->response->status(403);
-        }
-
         $project_id = $this->request->getIntegerParam('project_id');
         $timestamp = $this->request->getIntegerParam('timestamp');
 
-        if (! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
-            $this->response->text('Forbidden', 403);
+        if (! $project_id || ! $this->request->isAjax()) {
+            return $this->response->status(403);
         }
 
         if (! $this->project->isModifiedSince($project_id, $timestamp)) {
             return $this->response->status(304);
         }
 
-        $this->response->html($this->renderBoard($project_id));
+        return $this->response->html($this->renderBoard($project_id));
     }
 
     /**
@@ -126,14 +118,10 @@ class Board extends Base
      */
     public function reload()
     {
-        if (! $this->request->isAjax()) {
-            return $this->response->status(403);
-        }
-
         $project_id = $this->request->getIntegerParam('project_id');
 
-        if (! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
-            $this->response->text('Forbidden', 403);
+        if (! $project_id || ! $this->request->isAjax()) {
+            return $this->response->status(403);
         }
 
         $values = $this->request->getJson();
