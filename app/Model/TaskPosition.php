@@ -166,7 +166,12 @@ class TaskPosition extends Base
             return false;
         }
 
-        return true;
+        $now = time();
+
+        return $this->db->table(Task::TABLE)->eq('id', $task_id)->update(array(
+            'date_moved' => $now,
+            'date_modification' => $now,
+        ));
     }
 
     /**
