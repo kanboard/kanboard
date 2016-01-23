@@ -525,7 +525,7 @@ Response example:
 
 ### moveTaskPosition
 
-- Purpose: **Move a task to another column or another position**
+- Purpose: **Move a task to another column, position or swimlane inside the same board**
 - Parameters:
     - **project_id** (integer, required)
     - **task_id** (integer, required)
@@ -558,5 +558,79 @@ Response example:
     "jsonrpc": "2.0",
     "id": 117211800,
     "result": true
+}
+```
+
+### moveTaskToProject
+
+- Purpose: **Move a task to another project**
+- Parameters:
+    - **task_id** (integer, required)
+    - **project_id** (integer, required)
+    - **swimlane_id** (integer, optional)
+    - **column_id** (integer, optional)
+    - **category_id** (integer, optional)
+    - **owner_id** (integer, optional)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "moveTaskToProject",
+    "id": 15775829,
+    "params": [
+        4,
+        5
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 15775829,
+    "result": true
+}
+```
+
+### duplicateTaskToProject
+
+- Purpose: **Move a task to another column or another position**
+- Parameters:
+    - **task_id** (integer, required)
+    - **project_id** (integer, required)
+    - **swimlane_id** (integer, optional)
+    - **column_id** (integer, optional)
+    - **category_id** (integer, optional)
+    - **owner_id** (integer, optional)
+- Result on success: **task_id**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "duplicateTaskToProject",
+    "id": 1662458687,
+    "params": [
+        5,
+        7
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1662458687,
+    "result": 6
 }
 ```

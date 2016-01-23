@@ -55,4 +55,42 @@ class TaskTest extends Base
         $task = $this->app->getTask($task_id);
         $this->assertEquals(0, $task['owner_id']);
     }
+
+    public function testMoveTaskToAnotherProject()
+    {
+        $project_id1 = $this->app->createProject('My project');
+        $this->assertNotFalse($project_id1);
+
+        $project_id2 = $this->app->createProject('My project');
+        $this->assertNotFalse($project_id2);
+
+        $task_id = $this->app->createTask(array('project_id' => $project_id1, 'title' => 'My task'));
+        $this->assertNotFalse($task_id);
+
+        $this->assertTrue($this->app->moveTaskToProject($task_id, $project_id2));
+
+        $task = $this->app->getTask($task_id);
+        $this->assertEquals($project_id2, $task['project_id']);
+    }
+
+    public function testMoveCopyToAnotherProject()
+    {
+        $project_id1 = $this->app->createProject('My project');
+        $this->assertNotFalse($project_id1);
+
+        $project_id2 = $this->app->createProject('My project');
+        $this->assertNotFalse($project_id2);
+
+        $task_id1 = $this->app->createTask(array('project_id' => $project_id1, 'title' => 'My task'));
+        $this->assertNotFalse($task_id1);
+
+        $task_id2 = $this->app->duplicateTaskToProject($task_id1, $project_id2);
+        $this->assertNotFalse($task_id2);
+
+        $task = $this->app->getTask($task_id1);
+        $this->assertEquals($project_id1, $task['project_id']);
+
+        $task = $this->app->getTask($task_id2);
+        $this->assertEquals($project_id2, $task['project_id']);
+    }
 }

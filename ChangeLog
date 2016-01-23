@@ -6,7 +6,7 @@ New features:
 * Forgot Password
 * Add dropdown menu on each board column title to close all tasks
 * Add Malay language
-* Add new API procedures for groups, roles and project permissions
+* Add new API procedures for groups, roles, project permissions and to move/duplicate tasks to another project
 
 Improvements:
 
