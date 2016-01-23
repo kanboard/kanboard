@@ -117,7 +117,7 @@ class Task extends Base
             return false;
         }
 
-        if ($owner_id !== null && ! $this->projectPermission->isAssignable($project_id, $owner_id)) {
+        if ($owner_id !== null && $owner_id != 0 && ! $this->projectPermission->isAssignable($project_id, $owner_id)) {
             return false;
         }
 

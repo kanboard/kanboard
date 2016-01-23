@@ -37,6 +37,7 @@ Bug fixes:
 * Fix wrong link for category in task footer
 * Unable to set currency rate with Postgres database
 * Avoid automatic actions that change the color to fire subsequent events
+* Unable to unassign a task from the API
 
 Version 1.0.23
 --------------
