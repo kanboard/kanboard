@@ -1,7 +1,7 @@
 API Comment Procedures
 ======================
 
-### createComment
+## createComment
 
 - Purpose: **Create a new comment**
 - Parameters:
@@ -36,7 +36,7 @@ Response example:
 }
 ```
 
-### getComment
+## getComment
 
 - Purpose: **Get comment information**
 - Parameters:
@@ -75,7 +75,7 @@ Response example:
 }
 ```
 
-### getAllComments
+## getAllComments
 
 - Purpose: **Get all available comments**
 - Parameters:
@@ -117,7 +117,7 @@ Response example:
 }
 ```
 
-### updateComment
+## updateComment
 
 - Purpose: **Update a comment**
 - Parameters:
@@ -150,7 +150,7 @@ Response example:
 }
 ```
 
-### removeComment
+## removeComment
 
 - Purpose: **Remove a comment**
 - Parameters:

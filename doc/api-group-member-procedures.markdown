@@ -1,7 +1,7 @@
 Group Member API Procedures
 ===========================
 
-### getGroupMembers
+## getGroupMembers
 
 - Purpose: **Get all members of a group**
 - Parameters:
@@ -52,7 +52,7 @@ Response example:
 }
 ```
 
-### addGroupMember
+## addGroupMember
 
 - Purpose: **Add a user to a group**
 - Parameters:
@@ -85,7 +85,7 @@ Response example:
 }
 ```
 
-### removeGroupMember
+## removeGroupMember
 
 - Purpose: **Remove a user from a group**
 - Parameters:
@@ -118,7 +118,7 @@ Response example:
 }
 ```
 
-### isGroupMember
+## isGroupMember
 
 - Purpose: **Check if a user is member of a group**
 - Parameters:

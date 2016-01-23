@@ -1,7 +1,7 @@
 API File Procedures
 ===================
 
-### createFile
+## createFile
 
 - Purpose: **Create and upload a new task attachment**
 - Parameters:
@@ -39,7 +39,7 @@ Response example:
 }
 ```
 
-### getAllFiles
+## getAllFiles
 
 - Purpose: **Get all files attached to  task**
 - Parameters:
@@ -83,7 +83,7 @@ Response example:
 }
 ```
 
-### getFile
+## getFile
 
 - Purpose: **Get file information**
 - Parameters:
@@ -123,7 +123,7 @@ Response example:
 }
 ```
 
-### downloadFile
+## downloadFile
 
 - Purpose: **Download file contents (encoded in base64)**
 - Parameters:
@@ -154,7 +154,7 @@ Response example:
 }
 ```
 
-### removeFile
+## removeFile
 
 - Purpose: **Remove file**
 - Parameters:
@@ -185,7 +185,7 @@ Response example:
 }
 ```
 
-### removeAllFiles
+## removeAllFiles
 
 - Purpose: **Remove all files associated to a task**
 - Parameters:

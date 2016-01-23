@@ -1,7 +1,7 @@
 API Swimlane Procedures
 =======================
 
-### getDefaultSwimlane
+## getDefaultSwimlane
 
 - Purpose: **Get the default swimlane for a project**
 - Parameters:
@@ -36,7 +36,7 @@ Response example:
 }
 ```
 
-### getActiveSwimlanes
+## getActiveSwimlanes
 
 - Purpose: **Get the list of enabled swimlanes of a project (include default swimlane if enabled)**
 - Parameters:
@@ -76,7 +76,7 @@ Response example:
 }
 ```
 
-### getAllSwimlanes
+## getAllSwimlanes
 
 - Purpose: **Get the list of all swimlanes of a project (enabled or disabled) and sorted by position**
 - Parameters:
@@ -122,7 +122,7 @@ Response example:
 }
 ```
 
-### getSwimlane
+## getSwimlane
 
 - Purpose: **Get the a swimlane by id**
 - Parameters:
@@ -159,7 +159,7 @@ Response example:
 }
 ```
 
-### getSwimlaneById
+## getSwimlaneById
 
 - Purpose: **Get the a swimlane by id**
 - Parameters:
@@ -196,7 +196,7 @@ Response example:
 }
 ```
 
-### getSwimlaneByName
+## getSwimlaneByName
 
 - Purpose: **Get the a swimlane by name**
 - Parameters:
@@ -235,7 +235,7 @@ Response example:
 }
 ```
 
-### moveSwimlaneUp
+## moveSwimlaneUp
 
 - Purpose: **Move up the swimlane position**
 - Parameters:
@@ -268,7 +268,7 @@ Response example:
 }
 ```
 
-### moveSwimlaneDown
+## moveSwimlaneDown
 
 - Purpose: **Move down the swimlane position**
 - Parameters:
@@ -301,7 +301,7 @@ Response example:
 }
 ```
 
-### updateSwimlane
+## updateSwimlane
 
 - Purpose: **Update swimlane properties**
 - Parameters:
@@ -335,7 +335,7 @@ Response example:
 }
 ```
 
-### addSwimlane
+## addSwimlane
 
 - Purpose: **Add a new swimlane**
 - Parameters:
@@ -369,7 +369,7 @@ Response example:
 }
 ```
 
-### removeSwimlane
+## removeSwimlane
 
 - Purpose: **Remove a swimlane**
 - Parameters:
@@ -402,7 +402,7 @@ Response example:
 }
 ```
 
-### disableSwimlane
+## disableSwimlane
 
 - Purpose: **Enable a swimlane**
 - Parameters:
@@ -435,7 +435,7 @@ Response example:
 }
 ```
 
-### enableSwimlane
+## enableSwimlane
 
 - Purpose: **Enable a swimlane**
 - Parameters:

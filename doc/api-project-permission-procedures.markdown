@@ -1,7 +1,7 @@
 Project Permission API Procedures
 =================================
 
-### getProjectUsers
+## getProjectUsers
 
 - Purpose: **Get all members of a project**
 - Parameters:
@@ -34,7 +34,7 @@ Response example:
 }
 ```
 
-### getAssignableUsers
+## getAssignableUsers
 
 - Purpose: **Get users that can be assigned to a task for a project** (all members except viewers)
 - Parameters:
@@ -68,7 +68,7 @@ Response example:
 }
 ```
 
-### addProjectUser
+## addProjectUser
 
 - Purpose: **Grant access to a project for a user**
 - Parameters:
@@ -103,7 +103,7 @@ Response example:
 }
 ```
 
-### addProjectGroup
+## addProjectGroup
 
 - Purpose: **Grant access to a project for a group**
 - Parameters:
@@ -137,7 +137,7 @@ Response example:
 }
 ```
 
-### removeProjectUser
+## removeProjectUser
 
 - Purpose: **Revoke user access to a project**
 - Parameters:
@@ -170,7 +170,7 @@ Response example:
 }
 ```
 
-### removeProjectGroup
+## removeProjectGroup
 
 - Purpose: **Revoke group access to a project**
 - Parameters:
@@ -203,7 +203,7 @@ Response example:
 }
 ```
 
-### changeProjectUserRole
+## changeProjectUserRole
 
 - Purpose: **Change role of a user for a project**
 - Parameters:
@@ -238,7 +238,7 @@ Response example:
 }
 ```
 
-### changeProjectGroupRole
+## changeProjectGroupRole
 
 - Purpose: **Change role of a group for a project**
 - Parameters:

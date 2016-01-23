@@ -1,7 +1,7 @@
 API Application Procedures
 ==========================
 
-### getVersion
+## getVersion
 
 - Purpose: **Get the application version**
 - Parameters: none
@@ -27,7 +27,7 @@ Response example:
 }
 ```
 
-### getTimezone
+## getTimezone
 
 - Purpose: **Get the application timezone**
 - Parameters: none
@@ -54,7 +54,7 @@ Response example:
 }
 ```
 
-### getDefaultTaskColors
+## getDefaultTaskColors
 
 - Purpose: **Get all default task colors**
 - Parameters: None
@@ -161,7 +161,7 @@ Response example:
 }
 ```
 
-### getDefaultTaskColor
+## getDefaultTaskColor
 
 - Purpose: **Get default task color**
 - Parameters: None
@@ -187,7 +187,7 @@ Response example:
 }
 ```
 
-### getColorList
+## getColorList
 
 - Purpose: **Get the list of task colors**
 - Parameters: none
@@ -230,7 +230,7 @@ Response example:
 }
 ```
 
-### getApplicationRoles
+## getApplicationRoles
 
 - Purpose: **Get the application roles**
 - Parameters: none
@@ -260,7 +260,7 @@ Response example:
 }
 ```
 
-### getProjectRoles
+## getProjectRoles
 
 - Purpose: **Get the project roles**
 - Parameters: none

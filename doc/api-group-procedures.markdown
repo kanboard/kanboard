@@ -1,7 +1,7 @@
 Group API Procedures
 ====================
 
-### createGroup
+## createGroup
 
 - Purpose: **Create a new group**
 - Parameters:
@@ -34,7 +34,7 @@ Response example:
 }
 ```
 
-### updateGroup
+## updateGroup
 
 - Purpose: **Update a group**
 - Parameters:
@@ -69,7 +69,7 @@ Response example:
 }
 ```
 
-### removeGroup
+## removeGroup
 
 - Purpose: **Remove a group**
 - Parameters:
@@ -100,7 +100,7 @@ Response example:
 }
 ```
 
-### getGroup
+## getGroup
 
 - Purpose: **Get one group**
 - Parameters:
@@ -135,7 +135,7 @@ Response example:
 }
 ```
 
-### getAllGroups
+## getAllGroups
 
 - Purpose: **Get all groups**
 - Parameters: none

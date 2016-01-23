@@ -1,7 +1,7 @@
 API Project Procedures
 ======================
 
-### createProject
+## createProject
 
 - Purpose: **Create a new project**
 - Parameters:
@@ -33,7 +33,7 @@ Response example:
 }
 ```
 
-### getProjectById
+## getProjectById
 
 - Purpose: **Get project information**
 - Parameters:
@@ -82,7 +82,7 @@ Response example:
 }
 ```
 
-### getProjectByName
+## getProjectByName
 
 - Purpose: **Get project information**
 - Parameters:
@@ -131,7 +131,7 @@ Response example:
 }
 ```
 
-### getAllProjects
+## getAllProjects
 
 - Purpose: **Get all available projects**
 - Parameters:
@@ -179,7 +179,7 @@ Response example:
 }
 ```
 
-### updateProject
+## updateProject
 
 - Purpose: **Update a project**
 - Parameters:
@@ -213,7 +213,7 @@ Response example:
 }
 ```
 
-### removeProject
+## removeProject
 
 - Purpose: **Remove a project**
 - Parameters:
@@ -244,7 +244,7 @@ Response example:
 }
 ```
 
-### enableProject
+## enableProject
 
 - Purpose: **Enable a project**
 - Parameters:
@@ -275,7 +275,7 @@ Response example:
 }
 ```
 
-### disableProject
+## disableProject
 
 - Purpose: **Disable a project**
 - Parameters:
@@ -306,7 +306,7 @@ Response example:
 }
 ```
 
-### enableProjectPublicAccess
+## enableProjectPublicAccess
 
 - Purpose: **Enable public access for a given project**
 - Parameters:
@@ -337,7 +337,7 @@ Response example:
 }
 ```
 
-### disableProjectPublicAccess
+## disableProjectPublicAccess
 
 - Purpose: **Disable public access for a given project**
 - Parameters:
@@ -368,7 +368,7 @@ Response example:
 }
 ```
 
-### getProjectActivity
+## getProjectActivity
 
 - Purpose: **Get activity stream for a project**
 - Parameters:
@@ -389,7 +389,7 @@ Request example:
 }
 ```
 
-### getProjectActivities
+## getProjectActivities
 
 - Purpose: **Get Activityfeed for Project(s)**
 - Parameters:

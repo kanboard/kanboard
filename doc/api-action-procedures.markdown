@@ -1,7 +1,7 @@
 API Automatic Actions Procedures
 ================================
 
-### getAvailableActions
+## getAvailableActions
 
 - Purpose: **Get list of available automatic actions**
 - Parameters: none
@@ -47,7 +47,7 @@ Response example:
 }
 ```
 
-### getAvailableActionEvents
+## getAvailableActionEvents
 
 - Purpose: **Get list of available events for actions**
 - Parameters: none
@@ -93,7 +93,7 @@ Response example:
 }
 ```
 
-### getCompatibleActionEvents
+## getCompatibleActionEvents
 
 - Purpose: **Get list of events compatible with an action**
 - Parameters:
@@ -131,7 +131,7 @@ Response example:
 }
 ```
 
-### getActions
+## getActions
 
 - Purpose: **Get list of actions for a project**
 - Parameters:
@@ -173,7 +173,7 @@ Response example:
 }
 ```
 
-### createAction
+## createAction
 
 - Purpose: **Create an action**
 - Parameters:
@@ -213,7 +213,7 @@ Response example:
 }
 ```
 
-### removeAction
+## removeAction
 
 - Purpose: **Remove an action**
 - Parameters:

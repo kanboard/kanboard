@@ -1,7 +1,7 @@
 User API Specific Procedures
 ============================
 
-### getMe
+## getMe
 
 - Purpose: **Get logged user session**
 - Parameters: None
@@ -45,7 +45,7 @@ Response example:
 }
 ```
 
-### getMyDashboard
+## getMyDashboard
 
 - Purpose: **Get the dashboard of the logged user without pagination**
 - Parameters: None
@@ -147,7 +147,7 @@ Response example:
 }
 ```
 
-### getMyActivityStream
+## getMyActivityStream
 
 - Purpose: **Get the last 100 events for the logged user**
 - Parameters: None
@@ -230,7 +230,7 @@ Response example:
 }
 ```
 
-### createMyPrivateProject
+## createMyPrivateProject
 
 - Purpose: **Create a private project for the logged user**
 - Parameters:
@@ -262,7 +262,7 @@ Response example:
 }
 ```
 
-### getMyProjectsList
+## getMyProjectsList
 
 - Purpose: **Get projects of the connected user**
 - Parameters: None
@@ -290,7 +290,7 @@ Response example:
     }
 }
 ```
-### getMyOverdueTasks
+## getMyOverdueTasks
 
 - Purpose: **Get my overdue tasks**
 - Result on success: **List of tasks**
@@ -336,7 +336,7 @@ Response example:
 }
 ```
 
-### getMyProjects
+## getMyProjects
 
 - Purpose: **Get projects of connected user with full details**
 - Parameters:
