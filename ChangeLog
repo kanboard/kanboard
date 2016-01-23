@@ -38,6 +38,7 @@ Bug fixes:
 * Unable to set currency rate with Postgres database
 * Avoid automatic actions that change the color to fire subsequent events
 * Unable to unassign a task from the API
+* Revert back previous optimizations of TaskPosition
 
 Version 1.0.23
 --------------
