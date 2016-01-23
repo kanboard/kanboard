@@ -1,7 +1,7 @@
 <phpunit stopOnError="true" stopOnFailure="true" colors="true">
     <testsuites>
         <testsuite name="Kanboard">
-            <directory>functionals</directory>
+            <directory>integration</directory>
         </testsuite>
     </testsuites>
     <php>

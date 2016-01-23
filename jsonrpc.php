@@ -19,6 +19,8 @@ use Kanboard\Api\Swimlane;
 use Kanboard\Api\Task;
 use Kanboard\Api\TaskLink;
 use Kanboard\Api\User;
+use Kanboard\Api\Group;
+use Kanboard\Api\GroupMember;
 
 $server = new Server;
 $server->setAuthenticationHeader(API_AUTHENTICATION_HEADER);
@@ -39,5 +41,7 @@ $server->attach(new Swimlane($container));
 $server->attach(new Task($container));
 $server->attach(new TaskLink($container));
 $server->attach(new User($container));
+$server->attach(new Group($container));
+$server->attach(new GroupMember($container));
 
 echo $server->execute();

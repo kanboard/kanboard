@@ -229,3 +229,63 @@ Response example:
     }
 }
 ```
+
+### getApplicationRoles
+
+- Purpose: **Get the application roles**
+- Parameters: none
+- Result: **Dictionary of role => role_name**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getApplicationRoles",
+    "id": 317154243
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 317154243,
+    "result": {
+        "app-admin": "Administrator",
+        "app-manager": "Manager",
+        "app-user": "User"
+    }
+}
+```
+
+### getProjectRoles
+
+- Purpose: **Get the project roles**
+- Parameters: none
+- Result: **Dictionary of role => role_name**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getProjectRoles",
+    "id": 8981960
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 8981960,
+    "result": {
+        "project-manager": "Project Manager",
+        "project-member": "Project Member",
+        "project-viewer": "Project Viewer"
+    }
+}
+```

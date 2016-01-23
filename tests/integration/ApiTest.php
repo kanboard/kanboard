@@ -45,16 +45,6 @@ class Api extends PHPUnit_Framework_TestCase
         return $tasks[0]['id'];
     }
 
-    public function testGetTimezone()
-    {
-        $this->assertEquals('Europe/Paris', $this->client->getTimezone());
-    }
-
-    public function testGetVersion()
-    {
-        $this->assertEquals('master', $this->client->getVersion());
-    }
-
     public function testRemoveAll()
     {
         $projects = $this->client->getAllProjects();
