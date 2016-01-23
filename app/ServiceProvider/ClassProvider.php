@@ -168,6 +168,7 @@ class ClassProvider implements ServiceProviderInterface
         };
 
         $container['cspRules'] = array(
+            'default-src' => "'self'",
             'style-src' => "'self' 'unsafe-inline'",
             'img-src' => '* data:',
         );
