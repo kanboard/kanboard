@@ -996,7 +996,6 @@ return array(
     'Append/Replace' => 'Ajouter/Remplaçer',
     'Append' => 'Ajouter',
     'Replace' => 'Remplaçer',
-    'There is no notification method registered.' => 'Il n\'y a aucune méthode de notification enregistrée.',
     'Import' => 'Importation',
     'change sorting' => 'changer l\'ordre',
     'Tasks Importation' => 'Importation des tâches',
@@ -1105,4 +1104,7 @@ return array(
     'Do you really want to close all tasks of this column?' => 'Voulez-vous vraiment fermer toutes les tâches de cette colonne ?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d tâche(s) dans la colonne « %s » et la swimlane « %s » seront fermées.',
     'Close all tasks of this column' => 'Fermer toutes les tâches de cette colonne',
+    'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Aucun plugin n\'a enregistré une méthode de notification de projet. Vous pouvez toujours configurer les notifications individuelles dans votre profil d\'utilisateur.',
+    'My dashboard' => 'Mon tableau de bord',
+    'My profile' => 'Mon profile',
 );

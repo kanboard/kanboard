@@ -994,7 +994,6 @@ return array(
     'Append/Replace' => 'Dodaj/Zamijeni',
     'Append' => 'Dodaj',
     'Replace' => 'Zamijeni',
-    'There is no notification method registered.' => 'Nema registrovanih metoda za obavještenja',
     'Import' => 'Uvoz',
     'change sorting' => 'Promijeni sortiranje',
     'Tasks Importation' => 'Uvoz zadataka',
@@ -1102,4 +1101,7 @@ return array(
     // 'Do you really want to close all tasks of this column?' => '',
     // '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '',
     // 'Close all tasks of this column' => '',
+    // 'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => '',
+    // 'My dashboard' => '',
+    // 'My profile' => '',
 );
