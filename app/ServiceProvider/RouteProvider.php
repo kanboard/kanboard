@@ -52,7 +52,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/customer-filter', 'customfilter', 'index');
             $container['route']->addRoute('project/:project_id/share', 'project', 'share');
             $container['route']->addRoute('project/:project_id/notifications', 'project', 'notifications');
-            $container['route']->addRoute('project/:project_id/edit', 'project', 'edit');
             $container['route']->addRoute('project/:project_id/integrations', 'project', 'integrations');
             $container['route']->addRoute('project/:project_id/duplicate', 'project', 'duplicate');
             $container['route']->addRoute('project/:project_id/remove', 'project', 'remove');
@@ -60,6 +59,11 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/enable', 'project', 'enable');
             $container['route']->addRoute('project/:project_id/permissions', 'ProjectPermission', 'index');
             $container['route']->addRoute('project/:project_id/import', 'taskImport', 'step1');
+
+            // ProjectEdit routes
+            $container['route']->addRoute('project/:project_id/edit', 'ProjectEdit', 'edit');
+            $container['route']->addRoute('project/:project_id/edit/dates', 'ProjectEdit', 'dates');
+            $container['route']->addRoute('project/:project_id/edit/description', 'ProjectEdit', 'description');
 
             // ProjectUser routes
             $container['route']->addRoute('projects/managers/:user_id', 'projectuser', 'managers');

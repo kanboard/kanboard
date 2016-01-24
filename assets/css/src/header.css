@@ -93,8 +93,19 @@ header h1 .tooltip {
 .menu-inline li,
 .page-header li {
     display: inline;
-    padding-right: 10px;
+    padding-right: 15px;
     font-size: 0.95em;
+}
+
+.page-header li.active a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.page-header li.active a:hover,
+.page-header li.active a:focus {
+    text-decoration: underline;
 }
 
 .menu-inline {

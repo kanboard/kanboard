@@ -10,9 +10,9 @@
         </li>
         <?php endif ?>
 
-        <?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
-            <li <?= $this->app->checkMenuSelection('project', 'edit') ?>>
-                <?= $this->url->link(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
+        <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
+            <li <?= $this->app->checkMenuSelection('ProjectEdit', 'edit') ?>>
+                <?= $this->url->link(t('Edit project'), 'ProjectEdit', 'edit', array('project_id' => $project['id'])) ?>
             </li>
             <li <?= $this->app->checkMenuSelection('project', 'share') ?>>
                 <?= $this->url->link(t('Public access'), 'project', 'share', array('project_id' => $project['id'])) ?>

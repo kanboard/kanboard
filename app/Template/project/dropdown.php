@@ -32,7 +32,7 @@
     </li>
 <?php endif ?>
 
-<?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
+<?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
     <li>
         <i class="fa fa-cog fa-fw"></i>&nbsp;
         <?= $this->url->link(t('Settings'), 'project', 'show', array('project_id' => $project['id'])) ?>
