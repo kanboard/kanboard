@@ -686,7 +686,6 @@ return array(
     // 'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => '',
     'Screenshot uploaded successfully.' => 'Screenshot berhasil diunggah.',
     'SEK - Swedish Krona' => 'SEK - Krona Swedia',
-    'The project identifier is an optional alphanumeric code used to identify your project.' => 'Identifier projek adalah kode alfanumerik opsional digunakan untuk mengidentifikasi projek Anda.',
     'Identifier' => 'Identifier',
     'Disable two factor authentication' => 'Matikan dua faktor otentifikasi',
     'Do you really want to disable the two factor authentication for this user: "%s"?' => 'Apakah anda yakin akan mematikan dua faktor otentifikasi untuk pengguna ini : « %s » ?',
@@ -1104,4 +1103,10 @@ return array(
     // 'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => '',
     // 'My dashboard' => '',
     // 'My profile' => '',
+    // 'Project owner: ' => '',
+    // 'The project identifier is optional and must be alphanumeric, example: MYPROJECT.' => '',
+    // 'Project owner' => '',
+    // 'Those dates are useful for the project Gantt chart.' => '',
+    // 'Private projects do not have users and groups management.' => '',
+    // 'There is no project member.' => '',
 );

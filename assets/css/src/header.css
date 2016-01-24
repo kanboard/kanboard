@@ -55,6 +55,12 @@ nav .active a {
     color: #d40000;
 }
 
+/* title tooltip */
+header h1 .tooltip {
+    opacity: 0.3;
+    font-size: 0.6em;
+}
+
 /* page header */
 .page-header {
     margin-bottom: 20px;

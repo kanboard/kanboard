@@ -248,7 +248,7 @@ abstract class Base extends \Kanboard\Core\Base
     protected function getProject($project_id = 0)
     {
         $project_id = $this->request->getIntegerParam('project_id', $project_id);
-        $project = $this->project->getById($project_id);
+        $project = $this->project->getByIdWithOwner($project_id);
 
         if (empty($project)) {
             $this->flash->failure(t('Project not found.'));
@@ -308,6 +308,29 @@ abstract class Base extends \Kanboard\Core\Base
             'board_selector' => $board_selector,
             'filters' => $filters,
             'title' => $project['name'],
+            'description' => $this->getProjectDescription($project),
         );
+    }
+
+    /**
+     * Get project description
+     *
+     * @access protected
+     * @param  array  &$project
+     * @return string
+     */
+    protected function getProjectDescription(array &$project) {
+        if ($project['owner_id'] > 0) {
+            $description = t('Project owner: ').'**'.$this->template->e($project['owner_name'] ?: $project['owner_username']).'**'.PHP_EOL.PHP_EOL;
+
+            if (! empty($project['description'])) {
+                $description .= '***'.PHP_EOL.PHP_EOL;
+                $description .= $project['description'];
+            }
+        } else {
+            $description = $project['description'];
+        }
+
+        return $description;
     }
 }

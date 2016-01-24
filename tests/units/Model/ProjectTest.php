@@ -281,4 +281,28 @@ class ProjectTest extends Base
         $project = $p->getByIdentifier('');
         $this->assertFalse($project);
     }
+
+    public function testThatProjectCreatorAreAlsoOwner()
+    {
+        $projectModel = new Project($this->container);
+        $userModel = new User($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'Me')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'My project 1'), 2));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'My project 2')));
+
+        $project = $projectModel->getByIdWithOwner(1);
+        $this->assertNotEmpty($project);
+        $this->assertSame('My project 1', $project['name']);
+        $this->assertSame('Me', $project['owner_name']);
+        $this->assertSame('user1', $project['owner_username']);
+        $this->assertEquals(2, $project['owner_id']);
+
+        $project = $projectModel->getByIdWithOwner(2);
+        $this->assertNotEmpty($project);
+        $this->assertSame('My project 2', $project['name']);
+        $this->assertEquals('', $project['owner_name']);
+        $this->assertEquals('', $project['owner_username']);
+        $this->assertEquals(0, $project['owner_id']);
+    }
 }

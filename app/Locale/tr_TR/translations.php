@@ -686,7 +686,6 @@ return array(
     'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => 'Bir ekran görüntüsü alın ve buraya yapıştırmak için CTRL+V veya  ⌘+V tuşlarına basın.',
     'Screenshot uploaded successfully.' => 'Ekran görüntüsü başarıyla yüklendi',
     // 'SEK - Swedish Krona' => '',
-    'The project identifier is an optional alphanumeric code used to identify your project.' => 'Proje kimliği, projeyi tanımlamak için kullanılan opsiyonel bir alfanumerik koddur.',
     'Identifier' => 'Kimlik',
     'Disable two factor authentication' => 'İki kademeli doğrulamayı iptal et',
     'Do you really want to disable the two factor authentication for this user: "%s"?' => 'Bu kullanıcı için iki kademeli doğrulamayı iptal etmek istediğinize emin misiniz: "%s"?',
@@ -1104,4 +1103,10 @@ return array(
     // 'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => '',
     // 'My dashboard' => '',
     // 'My profile' => '',
+    // 'Project owner: ' => '',
+    // 'The project identifier is optional and must be alphanumeric, example: MYPROJECT.' => '',
+    // 'Project owner' => '',
+    // 'Those dates are useful for the project Gantt chart.' => '',
+    // 'Private projects do not have users and groups management.' => '',
+    // 'There is no project member.' => '',
 );

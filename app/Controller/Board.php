@@ -54,7 +54,6 @@ class Board extends Base
             'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
             'custom_filters_list' => $this->customFilter->getAll($params['project']['id'], $this->userSession->getId()),
             'swimlanes' => $this->taskFilter->search($params['filters']['search'])->getBoard($params['project']['id']),
-            'description' => $params['project']['description'],
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->config->get('board_highlight_period'),
         ) + $params));

@@ -686,7 +686,6 @@ return array(
     'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => 'Ta en skärmdump och tryck CTRL+V för att klistra in här.',
     'Screenshot uploaded successfully.' => 'Skärmdumpen laddades upp.',
     'SEK - Swedish Krona' => 'SEK - Svensk Krona',
-    'The project identifier is an optional alphanumeric code used to identify your project.' => 'Projektidentifieraren är en valbar alfanumerisk kod som används för att identifiera ditt projekt.',
     'Identifier' => 'Identifierare',
     'Disable two factor authentication' => 'Inaktivera två-faktors autentisering',
     'Do you really want to disable the two factor authentication for this user: "%s"?' => 'Vill du verkligen inaktivera två-faktors autentisering för denna användare: "%s"?',
@@ -1104,4 +1103,10 @@ return array(
     // 'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => '',
     // 'My dashboard' => '',
     // 'My profile' => '',
+    // 'Project owner: ' => '',
+    // 'The project identifier is optional and must be alphanumeric, example: MYPROJECT.' => '',
+    // 'Project owner' => '',
+    // 'Those dates are useful for the project Gantt chart.' => '',
+    // 'Private projects do not have users and groups management.' => '',
+    // 'There is no project member.' => '',
 );

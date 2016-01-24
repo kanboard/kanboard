@@ -6,7 +6,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 101;
+const VERSION = 102;
+
+function version_102(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN owner_id INT DEFAULT 0");
+}
 
 function version_101(PDO $pdo)
 {

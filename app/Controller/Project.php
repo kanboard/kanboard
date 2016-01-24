@@ -29,7 +29,7 @@ class Project extends Base
             ->setUrl('project', 'index')
             ->setMax(20)
             ->setOrder('name')
-            ->setQuery($this->project->getQueryProjectDetails($project_ids))
+            ->setQuery($this->project->getQueryColumnStats($project_ids))
             ->calculate();
 
         $this->response->html($this->template->layout('project/index', array(
@@ -145,6 +145,7 @@ class Project extends Base
             'values' => empty($values) ? $project : $values,
             'errors' => $errors,
             'project' => $project,
+            'owners' => $this->projectUserRole->getAssignableUsersList($project['id'], true),
             'title' => t('Edit project')
         )));
     }

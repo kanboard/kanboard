@@ -11,6 +11,9 @@
         <?php endif ?>
 
         <?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
+            <li <?= $this->app->checkMenuSelection('project', 'edit') ?>>
+                <?= $this->url->link(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
+            </li>
             <li <?= $this->app->checkMenuSelection('project', 'share') ?>>
                 <?= $this->url->link(t('Public access'), 'project', 'share', array('project_id' => $project['id'])) ?>
             </li>
@@ -19,9 +22,6 @@
             </li>
             <li <?= $this->app->checkMenuSelection('project', 'integrations') ?>>
                 <?= $this->url->link(t('Integrations'), 'project', 'integrations', array('project_id' => $project['id'])) ?>
-            </li>
-            <li <?= $this->app->checkMenuSelection('project', 'edit') ?>>
-                <?= $this->url->link(t('Edit project'), 'project', 'edit', array('project_id' => $project['id'])) ?>
             </li>
             <li <?= $this->app->checkMenuSelection('column') ?>>
                 <?= $this->url->link(t('Columns'), 'column', 'index', array('project_id' => $project['id'])) ?>

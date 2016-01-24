@@ -11,18 +11,26 @@
 
     <?= $this->form->label(t('Identifier'), 'identifier') ?>
     <?= $this->form->text('identifier', $values, $errors, array('maxlength="50"')) ?>
-    <p class="form-help"><?= t('The project identifier is an optional alphanumeric code used to identify your project.') ?></p>
+    <p class="form-help"><?= t('The project identifier is optional and must be alphanumeric, example: MYPROJECT.') ?></p>
 
+    <?= $this->form->label(t('Project owner'), 'owner_id') ?>
+    <?= $this->form->select('owner_id', $owners, $values, $errors) ?>
+
+    <hr>
     <?= $this->form->label(t('Start date'), 'start_date') ?>
     <?= $this->form->text('start_date', $values, $errors, array('maxlength="10"'), 'form-date') ?>
 
     <?= $this->form->label(t('End date'), 'end_date') ?>
     <?= $this->form->text('end_date', $values, $errors, array('maxlength="10"'), 'form-date') ?>
+    <p class="form-help"><?= t('Those dates are useful for the project Gantt chart.') ?></p>
 
     <?php if ($this->user->hasProjectAccess('project', 'create', $project['id'])): ?>
+        <hr>
         <?= $this->form->checkbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
+        <p class="form-help"><?= t('Private projects do not have users and groups management.') ?></p>
     <?php endif ?>
 
+    <hr>
     <?= $this->form->label(t('Description'), 'description') ?>
 
     <div class="form-tabs">

@@ -131,4 +131,17 @@ class Projectuser extends Base
     {
         $this->tasks(TaskModel::STATUS_CLOSED, 'closed', t('Closed tasks'), 'Closed tasks assigned to "%s"');
     }
+
+    /**
+     * Users tooltip
+     */
+    public function users()
+    {
+        $project = $this->getProject();
+
+        return $this->response->html($this->template->render('project_user/tooltip_users', array(
+            'users' => $this->projectUserRole->getAllUsersGroupedByRole($project['id']),
+            'roles' => $this->role->getProjectRoles(),
+        )));
+    }
 }
