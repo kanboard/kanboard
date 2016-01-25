@@ -41,7 +41,6 @@ class Comment extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
         if (empty($values)) {
             $values = array(
@@ -50,21 +49,19 @@ class Comment extends Base
             );
         }
 
-        if ($ajax) {
-            $this->response->html($this->template->render('comment/create', array(
-                'values' => $values,
-                'errors' => $errors,
-                'task' => $task,
-                'ajax' => $ajax,
-            )));
-        }
-
-        $this->response->html($this->taskLayout('comment/create', array(
+        $params = array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'title' => t('Add a comment'),
-        )));
+            'redirect' => $this->request->getStringParam('redirect', 'task'),
+        );
+
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->render('comment/create', $params));
+        }
+        else {
+            $this->response->html($this->taskLayout('comment/create', $params));
+        }
     }
 
     /**
@@ -76,7 +73,6 @@ class Comment extends Base
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
         list($valid, $errors) = $this->commentValidator->validateCreation($values);
 
@@ -87,11 +83,11 @@ class Comment extends Base
                 $this->flash->failure(t('Unable to create your comment.'));
             }
 
-            if ($ajax) {
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            }
-
-            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
+            $this->redirect(
+                $task,
+                $this->request->getStringParam('redirect', 'task'),
+                'comments'
+            );
         }
 
         $this->create($values, $errors);

@@ -15,7 +15,7 @@
 
 <?php if ($task['recurrence_status'] != \Kanboard\Model\Task::RECURRING_STATUS_PROCESSED): ?>
 
-    <form method="post" action="<?= $this->url->href('taskmodification', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <form method="post" action="<?= $this->url->href('taskmodification', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => $redirect)) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
 
@@ -40,7 +40,7 @@
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
             <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->cancel($task, $redirect) ?>
         </div>
     </form>
 

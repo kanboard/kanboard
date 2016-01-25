@@ -51,7 +51,7 @@ class Taskmodification extends Base
     public function description()
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
         if ($this->request->isPost()) {
             $values = $this->request->getValues();
@@ -65,11 +65,10 @@ class Taskmodification extends Base
                     $this->flash->failure(t('Unable to update your task.'));
                 }
 
-                if ($ajax) {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                } else {
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-                }
+                $this->redirect(
+                    $values,
+                    $redirect
+                );
             }
         } else {
             $values = $task;
@@ -80,10 +79,10 @@ class Taskmodification extends Base
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'ajax' => $ajax,
+            'redirect' => $redirect,
         );
 
-        if ($ajax) {
+        if ($this->request->isAjax()) {
             $this->response->html($this->template->render('task_modification/edit_description', $params));
         } else {
             $this->response->html($this->taskLayout('task_modification/edit_description', $params));
@@ -99,7 +98,7 @@ class Taskmodification extends Base
     {
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
-        $ajax = $this->request->isAjax();
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
         if (empty($values)) {
             $values = $task;
@@ -117,10 +116,10 @@ class Taskmodification extends Base
             'categories_list' => $this->category->getList($task['project_id']),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
-            'ajax' => $ajax,
+            'redirect' => $redirect,
         );
 
-        if ($ajax) {
+        if ($this->request->isAjax()) {
             $html = $this->template->render('task_modification/edit_task', $params);
         } else {
             $html = $this->taskLayout('task_modification/edit_task', $params);
@@ -144,11 +143,10 @@ class Taskmodification extends Base
         if ($valid && $this->taskModification->update($values)) {
             $this->flash->success(t('Task updated successfully.'));
 
-            if ($this->request->isAjax()) {
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            } else {
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-            }
+            $this->redirect(
+                $task,
+                $this->request->getStringParam('redirect', 'task')
+            );
         } else {
             $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);
@@ -163,6 +161,7 @@ class Taskmodification extends Base
     public function recurrence()
     {
         $task = $this->getTask();
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
         if ($this->request->isPost()) {
             $values = $this->request->getValues();
@@ -176,7 +175,10 @@ class Taskmodification extends Base
                     $this->flash->failure(t('Unable to update your task.'));
                 }
 
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+                $this->redirect(
+                    $task,
+                    $redirect
+                );
             }
         } else {
             $values = $task;
@@ -191,6 +193,7 @@ class Taskmodification extends Base
             'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
             'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
             'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
+            'redirect' => $redirect
         );
 
         $this->response->html($this->taskLayout('task_modification/edit_recurrence', $params));

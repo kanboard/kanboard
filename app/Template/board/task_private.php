@@ -17,7 +17,7 @@
         <div class="task-board-collapsed">
             <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse"></i></div>
             <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
-                <?= $this->render('board/task_menu', array('task' => $task)) ?>
+                <?= $this->render('board/task_menu', array('task' => $task, 'redirect' => 'board')) ?>
             <?php else: ?>
                 <strong><?= '#'.$task['id'] ?></strong>
             <?php endif ?>
@@ -33,7 +33,7 @@
         <div class="task-board-expanded">
             <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
             <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
-                <?= $this->render('board/task_menu', array('task' => $task)) ?>
+                <?= $this->render('board/task_menu', array('task' => $task, 'redirect' => 'board')) ?>
             <?php else: ?>
                 <strong><?= '#'.$task['id'] ?></strong>
             <?php endif ?>

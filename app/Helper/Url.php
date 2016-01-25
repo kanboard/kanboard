@@ -48,6 +48,25 @@ class Url extends Base
     }
 
     /**
+     * HTML Link tag specific to cancel an action
+     *
+     * @access public
+     * @param array   $task     Task data
+     * @param string  $redirect Type of redirection: 'board' to redirect to the given project view, empty to redirect to the current task
+     * @param string  $anchor   Optional anchor for default redirection (without the prefix #)
+     * @return string
+     */
+    public function cancel($task, $redirect='', $anchor='')
+    {
+        $actions = array('board' => 'show');
+        
+        if (in_array($redirect, array('board'))) {
+            return $this->link(t('cancel'), $redirect, $actions[$redirect], array('project_id' => $task['project_id']), false, 'close-popover', t('Cancel'), false, $anchor);
+        }
+        return $this->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover', t('Cancel'), false, $anchor);
+    }
+
+    /**
      * HTML Hyperlink
      *
      * @access public

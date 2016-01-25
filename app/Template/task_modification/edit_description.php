@@ -2,10 +2,11 @@
     <h2><?= t('Edit the description') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->url->href('taskmodification', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => $ajax)) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('taskmodification', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => $redirect)) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
+    <?= $this->form->hidden('project_id', $values) ?>
 
     <div class="form-tabs">
         <ul class="form-tabs-nav">
@@ -39,10 +40,6 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?= t('or') ?>
-        <?php if ($ajax): ?>
-            <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
-        <?php else: ?>
-            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        <?php endif ?>
+        <?= $this->url->cancel($task, $redirect) ?>
     </div>
 </form>

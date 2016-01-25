@@ -24,6 +24,7 @@ class BoardPopover extends Base
             'values' => $task,
             'users_list' => $this->projectUserRole->getAssignableUsersList($project['id']),
             'project' => $project,
+            'redirect' => $this->request->getStringParam('redirect', 'board')
         )));
     }
 
@@ -44,7 +45,10 @@ class BoardPopover extends Base
             $this->flash->failure(t('Unable to update your task.'));
         }
 
-        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $values['project_id'])));
+        $this->redirect(
+            $values,
+            $this->request->getStringParam('redirect', 'board')
+        );
     }
 
     /**
@@ -61,6 +65,7 @@ class BoardPopover extends Base
             'values' => $task,
             'categories_list' => $this->category->getList($project['id']),
             'project' => $project,
+            'redirect' => $this->request->getStringParam('redirect', 'board')
         )));
     }
 
@@ -81,7 +86,10 @@ class BoardPopover extends Base
             $this->flash->failure(t('Unable to update your task.'));
         }
 
-        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $values['project_id'])));
+        $this->redirect(
+            $values,
+            $this->request->getStringParam('redirect', 'board')
+        );
     }
 
     /**
@@ -95,7 +103,7 @@ class BoardPopover extends Base
 
         $this->response->html($this->template->render('file/screenshot', array(
             'task' => $task,
-            'redirect' => 'board',
+            'redirect' => $this->request->getStringParam('redirect', 'board'),
         )));
     }
 

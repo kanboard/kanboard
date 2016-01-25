@@ -45,17 +45,16 @@ class Taskstatus extends Base
                 $this->flash->failure($failure_message);
             }
 
-            if ($this->request->getStringParam('redirect') === 'board') {
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            }
-
-            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+            $this->redirect(
+                $task,
+                $this->request->getStringParam('redirect', 'task')
+            );
         }
     }
 
     private function renderTemplate(array $task, $template)
     {
-        $redirect = $this->request->getStringParam('redirect');
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
         if ($this->request->isAjax()) {
             $this->response->html($this->template->render($template, array(
