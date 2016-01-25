@@ -32,14 +32,18 @@ class File extends \Kanboard\Core\Base
             }
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
+            return '';
         }
-
-        return '';
     }
 
     public function createFile($project_id, $task_id, $filename, $blob)
     {
-        return $this->file->uploadContent($project_id, $task_id, $filename, $blob);
+        try {
+            return $this->file->uploadContent($project_id, $task_id, $filename, $blob);
+        } catch (ObjectStorageException $e) {
+            $this->logger->error($e->getMessage());
+            return false;
+        }
     }
 
     public function removeFile($file_id)

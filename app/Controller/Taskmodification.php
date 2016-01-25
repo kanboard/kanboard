@@ -98,6 +98,7 @@ class Taskmodification extends Base
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
+        $project = $this->project->getById($task['project_id']);
         $ajax = $this->request->isAjax();
         $project = $this->getProject();
         $swimlanes_list = $this->swimlane->getList($project['id'], false, true);
@@ -109,6 +110,7 @@ class Taskmodification extends Base
         $this->dateParser->format($values, array('date_due'));
 
         $params = array(
+            'project' => $project,
             'values' => $values,
             'errors' => $errors,
             'task' => $task,

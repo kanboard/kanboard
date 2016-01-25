@@ -47,6 +47,22 @@ class Project extends Base
     }
 
     /**
+     * Get a project by id with owner name
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return array
+     */
+    public function getByIdWithOwner($project_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->columns(self::TABLE.'.*', User::TABLE.'.username AS owner_username', User::TABLE.'.name AS owner_name')
+            ->eq(self::TABLE.'.id', $project_id)
+            ->join(User::TABLE, 'id', 'owner_id')
+            ->findOne();
+    }
+
+    /**
      * Get a project by the name
      *
      * @access public
@@ -276,23 +292,6 @@ class Project extends Base
     }
 
     /**
-     * Fetch more information for each project
-     *
-     * @access public
-     * @param  array    $projects
-     * @return array
-     */
-    public function applyProjectDetails(array $projects)
-    {
-        foreach ($projects as &$project) {
-            $this->getColumnStats($project);
-            $project = array_merge($project, $this->projectUserRole->getAllUsersGroupedByRole($project['id']));
-        }
-
-        return $projects;
-    }
-
-    /**
      * Get project summary for a list of project
      *
      * @access public
@@ -307,27 +306,10 @@ class Project extends Base
 
         return $this->db
                     ->table(Project::TABLE)
-                    ->in('id', $project_ids)
+                    ->columns(self::TABLE.'.*', User::TABLE.'.username AS owner_username', User::TABLE.'.name AS owner_name')
+                    ->join(User::TABLE, 'id', 'owner_id')
+                    ->in(self::TABLE.'.id', $project_ids)
                     ->callback(array($this, 'applyColumnStats'));
-    }
-
-    /**
-     * Get project details (users + columns) for a list of project
-     *
-     * @access public
-     * @param  array      $project_ids     List of project id
-     * @return \PicoDb\Table
-     */
-    public function getQueryProjectDetails(array $project_ids)
-    {
-        if (empty($project_ids)) {
-            return $this->db->table(Project::TABLE)->limit(0);
-        }
-
-        return $this->db
-                    ->table(Project::TABLE)
-                    ->in('id', $project_ids)
-                    ->callback(array($this, 'applyProjectDetails'));
     }
 
     /**
@@ -346,10 +328,13 @@ class Project extends Base
         $values['token'] = '';
         $values['last_modified'] = time();
         $values['is_private'] = empty($values['is_private']) ? 0 : 1;
+        $values['owner_id'] = $user_id;
 
         if (! empty($values['identifier'])) {
             $values['identifier'] = strtoupper($values['identifier']);
         }
+
+        $this->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
 
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
@@ -416,6 +401,8 @@ class Project extends Base
         if (! empty($values['identifier'])) {
             $values['identifier'] = strtoupper($values['identifier']);
         }
+
+        $this->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
 
         return $this->exists($values['id']) &&
                $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);

@@ -54,7 +54,6 @@ class Board extends Base
             'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
             'custom_filters_list' => $this->customFilter->getAll($params['project']['id'], $this->userSession->getId()),
             'swimlanes' => $this->taskFilter->search($params['filters']['search'])->getBoard($params['project']['id']),
-            'description' => $params['project']['description'],
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->config->get('board_highlight_period'),
         ) + $params));
@@ -71,10 +70,6 @@ class Board extends Base
 
         if (! $project_id || ! $this->request->isAjax()) {
             return $this->response->status(403);
-        }
-
-        if (! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
-            $this->response->text('Forbidden', 403);
         }
 
         $values = $this->request->getJson();
@@ -101,22 +96,18 @@ class Board extends Base
      */
     public function check()
     {
-        if (! $this->request->isAjax()) {
-            return $this->response->status(403);
-        }
-
         $project_id = $this->request->getIntegerParam('project_id');
         $timestamp = $this->request->getIntegerParam('timestamp');
 
-        if (! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
-            $this->response->text('Forbidden', 403);
+        if (! $project_id || ! $this->request->isAjax()) {
+            return $this->response->status(403);
         }
 
         if (! $this->project->isModifiedSince($project_id, $timestamp)) {
             return $this->response->status(304);
         }
 
-        $this->response->html($this->renderBoard($project_id));
+        return $this->response->html($this->renderBoard($project_id));
     }
 
     /**
@@ -126,14 +117,10 @@ class Board extends Base
      */
     public function reload()
     {
-        if (! $this->request->isAjax()) {
-            return $this->response->status(403);
-        }
-
         $project_id = $this->request->getIntegerParam('project_id');
 
-        if (! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
-            $this->response->text('Forbidden', 403);
+        if (! $project_id || ! $this->request->isAjax()) {
+            return $this->response->status(403);
         }
 
         $values = $this->request->getJson();

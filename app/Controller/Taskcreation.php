@@ -32,6 +32,7 @@ class Taskcreation extends Base
         }
 
         $this->response->html($this->template->$method('task_creation/form', array(
+            'project' => $project,
             'ajax' => $this->request->isAjax(),
             'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
