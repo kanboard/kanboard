@@ -4,6 +4,9 @@
         <span class="task-score"><?= $this->e($task['score']) ?></span>
     <?php endif ?>
     <ul>
+        <li>
+            <strong><?= t('Priority: %d', $task['priority']) ?></strong>
+        </li>
         <?php if ($task['reference']): ?>
         <li>
             <strong><?= t('Reference: %s', $task['reference']) ?></strong>

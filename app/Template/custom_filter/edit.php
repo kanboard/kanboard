@@ -16,14 +16,14 @@
     <?= $this->form->label(t('Filter'), 'filter') ?>
     <?= $this->form->text('filter', $values, $errors, array('required', 'maxlength="100"')) ?>
 
-    <?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
+    <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
         <?= $this->form->checkbox('is_shared', t('Share with all project members'), 1, $values['is_shared'] == 1) ?>
     <?php else: ?>
         <?= $this->form->hidden('is_shared', $values) ?>
     <?php endif ?>
-    
+
     <?= $this->form->checkbox('append', t('Append filter (instead of replacement)'), 1, $values['append'] == 1) ?>
-    
+
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
         <?= t('or') ?>

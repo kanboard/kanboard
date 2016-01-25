@@ -8,7 +8,7 @@
     <div class="form-column">
 
         <?= $this->form->label(t('Title'), 'title') ?>
-        <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"')) ?><br/>
+        <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"')) ?>
 
         <?= $this->form->label(t('Description'), 'description') ?>
         <div class="form-tabs">
@@ -45,16 +45,18 @@
         <?= $this->form->hidden('project_id', $values) ?>
 
         <?= $this->form->label(t('Assignee'), 'owner_id') ?>
-        <?= $this->form->select('owner_id', $users_list, $values, $errors, array('tabindex="3"')) ?><br/>
+        <?= $this->form->select('owner_id', $users_list, $values, $errors, array('tabindex="3"')) ?>
 
         <?= $this->form->label(t('Category'), 'category_id') ?>
-        <?= $this->form->select('category_id', $categories_list, $values, $errors, array('tabindex="4"')) ?><br/>
+        <?= $this->form->select('category_id', $categories_list, $values, $errors, array('tabindex="4"')) ?>
 
         <?= $this->form->label(t('Complexity'), 'score') ?>
-        <?= $this->form->number('score', $values, $errors, array('tabindex="6"')) ?><br/>
+        <?= $this->form->number('score', $values, $errors, array('tabindex="6"')) ?>
+
+        <?= $this->task->selectPriority($project, $values) ?>
 
         <?= $this->form->label(t('Due Date'), 'date_due') ?>
-        <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="7"'), 'form-date') ?><br/>
+        <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="8"'), 'form-date') ?>
         <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
     </div>
 

@@ -1,7 +1,7 @@
 API Application Procedures
 ==========================
 
-### getVersion
+## getVersion
 
 - Purpose: **Get the application version**
 - Parameters: none
@@ -27,7 +27,7 @@ Response example:
 }
 ```
 
-### getTimezone
+## getTimezone
 
 - Purpose: **Get the application timezone**
 - Parameters: none
@@ -54,7 +54,7 @@ Response example:
 }
 ```
 
-### getDefaultTaskColors
+## getDefaultTaskColors
 
 - Purpose: **Get all default task colors**
 - Parameters: None
@@ -161,7 +161,7 @@ Response example:
 }
 ```
 
-### getDefaultTaskColor
+## getDefaultTaskColor
 
 - Purpose: **Get default task color**
 - Parameters: None
@@ -187,7 +187,7 @@ Response example:
 }
 ```
 
-### getColorList
+## getColorList
 
 - Purpose: **Get the list of task colors**
 - Parameters: none
@@ -226,6 +226,66 @@ Response example:
         "lime": "Lime",
         "light_green": "Light Green",
         "amber": "Amber"
+    }
+}
+```
+
+## getApplicationRoles
+
+- Purpose: **Get the application roles**
+- Parameters: none
+- Result: **Dictionary of role => role_name**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getApplicationRoles",
+    "id": 317154243
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 317154243,
+    "result": {
+        "app-admin": "Administrator",
+        "app-manager": "Manager",
+        "app-user": "User"
+    }
+}
+```
+
+## getProjectRoles
+
+- Purpose: **Get the project roles**
+- Parameters: none
+- Result: **Dictionary of role => role_name**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getProjectRoles",
+    "id": 8981960
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 8981960,
+    "result": {
+        "project-manager": "Project Manager",
+        "project-member": "Project Member",
+        "project-viewer": "Project Viewer"
     }
 }
 ```

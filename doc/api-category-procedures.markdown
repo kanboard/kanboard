@@ -1,7 +1,7 @@
 API Category Procedures
 =======================
 
-### createCategory
+## createCategory
 
 - Purpose: **Create a new category**
 - Parameters:
@@ -34,7 +34,7 @@ Response example:
 }
 ```
 
-### getCategory
+## getCategory
 
 - Purpose: **Get category information**
 - Parameters:
@@ -70,7 +70,7 @@ Response example:
 }
 ```
 
-### getAllCategories
+## getAllCategories
 
 - Purpose: **Get all available categories**
 - Parameters:
@@ -107,7 +107,7 @@ Response example:
 }
 ```
 
-### updateCategory
+## updateCategory
 
 - Purpose: **Update a category**
 - Parameters:
@@ -140,7 +140,7 @@ Response example:
 }
 ```
 
-### removeCategory
+## removeCategory
 
 - Purpose: **Remove a category**
 - Parameters:

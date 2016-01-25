@@ -1,7 +1,7 @@
 API Link Procedures
 ===================
 
-### getAllLinks
+## getAllLinks
 
 - Purpose: **Get the list of possible relations between tasks**
 - Parameters: none
@@ -84,7 +84,7 @@ Response example:
 }
 ```
 
-### getOppositeLinkId
+## getOppositeLinkId
 
 - Purpose: **Get the opposite link id of a task link**
 - Parameters:
@@ -115,7 +115,7 @@ Response example:
 }
 ```
 
-### getLinkByLabel
+## getLinkByLabel
 
 - Purpose: **Get a link by label**
 - Parameters:
@@ -150,7 +150,7 @@ Response example:
 }
 ```
 
-### getLinkById
+## getLinkById
 
 - Purpose: **Get a link by id**
 - Parameters:
@@ -185,7 +185,7 @@ Response example:
 }
 ```
 
-### createLink
+## createLink
 
 - Purpose: **Create a new task relation**
 - Parameters:
@@ -218,7 +218,7 @@ Response example:
 }
 ```
 
-### updateLink
+## updateLink
 
 - Purpose: **Update a link**
 - Parameters:
@@ -253,7 +253,7 @@ Response example:
 }
 ```
 
-### removeLink
+## removeLink
 
 - Purpose: **Remove a link**
 - Parameters:
@@ -284,7 +284,7 @@ Response example:
 }
 ```
 
-### createTaskLink
+## createTaskLink
 
 - Purpose: **Create a link between two tasks**
 - Parameters:
@@ -319,7 +319,7 @@ Response example:
 }
 ```
 
-### updateTaskLink
+## updateTaskLink
 
 - Purpose: **Update task link**
 - Parameters:
@@ -356,7 +356,7 @@ Response example:
 }
 ```
 
-### getTaskLinkById
+## getTaskLinkById
 
 - Purpose: **Get a task link**
 - Parameters:
@@ -392,7 +392,7 @@ Response example:
 }
 ```
 
-### getAllTaskLinks
+## getAllTaskLinks
 
 - Purpose: **Get all links related to a task**
 - Parameters:
@@ -438,7 +438,7 @@ Response example:
 }
 ```
 
-### removeTaskLink
+## removeTaskLink
 
 - Purpose: **Remove a link between two tasks**
 - Parameters:

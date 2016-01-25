@@ -11,11 +11,6 @@
 
 @media only screen and (max-width: 1024px) {
 
-    li.hide-tablet,
-    .hide-tablet {
-        display: none;
-    }
-
     body {
         font-size: 0.85em;
     }

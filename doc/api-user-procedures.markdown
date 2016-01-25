@@ -1,7 +1,7 @@
 API User Procedures
 ===================
 
-### createUser
+## createUser
 
 - Purpose: **Create a new user**
 - Parameters:
@@ -37,7 +37,7 @@ Response example:
 }
 ```
 
-### createLdapUser
+## createLdapUser
 
 - Purpose: **Create a new user authentified by LDAP**
 - Parameters:
@@ -71,7 +71,7 @@ Response example:
 }
 ```
 
-### getUser
+## getUser
 
 - Purpose: **Get user information**
 - Parameters:
@@ -113,7 +113,7 @@ Response example:
 }
 ```
 
-### getAllUsers
+## getAllUsers
 
 - Purpose: **Get all available users**
 - Parameters:
@@ -154,7 +154,7 @@ Response example:
 }
 ```
 
-### updateUser
+## updateUser
 
 - Purpose: **Update a user**
 - Parameters:
@@ -190,7 +190,7 @@ Response example:
 }
 ```
 
-### removeUser
+## removeUser
 
 - Purpose: **Remove a user**
 - Parameters:

@@ -26,10 +26,8 @@ class TaskPosition extends Base
      */
     public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0, $fire_events = true)
     {
-        $result = false;
-
         if ($position < 1) {
-            return $result;
+            return false;
         }
 
         $task = $this->taskFinder->getById($task_id);
@@ -38,22 +36,17 @@ class TaskPosition extends Base
             return true;
         }
 
-        $this->db->startTransaction();
+        $result = false;
 
-        if ($task['swimlane_id'] != $swimlane_id || $task['column_id'] != $column_id) {
-            $result = $this->moveTaskToAnotherColumn($task, $swimlane_id, $column_id, $position);
+        if ($task['swimlane_id'] != $swimlane_id) {
+            $result = $this->saveSwimlaneChange($project_id, $task_id, $position, $task['column_id'], $column_id, $task['swimlane_id'], $swimlane_id);
+        } elseif ($task['column_id'] != $column_id) {
+            $result = $this->saveColumnChange($project_id, $task_id, $position, $swimlane_id, $task['column_id'], $column_id);
         } elseif ($task['position'] != $position) {
-            $result = $this->moveTaskWithinSameColumn($task, $position);
+            $result = $this->savePositionChange($project_id, $task_id, $position, $column_id, $swimlane_id);
         }
 
-        if (! $result) {
-            $this->db->cancelTransaction();
-            return false;
-        }
-
-        $this->db->closeTransaction();
-
-        if ($fire_events) {
+        if ($result && $fire_events) {
             $this->fireEvents($task, $column_id, $position, $swimlane_id);
         }
 
@@ -61,95 +54,150 @@ class TaskPosition extends Base
     }
 
     /**
-     * Move a task to another column/swimlane
+     * Move a task to another swimlane
      *
      * @access private
-     * @param  array   $task
-     * @param  integer $swimlane_id
-     * @param  integer $column_id
-     * @param  integer $position
+     * @param  integer    $project_id
+     * @param  integer    $task_id
+     * @param  integer    $position
+     * @param  integer    $original_column_id
+     * @param  integer    $new_column_id
+     * @param  integer    $original_swimlane_id
+     * @param  integer    $new_swimlane_id
      * @return boolean
      */
-    private function moveTaskToAnotherColumn(array $task, $swimlane_id, $column_id, $position)
+    private function saveSwimlaneChange($project_id, $task_id, $position, $original_column_id, $new_column_id, $original_swimlane_id, $new_swimlane_id)
     {
-        $results = array();
-        $max = $this->getQuery($task['project_id'], $swimlane_id, $column_id)->count();
-        $position = $max > 0 && $position > $max ? $max + 1 : $position;
+        $this->db->startTransaction();
+        $r1 = $this->saveTaskPositions($project_id, $task_id, 0, $original_column_id, $original_swimlane_id);
+        $r2 = $this->saveTaskPositions($project_id, $task_id, $position, $new_column_id, $new_swimlane_id);
+        $this->db->closeTransaction();
 
-        $results[] = $this->getQuery($task['project_id'], $task['swimlane_id'], $task['column_id'])->gt('position', $task['position'])->decrement('position', 1);
-        $results[] = $this->getQuery($task['project_id'], $swimlane_id, $column_id)->gte('position', $position)->increment('position', 1);
-        $results[] = $this->updateTaskPosition($task['id'], $swimlane_id, $column_id, $position);
-
-        return !in_array(false, $results, true);
+        return $r1 && $r2;
     }
 
     /**
-     * Move a task within the same column
+     * Move a task to another column
      *
      * @access private
-     * @param  array   $task
-     * @param  integer $position
+     * @param  integer    $project_id
+     * @param  integer    $task_id
+     * @param  integer    $position
+     * @param  integer    $swimlane_id
+     * @param  integer    $original_column_id
+     * @param  integer    $new_column_id
      * @return boolean
      */
-    private function moveTaskWithinSameColumn(array $task, $position)
+    private function saveColumnChange($project_id, $task_id, $position, $swimlane_id, $original_column_id, $new_column_id)
     {
-        $results = array();
-        $max = $this->getQuery($task['project_id'], $task['swimlane_id'], $task['column_id'])->count();
-        $position = $max > 0 && $position > $max ? $max : $position;
+        $this->db->startTransaction();
+        $r1 = $this->saveTaskPositions($project_id, $task_id, 0, $original_column_id, $swimlane_id);
+        $r2 = $this->saveTaskPositions($project_id, $task_id, $position, $new_column_id, $swimlane_id);
+        $this->db->closeTransaction();
 
-        if ($position >= $max) {
-            $results[] = $this->getQuery($task['project_id'], $task['swimlane_id'], $task['column_id'])->lte('position', $position)->decrement('position', 1);
-        } else {
-            $results[] = $this->getQuery($task['project_id'], $task['swimlane_id'], $task['column_id'])->gte('position', $position)->increment('position', 1);
+        return $r1 && $r2;
+    }
+
+    /**
+     * Move a task to another position in the same column
+     *
+     * @access private
+     * @param  integer    $project_id
+     * @param  integer    $task_id
+     * @param  integer    $position
+     * @param  integer    $column_id
+     * @param  integer    $swimlane_id
+     * @return boolean
+     */
+    private function savePositionChange($project_id, $task_id, $position, $column_id, $swimlane_id)
+    {
+        $this->db->startTransaction();
+        $result = $this->saveTaskPositions($project_id, $task_id, $position, $column_id, $swimlane_id);
+        $this->db->closeTransaction();
+
+        return $result;
+    }
+
+    /**
+     * Save all task positions for one column
+     *
+     * @access private
+     * @param  integer    $project_id
+     * @param  integer    $task_id
+     * @param  integer    $position
+     * @param  integer    $column_id
+     * @param  integer    $swimlane_id
+     * @return boolean
+     */
+    private function saveTaskPositions($project_id, $task_id, $position, $column_id, $swimlane_id)
+    {
+        $tasks_ids = $this->db->table(Task::TABLE)
+            ->eq('is_active', 1)
+            ->eq('swimlane_id', $swimlane_id)
+            ->eq('project_id', $project_id)
+            ->eq('column_id', $column_id)
+            ->neq('id', $task_id)
+            ->asc('position')
+            ->asc('id')
+            ->findAllByColumn('id');
+
+        $offset = 1;
+
+        foreach ($tasks_ids as $current_task_id) {
+
+            // Insert the new task
+            if ($position == $offset) {
+                if (! $this->saveTaskPosition($task_id, $offset, $column_id, $swimlane_id)) {
+                    return false;
+                }
+                $offset++;
+            }
+
+            // Rewrite other tasks position
+            if (! $this->saveTaskPosition($current_task_id, $offset, $column_id, $swimlane_id)) {
+                return false;
+            }
+
+            $offset++;
         }
 
-        $results[] = $this->updateTaskPosition($task['id'], $task['swimlane_id'], $task['column_id'], $position);
+        // Insert the new task at the bottom and normalize bad position
+        if ($position >= $offset && ! $this->saveTaskPosition($task_id, $offset, $column_id, $swimlane_id)) {
+            return false;
+        }
 
-        return !in_array(false, $results, true);
-    }
-
-    /**
-     * Update final task position
-     *
-     * @access private
-     * @param  integer $task_id
-     * @param  integer $swimlane_id
-     * @param  integer $column_id
-     * @param  integer $position
-     * @return boolean
-     */
-    private function updateTaskPosition($task_id, $swimlane_id, $column_id, $position)
-    {
         $now = time();
 
-        return $this->db->table(Task::TABLE)
-            ->eq('id', $task_id)
-            ->eq('is_active', 1)
-            ->update(array(
-                'position' => $position,
-                'column_id' => $column_id,
-                'swimlane_id' => $swimlane_id,
-                'date_modification' => $now,
-                'date_moved' => $now,
-            ));
+        return $this->db->table(Task::TABLE)->eq('id', $task_id)->update(array(
+            'date_moved' => $now,
+            'date_modification' => $now,
+        ));
     }
 
     /**
-     * Get common query
+     * Save new task position
      *
      * @access private
-     * @param  integer $project_id
-     * @param  integer $swimlane_id
-     * @param  integer $column_id
-     * @return \PicoDb\Table
+     * @param  integer    $task_id
+     * @param  integer    $position
+     * @param  integer    $column_id
+     * @param  integer    $swimlane_id
+     * @return boolean
      */
-    private function getQuery($project_id, $swimlane_id, $column_id)
+    private function saveTaskPosition($task_id, $position, $column_id, $swimlane_id)
     {
-        return $this->db->table(Task::TABLE)
-            ->eq('project_id', $project_id)
-            ->eq('swimlane_id', $swimlane_id)
-            ->eq('column_id', $column_id)
-            ->eq('is_active', 1);
+        $result = $this->db->table(Task::TABLE)->eq('id', $task_id)->update(array(
+            'position' => $position,
+            'column_id' => $column_id,
+            'swimlane_id' => $swimlane_id,
+        ));
+
+        if (! $result) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+
+        return true;
     }
 
     /**

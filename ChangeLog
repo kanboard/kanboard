@@ -1,18 +1,31 @@
-Version 1.0.24 (unreleased)
----------------------------
+Version 1.0.25 (unreleased)
+--------------
+
+New features:
+
+* Add project owner (Directly Responsible Individual)
+* Add configurable task priority
+
+Version 1.0.24
+--------------
 
 New features:
 
 * Forgot Password
-* Add dropdown menu on each board column title to close all tasks
+* Add drop-down menu on each board column title to close all tasks
 * Add Malay language
+* Add new API procedures for groups, roles, project permissions and to move/duplicate tasks to another project
 
 Improvements:
 
+* Avoid to send XHR request when a task has not moved after a drag and drop
+* Set maximum dropzone height when the individual column scrolling is disabled
+* Always show the search box in board selector
+* Replace logout link by a drop-down menu
 * Handle notification for group members attached to a project
 * Return the highest role for a project when a user is member of multiple groups
 * Show in user interface the saving state of the task
-* Add dropdown menu for subtasks, categories, swimlanes, columns, custom filters, task links and groups
+* Add drop-down menu for subtasks, categories, swimlanes, columns, custom filters, task links and groups
 * Add new template hooks
 * Application settings are not cached anymore in the session
 * Do not check board status during task move
@@ -22,7 +35,7 @@ Improvements:
 * Remove event subscriber to update date_moved field
 * Make sure that some event subscribers are not executed multiple times
 * Show rendering time of individual templates when debug mode is enabled
-* Make sure that no events are fired if nothing have been modified in the task
+* Make sure that no events are fired if nothing has been modified in the task
 * Make dashboard section title clickable
 * Add unit tests for LastLogin
 
@@ -32,6 +45,8 @@ Bug fixes:
 * Fix wrong link for category in task footer
 * Unable to set currency rate with Postgres database
 * Avoid automatic actions that change the color to fire subsequent events
+* Unable to unassign a task from the API
+* Revert back previous optimizations of TaskPosition (incompatibility with some environment)
 
 Version 1.0.23
 --------------
@@ -103,7 +118,7 @@ Version 1.0.21
 
 Breaking changes:
 
-* Projects with duplicate name are now allowed:
+* Projects with duplicate names are now allowed:
     - For Postgres and Mysql the unique constraint is removed by database migration
     - However Sqlite does not support alter table, only new databases will have the unique constraint removed
 
@@ -114,7 +129,7 @@ New features:
 
 Improvements:
 
-* Dropdown menu entry are now clickable outside of the html link
+* Dropdown menu entries are now clickable outside of the html link
 * Improve error handling of plugins
 * Use PHP7 function random_bytes() to generate tokens if available
 * CSV task export show the assignee name in addition to the assignee username
@@ -162,7 +177,7 @@ Improvements:
 Bug fixes:
 
 * People should not see any tasks during a search when they are not associated to a project
-* Avoid to disable the default swimlane during renaming when there is no other activated swimlane
+* Avoid disabling the default swimlane during renaming when there is no other activated swimlane
 
 Version 1.0.19
 --------------
@@ -194,15 +209,15 @@ Improvements:
 * Offer alternative method to create Mysql and Postgres databases (import sql dump)
 * Make sure there is always a trailing slash for application_url
 * Do not show the checkbox "Show default swimlane" when there is no active swimlanes
-* Append filters instead of replacing value for users and categories dropdowns
+* Append filters instead of replacing value for users and categories drop-downs
 * Do not show empty swimlanes in public view
 * Change swimlane layout to save space on the screen
 * Add the possibility to set/unset max column height (column scrolling)
-* Show "Open this task" in dropdown menu for closed tasks
+* Show "Open this task" in drop-down menu for closed tasks
 * Show assignee on card only when someone is assigned (hide nobody text)
-* Highlight selected item in dropdown menus
+* Highlight selected item in drop-down menus
 * Gantt chart: change bar color according to task progress
-* Replace color dropdown by color picker in task forms
+* Replace color drop-down by color picker in task forms
 * Creating another task stay in the popover (no full page refresh anymore)
 * Avoid scrollbar in Gantt chart for row title on Windows platform
 * Remove unnecessary margin for calendar header
@@ -214,14 +229,14 @@ Improvements:
 
 Others:
 
-* Data directory permissions are not checked anymore
+* Data directory permission are not checked anymore
 * Data directory is not mandatory anymore for people that use a remote database and remote object storage
 
 Bug fixes:
 
-* Fix typo in template that prevent the Gitlab OAuth link to be displayed
+* Fix typo in template that prevents Gitlab OAuth link to be displayed
 * Fix Markdown preview links focus
-* Avoid dropdown menu to be truncated inside a column with scrolling
+* Avoid drop-down menu to be truncated inside a column with scrolling
 * Deleting subtask doesn't update task time tracking
 * Fix Mysql error about gitlab_id when creating remote user
 * Fix subtask timer bug (event called recursively)
@@ -239,7 +254,7 @@ New features:
 * Add hide/show columns
 * Add Gantt chart for projects and tasks
 * Add new role "Project Administrator"
-* Add login bruteforce protection with captcha and account lockdown
+* Add login brute force protection with captcha and account lockdown
 * Add new api procedures: getDefaultTaskColor(), getDefaultTaskColors() and getColorList()
 * Add user api access
 * Add config parameter to define session duration
@@ -247,7 +262,7 @@ New features:
 * Add start/end date for projects
 * Add new automated action to change task color based on the task link
 * Add milestone marker in board task
-* Add search in task title when using an integer only input
+* Add search for task title when using an integer only input
 * Add Portuguese (European) translation
 * Add Norwegian translation
 
@@ -264,16 +279,16 @@ Improvements:
 * Improve sidebar menus
 * Add no referrer policy in meta tags
 * Run automated unit tests with Sqlite/Mysql/Postgres on Travis-ci
-* Add Makefile and remove the scripts directory
+* Add Makefile and remove the "scripts" directory
 
 Bug fixes:
 
 * Wrong template name for subtasks tooltip due to previous refactoring
 * Fix broken url for closed tasks in project view
 * Fix permission issue when changing the url manually
-* Fix bug task estimate is reseted when using subtask timer
+* Fix bug task estimate is reset when using subtask timer
 * Fix screenshot feature with Firefox 40
-* Fix bug when uploading files with cyrilic characters
+* Fix bug when uploading files with Cyrilic characters
 
 Version 1.0.17
 --------------
@@ -287,14 +302,14 @@ New features:
 * Added new dashboard layout
 * Added new layout for board/calendar/list views
 * Added filters helper for search forms
-* Added settings option to disable subtask timer
-* Added settings option to include or exclude closed tasks into CFD
-* Added settings option to define the default task color
+* Added setting option to disable subtask timer
+* Added setting option to include or exclude closed tasks into CFD
+* Added setting option to define the default task color
 * Added new config option to disable automatic creation of LDAP accounts
 * Added loading icon on board view
 * Prompt user when moving or duplicate a task to another project
 * Added current values when moving/duplicate a task to another project and add a loading icon
-* Added memory consumption in debug log
+* Added memory consumption to debug log
 * Added form to create remote user
 * Added edit form for user authentication
 * Added config option to hide login form
@@ -305,7 +320,7 @@ New features:
 * Added new report: Lead and cycle time for projects
 * Added new report: Average time spent into each column
 * Added task analytics
-* Added icon to set automatically the start date
+* Added icon to set the start date automatically
 * Added datetime picker for start date
 
 Improvements:
@@ -314,8 +329,8 @@ Improvements:
 * Display user initials when tasks are in collapsed mode
 * Show title in tooltip for collapsed tasks
 * Improve alert box fadeout to avoid an empty space
-* Set focus on the dropdown for category popover
-* Make escape keyboard shorcut global
+* Set focus on the drop-down for category popover
+* Make escape keyboard shortcut global
 * Check the box remember me by default
 * Store redirect login url in session instead of using url parameter
 * Update Gitlab webhook
@@ -342,7 +357,7 @@ Translations:
 
 Bug fixes:
 
-* Screenshot dropdown: unexpected scroll down on the board view and focus lost when clicking on the drop zone
+* Screenshot drop-down: unexpected scroll down on the board view and focus lost when clicking on the drop zone
 * No creator when duplicating a task
 * Avoid the creation of multiple subtask timer for the same task and user
 
