@@ -21,6 +21,11 @@ class User extends \Kanboard\Core\Base
         return $this->user->getById($user_id);
     }
 
+    public function getUserByName($username)
+    {
+        return $this->user->getByUsername($user_id);
+    }
+
     public function getAllUsers()
     {
         return $this->user->getAll();
