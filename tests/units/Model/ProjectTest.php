@@ -305,4 +305,24 @@ class ProjectTest extends Base
         $this->assertEquals('', $project['owner_username']);
         $this->assertEquals(0, $project['owner_id']);
     }
+
+    public function testPriority()
+    {
+        $projectModel = new Project($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'My project 2')));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(0, $project['priority_default']);
+        $this->assertEquals(0, $project['priority_start']);
+        $this->assertEquals(3, $project['priority_end']);
+
+        $this->assertTrue($projectModel->update(array('id' => 1, 'priority_start' => 2, 'priority_end' => 5, 'priority_default' => 4)));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(4, $project['priority_default']);
+        $this->assertEquals(2, $project['priority_start']);
+        $this->assertEquals(5, $project['priority_end']);
+    }
 }

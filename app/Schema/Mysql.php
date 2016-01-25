@@ -6,7 +6,15 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 102;
+const VERSION = 103;
+
+function version_103(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_default INT DEFAULT 0");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_start INT DEFAULT 0");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_end INT DEFAULT 3");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN priority INT DEFAULT 0");
+}
 
 function version_102(PDO $pdo)
 {

@@ -4,6 +4,7 @@
         <li ><?= $this->url->link(t('General'), 'ProjectEdit', 'edit', array('project_id' => $project['id'])) ?></li>
         <li class="active"><?= $this->url->link(t('Dates'), 'ProjectEdit', 'dates', array('project_id' => $project['id'])) ?></li>
         <li><?= $this->url->link(t('Description'), 'ProjectEdit', 'description', array('project_id' => $project['id'])) ?></li>
+        <li><?= $this->url->link(t('Task priority'), 'ProjectEdit', 'priority', array('project_id' => $project['id'])) ?></li>
     </ul>
 </div>
 <form method="post" action="<?= $this->url->href('ProjectEdit', 'update', array('project_id' => $project['id'], 'redirect' => 'dates')) ?>" autocomplete="off">

@@ -41,6 +41,16 @@ class ProjectEdit extends Base
     }
 
     /**
+     * Change task priority
+     *
+     * @access public
+     */
+    public function priority(array $values = array(), array $errors = array())
+    {
+        $this->renderView('project_edit/task_priority', $values, $errors);
+    }
+
+    /**
      * Validate and update a project
      *
      * @access public

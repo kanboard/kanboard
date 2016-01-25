@@ -334,6 +334,8 @@ class Project extends Base
             $values['identifier'] = strtoupper($values['identifier']);
         }
 
+        $this->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
+
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
             return false;
@@ -399,6 +401,8 @@ class Project extends Base
         if (! empty($values['identifier'])) {
             $values['identifier'] = strtoupper($values['identifier']);
         }
+
+        $this->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
 
         return $this->exists($values['id']) &&
                $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);

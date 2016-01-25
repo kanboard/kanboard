@@ -1112,4 +1112,13 @@ return array(
     'Those dates are useful for the project Gantt chart.' => 'Ces dates sont utiles pour le diagramme de Gantt des projets.',
     'Private projects do not have users and groups management.' => 'Les projets privés n\'ont pas de gestion d\'utilisateurs et de groupes.',
     'There is no project member.' => 'Il y a aucun membre du projet.',
+    'Priority' => 'Priorité',
+    'Task priority' => 'Priorité des tâches',
+    'General' => 'Général',
+    'Dates' => 'Dates',
+    'Default priority' => 'Priorité par défaut',
+    'Lowest priority' => 'Priorité basse',
+    'Highest priority' => 'Priorité haute',
+    'If you put zero to the low and high priority, this feature will be disabled.' => 'Si vous mettez zéro pour la priorité basse et haute, cette fonctionnalité sera désactivée.',
+    'Priority: %d' => 'Priorité : %d',
 );

@@ -69,4 +69,6 @@
             <i class="fa fa-flag flag-milestone"></i>
         </span>
     <?php endif ?>
+
+    <?= $this->task->formatPriority($project, $task) ?>
 </div>
