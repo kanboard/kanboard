@@ -338,16 +338,16 @@ abstract class Base extends \Kanboard\Core\Base
      * Common method to redirect the user after an action
      *
      * @param array   $task     Task data
-     * @param string  $redirect Type of redirection: 'board' to redirect to the given project view, empty to redirect to the current task
+     * @param string  $redirect Type of redirection: 'board' or 'listing' to redirect to the given project view, empty to redirect to the current task
      * @param string  $anchor   Optional anchor for default redirection (without the prefix #)
      * @access protected
      * @return Redirect to the relevant page
      */
     protected function redirect($task, $redirect='', $anchor='')
     {
-        $actions = array('board' => 'show');
+        $actions = array('board' => 'show', 'listing' => 'show');
 
-        if (in_array($redirect, array('board'))) {
+        if (in_array($redirect, array('board', 'listing'))) {
             $this->response->redirect($this->helper->url->to($redirect, $actions[$redirect], array('project_id' => $task['project_id']), $anchor));
         }
         $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), $anchor));
