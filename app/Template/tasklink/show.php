@@ -33,14 +33,26 @@
                         $link['is_active'] ? '' : 'task-link-closed'
                     ) ?>
                 <?php else: ?>
-                    <?= $this->url->link(
-                        $this->e('#'.$link['task_id'].' '.$link['title']),
-                        'task',
-                        'show',
-                        array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
-                        false,
-                        $link['is_active'] ? '' : 'task-link-closed'
-                    ) ?>
+                    <?php if ($task_editable): ?>
+                        <?= $this->render('board/task_menu', array('task' => array('id' => $link['task_id'], 'project_id' => $link['project_id'], 'is_active' => $link['is_active']), 'redirect' => $task['id'])) ?>
+                        <?= $this->url->link(
+                            $this->e($link['title']),
+                            'task',
+                            'show',
+                            array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
+                            false,
+                            $link['is_active'] ? '' : 'task-link-closed'
+                        ) ?>
+                    <?php else: ?>
+                        <?= $this->url->link(
+                            $this->e('#'.$link['task_id'].' '.$link['title']),
+                            'task',
+                            'show',
+                            array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
+                            false,
+                            $link['is_active'] ? '' : 'task-link-closed'
+                        ) ?>
+                    <?php endif ?>
                 <?php endif ?>
 
                 <br/>

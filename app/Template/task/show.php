@@ -18,6 +18,7 @@
     'links' => $links,
     'link_label_list' => $link_label_list,
     'editable' => $this->user->hasProjectAccess('tasklink', 'edit', $project['id']),
+    'task_editable' => $this->user->hasProjectAccess('taskmodification', 'edit', $project['id']),
     'is_public' => false,
 )) ?>
 
