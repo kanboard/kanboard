@@ -4,6 +4,10 @@
 <ul class="listing">
     <li><strong><?= $project['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
 
+    <?php if ($project['owner_id'] > 0): ?>
+        <li><?= t('Project owner: ') ?><strong><?= $this->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>
+    <?php endif ?>
+
     <?php if ($project['is_private']): ?>
         <li><i class="fa fa-lock"></i> <?= t('This project is private') ?></li>
     <?php endif ?>

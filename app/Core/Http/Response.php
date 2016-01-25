@@ -220,7 +220,6 @@ class Response extends Base
      */
     public function csp(array $policies = array())
     {
-        $policies['default-src'] = "'self'";
         $values = '';
 
         foreach ($policies as $policy => $acl) {

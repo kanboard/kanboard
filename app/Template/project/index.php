@@ -23,9 +23,9 @@
                 <th class="column-15"><?= $paginator->order(t('Project'), 'name') ?></th>
                 <th class="column-8"><?= $paginator->order(t('Start date'), 'start_date') ?></th>
                 <th class="column-8"><?= $paginator->order(t('End date'), 'end_date') ?></th>
+                <th class="column-15"><?= $paginator->order(t('Owner'), 'owner_id') ?></th>
                 <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
-                    <th class="column-12"><?= t('Managers') ?></th>
-                    <th class="column-12"><?= t('Members') ?></th>
+                    <th class="column-10"><?= t('Users') ?></th>
                 <?php endif ?>
                 <th><?= t('Columns') ?></th>
             </tr>
@@ -66,16 +66,15 @@
                 <td>
                     <?= $project['end_date'] ?>
                 </td>
+                <td>
+                    <?php if ($project['owner_id'] > 0): ?>
+                        <?= $this->e($project['owner_name'] ?: $project['owner_username']) ?>
+                    <?php endif ?>
+                </td>
                 <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
                     <td>
-                        <?= $this->render('project/roles', array('roles' => $project, 'role' => \Kanboard\Core\Security\Role::PROJECT_MANAGER)) ?>
-                    </td>
-                    <td>
-                        <?php if ($project['is_everybody_allowed'] == 1): ?>
-                            <?= t('Everybody') ?>
-                        <?php else: ?>
-                            <?= $this->render('project/roles', array('roles' => $project, 'role' => \Kanboard\Core\Security\Role::PROJECT_MEMBER)) ?>
-                        <?php endif ?>
+                        <i class="fa fa-users fa-fw"></i>
+                        <a href="#" class="tooltip" title="<?= t('Members') ?>" data-href="<?= $this->url->href('Projectuser', 'users', array('project_id' => $project['id'])) ?>"><?= t('Members') ?></a>
                     </td>
                 <?php endif ?>
                 <td class="dashboard-project-stats">

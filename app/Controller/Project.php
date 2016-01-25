@@ -29,7 +29,7 @@ class Project extends Base
             ->setUrl('project', 'index')
             ->setMax(20)
             ->setOrder('name')
-            ->setQuery($this->project->getQueryProjectDetails($project_ids))
+            ->setQuery($this->project->getQueryColumnStats($project_ids))
             ->calculate();
 
         $this->response->html($this->template->layout('project/index', array(
@@ -130,57 +130,6 @@ class Project extends Base
             'project' => $project,
             'title' => t('Notifications'),
         )));
-    }
-
-    /**
-     * Display a form to edit a project
-     *
-     * @access public
-     */
-    public function edit(array $values = array(), array $errors = array())
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->projectLayout('project/edit', array(
-            'values' => empty($values) ? $project : $values,
-            'errors' => $errors,
-            'project' => $project,
-            'title' => t('Edit project')
-        )));
-    }
-
-    /**
-     * Validate and update a project
-     *
-     * @access public
-     */
-    public function update()
-    {
-        $project = $this->getProject();
-        $values = $this->request->getValues();
-
-        if (isset($values['is_private'])) {
-            if (! $this->helper->user->hasProjectAccess('project', 'create', $project['id'])) {
-                unset($values['is_private']);
-            }
-        } elseif ($project['is_private'] == 1 && ! isset($values['is_private'])) {
-            if ($this->helper->user->hasProjectAccess('project', 'create', $project['id'])) {
-                $values += array('is_private' => 0);
-            }
-        }
-
-        list($valid, $errors) = $this->projectValidator->validateModification($values);
-
-        if ($valid) {
-            if ($this->project->update($values)) {
-                $this->flash->success(t('Project updated successfully.'));
-                $this->response->redirect($this->helper->url->to('project', 'edit', array('project_id' => $project['id'])));
-            } else {
-                $this->flash->failure(t('Unable to update this project.'));
-            }
-        }
-
-        $this->edit($values, $errors);
     }
 
     /**

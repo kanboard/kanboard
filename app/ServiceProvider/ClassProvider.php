@@ -167,7 +167,11 @@ class ClassProvider implements ServiceProviderInterface
             return $mailer;
         };
 
-        $container['cspRules'] = array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '* data:');
+        $container['cspRules'] = array(
+            'default-src' => "'self'",
+            'style-src' => "'self' 'unsafe-inline'",
+            'img-src' => '* data:',
+        );
 
         return $container;
     }

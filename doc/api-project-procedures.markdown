@@ -1,7 +1,7 @@
 API Project Procedures
 ======================
 
-### createProject
+## createProject
 
 - Purpose: **Create a new project**
 - Parameters:
@@ -33,7 +33,7 @@ Response example:
 }
 ```
 
-### getProjectById
+## getProjectById
 
 - Purpose: **Get project information**
 - Parameters:
@@ -82,7 +82,7 @@ Response example:
 }
 ```
 
-### getProjectByName
+## getProjectByName
 
 - Purpose: **Get project information**
 - Parameters:
@@ -131,7 +131,7 @@ Response example:
 }
 ```
 
-### getAllProjects
+## getAllProjects
 
 - Purpose: **Get all available projects**
 - Parameters:
@@ -179,7 +179,7 @@ Response example:
 }
 ```
 
-### updateProject
+## updateProject
 
 - Purpose: **Update a project**
 - Parameters:
@@ -213,7 +213,7 @@ Response example:
 }
 ```
 
-### removeProject
+## removeProject
 
 - Purpose: **Remove a project**
 - Parameters:
@@ -244,7 +244,7 @@ Response example:
 }
 ```
 
-### enableProject
+## enableProject
 
 - Purpose: **Enable a project**
 - Parameters:
@@ -275,7 +275,7 @@ Response example:
 }
 ```
 
-### disableProject
+## disableProject
 
 - Purpose: **Disable a project**
 - Parameters:
@@ -306,7 +306,7 @@ Response example:
 }
 ```
 
-### enableProjectPublicAccess
+## enableProjectPublicAccess
 
 - Purpose: **Enable public access for a given project**
 - Parameters:
@@ -337,7 +337,7 @@ Response example:
 }
 ```
 
-### disableProjectPublicAccess
+## disableProjectPublicAccess
 
 - Purpose: **Disable public access for a given project**
 - Parameters:
@@ -368,7 +368,7 @@ Response example:
 }
 ```
 
-### getProjectActivity
+## getProjectActivity
 
 - Purpose: **Get activity stream for a project**
 - Parameters:
@@ -389,7 +389,7 @@ Request example:
 }
 ```
 
-### getProjectActivities
+## getProjectActivities
 
 - Purpose: **Get Activityfeed for Project(s)**
 - Parameters:
@@ -407,106 +407,5 @@ Request example:
     "params": [
         "project_ids": [1,2]
     ]
-}
-```
-
-### getMembers
-
-- Purpose: **Get members of a project**
-- Parameters:
-    - **project_id** (integer, required)
-- Result on success: Key/value pair of user_id and username
-- Result on failure: **false**
-
-Request example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "method": "getMembers",
-    "id": 1944388643,
-    "params": [
-        1
-    ]
-}
-```
-
-Response example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "id": 1944388643,
-    "result": {
-        "1": "user1",
-        "2": "user2",
-        "3": "user3"
-    }
-}
-```
-
-### revokeUser
-
-- Purpose: **Revoke user access for a given project**
-- Parameters:
-    - **project_id** (integer, required)
-    - **user_id** (integer, required)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "method": "revokeUser",
-    "id": 251218350,
-    "params": [
-        1,
-        2
-    ]
-}
-```
-
-Response example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "id": 251218350,
-    "result": true
-}
-```
-
-### allowUser
-
-- Purpose: **Grant user access for a given project**
-- Parameters:
-    - **project_id** (integer, required)
-    - **user_id** (integer, required)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "method": "allowUser",
-    "id": 2111451404,
-    "params": [
-        1,
-        2
-    ]
-}
-```
-
-Response example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "id": 2111451404,
-    "result": true
 }
 ```

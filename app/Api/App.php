@@ -34,4 +34,14 @@ class App extends \Kanboard\Core\Base
     {
         return $this->color->getList();
     }
+
+    public function getApplicationRoles()
+    {
+        return $this->role->getApplicationRoles();
+    }
+
+    public function getProjectRoles()
+    {
+        return $this->role->getProjectRoles();
+    }
 }

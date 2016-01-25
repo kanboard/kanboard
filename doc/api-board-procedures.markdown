@@ -1,7 +1,7 @@
 API Board Procedures
 ====================
 
-### getBoard
+## getBoard
 
 - Purpose: **Get all necessary information to display a board**
 - Parameters:
@@ -157,7 +157,7 @@ Response example:
 }
 ```
 
-### getColumns
+## getColumns
 
 - Purpose: **Get all columns information for a given project**
 - Parameters:
@@ -210,7 +210,7 @@ Response example:
 }
 ```
 
-### getColumn
+## getColumn
 
 - Purpose: **Get a single column**
 - Parameters:
@@ -247,7 +247,7 @@ Response example:
 }
 ```
 
-### moveColumnUp
+## moveColumnUp
 
 - Purpose: **Move up the column position**
 - Parameters:
@@ -280,7 +280,7 @@ Response example:
 }
 ```
 
-### moveColumnDown
+## moveColumnDown
 
 - Purpose: **Move down the column position**
 - Parameters:
@@ -313,7 +313,7 @@ Response example:
 }
 ```
 
-### updateColumn
+## updateColumn
 
 - Purpose: **Update column properties**
 - Parameters:
@@ -349,7 +349,7 @@ Response example:
 }
 ```
 
-### addColumn
+## addColumn
 
 - Purpose: **Add a new column**
 - Parameters:
@@ -384,7 +384,7 @@ Response example:
 }
 ```
 
-### removeColumn
+## removeColumn
 
 - Purpose: **Remove a column**
 - Parameters:

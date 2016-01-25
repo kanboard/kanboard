@@ -1,32 +1,19 @@
 <div class="page-header">
     <h2><?= t('Edit project') ?></h2>
+    <ul>
+        <li><?= $this->url->link(t('General'), 'ProjectEdit', 'edit', array('project_id' => $project['id'])) ?></li>
+        <li><?= $this->url->link(t('Dates'), 'ProjectEdit', 'dates', array('project_id' => $project['id'])) ?></li>
+        <li class="active"><?= $this->url->link(t('Description'), 'ProjectEdit', 'description', array('project_id' => $project['id'])) ?></li>
+        <li><?= $this->url->link(t('Task priority'), 'ProjectEdit', 'priority', array('project_id' => $project['id'])) ?></li>
+    </ul>
 </div>
-<form method="post" action="<?= $this->url->href('project', 'update', array('project_id' => $project['id'])) ?>" autocomplete="off">
-
+<form method="post" action="<?= $this->url->href('ProjectEdit', 'update', array('project_id' => $project['id'], 'redirect' => 'description')) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
-
-    <?= $this->form->label(t('Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors, array('required', 'maxlength="50"')) ?>
-
-    <?= $this->form->label(t('Identifier'), 'identifier') ?>
-    <?= $this->form->text('identifier', $values, $errors, array('maxlength="50"')) ?>
-    <p class="form-help"><?= t('The project identifier is an optional alphanumeric code used to identify your project.') ?></p>
-
-    <?= $this->form->label(t('Start date'), 'start_date') ?>
-    <?= $this->form->text('start_date', $values, $errors, array('maxlength="10"'), 'form-date') ?>
-
-    <?= $this->form->label(t('End date'), 'end_date') ?>
-    <?= $this->form->text('end_date', $values, $errors, array('maxlength="10"'), 'form-date') ?>
-
-    <?php if ($this->user->hasProjectAccess('project', 'create', $project['id'])): ?>
-        <?= $this->form->checkbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
-    <?php endif ?>
+    <?= $this->form->hidden('name', $values) ?>
 
     <?= $this->form->label(t('Description'), 'description') ?>
-
     <div class="form-tabs">
-
         <div class="write-area">
           <?= $this->form->textarea('description', $values, $errors) ?>
         </div>

@@ -50,7 +50,7 @@ class Role
     }
 
     /**
-     * Get application roles
+     * Get role name
      *
      * @access public
      * @param  string $role
