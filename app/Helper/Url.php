@@ -52,15 +52,15 @@ class Url extends Base
      *
      * @access public
      * @param array   $task     Task data
-     * @param string  $redirect Type of redirection: 'board' or 'listing' to redirect to the given project view, empty to redirect to the current task, numeric value to redirect to a specific task
+     * @param string  $redirect Type of redirection: 'board', 'gantt' or 'listing' to redirect to the given project view, empty to redirect to the current task, numeric value to redirect to a specific task
      * @param string  $anchor   Optional anchor for default redirection (without the prefix #)
      * @return string
      */
     public function cancel($task, $redirect='', $anchor='')
     {
-        $actions = array('board' => 'show', 'listing' => 'show');
-        
-        if (in_array($redirect, array('board', 'listing'))) {
+        $actions = array('board' => 'show', 'gantt' => 'project', 'listing' => 'show');
+
+        if (in_array($redirect, array('board', 'gantt', 'listing'))) {
             return $this->link(t('cancel'), $redirect, $actions[$redirect], array('project_id' => $task['project_id']), false, 'close-popover', t('Cancel'), false, $anchor);
         }
         if (is_numeric($redirect)) {
