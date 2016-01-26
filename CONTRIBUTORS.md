@@ -5,9 +5,11 @@ Original author and main developer: Frédéric Guillot (fguillot)
 
 Contributors:
 
+- [85pando](https://github.com/85pando)
 - Alex Butum
 - [Aleix Pol](https://github.com/aleixpol)
 - [Ally Raza](https://github.com/alirz23)
+- [Angystardust](https://github.com/angystardust)
 - [Anjar Febrianto](https://github.com/Lasut)
 - [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
@@ -102,6 +104,7 @@ Contributors:
 - [Troloo](https://github.com/troloo)
 - [Typz](https://github.com/Typz)
 - [Vedovator](https://github.com/vedovator)
+- [Vitaliy S. Orlov](https://github.com/orlov0562)
 - [Vladimir Babin](https://github.com/Chiliec)
 - [Yannick Ihmels](https://github.com/ihmels)
 - [Ybarc](https://github.com/ybarc)
