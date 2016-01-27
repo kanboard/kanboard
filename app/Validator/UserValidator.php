@@ -46,6 +46,10 @@ class UserValidator extends Base
 
         if (isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1) {
             $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+        } else if (isset($values['email_invitation']) && $values['email_invitation'] == 1) {
+            $v = new Validator($values, array_merge($rules, $this->commonValidationRules(), array(
+                new Validators\Required('email', t('The email is required to send the invitation')),
+            )));
         } else {
             $v = new Validator($values, array_merge($rules, $this->commonValidationRules(), $this->commonPasswordValidationRules()));
         }

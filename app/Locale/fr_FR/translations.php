@@ -1121,4 +1121,13 @@ return array(
     'Highest priority' => 'Priorité haute',
     'If you put zero to the low and high priority, this feature will be disabled.' => 'Si vous mettez zéro pour la priorité basse et haute, cette fonctionnalité sera désactivée.',
     'Priority: %d' => 'Priorité : %d',
+    'Or send an invitation by email' => 'Ou envoyer une invitation par email',
+    'If you check the box "Send an invitation by email", "Password" is discarded and an email is sent to the new user to let him choose its own. In this case "Email" is required.' => 'Si vous cochez la case « Envoyer une invitation par email », « Mot de passe » est alors ignoré et un email est envoyé au nouvel utilisateur pour qu\'il en sélectionne un lui-même. Dans ce cas, « Email » est obligatoire.',
+    'The email is required to send the invitation' => 'L\'email est nécessaire pour pouvoir envoyer une invitation',
+    'An invitation has been sent by email.' => 'Une invitation a été envoyée par email.',
+    'New account for Kanboard' => 'Nouveau compte Kanboard',
+    'Welcome to Kanboard %s' => 'Bienvenue sur Kanboard %s',
+    'An account has been created for you on Kanboard by "%s".' => 'Un compte a été créé pour vous sur Kanboard par "%s".',
+    'Your login is "%s".' => 'Votre login est "%s".',
+    'Choose your password by clicking on this link: %s' => 'Choisissez votre mot de passe en cliquant sur ce lien : %s',
 );
