@@ -1,6 +1,8 @@
 Centos Installation
 ===================
 
+Note: Some features of Kanboard require that you run [a daily background job](cronjob.markdown).
+
 Centos 7
 --------
 

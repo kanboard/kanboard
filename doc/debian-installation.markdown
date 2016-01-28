@@ -1,6 +1,8 @@
 How to install Kanboard on Debian?
 ==================================
 
+Note: Some features of Kanboard require that you run [a daily background job](cronjob.markdown).
+
 Debian 8 (Jessie)
 -----------------
 
