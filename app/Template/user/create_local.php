@@ -20,11 +20,15 @@
             <?= $this->form->label(t('Email'), 'email') ?>
             <?= $this->form->email('email', $values, $errors) ?>
 
+            <br /><br /><hr />
             <?= $this->form->label(t('Password'), 'password') ?>
-            <?= $this->form->password('password', $values, $errors, array('required')) ?>
+            <?= $this->form->password('password', $values, $errors) ?>
 
             <?= $this->form->label(t('Confirmation'), 'confirmation') ?>
-            <?= $this->form->password('confirmation', $values, $errors, array('required')) ?>
+            <?= $this->form->password('confirmation', $values, $errors) ?>
+
+            <?= $this->form->checkbox('email_invitation', t('Or send an invitation by email'), 1, isset($values['email_invitation']) && $values['email_invitation'] == 1 ? true : false) ?>
+            <hr />
         </div>
 
         <div class="form-column">
@@ -49,5 +53,10 @@
             <?= $this->url->link(t('cancel'), 'user', 'index') ?>
         </div>
     </form>
+    <div class="alert alert-info">
+        <ul>
+            <li><?= t('If you check the box "Send an invitation by email", "Password" is discarded and an email is sent to the new user to let him choose its own. In this case "Email" is required.') ?></li>
+        </ul>
+    </div>
     </section>
 </section>

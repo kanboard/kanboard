@@ -114,6 +114,12 @@ class User extends Base
             $project_id = empty($values['project_id']) ? 0 : $values['project_id'];
             unset($values['project_id']);
 
+            $is_invitation = (isset($values['email_invitation']) && $values['email_invitation'] == 1);
+            if ($is_invitation) {
+                $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                $values['password'] = substr(str_shuffle($chars), 0, 12);
+                unset($values['email_invitation']);
+            }
             $user_id = $this->user->create($values);
 
             if ($user_id !== false) {
@@ -123,7 +129,11 @@ class User extends Base
                     $this->userNotificationType->saveSelectedTypes($user_id, array(MailNotification::TYPE));
                 }
 
-                $this->flash->success(t('User created successfully.'));
+                if ($is_invitation) {
+                    $this->sendInvitationEmail($values['username']);
+                }
+
+                $this->flash->success(t('User created successfully.').($is_invitation ? ' '.t('An invitation has been sent by email.') : ''));
                 $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user_id)));
             } else {
                 $this->flash->failure(t('Unable to create your user.'));
@@ -132,6 +142,26 @@ class User extends Base
         }
 
         $this->create($values, $errors);
+    }
+
+    /**
+     * Send an invitation email to the new user
+     */
+    private function sendInvitationEmail($username)
+    {
+        $invitor = $this->getUser();
+        $token = $this->passwordReset->create($username, time()+157680000); // Expire in 5 years
+
+        if ($token !== false) {
+            $user = $this->user->getByUsername($username);
+
+            $this->emailClient->send(
+                $user['email'],
+                $user['name'] ?: $user['username'],
+                t('New account for Kanboard'),
+                $this->template->render('user/email_invitation', array('token' => $token, 'user' => $user, 'invitor' => $invitor))
+            );
+        }
     }
 
     /**
