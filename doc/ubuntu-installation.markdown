@@ -26,3 +26,5 @@ sudo unzip kanboard-latest.zip
 sudo chown -R www-data:www-data kanboard/data
 sudo rm kanboard-latest.zip
 ```
+
+Some features of Kanboard require that you run [a daily background job](cronjob.markdown).

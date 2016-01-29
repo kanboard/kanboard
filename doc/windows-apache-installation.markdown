@@ -123,3 +123,8 @@ Tested configuration
 --------------------
 
 - Windows 2008 R2 / Apache 2.4.12 / PHP 5.6.8
+
+Notes
+-----
+
+- Some features of Kanboard require that you run [a daily background job](cronjob.markdown).

@@ -39,3 +39,8 @@ Security
 
 - Don't forget to change the default user/password
 - Don't allow everybody to access to the directory `data` from the URL. There is already a `.htaccess` for Apache but nothing for Nginx.
+
+Notes
+-----
+
+- Some features of Kanboard require that you run [a daily background job](cronjob.markdown)
