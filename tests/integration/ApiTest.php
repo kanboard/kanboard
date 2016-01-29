@@ -563,6 +563,20 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertNull($this->client->getUser(2222));
     }
 
+    public function testGetUserByName()
+    {
+        $user = $this->client->getUserByName('toto');
+        $this->assertNotFalse($user);
+        $this->assertTrue(is_array($user));
+        $this->assertEquals(2, $user['id']);
+
+        $user = $this->client->getUserByName('manager');
+        $this->assertNotEmpty($user);
+        $this->assertEquals('app-manager', $user['role']);
+
+        $this->assertNull($this->client->getUserByName('nonexistantusername'));
+    }
+
     public function testUpdateUser()
     {
         $user = array();

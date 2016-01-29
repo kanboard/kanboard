@@ -13,6 +13,8 @@ use Kanboard\Console\ProjectDailyColumnStatsExport;
 use Kanboard\Console\TransitionExport;
 use Kanboard\Console\LocaleSync;
 use Kanboard\Console\LocaleComparator;
+use Kanboard\Console\TaskTrigger;
+use Kanboard\Console\Cronjob;
 
 $container['dispatcher']->dispatch('app.bootstrap', new Event);
 
@@ -25,4 +27,6 @@ $application->add(new ProjectDailyColumnStatsExport($container));
 $application->add(new TransitionExport($container));
 $application->add(new LocaleSync($container));
 $application->add(new LocaleComparator($container));
+$application->add(new TaskTrigger($container));
+$application->add(new Cronjob($container));
 $application->run();

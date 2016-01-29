@@ -125,7 +125,7 @@ abstract class Base extends \Kanboard\Core\Base
             $params[] = $key.'='.var_export($value, true);
         }
 
-        return $this->getName().'('.implode('|', $params).'])';
+        return $this->getName().'('.implode('|', $params).')';
     }
 
     /**
