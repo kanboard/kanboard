@@ -19,7 +19,7 @@ class BoardTooltip extends Base
     {
         $task = $this->getTask();
         $this->response->html($this->template->render('board/tooltip_tasklinks', array(
-            'links' => $this->taskLink->getAll($task['id']),
+            'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
             'task' => $task,
         )));
     }

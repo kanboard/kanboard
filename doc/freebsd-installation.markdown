@@ -55,7 +55,7 @@ Generally 3 elements have to be installed:
 Fetch and extract ports...
 
 ```bash
-$ portsnap fetch 
+$ portsnap fetch
 $ portsnap extract
 ```
 
@@ -122,6 +122,7 @@ there is no need to install it manually.
 Please note
 -----------
 
-Port is being hosted on [bitbucket](https://bitbucket.org/if0/freebsd-kanboard/). Feel free to comment,
+- Port is being hosted on [bitbucket](https://bitbucket.org/if0/freebsd-kanboard/). Feel free to comment,
 fork and suggest updates!
- 
+- Some features of Kanboard require that you run [a daily background job](cronjob.markdown).
+

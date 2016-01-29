@@ -23,12 +23,14 @@ use Kanboard\Action\TaskCloseColumn;
 use Kanboard\Action\TaskCreation;
 use Kanboard\Action\TaskDuplicateAnotherProject;
 use Kanboard\Action\TaskEmail;
+use Kanboard\Action\TaskEmailNoActivity;
 use Kanboard\Action\TaskMoveAnotherProject;
 use Kanboard\Action\TaskMoveColumnAssigned;
 use Kanboard\Action\TaskMoveColumnCategoryChange;
 use Kanboard\Action\TaskMoveColumnUnAssigned;
 use Kanboard\Action\TaskOpen;
 use Kanboard\Action\TaskUpdateStartDate;
+use Kanboard\Action\TaskCloseNoActivity;
 
 /**
  * Action Provider
@@ -63,9 +65,11 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskAssignUser($container));
         $container['actionManager']->register(new TaskClose($container));
         $container['actionManager']->register(new TaskCloseColumn($container));
+        $container['actionManager']->register(new TaskCloseNoActivity($container));
         $container['actionManager']->register(new TaskCreation($container));
         $container['actionManager']->register(new TaskDuplicateAnotherProject($container));
         $container['actionManager']->register(new TaskEmail($container));
+        $container['actionManager']->register(new TaskEmailNoActivity($container));
         $container['actionManager']->register(new TaskMoveAnotherProject($container));
         $container['actionManager']->register(new TaskMoveColumnAssigned($container));
         $container['actionManager']->register(new TaskMoveColumnCategoryChange($container));

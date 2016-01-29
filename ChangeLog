@@ -5,6 +5,14 @@ New features:
 
 * Add project owner (Directly Responsible Individual)
 * Add configurable task priority
+* Add Greek translation
+* Add automatic actions to close tasks with no activity
+* Add automatic actions to send an email when there is no activity on a task
+* Regroup all daily background tasks in one command: "cronjob"
+
+Improvements:
+
+* Show progress for task links in board tooltips
 
 Version 1.0.24
 --------------

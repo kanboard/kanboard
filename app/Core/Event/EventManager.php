@@ -52,6 +52,7 @@ class EventManager
             Task::EVENT_CLOSE => t('Closing a task'),
             Task::EVENT_CREATE_UPDATE => t('Task creation or modification'),
             Task::EVENT_ASSIGNEE_CHANGE => t('Task assignee change'),
+            Task::EVENT_DAILY_CRONJOB => t('Daily background job for tasks'),
         );
 
         $events = array_merge($events, $this->events);

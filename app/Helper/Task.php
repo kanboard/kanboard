@@ -12,6 +12,14 @@ use Kanboard\Core\Base;
  */
 class Task extends Base
 {
+    /**
+     * Local cache for project columns
+     *
+     * @access private
+     * @var array
+     */
+    private $columns = array();
+
     public function getColors()
     {
         return $this->color->getList();
@@ -64,5 +72,14 @@ class Task extends Base
         }
 
         return $html;
+    }
+
+    public function getProgress($task)
+    {
+        if (! isset($this->columns[$task['project_id']])) {
+            $this->columns[$task['project_id']] = $this->board->getColumnsList($task['project_id']);
+        }
+
+        return $this->task->getProgress($task, $this->columns[$task['project_id']]);
     }
 }
