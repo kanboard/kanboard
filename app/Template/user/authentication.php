@@ -8,8 +8,7 @@
     <?= $this->form->hidden('id', $values) ?>
     <?= $this->form->hidden('username', $values) ?>
 
-    <?= $this->form->label(t('Google Id'), 'google_id') ?>
-    <?= $this->form->text('google_id', $values, $errors) ?>
+    <?= $this->hook->render('template:user:authentication:form', array('values' => $values, 'errors' => $errors, 'user' => $user)) ?>
 
     <?= $this->form->label(t('Github Id'), 'github_id') ?>
     <?= $this->form->text('github_id', $values, $errors) ?>

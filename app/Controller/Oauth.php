@@ -11,16 +11,6 @@ namespace Kanboard\Controller;
 class Oauth extends Base
 {
     /**
-     * Link or authenticate a Google account
-     *
-     * @access public
-     */
-    public function google()
-    {
-        $this->step1('Google');
-    }
-
-    /**
      * Link or authenticate a Github account
      *
      * @access public
@@ -65,7 +55,7 @@ class Oauth extends Base
      * @access private
      * @param string $provider
      */
-    private function step1($provider)
+    protected function step1($provider)
     {
         $code = $this->request->getStringParam('code');
 
@@ -79,11 +69,11 @@ class Oauth extends Base
     /**
      * Link or authenticate the user
      *
-     * @access private
+     * @access protected
      * @param string $provider
      * @param string $code
      */
-    private function step2($provider, $code)
+    protected function step2($provider, $code)
     {
         $this->authenticationManager->getProvider($provider)->setCode($code);
 
@@ -97,10 +87,10 @@ class Oauth extends Base
     /**
      * Link the account
      *
-     * @access private
+     * @access protected
      * @param string $provider
      */
-    private function link($provider)
+    protected function link($provider)
     {
         $authProvider = $this->authenticationManager->getProvider($provider);
 
@@ -117,10 +107,10 @@ class Oauth extends Base
     /**
      * Authenticate the account
      *
-     * @access private
+     * @access protected
      * @param string $provider
      */
-    private function authenticate($provider)
+    protected function authenticate($provider)
     {
         if ($this->authenticationManager->oauthAuthentication($provider)) {
             $this->response->redirect($this->helper->url->to('app', 'index'));

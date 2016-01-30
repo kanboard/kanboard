@@ -2,21 +2,7 @@
     <h2><?= t('External authentications') ?></h2>
 </div>
 
-<?php if (GOOGLE_AUTH): ?>
-    <h3><i class="fa fa-google"></i> <?= t('Google Account') ?></h3>
-
-    <p class="listing">
-    <?php if ($this->user->isCurrentUser($user['id'])): ?>
-        <?php if (empty($user['google_id'])): ?>
-            <?= $this->url->link(t('Link my Google Account'), 'oauth', 'google', array(), true) ?>
-        <?php else: ?>
-            <?= $this->url->link(t('Unlink my Google Account'), 'oauth', 'unlink', array('backend' => 'Google'), true) ?>
-        <?php endif ?>
-    <?php else: ?>
-        <?= empty($user['google_id']) ? t('No account linked.') : t('Account linked.') ?>
-    <?php endif ?>
-    </p>
-<?php endif ?>
+<?php $html = $this->hook->render('template:user:external', array('user' => $user)) ?>
 
 <?php if (GITHUB_AUTH): ?>
     <h3><i class="fa fa-github"></i> <?= t('Github Account') ?></h3>
@@ -50,6 +36,8 @@
     </p>
 <?php endif ?>
 
-<?php if (! GOOGLE_AUTH && ! GITHUB_AUTH && ! GITLAB_AUTH): ?>
+<?php if (empty($html) && ! GITHUB_AUTH && ! GITLAB_AUTH): ?>
     <p class="alert"><?= t('No external authentication enabled.') ?></p>
+<?php else: ?>
+    <?= $html ?>
 <?php endif ?>

@@ -51,11 +51,6 @@ defined('LDAP_GROUP_BASE_DN') or define('LDAP_GROUP_BASE_DN', '');
 defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', '');
 defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
-// Google authentication
-defined('GOOGLE_AUTH') or define('GOOGLE_AUTH', false);
-defined('GOOGLE_CLIENT_ID') or define('GOOGLE_CLIENT_ID', '');
-defined('GOOGLE_CLIENT_SECRET') or define('GOOGLE_CLIENT_SECRET', '');
-
 // Github authentication
 defined('GITHUB_AUTH') or define('GITHUB_AUTH', false);
 defined('GITHUB_CLIENT_ID') or define('GITHUB_CLIENT_ID', '');

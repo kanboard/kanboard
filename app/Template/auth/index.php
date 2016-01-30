@@ -40,12 +40,8 @@
 
     <?= $this->hook->render('template:auth:login-form:after') ?>
 
-    <?php if (GOOGLE_AUTH || GITHUB_AUTH || GITLAB_AUTH): ?>
+    <?php if (GITHUB_AUTH || GITLAB_AUTH): ?>
     <ul class="no-bullet">
-        <?php if (GOOGLE_AUTH): ?>
-            <li><?= $this->url->link(t('Login with my Google Account'), 'oauth', 'google') ?></li>
-        <?php endif ?>
-
         <?php if (GITHUB_AUTH): ?>
             <li><?= $this->url->link(t('Login with my Github Account'), 'oauth', 'github') ?></li>
         <?php endif ?>

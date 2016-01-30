@@ -13,7 +13,6 @@ use Kanboard\Auth\DatabaseAuth;
 use Kanboard\Auth\LdapAuth;
 use Kanboard\Auth\GitlabAuth;
 use Kanboard\Auth\GithubAuth;
-use Kanboard\Auth\GoogleAuth;
 use Kanboard\Auth\TotpAuth;
 use Kanboard\Auth\ReverseProxyAuth;
 
@@ -53,10 +52,6 @@ class AuthenticationProvider implements ServiceProviderInterface
 
         if (GITHUB_AUTH) {
             $container['authenticationManager']->register(new GithubAuth($container));
-        }
-
-        if (GOOGLE_AUTH) {
-            $container['authenticationManager']->register(new GoogleAuth($container));
         }
 
         $container['projectAccessMap'] = $this->getProjectAccessMap();
@@ -126,7 +121,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->setRoleHierarchy(Role::APP_MANAGER, array(Role::APP_USER, Role::APP_PUBLIC));
         $acl->setRoleHierarchy(Role::APP_USER, array(Role::APP_PUBLIC));
 
-        $acl->add('Oauth', array('google', 'github', 'gitlab'), Role::APP_PUBLIC);
+        $acl->add('Oauth', array('github', 'gitlab'), Role::APP_PUBLIC);
         $acl->add('Auth', array('login', 'check'), Role::APP_PUBLIC);
         $acl->add('Captcha', '*', Role::APP_PUBLIC);
         $acl->add('PasswordReset', '*', Role::APP_PUBLIC);

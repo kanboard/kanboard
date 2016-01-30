@@ -1,6 +1,11 @@
 Version 1.0.25 (unreleased)
 --------------
 
+Breaking changes:
+
+* Core functionalities moved to external plugins:
+    - Google Auth: https://github.com/kanboard/plugin-google-auth
+
 New features:
 
 * Add project owner (Directly Responsible Individual)

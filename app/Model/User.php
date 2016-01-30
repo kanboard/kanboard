@@ -48,20 +48,7 @@ class User extends Base
      */
     public function getQuery()
     {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        'id',
-                        'username',
-                        'name',
-                        'email',
-                        'role',
-                        'is_ldap_user',
-                        'notifications_enabled',
-                        'google_id',
-                        'github_id',
-                        'twofactor_activated'
-                    );
+        return $this->db->table(self::TABLE);
     }
 
     /**
