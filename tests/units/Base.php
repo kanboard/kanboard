@@ -10,6 +10,7 @@ use SimpleLogger\Logger;
 use SimpleLogger\File;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\Core\Session\SessionStorage;
+use Kanboard\Core\Action\ActionManager;
 
 class FakeHttpClient
 {
@@ -104,6 +105,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->container['sessionStorage'] = new SessionStorage;
+        $this->container['actionManager'] = new ActionManager($this->container);
 
         $this->container['flash'] = function($c) {
             return new FlashMessage($c);

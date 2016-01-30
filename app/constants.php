@@ -51,22 +51,6 @@ defined('LDAP_GROUP_BASE_DN') or define('LDAP_GROUP_BASE_DN', '');
 defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', '');
 defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
-// Github authentication
-defined('GITHUB_AUTH') or define('GITHUB_AUTH', false);
-defined('GITHUB_CLIENT_ID') or define('GITHUB_CLIENT_ID', '');
-defined('GITHUB_CLIENT_SECRET') or define('GITHUB_CLIENT_SECRET', '');
-defined('GITHUB_OAUTH_AUTHORIZE_URL') or define('GITHUB_OAUTH_AUTHORIZE_URL', 'https://github.com/login/oauth/authorize');
-defined('GITHUB_OAUTH_TOKEN_URL') or define('GITHUB_OAUTH_TOKEN_URL', 'https://github.com/login/oauth/access_token');
-defined('GITHUB_API_URL') or define('GITHUB_API_URL', 'https://api.github.com/');
-
-// Gitlab authentication
-defined('GITLAB_AUTH') or define('GITLAB_AUTH', false);
-defined('GITLAB_CLIENT_ID') or define('GITLAB_CLIENT_ID', '');
-defined('GITLAB_CLIENT_SECRET') or define('GITLAB_CLIENT_SECRET', '');
-defined('GITLAB_OAUTH_AUTHORIZE_URL') or define('GITLAB_OAUTH_AUTHORIZE_URL', 'https://gitlab.com/oauth/authorize');
-defined('GITLAB_OAUTH_TOKEN_URL') or define('GITLAB_OAUTH_TOKEN_URL', 'https://gitlab.com/oauth/token');
-defined('GITLAB_API_URL') or define('GITLAB_API_URL', 'https://gitlab.com/api/v3/');
-
 // Proxy authentication
 defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', false);
 defined('REVERSE_PROXY_USER_HEADER') or define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');

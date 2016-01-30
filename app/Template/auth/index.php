@@ -39,17 +39,4 @@
     <?php endif ?>
 
     <?= $this->hook->render('template:auth:login-form:after') ?>
-
-    <?php if (GITHUB_AUTH || GITLAB_AUTH): ?>
-    <ul class="no-bullet">
-        <?php if (GITHUB_AUTH): ?>
-            <li><?= $this->url->link(t('Login with my Github Account'), 'oauth', 'github') ?></li>
-        <?php endif ?>
-
-        <?php if (GITLAB_AUTH): ?>
-            <li><?= $this->url->link(t('Login with my Gitlab Account'), 'oauth', 'gitlab') ?></li>
-        <?php endif ?>
-    </ul>
-    <?php endif ?>
-
 </div>

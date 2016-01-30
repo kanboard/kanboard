@@ -5,6 +5,8 @@ Breaking changes:
 
 * Core functionalities moved to external plugins:
     - Google Auth: https://github.com/kanboard/plugin-google-auth
+    - Github Auth: https://github.com/kanboard/plugin-github-auth
+    - Gitlab Auth: https://github.com/kanboard/plugin-gitlab-auth
 
 New features:
 

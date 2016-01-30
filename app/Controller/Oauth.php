@@ -11,26 +11,6 @@ namespace Kanboard\Controller;
 class Oauth extends Base
 {
     /**
-     * Link or authenticate a Github account
-     *
-     * @access public
-     */
-    public function github()
-    {
-        $this->step1('Github');
-    }
-
-    /**
-     * Link or authenticate a Gitlab account
-     *
-     * @access public
-     */
-    public function gitlab()
-    {
-        $this->step1('Gitlab');
-    }
-
-    /**
      * Unlink external account
      *
      * @access public

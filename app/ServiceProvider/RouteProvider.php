@@ -205,8 +205,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('documentation', 'doc', 'show');
 
             // Auth routes
-            $container['route']->addRoute('oauth/github', 'oauth', 'github');
-            $container['route']->addRoute('oauth/gitlab', 'oauth', 'gitlab');
             $container['route']->addRoute('login', 'auth', 'login');
             $container['route']->addRoute('logout', 'auth', 'logout');
 

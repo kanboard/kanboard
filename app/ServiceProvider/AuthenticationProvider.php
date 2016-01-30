@@ -11,8 +11,6 @@ use Kanboard\Core\Security\Role;
 use Kanboard\Auth\RememberMeAuth;
 use Kanboard\Auth\DatabaseAuth;
 use Kanboard\Auth\LdapAuth;
-use Kanboard\Auth\GitlabAuth;
-use Kanboard\Auth\GithubAuth;
 use Kanboard\Auth\TotpAuth;
 use Kanboard\Auth\ReverseProxyAuth;
 
@@ -44,14 +42,6 @@ class AuthenticationProvider implements ServiceProviderInterface
 
         if (LDAP_AUTH) {
             $container['authenticationManager']->register(new LdapAuth($container));
-        }
-
-        if (GITLAB_AUTH) {
-            $container['authenticationManager']->register(new GitlabAuth($container));
-        }
-
-        if (GITHUB_AUTH) {
-            $container['authenticationManager']->register(new GithubAuth($container));
         }
 
         $container['projectAccessMap'] = $this->getProjectAccessMap();
@@ -121,7 +111,6 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->setRoleHierarchy(Role::APP_MANAGER, array(Role::APP_USER, Role::APP_PUBLIC));
         $acl->setRoleHierarchy(Role::APP_USER, array(Role::APP_PUBLIC));
 
-        $acl->add('Oauth', array('github', 'gitlab'), Role::APP_PUBLIC);
         $acl->add('Auth', array('login', 'check'), Role::APP_PUBLIC);
         $acl->add('Captcha', '*', Role::APP_PUBLIC);
         $acl->add('PasswordReset', '*', Role::APP_PUBLIC);
