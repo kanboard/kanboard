@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Edit a task') ?></h2>
 </div>
-<form id="task-form" method="post" action="<?= $this->url->href('taskmodification', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+<form id="task-form" method="post" action="<?= $this->url->href('taskmodification', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => $redirect)) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -63,10 +63,6 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue" tabindex="10">
         <?= t('or') ?>
-        <?php if ($ajax): ?>
-            <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
-        <?php else: ?>
-            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        <?php endif ?>
+        <?= $this->url->cancel($task, $redirect) ?>
     </div>
 </form>

@@ -31,6 +31,29 @@
             data-label-end-date="<?= t('Due date:') ?>"
             data-label-assignee="<?= t('Assignee:') ?>"
             data-label-not-defined="<?= t('There is no start date or due date for this task.') ?>"
+            <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $project['id'])): ?>
+                data-taskmodification="1"
+                data-label-change-assignee="<?= t('Change assignee') ?>"
+                data-url-change-assignee="<?= $this->url->to('BoardPopover', 'changeAssignee', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+                data-label-change-category="<?= t('Change category') ?>"
+                data-url-change-category="<?= $this->url->to('BoardPopover', 'changeCategory', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+                data-label-change-description="<?= t('Change description') ?>"
+                data-url-change-description="<?= $this->url->to('taskmodification', 'description', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+                data-label-edit-task="<?= t('Edit this task') ?>"
+                data-url-edit-task="<?= $this->url->to('taskmodification', 'edit', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+                data-label-add-comment="<?= t('Add a comment') ?>"
+                data-url-add-comment="<?= $this->url->to('comment', 'create', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+                data-label-add-link="<?= t('Add a link') ?>"
+                data-url-add-link="<?= $this->url->to('tasklink', 'create', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+                data-label-add-screenshot="<?= t('Add a screenshot') ?>"
+                data-url-add-screenshot="<?= $this->url->to('BoardPopover', 'screenshot', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+                data-label-close="<?= t('Close this task') ?>"
+                data-url-close="<?= $this->url->to('taskstatus', 'close', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+                data-label-open="<?= t('Open this task') ?>"
+                data-url-open="<?= $this->url->to('taskstatus', 'open', array('project_id' => $project['id'], 'redirect' => 'gantt')) ?>"
+            <?php else: ?>
+                data-taskmodification="0"
+            <?php endif ?>
         ></div>
         <p class="alert alert-info"><?= t('Moving or resizing a task will change the start and due date of the task.') ?></p>
     <?php else: ?>

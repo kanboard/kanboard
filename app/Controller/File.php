@@ -20,20 +20,20 @@ class File extends Base
     public function screenshot()
     {
         $task = $this->getTask();
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
         if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot')) !== false) {
             $this->flash->success(t('Screenshot uploaded successfully.'));
 
-            if ($this->request->getStringParam('redirect') === 'board') {
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            }
-
-            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+            $this->redirect(
+                $task,
+                $redirect
+            );
         }
 
         $this->response->html($this->taskLayout('file/screenshot', array(
             'task' => $task,
-            'redirect' => 'task',
+            'redirect' => $redirect,
         )));
     }
 

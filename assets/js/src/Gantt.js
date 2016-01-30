@@ -66,11 +66,14 @@ Gantt.prototype.renderVerticalHeader = function() {
     var seriesDiv = jQuery("<div>", { "class": "ganttview-vtheader-series" });
 
     for (var i = 0; i < this.data.length; i++) {
-        var content = jQuery("<span>")
-            .append(jQuery("<i>", {"class": "fa fa-info-circle tooltip", "title": this.getVerticalHeaderTooltip(this.data[i])}))
-            .append("&nbsp;");
+        var content = jQuery("<div>", {"class": "task-board-expanded"})
+        .append(jQuery("<i>", {"class": "fa fa-info-circle tooltip", "title": this.getVerticalHeaderTooltip(this.data[i])}))
+        .append("&nbsp;");
 
         if (this.data[i].type == "task") {
+            if (1 == $(this.options.container).data("taskmodification")) {
+                content.append(this.getDropdownMenu(this.data[i]));
+            }
             content.append(jQuery("<a>", {"href": this.data[i].link, "target": "_blank", "title": this.data[i].title}).append(this.data[i].title));
         }
         else {
@@ -216,6 +219,40 @@ Gantt.prototype.addBlocks = function(slider, start) {
         jQuery(rows[rowIdx]).append(block);
         rowIdx = rowIdx + 1;
     }
+};
+
+//Get dropdown menu for a task
+Gantt.prototype.getDropdownMenu = function(task) {
+    var taskId = task['id'];
+    var menuList = jQuery("<ul>")
+        .append(this.getDropdownMenuElement('fa-user', 'url-change-assignee', taskId, 'label-change-assignee'))
+        .append(this.getDropdownMenuElement('fa-tag', 'url-change-category', taskId, 'label-change-category'))
+        .append(this.getDropdownMenuElement('fa-align-left', 'url-change-description', taskId, 'label-change-description'))
+        .append(this.getDropdownMenuElement('fa-pencil-square-o', 'url-edit-task', taskId, 'label-edit-task'))
+        .append(this.getDropdownMenuElement('fa-comment-o', 'url-add-comment', taskId, 'label-add-comment'))
+        .append(this.getDropdownMenuElement('fa-code-fork', 'url-add-link', taskId, 'label-add-link'))
+        .append(this.getDropdownMenuElement('fa-camera', 'url-add-screenshot', taskId, 'label-add-screenshot'));
+    if (1 == task['is_active']) {
+        menuList.append(this.getDropdownMenuElement('fa-close', 'url-close', taskId, 'label-close'));
+    }
+    else {
+        menuList.append(this.getDropdownMenuElement('fa-check-square-o', 'url-open', taskId, 'label-open'));
+    }
+    var content = jQuery("<span>", {"class": "dropdown"});
+    content.append(jQuery("<a>", {"href": "#", "class": "dropdown-menu"}).append("#"+taskId));
+    content.append(menuList);
+    content.append("&nbsp;");
+    return content;
+};
+
+Gantt.prototype.getDropdownMenuElement = function(iClass, url, taskId, label) {
+    return jQuery("<li>")
+        .append(jQuery("<i>", {"class": "fa "+iClass+" fa-fw"}))
+        .append("&nbsp;")
+        .append(jQuery("<a>", {"href": $(this.options.container).data(url)+"&task_id="+taskId, "class": "popover"})
+                .append($(this.options.container).data(label))
+                )
+        ;
 };
 
 // Get tooltip for vertical header

@@ -36,26 +36,21 @@ class Tasklink extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
+        $redirect = $this->request->getStringParam('redirect', 'task');
 
-        if ($ajax && empty($errors)) {
-            $this->response->html($this->template->render('tasklink/create', array(
-                'values' => $values,
-                'errors' => $errors,
-                'task' => $task,
-                'labels' => $this->link->getList(0, false),
-                'title' => t('Add a new link'),
-                'ajax' => $ajax,
-            )));
-        }
-
-        $this->response->html($this->taskLayout('tasklink/create', array(
+        $params = array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
             'labels' => $this->link->getList(0, false),
-            'title' => t('Add a new link')
-        )));
+            'title' => t('Add a new link'),
+            'redirect' => $redirect,
+        );
+
+        if ($this->request->isAjax()) {
+            $this->response->html($this->template->render('tasklink/create', $params));
+        }
+        $this->response->html($this->taskLayout('tasklink/create', $params));
     }
 
     /**
@@ -67,7 +62,6 @@ class Tasklink extends Base
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
         list($valid, $errors) = $this->taskLinkValidator->validateCreation($values);
 
@@ -75,11 +69,11 @@ class Tasklink extends Base
             if ($this->taskLink->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->flash->success(t('Link added successfully.'));
 
-                if ($ajax) {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                }
-
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+                $this->redirect(
+                    $task,
+                    $this->request->getStringParam('redirect', 'task'),
+                    'links'
+                );
             }
 
             $errors = array('title' => array(t('The exact same link already exists')));

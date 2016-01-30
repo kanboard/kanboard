@@ -12,10 +12,15 @@
             <th><?= $paginator->order(t('Subtask'), 'title') ?></th>
             <th class="column-20"><?= t('Time tracking') ?></th>
         </tr>
+        <?php $taskmodificationEdit = array(); ?>
         <?php foreach ($paginator->getCollection() as $subtask): ?>
         <tr>
             <td class="task-table color-<?= $subtask['color_id'] ?>">
-                <?= $this->url->link('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
+                <?php if ((isset($taskmodificationEdit[$subtask['project_id']]) && $taskmodificationEdit[$subtask['project_id']]) || ($taskmodificationEdit[$subtask['project_id']] = $this->user->hasProjectAccess('taskmodification', 'edit', $subtask['project_id']))): ?>
+                    <?= $this->render('board/task_menu', array('task' => array('id' => $subtask['task_id'], 'project_id' => $subtask['project_id'], 'is_active' => $subtask['is_active']), 'redirect' => 'app')) ?>
+                <?php else: ?>
+                    <?= $this->url->link('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
+                <?php endif ?>
             </td>
             <td>
                 <?= $this->url->link($this->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>

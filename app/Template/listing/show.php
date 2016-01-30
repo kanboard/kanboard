@@ -21,7 +21,11 @@
             <?php foreach ($paginator->getCollection() as $task): ?>
             <tr>
                 <td class="task-table color-<?= $task['color_id'] ?>">
-                    <?= $this->url->link('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+                    <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+                        <?= $this->render('board/task_menu', array('task' => $task, 'redirect' => 'listing')) ?>
+                    <?php else: ?>
+                        <?= $this->url->link('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+                    <?php endif ?>
                 </td>
                 <td>
                     <?= $this->e($task['swimlane_name'] ?: $task['default_swimlane']) ?>
