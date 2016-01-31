@@ -118,7 +118,7 @@ class Task extends Base
         return $html;
     }
 
-    public function selectTimeEstimate(array $values, array $errors = array(), array $attributes = array())
+    public function selectTimeEstimated(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="9"'), $attributes);
 

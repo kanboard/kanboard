@@ -53,7 +53,7 @@
         <?= $this->task->selectColumn($columns_list, $values, $errors) ?>
         <?= $this->task->selectPriority($project, $values) ?>
         <?= $this->task->selectScore($values, $errors) ?>
-        <?= $this->task->selectTimeEstimate($values, $errors) ?>
+        <?= $this->task->selectTimeEstimated($values, $errors) ?>
         <?= $this->task->selectDueDate($values, $errors) ?>
     </div>
 
