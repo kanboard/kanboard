@@ -42,5 +42,4 @@
     'comments' => $comments,
     'project' => $project,
     'editable' => $this->user->hasProjectAccess('comment', 'edit', $project['id']),
-    'ajax' => $ajax,
 )) ?>

@@ -57,6 +57,7 @@ Popover.prototype.afterOpen = function() {
     var self = this;
     var popoverForm = $(".popover-form");
 
+    // Submit forms with Ajax request
     if (popoverForm) {
         popoverForm.on("submit", function(e) {
             e.preventDefault();
@@ -66,18 +67,35 @@ Popover.prototype.afterOpen = function() {
                 url: popoverForm.attr("action"),
                 data: popoverForm.serialize(),
                 success: function(data, textStatus, request) {
-                    var redirect = request.getResponseHeader("X-Ajax-Redirect");
-
-                    if (redirect) {
-                        window.location = redirect === 'self' ? window.location.href : redirect;
-                    }
-                    else {
-                        $("#popover-content").html(data);
-                        $("input[autofocus]").focus();
-                        self.afterOpen();
-                    }
+                    self.afterSubmit(data, request, self);
                 }
             });
         });
+    }
+
+    // Submit link with Ajax request
+    $(document).on("click", ".popover-link", function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "GET",
+            url: $(this).attr("href"),
+            success: function(data, textStatus, request) {
+                self.afterSubmit(data, request, self);
+            }
+        });
+    });
+};
+
+Popover.prototype.afterSubmit = function(data, request, self) {
+    var redirect = request.getResponseHeader("X-Ajax-Redirect");
+
+    if (redirect) {
+        window.location = redirect === 'self' ? window.location.href : redirect;
+    }
+    else {
+        $("#popover-content").html(data);
+        $("input[autofocus]").focus();
+        self.afterOpen();
     }
 };

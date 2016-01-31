@@ -18,22 +18,18 @@ class Taskcreation extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $method = $this->request->isAjax() ? 'render' : 'layout';
         $swimlanes_list = $this->swimlane->getList($project['id'], false, true);
 
         if (empty($values)) {
             $values = array(
                 'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
                 'column_id' => $this->request->getIntegerParam('column_id'),
-                'color_id' => $this->request->getStringParam('color_id', $this->color->getDefaultColor()),
-                'owner_id' => $this->request->getIntegerParam('owner_id'),
-                'another_task' => $this->request->getIntegerParam('another_task'),
+                'color_id' => $this->color->getDefaultColor(),
             );
         }
 
-        $this->response->html($this->template->$method('task_creation/form', array(
+        $this->response->html($this->template->render('task_creation/form', array(
             'project' => $project,
-            'ajax' => $this->request->isAjax(),
             'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
             'columns_list' => $this->board->getColumnsList($project['id']),
@@ -61,25 +57,26 @@ class Taskcreation extends Base
 
         if ($valid && $this->taskCreation->create($values)) {
             $this->flash->success(t('Task created successfully.'));
-            $this->afterSave($project, $values);
-        } else {
-            $this->flash->failure(t('Unable to create your task.'));
+            return $this->afterSave($project, $values);
         }
 
+        $this->flash->failure(t('Unable to create your task.'));
         $this->create($values, $errors);
     }
 
     private function afterSave(array $project, array &$values)
     {
         if (isset($values['another_task']) && $values['another_task'] == 1) {
-            unset($values['title']);
-            unset($values['description']);
-
-            if (! $this->request->isAjax()) {
-                $this->response->redirect($this->helper->url->to('taskcreation', 'create', $values));
-            }
-        } else {
-            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])));
+            return $this->create(array(
+                'owner_id' => $values['owner_id'],
+                'color_id' => $values['color_id'],
+                'category_id' => $values['category_id'],
+                'column_id' => $values['column_id'],
+                'swimlane_id' => isset($values['swimlane_id']) ? $values['swimlane_id'] : 0,
+                'another_task' => 1,
+            ));
         }
+
+        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])));
     }
 }

@@ -21,6 +21,7 @@ New features:
 Improvements:
 
 * Show progress for task links in board tooltips
+* Simplify code to handle ajax popover and redirects
 
 Version 1.0.24
 --------------

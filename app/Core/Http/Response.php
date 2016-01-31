@@ -72,7 +72,7 @@ class Response extends Base
      */
     public function redirect($url, $self = false)
     {
-        if ($this->request->getServerVariable('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest') {
+        if ($this->request->isAjax()) {
             header('X-Ajax-Redirect: '.($self ? 'self' : $url));
         } else {
             header('Location: '.$url);

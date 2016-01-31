@@ -22,7 +22,7 @@ class Tasklink extends Base
         $link = $this->taskLink->getById($this->request->getIntegerParam('link_id'));
 
         if (empty($link)) {
-            $this->notfound();
+            return $this->notfound();
         }
 
         return $link;
@@ -74,19 +74,13 @@ class Tasklink extends Base
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
         list($valid, $errors) = $this->taskLinkValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->taskLink->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->flash->success(t('Link added successfully.'));
-
-                if ($ajax) {
-                    return $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                }
-
-                return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+                return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links', true);
             }
 
             $errors = array('title' => array(t('The exact same link already exists')));

@@ -48,41 +48,44 @@ class Taskmodification extends Base
      *
      * @access public
      */
-    public function description()
+    public function description(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
-        if ($this->request->isPost()) {
-            $values = $this->request->getValues();
-
-            list($valid, $errors) = $this->taskValidator->validateDescriptionCreation($values);
-
-            if ($valid) {
-                if ($this->taskModification->update($values)) {
-                    $this->flash->success(t('Task updated successfully.'));
-                } else {
-                    $this->flash->failure(t('Unable to update your task.'));
-                }
-
-                if ($ajax) {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                } else {
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-                }
-            }
-        } else {
-            $values = $task;
-            $errors = array();
+        if (empty($values)) {
+            $values = array('id' => $task['id'], 'description' => $task['description']);
         }
 
-        $params = array(
+        $this->response->html($this->taskLayout('task_modification/edit_description', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-        );
+        )));
+    }
 
-        $this->response->html($this->taskLayout('task_modification/edit_description', $params));
+    /**
+     * Update description
+     *
+     * @access public
+     */
+    public function updateDescription()
+    {
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+
+        list($valid, $errors) = $this->taskValidator->validateDescriptionCreation($values);
+
+        if ($valid) {
+            if ($this->taskModification->update($values)) {
+                $this->flash->success(t('Task updated successfully.'));
+            } else {
+                $this->flash->failure(t('Unable to update your task.'));
+            }
+
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+        }
+
+        $this->description($values, $errors);
     }
 
     /**
@@ -94,7 +97,6 @@ class Taskmodification extends Base
     {
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
-        $ajax = $this->request->isAjax();
 
         if (empty($values)) {
             $values = $task;
@@ -102,7 +104,7 @@ class Taskmodification extends Base
 
         $this->dateParser->format($values, array('date_due'));
 
-        $params = array(
+        $this->response->html($this->taskLayout('task_modification/edit_task', array(
             'project' => $project,
             'values' => $values,
             'errors' => $errors,
@@ -112,16 +114,7 @@ class Taskmodification extends Base
             'categories_list' => $this->category->getList($task['project_id']),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
-            'ajax' => $ajax,
-        );
-
-        if ($ajax) {
-            $html = $this->template->render('task_modification/edit_task', $params);
-        } else {
-            $html = $this->taskLayout('task_modification/edit_task', $params);
-        }
-
-        $this->response->html($html);
+        )));
     }
 
     /**
@@ -138,12 +131,7 @@ class Taskmodification extends Base
 
         if ($valid && $this->taskModification->update($values)) {
             $this->flash->success(t('Task updated successfully.'));
-
-            if ($this->request->isAjax()) {
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            } else {
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-            }
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         } else {
             $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);

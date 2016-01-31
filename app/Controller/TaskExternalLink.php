@@ -137,7 +137,7 @@ class TaskExternalLink extends Base
 
         if ($valid && $this->taskExternalLink->update($values)) {
             $this->flash->success(t('Link updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('TaskExternalLink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+            return $this->response->redirect($this->helper->url->to('TaskExternalLink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
         $this->edit($values, $errors);

@@ -1,16 +1,8 @@
-<?php if (! $ajax): ?>
-<div class="page-header">
-    <ul>
-        <li><i class="fa fa-th fa-fw"></i><?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $values['project_id'])) ?></li>
-    </ul>
-</div>
-<?php else: ?>
 <div class="page-header">
     <h2><?= t('New task') ?></h2>
 </div>
-<?php endif ?>
 
-<form id="task-form" class="popover-form" method="post" action="<?= $this->url->href('taskcreation', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('taskcreation', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

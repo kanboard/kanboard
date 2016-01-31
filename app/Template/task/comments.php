@@ -29,7 +29,6 @@
             ),
             'errors' => array(),
             'task' => $task,
-            'ajax' => $ajax,
         )) ?>
     <?php endif ?>
 </div>
