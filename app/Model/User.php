@@ -265,7 +265,7 @@ class User extends Base
      *
      * @access public
      * @param  array  $values  Form values
-     * @return array
+     * @return boolean
      */
     public function update(array $values)
     {

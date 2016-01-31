@@ -55,22 +55,25 @@ Popover.prototype.listen = function() {
 
 Popover.prototype.afterOpen = function() {
     var self = this;
-    var taskForm = $("#task-form");
+    var popoverForm = $(".popover-form");
 
-    if (taskForm) {
-        taskForm.on("submit", function(e) {
+    if (popoverForm) {
+        popoverForm.on("submit", function(e) {
             e.preventDefault();
 
             $.ajax({
                 type: "POST",
-                url: taskForm.attr("action"),
-                data: taskForm.serialize(),
+                url: popoverForm.attr("action"),
+                data: popoverForm.serialize(),
                 success: function(data, textStatus, request) {
-                    if (request.getResponseHeader("X-Ajax-Redirect")) {
-                        window.location = request.getResponseHeader("X-Ajax-Redirect");
+                    var redirect = request.getResponseHeader("X-Ajax-Redirect");
+
+                    if (redirect) {
+                        window.location = redirect === 'self' ? window.location.href : redirect;
                     }
                     else {
                         $("#popover-content").html(data);
+                        $("input[autofocus]").focus();
                         self.afterOpen();
                     }
                 }

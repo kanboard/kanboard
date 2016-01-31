@@ -6,7 +6,25 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 95;
+const VERSION = 96;
+
+function version_96(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_external_links (
+            id INTEGER PRIMARY KEY,
+            link_type TEXT NOT NULL,
+            dependency TEXT NOT NULL,
+            title TEXT NOT NULL,
+            url TEXT NOT NULL,
+            date_creation INTEGER NOT NULL,
+            date_modification INTEGER NOT NULL,
+            task_id INTEGER NOT NULL,
+            creator_id INTEGER DEFAULT 0,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )
+    ");
+}
 
 function version_95(PDO $pdo)
 {

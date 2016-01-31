@@ -35,7 +35,11 @@
     <?php endif ?>
 
     <?php if (! empty($task['nb_links'])): ?>
-        <span title="<?= t('Links') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-code-fork"></i>&nbsp;<?= $task['nb_links'] ?></span>
+        <span title="<?= t('Links') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'tasklinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-code-fork fa-fw"></i><?= $task['nb_links'] ?></span>
+    <?php endif ?>
+
+    <?php if (! empty($task['nb_external_links'])): ?>
+        <span title="<?= t('External links') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'externallinks', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-external-link fa-fw"></i><?= $task['nb_external_links'] ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['nb_subtasks'])): ?>

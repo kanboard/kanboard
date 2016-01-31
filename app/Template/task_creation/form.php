@@ -10,7 +10,7 @@
 </div>
 <?php endif ?>
 
-<form id="task-form" method="post" action="<?= $this->url->href('taskcreation', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
+<form id="task-form" class="popover-form" method="post" action="<?= $this->url->href('taskcreation', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

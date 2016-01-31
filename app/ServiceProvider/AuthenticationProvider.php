@@ -89,6 +89,9 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('Taskduplication', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskImport', '*', Role::PROJECT_MANAGER);
         $acl->add('Tasklink', '*', Role::PROJECT_MEMBER);
+        $acl->add('Tasklink', array('show'), Role::PROJECT_VIEWER);
+        $acl->add('TaskExternalLink', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskExternalLink', array('show'), Role::PROJECT_VIEWER);
         $acl->add('Taskmodification', '*', Role::PROJECT_MEMBER);
         $acl->add('Taskstatus', '*', Role::PROJECT_MEMBER);
         $acl->add('Timer', '*', Role::PROJECT_MEMBER);

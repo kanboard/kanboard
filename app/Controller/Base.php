@@ -189,9 +189,15 @@ abstract class Base extends \Kanboard\Core\Base
      */
     protected function taskLayout($template, array $params)
     {
+        $params['ajax'] = $this->request->isAjax() || $this->request->getIntegerParam('ajax') === 1;
         $content = $this->template->render($template, $params);
-        $params['task_content_for_layout'] = $content;
+
+        if ($params['ajax']) {
+            return $content;
+        }
+
         $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];
+        $params['task_content_for_layout'] = $content;
         $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
 
         return $this->template->layout('task/layout', $params);
@@ -319,7 +325,8 @@ abstract class Base extends \Kanboard\Core\Base
      * @param  array  &$project
      * @return string
      */
-    protected function getProjectDescription(array &$project) {
+    protected function getProjectDescription(array &$project)
+    {
         if ($project['owner_id'] > 0) {
             $description = t('Project owner: ').'**'.$this->template->e($project['owner_name'] ?: $project['owner_username']).'**'.PHP_EOL.PHP_EOL;
 

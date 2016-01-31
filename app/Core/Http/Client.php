@@ -34,6 +34,19 @@ class Client extends Base
     const HTTP_USER_AGENT = 'Kanboard';
 
     /**
+     * Send a GET HTTP request
+     *
+     * @access public
+     * @param  string     $url
+     * @param  string[]   $headers
+     * @return string
+     */
+    public function get($url, array $headers = array())
+    {
+        return $this->doRequest('GET', $url, '', $headers);
+    }
+
+    /**
      * Send a GET HTTP request and parse JSON response
      *
      * @access public

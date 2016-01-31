@@ -41,22 +41,12 @@ class Comment extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
         if (empty($values)) {
             $values = array(
                 'user_id' => $this->userSession->getId(),
                 'task_id' => $task['id'],
             );
-        }
-
-        if ($ajax) {
-            $this->response->html($this->template->render('comment/create', array(
-                'values' => $values,
-                'errors' => $errors,
-                'task' => $task,
-                'ajax' => $ajax,
-            )));
         }
 
         $this->response->html($this->taskLayout('comment/create', array(

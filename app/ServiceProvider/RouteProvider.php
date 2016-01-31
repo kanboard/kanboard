@@ -106,10 +106,17 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/task/:task_id/screenshot', 'file', 'screenshot');
             $container['route']->addRoute('project/:project_id/task/:task_id/upload', 'file', 'create');
             $container['route']->addRoute('project/:project_id/task/:task_id/comment', 'comment', 'create');
+            $container['route']->addRoute('project/:project_id/task/:task_id/links', 'tasklink', 'show');
             $container['route']->addRoute('project/:project_id/task/:task_id/link', 'tasklink', 'create');
             $container['route']->addRoute('project/:project_id/task/:task_id/transitions', 'task', 'transitions');
             $container['route']->addRoute('project/:project_id/task/:task_id/analytics', 'task', 'analytics');
             $container['route']->addRoute('project/:project_id/task/:task_id/remove', 'task', 'remove');
+
+            $container['route']->addRoute('project/:project_id/task/:task_id/links/external', 'TaskExternalLink', 'show');
+            $container['route']->addRoute('project/:project_id/task/:task_id/link/external/new', 'TaskExternalLink', 'find');
+            $container['route']->addRoute('project/:project_id/task/:task_id/link/external/save', 'TaskExternalLink', 'create');
+            $container['route']->addRoute('project/:project_id/task/:task_id/link/external/:link_id', 'TaskExternalLink', 'edit');
+            $container['route']->addRoute('project/:project_id/task/:task_id/link/external/:link_id/remove', 'TaskExternalLink', 'confirm');
 
             $container['route']->addRoute('project/:project_id/task/:task_id/edit', 'taskmodification', 'edit');
             $container['route']->addRoute('project/:project_id/task/:task_id/description', 'taskmodification', 'description');

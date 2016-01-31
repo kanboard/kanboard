@@ -16,6 +16,7 @@ use Pimple\Container;
  * @property \Kanboard\Analytic\AverageLeadCycleTimeAnalytic            $averageLeadCycleTimeAnalytic
  * @property \Kanboard\Analytic\AverageTimeSpentColumnAnalytic          $averageTimeSpentColumnAnalytic
  * @property \Kanboard\Core\Action\ActionManager                        $actionManager
+ * @property \Kanboard\Core\ExternalLink\ExternalLinkManager            $externalLinkManager
  * @property \Kanboard\Core\Cache\MemoryCache                           $memoryCache
  * @property \Kanboard\Core\Event\EventManager                          $eventManager
  * @property \Kanboard\Core\Group\GroupManager                          $groupManager
@@ -97,6 +98,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskCreation                               $taskCreation
  * @property \Kanboard\Model\TaskDuplication                            $taskDuplication
  * @property \Kanboard\Model\TaskExport                                 $taskExport
+ * @property \Kanboard\Model\TaskExternalLink                           $taskExternalLink
  * @property \Kanboard\Model\TaskImport                                 $taskImport
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder
  * @property \Kanboard\Model\TaskFilter                                 $taskFilter
@@ -132,6 +134,7 @@ use Pimple\Container;
  * @property \Kanboard\Validator\SubtaskValidator                       $subtaskValidator
  * @property \Kanboard\Validator\SwimlaneValidator                      $swimlaneValidator
  * @property \Kanboard\Validator\TaskLinkValidator                      $taskLinkValidator
+ * @property \Kanboard\Validator\TaskExternalLinkValidator              $taskExternalLinkValidator
  * @property \Kanboard\Validator\TaskValidator                          $taskValidator
  * @property \Kanboard\Validator\UserValidator                          $userValidator
  * @property \Psr\Log\LoggerInterface                                   $logger

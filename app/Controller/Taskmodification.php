@@ -80,14 +80,9 @@ class Taskmodification extends Base
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'ajax' => $ajax,
         );
 
-        if ($ajax) {
-            $this->response->html($this->template->render('task_modification/edit_description', $params));
-        } else {
-            $this->response->html($this->taskLayout('task_modification/edit_description', $params));
-        }
+        $this->response->html($this->taskLayout('task_modification/edit_description', $params));
     }
 
     /**

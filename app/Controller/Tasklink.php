@@ -29,6 +29,25 @@ class Tasklink extends Base
     }
 
     /**
+     * Show links
+     *
+     * @access public
+     */
+    public function show()
+    {
+        $task = $this->getTask();
+        $project = $this->project->getById($task['project_id']);
+
+        $this->response->html($this->taskLayout('tasklink/show', array(
+            'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
+            'task' => $task,
+            'project' => $project,
+            'editable' => true,
+            'is_public' => false,
+        )));
+    }
+
+    /**
      * Creation form
      *
      * @access public
@@ -36,18 +55,6 @@ class Tasklink extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
-
-        if ($ajax && empty($errors)) {
-            $this->response->html($this->template->render('tasklink/create', array(
-                'values' => $values,
-                'errors' => $errors,
-                'task' => $task,
-                'labels' => $this->link->getList(0, false),
-                'title' => t('Add a new link'),
-                'ajax' => $ajax,
-            )));
-        }
 
         $this->response->html($this->taskLayout('tasklink/create', array(
             'values' => $values,
@@ -76,10 +83,10 @@ class Tasklink extends Base
                 $this->flash->success(t('Link added successfully.'));
 
                 if ($ajax) {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+                    return $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
                 }
 
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+                return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
             }
 
             $errors = array('title' => array(t('The exact same link already exists')));
@@ -130,7 +137,7 @@ class Tasklink extends Base
         if ($valid) {
             if ($this->taskLink->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->flash->success(t('Link updated successfully.'));
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+                return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
             }
 
             $this->flash->failure(t('Unable to update your link.'));

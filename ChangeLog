@@ -10,6 +10,7 @@ Breaking changes:
 
 New features:
 
+* Add external links for tasks with plugin api
 * Add project owner (Directly Responsible Individual)
 * Add configurable task priority
 * Add Greek translation
