@@ -43,10 +43,12 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('search', 'search', 'index');
             $container['route']->addRoute('search/:search', 'search', 'index');
 
+            // ProjectCreation routes
+            $container['route']->addRoute('project/create', 'ProjectCreation', 'create');
+            $container['route']->addRoute('project/create/private', 'ProjectCreation', 'createPrivate');
+
             // Project routes
             $container['route']->addRoute('projects', 'project', 'index');
-            $container['route']->addRoute('project/create', 'project', 'create');
-            $container['route']->addRoute('project/create/private', 'project', 'createPrivate');
             $container['route']->addRoute('project/:project_id', 'project', 'show');
             $container['route']->addRoute('p/:project_id', 'project', 'show');
             $container['route']->addRoute('project/:project_id/customer-filter', 'customfilter', 'index');

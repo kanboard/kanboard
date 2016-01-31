@@ -109,7 +109,7 @@ class Taskduplication extends Base
     private function chooseDestination(array $task, $template)
     {
         $values = array();
-        $projects_list = $this->projectUserRole->getProjectsByUser($this->userSession->getId(), array(ProjectModel::ACTIVE));
+        $projects_list = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 

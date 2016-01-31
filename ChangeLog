@@ -10,6 +10,7 @@ Breaking changes:
 
 New features:
 
+* When creating a new project, have the possibility to select another project to duplicate
 * Add a "Me" button to assignee form element
 * Add external links for tasks with plugin api
 * Add project owner (Directly Responsible Individual)

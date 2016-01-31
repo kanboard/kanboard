@@ -120,8 +120,6 @@ class ExternalLinkManager extends Base
      */
     public function find()
     {
-        $provider = null;
-
         if ($this->userInputType === self::TYPE_AUTO) {
             $provider = $this->findProvider();
         } else {

@@ -171,14 +171,15 @@ class Project extends Base
         $project = $this->getProject();
 
         if ($this->request->getStringParam('duplicate') === 'yes') {
-            $values = array_keys($this->request->getValues());
-            if ($this->projectDuplication->duplicate($project['id'], $values) !== false) {
+            $project_id = $this->projectDuplication->duplicate($project['id'], array_keys($this->request->getValues()), $this->userSession->getId());
+
+            if ($project_id !== false) {
                 $this->flash->success(t('Project cloned successfully.'));
             } else {
                 $this->flash->failure(t('Unable to clone this project.'));
             }
 
-            $this->response->redirect($this->helper->url->to('project', 'index'));
+            $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
         }
 
         $this->response->html($this->projectLayout('project/duplicate', array(
@@ -239,58 +240,5 @@ class Project extends Base
             'project' => $project,
             'title' => t('Project activation')
         )));
-    }
-
-    /**
-     * Display a form to create a new project
-     *
-     * @access public
-     */
-    public function create(array $values = array(), array $errors = array())
-    {
-        $is_private = isset($values['is_private']) && $values['is_private'] == 1;
-
-        $this->response->html($this->template->layout('project/new', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
-            'values' => $values,
-            'errors' => $errors,
-            'is_private' => $is_private,
-            'title' => $is_private ? t('New private project') : t('New project'),
-        )));
-    }
-
-    /**
-     * Display a form to create a private project
-     *
-     * @access public
-     */
-    public function createPrivate(array $values = array(), array $errors = array())
-    {
-        $values['is_private'] = 1;
-        $this->create($values, $errors);
-    }
-
-    /**
-     * Validate and save a new project
-     *
-     * @access public
-     */
-    public function save()
-    {
-        $values = $this->request->getValues();
-        list($valid, $errors) = $this->projectValidator->validateCreation($values);
-
-        if ($valid) {
-            $project_id = $this->project->create($values, $this->userSession->getId(), true);
-
-            if ($project_id > 0) {
-                $this->flash->success(t('Your project have been created successfully.'));
-                $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
-            }
-
-            $this->flash->failure(t('Unable to create your project.'));
-        }
-
-        $this->create($values, $errors);
     }
 }

@@ -36,8 +36,8 @@ class UserHelperTest extends Base
         );
 
         $this->assertTrue($helper->hasAccess('user', 'create'));
-        $this->assertTrue($helper->hasAccess('project', 'create'));
-        $this->assertTrue($helper->hasAccess('project', 'createPrivate'));
+        $this->assertTrue($helper->hasAccess('ProjectCreation', 'create'));
+        $this->assertTrue($helper->hasAccess('ProjectCreation', 'createPrivate'));
     }
 
     public function testHasAccessForManagers()
@@ -50,8 +50,8 @@ class UserHelperTest extends Base
         );
 
         $this->assertFalse($helper->hasAccess('user', 'create'));
-        $this->assertTrue($helper->hasAccess('project', 'create'));
-        $this->assertTrue($helper->hasAccess('project', 'createPrivate'));
+        $this->assertTrue($helper->hasAccess('ProjectCreation', 'create'));
+        $this->assertTrue($helper->hasAccess('ProjectCreation', 'createPrivate'));
     }
 
     public function testHasAccessForUsers()
@@ -64,8 +64,8 @@ class UserHelperTest extends Base
         );
 
         $this->assertFalse($helper->hasAccess('user', 'create'));
-        $this->assertFalse($helper->hasAccess('project', 'create'));
-        $this->assertTrue($helper->hasAccess('project', 'createPrivate'));
+        $this->assertFalse($helper->hasAccess('ProjectCreation', 'create'));
+        $this->assertTrue($helper->hasAccess('ProjectCreation', 'createPrivate'));
     }
 
     public function testHasProjectAccessForAdmins()

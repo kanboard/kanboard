@@ -180,6 +180,23 @@ class TaskFinder extends Base
     }
 
     /**
+     * Get all tasks for a given project and status
+     *
+     * @access public
+     * @param  integer   $project_id
+     * @param  array     $status
+     * @return array
+     */
+    public function getAllIds($project_id, array $status = array(Task::STATUS_OPEN))
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->in(Task::TABLE.'.is_active', $status)
+                    ->findAllByColumn('id');
+    }
+
+    /**
      * Get overdue tasks query
      *
      * @access public
