@@ -21,7 +21,8 @@ function version_104(PDO $pdo)
             date_modification INT NOT NULL,
             task_id INT NOT NULL,
             creator_id INT DEFAULT 0,
-            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            PRIMARY KEY(id)
         ) ENGINE=InnoDB CHARSET=utf8
     ");
 }

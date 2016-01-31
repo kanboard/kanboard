@@ -54,50 +54,6 @@ class TaskExternalLinkTest extends Base
         $this->assertEquals(time(), $link['date_creation'], '', 2);
     }
 
-    public function testCreateWithNoType()
-    {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertFalse($taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'http://kanboard.net/', 'title' => 'My website', 'dependency' => 'related')));
-    }
-
-    public function testCreateWithNoDependency()
-    {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertFalse($taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'http://kanboard.net/', 'title' => 'My website', 'link_type' => 'test')));
-    }
-
-    public function testCreateWithNoTitle()
-    {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertFalse($taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'http://kanboard.net/', 'link_type' => 'test', 'dependency' => 'test')));
-    }
-
-    public function testCreateWithNoUrl()
-    {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertFalse($taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'title' => 'test', 'link_type' => 'test', 'dependency' => 'test')));
-    }
-
     public function testModification()
     {
         $projectModel = new Project($this->container);
