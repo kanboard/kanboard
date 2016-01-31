@@ -45,7 +45,7 @@
                     ) ?>
                 <?php endif ?>
 
-                <br/>
+                <br>
 
                 <?php if (! empty($link['task_time_spent'])): ?>
                     <strong><?= $this->e($link['task_time_spent']).'h' ?></strong> <?= t('spent') ?>
