@@ -19,16 +19,6 @@
                 <i class="fa fa-folder fa-fw"></i>
                 <?= $this->url->link(t('Project management'), 'project', 'index') ?>
             </li>
-            <?php if ($this->user->hasAccess('user', 'index')): ?>
-                <li>
-                    <i class="fa fa-user fa-fw"></i>
-                    <?= $this->url->link(t('User management'), 'user', 'index') ?>
-                </li>
-                <li>
-                    <i class="fa fa-cog fa-fw"></i>
-                    <?= $this->url->link(t('Settings'), 'config', 'index') ?>
-                </li>
-            <?php endif ?>
         </ul>
     </div>
     <section class="sidebar-container" id="dashboard">

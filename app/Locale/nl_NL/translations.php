@@ -1125,4 +1125,9 @@ return array(
     // 'There is no internal link for the moment.' => '',
     // 'Assign to me' => '',
     // 'Me' => '',
+    // 'Do not duplicate anything' => '',
+    // 'Projects management' => '',
+    // 'Users management' => '',
+    // 'Groups management' => '',
+    // 'Create from another project' => '',
 );

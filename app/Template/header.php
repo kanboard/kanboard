@@ -54,9 +54,40 @@
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li class="no-hover"><strong><?= $this->e($this->user->getFullname()) ?></strong></li>
-                        <li><?= $this->url->link(t('My dashboard'), 'app', 'index', array('user_id' => $this->user->getId())) ?></li>
-                        <li><?= $this->url->link(t('My profile'), 'user', 'show', array('user_id' => $this->user->getId())) ?></li>
-                        <li><?= $this->url->link(t('Logout'), 'auth', 'logout') ?></li>
+                        <li>
+                            <i class="fa fa-tachometer fa-fw"></i>
+                            <?= $this->url->link(t('My dashboard'), 'app', 'index', array('user_id' => $this->user->getId())) ?>
+                        </li>
+                        <li>
+                            <i class="fa fa-home fa-fw"></i>
+                            <?= $this->url->link(t('My profile'), 'user', 'show', array('user_id' => $this->user->getId())) ?>
+                        </li>
+                        <li>
+                            <i class="fa fa-folder fa-fw"></i>
+                            <?= $this->url->link(t('Projects management'), 'project', 'index') ?>
+                        </li>
+                        <?php if ($this->user->hasAccess('user', 'index')): ?>
+                            <li>
+                                <i class="fa fa-user fa-fw"></i>
+                                <?= $this->url->link(t('Users management'), 'user', 'index') ?>
+                            </li>
+                            <li>
+                                <i class="fa fa-group fa-fw"></i>
+                                <?= $this->url->link(t('Groups management'), 'group', 'index') ?>
+                            </li>
+                            <li>
+                                <i class="fa fa-cog fa-fw"></i>
+                                <?= $this->url->link(t('Settings'), 'config', 'index') ?>
+                            </li>
+                        <?php endif ?>
+                        <li>
+                            <i class="fa fa-life-ring fa-fw"></i>
+                            <?= $this->url->link(t('Documentation'), 'doc', 'show') ?>
+                        </li>
+                        <li>
+                            <i class="fa fa-sign-out fa-fw"></i>
+                            <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
+                        </li>
                     </ul>
                 </div>
             </li>

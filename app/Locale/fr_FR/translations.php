@@ -1128,4 +1128,9 @@ return array(
     'There is no internal link for the moment.' => 'Il n\'y a pas de lien interne pour le moment.',
     'Assign to me' => 'Assigner à moi',
     'Me' => 'Moi',
+    'Do not duplicate anything' => 'Ne rien dupliquer',
+    'Projects management' => 'Gestion des projets',
+    'Users management' => 'Gestion des utilisateurs',
+    'Groups management' => 'Gestion des groupes',
+    'Create from another project' => 'Créer depuis un autre projet',
 );
