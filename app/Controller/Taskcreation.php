@@ -25,6 +25,7 @@ class Taskcreation extends Base
                 'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
                 'column_id' => $this->request->getIntegerParam('column_id'),
                 'color_id' => $this->color->getDefaultColor(),
+                'owner_id' => $this->userSession->getId(),
             );
         }
 
