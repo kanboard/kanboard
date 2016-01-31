@@ -45,6 +45,17 @@ class Task extends Base
         return $this->taskPermission->canRemoveTask($task);
     }
 
+    public function selectAssignee(array $users, array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="3"'), $attributes);
+
+        $html = $this->helper->form->label(t('Assignee'), 'owner_id');
+        $html .= $this->helper->form->select('owner_id', $users, $values, $errors, $attributes);
+        $html .= '<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'">'.t('Me').'</a>';
+
+        return $html;
+    }
+
     public function selectPriority(array $project, array $values)
     {
         $html = '';

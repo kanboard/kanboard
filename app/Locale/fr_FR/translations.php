@@ -1126,4 +1126,6 @@ return array(
     'There is no external link for the moment.' => 'Il n\'y a pas de lien externe pour le moment.',
     'Internal links' => 'Liens internes',
     'There is no internal link for the moment.' => 'Il n\'y a pas de lien interne pour le moment.',
+    'Assign to me' => 'Assigner à moi',
+    'Me' => 'Moi',
 );

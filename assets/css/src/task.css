@@ -329,3 +329,9 @@ div.color-square-selected {
     height: 28px;
     box-shadow: 3px 2px 10px 0 rgba(180,180,180,0.9);
 }
+
+/* Assign to me */
+.assign-me {
+    font-size: 0.8em;
+    vertical-align: bottom;
+}

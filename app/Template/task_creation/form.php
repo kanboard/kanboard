@@ -48,8 +48,7 @@
     <div class="form-column">
         <?= $this->form->hidden('project_id', $values) ?>
 
-        <?= $this->form->label(t('Assignee'), 'owner_id') ?>
-        <?= $this->form->select('owner_id', $users_list, $values, $errors, array('tabindex="3"')) ?>
+        <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
 
         <?= $this->form->label(t('Category'), 'category_id') ?>
         <?= $this->form->select('category_id', $categories_list, $values, $errors, array('tabindex="4"')) ?>

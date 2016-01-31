@@ -1123,4 +1123,6 @@ return array(
     // 'There is no external link for the moment.' => '',
     // 'Internal links' => '',
     // 'There is no internal link for the moment.' => '',
+    // 'Assign to me' => '',
+    // 'Me' => '',
 );
