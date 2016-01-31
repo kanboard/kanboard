@@ -47,31 +47,14 @@
 
     <div class="form-column">
         <?= $this->form->hidden('project_id', $values) ?>
-
         <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
-
-        <?= $this->form->label(t('Category'), 'category_id') ?>
-        <?= $this->form->select('category_id', $categories_list, $values, $errors, array('tabindex="4"')) ?>
-
-        <?php if (! (count($swimlanes_list) === 1 && key($swimlanes_list) === 0)): ?>
-        <?= $this->form->label(t('Swimlane'), 'swimlane_id') ?>
-        <?= $this->form->select('swimlane_id', $swimlanes_list, $values, $errors, array('tabindex="5"')) ?>
-        <?php endif ?>
-
-        <?= $this->form->label(t('Column'), 'column_id') ?>
-        <?= $this->form->select('column_id', $columns_list, $values, $errors, array('tabindex="6"')) ?>
-
+        <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
+        <?= $this->task->selectSwimlane($swimlanes_list, $values, $errors) ?>
+        <?= $this->task->selectColumn($columns_list, $values, $errors) ?>
         <?= $this->task->selectPriority($project, $values) ?>
-
-        <?= $this->form->label(t('Complexity'), 'score') ?>
-        <?= $this->form->number('score', $values, $errors, array('tabindex="9"')) ?>
-
-        <?= $this->form->label(t('Original estimate'), 'time_estimated') ?>
-        <?= $this->form->numeric('time_estimated', $values, $errors, array('tabindex="10"')) ?> <?= t('hours') ?>
-
-        <?= $this->form->label(t('Due Date'), 'date_due') ?>
-        <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="11"'), 'form-date') ?>
-        <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
+        <?= $this->task->selectScore($values, $errors) ?>
+        <?= $this->task->selectTimeEstimate($values, $errors) ?>
+        <?= $this->task->selectDueDate($values, $errors) ?>
     </div>
 
     <div class="form-actions">

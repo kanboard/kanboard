@@ -38,8 +38,6 @@ class Taskcreation extends Base
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'swimlanes_list' => $swimlanes_list,
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $project['name'].' &gt; '.t('New task')
         )));
     }

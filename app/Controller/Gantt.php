@@ -103,6 +103,7 @@ class Gantt extends Base
         $project = $this->getProject();
 
         $this->response->html($this->template->render('gantt/task_creation', array(
+            'project' => $project,
             'errors' => $errors,
             'values' => $values + array(
                 'project_id' => $project['id'],
@@ -113,8 +114,6 @@ class Gantt extends Base
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'swimlanes_list' => $this->swimlane->getList($project['id'], false, true),
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $project['name'].' &gt; '.t('New task')
         )));
     }
