@@ -2,7 +2,7 @@
     <div class="page-header">
         <h2><?= $title ?></h2>
     </div>
-    <form class="form-popover" id="project-creation-form" method="post" action="<?= $this->url->href('ProjectCreation', 'save') ?>" autocomplete="off">
+    <form class="popover-form" id="project-creation-form" method="post" action="<?= $this->url->href('ProjectCreation', 'save') ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
         <?= $this->form->hidden('is_private', $values) ?>
@@ -30,6 +30,8 @@
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
+            <?= t('or') ?>
+            <?= $this->url->link(t('cancel'), 'project', 'index', array(), false, 'close-popover') ?>
         </div>
     </form>
     <?php if ($is_private): ?>
