@@ -189,10 +189,9 @@ abstract class Base extends \Kanboard\Core\Base
      */
     protected function taskLayout($template, array $params)
     {
-        $params['ajax'] = $this->request->isAjax();
         $content = $this->template->render($template, $params);
 
-        if ($params['ajax']) {
+        if ($this->request->isAjax()) {
             return $content;
         }
 

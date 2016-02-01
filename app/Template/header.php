@@ -42,10 +42,10 @@
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-plus fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <?php if ($this->user->hasAccess('ProjectCreation', 'create')): ?>
-                            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'ProjectCreation', 'create') ?></li>
+                            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?></li>
                         <?php endif ?>
                         <li>
-                            <i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'ProjectCreation', 'createPrivate') ?>
+                            <i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
                         </li>
                     </ul>
                 </div>

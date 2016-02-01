@@ -4,12 +4,12 @@
             <?php if ($this->user->hasAccess('ProjectCreation', 'create')): ?>
                 <li>
                     <i class="fa fa-plus fa-fw"></i>
-                    <?= $this->url->link(t('New project'), 'ProjectCreation', 'create') ?>
+                    <?= $this->url->link(t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?>
                 </li>
             <?php endif ?>
             <li>
                 <i class="fa fa-lock fa-fw"></i>
-                <?= $this->url->link(t('New private project'), 'ProjectCreation', 'createPrivate') ?>
+                <?= $this->url->link(t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
             </li>
             <li>
                 <i class="fa fa-search fa-fw"></i>

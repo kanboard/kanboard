@@ -20,8 +20,7 @@ class ProjectCreation extends Base
         $is_private = isset($values['is_private']) && $values['is_private'] == 1;
         $projects_list = array(0 => t('Do not duplicate anything')) + $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
 
-        $this->response->html($this->template->layout('project_creation/create', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+        $this->response->html($this->helper->layout->app('project_creation/create', array(
             'values' => $values,
             'errors' => $errors,
             'is_private' => $is_private,
