@@ -27,7 +27,7 @@ class Export extends Base
             $this->response->csv($data);
         }
 
-        $this->response->html($this->projectLayout('export/'.$action, array(
+        $this->response->html($this->helper->layout->project('export/'.$action, array(
             'values' => array(
                 'controller' => 'export',
                 'action' => $action,

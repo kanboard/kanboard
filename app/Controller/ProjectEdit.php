@@ -114,7 +114,7 @@ class ProjectEdit extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout($template, array(
+        $this->response->html($this->helper->layout->project($template, array(
             'owners' => $this->projectUserRole->getAssignableUsersList($project['id'], true),
             'values' => empty($values) ? $project : $values,
             'errors' => $errors,

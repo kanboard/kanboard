@@ -32,8 +32,7 @@ class Project extends Base
             ->setQuery($this->project->getQueryColumnStats($project_ids))
             ->calculate();
 
-        $this->response->html($this->template->layout('project/index', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+        $this->response->html($this->helper->layout->app('project/index', array(
             'paginator' => $paginator,
             'nb_projects' => $nb_projects,
             'title' => t('Projects').' ('.$nb_projects.')'
@@ -49,7 +48,7 @@ class Project extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('project/show', array(
+        $this->response->html($this->helper->layout->project('project/show', array(
             'project' => $project,
             'stats' => $this->project->getTaskStats($project['id']),
             'title' => $project['name'],
@@ -78,7 +77,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'share', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/share', array(
+        $this->response->html($this->helper->layout->project('project/share', array(
             'project' => $project,
             'title' => t('Public access'),
         )));
@@ -99,7 +98,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'integrations', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/integrations', array(
+        $this->response->html($this->helper->layout->project('project/integrations', array(
             'project' => $project,
             'title' => t('Integrations'),
             'webhook_token' => $this->config->get('webhook_token'),
@@ -124,7 +123,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'notifications', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/notifications', array(
+        $this->response->html($this->helper->layout->project('project/notifications', array(
             'notifications' => $this->projectNotification->readSettings($project['id']),
             'types' => $this->projectNotificationType->getTypes(),
             'project' => $project,
@@ -153,7 +152,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'index'));
         }
 
-        $this->response->html($this->projectLayout('project/remove', array(
+        $this->response->html($this->helper->layout->project('project/remove', array(
             'project' => $project,
             'title' => t('Remove project')
         )));
@@ -182,7 +181,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
         }
 
-        $this->response->html($this->projectLayout('project/duplicate', array(
+        $this->response->html($this->helper->layout->project('project/duplicate', array(
             'project' => $project,
             'title' => t('Clone this project')
         )));
@@ -209,7 +208,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/disable', array(
+        $this->response->html($this->helper->layout->project('project/disable', array(
             'project' => $project,
             'title' => t('Project activation')
         )));
@@ -236,7 +235,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/enable', array(
+        $this->response->html($this->helper->layout->project('project/enable', array(
             'project' => $project,
             'title' => t('Project activation')
         )));

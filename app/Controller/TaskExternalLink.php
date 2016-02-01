@@ -21,7 +21,7 @@ class TaskExternalLink extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task_external_link/show', array(
+        $this->response->html($this->helper->layout->task('task_external_link/show', array(
             'links' => $this->taskExternalLink->getAll($task['id']),
             'task' => $task,
             'title' => t('List of external links'),
@@ -37,7 +37,7 @@ class TaskExternalLink extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task_external_link/find', array(
+        $this->response->html($this->helper->layout->task('task_external_link/find', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -60,7 +60,7 @@ class TaskExternalLink extends Base
             $provider = $this->externalLinkManager->setUserInput($values)->find();
             $link = $provider->getLink();
 
-            $this->response->html($this->taskLayout('task_external_link/create', array(
+            $this->response->html($this->helper->layout->task('task_external_link/create', array(
                 'values' => array(
                     'title' => $link->getTitle(),
                     'url' => $link->getUrl(),
@@ -116,7 +116,7 @@ class TaskExternalLink extends Base
 
         $provider = $this->externalLinkManager->getProvider($values['link_type']);
 
-        $this->response->html($this->taskLayout('task_external_link/edit', array(
+        $this->response->html($this->helper->layout->task('task_external_link/edit', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -158,7 +158,7 @@ class TaskExternalLink extends Base
             return $this->notfound();
         }
 
-        $this->response->html($this->taskLayout('task_external_link/remove', array(
+        $this->response->html($this->helper->layout->task('task_external_link/remove', array(
             'link' => $link,
             'task' => $task,
         )));

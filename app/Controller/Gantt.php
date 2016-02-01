@@ -23,10 +23,9 @@ class Gantt extends Base
             $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
         }
 
-        $this->response->html($this->template->layout('gantt/projects', array(
+        $this->response->html($this->helper->layout->app('gantt/projects', array(
             'projects' => $this->projectGanttFormatter->filter($project_ids)->format(),
             'title' => t('Gantt chart for all projects'),
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
         )));
     }
 
@@ -65,7 +64,7 @@ class Gantt extends Base
             $filter->getQuery()->asc('column_position')->asc(TaskModel::TABLE.'.position');
         }
 
-        $this->response->html($this->template->layout('gantt/project', $params + array(
+        $this->response->html($this->helper->layout->app('gantt/project', $params + array(
             'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
             'sorting' => $sorting,
             'tasks' => $filter->format(),

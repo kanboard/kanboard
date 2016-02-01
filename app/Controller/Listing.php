@@ -30,7 +30,7 @@ class Listing extends Base
             ->setQuery($query)
             ->calculate();
 
-        $this->response->html($this->template->layout('listing/show', $params + array(
+        $this->response->html($this->helper->layout->app('listing/show', $params + array(
             'paginator' => $paginator,
         )));
     }

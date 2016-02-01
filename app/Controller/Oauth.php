@@ -95,7 +95,7 @@ class Oauth extends Base
         if ($this->authenticationManager->oauthAuthentication($provider)) {
             $this->response->redirect($this->helper->url->to('app', 'index'));
         } else {
-            $this->response->html($this->template->layout('auth/index', array(
+            $this->response->html($this->helper->layout->app('auth/index', array(
                 'errors' => array('login' => t('External authentication failed')),
                 'values' => array(),
                 'no_layout' => true,

@@ -33,7 +33,7 @@
     </div>
     <section class="sidebar-container" id="analytic-section">
 
-        <?= $this->render('analytic/sidebar', array('project' => $project)) ?>
+        <?= $this->render($sidebar_template, array('project' => $project)) ?>
 
         <div class="sidebar-content">
             <?= $content_for_sublayout ?>

@@ -20,7 +20,7 @@ class TaskImport extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('task_import/step1', array(
+        $this->response->html($this->helper->layout->project('task_import/step1', array(
             'project' => $project,
             'values' => $values,
             'errors' => $errors,

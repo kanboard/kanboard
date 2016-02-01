@@ -26,6 +26,7 @@ Improvements:
 * Have a new task assigned to the creator by default instead of "no assignee"
 * Show progress for task links in board tooltips
 * Simplify code to handle ajax popover and redirects
+* Simplify layout and templates generation
 * Move task form elements to Task helper
 
 Version 1.0.24

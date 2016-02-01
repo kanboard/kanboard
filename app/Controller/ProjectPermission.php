@@ -43,7 +43,7 @@ class ProjectPermission extends Base
             $values['role'] = Role::PROJECT_MEMBER;
         }
 
-        $this->response->html($this->projectLayout('project_permission/index', array(
+        $this->response->html($this->helper->layout->project('project_permission/index', array(
             'project' => $project,
             'users' => $this->projectUserRole->getUsers($project['id']),
             'groups' => $this->projectGroupRole->getGroups($project['id']),

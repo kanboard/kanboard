@@ -131,7 +131,7 @@ abstract class Base extends \Kanboard\Core\Base
      */
     protected function notfound($no_layout = false)
     {
-        $this->response->html($this->template->layout('app/notfound', array(
+        $this->response->html($this->helper->layout->app('app/notfound', array(
             'title' => t('Page not found'),
             'no_layout' => $no_layout,
         )));
@@ -149,7 +149,7 @@ abstract class Base extends \Kanboard\Core\Base
             $this->response->text('Access Forbidden', 403);
         }
 
-        $this->response->html($this->template->layout('app/forbidden', array(
+        $this->response->html($this->helper->layout->app('app/forbidden', array(
             'title' => t('Access Forbidden'),
             'no_layout' => $no_layout,
         )));
@@ -177,48 +177,6 @@ abstract class Base extends \Kanboard\Core\Base
         if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
             $this->response->text('Not Authorized', 401);
         }
-    }
-
-    /**
-     * Common layout for task views
-     *
-     * @access protected
-     * @param  string $template Template name
-     * @param  array $params Template parameters
-     * @return string
-     */
-    protected function taskLayout($template, array $params)
-    {
-        $content = $this->template->render($template, $params);
-
-        if ($this->request->isAjax()) {
-            return $content;
-        }
-
-        $params['title'] = $params['task']['project_name'].' &gt; '.$params['task']['title'];
-        $params['task_content_for_layout'] = $content;
-        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
-
-        return $this->template->layout('task/layout', $params);
-    }
-
-    /**
-     * Common layout for project views
-     *
-     * @access protected
-     * @param  string    $template   Template name
-     * @param  array     $params     Template parameters
-     * @return string
-     */
-    protected function projectLayout($template, array $params, $sidebar_template = 'project/sidebar')
-    {
-        $content = $this->template->render($template, $params);
-        $params['project_content_for_layout'] = $content;
-        $params['title'] = $params['project']['name'] === $params['title'] ? $params['title'] : $params['project']['name'].' &gt; '.$params['title'];
-        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
-        $params['sidebar_template'] = $sidebar_template;
-
-        return $this->template->layout('project/layout', $params);
     }
 
     /**

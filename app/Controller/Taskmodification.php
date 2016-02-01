@@ -56,7 +56,7 @@ class Taskmodification extends Base
             $values = array('id' => $task['id'], 'description' => $task['description']);
         }
 
-        $this->response->html($this->taskLayout('task_modification/edit_description', array(
+        $this->response->html($this->helper->layout->task('task_modification/edit_description', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -104,7 +104,7 @@ class Taskmodification extends Base
 
         $this->dateParser->format($values, array('date_due'));
 
-        $this->response->html($this->taskLayout('task_modification/edit_task', array(
+        $this->response->html($this->helper->layout->task('task_modification/edit_task', array(
             'project' => $project,
             'values' => $values,
             'errors' => $errors,
@@ -176,6 +176,6 @@ class Taskmodification extends Base
             'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
         );
 
-        $this->response->html($this->taskLayout('task_modification/edit_recurrence', $params));
+        $this->response->html($this->helper->layout->task('task_modification/edit_recurrence', $params));
     }
 }

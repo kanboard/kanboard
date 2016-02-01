@@ -47,7 +47,7 @@ class Comment extends Base
             );
         }
 
-        $this->response->html($this->taskLayout('comment/create', array(
+        $this->response->html($this->helper->layout->task('comment/create', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -90,7 +90,7 @@ class Comment extends Base
         $task = $this->getTask();
         $comment = $this->getComment();
 
-        $this->response->html($this->taskLayout('comment/edit', array(
+        $this->response->html($this->helper->layout->task('comment/edit', array(
             'values' => empty($values) ? $comment : $values,
             'errors' => $errors,
             'comment' => $comment,
@@ -135,7 +135,7 @@ class Comment extends Base
         $task = $this->getTask();
         $comment = $this->getComment();
 
-        $this->response->html($this->taskLayout('comment/remove', array(
+        $this->response->html($this->helper->layout->task('comment/remove', array(
             'comment' => $comment,
             'task' => $task,
             'title' => t('Remove a comment')

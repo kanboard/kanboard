@@ -38,7 +38,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $project = $this->project->getById($task['project_id']);
 
-        $this->response->html($this->taskLayout('tasklink/show', array(
+        $this->response->html($this->helper->layout->task('tasklink/show', array(
             'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
             'task' => $task,
             'project' => $project,
@@ -56,7 +56,7 @@ class Tasklink extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('tasklink/create', array(
+        $this->response->html($this->helper->layout->task('tasklink/create', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -106,7 +106,7 @@ class Tasklink extends Base
             $values['title'] = '#'.$opposite_task['id'].' - '.$opposite_task['title'];
         }
 
-        $this->response->html($this->taskLayout('tasklink/edit', array(
+        $this->response->html($this->helper->layout->task('tasklink/edit', array(
             'values' => $values,
             'errors' => $errors,
             'task_link' => $task_link,
@@ -150,7 +150,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $link = $this->getTaskLink();
 
-        $this->response->html($this->taskLayout('tasklink/remove', array(
+        $this->response->html($this->helper->layout->task('tasklink/remove', array(
             'link' => $link,
             'task' => $task,
         )));
