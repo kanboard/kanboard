@@ -71,7 +71,7 @@ class User extends \Kanboard\Core\Base
         try {
 
             $ldap = LdapClient::connect();
-            $user = LdapUser::getUser($ldap, sprintf(LDAP_USER_FILTER, $username));
+            $user = LdapUser::getUser($ldap, $username);
 
             if ($user === null) {
                 $this->logger->info('User not found in LDAP server');
