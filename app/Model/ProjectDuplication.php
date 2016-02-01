@@ -17,7 +17,7 @@ class ProjectDuplication extends Base
      * Get list of optional models to duplicate
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getOptionalSelection()
     {
@@ -28,7 +28,7 @@ class ProjectDuplication extends Base
      * Get list of all possible models to duplicate
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getPossibleSelection()
     {
@@ -71,7 +71,7 @@ class ProjectDuplication extends Base
         // Get the cloned project Id
         $dst_project_id = $this->copy($src_project_id, $owner_id, $name, $private);
 
-        if (! $dst_project_id) {
+        if ($dst_project_id === false) {
             $this->db->cancelTransaction();
             return false;
         }

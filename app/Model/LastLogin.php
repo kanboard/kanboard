@@ -39,14 +39,14 @@ class LastLogin extends Base
         $this->cleanup($user_id);
 
         return $this->db
-                    ->table(self::TABLE)
-                    ->insert(array(
-                        'auth_type' => $auth_type,
-                        'user_id' => $user_id,
-                        'ip' => $ip,
-                        'user_agent' => substr($user_agent, 0, 255),
-                        'date_creation' => time(),
-                    ));
+            ->table(self::TABLE)
+            ->insert(array(
+                'auth_type' => $auth_type,
+                'user_id' => $user_id,
+                'ip' => $ip,
+                'user_agent' => substr($user_agent, 0, 255),
+                'date_creation' => time(),
+            ));
     }
 
     /**

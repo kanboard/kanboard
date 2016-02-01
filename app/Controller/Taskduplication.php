@@ -2,8 +2,6 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Model\Project as ProjectModel;
-
 /**
  * Task Duplication controller
  *
