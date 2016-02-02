@@ -125,6 +125,10 @@ class ExternalLinkManager extends Base
         } else {
             $provider = $this->getProvider($this->userInputType);
             $provider->setUserTextInput($this->userInputText);
+
+            if (! $provider->match()) {
+                throw new ExternalLinkProviderNotFound('Unable to parse URL with selected provider');
+            }
         }
 
         if ($provider === null) {
