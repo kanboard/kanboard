@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Edit a task') ?></h2>
 </div>
-<form id="task-form" method="post" action="<?= $this->url->href('taskmodification', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('taskmodification', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -43,38 +43,18 @@
     <div class="form-column">
         <?= $this->form->hidden('id', $values) ?>
         <?= $this->form->hidden('project_id', $values) ?>
-
-        <?= $this->form->label(t('Assignee'), 'owner_id') ?>
-        <?= $this->form->select('owner_id', $users_list, $values, $errors, array('tabindex="3"')) ?>
-
-        <?= $this->form->label(t('Category'), 'category_id') ?>
-        <?= $this->form->select('category_id', $categories_list, $values, $errors, array('tabindex="4"')) ?>
-
-        <?php if (! (count($swimlanes_list) === 1 && key($swimlanes_list) === 0)): ?>
-        <?= $this->form->label(t('Swimlane'), 'swimlane_id') ?>
-        <?= $this->form->select('swimlane_id', $swimlanes_list, $values, $errors, array('tabindex="5"')) ?><br/>
-        <?php endif ?>
-
-        <?= $this->form->label(t('Complexity'), 'score') ?>
-        <?= $this->form->number('score', $values, $errors, array('tabindex="6"')) ?>
-
+        <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
+        <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
+        <?= $this->task->selectSwimlane($swimlanes_list, $values, $errors) ?>
         <?= $this->task->selectPriority($project, $values) ?>
-
-        <?= $this->form->label(t('Original estimate'), 'time_estimated') ?>
-        <?= $this->form->numeric('time_estimated', $values, $errors, array('tabindex="9"')) ?> <?= t('hours') ?><br/>
-
-        <?= $this->form->label(t('Due Date'), 'date_due') ?>
-        <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="8"'), 'form-date') ?>
-        <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
+        <?= $this->task->selectScore($values, $errors) ?>
+        <?= $this->task->selectTimeEstimated($values, $errors) ?>
+        <?= $this->task->selectDueDate($values, $errors) ?>
     </div>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue" tabindex="10">
         <?= t('or') ?>
-        <?php if ($ajax): ?>
-            <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
-        <?php else: ?>
-            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        <?php endif ?>
+        <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>
 </form>
