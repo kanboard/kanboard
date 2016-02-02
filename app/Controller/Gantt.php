@@ -101,14 +101,18 @@ class Gantt extends Base
     {
         $project = $this->getProject();
 
+        $values = $values + array(
+            'project_id' => $project['id'],
+            'column_id' => $this->board->getFirstColumn($project['id']),
+            'position' => 1
+        );
+
+        $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
+
         $this->response->html($this->template->render('gantt/task_creation', array(
             'project' => $project,
             'errors' => $errors,
-            'values' => $values + array(
-                'project_id' => $project['id'],
-                'column_id' => $this->board->getFirstColumn($project['id']),
-                'position' => 1
-            ),
+            'values' => $values,
             'users_list' => $this->projectUserRole->getAssignableUsersList($project['id'], true, false, true),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),

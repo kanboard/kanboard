@@ -27,6 +27,8 @@ class Taskcreation extends Base
                 'color_id' => $this->color->getDefaultColor(),
                 'owner_id' => $this->userSession->getId(),
             );
+
+            $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
         }
 
         $this->response->html($this->template->render('task_creation/form', array(
