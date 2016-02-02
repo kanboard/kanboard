@@ -31,22 +31,65 @@
                 </select>
             </li>
             <?php endif ?>
-            <li>
+            <li class="user-links">
                 <?php if ($this->user->hasNotifications()): ?>
                     <span class="notification">
                         <?= $this->url->link('<i class="fa fa-bell web-notification-icon"></i>', 'app', 'notifications', array('user_id' => $this->user->getId()), false, '', t('Unread notifications')) ?>
                     </span>
                 <?php endif ?>
 
-                <span class="dropdown">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-plus fa-fw"></i><i class="fa fa-caret-down"></i></a>
+                    <ul>
+                        <?php if ($this->user->hasAccess('ProjectCreation', 'create')): ?>
+                            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?></li>
+                        <?php endif ?>
+                        <li>
+                            <i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li class="no-hover"><strong><?= $this->e($this->user->getFullname()) ?></strong></li>
-                        <li><?= $this->url->link(t('My dashboard'), 'app', 'index', array('user_id' => $this->user->getId())) ?></li>
-                        <li><?= $this->url->link(t('My profile'), 'user', 'show', array('user_id' => $this->user->getId())) ?></li>
-                        <li><?= $this->url->link(t('Logout'), 'auth', 'logout') ?></li>
+                        <li>
+                            <i class="fa fa-tachometer fa-fw"></i>
+                            <?= $this->url->link(t('My dashboard'), 'app', 'index', array('user_id' => $this->user->getId())) ?>
+                        </li>
+                        <li>
+                            <i class="fa fa-home fa-fw"></i>
+                            <?= $this->url->link(t('My profile'), 'user', 'show', array('user_id' => $this->user->getId())) ?>
+                        </li>
+                        <li>
+                            <i class="fa fa-folder fa-fw"></i>
+                            <?= $this->url->link(t('Projects management'), 'project', 'index') ?>
+                        </li>
+                        <?php if ($this->user->hasAccess('user', 'index')): ?>
+                            <li>
+                                <i class="fa fa-user fa-fw"></i>
+                                <?= $this->url->link(t('Users management'), 'user', 'index') ?>
+                            </li>
+                            <li>
+                                <i class="fa fa-group fa-fw"></i>
+                                <?= $this->url->link(t('Groups management'), 'group', 'index') ?>
+                            </li>
+                            <li>
+                                <i class="fa fa-cog fa-fw"></i>
+                                <?= $this->url->link(t('Settings'), 'config', 'index') ?>
+                            </li>
+                        <?php endif ?>
+                        <li>
+                            <i class="fa fa-life-ring fa-fw"></i>
+                            <?= $this->url->link(t('Documentation'), 'doc', 'show') ?>
+                        </li>
+                        <li>
+                            <i class="fa fa-sign-out fa-fw"></i>
+                            <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
+                        </li>
                     </ul>
-                </span>
+                </div>
             </li>
         </ul>
     </nav>

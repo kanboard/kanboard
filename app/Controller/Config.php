@@ -11,24 +11,6 @@ namespace Kanboard\Controller;
 class Config extends Base
 {
     /**
-     * Common layout for config views
-     *
-     * @access private
-     * @param  string    $template   Template name
-     * @param  array     $params     Template parameters
-     * @return string
-     */
-    private function layout($template, array $params)
-    {
-        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
-        $params['values'] = $this->config->getAll();
-        $params['errors'] = array();
-        $params['config_content_for_layout'] = $this->template->render($template, $params);
-
-        return $this->template->layout('config/layout', $params);
-    }
-
-    /**
      * Common method between pages
      *
      * @access private
@@ -72,7 +54,7 @@ class Config extends Base
      */
     public function index()
     {
-        $this->response->html($this->layout('config/about', array(
+        $this->response->html($this->helper->layout->config('config/about', array(
             'db_size' => $this->config->getDatabaseSize(),
             'title' => t('Settings').' &gt; '.t('About'),
         )));
@@ -85,7 +67,7 @@ class Config extends Base
      */
     public function plugins()
     {
-        $this->response->html($this->layout('config/plugins', array(
+        $this->response->html($this->helper->layout->config('config/plugins', array(
             'plugins' => $this->pluginLoader->plugins,
             'title' => t('Settings').' &gt; '.t('Plugins'),
         )));
@@ -100,7 +82,7 @@ class Config extends Base
     {
         $this->common('application');
 
-        $this->response->html($this->layout('config/application', array(
+        $this->response->html($this->helper->layout->config('config/application', array(
             'languages' => $this->config->getLanguages(),
             'timezones' => $this->config->getTimezones(),
             'date_formats' => $this->dateParser->getAvailableFormats(),
@@ -117,7 +99,7 @@ class Config extends Base
     {
         $this->common('project');
 
-        $this->response->html($this->layout('config/project', array(
+        $this->response->html($this->helper->layout->config('config/project', array(
             'colors' => $this->color->getList(),
             'default_columns' => implode(', ', $this->board->getDefaultColumns()),
             'title' => t('Settings').' &gt; '.t('Project settings'),
@@ -133,7 +115,7 @@ class Config extends Base
     {
         $this->common('board');
 
-        $this->response->html($this->layout('config/board', array(
+        $this->response->html($this->helper->layout->config('config/board', array(
             'title' => t('Settings').' &gt; '.t('Board settings'),
         )));
     }
@@ -147,7 +129,7 @@ class Config extends Base
     {
         $this->common('calendar');
 
-        $this->response->html($this->layout('config/calendar', array(
+        $this->response->html($this->helper->layout->config('config/calendar', array(
             'title' => t('Settings').' &gt; '.t('Calendar settings'),
         )));
     }
@@ -161,7 +143,7 @@ class Config extends Base
     {
         $this->common('integrations');
 
-        $this->response->html($this->layout('config/integrations', array(
+        $this->response->html($this->helper->layout->config('config/integrations', array(
             'title' => t('Settings').' &gt; '.t('Integrations'),
         )));
     }
@@ -175,7 +157,7 @@ class Config extends Base
     {
         $this->common('webhook');
 
-        $this->response->html($this->layout('config/webhook', array(
+        $this->response->html($this->helper->layout->config('config/webhook', array(
             'title' => t('Settings').' &gt; '.t('Webhook settings'),
         )));
     }
@@ -187,7 +169,7 @@ class Config extends Base
      */
     public function api()
     {
-        $this->response->html($this->layout('config/api', array(
+        $this->response->html($this->helper->layout->config('config/api', array(
             'title' => t('Settings').' &gt; '.t('API'),
         )));
     }

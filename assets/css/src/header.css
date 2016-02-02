@@ -55,6 +55,11 @@ nav .active a {
     color: #d40000;
 }
 
+/* user links on the left */
+header .user-links .dropdown {
+    margin-left: 15px;
+}
+
 /* title tooltip */
 header h1 .tooltip {
     opacity: 0.3;

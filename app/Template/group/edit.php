@@ -11,10 +11,10 @@
         <?= $this->form->hidden('external_id', $values) ?>
 
         <?= $this->form->label(t('Name'), 'name') ?>
-        <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="100"')) ?><br/>
+        <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="100"')) ?>
 
         <div class="form-actions">
-            <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+            <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
             <?= t('or') ?>
             <?= $this->url->link(t('cancel'), 'group', 'index') ?>
         </div>

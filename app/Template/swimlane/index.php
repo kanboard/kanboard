@@ -7,7 +7,7 @@
     <?= $this->form->hidden('id', $default_swimlane) ?>
 
     <?= $this->form->label(t('Rename'), 'default_swimlane') ?>
-    <?= $this->form->text('default_swimlane', $default_swimlane, array(), array('required', 'maxlength="50"')) ?><br/>
+    <?= $this->form->text('default_swimlane', $default_swimlane, array(), array('required', 'maxlength="50"')) ?>
 
     <?php if (! empty($active_swimlanes) || $default_swimlane['show_default_swimlane'] == 0): ?>
         <?= $this->form->checkbox('show_default_swimlane', t('Show default swimlane'), 1, $default_swimlane['show_default_swimlane'] == 1) ?>

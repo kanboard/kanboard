@@ -19,10 +19,10 @@
     </div>
     <section class="sidebar-container" id="task-section">
 
-        <?= $this->render('task/sidebar', array('task' => $task)) ?>
+        <?= $this->render($sidebar_template, array('task' => $task)) ?>
 
         <div class="sidebar-content">
-            <?= $task_content_for_layout ?>
+            <?= $content_for_sublayout ?>
         </div>
     </section>
 </section>

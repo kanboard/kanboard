@@ -17,7 +17,7 @@ class PasswordReset extends Base
     {
         $this->checkActivation();
 
-        $this->response->html($this->template->layout('password_reset/create', array(
+        $this->response->html($this->helper->layout->app('password_reset/create', array(
             'errors' => $errors,
             'values' => $values,
             'no_layout' => true,
@@ -53,7 +53,7 @@ class PasswordReset extends Base
         $user_id = $this->passwordReset->getUserIdByToken($token);
 
         if ($user_id !== false) {
-            $this->response->html($this->template->layout('password_reset/change', array(
+            $this->response->html($this->helper->layout->app('password_reset/change', array(
                 'token' => $token,
                 'errors' => $errors,
                 'values' => $values,

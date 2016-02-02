@@ -435,10 +435,10 @@ class Subtask extends Base
         return $this->db->transaction(function (Database $db) use ($src_task_id, $dst_task_id) {
 
             $subtasks = $db->table(Subtask::TABLE)
-                                 ->columns('title', 'time_estimated', 'position')
-                                 ->eq('task_id', $src_task_id)
-                                 ->asc('position')
-                                 ->findAll();
+                ->columns('title', 'time_estimated', 'position')
+                ->eq('task_id', $src_task_id)
+                ->asc('position')
+                ->findAll();
 
             foreach ($subtasks as &$subtask) {
                 $subtask['task_id'] = $dst_task_id;

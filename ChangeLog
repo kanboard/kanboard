@@ -1,8 +1,18 @@
 Version 1.0.25 (unreleased)
 --------------
 
+Breaking changes:
+
+* Core functionalities moved to external plugins:
+    - Google Auth: https://github.com/kanboard/plugin-google-auth
+    - Github Auth: https://github.com/kanboard/plugin-github-auth
+    - Gitlab Auth: https://github.com/kanboard/plugin-gitlab-auth
+
 New features:
 
+* When creating a new project, have the possibility to select another project to duplicate
+* Add a "Me" button to assignee form element
+* Add external links for tasks with plugin api
 * Add project owner (Directly Responsible Individual)
 * Add configurable task priority
 * Add Greek translation
@@ -12,7 +22,12 @@ New features:
 
 Improvements:
 
+* Move homepage menus to the user dropdown
+* Have a new task assigned to the creator by default instead of "no assignee"
 * Show progress for task links in board tooltips
+* Simplify code to handle ajax popover and redirects
+* Simplify layout and templates generation
+* Move task form elements to Task helper
 
 Version 1.0.24
 --------------

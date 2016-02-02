@@ -21,7 +21,7 @@ class Customfilter extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('custom_filter/index', array(
+        $this->response->html($this->helper->layout->project('custom_filter/index', array(
             'values' => $values + array('project_id' => $project['id']),
             'errors' => $errors,
             'project' => $project,
@@ -90,7 +90,7 @@ class Customfilter extends Base
 
         $this->checkPermission($project, $filter);
 
-        $this->response->html($this->projectLayout('custom_filter/edit', array(
+        $this->response->html($this->helper->layout->project('custom_filter/edit', array(
             'values' => empty($values) ? $filter : $values,
             'errors' => $errors,
             'project' => $project,
