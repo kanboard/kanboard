@@ -28,7 +28,7 @@
                 'task_id' => $task['id'],
             ),
             'errors' => array(),
-            'task' => $task
+            'task' => $task,
         )) ?>
     <?php endif ?>
 </div>

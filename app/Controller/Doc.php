@@ -52,8 +52,6 @@ class Doc extends Base
             }
         }
 
-        $this->response->html($this->template->layout('doc/show', $this->readFile($filename) + array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
-        )));
+        $this->response->html($this->helper->layout->app('doc/show', $this->readFile($filename)));
     }
 }

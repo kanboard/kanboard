@@ -32,8 +32,7 @@ class Project extends Base
             ->setQuery($this->project->getQueryColumnStats($project_ids))
             ->calculate();
 
-        $this->response->html($this->template->layout('project/index', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+        $this->response->html($this->helper->layout->app('project/index', array(
             'paginator' => $paginator,
             'nb_projects' => $nb_projects,
             'title' => t('Projects').' ('.$nb_projects.')'
@@ -49,7 +48,7 @@ class Project extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('project/show', array(
+        $this->response->html($this->helper->layout->project('project/show', array(
             'project' => $project,
             'stats' => $this->project->getTaskStats($project['id']),
             'title' => $project['name'],
@@ -78,7 +77,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'share', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/share', array(
+        $this->response->html($this->helper->layout->project('project/share', array(
             'project' => $project,
             'title' => t('Public access'),
         )));
@@ -99,7 +98,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'integrations', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/integrations', array(
+        $this->response->html($this->helper->layout->project('project/integrations', array(
             'project' => $project,
             'title' => t('Integrations'),
             'webhook_token' => $this->config->get('webhook_token'),
@@ -124,7 +123,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'notifications', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/notifications', array(
+        $this->response->html($this->helper->layout->project('project/notifications', array(
             'notifications' => $this->projectNotification->readSettings($project['id']),
             'types' => $this->projectNotificationType->getTypes(),
             'project' => $project,
@@ -153,7 +152,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'index'));
         }
 
-        $this->response->html($this->projectLayout('project/remove', array(
+        $this->response->html($this->helper->layout->project('project/remove', array(
             'project' => $project,
             'title' => t('Remove project')
         )));
@@ -171,17 +170,18 @@ class Project extends Base
         $project = $this->getProject();
 
         if ($this->request->getStringParam('duplicate') === 'yes') {
-            $values = array_keys($this->request->getValues());
-            if ($this->projectDuplication->duplicate($project['id'], $values) !== false) {
+            $project_id = $this->projectDuplication->duplicate($project['id'], array_keys($this->request->getValues()), $this->userSession->getId());
+
+            if ($project_id !== false) {
                 $this->flash->success(t('Project cloned successfully.'));
             } else {
                 $this->flash->failure(t('Unable to clone this project.'));
             }
 
-            $this->response->redirect($this->helper->url->to('project', 'index'));
+            $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
         }
 
-        $this->response->html($this->projectLayout('project/duplicate', array(
+        $this->response->html($this->helper->layout->project('project/duplicate', array(
             'project' => $project,
             'title' => t('Clone this project')
         )));
@@ -208,7 +208,7 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/disable', array(
+        $this->response->html($this->helper->layout->project('project/disable', array(
             'project' => $project,
             'title' => t('Project activation')
         )));
@@ -235,62 +235,9 @@ class Project extends Base
             $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('project/enable', array(
+        $this->response->html($this->helper->layout->project('project/enable', array(
             'project' => $project,
             'title' => t('Project activation')
         )));
-    }
-
-    /**
-     * Display a form to create a new project
-     *
-     * @access public
-     */
-    public function create(array $values = array(), array $errors = array())
-    {
-        $is_private = isset($values['is_private']) && $values['is_private'] == 1;
-
-        $this->response->html($this->template->layout('project/new', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
-            'values' => $values,
-            'errors' => $errors,
-            'is_private' => $is_private,
-            'title' => $is_private ? t('New private project') : t('New project'),
-        )));
-    }
-
-    /**
-     * Display a form to create a private project
-     *
-     * @access public
-     */
-    public function createPrivate(array $values = array(), array $errors = array())
-    {
-        $values['is_private'] = 1;
-        $this->create($values, $errors);
-    }
-
-    /**
-     * Validate and save a new project
-     *
-     * @access public
-     */
-    public function save()
-    {
-        $values = $this->request->getValues();
-        list($valid, $errors) = $this->projectValidator->validateCreation($values);
-
-        if ($valid) {
-            $project_id = $this->project->create($values, $this->userSession->getId(), true);
-
-            if ($project_id > 0) {
-                $this->flash->success(t('Your project have been created successfully.'));
-                $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
-            }
-
-            $this->flash->failure(t('Unable to create your project.'));
-        }
-
-        $this->create($values, $errors);
     }
 }

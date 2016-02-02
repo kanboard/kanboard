@@ -40,7 +40,7 @@ class Swimlane extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('swimlane/index', array(
+        $this->response->html($this->helper->layout->project('swimlane/index', array(
             'default_swimlane' => $this->swimlane->getDefault($project['id']),
             'active_swimlanes' => $this->swimlane->getAllByStatus($project['id'], SwimlaneModel::ACTIVE),
             'inactive_swimlanes' => $this->swimlane->getAllByStatus($project['id'], SwimlaneModel::INACTIVE),
@@ -108,7 +108,7 @@ class Swimlane extends Base
         $project = $this->getProject();
         $swimlane = $this->getSwimlane($project['id']);
 
-        $this->response->html($this->projectLayout('swimlane/edit', array(
+        $this->response->html($this->helper->layout->project('swimlane/edit', array(
             'values' => empty($values) ? $swimlane : $values,
             'errors' => $errors,
             'project' => $project,
@@ -150,7 +150,7 @@ class Swimlane extends Base
         $project = $this->getProject();
         $swimlane = $this->getSwimlane($project['id']);
 
-        $this->response->html($this->projectLayout('swimlane/remove', array(
+        $this->response->html($this->helper->layout->project('swimlane/remove', array(
             'project' => $project,
             'swimlane' => $swimlane,
             'title' => t('Remove a swimlane')

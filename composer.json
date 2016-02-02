@@ -20,7 +20,6 @@
         "ext-hash" : "*",
         "ext-openssl" : "*",
         "ext-json" : "*",
-        "ext-hash" : "*",
         "ext-ctype" : "*",
         "ext-filter" : "*",
         "ext-session" : "*",

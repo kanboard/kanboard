@@ -22,10 +22,29 @@ class Tasklink extends Base
         $link = $this->taskLink->getById($this->request->getIntegerParam('link_id'));
 
         if (empty($link)) {
-            $this->notfound();
+            return $this->notfound();
         }
 
         return $link;
+    }
+
+    /**
+     * Show links
+     *
+     * @access public
+     */
+    public function show()
+    {
+        $task = $this->getTask();
+        $project = $this->project->getById($task['project_id']);
+
+        $this->response->html($this->helper->layout->task('tasklink/show', array(
+            'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
+            'task' => $task,
+            'project' => $project,
+            'editable' => true,
+            'is_public' => false,
+        )));
     }
 
     /**
@@ -36,20 +55,8 @@ class Tasklink extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
-        if ($ajax && empty($errors)) {
-            $this->response->html($this->template->render('tasklink/create', array(
-                'values' => $values,
-                'errors' => $errors,
-                'task' => $task,
-                'labels' => $this->link->getList(0, false),
-                'title' => t('Add a new link'),
-                'ajax' => $ajax,
-            )));
-        }
-
-        $this->response->html($this->taskLayout('tasklink/create', array(
+        $this->response->html($this->helper->layout->task('tasklink/create', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -67,19 +74,13 @@ class Tasklink extends Base
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
         list($valid, $errors) = $this->taskLinkValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->taskLink->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->flash->success(t('Link added successfully.'));
-
-                if ($ajax) {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                }
-
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+                return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links', true);
             }
 
             $errors = array('title' => array(t('The exact same link already exists')));
@@ -105,7 +106,7 @@ class Tasklink extends Base
             $values['title'] = '#'.$opposite_task['id'].' - '.$opposite_task['title'];
         }
 
-        $this->response->html($this->taskLayout('tasklink/edit', array(
+        $this->response->html($this->helper->layout->task('tasklink/edit', array(
             'values' => $values,
             'errors' => $errors,
             'task_link' => $task_link,
@@ -130,7 +131,7 @@ class Tasklink extends Base
         if ($valid) {
             if ($this->taskLink->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->flash->success(t('Link updated successfully.'));
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+                return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
             }
 
             $this->flash->failure(t('Unable to update your link.'));
@@ -149,7 +150,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $link = $this->getTaskLink();
 
-        $this->response->html($this->taskLayout('tasklink/remove', array(
+        $this->response->html($this->helper->layout->task('tasklink/remove', array(
             'link' => $link,
             'task' => $task,
         )));

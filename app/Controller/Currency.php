@@ -11,29 +11,13 @@ namespace Kanboard\Controller;
 class Currency extends Base
 {
     /**
-     * Common layout for config views
-     *
-     * @access private
-     * @param  string    $template   Template name
-     * @param  array     $params     Template parameters
-     * @return string
-     */
-    private function layout($template, array $params)
-    {
-        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
-        $params['config_content_for_layout'] = $this->template->render($template, $params);
-
-        return $this->template->layout('config/layout', $params);
-    }
-
-    /**
      * Display all currency rates and form
      *
      * @access public
      */
     public function index(array $values = array(), array $errors = array())
     {
-        $this->response->html($this->layout('currency/index', array(
+        $this->response->html($this->helper->layout->config('currency/index', array(
             'config_values' => array('application_currency' => $this->config->get('application_currency')),
             'values' => $values,
             'errors' => $errors,

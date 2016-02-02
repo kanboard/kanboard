@@ -20,14 +20,7 @@
             <?= $this->form->label(t('Email'), 'email') ?>
             <?= $this->form->email('email', $values, $errors) ?>
 
-            <?= $this->form->label(t('Google Id'), 'google_id') ?>
-            <?= $this->form->text('google_id', $values, $errors) ?>
-
-            <?= $this->form->label(t('Github Id'), 'github_id') ?>
-            <?= $this->form->text('github_id', $values, $errors) ?>
-
-            <?= $this->form->label(t('Gitlab Id'), 'gitlab_id') ?>
-            <?= $this->form->text('gitlab_id', $values, $errors) ?>
+            <?= $this->hook->render('template:user:create-remote:form', array('values' => $values, 'errors' => $errors)) ?>
         </div>
 
         <div class="form-column">

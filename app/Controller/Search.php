@@ -36,8 +36,7 @@ class Search extends Base
             $nb_tasks = $paginator->getTotal();
         }
 
-        $this->response->html($this->template->layout('search/index', array(
-            'board_selector' => $projects,
+        $this->response->html($this->helper->layout->app('search/index', array(
             'values' => array(
                 'search' => $search,
                 'controller' => 'search',

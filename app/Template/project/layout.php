@@ -30,7 +30,7 @@
         <?= $this->render($sidebar_template, array('project' => $project)) ?>
 
         <div class="sidebar-content">
-            <?= $project_content_for_layout ?>
+            <?= $content_for_sublayout ?>
         </div>
     </section>
 </section>

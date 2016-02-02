@@ -55,26 +55,47 @@ Popover.prototype.listen = function() {
 
 Popover.prototype.afterOpen = function() {
     var self = this;
-    var taskForm = $("#task-form");
+    var popoverForm = $("#popover-content .popover-form");
 
-    if (taskForm) {
-        taskForm.on("submit", function(e) {
+    // Submit forms with Ajax request
+    if (popoverForm) {
+        popoverForm.on("submit", function(e) {
             e.preventDefault();
 
             $.ajax({
                 type: "POST",
-                url: taskForm.attr("action"),
-                data: taskForm.serialize(),
+                url: popoverForm.attr("action"),
+                data: popoverForm.serialize(),
                 success: function(data, textStatus, request) {
-                    if (request.getResponseHeader("X-Ajax-Redirect")) {
-                        window.location = request.getResponseHeader("X-Ajax-Redirect");
-                    }
-                    else {
-                        $("#popover-content").html(data);
-                        self.afterOpen();
-                    }
+                    self.afterSubmit(data, request, self);
                 }
             });
         });
+    }
+
+    // Submit link with Ajax request
+    $(document).on("click", ".popover-link", function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "GET",
+            url: $(this).attr("href"),
+            success: function(data, textStatus, request) {
+                self.afterSubmit(data, request, self);
+            }
+        });
+    });
+};
+
+Popover.prototype.afterSubmit = function(data, request, self) {
+    var redirect = request.getResponseHeader("X-Ajax-Redirect");
+
+    if (redirect) {
+        window.location = redirect === 'self' ? window.location.href : redirect;
+    }
+    else {
+        $("#popover-content").html(data);
+        $("#popover-content input[autofocus]").focus();
+        self.afterOpen();
     }
 };

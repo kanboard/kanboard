@@ -89,11 +89,11 @@ class ProjectEdit extends Base
     {
         if ($redirect === 'edit') {
             if (isset($values['is_private'])) {
-                if (! $this->helper->user->hasProjectAccess('project', 'create', $project['id'])) {
+                if (! $this->helper->user->hasProjectAccess('ProjectCreation', 'create', $project['id'])) {
                     unset($values['is_private']);
                 }
             } elseif ($project['is_private'] == 1 && ! isset($values['is_private'])) {
-                if ($this->helper->user->hasProjectAccess('project', 'create', $project['id'])) {
+                if ($this->helper->user->hasProjectAccess('ProjectCreation', 'create', $project['id'])) {
                     $values += array('is_private' => 0);
                 }
             }
@@ -114,7 +114,7 @@ class ProjectEdit extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout($template, array(
+        $this->response->html($this->helper->layout->project($template, array(
             'owners' => $this->projectUserRole->getAssignableUsersList($project['id'], true),
             'values' => empty($values) ? $project : $values,
             'errors' => $errors,

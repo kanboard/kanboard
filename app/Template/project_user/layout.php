@@ -1,13 +1,6 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <?php if ($this->user->hasAccess('project', 'create')): ?>
-                <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'project', 'create') ?></li>
-            <?php endif ?>
-            <li>
-                <i class="fa fa-lock fa-fw"></i>
-                <?= $this->url->link(t('New private project'), 'project', 'create', array('private' => 1)) ?>
-            </li>
             <li>
                 <i class="fa fa-folder fa-fw"></i>
                 <?= $this->url->link(t('Projects list'), 'project', 'index') ?>
@@ -22,7 +15,7 @@
     </div>
     <section class="sidebar-container">
 
-        <?= $this->render('project_user/sidebar', array('users' => $users, 'filter' => $filter)) ?>
+        <?= $this->render($sidebar_template, array('users' => $users, 'filter' => $filter)) ?>
 
         <div class="sidebar-content">
             <div class="page-header">

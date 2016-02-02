@@ -193,11 +193,12 @@ class Category extends Base
      */
     public function duplicate($src_project_id, $dst_project_id)
     {
-        $categories = $this->db->table(self::TABLE)
-                               ->columns('name')
-                               ->eq('project_id', $src_project_id)
-                               ->asc('name')
-                               ->findAll();
+        $categories = $this->db
+            ->table(self::TABLE)
+            ->columns('name')
+            ->eq('project_id', $src_project_id)
+            ->asc('name')
+            ->findAll();
 
         foreach ($categories as $category) {
             $category['project_id'] = $dst_project_id;
