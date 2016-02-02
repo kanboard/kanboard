@@ -55,7 +55,7 @@ Popover.prototype.listen = function() {
 
 Popover.prototype.afterOpen = function() {
     var self = this;
-    var popoverForm = $(".popover-form");
+    var popoverForm = $("#popover-content .popover-form");
 
     // Submit forms with Ajax request
     if (popoverForm) {
@@ -95,7 +95,7 @@ Popover.prototype.afterSubmit = function(data, request, self) {
     }
     else {
         $("#popover-content").html(data);
-        $("input[autofocus]").focus();
+        $("#popover-content input[autofocus]").focus();
         self.afterOpen();
     }
 };
