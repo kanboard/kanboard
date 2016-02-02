@@ -20,6 +20,7 @@ use Pimple\Container;
  * @property \Helper\Text       $text
  * @property \Helper\Url        $url
  * @property \Helper\User       $user
+ * @property \Helper\Layout     $layout
  */
 class Helper
 {

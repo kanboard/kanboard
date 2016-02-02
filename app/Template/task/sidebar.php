@@ -21,6 +21,25 @@
 
         <?= $this->hook->render('template:task:sidebar:information') ?>
     </ul>
+
+    <h2><?= t('Links') ?></h2>
+    <ul>
+        <li <?= $this->app->checkMenuSelection('tasklink', 'show') ?>>
+            <?= $this->url->link(t('View internal links'), 'tasklink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <li <?= $this->app->checkMenuSelection('TaskExternalLink', 'show') ?>>
+            <?= $this->url->link(t('View external links'), 'TaskExternalLink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <?php if ($this->user->hasProjectAccess('tasklink', 'create', $task['project_id'])): ?>
+        <li <?= $this->app->checkMenuSelection('tasklink', 'create') ?>>
+            <?= $this->url->link(t('Add internal link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <li <?= $this->app->checkMenuSelection('TaskExternalLink', 'find') ?>>
+            <?= $this->url->link(t('Add external link'), 'TaskExternalLink', 'find', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <?php endif ?>
+    </ul>
+
     <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
     <h2><?= t('Actions') ?></h2>
     <ul>
@@ -35,9 +54,6 @@
         </li>
         <li <?= $this->app->checkMenuSelection('subtask', 'create') ?>>
             <?= $this->url->link(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
-        <li <?= $this->app->checkMenuSelection('tasklink', 'create') ?>>
-            <?= $this->url->link(t('Add a link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li <?= $this->app->checkMenuSelection('comment', 'create') ?>>
             <?= $this->url->link(t('Add a comment'), 'comment', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>

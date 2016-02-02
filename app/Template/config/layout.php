@@ -1,10 +1,10 @@
 <section id="main">
     <section class="sidebar-container" id="config-section">
 
-        <?= $this->render('config/sidebar') ?>
+        <?= $this->render($sidebar_template) ?>
 
         <div class="sidebar-content">
-            <?= $config_content_for_layout ?>
+            <?= $content_for_sublayout ?>
         </div>
     </section>
 </section>

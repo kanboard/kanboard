@@ -1,8 +1,7 @@
 <div class="page-header">
     <h2><?= t('Add a comment') ?></h2>
 </div>
-
-<form method="post" action="<?= $this->url->href('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'ajax' => isset($ajax))) ?>" autocomplete="off" class="form-comment">
+<form class="popover-form" method="post" action="<?= $this->url->href('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off" class="form-comment">
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('task_id', $values) ?>
     <?= $this->form->hidden('user_id', $values) ?>
@@ -41,11 +40,7 @@
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
         <?php if (! isset($skip_cancel)): ?>
             <?= t('or') ?>
-            <?php if (isset($ajax)): ?>
-                <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $task['project_id'])) ?>
-            <?php else: ?>
-                <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-            <?php endif ?>
+            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
         <?php endif ?>
     </div>
 </form>

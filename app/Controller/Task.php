@@ -30,7 +30,7 @@ class Task extends Base
             $this->notfound(true);
         }
 
-        $this->response->html($this->template->layout('task/public', array(
+        $this->response->html($this->helper->layout->app('task/public', array(
             'project' => $project,
             'comments' => $this->comment->getAll($task['id']),
             'subtasks' => $this->subtask->getAll($task['id']),
@@ -64,7 +64,7 @@ class Task extends Base
 
         $this->dateParser->format($values, array('date_started'), 'Y-m-d H:i');
 
-        $this->response->html($this->taskLayout('task/show', array(
+        $this->response->html($this->helper->layout->task('task/show', array(
             'project' => $this->project->getById($task['project_id']),
             'files' => $this->file->getAllDocuments($task['id']),
             'images' => $this->file->getAllImages($task['id']),
@@ -95,7 +95,7 @@ class Task extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task/analytics', array(
+        $this->response->html($this->helper->layout->task('task/analytics', array(
             'title' => $task['title'],
             'task' => $task,
             'lead_time' => $this->taskAnalytic->getLeadTime($task),
@@ -121,7 +121,7 @@ class Task extends Base
             ->setQuery($this->subtaskTimeTracking->getTaskQuery($task['id']))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
-        $this->response->html($this->taskLayout('task/time_tracking_details', array(
+        $this->response->html($this->helper->layout->task('task/time_tracking_details', array(
             'task' => $task,
             'subtask_paginator' => $subtask_paginator,
         )));
@@ -136,7 +136,7 @@ class Task extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task/transitions', array(
+        $this->response->html($this->helper->layout->task('task/transitions', array(
             'task' => $task,
             'transitions' => $this->transition->getAllByTask($task['id']),
         )));
@@ -167,7 +167,7 @@ class Task extends Base
             $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
         }
 
-        $this->response->html($this->taskLayout('task/remove', array(
+        $this->response->html($this->helper->layout->task('task/remove', array(
             'task' => $task,
         )));
     }

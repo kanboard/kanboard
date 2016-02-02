@@ -1,7 +1,6 @@
 <div class="page-header">
     <h2><?= t('Application settings') ?></h2>
 </div>
-<section>
 <form method="post" action="<?= $this->url->href('config', 'application') ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
@@ -23,10 +22,9 @@
     <?= $this->form->checkbox('password_reset', t('Enable "Forget Password"'), 1, $values['password_reset'] == 1) ?>
 
     <?= $this->form->label(t('Custom Stylesheet'), 'application_stylesheet') ?>
-    <?= $this->form->textarea('application_stylesheet', $values, $errors) ?><br/>
+    <?= $this->form->textarea('application_stylesheet', $values, $errors) ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
     </div>
 </form>
-</section>

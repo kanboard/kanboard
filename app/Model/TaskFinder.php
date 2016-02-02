@@ -88,11 +88,12 @@ class TaskFinder extends Base
         return $this->db
             ->table(Task::TABLE)
             ->columns(
-                '(SELECT count(*) FROM '.Comment::TABLE.' WHERE task_id=tasks.id) AS nb_comments',
-                '(SELECT count(*) FROM '.File::TABLE.' WHERE task_id=tasks.id) AS nb_files',
-                '(SELECT count(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id) AS nb_subtasks',
-                '(SELECT count(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
-                '(SELECT count(*) FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id) AS nb_links',
+                '(SELECT COUNT(*) FROM '.Comment::TABLE.' WHERE task_id=tasks.id) AS nb_comments',
+                '(SELECT COUNT(*) FROM '.File::TABLE.' WHERE task_id=tasks.id) AS nb_files',
+                '(SELECT COUNT(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id) AS nb_subtasks',
+                '(SELECT COUNT(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
+                '(SELECT COUNT(*) FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id) AS nb_links',
+                '(SELECT COUNT(*) FROM '.TaskExternalLink::TABLE.' WHERE '.TaskExternalLink::TABLE.'.task_id = tasks.id) AS nb_external_links',
                 '(SELECT DISTINCT 1 FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id AND '.TaskLink::TABLE.'.link_id = 9) AS is_milestone',
                 'tasks.id',
                 'tasks.reference',
@@ -176,6 +177,23 @@ class TaskFinder extends Base
                     ->eq(Task::TABLE.'.project_id', $project_id)
                     ->eq(Task::TABLE.'.is_active', $status_id)
                     ->findAll();
+    }
+
+    /**
+     * Get all tasks for a given project and status
+     *
+     * @access public
+     * @param  integer   $project_id
+     * @param  array     $status
+     * @return array
+     */
+    public function getAllIds($project_id, array $status = array(Task::STATUS_OPEN))
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->in(Task::TABLE.'.is_active', $status)
+                    ->findAllByColumn('id');
     }
 
     /**

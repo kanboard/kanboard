@@ -58,7 +58,27 @@ class Plugin extends Base
 }
 ```
 
+Example to override default values for task forms:
+
+```php
+class Plugin extends Base
+{
+    public function initialize()
+    {
+        $this->hook->on('controller:task:form:default', function (array $default_values) {
+            return empty($default_values['score']) ? array('score' => 4) : array();
+        });
+    }
+}
+```
+
 List of merging hooks:
+
+#### controller:task:form:default
+
+- Override default values for task forms
+- Arguments:
+    - `$default_values`: actual default values (array)
 
 #### controller:calendar:project:events
 

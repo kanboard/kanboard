@@ -199,4 +199,25 @@ class Task extends Base
 
         return round(($position * 100) / count($columns), 1);
     }
+
+    /**
+     * Helper method to duplicate all tasks to another project
+     *
+     * @access public
+     * @param  integer $src_project_id
+     * @param  integer $dst_project_id
+     * @return boolean
+     */
+    public function duplicate($src_project_id, $dst_project_id)
+    {
+        $task_ids = $this->taskFinder->getAllIds($src_project_id, array(Task::STATUS_OPEN, Task::STATUS_CLOSED));
+
+        foreach ($task_ids as $task_id) {
+            if (! $this->taskDuplication->duplicateToProject($task_id, $dst_project_id)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

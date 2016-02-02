@@ -10,6 +10,7 @@ use SimpleLogger\Logger;
 use SimpleLogger\File;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\Core\Session\SessionStorage;
+use Kanboard\ServiceProvider\ActionProvider;
 
 class FakeHttpClient
 {
@@ -91,7 +92,11 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container['logger'] = new Logger;
         $this->container['logger']->setLogger(new File($this->isWindows() ? 'NUL' : '/dev/null'));
         $this->container['httpClient'] = new FakeHttpClient;
-        $this->container['emailClient'] = $this->getMockBuilder('EmailClient')->setMethods(array('send'))->getMock();
+        $this->container['emailClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Mail\Client')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('send'))
+            ->getMock();
 
         $this->container['userNotificationType'] = $this
             ->getMockBuilder('\Kanboard\Model\UserNotificationType')
@@ -100,8 +105,9 @@ abstract class Base extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->container['sessionStorage'] = new SessionStorage;
+        $this->container->register(new ActionProvider);
 
-        $this->container['flash'] = function($c) {
+        $this->container['flash'] = function ($c) {
             return new FlashMessage($c);
         };
     }

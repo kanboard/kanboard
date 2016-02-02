@@ -18,7 +18,7 @@ class UserImport extends Base
      */
     public function step1(array $values = array(), array $errors = array())
     {
-        $this->response->html($this->template->layout('user_import/step1', array(
+        $this->response->html($this->helper->layout->app('user_import/step1', array(
             'values' => $values,
             'errors' => $errors,
             'max_size' => ini_get('upload_max_filesize'),

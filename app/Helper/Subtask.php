@@ -43,4 +43,47 @@ class Subtask extends \Kanboard\Core\Base
             array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect)
         );
     }
+
+    public function selectTitle(array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="1"', 'required', 'maxlength="255"'), $attributes);
+
+        $html = $this->helper->form->label(t('Title'), 'title');
+        $html .= $this->helper->form->text('title', $values, $errors, $attributes);
+
+        return $html;
+    }
+
+    public function selectAssignee(array $users, array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="2"'), $attributes);
+
+        $html = $this->helper->form->label(t('Assignee'), 'user_id');
+        $html .= $this->helper->form->select('user_id', $users, $values, $errors, $attributes);
+        $html .= '&nbsp;<a href="#" class="assign-me" data-target-id="form-user_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'">'.t('Me').'</a>';
+
+        return $html;
+    }
+
+    public function selectTimeEstimated(array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="3"'), $attributes);
+
+        $html = $this->helper->form->label(t('Original estimate'), 'time_estimated');
+        $html .= $this->helper->form->numeric('time_estimated', $values, $errors, $attributes);
+        $html .= ' '.t('hours');
+
+        return $html;
+    }
+
+    public function selectTimeSpent(array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="4"'), $attributes);
+
+        $html = $this->helper->form->label(t('Time spent'), 'time_spent');
+        $html .= $this->helper->form->numeric('time_spent', $values, $errors, $attributes);
+        $html .= ' '.t('hours');
+
+        return $html;
+    }
 }

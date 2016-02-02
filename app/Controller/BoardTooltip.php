@@ -25,6 +25,20 @@ class BoardTooltip extends Base
     }
 
     /**
+     * Get links on mouseover
+     *
+     * @access public
+     */
+    public function externallinks()
+    {
+        $task = $this->getTask();
+        $this->response->html($this->template->render('board/tooltip_external_links', array(
+            'links' => $this->taskExternalLink->getAll($task['id']),
+            'task' => $task,
+        )));
+    }
+
+    /**
      * Get subtasks on mouseover
      *
      * @access public

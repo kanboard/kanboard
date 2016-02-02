@@ -14,23 +14,6 @@ use Kanboard\Core\Security\Role;
  */
 class Projectuser extends Base
 {
-    /**
-     * Common layout for users overview views
-     *
-     * @access private
-     * @param  string    $template   Template name
-     * @param  array     $params     Template parameters
-     * @return string
-     */
-    private function layout($template, array $params)
-    {
-        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
-        $params['content_for_sublayout'] = $this->template->render($template, $params);
-        $params['filter'] = array('user_id' => $params['user_id']);
-
-        return $this->template->layout('project_user/layout', $params);
-    }
-
     private function common()
     {
         $user_id = $this->request->getIntegerParam('user_id', UserModel::EVERYBODY_ID);
@@ -62,7 +45,7 @@ class Projectuser extends Base
             ->setQuery($query)
             ->calculate();
 
-        $this->response->html($this->layout('project_user/roles', array(
+        $this->response->html($this->helper->layout->projectUser('project_user/roles', array(
             'paginator' => $paginator,
             'title' => $title,
             'user_id' => $user_id,
@@ -88,7 +71,7 @@ class Projectuser extends Base
             ->setQuery($query)
             ->calculate();
 
-        $this->response->html($this->layout('project_user/tasks', array(
+        $this->response->html($this->helper->layout->projectUser('project_user/tasks', array(
             'paginator' => $paginator,
             'title' => $title,
             'user_id' => $user_id,

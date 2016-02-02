@@ -24,8 +24,7 @@ class Group extends Base
             ->setQuery($this->group->getQuery())
             ->calculate();
 
-        $this->response->html($this->template->layout('group/index', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+        $this->response->html($this->helper->layout->app('group/index', array(
             'title' => t('Groups').' ('.$paginator->getTotal().')',
             'paginator' => $paginator,
         )));
@@ -48,8 +47,7 @@ class Group extends Base
             ->setQuery($this->groupMember->getQuery($group_id))
             ->calculate();
 
-        $this->response->html($this->template->layout('group/users', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+        $this->response->html($this->helper->layout->app('group/users', array(
             'title' => t('Members of %s', $group['name']).' ('.$paginator->getTotal().')',
             'paginator' => $paginator,
             'group' => $group,
@@ -63,8 +61,7 @@ class Group extends Base
      */
     public function create(array $values = array(), array $errors = array())
     {
-        $this->response->html($this->template->layout('group/create', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+        $this->response->html($this->helper->layout->app('group/create', array(
             'errors' => $errors,
             'values' => $values,
             'title' => t('New group')
@@ -104,8 +101,7 @@ class Group extends Base
             $values = $this->group->getById($this->request->getIntegerParam('group_id'));
         }
 
-        $this->response->html($this->template->layout('group/edit', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+        $this->response->html($this->helper->layout->app('group/edit', array(
             'errors' => $errors,
             'values' => $values,
             'title' => t('Edit group')
@@ -148,8 +144,7 @@ class Group extends Base
             $values['group_id'] = $group_id;
         }
 
-        $this->response->html($this->template->layout('group/associate', array(
-            'board_selector' => $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId()),
+        $this->response->html($this->helper->layout->app('group/associate', array(
             'users' => $this->user->prepareList($this->groupMember->getNotMembers($group_id)),
             'group' => $group,
             'errors' => $errors,
@@ -191,7 +186,7 @@ class Group extends Base
         $group = $this->group->getById($group_id);
         $user = $this->user->getById($user_id);
 
-        $this->response->html($this->template->layout('group/dissociate', array(
+        $this->response->html($this->helper->layout->app('group/dissociate', array(
             'group' => $group,
             'user' => $user,
             'title' => t('Remove user from group "%s"', $group['name']),
@@ -228,7 +223,7 @@ class Group extends Base
         $group_id = $this->request->getIntegerParam('group_id');
         $group = $this->group->getById($group_id);
 
-        $this->response->html($this->template->layout('group/remove', array(
+        $this->response->html($this->helper->layout->app('group/remove', array(
             'group' => $group,
             'title' => t('Remove group'),
         )));
