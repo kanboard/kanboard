@@ -862,7 +862,7 @@ return array(
     'Current column: %s' => 'Текущая колонка: %s',
     'Current category: %s' => 'Текущая категория: %s',
     'no category' => 'без категории',
-    'Current assignee: %s' => 'Current assignee: %s',
+    'Current assignee: %s' => 'Текущее назначенное лицо: %s',
     'not assigned' => 'не назначен',
     'Author:' => 'Автор:',
     'contributors' => 'соавторы',
