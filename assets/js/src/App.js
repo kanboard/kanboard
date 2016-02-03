@@ -1,7 +1,6 @@
 function App() {
     this.board = new Board(this);
     this.markdown = new Markdown();
-    this.sidebar = new Sidebar();
     this.search = new Search(this);
     this.swimlane = new Swimlane();
     this.dropdown = new Dropdown();
@@ -33,7 +32,6 @@ App.prototype.listen = function() {
     this.project.listen();
     this.popover.listen();
     this.markdown.listen();
-    this.sidebar.listen();
     this.tooltip.listen();
     this.dropdown.listen();
     this.search.listen();

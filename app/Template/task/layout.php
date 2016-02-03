@@ -17,7 +17,7 @@
             <?php endif ?>
         </ul>
     </div>
-    <section class="sidebar-container" id="task-section">
+    <section class="sidebar-container">
 
         <?= $this->render($sidebar_template, array('task' => $task)) ?>
 

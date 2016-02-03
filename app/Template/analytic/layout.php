@@ -31,8 +31,7 @@
             </li>
         </ul>
     </div>
-    <section class="sidebar-container" id="analytic-section">
-
+    <section class="sidebar-container">
         <?= $this->render($sidebar_template, array('project' => $project)) ?>
 
         <div class="sidebar-content">

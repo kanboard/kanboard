@@ -36,6 +36,4 @@
         </li>
         <?= $this->hook->render('template:config:sidebar') ?>
     </ul>
-    <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
-    <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>
 </div>

@@ -22,6 +22,7 @@ New features:
 
 Improvements:
 
+* Change sidebar style
 * Change task summary layout
 * Use inline popup for subtasks modification
 * Move homepage menus to the user dropdown
