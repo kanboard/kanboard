@@ -129,10 +129,21 @@ class Task extends Base
         return $html;
     }
 
+    public function selectTimeSpent(array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="10"'), $attributes);
+
+        $html = $this->helper->form->label(t('Time spent'), 'time_spent');
+        $html .= $this->helper->form->numeric('time_spent', $values, $errors, $attributes);
+        $html .= ' '.t('hours');
+
+        return $html;
+    }
+
     public function selectStartDate(array $values, array $errors = array(), array $attributes = array())
     {
         $placeholder = $this->helper->text->in($this->config->get('application_date_format'), $this->dateParser->getAvailableFormats());
-        $attributes = array_merge(array('tabindex="10"', 'placeholder="'.$placeholder.'"'), $attributes);
+        $attributes = array_merge(array('tabindex="11"', 'placeholder="'.$placeholder.'"'), $attributes);
 
         $html = $this->helper->form->label(t('Start Date'), 'date_started');
         $html .= $this->helper->form->text('date_started', $values, $errors, $attributes, 'form-date');
@@ -143,7 +154,7 @@ class Task extends Base
     public function selectDueDate(array $values, array $errors = array(), array $attributes = array())
     {
         $placeholder = $this->helper->text->in($this->config->get('application_date_format'), $this->dateParser->getAvailableFormats());
-        $attributes = array_merge(array('tabindex="11"', 'placeholder="'.$placeholder.'"'), $attributes);
+        $attributes = array_merge(array('tabindex="12"', 'placeholder="'.$placeholder.'"'), $attributes);
 
         $html = $this->helper->form->label(t('Due Date'), 'date_due');
         $html .= $this->helper->form->text('date_due', $values, $errors, $attributes, 'form-date');
