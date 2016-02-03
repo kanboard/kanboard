@@ -45,8 +45,10 @@
         <?= $this->form->hidden('project_id', $values) ?>
         <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
         <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
+        <?= $this->task->selectSwimlane($swimlanes_list, $values, $errors) ?>
         <?= $this->task->selectPriority($project, $values) ?>
         <?= $this->task->selectScore($values, $errors) ?>
+        <?= $this->task->selectTimeEstimated($values, $errors) ?>
         <?= $this->task->selectDueDate($values, $errors) ?>
     </div>
 

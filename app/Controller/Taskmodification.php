@@ -113,6 +113,7 @@ class Taskmodification extends Base
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($task['project_id']),
+            'swimlanes_list' => $this->swimlane->getList($project['id'], false, true),
             'date_format' => $this->config->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats(),
         )));
