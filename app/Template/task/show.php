@@ -19,6 +19,7 @@
     'project' => $project,
     'users_list' => isset($users_list) ? $users_list : array(),
     'editable' => $this->user->hasProjectAccess('subtask', 'edit', $project['id']),
+    'redirect' => 'task',
 )) ?>
 
 <?= $this->render('tasklink/show', array(

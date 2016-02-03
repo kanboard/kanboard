@@ -13,7 +13,7 @@ Popover.prototype.open = function(link) {
     self.app.dropdown.close();
 
     $.get(link, function(content) {
-        $("body").append('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+        $("body").prepend('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
         self.app.refresh();
         self.router.dispatch(this.app);
         self.afterOpen();
@@ -91,7 +91,7 @@ Popover.prototype.afterSubmit = function(data, request, self) {
     var redirect = request.getResponseHeader("X-Ajax-Redirect");
 
     if (redirect) {
-        window.location = redirect === 'self' ? window.location.href : redirect;
+        window.location = redirect === 'self' ? window.location.href.split("#")[0] : redirect;
     }
     else {
         $("#popover-content").html(data);

@@ -2,7 +2,7 @@
     <h2><?= t('Add a sub-task') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->url->href('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('task_id', $values) ?>
@@ -15,6 +15,6 @@
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>
 </form>

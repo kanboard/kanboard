@@ -22,6 +22,18 @@
         <?= $this->hook->render('template:task:sidebar:information') ?>
     </ul>
 
+    <h2><?= t('Sub-Tasks') ?></h2>
+    <ul>
+        <li <?= $this->app->checkMenuSelection('subtask', 'show') ?>>
+            <?= $this->url->link(t('View all sub-tasks'), 'subtask', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <?php if ($this->user->hasProjectAccess('subtask', 'create', $task['project_id'])): ?>
+        <li <?= $this->app->checkMenuSelection('subtask', 'create') ?>>
+            <?= $this->url->link(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+        <?php endif ?>
+    </ul>
+
     <h2><?= t('Links') ?></h2>
     <ul>
         <li <?= $this->app->checkMenuSelection('tasklink', 'show') ?>>
@@ -51,9 +63,6 @@
         </li>
         <li <?= $this->app->checkMenuSelection('taskmodification', 'recurrence') ?>>
             <?= $this->url->link(t('Edit recurrence'), 'taskmodification', 'recurrence', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
-        <li <?= $this->app->checkMenuSelection('subtask', 'create') ?>>
-            <?= $this->url->link(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li <?= $this->app->checkMenuSelection('comment', 'create') ?>>
             <?= $this->url->link(t('Add a comment'), 'comment', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>

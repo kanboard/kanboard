@@ -1,9 +1,10 @@
+<div class="page-header">
+    <h2><?= t('Sub-Tasks') ?></h2>
+</div>
+
 <div id="subtasks" class="task-show-section">
 
     <?php if (! empty($subtasks)): ?>
-        <div class="page-header">
-            <h2><?= t('Sub-Tasks') ?></h2>
-        </div>
 
         <?php $first_position = $subtasks[0]['position']; ?>
         <?php $last_position = $subtasks[count($subtasks) - 1]['position']; ?>
@@ -20,7 +21,7 @@
             <tr>
                 <td>
                     <?php if ($editable): ?>
-                        <?= $this->subtask->toggleStatus($subtask, 'task') ?>
+                        <?= $this->subtask->toggleStatus($subtask, $redirect) ?>
                     <?php else: ?>
                         <?= $this->render('subtask/icons', array('subtask' => $subtask)) . $this->e($subtask['title']) ?>
                     <?php endif ?>
@@ -66,19 +67,19 @@
                         <ul>
                             <?php if ($subtask['position'] != $first_position): ?>
                                 <li>
-                                    <?= $this->url->link(t('Move Up'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'up'), true) ?>
+                                    <?= $this->url->link(t('Move Up'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'up', 'redirect' => $redirect), true) ?>
                                 </li>
                             <?php endif ?>
                             <?php if ($subtask['position'] != $last_position): ?>
                                 <li>
-                                    <?= $this->url->link(t('Move Down'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'down'), true) ?>
+                                    <?= $this->url->link(t('Move Down'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'down', 'redirect' => $redirect), true) ?>
                                 </li>
                             <?php endif ?>
                             <li>
-                                <?= $this->url->link(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
+                                <?= $this->url->link(t('Edit'), 'subtask', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id']), false, 'popover') ?>
                             </li>
                             <li>
-                                <?= $this->url->link(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
+                                <?= $this->url->link(t('Remove'), 'subtask', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id']), false, 'popover') ?>
                             </li>
                         </ul>
                         </div>
@@ -90,11 +91,6 @@
     <?php endif ?>
 
     <?php if ($editable && $this->user->hasProjectAccess('subtask', 'save', $task['project_id'])): ?>
-        <?php if (empty($subtasks)): ?>
-            <div class="page-header">
-                <h2><?= t('Sub-Tasks') ?></h2>
-            </div>
-        <?php endif ?>
         <form method="post" action="<?= $this->url->href('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
             <?= $this->form->csrf() ?>
             <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
