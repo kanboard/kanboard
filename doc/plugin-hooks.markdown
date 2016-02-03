@@ -151,13 +151,14 @@ Template names without prefix are core templates.
 
 List of template hooks:
 
+- `template:analytic:sidebar`
+- `template:app:filters-helper:before`
+- `template:app:filters-helper:after`
 - `template:auth:login-form:before`
 - `template:auth:login-form:after`
-- `template:dashboard:sidebar`
 - `template:config:sidebar`
 - `template:config:integrations`
-- `template:project:integrations`
-- `template:user:integrations`
+- `template:dashboard:sidebar`
 - `template:export:sidebar`
 - `template:layout:head`
 - `template:layout:top`
@@ -165,12 +166,16 @@ List of template hooks:
 - `template:project:dropdown`: "Actions" menu on left in different project views
 - `template:project:header:before`
 - `template:project:header:after`
+- `template:project:integrations`
+- `template:project:sidebar`
 - `template:project-user:sidebar`
 - `template:task:sidebar:information`
 - `template:task:sidebar:actions`
-- `template:user:sidebar:information`
+- `template:user:authentication:form`
+- `template:user:create-remote:form`
+- `template:user:external`
+- `template:user:integrations`
 - `template:user:sidebar:actions`
-- `template:app:filters-helper:before`
-- `template:app:filters-helper:after`
+- `template:user:sidebar:information`
 
 Another template hooks can be added if necessary, just ask on the issue tracker.
