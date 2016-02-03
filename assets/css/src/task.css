@@ -168,24 +168,36 @@ span.task-board-date-overdue {
 }
 
 /* task view */
-.task-show-details {
-    position: relative;
-    border-radius: 5px;
-    padding-bottom: 10px;
+#task-summary h2 {
+    color: #666;
+    font-size: 2.5em;
+    margin-top: 0;
+    padding-top: 0;
 }
 
-.task-show-details h2 {
-    font-size: 1.8em;
-    margin: 0;
-    margin-bottom: 25px;
-    padding: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+.task-summary-container {
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 15px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
 }
 
-.task-show-details li {
-    margin-left: 25px;
-    list-style-type: circle;
+.task-summary-column {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.task-summary-column span {
+    color: #777;
+}
+
+.task-summary-column li {
+    line-height: 23px;
 }
 
 .task-show-section {
