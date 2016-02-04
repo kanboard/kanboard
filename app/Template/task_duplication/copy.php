@@ -6,7 +6,7 @@
     <p class="alert"><?= t('There is no destination project available.') ?></p>
 <?php else: ?>
 
-    <form method="post" action="<?= $this->url->href('taskduplication', 'copy', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <form class="popover-form" method="post" action="<?= $this->url->href('taskduplication', 'copy', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
         <?= $this->form->hidden('id', $values) ?>
@@ -39,9 +39,9 @@
         <p class="form-help"><?= t('Current assignee: %s', ($task['assignee_name'] ?: $task['assignee_username']) ?: e('not assigned')) ?></p>
 
         <div class="form-actions">
-            <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+            <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
             <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
         </div>
     </form>
 

@@ -2,6 +2,9 @@
     <div class="page-header">
         <ul>
             <li>
+                <?= $this->render('task/menu', array('task' => $task)) ?>
+            </li>
+            <li>
                 <i class="fa fa-th fa-fw"></i>
                 <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $task['project_id']), false, '', '', false, $task['swimlane_id'] != 0 ? 'swimlane-'.$task['swimlane_id'] : '') ?>
             </li>

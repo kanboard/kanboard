@@ -59,7 +59,7 @@ class File extends Base
             $this->flash->failure(t('Unable to upload the file.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
     }
 
     /**

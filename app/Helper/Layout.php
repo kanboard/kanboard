@@ -60,7 +60,7 @@ class Layout extends Base
      */
     public function task($template, array $params)
     {
-        $params['title'] = '#'.$params['task']['id'].' '.$params['task']['title'];
+        $params['title'] = $params['task']['title'];
         return $this->subLayout('task/layout', 'task/sidebar', $template, $params);
     }
 

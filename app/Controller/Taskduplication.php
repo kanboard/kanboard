@@ -28,7 +28,7 @@ class Taskduplication extends Base
                 $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task_id)));
             } else {
                 $this->flash->failure(t('Unable to create this task.'));
-                $this->response->redirect($this->helper->url->to('taskduplication', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+                $this->response->redirect($this->helper->url->to('taskduplication', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
             }
         }
 
