@@ -4,7 +4,7 @@
 
 <?php if ($task['recurrence_status'] != \Kanboard\Model\Task::RECURRING_STATUS_NONE): ?>
 <div class="listing">
-    <?= $this->render('task/recurring_info', array(
+    <?= $this->render('task_recurrence/info', array(
         'task' => $task,
         'recurrence_trigger_list' => $recurrence_trigger_list,
         'recurrence_timeframe_list' => $recurrence_timeframe_list,
