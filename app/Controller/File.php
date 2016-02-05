@@ -23,17 +23,11 @@ class File extends Base
 
         if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot')) !== false) {
             $this->flash->success(t('Screenshot uploaded successfully.'));
-
-            if ($this->request->getStringParam('redirect') === 'board') {
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            }
-
-            $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
-        $this->response->html($this->taskLayout('file/screenshot', array(
+        $this->response->html($this->helper->layout->task('file/screenshot', array(
             'task' => $task,
-            'redirect' => 'task',
         )));
     }
 
@@ -46,7 +40,7 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('file/new', array(
+        $this->response->html($this->helper->layout->task('file/new', array(
             'task' => $task,
             'max_size' => ini_get('upload_max_filesize'),
         )));
@@ -65,7 +59,7 @@ class File extends Base
             $this->flash->failure(t('Unable to upload the file.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
     }
 
     /**
@@ -184,7 +178,7 @@ class File extends Base
         $task = $this->getTask();
         $file = $this->file->getById($this->request->getIntegerParam('file_id'));
 
-        $this->response->html($this->taskLayout('file/remove', array(
+        $this->response->html($this->helper->layout->task('file/remove', array(
             'task' => $task,
             'file' => $file,
         )));

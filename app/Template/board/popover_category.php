@@ -9,8 +9,7 @@
         <?= $this->form->hidden('id', $values) ?>
         <?= $this->form->hidden('project_id', $values) ?>
 
-        <?= $this->form->label(t('Category'), 'category_id') ?>
-        <?= $this->form->select('category_id', $categories_list, $values, array(), array('autofocus')) ?><br/>
+        <?= $this->task->selectCategory($categories_list, $values, array(), array('autofocus'), true) ?>
 
         <div class="form-actions">
             <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>

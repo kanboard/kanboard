@@ -21,7 +21,7 @@ class Auth extends Base
             $this->response->redirect($this->helper->url->to('app', 'index'));
         }
 
-        $this->response->html($this->template->layout('auth/index', array(
+        $this->response->html($this->helper->layout->app('auth/index', array(
             'captcha' => ! empty($values['username']) && $this->userLocking->hasCaptcha($values['username']),
             'errors' => $errors,
             'values' => $values,

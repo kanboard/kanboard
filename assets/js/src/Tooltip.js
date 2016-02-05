@@ -48,21 +48,6 @@ Tooltip.prototype.listen = function() {
                 var position = $(_this).tooltip("option", "position");
                 position.of = $(_this);
                 tooltip.position(position);
-
-                // Toggle subtasks status
-                $('#tooltip-subtasks a').not(".popover").click(function(e) {
-
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    if ($(this).hasClass("popover-subtask-restriction")) {
-                        self.app.popover.open($(this).attr('href'));
-                        $(_this).tooltip('close');
-                    }
-                    else {
-                        $.get($(this).attr('href'), setTooltipContent);
-                    }
-                });
             });
 
             return '<i class="fa fa-spinner fa-spin"></i>';

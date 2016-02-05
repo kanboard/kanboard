@@ -1,7 +1,6 @@
 function App() {
     this.board = new Board(this);
     this.markdown = new Markdown();
-    this.sidebar = new Sidebar();
     this.search = new Search(this);
     this.swimlane = new Swimlane();
     this.dropdown = new Dropdown();
@@ -33,7 +32,6 @@ App.prototype.listen = function() {
     this.project.listen();
     this.popover.listen();
     this.markdown.listen();
-    this.sidebar.listen();
     this.tooltip.listen();
     this.dropdown.listen();
     this.search.listen();
@@ -43,6 +41,19 @@ App.prototype.listen = function() {
     this.autoComplete();
     this.datePicker();
     this.focus();
+
+    $(document).on("click", ".ajax-replace", function(e) {
+        e.preventDefault();
+        var el = $(this);
+
+        $.ajax({
+            cache: false,
+            url: el.attr("href"),
+            success: function(data) {
+                el.replaceWith(data);
+            }
+        });
+    });
 };
 
 App.prototype.refresh = function() {

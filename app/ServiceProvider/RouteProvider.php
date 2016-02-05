@@ -43,10 +43,12 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('search', 'search', 'index');
             $container['route']->addRoute('search/:search', 'search', 'index');
 
+            // ProjectCreation routes
+            $container['route']->addRoute('project/create', 'ProjectCreation', 'create');
+            $container['route']->addRoute('project/create/private', 'ProjectCreation', 'createPrivate');
+
             // Project routes
             $container['route']->addRoute('projects', 'project', 'index');
-            $container['route']->addRoute('project/create', 'project', 'create');
-            $container['route']->addRoute('project/create/private', 'project', 'createPrivate');
             $container['route']->addRoute('project/:project_id', 'project', 'show');
             $container['route']->addRoute('p/:project_id', 'project', 'show');
             $container['route']->addRoute('project/:project_id/customer-filter', 'customfilter', 'index');
@@ -105,24 +107,10 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/task/:task_id/activity', 'activity', 'task');
             $container['route']->addRoute('project/:project_id/task/:task_id/screenshot', 'file', 'screenshot');
             $container['route']->addRoute('project/:project_id/task/:task_id/upload', 'file', 'create');
-            $container['route']->addRoute('project/:project_id/task/:task_id/comment', 'comment', 'create');
-            $container['route']->addRoute('project/:project_id/task/:task_id/link', 'tasklink', 'create');
             $container['route']->addRoute('project/:project_id/task/:task_id/transitions', 'task', 'transitions');
             $container['route']->addRoute('project/:project_id/task/:task_id/analytics', 'task', 'analytics');
-            $container['route']->addRoute('project/:project_id/task/:task_id/remove', 'task', 'remove');
-
-            $container['route']->addRoute('project/:project_id/task/:task_id/edit', 'taskmodification', 'edit');
-            $container['route']->addRoute('project/:project_id/task/:task_id/description', 'taskmodification', 'description');
-            $container['route']->addRoute('project/:project_id/task/:task_id/recurrence', 'taskmodification', 'recurrence');
-
-            $container['route']->addRoute('project/:project_id/task/:task_id/close', 'taskstatus', 'close');
-            $container['route']->addRoute('project/:project_id/task/:task_id/open', 'taskstatus', 'open');
-
-            $container['route']->addRoute('project/:project_id/task/:task_id/duplicate', 'taskduplication', 'duplicate');
-            $container['route']->addRoute('project/:project_id/task/:task_id/copy', 'taskduplication', 'copy');
-            $container['route']->addRoute('project/:project_id/task/:task_id/copy/:dst_project_id', 'taskduplication', 'copy');
-            $container['route']->addRoute('project/:project_id/task/:task_id/move', 'taskduplication', 'move');
-            $container['route']->addRoute('project/:project_id/task/:task_id/move/:dst_project_id', 'taskduplication', 'move');
+            $container['route']->addRoute('project/:project_id/task/:task_id/internal/links', 'tasklink', 'show');
+            $container['route']->addRoute('project/:project_id/task/:task_id/external/links', 'TaskExternalLink', 'show');
 
             // Exports
             $container['route']->addRoute('export/tasks/:project_id', 'export', 'tasks');
@@ -205,9 +193,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('documentation', 'doc', 'show');
 
             // Auth routes
-            $container['route']->addRoute('oauth/google', 'oauth', 'google');
-            $container['route']->addRoute('oauth/github', 'oauth', 'github');
-            $container['route']->addRoute('oauth/gitlab', 'oauth', 'gitlab');
             $container['route']->addRoute('login', 'auth', 'login');
             $container['route']->addRoute('logout', 'auth', 'logout');
 

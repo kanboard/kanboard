@@ -1,10 +1,38 @@
 Version 1.0.25 (unreleased)
 --------------
 
+Breaking changes:
+
+* Core functionalities moved to external plugins:
+    - Google Auth: https://github.com/kanboard/plugin-google-auth
+    - Github Auth: https://github.com/kanboard/plugin-github-auth
+    - Gitlab Auth: https://github.com/kanboard/plugin-gitlab-auth
+
 New features:
 
+* When creating a new project, have the possibility to select another project to duplicate
+* Add a "Me" button to assignee form element
+* Add external links for tasks with plugin api
 * Add project owner (Directly Responsible Individual)
 * Add configurable task priority
+* Add Greek translation
+* Add automatic actions to close tasks with no activity
+* Add automatic actions to send an email when there is no activity on a task
+* Regroup all daily background tasks in one command: "cronjob"
+
+Improvements:
+
+* Do not refresh the whole page when changing subtask status (work in progress)
+* Add dropdown menu with inline popup for all task actions
+* Change sidebar style
+* Change task summary layout
+* Use inline popup for subtasks modification
+* Move homepage menus to the user dropdown
+* Have a new task assigned to the creator by default instead of "no assignee"
+* Show progress for task links in board tooltips
+* Simplify code to handle ajax popover and redirects
+* Simplify layout and templates generation
+* Move task form elements to Task helper
 
 Version 1.0.24
 --------------

@@ -8,14 +8,7 @@
     <?= $this->form->hidden('id', $values) ?>
     <?= $this->form->hidden('username', $values) ?>
 
-    <?= $this->form->label(t('Google Id'), 'google_id') ?>
-    <?= $this->form->text('google_id', $values, $errors) ?>
-
-    <?= $this->form->label(t('Github Id'), 'github_id') ?>
-    <?= $this->form->text('github_id', $values, $errors) ?>
-
-    <?= $this->form->label(t('Gitlab Id'), 'gitlab_id') ?>
-    <?= $this->form->text('gitlab_id', $values, $errors) ?>
+    <?= $this->hook->render('template:user:authentication:form', array('values' => $values, 'errors' => $errors, 'user' => $user)) ?>
 
     <?= $this->form->checkbox('is_ldap_user', t('Remote user'), 1, isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1) ?>
     <?= $this->form->checkbox('disable_login_form', t('Disallow login form'), 1, isset($values['disable_login_form']) && $values['disable_login_form'] == 1) ?>

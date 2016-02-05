@@ -1,15 +1,17 @@
-<?php if (! empty($links)): ?>
 <div class="page-header">
-    <h2><?= t('Links') ?></h2>
+    <h2><?= t('Internal links') ?></h2>
 </div>
-<table id="links">
+<?php if (empty($links)): ?>
+    <p class="alert"><?= t('There is no internal link for the moment.') ?></p>
+<?php else: ?>
+<table id="links" class="table-small table-stripped">
     <tr>
         <th class="column-20"><?= t('Label') ?></th>
         <th class="column-30"><?= t('Task') ?></th>
         <th class="column-20"><?= t('Project') ?></th>
         <th><?= t('Column') ?></th>
         <th><?= t('Assignee') ?></th>
-        <?php if ($editable): ?>
+        <?php if ($editable && $this->user->hasProjectAccess('Tasklink', 'edit', $task['project_id'])): ?>
             <th class="column-5"><?= t('Action') ?></th>
         <?php endif ?>
     </tr>
@@ -43,7 +45,7 @@
                     ) ?>
                 <?php endif ?>
 
-                <br/>
+                <br>
 
                 <?php if (! empty($link['task_time_spent'])): ?>
                     <strong><?= $this->e($link['task_time_spent']).'h' ?></strong> <?= t('spent') ?>
@@ -64,7 +66,7 @@
                     <?php endif ?>
                 <?php endif ?>
             </td>
-            <?php if ($editable): ?>
+            <?php if ($editable && $this->user->hasProjectAccess('Tasklink', 'edit', $task['project_id'])): ?>
             <td>
                 <div class="dropdown">
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>

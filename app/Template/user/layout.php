@@ -13,7 +13,7 @@
         <?= $this->render('user/sidebar', array('user' => $user)) ?>
 
         <div class="sidebar-content">
-            <?= $user_content_for_layout ?>
+            <?= $content_for_sublayout ?>
         </div>
     </section>
 </section>

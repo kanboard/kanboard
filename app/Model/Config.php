@@ -76,6 +76,7 @@ class Config extends Setting
             'en_US' => 'English',
             'es_ES' => 'Español',
             'fr_FR' => 'Français',
+            'el_GR' => 'Grec',
             'it_IT' => 'Italiano',
             'hu_HU' => 'Magyar',
             'my_MY' => 'Melayu',
@@ -131,7 +132,8 @@ class Config extends Setting
             'zh_CN' => 'zh-cn',
             'ja_JP' => 'ja',
             'th_TH' => 'th',
-            'id_ID' => 'id'
+            'id_ID' => 'id',
+            'el_GR' => 'el',
         );
 
         $lang = $this->getCurrentLanguage();

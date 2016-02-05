@@ -159,7 +159,7 @@ class SubtaskTest extends Base
         $this->assertEquals(0, $subtask['user_id']);
         $this->assertEquals(1, $subtask['task_id']);
 
-        $this->assertTrue($s->toggleStatus(1));
+        $this->assertEquals(Subtask::STATUS_INPROGRESS, $s->toggleStatus(1));
 
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);
@@ -167,7 +167,7 @@ class SubtaskTest extends Base
         $this->assertEquals(0, $subtask['user_id']);
         $this->assertEquals(1, $subtask['task_id']);
 
-        $this->assertTrue($s->toggleStatus(1));
+        $this->assertEquals(Subtask::STATUS_DONE, $s->toggleStatus(1));
 
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);
@@ -175,7 +175,7 @@ class SubtaskTest extends Base
         $this->assertEquals(0, $subtask['user_id']);
         $this->assertEquals(1, $subtask['task_id']);
 
-        $this->assertTrue($s->toggleStatus(1));
+        $this->assertEquals(Subtask::STATUS_TODO, $s->toggleStatus(1));
 
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);
@@ -205,7 +205,7 @@ class SubtaskTest extends Base
         // Set the current logged user
         $this->container['sessionStorage']->user = array('id' => 1);
 
-        $this->assertTrue($s->toggleStatus(1));
+        $this->assertEquals(Subtask::STATUS_INPROGRESS, $s->toggleStatus(1));
 
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);
@@ -213,7 +213,7 @@ class SubtaskTest extends Base
         $this->assertEquals(1, $subtask['user_id']);
         $this->assertEquals(1, $subtask['task_id']);
 
-        $this->assertTrue($s->toggleStatus(1));
+        $this->assertEquals(Subtask::STATUS_DONE, $s->toggleStatus(1));
 
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);
@@ -221,7 +221,7 @@ class SubtaskTest extends Base
         $this->assertEquals(1, $subtask['user_id']);
         $this->assertEquals(1, $subtask['task_id']);
 
-        $this->assertTrue($s->toggleStatus(1));
+        $this->assertEquals(Subtask::STATUS_TODO, $s->toggleStatus(1));
 
         $subtask = $s->getById(1);
         $this->assertNotEmpty($subtask);

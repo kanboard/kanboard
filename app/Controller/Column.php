@@ -26,7 +26,7 @@ class Column extends Base
             $values['task_limit['.$column['id'].']'] = $column['task_limit'] ?: null;
         }
 
-        $this->response->html($this->projectLayout('column/index', array(
+        $this->response->html($this->helper->layout->project('column/index', array(
             'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
             'columns' => $columns,
@@ -75,7 +75,7 @@ class Column extends Base
         $project = $this->getProject();
         $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
 
-        $this->response->html($this->projectLayout('column/edit', array(
+        $this->response->html($this->helper->layout->project('column/edit', array(
             'errors' => $errors,
             'values' => $values ?: $column,
             'project' => $project,
@@ -136,7 +136,7 @@ class Column extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('column/remove', array(
+        $this->response->html($this->helper->layout->project('column/remove', array(
             'column' => $this->board->getColumn($this->request->getIntegerParam('column_id')),
             'project' => $project,
             'title' => t('Remove a column from a board')

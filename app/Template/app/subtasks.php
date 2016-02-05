@@ -24,7 +24,7 @@
                 <?= $this->url->link($this->e($subtask['task_name']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->subtask->toggleStatus($subtask, 'dashboard') ?>
+                <?= $this->subtask->toggleStatus($subtask, $subtask['project_id']) ?>
             </td>
             <td>
                 <?php if (! empty($subtask['time_spent'])): ?>

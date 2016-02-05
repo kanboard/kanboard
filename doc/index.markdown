@@ -103,6 +103,7 @@ Technical details
 ### Configuration
 
 - [Config file](config.markdown)
+- [Background tasks](cronjob.markdown)
 - [Email configuration](email-configuration.markdown)
 - [URL rewriting](nice-urls.markdown)
 
@@ -117,9 +118,6 @@ Technical details
 - [LDAP authentication](ldap-authentication.markdown)
 - [LDAP group synchronization](ldap-group-sync.markdown)
 - [LDAP parameters](ldap-parameters.markdown)
-- [Google authentication](google-authentication.markdown)
-- [Github authentication](github-authentication.markdown)
-- [Gitlab authentication](gitlab-authentication.markdown)
 - [Reverse proxy authentication](reverse-proxy-authentication.markdown)
 
 ### Contributors
