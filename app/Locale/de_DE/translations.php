@@ -26,7 +26,7 @@ return array(
     'Pink' => 'Pink',
     'Teal' => 'Türkis',
     'Cyan' => 'Cyan',
-    'Lime' => 'Grün (lime)',
+    'Lime' => 'Limette',
     'Light Green' => 'Hellgrün',
     'Amber' => 'Braun  (Amber)',
     'Save' => 'Speichern',
