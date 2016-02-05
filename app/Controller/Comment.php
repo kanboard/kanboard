@@ -107,7 +107,7 @@ class Comment extends Base
     public function update()
     {
         $task = $this->getTask();
-        $comment = $this->getComment();
+        $this->getComment();
 
         $values = $this->request->getValues();
         list($valid, $errors) = $this->commentValidator->validateModification($values);

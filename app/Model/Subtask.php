@@ -353,15 +353,16 @@ class Subtask extends Base
      *
      * @access public
      * @param  integer  $subtask_id
-     * @return bool
+     * @return boolean|integer
      */
     public function toggleStatus($subtask_id)
     {
         $subtask = $this->getById($subtask_id);
+        $status = ($subtask['status'] + 1) % 3;
 
         $values = array(
             'id' => $subtask['id'],
-            'status' => ($subtask['status'] + 1) % 3,
+            'status' => $status,
             'task_id' => $subtask['task_id'],
         );
 
@@ -369,7 +370,7 @@ class Subtask extends Base
             $values['user_id'] = $this->userSession->getId();
         }
 
-        return $this->update($values);
+        return $this->update($values) ? $status : false;
     }
 
     /**

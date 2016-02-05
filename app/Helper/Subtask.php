@@ -10,38 +10,40 @@ namespace Kanboard\Helper;
  */
 class Subtask extends \Kanboard\Core\Base
 {
+    public function getTitle(array $subtask)
+    {
+        if ($subtask['status'] == 0) {
+            $html = '<i class="fa fa-square-o fa-fw"></i>';
+        } elseif ($subtask['status'] == 1) {
+            $html = '<i class="fa fa-gears fa-fw"></i>';
+        } else {
+            $html = '<i class="fa fa-check-square-o fa-fw"></i>';
+        }
+
+        return $html.$this->helper->e($subtask['title']);
+    }
+
     /**
      * Get the link to toggle subtask status
      *
      * @access public
      * @param  array    $subtask
-     * @param  string   $redirect
      * @param  integer  $project_id
      * @return string
      */
-    public function toggleStatus(array $subtask, $redirect, $project_id = 0)
+    public function toggleStatus(array $subtask, $project_id)
     {
-        if ($project_id > 0 && ! $this->helper->user->hasProjectAccess('subtask', 'edit', $project_id)) {
-            return trim($this->template->render('subtask/icons', array('subtask' => $subtask))) . $this->helper->e($subtask['title']);
+        if (! $this->helper->user->hasProjectAccess('subtask', 'edit', $project_id)) {
+            return $this->getTitle($subtask);
         }
+
+        $params = array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']);
 
         if ($subtask['status'] == 0 && isset($this->sessionStorage->hasSubtaskInProgress) && $this->sessionStorage->hasSubtaskInProgress) {
-            return $this->helper->url->link(
-                trim($this->template->render('subtask/icons', array('subtask' => $subtask))) . $this->helper->e($subtask['title']),
-                'subtask',
-                'subtaskRestriction',
-                array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect),
-                false,
-                'popover task-board-popover'
-            );
+            return $this->helper->url->link($this->getTitle($subtask), 'SubtaskRestriction', 'popover', $params, false, 'popover');
         }
 
-        return $this->helper->url->link(
-            trim($this->template->render('subtask/icons', array('subtask' => $subtask))) . $this->helper->e($subtask['title']),
-            'subtask',
-            'toggleStatus',
-            array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'redirect' => $redirect)
-        );
+        return $this->helper->url->link($this->getTitle($subtask), 'SubtaskStatus', 'change', $params, false, 'ajax-replace');
     }
 
     public function selectTitle(array $values, array $errors = array(), array $attributes = array())

@@ -3,12 +3,12 @@
     <ul>
         <?php if ($subtask['position'] != $first_position): ?>
             <li>
-                <?= $this->url->link(t('Move Up'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'up', 'redirect' => $redirect), true) ?>
+                <?= $this->url->link(t('Move Up'), 'subtask', 'movePosition', array('project_id' => $task['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'up'), true) ?>
             </li>
         <?php endif ?>
         <?php if ($subtask['position'] != $last_position): ?>
             <li>
-                <?= $this->url->link(t('Move Down'), 'subtask', 'movePosition', array('project_id' => $project['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'down', 'redirect' => $redirect), true) ?>
+                <?= $this->url->link(t('Move Down'), 'subtask', 'movePosition', array('project_id' => $task['id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'direction' => 'down'), true) ?>
             </li>
         <?php endif ?>
         <li>

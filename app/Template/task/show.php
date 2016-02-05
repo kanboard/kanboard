@@ -18,15 +18,14 @@
     'subtasks' => $subtasks,
     'project' => $project,
     'users_list' => isset($users_list) ? $users_list : array(),
-    'editable' => $this->user->hasProjectAccess('subtask', 'edit', $project['id']),
-    'redirect' => 'task',
+    'editable' => true,
 )) ?>
 
 <?= $this->render('tasklink/show', array(
     'task' => $task,
     'links' => $links,
     'link_label_list' => $link_label_list,
-    'editable' => $this->user->hasProjectAccess('tasklink', 'edit', $project['id']),
+    'editable' => true,
     'is_public' => false,
 )) ?>
 

@@ -22,6 +22,7 @@ New features:
 
 Improvements:
 
+* Do not refresh the whole page when changing subtask status (work in progress)
 * Add dropdown menu with inline popup for all task actions
 * Change sidebar style
 * Change task summary layout

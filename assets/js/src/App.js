@@ -41,6 +41,19 @@ App.prototype.listen = function() {
     this.autoComplete();
     this.datePicker();
     this.focus();
+
+    $(document).on("click", ".ajax-replace", function(e) {
+        e.preventDefault();
+        var el = $(this);
+
+        $.ajax({
+            cache: false,
+            url: el.attr("href"),
+            success: function(data) {
+                el.replaceWith(data);
+            }
+        });
+    });
 };
 
 App.prototype.refresh = function() {

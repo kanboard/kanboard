@@ -214,8 +214,7 @@ abstract class Base extends \Kanboard\Core\Base
         $project = $this->project->getByIdWithOwner($project_id);
 
         if (empty($project)) {
-            $this->flash->failure(t('Project not found.'));
-            $this->response->redirect($this->helper->url->to('project', 'index'));
+            $this->notfound();
         }
 
         return $project;
@@ -240,6 +239,23 @@ abstract class Base extends \Kanboard\Core\Base
         }
 
         return $user;
+    }
+
+    /**
+     * Get the current subtask
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getSubtask()
+    {
+        $subtask = $this->subtask->getById($this->request->getIntegerParam('subtask_id'));
+
+        if (empty($subtask)) {
+            $this->notfound();
+        }
+
+        return $subtask;
     }
 
     /**
