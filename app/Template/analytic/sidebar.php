@@ -22,5 +22,8 @@
         <li <?= $this->app->checkMenuSelection('analytic', 'compareHours') ?>>
             <?= $this->url->link(t('Estimated vs actual time'), 'analytic', 'compareHours', array('project_id' => $project['id'])) ?>
         </li>
+        
+        <?= $this->hook->render('template:analytic:sidebar', array('project' => $project)) ?>
+        
     </ul>
 </div>
