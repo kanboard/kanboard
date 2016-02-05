@@ -71,7 +71,7 @@ class Taskcreation extends Base
             return $this->create(array(
                 'owner_id' => $values['owner_id'],
                 'color_id' => $values['color_id'],
-                'category_id' => $values['category_id'],
+                'category_id' => isset($values['category_id']) ? $values['category_id'] : 0,
                 'column_id' => $values['column_id'],
                 'swimlane_id' => isset($values['swimlane_id']) ? $values['swimlane_id'] : 0,
                 'another_task' => 1,
