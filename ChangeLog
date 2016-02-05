@@ -22,6 +22,7 @@ New features:
 
 Improvements:
 
+* Replace box shadow by larger border width when a task is recently modified
 * Do not refresh the whole page when changing subtask status
 * Add dropdown menu with inline popup for all task actions
 * Change sidebar style
