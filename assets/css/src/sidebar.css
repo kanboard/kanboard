@@ -26,7 +26,8 @@
     padding-right: 10px;
     border-right: 1px dotted #eee;
     font-size: 0.95em;
-    width: 240px;
+    max-width: 240px;
+    width: 18%;
     -ms-flex: 0 100px;
     -webkit-box-flex: 0;
     -moz-box-flex: 0;
