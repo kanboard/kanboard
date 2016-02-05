@@ -95,7 +95,6 @@ class BoardPopover extends Base
 
         $this->response->html($this->template->render('file/screenshot', array(
             'task' => $task,
-            'redirect' => 'board',
         )));
     }
 

@@ -16,7 +16,7 @@
         <tr>
             <td>
                 <?php if ($editable): ?>
-                    <?= $this->subtask->toggleStatus($subtask, $task['project_id']) ?>
+                    <?= $this->subtask->toggleStatus($subtask, $task['project_id'], true) ?>
                 <?php else: ?>
                     <?= $this->subtask->getTitle($subtask) ?>
                 <?php endif ?>
@@ -41,11 +41,11 @@
                     <li>
                         <?php if ($subtask['is_timer_started']): ?>
                             <i class="fa fa-pause"></i>
-                            <?= $this->url->link(t('Stop timer'), 'timer', 'subtask', array('timer' => 'stop', 'project_id' => $task['project_id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'])) ?>
+                            <?= $this->url->link(t('Stop timer'), 'SubtaskStatus', 'timer', array('timer' => 'stop', 'project_id' => $task['project_id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']), false, 'subtask-toggle-timer') ?>
                             (<?= $this->dt->age($subtask['timer_start_date']) ?>)
                         <?php else: ?>
                             <i class="fa fa-play-circle-o"></i>
-                            <?= $this->url->link(t('Start timer'), 'timer', 'subtask', array('timer' => 'start', 'project_id' => $task['project_id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'])) ?>
+                            <?= $this->url->link(t('Start timer'), 'SubtaskStatus', 'timer', array('timer' => 'start', 'project_id' => $task['project_id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']), false, 'subtask-toggle-timer') ?>
                         <?php endif ?>
                     </li>
                     <?php endif ?>

@@ -8,6 +8,7 @@ function App() {
     this.popover = new Popover(this);
     this.task = new Task();
     this.project = new Project();
+    this.subtask = new Subtask();
     this.keyboardShortcuts();
     this.chosen();
     this.poll();
@@ -37,23 +38,11 @@ App.prototype.listen = function() {
     this.search.listen();
     this.task.listen();
     this.swimlane.listen();
+    this.subtask.listen();
     this.search.focus();
     this.autoComplete();
     this.datePicker();
     this.focus();
-
-    $(document).on("click", ".ajax-replace", function(e) {
-        e.preventDefault();
-        var el = $(this);
-
-        $.ajax({
-            cache: false,
-            url: el.attr("href"),
-            success: function(data) {
-                el.replaceWith(data);
-            }
-        });
-    });
 };
 
 App.prototype.refresh = function() {
