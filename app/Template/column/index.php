@@ -29,7 +29,7 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
-                        <?= $this->url->link(t('Edit'), 'column', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
+                        <?= $this->url->link(t('Edit'), 'column', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
                     </li>
                     <?php if ($column['position'] != $first_position): ?>
                     <li>
@@ -42,7 +42,7 @@
                     </li>
                     <?php endif ?>
                     <li>
-                        <?= $this->url->link(t('Remove'), 'column', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
+                        <?= $this->url->link(t('Remove'), 'column', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
                     </li>
                 </ul>
                 </div>
@@ -87,6 +87,6 @@
     <div class="form-help"><?= $this->url->doc(t('Write your text in Markdown'), 'syntax-guide') ?></div>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Add this column') ?>" class="btn btn-blue"/>
+        <input type="submit" value="<?= t('Add this column') ?>" class="btn btn-blue">
     </div>
 </form>

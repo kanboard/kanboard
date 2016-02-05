@@ -53,7 +53,7 @@
             </ul>
         </td>
         <td>
-            <?= $this->url->link(t('Remove'), 'action', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id'])) ?>
+            <?= $this->url->link(t('Remove'), 'action', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id']), false, 'popover') ?>
         </td>
     </tr>
     <?php endforeach ?>

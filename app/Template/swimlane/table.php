@@ -27,7 +27,7 @@
                     </li>
                 <?php endif ?>
                 <li>
-                    <?= $this->url->link(t('Edit'), 'swimlane', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
+                    <?= $this->url->link(t('Edit'), 'swimlane', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                 </li>
                 <li>
                     <?php if ($swimlane['is_active']): ?>
@@ -37,7 +37,7 @@
                     <?php endif ?>
                 </li>
                 <li>
-                    <?= $this->url->link(t('Remove'), 'swimlane', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
+                    <?= $this->url->link(t('Remove'), 'swimlane', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                 </li>
             </ul>
             </div>

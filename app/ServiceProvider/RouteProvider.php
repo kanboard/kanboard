@@ -51,7 +51,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('projects', 'project', 'index');
             $container['route']->addRoute('project/:project_id', 'project', 'show');
             $container['route']->addRoute('p/:project_id', 'project', 'show');
-            $container['route']->addRoute('project/:project_id/customer-filter', 'customfilter', 'index');
+            $container['route']->addRoute('project/:project_id/customer-filters', 'customfilter', 'index');
             $container['route']->addRoute('project/:project_id/share', 'project', 'share');
             $container['route']->addRoute('project/:project_id/notifications', 'project', 'notifications');
             $container['route']->addRoute('project/:project_id/integrations', 'project', 'integrations');
@@ -77,27 +77,15 @@ class RouteProvider implements ServiceProviderInterface
 
             // Action routes
             $container['route']->addRoute('project/:project_id/actions', 'action', 'index');
-            $container['route']->addRoute('project/:project_id/action/:action_id/confirm', 'action', 'confirm');
 
             // Column routes
             $container['route']->addRoute('project/:project_id/columns', 'column', 'index');
-            $container['route']->addRoute('project/:project_id/column/:column_id/edit', 'column', 'edit');
-            $container['route']->addRoute('project/:project_id/column/:column_id/confirm', 'column', 'confirm');
-            $container['route']->addRoute('project/:project_id/column/:column_id/move/:direction', 'column', 'move');
 
             // Swimlane routes
             $container['route']->addRoute('project/:project_id/swimlanes', 'swimlane', 'index');
-            $container['route']->addRoute('project/:project_id/swimlane/:swimlane_id/edit', 'swimlane', 'edit');
-            $container['route']->addRoute('project/:project_id/swimlane/:swimlane_id/confirm', 'swimlane', 'confirm');
-            $container['route']->addRoute('project/:project_id/swimlane/:swimlane_id/disable', 'swimlane', 'disable');
-            $container['route']->addRoute('project/:project_id/swimlane/:swimlane_id/enable', 'swimlane', 'enable');
-            $container['route']->addRoute('project/:project_id/swimlane/:swimlane_id/up', 'swimlane', 'moveup');
-            $container['route']->addRoute('project/:project_id/swimlane/:swimlane_id/down', 'swimlane', 'movedown');
 
             // Category routes
             $container['route']->addRoute('project/:project_id/categories', 'category', 'index');
-            $container['route']->addRoute('project/:project_id/category/:category_id/edit', 'category', 'edit');
-            $container['route']->addRoute('project/:project_id/category/:category_id/confirm', 'category', 'confirm');
 
             // Task routes
             $container['route']->addRoute('project/:project_id/task/:task_id', 'task', 'show');

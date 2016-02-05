@@ -26,7 +26,7 @@ Improvements:
 * Add dropdown menu with inline popup for all task actions
 * Change sidebar style
 * Change task summary layout
-* Use inline popup for subtasks, categories
+* Use inline popup for subtasks, categories, swimlanes, actions and columns
 * Move homepage menus to the user dropdown
 * Have a new task assigned to the creator by default instead of "no assignee"
 * Show progress for task links in board tooltips
