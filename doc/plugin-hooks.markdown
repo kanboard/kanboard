@@ -151,31 +151,35 @@ Template names without prefix are core templates.
 
 List of template hooks:
 
-- `template:analytic:sidebar`
-- `template:app:filters-helper:before`
-- `template:app:filters-helper:after`
-- `template:auth:login-form:before`
-- `template:auth:login-form:after`
-- `template:config:sidebar`
-- `template:config:integrations`
-- `template:dashboard:sidebar`
-- `template:export:sidebar`
-- `template:layout:head`
-- `template:layout:top`
-- `template:layout:bottom`
-- `template:project:dropdown`: "Actions" menu on left in different project views
-- `template:project:header:before`
-- `template:project:header:after`
-- `template:project:integrations`
-- `template:project:sidebar`
-- `template:project-user:sidebar`
-- `template:task:sidebar:information`
-- `template:task:sidebar:actions`
-- `template:user:authentication:form`
-- `template:user:create-remote:form`
-- `template:user:external`
-- `template:user:integrations`
-- `template:user:sidebar:actions`
-- `template:user:sidebar:information`
+| Hook                                 | Description                                        |
+|--------------------------------------|----------------------------------------------------|
+| `template:analytic:sidebar`          | Sidebar on analytic pages                          |
+| `template:app:filters-helper:before` | Filter helper dropdown (top)                       |
+| `template:app:filters-helper:after`  | Filter helper dropdown (bottom)                    |
+| `template:auth:login-form:before`    | Login page (top)                                   |
+| `template:auth:login-form:after`     | Login page (bottom)                                |
+| `template:config:sidebar`            | Sidebar on settings page                           |
+| `template:config:integrations`       | Integration page in global settings                |
+| `template:dashboard:sidebar`         | Sidebar on dashboard page                          |
+| `template:export:sidebar`            | Sidebar on export pages                            |
+| `template:layout:head`               | Page layout `<head/>` tag                          |
+| `template:layout:top`                | Page layout top header                             |
+| `template:layout:bottom`             | Page layout footer                                 |
+| `template:project:dropdown`          | "Actions" menu on left in different project views  |
+| `template:project:header:before`     | Project filters (before)                           |
+| `template:project:header:after`      | Project filters (after)                            |
+| `template:project:integrations`      | Integration page in projects settings              |
+| `template:project:sidebar`           | Sidebar in project settings                        |
+| `template:project-user:sidebar`      | Sidebar on project user overview page              |
+| `template:task:menu`                 | "Actions" menu on left in different task views     |
+| `template:task:dropdown`             | Task dropdown menu in listing pages                |
+| `template:task:sidebar`              | Sidebar on task page                               |
+| `template:user:authentication:form`  | "Edit authentication" form in user profile         |
+| `template:user:create-remote:form`   | "Create remote user" form                          |
+| `template:user:external`             | "External authentication" page in user profile     |
+| `template:user:integrations`         | Integration page in user profile                   |
+| `template:user:sidebar:actions`      | Sidebar in user profile (section actions)          |
+| `template:user:sidebar:information`  | Sidebar in user profile (section information)      |
+
 
 Another template hooks can be added if necessary, just ask on the issue tracker.
