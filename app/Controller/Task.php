@@ -114,7 +114,7 @@ class Task extends Base
         $task = $this->getTask();
 
         $subtask_paginator = $this->paginator
-            ->setUrl('task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
+            ->setUrl('task', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
             ->setMax(15)
             ->setOrder('start')
             ->setDirection('DESC')

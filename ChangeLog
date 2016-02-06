@@ -36,6 +36,10 @@ Improvements:
 * Simplify layout and templates generation
 * Move task form elements to Task helper
 
+Bug fixes:
+
+* Fix pagination on task time tracking page
+
 Version 1.0.24
 --------------
 
