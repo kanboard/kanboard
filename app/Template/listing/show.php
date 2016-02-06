@@ -4,7 +4,7 @@
         'filters' => $filters,
     )) ?>
 
-    <?php if (! empty($values['search']) && $paginator->isEmpty()): ?>
+    <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No tasks found.') ?></p>
     <?php elseif (! $paginator->isEmpty()): ?>
         <table class="table-fixed table-small">
@@ -21,7 +21,7 @@
             <?php foreach ($paginator->getCollection() as $task): ?>
             <tr>
                 <td class="task-table color-<?= $task['color_id'] ?>">
-                    <?= $this->url->link('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+                    <?= $this->render('task/dropdown', array('task' => $task)) ?>
                 </td>
                 <td>
                     <?= $this->e($task['swimlane_name'] ?: $task['default_swimlane']) ?>

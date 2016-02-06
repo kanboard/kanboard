@@ -19,6 +19,7 @@ New features:
 * Add automatic actions to close tasks with no activity
 * Add automatic actions to send an email when there is no activity on a task
 * Regroup all daily background tasks in one command: "cronjob"
+* Add task dropdown menu on listing pages
 
 Improvements:
 

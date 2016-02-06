@@ -72,7 +72,7 @@
         </li>
         <?php endif ?>
 
-        <?= $this->hook->render('template:task:menu:actions') ?>
+        <?= $this->hook->render('template:task:menu') ?>
     </ul>
 </div>
 <?php endif ?>
