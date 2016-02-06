@@ -142,7 +142,7 @@ class Task extends Base
 
     public function selectStartDate(array $values, array $errors = array(), array $attributes = array())
     {
-        $placeholder = $this->helper->text->in($this->config->get('application_date_format'), $this->dateParser->getAvailableFormats());
+        $placeholder = date($this->config->get('application_date_format', 'm/d/Y H:i'));
         $attributes = array_merge(array('tabindex="11"', 'placeholder="'.$placeholder.'"'), $attributes);
 
         $html = $this->helper->form->label(t('Start Date'), 'date_started');
@@ -153,12 +153,11 @@ class Task extends Base
 
     public function selectDueDate(array $values, array $errors = array(), array $attributes = array())
     {
-        $placeholder = $this->helper->text->in($this->config->get('application_date_format'), $this->dateParser->getAvailableFormats());
+        $placeholder = date($this->config->get('application_date_format', 'm/d/Y'));
         $attributes = array_merge(array('tabindex="12"', 'placeholder="'.$placeholder.'"'), $attributes);
 
         $html = $this->helper->form->label(t('Due Date'), 'date_due');
         $html .= $this->helper->form->text('date_due', $values, $errors, $attributes, 'form-date');
-        $html .= '<div class="form-help">'.t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')).'</div>';
 
         return $html;
     }

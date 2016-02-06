@@ -6,23 +6,45 @@ use Kanboard\Helper\Dt;
 
 class DatetimeHelperTest extends Base
 {
+    public function testGetTime()
+    {
+        $helper = new Dt($this->container);
+        $this->assertEquals('17:25', $helper->time(1422206700));
+    }
+
+    public function testGetDate()
+    {
+        $helper = new Dt($this->container);
+        $this->assertEquals('01/25/2015', $helper->date(1422206700));
+        $this->assertEquals('01/25/2015', $helper->date('2015-01-25'));
+        $this->assertEquals('', $helper->date('0'));
+        $this->assertEquals('', $helper->date(0));
+        $this->assertEquals('', $helper->date(''));
+    }
+
+    public function testGetDatetime()
+    {
+        $helper = new Dt($this->container);
+        $this->assertEquals('01/25/2015 17:25', $helper->datetime(1422206700));
+    }
+
     public function testAge()
     {
-        $h = new Dt($this->container);
+        $helper = new Dt($this->container);
 
-        $this->assertEquals('&lt;15m', $h->age(0, 30));
-        $this->assertEquals('&lt;30m', $h->age(0, 1000));
-        $this->assertEquals('&lt;1h', $h->age(0, 3000));
-        $this->assertEquals('~2h', $h->age(0, 2*3600));
-        $this->assertEquals('1d', $h->age(0, 30*3600));
-        $this->assertEquals('2d', $h->age(0, 65*3600));
+        $this->assertEquals('&lt;15m', $helper->age(0, 30));
+        $this->assertEquals('&lt;30m', $helper->age(0, 1000));
+        $this->assertEquals('&lt;1h', $helper->age(0, 3000));
+        $this->assertEquals('~2h', $helper->age(0, 2*3600));
+        $this->assertEquals('1d', $helper->age(0, 30*3600));
+        $this->assertEquals('2d', $helper->age(0, 65*3600));
     }
 
     public function testGetDayHours()
     {
-        $h = new Dt($this->container);
+        $helper = new Dt($this->container);
 
-        $slots = $h->getDayHours();
+        $slots = $helper->getDayHours();
 
         $this->assertNotEmpty($slots);
         $this->assertCount(48, $slots);
@@ -36,9 +58,9 @@ class DatetimeHelperTest extends Base
 
     public function testGetWeekDays()
     {
-        $h = new Dt($this->container);
+        $helper = new Dt($this->container);
 
-        $slots = $h->getWeekDays();
+        $slots = $helper->getWeekDays();
 
         $this->assertNotEmpty($slots);
         $this->assertCount(7, $slots);
@@ -48,9 +70,9 @@ class DatetimeHelperTest extends Base
 
     public function testGetWeekDay()
     {
-        $h = new Dt($this->container);
+        $helper = new Dt($this->container);
 
-        $this->assertEquals('Monday', $h->getWeekDay(1));
-        $this->assertEquals('Sunday', $h->getWeekDay(7));
+        $this->assertEquals('Monday', $helper->getWeekDay(1));
+        $this->assertEquals('Sunday', $helper->getWeekDay(7));
     }
 }

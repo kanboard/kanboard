@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
+use Kanboard\Core\DateParser;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskDuplication;
@@ -665,6 +666,7 @@ class TaskDuplicationTest extends Base
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
+        $dp = new DateParser($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
 
@@ -685,7 +687,7 @@ class TaskDuplicationTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals(Task::RECURRING_STATUS_PROCESSED, $task['recurrence_status']);
         $this->assertEquals(2, $task['recurrence_child']);
-        $this->assertEquals(1436561776, $task['date_due'], '', 2);
+        $this->assertEquals(1436486400, $task['date_due'], '', 2);
 
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
@@ -695,6 +697,6 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(Task::RECURRING_BASEDATE_TRIGGERDATE, $task['recurrence_basedate']);
         $this->assertEquals(1, $task['recurrence_parent']);
         $this->assertEquals(2, $task['recurrence_factor']);
-        $this->assertEquals(strtotime('+2 days'), $task['date_due'], '', 2);
+        $this->assertEquals($dp->removeTimeFromTimestamp(strtotime('+2 days')), $task['date_due'], '', 2);
     }
 }

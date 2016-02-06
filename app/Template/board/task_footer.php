@@ -22,7 +22,7 @@
     <?php if (! empty($task['date_due'])): ?>
         <span class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
             <i class="fa fa-calendar"></i>
-            <?= (date('Y') === date('Y', $task['date_due']) ? dt('%b %e', $task['date_due']) : dt('%b %e %Y', $task['date_due'])) ?>
+            <?= $this->dt->date($task['date_due']) ?>
         </span>
     <?php endif ?>
 

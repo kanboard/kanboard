@@ -18,8 +18,8 @@
         <tr>
             <td><?= $this->url->link($this->e($record['task_title']), 'task', 'show', array('project_id' => $record['project_id'], 'task_id' => $record['task_id'])) ?></td>
             <td><?= $this->url->link($this->e($record['subtask_title']), 'task', 'show', array('project_id' => $record['project_id'], 'task_id' => $record['task_id'])) ?></td>
-            <td><?= dt('%B %e, %Y at %k:%M %p', $record['start']) ?></td>
-            <td><?= dt('%B %e, %Y at %k:%M %p', $record['end']) ?></td>
+            <td><?= $this->dt->datetime($record['start']) ?></td>
+            <td><?= $this->dt->datetime($record['end']) ?></td>
             <td><?= n($record['time_spent']).' '.t('hours') ?></td>
         </tr>
         <?php endforeach ?>

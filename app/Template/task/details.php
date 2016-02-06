@@ -79,7 +79,7 @@
                 <?php if ($task['date_due']): ?>
                 <li>
                     <strong><?= t('Due date:') ?></strong>
-                    <span><?= dt('%B %e, %Y', $task['date_due']) ?></span>
+                    <span><?= $this->dt->date($task['date_due']) ?></span>
                 </li>
                 <?php endif ?>
                 <?php if ($task['time_estimated']): ?>
@@ -100,28 +100,28 @@
             <ul class="no-bullet">
                 <li>
                     <strong><?= t('Created:') ?></strong>
-                    <span><?= dt('%B %e, %Y at %k:%M %p', $task['date_creation']) ?></span>
+                    <span><?= $this->dt->datetime($task['date_creation']) ?></span>
                 </li>
                 <li>
                     <strong><?= t('Modified:') ?></strong>
-                    <span><?= dt('%B %e, %Y at %k:%M %p', $task['date_modification']) ?></span>
+                    <span><?= $this->dt->datetime($task['date_modification']) ?></span>
                 </li>
                 <?php if ($task['date_completed']): ?>
                 <li>
                     <strong><?= t('Completed:') ?></strong>
-                    <span><?= dt('%B %e, %Y at %k:%M %p', $task['date_completed']) ?></span>
+                    <span><?= $this->dt->datetime($task['date_completed']) ?></span>
                 </li>
                 <?php endif ?>
                 <?php if ($task['date_started']): ?>
                 <li>
                     <strong><?= t('Started:') ?></strong>
-                    <span><?= dt('%B %e, %Y at %k:%M %p', $task['date_started']) ?></span>
+                    <span><?= $this->dt->datetime($task['date_started']) ?></span>
                 </li>
                 <?php endif ?>
                 <?php if ($task['date_moved']): ?>
                 <li>
                     <strong><?= t('Moved:') ?></strong>
-                    <span><?= dt('%B %e, %Y at %k:%M %p', $task['date_moved']) ?></span>
+                    <span><?= $this->dt->datetime($task['date_moved']) ?></span>
                 </li>
                 <?php endif ?>
             </ul>

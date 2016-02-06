@@ -57,10 +57,10 @@
                     <?= $this->url->link($this->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
                 </td>
                 <td>
-                    <?= $project['start_date'] ?>
+                    <?= $this->dt->date($project['start_date']) ?>
                 </td>
                 <td>
-                    <?= $project['end_date'] ?>
+                    <?= $this->dt->date($project['end_date']) ?>
                 </td>
                 <td>
                     <?php if ($project['owner_id'] > 0): ?>

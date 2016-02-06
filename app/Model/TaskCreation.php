@@ -49,8 +49,9 @@ class TaskCreation extends Base
      */
     public function prepare(array &$values)
     {
-        $this->dateParser->convert($values, array('date_due'));
-        $this->dateParser->convert($values, array('date_started'), true);
+        $values = $this->dateParser->convert($values, array('date_due'));
+        $values = $this->dateParser->convert($values, array('date_started'), true);
+
         $this->removeFields($values, array('another_task'));
         $this->resetFields($values, array('date_started', 'creator_id', 'owner_id', 'swimlane_id', 'date_due', 'score', 'category_id', 'time_estimated'));
 

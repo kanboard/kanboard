@@ -16,8 +16,8 @@
         <tr>
             <td><?= $this->url->link($this->e($record['user_fullname'] ?: $record['username']), 'user', 'show', array('user_id' => $record['user_id'])) ?></td>
             <td><?= t($record['subtask_title']) ?></td>
-            <td><?= dt('%B %e, %Y at %k:%M %p', $record['start']) ?></td>
-            <td><?= dt('%B %e, %Y at %k:%M %p', $record['end']) ?></td>
+            <td><?= $this->dt->datetime($record['start']) ?></td>
+            <td><?= $this->dt->datetime($record['end']) ?></td>
             <td><?= n($record['time_spent']).' '.t('hours') ?></td>
         </tr>
         <?php endforeach ?>

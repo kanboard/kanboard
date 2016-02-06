@@ -85,7 +85,9 @@ class Config extends Base
         $this->response->html($this->helper->layout->config('config/application', array(
             'languages' => $this->config->getLanguages(),
             'timezones' => $this->config->getTimezones(),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
+            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
+            'datetime_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateTimeFormats()),
+            'time_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getTimeFormats()),
             'title' => t('Settings').' &gt; '.t('Application settings'),
         )));
     }

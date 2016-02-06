@@ -308,7 +308,7 @@ class File extends Base
      */
     public function uploadScreenshot($project_id, $task_id, $blob)
     {
-        $original_filename = e('Screenshot taken %s', dt('%B %e, %Y at %k:%M %p', time())).'.png';
+        $original_filename = e('Screenshot taken %s', $this->helper->dt->datetime(time())).'.png';
         return $this->uploadContent($project_id, $task_id, $original_filename, $blob);
     }
 

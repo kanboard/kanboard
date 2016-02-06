@@ -62,7 +62,7 @@ class Task extends Base
             'time_spent' => $task['time_spent'] ?: '',
         );
 
-        $this->dateParser->format($values, array('date_started'), 'Y-m-d H:i');
+        $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', 'm/d/Y H:i'));
 
         $this->response->html($this->helper->layout->task('task/show', array(
             'project' => $this->project->getById($task['project_id']),
@@ -77,8 +77,6 @@ class Task extends Base
             'columns_list' => $this->board->getColumnsList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id'], true, false, false),
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $task['project_name'].' &gt; '.$task['title'],
             'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
             'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),

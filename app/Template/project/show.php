@@ -21,15 +21,15 @@
     <?php endif ?>
 
     <?php if ($project['last_modified']): ?>
-        <li><?= dt('Last modified on %B %e, %Y at %k:%M %p', $project['last_modified']) ?></li>
+        <li><?= t('Modified:').' '.$this->dt->datetime($project['last_modified']) ?></li>
     <?php endif ?>
 
     <?php if ($project['start_date']): ?>
-        <li><?= t('Start date: %s', $project['start_date']) ?></li>
+        <li><?= t('Start date: ').$this->dt->date($project['start_date']) ?></li>
     <?php endif ?>
 
     <?php if ($project['end_date']): ?>
-        <li><?= t('End date: %s', $project['end_date']) ?></li>
+        <li><?= t('End date: ').$this->dt->date($project['end_date']) ?></li>
     <?php endif ?>
 
     <?php if ($stats['nb_tasks'] > 0): ?>

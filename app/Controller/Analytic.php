@@ -31,7 +31,7 @@ class Analytic extends Base
             'average' => $this->averageLeadCycleTimeAnalytic->build($project['id']),
             'metrics' => $this->projectDailyStats->getRawMetrics($project['id'], $from, $to),
             'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
+            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => t('Lead and Cycle time for "%s"', $project['name']),
         )));
     }
@@ -154,7 +154,7 @@ class Analytic extends Base
             'metrics' => $display_graph ? $this->projectDailyColumnStats->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
             'project' => $project,
             'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
+            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => t($title, $project['name']),
         )));
     }

@@ -37,7 +37,7 @@ class Export extends Base
             ),
             'errors' => array(),
             'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
+            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'project' => $project,
             'title' => $page_title,
         ), 'export/sidebar'));

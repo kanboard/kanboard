@@ -82,8 +82,8 @@ class Taskmodification extends Base
             $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
         }
 
-        $this->dateParser->format($values, array('date_due'));
-        $this->dateParser->format($values, array('date_started'), 'Y-m-d H:i');
+        $values = $this->dateParser->format($values, array('date_due'), $this->config->get('application_date_format', 'm/d/Y'));
+        $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', 'm/d/Y H:i'));
 
         $this->response->html($this->helper->layout->task('task_modification/edit_task', array(
             'project' => $project,
@@ -93,8 +93,6 @@ class Taskmodification extends Base
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($task['project_id']),
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
         )));
     }
 

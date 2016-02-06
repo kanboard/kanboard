@@ -9,7 +9,7 @@
             <?php else: ?>
                 <?= $this->e($task['title']) ?>
             <?php endif ?>
-            (<?= dt('%B %e, %Y', $task['date_due']) ?>)
+            (<?= $this->dt->date($task['date_due']) ?>)
             <?php if ($task['assignee_username']): ?>
                 (<strong><?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?></strong>)
             <?php endif ?>

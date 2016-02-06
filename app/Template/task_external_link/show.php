@@ -31,7 +31,7 @@
                     <?= $this->e($link['creator_name'] ?: $link['creator_username']) ?>
                 </td>
                 <td>
-                    <?= dt('%B %e, %Y', $link['date_creation']) ?>
+                    <?= $this->dt->date($link['date_creation']) ?>
                 </td>
                 <?php if ($this->user->hasProjectAccess('TaskExternalLink', 'edit', $task['project_id'])): ?>
                 <td>
