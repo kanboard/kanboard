@@ -93,6 +93,7 @@ Technical details
 - [Installation on Ubuntu](ubuntu-installation.markdown)
 - [Installation on Debian](debian-installation.markdown)
 - [Installation on Centos](centos-installation.markdown)
+- [Installation on OpenSuse](suse-installation.markdown)
 - [Installation on FreeBSD](freebsd-installation.markdown)
 - [Installation on Windows Server with IIS](windows-iis-installation.markdown)
 - [Installation on Windows Server with Apache](windows-apache-installation.markdown)
