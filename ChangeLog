@@ -40,6 +40,7 @@ Improvements:
 
 Bug fixes:
 
+* Category label is broken on the board if there's a url in the description
 * Fix pagination on task time tracking page
 
 Version 1.0.24
