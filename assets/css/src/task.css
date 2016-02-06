@@ -168,6 +168,10 @@ span.task-board-date-overdue {
 }
 
 /* task view */
+#task-summary {
+    margin-bottom: 15px;
+}
+
 #task-summary h2 {
     color: #666;
     font-size: 2.5em;
@@ -301,15 +305,6 @@ span.task-board-date-overdue {
 
 .task-show-file-table {
     width: auto;
-}
-
-.task-show-start-link {
-    color: #000;
-}
-
-.task-show-start-link:hover,
-.task-show-start-link:focus {
-    color: red;
 }
 
 .flag-milestone {

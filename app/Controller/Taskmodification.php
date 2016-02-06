@@ -23,27 +23,6 @@ class Taskmodification extends Base
     }
 
     /**
-     * Update time tracking information
-     *
-     * @access public
-     */
-    public function time()
-    {
-        $task = $this->getTask();
-        $values = $this->request->getValues();
-
-        list($valid, ) = $this->taskValidator->validateTimeModification($values);
-
-        if ($valid && $this->taskModification->update($values)) {
-            $this->flash->success(t('Task updated successfully.'));
-        } else {
-            $this->flash->failure(t('Unable to update your task.'));
-        }
-
-        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-    }
-
-    /**
      * Edit description form
      *
      * @access public
@@ -104,6 +83,7 @@ class Taskmodification extends Base
         }
 
         $this->dateParser->format($values, array('date_due'));
+        $this->dateParser->format($values, array('date_started'), 'Y-m-d H:i');
 
         $this->response->html($this->helper->layout->task('task_modification/edit_task', array(
             'project' => $project,

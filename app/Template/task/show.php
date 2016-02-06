@@ -1,15 +1,8 @@
 <?= $this->render('task/details', array(
     'task' => $task,
     'project' => $project,
-    'recurrence_trigger_list' => $this->task->recurrenceTriggers(),
-    'recurrence_timeframe_list' => $this->task->recurrenceTimeframes(),
-    'recurrence_basedate_list' => $this->task->recurrenceBasedates(),
     'editable' => $this->user->hasProjectAccess('taskmodification', 'edit', $project['id']),
 )) ?>
-
-<?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $project['id'])): ?>
-    <?= $this->render('task_modification/edit_time', array('task' => $task, 'values' => $values, 'date_format' => $date_format, 'date_formats' => $date_formats)) ?>
-<?php endif ?>
 
 <?= $this->render('task/description', array('task' => $task)) ?>
 

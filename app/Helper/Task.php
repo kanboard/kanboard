@@ -146,7 +146,7 @@ class Task extends Base
         $attributes = array_merge(array('tabindex="11"', 'placeholder="'.$placeholder.'"'), $attributes);
 
         $html = $this->helper->form->label(t('Start Date'), 'date_started');
-        $html .= $this->helper->form->text('date_started', $values, $errors, $attributes, 'form-date');
+        $html .= $this->helper->form->text('date_started', $values, $errors, $attributes, 'form-datetime');
 
         return $html;
     }

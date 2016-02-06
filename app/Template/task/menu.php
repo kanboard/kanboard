@@ -2,6 +2,12 @@
 <div class="dropdown">
     <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
     <ul>
+        <?php if (empty($task['date_started'])): ?>
+        <li>
+            <i class="fa fa-play fa-fw"></i>
+            <?= $this->url->link(t('Set automatically the start date'), 'taskmodification', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </li>
+        <?php endif ?>
         <li>
             <i class="fa fa-pencil-square-o fa-fw"></i>
             <?= $this->url->link(t('Edit the task'), 'taskmodification', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>

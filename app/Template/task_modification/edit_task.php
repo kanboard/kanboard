@@ -19,6 +19,7 @@
     <div class="form-column">
         <?= $this->task->selectTimeEstimated($values, $errors) ?>
         <?= $this->task->selectTimeSpent($values, $errors) ?>
+        <?= $this->task->selectStartDate($values, $errors) ?>
         <?= $this->task->selectDueDate($values, $errors) ?>
     </div>
 
