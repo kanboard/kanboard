@@ -23,6 +23,7 @@ New features:
 
 Improvements:
 
+* Export only open tasks in iCal feed
 * Remove time form on task summary page and move that to task edit form
 * Replace box shadow by a larger border width when a task is recently modified
 * Do not refresh the whole page when changing subtask status
