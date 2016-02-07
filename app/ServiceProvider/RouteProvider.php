@@ -38,6 +38,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('dashboard/:user_id/subtasks', 'app', 'subtasks');
             $container['route']->addRoute('dashboard/:user_id/calendar', 'app', 'calendar');
             $container['route']->addRoute('dashboard/:user_id/activity', 'app', 'activity');
+            $container['route']->addRoute('dashboard/:user_id/notifications', 'app', 'notifications');
 
             // Search routes
             $container['route']->addRoute('search', 'search', 'index');
@@ -106,6 +107,15 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('export/subtasks/:project_id', 'export', 'subtasks');
             $container['route']->addRoute('export/transitions/:project_id', 'export', 'transitions');
             $container['route']->addRoute('export/summary/:project_id', 'export', 'summary');
+
+            // Analytics routes
+            $container['route']->addRoute('analytics/tasks/:project_id', 'analytic', 'tasks');
+            $container['route']->addRoute('analytics/users/:project_id', 'analytic', 'users');
+            $container['route']->addRoute('analytics/cfd/:project_id', 'analytic', 'cfd');
+            $container['route']->addRoute('analytics/burndown/:project_id', 'analytic', 'burndown');
+            $container['route']->addRoute('analytics/average-time-column/:project_id', 'analytic', 'averageTimeByColumn');
+            $container['route']->addRoute('analytics/lead-cycle-time/:project_id', 'analytic', 'leadAndCycleTime');
+            $container['route']->addRoute('analytics/estimated-spent-time/:project_id', 'analytic', 'compareHours');
 
             // Board routes
             $container['route']->addRoute('board/:project_id', 'board', 'show');
