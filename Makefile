@@ -62,6 +62,7 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard/*.markdown
 	@ rm -rf ${BUILD_DIR}/kanboard/*.lock
 	@ rm -rf ${BUILD_DIR}/kanboard/*.json
+	@ rm -rf ${BUILD_DIR}/kanboard/.docker
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name doc -type d -exec rm -rf {} +;
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name notes -type d -exec rm -rf {} +;
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name test -type d -exec rm -rf {} +;
@@ -133,5 +134,14 @@ sql:
 
 	@ let pg_version=`psql -U postgres -A -c 'copy(select version from schema_version) to stdout;' kanboard` ;\
 	echo "INSERT INTO schema_version VALUES ('$$pg_version');" >> app/Schema/Sql/postgres.sql
+
+docker-image:
+	@ docker build -t kanboard/kanboard:latest .
+
+docker-push:
+	@ docker push kanboard/kanboard:latest
+
+docker-run:
+	@ docker run -d --name kanboard -p 80:80 -t kanboard/kanboard:latest
 
 .PHONY: all
