@@ -12,49 +12,6 @@ use Kanboard\Core\Session\FlashMessage;
 use Kanboard\Core\Session\SessionStorage;
 use Kanboard\ServiceProvider\ActionProvider;
 
-class FakeHttpClient
-{
-    private $url = '';
-    private $data = array();
-    private $headers = array();
-
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function getHeaders()
-    {
-        return $this->headers;
-    }
-
-    public function toPrettyJson()
-    {
-        return json_encode($this->data, JSON_PRETTY_PRINT);
-    }
-
-    public function postJson($url, array $data, array $headers = array())
-    {
-        $this->url = $url;
-        $this->data = $data;
-        $this->headers = $headers;
-        return true;
-    }
-
-    public function postForm($url, array $data, array $headers = array())
-    {
-        $this->url = $url;
-        $this->data = $data;
-        $this->headers = $headers;
-        return true;
-    }
-}
-
 abstract class Base extends PHPUnit_Framework_TestCase
 {
     protected $container;
@@ -91,7 +48,13 @@ abstract class Base extends PHPUnit_Framework_TestCase
 
         $this->container['logger'] = new Logger;
         $this->container['logger']->setLogger(new File($this->isWindows() ? 'NUL' : '/dev/null'));
-        $this->container['httpClient'] = new FakeHttpClient;
+
+        $this->container['httpClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Http\Client')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('get', 'getJson', 'postJson', 'postForm'))
+            ->getMock();
+
         $this->container['emailClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Mail\Client')
             ->setConstructorArgs(array($this->container))

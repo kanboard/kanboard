@@ -27,17 +27,27 @@ class OAuth2Test extends Base
 
     public function testAccessToken()
     {
+        $params = array(
+            'code' => 'something',
+            'client_id' => 'A',
+            'client_secret' => 'B',
+            'redirect_uri' => 'C',
+            'grant_type' => 'authorization_code',
+        );
+
+        $response = json_encode(array(
+            'token_type' => 'bearer',
+            'access_token' => 'plop',
+        ));
+
+        $this->container['httpClient']
+            ->expects($this->once())
+            ->method('postForm')
+            ->with('E', $params, array('Accept: application/json'))
+            ->will($this->returnValue($response));
+
         $oauth = new OAuth2($this->container);
         $oauth->createService('A', 'B', 'C', 'D', 'E', array('f', 'g'));
         $oauth->getAccessToken('something');
-
-        $data = $this->container['httpClient']->getData();
-        $this->assertEquals('something', $data['code']);
-        $this->assertEquals('A', $data['client_id']);
-        $this->assertEquals('B', $data['client_secret']);
-        $this->assertEquals('C', $data['redirect_uri']);
-        $this->assertEquals('authorization_code', $data['grant_type']);
-
-        $this->assertEquals('E', $this->container['httpClient']->getUrl());
     }
 }

@@ -12,12 +12,6 @@ class WebLinkTest extends Base
         $title = 'My title';
         $html = '<!DOCTYPE html><html><head><title>  '.$title.'  </title></head><body>Test</body></html>';
 
-        $this->container['httpClient'] = $this
-            ->getMockBuilder('\Kanboard\Core\Http\Client')
-            ->setConstructorArgs(array($this->container))
-            ->setMethods(array('get'))
-            ->getMock();
-
         $webLink = new WebLink($this->container);
         $webLink->setUrl($url);
         $this->assertEquals($url, $webLink->getUrl());
@@ -35,12 +29,6 @@ class WebLinkTest extends Base
     {
         $url = 'http://kanboard.net/something';
         $html = '<!DOCTYPE html><html><head></head><body>Test</body></html>';
-
-        $this->container['httpClient'] = $this
-            ->getMockBuilder('\Kanboard\Core\Http\Client')
-            ->setConstructorArgs(array($this->container))
-            ->setMethods(array('get'))
-            ->getMock();
 
         $webLink = new WebLink($this->container);
         $webLink->setUrl($url);
