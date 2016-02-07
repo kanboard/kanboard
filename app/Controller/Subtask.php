@@ -23,6 +23,7 @@ class Subtask extends Base
             'project' => $this->getProject(),
             'subtasks' => $this->subtask->getAll($task['id']),
             'editable' => true,
+            'redirect' => 'subtask',
         )));
     }
 

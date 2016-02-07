@@ -12,6 +12,7 @@
     'project' => $project,
     'users_list' => isset($users_list) ? $users_list : array(),
     'editable' => true,
+    'redirect' => 'task',
 )) ?>
 
 <?= $this->render('tasklink/show', array(

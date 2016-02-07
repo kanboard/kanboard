@@ -135,11 +135,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('gantt/:project_id', 'gantt', 'project');
             $container['route']->addRoute('gantt/:project_id/sort/:sorting', 'gantt', 'project');
 
-            // Subtask routes
-            $container['route']->addRoute('project/:project_id/task/:task_id/subtask/create', 'subtask', 'create');
-            $container['route']->addRoute('project/:project_id/task/:task_id/subtask/:subtask_id/remove', 'subtask', 'confirm');
-            $container['route']->addRoute('project/:project_id/task/:task_id/subtask/:subtask_id/edit', 'subtask', 'edit');
-
             // Feed routes
             $container['route']->addRoute('feed/project/:token', 'feed', 'project');
             $container['route']->addRoute('feed/user/:token', 'feed', 'user');

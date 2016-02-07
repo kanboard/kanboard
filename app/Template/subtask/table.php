@@ -58,6 +58,7 @@
                         'subtask' => $subtask,
                         'first_position' => $first_position,
                         'last_position' => $last_position,
+                        'redirect' => $redirect,
                     )) ?>
                 </td>
             <?php endif ?>
