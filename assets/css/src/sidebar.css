@@ -28,6 +28,7 @@
     border-right: 1px dotted #eee;
     font-size: 0.95em;
     max-width: 240px;
+    min-width: 190px;
     width: 18%;
     -ms-flex: 0 100px;
     -webkit-box-flex: 0;
