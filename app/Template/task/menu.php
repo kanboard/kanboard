@@ -17,7 +17,7 @@
             <?= $this->url->link(t('Edit the description'), 'taskmodification', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
-            <i class="fa fa-clock-o fa-fw"></i>
+            <i class="fa fa-refresh fa-rotate-90 fa-fw"></i>
             <?= $this->url->link(t('Edit recurrence'), 'TaskRecurrence', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
