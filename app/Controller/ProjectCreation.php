@@ -73,7 +73,7 @@ class ProjectCreation extends Base
      */
     private function createOrDuplicate(array $values)
     {
-        if ($values['src_project_id'] == 0) {
+        if (empty($values['src_project_id'])) {
             return $this->createNewProject($values);
         }
 

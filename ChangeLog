@@ -1,3 +1,10 @@
+Version 1.0.26 (unreleased)
+--------------
+
+Bug fixes:
+
+* Fix PHP notices during creation of first project and in subtasks table
+
 Version 1.0.25
 --------------
 
