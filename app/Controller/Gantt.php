@@ -108,7 +108,7 @@ class Gantt extends Base
         );
 
         $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
-        $values = $this->hook->merge('controller:task:form:gantt', $values, array('default_values' => $values));
+        $values = $this->hook->merge('controller:gantt:task:form:default', $values, array('default_values' => $values));
 
         $this->response->html($this->template->render('gantt/task_creation', array(
             'project' => $project,

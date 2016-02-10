@@ -80,7 +80,7 @@ class Taskmodification extends Base
         if (empty($values)) {
             $values = $task;
             $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
-            $values = $this->hook->merge('controller:task:form:task-modification', $values, array('default_values' => $values));
+            $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
         }
 
         $values = $this->dateParser->format($values, array('date_due'), $this->config->get('application_date_format', 'm/d/Y'));

@@ -29,7 +29,7 @@ class Taskcreation extends Base
             );
 
             $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
-            $values = $this->hook->merge('controller:task:form:task-creation', $values, array('default_values' => $values));
+            $values = $this->hook->merge('controller:task-creation:form:default', $values, array('default_values' => $values));
         }
 
         $this->response->html($this->template->render('task_creation/form', array(
