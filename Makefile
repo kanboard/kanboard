@@ -88,6 +88,11 @@ test-archive:
 	@ rm -rf ${BUILD_DIR}/kanboard/.*.yml
 	@ rm -rf ${BUILD_DIR}/kanboard/*.md
 	@ rm -rf ${BUILD_DIR}/kanboard/*.markdown
+	@ rm -rf ${BUILD_DIR}/kanboard/Dockerfile
+	@ rm -rf ${BUILD_DIR}/kanboard/.docker
+	@ rm -rf ${BUILD_DIR}/kanboard/Vagrantfile
+	@ rm -rf ${BUILD_DIR}/kanboard/app.json
+	@ rm -rf ${BUILD_DIR}/kanboard/plugins/.gitignore
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name notes -type d -exec rm -rf {} +;
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name test -type d -exec rm -rf {} +;
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name tests -type d -exec rm -rf {} +;
