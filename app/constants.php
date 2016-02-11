@@ -23,6 +23,9 @@ defined('DB_HOSTNAME') or define('DB_HOSTNAME', 'localhost');
 defined('DB_NAME') or define('DB_NAME', 'kanboard');
 defined('DB_PORT') or define('DB_PORT', null);
 
+// Database backend group provider
+defined('DB_GROUP_PROVIDER') or define('DB_GROUP_PROVIDER', true);
+
 // LDAP configuration
 defined('LDAP_AUTH') or define('LDAP_AUTH', false);
 defined('LDAP_SERVER') or define('LDAP_SERVER', '');
