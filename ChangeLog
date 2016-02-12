@@ -4,6 +4,7 @@ Version 1.0.26 (unreleased)
 Bug fixes:
 
 * Fix PHP notices during creation of first project and in subtasks table
+* Fix filter dropdown not accessible when there are too many items
 
 Version 1.0.25
 --------------
