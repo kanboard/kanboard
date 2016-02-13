@@ -55,8 +55,13 @@ class Auth extends Base
      */
     public function logout()
     {
-        $this->sessionManager->close();
-        $this->response->redirect($this->helper->url->to('auth', 'login'));
+        if (! DISABLE_LOGOUT) {
+            $this->sessionManager->close();
+            $this->response->redirect($this->helper->url->to('auth', 'login'));
+        }
+        else {
+            $this->response->redirect($this->helper->url->to('auth', 'index'));
+        }
     }
 
     /**

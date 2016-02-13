@@ -84,10 +84,12 @@
                             <i class="fa fa-life-ring fa-fw"></i>
                             <?= $this->url->link(t('Documentation'), 'doc', 'show') ?>
                         </li>
-                        <li>
-                            <i class="fa fa-sign-out fa-fw"></i>
-                            <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
-                        </li>
+                        <?php if (! DISABLE_LOGOUT): ?>
+                            <li>
+                                <i class="fa fa-sign-out fa-fw"></i>
+                                <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
+                            </li>
+                        <?php endif ?>
                     </ul>
                 </div>
             </li>
