@@ -72,6 +72,7 @@ Contributors:
 - [Nala Ginrut](https://github.com/NalaGinrut)
 - [Nekohayo](https://github.com/nekohayo)
 - [Nicolas Lœuillet](https://github.com/nicosomb)
+- [Nick Blackledge](https://github.com/nttict-nick-b)
 - [Norcnorc](https://github.com/norcnorc)
 - [Nramel](https://github.com/nramel)
 - [Null-Kelvin](https://github.com/Null-Kelvin)
