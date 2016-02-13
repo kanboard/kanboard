@@ -24,7 +24,7 @@ class Projectuser extends Base
             $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
         }
 
-        return array($user_id, $project_ids, $this->user->getList(true));
+        return array($user_id, $project_ids, $this->user->getActiveUsersList(true));
     }
 
     private function role($role, $action, $title, $title_user)
@@ -33,7 +33,7 @@ class Projectuser extends Base
 
         $query = $this->projectPermission->getQueryByRole($project_ids, $role)->callback(array($this->project, 'applyColumnStats'));
 
-        if ($user_id !== UserModel::EVERYBODY_ID) {
+        if ($user_id !== UserModel::EVERYBODY_ID && isset($users[$user_id])) {
             $query->eq(UserModel::TABLE.'.id', $user_id);
             $title = t($title_user, $users[$user_id]);
         }
@@ -59,7 +59,7 @@ class Projectuser extends Base
 
         $query = $this->taskFinder->getProjectUserOverviewQuery($project_ids, $is_active);
 
-        if ($user_id !== UserModel::EVERYBODY_ID) {
+        if ($user_id !== UserModel::EVERYBODY_ID && isset($users[$user_id])) {
             $query->eq(TaskModel::TABLE.'.owner_id', $user_id);
             $title = t($title_user, $users[$user_id]);
         }

@@ -76,11 +76,5 @@
         <?php endif ?>
 
         <?= $this->hook->render('template:user:sidebar:actions', array('user' => $user)) ?>
-
-        <?php if ($this->user->hasAccess('user', 'remove') && ! $this->user->isCurrentUser($user['id'])): ?>
-            <li <?= $this->app->checkMenuSelection('user', 'remove') ?>>
-                <?= $this->url->link(t('Remove'), 'user', 'remove', array('user_id' => $user['id'])) ?>
-            </li>
-        <?php endif ?>
     </ul>
 </div>

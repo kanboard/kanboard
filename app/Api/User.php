@@ -36,6 +36,21 @@ class User extends \Kanboard\Core\Base
         return $this->user->remove($user_id);
     }
 
+    public function disableUser($user_id)
+    {
+        return $this->user->disable($user_id);
+    }
+
+    public function enableUser($user_id)
+    {
+        return $this->user->enable($user_id);
+    }
+
+    public function isActiveUser($user_id)
+    {
+        return $this->user->isActive($user_id);
+    }
+
     public function createUser($username, $password, $name = '', $email = '', $role = Role::APP_USER)
     {
         $values = array(

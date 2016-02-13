@@ -262,3 +262,96 @@ Response example:
     "result": true
 }
 ```
+
+## disableUser
+
+- Purpose: **Disable a user**
+- Parameters:
+    - **user_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "disableUser",
+    "id": 2094191872,
+    "params": {
+        "user_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2094191872,
+    "result": true
+}
+```
+
+## enableUser
+
+- Purpose: **Enable a user**
+- Parameters:
+    - **user_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "enableUser",
+    "id": 2094191872,
+    "params": {
+        "user_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2094191872,
+    "result": true
+}
+```
+
+## isActiveUser
+
+- Purpose: **Check if a user is active**
+- Parameters:
+    - **user_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "isActiveUser",
+    "id": 2094191872,
+    "params": {
+        "user_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2094191872,
+    "result": true
+}
+```

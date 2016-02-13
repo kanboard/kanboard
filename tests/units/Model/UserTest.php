@@ -96,13 +96,14 @@ class UserTest extends Base
         $this->assertEquals('you', $users[2]['username']);
     }
 
-    public function testGetList()
+    public function testGetActiveUsersList()
     {
         $u = new User($this->container);
         $this->assertEquals(2, $u->create(array('username' => 'you')));
         $this->assertEquals(3, $u->create(array('username' => 'me', 'name' => 'Me too')));
+        $this->assertEquals(4, $u->create(array('username' => 'foobar', 'is_active' => 0)));
 
-        $users = $u->getList();
+        $users = $u->getActiveUsersList();
 
         $expected = array(
             1 => 'admin',
@@ -112,7 +113,7 @@ class UserTest extends Base
 
         $this->assertEquals($expected, $users);
 
-        $users = $u->getList(true);
+        $users = $u->getActiveUsersList(true);
 
         $expected = array(
             User::EVERYBODY_ID => 'Everybody',
@@ -390,5 +391,25 @@ class UserTest extends Base
         $this->assertNotEmpty($user);
         $this->assertEquals('toto', $user['username']);
         $this->assertEmpty($user['token']);
+    }
+
+    public function testEnableDisable()
+    {
+        $userModel = new User($this->container);
+        $this->assertEquals(2, $userModel->create(array('username' => 'toto')));
+
+        $this->assertTrue($userModel->isActive(2));
+        $user = $userModel->getById(2);
+        $this->assertEquals(1, $user['is_active']);
+
+        $this->assertTrue($userModel->disable(2));
+        $user = $userModel->getById(2);
+        $this->assertEquals(0, $user['is_active']);
+        $this->assertFalse($userModel->isActive(2));
+
+        $this->assertTrue($userModel->enable(2));
+        $user = $userModel->getById(2);
+        $this->assertEquals(1, $user['is_active']);
+        $this->assertTrue($userModel->isActive(2));
     }
 }

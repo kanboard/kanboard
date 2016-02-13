@@ -106,6 +106,7 @@ class ProjectGroupRole extends Base
             ->join(GroupMember::TABLE, 'user_id', 'id', User::TABLE)
             ->join(self::TABLE, 'group_id', 'group_id', GroupMember::TABLE)
             ->eq(self::TABLE.'.project_id', $project_id)
+            ->eq(User::TABLE.'.is_active', 1)
             ->in(self::TABLE.'.role', array(Role::PROJECT_MANAGER, Role::PROJECT_MEMBER))
             ->asc(User::TABLE.'.username')
             ->findAll();

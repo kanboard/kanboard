@@ -152,13 +152,14 @@ class ProjectUserRole extends Base
     public function getAssignableUsers($project_id)
     {
         if ($this->projectPermission->isEverybodyAllowed($project_id)) {
-            return $this->user->getList();
+            return $this->user->getActiveUsersList();
         }
 
         $userMembers = $this->db->table(self::TABLE)
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
             ->join(User::TABLE, 'id', 'user_id')
-            ->eq('project_id', $project_id)
+            ->eq(User::TABLE.'.is_active', 1)
+            ->eq(self::TABLE.'.project_id', $project_id)
             ->in(self::TABLE.'.role', array(Role::PROJECT_MANAGER, Role::PROJECT_MEMBER))
             ->findAll();
 

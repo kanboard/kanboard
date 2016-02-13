@@ -6,7 +6,12 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 96;
+const VERSION = 97;
+
+function version_97(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN is_active INTEGER DEFAULT 1");
+}
 
 function version_96(PDO $pdo)
 {

@@ -32,7 +32,8 @@ class User extends Base
             $this->helper->layout->app('user/index', array(
                 'title' => t('Users').' ('.$paginator->getTotal().')',
                 'paginator' => $paginator,
-        )));
+            )
+        ));
     }
 
     /**
@@ -401,32 +402,6 @@ class User extends Base
         $this->response->html($this->helper->layout->user('user/authentication', array(
             'values' => $values,
             'errors' => $errors,
-            'user' => $user,
-        )));
-    }
-
-    /**
-     * Remove a user
-     *
-     * @access public
-     */
-    public function remove()
-    {
-        $user = $this->getUser();
-
-        if ($this->request->getStringParam('confirmation') === 'yes') {
-            $this->checkCSRFParam();
-
-            if ($this->user->remove($user['id'])) {
-                $this->flash->success(t('User removed successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to remove this user.'));
-            }
-
-            $this->response->redirect($this->helper->url->to('user', 'index'));
-        }
-
-        $this->response->html($this->helper->layout->user('user/remove', array(
             'user' => $user,
         )));
     }

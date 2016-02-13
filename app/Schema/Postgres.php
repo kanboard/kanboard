@@ -6,7 +6,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 84;
+const VERSION = 85;
+
+function version_85(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN is_active BOOLEAN DEFAULT '1'");
+}
 
 function version_84(PDO $pdo)
 {

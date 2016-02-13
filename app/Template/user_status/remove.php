@@ -6,8 +6,8 @@
     <p class="alert alert-info"><?= t('Do you really want to remove this user: "%s"?', $user['name'] ?: $user['username']) ?></p>
 
     <div class="form-actions">
-        <?= $this->url->link(t('Yes'), 'user', 'remove', array('user_id' => $user['id'], 'confirmation' => 'yes'), true, 'btn btn-red') ?>
+        <?= $this->url->link(t('Yes'), 'UserStatus', 'remove', array('user_id' => $user['id']), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'user', 'show', array('user_id' => $user['id'])) ?>
+        <?= $this->url->link(t('cancel'), 'user', 'index', array(), false, 'close-popover') ?>
     </div>
 </div>

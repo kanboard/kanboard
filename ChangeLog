@@ -3,6 +3,7 @@ Version 1.0.26 (unreleased)
 
 New features:
 
+* Enable/Disable users
 * Add setting option to disable private projects
 * Add new config option to disable logout
 

@@ -6,7 +6,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 104;
+const VERSION = 105;
+
+function version_105(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN is_active TINYINT(1) DEFAULT 1");
+}
 
 function version_104(PDO $pdo)
 {
