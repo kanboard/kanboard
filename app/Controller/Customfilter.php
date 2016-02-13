@@ -57,6 +57,23 @@ class Customfilter extends Base
     }
 
     /**
+     * Confirmation dialog before removing a custom filter
+     *
+     * @access public
+     */
+    public function confirm()
+    {
+        $project = $this->getProject();
+        $filter = $this->customFilter->getById($this->request->getIntegerParam('filter_id'));
+
+        $this->response->html($this->helper->layout->project('custom_filter/remove', array(
+            'project' => $project,
+            'filter' => $filter,
+            'title' => t('Remove a custom filter')
+        )));
+    }
+
+    /**
      * Remove a custom filter
      *
      * @access public
