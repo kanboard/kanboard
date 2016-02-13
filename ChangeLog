@@ -1,6 +1,15 @@
 Version 1.0.26 (unreleased)
 --------------
 
+New features:
+
+* Add new config option to disable logout
+
+Improvements:
+
+* Add confirmation inline popup to remove custom filter
+* Increase client_max_body_size value for Nginx
+
 Bug fixes:
 
 * Fix PHP notices during creation of first project and in subtasks table
