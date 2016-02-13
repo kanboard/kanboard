@@ -38,6 +38,10 @@ class Me extends Base
 
     public function createMyPrivateProject($name, $description = null)
     {
+        if ($this->config->get('disable_private_project', 0) == 1) {
+            return false;
+        }
+
         $values = array(
             'name' => $name,
             'description' => $description,

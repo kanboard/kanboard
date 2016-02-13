@@ -1118,4 +1118,7 @@ return array(
     'End date: ' => 'Data final: ',
     'New due date: ' => 'Nova data estimada: ',
     'Start date changed: ' => 'Data inicio alterada: ',
+    // 'Disable private projects' => '',
+    // 'Do you really want to remove this custom filter: "%s"?' => '',
+    // 'Remove a custom filter' => '',
 );

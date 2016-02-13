@@ -1118,4 +1118,7 @@ return array(
     // 'End date: ' => '',
     // 'New due date: ' => '',
     // 'Start date changed: ' => '',
+    // 'Disable private projects' => '',
+    // 'Do you really want to remove this custom filter: "%s"?' => '',
+    // 'Remove a custom filter' => '',
 );

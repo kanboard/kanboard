@@ -26,7 +26,12 @@ class Config extends Base
                     $values += array('password_reset' => 0);
                     break;
                 case 'project':
-                    $values += array('subtask_restriction' => 0, 'subtask_time_tracking' => 0, 'cfd_include_closed_tasks' => 0);
+                    $values += array(
+                        'subtask_restriction' => 0,
+                        'subtask_time_tracking' => 0,
+                        'cfd_include_closed_tasks' => 0,
+                        'disable_private_project' => 0,
+                    );
                     break;
                 case 'integrations':
                     $values += array('integration_gravatar' => 0);

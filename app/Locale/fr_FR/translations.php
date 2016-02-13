@@ -1121,4 +1121,7 @@ return array(
     'End date: ' => 'Date de fin : ',
     'New due date: ' => 'Nouvelle date d\'échéance : ',
     'Start date changed: ' => 'Date de début modifiée : ',
+    'Disable private projects' => 'Désactiver les projets privés',
+    'Do you really want to remove this custom filter: "%s"?' => 'Voulez-vous vraiment supprimer ce filtre personalisé : « %s » ?',
+    'Remove a custom filter' => 'Supprimer un filtre personalisé',
 );
