@@ -28,6 +28,7 @@ Contributors:
 - [Daniel Raknes](https://github.com/danielraknes)
 - [David-Norris](https://github.com/David-Norris)
 - [Dmitry](https://github.com/dmkcv)
+- [Djpadz](https://github.com/djpadz)
 - [Draza (bdpsoft)](https://github.com/bdpsoft)
 - [Eskiso](https://github.com/eSkiSo)
 - [Esteban Monge](https://github.com/EstebanMonge)

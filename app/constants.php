@@ -97,6 +97,9 @@ defined('ENABLE_URL_REWRITE') or define('ENABLE_URL_REWRITE', isset($_SERVER['HT
 // Hide login form
 defined('HIDE_LOGIN_FORM') or define('HIDE_LOGIN_FORM', false);
 
+// Disabling logout (for external SSO authentication)
+defined('DISABLE_LOGOUT') or define('DISABLE_LOGOUT', false);
+
 // Bruteforce protection
 defined('BRUTEFORCE_CAPTCHA') or define('BRUTEFORCE_CAPTCHA', 3);
 defined('BRUTEFORCE_LOCKDOWN') or define('BRUTEFORCE_LOCKDOWN', 6);
@@ -111,6 +114,3 @@ defined('HTTP_PROXY_HOSTNAME') or define('HTTP_PROXY_HOSTNAME', '');
 defined('HTTP_PROXY_PORT') or define('HTTP_PROXY_PORT', '3128');
 defined('HTTP_PROXY_USERNAME') or define('HTTP_PROXY_USERNAME', '');
 defined('HTTP_PROXY_PASSWORD') or define('HTTP_PROXY_PASSWORD', '');
-
-// Disabling logout (for external SSO authentication)
-defined('DISABLE_LOGOUT') or define('DISABLE_LOGOUT', 0);

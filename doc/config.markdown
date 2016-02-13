@@ -267,6 +267,9 @@ define('API_AUTHENTICATION_HEADER', '');
 // Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
 
+// Disabling logout (for external SSO authentication)
+define('DISABLE_LOGOUT', false);
+
 // Override API token stored in the database, useful for automated tests
 define('API_AUTHENTICATION_TOKEN', 'My unique API Token');
 ```

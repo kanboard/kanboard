@@ -166,6 +166,9 @@ define('ENABLE_URL_REWRITE', false);
 // Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
 
+// Disabling logout (for external SSO authentication)
+define('DISABLE_LOGOUT', false);
+
 // Enable captcha after 3 authentication failure
 define('BRUTEFORCE_CAPTCHA', 3);
 
