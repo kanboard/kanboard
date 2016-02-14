@@ -32,6 +32,9 @@ class Listing extends Base
 
         $this->response->html($this->helper->layout->app('listing/show', $params + array(
             'paginator' => $paginator,
+            'categories_list' => $this->category->getList($params['project']['id'], false),
+            'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
+            'custom_filters_list' => $this->customFilter->getAll($params['project']['id'], $this->userSession->getId()),
         )));
     }
 }

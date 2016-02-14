@@ -1,7 +1,10 @@
 <section id="main">
-    <?= $this->render('project/filters', array(
+    <?= $this->render('project_header/header', array(
         'project' => $project,
         'filters' => $filters,
+        'custom_filters_list' => $custom_filters_list,
+        'users_list' => $users_list,
+        'categories_list' => $categories_list,
     )) ?>
 
     <?php if ($paginator->isEmpty()): ?>
