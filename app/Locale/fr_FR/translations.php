@@ -1138,6 +1138,6 @@ return array(
     'Two Factor' => 'Deux-Facteurs',
     'Disable user' => 'Désactiver l\'utilisateur',
     'Do you really want to disable this user: "%s"?' => 'Voulez-vous vraiment désactiver cet utilisateur : « %s » ?',
-    'Enable user' => 'Voulez-vous vraiment activer cet utilisateur : « %s » ?',
-    'Do you really want to enable this user: "%s"?' => 'Voulez-vous vraiment supprimer cet utilisateur : « %s » ?',
+    'Enable user' => 'Activer un utilisateur',
+    'Do you really want to enable this user: "%s"?' => 'Voulez-vous vraiment activer cet utilisateur : « %s » ?',
 );
