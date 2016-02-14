@@ -89,7 +89,7 @@ class TaskFinder extends Base
             ->table(Task::TABLE)
             ->columns(
                 '(SELECT COUNT(*) FROM '.Comment::TABLE.' WHERE task_id=tasks.id) AS nb_comments',
-                '(SELECT COUNT(*) FROM '.File::TABLE.' WHERE task_id=tasks.id) AS nb_files',
+                '(SELECT COUNT(*) FROM '.TaskFile::TABLE.' WHERE task_id=tasks.id) AS nb_files',
                 '(SELECT COUNT(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id) AS nb_subtasks',
                 '(SELECT COUNT(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
                 '(SELECT COUNT(*) FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id) AS nb_links',

@@ -6,7 +6,27 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 105;
+const VERSION = 106;
+
+function version_106(PDO $pdo)
+{
+    $pdo->exec('RENAME TABLE files TO task_has_files');
+
+    $pdo->exec("
+        CREATE TABLE project_has_files (
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `project_id` INT NOT NULL,
+            `name` VARCHAR(255) NOT NULL,
+            `path` VARCHAR(255) NOT NULL,
+            `is_image` TINYINT(1) DEFAULT 0,
+            `size` INT DEFAULT 0 NOT NULL,
+            `user_id` INT DEFAULT 0 NOT NULL,
+            `date` INT DEFAULT 0 NOT NULL,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            PRIMARY KEY(id)
+        )  ENGINE=InnoDB CHARSET=utf8"
+    );
+}
 
 function version_105(PDO $pdo)
 {

@@ -7,7 +7,7 @@ use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Comment;
 use Kanboard\Model\User;
-use Kanboard\Model\File;
+use Kanboard\Model\TaskFile;
 use Kanboard\Model\Project;
 use Kanboard\Model\Task;
 use Kanboard\Notification\Mail;
@@ -23,7 +23,7 @@ class MailTest extends Base
         $tc = new TaskCreation($this->container);
         $s = new Subtask($this->container);
         $c = new Comment($this->container);
-        $f = new File($this->container);
+        $f = new TaskFile($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));

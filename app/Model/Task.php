@@ -92,7 +92,7 @@ class Task extends Base
             return false;
         }
 
-        $this->file->removeAll($task_id);
+        $this->taskFile->removeAll($task_id);
 
         return $this->db->table(self::TABLE)->eq('id', $task_id)->remove();
     }

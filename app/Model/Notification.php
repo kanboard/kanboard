@@ -72,7 +72,7 @@ class Notification extends Base
                 return e('%s updated a comment on the task #%d', $event_author, $event_data['task']['id']);
             case Comment::EVENT_CREATE:
                 return e('%s commented on the task #%d', $event_author, $event_data['task']['id']);
-            case File::EVENT_CREATE:
+            case TaskFile::EVENT_CREATE:
                 return e('%s attached a file to the task #%d', $event_author, $event_data['task']['id']);
             case Task::EVENT_USER_MENTION:
                 return e('%s mentioned you in the task #%d', $event_author, $event_data['task']['id']);
@@ -94,7 +94,7 @@ class Notification extends Base
     public function getTitleWithoutAuthor($event_name, array $event_data)
     {
         switch ($event_name) {
-            case File::EVENT_CREATE:
+            case TaskFile::EVENT_CREATE:
                 return e('New attachment on task #%d: %s', $event_data['file']['task_id'], $event_data['file']['name']);
             case Comment::EVENT_CREATE:
                 return e('New comment on task #%d', $event_data['comment']['task_id']);

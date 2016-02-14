@@ -9,7 +9,6 @@ use Kanboard\Model\Comment;
 use Kanboard\Model\User;
 use Kanboard\Model\Group;
 use Kanboard\Model\GroupMember;
-use Kanboard\Model\File;
 use Kanboard\Model\Project;
 use Kanboard\Model\ProjectPermission;
 use Kanboard\Model\Task;

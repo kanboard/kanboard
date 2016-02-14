@@ -62,7 +62,7 @@ class BoardTooltip extends Base
         $task = $this->getTask();
 
         $this->response->html($this->template->render('board/tooltip_files', array(
-            'files' => $this->file->getAll($task['id']),
+            'files' => $this->taskFile->getAll($task['id']),
             'task' => $task,
         )));
     }

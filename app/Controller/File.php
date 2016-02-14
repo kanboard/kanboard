@@ -21,7 +21,7 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        if ($this->request->isPost() && $this->file->uploadScreenshot($task['project_id'], $task['id'], $this->request->getValue('screenshot')) !== false) {
+        if ($this->request->isPost() && $this->taskFile->uploadScreenshot($task['id'], $this->request->getValue('screenshot')) !== false) {
             $this->flash->success(t('Screenshot uploaded successfully.'));
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
@@ -55,7 +55,7 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        if (! $this->file->uploadFiles($task['project_id'], $task['id'], 'files')) {
+        if (! $this->taskFile->uploadFiles($task['id'], $this->request->getFileInfo('files'))) {
             $this->flash->failure(t('Unable to upload the file.'));
         }
 
@@ -71,7 +71,7 @@ class File extends Base
     {
         try {
             $task = $this->getTask();
-            $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+            $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
             if ($file['task_id'] != $task['id']) {
                 $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
@@ -92,7 +92,7 @@ class File extends Base
     public function open()
     {
         $task = $this->getTask();
-        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
         if ($file['task_id'] == $task['id']) {
             $this->response->html($this->template->render('file/open', array(
@@ -111,10 +111,10 @@ class File extends Base
     {
         try {
             $task = $this->getTask();
-            $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+            $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
             if ($file['task_id'] == $task['id']) {
-                $this->response->contentType($this->file->getImageMimeType($file['name']));
+                $this->response->contentType($this->taskFile->getImageMimeType($file['name']));
                 $this->objectStorage->output($file['path']);
             }
         } catch (ObjectStorageException $e) {
@@ -133,18 +133,18 @@ class File extends Base
 
         try {
             $task = $this->getTask();
-            $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+            $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
             if ($file['task_id'] == $task['id']) {
-                $this->objectStorage->output($this->file->getThumbnailPath($file['path']));
+                $this->objectStorage->output($this->taskFile->getThumbnailPath($file['path']));
             }
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
 
             // Try to generate thumbnail on the fly for images uploaded before Kanboard < 1.0.19
             $data = $this->objectStorage->get($file['path']);
-            $this->file->generateThumbnailFromData($file['path'], $data);
-            $this->objectStorage->output($this->file->getThumbnailPath($file['path']));
+            $this->taskFile->generateThumbnailFromData($file['path'], $data);
+            $this->objectStorage->output($this->taskFile->getThumbnailPath($file['path']));
         }
     }
 
@@ -157,9 +157,9 @@ class File extends Base
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
-        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
-        if ($file['task_id'] == $task['id'] && $this->file->remove($file['id'])) {
+        if ($file['task_id'] == $task['id'] && $this->taskFile->remove($file['id'])) {
             $this->flash->success(t('File removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this file.'));
@@ -176,7 +176,7 @@ class File extends Base
     public function confirm()
     {
         $task = $this->getTask();
-        $file = $this->file->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
         $this->response->html($this->helper->layout->task('file/remove', array(
             'task' => $task,

@@ -67,7 +67,8 @@ use Pimple\Container;
  * @property \Kanboard\Model\Config                                     $config
  * @property \Kanboard\Model\Currency                                   $currency
  * @property \Kanboard\Model\CustomFilter                               $customFilter
- * @property \Kanboard\Model\File                                       $file
+ * @property \Kanboard\Model\TaskFile                                   $taskFile
+ * @property \Kanboard\Model\ProjectFile                                $projectFile
  * @property \Kanboard\Model\Group                                      $group
  * @property \Kanboard\Model\GroupMember                                $groupMember
  * @property \Kanboard\Model\LastLogin                                  $lastLogin

@@ -67,6 +67,12 @@ abstract class Base extends PHPUnit_Framework_TestCase
             ->setMethods(array('getType', 'getSelectedTypes'))
             ->getMock();
 
+        $this->container['objectStorage'] = $this
+            ->getMockBuilder('\Kanboard\Core\ObjectStorage\FileStorage')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
+            ->getMock();
+
         $this->container['sessionStorage'] = new SessionStorage;
         $this->container->register(new ActionProvider);
 
