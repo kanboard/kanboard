@@ -1,14 +1,3 @@
-@media only screen and (max-width: 1080px) {
-    div.filter-dropdowns .filters {
-        margin-left: 0;
-    }
-
-    div.filter-dropdowns {
-        display: block;
-        margin-top: 5px;
-    }
-}
-
 @media only screen and (max-width: 1024px) {
 
     body {
@@ -30,15 +19,6 @@
 
     td > input[type="text"] {
         max-width: 150px;
-    }
-
-    .task-time-form label {
-        display: block;
-    }
-
-    .task-time-form input[type="submit"] {
-        margin-top: 10px;
-        display: block;
     }
 
     .page-header .form-input-large {
