@@ -25,7 +25,7 @@
 
 <?= $this->render('task/time_tracking_summary', array('task' => $task)) ?>
 
-<?= $this->render('file/show', array(
+<?= $this->render('task_file/show', array(
     'task' => $task,
     'files' => $files,
     'images' => $images

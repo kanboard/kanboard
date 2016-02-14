@@ -93,7 +93,7 @@ class BoardPopover extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->render('file/screenshot', array(
+        $this->response->html($this->template->render('task_file/screenshot', array(
             'task' => $task,
         )));
     }

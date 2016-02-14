@@ -94,8 +94,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('public/task/:task_id/:token', 'task', 'readonly');
 
             $container['route']->addRoute('project/:project_id/task/:task_id/activity', 'activity', 'task');
-            $container['route']->addRoute('project/:project_id/task/:task_id/screenshot', 'file', 'screenshot');
-            $container['route']->addRoute('project/:project_id/task/:task_id/upload', 'file', 'create');
             $container['route']->addRoute('project/:project_id/task/:task_id/transitions', 'task', 'transitions');
             $container['route']->addRoute('project/:project_id/task/:task_id/analytics', 'task', 'analytics');
             $container['route']->addRoute('project/:project_id/task/:task_id/subtasks', 'subtask', 'show');

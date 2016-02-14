@@ -5,12 +5,12 @@ namespace Kanboard\Controller;
 use Kanboard\Core\ObjectStorage\ObjectStorageException;
 
 /**
- * File controller
+ * File File Controller
  *
  * @package  controller
  * @author   Frederic Guillot
  */
-class File extends Base
+class TaskFile extends Base
 {
     /**
      * Screenshot
@@ -26,7 +26,7 @@ class File extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
-        $this->response->html($this->helper->layout->task('file/screenshot', array(
+        $this->response->html($this->helper->layout->task('task_file/screenshot', array(
             'task' => $task,
         )));
     }
@@ -40,7 +40,7 @@ class File extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->helper->layout->task('file/new', array(
+        $this->response->html($this->helper->layout->task('task_file/new', array(
             'task' => $task,
             'max_size' => $this->helper->text->phpToBytes(ini_get('upload_max_filesize')),
         )));
@@ -95,7 +95,7 @@ class File extends Base
         $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
         if ($file['task_id'] == $task['id']) {
-            $this->response->html($this->template->render('file/open', array(
+            $this->response->html($this->template->render('task_file/open', array(
                 'file' => $file,
                 'task' => $task,
             )));
@@ -178,7 +178,7 @@ class File extends Base
         $task = $this->getTask();
         $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
-        $this->response->html($this->helper->layout->task('file/remove', array(
+        $this->response->html($this->helper->layout->task('task_file/remove', array(
             'task' => $task,
             'file' => $file,
         )));

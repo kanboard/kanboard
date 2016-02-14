@@ -38,11 +38,11 @@
         </li>
         <li>
             <i class="fa fa-file fa-fw"></i>
-            <?= $this->url->link(t('Attach a document'), 'file', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+            <?= $this->url->link(t('Attach a document'), 'TaskFile', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-camera fa-fw"></i>
-            <?= $this->url->link(t('Add a screenshot'), 'file', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+            <?= $this->url->link(t('Add a screenshot'), 'TaskFile', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-files-o fa-fw"></i>

@@ -18,7 +18,7 @@
 <div
     id="file-dropzone"
     data-max-size="<?= $max_size ?>"
-    data-url="<?= $this->url->href('file', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+    data-url="<?= $this->url->href('TaskFile', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
     <div id="file-dropzone-inner">
         <?= t('Drag and drop your files here') ?> <?= t('or') ?> <a href="#" id="file-browser"><?= t('choose files') ?></a>
     </div>
