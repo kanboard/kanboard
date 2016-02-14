@@ -43,6 +43,29 @@ class Text extends Base
     }
 
     /**
+     * Get the number of bytes from PHP size
+     *
+     * @param  integer  $val        PHP size (example: 2M)
+     * @return integer
+     */
+    public function phpToBytes($val)
+    {
+        $val = trim($val);
+        $last = strtolower($val[strlen($val)-1]);
+
+        switch ($last) {
+            case 'g':
+                $val *= 1024;
+            case 'm':
+                $val *= 1024;
+            case 'k':
+                $val *= 1024;
+        }
+
+        return $val;
+    }
+
+    /**
      * Return true if needle is contained in the haystack
      *
      * @param  string   $haystack   Haystack

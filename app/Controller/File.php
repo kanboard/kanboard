@@ -42,7 +42,7 @@ class File extends Base
 
         $this->response->html($this->helper->layout->task('file/new', array(
             'task' => $task,
-            'max_size' => ini_get('upload_max_filesize'),
+            'max_size' => $this->helper->text->phpToBytes(ini_get('upload_max_filesize')),
         )));
     }
 

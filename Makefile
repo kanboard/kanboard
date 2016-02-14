@@ -1,10 +1,10 @@
 BUILD_DIR = /tmp
 
-CSS_APP = $(addprefix assets/css/src/, $(addsuffix .css, base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown screenshot filters gantt project))
+CSS_APP = $(addprefix assets/css/src/, $(addsuffix .css, base links title table form button alert tooltip header board task comment subtask markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown upload filters gantt project))
 CSS_PRINT = $(addprefix assets/css/src/, $(addsuffix .css, print links table board task comment subtask markdown))
 CSS_VENDOR = $(addprefix assets/css/vendor/, $(addsuffix .css, jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min))
 
-JS_APP = $(addprefix assets/js/src/, $(addsuffix .js, Popover Dropdown Tooltip Markdown Search App Screenshot Calendar Board Swimlane Gantt Task Project Subtask TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart CompareHoursColumnChart Router))
+JS_APP = $(addprefix assets/js/src/, $(addsuffix .js, Popover Dropdown Tooltip Markdown Search App Screenshot FileUpload Calendar Board Swimlane Gantt Task Project Subtask TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart CompareHoursColumnChart Router))
 JS_VENDOR = $(addprefix assets/js/vendor/, $(addsuffix .js, jquery-1.11.3.min jquery-ui.min jquery-ui-timepicker-addon.min jquery.ui.touch-punch.min chosen.jquery.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min jquery.textcomplete))
 JS_LANG = $(addprefix assets/js/vendor/lang/, $(addsuffix .js, cs da de es el fi fr hu id it ja nl nb pl pt pt-br ru sv sr th tr zh-cn))
 
