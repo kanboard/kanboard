@@ -3,10 +3,10 @@
     display: flex;
     -webkit-flex-direction: row;
     flex-direction: row;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
 }
 
 .file-thumbnail {
@@ -15,6 +15,7 @@
     border-radius: 5px;
     margin-bottom: 20px;
     box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.55);
+    margin-right: 15px;
 }
 
 .file-thumbnail img {
