@@ -35,10 +35,11 @@ Popover.prototype.onClick = function(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    var link = e.target.getAttribute("href");
+    var target = e.currentTarget || e.target;
+    var link = target.getAttribute("href");
 
     if (! link) {
-        link = e.target.getAttribute("data-href");
+        link = target.getAttribute("data-href");
     }
 
     if (link) {

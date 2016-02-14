@@ -118,19 +118,9 @@ span.task-board-date-overdue {
 }
 
 /* task score */
-.task-score {
-    font-weight: bold;
-}
-
 .task-board .task-score {
+    font-weight: bold;
     font-size: 1.1em;
-}
-
-.task-show-details .task-score {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-size: 2em;
 }
 
 /* task age */
@@ -167,7 +157,7 @@ span.task-board-date-overdue {
     display: none;
 }
 
-/* task view */
+/* task summary */
 #task-summary {
     margin-bottom: 15px;
 }
@@ -204,38 +194,6 @@ span.task-board-date-overdue {
     line-height: 23px;
 }
 
-.task-show-section {
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-
-.task-show-files a {
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.task-show-files li {
-    margin-left: 25px;
-    list-style-type: square;
-    line-height: 25px;
-}
-
-.task-show-file-actions {
-    font-size: 0.75em;
-}
-
-.task-show-file-actions:before {
-    content: " [";
-}
-
-.task-show-file-actions:after {
-    content: "]";
-}
-
-.task-show-file-actions a {
-    color: #333;
-}
-
 .task-show-description {
     border-left: 4px solid #333;
     padding-left: 20px;
@@ -265,46 +223,6 @@ span.task-board-date-overdue {
 
 .task-link-closed {
     text-decoration: line-through;
-}
-
-.task-show-images {
-    list-style-type: none;
-}
-
-.task-show-images li img {
-    width: 100%;
-}
-
-.task-show-images li .img_container {
-    width: 250px;
-    height: 100px;
-    overflow: hidden;
-}
-
-.task-show-images li {
-    padding: 10px;
-    overflow: auto;
-    width: 250px;
-    min-height: 120px;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.task-show-images li p{
-    padding: 5px;
-    font-weight: bold;
-}
-
-.task-show-images li:hover {
-    background: #eee;
-}
-
-.task-show-image-actions {
-    margin-left: 5px;
-}
-
-.task-show-file-table {
-    width: auto;
 }
 
 .flag-milestone {

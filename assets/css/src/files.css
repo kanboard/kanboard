@@ -1,0 +1,45 @@
+.file-thumbnails {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.file-thumbnail {
+    width: 250px;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.55);
+}
+
+.file-thumbnail img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.file-thumbnail img:hover {
+    opacity: 0.5;
+}
+
+.file-thumbnail-content {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.file-thumbnail-title {
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.file-thumbnail-description {
+    font-size: 0.8em;
+    color: #aaa;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
