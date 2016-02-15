@@ -962,7 +962,7 @@ return array(
     'Edit group' => 'Editar o grupo',
     'Group updated successfully.' => 'Grupo atualizado com sucesso.',
     'Unable to update your group.' => 'Não foi possível atualizar o seu grupo.',
-    'Add group member to "%s"' => 'Adicionar um membro ao grupo "% s"',
+    'Add group member to "%s"' => 'Adicionar um membro ao grupo "%s"',
     'Group member added successfully.' => 'Membro adicionado com sucesso ao o grupo.',
     'Unable to add group member.' => 'Não foi possivel adicionar esse membro ao grupo.',
     'Remove user from group "%s"' => 'Remover usuário do grupo "%s"',
