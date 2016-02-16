@@ -5,7 +5,9 @@
             <?= $this->subtask->toggleStatus($subtask, $task['project_id']) ?>
         </td>
         <td>
-            <?= $this->e($subtask['username'] ?: $this->user->getFullname($subtask)) ?>
+            <?php if (! empty($subtask['username'])): ?>
+                    <?= $this->e($subtask['name'] ?: $subtask['username']) ?>
+            <?php endif ?>
         </td>
     </tr>
 <?php endforeach ?>
