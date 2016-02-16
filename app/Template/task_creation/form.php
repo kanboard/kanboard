@@ -55,6 +55,8 @@
         <?= $this->task->selectScore($values, $errors) ?>
         <?= $this->task->selectTimeEstimated($values, $errors) ?>
         <?= $this->task->selectDueDate($values, $errors) ?>
+
+        <?= $this->hook->render('template:task:form:right-column', array('values'=>$values, 'errors'=>$errors)) ?>
     </div>
 
     <div class="form-actions">
