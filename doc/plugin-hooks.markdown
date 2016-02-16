@@ -174,6 +174,7 @@ List of template hooks:
 | `template:task:menu`                 | "Actions" menu on left in different task views     |
 | `template:task:dropdown`             | Task dropdown menu in listing pages                |
 | `template:task:sidebar`              | Sidebar on task page                               |
+| `template:task:form:right-column`    | Right column in task form                          |
 | `template:user:authentication:form`  | "Edit authentication" form in user profile         |
 | `template:user:create-remote:form`   | "Create remote user" form                          |
 | `template:user:external`             | "External authentication" page in user profile     |
