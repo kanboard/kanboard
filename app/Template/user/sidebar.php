@@ -26,7 +26,7 @@
             </li>
         <?php endif ?>
 
-        <?= $this->hook->render('template:user:sidebar:information') ?>
+        <?= $this->hook->render('template:user:sidebar:information', array('user' => $user)) ?>
     </ul>
 
     <h2><?= t('Actions') ?></h2>

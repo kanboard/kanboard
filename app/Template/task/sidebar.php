@@ -28,6 +28,6 @@
             <?= $this->url->link(t('External links'), 'TaskExternalLink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
 
-        <?= $this->hook->render('template:task:sidebar') ?>
+        <?= $this->hook->render('template:task:sidebar', array('task' => $task)) ?>
     </ul>
 </div>
