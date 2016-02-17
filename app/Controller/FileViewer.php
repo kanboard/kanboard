@@ -13,6 +13,30 @@ use Kanboard\Core\ObjectStorage\ObjectStorageException;
 class FileViewer extends Base
 {
     /**
+     * Get file content from object storage
+     *
+     * @access private
+     * @param  array $file
+     * @return string
+     */
+    private function getFileContent(array $file)
+    {
+        $content = '';
+
+        try {
+
+            if ($file['is_image'] == 0) {
+                $content = $this->objectStorage->get($file['path']);
+            }
+
+        } catch (ObjectStorageException $e) {
+            $this->logger->error($e->getMessage());
+        }
+
+        return $content;
+    }
+
+    /**
      * Show file content in a popover
      *
      * @access public
@@ -20,6 +44,7 @@ class FileViewer extends Base
     public function show()
     {
         $file = $this->getFile();
+        $type = $this->helper->file->getPreviewType($file['name']);
         $params = array('file_id' => $file['id'], 'project_id' => $this->request->getIntegerParam('project_id'));
 
         if ($file['model'] === 'taskFile') {
@@ -29,6 +54,8 @@ class FileViewer extends Base
         $this->response->html($this->template->render('file_viewer/show', array(
             'file' => $file,
             'params' => $params,
+            'type' => $type,
+            'content' => $this->getFileContent($file),
         )));
     }
 

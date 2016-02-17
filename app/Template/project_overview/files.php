@@ -24,16 +24,16 @@
                     <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
                     <ul>
+                        <li>
+                            <i class="fa fa-download fa-fw"></i>
+                            <?= $this->url->link(t('Download'), 'FileViewer', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
+                        </li>
                         <?php if ($this->user->hasProjectAccess('ProjectFile', 'remove', $project['id'])): ?>
                         <li>
                             <i class="fa fa-trash fa-fw"></i>
                             <?= $this->url->link(t('Remove'), 'ProjectFile', 'confirm', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
                         </li>
                         <?php endif ?>
-                        <li>
-                            <i class="fa fa-download fa-fw"></i>
-                            <?= $this->url->link(t('Download'), 'FileViewer', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
-                        </li>
                     </ul>
                     </div>
                 </div>
@@ -64,16 +64,22 @@
                 <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
                     <ul>
-                        <?php if ($this->user->hasProjectAccess('ProjectFile', 'remove', $project['id'])): ?>
+                        <?php if ($this->file->getPreviewType($file['name']) !== null): ?>
                         <li>
-                            <i class="fa fa-trash fa-fw"></i>
-                            <?= $this->url->link(t('Remove'), 'ProjectFile', 'confirm', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
+                            <i class="fa fa-eye fa-fw"></i>
+                            <?= $this->url->link(t('View'), 'FileViewer', 'show', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
                         </li>
                         <?php endif ?>
                         <li>
                             <i class="fa fa-download fa-fw"></i>
                             <?= $this->url->link(t('Download'), 'FileViewer', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
                         </li>
+                        <?php if ($this->user->hasProjectAccess('ProjectFile', 'remove', $project['id'])): ?>
+                        <li>
+                            <i class="fa fa-trash fa-fw"></i>
+                            <?= $this->url->link(t('Remove'), 'ProjectFile', 'confirm', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
+                        </li>
+                        <?php endif ?>
                     </ul>
                 </div>
             </td>

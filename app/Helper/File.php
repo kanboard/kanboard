@@ -82,4 +82,26 @@ class File extends \Kanboard\Core\Base
                 return 'image/jpeg';
         }
     }
+
+    /**
+     * Get the preview type
+     *
+     * @access public
+     * @param  string $filename
+     * @return string
+     */
+    public function getPreviewType($filename)
+    {
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+        switch ($extension) {
+            case 'md':
+            case 'markdown':
+                return 'markdown';
+            case 'txt':
+                return 'text';
+        }
+
+        return null;
+    }
 }

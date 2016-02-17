@@ -205,22 +205,6 @@ span.task-board-date-overdue {
     height: 300px;
 }
 
-.task-file-viewer {
-    position: relative;
-}
-
-.task-file-viewer img {
-    max-width: 95%;
-    max-height: 85%;
-    margin-top: 10px;
-}
-
-.task-time-form {
-    margin-top: 10px;
-    margin-bottom: 25px;
-    padding: 3px;
-}
-
 .task-link-closed {
     text-decoration: line-through;
 }
