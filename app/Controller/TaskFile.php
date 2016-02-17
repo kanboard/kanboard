@@ -2,10 +2,8 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Core\ObjectStorage\ObjectStorageException;
-
 /**
- * File File Controller
+ * Task File Controller
  *
  * @package  controller
  * @author   Frederic Guillot
@@ -26,7 +24,7 @@ class TaskFile extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
-        $this->response->html($this->helper->layout->task('task_file/screenshot', array(
+        $this->response->html($this->template->render('task_file/screenshot', array(
             'task' => $task,
         )));
     }
@@ -40,7 +38,7 @@ class TaskFile extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->helper->layout->task('task_file/new', array(
+        $this->response->html($this->template->render('task_file/create', array(
             'task' => $task,
             'max_size' => $this->helper->text->phpToBytes(ini_get('upload_max_filesize')),
         )));
@@ -60,92 +58,6 @@ class TaskFile extends Base
         }
 
         $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
-    }
-
-    /**
-     * File download
-     *
-     * @access public
-     */
-    public function download()
-    {
-        try {
-            $task = $this->getTask();
-            $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
-
-            if ($file['task_id'] != $task['id']) {
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
-            }
-
-            $this->response->forceDownload($file['name']);
-            $this->objectStorage->output($file['path']);
-        } catch (ObjectStorageException $e) {
-            $this->logger->error($e->getMessage());
-        }
-    }
-
-    /**
-     * Open a file (show the content in a popover)
-     *
-     * @access public
-     */
-    public function open()
-    {
-        $task = $this->getTask();
-        $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
-
-        if ($file['task_id'] == $task['id']) {
-            $this->response->html($this->template->render('task_file/open', array(
-                'file' => $file,
-                'task' => $task,
-            )));
-        }
-    }
-
-    /**
-     * Display image
-     *
-     * @access public
-     */
-    public function image()
-    {
-        try {
-            $task = $this->getTask();
-            $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
-
-            if ($file['task_id'] == $task['id']) {
-                $this->response->contentType($this->taskFile->getImageMimeType($file['name']));
-                $this->objectStorage->output($file['path']);
-            }
-        } catch (ObjectStorageException $e) {
-            $this->logger->error($e->getMessage());
-        }
-    }
-
-    /**
-     * Display image thumbnails
-     *
-     * @access public
-     */
-    public function thumbnail()
-    {
-        $this->response->contentType('image/jpeg');
-
-        try {
-            $task = $this->getTask();
-            $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
-
-            if ($file['task_id'] == $task['id']) {
-                $this->objectStorage->output($this->taskFile->getThumbnailPath($file['path']));
-            }
-        } catch (ObjectStorageException $e) {
-            $this->logger->error($e->getMessage());
-
-            // Try to generate thumbnail on the fly for images uploaded before Kanboard < 1.0.19
-            $data = $this->objectStorage->get($file['path']);
-            $this->taskFile->generateThumbnailFromData($file['path'], $data);
-            $this->objectStorage->output($this->taskFile->getThumbnailPath($file['path']));
-        }
     }
 
     /**
@@ -178,7 +90,7 @@ class TaskFile extends Base
         $task = $this->getTask();
         $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
 
-        $this->response->html($this->helper->layout->task('task_file/remove', array(
+        $this->response->html($this->template->render('task_file/remove', array(
             'task' => $task,
             'file' => $file,
         )));

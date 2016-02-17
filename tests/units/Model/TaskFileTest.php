@@ -124,18 +124,6 @@ class TaskFileTest extends Base
         $this->assertFalse($fileModel->isImage('test.pdf'));
     }
 
-    public function testGetMimeType()
-    {
-        $fileModel = new TaskFile($this->container);
-
-        $this->assertEquals('image/jpeg', $fileModel->getImageMimeType('My File.JPG'));
-        $this->assertEquals('image/jpeg', $fileModel->getImageMimeType('My File.jpeg'));
-        $this->assertEquals('image/png', $fileModel->getImageMimeType('My File.PNG'));
-        $this->assertEquals('image/gif', $fileModel->getImageMimeType('My File.gif'));
-        $this->assertEquals('image/jpeg', $fileModel->getImageMimeType('My File.bmp'));
-        $this->assertEquals('image/jpeg', $fileModel->getImageMimeType('My File'));
-    }
-
     public function testGetThumbnailPath()
     {
         $fileModel = new TaskFile($this->container);

@@ -19,6 +19,8 @@ class ProjectOverview extends Base
         $params['users'] = $this->projectUserRole->getAllUsersGroupedByRole($params['project']['id']);
         $params['roles'] = $this->role->getProjectRoles();
         $params['events'] = $this->projectActivity->getProject($params['project']['id'], 10);
+        $params['images'] = $this->projectFile->getAllImages($params['project']['id']);
+        $params['files'] = $this->projectFile->getAllDocuments($params['project']['id']);
 
         $this->project->getColumnStats($params['project']);
 

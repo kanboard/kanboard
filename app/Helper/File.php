@@ -58,4 +58,28 @@ class File extends \Kanboard\Core\Base
 
         return 'fa-file-o';
     }
+
+    /**
+     * Return the image mimetype based on the file extension
+     *
+     * @access public
+     * @param  $filename
+     * @return string
+     */
+    public function getImageMimeType($filename)
+    {
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+        switch ($extension) {
+            case 'jpeg':
+            case 'jpg':
+                return 'image/jpeg';
+            case 'png':
+                return 'image/png';
+            case 'gif':
+                return 'image/gif';
+            default:
+                return 'image/jpeg';
+        }
+    }
 }

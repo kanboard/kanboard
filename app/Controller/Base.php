@@ -202,6 +202,36 @@ abstract class Base extends \Kanboard\Core\Base
     }
 
     /**
+     * Get Task or Project file
+     *
+     * @access protected
+     */
+    protected function getFile()
+    {
+        $task_id = $this->request->getIntegerParam('task_id');
+        $file_id = $this->request->getIntegerParam('file_id');
+        $model = 'projectFile';
+
+        if ($task_id > 0) {
+            $model = 'taskFile';
+            $project_id = $this->taskFinder->getProjectId($task_id);
+
+            if ($project_id !== $this->request->getIntegerParam('project_id')) {
+                $this->forbidden();
+            }
+        }
+
+        $file = $this->$model->getById($file_id);
+
+        if (empty($file)) {
+            $this->notfound();
+        }
+
+        $file['model'] = $model;
+        return $file;
+    }
+
+    /**
      * Common method to get a project
      *
      * @access protected

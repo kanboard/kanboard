@@ -8,7 +8,7 @@
         <div class="file-thumbnails">
             <?php foreach ($images as $file): ?>
                 <div class="file-thumbnail">
-                    <a href="<?= $this->url->href('TaskFile', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>" class="popover"><img src="<?= $this->url->href('TaskFile', 'thumbnail', array('file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" title="<?= $this->e($file['name']) ?>" alt="<?= $this->e($file['name']) ?>"></a>
+                    <a href="<?= $this->url->href('FileViewer', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>" class="popover"><img src="<?= $this->url->href('FileViewer', 'thumbnail', array('file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" title="<?= $this->e($file['name']) ?>" alt="<?= $this->e($file['name']) ?>"></a>
                     <div class="file-thumbnail-content">
                         <div class="file-thumbnail-title">
                             <div class="dropdown">
@@ -22,7 +22,7 @@
                                 <?php endif ?>
                                 <li>
                                     <i class="fa fa-download fa-fw"></i>
-                                    <?= $this->url->link(t('Download'), 'TaskFile', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                                    <?= $this->url->link(t('Download'), 'FileViewer', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                                 </li>
                             </ul>
                             </div>
@@ -62,7 +62,7 @@
                                 <?php endif ?>
                                 <li>
                                     <i class="fa fa-download fa-fw"></i>
-                                    <?= $this->url->link(t('Download'), 'TaskFile', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                                    <?= $this->url->link(t('Download'), 'FileViewer', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                                 </li>
                             </ul>
                         </div>
