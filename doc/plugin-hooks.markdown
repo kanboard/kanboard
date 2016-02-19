@@ -121,7 +121,8 @@ class Plugin extends Base
 
 List of asset Hooks:
 
-- `template:layout:css`
+- `template:layout:css` media='screen'
+- `templare:layout:css_print` media='print'
 - `template:layout:js`
 
 Template Hooks

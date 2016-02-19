@@ -22,6 +22,7 @@
         <?= $this->asset->customCss() ?>
 
         <?= $this->hook->asset('css', 'template:layout:css') ?>
+        <?= $this->hook->asset('css_print', 'template:layout:css_print') ?>
         <?= $this->hook->asset('js', 'template:layout:js') ?>
 
         <link rel="icon" type="image/png" href="<?= $this->url->dir() ?>assets/img/favicon.png">

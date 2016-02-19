@@ -35,6 +35,19 @@ class Asset extends \Kanboard\Core\Base
     }
 
     /**
+     * Add a stylesheet asset media = print
+     *
+     * @param  string   $filename   Filename
+     * @param  boolean  $is_file    Add file timestamp
+     * @param  string   $media      Media
+     * @return string
+     */
+    public function css_print($filename, $is_file = true, $media = 'print')
+    {
+        return '<link rel="stylesheet" href="'.$this->helper->url->dir().$filename.($is_file ? '?'.filemtime($filename) : '').'" media="'.$media.'">';
+    }
+
+    /**
      * Get custom css
      *
      * @access public
