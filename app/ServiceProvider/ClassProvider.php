@@ -27,6 +27,7 @@ class ClassProvider implements ServiceProviderInterface
             'Board',
             'Category',
             'Color',
+            'Column',
             'Comment',
             'Config',
             'Currency',

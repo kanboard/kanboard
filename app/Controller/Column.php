@@ -117,22 +117,21 @@ class Column extends Base
     }
 
     /**
-     * Move a column up or down
+     * Move column position
      *
      * @access public
      */
     public function move()
     {
-        $this->checkCSRFParam();
         $project = $this->getProject();
-        $column_id = $this->request->getIntegerParam('column_id');
-        $direction = $this->request->getStringParam('direction');
+        $values = $this->request->getJson();
 
-        if ($direction === 'up' || $direction === 'down') {
-            $this->board->{'move'.$direction}($project['id'], $column_id);
+        if (! empty($values)) {
+            $result = $this->column->changePosition($project['id'], $values['column_id'], $values['position']);
+            return $this->response->json(array('result' => $result));
         }
 
-        $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
+        $this->forbidden();
     }
 
     /**

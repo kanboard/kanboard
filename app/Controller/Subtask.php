@@ -174,7 +174,7 @@ class Subtask extends Base
 
         if (! empty($values) && $this->helper->user->hasProjectAccess('Subtask', 'movePosition', $project_id)) {
             $result = $this->subtask->changePosition($task_id, $values['subtask_id'], $values['position']);
-            $this->response->json(array('result' => $result));
+            return $this->response->json(array('result' => $result));
         }
 
         $this->forbidden();

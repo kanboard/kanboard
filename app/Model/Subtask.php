@@ -263,27 +263,6 @@ class Subtask extends Base
     }
 
     /**
-     * Get subtasks with consecutive positions
-     *
-     * If you remove a subtask, the positions are not anymore consecutives
-     *
-     * @access public
-     * @param  integer  $task_id
-     * @return array
-     */
-    public function getNormalizedPositions($task_id)
-    {
-        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
-        $position = 1;
-
-        foreach ($subtasks as $subtask_id => $subtask_position) {
-            $subtasks[$subtask_id] = $position++;
-        }
-
-        return $subtasks;
-    }
-
-    /**
      * Save subtask position
      *
      * @access public

@@ -3,7 +3,7 @@ Version 1.0.26 (unreleased)
 
 New features:
 
-* Add subtasks drag and drop
+* Add drag and drop to change subtasks and columns positions
 * Add file drag and drop and asynchronous upload
 * Enable/Disable users
 * Add setting option to disable private projects

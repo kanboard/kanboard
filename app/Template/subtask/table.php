@@ -1,8 +1,4 @@
 <?php if (! empty($subtasks)): ?>
-
-    <?php $first_position = $subtasks[0]['position']; ?>
-    <?php $last_position = $subtasks[count($subtasks) - 1]['position']; ?>
-
     <table
         class="subtasks-table table-stripped"
         data-save-position-url="<?= $this->url->href('Subtask', 'movePosition', array('project_id' => $task['project_id'], 'task_id' => $task['id'])) ?>"
@@ -63,8 +59,6 @@
                     <?= $this->render('subtask/menu', array(
                         'task' => $task,
                         'subtask' => $subtask,
-                        'first_position' => $first_position,
-                        'last_position' => $last_position,
                     )) ?>
                 </td>
             <?php endif ?>

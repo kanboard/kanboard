@@ -9,6 +9,7 @@ function App() {
     this.task = new Task();
     this.project = new Project();
     this.subtask = new Subtask(this);
+    this.column = new Column(this);
     this.file = new FileUpload(this);
     this.keyboardShortcuts();
     this.chosen();
@@ -40,6 +41,7 @@ App.prototype.listen = function() {
     this.task.listen();
     this.swimlane.listen();
     this.subtask.listen();
+    this.column.listen();
     this.file.listen();
     this.search.focus();
     this.autoComplete();
