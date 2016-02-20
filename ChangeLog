@@ -3,11 +3,13 @@ Version 1.0.26 (unreleased)
 
 Breaking changes:
 
-* API procedures: "moveColumnUp" and "moveColumnDown" are replace by "changeColumnPosition"
+* API procedures:
+    - "moveColumnUp" and "moveColumnDown" are replace by "changeColumnPosition"
+    - "moveSwimlaneUp" and "moveSwimlaneDown" are replace by "changeSwimlanePosition"
 
 New features:
 
-* Add drag and drop to change subtasks and columns positions
+* Add drag and drop to change subtasks, swimlanes and columns positions
 * Add file drag and drop and asynchronous upload
 * Enable/Disable users
 * Add setting option to disable private projects

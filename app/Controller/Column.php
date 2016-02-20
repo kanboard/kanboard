@@ -35,7 +35,6 @@ class Column extends Base
     public function create(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $columns = $this->column->getList($project['id']);
 
         if (empty($values)) {
             $values = array('project_id' => $project['id']);
@@ -126,7 +125,7 @@ class Column extends Base
         $project = $this->getProject();
         $values = $this->request->getJson();
 
-        if (! empty($values)) {
+        if (! empty($values) && isset($values['column_id']) && isset($values['position'])) {
             $result = $this->column->changePosition($project['id'], $values['column_id'], $values['position']);
             return $this->response->json(array('result' => $result));
         }

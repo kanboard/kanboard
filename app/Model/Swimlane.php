@@ -263,6 +263,40 @@ class Swimlane extends Base
     }
 
     /**
+     * Enable the default swimlane
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return bool
+     */
+    public function enableDefault($project_id)
+    {
+        return $this->db
+            ->table(Project::TABLE)
+            ->eq('id', $project_id)
+            ->update(array(
+                'show_default_swimlane' => 1,
+            ));
+    }
+
+    /**
+     * Disable the default swimlane
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @return bool
+     */
+    public function disableDefault($project_id)
+    {
+        return $this->db
+            ->table(Project::TABLE)
+            ->eq('id', $project_id)
+            ->update(array(
+                'show_default_swimlane' => 0,
+            ));
+    }
+
+    /**
      * Get the last position of a swimlane
      *
      * @access public
@@ -366,6 +400,7 @@ class Swimlane extends Base
             ->eq('project_id', $project_id)
             ->eq('is_active', 1)
             ->asc('position')
+            ->asc('id')
             ->findAllByColumn('id');
 
         if (! $swimlanes) {
@@ -382,69 +417,42 @@ class Swimlane extends Base
     }
 
     /**
-     * Move a swimlane down, increment the position value
+     * Change swimlane position
      *
      * @access public
-     * @param  integer  $project_id     Project id
-     * @param  integer  $swimlane_id    Swimlane id
+     * @param  integer  $project_id
+     * @param  integer  $swimlane_id
+     * @param  integer  $position
      * @return boolean
      */
-    public function moveDown($project_id, $swimlane_id)
+    public function changePosition($project_id, $swimlane_id, $position)
     {
-        $swimlanes = $this->db->hashtable(self::TABLE)
-            ->eq('project_id', $project_id)
-            ->eq('is_active', self::ACTIVE)
-            ->asc('position')
-            ->getAll('id', 'position');
-
-        $positions = array_flip($swimlanes);
-
-        if (isset($swimlanes[$swimlane_id]) && $swimlanes[$swimlane_id] < count($swimlanes)) {
-            $position = ++$swimlanes[$swimlane_id];
-            $swimlanes[$positions[$position]]--;
-
-            $this->db->startTransaction();
-            $this->db->table(self::TABLE)->eq('id', $swimlane_id)->update(array('position' => $position));
-            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $swimlanes[$positions[$position]]));
-            $this->db->closeTransaction();
-
-            return true;
+        if ($position < 1 || $position > $this->db->table(self::TABLE)->eq('project_id', $project_id)->count()) {
+            return false;
         }
 
-        return false;
-    }
-
-    /**
-     * Move a swimlane up, decrement the position value
-     *
-     * @access public
-     * @param  integer  $project_id     Project id
-     * @param  integer  $swimlane_id    Swimlane id
-     * @return boolean
-     */
-    public function moveUp($project_id, $swimlane_id)
-    {
-        $swimlanes = $this->db->hashtable(self::TABLE)
+        $swimlane_ids = $this->db->table(self::TABLE)
+            ->eq('is_active', 1)
             ->eq('project_id', $project_id)
-            ->eq('is_active', self::ACTIVE)
+            ->neq('id', $swimlane_id)
             ->asc('position')
-            ->getAll('id', 'position');
+            ->findAllByColumn('id');
 
-        $positions = array_flip($swimlanes);
+        $offset = 1;
+        $results = array();
 
-        if (isset($swimlanes[$swimlane_id]) && $swimlanes[$swimlane_id] > 1) {
-            $position = --$swimlanes[$swimlane_id];
-            $swimlanes[$positions[$position]]++;
+        foreach ($swimlane_ids as $current_swimlane_id) {
+            if ($offset == $position) {
+                $offset++;
+            }
 
-            $this->db->startTransaction();
-            $this->db->table(self::TABLE)->eq('id', $swimlane_id)->update(array('position' => $position));
-            $this->db->table(self::TABLE)->eq('id', $positions[$position])->update(array('position' => $swimlanes[$positions[$position]]));
-            $this->db->closeTransaction();
-
-            return true;
+            $results[] = $this->db->table(self::TABLE)->eq('id', $current_swimlane_id)->update(array('position' => $offset));
+            $offset++;
         }
 
-        return false;
+        $results[] = $this->db->table(self::TABLE)->eq('id', $swimlane_id)->update(array('position' => $position));
+
+        return !in_array(false, $results, true);
     }
 
     /**

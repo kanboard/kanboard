@@ -2,7 +2,7 @@ function App() {
     this.board = new Board(this);
     this.markdown = new Markdown();
     this.search = new Search(this);
-    this.swimlane = new Swimlane();
+    this.swimlane = new Swimlane(this);
     this.dropdown = new Dropdown();
     this.tooltip = new Tooltip(this);
     this.popover = new Popover(this);

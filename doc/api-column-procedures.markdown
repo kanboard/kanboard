@@ -97,7 +97,7 @@ Response example:
 - Parameters:
     - **project_id** (integer, required)
     - **column_id** (integer, required)
-    - **position** (integer, required)
+    - **position** (integer, required, must be >= 1)
 - Result on success: **true**
 - Result on failure: **false**
 
