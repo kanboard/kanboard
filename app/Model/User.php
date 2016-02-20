@@ -137,7 +137,7 @@ class User extends Base
      *
      * @access public
      * @param  string  $username  Username
-     * @return array
+     * @return integer
      */
     public function getIdByUsername($username)
     {

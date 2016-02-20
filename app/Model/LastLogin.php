@@ -65,9 +65,9 @@ class LastLogin extends Base
 
         if (count($connections) >= self::NB_LOGINS) {
             $this->db->table(self::TABLE)
-                     ->eq('user_id', $user_id)
-                     ->notin('id', array_slice($connections, 0, self::NB_LOGINS - 1))
-                     ->remove();
+                ->eq('user_id', $user_id)
+                ->notin('id', array_slice($connections, 0, self::NB_LOGINS - 1))
+                ->remove();
         }
     }
 

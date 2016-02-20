@@ -63,6 +63,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\Board                                      $board
  * @property \Kanboard\Model\Category                                   $category
  * @property \Kanboard\Model\Color                                      $color
+ * @property \Kanboard\Model\Column                                     $column
  * @property \Kanboard\Model\Comment                                    $comment
  * @property \Kanboard\Model\Config                                     $config
  * @property \Kanboard\Model\Currency                                   $currency

@@ -2,7 +2,6 @@
 
 namespace Kanboard\Api;
 
-use Kanboard\Core\Base;
 use Kanboard\Core\ObjectStorage\ObjectStorageException;
 
 /**

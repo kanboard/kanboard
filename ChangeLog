@@ -1,6 +1,10 @@
 Version 1.0.26 (unreleased)
 --------------
 
+Breaking changes:
+
+* API procedures: "moveColumnUp" and "moveColumnDown" are replace by "changeColumnPosition"
+
 New features:
 
 * Add drag and drop to change subtasks and columns positions

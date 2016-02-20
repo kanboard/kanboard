@@ -58,8 +58,7 @@ class Auth extends Base
         if (! DISABLE_LOGOUT) {
             $this->sessionManager->close();
             $this->response->redirect($this->helper->url->to('auth', 'login'));
-        }
-        else {
+        } else {
             $this->response->redirect($this->helper->url->to('auth', 'index'));
         }
     }
