@@ -23,7 +23,6 @@ class Subtask extends Base
             'project' => $this->getProject(),
             'subtasks' => $this->subtask->getAll($task['id']),
             'editable' => true,
-            'redirect' => 'subtask',
         )));
     }
 
@@ -169,15 +168,15 @@ class Subtask extends Base
      */
     public function movePosition()
     {
-        $this->checkCSRFParam();
         $project_id = $this->request->getIntegerParam('project_id');
         $task_id = $this->request->getIntegerParam('task_id');
-        $subtask_id = $this->request->getIntegerParam('subtask_id');
-        $direction = $this->request->getStringParam('direction');
-        $method = $direction === 'up' ? 'moveUp' : 'moveDown';
-        $redirect = $this->request->getStringParam('redirect', 'task');
+        $values = $this->request->getJson();
 
-        $this->subtask->$method($task_id, $subtask_id);
-        $this->response->redirect($this->helper->url->to($redirect, 'show', array('project_id' => $project_id, 'task_id' => $task_id), 'subtasks'));
+        if (! empty($values) && $this->helper->user->hasProjectAccess('Subtask', 'movePosition', $project_id)) {
+            $result = $this->subtask->changePosition($task_id, $values['subtask_id'], $values['position']);
+            $this->response->json(array('result' => $result));
+        }
+
+        $this->forbidden();
     }
 }

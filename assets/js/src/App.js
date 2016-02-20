@@ -8,7 +8,7 @@ function App() {
     this.popover = new Popover(this);
     this.task = new Task();
     this.project = new Project();
-    this.subtask = new Subtask();
+    this.subtask = new Subtask(this);
     this.file = new FileUpload(this);
     this.keyboardShortcuts();
     this.chosen();

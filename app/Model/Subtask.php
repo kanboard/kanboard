@@ -284,68 +284,36 @@ class Subtask extends Base
     }
 
     /**
-     * Save the new positions for a set of subtasks
+     * Save subtask position
      *
      * @access public
-     * @param  array   $subtasks    Hashmap of column_id/column_position
+     * @param  integer  $task_id
+     * @param  integer  $subtask_id
+     * @param  integer  $position
      * @return boolean
      */
-    public function savePositions(array $subtasks)
+    public function changePosition($task_id, $subtask_id, $position)
     {
-        return $this->db->transaction(function (Database $db) use ($subtasks) {
+        if ($position < 1 || $position > $this->db->table(self::TABLE)->eq('task_id', $task_id)->count()) {
+            return false;
+        }
 
-            foreach ($subtasks as $subtask_id => $position) {
-                if (! $db->table(Subtask::TABLE)->eq('id', $subtask_id)->update(array('position' => $position))) {
-                    return false;
-                }
+        $subtask_ids = $this->db->table(self::TABLE)->eq('task_id', $task_id)->neq('id', $subtask_id)->asc('position')->findAllByColumn('id');
+        $offset = 1;
+        $results = array();
+
+        foreach ($subtask_ids as $current_subtask_id) {
+            if ($offset == $position) {
+                $offset++;
             }
-        });
-    }
 
-    /**
-     * Move a subtask down, increment the position value
-     *
-     * @access public
-     * @param  integer  $task_id
-     * @param  integer  $subtask_id
-     * @return boolean
-     */
-    public function moveDown($task_id, $subtask_id)
-    {
-        $subtasks = $this->getNormalizedPositions($task_id);
-        $positions = array_flip($subtasks);
-
-        if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] < count($subtasks)) {
-            $position = ++$subtasks[$subtask_id];
-            $subtasks[$positions[$position]]--;
-
-            return $this->savePositions($subtasks);
+            $results[] = $this->db->table(self::TABLE)->eq('id', $current_subtask_id)->update(array('position' => $offset));
+            $offset++;
         }
 
-        return false;
-    }
+        $results[] = $this->db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position));
 
-    /**
-     * Move a subtask up, decrement the position value
-     *
-     * @access public
-     * @param  integer  $task_id
-     * @param  integer  $subtask_id
-     * @return boolean
-     */
-    public function moveUp($task_id, $subtask_id)
-    {
-        $subtasks = $this->getNormalizedPositions($task_id);
-        $positions = array_flip($subtasks);
-
-        if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] > 1) {
-            $position = --$subtasks[$subtask_id];
-            $subtasks[$positions[$position]]++;
-
-            return $this->savePositions($subtasks);
-        }
-
-        return false;
+        return !in_array(false, $results, true);
     }
 
     /**

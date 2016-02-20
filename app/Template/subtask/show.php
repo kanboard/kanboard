@@ -4,7 +4,7 @@
 
 <div id="subtasks">
 
-    <?= $this->render('subtask/table', array('subtasks' => $subtasks, 'task' => $task, 'editable' => $editable, 'redirect' => $redirect)) ?>
+    <?= $this->render('subtask/table', array('subtasks' => $subtasks, 'task' => $task, 'editable' => $editable)) ?>
 
     <?php if ($editable && $this->user->hasProjectAccess('subtask', 'save', $task['project_id'])): ?>
         <form method="post" action="<?= $this->url->href('subtask', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">

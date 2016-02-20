@@ -252,117 +252,6 @@ class SubtaskTest extends Base
         }
     }
 
-    public function testMoveUp()
-    {
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'test1')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
-
-        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1)));
-        $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1)));
-        $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 1)));
-
-        // Check positions
-        $subtask = $s->getById(1);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(1, $subtask['position']);
-
-        $subtask = $s->getById(2);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(2, $subtask['position']);
-
-        $subtask = $s->getById(3);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(3, $subtask['position']);
-
-        // Move up
-        $this->assertTrue($s->moveUp(1, 2));
-
-        // Check positions
-        $subtask = $s->getById(1);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(2, $subtask['position']);
-
-        $subtask = $s->getById(2);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(1, $subtask['position']);
-
-        $subtask = $s->getById(3);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(3, $subtask['position']);
-
-        // We can't move up #2
-        $this->assertFalse($s->moveUp(1, 2));
-
-        // Test remove
-        $this->assertTrue($s->remove(1));
-        $this->assertTrue($s->moveUp(1, 3));
-
-        // Check positions
-        $subtask = $s->getById(1);
-        $this->assertEmpty($subtask);
-
-        $subtask = $s->getById(2);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(2, $subtask['position']);
-
-        $subtask = $s->getById(3);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(1, $subtask['position']);
-    }
-
-    public function testMoveDown()
-    {
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $p = new Project($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'test1')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
-
-        $this->assertEquals(1, $s->create(array('title' => 'subtask #1', 'task_id' => 1)));
-        $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1)));
-        $this->assertEquals(3, $s->create(array('title' => 'subtask #3', 'task_id' => 1)));
-
-        // Move down #1
-        $this->assertTrue($s->moveDown(1, 1));
-
-        // Check positions
-        $subtask = $s->getById(1);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(2, $subtask['position']);
-
-        $subtask = $s->getById(2);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(1, $subtask['position']);
-
-        $subtask = $s->getById(3);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(3, $subtask['position']);
-
-        // We can't move down #3
-        $this->assertFalse($s->moveDown(1, 3));
-
-        // Test remove
-        $this->assertTrue($s->remove(1));
-        $this->assertTrue($s->moveDown(1, 2));
-
-        // Check positions
-        $subtask = $s->getById(1);
-        $this->assertEmpty($subtask);
-
-        $subtask = $s->getById(2);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(2, $subtask['position']);
-
-        $subtask = $s->getById(3);
-        $this->assertNotEmpty($subtask);
-        $this->assertEquals(1, $subtask['position']);
-    }
-
     public function testDuplicate()
     {
         $tc = new TaskCreation($this->container);
@@ -408,5 +297,70 @@ class SubtaskTest extends Base
 
         $this->assertEquals(1, $subtasks[0]['position']);
         $this->assertEquals(2, $subtasks[1]['position']);
+    }
+
+    public function testChangePosition()
+    {
+        $taskCreationModel = new TaskCreation($this->container);
+        $subtaskModel = new Subtask($this->container);
+        $projectModel = new Project($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1)));
+        $this->assertEquals(2, $subtaskModel->create(array('title' => 'subtask #2', 'task_id' => 1)));
+        $this->assertEquals(3, $subtaskModel->create(array('title' => 'subtask #3', 'task_id' => 1)));
+
+        $subtasks = $subtaskModel->getAll(1);
+        $this->assertEquals(1, $subtasks[0]['position']);
+        $this->assertEquals(1, $subtasks[0]['id']);
+        $this->assertEquals(2, $subtasks[1]['position']);
+        $this->assertEquals(2, $subtasks[1]['id']);
+        $this->assertEquals(3, $subtasks[2]['position']);
+        $this->assertEquals(3, $subtasks[2]['id']);
+
+        $this->assertTrue($subtaskModel->changePosition(1, 3, 2));
+
+        $subtasks = $subtaskModel->getAll(1);
+        $this->assertEquals(1, $subtasks[0]['position']);
+        $this->assertEquals(1, $subtasks[0]['id']);
+        $this->assertEquals(2, $subtasks[1]['position']);
+        $this->assertEquals(3, $subtasks[1]['id']);
+        $this->assertEquals(3, $subtasks[2]['position']);
+        $this->assertEquals(2, $subtasks[2]['id']);
+
+        $this->assertTrue($subtaskModel->changePosition(1, 2, 1));
+
+        $subtasks = $subtaskModel->getAll(1);
+        $this->assertEquals(1, $subtasks[0]['position']);
+        $this->assertEquals(2, $subtasks[0]['id']);
+        $this->assertEquals(2, $subtasks[1]['position']);
+        $this->assertEquals(1, $subtasks[1]['id']);
+        $this->assertEquals(3, $subtasks[2]['position']);
+        $this->assertEquals(3, $subtasks[2]['id']);
+
+        $this->assertTrue($subtaskModel->changePosition(1, 2, 2));
+
+        $subtasks = $subtaskModel->getAll(1);
+        $this->assertEquals(1, $subtasks[0]['position']);
+        $this->assertEquals(1, $subtasks[0]['id']);
+        $this->assertEquals(2, $subtasks[1]['position']);
+        $this->assertEquals(2, $subtasks[1]['id']);
+        $this->assertEquals(3, $subtasks[2]['position']);
+        $this->assertEquals(3, $subtasks[2]['id']);
+
+        $this->assertTrue($subtaskModel->changePosition(1, 1, 3));
+
+        $subtasks = $subtaskModel->getAll(1);
+        $this->assertEquals(1, $subtasks[0]['position']);
+        $this->assertEquals(2, $subtasks[0]['id']);
+        $this->assertEquals(2, $subtasks[1]['position']);
+        $this->assertEquals(3, $subtasks[1]['id']);
+        $this->assertEquals(3, $subtasks[2]['position']);
+        $this->assertEquals(1, $subtasks[2]['id']);
+
+        $this->assertFalse($subtaskModel->changePosition(1, 2, 0));
+        $this->assertFalse($subtaskModel->changePosition(1, 2, 4));
     }
 }

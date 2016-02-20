@@ -3,7 +3,11 @@
     <?php $first_position = $subtasks[0]['position']; ?>
     <?php $last_position = $subtasks[count($subtasks) - 1]['position']; ?>
 
-    <table class="subtasks-table">
+    <table
+        class="subtasks-table table-stripped"
+        data-save-position-url="<?= $this->url->href('Subtask', 'movePosition', array('project_id' => $task['project_id'], 'task_id' => $task['id'])) ?>"
+    >
+    <thead>
         <tr>
             <th class="column-40"><?= t('Title') ?></th>
             <th><?= t('Assignee') ?></th>
@@ -12,10 +16,13 @@
                 <th class="column-5"></th>
             <?php endif ?>
         </tr>
+    </thead>
+    <tbody>
         <?php foreach ($subtasks as $subtask): ?>
-        <tr>
+        <tr data-subtask-id="<?= $subtask['id'] ?>">
             <td>
                 <?php if ($editable): ?>
+                    <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Move subtask position') ?>"></i>
                     <?= $this->subtask->toggleStatus($subtask, $task['project_id'], true) ?>
                 <?php else: ?>
                     <?= $this->subtask->getTitle($subtask) ?>
@@ -58,12 +65,12 @@
                         'subtask' => $subtask,
                         'first_position' => $first_position,
                         'last_position' => $last_position,
-                        'redirect' => $redirect,
                     )) ?>
                 </td>
             <?php endif ?>
         </tr>
         <?php endforeach ?>
+    </tbody>
     </table>
 <?php else: ?>
     <p class="alert"><?= t('There is no subtask at the moment.') ?></p>
