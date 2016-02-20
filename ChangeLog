@@ -11,6 +11,7 @@ New features:
 
 Improvements:
 
+* Use inline popup to create new columns
 * Improve filter box design
 * Improve image thumbnails and files table
 * Add confirmation inline popup to remove custom filter
