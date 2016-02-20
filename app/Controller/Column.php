@@ -66,7 +66,7 @@ class Column extends Base
                 $this->flash->success(t('Column created successfully.'));
                 return $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])), true);
             } else {
-                $errors['title'] = array(t('Another column with the same title exists in the project'));
+                $errors['title'] = array(t('Another column with the same name exists in the project'));
             }
         }
 

@@ -18,7 +18,7 @@
         <tr data-subtask-id="<?= $subtask['id'] ?>">
             <td>
                 <?php if ($editable): ?>
-                    <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Move subtask position') ?>"></i>
+                    <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change subtask position') ?>"></i>
                     <?= $this->subtask->toggleStatus($subtask, $task['project_id'], true) ?>
                 <?php else: ?>
                     <?= $this->subtask->getTitle($subtask) ?>

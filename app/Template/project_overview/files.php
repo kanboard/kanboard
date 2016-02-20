@@ -67,7 +67,7 @@
                         <?php if ($this->file->getPreviewType($file['name']) !== null): ?>
                         <li>
                             <i class="fa fa-eye fa-fw"></i>
-                            <?= $this->url->link(t('View'), 'FileViewer', 'show', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
+                            <?= $this->url->link(t('View file'), 'FileViewer', 'show', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
                         </li>
                         <?php endif ?>
                         <li>

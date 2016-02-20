@@ -9,7 +9,7 @@
 </div>
 
 <?php if (empty($columns)): ?>
-    <p class="alert alert-error"><?= t('Your board doesn\'t have any columns!') ?></p>
+    <p class="alert alert-error"><?= t('Your board doesn\'t have any column!') ?></p>
 <?php else: ?>
     <table
         class="columns-table table-stripped"
@@ -25,7 +25,7 @@
         <?php foreach ($columns as $column): ?>
         <tr data-column-id="<?= $column['id'] ?>">
             <td>
-                <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Move column position') ?>"></i>
+                <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></i>
                 <?= $this->e($column['title']) ?>
                 <?php if (! empty($column['description'])): ?>
                     <span class="tooltip" title='<?= $this->e($this->text->markdown($column['description'])) ?>'>
