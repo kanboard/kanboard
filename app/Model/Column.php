@@ -18,6 +18,83 @@ class Column extends Base
     const TABLE = 'columns';
 
     /**
+     * Get a column by the id
+     *
+     * @access public
+     * @param  integer  $column_id    Column id
+     * @return array
+     */
+    public function getById($column_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->findOne();
+    }
+
+    /**
+     * Get the first column id for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return integer
+     */
+    public function getFirstColumnId($project_id)
+    {
+        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->findOneColumn('id');
+    }
+
+    /**
+     * Get the last column id for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return integer
+     */
+    public function getLastColumnId($project_id)
+    {
+        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->desc('position')->findOneColumn('id');
+    }
+
+    /**
+     * Get the position of the last column for a given project
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return integer
+     */
+    public function getLastColumnPosition($project_id)
+    {
+        return (int) $this->db
+                        ->table(self::TABLE)
+                        ->eq('project_id', $project_id)
+                        ->desc('position')
+                        ->findOneColumn('position');
+    }
+
+    /**
+     * Get a column id by the name
+     *
+     * @access public
+     * @param  integer  $project_id
+     * @param  string   $title
+     * @return integer
+     */
+    public function getColumnIdByTitle($project_id, $title)
+    {
+        return (int) $this->db->table(self::TABLE)->eq('project_id', $project_id)->eq('title', $title)->findOneColumn('id');
+    }
+
+    /**
+     * Get a column title by the id
+     *
+     * @access public
+     * @param  integer  $column_id
+     * @return integer
+     */
+    public function getColumnTitleById($column_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->findOneColumn('title');
+    }
+
+    /**
      * Get all columns sorted by position for a given project
      *
      * @access public
@@ -27,6 +104,74 @@ class Column extends Base
     public function getAll($project_id)
     {
         return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->findAll();
+    }
+
+    /**
+     * Get the list of columns sorted by position [ column_id => title ]
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @param  boolean  $prepend      Prepend a default value
+     * @return array
+     */
+    public function getList($project_id, $prepend = false)
+    {
+        $listing = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'title');
+        return $prepend ? array(-1 => t('All columns')) + $listing : $listing;
+    }
+
+    /**
+     * Add a new column to the board
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @param  string    $title         Column title
+     * @param  integer   $task_limit    Task limit
+     * @param  string    $description   Column description
+     * @return boolean|integer
+     */
+    public function create($project_id, $title, $task_limit = 0, $description = '')
+    {
+        $values = array(
+            'project_id' => $project_id,
+            'title' => $title,
+            'task_limit' => intval($task_limit),
+            'position' => $this->getLastColumnPosition($project_id) + 1,
+            'description' => $description,
+        );
+
+        return $this->persist(self::TABLE, $values);
+    }
+
+    /**
+     * Update a column
+     *
+     * @access public
+     * @param  integer   $column_id     Column id
+     * @param  string    $title         Column title
+     * @param  integer   $task_limit    Task limit
+     * @param  string    $description   Optional description
+     * @return boolean
+     */
+    public function update($column_id, $title, $task_limit = 0, $description = '')
+    {
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->update(array(
+            'title' => $title,
+            'task_limit' => intval($task_limit),
+            'description' => $description,
+        ));
+    }
+
+    /**
+     * Remove a column and all tasks associated to this column
+     *
+     * @access public
+     * @param  integer  $column_id    Column id
+     * @return boolean
+     */
+    public function remove($column_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->remove();
     }
 
     /**

@@ -103,7 +103,7 @@ class Gantt extends Base
 
         $values = $values + array(
             'project_id' => $project['id'],
-            'column_id' => $this->board->getFirstColumn($project['id']),
+            'column_id' => $this->column->getFirstColumnId($project['id']),
             'position' => 1
         );
 

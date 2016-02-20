@@ -241,7 +241,7 @@ class Project extends Base
     {
         $stats = array();
         $stats['nb_active_tasks'] = 0;
-        $columns = $this->board->getColumns($project_id);
+        $columns = $this->column->getAll($project_id);
         $column_stats = $this->board->getColumnStats($project_id);
 
         foreach ($columns as &$column) {
@@ -265,7 +265,7 @@ class Project extends Base
      */
     public function getColumnStats(array &$project)
     {
-        $project['columns'] = $this->board->getColumns($project['id']);
+        $project['columns'] = $this->column->getAll($project['id']);
         $stats = $this->board->getColumnStats($project['id']);
 
         foreach ($project['columns'] as &$column) {

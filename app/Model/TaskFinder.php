@@ -38,14 +38,14 @@ class TaskFinder extends Base
                         Task::TABLE.'.time_spent',
                         Task::TABLE.'.time_estimated',
                         Project::TABLE.'.name AS project_name',
-                        Board::TABLE.'.title AS column_name',
+                        Column::TABLE.'.title AS column_name',
                         User::TABLE.'.username AS assignee_username',
                         User::TABLE.'.name AS assignee_name'
                     )
                     ->eq(Task::TABLE.'.is_active', $is_active)
                     ->in(Project::TABLE.'.id', $project_ids)
                     ->join(Project::TABLE, 'id', 'project_id')
-                    ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+                    ->join(Column::TABLE, 'id', 'column_id', Task::TABLE)
                     ->join(User::TABLE, 'id', 'owner_id', Task::TABLE);
     }
 
@@ -129,15 +129,15 @@ class TaskFinder extends Base
                 User::TABLE.'.name AS assignee_name',
                 Category::TABLE.'.name AS category_name',
                 Category::TABLE.'.description AS category_description',
-                Board::TABLE.'.title AS column_name',
-                Board::TABLE.'.position AS column_position',
+                Column::TABLE.'.title AS column_name',
+                Column::TABLE.'.position AS column_position',
                 Swimlane::TABLE.'.name AS swimlane_name',
                 Project::TABLE.'.default_swimlane',
                 Project::TABLE.'.name AS project_name'
             )
             ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
             ->join(Category::TABLE, 'id', 'category_id', Task::TABLE)
-            ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+            ->join(Column::TABLE, 'id', 'column_id', Task::TABLE)
             ->join(Swimlane::TABLE, 'id', 'swimlane_id', Task::TABLE)
             ->join(Project::TABLE, 'id', 'project_id', Task::TABLE);
     }

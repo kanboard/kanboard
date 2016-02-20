@@ -8,8 +8,6 @@ use Kanboard\Model\Project;
 use Kanboard\Model\User;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Acl;
-use Kanboard\Model\Board;
 use Kanboard\Model\Config;
 use Kanboard\Model\Category;
 

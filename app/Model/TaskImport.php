@@ -111,7 +111,7 @@ class TaskImport extends Base
         }
 
         if (! empty($row['column'])) {
-            $values['column_id'] = $this->board->getColumnIdByTitle($this->projectId, $row['column']);
+            $values['column_id'] = $this->column->getColumnIdByTitle($this->projectId, $row['column']);
         }
 
         if (! empty($row['category'])) {

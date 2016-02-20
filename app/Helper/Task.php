@@ -178,7 +178,7 @@ class Task extends Base
     public function getProgress($task)
     {
         if (! isset($this->columns[$task['project_id']])) {
-            $this->columns[$task['project_id']] = $this->board->getColumnsList($task['project_id']);
+            $this->columns[$task['project_id']] = $this->column->getList($task['project_id']);
         }
 
         return $this->task->getProgress($task, $this->columns[$task['project_id']]);

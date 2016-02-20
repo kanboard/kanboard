@@ -115,7 +115,7 @@ class Taskduplication extends Base
             $dst_project_id = $this->request->getIntegerParam('dst_project_id', key($projects_list));
 
             $swimlanes_list = $this->swimlane->getList($dst_project_id, false, true);
-            $columns_list = $this->board->getColumnsList($dst_project_id);
+            $columns_list = $this->column->getList($dst_project_id);
             $categories_list = $this->category->getList($dst_project_id);
             $users_list = $this->projectUserRole->getAssignableUsersList($dst_project_id);
 

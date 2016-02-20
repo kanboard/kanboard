@@ -27,7 +27,7 @@ class Action extends Base
             'available_actions' => $this->actionManager->getAvailableActions(),
             'available_events' => $this->eventManager->getAll(),
             'available_params' => $this->actionManager->getAvailableParameters($actions),
-            'columns_list' => $this->board->getColumnsList($project['id']),
+            'columns_list' => $this->column->getList($project['id']),
             'users_list' => $this->projectUserRole->getAssignableUsersList($project['id']),
             'projects_list' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'colors_list' => $this->color->getList(),
@@ -86,7 +86,7 @@ class Action extends Base
         $this->response->html($this->helper->layout->project('action/params', array(
             'values' => $values,
             'action_params' => $action_params,
-            'columns_list' => $this->board->getColumnsList($project['id']),
+            'columns_list' => $this->column->getList($project['id']),
             'users_list' => $this->projectUserRole->getAssignableUsersList($project['id']),
             'projects_list' => $projects_list,
             'colors_list' => $this->color->getList(),

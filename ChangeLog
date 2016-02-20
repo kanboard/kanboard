@@ -16,6 +16,7 @@ Improvements:
 * Improve image thumbnails and files table
 * Add confirmation inline popup to remove custom filter
 * Increase client_max_body_size value for Nginx
+* Split Board model into multiple classes
 
 Bug fixes:
 

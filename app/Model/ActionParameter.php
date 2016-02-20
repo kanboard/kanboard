@@ -150,8 +150,8 @@ class ActionParameter extends Base
             case 'dest_column_id':
             case 'dst_column_id':
             case 'column_id':
-                $column = $this->board->getColumn($value);
-                return empty($column) ? false : $this->board->getColumnIdByTitle($project_id, $column['title']) ?: false;
+                $column = $this->column->getById($value);
+                return empty($column) ? false : $this->column->getColumnIdByTitle($project_id, $column['title']) ?: false;
             case 'user_id':
             case 'owner_id':
                 return $this->projectPermission->isAssignable($project_id, $value) ? $value : false;
