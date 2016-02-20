@@ -120,7 +120,7 @@ class Column extends Base
         $column_id = $this->request->getIntegerParam('column_id');
         $direction = $this->request->getStringParam('direction');
 
-        if ($direction === 'up' || $direction === 'down') {
+        if ($direction === 'up' || $direction === 'down' || $direction === 'top' || $direction === 'bottom') {
             $this->board->{'move'.$direction}($project['id'], $column_id);
         }
 
