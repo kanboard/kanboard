@@ -6,7 +6,12 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 98;
+const VERSION = 99;
+
+function version_99(PDO $pdo)
+{
+    $pdo->exec("UPDATE project_activities SET event_name='task.file.create' WHERE event_name='file.create'");
+}
 
 function version_98(PDO $pdo)
 {
