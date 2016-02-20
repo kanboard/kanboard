@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Päivitystiheys sekunteina (60 sekuntia oletuksena)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Päivitystiheys sekunteina (0 poistaa toiminnon käytöstä, oletuksena 10 sekuntia)',
     'Application URL' => 'Sovelluksen URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Esimerkiksi: http://example.kanboard.net/ (käytetään sähköposti-ilmoituksissa)',
     'Token regenerated.' => 'Token uudelleenluotu.',
     'Date format' => 'Päiväyksen muoto',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO-muoto on aina hyväksytty, esimerkiksi %s ja %s',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Gyakoriság másodpercben (alapértelmezetten 60 másodperc)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Gyakoriság másodpercben (0 funkció letiltva, alapértelmezetten 10 másodperc)',
     'Application URL' => 'Alkalmazás URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Példa: http://example.kanboard.net/ (e-mail értesítőben használt)',
     'Token regenerated.' => 'Token újragenerálva.',
     'Date format' => 'Dátum formátum',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO formátum mindig elfogadott, pl: "%s" és "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

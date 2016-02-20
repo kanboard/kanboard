@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Frequenz in Sekunden (standardmäßig 60 Sekunden)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Frequenz in Sekunden (0 um diese Funktion zu deaktivieren, standardmäßig 10 Sekunden)',
     'Application URL' => 'Applikations-URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Beispiel: http://example.kanboard.net/ (wird für E-Mail-Benachrichtigungen verwendet)',
     'Token regenerated.' => 'Token wurde neu generiert.',
     'Date format' => 'Datumsformat',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO Format wird immer akzeptiert, z.B.: "%s" und "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

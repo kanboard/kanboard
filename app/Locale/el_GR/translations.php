@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Συχνότητα σε δευτερόλεπτα (60 δευτερόλεπτα από προεπιλογή)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Συχνότητα σε δευτερόλεπτα (0 για να απενεργοποιήσετε αυτή τη λειτουργία, 10 δευτερόλεπτα από προεπιλογή)',
     'Application URL' => 'Application URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Παράδειγμα : http://exemple.kanboard.net/ (utilisé pour les notifications)',
     'Token regenerated.' => 'Token regenerated.',
     'Date format' => 'Μορφή ημερομηνίας',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO format είναι πάντα αποδεκτό, π.χ. : « %s » και « %s »',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

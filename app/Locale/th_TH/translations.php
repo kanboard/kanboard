@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'ความถี่ (ค่าเริ่มต้นทุก 60 วินาที) ',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'ความถี่ (0 ไม่ใช้คุณลักษณะนี้, ค่าเริ่มต้นทุก 10 วินาที)',
     // 'Application URL' => '',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'ตัวอย่าง: http://example.kanboard.net/ (ถูกใช้ในการแจ้งเตือนทางอีเมล์)',
     // 'Token regenerated.' => '',
     'Date format' => 'รูปแบบวันที่',
     // 'ISO format is always accepted, example: "%s" and "%s"' => '',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

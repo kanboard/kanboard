@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Frequensi dalam detik (standar 60 saat)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Frekuensi dalam detik (0 untuk menonaktifkan fitur ini, standar 10 detik)',
     'Application URL' => 'URL Aplikasi',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Contoh: http://example.kanboard.net/ (digunakan untuk pemberitahuan email)',
     'Token regenerated.' => 'Token diregenerasi.',
     'Date format' => 'Format tarikh',
     'ISO format is always accepted, example: "%s" and "%s"' => 'Format ISO selalunya diterima, contoh: « %s » et « %s »',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

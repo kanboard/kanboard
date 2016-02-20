@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => '秒数 (デフォルト 60 秒)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => '秒数 (0 は機能を無効化、デフォルト 10 秒)',
     'Application URL' => 'アプリケーションの URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Exemple : http://exemple.kanboard.net/ (Email 通知に利用)',
     'Token regenerated.' => 'トークンが再生成されました。',
     'Date format' => 'データのフォーマット',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO フォーマットが入力できます(例: %s または %s)',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

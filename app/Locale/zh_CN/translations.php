@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => '频率,单位为秒(默认是60秒)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => '频率,单位为秒(设置为0停用此功能，默认是10秒)',
     'Application URL' => '应用URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => '例如：http://example.kanboard.net/ (用于电子邮件通知)',
     'Token regenerated.' => '重新生成令牌',
     'Date format' => '日期格式',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO 格式总是允许的，例如："%s" 和 "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

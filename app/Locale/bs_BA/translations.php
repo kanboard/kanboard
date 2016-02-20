@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Frekvencija u sekundama (60 sekundi je uobičajeno)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Frekvencija u sekundama (0 je onemogućeno u budućnosti, 10 sekundi je uobičajeno)',
     'Application URL' => 'URL aplikacje',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Primjer: http://example.kanboard.net/ (koristi se u obavještenjima putem email-a)',
     'Token regenerated.' => 'Token regenerisan.',
     'Date format' => 'Format datuma',
     'ISO format is always accepted, example: "%s" and "%s"' => 'Format ISO je uvek prihvatljiv, primjer: "%s", "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

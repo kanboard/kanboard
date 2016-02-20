@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Frekvence v sekundách (60 sekund ve výchozím nastavení)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Frekvence v sekundách (0 pro zákaz této vlastnosti, 10 sekund ve výchozím nastavení)',
     'Application URL' => 'URL aplikace',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Ukázka: http://example.kanboard.net/ (použit v emailovém upozornění)',
     'Token regenerated.' => 'Token byl opětovně generován.',
     'Date format' => 'Formát datumu',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO formát je vždy akceptován, například: "%s" a "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

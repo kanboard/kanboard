@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Frekvens i sekunder (60 sekunder är standard)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Frekvens i sekunder (ange 0 för att inaktivera, 10 sekunder är standard)',
     'Application URL' => 'Applikations-URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Exempel: http://example.kanboard.net/ (används för e-postnotiser)',
     'Token regenerated.' => 'Token nyskapad.',
     'Date format' => 'Datumformat',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO-format är alltid tillåtet, exempel: "%s" och "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

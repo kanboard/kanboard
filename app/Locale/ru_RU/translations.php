@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Частота в секундах (60 секунд по умолчанию)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Частота в секундах (0 для выключения, 10 секунд по умолчанию)',
     'Application URL' => 'URL приложения',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Пример: http://example.kanboard.net (используется в email уведомлениях)',
     'Token regenerated.' => 'Токен пересоздан',
     'Date format' => 'Формат даты',
     'ISO format is always accepted, example: "%s" and "%s"' => 'Время должно быть в ISO-формате, например: "%s" или "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Frekevens i sekunder (60 sekunder som standard)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Frekvens i sekunder (0 for øt deaktivere denne funksjonen, 10 sekunder som standard)',
     'Application URL' => 'Applikasjons URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Eksempel: http://example.kanboard.net/ (bruges til email notifikationer)',
     'Token regenerated.' => 'Token regenerert.',
     'Date format' => 'Datoformat',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO format er alltid akseptert, eksempelvis: "%s" og "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );

@@ -431,7 +431,6 @@ return array(
     'Frequency in second (60 seconds by default)' => 'Saniye olarak frekans (varsayılan 60 saniye)',
     'Frequency in second (0 to disable this feature, 10 seconds by default)' => 'Saniye olarak frekans (Bu özelliği iptal etmek için 0, varsayılan değer 10 saniye)',
     'Application URL' => 'Uygulama URL',
-    'Example: http://example.kanboard.net/ (used by email notifications)' => 'Örneğin: http://example.kanboard.net/ (E-posta bildirimleri için kullanılıyor)',
     'Token regenerated.' => 'Beliteç yeniden oluşturuldu.',
     'Date format' => 'Tarih formatı',
     'ISO format is always accepted, example: "%s" and "%s"' => 'ISO formatı her zaman kabul edilir, örneğin: "%s" ve "%s"',
@@ -1148,4 +1147,5 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
+    // 'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '',
 );
