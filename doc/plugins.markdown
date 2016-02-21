@@ -9,20 +9,25 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 
 - [Creating your plugin](plugin-registration.markdown)
 - [Using plugin hooks](plugin-hooks.markdown)
+- [Events](plugin-events.markdown)
 - [Override default application behaviors](plugin-overrides.markdown)
 - [Add schema migrations for plugins](plugin-schema-migrations.markdown)
+- [Custom routes](plugin-routes.markdown)
 - [Add mail transports](plugin-mail-transports.markdown)
 - [Add notification types](plugin-notifications.markdown)
+- [Add automatic actions](plugin-automatic-actions.markdown)
 - [Attach metadata to users, tasks and projects](plugin-metadata.markdown)
 - [Authentication architecture](plugin-authentication-architecture.markdown)
 - [Authentication plugin registration](plugin-authentication.markdown)
 - [Authorization Architecture](plugin-authorization-architecture.markdown)
 - [Custom Group Providers](plugin-group-provider.markdown)
+- [External Link Providers](plugin-external-link.markdown)
 - [LDAP client](plugin-ldap-client.markdown)
 
 Examples of plugins
 -------------------
 
+- [SMS Two-Factor Authentication](https://github.com/kanboard/plugin-sms-2fa)
 - [Reverse-Proxy Authentication with LDAP support](https://github.com/kanboard/plugin-reverse-proxy-ldap)
 - [Slack](https://github.com/kanboard/plugin-slack)
 - [Hipchat](https://github.com/kanboard/plugin-hipchat)

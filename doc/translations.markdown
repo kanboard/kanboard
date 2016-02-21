@@ -5,7 +5,7 @@ How to translate Kanboard to a new language?
 --------------------------------------------
 
 - Translations are stored inside the directory `app/Locale`
-- There is subdirectory for each language, for example in French we have `fr_FR`, Italian `it_IT` etc.
+- There is a subdirectory for each language, for example in French we have `fr_FR`, Italian `it_IT` etc.
 - A translation is a PHP file that returns an Array with a key-value pairs
 - The key is the original text in English and the value is the translation of the corresponding language
 - **French translations are always up to date**
@@ -34,19 +34,8 @@ Translations are displayed with the following functions in the source code:
 
 - `t()`: display text with HTML escaping
 - `e()`: display text without HTML escaping
-- `dt()`: display date and time using the `strftime()` function formats
 
 Always use the english version in the source code.
-
-### Date and time translation
-
-Date strings use the function `strftime()` to format the date.
-
-For example, the original English version can be defined like that `Created on %B %e, %Y at %k:%M %p` and that will output something like that `Created on January 11, 2015 at 15:19 PM`. The French version can be modified to display a different format, `Créé le %d/%m/%Y à %H:%M` and the result will be `Créé le 11/01/2015 à 15:19`.
-
-All formats are available in the [PHP documentation](http://php.net/strftime).
-
-### Placeholders
 
 Text strings use the function `sprintf()` to replace elements:
 

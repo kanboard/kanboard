@@ -33,10 +33,10 @@
                 <?php endif ?>
             </td>
             <td>
-                <?= dt('%B %e, %Y', $task['date_started']) ?>
+                <?= $this->dt->date($task['date_started']) ?>
             </td>
             <td>
-                <?= dt('%B %e, %Y', $task['date_due']) ?>
+                <?= $this->dt->date($task['date_due']) ?>
             </td>
         </tr>
         <?php endforeach ?>

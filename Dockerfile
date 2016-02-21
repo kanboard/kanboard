@@ -1,23 +1,33 @@
-FROM ubuntu:14.04
+FROM gliderlabs/alpine:latest
 MAINTAINER Frederic Guillot <fred@kanboard.net>
 
-RUN apt-get update && apt-get install -y apache2 php5 php5-gd php5-sqlite git curl && apt-get clean
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf && a2enmod rewrite
-RUN sed -ri 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
-RUN curl -sS https://getcomposer.org/installer | php -- --filename=/usr/local/bin/composer
-RUN cd /var/www && git clone --depth 1 https://github.com/fguillot/kanboard.git
-RUN cd /var/www/kanboard && composer --prefer-dist --no-dev --optimize-autoloader --quiet install
-RUN rm -rf /var/www/html && mv /var/www/kanboard /var/www/html
-RUN chown -R www-data:www-data /var/www/html/data
+RUN apk-install nginx bash ca-certificates s6 curl \
+    php-fpm php-json php-zlib php-xml php-dom php-ctype php-opcache php-zip \
+    php-pdo php-pdo_mysql php-pdo_sqlite php-pdo_pgsql php-ldap \
+    php-gd php-mcrypt php-openssl php-phar \
+    && curl -sS https://getcomposer.org/installer | php -- --filename=/usr/local/bin/composer
 
-VOLUME /var/www/html/data
+RUN cd /var/www \
+    && wget https://github.com/fguillot/kanboard/archive/master.zip \
+    && unzip -qq master.zip \
+    && rm -f *.zip \
+    && mv kanboard-master kanboard \
+    && cd /var/www/kanboard && composer --prefer-dist --no-dev --optimize-autoloader --quiet install \
+    && chown -R nginx:nginx /var/www/kanboard \
+    && chown -R nginx:nginx /var/lib/nginx
+
+COPY .docker/services.d /etc/services.d
+COPY .docker/php/conf.d/local.ini /etc/php/conf.d/
+COPY .docker/php/php-fpm.conf /etc/php/
+COPY .docker/nginx/nginx.conf /etc/nginx/
+COPY .docker/kanboard/config.php /var/www/kanboard/
+COPY .docker/kanboard/config.php /var/www/kanboard/
+COPY .docker/crontab/kanboard /var/spool/cron/crontabs/nginx
 
 EXPOSE 80
 
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR /var/log/apache2
-ENV APACHE_LOCK_DIR /var/lock/apache2
-ENV APACHE_PID_FILE /var/run/apache2.pid
+VOLUME /var/www/kanboard/data
+VOLUME /var/www/kanboard/plugins
 
-CMD /usr/sbin/apache2ctl -D FOREGROUND
+ENTRYPOINT ["/bin/s6-svscan", "/etc/services.d"]
+CMD []

@@ -15,10 +15,10 @@ class Client
     /**
      * LDAP resource
      *
-     * @access private
+     * @access protected
      * @var resource
      */
-    private $ldap;
+    protected $ldap;
 
     /**
      * Establish LDAP connection

@@ -1,13 +1,7 @@
 Installation
 ============
 
-Requirements
-------------
-
-- Apache or Nginx
-- PHP >= 5.3.3 (Kanboard is compatible with PHP 5.3, 5.4, 5.5, 5.6 and 7.0)
-- PHP extensions required: mbstring, gd and pdo_sqlite
-- A modern web browser
+Firstly, check the [requirements](requirements.markdown) before to go further.
 
 From the archive (stable version)
 ---------------------------------
@@ -45,3 +39,8 @@ Security
 
 - Don't forget to change the default user/password
 - Don't allow everybody to access to the directory `data` from the URL. There is already a `.htaccess` for Apache but nothing for Nginx.
+
+Notes
+-----
+
+- Some features of Kanboard require that you run [a daily background job](cronjob.markdown)

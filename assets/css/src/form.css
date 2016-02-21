@@ -146,11 +146,6 @@ input.form-input-large {
     width: 400px;
 }
 
-.form-row {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
 .form-column {
     float: left;
     margin-right: 3%;
@@ -159,6 +154,12 @@ input.form-input-large {
 
 .form-column ul {
     margin-top: 15px;
+}
+
+.form-clear {
+    clear: both;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 .form-login {
@@ -171,6 +172,12 @@ input.form-input-large {
 .form-login li {
     margin-left: 25px;
     line-height: 25px;
+}
+
+.form-login h2 {
+    margin-bottom: 30px;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 /* preview tabs */
@@ -220,4 +227,13 @@ ul.form-tabs-nav {
     margin-bottom: 5px;
     display: none;
     overflow: auto;
+}
+
+.reset-password {
+    margin-top: 20px;
+}
+
+.reset-password a {
+    font-size: 0.8em;
+    color: #999;
 }

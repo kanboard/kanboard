@@ -1,7 +1,7 @@
 API Swimlane Procedures
 =======================
 
-### getDefaultSwimlane
+## getDefaultSwimlane
 
 - Purpose: **Get the default swimlane for a project**
 - Parameters:
@@ -36,7 +36,7 @@ Response example:
 }
 ```
 
-### getActiveSwimlanes
+## getActiveSwimlanes
 
 - Purpose: **Get the list of enabled swimlanes of a project (include default swimlane if enabled)**
 - Parameters:
@@ -76,7 +76,7 @@ Response example:
 }
 ```
 
-### getAllSwimlanes
+## getAllSwimlanes
 
 - Purpose: **Get the list of all swimlanes of a project (enabled or disabled) and sorted by position**
 - Parameters:
@@ -122,7 +122,7 @@ Response example:
 }
 ```
 
-### getSwimlane
+## getSwimlane
 
 - Purpose: **Get the a swimlane by id**
 - Parameters:
@@ -159,7 +159,7 @@ Response example:
 }
 ```
 
-### getSwimlaneById
+## getSwimlaneById
 
 - Purpose: **Get the a swimlane by id**
 - Parameters:
@@ -196,7 +196,7 @@ Response example:
 }
 ```
 
-### getSwimlaneByName
+## getSwimlaneByName
 
 - Purpose: **Get the a swimlane by name**
 - Parameters:
@@ -235,12 +235,13 @@ Response example:
 }
 ```
 
-### moveSwimlaneUp
+## changeSwimlanePosition
 
-- Purpose: **Move up the swimlane position**
+- Purpose: **Move up the swimlane position** (only for active swimlanes)
 - Parameters:
     - **project_id** (integer, required)
     - **swimlane_id** (integer, required)
+    - **position** (integer, required, must be >= 1)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -249,11 +250,12 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "moveSwimlaneUp",
+    "method": "changeSwimlanePosition",
     "id": 99275573,
     "params": [
         1,
-        2
+        2,
+        3
     ]
 }
 ```
@@ -268,40 +270,7 @@ Response example:
 }
 ```
 
-### moveSwimlaneDown
-
-- Purpose: **Move down the swimlane position**
-- Parameters:
-    - **project_id** (integer, required)
-    - **swimlane_id** (integer, required)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "method": "moveSwimlaneDown",
-    "id": 957090649,
-    "params": {
-        "project_id": 1,
-        "swimlane_id": 2
-    }
-}
-```
-
-Response example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "id": 957090649,
-    "result": true
-}
-```
-
-### updateSwimlane
+## updateSwimlane
 
 - Purpose: **Update swimlane properties**
 - Parameters:
@@ -335,7 +304,7 @@ Response example:
 }
 ```
 
-### addSwimlane
+## addSwimlane
 
 - Purpose: **Add a new swimlane**
 - Parameters:
@@ -369,7 +338,7 @@ Response example:
 }
 ```
 
-### removeSwimlane
+## removeSwimlane
 
 - Purpose: **Remove a swimlane**
 - Parameters:
@@ -402,7 +371,7 @@ Response example:
 }
 ```
 
-### disableSwimlane
+## disableSwimlane
 
 - Purpose: **Enable a swimlane**
 - Parameters:
@@ -435,7 +404,7 @@ Response example:
 }
 ```
 
-### enableSwimlane
+## enableSwimlane
 
 - Purpose: **Enable a swimlane**
 - Parameters:

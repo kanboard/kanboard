@@ -21,6 +21,11 @@ class User extends \Kanboard\Core\Base
         return $this->user->getById($user_id);
     }
 
+    public function getUserByName($username)
+    {
+        return $this->user->getByUsername($username);
+    }
+
     public function getAllUsers()
     {
         return $this->user->getAll();
@@ -29,6 +34,21 @@ class User extends \Kanboard\Core\Base
     public function removeUser($user_id)
     {
         return $this->user->remove($user_id);
+    }
+
+    public function disableUser($user_id)
+    {
+        return $this->user->disable($user_id);
+    }
+
+    public function enableUser($user_id)
+    {
+        return $this->user->enable($user_id);
+    }
+
+    public function isActiveUser($user_id)
+    {
+        return $this->user->isActive($user_id);
     }
 
     public function createUser($username, $password, $name = '', $email = '', $role = Role::APP_USER)
@@ -42,7 +62,7 @@ class User extends \Kanboard\Core\Base
             'role' => $role,
         );
 
-        list($valid, ) = $this->user->validateCreation($values);
+        list($valid, ) = $this->userValidator->validateCreation($values);
         return $valid ? $this->user->create($values) : false;
     }
 
@@ -94,7 +114,7 @@ class User extends \Kanboard\Core\Base
             }
         }
 
-        list($valid, ) = $this->user->validateApiModification($values);
+        list($valid, ) = $this->userValidator->validateApiModification($values);
         return $valid && $this->user->update($values);
     }
 }

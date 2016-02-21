@@ -76,8 +76,8 @@ class Transition extends Base
                         ->eq('task_id', $task_id)
                         ->desc('date')
                         ->join(User::TABLE, 'id', 'user_id')
-                        ->join(Board::TABLE.' as src', 'id', 'src_column_id', self::TABLE, 'src')
-                        ->join(Board::TABLE.' as dst', 'id', 'dst_column_id', self::TABLE, 'dst')
+                        ->join(Column::TABLE.' as src', 'id', 'src_column_id', self::TABLE, 'src')
+                        ->join(Column::TABLE.' as dst', 'id', 'dst_column_id', self::TABLE, 'dst')
                         ->findAll();
     }
 
@@ -118,8 +118,8 @@ class Transition extends Base
                         ->desc('date')
                         ->join(Task::TABLE, 'id', 'task_id')
                         ->join(User::TABLE, 'id', 'user_id')
-                        ->join(Board::TABLE.' as src', 'id', 'src_column_id', self::TABLE, 'src')
-                        ->join(Board::TABLE.' as dst', 'id', 'dst_column_id', self::TABLE, 'dst')
+                        ->join(Column::TABLE.' as src', 'id', 'src_column_id', self::TABLE, 'src')
+                        ->join(Column::TABLE.' as dst', 'id', 'dst_column_id', self::TABLE, 'dst')
                         ->findAll();
     }
 

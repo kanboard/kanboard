@@ -2,8 +2,6 @@
 
 namespace Kanboard\Model;
 
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
 use Kanboard\Event\TaskLinkEvent;
 
 /**
@@ -77,22 +75,23 @@ class TaskLink extends Base
                         Task::TABLE.'.title',
                         Task::TABLE.'.is_active',
                         Task::TABLE.'.project_id',
+                        Task::TABLE.'.column_id',
                         Task::TABLE.'.time_spent AS task_time_spent',
                         Task::TABLE.'.time_estimated AS task_time_estimated',
                         Task::TABLE.'.owner_id AS task_assignee_id',
                         User::TABLE.'.username AS task_assignee_username',
                         User::TABLE.'.name AS task_assignee_name',
-                        Board::TABLE.'.title AS column_title',
+                        Column::TABLE.'.title AS column_title',
                         Project::TABLE.'.name AS project_name'
                     )
                     ->eq(self::TABLE.'.task_id', $task_id)
                     ->join(Link::TABLE, 'id', 'link_id')
                     ->join(Task::TABLE, 'id', 'opposite_task_id')
-                    ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+                    ->join(Column::TABLE, 'id', 'column_id', Task::TABLE)
                     ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
                     ->join(Project::TABLE, 'id', 'project_id', Task::TABLE)
                     ->asc(Link::TABLE.'.id')
-                    ->desc(Board::TABLE.'.position')
+                    ->desc(Column::TABLE.'.position')
                     ->desc(Task::TABLE.'.is_active')
                     ->asc(Task::TABLE.'.position')
                     ->asc(Task::TABLE.'.id')
@@ -260,60 +259,5 @@ class TaskLink extends Base
         $this->db->closeTransaction();
 
         return true;
-    }
-
-    /**
-     * Common validation rules
-     *
-     * @access private
-     * @return array
-     */
-    private function commonValidationRules()
-    {
-        return array(
-            new Validators\Required('task_id', t('Field required')),
-            new Validators\Required('opposite_task_id', t('Field required')),
-            new Validators\Required('link_id', t('Field required')),
-            new Validators\NotEquals('opposite_task_id', 'task_id', t('A task cannot be linked to itself')),
-            new Validators\Exists('opposite_task_id', t('This linked task id doesn\'t exists'), $this->db->getConnection(), Task::TABLE, 'id')
-        );
-    }
-
-    /**
-     * Validate creation
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateCreation(array $values)
-    {
-        $v = new Validator($values, $this->commonValidationRules());
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate modification
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('Field required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
     }
 }

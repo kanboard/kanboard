@@ -7,119 +7,88 @@ use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Comment;
 use Kanboard\Model\Project;
-use Kanboard\Integration\GithubWebhook;
+use Kanboard\Model\ProjectUserRole;
+use Kanboard\Model\User;
 use Kanboard\Action\CommentCreation;
+use Kanboard\Core\Security\Role;
 
 class CommentCreationTest extends Base
 {
-    public function testWithoutRequiredParams()
+    public function testSuccess()
     {
-        $action = new CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $projectUserRoleModel = new ProjectUserRole($this->container);
+        $commentModel = new Comment($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
 
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
-        $c = new Comment($this->container);
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 2, Role::PROJECT_MEMBER));
 
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'user_id' => 1,
-        );
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'comment' => 'test123', 'reference' => 'ref123', 'user_id' => 2));
 
-        // Our event should be executed
-        $this->assertFalse($action->execute(new GenericEvent($event)));
+        $action = new CommentCreation($this->container);
+        $action->setProjectId(1);
+        $action->addEvent('test.event', 'Test Event');
 
-        $comment = $c->getById(1);
-        $this->assertEmpty($comment);
-    }
+        $this->assertTrue($action->execute($event, 'test.event'));
 
-    public function testWithCommitMessage()
-    {
-        $action = new CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
-
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
-        $c = new Comment($this->container);
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'commit_comment' => 'plop',
-        );
-
-        // Our event should be executed
-        $this->assertTrue($action->execute(new GenericEvent($event)));
-
-        $comment = $c->getById(1);
+        $comment = $commentModel->getById(1);
         $this->assertNotEmpty($comment);
         $this->assertEquals(1, $comment['task_id']);
+        $this->assertEquals('test123', $comment['comment']);
+        $this->assertEquals('ref123', $comment['reference']);
+        $this->assertEquals(2, $comment['user_id']);
+    }
+
+    public function testWithUserNotAssignable()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $projectUserRoleModel = new ProjectUserRole($this->container);
+        $commentModel = new Comment($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
+
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'comment' => 'test123', 'user_id' => 2));
+
+        $action = new CommentCreation($this->container);
+        $action->setProjectId(1);
+        $action->addEvent('test.event', 'Test Event');
+
+        $this->assertTrue($action->execute($event, 'test.event'));
+
+        $comment = $commentModel->getById(1);
+        $this->assertNotEmpty($comment);
+        $this->assertEquals(1, $comment['task_id']);
+        $this->assertEquals('test123', $comment['comment']);
+        $this->assertEquals('', $comment['reference']);
         $this->assertEquals(0, $comment['user_id']);
-        $this->assertEquals('plop', $comment['comment']);
     }
 
-    public function testWithUser()
+    public function testWithNoComment()
     {
-        $action = new CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $projectUserRoleModel = new ProjectUserRole($this->container);
+        $commentModel = new Comment($this->container);
+        $taskCreationModel = new TaskCreation($this->container);
 
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
-        $c = new Comment($this->container);
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
 
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'user_id' => 1,
-            'comment' => 'youpi',
-        );
+        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1));
 
-        // Our event should be executed
-        $this->assertTrue($action->execute(new GenericEvent($event)));
+        $action = new CommentCreation($this->container);
+        $action->setProjectId(1);
+        $action->addEvent('test.event', 'Test Event');
 
-        $comment = $c->getById(1);
-        $this->assertNotEmpty($comment);
-        $this->assertEquals(1, $comment['task_id']);
-        $this->assertEquals(1, $comment['user_id']);
-        $this->assertEquals('youpi', $comment['comment']);
-    }
-
-    public function testWithNoUser()
-    {
-        $action = new CommentCreation($this->container, 1, GithubWebhook::EVENT_ISSUE_COMMENT);
-
-        // We create a task in the first column
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
-        $c = new Comment($this->container);
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 1)));
-
-        // We create an event to move the task to the 2nd column
-        $event = array(
-            'project_id' => 1,
-            'task_id' => 1,
-            'user_id' => 0,
-            'comment' => 'youpi',
-        );
-
-        // Our event should be executed
-        $this->assertTrue($action->execute(new GenericEvent($event)));
-
-        $comment = $c->getById(1);
-        $this->assertNotEmpty($comment);
-        $this->assertEquals(1, $comment['task_id']);
-        $this->assertEquals(0, $comment['user_id']);
-        $this->assertEquals('youpi', $comment['comment']);
+        $this->assertFalse($action->execute($event, 'test.event'));
     }
 }

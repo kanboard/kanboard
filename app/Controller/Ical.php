@@ -3,6 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Model\TaskFilter;
+use Kanboard\Model\Task as TaskModel;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 
 /**
@@ -31,6 +32,7 @@ class Ical extends Base
         // Common filter
         $filter = $this->taskFilterICalendarFormatter
             ->create()
+            ->filterByStatus(TaskModel::STATUS_OPEN)
             ->filterByOwner($user['id']);
 
         // Calendar properties
@@ -60,6 +62,7 @@ class Ical extends Base
         // Common filter
         $filter = $this->taskFilterICalendarFormatter
             ->create()
+            ->filterByStatus(TaskModel::STATUS_OPEN)
             ->filterByProject($project['id']);
 
         // Calendar properties

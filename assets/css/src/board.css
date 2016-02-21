@@ -16,6 +16,7 @@
 
 #board {
     table-layout: fixed;
+    margin-bottom: 0;
 }
 
 #board th.board-column-header {
@@ -79,8 +80,8 @@ td.board-column-task-collapsed {
 }
 
 /* column header */
-.board-column-title {
-    cursor: pointer;
+.board-column-title .dropdown-menu {
+    text-decoration: none;
 }
 
 .board-add-icon {
@@ -153,4 +154,17 @@ div.draggable-item-selected {
 .task-board-sort-handle {
     float: left;
     padding-right: 5px;
+}
+
+/* board saving state */
+.task-board-saving-state {
+    opacity: 0.3;
+}
+
+.task-board-saving-icon {
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    color: #000;
 }

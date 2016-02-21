@@ -6,13 +6,21 @@ use RuntimeException;
 use Kanboard\Core\Base;
 
 /**
- * Router class
+ * Route Dispatcher
  *
  * @package http
  * @author  Frederic Guillot
  */
 class Router extends Base
 {
+    /**
+     * Plugin name
+     *
+     * @access private
+     * @var string
+     */
+    private $plugin = '';
+
     /**
      * Controller
      *
@@ -30,30 +38,14 @@ class Router extends Base
     private $action = '';
 
     /**
-     * Store routes for path lookup
-     *
-     * @access private
-     * @var array
-     */
-    private $paths = array();
-
-    /**
-     * Store routes for url lookup
-     *
-     * @access private
-     * @var array
-     */
-    private $urls = array();
-
-    /**
-     * Get action
+     * Get plugin name
      *
      * @access public
      * @return string
      */
-    public function getAction()
+    public function getPlugin()
     {
-        return $this->action;
+        return $this->plugin;
     }
 
     /**
@@ -68,22 +60,31 @@ class Router extends Base
     }
 
     /**
+     * Get action
+     *
+     * @access public
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
      * Get the path to compare patterns
      *
      * @access public
-     * @param  string  $uri
-     * @param  string  $query_string
      * @return string
      */
-    public function getPath($uri, $query_string = '')
+    public function getPath()
     {
-        $path = substr($uri, strlen($this->helper->url->dir()));
+        $path = substr($this->request->getUri(), strlen($this->helper->url->dir()));
 
-        if (! empty($query_string)) {
-            $path = substr($path, 0, - strlen($query_string) - 1);
+        if ($this->request->getQueryString() !== '') {
+            $path = substr($path, 0, - strlen($this->request->getQueryString()) - 1);
         }
 
-        if (! empty($path) && $path{0} === '/') {
+        if ($path !== '' && $path{0} === '/') {
             $path = substr($path, 1);
         }
 
@@ -91,140 +92,78 @@ class Router extends Base
     }
 
     /**
-     * Add route
+     * Find controller/action from the route table or from get arguments
      *
      * @access public
-     * @param  string   $path
-     * @param  string   $controller
-     * @param  string   $action
-     * @param  array    $params
      */
-    public function addRoute($path, $controller, $action, array $params = array())
+    public function dispatch()
     {
-        $pattern = explode('/', $path);
+        $controller = $this->request->getStringParam('controller');
+        $action = $this->request->getStringParam('action');
+        $plugin = $this->request->getStringParam('plugin');
 
-        $this->paths[] = array(
-            'pattern' => $pattern,
-            'count' => count($pattern),
-            'controller' => $controller,
-            'action' => $action,
-        );
-
-        $this->urls[$controller][$action][] = array(
-            'path' => $path,
-            'params' => array_flip($params),
-            'count' => count($params),
-        );
-    }
-
-    /**
-     * Find a route according to the given path
-     *
-     * @access public
-     * @param  string   $path
-     * @return array
-     */
-    public function findRoute($path)
-    {
-        $parts = explode('/', $path);
-        $count = count($parts);
-
-        foreach ($this->paths as $route) {
-            if ($count === $route['count']) {
-                $params = array();
-
-                for ($i = 0; $i < $count; $i++) {
-                    if ($route['pattern'][$i]{0} === ':') {
-                        $params[substr($route['pattern'][$i], 1)] = $parts[$i];
-                    } elseif ($route['pattern'][$i] !== $parts[$i]) {
-                        break;
-                    }
-                }
-
-                if ($i === $count) {
-                    $_GET = array_merge($_GET, $params);
-                    return array($route['controller'], $route['action']);
-                }
-            }
+        if ($controller === '') {
+            $route = $this->route->findRoute($this->getPath());
+            $controller = $route['controller'];
+            $action = $route['action'];
+            $plugin = $route['plugin'];
         }
 
-        return array('app', 'index');
-    }
+        $this->controller = ucfirst($this->sanitize($controller, 'app'));
+        $this->action = $this->sanitize($action, 'index');
+        $this->plugin = ucfirst($this->sanitize($plugin));
 
-    /**
-     * Find route url
-     *
-     * @access public
-     * @param  string   $controller
-     * @param  string   $action
-     * @param  array    $params
-     * @return string
-     */
-    public function findUrl($controller, $action, array $params = array())
-    {
-        if (! isset($this->urls[$controller][$action])) {
-            return '';
-        }
-
-        foreach ($this->urls[$controller][$action] as $pattern) {
-            if (array_diff_key($params, $pattern['params']) === array()) {
-                $url = $pattern['path'];
-                $i = 0;
-
-                foreach ($params as $variable => $value) {
-                    $url = str_replace(':'.$variable, $value, $url);
-                    $i++;
-                }
-
-                if ($i === $pattern['count']) {
-                    return $url;
-                }
-            }
-        }
-
-        return '';
+        return $this->executeAction();
     }
 
     /**
      * Check controller and action parameter
      *
      * @access public
-     * @param  string $value Controller or action name
-     * @param  string $default_value Default value if validation fail
+     * @param  string $value
+     * @param  string $default
      * @return string
      */
-    public function sanitize($value, $default_value)
+    public function sanitize($value, $default = '')
     {
-        return ! preg_match('/^[a-zA-Z_0-9]+$/', $value) ? $default_value : $value;
+        return preg_match('/^[a-zA-Z_0-9]+$/', $value) ? $value : $default;
     }
 
     /**
-     * Find controller/action from the route table or from get arguments
+     * Execute controller action
      *
-     * @access public
-     * @param  string  $uri
-     * @param  string  $query_string
+     * @access private
      */
-    public function dispatch($uri, $query_string = '')
+    private function executeAction()
     {
-        if (! empty($_GET['controller']) && ! empty($_GET['action'])) {
-            $this->controller = $this->sanitize($_GET['controller'], 'app');
-            $this->action = $this->sanitize($_GET['action'], 'index');
-            $plugin = ! empty($_GET['plugin']) ? $this->sanitize($_GET['plugin'], '') : '';
-        } else {
-            list($this->controller, $this->action) = $this->findRoute($this->getPath($uri, $query_string)); // TODO: add plugin for routes
-            $plugin = '';
+        $class = $this->getControllerClassName();
+
+        if (! class_exists($class)) {
+            throw new RuntimeException('Controller not found');
         }
 
-        $class = '\Kanboard\\';
-        $class .= empty($plugin) ? 'Controller\\'.ucfirst($this->controller) : 'Plugin\\'.ucfirst($plugin).'\Controller\\'.ucfirst($this->controller);
-
-        if (! class_exists($class) || ! method_exists($class, $this->action)) {
-            throw new RuntimeException('Controller or method not found for the given url!');
+        if (! method_exists($class, $this->action)) {
+            throw new RuntimeException('Action not implemented');
         }
 
         $instance = new $class($this->container);
-        $instance->beforeAction($this->controller, $this->action);
+        $instance->beforeAction();
         $instance->{$this->action}();
+        return $instance;
+    }
+
+    /**
+     * Get controller class name
+     *
+     * @access private
+     * @return string
+     */
+    private function getControllerClassName()
+    {
+        if ($this->plugin !== '') {
+            return '\Kanboard\Plugin\\'.$this->plugin.'\Controller\\'.$this->controller;
+        }
+
+        return '\Kanboard\Controller\\'.$this->controller;
     }
 }

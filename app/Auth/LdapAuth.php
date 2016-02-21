@@ -20,26 +20,26 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
     /**
      * User properties
      *
-     * @access private
+     * @access protected
      * @var \Kanboard\User\LdapUserProvider
      */
-    private $userInfo = null;
+    protected $userInfo = null;
 
     /**
      * Username
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $username = '';
+    protected $username = '';
 
     /**
      * Password
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $password = '';
+    protected $password = '';
 
     /**
      * Get authentication provider name

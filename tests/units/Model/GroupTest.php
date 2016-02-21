@@ -57,26 +57,4 @@ class GroupTest extends Base
         $this->assertTrue($groupModel->remove(1));
         $this->assertEmpty($groupModel->getById(1));
     }
-
-    public function testValidateCreation()
-    {
-        $groupModel = new Group($this->container);
-
-        $result = $groupModel->validateCreation(array('name' => 'Test'));
-        $this->assertTrue($result[0]);
-
-        $result = $groupModel->validateCreation(array('name' => ''));
-        $this->assertFalse($result[0]);
-    }
-
-    public function testValidateModification()
-    {
-        $groupModel = new Group($this->container);
-
-        $result = $groupModel->validateModification(array('name' => 'Test', 'id' => 1));
-        $this->assertTrue($result[0]);
-
-        $result = $groupModel->validateModification(array('name' => 'Test'));
-        $this->assertFalse($result[0]);
-    }
 }

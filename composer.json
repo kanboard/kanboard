@@ -1,5 +1,6 @@
 {
     "name": "fguillot/kanboard",
+    "type": "project",
     "description": "Kanban project management software",
     "license": "MIT",
     "authors": [
@@ -7,20 +8,31 @@
             "name": "Frédéric Guillot"
         }
     ],
+    "config": {
+        "preferred-install": "dist",
+        "optimize-autoloader": true,
+        "discard-changes": true
+    },
     "require" : {
         "php" : ">=5.3",
-        "ext-mbstring" : "*",
         "ext-gd" : "*",
+        "ext-mbstring" : "*",
+        "ext-hash" : "*",
+        "ext-openssl" : "*",
+        "ext-json" : "*",
+        "ext-ctype" : "*",
+        "ext-filter" : "*",
+        "ext-session" : "*",
         "christian-riesen/otp" : "1.4",
         "eluceo/ical": "0.8.0",
-        "erusev/parsedown" : "1.5.4",
-        "fabiang/xmpp" : "0.6.1",
+        "erusev/parsedown" : "1.6.0",
         "fguillot/json-rpc" : "1.0.3",
-        "fguillot/picodb" : "1.0.3",
+        "fguillot/picodb" : "1.0.5",
         "fguillot/simpleLogger" : "1.0.0",
         "fguillot/simple-validator" : "1.0.0",
-        "league/html-to-markdown" : "~4.0",
+        "paragonie/random_compat": "@stable",
         "pimple/pimple" : "~3.0",
+        "ramsey/array_column": "@stable",
         "swiftmailer/swiftmailer" : "~5.4",
         "symfony/console" : "~2.7",
         "symfony/event-dispatcher" : "~2.7",

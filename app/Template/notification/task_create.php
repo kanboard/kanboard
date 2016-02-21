@@ -2,11 +2,11 @@
 
 <ul>
     <li>
-        <?= dt('Created on %B %e, %Y at %k:%M %p', $task['date_creation']) ?>
+        <?= t('Created:').' '.$this->dt->datetime($task['date_creation']) ?>
     </li>
     <?php if ($task['date_due']): ?>
     <li>
-        <strong><?= dt('Must be done before %B %e, %Y', $task['date_due']) ?></strong>
+        <strong><?= t('Due date:').' '.$this->dt->date($task['date_due']) ?></strong>
     </li>
     <?php endif ?>
     <?php if (! empty($task['creator_username'])): ?>

@@ -4,20 +4,25 @@ namespace Kanboard\Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class BootstrapSubscriber extends \Kanboard\Core\Base implements EventSubscriberInterface
+class BootstrapSubscriber extends BaseSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
         return array(
-            'app.bootstrap' => array('setup', 0),
+            'app.bootstrap' => 'execute',
         );
     }
 
-    public function setup()
+    public function execute()
     {
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
         $this->config->setupTranslations();
         $this->config->setupTimezone();
-        $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
+        $this->actionManager->attachEvents();
+
+        if ($this->userSession->isLogged()) {
+            $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
+        }
     }
 
     public function __destruct()

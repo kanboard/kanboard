@@ -15,7 +15,6 @@ PHP installation
 Edit the `php.ini`, uncomment these PHP modules:
 
 ```ini
-extension=php_curl.dll
 extension=php_gd2.dll
 extension=php_ldap.dll
 extension=php_mbstring.dll
@@ -66,3 +65,9 @@ Tested configurations
 
 - Windows 2008 R2 Standard Edition / IIS 7.5 / PHP 5.5.16
 - Windows 2012 Standard Edition / IIS 8.5 / PHP 5.3.29
+
+Notes
+-----
+
+- Some features of Kanboard require that you run [a daily background job](cronjob.markdown).
+

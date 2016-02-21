@@ -26,59 +26,33 @@ Add a new action
 
 ![Define parameters](http://kanboard.net/screenshots/documentation/project-automatic-action-step3.png)
 
-List of available events
-------------------------
-
-- Move a task to another column
-- Move a task to another position in the same column
-- Task modification
-- Task creation
-- Reopen a task
-- Closing a task
-- Task creation or modification
-- Task assignee change
-- Task link created or updated
-- Github commit received
-- Github issue opened
-- Github issue closed
-- Github issue reopened
-- Github issue assignee change
-- Github issue label change
-- Github issue comment created
-- Gitlab issue opened
-- Gitlab issue closed
-- Gitlab commit received
-- Bitbucket commit received
-- Bitbucket issue opened
-- Bitbucket issue closed
-- Bitbucket issue reopened
-- Bitbucket issue assignee change
-- Bitbucket issue comment created
-
 List of available actions
 -------------------------
 
-- Close the task
-- Open a task
-- Assign the task to a specific user
+- Create a comment from an external provider
+- Add a comment log when moving the task between columns
+- Assign automatically a category based on a color
+- Change the category based on an external label
+- Assign automatically a category based on a link
+- Assign automatically a color based on a category
+- Assign a color when the task is moved to a specific column
+- Change task color when using a specific task link
+- Assign a color to a specific user
 - Assign the task to the person who does the action
+- Assign the task to the person who does the action when the column is changed
+- Assign the task to a specific user
+- Change the assignee based on an external username
+- Close the task
+- Close a task in a specific column
+- Create a task from an external provider
 - Duplicate the task to another project
+- Send a task by email to someone
 - Move the task to another project
 - Move the task to another column when assigned to a user
-- Move the task to another column when assignee is cleared
-- Assign color when the task is moved to a specific column
-- Assign color to a specific user
-- Assign automatically a color based on a category
-- Assign automatically a category based on a color
-- Create a comment from an external provider
-- Create a task from an external provider
-- Add a comment log when moving the task between columns
-- Change the assignee based on an external username
-- Change the category based on an external label
-- Automatically update the start date
 - Move the task to another column when the category is changed
-- Send a task by email to someone
-- Change task color when using a specific task link
+- Move the task to another column when assignee is cleared
+- Open a task
+- Automatically update the start date
 
 Examples
 --------
@@ -87,7 +61,7 @@ Here are some examples used in real life:
 
 ### When I move a task to the column "Done", automatically close this task
 
-- Choose action: **Close the task**
+- Choose action: **Close a task in a specific column**
 - Choose the event: **Move a task to another column**
 - Define action parameter: **Column = Done** (this is the destination column)
 
@@ -99,7 +73,7 @@ Here are some examples used in real life:
 
 ### When I move a task to the column "Work in progress", assign this task to the current user
 
-- Choose action: **Assign the task to the person who does the action**
+- Choose action: **Assign the task to the person who does the action when the column is changed**
 - Choose the event: **Move a task to another column**
 - Define action parameter: **Column = Work in progress**
 

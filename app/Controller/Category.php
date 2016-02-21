@@ -38,7 +38,7 @@ class Category extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('category/index', array(
+        $this->response->html($this->helper->layout->project('category/index', array(
             'categories' => $this->category->getList($project['id'], false),
             'values' => $values + array('project_id' => $project['id']),
             'errors' => $errors,
@@ -57,7 +57,7 @@ class Category extends Base
         $project = $this->getProject();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->category->validateCreation($values);
+        list($valid, $errors) = $this->categoryValidator->validateCreation($values);
 
         if ($valid) {
             if ($this->category->create($values)) {
@@ -81,7 +81,7 @@ class Category extends Base
         $project = $this->getProject();
         $category = $this->getCategory($project['id']);
 
-        $this->response->html($this->projectLayout('category/edit', array(
+        $this->response->html($this->helper->layout->project('category/edit', array(
             'values' => empty($values) ? $category : $values,
             'errors' => $errors,
             'project' => $project,
@@ -99,7 +99,7 @@ class Category extends Base
         $project = $this->getProject();
 
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->category->validateModification($values);
+        list($valid, $errors) = $this->categoryValidator->validateModification($values);
 
         if ($valid) {
             if ($this->category->update($values)) {
@@ -123,7 +123,7 @@ class Category extends Base
         $project = $this->getProject();
         $category = $this->getCategory($project['id']);
 
-        $this->response->html($this->projectLayout('category/remove', array(
+        $this->response->html($this->helper->layout->project('category/remove', array(
             'project' => $project,
             'category' => $category,
             'title' => t('Remove a category')

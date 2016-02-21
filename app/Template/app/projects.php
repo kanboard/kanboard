@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('My projects') ?> (<?= $paginator->getTotal() ?>)</h2>
+    <h2><?= $this->url->link(t('My projects'), 'app', 'projects', array('user_id' => $user['id'])) ?> (<?= $paginator->getTotal() ?>)</h2>
 </div>
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('Your are not member of any project.') ?></p>
@@ -22,7 +22,7 @@
                 <?php endif ?>
             </td>
             <td>
-                <?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
+                <?php if ($this->user->hasProjectAccess('gantt', 'project', $project['id'])): ?>
                     <?= $this->url->link('<i class="fa fa-sliders fa-fw"></i>', 'gantt', 'project', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Gantt chart')) ?>
                 <?php endif ?>
 

@@ -18,9 +18,12 @@ class ProjectDailyStatsTest extends Base
         $ts = new TaskStatus($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertEquals(2, $p->create(array('name' => 'UnitTest')));
 
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'date_started' => strtotime('-1 day'))));
-        $this->assertEquals(2, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1)));
+        $this->assertEquals(3, $tc->create(array('title' => 'Task #3', 'project_id' => 2)));
+
         $pds->updateTotals(1, date('Y-m-d', strtotime('-1 day')));
 
         $this->assertTrue($ts->close(1));

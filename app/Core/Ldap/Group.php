@@ -16,10 +16,10 @@ class Group
     /**
      * Query
      *
-     * @access private
+     * @access protected
      * @var Query
      */
-    private $query;
+    protected $query;
 
     /**
      * Constructor
@@ -43,7 +43,8 @@ class Group
      */
     public static function getGroups(Client $client, $query)
     {
-        $self = new self(new Query($client));
+        $className = get_called_class();
+        $self = new $className(new Query($client));
         return $self->find($query);
     }
 

@@ -1,7 +1,14 @@
-<section id="tooltip-subtasks">
+<table class="table-stripped">
 <?php foreach ($subtasks as $subtask): ?>
-    <?= $this->subtask->toggleStatus($subtask, 'board', $task['project_id']) ?>
-    <?= $this->e(empty($subtask['username']) ? '' : ' ['.$this->user->getFullname($subtask).']') ?>
-    <br/>
+    <tr>
+        <td class="column-80">
+            <?= $this->subtask->toggleStatus($subtask, $task['project_id']) ?>
+        </td>
+        <td>
+            <?php if (! empty($subtask['username'])): ?>
+                    <?= $this->e($subtask['name'] ?: $subtask['username']) ?>
+            <?php endif ?>
+        </td>
+    </tr>
 <?php endforeach ?>
-</section>
+</table>

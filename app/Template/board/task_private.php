@@ -3,6 +3,9 @@
         <?= $task['is_active'] == 1 ? ($this->user->hasProjectAccess('board', 'save', $task['project_id']) ? 'draggable-item ' : '').'task-board-status-open '.($task['date_modification'] > (time() - $board_highlight_period) ? 'task-board-recent' : '') : 'task-board-status-closed' ?>
         color-<?= $task['color_id'] ?>"
      data-task-id="<?= $task['id'] ?>"
+     data-column-id="<?= $task['column_id'] ?>"
+     data-swimlane-id="<?= $task['swimlane_id'] ?>"
+     data-position="<?= $task['position'] ?>"
      data-owner-id="<?= $task['owner_id'] ?>"
      data-category-id="<?= $task['category_id'] ?>"
      data-due-date="<?= $task['date_due'] ?>"
@@ -12,6 +15,7 @@
 
     <?php if ($this->board->isCollapsed($task['project_id'])): ?>
         <div class="task-board-collapsed">
+            <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse"></i></div>
             <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
                 <?= $this->render('board/task_menu', array('task' => $task)) ?>
             <?php else: ?>
@@ -27,6 +31,7 @@
         </div>
     <?php else: ?>
         <div class="task-board-expanded">
+            <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
             <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
                 <?= $this->render('board/task_menu', array('task' => $task)) ?>
             <?php else: ?>
@@ -73,6 +78,7 @@
             <?= $this->render('board/task_footer', array(
                     'task' => $task,
                     'not_editable' => $not_editable,
+                    'project' => $project,
             )) ?>
         </div>
     <?php endif ?>

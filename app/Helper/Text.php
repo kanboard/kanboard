@@ -3,14 +3,15 @@
 namespace Kanboard\Helper;
 
 use Kanboard\Core\Markdown;
+use Kanboard\Core\Base;
 
 /**
- * Text helpers
+ * Text Helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class Text extends \Kanboard\Core\Base
+class Text extends Base
 {
     /**
      * Markdown transformation
@@ -21,7 +22,7 @@ class Text extends \Kanboard\Core\Base
      */
     public function markdown($text, array $link = array())
     {
-        $parser = new Markdown($link, $this->helper->url);
+        $parser = new Markdown($this->container, $link);
         $parser->setMarkupEscaped(MARKDOWN_ESCAPE_HTML);
         return $parser->text($text);
     }
@@ -39,6 +40,29 @@ class Text extends \Kanboard\Core\Base
         $suffixes = array('', 'k', 'M', 'G', 'T');
 
         return round(pow(1024, $base - floor($base)), $precision).$suffixes[(int)floor($base)];
+    }
+
+    /**
+     * Get the number of bytes from PHP size
+     *
+     * @param  integer  $val        PHP size (example: 2M)
+     * @return integer
+     */
+    public function phpToBytes($val)
+    {
+        $val = trim($val);
+        $last = strtolower($val[strlen($val)-1]);
+
+        switch ($last) {
+            case 'g':
+                $val *= 1024;
+            case 'm':
+                $val *= 1024;
+            case 'k':
+                $val *= 1024;
+        }
+
+        return $val;
     }
 
     /**

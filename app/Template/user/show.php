@@ -5,6 +5,7 @@
     <li><?= t('Username:') ?> <strong><?= $this->e($user['username']) ?></strong></li>
     <li><?= t('Name:') ?> <strong><?= $this->e($user['name']) ?: t('None') ?></strong></li>
     <li><?= t('Email:') ?> <strong><?= $this->e($user['email']) ?: t('None') ?></strong></li>
+    <li><?= t('Status:') ?> <strong><?= $user['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
 </ul>
 
 <div class="page-header">

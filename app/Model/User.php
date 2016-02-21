@@ -3,9 +3,6 @@
 namespace Kanboard\Model;
 
 use PicoDb\Database;
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
-use Kanboard\Core\Session\SessionManager;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
@@ -44,6 +41,18 @@ class User extends Base
     }
 
     /**
+     * Return true if the user is active
+     *
+     * @access public
+     * @param  integer    $user_id   User id
+     * @return boolean
+     */
+    public function isActive($user_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $user_id)->eq('is_active', 1)->exists();
+    }
+
+    /**
      * Get query to fetch all users
      *
      * @access public
@@ -51,20 +60,7 @@ class User extends Base
      */
     public function getQuery()
     {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        'id',
-                        'username',
-                        'name',
-                        'email',
-                        'role',
-                        'is_ldap_user',
-                        'notifications_enabled',
-                        'google_id',
-                        'github_id',
-                        'twofactor_activated'
-                    );
+        return $this->db->table(self::TABLE);
     }
 
     /**
@@ -141,7 +137,7 @@ class User extends Base
      *
      * @access public
      * @param  string  $username  Username
-     * @return array
+     * @return integer
      */
     public function getIdByUsername($username)
     {
@@ -209,9 +205,9 @@ class User extends Base
      * @param  boolean  $prepend  Prepend "All users"
      * @return array
      */
-    public function getList($prepend = false)
+    public function getActiveUsersList($prepend = false)
     {
-        $users = $this->db->table(self::TABLE)->columns('id', 'username', 'name')->findAll();
+        $users = $this->db->table(self::TABLE)->eq('is_active', 1)->columns('id', 'username', 'name')->findAll();
         $listing = $this->prepareList($users);
 
         if ($prepend) {
@@ -281,7 +277,7 @@ class User extends Base
      *
      * @access public
      * @param  array  $values  Form values
-     * @return array
+     * @return boolean
      */
     public function update(array $values)
     {
@@ -294,6 +290,30 @@ class User extends Base
         }
 
         return $result;
+    }
+
+    /**
+     * Disable a specific user
+     *
+     * @access public
+     * @param  integer  $user_id
+     * @return boolean
+     */
+    public function disable($user_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $user_id)->update(array('is_active' => 0));
+    }
+
+    /**
+     * Enable a specific user
+     *
+     * @access public
+     * @param  integer  $user_id
+     * @return boolean
+     */
+    public function enable($user_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $user_id)->update(array('is_active' => 1));
     }
 
     /**
@@ -368,133 +388,5 @@ class User extends Base
                     ->table(self::TABLE)
                     ->eq('id', $user_id)
                     ->save(array('token' => ''));
-    }
-
-    /**
-     * Common validation rules
-     *
-     * @access private
-     * @return array
-     */
-    private function commonValidationRules()
-    {
-        return array(
-            new Validators\MaxLength('role', t('The maximum length is %d characters', 25), 25),
-            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
-            new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), self::TABLE, 'id'),
-            new Validators\Email('email', t('Email address invalid')),
-            new Validators\Integer('is_ldap_user', t('This value must be an integer')),
-        );
-    }
-
-    /**
-     * Common password validation rules
-     *
-     * @access private
-     * @return array
-     */
-    private function commonPasswordValidationRules()
-    {
-        return array(
-            new Validators\Required('password', t('The password is required')),
-            new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
-            new Validators\Required('confirmation', t('The confirmation is required')),
-            new Validators\Equals('password', 'confirmation', t('Passwords don\'t match')),
-        );
-    }
-
-    /**
-     * Validate user creation
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateCreation(array $values)
-    {
-        $rules = array(
-            new Validators\Required('username', t('The username is required')),
-        );
-
-        if (isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1) {
-            $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-        } else {
-            $v = new Validator($values, array_merge($rules, $this->commonValidationRules(), $this->commonPasswordValidationRules()));
-        }
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate user modification
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The user id is required')),
-            new Validators\Required('username', t('The username is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate user API modification
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateApiModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The user id is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate password modification
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validatePasswordModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The user id is required')),
-            new Validators\Required('current_password', t('The current password is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonPasswordValidationRules()));
-
-        if ($v->execute()) {
-            if ($this->authenticationManager->passwordAuthentication($this->userSession->getUsername(), $values['current_password'], false)) {
-                return array(true, array());
-            } else {
-                return array(false, array('current_password' => array(t('Wrong password'))));
-            }
-        }
-
-        return array(false, $v->getErrors());
     }
 }

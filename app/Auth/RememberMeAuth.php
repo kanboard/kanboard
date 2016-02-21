@@ -17,10 +17,10 @@ class RememberMeAuth extends Base implements PreAuthenticationProviderInterface
     /**
      * User properties
      *
-     * @access private
+     * @access protected
      * @var array
      */
-    private $userInfo = array();
+    protected $userInfo = array();
 
     /**
      * Get authentication provider name

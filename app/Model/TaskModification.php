@@ -17,16 +17,17 @@ class TaskModification extends Base
      *
      * @access public
      * @param  array     $values
+     * @param  boolean   $fire_events
      * @return boolean
      */
-    public function update(array $values)
+    public function update(array $values, $fire_events = true)
     {
         $original_task = $this->taskFinder->getById($values['id']);
 
         $this->prepare($values);
         $result = $this->db->table(Task::TABLE)->eq('id', $original_task['id'])->update($values);
 
-        if ($result) {
+        if ($fire_events && $result) {
             $this->fireEvents($original_task, $values);
         }
 
@@ -51,13 +52,14 @@ class TaskModification extends Base
 
         if ($this->isFieldModified('owner_id', $event_data['changes'])) {
             $events[] = Task::EVENT_ASSIGNEE_CHANGE;
-        } else {
+        } elseif (! empty($event_data['changes'])) {
             $events[] = Task::EVENT_CREATE_UPDATE;
             $events[] = Task::EVENT_UPDATE;
         }
 
         foreach ($events as $event) {
-            $this->container['dispatcher']->dispatch($event, new TaskEvent($event_data));
+            $this->logger->debug('Event fired: '.$event);
+            $this->dispatcher->dispatch($event, new TaskEvent($event_data));
         }
     }
 
@@ -82,11 +84,12 @@ class TaskModification extends Base
      */
     public function prepare(array &$values)
     {
-        $this->dateParser->convert($values, array('date_due'));
-        $this->dateParser->convert($values, array('date_started'), true);
+        $values = $this->dateParser->convert($values, array('date_due'));
+        $values = $this->dateParser->convert($values, array('date_started'), true);
+
         $this->removeFields($values, array('another_task', 'id'));
         $this->resetFields($values, array('date_due', 'date_started', 'score', 'category_id', 'time_estimated', 'time_spent'));
-        $this->convertIntegerFields($values, array('is_active', 'recurrence_status', 'recurrence_trigger', 'recurrence_factor', 'recurrence_timeframe', 'recurrence_basedate'));
+        $this->convertIntegerFields($values, array('priority', 'is_active', 'recurrence_status', 'recurrence_trigger', 'recurrence_factor', 'recurrence_timeframe', 'recurrence_basedate'));
 
         $values['date_modification'] = time();
     }

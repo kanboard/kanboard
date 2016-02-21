@@ -11,7 +11,7 @@
     <?= $this->form->hidden('action_name', $values) ?>
 
     <?= $this->form->label(t('Event'), 'event_name') ?>
-    <?= $this->form->select('event_name', $events, $values) ?><br/>
+    <?= $this->form->select('event_name', $events, $values) ?>
 
     <div class="form-help">
         <?= t('When the selected event occurs execute the corresponding action.') ?>

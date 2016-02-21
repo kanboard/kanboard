@@ -20,7 +20,19 @@ class ProjectUserRole extends Base
     const TABLE = 'project_has_users';
 
     /**
-     * Get the list of project visible by the given user
+     * Get the list of active project for the given user
+     *
+     * @access public
+     * @param  integer  $user_id
+     * @return array
+     */
+    public function getActiveProjectsByUser($user_id)
+    {
+        return $this->getProjectsByUser($user_id, array(Project::ACTIVE));
+    }
+
+    /**
+     * Get the list of project visible for the given user
      *
      * @access public
      * @param  integer  $user_id
@@ -40,11 +52,11 @@ class ProjectUserRole extends Base
             ->getAll(Project::TABLE.'.id', Project::TABLE.'.name');
 
         $groupProjects = $this->projectGroupRole->getProjectsByUser($user_id, $status);
-        $groups = $userProjects + $groupProjects;
+        $projects = $userProjects + $groupProjects;
 
-        asort($groups);
+        asort($projects);
 
-        return $groups;
+        return $projects;
     }
 
     /**
@@ -140,13 +152,14 @@ class ProjectUserRole extends Base
     public function getAssignableUsers($project_id)
     {
         if ($this->projectPermission->isEverybodyAllowed($project_id)) {
-            return $this->user->getList();
+            return $this->user->getActiveUsersList();
         }
 
         $userMembers = $this->db->table(self::TABLE)
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')
             ->join(User::TABLE, 'id', 'user_id')
-            ->eq('project_id', $project_id)
+            ->eq(User::TABLE.'.is_active', 1)
+            ->eq(self::TABLE.'.project_id', $project_id)
             ->in(self::TABLE.'.role', array(Role::PROJECT_MANAGER, Role::PROJECT_MEMBER))
             ->findAll();
 

@@ -4,7 +4,6 @@ namespace Kanboard\Model;
 
 use Kanboard\Core\Translator;
 use Kanboard\Core\Security\Token;
-use Kanboard\Core\Session\SessionManager;
 
 /**
  * Config model
@@ -14,31 +13,6 @@ use Kanboard\Core\Session\SessionManager;
  */
 class Config extends Setting
 {
-    /**
-     * Get available currencies
-     *
-     * @access public
-     * @return array
-     */
-    public function getCurrencies()
-    {
-        return array(
-            'USD' => t('USD - US Dollar'),
-            'EUR' => t('EUR - Euro'),
-            'GBP' => t('GBP - British Pound'),
-            'CHF' => t('CHF - Swiss Francs'),
-            'CAD' => t('CAD - Canadian Dollar'),
-            'AUD' => t('AUD - Australian Dollar'),
-            'NZD' => t('NZD - New Zealand Dollar'),
-            'INR' => t('INR - Indian Rupee'),
-            'JPY' => t('JPY - Japanese Yen'),
-            'RSD' => t('RSD - Serbian dinar'),
-            'SEK' => t('SEK - Swedish Krona'),
-            'NOK' => t('NOK - Norwegian Krone'),
-            'BAM' => t('BAM - Konvertible Mark'),
-        );
-    }
-
     /**
      * Get available timezones
      *
@@ -56,6 +30,31 @@ class Config extends Setting
         }
 
         return $listing;
+    }
+
+    /**
+     * Get current timezone
+     *
+     * @access public
+     * @return string
+     */
+    public function getCurrentTimezone()
+    {
+        if ($this->userSession->isLogged() && ! empty($this->sessionStorage->user['timezone'])) {
+            return $this->sessionStorage->user['timezone'];
+        }
+
+        return $this->get('application_timezone', 'UTC');
+    }
+
+    /**
+     * Set timezone
+     *
+     * @access public
+     */
+    public function setupTimezone()
+    {
+        date_default_timezone_set($this->getCurrentTimezone());
     }
 
     /**
@@ -77,8 +76,10 @@ class Config extends Setting
             'en_US' => 'English',
             'es_ES' => 'Español',
             'fr_FR' => 'Français',
+            'el_GR' => 'Grec',
             'it_IT' => 'Italiano',
             'hu_HU' => 'Magyar',
+            'my_MY' => 'Melayu',
             'nl_NL' => 'Nederlands',
             'nb_NO' => 'Norsk',
             'pl_PL' => 'Polski',
@@ -131,7 +132,8 @@ class Config extends Setting
             'zh_CN' => 'zh-cn',
             'ja_JP' => 'ja',
             'th_TH' => 'th',
-            'id_ID' => 'id'
+            'id_ID' => 'id',
+            'el_GR' => 'el',
         );
 
         $lang = $this->getCurrentLanguage();
@@ -155,43 +157,6 @@ class Config extends Setting
     }
 
     /**
-     * Get a config variable from the session or the database
-     *
-     * @access public
-     * @param  string   $name            Parameter name
-     * @param  string   $default_value   Default value of the parameter
-     * @return string
-     */
-    public function get($name, $default_value = '')
-    {
-        if (! SessionManager::isOpen()) {
-            return $this->getOption($name, $default_value);
-        }
-
-        // Cache config in session
-        if (! isset($this->sessionStorage->config[$name])) {
-            $this->sessionStorage->config = $this->getAll();
-        }
-
-        if (! empty($this->sessionStorage->config[$name])) {
-            return $this->sessionStorage->config[$name];
-        }
-
-        return $default_value;
-    }
-
-    /**
-     * Reload settings in the session and the translations
-     *
-     * @access public
-     */
-    public function reload()
-    {
-        $this->sessionStorage->config = $this->getAll();
-        $this->setupTranslations();
-    }
-
-    /**
      * Load translations
      *
      * @access public
@@ -202,28 +167,27 @@ class Config extends Setting
     }
 
     /**
-     * Get current timezone
+     * Get a config variable from the session or the database
      *
      * @access public
+     * @param  string   $name            Parameter name
+     * @param  string   $default_value   Default value of the parameter
      * @return string
      */
-    public function getCurrentTimezone()
+    public function get($name, $default_value = '')
     {
-        if ($this->userSession->isLogged() && ! empty($this->sessionStorage->user['timezone'])) {
-            return $this->sessionStorage->user['timezone'];
-        }
-
-        return $this->get('application_timezone', 'UTC');
+        $options = $this->memoryCache->proxy($this, 'getAll');
+        return isset($options[$name]) && $options[$name] !== '' ? $options[$name] : $default_value;
     }
 
     /**
-     * Set timezone
+     * Reload settings in the session and the translations
      *
      * @access public
      */
-    public function setupTimezone()
+    public function reload()
     {
-        date_default_timezone_set($this->getCurrentTimezone());
+        $this->setupTranslations();
     }
 
     /**
@@ -234,7 +198,7 @@ class Config extends Setting
      */
     public function optimizeDatabase()
     {
-        return $this->db->getconnection()->exec("VACUUM");
+        return $this->db->getconnection()->exec('VACUUM');
     }
 
     /**
@@ -264,10 +228,11 @@ class Config extends Setting
      *
      * @access public
      * @param  string   $option   Parameter name
+     * @return boolean
      */
     public function regenerateToken($option)
     {
-        $this->save(array($option => Token::getToken()));
+        return $this->save(array($option => Token::getToken()));
     }
 
     /**

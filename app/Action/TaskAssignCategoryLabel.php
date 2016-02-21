@@ -2,8 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\GithubWebhook;
-
 /**
  * Set a category automatically according to a label
  *
@@ -13,6 +11,17 @@ use Kanboard\Integration\GithubWebhook;
 class TaskAssignCategoryLabel extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Change the category based on an external label');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -20,9 +29,7 @@ class TaskAssignCategoryLabel extends Base
      */
     public function getCompatibleEvents()
     {
-        return array(
-            GithubWebhook::EVENT_ISSUE_LABEL_CHANGE,
-        );
+        return array();
     }
 
     /**
@@ -64,7 +71,7 @@ class TaskAssignCategoryLabel extends Base
     {
         $values = array(
             'id' => $data['task_id'],
-            'category_id' => isset($data['category_id']) ? $data['category_id'] : $this->getParam('category_id'),
+            'category_id' => $this->getParam('category_id'),
         );
 
         return $this->taskModification->update($values);
@@ -79,6 +86,6 @@ class TaskAssignCategoryLabel extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['label'] == $this->getParam('label');
+        return $data['label'] == $this->getParam('label') && empty($data['category_id']);
     }
 }

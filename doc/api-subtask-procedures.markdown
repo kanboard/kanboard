@@ -1,7 +1,7 @@
 API Subtask procedures
 ======================
 
-### createSubtask
+## createSubtask
 
 - Purpose: **Create a new subtask**
 - Parameters:
@@ -38,7 +38,7 @@ Response example:
 }
 ```
 
-### getSubtask
+## getSubtask
 
 - Purpose: **Get subtask information**
 - Parameters:
@@ -77,7 +77,7 @@ Response example:
 }
 ```
 
-### getAllSubtasks
+## getAllSubtasks
 
 - Purpose: **Get all available subtasks**
 - Parameters:
@@ -121,7 +121,7 @@ Response example:
 }
 ```
 
-### updateSubtask
+## updateSubtask
 
 - Purpose: **Update a subtask**
 - Parameters:
@@ -162,7 +162,7 @@ Response example:
 }
 ```
 
-### removeSubtask
+## removeSubtask
 
 - Purpose: **Remove a subtask**
 - Parameters:

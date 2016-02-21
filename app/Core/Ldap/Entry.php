@@ -13,10 +13,10 @@ class Entry
     /**
      * LDAP entry
      *
-     * @access private
+     * @access protected
      * @var array
      */
-    private $entry = array();
+    protected $entry = array();
 
     /**
      * Constructor

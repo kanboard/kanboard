@@ -8,6 +8,7 @@ use Kanboard\Model\Group;
 use Kanboard\Model\GroupMember;
 use Kanboard\Model\ProjectGroupRole;
 use Kanboard\Model\ProjectUserRole;
+use Kanboard\Model\ProjectPermission;
 use Kanboard\Core\Security\Role;
 
 class ProjectUserRoleTest extends Base
@@ -98,6 +99,36 @@ class ProjectUserRoleTest extends Base
 
         $this->assertEquals(Role::PROJECT_VIEWER, $userRoleModel->getUserRole(1, 1));
         $this->assertEquals('', $userRoleModel->getUserRole(1, 2));
+    }
+
+    public function testGetAssignableUsersWithDisabledUsers()
+    {
+        $projectModel = new Project($this->container);
+        $userModel = new User($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User2')));
+
+        $this->assertTrue($userRoleModel->addUser(1, 1, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+
+        $users = $userRoleModel->getAssignableUsers(1);
+        $this->assertCount(3, $users);
+
+        $this->assertEquals('admin', $users[1]);
+        $this->assertEquals('User1', $users[2]);
+        $this->assertEquals('User2', $users[3]);
+
+        $this->assertTrue($userModel->disable(2));
+
+        $users = $userRoleModel->getAssignableUsers(1);
+        $this->assertCount(2, $users);
+
+        $this->assertEquals('admin', $users[1]);
+        $this->assertEquals('User2', $users[3]);
     }
 
     public function testGetAssignableUsersWithoutGroups()
@@ -217,6 +248,36 @@ class ProjectUserRoleTest extends Base
         $this->assertEquals('User2', $users[3]);
         $this->assertEquals('User3', $users[4]);
         $this->assertEquals('User4', $users[5]);
+    }
+
+    public function testGetAssignableUsersWithDisabledUsersAndEverybodyAllowed()
+    {
+        $projectModel = new Project($this->container);
+        $projectPermission = new ProjectPermission($this->container);
+        $userModel = new User($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User2')));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1', 'is_everybody_allowed' => 1)));
+
+        $this->assertTrue($projectPermission->isEverybodyAllowed(1));
+
+        $users = $userRoleModel->getAssignableUsers(1);
+        $this->assertCount(3, $users);
+
+        $this->assertEquals('admin', $users[1]);
+        $this->assertEquals('User1', $users[2]);
+        $this->assertEquals('User2', $users[3]);
+
+        $this->assertTrue($userModel->disable(2));
+
+        $users = $userRoleModel->getAssignableUsers(1);
+        $this->assertCount(2, $users);
+
+        $this->assertEquals('admin', $users[1]);
+        $this->assertEquals('User2', $users[3]);
     }
 
     public function testGetProjectsByUser()

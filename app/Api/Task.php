@@ -64,14 +64,24 @@ class Task extends Base
         return $this->taskPosition->movePosition($project_id, $task_id, $column_id, $position, $swimlane_id);
     }
 
+    public function moveTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
+    {
+        return $this->taskDuplication->moveToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
+    }
+
+    public function duplicateTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
+    {
+        return $this->taskDuplication->duplicateToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
+    }
+
     public function createTask($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0,
-                               $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0,
-                               $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0,
-                               $recurrence_basedate = 0, $reference = '')
+                                $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0,
+                                $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0,
+                                $recurrence_basedate = 0, $reference = '')
     {
         $this->checkProjectPermission($project_id);
 
-        if ($owner_id !== 0 && ! $this->projectPermission->isMember($project_id, $owner_id)) {
+        if ($owner_id !== 0 && ! $this->projectPermission->isAssignable($project_id, $owner_id)) {
             return false;
         }
 
@@ -105,9 +115,9 @@ class Task extends Base
     }
 
     public function updateTask($id, $title = null, $color_id = null, $owner_id = null,
-                               $date_due = null, $description = null, $category_id = null, $score = null,
-                               $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
-                               $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null)
+                                $date_due = null, $description = null, $category_id = null, $score = null,
+                                $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
+                                $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null)
     {
         $this->checkTaskPermission($id);
 
@@ -117,7 +127,7 @@ class Task extends Base
             return false;
         }
 
-        if ($owner_id !== null && ! $this->projectPermission->isMember($project_id, $owner_id)) {
+        if ($owner_id !== null && $owner_id != 0 && ! $this->projectPermission->isAssignable($project_id, $owner_id)) {
             return false;
         }
 

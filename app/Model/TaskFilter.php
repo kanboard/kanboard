@@ -469,7 +469,7 @@ class TaskFilter extends Base
         $this->query->beginOr();
 
         foreach ($values as $project) {
-            $this->query->ilike(Board::TABLE.'.title', $project);
+            $this->query->ilike(Column::TABLE.'.title', $project);
         }
 
         $this->query->closeOr();

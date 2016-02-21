@@ -7,11 +7,13 @@ use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Comment;
 use Kanboard\Model\User;
-use Kanboard\Model\File;
+use Kanboard\Model\Group;
+use Kanboard\Model\GroupMember;
 use Kanboard\Model\Project;
 use Kanboard\Model\ProjectPermission;
 use Kanboard\Model\Task;
 use Kanboard\Model\ProjectUserRole;
+use Kanboard\Model\ProjectGroupRole;
 use Kanboard\Model\UserNotification;
 use Kanboard\Model\UserNotificationFilter;
 use Kanboard\Model\UserNotificationType;
@@ -96,6 +98,42 @@ class UserNotificationTest extends Base
         $this->assertEquals(UserNotificationFilter::FILTER_ASSIGNEE, $settings['notifications_filter']);
         $this->assertEquals(array('email', 'web'), $settings['notification_types']);
         $this->assertEquals(array(1), $settings['notification_projects']);
+    }
+
+    public function testGetGroupMembersWithNotificationEnabled()
+    {
+        $userModel = new User($this->container);
+        $groupModel = new Group($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $projectModel = new Project($this->container);
+        $userNotificationModel = new UserNotification($this->container);
+        $projectGroupRole = new ProjectGroupRole($this->container);
+        $projectUserRole = new ProjectUserRole($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
+
+        $this->assertEquals(1, $groupModel->create('G1'));
+        $this->assertEquals(2, $groupModel->create('G2'));
+
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+        $this->assertTrue($groupMemberModel->addUser(1, 3));
+        $this->assertTrue($groupMemberModel->addUser(1, 4));
+        $this->assertTrue($groupMemberModel->addUser(2, 2));
+        $this->assertTrue($groupMemberModel->addUser(2, 3));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
+
+        $this->assertTrue($projectGroupRole->addGroup(1, 1, Role::PROJECT_MEMBER));
+        $this->assertTrue($projectGroupRole->addGroup(1, 2, Role::PROJECT_VIEWER));
+
+        $this->assertTrue($projectUserRole->addUser(1, 2, Role::PROJECT_MEMBER));
+
+        $users = $userNotificationModel->getUsersWithNotificationEnabled(1);
+        $this->assertCount(2, $users);
+        $this->assertEquals('user1', $users[0]['username']);
+        $this->assertEquals('user2', $users[1]['username']);
     }
 
     public function testGetProjectMembersWithNotifications()

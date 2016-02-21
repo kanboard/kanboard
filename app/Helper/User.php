@@ -51,22 +51,6 @@ class User extends \Kanboard\Core\Base
     }
 
     /**
-     * Get user profile
-     *
-     * @access public
-     * @return string
-     */
-    public function getProfileLink()
-    {
-        return $this->helper->url->link(
-            $this->helper->e($this->getFullname()),
-            'user',
-            'show',
-            array('user_id' => $this->userSession->getId())
-        );
-    }
-
-    /**
      * Check if the given user_id is the connected user
      *
      * @param  integer   $user_id   User id

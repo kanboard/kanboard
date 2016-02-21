@@ -52,34 +52,6 @@ class CustomFilterTest extends Base
         $this->assertEquals(1, $filter['is_shared']);
     }
 
-    public function testValidation()
-    {
-        $cf = new CustomFilter($this->container);
-
-        // Validate creation
-        $r = $cf->validateCreation(array('filter' => 'test', 'name' => 'test', 'user_id' => 1, 'project_id' => 1, 'is_shared' => 0));
-        $this->assertTrue($r[0]);
-
-        $r = $cf->validateCreation(array('filter' => str_repeat('a', 101), 'name' => 'test', 'user_id' => 1, 'project_id' => 1, 'is_shared' => 0));
-        $this->assertFalse($r[0]);
-
-        $r = $cf->validateCreation(array('name' => 'test', 'user_id' => 1, 'project_id' => 1, 'is_shared' => 0));
-        $this->assertFalse($r[0]);
-
-        // Validate modification
-        $r = $cf->validateModification(array('id' => 1, 'filter' => 'test', 'name' => 'test', 'user_id' => 1, 'project_id' => 1, 'is_shared' => 0));
-        $this->assertTrue($r[0]);
-
-        $r = $cf->validateModification(array('filter' => 'test', 'name' => 'test', 'user_id' => 1, 'project_id' => 1, 'is_shared' => 0));
-        $this->assertFalse($r[0]);
-
-        $r = $cf->validateModification(array('id' => 1, 'filter' => str_repeat('a', 101), 'name' => 'test', 'user_id' => 1, 'project_id' => 1, 'is_shared' => 0));
-        $this->assertFalse($r[0]);
-
-        $r = $cf->validateModification(array('id' => 1, 'name' => 'test', 'user_id' => 1, 'project_id' => 1, 'is_shared' => 0));
-        $this->assertFalse($r[0]);
-    }
-
     public function testGetAll()
     {
         $u = new User($this->container);

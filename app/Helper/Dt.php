@@ -13,6 +13,50 @@ use DateTime;
 class Dt extends \Kanboard\Core\Base
 {
     /**
+     * Get formatted time
+     *
+     * @access public
+     * @param  integer $value
+     * @return string
+     */
+    public function time($value)
+    {
+        return date($this->config->get('application_time_format', 'H:i'), $value);
+    }
+
+    /**
+     * Get formatted date
+     *
+     * @access public
+     * @param  integer $value
+     * @return string
+     */
+    public function date($value)
+    {
+        if (empty($value)) {
+            return '';
+        }
+
+        if (! ctype_digit($value)) {
+            $value = strtotime($value);
+        }
+
+        return date($this->config->get('application_date_format', 'm/d/Y'), $value);
+    }
+
+    /**
+     * Get formatted  datetime
+     *
+     * @access public
+     * @param  integer $value
+     * @return string
+     */
+    public function datetime($value)
+    {
+        return date($this->config->get('application_datetime_format', 'm/d/Y H:i'), $value);
+    }
+
+    /**
      * Get duration in seconds into human format
      *
      * @access public
@@ -107,6 +151,6 @@ class Dt extends \Kanboard\Core\Base
      */
     public function getWeekDay($day)
     {
-        return dt('%A', strtotime('next Monday +'.($day - 1).' days'));
+        return date('l', strtotime('next Monday +'.($day - 1).' days'));
     }
 }

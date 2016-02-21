@@ -38,7 +38,7 @@
             <?php endif ?>
         </td>
         <td>
-            <?= dt('%B %e, %Y', $task['date_due']) ?>
+            <?= $this->dt->date($task['date_due']) ?>
         </td>
         <td>
             <?php if ($task['is_active'] == \Kanboard\Model\Task::STATUS_OPEN): ?>

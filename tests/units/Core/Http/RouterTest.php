@@ -1,81 +1,203 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace Kanboard\Controller {
 
-use Kanboard\Core\Http\Router;
-
-class RouterTest extends Base
-{
-    public function testSanitize()
-    {
-        $r = new Router($this->container);
-
-        $this->assertEquals('PloP', $r->sanitize('PloP', 'default'));
-        $this->assertEquals('default', $r->sanitize('', 'default'));
-        $this->assertEquals('default', $r->sanitize('123-AB', 'default'));
-        $this->assertEquals('default', $r->sanitize('R&D', 'default'));
-        $this->assertEquals('Test123', $r->sanitize('Test123', 'default'));
-        $this->assertEquals('Test_123', $r->sanitize('Test_123', 'default'));
-        $this->assertEquals('userImport', $r->sanitize('userImport', 'default'));
+    class FakeController {
+        public function beforeAction() {}
+        public function myAction() {}
     }
+}
 
-    public function testPath()
-    {
-        $r = new Router($this->container);
+namespace Kanboard\Plugin\Myplugin\Controller {
 
-        $this->assertEquals('a/b/c', $r->getPath('/a/b/c'));
-        $this->assertEquals('a/b/something', $r->getPath('/a/b/something?test=a', 'test=a'));
-
-        $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['PHP_SELF'] = '/a/index.php';
-
-        $this->assertEquals('b/c', $r->getPath('/a/b/c'));
-        $this->assertEquals('b/c', $r->getPath('/a/b/c?e=f', 'e=f'));
+    class FakeController {
+        public function beforeAction() {}
+        public function myAction() {}
     }
+}
 
-    public function testFindRouteWithEmptyTable()
+namespace {
+
+    require_once __DIR__.'/../../Base.php';
+
+    use Kanboard\Core\Helper;
+    use Kanboard\Core\Http\Route;
+    use Kanboard\Core\Http\Router;
+    use Kanboard\Core\Http\Request;
+
+    class RouterTest extends Base
     {
-        $r = new Router($this->container);
-        $this->assertEquals(array('app', 'index'), $r->findRoute(''));
-        $this->assertEquals(array('app', 'index'), $r->findRoute('/'));
-    }
+        public function testSanitize()
+        {
+            $dispatcher = new Router($this->container);
 
-    public function testFindRouteWithoutPlaceholders()
-    {
-        $r = new Router($this->container);
-        $r->addRoute('a/b', 'controller', 'action');
-        $this->assertEquals(array('app', 'index'), $r->findRoute('a/b/c'));
-        $this->assertEquals(array('controller', 'action'), $r->findRoute('a/b'));
-    }
+            $this->assertEquals('PloP', $dispatcher->sanitize('PloP', 'default'));
+            $this->assertEquals('default', $dispatcher->sanitize('', 'default'));
+            $this->assertEquals('default', $dispatcher->sanitize('123-AB', 'default'));
+            $this->assertEquals('default', $dispatcher->sanitize('R&D', 'default'));
+            $this->assertEquals('Test123', $dispatcher->sanitize('Test123', 'default'));
+            $this->assertEquals('Test_123', $dispatcher->sanitize('Test_123', 'default'));
+            $this->assertEquals('userImport', $dispatcher->sanitize('userImport', 'default'));
+        }
 
-    public function testFindRouteWithPlaceholders()
-    {
-        $r = new Router($this->container);
-        $r->addRoute('a/:myvar1/b/:myvar2', 'controller', 'action');
-        $this->assertEquals(array('app', 'index'), $r->findRoute('a/123/b'));
-        $this->assertEquals(array('controller', 'action'), $r->findRoute('a/456/b/789'));
-        $this->assertEquals(array('myvar1' => 456, 'myvar2' => 789), $_GET);
-    }
+        public function testGetPath()
+        {
+            $dispatcher = new Router($this->container);
 
-    public function testFindMultipleRoutes()
-    {
-        $r = new Router($this->container);
-        $r->addRoute('a/b', 'controller1', 'action1');
-        $r->addRoute('a/b', 'duplicate', 'duplicate');
-        $r->addRoute('a', 'controller2', 'action2');
-        $this->assertEquals(array('controller1', 'action1'), $r->findRoute('a/b'));
-        $this->assertEquals(array('controller2', 'action2'), $r->findRoute('a'));
-    }
+            $this->container['helper'] = new Helper($this->container);
+            $this->container['request'] = new Request($this->container, array('PHP_SELF' => '/index.php', 'REQUEST_URI' => '/a/b/c', 'REQUEST_METHOD' => 'GET'));
+            $this->assertEquals('a/b/c', $dispatcher->getPath());
 
-    public function testFindUrl()
-    {
-        $r = new Router($this->container);
-        $r->addRoute('a/b', 'controller1', 'action1');
-        $r->addRoute('a/:myvar1/b/:myvar2', 'controller2', 'action2', array('myvar1', 'myvar2'));
+            $this->container['helper'] = new Helper($this->container);
+            $this->container['request'] = new Request($this->container, array('PHP_SELF' => '/index.php', 'REQUEST_URI' => '/a/b/something?test=a', 'QUERY_STRING' => 'test=a', 'REQUEST_METHOD' => 'GET'));
+            $this->assertEquals('a/b/something', $dispatcher->getPath());
 
-        $this->assertEquals('a/1/b/2', $r->findUrl('controller2', 'action2', array('myvar1' => 1, 'myvar2' => 2)));
-        $this->assertEquals('', $r->findUrl('controller2', 'action2', array('myvar1' => 1)));
-        $this->assertEquals('a/b', $r->findUrl('controller1', 'action1'));
-        $this->assertEquals('', $r->findUrl('controller1', 'action2'));
+            $this->container['helper'] = new Helper($this->container);
+            $this->container['request'] = new Request($this->container, array('PHP_SELF' => '/a/index.php', 'REQUEST_URI' => '/a/b/something?test=a', 'QUERY_STRING' => 'test=a', 'REQUEST_METHOD' => 'GET'));
+            $this->assertEquals('b/something', $dispatcher->getPath());
+        }
+
+        public function testDispatcherWithControllerNotFound()
+        {
+            $this->container['request'] = new Request($this->container, array(
+                    'PHP_SELF' => '/kanboard/index.php',
+                    'REQUEST_URI' => '/kanboard/?controller=FakeControllerNotFound&action=myAction&myvar=value1',
+                    'QUERY_STRING' => 'controller=FakeControllerNotFound&action=myAction&myvar=value1',
+                    'REQUEST_METHOD' => 'GET'
+                ),
+                array(
+                    'controller' => 'FakeControllerNotFound',
+                    'action' => 'myAction',
+                    'myvar' => 'value1',
+                )
+            );
+
+            $this->setExpectedException('RuntimeException', 'Controller not found');
+
+            $dispatcher = new Router($this->container);
+            $dispatcher->dispatch();
+        }
+
+        public function testDispatcherWithActionNotFound()
+        {
+            $this->container['request'] = new Request($this->container, array(
+                    'PHP_SELF' => '/kanboard/index.php',
+                    'REQUEST_URI' => '/kanboard/?controller=FakeController&action=myActionNotFound&myvar=value1',
+                    'QUERY_STRING' => 'controller=FakeController&action=myActionNotFound&myvar=value1',
+                    'REQUEST_METHOD' => 'GET'
+                ),
+                array(
+                    'controller' => 'FakeController',
+                    'action' => 'myActionNotFound',
+                    'myvar' => 'value1',
+                )
+            );
+
+            $this->setExpectedException('RuntimeException', 'Action not implemented');
+
+            $dispatcher = new Router($this->container);
+            $dispatcher->dispatch();
+        }
+
+        public function testDispatcherWithNoUrlRewrite()
+        {
+            $this->container['request'] = new Request($this->container, array(
+                    'PHP_SELF' => '/kanboard/index.php',
+                    'REQUEST_URI' => '/kanboard/?controller=FakeController&action=myAction&myvar=value1',
+                    'QUERY_STRING' => 'controller=FakeController&action=myAction&myvar=value1',
+                    'REQUEST_METHOD' => 'GET'
+                ),
+                array(
+                    'controller' => 'FakeController',
+                    'action' => 'myAction',
+                    'myvar' => 'value1',
+                )
+            );
+
+            $dispatcher = new Router($this->container);
+            $this->assertInstanceOf('\Kanboard\Controller\FakeController', $dispatcher->dispatch());
+            $this->assertEquals('FakeController', $dispatcher->getController());
+            $this->assertEquals('myAction', $dispatcher->getAction());
+            $this->assertEquals('', $dispatcher->getPlugin());
+            $this->assertEquals('value1', $this->container['request']->getStringParam('myvar'));
+        }
+
+        public function testDispatcherWithNoUrlRewriteAndPlugin()
+        {
+            $this->container['request'] = new Request($this->container, array(
+                    'PHP_SELF' => '/kanboard/index.php',
+                    'REQUEST_URI' => '/kanboard/?controller=FakeController&action=myAction&myvar=value1&plugin=myplugin',
+                    'QUERY_STRING' => 'controller=FakeController&action=myAction&myvar=value1&plugin=myplugin',
+                    'REQUEST_METHOD' => 'GET'
+                ),
+                array(
+                    'controller' => 'FakeController',
+                    'action' => 'myAction',
+                    'myvar' => 'value1',
+                    'plugin' => 'myplugin',
+                )
+            );
+
+            $dispatcher = new Router($this->container);
+            $this->assertInstanceOf('\Kanboard\Plugin\Myplugin\Controller\FakeController', $dispatcher->dispatch());
+            $this->assertEquals('FakeController', $dispatcher->getController());
+            $this->assertEquals('myAction', $dispatcher->getAction());
+            $this->assertEquals('Myplugin', $dispatcher->getPlugin());
+            $this->assertEquals('value1', $this->container['request']->getStringParam('myvar'));
+        }
+
+        public function testDispatcherWithUrlRewrite()
+        {
+            $this->container['request'] = new Request($this->container, array(
+                    'PHP_SELF' => '/kanboard/index.php',
+                    'REQUEST_URI' => '/kanboard/my/route/123?myvar=value1',
+                    'QUERY_STRING' => 'myvar=value1',
+                    'REQUEST_METHOD' => 'GET'
+                ),
+                array(
+                    'myvar' => 'value1',
+                )
+            );
+
+            $this->container['route'] = new Route($this->container);
+            $this->container['route']->enable();
+            $dispatcher = new Router($this->container);
+
+            $this->container['route']->addRoute('/my/route/:param', 'FakeController', 'myAction');
+
+            $this->assertInstanceOf('\Kanboard\Controller\FakeController', $dispatcher->dispatch());
+            $this->assertEquals('FakeController', $dispatcher->getController());
+            $this->assertEquals('myAction', $dispatcher->getAction());
+            $this->assertEquals('', $dispatcher->getPlugin());
+            $this->assertEquals('value1', $this->container['request']->getStringParam('myvar'));
+            $this->assertEquals('123', $this->container['request']->getStringParam('param'));
+        }
+
+        public function testDispatcherWithUrlRewriteWithPlugin()
+        {
+            $this->container['request'] = new Request($this->container, array(
+                    'PHP_SELF' => '/kanboard/index.php',
+                    'REQUEST_URI' => '/kanboard/my/plugin/route/123?myvar=value1',
+                    'QUERY_STRING' => 'myvar=value1',
+                    'REQUEST_METHOD' => 'GET'
+                ),
+                array(
+                    'myvar' => 'value1',
+                )
+            );
+
+            $this->container['route'] = new Route($this->container);
+            $this->container['route']->enable();
+            $dispatcher = new Router($this->container);
+
+            $this->container['route']->addRoute('/my/plugin/route/:param', 'fakeController', 'myAction', 'Myplugin');
+
+            $this->assertInstanceOf('\Kanboard\Plugin\Myplugin\Controller\FakeController', $dispatcher->dispatch());
+            $this->assertEquals('FakeController', $dispatcher->getController());
+            $this->assertEquals('myAction', $dispatcher->getAction());
+            $this->assertEquals('Myplugin', $dispatcher->getPlugin());
+            $this->assertEquals('value1', $this->container['request']->getStringParam('myvar'));
+            $this->assertEquals('123', $this->container['request']->getStringParam('param'));
+        }
     }
 }

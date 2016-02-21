@@ -15,6 +15,9 @@ class TotpAuthTest extends Base
     public function testGetSecret()
     {
         $provider = new TotpAuth($this->container);
+        $this->assertEmpty($provider->getSecret());
+
+        $provider->generateSecret();
         $secret = $provider->getSecret();
 
         $this->assertNotEmpty($secret);
@@ -48,7 +51,7 @@ class TotpAuthTest extends Base
     {
         $provider = new TotpAuth($this->container);
 
-        $secret = $provider->getSecret();
+        $secret = $provider->generateSecret();
         $this->assertNotEmpty($secret);
 
         $provider->setCode('1234');

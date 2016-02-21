@@ -19,18 +19,18 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
     /**
      * User pin code
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $code = '';
+    protected $code = '';
 
     /**
      * Private key
      *
-     * @access private
+     * @access protected
      * @var string
      */
-    private $secret = '';
+    protected $secret = '';
 
     /**
      * Get authentication provider name
@@ -40,7 +40,7 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
      */
     public function getName()
     {
-        return 'Time-based One-time Password Algorithm';
+        return t('Time-based One-time Password Algorithm');
     }
 
     /**
@@ -56,6 +56,16 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
     }
 
     /**
+     * Called before to prompt the user
+     *
+     * @access public
+     */
+    public function beforeCode()
+    {
+
+    }
+
+    /**
      * Set validation code
      *
      * @access public
@@ -64,6 +74,18 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
     public function setCode($code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * Generate secret
+     *
+     * @access public
+     * @return string
+     */
+    public function generateSecret()
+    {
+        $this->secret = GoogleAuthenticator::generateRandom();
+        return $this->secret;
     }
 
     /**
@@ -85,10 +107,6 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
      */
     public function getSecret()
     {
-        if (empty($this->secret)) {
-            $this->secret = GoogleAuthenticator::generateRandom();
-        }
-
         return $this->secret;
     }
 

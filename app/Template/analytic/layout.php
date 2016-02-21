@@ -19,7 +19,7 @@
                 <i class="fa fa-calendar fa-fw"></i>
                 <?= $this->url->link(t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
             </li>
-            <?php if ($this->user->hasProjectAccess('project', 'edit', $project['id'])): ?>
+            <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
             <li>
                 <i class="fa fa-cog fa-fw"></i>
                 <?= $this->url->link(t('Project settings'), 'project', 'show', array('project_id' => $project['id'])) ?>
@@ -31,9 +31,8 @@
             </li>
         </ul>
     </div>
-    <section class="sidebar-container" id="analytic-section">
-
-        <?= $this->render('analytic/sidebar', array('project' => $project)) ?>
+    <section class="sidebar-container">
+        <?= $this->render($sidebar_template, array('project' => $project)) ?>
 
         <div class="sidebar-content">
             <?= $content_for_sublayout ?>

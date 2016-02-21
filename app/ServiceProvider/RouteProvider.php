@@ -4,6 +4,7 @@ namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Kanboard\Core\Http\Route;
 use Kanboard\Core\Http\Router;
 
 /**
@@ -24,175 +25,175 @@ class RouteProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         $container['router'] = new Router($container);
+        $container['route'] = new Route($container);
 
         if (ENABLE_URL_REWRITE) {
+            $container['route']->enable();
+
             // Dashboard
-            $container['router']->addRoute('dashboard', 'app', 'index');
-            $container['router']->addRoute('dashboard/:user_id', 'app', 'index', array('user_id'));
-            $container['router']->addRoute('dashboard/:user_id/projects', 'app', 'projects', array('user_id'));
-            $container['router']->addRoute('dashboard/:user_id/tasks', 'app', 'tasks', array('user_id'));
-            $container['router']->addRoute('dashboard/:user_id/subtasks', 'app', 'subtasks', array('user_id'));
-            $container['router']->addRoute('dashboard/:user_id/calendar', 'app', 'calendar', array('user_id'));
-            $container['router']->addRoute('dashboard/:user_id/activity', 'app', 'activity', array('user_id'));
+            $container['route']->addRoute('dashboard', 'app', 'index');
+            $container['route']->addRoute('dashboard/:user_id', 'app', 'index');
+            $container['route']->addRoute('dashboard/:user_id/projects', 'app', 'projects');
+            $container['route']->addRoute('dashboard/:user_id/tasks', 'app', 'tasks');
+            $container['route']->addRoute('dashboard/:user_id/subtasks', 'app', 'subtasks');
+            $container['route']->addRoute('dashboard/:user_id/calendar', 'app', 'calendar');
+            $container['route']->addRoute('dashboard/:user_id/activity', 'app', 'activity');
+            $container['route']->addRoute('dashboard/:user_id/notifications', 'app', 'notifications');
 
             // Search routes
-            $container['router']->addRoute('search', 'search', 'index');
-            $container['router']->addRoute('search/:search', 'search', 'index', array('search'));
+            $container['route']->addRoute('search', 'search', 'index');
+            $container['route']->addRoute('search/:search', 'search', 'index');
+
+            // ProjectCreation routes
+            $container['route']->addRoute('project/create', 'ProjectCreation', 'create');
+            $container['route']->addRoute('project/create/private', 'ProjectCreation', 'createPrivate');
 
             // Project routes
-            $container['router']->addRoute('projects', 'project', 'index');
-            $container['router']->addRoute('project/create', 'project', 'create');
-            $container['router']->addRoute('project/create/private', 'project', 'createPrivate');
-            $container['router']->addRoute('project/:project_id', 'project', 'show', array('project_id'));
-            $container['router']->addRoute('p/:project_id', 'project', 'show', array('project_id'));
-            $container['router']->addRoute('project/:project_id/customer-filter', 'customfilter', 'index', array('project_id'));
-            $container['router']->addRoute('project/:project_id/share', 'project', 'share', array('project_id'));
-            $container['router']->addRoute('project/:project_id/notifications', 'project', 'notifications', array('project_id'));
-            $container['router']->addRoute('project/:project_id/edit', 'project', 'edit', array('project_id'));
-            $container['router']->addRoute('project/:project_id/integrations', 'project', 'integrations', array('project_id'));
-            $container['router']->addRoute('project/:project_id/duplicate', 'project', 'duplicate', array('project_id'));
-            $container['router']->addRoute('project/:project_id/remove', 'project', 'remove', array('project_id'));
-            $container['router']->addRoute('project/:project_id/disable', 'project', 'disable', array('project_id'));
-            $container['router']->addRoute('project/:project_id/enable', 'project', 'enable', array('project_id'));
-            $container['router']->addRoute('project/:project_id/permissions', 'ProjectPermission', 'index', array('project_id'));
-            $container['router']->addRoute('project/:project_id/import', 'taskImport', 'step1', array('project_id'));
+            $container['route']->addRoute('projects', 'project', 'index');
+            $container['route']->addRoute('project/:project_id', 'project', 'show');
+            $container['route']->addRoute('p/:project_id', 'project', 'show');
+            $container['route']->addRoute('project/:project_id/customer-filters', 'customfilter', 'index');
+            $container['route']->addRoute('project/:project_id/share', 'project', 'share');
+            $container['route']->addRoute('project/:project_id/notifications', 'project', 'notifications');
+            $container['route']->addRoute('project/:project_id/integrations', 'project', 'integrations');
+            $container['route']->addRoute('project/:project_id/duplicate', 'project', 'duplicate');
+            $container['route']->addRoute('project/:project_id/remove', 'project', 'remove');
+            $container['route']->addRoute('project/:project_id/disable', 'project', 'disable');
+            $container['route']->addRoute('project/:project_id/enable', 'project', 'enable');
+            $container['route']->addRoute('project/:project_id/permissions', 'ProjectPermission', 'index');
+            $container['route']->addRoute('project/:project_id/import', 'taskImport', 'step1');
+
+            // Project Overview
+            $container['route']->addRoute('project/:project_id/overview', 'ProjectOverview', 'show');
+
+            // ProjectEdit routes
+            $container['route']->addRoute('project/:project_id/edit', 'ProjectEdit', 'edit');
+            $container['route']->addRoute('project/:project_id/edit/dates', 'ProjectEdit', 'dates');
+            $container['route']->addRoute('project/:project_id/edit/description', 'ProjectEdit', 'description');
+            $container['route']->addRoute('project/:project_id/edit/priority', 'ProjectEdit', 'priority');
+
+            // ProjectUser routes
+            $container['route']->addRoute('projects/managers/:user_id', 'projectuser', 'managers');
+            $container['route']->addRoute('projects/members/:user_id', 'projectuser', 'members');
+            $container['route']->addRoute('projects/tasks/:user_id/opens', 'projectuser', 'opens');
+            $container['route']->addRoute('projects/tasks/:user_id/closed', 'projectuser', 'closed');
+            $container['route']->addRoute('projects/managers', 'projectuser', 'managers');
 
             // Action routes
-            $container['router']->addRoute('project/:project_id/actions', 'action', 'index', array('project_id'));
-            $container['router']->addRoute('project/:project_id/action/:action_id/confirm', 'action', 'confirm', array('project_id', 'action_id'));
+            $container['route']->addRoute('project/:project_id/actions', 'action', 'index');
 
             // Column routes
-            $container['router']->addRoute('project/:project_id/columns', 'column', 'index', array('project_id'));
-            $container['router']->addRoute('project/:project_id/column/:column_id/edit', 'column', 'edit', array('project_id', 'column_id'));
-            $container['router']->addRoute('project/:project_id/column/:column_id/confirm', 'column', 'confirm', array('project_id', 'column_id'));
-            $container['router']->addRoute('project/:project_id/column/:column_id/move/:direction', 'column', 'move', array('project_id', 'column_id', 'direction'));
+            $container['route']->addRoute('project/:project_id/columns', 'column', 'index');
 
             // Swimlane routes
-            $container['router']->addRoute('project/:project_id/swimlanes', 'swimlane', 'index', array('project_id'));
-            $container['router']->addRoute('project/:project_id/swimlane/:swimlane_id/edit', 'swimlane', 'edit', array('project_id', 'swimlane_id'));
-            $container['router']->addRoute('project/:project_id/swimlane/:swimlane_id/confirm', 'swimlane', 'confirm', array('project_id', 'swimlane_id'));
-            $container['router']->addRoute('project/:project_id/swimlane/:swimlane_id/disable', 'swimlane', 'disable', array('project_id', 'swimlane_id'));
-            $container['router']->addRoute('project/:project_id/swimlane/:swimlane_id/enable', 'swimlane', 'enable', array('project_id', 'swimlane_id'));
-            $container['router']->addRoute('project/:project_id/swimlane/:swimlane_id/up', 'swimlane', 'moveup', array('project_id', 'swimlane_id'));
-            $container['router']->addRoute('project/:project_id/swimlane/:swimlane_id/down', 'swimlane', 'movedown', array('project_id', 'swimlane_id'));
+            $container['route']->addRoute('project/:project_id/swimlanes', 'swimlane', 'index');
 
             // Category routes
-            $container['router']->addRoute('project/:project_id/categories', 'category', 'index', array('project_id'));
-            $container['router']->addRoute('project/:project_id/category/:category_id/edit', 'category', 'edit', array('project_id', 'category_id'));
-            $container['router']->addRoute('project/:project_id/category/:category_id/confirm', 'category', 'confirm', array('project_id', 'category_id'));
+            $container['route']->addRoute('project/:project_id/categories', 'category', 'index');
 
             // Task routes
-            $container['router']->addRoute('project/:project_id/task/:task_id', 'task', 'show', array('project_id', 'task_id'));
-            $container['router']->addRoute('t/:task_id', 'task', 'show', array('task_id'));
-            $container['router']->addRoute('public/task/:task_id/:token', 'task', 'readonly', array('task_id', 'token'));
+            $container['route']->addRoute('project/:project_id/task/:task_id', 'task', 'show');
+            $container['route']->addRoute('t/:task_id', 'task', 'show');
+            $container['route']->addRoute('public/task/:task_id/:token', 'task', 'readonly');
 
-            $container['router']->addRoute('project/:project_id/task/:task_id/activity', 'activity', 'task', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/screenshot', 'file', 'screenshot', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/upload', 'file', 'create', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/comment', 'comment', 'create', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/link', 'tasklink', 'create', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/transitions', 'task', 'transitions', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/analytics', 'task', 'analytics', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/remove', 'task', 'remove', array('project_id', 'task_id'));
-
-            $container['router']->addRoute('project/:project_id/task/:task_id/edit', 'taskmodification', 'edit', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/description', 'taskmodification', 'description', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/recurrence', 'taskmodification', 'recurrence', array('project_id', 'task_id'));
-
-            $container['router']->addRoute('project/:project_id/task/:task_id/close', 'taskstatus', 'close', array('task_id', 'project_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/open', 'taskstatus', 'open', array('task_id', 'project_id'));
-
-            $container['router']->addRoute('project/:project_id/task/:task_id/duplicate', 'taskduplication', 'duplicate', array('task_id', 'project_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/copy', 'taskduplication', 'copy', array('task_id', 'project_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/copy/:dst_project_id', 'taskduplication', 'copy', array('task_id', 'project_id', 'dst_project_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/move', 'taskduplication', 'move', array('task_id', 'project_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/move/:dst_project_id', 'taskduplication', 'move', array('task_id', 'project_id', 'dst_project_id'));
+            $container['route']->addRoute('project/:project_id/task/:task_id/activity', 'activity', 'task');
+            $container['route']->addRoute('project/:project_id/task/:task_id/transitions', 'task', 'transitions');
+            $container['route']->addRoute('project/:project_id/task/:task_id/analytics', 'task', 'analytics');
+            $container['route']->addRoute('project/:project_id/task/:task_id/subtasks', 'subtask', 'show');
+            $container['route']->addRoute('project/:project_id/task/:task_id/time-tracking', 'task', 'timetracking');
+            $container['route']->addRoute('project/:project_id/task/:task_id/internal/links', 'tasklink', 'show');
+            $container['route']->addRoute('project/:project_id/task/:task_id/external/links', 'TaskExternalLink', 'show');
 
             // Exports
-            $container['router']->addRoute('export/tasks/:project_id', 'export', 'tasks', array('project_id'));
-            $container['router']->addRoute('export/subtasks/:project_id', 'export', 'subtasks', array('project_id'));
-            $container['router']->addRoute('export/transitions/:project_id', 'export', 'transitions', array('project_id'));
-            $container['router']->addRoute('export/summary/:project_id', 'export', 'summary', array('project_id'));
+            $container['route']->addRoute('export/tasks/:project_id', 'export', 'tasks');
+            $container['route']->addRoute('export/subtasks/:project_id', 'export', 'subtasks');
+            $container['route']->addRoute('export/transitions/:project_id', 'export', 'transitions');
+            $container['route']->addRoute('export/summary/:project_id', 'export', 'summary');
+
+            // Analytics routes
+            $container['route']->addRoute('analytics/tasks/:project_id', 'analytic', 'tasks');
+            $container['route']->addRoute('analytics/users/:project_id', 'analytic', 'users');
+            $container['route']->addRoute('analytics/cfd/:project_id', 'analytic', 'cfd');
+            $container['route']->addRoute('analytics/burndown/:project_id', 'analytic', 'burndown');
+            $container['route']->addRoute('analytics/average-time-column/:project_id', 'analytic', 'averageTimeByColumn');
+            $container['route']->addRoute('analytics/lead-cycle-time/:project_id', 'analytic', 'leadAndCycleTime');
+            $container['route']->addRoute('analytics/estimated-spent-time/:project_id', 'analytic', 'compareHours');
 
             // Board routes
-            $container['router']->addRoute('board/:project_id', 'board', 'show', array('project_id'));
-            $container['router']->addRoute('b/:project_id', 'board', 'show', array('project_id'));
-            $container['router']->addRoute('public/board/:token', 'board', 'readonly', array('token'));
+            $container['route']->addRoute('board/:project_id', 'board', 'show');
+            $container['route']->addRoute('b/:project_id', 'board', 'show');
+            $container['route']->addRoute('public/board/:token', 'board', 'readonly');
 
             // Calendar routes
-            $container['router']->addRoute('calendar/:project_id', 'calendar', 'show', array('project_id'));
-            $container['router']->addRoute('c/:project_id', 'calendar', 'show', array('project_id'));
+            $container['route']->addRoute('calendar/:project_id', 'calendar', 'show');
+            $container['route']->addRoute('c/:project_id', 'calendar', 'show');
 
             // Listing routes
-            $container['router']->addRoute('list/:project_id', 'listing', 'show', array('project_id'));
-            $container['router']->addRoute('l/:project_id', 'listing', 'show', array('project_id'));
+            $container['route']->addRoute('list/:project_id', 'listing', 'show');
+            $container['route']->addRoute('l/:project_id', 'listing', 'show');
 
             // Gantt routes
-            $container['router']->addRoute('gantt/:project_id', 'gantt', 'project', array('project_id'));
-            $container['router']->addRoute('gantt/:project_id/sort/:sorting', 'gantt', 'project', array('project_id', 'sorting'));
-
-            // Subtask routes
-            $container['router']->addRoute('project/:project_id/task/:task_id/subtask/create', 'subtask', 'create', array('project_id', 'task_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/subtask/:subtask_id/remove', 'subtask', 'confirm', array('project_id', 'task_id', 'subtask_id'));
-            $container['router']->addRoute('project/:project_id/task/:task_id/subtask/:subtask_id/edit', 'subtask', 'edit', array('project_id', 'task_id', 'subtask_id'));
+            $container['route']->addRoute('gantt/:project_id', 'gantt', 'project');
+            $container['route']->addRoute('gantt/:project_id/sort/:sorting', 'gantt', 'project');
 
             // Feed routes
-            $container['router']->addRoute('feed/project/:token', 'feed', 'project', array('token'));
-            $container['router']->addRoute('feed/user/:token', 'feed', 'user', array('token'));
+            $container['route']->addRoute('feed/project/:token', 'feed', 'project');
+            $container['route']->addRoute('feed/user/:token', 'feed', 'user');
 
             // Ical routes
-            $container['router']->addRoute('ical/project/:token', 'ical', 'project', array('token'));
-            $container['router']->addRoute('ical/user/:token', 'ical', 'user', array('token'));
+            $container['route']->addRoute('ical/project/:token', 'ical', 'project');
+            $container['route']->addRoute('ical/user/:token', 'ical', 'user');
 
             // Users
-            $container['router']->addRoute('users', 'user', 'index');
-            $container['router']->addRoute('user/show/:user_id', 'user', 'show', array('user_id'));
-            $container['router']->addRoute('user/show/:user_id/timesheet', 'user', 'timesheet', array('user_id'));
-            $container['router']->addRoute('user/show/:user_id/last-logins', 'user', 'last', array('user_id'));
-            $container['router']->addRoute('user/show/:user_id/sessions', 'user', 'sessions', array('user_id'));
-            $container['router']->addRoute('user/:user_id/edit', 'user', 'edit', array('user_id'));
-            $container['router']->addRoute('user/:user_id/password', 'user', 'password', array('user_id'));
-            $container['router']->addRoute('user/:user_id/share', 'user', 'share', array('user_id'));
-            $container['router']->addRoute('user/:user_id/notifications', 'user', 'notifications', array('user_id'));
-            $container['router']->addRoute('user/:user_id/accounts', 'user', 'external', array('user_id'));
-            $container['router']->addRoute('user/:user_id/integrations', 'user', 'integrations', array('user_id'));
-            $container['router']->addRoute('user/:user_id/authentication', 'user', 'authentication', array('user_id'));
-            $container['router']->addRoute('user/:user_id/remove', 'user', 'remove', array('user_id'));
-            $container['router']->addRoute('user/:user_id/2fa', 'twofactor', 'index', array('user_id'));
+            $container['route']->addRoute('users', 'user', 'index');
+            $container['route']->addRoute('user/profile/:user_id', 'user', 'profile');
+            $container['route']->addRoute('user/show/:user_id', 'user', 'show');
+            $container['route']->addRoute('user/show/:user_id/timesheet', 'user', 'timesheet');
+            $container['route']->addRoute('user/show/:user_id/last-logins', 'user', 'last');
+            $container['route']->addRoute('user/show/:user_id/sessions', 'user', 'sessions');
+            $container['route']->addRoute('user/:user_id/edit', 'user', 'edit');
+            $container['route']->addRoute('user/:user_id/password', 'user', 'password');
+            $container['route']->addRoute('user/:user_id/share', 'user', 'share');
+            $container['route']->addRoute('user/:user_id/notifications', 'user', 'notifications');
+            $container['route']->addRoute('user/:user_id/accounts', 'user', 'external');
+            $container['route']->addRoute('user/:user_id/integrations', 'user', 'integrations');
+            $container['route']->addRoute('user/:user_id/authentication', 'user', 'authentication');
+            $container['route']->addRoute('user/:user_id/2fa', 'twofactor', 'index');
 
             // Groups
-            $container['router']->addRoute('groups', 'group', 'index');
-            $container['router']->addRoute('groups/create', 'group', 'create');
-            $container['router']->addRoute('group/:group_id/associate', 'group', 'associate', array('group_id'));
-            $container['router']->addRoute('group/:group_id/dissociate/:user_id', 'group', 'dissociate', array('group_id', 'user_id'));
-            $container['router']->addRoute('group/:group_id/edit', 'group', 'edit', array('group_id'));
-            $container['router']->addRoute('group/:group_id/members', 'group', 'users', array('group_id'));
-            $container['router']->addRoute('group/:group_id/remove', 'group', 'confirm', array('group_id'));
+            $container['route']->addRoute('groups', 'group', 'index');
+            $container['route']->addRoute('groups/create', 'group', 'create');
+            $container['route']->addRoute('group/:group_id/associate', 'group', 'associate');
+            $container['route']->addRoute('group/:group_id/dissociate/:user_id', 'group', 'dissociate');
+            $container['route']->addRoute('group/:group_id/edit', 'group', 'edit');
+            $container['route']->addRoute('group/:group_id/members', 'group', 'users');
+            $container['route']->addRoute('group/:group_id/remove', 'group', 'confirm');
 
             // Config
-            $container['router']->addRoute('settings', 'config', 'index');
-            $container['router']->addRoute('settings/plugins', 'config', 'plugins');
-            $container['router']->addRoute('settings/application', 'config', 'application');
-            $container['router']->addRoute('settings/project', 'config', 'project');
-            $container['router']->addRoute('settings/project', 'config', 'project');
-            $container['router']->addRoute('settings/board', 'config', 'board');
-            $container['router']->addRoute('settings/calendar', 'config', 'calendar');
-            $container['router']->addRoute('settings/integrations', 'config', 'integrations');
-            $container['router']->addRoute('settings/webhook', 'config', 'webhook');
-            $container['router']->addRoute('settings/api', 'config', 'api');
-            $container['router']->addRoute('settings/links', 'link', 'index');
-            $container['router']->addRoute('settings/currencies', 'currency', 'index');
+            $container['route']->addRoute('settings', 'config', 'index');
+            $container['route']->addRoute('settings/plugins', 'config', 'plugins');
+            $container['route']->addRoute('settings/application', 'config', 'application');
+            $container['route']->addRoute('settings/project', 'config', 'project');
+            $container['route']->addRoute('settings/project', 'config', 'project');
+            $container['route']->addRoute('settings/board', 'config', 'board');
+            $container['route']->addRoute('settings/calendar', 'config', 'calendar');
+            $container['route']->addRoute('settings/integrations', 'config', 'integrations');
+            $container['route']->addRoute('settings/webhook', 'config', 'webhook');
+            $container['route']->addRoute('settings/api', 'config', 'api');
+            $container['route']->addRoute('settings/links', 'link', 'index');
+            $container['route']->addRoute('settings/currencies', 'currency', 'index');
 
             // Doc
-            $container['router']->addRoute('documentation/:file', 'doc', 'show', array('file'));
-            $container['router']->addRoute('documentation', 'doc', 'show');
+            $container['route']->addRoute('documentation/:file', 'doc', 'show');
+            $container['route']->addRoute('documentation', 'doc', 'show');
 
             // Auth routes
-            $container['router']->addRoute('oauth/google', 'oauth', 'google');
-            $container['router']->addRoute('oauth/github', 'oauth', 'github');
-            $container['router']->addRoute('oauth/gitlab', 'oauth', 'gitlab');
-            $container['router']->addRoute('login', 'auth', 'login');
-            $container['router']->addRoute('logout', 'auth', 'logout');
+            $container['route']->addRoute('login', 'auth', 'login');
+            $container['route']->addRoute('logout', 'auth', 'logout');
+
+            // PasswordReset
+            $container['route']->addRoute('forgot-password', 'PasswordReset', 'create');
+            $container['route']->addRoute('forgot-password/change/:token', 'PasswordReset', 'change');
         }
 
         return $container;

@@ -4,7 +4,6 @@ namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use League\HTMLToMarkdown\HtmlConverter;
 use Kanboard\Core\Mail\Client as EmailClient;
 use Kanboard\Core\ObjectStorage\FileStorage;
 use Kanboard\Core\Paginator;
@@ -15,26 +14,34 @@ use Kanboard\Core\Http\Client as HttpClient;
 class ClassProvider implements ServiceProviderInterface
 {
     private $classes = array(
+        'Analytic' => array(
+            'TaskDistributionAnalytic',
+            'UserDistributionAnalytic',
+            'EstimatedTimeComparisonAnalytic',
+            'AverageLeadCycleTimeAnalytic',
+            'AverageTimeSpentColumnAnalytic',
+        ),
         'Model' => array(
             'Action',
-            'Authentication',
+            'ActionParameter',
             'Board',
             'Category',
             'Color',
+            'Column',
             'Comment',
             'Config',
             'Currency',
             'CustomFilter',
-            'File',
             'Group',
             'GroupMember',
             'LastLogin',
             'Link',
             'Notification',
             'OverdueNotification',
+            'PasswordReset',
             'Project',
+            'ProjectFile',
             'ProjectActivity',
-            'ProjectAnalytic',
             'ProjectDuplication',
             'ProjectDailyColumnStats',
             'ProjectDailyStats',
@@ -42,7 +49,9 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectNotification',
             'ProjectMetadata',
             'ProjectGroupRole',
+            'ProjectGroupRoleFilter',
             'ProjectUserRole',
+            'ProjectUserRoleFilter',
             'RememberMeSession',
             'Subtask',
             'SubtaskExport',
@@ -53,20 +62,22 @@ class ClassProvider implements ServiceProviderInterface
             'TaskCreation',
             'TaskDuplication',
             'TaskExport',
+            'TaskExternalLink',
             'TaskFinder',
+            'TaskFile',
             'TaskFilter',
             'TaskLink',
             'TaskModification',
             'TaskPermission',
             'TaskPosition',
             'TaskStatus',
-            'TaskValidator',
             'TaskImport',
             'TaskMetadata',
             'Transition',
             'User',
             'UserImport',
             'UserLocking',
+            'UserMention',
             'UserNotification',
             'UserNotificationFilter',
             'UserUnreadNotification',
@@ -81,11 +92,33 @@ class ClassProvider implements ServiceProviderInterface
             'UserFilterAutoCompleteFormatter',
             'GroupAutoCompleteFormatter',
         ),
+        'Validator' => array(
+            'ActionValidator',
+            'AuthValidator',
+            'CategoryValidator',
+            'ColumnValidator',
+            'CommentValidator',
+            'CurrencyValidator',
+            'CustomFilterValidator',
+            'ExternalLinkValidator',
+            'GroupValidator',
+            'LinkValidator',
+            'PasswordResetValidator',
+            'ProjectValidator',
+            'SubtaskValidator',
+            'SwimlaneValidator',
+            'TaskValidator',
+            'TaskLinkValidator',
+            'UserValidator',
+        ),
         'Core' => array(
             'DateParser',
             'Helper',
             'Lexer',
             'Template',
+        ),
+        'Core\Event' => array(
+            'EventManager',
         ),
         'Core\Http' => array(
             'Request',
@@ -107,11 +140,6 @@ class ClassProvider implements ServiceProviderInterface
             'UserSync',
             'UserSession',
             'UserProfile',
-        ),
-        'Integration' => array(
-            'BitbucketWebhook',
-            'GithubWebhook',
-            'GitlabWebhook',
         )
     );
 
@@ -131,10 +159,6 @@ class ClassProvider implements ServiceProviderInterface
             return new HttpClient($c);
         };
 
-        $container['htmlConverter'] = function () {
-            return new HtmlConverter(array('strip_tags' => true));
-        };
-
         $container['objectStorage'] = function () {
             return new FileStorage(FILES_DIR);
         };
@@ -147,7 +171,11 @@ class ClassProvider implements ServiceProviderInterface
             return $mailer;
         };
 
-        $container['cspRules'] = array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '* data:');
+        $container['cspRules'] = array(
+            'default-src' => "'self'",
+            'style-src' => "'self' 'unsafe-inline'",
+            'img-src' => '* data:',
+        );
 
         return $container;
     }

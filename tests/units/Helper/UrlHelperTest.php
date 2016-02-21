@@ -4,14 +4,36 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Helper\Url;
 use Kanboard\Model\Config;
+use Kanboard\Core\Http\Request;
 
 class UrlHelperTest extends Base
 {
-    public function testLink()
+    public function testPluginLink()
     {
         $h = new Url($this->container);
         $this->assertEquals(
-            '<a href="?controller=a&amp;action=b&amp;d=e" class="f" title="g" target="_blank">label</a>',
+            '<a href="?controller=a&amp;action=b&amp;d=e&amp;plugin=something" class="f" title=\'g\' target="_blank">label</a>',
+            $h->link('label', 'a', 'b', array('d' => 'e', 'plugin' => 'something'), false, 'f', 'g', true)
+        );
+    }
+
+    public function testPluginLinkWithRouteDefined()
+    {
+        $this->container['route']->enable();
+        $this->container['route']->addRoute('/myplugin/something/:d', 'a', 'b', 'something');
+
+        $h = new Url($this->container);
+        $this->assertEquals(
+            '<a href="myplugin/something/e" class="f" title=\'g\' target="_blank">label</a>',
+            $h->link('label', 'a', 'b', array('d' => 'e', 'plugin' => 'something'), false, 'f', 'g', true)
+        );
+    }
+
+    public function testAppLink()
+    {
+        $h = new Url($this->container);
+        $this->assertEquals(
+            '<a href="?controller=a&amp;action=b&amp;d=e" class="f" title=\'g\' target="_blank">label</a>',
             $h->link('label', 'a', 'b', array('d' => 'e'), false, 'f', 'g', true)
         );
     }
@@ -36,48 +58,66 @@ class UrlHelperTest extends Base
 
     public function testDir()
     {
-        $h = new Url($this->container);
-        $this->assertEquals('', $h->dir());
+        $this->container['request'] = new Request($this->container, array(
+                'PHP_SELF' => '/kanboard/index.php',
+                'REQUEST_METHOD' => 'GET'
+            )
+        );
 
-        $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['PHP_SELF'] = '/plop/index.php';
         $h = new Url($this->container);
-        $this->assertEquals('/plop/', $h->dir());
+        $this->assertEquals('/kanboard/', $h->dir());
 
-        $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['PHP_SELF'] = '';
+        $this->container['request'] = new Request($this->container, array(
+                'PHP_SELF' => '/index.php',
+                'REQUEST_METHOD' => 'GET'
+            )
+        );
+
         $h = new Url($this->container);
         $this->assertEquals('/', $h->dir());
     }
 
     public function testServer()
     {
-        $h = new Url($this->container);
+        $this->container['request'] = new Request($this->container, array(
+                'PHP_SELF' => '/index.php',
+                'REQUEST_METHOD' => 'GET',
+                'SERVER_NAME' => 'localhost',
+                'SERVER_PORT' => 80,
+            )
+        );
 
+        $h = new Url($this->container);
         $this->assertEquals('http://localhost/', $h->server());
 
-        $_SERVER['PHP_SELF'] = '/';
-        $_SERVER['SERVER_NAME'] = 'kb';
-        $_SERVER['SERVER_PORT'] = 1234;
+        $this->container['request'] = new Request($this->container, array(
+                'PHP_SELF' => '/index.php',
+                'REQUEST_METHOD' => 'GET',
+                'SERVER_NAME' => 'kb',
+                'SERVER_PORT' => 1234,
+            )
+        );
 
+        $h = new Url($this->container);
         $this->assertEquals('http://kb:1234/', $h->server());
     }
 
     public function testBase()
     {
-        $h = new Url($this->container);
-
-        $this->assertEquals('http://localhost/', $h->base());
-
-        $_SERVER['PHP_SELF'] = '/';
-        $_SERVER['SERVER_NAME'] = 'kb';
-        $_SERVER['SERVER_PORT'] = 1234;
+        $this->container['request'] = new Request($this->container, array(
+                'PHP_SELF' => '/index.php',
+                'REQUEST_METHOD' => 'GET',
+                'SERVER_NAME' => 'kb',
+                'SERVER_PORT' => 1234,
+            )
+        );
 
         $h = new Url($this->container);
         $this->assertEquals('http://kb:1234/', $h->base());
 
         $c = new Config($this->container);
         $c->save(array('application_url' => 'https://mykanboard/'));
+        $this->container['memoryCache']->flush();
 
         $h = new Url($this->container);
         $this->assertEquals('https://mykanboard/', $c->get('application_url'));
