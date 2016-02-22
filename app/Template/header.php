@@ -38,19 +38,24 @@
                     </span>
                 <?php endif ?>
 
+                <?php $has_project_creation_access = $this->user->hasAccess('ProjectCreation', 'create'); ?>
+                <?php $is_private_project_enabled = $this->app->config('disable_private_project', 0) == 0; ?>
+
+                <?php if ($has_project_creation_access || (!$has_project_creation_access && $is_private_project_enabled)): ?>
                 <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-plus fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
-                        <?php if ($this->user->hasAccess('ProjectCreation', 'create')): ?>
+                        <?php if ($has_project_creation_access): ?>
                             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?></li>
                         <?php endif ?>
-                        <?php if ($this->app->config('disable_private_project', 0) == 0): ?>
+                        <?php if ($is_private_project_enabled): ?>
                         <li>
                             <i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
                         </li>
                         <?php endif ?>
                     </ul>
                 </div>
+                <?php endif ?>
 
                 <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i></a>
