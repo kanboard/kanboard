@@ -138,6 +138,8 @@ a.board-swimlane-toggle:focus {
 .draggable-item {
     cursor: pointer;
     user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 .draggable-placeholder {
