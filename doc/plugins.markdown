@@ -21,6 +21,7 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 - [Authentication plugin registration](plugin-authentication.markdown)
 - [Authorization Architecture](plugin-authorization-architecture.markdown)
 - [Custom Group Providers](plugin-group-provider.markdown)
+- [External Link Providers](plugin-external-link.markdown)
 - [LDAP client](plugin-ldap-client.markdown)
 
 Examples of plugins

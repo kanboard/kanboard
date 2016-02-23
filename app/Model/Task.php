@@ -42,6 +42,7 @@ class Task extends Base
     const EVENT_ASSIGNEE_CHANGE = 'task.assignee_change';
     const EVENT_OVERDUE         = 'task.overdue';
     const EVENT_USER_MENTION    = 'task.user.mention';
+    const EVENT_DAILY_CRONJOB   = 'task.cronjob.daily';
 
     /**
      * Recurrence: status
@@ -91,7 +92,7 @@ class Task extends Base
             return false;
         }
 
-        $this->file->removeAll($task_id);
+        $this->taskFile->removeAll($task_id);
 
         return $this->db->table(self::TABLE)->eq('id', $task_id)->remove();
     }
@@ -197,5 +198,26 @@ class Task extends Base
         }
 
         return round(($position * 100) / count($columns), 1);
+    }
+
+    /**
+     * Helper method to duplicate all tasks to another project
+     *
+     * @access public
+     * @param  integer $src_project_id
+     * @param  integer $dst_project_id
+     * @return boolean
+     */
+    public function duplicate($src_project_id, $dst_project_id)
+    {
+        $task_ids = $this->taskFinder->getAllIds($src_project_id, array(Task::STATUS_OPEN, Task::STATUS_CLOSED));
+
+        foreach ($task_ids as $task_id) {
+            if (! $this->taskDuplication->duplicateToProject($task_id, $dst_project_id)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

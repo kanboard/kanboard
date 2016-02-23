@@ -52,6 +52,7 @@ Usage
 - [Projects](api-project-procedures.markdown)
 - [Project Permissions](api-project-permission-procedures.markdown)
 - [Boards](api-board-procedures.markdown)
+- [Columns](api-column-procedures.markdown)
 - [Swimlanes](api-swimlane-procedures.markdown)
 - [Categories](api-category-procedures.markdown)
 - [Automatic Actions](api-action-procedures.markdown)

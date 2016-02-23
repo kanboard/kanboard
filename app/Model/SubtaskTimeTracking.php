@@ -302,11 +302,11 @@ class SubtaskTimeTracking extends Base
     {
         $hook = 'model:subtask-time-tracking:calculate:time-spent';
         $start_time = $this->db
-                           ->table(self::TABLE)
-                           ->eq('subtask_id', $subtask_id)
-                           ->eq('user_id', $user_id)
-                           ->eq('end', 0)
-                           ->findOneColumn('start');
+            ->table(self::TABLE)
+            ->eq('subtask_id', $subtask_id)
+            ->eq('user_id', $user_id)
+            ->eq('end', 0)
+            ->findOneColumn('start');
 
         if (empty($start_time)) {
             return 0;

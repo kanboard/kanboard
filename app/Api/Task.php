@@ -75,9 +75,9 @@ class Task extends Base
     }
 
     public function createTask($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0,
-                               $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0,
-                               $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0,
-                               $recurrence_basedate = 0, $reference = '')
+                                $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0,
+                                $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0,
+                                $recurrence_basedate = 0, $reference = '')
     {
         $this->checkProjectPermission($project_id);
 
@@ -115,9 +115,9 @@ class Task extends Base
     }
 
     public function updateTask($id, $title = null, $color_id = null, $owner_id = null,
-                               $date_due = null, $description = null, $category_id = null, $score = null,
-                               $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
-                               $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null)
+                                $date_due = null, $description = null, $category_id = null, $score = null,
+                                $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
+                                $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null)
     {
         $this->checkTaskPermission($id);
 

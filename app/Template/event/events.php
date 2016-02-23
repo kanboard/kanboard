@@ -14,7 +14,7 @@
                 <?php elseif ($this->text->contains($event['event_name'], 'comment')): ?>
                     <i class="fa fa-comments-o"></i>
                 <?php endif ?>
-                &nbsp;<?= dt('%B %e, %Y at %k:%M %p', $event['date_creation']) ?>
+                &nbsp;<?= $this->dt->datetime($event['date_creation']) ?>
             </p>
             <div class="activity-content"><?= $event['event_content'] ?></div>
         </div>

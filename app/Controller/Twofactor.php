@@ -33,7 +33,7 @@ class Twofactor extends User
         $this->checkCurrentUser($user);
         unset($this->sessionStorage->twoFactorSecret);
 
-        $this->response->html($this->layout('twofactor/index', array(
+        $this->response->html($this->helper->layout->user('twofactor/index', array(
             'user' => $user,
             'provider' => $this->authenticationManager->getPostAuthenticationProvider()->getName(),
         )));
@@ -60,7 +60,7 @@ class Twofactor extends User
             $provider->setSecret($this->sessionStorage->twoFactorSecret);
         }
 
-        $this->response->html($this->layout('twofactor/show', array(
+        $this->response->html($this->helper->layout->user('twofactor/show', array(
             'user' => $user,
             'secret' => $this->sessionStorage->twoFactorSecret,
             'qrcode_url' => $provider->getQrCodeUrl($label),
@@ -165,7 +165,7 @@ class Twofactor extends User
             $this->sessionStorage->twoFactorBeforeCodeCalled = true;
         }
 
-        $this->response->html($this->template->layout('twofactor/check', array(
+        $this->response->html($this->helper->layout->app('twofactor/check', array(
             'title' => t('Check two factor authentication code'),
         )));
     }
@@ -191,7 +191,7 @@ class Twofactor extends User
             $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
         }
 
-        $this->response->html($this->layout('twofactor/disable', array(
+        $this->response->html($this->helper->layout->user('twofactor/disable', array(
             'user' => $user,
         )));
     }

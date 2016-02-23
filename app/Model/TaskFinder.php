@@ -38,14 +38,14 @@ class TaskFinder extends Base
                         Task::TABLE.'.time_spent',
                         Task::TABLE.'.time_estimated',
                         Project::TABLE.'.name AS project_name',
-                        Board::TABLE.'.title AS column_name',
+                        Column::TABLE.'.title AS column_name',
                         User::TABLE.'.username AS assignee_username',
                         User::TABLE.'.name AS assignee_name'
                     )
                     ->eq(Task::TABLE.'.is_active', $is_active)
                     ->in(Project::TABLE.'.id', $project_ids)
                     ->join(Project::TABLE, 'id', 'project_id')
-                    ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+                    ->join(Column::TABLE, 'id', 'column_id', Task::TABLE)
                     ->join(User::TABLE, 'id', 'owner_id', Task::TABLE);
     }
 
@@ -88,11 +88,12 @@ class TaskFinder extends Base
         return $this->db
             ->table(Task::TABLE)
             ->columns(
-                '(SELECT count(*) FROM '.Comment::TABLE.' WHERE task_id=tasks.id) AS nb_comments',
-                '(SELECT count(*) FROM '.File::TABLE.' WHERE task_id=tasks.id) AS nb_files',
-                '(SELECT count(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id) AS nb_subtasks',
-                '(SELECT count(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
-                '(SELECT count(*) FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id) AS nb_links',
+                '(SELECT COUNT(*) FROM '.Comment::TABLE.' WHERE task_id=tasks.id) AS nb_comments',
+                '(SELECT COUNT(*) FROM '.TaskFile::TABLE.' WHERE task_id=tasks.id) AS nb_files',
+                '(SELECT COUNT(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id) AS nb_subtasks',
+                '(SELECT COUNT(*) FROM '.Subtask::TABLE.' WHERE '.Subtask::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
+                '(SELECT COUNT(*) FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id) AS nb_links',
+                '(SELECT COUNT(*) FROM '.TaskExternalLink::TABLE.' WHERE '.TaskExternalLink::TABLE.'.task_id = tasks.id) AS nb_external_links',
                 '(SELECT DISTINCT 1 FROM '.TaskLink::TABLE.' WHERE '.TaskLink::TABLE.'.task_id = tasks.id AND '.TaskLink::TABLE.'.link_id = 9) AS is_milestone',
                 'tasks.id',
                 'tasks.reference',
@@ -113,6 +114,7 @@ class TaskFinder extends Base
                 'tasks.is_active',
                 'tasks.score',
                 'tasks.category_id',
+                'tasks.priority',
                 'tasks.date_moved',
                 'tasks.recurrence_status',
                 'tasks.recurrence_trigger',
@@ -127,15 +129,15 @@ class TaskFinder extends Base
                 User::TABLE.'.name AS assignee_name',
                 Category::TABLE.'.name AS category_name',
                 Category::TABLE.'.description AS category_description',
-                Board::TABLE.'.title AS column_name',
-                Board::TABLE.'.position AS column_position',
+                Column::TABLE.'.title AS column_name',
+                Column::TABLE.'.position AS column_position',
                 Swimlane::TABLE.'.name AS swimlane_name',
                 Project::TABLE.'.default_swimlane',
                 Project::TABLE.'.name AS project_name'
             )
             ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
             ->join(Category::TABLE, 'id', 'category_id', Task::TABLE)
-            ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+            ->join(Column::TABLE, 'id', 'column_id', Task::TABLE)
             ->join(Swimlane::TABLE, 'id', 'swimlane_id', Task::TABLE)
             ->join(Project::TABLE, 'id', 'project_id', Task::TABLE);
     }
@@ -175,6 +177,23 @@ class TaskFinder extends Base
                     ->eq(Task::TABLE.'.project_id', $project_id)
                     ->eq(Task::TABLE.'.is_active', $status_id)
                     ->findAll();
+    }
+
+    /**
+     * Get all tasks for a given project and status
+     *
+     * @access public
+     * @param  integer   $project_id
+     * @param  array     $status
+     * @return array
+     */
+    public function getAllIds($project_id, array $status = array(Task::STATUS_OPEN))
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq(Task::TABLE.'.project_id', $project_id)
+                    ->in(Task::TABLE.'.is_active', $status)
+                    ->findAllByColumn('id');
     }
 
     /**
@@ -308,6 +327,7 @@ class TaskFinder extends Base
             tasks.is_active,
             tasks.score,
             tasks.category_id,
+            tasks.priority,
             tasks.swimlane_id,
             tasks.date_moved,
             tasks.recurrence_status,

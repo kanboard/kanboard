@@ -17,11 +17,12 @@ class App extends Base
      *
      * @access public
      * @param  string $param
+     * @param  mixed  $default_value
      * @return mixed
      */
-    public function config($param)
+    public function config($param, $default_value = '')
     {
-        return $this->config->get($param);
+        return $this->config->get($param, $default_value);
     }
 
     /**

@@ -4,13 +4,13 @@
         <?= $this->form->csrf() ?>
 
         <?= $this->form->label(t('New password'), 'password') ?>
-        <?= $this->form->password('password', $values, $errors) ?><br/>
+        <?= $this->form->password('password', $values, $errors) ?>
 
         <?= $this->form->label(t('Confirmation'), 'confirmation') ?>
         <?= $this->form->password('confirmation', $values, $errors) ?>
 
         <div class="form-actions">
-            <input type="submit" value="<?= t('Change Password') ?>" class="btn btn-blue"/>
+            <input type="submit" value="<?= t('Change Password') ?>" class="btn btn-blue">
         </div>
     </form>
 </div>

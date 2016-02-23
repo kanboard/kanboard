@@ -37,10 +37,11 @@ class TaskValidator extends Base
             new Validators\Integer('recurrence_basedate', t('This value must be an integer')),
             new Validators\Integer('recurrence_trigger', t('This value must be an integer')),
             new Validators\Integer('recurrence_status', t('This value must be an integer')),
+            new Validators\Integer('priority', t('This value must be an integer')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
             new Validators\MaxLength('reference', t('The maximum length is %d characters', 50), 50),
-            new Validators\Date('date_due', t('Invalid date'), $this->dateParser->getDateFormats()),
-            new Validators\Date('date_started', t('Invalid date'), $this->dateParser->getAllFormats()),
+            new Validators\Date('date_due', t('Invalid date'), $this->dateParser->getDateFormats(true)),
+            new Validators\Date('date_started', t('Invalid date'), $this->dateParser->getDateTimeFormats(true)),
             new Validators\Numeric('time_spent', t('This value must be numeric')),
             new Validators\Numeric('time_estimated', t('This value must be numeric')),
         );

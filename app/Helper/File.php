@@ -38,19 +38,70 @@ class File extends \Kanboard\Core\Base
                 return 'fa-file-powerpoint-o';
             case 'zip':
             case 'rar':
+            case 'tar':
+            case 'bz2':
+            case 'xz':
+            case 'gz':
                 return 'fa-file-archive-o';
             case 'mp3':
-                return 'fa-audio-o';
+                return 'fa-file-audio-o';
             case 'avi':
-                return 'fa-video-o';
+            case 'mov':
+                return 'fa-file-video-o';
             case 'php':
             case 'html':
             case 'css':
-                return 'fa-code-o';
+                return 'fa-file-code-o';
             case 'pdf':
                 return 'fa-file-pdf-o';
         }
 
         return 'fa-file-o';
+    }
+
+    /**
+     * Return the image mimetype based on the file extension
+     *
+     * @access public
+     * @param  $filename
+     * @return string
+     */
+    public function getImageMimeType($filename)
+    {
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+        switch ($extension) {
+            case 'jpeg':
+            case 'jpg':
+                return 'image/jpeg';
+            case 'png':
+                return 'image/png';
+            case 'gif':
+                return 'image/gif';
+            default:
+                return 'image/jpeg';
+        }
+    }
+
+    /**
+     * Get the preview type
+     *
+     * @access public
+     * @param  string $filename
+     * @return string
+     */
+    public function getPreviewType($filename)
+    {
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+        switch ($extension) {
+            case 'md':
+            case 'markdown':
+                return 'markdown';
+            case 'txt':
+                return 'text';
+        }
+
+        return null;
     }
 }

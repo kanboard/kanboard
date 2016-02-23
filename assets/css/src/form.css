@@ -146,11 +146,6 @@ input.form-input-large {
     width: 400px;
 }
 
-.form-row {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
 .form-column {
     float: left;
     margin-right: 3%;
@@ -159,6 +154,12 @@ input.form-input-large {
 
 .form-column ul {
     margin-top: 15px;
+}
+
+.form-clear {
+    clear: both;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 .form-login {

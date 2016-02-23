@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\Event as BaseEvent;
 
 class GenericEvent extends BaseEvent implements ArrayAccess
 {
-    private $container = array();
+    protected $container = array();
 
     public function __construct(array $values = array())
     {

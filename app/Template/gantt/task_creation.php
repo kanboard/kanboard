@@ -33,26 +33,13 @@
     </div>
 
     <div class="form-column">
-        <?= $this->form->label(t('Assignee'), 'owner_id') ?>
-        <?= $this->form->select('owner_id', $users_list, $values, $errors, array('tabindex="3"')) ?><br/>
-
-        <?= $this->form->label(t('Category'), 'category_id') ?>
-        <?= $this->form->select('category_id', $categories_list, $values, $errors, array('tabindex="4"')) ?><br/>
-
-        <?php if (! (count($swimlanes_list) === 1 && key($swimlanes_list) === 0)): ?>
-            <?= $this->form->label(t('Swimlane'), 'swimlane_id') ?>
-            <?= $this->form->select('swimlane_id', $swimlanes_list, $values, $errors, array('tabindex="5"')) ?><br/>
-        <?php endif ?>
-
-        <?= $this->form->label(t('Complexity'), 'score') ?>
-        <?= $this->form->number('score', $values, $errors, array('tabindex="6"')) ?><br/>
-
-        <?= $this->form->label(t('Start Date'), 'date_started') ?>
-        <?= $this->form->text('date_started', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="7"'), 'form-date') ?>
-
-        <?= $this->form->label(t('Due Date'), 'date_due') ?>
-        <?= $this->form->text('date_due', $values, $errors, array('placeholder="'.$this->text->in($date_format, $date_formats).'"', 'tabindex="8"'), 'form-date') ?><br/>
-        <div class="form-help"><?= t('Others formats accepted: %s and %s', date('Y-m-d'), date('Y_m_d')) ?></div>
+        <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
+        <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
+        <?= $this->task->selectSwimlane($swimlanes_list, $values, $errors) ?>
+        <?= $this->task->selectPriority($project, $values) ?>
+        <?= $this->task->selectScore($values, $errors) ?>
+        <?= $this->task->selectStartDate($values, $errors) ?>
+        <?= $this->task->selectDueDate($values, $errors) ?>
     </div>
 
     <div class="form-actions">

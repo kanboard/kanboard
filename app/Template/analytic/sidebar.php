@@ -22,7 +22,8 @@
         <li <?= $this->app->checkMenuSelection('analytic', 'compareHours') ?>>
             <?= $this->url->link(t('Estimated vs actual time'), 'analytic', 'compareHours', array('project_id' => $project['id'])) ?>
         </li>
+        
+        <?= $this->hook->render('template:analytic:sidebar', array('project' => $project)) ?>
+        
     </ul>
-    <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
-    <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>
 </div>

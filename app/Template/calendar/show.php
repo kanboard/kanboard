@@ -1,5 +1,5 @@
 <section id="main">
-    <?= $this->render('project/filters', array(
+    <?= $this->render('project_header/header', array(
         'project' => $project,
         'filters' => $filters,
     )) ?>

@@ -6,7 +6,67 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 81;
+const VERSION = 87;
+
+function version_87(PDO $pdo)
+{
+    $pdo->exec("UPDATE project_activities SET event_name='task.file.create' WHERE event_name='file.create'");
+}
+
+function version_86(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE files RENAME TO task_has_files');
+
+    $pdo->exec("
+        CREATE TABLE project_has_files (
+            id SERIAL PRIMARY KEY,
+            project_id INTEGER NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            path VARCHAR(255) NOT NULL,
+            is_image BOOLEAN DEFAULT '0',
+            size INTEGER DEFAULT 0 NOT NULL,
+            user_id INTEGER DEFAULT 0 NOT NULL,
+            date INTEGER DEFAULT 0 NOT NULL,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )"
+    );
+}
+
+function version_85(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN is_active BOOLEAN DEFAULT '1'");
+}
+
+function version_84(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_external_links (
+            id SERIAL PRIMARY KEY,
+            link_type VARCHAR(100) NOT NULL,
+            dependency VARCHAR(100) NOT NULL,
+            title VARCHAR(255) NOT NULL,
+            url VARCHAR(255) NOT NULL,
+            date_creation INT NOT NULL,
+            date_modification INT NOT NULL,
+            task_id INT NOT NULL,
+            creator_id INT DEFAULT 0,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )
+    ");
+}
+
+function version_83(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_default INTEGER DEFAULT 0");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_start INTEGER DEFAULT 0");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_end INTEGER DEFAULT 3");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN priority INTEGER DEFAULT 0");
+}
+
+function version_82(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN owner_id INTEGER DEFAULT 0");
+}
 
 function version_81(PDO $pdo)
 {

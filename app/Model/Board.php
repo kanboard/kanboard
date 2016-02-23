@@ -2,8 +2,6 @@
 
 namespace Kanboard\Model;
 
-use PicoDb\Database;
-
 /**
  * Board model
  *
@@ -12,13 +10,6 @@ use PicoDb\Database;
  */
 class Board extends Base
 {
-    /**
-     * SQL table name
-     *
-     * @var string
-     */
-    const TABLE = 'columns';
-
     /**
      * Get Kanboard default columns
      *
@@ -73,7 +64,7 @@ class Board extends Base
                 'description' => $column['description'],
             );
 
-            if (! $this->db->table(self::TABLE)->save($values)) {
+            if (! $this->db->table(Column::TABLE)->save($values)) {
                 return false;
             }
         }
@@ -91,141 +82,13 @@ class Board extends Base
      */
     public function duplicate($project_from, $project_to)
     {
-        $columns = $this->db->table(Board::TABLE)
+        $columns = $this->db->table(Column::TABLE)
                             ->columns('title', 'task_limit', 'description')
                             ->eq('project_id', $project_from)
                             ->asc('position')
                             ->findAll();
 
         return $this->board->create($project_to, $columns);
-    }
-
-    /**
-     * Add a new column to the board
-     *
-     * @access public
-     * @param  integer   $project_id    Project id
-     * @param  string    $title         Column title
-     * @param  integer   $task_limit    Task limit
-     * @param  string    $description   Column description
-     * @return boolean|integer
-     */
-    public function addColumn($project_id, $title, $task_limit = 0, $description = '')
-    {
-        $values = array(
-            'project_id' => $project_id,
-            'title' => $title,
-            'task_limit' => intval($task_limit),
-            'position' => $this->getLastColumnPosition($project_id) + 1,
-            'description' => $description,
-        );
-
-        return $this->persist(self::TABLE, $values);
-    }
-
-    /**
-     * Update a column
-     *
-     * @access public
-     * @param  integer   $column_id     Column id
-     * @param  string    $title         Column title
-     * @param  integer   $task_limit    Task limit
-     * @param  string    $description   Optional description
-     * @return boolean
-     */
-    public function updateColumn($column_id, $title, $task_limit = 0, $description = '')
-    {
-        return $this->db->table(self::TABLE)->eq('id', $column_id)->update(array(
-            'title' => $title,
-            'task_limit' => intval($task_limit),
-            'description' => $description,
-        ));
-    }
-
-    /**
-     * Get columns with consecutive positions
-     *
-     * If you remove a column, the positions are not anymore consecutives
-     *
-     * @access public
-     * @param  integer  $project_id
-     * @return array
-     */
-    public function getNormalizedColumnPositions($project_id)
-    {
-        $columns = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'position');
-        $position = 1;
-
-        foreach ($columns as $column_id => $column_position) {
-            $columns[$column_id] = $position++;
-        }
-
-        return $columns;
-    }
-
-    /**
-     * Save the new positions for a set of columns
-     *
-     * @access public
-     * @param  array   $columns    Hashmap of column_id/column_position
-     * @return boolean
-     */
-    public function saveColumnPositions(array $columns)
-    {
-        return $this->db->transaction(function (Database $db) use ($columns) {
-
-            foreach ($columns as $column_id => $position) {
-                if (! $db->table(Board::TABLE)->eq('id', $column_id)->update(array('position' => $position))) {
-                    return false;
-                }
-            }
-        });
-    }
-
-    /**
-     * Move a column down, increment the column position value
-     *
-     * @access public
-     * @param  integer  $project_id   Project id
-     * @param  integer  $column_id    Column id
-     * @return boolean
-     */
-    public function moveDown($project_id, $column_id)
-    {
-        $columns = $this->getNormalizedColumnPositions($project_id);
-        $positions = array_flip($columns);
-
-        if (isset($columns[$column_id]) && $columns[$column_id] < count($columns)) {
-            $position = ++$columns[$column_id];
-            $columns[$positions[$position]]--;
-
-            return $this->saveColumnPositions($columns);
-        }
-
-        return false;
-    }
-
-    /**
-     * Move a column up, decrement the column position value
-     *
-     * @access public
-     * @param  integer  $project_id   Project id
-     * @param  integer  $column_id    Column id
-     * @return boolean
-     */
-    public function moveUp($project_id, $column_id)
-    {
-        $columns = $this->getNormalizedColumnPositions($project_id);
-        $positions = array_flip($columns);
-
-        if (isset($columns[$column_id]) && $columns[$column_id] > 1) {
-            $position = --$columns[$column_id];
-            $columns[$positions[$position]]++;
-
-            return $this->saveColumnPositions($columns);
-        }
-
-        return false;
     }
 
     /**
@@ -239,7 +102,7 @@ class Board extends Base
     public function getBoard($project_id, $callback = null)
     {
         $swimlanes = $this->swimlane->getSwimlanes($project_id);
-        $columns = $this->getColumns($project_id);
+        $columns = $this->column->getAll($project_id);
         $nb_columns = count($columns);
 
         for ($i = 0, $ilen = count($swimlanes); $i < $ilen; $i++) {
@@ -306,132 +169,5 @@ class Board extends Base
                         ->getAll('column_id', 'COUNT(*) AS total');
 
         return $prepend ? array(-1 => t('All columns')) + $listing : $listing;
-    }
-
-    /**
-     * Get the first column id for a given project
-     *
-     * @access public
-     * @param  integer  $project_id   Project id
-     * @return integer
-     */
-    public function getFirstColumn($project_id)
-    {
-        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->findOneColumn('id');
-    }
-
-    /**
-     * Get the last column id for a given project
-     *
-     * @access public
-     * @param  integer  $project_id   Project id
-     * @return integer
-     */
-    public function getLastColumn($project_id)
-    {
-        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->desc('position')->findOneColumn('id');
-    }
-
-    /**
-     * Get the list of columns sorted by position [ column_id => title ]
-     *
-     * @access public
-     * @param  integer  $project_id   Project id
-     * @param  boolean  $prepend      Prepend a default value
-     * @return array
-     */
-    public function getColumnsList($project_id, $prepend = false)
-    {
-        $listing = $this->db->hashtable(self::TABLE)->eq('project_id', $project_id)->asc('position')->getAll('id', 'title');
-        return $prepend ? array(-1 => t('All columns')) + $listing : $listing;
-    }
-
-    /**
-     * Get all columns sorted by position for a given project
-     *
-     * @access public
-     * @param  integer  $project_id   Project id
-     * @return array
-     */
-    public function getColumns($project_id)
-    {
-        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->asc('position')->findAll();
-    }
-
-    /**
-     * Get the number of columns for a given project
-     *
-     * @access public
-     * @param  integer  $project_id   Project id
-     * @return integer
-     */
-    public function countColumns($project_id)
-    {
-        return $this->db->table(self::TABLE)->eq('project_id', $project_id)->count();
-    }
-
-    /**
-     * Get a column by the id
-     *
-     * @access public
-     * @param  integer  $column_id    Column id
-     * @return array
-     */
-    public function getColumn($column_id)
-    {
-        return $this->db->table(self::TABLE)->eq('id', $column_id)->findOne();
-    }
-
-    /**
-     * Get a column id by the name
-     *
-     * @access public
-     * @param  integer  $project_id
-     * @param  string   $title
-     * @return integer
-     */
-    public function getColumnIdByTitle($project_id, $title)
-    {
-        return (int) $this->db->table(self::TABLE)->eq('project_id', $project_id)->eq('title', $title)->findOneColumn('id');
-    }
-
-    /**
-     * Get a column title by the id
-     *
-     * @access public
-     * @param  integer  $column_id
-     * @return integer
-     */
-    public function getColumnTitleById($column_id)
-    {
-        return $this->db->table(self::TABLE)->eq('id', $column_id)->findOneColumn('title');
-    }
-
-    /**
-     * Get the position of the last column for a given project
-     *
-     * @access public
-     * @param  integer  $project_id   Project id
-     * @return integer
-     */
-    public function getLastColumnPosition($project_id)
-    {
-        return (int) $this->db
-                        ->table(self::TABLE)
-                        ->eq('project_id', $project_id)
-                        ->desc('position')
-                        ->findOneColumn('position');
-    }
-
-    /**
-     * Remove a column and all tasks associated to this column
-     *
-     * @access public
-     * @param  integer  $column_id    Column id
-     * @return boolean
-     */
-    public function removeColumn($column_id)
-    {
-        return $this->db->table(self::TABLE)->eq('id', $column_id)->remove();
     }
 }

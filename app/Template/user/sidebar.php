@@ -1,9 +1,11 @@
 <div class="sidebar">
     <h2><?= t('Information') ?></h2>
     <ul>
-        <li <?= $this->app->checkMenuSelection('user', 'show') ?>>
-            <?= $this->url->link(t('Summary'), 'user', 'show', array('user_id' => $user['id'])) ?>
-        </li>
+        <?php if ($this->user->hasAccess('user', 'show')): ?>
+            <li <?= $this->app->checkMenuSelection('user', 'show') ?>>
+                <?= $this->url->link(t('Summary'), 'user', 'show', array('user_id' => $user['id'])) ?>
+            </li>
+        <?php endif ?>
         <?php if ($this->user->isAdmin()): ?>
             <li>
                 <?= $this->url->link(t('User dashboard'), 'app', 'index', array('user_id' => $user['id'])) ?>
@@ -24,15 +26,18 @@
             </li>
         <?php endif ?>
 
-        <?= $this->hook->render('template:user:sidebar:information') ?>
+        <?= $this->hook->render('template:user:sidebar:information', array('user' => $user)) ?>
     </ul>
 
     <h2><?= t('Actions') ?></h2>
     <ul>
         <?php if ($this->user->isAdmin() || $this->user->isCurrentUser($user['id'])): ?>
-            <li <?= $this->app->checkMenuSelection('user', 'edit') ?>>
-                <?= $this->url->link(t('Edit profile'), 'user', 'edit', array('user_id' => $user['id'])) ?>
-            </li>
+
+            <?php if ($this->user->hasAccess('user', 'edit')): ?>
+                <li <?= $this->app->checkMenuSelection('user', 'edit') ?>>
+                    <?= $this->url->link(t('Edit profile'), 'user', 'edit', array('user_id' => $user['id'])) ?>
+                </li>
+            <?php endif ?>
 
             <?php if ($user['is_ldap_user'] == 0): ?>
                 <li <?= $this->app->checkMenuSelection('user', 'password') ?>>
@@ -71,13 +76,5 @@
         <?php endif ?>
 
         <?= $this->hook->render('template:user:sidebar:actions', array('user' => $user)) ?>
-
-        <?php if ($this->user->hasAccess('user', 'remove') && ! $this->user->isCurrentUser($user['id'])): ?>
-            <li <?= $this->app->checkMenuSelection('user', 'remove') ?>>
-                <?= $this->url->link(t('Remove'), 'user', 'remove', array('user_id' => $user['id'])) ?>
-            </li>
-        <?php endif ?>
     </ul>
-    <div class="sidebar-collapse"><a href="#" title="<?= t('Hide sidebar') ?>"><i class="fa fa-chevron-left"></i></a></div>
-    <div class="sidebar-expand" style="display: none"><a href="#" title="<?= t('Expand sidebar') ?>"><i class="fa fa-chevron-right"></i></a></div>
 </div>

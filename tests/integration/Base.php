@@ -35,7 +35,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
     {
         $this->app = new JsonRPC\Client(API_URL);
         $this->app->authentication('jsonrpc', API_KEY);
-        $this->app->debug = true;
+        // $this->app->debug = true;
 
         $this->admin = new JsonRPC\Client(API_URL);
         $this->admin->authentication('admin', 'admin');

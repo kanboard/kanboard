@@ -10,6 +10,6 @@
 
     <div class="form-actions">
         <?= $this->url->link(t('Yes'), 'column', 'remove', array('project_id' => $project['id'], 'column_id' => $column['id'], 'remove' => 'yes'), true, 'btn btn-red') ?>
-        <?= t('or') ?> <?= $this->url->link(t('cancel'), 'column', 'index', array('project_id' => $project['id'])) ?>
+        <?= t('or') ?> <?= $this->url->link(t('cancel'), 'column', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
     </div>
 </div>

@@ -130,51 +130,6 @@ define('LDAP_GROUP_FILTER', '');
 // LDAP attribute for the group name
 define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
-// Enable/disable Google authentication
-define('GOOGLE_AUTH', false);
-
-// Google client id (Get this value from the Google developer console)
-define('GOOGLE_CLIENT_ID', '');
-
-// Google client secret key (Get this value from the Google developer console)
-define('GOOGLE_CLIENT_SECRET', '');
-
-// Enable/disable GitHub authentication
-define('GITHUB_AUTH', false);
-
-// GitHub client id (Copy it from your settings -> Applications -> Developer applications)
-define('GITHUB_CLIENT_ID', '');
-
-// GitHub client secret key (Copy it from your settings -> Applications -> Developer applications)
-define('GITHUB_CLIENT_SECRET', '');
-
-// Github oauth2 authorize url
-define('GITHUB_OAUTH_AUTHORIZE_URL', 'https://github.com/login/oauth/authorize');
-
-// Github oauth2 token url
-define('GITHUB_OAUTH_TOKEN_URL', 'https://github.com/login/oauth/access_token');
-
-// Github API url (don't forget the trailing slash)
-define('GITHUB_API_URL', 'https://api.github.com/');
-
-// Enable/disable Gitlab authentication
-define('GITLAB_AUTH', false);
-
-// Gitlab application id
-define('GITLAB_CLIENT_ID', '');
-
-// Gitlab application secret
-define('GITLAB_CLIENT_SECRET', '');
-
-// Gitlab oauth2 authorize url
-define('GITLAB_OAUTH_AUTHORIZE_URL', 'https://gitlab.com/oauth/authorize');
-
-// Gitlab oauth2 token url
-define('GITLAB_OAUTH_TOKEN_URL', 'https://gitlab.com/oauth/token');
-
-// Gitlab API url endpoint (don't forget the trailing slash)
-define('GITLAB_API_URL', 'https://gitlab.com/api/v3/');
-
 // Enable/disable the reverse proxy authentication
 define('REVERSE_PROXY_AUTH', false);
 
@@ -210,6 +165,9 @@ define('ENABLE_URL_REWRITE', false);
 
 // Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
+
+// Disabling logout (for external SSO authentication)
+define('DISABLE_LOGOUT', false);
 
 // Enable captcha after 3 authentication failure
 define('BRUTEFORCE_CAPTCHA', 3);

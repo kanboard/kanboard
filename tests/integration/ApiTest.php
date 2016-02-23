@@ -170,192 +170,6 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertCount(0, $activities);
     }
 
-    public function testGetBoard()
-    {
-        $board = $this->client->getBoard(1);
-        $this->assertTrue(is_array($board));
-        $this->assertEquals(1, count($board));
-        $this->assertEquals('Default swimlane', $board[0]['name']);
-        $this->assertEquals(4, count($board[0]['columns']));
-    }
-
-    public function testGetColumns()
-    {
-        $columns = $this->client->getColumns(1);
-        $this->assertTrue(is_array($columns));
-        $this->assertEquals(4, count($columns));
-        $this->assertEquals('Done', $columns[3]['title']);
-    }
-
-    public function testMoveColumnUp()
-    {
-        $this->assertTrue($this->client->moveColumnUp(1, 4));
-
-        $columns = $this->client->getColumns(1);
-        $this->assertTrue(is_array($columns));
-        $this->assertEquals('Done', $columns[2]['title']);
-        $this->assertEquals('Work in progress', $columns[3]['title']);
-    }
-
-    public function testMoveColumnDown()
-    {
-        $this->assertTrue($this->client->moveColumnDown(1, 4));
-
-        $columns = $this->client->getColumns(1);
-        $this->assertTrue(is_array($columns));
-        $this->assertEquals('Work in progress', $columns[2]['title']);
-        $this->assertEquals('Done', $columns[3]['title']);
-    }
-
-    public function testUpdateColumn()
-    {
-        $this->assertTrue($this->client->updateColumn(4, 'Boo', 2));
-
-        $columns = $this->client->getColumns(1);
-        $this->assertTrue(is_array($columns));
-        $this->assertEquals('Boo', $columns[3]['title']);
-        $this->assertEquals(2, $columns[3]['task_limit']);
-    }
-
-    public function testAddColumn()
-    {
-        $column_id = $this->client->addColumn(1, 'New column');
-
-        $this->assertNotFalse($column_id);
-        $this->assertInternalType('int', $column_id);
-        $this->assertTrue($column_id > 0);
-
-        $columns = $this->client->getColumns(1);
-        $this->assertTrue(is_array($columns));
-        $this->assertEquals(5, count($columns));
-        $this->assertEquals('New column', $columns[4]['title']);
-    }
-
-    public function testRemoveColumn()
-    {
-        $this->assertTrue($this->client->removeColumn(5));
-
-        $columns = $this->client->getColumns(1);
-        $this->assertTrue(is_array($columns));
-        $this->assertEquals(4, count($columns));
-    }
-
-    public function testGetDefaultSwimlane()
-    {
-        $swimlane = $this->client->getDefaultSwimlane(1);
-        $this->assertNotEmpty($swimlane);
-        $this->assertEquals('Default swimlane', $swimlane['default_swimlane']);
-    }
-
-    public function testAddSwimlane()
-    {
-        $swimlane_id = $this->client->addSwimlane(1, 'Swimlane 1');
-        $this->assertNotFalse($swimlane_id);
-        $this->assertInternalType('int', $swimlane_id);
-
-        $swimlane = $this->client->getSwimlaneById($swimlane_id);
-        $this->assertNotEmpty($swimlane);
-        $this->assertInternalType('array', $swimlane);
-        $this->assertEquals('Swimlane 1', $swimlane['name']);
-    }
-
-    public function testGetSwimlane()
-    {
-        $swimlane = $this->client->getSwimlane(1);
-        $this->assertNotEmpty($swimlane);
-        $this->assertInternalType('array', $swimlane);
-        $this->assertEquals('Swimlane 1', $swimlane['name']);
-    }
-
-    public function testUpdateSwimlane()
-    {
-        $swimlane = $this->client->getSwimlaneByName(1, 'Swimlane 1');
-        $this->assertNotEmpty($swimlane);
-        $this->assertInternalType('array', $swimlane);
-        $this->assertEquals(1, $swimlane['id']);
-        $this->assertEquals('Swimlane 1', $swimlane['name']);
-
-        $this->assertTrue($this->client->updateSwimlane($swimlane['id'], 'Another swimlane'));
-
-        $swimlane = $this->client->getSwimlaneById($swimlane['id']);
-        $this->assertNotEmpty($swimlane);
-        $this->assertEquals('Another swimlane', $swimlane['name']);
-    }
-
-    public function testDisableSwimlane()
-    {
-        $this->assertTrue($this->client->disableSwimlane(1, 1));
-
-        $swimlane = $this->client->getSwimlaneById(1);
-        $this->assertNotEmpty($swimlane);
-        $this->assertEquals(0, $swimlane['is_active']);
-    }
-
-    public function testEnableSwimlane()
-    {
-        $this->assertTrue($this->client->enableSwimlane(1, 1));
-
-        $swimlane = $this->client->getSwimlaneById(1);
-        $this->assertNotEmpty($swimlane);
-        $this->assertEquals(1, $swimlane['is_active']);
-    }
-
-    public function testGetAllSwimlanes()
-    {
-        $this->assertNotFalse($this->client->addSwimlane(1, 'Swimlane A'));
-
-        $swimlanes = $this->client->getAllSwimlanes(1);
-        $this->assertNotEmpty($swimlanes);
-        $this->assertCount(2, $swimlanes);
-        $this->assertEquals('Another swimlane', $swimlanes[0]['name']);
-        $this->assertEquals('Swimlane A', $swimlanes[1]['name']);
-    }
-
-    public function testGetActiveSwimlane()
-    {
-        $this->assertTrue($this->client->disableSwimlane(1, 1));
-
-        $swimlanes = $this->client->getActiveSwimlanes(1);
-        $this->assertNotEmpty($swimlanes);
-        $this->assertCount(2, $swimlanes);
-        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
-        $this->assertEquals('Swimlane A', $swimlanes[1]['name']);
-    }
-
-    public function testMoveSwimlaneUp()
-    {
-        $this->assertTrue($this->client->enableSwimlane(1, 1));
-        $this->assertTrue($this->client->moveSwimlaneUp(1, 1));
-
-        $swimlanes = $this->client->getActiveSwimlanes(1);
-        $this->assertNotEmpty($swimlanes);
-        $this->assertCount(3, $swimlanes);
-        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
-        $this->assertEquals('Another swimlane', $swimlanes[1]['name']);
-        $this->assertEquals('Swimlane A', $swimlanes[2]['name']);
-
-        $this->assertTrue($this->client->moveSwimlaneUp(1, 2));
-
-        $swimlanes = $this->client->getActiveSwimlanes(1);
-        $this->assertNotEmpty($swimlanes);
-        $this->assertCount(3, $swimlanes);
-        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
-        $this->assertEquals('Swimlane A', $swimlanes[1]['name']);
-        $this->assertEquals('Another swimlane', $swimlanes[2]['name']);
-    }
-
-    public function testMoveSwimlaneDown()
-    {
-        $this->assertTrue($this->client->moveSwimlaneDown(1, 2));
-
-        $swimlanes = $this->client->getActiveSwimlanes(1);
-        $this->assertNotEmpty($swimlanes);
-        $this->assertCount(3, $swimlanes);
-        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
-        $this->assertEquals('Another swimlane', $swimlanes[1]['name']);
-        $this->assertEquals('Swimlane A', $swimlanes[2]['name']);
-    }
-
     public function testCreateTaskWithWrongMember()
     {
         $task = array(
@@ -464,18 +278,6 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertNotEquals($moved_timestamp, $task['date_moved']);
     }
 
-    public function testRemoveSwimlane()
-    {
-        $this->assertTrue($this->client->removeSwimlane(1, 2));
-
-        $task = $this->client->getTask($this->getTaskId());
-        $this->assertNotFalse($task);
-        $this->assertTrue(is_array($task));
-        $this->assertEquals(1, $task['position']);
-        $this->assertEquals(4, $task['column_id']);
-        $this->assertEquals(0, $task['swimlane_id']);
-    }
-
     public function testUpdateTask()
     {
         $task = $this->client->getTask(1);
@@ -561,6 +363,20 @@ class Api extends PHPUnit_Framework_TestCase
         $this->assertEquals('app-manager', $user['role']);
 
         $this->assertNull($this->client->getUser(2222));
+    }
+
+    public function testGetUserByName()
+    {
+        $user = $this->client->getUserByName('toto');
+        $this->assertNotFalse($user);
+        $this->assertTrue(is_array($user));
+        $this->assertEquals(2, $user['id']);
+
+        $user = $this->client->getUserByName('manager');
+        $this->assertNotEmpty($user);
+        $this->assertEquals('app-manager', $user['role']);
+
+        $this->assertNull($this->client->getUserByName('nonexistantusername'));
     }
 
     public function testUpdateUser()

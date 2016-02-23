@@ -48,9 +48,11 @@ class Swimlane extends \Kanboard\Core\Base
     public function updateSwimlane($swimlane_id, $name, $description = null)
     {
         $values = array('id' => $swimlane_id, 'name' => $name);
+
         if (!is_null($description)) {
             $values['description'] = $description;
         }
+
         return $this->swimlane->update($values);
     }
 
@@ -69,13 +71,8 @@ class Swimlane extends \Kanboard\Core\Base
         return $this->swimlane->enable($project_id, $swimlane_id);
     }
 
-    public function moveSwimlaneUp($project_id, $swimlane_id)
+    public function changeSwimlanePosition($project_id, $swimlane_id, $position)
     {
-        return $this->swimlane->moveUp($project_id, $swimlane_id);
-    }
-
-    public function moveSwimlaneDown($project_id, $swimlane_id)
-    {
-        return $this->swimlane->moveDown($project_id, $swimlane_id);
+        return $this->swimlane->changePosition($project_id, $swimlane_id, $position);
     }
 }

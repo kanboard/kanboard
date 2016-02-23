@@ -40,6 +40,15 @@ Search.prototype.listen = function() {
 Search.prototype.keyboardShortcuts = function() {
     var self = this;
 
+    // Switch view mode for projects: go to the overview page
+    Mousetrap.bind("v o", function(e) {
+        var link = $(".view-overview");
+
+        if (link.length) {
+            window.location = link.attr('href');
+        }
+    });
+
     // Switch view mode for projects: go to the board
     Mousetrap.bind("v b", function(e) {
         var link = $(".view-board");

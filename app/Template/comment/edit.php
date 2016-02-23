@@ -2,7 +2,7 @@
     <h2><?= t('Edit a comment') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->url->href('comment', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('comment', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
@@ -29,8 +29,8 @@
     <div class="form-help"><?= $this->url->doc(t('Write your text in Markdown'), 'syntax-guide') ?></div>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Update') ?>" class="btn btn-blue"/>
+        <input type="submit" value="<?= t('Update') ?>" class="btn btn-blue">
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>
 </form>

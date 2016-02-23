@@ -8,14 +8,13 @@
         </ul>
     </div>
 
-    <div class="search">
+    <div class="filter-box">
         <form method="get" action="<?= $this->url->dir() ?>" class="search">
             <?= $this->form->hidden('controller', $values) ?>
             <?= $this->form->hidden('action', $values) ?>
             <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
+            <?= $this->render('app/filters_helper') ?>
         </form>
-
-        <?= $this->render('app/filters_helper') ?>
     </div>
 
     <?php if (empty($values['search'])): ?>

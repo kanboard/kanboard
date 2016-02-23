@@ -12,7 +12,7 @@ class UrlHelperTest extends Base
     {
         $h = new Url($this->container);
         $this->assertEquals(
-            '<a href="?controller=a&amp;action=b&amp;d=e&amp;plugin=something" class="f" title="g" target="_blank">label</a>',
+            '<a href="?controller=a&amp;action=b&amp;d=e&amp;plugin=something" class="f" title=\'g\' target="_blank">label</a>',
             $h->link('label', 'a', 'b', array('d' => 'e', 'plugin' => 'something'), false, 'f', 'g', true)
         );
     }
@@ -24,7 +24,7 @@ class UrlHelperTest extends Base
 
         $h = new Url($this->container);
         $this->assertEquals(
-            '<a href="myplugin/something/e" class="f" title="g" target="_blank">label</a>',
+            '<a href="myplugin/something/e" class="f" title=\'g\' target="_blank">label</a>',
             $h->link('label', 'a', 'b', array('d' => 'e', 'plugin' => 'something'), false, 'f', 'g', true)
         );
     }
@@ -33,7 +33,7 @@ class UrlHelperTest extends Base
     {
         $h = new Url($this->container);
         $this->assertEquals(
-            '<a href="?controller=a&amp;action=b&amp;d=e" class="f" title="g" target="_blank">label</a>',
+            '<a href="?controller=a&amp;action=b&amp;d=e" class="f" title=\'g\' target="_blank">label</a>',
             $h->link('label', 'a', 'b', array('d' => 'e'), false, 'f', 'g', true)
         );
     }

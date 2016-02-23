@@ -9,7 +9,6 @@ use Kanboard\Model\ProjectActivity;
 use Kanboard\Model\Project;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Comment;
-use Kanboard\Model\File;
 
 class ProjectActivityTest extends Base
 {

@@ -8,8 +8,6 @@ use Kanboard\Model\Project;
 use Kanboard\Model\User;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Acl;
-use Kanboard\Model\Board;
 use Kanboard\Model\Config;
 use Kanboard\Model\Category;
 
@@ -280,5 +278,49 @@ class ProjectTest extends Base
 
         $project = $p->getByIdentifier('');
         $this->assertFalse($project);
+    }
+
+    public function testThatProjectCreatorAreAlsoOwner()
+    {
+        $projectModel = new Project($this->container);
+        $userModel = new User($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'Me')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'My project 1'), 2));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'My project 2')));
+
+        $project = $projectModel->getByIdWithOwner(1);
+        $this->assertNotEmpty($project);
+        $this->assertSame('My project 1', $project['name']);
+        $this->assertSame('Me', $project['owner_name']);
+        $this->assertSame('user1', $project['owner_username']);
+        $this->assertEquals(2, $project['owner_id']);
+
+        $project = $projectModel->getByIdWithOwner(2);
+        $this->assertNotEmpty($project);
+        $this->assertSame('My project 2', $project['name']);
+        $this->assertEquals('', $project['owner_name']);
+        $this->assertEquals('', $project['owner_username']);
+        $this->assertEquals(0, $project['owner_id']);
+    }
+
+    public function testPriority()
+    {
+        $projectModel = new Project($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'My project 2')));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(0, $project['priority_default']);
+        $this->assertEquals(0, $project['priority_start']);
+        $this->assertEquals(3, $project['priority_end']);
+
+        $this->assertTrue($projectModel->update(array('id' => 1, 'priority_start' => 2, 'priority_end' => 5, 'priority_default' => 4)));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(4, $project['priority_default']);
+        $this->assertEquals(2, $project['priority_start']);
+        $this->assertEquals(5, $project['priority_end']);
     }
 }

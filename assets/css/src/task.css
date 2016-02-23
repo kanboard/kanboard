@@ -9,7 +9,7 @@
 }
 
 div.task-board-recent {
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+    border-width: 2px;
 }
 
 div.task-board-status-closed {
@@ -118,19 +118,9 @@ span.task-board-date-overdue {
 }
 
 /* task score */
-.task-score {
-    font-weight: bold;
-}
-
 .task-board .task-score {
+    font-weight: bold;
     font-size: 1.1em;
-}
-
-.task-show-details .task-score {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-size: 2em;
 }
 
 /* task age */
@@ -167,57 +157,41 @@ span.task-board-date-overdue {
     display: none;
 }
 
-/* task view */
-.task-show-details {
-    position: relative;
-    border-radius: 5px;
-    padding-bottom: 10px;
+/* task summary */
+#task-summary {
+    margin-bottom: 15px;
 }
 
-.task-show-details h2 {
-    font-size: 1.8em;
-    margin: 0;
-    margin-bottom: 25px;
-    padding: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+#task-summary h2 {
+    color: #666;
+    font-size: 2.5em;
+    margin-top: 0;
+    padding-top: 0;
 }
 
-.task-show-details li {
-    margin-left: 25px;
-    list-style-type: circle;
+.task-summary-container {
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 15px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
 }
 
-.task-show-section {
-    margin-top: 30px;
-    margin-bottom: 20px;
+.task-summary-column {
+    font-size: 0.9em;
+    color: #666;
 }
 
-.task-show-files a {
-    font-weight: bold;
-    text-decoration: none;
+.task-summary-column span {
+    color: #555;
 }
 
-.task-show-files li {
-    margin-left: 25px;
-    list-style-type: square;
-    line-height: 25px;
-}
-
-.task-show-file-actions {
-    font-size: 0.75em;
-}
-
-.task-show-file-actions:before {
-    content: " [";
-}
-
-.task-show-file-actions:after {
-    content: "]";
-}
-
-.task-show-file-actions a {
-    color: #333;
+.task-summary-column li {
+    line-height: 23px;
 }
 
 .task-show-description {
@@ -231,73 +205,8 @@ span.task-board-date-overdue {
     height: 300px;
 }
 
-.task-file-viewer {
-    position: relative;
-}
-
-.task-file-viewer img {
-    max-width: 95%;
-    max-height: 85%;
-    margin-top: 10px;
-}
-
-.task-time-form {
-    margin-top: 10px;
-    margin-bottom: 25px;
-    padding: 3px;
-}
-
 .task-link-closed {
     text-decoration: line-through;
-}
-
-.task-show-images {
-    list-style-type: none;
-}
-
-.task-show-images li img {
-    width: 100%;
-}
-
-.task-show-images li .img_container {
-    width: 250px;
-    height: 100px;
-    overflow: hidden;
-}
-
-.task-show-images li {
-    padding: 10px;
-    overflow: auto;
-    width: 250px;
-    min-height: 120px;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.task-show-images li p{
-    padding: 5px;
-    font-weight: bold;
-}
-
-.task-show-images li:hover {
-    background: #eee;
-}
-
-.task-show-image-actions {
-    margin-left: 5px;
-}
-
-.task-show-file-table {
-    width: auto;
-}
-
-.task-show-start-link {
-    color: #000;
-}
-
-.task-show-start-link:hover,
-.task-show-start-link:focus {
-    color: red;
 }
 
 .flag-milestone {
@@ -328,4 +237,10 @@ div.color-square-selected {
     width: 28px;
     height: 28px;
     box-shadow: 3px 2px 10px 0 rgba(180,180,180,0.9);
+}
+
+/* Assign to me */
+.assign-me {
+    font-size: 0.8em;
+    vertical-align: bottom;
 }

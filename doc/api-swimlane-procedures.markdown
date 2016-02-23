@@ -235,12 +235,13 @@ Response example:
 }
 ```
 
-## moveSwimlaneUp
+## changeSwimlanePosition
 
-- Purpose: **Move up the swimlane position**
+- Purpose: **Move up the swimlane position** (only for active swimlanes)
 - Parameters:
     - **project_id** (integer, required)
     - **swimlane_id** (integer, required)
+    - **position** (integer, required, must be >= 1)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -249,11 +250,12 @@ Request example:
 ```json
 {
     "jsonrpc": "2.0",
-    "method": "moveSwimlaneUp",
+    "method": "changeSwimlanePosition",
     "id": 99275573,
     "params": [
         1,
-        2
+        2,
+        3
     ]
 }
 ```
@@ -264,39 +266,6 @@ Response example:
 {
     "jsonrpc": "2.0",
     "id": 99275573,
-    "result": true
-}
-```
-
-## moveSwimlaneDown
-
-- Purpose: **Move down the swimlane position**
-- Parameters:
-    - **project_id** (integer, required)
-    - **swimlane_id** (integer, required)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "method": "moveSwimlaneDown",
-    "id": 957090649,
-    "params": {
-        "project_id": 1,
-        "swimlane_id": 2
-    }
-}
-```
-
-Response example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "id": 957090649,
     "result": true
 }
 ```

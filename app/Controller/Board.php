@@ -27,7 +27,7 @@ class Board extends Base
         }
 
         // Display the board with a specific layout
-        $this->response->html($this->template->layout('board/view_public', array(
+        $this->response->html($this->helper->layout->app('board/view_public', array(
             'project' => $project,
             'swimlanes' => $this->board->getBoard($project['id']),
             'title' => $project['name'],
@@ -49,12 +49,11 @@ class Board extends Base
     {
         $params = $this->getProjectFilters('board', 'show');
 
-        $this->response->html($this->template->layout('board/view_private', array(
+        $this->response->html($this->helper->layout->app('board/view_private', array(
             'categories_list' => $this->category->getList($params['project']['id'], false),
             'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
             'custom_filters_list' => $this->customFilter->getAll($params['project']['id'], $this->userSession->getId()),
             'swimlanes' => $this->taskFilter->search($params['filters']['search'])->getBoard($params['project']['id']),
-            'description' => $params['project']['description'],
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->config->get('board_highlight_period'),
         ) + $params));

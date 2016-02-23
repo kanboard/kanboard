@@ -71,9 +71,14 @@ ul.dropdown-submenu-open {
     padding-right: 10px;
 }
 
+.dropdown-menu-link-text,
 .dropdown-menu-link-icon {
     color: #333;
     text-decoration: none;
+}
+
+.dropdown-menu-link-text:hover {
+    text-decoration: underline;
 }
 
 /* textarea dropdown */

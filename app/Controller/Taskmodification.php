@@ -23,71 +23,48 @@ class Taskmodification extends Base
     }
 
     /**
-     * Update time tracking information
-     *
-     * @access public
-     */
-    public function time()
-    {
-        $task = $this->getTask();
-        $values = $this->request->getValues();
-
-        list($valid, ) = $this->taskValidator->validateTimeModification($values);
-
-        if ($valid && $this->taskModification->update($values)) {
-            $this->flash->success(t('Task updated successfully.'));
-        } else {
-            $this->flash->failure(t('Unable to update your task.'));
-        }
-
-        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-    }
-
-    /**
      * Edit description form
      *
      * @access public
      */
-    public function description()
+    public function description(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax() || $this->request->getIntegerParam('ajax');
 
-        if ($this->request->isPost()) {
-            $values = $this->request->getValues();
-
-            list($valid, $errors) = $this->taskValidator->validateDescriptionCreation($values);
-
-            if ($valid) {
-                if ($this->taskModification->update($values)) {
-                    $this->flash->success(t('Task updated successfully.'));
-                } else {
-                    $this->flash->failure(t('Unable to update your task.'));
-                }
-
-                if ($ajax) {
-                    $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-                } else {
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-                }
-            }
-        } else {
-            $values = $task;
-            $errors = array();
+        if (empty($values)) {
+            $values = array('id' => $task['id'], 'description' => $task['description']);
         }
 
-        $params = array(
+        $this->response->html($this->helper->layout->task('task_modification/edit_description', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'ajax' => $ajax,
-        );
+        )));
+    }
 
-        if ($ajax) {
-            $this->response->html($this->template->render('task_modification/edit_description', $params));
-        } else {
-            $this->response->html($this->taskLayout('task_modification/edit_description', $params));
+    /**
+     * Update description
+     *
+     * @access public
+     */
+    public function updateDescription()
+    {
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+
+        list($valid, $errors) = $this->taskValidator->validateDescriptionCreation($values);
+
+        if ($valid) {
+            if ($this->taskModification->update($values)) {
+                $this->flash->success(t('Task updated successfully.'));
+            } else {
+                $this->flash->failure(t('Unable to update your task.'));
+            }
+
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         }
+
+        $this->description($values, $errors);
     }
 
     /**
@@ -98,33 +75,26 @@ class Taskmodification extends Base
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $ajax = $this->request->isAjax();
+        $project = $this->project->getById($task['project_id']);
 
         if (empty($values)) {
             $values = $task;
+            $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
+            $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
         }
 
-        $this->dateParser->format($values, array('date_due'));
+        $values = $this->dateParser->format($values, array('date_due'), $this->config->get('application_date_format', 'm/d/Y'));
+        $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', 'm/d/Y H:i'));
 
-        $params = array(
+        $this->response->html($this->helper->layout->task('task_modification/edit_task', array(
+            'project' => $project,
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($task['project_id']),
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
-            'ajax' => $ajax,
-        );
-
-        if ($ajax) {
-            $html = $this->template->render('task_modification/edit_task', $params);
-        } else {
-            $html = $this->taskLayout('task_modification/edit_task', $params);
-        }
-
-        $this->response->html($html);
+        )));
     }
 
     /**
@@ -141,56 +111,10 @@ class Taskmodification extends Base
 
         if ($valid && $this->taskModification->update($values)) {
             $this->flash->success(t('Task updated successfully.'));
-
-            if ($this->request->isAjax()) {
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            } else {
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-            }
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         } else {
             $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);
         }
-    }
-
-    /**
-     * Edit recurrence form
-     *
-     * @access public
-     */
-    public function recurrence()
-    {
-        $task = $this->getTask();
-
-        if ($this->request->isPost()) {
-            $values = $this->request->getValues();
-
-            list($valid, $errors) = $this->taskValidator->validateEditRecurrence($values);
-
-            if ($valid) {
-                if ($this->taskModification->update($values)) {
-                    $this->flash->success(t('Task updated successfully.'));
-                } else {
-                    $this->flash->failure(t('Unable to update your task.'));
-                }
-
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
-            }
-        } else {
-            $values = $task;
-            $errors = array();
-        }
-
-        $params = array(
-            'values' => $values,
-            'errors' => $errors,
-            'task' => $task,
-            'recurrence_status_list' => $this->task->getRecurrenceStatusList(),
-            'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
-            'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
-            'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
-        );
-
-        $this->response->html($this->taskLayout('task_modification/edit_recurrence', $params));
     }
 }

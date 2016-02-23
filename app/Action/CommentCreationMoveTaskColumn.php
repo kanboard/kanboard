@@ -71,7 +71,7 @@ class CommentCreationMoveTaskColumn extends Base
             return false;
         }
 
-        $column = $this->board->getColumn($data['column_id']);
+        $column = $this->column->getById($data['column_id']);
 
         return (bool) $this->comment->create(array(
             'comment' => t('Moved to column %s', $column['title']),

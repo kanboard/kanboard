@@ -174,34 +174,6 @@ define('LDAP_GROUP_FILTER', '');
 define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 ```
 
-Google Authentication settings
-------------------------------
-
-```php
-// Enable/disable Google authentication
-define('GOOGLE_AUTH', false);
-
-// Google client id (Get this value from the Google developer console)
-define('GOOGLE_CLIENT_ID', '');
-
-// Google client secret key (Get this value from the Google developer console)
-define('GOOGLE_CLIENT_SECRET', '');
-```
-
-Github Authentication settings
-------------------------------
-
-```php
-// Enable/disable GitHub authentication
-define('GITHUB_AUTH', false);
-
-// GitHub client id (Copy it from your settings -> Applications -> Developer applications)
-define('GITHUB_CLIENT_ID', '');
-
-// GitHub client secret key (Copy it from your settings -> Applications -> Developer applications)
-define('GITHUB_CLIENT_SECRET', '');
-```
-
 Reverse-Proxy Authentication settings
 -------------------------------------
 
@@ -294,6 +266,9 @@ define('API_AUTHENTICATION_HEADER', '');
 
 // Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
+
+// Disabling logout (for external SSO authentication)
+define('DISABLE_LOGOUT', false);
 
 // Override API token stored in the database, useful for automated tests
 define('API_AUTHENTICATION_TOKEN', 'My unique API Token');

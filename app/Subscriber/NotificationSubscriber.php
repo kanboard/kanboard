@@ -6,7 +6,7 @@ use Kanboard\Event\GenericEvent;
 use Kanboard\Model\Task;
 use Kanboard\Model\Comment;
 use Kanboard\Model\Subtask;
-use Kanboard\Model\File;
+use Kanboard\Model\TaskFile;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class NotificationSubscriber extends BaseSubscriber implements EventSubscriberInterface
@@ -28,7 +28,7 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
             Comment::EVENT_CREATE => 'handleEvent',
             Comment::EVENT_UPDATE => 'handleEvent',
             Comment::EVENT_USER_MENTION => 'handleEvent',
-            File::EVENT_CREATE => 'handleEvent',
+            TaskFile::EVENT_CREATE => 'handleEvent',
         );
     }
 

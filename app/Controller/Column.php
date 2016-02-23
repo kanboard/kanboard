@@ -15,23 +15,36 @@ class Column extends Base
      *
      * @access public
      */
-    public function index(array $values = array(), array $errors = array())
+    public function index()
     {
         $project = $this->getProject();
-        $columns = $this->board->getColumns($project['id']);
+        $columns = $this->column->getAll($project['id']);
 
-        foreach ($columns as $column) {
-            $values['title['.$column['id'].']'] = $column['title'];
-            $values['description['.$column['id'].']'] = $column['description'];
-            $values['task_limit['.$column['id'].']'] = $column['task_limit'] ?: null;
-        }
-
-        $this->response->html($this->projectLayout('column/index', array(
-            'errors' => $errors,
-            'values' => $values + array('project_id' => $project['id']),
+        $this->response->html($this->helper->layout->project('column/index', array(
             'columns' => $columns,
             'project' => $project,
             'title' => t('Edit board')
+        )));
+    }
+
+    /**
+     * Show form to create a new column
+     *
+     * @access public
+     */
+    public function create(array $values = array(), array $errors = array())
+    {
+        $project = $this->getProject();
+
+        if (empty($values)) {
+            $values = array('project_id' => $project['id']);
+        }
+
+        $this->response->html($this->template->render('column/create', array(
+            'values' => $values,
+            'errors' => $errors,
+            'project' => $project,
+            'title' => t('Add a new column')
         )));
     }
 
@@ -40,29 +53,23 @@ class Column extends Base
      *
      * @access public
      */
-    public function create()
+    public function save()
     {
         $project = $this->getProject();
-        $columns = $this->board->getColumnsList($project['id']);
-        $data = $this->request->getValues();
-        $values = array();
+        $values = $this->request->getValues();
 
-        foreach ($columns as $column_id => $column_title) {
-            $values['title['.$column_id.']'] = $column_title;
-        }
-
-        list($valid, $errors) = $this->columnValidator->validateCreation($data);
+        list($valid, $errors) = $this->columnValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->board->addColumn($project['id'], $data['title'], $data['task_limit'], $data['description'])) {
-                $this->flash->success(t('Board updated successfully.'));
-                $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
+            if ($this->column->create($project['id'], $values['title'], $values['task_limit'], $values['description'])) {
+                $this->flash->success(t('Column created successfully.'));
+                return $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])), true);
             } else {
-                $this->flash->failure(t('Unable to update this board.'));
+                $errors['title'] = array(t('Another column with the same name exists in the project'));
             }
         }
 
-        $this->index($values, $errors);
+        $this->create($values, $errors);
     }
 
     /**
@@ -73,9 +80,9 @@ class Column extends Base
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
+        $column = $this->column->getById($this->request->getIntegerParam('column_id'));
 
-        $this->response->html($this->projectLayout('column/edit', array(
+        $this->response->html($this->helper->layout->project('column/edit', array(
             'errors' => $errors,
             'values' => $values ?: $column,
             'project' => $project,
@@ -97,7 +104,7 @@ class Column extends Base
         list($valid, $errors) = $this->columnValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->board->updateColumn($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
+            if ($this->column->update($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
                 $this->flash->success(t('Board updated successfully.'));
                 $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
             } else {
@@ -109,22 +116,21 @@ class Column extends Base
     }
 
     /**
-     * Move a column up or down
+     * Move column position
      *
      * @access public
      */
     public function move()
     {
-        $this->checkCSRFParam();
         $project = $this->getProject();
-        $column_id = $this->request->getIntegerParam('column_id');
-        $direction = $this->request->getStringParam('direction');
+        $values = $this->request->getJson();
 
-        if ($direction === 'up' || $direction === 'down') {
-            $this->board->{'move'.$direction}($project['id'], $column_id);
+        if (! empty($values) && isset($values['column_id']) && isset($values['position'])) {
+            $result = $this->column->changePosition($project['id'], $values['column_id'], $values['position']);
+            return $this->response->json(array('result' => $result));
         }
 
-        $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
+        $this->forbidden();
     }
 
     /**
@@ -136,8 +142,8 @@ class Column extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('column/remove', array(
-            'column' => $this->board->getColumn($this->request->getIntegerParam('column_id')),
+        $this->response->html($this->helper->layout->project('column/remove', array(
+            'column' => $this->column->getById($this->request->getIntegerParam('column_id')),
             'project' => $project,
             'title' => t('Remove a column from a board')
         )));
@@ -152,9 +158,9 @@ class Column extends Base
     {
         $project = $this->getProject();
         $this->checkCSRFParam();
-        $column = $this->board->getColumn($this->request->getIntegerParam('column_id'));
+        $column_id = $this->request->getIntegerParam('column_id');
 
-        if (! empty($column) && $this->board->removeColumn($column['id'])) {
+        if ($this->column->remove($column_id)) {
             $this->flash->success(t('Column removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this column.'));

@@ -107,7 +107,8 @@ class ProjectPermission extends Base
      */
     public function isAssignable($project_id, $user_id)
     {
-        return in_array($this->projectUserRole->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER));
+        return $this->user->isActive($user_id) &&
+            in_array($this->projectUserRole->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER));
     }
 
     /**

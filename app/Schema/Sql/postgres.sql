@@ -68,7 +68,7 @@ CREATE TABLE actions (
     id integer NOT NULL,
     project_id integer NOT NULL,
     event_name character varying(50) NOT NULL,
-    action_name character varying(50) NOT NULL
+    action_name character varying(255) NOT NULL
 );
 
 
@@ -265,7 +265,7 @@ CREATE TABLE last_logins (
     id integer NOT NULL,
     auth_type character varying(25),
     user_id integer,
-    ip character varying(40),
+    ip character varying(45),
     user_agent character varying(255),
     date_creation bigint
 );
@@ -318,6 +318,21 @@ CREATE SEQUENCE links_id_seq
 --
 
 ALTER SEQUENCE links_id_seq OWNED BY links.id;
+
+
+--
+-- Name: password_reset; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE password_reset (
+    token character varying(80) NOT NULL,
+    user_id integer NOT NULL,
+    date_expiration integer NOT NULL,
+    date_creation integer NOT NULL,
+    ip character varying(45) NOT NULL,
+    user_agent character varying(255) NOT NULL,
+    is_active boolean NOT NULL
+);
 
 
 --
@@ -541,7 +556,11 @@ CREATE TABLE projects (
     description text,
     identifier character varying(50) DEFAULT ''::character varying,
     start_date character varying(10) DEFAULT ''::character varying,
-    end_date character varying(10) DEFAULT ''::character varying
+    end_date character varying(10) DEFAULT ''::character varying,
+    owner_id integer DEFAULT 0,
+    priority_default integer DEFAULT 0,
+    priority_start integer DEFAULT 0,
+    priority_end integer DEFAULT 3
 );
 
 
@@ -571,7 +590,7 @@ ALTER SEQUENCE projects_id_seq OWNED BY projects.id;
 CREATE TABLE remember_me (
     id integer NOT NULL,
     user_id integer,
-    ip character varying(40),
+    ip character varying(45),
     user_agent character varying(255),
     token character varying(255),
     sequence character varying(255),
@@ -701,6 +720,42 @@ ALTER SEQUENCE swimlanes_id_seq OWNED BY swimlanes.id;
 
 
 --
+-- Name: task_has_external_links; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE task_has_external_links (
+    id integer NOT NULL,
+    link_type character varying(100) NOT NULL,
+    dependency character varying(100) NOT NULL,
+    title character varying(255) NOT NULL,
+    url character varying(255) NOT NULL,
+    date_creation integer NOT NULL,
+    date_modification integer NOT NULL,
+    task_id integer NOT NULL,
+    creator_id integer DEFAULT 0
+);
+
+
+--
+-- Name: task_has_external_links_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE task_has_external_links_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: task_has_external_links_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE task_has_external_links_id_seq OWNED BY task_has_external_links.id;
+
+
+--
 -- Name: task_has_files_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -813,7 +868,8 @@ CREATE TABLE tasks (
     recurrence_timeframe integer DEFAULT 0 NOT NULL,
     recurrence_basedate integer DEFAULT 0 NOT NULL,
     recurrence_parent integer,
-    recurrence_child integer
+    recurrence_child integer,
+    priority integer DEFAULT 0
 );
 
 
@@ -1138,6 +1194,13 @@ ALTER TABLE ONLY swimlanes ALTER COLUMN id SET DEFAULT nextval('swimlanes_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY task_has_external_links ALTER COLUMN id SET DEFAULT nextval('task_has_external_links_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY task_has_links ALTER COLUMN id SET DEFAULT nextval('task_has_links_id_seq'::regclass);
 
 
@@ -1278,6 +1341,14 @@ ALTER TABLE ONLY links
 
 ALTER TABLE ONLY links
     ADD CONSTRAINT links_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: password_reset_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY password_reset
+    ADD CONSTRAINT password_reset_pkey PRIMARY KEY (token);
 
 
 --
@@ -1687,6 +1758,14 @@ ALTER TABLE ONLY last_logins
 
 
 --
+-- Name: password_reset_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY password_reset
+    ADD CONSTRAINT password_reset_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: project_activities_creator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1820,6 +1899,14 @@ ALTER TABLE ONLY subtask_time_tracking
 
 ALTER TABLE ONLY swimlanes
     ADD CONSTRAINT swimlanes_project_id_fkey FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+
+--
+-- Name: task_has_external_links_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY task_has_external_links
+    ADD CONSTRAINT task_has_external_links_task_id_fkey FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
 
 
 --
@@ -2001,8 +2088,8 @@ INSERT INTO settings (option, value) VALUES ('board_highlight_period', '172800')
 INSERT INTO settings (option, value) VALUES ('board_public_refresh_interval', '60');
 INSERT INTO settings (option, value) VALUES ('board_private_refresh_interval', '10');
 INSERT INTO settings (option, value) VALUES ('board_columns', '');
-INSERT INTO settings (option, value) VALUES ('webhook_token', '686b427497298001641d9d300d53b0b23da6a4a2cc0ce17d24d346219fca');
-INSERT INTO settings (option, value) VALUES ('api_token', '3387e930ebe3984d59eac1fb07bb112916c846cfe2f01b513349c24fc045');
+INSERT INTO settings (option, value) VALUES ('webhook_token', '083531659240f36021edc73a4ed3920646ef8798b798c5894e2277f048a2');
+INSERT INTO settings (option, value) VALUES ('api_token', 'b97b4abc7e8f0e0569bdad8cb54f7fb1931615932e552fa255f87a3e1360');
 INSERT INTO settings (option, value) VALUES ('application_language', 'en_US');
 INSERT INTO settings (option, value) VALUES ('application_timezone', 'UTC');
 INSERT INTO settings (option, value) VALUES ('application_url', '');
@@ -2019,6 +2106,7 @@ INSERT INTO settings (option, value) VALUES ('webhook_url', '');
 INSERT INTO settings (option, value) VALUES ('default_color', 'yellow');
 INSERT INTO settings (option, value) VALUES ('subtask_time_tracking', '1');
 INSERT INTO settings (option, value) VALUES ('cfd_include_closed_tasks', '1');
+INSERT INTO settings (option, value) VALUES ('password_reset', '1');
 
 
 --
@@ -2066,4 +2154,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$EIYcgiDba33chGTqlP4cYeXSF7WC5RJPr8eMGsx.8gVT1Q4OUgkay', 'app-admin');INSERT INTO schema_version VALUES ('78');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$f6brAPgJ6iTtOWUMJANDuuRG.VWDH61.aCb5v3MJnSrZodhDaCcmy', 'app-admin');INSERT INTO schema_version VALUES ('84');

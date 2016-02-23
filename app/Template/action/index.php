@@ -53,7 +53,7 @@
             </ul>
         </td>
         <td>
-            <?= $this->url->link(t('Remove'), 'action', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id'])) ?>
+            <?= $this->url->link(t('Remove'), 'action', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id']), false, 'popover') ?>
         </td>
     </tr>
     <?php endforeach ?>
@@ -67,9 +67,9 @@
     <?= $this->form->hidden('project_id', $values) ?>
 
     <?= $this->form->label(t('Action'), 'action_name') ?>
-    <?= $this->form->select('action_name', $available_actions, $values) ?><br/>
+    <?= $this->form->select('action_name', $available_actions, $values) ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Next step') ?>" class="btn btn-blue"/>
+        <input type="submit" value="<?= t('Next step') ?>" class="btn btn-blue">
     </div>
 </form>
