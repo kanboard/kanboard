@@ -70,3 +70,7 @@ hr {
 .web-notification-icon:hover {
     color: #000;
 }
+
+.smaller {
+    font-size: 0.85em;
+}

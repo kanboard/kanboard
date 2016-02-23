@@ -52,7 +52,7 @@ class UserProfile extends Base
             $this->groupSync->synchronize($profile['id'], $user->getExternalGroupIds());
         }
 
-        if (! empty($profile)) {
+        if (! empty($profile) && $profile['is_active'] == 1) {
             $this->userSession->initialize($profile);
             return true;
         }

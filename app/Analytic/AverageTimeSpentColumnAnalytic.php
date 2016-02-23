@@ -40,7 +40,7 @@ class AverageTimeSpentColumnAnalytic extends Base
     private function initialize($project_id)
     {
         $stats = array();
-        $columns = $this->board->getColumnsList($project_id);
+        $columns = $this->column->getList($project_id);
 
         foreach ($columns as $column_id => $column_title) {
             $stats[$column_id] = array(

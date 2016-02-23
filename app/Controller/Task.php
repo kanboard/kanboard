@@ -30,13 +30,13 @@ class Task extends Base
             $this->notfound(true);
         }
 
-        $this->response->html($this->template->layout('task/public', array(
+        $this->response->html($this->helper->layout->app('task/public', array(
             'project' => $project,
             'comments' => $this->comment->getAll($task['id']),
             'subtasks' => $this->subtask->getAll($task['id']),
             'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
             'task' => $task,
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'columns_list' => $this->column->getList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'title' => $task['title'],
             'no_layout' => true,
@@ -62,23 +62,21 @@ class Task extends Base
             'time_spent' => $task['time_spent'] ?: '',
         );
 
-        $this->dateParser->format($values, array('date_started'), 'Y-m-d H:i');
+        $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', 'm/d/Y H:i'));
 
-        $this->response->html($this->taskLayout('task/show', array(
+        $this->response->html($this->helper->layout->task('task/show', array(
             'project' => $this->project->getById($task['project_id']),
-            'files' => $this->file->getAllDocuments($task['id']),
-            'images' => $this->file->getAllImages($task['id']),
+            'files' => $this->taskFile->getAllDocuments($task['id']),
+            'images' => $this->taskFile->getAllImages($task['id']),
             'comments' => $this->comment->getAll($task['id'], $this->userSession->getCommentSorting()),
             'subtasks' => $subtasks,
             'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
             'task' => $task,
             'values' => $values,
             'link_label_list' => $this->link->getList(0, false),
-            'columns_list' => $this->board->getColumnsList($task['project_id']),
+            'columns_list' => $this->column->getList($task['project_id']),
             'colors_list' => $this->color->getList(),
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id'], true, false, false),
-            'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
             'title' => $task['project_name'].' &gt; '.$task['title'],
             'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
             'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
@@ -95,7 +93,7 @@ class Task extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task/analytics', array(
+        $this->response->html($this->helper->layout->task('task/analytics', array(
             'title' => $task['title'],
             'task' => $task,
             'lead_time' => $this->taskAnalytic->getLeadTime($task),
@@ -114,14 +112,14 @@ class Task extends Base
         $task = $this->getTask();
 
         $subtask_paginator = $this->paginator
-            ->setUrl('task', 'timesheet', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
+            ->setUrl('task', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
             ->setMax(15)
             ->setOrder('start')
             ->setDirection('DESC')
             ->setQuery($this->subtaskTimeTracking->getTaskQuery($task['id']))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
-        $this->response->html($this->taskLayout('task/time_tracking_details', array(
+        $this->response->html($this->helper->layout->task('task/time_tracking_details', array(
             'task' => $task,
             'subtask_paginator' => $subtask_paginator,
         )));
@@ -136,7 +134,7 @@ class Task extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->taskLayout('task/transitions', array(
+        $this->response->html($this->helper->layout->task('task/transitions', array(
             'task' => $task,
             'transitions' => $this->transition->getAllByTask($task['id']),
         )));
@@ -167,7 +165,7 @@ class Task extends Base
             $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
         }
 
-        $this->response->html($this->taskLayout('task/remove', array(
+        $this->response->html($this->helper->layout->task('task/remove', array(
             'task' => $task,
         )));
     }

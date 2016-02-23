@@ -6,7 +6,69 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 101;
+const VERSION = 107;
+
+function version_107(PDO $pdo)
+{
+    $pdo->exec("UPDATE project_activities SET event_name='task.file.create' WHERE event_name='file.create'");
+}
+
+function version_106(PDO $pdo)
+{
+    $pdo->exec('RENAME TABLE files TO task_has_files');
+
+    $pdo->exec("
+        CREATE TABLE project_has_files (
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `project_id` INT NOT NULL,
+            `name` VARCHAR(255) NOT NULL,
+            `path` VARCHAR(255) NOT NULL,
+            `is_image` TINYINT(1) DEFAULT 0,
+            `size` INT DEFAULT 0 NOT NULL,
+            `user_id` INT DEFAULT 0 NOT NULL,
+            `date` INT DEFAULT 0 NOT NULL,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            PRIMARY KEY(id)
+        )  ENGINE=InnoDB CHARSET=utf8"
+    );
+}
+
+function version_105(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN is_active TINYINT(1) DEFAULT 1");
+}
+
+function version_104(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_external_links (
+            id INT NOT NULL AUTO_INCREMENT,
+            link_type VARCHAR(100) NOT NULL,
+            dependency VARCHAR(100) NOT NULL,
+            title VARCHAR(255) NOT NULL,
+            url VARCHAR(255) NOT NULL,
+            date_creation INT NOT NULL,
+            date_modification INT NOT NULL,
+            task_id INT NOT NULL,
+            creator_id INT DEFAULT 0,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            PRIMARY KEY(id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+}
+
+function version_103(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_default INT DEFAULT 0");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_start INT DEFAULT 0");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_end INT DEFAULT 3");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN priority INT DEFAULT 0");
+}
+
+function version_102(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN owner_id INT DEFAULT 0");
+}
 
 function version_101(PDO $pdo)
 {

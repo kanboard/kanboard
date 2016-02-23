@@ -55,6 +55,17 @@ nav .active a {
     color: #d40000;
 }
 
+/* user links on the left */
+header .user-links .dropdown {
+    margin-left: 15px;
+}
+
+/* title tooltip */
+header h1 .tooltip {
+    opacity: 0.3;
+    font-size: 0.6em;
+}
+
 /* page header */
 .page-header {
     margin-bottom: 20px;
@@ -87,8 +98,19 @@ nav .active a {
 .menu-inline li,
 .page-header li {
     display: inline;
-    padding-right: 10px;
+    padding-right: 15px;
     font-size: 0.95em;
+}
+
+.page-header li.active a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.page-header li.active a:hover,
+.page-header li.active a:focus {
+    text-decoration: underline;
 }
 
 .menu-inline {

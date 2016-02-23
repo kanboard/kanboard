@@ -147,32 +147,6 @@ class Translator
     }
 
     /**
-     * Get a formatted datetime
-     *
-     * $translator->datetime('%Y-%m-%d', time());
-     *
-     * @access public
-     * @param  string   $format      Format defined by the strftime function
-     * @param  integer  $timestamp   Unix timestamp
-     * @return string
-     */
-    public function datetime($format, $timestamp)
-    {
-        if (! $timestamp) {
-            return '';
-        }
-
-        $format = $this->get($format, $format);
-
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $format = str_replace('%e', '%d', $format);
-            $format = str_replace('%k', '%H', $format);
-        }
-
-        return strftime($format, (int) $timestamp);
-    }
-
-    /**
      * Get an identifier from the translations or return the default
      *
      * @access public
@@ -199,8 +173,6 @@ class Translator
      */
     public static function load($language, $path = self::PATH)
     {
-        setlocale(LC_TIME, $language.'.UTF-8', $language);
-
         $filename = $path.DIRECTORY_SEPARATOR.$language.DIRECTORY_SEPARATOR.'translations.php';
 
         if (file_exists($filename)) {

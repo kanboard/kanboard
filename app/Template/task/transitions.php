@@ -15,7 +15,7 @@
         </tr>
         <?php foreach ($transitions as $transition): ?>
         <tr>
-            <td><?= dt('%B %e, %Y at %k:%M %p', $transition['date']) ?></td>
+            <td><?= $this->dt->datetime($transition['date']) ?></td>
             <td><?= $this->e($transition['src_column']) ?></td>
             <td><?= $this->e($transition['dst_column']) ?></td>
             <td><?= $this->url->link($this->e($transition['name'] ?: $transition['username']), 'user', 'show', array('user_id' => $transition['user_id'])) ?></td>

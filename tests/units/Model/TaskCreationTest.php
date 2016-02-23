@@ -295,7 +295,7 @@ class TaskCreationTest extends Base
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
         $this->assertEquals(2, $task['id']);
-        $this->assertEquals($timestamp, $task['date_due']);
+        $this->assertEquals(date('Y-m-d 00:00', $timestamp), date('Y-m-d 00:00', $task['date_due']));
 
         $task = $tf->getById(3);
         $this->assertEquals(3, $task['id']);
@@ -422,6 +422,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals('2050-01-10 12:30', date('Y-m-d H:i', $task['date_due']));
+        $this->assertEquals('2050-01-10 00:00', date('Y-m-d H:i', $task['date_due']));
     }
 }

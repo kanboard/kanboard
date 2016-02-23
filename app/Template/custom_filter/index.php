@@ -36,8 +36,8 @@
                     <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
-                        <li><?= $this->url->link(t('Remove'), 'customfilter', 'remove', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id']), true) ?></li>
-                        <li><?= $this->url->link(t('Edit'), 'customfilter', 'edit', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id'])) ?></li>
+                        <li><?= $this->url->link(t('Remove'), 'customfilter', 'confirm', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id']), false, 'popover') ?></li>
+                        <li><?= $this->url->link(t('Edit'), 'customfilter', 'edit', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id']), false, 'popover') ?></li>
                     </ul>
                     </div>
                 <?php endif ?>

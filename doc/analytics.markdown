@@ -62,9 +62,4 @@ This chart show the average lead and cycle time for the last 1000 tasks over tim
 
 Those metrics are calculated and recorded every day for the whole project.
 
-Don't forget to run the daily job for statistics calculation
--------------------------------------------------------
-
-To generate accurate analytic data, you should run the daily cronjob **project daily statistics**.
-
-[Read the documentation of Kanboard CLI](cli.markdown)
+Note: Don't forget to run the [daily cronjob](cronjob.markdown) to have accurate statistics.

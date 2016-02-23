@@ -29,7 +29,7 @@ CREATE TABLE `actions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `event_name` varchar(50) NOT NULL,
-  `action_name` varchar(50) NOT NULL,
+  `action_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
   CONSTRAINT `actions_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
@@ -142,7 +142,7 @@ CREATE TABLE `last_logins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `auth_type` varchar(25) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `ip` varchar(40) DEFAULT NULL,
+  `ip` varchar(45) DEFAULT NULL,
   `user_agent` varchar(255) DEFAULT NULL,
   `date_creation` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -159,6 +159,22 @@ CREATE TABLE `links` (
   `opposite_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `label` (`label`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `password_reset`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_reset` (
+  `token` varchar(80) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date_expiration` int(11) NOT NULL,
+  `date_creation` int(11) NOT NULL,
+  `ip` varchar(45) NOT NULL,
+  `user_agent` varchar(255) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`token`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `password_reset_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `plugin_schema_versions`;
@@ -304,6 +320,10 @@ CREATE TABLE `projects` (
   `identifier` varchar(50) DEFAULT '',
   `start_date` varchar(10) DEFAULT '',
   `end_date` varchar(10) DEFAULT '',
+  `owner_id` int(11) DEFAULT '0',
+  `priority_default` int(11) DEFAULT '0',
+  `priority_start` int(11) DEFAULT '0',
+  `priority_end` int(11) DEFAULT '3',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -313,7 +333,7 @@ DROP TABLE IF EXISTS `remember_me`;
 CREATE TABLE `remember_me` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
-  `ip` varchar(40) DEFAULT NULL,
+  `ip` varchar(45) DEFAULT NULL,
   `user_agent` varchar(255) DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   `sequence` varchar(255) DEFAULT NULL,
@@ -390,6 +410,24 @@ CREATE TABLE `swimlanes` (
   CONSTRAINT `swimlanes_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `task_has_external_links`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `task_has_external_links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `link_type` varchar(100) NOT NULL,
+  `dependency` varchar(100) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `date_creation` int(11) NOT NULL,
+  `date_modification` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `creator_id` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `task_id` (`task_id`),
+  CONSTRAINT `task_has_external_links_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `task_has_links`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -451,6 +489,7 @@ CREATE TABLE `tasks` (
   `recurrence_basedate` int(11) NOT NULL DEFAULT '0',
   `recurrence_parent` int(11) DEFAULT NULL,
   `recurrence_child` int(11) DEFAULT NULL,
+  `priority` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_task_active` (`is_active`),
   KEY `column_id` (`column_id`),
@@ -581,7 +620,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES ('api_token','a5ee9b5e8a97d1da2b725d5f3d66caec8b5fe195968c33f8081badd17c35'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','bb74b2b3d79f562520d1f495b6c0c1f9ff1d996d1d60374fd67b47637239'),('webhook_url','');
+INSERT INTO `settings` VALUES ('api_token','dcae89653bfd780f56a5c2ffabc54174bcdd877940e97eaa5d800b35df0c'),('application_currency','USD'),('application_date_format','m/d/Y'),('application_language','en_US'),('application_stylesheet',''),('application_timezone','UTC'),('application_url',''),('board_columns',''),('board_highlight_period','172800'),('board_private_refresh_interval','10'),('board_public_refresh_interval','60'),('calendar_project_tasks','date_started'),('calendar_user_subtasks_time_tracking','0'),('calendar_user_tasks','date_started'),('cfd_include_closed_tasks','1'),('default_color','yellow'),('integration_gravatar','0'),('password_reset','1'),('project_categories',''),('subtask_restriction','0'),('subtask_time_tracking','1'),('webhook_token','6c0a16d06e31add3ca1ca8713a69c6b410f72c80fd49cdfe27c4a62eef13'),('webhook_url','');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -610,4 +649,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$EIYcgiDba33chGTqlP4cYeXSF7WC5RJPr8eMGsx.8gVT1Q4OUgkay', 'app-admin');INSERT INTO schema_version VALUES ('98');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$f6brAPgJ6iTtOWUMJANDuuRG.VWDH61.aCb5v3MJnSrZodhDaCcmy', 'app-admin');INSERT INTO schema_version VALUES ('104');

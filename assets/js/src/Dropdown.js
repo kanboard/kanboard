@@ -26,11 +26,11 @@ Dropdown.prototype.listen = function() {
         var submenuHeight = clone.outerHeight();
         var submenuWidth = clone.outerWidth();
 
-        if (offset.top + submenuHeight - $(window).scrollTop() > $(window).height()) {
-            clone.css('top', offset.top - submenuHeight - 5);
+        if (offset.top + submenuHeight - $(window).scrollTop() < $(window).height() || $(window).scrollTop() + offset.top < submenuHeight) {
+            clone.css('top', offset.top + $(this).height());
         }
         else {
-            clone.css('top', offset.top + $(this).height());
+            clone.css('top', offset.top - submenuHeight - 5);
         }
 
         if (offset.left + submenuWidth > $(window).width()) {

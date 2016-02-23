@@ -7,4 +7,15 @@ Task.prototype.listen = function() {
         $(this).addClass("color-square-selected");
         $("#form-color_id").val($(this).data("color-id"));
     });
+
+    $(document).on("click", ".assign-me", function(e) {
+        e.preventDefault();
+
+        var currentId = $(this).data("current-id");
+        var dropdownId = "#" + $(this).data("target-id");
+
+        if ($(dropdownId + ' option[value=' + currentId + ']').length) {
+            $(dropdownId).val(currentId);
+        }
+    });
 };

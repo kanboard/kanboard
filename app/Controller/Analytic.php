@@ -1,6 +1,7 @@
 <?php
 
 namespace Kanboard\Controller;
+
 use Kanboard\Model\Task as TaskModel;
 
 /**
@@ -12,22 +13,6 @@ use Kanboard\Model\Task as TaskModel;
 class Analytic extends Base
 {
     /**
-     * Common layout for analytic views
-     *
-     * @access private
-     * @param  string    $template   Template name
-     * @param  array     $params     Template parameters
-     * @return string
-     */
-    private function layout($template, array $params)
-    {
-        $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
-        $params['content_for_sublayout'] = $this->template->render($template, $params);
-
-        return $this->template->layout('analytic/layout', $params);
-    }
-
-    /**
      * Show average Lead and Cycle time
      *
      * @access public
@@ -37,7 +22,7 @@ class Analytic extends Base
         $project = $this->getProject();
         list($from, $to) = $this->getDates();
 
-        $this->response->html($this->layout('analytic/lead_cycle_time', array(
+        $this->response->html($this->helper->layout->analytic('analytic/lead_cycle_time', array(
             'values' => array(
                 'from' => $from,
                 'to' => $to,
@@ -46,7 +31,7 @@ class Analytic extends Base
             'average' => $this->averageLeadCycleTimeAnalytic->build($project['id']),
             'metrics' => $this->projectDailyStats->getRawMetrics($project['id'], $from, $to),
             'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
+            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => t('Lead and Cycle time for "%s"', $project['name']),
         )));
     }
@@ -69,7 +54,7 @@ class Analytic extends Base
             ->setQuery($query)
             ->calculate();
 
-        $this->response->html($this->layout('analytic/compare_hours', array(
+        $this->response->html($this->helper->layout->analytic('analytic/compare_hours', array(
             'project' => $project,
             'paginator' => $paginator,
             'metrics' => $this->estimatedTimeComparisonAnalytic->build($project['id']),
@@ -86,7 +71,7 @@ class Analytic extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->layout('analytic/avg_time_columns', array(
+        $this->response->html($this->helper->layout->analytic('analytic/avg_time_columns', array(
             'project' => $project,
             'metrics' => $this->averageTimeSpentColumnAnalytic->build($project['id']),
             'title' => t('Average time spent into each column for "%s"', $project['name']),
@@ -102,7 +87,7 @@ class Analytic extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->layout('analytic/tasks', array(
+        $this->response->html($this->helper->layout->analytic('analytic/tasks', array(
             'project' => $project,
             'metrics' => $this->taskDistributionAnalytic->build($project['id']),
             'title' => t('Task repartition for "%s"', $project['name']),
@@ -118,7 +103,7 @@ class Analytic extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->layout('analytic/users', array(
+        $this->response->html($this->helper->layout->analytic('analytic/users', array(
             'project' => $project,
             'metrics' => $this->userDistributionAnalytic->build($project['id']),
             'title' => t('User repartition for "%s"', $project['name']),
@@ -160,7 +145,7 @@ class Analytic extends Base
 
         $display_graph = $this->projectDailyColumnStats->countDays($project['id'], $from, $to) >= 2;
 
-        $this->response->html($this->layout($template, array(
+        $this->response->html($this->helper->layout->analytic($template, array(
             'values' => array(
                 'from' => $from,
                 'to' => $to,
@@ -169,7 +154,7 @@ class Analytic extends Base
             'metrics' => $display_graph ? $this->projectDailyColumnStats->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
             'project' => $project,
             'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
+            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => t($title, $project['name']),
         )));
     }

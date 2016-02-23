@@ -2,8 +2,6 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Model\Subtask as SubtaskModel;
-
 /**
  * Subtask controller
  *
@@ -13,20 +11,19 @@ use Kanboard\Model\Subtask as SubtaskModel;
 class Subtask extends Base
 {
     /**
-     * Get the current subtask
-     *
-     * @access private
-     * @return array
+     * Show list of subtasks
      */
-    private function getSubtask()
+    public function show()
     {
-        $subtask = $this->subtask->getById($this->request->getIntegerParam('subtask_id'));
+        $task = $this->getTask();
 
-        if (empty($subtask)) {
-            $this->notfound();
-        }
-
-        return $subtask;
+        $this->response->html($this->helper->layout->task('subtask/show', array(
+            'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
+            'task' => $task,
+            'project' => $this->getProject(),
+            'subtasks' => $this->subtask->getAll($task['id']),
+            'editable' => true,
+        )));
     }
 
     /**
@@ -45,7 +42,7 @@ class Subtask extends Base
             );
         }
 
-        $this->response->html($this->taskLayout('subtask/create', array(
+        $this->response->html($this->helper->layout->task('subtask/create', array(
             'values' => $values,
             'errors' => $errors,
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
@@ -73,10 +70,10 @@ class Subtask extends Base
             }
 
             if (isset($values['another_subtask']) && $values['another_subtask'] == 1) {
-                $this->response->redirect($this->helper->url->to('subtask', 'create', array('project_id' => $task['project_id'], 'task_id' => $task['id'], 'another_subtask' => 1)));
+                return $this->create(array('project_id' => $task['project_id'], 'task_id' => $task['id'], 'another_subtask' => 1));
             }
 
-            $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'));
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
         }
 
         $this->create($values, $errors);
@@ -92,7 +89,7 @@ class Subtask extends Base
         $task = $this->getTask();
         $subtask = $this->getSubTask();
 
-        $this->response->html($this->taskLayout('subtask/edit', array(
+        $this->response->html($this->helper->layout->task('subtask/edit', array(
             'values' => empty($values) ? $subtask : $values,
             'errors' => $errors,
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
@@ -122,7 +119,7 @@ class Subtask extends Base
                 $this->flash->failure(t('Unable to update your sub-task.'));
             }
 
-            $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'));
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         }
 
         $this->edit($values, $errors);
@@ -138,7 +135,7 @@ class Subtask extends Base
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        $this->response->html($this->taskLayout('subtask/remove', array(
+        $this->response->html($this->helper->layout->task('subtask/remove', array(
             'subtask' => $subtask,
             'task' => $task,
         )));
@@ -161,97 +158,7 @@ class Subtask extends Base
             $this->flash->failure(t('Unable to remove this sub-task.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'));
-    }
-
-    /**
-     * Change status to the next status: Toto -> In Progress -> Done
-     *
-     * @access public
-     */
-    public function toggleStatus()
-    {
-        $task = $this->getTask();
-        $subtask = $this->getSubtask();
-        $redirect = $this->request->getStringParam('redirect', 'task');
-
-        $this->subtask->toggleStatus($subtask['id']);
-
-        if ($redirect === 'board') {
-            $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
-
-            $this->response->html($this->template->render('board/tooltip_subtasks', array(
-                'subtasks' => $this->subtask->getAll($task['id']),
-                'task' => $task,
-            )));
-        }
-
-        $this->toggleRedirect($task, $redirect);
-    }
-
-    /**
-     * Handle subtask restriction (popover)
-     *
-     * @access public
-     */
-    public function subtaskRestriction()
-    {
-        $task = $this->getTask();
-        $subtask = $this->getSubtask();
-
-        $this->response->html($this->template->render('subtask/restriction_change_status', array(
-            'status_list' => array(
-                SubtaskModel::STATUS_TODO => t('Todo'),
-                SubtaskModel::STATUS_DONE => t('Done'),
-            ),
-            'subtask_inprogress' => $this->subtask->getSubtaskInProgress($this->userSession->getId()),
-            'subtask' => $subtask,
-            'task' => $task,
-            'redirect' => $this->request->getStringParam('redirect'),
-        )));
-    }
-
-    /**
-     * Change status of the in progress subtask and the other subtask
-     *
-     * @access public
-     */
-    public function changeRestrictionStatus()
-    {
-        $task = $this->getTask();
-        $subtask = $this->getSubtask();
-        $values = $this->request->getValues();
-
-        // Change status of the previous in progress subtask
-        $this->subtask->update(array(
-            'id' => $values['id'],
-            'status' => $values['status'],
-        ));
-
-        // Set the current subtask to in pogress
-        $this->subtask->update(array(
-            'id' => $subtask['id'],
-            'status' => SubtaskModel::STATUS_INPROGRESS,
-        ));
-
-        $this->toggleRedirect($task, $values['redirect']);
-    }
-
-    /**
-     * Redirect to the right page
-     *
-     * @access private
-     */
-    private function toggleRedirect(array $task, $redirect)
-    {
-        switch ($redirect) {
-            case 'board':
-                $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
-            case 'dashboard':
-                $this->response->redirect($this->helper->url->to('app', 'index'));
-            default:
-                $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'subtasks'));
-        }
+        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
     }
 
     /**
@@ -261,14 +168,15 @@ class Subtask extends Base
      */
     public function movePosition()
     {
-        $this->checkCSRFParam();
         $project_id = $this->request->getIntegerParam('project_id');
         $task_id = $this->request->getIntegerParam('task_id');
-        $subtask_id = $this->request->getIntegerParam('subtask_id');
-        $direction = $this->request->getStringParam('direction');
-        $method = $direction === 'up' ? 'moveUp' : 'moveDown';
+        $values = $this->request->getJson();
 
-        $this->subtask->$method($task_id, $subtask_id);
-        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $project_id, 'task_id' => $task_id), 'subtasks'));
+        if (! empty($values) && $this->helper->user->hasProjectAccess('Subtask', 'movePosition', $project_id)) {
+            $result = $this->subtask->changePosition($task_id, $values['subtask_id'], $values['position']);
+            return $this->response->json(array('result' => $result));
+        }
+
+        $this->forbidden();
     }
 }

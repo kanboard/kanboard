@@ -6,7 +6,7 @@ use Kanboard\Model\Action;
 use Kanboard\Model\Project;
 use Kanboard\Model\Task;
 use Kanboard\Model\User;
-use Kanboard\Model\Board;
+use Kanboard\Model\Column;
 use Kanboard\Model\Category;
 use Kanboard\Model\ProjectUserRole;
 use Kanboard\Core\Security\Role;
@@ -260,12 +260,12 @@ class ActionTest extends Base
     {
         $projectModel = new Project($this->container);
         $actionModel = new Action($this->container);
-        $boardModel = new Board($this->container);
+        $columnModel = new Column($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
 
-        $this->assertTrue($boardModel->updateColumn(2, 'My unique column'));
+        $this->assertTrue($columnModel->update(2, 'My unique column'));
 
         $this->assertEquals(1, $actionModel->create(array(
             'project_id' => 1,

@@ -76,3 +76,22 @@ div.ui-tooltip {
 .ui-tooltip ul {
     margin-left: 20px;
 }
+
+.ui-tooltip dl {
+    margin: -5px 0 0 0;
+    padding: 0;
+}
+
+.ui-tooltip dt {
+    margin-top: 5px;
+}
+
+.ui-tooltip dd {
+   margin-left: 0;
+}
+
+.ui-tooltip .progress {
+    display: inline-block;
+    min-width: 3em;
+    text-align: right;
+}

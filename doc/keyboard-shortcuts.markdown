@@ -6,6 +6,7 @@ Keyboard shortcuts availability depends of the page you are presently.
 Project views (Board, Calendar, List, Gantt)
 --------------------------------------------
 
+- Switch to the project overview = **v o**
 - Switch to the board view = **v b** (press on **v** then **b**)
 - Switch to the calendar view = **v c**
 - Switch to the list view = **v l**

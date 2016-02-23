@@ -204,6 +204,44 @@ class ProjectGroupRoleTest extends Base
         $this->assertEquals('', $users[1]['name']);
     }
 
+    public function testGetAssignableUsersWithDisabledUsers()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1', 'name' => 'User #1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2', 'is_active' => 0)));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user 3')));
+
+        $this->assertEquals(1, $groupModel->create('Group A'));
+        $this->assertEquals(2, $groupModel->create('Group B'));
+        $this->assertEquals(3, $groupModel->create('Group C'));
+
+        $this->assertTrue($groupMemberModel->addUser(1, 4));
+        $this->assertTrue($groupMemberModel->addUser(2, 3));
+        $this->assertTrue($groupMemberModel->addUser(3, 2));
+
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_VIEWER));
+        $this->assertTrue($groupRoleModel->addGroup(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($groupRoleModel->addGroup(1, 3, Role::PROJECT_MANAGER));
+
+        $users = $groupRoleModel->getAssignableUsers(2);
+        $this->assertCount(0, $users);
+
+        $users = $groupRoleModel->getAssignableUsers(1);
+        $this->assertCount(1, $users);
+
+        $this->assertEquals(2, $users[0]['id']);
+        $this->assertEquals('user 1', $users[0]['username']);
+        $this->assertEquals('User #1', $users[0]['name']);
+    }
+
     public function testGetProjectsByUser()
     {
         $userModel = new User($this->container);

@@ -7,7 +7,6 @@ use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Comment;
 use Kanboard\Model\User;
-use Kanboard\Model\File;
 use Kanboard\Model\Task;
 use Kanboard\Model\Project;
 use Kanboard\Model\UserUnreadNotification;

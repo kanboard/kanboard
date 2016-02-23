@@ -3,7 +3,7 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Model\Task;
-use Kanboard\Model\Board;
+use Kanboard\Model\Column;
 use Kanboard\Model\TaskStatus;
 use Kanboard\Model\TaskPosition;
 use Kanboard\Model\TaskCreation;
@@ -21,23 +21,23 @@ class TaskPositionTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $b = new Board($this->container);
+        $columnModel = new Column($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
-        $this->assertEquals(0, $t->getProgress($tf->getById(1), $b->getColumnsList(1)));
+        $this->assertEquals(0, $t->getProgress($tf->getById(1), $columnModel->getList(1)));
 
         $this->assertTrue($tp->movePosition(1, 1, 2, 1));
-        $this->assertEquals(25, $t->getProgress($tf->getById(1), $b->getColumnsList(1)));
+        $this->assertEquals(25, $t->getProgress($tf->getById(1), $columnModel->getList(1)));
 
         $this->assertTrue($tp->movePosition(1, 1, 3, 1));
-        $this->assertEquals(50, $t->getProgress($tf->getById(1), $b->getColumnsList(1)));
+        $this->assertEquals(50, $t->getProgress($tf->getById(1), $columnModel->getList(1)));
 
         $this->assertTrue($tp->movePosition(1, 1, 4, 1));
-        $this->assertEquals(75, $t->getProgress($tf->getById(1), $b->getColumnsList(1)));
+        $this->assertEquals(75, $t->getProgress($tf->getById(1), $columnModel->getList(1)));
 
         $this->assertTrue($ts->close(1));
-        $this->assertEquals(100, $t->getProgress($tf->getById(1), $b->getColumnsList(1)));
+        $this->assertEquals(100, $t->getProgress($tf->getById(1), $columnModel->getList(1)));
     }
 
     public function testMoveTaskToWrongPosition()

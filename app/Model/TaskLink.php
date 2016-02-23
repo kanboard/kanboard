@@ -75,22 +75,23 @@ class TaskLink extends Base
                         Task::TABLE.'.title',
                         Task::TABLE.'.is_active',
                         Task::TABLE.'.project_id',
+                        Task::TABLE.'.column_id',
                         Task::TABLE.'.time_spent AS task_time_spent',
                         Task::TABLE.'.time_estimated AS task_time_estimated',
                         Task::TABLE.'.owner_id AS task_assignee_id',
                         User::TABLE.'.username AS task_assignee_username',
                         User::TABLE.'.name AS task_assignee_name',
-                        Board::TABLE.'.title AS column_title',
+                        Column::TABLE.'.title AS column_title',
                         Project::TABLE.'.name AS project_name'
                     )
                     ->eq(self::TABLE.'.task_id', $task_id)
                     ->join(Link::TABLE, 'id', 'link_id')
                     ->join(Task::TABLE, 'id', 'opposite_task_id')
-                    ->join(Board::TABLE, 'id', 'column_id', Task::TABLE)
+                    ->join(Column::TABLE, 'id', 'column_id', Task::TABLE)
                     ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
                     ->join(Project::TABLE, 'id', 'project_id', Task::TABLE)
                     ->asc(Link::TABLE.'.id')
-                    ->desc(Board::TABLE.'.position')
+                    ->desc(Column::TABLE.'.position')
                     ->desc(Task::TABLE.'.is_active')
                     ->asc(Task::TABLE.'.position')
                     ->asc(Task::TABLE.'.id')

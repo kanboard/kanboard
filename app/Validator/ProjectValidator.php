@@ -24,6 +24,9 @@ class ProjectValidator extends Base
     {
         return array(
             new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Integer('priority_default', t('This value must be an integer')),
+            new Validators\Integer('priority_start', t('This value must be an integer')),
+            new Validators\Integer('priority_end', t('This value must be an integer')),
             new Validators\Integer('is_active', t('This value must be an integer')),
             new Validators\Required('name', t('The project name is required')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),

@@ -1,14 +1,16 @@
 function App() {
     this.board = new Board(this);
     this.markdown = new Markdown();
-    this.sidebar = new Sidebar();
     this.search = new Search(this);
-    this.swimlane = new Swimlane();
+    this.swimlane = new Swimlane(this);
     this.dropdown = new Dropdown();
     this.tooltip = new Tooltip(this);
     this.popover = new Popover(this);
     this.task = new Task();
     this.project = new Project();
+    this.subtask = new Subtask(this);
+    this.column = new Column(this);
+    this.file = new FileUpload(this);
     this.keyboardShortcuts();
     this.chosen();
     this.poll();
@@ -33,12 +35,14 @@ App.prototype.listen = function() {
     this.project.listen();
     this.popover.listen();
     this.markdown.listen();
-    this.sidebar.listen();
     this.tooltip.listen();
     this.dropdown.listen();
     this.search.listen();
     this.task.listen();
     this.swimlane.listen();
+    this.subtask.listen();
+    this.column.listen();
+    this.file.listen();
     this.search.focus();
     this.autoComplete();
     this.datePicker();

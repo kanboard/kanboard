@@ -106,7 +106,7 @@ class TaskExport extends Base
         $task['score'] = $task['score'] ?: 0;
         $task['swimlane_id'] = isset($swimlanes[$task['swimlane_id']]) ? $swimlanes[$task['swimlane_id']] : '?';
 
-        $this->dateParser->format($task, array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'), 'Y-m-d');
+        $task = $this->dateParser->format($task, array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'), 'Y-m-d');
 
         return $task;
     }

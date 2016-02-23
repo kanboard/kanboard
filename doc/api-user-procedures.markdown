@@ -113,6 +113,48 @@ Response example:
 }
 ```
 
+## getUserByName
+
+- Purpose: **Get user information**
+- Parameters:
+    - **username** (string, required)
+- Result on success: **user properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getUserByName",
+    "id": 1769674782,
+    "params": {
+        "username": "biloute"
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1769674782,
+    "result": {
+        "id": "1",
+        "username": "biloute",
+        "password": "$2y$10$dRs6pPoBu935RpmsrhmbjevJH5MgZ7Kr9QrnVINwwyZ3.MOwqg.0m",
+        "role": "app-user",
+        "is_ldap_user": "0",
+        "name": "",
+        "email": "",
+        "google_id": null,
+        "github_id": null,
+        "notifications_enabled": "0"
+    }
+}
+```
+
 ## getAllUsers
 
 - Purpose: **Get all available users**
@@ -204,6 +246,99 @@ Request example:
 {
     "jsonrpc": "2.0",
     "method": "removeUser",
+    "id": 2094191872,
+    "params": {
+        "user_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2094191872,
+    "result": true
+}
+```
+
+## disableUser
+
+- Purpose: **Disable a user**
+- Parameters:
+    - **user_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "disableUser",
+    "id": 2094191872,
+    "params": {
+        "user_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2094191872,
+    "result": true
+}
+```
+
+## enableUser
+
+- Purpose: **Enable a user**
+- Parameters:
+    - **user_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "enableUser",
+    "id": 2094191872,
+    "params": {
+        "user_id": 1
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2094191872,
+    "result": true
+}
+```
+
+## isActiveUser
+
+- Purpose: **Check if a user is active**
+- Parameters:
+    - **user_id** (integer, required)
+- Result on success: **true**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "isActiveUser",
     "id": 2094191872,
     "params": {
         "user_id": 1

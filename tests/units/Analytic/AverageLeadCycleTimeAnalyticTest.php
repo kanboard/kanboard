@@ -37,15 +37,12 @@ class AverageLeadCycleTimeAnalyticTest extends Base
         $this->container['db']->table(Task::TABLE)->eq('id', 4)->update(array('date_completed' => $now + 2 * 3600));
 
         $stats = $averageLeadCycleTimeAnalytic->build(1);
-        $expected = array(
-            'count' => 4,
-            'total_lead_time' => 3600 + 1800 + 3600 + 2*3600,
-            'total_cycle_time' => 1800 + 900,
-            'avg_lead_time' => (3600 + 1800 + 3600 + 2*3600) / 4,
-            'avg_cycle_time' => (1800 + 900) / 4,
-        );
 
-        $this->assertEquals($expected, $stats);
+        $this->assertEquals(4, $stats['count']);
+        $this->assertEquals(3600 + 1800 + 3600 + 2*3600, $stats['total_lead_time'], '', 5);
+        $this->assertEquals(1800 + 900, $stats['total_cycle_time'], '', 5);
+        $this->assertEquals((3600 + 1800 + 3600 + 2*3600) / 4, $stats['avg_lead_time'], '', 5);
+        $this->assertEquals((1800 + 900) / 4, $stats['avg_cycle_time'], '', 5);
     }
 
     public function testBuildWithNoTasks()

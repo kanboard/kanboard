@@ -192,6 +192,28 @@ class ProjectPermissionTest extends Base
         $this->assertFalse($projectPermission->isAssignable(2, 5));
     }
 
+    public function testIsAssignableWhenUserIsDisabled()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2', 'is_active' => 0)));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+
+        $this->assertTrue($userRoleModel->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+
+        $this->assertTrue($projectPermission->isAssignable(1, 2));
+        $this->assertFalse($projectPermission->isAssignable(1, 3));
+    }
+
     public function testIsMember()
     {
         $userModel = new User($this->container);

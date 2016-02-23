@@ -93,9 +93,8 @@ class BoardPopover extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->render('file/screenshot', array(
+        $this->response->html($this->template->render('task_file/screenshot', array(
             'task' => $task,
-            'redirect' => 'board',
         )));
     }
 
@@ -113,7 +112,7 @@ class BoardPopover extends Base
         $this->response->html($this->template->render('board/popover_close_all_tasks_column', array(
             'project' => $project,
             'nb_tasks' => $this->taskFinder->countByColumnAndSwimlaneId($project['id'], $column_id, $swimlane_id),
-            'column' => $this->board->getColumnTitleById($column_id),
+            'column' => $this->column->getColumnTitleById($column_id),
             'swimlane' => $this->swimlane->getNameById($swimlane_id) ?: t($project['default_swimlane']),
             'values' => array('column_id' => $column_id, 'swimlane_id' => $swimlane_id),
         )));
@@ -130,7 +129,7 @@ class BoardPopover extends Base
         $values = $this->request->getValues();
 
         $this->taskStatus->closeTasksBySwimlaneAndColumn($values['swimlane_id'], $values['column_id']);
-        $this->flash->success(t('All tasks of the column "%s" and the swimlane "%s" have been closed successfully.', $this->board->getColumnTitleById($values['column_id']), $this->swimlane->getNameById($values['swimlane_id']) ?: t($project['default_swimlane'])));
+        $this->flash->success(t('All tasks of the column "%s" and the swimlane "%s" have been closed successfully.', $this->column->getColumnTitleById($values['column_id']), $this->swimlane->getNameById($values['swimlane_id']) ?: t($project['default_swimlane'])));
         $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])));
     }
 }

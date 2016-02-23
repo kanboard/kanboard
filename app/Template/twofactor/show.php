@@ -9,7 +9,7 @@
     <?php endif ?>
 
     <?php if (! empty($qrcode_url)): ?>
-        <p><br/><img src="<?= $qrcode_url ?>"/><br/><br/></p>
+        <p><br><img src="<?= $qrcode_url ?>"/><br><br></p>
     <?php endif ?>
 
     <?php if (! empty($key_url)): ?>
@@ -26,6 +26,6 @@
     <?= $this->form->text('code', array(), array(), array('placeholder="123456"', 'autofocus'), 'form-numeric') ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Check my code') ?>" class="btn btn-blue"/>
+        <input type="submit" value="<?= t('Check my code') ?>" class="btn btn-blue">
     </div>
 </form>

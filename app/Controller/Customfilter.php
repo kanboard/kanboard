@@ -21,7 +21,7 @@ class Customfilter extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('custom_filter/index', array(
+        $this->response->html($this->helper->layout->project('custom_filter/index', array(
             'values' => $values + array('project_id' => $project['id']),
             'errors' => $errors,
             'project' => $project,
@@ -54,6 +54,23 @@ class Customfilter extends Base
         }
 
         $this->index($values, $errors);
+    }
+
+    /**
+     * Confirmation dialog before removing a custom filter
+     *
+     * @access public
+     */
+    public function confirm()
+    {
+        $project = $this->getProject();
+        $filter = $this->customFilter->getById($this->request->getIntegerParam('filter_id'));
+
+        $this->response->html($this->helper->layout->project('custom_filter/remove', array(
+            'project' => $project,
+            'filter' => $filter,
+            'title' => t('Remove a custom filter')
+        )));
     }
 
     /**
@@ -90,7 +107,7 @@ class Customfilter extends Base
 
         $this->checkPermission($project, $filter);
 
-        $this->response->html($this->projectLayout('custom_filter/edit', array(
+        $this->response->html($this->helper->layout->project('custom_filter/edit', array(
             'values' => empty($values) ? $filter : $values,
             'errors' => $errors,
             'project' => $project,

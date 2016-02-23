@@ -15,10 +15,10 @@
             <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
             <ul>
                 <li>
-                    <?= $this->url->link(t('Edit'), 'category', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
+                    <?= $this->url->link(t('Edit'), 'category', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id), false, 'popover') ?>
                 </li>
                 <li>
-                    <?= $this->url->link(t('Remove'), 'category', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
+                    <?= $this->url->link(t('Remove'), 'category', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id), false, 'popover') ?>
                 </li>
             </ul>
             </div>

@@ -6,7 +6,7 @@
 <?php else: ?>
     <table class="table-fixed table-small">
         <tr>
-            <th class="column-10"><?= $paginator->order('Id', 'tasks.id') ?></th>
+            <th class="column-5"><?= $paginator->order('Id', 'tasks.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
             <th><?= $paginator->order(t('Task'), 'task_name') ?></th>
             <th><?= $paginator->order(t('Subtask'), 'title') ?></th>
@@ -15,7 +15,7 @@
         <?php foreach ($paginator->getCollection() as $subtask): ?>
         <tr>
             <td class="task-table color-<?= $subtask['color_id'] ?>">
-                <?= $this->url->link('#'.$subtask['task_id'], 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
+                <?= $this->render('task/dropdown', array('task' => array('id' => $subtask['task_id'], 'project_id' => $subtask['project_id']))) ?>
             </td>
             <td>
                 <?= $this->url->link($this->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
@@ -24,7 +24,7 @@
                 <?= $this->url->link($this->e($subtask['task_name']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->subtask->toggleStatus($subtask, 'dashboard') ?>
+                <?= $this->subtask->toggleStatus($subtask, $subtask['project_id']) ?>
             </td>
             <td>
                 <?php if (! empty($subtask['time_spent'])): ?>

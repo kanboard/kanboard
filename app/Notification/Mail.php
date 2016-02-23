@@ -4,7 +4,7 @@ namespace Kanboard\Notification;
 
 use Kanboard\Core\Base;
 use Kanboard\Model\Task;
-use Kanboard\Model\File;
+use Kanboard\Model\TaskFile;
 use Kanboard\Model\Comment;
 use Kanboard\Model\Subtask;
 
@@ -82,7 +82,7 @@ class Mail extends Base implements NotificationInterface
     public function getMailSubject($event_name, array $event_data)
     {
         switch ($event_name) {
-            case File::EVENT_CREATE:
+            case TaskFile::EVENT_CREATE:
                 $subject = $this->getStandardMailSubject(e('New attachment'), $event_data);
                 break;
             case Comment::EVENT_CREATE:

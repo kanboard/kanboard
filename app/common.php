@@ -16,7 +16,9 @@ if (getenv('DATABASE_URL')) {
 
 if (file_exists('config.php')) {
     require 'config.php';
-} elseif (file_exists('data'.DIRECTORY_SEPARATOR.'config.php')) {
+}
+
+if (file_exists('data'.DIRECTORY_SEPARATOR.'config.php')) {
     require 'data'.DIRECTORY_SEPARATOR.'config.php';
 }
 
@@ -34,4 +36,5 @@ $container->register(new Kanboard\ServiceProvider\EventDispatcherProvider);
 $container->register(new Kanboard\ServiceProvider\GroupProvider);
 $container->register(new Kanboard\ServiceProvider\RouteProvider);
 $container->register(new Kanboard\ServiceProvider\ActionProvider);
+$container->register(new Kanboard\ServiceProvider\ExternalLinkProvider);
 $container->register(new Kanboard\ServiceProvider\PluginProvider);

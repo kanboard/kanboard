@@ -93,6 +93,7 @@ Technical details
 - [Installation on Ubuntu](ubuntu-installation.markdown)
 - [Installation on Debian](debian-installation.markdown)
 - [Installation on Centos](centos-installation.markdown)
+- [Installation on OpenSuse](suse-installation.markdown)
 - [Installation on FreeBSD](freebsd-installation.markdown)
 - [Installation on Windows Server with IIS](windows-iis-installation.markdown)
 - [Installation on Windows Server with Apache](windows-apache-installation.markdown)
@@ -102,6 +103,7 @@ Technical details
 
 ### Configuration
 
+- [Daily background job](cronjob.markdown)
 - [Config file](config.markdown)
 - [Email configuration](email-configuration.markdown)
 - [URL rewriting](nice-urls.markdown)
@@ -117,9 +119,6 @@ Technical details
 - [LDAP authentication](ldap-authentication.markdown)
 - [LDAP group synchronization](ldap-group-sync.markdown)
 - [LDAP parameters](ldap-parameters.markdown)
-- [Google authentication](google-authentication.markdown)
-- [Github authentication](github-authentication.markdown)
-- [Gitlab authentication](gitlab-authentication.markdown)
 - [Reverse proxy authentication](reverse-proxy-authentication.markdown)
 
 ### Contributors

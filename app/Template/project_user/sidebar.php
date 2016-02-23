@@ -10,7 +10,7 @@
             'chosen-select select-auto-redirect'
         ) ?>
 
-    <br/><br/>
+    <br><br>
     <ul>
         <li <?= $this->app->checkMenuSelection('projectuser', 'managers') ?>>
             <?= $this->url->link(t('Project managers'), 'projectuser', 'managers', $filter) ?>

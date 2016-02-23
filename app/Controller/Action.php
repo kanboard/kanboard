@@ -20,14 +20,14 @@ class Action extends Base
         $project = $this->getProject();
         $actions = $this->action->getAllByProject($project['id']);
 
-        $this->response->html($this->projectLayout('action/index', array(
+        $this->response->html($this->helper->layout->project('action/index', array(
             'values' => array('project_id' => $project['id']),
             'project' => $project,
             'actions' => $actions,
             'available_actions' => $this->actionManager->getAvailableActions(),
             'available_events' => $this->eventManager->getAll(),
             'available_params' => $this->actionManager->getAvailableParameters($actions),
-            'columns_list' => $this->board->getColumnsList($project['id']),
+            'columns_list' => $this->column->getList($project['id']),
             'users_list' => $this->projectUserRole->getAssignableUsersList($project['id']),
             'projects_list' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
             'colors_list' => $this->color->getList(),
@@ -51,7 +51,7 @@ class Action extends Base
             $this->response->redirect($this->helper->url->to('action', 'index', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->projectLayout('action/event', array(
+        $this->response->html($this->helper->layout->project('action/event', array(
             'values' => $values,
             'project' => $project,
             'events' => $this->actionManager->getCompatibleEvents($values['action_name']),
@@ -83,10 +83,10 @@ class Action extends Base
         $projects_list = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
         unset($projects_list[$project['id']]);
 
-        $this->response->html($this->projectLayout('action/params', array(
+        $this->response->html($this->helper->layout->project('action/params', array(
             'values' => $values,
             'action_params' => $action_params,
-            'columns_list' => $this->board->getColumnsList($project['id']),
+            'columns_list' => $this->column->getList($project['id']),
             'users_list' => $this->projectUserRole->getAssignableUsersList($project['id']),
             'projects_list' => $projects_list,
             'colors_list' => $this->color->getList(),
@@ -138,7 +138,7 @@ class Action extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('action/remove', array(
+        $this->response->html($this->helper->layout->project('action/remove', array(
             'action' => $this->action->getById($this->request->getIntegerParam('action_id')),
             'available_events' => $this->eventManager->getAll(),
             'available_actions' => $this->actionManager->getAvailableActions(),

@@ -68,11 +68,12 @@ class Response extends Base
      *
      * @access public
      * @param  string   $url   Redirection URL
+     * @param  boolean  $self  If Ajax request and true: refresh the current page
      */
-    public function redirect($url)
+    public function redirect($url, $self = false)
     {
-        if ($this->request->getServerVariable('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest') {
-            header('X-Ajax-Redirect: '.$url);
+        if ($this->request->isAjax()) {
+            header('X-Ajax-Redirect: '.($self ? 'self' : $url));
         } else {
             header('Location: '.$url);
         }

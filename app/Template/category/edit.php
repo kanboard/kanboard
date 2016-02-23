@@ -2,7 +2,7 @@
     <h2><?= t('Category modification for the project "%s"', $project['name']) ?></h2>
 </div>
 
-<form method="post" action="<?= $this->url->href('category', 'update', array('project_id' => $project['id'], 'category_id' => $values['id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('category', 'update', array('project_id' => $project['id'], 'category_id' => $values['id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -33,8 +33,8 @@
     <div class="form-help"><?= $this->url->doc(t('Write your text in Markdown'), 'syntax-guide') ?></div>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'category', 'index', array('project_id' => $project['id'])) ?>
+        <?= $this->url->link(t('cancel'), 'category', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
     </div>
 </form>

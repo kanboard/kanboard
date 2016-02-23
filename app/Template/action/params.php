@@ -15,22 +15,25 @@
 
         <?php if ($this->text->contains($param_name, 'column_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
-            <?= $this->form->select('params['.$param_name.']', $columns_list, $values) ?><br/>
+            <?= $this->form->select('params['.$param_name.']', $columns_list, $values) ?>
         <?php elseif ($this->text->contains($param_name, 'user_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
-            <?= $this->form->select('params['.$param_name.']', $users_list, $values) ?><br/>
+            <?= $this->form->select('params['.$param_name.']', $users_list, $values) ?>
         <?php elseif ($this->text->contains($param_name, 'project_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
-            <?= $this->form->select('params['.$param_name.']', $projects_list, $values) ?><br/>
+            <?= $this->form->select('params['.$param_name.']', $projects_list, $values) ?>
         <?php elseif ($this->text->contains($param_name, 'color_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
-            <?= $this->form->select('params['.$param_name.']', $colors_list, $values) ?><br/>
+            <?= $this->form->select('params['.$param_name.']', $colors_list, $values) ?>
         <?php elseif ($this->text->contains($param_name, 'category_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
-            <?= $this->form->select('params['.$param_name.']', $categories_list, $values) ?><br/>
+            <?= $this->form->select('params['.$param_name.']', $categories_list, $values) ?>
         <?php elseif ($this->text->contains($param_name, 'link_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
-            <?= $this->form->select('params['.$param_name.']', $links_list, $values) ?><br/>
+            <?= $this->form->select('params['.$param_name.']', $links_list, $values) ?>
+        <?php elseif ($this->text->contains($param_name, 'duration')): ?>
+            <?= $this->form->label($param_desc, $param_name) ?>
+            <?= $this->form->number('params['.$param_name.']', $values) ?>
         <?php else: ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->text('params['.$param_name.']', $values) ?>

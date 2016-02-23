@@ -84,7 +84,7 @@ class ProjectDailyColumnStats extends Base
      */
     public function getAggregatedMetrics($project_id, $from, $to, $field = 'total')
     {
-        $columns = $this->board->getColumnsList($project_id);
+        $columns = $this->column->getList($project_id);
         $metrics = $this->getMetrics($project_id, $from, $to);
         return $this->buildAggregate($metrics, $columns, $field);
     }
