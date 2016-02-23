@@ -1,0 +1,33 @@
+{
+    "name": "christian-riesen/base32",
+    "type": "library",
+    "description": "Base32 encoder/decoder according to RFC 4648",
+    "keywords": ["base32","encode","decode","rfc4648"],
+    "homepage": "https://github.com/ChristianRiesen/base32",
+    "license": "MIT",
+	"authors": [
+        {
+            "name": "Christian Riesen",
+            "email": "chris.riesen@gmail.com",
+            "homepage": "http://christianriesen.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "satooshi/php-coveralls": "0.*"
+    },
+	"autoload": {
+        "psr-4": {
+            "Base32\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    }
+}

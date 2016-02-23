@@ -1,0 +1,16 @@
+<div>_content_</div>
+
+paragraph
+
+<div>
+  <div class="inner">
+    _content_
+  </div>
+</div>
+
+<style type="text/css">
+  p {color: #789;}
+</style>
+
+<div>
+  <a href="/">home</a></div>
