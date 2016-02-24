@@ -6,7 +6,7 @@ function App() {
     this.dropdown = new Dropdown();
     this.tooltip = new Tooltip(this);
     this.popover = new Popover(this);
-    this.task = new Task();
+    this.task = new Task(this);
     this.project = new Project();
     this.subtask = new Subtask(this);
     this.column = new Column(this);
@@ -18,16 +18,6 @@ function App() {
     // Alert box fadeout
     $(".alert-fade-out").delay(4000).fadeOut(800, function() {
         $(this).remove();
-    });
-
-    // Reload page when a destination project is changed
-    var reloading_project = false;
-    $("select.task-reload-project-destination").change(function() {
-        if (! reloading_project) {
-            $(".loading-icon").show();
-            reloading_project = true;
-            window.location = $(this).data("redirect").replace(/PROJECT_ID/g, $(this).val());
-        }
     });
 }
 
