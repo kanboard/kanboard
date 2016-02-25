@@ -1,6 +1,6 @@
 <section id="main">
     <div class="page-header">
-        <?php if ($this->user->isAdmin()): ?>
+        <?php if ($this->user->hasAccess('user', 'create')): ?>
         <ul>
             <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'user', 'index') ?></li>
             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New local user'), 'user', 'create') ?></li>

@@ -4,11 +4,9 @@ namespace Kanboard\Model;
 
 use PicoDb\Database;
 use Kanboard\Event\SubtaskEvent;
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
 
 /**
- * Subtask model
+ * Subtask Model
  *
  * @package  model
  * @author   Frederic Guillot
@@ -265,89 +263,36 @@ class Subtask extends Base
     }
 
     /**
-     * Get subtasks with consecutive positions
-     *
-     * If you remove a subtask, the positions are not anymore consecutives
+     * Save subtask position
      *
      * @access public
      * @param  integer  $task_id
-     * @return array
-     */
-    public function getNormalizedPositions($task_id)
-    {
-        $subtasks = $this->db->hashtable(self::TABLE)->eq('task_id', $task_id)->asc('position')->getAll('id', 'position');
-        $position = 1;
-
-        foreach ($subtasks as $subtask_id => $subtask_position) {
-            $subtasks[$subtask_id] = $position++;
-        }
-
-        return $subtasks;
-    }
-
-    /**
-     * Save the new positions for a set of subtasks
-     *
-     * @access public
-     * @param  array   $subtasks    Hashmap of column_id/column_position
+     * @param  integer  $subtask_id
+     * @param  integer  $position
      * @return boolean
      */
-    public function savePositions(array $subtasks)
+    public function changePosition($task_id, $subtask_id, $position)
     {
-        return $this->db->transaction(function (Database $db) use ($subtasks) {
+        if ($position < 1 || $position > $this->db->table(self::TABLE)->eq('task_id', $task_id)->count()) {
+            return false;
+        }
 
-            foreach ($subtasks as $subtask_id => $position) {
-                if (! $db->table(Subtask::TABLE)->eq('id', $subtask_id)->update(array('position' => $position))) {
-                    return false;
-                }
+        $subtask_ids = $this->db->table(self::TABLE)->eq('task_id', $task_id)->neq('id', $subtask_id)->asc('position')->findAllByColumn('id');
+        $offset = 1;
+        $results = array();
+
+        foreach ($subtask_ids as $current_subtask_id) {
+            if ($offset == $position) {
+                $offset++;
             }
-        });
-    }
 
-    /**
-     * Move a subtask down, increment the position value
-     *
-     * @access public
-     * @param  integer  $task_id
-     * @param  integer  $subtask_id
-     * @return boolean
-     */
-    public function moveDown($task_id, $subtask_id)
-    {
-        $subtasks = $this->getNormalizedPositions($task_id);
-        $positions = array_flip($subtasks);
-
-        if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] < count($subtasks)) {
-            $position = ++$subtasks[$subtask_id];
-            $subtasks[$positions[$position]]--;
-
-            return $this->savePositions($subtasks);
+            $results[] = $this->db->table(self::TABLE)->eq('id', $current_subtask_id)->update(array('position' => $offset));
+            $offset++;
         }
 
-        return false;
-    }
+        $results[] = $this->db->table(self::TABLE)->eq('id', $subtask_id)->update(array('position' => $position));
 
-    /**
-     * Move a subtask up, decrement the position value
-     *
-     * @access public
-     * @param  integer  $task_id
-     * @param  integer  $subtask_id
-     * @return boolean
-     */
-    public function moveUp($task_id, $subtask_id)
-    {
-        $subtasks = $this->getNormalizedPositions($task_id);
-        $positions = array_flip($subtasks);
-
-        if (isset($subtasks[$subtask_id]) && $subtasks[$subtask_id] > 1) {
-            $position = --$subtasks[$subtask_id];
-            $subtasks[$positions[$position]]++;
-
-            return $this->savePositions($subtasks);
-        }
-
-        return false;
+        return !in_array(false, $results, true);
     }
 
     /**
@@ -355,15 +300,16 @@ class Subtask extends Base
      *
      * @access public
      * @param  integer  $subtask_id
-     * @return bool
+     * @return boolean|integer
      */
     public function toggleStatus($subtask_id)
     {
         $subtask = $this->getById($subtask_id);
+        $status = ($subtask['status'] + 1) % 3;
 
         $values = array(
             'id' => $subtask['id'],
-            'status' => ($subtask['status'] + 1) % 3,
+            'status' => $status,
             'task_id' => $subtask['task_id'],
         );
 
@@ -371,7 +317,7 @@ class Subtask extends Base
             $values['user_id'] = $this->userSession->getId();
         }
 
-        return $this->update($values);
+        return $this->update($values) ? $status : false;
     }
 
     /**
@@ -437,10 +383,10 @@ class Subtask extends Base
         return $this->db->transaction(function (Database $db) use ($src_task_id, $dst_task_id) {
 
             $subtasks = $db->table(Subtask::TABLE)
-                                 ->columns('title', 'time_estimated', 'position')
-                                 ->eq('task_id', $src_task_id)
-                                 ->asc('position')
-                                 ->findAll();
+                ->columns('title', 'time_estimated', 'position')
+                ->eq('task_id', $src_task_id)
+                ->asc('position')
+                ->findAll();
 
             foreach ($subtasks as &$subtask) {
                 $subtask['task_id'] = $dst_task_id;
@@ -450,91 +396,5 @@ class Subtask extends Base
                 }
             }
         });
-    }
-
-    /**
-     * Validate creation
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateCreation(array $values)
-    {
-        $rules = array(
-            new Validators\Required('task_id', t('The task id is required')),
-            new Validators\Required('title', t('The title is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate modification
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The subtask id is required')),
-            new Validators\Required('task_id', t('The task id is required')),
-            new Validators\Required('title', t('The title is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate API modification
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateApiModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The subtask id is required')),
-            new Validators\Required('task_id', t('The task id is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Common validation rules
-     *
-     * @access private
-     * @return array
-     */
-    private function commonValidationRules()
-    {
-        return array(
-            new Validators\Integer('id', t('The subtask id must be an integer')),
-            new Validators\Integer('task_id', t('The task id must be an integer')),
-            new Validators\MaxLength('title', t('The maximum length is %d characters', 255), 255),
-            new Validators\Integer('user_id', t('The user id must be an integer')),
-            new Validators\Integer('status', t('The status must be an integer')),
-            new Validators\Numeric('time_estimated', t('The time must be a numeric value')),
-            new Validators\Numeric('time_spent', t('The time must be a numeric value')),
-        );
     }
 }

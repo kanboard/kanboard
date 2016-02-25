@@ -11,7 +11,7 @@ define('DEBUG', false);
 define('DEBUG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
 
 // Plugins directory
-define('PLUGINS_DIR', 'data'.DIRECTORY_SEPARATOR.'plugins');
+define('PLUGINS_DIR', 'plugins');
 
 // Folder for uploaded files
 define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files');
@@ -31,19 +31,6 @@ define('MAIL_SMTP_ENCRYPTION', null); // Valid values are "null", "ssl" or "tls"
 
 // Sendmail command to use when the transport is "sendmail"
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
-
-// Postmark API token (used to send emails through their API)
-define('POSTMARK_API_TOKEN', '');
-
-// Mailgun API key (used to send emails through their API)
-define('MAILGUN_API_TOKEN', '');
-
-// Mailgun domain name
-define('MAILGUN_DOMAIN', '');
-
-// Sendgrid API configuration
-define('SENDGRID_API_USER', '');
-define('SENDGRID_API_KEY', '');
 
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');
@@ -78,6 +65,10 @@ define('LDAP_SSL_VERIFY', true);
 // Enable LDAP START_TLS
 define('LDAP_START_TLS', false);
 
+// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
+// Set to true if you want to preserve the case
+define('LDAP_USERNAME_CASE_SENSITIVE', false);
+
 // LDAP bind type: "anonymous", "user" or "proxy"
 define('LDAP_BIND_TYPE', 'anonymous');
 
@@ -88,88 +79,56 @@ define('LDAP_USERNAME', null);
 // LDAP password to use for proxy mode
 define('LDAP_PASSWORD', null);
 
-// LDAP account base, i.e. root of all user account
-// Example: ou=People,dc=example,dc=com
-define('LDAP_ACCOUNT_BASE', '');
+// LDAP DN for users
+// Example for ActiveDirectory: CN=Users,DC=kanboard,DC=local
+// Example for OpenLDAP: ou=People,dc=example,dc=com
+define('LDAP_USER_BASE_DN', '');
 
-// LDAP query pattern to use when searching for a user account
+// LDAP pattern to use when searching for a user account
 // Example for ActiveDirectory: '(&(objectClass=user)(sAMAccountName=%s))'
 // Example for OpenLDAP: 'uid=%s'
-define('LDAP_USER_PATTERN', '');
+define('LDAP_USER_FILTER', '');
 
-// Name of an attribute of the user account object which should be used as the full name of the user
-define('LDAP_ACCOUNT_FULLNAME', 'displayname');
-
-// Name of an attribute of the user account object which should be used as the email of the user
-define('LDAP_ACCOUNT_EMAIL', 'mail');
-
-// Name of an attribute of the user account object which should be used as the id of the user. (optional)
+// LDAP attribute for username
 // Example for ActiveDirectory: 'samaccountname'
 // Example for OpenLDAP: 'uid'
-define('LDAP_ACCOUNT_ID', '');
+define('LDAP_USER_ATTRIBUTE_USERNAME', 'uid');
 
-// LDAP Attribute for group membership
-define('LDAP_ACCOUNT_MEMBEROF', 'memberof');
+// LDAP attribute for user full name
+// Example for ActiveDirectory: 'displayname'
+// Example for OpenLDAP: 'cn'
+define('LDAP_USER_ATTRIBUTE_FULLNAME', 'cn');
 
-// DN for administrators
-// Example: CN=Kanboard Admins,CN=Users,DC=kanboard,DC=local
+// LDAP attribute for user email
+define('LDAP_USER_ATTRIBUTE_EMAIL', 'mail');
+
+// LDAP attribute to find groups in user profile
+define('LDAP_USER_ATTRIBUTE_GROUPS', 'memberof');
+
+// Allow automatic LDAP user creation
+define('LDAP_USER_CREATION', true);
+
+// LDAP DN for administrators
+// Example: CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local
 define('LDAP_GROUP_ADMIN_DN', '');
 
-// DN for project administrators
-// Example: CN=Kanboard Project Admins,CN=Users,DC=kanboard,DC=local
-define('LDAP_GROUP_PROJECT_ADMIN_DN', '');
+// LDAP DN for managers
+// Example: CN=Kanboard Managers,CN=Users,DC=kanboard,DC=local
+define('LDAP_GROUP_MANAGER_DN', '');
 
-// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
-// Set to true if you want to preserve the case
-define('LDAP_USERNAME_CASE_SENSITIVE', false);
+// Enable LDAP group provider for project permissions
+// The end-user will be able to browse LDAP groups from the user interface and allow access to specified projects
+define('LDAP_GROUP_PROVIDER', false);
 
-// Automatically create user account
-define('LDAP_ACCOUNT_CREATION', true);
+// LDAP Base DN for groups
+define('LDAP_GROUP_BASE_DN', '');
 
-// Enable/disable Google authentication
-define('GOOGLE_AUTH', false);
+// LDAP group filter
+// Example for ActiveDirectory: (&(objectClass=group)(sAMAccountName=%s*))
+define('LDAP_GROUP_FILTER', '');
 
-// Google client id (Get this value from the Google developer console)
-define('GOOGLE_CLIENT_ID', '');
-
-// Google client secret key (Get this value from the Google developer console)
-define('GOOGLE_CLIENT_SECRET', '');
-
-// Enable/disable GitHub authentication
-define('GITHUB_AUTH', false);
-
-// GitHub client id (Copy it from your settings -> Applications -> Developer applications)
-define('GITHUB_CLIENT_ID', '');
-
-// GitHub client secret key (Copy it from your settings -> Applications -> Developer applications)
-define('GITHUB_CLIENT_SECRET', '');
-
-// Github oauth2 authorize url
-define('GITHUB_OAUTH_AUTHORIZE_URL', 'https://github.com/login/oauth/authorize');
-
-// Github oauth2 token url
-define('GITHUB_OAUTH_TOKEN_URL', 'https://github.com/login/oauth/access_token');
-
-// Github API url (don't forget the trailing slash)
-define('GITHUB_API_URL', 'https://api.github.com/');
-
-// Enable/disable Gitlab authentication
-define('GITLAB_AUTH', false);
-
-// Gitlab application id
-define('GITLAB_CLIENT_ID', '');
-
-// Gitlab application secret
-define('GITLAB_CLIENT_SECRET', '');
-
-// Gitlab oauth2 authorize url
-define('GITLAB_OAUTH_AUTHORIZE_URL', 'https://gitlab.com/oauth/authorize');
-
-// Gitlab oauth2 token url
-define('GITLAB_OAUTH_TOKEN_URL', 'https://gitlab.com/oauth/token');
-
-// Gitlab API url endpoint (don't forget the trailing slash)
-define('GITLAB_API_URL', 'https://gitlab.com/api/v3/');
+// LDAP attribute for the group name
+define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
 // Enable/disable the reverse proxy authentication
 define('REVERSE_PROXY_AUTH', false);
@@ -206,6 +165,9 @@ define('ENABLE_URL_REWRITE', false);
 
 // Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
+
+// Disabling logout (for external SSO authentication)
+define('DISABLE_LOGOUT', false);
 
 // Enable captcha after 3 authentication failure
 define('BRUTEFORCE_CAPTCHA', 3);

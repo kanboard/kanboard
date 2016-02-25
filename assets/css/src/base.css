@@ -17,7 +17,7 @@ body {
 body {
     margin-left: 10px;
     margin-right: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     color: #333;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-rendering: optimizeLegibility;
@@ -71,3 +71,6 @@ hr {
     color: #000;
 }
 
+.smaller {
+    font-size: 0.85em;
+}

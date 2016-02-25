@@ -1,7 +1,7 @@
 Analytics for tasks
 ===================
 
-Each task have an analytics section available from the left menu in the task view.
+Each task has an analytics section available from the left menu in the task view.
 
 Lead and cycle time
 -------------------
@@ -13,12 +13,12 @@ Lead and cycle time
 - If the task is not closed the current time is used instead of the date of completion.
 - If the start date is not specified, the cycle time is not calculated.
 
-Note: You can configure an automatic action to define automatically the start date when you move a task to the column of your choice.
+Note: You can configure an automatic action to define the start date automatically when you move a task to the column of your choice.
 
 Time spent into each column
 ---------------------------
 
 ![Time spent into each column](http://kanboard.net/screenshots/documentation/time-into-each-column.png)
 
-- This chart show the total time spent into each column for the task.
+- This chart shows the total time spent into each column for the task.
 - The time spent is calculated until the task is closed.

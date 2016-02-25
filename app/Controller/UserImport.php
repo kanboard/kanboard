@@ -18,7 +18,7 @@ class UserImport extends Base
      */
     public function step1(array $values = array(), array $errors = array())
     {
-        $this->response->html($this->template->layout('user_import/step1', array(
+        $this->response->html($this->helper->layout->app('user_import/step1', array(
             'values' => $values,
             'errors' => $errors,
             'max_size' => ini_get('upload_max_filesize'),
@@ -46,9 +46,9 @@ class UserImport extends Base
         $csv->read($filename, array($this->userImport, 'import'));
 
         if ($this->userImport->counter > 0) {
-            $this->session->flash(t('%d user(s) have been imported successfully.', $this->userImport->counter));
+            $this->flash->success(t('%d user(s) have been imported successfully.', $this->userImport->counter));
         } else {
-            $this->session->flashError(t('Nothing have been imported!'));
+            $this->flash->failure(t('Nothing have been imported!'));
         }
 
         $this->response->redirect($this->helper->url->to('userImport', 'step1'));

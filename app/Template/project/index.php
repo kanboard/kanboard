@@ -1,12 +1,10 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <?php if ($this->user->isProjectAdmin() || $this->user->isAdmin()): ?>
-                <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'project', 'create') ?></li>
-            <?php endif ?>
-            <li><i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'project', 'create', array('private' => 1)) ?></li>
-            <?php if ($this->user->isProjectAdmin() || $this->user->isAdmin()): ?>
+            <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
                 <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'projectuser', 'managers') ?></li>
+            <?php endif ?>
+            <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
                 <li><i class="fa fa-sliders fa-fw"></i><?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?></li>
             <?php endif ?>
         </ul>
@@ -21,9 +19,9 @@
                 <th class="column-15"><?= $paginator->order(t('Project'), 'name') ?></th>
                 <th class="column-8"><?= $paginator->order(t('Start date'), 'start_date') ?></th>
                 <th class="column-8"><?= $paginator->order(t('End date'), 'end_date') ?></th>
-                <?php if ($this->user->isAdmin() || $this->user->isProjectAdmin()): ?>
-                    <th class="column-12"><?= t('Managers') ?></th>
-                    <th class="column-12"><?= t('Members') ?></th>
+                <th class="column-15"><?= $paginator->order(t('Owner'), 'owner_id') ?></th>
+                <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
+                    <th class="column-10"><?= t('Users') ?></th>
                 <?php endif ?>
                 <th><?= t('Columns') ?></th>
             </tr>
@@ -59,30 +57,21 @@
                     <?= $this->url->link($this->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
                 </td>
                 <td>
-                    <?= $project['start_date'] ?>
+                    <?= $this->dt->date($project['start_date']) ?>
                 </td>
                 <td>
-                    <?= $project['end_date'] ?>
-                </td>
-                <?php if ($this->user->isAdmin() || $this->user->isProjectAdmin()): ?>
-                <td>
-                    <ul class="no-bullet">
-                    <?php foreach ($project['managers'] as $user_id => $user_name): ?>
-                        <li><?= $this->url->link($this->e($user_name), 'projectuser', 'opens', array('user_id' => $user_id)) ?></li>
-                    <?php endforeach ?>
-                    </ul>
+                    <?= $this->dt->date($project['end_date']) ?>
                 </td>
                 <td>
-                    <?php if ($project['is_everybody_allowed'] == 1): ?>
-                        <?= t('Everybody') ?>
-                    <?php else: ?>
-                        <ul class="no-bullet">
-                        <?php foreach ($project['members'] as $user_id => $user_name): ?>
-                            <li><?= $this->url->link($this->e($user_name), 'projectuser', 'opens', array('user_id' => $user_id)) ?></li>
-                        <?php endforeach ?>
-                        </ul>
+                    <?php if ($project['owner_id'] > 0): ?>
+                        <?= $this->e($project['owner_name'] ?: $project['owner_username']) ?>
                     <?php endif ?>
                 </td>
+                <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
+                    <td>
+                        <i class="fa fa-users fa-fw"></i>
+                        <a href="#" class="tooltip" title="<?= t('Members') ?>" data-href="<?= $this->url->href('Projectuser', 'users', array('project_id' => $project['id'])) ?>"><?= t('Members') ?></a>
+                    </td>
                 <?php endif ?>
                 <td class="dashboard-project-stats">
                     <?php foreach ($project['columns'] as $column): ?>

@@ -8,7 +8,6 @@ use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\TaskStatus;
 use Kanboard\Model\Project;
-use Kanboard\Model\ProjectPermission;
 
 class TaskCreationTest extends Base
 {
@@ -182,8 +181,7 @@ class TaskCreationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 
-        $_SESSION = array();
-        $_SESSION['user']['id'] = 1;
+        $this->container['sessionStorage']->user = array('id' => 1);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
@@ -194,8 +192,6 @@ class TaskCreationTest extends Base
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(1, $task['creator_id']);
-
-        $_SESSION = array();
     }
 
     public function testColumnId()
@@ -299,7 +295,7 @@ class TaskCreationTest extends Base
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
         $this->assertEquals(2, $task['id']);
-        $this->assertEquals($timestamp, $task['date_due']);
+        $this->assertEquals(date('Y-m-d 00:00', $timestamp), date('Y-m-d 00:00', $task['date_due']));
 
         $task = $tf->getById(3);
         $this->assertEquals(3, $task['id']);
@@ -406,6 +402,7 @@ class TaskCreationTest extends Base
         $this->assertEquals('yellow', $task['color_id']);
 
         $this->assertTrue($c->save(array('default_color' => 'orange')));
+        $this->container['memoryCache']->flush();
 
         $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'test2')));
 
@@ -425,6 +422,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals('2050-01-10 12:30', date('Y-m-d H:i', $task['date_due']));
+        $this->assertEquals('2050-01-10 00:00', date('Y-m-d H:i', $task['date_due']));
     }
 }

@@ -2,10 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\GithubWebhook;
-use Kanboard\Integration\GitlabWebhook;
-use Kanboard\Integration\BitbucketWebhook;
-
 /**
  * Create automatically a task from a webhook
  *
@@ -15,6 +11,17 @@ use Kanboard\Integration\BitbucketWebhook;
 class TaskCreation extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Create a task from an external provider');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -22,11 +29,7 @@ class TaskCreation extends Base
      */
     public function getCompatibleEvents()
     {
-        return array(
-            GithubWebhook::EVENT_ISSUE_OPENED,
-            GitlabWebhook::EVENT_ISSUE_OPENED,
-            BitbucketWebhook::EVENT_ISSUE_OPENED,
-        );
+        return array();
     }
 
     /**

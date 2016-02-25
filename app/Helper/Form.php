@@ -2,7 +2,7 @@
 
 namespace Kanboard\Helper;
 
-use Kanboard\Core\Security;
+use Kanboard\Core\Base;
 
 /**
  * Form helpers
@@ -10,7 +10,7 @@ use Kanboard\Core\Security;
  * @package helper
  * @author  Frederic Guillot
  */
-class Form extends \Kanboard\Core\Base
+class Form extends Base
 {
     /**
      * Hidden CSRF token field
@@ -20,7 +20,7 @@ class Form extends \Kanboard\Core\Base
      */
     public function csrf()
     {
-        return '<input type="hidden" name="csrf_token" value="'.Security::getCSRFToken().'"/>';
+        return '<input type="hidden" name="csrf_token" value="'.$this->token->getCSRFToken().'"/>';
     }
 
     /**

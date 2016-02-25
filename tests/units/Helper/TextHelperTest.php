@@ -6,7 +6,7 @@ use Kanboard\Helper\Text;
 
 class TextHelperTest extends Base
 {
-    public function testMarkdown()
+    public function testMarkdownTaskLink()
     {
         $h = new Text($this->container);
 
@@ -29,6 +29,12 @@ class TextHelperTest extends Base
                 array('controller' => 'a', 'action' => 'b', 'params' => array('c' => 'd'))
             )
         );
+    }
+
+    public function testMarkdownUserLink()
+    {
+        $h = new Text($this->container);
+        $this->assertEquals('<p>Text <a href="?controller=user&amp;action=profile&amp;user_id=1" class="user-mention-link">@admin</a> @notfound</p>', $h->markdown('Text @admin @notfound'));
     }
 
     public function testFormatBytes()

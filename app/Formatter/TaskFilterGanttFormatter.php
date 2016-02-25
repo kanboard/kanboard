@@ -47,7 +47,7 @@ class TaskFilterGanttFormatter extends TaskFilter implements FormatterInterface
     private function formatTask(array $task)
     {
         if (! isset($this->columns[$task['project_id']])) {
-            $this->columns[$task['project_id']] = $this->board->getColumnsList($task['project_id']);
+            $this->columns[$task['project_id']] = $this->column->getList($task['project_id']);
         }
 
         $start = $task['date_started'] ?: time();

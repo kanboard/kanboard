@@ -13,6 +13,17 @@ use Kanboard\Model\Task;
 class TaskEmail extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Send a task by email to someone');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public

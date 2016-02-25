@@ -3,8 +3,7 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Translator;
-use Kanboard\Core\Security;
-use Kanboard\Core\Session;
+use Kanboard\Core\Security\Token;
 
 /**
  * Config model
@@ -14,30 +13,6 @@ use Kanboard\Core\Session;
  */
 class Config extends Setting
 {
-    /**
-     * Get available currencies
-     *
-     * @access public
-     * @return array
-     */
-    public function getCurrencies()
-    {
-        return array(
-            'USD' => t('USD - US Dollar'),
-            'EUR' => t('EUR - Euro'),
-            'GBP' => t('GBP - British Pound'),
-            'CHF' => t('CHF - Swiss Francs'),
-            'CAD' => t('CAD - Canadian Dollar'),
-            'AUD' => t('AUD - Australian Dollar'),
-            'NZD' => t('NZD - New Zealand Dollar'),
-            'INR' => t('INR - Indian Rupee'),
-            'JPY' => t('JPY - Japanese Yen'),
-            'RSD' => t('RSD - Serbian dinar'),
-            'SEK' => t('SEK - Swedish Krona'),
-            'NOK' => t('NOK - Norwegian Krone'),
-        );
-    }
-
     /**
      * Get available timezones
      *
@@ -58,6 +33,31 @@ class Config extends Setting
     }
 
     /**
+     * Get current timezone
+     *
+     * @access public
+     * @return string
+     */
+    public function getCurrentTimezone()
+    {
+        if ($this->userSession->isLogged() && ! empty($this->sessionStorage->user['timezone'])) {
+            return $this->sessionStorage->user['timezone'];
+        }
+
+        return $this->get('application_timezone', 'UTC');
+    }
+
+    /**
+     * Set timezone
+     *
+     * @access public
+     */
+    public function setupTimezone()
+    {
+        date_default_timezone_set($this->getCurrentTimezone());
+    }
+
+    /**
      * Get available languages
      *
      * @access public
@@ -69,14 +69,17 @@ class Config extends Setting
         // Sorted by value
         $languages = array(
             'id_ID' => 'Bahasa Indonesia',
+            'bs_BA' => 'Bosanski',
             'cs_CZ' => 'Čeština',
             'da_DK' => 'Dansk',
             'de_DE' => 'Deutsch',
             'en_US' => 'English',
             'es_ES' => 'Español',
             'fr_FR' => 'Français',
+            'el_GR' => 'Grec',
             'it_IT' => 'Italiano',
             'hu_HU' => 'Magyar',
+            'my_MY' => 'Melayu',
             'nl_NL' => 'Nederlands',
             'nb_NO' => 'Norsk',
             'pl_PL' => 'Polski',
@@ -108,7 +111,7 @@ class Config extends Setting
     public function getJsLanguageCode()
     {
         $languages = array(
-            'cs_CZ' => 'cz',
+            'cs_CZ' => 'cs',
             'da_DK' => 'da',
             'de_DE' => 'de',
             'en_US' => 'en',
@@ -129,7 +132,8 @@ class Config extends Setting
             'zh_CN' => 'zh-cn',
             'ja_JP' => 'ja',
             'th_TH' => 'th',
-            'id_ID' => 'id'
+            'id_ID' => 'id',
+            'el_GR' => 'el',
         );
 
         $lang = $this->getCurrentLanguage();
@@ -145,48 +149,11 @@ class Config extends Setting
      */
     public function getCurrentLanguage()
     {
-        if ($this->userSession->isLogged() && ! empty($this->session['user']['language'])) {
-            return $this->session['user']['language'];
+        if ($this->userSession->isLogged() && ! empty($this->sessionStorage->user['language'])) {
+            return $this->sessionStorage->user['language'];
         }
 
         return $this->get('application_language', 'en_US');
-    }
-
-    /**
-     * Get a config variable from the session or the database
-     *
-     * @access public
-     * @param  string   $name            Parameter name
-     * @param  string   $default_value   Default value of the parameter
-     * @return string
-     */
-    public function get($name, $default_value = '')
-    {
-        if (! Session::isOpen()) {
-            return $this->getOption($name, $default_value);
-        }
-
-        // Cache config in session
-        if (! isset($this->session['config'][$name])) {
-            $this->session['config'] = $this->getAll();
-        }
-
-        if (! empty($this->session['config'][$name])) {
-            return $this->session['config'][$name];
-        }
-
-        return $default_value;
-    }
-
-    /**
-     * Reload settings in the session and the translations
-     *
-     * @access public
-     */
-    public function reload()
-    {
-        $this->session['config'] = $this->getAll();
-        $this->setupTranslations();
     }
 
     /**
@@ -200,28 +167,27 @@ class Config extends Setting
     }
 
     /**
-     * Get current timezone
+     * Get a config variable from the session or the database
      *
      * @access public
+     * @param  string   $name            Parameter name
+     * @param  string   $default_value   Default value of the parameter
      * @return string
      */
-    public function getCurrentTimezone()
+    public function get($name, $default_value = '')
     {
-        if ($this->userSession->isLogged() && ! empty($this->session['user']['timezone'])) {
-            return $this->session['user']['timezone'];
-        }
-
-        return $this->get('application_timezone', 'UTC');
+        $options = $this->memoryCache->proxy($this, 'getAll');
+        return isset($options[$name]) && $options[$name] !== '' ? $options[$name] : $default_value;
     }
 
     /**
-     * Set timezone
+     * Reload settings in the session and the translations
      *
      * @access public
      */
-    public function setupTimezone()
+    public function reload()
     {
-        date_default_timezone_set($this->getCurrentTimezone());
+        $this->setupTranslations();
     }
 
     /**
@@ -232,7 +198,7 @@ class Config extends Setting
      */
     public function optimizeDatabase()
     {
-        return $this->db->getconnection()->exec("VACUUM");
+        return $this->db->getconnection()->exec('VACUUM');
     }
 
     /**
@@ -262,10 +228,11 @@ class Config extends Setting
      *
      * @access public
      * @param  string   $option   Parameter name
+     * @return boolean
      */
     public function regenerateToken($option)
     {
-        $this->save(array($option => Security::generateToken()));
+        return $this->save(array($option => Token::getToken()));
     }
 
     /**

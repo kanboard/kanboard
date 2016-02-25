@@ -2,9 +2,6 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Integration\GithubWebhook;
-use Kanboard\Integration\BitbucketWebhook;
-
 /**
  * Open automatically a task
  *
@@ -14,6 +11,17 @@ use Kanboard\Integration\BitbucketWebhook;
 class TaskOpen extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Open a task');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -21,10 +29,7 @@ class TaskOpen extends Base
      */
     public function getCompatibleEvents()
     {
-        return array(
-            GithubWebhook::EVENT_ISSUE_REOPENED,
-            BitbucketWebhook::EVENT_ISSUE_REOPENED,
-        );
+        return array();
     }
 
     /**

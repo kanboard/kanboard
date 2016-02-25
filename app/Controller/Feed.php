@@ -25,10 +25,8 @@ class Feed extends Base
             $this->forbidden(true);
         }
 
-        $projects = $this->projectPermission->getActiveMemberProjects($user['id']);
-
         $this->response->xml($this->template->render('feed/user', array(
-            'events' => $this->projectActivity->getProjects(array_keys($projects)),
+            'events' => $this->projectActivity->getProjects($this->projectPermission->getActiveProjectIds($user['id'])),
             'user' => $user,
         )));
     }

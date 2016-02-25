@@ -23,46 +23,36 @@ defined('DB_HOSTNAME') or define('DB_HOSTNAME', 'localhost');
 defined('DB_NAME') or define('DB_NAME', 'kanboard');
 defined('DB_PORT') or define('DB_PORT', null);
 
+// Database backend group provider
+defined('DB_GROUP_PROVIDER') or define('DB_GROUP_PROVIDER', true);
+
 // LDAP configuration
 defined('LDAP_AUTH') or define('LDAP_AUTH', false);
 defined('LDAP_SERVER') or define('LDAP_SERVER', '');
 defined('LDAP_PORT') or define('LDAP_PORT', 389);
-defined('LDAP_START_TLS') or define('LDAP_START_TLS', false);
 defined('LDAP_SSL_VERIFY') or define('LDAP_SSL_VERIFY', true);
+defined('LDAP_START_TLS') or define('LDAP_START_TLS', false);
+defined('LDAP_USERNAME_CASE_SENSITIVE') or define('LDAP_USERNAME_CASE_SENSITIVE', false);
+
 defined('LDAP_BIND_TYPE') or define('LDAP_BIND_TYPE', 'anonymous');
 defined('LDAP_USERNAME') or define('LDAP_USERNAME', null);
 defined('LDAP_PASSWORD') or define('LDAP_PASSWORD', null);
-defined('LDAP_ACCOUNT_BASE') or define('LDAP_ACCOUNT_BASE', '');
-defined('LDAP_USER_PATTERN') or define('LDAP_USER_PATTERN', '');
-defined('LDAP_ACCOUNT_FULLNAME') or define('LDAP_ACCOUNT_FULLNAME', 'displayname');
-defined('LDAP_ACCOUNT_EMAIL') or define('LDAP_ACCOUNT_EMAIL', 'mail');
-defined('LDAP_ACCOUNT_ID') or define('LDAP_ACCOUNT_ID', '');
-defined('LDAP_ACCOUNT_MEMBEROF') or define('LDAP_ACCOUNT_MEMBEROF', 'memberof');
-defined('LDAP_ACCOUNT_CREATION') or define('LDAP_ACCOUNT_CREATION', true);
+
+defined('LDAP_USER_BASE_DN') or define('LDAP_USER_BASE_DN', '');
+defined('LDAP_USER_FILTER') or define('LDAP_USER_FILTER', '');
+defined('LDAP_USER_ATTRIBUTE_USERNAME') or define('LDAP_USER_ATTRIBUTE_USERNAME', 'uid');
+defined('LDAP_USER_ATTRIBUTE_FULLNAME') or define('LDAP_USER_ATTRIBUTE_FULLNAME', 'cn');
+defined('LDAP_USER_ATTRIBUTE_EMAIL') or define('LDAP_USER_ATTRIBUTE_EMAIL', 'mail');
+defined('LDAP_USER_ATTRIBUTE_GROUPS') or define('LDAP_USER_ATTRIBUTE_GROUPS', 'memberof');
+defined('LDAP_USER_CREATION') or define('LDAP_USER_CREATION', true);
+
 defined('LDAP_GROUP_ADMIN_DN') or define('LDAP_GROUP_ADMIN_DN', '');
-defined('LDAP_GROUP_PROJECT_ADMIN_DN') or define('LDAP_GROUP_PROJECT_ADMIN_DN', '');
-defined('LDAP_USERNAME_CASE_SENSITIVE') or define('LDAP_USERNAME_CASE_SENSITIVE', false);
+defined('LDAP_GROUP_MANAGER_DN') or define('LDAP_GROUP_MANAGER_DN', '');
 
-// Google authentication
-defined('GOOGLE_AUTH') or define('GOOGLE_AUTH', false);
-defined('GOOGLE_CLIENT_ID') or define('GOOGLE_CLIENT_ID', '');
-defined('GOOGLE_CLIENT_SECRET') or define('GOOGLE_CLIENT_SECRET', '');
-
-// Github authentication
-defined('GITHUB_AUTH') or define('GITHUB_AUTH', false);
-defined('GITHUB_CLIENT_ID') or define('GITHUB_CLIENT_ID', '');
-defined('GITHUB_CLIENT_SECRET') or define('GITHUB_CLIENT_SECRET', '');
-defined('GITHUB_OAUTH_AUTHORIZE_URL') or define('GITHUB_OAUTH_AUTHORIZE_URL', 'https://github.com/login/oauth/authorize');
-defined('GITHUB_OAUTH_TOKEN_URL') or define('GITHUB_OAUTH_TOKEN_URL', 'https://github.com/login/oauth/access_token');
-defined('GITHUB_API_URL') or define('GITHUB_API_URL', 'https://api.github.com/');
-
-// Gitlab authentication
-defined('GITLAB_AUTH') or define('GITLAB_AUTH', false);
-defined('GITLAB_CLIENT_ID') or define('GITLAB_CLIENT_ID', '');
-defined('GITLAB_CLIENT_SECRET') or define('GITLAB_CLIENT_SECRET', '');
-defined('GITLAB_OAUTH_AUTHORIZE_URL') or define('GITLAB_OAUTH_AUTHORIZE_URL', 'https://gitlab.com/oauth/authorize');
-defined('GITLAB_OAUTH_TOKEN_URL') or define('GITLAB_OAUTH_TOKEN_URL', 'https://gitlab.com/oauth/token');
-defined('GITLAB_API_URL') or define('GITLAB_API_URL', 'https://gitlab.com/api/v3/');
+defined('LDAP_GROUP_PROVIDER') or define('LDAP_GROUP_PROVIDER', false);
+defined('LDAP_GROUP_BASE_DN') or define('LDAP_GROUP_BASE_DN', '');
+defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', '');
+defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
 // Proxy authentication
 defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', false);
@@ -106,6 +96,9 @@ defined('ENABLE_URL_REWRITE') or define('ENABLE_URL_REWRITE', isset($_SERVER['HT
 
 // Hide login form
 defined('HIDE_LOGIN_FORM') or define('HIDE_LOGIN_FORM', false);
+
+// Disabling logout (for external SSO authentication)
+defined('DISABLE_LOGOUT') or define('DISABLE_LOGOUT', false);
 
 // Bruteforce protection
 defined('BRUTEFORCE_CAPTCHA') or define('BRUTEFORCE_CAPTCHA', 3);

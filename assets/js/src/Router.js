@@ -30,6 +30,7 @@ jQuery(document).ready(function() {
     router.addRoute('analytic-avg-time-column', AvgTimeColumnChart);
     router.addRoute('analytic-task-time-column', TaskTimeColumnChart);
     router.addRoute('analytic-lead-cycle-time', LeadCycleTimeChart);
+    router.addRoute('analytic-compare-hours', CompareHoursColumnChart);
     router.addRoute('gantt-chart', Gantt);
     router.dispatch(app);
     app.listen();

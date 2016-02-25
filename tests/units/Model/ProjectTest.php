@@ -5,12 +5,9 @@ require_once __DIR__.'/../Base.php';
 use Kanboard\Core\Translator;
 use Kanboard\Subscriber\ProjectModificationDateSubscriber;
 use Kanboard\Model\Project;
-use Kanboard\Model\ProjectPermission;
 use Kanboard\Model\User;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Acl;
-use Kanboard\Model\Board;
 use Kanboard\Model\Config;
 use Kanboard\Model\Category;
 
@@ -42,6 +39,14 @@ class ProjectTest extends Base
         $this->assertEquals(0, $project['is_private']);
         $this->assertEquals(time(), $project['last_modified'], '', 1);
         $this->assertEmpty($project['token']);
+    }
+
+    public function testCreationWithDuplicateName()
+    {
+        $p = new Project($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertEquals(2, $p->create(array('name' => 'UnitTest')));
     }
 
     public function testCreationWithStartAndDate()
@@ -79,6 +84,7 @@ class ProjectTest extends Base
         // Single category
 
         $this->assertTrue($c->save(array('project_categories' => 'Test1')));
+        $this->container['memoryCache']->flush();
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
 
         $project = $p->getById(2);
@@ -92,6 +98,7 @@ class ProjectTest extends Base
         // Multiple categories badly formatted
 
         $this->assertTrue($c->save(array('project_categories' => 'ABC, , DEF 3,  ')));
+        $this->container['memoryCache']->flush();
         $this->assertEquals(3, $p->create(array('name' => 'UnitTest3')));
 
         $project = $p->getById(3);
@@ -105,6 +112,7 @@ class ProjectTest extends Base
 
         // No default categories
         $this->assertTrue($c->save(array('project_categories' => '  ')));
+        $this->container['memoryCache']->flush();
         $this->assertEquals(4, $p->create(array('name' => 'UnitTest4')));
 
         $project = $p->getById(4);
@@ -270,30 +278,49 @@ class ProjectTest extends Base
 
         $project = $p->getByIdentifier('');
         $this->assertFalse($project);
+    }
 
-        // Validation rules
-        $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'TEST1'));
-        $this->assertFalse($r[0]);
+    public function testThatProjectCreatorAreAlsoOwner()
+    {
+        $projectModel = new Project($this->container);
+        $userModel = new User($this->container);
 
-        $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'test1'));
-        $this->assertFalse($r[0]);
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'Me')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'My project 1'), 2));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'My project 2')));
 
-        $r = $p->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'TEST1'));
-        $this->assertTrue($r[0]);
+        $project = $projectModel->getByIdWithOwner(1);
+        $this->assertNotEmpty($project);
+        $this->assertSame('My project 1', $project['name']);
+        $this->assertSame('Me', $project['owner_name']);
+        $this->assertSame('user1', $project['owner_username']);
+        $this->assertEquals(2, $project['owner_id']);
 
-        $r = $p->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'test3'));
-        $this->assertTrue($r[0]);
+        $project = $projectModel->getByIdWithOwner(2);
+        $this->assertNotEmpty($project);
+        $this->assertSame('My project 2', $project['name']);
+        $this->assertEquals('', $project['owner_name']);
+        $this->assertEquals('', $project['owner_username']);
+        $this->assertEquals(0, $project['owner_id']);
+    }
 
-        $r = $p->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => ''));
-        $this->assertTrue($r[0]);
+    public function testPriority()
+    {
+        $projectModel = new Project($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'My project 2')));
 
-        $r = $p->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'TEST2'));
-        $this->assertFalse($r[0]);
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(0, $project['priority_default']);
+        $this->assertEquals(0, $project['priority_start']);
+        $this->assertEquals(3, $project['priority_end']);
 
-        $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'a-b-c'));
-        $this->assertFalse($r[0]);
+        $this->assertTrue($projectModel->update(array('id' => 1, 'priority_start' => 2, 'priority_end' => 5, 'priority_default' => 4)));
 
-        $r = $p->validateCreation(array('name' => 'test', 'identifier' => 'test 123'));
-        $this->assertFalse($r[0]);
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(4, $project['priority_default']);
+        $this->assertEquals(2, $project['priority_start']);
+        $this->assertEquals(5, $project['priority_end']);
     }
 }

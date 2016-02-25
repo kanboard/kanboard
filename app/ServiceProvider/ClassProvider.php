@@ -4,44 +4,55 @@ namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use League\HTMLToMarkdown\HtmlConverter;
-use Kanboard\Core\Plugin\Loader;
 use Kanboard\Core\Mail\Client as EmailClient;
 use Kanboard\Core\ObjectStorage\FileStorage;
 use Kanboard\Core\Paginator;
-use Kanboard\Core\OAuth2;
+use Kanboard\Core\Http\OAuth2;
 use Kanboard\Core\Tool;
-use Kanboard\Model\UserNotificationType;
-use Kanboard\Model\ProjectNotificationType;
+use Kanboard\Core\Http\Client as HttpClient;
 
 class ClassProvider implements ServiceProviderInterface
 {
     private $classes = array(
+        'Analytic' => array(
+            'TaskDistributionAnalytic',
+            'UserDistributionAnalytic',
+            'EstimatedTimeComparisonAnalytic',
+            'AverageLeadCycleTimeAnalytic',
+            'AverageTimeSpentColumnAnalytic',
+        ),
         'Model' => array(
-            'Acl',
             'Action',
-            'Authentication',
+            'ActionParameter',
             'Board',
             'Category',
             'Color',
+            'Column',
             'Comment',
             'Config',
             'Currency',
             'CustomFilter',
-            'File',
+            'Group',
+            'GroupMember',
             'LastLogin',
             'Link',
             'Notification',
             'OverdueNotification',
+            'PasswordReset',
             'Project',
+            'ProjectFile',
             'ProjectActivity',
-            'ProjectAnalytic',
             'ProjectDuplication',
             'ProjectDailyColumnStats',
             'ProjectDailyStats',
             'ProjectPermission',
             'ProjectNotification',
             'ProjectMetadata',
+            'ProjectGroupRole',
+            'ProjectGroupRoleFilter',
+            'ProjectUserRole',
+            'ProjectUserRoleFilter',
+            'RememberMeSession',
             'Subtask',
             'SubtaskExport',
             'SubtaskTimeTracking',
@@ -51,22 +62,23 @@ class ClassProvider implements ServiceProviderInterface
             'TaskCreation',
             'TaskDuplication',
             'TaskExport',
+            'TaskExternalLink',
             'TaskFinder',
+            'TaskFile',
             'TaskFilter',
             'TaskLink',
             'TaskModification',
             'TaskPermission',
             'TaskPosition',
             'TaskStatus',
-            'TaskValidator',
             'TaskImport',
             'TaskMetadata',
             'Transition',
             'User',
             'UserImport',
-            'UserSession',
+            'UserLocking',
+            'UserMention',
             'UserNotification',
-            'UserNotificationType',
             'UserNotificationFilter',
             'UserUnreadNotification',
             'UserMetadata',
@@ -77,16 +89,41 @@ class ClassProvider implements ServiceProviderInterface
             'TaskFilterCalendarFormatter',
             'TaskFilterICalendarFormatter',
             'ProjectGanttFormatter',
+            'UserFilterAutoCompleteFormatter',
+            'GroupAutoCompleteFormatter',
+        ),
+        'Validator' => array(
+            'ActionValidator',
+            'AuthValidator',
+            'CategoryValidator',
+            'ColumnValidator',
+            'CommentValidator',
+            'CurrencyValidator',
+            'CustomFilterValidator',
+            'ExternalLinkValidator',
+            'GroupValidator',
+            'LinkValidator',
+            'PasswordResetValidator',
+            'ProjectValidator',
+            'SubtaskValidator',
+            'SwimlaneValidator',
+            'TaskValidator',
+            'TaskLinkValidator',
+            'UserValidator',
         ),
         'Core' => array(
             'DateParser',
             'Helper',
-            'HttpClient',
             'Lexer',
-            'Request',
-            'Router',
-            'Session',
             'Template',
+        ),
+        'Core\Event' => array(
+            'EventManager',
+        ),
+        'Core\Http' => array(
+            'Request',
+            'Response',
+            'RememberMeCookie',
         ),
         'Core\Cache' => array(
             'MemoryCache',
@@ -94,10 +131,15 @@ class ClassProvider implements ServiceProviderInterface
         'Core\Plugin' => array(
             'Hook',
         ),
-        'Integration' => array(
-            'BitbucketWebhook',
-            'GithubWebhook',
-            'GitlabWebhook',
+        'Core\Security' => array(
+            'Token',
+            'Role',
+        ),
+        'Core\User' => array(
+            'GroupSync',
+            'UserSync',
+            'UserSession',
+            'UserProfile',
         )
     );
 
@@ -113,8 +155,8 @@ class ClassProvider implements ServiceProviderInterface
             return new OAuth2($c);
         });
 
-        $container['htmlConverter'] = function () {
-            return new HtmlConverter(array('strip_tags' => true));
+        $container['httpClient'] = function ($c) {
+            return new HttpClient($c);
         };
 
         $container['objectStorage'] = function () {
@@ -129,22 +171,12 @@ class ClassProvider implements ServiceProviderInterface
             return $mailer;
         };
 
-        $container['userNotificationType'] = function ($container) {
-            $type = new UserNotificationType($container);
-            $type->setType('email', t('Email'), '\Kanboard\Notification\Mail');
-            $type->setType('web', t('Web'), '\Kanboard\Notification\Web');
-            return $type;
-        };
+        $container['cspRules'] = array(
+            'default-src' => "'self'",
+            'style-src' => "'self' 'unsafe-inline'",
+            'img-src' => '* data:',
+        );
 
-        $container['projectNotificationType'] = function ($container) {
-            $type = new ProjectNotificationType($container);
-            $type->setType('webhook', 'Webhook', '\Kanboard\Notification\Webhook', true);
-            $type->setType('activity_stream', 'ActivityStream', '\Kanboard\Notification\ActivityStream', true);
-            return $type;
-        };
-
-        $container['pluginLoader'] = new Loader($container);
-
-        $container['cspRules'] = array('style-src' => "'self' 'unsafe-inline'", 'img-src' => '* data:');
+        return $container;
     }
 }

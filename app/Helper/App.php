@@ -2,14 +2,64 @@
 
 namespace Kanboard\Helper;
 
+use Kanboard\Core\Base;
+
 /**
  * Application helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class App extends \Kanboard\Core\Base
+class App extends Base
 {
+    /**
+     * Get config variable
+     *
+     * @access public
+     * @param  string $param
+     * @param  mixed  $default_value
+     * @return mixed
+     */
+    public function config($param, $default_value = '')
+    {
+        return $this->config->get($param, $default_value);
+    }
+
+    /**
+     * Make sidebar menu active
+     *
+     * @access public
+     * @param  string $controller
+     * @param  string $action
+     * @param  string $plugin
+     * @return string
+     */
+    public function checkMenuSelection($controller, $action = '', $plugin = '')
+    {
+        $result = strtolower($this->getRouterController()) === strtolower($controller);
+
+        if ($result && $action !== '') {
+            $result = strtolower($this->getRouterAction()) === strtolower($action);
+        }
+
+        if ($result && $plugin !== '') {
+            $result = strtolower($this->getPluginName()) === strtolower($plugin);
+        }
+
+        return $result ? 'class="active"' : '';
+    }
+
+    /**
+     * Get plugin name from route
+     *
+     * @access public
+     * @return string
+     */
+    public function getPluginName()
+    {
+        return $this->router->getPlugin();
+    }
+
     /**
      * Get router controller
      *
@@ -62,18 +112,17 @@ class App extends \Kanboard\Core\Base
      */
     public function flashMessage()
     {
-        $html = '';
+        $success_message = $this->flash->getMessage('success');
+        $failure_message = $this->flash->getMessage('failure');
 
-        if (isset($this->session['flash_message'])) {
-            $html = '<div class="alert alert-success alert-fade-out">'.$this->helper->e($this->session['flash_message']).'</div>';
-            unset($this->session['flash_message']);
-            unset($this->session['flash_error_message']);
-        } elseif (isset($this->session['flash_error_message'])) {
-            $html = '<div class="alert alert-error">'.$this->helper->e($this->session['flash_error_message']).'</div>';
-            unset($this->session['flash_message']);
-            unset($this->session['flash_error_message']);
+        if (! empty($success_message)) {
+            return '<div class="alert alert-success alert-fade-out">'.$this->helper->e($success_message).'</div>';
         }
 
-        return $html;
+        if (! empty($failure_message)) {
+            return '<div class="alert alert-error">'.$this->helper->e($failure_message).'</div>';
+        }
+
+        return '';
     }
 }

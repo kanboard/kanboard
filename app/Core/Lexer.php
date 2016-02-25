@@ -39,6 +39,7 @@ class Lexer
         "/^(swimlane:)/"                                 => 'T_SWIMLANE',
         "/^(ref:)/"                                      => 'T_REFERENCE',
         "/^(reference:)/"                                => 'T_REFERENCE',
+        "/^(link:)/"                                     => 'T_LINK',
         "/^(\s+)/"                                       => 'T_WHITESPACE',
         '/^([<=>]{0,2}[0-9]{4}-[0-9]{2}-[0-9]{2})/'      => 'T_DATE',
         '/^(yesterday|tomorrow|today)/'                  => 'T_DATE',
@@ -118,6 +119,7 @@ class Lexer
                 case 'T_COLUMN':
                 case 'T_PROJECT':
                 case 'T_SWIMLANE':
+                case 'T_LINK':
                     $next = next($tokens);
 
                     if ($next !== false && $next['token'] === 'T_STRING') {

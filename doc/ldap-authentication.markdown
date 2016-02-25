@@ -1,4 +1,4 @@
-LDAP authentication
+LDAP Authentication
 ===================
 
 Requirements
@@ -13,28 +13,24 @@ Requirements
 Workflow
 --------
 
-When the LDAP authentication is activated, the login process work like that:
+When the LDAP authentication is activated, the login process works like that:
 
 1. Try first to authenticate the user by using the database
 2. If the user is not found inside the database, a LDAP authentication is performed
-3. If the LDAP authentication is successful, by default a local user is created automatically with no password and marked as LDAP user.
-
-### Differences between a local user and a LDAP user are the following:
-
-- LDAP users have no local passwords
-- LDAP users can't modify their password with the user interface
+3. If the LDAP authentication is successful, by default a local user is created automatically with no password and marked as LDAP users.
 
 The full name and the email address are automatically fetched from the LDAP server.
 
-Configuration
--------------
+Authentication Types
+--------------------
 
-You have to create a custom config file named `config.php` (you can also use the template `config.default.php`).
-This file must be stored in the root directory of Kanboard.
+| Type       | Description                                                     |
+|------------|-----------------------------------------------------------------|
+| Proxy User | A specific user is used to browse LDAP directory                |
+| User       | The end-user credentials are used for browsing LDAP directory   |
+| Anonymous  | No authentication is performed for LDAP browsing                |
 
-### LDAP bind type
-
-There are 3 possible ways to browse the LDAP directory:
+**The recommended authentication method is "Proxy"**.
 
 #### Anonymous mode
 
@@ -44,7 +40,7 @@ define('LDAP_USERNAME', null);
 define('LDAP_PASSWORD', null);
 ```
 
-This is the default value but some LDAP servers don't allow that.
+This is the default value but some LDAP servers don't allow anonymous browsing for security reasons.
 
 #### Proxy mode
 
@@ -60,7 +56,7 @@ define('LDAP_PASSWORD', 'my proxy password');
 
 This method uses the credentials provided by the end-user.
 
-By example, Microsoft Active Directory doesn't allow anonymous browsing by default and if you don't want to use a proxy user you can use this method.
+For example, Microsoft Active Directory doesn't allow anonymous browsing by default and if you don't want to use a proxy user you can use this method.
 
 ```php
 define('LDAP_BIND_TYPE', 'user');
@@ -73,7 +69,26 @@ In this case, the constant `LDAP_USERNAME` is used as a pattern to the ldap user
 - `%s@kanboard.local` will be replaced by `my_user@kanboard.local`
 - `KANBOARD\\%s` will be replaced by `KANBOARD\my_user`
 
-### Example for Microsoft Active Directory
+User LDAP filter
+----------------
+
+The configuration parameter `LDAP_USER_FILTER` is used to find users in LDAP directory.
+
+Examples:
+
+- `(&(objectClass=user)(sAMAccountName=%s))` is replaced by `(&(objectClass=user)(sAMAccountName=my_username))`
+- `uid=%s` is replaced by `uid=my_username`
+
+Other examples of [filters for Active Directory](http://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)
+
+Example to filter access to Kanboard:
+
+`(&(objectClass=user)(sAMAccountName=%s)(memberOf=CN=Kanboard Users,CN=Users,DC=kanboard,DC=local))`
+
+This example allows only people members of the group "Kanboard Users" to connect to Kanboard.
+
+Example for Microsoft Active Directory
+--------------------------------------
 
 Let's say we have a domain `KANBOARD` (kanboard.local) and the primary controller is `myserver.kanboard.local`.
 
@@ -93,8 +108,8 @@ define('LDAP_PASSWORD', 'my super secret password');
 define('LDAP_SERVER', 'myserver.kanboard.local');
 
 // LDAP properties
-define('LDAP_ACCOUNT_BASE', 'CN=Users,DC=kanboard,DC=local');
-define('LDAP_USER_PATTERN', '(&(objectClass=user)(sAMAccountName=%s))');
+define('LDAP_USER_BASE_DN', 'CN=Users,DC=kanboard,DC=local');
+define('LDAP_USER_FILTER', '(&(objectClass=user)(sAMAccountName=%s))');
 ```
 
 Second example with user mode:
@@ -113,11 +128,12 @@ define('LDAP_PASSWORD', null);
 define('LDAP_SERVER', 'myserver.kanboard.local');
 
 // LDAP properties
-define('LDAP_ACCOUNT_BASE', 'CN=Users,DC=kanboard,DC=local');
-define('LDAP_USER_PATTERN', '(&(objectClass=user)(sAMAccountName=%s))');
+define('LDAP_USER_BASE_DN', 'CN=Users,DC=kanboard,DC=local');
+define('LDAP_USER_FILTER', '(&(objectClass=user)(sAMAccountName=%s))');
 ```
 
-### Example for OpenLDAP
+Example for OpenLDAP
+--------------------
 
 Our LDAP server is `myserver.example.com` and all users are stored under `ou=People,dc=example,dc=com`.
 
@@ -133,15 +149,14 @@ define('LDAP_AUTH', true);
 define('LDAP_SERVER', 'myserver.example.com');
 
 // LDAP properties
-define('LDAP_ACCOUNT_BASE', 'ou=People,dc=example,dc=com');
-define('LDAP_USER_PATTERN', 'uid=%s');
+define('LDAP_USER_BASE_DN', 'ou=People,dc=example,dc=com');
+define('LDAP_USER_FILTER', 'uid=%s');
 ```
 
-The `%s` is replaced by the username for the parameter `LDAP_USER_PATTERN`, so you can define a custom Distinguished Name: ` (&(objectClass=user)(uid=%s)(!(ou:dn::=trainees)))`.
+Disable automatic account creation
+-----------------------------------
 
-### Disable automatic account creation
-
-By default, Kanboard will create automatically a user account if nothing is found.
+By default, Kanboard will create a user account automatically if nothing is found.
 
 You can disable this behavior if you prefer to create user accounts manually to restrict Kanboard to only some people.
 
@@ -152,77 +167,18 @@ Just change the value of `LDAP_ACCOUNT_CREATION` to `false`:
 define('LDAP_ACCOUNT_CREATION', false);
 ```
 
+Troubleshootings
+----------------
+
 ### SELinux restrictions
 
 If SELinux is enabled, you have to allow Apache to reach out your LDAP server.
 
-- You can switch SELinux to the permissive mode or disable it (not recomemnded)
+- You can switch SELinux to the permissive mode or disable it (not recommended)
 - You can allow all network connections, by example `setsebool -P httpd_can_network_connect=1` or have a more restrictive rule
 
 In any case, refer to the official Redhat/Centos documentation.
 
-### Available configuration parameters
+### Enable debug mode
 
-```php
-// Enable LDAP authentication (false by default)
-define('LDAP_AUTH', false);
-
-// LDAP server hostname
-define('LDAP_SERVER', '');
-
-// LDAP server port (389 by default)
-define('LDAP_PORT', 389);
-
-// By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification
-define('LDAP_SSL_VERIFY', true);
-
-// Enable LDAP START_TLS
-define('LDAP_START_TLS', false);
-
-// LDAP bind type: "anonymous", "user" or "proxy"
-define('LDAP_BIND_TYPE', 'anonymous');
-
-// LDAP username to connect with. null for anonymous bind (default).
-define('LDAP_USERNAME', null);
-
-// LDAP password to connect with. null for anonymous bind (default).
-define('LDAP_PASSWORD', null);
-
-// LDAP account base, i.e. root of all user account
-// Example: ou=People,dc=example,dc=com
-define('LDAP_ACCOUNT_BASE', '');
-
-// LDAP query pattern to use when searching for a user account
-// Example for ActiveDirectory: '(&(objectClass=user)(sAMAccountName=%s))'
-// Example for OpenLDAP: 'uid=%s'
-define('LDAP_USER_PATTERN', '');
-
-// Name of an attribute of the user account object which should be used as the full name of the user.
-define('LDAP_ACCOUNT_FULLNAME', 'displayname');
-
-// Name of an attribute of the user account object which should be used as the email of the user.
-define('LDAP_ACCOUNT_EMAIL', 'mail');
-
-// Name of an attribute of the user account object which should be used as the id of the user.
-// Example for ActiveDirectory: 'samaccountname'
-// Example for OpenLDAP: 'uid'
-define('LDAP_ACCOUNT_ID', '');
-
-// LDAP Attribute for group membership
-define('LDAP_ACCOUNT_MEMBEROF', 'memberof');
-
-// DN for administrators
-// Example: CN=Kanboard Admins,CN=Users,DC=kanboard,DC=local
-define('LDAP_GROUP_ADMIN_DN', '');
-
-// DN for project administrators
-// Example: CN=Kanboard Project Admins,CN=Users,DC=kanboard,DC=local
-define('LDAP_GROUP_PROJECT_ADMIN_DN', '');
-
-// By default Kanboard lowercase the ldap username to avoid duplicate users (the database is case sensitive)
-// Set to true if you want to preserve the case
-define('LDAP_USERNAME_CASE_SENSITIVE', false);
-
-// Automatically create user account
-define('LDAP_ACCOUNT_CREATION', true);
-```
+If you are not able to setup correctly the LDAP authentication, you can [enable the debug mode](config.markdown) and watch log files.

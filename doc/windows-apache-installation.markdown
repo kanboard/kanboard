@@ -3,7 +3,7 @@ Installation on Windows Server and Apache
 
 This guide will help you to setup step by step Kanboard on a Windows Server with Apache and PHP.
 
-Note: If you have a 64 bits platform choose "x64" otherwise choose "x86" for 32 bits systems.
+Note: If you have a 64 bits platform choose "x64" otherwise choose "x86" for 32-bit systems.
 
 Visual C++ Redistributable Installation
 ---------------------------------------
@@ -65,7 +65,6 @@ extension_dir = "C:/php/ext"
 Uncomment these PHP modules:
 
 ```ini
-extension=php_curl.dll
 extension=php_gd2.dll
 extension=php_ldap.dll
 extension=php_mbstring.dll
@@ -73,13 +72,13 @@ extension=php_openssl.dll
 extension=php_pdo_sqlite.dll
 ```
 
-Set the timezone:
+Set the time zone:
 
 ```ini
 date.timezone = America/Montreal
 ```
 
-The list of supported timezones can be found in the [PHP documentation](http://php.net/manual/en/timezones.america.php).
+The list of supported time zones can be found in the [PHP documentation](http://php.net/manual/en/timezones.america.php).
 
 Load the PHP module for Apache:
 
@@ -116,7 +115,7 @@ Kanboard installation
 ---------------------
 
 - Download the zip file
-- Uncompress the archive in `C:\Apache24\htdocs\kanboard` by example
+- Decompress the archive in `C:\Apache24\htdocs\kanboard` by example
 - Open your web browser to use Kanboard http://localhost/kanboard/
 - The default credentials are **admin/admin**
 
@@ -124,3 +123,8 @@ Tested configuration
 --------------------
 
 - Windows 2008 R2 / Apache 2.4.12 / PHP 5.6.8
+
+Notes
+-----
+
+- Some features of Kanboard require that you run [a daily background job](cronjob.markdown).

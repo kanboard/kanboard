@@ -15,6 +15,8 @@ class DatabaseProvider implements ServiceProviderInterface
         $container['db'] = $this->getInstance();
         $container['db']->stopwatch = DEBUG;
         $container['db']->logQueries = DEBUG;
+
+        return $container;
     }
 
     /**

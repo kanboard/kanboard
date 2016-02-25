@@ -58,6 +58,7 @@ class TaskExport extends Base
             tasks.date_due,
             creators.username AS creator_username,
             users.username AS assignee_username,
+            users.name AS assignee_name,
             tasks.score,
             tasks.title,
             tasks.date_creation,
@@ -105,7 +106,7 @@ class TaskExport extends Base
         $task['score'] = $task['score'] ?: 0;
         $task['swimlane_id'] = isset($swimlanes[$task['swimlane_id']]) ? $swimlanes[$task['swimlane_id']] : '?';
 
-        $this->dateParser->format($task, array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'), 'Y-m-d');
+        $task = $this->dateParser->format($task, array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'), 'Y-m-d');
 
         return $task;
     }
@@ -129,7 +130,8 @@ class TaskExport extends Base
             e('Color'),
             e('Due date'),
             e('Creator'),
-            e('Assignee'),
+            e('Assignee Username'),
+            e('Assignee Name'),
             e('Complexity'),
             e('Title'),
             e('Creation date'),

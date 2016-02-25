@@ -49,7 +49,7 @@
                 <?php endif ?>
             </td>
             <td>
-                <?= dt('%B %e, %Y at %k:%M %p', $notification['date_creation']) ?>
+                <?= $this->dt->datetime($notification['date_creation']) ?>
             </td>
             <td>
                 <i class="fa fa-check fa-fw"></i>

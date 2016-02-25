@@ -3,7 +3,6 @@
 namespace Kanboard\Api;
 
 use JsonRPC\AuthenticationFailure;
-use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Base class
@@ -24,15 +23,58 @@ class Auth extends Base
      */
     public function checkCredentials($username, $password, $class, $method)
     {
-        $this->container['dispatcher']->dispatch('api.bootstrap', new Event);
+        $this->dispatcher->dispatch('app.bootstrap');
 
-        if ($username !== 'jsonrpc' && ! $this->authentication->hasCaptcha($username) && $this->authentication->authenticate($username, $password)) {
+        if ($this->isUserAuthenticated($username, $password)) {
             $this->checkProcedurePermission(true, $method);
-            $this->userSession->refresh($this->user->getByUsername($username));
-        } elseif ($username === 'jsonrpc' && $password === $this->config->get('api_token')) {
+            $this->userSession->initialize($this->user->getByUsername($username));
+        } elseif ($this->isAppAuthenticated($username, $password)) {
             $this->checkProcedurePermission(false, $method);
         } else {
             throw new AuthenticationFailure('Wrong credentials');
         }
+    }
+
+    /**
+     * Check user credentials
+     *
+     * @access public
+     * @param  string  $username
+     * @param  string  $password
+     * @return boolean
+     */
+    private function isUserAuthenticated($username, $password)
+    {
+        return $username !== 'jsonrpc' &&
+            ! $this->userLocking->isLocked($username) &&
+            $this->authenticationManager->passwordAuthentication($username, $password);
+    }
+
+    /**
+     * Check administrative credentials
+     *
+     * @access public
+     * @param  string  $username
+     * @param  string  $password
+     * @return boolean
+     */
+    private function isAppAuthenticated($username, $password)
+    {
+        return $username === 'jsonrpc' && $password === $this->getApiToken();
+    }
+
+    /**
+     * Get API Token
+     *
+     * @access private
+     * @return string
+     */
+    private function getApiToken()
+    {
+        if (defined('API_AUTHENTICATION_TOKEN')) {
+            return API_AUTHENTICATION_TOKEN;
+        }
+
+        return $this->config->get('api_token');
     }
 }

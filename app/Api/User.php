@@ -2,7 +2,11 @@
 
 namespace Kanboard\Api;
 
-use Kanboard\Auth\Ldap;
+use LogicException;
+use Kanboard\Core\Security\Role;
+use Kanboard\Core\Ldap\Client as LdapClient;
+use Kanboard\Core\Ldap\ClientException as LdapException;
+use Kanboard\Core\Ldap\User as LdapUser;
 
 /**
  * User API controller
@@ -17,6 +21,11 @@ class User extends \Kanboard\Core\Base
         return $this->user->getById($user_id);
     }
 
+    public function getUserByName($username)
+    {
+        return $this->user->getByUsername($username);
+    }
+
     public function getAllUsers()
     {
         return $this->user->getAll();
@@ -27,7 +36,22 @@ class User extends \Kanboard\Core\Base
         return $this->user->remove($user_id);
     }
 
-    public function createUser($username, $password, $name = '', $email = '', $is_admin = 0, $is_project_admin = 0)
+    public function disableUser($user_id)
+    {
+        return $this->user->disable($user_id);
+    }
+
+    public function enableUser($user_id)
+    {
+        return $this->user->enable($user_id);
+    }
+
+    public function isActiveUser($user_id)
+    {
+        return $this->user->isActive($user_id);
+    }
+
+    public function createUser($username, $password, $name = '', $email = '', $role = Role::APP_USER)
     {
         $values = array(
             'username' => $username,
@@ -35,44 +59,53 @@ class User extends \Kanboard\Core\Base
             'confirmation' => $password,
             'name' => $name,
             'email' => $email,
-            'is_admin' => $is_admin,
-            'is_project_admin' => $is_project_admin,
+            'role' => $role,
         );
 
-        list($valid, ) = $this->user->validateCreation($values);
+        list($valid, ) = $this->userValidator->validateCreation($values);
         return $valid ? $this->user->create($values) : false;
     }
 
-    public function createLdapUser($username = '', $email = '', $is_admin = 0, $is_project_admin = 0)
+    public function createLdapUser($username)
     {
-        $ldap = new Ldap($this->container);
-        $user = $ldap->lookup($username, $email);
+        try {
 
-        if (! $user) {
+            $ldap = LdapClient::connect();
+            $user = LdapUser::getUser($ldap, sprintf(LDAP_USER_FILTER, $username));
+
+            if ($user === null) {
+                $this->logger->info('User not found in LDAP server');
+                return false;
+            }
+
+            if ($user->getUsername() === '') {
+                throw new LogicException('Username not found in LDAP profile, check the parameter LDAP_USER_ATTRIBUTE_USERNAME');
+            }
+
+            $values = array(
+                'username' => $user->getUsername(),
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'role' => $user->getRole(),
+                'is_ldap_user' => 1,
+            );
+
+            return $this->user->create($values);
+
+        } catch (LdapException $e) {
+            $this->logger->error($e->getMessage());
             return false;
         }
-
-        $values = array(
-            'username' => $user['username'],
-            'name' => $user['name'],
-            'email' => $user['email'],
-            'is_ldap_user' => 1,
-            'is_admin' => $is_admin,
-            'is_project_admin' => $is_project_admin,
-        );
-
-        return $this->user->create($values);
     }
 
-    public function updateUser($id, $username = null, $name = null, $email = null, $is_admin = null, $is_project_admin = null)
+    public function updateUser($id, $username = null, $name = null, $email = null, $role = null)
     {
         $values = array(
             'id' => $id,
             'username' => $username,
             'name' => $name,
             'email' => $email,
-            'is_admin' => $is_admin,
-            'is_project_admin' => $is_project_admin,
+            'role' => $role,
         );
 
         foreach ($values as $key => $value) {
@@ -81,7 +114,7 @@ class User extends \Kanboard\Core\Base
             }
         }
 
-        list($valid, ) = $this->user->validateApiModification($values);
+        list($valid, ) = $this->userValidator->validateApiModification($values);
         return $valid && $this->user->update($values);
     }
 }

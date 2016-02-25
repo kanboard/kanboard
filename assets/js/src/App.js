@@ -1,13 +1,16 @@
 function App() {
     this.board = new Board(this);
     this.markdown = new Markdown();
-    this.sidebar = new Sidebar();
     this.search = new Search(this);
-    this.swimlane = new Swimlane();
+    this.swimlane = new Swimlane(this);
     this.dropdown = new Dropdown();
     this.tooltip = new Tooltip(this);
     this.popover = new Popover(this);
-    this.task = new Task();
+    this.task = new Task(this);
+    this.project = new Project();
+    this.subtask = new Subtask(this);
+    this.column = new Column(this);
+    this.file = new FileUpload(this);
     this.keyboardShortcuts();
     this.chosen();
     this.poll();
@@ -16,29 +19,22 @@ function App() {
     $(".alert-fade-out").delay(4000).fadeOut(800, function() {
         $(this).remove();
     });
-
-    // Reload page when a destination project is changed
-    var reloading_project = false;
-    $("select.task-reload-project-destination").change(function() {
-        if (! reloading_project) {
-            $(".loading-icon").show();
-            reloading_project = true;
-            window.location = $(this).data("redirect").replace(/PROJECT_ID/g, $(this).val());
-        }
-    });
 }
 
 App.prototype.listen = function() {
+    this.project.listen();
     this.popover.listen();
     this.markdown.listen();
-    this.sidebar.listen();
     this.tooltip.listen();
     this.dropdown.listen();
     this.search.listen();
     this.task.listen();
     this.swimlane.listen();
+    this.subtask.listen();
+    this.column.listen();
+    this.file.listen();
     this.search.focus();
-    this.taskAutoComplete();
+    this.autoComplete();
     this.datePicker();
     this.focus();
 };
@@ -125,36 +121,47 @@ App.prototype.datePicker = function() {
         // timeFormat: 'h:mm tt',
         constrainInput: false
     });
-
-    $(".hasDatepicker").on("blur", function(e) { $(this).datepicker("hide"); });
 };
 
-App.prototype.taskAutoComplete = function() {
-    // Task auto-completion
-    if ($(".task-autocomplete").length) {
+App.prototype.autoComplete = function() {
+    $(".autocomplete").each(function() {
+        var input = $(this);
+        var field = input.data("dst-field");
+        var extraField = input.data("dst-extra-field");
 
-        if ($('.opposite_task_id').val() == '') {
-            $(".task-autocomplete").parent().find("input[type=submit]").attr('disabled','disabled');
+        if ($('#form-' + field).val() == '') {
+            input.parent().find("input[type=submit]").attr('disabled','disabled');
         }
 
-        $(".task-autocomplete").autocomplete({
-            source: $(".task-autocomplete").data("search-url"),
+        input.autocomplete({
+            source: input.data("search-url"),
             minLength: 1,
             select: function(event, ui) {
-                var field = $(".task-autocomplete").data("dst-field");
                 $("input[name=" + field + "]").val(ui.item.id);
 
-                $(".task-autocomplete").parent().find("input[type=submit]").removeAttr('disabled');
+                if (extraField) {
+                    $("input[name=" + extraField + "]").val(ui.item[extraField]);
+                }
+
+                input.parent().find("input[type=submit]").removeAttr('disabled');
             }
         });
-    }
+    });
 };
 
 App.prototype.chosen = function() {
-    $(".chosen-select").chosen({
-        width: "180px",
-        no_results_text: $(".chosen-select").data("notfound"),
-        disable_search_threshold: 10
+    $(".chosen-select").each(function() {
+        var searchThreshold = $(this).data("search-threshold");
+
+        if (searchThreshold === undefined) {
+            searchThreshold = 10;
+        }
+
+        $(this).chosen({
+            width: "180px",
+            no_results_text: $(this).data("notfound"),
+            disable_search_threshold: searchThreshold
+        });
     });
 
     $(".select-auto-redirect").change(function() {

@@ -27,7 +27,7 @@ class Export extends Base
             $this->response->csv($data);
         }
 
-        $this->response->html($this->projectLayout('export/'.$action, array(
+        $this->response->html($this->helper->layout->project('export/'.$action, array(
             'values' => array(
                 'controller' => 'export',
                 'action' => $action,
@@ -37,7 +37,7 @@ class Export extends Base
             ),
             'errors' => array(),
             'date_format' => $this->config->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats(),
+            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'project' => $project,
             'title' => $page_title,
         ), 'export/sidebar'));
@@ -70,7 +70,7 @@ class Export extends Base
      */
     public function summary()
     {
-        $this->common('ProjectDailyColumnStats', 'getAggregatedMetrics', t('Summary'), 'summary', t('Daily project summary export'));
+        $this->common('projectDailyColumnStats', 'getAggregatedMetrics', t('Summary'), 'summary', t('Daily project summary export'));
     }
 
     /**

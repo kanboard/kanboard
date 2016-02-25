@@ -46,7 +46,7 @@ class Mail extends Base implements ClientInterface
      * Get SwiftMailer transport
      *
      * @access protected
-     * @return \Swift_Transport
+     * @return \Swift_Transport|\Swift_MailTransport|\Swift_SmtpTransport|\Swift_SendmailTransport
      */
     protected function getTransport()
     {

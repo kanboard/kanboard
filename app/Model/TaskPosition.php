@@ -32,7 +32,6 @@ class TaskPosition extends Base
 
         $task = $this->taskFinder->getById($task_id);
 
-        // Ignore closed tasks
         if ($task['is_active'] == Task::STATUS_CLOSED) {
             return true;
         }
@@ -167,7 +166,12 @@ class TaskPosition extends Base
             return false;
         }
 
-        return true;
+        $now = time();
+
+        return $this->db->table(Task::TABLE)->eq('id', $task_id)->update(array(
+            'date_moved' => $now,
+            'date_modification' => $now,
+        ));
     }
 
     /**
@@ -221,11 +225,14 @@ class TaskPosition extends Base
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {
-            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_SWIMLANE, new TaskEvent($event_data));
+            $this->logger->debug('Event fired: '.Task::EVENT_MOVE_SWIMLANE);
+            $this->dispatcher->dispatch(Task::EVENT_MOVE_SWIMLANE, new TaskEvent($event_data));
         } elseif ($task['column_id'] != $new_column_id) {
-            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_COLUMN, new TaskEvent($event_data));
+            $this->logger->debug('Event fired: '.Task::EVENT_MOVE_COLUMN);
+            $this->dispatcher->dispatch(Task::EVENT_MOVE_COLUMN, new TaskEvent($event_data));
         } elseif ($task['position'] != $new_position) {
-            $this->container['dispatcher']->dispatch(Task::EVENT_MOVE_POSITION, new TaskEvent($event_data));
+            $this->logger->debug('Event fired: '.Task::EVENT_MOVE_POSITION);
+            $this->dispatcher->dispatch(Task::EVENT_MOVE_POSITION, new TaskEvent($event_data));
         }
     }
 }

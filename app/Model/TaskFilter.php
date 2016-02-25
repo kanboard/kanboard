@@ -30,6 +30,7 @@ class TaskFilter extends Base
         'T_COLUMN' => 'filterByColumnName',
         'T_REFERENCE' => 'filterByReference',
         'T_SWIMLANE' => 'filterBySwimlaneName',
+        'T_LINK' => 'filterByLinkName',
     );
 
     /**
@@ -105,6 +106,22 @@ class TaskFilter extends Base
             )
             ->join(User::TABLE, 'id', 'user_id', Subtask::TABLE)
             ->neq(Subtask::TABLE.'.status', Subtask::STATUS_DONE);
+    }
+
+    /**
+     * Create a new link query
+     *
+     * @access public
+     * @return \PicoDb\Table
+     */
+    public function createLinkQuery()
+    {
+        return $this->db->table(TaskLink::TABLE)
+            ->columns(
+                TaskLink::TABLE.'.task_id',
+                Link::TABLE.'.label'
+            )
+            ->join(Link::TABLE, 'id', 'link_id', TaskLink::TABLE);
     }
 
     /**
@@ -452,7 +469,7 @@ class TaskFilter extends Base
         $this->query->beginOr();
 
         foreach ($values as $project) {
-            $this->query->ilike(Board::TABLE.'.title', $project);
+            $this->query->ilike(Column::TABLE.'.title', $project);
         }
 
         $this->query->closeOr();
@@ -502,6 +519,30 @@ class TaskFilter extends Base
         if ($is_active >= 0) {
             $this->query->eq(Task::TABLE.'.is_active', $is_active);
         }
+
+        return $this;
+    }
+
+    /**
+     * Filter by link
+     *
+     * @access public
+     * @param  array    $values   List of links
+     * @return TaskFilter
+     */
+    public function filterByLinkName(array $values)
+    {
+        $this->query->beginOr();
+
+        $link_query = $this->createLinkQuery()->in(Link::TABLE.'.label', $values);
+        $matching_task_ids = $link_query->findAllByColumn('task_id');
+        if (empty($matching_task_ids)) {
+            $this->query->eq(Task::TABLE.'.id', 0);
+        } else {
+            $this->query->in(Task::TABLE.'.id', $matching_task_ids);
+        }
+
+        $this->query->closeOr();
 
         return $this;
     }

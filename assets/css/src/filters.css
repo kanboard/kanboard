@@ -1,68 +1,57 @@
-.toolbar {
-    font-size: 0.9em;
-    padding-top: 5px;
+.project-header {
+    margin-top: 8px;
+    margin-bottom: 20px;
 }
 
-.views {
+.filter-box {
     display: inline-block;
-    margin-right: 10px;
-    font-size: 0.9em;
+    position: relative;
+    font-size: 0;
+    margin-bottom: 20px;
 }
 
-.views li {
-    border: 1px solid #eee;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    display: inline;
+.project-header .filter-box {
+    margin: 0;
 }
 
-.menu-inline li.active a,
-.views li.active a {
-    font-weight: bold;
-    color: #000;
-    text-decoration: none;
+.filter-box form {
+    margin: 0;
 }
 
-.views li:first-child {
-    border-right: none;
+.filter-box input[type="text"] {
+    margin: 0;
+    font-size: 16px;
+    height: 26px;
+    border-color: #dedede;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    vertical-align: top;
 }
 
-.views li:last-child {
+.filter-box input[type="text"]:focus {
+    color: #000;
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+.filter-box div.dropdown {
+    display: inline-block;
+    font-size: 16px;
+    border: 1px solid #dedede;
     border-left: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 8px;
+    height: 27px;
+}
+
+.filter-box div.dropdown:last-child {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
-.filters {
-    display: inline-block;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    padding: 5px;
-    padding-right: 10px;
-    margin-left: 8px;
-}
-
-.filters ul {
-    font-size: 0.8em;
-}
-
-.page-header .filters ul {
-    font-size: 0.9em;
-}
-
-form.search {
-    display: inline;
-}
-
-div.search {
-    margin-bottom: 20px;
-}
-
-.filter-dropdowns {
-    font-size: 0.9em;
-    display: inline-block;
+.filter-box div.dropdown a {
+    line-height: 27px;
 }

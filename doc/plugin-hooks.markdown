@@ -16,13 +16,13 @@ $this->hook->on('hook_name', $callable);
 
 The first argument is the name of the hook and the second is a PHP callable.
 
-### Hooks executed only one time
+### Hooks executed only once
 
 Some hooks can have only one listener:
 
 #### model:subtask-time-tracking:calculate:time-spent
 
-- Override time spent calculation when subtask timer is stopped
+- Override time spent calculation when sub-task timer is stopped
 - Arguments:
     - `$user_id` (integer)
     - `$start` (DateTime)
@@ -58,7 +58,27 @@ class Plugin extends Base
 }
 ```
 
-List of merge hooks:
+Example to override default values for task forms:
+
+```php
+class Plugin extends Base
+{
+    public function initialize()
+    {
+        $this->hook->on('controller:task:form:default', function (array $default_values) {
+            return empty($default_values['score']) ? array('score' => 4) : array();
+        });
+    }
+}
+```
+
+List of merging hooks:
+
+#### controller:task:form:default
+
+- Override default values for task forms
+- Arguments:
+    - `$default_values`: actual default values (array)
 
 #### controller:calendar:project:events
 
@@ -79,7 +99,7 @@ List of merge hooks:
 Asset Hooks
 -----------
 
-Asset hooks can be used to add easily a new stylesheet or a new javascript file in the layout. You can use this feature to create a theme and override all Kanboard default styles.
+Asset hooks can be used to add a new stylesheet easily or a new JavaScript file in the layout. You can use this feature to create a theme and override all Kanboard default styles.
 
 Example to add a new stylesheet:
 
@@ -127,26 +147,40 @@ Example with `myplugin:dashboard/sidebar`:
 - On the filesystem, the plugin will be located here: `plugins\Myplugin\Template\dashboard\sidebar.php`
 - Templates are written in pure PHP (don't forget to escape data)
 
-Template name without prefix are core templates.
+Template names without prefix are core templates.
 
 List of template hooks:
 
-- `template:auth:login-form:before`
-- `template:auth:login-form:after`
-- `template:dashboard:sidebar`
-- `template:config:sidebar`
-- `template:config:integrations`
-- `template:project:integrations`
-- `template:user:integrations`
-- `template:export:sidebar`
-- `template:layout:head`
-- `template:layout:top`
-- `template:layout:bottom`
-- `template:project:dropdown`
-- `template:project-user:sidebar`
-- `template:task:sidebar:information`
-- `template:task:sidebar:actions`
-- `template:user:sidebar:information`
-- `template:user:sidebar:actions`
+| Hook                                 | Description                                        |
+|--------------------------------------|----------------------------------------------------|
+| `template:analytic:sidebar`          | Sidebar on analytic pages                          |
+| `template:app:filters-helper:before` | Filter helper dropdown (top)                       |
+| `template:app:filters-helper:after`  | Filter helper dropdown (bottom)                    |
+| `template:auth:login-form:before`    | Login page (top)                                   |
+| `template:auth:login-form:after`     | Login page (bottom)                                |
+| `template:config:sidebar`            | Sidebar on settings page                           |
+| `template:config:integrations`       | Integration page in global settings                |
+| `template:dashboard:sidebar`         | Sidebar on dashboard page                          |
+| `template:export:sidebar`            | Sidebar on export pages                            |
+| `template:layout:head`               | Page layout `<head/>` tag                          |
+| `template:layout:top`                | Page layout top header                             |
+| `template:layout:bottom`             | Page layout footer                                 |
+| `template:project:dropdown`          | "Actions" menu on left in different project views  |
+| `template:project:header:before`     | Project filters (before)                           |
+| `template:project:header:after`      | Project filters (after)                            |
+| `template:project:integrations`      | Integration page in projects settings              |
+| `template:project:sidebar`           | Sidebar in project settings                        |
+| `template:project-user:sidebar`      | Sidebar on project user overview page              |
+| `template:task:menu`                 | "Actions" menu on left in different task views     |
+| `template:task:dropdown`             | Task dropdown menu in listing pages                |
+| `template:task:sidebar`              | Sidebar on task page                               |
+| `template:task:form:right-column`    | Right column in task form                          |
+| `template:user:authentication:form`  | "Edit authentication" form in user profile         |
+| `template:user:create-remote:form`   | "Create remote user" form                          |
+| `template:user:external`             | "External authentication" page in user profile     |
+| `template:user:integrations`         | Integration page in user profile                   |
+| `template:user:sidebar:actions`      | Sidebar in user profile (section actions)          |
+| `template:user:sidebar:information`  | Sidebar in user profile (section information)      |
 
-Other template hooks can be added if necessary, just ask on the issue tracker.
+
+Another template hooks can be added if necessary, just ask on the issue tracker.

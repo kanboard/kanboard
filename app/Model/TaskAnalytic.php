@@ -48,7 +48,7 @@ class TaskAnalytic extends Base
     public function getTimeSpentByColumn(array $task)
     {
         $result = array();
-        $columns = $this->board->getColumnsList($task['project_id']);
+        $columns = $this->column->getList($task['project_id']);
         $sums = $this->transition->getTimeSpentByTask($task['id']);
 
         foreach ($columns as $column_id => $column_title) {

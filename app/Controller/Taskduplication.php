@@ -24,15 +24,15 @@ class Taskduplication extends Base
             $task_id = $this->taskDuplication->duplicate($task['id']);
 
             if ($task_id > 0) {
-                $this->session->flash(t('Task created successfully.'));
+                $this->flash->success(t('Task created successfully.'));
                 $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task_id)));
             } else {
-                $this->session->flashError(t('Unable to create this task.'));
-                $this->response->redirect($this->helper->url->to('taskduplication', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+                $this->flash->failure(t('Unable to create this task.'));
+                $this->response->redirect($this->helper->url->to('taskduplication', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
             }
         }
 
-        $this->response->html($this->taskLayout('task_duplication/duplicate', array(
+        $this->response->html($this->helper->layout->task('task_duplication/duplicate', array(
             'task' => $task,
         )));
     }
@@ -56,11 +56,11 @@ class Taskduplication extends Base
                                                                 $values['column_id'],
                                                                 $values['category_id'],
                                                                 $values['owner_id'])) {
-                $this->session->flash(t('Task updated successfully.'));
+                $this->flash->success(t('Task updated successfully.'));
                 $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task['id'])));
             }
 
-            $this->session->flashError(t('Unable to update your task.'));
+            $this->flash->failure(t('Unable to update your task.'));
         }
 
         $this->chooseDestination($task, 'task_duplication/move');
@@ -86,12 +86,12 @@ class Taskduplication extends Base
                 );
 
                 if ($task_id > 0) {
-                    $this->session->flash(t('Task created successfully.'));
+                    $this->flash->success(t('Task created successfully.'));
                     $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task_id)));
                 }
             }
 
-            $this->session->flashError(t('Unable to create your task.'));
+            $this->flash->failure(t('Unable to create your task.'));
         }
 
         $this->chooseDestination($task, 'task_duplication/copy');
@@ -107,7 +107,7 @@ class Taskduplication extends Base
     private function chooseDestination(array $task, $template)
     {
         $values = array();
-        $projects_list = $this->projectPermission->getActiveMemberProjects($this->userSession->getId());
+        $projects_list = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 
@@ -115,9 +115,9 @@ class Taskduplication extends Base
             $dst_project_id = $this->request->getIntegerParam('dst_project_id', key($projects_list));
 
             $swimlanes_list = $this->swimlane->getList($dst_project_id, false, true);
-            $columns_list = $this->board->getColumnsList($dst_project_id);
+            $columns_list = $this->column->getList($dst_project_id);
             $categories_list = $this->category->getList($dst_project_id);
-            $users_list = $this->projectPermission->getMemberList($dst_project_id);
+            $users_list = $this->projectUserRole->getAssignableUsersList($dst_project_id);
 
             $values = $this->taskDuplication->checkDestinationProjectValues($task);
             $values['project_id'] = $dst_project_id;
@@ -128,7 +128,7 @@ class Taskduplication extends Base
             $users_list = array();
         }
 
-        $this->response->html($this->taskLayout($template, array(
+        $this->response->html($this->helper->layout->task($template, array(
             'values' => $values,
             'task' => $task,
             'projects_list' => $projects_list,

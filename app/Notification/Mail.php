@@ -4,7 +4,7 @@ namespace Kanboard\Notification;
 
 use Kanboard\Core\Base;
 use Kanboard\Model\Task;
-use Kanboard\Model\File;
+use Kanboard\Model\TaskFile;
 use Kanboard\Model\Comment;
 use Kanboard\Model\Subtask;
 
@@ -16,6 +16,13 @@ use Kanboard\Model\Subtask;
  */
 class Mail extends Base implements NotificationInterface
 {
+    /**
+     * Notification type
+     *
+     * @var string
+     */
+    const TYPE = 'email';
+
     /**
      * Send notification to a user
      *
@@ -75,7 +82,7 @@ class Mail extends Base implements NotificationInterface
     public function getMailSubject($event_name, array $event_data)
     {
         switch ($event_name) {
-            case File::EVENT_CREATE:
+            case TaskFile::EVENT_CREATE:
                 $subject = $this->getStandardMailSubject(e('New attachment'), $event_data);
                 break;
             case Comment::EVENT_CREATE:
@@ -113,6 +120,10 @@ class Mail extends Base implements NotificationInterface
                 break;
             case Task::EVENT_ASSIGNEE_CHANGE:
                 $subject = $this->getStandardMailSubject(e('Assignee change'), $event_data);
+                break;
+            case Task::EVENT_USER_MENTION:
+            case Comment::EVENT_USER_MENTION:
+                $subject = $this->getStandardMailSubject(e('Mentioned'), $event_data);
                 break;
             case Task::EVENT_OVERDUE:
                 $subject = e('[%s] Overdue tasks', $event_data['project_name']);

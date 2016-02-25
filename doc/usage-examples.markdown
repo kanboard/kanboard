@@ -1,4 +1,4 @@
-Usage examples
+Usage Examples
 ==============
 
 You can customize your boards according to your business activities:

@@ -1,12 +1,12 @@
 Advanced Search Syntax
 ======================
 
-Kanboard use a simple query language for advanced search.
+Kanboard uses a simple query language for advanced search.
 
 Example of query
 ----------------
 
-This example will returns all tasks assigned to me with a due date for tomorrow and a title that contains "my title":
+This example will return all tasks assigned to me with a due date for tomorrow and a title that contains "my title":
 
 ```
 assigne:me due:tomorrow my title
@@ -17,7 +17,7 @@ Search by task id or title
 
 - Search by task id: `#123`
 - Search by task id and task title: `123`
-- Search by task title: anything that don't match any search attributes
+- Search by task title: anything that doesn't match any search attributes
 
 Search by status
 ----------------
@@ -27,8 +27,8 @@ Attribute: **status**
 - Query to find open tasks: `status:open`
 - Query to find closed tasks: `status:closed`
 
-Search by assignee
-------------------
+Search by assignees
+-------------------
 
 Attribute: **assignee**
 
@@ -48,8 +48,8 @@ Attribute: **color**
 - Query to search by color id: `color:blue`
 - Query to search by color name: `color:"Deep Orange"`
 
-Search by due date
-------------------
+Search by the due date
+----------------------
 
 Attribute: **due**
 
@@ -58,9 +58,9 @@ Attribute: **due**
 - Search tasks due yesterday: `due:yesterday`
 - Search tasks due with the exact date: `due:2015-06-29`
 
-The date must use the ISO8601 format: **YYYY-MM-DD**.
+The date must use the ISO 8601 format: **YYYY-MM-DD**.
 
-All string formats supported by the `strtotime()` function are supported, by example `next Thursday`, `-2 days`, `+2 months`, `tomorrow`, etc...
+All string formats supported by the `strtotime()` function are supported, for example `next Thursday`, `-2 days`, `+2 months`, `tomorrow`, etc.
 
 Operators supported with a date:
 
@@ -74,11 +74,11 @@ Search by modification date
 
 Attribute: **modified** or **updated**
 
-The date formats are the same as the due date. 
+The date formats are the same as the due date.
 
 There is also a filter by recently modified tasks: `modified:recently`.
 
-This query will use the same value as the board highlight period configured in settings. 
+This query will use the same value as the board highlight period configured in settings.
 
 Search by creation date
 -----------------------
@@ -119,20 +119,28 @@ Attribute: **project**
 - Find tasks by project id: `project:23`
 - Find tasks for several projects: `project:"My project A" project:"My project B"`
 
-Search by column
-----------------
+Search by columns
+-----------------
 
 Attribute: **column**
 
 - Find tasks by column name: `column:"Work in progress"`
 - Find tasks for several columns: `column:"Backlog" column:ready`
 
-Search by swimlane
-------------------
+Search by swim lane
+-------------------
 
 Attribute: **swimlane**
 
-- Find tasks by swimlane: `swimlane:"Version 42"`
-- Find tasks in the default swimlane: `swimlane:default`
-- Find tasks into several swimlanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
+- Find tasks by swim lane: `swimlane:"Version 42"`
+- Find tasks in the default swim lane: `swimlane:default`
+- Find tasks into several swim lanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
+
+Search by task link
+------------------
+
+Attribute: **link**
+
+- Find tasks by link name: `link:"is a milestone of"`
+- Find tasks into several links: `link:"is a milestone of" link:"relates to"`
 

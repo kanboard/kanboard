@@ -1,7 +1,11 @@
 Kanboard
 ========
 
-Kanboard is a project management software that use the Kanban methodology.
+[![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fguillot/kanboard/badges/quality-score.png?s=2b6490781608657cc8c43d02285bfafb4f489528)](https://scrutinizer-ci.com/g/fguillot/kanboard/)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5e50750e-fc62-4a1f-b02a-71991123a2a7/mini.png)](https://insight.sensiolabs.com/projects/5e50750e-fc62-4a1f-b02a-71991123a2a7)
+
+Kanboard is a project management software that focus on the Kanban methodology.
 
 Official website: <http://kanboard.net>
 
@@ -9,41 +13,23 @@ Official website: <http://kanboard.net>
 - Multiple boards with the ability to drag and drop tasks
 - Open source and self-hosted
 - Super simple installation
-- Translated in 22 languages
-- Distributed under [MIT License](LICENSE)
-- [List of features are available on the website](http://kanboard.net/features)
-- [Change Log](ChangeLog)
-
-[![Build Status](https://travis-ci.org/fguillot/kanboard.svg)](https://travis-ci.org/fguillot/kanboard)
-
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fguillot/kanboard/badges/quality-score.png?s=2b6490781608657cc8c43d02285bfafb4f489528)](https://scrutinizer-ci.com/g/fguillot/kanboard/)
+- Translated in many languages
+- Distributed under [MIT License](https://github.com/fguillot/kanboard/blob/master/LICENSE)
+- The complete [list of features are available on the website](http://kanboard.net/features)
+- [Change Log](https://github.com/fguillot/kanboard/blob/master/ChangeLog)
+- [Documentation](https://github.com/fguillot/kanboard/blob/master/doc/index.markdown)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-Known bugs and feature requests
--------------------------------
-
-- Bug tracker: <https://github.com/fguillot/kanboard/issues>
 
 Authors
 -------
 
-- Main developer: Frédéric Guillot (fguillot)
-- [List of contributors](CONTRIBUTORS.md)
+- Main developer: [Frédéric Guillot](https://github.com/fguillot)
+- [List of contributors](https://github.com/fguillot/kanboard/blob/master/CONTRIBUTORS.md)
 
-Documentation
--------------
+Installation and Upgrade
+------------------------
 
-- [Read the documentation](doc/index.markdown)
-
-Related projects
-----------------
-
-- [Kanboard API python client by @freekoder](https://github.com/freekoder/kanboard-py)
-- [Kanboard Presenter by David Eberlein](https://github.com/davideberlein/kanboard-presenter)
-- [CSV2Kanboard by @ashbike](https://github.com/ashbike/csv2kanboard)
-- [Kanboard for Yunohost by @mbugeia](https://github.com/mbugeia/kanboard_ynh)
-- [Trello import script by @matueranet](https://github.com/matueranet/kanboard-import-trello)
-- [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
-- [Wunderlist To Kanboard script by EpocDotFr](https://github.com/EpocDotFr/WunderlistToKanboard)
-- [Python client script by @dzudek](https://gist.github.com/fguillot/84c70d4928eb1e0cb374)
+- [Requirements](http://kanboard.net/documentation/requirements)
+- [Installation instructions](http://kanboard.net/documentation/installation)
+- [Upgrade to a new version](http://kanboard.net/documentation/update)

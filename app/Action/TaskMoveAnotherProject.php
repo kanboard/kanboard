@@ -13,6 +13,17 @@ use Kanboard\Model\Task;
 class TaskMoveAnotherProject extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Move the task to another project');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public

@@ -19,6 +19,50 @@ class Template extends Helper
     private $overrides = array();
 
     /**
+     * Rendering start time
+     *
+     * @access private
+     * @var float
+     */
+    private $startTime = 0;
+
+    /**
+     * Total rendering time
+     *
+     * @access private
+     * @var float
+     */
+    private $renderingTime = 0;
+
+    /**
+     * Method executed before the rendering
+     *
+     * @access protected
+     * @param  string $template
+     */
+    protected function beforeRender($template)
+    {
+        if (DEBUG) {
+            $this->startTime = microtime(true);
+        }
+    }
+
+    /**
+     * Method executed after the rendering
+     *
+     * @access protected
+     * @param  string $template
+     */
+    protected function afterRender($template)
+    {
+        if (DEBUG) {
+            $duration = microtime(true) - $this->startTime;
+            $this->renderingTime += $duration;
+            $this->container['logger']->debug('Rendering '.$template.' in '.$duration.'s, total='.$this->renderingTime);
+        }
+    }
+
+    /**
      * Render a template
      *
      * Example:
@@ -32,11 +76,16 @@ class Template extends Helper
      */
     public function render($__template_name, array $__template_args = array())
     {
-        extract($__template_args);
+        $this->beforeRender($__template_name);
 
+        extract($__template_args);
         ob_start();
         include $this->getTemplateFile($__template_name);
-        return ob_get_clean();
+        $html = ob_get_clean();
+
+        $this->afterRender($__template_name);
+
+        return $html;
     }
 
     /**

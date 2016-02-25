@@ -8,23 +8,23 @@
     <?= $this->form->hidden('id', $values) ?>
 
     <?= $this->form->label(t('Username'), 'username') ?>
-    <?= $this->form->text('username', $values, $errors, array('required', $values['is_ldap_user'] == 1 ? 'readonly' : '', 'maxlength="50"')) ?><br/>
+    <?= $this->form->text('username', $values, $errors, array('required', isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1 ? 'readonly' : '', 'maxlength="50"')) ?>
 
     <?= $this->form->label(t('Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors) ?><br/>
+    <?= $this->form->text('name', $values, $errors) ?>
 
     <?= $this->form->label(t('Email'), 'email') ?>
-    <?= $this->form->email('email', $values, $errors) ?><br/>
+    <?= $this->form->email('email', $values, $errors) ?>
 
     <?= $this->form->label(t('Timezone'), 'timezone') ?>
-    <?= $this->form->select('timezone', $timezones, $values, $errors) ?><br/>
+    <?= $this->form->select('timezone', $timezones, $values, $errors) ?>
 
     <?= $this->form->label(t('Language'), 'language') ?>
-    <?= $this->form->select('language', $languages, $values, $errors) ?><br/>
+    <?= $this->form->select('language', $languages, $values, $errors) ?>
 
     <?php if ($this->user->isAdmin()): ?>
-        <?= $this->form->checkbox('is_admin', t('Administrator'), 1, isset($values['is_admin']) && $values['is_admin'] == 1) ?>
-        <?= $this->form->checkbox('is_project_admin', t('Project Administrator'), 1, isset($values['is_project_admin']) && $values['is_project_admin'] == 1) ?>
+        <?= $this->form->label(t('Role'), 'role') ?>
+        <?= $this->form->select('role', $roles, $values, $errors) ?>
     <?php endif ?>
 
     <div class="form-actions">

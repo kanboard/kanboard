@@ -4,7 +4,7 @@ Sharing boards and tasks
 By default, boards are private but it's possible to make a board public.
 
 A public board **cannot be modified, it's a read-only access**.
-This access is protected by a random token, only people who have the right url can see the board.
+This access is protected by a random token, only people who have the right URL can see the board.
 
 Public boards are automatically refreshed every 60 seconds.
 Task details are also available in read-only.

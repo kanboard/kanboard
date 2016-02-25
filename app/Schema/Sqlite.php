@@ -2,10 +2,185 @@
 
 namespace Schema;
 
-use Kanboard\Core\Security;
+use Kanboard\Core\Security\Token;
+use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 88;
+const VERSION = 99;
+
+function version_99(PDO $pdo)
+{
+    $pdo->exec("UPDATE project_activities SET event_name='task.file.create' WHERE event_name='file.create'");
+}
+
+function version_98(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE files RENAME TO task_has_files');
+
+    $pdo->exec("
+        CREATE TABLE project_has_files (
+            id INTEGER PRIMARY KEY,
+            project_id INTEGER NOT NULL,
+            name TEXT COLLATE NOCASE NOT NULL,
+            path TEXT NOT NULL,
+            is_image INTEGER DEFAULT 0,
+            size INTEGER DEFAULT 0 NOT NULL,
+            user_id INTEGER DEFAULT 0 NOT NULL,
+            date INTEGER DEFAULT 0 NOT NULL,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+        )"
+    );
+}
+
+function version_97(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN is_active INTEGER DEFAULT 1");
+}
+
+function version_96(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE task_has_external_links (
+            id INTEGER PRIMARY KEY,
+            link_type TEXT NOT NULL,
+            dependency TEXT NOT NULL,
+            title TEXT NOT NULL,
+            url TEXT NOT NULL,
+            date_creation INTEGER NOT NULL,
+            date_modification INTEGER NOT NULL,
+            task_id INTEGER NOT NULL,
+            creator_id INTEGER DEFAULT 0,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE
+        )
+    ");
+}
+
+function version_95(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_default INTEGER DEFAULT 0");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_start INTEGER DEFAULT 0");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN priority_end INTEGER DEFAULT 3");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN priority INTEGER DEFAULT 0");
+}
+
+function version_94(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE projects ADD COLUMN owner_id INTEGER DEFAULT 0");
+}
+
+function version_93(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE password_reset (
+            token TEXT PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            date_expiration INTEGER NOT NULL,
+            date_creation INTEGER NOT NULL,
+            ip TEXT NOT NULL,
+            user_agent TEXT NOT NULL,
+            is_active INTEGER NOT NULL,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    ");
+
+    $pdo->exec("INSERT INTO settings VALUES ('password_reset', '1')");
+}
+
+function version_92(PDO $pdo)
+{
+    $rq = $pdo->prepare('SELECT * FROM actions');
+    $rq->execute();
+    $rows = $rq->fetchAll(PDO::FETCH_ASSOC) ?: array();
+
+    $rq = $pdo->prepare('UPDATE actions SET action_name=? WHERE id=?');
+
+    foreach ($rows as $row) {
+        if ($row['action_name'] === 'TaskAssignCurrentUser' && $row['event_name'] === 'task.move.column') {
+            $row['action_name'] = '\Kanboard\Action\TaskAssignCurrentUserColumn';
+        } elseif ($row['action_name'] === 'TaskClose' && $row['event_name'] === 'task.move.column') {
+            $row['action_name'] = '\Kanboard\Action\TaskCloseColumn';
+        } elseif ($row['action_name'] === 'TaskLogMoveAnotherColumn') {
+            $row['action_name'] = '\Kanboard\Action\CommentCreationMoveTaskColumn';
+        } elseif ($row['action_name']{0} !== '\\') {
+            $row['action_name'] = '\Kanboard\Action\\'.$row['action_name'];
+        }
+
+        $rq->execute(array($row['action_name'], $row['id']));
+    }
+}
+
+function version_91(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT '".Role::APP_USER."'");
+
+    $rq = $pdo->prepare('SELECT * FROM users');
+    $rq->execute();
+    $rows = $rq->fetchAll(PDO::FETCH_ASSOC) ?: array();
+
+    $rq = $pdo->prepare('UPDATE users SET "role"=? WHERE "id"=?');
+
+    foreach ($rows as $row) {
+        $role = Role::APP_USER;
+
+        if ($row['is_admin'] == 1) {
+            $role = Role::APP_ADMIN;
+        } else if ($row['is_project_admin']) {
+            $role = Role::APP_MANAGER;
+        }
+
+        $rq->execute(array($role, $row['id']));
+    }
+}
+
+function version_90(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_has_groups (
+            group_id INTEGER NOT NULL,
+            project_id INTEGER NOT NULL,
+            role TEXT NOT NULL,
+            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            UNIQUE(group_id, project_id)
+        )
+    ");
+
+    $pdo->exec("ALTER TABLE project_has_users ADD COLUMN role TEXT NOT NULL DEFAULT '".Role::PROJECT_VIEWER."'");
+
+    $rq = $pdo->prepare('SELECT * FROM project_has_users');
+    $rq->execute();
+    $rows = $rq->fetchAll(PDO::FETCH_ASSOC) ?: array();
+
+    $rq = $pdo->prepare('UPDATE project_has_users SET "role"=? WHERE "id"=?');
+
+    foreach ($rows as $row) {
+        $rq->execute(array(
+            $row['is_owner'] == 1 ? Role::PROJECT_MANAGER : Role::PROJECT_MEMBER,
+            $row['id'],
+        ));
+    }
+}
+
+function version_89(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE groups (
+            id INTEGER PRIMARY KEY,
+            external_id TEXT DEFAULT '',
+            name TEXT NOCASE NOT NULL UNIQUE
+        )
+    ");
+
+    $pdo->exec("
+        CREATE TABLE group_has_users (
+            group_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
+            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            UNIQUE(group_id, user_id)
+        )
+    ");
+}
 
 function version_88(PDO $pdo)
 {
@@ -799,7 +974,7 @@ function version_20(PDO $pdo)
 function version_19(PDO $pdo)
 {
     $pdo->exec("ALTER TABLE config ADD COLUMN api_token TEXT DEFAULT ''");
-    $pdo->exec("UPDATE config SET api_token='".Security::generateToken()."'");
+    $pdo->exec("UPDATE config SET api_token='".Token::getToken()."'");
 }
 
 function version_18(PDO $pdo)
@@ -969,7 +1144,6 @@ function version_7(PDO $pdo)
 {
     $pdo->exec("
         CREATE TABLE project_has_users (
-            id INTEGER PRIMARY KEY,
             project_id INTEGER NOT NULL,
             user_id INTEGER NOT NULL,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
@@ -1026,7 +1200,7 @@ function version_1(PDO $pdo)
     $pdo->exec("
         CREATE TABLE projects (
             id INTEGER PRIMARY KEY,
-            name TEXT NOCASE NOT NULL UNIQUE,
+            name TEXT NOCASE NOT NULL,
             is_active INTEGER DEFAULT 1
         )
     ");
@@ -1068,6 +1242,6 @@ function version_1(PDO $pdo)
     $pdo->exec("
         INSERT INTO config
         (webhooks_token)
-        VALUES ('".Security::generateToken()."')
+        VALUES ('".Token::getToken()."')
     ");
 }

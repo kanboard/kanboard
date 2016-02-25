@@ -2,286 +2,317 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
 use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\Project;
 use Kanboard\Model\User;
+use Kanboard\Model\Group;
+use Kanboard\Model\GroupMember;
+use Kanboard\Model\ProjectGroupRole;
+use Kanboard\Model\ProjectUserRole;
+use Kanboard\Core\Security\Role;
 
 class ProjectPermissionTest extends Base
 {
-    public function testAllowEverybody()
+    public function testFindByUsernames()
     {
-        $user = new User($this->container);
-        $this->assertNotFalse($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
-        $this->assertNotFalse($user->create(array('username' => 'unittest#2', 'password' => 'unittest')));
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermissionModel = new ProjectPermission($this->container);
 
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
 
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-        $this->assertFalse($pp->isEverybodyAllowed(1));
-        $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertFalse($pp->isUserAllowed(1, 2));
-        $this->assertFalse($pp->isUserAllowed(1, 3));
-        $this->assertEquals(array(), $pp->getMembers(1));
-        $this->assertEquals(array('Unassigned'), $pp->getMemberList(1));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
 
-        $this->assertEmpty($pp->getMemberProjects(1));
-        $this->assertEmpty($pp->getMemberProjects(2));
-        $this->assertEmpty($pp->getMemberProjects(3));
+        $this->assertEquals(1, $groupModel->create('Group A'));
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
 
-        $this->assertEmpty($pp->getMemberProjectIds(1));
-        $this->assertEmpty($pp->getMemberProjectIds(2));
-        $this->assertEmpty($pp->getMemberProjectIds(3));
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MANAGER));
 
-        $this->assertEmpty($pp->getActiveMemberProjectIds(1));
-        $this->assertEmpty($pp->getActiveMemberProjectIds(2));
-        $this->assertEmpty($pp->getActiveMemberProjectIds(3));
-
-        $this->assertEmpty($pp->getActiveMemberProjects(1));
-        $this->assertEmpty($pp->getActiveMemberProjects(2));
-        $this->assertEmpty($pp->getActiveMemberProjects(3));
-
-        $this->assertTrue($p->update(array('id' => 1, 'is_everybody_allowed' => 1)));
-        $this->assertTrue($pp->isEverybodyAllowed(1));
-        $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
-        $this->assertTrue($pp->isUserAllowed(1, 3));
-        $this->assertEquals(array('1' => 'admin', '2' => 'unittest#1', '3' => 'unittest#2'), $pp->getMembers(1));
-        $this->assertEquals(array('Unassigned', '1' => 'admin', '2' => 'unittest#1', '3' => 'unittest#2'), $pp->getMemberList(1));
-
-        $this->assertNotEmpty($pp->getMemberProjects(1));
-        $this->assertNotEmpty($pp->getMemberProjects(2));
-        $this->assertNotEmpty($pp->getMemberProjects(3));
-
-        $this->assertNotEmpty($pp->getMemberProjectIds(1));
-        $this->assertNotEmpty($pp->getMemberProjectIds(2));
-        $this->assertNotEmpty($pp->getMemberProjectIds(3));
-
-        $this->assertNotEmpty($pp->getActiveMemberProjectIds(1));
-        $this->assertNotEmpty($pp->getActiveMemberProjectIds(2));
-        $this->assertNotEmpty($pp->getActiveMemberProjectIds(3));
-
-        $this->assertNotEmpty($pp->getActiveMemberProjects(1));
-        $this->assertNotEmpty($pp->getActiveMemberProjects(2));
-        $this->assertNotEmpty($pp->getActiveMemberProjects(3));
-
-        $this->assertTrue($p->disable(1));
-
-        $this->assertEmpty($pp->getActiveMemberProjectIds(1));
-        $this->assertEmpty($pp->getActiveMemberProjectIds(2));
-        $this->assertEmpty($pp->getActiveMemberProjectIds(3));
-
-        $this->assertEmpty($pp->getActiveMemberProjects(1));
-        $this->assertEmpty($pp->getActiveMemberProjects(2));
-        $this->assertEmpty($pp->getActiveMemberProjects(3));
+        $this->assertEquals(array('user1', 'user2'), $projectPermissionModel->findUsernames(1, 'us'));
+        $this->assertEmpty($projectPermissionModel->findUsernames(1, 'a'));
+        $this->assertEmpty($projectPermissionModel->findUsernames(2, 'user'));
     }
 
-    public function testDisallowEverybody()
+    public function testGetQueryByRole()
     {
-        // We create a regular user
-        $user = new User($this->container);
-        $user->create(array('username' => 'unittest', 'password' => 'unittest'));
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
 
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
+        $this->assertEquals(3, $projectModel->create(array('name' => 'Project 3')));
 
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user 3')));
+        $this->assertEquals(5, $userModel->create(array('username' => 'user 4')));
 
-        $this->assertEmpty($pp->getMembers(1)); // Nobody is specified for the given project
-        $this->assertTrue($pp->isUserAllowed(1, 1)); // Admin should be allowed
-        $this->assertFalse($pp->isUserAllowed(1, 2)); // Regular user should be denied
+        $this->assertTrue($userRoleModel->addUser(1, 2, Role::PROJECT_MANAGER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MANAGER));
+        $this->assertTrue($userRoleModel->addUser(1, 4, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 5, Role::PROJECT_MEMBER));
+
+        $this->assertTrue($userRoleModel->addUser(2, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(2, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(2, 5, Role::PROJECT_MANAGER));
+
+        $this->assertTrue($userRoleModel->addUser(3, 4, Role::PROJECT_MANAGER));
+        $this->assertTrue($userRoleModel->addUser(3, 5, Role::PROJECT_VIEWER));
+
+        $this->assertEmpty($projectPermission->getQueryByRole(array(), Role::PROJECT_MANAGER)->findAll());
+
+        $users = $projectPermission->getQueryByRole(array(1, 2), Role::PROJECT_MANAGER)->findAll();
+        $this->assertCount(3, $users);
+        $this->assertEquals('user 1', $users[0]['username']);
+        $this->assertEquals('Project 1', $users[0]['project_name']);
+        $this->assertEquals('user 2', $users[1]['username']);
+        $this->assertEquals('Project 1', $users[1]['project_name']);
+        $this->assertEquals('user 4', $users[2]['username']);
+        $this->assertEquals('Project 2', $users[2]['project_name']);
+
+        $users = $projectPermission->getQueryByRole(array(1), Role::PROJECT_MANAGER)->findAll();
+        $this->assertCount(2, $users);
+        $this->assertEquals('user 1', $users[0]['username']);
+        $this->assertEquals('Project 1', $users[0]['project_name']);
+        $this->assertEquals('user 2', $users[1]['username']);
+        $this->assertEquals('Project 1', $users[1]['project_name']);
+
+        $users = $projectPermission->getQueryByRole(array(1, 2, 3), Role::PROJECT_MEMBER)->findAll();
+        $this->assertCount(4, $users);
+        $this->assertEquals('user 3', $users[0]['username']);
+        $this->assertEquals('Project 1', $users[0]['project_name']);
+        $this->assertEquals('user 4', $users[1]['username']);
+        $this->assertEquals('Project 1', $users[1]['project_name']);
+        $this->assertEquals('user 1', $users[2]['username']);
+        $this->assertEquals('Project 2', $users[2]['project_name']);
+        $this->assertEquals('user 2', $users[3]['username']);
+        $this->assertEquals('Project 2', $users[3]['project_name']);
+
+        $users = $projectPermission->getQueryByRole(array(1, 2, 3), Role::PROJECT_VIEWER)->findAll();
+        $this->assertCount(1, $users);
+        $this->assertEquals('user 4', $users[0]['username']);
+        $this->assertEquals('Project 3', $users[0]['project_name']);
     }
 
-    public function testAllowUser()
+    public function testEverybodyAllowed()
     {
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $user = new User($this->container);
+        $projectModel = new Project($this->container);
+        $projectPermission = new ProjectPermission($this->container);
 
-        $this->assertNotFalse($user->create(array('username' => 'unittest', 'password' => 'unittest')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2', 'is_everybody_allowed' => 1)));
 
-        // We create a project
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
-
-        $this->assertEmpty($pp->getMemberProjects(1));
-        $this->assertEmpty($pp->getMemberProjects(2));
-
-        $this->assertEmpty($pp->getMemberProjectIds(1));
-        $this->assertEmpty($pp->getMemberProjectIds(2));
-
-        $this->assertEmpty($pp->getActiveMemberProjectIds(1));
-        $this->assertEmpty($pp->getActiveMemberProjectIds(2));
-
-        $this->assertEmpty($pp->getActiveMemberProjects(1));
-        $this->assertEmpty($pp->getActiveMemberProjects(2));
-
-        // We allow the admin user
-        $this->assertTrue($pp->addMember(1, 1));
-        $this->assertTrue($pp->addMember(1, 2));
-
-        // Non-existant project
-        $this->assertFalse($pp->addMember(50, 1));
-
-        // Non-existant user
-        $this->assertFalse($pp->addMember(1, 50));
-
-        // Both users should be allowed
-        $this->assertEquals(array('1' => 'admin', '2' => 'unittest'), $pp->getMembers(1));
-        $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
-
-        $this->assertNotEmpty($pp->getMemberProjects(1));
-        $this->assertNotEmpty($pp->getMemberProjects(2));
-
-        $this->assertNotEmpty($pp->getMemberProjectIds(1));
-        $this->assertNotEmpty($pp->getMemberProjectIds(2));
-
-        $this->assertNotEmpty($pp->getActiveMemberProjectIds(1));
-        $this->assertNotEmpty($pp->getActiveMemberProjectIds(2));
-
-        $this->assertNotEmpty($pp->getActiveMemberProjects(1));
-        $this->assertNotEmpty($pp->getActiveMemberProjects(2));
+        $this->assertFalse($projectPermission->isEverybodyAllowed(1));
+        $this->assertTrue($projectPermission->isEverybodyAllowed(2));
     }
 
-    public function testRevokeUser()
+    public function testIsUserAllowed()
     {
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $user = new User($this->container);
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
 
-        $user->create(array('username' => 'unittest', 'password' => 'unittest'));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user 3')));
+        $this->assertEquals(5, $userModel->create(array('username' => 'user 4')));
 
-        // We create a project
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
 
-        // We revoke our admin user (not existing row)
-        $this->assertFalse($pp->revokeMember(1, 1));
+        $this->assertEquals(1, $groupModel->create('Group A'));
 
-        // We should have nobody in the users list
-        $this->assertEmpty($pp->getMembers(1));
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_VIEWER));
 
-        // Only admin is allowed
-        $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertFalse($pp->isUserAllowed(1, 2));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 4, Role::PROJECT_MANAGER));
 
-        // We allow only the regular user
-        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($projectPermission->isUserAllowed(1, 2));
+        $this->assertTrue($projectPermission->isUserAllowed(1, 3));
+        $this->assertTrue($projectPermission->isUserAllowed(1, 4));
+        $this->assertFalse($projectPermission->isUserAllowed(1, 5));
 
-        // All users should be allowed (admin and regular)
-        $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
-
-        // However, we should have only our regular user in the list
-        $this->assertEquals(array('2' => 'unittest'), $pp->getMembers(1));
-
-        // We allow our admin, we should have both in the list
-        $this->assertTrue($pp->addMember(1, 1));
-        $this->assertEquals(array('1' => 'admin', '2' => 'unittest'), $pp->getMembers(1));
-        $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
-
-        // We revoke the regular user
-        $this->assertTrue($pp->revokeMember(1, 2));
-
-        // Only admin should be allowed
-        $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertFalse($pp->isUserAllowed(1, 2));
-
-        // We should have only admin in the list
-        $this->assertEquals(array('1' => 'admin'), $pp->getMembers(1));
-
-        // We revoke the admin user
-        $this->assertTrue($pp->revokeMember(1, 1));
-        $this->assertEmpty($pp->getMembers(1));
-
-        // Only admin should be allowed again
-        $this->assertTrue($pp->isUserAllowed(1, 1));
-        $this->assertFalse($pp->isUserAllowed(1, 2));
+        $this->assertFalse($projectPermission->isUserAllowed(2, 2));
+        $this->assertFalse($projectPermission->isUserAllowed(2, 3));
+        $this->assertFalse($projectPermission->isUserAllowed(2, 4));
+        $this->assertFalse($projectPermission->isUserAllowed(2, 5));
     }
 
-    public function testManager()
+    public function testIsAssignable()
     {
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
-        $u = new User($this->container);
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
 
-        $this->assertEquals(2, $u->create(array('username' => 'unittest', 'password' => 'unittest')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user 3')));
+        $this->assertEquals(5, $userModel->create(array('username' => 'user 4')));
 
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
-        $this->assertFalse($pp->isMember(1, 2));
-        $this->assertFalse($pp->isManager(1, 2));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
 
-        $this->assertEquals(2, $p->create(array('name' => 'UnitTest2'), 1, true));
-        $this->assertFalse($pp->isMember(2, 2));
-        $this->assertFalse($pp->isManager(2, 2));
+        $this->assertEquals(1, $groupModel->create('Group A'));
 
-        $this->assertEquals(3, $p->create(array('name' => 'UnitTest3'), 2, true));
-        $this->assertTrue($pp->isMember(3, 2));
-        $this->assertTrue($pp->isManager(3, 2));
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_VIEWER));
 
-        $this->assertEquals(4, $p->create(array('name' => 'UnitTest4')));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 4, Role::PROJECT_MANAGER));
 
-        $this->assertTrue($pp->addManager(4, 2));
-        $this->assertTrue($pp->isMember(4, 2));
-        $this->assertTrue($pp->isManager(4, 2));
+        $this->assertFalse($projectPermission->isAssignable(1, 2));
+        $this->assertTrue($projectPermission->isAssignable(1, 3));
+        $this->assertTrue($projectPermission->isAssignable(1, 4));
+        $this->assertFalse($projectPermission->isAssignable(1, 5));
 
-        $this->assertEquals(5, $p->create(array('name' => 'UnitTest5')));
-        $this->assertTrue($pp->addMember(5, 2));
-        $this->assertTrue($pp->changeRole(5, 2, 1));
-        $this->assertTrue($pp->isMember(5, 2));
-        $this->assertTrue($pp->isManager(5, 2));
-        $this->assertTrue($pp->changeRole(5, 2, 0));
-        $this->assertTrue($pp->isMember(5, 2));
-        $this->assertFalse($pp->isManager(5, 2));
+        $this->assertFalse($projectPermission->isAssignable(2, 2));
+        $this->assertFalse($projectPermission->isAssignable(2, 3));
+        $this->assertFalse($projectPermission->isAssignable(2, 4));
+        $this->assertFalse($projectPermission->isAssignable(2, 5));
     }
 
-    public function testUsersList()
+    public function testIsAssignableWhenUserIsDisabled()
     {
-        $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
 
-        $user = new User($this->container);
-        $this->assertNotFalse($user->create(array('username' => 'unittest', 'password' => 'unittest')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2', 'is_active' => 0)));
 
-        // We create project
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
 
-        // No restriction, we should have no body
-        $this->assertEquals(
-            array('Unassigned'),
-            $pp->getMemberList(1)
-        );
+        $this->assertTrue($userRoleModel->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
 
-        // We allow only the regular user
-        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($projectPermission->isAssignable(1, 2));
+        $this->assertFalse($projectPermission->isAssignable(1, 3));
+    }
 
-        $this->assertEquals(
-            array(0 => 'Unassigned', 2 => 'unittest'),
-            $pp->getMemberList(1)
-        );
+    public function testIsMember()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
 
-        // We allow the admin user
-        $this->assertTrue($pp->addMember(1, 1));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user 3')));
+        $this->assertEquals(5, $userModel->create(array('username' => 'user 4')));
 
-        $this->assertEquals(
-            array(0 => 'Unassigned', 1 => 'admin', 2 => 'unittest'),
-            $pp->getMemberList(1)
-        );
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
 
-        // We revoke only the regular user
-        $this->assertTrue($pp->revokeMember(1, 2));
+        $this->assertEquals(1, $groupModel->create('Group A'));
 
-        $this->assertEquals(
-            array(0 => 'Unassigned', 1 => 'admin'),
-            $pp->getMemberList(1)
-        );
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_VIEWER));
 
-        // We revoke only the admin user, we should have everybody
-        $this->assertTrue($pp->revokeMember(1, 1));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 4, Role::PROJECT_MANAGER));
 
-        $this->assertEquals(
-            array(0 => 'Unassigned'),
-            $pp->getMemberList(1)
-        );
+        $this->assertTrue($projectPermission->isMember(1, 2));
+        $this->assertTrue($projectPermission->isMember(1, 3));
+        $this->assertTrue($projectPermission->isMember(1, 4));
+        $this->assertFalse($projectPermission->isMember(1, 5));
+
+        $this->assertFalse($projectPermission->isMember(2, 2));
+        $this->assertFalse($projectPermission->isMember(2, 3));
+        $this->assertFalse($projectPermission->isMember(2, 4));
+        $this->assertFalse($projectPermission->isMember(2, 5));
+    }
+
+    public function testGetActiveProjectIds()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2', 'is_active' => 0)));
+
+        $this->assertTrue($userRoleModel->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(2, 2, Role::PROJECT_VIEWER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_VIEWER));
+
+        $this->assertEmpty($projectPermission->getActiveProjectIds(1));
+        $this->assertEquals(array(1), $projectPermission->getActiveProjectIds(2));
+        $this->assertEquals(array(1), $projectPermission->getActiveProjectIds(3));
+    }
+
+    public function testDuplicate()
+    {
+        $userModel = new User($this->container);
+        $projectModel = new Project($this->container);
+        $groupModel = new Group($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $groupRoleModel = new ProjectGroupRole($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $projectPermission = new ProjectPermission($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1', 'name' => 'User #1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user 3')));
+        $this->assertEquals(5, $userModel->create(array('username' => 'user 4')));
+        $this->assertEquals(6, $userModel->create(array('username' => 'user 5', 'name' => 'User #5')));
+
+        $this->assertEquals(1, $groupModel->create('Group C'));
+        $this->assertEquals(2, $groupModel->create('Group B'));
+        $this->assertEquals(3, $groupModel->create('Group A'));
+
+        $this->assertTrue($groupMemberModel->addUser(1, 4));
+        $this->assertTrue($groupMemberModel->addUser(2, 5));
+        $this->assertTrue($groupMemberModel->addUser(3, 3));
+        $this->assertTrue($groupMemberModel->addUser(3, 2));
+
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_VIEWER));
+        $this->assertTrue($groupRoleModel->addGroup(1, 3, Role::PROJECT_MANAGER));
+
+        $this->assertTrue($userRoleModel->addUser(1, 5, Role::PROJECT_MANAGER));
+        $this->assertTrue($userRoleModel->addUser(1, 6, Role::PROJECT_MEMBER));
+
+        $this->assertTrue($projectPermission->duplicate(1, 2));
+
+        $this->assertCount(2, $userRoleModel->getUsers(2));
+        $this->assertCount(3, $groupRoleModel->getUsers(2));
     }
 }

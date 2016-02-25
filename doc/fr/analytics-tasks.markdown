@@ -11,9 +11,9 @@ Lead et cycle time
 - Le lead time est la durée entre la création de la tâche et son achèvement (tâche fermée).
 - Le cycle time est la durée entre la date de début et l'achèvement.
 - Si la tâche n’est pas fermée, l’heure courante est utilisée à la place de la date d'achèvement.
-- Si la date de départ n\'est pas spécifiée, le cycle time n'est pas calculé.
+- Si la date de départ n'est pas spécifiée, le cycle time n'est pas calculé.
 
-Remarque : vous pouvez configurer une action pour définir automatiquement que la date de départ sera le moment ou vous déplacez une tâche vers une colonne de votre choix
+Remarque : vous pouvez configurer une action pour définir automatiquement que la date de départ sera le moment où vous déplacez une tâche vers une colonne de votre choix
 
 Temps passé dans chaque colonne
 ---------------------------

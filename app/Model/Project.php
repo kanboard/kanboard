@@ -2,9 +2,8 @@
 
 namespace Kanboard\Model;
 
-use SimpleValidator\Validator;
-use SimpleValidator\Validators;
-use Kanboard\Core\Security;
+use Kanboard\Core\Security\Token;
+use Kanboard\Core\Security\Role;
 
 /**
  * Project model
@@ -45,6 +44,22 @@ class Project extends Base
     public function getById($project_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $project_id)->findOne();
+    }
+
+    /**
+     * Get a project by id with owner name
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return array
+     */
+    public function getByIdWithOwner($project_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->columns(self::TABLE.'.*', User::TABLE.'.username AS owner_username', User::TABLE.'.name AS owner_name')
+            ->eq(self::TABLE.'.id', $project_id)
+            ->join(User::TABLE, 'id', 'owner_id')
+            ->findOne();
     }
 
     /**
@@ -226,7 +241,7 @@ class Project extends Base
     {
         $stats = array();
         $stats['nb_active_tasks'] = 0;
-        $columns = $this->board->getColumns($project_id);
+        $columns = $this->column->getAll($project_id);
         $column_stats = $this->board->getColumnStats($project_id);
 
         foreach ($columns as &$column) {
@@ -250,7 +265,7 @@ class Project extends Base
      */
     public function getColumnStats(array &$project)
     {
-        $project['columns'] = $this->board->getColumns($project['id']);
+        $project['columns'] = $this->column->getAll($project['id']);
         $stats = $this->board->getColumnStats($project['id']);
 
         foreach ($project['columns'] as &$column) {
@@ -277,23 +292,6 @@ class Project extends Base
     }
 
     /**
-     * Fetch more information for each project
-     *
-     * @access public
-     * @param  array    $projects
-     * @return array
-     */
-    public function applyProjectDetails(array $projects)
-    {
-        foreach ($projects as &$project) {
-            $this->getColumnStats($project);
-            $project = array_merge($project, $this->projectPermission->getProjectUsers($project['id']));
-        }
-
-        return $projects;
-    }
-
-    /**
      * Get project summary for a list of project
      *
      * @access public
@@ -308,27 +306,10 @@ class Project extends Base
 
         return $this->db
                     ->table(Project::TABLE)
-                    ->in('id', $project_ids)
+                    ->columns(self::TABLE.'.*', User::TABLE.'.username AS owner_username', User::TABLE.'.name AS owner_name')
+                    ->join(User::TABLE, 'id', 'owner_id')
+                    ->in(self::TABLE.'.id', $project_ids)
                     ->callback(array($this, 'applyColumnStats'));
-    }
-
-    /**
-     * Get project details (users + columns) for a list of project
-     *
-     * @access public
-     * @param  array      $project_ids     List of project id
-     * @return \PicoDb\Table
-     */
-    public function getQueryProjectDetails(array $project_ids)
-    {
-        if (empty($project_ids)) {
-            return $this->db->table(Project::TABLE)->limit(0);
-        }
-
-        return $this->db
-                    ->table(Project::TABLE)
-                    ->in('id', $project_ids)
-                    ->callback(array($this, 'applyProjectDetails'));
     }
 
     /**
@@ -347,10 +328,13 @@ class Project extends Base
         $values['token'] = '';
         $values['last_modified'] = time();
         $values['is_private'] = empty($values['is_private']) ? 0 : 1;
+        $values['owner_id'] = $user_id;
 
         if (! empty($values['identifier'])) {
             $values['identifier'] = strtoupper($values['identifier']);
         }
+
+        $this->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
 
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
@@ -365,7 +349,7 @@ class Project extends Base
         }
 
         if ($add_user && $user_id) {
-            $this->projectPermission->addManager($project_id, $user_id);
+            $this->projectUserRole->addUser($project_id, $user_id, Role::PROJECT_MANAGER);
         }
 
         $this->category->createDefaultCategories($project_id);
@@ -417,6 +401,8 @@ class Project extends Base
         if (! empty($values['identifier'])) {
             $values['identifier'] = strtoupper($values['identifier']);
         }
+
+        $this->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
 
         return $this->exists($values['id']) &&
                $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
@@ -491,7 +477,7 @@ class Project extends Base
                $this->db
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
-                    ->save(array('is_public' => 1, 'token' => Security::generateToken()));
+                    ->save(array('is_public' => 1, 'token' => Token::getToken()));
     }
 
     /**
@@ -508,73 +494,5 @@ class Project extends Base
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
                     ->save(array('is_public' => 0, 'token' => ''));
-    }
-
-    /**
-     * Common validation rules
-     *
-     * @access private
-     * @return array
-     */
-    private function commonValidationRules()
-    {
-        return array(
-            new Validators\Integer('id', t('This value must be an integer')),
-            new Validators\Integer('is_active', t('This value must be an integer')),
-            new Validators\Required('name', t('The project name is required')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
-            new Validators\MaxLength('identifier', t('The maximum length is %d characters', 50), 50),
-            new Validators\MaxLength('start_date', t('The maximum length is %d characters', 10), 10),
-            new Validators\MaxLength('end_date', t('The maximum length is %d characters', 10), 10),
-            new Validators\AlphaNumeric('identifier', t('This value must be alphanumeric')) ,
-            new Validators\Unique('name', t('This project must be unique'), $this->db->getConnection(), self::TABLE),
-            new Validators\Unique('identifier', t('The identifier must be unique'), $this->db->getConnection(), self::TABLE),
-        );
-    }
-
-    /**
-     * Validate project creation
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateCreation(array $values)
-    {
-        if (! empty($values['identifier'])) {
-            $values['identifier'] = strtoupper($values['identifier']);
-        }
-
-        $v = new Validator($values, $this->commonValidationRules());
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate project modification
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateModification(array $values)
-    {
-        if (! empty($values['identifier'])) {
-            $values['identifier'] = strtoupper($values['identifier']);
-        }
-
-        $rules = array(
-            new Validators\Required('id', t('This value is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
     }
 }

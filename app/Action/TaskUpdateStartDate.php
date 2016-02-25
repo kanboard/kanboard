@@ -13,6 +13,17 @@ use Kanboard\Model\Task;
 class TaskUpdateStartDate extends Base
 {
     /**
+     * Get automatic action description
+     *
+     * @access public
+     * @return string
+     */
+    public function getDescription()
+    {
+        return t('Automatically update the start date');
+    }
+
+    /**
      * Get the list of compatible events
      *
      * @access public
@@ -66,7 +77,7 @@ class TaskUpdateStartDate extends Base
             'date_started' => time(),
         );
 
-        return $this->taskModification->update($values);
+        return $this->taskModification->update($values, false);
     }
 
     /**

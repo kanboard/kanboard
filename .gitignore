@@ -18,3 +18,5 @@ config.php
 data/files
 data/cache
 /vendor
+*.bak
+!.docker/kanboard/config.php

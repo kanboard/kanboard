@@ -4,6 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Model\User as UserModel;
 use Kanboard\Model\Task as TaskModel;
+use Kanboard\Core\Security\Role;
 
 /**
  * Project User overview
@@ -13,23 +14,6 @@ use Kanboard\Model\Task as TaskModel;
  */
 class Projectuser extends Base
 {
-    /**
-     * Common layout for users overview views
-     *
-     * @access private
-     * @param  string    $template   Template name
-     * @param  array     $params     Template parameters
-     * @return string
-     */
-    private function layout($template, array $params)
-    {
-        $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
-        $params['content_for_sublayout'] = $this->template->render($template, $params);
-        $params['filter'] = array('user_id' => $params['user_id']);
-
-        return $this->template->layout('project_user/layout', $params);
-    }
-
     private function common()
     {
         $user_id = $this->request->getIntegerParam('user_id', UserModel::EVERYBODY_ID);
@@ -37,19 +21,19 @@ class Projectuser extends Base
         if ($this->userSession->isAdmin()) {
             $project_ids = $this->project->getAllIds();
         } else {
-            $project_ids = $this->projectPermission->getMemberProjectIds($this->userSession->getId());
+            $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
         }
 
-        return array($user_id, $project_ids, $this->user->getList(true));
+        return array($user_id, $project_ids, $this->user->getActiveUsersList(true));
     }
 
-    private function role($is_owner, $action, $title, $title_user)
+    private function role($role, $action, $title, $title_user)
     {
         list($user_id, $project_ids, $users) = $this->common();
 
-        $query = $this->projectPermission->getQueryByRole($project_ids, $is_owner)->callback(array($this->project, 'applyColumnStats'));
+        $query = $this->projectPermission->getQueryByRole($project_ids, $role)->callback(array($this->project, 'applyColumnStats'));
 
-        if ($user_id !== UserModel::EVERYBODY_ID) {
+        if ($user_id !== UserModel::EVERYBODY_ID && isset($users[$user_id])) {
             $query->eq(UserModel::TABLE.'.id', $user_id);
             $title = t($title_user, $users[$user_id]);
         }
@@ -61,7 +45,7 @@ class Projectuser extends Base
             ->setQuery($query)
             ->calculate();
 
-        $this->response->html($this->layout('project_user/roles', array(
+        $this->response->html($this->helper->layout->projectUser('project_user/roles', array(
             'paginator' => $paginator,
             'title' => $title,
             'user_id' => $user_id,
@@ -75,7 +59,7 @@ class Projectuser extends Base
 
         $query = $this->taskFinder->getProjectUserOverviewQuery($project_ids, $is_active);
 
-        if ($user_id !== UserModel::EVERYBODY_ID) {
+        if ($user_id !== UserModel::EVERYBODY_ID && isset($users[$user_id])) {
             $query->eq(TaskModel::TABLE.'.owner_id', $user_id);
             $title = t($title_user, $users[$user_id]);
         }
@@ -87,7 +71,7 @@ class Projectuser extends Base
             ->setQuery($query)
             ->calculate();
 
-        $this->response->html($this->layout('project_user/tasks', array(
+        $this->response->html($this->helper->layout->projectUser('project_user/tasks', array(
             'paginator' => $paginator,
             'title' => $title,
             'user_id' => $user_id,
@@ -101,7 +85,7 @@ class Projectuser extends Base
      */
     public function managers()
     {
-        $this->role(1, 'managers', t('People who are project managers'), 'Projects where "%s" is manager');
+        $this->role(Role::PROJECT_MANAGER, 'managers', t('People who are project managers'), 'Projects where "%s" is manager');
     }
 
     /**
@@ -110,7 +94,7 @@ class Projectuser extends Base
      */
     public function members()
     {
-        $this->role(0, 'members', t('People who are project members'), 'Projects where "%s" is member');
+        $this->role(ROLE::PROJECT_MEMBER, 'members', t('People who are project members'), 'Projects where "%s" is member');
     }
 
     /**
@@ -129,5 +113,18 @@ class Projectuser extends Base
     public function closed()
     {
         $this->tasks(TaskModel::STATUS_CLOSED, 'closed', t('Closed tasks'), 'Closed tasks assigned to "%s"');
+    }
+
+    /**
+     * Users tooltip
+     */
+    public function users()
+    {
+        $project = $this->getProject();
+
+        return $this->response->html($this->template->render('project_user/tooltip_users', array(
+            'users' => $this->projectUserRole->getAllUsersGroupedByRole($project['id']),
+            'roles' => $this->role->getProjectRoles(),
+        )));
     }
 }

@@ -2,16 +2,18 @@
 
 require_once __DIR__.'/../Base.php';
 
+use Kanboard\Core\DateParser;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskDuplication;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\TaskStatus;
 use Kanboard\Model\Project;
-use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\ProjectUserRole;
 use Kanboard\Model\Category;
 use Kanboard\Model\User;
 use Kanboard\Model\Swimlane;
+use Kanboard\Core\Security\Role;
 
 class TaskDuplicationTest extends Base
 {
@@ -31,8 +33,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(1, $task['project_id']);
         $this->assertEquals(0, $task['creator_id']);
 
-        $_SESSION = array();
-        $_SESSION['user']['id'] = 1;
+        $this->container['sessionStorage']->user = array('id' => 1);
 
         // We duplicate our task
         $this->assertEquals(2, $td->duplicate(1));
@@ -41,8 +42,6 @@ class TaskDuplicationTest extends Base
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
         $this->assertEquals(1, $task['creator_id']);
-
-        $_SESSION = array();
     }
 
     public function testDuplicateSameProject()
@@ -130,7 +129,7 @@ class TaskDuplicationTest extends Base
         // Check the values of the duplicated task
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
-        $this->assertEquals(1, $task['owner_id']);
+        $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(0, $task['swimlane_id']);
         $this->assertEquals(6, $task['column_id']);
@@ -336,7 +335,7 @@ class TaskDuplicationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
 
         // We create 2 projects
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
@@ -360,10 +359,8 @@ class TaskDuplicationTest extends Base
         // We create a new user for our project
         $user = new User($this->container);
         $this->assertNotFalse($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->addMember(2, 2));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
-        $this->assertTrue($pp->isUserAllowed(2, 2));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(2, 2, Role::PROJECT_MEMBER));
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(3, $td->duplicateToProject(1, 2));
@@ -394,7 +391,7 @@ class TaskDuplicationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pr = new ProjectUserRole($this->container);
 
         // We create 2 projects
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
@@ -402,6 +399,7 @@ class TaskDuplicationTest extends Base
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2)));
+        $this->assertTrue($pr->addUser(2, 1, Role::PROJECT_MEMBER));
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $td->duplicateToProject(1, 2, null, null, null, 1));
@@ -428,7 +426,6 @@ class TaskDuplicationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
         $user = new User($this->container);
 
         // We create 2 projects
@@ -449,7 +446,7 @@ class TaskDuplicationTest extends Base
         // Check the values of the moved task
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(1, $task['owner_id']);
+        $this->assertEquals(0, $task['owner_id']);
         $this->assertEquals(0, $task['category_id']);
         $this->assertEquals(0, $task['swimlane_id']);
         $this->assertEquals(2, $task['project_id']);
@@ -499,7 +496,7 @@ class TaskDuplicationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
         $user = new User($this->container);
 
         // We create 2 projects
@@ -508,10 +505,8 @@ class TaskDuplicationTest extends Base
 
         // We create a new user for our project
         $this->assertNotFalse($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->addMember(2, 2));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
-        $this->assertTrue($pp->isUserAllowed(2, 2));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(2, 2, Role::PROJECT_MEMBER));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2)));
@@ -534,7 +529,7 @@ class TaskDuplicationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
         $user = new User($this->container);
 
         // We create 2 projects
@@ -543,10 +538,8 @@ class TaskDuplicationTest extends Base
 
         // We create a new user for our project
         $this->assertNotFalse($user->create(array('username' => 'unittest#1', 'password' => 'unittest')));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->addMember(2, 2));
-        $this->assertTrue($pp->isUserAllowed(1, 2));
-        $this->assertTrue($pp->isUserAllowed(2, 2));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(2, 2, Role::PROJECT_MEMBER));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 3)));
@@ -673,6 +666,7 @@ class TaskDuplicationTest extends Base
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
+        $dp = new DateParser($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
 
@@ -693,7 +687,7 @@ class TaskDuplicationTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals(Task::RECURRING_STATUS_PROCESSED, $task['recurrence_status']);
         $this->assertEquals(2, $task['recurrence_child']);
-        $this->assertEquals(1436561776, $task['date_due'], '', 2);
+        $this->assertEquals(1436486400, $task['date_due'], '', 2);
 
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
@@ -703,6 +697,6 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(Task::RECURRING_BASEDATE_TRIGGERDATE, $task['recurrence_basedate']);
         $this->assertEquals(1, $task['recurrence_parent']);
         $this->assertEquals(2, $task['recurrence_factor']);
-        $this->assertEquals(strtotime('+2 days'), $task['date_due'], '', 2);
+        $this->assertEquals($dp->removeTimeFromTimestamp(strtotime('+2 days')), $task['date_due'], '', 2);
     }
 }

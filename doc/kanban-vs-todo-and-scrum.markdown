@@ -24,8 +24,8 @@ Kanban vs Scrum
 - Estimation is required
 - Uses velocity as default metric
 - Scrum board is cleared between each sprint
-- Scrum has predefined roles like scrum master, product owner and the team
-- A lot of meetings: planning, backlog grooming, daily stand-up, retrospective
+- Scrum has pre-defined roles like scrum master, product owners and the team
+- A lot of meetings: planning, backlogs grooming, daily stand-up, retrospective
 
 ### Kanban:
 

@@ -9,19 +9,19 @@
             <span class="comment-username"><?= $this->e($comment['name'] ?: $comment['username']) ?></span> @
         <?php endif ?>
 
-        <span class="comment-date"><?= dt('%B %e, %Y at %k:%M %p', $comment['date_creation']) ?></span>
+        <span class="comment-date"><?= $this->dt->datetime($comment['date_creation']) ?></span>
     </p>
     <div class="comment-inner">
 
         <?php if (! isset($preview)): ?>
         <ul class="comment-actions">
             <li><a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a></li>
-            <?php if ((! isset($not_editable) || ! $not_editable) && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
+            <?php if ($editable && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
                 <li>
-                    <?= $this->url->link(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
+                    <?= $this->url->link(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
                 </li>
                 <li>
-                    <?= $this->url->link(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
+                    <?= $this->url->link(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
                 </li>
             <?php endif ?>
         </ul>

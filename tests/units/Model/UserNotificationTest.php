@@ -7,14 +7,18 @@ use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Comment;
 use Kanboard\Model\User;
-use Kanboard\Model\File;
+use Kanboard\Model\Group;
+use Kanboard\Model\GroupMember;
 use Kanboard\Model\Project;
-use Kanboard\Model\Task;
 use Kanboard\Model\ProjectPermission;
+use Kanboard\Model\Task;
+use Kanboard\Model\ProjectUserRole;
+use Kanboard\Model\ProjectGroupRole;
 use Kanboard\Model\UserNotification;
 use Kanboard\Model\UserNotificationFilter;
 use Kanboard\Model\UserNotificationType;
 use Kanboard\Subscriber\UserNotificationSubscriber;
+use Kanboard\Core\Security\Role;
 
 class UserNotificationTest extends Base
 {
@@ -23,11 +27,11 @@ class UserNotificationTest extends Base
         $u = new User($this->container);
         $p = new Project($this->container);
         $n = new UserNotification($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
         $this->assertEquals(2, $u->create(array('username' => 'user1')));
-        $this->assertTrue($pp->addMember(1, 2));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
 
         $this->assertEmpty($n->getUsersWithNotificationEnabled(1));
         $n->enableNotification(2);
@@ -96,12 +100,48 @@ class UserNotificationTest extends Base
         $this->assertEquals(array(1), $settings['notification_projects']);
     }
 
+    public function testGetGroupMembersWithNotificationEnabled()
+    {
+        $userModel = new User($this->container);
+        $groupModel = new Group($this->container);
+        $groupMemberModel = new GroupMember($this->container);
+        $projectModel = new Project($this->container);
+        $userNotificationModel = new UserNotification($this->container);
+        $projectGroupRole = new ProjectGroupRole($this->container);
+        $projectUserRole = new ProjectUserRole($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
+
+        $this->assertEquals(1, $groupModel->create('G1'));
+        $this->assertEquals(2, $groupModel->create('G2'));
+
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+        $this->assertTrue($groupMemberModel->addUser(1, 3));
+        $this->assertTrue($groupMemberModel->addUser(1, 4));
+        $this->assertTrue($groupMemberModel->addUser(2, 2));
+        $this->assertTrue($groupMemberModel->addUser(2, 3));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
+
+        $this->assertTrue($projectGroupRole->addGroup(1, 1, Role::PROJECT_MEMBER));
+        $this->assertTrue($projectGroupRole->addGroup(1, 2, Role::PROJECT_VIEWER));
+
+        $this->assertTrue($projectUserRole->addUser(1, 2, Role::PROJECT_MEMBER));
+
+        $users = $userNotificationModel->getUsersWithNotificationEnabled(1);
+        $this->assertCount(2, $users);
+        $this->assertEquals('user1', $users[0]['username']);
+        $this->assertEquals('user2', $users[1]['username']);
+    }
+
     public function testGetProjectMembersWithNotifications()
     {
         $u = new User($this->container);
         $p = new Project($this->container);
         $n = new UserNotification($this->container);
-        $pp = new ProjectPermission($this->container);
+        $pp = new ProjectUserRole($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
@@ -118,16 +158,16 @@ class UserNotificationTest extends Base
         $this->assertNotFalse($u->create(array('username' => 'user4')));
 
         // Nobody is member of any projects
-        $this->assertEmpty($pp->getMembers(1));
+        $this->assertEmpty($pp->getUsers(1));
         $this->assertEmpty($n->getUsersWithNotificationEnabled(1));
 
         // We allow all users to be member of our projects
-        $this->assertTrue($pp->addMember(1, 1));
-        $this->assertTrue($pp->addMember(1, 2));
-        $this->assertTrue($pp->addMember(1, 3));
-        $this->assertTrue($pp->addMember(1, 4));
+        $this->assertTrue($pp->addUser(1, 1, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 4, Role::PROJECT_MEMBER));
 
-        $this->assertNotEmpty($pp->getMembers(1));
+        $this->assertNotEmpty($pp->getUsers(1));
         $users = $n->getUsersWithNotificationEnabled(1);
 
         $this->assertNotEmpty($users);

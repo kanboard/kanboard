@@ -5,19 +5,30 @@ Note: The plugin API is **considered alpha** at the moment.
 
 Plugins are useful to extend the core functionalities of Kanboard, adding features, creating themes or changing the default behavior.
 
-Plugin creators should specify explicitly the compatible versions of Kanboard. Internal code of Kanboard may change over the time and your plugin must be tested with new versions.
+Plugin creators should specify explicitly the compatible versions of Kanboard. Internal code of Kanboard may change over time and your plugin must be tested with new versions. Always check the [ChangeLog](https://github.com/fguillot/kanboard/blob/master/ChangeLog) for breaking changes.
 
 - [Creating your plugin](plugin-registration.markdown)
 - [Using plugin hooks](plugin-hooks.markdown)
+- [Events](plugin-events.markdown)
 - [Override default application behaviors](plugin-overrides.markdown)
 - [Add schema migrations for plugins](plugin-schema-migrations.markdown)
+- [Custom routes](plugin-routes.markdown)
 - [Add mail transports](plugin-mail-transports.markdown)
 - [Add notification types](plugin-notifications.markdown)
+- [Add automatic actions](plugin-automatic-actions.markdown)
 - [Attach metadata to users, tasks and projects](plugin-metadata.markdown)
+- [Authentication architecture](plugin-authentication-architecture.markdown)
+- [Authentication plugin registration](plugin-authentication.markdown)
+- [Authorization Architecture](plugin-authorization-architecture.markdown)
+- [Custom Group Providers](plugin-group-provider.markdown)
+- [External Link Providers](plugin-external-link.markdown)
+- [LDAP client](plugin-ldap-client.markdown)
 
 Examples of plugins
 -------------------
 
+- [SMS Two-Factor Authentication](https://github.com/kanboard/plugin-sms-2fa)
+- [Reverse-Proxy Authentication with LDAP support](https://github.com/kanboard/plugin-reverse-proxy-ldap)
 - [Slack](https://github.com/kanboard/plugin-slack)
 - [Hipchat](https://github.com/kanboard/plugin-hipchat)
 - [Jabber](https://github.com/kanboard/plugin-jabber)
@@ -26,7 +37,7 @@ Examples of plugins
 - [Postmark](https://github.com/kanboard/plugin-postmark)
 - [Amazon S3](https://github.com/kanboard/plugin-s3)
 - [Budget planning](https://github.com/kanboard/plugin-budget)
-- [User timetable](https://github.com/kanboard/plugin-timetable)
+- [User timetables](https://github.com/kanboard/plugin-timetable)
 - [Subtask Forecast](https://github.com/kanboard/plugin-subtask-forecast)
 - [Automatic Action example](https://github.com/kanboard/plugin-example-automatic-action)
 - [Theme plugin example](https://github.com/kanboard/plugin-example-theme)

@@ -1,20 +1,20 @@
-Webhooks
-========
+Web Hooks
+=========
 
 Webhooks are useful to perform actions with external applications.
 
 - Webhooks can be used to create a task by calling a simple URL (You can also do that with the API)
 - An external URL can be called automatically when an event occurs in Kanboard (task creation, comment updated, etc)
 
-How to write a webhook receiver?
---------------------------------
+How to write a web hook receiver?
+---------------------------------
 
 All internal events of Kanboard can be sent to an external URL.
 
-- The webhook url have to be defined in **Settings > Webhooks > Webhook URL**.
-- When an event is triggered Kanboard call automatically the predefined URL
+- The web hook URL has to be defined in **Settings > Webhooks > Webhook URL**.
+- When an event is triggered Kanboard calls the pre-defined URL automatically
 - The data are encoded in JSON format and sent with a POST HTTP request
-- The webhook token is also sent as a query string parameter, so you can check if the request really come from Kanboard.
+- The web hook token is also sent as a query string parameter, so you can check if the request really comes from Kanboard.
 - **Your custom URL must answer in less than 1 second**, those requests are synchronous (PHP limitation) and that can slow down the user interface if your script is too slow!
 
 ### List of supported events
@@ -270,10 +270,8 @@ Screenshot created:
 }
 ```
 
-Note: Webhooks configuration and payload have changed since Kanboard >= 1.0.15
-
-How to create a task with a webhook?
-------------------------------------
+How to create a task with a web hook?
+-------------------------------------
 
 Firstly, you have to get the token from the settings page. After that, just call this url from anywhere:
 
@@ -288,7 +286,7 @@ curl "http://myserver/?controller=webhook&action=task&token=superSecretToken&tit
 ### Available responses
 
 - When a task is created successfully, Kanboard return the message "OK" in plain text.
-- However if the task creation fail, you will got a "FAILED" message.
+- However if the task creation fail, you will get a "FAILED" message.
 - If the token is wrong, you got a "Not Authorized" message and a HTTP status code 401.
 
 ### Available parameters
@@ -298,9 +296,9 @@ Base URL: `http://YOUR_SERVER_HOSTNAME/?controller=webhook&action=task`
 - `token`: Token displayed on the settings page (required)
 - `title`: Task title (required)
 - `description`: Task description
-- `color_id`: Supported colors are yellow, blue, green, purple, red, orange and grey
+- `color_id`: Supported colors are yellow, blue, green, purple, red, orange and gray
 - `project_id`: Project id (Get the id from the project page)
-- `owner_id`: Assignee (Get the user id from the users page)
+- `owner_id`: Assignee (Get the user id from the user's page)
 - `column_id`: Column on the board (Get the column id from the projects page, mouse over on the column name)
 
 Only the token and the title parameters are mandatory. The different id can also be found in the database.
