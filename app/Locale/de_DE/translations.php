@@ -806,7 +806,7 @@ return array(
     'Set automatically the start date' => 'Setze Startdatum automatisch',
     'Edit Authentication' => 'Authentifizierung bearbeiten',
     'Remote user' => 'Remote-Benutzer',
-    'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Remote-Benutzer haben kein Passwort in der Kanboard Datenbank, Beispiel LDAP, Goole und Github Accounts',
+    'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Remote-Benutzer haben kein Passwort in der Kanboard Datenbank, Beispiel LDAP, Google und Github Accounts',
     'If you check the box "Disallow login form", credentials entered in the login form will be ignored.' => 'Wenn die Box "Verbiete Login-Formular" angeschaltet ist, werden Eingaben in das Login Formular ignoriert.',
     'New remote user' => 'Neuer Remote-Benutzer',
     'New local user' => 'Neuer lokaler Benutzer',
