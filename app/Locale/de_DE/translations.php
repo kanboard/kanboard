@@ -871,7 +871,7 @@ return array(
     'Set maximum column height' => 'Setze maximale Spaltenhöhe',
     'Remove maximum column height' => 'Entferne maximale Spaltenhöhe',
     'My notifications' => 'Meine Benachrichtigungen',
-    'Custom filters' => 'benutzerdefinierte Filter',
+    'Custom filters' => 'Benutzerdefinierte Filter',
     'Your custom filter have been created successfully.' => 'Benutzerdefinierten Filter erfolgreich erstellt.',
     'Unable to create your custom filter.' => 'Benutzerdefinierter Filter konnte nicht erstellt werden.',
     'Custom filter removed successfully.' => 'Benutzerdefinierten Filter erfolgreich entfernt.',
