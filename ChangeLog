@@ -1,4 +1,4 @@
-Version 1.0.26 (unreleased)
+Version 1.0.26
 --------------
 
 Breaking changes:
@@ -23,6 +23,7 @@ Improvements:
 * Add confirmation inline popup to remove custom filter
 * Increase client_max_body_size value for Nginx
 * Split Board model into multiple classes
+* Improve logging for the Docker image
 
 Bug fixes:
 
