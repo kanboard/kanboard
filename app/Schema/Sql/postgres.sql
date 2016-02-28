@@ -202,22 +202,6 @@ ALTER SEQUENCE custom_filters_id_seq OWNED BY custom_filters.id;
 
 
 --
--- Name: files; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE files (
-    id integer NOT NULL,
-    name character varying(255) NOT NULL,
-    path character varying(255),
-    is_image boolean DEFAULT false,
-    task_id integer NOT NULL,
-    date bigint DEFAULT 0 NOT NULL,
-    user_id integer DEFAULT 0 NOT NULL,
-    size integer DEFAULT 0 NOT NULL
-);
-
-
---
 -- Name: group_has_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -473,6 +457,41 @@ CREATE SEQUENCE project_has_categories_id_seq
 --
 
 ALTER SEQUENCE project_has_categories_id_seq OWNED BY project_has_categories.id;
+
+
+--
+-- Name: project_has_files; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE project_has_files (
+    id integer NOT NULL,
+    project_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    path character varying(255) NOT NULL,
+    is_image boolean DEFAULT false,
+    size integer DEFAULT 0 NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    date integer DEFAULT 0 NOT NULL
+);
+
+
+--
+-- Name: project_has_files_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE project_has_files_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_has_files_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE project_has_files_id_seq OWNED BY project_has_files.id;
 
 
 --
@@ -756,6 +775,22 @@ ALTER SEQUENCE task_has_external_links_id_seq OWNED BY task_has_external_links.i
 
 
 --
+-- Name: task_has_files; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE task_has_files (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    path character varying(255),
+    is_image boolean DEFAULT false,
+    task_id integer NOT NULL,
+    date bigint DEFAULT 0 NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    size integer DEFAULT 0 NOT NULL
+);
+
+
+--
 -- Name: task_has_files_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -771,7 +806,7 @@ CREATE SEQUENCE task_has_files_id_seq
 -- Name: task_has_files_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE task_has_files_id_seq OWNED BY files.id;
+ALTER SEQUENCE task_has_files_id_seq OWNED BY task_has_files.id;
 
 
 --
@@ -1034,7 +1069,8 @@ CREATE TABLE users (
     nb_failed_login integer DEFAULT 0,
     lock_expiration_date bigint DEFAULT 0,
     gitlab_id integer,
-    role character varying(25) DEFAULT 'app-user'::character varying NOT NULL
+    role character varying(25) DEFAULT 'app-user'::character varying NOT NULL,
+    is_active boolean DEFAULT true
 );
 
 
@@ -1096,13 +1132,6 @@ ALTER TABLE ONLY custom_filters ALTER COLUMN id SET DEFAULT nextval('custom_filt
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY files ALTER COLUMN id SET DEFAULT nextval('task_has_files_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
 
 
@@ -1152,6 +1181,13 @@ ALTER TABLE ONLY project_has_categories ALTER COLUMN id SET DEFAULT nextval('pro
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY project_has_files ALTER COLUMN id SET DEFAULT nextval('project_has_files_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY project_has_notification_types ALTER COLUMN id SET DEFAULT nextval('project_has_notification_types_id_seq'::regclass);
 
 
@@ -1195,6 +1231,13 @@ ALTER TABLE ONLY swimlanes ALTER COLUMN id SET DEFAULT nextval('swimlanes_id_seq
 --
 
 ALTER TABLE ONLY task_has_external_links ALTER COLUMN id SET DEFAULT nextval('task_has_external_links_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY task_has_files ALTER COLUMN id SET DEFAULT nextval('task_has_files_id_seq'::regclass);
 
 
 --
@@ -1400,6 +1443,14 @@ ALTER TABLE ONLY project_has_categories
 
 
 --
+-- Name: project_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY project_has_files
+    ADD CONSTRAINT project_has_files_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: project_has_groups_group_id_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1488,10 +1539,18 @@ ALTER TABLE ONLY swimlanes
 
 
 --
+-- Name: task_has_external_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY task_has_external_links
+    ADD CONSTRAINT task_has_external_links_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: task_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY files
+ALTER TABLE ONLY task_has_files
     ADD CONSTRAINT task_has_files_pkey PRIMARY KEY (id);
 
 
@@ -1607,7 +1666,7 @@ CREATE INDEX comments_task_idx ON comments USING btree (task_id);
 -- Name: files_task_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX files_task_idx ON files USING btree (task_id);
+CREATE INDEX files_task_idx ON task_has_files USING btree (task_id);
 
 
 --
@@ -1822,6 +1881,14 @@ ALTER TABLE ONLY project_has_categories
 
 
 --
+-- Name: project_has_files_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY project_has_files
+    ADD CONSTRAINT project_has_files_project_id_fkey FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+
+--
 -- Name: project_has_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1913,7 +1980,7 @@ ALTER TABLE ONLY task_has_external_links
 -- Name: task_has_files_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY files
+ALTER TABLE ONLY task_has_files
     ADD CONSTRAINT task_has_files_task_id_fkey FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
 
 
@@ -2054,16 +2121,6 @@ ALTER TABLE ONLY user_has_unread_notifications
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: -
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM fred;
-GRANT ALL ON SCHEMA public TO fred;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
---
 -- PostgreSQL database dump complete
 --
 
@@ -2088,8 +2145,8 @@ INSERT INTO settings (option, value) VALUES ('board_highlight_period', '172800')
 INSERT INTO settings (option, value) VALUES ('board_public_refresh_interval', '60');
 INSERT INTO settings (option, value) VALUES ('board_private_refresh_interval', '10');
 INSERT INTO settings (option, value) VALUES ('board_columns', '');
-INSERT INTO settings (option, value) VALUES ('webhook_token', '083531659240f36021edc73a4ed3920646ef8798b798c5894e2277f048a2');
-INSERT INTO settings (option, value) VALUES ('api_token', 'b97b4abc7e8f0e0569bdad8cb54f7fb1931615932e552fa255f87a3e1360');
+INSERT INTO settings (option, value) VALUES ('webhook_token', 'c7caaf8f87ad391800e3989d7abfd98a6066a6f801fc151012bb5c4ee3cb');
+INSERT INTO settings (option, value) VALUES ('api_token', 'b0a6f56fe236fc9639fc6914e92365aa627d95cd790aa7e0c5a3ebebf844');
 INSERT INTO settings (option, value) VALUES ('application_language', 'en_US');
 INSERT INTO settings (option, value) VALUES ('application_timezone', 'UTC');
 INSERT INTO settings (option, value) VALUES ('application_url', '');
@@ -2154,4 +2211,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$f6brAPgJ6iTtOWUMJANDuuRG.VWDH61.aCb5v3MJnSrZodhDaCcmy', 'app-admin');INSERT INTO schema_version VALUES ('84');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$tyByY1dfUO9S.2wpJcSMEO4UU9H.yCwf/pmzo430DM2C4QZ/K3Kt2', 'app-admin');INSERT INTO schema_version VALUES ('87');

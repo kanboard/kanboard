@@ -121,7 +121,7 @@ test-postgres:
 unittest: test-sqlite test-mysql test-postgres
 
 sql:
-	@ pg_dump --schema-only --no-owner --file app/Schema/Sql/postgres.sql kanboard
+	@ pg_dump --schema-only --no-owner --no-privileges --file app/Schema/Sql/postgres.sql kanboard
 	@ pg_dump -d kanboard --column-inserts --data-only --table settings >> app/Schema/Sql/postgres.sql
 	@ pg_dump -d kanboard --column-inserts --data-only --table links >> app/Schema/Sql/postgres.sql
 
