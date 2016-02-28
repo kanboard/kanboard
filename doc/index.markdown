@@ -105,6 +105,7 @@ Technical details
 
 - [Daily background job](cronjob.markdown)
 - [Config file](config.markdown)
+- [Environment variables](env.markdown)
 - [Email configuration](email-configuration.markdown)
 - [URL rewriting](nice-urls.markdown)
 

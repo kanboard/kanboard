@@ -69,6 +69,18 @@ You can attach 2 volumes to your container:
 
 Use the flag `-v` to mount a volume on the host machine like described in [official Docker documentation](https://docs.docker.com/engine/userguide/containers/dockervolumes/).
 
+Upgrade your container
+----------------------
+
+- Pull the new image
+- Remove the old container
+- Restart a new container with the same volumes
+
+Environment variables
+---------------------
+
+The list of environment variables is available on [this page](env.markdown).
+
 Config files
 ------------
 

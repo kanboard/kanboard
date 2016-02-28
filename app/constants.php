@@ -1,8 +1,8 @@
 <?php
 
 // Enable/disable debug
-defined('DEBUG') or define('DEBUG', false);
-defined('DEBUG_FILE') or define('DEBUG_FILE', __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
+defined('DEBUG') or define('DEBUG', getenv('DEBUG'));
+defined('DEBUG_FILE') or define('DEBUG_FILE', getenv('DEBUG_FILE') ?: __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
 
 // Plugin directory
 defined('PLUGINS_DIR') or define('PLUGINS_DIR', __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'plugins');
@@ -80,7 +80,7 @@ defined('ENABLE_HSTS') or define('ENABLE_HSTS', true);
 defined('ENABLE_XFRAME') or define('ENABLE_XFRAME', true);
 
 // Syslog
-defined('ENABLE_SYSLOG') or define('ENABLE_SYSLOG', true);
+defined('ENABLE_SYSLOG') or define('ENABLE_SYSLOG', getenv('ENABLE_SYSLOG'));
 
 // Default files directory
 defined('FILES_DIR') or define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files');
