@@ -159,6 +159,7 @@ List of template hooks:
 | `template:auth:login-form:before`    | Login page (top)                                   |
 | `template:auth:login-form:after`     | Login page (bottom)                                |
 | `template:config:sidebar`            | Sidebar on settings page                           |
+| `template:config:application `       | Application settings form                          |
 | `template:config:integrations`       | Integration page in global settings                |
 | `template:dashboard:sidebar`         | Sidebar on dashboard page                          |
 | `template:export:sidebar`            | Sidebar on export pages                            |
