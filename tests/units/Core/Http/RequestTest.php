@@ -102,6 +102,12 @@ class RequestTest extends Base
 
         $request = new Request($this->container, array('HTTPS' => '1'), array(), array(), array(), array());
         $this->assertTrue($request->isHTTPS());
+
+        $request = new Request($this->container, array('HTTP_X_FORWARDED_PROTO' => 'https'), array(), array(), array(), array());
+        $this->assertTrue($request->isHTTPS());
+
+        $request = new Request($this->container, array('HTTP_X_FORWARDED_PROTO' => 'http'), array(), array(), array(), array());
+        $this->assertFalse($request->isHTTPS());
     }
 
     public function testGetCookie()

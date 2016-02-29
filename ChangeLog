@@ -1,11 +1,18 @@
+Version 1.0.27 (unreleased)
+--------------
+
+Improvements:
+
+* Added support for HTTP header "X-Forwarded-Proto: https"
+
 Version 1.0.26
 --------------
 
 Breaking changes:
 
 * API procedures:
-    - "moveColumnUp" and "moveColumnDown" are replace by "changeColumnPosition"
-    - "moveSwimlaneUp" and "moveSwimlaneDown" are replace by "changeSwimlanePosition"
+    - "moveColumnUp" and "moveColumnDown" are replaced by "changeColumnPosition"
+    - "moveSwimlaneUp" and "moveSwimlaneDown" are replaced by "changeSwimlanePosition"
 
 New features:
 

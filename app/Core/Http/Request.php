@@ -211,7 +211,11 @@ class Request extends Base
      */
     public function isHTTPS()
     {
-        return isset($this->server['HTTPS']) && $this->server['HTTPS'] !== '' && $this->server['HTTPS'] !== 'off';
+        if ($this->getServerVariable('HTTP_X_FORWARDED_PROTO') === 'https') {
+            return true;
+        }
+
+        return $this->getServerVariable('HTTPS') !== '' && $this->server['HTTPS'] !== 'off';
     }
 
     /**
