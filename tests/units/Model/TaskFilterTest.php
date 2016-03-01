@@ -10,7 +10,6 @@ use Kanboard\Model\TaskLink;
 use Kanboard\Core\DateParser;
 use Kanboard\Model\Category;
 use Kanboard\Model\Subtask;
-use Kanboard\Model\Config;
 use Kanboard\Model\Swimlane;
 
 class TaskFilterTest extends Base

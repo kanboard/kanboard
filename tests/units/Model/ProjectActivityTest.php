@@ -7,8 +7,6 @@ use Kanboard\Model\TaskFinder;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\ProjectActivity;
 use Kanboard\Model\Project;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\Comment;
 
 class ProjectActivityTest extends Base
 {

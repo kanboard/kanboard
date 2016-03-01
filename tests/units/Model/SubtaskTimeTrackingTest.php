@@ -7,8 +7,6 @@ use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\SubtaskTimeTracking;
 use Kanboard\Model\Project;
-use Kanboard\Model\Category;
-use Kanboard\Model\User;
 
 class SubtaskTimeTrackingTest extends Base
 {

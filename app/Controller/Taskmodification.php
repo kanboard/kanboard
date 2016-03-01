@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\DateParser;
+
 /**
  * Task Modification controller
  *
@@ -83,8 +85,8 @@ class Taskmodification extends Base
             $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
         }
 
-        $values = $this->dateParser->format($values, array('date_due'), $this->config->get('application_date_format', 'm/d/Y'));
-        $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', 'm/d/Y H:i'));
+        $values = $this->dateParser->format($values, array('date_due'), $this->config->get('application_date_format', DateParser::DATE_FORMAT));
+        $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', DateParser::DATE_TIME_FORMAT));
 
         $this->response->html($this->helper->layout->task('task_modification/edit_task', array(
             'project' => $project,

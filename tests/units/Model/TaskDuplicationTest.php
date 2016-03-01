@@ -7,7 +7,6 @@ use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskDuplication;
 use Kanboard\Model\TaskFinder;
-use Kanboard\Model\TaskStatus;
 use Kanboard\Model\Project;
 use Kanboard\Model\ProjectUserRole;
 use Kanboard\Model\Category;

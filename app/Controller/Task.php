@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\DateParser;
+
 /**
  * Task controller
  *
@@ -62,7 +64,7 @@ class Task extends Base
             'time_spent' => $task['time_spent'] ?: '',
         );
 
-        $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', 'm/d/Y H:i'));
+        $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', DateParser::DATE_TIME_FORMAT));
 
         $this->response->html($this->helper->layout->task('task/show', array(
             'project' => $this->project->getById($task['project_id']),

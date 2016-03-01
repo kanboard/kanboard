@@ -4,7 +4,6 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\Helper\App;
-use Kanboard\Model\Config;
 
 class AppHelperTest extends Base
 {

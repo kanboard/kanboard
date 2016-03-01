@@ -74,6 +74,7 @@ class ClassProvider implements ServiceProviderInterface
             'TaskImport',
             'TaskMetadata',
             'Transition',
+            'TransitionExport',
             'User',
             'UserImport',
             'UserLocking',

@@ -111,6 +111,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskStatus                                 $taskStatus
  * @property \Kanboard\Model\TaskMetadata                               $taskMetadata
  * @property \Kanboard\Model\Transition                                 $transition
+ * @property \Kanboard\Model\TransitionExport                           $transitionExport
  * @property \Kanboard\Model\User                                       $user
  * @property \Kanboard\Model\UserImport                                 $userImport
  * @property \Kanboard\Model\UserLocking                                $userLocking

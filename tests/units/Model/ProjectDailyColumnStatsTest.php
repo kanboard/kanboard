@@ -7,7 +7,6 @@ use Kanboard\Model\ProjectDailyColumnStats;
 use Kanboard\Model\Config;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskStatus;
 
 class ProjectDailyColumnStatsTest extends Base
 {

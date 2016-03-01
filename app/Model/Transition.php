@@ -3,7 +3,7 @@
 namespace Kanboard\Model;
 
 /**
- * Transition model
+ * Transition
  *
  * @package  model
  * @author   Frederic Guillot
@@ -21,20 +21,22 @@ class Transition extends Base
      * Save transition event
      *
      * @access public
-     * @param  integer  $user_id
-     * @param  array    $task
-     * @return boolean
+     * @param  integer $user_id
+     * @param  array   $task_event
+     * @return bool
      */
-    public function save($user_id, array $task)
+    public function save($user_id, array $task_event)
     {
+        $time = time();
+
         return $this->db->table(self::TABLE)->insert(array(
             'user_id' => $user_id,
-            'project_id' => $task['project_id'],
-            'task_id' => $task['task_id'],
-            'src_column_id' => $task['src_column_id'],
-            'dst_column_id' => $task['dst_column_id'],
-            'date' => time(),
-            'time_spent' => time() - $task['date_moved']
+            'project_id' => $task_event['project_id'],
+            'task_id' => $task_event['task_id'],
+            'src_column_id' => $task_event['src_column_id'],
+            'dst_column_id' => $task_event['dst_column_id'],
+            'date' => $time,
+            'time_spent' => $time - $task_event['date_moved']
         ));
     }
 
@@ -116,71 +118,11 @@ class Transition extends Base
                         ->lte('date', $to)
                         ->eq(self::TABLE.'.project_id', $project_id)
                         ->desc('date')
+                        ->desc(self::TABLE.'.id')
                         ->join(Task::TABLE, 'id', 'task_id')
                         ->join(User::TABLE, 'id', 'user_id')
                         ->join(Column::TABLE.' as src', 'id', 'src_column_id', self::TABLE, 'src')
                         ->join(Column::TABLE.' as dst', 'id', 'dst_column_id', self::TABLE, 'dst')
                         ->findAll();
-    }
-
-    /**
-     * Get project export
-     *
-     * @access public
-     * @param  integer    $project_id      Project id
-     * @param  mixed      $from            Start date (timestamp or user formatted date)
-     * @param  mixed      $to              End date (timestamp or user formatted date)
-     * @return array
-     */
-    public function export($project_id, $from, $to)
-    {
-        $results = array($this->getColumns());
-        $transitions = $this->getAllByProjectAndDate($project_id, $from, $to);
-
-        foreach ($transitions as $transition) {
-            $results[] = $this->format($transition);
-        }
-
-        return $results;
-    }
-
-    /**
-     * Get column titles
-     *
-     * @access public
-     * @return string[]
-     */
-    public function getColumns()
-    {
-        return array(
-            e('Id'),
-            e('Task Title'),
-            e('Source column'),
-            e('Destination column'),
-            e('Executer'),
-            e('Date'),
-            e('Time spent'),
-        );
-    }
-
-    /**
-     * Format the output of a transition array
-     *
-     * @access public
-     * @param  array     $transition
-     * @return array
-     */
-    public function format(array $transition)
-    {
-        $values = array();
-        $values[] = $transition['id'];
-        $values[] = $transition['title'];
-        $values[] = $transition['src_column'];
-        $values[] = $transition['dst_column'];
-        $values[] = $transition['name'] ?: $transition['username'];
-        $values[] = date('Y-m-d H:i', $transition['date']);
-        $values[] = round($transition['time_spent'] / 3600, 2);
-
-        return $values;
     }
 }

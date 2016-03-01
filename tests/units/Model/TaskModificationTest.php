@@ -6,7 +6,6 @@ use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskModification;
 use Kanboard\Model\TaskFinder;
-use Kanboard\Model\TaskStatus;
 use Kanboard\Model\Project;
 
 class TaskModificationTest extends Base

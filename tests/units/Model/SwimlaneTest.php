@@ -3,7 +3,6 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Model\Project;
-use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\Swimlane;

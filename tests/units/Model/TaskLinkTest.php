@@ -2,7 +2,6 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Link;
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\TaskLink;
 use Kanboard\Model\TaskCreation;
