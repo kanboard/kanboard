@@ -8,7 +8,7 @@ RUN apk-install nginx bash ca-certificates s6 curl \
     && curl -sS https://getcomposer.org/installer | php -- --filename=/usr/local/bin/composer
 
 RUN cd /var/www \
-    && wget https://github.com/fguillot/kanboard/archive/master.zip \
+    && curl -LO https://github.com/fguillot/kanboard/archive/master.zip \
     && unzip -qq master.zip \
     && rm -f *.zip \
     && mv kanboard-master kanboard \
