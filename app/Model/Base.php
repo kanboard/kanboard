@@ -135,23 +135,4 @@ abstract class Base extends \Kanboard\Core\Base
 
         return $start_column.' IS NOT NULL AND '.$start_column.' > 0 AND ('.implode(' OR ', $conditions).')';
     }
-
-    /**
-     * Group a collection of records by a column
-     *
-     * @access public
-     * @param  array   $collection
-     * @param  string  $column
-     * @return array
-     */
-    public function groupByColumn(array $collection, $column)
-    {
-        $result = array();
-
-        foreach ($collection as $item) {
-            $result[$item[$column]][] = $item;
-        }
-
-        return $result;
-    }
 }

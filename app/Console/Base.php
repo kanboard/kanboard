@@ -14,11 +14,9 @@ use Symfony\Component\Console\Command\Command;
  * @property \Kanboard\Model\Notification                               $notification
  * @property \Kanboard\Model\Project                                    $project
  * @property \Kanboard\Model\ProjectPermission                          $projectPermission
- * @property \Kanboard\Model\ProjectAnalytic                            $projectAnalytic
  * @property \Kanboard\Model\ProjectDailyColumnStats                    $projectDailyColumnStats
  * @property \Kanboard\Model\ProjectDailyStats                          $projectDailyStats
  * @property \Kanboard\Model\SubtaskExport                              $subtaskExport
- * @property \Kanboard\Model\OverdueNotification                        $overdueNotification
  * @property \Kanboard\Model\Task                                       $task
  * @property \Kanboard\Model\TaskExport                                 $taskExport
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder

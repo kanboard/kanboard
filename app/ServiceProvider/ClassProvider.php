@@ -37,7 +37,6 @@ class ClassProvider implements ServiceProviderInterface
             'LastLogin',
             'Link',
             'Notification',
-            'OverdueNotification',
             'PasswordReset',
             'Project',
             'ProjectFile',

@@ -75,11 +75,9 @@ use Pimple\Container;
  * @property \Kanboard\Model\LastLogin                                  $lastLogin
  * @property \Kanboard\Model\Link                                       $link
  * @property \Kanboard\Model\Notification                               $notification
- * @property \Kanboard\Model\OverdueNotification                        $overdueNotification
  * @property \Kanboard\Model\PasswordReset                              $passwordReset
  * @property \Kanboard\Model\Project                                    $project
  * @property \Kanboard\Model\ProjectActivity                            $projectActivity
- * @property \Kanboard\Model\ProjectAnalytic                            $projectAnalytic
  * @property \Kanboard\Model\ProjectDuplication                         $projectDuplication
  * @property \Kanboard\Model\ProjectDailyColumnStats                    $projectDailyColumnStats
  * @property \Kanboard\Model\ProjectDailyStats                          $projectDailyStats
@@ -121,7 +119,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
  * @property \Kanboard\Model\UserUnreadNotification                     $userUnreadNotification
  * @property \Kanboard\Model\UserMetadata                               $userMetadata
- * @property \Kanboard\Model\Webhook                                    $webhook
  * @property \Kanboard\Validator\ActionValidator                        $actionValidator
  * @property \Kanboard\Validator\AuthValidator                          $authValidator
  * @property \Kanboard\Validator\ColumnValidator                        $columnValidator
@@ -137,7 +134,7 @@ use Pimple\Container;
  * @property \Kanboard\Validator\SubtaskValidator                       $subtaskValidator
  * @property \Kanboard\Validator\SwimlaneValidator                      $swimlaneValidator
  * @property \Kanboard\Validator\TaskLinkValidator                      $taskLinkValidator
- * @property \Kanboard\Validator\TaskExternalLinkValidator              $taskExternalLinkValidator
+ * @property \Kanboard\Validator\ExternalLinkValidator                  $externalLinkValidator
  * @property \Kanboard\Validator\TaskValidator                          $taskValidator
  * @property \Kanboard\Validator\UserValidator                          $userValidator
  * @property \Psr\Log\LoggerInterface                                   $logger
