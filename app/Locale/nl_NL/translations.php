@@ -712,7 +712,7 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     'Swimlane' => 'Swimlane',
     'Gravatar' => 'Gravatar',
-    '%s moved the task %s to the first swimlane' => '%s heeft de taak naar de eerste swimlane verplaatst',
+    '%s moved the task %s to the first swimlane' => '%s heeft de taak %s naar de eerste swimlane verplaatst',
     '%s moved the task %s to the swimlane "%s"' => '%s heeft taak %s naar swimlane "%s" verplaatst',
     // 'This report contains all subtasks information for the given date range.' => '',
     // 'This report contains all tasks information for the given date range.' => '',
