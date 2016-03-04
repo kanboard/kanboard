@@ -177,7 +177,7 @@ class Color extends Base
     }
 
     /**
-     * Get Bordercolor from string
+     * Get border color from string
      *
      * @access public
      * @param  string   $color_id   Color id
