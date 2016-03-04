@@ -42,6 +42,13 @@ class ProjectDailyStatsTest extends Base
             )
         );
 
-        $this->assertEquals($expected, $metrics);
+        $this->assertEquals($expected[0]['day'], $metrics[0]['day']);
+        $this->assertEquals($expected[1]['day'], $metrics[1]['day']);
+
+        $this->assertEquals($expected[0]['avg_lead_time'], $metrics[0]['avg_lead_time'], '', 2);
+        $this->assertEquals($expected[1]['avg_lead_time'], $metrics[1]['avg_lead_time'], '', 2);
+
+        $this->assertEquals($expected[0]['avg_cycle_time'], $metrics[0]['avg_cycle_time'], '', 2);
+        $this->assertEquals($expected[1]['avg_cycle_time'], $metrics[1]['avg_cycle_time'], '', 2);
     }
 }
