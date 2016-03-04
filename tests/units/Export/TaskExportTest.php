@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+require_once __DIR__ . '/../Base.php';
 
 use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskExport;
+use Kanboard\Export\TaskExport;
 use Kanboard\Model\Project;
 use Kanboard\Model\Category;
 use Kanboard\Model\Swimlane;

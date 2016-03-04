@@ -1,11 +1,16 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Export;
+
+use Kanboard\Core\Base;
+use Kanboard\Model\Task;
+use Kanboard\Model\Subtask;
+use Kanboard\Model\User;
 
 /**
  * Subtask Export
  *
- * @package  model
+ * @package  export
  * @author   Frederic Guillot
  */
 class SubtaskExport extends Base

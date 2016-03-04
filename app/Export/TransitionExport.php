@@ -1,13 +1,14 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Export;
 
+use Kanboard\Core\Base;
 use Kanboard\Core\DateParser;
 
 /**
  * Transition Export
  *
- * @package  model
+ * @package  export
  * @author   Frederic Guillot
  */
 class TransitionExport extends Base

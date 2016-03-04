@@ -1,14 +1,16 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Export;
 
+use Kanboard\Core\Base;
 use Kanboard\Core\DateParser;
+use Kanboard\Model\Task;
 use PDO;
 
 /**
- * Task Export model
+ * Task Export
  *
- * @package  model
+ * @package  export
  * @author   Frederic Guillot
  */
 class TaskExport extends Base

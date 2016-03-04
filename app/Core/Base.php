@@ -90,14 +90,12 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectNotificationType                    $projectNotificationType
  * @property \Kanboard\Model\RememberMeSession                          $rememberMeSession
  * @property \Kanboard\Model\Subtask                                    $subtask
- * @property \Kanboard\Model\SubtaskExport                              $subtaskExport
  * @property \Kanboard\Model\SubtaskTimeTracking                        $subtaskTimeTracking
  * @property \Kanboard\Model\Swimlane                                   $swimlane
  * @property \Kanboard\Model\Task                                       $task
  * @property \Kanboard\Model\TaskAnalytic                               $taskAnalytic
  * @property \Kanboard\Model\TaskCreation                               $taskCreation
  * @property \Kanboard\Model\TaskDuplication                            $taskDuplication
- * @property \Kanboard\Model\TaskExport                                 $taskExport
  * @property \Kanboard\Model\TaskExternalLink                           $taskExternalLink
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder
  * @property \Kanboard\Model\TaskFilter                                 $taskFilter
@@ -108,7 +106,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskStatus                                 $taskStatus
  * @property \Kanboard\Model\TaskMetadata                               $taskMetadata
  * @property \Kanboard\Model\Transition                                 $transition
- * @property \Kanboard\Model\TransitionExport                           $transitionExport
  * @property \Kanboard\Model\User                                       $user
  * @property \Kanboard\Model\UserLocking                                $userLocking
  * @property \Kanboard\Model\UserMention                                $userMention
@@ -121,7 +118,6 @@ use Pimple\Container;
  * @property \Kanboard\Validator\AuthValidator                          $authValidator
  * @property \Kanboard\Validator\ColumnValidator                        $columnValidator
  * @property \Kanboard\Validator\CategoryValidator                      $categoryValidator
- * @property \Kanboard\Validator\ColumnValidator                        $columnValidator
  * @property \Kanboard\Validator\CommentValidator                       $commentValidator
  * @property \Kanboard\Validator\CurrencyValidator                      $currencyValidator
  * @property \Kanboard\Validator\CustomFilterValidator                  $customFilterValidator
@@ -137,6 +133,9 @@ use Pimple\Container;
  * @property \Kanboard\Validator\UserValidator                          $userValidator
  * @property \Kanboard\Import\TaskImport                                $taskImport
  * @property \Kanboard\Import\UserImport                                $userImport
+ * @property \Kanboard\Export\SubtaskExport                             $subtaskExport
+ * @property \Kanboard\Export\TaskExport                                $taskExport
+ * @property \Kanboard\Export\TransitionExport                          $transitionExport
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \PicoDb\Database                                           $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher

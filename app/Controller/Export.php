@@ -80,6 +80,6 @@ class Export extends Base
      */
     public function transitions()
     {
-        $this->common('transition', 'export', t('Transitions'), 'transitions', t('Task transitions export'));
+        $this->common('transitionExport', 'export', t('Transitions'), 'transitions', t('Task transitions export'));
     }
 }
