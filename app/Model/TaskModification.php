@@ -87,9 +87,9 @@ class TaskModification extends Base
         $values = $this->dateParser->convert($values, array('date_due'));
         $values = $this->dateParser->convert($values, array('date_started'), true);
 
-        $this->removeFields($values, array('another_task', 'id'));
-        $this->resetFields($values, array('date_due', 'date_started', 'score', 'category_id', 'time_estimated', 'time_spent'));
-        $this->convertIntegerFields($values, array('priority', 'is_active', 'recurrence_status', 'recurrence_trigger', 'recurrence_factor', 'recurrence_timeframe', 'recurrence_basedate'));
+        $this->helper->model->removeFields($values, array('another_task', 'id'));
+        $this->helper->model->resetFields($values, array('date_due', 'date_started', 'score', 'category_id', 'time_estimated', 'time_spent'));
+        $this->helper->model->convertIntegerFields($values, array('priority', 'is_active', 'recurrence_status', 'recurrence_trigger', 'recurrence_factor', 'recurrence_timeframe', 'recurrence_basedate'));
 
         $values['date_modification'] = time();
     }

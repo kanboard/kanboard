@@ -70,12 +70,10 @@ class ClassProvider implements ServiceProviderInterface
             'TaskPermission',
             'TaskPosition',
             'TaskStatus',
-            'TaskImport',
             'TaskMetadata',
             'Transition',
             'TransitionExport',
             'User',
-            'UserImport',
             'UserLocking',
             'UserMention',
             'UserNotification',
@@ -110,6 +108,10 @@ class ClassProvider implements ServiceProviderInterface
             'TaskValidator',
             'TaskLinkValidator',
             'UserValidator',
+        ),
+        'Import' => array(
+            'TaskImport',
+            'UserImport',
         ),
         'Core' => array(
             'DateParser',

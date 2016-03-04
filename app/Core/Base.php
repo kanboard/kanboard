@@ -99,7 +99,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskDuplication                            $taskDuplication
  * @property \Kanboard\Model\TaskExport                                 $taskExport
  * @property \Kanboard\Model\TaskExternalLink                           $taskExternalLink
- * @property \Kanboard\Model\TaskImport                                 $taskImport
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder
  * @property \Kanboard\Model\TaskFilter                                 $taskFilter
  * @property \Kanboard\Model\TaskLink                                   $taskLink
@@ -111,7 +110,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\Transition                                 $transition
  * @property \Kanboard\Model\TransitionExport                           $transitionExport
  * @property \Kanboard\Model\User                                       $user
- * @property \Kanboard\Model\UserImport                                 $userImport
  * @property \Kanboard\Model\UserLocking                                $userLocking
  * @property \Kanboard\Model\UserMention                                $userMention
  * @property \Kanboard\Model\UserNotification                           $userNotification
@@ -137,6 +135,8 @@ use Pimple\Container;
  * @property \Kanboard\Validator\ExternalLinkValidator                  $externalLinkValidator
  * @property \Kanboard\Validator\TaskValidator                          $taskValidator
  * @property \Kanboard\Validator\UserValidator                          $userValidator
+ * @property \Kanboard\Import\TaskImport                                $taskImport
+ * @property \Kanboard\Import\UserImport                                $userImport
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \PicoDb\Database                                           $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher

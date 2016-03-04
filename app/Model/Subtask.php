@@ -168,8 +168,8 @@ class Subtask extends Base
      */
     public function prepare(array &$values)
     {
-        $this->removeFields($values, array('another_subtask'));
-        $this->resetFields($values, array('time_estimated', 'time_spent'));
+        $this->helper->model->removeFields($values, array('another_subtask'));
+        $this->helper->model->resetFields($values, array('time_estimated', 'time_spent'));
     }
 
     /**

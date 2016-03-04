@@ -21,6 +21,8 @@ use Symfony\Component\Console\Command\Command;
  * @property \Kanboard\Model\TaskExport                                 $taskExport
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder
  * @property \Kanboard\Model\Transition                                 $transition
+ * @property \Kanboard\Model\UserNotification                           $userNotification
+ * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher
  */
 abstract class Base extends Command

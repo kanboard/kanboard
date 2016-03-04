@@ -1,7 +1,8 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Import;
 
+use Kanboard\Core\Base;
 use Kanboard\Core\Csv;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
@@ -9,7 +10,7 @@ use SimpleValidator\Validators;
 /**
  * Task Import
  *
- * @package  model
+ * @package  import
  * @author   Frederic Guillot
  */
 class TaskImport extends Base
@@ -126,7 +127,7 @@ class TaskImport extends Base
             $values['date_due'] = $this->dateParser->getTimestampFromIsoFormat($row['date_due']);
         }
 
-        $this->removeEmptyFields(
+        $this->helper->model->removeEmptyFields(
             $values,
             array('owner_id', 'creator_id', 'color_id', 'column_id', 'category_id', 'swimlane_id', 'date_due')
         );

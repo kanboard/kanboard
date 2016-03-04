@@ -10,17 +10,18 @@ use Pimple\Container;
  * @package core
  * @author  Frederic Guillot
  *
- * @property \Helper\App        $app
- * @property \Helper\Asset      $asset
- * @property \Helper\Dt         $dt
- * @property \Helper\File       $file
- * @property \Helper\Form       $form
- * @property \Helper\Subtask    $subtask
- * @property \Helper\Task       $task
- * @property \Helper\Text       $text
- * @property \Helper\Url        $url
- * @property \Helper\User       $user
- * @property \Helper\Layout     $layout
+ * @property \Kanboard\Helper\App        $app
+ * @property \Kanboard\Helper\Asset      $asset
+ * @property \Kanboard\Helper\Dt         $dt
+ * @property \Kanboard\Helper\File       $file
+ * @property \Kanboard\Helper\Form       $form
+ * @property \Kanboard\Helper\Subtask    $subtask
+ * @property \Kanboard\Helper\Task       $task
+ * @property \Kanboard\Helper\Text       $text
+ * @property \Kanboard\Helper\Url        $url
+ * @property \Kanboard\Helper\User       $user
+ * @property \Kanboard\Helper\Layout     $layout
+ * @property \Kanboard\Helper\Model      $model
  */
 class Helper
 {

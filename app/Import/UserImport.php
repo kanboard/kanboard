@@ -1,16 +1,18 @@
 <?php
 
-namespace Kanboard\Model;
+namespace Kanboard\Import;
 
+use Kanboard\Model\User;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Kanboard\Core\Security\Role;
+use Kanboard\Core\Base;
 use Kanboard\Core\Csv;
 
 /**
  * User Import
  *
- * @package  model
+ * @package  import
  * @author   Frederic Guillot
  */
 class UserImport extends Base
@@ -91,7 +93,7 @@ class UserImport extends Base
         unset($row['is_admin']);
         unset($row['is_manager']);
 
-        $this->removeEmptyFields($row, array('password', 'email', 'name'));
+        $this->helper->model->removeEmptyFields($row, array('password', 'email', 'name'));
 
         return $row;
     }
