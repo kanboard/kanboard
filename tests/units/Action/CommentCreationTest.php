@@ -3,7 +3,6 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Comment;
 use Kanboard\Model\Project;

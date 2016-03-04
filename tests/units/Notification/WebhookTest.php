@@ -3,11 +3,8 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Model\Config;
-use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskModification;
 use Kanboard\Model\Project;
-use Kanboard\Model\Comment;
 use Kanboard\Subscriber\NotificationSubscriber;
 
 class WebhookTest extends Base

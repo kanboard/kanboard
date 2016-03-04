@@ -4,7 +4,6 @@ require_once __DIR__.'/../../Base.php';
 
 use Kanboard\Core\Ldap\Group;
 use Kanboard\Core\Ldap\Entries;
-use Kanboard\Core\Security\Role;
 
 class LdapGroupTest extends Base
 {

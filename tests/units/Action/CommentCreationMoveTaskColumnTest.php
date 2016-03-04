@@ -7,7 +7,6 @@ use Kanboard\Model\Task;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Comment;
 use Kanboard\Model\Project;
-use Kanboard\Model\ProjectUserRole;
 use Kanboard\Action\CommentCreationMoveTaskColumn;
 
 class CommentCreationMoveTaskColumnTest extends Base

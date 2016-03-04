@@ -57,8 +57,8 @@ class TaskDuplicationTest extends Base
         // Some categories
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
         $this->assertNotFalse($c->create(array('name' => 'Category #2', 'project_id' => 1)));
-        $this->assertTrue($c->exists(1, 1));
-        $this->assertTrue($c->exists(2, 1));
+        $this->assertTrue($c->exists(1));
+        $this->assertTrue($c->exists(2));
 
         $this->assertEquals(
             1,
@@ -110,7 +110,7 @@ class TaskDuplicationTest extends Base
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
 
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
-        $this->assertTrue($c->exists(1, 1));
+        $this->assertTrue($c->exists(1));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1, 'category_id' => 1)));
@@ -151,8 +151,8 @@ class TaskDuplicationTest extends Base
 
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 2)));
-        $this->assertTrue($c->exists(1, 1));
-        $this->assertTrue($c->exists(2, 2));
+        $this->assertTrue($c->exists(1));
+        $this->assertTrue($c->exists(2));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'category_id' => 1)));
@@ -187,9 +187,9 @@ class TaskDuplicationTest extends Base
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 2)));
         $this->assertNotFalse($c->create(array('name' => 'Category #2', 'project_id' => 2)));
-        $this->assertTrue($c->exists(1, 1));
-        $this->assertTrue($c->exists(2, 2));
-        $this->assertTrue($c->exists(3, 2));
+        $this->assertTrue($c->exists(1));
+        $this->assertTrue($c->exists(2));
+        $this->assertTrue($c->exists(3));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'category_id' => 1)));
@@ -468,8 +468,8 @@ class TaskDuplicationTest extends Base
 
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 1)));
         $this->assertNotFalse($c->create(array('name' => 'Category #1', 'project_id' => 2)));
-        $this->assertTrue($c->exists(1, 1));
-        $this->assertTrue($c->exists(2, 2));
+        $this->assertTrue($c->exists(1));
+        $this->assertTrue($c->exists(2));
 
         // We create a task
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'category_id' => 1)));

@@ -8,10 +8,7 @@ use Kanboard\Model\Project;
 use Kanboard\Model\User;
 use Kanboard\Model\TaskCreation;
 use Kanboard\Core\DateParser;
-use Kanboard\Model\Category;
-use Kanboard\Model\Subtask;
 use Kanboard\Model\Config;
-use Kanboard\Model\Swimlane;
 
 class TaskFilterICalendarFormatterTest extends Base
 {

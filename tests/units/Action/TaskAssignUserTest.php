@@ -8,7 +8,6 @@ use Kanboard\Model\TaskFinder;
 use Kanboard\Model\Project;
 use Kanboard\Model\ProjectUserRole;
 use Kanboard\Model\User;
-use Kanboard\Model\Task;
 use Kanboard\Action\TaskAssignUser;
 use Kanboard\Core\Security\Role;
 

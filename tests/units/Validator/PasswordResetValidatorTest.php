@@ -2,7 +2,6 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\User;
 use Kanboard\Validator\PasswordResetValidator;
 
 class PasswordResetValidatorTest extends Base

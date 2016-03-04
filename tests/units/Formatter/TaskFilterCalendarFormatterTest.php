@@ -3,14 +3,6 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Formatter\TaskFilterCalendarFormatter;
-use Kanboard\Model\Project;
-use Kanboard\Model\User;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Core\DateParser;
-use Kanboard\Model\Category;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\Config;
-use Kanboard\Model\Swimlane;
 
 class TaskFilterCalendarFormatterTest extends Base
 {
