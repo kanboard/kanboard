@@ -180,6 +180,10 @@ input.form-input-large {
     font-weight: bold;
 }
 
+.popover-form {
+    margin-bottom: 0;
+}
+
 /* preview tabs */
 label + .form-tabs {
     margin-top: 10px;

@@ -1,9 +1,8 @@
 <div class="page-header">
-    <h2><?= t('Automatic actions for the project "%s"', $project['name']) ?></h2>
+    <h2><?= t('Define action parameters') ?></h2>
 </div>
 
-<h3><?= t('Define action parameters') ?></h3>
-<form method="post" action="<?= $this->url->href('action', 'create', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('ActionCreation', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -11,8 +10,13 @@
     <?= $this->form->hidden('event_name', $values) ?>
     <?= $this->form->hidden('action_name', $values) ?>
 
-    <?php foreach ($action_params as $param_name => $param_desc): ?>
+    <?= $this->form->label(t('Action'), 'action_name') ?>
+    <?= $this->form->select('action_name', $available_actions, $values, array(), array('disabled')) ?>
 
+    <?= $this->form->label(t('Event'), 'event_name') ?>
+    <?= $this->form->select('event_name', $events, $values, array(), array('disabled')) ?>
+
+    <?php foreach ($action_params as $param_name => $param_desc): ?>
         <?php if ($this->text->contains($param_name, 'column_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->select('params['.$param_name.']', $columns_list, $values) ?>
@@ -38,12 +42,11 @@
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->text('params['.$param_name.']', $values) ?>
         <?php endif ?>
-
     <?php endforeach ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'action', 'index', array('project_id' => $project['id'])) ?>
+        <?= $this->url->link(t('cancel'), 'action', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
     </div>
 </form>

@@ -16,7 +16,7 @@ class ActionProject extends Base
         $projects = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
         unset($projects[$project['id']]);
 
-        $this->response->html($this->helper->layout->project('action_project/project', array(
+        $this->response->html($this->template->render('action_project/project', array(
             'project' => $project,
             'projects_list' => $projects,
         )));
@@ -33,6 +33,6 @@ class ActionProject extends Base
             $this->flash->failure(t('Unable to duplicate actions.'));
         }
 
-        $this->response->redirect($this->helper->url->to('Action', 'index', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('action', 'index', array('project_id' => $project['id'])));
     }
 }
