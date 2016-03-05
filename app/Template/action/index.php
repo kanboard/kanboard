@@ -1,5 +1,11 @@
 <div class="page-header">
     <h2><?= t('Automatic actions for the project "%s"', $project['name']) ?></h2>
+    <ul>
+        <li>
+            <i class="fa fa-plus fa-fw"></i>
+            <?= $this->url->link(t('Import from another project'), 'ActionProject', 'project', array('project_id' => $project['id']), false, 'popover') ?>
+        </li>
+    </ul>
 </div>
 
 <?php if (! empty($actions)): ?>

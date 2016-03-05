@@ -67,6 +67,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->setRoleHierarchy(Role::PROJECT_MEMBER, array(Role::PROJECT_VIEWER));
 
         $acl->add('Action', '*', Role::PROJECT_MANAGER);
+        $acl->add('ActionProject', '*', Role::PROJECT_MANAGER);
         $acl->add('Analytic', '*', Role::PROJECT_MANAGER);
         $acl->add('Board', 'save', Role::PROJECT_MEMBER);
         $acl->add('BoardPopover', '*', Role::PROJECT_MEMBER);
