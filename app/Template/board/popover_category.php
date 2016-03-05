@@ -2,7 +2,7 @@
     <div class="page-header">
         <h2><?= t('Change category for the task "%s"', $values['title']) ?></h2>
     </div>
-    <form method="post" action="<?= $this->url->href('BoardPopover', 'updateCategory', array('task_id' => $values['id'], 'project_id' => $project['id'])) ?>">
+    <form class="popover-form" method="post" action="<?= $this->url->href('BoardPopover', 'updateCategory', array('task_id' => $values['id'], 'project_id' => $project['id'])) ?>">
 
         <?= $this->form->csrf() ?>
 
