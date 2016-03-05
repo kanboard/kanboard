@@ -57,4 +57,5 @@
     margin-bottom: 0;
     border-width: 1px 0 0;
     border-radius: 0;
+    z-index: 9999;
 }
