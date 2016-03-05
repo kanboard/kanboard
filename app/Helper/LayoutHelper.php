@@ -5,7 +5,7 @@ namespace Kanboard\Helper;
 use Kanboard\Core\Base;
 
 /**
- * Layout helpers
+ * Layout Helper
  *
  * @package helper
  * @author  Frederic Guillot
@@ -30,7 +30,7 @@ class LayoutHelper extends Base
             $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
         }
 
-        return $this->template->layout($template, $params);
+        return $this->pageLayout($template, $params);
     }
 
     /**
@@ -146,7 +146,24 @@ class LayoutHelper extends Base
     }
 
     /**
-     * Common method to generate a sublayout
+     * Render page layout
+     *
+     * @access public
+     * @param  string   $template   Template name
+     * @param  array    $params     Key/value dictionary
+     * @param  string   $layout     Layout name
+     * @return string
+     */
+    public function pageLayout($template, array $params = array(), $layout = 'layout')
+    {
+        return $this->template->render(
+            $layout,
+            $params + array('content_for_layout' => $this->template->render($template, $params))
+        );
+    }
+
+    /**
+     * Common method to generate a sub-layout
      *
      * @access public
      * @param  string $sublayout

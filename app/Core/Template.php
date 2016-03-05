@@ -70,23 +70,6 @@ class Template
     }
 
     /**
-     * Render a page layout
-     *
-     * @access public
-     * @param  string   $template_name   Template name
-     * @param  array    $template_args   Key/value map
-     * @param  string   $layout_name     Layout name
-     * @return string
-     */
-    public function layout($template_name, array $template_args = array(), $layout_name = 'layout')
-    {
-        return $this->render(
-            $layout_name,
-            $template_args + array('content_for_layout' => $this->render($template_name, $template_args))
-        );
-    }
-
-    /**
      * Define a new template override
      *
      * @access public
