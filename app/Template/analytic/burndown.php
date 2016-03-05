@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-inline-group">
-        <input type="submit" value="<?= t('Execute') ?>" class="btn btn-blue"/>
+        <button type="submit" class="btn btn-blue"><?= t('Execute') ?></button>
     </div>
 </form>
 

@@ -7,9 +7,9 @@
     <p><?= t('Two-Factor Provider: ') ?><strong><?= $this->text->e($provider) ?></strong></p>
     <div class="form-actions">
         <?php if ($user['twofactor_activated'] == 1): ?>
-            <input type="submit" value="<?= t('Disable two-factor authentication') ?>" class="btn btn-red"/>
+            <button type="submit" class="btn btn-red"><?= t('Disable two-factor authentication') ?></button>
         <?php else: ?>
-            <input type="submit" value="<?= t('Enable two-factor authentication') ?>" class="btn btn-blue"/>
+            <button type="submit" class="btn btn-blue"><?= t('Enable two-factor authentication') ?></button>
         <?php endif ?>
     </div>
 </form>

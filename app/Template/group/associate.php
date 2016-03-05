@@ -16,7 +16,7 @@
             <?= $this->form->select('user_id', $users, $values, $errors, array('required'), 'chosen-select') ?>
 
             <div class="form-actions">
-                <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
+                <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
                 <?= t('or') ?>
                 <?= $this->url->link(t('cancel'), 'group', 'index') ?>
             </div>

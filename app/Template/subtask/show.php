@@ -13,7 +13,7 @@
             <?= $this->form->text('title', array(), array(), array('required', 'placeholder="'.t('Type here to create a new sub-task').'"')) ?>
             <?= $this->form->numeric('time_estimated', array(), array(), array('placeholder="'.t('Original estimate').'"')) ?>
             <?= $this->form->select('user_id', $users_list, array(), array(), array('placeholder="'.t('Assignee').'"')) ?>
-            <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
+            <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
         </form>
     <?php endif ?>
 

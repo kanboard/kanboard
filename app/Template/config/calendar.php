@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
     </div>
 </form>
 </section>

@@ -18,7 +18,7 @@
     </div>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Next step') ?>" class="btn btn-blue"/>
+        <button type="submit" class="btn btn-blue"><?= t('Next step') ?></button>
         <?= t('or') ?>
         <?= $this->url->link(t('cancel'), 'action', 'index', array('project_id' => $project['id'])) ?>
     </div>

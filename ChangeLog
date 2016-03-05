@@ -3,6 +3,7 @@ Version 1.0.27 (unreleased)
 
 Improvements:
 
+* Added Ajax loading icon for submit buttons
 * Added support for HTTP header "X-Forwarded-Proto: https"
 
 Security issues:

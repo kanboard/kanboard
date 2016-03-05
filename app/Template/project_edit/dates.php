@@ -19,7 +19,7 @@
     <?= $this->form->text('end_date', $values, $errors, array('maxlength="10"'), 'form-date') ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
     </div>
 </form>
 

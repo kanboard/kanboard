@@ -19,7 +19,7 @@
     <?= $this->form->password('confirmation', $values, $errors) ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
+        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
         <?= $this->url->link(t('cancel'), 'user', 'show', array('user_id' => $user['id'])) ?>
     </div>

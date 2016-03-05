@@ -69,6 +69,11 @@ Popover.prototype.afterOpen = function() {
                 data: popoverForm.serialize(),
                 success: function(data, textStatus, request) {
                     self.afterSubmit(data, request, self);
+                },
+                beforeSend: function() {
+                    var button = $('.popover-form button[type="submit"]');
+                    button.html('<i class="fa fa-spinner fa-pulse"></i> ' + button.html());
+                    button.attr("disabled", true);
                 }
             });
         });

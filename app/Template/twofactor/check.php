@@ -5,6 +5,6 @@
     <?= $this->form->text('code', array(), array(), array('placeholder="123456"', 'autofocus'), 'form-numeric') ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Check my code') ?>" class="btn btn-blue"/>
+        <button type="submit" class="btn btn-blue"><?= t('Check my code') ?></button>
     </div>
 </form>

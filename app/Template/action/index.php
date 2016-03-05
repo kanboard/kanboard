@@ -70,6 +70,6 @@
     <?= $this->form->select('action_name', $available_actions, $values) ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Next step') ?>" class="btn btn-blue">
+        <button type="submit" class="btn btn-blue"><?= t('Next step') ?></button>
     </div>
 </form>

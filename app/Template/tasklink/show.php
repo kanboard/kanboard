@@ -104,7 +104,7 @@
             ),
             'autocomplete') ?>
 
-        <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
+        <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
     </form>
 <?php endif ?>
 

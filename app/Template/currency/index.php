@@ -32,7 +32,7 @@
     <?= $this->form->select('application_currency', $currencies, $config_values, $errors) ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
+        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
     </div>
 </form>
 
@@ -49,6 +49,6 @@
     <?= $this->form->text('rate', $values, $errors, array(), 'form-numeric') ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">
+        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
     </div>
 </form>

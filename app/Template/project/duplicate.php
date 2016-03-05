@@ -20,7 +20,7 @@
         <?= $this->form->checkbox('task', t('Tasks'), 1, false) ?>
 
         <div class="form-actions">
-            <input type="submit" value="<?= t('Duplicate') ?>" class="btn btn-red">
+            <button type="submit" class="btn btn-red"><?= t('Duplicate') ?></button>
             <?= t('or') ?> <?= $this->url->link(t('cancel'), 'project', 'show', array('project_id' => $project['id'])) ?>
         </div>
     </form>

@@ -10,7 +10,7 @@
     <input type="hidden" name="screenshot"/>
     <?= $this->form->csrf() ?>
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
         <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>

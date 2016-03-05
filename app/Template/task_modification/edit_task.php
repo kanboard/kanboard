@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue" tabindex="10">
+        <button type="submit" class="btn btn-blue" tabindex="15"><?= t('Save') ?></button>
         <?= t('or') ?>
         <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>

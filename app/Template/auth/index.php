@@ -28,7 +28,7 @@
         <?php endif ?>
 
         <div class="form-actions">
-            <input type="submit" value="<?= t('Sign in') ?>" class="btn btn-blue"/>
+            <button type="submit" class="btn btn-blue"><?= t('Sign in') ?></button>
         </div>
         <?php if ($this->app->config('password_reset') == 1): ?>
             <div class="reset-password">

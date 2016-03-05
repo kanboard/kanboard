@@ -16,7 +16,7 @@
     <p class="form-help"><?= t('Maximum size: ') ?><?= is_integer($max_size) ? $this->text->bytes($max_size) : $max_size ?></p>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Import') ?>" class="btn btn-blue">
+        <button type="submit" class="btn btn-blue"><?= t('Import') ?></button>
     </div>
 </form>
 <div class="page-header">

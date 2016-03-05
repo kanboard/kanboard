@@ -12,7 +12,7 @@
         <?= $this->task->selectCategory($categories_list, $values, array(), array('autofocus'), true) ?>
 
         <div class="form-actions">
-            <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+            <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
             <?= t('or') ?>
             <?= $this->url->link(t('cancel'), 'board', 'show', array('project_id' => $project['id']), false, 'close-popover') ?>
         </div>

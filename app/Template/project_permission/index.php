@@ -57,7 +57,7 @@
 
             <?= $this->form->select('role', $roles, $values, $errors) ?>
 
-            <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
+            <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
         </form>
     </div>
     <?php endif ?>
@@ -119,7 +119,7 @@
 
             <?= $this->form->select('role', $roles, $values, $errors) ?>
 
-            <input type="submit" value="<?= t('Add') ?>" class="btn btn-blue"/>
+            <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
         </form>
     </div>
     <?php endif ?>
@@ -135,7 +135,7 @@
     <?= $this->form->checkbox('is_everybody_allowed', t('Allow everybody to access to this project'), 1, $project['is_everybody_allowed']) ?>
 
     <div class="form-actions">
-        <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
+        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
     </div>
 </form>
 <?php endif ?>
