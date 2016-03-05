@@ -5,16 +5,16 @@
         <li><?= t('Recurrent task has been generated:') ?>
             <ul>
                 <li>
-                    <?= t('Trigger to generate recurrent task: ') ?><strong><?= $this->e($recurrence_trigger_list[$task['recurrence_trigger']]) ?></strong>
+                    <?= t('Trigger to generate recurrent task: ') ?><strong><?= $this->text->e($recurrence_trigger_list[$task['recurrence_trigger']]) ?></strong>
                 </li>
                 <li>
-                    <?= t('Factor to calculate new due date: ') ?><strong><?= $this->e($task['recurrence_factor']) ?></strong>
+                    <?= t('Factor to calculate new due date: ') ?><strong><?= $this->text->e($task['recurrence_factor']) ?></strong>
                 </li>
                 <li>
-                    <?= t('Timeframe to calculate new due date: ') ?><strong><?= $this->e($recurrence_timeframe_list[$task['recurrence_timeframe']]) ?></strong>
+                    <?= t('Timeframe to calculate new due date: ') ?><strong><?= $this->text->e($recurrence_timeframe_list[$task['recurrence_timeframe']]) ?></strong>
                 </li>
                 <li>
-                    <?= t('Base date to calculate new due date: ') ?><strong><?= $this->e($recurrence_basedate_list[$task['recurrence_basedate']]) ?></strong>
+                    <?= t('Base date to calculate new due date: ') ?><strong><?= $this->text->e($recurrence_basedate_list[$task['recurrence_basedate']]) ?></strong>
                 </li>
             </ul>
         </li>

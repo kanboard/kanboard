@@ -23,11 +23,11 @@
             <?php endif ?>
 
             <?php if (! empty($task['assignee_username'])): ?>
-                <span title="<?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>">
-                    <?= $this->e($this->user->getInitials($task['assignee_name'] ?: $task['assignee_username'])) ?>
+                <span title="<?= $this->text->e($task['assignee_name'] ?: $task['assignee_username']) ?>">
+                    <?= $this->text->e($this->user->getInitials($task['assignee_name'] ?: $task['assignee_username'])) ?>
                 </span> -
             <?php endif ?>
-            <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-collapsed-title tooltip', $this->e($task['title'])) ?>
+            <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'task-board-collapsed-title tooltip', $this->text->e($task['title'])) ?>
         </div>
     <?php else: ?>
         <div class="task-board-expanded">
@@ -57,7 +57,7 @@
                         t('Change assignee')
                     ) ?>
                 <?php else: ?>
-                    <?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>
+                    <?= $this->text->e($task['assignee_name'] ?: $task['assignee_username']) ?>
                 <?php endif ?>
             </span>
             <?php endif ?>
@@ -72,7 +72,7 @@
             <?php endif ?>
 
             <div class="task-board-title">
-                <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+                <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
             </div>
 
             <?= $this->render('board/task_footer', array(

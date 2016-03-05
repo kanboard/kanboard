@@ -2,13 +2,15 @@
 
 namespace Kanboard\Helper;
 
+use Kanboard\Core\Base;
+
 /**
- * Assets helpers
+ * Asset Helper
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class Asset extends \Kanboard\Core\Base
+class AssetHelper extends Base
 {
     /**
      * Add a Javascript asset

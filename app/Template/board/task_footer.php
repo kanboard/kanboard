@@ -2,10 +2,10 @@
 <div class="task-board-category-container">
     <span class="task-board-category">
         <?php if ($not_editable): ?>
-            <?= $this->e($task['category_name']) ?>
+            <?= $this->text->e($task['category_name']) ?>
         <?php else: ?>
             <?= $this->url->link(
-                $this->e($task['category_name']),
+                $this->text->e($task['category_name']),
                 'boardPopover',
                 'changeCategory',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
@@ -61,11 +61,11 @@
     <?php endif ?>
 
     <?php if ($task['score']): ?>
-        <span class="task-score"><?= $this->e($task['score']) ?></span>
+        <span class="task-score"><?= $this->text->e($task['score']) ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['time_estimated'])): ?>
-        <span class="task-time-estimated" title="<?= t('Time estimated') ?>"><?= $this->e($task['time_estimated']).'h' ?></span>
+        <span class="task-time-estimated" title="<?= t('Time estimated') ?>"><?= $this->text->e($task['time_estimated']).'h' ?></span>
     <?php endif ?>
 
     <?php if ($task['is_milestone'] == 1): ?>

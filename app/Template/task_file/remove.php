@@ -4,7 +4,7 @@
 
 <div class="confirm">
     <p class="alert alert-info">
-        <?= t('Do you really want to remove this file: "%s"?', $this->e($file['name'])) ?>
+        <?= t('Do you really want to remove this file: "%s"?', $this->text->e($file['name'])) ?>
     </p>
 
     <div class="form-actions">

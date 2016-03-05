@@ -3,13 +3,21 @@
 namespace Kanboard\Core;
 
 /**
- * Template class
+ * Template
  *
  * @package core
  * @author  Frederic Guillot
  */
-class Template extends Helper
+class Template
 {
+    /**
+     * Helper object
+     *
+     * @access private
+     * @var Helper
+     */
+    private $helper;
+
     /**
      * List of template overrides
      *
@@ -19,47 +27,26 @@ class Template extends Helper
     private $overrides = array();
 
     /**
-     * Rendering start time
+     * Template constructor
      *
-     * @access private
-     * @var float
+     * @access public
+     * @param  Helper $helper
      */
-    private $startTime = 0;
-
-    /**
-     * Total rendering time
-     *
-     * @access private
-     * @var float
-     */
-    private $renderingTime = 0;
-
-    /**
-     * Method executed before the rendering
-     *
-     * @access protected
-     * @param  string $template
-     */
-    protected function beforeRender($template)
+    public function __construct(Helper $helper)
     {
-        if (DEBUG) {
-            $this->startTime = microtime(true);
-        }
+        $this->helper = $helper;
     }
 
     /**
-     * Method executed after the rendering
+     * Expose helpers with magic getter
      *
-     * @access protected
-     * @param  string $template
+     * @access public
+     * @param  string $helper
+     * @return mixed
      */
-    protected function afterRender($template)
+    public function __get($helper)
     {
-        if (DEBUG) {
-            $duration = microtime(true) - $this->startTime;
-            $this->renderingTime += $duration;
-            $this->container['logger']->debug('Rendering '.$template.' in '.$duration.'s, total='.$this->renderingTime);
-        }
+        return $this->helper->getHelper($helper);
     }
 
     /**
@@ -76,16 +63,10 @@ class Template extends Helper
      */
     public function render($__template_name, array $__template_args = array())
     {
-        $this->beforeRender($__template_name);
-
         extract($__template_args);
         ob_start();
         include $this->getTemplateFile($__template_name);
-        $html = ob_get_clean();
-
-        $this->afterRender($__template_name);
-
-        return $html;
+        return ob_get_clean();
     }
 
     /**

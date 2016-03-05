@@ -29,7 +29,7 @@
     <ul>
         <li>
             <?= t('Database driver:') ?>
-            <strong><?= $this->e(DB_DRIVER) ?></strong>
+            <strong><?= $this->text->e(DB_DRIVER) ?></strong>
         </li>
         <?php if (DB_DRIVER === 'sqlite'): ?>
             <li>

@@ -45,7 +45,7 @@
                     <?php elseif ($this->text->contains($param_name, 'link_id')): ?>
                         <?= $this->text->in($param_value, $links_list) ?>
                     <?php else: ?>
-                        <?= $this->e($param_value) ?>
+                        <?= $this->text->e($param_value) ?>
                     <?php endif ?>
                     </strong>
                 </li>

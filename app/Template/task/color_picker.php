@@ -3,7 +3,7 @@
     <div
         data-color-id="<?= $color_id ?>"
         class="color-square color-<?= $color_id ?> <?= isset($values['color_id']) && $values['color_id'] === $color_id ? 'color-square-selected' : '' ?>"
-        title="<?= $this->e($color_name) ?>">
+        title="<?= $this->text->e($color_name) ?>">
     </div>
 <?php endforeach ?>
 </div>

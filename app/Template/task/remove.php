@@ -4,7 +4,7 @@
 
 <div class="confirm">
     <p class="alert alert-info">
-        <?= t('Do you really want to remove this task: "%s"?', $this->e($task['title'])) ?>
+        <?= t('Do you really want to remove this task: "%s"?', $this->text->e($task['title'])) ?>
     </p>
 
     <div class="form-actions">

@@ -14,8 +14,8 @@
         </tr>
     <?php foreach ($custom_filters as $filter): ?>
          <tr>
-            <td><?= $this->e($filter['name']) ?></td>
-            <td><?= $this->e($filter['filter']) ?></td>
+            <td><?= $this->text->e($filter['name']) ?></td>
+            <td><?= $this->text->e($filter['filter']) ?></td>
             <td>
             <?php if ($filter['is_shared'] == 1): ?>
                 <?= t('Yes') ?>
@@ -30,7 +30,7 @@
                 <?= t('Replace') ?>
             <?php endif ?>
             </td>
-            <td><?= $this->e($filter['owner_name'] ?: $filter['owner_username']) ?></td>
+            <td><?= $this->text->e($filter['owner_name'] ?: $filter['owner_username']) ?></td>
             <td>
                 <?php if ($filter['user_id'] == $this->user->getId() || $this->user->hasProjectAccess('customfilter', 'edit', $project['id'])): ?>
                     <div class="dropdown">

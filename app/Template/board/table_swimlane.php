@@ -8,7 +8,7 @@
             </a>
         <?php endif ?>
 
-        <?= $this->e($swimlane['name']) ?>
+        <?= $this->text->e($swimlane['name']) ?>
 
         <?php if (! $not_editable && ! empty($swimlane['description'])): ?>
             <span

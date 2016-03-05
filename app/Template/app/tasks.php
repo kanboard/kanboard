@@ -18,18 +18,18 @@
                 <?= $this->render('task/dropdown', array('task' => $task)) ?>
             </td>
             <td>
-                <?= $this->url->link($this->e($task['project_name']), 'board', 'show', array('project_id' => $task['project_id'])) ?>
+                <?= $this->url->link($this->text->e($task['project_name']), 'board', 'show', array('project_id' => $task['project_id'])) ?>
             </td>
             <td>
-                <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
             <td>
                 <?php if (! empty($task['time_spent'])): ?>
-                    <strong><?= $this->e($task['time_spent']).'h' ?></strong> <?= t('spent') ?>
+                    <strong><?= $this->text->e($task['time_spent']).'h' ?></strong> <?= t('spent') ?>
                 <?php endif ?>
 
                 <?php if (! empty($task['time_estimated'])): ?>
-                    <strong><?= $this->e($task['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
+                    <strong><?= $this->text->e($task['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
                 <?php endif ?>
             </td>
             <td>

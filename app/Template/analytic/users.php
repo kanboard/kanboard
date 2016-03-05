@@ -18,7 +18,7 @@
         <?php foreach ($metrics as $metric): ?>
         <tr>
             <td>
-                <?= $this->e($metric['user']) ?>
+                <?= $this->text->e($metric['user']) ?>
             </td>
             <td>
                 <?= $metric['nb_tasks'] ?>

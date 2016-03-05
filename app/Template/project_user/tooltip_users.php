@@ -6,7 +6,7 @@
         <strong><?= $role_name ?></strong>
         <ul>
             <?php foreach ($users[$role] as $user_id => $user): ?>
-                <li><?= $this->url->link($this->e($user), 'Projectuser', 'opens', array('user_id' => $user_id)) ?></li>
+                <li><?= $this->url->link($this->text->e($user), 'Projectuser', 'opens', array('user_id' => $user_id)) ?></li>
             <?php endforeach ?>
         </ul>
         <?php endif ?>

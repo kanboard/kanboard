@@ -18,8 +18,8 @@
         <td><?= $this->dt->datetime($token['date_creation']) ?></td>
         <td><?= $this->dt->datetime($token['date_expiration']) ?></td>
         <td><?= $token['is_active'] == 0 ? t('No') : t('Yes') ?></td>
-        <td><?= $this->e($token['ip']) ?></td>
-        <td><?= $this->e($token['user_agent']) ?></td>
+        <td><?= $this->text->e($token['ip']) ?></td>
+        <td><?= $this->text->e($token['user_agent']) ?></td>
     </tr>
     <?php endforeach ?>
     </table>

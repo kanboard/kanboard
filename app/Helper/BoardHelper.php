@@ -2,13 +2,15 @@
 
 namespace Kanboard\Helper;
 
+use Kanboard\Core\Base;
+
 /**
  * Board Helper
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class Board extends \Kanboard\Core\Base
+class BoardHelper extends Base
 {
     /**
      * Return true if tasks are collapsed

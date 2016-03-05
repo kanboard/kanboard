@@ -10,7 +10,7 @@ use Kanboard\Core\Base;
  * @package helper
  * @author  Frederic Guillot
  */
-class Layout extends Base
+class LayoutHelper extends Base
 {
     /**
      * Render a template without the layout if Ajax request

@@ -27,7 +27,7 @@
             <td>
                 <?php if ($is_public): ?>
                     <?= $this->url->link(
-                        $this->e('#'.$link['task_id'].' '.$link['title']),
+                        $this->text->e('#'.$link['task_id'].' '.$link['title']),
                         'task',
                         'readonly',
                         array('task_id' => $link['task_id'], 'token' => $project['token']),
@@ -36,7 +36,7 @@
                     ) ?>
                 <?php else: ?>
                     <?= $this->url->link(
-                        $this->e('#'.$link['task_id'].' '.$link['title']),
+                        $this->text->e('#'.$link['task_id'].' '.$link['title']),
                         'task',
                         'show',
                         array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
@@ -48,21 +48,21 @@
                 <br>
 
                 <?php if (! empty($link['task_time_spent'])): ?>
-                    <strong><?= $this->e($link['task_time_spent']).'h' ?></strong> <?= t('spent') ?>
+                    <strong><?= $this->text->e($link['task_time_spent']).'h' ?></strong> <?= t('spent') ?>
                 <?php endif ?>
 
                 <?php if (! empty($link['task_time_estimated'])): ?>
-                    <strong><?= $this->e($link['task_time_estimated']).'h' ?></strong> <?= t('estimated') ?>
+                    <strong><?= $this->text->e($link['task_time_estimated']).'h' ?></strong> <?= t('estimated') ?>
                 <?php endif ?>
             </td>
-            <td><?= $this->e($link['project_name']) ?></td>
-            <td><?= $this->e($link['column_title']) ?></td>
+            <td><?= $this->text->e($link['project_name']) ?></td>
+            <td><?= $this->text->e($link['column_title']) ?></td>
             <td>
                 <?php if (! empty($link['task_assignee_username'])): ?>
                     <?php if ($editable): ?>
-                        <?= $this->url->link($this->e($link['task_assignee_name'] ?: $link['task_assignee_username']), 'user', 'show', array('user_id' => $link['task_assignee_id'])) ?>
+                        <?= $this->url->link($this->text->e($link['task_assignee_name'] ?: $link['task_assignee_username']), 'user', 'show', array('user_id' => $link['task_assignee_id'])) ?>
                     <?php else: ?>
-                        <?= $this->e($link['task_assignee_name'] ?: $link['task_assignee_username']) ?>
+                        <?= $this->text->e($link['task_assignee_name'] ?: $link['task_assignee_username']) ?>
                     <?php endif ?>
                 <?php endif ?>
             </td>

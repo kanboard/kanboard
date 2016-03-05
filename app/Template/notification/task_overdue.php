@@ -5,9 +5,9 @@
         <li>
             (<strong>#<?= $task['id'] ?></strong>)
             <?php if ($application_url): ?>
-                <a href="<?= $this->url->href('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', true) ?>"><?= $this->e($task['title']) ?></a>
+                <a href="<?= $this->url->href('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', true) ?>"><?= $this->text->e($task['title']) ?></a>
             <?php else: ?>
-                <?= $this->e($task['title']) ?>
+                <?= $this->text->e($task['title']) ?>
             <?php endif ?>
             (<?= $this->dt->date($task['date_due']) ?>)
             <?php if ($task['assignee_username']): ?>

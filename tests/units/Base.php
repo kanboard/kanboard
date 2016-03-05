@@ -33,6 +33,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
         }
 
         $this->container = new Pimple\Container;
+        $this->container->register(new Kanboard\ServiceProvider\HelperProvider);
         $this->container->register(new Kanboard\ServiceProvider\AuthenticationProvider);
         $this->container->register(new Kanboard\ServiceProvider\DatabaseProvider);
         $this->container->register(new Kanboard\ServiceProvider\ClassProvider);

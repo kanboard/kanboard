@@ -1,4 +1,4 @@
-<h2><?= $this->e($task['title']) ?> (#<?= $task['id'] ?>)</h2>
+<h2><?= $this->text->e($task['title']) ?> (#<?= $task['id'] ?>)</h2>
 
 <ul>
     <li>

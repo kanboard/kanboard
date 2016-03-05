@@ -22,7 +22,7 @@
     <ul>
         <li>
             <?= t('Webhook token:') ?>
-            <strong><?= $this->e($values['webhook_token']) ?></strong>
+            <strong><?= $this->text->e($values['webhook_token']) ?></strong>
         </li>
         <li>
             <?= t('URL for task creation:') ?>

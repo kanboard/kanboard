@@ -27,13 +27,13 @@
             <tr>
                 <td>
                     <?= '#'.$user['id'] ?>&nbsp;
-                    <?= $this->url->link($this->e($user['username']), 'user', 'show', array('user_id' => $user['id'])) ?>
+                    <?= $this->url->link($this->text->e($user['username']), 'user', 'show', array('user_id' => $user['id'])) ?>
                 </td>
                 <td>
-                    <?= $this->e($user['name']) ?>
+                    <?= $this->text->e($user['name']) ?>
                 </td>
                 <td>
-                    <a href="mailto:<?= $this->e($user['email']) ?>"><?= $this->e($user['email']) ?></a>
+                    <a href="mailto:<?= $this->text->e($user['email']) ?>"><?= $this->text->e($user['email']) ?></a>
                 </td>
                 <td>
                     <?= $this->user->getRoleName($user['role']) ?>

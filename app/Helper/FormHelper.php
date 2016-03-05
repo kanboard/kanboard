@@ -10,7 +10,7 @@ use Kanboard\Core\Base;
  * @package helper
  * @author  Frederic Guillot
  */
-class Form extends Base
+class FormHelper extends Base
 {
     /**
      * Hidden CSRF token field
@@ -52,7 +52,7 @@ class Form extends Base
         $html = '<select name="'.$name.'" id="form-'.$name.'" class="'.$class.'" '.implode(' ', $attributes).'>';
 
         foreach ($options as $id => $value) {
-            $html .= '<option value="'.$this->helper->e($id).'"';
+            $html .= '<option value="'.$this->helper->text->e($id).'"';
 
             if (isset($values->$name) && $id == $values->$name) {
                 $html .= ' selected="selected"';
@@ -61,7 +61,7 @@ class Form extends Base
                 $html .= ' selected="selected"';
             }
 
-            $html .= '>'.$this->helper->e($value).'</option>';
+            $html .= '>'.$this->helper->text->e($value).'</option>';
         }
 
         $html .= '</select>';
@@ -103,7 +103,7 @@ class Form extends Base
      */
     public function radio($name, $label, $value, $selected = false, $class = '')
     {
-        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->helper->e($value).'" '.($selected ? 'checked="checked"' : '').'> '.$this->helper->e($label).'</label>';
+        return '<label><input type="radio" name="'.$name.'" class="'.$class.'" value="'.$this->helper->text->e($value).'" '.($selected ? 'checked="checked"' : '').'> '.$this->helper->text->e($label).'</label>';
     }
 
     /**
@@ -139,7 +139,7 @@ class Form extends Base
      */
     public function checkbox($name, $label, $value, $checked = false, $class = '')
     {
-        return '<label><input type="checkbox" name="'.$name.'" class="'.$class.'" value="'.$this->helper->e($value).'" '.($checked ? 'checked="checked"' : '').'>&nbsp;'.$this->helper->e($label).'</label>';
+        return '<label><input type="checkbox" name="'.$name.'" class="'.$class.'" value="'.$this->helper->text->e($value).'" '.($checked ? 'checked="checked"' : '').'>&nbsp;'.$this->helper->text->e($label).'</label>';
     }
 
     /**
@@ -153,7 +153,7 @@ class Form extends Base
      */
     public function label($label, $name, array $attributes = array())
     {
-        return '<label for="form-'.$name.'" '.implode(' ', $attributes).'>'.$this->helper->e($label).'</label>';
+        return '<label for="form-'.$name.'" '.implode(' ', $attributes).'>'.$this->helper->text->e($label).'</label>';
     }
 
     /**
@@ -173,7 +173,7 @@ class Form extends Base
 
         $html = '<textarea name="'.$name.'" id="form-'.$name.'" class="'.$class.'" ';
         $html .= implode(' ', $attributes).'>';
-        $html .= isset($values->$name) ? $this->helper->e($values->$name) : isset($values[$name]) ? $values[$name] : '';
+        $html .= isset($values->$name) ? $this->helper->text->e($values->$name) : isset($values[$name]) ? $values[$name] : '';
         $html .= '</textarea>';
         $html .= $this->errorList($errors, $name);
 
@@ -334,7 +334,7 @@ class Form extends Base
             $html .= '<ul class="form-errors">';
 
             foreach ($errors[$name] as $error) {
-                $html .= '<li>'.$this->helper->e($error).'</li>';
+                $html .= '<li>'.$this->helper->text->e($error).'</li>';
             }
 
             $html .= '</ul>';
@@ -354,9 +354,9 @@ class Form extends Base
     private function formValue($values, $name)
     {
         if (isset($values->$name)) {
-            return 'value="'.$this->helper->e($values->$name).'"';
+            return 'value="'.$this->helper->text->e($values->$name).'"';
         }
 
-        return isset($values[$name]) ? 'value="'.$this->helper->e($values[$name]).'"' : '';
+        return isset($values[$name]) ? 'value="'.$this->helper->text->e($values[$name]).'"' : '';
     }
 }

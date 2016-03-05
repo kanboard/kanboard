@@ -26,10 +26,10 @@
 
             <span class="board-column-title">
                 <?php if ($not_editable): ?>
-                    <?= $this->e($column['title']) ?>
+                    <?= $this->text->e($column['title']) ?>
                 <?php else: ?>
                     <span class="dropdown">
-                        <a href="#" class="dropdown-menu"><?= $this->e($column['title']) ?> <i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-menu"><?= $this->text->e($column['title']) ?> <i class="fa fa-caret-down"></i></a>
                         <ul>
                             <li>
                                 <i class="fa fa-minus-square fa-fw"></i>
@@ -47,7 +47,7 @@
             </span>
 
             <?php if (! $not_editable && ! empty($column['description'])): ?>
-                <span class="tooltip pull-right" title='<?= $this->e($this->text->markdown($column['description'])) ?>'>
+                <span class="tooltip pull-right" title='<?= $this->text->e($this->text->markdown($column['description'])) ?>'>
                     &nbsp;<i class="fa fa-info-circle"></i>
                 </span>
             <?php endif ?>
@@ -60,7 +60,7 @@
 
             <?php if ($column['task_limit']): ?>
                 <span title="<?= t('Task limit') ?>">
-                    (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>/<?= $this->e($column['task_limit']) ?>)
+                    (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>/<?= $this->text->e($column['task_limit']) ?>)
                 </span>
             <?php else: ?>
                 <span title="<?= t('Task count') ?>" class="board-column-header-task-count">

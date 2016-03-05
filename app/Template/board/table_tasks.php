@@ -22,7 +22,7 @@
             <div class="board-column-collapsed">
                 <div class="board-rotation-wrapper">
                     <div class="board-column-title board-rotation board-toggle-column-view" data-column-id="<?= $column['id'] ?>" title="<?= t('Show this column') ?>">
-                        <i class="fa fa-plus-square tooltip" title="<?= $this->e($column['title']) ?>"></i> <?= $this->e($column['title']) ?>
+                        <i class="fa fa-plus-square tooltip" title="<?= $this->text->e($column['title']) ?>"></i> <?= $this->text->e($column['title']) ?>
                     </div>
                 </div>
             </div>

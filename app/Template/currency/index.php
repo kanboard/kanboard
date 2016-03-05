@@ -12,7 +12,7 @@
     <?php foreach ($rates as $rate): ?>
     <tr>
         <td>
-            <strong><?= $this->e($rate['currency']) ?></strong>
+            <strong><?= $this->text->e($rate['currency']) ?></strong>
         </td>
         <td>
             <?= n($rate['rate']) ?>

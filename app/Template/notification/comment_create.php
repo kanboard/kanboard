@@ -1,4 +1,4 @@
-<h2><?= $this->e($task['title']) ?> (#<?= $task['id'] ?>)</h2>
+<h2><?= $this->text->e($task['title']) ?> (#<?= $task['id'] ?>)</h2>
 
 <?php if (! empty($comment['username'])): ?>
     <h3><?= t('New comment posted by %s', $comment['name'] ?: $comment['username']) ?></h3>

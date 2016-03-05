@@ -19,7 +19,7 @@
 
         <div class="sidebar-content">
             <div class="page-header">
-                <h2><?= $this->e($title) ?></h2>
+                <h2><?= $this->text->e($title) ?></h2>
             </div>
             <?= $content_for_sublayout ?>
         </div>

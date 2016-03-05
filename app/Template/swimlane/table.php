@@ -10,7 +10,7 @@
         <?php if (! empty($default_swimlane)): ?>
         <tr>
             <td>
-                <?= $this->e($default_swimlane['default_swimlane']) ?>
+                <?= $this->text->e($default_swimlane['default_swimlane']) ?>
                 <?php if ($default_swimlane['default_swimlane'] !== t('Default swimlane')): ?>
                     &nbsp;(<?= t('Default swimlane') ?>)
                 <?php endif ?>
@@ -42,10 +42,10 @@
                     <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></i>
                 <?php endif ?>
 
-                <?= $this->e($swimlane['name']) ?>
+                <?= $this->text->e($swimlane['name']) ?>
 
                 <?php if (! empty($swimlane['description'])): ?>
-                    <span class="tooltip" title='<?= $this->e($this->text->markdown($swimlane['description'])) ?>'>
+                    <span class="tooltip" title='<?= $this->text->e($this->text->markdown($swimlane['description'])) ?>'>
                         <i class="fa fa-info-circle"></i>
                     </span>
                 <?php endif ?>

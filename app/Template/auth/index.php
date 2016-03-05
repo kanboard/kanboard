@@ -3,7 +3,7 @@
     <?= $this->hook->render('template:auth:login-form:before') ?>
 
     <?php if (isset($errors['login'])): ?>
-        <p class="alert alert-error"><?= $this->e($errors['login']) ?></p>
+        <p class="alert alert-error"><?= $this->text->e($errors['login']) ?></p>
     <?php endif ?>
 
     <?php if (! HIDE_LOGIN_FORM): ?>

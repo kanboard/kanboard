@@ -3,7 +3,7 @@
     <tr>
         <th>
             <i class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></i>
-            <?= $this->e($file['name']) ?>
+            <?= $this->text->e($file['name']) ?>
         </th>
     </tr>
     <tr>

@@ -11,8 +11,19 @@ use Kanboard\Core\Base;
  * @package helper
  * @author  Frederic Guillot
  */
-class Text extends Base
+class TextHelper extends Base
 {
+    /**
+     * HTML escaping
+     *
+     * @param  string   $value    Value to escape
+     * @return string
+     */
+    public function e($value)
+    {
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+    }
+
     /**
      * Markdown transformation
      *
@@ -88,7 +99,7 @@ class Text extends Base
     public function in($id, array $listing, $default_value = '?')
     {
         if (isset($listing[$id])) {
-            return $this->helper->e($listing[$id]);
+            return $this->helper->text->e($listing[$id]);
         }
 
         return $default_value;

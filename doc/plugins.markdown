@@ -13,6 +13,7 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 - [Override default application behaviors](plugin-overrides.markdown)
 - [Add schema migrations for plugins](plugin-schema-migrations.markdown)
 - [Custom routes](plugin-routes.markdown)
+- [Add helpers](plugin-helpers.markdown)
 - [Add mail transports](plugin-mail-transports.markdown)
 - [Add notification types](plugin-notifications.markdown)
 - [Add automatic actions](plugin-automatic-actions.markdown)

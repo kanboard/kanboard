@@ -5,12 +5,12 @@ namespace Kanboard\Helper;
 use Kanboard\Core\Base;
 
 /**
- * Application helpers
+ * Application Helper
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class App extends Base
+class AppHelper extends Base
 {
     /**
      * Get config variable
@@ -116,11 +116,11 @@ class App extends Base
         $failure_message = $this->flash->getMessage('failure');
 
         if (! empty($success_message)) {
-            return '<div class="alert alert-success alert-fade-out">'.$this->helper->e($success_message).'</div>';
+            return '<div class="alert alert-success alert-fade-out">'.$this->helper->text->e($success_message).'</div>';
         }
 
         if (! empty($failure_message)) {
-            return '<div class="alert alert-error">'.$this->helper->e($failure_message).'</div>';
+            return '<div class="alert alert-error">'.$this->helper->text->e($failure_message).'</div>';
         }
 
         return '';

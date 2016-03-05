@@ -18,21 +18,21 @@
                 <?= $this->render('task/dropdown', array('task' => array('id' => $subtask['task_id'], 'project_id' => $subtask['project_id']))) ?>
             </td>
             <td>
-                <?= $this->url->link($this->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
+                <?= $this->url->link($this->text->e($subtask['project_name']), 'board', 'show', array('project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->url->link($this->e($subtask['task_name']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
+                <?= $this->url->link($this->text->e($subtask['task_name']), 'task', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
                 <?= $this->subtask->toggleStatus($subtask, $subtask['project_id']) ?>
             </td>
             <td>
                 <?php if (! empty($subtask['time_spent'])): ?>
-                    <strong><?= $this->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
+                    <strong><?= $this->text->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
                 <?php endif ?>
 
                 <?php if (! empty($subtask['time_estimated'])): ?>
-                    <strong><?= $this->e($subtask['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
+                    <strong><?= $this->text->e($subtask['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
                 <?php endif ?>
             </td>
         </tr>

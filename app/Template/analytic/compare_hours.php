@@ -4,8 +4,8 @@
 
 <div class="listing">
     <ul>
-        <li><?= t('Estimated hours: ').'<strong>'.$this->e($metrics['open']['time_estimated'] + $metrics['closed']['time_estimated']) ?></strong></li>
-        <li><?= t('Actual hours: ').'<strong>'.$this->e($metrics['open']['time_spent'] + $metrics['closed']['time_spent']) ?></strong></li>
+        <li><?= t('Estimated hours: ').'<strong>'.$this->text->e($metrics['open']['time_estimated'] + $metrics['closed']['time_estimated']) ?></strong></li>
+        <li><?= t('Actual hours: ').'<strong>'.$this->text->e($metrics['open']['time_spent'] + $metrics['closed']['time_spent']) ?></strong></li>
     </ul>
 </div>
 
@@ -34,10 +34,10 @@
             <?php foreach ($paginator->getCollection() as $task): ?>
             <tr>
                 <td class="task-table color-<?= $task['color_id'] ?>">
-                    <?= $this->url->link('#'.$this->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+                    <?= $this->url->link('#'.$this->text->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
                 </td>
                 <td>
-                    <?= $this->url->link($this->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+                    <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
                 </td>
                 <td>
                     <?php if ($task['is_active'] == \Kanboard\Model\Task::STATUS_OPEN): ?>
@@ -47,10 +47,10 @@
                     <?php endif ?>
                 </td>
                 <td>
-                    <?= $this->e($task['time_estimated']) ?>
+                    <?= $this->text->e($task['time_estimated']) ?>
                 </td>
                 <td>
-                    <?= $this->e($task['time_spent']) ?>
+                    <?= $this->text->e($task['time_spent']) ?>
                 </td>
             </tr>
             <?php endforeach ?>

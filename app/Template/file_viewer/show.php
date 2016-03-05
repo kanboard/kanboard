@@ -1,9 +1,9 @@
 <div class="page-header">
-    <h2><?= $this->e($file['name']) ?></h2>
+    <h2><?= $this->text->e($file['name']) ?></h2>
 </div>
 <div class="file-viewer">
     <?php if ($file['is_image']): ?>
-        <img src="<?= $this->url->href('FileViewer', 'image', $params) ?>" alt="<?= $this->e($file['name']) ?>">
+        <img src="<?= $this->url->href('FileViewer', 'image', $params) ?>" alt="<?= $this->text->e($file['name']) ?>">
     <?php elseif ($type === 'markdown'): ?>
         <article class="markdown">
             <?= $this->text->markdown($content) ?>

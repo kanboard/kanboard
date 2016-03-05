@@ -19,7 +19,7 @@
             </tr>
             <?php foreach ($users as $user): ?>
             <tr>
-                <td><?= $this->e($user['name'] ?: $user['username']) ?></td>
+                <td><?= $this->text->e($user['name'] ?: $user['username']) ?></td>
                 <td>
                     <?= $this->form->select(
                         'role-'.$user['id'],
@@ -79,7 +79,7 @@
             </tr>
             <?php foreach ($groups as $group): ?>
             <tr>
-                <td><?= $this->e($group['name']) ?></td>
+                <td><?= $this->text->e($group['name']) ?></td>
                 <td>
                     <?= $this->form->select(
                         'role-'.$group['id'],

@@ -3,6 +3,7 @@
 namespace Kanboard\Helper;
 
 use DateTime;
+use Kanboard\Core\Base;
 
 /**
  * DateTime helpers
@@ -10,7 +11,7 @@ use DateTime;
  * @package helper
  * @author  Frederic Guillot
  */
-class Dt extends \Kanboard\Core\Base
+class DateHelper extends Base
 {
     /**
      * Get formatted time

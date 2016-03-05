@@ -2,13 +2,15 @@
 
 namespace Kanboard\Helper;
 
+use Kanboard\Core\Base;
+
 /**
  * Template Hook helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class Hook extends \Kanboard\Core\Base
+class HookHelper extends Base
 {
     /**
      * Add assets JS or CSS

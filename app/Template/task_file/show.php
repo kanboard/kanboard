@@ -8,11 +8,11 @@
         <div class="file-thumbnails">
             <?php foreach ($images as $file): ?>
                 <div class="file-thumbnail">
-                    <a href="<?= $this->url->href('FileViewer', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>" class="popover"><img src="<?= $this->url->href('FileViewer', 'thumbnail', array('file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" title="<?= $this->e($file['name']) ?>" alt="<?= $this->e($file['name']) ?>"></a>
+                    <a href="<?= $this->url->href('FileViewer', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>" class="popover"><img src="<?= $this->url->href('FileViewer', 'thumbnail', array('file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" title="<?= $this->text->e($file['name']) ?>" alt="<?= $this->text->e($file['name']) ?>"></a>
                     <div class="file-thumbnail-content">
                         <div class="file-thumbnail-title">
                             <div class="dropdown">
-                            <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
+                            <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
                             <ul>
                                 <li>
                                     <i class="fa fa-download fa-fw"></i>
@@ -52,7 +52,7 @@
                     <td>
                         <i class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></i>
                         <div class="dropdown">
-                            <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
+                            <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
                             <ul>
                                 <?php if ($this->file->getPreviewType($file['name']) !== null): ?>
                                 <li>
@@ -74,7 +74,7 @@
                         </div>
                     </td>
                     <td>
-                        <?= $this->e($file['user_name'] ?: $file['username']) ?>
+                        <?= $this->text->e($file['user_name'] ?: $file['username']) ?>
                     </td>
                     <td>
                         <?= $this->dt->date($file['date']) ?>

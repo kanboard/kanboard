@@ -19,7 +19,7 @@
     </span>
 
     <div class="task-board-title">
-        <?= $this->url->link($this->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
+        <?= $this->url->link($this->text->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
     </div>
 
     <?= $this->render('board/task_footer', array(

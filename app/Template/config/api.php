@@ -5,7 +5,7 @@
     <ul>
         <li>
             <?= t('API token:') ?>
-            <strong><?= $this->e($values['api_token']) ?></strong>
+            <strong><?= $this->text->e($values['api_token']) ?></strong>
         </li>
         <li>
             <?= t('API endpoint:') ?>

@@ -331,7 +331,7 @@ abstract class Base extends \Kanboard\Core\Base
     protected function getProjectDescription(array &$project)
     {
         if ($project['owner_id'] > 0) {
-            $description = t('Project owner: ').'**'.$this->template->e($project['owner_name'] ?: $project['owner_username']).'**'.PHP_EOL.PHP_EOL;
+            $description = t('Project owner: ').'**'.$this->helper->text->e($project['owner_name'] ?: $project['owner_username']).'**'.PHP_EOL.PHP_EOL;
 
             if (! empty($project['description'])) {
                 $description .= '***'.PHP_EOL.PHP_EOL;

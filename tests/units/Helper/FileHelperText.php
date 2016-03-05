@@ -2,20 +2,20 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Helper\File;
+use Kanboard\Helper\FileHelper;
 
 class FileHelperTest extends Base
 {
     public function testIcon()
     {
-        $helper = new File($this->container);
+        $helper = new FileHelper($this->container);
         $this->assertEquals('fa-file-image-o', $helper->icon('test.png'));
         $this->assertEquals('fa-file-o', $helper->icon('test'));
     }
 
     public function testGetMimeType()
     {
-        $helper = new File($this->container);
+        $helper = new FileHelper($this->container);
 
         $this->assertEquals('image/jpeg', $helper->getImageMimeType('My File.JPG'));
         $this->assertEquals('image/jpeg', $helper->getImageMimeType('My File.jpeg'));
@@ -27,7 +27,7 @@ class FileHelperTest extends Base
 
     public function testGetPreviewType()
     {
-        $helper = new File($this->container);
+        $helper = new FileHelper($this->container);
         $this->assertEquals('text', $helper->getPreviewType('test.txt'));
         $this->assertEquals('markdown', $helper->getPreviewType('test.markdown'));
         $this->assertEquals('md', $helper->getPreviewType('test.md'));

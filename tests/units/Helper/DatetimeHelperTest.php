@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Helper\Dt;
+use Kanboard\Helper\DateHelper;
 
 class DatetimeHelperTest extends Base
 {
     public function testGetTime()
     {
-        $helper = new Dt($this->container);
+        $helper = new DateHelper($this->container);
         $this->assertEquals('17:25', $helper->time(1422206700));
     }
 
     public function testGetDate()
     {
-        $helper = new Dt($this->container);
+        $helper = new DateHelper($this->container);
         $this->assertEquals('01/25/2015', $helper->date(1422206700));
         $this->assertEquals('01/25/2015', $helper->date('2015-01-25'));
         $this->assertEquals('', $helper->date('0'));
@@ -24,13 +24,13 @@ class DatetimeHelperTest extends Base
 
     public function testGetDatetime()
     {
-        $helper = new Dt($this->container);
+        $helper = new DateHelper($this->container);
         $this->assertEquals('01/25/2015 17:25', $helper->datetime(1422206700));
     }
 
     public function testAge()
     {
-        $helper = new Dt($this->container);
+        $helper = new DateHelper($this->container);
 
         $this->assertEquals('&lt;15m', $helper->age(0, 30));
         $this->assertEquals('&lt;30m', $helper->age(0, 1000));
@@ -42,7 +42,7 @@ class DatetimeHelperTest extends Base
 
     public function testGetDayHours()
     {
-        $helper = new Dt($this->container);
+        $helper = new DateHelper($this->container);
 
         $slots = $helper->getDayHours();
 
@@ -58,7 +58,7 @@ class DatetimeHelperTest extends Base
 
     public function testGetWeekDays()
     {
-        $helper = new Dt($this->container);
+        $helper = new DateHelper($this->container);
 
         $slots = $helper->getWeekDays();
 
@@ -70,7 +70,7 @@ class DatetimeHelperTest extends Base
 
     public function testGetWeekDay()
     {
-        $helper = new Dt($this->container);
+        $helper = new DateHelper($this->container);
 
         $this->assertEquals('Monday', $helper->getWeekDay(1));
         $this->assertEquals('Sunday', $helper->getWeekDay(7));

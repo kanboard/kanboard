@@ -22,13 +22,13 @@
                     <?= $link['type'] ?>
                 </td>
                 <td>
-                    <a href="<?= $link['url'] ?>" target="_blank"><?= $this->e($link['title']) ?></a>
+                    <a href="<?= $link['url'] ?>" target="_blank"><?= $this->text->e($link['title']) ?></a>
                 </td>
                 <td>
-                    <?= $this->e($link['dependency_label']) ?>
+                    <?= $this->text->e($link['dependency_label']) ?>
                 </td>
                 <td>
-                    <?= $this->e($link['creator_name'] ?: $link['creator_username']) ?>
+                    <?= $this->text->e($link['creator_name'] ?: $link['creator_username']) ?>
                 </td>
                 <td>
                     <?= $this->dt->date($link['date_creation']) ?>

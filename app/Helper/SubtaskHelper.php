@@ -2,13 +2,15 @@
 
 namespace Kanboard\Helper;
 
+use Kanboard\Core\Base;
+
 /**
  * Subtask helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class Subtask extends \Kanboard\Core\Base
+class SubtaskHelper extends Base
 {
     public function getTitle(array $subtask)
     {
@@ -20,7 +22,7 @@ class Subtask extends \Kanboard\Core\Base
             $html = '<i class="fa fa-check-square-o fa-fw"></i>';
         }
 
-        return $html.$this->helper->e($subtask['title']);
+        return $html.$this->helper->text->e($subtask['title']);
     }
 
     /**

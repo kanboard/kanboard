@@ -40,21 +40,25 @@ namespace {
             $this->assertEquals('userImport', $dispatcher->sanitize('userImport', 'default'));
         }
 
-        public function testGetPath()
+        public function testGetPathWithFolder()
         {
-            $dispatcher = new Router($this->container);
-
-            $this->container['helper'] = new Helper($this->container);
+            $router = new Router($this->container);
             $this->container['request'] = new Request($this->container, array('PHP_SELF' => '/index.php', 'REQUEST_URI' => '/a/b/c', 'REQUEST_METHOD' => 'GET'));
-            $this->assertEquals('a/b/c', $dispatcher->getPath());
+            $this->assertEquals('a/b/c', $router->getPath());
+        }
 
-            $this->container['helper'] = new Helper($this->container);
+        public function testGetPathWithQueryString()
+        {
+            $router = new Router($this->container);
             $this->container['request'] = new Request($this->container, array('PHP_SELF' => '/index.php', 'REQUEST_URI' => '/a/b/something?test=a', 'QUERY_STRING' => 'test=a', 'REQUEST_METHOD' => 'GET'));
-            $this->assertEquals('a/b/something', $dispatcher->getPath());
+            $this->assertEquals('a/b/something', $router->getPath());
+        }
 
-            $this->container['helper'] = new Helper($this->container);
+        public function testGetPathWithSubFolderAndQueryString()
+        {
+            $router = new Router($this->container);
             $this->container['request'] = new Request($this->container, array('PHP_SELF' => '/a/index.php', 'REQUEST_URI' => '/a/b/something?test=a', 'QUERY_STRING' => 'test=a', 'REQUEST_METHOD' => 'GET'));
-            $this->assertEquals('b/something', $dispatcher->getPath());
+            $this->assertEquals('b/something', $router->getPath());
         }
 
         public function testDispatcherWithControllerNotFound()

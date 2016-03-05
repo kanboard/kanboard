@@ -2,13 +2,15 @@
 
 namespace Kanboard\Helper;
 
+use Kanboard\Core\Base;
+
 /**
  * User helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class User extends \Kanboard\Core\Base
+class UserHelper extends Base
 {
     /**
      * Return true if the logged user as unread notifications
@@ -168,7 +170,7 @@ class User extends \Kanboard\Core\Base
     public function avatar($email, $alt = '')
     {
         if (! empty($email) && $this->config->get('integration_gravatar') == 1) {
-            return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=25" alt="'.$this->helper->e($alt).'" title="'.$this->helper->e($alt).'">';
+            return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=25" alt="'.$this->helper->text->e($alt).'" title="'.$this->helper->text->e($alt).'">';
         }
 
         return '';

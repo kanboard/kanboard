@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Helper\User;
+use Kanboard\Helper\UserHelper;
 use Kanboard\Model\Project;
 use Kanboard\Model\ProjectUserRole;
 use Kanboard\Model\User as UserModel;
@@ -12,7 +12,7 @@ class UserHelperTest extends Base
 {
     public function testInitials()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
 
         $this->assertEquals('CN', $helper->getInitials('chuck norris'));
         $this->assertEquals('A', $helper->getInitials('admin'));
@@ -20,7 +20,7 @@ class UserHelperTest extends Base
 
     public function testGetRoleName()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
         $this->assertEquals('Administrator', $helper->getRoleName(Role::APP_ADMIN));
         $this->assertEquals('Manager', $helper->getRoleName(Role::APP_MANAGER));
         $this->assertEquals('Project Viewer', $helper->getRoleName(Role::PROJECT_VIEWER));
@@ -28,7 +28,7 @@ class UserHelperTest extends Base
 
     public function testHasAccessForAdmins()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -42,7 +42,7 @@ class UserHelperTest extends Base
 
     public function testHasAccessForManagers()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -56,7 +56,7 @@ class UserHelperTest extends Base
 
     public function testHasAccessForUsers()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -70,7 +70,7 @@ class UserHelperTest extends Base
 
     public function testHasProjectAccessForAdmins()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
         $project = new Project($this->container);
 
         $this->container['sessionStorage']->user = array(
@@ -86,7 +86,7 @@ class UserHelperTest extends Base
 
     public function testHasProjectAccessForManagers()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
         $project = new Project($this->container);
 
         $this->container['sessionStorage']->user = array(
@@ -102,7 +102,7 @@ class UserHelperTest extends Base
 
     public function testHasProjectAccessForUsers()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
         $project = new Project($this->container);
 
         $this->container['sessionStorage']->user = array(
@@ -118,7 +118,7 @@ class UserHelperTest extends Base
 
     public function testHasProjectAccessForAppManagerAndProjectManagers()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
         $user = new UserModel($this->container);
         $project = new Project($this->container);
         $projectUserRole = new ProjectUserRole($this->container);
@@ -146,7 +146,7 @@ class UserHelperTest extends Base
 
     public function testHasProjectAccessForProjectManagers()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
         $user = new UserModel($this->container);
         $project = new Project($this->container);
         $projectUserRole = new ProjectUserRole($this->container);
@@ -174,7 +174,7 @@ class UserHelperTest extends Base
 
     public function testHasProjectAccessForProjectMembers()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
         $user = new UserModel($this->container);
         $project = new Project($this->container);
         $projectUserRole = new ProjectUserRole($this->container);
@@ -202,7 +202,7 @@ class UserHelperTest extends Base
 
     public function testHasProjectAccessForProjectViewers()
     {
-        $helper = new User($this->container);
+        $helper = new UserHelper($this->container);
         $user = new UserModel($this->container);
         $project = new Project($this->container);
         $projectUserRole = new ProjectUserRole($this->container);

@@ -10,7 +10,7 @@ use Kanboard\Core\Base;
  * @package helper
  * @author  Frederic Guillot
  */
-class Model extends Base
+class ModelHelper extends Base
 {
     /**
      * Remove keys from an array

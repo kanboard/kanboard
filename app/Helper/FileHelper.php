@@ -2,13 +2,15 @@
 
 namespace Kanboard\Helper;
 
+use Kanboard\Core\Base;
+
 /**
  * File helpers
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class File extends \Kanboard\Core\Base
+class FileHelper extends Base
 {
     /**
      * Get file icon

@@ -5,12 +5,12 @@ namespace Kanboard\Helper;
 use Kanboard\Core\Base;
 
 /**
- * Url helpers
+ * Url Helper
  *
  * @package helper
  * @author  Frederic Guillot
  */
-class Url extends Base
+class UrlHelper extends Base
 {
     private $base = '';
     private $directory = '';

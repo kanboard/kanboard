@@ -5,7 +5,7 @@
 <?php if (! empty($secret) || ! empty($qrcode_url) || ! empty($key_url)): ?>
 <div class="listing">
     <?php if (! empty($secret)): ?>
-        <p><?= t('Secret key: ') ?><strong><?= $this->e($secret) ?></strong></p>
+        <p><?= t('Secret key: ') ?><strong><?= $this->text->e($secret) ?></strong></p>
     <?php endif ?>
 
     <?php if (! empty($qrcode_url)): ?>
@@ -13,7 +13,7 @@
     <?php endif ?>
 
     <?php if (! empty($key_url)): ?>
-        <p><?= t('This QR code contains the key URI: ') ?><a href="<?= $this->e($key_url) ?>"><?= $this->e($key_url) ?></a></p>
+        <p><?= t('This QR code contains the key URI: ') ?><a href="<?= $this->text->e($key_url) ?>"><?= $this->text->e($key_url) ?></a></p>
     <?php endif ?>
 </div>
 <?php endif ?>

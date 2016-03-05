@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Helper\Hook;
+use Kanboard\Helper\HookHelper;
 
 class HookHelperTest extends Base
 {
@@ -10,7 +10,7 @@ class HookHelperTest extends Base
     {
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
-            ->setConstructorArgs(array($this->container))
+            ->setConstructorArgs(array($this->container['helper']))
             ->setMethods(array('render'))
             ->getMock();
 
@@ -32,7 +32,7 @@ class HookHelperTest extends Base
             )
             ->will($this->returnValue('tpl2_content'));
 
-        $h = new Hook($this->container);
+        $h = new HookHelper($this->container);
         $h->attach('test', 'tpl1');
         $h->attach('test', 'tpl2');
         $this->assertEquals('tpl1_contenttpl2_content', $h->render('test'));
@@ -41,7 +41,7 @@ class HookHelperTest extends Base
     public function testAssetHooks()
     {
         $this->container['helper']->asset = $this
-            ->getMockBuilder('\Kanboard\Helper\Asset')
+            ->getMockBuilder('\Kanboard\Helper\AssetHelper')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('css', 'js'))
             ->getMock();
@@ -64,7 +64,7 @@ class HookHelperTest extends Base
             )
             ->will($this->returnValue('<script src="skin.js"></script>'));
 
-        $h = new Hook($this->container);
+        $h = new HookHelper($this->container);
         $h->attach('test1', 'skin.css');
         $h->attach('test2', 'skin.js');
 

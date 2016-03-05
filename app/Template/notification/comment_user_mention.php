@@ -1,6 +1,6 @@
 <h2><?= t('You were mentioned in a comment on the task #%d', $task['id']) ?></h2>
 
-<p><?= $this->e($task['title']) ?></p>
+<p><?= $this->text->e($task['title']) ?></p>
 
 <?= $this->text->markdown($comment['comment']) ?>
 

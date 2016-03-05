@@ -6,7 +6,7 @@
         </td>
         <td>
             <?php if (! empty($subtask['username'])): ?>
-                    <?= $this->e($subtask['name'] ?: $subtask['username']) ?>
+                    <?= $this->text->e($subtask['name'] ?: $subtask['username']) ?>
             <?php endif ?>
         </td>
     </tr>

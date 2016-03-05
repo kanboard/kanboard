@@ -49,12 +49,12 @@
                     <?php endif ?>
 
                     <?php if (! empty($project['description'])): ?>
-                        <span class="tooltip" title='<?= $this->e($this->text->markdown($project['description'])) ?>'>
+                        <span class="tooltip" title='<?= $this->text->e($this->text->markdown($project['description'])) ?>'>
                             <i class="fa fa-info-circle"></i>
                         </span>
                     <?php endif ?>
 
-                    <?= $this->url->link($this->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
+                    <?= $this->url->link($this->text->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
                 </td>
                 <td>
                     <?= $this->dt->date($project['start_date']) ?>
@@ -64,7 +64,7 @@
                 </td>
                 <td>
                     <?php if ($project['owner_id'] > 0): ?>
-                        <?= $this->e($project['owner_name'] ?: $project['owner_username']) ?>
+                        <?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?>
                     <?php endif ?>
                 </td>
                 <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
@@ -76,7 +76,7 @@
                 <td class="dashboard-project-stats">
                     <?php foreach ($project['columns'] as $column): ?>
                         <strong title="<?= t('Task count') ?>"><?= $column['nb_tasks'] ?></strong>
-                        <span><?= $this->e($column['title']) ?></span>
+                        <span><?= $this->text->e($column['title']) ?></span>
                     <?php endforeach ?>
                 </td>
             </tr>

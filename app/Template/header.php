@@ -5,10 +5,10 @@
                 <?= $this->url->link('K<span>B</span>', 'app', 'index', array(), false, '', t('Dashboard')) ?>
             </span>
             <span class="title">
-                <?= $this->e($title) ?>
+                <?= $this->text->e($title) ?>
             </span>
             <?php if (! empty($description)): ?>
-                <span class="tooltip" title='<?= $this->e($this->text->markdown($description)) ?>'>
+                <span class="tooltip" title='<?= $this->text->e($this->text->markdown($description)) ?>'>
                     <i class="fa fa-info-circle"></i>
                 </span>
             <?php endif ?>
@@ -26,7 +26,7 @@
                         data-redirect-url="<?= $this->url->href('board', 'show', array('project_id' => 'PROJECT_ID')) ?>">
                     <option value=""></option>
                     <?php foreach ($board_selector as $board_id => $board_name): ?>
-                        <option value="<?= $board_id ?>"><?= $this->e($board_name) ?></option>
+                        <option value="<?= $board_id ?>"><?= $this->text->e($board_name) ?></option>
                     <?php endforeach ?>
                 </select>
             </li>
@@ -60,7 +60,7 @@
                 <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
-                        <li class="no-hover"><strong><?= $this->e($this->user->getFullname()) ?></strong></li>
+                        <li class="no-hover"><strong><?= $this->text->e($this->user->getFullname()) ?></strong></li>
                         <li>
                             <i class="fa fa-tachometer fa-fw"></i>
                             <?= $this->url->link(t('My dashboard'), 'app', 'index', array('user_id' => $this->user->getId())) ?>

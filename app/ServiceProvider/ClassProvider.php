@@ -117,9 +117,7 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Core' => array(
             'DateParser',
-            'Helper',
             'Lexer',
-            'Template',
         ),
         'Core\Event' => array(
             'EventManager',

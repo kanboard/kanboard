@@ -17,14 +17,14 @@
     <tr>
         <td>
             <?php if ($plugin->getPluginHomepage()): ?>
-                <a href="<?= $plugin->getPluginHomepage() ?>" target="_blank" rel="noreferrer"><?= $this->e($plugin->getPluginName()) ?></a>
+                <a href="<?= $plugin->getPluginHomepage() ?>" target="_blank" rel="noreferrer"><?= $this->text->e($plugin->getPluginName()) ?></a>
             <?php else: ?>
-                <?= $this->e($plugin->getPluginName()) ?>
+                <?= $this->text->e($plugin->getPluginName()) ?>
             <?php endif ?>
         </td>
-        <td><?= $this->e($plugin->getPluginAuthor()) ?></td>
-        <td><?= $this->e($plugin->getPluginVersion()) ?></td>
-        <td><?= $this->e($plugin->getPluginDescription()) ?></td>
+        <td><?= $this->text->e($plugin->getPluginAuthor()) ?></td>
+        <td><?= $this->text->e($plugin->getPluginVersion()) ?></td>
+        <td><?= $this->text->e($plugin->getPluginDescription()) ?></td>
     </tr>
     <?php endforeach ?>
 <?php endif ?>

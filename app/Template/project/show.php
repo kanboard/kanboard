@@ -5,7 +5,7 @@
     <li><strong><?= $project['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
 
     <?php if ($project['owner_id'] > 0): ?>
-        <li><?= t('Project owner: ') ?><strong><?= $this->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>
+        <li><?= t('Project owner: ') ?><strong><?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>
     <?php endif ?>
 
     <?php if ($project['is_private']): ?>
@@ -61,9 +61,9 @@
     <?php foreach ($stats['columns'] as $column): ?>
     <tr>
         <td>
-            <?= $this->e($column['title']) ?>
+            <?= $this->text->e($column['title']) ?>
             <?php if (! empty($column['description'])): ?>
-                <span class="tooltip" title='<?= $this->e($this->text->markdown($column['description'])) ?>'>
+                <span class="tooltip" title='<?= $this->text->e($this->text->markdown($column['description'])) ?>'>
                     <i class="fa fa-info-circle"></i>
                 </span>
             <?php endif ?>

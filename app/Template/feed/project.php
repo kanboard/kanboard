@@ -15,7 +15,7 @@
         <published><?= date(DATE_ATOM, $e['date_creation']) ?></published>
         <updated><?= date(DATE_ATOM, $e['date_creation']) ?></updated>
         <author>
-            <name><?= $this->e($e['author']) ?></name>
+            <name><?= $this->text->e($e['author']) ?></name>
         </author>
         <content type="html">
             <![CDATA[

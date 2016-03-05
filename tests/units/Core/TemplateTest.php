@@ -8,7 +8,7 @@ class TemplateTest extends Base
 {
     public function testGetTemplateFile()
     {
-        $t = new Template($this->container);
+        $t = new Template($this->container['helper']);
         $this->assertStringEndsWith(
             'app'.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR.'b.php',
             $t->getTemplateFile('a'.DIRECTORY_SEPARATOR.'b')
@@ -17,7 +17,7 @@ class TemplateTest extends Base
 
     public function testGetPluginTemplateFile()
     {
-        $t = new Template($this->container);
+        $t = new Template($this->container['helper']);
         $this->assertStringEndsWith(
             'app'.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.'Myplugin'.DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR.'b.php',
             $t->getTemplateFile('myplugin:a'.DIRECTORY_SEPARATOR.'b')
@@ -26,7 +26,7 @@ class TemplateTest extends Base
 
     public function testGetOverridedTemplateFile()
     {
-        $t = new Template($this->container);
+        $t = new Template($this->container['helper']);
         $t->setTemplateOverride('a'.DIRECTORY_SEPARATOR.'b', 'myplugin:c');
 
         $this->assertStringEndsWith(

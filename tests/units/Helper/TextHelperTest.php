@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Helper\Text;
+use Kanboard\Helper\TextHelper;
 
 class TextHelperTest extends Base
 {
     public function testMarkdownTaskLink()
     {
-        $h = new Text($this->container);
+        $h = new TextHelper($this->container);
 
         $this->assertEquals('<p>Test</p>', $h->markdown('Test'));
 
@@ -33,13 +33,13 @@ class TextHelperTest extends Base
 
     public function testMarkdownUserLink()
     {
-        $h = new Text($this->container);
+        $h = new TextHelper($this->container);
         $this->assertEquals('<p>Text <a href="?controller=user&amp;action=profile&amp;user_id=1" class="user-mention-link">@admin</a> @notfound</p>', $h->markdown('Text @admin @notfound'));
     }
 
     public function testFormatBytes()
     {
-        $h = new Text($this->container);
+        $h = new TextHelper($this->container);
 
         $this->assertEquals('1k', $h->bytes(1024));
         $this->assertEquals('33.71k', $h->bytes(34520));
@@ -47,7 +47,7 @@ class TextHelperTest extends Base
 
     public function testContains()
     {
-        $h = new Text($this->container);
+        $h = new TextHelper($this->container);
 
         $this->assertTrue($h->contains('abc', 'b'));
         $this->assertFalse($h->contains('abc', 'd'));
@@ -55,7 +55,7 @@ class TextHelperTest extends Base
 
     public function testInList()
     {
-        $h = new Text($this->container);
+        $h = new TextHelper($this->container);
         $this->assertEquals('?', $h->in('a', array('b' => 'c')));
         $this->assertEquals('c', $h->in('b', array('b' => 'c')));
     }

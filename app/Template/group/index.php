@@ -21,10 +21,10 @@
                     #<?= $group['id'] ?>
                 </td>
                 <td>
-                    <?= $this->e($group['external_id']) ?>
+                    <?= $this->text->e($group['external_id']) ?>
                 </td>
                 <td>
-                    <?= $this->e($group['name']) ?>
+                    <?= $this->text->e($group['name']) ?>
                 </td>
                 <td>
                     <div class="dropdown">

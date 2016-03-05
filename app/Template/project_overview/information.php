@@ -4,7 +4,7 @@
 <div class="listing">
 <ul>
     <?php if ($project['owner_id'] > 0): ?>
-        <li><?= t('Project owner: ') ?><strong><?= $this->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>
+        <li><?= t('Project owner: ') ?><strong><?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>
     <?php endif ?>
 
     <?php if (! empty($users)): ?>
