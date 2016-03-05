@@ -67,6 +67,7 @@ Contributors:
 - [Max Kamashev](https://github.com/ukko)
 - [mfoucrier](https://github.com/mfoucrier)
 - [Matthew Cillo](https://github.com/peripatetic-sojourner)
+- [Maxime Corteel](https://github.com/mcorteel)
 - [Mgro](https://github.com/mgro)
 - [Michael Lüpkes](https://github.com/mluepkes)
 - [Mihailov Vasilievic Filho](https://github.com/mihailov-vf)

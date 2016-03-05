@@ -16,7 +16,7 @@ function App() {
     this.poll();
 
     // Alert box fadeout
-    $(".alert-fade-out").delay(4000).fadeOut(800, function() {
+    $(".alert-fade-out").delay(5000).fadeOut(800, function() {
         $(this).remove();
     });
 }

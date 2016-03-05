@@ -48,9 +48,12 @@
 
 .alert-fade-out {
     position: fixed;
-        bottom: 0;
-        left: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
+    font-size: 1.1em;
+    padding-top: 15px;
+    padding-bottom: 15px;
     margin-bottom: 0;
     border-width: 1px 0 0;
     border-radius: 0;
