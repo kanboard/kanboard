@@ -5,6 +5,10 @@ Improvements:
 
 * Added support for HTTP header "X-Forwarded-Proto: https"
 
+Security issues:
+
+* Access allowed to any tasks from the shared public board by changing the URL parameters
+
 Version 1.0.26
 --------------
 

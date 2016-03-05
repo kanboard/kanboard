@@ -23,13 +23,17 @@ class Task extends Base
 
         // Token verification
         if (empty($project)) {
-            $this->forbidden(true);
+            return $this->forbidden(true);
         }
 
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
         if (empty($task)) {
-            $this->notfound(true);
+            return $this->notfound(true);
+        }
+
+        if ($task['project_id'] != $project['id']) {
+            return $this->forbidden(true);
         }
 
         $this->response->html($this->helper->layout->app('task/public', array(
