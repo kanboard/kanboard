@@ -9,6 +9,10 @@ Security issues:
 
 * Access allowed to any tasks from the shared public board by changing the URL parameters
 
+Bug fixes:
+
+* Ambiguous column name with very old version of Sqlite
+
 Version 1.0.26
 --------------
 

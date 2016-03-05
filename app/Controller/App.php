@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Model\Project as ProjectModel;
 use Kanboard\Model\Subtask as SubtaskModel;
 
 /**
@@ -26,7 +27,7 @@ class App extends Base
         return $this->paginator
             ->setUrl('app', $action, array('pagination' => 'projects', 'user_id' => $user_id))
             ->setMax($max)
-            ->setOrder('name')
+            ->setOrder(ProjectModel::TABLE.'.name')
             ->setQuery($this->project->getQueryColumnStats($this->projectPermission->getActiveProjectIds($user_id)))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'projects');
     }
