@@ -40,11 +40,12 @@ class FormHelper extends Base
      * Display a select field
      *
      * @access public
-     * @param  string  $name     Field name
-     * @param  array   $options  Options
-     * @param  array   $values   Form values
-     * @param  array   $errors   Form errors
-     * @param  string  $class    CSS class
+     * @param  string $name Field name
+     * @param  array $options Options
+     * @param  array $values Form values
+     * @param  array $errors Form errors
+     * @param  array $attributes
+     * @param  string $class CSS class
      * @return string
      */
     public function select($name, array $options, array $values = array(), array $errors = array(), array $attributes = array(), $class = '')

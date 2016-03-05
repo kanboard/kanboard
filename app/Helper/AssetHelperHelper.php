@@ -15,7 +15,8 @@ class AssetHelper extends Base
     /**
      * Add a Javascript asset
      *
-     * @param  string   $filename   Filename
+     * @param  string $filename Filename
+     * @param  bool   $async
      * @return string
      */
     public function js($filename, $async = false)

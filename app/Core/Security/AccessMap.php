@@ -39,7 +39,7 @@ class AccessMap
      *
      * @access public
      * @param  string $role
-     * @return Acl
+     * @return AccessMap
      */
     public function setDefaultRole($role)
     {
@@ -53,7 +53,7 @@ class AccessMap
      * @access public
      * @param  string $role
      * @param  array  $subroles
-     * @return Acl
+     * @return AccessMap
      */
     public function setRoleHierarchy($role, array $subroles)
     {
@@ -113,7 +113,7 @@ class AccessMap
      * @param  string $controller  Controller class name
      * @param  mixed  $methods     List of method name or just one method
      * @param  string $role        Lowest role required
-     * @return Acl
+     * @return AccessMap
      */
     public function add($controller, $methods, $role)
     {
@@ -135,7 +135,7 @@ class AccessMap
      * @param  string $controller
      * @param  string $method
      * @param  string $role
-     * @return Acl
+     * @return AccessMap
      */
     private function addRule($controller, $method, $role)
     {
@@ -157,7 +157,7 @@ class AccessMap
      * @access public
      * @param  string $controller
      * @param  string $method
-     * @return boolean
+     * @return array
      */
     public function getRoles($controller, $method)
     {

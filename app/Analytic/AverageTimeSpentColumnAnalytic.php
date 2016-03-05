@@ -126,6 +126,7 @@ class AverageTimeSpentColumnAnalytic extends Base
      *
      * @access private
      * @param  array   $task
+     * @return integer
      */
     private function getTaskTimeSpentInCurrentColumn(array &$task)
     {

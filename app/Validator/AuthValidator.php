@@ -114,6 +114,6 @@ class AuthValidator extends Base
             }
         }
 
-        return array($result, $errors);;
+        return array($result, $errors);
     }
 }

@@ -141,6 +141,7 @@ class Color extends Base
      * Get available colors
      *
      * @access public
+     * @param  bool $prepend
      * @return array
      */
     public function getList($prepend = false)

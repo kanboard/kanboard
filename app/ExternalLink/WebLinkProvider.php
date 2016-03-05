@@ -65,7 +65,7 @@ class WebLinkProvider extends BaseLinkProvider implements ExternalLinkProviderIn
      * Get the link found with the properties
      *
      * @access public
-     * @return ExternalLinkInterface
+     * @return \Kanboard\Core\ExternalLink\ExternalLinkInterface
      */
     public function getLink()
     {

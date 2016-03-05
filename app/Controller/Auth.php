@@ -14,6 +14,8 @@ class Auth extends Base
      * Display the form login
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function login(array $values = array(), array $errors = array())
     {

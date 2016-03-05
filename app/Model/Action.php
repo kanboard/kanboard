@@ -151,7 +151,7 @@ class Action extends Base
      *
      * @author Antonio Rabelo
      * @param  integer    $src_project_id      Source project id
-     * @return integer    $dst_project_id      Destination project id
+     * @param  integer    $dst_project_id      Destination project id
      * @return boolean
      */
     public function duplicate($src_project_id, $dst_project_id)

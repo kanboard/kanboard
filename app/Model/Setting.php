@@ -75,6 +75,7 @@ abstract class Setting extends Base
      *
      * @access public
      * @param  array    $values
+     * @return boolean
      */
     public function save(array $values)
     {

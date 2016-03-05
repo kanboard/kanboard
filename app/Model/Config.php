@@ -239,6 +239,7 @@ class Config extends Setting
      * Prepare data before save
      *
      * @access public
+     * @param  array $values
      * @return array
      */
     public function prepare(array $values)

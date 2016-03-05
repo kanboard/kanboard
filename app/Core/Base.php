@@ -31,7 +31,6 @@ use Pimple\Container;
  * @property \Kanboard\Core\ObjectStorage\ObjectStorageInterface        $objectStorage
  * @property \Kanboard\Core\Plugin\Hook                                 $hook
  * @property \Kanboard\Core\Plugin\Loader                               $pluginLoader
- * @property \Kanboard\Core\Security\AccessMap                          $projectAccessMap
  * @property \Kanboard\Core\Security\AuthenticationManager              $authenticationManager
  * @property \Kanboard\Core\Security\AccessMap                          $applicationAccessMap
  * @property \Kanboard\Core\Security\AccessMap                          $projectAccessMap

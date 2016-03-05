@@ -12,11 +12,6 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
     if (! ini_get('short_open_tag')) {
         throw new Exception('This software require to have short tags enabled if you have PHP < 5.4 ("short_open_tag = On")');
     }
-
-    // Magic quotes are deprecated since PHP 5.4
-    if (get_magic_quotes_gpc()) {
-        throw new Exception('This software require to have "Magic quotes" disabled, it\'s deprecated since PHP 5.4 ("magic_quotes_gpc = Off")');
-    }
 }
 
 // Check data folder if sqlite

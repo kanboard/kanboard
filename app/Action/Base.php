@@ -132,6 +132,7 @@ abstract class Base extends \Kanboard\Core\Base
      * Set project id
      *
      * @access public
+     * @param  integer $project_id
      * @return Base
      */
     public function setProjectId($project_id)
@@ -154,10 +155,10 @@ abstract class Base extends \Kanboard\Core\Base
     /**
      * Set an user defined parameter
      *
-     * @access public
-     * @param  string  $name    Parameter name
-     * @param  mixed   $value   Value
-     * @param  Base
+     * @access  public
+     * @param   string  $name    Parameter name
+     * @param   mixed   $value   Value
+     * @return  Base
      */
     public function setParam($name, $value)
     {
@@ -271,6 +272,7 @@ abstract class Base extends \Kanboard\Core\Base
      * @access public
      * @param  string $event
      * @param  string $description
+     * @return Base
      */
     public function addEvent($event, $description = '')
     {

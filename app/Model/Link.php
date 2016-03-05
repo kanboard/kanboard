@@ -90,7 +90,7 @@ class Link extends Base
      *
      * @access public
      * @param  integer   $exclude_id   Exclude this link
-     * @param  booelan   $prepend      Prepend default value
+     * @param  boolean   $prepend      Prepend default value
      * @return array
      */
     public function getList($exclude_id = 0, $prepend = true)

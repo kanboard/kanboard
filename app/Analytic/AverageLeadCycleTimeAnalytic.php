@@ -99,6 +99,7 @@ class AverageLeadCycleTimeAnalytic extends Base
      * Get the 1000 last created tasks
      *
      * @access private
+     * @param  integer $project_id
      * @return array
      */
     private function getTasks($project_id)

@@ -33,6 +33,7 @@ class FileStorage implements ObjectStorageInterface
      * Fetch object contents
      *
      * @access public
+     * @throws ObjectStorageException
      * @param  string  $key
      * @return string
      */
@@ -51,6 +52,7 @@ class FileStorage implements ObjectStorageInterface
      * Save object
      *
      * @access public
+     * @throws ObjectStorageException
      * @param  string  $key
      * @param  string  $blob
      */
@@ -67,6 +69,7 @@ class FileStorage implements ObjectStorageInterface
      * Output directly object content
      *
      * @access public
+     * @throws ObjectStorageException
      * @param  string  $key
      */
     public function output($key)
@@ -84,6 +87,7 @@ class FileStorage implements ObjectStorageInterface
      * Move local file to object storage
      *
      * @access public
+     * @throws ObjectStorageException
      * @param  string  $src_filename
      * @param  string  $key
      * @return boolean
@@ -136,6 +140,7 @@ class FileStorage implements ObjectStorageInterface
      * Create object folder
      *
      * @access private
+     * @throws ObjectStorageException
      * @param  string  $key
      */
     private function createFolder($key)

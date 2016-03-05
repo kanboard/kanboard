@@ -69,7 +69,7 @@ class LdapUserProvider implements UserProviderInterface
      * @param  string   $name
      * @param  string   $email
      * @param  string   $role
-     * @param  string[]
+     * @param  string[] $groupIds
      */
     public function __construct($dn, $username, $name, $email, $role, array $groupIds)
     {

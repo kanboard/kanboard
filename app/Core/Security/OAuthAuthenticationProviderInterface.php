@@ -14,7 +14,7 @@ interface OAuthAuthenticationProviderInterface extends AuthenticationProviderInt
      * Get user object
      *
      * @access public
-     * @return UserProviderInterface
+     * @return \Kanboard\Core\User\UserProviderInterface
      */
     public function getUser();
 
@@ -31,7 +31,7 @@ interface OAuthAuthenticationProviderInterface extends AuthenticationProviderInt
      * Get configured OAuth2 service
      *
      * @access public
-     * @return Kanboard\Core\Http\OAuth2
+     * @return \Kanboard\Core\Http\OAuth2
      */
     public function getService();
 

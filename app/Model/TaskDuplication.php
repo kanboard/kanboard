@@ -155,6 +155,7 @@ class TaskDuplication extends Base
      *
      * @access public
      * @param  array      $values
+     * @return array
      */
     public function checkDestinationProjectValues(array &$values)
     {

@@ -89,6 +89,7 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
      * Increment failed login counter
      *
      * @access public
+     * @param AuthFailureEvent $event
      */
     public function onLoginFailure(AuthFailureEvent $event)
     {

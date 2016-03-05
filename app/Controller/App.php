@@ -19,6 +19,7 @@ class App extends Base
      * @param  integer  $user_id
      * @param  string   $action
      * @param  integer  $max
+     * @return \Kanboard\Core\Paginator
      */
     private function getProjectPaginator($user_id, $action, $max)
     {
@@ -37,6 +38,7 @@ class App extends Base
      * @param  integer  $user_id
      * @param  string   $action
      * @param  integer  $max
+     * @return \Kanboard\Core\Paginator
      */
     private function getTaskPaginator($user_id, $action, $max)
     {
@@ -55,6 +57,7 @@ class App extends Base
      * @param  integer  $user_id
      * @param  string   $action
      * @param  integer  $max
+     * @return \Kanboard\Core\Paginator
      */
     private function getSubtaskPaginator($user_id, $action, $max)
     {

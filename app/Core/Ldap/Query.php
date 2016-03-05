@@ -78,7 +78,7 @@ class Query
      * Get LDAP Entries
      *
      * @access public
-     * @return Entities
+     * @return Entries
      */
     public function getEntries()
     {

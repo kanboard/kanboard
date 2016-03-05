@@ -76,6 +76,7 @@ abstract class Metadata extends Base
      * @access public
      * @param  integer  $entity_id
      * @param  array    $values
+     * @return boolean
      */
     public function save($entity_id, array $values)
     {

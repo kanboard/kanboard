@@ -25,6 +25,7 @@ function e()
 /**
  * Translate a number
  *
+ * @param  mixed $value
  * @return string
  */
 function n($value)

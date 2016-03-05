@@ -77,7 +77,7 @@ class Board extends Base
      *
      * @author Antonio Rabelo
      * @param  integer    $project_from      Project Template
-     * @return integer    $project_to        Project that receives the copy
+     * @param  integer    $project_to        Project that receives the copy
      * @return boolean
      */
     public function duplicate($project_from, $project_to)

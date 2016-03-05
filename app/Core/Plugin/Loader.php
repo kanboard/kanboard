@@ -55,6 +55,7 @@ class Loader extends \Kanboard\Core\Base
      * Load plugin
      *
      * @access public
+     * @throws LogicException
      * @param  string $plugin
      */
     public function load($plugin)

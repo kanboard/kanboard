@@ -80,7 +80,7 @@ abstract class NotificationType extends Base
      *
      * @access public
      * @param  string  $type
-     * @return NotificationInterface
+     * @return \Kanboard\Notification\NotificationInterface
      */
     public function getType($type)
     {

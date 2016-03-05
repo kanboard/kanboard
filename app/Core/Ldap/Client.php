@@ -60,6 +60,7 @@ class Client
      * Establish server connection
      *
      * @access public
+     * @throws ClientException
      * @param  string   $server  LDAP server hostname or IP
      * @param  integer  $port    LDAP port
      * @param  boolean  $tls     Start TLS
@@ -98,6 +99,7 @@ class Client
      * Anonymous authentication
      *
      * @access public
+     * @throws ClientException
      * @return boolean
      */
     public function useAnonymousAuthentication()
@@ -113,6 +115,7 @@ class Client
      * Authentication with username/password
      *
      * @access public
+     * @throws ClientException
      * @param  string  $bind_rdn
      * @param  string  $bind_password
      * @return boolean

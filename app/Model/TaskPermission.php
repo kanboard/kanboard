@@ -18,7 +18,8 @@ class TaskPermission extends Base
      * Regular users can't remove tasks from other people
      *
      * @public
-     * @return boolean
+     * @param  array $task
+     * @return bool
      */
     public function canRemoveTask(array $task)
     {

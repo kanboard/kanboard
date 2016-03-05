@@ -11,6 +11,26 @@ namespace Kanboard\Core\Cache;
 abstract class Base
 {
     /**
+     * Fetch value from cache
+     *
+     * @abstract
+     * @access public
+     * @param  string  $key
+     * @return mixed            Null when not found, cached value otherwise
+     */
+    abstract public function get($key);
+
+    /**
+     * Save a new value in the cache
+     *
+     * @abstract
+     * @access public
+     * @param  string  $key
+     * @param  mixed   $value
+     */
+    abstract public function set($key, $value);
+
+    /**
      * Proxy cache
      *
      * Note: Arguments must be scalar types

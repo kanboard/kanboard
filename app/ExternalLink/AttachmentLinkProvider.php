@@ -85,7 +85,7 @@ class AttachmentLinkProvider extends BaseLinkProvider implements ExternalLinkPro
      * Get the link found with the properties
      *
      * @access public
-     * @return ExternalLinkInterface
+     * @return \Kanboard\Core\ExternalLink\ExternalLinkInterface
      */
     public function getLink()
     {
