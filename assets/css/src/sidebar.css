@@ -37,6 +37,10 @@
     box-flex: 0;
 }
 
+.sidebar h2 {
+    margin-top: 0;
+}
+
 .sidebar a {
     text-decoration: none;
 }
@@ -45,6 +49,7 @@
     list-style-type: none;
     line-height: 35px;
     border-bottom: 1px dotted #efefef;
+    padding-left: 13px;
 }
 
 .sidebar li:hover {
