@@ -65,7 +65,7 @@ class UrlHelper extends Base
      */
     public function buttonLink($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '')
     {
-        return '<a href="'.$this->href($controller, $action, $params, $csrf, $anchor).'" class="'.$class.' btn" title=\''.$title.'\' '.($new_tab ? 'target="_blank"' : '').'>'.preg_replace('#<fa-([a-z-]+)>#', '<i class="fa fa-$1 fa-fw"></i>', $label).'</a>';
+        return $this->link($label, $controller, $action, $params, $csrf, $class . ' btn', $title, $new_tab, $anchor);
     }
 
     /**
