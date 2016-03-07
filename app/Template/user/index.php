@@ -1,11 +1,11 @@
 <section id="main">
     <div class="page-header">
         <?php if ($this->user->hasAccess('user', 'create')): ?>
-        <ul>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New local user'), 'user', 'create') ?></li>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
-            <li><i class="fa fa-upload fa-fw"></i><?= $this->url->link(t('Import'), 'userImport', 'step1') ?></li>
-            <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'group', 'index') ?></li>
+        <ul class="btn-group">
+            <li><?= $this->url->buttonLink('<fa-plus>' . t('New local user'), 'user', 'create') ?></li>
+            <li><?= $this->url->buttonLink('<fa-plus>' . t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
+            <li><?= $this->url->buttonLink('<fa-upload>' . t('Import'), 'userImport', 'step1') ?></li>
+            <li><?= $this->url->buttonLink('<fa-users>' . t('View all groups'), 'group', 'index') ?></li>
         </ul>
         <?php endif ?>
     </div>

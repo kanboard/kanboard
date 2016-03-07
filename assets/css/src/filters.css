@@ -44,9 +44,10 @@
 
 .filter-box div.dropdown a.dropdown-menu {
     border-radius: 0;
+    border-left: 0;
 }
 
 .filter-box div.dropdown:last-child a {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
