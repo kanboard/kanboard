@@ -1,6 +1,6 @@
 <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
 <div class="dropdown">
-    <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
+    <a href="#" class="dropdown-menu btn"><?= t('Actions') ?> <i class="fa fa-caret-down"></i></a>
     <ul>
         <?php if (empty($task['date_started'])): ?>
         <li>

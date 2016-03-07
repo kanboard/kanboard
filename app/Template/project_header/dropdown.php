@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu"><?= t('Actions') ?> <i class="fa fa-caret-down"></i></a>
+    <a href="#" class="dropdown-menu btn"><?= t('Actions') ?> <i class="fa fa-caret-down"></i></a>
     <ul>
         <?php if ($is_board): ?>
         <li>

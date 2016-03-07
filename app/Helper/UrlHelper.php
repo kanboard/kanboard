@@ -47,6 +47,26 @@ class UrlHelper extends Base
     {
         return '<a href="'.$this->href($controller, $action, $params, $csrf, $anchor).'" class="'.$class.'" title=\''.$title.'\' '.($new_tab ? 'target="_blank"' : '').'>'.preg_replace('#<fa-([a-z-]+)>#', '<i class="fa fa-$1 fa-fw"></i>', $label).'</a>';
     }
+    
+    /**
+     * HTML Link tag
+     *
+     * @access public
+     * @param  string  $label Link label
+     * @param  string  $controller Controller name
+     * @param  string  $action Action name
+     * @param  array   $params Url parameters
+     * @param  boolean $csrf Add a CSRF token
+     * @param  string  $class CSS class attribute
+     * @param  string  $title
+     * @param  boolean $new_tab Open the link in a new tab
+     * @param  string  $anchor Link Anchor
+     * @return string
+     */
+    public function buttonLink($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '')
+    {
+        return '<a href="'.$this->href($controller, $action, $params, $csrf, $anchor).'" class="'.$class.' btn" title=\''.$title.'\' '.($new_tab ? 'target="_blank"' : '').'>'.preg_replace('#<fa-([a-z-]+)>#', '<i class="fa fa-$1 fa-fw"></i>', $label).'</a>';
+    }
 
     /**
      * HTML Hyperlink
