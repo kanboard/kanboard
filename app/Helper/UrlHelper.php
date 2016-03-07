@@ -49,7 +49,7 @@ class UrlHelper extends Base
     }
     
     /**
-     * HTML Link tag
+     * HTML Link tag with button styling
      *
      * @access public
      * @param  string  $label Link label
