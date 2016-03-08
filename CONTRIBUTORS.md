@@ -98,6 +98,7 @@ Contributors:
 - [Rafaelrossa](https://github.com/rafaelrossa)
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
 - [René Stoltenberg](https://github.com/rstoltenberg)
+- [Renothing](https://github.com/renothing)
 - [Rzeka](https://github.com/rzeka)
 - [Sebastien Pacilly](https://github.com/spacilly)
 - [Sebastian Reese](https://github.com/ReeseSebastian)
