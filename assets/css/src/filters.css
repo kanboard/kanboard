@@ -1,13 +1,12 @@
 .project-header {
-    margin-top: 8px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 
 .filter-box {
     display: inline-block;
-    position: relative;
-    font-size: 0;
-    margin-bottom: 20px;
+    vertical-align: top;
 }
 
 .project-header .filter-box {
@@ -20,12 +19,13 @@
 
 .filter-box input[type="text"] {
     margin: 0;
-    font-size: 16px;
-    height: 26px;
-    border-color: #dedede;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     vertical-align: top;
+    border: 1px solid #ddd;
+    padding: 3px 8px;
+    height: auto;
+    float:left;
 }
 
 .filter-box input[type="text"]:focus {
@@ -37,21 +37,17 @@
 
 .filter-box div.dropdown {
     display: inline-block;
-    font-size: 16px;
-    border: 1px solid #dedede;
-    border-left: none;
     margin: 0;
     padding: 0;
-    padding-left: 5px;
-    padding-right: 8px;
-    height: 27px;
+    float:left;
 }
 
-.filter-box div.dropdown:last-child {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+.filter-box div.dropdown a.dropdown-menu {
+    border-radius: 0;
+    border-left: 0;
 }
 
-.filter-box div.dropdown a {
-    line-height: 27px;
+.filter-box div.dropdown:last-child a {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
 }

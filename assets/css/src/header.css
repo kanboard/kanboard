@@ -68,7 +68,9 @@ header h1 .tooltip {
 
 /* page header */
 .page-header {
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
 }
 
 .page-header h2 {
@@ -91,15 +93,12 @@ header h1 .tooltip {
 
 .page-header ul {
     text-align: left;
-    margin-top: 5px;
     display: inline-block;
 }
 
 .menu-inline li,
 .page-header li {
     display: inline;
-    padding-right: 15px;
-    font-size: 0.95em;
 }
 
 .page-header li.active a {

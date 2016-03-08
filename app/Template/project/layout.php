@@ -4,24 +4,23 @@
             <li>
             <span class="dropdown">
                 <span>
-                    <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
+                    <a href="#" class="dropdown-menu btn"><?= t('Actions') ?> <i class="fa fa-caret-down"></i></a>
                     <ul>
                         <?= $this->render('project/dropdown', array('project' => $project)) ?>
                     </ul>
                 </span>
             </span>
-        </li>
+            </li>
+        </ul>
+        <ul class="btn-group">
             <li>
-                <i class="fa fa-th fa-fw"></i>
-                <?= $this->url->link(t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->buttonLink('<fa-th>' . t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
-                <i class="fa fa-calendar fa-fw"></i>
-                <?= $this->url->link(t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->buttonLink('<fa-calendar>' . t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
-                <i class="fa fa-folder fa-fw"></i>
-                <?= $this->url->link(t('All projects'), 'project', 'index') ?>
+                <?= $this->url->buttonLink('<fa-folder>' . t('All projects'), 'project', 'index') ?>
             </li>
         </ul>
     </div>

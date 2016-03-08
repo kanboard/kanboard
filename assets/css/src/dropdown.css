@@ -1,5 +1,5 @@
 .dropdown {
-    display: inline;
+    display: inline-block;
     position: relative;
 }
 

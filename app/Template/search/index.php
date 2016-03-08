@@ -1,9 +1,8 @@
 <section id="main">
     <div class="page-header">
-        <ul>
+        <ul class="btn-group">
             <li>
-                <i class="fa fa-folder fa-fw"></i>
-                <?= $this->url->link(t('All projects'), 'project', 'index') ?>
+                <?= $this->url->buttonLink('<fa-folder>' . t('All projects'), 'project', 'index') ?>
             </li>
         </ul>
     </div>

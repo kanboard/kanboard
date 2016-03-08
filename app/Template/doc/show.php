@@ -1,9 +1,8 @@
 <section id="main">
     <div class="page-header">
-        <ul>
+        <ul class="btn-group">
             <li>
-                <i class="fa fa-life-ring fa-fw"></i>
-                <?= $this->url->link(t('Table of contents'), 'doc', 'show', array('file' => 'index')) ?>
+                <?= $this->url->buttonLink('<fa-life-ring>' . t('Table of contents'), 'doc', 'show', array('file' => 'index')) ?>
             </li>
         </ul>
     </div>
