@@ -190,11 +190,11 @@ class Task extends Base
         $position = 0;
 
         foreach ($columns as $column_id => $column_title) {
+            $position++;
+            
             if ($column_id == $task['column_id']) {
                 break;
             }
-
-            $position++;
         }
 
         return round(($position * 100) / count($columns), 1);
