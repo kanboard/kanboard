@@ -31,7 +31,7 @@ class Client
      */
     public static function connect($username = null, $password = null)
     {
-        $client = new self;
+        $client = new static;
         $client->open($client->getLdapServer());
         $username = $username ?: $client->getLdapUsername();
         $password = $password ?: $client->getLdapPassword();
