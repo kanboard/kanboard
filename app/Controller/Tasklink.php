@@ -42,6 +42,7 @@ class Tasklink extends Base
             'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
             'task' => $task,
             'project' => $project,
+            'link_label_list' => $this->link->getList(0, false),
             'editable' => true,
             'is_public' => false,
             'show_title' => true,
