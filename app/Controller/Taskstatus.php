@@ -55,7 +55,7 @@ class Taskstatus extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
-        $this->response->html($this->helper->layout->task($template, array(
+        $this->response->html($this->template->render($template, array(
             'task' => $task,
         )));
     }

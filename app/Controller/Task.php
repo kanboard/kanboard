@@ -80,13 +80,7 @@ class Task extends Base
             'task' => $task,
             'values' => $values,
             'link_label_list' => $this->link->getList(0, false),
-            'columns_list' => $this->column->getList($task['project_id']),
-            'colors_list' => $this->color->getList(),
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id'], true, false, false),
-            'title' => $task['project_name'].' &gt; '.$task['title'],
-            'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
-            'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
-            'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
         )));
     }
 
@@ -100,7 +94,6 @@ class Task extends Base
         $task = $this->getTask();
 
         $this->response->html($this->helper->layout->task('task/analytics', array(
-            'title' => $task['title'],
             'task' => $task,
             'lead_time' => $this->taskAnalytic->getLeadTime($task),
             'cycle_time' => $this->taskAnalytic->getCycleTime($task),
@@ -171,7 +164,7 @@ class Task extends Base
             $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
         }
 
-        $this->response->html($this->helper->layout->task('task/remove', array(
+        $this->response->html($this->template->render('task/remove', array(
             'task' => $task,
         )));
     }

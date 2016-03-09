@@ -23,6 +23,7 @@ class Subtask extends Base
             'project' => $this->getProject(),
             'subtasks' => $this->subtask->getAll($task['id']),
             'editable' => true,
+            'show_title' => true,
         )));
     }
 
@@ -42,7 +43,7 @@ class Subtask extends Base
             );
         }
 
-        $this->response->html($this->helper->layout->task('subtask/create', array(
+        $this->response->html($this->template->render('subtask/create', array(
             'values' => $values,
             'errors' => $errors,
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
@@ -89,7 +90,7 @@ class Subtask extends Base
         $task = $this->getTask();
         $subtask = $this->getSubTask();
 
-        $this->response->html($this->helper->layout->task('subtask/edit', array(
+        $this->response->html($this->template->render('subtask/edit', array(
             'values' => empty($values) ? $subtask : $values,
             'errors' => $errors,
             'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
@@ -135,7 +136,7 @@ class Subtask extends Base
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        $this->response->html($this->helper->layout->task('subtask/remove', array(
+        $this->response->html($this->template->render('subtask/remove', array(
             'subtask' => $subtask,
             'task' => $task,
         )));

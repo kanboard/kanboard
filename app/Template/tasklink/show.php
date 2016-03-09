@@ -1,3 +1,9 @@
+<?php if (isset($show_title)): ?>
+    <div class="task-show-title color-<?= $task['color_id'] ?>">
+        <h2><?= $this->text->e($task['title']) ?></h2>
+    </div>
+<?php endif ?>
+
 <div class="page-header">
     <h2><?= t('Internal links') ?></h2>
 </div>

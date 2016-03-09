@@ -32,7 +32,7 @@ class Taskduplication extends Base
             }
         }
 
-        $this->response->html($this->helper->layout->task('task_duplication/duplicate', array(
+        $this->response->html($this->template->render('task_duplication/duplicate', array(
             'task' => $task,
         )));
     }
@@ -128,7 +128,7 @@ class Taskduplication extends Base
             $users_list = array();
         }
 
-        $this->response->html($this->helper->layout->task($template, array(
+        $this->response->html($this->template->render($template, array(
             'values' => $values,
             'task' => $task,
             'projects_list' => $projects_list,

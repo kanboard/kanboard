@@ -3,6 +3,7 @@ Version 1.0.27 (unreleased)
 
 Improvements:
 
+* Always display project name and task title in task views
 * Improve automatic action creation
 * Move notifications to the bottom of the screen
 * Added the possibility to import automatic actions from another project

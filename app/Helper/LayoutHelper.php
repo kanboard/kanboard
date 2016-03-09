@@ -60,7 +60,7 @@ class LayoutHelper extends Base
      */
     public function task($template, array $params)
     {
-        $params['title'] = $params['task']['title'];
+        $params['title'] = $params['task']['project_name'];
         return $this->subLayout('task/layout', 'task/sidebar', $template, $params);
     }
 

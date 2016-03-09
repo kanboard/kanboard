@@ -23,7 +23,7 @@ class TaskRecurrence extends Base
             $values = $task;
         }
 
-        $this->response->html($this->helper->layout->task('task_recurrence/edit', array(
+        $this->response->html($this->template->render('task_recurrence/edit', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,

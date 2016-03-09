@@ -44,6 +44,7 @@ class Tasklink extends Base
             'project' => $project,
             'editable' => true,
             'is_public' => false,
+            'show_title' => true,
         )));
     }
 
@@ -56,7 +57,7 @@ class Tasklink extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->helper->layout->task('tasklink/create', array(
+        $this->response->html($this->template->render('tasklink/create', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
@@ -106,7 +107,7 @@ class Tasklink extends Base
             $values['title'] = '#'.$opposite_task['id'].' - '.$opposite_task['title'];
         }
 
-        $this->response->html($this->helper->layout->task('tasklink/edit', array(
+        $this->response->html($this->template->render('tasklink/edit', array(
             'values' => $values,
             'errors' => $errors,
             'task_link' => $task_link,
@@ -150,7 +151,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $link = $this->getTaskLink();
 
-        $this->response->html($this->helper->layout->task('tasklink/remove', array(
+        $this->response->html($this->template->render('tasklink/remove', array(
             'link' => $link,
             'task' => $task,
         )));
