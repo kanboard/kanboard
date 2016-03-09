@@ -730,7 +730,7 @@ return array(
     'Time spent changed: %sh' => 'Harcanan zaman değiştirildi: %sh',
     'Time estimated changed: %sh' => 'Tahmini süre değiştirildi: %sh',
     'The field "%s" have been updated' => '"%s" hanesi değiştirildi',
-    'The description have been modified' => 'Açıklama değiştirildi',
+    'The description has been modified' => 'Açıklama değiştirildi',
     'Do you really want to close the task "%s" as well as all subtasks?' => '"%s" görevini ve tüm alt görevlerini kapatmak istediğinize emin misiniz?',
     'I want to receive notifications for:' => 'Bununla ilgili bildirimler almak istiyorum:',
     'All tasks' => 'Tüm görevler',

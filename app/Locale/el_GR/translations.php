@@ -730,7 +730,7 @@ return array(
     'Time spent changed: %sh' => 'Ο χρόνος που πέρασε έχει αλλάξει : %sh',
     'Time estimated changed: %sh' => 'Ο εκτιμώμενος χρόνος άλλαξε : %sh',
     'The field "%s" have been updated' => 'Το πεδίο « %s » έχει ενημερωθεί',
-    'The description have been modified' => 'Η περιγραφή έχει ενημερωθεί',
+    'The description has been modified' => 'Η περιγραφή έχει ενημερωθεί',
     'Do you really want to close the task "%s" as well as all subtasks?' => 'Σίγουρα θέλετε να κλείσετε την εργασία « %s » και την υπο-εργασία ?',
     'I want to receive notifications for:' => 'Επιθυμώ να λαμβάνω ενημερώσεις για :',
     'All tasks' => 'Όλες οι εργασίες',

@@ -730,7 +730,7 @@ return array(
     'Time spent changed: %sh' => 'Waktu yang dihabiskan berubah : %sh',
     'Time estimated changed: %sh' => 'Perkiraan waktu berubah : %sh',
     'The field "%s" have been updated' => 'Field « %s » telah diperbaharui',
-    'The description have been modified' => 'Deskripsi telah dimodifikasi',
+    'The description has been modified' => 'Deskripsi telah dimodifikasi',
     'Do you really want to close the task "%s" as well as all subtasks?' => 'Apakah anda yakin akan menutup tugas « %s » beserta semua sub-tugasnya ?',
     'I want to receive notifications for:' => 'Saya ingin menerima pemberitahuan untuk :',
     'All tasks' => 'Semua tugas',

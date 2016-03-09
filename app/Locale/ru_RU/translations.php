@@ -730,7 +730,7 @@ return array(
     'Time spent changed: %sh' => 'Изменение количества затраченного времени: %sh',
     'Time estimated changed: %sh' => 'Ожидаемый срок изменен: %sh',
     'The field "%s" have been updated' => 'Поле "%s" ,было изменено',
-    'The description have been modified' => 'Описание было изменено',
+    'The description has been modified' => 'Описание было изменено',
     'Do you really want to close the task "%s" as well as all subtasks?' => 'Вы действительно хотите закрыть задачу "%s", а также все подзадачи?',
     'I want to receive notifications for:' => 'Я хочу получать уведомления для:',
     'All tasks' => 'Все задачи',
