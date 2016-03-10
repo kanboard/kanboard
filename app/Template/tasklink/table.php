@@ -1,7 +1,7 @@
 <?php if (empty($links)): ?>
     <p class="alert"><?= t('There is no internal link for the moment.') ?></p>
 <?php else: ?>
-<table class="tasklinks-table table-stripped">
+<table class="task-links-table table-stripped">
     <?php foreach ($links as $label => $grouped_links): ?>
         <?php $hide_td = false ?>
         <?php foreach ($grouped_links as $link): ?>
@@ -10,7 +10,7 @@
                     <td class="column-40" colspan="2">
                         <?= t('This task') ?>
                         <strong><?= t($label) ?></strong>
-                        <span class="board-column-header-task-count">(<?= count($grouped_links) ?>)</span>
+                        <span class="task-links-task-count">(<?= count($grouped_links) ?>)</span>
                     </td>
                     <th><?= t('Assignee') ?></th>
                     <th><?= t('Time tracking') ?></th>
@@ -45,11 +45,12 @@
 
                 <?php if ($link['project_id'] != $project['id']): ?>
                     <br>
-                    <?= t('Project') ?>
                     <?= $this->text->e($link['project_name']) ?>
                 <?php endif ?>
             </td>
-            <td><?= $this->text->e($link['column_title']) ?></td>
+            <td>
+                <?= $this->text->e($link['column_title']) ?>
+            </td>
             <td>
                 <?php if (! empty($link['task_assignee_username'])): ?>
                     <?php if ($editable): ?>
@@ -73,8 +74,8 @@
                 <div class="dropdown">
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
-                    <li><?= $this->url->link(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
-                    <li><?= $this->url->link(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?></li>
+                    <li><?= $this->url->link(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
+                    <li><?= $this->url->link(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
                 </ul>
                 </div>
             </td>
