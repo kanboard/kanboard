@@ -6,7 +6,23 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 107;
+const VERSION = 108;
+
+function version_108(PDO $pdo)
+{
+         //user_has_metadata
+         $pdo->exec("ALTER TABLE user_has_metadata ADD COLUMN changed_by INT DEFAULT 0 NOT NULL");
+         $pdo->exec("ALTER TABLE user_has_metadata ADD COLUMN changed_on INT DEFAULT 0 NOT NULL");
+         //project_has_metadata
+         $pdo->exec("ALTER TABLE project_has_metadata ADD COLUMN changed_by INT DEFAULT 0 NOT NULL");
+         $pdo->exec("ALTER TABLE project_has_metadata ADD COLUMN changed_on INT DEFAULT 0 NOT NULL");
+         //task_has_metadata
+         $pdo->exec("ALTER TABLE task_has_metadata ADD COLUMN changed_by INT DEFAULT 0 NOT NULL");
+         $pdo->exec("ALTER TABLE task_has_metadata ADD COLUMN changed_on INT DEFAULT 0 NOT NULL");
+         //settings
+         $pdo->exec("ALTER TABLE settings ADD COLUMN changed_by INT DEFAULT 0 NOT NULL");
+         $pdo->exec("ALTER TABLE settings ADD COLUMN changed_on INT DEFAULT 0 NOT NULL");
+}
 
 function version_107(PDO $pdo)
 {
