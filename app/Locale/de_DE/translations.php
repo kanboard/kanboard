@@ -926,7 +926,7 @@ return array(
     'change sorting' => 'Sortierung ändern',
     'Tasks Importation' => 'Aufgaben Import',
     'Delimiter' => 'Trennzeichen',
-    'Enclosure' => 'Anlage',
+    'Enclosure' => 'Textbegrenzer',
     'CSV File' => 'CSV Datei',
     'Instructions' => 'Anweisungen',
     'Your file must use the predefined CSV format' => 'Ihre Datei muss das vorgegebene CSV Format haben',
