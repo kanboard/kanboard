@@ -66,6 +66,13 @@
         <li><?= t('Expand/collapse tasks') ?> = <strong>s</strong></li>
         <li><?= t('Compact/wide view') ?> = <strong>c</strong></li>
     </ul>
+    <h3><?= t('Task view') ?></h3>
+    <ul>
+        <li><?= t('Edit task') ?> = <strong>e</strong></li>
+        <li><?= t('New subtask') ?> = <strong>s</strong></li>
+        <li><?= t('New comment') ?> = <strong>c</strong></li>
+        <li><?= t('New internal link') ?> = <strong>l</strong></li>
+    </ul>
     <h3><?= t('Application') ?></h3>
     <ul>
         <li><?= t('Open board switcher') ?> = <strong>b</strong></li>

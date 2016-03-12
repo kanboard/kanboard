@@ -2,6 +2,29 @@ function Task(app) {
     this.app = app;
 }
 
+Task.prototype.keyboardShortcuts = function() {
+    var taskView = $("#task-view");
+    var self = this;
+
+    if (taskView.length) {
+        Mousetrap.bind("e", function() {
+            self.app.popover.open(taskView.data("edit-url"));
+        });
+
+        Mousetrap.bind("c", function() {
+            self.app.popover.open(taskView.data("comment-url"));
+        });
+
+        Mousetrap.bind("s", function() {
+            self.app.popover.open(taskView.data("subtask-url"));
+        });
+
+        Mousetrap.bind("l", function() {
+            self.app.popover.open(taskView.data("internal-link-url"));
+        });
+    }
+};
+
 Task.prototype.listen = function() {
     var self = this;
     var reloadingProjectId = 0;

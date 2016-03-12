@@ -12,6 +12,7 @@ function App() {
     this.column = new Column(this);
     this.file = new FileUpload(this);
     this.keyboardShortcuts();
+    this.task.keyboardShortcuts();
     this.chosen();
     this.poll();
 
