@@ -17,6 +17,8 @@ Tell us what happens instead
 
 ### Configuration
 
+Copy and paste the configuration section from the Kanboard settings page or fill these fields:
+
 - Kanboard version:
 - Database type and version:
 - PHP version:
