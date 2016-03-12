@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e754e4bc3eec85b3d14c748f1ed857a",
-    "content-hash": "c7f7baadd60fdcf8fb9e2e3a7214357f",
+    "hash": "d60e4b6b7ceb60202c48112ffbc33fba",
+    "content-hash": "fbb704fa621ed6dd3c60241913ea1686",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -239,16 +239,16 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "v1.0.5",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "3b388ef12f8c57f3bca85d278a53cf6fa2d832b8"
+                "reference": "7f36dc3a7814ca0fc63439cd948e8acfeda672de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/3b388ef12f8c57f3bca85d278a53cf6fa2d832b8",
-                "reference": "3b388ef12f8c57f3bca85d278a53cf6fa2d832b8",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/7f36dc3a7814ca0fc63439cd948e8acfeda672de",
+                "reference": "7f36dc3a7814ca0fc63439cd948e8acfeda672de",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +272,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2016-02-20 02:56:11"
+            "time": "2016-03-12 14:31:33"
         },
         {
             "name": "fguillot/simple-validator",
@@ -397,16 +397,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "f078eba3bcf140fd69b5fcc3ea5ac809abf729dc"
+                "reference": "b3313b618f4edd76523572531d5d7e22fe747430"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/f078eba3bcf140fd69b5fcc3ea5ac809abf729dc",
-                "reference": "f078eba3bcf140fd69b5fcc3ea5ac809abf729dc",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/b3313b618f4edd76523572531d5d7e22fe747430",
+                "reference": "b3313b618f4edd76523572531d5d7e22fe747430",
                 "shasum": ""
             },
             "require": {
@@ -441,7 +441,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-02-29 17:25:04"
+            "time": "2016-03-11 19:54:08"
         },
         {
             "name": "pimple/pimple",
@@ -747,7 +747,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",

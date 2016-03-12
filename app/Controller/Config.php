@@ -61,6 +61,8 @@ class Config extends Base
     {
         $this->response->html($this->helper->layout->config('config/about', array(
             'db_size' => $this->config->getDatabaseSize(),
+            'db_version' => $this->db->getDriver()->getDatabaseVersion(),
+            'user_agent' => $this->request->getServerVariable('HTTP_USER_AGENT'),
             'title' => t('Settings').' &gt; '.t('About'),
         )));
     }

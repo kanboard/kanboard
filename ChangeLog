@@ -3,6 +3,7 @@ Version 1.0.27 (unreleased)
 
 Improvements:
 
+* Show configuration in settings page
 * Added "?" to display list of keyboard shortcuts
 * Added new keyboard shortcuts for task view
 * Always display project name and task title in task views
