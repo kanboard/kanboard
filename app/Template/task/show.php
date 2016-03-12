@@ -25,6 +25,7 @@
 <?= $this->render('tasklink/show', array(
     'task' => $task,
     'links' => $links,
+    'project' => $project,
     'link_label_list' => $link_label_list,
     'editable' => true,
     'is_public' => false,

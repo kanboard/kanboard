@@ -1,12 +1,14 @@
 <section id="main">
     <div class="page-header">
-        <ul class="btn-group">
+        <ul>
             <li>
-                <?= $this->url->button('folder', t('Projects list'), 'project', 'index') ?>
+                <i class="fa fa-folder fa-fw"></i>
+                <?= $this->url->link(t('Projects list'), 'project', 'index') ?>
             </li>
             <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
                 <li>
-                    <?= $this->url->button('sliders', t('Projects Gantt chart'), 'gantt', 'projects') ?>
+                    <i class="fa fa-sliders fa-fw"></i>
+                    <?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?>
                 </li>
             <?php endif ?>
         </ul>

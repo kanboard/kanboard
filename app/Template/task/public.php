@@ -10,18 +10,18 @@
         'is_public' => true,
     )) ?>
 
+    <?= $this->render('subtask/show', array(
+        'task' => $task,
+        'subtasks' => $subtasks,
+        'editable' => false
+    )) ?>
+
     <?= $this->render('tasklink/show', array(
         'task' => $task,
         'links' => $links,
         'project' => $project,
         'editable' => false,
         'is_public' => true,
-    )) ?>
-
-    <?= $this->render('subtask/show', array(
-        'task' => $task,
-        'subtasks' => $subtasks,
-        'editable' => false
     )) ?>
 
     <?= $this->render('task/comments', array(

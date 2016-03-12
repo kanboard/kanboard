@@ -1,11 +1,11 @@
 <section id="main">
     <div class="page-header">
-        <ul class="btn-group">
+        <ul>
             <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
-                <li><?= $this->url->button('user', t('Users overview'), 'projectuser', 'managers') ?></li>
+                <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'projectuser', 'managers') ?></li>
             <?php endif ?>
             <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
-                <li><?= $this->url->button('sliders', t('Projects Gantt chart'), 'gantt', 'projects') ?></li>
+                <li><i class="fa fa-sliders fa-fw"></i><?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?></li>
             <?php endif ?>
         </ul>
     </div>
