@@ -1,1 +1,16 @@
 app/constants.php export-subst
+
+.gitattributes export-ignore
+.gitignore export-ignore
+
+.docker export-ignore
+.scrutinizer.yml export-ignore
+.travis.yml export-ignore
+Dockerfile export-ignore
+Makefile export-ignore
+README.md export-ignore
+Vagrantfile export-ignore
+app.json export-ignore
+issue_template.md export-ignore
+data/*.sqlite export-ignore
+tests export-ignore
