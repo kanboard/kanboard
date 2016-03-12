@@ -54,4 +54,12 @@ class Doc extends Base
 
         $this->response->html($this->helper->layout->app('doc/show', $this->readFile($filename)));
     }
+
+    /**
+     * Display keyboard shortcut
+     */
+    public function shortcuts()
+    {
+        $this->response->html($this->template->render('config/keyboard_shortcuts'));
+    }
 }

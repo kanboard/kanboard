@@ -29,6 +29,7 @@ Vue détaillée d'une tâche
 Application
 -----------
 
+- Afficher la liste des raccourcis clavier = **?**
 - Ouvrir le changement de tableau = **b**
 - Aller au moteur de recherche = **f**
 - Restaurer la boîte de recherche = **r**

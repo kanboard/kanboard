@@ -86,6 +86,11 @@ App.prototype.keyboardShortcuts = function() {
         self.popover.close();
         self.dropdown.close();
     });
+
+    // Show keyboard shortcut
+    Mousetrap.bind("?", function() {
+        self.popover.open($("body").data("keyboard-shortcut-url"));
+    });
 };
 
 App.prototype.checkSession = function() {

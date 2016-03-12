@@ -30,6 +30,7 @@ Task view
 Application
 -----------
 
+- Display list of keyboard shortcuts = **?**
 - Open board switcher = **b**
 - Go to the search box = **f**
 - Reset the search box = **r**
