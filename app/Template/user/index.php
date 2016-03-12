@@ -2,10 +2,10 @@
     <div class="page-header">
         <?php if ($this->user->hasAccess('user', 'create')): ?>
         <ul class="btn-group">
-            <li><?= $this->url->buttonLink('<fa-plus>' . t('New local user'), 'user', 'create') ?></li>
-            <li><?= $this->url->buttonLink('<fa-plus>' . t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
-            <li><?= $this->url->buttonLink('<fa-upload>' . t('Import'), 'userImport', 'step1') ?></li>
-            <li><?= $this->url->buttonLink('<fa-users>' . t('View all groups'), 'group', 'index') ?></li>
+            <li><?= $this->url->button('plus', t('New local user'), 'user', 'create') ?></li>
+            <li><?= $this->url->button('plus', t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
+            <li><?= $this->url->button('upload', t('Import'), 'userImport', 'step1') ?></li>
+            <li><?= $this->url->button('users', t('View all groups'), 'group', 'index') ?></li>
         </ul>
         <?php endif ?>
     </div>

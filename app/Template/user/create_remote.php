@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
         <ul class="btn-group">
-            <li><?= $this->url->buttonLink('<fa-user>' . t('All users'), 'user', 'index') ?></li>
-            <li><?= $this->url->buttonLink('<fa-plus>' . t('New local user'), 'user', 'create') ?></li>
+            <li><?= $this->url->button('user', t('All users'), 'user', 'index') ?></li>
+            <li><?= $this->url->button('plus', t('New local user'), 'user', 'create') ?></li>
         </ul>
     </div>
     <form method="post" action="<?= $this->url->href('user', 'save') ?>" autocomplete="off">

@@ -2,7 +2,7 @@
     <div class="page-header">
         <ul class="btn-group">
             <li>
-                <?= $this->url->buttonLink('<fa-folder>' . t('All projects'), 'project', 'index') ?>
+                <?= $this->url->button('folder', t('All projects'), 'project', 'index') ?>
             </li>
         </ul>
     </div>

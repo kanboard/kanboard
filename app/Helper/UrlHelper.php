@@ -52,7 +52,8 @@ class UrlHelper extends Base
      * HTML Link tag with button styling
      *
      * @access public
-     * @param  string  $label Link label
+     * @param  string  $icon Button icon
+     * @param  string  $label Button label
      * @param  string  $controller Controller name
      * @param  string  $action Action name
      * @param  array   $params Url parameters
@@ -63,9 +64,9 @@ class UrlHelper extends Base
      * @param  string  $anchor Link Anchor
      * @return string
      */
-    public function buttonLink($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '')
+    public function button($icon, $label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '')
     {
-        return $this->link(preg_replace('#<fa-([a-z-]+)>#', '<i class="fa fa-$1 fa-fw"></i>', $label), $controller, $action, $params, $csrf, $class . ' btn', $title, $new_tab, $anchor);
+        return $this->link('<i class="fa fa-'.$icon.' fa-fw"></i> '.$label, $controller, $action, $params, $csrf, $class . ' btn', $title, $new_tab, $anchor);
     }
 
     /**

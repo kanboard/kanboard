@@ -3,19 +3,19 @@
         <ul class="btn-group">
             <?php if ($this->user->hasAccess('ProjectCreation', 'create')): ?>
                 <li>
-                    <?= $this->url->buttonLink('<fa-plus>' . t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?>
+                    <?= $this->url->button('plus', t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?>
                 </li>
             <?php endif ?>
             <?php if ($this->app->config('disable_private_project', 0) == 0): ?>
             <li>
-                <?= $this->url->buttonLink('<fa-lock>' . t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
+                <?= $this->url->button('lock', t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
             </li>
             <?php endif ?>
             <li>
-                <?= $this->url->buttonLink('<fa-search>' . t('Search'), 'search', 'index') ?>
+                <?= $this->url->button('search', t('Search'), 'search', 'index') ?>
             </li>
             <li>
-                <?= $this->url->buttonLink('<fa-folder>' . t('Project management'), 'project', 'index') ?>
+                <?= $this->url->button('folder', t('Project management'), 'project', 'index') ?>
             </li>
         </ul>
     </div>

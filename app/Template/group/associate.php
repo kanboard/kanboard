@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
         <ul class="btn-group">
-            <li><?= $this->url->buttonLink('<fa-users>' . t('View all groups'), 'group', 'index') ?></li>
-            <li><?= $this->url->buttonLink('<fa-user>' . t('View group members'), 'group', 'users', array('group_id' => $group['id'])) ?></li>
+            <li><?= $this->url->button('users', t('View all groups'), 'group', 'index') ?></li>
+            <li><?= $this->url->button('user', t('View group members'), 'group', 'users', array('group_id' => $group['id'])) ?></li>
         </ul>
     </div>
     <?php if (empty($users)): ?>

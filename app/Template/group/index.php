@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
         <ul class="btn-group">
-            <li><?= $this->url->buttonLink('<fa-users>' . t('All users'), 'user', 'index') ?></li>
-            <li><?= $this->url->buttonLink('<fa-user-plus>' . t('New group'), 'group', 'create') ?></li>
+            <li><?= $this->url->button('users', t('All users'), 'user', 'index') ?></li>
+            <li><?= $this->url->button('user-plus', t('New group'), 'group', 'create') ?></li>
         </ul>
     </div>
     <?php if ($paginator->isEmpty()): ?>

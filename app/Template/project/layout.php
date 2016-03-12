@@ -14,13 +14,13 @@
         </ul>
         <ul class="btn-group">
             <li>
-                <?= $this->url->buttonLink('<fa-th>' . t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->button('th', t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
-                <?= $this->url->buttonLink('<fa-calendar>' . t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->button('calendar', t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
-                <?= $this->url->buttonLink('<fa-folder>' . t('All projects'), 'project', 'index') ?>
+                <?= $this->url->button('folder', t('All projects'), 'project', 'index') ?>
             </li>
         </ul>
     </div>

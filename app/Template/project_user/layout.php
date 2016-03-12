@@ -2,11 +2,11 @@
     <div class="page-header">
         <ul class="btn-group">
             <li>
-                <?= $this->url->buttonLink('<fa-folder>' . t('Projects list'), 'project', 'index') ?>
+                <?= $this->url->button('folder', t('Projects list'), 'project', 'index') ?>
             </li>
             <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
                 <li>
-                    <?= $this->url->buttonLink('<fa-sliders>' . t('Projects Gantt chart'), 'gantt', 'projects') ?>
+                    <?= $this->url->button('sliders', t('Projects Gantt chart'), 'gantt', 'projects') ?>
                 </li>
             <?php endif ?>
         </ul>

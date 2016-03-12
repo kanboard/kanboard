@@ -14,18 +14,18 @@
         </ul>
         <ul class="btn-group">
             <li>
-                <?= $this->url->buttonLink('<fa-th>' . t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->button('th', t('Back to the board'), 'board', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li>
-                <?= $this->url->buttonLink('<fa-calendar>' . t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->button('calendar', t('Back to the calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
             <li>
-                <?= $this->url->buttonLink('<fa-cog>' . t('Project settings'), 'project', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->button('cog', t('Project settings'), 'project', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <?php endif ?>
             <li>
-                <?= $this->url->buttonLink('<fa-folder>' . t('All projects'), 'project', 'index') ?>
+                <?= $this->url->button('folder', t('All projects'), 'project', 'index') ?>
             </li>
         </ul>
     </div>
