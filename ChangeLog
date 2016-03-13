@@ -19,6 +19,7 @@ Security issues:
 
 Bug fixes:
 
+* Fix invalid user filter for API procedure createLdapUser()
 * Ambiguous column name with very old version of Sqlite
 
 Version 1.0.26
