@@ -79,6 +79,11 @@ select:focus {
 .form-actions {
     padding-top: 20px;
     clear: both;
+    font-size: 16px;
+}
+
+.form-actions .btn {
+    padding: 5px 8px;
 }
 
 input.form-error,
