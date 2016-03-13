@@ -64,8 +64,8 @@
 
             <?php if ($task['is_active'] == 1): ?>
             <div class="task-board-days">
-                <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->dt->age($task['date_creation']) ?></span>
-                <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->dt->age($task['date_moved']) ?></span>
+                <span title="<?= t('Task age')?>" class="task-days-age"><?= $this->dt->age($task['date_creation']) ?></span>
+                <span title="<?= t('Time in this column')?>" class="task-days-incolumn"><?= $this->dt->age($task['date_moved']) ?></span>
             </div>
             <?php else: ?>
                 <div class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></div>
