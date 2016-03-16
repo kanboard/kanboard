@@ -1,29 +1,53 @@
 /* activity */
 .activity-event {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.activity-event a {
+    text-decoration: none;
 }
 
 .activity-datetime {
-    color: #999;
-    font-size: 0.85em;
+    color: #555;
+    font-size: 0.9em;
+    float: right;
 }
 
 .activity-content {
     margin-top: 10px;
-    margin-left: 20px;
-    padding-left: 20px;
-    border-left: 2px solid #666;
+    margin-left: 37px;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    box-shadow: 0px 0px 3px rgba(100, 100, 100, 0.2);
+}
+
+.no-avatars .activity-content {
+    margin-left: 0;
+}
+
+.activity-content .avatar {
+    margin-left: -37px;
+    margin-top: -3px;
+    border-radius: 2px;
 }
 
 .activity-title {
-    font-weight: bold;
     color: #000;
+    font-size: 0.9em;
+    padding: 3px 5px;
+    min-height: 19px;
+    background-color: #f5f5f5;
 }
 
+.activity-title .fa {
+    color: #555;
+}
+    
 .activity-description {
     font-size: 0.9em;
-    color: #aaa;
-    padding-top: 5px;
+    color: #555;
+    padding: 5px;
+    border-top: 1px solid #bbb;
 }
 
 .activity-description ul {
@@ -41,11 +65,10 @@
     color: #555;
 }
 
-.activity-changes {
-    margin-top: 10px;
-    font-size: 0.85em;
+.activity-description ul {
+    margin: 0;
 }
 
-.activity-changes ul {
-    margin-left: 25px;
+.activity-description ul li {
+    margin-left: 20px;
 }
