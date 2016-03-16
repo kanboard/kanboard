@@ -4,9 +4,15 @@ CSS_APP = $(addprefix assets/css/src/, $(addsuffix .css, base links title table 
 CSS_PRINT = $(addprefix assets/css/src/, $(addsuffix .css, print links table board task comment subtask tasklink markdown))
 CSS_VENDOR = $(addprefix assets/css/vendor/, $(addsuffix .css, jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min simplemde.min))
 
+<<<<<<< HEAD
 JS_APP = $(addprefix assets/js/src/, $(addsuffix .js, Namespace App Dropdown Popover Notification Accordion Session Calendar AvgTimeColumnChart BurndownChart CompareHoursColumnChart CumulativeFlowDiagram LeadCycleTimeChart UserRepartitionChart TaskTimeColumnChart TaskRepartitionChart Gantt Column Markdown ProjectPermission ProjectCreation Screenshot FileUpload Search Task Subtask Swimlane BoardColumnView BoardColumnScrolling BoardHorizontalScrolling BoardCollapsedMode BoardDragAndDrop BoardTask BoardPolling Tooltip Bootstrap))
 JS_VENDOR = $(addprefix assets/js/vendor/, $(addsuffix .js, jquery-1.11.3.min jquery-ui.min jquery-ui-timepicker-addon.min jquery.ui.touch-punch.min chosen.jquery.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min simplemde.min))
 JS_LANG = $(addprefix assets/js/vendor/lang/, $(addsuffix .js, cs da de es el fi fr hu id it ja ko nl nb pl pt pt-br ru sv sr th tr zh-cn))
+=======
+JS_APP = $(addprefix assets/js/src/, $(addsuffix .js, Popover Dropdown Tooltip Markdown Search App Screenshot FileUpload Calendar Board Column Swimlane Gantt Task Project Subtask CategoryRepartitionChart TaskRepartitionChart UserRepartitionChart CumulativeFlowDiagram BurndownChart AvgTimeColumnChart TaskTimeColumnChart LeadCycleTimeChart CompareHoursColumnChart Router))
+JS_VENDOR = $(addprefix assets/js/vendor/, $(addsuffix .js, jquery-1.11.3.min jquery-ui.min jquery-ui-timepicker-addon.min jquery.ui.touch-punch.min chosen.jquery.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min jquery.textcomplete))
+JS_LANG = $(addprefix assets/js/vendor/lang/, $(addsuffix .js, cs da de es el fi fr hu id it ja nl nb pl pt pt-br ru sv sr th tr zh-cn))
+>>>>>>> Added category distribution analytics as per #1920
 
 all: css js
 

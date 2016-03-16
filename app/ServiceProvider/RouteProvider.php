@@ -109,6 +109,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('export/summary/:project_id', 'export', 'summary');
 
             // Analytics routes
+            $container['route']->addRoute('analytics/tasks/:project_id', 'analytic', 'categories');
             $container['route']->addRoute('analytics/tasks/:project_id', 'analytic', 'tasks');
             $container['route']->addRoute('analytics/users/:project_id', 'analytic', 'users');
             $container['route']->addRoute('analytics/cfd/:project_id', 'analytic', 'cfd');

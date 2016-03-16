@@ -97,6 +97,22 @@ class Analytic extends Base
     }
 
     /**
+     * Show categories distribution graph
+     *
+     * @access public
+     */
+    public function categories()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->helper->layout->analytic('analytic/categories', array(
+            'project' => $project,
+            'metrics' => $this->categoryDistributionAnalytic->build($project['id']),
+            'title' => t('Category repartition for "%s"', $project['name']),
+        )));
+    }
+
+    /**
      * Show users repartition
      *
      * @access public

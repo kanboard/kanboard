@@ -4,6 +4,9 @@
         <li <?= $this->app->checkMenuSelection('analytic', 'tasks') ?>>
             <?= $this->url->link(t('Task distribution'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
         </li>
+        <li <?= $this->app->checkMenuSelection('analytic', 'categories') ?>>
+            <?= $this->url->link(t('Category distribution'), 'analytic', 'categories', array('project_id' => $project['id'])) ?>
+        </li>
         <li <?= $this->app->checkMenuSelection('analytic', 'users') ?>>
             <?= $this->url->link(t('User repartition'), 'analytic', 'users', array('project_id' => $project['id'])) ?>
         </li>

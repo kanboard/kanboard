@@ -15,6 +15,7 @@ class ClassProvider implements ServiceProviderInterface
 {
     private $classes = array(
         'Analytic' => array(
+            'CategoryDistributionAnalytic',
             'TaskDistributionAnalytic',
             'UserDistributionAnalytic',
             'EstimatedTimeComparisonAnalytic',
