@@ -1,4 +1,4 @@
-<div class="activity <?php echo $avatars ? : "no-avatars"; ?>">
+<div class="activity <?= $avatars ? : "no-avatars" ?>">
     <?php if (empty($events)): ?>
         <p class="alert"><?= t('There is no activity yet.') ?></p>
     <?php else: ?>
