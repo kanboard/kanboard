@@ -1,6 +1,9 @@
 <?= $this->user->avatar($email, $author, 32) ?>
 
 <p class="activity-title">
+    <span class="activity-datetime">
+        <?= $this->dt->datetime($date_creation) ?>
+    </span>
     <i class="fa fa-arrows-v fa-fw"></i>
     <?= e('%s moved the task %s to the position #%d in the column "%s"',
             $this->text->e($author),
@@ -8,7 +11,4 @@
             $task['position'],
             $this->text->e($task['column_title'])
         ) ?>
-    <span class="activity-datetime">
-        <?= $this->dt->datetime($date_creation) ?>
-    </span>
 </p>
