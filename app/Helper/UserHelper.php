@@ -170,7 +170,7 @@ class UserHelper extends Base
     public function avatar($email, $alt = '', $size = 25)
     {
         if (! empty($email) && $this->config->get('integration_gravatar') == 1) {
-            return '<img class="avatar avatar-32" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=32" alt="'.$this->helper->text->e($alt).'" title="'.$this->helper->text->e($alt).'">';
+            return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s='.$size.'" alt="'.$this->helper->text->e($alt).'" title="'.$this->helper->text->e($alt).'">';
         }
 
         return '';
