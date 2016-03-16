@@ -18,9 +18,13 @@
     <?php endif ?>
     </span>
 
+    <?= $this->hook->render('template:board:public:task:before-title', array('task' => $task)) ?>
+
     <div class="task-board-title">
         <?= $this->url->link($this->text->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
     </div>
+    
+    <?= $this->hook->render('template:board:public:task:after-title', array('task' => $task)) ?>
 
     <?= $this->render('board/task_footer', array(
         'task' => $task,

@@ -59,6 +59,8 @@
             <i class="fa fa-file-text-o"></i>
         </span>
     <?php endif ?>
+    
+    <?= $this->hook->render('template:board:task:footer', array('task' => $task)) ?>
 
     <?php if ($task['score']): ?>
         <span class="task-score"><?= $this->text->e($task['score']) ?></span>

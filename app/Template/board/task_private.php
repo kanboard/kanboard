@@ -71,9 +71,13 @@
                 <div class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></div>
             <?php endif ?>
 
+            <?= $this->hook->render('template:board:private:task:before-title', array('task' => $task)) ?>
+
             <div class="task-board-title">
                 <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
             </div>
+            
+            <?= $this->hook->render('template:board:private:task:after-title', array('task' => $task)) ?>
 
             <?= $this->render('board/task_footer', array(
                     'task' => $task,
