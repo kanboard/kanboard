@@ -10,7 +10,6 @@ Dockerfile export-ignore
 Makefile export-ignore
 README.md export-ignore
 Vagrantfile export-ignore
-app.json export-ignore
 issue_template.md export-ignore
 data/*.sqlite export-ignore
 tests export-ignore
