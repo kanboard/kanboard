@@ -32,6 +32,11 @@
     border-radius: 2px;
 }
 
+.activity-content .markdown {
+    margin-left: 3ex;
+}
+
+
 .activity-title {
     color: #000;
     font-size: 0.9em;
