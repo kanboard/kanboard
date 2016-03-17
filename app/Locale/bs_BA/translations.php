@@ -1027,7 +1027,7 @@ return array(
     'Password reset history' => 'Hitorija promjena šifri',
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Svi zadaci kolone "%s" i swimline-a "%s" uspješno su zatvoreni.',
     'Do you really want to close all tasks of this column?' => 'Da li zaista želiš zatvoriti sve zadatke ove kolone?',
-    '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d zadatak(ci) u koloni "%s" i swimline-u će biti zatvoreni.',
+    '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d zadatak(ci) u koloni "%s" i swimline-u "%s" će biti zatvoreni.',
     'Close all tasks of this column' => 'Zatvori sve zadatke ove kolone',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Nema posebnog plugin-a za obavještenja. Još uvijek možeš koristiti individualne postavke obavještenja na svom profilu.',
     'My dashboard' => 'Moj panel',
