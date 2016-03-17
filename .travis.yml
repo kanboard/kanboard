@@ -1,3 +1,6 @@
+git:
+  depth: 3
+
 language: php
 sudo: false
 
@@ -17,6 +20,7 @@ matrix:
   fast_finish: true
 
 before_script:
+  - phpenv config-rm xdebug.ini
   - phpenv config-add tests/php.ini
   - composer install
   - php -i
