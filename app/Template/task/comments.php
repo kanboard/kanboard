@@ -9,7 +9,19 @@
             </span>
         </h2>
     </div>
-
+    <?php if ($editable && $commentsSorting == "DESC"): ?>
+        <?= $this->render('comment/create', array(
+            'skip_cancel' => true,
+            'values' => array(
+                'user_id' => $this->user->getId(),
+                'task_id' => $task['id'],
+            ),
+            'errors' => array(),
+            'task' => $task,
+            'user' => $this->user
+        )) ?>
+    <?php endif ?>
+    
     <?php foreach ($comments as $comment): ?>
         <?= $this->render('comment/show', array(
             'comment' => $comment,
@@ -20,7 +32,7 @@
         )) ?>
     <?php endforeach ?>
 
-    <?php if ($editable): ?>
+    <?php if ($editable && $commentsSorting == "ASC"): ?>
         <?= $this->render('comment/create', array(
             'skip_cancel' => true,
             'values' => array(
