@@ -11,5 +11,5 @@
         ) ?>
 </p>
 <p class="activity-description">
-    <code><?= $this->text->e($file['name']) ?></code>
+    <i class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></i> <?= $this->url->link(e($file['name']), 'FileViewer', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['file_id'])) ?>
 </p>
