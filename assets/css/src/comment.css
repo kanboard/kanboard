@@ -24,7 +24,7 @@ span.comment-sorting a:hover {
     background: #F7F8E0;
 }
 
-.comment .avatar {
+.comment .avatar, .form-comment .avatar {
     margin-left: -37px;
 }
 

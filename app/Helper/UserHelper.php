@@ -158,6 +158,17 @@ class UserHelper extends Base
     {
         return $this->user->getFullname(empty($user) ? $this->sessionStorage->user : $user);
     }
+    
+    /**
+     * Return the user email
+     *
+     * @param  array    $user   User properties
+     * @return string
+     */
+    public function getEmail(array $user = array())
+    {
+        return $this->user->getEmail(empty($user) ? $this->sessionStorage->user : $user);
+    }
 
     /**
      * Display gravatar image

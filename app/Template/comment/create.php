@@ -1,4 +1,7 @@
 <form class="popover-form form-comment" method="post" action="<?= $this->url->href('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <?php if(isset($user)): ?>
+        <?= $user->avatar($user->getEmail(), $user->getFullName(), 32) ?>
+    <?php endif ?>
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('task_id', $values) ?>
     <?= $this->form->hidden('user_id', $values) ?>
