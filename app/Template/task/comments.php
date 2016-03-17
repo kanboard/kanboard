@@ -1,5 +1,5 @@
 <?php if (! empty($comments)): ?>
-<div id="comments" class="task-show-section">
+<div id="comments" class="task-show-section <?= $avatars ?: "no-avatars" ?>">
     <div class="page-header">
         <h2>
             <?= t('Comments') ?>

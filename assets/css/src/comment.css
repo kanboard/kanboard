@@ -128,3 +128,7 @@ span.comment-sorting a:hover {
 #comments .form-actions {
     padding: 5px;
 }
+
+.no-avatars .comment, #comments.no-avatars .form-comment{
+    margin-left: 0;
+}

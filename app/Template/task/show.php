@@ -50,6 +50,7 @@
     'comments' => $comments,
     'project' => $project,
     'editable' => $this->user->hasProjectAccess('comment', 'edit', $project['id']),
+    'avatars' => $this->app->config->get('integration_gravatar') == 1
 )) ?>
 
 <?= $this->hook->render('template:task:show:bottom', array('task' => $task, 'project' => $project)) ?>
