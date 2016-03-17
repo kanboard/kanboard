@@ -46,8 +46,10 @@ input[type="number"] {
 
 textarea {
     border: 1px solid #ccc;
-    width: 400px;
-    max-width: 99%;
+    width: 100%;
+    padding: 5px;
+    max-width: 100%;
+    box-sizing: border-box;
     height: 200px;
     font-size: 100%;
     font-family: sans-serif;
@@ -191,7 +193,6 @@ label + .form-tabs {
 
 .form-tabs {
     width: 100%;
-    max-width: 800px;
 }
 
 ul.form-tabs-nav {
@@ -225,12 +226,13 @@ ul.form-tabs-nav {
 
 .preview-area {
     border: 1px dashed #000;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 5px;
     margin-bottom: 5px;
     display: none;
     overflow: auto;
+    width: 100%!important;
+    box-sizing: border-box;
+    background-color: #fff;
 }
 
 .reset-password {

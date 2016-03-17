@@ -29,6 +29,7 @@
             ),
             'errors' => array(),
             'task' => $task,
+            'user' => $this->user
         )) ?>
     <?php endif ?>
 </div>

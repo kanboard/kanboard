@@ -213,8 +213,6 @@ span.task-board-date-overdue {
 }
 
 .task-show-description-textarea {
-    width: 99%;
-    max-width: 99%;
     height: 300px;
 }
 
