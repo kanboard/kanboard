@@ -211,14 +211,15 @@ class User
      *
      * @access public
      * @param  string  $username
+     * @param  string  $filter
      * @return string
      */
-    public function getLdapUserPattern($username)
+    public function getLdapUserPattern($username, $filter = LDAP_USER_FILTER)
     {
-        if (! LDAP_USER_FILTER) {
+        if (! $filter) {
             throw new LogicException('LDAP user filter empty, check the parameter LDAP_USER_FILTER');
         }
 
-        return sprintf(LDAP_USER_FILTER, $username);
+        return str_replace('%s', $username, $filter);
     }
 }

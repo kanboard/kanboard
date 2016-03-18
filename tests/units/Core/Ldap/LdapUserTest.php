@@ -321,8 +321,6 @@ class LdapUserTest extends Base
 
     public function testGetUserNotFound()
     {
-        $entries = new Entries(array());
-
         $this->client
             ->expects($this->any())
             ->method('getConnection')
@@ -375,5 +373,31 @@ class LdapUserTest extends Base
 
         $user = new User($this->query);
         $user->getBasDn();
+    }
+
+    public function testGetLdapUserPatternNotConfigured()
+    {
+        $this->setExpectedException('\LogicException');
+
+        $user = new User($this->query);
+        $user->getLdapUserPattern('test');
+    }
+
+    public function testGetLdapUserWithMultiplePlaceholders()
+    {
+        $filter = '(|(&(objectClass=user)(mail=%s))(&(objectClass=user)(sAMAccountName=%s)))';
+        $expected = '(|(&(objectClass=user)(mail=test))(&(objectClass=user)(sAMAccountName=test)))';
+
+        $user = new User($this->query);
+        $this->assertEquals($expected, $user->getLdapUserPattern('test', $filter));
+    }
+
+    public function testGetLdapUserWithOnePlaceholder()
+    {
+        $filter = '(sAMAccountName=%s)';
+        $expected = '(sAMAccountName=test)';
+
+        $user = new User($this->query);
+        $this->assertEquals($expected, $user->getLdapUserPattern('test', $filter));
     }
 }
