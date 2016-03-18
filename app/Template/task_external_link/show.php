@@ -4,6 +4,12 @@
 
 <div class="page-header">
     <h2><?= t('External links') ?></h2>
+    <ul>
+        <li>
+            <i class="fa fa-external-link fa-fw"></i>
+            <?= $this->url->link(t('Add external link'), 'TaskExternalLink', 'find', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+    </ul>
 </div>
 
 <?php if (empty($links)): ?>

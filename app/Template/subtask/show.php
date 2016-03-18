@@ -6,6 +6,12 @@
 
 <div class="page-header">
     <h2><?= t('Sub-Tasks') ?></h2>
+    <ul>
+        <li>
+            <i class="fa fa-plus fa-fw"></i>
+            <?= $this->url->link(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+    </ul>
 </div>
 
 <div id="subtasks">

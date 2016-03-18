@@ -2,6 +2,12 @@
     <div id="description" class="task-show-section">
         <div class="page-header">
             <h2><?= t('Description') ?></h2>
+            <ul>
+                <li>
+                    <i class="fa fa-edit fa-fw"></i>
+                    <?= $this->url->link(t('Edit the description'), 'taskmodification', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+                </li>
+            </ul>
         </div>
 
         <article class="markdown task-show-description">

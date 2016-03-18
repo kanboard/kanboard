@@ -6,6 +6,12 @@
 
 <div class="page-header">
     <h2><?= t('Internal links') ?></h2>
+    <ul>
+        <li>
+            <i class="fa fa-code-fork fa-fw"></i>
+            <?= $this->url->link(t('Add internal link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+    </ul>
 </div>
 
 <div id="link">
