@@ -75,6 +75,7 @@ class Task extends Base
             'files' => $this->taskFile->getAllDocuments($task['id']),
             'images' => $this->taskFile->getAllImages($task['id']),
             'comments' => $this->comment->getAll($task['id'], $this->userSession->getCommentSorting()),
+            'commentsSorting' => $this->userSession->getCommentSorting(),
             'subtasks' => $subtasks,
             'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
             'task' => $task,

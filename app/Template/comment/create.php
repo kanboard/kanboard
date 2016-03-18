@@ -1,11 +1,13 @@
-<div class="page-header">
-    <h2><?= t('Add a comment') ?></h2>
-</div>
-<form class="popover-form" method="post" action="<?= $this->url->href('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off" class="form-comment">
+<form class="popover-form form-comment" method="post" action="<?= $this->url->href('comment', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <?php if(isset($user)): ?>
+        <?= $user->avatar($user->getEmail(), $user->getFullName(), 32) ?>
+    <?php endif ?>
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('task_id', $values) ?>
     <?= $this->form->hidden('user_id', $values) ?>
-
+    <div class="page-header">
+        <h2><?= t('Add a comment') ?></h2>
+    </div>
     <div class="form-tabs">
         <ul class="form-tabs-nav">
             <li class="form-tab form-tab-selected">

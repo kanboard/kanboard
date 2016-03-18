@@ -36,5 +36,8 @@
         </ul>
     </div>
 
-    <?= $this->render('event/events', array('events' => $events)) ?>
+    <?= $this->render('event/events', array(
+            'events' => $events,
+            'avatars' => $this->app->config->get('integration_gravatar') == 1
+        )) ?>
 </section>

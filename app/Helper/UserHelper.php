@@ -158,6 +158,17 @@ class UserHelper extends Base
     {
         return $this->user->getFullname(empty($user) ? $this->sessionStorage->user : $user);
     }
+    
+    /**
+     * Return the user email
+     *
+     * @param  array    $user   User properties
+     * @return string
+     */
+    public function getEmail(array $user = array())
+    {
+        return $this->user->getEmail(empty($user) ? $this->sessionStorage->user : $user);
+    }
 
     /**
      * Display gravatar image
@@ -167,10 +178,10 @@ class UserHelper extends Base
      * @param  string  $alt
      * @return string
      */
-    public function avatar($email, $alt = '')
+    public function avatar($email, $alt = '', $size = 25)
     {
         if (! empty($email) && $this->config->get('integration_gravatar') == 1) {
-            return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=25" alt="'.$this->helper->text->e($alt).'" title="'.$this->helper->text->e($alt).'">';
+            return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s='.$size.'" alt="'.$this->helper->text->e($alt).'" title="'.$this->helper->text->e($alt).'">';
         }
 
         return '';
