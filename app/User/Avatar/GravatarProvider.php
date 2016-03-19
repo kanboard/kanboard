@@ -5,6 +5,12 @@ namespace Kanboard\User\Avatar;
 use Kanboard\Core\Base;
 use Kanboard\Core\User\Avatar\AvatarProviderInterface;
 
+/**
+ * Gravatar Avatar Provider
+ *
+ * @package  avatar
+ * @author   Frederic Guillot
+ */
 class GravatarProvider extends Base implements AvatarProviderInterface
 {
     /**

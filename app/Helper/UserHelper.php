@@ -171,7 +171,7 @@ class UserHelper extends Base
      */
     public function avatar($user_id, $username, $name, $email)
     {
-        $html = $this->avatarManager->render($user_id, $username, $name, $email, 25);
+        $html = $this->avatarManager->render($user_id, $username, $name, $email, 48);
         return '<div class="avatar">'.$html.'</div>';
     }
 }

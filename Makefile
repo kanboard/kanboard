@@ -1,6 +1,6 @@
 BUILD_DIR = /tmp
 
-CSS_APP = $(addprefix assets/css/src/, $(addsuffix .css, base links title table form button alert tooltip header board task comment subtask tasklink markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown upload filters gantt project files views accordion))
+CSS_APP = $(addprefix assets/css/src/, $(addsuffix .css, base links title table form button alert tooltip header board task comment subtask tasklink markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown upload filters gantt project files views accordion avatar))
 CSS_PRINT = $(addprefix assets/css/src/, $(addsuffix .css, print links table board task comment subtask tasklink markdown))
 CSS_VENDOR = $(addprefix assets/css/vendor/, $(addsuffix .css, jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min))
 

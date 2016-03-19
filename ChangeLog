@@ -3,6 +3,7 @@ Version 1.0.27 (unreleased)
 
 Improvements:
 
+* Added letter avatar provider
 * Added pluggable Avatar providers
 * Improve task summary sections
 * Put back the action sidebar in task view

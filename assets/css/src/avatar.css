@@ -1,0 +1,17 @@
+.avatar {
+    float: left;
+    margin-right: 10px;
+}
+
+.avatar img,
+.avatar div {
+    border-radius: 30px;
+}
+
+.avatar-letter {
+    color: #fff;
+    line-height: 48px;
+    width: 48px;
+    font-size: 25px;
+    text-align: center;
+}

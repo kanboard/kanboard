@@ -5,7 +5,7 @@ namespace Kanboard\Core\User\Avatar;
 /**
  * Avatar Manager
  *
- * @package  user
+ * @package  avatar
  * @author   Frederic Guillot
  */
 class AvatarManager
@@ -50,6 +50,8 @@ class AvatarManager
             'name' => $name,
             'email' => $email,
         );
+
+        krsort($this->providers);
 
         foreach ($this->providers as $provider) {
             if ($provider->isActive($user)) {

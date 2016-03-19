@@ -6,6 +6,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Kanboard\Core\User\Avatar\AvatarManager;
 use Kanboard\User\Avatar\GravatarProvider;
+use Kanboard\User\Avatar\LetterAvatarProvider;
 
 /**
  * Avatar Provider
@@ -25,6 +26,7 @@ class AvatarProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         $container['avatarManager'] = new AvatarManager;
+        $container['avatarManager']->register(new LetterAvatarProvider($container));
         $container['avatarManager']->register(new GravatarProvider($container));
         return $container;
     }
