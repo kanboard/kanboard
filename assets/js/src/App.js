@@ -138,7 +138,7 @@ App.prototype.autoComplete = function() {
         var extraField = input.data("dst-extra-field");
 
         if ($('#form-' + field).val() == '') {
-            input.parent().find("input[type=submit]").attr('disabled','disabled');
+            input.parent().find("button[type=submit]").attr('disabled','disabled');
         }
 
         input.autocomplete({
@@ -151,7 +151,7 @@ App.prototype.autoComplete = function() {
                     $("input[name=" + extraField + "]").val(ui.item[extraField]);
                 }
 
-                input.parent().find("input[type=submit]").removeAttr('disabled');
+                input.parent().find("button[type=submit]").removeAttr('disabled');
             }
         });
     });
