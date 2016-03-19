@@ -1,3 +1,23 @@
+<?php if (! empty($task['owner_id'])): ?>
+    <div class="task-board-avatars">
+    <span
+        <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+        class="task-board-assignee task-board-change-assignee"
+        data-url="<?= $this->url->href('BoardPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+    <?php else: ?>
+        class="task-board-assignee">
+    <?php endif ?>
+        <?= $this->avatar->small(
+            $task['owner_id'],
+            $task['assignee_username'],
+            $task['assignee_name'],
+            $task['assignee_email'],
+            'avatar-inline'
+        ) ?>
+    </span>
+    </div>
+<?php endif ?>
+
 <?php if (! empty($task['category_id'])): ?>
 <div class="task-board-category-container">
     <span class="task-board-category">
@@ -14,26 +34,6 @@
                 ! empty($task['category_description']) ? $this->text->markdown($task['category_description']) : t('Change category')
             ) ?>
         <?php endif ?>
-    </span>
-</div>
-<?php endif ?>
-
-<?php if (! empty($task['owner_id'])): ?>
-<div class="task-board-avatars">
-    <span
-    <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
-        class="task-board-assignee task-board-change-assignee"
-        data-url="<?= $this->url->href('BoardPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
-    <?php else: ?>
-        class="task-board-assignee">
-    <?php endif ?>
-        <?= $this->avatar->small(
-            $task['owner_id'],
-            $task['assignee_username'],
-            $task['assignee_name'],
-            $task['assignee_email'],
-            'avatar-inline'
-        ) ?>
     </span>
 </div>
 <?php endif ?>
