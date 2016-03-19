@@ -730,7 +730,7 @@ return array(
     // 'Time spent changed: %sh' => '',
     // 'Time estimated changed: %sh' => '',
     // 'The field "%s" have been updated' => '',
-    // 'The description has been modified' => '',
+    // 'The description has been modified:' => '',
     // 'Do you really want to close the task "%s" as well as all subtasks?' => '',
     'I want to receive notifications for:' => 'Jeg vil motta varslinger om:',
     'All tasks' => 'Alle oppgaver',

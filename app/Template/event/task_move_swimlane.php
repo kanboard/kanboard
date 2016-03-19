@@ -11,7 +11,8 @@
                 $this->text->e($task['swimlane_name'])
             ) ?>
     <?php endif ?>
+    <span class="activity-date"><?= $this->dt->datetime($date_creation) ?></span>
 </p>
-<p class="activity-description">
-    <em><?= $this->text->e($task['title']) ?></em>
-</p>
+<div class="activity-description">
+    <p class="activity-task-title"><?= $this->text->e($task['title']) ?></p>
+</div>

@@ -730,7 +730,7 @@ return array(
     'Time spent changed: %sh' => '时间花费已变更：%sh',
     'Time estimated changed: %sh' => '时间预估已变更：%sh',
     'The field "%s" have been updated' => '"%s"字段已更新',
-    'The description has been modified' => '描述已更改',
+    'The description has been modified:' => '描述已更改',
     'Do you really want to close the task "%s" as well as all subtasks?' => '你是否要移除所有子任务的同时父任务"%s"',
     'I want to receive notifications for:' => '我想接收以下相关通知：',
     'All tasks' => '所有任务',

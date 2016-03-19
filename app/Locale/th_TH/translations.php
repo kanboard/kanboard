@@ -730,7 +730,7 @@ return array(
     'Time spent changed: %sh' => 'เวลาที่ใช้ในการเปลี่ยน: %s ชม.',
     'Time estimated changed: %sh' => 'เวลาโดยประมาณในการเปลี่ยน: %s ชม.',
     'The field "%s" have been updated' => 'ฟิลด์ "%s" ถูกปรับปรุง',
-    'The description has been modified' => 'คำอธิบายถูกแก้ไข',
+    'The description has been modified:' => 'คำอธิบายถูกแก้ไข',
     'Do you really want to close the task "%s" as well as all subtasks?' => 'คุณต้องการปิดงาน "%s" เช่นเดียวกับงานย่อยทั้งหมด?',
     'I want to receive notifications for:' => 'ฉันต้องการรับการแจ้งเตือนสำหรับ:',
     'All tasks' => 'ทุกงาน',

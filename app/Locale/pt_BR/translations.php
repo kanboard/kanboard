@@ -730,7 +730,7 @@ return array(
     'Time spent changed: %sh' => 'O tempo despendido foi mudado: %sh',
     'Time estimated changed: %sh' => 'O tempo estimado foi mudado/ %sh',
     'The field "%s" have been updated' => 'O campo "%s" foi atualizada',
-    'The description has been modified' => 'A descrição foi modificada',
+    'The description has been modified:' => 'A descrição foi modificada',
     'Do you really want to close the task "%s" as well as all subtasks?' => 'Você realmente deseja finalizar a tarefa "%s" e todas as suas subtarefas?',
     'I want to receive notifications for:' => 'Eu quero receber as notificações para:',
     'All tasks' => 'Todas as tarefas',

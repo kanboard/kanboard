@@ -730,7 +730,7 @@ return array(
     'Time spent changed: %sh' => 'Utrošeno vrijeme je promijenjeno: %sh',
     'Time estimated changed: %sh' => 'Očekivano vrijeme je promijenjeno: %sh',
     'The field "%s" have been updated' => 'Polje "%s" je ažurirano',
-    'The description has been modified' => 'Promijenjen opis',
+    'The description has been modified:' => 'Promijenjen opis',
     'Do you really want to close the task "%s" as well as all subtasks?' => 'Da li zaista želiš zatvoriti zadatak "%s" kao i sve pod-zadatke?',
     'I want to receive notifications for:' => 'Želim dobijati obavještenja za:',
     'All tasks' => 'Sve zadatke',
