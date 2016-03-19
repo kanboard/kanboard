@@ -1,3 +1,4 @@
+<?php if (! empty($links)): ?>
 <table class="table-stripped table-small">
     <tr>
         <th class="column-10"><?= t('Type') ?></th>
@@ -40,3 +41,4 @@
         </tr>
     <?php endforeach ?>
 </table>
+<?php endif ?>
