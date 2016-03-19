@@ -36,6 +36,17 @@ class UserSession extends Base
     }
 
     /**
+     * Get user properties
+     *
+     * @access public
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->sessionStorage->user;
+    }
+
+    /**
      * Get user application role
      *
      * @access public

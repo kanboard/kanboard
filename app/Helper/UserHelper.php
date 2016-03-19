@@ -156,27 +156,6 @@ class UserHelper extends Base
      */
     public function getFullname(array $user = array())
     {
-        return $this->user->getFullname(empty($user) ? $this->sessionStorage->user : $user);
-    }
-
-    /**
-     * Display avatar
-     *
-     * @access public
-     * @param  string   $user_id
-     * @param  string   $username
-     * @param  string   $name
-     * @param  string   $email
-     * @return string
-     */
-    public function avatar($user_id, $username, $name, $email)
-    {
-        if (empty($user_id) && empty($username)) {
-            $html = $this->avatarManager->renderDefault(48);
-        } else {
-            $html = $this->avatarManager->render($user_id, $username, $name, $email, 48);
-        }
-
-        return '<div class="avatar">'.$html.'</div>';
+        return $this->user->getFullname(empty($user) ? $this->userSession->getAll() : $user);
     }
 }

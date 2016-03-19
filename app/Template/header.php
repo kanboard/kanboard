@@ -58,7 +58,7 @@
                 <?php endif ?>
 
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><?= $this->avatar->currentUserSmall('avatar-inline') ?><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li class="no-hover"><strong><?= $this->text->e($this->user->getFullname()) ?></strong></li>
                         <li>

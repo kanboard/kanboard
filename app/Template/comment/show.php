@@ -1,6 +1,6 @@
 <div class="comment <?= isset($preview) ? 'comment-preview' : '' ?>" id="comment-<?= $comment['id'] ?>">
 
-    <?= $this->user->avatar($comment['user_id'], $comment['username'], $comment['name'], $comment['email']) ?>
+    <?= $this->avatar->render($comment['user_id'], $comment['username'], $comment['name'], $comment['email']) ?>
 
     <div class="comment-title">
         <?php if (! empty($comment['username'])): ?>
