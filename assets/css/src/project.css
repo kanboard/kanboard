@@ -29,6 +29,9 @@
 .project-overview-column {
     text-align: center;
     margin-right: 80px;
+    padding: 3px 15px 3px 15px;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
 }
 
 .project-overview-column strong {
