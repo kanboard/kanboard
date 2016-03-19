@@ -14,8 +14,6 @@ Popover.prototype.open = function(link) {
 
     $.get(link, function(content) {
         $("body").prepend('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
-        self.app.refresh();
-        self.router.dispatch(this.app);
         self.afterOpen();
     });
 };
@@ -57,6 +55,9 @@ Popover.prototype.listen = function() {
 Popover.prototype.afterOpen = function() {
     var self = this;
     var popoverForm = $("#popover-content .popover-form");
+
+    self.app.refresh();
+    self.router.dispatch(this.app);
 
     // Submit forms with Ajax request
     if (popoverForm) {
