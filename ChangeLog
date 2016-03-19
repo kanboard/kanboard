@@ -3,6 +3,7 @@ Version 1.0.27 (unreleased)
 
 Improvements:
 
+* Improve comments design
 * Added letter avatar provider
 * Added pluggable Avatar providers
 * Improve task summary sections

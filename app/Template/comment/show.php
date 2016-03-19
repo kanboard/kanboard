@@ -1,30 +1,16 @@
 <div class="comment <?= isset($preview) ? 'comment-preview' : '' ?>" id="comment-<?= $comment['id'] ?>">
 
-    <p class="comment-title">
-        <?= $this->user->avatar($comment['user_id'], $comment['username'], $comment['name'], $comment['email']) ?>
+    <?= $this->user->avatar($comment['user_id'], $comment['username'], $comment['name'], $comment['email']) ?>
 
+    <div class="comment-title">
         <?php if (! empty($comment['username'])): ?>
-            <span class="comment-username"><?= $this->text->e($comment['name'] ?: $comment['username']) ?></span> @
+            <span class="comment-username"><?= $this->text->e($comment['name'] ?: $comment['username']) ?></span>
         <?php endif ?>
 
         <span class="comment-date"><?= $this->dt->datetime($comment['date_creation']) ?></span>
-    </p>
-    <div class="comment-inner">
+    </div>
 
-        <?php if (! isset($preview)): ?>
-        <ul class="comment-actions">
-            <li><a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a></li>
-            <?php if ($editable && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
-                <li>
-                    <?= $this->url->link(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
-                </li>
-                <li>
-                    <?= $this->url->link(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
-                </li>
-            <?php endif ?>
-        </ul>
-        <?php endif ?>
-
+    <div class="comment-content">
         <div class="markdown">
             <?php if (isset($is_public) && $is_public): ?>
                 <?= $this->text->markdown(
@@ -50,6 +36,26 @@
                 ) ?>
             <?php endif ?>
         </div>
-
     </div>
+
+    <?php if (! isset($hide_actions)): ?>
+        <div class="comment-actions">
+            <ul>
+                <li>
+                    <i class="fa fa-link fa-fw"></i>
+                    <a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a>
+                </li>
+                <?php if ($editable && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
+                    <li>
+                        <i class="fa fa-remove fa-fw"></i>
+                        <?= $this->url->link(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
+                    </li>
+                    <li>
+                        <i class="fa fa-edit fa-fw"></i>
+                        <?= $this->url->link(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
+                    </li>
+                <?php endif ?>
+            </ul>
+        </div>
+    <?php endif ?>
 </div>
