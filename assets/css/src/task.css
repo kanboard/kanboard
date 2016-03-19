@@ -119,7 +119,6 @@ span.task-board-date-overdue {
 /* task score */
 .task-board .task-score {
     font-weight: bold;
-    font-size: 1.1em;
 }
 
 /* task age */

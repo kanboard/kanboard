@@ -126,6 +126,10 @@ th a:hover {
     width: 70%;
 }
 
+.column-80 {
+    width: 70%;
+}
+
 .draggable-row-handle {
     cursor: move;
     color: #dedede;

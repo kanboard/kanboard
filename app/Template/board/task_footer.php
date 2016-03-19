@@ -39,6 +39,13 @@
 <?php endif ?>
 
 <div class="task-board-icons">
+    <?php if ($task['score']): ?>
+        <span class="task-score" title="<?= t('Complexity') ?>">
+            <i class="fa fa-trophy"></i>
+            <?= $this->text->e($task['score']) ?>
+        </span>
+    <?php endif ?>
+
     <?php if (! empty($task['date_due'])): ?>
         <span class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
             <i class="fa fa-calendar"></i>
@@ -78,10 +85,6 @@
         <span title="<?= t('Description') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltip', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
             <i class="fa fa-file-text-o"></i>
         </span>
-    <?php endif ?>
-
-    <?php if ($task['score']): ?>
-        <span class="task-score"><?= $this->text->e($task['score']) ?></span>
     <?php endif ?>
 
     <?php if (! empty($task['time_estimated'])): ?>

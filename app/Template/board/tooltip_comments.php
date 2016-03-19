@@ -1,4 +1,4 @@
-<div class="comment-tooltip">
+<div class="tooltip-large">
     <?php foreach ($comments as $comment): ?>
         <?= $this->render('comment/show', array(
             'comment' => $comment,

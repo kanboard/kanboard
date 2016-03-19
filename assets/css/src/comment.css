@@ -80,8 +80,3 @@
     height: 80px;
     width: 500px;
 }
-
-/* comment board tooltip */
-.comment-tooltip {
-    min-width: 550px;
-}
