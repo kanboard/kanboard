@@ -61,4 +61,30 @@ class AvatarManager
 
         return '';
     }
+
+    /**
+     * Render default provider for unknown users (first provider registered)
+     *
+     * @access public
+     * @param  integer $size
+     * @return string
+     */
+    public function renderDefault($size)
+    {
+        if (count($this->providers) > 0) {
+            ksort($this->providers);
+            $provider = current($this->providers);
+
+            $user = array(
+                'id' => 0,
+                'username' => '',
+                'name' => '?',
+                'email' => '',
+            );
+
+            return $provider->render($user, $size);
+        }
+
+        return '';
+    }
 }
