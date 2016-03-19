@@ -1,5 +1,3 @@
-<?= $this->user->avatar($email, $author) ?>
-
 <p class="activity-title">
     <?= e('%s attached a new file to the task %s',
             $this->text->e($author),

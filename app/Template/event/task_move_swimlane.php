@@ -1,5 +1,3 @@
-<?= $this->user->avatar($email, $author) ?>
-
 <p class="activity-title">
     <?php if ($task['swimlane_id'] == 0): ?>
         <?= e('%s moved the task %s to the first swimlane',

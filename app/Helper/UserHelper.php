@@ -160,19 +160,18 @@ class UserHelper extends Base
     }
 
     /**
-     * Display gravatar image
+     * Display avatar
      *
      * @access public
-     * @param  string  $email
-     * @param  string  $alt
+     * @param  string   $user_id
+     * @param  string   $username
+     * @param  string   $name
+     * @param  string   $email
      * @return string
      */
-    public function avatar($email, $alt = '')
+    public function avatar($user_id, $username, $name, $email)
     {
-        if (! empty($email) && $this->config->get('integration_gravatar') == 1) {
-            return '<img class="avatar" src="https://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=25" alt="'.$this->helper->text->e($alt).'" title="'.$this->helper->text->e($alt).'">';
-        }
-
-        return '';
+        $html = $this->avatarManager->render($user_id, $username, $name, $email, 25);
+        return '<div class="avatar">'.$html.'</div>';
     }
 }

@@ -1,9 +1,7 @@
 <div class="comment <?= isset($preview) ? 'comment-preview' : '' ?>" id="comment-<?= $comment['id'] ?>">
 
     <p class="comment-title">
-        <?php if (! empty($comment['email'])): ?>
-            <?= $this->user->avatar($comment['email'], $comment['name'] ?: $comment['username']) ?>
-        <?php endif ?>
+        <?= $this->user->avatar($comment['user_id'], $comment['username'], $comment['name'], $comment['email']) ?>
 
         <?php if (! empty($comment['username'])): ?>
             <span class="comment-username"><?= $this->text->e($comment['name'] ?: $comment['username']) ?></span> @

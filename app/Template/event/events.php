@@ -16,7 +16,16 @@
                 <?php endif ?>
                 &nbsp;<?= $this->dt->datetime($event['date_creation']) ?>
             </p>
-            <div class="activity-content"><?= $event['event_content'] ?></div>
+            <div class="activity-content">
+                <?= $this->user->avatar(
+                    $event['creator_id'],
+                    $event['author_username'],
+                    $event['author_name'],
+                    $event['email']
+                ) ?>
+
+                <?= $event['event_content'] ?>
+            </div>
         </div>
     <?php endforeach ?>
 
