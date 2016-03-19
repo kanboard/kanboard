@@ -64,6 +64,7 @@ div.task-board-status-closed {
 /* category label */
 .task-board-category-container {
     text-align: right;
+    margin-top: 8px;
     margin-bottom: 8px;
 }
 
@@ -88,6 +89,7 @@ div.task-board-status-closed {
 .task-board-icons {
     text-align: right;
     margin-top: 4px;
+    margin-bottom: 2px;
 }
 
 .task-board-icons a {
