@@ -20,12 +20,12 @@
 
 <?php if (! empty($task['owner_id'])): ?>
 <div class="task-board-avatars">
+    <span
     <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
-    <div
         class="task-board-assignee task-board-change-assignee"
         data-url="<?= $this->url->href('BoardPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
     <?php else: ?>
-        <div class="task-board-assignee">
+        class="task-board-assignee">
     <?php endif ?>
         <?= $this->avatar->small(
             $task['owner_id'],
@@ -34,7 +34,7 @@
             $task['assignee_email'],
             'avatar-inline'
         ) ?>
-    </div>
+    </span>
 </div>
 <?php endif ?>
 
@@ -95,6 +95,15 @@
     <?php endif ?>
 
     <?= $this->task->formatPriority($project, $task) ?>
+
+    <?php if ($task['is_active'] == 1): ?>
+        <div class="task-board-age">
+            <span title="<?= t('Task age in days')?>" class="task-board-age-total"><?= $this->dt->age($task['date_creation']) ?></span>
+            <span title="<?= t('Days in this column')?>" class="task-board-age-column"><?= $this->dt->age($task['date_moved']) ?></span>
+        </div>
+    <?php else: ?>
+        <span class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></span>
+    <?php endif ?>
 </div>
 
 <?= $this->hook->render('template:board:task:footer', array('task' => $task)) ?>

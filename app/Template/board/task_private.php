@@ -44,20 +44,11 @@
             </span>
             <?php endif ?>
 
-            <?php if ($task['is_active'] == 1): ?>
-            <div class="task-board-days">
-                <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->dt->age($task['date_creation']) ?></span>
-                <span title="<?= t('Days in this column')?>" class="task-days-incolumn"><?= $this->dt->age($task['date_moved']) ?></span>
-            </div>
-            <?php else: ?>
-                <div class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></div>
-            <?php endif ?>
-
             <?= $this->hook->render('template:board:private:task:before-title', array('task' => $task)) ?>
 
-            <div class="task-board-title">
+            <span class="task-board-title">
                 <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
-            </div>
+            </span>
 
             <?= $this->hook->render('template:board:private:task:after-title', array('task' => $task)) ?>
 
