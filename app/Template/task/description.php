@@ -1,16 +1,9 @@
-<?php if (! empty($task['description'])): ?>
-    <div id="description" class="task-show-section">
-        <div class="page-header">
-            <h2><?= t('Description') ?></h2>
-            <ul>
-                <li>
-                    <i class="fa fa-edit fa-fw"></i>
-                    <?= $this->url->link(t('Edit the description'), 'taskmodification', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
-                </li>
-            </ul>
-        </div>
-
-        <article class="markdown task-show-description">
+<section class="accordion-section <?= empty($task['description']) ? 'accordion-collapsed' : '' ?>">
+    <div class="accordion-title">
+        <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Description') ?></h3>
+    </div>
+    <div class="accordion-content">
+        <article class="markdown">
             <?php if (! isset($is_public)): ?>
                 <?= $this->text->markdown(
                     $task['description'],
@@ -36,4 +29,4 @@
             <?php endif ?>
         </article>
     </div>
-<?php endif ?>
+</section>

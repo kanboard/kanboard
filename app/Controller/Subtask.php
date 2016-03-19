@@ -11,23 +11,6 @@ namespace Kanboard\Controller;
 class Subtask extends Base
 {
     /**
-     * Show list of subtasks
-     */
-    public function show()
-    {
-        $task = $this->getTask();
-
-        $this->response->html($this->helper->layout->task('subtask/show', array(
-            'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
-            'task' => $task,
-            'project' => $this->getProject(),
-            'subtasks' => $this->subtask->getAll($task['id']),
-            'editable' => true,
-            'show_title' => true,
-        )));
-    }
-
-    /**
      * Creation form
      *
      * @access public

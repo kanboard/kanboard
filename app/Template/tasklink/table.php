@@ -1,6 +1,4 @@
-<?php if (empty($links)): ?>
-    <p class="alert"><?= t('There is no internal link for the moment.') ?></p>
-<?php else: ?>
+<?php if (! empty($links)): ?>
 <table class="task-links-table table-stripped">
     <?php foreach ($links as $label => $grouped_links): ?>
         <?php $hide_td = false ?>

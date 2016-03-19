@@ -66,6 +66,4 @@
         <?php endforeach ?>
     </tbody>
     </table>
-<?php else: ?>
-    <p class="alert"><?= t('There is no subtask at the moment.') ?></p>
 <?php endif ?>

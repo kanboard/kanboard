@@ -29,27 +29,6 @@ class Tasklink extends Base
     }
 
     /**
-     * Show links
-     *
-     * @access public
-     */
-    public function show()
-    {
-        $task = $this->getTask();
-        $project = $this->project->getById($task['project_id']);
-
-        $this->response->html($this->helper->layout->task('tasklink/show', array(
-            'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
-            'task' => $task,
-            'project' => $project,
-            'link_label_list' => $this->link->getList(0, false),
-            'editable' => true,
-            'is_public' => false,
-            'show_title' => true,
-        )));
-    }
-
-    /**
      * Creation form
      *
      * @access public

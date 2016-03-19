@@ -3,6 +3,7 @@ Version 1.0.27 (unreleased)
 
 Improvements:
 
+* Improve task summary sections
 * Put back the action sidebar in task view
 * Added support for multiple placeholders for LDAP_USER_FILTER
 * Added local file link provider

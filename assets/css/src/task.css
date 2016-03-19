@@ -207,17 +207,6 @@ span.task-board-date-overdue {
     padding: 8px;
 }
 
-.task-show-description {
-    border-left: 4px solid #333;
-    padding-left: 20px;
-}
-
-.task-show-description-textarea {
-    width: 99%;
-    max-width: 99%;
-    height: 300px;
-}
-
 .task-link-closed {
     text-decoration: line-through;
 }

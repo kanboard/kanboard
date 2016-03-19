@@ -1,8 +1,5 @@
 <section id="main" class="public-task">
-
     <?= $this->render('task/details', array('task' => $task, 'project' => $project, 'editable' => false)) ?>
-
-    <p class="pull-right"><?= $this->url->link(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?></p>
 
     <?= $this->render('task/description', array(
         'task' => $task,
@@ -24,12 +21,11 @@
         'is_public' => true,
     )) ?>
 
-    <?= $this->render('task/comments', array(
+    <?= $this->render('comments/show', array(
         'task' => $task,
         'comments' => $comments,
         'project' => $project,
         'editable' => false,
         'is_public' => true,
     )) ?>
-
 </section>

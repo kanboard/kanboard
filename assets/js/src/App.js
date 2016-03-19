@@ -11,6 +11,7 @@ function App() {
     this.subtask = new Subtask(this);
     this.column = new Column(this);
     this.file = new FileUpload(this);
+    this.accordion = new Accordion(this);
     this.keyboardShortcuts();
     this.task.keyboardShortcuts();
     this.chosen();
@@ -34,6 +35,7 @@ App.prototype.listen = function() {
     this.subtask.listen();
     this.column.listen();
     this.file.listen();
+    this.accordion.listen();
     this.search.focus();
     this.autoComplete();
     this.datePicker();

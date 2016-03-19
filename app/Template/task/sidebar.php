@@ -23,18 +23,6 @@
             <?= $this->url->link(t('Time tracking'), 'task', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php endif ?>
-        <li <?= $this->app->checkMenuSelection('subtask', 'show') ?>>
-            <i class="fa fa-tasks fa-fw"></i>
-            <?= $this->url->link(t('Sub-tasks'), 'subtask', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
-        <li <?= $this->app->checkMenuSelection('tasklink', 'show') ?>>
-            <i class="fa fa-code-fork fa-fw"></i>
-            <?= $this->url->link(t('Internal links'), 'tasklink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
-        <li <?= $this->app->checkMenuSelection('TaskExternalLink', 'show') ?>>
-            <i class="fa fa-external-link fa-fw"></i>
-            <?= $this->url->link(t('External links'), 'TaskExternalLink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
     </ul>
     <h2><?= t('Actions') ?></h2>
     <ul>
@@ -53,6 +41,14 @@
         <li>
             <i class="fa fa-plus fa-fw"></i>
             <?= $this->url->link(t('Add a sub-task'), 'subtask', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+        <li>
+            <i class="fa fa-code-fork fa-fw"></i>
+            <?= $this->url->link(t('Add internal link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+        <li>
+            <i class="fa fa-external-link fa-fw"></i>
+            <?= $this->url->link(t('Add external link'), 'TaskExternalLink', 'find', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-comment-o fa-fw"></i>

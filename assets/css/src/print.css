@@ -1,6 +1,6 @@
 header,
 .sidebar,
-.form-comment,
+#comments form,
 .page-header {
     display: none;
 }
