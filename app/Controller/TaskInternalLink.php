@@ -3,13 +3,13 @@
 namespace Kanboard\Controller;
 
 /**
- * TaskLink controller
+ * TaskInternalLink Controller
  *
  * @package  controller
  * @author   Olivier Maridat
  * @author   Frederic Guillot
  */
-class Tasklink extends Base
+class TaskInternalLink extends Base
 {
     /**
      * Get the current link
@@ -37,12 +37,11 @@ class Tasklink extends Base
     {
         $task = $this->getTask();
 
-        $this->response->html($this->template->render('tasklink/create', array(
+        $this->response->html($this->template->render('task_internal_link/create', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
             'labels' => $this->link->getList(0, false),
-            'title' => t('Add a new link')
         )));
     }
 
@@ -61,7 +60,7 @@ class Tasklink extends Base
         if ($valid) {
             if ($this->taskLink->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->flash->success(t('Link added successfully.'));
-                return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links', true);
+                return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
             }
 
             $errors = array('title' => array(t('The exact same link already exists')));
@@ -87,13 +86,12 @@ class Tasklink extends Base
             $values['title'] = '#'.$opposite_task['id'].' - '.$opposite_task['title'];
         }
 
-        $this->response->html($this->template->render('tasklink/edit', array(
+        $this->response->html($this->template->render('task_internal_link/edit', array(
             'values' => $values,
             'errors' => $errors,
             'task_link' => $task_link,
             'task' => $task,
-            'labels' => $this->link->getList(0, false),
-            'title' => t('Edit link')
+            'labels' => $this->link->getList(0, false)
         )));
     }
 
@@ -131,7 +129,7 @@ class Tasklink extends Base
         $task = $this->getTask();
         $link = $this->getTaskLink();
 
-        $this->response->html($this->template->render('tasklink/remove', array(
+        $this->response->html($this->template->render('task_internal_link/remove', array(
             'link' => $link,
             'task' => $task,
         )));
@@ -153,6 +151,6 @@ class Tasklink extends Base
             $this->flash->failure(t('Unable to remove this link.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 }

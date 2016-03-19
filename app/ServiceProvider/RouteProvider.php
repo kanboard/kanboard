@@ -101,8 +101,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/task/:task_id/analytics', 'task', 'analytics');
             $container['route']->addRoute('project/:project_id/task/:task_id/subtasks', 'subtask', 'show');
             $container['route']->addRoute('project/:project_id/task/:task_id/time-tracking', 'task', 'timetracking');
-            $container['route']->addRoute('project/:project_id/task/:task_id/internal/links', 'tasklink', 'show');
-            $container['route']->addRoute('project/:project_id/task/:task_id/external/links', 'TaskExternalLink', 'show');
 
             // Exports
             $container['route']->addRoute('export/tasks/:project_id', 'export', 'tasks');

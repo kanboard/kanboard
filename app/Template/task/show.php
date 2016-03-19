@@ -19,7 +19,7 @@
 )) ?>
 
 <?= $this->hook->render('template:task:show:before-internal-links', array('task' => $task, 'project' => $project)) ?>
-<?= $this->render('tasklink/show', array(
+<?= $this->render('task_internal_link/show', array(
     'task' => $task,
     'links' => $internal_links,
     'project' => $project,

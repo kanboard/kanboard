@@ -13,7 +13,7 @@
         'editable' => false
     )) ?>
 
-    <?= $this->render('tasklink/show', array(
+    <?= $this->render('task_internal_link/show', array(
         'task' => $task,
         'links' => $links,
         'project' => $project,
