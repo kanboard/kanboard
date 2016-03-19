@@ -8,22 +8,12 @@
     </span>
     <?php endif ?>
 
-    &nbsp;-&nbsp;
-
-    <span class="task-board-user">
-    <?php if (! empty($task['owner_id'])): ?>
-        <?= t('Assigned to %s', $task['assignee_name'] ?: $task['assignee_username']) ?>
-    <?php else: ?>
-        <span class="task-board-nobody"><?= t('Nobody assigned') ?></span>
-    <?php endif ?>
-    </span>
-
     <?= $this->hook->render('template:board:public:task:before-title', array('task' => $task)) ?>
 
     <div class="task-board-title">
         <?= $this->url->link($this->text->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
     </div>
-    
+
     <?= $this->hook->render('template:board:public:task:after-title', array('task' => $task)) ?>
 
     <?= $this->render('board/task_footer', array(

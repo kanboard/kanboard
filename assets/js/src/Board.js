@@ -148,8 +148,13 @@ Board.prototype.changeTaskState = function(taskId) {
 Board.prototype.listen = function() {
     var self = this;
 
+    $(document).on("click", ".task-board-change-assignee", function(e) {
+        e.preventDefault();
+        self.app.popover.open($(this).data('url'));
+    });
+
     $(document).on("click", ".task-board", function(e) {
-        if (e.target.tagName != "A") {
+        if (e.target.tagName != "A" && e.target.tagName != "IMG") {
             window.location = $(this).data("task-url");
         }
     });

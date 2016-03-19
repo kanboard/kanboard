@@ -18,6 +18,26 @@
 </div>
 <?php endif ?>
 
+<?php if (! empty($task['owner_id'])): ?>
+<div class="task-board-avatars">
+    <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+    <div
+        class="task-board-assignee task-board-change-assignee"
+        data-url="<?= $this->url->href('BoardPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+    <?php else: ?>
+        <div class="task-board-assignee">
+    <?php endif ?>
+        <?= $this->avatar->small(
+            $task['owner_id'],
+            $task['assignee_username'],
+            $task['assignee_name'],
+            $task['assignee_email'],
+            'avatar-inline'
+        ) ?>
+    </div>
+</div>
+<?php endif ?>
+
 <div class="task-board-icons">
     <?php if (! empty($task['date_due'])): ?>
         <span class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
@@ -59,8 +79,6 @@
             <i class="fa fa-file-text-o"></i>
         </span>
     <?php endif ?>
-    
-    <?= $this->hook->render('template:board:task:footer', array('task' => $task)) ?>
 
     <?php if ($task['score']): ?>
         <span class="task-score"><?= $this->text->e($task['score']) ?></span>
@@ -78,3 +96,5 @@
 
     <?= $this->task->formatPriority($project, $task) ?>
 </div>
+
+<?= $this->hook->render('template:board:task:footer', array('task' => $task)) ?>

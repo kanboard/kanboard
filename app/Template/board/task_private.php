@@ -44,24 +44,6 @@
             </span>
             <?php endif ?>
 
-            <?php if (! empty($task['owner_id'])): ?>
-            <span class="task-board-user <?= $this->user->isCurrentUser($task['owner_id']) ? 'task-board-current-user' : '' ?>">
-                <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
-                    <?= $this->url->link(
-                        $task['assignee_name'] ?: $task['assignee_username'],
-                        'BoardPopover',
-                        'changeAssignee',
-                        array('task_id' => $task['id'], 'project_id' => $task['project_id']),
-                        false,
-                        'popover',
-                        t('Change assignee')
-                    ) ?>
-                <?php else: ?>
-                    <?= $this->text->e($task['assignee_name'] ?: $task['assignee_username']) ?>
-                <?php endif ?>
-            </span>
-            <?php endif ?>
-
             <?php if ($task['is_active'] == 1): ?>
             <div class="task-board-days">
                 <span title="<?= t('Task age in days')?>" class="task-days-age"><?= $this->dt->age($task['date_creation']) ?></span>
@@ -76,7 +58,7 @@
             <div class="task-board-title">
                 <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
             </div>
-            
+
             <?= $this->hook->render('template:board:private:task:after-title', array('task' => $task)) ?>
 
             <?= $this->render('board/task_footer', array(

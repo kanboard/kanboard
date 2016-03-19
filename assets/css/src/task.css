@@ -55,17 +55,8 @@ a.task-board-collapsed-title {
     font-weight: normal;
 }
 
-.task-board-user {
-    font-size: 0.8em;
-}
-
-.task-board-current-user a {
-    text-decoration: underline;
-}
-
-.task-board-current-user a:focus,
-.task-board-current-user a:hover {
-    text-decoration: none;
+.task-board-change-assignee {
+    cursor: pointer;
 }
 
 a.task-board-nobody {
