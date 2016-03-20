@@ -5,9 +5,11 @@ Kanboard.BoardCollapsedMode = function(app) {
 Kanboard.BoardCollapsedMode.prototype.keyboardShortcuts = function() {
     var self = this;
 
-    Mousetrap.bind("s", function() {
-        self.toggle();
-    });
+    if (self.app.hasId("board")) {
+        Mousetrap.bind("s", function() {
+            self.toggle();
+        });
+    }
 };
 
 Kanboard.BoardCollapsedMode.prototype.toggle = function() {
