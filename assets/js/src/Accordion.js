@@ -1,11 +1,11 @@
-function Accordion(app) {
+Kanboard.Accordion = function(app) {
     this.app = app;
-}
+};
 
-Accordion.prototype.listen = function() {
+Kanboard.Accordion.prototype.listen = function() {
     $(document).on("click", ".accordion-toggle", function(e) {
-        e.preventDefault();
         var section = $(this).parents(".accordion-section");
+        e.preventDefault();
 
         if (section.hasClass("accordion-collapsed")) {
             section.find(".accordion-content").show();

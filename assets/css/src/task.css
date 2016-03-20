@@ -10,6 +10,15 @@
     text-decoration: underline;
 }
 
+td.task-table a {
+    color: #000;
+    text-decoration: none;
+}
+
+td.task-table a:hover {
+    text-decoration: underline;
+}
+
 /* task inside the board */
 .task-board {
     position: relative;

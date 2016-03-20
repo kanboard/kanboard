@@ -68,15 +68,3 @@
 .comment-content {
     margin-left: 55px;
 }
-
-/* comment textarea */
-.comment-textarea {
-    height: 200px;
-    width: 80%;
-    max-width: 800px;
-}
-
-#comments .comment-textarea {
-    height: 80px;
-    width: 500px;
-}

@@ -1,7 +1,8 @@
-function Dropdown() {
-}
+Kanboard.Dropdown = function(app) {
+    this.app = app;
+};
 
-Dropdown.prototype.listen = function() {
+Kanboard.Dropdown.prototype.listen = function() {
     var self = this;
 
     $(document).on('click', function() {
@@ -46,23 +47,12 @@ Dropdown.prototype.listen = function() {
             $(this).find('a:visible')[0].click(); // Calling native click() not the jQuery one
         }
     });
-
-    // User mention autocomplete
-    $('textarea[data-mention-search-url]').textcomplete([{
-        match: /(^|\s)@(\w*)$/,
-        search: function (term, callback) {
-            var url = $('textarea[data-mention-search-url]').data('mention-search-url');
-            $.getJSON(url, { q: term })
-                .done(function (resp) { callback(resp); })
-                .fail(function ()     { callback([]);   });
-        },
-        replace: function (value) {
-            return '$1@' + value + ' ';
-        },
-        cache: true
-    }], {className: "textarea-dropdown"});
 };
 
-Dropdown.prototype.close = function() {
+Kanboard.Dropdown.prototype.close = function() {
     $("#dropdown").remove();
+};
+
+Kanboard.Dropdown.prototype.onPopoverOpened = function() {
+    this.close();
 };

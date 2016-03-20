@@ -1,20 +1,27 @@
-function LeadCycleTimeChart(app) {
+Kanboard.LeadCycleTimeChart = function(app) {
     this.app = app;
-}
+};
 
-LeadCycleTimeChart.prototype.execute = function() {
-    var metrics = $("#chart").data("metrics");
-    var cycle = [$("#chart").data("label-cycle")];
-    var lead = [$("#chart").data("label-lead")];
+Kanboard.LeadCycleTimeChart.prototype.execute = function() {
+    if (this.app.hasId("analytic-lead-cycle-time")) {
+        this.show();
+    }
+};
+
+Kanboard.LeadCycleTimeChart.prototype.show = function() {
+    var chart = $("#chart");
+    var metrics = chart.data("metrics");
+    var cycle = [chart.data("label-cycle")];
+    var lead = [chart.data("label-lead")];
     var categories = [];
 
     var types = {};
-    types[$("#chart").data("label-cycle")] = 'area';
-    types[$("#chart").data("label-lead")] = 'area-spline';
+    types[chart.data("label-cycle")] = 'area';
+    types[chart.data("label-lead")] = 'area-spline';
 
     var colors = {};
-    colors[$("#chart").data("label-lead")] = '#afb42b';
-    colors[$("#chart").data("label-cycle")] = '#4e342e';
+    colors[chart.data("label-lead")] = '#afb42b';
+    colors[chart.data("label-cycle")] = '#4e342e';
 
     for (var i = 0; i < metrics.length; i++) {
         cycle.push(parseInt(metrics[i].avg_cycle_time));

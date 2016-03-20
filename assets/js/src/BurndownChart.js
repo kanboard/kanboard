@@ -1,12 +1,20 @@
-function BurndownChart() {
-}
+Kanboard.BurndownChart = function(app) {
+    this.app = app;
+};
 
-BurndownChart.prototype.execute = function() {
-    var metrics = $("#chart").data("metrics");
-    var columns = [[$("#chart").data("label-total")]];
+Kanboard.BurndownChart.prototype.execute = function() {
+    if (this.app.hasId("analytic-burndown")) {
+        this.show();
+    }
+};
+
+Kanboard.BurndownChart.prototype.show = function() {
+    var chart = $("#chart");
+    var metrics = chart.data("metrics");
+    var columns = [[chart.data("label-total")]];
     var categories = [];
     var inputFormat = d3.time.format("%Y-%m-%d");
-    var outputFormat = d3.time.format($("#chart").data("date-format"));
+    var outputFormat = d3.time.format(chart.data("date-format"));
 
     for (var i = 0; i < metrics.length; i++) {
 

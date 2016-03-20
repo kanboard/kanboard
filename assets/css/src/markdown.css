@@ -1,7 +1,23 @@
+/* markdown editor */
+div.CodeMirror,
+div.CodeMirror-scroll {
+    max-height: 250px;
+    min-height: 200px;
+}
+
+.markdown-editor-small div.CodeMirror,
+.markdown-editor-small div.CodeMirror-scroll {
+    min-height: 100px;
+    max-height: 180px;
+}
+
+.form-column div.CodeMirror {
+    margin-bottom: 10px;
+}
+
 /* markdown content */
 .markdown {
     line-height: 1.4em;
-    font-size: 1.0em;
 }
 
 .markdown h1 {

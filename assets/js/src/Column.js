@@ -1,12 +1,12 @@
-function Column(app) {
+Kanboard.Column = function(app) {
     this.app = app;
-}
+};
 
-Column.prototype.listen = function() {
+Kanboard.Column.prototype.listen = function() {
     this.dragAndDrop();
 };
 
-Column.prototype.dragAndDrop = function() {
+Kanboard.Column.prototype.dragAndDrop = function() {
     var self = this;
 
     $(".draggable-row-handle").mouseenter(function() {
@@ -36,7 +36,7 @@ Column.prototype.dragAndDrop = function() {
     }).disableSelection();
 };
 
-Column.prototype.savePosition = function(columnId, position) {
+Kanboard.Column.prototype.savePosition = function(columnId, position) {
     var url = $(".columns-table").data("save-position-url");
     var self = this;
 
