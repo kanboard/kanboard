@@ -21,7 +21,9 @@ Kanboard.BoardTask.prototype.listen = function() {
 Kanboard.BoardTask.prototype.keyboardShortcuts = function() {
     var self = this;
 
-    Mousetrap.bind("n", function() {
-        self.app.get("Popover").open($("#board").data("task-creation-url"));
-    });
+    if (self.app.hasId("board")) {
+        Mousetrap.bind("n", function () {
+            self.app.get("Popover").open($("#board").data("task-creation-url"));
+        });
+    }
 };
