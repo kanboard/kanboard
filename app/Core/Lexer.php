@@ -37,6 +37,7 @@ class Lexer
         "/^(column:)/"                                   => 'T_COLUMN',
         "/^(project:)/"                                  => 'T_PROJECT',
         "/^(swimlane:)/"                                 => 'T_SWIMLANE',
+        "/^(comment:)/"                                  => 'T_COMMENT',
         "/^(ref:)/"                                      => 'T_REFERENCE',
         "/^(reference:)/"                                => 'T_REFERENCE',
         "/^(link:)/"                                     => 'T_LINK',
@@ -134,6 +135,7 @@ class Lexer
                 case 'T_CREATED':
                 case 'T_DESCRIPTION':
                 case 'T_REFERENCE':
+                case 'T_COMMENT':
                     $next = next($tokens);
 
                     if ($next !== false && ($next['token'] === 'T_DATE' || $next['token'] === 'T_STRING')) {

@@ -1154,4 +1154,11 @@ return array(
     'There is no action at the moment.' => 'Il n\'y a aucune action pour le moment.',
     'Import actions from another project' => 'Importer les actions depuis un autre projet',
     'There is no available project.' => 'Il n\'y a pas de projet disponible.',
+    // 'Order by Date' => '',
+    // 'Order by Task' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
+    // 'Comment' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => ''
 );

@@ -31,6 +31,7 @@ class TaskFilter extends Base
         'T_REFERENCE' => 'filterByReference',
         'T_SWIMLANE' => 'filterBySwimlaneName',
         'T_LINK' => 'filterByLinkName',
+        'T_COMMENT' => 'filterByComment',
     );
 
     /**
@@ -545,6 +546,22 @@ class TaskFilter extends Base
         $this->query->closeOr();
 
         return $this;
+    }
+
+    /**
+     * Filter by comments
+     *
+     * @access public
+     * @param  string  $string
+     * @return TaskFilter
+     */
+    public function filterByComment($string) {
+        $this->query->beginOr();
+
+        $this->query->ilike(Comment::TABLE.'.comment', '%'.$string.'%');
+        $this->query->join(Comment::TABLE, 'task_id', 'id');
+
+        $this->query->closeOr();
     }
 
     /**

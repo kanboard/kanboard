@@ -1151,4 +1151,11 @@ return array(
     'There is no action at the moment.' => '当前没有动作。',
     'Import actions from another project' => '从另一个项目中导入动作',
     'There is no available project.' => '当前没有可用项目',
+    // 'Order by Date' => '',
+    // 'Order by Task' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
+    // 'Comment' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => ''
 );

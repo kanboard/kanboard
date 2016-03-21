@@ -1,8 +1,7 @@
-<?php if (empty($events)): ?>
+<?php if ($events->isEmpty()): ?>
     <p class="alert"><?= t('There is no activity yet.') ?></p>
 <?php else: ?>
-
-    <?php foreach ($events as $event): ?>
+    <?php foreach ($events->getCollection() as $event): ?>
         <div class="activity-event">
             <p class="activity-datetime">
                 <?php if ($this->text->contains($event['event_name'], 'subtask')): ?>
@@ -19,5 +18,5 @@
             <div class="activity-content"><?= $event['event_content'] ?></div>
         </div>
     <?php endforeach ?>
-
+    <?= $events ?>
 <?php endif ?>

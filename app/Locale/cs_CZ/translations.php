@@ -1151,4 +1151,11 @@ return array(
     // 'There is no action at the moment.' => '',
     // 'Import actions from another project' => '',
     // 'There is no available project.' => '',
+    // 'Order by Date' => '',
+    // 'Order by Task' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
+    // 'Comment' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by status: ' => ''
 );

@@ -1151,4 +1151,11 @@ return array(
     'There is no action at the moment.' => 'Trenutno nema akcija.',
     'Import actions from another project' => 'Uvezi akcije iz drugog projekta',
     'There is no available project.' => 'Trenutno nema dostupnih projekata.',
+    'Order by Date' => 'Sortiraj po datumu',
+    'Order by Task' => 'Sortiraj po zadacima',
+    'Activity until yesterday' => 'Aktivnosti do jučer',
+    'Activity until today' => 'Aktivnosti do danas',
+    'Comment' => 'Komentar',
+    'Search by creation date: ' => 'Pretraga po datumu kreiranja: ',
+    'Search by status: ' => 'Pretraga po statusu: '
 );

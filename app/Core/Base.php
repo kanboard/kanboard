@@ -58,6 +58,8 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\UserFilterAutoCompleteFormatter        $userFilterAutoCompleteFormatter
  * @property \Kanboard\Formatter\GroupAutoCompleteFormatter             $groupAutoCompleteFormatter
  * @property \Kanboard\Model\Action                                     $action
+ * @property \Kanboard\Model\ActivityFilter                             $activityFilter
+ * @property \Kanboard\Model\ActivityFinder                             $activityFinder
  * @property \Kanboard\Model\ActionParameter                            $actionParameter
  * @property \Kanboard\Model\Board                                      $board
  * @property \Kanboard\Model\Category                                   $category
