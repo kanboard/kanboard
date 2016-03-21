@@ -1,13 +1,16 @@
-function Screenshot() {
+Kanboard.Screenshot = function(app) {
+    this.app = app;
     this.pasteCatcher = null;
-}
+};
 
-Screenshot.prototype.execute = function() {
-    this.initialize();
+Kanboard.Screenshot.prototype.onPopoverOpened = function() {
+    if (this.app.hasId("screenshot-zone")) {
+        this.initialize();
+    }
 };
 
 // Setup event listener and workarounds
-Screenshot.prototype.initialize = function() {
+Kanboard.Screenshot.prototype.initialize = function() {
     this.destroy();
 
     if (! window.Clipboard) {
@@ -40,7 +43,7 @@ Screenshot.prototype.initialize = function() {
 };
 
 // Destroy contentEditable element
-Screenshot.prototype.destroy = function() {
+Kanboard.Screenshot.prototype.destroy = function() {
     if (this.pasteCatcher != null) {
         document.body.removeChild(this.pasteCatcher);
     }
@@ -53,14 +56,14 @@ Screenshot.prototype.destroy = function() {
 };
 
 // Set focus on contentEditable element
-Screenshot.prototype.setFocus = function() {
+Kanboard.Screenshot.prototype.setFocus = function() {
     if (this.pasteCatcher !== null) {
         this.pasteCatcher.focus();
     }
 };
 
 // Paste event callback
-Screenshot.prototype.pasteHandler = function(e) {
+Kanboard.Screenshot.prototype.pasteHandler = function(e) {
     // Firefox doesn't have the property e.clipboardData.items (only Chrome)
     if (e.clipboardData && e.clipboardData.items) {
 
@@ -95,7 +98,7 @@ Screenshot.prototype.pasteHandler = function(e) {
 };
 
 // Parse the input in the paste catcher element
-Screenshot.prototype.checkInput = function() {
+Kanboard.Screenshot.prototype.checkInput = function() {
     var child = this.pasteCatcher.childNodes[0];
 
     if (child) {
@@ -110,7 +113,7 @@ Screenshot.prototype.checkInput = function() {
 };
 
 // Creates a new image from a given source
-Screenshot.prototype.createImage = function(blob) {
+Kanboard.Screenshot.prototype.createImage = function(blob) {
     var pastedImage = new Image();
     pastedImage.src = blob;
 

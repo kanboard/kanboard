@@ -1,16 +1,9 @@
-<section>
+<div class="tooltip-large">
     <?php foreach ($comments as $comment): ?>
-        <p class="comment-title">
-            <?php if (! empty($comment['username'])): ?>
-                <span class="comment-username"><?= $this->text->e($comment['name'] ?: $comment['username']) ?></span> @
-            <?php endif ?>
-            <span class="comment-date"><?= $this->dt->datetime($comment['date_creation']) ?></span>
-        </p>
-
-		<div class="comment-inner">
-            <div class="markdown">
-                <?= $this->text->markdown($comment['comment']) ?>
-            </div>
-        </div>
+        <?= $this->render('comment/show', array(
+            'comment' => $comment,
+            'task' => $task,
+            'hide_actions' => true,
+        )) ?>
     <?php endforeach ?>
-</section>
+</div>

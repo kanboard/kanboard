@@ -1,7 +1,14 @@
-function TaskRepartitionChart() {
-}
+Kanboard.TaskRepartitionChart = function(app) {
+    this.app = app;
+};
 
-TaskRepartitionChart.prototype.execute = function() {
+Kanboard.TaskRepartitionChart.prototype.execute = function() {
+    if (this.app.hasId("analytic-task-repartition")) {
+        this.show();
+    }
+};
+
+Kanboard.TaskRepartitionChart.prototype.show = function() {
     var metrics = $("#chart").data("metrics");
     var columns = [];
 

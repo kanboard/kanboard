@@ -21,7 +21,7 @@
         </li>
         <li>
             <i class="fa fa-code-fork fa-fw"></i>
-            <?= $this->url->link(t('Add internal link'), 'tasklink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+            <?= $this->url->link(t('Add internal link'), 'TaskInternalLink', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-external-link fa-fw"></i>

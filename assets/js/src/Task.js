@@ -1,31 +1,35 @@
-function Task(app) {
+Kanboard.Task = function(app) {
     this.app = app;
-}
+};
 
-Task.prototype.keyboardShortcuts = function() {
+Kanboard.Task.prototype.keyboardShortcuts = function() {
     var taskView = $("#task-view");
     var self = this;
 
-    if (taskView.length) {
+    if (this.app.hasId("task-view")) {
         Mousetrap.bind("e", function() {
-            self.app.popover.open(taskView.data("edit-url"));
+            self.app.get("Popover").open(taskView.data("edit-url"));
+        });
+
+        Mousetrap.bind("d", function() {
+            self.app.get("Popover").open(taskView.data("description-url"));
         });
 
         Mousetrap.bind("c", function() {
-            self.app.popover.open(taskView.data("comment-url"));
+            self.app.get("Popover").open(taskView.data("comment-url"));
         });
 
         Mousetrap.bind("s", function() {
-            self.app.popover.open(taskView.data("subtask-url"));
+            self.app.get("Popover").open(taskView.data("subtask-url"));
         });
 
         Mousetrap.bind("l", function() {
-            self.app.popover.open(taskView.data("internal-link-url"));
+            self.app.get("Popover").open(taskView.data("internal-link-url"));
         });
     }
 };
 
-Task.prototype.listen = function() {
+Kanboard.Task.prototype.onPopoverOpened = function() {
     var self = this;
     var reloadingProjectId = 0;
 
@@ -38,10 +42,10 @@ Task.prototype.listen = function() {
 
     // Assign to me
     $(document).on("click", ".assign-me", function(e) {
-        e.preventDefault();
-
         var currentId = $(this).data("current-id");
         var dropdownId = "#" + $(this).data("target-id");
+
+        e.preventDefault();
 
         if ($(dropdownId + ' option[value=' + currentId + ']').length) {
             $(dropdownId).val(currentId);
@@ -65,8 +69,7 @@ Task.prototype.listen = function() {
                 success: function(data, textStatus, request) {
                     reloadingProjectId = 0;
                     $(".loading-icon").hide();
-
-                    self.app.popover.afterSubmit(data, request, self.app.popover);
+                    self.app.get("Popover").ajaxReload(data, request, self.app.get("Popover"));
                 }
             });
         }

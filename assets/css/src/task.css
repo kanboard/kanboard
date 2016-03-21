@@ -1,3 +1,24 @@
+/* task listing table */
+.task-table .dropdown-menu {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.task-table .dropdown-menu:focus,
+.task-table .dropdown-menu:hover {
+    text-decoration: underline;
+}
+
+td.task-table a {
+    color: #000;
+    text-decoration: none;
+}
+
+td.task-table a:hover {
+    text-decoration: underline;
+}
+
 /* task inside the board */
 .task-board {
     position: relative;
@@ -17,18 +38,22 @@ div.task-board-status-closed {
     border: 1px dotted #555;
 }
 
-.task-table a,
 .task-board a {
     color: #000;
     text-decoration: none;
+}
+
+.task-board .dropdown-menu {
     font-weight: bold;
 }
 
-.task-table a:focus,
-.task-table a:hover,
-.task-board a:focus,
-.task-board a:hover {
+.task-board-title a:hover {
     text-decoration: underline;
+}
+
+.task-board-title {
+    margin-left: 5px;
+    font-size: 1.15em;
 }
 
 .task-board-collapsed {
@@ -37,60 +62,43 @@ div.task-board-status-closed {
     text-overflow: ellipsis;
 }
 
-a.task-board-collapsed-title {
-    font-weight: normal;
+.task-board-change-assignee:hover {
+    opacity: 0.6;
 }
 
-.task-board .dropdown {
-    font-size: 1.1em;
+.task-board-change-assignee {
+    cursor: pointer;
 }
 
-.task-board-title {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 1.1em;
-}
-
-.task-board-title a {
-    font-weight: normal;
-}
-
-.task-board-user {
-    font-size: 0.8em;
-}
-
-.task-board-current-user a {
-    text-decoration: underline;
-}
-
-.task-board-current-user a:focus,
-.task-board-current-user a:hover {
-    text-decoration: none;
-}
-
-a.task-board-nobody {
-    font-weight: normal;
-    font-style: italic;
-    color: #444;
-}
-
+/* category label */
 .task-board-category-container {
     text-align: right;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .task-board-category {
-    font-weight: bold;
-    font-size: 0.9em;
+    font-weight: 500;
     color: #000;
     border: 1px solid #555;
-    padding: 2px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding: 1px 2px 1px 2px;
+    border-radius: 4px;
 }
 
+.task-board-category:hover {
+    opacity: 0.6;
+}
+
+/* avatars on the card */
+.task-board-avatars {
+    margin-top: 5px;
+}
+
+/* task icons footer */
 .task-board-icons {
     text-align: right;
-    margin-top: 8px;
+    margin-top: 4px;
+    margin-bottom: 2px;
 }
 
 .task-board-icons a {
@@ -120,41 +128,28 @@ span.task-board-date-overdue {
 /* task score */
 .task-board .task-score {
     font-weight: bold;
-    font-size: 1.1em;
 }
 
 /* task age */
-.task-board-closed,
-.task-board-days {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    opacity: 0.5;
-    font-size: 0.8em;
+.task-board-age {
+    display: inline-block;
+    font-size: 0.9em;
 }
 
-.task-board-days:hover {
-    opacity: 1.0;
-}
-
-.task-days-age {
+span.task-board-age-total {
     border: #666 1px solid;
-    padding: 1px 4px 1px 2px;
+    padding: 1px 2px 1px 2px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
 
-.task-days-incolumn {
+span.task-board-age-column {
     border: #666 1px solid;
     border-left: none;
     margin-left: -5px;
-    padding: 1px 2px 1px 4px;
+    padding: 1px 2px 1px 2px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-}
-
-.board-container-compact .task-board-days {
-    display: none;
 }
 
 /* task summary */
@@ -205,17 +200,6 @@ span.task-board-date-overdue {
     font-size: 1.8em;
     margin: 0;
     padding: 8px;
-}
-
-.task-show-description {
-    border-left: 4px solid #333;
-    padding-left: 20px;
-}
-
-.task-show-description-textarea {
-    width: 99%;
-    max-width: 99%;
-    height: 300px;
 }
 
 .task-link-closed {

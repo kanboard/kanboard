@@ -29,18 +29,37 @@ class UrlHelper extends Base
     }
 
     /**
-     * HTML Link tag
+     * Button Link Element
      *
      * @access public
-     * @param  string  $label Link label
+     * @param  string  $icon       Font-Awesome icon
+     * @param  string  $label      Link label
      * @param  string  $controller Controller name
-     * @param  string  $action Action name
-     * @param  array   $params Url parameters
-     * @param  boolean $csrf Add a CSRF token
-     * @param  string  $class CSS class attribute
+     * @param  string  $action     Action name
+     * @param  array   $params     Url parameters
+     * @param  string  $class      CSS class attribute
+     * @return string
+     */
+    public function button($icon, $label, $controller, $action, array $params = array(), $class = '')
+    {
+        $icon = '<i class="fa '.$icon.' fa-fw"></i> ';
+        $class = 'btn '.$class;
+        return $this->link($icon.$label, $controller, $action, $params, false, $class);
+    }
+
+    /**
+     * Link element
+     *
+     * @access public
+     * @param  string  $label      Link label
+     * @param  string  $controller Controller name
+     * @param  string  $action     Action name
+     * @param  array   $params     Url parameters
+     * @param  boolean $csrf       Add a CSRF token
+     * @param  string  $class      CSS class attribute
      * @param  string  $title
-     * @param  boolean $new_tab Open the link in a new tab
-     * @param  string  $anchor Link Anchor
+     * @param  boolean $new_tab    Open the link in a new tab
+     * @param  string  $anchor     Link Anchor
      * @return string
      */
     public function link($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '')

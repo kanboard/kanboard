@@ -1,37 +1,28 @@
-function Popover(app) {
+Kanboard.Popover = function(app) {
     this.app = app;
-    this.router = new Router();
-    this.router.addRoute('screenshot-zone', Screenshot);
-}
-
-Popover.prototype.isOpen = function() {
-    return $('#popover-container').size() > 0;
 };
 
-Popover.prototype.open = function(link) {
+Kanboard.Popover.prototype.listen = function() {
     var self = this;
-    self.app.dropdown.close();
 
-    $.get(link, function(content) {
-        $("body").prepend('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
-        self.app.refresh();
-        self.router.dispatch(this.app);
-        self.afterOpen();
+    $(document).on("click", ".popover", function(e) {
+        self.onClick(e);
+    });
+
+    $(document).on("click", ".close-popover", function(e) {
+        self.close(e);
+    });
+
+    $(document).on("click", "#popover-container", function(e) {
+        self.close(e);
+    });
+
+    $(document).on("click", "#popover-content", function(e) {
+        e.stopPropagation();
     });
 };
 
-Popover.prototype.close = function(e) {
-    if (this.isOpen()) {
-
-        if (e) {
-            e.preventDefault();
-        }
-
-        $('#popover-container').remove();
-    }
-};
-
-Popover.prototype.onClick = function(e) {
+Kanboard.Popover.prototype.onClick = function(e) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -47,14 +38,66 @@ Popover.prototype.onClick = function(e) {
     }
 };
 
-Popover.prototype.listen = function() {
-    $(document).on("click", ".popover", this.onClick.bind(this));
-    $(document).on("click", ".close-popover", this.close.bind(this));
-    $(document).on("click", "#popover-container", this.close.bind(this));
-    $(document).on("click", "#popover-content", function(e) { e.stopPropagation(); });
+Kanboard.Popover.prototype.isOpen = function() {
+    return $('#popover-container').size() > 0;
 };
 
-Popover.prototype.afterOpen = function() {
+Kanboard.Popover.prototype.open = function(link) {
+    var self = this;
+
+    $.get(link, function(content) {
+        $("body").prepend('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+        self.executeOnOpenedListeners();
+    });
+};
+
+Kanboard.Popover.prototype.close = function(e) {
+    if (this.isOpen()) {
+        if (e) {
+            e.preventDefault();
+        }
+
+        $("#popover-container").remove();
+        this.executeOnClosedListeners();
+    }
+};
+
+Kanboard.Popover.prototype.ajaxReload = function(data, request, self) {
+    var redirect = request.getResponseHeader("X-Ajax-Redirect");
+
+    if (redirect) {
+        window.location = redirect === 'self' ? window.location.href.split("#")[0] : redirect;
+    }
+    else {
+        $("#popover-content").html(data);
+        $("#popover-content input[autofocus]").focus();
+        self.executeOnOpenedListeners();
+    }
+};
+
+Kanboard.Popover.prototype.executeOnOpenedListeners = function() {
+    for (var className in this.app.controllers) {
+        var controller = this.app.get(className);
+
+        if (typeof controller.onPopoverOpened === "function") {
+            controller.onPopoverOpened();
+        }
+    }
+
+    this.afterOpen();
+};
+
+Kanboard.Popover.prototype.executeOnClosedListeners = function() {
+    for (var className in this.app.controllers) {
+        var controller = this.app.get(className);
+
+        if (typeof controller.onPopoverClosed === "function") {
+            controller.onPopoverClosed();
+        }
+    }
+};
+
+Kanboard.Popover.prototype.afterOpen = function() {
     var self = this;
     var popoverForm = $("#popover-content .popover-form");
 
@@ -68,7 +111,7 @@ Popover.prototype.afterOpen = function() {
                 url: popoverForm.attr("action"),
                 data: popoverForm.serialize(),
                 success: function(data, textStatus, request) {
-                    self.afterSubmit(data, request, self);
+                    self.ajaxReload(data, request, self);
                 },
                 beforeSend: function() {
                     var button = $('.popover-form button[type="submit"]');
@@ -87,21 +130,16 @@ Popover.prototype.afterOpen = function() {
             type: "GET",
             url: $(this).attr("href"),
             success: function(data, textStatus, request) {
-                self.afterSubmit(data, request, self);
+                self.ajaxReload(data, request, self);
             }
         });
     });
-};
 
-Popover.prototype.afterSubmit = function(data, request, self) {
-    var redirect = request.getResponseHeader("X-Ajax-Redirect");
+    // Autofocus fields (html5 autofocus works only with page onload)
+    $("[autofocus]").each(function() {
+        $(this).focus();
+    });
 
-    if (redirect) {
-        window.location = redirect === 'self' ? window.location.href.split("#")[0] : redirect;
-    }
-    else {
-        $("#popover-content").html(data);
-        $("#popover-content input[autofocus]").focus();
-        self.afterOpen();
-    }
+    this.app.datePicker();
+    this.app.autoComplete();
 };

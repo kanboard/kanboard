@@ -7,11 +7,9 @@
 )) ?>
 
 <?= $this->hook->render('template:task:show:before-description', array('task' => $task, 'project' => $project)) ?>
-
 <?= $this->render('task/description', array('task' => $task)) ?>
 
 <?= $this->hook->render('template:task:show:before-subtasks', array('task' => $task, 'project' => $project)) ?>
-
 <?= $this->render('subtask/show', array(
     'task' => $task,
     'subtasks' => $subtasks,
@@ -20,23 +18,24 @@
     'editable' => true,
 )) ?>
 
-<?= $this->hook->render('template:task:show:before-tasklinks', array('task' => $task, 'project' => $project)) ?>
-
-<?= $this->render('tasklink/show', array(
+<?= $this->hook->render('template:task:show:before-internal-links', array('task' => $task, 'project' => $project)) ?>
+<?= $this->render('task_internal_link/show', array(
     'task' => $task,
-    'links' => $links,
+    'links' => $internal_links,
     'project' => $project,
     'link_label_list' => $link_label_list,
     'editable' => true,
     'is_public' => false,
 )) ?>
 
-<?= $this->hook->render('template:task:show:before-timetracking', array('task' => $task, 'project' => $project)) ?>
-
-<?= $this->render('task/time_tracking_summary', array('task' => $task)) ?>
+<?= $this->hook->render('template:task:show:before-external-links', array('task' => $task, 'project' => $project)) ?>
+<?= $this->render('task_external_link/show', array(
+    'task' => $task,
+    'links' => $external_links,
+    'project' => $project,
+)) ?>
 
 <?= $this->hook->render('template:task:show:before-attachements', array('task' => $task, 'project' => $project)) ?>
-
 <?= $this->render('task_file/show', array(
     'task' => $task,
     'files' => $files,
@@ -44,8 +43,7 @@
 )) ?>
 
 <?= $this->hook->render('template:task:show:before-comments', array('task' => $task, 'project' => $project)) ?>
-
-<?= $this->render('task/comments', array(
+<?= $this->render('comments/show', array(
     'task' => $task,
     'comments' => $comments,
     'project' => $project,

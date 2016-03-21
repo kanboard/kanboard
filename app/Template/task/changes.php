@@ -68,7 +68,7 @@
     </ul>
 
     <?php if (! empty($changes['description'])): ?>
-        <p><?= t('The description has been modified') ?></p>
+        <p><strong><?= t('The description has been modified:') ?></strong></p>
         <div class="markdown"><?= $this->text->markdown($task['description']) ?></div>
     <?php endif ?>
 <?php endif ?>

@@ -67,7 +67,7 @@ class ProjectEdit extends Base
         if ($valid) {
             if ($this->project->update($values)) {
                 $this->flash->success(t('Project updated successfully.'));
-                $this->response->redirect($this->helper->url->to('ProjectEdit', $redirect, array('project_id' => $project['id'])));
+                $this->response->redirect($this->helper->url->to('ProjectEdit', $redirect, array('project_id' => $project['id'])), true);
             } else {
                 $this->flash->failure(t('Unable to update this project.'));
             }

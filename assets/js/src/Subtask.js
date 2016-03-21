@@ -1,15 +1,14 @@
-function Subtask(app) {
+Kanboard.Subtask = function(app) {
     this.app = app;
-}
+};
 
-Subtask.prototype.listen = function() {
+Kanboard.Subtask.prototype.listen = function() {
     var self = this;
-
     this.dragAndDrop();
 
     $(document).on("click", ".subtask-toggle-status", function(e) {
-        e.preventDefault();
         var el = $(this);
+        e.preventDefault();
 
         $.ajax({
             cache: false,
@@ -27,8 +26,8 @@ Subtask.prototype.listen = function() {
     });
 
     $(document).on("click", ".subtask-toggle-timer", function(e) {
-        e.preventDefault();
         var el = $(this);
+        e.preventDefault();
 
         $.ajax({
             cache: false,
@@ -41,7 +40,7 @@ Subtask.prototype.listen = function() {
     });
 };
 
-Subtask.prototype.dragAndDrop = function() {
+Kanboard.Subtask.prototype.dragAndDrop = function() {
     var self = this;
 
     $(".draggable-row-handle").mouseenter(function() {
@@ -71,7 +70,7 @@ Subtask.prototype.dragAndDrop = function() {
     }).disableSelection();
 };
 
-Subtask.prototype.savePosition = function(subtaskId, position) {
+Kanboard.Subtask.prototype.savePosition = function(subtaskId, position) {
     var url = $(".subtasks-table").data("save-position-url");
     var self = this;
 

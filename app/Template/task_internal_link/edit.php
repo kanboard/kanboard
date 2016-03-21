@@ -1,11 +1,12 @@
 <div class="page-header">
-    <h2><?= t('Add a new link') ?></h2>
+    <h2><?= t('Edit link') ?></h2>
 </div>
 
-<form class="popover-form" action="<?= $this->url->href('tasklink', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
+<form action="<?= $this->url->href('TaskInternalLink', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'link_id' => $task_link['id'])) ?>" method="post" autocomplete="off">
 
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
+    <?= $this->form->hidden('id', $values) ?>
+    <?= $this->form->hidden('task_id', $values) ?>
     <?= $this->form->hidden('opposite_task_id', $values) ?>
 
     <?= $this->form->label(t('Label'), 'link_id') ?>

@@ -1,10 +1,16 @@
-function Calendar() {
+Kanboard.Calendar = function(app) {
+    this.app = app;
+};
 
-}
-
-Calendar.prototype.execute = function() {
+Kanboard.Calendar.prototype.execute = function() {
     var calendar = $('#calendar');
 
+    if (calendar.length == 1) {
+        this.show(calendar);
+    }
+};
+
+Kanboard.Calendar.prototype.show = function(calendar) {
     calendar.fullCalendar({
         lang: $("body").data("js-lang"),
         editable: true,

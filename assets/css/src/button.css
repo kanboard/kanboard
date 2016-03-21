@@ -1,28 +1,27 @@
 /* buttons */
 .btn {
+    font-size: 1.1em;
+    font-weight: normal;
+    cursor: pointer;
     -webkit-appearance: none;
     appearance: none;
     display: inline-block;
     color: #333;
-    border: 1px solid #ccc;
-    background: #efefef;
-    padding: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 0.9em;
-    cursor: pointer;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
     border-radius: 2px;
+    padding: 3px 10px;
+    margin: 0;
 }
 
 a.btn {
     text-decoration: none;
-    font-weight: bold;
 }
 
-.btn-small {
-    padding: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
+.btn:hover {
+    border: 1px solid #bbb;
+    color: #000;
+    background: #fafafa;
 }
 
 .btn-red {
@@ -31,30 +30,32 @@ a.btn {
     color: #fff;
 }
 
-a.btn-red:hover,
 .btn-red:hover,
 .btn-red:focus {
     color: #fff;
     background: #c53727;
 }
 
-a.btn-blue,
 .btn-blue {
     border-color: #3079ed;
     background: #4d90fe;
     color: #fff;
 }
 
-a.btn-blue:hover,
 .btn-blue:hover,
-a.btn-blue:focus,
 .btn-blue:focus {
     border-color: #2f5bb7;
     background: #357ae8;
+    color: #fff;
 }
 
-.btn-blue:disabled {
+.btn:disabled {
     color: #ccc;
     border: 1px solid #ccc;
     background: #f7f7f7;
+}
+
+.buttons-header {
+    font-size: 0.9em;
+    margin-bottom: 15px;
 }

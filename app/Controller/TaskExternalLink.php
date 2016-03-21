@@ -13,22 +13,6 @@ use Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound;
 class TaskExternalLink extends Base
 {
     /**
-     * Creation form
-     *
-     * @access public
-     */
-    public function show()
-    {
-        $task = $this->getTask();
-
-        $this->response->html($this->helper->layout->task('task_external_link/show', array(
-            'links' => $this->taskExternalLink->getAll($task['id']),
-            'task' => $task,
-            'title' => t('List of external links'),
-        )));
-    }
-
-    /**
      * First creation form
      *
      * @access public
@@ -90,7 +74,7 @@ class TaskExternalLink extends Base
 
         if ($valid && $this->taskExternalLink->create($values)) {
             $this->flash->success(t('Link added successfully.'));
-            return $this->response->redirect($this->helper->url->to('TaskExternalLink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
         $this->edit($values, $errors);
@@ -137,7 +121,7 @@ class TaskExternalLink extends Base
 
         if ($valid && $this->taskExternalLink->update($values)) {
             $this->flash->success(t('Link updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('TaskExternalLink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
         $this->edit($values, $errors);
@@ -180,6 +164,6 @@ class TaskExternalLink extends Base
             $this->flash->failure(t('Unable to remove this link.'));
         }
 
-        $this->response->redirect($this->helper->url->to('TaskExternalLink', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 }

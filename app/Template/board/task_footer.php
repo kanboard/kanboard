@@ -1,3 +1,23 @@
+<?php if (! empty($task['owner_id'])): ?>
+    <div class="task-board-avatars">
+    <span
+        <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+        class="task-board-assignee task-board-change-assignee"
+        data-url="<?= $this->url->href('BoardPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+    <?php else: ?>
+        class="task-board-assignee">
+    <?php endif ?>
+        <?= $this->avatar->small(
+            $task['owner_id'],
+            $task['assignee_username'],
+            $task['assignee_name'],
+            $task['assignee_email'],
+            'avatar-inline'
+        ) ?>
+    </span>
+    </div>
+<?php endif ?>
+
 <?php if (! empty($task['category_id'])): ?>
 <div class="task-board-category-container">
     <span class="task-board-category">
@@ -19,6 +39,13 @@
 <?php endif ?>
 
 <div class="task-board-icons">
+    <?php if ($task['score']): ?>
+        <span class="task-score" title="<?= t('Complexity') ?>">
+            <i class="fa fa-trophy"></i>
+            <?= $this->text->e($task['score']) ?>
+        </span>
+    <?php endif ?>
+
     <?php if (! empty($task['date_due'])): ?>
         <span class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
             <i class="fa fa-calendar"></i>
@@ -59,12 +86,6 @@
             <i class="fa fa-file-text-o"></i>
         </span>
     <?php endif ?>
-    
-    <?= $this->hook->render('template:board:task:footer', array('task' => $task)) ?>
-
-    <?php if ($task['score']): ?>
-        <span class="task-score"><?= $this->text->e($task['score']) ?></span>
-    <?php endif ?>
 
     <?php if (! empty($task['time_estimated'])): ?>
         <span class="task-time-estimated" title="<?= t('Time estimated') ?>"><?= $this->text->e($task['time_estimated']).'h' ?></span>
@@ -77,4 +98,15 @@
     <?php endif ?>
 
     <?= $this->task->formatPriority($project, $task) ?>
+
+    <?php if ($task['is_active'] == 1): ?>
+        <div class="task-board-age">
+            <span title="<?= t('Task age in days')?>" class="task-board-age-total"><?= $this->dt->age($task['date_creation']) ?></span>
+            <span title="<?= t('Days in this column')?>" class="task-board-age-column"><?= $this->dt->age($task['date_moved']) ?></span>
+        </div>
+    <?php else: ?>
+        <span class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></span>
+    <?php endif ?>
 </div>
+
+<?= $this->hook->render('template:board:task:footer', array('task' => $task)) ?>

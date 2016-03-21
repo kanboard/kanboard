@@ -1,6 +1,4 @@
-<?php if (empty($links)): ?>
-    <p class="alert"><?= t('There is no internal link for the moment.') ?></p>
-<?php else: ?>
+<?php if (! empty($links)): ?>
 <table class="task-links-table table-stripped">
     <?php foreach ($links as $label => $grouped_links): ?>
         <?php $hide_td = false ?>
@@ -74,8 +72,8 @@
                 <div class="dropdown">
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
-                    <li><?= $this->url->link(t('Edit'), 'tasklink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
-                    <li><?= $this->url->link(t('Remove'), 'tasklink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
+                    <li><?= $this->url->link(t('Edit'), 'TaskInternalLink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
+                    <li><?= $this->url->link(t('Remove'), 'TaskInternalLink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
                 </ul>
                 </div>
             </td>

@@ -149,7 +149,8 @@ input.form-input-large {
 .form-column {
     float: left;
     margin-right: 3%;
-    max-width: 47%;
+    max-width: 50%;
+    min-width: 40%;
 }
 
 .form-column ul {
@@ -182,55 +183,6 @@ input.form-input-large {
 
 .popover-form {
     margin-bottom: 0;
-}
-
-/* preview tabs */
-label + .form-tabs {
-    margin-top: 10px;
-}
-
-.form-tabs {
-    width: 100%;
-    max-width: 800px;
-}
-
-ul.form-tabs-nav {
-    margin-bottom: 8px;
-    margin-top: 0;
-}
-
-.form-tabs-nav li {
-    margin-left: 0;
-    display: inline;
-}
-
-.form-tab {
-    margin-right: 20px;
-}
-
-.form-tab a {
-    color: #ccc;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.form-tab a:focus,
-.form-tab a:hover {
-    color: #000;
-}
-
-.form-tab-selected a {
-    color: #333;
-}
-
-.preview-area {
-    border: 1px dashed #000;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-bottom: 5px;
-    display: none;
-    overflow: auto;
 }
 
 .reset-password {

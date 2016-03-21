@@ -1,89 +1,70 @@
-/* comments */
-.comment {
-    margin-bottom: 20px;
-}
-
-.comment:hover {
-    background: #F7F8E0;
-}
-
-.comment-inner {
-    border-left: 4px solid #333;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    margin-left: 20px;
-    margin-right: 10px;
-}
-
-.comment-preview {
-    border: 2px solid #000;
-    border-radius: 3px;
-    padding: 10px;
-}
-
-.comment-preview .comment-inner {
-    border: none;
-    padding: 0;
-    margin: 0;
-}
-
-.comment-title {
-    margin-bottom: 8px;
-    padding-bottom: 3px;
-    border-bottom: 1px dotted #aaa;
-}
-
-.ui-tooltip .comment-title {
-    font-size: 80%;
-}
-
-.ui-tooltip .comment-inner {
-    padding-bottom: 0;
-}
-
-.comment-actions {
-    font-size: 0.8em;
-    padding: 0;
-    text-align: right;
-}
-
-.comment-actions li {
-    display: inline;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-right: 1px dotted #000;
-}
-
-.comment-actions li:last-child {
-    padding-right: 0;
-    border: 0;
-}
-
-.comment-username {
-    font-weight: bold;
-}
-
-.comment-textarea {
-    height: 200px;
-    width: 80%;
-    max-width: 800px;
-}
-
+/* sorting */
 .comment-sorting {
+    text-align: right;
     font-size: 0.5em;
 }
 
-span.comment-sorting a {
+.comment-sorting a {
     color: #555;
     font-weight: normal;
     text-decoration: none;
 }
 
-span.comment-sorting a:hover {
+.comment-sorting a:hover {
     color: #aaa;
 }
 
-#comments .comment-textarea {
-    height: 80px;
-    width: 500px;
+/* comment container */
+.comment {
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.comment:hover {
+    background: #fafafa;
+}
+
+/* comment title */
+.comment-title {
+    border-bottom: 1px dotted #eee;
+    margin-left: 55px;
+    margin-bottom: 10px;
+}
+
+.comment-username {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.comment-date {
+    color: #999;
+    font-size: 0.7em;
+    font-weight: 200;
+}
+
+/* comment actions */
+.comment-actions {
+    font-size: 0.8em;
+    margin-left: 55px;
+    margin-top: 8px;
+}
+
+.comment-actions li {
+    display: inline;
+}
+
+.comment-actions a {
+    color: #999;
+    text-decoration: none;
+}
+
+.comment-actions a:focus,
+.comment-actions a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* comment content */
+.comment-content {
+    margin-left: 55px;
 }

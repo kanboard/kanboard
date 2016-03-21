@@ -43,6 +43,12 @@
 
 .sidebar a {
     text-decoration: none;
+    color: #999;
+    font-weight: 300;
+}
+
+.sidebar a:hover {
+    color: #333;
 }
 
 .sidebar li {
@@ -67,7 +73,21 @@
     font-weight: bold;
 }
 
+.sidebar-icons li {
+    padding-left: 0;
+}
+
+.sidebar-icons li:hover,
+.sidebar-icons li.active {
+    padding-left: 0;
+    border-left: none;
+}
+
 .sidebar li.active a:focus,
 .sidebar li.active a:hover {
     color: #555;
+}
+
+.sidebar li:last-child {
+    margin-bottom: 15px;
 }

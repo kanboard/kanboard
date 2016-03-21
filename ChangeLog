@@ -1,8 +1,20 @@
 Version 1.0.27 (unreleased)
 --------------
 
+New features:
+
+* Added Markdown editor
+* Added letter avatar provider
+* Added pluggable Avatar providers
+
 Improvements:
 
+* Refactoring of Javascript code
+* Improve comments design
+* Improve task summary sections
+* Put back the action sidebar in task view
+* Added support for multiple placeholders for LDAP_USER_FILTER
+* Added local file link provider
 * Show configuration in settings page
 * Added "?" to display list of keyboard shortcuts
 * Added new keyboard shortcuts for task view

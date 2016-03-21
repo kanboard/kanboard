@@ -1,51 +1,41 @@
 /* activity */
 .activity-event {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    padding: 10px;
 }
 
-.activity-datetime {
+.activity-event:hover {
+    background: #fafafa;
+}
+
+.activity-date {
+    margin-left: 10px;
+    font-weight: normal;
     color: #999;
-    font-size: 0.85em;
+    font-size: 0.8em;
 }
 
 .activity-content {
-    margin-top: 10px;
-    margin-left: 20px;
-    padding-left: 20px;
-    border-left: 2px solid #666;
+    margin-left: 55px;
 }
 
 .activity-title {
     font-weight: bold;
     color: #000;
+    border-bottom: 1px dotted #efefef;
 }
 
 .activity-description {
-    font-size: 0.9em;
-    color: #aaa;
-    padding-top: 5px;
-}
-
-.activity-description ul {
+    font-size: 0.95em;
+    color: #555;
     margin-top: 10px;
 }
 
 .activity-description li {
-    margin-left: 40px;
     list-style-type: circle;
-    color: #555;
 }
 
-.activity-description .markdown {
+.activity-description ul {
     margin-top: 10px;
-    color: #555;
-}
-
-.activity-changes {
-    margin-top: 10px;
-    font-size: 0.85em;
-}
-
-.activity-changes ul {
-    margin-left: 25px;
+    margin-left: 20px;
 }

@@ -127,6 +127,7 @@ class TaskFinder extends Base
                 'tasks.time_spent',
                 User::TABLE.'.username AS assignee_username',
                 User::TABLE.'.name AS assignee_name',
+                User::TABLE.'.email AS assignee_email',
                 Category::TABLE.'.name AS category_name',
                 Category::TABLE.'.description AS category_description',
                 Column::TABLE.'.title AS column_name',
