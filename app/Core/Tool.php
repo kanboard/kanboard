@@ -56,6 +56,27 @@ class Tool
     }
 
     /**
+     * Build dependency injection container for custom helpers from an array
+     *
+     * @static
+     * @access public
+     * @param  Container  $container
+     * @param  array      $namespaces
+     * @return Container
+     */
+    public static function buildDICHelpers(Container $container, array $namespaces)
+    {
+        foreach ($namespaces as $namespace => $classes) {
+            foreach ($classes as $name) {
+                $class = '\\Kanboard\\'.$namespace.'\\'.$name;
+                $container['helper']->register($name, $class);
+            }
+        }
+
+        return $container;
+    }
+
+    /**
      * Generate a jpeg thumbnail from an image
      *
      * @static
