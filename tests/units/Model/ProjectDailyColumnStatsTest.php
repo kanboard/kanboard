@@ -244,7 +244,7 @@ class ProjectDailyColumnStatsTest extends Base
             array('2016-01-18', 4, 5, 3, 0),
         );
 
-        $this->assertEquals($expected, $projectDailyColumnStats->getAggregatedMetrics(1, '2016-01-16', '2016-01-18'));
+        $this->assertSame($expected, $projectDailyColumnStats->getAggregatedMetrics(1, '2016-01-16', '2016-01-18'));
 
         $expected = array(
             array('Date', 'Backlog', 'Ready', 'Work in progress', 'Done'),
@@ -253,7 +253,7 @@ class ProjectDailyColumnStatsTest extends Base
             array('2016-01-18', 11, 14, 1, 0),
         );
 
-        $this->assertEquals($expected, $projectDailyColumnStats->getAggregatedMetrics(1, '2016-01-16', '2016-01-18', 'score'));
+        $this->assertSame($expected, $projectDailyColumnStats->getAggregatedMetrics(1, '2016-01-16', '2016-01-18', 'score'));
     }
 
     private function createTasks($column_id, $score, $is_active)

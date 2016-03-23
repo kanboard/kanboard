@@ -165,7 +165,7 @@ class ProjectDailyColumnStats extends Base
     {
         foreach ($metrics as $metric) {
             if ($metric['day'] === $day && $metric['column_id'] == $column_id) {
-                return $metric[$field];
+                return (int) $metric[$field];
             }
         }
 
