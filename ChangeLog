@@ -25,12 +25,10 @@ Improvements:
 * Added Ajax loading icon for submit buttons
 * Added support for HTTP header "X-Forwarded-Proto: https"
 
-Security issues:
-
-* Access allowed to any tasks from the shared public board by changing the URL parameters
-
 Bug fixes:
 
+* Fixes cycle time calculation when the start date is defined in the future
+* Access allowed to any tasks from the shared public board by changing the URL parameters
 * Fix invalid user filter for API procedure createLdapUser()
 * Ambiguous column name with very old version of Sqlite
 

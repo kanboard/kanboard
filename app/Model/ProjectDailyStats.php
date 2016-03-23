@@ -56,12 +56,19 @@ class ProjectDailyStats extends Base
      */
     public function getRawMetrics($project_id, $from, $to)
     {
-        return $this->db->table(self::TABLE)
+        $metrics = $this->db->table(self::TABLE)
             ->columns('day', 'avg_lead_time', 'avg_cycle_time')
             ->eq('project_id', $project_id)
             ->gte('day', $from)
             ->lte('day', $to)
             ->asc('day')
             ->findAll();
+
+        foreach ($metrics as &$metric) {
+            $metric['avg_lead_time'] = (int) $metric['avg_lead_time'];
+            $metric['avg_cycle_time'] = (int) $metric['avg_cycle_time'];
+        }
+
+        return $metrics;
     }
 }

@@ -85,14 +85,15 @@ class AverageLeadCycleTimeAnalytic extends Base
      */
     private function calculateCycleTime(array &$task)
     {
-        if (empty($task['date_started'])) {
-            return 0;
+        $end = (int) $task['date_completed'] ?: time();
+        $start = (int) $task['date_started'];
+
+        // Start date can be in the future when defined with the Gantt chart
+        if ($start > 0 && $end > $start) {
+            return $end - $start;
         }
 
-        $end = $task['date_completed'] ?: time();
-        $start = $task['date_started'];
-
-        return $end - $start;
+        return 0;
     }
 
     /**
