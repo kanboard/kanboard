@@ -41,6 +41,17 @@ abstract class Base extends \Kanboard\Core\Base
     }
 
     /**
+     * Returns all helper classes that needs to be stored in the DI container
+     *
+     * @access public
+     * @return array
+     */
+    public function getHelpers()
+    {
+        return array();
+    }
+
+    /**
      * Listen on internal events
      *
      * @access public

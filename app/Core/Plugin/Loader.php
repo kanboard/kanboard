@@ -70,6 +70,8 @@ class Loader extends \Kanboard\Core\Base
 
         Tool::buildDic($this->container, $instance->getClasses());
 
+        Tool::buildDICHelpers($this->container, $instance->getHelpers());
+
         $instance->initialize();
         $this->plugins[] = $instance;
     }
