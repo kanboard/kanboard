@@ -179,6 +179,7 @@ List of template hooks:
 | `template:project-user:sidebar`            | Sidebar on project user overview page              |
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
 | `template:task:sidebar`                    | Sidebar on task page                               |
+| `template:task:form:left-column`           | Left column in task form                           |
 | `template:task:form:right-column`          | Right column in task form                          |
 | `template:task:show:top   `                | Show task page: top                                |
 | `template:task:show:bottom`                | Show task page: bottom                             |
