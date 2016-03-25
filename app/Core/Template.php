@@ -84,25 +84,26 @@ class Template
     /**
      * Find template filename
      *
-     * Core template name: 'task/show'
-     * Plugin template name: 'myplugin:task/show'
+     * Core template: 'task/show' or 'kanboard:task/show'
+     * Plugin template: 'myplugin:task/show'
      *
      * @access public
-     * @param  string  $template_name
+     * @param  string  $template
      * @return string
      */
-    public function getTemplateFile($template_name)
+    public function getTemplateFile($template)
     {
-        $template_name = isset($this->overrides[$template_name]) ? $this->overrides[$template_name] : $template_name;
+        $plugin = '';
+        $template = isset($this->overrides[$template]) ? $this->overrides[$template] : $template;
 
-        if (strpos($template_name, ':') !== false) {
-            list($plugin, $template) = explode(':', $template_name);
-            $path = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'plugins';
-            $path .= DIRECTORY_SEPARATOR.ucfirst($plugin).DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.$template.'.php';
-        } else {
-            $path = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.$template_name.'.php';
+        if (strpos($template, ':') !== false) {
+            list($plugin, $template) = explode(':', $template);
         }
 
-        return $path;
+        if ($plugin !== 'kanboard' && $plugin !== '') {
+            return implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', 'plugins', ucfirst($plugin), 'Template', $template.'.php'));
+        }
+
+        return implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'Template', $template.'.php'));
     }
 }
