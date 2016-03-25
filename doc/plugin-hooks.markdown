@@ -180,6 +180,7 @@ List of template hooks:
 | `template:task:menu`                       | "Actions" menu on left in different task views     |
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
 | `template:task:sidebar`                    | Sidebar on task page                               |
+| `template:task:form:left-column`           | Right column in task form                          |
 | `template:task:form:right-column`          | Right column in task form                          |
 | `template:task:show:top   `                | Show task page: top                                |
 | `template:task:show:bottom`                | Show task page: bottom                             |
