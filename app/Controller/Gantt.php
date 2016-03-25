@@ -54,8 +54,9 @@ class Gantt extends Base
      */
     public function project()
     {
-        $params = $this->getProjectFilters('gantt', 'project');
-        $filter = $this->taskFilterGanttFormatter->search($params['filters']['search'])->filterByProject($params['project']['id']);
+        $project = $this->getProject();
+        $search = $this->helper->projectHeader->getSearchQuery($project);
+        $filter = $this->taskFilterGanttFormatter->search($search)->filterByProject($project['id']);
         $sorting = $this->request->getStringParam('sorting', 'board');
 
         if ($sorting === 'date') {
@@ -64,8 +65,10 @@ class Gantt extends Base
             $filter->getQuery()->asc('column_position')->asc(TaskModel::TABLE.'.position');
         }
 
-        $this->response->html($this->helper->layout->app('gantt/project', $params + array(
-            'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
+        $this->response->html($this->helper->layout->app('gantt/project', array(
+            'project' => $project,
+            'title' => $project['name'],
+            'description' => $this->helper->projectHeader->getDescription($project),
             'sorting' => $sorting,
             'tasks' => $filter->format(),
         )));

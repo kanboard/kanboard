@@ -167,6 +167,11 @@ span.task-board-age-column {
     padding-top: 0;
 }
 
+.task-summary-buttons {
+    margin-top: 10px;
+    font-size: 0.85em;
+}
+
 .task-summary-container {
     border: 2px solid #000;
     border-radius: 8px;

@@ -1,7 +1,7 @@
 <div class="dropdown">
-    <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Actions') ?></a>
+    <a href="#" class="dropdown-menu action-menu"><?= t('Menu') ?> <i class="fa fa-caret-down"></i></a>
     <ul>
-        <?php if ($is_board): ?>
+        <?php if ($board_view): ?>
         <li>
             <span class="filter-display-mode" <?= $this->board->isCollapsed($project['id']) ? '' : 'style="display: none;"' ?>>
                 <i class="fa fa-expand fa-fw"></i>

@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Unification of the project header
 * Refactoring of Javascript code
 * Improve comments design
 * Improve task summary sections

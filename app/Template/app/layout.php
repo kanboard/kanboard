@@ -1,5 +1,5 @@
 <section id="main">
-    <div class="page-header page-header-mobile">
+    <div class="page-header">
         <ul>
             <?php if ($this->user->hasAccess('ProjectCreation', 'create')): ?>
                 <li>

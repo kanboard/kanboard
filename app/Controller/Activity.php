@@ -38,6 +38,7 @@ class Activity extends Base
         $this->response->html($this->helper->layout->task('activity/task', array(
             'title' => $task['title'],
             'task' => $task,
+            'project' => $this->project->getById($task['project_id']),
             'events' => $this->projectActivity->getTask($task['id']),
         )));
     }

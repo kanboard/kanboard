@@ -20,9 +20,14 @@ class Calendar extends Base
      */
     public function show()
     {
+        $project = $this->getProject();
+
         $this->response->html($this->helper->layout->app('calendar/show', array(
+            'project' => $project,
+            'title' => $project['name'],
+            'description' => $this->helper->projectHeader->getDescription($project),
             'check_interval' => $this->config->get('board_private_refresh_interval'),
-        ) + $this->getProjectFilters('calendar', 'show')));
+        )));
     }
 
     /**

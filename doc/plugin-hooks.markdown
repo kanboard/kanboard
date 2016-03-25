@@ -177,7 +177,6 @@ List of template hooks:
 | `template:project:integrations`            | Integration page in projects settings              |
 | `template:project:sidebar`                 | Sidebar in project settings                        |
 | `template:project-user:sidebar`            | Sidebar on project user overview page              |
-| `template:task:menu`                       | "Actions" menu on left in different task views     |
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
 | `template:task:sidebar`                    | Sidebar on task page                               |
 | `template:task:form:right-column`          | Right column in task form                          |

@@ -1,11 +1,5 @@
 <section id="main">
-    <?= $this->render('project_header/header', array(
-        'project' => $project,
-        'filters' => $filters,
-        'custom_filters_list' => $custom_filters_list,
-        'users_list' => $users_list,
-        'categories_list' => $categories_list,
-    )) ?>
+    <?= $this->projectHeader->render($project, 'Listing', 'show') ?>
 
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No tasks found.') ?></p>

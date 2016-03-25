@@ -1,7 +1,7 @@
 <ul class="views">
     <li <?= $this->app->getRouterController() === 'ProjectOverview' ? 'class="active"' : '' ?>>
         <i class="fa fa-eye fa-fw"></i>
-        <?= $this->url->link(t('Overview'), 'ProjectOverview', 'show', array('project_id' => $project['id']), false, 'view-overview', t('Keyboard shortcut: "%s"', 'v o')) ?>
+        <?= $this->url->link(t('Overview'), 'ProjectOverview', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-overview', t('Keyboard shortcut: "%s"', 'v o')) ?>
     </li>
     <li <?= $this->app->getRouterController() === 'Board' ? 'class="active"' : '' ?>>
         <i class="fa fa-th fa-fw"></i>
