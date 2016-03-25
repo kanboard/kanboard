@@ -22,7 +22,7 @@
     margin: 0;
     font-size: 16px;
     height: 26px;
-    border-color: #dedede;
+    border-color: #ddd;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     vertical-align: top;
@@ -36,9 +36,10 @@
 }
 
 .filter-box div.dropdown {
+    background: #fafafa;
     display: inline-block;
     font-size: 16px;
-    border: 1px solid #dedede;
+    border: 1px solid #ddd;
     border-left: none;
     margin: 0;
     padding: 0;
