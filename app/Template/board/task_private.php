@@ -44,18 +44,18 @@
             </span>
             <?php endif ?>
 
+            <?= $this->render('board/task_avatar', array('task' => $task)) ?>
+
             <?= $this->hook->render('template:board:private:task:before-title', array('task' => $task)) ?>
-
-            <span class="task-board-title">
+            <div class="task-board-title">
                 <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
-            </span>
-
+            </div>
             <?= $this->hook->render('template:board:private:task:after-title', array('task' => $task)) ?>
 
             <?= $this->render('board/task_footer', array(
-                    'task' => $task,
-                    'not_editable' => $not_editable,
-                    'project' => $project,
+                'task' => $task,
+                'not_editable' => $not_editable,
+                'project' => $project,
             )) ?>
         </div>
     <?php endif ?>

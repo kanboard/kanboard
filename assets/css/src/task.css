@@ -47,27 +47,21 @@ div.task-board-status-closed {
     font-weight: bold;
 }
 
-.task-board-title a:hover {
-    text-decoration: underline;
-}
-
-.task-board-title {
-    margin-left: 5px;
-    font-size: 1.15em;
-}
-
 .task-board-collapsed {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.task-board-change-assignee:hover {
-    opacity: 0.6;
+/* title one the card */
+.task-board-title {
+    font-size: 1.2em;
+    margin-top: 5px;
+    margin-bottom: 8px;
 }
 
-.task-board-change-assignee {
-    cursor: pointer;
+.task-board-title a:hover {
+    text-decoration: underline;
 }
 
 /* category label */
@@ -91,7 +85,16 @@ div.task-board-status-closed {
 
 /* avatars on the card */
 .task-board-avatars {
-    margin-top: 5px;
+    text-align: right;
+    float: right;
+}
+
+.task-board-change-assignee:hover {
+    opacity: 0.6;
+}
+
+.task-board-change-assignee {
+    cursor: pointer;
 }
 
 /* task icons footer */
@@ -138,7 +141,7 @@ span.task-board-date-overdue {
 
 span.task-board-age-total {
     border: #666 1px solid;
-    padding: 1px 2px 1px 2px;
+    padding: 1px 3px 1px 3px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
@@ -147,7 +150,7 @@ span.task-board-age-column {
     border: #666 1px solid;
     border-left: none;
     margin-left: -5px;
-    padding: 1px 2px 1px 2px;
+    padding: 1px 3px 1px 3px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
