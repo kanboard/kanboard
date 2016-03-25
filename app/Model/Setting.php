@@ -81,14 +81,16 @@ abstract class Setting extends Base
     {
         $results = array();
         $values = $this->prepare($values);
+        $user_id = $this->userSession->getId();
+        $timestamp = time();
 
         $this->db->startTransaction();
 
         foreach ($values as $option => $value) {
             if ($this->exists($option)) {
-                $results[] = $this->db->table(self::TABLE)->eq('option', $option)->update(array('value' => $value));
+                $results[] = $this->db->table(self::TABLE)->eq('option', $option)->update(array('value' => $value, 'changed_on' => $timestamp, 'changed_by' => $user_id));
             } else {
-                $results[] = $this->db->table(self::TABLE)->insert(array('option' => $option, 'value' => $value));
+                $results[] = $this->db->table(self::TABLE)->insert(array('option' => $option, 'value' => $value, 'changed_on' => $timestamp, 'changed_by' => $user_id));
             }
         }
 
