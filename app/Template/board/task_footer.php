@@ -76,6 +76,8 @@
             <i class="fa fa-flag flag-milestone"></i>
         </span>
     <?php endif ?>
+    
+    <?= $this->hook->render('template:board:task:icons', array('task' => $task)) ?>
 
     <?= $this->task->formatPriority($project, $task) ?>
 
