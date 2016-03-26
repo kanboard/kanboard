@@ -8,7 +8,7 @@
 div.ui-tooltip {
     min-width: 200px;
     max-width: 600px;
-    font-size: 0.85em;
+    font-size: 0.75em;
 }
 
 .tooltip-arrow {
