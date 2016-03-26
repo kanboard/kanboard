@@ -24,6 +24,7 @@ class ClassProvider implements ServiceProviderInterface
         'Model' => array(
             'Action',
             'ActionParameter',
+            'AvatarFile',
             'Board',
             'Category',
             'Color',

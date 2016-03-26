@@ -405,4 +405,41 @@ class User extends Base
             'user' => $user,
         )));
     }
+
+    /**
+     * Display avatar page
+     */
+    public function avatar()
+    {
+        $user = $this->getUser();
+
+        $this->response->html($this->helper->layout->user('user/avatar', array(
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Upload Avatar
+     */
+    public function uploadAvatar()
+    {
+        $user = $this->getUser();
+
+        if (! $this->avatarFile->uploadFile($user['id'], $this->request->getFileInfo('avatar'))) {
+            $this->flash->failure(t('Unable to upload the file.'));
+        }
+
+        $this->response->redirect($this->helper->url->to('user', 'avatar', array('user_id' => $user['id'])));
+    }
+
+    /**
+     * Remove Avatar image
+     */
+    public function removeAvatar()
+    {
+        $this->checkCSRFParam();
+        $user = $this->getUser();
+        $this->avatarFile->remove($user['id']);
+        $this->response->redirect($this->helper->url->to('user', 'avatar', array('user_id' => $user['id'])));
+    }
 }

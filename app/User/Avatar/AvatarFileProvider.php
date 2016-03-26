@@ -6,12 +6,12 @@ use Kanboard\Core\Base;
 use Kanboard\Core\User\Avatar\AvatarProviderInterface;
 
 /**
- * Gravatar Avatar Provider
+ * Avatar Local Image File Provider
  *
  * @package  avatar
  * @author   Frederic Guillot
  */
-class GravatarProvider extends Base implements AvatarProviderInterface
+class AvatarFileProvider extends Base implements AvatarProviderInterface
 {
     /**
      * Render avatar html
@@ -23,9 +23,9 @@ class GravatarProvider extends Base implements AvatarProviderInterface
      */
     public function render(array $user, $size)
     {
-        $url = sprintf('https://www.gravatar.com/avatar/%s?s=%d', md5(strtolower($user['email'])), $size);
+        $url = $this->helper->url->href('AvatarFile', 'show', array('user_id' => $user['id'], 'size' => $size));
         $title = $this->helper->text->e($user['name'] ?: $user['username']);
-        return '<img src="'.$url.'" alt="'.$title.'" title="'.$title.'">';
+        return '<img src="' . $url . '" alt="' . $title . '" title="' . $title . '">';
     }
 
     /**
@@ -37,6 +37,6 @@ class GravatarProvider extends Base implements AvatarProviderInterface
      */
     public function isActive(array $user)
     {
-        return !empty($user['email']) && $this->config->get('integration_gravatar') == 1;
+        return !empty($user['avatar_path']);
     }
 }

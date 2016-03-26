@@ -6,7 +6,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 108;
+const VERSION = 109;
+
+function version_109(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN avatar_path VARCHAR(255)");
+}
 
 function version_108(PDO $pdo)
 {

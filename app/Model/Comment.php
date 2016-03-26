@@ -48,7 +48,8 @@ class Comment extends Base
                 self::TABLE.'.comment',
                 User::TABLE.'.username',
                 User::TABLE.'.name',
-                User::TABLE.'.email'
+                User::TABLE.'.email',
+                User::TABLE.'.avatar_path'
             )
             ->join(User::TABLE, 'id', 'user_id')
             ->orderBy(self::TABLE.'.date_creation', $sorting)
