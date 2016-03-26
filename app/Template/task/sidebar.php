@@ -24,6 +24,8 @@
         </li>
         <?php endif ?>
     </ul>
+
+    <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
     <h2><?= t('Actions') ?></h2>
     <ul>
         <li>
@@ -90,6 +92,7 @@
             </li>
         <?php endif ?>
     </ul>
+    <?php endif ?>
 
     <?= $this->hook->render('template:task:sidebar', array('task' => $task)) ?>
 </div>
