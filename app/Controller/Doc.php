@@ -83,6 +83,10 @@ class Doc extends Base
      */
     public function replaceImageUrl(array $matches)
     {
+        if ($this->config->getCurrentLanguage() === 'fr_FR') {
+            return '('.$this->helper->url->base().'doc/fr/'.$matches[1].')';
+        }
+
         return '('.$this->helper->url->base().'doc/'.$matches[1].')';
     }
 }
