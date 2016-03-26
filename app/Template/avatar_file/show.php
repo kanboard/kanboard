@@ -4,14 +4,14 @@
 
 <?= $this->avatar->render($user['id'], $user['username'], $user['name'], $user['email'], $user['avatar_path'], '') ?>
 
-<form method="post" enctype="multipart/form-data" action="<?= $this->url->href('user', 'uploadAvatar', array('user_id' => $user['id'])) ?>">
+<form method="post" enctype="multipart/form-data" action="<?= $this->url->href('AvatarFile', 'upload', array('user_id' => $user['id'])) ?>">
     <?= $this->form->csrf() ?>
     <?= $this->form->label(t('Upload my avatar image'), 'avatar') ?>
     <?= $this->form->file('avatar') ?>
 
     <div class="form-actions">
         <?php if (! empty($user['avatar_path'])): ?>
-            <?= $this->url->link(t('Remove my image'), 'User', 'removeAvatar', array('user_id' => $user['id']), true, 'btn btn-red') ?>
+            <?= $this->url->link(t('Remove my image'), 'AvatarFile', 'remove', array('user_id' => $user['id']), true, 'btn btn-red') ?>
         <?php endif ?>
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
