@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Improve schema migration process
 * Improve notification configuration form
 * Handle state in OAuth2 client
 * Allow to use the original template in overridden templates

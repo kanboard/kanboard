@@ -44,8 +44,8 @@ class DatabaseProvider implements ServiceProviderInterface
         if ($db->schema()->check(\Schema\VERSION)) {
             return $db;
         } else {
-            $errors = $db->getLogMessages();
-            throw new RuntimeException('Unable to migrate database schema: '.(isset($errors[0]) ? $errors[0] : 'Unknown error'));
+            $messages = $db->getLogMessages();
+            throw new RuntimeException('Unable to run SQL migrations: '.implode(', ', $messages).' (You may have to fix it manually)');
         }
     }
 
