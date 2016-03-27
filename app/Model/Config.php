@@ -90,6 +90,7 @@ class Config extends Setting
             'fi_FI' => 'Suomi',
             'sv_SE' => 'Svenska',
             'tr_TR' => 'Türkçe',
+			'ko_KR' => '한국어',
             'zh_CN' => '中文(简体)',
             'ja_JP' => '日本語',
             'th_TH' => 'ไทย',
