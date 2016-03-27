@@ -1,4 +1,4 @@
-User management
+User Management
 ===============
 
 Add a new user
@@ -6,18 +6,18 @@ Add a new user
 
 To add a new user, you must be an administrator.
 
-1. From the dashboard, go to the menu **User Management**
+1. From the dropdown menu in the top right corner, go to the menu **Users Management**
 2. On the top, you have a link **New local user** or **New remote user**
-3. Fill out the form and save
+3. Fill the form and save
 
-![New user](http://kanboard.net/screenshots/documentation/new-user.png)
+![New user](screenshots/new-user.png)
 
 When you create a **local user**, you have to specify at least those values:
 
 - **username**: This is the unique identifier of your user (login)
 - **password**: The password of your user must have at least 6 characters
 
-For **remote users**, only the username is mandatory. You can also pre-link Github or Google accounts if you already know their unique id.
+For **remote users**, only the username is mandatory.
 
 Edit users
 ----------

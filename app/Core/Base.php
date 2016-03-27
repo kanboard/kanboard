@@ -62,6 +62,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ActivityFilter                             $activityFilter
  * @property \Kanboard\Model\ActivityFinder                             $activityFinder
  * @property \Kanboard\Model\ActionParameter                            $actionParameter
+ * @property \Kanboard\Model\AvatarFile                                 $avatarFile
  * @property \Kanboard\Model\Board                                      $board
  * @property \Kanboard\Model\Category                                   $category
  * @property \Kanboard\Model\Color                                      $color

@@ -125,6 +125,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('Board', 'readonly', Role::APP_PUBLIC);
         $acl->add('Ical', '*', Role::APP_PUBLIC);
         $acl->add('Feed', '*', Role::APP_PUBLIC);
+        $acl->add('AvatarFile', 'show', Role::APP_PUBLIC);
 
         $acl->add('Config', '*', Role::APP_ADMIN);
         $acl->add('Currency', '*', Role::APP_ADMIN);

@@ -6,12 +6,25 @@
 }
 
 .views li {
-    border: 1px solid #eee;
+    background: #fafafa;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 5px;
     padding-bottom: 5px;
     display: inline;
+}
+
+.views a {
+    color: #555;
+    text-decoration: none;
+}
+
+.views a:hover {
+    color: #333;
+    text-decoration: underline;
 }
 
 .menu-inline li.active a,
@@ -22,13 +35,12 @@
 }
 
 .views li:first-child {
-    border-right: none;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
 .views li:last-child {
-    border-left: none;
+    border-right: 1px solid #ddd;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }

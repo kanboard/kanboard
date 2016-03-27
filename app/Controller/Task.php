@@ -71,17 +71,16 @@ class Task extends Base
         $values = $this->dateParser->format($values, array('date_started'), $this->config->get('application_datetime_format', DateParser::DATE_TIME_FORMAT));
 
         $this->response->html($this->helper->layout->task('task/show', array(
+            'task' => $task,
             'project' => $this->project->getById($task['project_id']),
+            'values' => $values,
             'files' => $this->taskFile->getAllDocuments($task['id']),
             'images' => $this->taskFile->getAllImages($task['id']),
             'comments' => $this->comment->getAll($task['id'], $this->userSession->getCommentSorting()),
             'subtasks' => $subtasks,
             'internal_links' => $this->taskLink->getAllGroupedByLabel($task['id']),
             'external_links' => $this->taskExternalLink->getAll($task['id']),
-            'task' => $task,
-            'values' => $values,
             'link_label_list' => $this->link->getList(0, false),
-            'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id'], true, false, false),
         )));
     }
 
@@ -96,6 +95,7 @@ class Task extends Base
 
         $this->response->html($this->helper->layout->task('task/analytics', array(
             'task' => $task,
+            'project' => $this->project->getById($task['project_id']),
             'lead_time' => $this->taskAnalytic->getLeadTime($task),
             'cycle_time' => $this->taskAnalytic->getCycleTime($task),
             'time_spent_columns' => $this->taskAnalytic->getTimeSpentByColumn($task),
@@ -121,6 +121,7 @@ class Task extends Base
 
         $this->response->html($this->helper->layout->task('task/time_tracking_details', array(
             'task' => $task,
+            'project' => $this->project->getById($task['project_id']),
             'subtask_paginator' => $subtask_paginator,
         )));
     }
@@ -136,6 +137,7 @@ class Task extends Base
 
         $this->response->html($this->helper->layout->task('task/transitions', array(
             'task' => $task,
+            'project' => $this->project->getById($task['project_id']),
             'transitions' => $this->transition->getAllByTask($task['id']),
         )));
     }

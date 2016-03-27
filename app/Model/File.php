@@ -3,8 +3,8 @@
 namespace Kanboard\Model;
 
 use Exception;
+use Kanboard\Core\Thumbnail;
 use Kanboard\Event\FileEvent;
-use Kanboard\Core\Tool;
 use Kanboard\Core\ObjectStorage\ObjectStorageException;
 
 /**
@@ -315,15 +315,15 @@ abstract class File extends Base
      */
     public function generateThumbnailFromData($destination_filename, &$data)
     {
-        $temp_filename = tempnam(sys_get_temp_dir(), 'datafile');
+        $blob = Thumbnail::createFromString($data)
+            ->resize()
+            ->toString();
 
-        file_put_contents($temp_filename, $data);
-        $this->generateThumbnailFromFile($temp_filename, $destination_filename);
-        unlink($temp_filename);
+        $this->objectStorage->put($this->getThumbnailPath($destination_filename), $blob);
     }
 
     /**
-     * Generate thumbnail from a blob
+     * Generate thumbnail from a local file
      *
      * @access public
      * @param  string   $uploaded_filename
@@ -331,8 +331,10 @@ abstract class File extends Base
      */
     public function generateThumbnailFromFile($uploaded_filename, $destination_filename)
     {
-        $thumbnail_filename = tempnam(sys_get_temp_dir(), 'thumbnail');
-        Tool::generateThumbnail($uploaded_filename, $thumbnail_filename);
-        $this->objectStorage->moveFile($thumbnail_filename, $this->getThumbnailPath($destination_filename));
+        $blob = Thumbnail::createFromFile($uploaded_filename)
+            ->resize()
+            ->toString();
+
+        $this->objectStorage->put($this->getThumbnailPath($destination_filename), $blob);
     }
 }

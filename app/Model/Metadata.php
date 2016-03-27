@@ -81,19 +81,32 @@ abstract class Metadata extends Base
     public function save($entity_id, array $values)
     {
         $results = array();
+        $user_id = $this->userSession->getId();
+        $timestamp = time();
 
         $this->db->startTransaction();
 
         foreach ($values as $key => $value) {
             if ($this->exists($entity_id, $key)) {
-                $results[] = $this->db->table(static::TABLE)->eq($this->getEntityKey(), $entity_id)->eq('name', $key)->update(array('value' => $value));
+                $results[] = $this->db->table(static::TABLE)
+                    ->eq($this->getEntityKey(), $entity_id)
+                    ->eq('name', $key)->update(array(
+                        'value' => $value,
+                        'changed_on' => $timestamp,
+                        'changed_by' => $user_id,
+                    ));
             } else {
-                $results[] = $this->db->table(static::TABLE)->insert(array('name' => $key, 'value' => $value, $this->getEntityKey() => $entity_id));
+                $results[] = $this->db->table(static::TABLE)->insert(array(
+                    'name' => $key,
+                    'value' => $value,
+                    $this->getEntityKey() => $entity_id,
+                    'changed_on' => $timestamp,
+                    'changed_by' => $user_id,
+                ));
             }
         }
 
         $this->db->closeTransaction();
-
         return ! in_array(false, $results, true);
     }
 

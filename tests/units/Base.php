@@ -39,6 +39,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container->register(new Kanboard\ServiceProvider\ClassProvider);
         $this->container->register(new Kanboard\ServiceProvider\NotificationProvider);
         $this->container->register(new Kanboard\ServiceProvider\RouteProvider);
+        $this->container->register(new Kanboard\ServiceProvider\AvatarProvider);
 
         $this->container['dispatcher'] = new TraceableEventDispatcher(
             new EventDispatcher,

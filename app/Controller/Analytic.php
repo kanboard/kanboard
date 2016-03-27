@@ -44,8 +44,7 @@ class Analytic extends Base
     public function compareHours()
     {
         $project = $this->getProject();
-        $params = $this->getProjectFilters('analytic', 'compareHours');
-        $query = $this->taskFilter->create()->filterByProject($params['project']['id'])->getQuery();
+        $query = $this->taskFilter->create()->filterByProject($project['id'])->getQuery();
 
         $paginator = $this->paginator
             ->setUrl('analytic', 'compareHours', array('project_id' => $project['id']))

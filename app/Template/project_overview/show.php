@@ -1,9 +1,5 @@
 <section id="main">
-    <?= $this->render('project_header/header', array(
-        'project' => $project,
-        'filters' => $filters,
-    )) ?>
-
+    <?= $this->projectHeader->render($project, 'ProjectOverview', 'show') ?>
     <?= $this->render('project_overview/columns', array('project' => $project)) ?>
     <?= $this->render('project_overview/description', array('project' => $project)) ?>
     <?= $this->render('project_overview/attachments', array('project' => $project, 'images' => $images, 'files' => $files)) ?>

@@ -15,11 +15,11 @@ Usage examples:
 - Display the board on a large screen in your office
 
 Enable public access
--------------------
+--------------------
 
 Select your project, then click on "Public access" and finally click on the button "Enable public access".
 
-![Enable public access](http://kanboard.net/screenshots/documentation/project-enable-sharing.png)
+![Enable public access](screenshots/project-enable-sharing.png)
 
 When the public access is enabled, a couple of links are generated:
 
@@ -27,7 +27,7 @@ When the public access is enabled, a couple of links are generated:
 - RSS feed subscription link
 - iCalendar subscription link
 
-![Disable public access](http://kanboard.net/screenshots/documentation/project-disable-sharing.png)
+![Disable public access](screenshots/project-disable-sharing.png)
 
 You can also disable the public access whenever you want.
 

@@ -14,7 +14,7 @@ Creating projects for multiple users
 
 From the dashboard, click on the link **New project**:
 
-![Project creation form](http://kanboard.net/screenshots/documentation/project-creation-form.png)
+![Project creation form](screenshots/new-project.png)
 
 It's very easy, you just have to find a name for your project!
 
@@ -27,6 +27,13 @@ Creating a private project
 
 From the dashboard, click on the link **New private project**.
 
-![New private project](http://kanboard.net/screenshots/documentation/new-private-project.png)
+Creating projects from another project
+--------------------------------------
 
-Note: project names must be unique across the application.
+When you create a new project, your can choose to duplicate the properties of another project :
+
+- Permissions
+- Actions
+- Swimlanes
+- Catégories
+- Tasks

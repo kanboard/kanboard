@@ -1,49 +1,22 @@
 Permissions des projets
-===================
+=======================
 
-Deux sortes d'utilisateurs sont en charge d'un projet : les **gestionnaires de projet** et les **membres du projet**.
+Chaque projet est isolé des autres.
+Les accès au projet doivent être autorisés par le chef de projet.
 
-- Les gestionnaires de projet peuvent gérer la configuration du projet et accéder aux rapports.
-- Les membres du projet ne peuvent effectuer que des opérations de base (créer ou déplacer des tâches).
+Chaque utilisateur et chaque groupe peut avoir un rôle différent.
+Il y a 3 types de [rôles pour les projets](roles.markdown) :
 
-Quand vous créez un nouveau projet, le statut de gestionnaire de projet vous est automatiquement attribué.
+- Chef de projet
+- Membre du projet
+- Visualiseur
 
-Les administrateurs de Kanboard peuvent accéder à tout mais ils ne sont pas nécessairement gestionnaires de projet ni membres du projet. **Ces permissions sont définies au niveau du projet**.
+L'assignation des rôles est disponible depuis **Paramètres du projet > Permissions**:
 
-Permissions selon chaque rôle
--------------------------
+![Permissions du projet](screenshots/project-permissions.png)
 
-### Membres du projet
+Si vous choisissez d'autoriser tout le monde, tous les utilisateurs de Kanboard seront considérés comme **Membre du projet**.
+Ce qui signifie qu'il n'y a plus des gestion de rôles.
+Les permissions par utilisateur ou par groupe ne peuvent plus être appliquées.
 
-- Utiliser le tableau (créer, déplacer et modifier les tâches)
-- Supprimer seulement les tâches créées par eux-mêmes
-
-### Gestionnaires du projet
-
-- Utiliser le tableau 
-- Configurer le projet
-- Partager, renommer, dupliquer et désactiver le projet      
-- Gérer les swimlanes, les catégories, colonnes et utilisateurs
-- Modifier les actions automatisées
-- Exporter en CSV
-- Supprimer les tâches de n'importe quel membre du projet
-- Accéder à la section analytique
-
-Ils ne  **peuvent pas supprimer un projet**.
-
-Gérer les utilisateurs et les permissions
-----------------------------
-
-Pour définir les rôles dans un projet, allez sur la page de  **configuration de projet** puis cliquez sur **Gestion des utilisateurs**.
-
-### Gestion des utilisateurs
-
-![Permissions du projet](http://kanboard.net/screenshots/documentation/project-permissions.png)
-
-C'est l'endroit où vous pouvez choisir de nouveaux membres, modifier leur rôle ou interrompre l'accès d'un utilisateur.
-
-### Permission générale
-
-Si vous choisissez d'autoriser tout le monde (tous les utilisateurs de Kanboard), le projet est considéré comme public.
-
-Cela signifie qu'il n'y a plus de rôle de gestionnaire de projet. Les permissions par utilisateur ne peuvent pas s'appliquer.
+Les projets privés ne peuvent pas définir de permissions.

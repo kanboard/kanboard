@@ -11,22 +11,6 @@ namespace Kanboard\Controller;
 class TaskHelper extends Base
 {
     /**
-     * Render Markdown text and reply with the HTML Code
-     *
-     * @access public
-     */
-    public function preview()
-    {
-        $payload = $this->request->getJson();
-
-        if (empty($payload['text'])) {
-            $this->response->html('<p>'.t('Nothing to preview...').'</p>');
-        }
-
-        $this->response->html($this->helper->text->markdown($payload['text']));
-    }
-
-    /**
      * Task autocompletion (Ajax)
      *
      * @access public

@@ -5,7 +5,7 @@ Projects can be renamed and disabled at any time.
 
 To rename a project, just click on the link "Edit project" on the left.
 
-![Project edition](http://kanboard.net/screenshots/documentation/project-edition.png)
+![Project edition](screenshots/project-edition.png)
 
 - The start date and end date are used to generate the project Gantt chart
 - The description is visible as tooltip on the board and on the projects listing page

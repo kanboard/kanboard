@@ -81,6 +81,7 @@ class Activity extends Base
             'title' => $task['title'],
             'task' => $task,
             'events' => $this->getActivityPaginatorByTask($task['id']),
+            'project' => $this->project->getById($task['project_id']),
         )));
     }
 }

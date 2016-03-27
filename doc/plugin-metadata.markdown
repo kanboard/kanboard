@@ -1,7 +1,7 @@
 Metadata
 ========
 
-You can attach metadata for each project, task and user.
+You can attach metadata for each project, task, user or for the whole application.
 Metadata are custom fields, it's a key/value table.
 
 For example your plugin can store external information for a task or new settings for a project.
@@ -34,6 +34,7 @@ Metadata types
 - TaskMetadata: `$this->taskMetadata`
 - ProjectMetadata: `$this->projectMetadata`
 - UserMetadata: `$this->userMetadata`
+- Settings/Config: `$this->config`
 
 Notes
 -----

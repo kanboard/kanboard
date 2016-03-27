@@ -163,6 +163,7 @@ List of template hooks:
 | `template:board:public:task:before-title`  | Task in public board: before title                 |
 | `template:board:public:task:after-title`   | Task in public board: after title                  |
 | `template:board:task:footer`               | Task in board: footer                              |
+| `template:board:task:icons`                | Task in board: tooltip icon                        |
 | `template:config:sidebar`                  | Sidebar on settings page                           |
 | `template:config:application `             | Application settings form                          |
 | `template:config:integrations`             | Integration page in global settings                |
@@ -177,9 +178,9 @@ List of template hooks:
 | `template:project:integrations`            | Integration page in projects settings              |
 | `template:project:sidebar`                 | Sidebar in project settings                        |
 | `template:project-user:sidebar`            | Sidebar on project user overview page              |
-| `template:task:menu`                       | "Actions" menu on left in different task views     |
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
 | `template:task:sidebar`                    | Sidebar on task page                               |
+| `template:task:form:left-column`           | Left column in task form                           |
 | `template:task:form:right-column`          | Right column in task form                          |
 | `template:task:show:top   `                | Show task page: top                                |
 | `template:task:show:bottom`                | Show task page: bottom                             |

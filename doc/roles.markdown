@@ -22,4 +22,3 @@ Each individual team project can assign a different role to each user and group:
 | Project Manager | Can change project settings, access to the Gantt chart and reports   |
 | Project Member  | Can create tasks and use the board                                   |
 | Project Viewer  | Read-only access to the board and tasks                              |
-

@@ -7,7 +7,7 @@ Switching from one view to another can be done with the keyboard shortcut **"s"*
 Collapsed mode
 --------------
 
-![Tasks collapsed](http://kanboard.net/screenshots/documentation/board-collapsed-mode.png)
+![Tasks collapsed](screenshots/board-collapsed-mode.png)
 
 - If the task is assigned to someone, the initials of the person are shown next to the task number
 - If the task title is too long, you can put your mouse over the task to show a tooltip with the full title.
@@ -15,5 +15,4 @@ Collapsed mode
 Expanded mode
 -------------
 
-![Tasks expanded](http://kanboard.net/screenshots/documentation/board-expanded-mode.png)
-
+![Tasks expanded](screenshots/board-expanded-mode.png)

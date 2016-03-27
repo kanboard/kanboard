@@ -331,7 +331,7 @@ class TaskFileTest extends Base
         $fileModel = $this
             ->getMockBuilder('\Kanboard\Model\TaskFile')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('generateThumbnailFromFile'))
+            ->setMethods(array('generateThumbnailFromData'))
             ->getMock();
 
         $projectModel = new Project($this->container);
@@ -343,7 +343,7 @@ class TaskFileTest extends Base
 
         $fileModel
             ->expects($this->once())
-            ->method('generateThumbnailFromFile');
+            ->method('generateThumbnailFromData');
 
         $this->container['objectStorage']
             ->expects($this->once())

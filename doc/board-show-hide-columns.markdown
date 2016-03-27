@@ -3,9 +3,10 @@ Show and hide columns on the board
 
 You can hide or display columns very easily on the board:
 
-![Board with hidden columns](http://kanboard.net/screenshots/documentation/board-hide-show-column.png)
+![Hide a column](screenshots/hide-column.png)
 
-- To hide a column, just click on the column title
-- To show a hidden column, click on the vertical title
+Pour cacher une colonne, ouvrez le menu déroulant de la colonne.
 
-When a column is hidden, the number of tasks is displayed at the top.
+![Show a column](screenshots/show-column.png)
+
+To show again the column, click on the "plus icon".

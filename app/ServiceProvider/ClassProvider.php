@@ -26,6 +26,7 @@ class ClassProvider implements ServiceProviderInterface
             'ActivityFilter',
             'ActivityFinder',
             'ActionParameter',
+            'AvatarFile',
             'Board',
             'Category',
             'Color',

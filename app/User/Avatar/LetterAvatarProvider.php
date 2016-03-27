@@ -24,8 +24,9 @@ class LetterAvatarProvider extends Base implements AvatarProviderInterface
      * Render avatar html
      *
      * @access public
-     * @param array $user
-     * @param int   $size
+     * @param  array $user
+     * @param  int   $size
+     * @return string
      */
     public function render(array $user, $size)
     {

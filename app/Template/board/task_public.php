@@ -8,12 +8,12 @@
     </span>
     <?php endif ?>
 
+    <?= $this->render('board/task_avatar', array('task' => $task)) ?>
+
     <?= $this->hook->render('template:board:public:task:before-title', array('task' => $task)) ?>
-
-    <span class="task-board-title">
+    <div class="task-board-title">
         <?= $this->url->link($this->text->e($task['title']), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
-    </span>
-
+    </div>
     <?= $this->hook->render('template:board:public:task:after-title', array('task' => $task)) ?>
 
     <?= $this->render('board/task_footer', array(

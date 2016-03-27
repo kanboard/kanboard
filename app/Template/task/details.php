@@ -1,5 +1,6 @@
 <section id="task-summary">
     <h2><?= $this->text->e($task['title']) ?></h2>
+
     <div class="task-summary-container color-<?= $task['color_id'] ?>">
         <div class="task-summary-column">
             <ul class="no-bullet">
@@ -134,4 +135,10 @@
             </ul>
         </div>
     </div>
+
+    <?php if ($editable && empty($task['date_started'])): ?>
+        <div class="task-summary-buttons">
+            <?= $this->url->button('fa-play', t('Set start date'), 'taskmodification', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        </div>
+    <?php endif ?>
 </section>

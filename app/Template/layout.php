@@ -36,7 +36,6 @@
     </head>
     <body data-status-url="<?= $this->url->href('app', 'status') ?>"
           data-login-url="<?= $this->url->href('auth', 'login') ?>"
-          data-markdown-preview-url="<?= $this->url->href('TaskHelper', 'preview') ?>"
           data-keyboard-shortcut-url="<?= $this->url->href('Doc', 'shortcuts') ?>"
           data-timezone="<?= $this->app->getTimezone() ?>"
           data-js-lang="<?= $this->app->jsLang() ?>">
