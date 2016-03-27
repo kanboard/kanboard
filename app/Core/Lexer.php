@@ -26,6 +26,7 @@ class Lexer
      */
     private $tokenMap = array(
         "/^(assignee:)/"                                 => 'T_ASSIGNEE',
+        "/^(creator:)/"                                  => 'T_CREATOR',
         "/^(color:)/"                                    => 'T_COLOR',
         "/^(due:)/"                                      => 'T_DUE',
         "/^(updated:)/"                                  => 'T_UPDATED',
@@ -115,6 +116,7 @@ class Lexer
         while (false !== ($token = current($tokens))) {
             switch ($token['token']) {
                 case 'T_ASSIGNEE':
+                case 'T_CREATOR':
                 case 'T_COLOR':
                 case 'T_CATEGORY':
                 case 'T_COLUMN':

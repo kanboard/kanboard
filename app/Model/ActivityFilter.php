@@ -18,7 +18,7 @@ class ActivityFilter extends Base
      */
     private $filters = array(
         'T_TITLE' => 'filterByTask',
-        'T_ASSIGNEE' => 'filterByAssignee',
+        'T_CREATOR' => 'filterByCreator',
         'T_CREATED' => 'filterByCreationDate',
         'T_STATUS' => 'filterByStatusName',
         'T_PROJECT' => 'filterByProjectName',
@@ -92,22 +92,6 @@ class ActivityFilter extends Base
     }
 
     /**
-     * Filter by task id
-     *
-     * @access public
-     * @param  integer  $task_id
-     * @return ActivityFilter
-     */
-    public function filterById($task_id)
-    {
-        if ($task_id > 0) {
-            $this->query->eq(ProjectActivity::TABLE.'.task_id', $task_id);
-        }
-
-        return $this;
-    }
-
-    /**
      * Filter by task title or task id if the string is like #123 or an integer
      *
      * @access public
@@ -120,30 +104,27 @@ class ActivityFilter extends Base
             $this->query->beginOr();
             $this->query->eq(ProjectActivity::TABLE.'.task_id', str_replace('#', '', $title));
             $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
-            $this->query->join(Task::TABLE, 'id', 'task_id');
             $this->query->closeOr();
         } else {
             $this->query->ilike(Task::TABLE.'.title', '%'.$title.'%');
-            $this->query->join(Task::TABLE, 'id', 'task_id');
         }
 
         return $this;
     }
 
     /**
-     * Filter by assignee names
+     * Filter by creator names
      *
      * @access public
-     * @param  array    $values   List of assignees
+     * @param  array    $values   List of creators
      * @return ActivityFilter
      */
-    public function filterByAssignee(array $values)
+    public function filterByCreator(array $values)
     {
         $this->query->beginOr();
 
-        $this->logger->debug('');
-        foreach ($values as $assignee) {
-            switch ($assignee) {
+        foreach ($values as $creator) {
+            switch ($creator) {
                 case 'me':
                     $this->query->eq(ProjectActivity::TABLE.'.creator_id', $this->userSession->getId());
                     break;
@@ -151,8 +132,8 @@ class ActivityFilter extends Base
                     $this->query->eq(ProjectActivity::TABLE.'.creator_id', 0);
                     break;
                 default:
-                    $this->query->ilike(User::TABLE.'.username', '%'.$assignee.'%');
-                    $this->query->ilike(User::TABLE.'.name', '%'.$assignee.'%');
+                    $this->query->ilike(User::TABLE.'.username', '%'.$creator.'%');
+                    $this->query->ilike(User::TABLE.'.name', '%'.$creator.'%');
             }
         }
 
@@ -188,7 +169,6 @@ class ActivityFilter extends Base
     {
         if ($is_active >= 0) {
             $this->query->eq(Task::TABLE.'.is_active', $is_active);
-            $this->query->join(Task::TABLE, 'id', 'task_id');
         }
 
         return $this;
@@ -224,17 +204,15 @@ class ActivityFilter extends Base
      */
     public function filterByProjects(array $project_ids)
     {
-        $this
-                ->query
-                ->columns(
-                    ProjectActivity::TABLE.'.*',
-                    User::TABLE.'.username AS author_username',
-                    User::TABLE.'.name AS author_name',
-                    User::TABLE.'.email'
-                )
-                ->join(User::TABLE, 'id', 'creator_id')
-                ->in(ProjectActivity::TABLE.'.project_id', $project_ids)
-                ->callback(array($this, 'reorganizeDataParameters'));
+        $this->query
+            ->columns(
+                ProjectActivity::TABLE.'.*',
+                User::TABLE.'.username AS author_username',
+                User::TABLE.'.name AS author_name',
+                User::TABLE.'.email'
+            )
+            ->in(ProjectActivity::TABLE.'.project_id', $project_ids)
+            ->callback(array($this, 'reorganizeDataParameters'));
 
         return $this;
     }
@@ -327,6 +305,17 @@ class ActivityFilter extends Base
         $this->query->join(Comment::TABLE, 'task_id', 'task_id');
 
         $this->query->closeOr();
+    }
+
+    /**
+     * Get all results of the filter
+     *
+     * @access public
+     * @return array
+     */
+    public function findAll()
+    {
+        return $this->query->asc(Task::TABLE.'.id')->findAll();
     }
 
     /**
