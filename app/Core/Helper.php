@@ -15,6 +15,7 @@ use Pimple\Container;
  * @property \Kanboard\Helper\DateHelper              $dt
  * @property \Kanboard\Helper\FileHelper              $file
  * @property \Kanboard\Helper\FormHelper              $form
+ * @property \Kanboard\Helper\HookHelper              $hook
  * @property \Kanboard\Helper\ModelHelper             $model
  * @property \Kanboard\Helper\SubtaskHelper           $subtask
  * @property \Kanboard\Helper\TaskHelper              $task

@@ -7,6 +7,21 @@ namespace Kanboard\Core;
  *
  * @package core
  * @author  Frederic Guillot
+ *
+ * @property \Kanboard\Helper\AppHelper               $app
+ * @property \Kanboard\Helper\AssetHelper             $asset
+ * @property \Kanboard\Helper\DateHelper              $dt
+ * @property \Kanboard\Helper\FileHelper              $file
+ * @property \Kanboard\Helper\FormHelper              $form
+ * @property \Kanboard\Helper\HookHelper              $hook
+ * @property \Kanboard\Helper\ModelHelper             $model
+ * @property \Kanboard\Helper\SubtaskHelper           $subtask
+ * @property \Kanboard\Helper\TaskHelper              $task
+ * @property \Kanboard\Helper\TextHelper              $text
+ * @property \Kanboard\Helper\UrlHelper               $url
+ * @property \Kanboard\Helper\UserHelper              $user
+ * @property \Kanboard\Helper\LayoutHelper            $layout
+ * @property \Kanboard\Helper\ProjectHeaderHelper     $projectHeader
  */
 class Template
 {
