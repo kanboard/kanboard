@@ -120,6 +120,7 @@ Contributors:
 - [Vladimir Babin](https://github.com/Chiliec)
 - [Yannick Ihmels](https://github.com/ihmels)
 - [Ybarc](https://github.com/ybarc)
+- [Yu Yongwoo](https://github.com/uyu423)
 - [Yuichi Murata](https://github.com/yuichi1004)
 
 There is also many people who have reported bugs or proposed awesome ideas.

@@ -6,9 +6,12 @@ New features:
 * Added Markdown editor
 * Added letter avatar provider
 * Added pluggable Avatar providers
+* Added Korean translation
 
 Improvements:
 
+* Improve schema migration process
+* Improve notification configuration form
 * Handle state in OAuth2 client
 * Allow to use the original template in overridden templates
 * Unification of the project header
@@ -30,6 +33,7 @@ Improvements:
 
 Bug fixes:
 
+* Fix bad unique constraints in Mysql table user_has_notifications
 * Force integer type for aggregated metrics (Burndown chart concat values instead of summing)
 * Fixes cycle time calculation when the start date is defined in the future
 * Access allowed to any tasks from the shared public board by changing the URL parameters
