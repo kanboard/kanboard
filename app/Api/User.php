@@ -87,6 +87,7 @@ class User extends \Kanboard\Core\Base
         try {
 
             $ldap = LdapClient::connect();
+            $ldap->setLogger($this->logger);
             $user = LdapUser::getUser($ldap, $username);
 
             if ($user === null) {

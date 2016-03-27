@@ -198,4 +198,15 @@ class Client
     {
         return $this->logger;
     }
+
+    /**
+     * Test if a logger is defined
+     *
+     * @access public
+     * @return boolean
+     */
+    public function hasLogger()
+    {
+        return $this->logger !== null;
+    }
 }

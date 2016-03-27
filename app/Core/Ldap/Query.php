@@ -48,7 +48,7 @@ class Query
      */
     public function execute($baseDn, $filter, array $attributes)
     {
-        if (DEBUG) {
+        if (DEBUG && $this->client->hasLogger()) {
             $this->client->getLogger()->debug('BaseDN='.$baseDn);
             $this->client->getLogger()->debug('Filter='.$filter);
             $this->client->getLogger()->debug('Attributes='.implode(', ', $attributes));
