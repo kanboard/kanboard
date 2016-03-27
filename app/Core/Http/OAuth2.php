@@ -12,14 +12,14 @@ use Kanboard\Core\Base;
  */
 class OAuth2 extends Base
 {
-    private $clientId;
-    private $secret;
-    private $callbackUrl;
-    private $authUrl;
-    private $tokenUrl;
-    private $scopes;
-    private $tokenType;
-    private $accessToken;
+    protected $clientId;
+    protected $secret;
+    protected $callbackUrl;
+    protected $authUrl;
+    protected $tokenUrl;
+    protected $scopes;
+    protected $tokenType;
+    protected $accessToken;
 
     /**
      * Create OAuth2 service
@@ -46,6 +46,33 @@ class OAuth2 extends Base
     }
 
     /**
+     * Generate OAuth2 state and return the token value
+     *
+     * @access public
+     * @return string
+     */
+    public function getState()
+    {
+        if (! isset($this->sessionStorage->oauthState) || empty($this->sessionStorage->oauthState)) {
+            $this->sessionStorage->oauthState = $this->token->getToken();
+        }
+
+        return $this->sessionStorage->oauthState;
+    }
+
+    /**
+     * Check the validity of the state (CSRF token)
+     *
+     * @access public
+     * @param  string $state
+     * @return bool
+     */
+    public function isValidateState($state)
+    {
+        return $state === $this->getState();
+    }
+
+    /**
      * Get authorization url
      *
      * @access public
@@ -58,6 +85,7 @@ class OAuth2 extends Base
             'client_id' => $this->clientId,
             'redirect_uri' => $this->callbackUrl,
             'scope' => implode(' ', $this->scopes),
+            'state' => $this->getState(),
         );
 
         return $this->authUrl.'?'.http_build_query($params);
@@ -94,6 +122,7 @@ class OAuth2 extends Base
                 'client_secret' => $this->secret,
                 'redirect_uri' => $this->callbackUrl,
                 'grant_type' => 'authorization_code',
+                'state' => $this->getState(),
             );
 
             $response = json_decode($this->httpClient->postForm($this->tokenUrl, $params, array('Accept: application/json')), true);
