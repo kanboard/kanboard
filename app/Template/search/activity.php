@@ -20,9 +20,9 @@
     <?php if (empty($values['search'])): ?>
         <div class="listing">
             <h3><?= t('Advanced search') ?></h3>
-            <p><?= t('Example of query: ') ?><strong>project:"My project" assignee:me created:yesterday</strong></p>
+            <p><?= t('Example of query: ') ?><strong>project:"My project" creator:me created:yesterday</strong></p>
             <ul>
-                <li><?= t('Search by assignee: ') ?><strong>assignee:nobody|me|name|surname|username</strong></li>
+                <li><?= t('Search by creator: ') ?><strong>creator:nobody|me|name|surname|username</strong></li>
                 <li><?= t('Search by creation date: ') ?><strong>creation:(<=>)yesterday|today|2015-07-01</strong></li>
                 <li><?= t('Search by status: ') ?><strong>status:closed|open</strong></li>
             </ul>

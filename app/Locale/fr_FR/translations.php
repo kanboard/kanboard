@@ -1160,4 +1160,5 @@ return array(
     'Upload my avatar image' => 'Uploader mon image d\'avatar',
     'Remove my image' => 'Supprimer mon image',
     'The OAuth2 state parameter is invalid' => 'Le paramètre "state" de OAuth2 est invalide',
+    // 'Search by creator: ' => '',
 );
