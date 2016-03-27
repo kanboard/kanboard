@@ -15,6 +15,7 @@ class UserHelperTest extends Base
         $helper = new UserHelper($this->container);
 
         $this->assertEquals('CN', $helper->getInitials('chuck norris'));
+        $this->assertEquals('CN', $helper->getInitials('chuck norris #2'));
         $this->assertEquals('A', $helper->getInitials('admin'));
     }
 
