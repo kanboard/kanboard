@@ -6,7 +6,16 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 109;
+const VERSION = 110;
+
+function version_110(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE user_has_notifications DROP FOREIGN KEY `user_has_notifications_ibfk_1`");
+    $pdo->exec("ALTER TABLE user_has_notifications DROP FOREIGN KEY `user_has_notifications_ibfk_2`");
+    $pdo->exec("DROP INDEX `project_id` ON user_has_notifications");
+    $pdo->exec("ALTER TABLE user_has_notifications DROP KEY `user_id`");
+    $pdo->exec("CREATE UNIQUE INDEX `user_has_notifications_unique_idx` ON `user_has_notifications` (`user_id`, `project_id`)");
+}
 
 function version_109(PDO $pdo)
 {
