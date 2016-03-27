@@ -20,7 +20,7 @@ Official website: <http://kanboard.net>
 - [Change Log](https://github.com/fguillot/kanboard/blob/master/ChangeLog)
 - [Documentation](https://github.com/fguillot/kanboard/blob/master/doc/index.markdown)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/fguillot/kanboard)
 
 Authors
 -------
