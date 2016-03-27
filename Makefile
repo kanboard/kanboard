@@ -56,6 +56,7 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard/Makefile
 	@ rm -rf ${BUILD_DIR}/kanboard/Vagrantfile
 	@ rm -rf ${BUILD_DIR}/kanboard/Dockerfile
+	@ rm -rf ${BUILD_DIR}/kanboard/docker-compose.yml
 	@ rm -rf ${BUILD_DIR}/kanboard/.*.yml
 	@ rm -rf ${BUILD_DIR}/kanboard/*.md
 	@ rm -rf ${BUILD_DIR}/kanboard/*.markdown
