@@ -1,11 +1,13 @@
-Version 1.0.27 (unreleased)
+Version 1.0.27
 --------------
 
 New features:
 
 * Added Markdown editor
-* Added letter avatar provider
-* Added pluggable Avatar providers
+* Added Avatar with pluggable system
+    - Default is a letter based avatar
+    - Gravatar
+    - Avatar Image upload
 * Added Korean translation
 
 Improvements:
