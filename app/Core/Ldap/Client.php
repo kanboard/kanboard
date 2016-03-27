@@ -3,6 +3,7 @@
 namespace Kanboard\Core\Ldap;
 
 use LogicException;
+use Psr\Log\LoggerInterface;
 
 /**
  * LDAP Client
@@ -19,6 +20,14 @@ class Client
      * @var resource
      */
     protected $ldap;
+
+    /**
+     * Logger instance
+     *
+     * @access private
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * Establish LDAP connection
@@ -164,5 +173,29 @@ class Client
     public function getLdapPassword()
     {
         return LDAP_PASSWORD;
+    }
+
+    /**
+     * Set logger
+     *
+     * @access public
+     * @param  LoggerInterface $logger
+     * @return Client
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        return $this;
+    }
+
+    /**
+     * Get logger
+     *
+     * @access public
+     * @return LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger;
     }
 }

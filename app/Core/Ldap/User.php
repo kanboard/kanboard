@@ -44,8 +44,7 @@ class User
      */
     public static function getUser(Client $client, $username)
     {
-        $className = get_called_class();
-        $self = new $className(new Query($client));
+        $self = new static(new Query($client));
         return $self->find($self->getLdapUserPattern($username));
     }
 

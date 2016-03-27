@@ -10,6 +10,7 @@ New features:
 
 Improvements:
 
+* Added more logging for LDAP client
 * Improve schema migration process
 * Improve notification configuration form
 * Handle state in OAuth2 client
