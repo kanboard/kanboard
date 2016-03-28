@@ -7,6 +7,7 @@ app/constants.php export-subst
 .scrutinizer.yml export-ignore
 .travis.yml export-ignore
 Dockerfile export-ignore
+docker-compose.yml export-ignore
 Makefile export-ignore
 README.md export-ignore
 Vagrantfile export-ignore
