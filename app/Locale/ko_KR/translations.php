@@ -1153,4 +1153,5 @@ return array(
     // 'Upload my avatar image' => '',
     // 'Remove my image' => '',
     // 'The OAuth2 state parameter is invalid' => '',
+    // 'My activities' => '',
 );

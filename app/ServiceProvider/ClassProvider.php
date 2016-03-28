@@ -23,6 +23,8 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Model' => array(
             'Action',
+            'ActivityFilter',
+            'ActivityFinder',
             'ActionParameter',
             'AvatarFile',
             'Board',

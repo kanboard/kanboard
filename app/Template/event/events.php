@@ -1,7 +1,7 @@
-<?php if (empty($events)): ?>
+<?php if ($events->isEmpty()): ?>
     <p class="alert"><?= t('There is no activity yet.') ?></p>
 <?php else: ?>
-    <?php foreach ($events as $event): ?>
+    <?php foreach ($events->getCollection() as $event): ?>
         <div class="activity-event">
             <?= $this->avatar->render(
                 $event['creator_id'],
@@ -16,5 +16,5 @@
             </div>
         </div>
     <?php endforeach ?>
+    <?= $events ?>
 <?php endif ?>
-

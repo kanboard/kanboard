@@ -11,6 +11,7 @@ use Kanboard\Core\DateParser;
 use Kanboard\Model\Category;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Swimlane;
+use Kanboard\Model\Comment;
 
 class TaskFilterTest extends Base
 {
@@ -609,6 +610,46 @@ class TaskFilterTest extends Base
         $this->assertEquals('my task title is awesome', $tasks[0]['title']);
         $this->assertEquals('my task title is amazing', $tasks[1]['title']);
         $this->assertEquals('Bob at work', $tasks[2]['title']);
+    }
+
+    public function testFilterByComment()
+    {
+        $c = new Comment($this->container);
+        $p = new Project($this->container);
+        $tc = new TaskCreation($this->container);
+        $tf = new TaskFilter($this->container);
+
+        $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'Task #1')));
+        $this->assertEquals(1, $c->create(array('task_id' => 1, 'comment' => 'bla bla', 'user_id' => 1)));
+        $this->assertEquals(2, $c->create(array('task_id' => 1, 'comment' => 'bla alb')));
+        $this->assertNotFalse($tc->create(array('project_id' => 1, 'title' => 'Task #2')));
+        $this->assertEquals(3, $c->create(array('task_id' => 2, 'comment' => 'bla bla', 'user_id' => 1)));
+        $this->assertEquals(4, $c->create(array('task_id' => 2, 'comment' => 'c2')));
+
+        $tf->search('comment:bla');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(3, $tasks);
+        $this->assertEquals('Task #1', $tasks[0]['title']);
+
+        $tf->search('comment:alb');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('Task #1', $tasks[0]['title']);
+
+        $tf->search('comment:alb');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('Task #1', $tasks[0]['title']);
+
+        $tf->search('comment:c2');
+        $tasks = $tf->findAll();
+        $this->assertNotEmpty($tasks);
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('Task #2', $tasks[0]['title']);
     }
 
     public function testCopy()

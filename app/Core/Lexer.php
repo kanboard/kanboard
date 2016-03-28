@@ -26,6 +26,7 @@ class Lexer
      */
     private $tokenMap = array(
         "/^(assignee:)/"                                 => 'T_ASSIGNEE',
+        "/^(creator:)/"                                  => 'T_CREATOR',
         "/^(color:)/"                                    => 'T_COLOR',
         "/^(due:)/"                                      => 'T_DUE',
         "/^(updated:)/"                                  => 'T_UPDATED',
@@ -37,6 +38,7 @@ class Lexer
         "/^(column:)/"                                   => 'T_COLUMN',
         "/^(project:)/"                                  => 'T_PROJECT',
         "/^(swimlane:)/"                                 => 'T_SWIMLANE',
+        "/^(comment:)/"                                  => 'T_COMMENT',
         "/^(ref:)/"                                      => 'T_REFERENCE',
         "/^(reference:)/"                                => 'T_REFERENCE',
         "/^(link:)/"                                     => 'T_LINK',
@@ -114,6 +116,7 @@ class Lexer
         while (false !== ($token = current($tokens))) {
             switch ($token['token']) {
                 case 'T_ASSIGNEE':
+                case 'T_CREATOR':
                 case 'T_COLOR':
                 case 'T_CATEGORY':
                 case 'T_COLUMN':
@@ -134,6 +137,7 @@ class Lexer
                 case 'T_CREATED':
                 case 'T_DESCRIPTION':
                 case 'T_REFERENCE':
+                case 'T_COMMENT':
                     $next = next($tokens);
 
                     if ($next !== false && ($next['token'] === 'T_DATE' || $next['token'] === 'T_STRING')) {

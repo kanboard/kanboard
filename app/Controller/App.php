@@ -71,6 +71,27 @@ class App extends Base
     }
 
     /**
+     * Get activity pagination
+     *
+     * @access private
+     * @param  integer  $user_id
+     * @param  string   $action
+     * @param  integer  $max
+     */
+    private function getActivityPaginator($user_id, $action, $max)
+    {
+        $events =  $this->paginator
+            ->setUrl('app', $action, array('pagination' => 'activity', 'user_id' => $user_id))
+            ->setMax($max)
+            ->setOrder('id')
+            ->setDirection('DESC')
+            ->setQuery($this->projectActivity->getUserQuery($user_id))
+            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'activity');
+
+        return $events;
+    }
+
+    /**
      * Check if the user is connected
      *
      * @access public
@@ -157,7 +178,7 @@ class App extends Base
 
         $this->response->html($this->helper->layout->dashboard('app/activity', array(
             'title' => t('My activity stream'),
-            'events' => $this->projectActivity->getProjects($this->projectPermission->getActiveProjectIds($user['id']), 100),
+            'events' => $this->getActivityPaginator($user['id'], 'activity', 100),
             'user' => $user,
         )));
     }
