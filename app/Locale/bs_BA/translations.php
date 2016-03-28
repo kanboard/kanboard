@@ -1161,4 +1161,5 @@ return array(
     'Remove my image' => 'Ukloni sliku',
     'The OAuth2 state parameter is invalid' => 'OAuth2 status parametar je neispravan',
     'Search by creator: ' => 'Pretraga po kreatoru: ',
+    'My activities' => 'Moje aktivnosti',
 );

@@ -1184,4 +1184,5 @@ return array(
     // 'Remove my image' => '',
     // 'The OAuth2 state parameter is invalid' => '',
     // 'Search by creator: ' => '',
+    // 'My activities' => '',
 );

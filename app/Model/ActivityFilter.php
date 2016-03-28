@@ -375,10 +375,7 @@ class ActivityFilter extends Base
      */
     public function getContent(array $params)
     {
-        return $this->template->render(
-            'event/'.str_replace('.', '_', $params['event_name']),
-            $params
-        );
+        return ProjectActivity::getContent($params);
     }
 
     /**
@@ -390,11 +387,6 @@ class ActivityFilter extends Base
      */
     public function decode($data)
     {
-        if ($data{0} === 'a') {
-            return unserialize($data);
-        }
-
-        return json_decode($data, true) ?: array();
+        return ProjectActivity::decode($data);
     }
-
 }
