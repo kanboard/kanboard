@@ -32,23 +32,25 @@ class AvatarManager
     }
 
     /**
-     * Render avatar html element
+     * Render avatar HTML element
      *
      * @access public
      * @param  string   $user_id
      * @param  string   $username
      * @param  string   $name
      * @param  string   $email
+     * @param  string   $avatar_path
      * @param  int      $size
      * @return string
      */
-    public function render($user_id, $username, $name, $email, $size)
+    public function render($user_id, $username, $name, $email, $avatar_path, $size)
     {
         $user = array(
             'id' => $user_id,
             'username' => $username,
             'name' => $name,
             'email' => $email,
+            'avatar_path' => $avatar_path,
         );
 
         krsort($this->providers);
@@ -80,6 +82,7 @@ class AvatarManager
                 'username' => '',
                 'name' => '?',
                 'email' => '',
+                'avatar_path' => '',
             );
 
             return $provider->render($user, $size);

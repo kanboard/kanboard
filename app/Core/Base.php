@@ -60,6 +60,7 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\GroupAutoCompleteFormatter             $groupAutoCompleteFormatter
  * @property \Kanboard\Model\Action                                     $action
  * @property \Kanboard\Model\ActionParameter                            $actionParameter
+ * @property \Kanboard\Model\AvatarFile                                 $avatarFile
  * @property \Kanboard\Model\Board                                      $board
  * @property \Kanboard\Model\Category                                   $category
  * @property \Kanboard\Model\Color                                      $color

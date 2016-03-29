@@ -26,10 +26,11 @@ class UserNotificationFilterTest extends Base
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
+        $this->assertEquals(3, $p->create(array('name' => 'UnitTest3')));
 
         $this->assertEmpty($nf->getSelectedProjects(1));
-        $nf->saveSelectedProjects(1, array(1, 2));
-        $this->assertEquals(array(1, 2), $nf->getSelectedProjects(1));
+        $this->assertTrue($nf->saveSelectedProjects(1, array(1, 2, 3)));
+        $this->assertEquals(array(1, 2, 3), $nf->getSelectedProjects(1));
     }
 
     public function testSaveUserFilter()

@@ -3,11 +3,8 @@
 </div>
 
 <form method="post" action="<?= $this->url->href('user', 'notifications', array('user_id' => $user['id'])) ?>" autocomplete="off">
-
     <?= $this->form->csrf() ?>
-    <?= $this->form->checkbox('notifications_enabled', t('Enable notifications'), '1', $notifications['notifications_enabled'] == 1) ?><br>
 
-    <hr>
     <h4><?= t('Notification methods:') ?></h4>
     <?= $this->form->checkboxes('notification_types', $types, $notifications) ?>
 

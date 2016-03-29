@@ -37,6 +37,9 @@
                 <li <?= $this->app->checkMenuSelection('user', 'edit') ?>>
                     <?= $this->url->link(t('Edit profile'), 'user', 'edit', array('user_id' => $user['id'])) ?>
                 </li>
+                <li <?= $this->app->checkMenuSelection('AvatarFile') ?>>
+                    <?= $this->url->link(t('Avatar'), 'AvatarFile', 'show', array('user_id' => $user['id'])) ?>
+                </li>
             <?php endif ?>
 
             <?php if ($user['is_ldap_user'] == 0): ?>

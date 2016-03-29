@@ -88,7 +88,8 @@ class ProjectActivity extends Base
                         self::TABLE.'.*',
                         User::TABLE.'.username AS author_username',
                         User::TABLE.'.name AS author_name',
-                        User::TABLE.'.email'
+                        User::TABLE.'.email',
+                        User::TABLE.'.avatar_path'
                     )
                     ->in('project_id', $project_ids)
                     ->join(User::TABLE, 'id', 'creator_id')
@@ -117,7 +118,8 @@ class ProjectActivity extends Base
                         self::TABLE.'.*',
                         User::TABLE.'.username AS author_username',
                         User::TABLE.'.name AS author_name',
-                        User::TABLE.'.email'
+                        User::TABLE.'.email',
+                        User::TABLE.'.avatar_path'
                     )
                     ->eq('task_id', $task_id)
                     ->join(User::TABLE, 'id', 'creator_id')

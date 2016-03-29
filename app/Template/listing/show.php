@@ -18,7 +18,11 @@
             <?php foreach ($paginator->getCollection() as $task): ?>
             <tr>
                 <td class="task-table color-<?= $task['color_id'] ?>">
-                    <?= $this->render('task/dropdown', array('task' => $task)) ?>
+                    <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+                        <?= $this->render('task/dropdown', array('task' => $task)) ?>
+                    <?php else: ?>
+                        #<?= $task['id'] ?>
+                    <?php endif ?>
                 </td>
                 <td>
                     <?= $this->text->e($task['swimlane_name'] ?: $task['default_swimlane']) ?>
