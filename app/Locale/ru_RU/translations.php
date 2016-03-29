@@ -1149,8 +1149,8 @@ return array(
     'Display list of keyboard shortcuts' => 'Показать список клавиатурных сокращений',
     'Menu' => 'Меню',
     'Set start date' => 'Установить дату начала',
-    // 'Avatar' => '',
-    // 'Upload my avatar image' => '',
-    // 'Remove my image' => '',
-    // 'The OAuth2 state parameter is invalid' => '',
+    'Avatar' => 'Аватар',
+    'Upload my avatar image' => 'Загрузить моё изображение для аватара',
+    'Remove my image' => 'Удалить моё изображение',
+    'The OAuth2 state parameter is invalid' => 'Параметр состояние OAuth2 неправильный'
 );
