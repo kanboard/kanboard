@@ -1089,7 +1089,7 @@ return array(
     'New due date: ' => 'Nova data limite: ',
     'Start date changed: ' => 'Data de início alterada: ',
     'Disable private projects' => 'Desativar os projetos privados',
-    'Do you really want to remove this custom filter: "%s"?' => 'Você realmente quer remover este filtro personalizado: "% s"?',
+    'Do you really want to remove this custom filter: "%s"?' => 'Você realmente quer remover este filtro personalizado: "%s"?',
     'Remove a custom filter' => 'Remover um filtro personalizado',
     'User activated successfully.' => 'Usuário ativado com sucesso.',
     'Unable to enable this user.' => 'Impossível de ativar esse usuário.',
