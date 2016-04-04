@@ -22,7 +22,7 @@ class ProjectDuplicationTest extends Base
     public function testGetSelections()
     {
         $projectDuplicationModel = new ProjectDuplication($this->container);
-        $this->assertCount(7, $projectDuplicationModel->getOptionalSelection());
+        $this->assertCount(6, $projectDuplicationModel->getOptionalSelection());
         $this->assertCount(7, $projectDuplicationModel->getPossibleSelection());
     }
 
