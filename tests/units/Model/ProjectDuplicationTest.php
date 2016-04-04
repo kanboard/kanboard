@@ -22,8 +22,8 @@ class ProjectDuplicationTest extends Base
     public function testGetSelections()
     {
         $projectDuplicationModel = new ProjectDuplication($this->container);
-        $this->assertCount(5, $projectDuplicationModel->getOptionalSelection());
-        $this->assertCount(6, $projectDuplicationModel->getPossibleSelection());
+        $this->assertCount(7, $projectDuplicationModel->getOptionalSelection());
+        $this->assertCount(7, $projectDuplicationModel->getPossibleSelection());
     }
 
     public function testGetClonedProjectName()
