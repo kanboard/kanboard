@@ -83,7 +83,9 @@ class ProjectPermission extends Base
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        if ($this->projectUserRole->addUser($values['project_id'], $values['user_id'], $values['role'])) {
+        if (empty($values['user_id'])) {
+            $this->flash->failure(t('User not found.'));
+        } elseif ($this->projectUserRole->addUser($values['project_id'], $values['user_id'], $values['role'])) {
             $this->flash->success(t('Project updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this project.'));
