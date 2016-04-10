@@ -22,6 +22,7 @@ abstract class Setting extends Base
      *
      * @abstract
      * @access public
+     * @param  array $values
      * @return array
      */
     abstract public function prepare(array $values);

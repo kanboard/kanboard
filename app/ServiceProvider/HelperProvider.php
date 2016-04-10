@@ -13,12 +13,14 @@ class HelperProvider implements ServiceProviderInterface
     {
         $container['helper'] = new Helper($container);
         $container['helper']->register('app', '\Kanboard\Helper\AppHelper');
+        $container['helper']->register('calendar', '\Kanboard\Helper\CalendarHelper');
         $container['helper']->register('asset', '\Kanboard\Helper\AssetHelper');
         $container['helper']->register('board', '\Kanboard\Helper\BoardHelper');
         $container['helper']->register('dt', '\Kanboard\Helper\DateHelper');
         $container['helper']->register('file', '\Kanboard\Helper\FileHelper');
         $container['helper']->register('form', '\Kanboard\Helper\FormHelper');
         $container['helper']->register('hook', '\Kanboard\Helper\HookHelper');
+        $container['helper']->register('ical', '\Kanboard\Helper\ICalHelper');
         $container['helper']->register('layout', '\Kanboard\Helper\LayoutHelper');
         $container['helper']->register('model', '\Kanboard\Helper\ModelHelper');
         $container['helper']->register('subtask', '\Kanboard\Helper\SubtaskHelper');

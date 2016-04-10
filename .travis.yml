@@ -23,7 +23,6 @@ before_script:
   - phpenv config-rm xdebug.ini
   - phpenv config-add tests/php.ini
   - composer install
-  - php -i
 
 script:
   - phpunit -c tests/units.$DB.xml

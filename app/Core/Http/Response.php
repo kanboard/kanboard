@@ -232,6 +232,20 @@ class Response extends Base
     }
 
     /**
+     * Send a iCal response
+     *
+     * @access public
+     * @param  string   $data          Raw data
+     * @param  integer  $status_code   HTTP status code
+     */
+    public function ical($data, $status_code = 200)
+    {
+        $this->status($status_code);
+        $this->contentType('text/calendar; charset=utf-8');
+        echo $data;
+    }
+
+    /**
      * Send the security header: Content-Security-Policy
      *
      * @access public

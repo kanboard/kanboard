@@ -2,7 +2,11 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Model\TaskFilter;
+use Kanboard\Core\Filter\QueryBuilder;
+use Kanboard\Filter\TaskAssigneeFilter;
+use Kanboard\Filter\TaskProjectFilter;
+use Kanboard\Filter\TaskStatusFilter;
+use Kanboard\Formatter\TaskICalFormatter;
 use Kanboard\Model\Task as TaskModel;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 
@@ -30,10 +34,11 @@ class Ical extends Base
         }
 
         // Common filter
-        $filter = $this->taskFilterICalendarFormatter
-            ->create()
-            ->filterByStatus(TaskModel::STATUS_OPEN)
-            ->filterByOwner($user['id']);
+        $queryBuilder = new QueryBuilder();
+        $queryBuilder
+            ->withQuery($this->taskFinder->getICalQuery())
+            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
+            ->withFilter(new TaskAssigneeFilter($user['id']));
 
         // Calendar properties
         $calendar = new iCalendar('Kanboard');
@@ -41,7 +46,7 @@ class Ical extends Base
         $calendar->setDescription($user['name'] ?: $user['username']);
         $calendar->setPublishedTTL('PT1H');
 
-        $this->renderCalendar($filter, $calendar);
+        $this->renderCalendar($queryBuilder, $calendar);
     }
 
     /**
@@ -60,10 +65,11 @@ class Ical extends Base
         }
 
         // Common filter
-        $filter = $this->taskFilterICalendarFormatter
-            ->create()
-            ->filterByStatus(TaskModel::STATUS_OPEN)
-            ->filterByProject($project['id']);
+        $queryBuilder = new QueryBuilder();
+        $queryBuilder
+            ->withQuery($this->taskFinder->getICalQuery())
+            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
+            ->withFilter(new TaskProjectFilter($project['id']));
 
         // Calendar properties
         $calendar = new iCalendar('Kanboard');
@@ -71,7 +77,7 @@ class Ical extends Base
         $calendar->setDescription($project['name']);
         $calendar->setPublishedTTL('PT1H');
 
-        $this->renderCalendar($filter, $calendar);
+        $this->renderCalendar($queryBuilder, $calendar);
     }
 
     /**
@@ -79,37 +85,14 @@ class Ical extends Base
      *
      * @access private
      */
-    private function renderCalendar(TaskFilter $filter, iCalendar $calendar)
+    private function renderCalendar(QueryBuilder $queryBuilder, iCalendar $calendar)
     {
         $start = $this->request->getStringParam('start', strtotime('-2 month'));
         $end = $this->request->getStringParam('end', strtotime('+6 months'));
 
-        // Tasks
-        if ($this->config->get('calendar_project_tasks', 'date_started') === 'date_creation') {
-            $filter
-                ->copy()
-                ->filterByCreationDateRange($start, $end)
-                ->setColumns('date_creation', 'date_completed')
-                ->setCalendar($calendar)
-                ->addDateTimeEvents();
-        } else {
-            $filter
-                ->copy()
-                ->filterByStartDateRange($start, $end)
-                ->setColumns('date_started', 'date_completed')
-                ->setCalendar($calendar)
-                ->addDateTimeEvents($calendar);
-        }
+        $this->helper->ical->addTaskDateDueEvents($queryBuilder, $calendar, $start, $end);
 
-        // Tasks with due date
-        $filter
-            ->copy()
-            ->filterByDueDateRange($start, $end)
-            ->setColumns('date_due')
-            ->setCalendar($calendar)
-            ->addFullDayEvents($calendar);
-
-        $this->response->contentType('text/calendar; charset=utf-8');
-        echo $filter->setCalendar($calendar)->format();
+        $formatter = new TaskICalFormatter($this->container);
+        $this->response->ical($formatter->setCalendar($calendar)->format());
     }
 }

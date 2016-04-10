@@ -39,4 +39,5 @@ $container->register(new Kanboard\ServiceProvider\RouteProvider);
 $container->register(new Kanboard\ServiceProvider\ActionProvider);
 $container->register(new Kanboard\ServiceProvider\ExternalLinkProvider);
 $container->register(new Kanboard\ServiceProvider\AvatarProvider);
+$container->register(new Kanboard\ServiceProvider\FilterProvider);
 $container->register(new Kanboard\ServiceProvider\PluginProvider);

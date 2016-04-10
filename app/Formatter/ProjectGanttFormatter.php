@@ -2,7 +2,7 @@
 
 namespace Kanboard\Formatter;
 
-use Kanboard\Model\Project;
+use Kanboard\Core\Filter\FormatterInterface;
 
 /**
  * Gantt chart formatter for projects
@@ -10,40 +10,8 @@ use Kanboard\Model\Project;
  * @package  formatter
  * @author   Frederic Guillot
  */
-class ProjectGanttFormatter extends Project implements FormatterInterface
+class ProjectGanttFormatter extends BaseFormatter implements FormatterInterface
 {
-    /**
-     * List of projects
-     *
-     * @access private
-     * @var array
-     */
-    private $projects = array();
-
-    /**
-     * Filter projects to generate the Gantt chart
-     *
-     * @access public
-     * @param  int[]   $project_ids
-     * @return ProjectGanttFormatter
-     */
-    public function filter(array $project_ids)
-    {
-        if (empty($project_ids)) {
-            $this->projects = array();
-        } else {
-            $this->projects = $this->db
-                ->table(self::TABLE)
-                ->asc('start_date')
-                ->in('id', $project_ids)
-                ->eq('is_active', self::ACTIVE)
-                ->eq('is_private', 0)
-                ->findAll();
-        }
-
-        return $this;
-    }
-
     /**
      * Format projects to be displayed in the Gantt chart
      *
@@ -52,10 +20,11 @@ class ProjectGanttFormatter extends Project implements FormatterInterface
      */
     public function format()
     {
+        $projects = $this->query->findAll();
         $colors = $this->color->getDefaultColors();
         $bars = array();
 
-        foreach ($this->projects as $project) {
+        foreach ($projects as $project) {
             $start = empty($project['start_date']) ? time() : strtotime($project['start_date']);
             $end = empty($project['end_date']) ? $start : strtotime($project['end_date']);
             $color = next($colors) ?: reset($colors);

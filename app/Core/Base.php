@@ -48,16 +48,8 @@ use Pimple\Container;
  * @property \Kanboard\Core\User\UserSession                            $userSession
  * @property \Kanboard\Core\DateParser                                  $dateParser
  * @property \Kanboard\Core\Helper                                      $helper
- * @property \Kanboard\Core\Lexer                                       $lexer
  * @property \Kanboard\Core\Paginator                                   $paginator
  * @property \Kanboard\Core\Template                                    $template
- * @property \Kanboard\Formatter\ProjectGanttFormatter                  $projectGanttFormatter
- * @property \Kanboard\Formatter\TaskFilterGanttFormatter               $taskFilterGanttFormatter
- * @property \Kanboard\Formatter\TaskFilterAutoCompleteFormatter        $taskFilterAutoCompleteFormatter
- * @property \Kanboard\Formatter\TaskFilterCalendarFormatter            $taskFilterCalendarFormatter
- * @property \Kanboard\Formatter\TaskFilterICalendarFormatter           $taskFilterICalendarFormatter
- * @property \Kanboard\Formatter\UserFilterAutoCompleteFormatter        $userFilterAutoCompleteFormatter
- * @property \Kanboard\Formatter\GroupAutoCompleteFormatter             $groupAutoCompleteFormatter
  * @property \Kanboard\Model\Action                                     $action
  * @property \Kanboard\Model\ActionParameter                            $actionParameter
  * @property \Kanboard\Model\AvatarFile                                 $avatarFile
@@ -85,7 +77,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectMetadata                            $projectMetadata
  * @property \Kanboard\Model\ProjectPermission                          $projectPermission
  * @property \Kanboard\Model\ProjectUserRole                            $projectUserRole
- * @property \Kanboard\Model\projectUserRoleFilter                      $projectUserRoleFilter
  * @property \Kanboard\Model\ProjectGroupRole                           $projectGroupRole
  * @property \Kanboard\Model\ProjectNotification                        $projectNotification
  * @property \Kanboard\Model\ProjectNotificationType                    $projectNotificationType
@@ -99,7 +90,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskDuplication                            $taskDuplication
  * @property \Kanboard\Model\TaskExternalLink                           $taskExternalLink
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder
- * @property \Kanboard\Model\TaskFilter                                 $taskFilter
  * @property \Kanboard\Model\TaskLink                                   $taskLink
  * @property \Kanboard\Model\TaskModification                           $taskModification
  * @property \Kanboard\Model\TaskPermission                             $taskPermission
@@ -137,6 +127,12 @@ use Pimple\Container;
  * @property \Kanboard\Export\SubtaskExport                             $subtaskExport
  * @property \Kanboard\Export\TaskExport                                $taskExport
  * @property \Kanboard\Export\TransitionExport                          $transitionExport
+ * @property \Kanboard\Core\Filter\QueryBuilder                         $projectGroupRoleQuery
+ * @property \Kanboard\Core\Filter\QueryBuilder                         $projectUserRoleQuery
+ * @property \Kanboard\Core\Filter\QueryBuilder                         $userQuery
+ * @property \Kanboard\Core\Filter\QueryBuilder                         $projectQuery
+ * @property \Kanboard\Core\Filter\QueryBuilder                         $taskQuery
+ * @property \Kanboard\Core\Filter\LexerBuilder                         $taskLexer
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \PicoDb\Database                                           $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher
@@ -172,5 +168,19 @@ abstract class Base
     public function __get($name)
     {
         return $this->container[$name];
+    }
+
+    /**
+     * Get object instance
+     *
+     * @static
+     * @access public
+     * @param  Container $container
+     * @return static
+     */
+    public static function getInstance(Container $container)
+    {
+        $self = new static($container);
+        return $self;
     }
 }

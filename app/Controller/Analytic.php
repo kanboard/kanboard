@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Model\Task as TaskModel;
 
 /**
@@ -44,13 +45,15 @@ class Analytic extends Base
     public function compareHours()
     {
         $project = $this->getProject();
-        $query = $this->taskFilter->create()->filterByProject($project['id'])->getQuery();
 
         $paginator = $this->paginator
             ->setUrl('analytic', 'compareHours', array('project_id' => $project['id']))
             ->setMax(30)
             ->setOrder(TaskModel::TABLE.'.id')
-            ->setQuery($query)
+            ->setQuery($this->taskQuery
+                ->withFilter(new TaskProjectFilter($project['id']))
+                ->getQuery()
+            )
             ->calculate();
 
         $this->response->html($this->helper->layout->analytic('analytic/compare_hours', array(

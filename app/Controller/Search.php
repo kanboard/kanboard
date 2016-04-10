@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Filter\TaskProjectsFilter;
+
 /**
  * Search controller
  *
@@ -23,14 +25,12 @@ class Search extends Base
                 ->setDirection('DESC');
 
         if ($search !== '' && ! empty($projects)) {
-            $query = $this
-                ->taskFilter
-                ->search($search)
-                ->filterByProjects(array_keys($projects))
-                ->getQuery();
-
             $paginator
-                ->setQuery($query)
+                ->setQuery($this->taskLexer
+                    ->build($search)
+                    ->withFilter(new TaskProjectsFilter(array_keys($projects)))
+                    ->getQuery()
+                )
                 ->calculate();
 
             $nb_tasks = $paginator->getTotal();

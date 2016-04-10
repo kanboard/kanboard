@@ -363,6 +363,27 @@ class TaskFinder extends Base
     }
 
     /**
+     * Get iCal query
+     *
+     * @access public
+     * @return \PicoDb\Table
+     */
+    public function getICalQuery()
+    {
+        return $this->db->table(Task::TABLE)
+            ->left(User::TABLE, 'ua', 'id', Task::TABLE, 'owner_id')
+            ->left(User::TABLE, 'uc', 'id', Task::TABLE, 'creator_id')
+            ->columns(
+                Task::TABLE.'.*',
+                'ua.email AS assignee_email',
+                'ua.name AS assignee_name',
+                'ua.username AS assignee_username',
+                'uc.email AS creator_email',
+                'uc.username AS creator_username'
+            );
+    }
+
+    /**
      * Count all tasks for a given project and status
      *
      * @access public

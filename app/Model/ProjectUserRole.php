@@ -251,8 +251,8 @@ class ProjectUserRole extends Base
     /**
      * Copy user access from a project to another one
      *
-     * @param  integer   $project_src_id  Project Template
-     * @return integer   $project_dst_id  Project that receives the copy
+     * @param  integer $project_src_id
+     * @param  integer $project_dst_id
      * @return boolean
      */
     public function duplicate($project_src_id, $project_dst_id)

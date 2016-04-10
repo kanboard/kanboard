@@ -1,3 +1,10 @@
+Version 1.0.28 (unreleased)
+--------------
+
+Improvements:
+
+* Filter/Lexer/QueryBuilder refactoring
+
 Version 1.0.27
 --------------
 

@@ -2,7 +2,14 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Filter\ProjectIdsFilter;
+use Kanboard\Filter\ProjectStatusFilter;
+use Kanboard\Filter\ProjectTypeFilter;
+use Kanboard\Filter\TaskProjectFilter;
+use Kanboard\Formatter\ProjectGanttFormatter;
+use Kanboard\Formatter\TaskGanttFormatter;
 use Kanboard\Model\Task as TaskModel;
+use Kanboard\Model\Project as ProjectModel;
 
 /**
  * Gantt controller
@@ -17,14 +24,16 @@ class Gantt extends Base
      */
     public function projects()
     {
-        if ($this->userSession->isAdmin()) {
-            $project_ids = $this->project->getAllIds();
-        } else {
-            $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
-        }
+        $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
+        $filter = $this->projectQuery
+            ->withFilter(new ProjectTypeFilter(ProjectModel::TYPE_TEAM))
+            ->withFilter(new ProjectStatusFilter(ProjectModel::ACTIVE))
+            ->withFilter(new ProjectIdsFilter($project_ids));
+
+        $filter->getQuery()->asc(ProjectModel::TABLE.'.start_date');
 
         $this->response->html($this->helper->layout->app('gantt/projects', array(
-            'projects' => $this->projectGanttFormatter->filter($project_ids)->format(),
+            'projects' => $filter->format(new ProjectGanttFormatter($this->container)),
             'title' => t('Gantt chart for all projects'),
         )));
     }
@@ -56,8 +65,8 @@ class Gantt extends Base
     {
         $project = $this->getProject();
         $search = $this->helper->projectHeader->getSearchQuery($project);
-        $filter = $this->taskFilterGanttFormatter->search($search)->filterByProject($project['id']);
         $sorting = $this->request->getStringParam('sorting', 'board');
+        $filter = $this->taskLexer->build($search)->withFilter(new TaskProjectFilter($project['id']));
 
         if ($sorting === 'date') {
             $filter->getQuery()->asc(TaskModel::TABLE.'.date_started')->asc(TaskModel::TABLE.'.date_creation');
@@ -70,7 +79,7 @@ class Gantt extends Base
             'title' => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
             'sorting' => $sorting,
-            'tasks' => $filter->format(),
+            'tasks' => $filter->format(new TaskGanttFormatter($this->container)),
         )));
     }
 

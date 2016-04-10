@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use PicoDb\Table;
+
 /**
  * Project activity model
  *
@@ -133,12 +135,12 @@ class ProjectActivity extends Base
      * Common function to return events
      *
      * @access public
-     * @param  \PicoDb\Table   $query           PicoDb Query
+     * @param  Table           $query           PicoDb Query
      * @param  integer         $start           Timestamp of earliest activity
      * @param  integer         $end             Timestamp of latest activity
      * @return array
      */
-    private function getEvents(\PicoDb\Table $query, $start, $end)
+    private function getEvents(Table $query, $start, $end)
     {
         if (! is_null($start)) {
             $query->gte('date_creation', $start);

@@ -76,6 +76,7 @@ class AvatarFile extends Base
      * @access public
      * @param  integer $user_id
      * @param  array   $file
+     * @return boolean
      */
     public function uploadFile($user_id, array $file)
     {

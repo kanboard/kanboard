@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "christian-riesen/base32",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristianRiesen/base32.git",
-                "reference": "fbe67d49d45dc789f942ef828c787550ebb894bc"
+                "reference": "fde061a370b0a97fdcd33d9d5f7b1b70ce1f79d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/fbe67d49d45dc789f942ef828c787550ebb894bc",
-                "reference": "fbe67d49d45dc789f942ef828c787550ebb894bc",
+                "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/fde061a370b0a97fdcd33d9d5f7b1b70ce1f79d4",
+                "reference": "fde061a370b0a97fdcd33d9d5f7b1b70ce1f79d4",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "encode",
                 "rfc4648"
             ],
-            "time": "2015-09-27 23:45:02"
+            "time": "2016-04-07 07:45:31"
         },
         {
             "name": "christian-riesen/otp",
@@ -397,16 +397,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "76e90f747b769b347fe584e8015a014549107d35"
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/76e90f747b769b347fe584e8015a014549107d35",
-                "reference": "76e90f747b769b347fe584e8015a014549107d35",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
                 "shasum": ""
             },
             "require": {
@@ -441,7 +441,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-03-18 20:36:13"
+            "time": "2016-04-03 06:00:07"
         },
         {
             "name": "pimple/pimple",

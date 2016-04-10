@@ -28,15 +28,6 @@ Some hooks can have only one listener:
     - `$start` (DateTime)
     - `$end` (DateTime)
 
-#### model:subtask-time-tracking:calendar:events
-
-- Override subtask time tracking events to display the calendar
-- Arguments:
-    - `$user_id` (integer)
-    - `$events` (array)
-    - `$start` (string, ISO-8601 format)
-    - `$end` (string, ISO-8601 format)
-
 ### Merge hooks
 
 "Merge hooks" act in the same way as the function `array_merge`. The hook callback must return an array. This array will be merged with the default one.
