@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Activity stream search'), 'search', 'activity') ?>
+                <?= $this->url->link(t('Search tasks'), 'search', 'index') ?>
             </li>
         </ul>
     </div>
@@ -13,31 +13,27 @@
             <?= $this->form->hidden('controller', $values) ?>
             <?= $this->form->hidden('action', $values) ?>
             <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
-            <?= $this->render('app/filters_helper') ?>
+            <?= $this->render('activity/filter_dropdown') ?>
         </form>
     </div>
 
     <?php if (empty($values['search'])): ?>
         <div class="listing">
             <h3><?= t('Advanced search') ?></h3>
-            <p><?= t('Example of query: ') ?><strong>project:"My project" assignee:me due:tomorrow</strong></p>
+            <p><?= t('Example of query: ') ?><strong>project:"My project" creator:me</strong></p>
             <ul>
                 <li><?= t('Search by project: ') ?><strong>project:"My project"</strong></li>
-                <li><?= t('Search by column: ') ?><strong>column:"Work in progress"</strong></li>
-                <li><?= t('Search by assignee: ') ?><strong>assignee:nobody</strong></li>
-                <li><?= t('Search by color: ') ?><strong>color:Blue</strong></li>
-                <li><?= t('Search by category: ') ?><strong>category:"Feature Request"</strong></li>
-                <li><?= t('Search by description: ') ?><strong>description:"Something to find"</strong></li>
-                <li><?= t('Search by due date: ') ?><strong>due:2015-07-01</strong></li>
+                <li><?= t('Search by creator: ') ?><strong>creator:admin</strong></li>
+                <li><?= t('Search by creation date: ') ?><strong>created:today</strong></li>
+                <li><?= t('Search by task status: ') ?><strong>status:open</strong></li>
+                <li><?= t('Search by task title: ') ?><strong>title:"My task"</strong></li>
             </ul>
             <p><i class="fa fa-external-link fa-fw"></i><?= $this->url->doc(t('View advanced search syntax'), 'search') ?></p>
         </div>
-    <?php elseif (! empty($values['search']) && $paginator->isEmpty()): ?>
+    <?php elseif (! empty($values['search']) && $nb_events === 0): ?>
         <p class="alert"><?= t('Nothing found.') ?></p>
-    <?php elseif (! $paginator->isEmpty()): ?>
-        <?= $this->render('search/results', array(
-            'paginator' => $paginator,
-        )) ?>
+    <?php else: ?>
+        <?= $this->render('event/events', array('events' => $events)) ?>
     <?php endif ?>
 
 </section>

@@ -42,7 +42,7 @@ class RouteProvider implements ServiceProviderInterface
 
             // Search routes
             $container['route']->addRoute('search', 'search', 'index');
-            $container['route']->addRoute('search/:search', 'search', 'index');
+            $container['route']->addRoute('search/activity', 'search', 'activity');
 
             // ProjectCreation routes
             $container['route']->addRoute('project/create', 'ProjectCreation', 'create');
@@ -62,6 +62,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/enable', 'project', 'enable');
             $container['route']->addRoute('project/:project_id/permissions', 'ProjectPermission', 'index');
             $container['route']->addRoute('project/:project_id/import', 'taskImport', 'step1');
+            $container['route']->addRoute('project/:project_id/activity', 'activity', 'project');
 
             // Project Overview
             $container['route']->addRoute('project/:project_id/overview', 'ProjectOverview', 'show');

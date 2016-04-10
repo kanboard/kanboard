@@ -4,6 +4,10 @@ namespace Kanboard\ServiceProvider;
 
 use Kanboard\Core\Filter\LexerBuilder;
 use Kanboard\Core\Filter\QueryBuilder;
+use Kanboard\Filter\ProjectActivityCreationDateFilter;
+use Kanboard\Filter\ProjectActivityCreatorFilter;
+use Kanboard\Filter\ProjectActivityProjectNameFilter;
+use Kanboard\Filter\ProjectActivityTaskStatusFilter;
 use Kanboard\Filter\ProjectActivityTaskTitleFilter;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskCategoryFilter;
@@ -86,8 +90,18 @@ class FilterProvider implements ServiceProviderInterface
 
         $container['projectActivityLexer'] = $container->factory(function ($c) {
             $builder = new LexerBuilder();
-            $builder->withQuery($c['projectActivity']->getQuery());
-            $builder->withFilter(new ProjectActivityTaskTitleFilter());
+            $builder
+                ->withQuery($c['projectActivity']->getQuery())
+                ->withFilter(new ProjectActivityTaskTitleFilter(), true)
+                ->withFilter(new ProjectActivityTaskStatusFilter())
+                ->withFilter(new ProjectActivityProjectNameFilter())
+                ->withFilter(ProjectActivityCreationDateFilter::getInstance()
+                    ->setDateParser($c['dateParser'])
+                )
+                ->withFilter(ProjectActivityCreatorFilter::getInstance()
+                    ->setCurrentUserId($c['userSession']->getId())
+                )
+            ;
 
             return $builder;
         });
@@ -124,17 +138,23 @@ class FilterProvider implements ServiceProviderInterface
                 )
                 ->withFilter(new TaskColumnFilter())
                 ->withFilter(new TaskCommentFilter())
-                ->withFilter(new TaskCreationDateFilter())
+                ->withFilter(TaskCreationDateFilter::getInstance()
+                    ->setDateParser($c['dateParser'])
+                )
                 ->withFilter(TaskCreatorFilter::getInstance()
                     ->setCurrentUserId($c['userSession']->getId())
                 )
                 ->withFilter(new TaskDescriptionFilter())
-                ->withFilter(new TaskDueDateFilter())
+                ->withFilter(TaskDueDateFilter::getInstance()
+                    ->setDateParser($c['dateParser'])
+                )
                 ->withFilter(new TaskIdFilter())
                 ->withFilter(TaskLinkFilter::getInstance()
                     ->setDatabase($c['db'])
                 )
-                ->withFilter(new TaskModificationDateFilter())
+                ->withFilter(TaskModificationDateFilter::getInstance()
+                    ->setDateParser($c['dateParser'])
+                )
                 ->withFilter(new TaskProjectFilter())
                 ->withFilter(new TaskReferenceFilter())
                 ->withFilter(new TaskStatusFilter())

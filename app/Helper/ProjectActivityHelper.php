@@ -18,6 +18,33 @@ use Kanboard\Model\ProjectActivity;
 class ProjectActivityHelper extends Base
 {
     /**
+     * Search events
+     *
+     * @access public
+     * @param  string $search
+     * @return array
+     */
+    public function searchEvents($search)
+    {
+        $projects = $this->projectUserRole->getProjectsByUser($this->userSession->getId());
+        $events = array();
+
+        if ($search !== '') {
+            $queryBuilder = $this->projectActivityLexer->build($search);
+            $queryBuilder
+                ->withFilter(new ProjectActivityProjectIdsFilter(array_keys($projects)))
+                ->getQuery()
+                ->desc(ProjectActivity::TABLE.'.id')
+                ->limit(500)
+            ;
+
+            $events = $queryBuilder->format(new ProjectActivityEventFormatter($this->container));
+        }
+
+        return $events;
+    }
+
+    /**
      * Get project activity events
      *
      * @access public

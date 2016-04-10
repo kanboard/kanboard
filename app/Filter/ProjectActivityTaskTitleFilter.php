@@ -3,7 +3,6 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
 
 /**
  * Filter activity events by task title
@@ -11,7 +10,7 @@ use Kanboard\Model\Task;
  * @package filter
  * @author  Frederic Guillot
  */
-class ProjectActivityTaskTitleFilter extends BaseFilter implements FilterInterface
+class ProjectActivityTaskTitleFilter extends TaskTitleFilter implements FilterInterface
 {
     /**
      * Get search attribute
@@ -22,17 +21,5 @@ class ProjectActivityTaskTitleFilter extends BaseFilter implements FilterInterfa
     public function getAttributes()
     {
         return array('title');
-    }
-
-    /**
-     * Apply filter
-     *
-     * @access public
-     * @return FilterInterface
-     */
-    public function apply()
-    {
-        $this->query->ilike(Task::TABLE.'.title', '%'.$this->value.'%');
-        return $this;
     }
 }

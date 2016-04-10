@@ -46,4 +46,22 @@ class Search extends Base
             'title' => t('Search tasks').($nb_tasks > 0 ? ' ('.$nb_tasks.')' : '')
         )));
     }
+
+    public function activity()
+    {
+        $search = urldecode($this->request->getStringParam('search'));
+        $events = $this->helper->projectActivity->searchEvents($search);
+        $nb_events = count($events);
+
+        $this->response->html($this->helper->layout->app('search/activity', array(
+            'values' => array(
+                'search' => $search,
+                'controller' => 'search',
+                'action' => 'activity',
+            ),
+            'title' => t('Search in activity stream').($nb_events > 0 ? ' ('.$nb_events.')' : ''),
+            'nb_events' => $nb_events,
+            'events' => $events,
+        )));
+    }
 }

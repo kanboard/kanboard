@@ -6,12 +6,12 @@ use Kanboard\Core\Filter\FilterInterface;
 use Kanboard\Model\Task;
 
 /**
- * Filter tasks by project ids
+ * Filter activity events by task status
  *
  * @package filter
  * @author  Frederic Guillot
  */
-class TaskProjectsFilter extends BaseFilter implements FilterInterface
+class ProjectActivityTaskStatusFilter extends BaseFilter implements FilterInterface
 {
     /**
      * Get search attribute
@@ -21,7 +21,7 @@ class TaskProjectsFilter extends BaseFilter implements FilterInterface
      */
     public function getAttributes()
     {
-        return array('projects');
+        return array('status');
     }
 
     /**
@@ -32,10 +32,10 @@ class TaskProjectsFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        if (empty($this->value)) {
-            $this->query->eq(Task::TABLE.'.project_id', 0);
-        } else {
-            $this->query->in(Task::TABLE.'.project_id', $this->value);
+        if ($this->value === 'open') {
+            $this->query->eq(Task::TABLE.'.is_active', Task::STATUS_OPEN);
+        } elseif ($this->value === 'closed') {
+            $this->query->eq(Task::TABLE.'.is_active', Task::STATUS_CLOSED);
         }
 
         return $this;

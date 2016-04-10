@@ -3,15 +3,15 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\Project;
 
 /**
- * Filter tasks by project ids
+ * Filter activity events by project name
  *
  * @package filter
  * @author  Frederic Guillot
  */
-class TaskProjectsFilter extends BaseFilter implements FilterInterface
+class ProjectActivityProjectNameFilter extends BaseFilter implements FilterInterface
 {
     /**
      * Get search attribute
@@ -21,7 +21,7 @@ class TaskProjectsFilter extends BaseFilter implements FilterInterface
      */
     public function getAttributes()
     {
-        return array('projects');
+        return array('project');
     }
 
     /**
@@ -32,12 +32,7 @@ class TaskProjectsFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        if (empty($this->value)) {
-            $this->query->eq(Task::TABLE.'.project_id', 0);
-        } else {
-            $this->query->in(Task::TABLE.'.project_id', $this->value);
-        }
-
+        $this->query->ilike(Project::TABLE.'.name', '%'.$this->value.'%');
         return $this;
     }
 }

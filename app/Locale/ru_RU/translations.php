@@ -1152,5 +1152,15 @@ return array(
     'Avatar' => 'Аватар',
     'Upload my avatar image' => 'Загрузить моё изображение для аватара',
     'Remove my image' => 'Удалить моё изображение',
-    'The OAuth2 state parameter is invalid' => 'Параметр состояние OAuth2 неправильный'
+    'The OAuth2 state parameter is invalid' => 'Параметр состояние OAuth2 неправильный',
+    // 'User not found.' => '',
+    // 'Search in activity stream' => '',
+    // 'My activities' => '',
+    // 'Activity until yesterday' => '',
+    // 'Activity until today' => '',
+    // 'Search by creator: ' => '',
+    // 'Search by creation date: ' => '',
+    // 'Search by task status: ' => '',
+    // 'Search by task title: ' => '',
+    // 'Activity stream search' => '',
 );

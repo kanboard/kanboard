@@ -71,6 +71,7 @@ class ProjectActivity extends Base
                 'uc.avatar_path'
             )
             ->join(Task::TABLE, 'id', 'task_id')
+            ->join(Project::TABLE, 'id', 'project_id')
             ->left(User::TABLE, 'uc', 'id', ProjectActivity::TABLE, 'creator_id');
     }
 

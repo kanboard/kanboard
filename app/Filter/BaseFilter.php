@@ -72,48 +72,4 @@ abstract class BaseFilter
         $this->value = $value;
         return $this;
     }
-
-    /**
-     * Parse operator in the input string
-     *
-     * @access protected
-     * @return string
-     */
-    protected function parseOperator()
-    {
-        $operators = array(
-            '<=' => 'lte',
-            '>=' => 'gte',
-            '<' => 'lt',
-            '>' => 'gt',
-        );
-
-        foreach ($operators as $operator => $method) {
-            if (strpos($this->value, $operator) === 0) {
-                $this->value = substr($this->value, strlen($operator));
-                return $method;
-            }
-        }
-
-        return '';
-    }
-
-    /**
-     * Apply a date filter
-     *
-     * @access protected
-     * @param  string $field
-     */
-    protected function applyDateFilter($field)
-    {
-        $timestamp = strtotime($this->value);
-        $method = $this->parseOperator();
-
-        if ($method !== '') {
-            $this->query->$method($field, $timestamp);
-        } else {
-            $this->query->gte($field, $timestamp);
-            $this->query->lte($field, $timestamp + 86399);
-        }
-    }
 }
