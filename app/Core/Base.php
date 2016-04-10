@@ -129,10 +129,12 @@ use Pimple\Container;
  * @property \Kanboard\Export\TransitionExport                          $transitionExport
  * @property \Kanboard\Core\Filter\QueryBuilder                         $projectGroupRoleQuery
  * @property \Kanboard\Core\Filter\QueryBuilder                         $projectUserRoleQuery
+ * @property \Kanboard\Core\Filter\QueryBuilder                         $projectActivityQuery
  * @property \Kanboard\Core\Filter\QueryBuilder                         $userQuery
  * @property \Kanboard\Core\Filter\QueryBuilder                         $projectQuery
  * @property \Kanboard\Core\Filter\QueryBuilder                         $taskQuery
  * @property \Kanboard\Core\Filter\LexerBuilder                         $taskLexer
+ * @property \Kanboard\Core\Filter\LexerBuilder                         $projectActivityLexer
  * @property \Psr\Log\LoggerInterface                                   $logger
  * @property \PicoDb\Database                                           $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher

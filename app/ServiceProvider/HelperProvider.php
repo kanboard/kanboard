@@ -30,6 +30,7 @@ class HelperProvider implements ServiceProviderInterface
         $container['helper']->register('user', '\Kanboard\Helper\UserHelper');
         $container['helper']->register('avatar', '\Kanboard\Helper\AvatarHelper');
         $container['helper']->register('projectHeader', '\Kanboard\Helper\ProjectHeaderHelper');
+        $container['helper']->register('projectActivity', '\Kanboard\Helper\ProjectActivityHelper');
 
         $container['template'] = new Template($container['helper']);
 

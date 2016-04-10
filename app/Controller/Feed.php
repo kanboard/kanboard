@@ -26,7 +26,7 @@ class Feed extends Base
         }
 
         $this->response->xml($this->template->render('feed/user', array(
-            'events' => $this->projectActivity->getProjects($this->projectPermission->getActiveProjectIds($user['id'])),
+            'events' => $this->helper->projectActivity->getProjectsEvents($this->projectPermission->getActiveProjectIds($user['id'])),
             'user' => $user,
         )));
     }
@@ -47,7 +47,7 @@ class Feed extends Base
         }
 
         $this->response->xml($this->template->render('feed/project', array(
-            'events' => $this->projectActivity->getProject($project['id']),
+            'events' => $this->helper->projectActivity->getProjectEvents($project['id']),
             'project' => $project,
         )));
     }

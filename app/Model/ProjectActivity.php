@@ -53,115 +53,25 @@ class ProjectActivity extends Base
     }
 
     /**
-     * Get all events for the given project
+     * Get query
      *
      * @access public
-     * @param  integer     $project_id      Project id
-     * @param  integer     $limit           Maximum events number
-     * @param  integer     $start           Timestamp of earliest activity
-     * @param  integer     $end             Timestamp of latest activity
-     * @return array
+     * @return Table
      */
-    public function getProject($project_id, $limit = 50, $start = null, $end = null)
+    public function getQuery()
     {
-        return $this->getProjects(array($project_id), $limit, $start, $end);
-    }
-
-    /**
-     * Get all events for the given projects list
-     *
-     * @access public
-     * @param  integer[]   $project_ids     Projects id
-     * @param  integer     $limit           Maximum events number
-     * @param  integer     $start           Timestamp of earliest activity
-     * @param  integer     $end             Timestamp of latest activity
-     * @return array
-     */
-    public function getProjects(array $project_ids, $limit = 50, $start = null, $end = null)
-    {
-        if (empty($project_ids)) {
-            return array();
-        }
-
-        $query = $this
-                    ->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        self::TABLE.'.*',
-                        User::TABLE.'.username AS author_username',
-                        User::TABLE.'.name AS author_name',
-                        User::TABLE.'.email',
-                        User::TABLE.'.avatar_path'
-                    )
-                    ->in('project_id', $project_ids)
-                    ->join(User::TABLE, 'id', 'creator_id')
-                    ->desc(self::TABLE.'.id')
-                    ->limit($limit);
-
-        return $this->getEvents($query, $start, $end);
-    }
-
-    /**
-     * Get all events for the given task
-     *
-     * @access public
-     * @param  integer     $task_id         Task id
-     * @param  integer     $limit           Maximum events number
-     * @param  integer     $start           Timestamp of earliest activity
-     * @param  integer     $end             Timestamp of latest activity
-     * @return array
-     */
-    public function getTask($task_id, $limit = 50, $start = null, $end = null)
-    {
-        $query = $this
-                    ->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        self::TABLE.'.*',
-                        User::TABLE.'.username AS author_username',
-                        User::TABLE.'.name AS author_name',
-                        User::TABLE.'.email',
-                        User::TABLE.'.avatar_path'
-                    )
-                    ->eq('task_id', $task_id)
-                    ->join(User::TABLE, 'id', 'creator_id')
-                    ->desc(self::TABLE.'.id')
-                    ->limit($limit);
-
-        return $this->getEvents($query, $start, $end);
-    }
-
-    /**
-     * Common function to return events
-     *
-     * @access public
-     * @param  Table           $query           PicoDb Query
-     * @param  integer         $start           Timestamp of earliest activity
-     * @param  integer         $end             Timestamp of latest activity
-     * @return array
-     */
-    private function getEvents(Table $query, $start, $end)
-    {
-        if (! is_null($start)) {
-            $query->gte('date_creation', $start);
-        }
-
-        if (! is_null($end)) {
-            $query->lte('date_creation', $end);
-        }
-
-        $events = $query->findAll();
-
-        foreach ($events as &$event) {
-            $event += $this->decode($event['data']);
-            unset($event['data']);
-
-            $event['author'] = $event['author_name'] ?: $event['author_username'];
-            $event['event_title'] = $this->notification->getTitleWithAuthor($event['author'], $event['event_name'], $event);
-            $event['event_content'] = $this->getContent($event);
-        }
-
-        return $events;
+        return $this
+            ->db
+            ->table(ProjectActivity::TABLE)
+            ->columns(
+                ProjectActivity::TABLE.'.*',
+                'uc.username AS author_username',
+                'uc.name AS author_name',
+                'uc.email',
+                'uc.avatar_path'
+            )
+            ->join(Task::TABLE, 'id', 'task_id')
+            ->left(User::TABLE, 'uc', 'id', ProjectActivity::TABLE, 'creator_id');
     }
 
     /**
@@ -178,36 +88,5 @@ class ProjectActivity extends Base
             $ids = $this->db->table(self::TABLE)->asc('id')->limit($total - $max)->findAllByColumn('id');
             $this->db->table(self::TABLE)->in('id', $ids)->remove();
         }
-    }
-
-    /**
-     * Get the event html content
-     *
-     * @access public
-     * @param  array     $params    Event properties
-     * @return string
-     */
-    public function getContent(array $params)
-    {
-        return $this->template->render(
-            'event/'.str_replace('.', '_', $params['event_name']),
-            $params
-        );
-    }
-
-    /**
-     * Decode event data, supports unserialize() and json_decode()
-     *
-     * @access public
-     * @param  string   $data   Serialized data
-     * @return array
-     */
-    public function decode($data)
-    {
-        if ($data{0} === 'a') {
-            return unserialize($data);
-        }
-
-        return json_decode($data, true) ?: array();
     }
 }

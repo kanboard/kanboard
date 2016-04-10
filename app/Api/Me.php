@@ -33,7 +33,7 @@ class Me extends Base
     public function getMyActivityStream()
     {
         $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
-        return $this->projectActivity->getProjects($project_ids, 100);
+        return $this->helper->projectActivity->getProjectsEvents($project_ids, 100);
     }
 
     public function createMyPrivateProject($name, $description = null)

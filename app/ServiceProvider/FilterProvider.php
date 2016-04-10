@@ -4,6 +4,7 @@ namespace Kanboard\ServiceProvider;
 
 use Kanboard\Core\Filter\LexerBuilder;
 use Kanboard\Core\Filter\QueryBuilder;
+use Kanboard\Filter\ProjectActivityTaskTitleFilter;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskCategoryFilter;
 use Kanboard\Filter\TaskColorFilter;
@@ -46,6 +47,25 @@ class FilterProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
+        $this->createUserFilter($container);
+        $this->createProjectFilter($container);
+        $this->createTaskFilter($container);
+        return $container;
+    }
+
+    public function createUserFilter(Container $container)
+    {
+        $container['userQuery'] = $container->factory(function ($c) {
+            $builder = new QueryBuilder();
+            $builder->withQuery($c['db']->table(User::TABLE));
+            return $builder;
+        });
+
+        return $container;
+    }
+
+    public function createProjectFilter(Container $container)
+    {
         $container['projectGroupRoleQuery'] = $container->factory(function ($c) {
             $builder = new QueryBuilder();
             $builder->withQuery($c['db']->table(ProjectGroupRole::TABLE));
@@ -58,18 +78,32 @@ class FilterProvider implements ServiceProviderInterface
             return $builder;
         });
 
-        $container['userQuery'] = $container->factory(function ($c) {
-            $builder = new QueryBuilder();
-            $builder->withQuery($c['db']->table(User::TABLE));
-            return $builder;
-        });
-
         $container['projectQuery'] = $container->factory(function ($c) {
             $builder = new QueryBuilder();
             $builder->withQuery($c['db']->table(Project::TABLE));
             return $builder;
         });
 
+        $container['projectActivityLexer'] = $container->factory(function ($c) {
+            $builder = new LexerBuilder();
+            $builder->withQuery($c['projectActivity']->getQuery());
+            $builder->withFilter(new ProjectActivityTaskTitleFilter());
+
+            return $builder;
+        });
+
+        $container['projectActivityQuery'] = $container->factory(function ($c) {
+            $builder = new QueryBuilder();
+            $builder->withQuery($c['projectActivity']->getQuery());
+
+            return $builder;
+        });
+
+        return $container;
+    }
+
+    public function createTaskFilter(Container $container)
+    {
         $container['taskQuery'] = $container->factory(function ($c) {
             $builder = new QueryBuilder();
             $builder->withQuery($c['taskFinder']->getExtendedQuery());
