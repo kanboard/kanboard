@@ -1,7 +1,14 @@
-function CategoryRepartitionChart() {
-}
+Kanboard.CategoryRepartitionChart = function(app) {
+    this.app = app;
+};
 
-CategoryRepartitionChart.prototype.execute = function() {
+Kanboard.CategoryRepartitionChart.prototype.execute = function() {
+    if (this.app.hasId("analytic-category-repartition")) {
+        this.show();
+    }
+};
+
+Kanboard.CategoryRepartitionChart.prototype.show = function() {
     var metrics = $("#chart").data("metrics");
     var columns = [];
 
