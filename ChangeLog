@@ -1,6 +1,10 @@
 Version 1.0.28 (unreleased)
 --------------
 
+New features:
+
+* Search in comments
+
 Improvements:
 
 * Filter/Lexer/QueryBuilder refactoring

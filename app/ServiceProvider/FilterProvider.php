@@ -8,6 +8,7 @@ use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskCategoryFilter;
 use Kanboard\Filter\TaskColorFilter;
 use Kanboard\Filter\TaskColumnFilter;
+use Kanboard\Filter\TaskCommentFilter;
 use Kanboard\Filter\TaskCreationDateFilter;
 use Kanboard\Filter\TaskDescriptionFilter;
 use Kanboard\Filter\TaskDueDateFilter;
@@ -85,6 +86,7 @@ class FilterProvider implements ServiceProviderInterface
                 ->withFilter(new TaskCategoryFilter())
                 ->withFilter(TaskColorFilter::getInstance()->setColorModel($c['color']))
                 ->withFilter(new TaskColumnFilter())
+                ->withFilter(new TaskCommentFilter())
                 ->withFilter(new TaskCreationDateFilter())
                 ->withFilter(new TaskDescriptionFilter())
                 ->withFilter(new TaskDueDateFilter())

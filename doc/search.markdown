@@ -38,7 +38,12 @@ Attribute: **assignee**
 - Query for unassigned tasks: `assignee:nobody`
 - Query for my assigned tasks: `assignee:me`
 
-Note: Kanboard will also search in assigned subtasks with the status todo and in progress.
+Search by subtask assignee
+--------------------------
+
+Attribute: **subtask:assignee**
+
+- Example: `subtask:assignee:"John Doe"`
 
 Search by color
 ---------------
@@ -90,7 +95,7 @@ Works in the same way as the modification date queries.
 Search by description
 ---------------------
 
-Attribute: **description**
+Attribute: **description** or **desc**
 
 Example: `description:"text search"`
 
@@ -127,14 +132,14 @@ Attribute: **column**
 - Find tasks by column name: `column:"Work in progress"`
 - Find tasks for several columns: `column:"Backlog" column:ready`
 
-Search by swim lane
+Search by swim-lane
 -------------------
 
 Attribute: **swimlane**
 
-- Find tasks by swim lane: `swimlane:"Version 42"`
-- Find tasks in the default swim lane: `swimlane:default`
-- Find tasks into several swim lanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
+- Find tasks by swim-lane: `swimlane:"Version 42"`
+- Find tasks in the default swim-lane: `swimlane:default`
+- Find tasks into several swim-lanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
 
 Search by task link
 ------------------
@@ -144,3 +149,9 @@ Attribute: **link**
 - Find tasks by link name: `link:"is a milestone of"`
 - Find tasks into several links: `link:"is a milestone of" link:"relates to"`
 
+Search by comment
+-----------------
+
+Attribute: **comment**
+
+- Find comments that contains this title: `comment:"My comment message"`
