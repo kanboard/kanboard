@@ -10,6 +10,7 @@ use Kanboard\Filter\TaskColorFilter;
 use Kanboard\Filter\TaskColumnFilter;
 use Kanboard\Filter\TaskCommentFilter;
 use Kanboard\Filter\TaskCreationDateFilter;
+use Kanboard\Filter\TaskCreatorFilter;
 use Kanboard\Filter\TaskDescriptionFilter;
 use Kanboard\Filter\TaskDueDateFilter;
 use Kanboard\Filter\TaskIdFilter;
@@ -84,10 +85,15 @@ class FilterProvider implements ServiceProviderInterface
                     ->setCurrentUserId($c['userSession']->getId())
                 )
                 ->withFilter(new TaskCategoryFilter())
-                ->withFilter(TaskColorFilter::getInstance()->setColorModel($c['color']))
+                ->withFilter(TaskColorFilter::getInstance()
+                    ->setColorModel($c['color'])
+                )
                 ->withFilter(new TaskColumnFilter())
                 ->withFilter(new TaskCommentFilter())
                 ->withFilter(new TaskCreationDateFilter())
+                ->withFilter(TaskCreatorFilter::getInstance()
+                    ->setCurrentUserId($c['userSession']->getId())
+                )
                 ->withFilter(new TaskDescriptionFilter())
                 ->withFilter(new TaskDueDateFilter())
                 ->withFilter(new TaskIdFilter())

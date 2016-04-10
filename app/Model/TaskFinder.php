@@ -138,6 +138,7 @@ class TaskFinder extends Base
                 Project::TABLE.'.name AS project_name'
             )
             ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
+            ->left(User::TABLE, 'uc', 'id', Task::TABLE, 'creator_id')
             ->join(Category::TABLE, 'id', 'category_id', Task::TABLE)
             ->join(Column::TABLE, 'id', 'column_id', Task::TABLE)
             ->join(Swimlane::TABLE, 'id', 'swimlane_id', Task::TABLE)

@@ -27,8 +27,8 @@ Attribute: **status**
 - Query to find open tasks: `status:open`
 - Query to find closed tasks: `status:closed`
 
-Search by assignees
--------------------
+Search by assignee
+------------------
 
 Attribute: **assignee**
 
@@ -37,6 +37,15 @@ Attribute: **assignee**
 - Multiple assignee lookup: `assignee:user1 assignee:"John Doe"`
 - Query for unassigned tasks: `assignee:nobody`
 - Query for my assigned tasks: `assignee:me`
+
+Search by task creator
+----------------------
+
+Attribute: **creator**
+
+- Tasks created by myself: `creator:me`
+- Tasks created by John Doe: `creator:"John Doe"`
+- Tasks created by the user id #1: `creator:1`
 
 Search by subtask assignee
 --------------------------
