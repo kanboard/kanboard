@@ -1163,4 +1163,8 @@ return array(
     'Search by task status: ' => 'Ricerca per stato del task: ',
     'Search by task title: ' => 'Ricerca per titolo del task: ',
     'Activity stream search' => 'Ricerca nel flusso attività',
+    'Projects where "%s" is manager' => 'Progetti all\'interno dei quali "%s" è manager',
+    'Projects where "%s" is member' => 'Progetti all\'interno dei quali "%s" è membro',
+    'Open tasks assigned to "%s"' => 'Task aperti assegnati a "%s"',
+    'Closed tasks assigned to "%s"' => 'Task chiusi assegnati a "%s"',
 );
