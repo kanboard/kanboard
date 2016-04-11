@@ -14,7 +14,7 @@
     <?php else: ?>
         <table class="table-stripped">
             <tr>
-                <th class="column-5"><?= $paginator->order(t('ID'), 'id') ?></th>
+                <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
                 <th class="column-18"><?= $paginator->order(t('Username'), 'username') ?></th>
                 <th class="column-18"><?= $paginator->order(t('Name'), 'name') ?></th>
                 <th class="column-15"><?= $paginator->order(t('Email'), 'email') ?></th>
