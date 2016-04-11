@@ -1163,4 +1163,8 @@ return array(
     'Search by task status: ' => 'Pretraga po statusu zadatka: ',
     'Search by task title: ' => 'Pretraga po naslovu zadatka: ',
     'Activity stream search' => 'Pretraga aktivnosti',
+    // 'Projects where "%s" is manager' => '',
+    // 'Projects where "%s" is member' => '',
+    // 'Open tasks assigned to "%s"' => '',
+    // 'Closed tasks assigned to "%s"' => '',
 );

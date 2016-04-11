@@ -1163,4 +1163,8 @@ return array(
     // 'Search by task status: ' => '',
     // 'Search by task title: ' => '',
     // 'Activity stream search' => '',
+    // 'Projects where "%s" is manager' => '',
+    // 'Projects where "%s" is member' => '',
+    // 'Open tasks assigned to "%s"' => '',
+    // 'Closed tasks assigned to "%s"' => '',
 );
