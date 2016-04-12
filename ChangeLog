@@ -11,6 +11,10 @@ Improvements:
 
 * Filter/Lexer/QueryBuilder refactoring
 
+Bug fixes:
+
+* Removed PHP notices in comment suppression view
+
 Version 1.0.27
 --------------
 

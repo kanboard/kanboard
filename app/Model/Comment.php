@@ -76,7 +76,9 @@ class Comment extends Base
                 self::TABLE.'.comment',
                 self::TABLE.'.reference',
                 User::TABLE.'.username',
-                User::TABLE.'.name'
+                User::TABLE.'.name',
+                User::TABLE.'.email',
+                User::TABLE.'.avatar_path'
             )
             ->join(User::TABLE, 'id', 'user_id')
             ->eq(self::TABLE.'.id', $comment_id)
