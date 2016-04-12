@@ -20,6 +20,12 @@ I get a blank page after installing or upgrading Kanboard
 - If you use an aggressive OPcode caching, reload your web-server or php-fpm
 
 
+I have the error "There is no suitable CSPRNG installed on your system"
+-----------------------------------------------------------------------
+
+If you use PHP < 7.0, you need to have the openssl extension enabled or `/dev/urandom` accessible from the application if restricted by an `open_basedir` restriction.
+
+
 Page not found and the URL seems wrong (&amp;amp;)
 --------------------------------------------------
 
