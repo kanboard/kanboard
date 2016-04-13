@@ -40,6 +40,8 @@
                 </li>
                 <?php endif ?>
                 <li class="smaller">
+
+                <?= $this->hook->render('template:task:details:first-column') ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -64,6 +66,8 @@
                     <strong><?= t('Position:') ?></strong>
                     <span><?= $task['position'] ?></span>
                 </li>
+
+                <?= $this->hook->render('template:task:details:second-column') ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -102,6 +106,8 @@
                     <span><?= t('%s hours', $task['time_spent']) ?></span>
                 </li>
                 <?php endif ?>
+
+                <?= $this->hook->render('template:task:details:third-column') ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -132,6 +138,8 @@
                     <span><?= $this->dt->datetime($task['date_moved']) ?></span>
                 </li>
                 <?php endif ?>
+
+                <?= $this->hook->render('template:task:details:fourth-column') ?>
             </ul>
         </div>
     </div>
