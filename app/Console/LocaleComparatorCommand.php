@@ -7,7 +7,7 @@ use RecursiveDirectoryIterator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class LocaleComparator extends Base
+class LocaleComparatorCommand extends BaseCommand
 {
     const REF_LOCALE = 'fr_FR';
 

@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 
-class Cronjob extends Base
+class CronjobCommand extends BaseCommand
 {
     private $commands = array(
         'projects:daily-stats',

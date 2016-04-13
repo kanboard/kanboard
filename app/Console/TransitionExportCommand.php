@@ -7,13 +7,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ProjectDailyColumnStatsExport extends Base
+class TransitionExportCommand extends BaseCommand
 {
     protected function configure()
     {
         $this
-            ->setName('export:daily-project-column-stats')
-            ->setDescription('Daily project column stats CSV export (number of tasks per column and per day)')
+            ->setName('export:transitions')
+            ->setDescription('Task transitions CSV export')
             ->addArgument('project_id', InputArgument::REQUIRED, 'Project id')
             ->addArgument('start_date', InputArgument::REQUIRED, 'Start date (YYYY-MM-DD)')
             ->addArgument('end_date', InputArgument::REQUIRED, 'End date (YYYY-MM-DD)');
@@ -21,7 +21,7 @@ class ProjectDailyColumnStatsExport extends Base
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $data = $this->projectDailyColumnStats->getAggregatedMetrics(
+        $data = $this->transitionExport->export(
             $input->getArgument('project_id'),
             $input->getArgument('start_date'),
             $input->getArgument('end_date')

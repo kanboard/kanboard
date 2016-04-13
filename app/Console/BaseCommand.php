@@ -25,7 +25,7 @@ use Symfony\Component\Console\Command\Command;
  * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher
  */
-abstract class Base extends Command
+abstract class BaseCommand extends Command
 {
     /**
      * Container instance

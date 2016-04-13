@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Kanboard\Model\Task;
 use Kanboard\Event\TaskListEvent;
 
-class TaskTrigger extends Base
+class TaskTriggerCommand extends BaseCommand
 {
     protected function configure()
     {

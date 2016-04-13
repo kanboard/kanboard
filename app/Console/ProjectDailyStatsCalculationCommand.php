@@ -6,7 +6,7 @@ use Kanboard\Model\Project;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ProjectDailyStatsCalculation extends Base
+class ProjectDailyStatsCalculationCommand extends BaseCommand
 {
     protected function configure()
     {
