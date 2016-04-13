@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
  * @package  console
  * @author   Frederic Guillot
  *
+ * @property \Kanboard\Validator\PasswordResetValidator                 $passwordResetValidator
  * @property \Kanboard\Export\SubtaskExport                             $subtaskExport
  * @property \Kanboard\Export\TaskExport                                $taskExport
  * @property \Kanboard\Export\TransitionExport                          $transitionExport
@@ -21,6 +22,7 @@ use Symfony\Component\Console\Command\Command;
  * @property \Kanboard\Model\ProjectDailyStats                          $projectDailyStats
  * @property \Kanboard\Model\Task                                       $task
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder
+ * @property \Kanboard\Model\User                                       $user
  * @property \Kanboard\Model\UserNotification                           $userNotification
  * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher

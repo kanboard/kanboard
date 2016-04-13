@@ -6,6 +6,7 @@ New features:
 * Search in activity stream
 * Search in comments
 * Search by task creator
+* Added command line utility to reset user password and to disable 2FA
 
 Improvements:
 

@@ -45,6 +45,9 @@ Available commands:
   projects:daily-stats               Calculate daily statistics for all projects
  trigger
   trigger:tasks                      Trigger scheduler event for all tasks
+ user
+  user:reset-2fa                     Remove two-factor authentication for a user
+  user:reset-password                Change user password
 ```
 
 Available commands
@@ -146,4 +149,18 @@ This command send a "daily cronjob event" to all open tasks of each project.
 ```bash
 ./kanboard trigger:tasks
 Trigger task event: project_id=2, nb_tasks=1
+```
+
+### Reset user password
+
+```bash
+./kanboard user:reset-password my_user
+```
+
+You will be prompted for a password and confirmation. Characters are not printed to the screen.
+
+### Remove two-factor authentication for a user
+
+```bash
+./kanboard user:reset-2fa my_user
 ```

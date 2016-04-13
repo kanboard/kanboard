@@ -3,6 +3,8 @@
 
 require __DIR__.'/app/common.php';
 
+use Kanboard\Console\ResetPasswordCommand;
+use Kanboard\Console\ResetTwoFactorCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\EventDispatcher\Event;
 use Kanboard\Console\TaskOverdueNotificationCommand;
@@ -29,4 +31,6 @@ $application->add(new LocaleSyncCommand($container));
 $application->add(new LocaleComparatorCommand($container));
 $application->add(new TaskTriggerCommand($container));
 $application->add(new CronjobCommand($container));
+$application->add(new ResetPasswordCommand($container));
+$application->add(new ResetTwoFactorCommand($container));
 $application->run();
