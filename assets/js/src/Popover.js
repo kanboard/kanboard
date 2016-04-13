@@ -45,10 +45,12 @@ Kanboard.Popover.prototype.isOpen = function() {
 Kanboard.Popover.prototype.open = function(link) {
     var self = this;
 
-    $.get(link, function(content) {
-        $("body").prepend('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
-        self.executeOnOpenedListeners();
-    });
+    if (!self.isOpen()) {
+        $.get(link, function(content) {
+            $("body").prepend('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+            self.executeOnOpenedListeners();
+        });
+    }
 };
 
 Kanboard.Popover.prototype.close = function(e) {
