@@ -34,7 +34,7 @@ class UserHelper extends Base
     {
         $initials = '';
 
-        foreach (explode(' ', $name) as $string) {
+        foreach (explode(' ', $name, 2) as $string) {
             $initials .= mb_substr($string, 0, 1);
         }
 

@@ -24,13 +24,14 @@ class LetterAvatarProvider extends Base implements AvatarProviderInterface
      * Render avatar html
      *
      * @access public
-     * @param array $user
-     * @param int   $size
+     * @param  array $user
+     * @param  int   $size
+     * @return string
      */
     public function render(array $user, $size)
     {
         $initials = $this->helper->user->getInitials($user['name'] ?: $user['username']);
-        $rgb = $this->getBackgroundColor($initials);
+        $rgb = $this->getBackgroundColor($user['name'] ?: $user['username']);
 
         return sprintf(
             '<div class="avatar-letter" style="background-color: rgb(%d, %d, %d)" title="%s">%s</div>',

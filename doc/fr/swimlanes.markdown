@@ -2,12 +2,13 @@ Swimlanes
 =========
 
 Les *swimlanes* sont des séparations horizontales de votre tableau (pensez à des « couloirs » ou « lignes d'eau » dans une piscine).
+
 Par exemple, cela peut servir à séparer les sorties des différentes versions d'un logiciel, à diviser vos tâches selon différents produits, équipes ou tout autre critère de votre choix.
 
 Tableau avec des swimlanes
---------------------
+--------------------------
 
-![Configuration des swimlanes](http://kanboard.net/screenshots/documentation/swimlanes.png)
+![Swimlanes](screenshots/swimlanes.png)
 
 Gestion des swimlanes
 ------------------
@@ -18,7 +19,7 @@ Gestion des swimlanes
 
 Pour configurer les swimlanes allez sur la page de **Configuration du projet** et choisissez la section **Swimlanes**.
 
-![Swimlanes Configuration](http://kanboard.net/screenshots/documentation/swimlanes-configuration.png)
+![Swimlanes Configuration](screenshots/swimlane-configuration.png)
 
 À partir de cet endroit, vous pouvez ajouter une nouvelle swimlane ou renommer celle qui existe par défaut.
 Vous pouvez aussi désactiver et modifier la position des diverses swimlanes.

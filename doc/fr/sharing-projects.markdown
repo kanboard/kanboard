@@ -1,5 +1,5 @@
 Partager des tableaux et des tâches
-========================
+===================================
 
 Par défaut, les tableaux sont privés, mais il est possible de rendre un tableau public.
 
@@ -15,11 +15,11 @@ Exemples d'utilisation :
 - Afficher le tableau sur un grand écran dans votre bureau
 
 Activer l'accès public
--------------------
+----------------------
 
 Choisissez votre projet, puis cliquez sur « Accès public » et enfin sur le bouton « Activer l'accès public ».
 
-![Activer l'accès public](captures/kanboard-acces-prive.png)
+![Activer l'accès public](screenshots/project-enable-sharing.png)
 
 Lorsque l'accès public est activé, plusieurs liens sont créés :
 
@@ -27,11 +27,9 @@ Lorsque l'accès public est activé, plusieurs liens sont créés :
 - Lien de souscription au fil RSS
 - Lien d'abonnement à iCalendar
 
-![Désactiver l'accès public](captures/kanboard-acces-public.png)
+![Désactiver l'accès public](screenshots/project-disable-sharing.png)
 
 Vous pouvez désactiver l'accès public à tout moment.
 
 À chaque fois que vous activez ou désactivez l'accès public, un nouveau jeton aléatoire est créé.
 **Les liens précédents ne fonctionneront pas**.
-
-

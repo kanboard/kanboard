@@ -34,3 +34,9 @@ $this->template->setTemplateOverride('header', 'theme:layout/header');
 ```
 
 The first argument is the original template name and the second argument the template to use as replacement.
+
+You can still use the original template using the "kanboard:" prefix:
+
+```php
+<?= $this->render('kanboard:header') ?>
+```

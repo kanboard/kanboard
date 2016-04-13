@@ -3,6 +3,10 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Security\Role;
+use Kanboard\Filter\ProjectGroupRoleProjectFilter;
+use Kanboard\Filter\ProjectGroupRoleUsernameFilter;
+use Kanboard\Filter\ProjectUserRoleProjectFilter;
+use Kanboard\Filter\ProjectUserRoleUsernameFilter;
 
 /**
  * Project Permission
@@ -53,8 +57,18 @@ class ProjectPermission extends Base
      */
     public function findUsernames($project_id, $input)
     {
-        $userMembers = $this->projectUserRoleFilter->create()->filterByProjectId($project_id)->startWithUsername($input)->findAll('username');
-        $groupMembers = $this->projectGroupRoleFilter->create()->filterByProjectId($project_id)->startWithUsername($input)->findAll('username');
+        $userMembers = $this->projectUserRoleQuery
+            ->withFilter(new ProjectUserRoleProjectFilter($project_id))
+            ->withFilter(new ProjectUserRoleUsernameFilter($input))
+            ->getQuery()
+            ->findAllByColumn('username');
+
+        $groupMembers = $this->projectGroupRoleQuery
+            ->withFilter(new ProjectGroupRoleProjectFilter($project_id))
+            ->withFilter(new ProjectGroupRoleUsernameFilter($input))
+            ->getQuery()
+            ->findAllByColumn('username');
+
         $members = array_unique(array_merge($userMembers, $groupMembers));
 
         sort($members);

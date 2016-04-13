@@ -157,7 +157,7 @@ class App extends Base
 
         $this->response->html($this->helper->layout->dashboard('app/activity', array(
             'title' => t('My activity stream'),
-            'events' => $this->projectActivity->getProjects($this->projectPermission->getActiveProjectIds($user['id']), 100),
+            'events' => $this->helper->projectActivity->getProjectsEvents($this->projectPermission->getActiveProjectIds($user['id']), 100),
             'user' => $user,
         )));
     }

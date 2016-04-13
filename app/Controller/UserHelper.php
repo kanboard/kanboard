@@ -2,6 +2,10 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Filter\UserNameFilter;
+use Kanboard\Formatter\UserAutoCompleteFormatter;
+use Kanboard\Model\User as UserModel;
+
 /**
  * User Helper
  *
@@ -11,19 +15,20 @@ namespace Kanboard\Controller;
 class UserHelper extends Base
 {
     /**
-     * User autocompletion (Ajax)
+     * User auto-completion (Ajax)
      *
      * @access public
      */
     public function autocomplete()
     {
         $search = $this->request->getStringParam('term');
-        $users = $this->userFilterAutoCompleteFormatter->create($search)->filterByUsernameOrByName()->format();
-        $this->response->json($users);
+        $filter = $this->userQuery->withFilter(new UserNameFilter($search));
+        $filter->getQuery()->asc(UserModel::TABLE.'.name')->asc(UserModel::TABLE.'.username');
+        $this->response->json($filter->format(new UserAutoCompleteFormatter($this->container)));
     }
 
     /**
-     * User mention autocompletion (Ajax)
+     * User mention auto-completion (Ajax)
      *
      * @access public
      */

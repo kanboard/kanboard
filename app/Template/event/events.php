@@ -7,7 +7,8 @@
                 $event['creator_id'],
                 $event['author_username'],
                 $event['author_name'],
-                $event['email']
+                $event['email'],
+                $event['avatar_path']
             ) ?>
 
             <div class="activity-content">

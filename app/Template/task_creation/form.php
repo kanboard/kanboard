@@ -28,6 +28,8 @@
         <?php if (! isset($duplicate)): ?>
             <?= $this->form->checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>
         <?php endif ?>
+
+        <?= $this->hook->render('template:task:form:left-column', array('values'=>$values, 'errors'=>$errors)) ?>
     </div>
 
     <div class="form-column">

@@ -512,7 +512,9 @@ CREATE TABLE project_has_groups (
 CREATE TABLE project_has_metadata (
     project_id integer NOT NULL,
     name character varying(50) NOT NULL,
-    value character varying(255) DEFAULT ''::character varying
+    value character varying(255) DEFAULT ''::character varying,
+    changed_by integer DEFAULT 0 NOT NULL,
+    changed_on integer DEFAULT 0 NOT NULL
 );
 
 
@@ -652,7 +654,9 @@ CREATE TABLE schema_version (
 
 CREATE TABLE settings (
     option character varying(100) NOT NULL,
-    value character varying(255) DEFAULT ''::character varying
+    value character varying(255) DEFAULT ''::character varying,
+    changed_by integer DEFAULT 0 NOT NULL,
+    changed_on integer DEFAULT 0 NOT NULL
 );
 
 
@@ -847,7 +851,9 @@ ALTER SEQUENCE task_has_links_id_seq OWNED BY task_has_links.id;
 CREATE TABLE task_has_metadata (
     task_id integer NOT NULL,
     name character varying(50) NOT NULL,
-    value character varying(255) DEFAULT ''::character varying
+    value character varying(255) DEFAULT ''::character varying,
+    changed_by integer DEFAULT 0 NOT NULL,
+    changed_on integer DEFAULT 0 NOT NULL
 );
 
 
@@ -969,7 +975,9 @@ ALTER SEQUENCE transitions_id_seq OWNED BY transitions.id;
 CREATE TABLE user_has_metadata (
     user_id integer NOT NULL,
     name character varying(50) NOT NULL,
-    value character varying(255) DEFAULT ''::character varying
+    value character varying(255) DEFAULT ''::character varying,
+    changed_by integer DEFAULT 0 NOT NULL,
+    changed_on integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1070,7 +1078,8 @@ CREATE TABLE users (
     lock_expiration_date bigint DEFAULT 0,
     gitlab_id integer,
     role character varying(25) DEFAULT 'app-user'::character varying NOT NULL,
-    is_active boolean DEFAULT true
+    is_active boolean DEFAULT true,
+    avatar_path character varying(255)
 );
 
 
@@ -2141,29 +2150,29 @@ SET search_path = public, pg_catalog;
 -- Data for Name: settings; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO settings (option, value) VALUES ('board_highlight_period', '172800');
-INSERT INTO settings (option, value) VALUES ('board_public_refresh_interval', '60');
-INSERT INTO settings (option, value) VALUES ('board_private_refresh_interval', '10');
-INSERT INTO settings (option, value) VALUES ('board_columns', '');
-INSERT INTO settings (option, value) VALUES ('webhook_token', 'c7caaf8f87ad391800e3989d7abfd98a6066a6f801fc151012bb5c4ee3cb');
-INSERT INTO settings (option, value) VALUES ('api_token', 'b0a6f56fe236fc9639fc6914e92365aa627d95cd790aa7e0c5a3ebebf844');
-INSERT INTO settings (option, value) VALUES ('application_language', 'en_US');
-INSERT INTO settings (option, value) VALUES ('application_timezone', 'UTC');
-INSERT INTO settings (option, value) VALUES ('application_url', '');
-INSERT INTO settings (option, value) VALUES ('application_date_format', 'm/d/Y');
-INSERT INTO settings (option, value) VALUES ('project_categories', '');
-INSERT INTO settings (option, value) VALUES ('subtask_restriction', '0');
-INSERT INTO settings (option, value) VALUES ('application_stylesheet', '');
-INSERT INTO settings (option, value) VALUES ('application_currency', 'USD');
-INSERT INTO settings (option, value) VALUES ('integration_gravatar', '0');
-INSERT INTO settings (option, value) VALUES ('calendar_user_subtasks_time_tracking', '0');
-INSERT INTO settings (option, value) VALUES ('calendar_user_tasks', 'date_started');
-INSERT INTO settings (option, value) VALUES ('calendar_project_tasks', 'date_started');
-INSERT INTO settings (option, value) VALUES ('webhook_url', '');
-INSERT INTO settings (option, value) VALUES ('default_color', 'yellow');
-INSERT INTO settings (option, value) VALUES ('subtask_time_tracking', '1');
-INSERT INTO settings (option, value) VALUES ('cfd_include_closed_tasks', '1');
-INSERT INTO settings (option, value) VALUES ('password_reset', '1');
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_highlight_period', '172800', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', '67545fef6a0a3f43d60c7d57632d6e4af9930f064c12e72266b1c9b42381', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'c16b1c5896b258409a5eb344152b5b33c8ef4c58902bc543fc1348c37975', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_date_format', 'm/d/Y', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('project_categories', '', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('subtask_restriction', '0', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_stylesheet', '', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_currency', 'USD', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('integration_gravatar', '0', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('calendar_user_subtasks_time_tracking', '0', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('calendar_user_tasks', 'date_started', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('calendar_project_tasks', 'date_started', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_url', '', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('default_color', 'yellow', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('subtask_time_tracking', '1', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('cfd_include_closed_tasks', '1', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('password_reset', '1', 0, 0);
 
 
 --
@@ -2211,4 +2220,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$tyByY1dfUO9S.2wpJcSMEO4UU9H.yCwf/pmzo430DM2C4QZ/K3Kt2', 'app-admin');INSERT INTO schema_version VALUES ('87');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$e.SftITKuBvXeNbxtmTKS.KAbIy4Mx09t254BAiEAuWOxkuS4xfLG', 'app-admin');INSERT INTO schema_version VALUES ('89');

@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Formatter\GroupAutoCompleteFormatter;
+
 /**
  * Group Helper
  *
@@ -11,14 +13,14 @@ namespace Kanboard\Controller;
 class GroupHelper extends Base
 {
     /**
-     * Group autocompletion (Ajax)
+     * Group auto-completion (Ajax)
      *
      * @access public
      */
     public function autocomplete()
     {
         $search = $this->request->getStringParam('term');
-        $groups = $this->groupManager->find($search);
-        $this->response->json($this->groupAutoCompleteFormatter->setGroups($groups)->format());
+        $formatter = new GroupAutoCompleteFormatter($this->groupManager->find($search));
+        $this->response->json($formatter->format());
     }
 }

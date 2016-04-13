@@ -27,7 +27,7 @@ From the repository (development version)
 -----------------------------------------
 
 1. `git pull`
-2. `composer install`
+2. `composer install --no-dev`
 3. Login and check if everything is ok
 
 Note: This method will install the **current development version**, use at your own risk.

@@ -14,7 +14,6 @@
     'task' => $task,
     'subtasks' => $subtasks,
     'project' => $project,
-    'users_list' => isset($users_list) ? $users_list : array(),
     'editable' => true,
 )) ?>
 

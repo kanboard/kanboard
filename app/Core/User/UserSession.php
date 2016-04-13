@@ -14,6 +14,19 @@ use Kanboard\Core\Security\Role;
 class UserSession extends Base
 {
     /**
+     * Refresh current session if necessary
+     *
+     * @access public
+     * @param integer $user_id
+     */
+    public function refresh($user_id)
+    {
+        if ($this->getId() == $user_id) {
+            $this->initialize($this->user->getById($user_id));
+        }
+    }
+
+    /**
      * Update user session
      *
      * @access public

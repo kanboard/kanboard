@@ -1,0 +1,52 @@
+<?php
+
+use Kanboard\Filter\TaskCommentFilter;
+use Kanboard\Model\Comment;
+use Kanboard\Model\Project;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
+
+require_once __DIR__.'/../Base.php';
+
+class TaskCommentFilterTest extends Base
+{
+    public function testMatch()
+    {
+        $taskFinder = new TaskFinder($this->container);
+        $taskCreation = new TaskCreation($this->container);
+        $commentModel = new Comment($this->container);
+        $projectModel = new Project($this->container);
+        $query = $taskFinder->getExtendedQuery();
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreation->create(array('title' => 'Test', 'project_id' => 1)));
+        $this->assertEquals(1, $commentModel->create(array('task_id' => 1, 'user_id' => 1, 'comment' => 'This is a test')));
+
+        $filter = new TaskCommentFilter();
+        $filter->withQuery($query);
+        $filter->withValue('test');
+        $filter->apply();
+
+        $this->assertCount(1, $query->findAll());
+    }
+
+    public function testNoMatch()
+    {
+        $taskFinder = new TaskFinder($this->container);
+        $taskCreation = new TaskCreation($this->container);
+        $commentModel = new Comment($this->container);
+        $projectModel = new Project($this->container);
+        $query = $taskFinder->getExtendedQuery();
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreation->create(array('title' => 'Test', 'project_id' => 1)));
+        $this->assertEquals(1, $commentModel->create(array('task_id' => 1, 'user_id' => 1, 'comment' => 'This is a test')));
+
+        $filter = new TaskCommentFilter();
+        $filter->withQuery($query);
+        $filter->withValue('foobar');
+        $filter->apply();
+
+        $this->assertCount(0, $query->findAll());
+    }
+}

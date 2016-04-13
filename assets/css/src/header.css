@@ -116,10 +116,3 @@ header h1 .tooltip {
 .menu-inline {
     margin-bottom: 5px;
 }
-
-@media only screen and (max-width: 640px) {
-    .page-header-mobile li {
-        display: block;
-        margin-bottom: 5px;
-    }
-}

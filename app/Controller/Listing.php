@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Model\Task as TaskModel;
 
 /**
@@ -19,22 +20,26 @@ class Listing extends Base
      */
     public function show()
     {
-        $params = $this->getProjectFilters('listing', 'show');
-        $query = $this->taskFilter->search($params['filters']['search'])->filterByProject($params['project']['id'])->getQuery();
+        $project = $this->getProject();
+        $search = $this->helper->projectHeader->getSearchQuery($project);
 
         $paginator = $this->paginator
-            ->setUrl('listing', 'show', array('project_id' => $params['project']['id']))
+            ->setUrl('listing', 'show', array('project_id' => $project['id']))
             ->setMax(30)
             ->setOrder(TaskModel::TABLE.'.id')
             ->setDirection('DESC')
-            ->setQuery($query)
+            ->setQuery($this->taskLexer
+                ->build($search)
+                ->withFilter(new TaskProjectFilter($project['id']))
+                ->getQuery()
+            )
             ->calculate();
 
-        $this->response->html($this->helper->layout->app('listing/show', $params + array(
+        $this->response->html($this->helper->layout->app('listing/show', array(
+            'project' => $project,
+            'title' => $project['name'],
+            'description' => $this->helper->projectHeader->getDescription($project),
             'paginator' => $paginator,
-            'categories_list' => $this->category->getList($params['project']['id'], false),
-            'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
-            'custom_filters_list' => $this->customFilter->getAll($params['project']['id'], $this->userSession->getId()),
         )));
     }
 }

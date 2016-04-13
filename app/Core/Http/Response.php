@@ -14,6 +14,24 @@ use Kanboard\Core\Csv;
 class Response extends Base
 {
     /**
+     * Send headers to cache a resource
+     *
+     * @access public
+     * @param  integer $duration
+     * @param  string  $etag
+     */
+    public function cache($duration, $etag = '')
+    {
+        header('Pragma: cache');
+        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $duration) . ' GMT');
+        header('Cache-Control: public, max-age=' . $duration);
+
+        if ($etag) {
+            header('ETag: "' . $etag . '"');
+        }
+    }
+
+    /**
      * Send no cache headers
      *
      * @access public
@@ -211,6 +229,20 @@ class Response extends Base
         header('Content-Type: application/octet-stream');
         echo $data;
         exit;
+    }
+
+    /**
+     * Send a iCal response
+     *
+     * @access public
+     * @param  string   $data          Raw data
+     * @param  integer  $status_code   HTTP status code
+     */
+    public function ical($data, $status_code = 200)
+    {
+        $this->status($status_code);
+        $this->contentType('text/calendar; charset=utf-8');
+        echo $data;
     }
 
     /**

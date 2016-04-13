@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Formatter\BoardFormatter;
+
 /**
  * Board controller
  *
@@ -47,16 +49,19 @@ class Board extends Base
      */
     public function show()
     {
-        $params = $this->getProjectFilters('board', 'show');
+        $project = $this->getProject();
+        $search = $this->helper->projectHeader->getSearchQuery($project);
 
         $this->response->html($this->helper->layout->app('board/view_private', array(
-            'categories_list' => $this->category->getList($params['project']['id'], false),
-            'users_list' => $this->projectUserRole->getAssignableUsersList($params['project']['id'], false),
-            'custom_filters_list' => $this->customFilter->getAll($params['project']['id'], $this->userSession->getId()),
-            'swimlanes' => $this->taskFilter->search($params['filters']['search'])->getBoard($params['project']['id']),
+            'project' => $project,
+            'title' => $project['name'],
+            'description' => $this->helper->projectHeader->getDescription($project),
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->config->get('board_highlight_period'),
-        ) + $params));
+            'swimlanes' => $this->taskLexer
+                ->build($search)
+                ->format(BoardFormatter::getInstance($this->container)->setProjectId($project['id']))
+        )));
     }
 
     /**
@@ -177,9 +182,11 @@ class Board extends Base
     {
         return $this->template->render('board/table_container', array(
             'project' => $this->project->getById($project_id),
-            'swimlanes' => $this->taskFilter->search($this->userSession->getFilters($project_id))->getBoard($project_id),
             'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->config->get('board_highlight_period'),
+            'swimlanes' => $this->taskLexer
+                ->build($this->userSession->getFilters($project_id))
+                ->format(BoardFormatter::getInstance($this->container)->setProjectId($project_id))
         ));
     }
 }

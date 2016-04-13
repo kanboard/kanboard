@@ -19,6 +19,7 @@ Utiliser Kanboard
 
 ### Travailler avec les projets
 
+- [Types de projets](project-types.markdown)
 - [Créer des projets](creating-projects.markdown)
 - [Modifier des projets](editing-projects.markdown)
 - [Partager des tableaux et des tâches](sharing-projects.markdown)
@@ -46,6 +47,7 @@ Utiliser Kanboard
 
 ### Travailler avec les utilisateurs
 
+- [Rôles](roles.markdown)
 - [Gestion des utilisateurs](user-management.markdown)
 - [Notifications](notifications.markdown)
 - [Authentification à deux facteurs](2fa.markdown)

@@ -23,7 +23,7 @@ class ExternalLinkManager extends Base
      * Registered providers
      *
      * @access private
-     * @var array
+     * @var ExternalLinkProviderInterface[]
      */
     private $providers = array();
 

@@ -18,7 +18,7 @@ class ActionManager extends Base
      * List of automatic actions
      *
      * @access private
-     * @var array
+     * @var ActionBase[]
      */
     private $actions = array();
 

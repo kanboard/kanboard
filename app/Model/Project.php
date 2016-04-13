@@ -35,6 +35,20 @@ class Project extends Base
     const INACTIVE = 0;
 
     /**
+     * Value for private project
+     *
+     * @var integer
+     */
+    const TYPE_PRIVATE = 1;
+
+    /**
+     * Value for team project
+     *
+     * @var integer
+     */
+    const TYPE_TEAM = 0;
+
+    /**
      * Get a project by the id
      *
      * @access public

@@ -29,7 +29,7 @@ Contributors:
 - [Daniel Raknes](https://github.com/danielraknes)
 - [David-Norris](https://github.com/David-Norris)
 - [Dmitry](https://github.com/dmkcv)
-- [Djpadz](https://github.com/djpadz)
+- [Dj Padzensky](https://github.com/djpadz)
 - [Draza (bdpsoft)](https://github.com/bdpsoft)
 - [Eskiso](https://github.com/eSkiSo)
 - [Esteban Monge](https://github.com/EstebanMonge)
@@ -120,6 +120,7 @@ Contributors:
 - [Vladimir Babin](https://github.com/Chiliec)
 - [Yannick Ihmels](https://github.com/ihmels)
 - [Ybarc](https://github.com/ybarc)
+- [Yu Yongwoo](https://github.com/uyu423)
 - [Yuichi Murata](https://github.com/yuichi1004)
 
 There is also many people who have reported bugs or proposed awesome ideas.

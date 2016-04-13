@@ -53,13 +53,13 @@ class Project extends Base
 
     public function getProjectActivities(array $project_ids)
     {
-        return $this->projectActivity->getProjects($project_ids);
+        return $this->helper->projectActivity->getProjectsEvents($project_ids);
     }
 
     public function getProjectActivity($project_id)
     {
         $this->checkProjectPermission($project_id);
-        return $this->projectActivity->getProject($project_id);
+        return $this->helper->projectActivity->getProjectEvents($project_id);
     }
 
     public function createProject($name, $description = null)

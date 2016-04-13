@@ -8,35 +8,41 @@ class TemplateTest extends Base
 {
     public function testGetTemplateFile()
     {
-        $t = new Template($this->container['helper']);
+        $template = new Template($this->container['helper']);
+
         $this->assertStringEndsWith(
-            'app'.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR.'b.php',
-            $t->getTemplateFile('a'.DIRECTORY_SEPARATOR.'b')
+            implode(DIRECTORY_SEPARATOR, array('app', 'Core', '..', 'Template', 'a', 'b.php')),
+            $template->getTemplateFile('a'.DIRECTORY_SEPARATOR.'b')
+        );
+
+        $this->assertStringEndsWith(
+            implode(DIRECTORY_SEPARATOR, array('app', 'Core', '..', 'Template', 'a', 'b.php')),
+            $template->getTemplateFile('kanboard:a'.DIRECTORY_SEPARATOR.'b')
         );
     }
 
     public function testGetPluginTemplateFile()
     {
-        $t = new Template($this->container['helper']);
+        $template = new Template($this->container['helper']);
         $this->assertStringEndsWith(
-            'app'.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.'Myplugin'.DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR.'b.php',
-            $t->getTemplateFile('myplugin:a'.DIRECTORY_SEPARATOR.'b')
+            implode(DIRECTORY_SEPARATOR, array('app', 'Core', '..', '..', 'plugins', 'Myplugin', 'Template', 'a', 'b.php')),
+            $template->getTemplateFile('myplugin:a'.DIRECTORY_SEPARATOR.'b')
         );
     }
 
     public function testGetOverridedTemplateFile()
     {
-        $t = new Template($this->container['helper']);
-        $t->setTemplateOverride('a'.DIRECTORY_SEPARATOR.'b', 'myplugin:c');
+        $template = new Template($this->container['helper']);
+        $template->setTemplateOverride('a'.DIRECTORY_SEPARATOR.'b', 'myplugin:c');
 
         $this->assertStringEndsWith(
-            'app'.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR.'Myplugin'.DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.'c.php',
-            $t->getTemplateFile('a'.DIRECTORY_SEPARATOR.'b')
+            implode(DIRECTORY_SEPARATOR, array('app', 'Core', '..', '..', 'plugins', 'Myplugin', 'Template', 'c.php')),
+            $template->getTemplateFile('a'.DIRECTORY_SEPARATOR.'b')
         );
 
         $this->assertStringEndsWith(
-            'app'.DIRECTORY_SEPARATOR.'Core'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'Template'.DIRECTORY_SEPARATOR.'d.php',
-            $t->getTemplateFile('d')
+            implode(DIRECTORY_SEPARATOR, array('app', 'Core', '..', 'Template', 'd.php')),
+            $template->getTemplateFile('d')
         );
     }
 }
