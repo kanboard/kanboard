@@ -15,8 +15,8 @@ if (version_compare(PHP_VERSION, '5.4.0', '<')) {
 }
 
 // Check data folder if sqlite
-if (DB_DRIVER === 'sqlite' && ! is_writable('data')) {
-    throw new Exception('The directory "data" must be writeable by your web server user');
+if (DB_DRIVER === 'sqlite' && ! is_writable(dirname(DB_FILENAME))) {
+    throw new Exception('The directory "'.dirname(DB_FILENAME).'" must be writeable by your web server user');
 }
 
 // Check PDO extensions
