@@ -41,7 +41,7 @@
                 <?php endif ?>
                 <li class="smaller">
 
-                <?= $this->hook->render('template:task:details:first-column') ?>
+                <?= $this->hook->render('template:task:details:first-column', array('task' => $task)) ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -67,7 +67,7 @@
                     <span><?= $task['position'] ?></span>
                 </li>
 
-                <?= $this->hook->render('template:task:details:second-column') ?>
+                <?= $this->hook->render('template:task:details:second-column', array('task' => $task)) ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -107,7 +107,7 @@
                 </li>
                 <?php endif ?>
 
-                <?= $this->hook->render('template:task:details:third-column') ?>
+                <?= $this->hook->render('template:task:details:third-column', array('task' => $task)) ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -139,7 +139,7 @@
                 </li>
                 <?php endif ?>
 
-                <?= $this->hook->render('template:task:details:fourth-column') ?>
+                <?= $this->hook->render('template:task:details:fourth-column', array('task' => $task)) ?>
             </ul>
         </div>
     </div>
