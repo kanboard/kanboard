@@ -10,6 +10,8 @@ New features:
 
 Improvements:
 
+* Allow people to install Kanboard outside of the DocumentRoot
+* Allow plugins to be loaded from another folder
 * Filter/Lexer/QueryBuilder refactoring
 
 Bug fixes:
