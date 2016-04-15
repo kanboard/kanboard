@@ -709,7 +709,7 @@ return array(
     'view the board on Kanboard' => 'Pinnwand in Kanboard anzeigen',
     'The task have been moved to the first swimlane' => 'Die Aufgabe wurde in die erste Swimlane verschoben',
     'The task have been moved to another swimlane:' => 'Die Aufgaben wurde in ene andere Swimlane verschoben',
-    'Overdue tasks for the project "%s"' => 'Überfällige Aufgaben für das Projekt "%s"',
+    // 'Overdue tasks for the project(s) "%s"' => 'Überfällige Aufgaben für das Projekt "%s"',
     'New title: %s' => 'Neuer Titel: %s',
     'The task is not assigned anymore' => 'Die Aufgabe ist nicht mehr zugewiesen',
     'New assignee: %s' => 'Neue Zuordnung: %s',

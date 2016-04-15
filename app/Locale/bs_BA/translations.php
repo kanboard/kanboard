@@ -709,9 +709,9 @@ return array(
     'view the board on Kanboard' => 'pregled ploče na Kanboard-u',
     'The task have been moved to the first swimlane' => 'Zadatak je premješten u prvu swimline traku',
     'The task have been moved to another swimlane:' => 'Zadatak je premješten u drugu swimline traku',
-    'Overdue tasks for the project "%s"' => 'Zadaci u kašnjenju za projekat "%s"',
+    'Overdue tasks for the project(s) "%s"' => 'Zadaci u kašnjenju za projekat(te) "%s"',
     'New title: %s' => 'Novi naslov: %s',
-    'The task is not assigned anymore' => 'Zadatak nema više izvršioca',
+    'The task is not assigned anymore' => 'Zadatak nema više izvršioca',``
     'New assignee: %s' => 'Novi izvršilac: %s',
     'There is no category now' => 'Sada nema kategorije',
     'New category: %s' => 'Nova kategorija: %s',

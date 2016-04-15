@@ -709,7 +709,7 @@ return array(
     // 'view the board on Kanboard' => '',
     // 'The task have been moved to the first swimlane' => '',
     // 'The task have been moved to another swimlane:' => '',
-    // 'Overdue tasks for the project "%s"' => '',
+    // 'Overdue tasks for the project(s) "%s"' => '',
     'New title: %s' => '제목 변경: %s',
     'The task is not assigned anymore' => '담당자 없음',
     'New assignee: %s' => '담당자 변경: %s',

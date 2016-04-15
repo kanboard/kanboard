@@ -3,6 +3,8 @@
 namespace Kanboard\Console;
 
 use Kanboard\Model\Task;
+use Kanboard\Core\Security\Role;
+use Kanboard\Model\ProjectUserRole;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,12 +17,20 @@ class TaskOverdueNotificationCommand extends BaseCommand
         $this
             ->setName('notification:overdue-tasks')
             ->setDescription('Send notifications for overdue tasks')
-            ->addOption('show', null, InputOption::VALUE_NONE, 'Show sent overdue tasks');
+            ->addOption('show', null, InputOption::VALUE_NONE, 'Show sent overdue tasks')
+            ->addOption('group', null, InputOption::VALUE_NONE, 'Group all overdue tasks for one user (from all projects) in one email')
+            ->addOption('manager', null, InputOption::VALUE_NONE, 'Send all overdue tasks to project manager(s) in one email');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $tasks = $this->sendOverdueTaskNotifications();
+        if($input->getOption('group')) {
+            $tasks = $this->sendGroupOverdueTaskNotifications();
+        } elseif ($input->getOption('manager')) {
+            $tasks = $this->sendOverdueTaskNotificationsToManagers();
+        } else {
+            $tasks = $this->sendOverdueTaskNotifications();
+        }
 
         if ($input->getOption('show')) {
             $this->showTable($output, $tasks);
@@ -47,6 +57,54 @@ class TaskOverdueNotificationCommand extends BaseCommand
             ->setHeaders(array('Id', 'Title', 'Due date', 'Project Id', 'Project name', 'Assignee'))
             ->setRows($rows)
             ->render();
+    }
+
+    /**
+     * Send all overdue tasks for one user in one email
+     *
+     * @access public
+     */
+    public function sendGroupOverdueTaskNotifications()
+    {
+        $tasks = $this->taskFinder->getOverdueTasks();
+
+        foreach ($this->groupByColumn($tasks, 'owner_id') as $user_tasks) {
+            $users = $this->userNotification->getUsersWithNotificationEnabled($user_tasks[0]['project_id']);
+
+            foreach ($users as $user) {
+                $this->sendUserOverdueTaskNotifications($user, $user_tasks);
+            }
+        }
+
+        return $tasks;
+    }
+
+    /**
+     * Send all overdue tasks in one email to project manager(s)
+     *
+     * @access public
+     */
+    public function sendOverdueTaskNotificationsToManagers()
+    {
+        $tasks = $this->taskFinder->getOverdueTasks();
+
+        foreach ($this->groupByColumn($tasks, 'project_id') as $project_id => $project_tasks) {
+            $users = $this->userNotification->getUsersWithNotificationEnabled($project_id);
+
+            $managers = array();
+            foreach ($users as $user) {
+                $role = ProjectUserRole::getUserRole($project_id, $user['id']);
+                if($role == Role::PROJECT_MANAGER) {
+                    $managers[] = $user;
+                }
+            }
+
+            foreach ($managers as $manager) {
+                $this->sendUserOverdueTaskNotificationsToManagers($manager, $project_tasks);
+            }
+        }
+
+        return $tasks;
     }
 
     /**
@@ -79,10 +137,12 @@ class TaskOverdueNotificationCommand extends BaseCommand
     public function sendUserOverdueTaskNotifications(array $user, array $tasks)
     {
         $user_tasks = array();
+        $project_names = array();
 
         foreach ($tasks as $task) {
             if ($this->userNotificationFilter->shouldReceiveNotification($user, array('task' => $task))) {
                 $user_tasks[] = $task;
+                $project_names[$task['project_id']] = $task['project_name'];
             }
         }
 
@@ -90,9 +150,25 @@ class TaskOverdueNotificationCommand extends BaseCommand
             $this->userNotification->sendUserNotification(
                 $user,
                 Task::EVENT_OVERDUE,
-                array('tasks' => $user_tasks, 'project_name' => $tasks[0]['project_name'])
+                array('tasks' => $user_tasks, 'project_name' => implode(", ", $project_names))
             );
         }
+    }
+
+    /**
+     * Send overdue tasks for a project manager(s)
+     *
+     * @access public
+     * @param  array   $user
+     * @param  array   $tasks
+     */
+    public function sendUserOverdueTaskNotificationsToManagers(array $manager, array $tasks)
+    {
+        $this->userNotification->sendUserNotification(
+            $manager,
+            Task::EVENT_OVERDUE,
+            array('tasks' => $tasks, 'project_name' => $tasks[0]['project_name'])
+        );
     }
 
     /**
