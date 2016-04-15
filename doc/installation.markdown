@@ -43,11 +43,14 @@ If you would like to install Kanboard outside of the web server document root, y
 .
 ├── .htaccess -> ../kanboard/.htaccess
 ├── assets -> ../kanboard/assets
+├── favicon.ico -> ../kanboard/favicon.ico
 ├── index.php -> ../kanboard/index.php
 └── jsonrpc.php -> ../kanboard/jsonrpc.php
 ```
 
 The `.htaccess` is optional because its content can be included directly in the Apache configuration.
+
+You can also define a custom location for the plugins and files folders by changing the [config file](config.markdown).
 
 Security
 --------
