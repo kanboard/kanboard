@@ -93,7 +93,7 @@ class TaskOverdueNotificationCommand extends BaseCommand
 
             $managers = array();
             foreach ($users as $user) {
-                $role = ProjectUserRole::getUserRole($project_id, $user['id']);
+                $role = $this->projectUserRole->getUserRole($project_id, $user['id']);
                 if($role == Role::PROJECT_MANAGER) {
                     $managers[] = $user;
                 }
