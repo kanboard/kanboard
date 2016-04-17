@@ -2,7 +2,7 @@
     <div class="page-header">
         <ul>
             <li><?= $this->url->button('fa-user', t('All users'), 'user', 'index') ?></li>
-            <li><?= $this->url->button('fa-user', t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
+            <li><?= $this->url->button('fa-plus', t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
         </ul>
     </div>
     <section>
