@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'group', 'index') ?></li>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('Add group member'), 'group', 'associate', array('group_id' => $group['id'])) ?></li>
+            <li><?= $this->url->button('fa-users', t('View all groups'), 'group', 'index') ?></li>
+            <li><?= $this->url->button('fa-plus', t('Add group member'), 'group', 'associate', array('group_id' => $group['id'])) ?></li>
         </ul>
     </div>
     <?php if ($paginator->isEmpty()): ?>

@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Edit project') ?></h2>
     <ul>
-        <li ><?= $this->url->link(t('General'), 'ProjectEdit', 'edit', array('project_id' => $project['id']), false, 'popover-link') ?></li>
+        <li><?= $this->url->link(t('General'), 'ProjectEdit', 'edit', array('project_id' => $project['id']), false, 'popover-link') ?></li>
         <li><?= $this->url->link(t('Dates'), 'ProjectEdit', 'dates', array('project_id' => $project['id']), false, 'popover-link') ?></li>
         <li><?= $this->url->link(t('Description'), 'ProjectEdit', 'description', array('project_id' => $project['id']), false, 'popover-link') ?></li>
         <li class="active"><?= $this->url->link(t('Task priority'), 'ProjectEdit', 'priority', array('project_id' => $project['id']), false, 'popover-link') ?></li>

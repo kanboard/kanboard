@@ -29,14 +29,12 @@
                 <?php endif ?>
                 <?php if ($project['is_public']): ?>
                 <li class="smaller">
-                    <i class="fa fa-external-link fa-fw"></i>
-                    <?= $this->url->link(t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+                    <?= $this->url->button('fa-external-link', t('Public link'), 'task', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
                 </li>
                 <?php endif ?>
                 <?php if ($project['is_public'] && !$editable): ?>
                 <li class="smaller">
-                    <i class="fa fa-th fa-fw"></i>
-                    <?= $this->url->link(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?>
+                    <?= $this->url->button('fa-th', t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?>
                 </li>
                 <?php endif ?>
                 <li class="smaller">

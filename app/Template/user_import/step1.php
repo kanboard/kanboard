@@ -2,9 +2,9 @@
     <div class="page-header">
         <?php if ($this->user->hasAccess('user', 'create')): ?>
         <ul>
-            <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'user', 'index') ?></li>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New local user'), 'user', 'create') ?></li>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
+            <li><?= $this->url->button('fa-user', t('All users'), 'user', 'index') ?></li>
+            <li><?= $this->url->button('fa-plus', t('New local user'), 'user', 'create') ?></li>
+            <li><?= $this->url->button('fa-plus', t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
         </ul>
         <?php endif ?>
     </div>
@@ -42,5 +42,5 @@
             <li><?= t('Passwords will be encrypted if present') ?></li>
         </ul>
     </div>
-    <p><i class="fa fa-download fa-fw"></i><?= $this->url->link(t('Download CSV template'), 'userImport', 'template') ?></p>
+    <p><?= $this->url->button('fa-download', t('Download CSV template'), 'userImport', 'template') ?></p>
 </section>
