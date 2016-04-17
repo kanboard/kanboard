@@ -169,6 +169,10 @@ List of template hooks:
 | `template:project:integrations`            | Integration page in projects settings              |
 | `template:project:sidebar`                 | Sidebar in project settings                        |
 | `template:project-user:sidebar`            | Sidebar on project user overview page              |
+| `template:task:details:first-column`       | Task summary first column                          |
+| `template:task:details:second-column`      | Task summary second column                         |
+| `template:task:details:third-column`       | Task summary third column                          |
+| `template:task:details:fourth-column`      | Task summary fourth column                         |
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
 | `template:task:sidebar`                    | Sidebar on task page                               |
 | `template:task:form:left-column`           | Left column in task form                           |

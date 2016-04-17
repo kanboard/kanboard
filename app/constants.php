@@ -1,11 +1,17 @@
 <?php
 
+// Data directory location
+defined('DATA_DIR') or define('DATA_DIR', implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'data')));
+
+// Files directory (attachments)
+defined('FILES_DIR') or define('FILES_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'files');
+
+// Plugins directory
+defined('PLUGINS_DIR') or define('PLUGINS_DIR', implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'plugins')));
+
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', getenv('DEBUG'));
-defined('DEBUG_FILE') or define('DEBUG_FILE', getenv('DEBUG_FILE') ?: __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
-
-// Plugin directory
-defined('PLUGINS_DIR') or define('PLUGINS_DIR', __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'plugins');
+defined('DEBUG_FILE') or define('DEBUG_FILE', getenv('DEBUG_FILE') ?: DATA_DIR.DIRECTORY_SEPARATOR.'debug.log');
 
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', build_app_version('$Format:%d$', '$Format:%H$'));
@@ -14,7 +20,7 @@ defined('APP_VERSION') or define('APP_VERSION', build_app_version('$Format:%d$',
 defined('DB_DRIVER') or define('DB_DRIVER', 'sqlite');
 
 // Sqlite configuration
-defined('DB_FILENAME') or define('DB_FILENAME', 'data'.DIRECTORY_SEPARATOR.'db.sqlite');
+defined('DB_FILENAME') or define('DB_FILENAME', DATA_DIR.DIRECTORY_SEPARATOR.'db.sqlite');
 
 // Mysql/Postgres configuration
 defined('DB_USERNAME') or define('DB_USERNAME', 'root');
@@ -81,9 +87,6 @@ defined('ENABLE_XFRAME') or define('ENABLE_XFRAME', true);
 
 // Syslog
 defined('ENABLE_SYSLOG') or define('ENABLE_SYSLOG', getenv('ENABLE_SYSLOG'));
-
-// Default files directory
-defined('FILES_DIR') or define('FILES_DIR', 'data'.DIRECTORY_SEPARATOR.'files');
 
 // Escape html inside markdown text
 defined('MARKDOWN_ESCAPE_HTML') or define('MARKDOWN_ESCAPE_HTML', true);

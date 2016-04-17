@@ -10,10 +10,13 @@ New features:
 
 Improvements:
 
+* Allow people to install Kanboard outside of the DocumentRoot
+* Allow plugins to be loaded from another folder
 * Filter/Lexer/QueryBuilder refactoring
 
 Bug fixes:
 
+* Fixed form submission with Meta+Enter keyboard shortcut
 * Removed PHP notices in comment suppression view
 
 Version 1.0.27

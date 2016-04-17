@@ -42,7 +42,17 @@ Kanboard.App.prototype.keyboardShortcuts = function() {
 
     // Submit form
     Mousetrap.bindGlobal("mod+enter", function() {
-        $("form").submit();
+        var forms = $("form");
+
+        if (forms.length == 1) {
+            forms.submit();
+        } else if (forms.length > 1) {
+            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+                $(document.activeElement).parents("form").submit();
+            } else if (self.get("Popover").isOpen()) {
+                $("#popover-container form").submit();
+            }
+        }
     });
 
     // Open board selector

@@ -41,7 +41,6 @@
     "autoload" : {
         "classmap" : ["app/"],
         "psr-4" : {
-            "Kanboard\\Plugin\\": "plugins/",
             "Kanboard\\" : "app/"
         },
         "files" : [
