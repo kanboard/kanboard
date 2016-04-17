@@ -2,6 +2,7 @@
 a {
     color: #3366CC;
     border: none;
+    text-decoration: none;
 }
 
 a:focus {

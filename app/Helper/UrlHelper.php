@@ -43,7 +43,6 @@ class UrlHelper extends Base
     public function button($icon, $label, $controller, $action, array $params = array(), $class = '')
     {
         $icon = '<i class="fa '.$icon.' fa-fw"></i> ';
-        $class = 'btn '.$class;
         return $this->link($icon.$label, $controller, $action, $params, false, $class);
     }
 

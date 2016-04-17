@@ -46,11 +46,11 @@
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-plus fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <?php if ($has_project_creation_access): ?>
-                            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?></li>
+                            <li><?= $this->url->button('fa-plus', t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?></li>
                         <?php endif ?>
                         <?php if ($is_private_project_enabled): ?>
                         <li>
-                            <i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
+                            <?= $this->url->button('fa-lock', t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
                         </li>
                         <?php endif ?>
                     </ul>
@@ -62,39 +62,31 @@
                     <ul>
                         <li class="no-hover"><strong><?= $this->text->e($this->user->getFullname()) ?></strong></li>
                         <li>
-                            <i class="fa fa-tachometer fa-fw"></i>
-                            <?= $this->url->link(t('My dashboard'), 'app', 'index', array('user_id' => $this->user->getId())) ?>
+                            <?= $this->url->button('fa-tachometer', t('My dashboard'), 'app', 'index', array('user_id' => $this->user->getId())) ?>
                         </li>
                         <li>
-                            <i class="fa fa-home fa-fw"></i>
-                            <?= $this->url->link(t('My profile'), 'user', 'show', array('user_id' => $this->user->getId())) ?>
+                            <?= $this->url->button('fa-home', t('My profile'), 'user', 'show', array('user_id' => $this->user->getId())) ?>
                         </li>
                         <li>
-                            <i class="fa fa-folder fa-fw"></i>
-                            <?= $this->url->link(t('Projects management'), 'project', 'index') ?>
+                            <?= $this->url->button('fa-folder', t('Projects management'), 'project', 'index') ?>
                         </li>
                         <?php if ($this->user->hasAccess('user', 'index')): ?>
                             <li>
-                                <i class="fa fa-user fa-fw"></i>
-                                <?= $this->url->link(t('Users management'), 'user', 'index') ?>
+                                <?= $this->url->button('fa-user', t('Users management'), 'user', 'index') ?>
                             </li>
                             <li>
-                                <i class="fa fa-group fa-fw"></i>
-                                <?= $this->url->link(t('Groups management'), 'group', 'index') ?>
+                                <?= $this->url->button('fa-group', t('Groups management'), 'group', 'index') ?>
                             </li>
                             <li>
-                                <i class="fa fa-cog fa-fw"></i>
-                                <?= $this->url->link(t('Settings'), 'config', 'index') ?>
+                                <?= $this->url->button('fa-cog', t('Settings'), 'config', 'index') ?>
                             </li>
                         <?php endif ?>
                         <li>
-                            <i class="fa fa-life-ring fa-fw"></i>
-                            <?= $this->url->link(t('Documentation'), 'doc', 'show') ?>
+                            <?= $this->url->button('fa-life-ring', t('Documentation'), 'doc', 'show') ?>
                         </li>
                         <?php if (! DISABLE_LOGOUT): ?>
                             <li>
-                                <i class="fa fa-sign-out fa-fw"></i>
-                                <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
+                                <?= $this->url->button('fa-sign-out', t('Logout'), 'auth', 'logout') ?>
                             </li>
                         <?php endif ?>
                     </ul>

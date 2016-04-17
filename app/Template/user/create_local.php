@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'user', 'index') ?></li>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
+            <li><?= $this->url->button('fa-user', t('All users'), 'user', 'index') ?></li>
+            <li><?= $this->url->button('fa-user', t('New remote user'), 'user', 'create', array('remote' => 1)) ?></li>
         </ul>
     </div>
     <section>

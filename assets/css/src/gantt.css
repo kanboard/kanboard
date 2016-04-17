@@ -66,6 +66,10 @@ div.ganttview-vtheader-series-name {
     white-space: nowrap;
 }
 
+div.ganttview-vtheader-series-name i {
+    cursor: help;
+}
+
 div.ganttview-vtheader-series-name a {
     color: #666;
     text-decoration: none;

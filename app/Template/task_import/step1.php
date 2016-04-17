@@ -31,4 +31,4 @@
         <li><?= t('The due date must use the ISO format: YYYY-MM-DD') ?></li>
     </ul>
 </div>
-<p><i class="fa fa-download fa-fw"></i><?= $this->url->link(t('Download CSV template'), 'taskImport', 'template', array('project_id' => $project['id'])) ?></p>
+<p><?= $this->url->button('fa-download', t('Download CSV template'), 'taskImport', 'template', array('project_id' => $project['id'])) ?></p>
