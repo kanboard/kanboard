@@ -174,7 +174,8 @@ List of template hooks:
 | `template:task:details:third-column`       | Task summary third column                          |
 | `template:task:details:fourth-column`      | Task summary fourth column                         |
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
-| `template:task:sidebar`                    | Sidebar on task page                               |
+| `template:task:sidebar:actions`            | Sidebar on task page (section actions)             |
+| `template:task:sidebar:information`        | Sidebar on task page (section information)         |
 | `template:task:form:left-column`           | Left column in task form                           |
 | `template:task:form:right-column`          | Right column in task form                          |
 | `template:task:show:top   `                | Show task page: top                                |
