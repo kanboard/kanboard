@@ -11,7 +11,7 @@
         <?php endif ?>
 
         <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
-            <li <?= $this->app->checkMenuSelection('ProjectEdit', 'edit') ?><?= $this->app->checkMenuSelection('ProjectEdit', 'dates') ?><?= $this->app->checkMenuSelection('ProjectEdit', 'description') ?><?= $this->app->checkMenuSelection('ProjectEdit', 'priority') ?>>
+            <li <?= $this->app->checkMenuSelection('ProjectEdit') ?>>
                 <?= $this->url->link(t('Edit project'), 'ProjectEdit', 'edit', array('project_id' => $project['id'])) ?>
             </li>
             <li <?= $this->app->checkMenuSelection('project', 'share') ?>>
