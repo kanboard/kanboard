@@ -2,8 +2,8 @@
     <h2><?= t('My notifications') ?></h2>
 
 <?php if (empty($notifications)): ?>
-    <p class="alert"><?= t('No new notifications.') ?></p>
 </div>
+<p class="alert"><?= t('No new notifications.') ?></p>
 <?php else: ?>
     <ul>
         <li>
