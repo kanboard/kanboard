@@ -41,11 +41,12 @@ If you would like to install Kanboard outside of the web server document root, y
 
 ```bash
 .
-├── .htaccess -> ../kanboard/.htaccess
 ├── assets -> ../kanboard/assets
+├── doc -> ../kanboard/doc
 ├── favicon.ico -> ../kanboard/favicon.ico
 ├── index.php -> ../kanboard/index.php
-└── jsonrpc.php -> ../kanboard/jsonrpc.php
+├── jsonrpc.php -> ../kanboard/jsonrpc.php
+└── robots.txt -> ../kanboard/robots.txt
 ```
 
 The `.htaccess` is optional because its content can be included directly in the Apache configuration.
