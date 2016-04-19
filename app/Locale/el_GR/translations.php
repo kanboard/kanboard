@@ -709,7 +709,7 @@ return array(
     'view the board on Kanboard' => 'δείτε τον πίνακα στο Kanboard',
     'The task have been moved to the first swimlane' => 'Η εργασία αυτή έχει μετακινηθεί στην πρώτη λωρίδα',
     'The task have been moved to another swimlane:' => 'Η εργασία αυτή έχει μετακινηθεί σε άλλη λωρίδα:',
-    'Overdue tasks for the project "%s"' => 'Εκπρόθεσμες εργασίες για το έργο « %s »',
+    // 'Overdue tasks for the project(s) "%s"' => 'Εκπρόθεσμες εργασίες για το έργο « %s »',
     'New title: %s' => 'Νέος τίτλος: %s',
     'The task is not assigned anymore' => 'Η εργασία δεν έχει ανατεθεί πλέον',
     'New assignee: %s' => 'Καινούργια ανάθεση: %s',

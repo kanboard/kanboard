@@ -709,7 +709,7 @@ return array(
     'view the board on Kanboard' => 'แสดงบอร์ดบนคังบอร์ด',
     'The task have been moved to the first swimlane' => 'งานถูกย้านไปสวิมเลนแรก',
     'The task have been moved to another swimlane:' => 'งานถูกย้านไปสวิมเลนอื่น:',
-    'Overdue tasks for the project "%s"' => 'งานที่เกินกำหนดสำหรับโปรเจค "%s"',
+    // 'Overdue tasks for the project(s) "%s"' => 'งานที่เกินกำหนดสำหรับโปรเจค "%s"',
     'New title: %s' => 'ชื่อเรื่องใหม่: %s',
     'The task is not assigned anymore' => 'ไม่กำหนดผู้รับผิดชอบ',
     'New assignee: %s' => 'ผู้รับผิดชอบใหม่: %s',

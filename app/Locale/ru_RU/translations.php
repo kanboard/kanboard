@@ -709,7 +709,7 @@ return array(
     'view the board on Kanboard' => 'посмотреть доску на Kanboard',
     'The task have been moved to the first swimlane' => 'Эта задача была перемещена в первую дорожку',
     'The task have been moved to another swimlane:' => 'Эта задача была перемещена в другую дорожку:',
-    'Overdue tasks for the project "%s"' => 'Просроченные задачи для проекта "%s"',
+    // 'Overdue tasks for the project(s) "%s"' => 'Просроченные задачи для проекта "%s"',
     'New title: %s' => 'Новый заголовок: %s',
     'The task is not assigned anymore' => 'Задача больше не назначена',
     'New assignee: %s' => 'Новый назначенный: %s',
