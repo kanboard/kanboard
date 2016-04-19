@@ -4,7 +4,6 @@ namespace Kanboard\Console;
 
 use Kanboard\Model\Task;
 use Kanboard\Core\Security\Role;
-use Kanboard\Model\ProjectUserRole;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,7 +23,7 @@ class TaskOverdueNotificationCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if($input->getOption('group')) {
+        if ($input->getOption('group')) {
             $tasks = $this->sendGroupOverdueTaskNotifications();
         } elseif ($input->getOption('manager')) {
             $tasks = $this->sendOverdueTaskNotificationsToManagers();
@@ -90,8 +89,8 @@ class TaskOverdueNotificationCommand extends BaseCommand
 
         foreach ($this->groupByColumn($tasks, 'project_id') as $project_id => $project_tasks) {
             $users = $this->userNotification->getUsersWithNotificationEnabled($project_id);
-
             $managers = array();
+
             foreach ($users as $user) {
                 $role = $this->projectUserRole->getUserRole($project_id, $user['id']);
                 if($role == Role::PROJECT_MANAGER) {
@@ -159,7 +158,7 @@ class TaskOverdueNotificationCommand extends BaseCommand
      * Send overdue tasks for a project manager(s)
      *
      * @access public
-     * @param  array   $user
+     * @param  array   $manager
      * @param  array   $tasks
      */
     public function sendUserOverdueTaskNotificationsToManagers(array $manager, array $tasks)
