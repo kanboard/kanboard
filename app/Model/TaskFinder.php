@@ -35,6 +35,7 @@ class TaskFinder extends Base
                         Task::TABLE.'.date_started',
                         Task::TABLE.'.project_id',
                         Task::TABLE.'.color_id',
+                        Task::TABLE.'.priority',
                         Task::TABLE.'.time_spent',
                         Task::TABLE.'.time_estimated',
                         Project::TABLE.'.name AS project_name',
@@ -67,6 +68,7 @@ class TaskFinder extends Base
                         'tasks.date_creation',
                         'tasks.project_id',
                         'tasks.color_id',
+                        'tasks.priority',
                         'tasks.time_spent',
                         'tasks.time_estimated',
                         'projects.name AS project_name'
@@ -138,7 +140,6 @@ class TaskFinder extends Base
                 Project::TABLE.'.name AS project_name'
             )
             ->join(User::TABLE, 'id', 'owner_id', Task::TABLE)
-            ->left(User::TABLE, 'uc', 'id', Task::TABLE, 'creator_id')
             ->join(Category::TABLE, 'id', 'category_id', Task::TABLE)
             ->join(Column::TABLE, 'id', 'column_id', Task::TABLE)
             ->join(Swimlane::TABLE, 'id', 'swimlane_id', Task::TABLE)
@@ -361,27 +362,6 @@ class TaskFinder extends Base
 
         $rq = $this->db->execute($sql, array($task_id));
         return $rq->fetch(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * Get iCal query
-     *
-     * @access public
-     * @return \PicoDb\Table
-     */
-    public function getICalQuery()
-    {
-        return $this->db->table(Task::TABLE)
-            ->left(User::TABLE, 'ua', 'id', Task::TABLE, 'owner_id')
-            ->left(User::TABLE, 'uc', 'id', Task::TABLE, 'creator_id')
-            ->columns(
-                Task::TABLE.'.*',
-                'ua.email AS assignee_email',
-                'ua.name AS assignee_name',
-                'ua.username AS assignee_username',
-                'uc.email AS creator_email',
-                'uc.username AS creator_username'
-            );
     }
 
     /**
