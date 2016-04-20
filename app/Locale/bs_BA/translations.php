@@ -1167,4 +1167,6 @@ return array(
     'Projects where "%s" is member' => 'Projekti gdje je "%s" član',
     'Open tasks assigned to "%s"' => 'Otvoreni zadaci dodijeljeni "%s"',
     'Closed tasks assigned to "%s"' => 'Zatvoreni zadaci dodijeljeni "%s"',
+    'Group by date' => 'Grupiši po datumu',
+    'Group by task' => 'Grupiši po zadatku',
 );

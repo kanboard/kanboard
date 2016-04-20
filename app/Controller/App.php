@@ -183,10 +183,11 @@ class App extends Base
     public function notifications()
     {
         $user = $this->getUser();
+        $group_by = $this->request->getStringParam('group_by', 'date_creation');
 
         $this->response->html($this->helper->layout->dashboard('app/notifications', array(
             'title' => t('My notifications'),
-            'notifications' => $this->userUnreadNotification->getAll($user['id']),
+            'notifications' => $this->userUnreadNotification->getAll($user['id'], $group_by),
             'user' => $user,
         )));
     }

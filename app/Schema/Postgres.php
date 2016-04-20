@@ -6,7 +6,13 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 89;
+const VERSION = 90;
+
+function version_90(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE user_has_unread_notifications ADD COLUMN task_id INTEGER DEFAULT 0 NULL");
+    $pdo->exec("ALTER TABLE user_has_unread_notifications ADD CONSTRAINT user_has_notifications_ibfk_3 FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE");
+}
 
 function version_89(PDO $pdo)
 {
