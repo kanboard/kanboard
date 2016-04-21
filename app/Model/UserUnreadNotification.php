@@ -57,6 +57,7 @@ class UserUnreadNotification extends Base
      */
     public function getAll($user_id, $group_by='date_creation')
     {
+        $grouped_events = array();
         $events = $this->db->table(self::TABLE)->eq('user_id', $user_id)->asc('date_creation')->findAll();
 
         foreach ($events as &$event) {
