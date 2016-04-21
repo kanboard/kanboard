@@ -10,8 +10,7 @@ const VERSION = 102;
 
 function version_102(PDO $pdo)
 {
-    $pdo->exec("ALTER TABLE user_has_unread_notifications ADD COLUMN task_id INTEGER DEFAULT 0 NULL");
-    $pdo->exec("ALTER TABLE user_has_unread_notifications ADD CONSTRAINT user_has_notifications_ibfk_3 FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE");
+    $pdo->exec("ALTER TABLE user_has_unread_notifications ADD COLUMN task_id INTEGER REFERENCES tasks(id)");
 }
 
 function version_101(PDO $pdo)
