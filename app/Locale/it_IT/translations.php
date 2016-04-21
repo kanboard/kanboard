@@ -1167,4 +1167,6 @@ return array(
     'Projects where "%s" is member' => 'Progetti all\'interno dei quali "%s" è membro',
     'Open tasks assigned to "%s"' => 'Task aperti assegnati a "%s"',
     'Closed tasks assigned to "%s"' => 'Task chiusi assegnati a "%s"',
+    // 'Group by date' => '',
+    // 'Group by task' => '',
 );

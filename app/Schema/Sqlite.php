@@ -6,7 +6,12 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 101;
+const VERSION = 102;
+
+function version_102(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE user_has_unread_notifications ADD COLUMN task_id INTEGER REFERENCES tasks(id)");
+}
 
 function version_101(PDO $pdo)
 {

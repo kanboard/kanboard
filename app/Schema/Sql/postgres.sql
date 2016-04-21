@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: action_has_params; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: action_has_params; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE action_has_params (
@@ -61,7 +61,7 @@ ALTER SEQUENCE action_has_params_id_seq OWNED BY action_has_params.id;
 
 
 --
--- Name: actions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: actions; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE actions (
@@ -92,7 +92,7 @@ ALTER SEQUENCE actions_id_seq OWNED BY actions.id;
 
 
 --
--- Name: columns; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: columns; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE columns (
@@ -125,7 +125,7 @@ ALTER SEQUENCE columns_id_seq OWNED BY columns.id;
 
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE comments (
@@ -158,7 +158,7 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- Name: currencies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: currencies; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE currencies (
@@ -168,7 +168,7 @@ CREATE TABLE currencies (
 
 
 --
--- Name: custom_filters; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: custom_filters; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE custom_filters (
@@ -202,7 +202,7 @@ ALTER SEQUENCE custom_filters_id_seq OWNED BY custom_filters.id;
 
 
 --
--- Name: group_has_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: group_has_users; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE group_has_users (
@@ -212,7 +212,7 @@ CREATE TABLE group_has_users (
 
 
 --
--- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE groups (
@@ -242,7 +242,7 @@ ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
 
 
 --
--- Name: last_logins; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: last_logins; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE last_logins (
@@ -275,7 +275,7 @@ ALTER SEQUENCE last_logins_id_seq OWNED BY last_logins.id;
 
 
 --
--- Name: links; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: links; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE links (
@@ -305,7 +305,7 @@ ALTER SEQUENCE links_id_seq OWNED BY links.id;
 
 
 --
--- Name: password_reset; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: password_reset; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE password_reset (
@@ -320,7 +320,7 @@ CREATE TABLE password_reset (
 
 
 --
--- Name: plugin_schema_versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: plugin_schema_versions; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE plugin_schema_versions (
@@ -330,7 +330,7 @@ CREATE TABLE plugin_schema_versions (
 
 
 --
--- Name: project_activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_activities; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_activities (
@@ -364,7 +364,7 @@ ALTER SEQUENCE project_activities_id_seq OWNED BY project_activities.id;
 
 
 --
--- Name: project_daily_column_stats; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_daily_column_stats; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_daily_column_stats (
@@ -378,7 +378,7 @@ CREATE TABLE project_daily_column_stats (
 
 
 --
--- Name: project_daily_stats; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_daily_stats; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_daily_stats (
@@ -429,7 +429,7 @@ ALTER SEQUENCE project_daily_summaries_id_seq OWNED BY project_daily_column_stat
 
 
 --
--- Name: project_has_categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_categories; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_has_categories (
@@ -460,7 +460,7 @@ ALTER SEQUENCE project_has_categories_id_seq OWNED BY project_has_categories.id;
 
 
 --
--- Name: project_has_files; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_files; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_has_files (
@@ -495,7 +495,7 @@ ALTER SEQUENCE project_has_files_id_seq OWNED BY project_has_files.id;
 
 
 --
--- Name: project_has_groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_groups; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_has_groups (
@@ -506,7 +506,7 @@ CREATE TABLE project_has_groups (
 
 
 --
--- Name: project_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_has_metadata (
@@ -519,7 +519,7 @@ CREATE TABLE project_has_metadata (
 
 
 --
--- Name: project_has_notification_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_notification_types; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_has_notification_types (
@@ -549,7 +549,7 @@ ALTER SEQUENCE project_has_notification_types_id_seq OWNED BY project_has_notifi
 
 
 --
--- Name: project_has_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_users; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE project_has_users (
@@ -560,7 +560,7 @@ CREATE TABLE project_has_users (
 
 
 --
--- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE projects (
@@ -605,7 +605,7 @@ ALTER SEQUENCE projects_id_seq OWNED BY projects.id;
 
 
 --
--- Name: remember_me; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: remember_me; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE remember_me (
@@ -640,7 +640,7 @@ ALTER SEQUENCE remember_me_id_seq OWNED BY remember_me.id;
 
 
 --
--- Name: schema_version; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_version; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE schema_version (
@@ -649,7 +649,7 @@ CREATE TABLE schema_version (
 
 
 --
--- Name: settings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: settings; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE settings (
@@ -661,7 +661,7 @@ CREATE TABLE settings (
 
 
 --
--- Name: subtask_time_tracking; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: subtask_time_tracking; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE subtask_time_tracking (
@@ -694,7 +694,7 @@ ALTER SEQUENCE subtask_time_tracking_id_seq OWNED BY subtask_time_tracking.id;
 
 
 --
--- Name: subtasks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: subtasks; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE subtasks (
@@ -710,7 +710,7 @@ CREATE TABLE subtasks (
 
 
 --
--- Name: swimlanes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: swimlanes; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE swimlanes (
@@ -743,7 +743,7 @@ ALTER SEQUENCE swimlanes_id_seq OWNED BY swimlanes.id;
 
 
 --
--- Name: task_has_external_links; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_external_links; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE task_has_external_links (
@@ -779,7 +779,7 @@ ALTER SEQUENCE task_has_external_links_id_seq OWNED BY task_has_external_links.i
 
 
 --
--- Name: task_has_files; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_files; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE task_has_files (
@@ -814,7 +814,7 @@ ALTER SEQUENCE task_has_files_id_seq OWNED BY task_has_files.id;
 
 
 --
--- Name: task_has_links; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_links; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE task_has_links (
@@ -845,7 +845,7 @@ ALTER SEQUENCE task_has_links_id_seq OWNED BY task_has_links.id;
 
 
 --
--- Name: task_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE task_has_metadata (
@@ -877,7 +877,7 @@ ALTER SEQUENCE task_has_subtasks_id_seq OWNED BY subtasks.id;
 
 
 --
--- Name: tasks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tasks; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE tasks (
@@ -934,7 +934,7 @@ ALTER SEQUENCE tasks_id_seq OWNED BY tasks.id;
 
 
 --
--- Name: transitions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: transitions; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE transitions (
@@ -969,7 +969,7 @@ ALTER SEQUENCE transitions_id_seq OWNED BY transitions.id;
 
 
 --
--- Name: user_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE user_has_metadata (
@@ -982,7 +982,7 @@ CREATE TABLE user_has_metadata (
 
 
 --
--- Name: user_has_notification_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_notification_types; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE user_has_notification_types (
@@ -1012,7 +1012,7 @@ ALTER SEQUENCE user_has_notification_types_id_seq OWNED BY user_has_notification
 
 
 --
--- Name: user_has_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE user_has_notifications (
@@ -1022,12 +1022,13 @@ CREATE TABLE user_has_notifications (
 
 
 --
--- Name: user_has_unread_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_unread_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE user_has_unread_notifications (
     id integer NOT NULL,
     user_id integer NOT NULL,
+    task_id integer NULL,
     date_creation bigint NOT NULL,
     event_name character varying(50) NOT NULL,
     event_data text NOT NULL
@@ -1054,7 +1055,7 @@ ALTER SEQUENCE user_has_unread_notifications_id_seq OWNED BY user_has_unread_not
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE TABLE users (
@@ -1292,7 +1293,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Name: action_has_params_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: action_has_params_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY action_has_params
@@ -1300,7 +1301,7 @@ ALTER TABLE ONLY action_has_params
 
 
 --
--- Name: actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY actions
@@ -1308,7 +1309,7 @@ ALTER TABLE ONLY actions
 
 
 --
--- Name: columns_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: columns_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY columns
@@ -1316,7 +1317,7 @@ ALTER TABLE ONLY columns
 
 
 --
--- Name: columns_title_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: columns_title_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY columns
@@ -1324,7 +1325,7 @@ ALTER TABLE ONLY columns
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY comments
@@ -1332,7 +1333,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: currencies_currency_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: currencies_currency_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY currencies
@@ -1340,7 +1341,7 @@ ALTER TABLE ONLY currencies
 
 
 --
--- Name: custom_filters_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: custom_filters_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY custom_filters
@@ -1348,7 +1349,7 @@ ALTER TABLE ONLY custom_filters
 
 
 --
--- Name: group_has_users_group_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: group_has_users_group_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY group_has_users
@@ -1356,7 +1357,7 @@ ALTER TABLE ONLY group_has_users
 
 
 --
--- Name: groups_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: groups_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY groups
@@ -1364,7 +1365,7 @@ ALTER TABLE ONLY groups
 
 
 --
--- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY groups
@@ -1372,7 +1373,7 @@ ALTER TABLE ONLY groups
 
 
 --
--- Name: last_logins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: last_logins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY last_logins
@@ -1380,7 +1381,7 @@ ALTER TABLE ONLY last_logins
 
 
 --
--- Name: links_label_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: links_label_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY links
@@ -1388,7 +1389,7 @@ ALTER TABLE ONLY links
 
 
 --
--- Name: links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY links
@@ -1396,7 +1397,7 @@ ALTER TABLE ONLY links
 
 
 --
--- Name: password_reset_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: password_reset_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY password_reset
@@ -1404,7 +1405,7 @@ ALTER TABLE ONLY password_reset
 
 
 --
--- Name: plugin_schema_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: plugin_schema_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY plugin_schema_versions
@@ -1412,7 +1413,7 @@ ALTER TABLE ONLY plugin_schema_versions
 
 
 --
--- Name: project_activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_activities
@@ -1420,7 +1421,7 @@ ALTER TABLE ONLY project_activities
 
 
 --
--- Name: project_daily_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_daily_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_daily_stats
@@ -1428,7 +1429,7 @@ ALTER TABLE ONLY project_daily_stats
 
 
 --
--- Name: project_daily_summaries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_daily_summaries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_daily_column_stats
@@ -1436,7 +1437,7 @@ ALTER TABLE ONLY project_daily_column_stats
 
 
 --
--- Name: project_has_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_has_categories
@@ -1444,7 +1445,7 @@ ALTER TABLE ONLY project_has_categories
 
 
 --
--- Name: project_has_categories_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_categories_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_has_categories
@@ -1452,7 +1453,7 @@ ALTER TABLE ONLY project_has_categories
 
 
 --
--- Name: project_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_has_files
@@ -1460,7 +1461,7 @@ ALTER TABLE ONLY project_has_files
 
 
 --
--- Name: project_has_groups_group_id_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_groups_group_id_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_has_groups
@@ -1468,7 +1469,7 @@ ALTER TABLE ONLY project_has_groups
 
 
 --
--- Name: project_has_metadata_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_metadata_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_has_metadata
@@ -1476,7 +1477,7 @@ ALTER TABLE ONLY project_has_metadata
 
 
 --
--- Name: project_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_has_notification_types
@@ -1484,7 +1485,7 @@ ALTER TABLE ONLY project_has_notification_types
 
 
 --
--- Name: project_has_notification_types_project_id_notification_type_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_notification_types_project_id_notification_type_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_has_notification_types
@@ -1492,7 +1493,7 @@ ALTER TABLE ONLY project_has_notification_types
 
 
 --
--- Name: project_has_users_project_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_has_users_project_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY project_has_users
@@ -1500,7 +1501,7 @@ ALTER TABLE ONLY project_has_users
 
 
 --
--- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY projects
@@ -1508,7 +1509,7 @@ ALTER TABLE ONLY projects
 
 
 --
--- Name: remember_me_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: remember_me_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY remember_me
@@ -1516,7 +1517,7 @@ ALTER TABLE ONLY remember_me
 
 
 --
--- Name: settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY settings
@@ -1524,7 +1525,7 @@ ALTER TABLE ONLY settings
 
 
 --
--- Name: subtask_time_tracking_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: subtask_time_tracking_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY subtask_time_tracking
@@ -1532,7 +1533,7 @@ ALTER TABLE ONLY subtask_time_tracking
 
 
 --
--- Name: swimlanes_name_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: swimlanes_name_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY swimlanes
@@ -1540,7 +1541,7 @@ ALTER TABLE ONLY swimlanes
 
 
 --
--- Name: swimlanes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: swimlanes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY swimlanes
@@ -1548,7 +1549,7 @@ ALTER TABLE ONLY swimlanes
 
 
 --
--- Name: task_has_external_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_external_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY task_has_external_links
@@ -1556,7 +1557,7 @@ ALTER TABLE ONLY task_has_external_links
 
 
 --
--- Name: task_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY task_has_files
@@ -1564,7 +1565,7 @@ ALTER TABLE ONLY task_has_files
 
 
 --
--- Name: task_has_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY task_has_links
@@ -1572,7 +1573,7 @@ ALTER TABLE ONLY task_has_links
 
 
 --
--- Name: task_has_metadata_task_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_metadata_task_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY task_has_metadata
@@ -1580,7 +1581,7 @@ ALTER TABLE ONLY task_has_metadata
 
 
 --
--- Name: task_has_subtasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_subtasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY subtasks
@@ -1588,7 +1589,7 @@ ALTER TABLE ONLY subtasks
 
 
 --
--- Name: tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY tasks
@@ -1596,7 +1597,7 @@ ALTER TABLE ONLY tasks
 
 
 --
--- Name: transitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: transitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY transitions
@@ -1604,7 +1605,7 @@ ALTER TABLE ONLY transitions
 
 
 --
--- Name: user_has_metadata_user_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_metadata_user_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY user_has_metadata
@@ -1612,7 +1613,7 @@ ALTER TABLE ONLY user_has_metadata
 
 
 --
--- Name: user_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY user_has_notification_types
@@ -1620,7 +1621,7 @@ ALTER TABLE ONLY user_has_notification_types
 
 
 --
--- Name: user_has_notifications_project_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_notifications_project_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY user_has_notifications
@@ -1628,7 +1629,7 @@ ALTER TABLE ONLY user_has_notifications
 
 
 --
--- Name: user_has_unread_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_unread_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY user_has_unread_notifications
@@ -1636,7 +1637,7 @@ ALTER TABLE ONLY user_has_unread_notifications
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY users
@@ -1644,126 +1645,126 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: categories_project_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_project_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX categories_project_idx ON project_has_categories USING btree (project_id);
 
 
 --
--- Name: columns_project_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: columns_project_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX columns_project_idx ON columns USING btree (project_id);
 
 
 --
--- Name: comments_reference_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: comments_reference_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX comments_reference_idx ON comments USING btree (reference);
 
 
 --
--- Name: comments_task_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: comments_task_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX comments_task_idx ON comments USING btree (task_id);
 
 
 --
--- Name: files_task_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: files_task_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX files_task_idx ON task_has_files USING btree (task_id);
 
 
 --
--- Name: project_daily_column_stats_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: project_daily_column_stats_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX project_daily_column_stats_idx ON project_daily_column_stats USING btree (day, project_id, column_id);
 
 
 --
--- Name: project_daily_stats_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: project_daily_stats_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX project_daily_stats_idx ON project_daily_stats USING btree (day, project_id);
 
 
 --
--- Name: subtasks_task_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: subtasks_task_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX subtasks_task_idx ON subtasks USING btree (task_id);
 
 
 --
--- Name: swimlanes_project_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: swimlanes_project_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX swimlanes_project_idx ON swimlanes USING btree (project_id);
 
 
 --
--- Name: task_has_links_task_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_links_task_index; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX task_has_links_task_index ON task_has_links USING btree (task_id);
 
 
 --
--- Name: task_has_links_unique; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: task_has_links_unique; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX task_has_links_unique ON task_has_links USING btree (link_id, task_id, opposite_task_id);
 
 
 --
--- Name: tasks_project_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: tasks_project_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX tasks_project_idx ON tasks USING btree (project_id);
 
 
 --
--- Name: tasks_reference_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: tasks_reference_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX tasks_reference_idx ON tasks USING btree (reference);
 
 
 --
--- Name: transitions_project_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: transitions_project_index; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX transitions_project_index ON transitions USING btree (project_id);
 
 
 --
--- Name: transitions_task_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: transitions_task_index; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX transitions_task_index ON transitions USING btree (task_id);
 
 
 --
--- Name: transitions_user_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: transitions_user_index; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE INDEX transitions_user_index ON transitions USING btree (user_id);
 
 
 --
--- Name: user_has_notification_types_user_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: user_has_notification_types_user_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX user_has_notification_types_user_idx ON user_has_notification_types USING btree (user_id, notification_type);
 
 
 --
--- Name: users_username_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: users_username_idx; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
 CREATE UNIQUE INDEX users_username_idx ON users USING btree (username);
@@ -2127,6 +2128,14 @@ ALTER TABLE ONLY user_has_notifications
 
 ALTER TABLE ONLY user_has_unread_notifications
     ADD CONSTRAINT user_has_unread_notifications_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: user_has_unread_notifications_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_has_unread_notifications
+    ADD CONSTRAINT user_has_unread_notifications_task_id_fkey FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
 
 
 --

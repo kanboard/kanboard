@@ -88,8 +88,15 @@ class UserUnreadNotificationTest extends Base
         $this->assertEmpty($wn->getAll(2));
 
         $notifications = $wn->getAll(1);
-        $this->assertCount(2, $notifications);
-        $this->assertArrayHasKey('title', $notifications[0]);
-        $this->assertTrue(is_array($notifications[0]['event_data']));
+
+        $this->assertCount(2, $notifications[strtotime('today UTC')]);
+        $this->assertArrayHasKey('title', $notifications[strtotime('today UTC')][0]);
+        $this->assertTrue(is_array($notifications[strtotime('today UTC')][0]['event_data']));
+
+        $notifications = $wn->getAll(1, 'task_id');
+
+        $this->assertCount(2, $notifications[1]);
+        $this->assertArrayHasKey('title', $notifications[1][0]);
+        $this->assertTrue(is_array($notifications[1][0]['event_data']));
     }
 }

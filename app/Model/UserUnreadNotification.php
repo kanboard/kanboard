@@ -27,8 +27,20 @@ class UserUnreadNotification extends Base
      */
     public function create($user_id, $event_name, array $event_data)
     {
+        $task_id = null;
+        if(strpos(json_encode($event_data), 'comment')) {
+            $task_id = $event_data['comment']['task_id'];
+        } elseif(strpos(json_encode($event_data), 'task.overdue')) {
+            if (count($event_data['tasks']) == 1) {
+                $task_id = $event_data['tasks'][0]['id'];
+            }
+        } elseif(isset($event_data['task']['id'])) {
+            $task_id = $event_data['task']['id'];
+        }
+
         $this->db->table(self::TABLE)->insert(array(
             'user_id' => $user_id,
+            'task_id' => $task_id,
             'date_creation' => time(),
             'event_name' => $event_name,
             'event_data' => json_encode($event_data),
@@ -40,18 +52,28 @@ class UserUnreadNotification extends Base
      *
      * @access public
      * @param  integer $user_id
+     * @param  string $group_by
      * @return array
      */
-    public function getAll($user_id)
+    public function getAll($user_id, $group_by='date_creation')
     {
+        $grouped_events = array();
         $events = $this->db->table(self::TABLE)->eq('user_id', $user_id)->asc('date_creation')->findAll();
 
         foreach ($events as &$event) {
             $event['event_data'] = json_decode($event['event_data'], true);
             $event['title'] = $this->notification->getTitleWithoutAuthor($event['event_name'], $event['event_data']);
+
+            if($group_by == 'date_creation') {
+                $grouped_events[strtotime(date("Y-m-d", $event['date_creation']))][] = $event;
+            } else {
+                $grouped_events[$event['task_id']][] = $event;
+            }
         }
 
-        return $events;
+        ksort($grouped_events);
+
+        return $grouped_events;
     }
 
     /**
