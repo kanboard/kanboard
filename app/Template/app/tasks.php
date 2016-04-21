@@ -25,9 +25,9 @@
                 <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </td>
             <td>
-            	<?php if ($task['priority'] > 0): ?>
-            		<?= $this->text->e($task['priority'])?>
-            	<?php endif?>
+                <?php if ($task['priority'] >= 0): ?>
+                    P<?= $this->text->e($task['priority'])?>
+                <?php endif?>
             </td>
             <td>
                 <?php if (! empty($task['time_spent'])): ?>
