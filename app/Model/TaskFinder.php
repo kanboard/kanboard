@@ -35,6 +35,7 @@ class TaskFinder extends Base
                         Task::TABLE.'.date_started',
                         Task::TABLE.'.project_id',
                         Task::TABLE.'.color_id',
+                        Task::TABLE.'.priority',
                         Task::TABLE.'.time_spent',
                         Task::TABLE.'.time_estimated',
                         Project::TABLE.'.name AS project_name',
@@ -67,6 +68,7 @@ class TaskFinder extends Base
                         'tasks.date_creation',
                         'tasks.project_id',
                         'tasks.color_id',
+                        'tasks.priority',
                         'tasks.time_spent',
                         'tasks.time_estimated',
                         'projects.name AS project_name'
