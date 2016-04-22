@@ -2,6 +2,7 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Model\Task as TaskModel;
 
 /**
@@ -12,6 +13,12 @@ use Kanboard\Model\Task as TaskModel;
  */
 class Task extends Base
 {
+    public function searchTasks($project_id, $query)
+    {
+        $this->checkProjectPermission($project_id);
+        return $this->taskLexer->build($query)->withFilter(new TaskProjectFilter($project_id))->toArray();
+    }
+
     public function getTask($task_id)
     {
         $this->checkTaskPermission($task_id);
