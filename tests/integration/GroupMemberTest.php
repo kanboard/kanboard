@@ -30,6 +30,14 @@ class GroupMemberTest extends Base
         $this->assertFalse($this->app->isGroupMember($groupId, 2));
     }
 
+    public function testGetGroups()
+    {
+        $groups = $this->app->getMemberGroups(1);
+        $this->assertCount(1, $groups);
+        $this->assertEquals(1, $groups[0]['id']);
+        $this->assertEquals('My Group A', $groups[0]['name']);
+    }
+
     public function testRemove()
     {
         $groupId = $this->getGroupId();
