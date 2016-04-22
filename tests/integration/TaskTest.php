@@ -4,6 +4,22 @@ require_once __DIR__.'/Base.php';
 
 class TaskTest extends Base
 {
+    public function testPriorityAttribute()
+    {
+        $project_id = $this->app->createProject('My project');
+        $this->assertNotFalse($project_id);
+
+        $task_id = $this->app->createTask(array('project_id' => $project_id, 'title' => 'My task', 'priority' => 2));
+
+        $task = $this->app->getTask($task_id);
+        $this->assertEquals(2, $task['priority']);
+
+        $this->assertTrue($this->app->updateTask(array('id' => $task_id, 'project_id' => $project_id, 'priority' => 3)));
+
+        $task = $this->app->getTask($task_id);
+        $this->assertEquals(3, $task['priority']);
+    }
+
     public function testChangeAssigneeToAssignableUser()
     {
         $project_id = $this->app->createProject('My project');

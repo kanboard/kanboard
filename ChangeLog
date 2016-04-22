@@ -10,6 +10,7 @@ New features:
 
 Improvements:
 
+* Added priority field to API procedures
 * Added API procedure "getMemberGroups"
 * Added parameters for overdue tasks notifications: group by projects and send only to managers
 * Allow people to install Kanboard outside of the DocumentRoot
