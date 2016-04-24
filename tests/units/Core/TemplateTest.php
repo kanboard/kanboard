@@ -25,7 +25,7 @@ class TemplateTest extends Base
     {
         $template = new Template($this->container['helper']);
         $this->assertStringEndsWith(
-            implode(DIRECTORY_SEPARATOR, array('app', 'Core', '..', '..', 'plugins', 'Myplugin', 'Template', 'a', 'b.php')),
+            implode(DIRECTORY_SEPARATOR, array(PLUGINS_DIR, 'Myplugin', 'Template', 'a', 'b.php')),
             $template->getTemplateFile('myplugin:a'.DIRECTORY_SEPARATOR.'b')
         );
     }
@@ -36,7 +36,7 @@ class TemplateTest extends Base
         $template->setTemplateOverride('a'.DIRECTORY_SEPARATOR.'b', 'myplugin:c');
 
         $this->assertStringEndsWith(
-            implode(DIRECTORY_SEPARATOR, array('app', 'Core', '..', '..', 'plugins', 'Myplugin', 'Template', 'c.php')),
+            implode(DIRECTORY_SEPARATOR, array(PLUGINS_DIR, 'Myplugin', 'Template', 'c.php')),
             $template->getTemplateFile('a'.DIRECTORY_SEPARATOR.'b')
         );
 
