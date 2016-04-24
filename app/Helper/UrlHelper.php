@@ -40,10 +40,10 @@ class UrlHelper extends Base
      * @param  string  $class      CSS class attribute
      * @return string
      */
-    public function button($icon, $label, $controller, $action, array $params = array(), $class = '')
+    public function button($icon, $label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '')
     {
         $icon = '<i class="fa '.$icon.' fa-fw"></i> ';
-        return $this->link($icon.$label, $controller, $action, $params, false, $class);
+        return $this->link($icon.$label, $controller, $action, $params, $csrf, $class, $title, $new_tab, $anchor);
     }
 
     /**

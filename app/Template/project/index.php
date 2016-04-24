@@ -2,10 +2,10 @@
     <div class="page-header">
         <ul>
             <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
-                <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'projectuser', 'managers') ?></li>
+                <li><?= $this->url->button('fa-user', t('Users overview'), 'projectuser', 'managers') ?></li>
             <?php endif ?>
             <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
-                <li><i class="fa fa-sliders fa-fw"></i><?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?></li>
+                <li><?= $this->url->button('fa-sliders', t('Projects Gantt chart'), 'gantt', 'projects') ?></li>
             <?php endif ?>
         </ul>
     </div>
