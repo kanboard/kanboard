@@ -10,6 +10,7 @@ New features:
 
 Improvements:
 
+* Category and user filters do not append anymore in search field
 * Added more template hooks
 * Added tasks search with the API
 * Added priority field to API procedures

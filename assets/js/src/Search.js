@@ -16,15 +16,21 @@ Kanboard.Search.prototype.focus = function() {
 };
 
 Kanboard.Search.prototype.listen = function() {
-    // Filter helper for search
     $(document).on("click", ".filter-helper", function (e) {
         e.preventDefault();
 
         var filter = $(this).data("filter");
         var appendFilter = $(this).data("append-filter");
+        var uniqueFilter = $(this).data("unique-filter");
         var input = $("#form-search");
 
-        if (appendFilter) {
+        if (uniqueFilter) {
+            var attribute = uniqueFilter.substr(0, uniqueFilter.indexOf(':'));
+            filter = input.val().replace(new RegExp('(' + attribute + ':[#a-z0-9]+)', 'g'), '');
+            filter = filter.replace(new RegExp('(' + attribute + ':"(.+)")', 'g'), '');
+            filter = filter.trim();
+            filter += ' ' + uniqueFilter;
+        } else if (appendFilter) {
             filter = input.val() + " " + appendFilter;
         }
 
