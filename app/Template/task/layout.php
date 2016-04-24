@@ -1,5 +1,6 @@
 <section id="main">
     <?= $this->projectHeader->render($project, 'Listing', 'show') ?>
+    <?= $this->hook->render('template:task:layout:top', array('task' => $task)) ?>
     <section
         class="sidebar-container" id="task-view"
         data-edit-url="<?= $this->url->href('taskmodification', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"

@@ -34,7 +34,7 @@
     'project' => $project,
 )) ?>
 
-<?= $this->hook->render('template:task:show:before-attachements', array('task' => $task, 'project' => $project)) ?>
+<?= $this->hook->render('template:task:show:before-attachments', array('task' => $task, 'project' => $project)) ?>
 <?= $this->render('task_file/show', array(
     'task' => $task,
     'files' => $files,

@@ -55,6 +55,6 @@
         </li>
         <?php endif ?>
 
-        <?= $this->hook->render('template:task:dropdown') ?>
+        <?= $this->hook->render('template:task:dropdown', array('task' => $task)) ?>
     </ul>
 </div>

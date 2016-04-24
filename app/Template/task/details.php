@@ -1,6 +1,8 @@
 <section id="task-summary">
     <h2><?= $this->text->e($task['title']) ?></h2>
 
+    <?= $this->hook->render('template:task:details:top', array('task' => $task)) ?>
+
     <div class="task-summary-container color-<?= $task['color_id'] ?>">
         <div class="task-summary-column">
             <ul class="no-bullet">
@@ -149,4 +151,6 @@
             <?= $this->url->button('fa-play', t('Set start date'), 'taskmodification', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </div>
     <?php endif ?>
+
+    <?= $this->hook->render('template:task:details:bottom', array('task' => $task)) ?>
 </section>

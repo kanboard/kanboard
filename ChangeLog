@@ -10,6 +10,7 @@ New features:
 
 Improvements:
 
+* Added more template hooks
 * Added tasks search with the API
 * Added priority field to API procedures
 * Added API procedure "getMemberGroups"
