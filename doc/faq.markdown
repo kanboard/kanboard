@@ -110,6 +110,7 @@ Where can I find a list of related projects?
 - [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
 - [Python client script by @dzudek](https://gist.github.com/fguillot/84c70d4928eb1e0cb374)
 - [Shell script for SQLite to MySQL/MariaDB migration by @oliviermaridat](https://github.com/oliviermaridat/kanboard-sqlite2mysql)
+- [Git hooks for integration with Kanboard by Gene Pavlovsky](https://github.com/gene-pavlovsky/kanboard-git-hooks)
 
 
 Are there some tutorials about Kanboard in other languages?
