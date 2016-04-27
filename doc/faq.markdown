@@ -49,6 +49,18 @@ php_value arg_separator.output "&"
 Otherwise Kanboard will try to override the value directly in PHP.
 
 
+Authentication failure with the API and Apache + PHP-FPM
+--------------------------------------------------------
+
+php-cgi under Apache does not pass HTTP Basic user/pass to PHP by default.
+For this workaround to work, add these lines to your `.htaccess` file:
+
+```
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+```
+
+
 Known issues with eAccelerator
 ------------------------------
 
