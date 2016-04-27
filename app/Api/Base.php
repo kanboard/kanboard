@@ -2,7 +2,7 @@
 
 namespace Kanboard\Api;
 
-use JsonRPC\AccessDeniedException;
+use JsonRPC\Exception\AccessDeniedException;
 
 /**
  * Base class

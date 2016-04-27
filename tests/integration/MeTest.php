@@ -15,7 +15,7 @@ class MeTest extends Base
     }
 
     /**
-     * @expectedException JsonRPC\AccessDeniedException
+     * @expectedException JsonRPC\Exception\AccessDeniedException
      */
     public function testNotAllowedAppProcedure()
     {
@@ -23,7 +23,7 @@ class MeTest extends Base
     }
 
     /**
-     * @expectedException JsonRPC\AccessDeniedException
+     * @expectedException JsonRPC\Exception\AccessDeniedException
      */
     public function testNotAllowedUserProcedure()
     {
@@ -31,7 +31,7 @@ class MeTest extends Base
     }
 
     /**
-     * @expectedException JsonRPC\AccessDeniedException
+     * @expectedException JsonRPC\Exception\AccessDeniedException
      */
     public function testNotAllowedProjectForUser()
     {
@@ -140,7 +140,7 @@ class MeTest extends Base
     }
 
     /**
-     * @expectedException JsonRPC\AccessDeniedException
+     * @expectedException JsonRPC\Exception\AccessDeniedException
      */
     public function testGetAdminTask()
     {
@@ -148,7 +148,7 @@ class MeTest extends Base
     }
 
     /**
-     * @expectedException JsonRPC\AccessDeniedException
+     * @expectedException JsonRPC\Exception\AccessDeniedException
      */
     public function testGetProjectActivityDenied()
     {
