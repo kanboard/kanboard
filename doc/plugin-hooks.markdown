@@ -160,6 +160,7 @@ List of template hooks:
 | `template:config:integrations`             | Integration page in global settings                |
 | `template:dashboard:sidebar`               | Sidebar on dashboard page                          |
 | `template:export:sidebar`                  | Sidebar on export pages                            |
+| `template:header:dropdown`                 | Dropdown on header                                 |
 | `template:layout:head`                     | Page layout `<head/>` tag                          |
 | `template:layout:top`                      | Page layout top header                             |
 | `template:layout:bottom`                   | Page layout footer                                 |
