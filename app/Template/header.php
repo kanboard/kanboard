@@ -87,6 +87,9 @@
                                 <?= $this->url->link(t('Settings'), 'config', 'index') ?>
                             </li>
                         <?php endif ?>
+
+                        <?= $this->hook->render('template:header:dropdown') ?>
+
                         <li>
                             <i class="fa fa-life-ring fa-fw"></i>
                             <?= $this->url->link(t('Documentation'), 'doc', 'show') ?>
