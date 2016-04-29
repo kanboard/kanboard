@@ -11,7 +11,7 @@
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,
                 'popover' . (! empty($task['category_description']) ? ' tooltip' : ''),
-                ! empty($task['category_description']) ? $this->text->markdown($task['category_description']) : t('Change category')
+                ! empty($task['category_description']) ? $this->text->markdownAttribute($task['category_description']) : t('Change category')
             ) ?>
         <?php endif ?>
     </span>
@@ -76,7 +76,7 @@
             <i class="fa fa-flag flag-milestone"></i>
         </span>
     <?php endif ?>
-    
+
     <?= $this->hook->render('template:board:task:icons', array('task' => $task)) ?>
 
     <?= $this->task->formatPriority($project, $task) ?>

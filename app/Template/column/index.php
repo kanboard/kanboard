@@ -28,7 +28,7 @@
                 <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></i>
                 <?= $this->text->e($column['title']) ?>
                 <?php if (! empty($column['description'])): ?>
-                    <span class="tooltip" title='<?= $this->text->e($this->text->markdown($column['description'])) ?>'>
+                    <span class="tooltip" title="<?= $this->text->markdownAttribute($column['description']) ?>">
                         <i class="fa fa-info-circle"></i>
                     </span>
                 <?php endif ?>

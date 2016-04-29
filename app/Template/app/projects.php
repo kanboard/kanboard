@@ -31,7 +31,7 @@
 
                 <?= $this->url->link($this->text->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
                 <?php if (! empty($project['description'])): ?>
-                    <span class="tooltip" title='<?= $this->text->e($this->text->markdown($project['description'])) ?>'>
+                    <span class="tooltip" title="<?= $this->text->markdownAttribute($project['description']) ?>">
                         <i class="fa fa-info-circle"></i>
                     </span>
                 <?php endif ?>

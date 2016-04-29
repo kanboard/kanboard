@@ -22,6 +22,7 @@ Improvements:
 
 Bug fixes:
 
+* Fixed improper Markdown escaping for some tooltips
 * Closing all tasks by column, also update closed tasks
 * Fixed wrong task link generation within Markdown text
 * Fixed wrong URL on comment toggle link for sorting

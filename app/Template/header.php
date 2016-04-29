@@ -8,7 +8,7 @@
                 <?= $this->text->e($title) ?>
             </span>
             <?php if (! empty($description)): ?>
-                <span class="tooltip" title='<?= $this->text->e($this->text->markdown($description)) ?>'>
+                <span class="tooltip" title="<?= $this->text->markdownAttribute($description) ?>">
                     <i class="fa fa-info-circle"></i>
                 </span>
             <?php endif ?>
