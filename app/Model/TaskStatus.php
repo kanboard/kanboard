@@ -83,7 +83,13 @@ class TaskStatus extends Base
      */
     public function closeTasksBySwimlaneAndColumn($swimlane_id, $column_id)
     {
-        $task_ids = $this->db->table(Task::TABLE)->eq('swimlane_id', $swimlane_id)->eq('column_id', $column_id)->findAllByColumn('id');
+        $task_ids = $this->db
+            ->table(Task::TABLE)
+            ->eq('swimlane_id', $swimlane_id)
+            ->eq('column_id', $column_id)
+            ->eq(Task::TABLE.'.is_active', Task::STATUS_OPEN)
+            ->findAllByColumn('id');
+
         $this->closeMultipleTasks($task_ids);
     }
 

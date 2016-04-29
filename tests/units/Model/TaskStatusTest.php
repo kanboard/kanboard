@@ -26,6 +26,9 @@ class TaskStatusTest extends Base
         $this->assertEquals(2, $tc->create(array('title' => 'test', 'project_id' => 1)));
         $this->assertEquals(3, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2)));
         $this->assertEquals(4, $tc->create(array('title' => 'test', 'project_id' => 1, 'swimlane_id' => 1)));
+        $this->assertEquals(5, $tc->create(array('title' => 'test', 'project_id' => 1, 'is_active' => 0, 'date_completed' => strtotime('2015-01-01'))));
+
+        $taskBefore = $tf->getById(5);
 
         $this->assertEquals(2, $tf->countByColumnAndSwimlaneId(1, 1, 0));
         $this->assertEquals(1, $tf->countByColumnAndSwimlaneId(1, 1, 1));
@@ -45,6 +48,10 @@ class TaskStatusTest extends Base
         $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 1, 0));
         $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 1, 1));
         $this->assertEquals(0, $tf->countByColumnAndSwimlaneId(1, 2, 0));
+
+        $taskAfter = $tf->getById(5);
+        $this->assertEquals(strtotime('2015-01-01'), $taskAfter['date_completed']);
+        $this->assertEquals($taskBefore['date_modification'], $taskAfter['date_modification']);
     }
 
     public function testStatus()
