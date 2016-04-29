@@ -12,29 +12,7 @@
 
     <div class="comment-content">
         <div class="markdown">
-            <?php if (isset($is_public) && $is_public): ?>
-                <?= $this->text->markdown(
-                    $comment['comment'],
-                    array(
-                        'controller' => 'task',
-                        'action' => 'readonly',
-                        'params' => array(
-                            'token' => $project['token']
-                        )
-                    )
-                ) ?>
-            <?php else: ?>
-                <?= $this->text->markdown(
-                    $comment['comment'],
-                    array(
-                        'controller' => 'task',
-                        'action' => 'show',
-                        'params' => array(
-                            'project_id' => $task['project_id']
-                        )
-                    )
-                ) ?>
-            <?php endif ?>
+            <?= $this->text->markdown($comment['comment'], isset($is_public) && $is_public) ?>
         </div>
     </div>
 

@@ -93,4 +93,23 @@ class TaskFinderTest extends Base
         $this->assertEquals(1, $tf->countByProjectId(1));
         $this->assertEquals(2, $tf->countByProjectId(2));
     }
+
+    public function testGetProjectToken()
+    {
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
+        $projectModel = new Project($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project #2')));
+
+        $this->assertTrue($projectModel->enablePublicAccess(1));
+
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task #2', 'project_id' => 2)));
+
+        $project = $projectModel->getById(1);
+        $this->assertEquals($project['token'], $taskFinderModel->getProjectToken(1));
+        $this->assertEmpty($taskFinderModel->getProjectToken(2));
+    }
 }

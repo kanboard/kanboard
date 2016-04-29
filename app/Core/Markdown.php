@@ -15,12 +15,12 @@ use Pimple\Container;
 class Markdown extends Parsedown
 {
     /**
-     * Link params for tasks
+     * Task links generated will use the project token instead
      *
      * @access private
-     * @var array
+     * @var boolean
      */
-    private $link = array();
+    private $isPublicLink = false;
 
     /**
      * Container
@@ -35,11 +35,11 @@ class Markdown extends Parsedown
      *
      * @access public
      * @param  Container  $container
-     * @param  array      $link
+     * @param  boolean    $isPublicLink
      */
-    public function __construct(Container $container, array $link)
+    public function __construct(Container $container, $isPublicLink)
     {
-        $this->link = $link;
+        $this->isPublicLink = $isPublicLink;
         $this->container = $container;
         $this->InlineTypes['#'][] = 'TaskLink';
         $this->InlineTypes['@'][] = 'UserLink';
@@ -53,26 +53,26 @@ class Markdown extends Parsedown
      *
      * @access public
      * @param  array  $Excerpt
-     * @return array
+     * @return array|null
      */
     protected function inlineTaskLink(array $Excerpt)
     {
-        if (! empty($this->link) && preg_match('!#(\d+)!i', $Excerpt['text'], $matches)) {
-            $url = $this->container['helper']->url->href(
-                $this->link['controller'],
-                $this->link['action'],
-                $this->link['params'] + array('task_id' => $matches[1])
-            );
+        if (preg_match('!#(\d+)!i', $Excerpt['text'], $matches)) {
+            $link = $this->buildTaskLink($matches[1]);
 
-            return array(
-                'extent' => strlen($matches[0]),
-                'element' => array(
-                    'name' => 'a',
-                    'text' => $matches[0],
-                    'attributes' => array('href' => $url)
-                ),
-            );
+            if (! empty($link)) {
+                return array(
+                    'extent' => strlen($matches[0]),
+                    'element' => array(
+                        'name' => 'a',
+                        'text' => $matches[0],
+                        'attributes' => array('href' => $link),
+                    ),
+                );
+            }
         }
+
+        return null;
     }
 
     /**
@@ -82,11 +82,11 @@ class Markdown extends Parsedown
      *
      * @access public
      * @param  array  $Excerpt
-     * @return array
+     * @return array|null
      */
     protected function inlineUserLink(array $Excerpt)
     {
-        if (preg_match('/^@([^\s]+)/', $Excerpt['text'], $matches)) {
+        if (! $this->isPublicLink && preg_match('/^@([^\s]+)/', $Excerpt['text'], $matches)) {
             $user_id = $this->container['user']->getIdByUsername($matches[1]);
 
             if (! empty($user_id)) {
@@ -102,5 +102,40 @@ class Markdown extends Parsedown
                 );
             }
         }
+
+        return null;
+    }
+
+    /**
+     * Build task link
+     *
+     * @access private
+     * @param  integer $task_id
+     * @return string
+     */
+    private function buildTaskLink($task_id)
+    {
+        if ($this->isPublicLink) {
+            $token = $this->container['memoryCache']->proxy($this->container['taskFinder'], 'getProjectToken', $task_id);
+
+            if (! empty($token)) {
+                return $this->container['helper']->url->href(
+                    'task',
+                    'readonly',
+                    array(
+                        'token' => $token,
+                        'task_id' => $task_id,
+                    )
+                );
+            }
+
+            return '';
+        }
+
+        return $this->container['helper']->url->href(
+            'task',
+            'show',
+            array('task_id' => $task_id)
+        );
     }
 }

@@ -22,6 +22,7 @@ Improvements:
 
 Bug fixes:
 
+* Fixed wrong task link generation within Markdown text
 * Fixed wrong URL on comment toggle link for sorting
 * Fixed form submission with Meta+Enter keyboard shortcut
 * Removed PHP notices in comment suppression view

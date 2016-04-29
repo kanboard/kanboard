@@ -452,4 +452,20 @@ class TaskFinder extends Base
     {
         return $this->db->table(Task::TABLE)->eq('id', $task_id)->exists();
     }
+
+    /**
+     * Get project token
+     *
+     * @access public
+     * @param  integer $task_id
+     * @return string
+     */
+    public function getProjectToken($task_id)
+    {
+        return $this->db
+            ->table(Task::TABLE)
+            ->eq(Task::TABLE.'.id', $task_id)
+            ->join(Project::TABLE, 'id', 'project_id')
+            ->findOneColumn(Project::TABLE.'.token');
+    }
 }

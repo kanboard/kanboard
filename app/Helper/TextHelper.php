@@ -27,13 +27,13 @@ class TextHelper extends Base
     /**
      * Markdown transformation
      *
-     * @param  string    $text     Markdown content
-     * @param  array     $link     Link parameters for replacement
+     * @param  string    $text
+     * @param  boolean   $isPublicLink
      * @return string
      */
-    public function markdown($text, array $link = array())
+    public function markdown($text, $isPublicLink = false)
     {
-        $parser = new Markdown($this->container, $link);
+        $parser = new Markdown($this->container, $isPublicLink);
         $parser->setMarkupEscaped(MARKDOWN_ESCAPE_HTML);
         return $parser->text($text);
     }
