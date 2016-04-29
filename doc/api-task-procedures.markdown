@@ -16,6 +16,7 @@ API Task Procedures
     - **category_id** (integer, optional)
     - **score** (integer, optional)
     - **swimlane_id** (integer, optional)
+    - **priority** (integer, optional)
     - **recurrence_status**  (integer, optional)
     - **recurrence_trigger**  (integer, optional)
     - **recurrence_factor**  (integer, optional)
@@ -398,6 +399,7 @@ Response example:
     - **description** Markdown content (string, optional)
     - **category_id** (integer, optional)
     - **score** (integer, optional)
+    - **priority** (integer, optional)
     - **recurrence_status**  (integer, optional)
     - **recurrence_trigger**  (integer, optional)
     - **recurrence_factor**  (integer, optional)
@@ -632,5 +634,64 @@ Response example:
     "jsonrpc": "2.0",
     "id": 1662458687,
     "result": 6
+}
+```
+
+## searchTasks
+
+- Purpose: **Find tasks by using the search engine**
+- Parameters:
+    - **project_id** (integer, required)
+    - **query** (string, required)
+- Result on success: **list of tasks**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "searchTasks",
+    "id": 1468511716,
+    "params": {
+        "project_id": 2,
+        "query": "assignee:nobody"
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1468511716,
+    "result": [
+        {
+            "nb_comments": "0",
+            "nb_files": "0",
+            "nb_subtasks": "0",
+            "nb_completed_subtasks": "0",
+            "nb_links": "0",
+            "nb_external_links": "0",
+            "is_milestone": null,
+            "id": "3",
+            "reference": "",
+            "title": "T3",
+            "description": "",
+            "date_creation": "1461365164",
+            "date_modification": "1461365164",
+            "date_completed": null,
+            "date_started": null,
+            "date_due": "0",
+            "color_id": "yellow",
+            "project_id": "2",
+            "column_id": "5",
+            "swimlane_id": "0",
+            "owner_id": "0",
+            "creator_id": "0"
+            // ...
+         }
+    ]
 }
 ```

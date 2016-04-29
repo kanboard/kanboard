@@ -2,7 +2,7 @@
 
 namespace Kanboard\Api;
 
-use JsonRPC\AccessDeniedException;
+use JsonRPC\Exception\AccessDeniedException;
 
 /**
  * Base class
@@ -40,6 +40,7 @@ abstract class Base extends \Kanboard\Core\Base
         'getBoard',
         'getProjectActivity',
         'getOverdueTasksByProject',
+        'searchTasks',
     );
 
     public function checkProcedurePermission($is_user, $procedure)

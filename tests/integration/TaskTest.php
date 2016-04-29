@@ -4,6 +4,42 @@ require_once __DIR__.'/Base.php';
 
 class TaskTest extends Base
 {
+    public function testSearchTasks()
+    {
+        $project_id1 = $this->app->createProject('My project');
+        $project_id2 = $this->app->createProject('My project');
+        $this->assertNotFalse($project_id1);
+        $this->assertNotFalse($project_id2);
+
+        $this->assertNotFalse($this->app->createTask(array('project_id' => $project_id1, 'title' => 'T1')));
+        $this->assertNotFalse($this->app->createTask(array('project_id' => $project_id1, 'title' => 'T2')));
+        $this->assertNotFalse($this->app->createTask(array('project_id' => $project_id2, 'title' => 'T3')));
+
+        $tasks = $this->app->searchTasks($project_id1, 't2');
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('T2', $tasks[0]['title']);
+
+        $tasks = $this->app->searchTasks(array('project_id' => $project_id2, 'query' => 'assignee:nobody'));
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('T3', $tasks[0]['title']);
+    }
+
+    public function testPriorityAttribute()
+    {
+        $project_id = $this->app->createProject('My project');
+        $this->assertNotFalse($project_id);
+
+        $task_id = $this->app->createTask(array('project_id' => $project_id, 'title' => 'My task', 'priority' => 2));
+
+        $task = $this->app->getTask($task_id);
+        $this->assertEquals(2, $task['priority']);
+
+        $this->assertTrue($this->app->updateTask(array('id' => $task_id, 'project_id' => $project_id, 'priority' => 3)));
+
+        $task = $this->app->getTask($task_id);
+        $this->assertEquals(3, $task['priority']);
+    }
+
     public function testChangeAssigneeToAssignableUser()
     {
         $project_id = $this->app->createProject('My project');

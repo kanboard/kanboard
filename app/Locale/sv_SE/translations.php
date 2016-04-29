@@ -709,7 +709,7 @@ return array(
     'view the board on Kanboard' => 'visa tavlan på Kanboard',
     'The task have been moved to the first swimlane' => 'Uppgiften har flyttats till första swimlane',
     'The task have been moved to another swimlane:' => 'Uppgiften har flyttats till en annan swimlane:',
-    'Overdue tasks for the project "%s"' => 'Försenade uppgifter för projektet "%s"',
+    // 'Overdue tasks for the project(s) "%s"' => 'Försenade uppgifter för projektet "%s"',
     'New title: %s' => 'Ny titel: %s',
     'The task is not assigned anymore' => 'Uppgiften är inte länge tilldelad',
     'New assignee: %s' => 'Ny tilldelning: %s',

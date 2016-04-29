@@ -10,6 +10,11 @@ namespace Kanboard\Api;
  */
 class GroupMember extends \Kanboard\Core\Base
 {
+    public function getMemberGroups($user_id)
+    {
+        return $this->groupMember->getGroups($user_id);
+    }
+
     public function getGroupMembers($group_id)
     {
         return $this->groupMember->getMembers($group_id);

@@ -2,7 +2,7 @@
 
 namespace Kanboard\Api;
 
-use JsonRPC\AuthenticationFailure;
+use JsonRPC\Exception\AuthenticationFailureException;
 
 /**
  * Base class
@@ -32,7 +32,7 @@ class Auth extends Base
             $this->checkProcedurePermission(false, $method);
         } else {
             $this->logger->error('API authentication failure for '.$username);
-            throw new AuthenticationFailure('Wrong credentials');
+            throw new AuthenticationFailureException('Wrong credentials');
         }
     }
 

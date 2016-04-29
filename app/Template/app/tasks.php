@@ -9,6 +9,7 @@
             <th class="column-5"><?= $paginator->order('Id', 'tasks.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
             <th><?= $paginator->order(t('Task'), 'title') ?></th>
+            <th class="column-5"><?= $paginator->order('Priority', 'tasks.priority') ?></th>
             <th class="column-20"><?= t('Time tracking') ?></th>
             <th class="column-20"><?= $paginator->order(t('Due date'), 'date_due') ?></th>
         </tr>
@@ -22,6 +23,11 @@
             </td>
             <td>
                 <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            </td>
+            <td>
+                <?php if ($task['priority'] >= 0): ?>
+                    P<?= $this->text->e($task['priority'])?>
+                <?php endif?>
             </td>
             <td>
                 <?php if (! empty($task['time_spent'])): ?>

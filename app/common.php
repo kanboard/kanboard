@@ -14,12 +14,16 @@ if (getenv('DATABASE_URL')) {
     define('DB_NAME', ltrim($dbopts["path"], '/'));
 }
 
-if (file_exists('config.php')) {
-    require 'config.php';
+$config_file = implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'config.php'));
+
+if (file_exists($config_file)) {
+    require $config_file;
 }
 
-if (file_exists('data'.DIRECTORY_SEPARATOR.'config.php')) {
-    require 'data'.DIRECTORY_SEPARATOR.'config.php';
+$config_file = implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'data', 'config.php'));
+
+if (file_exists($config_file)) {
+    require $config_file;
 }
 
 require __DIR__.'/constants.php';

@@ -173,6 +173,6 @@ class Comment extends Base
         $order = $this->userSession->getCommentSorting() === 'ASC' ? 'DESC' : 'ASC';
         $this->userSession->setCommentSorting($order);
 
-        $this->response->redirect($this->helper->url->href('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'comments'));
+        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
     }
 }

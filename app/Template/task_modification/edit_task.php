@@ -14,6 +14,8 @@
         <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
         <?= $this->task->selectPriority($project, $values) ?>
         <?= $this->task->selectScore($values, $errors) ?>
+
+        <?= $this->hook->render('template:task:form:left-column', array('values' => $values, 'errors' => $errors)) ?>
     </div>
 
     <div class="form-column">
@@ -21,6 +23,8 @@
         <?= $this->task->selectTimeSpent($values, $errors) ?>
         <?= $this->task->selectStartDate($values, $errors) ?>
         <?= $this->task->selectDueDate($values, $errors) ?>
+
+        <?= $this->hook->render('template:task:form:right-column', array('values' => $values, 'errors' => $errors)) ?>
     </div>
 
     <div class="form-clear">

@@ -169,8 +169,16 @@ List of template hooks:
 | `template:project:integrations`            | Integration page in projects settings              |
 | `template:project:sidebar`                 | Sidebar in project settings                        |
 | `template:project-user:sidebar`            | Sidebar on project user overview page              |
+| `template:task:layout:top`                 | Task layout top (after page header)                |
+| `template:task:details:top`                | Task summary top                                   |
+| `template:task:details:bottom`             | Task summary bottom                                |
+| `template:task:details:first-column`       | Task summary first column                          |
+| `template:task:details:second-column`      | Task summary second column                         |
+| `template:task:details:third-column`       | Task summary third column                          |
+| `template:task:details:fourth-column`      | Task summary fourth column                         |
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
-| `template:task:sidebar`                    | Sidebar on task page                               |
+| `template:task:sidebar:actions`            | Sidebar on task page (section actions)             |
+| `template:task:sidebar:information`        | Sidebar on task page (section information)         |
 | `template:task:form:left-column`           | Left column in task form                           |
 | `template:task:form:right-column`          | Right column in task form                          |
 | `template:task:show:top   `                | Show task page: top                                |
@@ -179,7 +187,7 @@ List of template hooks:
 | `template:task:show:before-tasklinks`      | Show task page: before tasklinks                   |
 | `template:task:show:before-subtasks`       | Show task page: before subtasks                    |
 | `template:task:show:before-timetracking`   | Show task page: before timetracking                |
-| `template:task:show:before-attachements`   | Show task page: before attachments                 |
+| `template:task:show:before-attachments`    | Show task page: before attachments                 |
 | `template:task:show:before-comments`       | Show task page: before comments                    |
 | `template:user:authentication:form`        | "Edit authentication" form in user profile         |
 | `template:user:create-remote:form`         | "Create remote user" form                          |

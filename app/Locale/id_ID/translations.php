@@ -709,7 +709,7 @@ return array(
     'view the board on Kanboard' => 'lihat papan di Kanboard',
     'The task have been moved to the first swimlane' => 'Tugas telah dipindahkan ke swimlane pertama',
     'The task have been moved to another swimlane:' => 'Tugas telah dipindahkan ke swimlane lain:',
-    'Overdue tasks for the project "%s"' => 'Tugas terlambat untuk proyek « %s »',
+    // 'Overdue tasks for the project(s) "%s"' => 'Tugas terlambat untuk proyek « %s »',
     'New title: %s' => 'Judul baru : %s',
     'The task is not assigned anymore' => 'Tugas tidak ditugaskan lagi',
     'New assignee: %s' => 'Penerima baru : %s',

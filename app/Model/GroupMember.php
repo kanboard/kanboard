@@ -108,4 +108,21 @@ class GroupMember extends Base
             ->eq('user_id', $user_id)
             ->exists();
     }
+
+    /**
+     * Get all groups for a given user
+     *
+     * @access public
+     * @param  integer $user_id
+     * @return array
+     */
+    public function getGroups($user_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->columns(Group::TABLE.'.id', Group::TABLE.'.name')
+            ->join(Group::TABLE, 'id', 'group_id')
+            ->eq(self::TABLE.'.user_id', $user_id)
+            ->asc(Group::TABLE.'.name')
+            ->findAll();
+    }
 }

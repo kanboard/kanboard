@@ -709,7 +709,7 @@ return array(
     'view the board on Kanboard' => 'Tabloyu Kanboard\'da görüntüle',
     'The task have been moved to the first swimlane' => 'Görev birinci kulvara taşındı',
     'The task have been moved to another swimlane:' => 'Görev başka bir kulvara taşındı:',
-    'Overdue tasks for the project "%s"' => '"%s" projesi için gecikmiş görevler',
+    // 'Overdue tasks for the project(s) "%s"' => '"%s" projesi için gecikmiş görevler',
     'New title: %s' => 'Yeni başlık: %s',
     'The task is not assigned anymore' => 'Görev artık atanmamış',
     'New assignee: %s' => 'Yeni atanan: %s',

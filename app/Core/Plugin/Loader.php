@@ -2,6 +2,7 @@
 
 namespace Kanboard\Core\Plugin;
 
+use Composer\Autoload\ClassLoader;
 use DirectoryIterator;
 use PDOException;
 use LogicException;
@@ -39,6 +40,10 @@ class Loader extends \Kanboard\Core\Base
     public function scan()
     {
         if (file_exists(PLUGINS_DIR)) {
+            $loader = new ClassLoader();
+            $loader->addPsr4('Kanboard\Plugin\\', PLUGINS_DIR);
+            $loader->register();
+
             $dir = new DirectoryIterator(PLUGINS_DIR);
 
             foreach ($dir as $fileinfo) {
@@ -68,8 +73,7 @@ class Loader extends \Kanboard\Core\Base
 
         $instance = new $class($this->container);
 
-        Tool::buildDic($this->container, $instance->getClasses());
-
+        Tool::buildDIC($this->container, $instance->getClasses());
         Tool::buildDICHelpers($this->container, $instance->getHelpers());
 
         $instance->initialize();

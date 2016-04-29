@@ -23,6 +23,8 @@
             <?= $this->url->link(t('Time tracking'), 'task', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php endif ?>
+
+        <?= $this->hook->render('template:task:sidebar:information', array('task' => $task)) ?>
     </ul>
 
     <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
@@ -91,8 +93,8 @@
                 <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
             </li>
         <?php endif ?>
+
+        <?= $this->hook->render('template:task:sidebar:actions', array('task' => $task)) ?>
     </ul>
     <?php endif ?>
-
-    <?= $this->hook->render('template:task:sidebar', array('task' => $task)) ?>
 </div>

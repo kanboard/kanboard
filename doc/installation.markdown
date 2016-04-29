@@ -34,6 +34,25 @@ You must install [composer](https://getcomposer.org/) to use this method.
 
 Note: This method will install the **current development version**, use at your own risk.
 
+Installation outside of the document root
+-----------------------------------------
+
+If you would like to install Kanboard outside of the web server document root, you need to create at least these symlinks:
+
+```bash
+.
+├── assets -> ../kanboard/assets
+├── doc -> ../kanboard/doc
+├── favicon.ico -> ../kanboard/favicon.ico
+├── index.php -> ../kanboard/index.php
+├── jsonrpc.php -> ../kanboard/jsonrpc.php
+└── robots.txt -> ../kanboard/robots.txt
+```
+
+The `.htaccess` is optional because its content can be included directly in the Apache configuration.
+
+You can also define a custom location for the plugins and files folders by changing the [config file](config.markdown).
+
 Security
 --------
 

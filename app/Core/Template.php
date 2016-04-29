@@ -116,7 +116,7 @@ class Template
         }
 
         if ($plugin !== 'kanboard' && $plugin !== '') {
-            return implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', 'plugins', ucfirst($plugin), 'Template', $template.'.php'));
+            return implode(DIRECTORY_SEPARATOR, array(PLUGINS_DIR, ucfirst($plugin), 'Template', $template.'.php'));
         }
 
         return implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'Template', $template.'.php'));

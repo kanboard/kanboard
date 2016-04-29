@@ -709,7 +709,7 @@ return array(
     'view the board on Kanboard' => '在看板上查看面板',
     'The task have been moved to the first swimlane' => '该任务已被移动到首个里程碑',
     'The task have been moved to another swimlane:' => '该任务已被移动到别的里程碑：',
-    'Overdue tasks for the project "%s"' => '"%s"项目下的超期任务',
+    // 'Overdue tasks for the project(s) "%s"' => '"%s"项目下的超期任务',
     'New title: %s' => '新标题：%s',
     'The task is not assigned anymore' => '该任务没有指派人',
     'New assignee: %s' => '新指派到：%s',

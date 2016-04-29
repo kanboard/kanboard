@@ -49,6 +49,18 @@ php_value arg_separator.output "&"
 Otherwise Kanboard will try to override the value directly in PHP.
 
 
+Authentication failure with the API and Apache + PHP-FPM
+--------------------------------------------------------
+
+php-cgi under Apache does not pass HTTP Basic user/pass to PHP by default.
+For this workaround to work, add these lines to your `.htaccess` file:
+
+```
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+```
+
+
 Known issues with eAccelerator
 ------------------------------
 
@@ -109,6 +121,8 @@ Where can I find a list of related projects?
 - [Trello import script by @matueranet](https://github.com/matueranet/kanboard-import-trello)
 - [Chrome extension by Timo](https://chrome.google.com/webstore/detail/kanboard-quickmenu/akjbeplnnihghabpgcfmfhfmifjljneh?utm_source=chrome-ntp-icon), [Source code](https://github.com/BlueTeck/kanboard_chrome_extension)
 - [Python client script by @dzudek](https://gist.github.com/fguillot/84c70d4928eb1e0cb374)
+- [Shell script for SQLite to MySQL/MariaDB migration by @oliviermaridat](https://github.com/oliviermaridat/kanboard-sqlite2mysql)
+- [Git hooks for integration with Kanboard by Gene Pavlovsky](https://github.com/gene-pavlovsky/kanboard-git-hooks)
 
 
 Are there some tutorials about Kanboard in other languages?

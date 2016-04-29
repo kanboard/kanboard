@@ -709,7 +709,7 @@ return array(
     // 'view the board on Kanboard' => '',
     // 'The task have been moved to the first swimlane' => '',
     // 'The task have been moved to another swimlane:' => '',
-    // 'Overdue tasks for the project "%s"' => '',
+    // 'Overdue tasks for the project(s) "%s"' => '',
     'New title: %s' => 'Nowy tytuł: %s',
     'The task is not assigned anymore' => 'Brak osoby odpowiedzialnej za zadanie',
     'New assignee: %s' => 'Nowy odpowiedzialny: %s',

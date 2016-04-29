@@ -72,5 +72,35 @@ class GroupMemberTest extends Base
         $this->assertCount(2, $users);
         $this->assertEquals('admin', $users[0]['username']);
         $this->assertEquals('user1', $users[1]['username']);
+
+        $groups = $groupMemberModel->getGroups(1);
+        $this->assertCount(1, $groups);
+        $this->assertEquals(1, $groups[0]['id']);
+        $this->assertEquals('Group A', $groups[0]['name']);
+
+        $groups = $groupMemberModel->getGroups(2);
+        $this->assertCount(1, $groups);
+        $this->assertEquals(1, $groups[0]['id']);
+        $this->assertEquals('Group A', $groups[0]['name']);
+
+        $groups = $groupMemberModel->getGroups(3);
+        $this->assertCount(1, $groups);
+        $this->assertEquals(2, $groups[0]['id']);
+        $this->assertEquals('Group B', $groups[0]['name']);
+
+        $groups = $groupMemberModel->getGroups(4);
+        $this->assertCount(1, $groups);
+        $this->assertEquals(2, $groups[0]['id']);
+        $this->assertEquals('Group B', $groups[0]['name']);
+
+        $groups = $groupMemberModel->getGroups(5);
+        $this->assertCount(2, $groups);
+        $this->assertEquals(1, $groups[0]['id']);
+        $this->assertEquals('Group A', $groups[0]['name']);
+        $this->assertEquals(2, $groups[1]['id']);
+        $this->assertEquals('Group B', $groups[1]['name']);
+
+        $groups = $groupMemberModel->getGroups(6);
+        $this->assertCount(0, $groups);
     }
 }

@@ -119,6 +119,12 @@ Emails will be sent to all users with notifications enabled.
 ./kanboard notification:overdue-tasks
 ```
 
+Optional parameters:
+
+- `--show`: Display notifications sent
+- `--group`: Group all overdue tasks for one user (from all projects) in one email
+- `--manager`: Send all overdue tasks to project manager(s) in one email
+
 You can also display the overdue tasks with the flag `--show`:
 
 ```bash

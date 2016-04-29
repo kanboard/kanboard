@@ -1,6 +1,42 @@
 Group Member API Procedures
 ===========================
 
+## getMemberGroups
+
+- Purpose: **Get all groups for a given user**
+- Parameters:
+    - **user_id** (integer, required)
+- Result on success: **List of groups**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getMemberGroups",
+    "id": 1987176726,
+    "params": [
+        "1"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1987176726,
+    "result": [
+        {
+            "id": "1",
+            "name": "My Group A"
+        }
+    ]
+}
+```
+
 ## getGroupMembers
 
 - Purpose: **Get all members of a group**

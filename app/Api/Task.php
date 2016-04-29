@@ -2,6 +2,7 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Model\Task as TaskModel;
 
 /**
@@ -12,6 +13,12 @@ use Kanboard\Model\Task as TaskModel;
  */
 class Task extends Base
 {
+    public function searchTasks($project_id, $query)
+    {
+        $this->checkProjectPermission($project_id);
+        return $this->taskLexer->build($query)->withFilter(new TaskProjectFilter($project_id))->toArray();
+    }
+
     public function getTask($task_id)
     {
         $this->checkTaskPermission($task_id);
@@ -75,7 +82,7 @@ class Task extends Base
     }
 
     public function createTask($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0,
-                                $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0,
+                                $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0, $priority = 0,
                                 $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0,
                                 $recurrence_basedate = 0, $reference = '')
     {
@@ -107,6 +114,7 @@ class Task extends Base
             'recurrence_timeframe' => $recurrence_timeframe,
             'recurrence_basedate' => $recurrence_basedate,
             'reference' => $reference,
+            'priority' => $priority,
         );
 
         list($valid, ) = $this->taskValidator->validateCreation($values);
@@ -115,7 +123,7 @@ class Task extends Base
     }
 
     public function updateTask($id, $title = null, $color_id = null, $owner_id = null,
-                                $date_due = null, $description = null, $category_id = null, $score = null,
+                                $date_due = null, $description = null, $category_id = null, $score = null, $priority = null,
                                 $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
                                 $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null)
     {
@@ -146,6 +154,7 @@ class Task extends Base
             'recurrence_timeframe' => $recurrence_timeframe,
             'recurrence_basedate' => $recurrence_basedate,
             'reference' => $reference,
+            'priority' => $priority,
         );
 
         foreach ($values as $key => $value) {

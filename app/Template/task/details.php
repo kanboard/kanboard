@@ -1,6 +1,8 @@
 <section id="task-summary">
     <h2><?= $this->text->e($task['title']) ?></h2>
 
+    <?= $this->hook->render('template:task:details:top', array('task' => $task)) ?>
+
     <div class="task-summary-container color-<?= $task['color_id'] ?>">
         <div class="task-summary-column">
             <ul class="no-bullet">
@@ -40,6 +42,8 @@
                 </li>
                 <?php endif ?>
                 <li class="smaller">
+
+                <?= $this->hook->render('template:task:details:first-column', array('task' => $task)) ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -64,6 +68,8 @@
                     <strong><?= t('Position:') ?></strong>
                     <span><?= $task['position'] ?></span>
                 </li>
+
+                <?= $this->hook->render('template:task:details:second-column', array('task' => $task)) ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -102,6 +108,8 @@
                     <span><?= t('%s hours', $task['time_spent']) ?></span>
                 </li>
                 <?php endif ?>
+
+                <?= $this->hook->render('template:task:details:third-column', array('task' => $task)) ?>
             </ul>
         </div>
         <div class="task-summary-column">
@@ -132,6 +140,8 @@
                     <span><?= $this->dt->datetime($task['date_moved']) ?></span>
                 </li>
                 <?php endif ?>
+
+                <?= $this->hook->render('template:task:details:fourth-column', array('task' => $task)) ?>
             </ul>
         </div>
     </div>
@@ -141,4 +151,6 @@
             <?= $this->url->button('fa-play', t('Set start date'), 'taskmodification', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </div>
     <?php endif ?>
+
+    <?= $this->hook->render('template:task:details:bottom', array('task' => $task)) ?>
 </section>

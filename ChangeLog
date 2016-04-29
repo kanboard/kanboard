@@ -10,10 +10,20 @@ New features:
 
 Improvements:
 
+* Category and user filters do not append anymore in search field
+* Added more template hooks
+* Added tasks search with the API
+* Added priority field to API procedures
+* Added API procedure "getMemberGroups"
+* Added parameters for overdue tasks notifications: group by projects and send only to managers
+* Allow people to install Kanboard outside of the DocumentRoot
+* Allow plugins to be loaded from another folder
 * Filter/Lexer/QueryBuilder refactoring
 
 Bug fixes:
 
+* Fixed wrong URL on comment toggle link for sorting
+* Fixed form submission with Meta+Enter keyboard shortcut
 * Removed PHP notices in comment suppression view
 
 Version 1.0.27
