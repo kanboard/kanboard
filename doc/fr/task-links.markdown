@@ -3,7 +3,7 @@ Liens entre les tâches
 
 Les tâches peuvent être liées ensemble avec des relations prédéfinies.
 
-![Task Links](http://kanboard.net/screenshots/documentation/task-links.png)
+![Task Links](https://kanboard.net/screenshots/documentation/task-links.png)
 
 Les relations établies par défaut sont les suivantes :
 

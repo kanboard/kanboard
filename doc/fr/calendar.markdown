@@ -13,7 +13,7 @@ Pour l'instant le calendrier permet d'afficher les informations suivantes :
 - Le suivi dans le temps de sous-tâches, tous les segments temporels sont affichés dans le calendrier.
 - Les estimations pour les sous-tâches, les prévisions et le travail restant
 
-![Calendrier](http://kanboard.net/screenshots/documentation/calendar.png)
+![Calendrier](https://kanboard.net/screenshots/documentation/calendar.png)
 
 La configuration du calendrier peut être modifiée dans la page des paramètres.
 

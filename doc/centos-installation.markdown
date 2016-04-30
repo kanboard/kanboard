@@ -24,7 +24,7 @@ Install Kanboard:
 
 ```bash
 cd /var/www/html
-wget http://kanboard.net/kanboard-latest.zip
+wget https://kanboard.net/kanboard-latest.zip
 unzip kanboard-latest.zip
 chown -R apache:apache kanboard/data
 rm kanboard-latest.zip
@@ -70,7 +70,7 @@ Install Kanboard:
 
 ```bash
 cd /var/www/html
-wget http://kanboard.net/kanboard-latest.zip
+wget https://kanboard.net/kanboard-latest.zip
 unzip kanboard-latest.zip
 chown -R apache:apache kanboard/data
 rm kanboard-latest.zip

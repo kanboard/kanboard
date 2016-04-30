@@ -28,13 +28,13 @@ class AttachmentLinkProviderTest extends Base
     {
         $attachmentLinkProvider = new AttachmentLinkProvider($this->container);
 
-        $attachmentLinkProvider->setUserTextInput('http://kanboard.net/FILE.DOC');
+        $attachmentLinkProvider->setUserTextInput('https://kanboard.net/FILE.DOC');
         $this->assertTrue($attachmentLinkProvider->match());
 
-        $attachmentLinkProvider->setUserTextInput('http://kanboard.net/folder/document.PDF');
+        $attachmentLinkProvider->setUserTextInput('https://kanboard.net/folder/document.PDF');
         $this->assertTrue($attachmentLinkProvider->match());
 
-        $attachmentLinkProvider->setUserTextInput('http://kanboard.net/archive.zip');
+        $attachmentLinkProvider->setUserTextInput('https://kanboard.net/archive.zip');
         $this->assertTrue($attachmentLinkProvider->match());
 
         $attachmentLinkProvider->setUserTextInput('  https://kanboard.net/folder/archive.tar ');
@@ -46,13 +46,13 @@ class AttachmentLinkProviderTest extends Base
         $attachmentLinkProvider->setUserTextInput('');
         $this->assertFalse($attachmentLinkProvider->match());
 
-        $attachmentLinkProvider->setUserTextInput('http://kanboard.net/folder/document.html');
+        $attachmentLinkProvider->setUserTextInput('https://kanboard.net/folder/document.html');
         $this->assertFalse($attachmentLinkProvider->match());
 
-        $attachmentLinkProvider->setUserTextInput('http://kanboard.net/folder/DOC.HTML');
+        $attachmentLinkProvider->setUserTextInput('https://kanboard.net/folder/DOC.HTML');
         $this->assertFalse($attachmentLinkProvider->match());
 
-        $attachmentLinkProvider->setUserTextInput('http://kanboard.net/folder/document.do');
+        $attachmentLinkProvider->setUserTextInput('https://kanboard.net/folder/document.do');
         $this->assertFalse($attachmentLinkProvider->match());
     }
 

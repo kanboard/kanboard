@@ -8,7 +8,7 @@ Kanboard
 
 Kanboard is a project management software that focus on the Kanban methodology.
 
-Official website: <http://kanboard.net>
+Official website: <https://kanboard.net>
 
 - Get a visual and clear overview of your project
 - Multiple boards with the ability to drag and drop tasks
@@ -16,7 +16,7 @@ Official website: <http://kanboard.net>
 - Super simple installation
 - Translated in many languages
 - Distributed under [MIT License](https://github.com/fguillot/kanboard/blob/master/LICENSE)
-- The complete [list of features are available on the website](http://kanboard.net/features)
+- The complete [list of features are available on the website](https://kanboard.net/features)
 - [Change Log](https://github.com/fguillot/kanboard/blob/master/ChangeLog)
 - [Documentation](https://github.com/fguillot/kanboard/blob/master/doc/index.markdown)
 
@@ -31,6 +31,6 @@ Authors
 Installation and Upgrade
 ------------------------
 
-- [Requirements](http://kanboard.net/documentation/requirements)
-- [Installation instructions](http://kanboard.net/documentation/installation)
-- [Upgrade to a new version](http://kanboard.net/documentation/update)
+- [Requirements](https://kanboard.net/documentation/requirements)
+- [Installation instructions](https://kanboard.net/documentation/installation)
+- [Upgrade to a new version](https://kanboard.net/documentation/update)

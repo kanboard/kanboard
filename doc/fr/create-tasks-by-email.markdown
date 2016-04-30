@@ -5,9 +5,9 @@ Vous pouvez créer des tâches directement en envoyant un message.
 
 Pour le moment, Kanboard fonctionne avec 3 services externes :
 
-- [Mailgun](http://kanboard.net/documentation/mailgun)
-- [Sendgrid](http://kanboard.net/documentation/sendgrid)
-- [Postmark](http://kanboard.net/documentation/postmark)
+- [Mailgun](https://kanboard.net/documentation/mailgun)
+- [Sendgrid](https://kanboard.net/documentation/sendgrid)
+- [Postmark](https://kanboard.net/documentation/postmark)
 
 Ces services gèrent le courrier entrant sans qu'on ait à configurer un serveur SMTP.
 

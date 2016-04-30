@@ -3,18 +3,18 @@ Créer des tâches
 
 Depuis le tableau, cliquez sur le signe plus + à côté du nom de la colonne :
 
-![Création de tâche à partir du tableau](http://kanboard.net/screenshots/documentation/task-creation-board.png)
+![Création de tâche à partir du tableau](https://kanboard.net/screenshots/documentation/task-creation-board.png)
 
 Le formulaire de création de tâche apparaît :
 
-![Formulaire de création de tâche](http://kanboard.net/screenshots/documentation/task-creation-form.png)
+![Formulaire de création de tâche](https://kanboard.net/screenshots/documentation/task-creation-form.png)
 
 Le seul champ obligatoire est le titre.
 
 Description des champs :
 
 - **Titre** : le titre de votre tâche, tel qu'il sera affiché sur le tableau.
-- **Description** : vous permet d'ajouter davantage d'informations sur la tâche. Le contenu peut être écrit en [Markdown](http://kanboard.net/documentation/syntax-guide).
+- **Description** : vous permet d'ajouter davantage d'informations sur la tâche. Le contenu peut être écrit en [Markdown](https://kanboard.net/documentation/syntax-guide).
 - **Créer une autre tâche** : cochez cette case si vous souhaitez créer une tâche similaire (les champs seront pré-remplis).
 - **Assigné** : la personne qui va travailler sur la tâche.
 - **Catégorie** : une seule catégorie peut être assignée à une tâche.

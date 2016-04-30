@@ -8,7 +8,7 @@ class WebLinkTest extends Base
 {
     public function testGetTitleFromHtml()
     {
-        $url = 'http://kanboard.net/something';
+        $url = 'https://kanboard.net/something';
         $title = 'My title';
         $html = '<!DOCTYPE html><html><head><title>  '.$title.'  </title></head><body>Test</body></html>';
 
@@ -27,7 +27,7 @@ class WebLinkTest extends Base
 
     public function testGetTitleFromUrl()
     {
-        $url = 'http://kanboard.net/something';
+        $url = 'https://kanboard.net/something';
         $html = '<!DOCTYPE html><html><head></head><body>Test</body></html>';
 
         $webLink = new WebLink($this->container);

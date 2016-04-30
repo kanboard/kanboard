@@ -3,7 +3,7 @@ Task Links
 
 Tasks can be linked together with pre-defined relationships:
 
-![Task Links](http://kanboard.net/screenshots/documentation/task-links.png)
+![Task Links](https://kanboard.net/screenshots/documentation/task-links.png)
 
 The default relationships are:
 
