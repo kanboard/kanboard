@@ -1,13 +1,19 @@
 <?php
 
+// Root directory
+define('ROOT_DIR', __DIR__.DIRECTORY_SEPARATOR.'..');
+
+// App directory
+define('APP_DIR', __DIR__);
+
 // Data directory location
-defined('DATA_DIR') or define('DATA_DIR', implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'data')));
+defined('DATA_DIR') or define('DATA_DIR', ROOT_DIR.DIRECTORY_SEPARATOR.'data');
 
 // Files directory (attachments)
 defined('FILES_DIR') or define('FILES_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'files');
 
 // Plugins directory
-defined('PLUGINS_DIR') or define('PLUGINS_DIR', implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'plugins')));
+defined('PLUGINS_DIR') or define('PLUGINS_DIR', ROOT_DIR.DIRECTORY_SEPARATOR.'plugins');
 
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', getenv('DEBUG'));

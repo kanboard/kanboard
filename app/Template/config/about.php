@@ -82,5 +82,5 @@
     <h2><?= t('License') ?></h2>
 </div>
 <div class="listing">
-<?= nl2br(file_get_contents('LICENSE')) ?>
+<?= nl2br(file_get_contents(ROOT_DIR.DIRECTORY_SEPARATOR.'LICENSE')) ?>
 </div>
