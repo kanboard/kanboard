@@ -66,6 +66,10 @@ class Query
 
         $this->entries = $entries;
 
+        if (DEBUG && $this->client->hasLogger()) {
+            $this->client->getLogger()->debug('NbEntries='.$entries['count']);
+        }
+
         return $this;
     }
 

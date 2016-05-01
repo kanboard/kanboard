@@ -26,6 +26,7 @@ Here is the list of available LDAP parameters:
 | `LDAP_GROUP_PROVIDER`           | false          | Enable LDAP group provider for project permissions  |
 | `LDAP_GROUP_BASE_DN`            | Empty          | LDAP Base DN for groups   |
 | `LDAP_GROUP_FILTER`             | Empty          | LDAP group filter (Example: "(&(objectClass=group)(sAMAccountName=%s*))")   |
+| `LDAP_GROUP_USER_FILTER`        | Empty          | If defined, Kanboard will search user groups in LDAP_GROUP_BASE_DN with this filter, it's useful only for posixGroups (Example: `(&(objectClass=posixGroup)(memberUid=%s))`) |
 | `LDAP_GROUP_ATTRIBUTE_NAME`     | cn             | LDAP attribute for the group name  |
 
 Notes:

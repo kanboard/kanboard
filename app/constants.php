@@ -64,6 +64,7 @@ defined('LDAP_GROUP_MANAGER_DN') or define('LDAP_GROUP_MANAGER_DN', '');
 defined('LDAP_GROUP_PROVIDER') or define('LDAP_GROUP_PROVIDER', false);
 defined('LDAP_GROUP_BASE_DN') or define('LDAP_GROUP_BASE_DN', '');
 defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', '');
+defined('LDAP_GROUP_USER_FILTER') or define('LDAP_GROUP_USER_FILTER', '');
 defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
 // Proxy authentication

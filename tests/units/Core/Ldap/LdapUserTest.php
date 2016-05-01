@@ -2,15 +2,18 @@
 
 require_once __DIR__.'/../../Base.php';
 
+use Kanboard\Core\Ldap\Query;
 use Kanboard\Core\Ldap\User;
 use Kanboard\Core\Ldap\Entries;
 use Kanboard\Core\Security\Role;
+use Kanboard\Group\LdapGroupProvider;
 
 class LdapUserTest extends Base
 {
     private $query;
     private $client;
     private $user;
+    private $group;
 
     public function setUp()
     {
@@ -33,14 +36,23 @@ class LdapUserTest extends Base
             ))
             ->getMock();
 
+        $this->group = $this
+            ->getMockBuilder('\Kanboard\Core\Ldap\Group')
+            ->setConstructorArgs(array(new Query($this->client)))
+            ->setMethods(array(
+                'find',
+            ))
+            ->getMock();
+
         $this->user = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\User')
-            ->setConstructorArgs(array($this->query))
+            ->setConstructorArgs(array($this->query, $this->group))
             ->setMethods(array(
                 'getAttributeUsername',
                 'getAttributeEmail',
                 'getAttributeName',
                 'getAttributeGroup',
+                'getGroupUserFilter',
                 'getGroupAdminDn',
                 'getGroupManagerDn',
                 'getBasDn',
@@ -367,6 +379,328 @@ class LdapUserTest extends Base
         $this->assertEquals(null, $user);
     }
 
+    public function testGetUserWithAdminRoleAndPosixGroups()
+    {
+        $entries = new Entries(array(
+            'count' => 1,
+            0 => array(
+                'count' => 2,
+                'dn' => 'uid=my_ldap_user,ou=Users,dc=kanboard,dc=local',
+                'cn' => array(
+                    'count' => 1,
+                    0 => 'My LDAP user',
+                ),
+                'mail' => array(
+                    'count' => 2,
+                    0 => 'user1@localhost',
+                    1 => 'user2@localhost',
+                ),
+                'uid' => array(
+                    'count' => 1,
+                    0 => 'my_ldap_user',
+                ),
+                0 => 'cn',
+                1 => 'mail',
+                2 => 'uid',
+            )
+        ));
+
+        $groups = array(
+            new LdapGroupProvider('CN=Kanboard Admins,OU=Groups,DC=kanboard,DC=local', 'Kanboard Admins')
+        );
+
+        $this->client
+            ->expects($this->any())
+            ->method('getConnection')
+            ->will($this->returnValue('my_ldap_resource'));
+
+        $this->query
+            ->expects($this->once())
+            ->method('execute')
+            ->with(
+                $this->equalTo('OU=Users,DC=kanboard,DC=local'),
+                $this->equalTo('(uid=my_ldap_user)')
+            );
+
+        $this->query
+            ->expects($this->once())
+            ->method('hasResult')
+            ->will($this->returnValue(true));
+
+        $this->query
+            ->expects($this->once())
+            ->method('getEntries')
+            ->will($this->returnValue($entries));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeUsername')
+            ->will($this->returnValue('uid'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeName')
+            ->will($this->returnValue('cn'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeEmail')
+            ->will($this->returnValue('mail'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeGroup')
+            ->will($this->returnValue(''));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupUserFilter')
+            ->will($this->returnValue('(&(objectClass=posixGroup)(memberUid=%s))'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupAdminDn')
+            ->will($this->returnValue('cn=Kanboard Admins,ou=Groups,dc=kanboard,dc=local'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getBasDn')
+            ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
+
+        $this->group
+            ->expects($this->once())
+            ->method('find')
+            ->with('(&(objectClass=posixGroup)(memberUid=my_ldap_user))')
+            ->will($this->returnValue($groups));
+
+        $user = $this->user->find('(uid=my_ldap_user)');
+        $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
+        $this->assertEquals('uid=my_ldap_user,ou=Users,dc=kanboard,dc=local', $user->getDn());
+        $this->assertEquals('my_ldap_user', $user->getUsername());
+        $this->assertEquals('My LDAP user', $user->getName());
+        $this->assertEquals('user1@localhost', $user->getEmail());
+        $this->assertEquals(array('CN=Kanboard Admins,OU=Groups,DC=kanboard,DC=local'), $user->getExternalGroupIds());
+        $this->assertEquals(Role::APP_ADMIN, $user->getRole());
+        $this->assertEquals(array('is_ldap_user' => 1), $user->getExtraAttributes());
+    }
+
+    public function testGetUserWithManagerRoleAndPosixGroups()
+    {
+        $entries = new Entries(array(
+            'count' => 1,
+            0 => array(
+                'count' => 2,
+                'dn' => 'uid=my_ldap_user,ou=Users,dc=kanboard,dc=local',
+                'cn' => array(
+                    'count' => 1,
+                    0 => 'My LDAP user',
+                ),
+                'mail' => array(
+                    'count' => 2,
+                    0 => 'user1@localhost',
+                    1 => 'user2@localhost',
+                ),
+                'uid' => array(
+                    'count' => 1,
+                    0 => 'my_ldap_user',
+                ),
+                0 => 'cn',
+                1 => 'mail',
+                2 => 'uid',
+            )
+        ));
+
+        $groups = array(
+            new LdapGroupProvider('CN=Kanboard Users,OU=Groups,DC=kanboard,DC=local', 'Kanboard Users'),
+            new LdapGroupProvider('CN=Kanboard Managers,OU=Groups,DC=kanboard,DC=local', 'Kanboard Managers'),
+        );
+
+        $this->client
+            ->expects($this->any())
+            ->method('getConnection')
+            ->will($this->returnValue('my_ldap_resource'));
+
+        $this->query
+            ->expects($this->once())
+            ->method('execute')
+            ->with(
+                $this->equalTo('OU=Users,DC=kanboard,DC=local'),
+                $this->equalTo('(uid=my_ldap_user)')
+            );
+
+        $this->query
+            ->expects($this->once())
+            ->method('hasResult')
+            ->will($this->returnValue(true));
+
+        $this->query
+            ->expects($this->once())
+            ->method('getEntries')
+            ->will($this->returnValue($entries));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeUsername')
+            ->will($this->returnValue('uid'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeName')
+            ->will($this->returnValue('cn'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeEmail')
+            ->will($this->returnValue('mail'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeGroup')
+            ->will($this->returnValue(''));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupUserFilter')
+            ->will($this->returnValue('(&(objectClass=posixGroup)(memberUid=%s))'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupManagerDn')
+            ->will($this->returnValue('cn=Kanboard Managers,ou=Groups,dc=kanboard,dc=local'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getBasDn')
+            ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
+
+        $this->group
+            ->expects($this->once())
+            ->method('find')
+            ->with('(&(objectClass=posixGroup)(memberUid=my_ldap_user))')
+            ->will($this->returnValue($groups));
+
+        $user = $this->user->find('(uid=my_ldap_user)');
+        $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
+        $this->assertEquals('uid=my_ldap_user,ou=Users,dc=kanboard,dc=local', $user->getDn());
+        $this->assertEquals('my_ldap_user', $user->getUsername());
+        $this->assertEquals('My LDAP user', $user->getName());
+        $this->assertEquals('user1@localhost', $user->getEmail());
+        $this->assertEquals(
+            array(
+                'CN=Kanboard Users,OU=Groups,DC=kanboard,DC=local',
+                'CN=Kanboard Managers,OU=Groups,DC=kanboard,DC=local',
+            ),
+            $user->getExternalGroupIds()
+        );
+        $this->assertEquals(Role::APP_MANAGER, $user->getRole());
+        $this->assertEquals(array('is_ldap_user' => 1), $user->getExtraAttributes());
+    }
+
+    public function testGetUserWithUserRoleAndPosixGroups()
+    {
+        $entries = new Entries(array(
+            'count' => 1,
+            0 => array(
+                'count' => 2,
+                'dn' => 'uid=my_ldap_user,ou=Users,dc=kanboard,dc=local',
+                'cn' => array(
+                    'count' => 1,
+                    0 => 'My LDAP user',
+                ),
+                'mail' => array(
+                    'count' => 2,
+                    0 => 'user1@localhost',
+                    1 => 'user2@localhost',
+                ),
+                'uid' => array(
+                    'count' => 1,
+                    0 => 'my_ldap_user',
+                ),
+                0 => 'cn',
+                1 => 'mail',
+                2 => 'uid',
+            )
+        ));
+
+        $groups = array(
+            new LdapGroupProvider('CN=Kanboard Users,OU=Groups,DC=kanboard,DC=local', 'Kanboard Users'),
+        );
+
+        $this->client
+            ->expects($this->any())
+            ->method('getConnection')
+            ->will($this->returnValue('my_ldap_resource'));
+
+        $this->query
+            ->expects($this->once())
+            ->method('execute')
+            ->with(
+                $this->equalTo('OU=Users,DC=kanboard,DC=local'),
+                $this->equalTo('(uid=my_ldap_user)')
+            );
+
+        $this->query
+            ->expects($this->once())
+            ->method('hasResult')
+            ->will($this->returnValue(true));
+
+        $this->query
+            ->expects($this->once())
+            ->method('getEntries')
+            ->will($this->returnValue($entries));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeUsername')
+            ->will($this->returnValue('uid'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeName')
+            ->will($this->returnValue('cn'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeEmail')
+            ->will($this->returnValue('mail'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributeGroup')
+            ->will($this->returnValue(''));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupUserFilter')
+            ->will($this->returnValue('(&(objectClass=posixGroup)(memberUid=%s))'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getBasDn')
+            ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
+
+        $this->group
+            ->expects($this->once())
+            ->method('find')
+            ->with('(&(objectClass=posixGroup)(memberUid=my_ldap_user))')
+            ->will($this->returnValue($groups));
+
+        $user = $this->user->find('(uid=my_ldap_user)');
+        $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
+        $this->assertEquals('uid=my_ldap_user,ou=Users,dc=kanboard,dc=local', $user->getDn());
+        $this->assertEquals('my_ldap_user', $user->getUsername());
+        $this->assertEquals('My LDAP user', $user->getName());
+        $this->assertEquals('user1@localhost', $user->getEmail());
+        $this->assertEquals(
+            array(
+                'CN=Kanboard Users,OU=Groups,DC=kanboard,DC=local',
+            ),
+            $user->getExternalGroupIds()
+        );
+        $this->assertEquals(Role::APP_USER, $user->getRole());
+        $this->assertEquals(array('is_ldap_user' => 1), $user->getExtraAttributes());
+    }
+
     public function testGetBaseDnNotConfigured()
     {
         $this->setExpectedException('\LogicException');
@@ -399,5 +733,41 @@ class LdapUserTest extends Base
 
         $user = new User($this->query);
         $this->assertEquals($expected, $user->getLdapUserPattern('test', $filter));
+    }
+
+    public function testGetGroupUserFilter()
+    {
+        $user = new User($this->query);
+        $this->assertSame('', $user->getGroupUserFilter());
+    }
+
+    public function testHasGroupUserFilterWithEmptyString()
+    {
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupUserFilter')
+            ->will($this->returnValue(''));
+
+        $this->assertFalse($this->user->hasGroupUserFilter());
+    }
+
+    public function testHasGroupUserFilterWithNull()
+    {
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupUserFilter')
+            ->will($this->returnValue(null));
+
+        $this->assertFalse($this->user->hasGroupUserFilter());
+    }
+
+    public function testHasGroupUserFilterWithValue()
+    {
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupUserFilter')
+            ->will($this->returnValue('foobar'));
+
+        $this->assertTrue($this->user->hasGroupUserFilter());
     }
 }

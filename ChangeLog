@@ -3,6 +3,7 @@ Version 1.0.28 (unreleased)
 
 New features:
 
+* Added support for LDAP Posix Groups (OpenLDAP with memberUid)
 * Search in activity stream
 * Search in comments
 * Search by task creator

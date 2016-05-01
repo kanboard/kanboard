@@ -39,12 +39,11 @@ class Group
      * @access public
      * @param  Client    $client
      * @param  string    $query
-     * @return array
+     * @return LdapGroupProvider[]
      */
     public static function getGroups(Client $client, $query)
     {
-        $className = get_called_class();
-        $self = new $className(new Query($client));
+        $self = new static(new Query($client));
         return $self->find($query);
     }
 
@@ -111,7 +110,7 @@ class Group
             throw new LogicException('LDAP full name attribute empty, check the parameter LDAP_GROUP_ATTRIBUTE_NAME');
         }
 
-        return LDAP_GROUP_ATTRIBUTE_NAME;
+        return strtolower(LDAP_GROUP_ATTRIBUTE_NAME);
     }
 
     /**

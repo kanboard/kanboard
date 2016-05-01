@@ -170,10 +170,10 @@ class LdapUserProvider implements UserProviderInterface
     }
 
     /**
-     * Get groups
+     * Get groups DN
      *
      * @access public
-     * @return array
+     * @return string[]
      */
     public function getExternalGroupIds()
     {
