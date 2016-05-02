@@ -59,6 +59,7 @@ Contributors:
 - [Lesstat](https://github.com/Lesstat)
 - [Levlaz](https://github.com/levlaz)
 - [Lim Yuen Hoe](https://github.com/jasonmoofang)
+- [Łukasz Klim](https://github.com/lukas346)
 - [Manish Lad](https://github.com/manishlad)
 - [Mathgl67](https://github.com/mathgl67)
 - [Matthieu Keller](https://github.com/maggick)
