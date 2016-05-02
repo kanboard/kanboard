@@ -1,18 +1,16 @@
 <li>
-    <i class="fa fa-dashboard fa-fw"></i>&nbsp;
-    <?= $this->url->link(t('Activity'), 'activity', 'project', array('project_id' => $project['id'])) ?>
+    <?= $this->url->button('fa-dashboard', t('Activity'), 'activity', 'project', array('project_id' => $project['id'])) ?>
 </li>
 
 <?php if ($this->user->hasProjectAccess('customfilter', 'index', $project['id'])): ?>
 <li>
-    <i class="fa fa-filter fa-fw"></i>&nbsp;
-    <?= $this->url->link(t('Custom filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
+    <?= $this->url->button('fa-filter', t('Custom filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
 </li>
 <?php endif ?>
 
 <?php if ($project['is_public']): ?>
 <li>
-    <i class="fa fa-share-alt fa-fw"></i>&nbsp;<?= $this->url->link(t('Public link'), 'board', 'readonly', array('token' => $project['token']), false, '', '', true) ?>
+    <?= $this->url->button('fa-share-alt', t('Public link'), 'board', 'readonly', array('token' => $project['token']), false, '', '', true) ?>
 </li>
 <?php endif ?>
 
@@ -20,21 +18,18 @@
 
 <?php if ($this->user->hasProjectAccess('analytic', 'tasks', $project['id'])): ?>
     <li>
-        <i class="fa fa-line-chart fa-fw"></i>&nbsp;
-        <?= $this->url->link(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
+        <?= $this->url->button('fa-line-chart', t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
     </li>
 <?php endif ?>
 
 <?php if ($this->user->hasProjectAccess('export', 'tasks', $project['id'])): ?>
     <li>
-        <i class="fa fa-download fa-fw"></i>&nbsp;
-        <?= $this->url->link(t('Exports'), 'export', 'tasks', array('project_id' => $project['id'])) ?>
+        <?= $this->url->button('fa-download', t('Exports'), 'export', 'tasks', array('project_id' => $project['id'])) ?>
     </li>
 <?php endif ?>
 
 <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
     <li>
-        <i class="fa fa-cog fa-fw"></i>&nbsp;
-        <?= $this->url->link(t('Settings'), 'project', 'show', array('project_id' => $project['id'])) ?>
+        <?= $this->url->button('fa-cog', t('Settings'), 'project', 'show', array('project_id' => $project['id'])) ?>
     </li>
 <?php endif ?>

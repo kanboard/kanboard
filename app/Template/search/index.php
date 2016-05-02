@@ -2,8 +2,7 @@
     <div class="page-header">
         <ul>
             <li>
-                <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Activity stream search'), 'search', 'activity') ?>
+                <?= $this->url->button('fa-search', t('Activity stream search'), 'search', 'activity') ?>
             </li>
         </ul>
     </div>

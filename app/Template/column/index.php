@@ -2,8 +2,7 @@
     <h2><?= t('Edit the board for "%s"', $project['name']) ?></h2>
     <ul>
         <li>
-            <i class="fa fa-plus fa-fw"></i>
-            <?= $this->url->link(t('Add a new column'), 'Column', 'create', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->url->button('fa-plus', t('Add a new column'), 'Column', 'create', array('project_id' => $project['id']), false, 'popover') ?>
         </li>
     </ul>
 </div>

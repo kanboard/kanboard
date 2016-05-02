@@ -2,12 +2,10 @@
     <h2><?= t('Automatic actions for the project "%s"', $project['name']) ?></h2>
     <ul>
         <li>
-            <i class="fa fa-plus fa-fw"></i>
-            <?= $this->url->link(t('Add a new action'), 'ActionCreation', 'create', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->url->button('fa-plus', t('Add a new action'), 'ActionCreation', 'create', array('project_id' => $project['id']), false, 'popover') ?>
         </li>
         <li>
-            <i class="fa fa-copy fa-fw"></i>
-            <?= $this->url->link(t('Import from another project'), 'ActionProject', 'project', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->url->button('fa-copy', t('Import from another project'), 'ActionProject', 'project', array('project_id' => $project['id']), false, 'popover') ?>
         </li>
     </ul>
 </div>

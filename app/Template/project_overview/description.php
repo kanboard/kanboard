@@ -5,7 +5,7 @@
     <div class="accordion-content">
         <?php if ($this->user->hasProjectAccess('ProjectEdit', 'description', $project['id'])): ?>
             <div class="buttons-header">
-                <?= $this->url->button('fa-edit', t('Edit description'), 'ProjectEdit', 'description', array('project_id' => $project['id']), 'popover') ?>
+                <?= $this->url->button('fa-edit', t('Edit description'), 'ProjectEdit', 'description', array('project_id' => $project['id']), false, 'popover btn') ?>
             </div>
         <?php endif ?>
         <article class="markdown">

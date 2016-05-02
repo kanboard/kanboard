@@ -3,16 +3,13 @@
     <div class="menu-inline">
         <ul>
             <li <?= $sorting === 'board' ? 'class="active"' : '' ?>>
-                <i class="fa fa-sort-numeric-asc fa-fw"></i>
-                <?= $this->url->link(t('Sort by position'), 'gantt', 'project', array('project_id' => $project['id'], 'sorting' => 'board')) ?>
+                <?= $this->url->button('fa-sort-numeric-asc', t('Sort by position'), 'gantt', 'project', array('project_id' => $project['id'], 'sorting' => 'board')) ?>
             </li>
             <li <?= $sorting === 'date' ? 'class="active"' : '' ?>>
-                <i class="fa fa-sort-amount-asc fa-fw"></i>
-                <?= $this->url->link(t('Sort by date'), 'gantt', 'project', array('project_id' => $project['id'], 'sorting' => 'date')) ?>
+                <?= $this->url->button('fa-sort-amount-asc', t('Sort by date'), 'gantt', 'project', array('project_id' => $project['id'], 'sorting' => 'date')) ?>
             </li>
             <li>
-                <i class="fa fa-plus fa-fw"></i>
-                <?= $this->url->link(t('Add task'), 'gantt', 'task', array('project_id' => $project['id']), false, 'popover') ?>
+                <?= $this->url->button('fa-plus', t('Add task'), 'gantt', 'task', array('project_id' => $project['id']), false, 'popover') ?>
             </li>
         </ul>
     </div>

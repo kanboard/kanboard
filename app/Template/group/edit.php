@@ -1,7 +1,7 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'group', 'index') ?></li>
+            <li><?= $this->url->button('fa-users', t('View all groups'), 'group', 'index') ?></li>
         </ul>
     </div>
     <form method="post" action="<?= $this->url->href('group', 'update') ?>" autocomplete="off">
