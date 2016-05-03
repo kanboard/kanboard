@@ -3,6 +3,7 @@
 require __DIR__.'/../../vendor/autoload.php';
 require __DIR__.'/../../app/constants.php';
 
+use Composer\Autoload\ClassLoader;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -82,6 +83,10 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container['flash'] = function ($c) {
             return new FlashMessage($c);
         };
+
+        $loader = new ClassLoader();
+        $loader->addPsr4('Kanboard\Plugin\\', PLUGINS_DIR);
+        $loader->register();
     }
 
     public function tearDown()
