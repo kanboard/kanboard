@@ -11,6 +11,7 @@ New features:
 
 Improvements:
 
+* Improve LDAP user group membership synchronization
 * Category and user filters do not append anymore in search field
 * Added more template hooks
 * Added tasks search with the API

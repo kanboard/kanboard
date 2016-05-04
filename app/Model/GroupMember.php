@@ -119,7 +119,7 @@ class GroupMember extends Base
     public function getGroups($user_id)
     {
         return $this->db->table(self::TABLE)
-            ->columns(Group::TABLE.'.id', Group::TABLE.'.name')
+            ->columns(Group::TABLE.'.id', Group::TABLE.'.external_id', Group::TABLE.'.name')
             ->join(Group::TABLE, 'id', 'group_id')
             ->eq(self::TABLE.'.user_id', $user_id)
             ->asc(Group::TABLE.'.name')
