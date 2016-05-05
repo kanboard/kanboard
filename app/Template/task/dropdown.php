@@ -1,7 +1,7 @@
 <div class="dropdown">
     <a href="#" class="dropdown-menu">#<?= $task['id'] ?></a>
     <ul>
-        <?php if (isset($task['date_started']) && empty($task['date_started'])): ?>
+        <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
         <li>
             <i class="fa fa-play fa-fw"></i>
             <?= $this->url->link(t('Set automatically the start date'), 'taskmodification', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
