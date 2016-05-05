@@ -2,11 +2,15 @@
 
 require_once __DIR__.'/../Base.php';
 
+use Kanboard\Core\User\UserSession;
 use Kanboard\Helper\UserHelper;
 use Kanboard\Model\Project;
 use Kanboard\Model\ProjectUserRole;
+use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskFinder;
 use Kanboard\Model\User as UserModel;
 use Kanboard\Core\Security\Role;
+use Kanboard\Model\User;
 
 class UserHelperTest extends Base
 {
@@ -227,5 +231,95 @@ class UserHelperTest extends Base
         $this->assertFalse($helper->hasProjectAccess('board', 'show', 2));
         $this->assertFalse($helper->hasProjectAccess('task', 'show', 2));
         $this->assertFalse($helper->hasProjectAccess('taskcreation', 'save', 2));
+    }
+
+    public function testCanRemoveTask()
+    {
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
+        $helper = new UserHelper($this->container);
+        $projectModel = new Project($this->container);
+        $userModel = new User($this->container);
+        $userSessionModel = new UserSession($this->container);
+
+        $this->assertNotFalse($userModel->create(array('username' => 'toto', 'password' => '123456')));
+        $this->assertNotFalse($userModel->create(array('username' => 'toto2', 'password' => '123456')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1, 'creator_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task #2', 'project_id' => 1, 'creator_id' => 2)));
+        $this->assertEquals(3, $taskCreationModel->create(array('title' => 'Task #3', 'project_id' => 1, 'creator_id' => 3)));
+        $this->assertEquals(4, $taskCreationModel->create(array('title' => 'Task #4', 'project_id' => 1)));
+
+        // User #1 can remove everything
+        $user = $userModel->getById(1);
+        $this->assertNotEmpty($user);
+        $userSessionModel->initialize($user);
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertTrue($helper->canRemoveTask($task));
+
+        // User #2 can't remove the task #1
+        $user = $userModel->getById(2);
+        $this->assertNotEmpty($user);
+        $userSessionModel->initialize($user);
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertFalse($helper->canRemoveTask($task));
+
+        // User #1 can remove everything
+        $user = $userModel->getById(1);
+        $this->assertNotEmpty($user);
+        $userSessionModel->initialize($user);
+
+        $task = $taskFinderModel->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertTrue($helper->canRemoveTask($task));
+
+        // User #2 can remove his own task
+        $user = $userModel->getbyId(2);
+        $this->assertNotEmpty($user);
+        $userSessionModel->initialize($user);
+
+        $task = $taskFinderModel->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertTrue($helper->canRemoveTask($task));
+
+        // User #1 can remove everything
+        $user = $userModel->getById(1);
+        $this->assertNotEmpty($user);
+        $userSessionModel->initialize($user);
+
+        $task = $taskFinderModel->getById(3);
+        $this->assertNotEmpty($task);
+        $this->assertTrue($helper->canRemoveTask($task));
+
+        // User #2 can't remove the task #3
+        $user = $userModel->getById(2);
+        $this->assertNotEmpty($user);
+        $userSessionModel->initialize($user);
+
+        $task = $taskFinderModel->getById(3);
+        $this->assertNotEmpty($task);
+        $this->assertFalse($helper->canRemoveTask($task));
+
+        // User #1 can remove everything
+        $user = $userModel->getById(1);
+        $this->assertNotEmpty($user);
+        $userSessionModel->initialize($user);
+
+        $task = $taskFinderModel->getById(4);
+        $this->assertNotEmpty($task);
+        $this->assertTrue($helper->canRemoveTask($task));
+
+        // User #2 can't remove the task #4
+        $user = $userModel->getById(2);
+        $this->assertNotEmpty($user);
+        $userSessionModel->initialize($user);
+
+        $task = $taskFinderModel->getById(4);
+        $this->assertNotEmpty($task);
+        $this->assertFalse($helper->canRemoveTask($task));
     }
 }

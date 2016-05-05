@@ -63,7 +63,6 @@ class ClassProvider implements ServiceProviderInterface
             'TaskFile',
             'TaskLink',
             'TaskModification',
-            'TaskPermission',
             'TaskPosition',
             'TaskStatus',
             'TaskMetadata',

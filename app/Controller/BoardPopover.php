@@ -44,7 +44,7 @@ class BoardPopover extends Base
             $this->flash->failure(t('Unable to update your task.'));
         }
 
-        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $values['project_id'])));
+        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $values['project_id'])), true);
     }
 
     /**
@@ -81,7 +81,7 @@ class BoardPopover extends Base
             $this->flash->failure(t('Unable to update your task.'));
         }
 
-        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $values['project_id'])));
+        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $values['project_id'])), true);
     }
 
     /**

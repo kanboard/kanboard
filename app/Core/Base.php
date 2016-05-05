@@ -92,7 +92,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskFinder                                 $taskFinder
  * @property \Kanboard\Model\TaskLink                                   $taskLink
  * @property \Kanboard\Model\TaskModification                           $taskModification
- * @property \Kanboard\Model\TaskPermission                             $taskPermission
  * @property \Kanboard\Model\TaskPosition                               $taskPosition
  * @property \Kanboard\Model\TaskStatus                                 $taskStatus
  * @property \Kanboard\Model\TaskMetadata                               $taskMetadata

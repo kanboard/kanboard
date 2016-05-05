@@ -151,7 +151,7 @@ class Task extends Base
     {
         $task = $this->getTask();
 
-        if (! $this->taskPermission->canRemoveTask($task)) {
+        if (! $this->helper->user->canRemoveTask($task)) {
             $this->forbidden();
         }
 
@@ -164,7 +164,7 @@ class Task extends Base
                 $this->flash->failure(t('Unable to remove this task.'));
             }
 
-            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])));
+            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])), true);
         }
 
         $this->response->html($this->template->render('task/remove', array(

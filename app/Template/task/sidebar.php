@@ -87,7 +87,7 @@
                 <?= $this->url->link(t('Open this task'), 'taskstatus', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
             <?php endif ?>
         </li>
-        <?php if ($this->task->canRemove($task)): ?>
+        <?php if ($this->user->canRemoveTask($task)): ?>
             <li>
                 <i class="fa fa-trash-o fa-fw"></i>
                 <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>

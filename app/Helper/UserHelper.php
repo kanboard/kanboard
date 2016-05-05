@@ -3,6 +3,7 @@
 namespace Kanboard\Helper;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Security\Role;
 
 /**
  * User helpers
@@ -39,6 +40,17 @@ class UserHelper extends Base
         }
 
         return mb_strtoupper($initials);
+    }
+
+    /**
+     * Return the user full name
+     *
+     * @param  array    $user   User properties
+     * @return string
+     */
+    public function getFullname(array $user = array())
+    {
+        return $this->user->getFullname(empty($user) ? $this->userSession->getAll() : $user);
     }
 
     /**
@@ -149,13 +161,24 @@ class UserHelper extends Base
     }
 
     /**
-     * Return the user full name
+     * Return true if the user can remove a task
      *
-     * @param  array    $user   User properties
-     * @return string
+     * Regular users can't remove tasks from other people
+     *
+     * @public
+     * @param  array $task
+     * @return bool
      */
-    public function getFullname(array $user = array())
+    public function canRemoveTask(array $task)
     {
-        return $this->user->getFullname(empty($user) ? $this->userSession->getAll() : $user);
+        if (isset($task['creator_id']) && $task['creator_id'] == $this->userSession->getId()) {
+            return true;
+        }
+        
+        if ($this->userSession->isAdmin() || $this->getProjectUserRole($task['project_id']) === Role::PROJECT_MANAGER) {
+            return true;
+        }
+
+        return false;
     }
 }

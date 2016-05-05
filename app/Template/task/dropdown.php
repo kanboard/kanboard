@@ -8,6 +8,14 @@
         </li>
         <?php endif ?>
         <li>
+            <i class="fa fa-user fa-fw"></i>
+            <?= $this->url->link(t('Change assignee'), 'BoardPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+        <li>
+            <i class="fa fa-tag fa-fw"></i>
+            <?= $this->url->link(t('Change category'), 'BoardPopover', 'changeCategory', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+        <li>
             <i class="fa fa-pencil-square-o fa-fw"></i>
             <?= $this->url->link(t('Edit the task'), 'taskmodification', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
@@ -32,6 +40,10 @@
             <?= $this->url->link(t('Add a comment'), 'comment', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
+            <i class="fa fa-camera fa-fw"></i>
+            <?= $this->url->link(t('Add a screenshot'), 'BoardPopover', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+        </li>
+        <li>
             <i class="fa fa-files-o fa-fw"></i>
             <?= $this->url->link(t('Duplicate'), 'taskduplication', 'duplicate', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
@@ -43,6 +55,12 @@
             <i class="fa fa-clone fa-fw"></i>
             <?= $this->url->link(t('Move to another project'), 'taskduplication', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
+        <?php if ($this->user->canRemoveTask($task)): ?>
+            <li>
+                <i class="fa fa-trash-o fa-fw"></i>
+                <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+            </li>
+        <?php endif ?>
         <?php if (isset($task['is_active'])): ?>
         <li>
             <?php if ($task['is_active'] == 1): ?>

@@ -71,6 +71,8 @@ class TaskFinder extends Base
                         'tasks.priority',
                         'tasks.time_spent',
                         'tasks.time_estimated',
+                        'tasks.is_active',
+                        'tasks.creator_id',
                         'projects.name AS project_name'
                     )
                     ->join(Project::TABLE, 'id', 'project_id')
