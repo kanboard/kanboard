@@ -30,7 +30,15 @@
         <link rel="apple-touch-icon" sizes="114x114" href="<?= $this->url->dir() ?>assets/img/touch-icon-iphone-retina.png">
         <link rel="apple-touch-icon" sizes="144x144" href="<?= $this->url->dir() ?>assets/img/touch-icon-ipad-retina.png">
 
-        <title><?= isset($title) ? $this->text->e($title) : 'Kanboard' ?></title>
+        <title>
+            <?php if (isset($page_title)): ?>
+                <?= $this->text->e($page_title) ?>
+            <?php elseif (isset($title)): ?>
+                <?= $this->text->e($title) ?>
+            <?php else: ?>
+                Kanboard
+            <?php endif ?>
+        </title>
 
         <?= $this->hook->render('template:layout:head') ?>
     </head>
