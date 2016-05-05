@@ -46,7 +46,6 @@ class CommentCreationTest extends Base
     {
         $userModel = new User($this->container);
         $projectModel = new Project($this->container);
-        $projectUserRoleModel = new ProjectUserRole($this->container);
         $commentModel = new Comment($this->container);
         $taskCreationModel = new TaskCreation($this->container);
 
@@ -74,8 +73,6 @@ class CommentCreationTest extends Base
     {
         $userModel = new User($this->container);
         $projectModel = new Project($this->container);
-        $projectUserRoleModel = new ProjectUserRole($this->container);
-        $commentModel = new Comment($this->container);
         $taskCreationModel = new TaskCreation($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));

@@ -34,7 +34,6 @@ class TaskCreationActionTest extends Base
     public function testWithNoTitle()
     {
         $projectModel = new Project($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
 

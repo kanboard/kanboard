@@ -3,6 +3,7 @@ Version 1.0.28 (unreleased)
 
 New features:
 
+* Added automated action to change task color based on the priority
 * Added support for LDAP Posix Groups (OpenLDAP with memberUid)
 * Search in activity stream
 * Search in comments

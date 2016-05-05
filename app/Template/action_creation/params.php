@@ -35,6 +35,9 @@
         <?php elseif ($this->text->contains($param_name, 'link_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->select('params['.$param_name.']', $links_list, $values) ?>
+        <?php elseif ($param_name === 'priority'): ?>
+            <?= $this->form->label($param_desc, $param_name) ?>
+            <?= $this->form->select('params['.$param_name.']', $priorities_list, $values) ?>
         <?php elseif ($this->text->contains($param_name, 'duration')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->number('params['.$param_name.']', $values) ?>

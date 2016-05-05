@@ -315,6 +315,11 @@ class ProjectTest extends Base
         $this->assertEquals(0, $project['priority_start']);
         $this->assertEquals(3, $project['priority_end']);
 
+        $this->assertEquals(
+            array(0 => 0, 1 => 1, 2 => 2, 3 => 3),
+            $projectModel->getPriorities($project)
+        );
+
         $this->assertTrue($projectModel->update(array('id' => 1, 'priority_start' => 2, 'priority_end' => 5, 'priority_default' => 4)));
 
         $project = $projectModel->getById(1);
@@ -322,5 +327,10 @@ class ProjectTest extends Base
         $this->assertEquals(4, $project['priority_default']);
         $this->assertEquals(2, $project['priority_start']);
         $this->assertEquals(5, $project['priority_end']);
+
+        $this->assertEquals(
+            array(2 => 2, 3 => 3, 4 => 4, 5 => 5),
+            $projectModel->getPriorities($project)
+        );
     }
 }

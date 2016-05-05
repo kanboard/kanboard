@@ -201,7 +201,7 @@ class Project extends Base
      * Get all projects with all its data for a given status
      *
      * @access public
-     * @param  integer   $status   Proejct status: self::ACTIVE or self:INACTIVE
+     * @param  integer   $status   Project status: self::ACTIVE or self:INACTIVE
      * @return array
      */
     public function getAllByStatus($status)
@@ -242,6 +242,19 @@ class Project extends Base
                     ->table(self::TABLE)
                     ->eq('is_active', $status)
                     ->count();
+    }
+
+    /**
+     * Get Priority range from a project
+     *
+     * @access public
+     * @param  array $project
+     * @return array
+     */
+    public function getPriorities(array $project)
+    {
+        $range = range($project['priority_start'], $project['priority_end']);
+        return array_combine($range, $range);
     }
 
     /**

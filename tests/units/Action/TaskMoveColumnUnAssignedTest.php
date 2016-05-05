@@ -39,7 +39,6 @@ class TaskMoveColumnUnAssignedTest extends Base
     public function testWithWrongColumn()
     {
         $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
@@ -57,7 +56,6 @@ class TaskMoveColumnUnAssignedTest extends Base
     public function testWithWrongUser()
     {
         $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));

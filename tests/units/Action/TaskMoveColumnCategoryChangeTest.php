@@ -43,7 +43,6 @@ class TaskMoveColumnCategoryChangeTest extends Base
     {
         $projectModel = new Project($this->container);
         $taskCreationModel = new TaskCreation($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
         $categoryModel = new Category($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
@@ -65,7 +64,6 @@ class TaskMoveColumnCategoryChangeTest extends Base
     {
         $projectModel = new Project($this->container);
         $taskCreationModel = new TaskCreation($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
         $categoryModel = new Category($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));

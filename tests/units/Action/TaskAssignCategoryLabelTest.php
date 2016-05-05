@@ -42,7 +42,6 @@ class TaskAssignCategoryLabelTest extends Base
         $categoryModel = new Category($this->container);
         $projectModel = new Project($this->container);
         $taskCreationModel = new TaskCreation($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -64,7 +63,6 @@ class TaskAssignCategoryLabelTest extends Base
         $categoryModel = new Category($this->container);
         $projectModel = new Project($this->container);
         $taskCreationModel = new TaskCreation($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'c1', 'project_id' => 1)));

@@ -40,7 +40,6 @@ class CommentCreationMoveTaskColumnTest extends Base
     public function testWithUserNotLogged()
     {
         $projectModel = new Project($this->container);
-        $commentModel = new Comment($this->container);
         $taskCreationModel = new TaskCreation($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));

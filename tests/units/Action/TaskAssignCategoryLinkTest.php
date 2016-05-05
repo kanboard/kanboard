@@ -70,7 +70,6 @@ class TaskAssignCategoryLinkTest extends Base
     public function testThatExistingCategoryWillNotChange()
     {
         $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
         $c = new Category($this->container);
 

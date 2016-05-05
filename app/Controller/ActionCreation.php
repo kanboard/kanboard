@@ -81,6 +81,7 @@ class ActionCreation extends Base
             'colors_list' => $this->color->getList(),
             'categories_list' => $this->category->getList($project['id']),
             'links_list' => $this->link->getList(0, false),
+            'priorities_list' => $this->project->getPriorities($project),
             'project' => $project,
             'available_actions' => $this->actionManager->getAvailableActions(),
             'events' => $this->actionManager->getCompatibleEvents($values['action_name']),
