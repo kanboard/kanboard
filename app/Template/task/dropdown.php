@@ -9,11 +9,11 @@
         <?php endif ?>
         <li>
             <i class="fa fa-user fa-fw"></i>
-            <?= $this->url->link(t('Change assignee'), 'BoardPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+            <?= $this->url->link(t('Change assignee'), 'TaskPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-tag fa-fw"></i>
-            <?= $this->url->link(t('Change category'), 'BoardPopover', 'changeCategory', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+            <?= $this->url->link(t('Change category'), 'TaskPopover', 'changeCategory', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-pencil-square-o fa-fw"></i>
@@ -41,7 +41,7 @@
         </li>
         <li>
             <i class="fa fa-camera fa-fw"></i>
-            <?= $this->url->link(t('Add a screenshot'), 'BoardPopover', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+            <?= $this->url->link(t('Add a screenshot'), 'TaskPopover', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-files-o fa-fw"></i>
