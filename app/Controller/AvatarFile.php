@@ -47,6 +47,7 @@ class AvatarFile extends Base
         $this->checkCSRFParam();
         $user = $this->getUser();
         $this->avatarFile->remove($user['id']);
+        $this->userSession->refresh($user['id']);
         $this->response->redirect($this->helper->url->to('AvatarFile', 'show', array('user_id' => $user['id'])));
     }
 

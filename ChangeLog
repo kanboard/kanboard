@@ -27,6 +27,7 @@ Improvements:
 
 Bug fixes:
 
+* Fixed PHP warning when removing a user with no Avatar image
 * Fixed improper Markdown escaping for some tooltips
 * Closing all tasks by column, also update closed tasks
 * Fixed wrong task link generation within Markdown text

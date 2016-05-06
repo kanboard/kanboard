@@ -60,14 +60,18 @@ class AvatarFile extends Base
     public function remove($user_id)
     {
         try {
-            $this->objectStorage->remove($this->getFilename($user_id));
-            $result = $this->db->table(User::TABLE)->eq('id', $user_id)->update(array('avatar_path' => ''));
-            $this->userSession->refresh($user_id);
-            return $result;
+            $filename = $this->getFilename($user_id);
+
+            if (! empty($filename)) {
+                $this->objectStorage->remove($filename);
+                return $this->db->table(User::TABLE)->eq('id', $user_id)->update(array('avatar_path' => ''));
+            }
         } catch (Exception $e) {
             $this->logger->error($e->getMessage());
             return false;
         }
+
+        return true;
     }
 
     /**

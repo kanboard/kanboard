@@ -22,7 +22,7 @@ class User extends Base
     const TABLE = 'users';
 
     /**
-     * Id used for everbody (filtering)
+     * Id used for everybody (filtering)
      *
      * @var integer
      */
