@@ -12,6 +12,7 @@ New features:
 
 Improvements:
 
+* Added support for Mysql SSL connection
 * Improve web page title on the task view
 * Unify task drop-down menu between different views
 * Improve LDAP user group membership synchronization

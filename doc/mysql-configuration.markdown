@@ -1,5 +1,5 @@
-How to use Mysql or MariaDB instead of Sqlite
-=============================================
+Mysql/MariaDB Configuration
+===========================
 
 By default Kanboard use Sqlite to stores its data.
 However it's possible to use Mysql or MariaDB instead of Sqlite.
@@ -8,7 +8,7 @@ Requirements
 ------------
 
 - Mysql server
-- The PHP extension `pdo_mysql` installed (Debian/Ubuntu: `apt-get install php5-mysql`)
+- The PHP extension `pdo_mysql` installed
 
 Note: Kanboard is tested with **Mysql >= 5.5 and MariaDB >= 10.0**
 
@@ -47,11 +47,26 @@ Note: You can also rename the template file `config.default.php` to `config.php`
 
 For the first time, Kanboard will run one by one each database migration and this process can take some time according to your configuration.
 
-To avoid any issues or potential timeouts you can initialize the database directly by importing the SQL schema:
+To avoid any potential timeout you can initialize the database directly by importing the SQL schema:
 
 ```bash
 mysql -u root -p my_database < app/Schema/Sql/mysql.sql
 ```
 
-The file `app/Schema/Sql/mysql.sql` is a sql dump that represents the last version of the database.
+The file `app/Schema/Sql/mysql.sql` is a SQL dump that represents the last version of the database.
 
+SSL configuration
+-----------------
+
+These parameters have to be defined to enable the Mysql SSL connection:
+
+```php
+// Mysql SSL key
+define('DB_SSL_KEY', '/path/to/client-key.pem');
+
+// Mysql SSL certificate
+define('DB_SSL_CERT', '/path/to/client-cert.pem');
+
+// Mysql SSL CA
+define('DB_SSL_CA', '/path/to/ca-cert.pem');
+```

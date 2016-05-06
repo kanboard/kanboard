@@ -50,6 +50,15 @@ define('DB_NAME', 'kanboard');
 // Mysql/Postgres custom port (null = default port)
 define('DB_PORT', null);
 
+// Mysql SSL key
+define('DB_SSL_KEY', null);
+
+// Mysql SSL certificate
+define('DB_SSL_CERT', null);
+
+// Mysql SSL CA
+define('DB_SSL_CA', null);
+
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', false);
 

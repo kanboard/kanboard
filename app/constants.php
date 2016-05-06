@@ -34,6 +34,9 @@ defined('DB_PASSWORD') or define('DB_PASSWORD', '');
 defined('DB_HOSTNAME') or define('DB_HOSTNAME', 'localhost');
 defined('DB_NAME') or define('DB_NAME', 'kanboard');
 defined('DB_PORT') or define('DB_PORT', null);
+defined('DB_SSL_KEY') or define('DB_SSL_KEY', null);
+defined('DB_SSL_CERT') or define('DB_SSL_CERT', null);
+defined('DB_SSL_CA') or define('DB_SSL_CA', null);
 
 // Database backend group provider
 defined('DB_GROUP_PROVIDER') or define('DB_GROUP_PROVIDER', true);
