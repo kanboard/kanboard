@@ -69,8 +69,13 @@ class ProjectUserRole extends Base
      */
     public function getUserRole($project_id, $user_id)
     {
-        if ($this->projectPermission->isEverybodyAllowed($project_id)) {
-            return Role::PROJECT_MEMBER;
+        $projectInfo = $this->db->table(Project::TABLE)
+            ->eq('id', $project_id)
+            ->columns('owner_id', 'is_everybody_allowed')
+            ->findOne();
+
+        if ($projectInfo['is_everybody_allowed'] == 1) {
+            return $projectInfo['owner_id'] == $user_id ? Role::PROJECT_MANAGER : Role::PROJECT_MEMBER;
         }
 
         $role = $this->db->table(self::TABLE)->eq('user_id', $user_id)->eq('project_id', $project_id)->findOneColumn('role');

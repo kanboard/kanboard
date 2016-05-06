@@ -101,6 +101,26 @@ class ProjectUserRoleTest extends Base
         $this->assertEquals('', $userRoleModel->getUserRole(1, 2));
     }
 
+    public function testGetRoleWithPublicProject()
+    {
+        $projectModel = new Project($this->container);
+        $userRoleModel = new ProjectUserRole($this->container);
+        $userModel = new User($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User2')));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test'), 2, true));
+
+        $this->assertEquals(Role::PROJECT_MANAGER, $userRoleModel->getUserRole(1, 2));
+        $this->assertEquals(null, $userRoleModel->getUserRole(1, 3));
+
+        $this->assertTrue($projectModel->update(array('id' => 1, 'is_everybody_allowed' => 1)));
+
+        $this->assertEquals(Role::PROJECT_MANAGER, $userRoleModel->getUserRole(1, 2));
+        $this->assertEquals(Role::PROJECT_MEMBER, $userRoleModel->getUserRole(1, 3));
+    }
+
     public function testGetAssignableUsersWithDisabledUsers()
     {
         $projectModel = new Project($this->container);
