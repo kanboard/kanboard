@@ -5,6 +5,7 @@ New features:
 
 * Added automated action to change task color based on the priority
 * Added support for LDAP Posix Groups (OpenLDAP with memberUid)
+* Added support for LDAP user photo attribute (Avatar image)
 * Search in activity stream
 * Search in comments
 * Search by task creator

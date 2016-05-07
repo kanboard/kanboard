@@ -75,24 +75,46 @@ class AvatarFile extends Base
     }
 
     /**
-     * Upload avatar image
+     * Upload avatar image file
      *
      * @access public
      * @param  integer $user_id
      * @param  array   $file
      * @return boolean
      */
-    public function uploadFile($user_id, array $file)
+    public function uploadImageFile($user_id, array $file)
     {
         try {
             if ($file['error'] == UPLOAD_ERR_OK && $file['size'] > 0) {
-                $destination_filename = $this->generatePath($user_id, $file['name']);
-                $this->objectStorage->moveUploadedFile($file['tmp_name'], $destination_filename);
-                $this->create($user_id, $destination_filename);
+                $destinationFilename = $this->generatePath($user_id, $file['name']);
+                $this->objectStorage->moveUploadedFile($file['tmp_name'], $destinationFilename);
+                $this->create($user_id, $destinationFilename);
             } else {
                 throw new Exception('File not uploaded: '.var_export($file['error'], true));
             }
 
+        } catch (Exception $e) {
+            $this->logger->error($e->getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Upload avatar image content
+     *
+     * @access public
+     * @param  integer $user_id
+     * @param  string  $blob
+     * @return boolean
+     */
+    public function uploadImageContent($user_id, &$blob)
+    {
+        try {
+            $destinationFilename = $this->generatePath($user_id, 'imageContent');
+            $this->objectStorage->put($destinationFilename, $blob);
+            $this->create($user_id, $destinationFilename);
         } catch (Exception $e) {
             $this->logger->error($e->getMessage());
             return false;

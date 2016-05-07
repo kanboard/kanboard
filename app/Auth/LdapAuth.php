@@ -76,7 +76,7 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
                 throw new LogicException('Username not found in LDAP profile, check the parameter LDAP_USER_ATTRIBUTE_USERNAME');
             }
 
-            $this->logger->info('Authenticate user: '.$user->getDn());
+            $this->logger->info('Authenticate this user: '.$user->getDn());
 
             if ($client->authenticate($user->getDn(), $this->password)) {
                 $this->userInfo = $user;

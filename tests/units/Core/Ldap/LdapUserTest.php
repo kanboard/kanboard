@@ -52,6 +52,7 @@ class LdapUserTest extends Base
                 'getAttributeEmail',
                 'getAttributeName',
                 'getAttributeGroup',
+                'getAttributePhoto',
                 'getGroupUserFilter',
                 'getGroupAdminDn',
                 'getGroupManagerDn',
@@ -136,8 +137,77 @@ class LdapUserTest extends Base
         $this->assertEquals('My LDAP user', $user->getName());
         $this->assertEquals('user1@localhost', $user->getEmail());
         $this->assertEquals(Role::APP_USER, $user->getRole());
+        $this->assertSame('', $user->getPhoto());
         $this->assertEquals(array(), $user->getExternalGroupIds());
         $this->assertEquals(array('is_ldap_user' => 1), $user->getExtraAttributes());
+    }
+
+    public function testGetUserWithPhoto()
+    {
+        $entries = new Entries(array(
+            'count' => 1,
+            0 => array(
+                'count' => 2,
+                'dn' => 'uid=my_ldap_user,ou=People,dc=kanboard,dc=local',
+                'displayname' => array(
+                    'count' => 1,
+                    0 => 'My LDAP user',
+                ),
+                'mail' => array(
+                    'count' => 2,
+                    0 => 'user1@localhost',
+                    1 => 'user2@localhost',
+                ),
+                'samaccountname' => array(
+                    'count' => 1,
+                    0 => 'my_ldap_user',
+                ),
+                'jpegPhoto' => array(
+                    'count' => 1,
+                    0 => 'my photo',
+                ),
+                0 => 'displayname',
+                1 => 'mail',
+                2 => 'samaccountname',
+            )
+        ));
+
+        $this->client
+            ->expects($this->any())
+            ->method('getConnection')
+            ->will($this->returnValue('my_ldap_resource'));
+
+        $this->query
+            ->expects($this->once())
+            ->method('execute')
+            ->with(
+                $this->equalTo('ou=People,dc=kanboard,dc=local'),
+                $this->equalTo('(uid=my_ldap_user)')
+            );
+
+        $this->query
+            ->expects($this->once())
+            ->method('hasResult')
+            ->will($this->returnValue(true));
+
+        $this->query
+            ->expects($this->once())
+            ->method('getEntries')
+            ->will($this->returnValue($entries));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getAttributePhoto')
+            ->will($this->returnValue('jpegPhoto'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getBasDn')
+            ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
+
+        $user = $this->user->find('(uid=my_ldap_user)');
+        $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
+        $this->assertEquals('my photo', $user->getPhoto());
     }
 
     public function testGetUserWithAdminRole()

@@ -61,6 +61,14 @@ class LdapUserProvider implements UserProviderInterface
     protected $groupIds;
 
     /**
+     * User photo
+     *
+     * @access protected
+     * @var string
+     */
+    protected $photo = '';
+
+    /**
      * Constructor
      *
      * @access public
@@ -70,8 +78,9 @@ class LdapUserProvider implements UserProviderInterface
      * @param  string   $email
      * @param  string   $role
      * @param  string[] $groupIds
+     * @param  string   $photo
      */
-    public function __construct($dn, $username, $name, $email, $role, array $groupIds)
+    public function __construct($dn, $username, $name, $email, $role, array $groupIds, $photo = '')
     {
         $this->dn = $dn;
         $this->username = $username;
@@ -79,6 +88,7 @@ class LdapUserProvider implements UserProviderInterface
         $this->email = $email;
         $this->role = $role;
         $this->groupIds = $groupIds;
+        $this->photo = $photo;
     }
 
     /**
@@ -202,5 +212,16 @@ class LdapUserProvider implements UserProviderInterface
     public function getDn()
     {
         return $this->dn;
+    }
+
+    /**
+     * Get user photo
+     *
+     * @access public
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 }

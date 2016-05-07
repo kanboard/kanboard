@@ -145,7 +145,8 @@ class User
             $entry->getFirstValue($this->getAttributeName()),
             $entry->getFirstValue($this->getAttributeEmail()),
             $this->getRole($groupIds),
-            $groupIds
+            $groupIds,
+            $entry->getFirstValue($this->getAttributePhoto())
         );
     }
 
@@ -164,6 +165,7 @@ class User
             $this->getAttributeName(),
             $this->getAttributeEmail(),
             $this->getAttributeGroup(),
+            $this->getAttributePhoto(),
         )));
     }
 
@@ -221,6 +223,17 @@ class User
     public function getAttributeGroup()
     {
         return strtolower(LDAP_USER_ATTRIBUTE_GROUPS);
+    }
+
+    /**
+     * Get LDAP profile photo attribute
+     *
+     * @access public
+     * @return string
+     */
+    public function getAttributePhoto()
+    {
+        return strtolower(LDAP_USER_ATTRIBUTE_PHOTO);
     }
 
     /**

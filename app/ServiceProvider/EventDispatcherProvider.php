@@ -2,6 +2,7 @@
 
 namespace Kanboard\ServiceProvider;
 
+use Kanboard\Subscriber\LdapUserPhotoSubscriber;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -27,6 +28,10 @@ class EventDispatcherProvider implements ServiceProviderInterface
         $container['dispatcher']->addSubscriber(new SubtaskTimeTrackingSubscriber($container));
         $container['dispatcher']->addSubscriber(new TransitionSubscriber($container));
         $container['dispatcher']->addSubscriber(new RecurringTaskSubscriber($container));
+
+        if (LDAP_AUTH && LDAP_USER_ATTRIBUTE_PHOTO !== '') {
+            $container['dispatcher']->addSubscriber(new LdapUserPhotoSubscriber($container));
+        }
 
         return $container;
     }

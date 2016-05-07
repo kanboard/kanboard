@@ -32,7 +32,7 @@ class AvatarFile extends Base
     {
         $user = $this->getUser();
 
-        if (! $this->avatarFile->uploadFile($user['id'], $this->request->getFileInfo('avatar'))) {
+        if (! $this->avatarFile->uploadImageFile($user['id'], $this->request->getFileInfo('avatar'))) {
             $this->flash->failure(t('Unable to upload the file.'));
         }
 

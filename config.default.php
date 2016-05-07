@@ -114,6 +114,9 @@ define('LDAP_USER_ATTRIBUTE_EMAIL', 'mail');
 // LDAP attribute to find groups in user profile
 define('LDAP_USER_ATTRIBUTE_GROUPS', 'memberof');
 
+// LDAP attribute for user avatar image: thumbnailPhoto or jpegPhoto
+define('LDAP_USER_ATTRIBUTE_PHOTO', '');
+
 // Allow automatic LDAP user creation
 define('LDAP_USER_CREATION', true);
 

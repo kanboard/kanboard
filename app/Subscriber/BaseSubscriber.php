@@ -34,7 +34,6 @@ class BaseSubscriber extends Base
         }
 
         $this->called[$key] = true;
-
         return false;
     }
 }
