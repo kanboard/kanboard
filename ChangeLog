@@ -12,6 +12,7 @@ New features:
 
 Improvements:
 
+* User roles are synced with LDAP at each login
 * Added support for Mysql SSL connection
 * Improve web page title on the task view
 * Unify task drop-down menu between different views

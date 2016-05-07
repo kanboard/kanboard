@@ -58,6 +58,6 @@ class UserProfileTest extends Base
         $this->assertEquals('admin', $this->container['sessionStorage']->user['username']);
         $this->assertEquals('Bob', $this->container['sessionStorage']->user['name']);
         $this->assertEquals('', $this->container['sessionStorage']->user['email']);
-        $this->assertEquals(Role::APP_ADMIN, $this->container['sessionStorage']->user['role']);
+        $this->assertEquals(Role::APP_MANAGER, $this->container['sessionStorage']->user['role']);
     }
 }

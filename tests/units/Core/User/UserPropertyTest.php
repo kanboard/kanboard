@@ -31,7 +31,7 @@ class UserPropertyTest extends Base
         $this->assertEquals($expected, UserProperty::getProperties($user));
     }
 
-    public function testFilterProperties()
+    public function testFilterPropertiesDoNotOverrideExistingValue()
     {
         $profile = array(
             'id' => 123,
@@ -52,6 +52,60 @@ class UserPropertyTest extends Base
 
         $expected = array(
             'name' => 'Bobby',
+            'email' => 'admin@localhost',
+        );
+
+        $this->assertEquals($expected, UserProperty::filterProperties($profile, $properties));
+    }
+
+    public function testFilterPropertiesOverrideExistingValueWhenNecessary()
+    {
+        $profile = array(
+            'id' => 123,
+            'username' => 'bob',
+            'name' => null,
+            'email' => '',
+            'other_column' => 'myvalue',
+            'role' => Role::APP_USER,
+        );
+
+        $properties = array(
+            'external_id' => '456',
+            'username' => 'bobby',
+            'name' => 'Bobby',
+            'email' => 'admin@localhost',
+            'role' => Role::APP_MANAGER,
+        );
+
+        $expected = array(
+            'name' => 'Bobby',
+            'email' => 'admin@localhost',
+            'role' => Role::APP_MANAGER,
+        );
+
+        $this->assertEquals($expected, UserProperty::filterProperties($profile, $properties));
+    }
+
+    public function testFilterPropertiesDoNotOverrideSameValue()
+    {
+        $profile = array(
+            'id' => 123,
+            'username' => 'bob',
+            'name' => 'Bobby',
+            'email' => 'admin@example.org',
+            'other_column' => 'myvalue',
+            'role' => Role::APP_MANAGER,
+        );
+
+        $properties = array(
+            'external_id' => '456',
+            'username' => 'bobby',
+            'name' => 'Bobby',
+            'email' => 'admin@localhost',
+            'role' => Role::APP_MANAGER,
+        );
+
+        $expected = array(
             'email' => 'admin@localhost',
         );
 
