@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../../Base.php';
 
-use Kanboard\Core\Plugin\Loader;
+use Kanboard\Core\Plugin\SchemaHandler;
 
-class LoaderTest extends Base
+class SchemaHandlerTest extends Base
 {
     public function testGetSchemaVersion()
     {
-        $p = new Loader($this->container);
+        $p = new SchemaHandler($this->container);
         $this->assertEquals(0, $p->getSchemaVersion('not_found'));
 
         $this->assertTrue($p->setSchemaVersion('plugin1', 1));

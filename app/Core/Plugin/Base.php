@@ -5,8 +5,8 @@ namespace Kanboard\Core\Plugin;
 /**
  * Plugin Base class
  *
- * @package  plugin
- * @author   Frederic Guillot
+ * @package Kanboard\Core\Plugin
+ * @author  Frederic Guillot
  */
 abstract class Base extends \Kanboard\Core\Base
 {

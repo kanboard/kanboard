@@ -8,7 +8,6 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
 use SimpleLogger\Logger;
-use SimpleLogger\File;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\Core\Session\SessionStorage;
 use Kanboard\ServiceProvider\ActionProvider;
@@ -90,10 +89,5 @@ abstract class Base extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->container['db']->closeConnection();
-    }
-
-    public function isWindows()
-    {
-        return substr(PHP_OS, 0, 3) === 'WIN';
     }
 }

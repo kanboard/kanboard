@@ -5,8 +5,8 @@ namespace Kanboard\Core\Plugin;
 /**
  * Plugin Hooks Handler
  *
- * @package  plugin
- * @author   Frederic Guillot
+ * @package Kanboard\Core\Plugin
+ * @author  Frederic Guillot
  */
 class Hook
 {
