@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3e42867a9978b7e3f2dbf0861e73519",
-    "content-hash": "3f031c0bd8d109e424d67a4d59cde8e3",
+    "hash": "82919780935641d67b876686f590fef1",
+    "content-hash": "9f74907d3c4ec204ff714821eecd75f9",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -312,16 +312,16 @@
         },
         {
             "name": "fguillot/simpleLogger",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simpleLogger.git",
-                "reference": "f9f46439219749a67cefe0983286d540739ba973"
+                "reference": "c6831841193bb265b7900ecc8b6a8918371a7c98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleLogger/zipball/f9f46439219749a67cefe0983286d540739ba973",
-                "reference": "f9f46439219749a67cefe0983286d540739ba973",
+                "url": "https://api.github.com/repos/fguillot/simpleLogger/zipball/c6831841193bb265b7900ecc8b6a8918371a7c98",
+                "reference": "c6831841193bb265b7900ecc8b6a8918371a7c98",
                 "shasum": ""
             },
             "require": {
@@ -345,7 +345,7 @@
             ],
             "description": "PHP library to write logs (compatible with PSR-3)",
             "homepage": "https://github.com/fguillot/simpleLogger",
-            "time": "2015-08-29 14:44:37"
+            "time": "2016-05-07 18:01:57"
         },
         {
             "name": "gregwar/captcha",

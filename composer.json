@@ -28,7 +28,7 @@
         "erusev/parsedown" : "1.6.0",
         "fguillot/json-rpc" : "1.1.0",
         "fguillot/picodb" : "1.0.10",
-        "fguillot/simpleLogger" : "1.0.0",
+        "fguillot/simpleLogger" : "1.0.1",
         "fguillot/simple-validator" : "1.0.0",
         "paragonie/random_compat": "@stable",
         "pimple/pimple" : "~3.0",

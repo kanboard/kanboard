@@ -8,20 +8,12 @@ Enable/Disable debug mode
 -------------------------
 
 ```php
-define('DEBUG', false);
+define('DEBUG', true);
+define('LOG_DRIVER', 'file'); // Other drivers are: syslog, stdout, stderr or file
 ```
 
+The log driver must be defined if you enable the debug mode.
 The debug mode logs all SQL queries and the time taken to generate pages.
-
-Debug file path
----------------
-
-```php
-define('DEBUG_FILE', __DIR__.'/data/debug.log');
-```
-
-All debug information are saved in this file.
-If you prefer to send logs to `stdout` or `stderr` replace the value by `php://stdout` or `php://stderr`.
 
 Plugins folder
 --------------
@@ -157,6 +149,9 @@ define('LDAP_USER_ATTRIBUTE_EMAIL', 'mail');
 // LDAP attribute to find groups in user profile
 define('LDAP_USER_ATTRIBUTE_GROUPS', 'memberof');
 
+// LDAP attribute for user avatar image: thumbnailPhoto or jpegPhoto
+define('LDAP_USER_ATTRIBUTE_PHOTO', '');
+
 // Allow automatic LDAP user creation
 define('LDAP_USER_CREATION', true);
 
@@ -227,13 +222,18 @@ define('ENABLE_XFRAME', true);
 Logging
 -------
 
+By default, Kanboard do not log anything.
+If you want to enable the logging, you have to set a log driver.
+
 ```php
-// Enable syslog logging
-// Set to false to disable syslog
-define('ENABLE_SYSLOG', true);
+// Available log drivers: syslog, stderr, stdout or file
+define('LOG_DRIVER', '');
+
+// Log filename if the log driver is "file"
+define('LOG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
 ```
 
-Bruteforce protection
+Brute-force protection
 ---------------------
 
 ```php

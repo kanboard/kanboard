@@ -7,8 +7,11 @@
 // Enable/Disable debug
 define('DEBUG', false);
 
-// Debug file path
-define('DEBUG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
+// Available log drivers: syslog, stderr, stdout or file
+define('LOG_DRIVER', '');
+
+// Log filename if the log driver is "file"
+define('LOG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
 
 // Plugins directory
 define('PLUGINS_DIR', 'plugins');
@@ -167,9 +170,6 @@ define('ENABLE_HSTS', true);
 
 // Enable or disable "X-Frame-Options: DENY" HTTP header
 define('ENABLE_XFRAME', true);
-
-// Enable syslog logging
-define('ENABLE_SYSLOG', true);
 
 // Escape html inside markdown text
 define('MARKDOWN_ESCAPE_HTML', true);
