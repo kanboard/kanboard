@@ -77,6 +77,11 @@ class Loader extends \Kanboard\Core\Base
         Tool::buildDICHelpers($this->container, $instance->getHelpers());
 
         $instance->initialize();
+
+        if (method_exists($instance, 'onStartup')) {
+            $this->dispatcher->addListener('app.bootstrap', array($instance, 'onStartup'));
+        }
+
         $this->plugins[] = $instance;
     }
 

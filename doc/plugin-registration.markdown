@@ -70,6 +70,7 @@ Available methods from `Kanboard\Core\Plugin\Base`:
 - `getPluginDescription()`: Should return plugin description
 - `getPluginHomepage()`: Should return plugin Homepage (link)
 - `setContentSecurityPolicy(array $rules)`: Override default HTTP CSP rules
+- `onStartup()`: If present, this method is executed automatically when the event "app.bootstrap" is triggered
 
 Your plugin registration class can also inherit from Kanboard\Core\Base, that way you can access all classes and methods of Kanboard easily.
 
@@ -85,9 +86,10 @@ Plugin Translations
 Plugin can be translated in the same way as the rest of the application. You must load the translations yourself when the session is created:
 
 ```php
-$this->on('app.bootstrap', function($container) {
-    Translator::load($container['language']->getCurrentLanguage(), __DIR__.'/Locale');
-});
+public function onStartup()
+{
+    Translator::load($this->language->getCurrentLanguage(), __DIR__.'/Locale');
+}
 ```
 
 The translations must be stored in the file `plugins/Myplugin/Locale/xx_XX/translations.php` (replace xx_XX by the language code fr_FR, en_US...).
