@@ -49,9 +49,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
         );
 
         $this->container['db']->logQueries = true;
-
         $this->container['logger'] = new Logger;
-        $this->container['logger']->setLogger(new File($this->isWindows() ? 'NUL' : '/dev/null'));
 
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')
