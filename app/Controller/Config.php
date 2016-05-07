@@ -42,7 +42,7 @@ class Config extends Base
             }
 
             if ($this->config->save($values)) {
-                $this->config->reload();
+                $this->language->loadCurrentLanguage();
                 $this->flash->success(t('Settings saved successfully.'));
             } else {
                 $this->flash->failure(t('Unable to save your settings.'));
@@ -90,8 +90,8 @@ class Config extends Base
         $this->common('application');
 
         $this->response->html($this->helper->layout->config('config/application', array(
-            'languages' => $this->config->getLanguages(),
-            'timezones' => $this->config->getTimezones(),
+            'languages' => $this->language->getLanguages(),
+            'timezones' => $this->timezone->getTimezones(),
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'datetime_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateTimeFormats()),
             'time_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getTimeFormats()),

@@ -86,7 +86,7 @@ Plugin can be translated in the same way as the rest of the application. You mus
 
 ```php
 $this->on('app.bootstrap', function($container) {
-    Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
+    Translator::load($container['language']->getCurrentLanguage(), __DIR__.'/Locale');
 });
 ```
 

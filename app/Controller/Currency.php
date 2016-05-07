@@ -59,7 +59,6 @@ class Currency extends Base
         $values = $this->request->getValues();
 
         if ($this->config->save($values)) {
-            $this->config->reload();
             $this->flash->success(t('Settings saved successfully.'));
         } else {
             $this->flash->failure(t('Unable to save your settings.'));

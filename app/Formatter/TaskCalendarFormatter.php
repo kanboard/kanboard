@@ -44,7 +44,7 @@ class TaskCalendarFormatter extends BaseTaskCalendarFormatter implements Formatt
 
         foreach ($this->query->findAll() as $task) {
             $events[] = array(
-                'timezoneParam' => $this->config->getCurrentTimezone(),
+                'timezoneParam' => $this->timezone->getCurrentTimezone(),
                 'id' => $task['id'],
                 'title' => t('#%d', $task['id']).' '.$task['title'],
                 'backgroundColor' => $this->color->getBackgroundColor($task['color_id']),

@@ -6,66 +6,6 @@ use Kanboard\Model\Config;
 
 class ConfigTest extends Base
 {
-    public function testGetTimezones()
-    {
-        $configModel = new Config($this->container);
-        $this->assertNotEmpty($configModel->getTimezones());
-        $this->assertArrayHasKey('Europe/Paris', $configModel->getTimezones());
-        $this->assertContains('Europe/Paris', $configModel->getTimezones());
-        $this->assertArrayNotHasKey('', $configModel->getTimezones());
-
-        $this->assertArrayHasKey('', $configModel->getTimezones(true));
-        $this->assertContains('Application default', $configModel->getTimezones(true));
-    }
-
-    public function testGetLanguages()
-    {
-        $configModel = new Config($this->container);
-        $this->assertNotEmpty($configModel->getLanguages());
-        $this->assertArrayHasKey('fr_FR', $configModel->getLanguages());
-        $this->assertContains('Français', $configModel->getLanguages());
-        $this->assertArrayNotHasKey('', $configModel->getLanguages());
-
-        $this->assertArrayHasKey('', $configModel->getLanguages(true));
-        $this->assertContains('Application default', $configModel->getLanguages(true));
-    }
-
-    public function testGetJsLanguage()
-    {
-        $configModel = new Config($this->container);
-        $this->assertEquals('en', $configModel->getJsLanguageCode());
-
-        $this->container['sessionStorage']->user = array('language' => 'fr_FR');
-        $this->assertEquals('fr', $configModel->getJsLanguageCode());
-
-        $this->container['sessionStorage']->user = array('language' => 'xx_XX');
-        $this->assertEquals('en', $configModel->getJsLanguageCode());
-    }
-
-    public function testGetCurrentLanguage()
-    {
-        $configModel = new Config($this->container);
-        $this->assertEquals('en_US', $configModel->getCurrentLanguage());
-
-        $this->container['sessionStorage']->user = array('language' => 'fr_FR');
-        $this->assertEquals('fr_FR', $configModel->getCurrentLanguage());
-
-        $this->container['sessionStorage']->user = array('language' => 'xx_XX');
-        $this->assertEquals('xx_XX', $configModel->getCurrentLanguage());
-    }
-
-    public function testGetCurrentTimezone()
-    {
-        $configModel = new Config($this->container);
-        $this->assertEquals('UTC', $configModel->getCurrentTimezone());
-
-        $this->container['sessionStorage']->user = array('timezone' => 'Europe/Paris');
-        $this->assertEquals('Europe/Paris', $configModel->getCurrentTimezone());
-
-        $this->container['sessionStorage']->user = array('timezone' => 'Something');
-        $this->assertEquals('Something', $configModel->getCurrentTimezone());
-    }
-
     public function testRegenerateToken()
     {
         $configModel = new Config($this->container);

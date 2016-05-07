@@ -12,7 +12,7 @@ class App extends \Kanboard\Core\Base
 {
     public function getTimezone()
     {
-        return $this->config->get('application_timezone');
+        return $this->timezone->getCurrentTimezone();
     }
 
     public function getVersion()

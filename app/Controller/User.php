@@ -67,8 +67,8 @@ class User extends Base
         $is_remote = $this->request->getIntegerParam('remote') == 1 || (isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1);
 
         $this->response->html($this->helper->layout->app($is_remote ? 'user/create_remote' : 'user/create_local', array(
-            'timezones' => $this->config->getTimezones(true),
-            'languages' => $this->config->getLanguages(true),
+            'timezones' => $this->timezone->getTimezones(true),
+            'languages' => $this->language->getLanguages(true),
             'roles' => $this->role->getApplicationRoles(),
             'projects' => $this->project->getList(),
             'errors' => $errors,
@@ -121,8 +121,8 @@ class User extends Base
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user/show', array(
             'user' => $user,
-            'timezones' => $this->config->getTimezones(true),
-            'languages' => $this->config->getLanguages(true),
+            'timezones' => $this->timezone->getTimezones(true),
+            'languages' => $this->language->getLanguages(true),
         )));
     }
 
@@ -247,7 +247,7 @@ class User extends Base
 
         $this->response->html($this->helper->layout->user('user/integrations', array(
             'user' => $user,
-            'values' => $this->userMetadata->getall($user['id']),
+            'values' => $this->userMetadata->getAll($user['id']),
         )));
     }
 
@@ -365,8 +365,8 @@ class User extends Base
             'values' => $values,
             'errors' => $errors,
             'user' => $user,
-            'timezones' => $this->config->getTimezones(true),
-            'languages' => $this->config->getLanguages(true),
+            'timezones' => $this->timezone->getTimezones(true),
+            'languages' => $this->language->getLanguages(true),
             'roles' => $this->role->getApplicationRoles(),
         )));
     }

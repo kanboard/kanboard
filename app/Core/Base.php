@@ -65,6 +65,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectFile                                $projectFile
  * @property \Kanboard\Model\Group                                      $group
  * @property \Kanboard\Model\GroupMember                                $groupMember
+ * @property \Kanboard\Model\Language                                   $language
  * @property \Kanboard\Model\LastLogin                                  $lastLogin
  * @property \Kanboard\Model\Link                                       $link
  * @property \Kanboard\Model\Notification                               $notification
@@ -95,6 +96,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskPosition                               $taskPosition
  * @property \Kanboard\Model\TaskStatus                                 $taskStatus
  * @property \Kanboard\Model\TaskMetadata                               $taskMetadata
+ * @property \Kanboard\Model\Timezone                                   $timezone
  * @property \Kanboard\Model\Transition                                 $transition
  * @property \Kanboard\Model\User                                       $user
  * @property \Kanboard\Model\UserLocking                                $userLocking

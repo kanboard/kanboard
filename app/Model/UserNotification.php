@@ -54,7 +54,7 @@ class UserNotification extends Base
         }
 
         // Restore locales
-        $this->config->setupTranslations();
+        $this->language->loadCurrentLanguage();
     }
 
     /**

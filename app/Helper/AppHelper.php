@@ -90,7 +90,7 @@ class AppHelper extends Base
      */
     public function jsLang()
     {
-        return $this->config->getJsLanguageCode();
+        return $this->language->getJsLanguageCode();
     }
 
     /**
@@ -101,7 +101,7 @@ class AppHelper extends Base
      */
     public function getTimezone()
     {
-        return $this->config->getCurrentTimezone();
+        return $this->timezone->getCurrentTimezone();
     }
 
     /**

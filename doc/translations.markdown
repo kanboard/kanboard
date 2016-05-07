@@ -16,7 +16,7 @@ How to translate Kanboard to a new language?
 1. Make a new directory: `app/Locale/xx_XX` for example `app/Locale/fr_CA` for French Canadian
 2. Create a new file for the translation: `app/Locale/xx_XX/translations.php`
 3. Use the content of the French locales and replace the values
-4. Inside the file `app/Model/Config.php`, add a new entry for your translation inside the function `getLanguages()`
+4. Update the file `app/Model/Language.php`
 5. Check with your local installation of Kanboard if everything is OK
 6. Send a [pull-request with Github](https://help.github.com/articles/using-pull-requests/)
 

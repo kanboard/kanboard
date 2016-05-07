@@ -152,6 +152,10 @@ define('LDAP_USER_ATTRIBUTE_GROUPS', 'memberof');
 // LDAP attribute for user avatar image: thumbnailPhoto or jpegPhoto
 define('LDAP_USER_ATTRIBUTE_PHOTO', '');
 
+// LDAP attribute for user language, example: 'preferredlanguage'
+// Put an empty string to disable language sync
+define('LDAP_USER_ATTRIBUTE_LANGUAGE', '');
+
 // Allow automatic LDAP user creation
 define('LDAP_USER_CREATION', true);
 

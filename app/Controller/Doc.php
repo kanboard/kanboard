@@ -20,7 +20,7 @@ class Doc extends Base
             $page = 'index';
         }
 
-        if ($this->config->getCurrentLanguage() === 'fr_FR') {
+        if ($this->language->getCurrentLanguage() === 'fr_FR') {
             $filename = __DIR__.'/../../doc/fr/' . $page . '.markdown';
         } else {
             $filename = __DIR__ . '/../../doc/' . $page . '.markdown';
@@ -83,7 +83,7 @@ class Doc extends Base
      */
     public function replaceImageUrl(array $matches)
     {
-        if ($this->config->getCurrentLanguage() === 'fr_FR') {
+        if ($this->language->getCurrentLanguage() === 'fr_FR') {
             return '('.$this->helper->url->base().'doc/fr/'.$matches[1].')';
         }
 

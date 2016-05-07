@@ -15,10 +15,10 @@ class ProjectTest extends Base
 {
     public function testCreationForAllLanguages()
     {
-        $c = new Config($this->container);
         $p = new Project($this->container);
 
-        foreach ($c->getLanguages() as $locale => $language) {
+        foreach ($this->container['language']->getLanguages() as $locale => $language) {
+            Translator::unload();
             Translator::load($locale);
             $this->assertNotFalse($p->create(array('name' => 'UnitTest '.$locale)), 'Unable to create project with '.$locale.':'.$language);
         }

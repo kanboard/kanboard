@@ -13,5 +13,8 @@
         <const name="DB_USERNAME" value="root" />
         <const name="DB_PASSWORD" value="" />
         <const name="DB_PORT" value="" />
+        <const name="DB_SSL_KEY" value="" />
+        <const name="DB_SSL_CA" value="" />
+        <const name="DB_SSL_CERT" value="" />
     </php>
 </phpunit>

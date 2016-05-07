@@ -146,7 +146,8 @@ class User
             $entry->getFirstValue($this->getAttributeEmail()),
             $this->getRole($groupIds),
             $groupIds,
-            $entry->getFirstValue($this->getAttributePhoto())
+            $entry->getFirstValue($this->getAttributePhoto()),
+            $entry->getFirstValue($this->getAttributeLanguage())
         );
     }
 
@@ -166,6 +167,7 @@ class User
             $this->getAttributeEmail(),
             $this->getAttributeGroup(),
             $this->getAttributePhoto(),
+            $this->getAttributeLanguage(),
         )));
     }
 
@@ -234,6 +236,17 @@ class User
     public function getAttributePhoto()
     {
         return strtolower(LDAP_USER_ATTRIBUTE_PHOTO);
+    }
+
+    /**
+     * Get LDAP language attribute
+     *
+     * @access public
+     * @return string
+     */
+    public function getAttributeLanguage()
+    {
+        return strtolower(LDAP_USER_ATTRIBUTE_LANGUAGE);
     }
 
     /**

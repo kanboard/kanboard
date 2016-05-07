@@ -21,6 +21,7 @@ Here is the list of available LDAP parameters:
 | `LDAP_USER_ATTRIBUTE_EMAIL`     | mail           | LDAP attribute for user email                                      |
 | `LDAP_USER_ATTRIBUTE_GROUPS`    | memberof       | LDAP attribute to find groups in user profile                      |
 | `LDAP_USER_ATTRIBUTE_PHOTO`     | Empty          | LDAP attribute to find user photo (jpegPhoto or thumbnailPhoto                      |
+| `LDAP_USER_ATTRIBUTE_LANGUAGE`  | Empty          | LDAP attribute for user language (preferredlanguage), the accepted language format is "fr-FR" |
 | `LDAP_USER_CREATION`            | true           | Enable automatic LDAP user creation                                |
 | `LDAP_GROUP_ADMIN_DN`           | Empty          | LDAP DN for administrators (Example: "CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local")   |
 | `LDAP_GROUP_MANAGER_DN`         | Empty          | LDAP DN for managers (Example: "CN=Kanboard Managers,CN=Users,DC=kanboard,DC=local")   |
