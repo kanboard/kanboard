@@ -6,17 +6,18 @@ Server side
 
 ### Compatible Operating Systems
 
-| Operating System               |
-|--------------------------------|
-| Linux Ubuntu Trusty 14.04 LTS  |
-| Linux Centos 6.x               |
-| Linux Centos 7.x               |
-| Linux Redhat 6.x               |
-| Linux Redhat 7.x               |
-| Linux Debian 8                 |
-| FreeBSD 10.x                   |
-| Microsoft Windows 2012 R2      |
-| Microsoft Windows 2008         |
+| Operating System                     |
+|--------------------------------------|
+| Linux Ubuntu Xenial Xerus 16.04 LTS  |
+| Linux Ubuntu Trusty 14.04 LTS        |
+| Linux Centos 6.x                     |
+| Linux Centos 7.x                     |
+| Linux Redhat 6.x                     |
+| Linux Redhat 7.x                     |
+| Linux Debian 8                       |
+| FreeBSD 10.x                         |
+| Microsoft Windows 2012 R2            |
+| Microsoft Windows 2008               |
 
 ### Compatible Databases
 
