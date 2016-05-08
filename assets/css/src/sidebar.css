@@ -41,53 +41,53 @@
     margin-top: 0;
 }
 
-.sidebar a {
+.sidebar > ul a {
     text-decoration: none;
     color: #999;
     font-weight: 300;
 }
 
-.sidebar a:hover {
+.sidebar > ul a:hover {
     color: #333;
 }
 
-.sidebar li {
+.sidebar > ul li {
     list-style-type: none;
     line-height: 35px;
     border-bottom: 1px dotted #efefef;
     padding-left: 13px;
 }
 
-.sidebar li:hover {
+.sidebar > ul li:hover {
     border-left: 5px solid #555;
     padding-left: 8px;
 }
 
-.sidebar li.active {
+.sidebar > ul li.active {
     border-left: 5px solid #333;
     padding-left: 8px;
 }
 
-.sidebar li.active a {
+.sidebar > ul li.active a {
     color: #333;
     font-weight: bold;
 }
 
-.sidebar-icons li {
+.sidebar-icons > ul li {
     padding-left: 0;
 }
 
-.sidebar-icons li:hover,
-.sidebar-icons li.active {
+.sidebar-icons > ul li:hover,
+.sidebar-icons > ul li.active {
     padding-left: 0;
     border-left: none;
 }
 
-.sidebar li.active a:focus,
-.sidebar li.active a:hover {
+.sidebar > ul li.active a:focus,
+.sidebar > ul li.active a:hover {
     color: #555;
 }
 
-.sidebar li:last-child {
+.sidebar > ul li:last-child {
     margin-bottom: 15px;
 }

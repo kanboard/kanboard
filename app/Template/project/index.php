@@ -70,7 +70,7 @@
                 <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
                     <td>
                         <i class="fa fa-users fa-fw"></i>
-                        <a href="#" class="tooltip" title="<?= t('Members') ?>" data-href="<?= $this->url->href('Projectuser', 'users', array('project_id' => $project['id'])) ?>"><?= t('Members') ?></a>
+                        <span class="tooltip" title="<?= t('Members') ?>" data-href="<?= $this->url->href('Projectuser', 'users', array('project_id' => $project['id'])) ?>"><?= t('Members') ?></span>
                     </td>
                 <?php endif ?>
                 <td class="dashboard-project-stats">
