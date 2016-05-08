@@ -50,7 +50,9 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard ${BUILD_DIR}/kanboard-*.zip
 	@ cd ${BUILD_DIR} && git clone --depth 1 -q https://github.com/fguillot/kanboard.git
 	@ cd ${BUILD_DIR}/kanboard && composer --prefer-dist --no-dev --optimize-autoloader --quiet install
-	@ rm -rf ${BUILD_DIR}/kanboard/data/*
+	@ rm -rf ${BUILD_DIR}/kanboard/data/*.sqlite
+	@ rm -rf ${BUILD_DIR}/kanboard/data/*.log
+	@ rm -rf ${BUILD_DIR}/kanboard/data/files
 	@ rm -rf ${BUILD_DIR}/kanboard/.git*
 	@ rm -rf ${BUILD_DIR}/kanboard/tests
 	@ rm -rf ${BUILD_DIR}/kanboard/Makefile
