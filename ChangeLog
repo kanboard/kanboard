@@ -1,4 +1,4 @@
-Version 1.0.28 (unreleased)
+Version 1.0.28
 --------------
 
 New features:
@@ -7,6 +7,7 @@ New features:
 * Added support for LDAP Posix Groups (OpenLDAP with memberUid)
 * Added support for LDAP user photo attribute (Avatar image)
 * Added support for language LDAP attribute
+* Added support for Mysql SSL connection
 * Search in activity stream
 * Search in comments
 * Search by task creator
@@ -15,8 +16,7 @@ New features:
 Improvements:
 
 * Improve Avatar upload form
-* User roles are synced with LDAP at each login
-* Added support for Mysql SSL connection
+* User roles are now synced with LDAP at each login
 * Improve web page title on the task view
 * Unify task drop-down menu between different views
 * Improve LDAP user group membership synchronization

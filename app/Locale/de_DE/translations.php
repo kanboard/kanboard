@@ -1165,4 +1165,5 @@ return array(
     'Closed tasks assigned to "%s"' => 'Geschlossene Aufgaben, die "%s" zugeteilt sind',
     // 'Assign automatically a color based on a priority' => '',
     // 'Overdue tasks for the project(s) "%s"' => '',
+    // 'Upload files' => '',
 );

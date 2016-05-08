@@ -27,7 +27,7 @@
 <input type="file" name="files[]" multiple style="display:none" id="file-form-element">
 
 <div class="form-actions">
-    <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue" id="file-upload-button" disabled>
+    <input type="submit" value="<?= t('Upload files') ?>" class="btn btn-blue" id="file-upload-button" disabled>
     <?= t('or') ?>
     <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
 </div>

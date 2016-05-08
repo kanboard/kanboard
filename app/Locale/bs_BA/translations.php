@@ -1165,4 +1165,5 @@ return array(
     'Closed tasks assigned to "%s"' => 'Zatvoreni zadaci dodijeljeni "%s"',
     // 'Assign automatically a color based on a priority' => '',
     'Overdue tasks for the project(s) "%s"' => 'Zadaci u kašnjenju za projekat(te) "%s"',
+    // 'Upload files' => '',
 );

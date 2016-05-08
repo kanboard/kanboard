@@ -1166,4 +1166,5 @@ return array(
     'Closed tasks assigned to "%s"' => 'Tâches fermées assignées à « %s »',
     'Assign automatically a color based on a priority' => 'Assigner automatiquement une couleur par rapport à une priorité',
     'Overdue tasks for the project(s) "%s"' => 'Tâches en retard pour le projet(s) « %s »',
+    'Upload files' => 'Uploader les fichiers',
 );
