@@ -123,6 +123,7 @@ Technical details
 - [LDAP group synchronization](ldap-group-sync.markdown)
 - [LDAP profile picture](ldap-profile-picture.markdown)
 - [LDAP parameters](ldap-parameters.markdown)
+- [LDAP configuration examples](ldap-configuration-examples.markdown)
 - [Reverse proxy authentication](reverse-proxy-authentication.markdown)
 
 ### Contributors
