@@ -14,6 +14,7 @@ New features:
 
 Improvements:
 
+* Improve Avatar upload form
 * User roles are synced with LDAP at each login
 * Added support for Mysql SSL connection
 * Improve web page title on the task view
