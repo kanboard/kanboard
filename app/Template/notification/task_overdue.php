@@ -23,7 +23,7 @@
             <td style="border: 1px solid #eee;"><?= $task['project_name'] ?></td>
             <td style="border: 1px solid #eee;">
                 <?php if ($task['assignee_username']): ?>
-                    <?= $this->e($task['assignee_name'] ?: $task['assignee_username']) ?>
+                    <?= $this->text->e($task['assignee_name'] ?: $task['assignee_username']) ?>
                 <?php endif ?>
             </td>
         </tr>
