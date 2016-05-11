@@ -18,6 +18,7 @@
         <?= $this->form->checkbox('action', t('Actions'), 1, true) ?>
         <?= $this->form->checkbox('swimlane', t('Swimlanes'), 1, false) ?>
         <?= $this->form->checkbox('task', t('Tasks'), 1, false) ?>
+        <?= $this->form->checkbox('projectMetadata', t('Metadata'), 1, false) ?>
 
         <div class="form-actions">
             <button type="submit" class="btn btn-red"><?= t('Duplicate') ?></button>

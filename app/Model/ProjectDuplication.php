@@ -21,7 +21,7 @@ class ProjectDuplication extends Base
      */
     public function getOptionalSelection()
     {
-        return array('category', 'projectPermission', 'action', 'swimlane', 'task');
+        return array('category', 'projectPermission', 'action', 'swimlane', 'task', 'projectMetadata');
     }
 
     /**
@@ -32,7 +32,7 @@ class ProjectDuplication extends Base
      */
     public function getPossibleSelection()
     {
-        return array('board', 'category', 'projectPermission', 'action', 'swimlane', 'task');
+        return array('board', 'category', 'projectPermission', 'action', 'swimlane', 'task', 'projectMetadata');
     }
 
     /**
