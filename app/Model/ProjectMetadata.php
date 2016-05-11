@@ -11,11 +11,16 @@ namespace Kanboard\Model;
 class ProjectMetadata extends Metadata
 {
     /**
-     * SQL table name
+     * Get the table
      *
-     * @var string
+     * @abstract
+     * @access protected
+     * @return string
      */
-    const TABLE = 'project_has_metadata';
+    protected function getTable()
+    {
+        return 'project_has_metadata';
+    }
 
     /**
      * Define the entity key

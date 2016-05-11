@@ -11,6 +11,15 @@ namespace Kanboard\Model;
 abstract class Metadata extends Base
 {
     /**
+     * Get the table
+     *
+     * @abstract
+     * @access protected
+     * @return string
+     */
+    abstract protected function getTable();
+
+    /**
      * Define the entity key
      *
      * @abstract
@@ -29,7 +38,7 @@ abstract class Metadata extends Base
     public function getAll($entity_id)
     {
         return $this->db
-            ->hashtable(static::TABLE)
+            ->hashtable($this->getTable())
             ->eq($this->getEntityKey(), $entity_id)
             ->asc('name')
             ->getAll('name', 'value');
@@ -47,7 +56,7 @@ abstract class Metadata extends Base
     public function get($entity_id, $name, $default = '')
     {
         return $this->db
-            ->table(static::TABLE)
+            ->table($this->getTable())
             ->eq($this->getEntityKey(), $entity_id)
             ->eq('name', $name)
             ->findOneColumn('value') ?: $default;
@@ -64,7 +73,7 @@ abstract class Metadata extends Base
     public function exists($entity_id, $name)
     {
         return $this->db
-            ->table(static::TABLE)
+            ->table($this->getTable())
             ->eq($this->getEntityKey(), $entity_id)
             ->eq('name', $name)
             ->exists();
@@ -88,7 +97,7 @@ abstract class Metadata extends Base
 
         foreach ($values as $key => $value) {
             if ($this->exists($entity_id, $key)) {
-                $results[] = $this->db->table(static::TABLE)
+                $results[] = $this->db->table($this->getTable())
                     ->eq($this->getEntityKey(), $entity_id)
                     ->eq('name', $key)->update(array(
                         'value' => $value,
@@ -96,7 +105,7 @@ abstract class Metadata extends Base
                         'changed_by' => $user_id,
                     ));
             } else {
-                $results[] = $this->db->table(static::TABLE)->insert(array(
+                $results[] = $this->db->table($this->getTable())->insert(array(
                     'name' => $key,
                     'value' => $value,
                     $this->getEntityKey() => $entity_id,
@@ -120,6 +129,9 @@ abstract class Metadata extends Base
      */
     public function remove($entity_id, $name)
     {
-        return $this->db->table(static::TABLE)->eq($this->getEntityKey(), $entity_id)->eq('name', $name)->remove();
+        return $this->db->table($this->getTable())
+            ->eq($this->getEntityKey(), $entity_id)
+            ->eq('name', $name)
+            ->remove();
     }
 }
