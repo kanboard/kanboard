@@ -1163,7 +1163,7 @@ return array(
     'Projects where "%s" is member' => 'Projectos onde "%s" é membro',
     'Open tasks assigned to "%s"' => 'Tarefas abertas assignadas a "%s"',
     'Closed tasks assigned to "%s"' => 'Tarefas fechadas assignadas a "%s"',
-    // 'Assign automatically a color based on a priority' => '',
-    // 'Overdue tasks for the project(s) "%s"' => '',
-    // 'Upload files' => '',
+    'Assign automatically a color based on a priority' => 'Assignar uma cor automáticamente de acordo com a prioridade',
+    'Overdue tasks for the project(s) "%s"' => 'Tarefas em atraso para o(s) projecto(s) "%s"',
+    'Upload files' => 'Enviar ficheiros',
 );
