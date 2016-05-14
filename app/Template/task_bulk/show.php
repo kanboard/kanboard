@@ -12,9 +12,7 @@
     <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
 
     <?= $this->form->label(t('Tasks'), 'tasks') ?>
-    <?= $this->form->textarea('tasks', $values, $errors, array(
-        'placeholder="'.implode("\r\n", array(t('My task title'), t('My task title'), t('My task title'))).'"')
-    ) ?>
+    <?= $this->form->textarea('tasks', $values, $errors, array('placeholder="'.t('My task title').'"')) ?>
     <p class="form-help"><?= t('Enter one task by line.') ?></p>
 
     <?= $this->render('task/color_picker', array('colors_list' => $colors_list, 'values' => $values)) ?>
