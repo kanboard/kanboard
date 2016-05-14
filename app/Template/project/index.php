@@ -28,7 +28,7 @@
             <?php foreach ($paginator->getCollection() as $project): ?>
             <tr>
                 <td>
-                    <?= $this->url->link('#'.$project['id'], 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link') ?>
+                    <?= $this->render('project/dropdown', array('project' => $project)) ?>
                 </td>
                 <td>
                     <?php if ($project['is_active']): ?>
@@ -38,9 +38,6 @@
                     <?php endif ?>
                 </td>
                 <td>
-                    <?= $this->url->link('<i class="fa fa-th"></i>', 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Board')) ?>
-                    <?= $this->url->link('<i class="fa fa-sliders fa-fw"></i>', 'gantt', 'project', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Gantt chart')) ?>
-
                     <?php if ($project['is_public']): ?>
                         <i class="fa fa-share-alt fa-fw" title="<?= t('Shared project') ?>"></i>
                     <?php endif ?>
@@ -54,7 +51,7 @@
                         </span>
                     <?php endif ?>
 
-                    <?= $this->url->link($this->text->e($project['name']), 'project', 'show', array('project_id' => $project['id'])) ?>
+                    <?= $this->url->link($this->text->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
                 </td>
                 <td>
                     <?= $this->dt->date($project['start_date']) ?>

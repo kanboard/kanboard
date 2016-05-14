@@ -14,7 +14,7 @@
         <?php foreach ($paginator->getCollection() as $project): ?>
         <tr>
             <td>
-                <?= $this->url->link('#'.$project['id'], 'board', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link') ?>
+                <?= $this->render('project/dropdown', array('project' => $project)) ?>
             </td>
             <td>
                 <?php if ($project['is_private']): ?>
