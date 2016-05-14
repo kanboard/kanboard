@@ -38,6 +38,8 @@
                     <?php endif ?>
                 </td>
                 <td>
+                    <?= $this->url->link($this->text->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
+
                     <?php if ($project['is_public']): ?>
                         <i class="fa fa-share-alt fa-fw" title="<?= t('Shared project') ?>"></i>
                     <?php endif ?>
@@ -50,8 +52,6 @@
                             <i class="fa fa-info-circle"></i>
                         </span>
                     <?php endif ?>
-
-                    <?= $this->url->link($this->text->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
                 </td>
                 <td>
                     <?= $this->dt->date($project['start_date']) ?>
