@@ -17,8 +17,8 @@
                 id="gantt-chart"
                 data-records='<?= json_encode($projects, JSON_HEX_APOS) ?>'
                 data-save-url="<?= $this->url->href('gantt', 'saveProjectDate') ?>"
-                data-label-managers="<?= t('Project managers') ?>"
-                data-label-members="<?= t('Project members') ?>"
+                data-label-project-manager="<?= t('Project managers') ?>"
+                data-label-project-member="<?= t('Project members') ?>"
                 data-label-gantt-link="<?= t('Gantt chart for this project') ?>"
                 data-label-board-link="<?= t('Project board') ?>"
                 data-label-start-date="<?= t('Start date:') ?>"

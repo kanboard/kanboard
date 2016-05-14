@@ -232,7 +232,7 @@ Kanboard.Gantt.prototype.getVerticalHeaderTooltip = function(record) {
         tooltip = "<strong>" + record.column_title + "</strong> (" + record.progress + ")<br/>" + record.title;
     }
     else {
-        var types = ["managers", "members"];
+        var types = ["project-manager", "project-member"];
 
         for (var index in types) {
             var type = types[index];
@@ -240,7 +240,9 @@ Kanboard.Gantt.prototype.getVerticalHeaderTooltip = function(record) {
                 var list = jQuery("<ul>");
 
                 for (var user_id in record.users[type]) {
-                    list.append(jQuery("<li>").append(record.users[type][user_id]));
+                    if (user_id) {
+                        list.append(jQuery("<li>").append(record.users[type][user_id]));
+                    }
                 }
 
                 tooltip += "<p><strong>" + $(this.options.container).data("label-" + type) + "</strong></p>" + list[0].outerHTML;
