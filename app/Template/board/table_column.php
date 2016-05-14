@@ -35,11 +35,17 @@
                                 <i class="fa fa-minus-square fa-fw"></i>
                                 <a href="#" class="board-toggle-column-view" data-column-id="<?= $column['id'] ?>"><?= t('Hide this column') ?></a>
                             </li>
-                            <?php if ($this->user->hasProjectAccess('BoardPopover', 'closeColumnTasks', $column['project_id']) && $column['nb_tasks'] > 0): ?>
+                            <?php if ($this->user->hasProjectAccess('Taskcreation', 'create', $column['project_id'])): ?>
                                 <li>
-                                    <i class="fa fa-close fa-fw"></i>
-                                    <?= $this->url->link(t('Close all tasks of this column'), 'BoardPopover', 'confirmCloseColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                                    <i class="fa fa-align-justify" aria-hidden="true"></i>
+                                    <?= $this->url->link(t('Create tasks in bulk'), 'TaskBulk', 'show', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                                 </li>
+                                <?php if ($column['nb_tasks'] > 0): ?>
+                                    <li>
+                                        <i class="fa fa-close fa-fw"></i>
+                                        <?= $this->url->link(t('Close all tasks of this column'), 'BoardPopover', 'confirmCloseColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                                    </li>
+                                <?php endif ?>
                             <?php endif ?>
                         </ul>
                     </span>

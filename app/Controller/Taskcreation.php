@@ -79,6 +79,6 @@ class Taskcreation extends Base
             ));
         }
 
-        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])), true);
     }
 }

@@ -70,6 +70,32 @@ class TaskValidator extends Base
     }
 
     /**
+     * Validate task creation
+     *
+     * @access public
+     * @param  array    $values           Form values
+     * @return array    $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateBulkCreation(array $values)
+    {
+        $rules = array(
+            new Validators\Required('project_id', t('The project is required')),
+            new Validators\Required('tasks', t('Field required')),
+            new Validators\Required('column_id', t('Field required')),
+            new Validators\Required('swimlane_id', t('Field required')),
+            new Validators\Integer('category_id', t('This value must be an integer')),
+            new Validators\Integer('swimlane_id', t('This value must be an integer')),
+        );
+
+        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+
+        return array(
+            $v->execute(),
+            $v->getErrors()
+        );
+    }
+
+    /**
      * Validate description creation
      *
      * @access public
