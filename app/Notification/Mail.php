@@ -145,6 +145,6 @@ class Mail extends Base implements NotificationInterface
      */
     private function getStandardMailSubject($label, array $data)
     {
-        return sprintf('[%s][%s] %s (#%d)', $data['task']['project_name'], $label, $data['task']['title'], $data['task']['id']);
+        return sprintf('[%s][P%d][%s] %s (#%d)', $data['task']['project_name'], $data['task']['priority'], $label, $data['task']['title'], $data['task']['id']);
     }
 }
