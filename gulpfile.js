@@ -97,7 +97,8 @@ var vendor = {
 var dist = {
     fonts: 'assets/fonts/',
     css: 'assets/css/',
-    js: 'assets/js/'
+    js: 'assets/js/',
+    img: 'assets/img/'
 };
 
 gulp.task('bower', function() {
@@ -120,6 +121,9 @@ gulp.task('vendor', function() {
 
     gulp.src('bower_components/jquery-ui/themes/base/images/*')
         .pipe(gulp.dest(dist.css + 'images/'));
+
+    gulp.src('bower_components/chosen/*.png')
+        .pipe(gulp.dest(dist.img + ''));
 });
 
 gulp.task('js', function() {
