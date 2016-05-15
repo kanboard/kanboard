@@ -10,6 +10,7 @@ use Pimple\Container;
  * @package core
  * @author  Frederic Guillot
  *
+ * @property \Kanboard\Analytic\CategoryDistributionAnalytic            $categoryDistributionAnalytic
  * @property \Kanboard\Analytic\TaskDistributionAnalytic                $taskDistributionAnalytic
  * @property \Kanboard\Analytic\UserDistributionAnalytic                $userDistributionAnalytic
  * @property \Kanboard\Analytic\EstimatedTimeComparisonAnalytic         $estimatedTimeComparisonAnalytic

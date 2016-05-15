@@ -424,6 +424,24 @@ class TaskFinder extends Base
     }
 
     /**
+     * Count the number of tasks for a given category and status
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @param  integer   $category_id  Category id
+     * @return integer
+     */
+    public function countByCategoryId($project_id, $category_id)
+    {
+        return $this->db
+                    ->table(Task::TABLE)
+                    ->eq('project_id', $project_id)
+                    ->eq('category_id', $category_id)
+                    ->eq('is_active', 1)
+                    ->count();
+    }
+
+    /**
      * Count the number of tasks for a given column and swimlane
      *
      * @access public
