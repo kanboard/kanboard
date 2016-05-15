@@ -123,7 +123,7 @@ gulp.task('vendor', function() {
         .pipe(gulp.dest(dist.css + 'images/'));
 
     gulp.src('bower_components/chosen/*.png')
-        .pipe(gulp.dest(dist.img + ''));
+        .pipe(gulp.dest(dist.css + ''));
 });
 
 gulp.task('js', function() {

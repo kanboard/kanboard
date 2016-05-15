@@ -18,6 +18,11 @@
         <?= $this->asset->css('assets/css/print.min.css', true, 'print') ?>
         <?= $this->asset->customCss() ?>
 
+        <?php if (! isset($not_editable)): ?>
+            <?= $this->asset->js('assets/js/vendor.min.js') ?>
+            <?= $this->asset->js('assets/js/app.min.js') ?>
+        <?php endif ?>
+
         <?= $this->hook->asset('css', 'template:layout:css') ?>
         <?= $this->hook->asset('js', 'template:layout:js') ?>
 
@@ -59,10 +64,6 @@
             <?= $content_for_layout ?>
         </section>
         <?= $this->hook->render('template:layout:bottom') ?>
-    <?php endif ?>
-    <?php if (! isset($not_editable)): ?>
-        <?= $this->asset->js('assets/js/vendor.min.js') ?>
-        <?= $this->asset->js('assets/js/app.min.js') ?>
     <?php endif ?>
     </body>
 </html>
