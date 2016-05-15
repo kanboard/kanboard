@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class WebNotification extends Base
+class WebNotification extends BaseController
 {
     /**
      * Mark all notifications as read
@@ -20,7 +20,7 @@ class WebNotification extends Base
         $user_id = $this->getUserId();
 
         $this->userUnreadNotification->markAllAsRead($user_id);
-        $this->response->redirect($this->helper->url->to('app', 'notifications', array('user_id' => $user_id)));
+        $this->response->redirect($this->helper->url->to('DashboardController', 'notifications', array('user_id' => $user_id)));
     }
 
     /**
@@ -34,7 +34,7 @@ class WebNotification extends Base
         $notification_id = $this->request->getIntegerParam('notification_id');
 
         $this->userUnreadNotification->markAsRead($user_id, $notification_id);
-        $this->response->redirect($this->helper->url->to('app', 'notifications', array('user_id' => $user_id)));
+        $this->response->redirect($this->helper->url->to('DashboardController', 'notifications', array('user_id' => $user_id)));
     }
 
     private function getUserId()

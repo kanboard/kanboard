@@ -10,7 +10,7 @@ use Kanboard\Filter\TaskProjectsFilter;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Search extends Base
+class Search extends BaseController
 {
     public function index()
     {

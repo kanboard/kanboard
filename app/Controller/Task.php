@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+use Kanboard\Core\Controller\PageNotFoundException;
 use Kanboard\Core\DateParser;
 
 /**
@@ -10,7 +12,7 @@ use Kanboard\Core\DateParser;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Task extends Base
+class Task extends BaseController
 {
     /**
      * Public access (display a task)
@@ -23,17 +25,17 @@ class Task extends Base
 
         // Token verification
         if (empty($project)) {
-            return $this->forbidden(true);
+            throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
         $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
 
         if (empty($task)) {
-            return $this->notfound(true);
+            throw PageNotFoundException::getInstance()->withoutLayout();
         }
 
         if ($task['project_id'] != $project['id']) {
-            return $this->forbidden(true);
+            throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
         $this->response->html($this->helper->layout->app('task/public', array(
@@ -152,7 +154,7 @@ class Task extends Base
         $task = $this->getTask();
 
         if (! $this->helper->user->canRemoveTask($task)) {
-            $this->forbidden();
+            throw new AccessForbiddenException();
         }
 
         if ($this->request->getStringParam('confirmation') === 'yes') {
@@ -164,10 +166,10 @@ class Task extends Base
                 $this->flash->failure(t('Unable to remove this task.'));
             }
 
-            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])), true);
+            return $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])), true);
         }
 
-        $this->response->html($this->template->render('task/remove', array(
+        return $this->response->html($this->template->render('task/remove', array(
             'task' => $task,
         )));
     }

@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package controller
  * @author  Frederic Guillot
  */
-class ActionProject extends Base
+class ActionProject extends BaseController
 {
     public function project()
     {

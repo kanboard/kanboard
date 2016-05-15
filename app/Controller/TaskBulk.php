@@ -7,7 +7,7 @@ namespace Kanboard\Controller;
  *
  * @package Kanboard\Controller
  */
-class TaskBulk extends Base
+class TaskBulk extends BaseController
 {
     /**
      * Show the form

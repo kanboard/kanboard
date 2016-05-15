@@ -31,14 +31,14 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->enable();
 
             // Dashboard
-            $container['route']->addRoute('dashboard', 'app', 'index');
-            $container['route']->addRoute('dashboard/:user_id', 'app', 'index');
-            $container['route']->addRoute('dashboard/:user_id/projects', 'app', 'projects');
-            $container['route']->addRoute('dashboard/:user_id/tasks', 'app', 'tasks');
-            $container['route']->addRoute('dashboard/:user_id/subtasks', 'app', 'subtasks');
-            $container['route']->addRoute('dashboard/:user_id/calendar', 'app', 'calendar');
-            $container['route']->addRoute('dashboard/:user_id/activity', 'app', 'activity');
-            $container['route']->addRoute('dashboard/:user_id/notifications', 'app', 'notifications');
+            $container['route']->addRoute('dashboard', 'DashboardController', 'show');
+            $container['route']->addRoute('dashboard/:user_id', 'DashboardController', 'show');
+            $container['route']->addRoute('dashboard/:user_id/projects', 'DashboardController', 'projects');
+            $container['route']->addRoute('dashboard/:user_id/tasks', 'DashboardController', 'tasks');
+            $container['route']->addRoute('dashboard/:user_id/subtasks', 'DashboardController', 'subtasks');
+            $container['route']->addRoute('dashboard/:user_id/calendar', 'DashboardController', 'calendar');
+            $container['route']->addRoute('dashboard/:user_id/activity', 'DashboardController', 'activity');
+            $container['route']->addRoute('dashboard/:user_id/notifications', 'DashboardController', 'notifications');
 
             // Search routes
             $container['route']->addRoute('search', 'search', 'index');

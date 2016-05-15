@@ -10,7 +10,7 @@ use Kanboard\Formatter\GroupAutoCompleteFormatter;
  * @package  controller
  * @author   Frederic Guillot
  */
-class GroupHelper extends Base
+class GroupHelper extends BaseController
 {
     /**
      * Group auto-completion (Ajax)

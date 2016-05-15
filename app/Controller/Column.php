@@ -2,13 +2,15 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Column controller
  *
  * @package  controller
  * @author   Frederic Guillot
  */
-class Column extends Base
+class Column extends BaseController
 {
     /**
      * Display columns list
@@ -31,6 +33,9 @@ class Column extends Base
      * Show form to create a new column
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -69,7 +74,7 @@ class Column extends Base
             }
         }
 
-        $this->create($values, $errors);
+        return $this->create($values, $errors);
     }
 
     /**
@@ -108,13 +113,13 @@ class Column extends Base
         if ($valid) {
             if ($this->column->update($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
                 $this->flash->success(t('Board updated successfully.'));
-                $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
+                return $this->response->redirect($this->helper->url->to('column', 'index', array('project_id' => $project['id'])));
             } else {
                 $this->flash->failure(t('Unable to update this board.'));
             }
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**
@@ -129,10 +134,10 @@ class Column extends Base
 
         if (! empty($values) && isset($values['column_id']) && isset($values['position'])) {
             $result = $this->column->changePosition($project['id'], $values['column_id'], $values['position']);
-            return $this->response->json(array('result' => $result));
+            $this->response->json(array('result' => $result));
+        } else {
+            throw new AccessForbiddenException();
         }
-
-        $this->forbidden();
     }
 
     /**

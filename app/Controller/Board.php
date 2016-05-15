@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Formatter\BoardFormatter;
 
 /**
@@ -10,7 +11,7 @@ use Kanboard\Formatter\BoardFormatter;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Board extends Base
+class Board extends BaseController
 {
     /**
      * Display the public version of a board
@@ -25,7 +26,7 @@ class Board extends Base
 
         // Token verification
         if (empty($project)) {
-            $this->forbidden(true);
+            throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
         // Display the board with a specific layout
@@ -74,7 +75,7 @@ class Board extends Base
         $project_id = $this->request->getIntegerParam('project_id');
 
         if (! $project_id || ! $this->request->isAjax()) {
-            return $this->response->status(403);
+            throw new AccessForbiddenException();
         }
 
         $values = $this->request->getJson();
@@ -88,10 +89,10 @@ class Board extends Base
         );
 
         if (! $result) {
-            return $this->response->status(400);
+            $this->response->status(400);
+        } else {
+            $this->response->html($this->renderBoard($project_id), 201);
         }
-
-        $this->response->html($this->renderBoard($project_id), 201);
     }
 
     /**
@@ -105,14 +106,12 @@ class Board extends Base
         $timestamp = $this->request->getIntegerParam('timestamp');
 
         if (! $project_id || ! $this->request->isAjax()) {
-            return $this->response->status(403);
+            $this->response->status(403);
+        } elseif (! $this->project->isModifiedSince($project_id, $timestamp)) {
+            $this->response->status(304);
+        } else {
+            $this->response->html($this->renderBoard($project_id));
         }
-
-        if (! $this->project->isModifiedSince($project_id, $timestamp)) {
-            return $this->response->status(304);
-        }
-
-        return $this->response->html($this->renderBoard($project_id));
     }
 
     /**
@@ -125,7 +124,7 @@ class Board extends Base
         $project_id = $this->request->getIntegerParam('project_id');
 
         if (! $project_id || ! $this->request->isAjax()) {
-            return $this->response->status(403);
+            throw new AccessForbiddenException();
         }
 
         $values = $this->request->getJson();
@@ -177,6 +176,7 @@ class Board extends Base
      *
      * @access private
      * @param  integer $project_id
+     * @return string
      */
     private function renderBoard($project_id)
     {

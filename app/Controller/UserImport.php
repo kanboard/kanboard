@@ -10,7 +10,7 @@ use Kanboard\Core\Csv;
  * @package  controller
  * @author   Frederic Guillot
  */
-class UserImport extends Base
+class UserImport extends BaseController
 {
     /**
      * Upload the file and ask settings
@@ -60,7 +60,7 @@ class UserImport extends Base
      */
     public function template()
     {
-        $this->response->forceDownload('users.csv');
+        $this->response->withDownload('users.csv');
         $this->response->csv(array($this->userImport->getColumnMapping()));
     }
 }

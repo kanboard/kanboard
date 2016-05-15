@@ -3,6 +3,7 @@
 require_once __DIR__.'/../../Base.php';
 
 use Kanboard\Core\Http\Route;
+use Kanboard\Core\Http\Router;
 
 class RouteTest extends Base
 {
@@ -34,7 +35,7 @@ class RouteTest extends Base
         );
 
         $this->assertEquals(
-            array('controller' => 'app', 'action' => 'index', 'plugin' => ''),
+            array('controller' => Router::DEFAULT_CONTROLLER, 'action' => Router::DEFAULT_METHOD, 'plugin' => ''),
             $route->findRoute('/notfound')
         );
 

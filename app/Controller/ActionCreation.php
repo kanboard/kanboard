@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package controller
  * @author  Frederic Guillot
  */
-class ActionCreation extends Base
+class ActionCreation extends BaseController
 {
     /**
      * Show the form (step 1)

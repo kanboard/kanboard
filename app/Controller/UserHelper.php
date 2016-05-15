@@ -12,7 +12,7 @@ use Kanboard\Model\User as UserModel;
  * @package  controller
  * @author   Frederic Guillot
  */
-class UserHelper extends Base
+class UserHelper extends BaseController
 {
     /**
      * User auto-completion (Ajax)
@@ -38,5 +38,15 @@ class UserHelper extends Base
         $query = $this->request->getStringParam('q');
         $users = $this->projectPermission->findUsernames($project_id, $query);
         $this->response->json($users);
+    }
+
+    /**
+     * Check if the user is connected
+     *
+     * @access public
+     */
+    public function status()
+    {
+        $this->response->text('OK');
     }
 }

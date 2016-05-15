@@ -10,7 +10,7 @@ use Kanboard\Core\DateParser;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Taskmodification extends Base
+class Taskmodification extends BaseController
 {
     /**
      * Set automatically the start date
@@ -28,6 +28,10 @@ class Taskmodification extends Base
      * Edit description form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function description(array $values = array(), array $errors = array())
     {
@@ -66,13 +70,17 @@ class Taskmodification extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         }
 
-        $this->description($values, $errors);
+        return $this->description($values, $errors);
     }
 
     /**
      * Display a form to edit a task
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -113,7 +121,7 @@ class Taskmodification extends Base
 
         if ($valid && $this->taskModification->update($values)) {
             $this->flash->success(t('Task updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+            $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         } else {
             $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);

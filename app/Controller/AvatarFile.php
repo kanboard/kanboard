@@ -11,7 +11,7 @@ use Kanboard\Core\Thumbnail;
  * @package  controller
  * @author   Frederic Guillot
  */
-class AvatarFile extends Base
+class AvatarFile extends BaseController
 {
     /**
      * Display avatar page
@@ -61,8 +61,8 @@ class AvatarFile extends Base
         $filename = $this->avatarFile->getFilename($user_id);
         $etag = md5($filename.$size);
 
-        $this->response->cache(365 * 86400, $etag);
-        $this->response->contentType('image/jpeg');
+        $this->response->withCache(365 * 86400, $etag);
+        $this->response->withContentType('image/jpeg');
 
         if ($this->request->getHeader('If-None-Match') !== '"'.$etag.'"') {
             $this->render($filename, $size);

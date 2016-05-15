@@ -8,12 +8,18 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Export extends Base
+class Export extends BaseController
 {
     /**
      * Common export method
      *
      * @access private
+     * @param  string $model
+     * @param  string $method
+     * @param  string $filename
+     * @param  string $action
+     * @param  string $page_title
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     private function common($model, $method, $filename, $action, $page_title)
     {
@@ -23,7 +29,7 @@ class Export extends Base
 
         if ($from && $to) {
             $data = $this->$model->$method($project['id'], $from, $to);
-            $this->response->forceDownload($filename.'.csv');
+            $this->response->withDownload($filename.'.csv');
             $this->response->csv($data);
         }
 

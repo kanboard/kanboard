@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\PageNotFoundException;
+
 /**
  * TaskInternalLink Controller
  *
@@ -9,20 +11,21 @@ namespace Kanboard\Controller;
  * @author   Olivier Maridat
  * @author   Frederic Guillot
  */
-class TaskInternalLink extends Base
+class TaskInternalLink extends BaseController
 {
     /**
      * Get the current link
      *
      * @access private
      * @return array
+     * @throws PageNotFoundException
      */
     private function getTaskLink()
     {
         $link = $this->taskLink->getById($this->request->getIntegerParam('link_id'));
 
         if (empty($link)) {
-            return $this->notfound();
+            throw new PageNotFoundException();
         }
 
         return $link;
@@ -32,6 +35,10 @@ class TaskInternalLink extends Base
      * Creation form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws PageNotFoundException
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -67,13 +74,17 @@ class TaskInternalLink extends Base
             $this->flash->failure(t('Unable to create your link.'));
         }
 
-        $this->create($values, $errors);
+        return $this->create($values, $errors);
     }
 
     /**
      * Edit form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws PageNotFoundException
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -116,7 +127,7 @@ class TaskInternalLink extends Base
             $this->flash->failure(t('Unable to update your link.'));
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**

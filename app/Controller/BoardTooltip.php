@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class BoardTooltip extends Base
+class BoardTooltip extends BaseController
 {
     /**
      * Get links on mouseover

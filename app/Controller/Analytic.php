@@ -11,7 +11,7 @@ use Kanboard\Model\Task as TaskModel;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Analytic extends Base
+class Analytic extends BaseController
 {
     /**
      * Show average Lead and Cycle time

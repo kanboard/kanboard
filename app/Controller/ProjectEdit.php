@@ -8,12 +8,14 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class ProjectEdit extends Base
+class ProjectEdit extends BaseController
 {
     /**
      * General edition (most common operations)
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -24,6 +26,8 @@ class ProjectEdit extends Base
      * Change start and end dates
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function dates(array $values = array(), array $errors = array())
     {
@@ -34,6 +38,8 @@ class ProjectEdit extends Base
      * Change project description
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function description(array $values = array(), array $errors = array())
     {
@@ -44,6 +50,8 @@ class ProjectEdit extends Base
      * Change task priority
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function priority(array $values = array(), array $errors = array())
     {
@@ -67,13 +75,13 @@ class ProjectEdit extends Base
         if ($valid) {
             if ($this->project->update($values)) {
                 $this->flash->success(t('Project updated successfully.'));
-                $this->response->redirect($this->helper->url->to('ProjectEdit', $redirect, array('project_id' => $project['id'])), true);
+                return $this->response->redirect($this->helper->url->to('ProjectEdit', $redirect, array('project_id' => $project['id'])), true);
             } else {
                 $this->flash->failure(t('Unable to update this project.'));
             }
         }
 
-        $this->$redirect($values, $errors);
+        return $this->$redirect($values, $errors);
     }
 
     /**

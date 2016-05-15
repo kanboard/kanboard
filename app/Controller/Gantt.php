@@ -17,7 +17,7 @@ use Kanboard\Model\Project as ProjectModel;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Gantt extends Base
+class Gantt extends BaseController
 {
     /**
      * Show Gantt chart for all projects
@@ -53,9 +53,9 @@ class Gantt extends Base
 
         if (! $result) {
             $this->response->json(array('message' => 'Unable to save project'), 400);
+        } else {
+            $this->response->json(array('message' => 'OK'), 201);
         }
-
-        $this->response->json(array('message' => 'OK'), 201);
     }
 
     /**
@@ -99,15 +99,18 @@ class Gantt extends Base
 
         if (! $result) {
             $this->response->json(array('message' => 'Unable to save task'), 400);
+        } else {
+            $this->response->json(array('message' => 'OK'), 201);
         }
-
-        $this->response->json(array('message' => 'OK'), 201);
     }
 
     /**
      * Simplified form to create a new task
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function task(array $values = array(), array $errors = array())
     {
@@ -151,12 +154,12 @@ class Gantt extends Base
 
             if ($task_id !== false) {
                 $this->flash->success(t('Task created successfully.'));
-                $this->response->redirect($this->helper->url->to('gantt', 'project', array('project_id' => $project['id'])));
+                return $this->response->redirect($this->helper->url->to('gantt', 'project', array('project_id' => $project['id'])));
             } else {
                 $this->flash->failure(t('Unable to create your task.'));
             }
         }
 
-        $this->task($values, $errors);
+        return $this->task($values, $errors);
     }
 }

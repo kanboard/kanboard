@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package controller
  * @author  Frederic Guillot
  */
-class Action extends Base
+class Action extends BaseController
 {
     /**
      * List of automatic actions for a given project

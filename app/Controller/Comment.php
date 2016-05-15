@@ -2,30 +2,35 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+use Kanboard\Core\Controller\PageNotFoundException;
+
 /**
  * Comment controller
  *
  * @package  controller
  * @author   Frederic Guillot
  */
-class Comment extends Base
+class Comment extends BaseController
 {
     /**
      * Get the current comment
      *
      * @access private
      * @return array
+     * @throws PageNotFoundException
+     * @throws AccessForbiddenException
      */
     private function getComment()
     {
         $comment = $this->comment->getById($this->request->getIntegerParam('comment_id'));
 
         if (empty($comment)) {
-            return $this->notfound();
+            throw new PageNotFoundException();
         }
 
         if (! $this->userSession->isAdmin() && $comment['user_id'] != $this->userSession->getId()) {
-            return $this->forbidden();
+            throw new AccessForbiddenException();
         }
 
         return $comment;
@@ -35,6 +40,10 @@ class Comment extends Base
      * Add comment form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws AccessForbiddenException
+     * @throws PageNotFoundException
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -76,13 +85,17 @@ class Comment extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
         }
 
-        $this->create($values, $errors);
+        return $this->create($values, $errors);
     }
 
     /**
      * Edit a comment
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws AccessForbiddenException
+     * @throws PageNotFoundException
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -121,7 +134,7 @@ class Comment extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), false);
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**

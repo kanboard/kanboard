@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Group extends Base
+class Group extends BaseController
 {
     /**
      * List all groups
@@ -58,6 +58,8 @@ class Group extends Base
      * Display a form to create a new group
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -81,19 +83,21 @@ class Group extends Base
         if ($valid) {
             if ($this->group->create($values['name']) !== false) {
                 $this->flash->success(t('Group created successfully.'));
-                $this->response->redirect($this->helper->url->to('group', 'index'));
+                return $this->response->redirect($this->helper->url->to('group', 'index'));
             } else {
                 $this->flash->failure(t('Unable to create your group.'));
             }
         }
 
-        $this->create($values, $errors);
+        return $this->create($values, $errors);
     }
 
     /**
      * Display a form to update a group
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -121,24 +125,26 @@ class Group extends Base
         if ($valid) {
             if ($this->group->update($values) !== false) {
                 $this->flash->success(t('Group updated successfully.'));
-                $this->response->redirect($this->helper->url->to('group', 'index'));
+                return $this->response->redirect($this->helper->url->to('group', 'index'));
             } else {
                 $this->flash->failure(t('Unable to update your group.'));
             }
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**
      * Form to associate a user to a group
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function associate(array $values = array(), array $errors = array())
     {
         $group_id = $this->request->getIntegerParam('group_id');
-        $group = $this->group->getbyId($group_id);
+        $group = $this->group->getById($group_id);
 
         if (empty($values)) {
             $values['group_id'] = $group_id;
@@ -165,13 +171,13 @@ class Group extends Base
         if (isset($values['group_id']) && isset($values['user_id'])) {
             if ($this->groupMember->addUser($values['group_id'], $values['user_id'])) {
                 $this->flash->success(t('Group member added successfully.'));
-                $this->response->redirect($this->helper->url->to('group', 'users', array('group_id' => $values['group_id'])));
+                return $this->response->redirect($this->helper->url->to('group', 'users', array('group_id' => $values['group_id'])));
             } else {
                 $this->flash->failure(t('Unable to add group member.'));
             }
         }
 
-        $this->associate($values);
+        return $this->associate($values);
     }
 
     /**

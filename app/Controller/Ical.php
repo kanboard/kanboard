@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Filter\QueryBuilder;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskProjectFilter;
@@ -16,7 +17,7 @@ use Eluceo\iCal\Component\Calendar as iCalendar;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Ical extends Base
+class Ical extends BaseController
 {
     /**
      * Get user iCalendar
@@ -30,7 +31,7 @@ class Ical extends Base
 
         // Token verification
         if (empty($user)) {
-            $this->forbidden(true);
+            throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
         // Common filter
@@ -61,7 +62,7 @@ class Ical extends Base
 
         // Token verification
         if (empty($project)) {
-            $this->forbidden(true);
+            throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
         // Common filter
@@ -84,6 +85,8 @@ class Ical extends Base
      * Common method to render iCal events
      *
      * @access private
+     * @param QueryBuilder $queryBuilder
+     * @param iCalendar    $calendar
      */
     private function renderCalendar(QueryBuilder $queryBuilder, iCalendar $calendar)
     {

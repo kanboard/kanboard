@@ -44,7 +44,7 @@
 
         <?= $this->hook->render('template:layout:head') ?>
     </head>
-    <body data-status-url="<?= $this->url->href('app', 'status') ?>"
+    <body data-status-url="<?= $this->url->href('UserHelper', 'status') ?>"
           data-login-url="<?= $this->url->href('auth', 'login') ?>"
           data-keyboard-shortcut-url="<?= $this->url->href('Doc', 'shortcuts') ?>"
           data-timezone="<?= $this->app->getTimezone() ?>"

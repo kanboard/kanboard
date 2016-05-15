@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Security\Role;
 
 /**
@@ -10,7 +11,7 @@ use Kanboard\Core\Security\Role;
  * @package controller
  * @author  Timo Litzbarski
  */
-class Customfilter extends Base
+class Customfilter extends BaseController
 {
     /**
      * Display list of filters
@@ -47,13 +48,13 @@ class Customfilter extends Base
         if ($valid) {
             if ($this->customFilter->create($values)) {
                 $this->flash->success(t('Your custom filter have been created successfully.'));
-                $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
+                return $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
             } else {
                 $this->flash->failure(t('Unable to create your custom filter.'));
             }
         }
 
-        $this->index($values, $errors);
+        return $this->index($values, $errors);
     }
 
     /**
@@ -143,13 +144,13 @@ class Customfilter extends Base
         if ($valid) {
             if ($this->customFilter->update($values)) {
                 $this->flash->success(t('Your custom filter have been updated successfully.'));
-                $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
+                return $this->response->redirect($this->helper->url->to('customfilter', 'index', array('project_id' => $project['id'])));
             } else {
                 $this->flash->failure(t('Unable to update custom filter.'));
             }
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     private function checkPermission(array $project, array $filter)
@@ -157,7 +158,7 @@ class Customfilter extends Base
         $user_id = $this->userSession->getId();
 
         if ($filter['user_id'] != $user_id && ($this->projectUserRole->getUserRole($project['id'], $user_id) === Role::PROJECT_MANAGER || ! $this->userSession->isAdmin())) {
-            $this->forbidden();
+            throw new AccessForbiddenException();
         }
     }
 }

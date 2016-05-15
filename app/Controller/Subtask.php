@@ -2,18 +2,24 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Subtask controller
  *
  * @package  controller
  * @author   Frederic Guillot
  */
-class Subtask extends Base
+class Subtask extends BaseController
 {
     /**
      * Creation form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -60,18 +66,22 @@ class Subtask extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
         }
 
-        $this->create($values, $errors);
+        return $this->create($values, $errors);
     }
 
     /**
      * Edit form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $subtask = $this->getSubTask();
+        $subtask = $this->getSubtask();
 
         $this->response->html($this->template->render('subtask/edit', array(
             'values' => empty($values) ? $subtask : $values,
@@ -106,7 +116,7 @@ class Subtask extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**
@@ -158,9 +168,9 @@ class Subtask extends Base
 
         if (! empty($values) && $this->helper->user->hasProjectAccess('Subtask', 'movePosition', $project_id)) {
             $result = $this->subtask->changePosition($task_id, $values['subtask_id'], $values['position']);
-            return $this->response->json(array('result' => $result));
+            $this->response->json(array('result' => $result));
+        } else {
+            throw new AccessForbiddenException();
         }
-
-        $this->forbidden();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Security\Role;
 
 /**
@@ -10,7 +11,7 @@ use Kanboard\Core\Security\Role;
  * @package  controller
  * @author   Frederic Guillot
  */
-class ProjectPermission extends Base
+class ProjectPermission extends BaseController
 {
     /**
      * Permissions are only available for team projects
@@ -18,13 +19,14 @@ class ProjectPermission extends Base
      * @access protected
      * @param  integer      $project_id    Default project id
      * @return array
+     * @throws AccessForbiddenException
      */
     protected function getProject($project_id = 0)
     {
         $project = parent::getProject($project_id);
 
         if ($project['is_private'] == 1) {
-            $this->forbidden();
+            throw new AccessForbiddenException();
         }
 
         return $project;
@@ -34,6 +36,9 @@ class ProjectPermission extends Base
      * Show all permissions
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws AccessForbiddenException
      */
     public function index(array $values = array(), array $errors = array())
     {

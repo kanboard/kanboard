@@ -8,12 +8,15 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Taskcreation extends Base
+class Taskcreation extends BaseController
 {
     /**
      * Display a form to create a new task
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -63,7 +66,7 @@ class Taskcreation extends Base
         }
 
         $this->flash->failure(t('Unable to create your task.'));
-        $this->create($values, $errors);
+        return $this->create($values, $errors);
     }
 
     private function afterSave(array $project, array &$values)
@@ -79,6 +82,6 @@ class Taskcreation extends Base
             ));
         }
 
-        $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])), true);
+        return $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])), true);
     }
 }

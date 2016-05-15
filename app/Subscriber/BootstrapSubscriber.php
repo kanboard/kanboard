@@ -29,7 +29,7 @@ class BootstrapSubscriber extends BaseSubscriber implements EventSubscriberInter
     {
         if (DEBUG) {
             foreach ($this->db->getLogMessages() as $message) {
-                $this->logger->debug($message);
+                $this->logger->debug('SQL: ' . $message);
             }
 
             $this->logger->debug('nb_queries={nb}', array('nb' => $this->db->getStatementHandler()->getNbQueries()));

@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\PageNotFoundException;
 use Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound;
 
 /**
@@ -10,12 +11,16 @@ use Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound;
  * @package  controller
  * @author   Frederic Guillot
  */
-class TaskExternalLink extends Base
+class TaskExternalLink extends BaseController
 {
     /**
      * First creation form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws PageNotFoundException
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
      */
     public function find(array $values = array(), array $errors = array())
     {
@@ -36,11 +41,10 @@ class TaskExternalLink extends Base
      */
     public function create()
     {
+        $task = $this->getTask();
+        $values = $this->request->getValues();
+
         try {
-
-            $task = $this->getTask();
-            $values = $this->request->getValues();
-
             $provider = $this->externalLinkManager->setUserInput($values)->find();
             $link = $provider->getLink();
 
@@ -77,13 +81,18 @@ class TaskExternalLink extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**
      * Edit form
      *
      * @access public
+     * @param  array $values
+     * @param  array $errors
+     * @throws ExternalLinkProviderNotFound
+     * @throws PageNotFoundException
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -95,7 +104,7 @@ class TaskExternalLink extends Base
         }
 
         if (empty($values)) {
-            return $this->notfound();
+            throw new PageNotFoundException();
         }
 
         $provider = $this->externalLinkManager->getProvider($values['link_type']);
@@ -124,7 +133,7 @@ class TaskExternalLink extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**
@@ -139,7 +148,7 @@ class TaskExternalLink extends Base
         $link = $this->taskExternalLink->getById($link_id);
 
         if (empty($link)) {
-            return $this->notfound();
+            throw new PageNotFoundException();
         }
 
         $this->response->html($this->template->render('task_external_link/remove', array(

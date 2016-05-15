@@ -10,7 +10,7 @@ use Parsedown;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Doc extends Base
+class Doc extends BaseController
 {
     public function show()
     {

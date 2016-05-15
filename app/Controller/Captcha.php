@@ -10,7 +10,7 @@ use Gregwar\Captcha\CaptchaBuilder;
  * @package controller
  * @author  Frederic Guillot
  */
-class Captcha extends Base
+class Captcha extends BaseController
 {
     /**
      * Display captcha image
@@ -19,7 +19,7 @@ class Captcha extends Base
      */
     public function image()
     {
-        $this->response->contentType('image/jpeg');
+        $this->response->withContentType('image/jpeg');
 
         $builder = new CaptchaBuilder;
         $builder->build();

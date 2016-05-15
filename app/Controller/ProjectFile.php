@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class ProjectFile extends Base
+class ProjectFile extends BaseController
 {
     /**
      * File upload form

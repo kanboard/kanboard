@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\PageNotFoundException;
 use Kanboard\Notification\Mail as MailNotification;
 use Kanboard\Model\Project as ProjectModel;
 use Kanboard\Core\Security\Role;
@@ -12,7 +13,7 @@ use Kanboard\Core\Security\Role;
  * @package  controller
  * @author   Frederic Guillot
  */
-class User extends Base
+class User extends BaseController
 {
     /**
      * List all users
@@ -28,39 +29,38 @@ class User extends Base
                 ->setQuery($this->user->getQuery())
                 ->calculate();
 
-        $this->response->html(
-            $this->helper->layout->app('user/index', array(
-                'title' => t('Users').' ('.$paginator->getTotal().')',
-                'paginator' => $paginator,
-            )
-        ));
+        $this->response->html($this->helper->layout->app('user/index', array(
+            'title' => t('Users').' ('.$paginator->getTotal().')',
+            'paginator' => $paginator,
+        )));
     }
 
     /**
      * Public user profile
      *
      * @access public
+     * @throws PageNotFoundException
      */
     public function profile()
     {
         $user = $this->user->getById($this->request->getIntegerParam('user_id'));
 
         if (empty($user)) {
-            $this->notfound();
+            throw new PageNotFoundException();
         }
 
-        $this->response->html(
-            $this->helper->layout->app('user/profile', array(
-                'title' => $user['name'] ?: $user['username'],
-                'user' => $user,
-            )
-        ));
+        $this->response->html($this->helper->layout->app('user/profile', array(
+            'title' => $user['name'] ?: $user['username'],
+            'user' => $user,
+        )));
     }
 
     /**
      * Display a form to create a new user
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -101,14 +101,14 @@ class User extends Base
                 }
 
                 $this->flash->success(t('User created successfully.'));
-                $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user_id)));
+                return $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user_id)));
             } else {
                 $this->flash->failure(t('Unable to create your user.'));
                 $values['project_id'] = $project_id;
             }
         }
 
-        $this->create($values, $errors);
+        return $this->create($values, $errors);
     }
 
     /**
@@ -217,10 +217,10 @@ class User extends Base
             $values = $this->request->getValues();
             $this->userNotification->saveSettings($user['id'], $values);
             $this->flash->success(t('User updated successfully.'));
-            $this->response->redirect($this->helper->url->to('user', 'notifications', array('user_id' => $user['id'])));
+            return $this->response->redirect($this->helper->url->to('user', 'notifications', array('user_id' => $user['id'])));
         }
 
-        $this->response->html($this->helper->layout->user('user/notifications', array(
+        return $this->response->html($this->helper->layout->user('user/notifications', array(
             'projects' => $this->projectUserRole->getProjectsByUser($user['id'], array(ProjectModel::ACTIVE)),
             'notifications' => $this->userNotification->readSettings($user['id']),
             'types' => $this->userNotificationType->getTypes(),
@@ -284,10 +284,10 @@ class User extends Base
                 $this->flash->failure(t('Unable to update this user.'));
             }
 
-            $this->response->redirect($this->helper->url->to('user', 'share', array('user_id' => $user['id'])));
+            return $this->response->redirect($this->helper->url->to('user', 'share', array('user_id' => $user['id'])));
         }
 
-        $this->response->html($this->helper->layout->user('user/share', array(
+        return $this->response->html($this->helper->layout->user('user/share', array(
             'user' => $user,
             'title' => t('Public access'),
         )));
@@ -315,11 +315,11 @@ class User extends Base
                     $this->flash->failure(t('Unable to change the password.'));
                 }
 
-                $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
+                return $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
             }
         }
 
-        $this->response->html($this->helper->layout->user('user/password', array(
+        return $this->response->html($this->helper->layout->user('user/password', array(
             'values' => $values,
             'errors' => $errors,
             'user' => $user,
@@ -357,11 +357,11 @@ class User extends Base
                     $this->flash->failure(t('Unable to update your user.'));
                 }
 
-                $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
+                return $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
             }
         }
 
-        $this->response->html($this->helper->layout->user('user/edit', array(
+        return $this->response->html($this->helper->layout->user('user/edit', array(
             'values' => $values,
             'errors' => $errors,
             'user' => $user,
@@ -395,11 +395,11 @@ class User extends Base
                     $this->flash->failure(t('Unable to update your user.'));
                 }
 
-                $this->response->redirect($this->helper->url->to('user', 'authentication', array('user_id' => $user['id'])));
+                return $this->response->redirect($this->helper->url->to('user', 'authentication', array('user_id' => $user['id'])));
             }
         }
 
-        $this->response->html($this->helper->layout->user('user/authentication', array(
+        return $this->response->html($this->helper->layout->user('user/authentication', array(
             'values' => $values,
             'errors' => $errors,
             'user' => $user,

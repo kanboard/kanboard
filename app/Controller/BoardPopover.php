@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class BoardPopover extends Base
+class BoardPopover extends BaseController
 {
     /**
      * Confirmation before to close all column tasks

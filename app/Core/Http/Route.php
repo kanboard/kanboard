@@ -119,8 +119,8 @@ class Route extends Base
         }
 
         return array(
-            'controller' => 'app',
-            'action' => 'index',
+            'controller' => 'DashboardController',
+            'action' => 'show',
             'plugin' => '',
         );
     }

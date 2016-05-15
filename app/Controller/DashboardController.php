@@ -6,12 +6,12 @@ use Kanboard\Model\Project as ProjectModel;
 use Kanboard\Model\Subtask as SubtaskModel;
 
 /**
- * Application controller
+ * Dashboard Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class App extends Base
+class DashboardController extends BaseController
 {
     /**
      * Get project pagination
@@ -25,7 +25,7 @@ class App extends Base
     private function getProjectPaginator($user_id, $action, $max)
     {
         return $this->paginator
-            ->setUrl('app', $action, array('pagination' => 'projects', 'user_id' => $user_id))
+            ->setUrl('DashboardController', $action, array('pagination' => 'projects', 'user_id' => $user_id))
             ->setMax($max)
             ->setOrder(ProjectModel::TABLE.'.name')
             ->setQuery($this->project->getQueryColumnStats($this->projectPermission->getActiveProjectIds($user_id)))
@@ -44,7 +44,7 @@ class App extends Base
     private function getTaskPaginator($user_id, $action, $max)
     {
         return $this->paginator
-            ->setUrl('app', $action, array('pagination' => 'tasks', 'user_id' => $user_id))
+            ->setUrl('DashboardController', $action, array('pagination' => 'tasks', 'user_id' => $user_id))
             ->setMax($max)
             ->setOrder('tasks.id')
             ->setQuery($this->taskFinder->getUserQuery($user_id))
@@ -63,7 +63,7 @@ class App extends Base
     private function getSubtaskPaginator($user_id, $action, $max)
     {
         return $this->paginator
-            ->setUrl('app', $action, array('pagination' => 'subtasks', 'user_id' => $user_id))
+            ->setUrl('DashboardController', $action, array('pagination' => 'subtasks', 'user_id' => $user_id))
             ->setMax($max)
             ->setOrder('tasks.id')
             ->setQuery($this->subtask->getUserQuery($user_id, array(SubTaskModel::STATUS_TODO, SubtaskModel::STATUS_INPROGRESS)))
@@ -71,25 +71,15 @@ class App extends Base
     }
 
     /**
-     * Check if the user is connected
-     *
-     * @access public
-     */
-    public function status()
-    {
-        $this->response->text('OK');
-    }
-
-    /**
      * Dashboard overview
      *
      * @access public
      */
-    public function index()
+    public function show()
     {
         $user = $this->getUser();
 
-        $this->response->html($this->helper->layout->dashboard('app/overview', array(
+        $this->response->html($this->helper->layout->dashboard('dashboard/show', array(
             'title' => t('Dashboard'),
             'project_paginator' => $this->getProjectPaginator($user['id'], 'index', 10),
             'task_paginator' => $this->getTaskPaginator($user['id'], 'index', 10),
@@ -107,7 +97,7 @@ class App extends Base
     {
         $user = $this->getUser();
 
-        $this->response->html($this->helper->layout->dashboard('app/tasks', array(
+        $this->response->html($this->helper->layout->dashboard('dashboard/tasks', array(
             'title' => t('My tasks'),
             'paginator' => $this->getTaskPaginator($user['id'], 'tasks', 50),
             'user' => $user,
@@ -123,7 +113,7 @@ class App extends Base
     {
         $user = $this->getUser();
 
-        $this->response->html($this->helper->layout->dashboard('app/subtasks', array(
+        $this->response->html($this->helper->layout->dashboard('dashboard/subtasks', array(
             'title' => t('My subtasks'),
             'paginator' => $this->getSubtaskPaginator($user['id'], 'subtasks', 50),
             'user' => $user,
@@ -139,7 +129,7 @@ class App extends Base
     {
         $user = $this->getUser();
 
-        $this->response->html($this->helper->layout->dashboard('app/projects', array(
+        $this->response->html($this->helper->layout->dashboard('dashboard/projects', array(
             'title' => t('My projects'),
             'paginator' => $this->getProjectPaginator($user['id'], 'projects', 25),
             'user' => $user,
@@ -155,7 +145,7 @@ class App extends Base
     {
         $user = $this->getUser();
 
-        $this->response->html($this->helper->layout->dashboard('app/activity', array(
+        $this->response->html($this->helper->layout->dashboard('dashboard/activity', array(
             'title' => t('My activity stream'),
             'events' => $this->helper->projectActivity->getProjectsEvents($this->projectPermission->getActiveProjectIds($user['id']), 100),
             'user' => $user,
@@ -169,7 +159,7 @@ class App extends Base
      */
     public function calendar()
     {
-        $this->response->html($this->helper->layout->dashboard('app/calendar', array(
+        $this->response->html($this->helper->layout->dashboard('dashboard/calendar', array(
             'title' => t('My calendar'),
             'user' => $this->getUser(),
         )));
@@ -184,7 +174,7 @@ class App extends Base
     {
         $user = $this->getUser();
 
-        $this->response->html($this->helper->layout->dashboard('app/notifications', array(
+        $this->response->html($this->helper->layout->dashboard('dashboard/notifications', array(
             'title' => t('My notifications'),
             'notifications' => $this->userUnreadNotification->getAll($user['id']),
             'user' => $user,

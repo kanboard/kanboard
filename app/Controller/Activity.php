@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package controller
  * @author  Frederic Guillot
  */
-class Activity extends Base
+class Activity extends BaseController
 {
     /**
      * Activity page for a project

@@ -10,11 +10,14 @@ use Kanboard\Core\Csv;
  * @package  controller
  * @author   Frederic Guillot
  */
-class TaskImport extends Base
+class TaskImport extends BaseController
 {
     /**
      * Upload the file and ask settings
      *
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function step1(array $values = array(), array $errors = array())
     {
@@ -66,7 +69,7 @@ class TaskImport extends Base
      */
     public function template()
     {
-        $this->response->forceDownload('tasks.csv');
+        $this->response->withDownload('tasks.csv');
         $this->response->csv(array($this->taskImport->getColumnMapping()));
     }
 }

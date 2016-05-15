@@ -14,7 +14,7 @@ use Kanboard\Formatter\TaskAutoCompleteFormatter;
  * @package  controller
  * @author   Frederic Guillot
  */
-class TaskHelper extends Base
+class TaskHelper extends BaseController
 {
     /**
      * Task auto-completion (Ajax)

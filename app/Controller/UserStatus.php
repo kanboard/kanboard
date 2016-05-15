@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class UserStatus extends Base
+class UserStatus extends BaseController
 {
     /**
      * Confirm remove a user

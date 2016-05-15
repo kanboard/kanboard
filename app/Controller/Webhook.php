@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Webhook extends Base
+class Webhook extends BaseController
 {
     /**
      * Webhook to create a task
@@ -34,9 +34,9 @@ class Webhook extends Base
         list($valid, ) = $this->taskValidator->validateCreation($values);
 
         if ($valid && $this->taskCreation->create($values)) {
-            $this->response->text('OK');
+            return $this->response->text('OK');
         }
 
-        $this->response->text('FAILED');
+        return $this->response->text('FAILED');
     }
 }

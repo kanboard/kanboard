@@ -130,7 +130,7 @@ class LayoutHelper extends Base
      */
     public function dashboard($template, array $params)
     {
-        return $this->subLayout('app/layout', 'app/sidebar', $template, $params);
+        return $this->subLayout('dashboard/layout', 'dashboard/sidebar', $template, $params);
     }
 
     /**

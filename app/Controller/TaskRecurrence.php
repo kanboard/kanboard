@@ -8,12 +8,16 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class TaskRecurrence extends Base
+class TaskRecurrence extends BaseController
 {
     /**
      * Edit recurrence form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -53,9 +57,9 @@ class TaskRecurrence extends Base
                 $this->flash->failure(t('Unable to update your task.'));
             }
 
-            $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 }

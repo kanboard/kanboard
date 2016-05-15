@@ -13,72 +13,204 @@ use Kanboard\Core\Csv;
  */
 class Response extends Base
 {
+    private $httpStatusCode = 200;
+    private $httpHeaders = array();
+    private $httpBody = '';
+
+    /**
+     * Set HTTP status code
+     *
+     * @access public
+     * @param  integer $statusCode
+     * @return $this
+     */
+    public function withStatusCode($statusCode)
+    {
+        $this->httpStatusCode = $statusCode;
+        return $this;
+    }
+
+    /**
+     * Set HTTP header
+     *
+     * @access public
+     * @param  string $header
+     * @param  string $value
+     * @return $this
+     */
+    public function withHeader($header, $value)
+    {
+        $this->httpHeaders[$header] = $value;
+        return $this;
+    }
+
+    /**
+     * Set content type header
+     *
+     * @access public
+     * @param  string $value
+     * @return $this
+     */
+    public function withContentType($value)
+    {
+        $this->httpHeaders['Content-Type'] = $value;
+        return $this;
+    }
+
+    /**
+     * Set default security headers
+     *
+     * @access public
+     * @return $this
+     */
+    public function withSecurityHeaders()
+    {
+        $this->httpHeaders['X-Content-Type-Options'] = 'nosniff';
+        $this->httpHeaders['X-XSS-Protection'] = '1; mode=block';
+        return $this;
+    }
+
+    /**
+     * Set header Content-Security-Policy
+     *
+     * @access public
+     * @param  array  $policies
+     * @return $this
+     */
+    public function withContentSecurityPolicy(array $policies = array())
+    {
+        $values = '';
+
+        foreach ($policies as $policy => $acl) {
+            $values .= $policy.' '.trim($acl).'; ';
+        }
+
+        $this->withHeader('Content-Security-Policy', $values);
+        return $this;
+    }
+
+    /**
+     * Set header X-Frame-Options
+     *
+     * @access public
+     * @return $this
+     */
+    public function withXframe()
+    {
+        $this->withHeader('X-Frame-Options', 'DENY');
+        return $this;
+    }
+
+    /**
+     * Set header Strict-Transport-Security (only if we use HTTPS)
+     *
+     * @access public
+     * @return $this
+     */
+    public function withStrictTransportSecurity()
+    {
+        if ($this->request->isHTTPS()) {
+            $this->withHeader('Strict-Transport-Security', 'max-age=31536000');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set HTTP response body
+     *
+     * @access public
+     * @param  string $body
+     * @return $this
+     */
+    public function withBody($body)
+    {
+        $this->httpBody = $body;
+        return $this;
+    }
+
     /**
      * Send headers to cache a resource
      *
      * @access public
      * @param  integer $duration
      * @param  string  $etag
+     * @return $this
      */
-    public function cache($duration, $etag = '')
+    public function withCache($duration, $etag = '')
     {
-        header('Pragma: cache');
-        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $duration) . ' GMT');
-        header('Cache-Control: public, max-age=' . $duration);
+        $this
+            ->withHeader('Pragma', 'cache')
+            ->withHeader('Expires', gmdate('D, d M Y H:i:s', time() + $duration) . ' GMT')
+            ->withHeader('Cache-Control', 'public, max-age=' . $duration)
+        ;
 
         if ($etag) {
-            header('ETag: "' . $etag . '"');
+            $this->withHeader('ETag', '"' . $etag . '"');
         }
+
+        return $this;
     }
 
     /**
      * Send no cache headers
      *
      * @access public
+     * @return $this
      */
-    public function nocache()
+    public function withoutCache()
     {
-        header('Pragma: no-cache');
-        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
-
-        // Use no-store due to a Chrome bug: https://code.google.com/p/chromium/issues/detail?id=28035
-        header('Cache-Control: no-store, must-revalidate');
-    }
-
-    /**
-     * Send a custom Content-Type header
-     *
-     * @access public
-     * @param  string   $mimetype   Mime-type
-     */
-    public function contentType($mimetype)
-    {
-        header('Content-Type: '.$mimetype);
+        $this->withHeader('Pragma', 'no-cache');
+        $this->withHeader('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
+        return $this;
     }
 
     /**
      * Force the browser to download an attachment
      *
      * @access public
-     * @param  string   $filename    File name
+     * @param  string $filename
+     * @return $this
      */
-    public function forceDownload($filename)
+    public function withDownload($filename)
     {
-        header('Content-Disposition: attachment; filename="'.$filename.'"');
-        header('Content-Transfer-Encoding: binary');
-        header('Content-Type: application/octet-stream');
+        $this->withHeader('Content-Disposition', 'attachment; filename="'.$filename.'"');
+        $this->withHeader('Content-Transfer-Encoding', 'binary');
+        $this->withHeader('Content-Type', 'application/octet-stream');
+        return $this;
+    }
+
+    /**
+     * Send headers and body
+     *
+     * @access public
+     */
+    public function send()
+    {
+        if ($this->httpStatusCode !== 200) {
+            header('Status: '.$this->httpStatusCode);
+            header($this->request->getServerVariable('SERVER_PROTOCOL').' '.$this->httpStatusCode);
+        }
+
+        foreach ($this->httpHeaders as $header => $value) {
+            header($header.': '.$value);
+        }
+
+        if (! empty($this->httpBody)) {
+            echo $this->httpBody;
+        }
     }
 
     /**
      * Send a custom HTTP status code
      *
      * @access public
-     * @param  integer   $status_code   HTTP status code
+     * @param  integer $statusCode
      */
-    public function status($status_code)
+    public function status($statusCode)
     {
-        header('Status: '.$status_code);
-        header($this->request->getServerVariable('SERVER_PROTOCOL').' '.$status_code);
+        $this->withStatusCode($statusCode);
+        $this->send();
     }
 
     /**
@@ -91,218 +223,149 @@ class Response extends Base
     public function redirect($url, $self = false)
     {
         if ($this->request->isAjax()) {
-            header('X-Ajax-Redirect: '.($self ? 'self' : $url));
+            $this->withHeader('X-Ajax-Redirect', $self ? 'self' : $url);
         } else {
-            header('Location: '.$url);
+            $this->withHeader('Location', $url);
         }
 
-        exit;
-    }
-
-    /**
-     * Send a CSV response
-     *
-     * @access public
-     * @param  array    $data          Data to serialize in csv
-     * @param  integer  $status_code   HTTP status code
-     */
-    public function csv(array $data, $status_code = 200)
-    {
-        $this->status($status_code);
-        $this->nocache();
-
-        header('Content-Type: text/csv');
-        Csv::output($data);
-        exit;
-    }
-
-    /**
-     * Send a Json response
-     *
-     * @access public
-     * @param  array    $data          Data to serialize in json
-     * @param  integer  $status_code   HTTP status code
-     */
-    public function json(array $data, $status_code = 200)
-    {
-        $this->status($status_code);
-        $this->nocache();
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
-    }
-
-    /**
-     * Send a text response
-     *
-     * @access public
-     * @param  string   $data          Raw data
-     * @param  integer  $status_code   HTTP status code
-     */
-    public function text($data, $status_code = 200)
-    {
-        $this->status($status_code);
-        $this->nocache();
-        header('Content-Type: text/plain; charset=utf-8');
-        echo $data;
-        exit;
+        $this->send();
     }
 
     /**
      * Send a HTML response
      *
      * @access public
-     * @param  string   $data          Raw data
-     * @param  integer  $status_code   HTTP status code
+     * @param  string  $data
+     * @param  integer $statusCode
      */
-    public function html($data, $status_code = 200)
+    public function html($data, $statusCode = 200)
     {
-        $this->status($status_code);
-        $this->nocache();
-        header('Content-Type: text/html; charset=utf-8');
-        echo $data;
-        exit;
+        $this->withStatusCode($statusCode);
+        $this->withContentType('text/html; charset=utf-8');
+        $this->withBody($data);
+        $this->send();
+    }
+
+    /**
+     * Send a text response
+     *
+     * @access public
+     * @param  string   $data
+     * @param  integer  $statusCode
+     */
+    public function text($data, $statusCode = 200)
+    {
+        $this->withStatusCode($statusCode);
+        $this->withContentType('text/plain; charset=utf-8');
+        $this->withBody($data);
+        $this->send();
+    }
+
+    /**
+     * Send a CSV response
+     *
+     * @access public
+     * @param  array  $data  Data to serialize in csv
+     */
+    public function csv(array $data)
+    {
+        $this->withoutCache();
+        $this->withContentType('text/csv; charset=utf-8');
+        $this->send();
+        Csv::output($data);
+    }
+
+    /**
+     * Send a Json response
+     *
+     * @access public
+     * @param  array    $data         Data to serialize in json
+     * @param  integer  $statusCode   HTTP status code
+     */
+    public function json(array $data, $statusCode = 200)
+    {
+        $this->withStatusCode($statusCode);
+        $this->withContentType('application/json');
+        $this->withoutCache();
+        $this->withBody(json_encode($data));
+        $this->send();
     }
 
     /**
      * Send a XML response
      *
      * @access public
-     * @param  string   $data          Raw data
-     * @param  integer  $status_code   HTTP status code
+     * @param  string   $data
+     * @param  integer  $statusCode
      */
-    public function xml($data, $status_code = 200)
+    public function xml($data, $statusCode = 200)
     {
-        $this->status($status_code);
-        $this->nocache();
-        header('Content-Type: text/xml; charset=utf-8');
-        echo $data;
-        exit;
+        $this->withStatusCode($statusCode);
+        $this->withContentType('text/xml; charset=utf-8');
+        $this->withoutCache();
+        $this->withBody($data);
+        $this->send();
     }
 
     /**
      * Send a javascript response
      *
      * @access public
-     * @param  string   $data          Raw data
-     * @param  integer  $status_code   HTTP status code
+     * @param  string  $data
+     * @param  integer $statusCode
      */
-    public function js($data, $status_code = 200)
+    public function js($data, $statusCode = 200)
     {
-        $this->status($status_code);
-
-        header('Content-Type: text/javascript; charset=utf-8');
-        echo $data;
-
-        exit;
+        $this->withStatusCode($statusCode);
+        $this->withContentType('text/javascript; charset=utf-8');
+        $this->withBody($data);
+        $this->send();
     }
 
     /**
      * Send a css response
      *
      * @access public
-     * @param  string   $data          Raw data
-     * @param  integer  $status_code   HTTP status code
+     * @param  string  $data
+     * @param  integer $statusCode
      */
-    public function css($data, $status_code = 200)
+    public function css($data, $statusCode = 200)
     {
-        $this->status($status_code);
-
-        header('Content-Type: text/css; charset=utf-8');
-        echo $data;
-
-        exit;
+        $this->withStatusCode($statusCode);
+        $this->withContentType('text/css; charset=utf-8');
+        $this->withBody($data);
+        $this->send();
     }
 
     /**
      * Send a binary response
      *
      * @access public
-     * @param  string   $data          Raw data
-     * @param  integer  $status_code   HTTP status code
+     * @param  string  $data
+     * @param  integer $statusCode
      */
-    public function binary($data, $status_code = 200)
+    public function binary($data, $statusCode = 200)
     {
-        $this->status($status_code);
-        $this->nocache();
-        header('Content-Transfer-Encoding: binary');
-        header('Content-Type: application/octet-stream');
-        echo $data;
-        exit;
+        $this->withStatusCode($statusCode);
+        $this->withoutCache();
+        $this->withHeader('Content-Transfer-Encoding', 'binary');
+        $this->withContentType('application/octet-stream');
+        $this->withBody($data);
+        $this->send();
     }
 
     /**
      * Send a iCal response
      *
      * @access public
-     * @param  string   $data          Raw data
-     * @param  integer  $status_code   HTTP status code
+     * @param  string  $data
+     * @param  integer $statusCode
      */
-    public function ical($data, $status_code = 200)
+    public function ical($data, $statusCode = 200)
     {
-        $this->status($status_code);
-        $this->contentType('text/calendar; charset=utf-8');
-        echo $data;
-    }
-
-    /**
-     * Send the security header: Content-Security-Policy
-     *
-     * @access public
-     * @param  array    $policies   CSP rules
-     */
-    public function csp(array $policies = array())
-    {
-        $values = '';
-
-        foreach ($policies as $policy => $acl) {
-            $values .= $policy.' '.trim($acl).'; ';
-        }
-
-        header('Content-Security-Policy: '.$values);
-    }
-
-    /**
-     * Send the security header: X-Content-Type-Options
-     *
-     * @access public
-     */
-    public function nosniff()
-    {
-        header('X-Content-Type-Options: nosniff');
-    }
-
-    /**
-     * Send the security header: X-XSS-Protection
-     *
-     * @access public
-     */
-    public function xss()
-    {
-        header('X-XSS-Protection: 1; mode=block');
-    }
-
-    /**
-     * Send the security header: Strict-Transport-Security (only if we use HTTPS)
-     *
-     * @access public
-     */
-    public function hsts()
-    {
-        if ($this->request->isHTTPS()) {
-            header('Strict-Transport-Security: max-age=31536000');
-        }
-    }
-
-    /**
-     * Send the security header: X-Frame-Options (deny by default)
-     *
-     * @access public
-     * @param  string   $mode   Frame option mode
-     * @param  array    $urls   Allowed urls for the given mode
-     */
-    public function xframe($mode = 'DENY', array $urls = array())
-    {
-        header('X-Frame-Options: '.$mode.' '.implode(' ', $urls));
+        $this->withStatusCode($statusCode);
+        $this->withContentType('text/calendar; charset=utf-8');
+        $this->withBody($data);
+        $this->send();
     }
 }

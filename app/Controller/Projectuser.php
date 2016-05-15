@@ -12,7 +12,7 @@ use Kanboard\Core\Security\Role;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Projectuser extends Base
+class Projectuser extends BaseController
 {
     private function common()
     {
@@ -94,7 +94,7 @@ class Projectuser extends Base
      */
     public function members()
     {
-        $this->role(ROLE::PROJECT_MEMBER, 'members', t('People who are project members'), 'Projects where "%s" is member');
+        $this->role(Role::PROJECT_MEMBER, 'members', t('People who are project members'), 'Projects where "%s" is member');
     }
 
     /**

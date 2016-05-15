@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Project settings') ?></h2>
 </div>
-<form method="post" action="<?= $this->url->href('config', 'project') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('config', 'save', array('redirect' => 'project')) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

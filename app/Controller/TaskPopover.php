@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class TaskPopover extends Base
+class TaskPopover extends BaseController
 {
     /**
      * Change a task assignee directly from the board

@@ -2,28 +2,29 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\PageNotFoundException;
+
 /**
  * Category management
  *
  * @package controller
  * @author  Frederic Guillot
  */
-class Category extends Base
+class Category extends BaseController
 {
     /**
      * Get the category (common method between actions)
      *
      * @access private
-     * @param  integer   $project_id
      * @return array
+     * @throws PageNotFoundException
      */
-    private function getCategory($project_id)
+    private function getCategory()
     {
         $category = $this->category->getById($this->request->getIntegerParam('category_id'));
 
         if (empty($category)) {
-            $this->flash->failure(t('Category not found.'));
-            $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project_id)));
+            throw new PageNotFoundException();
         }
 
         return $category;
@@ -33,6 +34,9 @@ class Category extends Base
      * List of categories for a given project
      *
      * @access public
+     * @param  array $values
+     * @param  array $errors
+     * @throws PageNotFoundException
      */
     public function index(array $values = array(), array $errors = array())
     {
@@ -62,24 +66,27 @@ class Category extends Base
         if ($valid) {
             if ($this->category->create($values)) {
                 $this->flash->success(t('Your category have been created successfully.'));
-                $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));
+                return $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));
             } else {
                 $this->flash->failure(t('Unable to create your category.'));
             }
         }
 
-        $this->index($values, $errors);
+        return $this->index($values, $errors);
     }
 
     /**
      * Edit a category (display the form)
      *
      * @access public
+     * @param  array $values
+     * @param  array $errors
+     * @throws PageNotFoundException
      */
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $category = $this->getCategory($project['id']);
+        $category = $this->getCategory();
 
         $this->response->html($this->helper->layout->project('category/edit', array(
             'values' => empty($values) ? $category : $values,
@@ -104,13 +111,13 @@ class Category extends Base
         if ($valid) {
             if ($this->category->update($values)) {
                 $this->flash->success(t('Your category have been updated successfully.'));
-                $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));
+                return $this->response->redirect($this->helper->url->to('category', 'index', array('project_id' => $project['id'])));
             } else {
                 $this->flash->failure(t('Unable to update your category.'));
             }
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**
@@ -121,7 +128,7 @@ class Category extends Base
     public function confirm()
     {
         $project = $this->getProject();
-        $category = $this->getCategory($project['id']);
+        $category = $this->getCategory();
 
         $this->response->html($this->helper->layout->project('category/remove', array(
             'project' => $project,
@@ -139,7 +146,7 @@ class Category extends Base
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $category = $this->getCategory($project['id']);
+        $category = $this->getCategory();
 
         if ($this->category->remove($category['id'])) {
             $this->flash->success(t('Category removed successfully.'));

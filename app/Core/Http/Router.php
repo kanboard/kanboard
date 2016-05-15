@@ -2,7 +2,6 @@
 
 namespace Kanboard\Core\Http;
 
-use RuntimeException;
 use Kanboard\Core\Base;
 
 /**
@@ -13,13 +12,16 @@ use Kanboard\Core\Base;
  */
 class Router extends Base
 {
+    const DEFAULT_CONTROLLER = 'DashboardController';
+    const DEFAULT_METHOD = 'show';
+
     /**
      * Plugin name
      *
      * @access private
      * @var string
      */
-    private $plugin = '';
+    private $currentPluginName = '';
 
     /**
      * Controller
@@ -27,7 +29,7 @@ class Router extends Base
      * @access private
      * @var string
      */
-    private $controller = '';
+    private $currentControllerName = '';
 
     /**
      * Action
@@ -35,7 +37,7 @@ class Router extends Base
      * @access private
      * @var string
      */
-    private $action = '';
+    private $currentActionName = '';
 
     /**
      * Get plugin name
@@ -45,7 +47,7 @@ class Router extends Base
      */
     public function getPlugin()
     {
-        return $this->plugin;
+        return $this->currentPluginName;
     }
 
     /**
@@ -56,7 +58,7 @@ class Router extends Base
      */
     public function getController()
     {
-        return $this->controller;
+        return $this->currentControllerName;
     }
 
     /**
@@ -67,7 +69,7 @@ class Router extends Base
      */
     public function getAction()
     {
-        return $this->action;
+        return $this->currentActionName;
     }
 
     /**
@@ -109,11 +111,9 @@ class Router extends Base
             $plugin = $route['plugin'];
         }
 
-        $this->controller = ucfirst($this->sanitize($controller, 'app'));
-        $this->action = $this->sanitize($action, 'index');
-        $this->plugin = ucfirst($this->sanitize($plugin));
-
-        return $this->executeAction();
+        $this->currentControllerName = ucfirst($this->sanitize($controller, self::DEFAULT_CONTROLLER));
+        $this->currentActionName = $this->sanitize($action, self::DEFAULT_METHOD);
+        $this->currentPluginName = ucfirst($this->sanitize($plugin));
     }
 
     /**
@@ -127,43 +127,5 @@ class Router extends Base
     public function sanitize($value, $default = '')
     {
         return preg_match('/^[a-zA-Z_0-9]+$/', $value) ? $value : $default;
-    }
-
-    /**
-     * Execute controller action
-     *
-     * @access private
-     */
-    private function executeAction()
-    {
-        $class = $this->getControllerClassName();
-
-        if (! class_exists($class)) {
-            throw new RuntimeException('Controller not found');
-        }
-
-        if (! method_exists($class, $this->action)) {
-            throw new RuntimeException('Action not implemented');
-        }
-
-        $instance = new $class($this->container);
-        $instance->beforeAction();
-        $instance->{$this->action}();
-        return $instance;
-    }
-
-    /**
-     * Get controller class name
-     *
-     * @access private
-     * @return string
-     */
-    private function getControllerClassName()
-    {
-        if ($this->plugin !== '') {
-            return '\Kanboard\Plugin\\'.$this->plugin.'\Controller\\'.$this->controller;
-        }
-
-        return '\Kanboard\Controller\\'.$this->controller;
     }
 }

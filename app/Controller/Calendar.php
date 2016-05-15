@@ -14,7 +14,7 @@ use Kanboard\Model\Task as TaskModel;
  * @author   Frederic Guillot
  * @author   Timo Litzbarski
  */
-class Calendar extends Base
+class Calendar extends BaseController
 {
     /**
      * Show calendar view for projects

@@ -8,12 +8,14 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Currency extends Base
+class Currency extends BaseController
 {
     /**
      * Display all currency rates and form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function index(array $values = array(), array $errors = array())
     {
@@ -40,13 +42,13 @@ class Currency extends Base
         if ($valid) {
             if ($this->currency->create($values['currency'], $values['rate'])) {
                 $this->flash->success(t('The currency rate have been added successfully.'));
-                $this->response->redirect($this->helper->url->to('currency', 'index'));
+                return $this->response->redirect($this->helper->url->to('currency', 'index'));
             } else {
                 $this->flash->failure(t('Unable to add this currency rate.'));
             }
         }
 
-        $this->index($values, $errors);
+        return $this->index($values, $errors);
     }
 
     /**

@@ -2,13 +2,15 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Atom/RSS Feed controller
  *
  * @package  controller
  * @author   Frederic Guillot
  */
-class Feed extends Base
+class Feed extends BaseController
 {
     /**
      * RSS feed for a user
@@ -22,7 +24,7 @@ class Feed extends Base
 
         // Token verification
         if (empty($user)) {
-            $this->forbidden(true);
+            throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
         $this->response->xml($this->template->render('feed/user', array(
@@ -41,9 +43,8 @@ class Feed extends Base
         $token = $this->request->getStringParam('token');
         $project = $this->project->getByToken($token);
 
-        // Token verification
         if (empty($project)) {
-            $this->forbidden(true);
+            throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
         $this->response->xml($this->template->render('feed/project', array(

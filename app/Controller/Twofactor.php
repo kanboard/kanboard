@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Two Factor Auth controller
  *
@@ -14,11 +16,13 @@ class Twofactor extends User
      * Only the current user can access to 2FA settings
      *
      * @access private
+     * @param  array $user
+     * @throws AccessForbiddenException
      */
     private function checkCurrentUser(array $user)
     {
         if ($user['id'] != $this->userSession->getId()) {
-            $this->forbidden();
+            throw new AccessForbiddenException();
         }
     }
 
@@ -145,7 +149,7 @@ class Twofactor extends User
         if ($provider->authenticate()) {
             $this->userSession->validatePostAuthentication();
             $this->flash->success(t('The two factor authentication code is valid.'));
-            $this->response->redirect($this->helper->url->to('app', 'index'));
+            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
         } else {
             $this->flash->failure(t('The two factor authentication code is not valid.'));
             $this->response->redirect($this->helper->url->to('twofactor', 'code'));
@@ -188,10 +192,10 @@ class Twofactor extends User
                 'twofactor_secret' => '',
             ));
 
-            $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
+            return $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
         }
 
-        $this->response->html($this->helper->layout->user('twofactor/disable', array(
+        return $this->response->html($this->helper->layout->user('twofactor/disable', array(
             'user' => $user,
         )));
     }

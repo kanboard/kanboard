@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Auth extends Base
+class Auth extends BaseController
 {
     /**
      * Display the form login
@@ -20,16 +20,16 @@ class Auth extends Base
     public function login(array $values = array(), array $errors = array())
     {
         if ($this->userSession->isLogged()) {
-            $this->response->redirect($this->helper->url->to('app', 'index'));
+            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
+        } else {
+            $this->response->html($this->helper->layout->app('auth/index', array(
+                'captcha' => ! empty($values['username']) && $this->userLocking->hasCaptcha($values['username']),
+                'errors' => $errors,
+                'values' => $values,
+                'no_layout' => true,
+                'title' => t('Login')
+            )));
         }
-
-        $this->response->html($this->helper->layout->app('auth/index', array(
-            'captcha' => ! empty($values['username']) && $this->userLocking->hasCaptcha($values['username']),
-            'errors' => $errors,
-            'values' => $values,
-            'no_layout' => true,
-            'title' => t('Login')
-        )));
     }
 
     /**
@@ -45,9 +45,9 @@ class Auth extends Base
 
         if ($valid) {
             $this->redirectAfterLogin();
+        } else {
+            $this->login($values, $errors);
         }
-
-        $this->login($values, $errors);
     }
 
     /**
@@ -76,8 +76,8 @@ class Auth extends Base
             $redirect = $this->sessionStorage->redirectAfterLogin;
             unset($this->sessionStorage->redirectAfterLogin);
             $this->response->redirect($redirect);
+        } else {
+            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
         }
-
-        $this->response->redirect($this->helper->url->to('app', 'index'));
     }
 }

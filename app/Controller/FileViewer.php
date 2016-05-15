@@ -10,7 +10,7 @@ use Kanboard\Core\ObjectStorage\ObjectStorageException;
  * @package  controller
  * @author   Frederic Guillot
  */
-class FileViewer extends Base
+class FileViewer extends BaseController
 {
     /**
      * Get file content from object storage
@@ -24,11 +24,9 @@ class FileViewer extends Base
         $content = '';
 
         try {
-
             if ($file['is_image'] == 0) {
                 $content = $this->objectStorage->get($file['path']);
             }
-
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
         }
@@ -68,17 +66,18 @@ class FileViewer extends Base
     {
         $file = $this->getFile();
         $etag = md5($file['path']);
-        $this->response->contentType($this->helper->file->getImageMimeType($file['name']));
-        $this->response->cache(5 * 86400, $etag);
+        $this->response->withContentType($this->helper->file->getImageMimeType($file['name']));
+        $this->response->withCache(5 * 86400, $etag);
 
         if ($this->request->getHeader('If-None-Match') === '"'.$etag.'"') {
-            return $this->response->status(304);
-        }
+            $this->response->status(304);
+        } else {
 
-        try {
-            $this->objectStorage->output($file['path']);
-        } catch (ObjectStorageException $e) {
-            $this->logger->error($e->getMessage());
+            try {
+                $this->objectStorage->output($file['path']);
+            } catch (ObjectStorageException $e) {
+                $this->logger->error($e->getMessage());
+            }
         }
     }
 
@@ -94,23 +93,24 @@ class FileViewer extends Base
         $filename = $this->$model->getThumbnailPath($file['path']);
         $etag = md5($filename);
 
-        $this->response->cache(5 * 86400, $etag);
-        $this->response->contentType('image/jpeg');
+        $this->response->withCache(5 * 86400, $etag);
+        $this->response->withContentType('image/jpeg');
 
         if ($this->request->getHeader('If-None-Match') === '"'.$etag.'"') {
-            return $this->response->status(304);
-        }
+            $this->response->status(304);
+        } else {
 
-        try {
+            try {
 
-            $this->objectStorage->output($filename);
-        } catch (ObjectStorageException $e) {
-            $this->logger->error($e->getMessage());
+                $this->objectStorage->output($filename);
+            } catch (ObjectStorageException $e) {
+                $this->logger->error($e->getMessage());
 
-            // Try to generate thumbnail on the fly for images uploaded before Kanboard < 1.0.19
-            $data = $this->objectStorage->get($file['path']);
-            $this->$model->generateThumbnailFromData($file['path'], $data);
-            $this->objectStorage->output($this->$model->getThumbnailPath($file['path']));
+                // Try to generate thumbnail on the fly for images uploaded before Kanboard < 1.0.19
+                $data = $this->objectStorage->get($file['path']);
+                $this->$model->generateThumbnailFromData($file['path'], $data);
+                $this->objectStorage->output($this->$model->getThumbnailPath($file['path']));
+            }
         }
     }
 
@@ -123,7 +123,7 @@ class FileViewer extends Base
     {
         try {
             $file = $this->getFile();
-            $this->response->forceDownload($file['name']);
+            $this->response->withDownload($file['name']);
             $this->objectStorage->output($file['path']);
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());

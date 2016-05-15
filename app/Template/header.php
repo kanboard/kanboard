@@ -2,7 +2,7 @@
     <nav>
         <h1>
             <span class="logo">
-                <?= $this->url->link('K<span>B</span>', 'app', 'index', array(), false, '', t('Dashboard')) ?>
+                <?= $this->url->link('K<span>B</span>', 'DashboardController', 'show', array(), false, '', t('Dashboard')) ?>
             </span>
             <span class="title">
                 <?= $this->text->e($title) ?>
@@ -34,7 +34,7 @@
             <li class="user-links">
                 <?php if ($this->user->hasNotifications()): ?>
                     <span class="notification">
-                        <?= $this->url->link('<i class="fa fa-bell web-notification-icon"></i>', 'app', 'notifications', array('user_id' => $this->user->getId()), false, '', t('Unread notifications')) ?>
+                        <?= $this->url->link('<i class="fa fa-bell web-notification-icon"></i>', 'DashboardController', 'notifications', array('user_id' => $this->user->getId()), false, '', t('Unread notifications')) ?>
                     </span>
                 <?php endif ?>
 
@@ -63,7 +63,7 @@
                         <li class="no-hover"><strong><?= $this->text->e($this->user->getFullname()) ?></strong></li>
                         <li>
                             <i class="fa fa-tachometer fa-fw"></i>
-                            <?= $this->url->link(t('My dashboard'), 'app', 'index', array('user_id' => $this->user->getId())) ?>
+                            <?= $this->url->link(t('My dashboard'), 'DashboardController', 'show', array('user_id' => $this->user->getId())) ?>
                         </li>
                         <li>
                             <i class="fa fa-home fa-fw"></i>

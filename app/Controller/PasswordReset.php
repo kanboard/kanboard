@@ -2,13 +2,15 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Password Reset Controller
  *
  * @package controller
  * @author  Frederic Guillot
  */
-class PasswordReset extends Base
+class PasswordReset extends BaseController
 {
     /**
      * Show the form to reset the password
@@ -37,9 +39,9 @@ class PasswordReset extends Base
         if ($valid) {
             $this->sendEmail($values['username']);
             $this->response->redirect($this->helper->url->to('auth', 'login'));
+        } else {
+            $this->create($values, $errors);
         }
-
-        $this->create($values, $errors);
     }
 
     /**
@@ -59,9 +61,9 @@ class PasswordReset extends Base
                 'values' => $values,
                 'no_layout' => true,
             )));
+        } else {
+            $this->response->redirect($this->helper->url->to('auth', 'login'));
         }
-
-        $this->response->redirect($this->helper->url->to('auth', 'login'));
     }
 
     /**
@@ -83,10 +85,10 @@ class PasswordReset extends Base
                 $this->passwordReset->disable($user_id);
             }
 
-            $this->response->redirect($this->helper->url->to('auth', 'login'));
+            return $this->response->redirect($this->helper->url->to('auth', 'login'));
         }
 
-        $this->change($values, $errors);
+        return $this->change($values, $errors);
     }
 
     /**
@@ -114,7 +116,7 @@ class PasswordReset extends Base
     private function checkActivation()
     {
         if ($this->config->get('password_reset', 0) == 0) {
-            $this->response->redirect($this->helper->url->to('auth', 'login'));
+            throw AccessForbiddenException::getInstance()->withoutLayout();
         }
     }
 }

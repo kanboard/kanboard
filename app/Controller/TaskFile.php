@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class TaskFile extends Base
+class TaskFile extends BaseController
 {
     /**
      * Screenshot
@@ -24,7 +24,7 @@ class TaskFile extends Base
             return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
-        $this->response->html($this->template->render('task_file/screenshot', array(
+        return $this->response->html($this->template->render('task_file/screenshot', array(
             'task' => $task,
         )));
     }

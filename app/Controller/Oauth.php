@@ -10,7 +10,7 @@ use Kanboard\Core\Security\OAuthAuthenticationProviderInterface;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Oauth extends Base
+class Oauth extends BaseController
 {
     /**
      * Redirect to the provider if no code received
@@ -106,7 +106,7 @@ class Oauth extends Base
     protected function authenticate($providerName)
     {
         if ($this->authenticationManager->oauthAuthentication($providerName)) {
-            $this->response->redirect($this->helper->url->to('app', 'index'));
+            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
         } else {
             $this->authenticationFailure(t('External authentication failed'));
         }

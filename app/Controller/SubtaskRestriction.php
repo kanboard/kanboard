@@ -10,7 +10,7 @@ use Kanboard\Model\Subtask as SubtaskModel;
  * @package  controller
  * @author   Frederic Guillot
  */
-class SubtaskRestriction extends Base
+class SubtaskRestriction extends BaseController
 {
     /**
      * Show popup

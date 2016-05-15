@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class ProjectOverview extends Base
+class ProjectOverview extends BaseController
 {
     /**
      * Show project overview

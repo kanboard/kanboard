@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Board settings') ?></h2>
 </div>
-<form method="post" action="<?= $this->url->href('config', 'board') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('config', 'save', array('redirect' => 'board')) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

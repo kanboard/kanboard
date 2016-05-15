@@ -8,12 +8,14 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class ProjectCreation extends Base
+class ProjectCreation extends BaseController
 {
     /**
      * Display a form to create a new project
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -33,6 +35,8 @@ class ProjectCreation extends Base
      * Display a form to create a private project
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function createPrivate(array $values = array(), array $errors = array())
     {
@@ -61,7 +65,7 @@ class ProjectCreation extends Base
             $this->flash->failure(t('Unable to create your project.'));
         }
 
-        $this->create($values, $errors);
+        return $this->create($values, $errors);
     }
 
     /**

@@ -11,7 +11,7 @@ use Kanboard\Model\Task as TaskModel;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Listing extends Base
+class Listing extends BaseController
 {
     /**
      * Show list view for projects

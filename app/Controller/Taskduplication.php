@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Taskduplication extends Base
+class Taskduplication extends BaseController
 {
     /**
      * Duplicate a task
@@ -25,14 +25,14 @@ class Taskduplication extends Base
 
             if ($task_id > 0) {
                 $this->flash->success(t('Task created successfully.'));
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task_id)));
+                return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task_id)));
             } else {
                 $this->flash->failure(t('Unable to create this task.'));
-                $this->response->redirect($this->helper->url->to('taskduplication', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+                return $this->response->redirect($this->helper->url->to('taskduplication', 'duplicate', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
             }
         }
 
-        $this->response->html($this->template->render('task_duplication/duplicate', array(
+        return $this->response->html($this->template->render('task_duplication/duplicate', array(
             'task' => $task,
         )));
     }
@@ -57,13 +57,13 @@ class Taskduplication extends Base
                                                                 $values['category_id'],
                                                                 $values['owner_id'])) {
                 $this->flash->success(t('Task updated successfully.'));
-                $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task['id'])));
+                return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task['id'])));
             }
 
             $this->flash->failure(t('Unable to update your task.'));
         }
 
-        $this->chooseDestination($task, 'task_duplication/move');
+        return $this->chooseDestination($task, 'task_duplication/move');
     }
 
     /**
@@ -87,14 +87,14 @@ class Taskduplication extends Base
 
                 if ($task_id > 0) {
                     $this->flash->success(t('Task created successfully.'));
-                    $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task_id)));
+                    return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $values['project_id'], 'task_id' => $task_id)));
                 }
             }
 
             $this->flash->failure(t('Unable to create your task.'));
         }
 
-        $this->chooseDestination($task, 'task_duplication/copy');
+        return $this->chooseDestination($task, 'task_duplication/copy');
     }
 
     /**

@@ -8,7 +8,7 @@ namespace Kanboard\Controller;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Project extends Base
+class Project extends BaseController
 {
     /**
      * List of projects
@@ -75,12 +75,9 @@ class Project extends Base
             }
 
             $this->response->redirect($this->helper->url->to('project', 'share', array('project_id' => $project['id'])));
+        } else {
+            $this->show();
         }
-
-        $this->response->html($this->helper->layout->project('project/share', array(
-            'project' => $project,
-            'title' => t('Public access'),
-        )));
     }
 
     /**
@@ -96,15 +93,15 @@ class Project extends Base
             $this->projectMetadata->save($project['id'], $this->request->getValues());
             $this->flash->success(t('Project updated successfully.'));
             $this->response->redirect($this->helper->url->to('project', 'integrations', array('project_id' => $project['id'])));
+        } else {
+            $this->response->html($this->helper->layout->project('project/integrations', array(
+                'project' => $project,
+                'title' => t('Integrations'),
+                'webhook_token' => $this->config->get('webhook_token'),
+                'values' => $this->projectMetadata->getAll($project['id']),
+                'errors' => array(),
+            )));
         }
-
-        $this->response->html($this->helper->layout->project('project/integrations', array(
-            'project' => $project,
-            'title' => t('Integrations'),
-            'webhook_token' => $this->config->get('webhook_token'),
-            'values' => $this->projectMetadata->getAll($project['id']),
-            'errors' => array(),
-        )));
     }
 
     /**
@@ -120,10 +117,10 @@ class Project extends Base
             $values = $this->request->getValues();
             $this->projectNotification->saveSettings($project['id'], $values);
             $this->flash->success(t('Project updated successfully.'));
-            $this->response->redirect($this->helper->url->to('project', 'notifications', array('project_id' => $project['id'])));
+            return $this->response->redirect($this->helper->url->to('project', 'notifications', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->helper->layout->project('project/notifications', array(
+        return $this->response->html($this->helper->layout->project('project/notifications', array(
             'notifications' => $this->projectNotification->readSettings($project['id']),
             'types' => $this->projectNotificationType->getTypes(),
             'project' => $project,
@@ -149,10 +146,10 @@ class Project extends Base
                 $this->flash->failure(t('Unable to remove this project.'));
             }
 
-            $this->response->redirect($this->helper->url->to('project', 'index'));
+            return $this->response->redirect($this->helper->url->to('project', 'index'));
         }
 
-        $this->response->html($this->helper->layout->project('project/remove', array(
+        return $this->response->html($this->helper->layout->project('project/remove', array(
             'project' => $project,
             'title' => t('Remove project')
         )));
@@ -178,10 +175,10 @@ class Project extends Base
                 $this->flash->failure(t('Unable to clone this project.'));
             }
 
-            $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
+            return $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project_id)));
         }
 
-        $this->response->html($this->helper->layout->project('project/duplicate', array(
+        return $this->response->html($this->helper->layout->project('project/duplicate', array(
             'project' => $project,
             'title' => t('Clone this project')
         )));
@@ -205,10 +202,10 @@ class Project extends Base
                 $this->flash->failure(t('Unable to disable this project.'));
             }
 
-            $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
+            return $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->helper->layout->project('project/disable', array(
+        return $this->response->html($this->helper->layout->project('project/disable', array(
             'project' => $project,
             'title' => t('Project activation')
         )));
@@ -232,10 +229,10 @@ class Project extends Base
                 $this->flash->failure(t('Unable to activate this project.'));
             }
 
-            $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
+            return $this->response->redirect($this->helper->url->to('project', 'show', array('project_id' => $project['id'])));
         }
 
-        $this->response->html($this->helper->layout->project('project/enable', array(
+        return $this->response->html($this->helper->layout->project('project/enable', array(
             'project' => $project,
             'title' => t('Project activation')
         )));

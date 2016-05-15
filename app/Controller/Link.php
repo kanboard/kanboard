@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\PageNotFoundException;
+
 /**
  * Link controller
  *
@@ -9,20 +11,21 @@ namespace Kanboard\Controller;
  * @author  Olivier Maridat
  * @author  Frederic Guillot
  */
-class Link extends Base
+class Link extends BaseController
 {
     /**
      * Get the current link
      *
      * @access private
      * @return array
+     * @throws PageNotFoundException
      */
     private function getLink()
     {
         $link = $this->link->getById($this->request->getIntegerParam('link_id'));
 
         if (empty($link)) {
-            $this->notfound();
+            throw new PageNotFoundException();
         }
 
         return $link;
@@ -32,6 +35,8 @@ class Link extends Base
      * List of links
      *
      * @access public
+     * @param array $values
+     * @param array $errors
      */
     public function index(array $values = array(), array $errors = array())
     {
@@ -56,19 +61,22 @@ class Link extends Base
         if ($valid) {
             if ($this->link->create($values['label'], $values['opposite_label']) !== false) {
                 $this->flash->success(t('Link added successfully.'));
-                $this->response->redirect($this->helper->url->to('link', 'index'));
+                return $this->response->redirect($this->helper->url->to('link', 'index'));
             } else {
                 $this->flash->failure(t('Unable to create your link.'));
             }
         }
 
-        $this->index($values, $errors);
+        return $this->index($values, $errors);
     }
 
     /**
      * Edit form
      *
      * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws PageNotFoundException
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -97,13 +105,13 @@ class Link extends Base
         if ($valid) {
             if ($this->link->update($values)) {
                 $this->flash->success(t('Link updated successfully.'));
-                $this->response->redirect($this->helper->url->to('link', 'index'));
+                return $this->response->redirect($this->helper->url->to('link', 'index'));
             } else {
                 $this->flash->failure(t('Unable to update your link.'));
             }
         }
 
-        $this->edit($values, $errors);
+        return $this->edit($values, $errors);
     }
 
     /**
