@@ -32,10 +32,10 @@ class BootstrapSubscriber extends BaseSubscriber implements EventSubscriberInter
                 $this->logger->debug($message);
             }
 
-            $this->logger->debug('SQL_QUERIES={nb}', array('nb' => $this->container['db']->nbQueries));
-            $this->logger->debug('RENDERING={time}', array('time' => microtime(true) - $this->request->getStartTime()));
-            $this->logger->debug('MEMORY='.$this->helper->text->bytes(memory_get_usage()));
-            $this->logger->debug('URI='.$this->request->getUri());
+            $this->logger->debug('nb_queries={nb}', array('nb' => $this->db->getStatementHandler()->getNbQueries()));
+            $this->logger->debug('rendering_time={time}', array('time' => microtime(true) - $this->request->getStartTime()));
+            $this->logger->debug('memory_usage='.$this->helper->text->bytes(memory_get_usage()));
+            $this->logger->debug('uri='.$this->request->getUri());
             $this->logger->debug('###############################################');
         }
     }

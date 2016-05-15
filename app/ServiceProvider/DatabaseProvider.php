@@ -20,8 +20,13 @@ class DatabaseProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         $container['db'] = $this->getInstance();
-        $container['db']->stopwatch = DEBUG;
-        $container['db']->logQueries = DEBUG;
+
+        if (DEBUG) {
+            $container['db']->getStatementHandler()
+                ->withLogging()
+                ->withStopWatch()
+            ;
+        }
 
         return $container;
     }
