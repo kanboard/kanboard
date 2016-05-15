@@ -1,49 +1,10 @@
 BUILD_DIR = /tmp
 
-CSS_APP = $(addprefix assets/css/src/, $(addsuffix .css, base links title table form button alert tooltip header board task comment subtask tasklink markdown listing activity dashboard pagination popover confirm sidebar responsive dropdown upload filters gantt project files views accordion avatar))
-CSS_PRINT = $(addprefix assets/css/src/, $(addsuffix .css, print links table board task comment subtask tasklink markdown))
-CSS_VENDOR = $(addprefix assets/css/vendor/, $(addsuffix .css, jquery-ui.min jquery-ui-timepicker-addon.min chosen.min fullcalendar.min font-awesome.min c3.min simplemde.min))
+all: static
 
-JS_APP = $(addprefix assets/js/src/, $(addsuffix .js, Namespace App Dropdown Popover Notification Accordion Session Calendar AvgTimeColumnChart BurndownChart CompareHoursColumnChart CumulativeFlowDiagram LeadCycleTimeChart UserRepartitionChart TaskTimeColumnChart TaskRepartitionChart Gantt Column Markdown ProjectPermission ProjectCreation Screenshot FileUpload Search Task Subtask Swimlane BoardColumnView BoardColumnScrolling BoardHorizontalScrolling BoardCollapsedMode BoardDragAndDrop BoardTask BoardPolling Tooltip Bootstrap))
-JS_VENDOR = $(addprefix assets/js/vendor/, $(addsuffix .js, jquery-1.11.3.min jquery-ui.min jquery-ui-timepicker-addon.min jquery.ui.touch-punch.min chosen.jquery.min moment.min fullcalendar.min mousetrap.min mousetrap-global-bind.min simplemde.min))
-JS_LANG = $(addprefix assets/js/vendor/lang/, $(addsuffix .js, cs da de es el fi fr hu id it ja ko nl nb pl pt pt-br ru sv sr th tr zh-cn))
-
-all: css js
-
-vendor.css:
-	@ cat ${CSS_VENDOR} > vendor.css
-
-app.css:
-	@ rm -f assets/css/app.css
-	@ cat ${CSS_APP} > tmp.css
-	@ yuicompressor --charset utf-8 --type css -o tmp.css tmp.css
-	@ cat vendor.css tmp.css >> assets/css/app.css
-	@ rm -f tmp.css
-
-print.css:
-	@ rm -f assets/css/print.css
-	@ cat ${CSS_PRINT} > tmp.css
-	@ yuicompressor --charset utf-8 --type css -o tmp.css tmp.css
-	@ cat vendor.css tmp.css >> assets/css/print.css
-	@ rm -f tmp.css
-
-css: vendor.css app.css print.css
-	@ rm -f vendor.css
-
-vendor.js:
-	@ cat ${JS_VENDOR} > vendor.js
-	@ cat ${JS_LANG} >> vendor.js
-
-app.js:
-	@ rm -f tmp.js
-	@ rm -f assets/js/app.js
-	@ cat ${JS_APP} >> tmp.js
-	@ yuicompressor --charset utf-8 --type js -o tmp.js tmp.js
-	@ cat vendor.js tmp.js >> assets/js/app.js
-	@ rm -f tmp.js
-
-js: vendor.js app.js
-	@ rm -f vendor.js
+static:
+	@ npm install
+	@ ./node_modules/gulp-cli/bin/gulp.js
 
 archive:
 	@ echo "Build archive: version=${version}, destination=${dst}"
@@ -64,6 +25,7 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard/*.markdown
 	@ rm -rf ${BUILD_DIR}/kanboard/*.lock
 	@ rm -rf ${BUILD_DIR}/kanboard/*.json
+	@ rm -rf ${BUILD_DIR}/kanboard/*.js
 	@ rm -rf ${BUILD_DIR}/kanboard/.docker
 	@ rm -rf ${BUILD_DIR}/kanboard/nitrous*
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name doc -type d -exec rm -rf {} +;

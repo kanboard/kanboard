@@ -1,0 +1,23 @@
+{
+  "name": "kanboard",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "fullcalendar": "^2.7.1",
+    "chosen": "^1.5.1",
+    "c3": "^0.4.11",
+    "jquery-ui": "^1.11.4",
+    "jqueryui-touch-punch": "*",
+    "jqueryui-timepicker-addon": "^1.6.3",
+    "mousetrap": "^1.5.3",
+    "simplemde": "^1.10.1",
+    "font-awesome": "fontawesome#^4.6.3",
+    "d3": "~3.5.0"
+  }
+}

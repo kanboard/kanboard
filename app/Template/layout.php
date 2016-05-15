@@ -12,13 +12,10 @@
             <meta http-equiv="refresh" content="<?= $board_public_refresh_interval ?>">
         <?php endif ?>
 
-        <?php if (! isset($not_editable)): ?>
-            <?= $this->asset->js('assets/js/app.js') ?>
-        <?php endif ?>
-
         <?= $this->asset->colorCss() ?>
-        <?= $this->asset->css('assets/css/app.css') ?>
-        <?= $this->asset->css('assets/css/print.css', true, 'print') ?>
+        <?= $this->asset->css('assets/css/vendor.min.css') ?>
+        <?= $this->asset->css('assets/css/app.min.css') ?>
+        <?= $this->asset->css('assets/css/print.min.css', true, 'print') ?>
         <?= $this->asset->customCss() ?>
 
         <?= $this->hook->asset('css', 'template:layout:css') ?>
@@ -62,6 +59,10 @@
             <?= $content_for_layout ?>
         </section>
         <?= $this->hook->render('template:layout:bottom') ?>
-     <?php endif ?>
+    <?php endif ?>
+    <?php if (! isset($not_editable)): ?>
+        <?= $this->asset->js('assets/js/vendor.min.js') ?>
+        <?= $this->asset->js('assets/js/app.min.js') ?>
+    <?php endif ?>
     </body>
 </html>

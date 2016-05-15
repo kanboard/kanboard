@@ -6,6 +6,9 @@ New features:
 * Add tasks in bulk from the board
 * Add dropdown for projects
 
+Improvements:
+
+* Use Gulp and Bower to manage assets
 
 Version 1.0.28
 --------------

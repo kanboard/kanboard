@@ -8,6 +8,3 @@
         </div>
     </section>
 </section>
-
-<?= $this->asset->js('assets/js/vendor/d3.v3.min.js') ?>
-<?= $this->asset->js('assets/js/vendor/c3.min.js') ?>

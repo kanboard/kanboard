@@ -34,6 +34,3 @@
         <li><?= t('If the task is not closed the current time is used instead of the completion date.') ?></li>
     </ul>
 </div>
-
-<?= $this->asset->js('assets/js/vendor/d3.v3.min.js') ?>
-<?= $this->asset->js('assets/js/vendor/c3.min.js') ?>

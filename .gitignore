@@ -20,3 +20,5 @@ data/cache
 /vendor
 *.bak
 !.docker/kanboard/config.php
+node_modules
+bower_components
