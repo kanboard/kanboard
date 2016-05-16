@@ -5,22 +5,22 @@
             <i class="fa fa-user fa-fw"></i>
             <?= $this->url->link(t('View profile'), 'user', 'show', array('user_id' => $user['id'])) ?>
         </li>
-        <?php if ($user['is_active'] == 1 && $this->user->hasAccess('UserStatus', 'disable') && ! $this->user->isCurrentUser($user['id'])): ?>
+        <?php if ($user['is_active'] == 1 && $this->user->hasAccess('UserStatusController', 'disable') && ! $this->user->isCurrentUser($user['id'])): ?>
             <li>
                 <i class="fa fa-times fa-fw"></i>
-                <?= $this->url->link(t('Disable'), 'UserStatus', 'confirmDisable', array('user_id' => $user['id']), false, 'popover') ?>
+                <?= $this->url->link(t('Disable'), 'UserStatusController', 'confirmDisable', array('user_id' => $user['id']), false, 'popover') ?>
             </li>
         <?php endif ?>
-        <?php if ($user['is_active'] == 0 && $this->user->hasAccess('UserStatus', 'enable') && ! $this->user->isCurrentUser($user['id'])): ?>
+        <?php if ($user['is_active'] == 0 && $this->user->hasAccess('UserStatusController', 'enable') && ! $this->user->isCurrentUser($user['id'])): ?>
             <li>
                 <i class="fa fa-check-square-o fa-fw"></i>
-                <?= $this->url->link(t('Enable'), 'UserStatus', 'confirmEnable', array('user_id' => $user['id']), false, 'popover') ?>
+                <?= $this->url->link(t('Enable'), 'UserStatusController', 'confirmEnable', array('user_id' => $user['id']), false, 'popover') ?>
             </li>
         <?php endif ?>
-        <?php if ($this->user->hasAccess('UserStatus', 'remove') && ! $this->user->isCurrentUser($user['id'])): ?>
+        <?php if ($this->user->hasAccess('UserStatusController', 'remove') && ! $this->user->isCurrentUser($user['id'])): ?>
             <li>
                 <i class="fa fa-trash-o fa-fw"></i>
-                <?= $this->url->link(t('Remove'), 'UserStatus', 'confirmRemove', array('user_id' => $user['id']), false, 'popover') ?>
+                <?= $this->url->link(t('Remove'), 'UserStatusController', 'confirmRemove', array('user_id' => $user['id']), false, 'popover') ?>
             </li>
         <?php endif ?>
     </ul>
