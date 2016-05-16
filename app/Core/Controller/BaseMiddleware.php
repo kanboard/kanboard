@@ -25,7 +25,7 @@ abstract class BaseMiddleware extends Base
     /**
      * Set next middleware
      *
-     * @param  BaseMiddleware|null $nextMiddleware
+     * @param  BaseMiddleware $nextMiddleware
      * @return BaseMiddleware
      */
     public function setNextMiddleware(BaseMiddleware $nextMiddleware)

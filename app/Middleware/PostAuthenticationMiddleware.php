@@ -22,7 +22,7 @@ class PostAuthenticationMiddleware extends BaseMiddleware
         $ignore = ($controller === 'twofactor' && in_array($action, array('code', 'check'))) || ($controller === 'auth' && $action === 'logout');
 
         if ($ignore === false && $this->userSession->hasPostAuthentication() && ! $this->userSession->isPostAuthenticationValidated()) {
-            $this->setNextMiddleware(null);
+            $this->nextMiddleware = null;
 
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);

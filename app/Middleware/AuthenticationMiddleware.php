@@ -33,7 +33,7 @@ class AuthenticationMiddleware extends BaseMiddleware
     protected function handleAuthentication()
     {
         if (! $this->userSession->isLogged() && ! $this->authenticationManager->preAuthentication()) {
-            $this->setNextMiddleware(null);
+            $this->nextMiddleware = null;
 
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);
@@ -44,10 +44,10 @@ class AuthenticationMiddleware extends BaseMiddleware
         }
     }
 
-    private function isPublicAccess()
+    protected function isPublicAccess()
     {
         if ($this->applicationAuthorization->isAllowed($this->router->getController(), $this->router->getAction(), Role::APP_PUBLIC)) {
-            $this->setNextMiddleware(null);
+            $this->nextMiddleware = null;
             return true;
         }
 
