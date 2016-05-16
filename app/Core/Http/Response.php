@@ -172,7 +172,7 @@ class Response extends Base
      * @param  string $filename
      * @return $this
      */
-    public function withDownload($filename)
+    public function withFileDownload($filename)
     {
         $this->withHeader('Content-Disposition', 'attachment; filename="'.$filename.'"');
         $this->withHeader('Content-Transfer-Encoding', 'binary');

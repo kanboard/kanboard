@@ -123,7 +123,7 @@ class FileViewer extends BaseController
     {
         try {
             $file = $this->getFile();
-            $this->response->withDownload($file['name']);
+            $this->response->withFileDownload($file['name']);
             $this->objectStorage->output($file['path']);
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());

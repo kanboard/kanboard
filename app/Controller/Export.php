@@ -29,7 +29,7 @@ class Export extends BaseController
 
         if ($from && $to) {
             $data = $this->$model->$method($project['id'], $from, $to);
-            $this->response->withDownload($filename.'.csv');
+            $this->response->withFileDownload($filename.'.csv');
             $this->response->csv($data);
         }
 

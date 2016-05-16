@@ -69,7 +69,7 @@ class TaskImport extends BaseController
      */
     public function template()
     {
-        $this->response->withDownload('tasks.csv');
+        $this->response->withFileDownload('tasks.csv');
         $this->response->csv(array($this->taskImport->getColumnMapping()));
     }
 }

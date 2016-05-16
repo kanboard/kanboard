@@ -137,7 +137,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('ProjectCreation', 'create', Role::APP_MANAGER);
         $acl->add('Projectuser', '*', Role::APP_MANAGER);
         $acl->add('Twofactor', 'disable', Role::APP_ADMIN);
-        $acl->add('UserImport', '*', Role::APP_ADMIN);
+        $acl->add('UserImportController', '*', Role::APP_ADMIN);
         $acl->add('User', array('index', 'create', 'save', 'authentication'), Role::APP_ADMIN);
         $acl->add('UserStatus', '*', Role::APP_ADMIN);
 

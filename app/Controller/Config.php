@@ -176,7 +176,7 @@ class Config extends BaseController
     public function downloadDb()
     {
         $this->checkCSRFParam();
-        $this->response->withDownload('db.sqlite.gz');
+        $this->response->withFileDownload('db.sqlite.gz');
         $this->response->binary($this->config->downloadDatabase());
     }
 
