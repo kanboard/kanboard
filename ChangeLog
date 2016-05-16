@@ -3,12 +3,14 @@ Version 1.0.29 (unreleased)
 
 New features:
 
+* Added menu entry to add tasks from all project views
 * Add tasks in bulk from the board
 * Add dropdown for projects
 
 Improvements:
 
 * Use Gulp and Bower to manage assets
+* Controller and Middleware refactoring
 
 Version 1.0.28
 --------------

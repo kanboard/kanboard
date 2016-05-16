@@ -13,7 +13,7 @@
                    data-save-url="<?= $this->url->href('board', 'save', array('project_id' => $project['id'])) ?>"
                    data-reload-url="<?= $this->url->href('board', 'reload', array('project_id' => $project['id'])) ?>"
                    data-check-url="<?= $this->url->href('board', 'check', array('project_id' => $project['id'], 'timestamp' => time())) ?>"
-                   data-task-creation-url="<?= $this->url->href('taskcreation', 'create', array('project_id' => $project['id'])) ?>"
+                   data-task-creation-url="<?= $this->url->href('TaskCreationController', 'show', array('project_id' => $project['id'])) ?>"
             >
         <?php endif ?>
 

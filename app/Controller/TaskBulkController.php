@@ -3,11 +3,11 @@
 namespace Kanboard\Controller;
 
 /**
- * Class TaskBulk
+ * Class TaskBulkController
  *
  * @package Kanboard\Controller
  */
-class TaskBulk extends BaseController
+class TaskBulkController extends BaseController
 {
     /**
      * Show the form

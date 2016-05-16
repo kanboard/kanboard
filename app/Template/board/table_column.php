@@ -12,9 +12,9 @@
 
         <!-- column in expanded mode -->
         <div class="board-column-expanded">
-            <?php if (! $not_editable && $this->user->hasProjectAccess('taskcreation', 'create', $column['project_id'])): ?>
+            <?php if (! $not_editable && $this->user->hasProjectAccess('TaskCreationController', 'show', $column['project_id'])): ?>
                 <div class="board-add-icon">
-                    <?= $this->url->link('+', 'taskcreation', 'create', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover', t('Add a new task')) ?>
+                    <?= $this->url->link('+', 'TaskCreationController', 'show', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover', t('Add a new task')) ?>
                 </div>
             <?php endif ?>
 
@@ -35,10 +35,10 @@
                                 <i class="fa fa-minus-square fa-fw"></i>
                                 <a href="#" class="board-toggle-column-view" data-column-id="<?= $column['id'] ?>"><?= t('Hide this column') ?></a>
                             </li>
-                            <?php if ($this->user->hasProjectAccess('Taskcreation', 'create', $column['project_id'])): ?>
+                            <?php if ($this->user->hasProjectAccess('TaskCreationController', 'show', $column['project_id'])): ?>
                                 <li>
                                     <i class="fa fa-align-justify" aria-hidden="true"></i>
-                                    <?= $this->url->link(t('Create tasks in bulk'), 'TaskBulk', 'show', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                                    <?= $this->url->link(t('Create tasks in bulk'), 'TaskBulkController', 'show', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                                 </li>
                                 <?php if ($column['nb_tasks'] > 0): ?>
                                     <li>

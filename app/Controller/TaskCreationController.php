@@ -3,12 +3,12 @@
 namespace Kanboard\Controller;
 
 /**
- * Task Creation controller
+ * Task Creation Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Taskcreation extends BaseController
+class TaskCreationController extends BaseController
 {
     /**
      * Display a form to create a new task
@@ -18,7 +18,7 @@ class Taskcreation extends BaseController
      * @param array $errors
      * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
-    public function create(array $values = array(), array $errors = array())
+    public function show(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
         $swimlanes_list = $this->swimlane->getList($project['id'], false, true);
@@ -35,7 +35,7 @@ class Taskcreation extends BaseController
             $values = $this->hook->merge('controller:task-creation:form:default', $values, array('default_values' => $values));
         }
 
-        $this->response->html($this->template->render('task_creation/form', array(
+        $this->response->html($this->template->render('task_creation/show', array(
             'project' => $project,
             'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
@@ -66,13 +66,13 @@ class Taskcreation extends BaseController
         }
 
         $this->flash->failure(t('Unable to create your task.'));
-        return $this->create($values, $errors);
+        return $this->show($values, $errors);
     }
 
     private function afterSave(array $project, array &$values)
     {
         if (isset($values['another_task']) && $values['another_task'] == 1) {
-            return $this->create(array(
+            return $this->show(array(
                 'owner_id' => $values['owner_id'],
                 'color_id' => $values['color_id'],
                 'category_id' => isset($values['category_id']) ? $values['category_id'] : 0,

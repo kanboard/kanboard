@@ -81,9 +81,9 @@ class DashboardController extends BaseController
 
         $this->response->html($this->helper->layout->dashboard('dashboard/show', array(
             'title' => t('Dashboard'),
-            'project_paginator' => $this->getProjectPaginator($user['id'], 'index', 10),
-            'task_paginator' => $this->getTaskPaginator($user['id'], 'index', 10),
-            'subtask_paginator' => $this->getSubtaskPaginator($user['id'], 'index', 10),
+            'project_paginator' => $this->getProjectPaginator($user['id'], 'show', 10),
+            'task_paginator' => $this->getTaskPaginator($user['id'], 'show', 10),
+            'subtask_paginator' => $this->getSubtaskPaginator($user['id'], 'show', 10),
             'user' => $user,
         )));
     }
