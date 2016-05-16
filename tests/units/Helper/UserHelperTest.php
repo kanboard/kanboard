@@ -54,7 +54,7 @@ class UserHelperTest extends Base
             'role' => Role::APP_MANAGER,
         );
 
-        $this->assertFalse($helper->hasAccess('user', 'create'));
+        $this->assertFalse($helper->hasAccess('UserCreationController', 'show'));
         $this->assertTrue($helper->hasAccess('ProjectCreation', 'create'));
         $this->assertTrue($helper->hasAccess('ProjectCreation', 'createPrivate'));
     }
@@ -68,7 +68,7 @@ class UserHelperTest extends Base
             'role' => Role::APP_USER,
         );
 
-        $this->assertFalse($helper->hasAccess('user', 'create'));
+        $this->assertFalse($helper->hasAccess('UserCreationController', 'show'));
         $this->assertFalse($helper->hasAccess('ProjectCreation', 'create'));
         $this->assertTrue($helper->hasAccess('ProjectCreation', 'createPrivate'));
     }
