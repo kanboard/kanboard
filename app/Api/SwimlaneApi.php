@@ -2,13 +2,15 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
+
 /**
  * Swimlane API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Swimlane extends \Kanboard\Core\Base
+class SwimlaneApi extends Base
 {
     public function getActiveSwimlanes($project_id)
     {

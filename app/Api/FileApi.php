@@ -7,10 +7,10 @@ use Kanboard\Core\ObjectStorage\ObjectStorageException;
 /**
  * File API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class File extends Base
+class FileApi extends BaseApi
 {
     public function getTaskFile($file_id)
     {
@@ -32,8 +32,9 @@ class File extends Base
             }
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
-            return '';
         }
+        
+        return '';
     }
 
     public function createTaskFile($project_id, $task_id, $filename, $blob)

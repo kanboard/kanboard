@@ -2,6 +2,7 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
 use LogicException;
 use Kanboard\Core\Security\Role;
 use Kanboard\Core\Ldap\Client as LdapClient;
@@ -11,10 +12,10 @@ use Kanboard\Core\Ldap\User as LdapUser;
 /**
  * User API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class User extends \Kanboard\Core\Base
+class UserApi extends Base
 {
     public function getUser($user_id)
     {

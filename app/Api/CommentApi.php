@@ -2,13 +2,15 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
+
 /**
  * Comment API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Comment extends \Kanboard\Core\Base
+class CommentApi extends Base
 {
     public function getComment($comment_id)
     {

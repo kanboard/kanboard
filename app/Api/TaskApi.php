@@ -8,10 +8,10 @@ use Kanboard\Model\Task as TaskModel;
 /**
  * Task API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Task extends Base
+class TaskApi extends BaseApi
 {
     public function searchTasks($project_id, $query)
     {

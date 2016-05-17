@@ -2,13 +2,15 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
+
 /**
  * TaskLink API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class TaskLink extends \Kanboard\Core\Base
+class TaskLinkApi extends Base
 {
     /**
      * Get a task link

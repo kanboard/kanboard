@@ -7,10 +7,10 @@ use Kanboard\Model\Subtask as SubtaskModel;
 /**
  * Me API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Me extends Base
+class MeApi extends BaseApi
 {
     public function getMe()
     {

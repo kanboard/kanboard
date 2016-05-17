@@ -2,13 +2,15 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
+
 /**
  * Subtask API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Subtask extends \Kanboard\Core\Base
+class SubtaskApi extends Base
 {
     public function getSubtask($subtask_id)
     {

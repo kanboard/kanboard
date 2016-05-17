@@ -2,13 +2,15 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
+
 /**
  * Action API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Action extends \Kanboard\Core\Base
+class ActionApi extends Base
 {
     public function getAvailableActions()
     {

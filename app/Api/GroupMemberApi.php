@@ -2,13 +2,15 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
+
 /**
  * Group Member API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class GroupMember extends \Kanboard\Core\Base
+class GroupMemberApi extends Base
 {
     public function getMemberGroups($user_id)
     {

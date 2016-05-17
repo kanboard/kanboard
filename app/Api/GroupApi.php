@@ -2,13 +2,15 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
+
 /**
  * Group API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Group extends \Kanboard\Core\Base
+class GroupApi extends Base
 {
     public function createGroup($name, $external_id = '')
     {

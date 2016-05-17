@@ -2,15 +2,16 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Core\Base;
 use Kanboard\Core\Security\Role;
 
 /**
  * Project Permission API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class ProjectPermission extends \Kanboard\Core\Base
+class ProjectPermissionApi extends Base
 {
     public function getProjectUsers($project_id)
     {

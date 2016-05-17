@@ -5,10 +5,10 @@ namespace Kanboard\Api;
 /**
  * Column API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Column extends Base
+class ColumnApi extends BaseApi
 {
     public function getColumns($project_id)
     {

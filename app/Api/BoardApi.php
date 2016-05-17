@@ -5,10 +5,10 @@ namespace Kanboard\Api;
 /**
  * Board API controller
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Board extends Base
+class BoardApi extends BaseApi
 {
     public function getBoard($project_id)
     {

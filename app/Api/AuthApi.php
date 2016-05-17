@@ -7,10 +7,10 @@ use JsonRPC\Exception\AuthenticationFailureException;
 /**
  * Base class
  *
- * @package  api
+ * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class Auth extends Base
+class AuthApi extends BaseApi
 {
     /**
      * Check api credentials
@@ -20,6 +20,7 @@ class Auth extends Base
      * @param  string  $password
      * @param  string  $class
      * @param  string  $method
+     * @throws AuthenticationFailureException
      */
     public function checkCredentials($username, $password, $class, $method)
     {
