@@ -5,12 +5,12 @@ namespace Kanboard\Controller;
 use Kanboard\Formatter\GroupAutoCompleteFormatter;
 
 /**
- * Group Helper
+ * Group Ajax Controller
  *
- * @package  controller
- * @author   Frederic Guillot
+ * @package Kanboard\Controller
+ * @author  Frederic Guillot
  */
-class GroupHelper extends BaseController
+class GroupAjaxController extends BaseController
 {
     /**
      * Group auto-completion (Ajax)

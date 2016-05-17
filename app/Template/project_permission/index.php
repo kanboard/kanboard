@@ -113,7 +113,7 @@
                 'title="'.t('Enter group name...').'"',
                 'data-dst-field="group_id"',
                 'data-dst-extra-field="external_id"',
-                'data-search-url="'.$this->url->href('GroupHelper', 'autocomplete').'"',
+                'data-search-url="'.$this->url->href('GroupAjaxController', 'autocomplete').'"',
             ),
             'autocomplete') ?>
 

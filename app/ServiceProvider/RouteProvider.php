@@ -161,13 +161,8 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('user/:user_id/avatar', 'AvatarFile', 'show');
 
             // Groups
-            $container['route']->addRoute('groups', 'group', 'index');
-            $container['route']->addRoute('groups/create', 'group', 'create');
-            $container['route']->addRoute('group/:group_id/associate', 'group', 'associate');
-            $container['route']->addRoute('group/:group_id/dissociate/:user_id', 'group', 'dissociate');
-            $container['route']->addRoute('group/:group_id/edit', 'group', 'edit');
-            $container['route']->addRoute('group/:group_id/members', 'group', 'users');
-            $container['route']->addRoute('group/:group_id/remove', 'group', 'confirm');
+            $container['route']->addRoute('groups', 'GroupListController', 'index');
+            $container['route']->addRoute('group/:group_id/members', 'GroupListController', 'users');
 
             // Config
             $container['route']->addRoute('settings', 'config', 'index');

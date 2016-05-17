@@ -80,7 +80,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-group fa-fw"></i>
-                                <?= $this->url->link(t('Groups management'), 'group', 'index') ?>
+                                <?= $this->url->link(t('Groups management'), 'GroupListController', 'index') ?>
                             </li>
                             <li>
                                 <i class="fa fa-cog fa-fw"></i>

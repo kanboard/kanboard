@@ -5,10 +5,10 @@ namespace Kanboard\Controller;
 /**
  * Group Controller
  *
- * @package  controller
- * @author   Frederic Guillot
+ * @package Kanboard\Controller
+ * @author  Frederic Guillot
  */
-class Group extends BaseController
+class GroupListController extends BaseController
 {
     /**
      * List all groups
@@ -18,7 +18,7 @@ class Group extends BaseController
     public function index()
     {
         $paginator = $this->paginator
-            ->setUrl('group', 'index')
+            ->setUrl('GroupListController', 'index')
             ->setMax(30)
             ->setOrder('name')
             ->setQuery($this->group->getQuery())
@@ -41,7 +41,7 @@ class Group extends BaseController
         $group = $this->group->getById($group_id);
 
         $paginator = $this->paginator
-            ->setUrl('group', 'users', array('group_id' => $group_id))
+            ->setUrl('GroupListController', 'users', array('group_id' => $group_id))
             ->setMax(30)
             ->setOrder('username')
             ->setQuery($this->groupMember->getQuery($group_id))
@@ -52,86 +52,6 @@ class Group extends BaseController
             'paginator' => $paginator,
             'group' => $group,
         )));
-    }
-
-    /**
-     * Display a form to create a new group
-     *
-     * @access public
-     * @param array $values
-     * @param array $errors
-     */
-    public function create(array $values = array(), array $errors = array())
-    {
-        $this->response->html($this->helper->layout->app('group/create', array(
-            'errors' => $errors,
-            'values' => $values,
-            'title' => t('New group')
-        )));
-    }
-
-    /**
-     * Validate and save a new group
-     *
-     * @access public
-     */
-    public function save()
-    {
-        $values = $this->request->getValues();
-        list($valid, $errors) = $this->groupValidator->validateCreation($values);
-
-        if ($valid) {
-            if ($this->group->create($values['name']) !== false) {
-                $this->flash->success(t('Group created successfully.'));
-                return $this->response->redirect($this->helper->url->to('group', 'index'));
-            } else {
-                $this->flash->failure(t('Unable to create your group.'));
-            }
-        }
-
-        return $this->create($values, $errors);
-    }
-
-    /**
-     * Display a form to update a group
-     *
-     * @access public
-     * @param array $values
-     * @param array $errors
-     */
-    public function edit(array $values = array(), array $errors = array())
-    {
-        if (empty($values)) {
-            $values = $this->group->getById($this->request->getIntegerParam('group_id'));
-        }
-
-        $this->response->html($this->helper->layout->app('group/edit', array(
-            'errors' => $errors,
-            'values' => $values,
-            'title' => t('Edit group')
-        )));
-    }
-
-    /**
-     * Validate and save a group
-     *
-     * @access public
-     */
-    public function update()
-    {
-        $values = $this->request->getValues();
-        list($valid, $errors) = $this->groupValidator->validateModification($values);
-
-        if ($valid) {
-            if ($this->group->update($values) !== false) {
-                $this->flash->success(t('Group updated successfully.'));
-                return $this->response->redirect($this->helper->url->to('group', 'index'));
-            } else {
-                $this->flash->failure(t('Unable to update your group.'));
-            }
-        }
-
-        return $this->edit($values, $errors);
     }
 
     /**
@@ -150,12 +70,11 @@ class Group extends BaseController
             $values['group_id'] = $group_id;
         }
 
-        $this->response->html($this->helper->layout->app('group/associate', array(
+        $this->response->html($this->template->render('group/associate', array(
             'users' => $this->user->prepareList($this->groupMember->getNotMembers($group_id)),
             'group' => $group,
             'errors' => $errors,
             'values' => $values,
-            'title' => t('Add group member to "%s"', $group['name']),
         )));
     }
 
@@ -171,7 +90,7 @@ class Group extends BaseController
         if (isset($values['group_id']) && isset($values['user_id'])) {
             if ($this->groupMember->addUser($values['group_id'], $values['user_id'])) {
                 $this->flash->success(t('Group member added successfully.'));
-                return $this->response->redirect($this->helper->url->to('group', 'users', array('group_id' => $values['group_id'])));
+                return $this->response->redirect($this->helper->url->to('GroupListController', 'users', array('group_id' => $values['group_id'])), true);
             } else {
                 $this->flash->failure(t('Unable to add group member.'));
             }
@@ -192,10 +111,9 @@ class Group extends BaseController
         $group = $this->group->getById($group_id);
         $user = $this->user->getById($user_id);
 
-        $this->response->html($this->helper->layout->app('group/dissociate', array(
+        $this->response->html($this->template->render('group/dissociate', array(
             'group' => $group,
             'user' => $user,
-            'title' => t('Remove user from group "%s"', $group['name']),
         )));
     }
 
@@ -216,7 +134,7 @@ class Group extends BaseController
             $this->flash->failure(t('Unable to remove this user from the group.'));
         }
 
-        $this->response->redirect($this->helper->url->to('group', 'users', array('group_id' => $group_id)));
+        $this->response->redirect($this->helper->url->to('GroupListController', 'users', array('group_id' => $group_id)), true);
     }
 
     /**
@@ -229,9 +147,8 @@ class Group extends BaseController
         $group_id = $this->request->getIntegerParam('group_id');
         $group = $this->group->getById($group_id);
 
-        $this->response->html($this->helper->layout->app('group/remove', array(
+        $this->response->html($this->template->render('group/remove', array(
             'group' => $group,
-            'title' => t('Remove group'),
         )));
     }
 
@@ -251,6 +168,6 @@ class Group extends BaseController
             $this->flash->failure(t('Unable to remove this group.'));
         }
 
-        $this->response->redirect($this->helper->url->to('group', 'index'));
+        $this->response->redirect($this->helper->url->to('GroupListController', 'index'), true);
     }
 }

@@ -6,7 +6,7 @@
             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New local user'), 'UserCreationController', 'show', array(), false, 'popover') ?></li>
             <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New remote user'), 'UserCreationController', 'show', array('remote' => 1), false, 'popover') ?></li>
             <li><i class="fa fa-upload fa-fw"></i><?= $this->url->link(t('Import'), 'UserImportController', 'show', array(), false, 'popover') ?></li>
-            <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'group', 'index') ?></li>
+            <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'GroupListController', 'index') ?></li>
         </ul>
         <?php endif ?>
     </div>
