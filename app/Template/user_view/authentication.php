@@ -1,8 +1,7 @@
 <div class="page-header">
     <h2><?= t('Edit Authentication') ?></h2>
 </div>
-<form method="post" action="<?= $this->url->href('user', 'authentication', array('user_id' => $user['id'])) ?>" autocomplete="off">
-
+<form method="post" action="<?= $this->url->href('UserViewController', 'authentication', array('user_id' => $user['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
     <?= $this->form->hidden('id', $values) ?>
@@ -16,7 +15,7 @@
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'user', 'show', array('user_id' => $user['id'])) ?>
+        <?= $this->url->link(t('cancel'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
     </div>
 
     <div class="alert alert-info">

@@ -1,7 +1,7 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'user', 'index') ?></li>
+            <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'UserListController', 'show') ?></li>
             <li><i class="fa fa-user-plus fa-fw"></i><?= $this->url->link(t('New group'), 'GroupCreationController', 'show', array(), false, 'popover') ?></li>
         </ul>
     </div>

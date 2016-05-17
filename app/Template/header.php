@@ -67,16 +67,16 @@
                         </li>
                         <li>
                             <i class="fa fa-home fa-fw"></i>
-                            <?= $this->url->link(t('My profile'), 'user', 'show', array('user_id' => $this->user->getId())) ?>
+                            <?= $this->url->link(t('My profile'), 'UserViewController', 'show', array('user_id' => $this->user->getId())) ?>
                         </li>
                         <li>
                             <i class="fa fa-folder fa-fw"></i>
                             <?= $this->url->link(t('Projects management'), 'project', 'index') ?>
                         </li>
-                        <?php if ($this->user->hasAccess('user', 'index')): ?>
+                        <?php if ($this->user->hasAccess('UserListController', 'show')): ?>
                             <li>
                                 <i class="fa fa-user fa-fw"></i>
-                                <?= $this->url->link(t('Users management'), 'user', 'index') ?>
+                                <?= $this->url->link(t('Users management'), 'UserListController', 'show') ?>
                             </li>
                             <li>
                                 <i class="fa fa-group fa-fw"></i>

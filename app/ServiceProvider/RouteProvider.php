@@ -144,19 +144,19 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('ical/user/:token', 'ical', 'user');
 
             // Users
-            $container['route']->addRoute('users', 'user', 'index');
-            $container['route']->addRoute('user/profile/:user_id', 'user', 'profile');
-            $container['route']->addRoute('user/show/:user_id', 'user', 'show');
-            $container['route']->addRoute('user/show/:user_id/timesheet', 'user', 'timesheet');
-            $container['route']->addRoute('user/show/:user_id/last-logins', 'user', 'last');
-            $container['route']->addRoute('user/show/:user_id/sessions', 'user', 'sessions');
-            $container['route']->addRoute('user/:user_id/edit', 'user', 'edit');
-            $container['route']->addRoute('user/:user_id/password', 'user', 'password');
-            $container['route']->addRoute('user/:user_id/share', 'user', 'share');
-            $container['route']->addRoute('user/:user_id/notifications', 'user', 'notifications');
-            $container['route']->addRoute('user/:user_id/accounts', 'user', 'external');
-            $container['route']->addRoute('user/:user_id/integrations', 'user', 'integrations');
-            $container['route']->addRoute('user/:user_id/authentication', 'user', 'authentication');
+            $container['route']->addRoute('users', 'UserListController', 'show');
+            $container['route']->addRoute('user/profile/:user_id', 'UserViewController', 'profile');
+            $container['route']->addRoute('user/show/:user_id', 'UserViewController', 'show');
+            $container['route']->addRoute('user/show/:user_id/timesheet', 'UserViewController', 'timesheet');
+            $container['route']->addRoute('user/show/:user_id/last-logins', 'UserViewController', 'lastLogin');
+            $container['route']->addRoute('user/show/:user_id/sessions', 'UserViewController', 'sessions');
+            $container['route']->addRoute('user/:user_id/edit', 'UserViewController', 'edit');
+            $container['route']->addRoute('user/:user_id/password', 'UserViewController', 'password');
+            $container['route']->addRoute('user/:user_id/share', 'UserViewController', 'share');
+            $container['route']->addRoute('user/:user_id/notifications', 'UserViewController', 'notifications');
+            $container['route']->addRoute('user/:user_id/accounts', 'UserViewController', 'external');
+            $container['route']->addRoute('user/:user_id/integrations', 'UserViewController', 'integrations');
+            $container['route']->addRoute('user/:user_id/authentication', 'UserViewController', 'authentication');
             $container['route']->addRoute('user/:user_id/2fa', 'twofactor', 'index');
             $container['route']->addRoute('user/:user_id/avatar', 'AvatarFile', 'show');
 

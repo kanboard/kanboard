@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Edit user') ?></h2>
 </div>
-<form method="post" action="<?= $this->url->href('user', 'edit', array('user_id' => $user['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('UserViewController', 'edit', array('user_id' => $user['id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -30,6 +30,6 @@
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'user', 'show', array('user_id' => $user['id'])) ?>
+        <?= $this->url->link(t('cancel'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
     </div>
 </form>

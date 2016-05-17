@@ -18,7 +18,7 @@
             array(
                 'placeholder="'.t('Leave a description').'"',
                 'tabindex="2"',
-                'data-mention-search-url="'.$this->url->href('UserHelper', 'mention', array('project_id' => $values['project_id'])).'"'
+                'data-mention-search-url="'.$this->url->href('UserAjaxController', 'mention', array('project_id' => $values['project_id'])).'"'
             ),
             'markdown-editor'
         ) ?>

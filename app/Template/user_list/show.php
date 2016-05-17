@@ -30,7 +30,7 @@
                     <?= '#'.$user['id'] ?>
                 </td>
                 <td>
-                    <?= $this->url->link($this->text->e($user['username']), 'user', 'show', array('user_id' => $user['id'])) ?>
+                    <?= $this->url->link($this->text->e($user['username']), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
                 </td>
                 <td>
                     <?= $this->text->e($user['name']) ?>
@@ -55,7 +55,7 @@
                     <?php endif ?>
                 </td>
                 <td>
-                    <?= $this->render('user/dropdown', array('user' => $user)) ?>
+                    <?= $this->render('user_list/dropdown', array('user' => $user)) ?>
                 </td>
             </tr>
             <?php endforeach ?>

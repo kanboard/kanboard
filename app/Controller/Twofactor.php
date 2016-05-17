@@ -10,7 +10,7 @@ use Kanboard\Core\Controller\AccessForbiddenException;
  * @package  controller
  * @author   Frederic Guillot
  */
-class Twofactor extends User
+class Twofactor extends UserViewController
 {
     /**
      * Only the current user can access to 2FA settings
@@ -192,7 +192,7 @@ class Twofactor extends User
                 'twofactor_secret' => '',
             ));
 
-            return $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
+            return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
         }
 
         return $this->response->html($this->helper->layout->user('twofactor/disable', array(

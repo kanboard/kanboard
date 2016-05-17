@@ -3,7 +3,7 @@
     <ul>
         <li>
             <i class="fa fa-user fa-fw"></i>
-            <?= $this->url->link(t('View profile'), 'user', 'show', array('user_id' => $user['id'])) ?>
+            <?= $this->url->link(t('View profile'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
         </li>
         <?php if ($user['is_active'] == 1 && $this->user->hasAccess('UserStatusController', 'disable') && ! $this->user->isCurrentUser($user['id'])): ?>
             <li>

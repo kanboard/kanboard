@@ -22,7 +22,7 @@
             <td><?= $this->dt->datetime($transition['date']) ?></td>
             <td><?= $this->text->e($transition['src_column']) ?></td>
             <td><?= $this->text->e($transition['dst_column']) ?></td>
-            <td><?= $this->url->link($this->text->e($transition['name'] ?: $transition['username']), 'user', 'show', array('user_id' => $transition['user_id'])) ?></td>
+            <td><?= $this->url->link($this->text->e($transition['name'] ?: $transition['username']), 'UserViewController', 'show', array('user_id' => $transition['user_id'])) ?></td>
             <td><?= $this->dt->duration($transition['time_spent']) ?></td>
         </tr>
         <?php endforeach ?>

@@ -100,7 +100,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('TaskExternalLink', '*', Role::PROJECT_MEMBER);
         $acl->add('Taskmodification', '*', Role::PROJECT_MEMBER);
         $acl->add('Taskstatus', '*', Role::PROJECT_MEMBER);
-        $acl->add('UserHelper', array('mention'), Role::PROJECT_MEMBER);
+        $acl->add('UserAjaxController', array('mention'), Role::PROJECT_MEMBER);
 
         return $acl;
     }
@@ -141,8 +141,9 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('Twofactor', 'disable', Role::APP_ADMIN);
         $acl->add('UserImportController', '*', Role::APP_ADMIN);
         $acl->add('UserCreationController', '*', Role::APP_ADMIN);
-        $acl->add('User', array('index', 'authentication'), Role::APP_ADMIN);
+        $acl->add('UserListController', '*', Role::APP_ADMIN);
         $acl->add('UserStatusController', '*', Role::APP_ADMIN);
+        $acl->add('UserViewController', array('authentication'), Role::APP_ADMIN);
 
         return $acl;
     }

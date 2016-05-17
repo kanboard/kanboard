@@ -43,7 +43,7 @@ class UserImportController extends BaseController
             $this->importFile($values, $filename);
         }
 
-        $this->response->redirect($this->helper->url->to('user', 'index'));
+        $this->response->redirect($this->helper->url->to('UserListController', 'show'));
     }
 
     /**

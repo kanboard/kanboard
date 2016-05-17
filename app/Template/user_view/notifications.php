@@ -2,7 +2,7 @@
     <h2><?= t('Notifications') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->url->href('user', 'notifications', array('user_id' => $user['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('UserViewController', 'notifications', array('user_id' => $user['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
     <h4><?= t('Notification methods:') ?></h4>
@@ -21,6 +21,6 @@
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'user', 'show', array('user_id' => $user['id'])) ?>
+        <?= $this->url->link(t('cancel'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
     </div>
 </form>

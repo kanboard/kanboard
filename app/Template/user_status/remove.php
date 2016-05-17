@@ -8,6 +8,6 @@
     <div class="form-actions">
         <?= $this->url->link(t('Yes'), 'UserStatusController', 'remove', array('user_id' => $user['id']), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'user', 'index', array(), false, 'close-popover') ?>
+        <?= $this->url->link(t('cancel'), 'UserListController', 'show', array(), false, 'close-popover') ?>
     </div>
 </div>

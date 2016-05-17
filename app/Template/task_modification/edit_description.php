@@ -14,7 +14,7 @@
         array(
             'autofocus',
             'placeholder="'.t('Leave a description').'"',
-            'data-mention-search-url="'.$this->url->href('UserHelper', 'mention', array('project_id' => $task['project_id'])).'"'
+            'data-mention-search-url="'.$this->url->href('UserAjaxController', 'mention', array('project_id' => $task['project_id'])).'"'
         ),
         'markdown-editor'
     ) ?>

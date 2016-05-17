@@ -9,6 +9,6 @@
 
     <div class="form-actions">
         <?= $this->url->link(t('Yes'), 'twofactor', 'disable', array('user_id' => $user['id'], 'disable' => 'yes'), true, 'btn btn-red') ?>
-        <?= t('or') ?> <?= $this->url->link(t('cancel'), 'user', 'show', array('user_id' => $user['id'])) ?>
+        <?= t('or') ?> <?= $this->url->link(t('cancel'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
     </div>
 </div>

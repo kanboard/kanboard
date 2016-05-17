@@ -90,7 +90,7 @@ class Markdown extends Parsedown
             $user_id = $this->container['user']->getIdByUsername($matches[1]);
 
             if (! empty($user_id)) {
-                $url = $this->container['helper']->url->href('user', 'profile', array('user_id' => $user_id));
+                $url = $this->container['helper']->url->href('UserViewController', 'profile', array('user_id' => $user_id));
 
                 return array(
                     'extent' => strlen($matches[0]),

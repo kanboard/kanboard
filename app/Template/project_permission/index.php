@@ -51,7 +51,7 @@
                 'placeholder="'.t('Enter user name...').'"',
                 'title="'.t('Enter user name...').'"',
                 'data-dst-field="user_id"',
-                'data-search-url="'.$this->url->href('UserHelper', 'autocomplete').'"',
+                'data-search-url="'.$this->url->href('UserAjaxController', 'autocomplete').'"',
             ),
             'autocomplete') ?>
 

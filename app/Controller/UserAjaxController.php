@@ -7,12 +7,12 @@ use Kanboard\Formatter\UserAutoCompleteFormatter;
 use Kanboard\Model\User as UserModel;
 
 /**
- * User Helper
+ * User Ajax Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class UserHelper extends BaseController
+class UserAjaxController extends BaseController
 {
     /**
      * User auto-completion (Ajax)

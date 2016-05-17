@@ -6,33 +6,13 @@ use Kanboard\Core\Controller\PageNotFoundException;
 use Kanboard\Model\Project as ProjectModel;
 
 /**
- * User controller
+ * Class UserViewController
  *
- * @package  controller
- * @author   Frederic Guillot
+ * @package Kanboard\Controller
+ * @author  Frederic Guillot
  */
-class User extends BaseController
+class UserViewController extends BaseController
 {
-    /**
-     * List all users
-     *
-     * @access public
-     */
-    public function index()
-    {
-        $paginator = $this->paginator
-                ->setUrl('user', 'index')
-                ->setMax(30)
-                ->setOrder('username')
-                ->setQuery($this->user->getQuery())
-                ->calculate();
-
-        $this->response->html($this->helper->layout->app('user/index', array(
-            'title' => t('Users').' ('.$paginator->getTotal().')',
-            'paginator' => $paginator,
-        )));
-    }
-
     /**
      * Public user profile
      *
@@ -47,7 +27,7 @@ class User extends BaseController
             throw new PageNotFoundException();
         }
 
-        $this->response->html($this->helper->layout->app('user/profile', array(
+        $this->response->html($this->helper->layout->app('user_view/profile', array(
             'title' => $user['name'] ?: $user['username'],
             'user' => $user,
         )));
@@ -61,7 +41,7 @@ class User extends BaseController
     public function show()
     {
         $user = $this->getUser();
-        $this->response->html($this->helper->layout->user('user/show', array(
+        $this->response->html($this->helper->layout->user('user_view/show', array(
             'user' => $user,
             'timezones' => $this->timezone->getTimezones(true),
             'languages' => $this->language->getLanguages(true),
@@ -78,14 +58,14 @@ class User extends BaseController
         $user = $this->getUser();
 
         $subtask_paginator = $this->paginator
-            ->setUrl('user', 'timesheet', array('user_id' => $user['id'], 'pagination' => 'subtasks'))
+            ->setUrl('UserViewController', 'timesheet', array('user_id' => $user['id'], 'pagination' => 'subtasks'))
             ->setMax(20)
             ->setOrder('start')
             ->setDirection('DESC')
             ->setQuery($this->subtaskTimeTracking->getUserQuery($user['id']))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
-        $this->response->html($this->helper->layout->user('user/timesheet', array(
+        $this->response->html($this->helper->layout->user('user_view/timesheet', array(
             'subtask_paginator' => $subtask_paginator,
             'user' => $user,
         )));
@@ -99,7 +79,7 @@ class User extends BaseController
     public function passwordReset()
     {
         $user = $this->getUser();
-        $this->response->html($this->helper->layout->user('user/password_reset', array(
+        $this->response->html($this->helper->layout->user('user_view/password_reset', array(
             'tokens' => $this->passwordReset->getAll($user['id']),
             'user' => $user,
         )));
@@ -110,10 +90,10 @@ class User extends BaseController
      *
      * @access public
      */
-    public function last()
+    public function lastLogin()
     {
         $user = $this->getUser();
-        $this->response->html($this->helper->layout->user('user/last', array(
+        $this->response->html($this->helper->layout->user('user_view/last', array(
             'last_logins' => $this->lastLogin->getAll($user['id']),
             'user' => $user,
         )));
@@ -127,7 +107,7 @@ class User extends BaseController
     public function sessions()
     {
         $user = $this->getUser();
-        $this->response->html($this->helper->layout->user('user/sessions', array(
+        $this->response->html($this->helper->layout->user('user_view/sessions', array(
             'sessions' => $this->rememberMeSession->getAll($user['id']),
             'user' => $user,
         )));
@@ -143,7 +123,7 @@ class User extends BaseController
         $this->checkCSRFParam();
         $user = $this->getUser();
         $this->rememberMeSession->remove($this->request->getIntegerParam('id'));
-        $this->response->redirect($this->helper->url->to('user', 'sessions', array('user_id' => $user['id'])));
+        $this->response->redirect($this->helper->url->to('UserViewController', 'sessions', array('user_id' => $user['id'])));
     }
 
     /**
@@ -159,10 +139,10 @@ class User extends BaseController
             $values = $this->request->getValues();
             $this->userNotification->saveSettings($user['id'], $values);
             $this->flash->success(t('User updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('user', 'notifications', array('user_id' => $user['id'])));
+            return $this->response->redirect($this->helper->url->to('UserViewController', 'notifications', array('user_id' => $user['id'])));
         }
 
-        return $this->response->html($this->helper->layout->user('user/notifications', array(
+        return $this->response->html($this->helper->layout->user('user_view/notifications', array(
             'projects' => $this->projectUserRole->getProjectsByUser($user['id'], array(ProjectModel::ACTIVE)),
             'notifications' => $this->userNotification->readSettings($user['id']),
             'types' => $this->userNotificationType->getTypes(),
@@ -184,10 +164,10 @@ class User extends BaseController
             $values = $this->request->getValues();
             $this->userMetadata->save($user['id'], $values);
             $this->flash->success(t('User updated successfully.'));
-            $this->response->redirect($this->helper->url->to('user', 'integrations', array('user_id' => $user['id'])));
+            $this->response->redirect($this->helper->url->to('UserViewController', 'integrations', array('user_id' => $user['id'])));
         }
 
-        $this->response->html($this->helper->layout->user('user/integrations', array(
+        $this->response->html($this->helper->layout->user('user_view/integrations', array(
             'user' => $user,
             'values' => $this->userMetadata->getAll($user['id']),
         )));
@@ -201,7 +181,7 @@ class User extends BaseController
     public function external()
     {
         $user = $this->getUser();
-        $this->response->html($this->helper->layout->user('user/external', array(
+        $this->response->html($this->helper->layout->user('user_view/external', array(
             'last_logins' => $this->lastLogin->getAll($user['id']),
             'user' => $user,
         )));
@@ -226,10 +206,10 @@ class User extends BaseController
                 $this->flash->failure(t('Unable to update this user.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('user', 'share', array('user_id' => $user['id'])));
+            return $this->response->redirect($this->helper->url->to('UserViewController', 'share', array('user_id' => $user['id'])));
         }
 
-        return $this->response->html($this->helper->layout->user('user/share', array(
+        return $this->response->html($this->helper->layout->user('user_view/share', array(
             'user' => $user,
             'title' => t('Public access'),
         )));
@@ -257,11 +237,11 @@ class User extends BaseController
                     $this->flash->failure(t('Unable to change the password.'));
                 }
 
-                return $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
+                return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
             }
         }
 
-        return $this->response->html($this->helper->layout->user('user/password', array(
+        return $this->response->html($this->helper->layout->user('user_view/password', array(
             'values' => $values,
             'errors' => $errors,
             'user' => $user,
@@ -299,11 +279,11 @@ class User extends BaseController
                     $this->flash->failure(t('Unable to update your user.'));
                 }
 
-                return $this->response->redirect($this->helper->url->to('user', 'show', array('user_id' => $user['id'])));
+                return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
             }
         }
 
-        return $this->response->html($this->helper->layout->user('user/edit', array(
+        return $this->response->html($this->helper->layout->user('user_view/edit', array(
             'values' => $values,
             'errors' => $errors,
             'user' => $user,
@@ -337,11 +317,11 @@ class User extends BaseController
                     $this->flash->failure(t('Unable to update your user.'));
                 }
 
-                return $this->response->redirect($this->helper->url->to('user', 'authentication', array('user_id' => $user['id'])));
+                return $this->response->redirect($this->helper->url->to('UserViewController', 'authentication', array('user_id' => $user['id'])));
             }
         }
 
-        return $this->response->html($this->helper->layout->user('user/authentication', array(
+        return $this->response->html($this->helper->layout->user('user_view/authentication', array(
             'values' => $values,
             'errors' => $errors,
             'user' => $user,

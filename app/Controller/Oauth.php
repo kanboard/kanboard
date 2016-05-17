@@ -49,7 +49,7 @@ class Oauth extends BaseController
                 $this->link($provider);
             } else {
                 $this->flash->failure(t('The OAuth2 state parameter is invalid'));
-                $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
+                $this->response->redirect($this->helper->url->to('UserViewController', 'external', array('user_id' => $this->userSession->getId())));
             }
         } else {
             if ($hasValidState) {
@@ -75,7 +75,7 @@ class Oauth extends BaseController
             $this->flash->success(t('Your external account is linked to your profile successfully.'));
         }
 
-        $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
+        $this->response->redirect($this->helper->url->to('UserViewController', 'external', array('user_id' => $this->userSession->getId())));
     }
 
     /**
@@ -94,7 +94,7 @@ class Oauth extends BaseController
             $this->flash->failure(t('Unable to unlink your external account.'));
         }
 
-        $this->response->redirect($this->helper->url->to('user', 'external', array('user_id' => $this->userSession->getId())));
+        $this->response->redirect($this->helper->url->to('UserViewController', 'external', array('user_id' => $this->userSession->getId())));
     }
 
     /**
