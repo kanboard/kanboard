@@ -366,7 +366,7 @@ return array(
     'Password modification' => 'Changement de mot de passe',
     'External authentications' => 'Authentifications externes',
     'Never connected.' => 'Jamais connecté.',
-    'No external authentication enabled.' => 'Aucune authentication externe activée.',
+    'No external authentication enabled.' => 'Aucune authentification externe activée.',
     'Password modified successfully.' => 'Mot de passe changé avec succès.',
     'Unable to change the password.' => 'Impossible de changer le mot de passe.',
     'Change category for the task "%s"' => 'Changer la catégorie pour la tâche « %s »',
