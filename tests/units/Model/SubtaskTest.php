@@ -6,6 +6,7 @@ use Kanboard\Model\TaskCreation;
 use Kanboard\Model\Subtask;
 use Kanboard\Model\Project;
 use Kanboard\Core\User\UserSession;
+use Kanboard\Model\TaskFinder;
 
 class SubtaskTest extends Base
 {
@@ -359,5 +360,29 @@ class SubtaskTest extends Base
 
         $this->assertFalse($subtaskModel->changePosition(1, 2, 0));
         $this->assertFalse($subtaskModel->changePosition(1, 2, 4));
+    }
+
+    public function testConvertToTask()
+    {
+        $taskCreationModel = new TaskCreation($this->container);
+        $taskFinderModel = new TaskFinder($this->container);
+        $subtaskModel = new Subtask($this->container);
+        $projectModel = new Project($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1, 'user_id' => 1, 'time_spent' => 2, 'time_estimated' => 3)));
+        $task_id = $subtaskModel->convertToTask(1, 1);
+
+        $this->assertNotFalse($task_id);
+        $this->assertEmpty($subtaskModel->getById(1));
+
+        $task = $taskFinderModel->getById($task_id);
+        $this->assertEquals('subtask #1', $task['title']);
+        $this->assertEquals(1, $task['project_id']);
+        $this->assertEquals(1, $task['owner_id']);
+        $this->assertEquals(2, $task['time_spent']);
+        $this->assertEquals(3, $task['time_estimated']);
     }
 }
