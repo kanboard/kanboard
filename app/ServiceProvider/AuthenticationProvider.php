@@ -86,9 +86,9 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('ProjectEdit', '*', Role::PROJECT_MANAGER);
         $acl->add('ProjectFile', '*', Role::PROJECT_MEMBER);
         $acl->add('Projectuser', '*', Role::PROJECT_MANAGER);
-        $acl->add('Subtask', '*', Role::PROJECT_MEMBER);
-        $acl->add('SubtaskRestriction', '*', Role::PROJECT_MEMBER);
-        $acl->add('SubtaskStatus', '*', Role::PROJECT_MEMBER);
+        $acl->add('SubtaskController', '*', Role::PROJECT_MEMBER);
+        $acl->add('SubtaskRestrictionController', '*', Role::PROJECT_MEMBER);
+        $acl->add('SubtaskStatusController', '*', Role::PROJECT_MEMBER);
         $acl->add('Swimlane', '*', Role::PROJECT_MANAGER);
         $acl->add('Task', 'remove', Role::PROJECT_MEMBER);
         $acl->add('TaskCreationController', '*', Role::PROJECT_MEMBER);

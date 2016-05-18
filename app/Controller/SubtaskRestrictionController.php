@@ -7,22 +7,22 @@ use Kanboard\Model\Subtask as SubtaskModel;
 /**
  * Subtask Restriction
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class SubtaskRestriction extends BaseController
+class SubtaskRestrictionController extends BaseController
 {
     /**
      * Show popup
      *
      * @access public
      */
-    public function popover()
+    public function show()
     {
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        $this->response->html($this->template->render('subtask_restriction/popover', array(
+        $this->response->html($this->template->render('subtask_restriction/show', array(
             'status_list' => array(
                 SubtaskModel::STATUS_TODO => t('Todo'),
                 SubtaskModel::STATUS_DONE => t('Done'),
@@ -38,7 +38,7 @@ class SubtaskRestriction extends BaseController
      *
      * @access public
      */
-    public function update()
+    public function save()
     {
         $task = $this->getTask();
         $subtask = $this->getSubtask();

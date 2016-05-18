@@ -5,10 +5,10 @@ namespace Kanboard\Controller;
 /**
  * Subtask Status
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class SubtaskStatus extends BaseController
+class SubtaskStatusController extends BaseController
 {
     /**
      * Change status to the next status: Toto -> In Progress -> Done

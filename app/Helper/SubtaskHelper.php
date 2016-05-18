@@ -36,18 +36,18 @@ class SubtaskHelper extends Base
      */
     public function toggleStatus(array $subtask, $project_id, $refresh_table = false)
     {
-        if (! $this->helper->user->hasProjectAccess('subtask', 'edit', $project_id)) {
+        if (! $this->helper->user->hasProjectAccess('SubtaskController', 'edit', $project_id)) {
             return $this->getTitle($subtask);
         }
 
         $params = array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'refresh-table' => (int) $refresh_table);
 
         if ($subtask['status'] == 0 && isset($this->sessionStorage->hasSubtaskInProgress) && $this->sessionStorage->hasSubtaskInProgress) {
-            return $this->helper->url->link($this->getTitle($subtask), 'SubtaskRestriction', 'popover', $params, false, 'popover');
+            return $this->helper->url->link($this->getTitle($subtask), 'SubtaskRestrictionController', 'show', $params, false, 'popover');
         }
 
         $class = 'subtask-toggle-status '.($refresh_table ? 'subtask-refresh-table' : '');
-        return $this->helper->url->link($this->getTitle($subtask), 'SubtaskStatus', 'change', $params, false, $class);
+        return $this->helper->url->link($this->getTitle($subtask), 'SubtaskStatusController', 'change', $params, false, $class);
     }
 
     public function selectTitle(array $values, array $errors = array(), array $attributes = array())

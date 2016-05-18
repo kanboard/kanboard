@@ -3,14 +3,15 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
+use Kanboard\Core\Controller\PageNotFoundException;
 
 /**
  * Subtask controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Subtask extends BaseController
+class SubtaskController extends BaseController
 {
     /**
      * Creation form
@@ -19,7 +20,7 @@ class Subtask extends BaseController
      * @param array $values
      * @param array $errors
      * @throws AccessForbiddenException
-     * @throws \Kanboard\Core\Controller\PageNotFoundException
+     * @throws PageNotFoundException
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -76,7 +77,7 @@ class Subtask extends BaseController
      * @param array $values
      * @param array $errors
      * @throws AccessForbiddenException
-     * @throws \Kanboard\Core\Controller\PageNotFoundException
+     * @throws PageNotFoundException
      */
     public function edit(array $values = array(), array $errors = array())
     {
@@ -166,7 +167,7 @@ class Subtask extends BaseController
         $task_id = $this->request->getIntegerParam('task_id');
         $values = $this->request->getJson();
 
-        if (! empty($values) && $this->helper->user->hasProjectAccess('Subtask', 'movePosition', $project_id)) {
+        if (! empty($values) && $this->helper->user->hasProjectAccess('SubtaskController', 'movePosition', $project_id)) {
             $result = $this->subtask->changePosition($task_id, $values['subtask_id'], $values['position']);
             $this->response->json(array('result' => $result));
         } else {
