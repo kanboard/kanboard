@@ -15,6 +15,10 @@
     <li><?= t('Role:') ?> <strong><?= $this->user->getRoleName($user['role']) ?></strong></li>
     <li><?= t('Account type:') ?> <strong><?= $user['is_ldap_user'] ? t('Remote') : t('Local') ?></strong></li>
     <li><?= $user['twofactor_activated'] == 1 ? t('Two factor authentication enabled') :  t('Two factor authentication disabled') ?></li>
+    <li><?= t('Number of failed login:') ?> <strong><?= $user['nb_failed_login'] ?></strong></li>
+    <?php if ($user['lock_expiration_date'] != 0): ?>
+        <li><?= t('Account locked until:') ?> <strong><?= $this->dt->datetime($user['lock_expiration_date']) ?></strong></li>
+    <?php endif ?>
 </ul>
 
 <div class="page-header">

@@ -33,9 +33,9 @@
     <ul>
         <?php if ($this->user->isAdmin() || $this->user->isCurrentUser($user['id'])): ?>
 
-            <?php if ($this->user->hasAccess('UserViewController', 'edit')): ?>
-                <li <?= $this->app->checkMenuSelection('UserViewController', 'edit') ?>>
-                    <?= $this->url->link(t('Edit profile'), 'UserViewController', 'edit', array('user_id' => $user['id'])) ?>
+            <?php if ($this->user->hasAccess('UserModificationController', 'show')): ?>
+                <li <?= $this->app->checkMenuSelection('UserModificationController', 'show') ?>>
+                    <?= $this->url->link(t('Edit profile'), 'UserModificationController', 'show', array('user_id' => $user['id'])) ?>
                 </li>
                 <li <?= $this->app->checkMenuSelection('AvatarFile') ?>>
                     <?= $this->url->link(t('Avatar'), 'AvatarFile', 'show', array('user_id' => $user['id'])) ?>
@@ -43,8 +43,8 @@
             <?php endif ?>
 
             <?php if ($user['is_ldap_user'] == 0): ?>
-                <li <?= $this->app->checkMenuSelection('UserViewController', 'password') ?>>
-                    <?= $this->url->link(t('Change password'), 'UserViewController', 'password', array('user_id' => $user['id'])) ?>
+                <li <?= $this->app->checkMenuSelection('UserCredentialController', 'changePassword') ?>>
+                    <?= $this->url->link(t('Change password'), 'UserCredentialController', 'changePassword', array('user_id' => $user['id'])) ?>
                 </li>
             <?php endif ?>
 
@@ -72,9 +72,9 @@
             </li>
         <?php endif ?>
 
-        <?php if ($this->user->hasAccess('UserViewController', 'authentication')): ?>
-            <li <?= $this->app->checkMenuSelection('UserViewController', 'authentication') ?>>
-                <?= $this->url->link(t('Edit Authentication'), 'UserViewController', 'authentication', array('user_id' => $user['id'])) ?>
+        <?php if ($this->user->hasAccess('UserCredentialController', 'changeAuthentication')): ?>
+            <li <?= $this->app->checkMenuSelection('UserCredentialController', 'changeAuthentication') ?>>
+                <?= $this->url->link(t('Edit Authentication'), 'UserCredentialController', 'changeAuthentication', array('user_id' => $user['id'])) ?>
             </li>
         <?php endif ?>
 

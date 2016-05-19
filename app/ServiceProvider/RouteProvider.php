@@ -149,13 +149,13 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('user/show/:user_id/timesheet', 'UserViewController', 'timesheet');
             $container['route']->addRoute('user/show/:user_id/last-logins', 'UserViewController', 'lastLogin');
             $container['route']->addRoute('user/show/:user_id/sessions', 'UserViewController', 'sessions');
-            $container['route']->addRoute('user/:user_id/edit', 'UserViewController', 'edit');
-            $container['route']->addRoute('user/:user_id/password', 'UserViewController', 'password');
+            $container['route']->addRoute('user/:user_id/edit', 'UserModificationController', 'show');
+            $container['route']->addRoute('user/:user_id/password', 'UserCredentialController', 'changePassword');
             $container['route']->addRoute('user/:user_id/share', 'UserViewController', 'share');
             $container['route']->addRoute('user/:user_id/notifications', 'UserViewController', 'notifications');
             $container['route']->addRoute('user/:user_id/accounts', 'UserViewController', 'external');
             $container['route']->addRoute('user/:user_id/integrations', 'UserViewController', 'integrations');
-            $container['route']->addRoute('user/:user_id/authentication', 'UserViewController', 'authentication');
+            $container['route']->addRoute('user/:user_id/authentication', 'UserCredentialController', 'changeAuthentication');
             $container['route']->addRoute('user/:user_id/2fa', 'twofactor', 'index');
             $container['route']->addRoute('user/:user_id/avatar', 'AvatarFile', 'show');
 

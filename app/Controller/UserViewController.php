@@ -29,7 +29,7 @@ class UserViewController extends BaseController
 
         $this->response->html($this->helper->layout->app('user_view/profile', array(
             'title' => $user['name'] ?: $user['username'],
-            'user' => $user,
+            'user'  => $user,
         )));
     }
 
@@ -42,7 +42,7 @@ class UserViewController extends BaseController
     {
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/show', array(
-            'user' => $user,
+            'user'      => $user,
             'timezones' => $this->timezone->getTimezones(true),
             'languages' => $this->language->getLanguages(true),
         )));
@@ -67,7 +67,7 @@ class UserViewController extends BaseController
 
         $this->response->html($this->helper->layout->user('user_view/timesheet', array(
             'subtask_paginator' => $subtask_paginator,
-            'user' => $user,
+            'user'              => $user,
         )));
     }
 
@@ -81,7 +81,7 @@ class UserViewController extends BaseController
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/password_reset', array(
             'tokens' => $this->passwordReset->getAll($user['id']),
-            'user' => $user,
+            'user'   => $user,
         )));
     }
 
@@ -95,7 +95,7 @@ class UserViewController extends BaseController
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/last', array(
             'last_logins' => $this->lastLogin->getAll($user['id']),
-            'user' => $user,
+            'user'        => $user,
         )));
     }
 
@@ -109,7 +109,7 @@ class UserViewController extends BaseController
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/sessions', array(
             'sessions' => $this->rememberMeSession->getAll($user['id']),
-            'user' => $user,
+            'user'     => $user,
         )));
     }
 
@@ -143,11 +143,11 @@ class UserViewController extends BaseController
         }
 
         return $this->response->html($this->helper->layout->user('user_view/notifications', array(
-            'projects' => $this->projectUserRole->getProjectsByUser($user['id'], array(ProjectModel::ACTIVE)),
+            'projects'      => $this->projectUserRole->getProjectsByUser($user['id'], array(ProjectModel::ACTIVE)),
             'notifications' => $this->userNotification->readSettings($user['id']),
-            'types' => $this->userNotificationType->getTypes(),
-            'filters' => $this->userNotificationFilter->getFilters(),
-            'user' => $user,
+            'types'         => $this->userNotificationType->getTypes(),
+            'filters'       => $this->userNotificationFilter->getFilters(),
+            'user'          => $user,
         )));
     }
 
@@ -168,7 +168,7 @@ class UserViewController extends BaseController
         }
 
         $this->response->html($this->helper->layout->user('user_view/integrations', array(
-            'user' => $user,
+            'user'   => $user,
             'values' => $this->userMetadata->getAll($user['id']),
         )));
     }
@@ -183,7 +183,7 @@ class UserViewController extends BaseController
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/external', array(
             'last_logins' => $this->lastLogin->getAll($user['id']),
-            'user' => $user,
+            'user'        => $user,
         )));
     }
 
@@ -200,7 +200,7 @@ class UserViewController extends BaseController
         if ($switch === 'enable' || $switch === 'disable') {
             $this->checkCSRFParam();
 
-            if ($this->user->{$switch.'PublicAccess'}($user['id'])) {
+            if ($this->user->{$switch . 'PublicAccess'}($user['id'])) {
                 $this->flash->success(t('User updated successfully.'));
             } else {
                 $this->flash->failure(t('Unable to update this user.'));
@@ -210,121 +210,8 @@ class UserViewController extends BaseController
         }
 
         return $this->response->html($this->helper->layout->user('user_view/share', array(
-            'user' => $user,
+            'user'  => $user,
             'title' => t('Public access'),
-        )));
-    }
-
-    /**
-     * Password modification
-     *
-     * @access public
-     */
-    public function password()
-    {
-        $user = $this->getUser();
-        $values = array('id' => $user['id']);
-        $errors = array();
-
-        if ($this->request->isPost()) {
-            $values = $this->request->getValues();
-            list($valid, $errors) = $this->userValidator->validatePasswordModification($values);
-
-            if ($valid) {
-                if ($this->user->update($values)) {
-                    $this->flash->success(t('Password modified successfully.'));
-                } else {
-                    $this->flash->failure(t('Unable to change the password.'));
-                }
-
-                return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
-            }
-        }
-
-        return $this->response->html($this->helper->layout->user('user_view/password', array(
-            'values' => $values,
-            'errors' => $errors,
-            'user' => $user,
-        )));
-    }
-
-    /**
-     * Display a form to edit a user
-     *
-     * @access public
-     */
-    public function edit()
-    {
-        $user = $this->getUser();
-        $values = $user;
-        $errors = array();
-
-        unset($values['password']);
-
-        if ($this->request->isPost()) {
-            $values = $this->request->getValues();
-
-            if (! $this->userSession->isAdmin()) {
-                if (isset($values['role'])) {
-                    unset($values['role']);
-                }
-            }
-
-            list($valid, $errors) = $this->userValidator->validateModification($values);
-
-            if ($valid) {
-                if ($this->user->update($values)) {
-                    $this->flash->success(t('User updated successfully.'));
-                } else {
-                    $this->flash->failure(t('Unable to update your user.'));
-                }
-
-                return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
-            }
-        }
-
-        return $this->response->html($this->helper->layout->user('user_view/edit', array(
-            'values' => $values,
-            'errors' => $errors,
-            'user' => $user,
-            'timezones' => $this->timezone->getTimezones(true),
-            'languages' => $this->language->getLanguages(true),
-            'roles' => $this->role->getApplicationRoles(),
-        )));
-    }
-
-    /**
-     * Display a form to edit authentication
-     *
-     * @access public
-     */
-    public function authentication()
-    {
-        $user = $this->getUser();
-        $values = $user;
-        $errors = array();
-
-        unset($values['password']);
-
-        if ($this->request->isPost()) {
-            $values = $this->request->getValues() + array('disable_login_form' => 0, 'is_ldap_user' => 0);
-            list($valid, $errors) = $this->userValidator->validateModification($values);
-
-            if ($valid) {
-                if ($this->user->update($values)) {
-                    $this->flash->success(t('User updated successfully.'));
-                } else {
-                    $this->flash->failure(t('Unable to update your user.'));
-                }
-
-                return $this->response->redirect($this->helper->url->to('UserViewController', 'authentication', array('user_id' => $user['id'])));
-            }
-        }
-
-        return $this->response->html($this->helper->layout->user('user_view/authentication', array(
-            'values' => $values,
-            'errors' => $errors,
-            'user' => $user,
         )));
     }
 }

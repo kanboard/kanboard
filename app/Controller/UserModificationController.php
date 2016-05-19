@@ -1,0 +1,69 @@
+<?php
+
+namespace Kanboard\Controller;
+
+/**
+ * Class UserModificationController
+ *
+ * @package Kanboard\Controller
+ * @author  Frederic Guillot
+ */
+class UserModificationController extends BaseController
+{
+    /**
+     * Display a form to edit user information
+     *
+     * @access public
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
+     */
+    public function show(array $values = array(), array $errors = array())
+    {
+        $user = $this->getUser();
+
+        if (empty($values)) {
+            $values = $user;
+            unset($values['password']);
+        }
+
+        return $this->response->html($this->helper->layout->user('user_modification/show', array(
+            'values' => $values,
+            'errors' => $errors,
+            'user' => $user,
+            'timezones' => $this->timezone->getTimezones(true),
+            'languages' => $this->language->getLanguages(true),
+            'roles' => $this->role->getApplicationRoles(),
+        )));
+    }
+
+    /**
+     * Save user information
+     */
+    public function save()
+    {
+        $user = $this->getUser();
+        $values = $this->request->getValues();
+
+        if (! $this->userSession->isAdmin()) {
+            if (isset($values['role'])) {
+                unset($values['role']);
+            }
+        }
+
+        list($valid, $errors) = $this->userValidator->validateModification($values);
+
+        if ($valid) {
+            if ($this->user->update($values)) {
+                $this->flash->success(t('User updated successfully.'));
+            } else {
+                $this->flash->failure(t('Unable to update your user.'));
+            }
+
+            return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
+        }
+
+        return $this->show($values, $errors);
+    }
+}
