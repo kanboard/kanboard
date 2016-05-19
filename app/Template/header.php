@@ -83,6 +83,10 @@
                                 <?= $this->url->link(t('Groups management'), 'GroupListController', 'index') ?>
                             </li>
                             <li>
+                                <i class="fa fa-cubes" aria-hidden="true"></i>
+                                <?= $this->url->link(t('Plugins'), 'PluginController', 'show') ?>
+                            </li>
+                            <li>
                                 <i class="fa fa-cog fa-fw"></i>
                                 <?= $this->url->link(t('Settings'), 'config', 'index') ?>
                             </li>

@@ -165,7 +165,6 @@ class RouteProvider implements ServiceProviderInterface
 
             // Config
             $container['route']->addRoute('settings', 'config', 'index');
-            $container['route']->addRoute('settings/plugins', 'config', 'plugins');
             $container['route']->addRoute('settings/application', 'config', 'application');
             $container['route']->addRoute('settings/project', 'config', 'project');
             $container['route']->addRoute('settings/project', 'config', 'project');
@@ -176,6 +175,10 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('settings/api', 'config', 'api');
             $container['route']->addRoute('settings/links', 'link', 'index');
             $container['route']->addRoute('settings/currencies', 'currency', 'index');
+
+            // Plugins
+            $container['route']->addRoute('extensions', 'PluginController', 'show');
+            $container['route']->addRoute('extensions/list', 'PluginController', 'directory');
 
             // Doc
             $container['route']->addRoute('documentation/:file', 'doc', 'show');

@@ -4,9 +4,6 @@
         <li <?= $this->app->checkMenuSelection('config', 'index') ?>>
             <?= $this->url->link(t('About'), 'config', 'index') ?>
         </li>
-        <li <?= $this->app->checkMenuSelection('config', 'plugins') ?>>
-            <?= $this->url->link(t('Plugins'), 'config', 'plugins') ?>
-        </li>
         <li <?= $this->app->checkMenuSelection('config', 'application') ?>>
             <?= $this->url->link(t('Application settings'), 'config', 'application') ?>
         </li>

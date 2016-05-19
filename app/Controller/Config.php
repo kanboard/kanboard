@@ -65,19 +65,6 @@ class Config extends BaseController
     }
 
     /**
-     * Display the plugin page
-     *
-     * @access public
-     */
-    public function plugins()
-    {
-        $this->response->html($this->helper->layout->config('config/plugins', array(
-            'plugins' => $this->pluginLoader->plugins,
-            'title' => t('Settings').' &gt; '.t('Plugins'),
-        )));
-    }
-
-    /**
      * Display the application settings page
      *
      * @access public

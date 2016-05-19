@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Plugins') ?></h2>
+    <h2><?= t('Installed Plugins') ?></h2>
 </div>
 
 <?php if (empty($plugins)): ?>
@@ -27,4 +27,5 @@
         <td><?= $this->text->e($plugin->getPluginDescription()) ?></td>
     </tr>
     <?php endforeach ?>
+    </table>
 <?php endif ?>

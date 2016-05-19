@@ -130,6 +130,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('AvatarFile', 'show', Role::APP_PUBLIC);
 
         $acl->add('Config', '*', Role::APP_ADMIN);
+        $acl->add('PluginController', '*', Role::APP_ADMIN);
         $acl->add('Currency', '*', Role::APP_ADMIN);
         $acl->add('Gantt', array('projects', 'saveProjectDate'), Role::APP_MANAGER);
         $acl->add('GroupListController', '*', Role::APP_ADMIN);

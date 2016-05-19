@@ -121,6 +121,19 @@ class LayoutHelper extends Base
     }
 
     /**
+     * Common layout for plugin views
+     *
+     * @access public
+     * @param  string $template
+     * @param  array  $params
+     * @return string
+     */
+    public function plugin($template, array $params)
+    {
+        return $this->subLayout('plugin/layout', 'plugin/sidebar', $template, $params);
+    }
+
+    /**
      * Common layout for dashboard views
      *
      * @access public
