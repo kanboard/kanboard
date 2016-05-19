@@ -81,11 +81,11 @@ Kanboard.Gantt.prototype.renderVerticalHeader = function() {
         }
         else {
             content
-                .append(jQuery("<a>", {"href": this.data[i].board_link, "target": "_blank", "title": $(this.options.container).data("label-board-link")}).append('<i class="fa fa-th"></i>'))
+                .append(jQuery("<a>", {"href": this.data[i].board_link, "title": $(this.options.container).data("label-board-link")}).append('<i class="fa fa-th"></i>'))
                 .append("&nbsp;")
-                .append(jQuery("<a>", {"href": this.data[i].gantt_link, "target": "_blank", "title": $(this.options.container).data("label-gantt-link")}).append('<i class="fa fa-sliders"></i>'))
+                .append(jQuery("<a>", {"href": this.data[i].gantt_link, "title": $(this.options.container).data("label-gantt-link")}).append('<i class="fa fa-sliders"></i>'))
                 .append("&nbsp;")
-                .append(jQuery("<a>", {"href": this.data[i].link, "target": "_blank"}).append(this.data[i].title));
+                .append(jQuery("<a>", {"href": this.data[i].link}).append(this.data[i].title));
         }
 
         seriesDiv.append(jQuery("<div>", {"class": "ganttview-vtheader-series-name"}).append(content));
@@ -205,20 +205,6 @@ Kanboard.Gantt.prototype.addBlocks = function(slider, start) {
         block.data("record", series);
         this.setBarColor(block, series);
 
-        if (series.progress != "0%") {
-            block.append(jQuery("<div>", {
-                "css": {
-                    "z-index": 0,
-                    "position": "absolute",
-                    "top": 0,
-                    "bottom": 0,
-                    "background-color": series.color.border,
-                    "width": series.progress,
-                    "opacity": 0.4
-                }
-            }));
-        }
-
         jQuery(rows[rowIdx]).append(block);
         rowIdx = rowIdx + 1;
     }
@@ -281,6 +267,20 @@ Kanboard.Gantt.prototype.setBarColor = function(block, record) {
     else {
         block.css("background-color", record.color.background);
         block.css("border-color", record.color.border);
+
+        if (record.progress != "0%") {
+            block.append(jQuery("<div>", {
+                "css": {
+                    "z-index": 0,
+                    "position": "absolute",
+                    "top": 0,
+                    "bottom": 0,
+                    "background-color": record.color.border,
+                    "width": record.progress,
+                    "opacity": 0.4
+                }
+            }));
+        }
     }
 };
 
