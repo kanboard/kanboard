@@ -1075,7 +1075,7 @@ return array(
     'Completed:' => '완료:',
     'Started:' => '시작:',
     'Moved:' => '이동:',
-    'Task #%d' => '할일 #d',
+    'Task #%d' => '할일 #%d',
     'Date and time format' => '날짜와 시간 형식',
     'Time format' => '시간 형식',
     'Start date: ' => '시작일: ',
