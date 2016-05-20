@@ -12,8 +12,10 @@ defined('DATA_DIR') or define('DATA_DIR', ROOT_DIR.DIRECTORY_SEPARATOR.'data');
 // Files directory (attachments)
 defined('FILES_DIR') or define('FILES_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'files');
 
-// Plugins directory
+// Plugins settings
 defined('PLUGINS_DIR') or define('PLUGINS_DIR', ROOT_DIR.DIRECTORY_SEPARATOR.'plugins');
+defined('PLUGIN_API_URL') or define('PLUGIN_API_URL', 'https://kanboard.net/plugins.json');
+defined('PLUGIN_INSTALLER') or define('PLUGIN_INSTALLER', true);
 
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', strtolower(getenv('DEBUG')) === 'true');
@@ -131,5 +133,3 @@ defined('HTTP_PROXY_HOSTNAME') or define('HTTP_PROXY_HOSTNAME', '');
 defined('HTTP_PROXY_PORT') or define('HTTP_PROXY_PORT', '3128');
 defined('HTTP_PROXY_USERNAME') or define('HTTP_PROXY_USERNAME', '');
 defined('HTTP_PROXY_PASSWORD') or define('HTTP_PROXY_PASSWORD', '');
-
-defined('PLUGIN_API_URL') or define('PLUGIN_API_URL', 'https://kanboard.net/plugins.json');

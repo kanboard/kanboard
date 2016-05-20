@@ -178,7 +178,7 @@ class RouteProvider implements ServiceProviderInterface
 
             // Plugins
             $container['route']->addRoute('extensions', 'PluginController', 'show');
-            $container['route']->addRoute('extensions/list', 'PluginController', 'directory');
+            $container['route']->addRoute('extensions/directory', 'PluginController', 'directory');
 
             // Doc
             $container['route']->addRoute('documentation/:file', 'doc', 'show');

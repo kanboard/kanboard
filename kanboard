@@ -1,8 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__.'/app/common.php';
-
+use Kanboard\Console\PluginInstallCommand;
+use Kanboard\Console\PluginUninstallCommand;
+use Kanboard\Console\PluginUpgradeCommand;
 use Kanboard\Console\ResetPasswordCommand;
 use Kanboard\Console\ResetTwoFactorCommand;
 use Symfony\Component\Console\Application;
@@ -18,19 +19,32 @@ use Kanboard\Console\LocaleComparatorCommand;
 use Kanboard\Console\TaskTriggerCommand;
 use Kanboard\Console\CronjobCommand;
 
-$container['dispatcher']->dispatch('app.bootstrap', new Event);
 
-$application = new Application('Kanboard', APP_VERSION);
-$application->add(new TaskOverdueNotificationCommand($container));
-$application->add(new SubtaskExportCommand($container));
-$application->add(new TaskExportCommand($container));
-$application->add(new ProjectDailyStatsCalculationCommand($container));
-$application->add(new ProjectDailyColumnStatsExportCommand($container));
-$application->add(new TransitionExportCommand($container));
-$application->add(new LocaleSyncCommand($container));
-$application->add(new LocaleComparatorCommand($container));
-$application->add(new TaskTriggerCommand($container));
-$application->add(new CronjobCommand($container));
-$application->add(new ResetPasswordCommand($container));
-$application->add(new ResetTwoFactorCommand($container));
-$application->run();
+try {
+
+    require __DIR__.'/app/common.php';
+
+    $container['dispatcher']->dispatch('app.bootstrap', new Event);
+
+    $application = new Application('Kanboard', APP_VERSION);
+    $application->add(new TaskOverdueNotificationCommand($container));
+    $application->add(new SubtaskExportCommand($container));
+    $application->add(new TaskExportCommand($container));
+    $application->add(new ProjectDailyStatsCalculationCommand($container));
+    $application->add(new ProjectDailyColumnStatsExportCommand($container));
+    $application->add(new TransitionExportCommand($container));
+    $application->add(new LocaleSyncCommand($container));
+    $application->add(new LocaleComparatorCommand($container));
+    $application->add(new TaskTriggerCommand($container));
+    $application->add(new CronjobCommand($container));
+    $application->add(new ResetPasswordCommand($container));
+    $application->add(new ResetTwoFactorCommand($container));
+    $application->add(new PluginUpgradeCommand($container));
+    $application->add(new PluginInstallCommand($container));
+    $application->add(new PluginUninstallCommand($container));
+    $application->run();
+
+} catch (Exception $e) {
+    echo $e->getMessage().PHP_EOL;
+    exit(255);
+}

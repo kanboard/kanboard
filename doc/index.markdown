@@ -110,6 +110,7 @@ Technical details
 - [Environment variables](env.markdown)
 - [Email configuration](email-configuration.markdown)
 - [URL rewriting](nice-urls.markdown)
+- [Plugin Directory](plugin-directory.markdown)
 
 ### Database
 

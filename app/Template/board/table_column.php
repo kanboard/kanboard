@@ -37,7 +37,7 @@
                             </li>
                             <?php if ($this->user->hasProjectAccess('TaskCreationController', 'show', $column['project_id'])): ?>
                                 <li>
-                                    <i class="fa fa-align-justify" aria-hidden="true"></i>
+                                    <i class="fa fa-align-justify fa-fw" aria-hidden="true"></i>
                                     <?= $this->url->link(t('Create tasks in bulk'), 'TaskBulkController', 'show', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                                 </li>
                                 <?php if ($column['nb_tasks'] > 0): ?>

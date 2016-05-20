@@ -15,12 +15,19 @@ define('LOG_DRIVER', 'file'); // Other drivers are: syslog, stdout, stderr or fi
 The log driver must be defined if you enable the debug mode.
 The debug mode logs all SQL queries and the time taken to generate pages.
 
-Plugins folder
---------------
+Plugins
+-------
+
+Plugin folder:
 
 ```php
-// Plugin directory
 define('PLUGINS_DIR', 'data/plugins');
+```
+
+Enable/disable plugin installation from the user interface:
+
+```php
+define('PLUGIN_INSTALLER', true); // Default is true
 ```
 
 Folder for uploaded files

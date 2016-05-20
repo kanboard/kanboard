@@ -26,6 +26,8 @@ use Symfony\Component\Console\Command\Command;
  * @property \Kanboard\Model\UserNotification                           $userNotification
  * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
  * @property \Kanboard\Model\ProjectUserRole                            $projectUserRole
+ * @property \Kanboard\Core\Plugin\Loader                               $pluginLoader
+ * @property \Kanboard\Core\Http\Client                                 $httpClient
  * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher
  */
 abstract class BaseCommand extends Command

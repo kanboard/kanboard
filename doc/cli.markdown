@@ -41,6 +41,10 @@ Available commands:
   locale:sync                        Synchronize all translations based on the fr_FR locale
  notification
   notification:overdue-tasks         Send notifications for overdue tasks
+ plugin
+  plugin:install                     Install a plugin from a remote Zip archive
+  plugin:uninstall                   Remove a plugin
+  plugin:upgrade                     Update all installed plugins
  projects
   projects:daily-stats               Calculate daily statistics for all projects
  trigger
@@ -169,4 +173,26 @@ You will be prompted for a password and confirmation. Characters are not printed
 
 ```bash
 ./kanboard user:reset-2fa my_user
+```
+
+### Install a plugin
+
+```bash
+./kanboard plugin:install https://github.com/kanboard/plugin-github-auth/releases/download/v1.0.1/GithubAuth-1.0.1.zip
+```
+
+Note: Installed files will have the same permissions as the current user
+
+### Remove a plugin
+
+```bash
+./kanboard plugin:uninstall Budget
+```
+
+### Upgrade all plugins
+
+```bash
+./kanboard plugin:upgrade
+* Updating plugin: Budget Planning
+* Plugin up to date: Github Authentication
 ```

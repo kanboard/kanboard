@@ -3,6 +3,7 @@ Version 1.0.29 (unreleased)
 
 New features:
 
+* Manage plugin from the user interface and from the command line
 * Added the possibility to convert a subtask to a task
 * Added menu entry to add tasks from all project views
 * Add tasks in bulk from the board
