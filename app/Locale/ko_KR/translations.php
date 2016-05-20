@@ -695,7 +695,7 @@ return array(
     '[%s] Overdue tasks' => '[%s] 마감시간 지남',
     'Notification' => '알림',
     '%s moved the task #%d to the first swimlane' => '%s가 할일 #%d를 첫번째 스웜레인으로 이동시켰습니다',
-    '%s moved the task #%d to the swimlane "%s"' => '%s가 할일 #%d를 스웜레인으로 이동시켰습니다',
+    '%s moved the task #%d to the swimlane "%s"' => '%s가 할일 #%d를 "%s" 스웜레인으로 이동시켰습니다',
     'Swimlane' => '스윔레인',
     // 'Gravatar' => '',
     '%s moved the task %s to the first swimlane' => '%s가 할일 %s를 첫번째 스웜레인으로 이동시켰습니다',
