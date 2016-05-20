@@ -699,7 +699,7 @@ return array(
     'Swimlane' => '스윔레인',
     // 'Gravatar' => '',
     '%s moved the task %s to the first swimlane' => '%s가 할일 %s를 첫번째 스웜레인으로 이동시켰습니다',
-    '%s moved the task %s to the swimlane "%s"' => '%s가 할일 %s를 스웜레인으로 이동시켰습니다',
+    '%s moved the task %s to the swimlane "%s"' => '%s가 할일 %s를 %s 스웜레인으로 이동시켰습니다',
     'This report contains all subtasks information for the given date range.' => '해당 기간의 모든 서브 할일 정보가 보고서에 포함됩니다',
     'This report contains all tasks information for the given date range.' => '해당 기간의 모든 할일 정보가 보고서에 포함됩니다',
     'Project activities for %s' => '%s의 프로젝트 활성화',
