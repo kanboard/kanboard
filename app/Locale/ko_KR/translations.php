@@ -979,7 +979,7 @@ return array(
     'Compare hours for "%s"' => '"%s" 시간동안 비교',
     '%s mentioned you in the task #%d' => '#%d 할일에서 %s가 당신을 언급하였습니다',
     '%s mentioned you in a comment on the task #%d' => '#%d 할일에서 %s가 당신의 댓글을 언급하였습니다',
-    'You were mentioned in the task #%d' => '#%d 할일에서 %s가 당신이 언급되었습니다',
+    'You were mentioned in the task #%d' => '#%d 할일에서 당신이 언급되었습니다',
     'You were mentioned in a comment on the task #%d' => '할일 #%d의 댓글에서 언급되었습니다',
     'Mentioned' => '언급된',
     'Compare Estimated Time vs Actual Time' => '예상 시간과 실제 시간 비교',
