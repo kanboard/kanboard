@@ -1162,6 +1162,6 @@ return array(
     'Open tasks assigned to "%s"' => '"%s"에게 할당된 할일 시작하기',
     'Closed tasks assigned to "%s"' => '"%s"에게 할당된 할일 종료하기',
     'Assign automatically a color based on a priority' => '우선순위로 색깔 자동 지정',
-    'Overdue tasks for the project(s) "%s"' => '프로젝트의 기한이 지난 할일',
+    'Overdue tasks for the project(s) "%s"' => '"%s" 프로젝트의 기한이 지난 할일',
     'Upload files' => '파일 올리기',
 );
