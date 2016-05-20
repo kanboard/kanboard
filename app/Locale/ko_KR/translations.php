@@ -399,7 +399,7 @@ return array(
     'Default values are "%s"' => '기본 값은 "%s" 입니다',
     'Default columns for new projects (Comma-separated)' => '새로운 프로젝트의 기본 칼럼 (콤마(,)로 분리됨)',
     'Task assignee change' => '담당자의 변경',
-    '%s change the assignee of the task #%d to %s' => '%s이 할일 %s의 담당을 %s로 변경합니다',
+    '%s change the assignee of the task #%d to %s' => '%s이 할일 #%d의 담당을 %s로 변경합니다',
     '%s changed the assignee of the task %s to %s' => '%s이 할일 %s의 담당을 %s로 변경했습니다',
     'New password for the user "%s"' => '사용자 "%s"의 새로운 패스워드',
     'Choose an event' => '행사의 선택',
