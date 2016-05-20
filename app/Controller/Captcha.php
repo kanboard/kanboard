@@ -19,7 +19,7 @@ class Captcha extends BaseController
      */
     public function image()
     {
-        $this->response->withContentType('image/jpeg');
+        $this->response->withContentType('image/jpeg')->send();
 
         $builder = new CaptchaBuilder;
         $builder->build();

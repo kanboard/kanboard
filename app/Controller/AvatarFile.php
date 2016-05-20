@@ -65,6 +65,7 @@ class AvatarFile extends BaseController
         $this->response->withContentType('image/jpeg');
 
         if ($this->request->getHeader('If-None-Match') !== '"'.$etag.'"') {
+            $this->response->send();
             $this->render($filename, $size);
         } else {
             $this->response->status(304);

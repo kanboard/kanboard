@@ -74,6 +74,7 @@ class FileViewer extends BaseController
         } else {
 
             try {
+                $this->response->send();
                 $this->objectStorage->output($file['path']);
             } catch (ObjectStorageException $e) {
                 $this->logger->error($e->getMessage());
@@ -100,6 +101,8 @@ class FileViewer extends BaseController
             $this->response->status(304);
         } else {
 
+            $this->response->send();
+
             try {
 
                 $this->objectStorage->output($filename);
@@ -124,6 +127,7 @@ class FileViewer extends BaseController
         try {
             $file = $this->getFile();
             $this->response->withFileDownload($file['name']);
+            $this->response->send();
             $this->objectStorage->output($file['path']);
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
