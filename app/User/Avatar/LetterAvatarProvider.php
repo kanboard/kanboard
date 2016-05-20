@@ -164,7 +164,7 @@ class LetterAvatarProvider extends Base implements AvatarProviderInterface
      */
     protected function getCharCode($c)
     {
-        list(, $ord) = unpack('N', mb_convert_encoding($c, 'UCS-4BE', 'UTF-8'));
+        list(, $ord) = unpack('N', mb_convert_encoding($c, 'UCS-4BE', mb_detect_encoding($c, "UTF-8, ISO-8859-1, ISO-8859-15", true)));
         return $ord;
     }
 }
