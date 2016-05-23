@@ -73,9 +73,11 @@ class TaskFinder extends Base
                         'tasks.time_estimated',
                         'tasks.is_active',
                         'tasks.creator_id',
-                        'projects.name AS project_name'
+                        'projects.name AS project_name',
+                        'columns.title AS column_title'
                     )
                     ->join(Project::TABLE, 'id', 'project_id')
+                    ->join(Column::TABLE, 'id', 'column_id')
                     ->eq(Task::TABLE.'.owner_id', $user_id)
                     ->eq(Task::TABLE.'.is_active', Task::STATUS_OPEN)
                     ->eq(Project::TABLE.'.is_active', Project::ACTIVE);
