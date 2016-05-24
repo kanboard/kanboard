@@ -17,7 +17,7 @@ use Kanboard\Auth\ReverseProxyAuth;
 /**
  * Authentication Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class AuthenticationProvider implements ServiceProviderInterface

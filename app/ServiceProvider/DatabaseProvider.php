@@ -8,6 +8,12 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use PicoDb\Database;
 
+/**
+ * Class DatabaseProvider
+ *
+ * @package Kanboard\ServiceProvider
+ * @author  Frederic Guillot
+ */
 class DatabaseProvider implements ServiceProviderInterface
 {
     /**

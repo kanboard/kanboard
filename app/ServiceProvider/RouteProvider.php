@@ -10,7 +10,7 @@ use Kanboard\Core\Http\Router;
 /**
  * Route Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class RouteProvider implements ServiceProviderInterface

@@ -12,7 +12,7 @@ use Kanboard\Notification\Web as WebNotification;
 /**
  * Notification Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class NotificationProvider implements ServiceProviderInterface

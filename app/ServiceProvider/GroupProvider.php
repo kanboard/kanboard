@@ -11,7 +11,7 @@ use Kanboard\Group\LdapBackendGroupProvider;
 /**
  * Group Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class GroupProvider implements ServiceProviderInterface

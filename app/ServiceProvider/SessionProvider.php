@@ -11,7 +11,7 @@ use Kanboard\Core\Session\FlashMessage;
 /**
  * Session Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class SessionProvider implements ServiceProviderInterface

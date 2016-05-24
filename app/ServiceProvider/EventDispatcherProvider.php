@@ -15,6 +15,12 @@ use Kanboard\Subscriber\SubtaskTimeTrackingSubscriber;
 use Kanboard\Subscriber\TransitionSubscriber;
 use Kanboard\Subscriber\RecurringTaskSubscriber;
 
+/**
+ * Class EventDispatcherProvider
+ *
+ * @package Kanboard\ServiceProvider
+ * @author  Frederic Guillot
+ */
 class EventDispatcherProvider implements ServiceProviderInterface
 {
     public function register(Container $container)

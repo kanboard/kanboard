@@ -36,7 +36,7 @@ use Kanboard\Action\TaskCloseNoActivity;
 /**
  * Action Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class ActionProvider implements ServiceProviderInterface

@@ -12,7 +12,7 @@ use Kanboard\User\Avatar\LetterAvatarProvider;
 /**
  * Avatar Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class AvatarProvider implements ServiceProviderInterface

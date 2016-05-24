@@ -12,7 +12,7 @@ use Kanboard\ExternalLink\FileLinkProvider;
 /**
  * External Link Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class ExternalLinkProvider implements ServiceProviderInterface

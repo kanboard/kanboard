@@ -3,6 +3,7 @@
 namespace Kanboard\Subscriber;
 
 use Kanboard\Event\TaskEvent;
+use Kanboard\Job\ProjectMetricJob;
 use Kanboard\Model\Task;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -23,8 +24,7 @@ class ProjectDailySummarySubscriber extends BaseSubscriber implements EventSubsc
     {
         if (isset($event['project_id']) && !$this->isExecuted()) {
             $this->logger->debug('Subscriber executed: '.__METHOD__);
-            $this->projectDailyColumnStats->updateTotals($event['project_id'], date('Y-m-d'));
-            $this->projectDailyStats->updateTotals($event['project_id'], date('Y-m-d'));
+            $this->queueManager->push(ProjectMetricJob::getInstance($this->container)->withParams($event['project_id']));
         }
     }
 }

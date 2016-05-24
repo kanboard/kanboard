@@ -7,6 +7,12 @@ use Kanboard\Core\Template;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
+/**
+ * Class HelperProvider
+ *
+ * @package Kanboard\ServiceProvider
+ * @author  Frederic Guillot
+ */
 class HelperProvider implements ServiceProviderInterface
 {
     public function register(Container $container)

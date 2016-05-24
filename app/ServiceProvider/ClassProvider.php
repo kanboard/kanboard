@@ -11,6 +11,12 @@ use Kanboard\Core\Http\OAuth2;
 use Kanboard\Core\Tool;
 use Kanboard\Core\Http\Client as HttpClient;
 
+/**
+ * Class ClassProvider
+ *
+ * @package Kanboard\ServiceProvider
+ * @author  Frederic Guillot
+ */
 class ClassProvider implements ServiceProviderInterface
 {
     private $classes = array(

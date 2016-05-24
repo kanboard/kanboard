@@ -6,6 +6,7 @@ use Kanboard\Console\PluginUninstallCommand;
 use Kanboard\Console\PluginUpgradeCommand;
 use Kanboard\Console\ResetPasswordCommand;
 use Kanboard\Console\ResetTwoFactorCommand;
+use Kanboard\Console\WorkerCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\EventDispatcher\Event;
 use Kanboard\Console\TaskOverdueNotificationCommand;
@@ -37,6 +38,7 @@ try {
     $application->add(new LocaleComparatorCommand($container));
     $application->add(new TaskTriggerCommand($container));
     $application->add(new CronjobCommand($container));
+    $application->add(new WorkerCommand($container));
     $application->add(new ResetPasswordCommand($container));
     $application->add(new ResetTwoFactorCommand($container));
     $application->add(new PluginUpgradeCommand($container));

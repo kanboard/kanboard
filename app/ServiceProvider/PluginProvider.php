@@ -9,7 +9,7 @@ use Kanboard\Core\Plugin\Loader;
 /**
  * Plugin Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class PluginProvider implements ServiceProviderInterface

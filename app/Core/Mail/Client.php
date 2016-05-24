@@ -2,6 +2,7 @@
 
 namespace Kanboard\Core\Mail;
 
+use Kanboard\Job\EmailJob;
 use Pimple\Container;
 use Kanboard\Core\Base;
 
@@ -46,23 +47,29 @@ class Client extends Base
     public function send($email, $name, $subject, $html)
     {
         if (! empty($email)) {
-            $this->logger->debug('Sending email to '.$email.' ('.MAIL_TRANSPORT.')');
-
-            $start_time = microtime(true);
-            $author = 'Kanboard';
-
-            if ($this->userSession->isLogged()) {
-                $author = e('%s via Kanboard', $this->helper->user->getFullname());
-            }
-
-            $this->getTransport(MAIL_TRANSPORT)->sendEmail($email, $name, $subject, $html, $author);
-
-            if (DEBUG) {
-                $this->logger->debug('Email sent in '.round(microtime(true) - $start_time, 6).' seconds');
-            }
+            $this->queueManager->push(EmailJob::getInstance($this->container)
+                ->withParams($email, $name, $subject, $html, $this->getAuthor())
+            );
         }
 
         return $this;
+    }
+
+    /**
+     * Get email author
+     *
+     * @access public
+     * @return string
+     */
+    public function getAuthor()
+    {
+        $author = 'Kanboard';
+
+        if ($this->userSession->isLogged()) {
+            $author = e('%s via Kanboard', $this->helper->user->getFullname());
+        }
+
+        return $author;
     }
 
     /**

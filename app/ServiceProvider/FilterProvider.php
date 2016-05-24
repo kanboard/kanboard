@@ -37,7 +37,7 @@ use Pimple\ServiceProviderInterface;
 /**
  * Filter Provider
  *
- * @package serviceProvider
+ * @package Kanboard\ServiceProvider
  * @author  Frederic Guillot
  */
 class FilterProvider implements ServiceProviderInterface

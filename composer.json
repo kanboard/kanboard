@@ -30,6 +30,7 @@
         "fguillot/picodb" : "1.0.11",
         "fguillot/simpleLogger" : "1.0.1",
         "fguillot/simple-validator" : "1.0.0",
+        "fguillot/simple-queue" : "dev-master",
         "paragonie/random_compat": "@stable",
         "pimple/pimple" : "~3.0",
         "ramsey/array_column": "@stable",
