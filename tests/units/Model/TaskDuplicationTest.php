@@ -664,7 +664,6 @@ class TaskDuplicationTest extends Base
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
         $p = new Project($this->container);
-        $c = new Category($this->container);
         $dp = new DateParser($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));

@@ -246,45 +246,33 @@ class UserTest extends Base
         $this->assertFalse($u->create(array('username' => 'user #1')));
 
         $user = $u->getById(1);
-        $this->assertNotFalse($user);
-        $this->assertTrue(is_array($user));
         $this->assertEquals('admin', $user['username']);
         $this->assertEquals('', $user['name']);
         $this->assertEquals(Role::APP_ADMIN, $user['role']);
         $this->assertEquals(0, $user['is_ldap_user']);
 
         $user = $u->getById(2);
-        $this->assertNotFalse($user);
-        $this->assertTrue(is_array($user));
         $this->assertEquals('user #1', $user['username']);
         $this->assertEquals('User', $user['name']);
         $this->assertEquals(Role::APP_USER, $user['role']);
         $this->assertEquals(0, $user['is_ldap_user']);
 
         $user = $u->getById(3);
-        $this->assertNotFalse($user);
-        $this->assertTrue(is_array($user));
         $this->assertEquals('user #2', $user['username']);
         $this->assertEquals('', $user['name']);
         $this->assertEquals(Role::APP_USER, $user['role']);
         $this->assertEquals(1, $user['is_ldap_user']);
 
         $user = $u->getById(4);
-        $this->assertNotFalse($user);
-        $this->assertTrue(is_array($user));
         $this->assertEquals('user #3', $user['username']);
         $this->assertEquals(Role::APP_MANAGER, $user['role']);
 
         $user = $u->getById(5);
-        $this->assertNotFalse($user);
-        $this->assertTrue(is_array($user));
         $this->assertEquals('user #4', $user['username']);
         $this->assertEquals('', $user['gitlab_id']);
         $this->assertEquals(Role::APP_ADMIN, $user['role']);
 
         $user = $u->getById(6);
-        $this->assertNotFalse($user);
-        $this->assertTrue(is_array($user));
         $this->assertEquals('user #5', $user['username']);
         $this->assertEquals('1234', $user['gitlab_id']);
         $this->assertEquals(Role::APP_USER, $user['role']);
@@ -300,8 +288,6 @@ class UserTest extends Base
         $this->assertTrue($u->update(array('id' => 3, 'gitlab_id' => '')));
 
         $user = $u->getById(2);
-        $this->assertNotFalse($user);
-        $this->assertTrue(is_array($user));
         $this->assertEquals('biloute', $user['username']);
         $this->assertEquals('Toto', $user['name']);
         $this->assertEquals(Role::APP_USER, $user['role']);

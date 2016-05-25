@@ -4,7 +4,6 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Model\TaskFinder;
 use Kanboard\Model\TaskCreation;
-use Kanboard\Model\User;
 use Kanboard\Model\Task;
 use Kanboard\Model\Project;
 use Kanboard\Model\UserUnreadNotification;
@@ -17,7 +16,6 @@ class UserUnreadNotificationTest extends Base
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
-        $u = new User($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
@@ -35,7 +33,6 @@ class UserUnreadNotificationTest extends Base
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
-        $u = new User($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
@@ -55,7 +52,6 @@ class UserUnreadNotificationTest extends Base
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
-        $u = new User($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
@@ -77,7 +73,6 @@ class UserUnreadNotificationTest extends Base
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
-        $u = new User($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));

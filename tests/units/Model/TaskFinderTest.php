@@ -44,7 +44,7 @@ class TaskFinderTest extends Base
         $tasks = $tf->getOverdueTasksByProject(1);
         $this->assertNotEmpty($tasks);
         $this->assertTrue(is_array($tasks));
-        $this->assertcount(1, $tasks);
+        $this->assertCount(1, $tasks);
         $this->assertEquals('Task #1', $tasks[0]['title']);
     }
 

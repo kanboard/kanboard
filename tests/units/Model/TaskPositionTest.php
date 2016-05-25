@@ -283,7 +283,6 @@ class TaskPositionTest extends Base
                 $this->assertEquals($counter, $tc->create($task));
 
                 $task = $tf->getById($counter);
-                $this->assertNotFalse($task);
                 $this->assertNotEmpty($task);
                 $this->assertEquals($i, $task['position']);
             }

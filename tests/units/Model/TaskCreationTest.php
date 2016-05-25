@@ -117,7 +117,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals('blue', $task['color_id']);
@@ -134,7 +133,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(1, $task['owner_id']);
@@ -151,7 +149,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(1, $task['category_id']);
@@ -168,7 +165,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(1, $task['creator_id']);
@@ -187,7 +183,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(1, $task['creator_id']);
@@ -204,7 +199,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(2, $task['column_id']);
@@ -222,7 +216,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(2, $task['column_id']);
@@ -232,7 +225,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(2);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(2, $task['id']);
         $this->assertEquals(2, $task['column_id']);
@@ -250,7 +242,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals('test', $task['description']);
@@ -267,7 +258,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals('test', $task['reference']);
@@ -350,7 +340,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
 
         $this->assertEquals(1, $task['id']);
         $this->assertEquals(1.5, $task['time_estimated']);
@@ -368,7 +357,6 @@ class TaskCreationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotFalse($task);
     }
 
     public function testScore()

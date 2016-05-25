@@ -21,9 +21,9 @@ class ProjectActivityTest extends Base
         $this->assertEquals(1, $taskCreation->create(array('title' => 'Task #1', 'project_id' => 1)));
         $this->assertEquals(2, $taskCreation->create(array('title' => 'Task #2', 'project_id' => 1)));
 
-        $this->assertTrue($projectActivity->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $taskFinder->getbyId(1))));
+        $this->assertTrue($projectActivity->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $taskFinder->getById(1))));
         $this->assertTrue($projectActivity->createEvent(1, 2, 1, Task::EVENT_UPDATE, array('task' => $taskFinder->getById(2))));
-        $this->assertFalse($projectActivity->createEvent(1, 1, 0, Task::EVENT_OPEN, array('task' => $taskFinder->getbyId(1))));
+        $this->assertFalse($projectActivity->createEvent(1, 1, 0, Task::EVENT_OPEN, array('task' => $taskFinder->getById(1))));
 
         $events = $projectActivity->getQuery()->desc('id')->findAll();
 
@@ -45,7 +45,7 @@ class ProjectActivityTest extends Base
 
         $max = 15;
         $nb_events = 100;
-        $task = $taskFinder->getbyId(1);
+        $task = $taskFinder->getById(1);
 
         for ($i = 0; $i < $nb_events; $i++) {
             $this->assertTrue($projectActivity->createEvent(1, 1, 1, Task::EVENT_CLOSE, array('task' => $task)));

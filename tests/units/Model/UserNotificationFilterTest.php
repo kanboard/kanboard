@@ -48,10 +48,10 @@ class UserNotificationFilterTest extends Base
         $n = new UserNotificationFilter($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'user1', 'notifications_filter' => UserNotificationFilter::FILTER_NONE)));
-        $this->assertTrue($n->filterNone($u->getById(2), array()));
+        $this->assertTrue($n->filterNone($u->getById(2)));
 
         $this->assertEquals(3, $u->create(array('username' => 'user2', 'notifications_filter' => UserNotificationFilter::FILTER_BOTH)));
-        $this->assertFalse($n->filterNone($u->getById(3), array()));
+        $this->assertFalse($n->filterNone($u->getById(3)));
     }
 
     public function testFilterCreator()
@@ -126,7 +126,6 @@ class UserNotificationFilterTest extends Base
     {
         $u = new User($this->container);
         $n = new UserNotificationFilter($this->container);
-        $p = new Project($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => UserNotificationFilter::FILTER_NONE)));
 
@@ -137,7 +136,6 @@ class UserNotificationFilterTest extends Base
     {
         $u = new User($this->container);
         $n = new UserNotificationFilter($this->container);
-        $p = new Project($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => UserNotificationFilter::FILTER_ASSIGNEE)));
 
@@ -149,7 +147,6 @@ class UserNotificationFilterTest extends Base
     {
         $u = new User($this->container);
         $n = new UserNotificationFilter($this->container);
-        $p = new Project($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => UserNotificationFilter::FILTER_CREATOR)));
 
@@ -161,7 +158,6 @@ class UserNotificationFilterTest extends Base
     {
         $u = new User($this->container);
         $n = new UserNotificationFilter($this->container);
-        $p = new Project($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'user2', 'notifications_filter' => UserNotificationFilter::FILTER_BOTH)));
 

@@ -44,9 +44,6 @@ class ProjectPermissionTest extends Base
     {
         $userModel = new User($this->container);
         $projectModel = new Project($this->container);
-        $groupModel = new Group($this->container);
-        $groupMemberModel = new GroupMember($this->container);
-        $groupRoleModel = new ProjectGroupRole($this->container);
         $userRoleModel = new ProjectUserRole($this->container);
         $projectPermission = new ProjectPermission($this->container);
 
@@ -196,9 +193,6 @@ class ProjectPermissionTest extends Base
     {
         $userModel = new User($this->container);
         $projectModel = new Project($this->container);
-        $groupModel = new Group($this->container);
-        $groupRoleModel = new ProjectGroupRole($this->container);
-        $groupMemberModel = new GroupMember($this->container);
         $userRoleModel = new ProjectUserRole($this->container);
         $projectPermission = new ProjectPermission($this->container);
 
@@ -255,9 +249,6 @@ class ProjectPermissionTest extends Base
     {
         $userModel = new User($this->container);
         $projectModel = new Project($this->container);
-        $groupModel = new Group($this->container);
-        $groupRoleModel = new ProjectGroupRole($this->container);
-        $groupMemberModel = new GroupMember($this->container);
         $userRoleModel = new ProjectUserRole($this->container);
         $projectPermission = new ProjectPermission($this->container);
 

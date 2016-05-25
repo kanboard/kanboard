@@ -205,7 +205,6 @@ class ProjectDuplicationTest extends Base
     public function testCloneProjectWithUsers()
     {
         $p = new Project($this->container);
-        $c = new Category($this->container);
         $pp = new ProjectUserRole($this->container);
         $u = new User($this->container);
         $pd = new ProjectDuplication($this->container);
@@ -231,7 +230,6 @@ class ProjectDuplicationTest extends Base
     public function testCloneProjectWithUsersAndOverrideOwner()
     {
         $p = new Project($this->container);
-        $c = new Category($this->container);
         $pp = new ProjectUserRole($this->container);
         $u = new User($this->container);
         $pd = new ProjectDuplication($this->container);
@@ -258,7 +256,6 @@ class ProjectDuplicationTest extends Base
     public function testCloneTeamProjectToPrivatProject()
     {
         $p = new Project($this->container);
-        $c = new Category($this->container);
         $pp = new ProjectUserRole($this->container);
         $u = new User($this->container);
         $pd = new ProjectDuplication($this->container);
@@ -287,7 +284,6 @@ class ProjectDuplicationTest extends Base
     public function testCloneProjectWithGroups()
     {
         $p = new Project($this->container);
-        $c = new Category($this->container);
         $pd = new ProjectDuplication($this->container);
         $userModel = new User($this->container);
         $groupModel = new Group($this->container);
@@ -420,7 +416,6 @@ class ProjectDuplicationTest extends Base
     {
         $p = new Project($this->container);
         $pd = new ProjectDuplication($this->container);
-        $s = new Swimlane($this->container);
         $tc = new TaskCreation($this->container);
         $tf = new TaskFinder($this->container);
 

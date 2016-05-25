@@ -15,7 +15,6 @@ class BoardTest extends Base
     public function testCreation()
     {
         $p = new Project($this->container);
-        $b = new Board($this->container);
         $columnModel = new Column($this->container);
         $c = new Config($this->container);
 

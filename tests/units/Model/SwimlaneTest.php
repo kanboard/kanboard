@@ -152,13 +152,13 @@ class SwimlaneTest extends Base
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'swimlane_id' => 1)));
 
-        $task = $tf->getbyId(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(1, $task['swimlane_id']);
 
         $this->assertTrue($s->remove(1, 1));
 
-        $task = $tf->getbyId(1);
+        $task = $tf->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(0, $task['swimlane_id']);
 

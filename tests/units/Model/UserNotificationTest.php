@@ -14,7 +14,6 @@ use Kanboard\Model\ProjectUserRole;
 use Kanboard\Model\ProjectGroupRole;
 use Kanboard\Model\UserNotification;
 use Kanboard\Model\UserNotificationFilter;
-use Kanboard\Subscriber\UserNotificationSubscriber;
 use Kanboard\Core\Security\Role;
 
 class UserNotificationTest extends Base

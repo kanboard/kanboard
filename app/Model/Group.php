@@ -80,7 +80,7 @@ class Group extends Base
      *
      * @access public
      * @param  integer $group_id
-     * @return array
+     * @return boolean
      */
     public function remove($group_id)
     {

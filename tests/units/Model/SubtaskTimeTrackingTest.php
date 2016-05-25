@@ -48,7 +48,7 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertEquals(0, $subtasks[0]['timer_start_date']);
         $this->assertFalse($subtasks[0]['is_timer_started']);
 
-        $subtask = $s->getbyId(1, true);
+        $subtask = $s->getById(1, true);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(0, $subtask['timer_start_date']);
         $this->assertFalse($subtask['is_timer_started']);
@@ -61,7 +61,7 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertEquals(time(), $subtasks[0]['timer_start_date'], '', 3);
         $this->assertTrue($subtasks[0]['is_timer_started']);
 
-        $subtask = $s->getbyId(1, true);
+        $subtask = $s->getById(1, true);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(time(), $subtask['timer_start_date'], '', 3);
         $this->assertTrue($subtask['is_timer_started']);
@@ -73,7 +73,7 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertEquals(0, $subtasks[0]['timer_start_date']);
         $this->assertFalse($subtasks[0]['is_timer_started']);
 
-        $subtask = $s->getbyId(1, true);
+        $subtask = $s->getById(1, true);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(0, $subtask['timer_start_date']);
         $this->assertFalse($subtask['is_timer_started']);
@@ -145,7 +145,6 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertEquals(2, $s->create(array('title' => 'subtask #2', 'task_id' => 1, 'time_spent' => 1.1, 'time_estimated' => 4.4)));
 
         $time = $st->calculateSubtaskTime(1);
-        $this->assertNotempty($time);
         $this->assertCount(2, $time);
         $this->assertEquals(3.3, $time['time_spent'], 'Total spent', 0.01);
         $this->assertEquals(7.7, $time['time_estimated'], 'Total estimated', 0.01);
@@ -179,12 +178,10 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertEquals(3600, $timesheet[1]['end'] - $timesheet[1]['start'], 'Wrong timestamps', 1);
 
         $time = $st->calculateSubtaskTime(1);
-        $this->assertNotempty($time);
         $this->assertEquals(4.2, $time['time_spent'], 'Total spent', 0.01);
         $this->assertEquals(0, $time['time_estimated'], 'Total estimated', 0.01);
 
         $time = $st->calculateSubtaskTime(2);
-        $this->assertNotempty($time);
         $this->assertEquals(0, $time['time_spent'], 'Total spent', 0.01);
         $this->assertEquals(0, $time['time_estimated'], 'Total estimated', 0.01);
     }
