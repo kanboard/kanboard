@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Plugin\Directory;
 use Kanboard\Core\Plugin\Installer;
 use Kanboard\Core\Plugin\PluginInstallerException;
 
@@ -40,7 +41,7 @@ class PluginController extends BaseController
 
         $this->response->html($this->helper->layout->plugin('plugin/directory', array(
             'installed_plugins' => $installedPlugins,
-            'available_plugins' => $this->httpClient->getJson(PLUGIN_API_URL),
+            'available_plugins' => Directory::getInstance($this->container)->getAvailablePlugins(),
             'title' => t('Plugin Directory'),
             'is_configured' => Installer::isConfigured(),
         )));

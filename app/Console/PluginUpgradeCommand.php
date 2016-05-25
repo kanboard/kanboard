@@ -3,6 +3,7 @@
 namespace Kanboard\Console;
 
 use Kanboard\Core\Plugin\Base as BasePlugin;
+use Kanboard\Core\Plugin\Directory;
 use Kanboard\Core\Plugin\Installer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,7 +25,7 @@ class PluginUpgradeCommand extends BaseCommand
         }
 
         $installer = new Installer($this->container);
-        $availablePlugins = $this->httpClient->getJson(PLUGIN_API_URL);
+        $availablePlugins = Directory::getInstance($this->container)->getAvailablePlugins();
 
         foreach ($this->pluginLoader->getPlugins() as $installedPlugin) {
             $pluginDetails = $this->getPluginDetails($availablePlugins, $installedPlugin);
