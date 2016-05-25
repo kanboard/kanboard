@@ -14,7 +14,7 @@
         "discard-changes": true
     },
     "require" : {
-        "php" : ">=5.3",
+        "php" : ">=5.3.3",
         "ext-gd" : "*",
         "ext-mbstring" : "*",
         "ext-hash" : "*",
@@ -50,7 +50,8 @@
         ]
     },
     "require-dev" : {
+        "symfony/yaml" : "2.1",
         "symfony/stopwatch" : "~2.6",
-        "phpunit/phpunit": "4.8.*"
+        "phpunit/phpunit" : "4.8.*"
     }
 }
