@@ -17,6 +17,10 @@ Improvements:
 * Use Gulp and Bower to manage assets
 * Controller and Middleware refactoring
 
+Bug fixes:
+
+* Do not send notifications to disabled users
+
 Version 1.0.28
 --------------
 

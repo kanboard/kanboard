@@ -109,7 +109,8 @@ class UserNotificationTest extends Base
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
         $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
-        $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user3', 'email' => '', 'notifications_enabled' => 1, 'is_active' => 0)));
+        $this->assertEquals(5, $userModel->create(array('username' => 'user4')));
 
         $this->assertEquals(1, $groupModel->create('G1'));
         $this->assertEquals(2, $groupModel->create('G2'));
@@ -117,6 +118,7 @@ class UserNotificationTest extends Base
         $this->assertTrue($groupMemberModel->addUser(1, 2));
         $this->assertTrue($groupMemberModel->addUser(1, 3));
         $this->assertTrue($groupMemberModel->addUser(1, 4));
+        $this->assertTrue($groupMemberModel->addUser(1, 5));
         $this->assertTrue($groupMemberModel->addUser(2, 2));
         $this->assertTrue($groupMemberModel->addUser(2, 3));
 
@@ -143,26 +145,30 @@ class UserNotificationTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
         // Email + Notifications enabled
-        $this->assertNotFalse($u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
+        $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
 
         // No email + Notifications enabled
-        $this->assertNotFalse($u->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
+        $this->assertEquals(3, $u->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
 
         // Email + Notifications enabled
-        $this->assertNotFalse($u->create(array('username' => 'user3', 'email' => 'user3@here', 'notifications_enabled' => 1)));
+        $this->assertEquals(4, $u->create(array('username' => 'user3', 'email' => 'user3@here', 'notifications_enabled' => 1)));
+
+        // User disabled
+        $this->assertEquals(5, $u->create(array('username' => 'user4', 'email' => 'user3@here', 'notifications_enabled' => 1, 'is_active' => 0)));
 
         // No email + notifications disabled
-        $this->assertNotFalse($u->create(array('username' => 'user4')));
+        $this->assertEquals(6, $u->create(array('username' => 'user5')));
 
         // Nobody is member of any projects
         $this->assertEmpty($pp->getUsers(1));
         $this->assertEmpty($n->getUsersWithNotificationEnabled(1));
 
         // We allow all users to be member of our projects
-        $this->assertTrue($pp->addUser(1, 1, Role::PROJECT_MEMBER));
         $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MEMBER));
         $this->assertTrue($pp->addUser(1, 3, Role::PROJECT_MEMBER));
         $this->assertTrue($pp->addUser(1, 4, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 5, Role::PROJECT_MEMBER));
+        $this->assertTrue($pp->addUser(1, 6, Role::PROJECT_MEMBER));
 
         $this->assertNotEmpty($pp->getUsers(1));
         $users = $n->getUsersWithNotificationEnabled(1);
@@ -185,16 +191,19 @@ class UserNotificationTest extends Base
         $this->assertTrue($pp->isEverybodyAllowed(1));
 
         // Email + Notifications enabled
-        $this->assertNotFalse($u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
+        $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
 
         // No email + Notifications enabled
-        $this->assertNotFalse($u->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
+        $this->assertEquals(3, $u->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
 
         // Email + Notifications enabled
-        $this->assertNotFalse($u->create(array('username' => 'user3', 'email' => 'user3@here', 'notifications_enabled' => 1)));
+        $this->assertEquals(4, $u->create(array('username' => 'user3', 'email' => 'user3@here', 'notifications_enabled' => 1)));
+
+        // User disabled
+        $this->assertEquals(5, $u->create(array('username' => 'user4', 'email' => 'user3@here', 'notifications_enabled' => 1, 'is_active' => 0)));
 
         // No email + notifications disabled
-        $this->assertNotFalse($u->create(array('username' => 'user4')));
+        $this->assertEquals(6, $u->create(array('username' => 'user5')));
 
         $users = $n->getUsersWithNotificationEnabled(1);
 

@@ -162,8 +162,9 @@ class UserNotification extends Base
             ->table(ProjectUserRole::TABLE)
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email', User::TABLE.'.language', User::TABLE.'.notifications_filter')
             ->join(User::TABLE, 'id', 'user_id')
-            ->eq('project_id', $project_id)
-            ->eq('notifications_enabled', '1')
+            ->eq(ProjectUserRole::TABLE.'.project_id', $project_id)
+            ->eq(User::TABLE.'.notifications_enabled', '1')
+            ->eq(User::TABLE.'.is_active', 1)
             ->neq(User::TABLE.'.id', $exclude_user_id)
             ->findAll();
     }
@@ -178,6 +179,7 @@ class UserNotification extends Base
             ->eq(ProjectGroupRole::TABLE.'.project_id', $project_id)
             ->eq(User::TABLE.'.notifications_enabled', '1')
             ->neq(User::TABLE.'.id', $exclude_user_id)
+            ->eq(User::TABLE.'.is_active', 1)
             ->findAll();
     }
 
@@ -195,6 +197,7 @@ class UserNotification extends Base
             ->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name', User::TABLE.'.email', User::TABLE.'.language', User::TABLE.'.notifications_filter')
             ->eq('notifications_enabled', '1')
             ->neq(User::TABLE.'.id', $exclude_user_id)
+            ->eq(User::TABLE.'.is_active', 1)
             ->findAll();
     }
 }
