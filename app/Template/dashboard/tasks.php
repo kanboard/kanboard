@@ -11,7 +11,8 @@
             <th><?= $paginator->order(t('Task'), 'title') ?></th>
             <th class="column-5"><?= $paginator->order('Priority', 'tasks.priority') ?></th>
             <th class="column-20"><?= t('Time tracking') ?></th>
-            <th class="column-20"><?= $paginator->order(t('Due date'), 'date_due') ?></th>
+            <th class="column-10"><?= $paginator->order(t('Due date'), 'date_due') ?></th>
+            <th class="column-10"><?= $paginator->order(t('Column'), 'column_title') ?></th>
         </tr>
         <?php foreach ($paginator->getCollection() as $task): ?>
         <tr>
@@ -40,6 +41,9 @@
             </td>
             <td>
                 <?= $this->dt->date($task['date_due']) ?>
+            </td>
+            <td>
+                <?= $this->text->e($task['column_title']) ?>
             </td>
         </tr>
         <?php endforeach ?>
