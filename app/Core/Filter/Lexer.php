@@ -26,9 +26,10 @@ class Lexer
      */
     private $tokenMap = array(
         "/^(\s+)/"                                       => 'T_WHITESPACE',
-        '/^([<=>]{0,2}[0-9]{4}-[0-9]{2}-[0-9]{2})/'      => 'T_DATE',
-        '/^(yesterday|tomorrow|today)/'                  => 'T_DATE',
-        '/^("(.*?)")/'                                   => 'T_STRING',
+        '/^([<=>]{0,2}[0-9]{4}-[0-9]{2}-[0-9]{2})/'      => 'T_STRING',
+        '/^([<=>]{1,2}\w+)/'                             => 'T_STRING',
+        '/^([<=>]{1,2}".+")/'                            => 'T_STRING',
+        '/^("(.+)")/'                                    => 'T_STRING',
         "/^(\w+)/"                                       => 'T_STRING',
         "/^(#\d+)/"                                      => 'T_STRING',
     );
@@ -107,7 +108,7 @@ class Lexer
                 $this->offset += strlen($matches[1]);
 
                 return array(
-                    'match' => trim($matches[1], '"'),
+                    'match' => str_replace('"', '', $matches[1]),
                     'token' => $name,
                 );
             }
@@ -134,7 +135,7 @@ class Lexer
             } else {
                 $next = next($tokens);
 
-                if ($next !== false && in_array($next['token'], array('T_STRING', 'T_DATE'))) {
+                if ($next !== false && $next['token'] === 'T_STRING') {
                     $map[$token['token']][] = $next['match'];
                 }
             }

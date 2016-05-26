@@ -51,6 +51,26 @@ class ProjectActivityCreationDateFilterTest extends Base
         $this->assertCount(0, $events);
     }
 
+    public function testWithStrtotimeString()
+    {
+        $taskFinder = new TaskFinder($this->container);
+        $taskCreation = new TaskCreation($this->container);
+        $projectModel = new Project($this->container);
+        $projectActivityModel = new ProjectActivity($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
+        $this->assertEquals(1, $taskCreation->create(array('title' => 'Test', 'project_id' => 1)));
+        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, Task::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
+
+        $query = $projectActivityModel->getQuery();
+        $filter = new ProjectActivityCreationDateFilter('<=last week');
+        $filter->setDateParser($this->container['dateParser']);
+        $filter->withQuery($query)->apply();
+
+        $events = $query->findAll();
+        $this->assertCount(0, $events);
+    }
+
     public function testWithIsoDate()
     {
         $taskFinder = new TaskFinder($this->container);

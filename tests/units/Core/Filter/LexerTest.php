@@ -77,22 +77,103 @@ class LexerTest extends Base
     public function testTokenizeWithStringDate()
     {
         $lexer = new Lexer();
-        $lexer->addToken("/^(date:)/", 'T_DATE');
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
 
         $expected = array(
-            'T_DATE' => array('today'),
+            'T_MY_DATE' => array('today'),
         );
 
         $this->assertSame($expected, $lexer->tokenize('date:today something else'));
     }
 
+    public function testTokenizeWithStringDateWithSpaces()
+    {
+        $lexer = new Lexer();
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
+
+        $expected = array(
+            'T_MY_DATE' => array('last month'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('date:"last month" something else'));
+    }
+
+    public function testTokenizeWithStringDateWithSpacesAndOperator()
+    {
+        $lexer = new Lexer();
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
+
+        $expected = array(
+            'T_MY_DATE' => array('<=last month'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('date:<="last month" something else'));
+
+        $lexer = new Lexer();
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
+
+        $expected = array(
+            'T_MY_DATE' => array('>=next month'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('date:>="next month" something else'));
+
+        $lexer = new Lexer();
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
+
+        $expected = array(
+            'T_MY_DATE' => array('<+2 days'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('date:<"+2 days" something else'));
+
+        $lexer = new Lexer();
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
+
+        $expected = array(
+            'T_MY_DATE' => array('<-1 hour'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('date:<"-1 hour" something else'));
+    }
+
+    public function testTokenizeWithStringDateAndOperator()
+    {
+        $lexer = new Lexer();
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
+
+        $expected = array(
+            'T_MY_DATE' => array('<=today'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('date:<=today something else'));
+
+        $lexer = new Lexer();
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
+
+        $expected = array(
+            'T_MY_DATE' => array('>now'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('date:>now something else'));
+
+        $lexer = new Lexer();
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
+
+        $expected = array(
+            'T_MY_DATE' => array('>=now'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('date:>=now something else'));
+    }
+
     public function testTokenizeWithIsoDate()
     {
         $lexer = new Lexer();
-        $lexer->addToken("/^(date:)/", 'T_DATE');
+        $lexer->addToken("/^(date:)/", 'T_MY_DATE');
 
         $expected = array(
-            'T_DATE' => array('<=2016-01-01'),
+            'T_MY_DATE' => array('<=2016-01-01'),
         );
 
         $this->assertSame($expected, $lexer->tokenize('date:<=2016-01-01 something else'));
