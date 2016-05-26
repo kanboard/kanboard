@@ -5,10 +5,10 @@ namespace Kanboard\Controller;
 /**
  * Project Edit Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class ProjectEdit extends BaseController
+class ProjectEditController extends BaseController
 {
     /**
      * General edition (most common operations)
@@ -75,7 +75,7 @@ class ProjectEdit extends BaseController
         if ($valid) {
             if ($this->project->update($values)) {
                 $this->flash->success(t('Project updated successfully.'));
-                return $this->response->redirect($this->helper->url->to('ProjectEdit', $redirect, array('project_id' => $project['id'])), true);
+                return $this->response->redirect($this->helper->url->to('ProjectEditController', $redirect, array('project_id' => $project['id'])), true);
             } else {
                 $this->flash->failure(t('Unable to update this project.'));
             }
@@ -111,7 +111,7 @@ class ProjectEdit extends BaseController
     }
 
     /**
-     * Common metthod to render different views
+     * Common method to render different views
      *
      * @access private
      * @param  string $template

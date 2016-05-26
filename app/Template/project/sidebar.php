@@ -10,9 +10,9 @@
         </li>
         <?php endif ?>
 
-        <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
-            <li <?= $this->app->checkMenuSelection('ProjectEdit') ?>>
-                <?= $this->url->link(t('Edit project'), 'ProjectEdit', 'edit', array('project_id' => $project['id'])) ?>
+        <?php if ($this->user->hasProjectAccess('ProjectEditController', 'edit', $project['id'])): ?>
+            <li <?= $this->app->checkMenuSelection('ProjectEditController') ?>>
+                <?= $this->url->link(t('Edit project'), 'ProjectEditController', 'edit', array('project_id' => $project['id'])) ?>
             </li>
             <li <?= $this->app->checkMenuSelection('ProjectViewController', 'share') ?>>
                 <?= $this->url->link(t('Public access'), 'ProjectViewController', 'share', array('project_id' => $project['id'])) ?>
@@ -33,7 +33,7 @@
                 <?= $this->url->link(t('Categories'), 'category', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($project['is_private'] == 0): ?>
-            <li <?= $this->app->checkMenuSelection('ProjectPermission') ?>>
+            <li <?= $this->app->checkMenuSelection('ProjectPermissionController') ?>>
                 <?= $this->url->link(t('Permissions'), 'ProjectPermissionController', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php endif ?>

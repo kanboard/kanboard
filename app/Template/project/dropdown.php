@@ -34,7 +34,7 @@
 
         <?= $this->hook->render('template:project:dropdown', array('project' => $project)) ?>
 
-        <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('ProjectEditController', 'edit', $project['id'])): ?>
             <li>
                 <i class="fa fa-cog fa-fw"></i>
                 <?= $this->url->link(t('Settings'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>

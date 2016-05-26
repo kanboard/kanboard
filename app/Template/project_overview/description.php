@@ -3,9 +3,9 @@
         <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Description') ?></h3>
     </div>
     <div class="accordion-content">
-        <?php if ($this->user->hasProjectAccess('ProjectEdit', 'description', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('ProjectEditController', 'description', $project['id'])): ?>
             <div class="buttons-header">
-                <?= $this->url->button('fa-edit', t('Edit description'), 'ProjectEdit', 'description', array('project_id' => $project['id']), 'popover') ?>
+                <?= $this->url->button('fa-edit', t('Edit description'), 'ProjectEditController', 'description', array('project_id' => $project['id']), 'popover') ?>
             </div>
         <?php endif ?>
         <article class="markdown">
