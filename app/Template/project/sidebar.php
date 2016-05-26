@@ -34,7 +34,7 @@
             </li>
             <?php if ($project['is_private'] == 0): ?>
             <li <?= $this->app->checkMenuSelection('ProjectPermission') ?>>
-                <?= $this->url->link(t('Permissions'), 'ProjectPermission', 'index', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Permissions'), 'ProjectPermissionController', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php endif ?>
             <li <?= $this->app->checkMenuSelection('action') ?>>

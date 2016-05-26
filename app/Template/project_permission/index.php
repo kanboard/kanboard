@@ -26,12 +26,12 @@
                         $roles,
                         array('role-'.$user['id'] => $user['role']),
                         array(),
-                        array('data-url="'.$this->url->href('ProjectPermission', 'changeUserRole', array('project_id' => $project['id'])).'"', 'data-id="'.$user['id'].'"'),
+                        array('data-url="'.$this->url->href('ProjectPermissionController', 'changeUserRole', array('project_id' => $project['id'])).'"', 'data-id="'.$user['id'].'"'),
                         'project-change-role'
                     ) ?>
                 </td>
                 <td>
-                    <?= $this->url->link(t('Remove'), 'ProjectPermission', 'removeUser', array('project_id' => $project['id'], 'user_id' => $user['id']), true) ?>
+                    <?= $this->url->link(t('Remove'), 'ProjectPermissionController', 'removeUser', array('project_id' => $project['id'], 'user_id' => $user['id']), true) ?>
                 </td>
             </tr>
             <?php endforeach ?>
@@ -40,7 +40,7 @@
 
     <?php if ($project['is_private'] == 0): ?>
     <div class="listing">
-        <form method="post" action="<?= $this->url->href('ProjectPermission', 'addUser', array('project_id' => $project['id'])) ?>" autocomplete="off" class="form-inline">
+        <form method="post" action="<?= $this->url->href('ProjectPermissionController', 'addUser', array('project_id' => $project['id'])) ?>" autocomplete="off" class="form-inline">
             <?= $this->form->csrf() ?>
             <?= $this->form->hidden('project_id', array('project_id' => $project['id'])) ?>
             <?= $this->form->hidden('user_id', $values) ?>
@@ -86,12 +86,12 @@
                         $roles,
                         array('role-'.$group['id'] => $group['role']),
                         array(),
-                        array('data-url="'.$this->url->href('ProjectPermission', 'changeGroupRole', array('project_id' => $project['id'])).'"', 'data-id="'.$group['id'].'"'),
+                        array('data-url="'.$this->url->href('ProjectPermissionController', 'changeGroupRole', array('project_id' => $project['id'])).'"', 'data-id="'.$group['id'].'"'),
                         'project-change-role'
                     ) ?>
                 </td>
                 <td>
-                    <?= $this->url->link(t('Remove'), 'ProjectPermission', 'removeGroup', array('project_id' => $project['id'], 'group_id' => $group['id']), true) ?>
+                    <?= $this->url->link(t('Remove'), 'ProjectPermissionController', 'removeGroup', array('project_id' => $project['id'], 'group_id' => $group['id']), true) ?>
                 </td>
             </tr>
             <?php endforeach ?>
@@ -100,7 +100,7 @@
 
     <?php if ($project['is_private'] == 0): ?>
     <div class="listing">
-        <form method="post" action="<?= $this->url->href('ProjectPermission', 'addGroup', array('project_id' => $project['id'])) ?>" autocomplete="off" class="form-inline">
+        <form method="post" action="<?= $this->url->href('ProjectPermissionController', 'addGroup', array('project_id' => $project['id'])) ?>" autocomplete="off" class="form-inline">
             <?= $this->form->csrf() ?>
             <?= $this->form->hidden('project_id', array('project_id' => $project['id'])) ?>
             <?= $this->form->hidden('group_id', $values) ?>
@@ -128,7 +128,7 @@
 
 <?php if ($project['is_private'] == 0): ?>
 <hr/>
-<form method="post" action="<?= $this->url->href('ProjectPermission', 'allowEverybody', array('project_id' => $project['id'])) ?>">
+<form method="post" action="<?= $this->url->href('ProjectPermissionController', 'allowEverybody', array('project_id' => $project['id'])) ?>">
     <?= $this->form->csrf() ?>
 
     <?= $this->form->hidden('id', array('id' => $project['id'])) ?>

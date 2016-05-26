@@ -6,12 +6,12 @@ use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Security\Role;
 
 /**
- * Project Permission
+ * Project Permission Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class ProjectPermission extends BaseController
+class ProjectPermissionController extends BaseController
 {
     /**
      * Permissions are only available for team projects
@@ -75,7 +75,7 @@ class ProjectPermission extends BaseController
             $this->flash->failure(t('Unable to update this project.'));
         }
 
-        $this->response->redirect($this->helper->url->to('ProjectPermission', 'index', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('ProjectPermissionController', 'index', array('project_id' => $project['id'])));
     }
 
     /**
@@ -96,7 +96,7 @@ class ProjectPermission extends BaseController
             $this->flash->failure(t('Unable to update this project.'));
         }
 
-        $this->response->redirect($this->helper->url->to('ProjectPermission', 'index', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('ProjectPermissionController', 'index', array('project_id' => $project['id'])));
     }
 
     /**
@@ -116,7 +116,7 @@ class ProjectPermission extends BaseController
             $this->flash->failure(t('Unable to update this project.'));
         }
 
-        $this->response->redirect($this->helper->url->to('ProjectPermission', 'index', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('ProjectPermissionController', 'index', array('project_id' => $project['id'])));
     }
 
     /**
@@ -156,7 +156,7 @@ class ProjectPermission extends BaseController
             $this->flash->failure(t('Unable to update this project.'));
         }
 
-        $this->response->redirect($this->helper->url->to('ProjectPermission', 'index', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('ProjectPermissionController', 'index', array('project_id' => $project['id'])));
     }
 
     /**
@@ -176,7 +176,7 @@ class ProjectPermission extends BaseController
             $this->flash->failure(t('Unable to update this project.'));
         }
 
-        $this->response->redirect($this->helper->url->to('ProjectPermission', 'index', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('ProjectPermissionController', 'index', array('project_id' => $project['id'])));
     }
 
     /**
