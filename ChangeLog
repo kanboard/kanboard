@@ -22,6 +22,10 @@ Bug fixes:
 
 * Do not send notifications to disabled users
 
+Breaking changes:
+
+* Webhook to create tasks have been removed, use the API instead.
+
 Version 1.0.28
 --------------
 
