@@ -142,6 +142,13 @@ class TaskPositionModel extends Base
             ->asc('id')
             ->findAllByColumn('id');
 
+        $task = $this->taskFinderModel->getById($task_id);
+
+        $is_same_column = false;
+        if (isset($task['column_id']) && $task['column_id'] === $column_id) {
+            $is_same_column = true;
+        }
+
         $offset = 1;
 
         foreach ($tasks_ids as $current_task_id) {
@@ -169,10 +176,12 @@ class TaskPositionModel extends Base
 
         $now = time();
 
-        return $this->db->table(TaskModel::TABLE)->eq('id', $task_id)->update(array(
-            'date_moved' => $now,
-            'date_modification' => $now,
-        ));
+        $date_params = array('date_modification' => $now);
+        if (! $is_same_column) {
+            $date_params['date_moved'] = $now;
+        }
+
+        return $this->db->table(TaskModel::TABLE)->eq('id', $task_id)->update($date_params);
     }
 
     /**
