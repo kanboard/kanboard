@@ -75,13 +75,13 @@
         <?php if ($this->user->hasProjectAccess('ProjectEdit', 'edit', $project['id'])): ?>
             <li>
                 <i class="fa fa-cog fa-fw"></i>
-                <?= $this->url->link(t('Settings'), 'project', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Settings'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 
         <li>
             <i class="fa fa-folder fa-fw" aria-hidden="true"></i>
-            <?= $this->url->link(t('Manage projects'), 'project', 'index') ?>
+            <?= $this->url->link(t('Manage projects'), 'ProjectListController', 'show') ?>
         </li>
     </ul>
 </div>

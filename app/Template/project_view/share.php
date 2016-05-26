@@ -12,8 +12,7 @@
         </ul>
     </div>
 
-    <?= $this->url->link(t('Disable public access'), 'project', 'share', array('project_id' => $project['id'], 'switch' => 'disable'), true, 'btn btn-red') ?>
-
+    <?= $this->url->link(t('Disable public access'), 'ProjectViewController', 'updateSharing', array('project_id' => $project['id'], 'switch' => 'disable'), true, 'btn btn-red') ?>
 <?php else: ?>
-    <?= $this->url->link(t('Enable public access'), 'project', 'share', array('project_id' => $project['id'], 'switch' => 'enable'), true, 'btn btn-blue') ?>
+    <?= $this->url->link(t('Enable public access'), 'ProjectViewController', 'updateSharing', array('project_id' => $project['id'], 'switch' => 'enable'), true, 'btn btn-blue') ?>
 <?php endif ?>

@@ -49,17 +49,14 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/create/private', 'ProjectCreation', 'createPrivate');
 
             // Project routes
-            $container['route']->addRoute('projects', 'project', 'index');
-            $container['route']->addRoute('project/:project_id', 'project', 'show');
-            $container['route']->addRoute('p/:project_id', 'project', 'show');
+            $container['route']->addRoute('projects', 'ProjectListController', 'show');
+            $container['route']->addRoute('project/:project_id', 'ProjectViewController', 'show');
+            $container['route']->addRoute('p/:project_id', 'ProjectViewController', 'show');
             $container['route']->addRoute('project/:project_id/customer-filters', 'customfilter', 'index');
-            $container['route']->addRoute('project/:project_id/share', 'project', 'share');
-            $container['route']->addRoute('project/:project_id/notifications', 'project', 'notifications');
-            $container['route']->addRoute('project/:project_id/integrations', 'project', 'integrations');
-            $container['route']->addRoute('project/:project_id/duplicate', 'project', 'duplicate');
-            $container['route']->addRoute('project/:project_id/remove', 'project', 'remove');
-            $container['route']->addRoute('project/:project_id/disable', 'project', 'disable');
-            $container['route']->addRoute('project/:project_id/enable', 'project', 'enable');
+            $container['route']->addRoute('project/:project_id/share', 'ProjectViewController', 'share');
+            $container['route']->addRoute('project/:project_id/notifications', 'ProjectViewController', 'notifications');
+            $container['route']->addRoute('project/:project_id/integrations', 'ProjectViewController', 'integrations');
+            $container['route']->addRoute('project/:project_id/duplicate', 'ProjectViewController', 'duplicate');
             $container['route']->addRoute('project/:project_id/permissions', 'ProjectPermission', 'index');
             $container['route']->addRoute('project/:project_id/import', 'taskImport', 'step1');
             $container['route']->addRoute('project/:project_id/activity', 'activity', 'project');

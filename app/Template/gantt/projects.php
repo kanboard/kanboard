@@ -2,7 +2,7 @@
     <div class="page-header">
         <ul>
             <li>
-                <i class="fa fa-folder fa-fw"></i><?= $this->url->link(t('Projects list'), 'project', 'index') ?>
+                <i class="fa fa-folder fa-fw"></i><?= $this->url->link(t('Projects list'), 'ProjectListController', 'show') ?>
             </li>
             <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
                 <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'projectuser', 'managers') ?></li>

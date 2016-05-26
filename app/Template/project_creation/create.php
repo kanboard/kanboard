@@ -31,7 +31,7 @@
         <div class="form-actions">
             <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
             <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'project', 'index', array(), false, 'close-popover') ?>
+            <?= $this->url->link(t('cancel'), 'ProjectListController', 'show', array(), false, 'close-popover') ?>
         </div>
     </form>
     <?php if ($is_private): ?>

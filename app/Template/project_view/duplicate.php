@@ -6,7 +6,7 @@
     <p class="alert alert-info">
         <?= t('Which parts of the project do you want to duplicate?') ?>
     </p>
-    <form method="post" action="<?= $this->url->href('project', 'duplicate', array('project_id' => $project['id'], 'duplicate' => 'yes')) ?>" autocomplete="off">
+    <form method="post" action="<?= $this->url->href('ProjectViewController', 'doDuplication', array('project_id' => $project['id'], 'duplicate' => 'yes')) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
 
@@ -22,7 +22,7 @@
 
         <div class="form-actions">
             <button type="submit" class="btn btn-red"><?= t('Duplicate') ?></button>
-            <?= t('or') ?> <?= $this->url->link(t('cancel'), 'project', 'show', array('project_id' => $project['id'])) ?>
+            <?= t('or') ?> <?= $this->url->link(t('cancel'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
         </div>
     </form>
 </div>

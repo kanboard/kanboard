@@ -43,7 +43,7 @@ class ProjectGanttFormatter extends BaseFormatter implements FormatterInterface
                     (int) date('n', $end),
                     (int) date('j', $end),
                 ),
-                'link' => $this->helper->url->href('project', 'show', array('project_id' => $project['id'])),
+                'link' => $this->helper->url->href('ProjectViewController', 'show', array('project_id' => $project['id'])),
                 'board_link' => $this->helper->url->href('board', 'show', array('project_id' => $project['id'])),
                 'gantt_link' => $this->helper->url->href('gantt', 'project', array('project_id' => $project['id'])),
                 'color' => $color,

@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <i class="fa fa-folder fa-fw"></i>
-                <?= $this->url->link(t('Projects list'), 'project', 'index') ?>
+                <?= $this->url->link(t('Projects list'), 'ProjectListController', 'show') ?>
             </li>
             <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
                 <li>

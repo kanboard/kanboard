@@ -4,7 +4,7 @@
 <?php if (empty($types)): ?>
     <p class="alert"><?= t('No plugin has registered a project notification method. You can still configure individual notifications in your user profile.') ?></p>
 <?php else: ?>
-    <form method="post" action="<?= $this->url->href('project', 'notifications', array('project_id' => $project['id'])) ?>" autocomplete="off">
+    <form method="post" action="<?= $this->url->href('ProjectViewController', 'updateNotifications', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
 
@@ -14,7 +14,7 @@
         <div class="form-actions">
             <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
             <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'project', 'show', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('cancel'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
         </div>
     </form>
 <?php endif ?>

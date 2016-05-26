@@ -71,7 +71,7 @@
                         </li>
                         <li>
                             <i class="fa fa-folder fa-fw"></i>
-                            <?= $this->url->link(t('Projects management'), 'project', 'index') ?>
+                            <?= $this->url->link(t('Projects management'), 'ProjectListController', 'show') ?>
                         </li>
                         <?php if ($this->user->hasAccess('UserListController', 'show')): ?>
                             <li>

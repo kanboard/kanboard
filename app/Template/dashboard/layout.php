@@ -19,7 +19,7 @@
             </li>
             <li>
                 <i class="fa fa-folder fa-fw"></i>
-                <?= $this->url->link(t('Project management'), 'project', 'index') ?>
+                <?= $this->url->link(t('Project management'), 'ProjectListController', 'show') ?>
             </li>
         </ul>
     </div>
