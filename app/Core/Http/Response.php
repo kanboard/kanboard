@@ -16,6 +16,18 @@ class Response extends Base
     private $httpStatusCode = 200;
     private $httpHeaders = array();
     private $httpBody = '';
+    private $responseSent = false;
+
+    /**
+     * Return true if the response have been sent to the user agent
+     *
+     * @access public
+     * @return bool
+     */
+    public function isResponseAlreadySent()
+    {
+        return $this->responseSent;
+    }
 
     /**
      * Set HTTP status code
@@ -187,6 +199,8 @@ class Response extends Base
      */
     public function send()
     {
+        $this->responseSent = true;
+
         if ($this->httpStatusCode !== 200) {
             header('Status: '.$this->httpStatusCode);
             header($this->request->getServerVariable('SERVER_PROTOCOL').' '.$this->httpStatusCode);

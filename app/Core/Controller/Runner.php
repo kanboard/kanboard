@@ -26,7 +26,10 @@ class Runner extends Base
     {
         try {
             $this->executeMiddleware();
-            $this->executeController();
+
+            if (!$this->response->isResponseAlreadySent()) {
+                $this->executeController();
+            }
         } catch (PageNotFoundException $e) {
             $controllerObject = new AppController($this->container);
             $controllerObject->notFound($e->hasLayout());
