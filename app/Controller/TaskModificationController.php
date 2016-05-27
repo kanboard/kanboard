@@ -21,7 +21,7 @@ class TaskModificationController extends BaseController
     {
         $task = $this->getTask();
         $this->taskModification->update(array('id' => $task['id'], 'date_started' => time()));
-        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
     }
 
     /**
@@ -67,7 +67,7 @@ class TaskModificationController extends BaseController
                 $this->flash->failure(t('Unable to update your task.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         }
 
         return $this->description($values, $errors);
@@ -121,7 +121,7 @@ class TaskModificationController extends BaseController
 
         if ($valid && $this->taskModification->update($values)) {
             $this->flash->success(t('Task updated successfully.'));
-            $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         } else {
             $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);

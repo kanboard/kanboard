@@ -66,7 +66,6 @@ class SubtaskStatusController extends BaseController
             'task' => $task,
             'subtasks' => $this->subtask->getAll($task['id']),
             'editable' => true,
-            'redirect' => 'task',
         ));
     }
 }

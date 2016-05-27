@@ -16,7 +16,7 @@
             <?= $this->url->link($this->text->e($task['project_name']), 'board', 'show', array('project_id' => $task['project_id'])) ?>
         </td>
         <td class="task-table color-<?= $task['color_id'] ?>">
-            <?= $this->url->link('#'.$this->text->e($task['id']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+            <?= $this->url->link('#'.$this->text->e($task['id']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
             <?= $this->text->e($task['swimlane_name'] ?: $task['default_swimlane']) ?>
@@ -28,7 +28,7 @@
             <?= $this->text->e($task['category_name']) ?>
         </td>
         <td>
-            <?= $this->url->link($this->text->e($task['title']), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
+            <?= $this->url->link($this->text->e($task['title']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
             <?php if ($task['assignee_username']): ?>

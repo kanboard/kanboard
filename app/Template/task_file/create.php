@@ -4,7 +4,7 @@
 <div id="file-done" style="display:none">
     <p class="alert alert-success">
         <?= t('All files have been uploaded successfully.') ?>
-        <?= $this->url->link(t('View uploaded files'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+        <?= $this->url->link(t('View uploaded files'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
     </p>
 </div>
 
@@ -29,5 +29,5 @@
 <div class="form-actions">
     <input type="submit" value="<?= t('Upload files') ?>" class="btn btn-blue" id="file-upload-button" disabled>
     <?= t('or') ?>
-    <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
+    <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
 </div>

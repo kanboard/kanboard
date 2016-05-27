@@ -9,12 +9,12 @@ use Kanboard\Filter\TaskTitleFilter;
 use Kanboard\Formatter\TaskAutoCompleteFormatter;
 
 /**
- * Task Ajax Helper
+ * Task Ajax Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class TaskHelper extends BaseController
+class TaskAjaxController extends BaseController
 {
     /**
      * Task auto-completion (Ajax)

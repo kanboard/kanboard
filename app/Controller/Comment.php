@@ -82,7 +82,7 @@ class Comment extends BaseController
                 $this->flash->failure(t('Unable to create your comment.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
         }
 
         return $this->create($values, $errors);
@@ -131,7 +131,7 @@ class Comment extends BaseController
                 $this->flash->failure(t('Unable to update your comment.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), false);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), false);
         }
 
         return $this->edit($values, $errors);
@@ -171,7 +171,7 @@ class Comment extends BaseController
             $this->flash->failure(t('Unable to remove this comment.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
     }
 
     /**
@@ -186,6 +186,6 @@ class Comment extends BaseController
         $order = $this->userSession->getCommentSorting() === 'ASC' ? 'DESC' : 'ASC';
         $this->userSession->setCommentSorting($order);
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
     }
 }

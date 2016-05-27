@@ -75,7 +75,7 @@ abstract class BaseApi extends Base
     protected function formatTask($task)
     {
         if (! empty($task)) {
-            $task['url'] = $this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
+            $task['url'] = $this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
             $task['color'] = $this->color->getColorProperties($task['color_id']);
         }
 

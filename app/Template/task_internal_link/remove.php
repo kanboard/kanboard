@@ -10,6 +10,6 @@
     <div class="form-actions">
         <?= $this->url->link(t('Yes'), 'TaskInternalLinkController', 'remove', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), true, 'btn btn-red') ?>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
+        <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>
 </div>

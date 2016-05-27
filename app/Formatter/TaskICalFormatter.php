@@ -117,7 +117,7 @@ class TaskICalFormatter extends BaseTaskCalendarFormatter implements FormatterIn
         $vEvent->setModified($dateModif);
         $vEvent->setUseTimezone(true);
         $vEvent->setSummary(t('#%d', $task['id']).' '.$task['title']);
-        $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
 
         if (! empty($task['owner_id'])) {
             $vEvent->setOrganizer($task['assignee_name'] ?: $task['assignee_username'], $task['assignee_email']);

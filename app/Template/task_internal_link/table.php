@@ -24,7 +24,7 @@
                 <?php if ($is_public): ?>
                     <?= $this->url->link(
                         $this->text->e('#'.$link['task_id'].' '.$link['title']),
-                        'task',
+                        'TaskViewController',
                         'readonly',
                         array('task_id' => $link['task_id'], 'token' => $project['token']),
                         false,
@@ -33,7 +33,7 @@
                 <?php else: ?>
                     <?= $this->url->link(
                         $this->text->e('#'.$link['task_id'].' '.$link['title']),
-                        'task',
+                        'TaskViewController',
                         'show',
                         array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
                         false,

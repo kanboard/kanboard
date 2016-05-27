@@ -34,6 +34,6 @@ class SubtaskConverterController extends BaseController
             $this->flash->failure(t('Unable to convert the subtask.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $project['id'], 'task_id' => $task_id)), true);
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $project['id'], 'task_id' => $task_id)), true);
     }
 }

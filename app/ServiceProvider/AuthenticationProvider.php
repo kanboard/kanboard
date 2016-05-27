@@ -91,7 +91,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('SubtaskRestrictionController', '*', Role::PROJECT_MEMBER);
         $acl->add('SubtaskStatusController', '*', Role::PROJECT_MEMBER);
         $acl->add('Swimlane', '*', Role::PROJECT_MANAGER);
-        $acl->add('Task', 'remove', Role::PROJECT_MEMBER);
+        $acl->add('TaskViewController', 'remove', Role::PROJECT_MEMBER);
         $acl->add('TaskCreationController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskBulkController', '*', Role::PROJECT_MEMBER);
         $acl->add('Taskduplication', '*', Role::PROJECT_MEMBER);
@@ -124,7 +124,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('Captcha', '*', Role::APP_PUBLIC);
         $acl->add('PasswordReset', '*', Role::APP_PUBLIC);
         $acl->add('Webhook', '*', Role::APP_PUBLIC);
-        $acl->add('Task', 'readonly', Role::APP_PUBLIC);
+        $acl->add('TaskViewController', 'readonly', Role::APP_PUBLIC);
         $acl->add('Board', 'readonly', Role::APP_PUBLIC);
         $acl->add('Ical', '*', Role::APP_PUBLIC);
         $acl->add('Feed', '*', Role::APP_PUBLIC);

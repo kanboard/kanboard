@@ -78,7 +78,7 @@ class TaskExternalLink extends BaseController
 
         if ($valid && $this->taskExternalLink->create($values)) {
             $this->flash->success(t('Link added successfully.'));
-            return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
         return $this->edit($values, $errors);
@@ -130,7 +130,7 @@ class TaskExternalLink extends BaseController
 
         if ($valid && $this->taskExternalLink->update($values)) {
             $this->flash->success(t('Link updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
 
         return $this->edit($values, $errors);
@@ -173,6 +173,6 @@ class TaskExternalLink extends BaseController
             $this->flash->failure(t('Unable to remove this link.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 }

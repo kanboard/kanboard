@@ -10,7 +10,7 @@
     <?php foreach ($events as $e): ?>
     <entry>
         <title type="text"><?= $e['event_title'] ?></title>
-        <link rel="alternate" href="<?= $this->url->href('task', 'show', array('task_id' => $e['task_id']), false, '', true) ?>"/>
+        <link rel="alternate" href="<?= $this->url->href('TaskViewController', 'show', array('task_id' => $e['task_id']), false, '', true) ?>"/>
         <id><?= $e['id'].'-'.$e['event_name'].'-'.$e['task_id'].'-'.$e['date_creation'] ?></id>
         <published><?= date(DATE_ATOM, $e['date_creation']) ?></published>
         <updated><?= date(DATE_ATOM, $e['date_creation']) ?></updated>

@@ -64,7 +64,7 @@ class SubtaskController extends BaseController
                 return $this->create(array('project_id' => $task['project_id'], 'task_id' => $task['id'], 'another_subtask' => 1));
             }
 
-            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
         }
 
         return $this->create($values, $errors);
@@ -114,7 +114,7 @@ class SubtaskController extends BaseController
                 $this->flash->failure(t('Unable to update your sub-task.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         }
 
         return $this->edit($values, $errors);
@@ -153,7 +153,7 @@ class SubtaskController extends BaseController
             $this->flash->failure(t('Unable to remove this sub-task.'));
         }
 
-        $this->response->redirect($this->helper->url->to('task', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
     }
 
     /**

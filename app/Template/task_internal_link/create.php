@@ -21,13 +21,13 @@
             'placeholder="'.t('Start to type task title...').'"',
             'title="'.t('Start to type task title...').'"',
             'data-dst-field="opposite_task_id"',
-            'data-search-url="'.$this->url->href('TaskHelper', 'autocomplete', array('exclude_task_id' => $task['id'])).'"',
+            'data-search-url="'.$this->url->href('TaskAjaxController', 'autocomplete', array('exclude_task_id' => $task['id'])).'"',
         ),
         'autocomplete') ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'task', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
+        <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
     </div>
 </form>

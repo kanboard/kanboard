@@ -7,12 +7,12 @@ use Kanboard\Core\Controller\PageNotFoundException;
 use Kanboard\Core\DateParser;
 
 /**
- * Task controller
+ * Task Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Task extends BaseController
+class TaskViewController extends BaseController
 {
     /**
      * Public access (display a task)
@@ -114,7 +114,7 @@ class Task extends BaseController
         $task = $this->getTask();
 
         $subtask_paginator = $this->paginator
-            ->setUrl('task', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
+            ->setUrl('TaskViewController', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
             ->setMax(15)
             ->setOrder('start')
             ->setDirection('DESC')

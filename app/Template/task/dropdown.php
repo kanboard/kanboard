@@ -58,7 +58,7 @@
         <?php if ($this->user->canRemoveTask($task)): ?>
             <li>
                 <i class="fa fa-trash-o fa-fw"></i>
-                <?= $this->url->link(t('Remove'), 'task', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+                <?= $this->url->link(t('Remove'), 'TaskViewController', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
             </li>
         <?php endif ?>
         <?php if (isset($task['is_active'])): ?>
