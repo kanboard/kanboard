@@ -8,7 +8,7 @@
     <ul>
         <li>
             <i class="fa fa-check-square-o fa-fw"></i>
-            <?= $this->url->link(t('Mark all as read'), 'webNotification', 'flush', array('user_id' => $user['id'])) ?>
+            <?= $this->url->link(t('Mark all as read'), 'WebNotificationController', 'flush', array('user_id' => $user['id'])) ?>
         </li>
     </ul>
 </div>
@@ -36,16 +36,12 @@
                     <i class="fa fa-file-o fa-fw"></i>
                 <?php endif ?>
 
-                <?php if ($this->text->contains($notification['event_name'], 'comment')): ?>
-                    <?= $this->url->link($notification['title'], 'task', 'show', array('task_id' => $notification['event_data']['task']['id'], 'project_id' => $notification['event_data']['task']['project_id']), false, '', '', false, 'comment-'.$notification['event_data']['comment']['id']) ?>
-                <?php elseif ($this->text->contains($notification['event_name'], 'task.overdue')): ?>
+                <?php if ($this->text->contains($notification['event_name'], 'task.overdue')): ?>
                     <?php if (count($notification['event_data']['tasks']) > 1): ?>
                         <?= $notification['title'] ?>
-                    <?php else: ?>
-                        <?= $this->url->link($notification['title'], 'task', 'show', array('task_id' => $notification['event_data']['tasks'][0]['id'], 'project_id' => $notification['event_data']['tasks'][0]['project_id'])) ?>
                     <?php endif ?>
                 <?php else: ?>
-                    <?= $this->url->link($notification['title'], 'task', 'show', array('task_id' => $notification['event_data']['task']['id'], 'project_id' => $notification['event_data']['task']['project_id'])) ?>
+                    <?= $this->url->link($notification['title'], 'WebNotificationController', 'redirect', array('notification_id' => $notification['id'], 'user_id' => $user['id'])) ?>
                 <?php endif ?>
             </td>
             <td>
@@ -53,7 +49,7 @@
             </td>
             <td>
                 <i class="fa fa-check fa-fw"></i>
-                <?= $this->url->link(t('Mark as read'), 'webNotification', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'])) ?>
+                <?= $this->url->link(t('Mark as read'), 'WebNotificationController', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'])) ?>
             </td>
         </tr>
         <?php endforeach ?>

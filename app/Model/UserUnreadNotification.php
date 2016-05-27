@@ -36,6 +36,23 @@ class UserUnreadNotification extends Base
     }
 
     /**
+     * Get one notification
+     *
+     * @param  integer $notification_id
+     * @return array|null
+     */
+    public function getById($notification_id)
+    {
+        $notification = $this->db->table(self::TABLE)->eq('id', $notification_id)->findOne();
+
+        if (! empty($notification)) {
+            $this->unserialize($notification);
+        }
+
+        return $notification;
+    }
+
+    /**
      * Get all notifications for a user
      *
      * @access public
@@ -47,8 +64,7 @@ class UserUnreadNotification extends Base
         $events = $this->db->table(self::TABLE)->eq('user_id', $user_id)->asc('date_creation')->findAll();
 
         foreach ($events as &$event) {
-            $event['event_data'] = json_decode($event['event_data'], true);
-            $event['title'] = $this->notification->getTitleWithoutAuthor($event['event_name'], $event['event_data']);
+            $this->unserialize($event);
         }
 
         return $events;
@@ -89,5 +105,11 @@ class UserUnreadNotification extends Base
     public function hasNotifications($user_id)
     {
         return $this->db->table(self::TABLE)->eq('user_id', $user_id)->exists();
+    }
+
+    private function unserialize(&$event)
+    {
+        $event['event_data'] = json_decode($event['event_data'], true);
+        $event['title'] = $this->notification->getTitleWithoutAuthor($event['event_name'], $event['event_data']);
     }
 }

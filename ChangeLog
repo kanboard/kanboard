@@ -11,6 +11,7 @@ New features:
 
 Improvements:
 
+* Mark web notification as read when clicking on it
 * Support strtotime strings for date search
 * Reset failed login counter and unlock user when changing password
 * Task do not open anymore in a new window on the Gantt chart
