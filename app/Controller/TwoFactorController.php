@@ -7,10 +7,10 @@ use Kanboard\Core\Controller\AccessForbiddenException;
 /**
  * Two Factor Auth controller
  *
- * @package  controller
+ * @package  Kanboard/Controller
  * @author   Frederic Guillot
  */
-class Twofactor extends UserViewController
+class TwoFactorController extends UserViewController
 {
     /**
      * Only the current user can access to 2FA settings
@@ -100,10 +100,10 @@ class Twofactor extends UserViewController
             unset($this->sessionStorage->twoFactorSecret);
             $this->userSession->disablePostAuthentication();
 
-            $this->response->redirect($this->helper->url->to('twofactor', 'index', array('user_id' => $user['id'])));
+            $this->response->redirect($this->helper->url->to('TwoFactorController', 'index', array('user_id' => $user['id'])));
         } else {
             $this->flash->failure(t('The two factor authentication code is not valid.'));
-            $this->response->redirect($this->helper->url->to('twofactor', 'show', array('user_id' => $user['id'])));
+            $this->response->redirect($this->helper->url->to('TwoFactorController', 'show', array('user_id' => $user['id'])));
         }
     }
 
@@ -127,7 +127,7 @@ class Twofactor extends UserViewController
         $this->userSession->disablePostAuthentication();
 
         $this->flash->success(t('User updated successfully.'));
-        $this->response->redirect($this->helper->url->to('twofactor', 'index', array('user_id' => $user['id'])));
+        $this->response->redirect($this->helper->url->to('TwoFactorController', 'index', array('user_id' => $user['id'])));
     }
 
     /**
@@ -152,7 +152,7 @@ class Twofactor extends UserViewController
             $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
         } else {
             $this->flash->failure(t('The two factor authentication code is not valid.'));
-            $this->response->redirect($this->helper->url->to('twofactor', 'code'));
+            $this->response->redirect($this->helper->url->to('TwoFactorController', 'code'));
         }
     }
 

@@ -19,7 +19,7 @@
 <?php endif ?>
 
 <h3><?= t('Test your device') ?></h3>
-<form method="post" action="<?= $this->url->href('twofactor', 'test', array('user_id' => $user['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('TwoFactorController', 'test', array('user_id' => $user['id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->label(t('Code'), 'code') ?>

@@ -49,12 +49,12 @@
             <?php endif ?>
 
             <?php if ($this->user->isCurrentUser($user['id'])): ?>
-                <li <?= $this->app->checkMenuSelection('twofactor', 'index') ?>>
-                    <?= $this->url->link(t('Two factor authentication'), 'twofactor', 'index', array('user_id' => $user['id'])) ?>
+                <li <?= $this->app->checkMenuSelection('TwoFactorController', 'index') ?>>
+                    <?= $this->url->link(t('Two factor authentication'), 'TwoFactorController', 'index', array('user_id' => $user['id'])) ?>
                 </li>
-            <?php elseif ($this->user->hasAccess('twofactor', 'disable') && $user['twofactor_activated'] == 1): ?>
-                <li <?= $this->app->checkMenuSelection('twofactor', 'disable') ?>>
-                    <?= $this->url->link(t('Two factor authentication'), 'twofactor', 'disable', array('user_id' => $user['id'])) ?>
+            <?php elseif ($this->user->hasAccess('TwoFactorController', 'disable') && $user['twofactor_activated'] == 1): ?>
+                <li <?= $this->app->checkMenuSelection('TwoFactorController', 'disable') ?>>
+                    <?= $this->url->link(t('Two factor authentication'), 'TwoFactorController', 'disable', array('user_id' => $user['id'])) ?>
                 </li>
             <?php endif ?>
 

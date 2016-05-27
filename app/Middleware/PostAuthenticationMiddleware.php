@@ -19,7 +19,7 @@ class PostAuthenticationMiddleware extends BaseMiddleware
     {
         $controller = strtolower($this->router->getController());
         $action = strtolower($this->router->getAction());
-        $ignore = ($controller === 'twofactor' && in_array($action, array('code', 'check'))) || ($controller === 'auth' && $action === 'logout');
+        $ignore = ($controller === 'twofactorcontroller' && in_array($action, array('code', 'check'))) || ($controller === 'auth' && $action === 'logout');
 
         if ($ignore === false && $this->userSession->hasPostAuthentication() && ! $this->userSession->isPostAuthenticationValidated()) {
             $this->nextMiddleware = null;
@@ -28,7 +28,7 @@ class PostAuthenticationMiddleware extends BaseMiddleware
                 $this->response->text('Not Authorized', 401);
             }
 
-            $this->response->redirect($this->helper->url->to('twofactor', 'code'));
+            $this->response->redirect($this->helper->url->to('TwoFactorController', 'code'));
         }
 
         $this->next();
