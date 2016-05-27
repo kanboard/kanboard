@@ -144,12 +144,12 @@ class LetterAvatarProvider extends Base implements AvatarProviderInterface
         $str .= 'x';
         $max = intval(9007199254740991 / $seed2);
 
-        for ($i = 0, $ilen = mb_strlen($str); $i < $ilen; $i++) {
+        for ($i = 0, $ilen = mb_strlen($str, 'UTF-8'); $i < $ilen; $i++) {
             if ($hash > $max) {
                 $hash = intval($hash / $seed2);
             }
 
-            $hash = $hash * $seed + $this->getCharCode($str[$i]);
+            $hash = $hash * $seed + $this->getCharCode(mb_substr($str, $i, 1, 'UTF-8'));
         }
 
         return $hash;
