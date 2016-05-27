@@ -72,8 +72,8 @@
                 <div class="dropdown">
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
-                    <li><?= $this->url->link(t('Edit'), 'TaskInternalLink', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
-                    <li><?= $this->url->link(t('Remove'), 'TaskInternalLink', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
+                    <li><?= $this->url->link(t('Edit'), 'TaskInternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
+                    <li><?= $this->url->link(t('Remove'), 'TaskInternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?></li>
                 </ul>
                 </div>
             </td>

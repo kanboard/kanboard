@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Tasks Importation') ?></h2>
 </div>
-<form action="<?= $this->url->href('taskImport', 'step2', array('project_id' => $project['id'])) ?>" method="post" enctype="multipart/form-data">
+<form action="<?= $this->url->href('TaskImportController', 'step2', array('project_id' => $project['id'])) ?>" method="post" enctype="multipart/form-data">
     <?= $this->form->csrf() ?>
 
     <?= $this->form->label(t('Delimiter'), 'delimiter') ?>
@@ -31,4 +31,4 @@
         <li><?= t('The due date must use the ISO format: YYYY-MM-DD') ?></li>
     </ul>
 </div>
-<p><i class="fa fa-download fa-fw"></i><?= $this->url->link(t('Download CSV template'), 'taskImport', 'template', array('project_id' => $project['id'])) ?></p>
+<p><i class="fa fa-download fa-fw"></i><?= $this->url->link(t('Download CSV template'), 'TaskImportController', 'template', array('project_id' => $project['id'])) ?></p>

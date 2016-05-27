@@ -5,10 +5,10 @@ namespace Kanboard\Controller;
 /**
  * Task Status controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Taskstatus extends BaseController
+class TaskStatusController extends BaseController
 {
     /**
      * Close a task

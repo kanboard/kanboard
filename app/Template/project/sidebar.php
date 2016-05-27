@@ -51,8 +51,8 @@
                     <?= $this->url->link(t('Enable'), 'ProjectStatusController', 'confirmEnable', array('project_id' => $project['id']), false, 'popover') ?>
                 <?php endif ?>
             </li>
-            <li <?= $this->app->checkMenuSelection('taskImport') ?>>
-                <?= $this->url->link(t('Import'), 'taskImport', 'step1', array('project_id' => $project['id'])) ?>
+            <li <?= $this->app->checkMenuSelection('TaskImportController') ?>>
+                <?= $this->url->link(t('Import'), 'TaskImportController', 'step1', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($this->user->hasProjectAccess('ProjectStatusController', 'remove', $project['id'])): ?>
                 <li>

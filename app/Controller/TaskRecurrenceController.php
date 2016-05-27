@@ -5,10 +5,10 @@ namespace Kanboard\Controller;
 /**
  * Task Recurrence controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class TaskRecurrence extends BaseController
+class TaskRecurrenceController extends BaseController
 {
     /**
      * Edit recurrence form

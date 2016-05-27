@@ -7,10 +7,10 @@ use Kanboard\Core\Csv;
 /**
  * Task Import controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class TaskImport extends BaseController
+class TaskImportController extends BaseController
 {
     /**
      * Upload the file and ask settings
@@ -60,7 +60,7 @@ class TaskImport extends BaseController
             $this->flash->failure(t('Nothing have been imported!'));
         }
 
-        $this->response->redirect($this->helper->url->to('taskImport', 'step1', array('project_id' => $project['id'])));
+        $this->response->redirect($this->helper->url->to('TaskImportController', 'step1', array('project_id' => $project['id'])));
     }
 
     /**

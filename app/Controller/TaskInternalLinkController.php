@@ -7,11 +7,11 @@ use Kanboard\Core\Controller\PageNotFoundException;
 /**
  * TaskInternalLink Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Olivier Maridat
  * @author   Frederic Guillot
  */
-class TaskInternalLink extends BaseController
+class TaskInternalLinkController extends BaseController
 {
     /**
      * Get the current link

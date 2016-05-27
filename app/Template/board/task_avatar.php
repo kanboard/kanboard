@@ -1,9 +1,9 @@
 <?php if (! empty($task['owner_id'])): ?>
 <div class="task-board-avatars">
     <span
-        <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+        <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
         class="task-board-assignee task-board-change-assignee"
-        data-url="<?= $this->url->href('TaskPopover', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+        data-url="<?= $this->url->href('TaskPopoverController', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
     <?php else: ?>
         class="task-board-assignee">
     <?php endif ?>

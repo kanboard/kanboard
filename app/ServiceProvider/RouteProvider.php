@@ -58,7 +58,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/integrations', 'ProjectViewController', 'integrations');
             $container['route']->addRoute('project/:project_id/duplicate', 'ProjectViewController', 'duplicate');
             $container['route']->addRoute('project/:project_id/permissions', 'ProjectPermissionController', 'index');
-            $container['route']->addRoute('project/:project_id/import', 'taskImport', 'step1');
+            $container['route']->addRoute('project/:project_id/import', 'TaskImportController', 'step1');
             $container['route']->addRoute('project/:project_id/activity', 'activity', 'project');
 
             // Project Overview

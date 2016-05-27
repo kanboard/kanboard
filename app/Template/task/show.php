@@ -3,7 +3,7 @@
 <?= $this->render('task/details', array(
     'task' => $task,
     'project' => $project,
-    'editable' => $this->user->hasProjectAccess('taskmodification', 'edit', $project['id']),
+    'editable' => $this->user->hasProjectAccess('TaskModificationController', 'edit', $project['id']),
 )) ?>
 
 <?= $this->hook->render('template:task:show:before-description', array('task' => $task, 'project' => $project)) ?>

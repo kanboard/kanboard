@@ -16,7 +16,7 @@
     <?php if ($this->board->isCollapsed($task['project_id'])): ?>
         <div class="task-board-collapsed">
             <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse"></i></div>
-            <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+            <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                 <?= $this->render('task/dropdown', array('task' => $task)) ?>
             <?php else: ?>
                 <strong><?= '#'.$task['id'] ?></strong>
@@ -32,7 +32,7 @@
     <?php else: ?>
         <div class="task-board-expanded">
             <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
-            <?php if ($this->user->hasProjectAccess('taskmodification', 'edit', $task['project_id'])): ?>
+            <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                 <?= $this->render('task/dropdown', array('task' => $task)) ?>
             <?php else: ?>
                 <strong><?= '#'.$task['id'] ?></strong>

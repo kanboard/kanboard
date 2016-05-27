@@ -72,7 +72,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('Analytic', '*', Role::PROJECT_MANAGER);
         $acl->add('Board', 'save', Role::PROJECT_MEMBER);
         $acl->add('BoardPopover', '*', Role::PROJECT_MEMBER);
-        $acl->add('TaskPopover', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskPopoverController', '*', Role::PROJECT_MEMBER);
         $acl->add('Calendar', 'save', Role::PROJECT_MEMBER);
         $acl->add('Category', '*', Role::PROJECT_MANAGER);
         $acl->add('Column', '*', Role::PROJECT_MANAGER);
@@ -95,12 +95,12 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('TaskCreationController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskBulkController', '*', Role::PROJECT_MEMBER);
         $acl->add('Taskduplication', '*', Role::PROJECT_MEMBER);
-        $acl->add('TaskRecurrence', '*', Role::PROJECT_MEMBER);
-        $acl->add('TaskImport', '*', Role::PROJECT_MANAGER);
-        $acl->add('TaskInternalLink', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskRecurrenceController', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskImportController', '*', Role::PROJECT_MANAGER);
+        $acl->add('TaskInternalLinkController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskExternalLink', '*', Role::PROJECT_MEMBER);
-        $acl->add('Taskmodification', '*', Role::PROJECT_MEMBER);
-        $acl->add('Taskstatus', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskModificationController', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskStatusController', '*', Role::PROJECT_MEMBER);
         $acl->add('UserAjaxController', array('mention'), Role::PROJECT_MEMBER);
 
         return $acl;

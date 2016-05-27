@@ -7,10 +7,10 @@ use Kanboard\Core\DateParser;
 /**
  * Task Modification controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Taskmodification extends BaseController
+class TaskModificationController extends BaseController
 {
     /**
      * Set automatically the start date
