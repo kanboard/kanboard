@@ -82,6 +82,6 @@ class TaskCreationController extends BaseController
             ));
         }
 
-        return $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project['id'])), true);
+        return $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
     }
 }

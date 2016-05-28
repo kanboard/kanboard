@@ -3,9 +3,9 @@
         <i class="fa fa-eye fa-fw"></i>
         <?= $this->url->link(t('Overview'), 'ProjectOverviewController', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-overview', t('Keyboard shortcut: "%s"', 'v o')) ?>
     </li>
-    <li <?= $this->app->checkMenuSelection('Board') ?>>
+    <li <?= $this->app->checkMenuSelection('BoardViewController') ?>>
         <i class="fa fa-th fa-fw"></i>
-        <?= $this->url->link(t('Board'), 'board', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-board', t('Keyboard shortcut: "%s"', 'v b')) ?>
+        <?= $this->url->link(t('Board'), 'BoardViewController', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-board', t('Keyboard shortcut: "%s"', 'v b')) ?>
     </li>
     <li <?= $this->app->checkMenuSelection('Calendar') ?>>
         <i class="fa fa-calendar fa-fw"></i>

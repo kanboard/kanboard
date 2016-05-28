@@ -166,7 +166,7 @@ class TaskViewController extends BaseController
                 $this->flash->failure(t('Unable to remove this task.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $task['project_id'])), true);
+            return $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $task['project_id'])), true);
         }
 
         return $this->response->html($this->template->render('task/remove', array(

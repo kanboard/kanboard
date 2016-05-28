@@ -29,7 +29,7 @@
                 <?= $this->url->link('<i class="fa fa-list"></i>', 'TaskListController', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('List')) ?>&nbsp;
                 <?= $this->url->link('<i class="fa fa-calendar"></i>', 'CalendarController', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Calendar')) ?>&nbsp;
 
-                <?= $this->url->link($this->text->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link($this->text->e($project['name']), 'BoardViewController', 'show', array('project_id' => $project['id'])) ?>
                 <?php if (! empty($project['description'])): ?>
                     <span class="tooltip" title="<?= $this->text->markdownAttribute($project['description']) ?>">
                         <i class="fa fa-info-circle"></i>

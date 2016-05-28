@@ -97,7 +97,7 @@ abstract class BaseApi extends Base
     {
         if (! empty($project)) {
             $project['url'] = array(
-                'board' => $this->helper->url->to('board', 'show', array('project_id' => $project['id']), '', true),
+                'board' => $this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id']), '', true),
                 'calendar' => $this->helper->url->to('CalendarController', 'show', array('project_id' => $project['id']), '', true),
                 'list' => $this->helper->url->to('TaskListController', 'show', array('project_id' => $project['id']), '', true),
             );

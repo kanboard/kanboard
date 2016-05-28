@@ -70,7 +70,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('ProjectActionDuplicationController', '*', Role::PROJECT_MANAGER);
         $acl->add('ActionCreationController', '*', Role::PROJECT_MANAGER);
         $acl->add('AnalyticController', '*', Role::PROJECT_MANAGER);
-        $acl->add('Board', 'save', Role::PROJECT_MEMBER);
+        $acl->add('BoardAjaxController', 'save', Role::PROJECT_MEMBER);
         $acl->add('BoardPopoverController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskPopoverController', '*', Role::PROJECT_MEMBER);
         $acl->add('CalendarController', 'save', Role::PROJECT_MEMBER);
@@ -124,7 +124,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('CaptchaController', '*', Role::APP_PUBLIC);
         $acl->add('PasswordResetController', '*', Role::APP_PUBLIC);
         $acl->add('TaskViewController', 'readonly', Role::APP_PUBLIC);
-        $acl->add('Board', 'readonly', Role::APP_PUBLIC);
+        $acl->add('BoardViewController', 'readonly', Role::APP_PUBLIC);
         $acl->add('ICalendarController', '*', Role::APP_PUBLIC);
         $acl->add('FeedController', '*', Role::APP_PUBLIC);
         $acl->add('AvatarFileController', 'show', Role::APP_PUBLIC);

@@ -38,7 +38,7 @@
                 <?php if ($project['is_public'] && !$editable): ?>
                 <li class="smaller">
                     <i class="fa fa-th fa-fw"></i>
-                    <?= $this->url->link(t('Back to the board'), 'board', 'readonly', array('token' => $project['token'])) ?>
+                    <?= $this->url->link(t('Back to the board'), 'BoardViewController', 'readonly', array('token' => $project['token'])) ?>
                 </li>
                 <?php endif ?>
                 <li class="smaller">

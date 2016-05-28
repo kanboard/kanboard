@@ -6,67 +6,15 @@ use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Formatter\BoardFormatter;
 
 /**
- * Board controller
+ * Class BoardAjaxController
  *
- * @package  controller
- * @author   Frederic Guillot
+ * @package Kanboard\Controller
+ * @author  Fredric Guillot
  */
-class Board extends BaseController
+class BoardAjaxController extends BaseController
 {
     /**
-     * Display the public version of a board
-     * Access checked by a simple token, no user login, read only, auto-refresh
-     *
-     * @access public
-     */
-    public function readonly()
-    {
-        $token = $this->request->getStringParam('token');
-        $project = $this->project->getByToken($token);
-
-        // Token verification
-        if (empty($project)) {
-            throw AccessForbiddenException::getInstance()->withoutLayout();
-        }
-
-        // Display the board with a specific layout
-        $this->response->html($this->helper->layout->app('board/view_public', array(
-            'project' => $project,
-            'swimlanes' => $this->board->getBoard($project['id']),
-            'title' => $project['name'],
-            'description' => $project['description'],
-            'no_layout' => true,
-            'not_editable' => true,
-            'board_public_refresh_interval' => $this->config->get('board_public_refresh_interval'),
-            'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-            'board_highlight_period' => $this->config->get('board_highlight_period'),
-        )));
-    }
-
-    /**
-     * Show a board for a given project
-     *
-     * @access public
-     */
-    public function show()
-    {
-        $project = $this->getProject();
-        $search = $this->helper->projectHeader->getSearchQuery($project);
-
-        $this->response->html($this->helper->layout->app('board/view_private', array(
-            'project' => $project,
-            'title' => $project['name'],
-            'description' => $this->helper->projectHeader->getDescription($project),
-            'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-            'board_highlight_period' => $this->config->get('board_highlight_period'),
-            'swimlanes' => $this->taskLexer
-                ->build($search)
-                ->format(BoardFormatter::getInstance($this->container)->setProjectId($project['id']))
-        )));
-    }
-
-    /**
-     * Save the board (Ajax request made by the drag and drop)
+     * Save new task positions (Ajax request made by the drag and drop)
      *
      * @access public
      */
@@ -106,7 +54,7 @@ class Board extends BaseController
         $timestamp = $this->request->getIntegerParam('timestamp');
 
         if (! $project_id || ! $this->request->isAjax()) {
-            $this->response->status(403);
+            throw new AccessForbiddenException();
         } elseif (! $this->project->isModifiedSince($project_id, $timestamp)) {
             $this->response->status(304);
         } else {
@@ -167,18 +115,18 @@ class Board extends BaseController
         if ($this->request->isAjax()) {
             $this->response->html($this->renderBoard($project_id));
         } else {
-            $this->response->redirect($this->helper->url->to('board', 'show', array('project_id' => $project_id)));
+            $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project_id)));
         }
     }
 
     /**
      * Render board
      *
-     * @access private
+     * @access protected
      * @param  integer $project_id
      * @return string
      */
-    private function renderBoard($project_id)
+    protected function renderBoard($project_id)
     {
         return $this->template->render('board/table_container', array(
             'project' => $this->project->getById($project_id),

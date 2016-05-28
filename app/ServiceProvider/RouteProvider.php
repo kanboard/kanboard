@@ -115,9 +115,9 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('analytics/estimated-spent-time/:project_id', 'AnalyticController', 'compareHours');
 
             // Board routes
-            $container['route']->addRoute('board/:project_id', 'board', 'show');
-            $container['route']->addRoute('b/:project_id', 'board', 'show');
-            $container['route']->addRoute('public/board/:token', 'board', 'readonly');
+            $container['route']->addRoute('board/:project_id', 'BoardViewController', 'show');
+            $container['route']->addRoute('b/:project_id', 'BoardViewController', 'show');
+            $container['route']->addRoute('public/board/:token', 'BoardViewController', 'readonly');
 
             // Calendar routes
             $container['route']->addRoute('calendar/:project_id', 'CalendarController', 'show');

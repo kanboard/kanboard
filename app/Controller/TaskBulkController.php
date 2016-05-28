@@ -50,7 +50,7 @@ class TaskBulkController extends BaseController
         if ($valid) {
             $this->createTasks($project, $values);
             $this->response->redirect($this->helper->url->to(
-                'Board',
+                'BoardViewController',
                 'show',
                 array('project_id' => $project['id']),
                 'swimlane-'. $values['swimlane_id']

@@ -1,6 +1,6 @@
 <section id="main">
 
-    <?= $this->projectHeader->render($project, 'Board', 'show', true) ?>
+    <?= $this->projectHeader->render($project, 'BoardViewController', 'show', true) ?>
 
     <?= $this->render('board/table_container', array(
         'project' => $project,
