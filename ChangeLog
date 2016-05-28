@@ -26,7 +26,9 @@ Bug fixes:
 
 Breaking changes:
 
-* Webhook to create tasks have been removed, use the API instead.
+* Webhook to create tasks have been removed, use the API instead
+* All controllers have been renamed, people who are not using URL rewriting will see different URLs
+* All models have been renamed, plugin maintainers will have to update their plugins
 
 Version 1.0.28
 --------------
