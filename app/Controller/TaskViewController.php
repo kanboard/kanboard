@@ -143,34 +143,4 @@ class TaskViewController extends BaseController
             'transitions' => $this->transition->getAllByTask($task['id']),
         )));
     }
-
-    /**
-     * Remove a task
-     *
-     * @access public
-     */
-    public function remove()
-    {
-        $task = $this->getTask();
-
-        if (! $this->helper->user->canRemoveTask($task)) {
-            throw new AccessForbiddenException();
-        }
-
-        if ($this->request->getStringParam('confirmation') === 'yes') {
-            $this->checkCSRFParam();
-
-            if ($this->task->remove($task['id'])) {
-                $this->flash->success(t('Task removed successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to remove this task.'));
-            }
-
-            return $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $task['project_id'])), true);
-        }
-
-        return $this->response->html($this->template->render('task/remove', array(
-            'task' => $task,
-        )));
-    }
 }

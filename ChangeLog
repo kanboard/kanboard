@@ -22,6 +22,7 @@ Improvements:
 Bug fixes:
 
 * Do not send notifications to disabled users
+* Fix wrong redirect when removing a task from the task view page
 
 Breaking changes:
 

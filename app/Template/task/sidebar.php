@@ -90,7 +90,7 @@
         <?php if ($this->user->canRemoveTask($task)): ?>
             <li>
                 <i class="fa fa-trash-o fa-fw"></i>
-                <?= $this->url->link(t('Remove'), 'TaskViewController', 'remove', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+                <?= $this->url->link(t('Remove'), 'TaskSuppressionController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => 'board'), false, 'popover') ?>
             </li>
         <?php endif ?>
 
