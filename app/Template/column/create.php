@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Add a new column') ?></h2>
 </div>
-<form class="popover-form" method="post" action="<?= $this->url->href('Column', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('ColumnController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

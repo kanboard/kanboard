@@ -1,6 +1,6 @@
 <table
     class="swimlanes-table table-stripped"
-    data-save-position-url="<?= $this->url->href('Swimlane', 'move', array('project_id' => $project['id'])) ?>">
+    data-save-position-url="<?= $this->url->href('SwimlaneController', 'move', array('project_id' => $project['id'])) ?>">
     <thead>
         <tr>
             <th><?= t('Name') ?></th>
@@ -20,13 +20,13 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
-                        <?= $this->url->link(t('Edit'), 'Swimlane', 'editDefault', array('project_id' => $project['id']), false, 'popover') ?>
+                        <?= $this->url->link(t('Edit'), 'SwimlaneController', 'editDefault', array('project_id' => $project['id']), false, 'popover') ?>
                     </li>
                     <li>
                         <?php if ($default_swimlane['show_default_swimlane'] == 1): ?>
-                            <?= $this->url->link(t('Disable'), 'Swimlane', 'disableDefault', array('project_id' => $project['id']), true) ?>
+                            <?= $this->url->link(t('Disable'), 'SwimlaneController', 'disableDefault', array('project_id' => $project['id']), true) ?>
                         <?php else: ?>
-                            <?= $this->url->link(t('Enable'), 'Swimlane', 'enableDefault', array('project_id' => $project['id']), true) ?>
+                            <?= $this->url->link(t('Enable'), 'SwimlaneController', 'enableDefault', array('project_id' => $project['id']), true) ?>
                         <?php endif ?>
                     </li>
                 </ul>
@@ -55,17 +55,17 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
-                        <?= $this->url->link(t('Edit'), 'swimlane', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                        <?= $this->url->link(t('Edit'), 'SwimlaneController', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                     </li>
                     <li>
                         <?php if ($swimlane['is_active']): ?>
-                            <?= $this->url->link(t('Disable'), 'swimlane', 'disable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
+                            <?= $this->url->link(t('Disable'), 'SwimlaneController', 'disable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                         <?php else: ?>
-                            <?= $this->url->link(t('Enable'), 'swimlane', 'enable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
+                            <?= $this->url->link(t('Enable'), 'SwimlaneController', 'enable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                         <?php endif ?>
                     </li>
                     <li>
-                        <?= $this->url->link(t('Remove'), 'swimlane', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                        <?= $this->url->link(t('Remove'), 'SwimlaneController', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                     </li>
                 </ul>
                 </div>

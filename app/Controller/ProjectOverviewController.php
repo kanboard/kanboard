@@ -1,0 +1,32 @@
+<?php
+
+namespace Kanboard\Controller;
+
+/**
+ * Project Overview Controller
+ *
+ * @package  Kanboard\Controller
+ * @author   Frederic Guillot
+ */
+class ProjectOverviewController extends BaseController
+{
+    /**
+     * Show project overview
+     */
+    public function show()
+    {
+        $project = $this->getProject();
+        $this->project->getColumnStats($project);
+
+        $this->response->html($this->helper->layout->app('project_overview/show', array(
+            'project' => $project,
+            'title' => $project['name'],
+            'description' => $this->helper->projectHeader->getDescription($project),
+            'users' => $this->projectUserRole->getAllUsersGroupedByRole($project['id']),
+            'roles' => $this->role->getProjectRoles(),
+            'events' => $this->helper->projectActivity->getProjectEvents($project['id'], 10),
+            'images' => $this->projectFile->getAllImages($project['id']),
+            'files' => $this->projectFile->getAllDocuments($project['id']),
+        )));
+    }
+}

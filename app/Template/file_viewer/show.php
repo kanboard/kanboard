@@ -3,7 +3,7 @@
 </div>
 <div class="file-viewer">
     <?php if ($file['is_image']): ?>
-        <img src="<?= $this->url->href('FileViewer', 'image', $params) ?>" alt="<?= $this->text->e($file['name']) ?>">
+        <img src="<?= $this->url->href('FileViewerController', 'image', $params) ?>" alt="<?= $this->text->e($file['name']) ?>">
     <?php elseif ($type === 'markdown'): ?>
         <article class="markdown">
             <?= $this->text->markdown($content) ?>

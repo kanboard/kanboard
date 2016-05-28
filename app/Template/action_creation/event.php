@@ -2,7 +2,7 @@
     <h2><?= t('Choose an event') ?></h2>
 </div>
 
-<form class="popover-form" method="post" action="<?= $this->url->href('ActionCreation', 'params', array('project_id' => $project['id'])) ?>">
+<form class="popover-form" method="post" action="<?= $this->url->href('ActionCreationController', 'params', array('project_id' => $project['id'])) ?>">
 
     <?= $this->form->csrf() ?>
 
@@ -22,6 +22,6 @@
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Next step') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'action', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
+        <?= $this->url->link(t('cancel'), 'ActionController', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
     </div>
 </form>

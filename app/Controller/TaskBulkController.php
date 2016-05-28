@@ -6,6 +6,7 @@ namespace Kanboard\Controller;
  * Class TaskBulkController
  *
  * @package Kanboard\Controller
+ * @author  Frederic Guillot
  */
 class TaskBulkController extends BaseController
 {

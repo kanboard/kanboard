@@ -6,7 +6,7 @@
     <p id="screenshot-inner"><?= t('Take a screenshot and press CTRL+V or ⌘+V to paste here.') ?></p>
 </div>
 
-<form class="popover-form" action="<?= $this->url->href('TaskFile', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post">
+<form class="popover-form" action="<?= $this->url->href('TaskFileController', 'screenshot', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post">
     <input type="hidden" name="screenshot"/>
     <?= $this->form->csrf() ?>
     <div class="form-actions">

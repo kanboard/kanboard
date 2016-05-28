@@ -19,7 +19,7 @@ class PostAuthenticationMiddleware extends BaseMiddleware
     {
         $controller = strtolower($this->router->getController());
         $action = strtolower($this->router->getAction());
-        $ignore = ($controller === 'twofactorcontroller' && in_array($action, array('code', 'check'))) || ($controller === 'auth' && $action === 'logout');
+        $ignore = ($controller === 'twofactorcontroller' && in_array($action, array('code', 'check'))) || ($controller === 'authcontroller' && $action === 'logout');
 
         if ($ignore === false && $this->userSession->hasPostAuthentication() && ! $this->userSession->isPostAuthenticationValidated()) {
             $this->nextMiddleware = null;

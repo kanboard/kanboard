@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
-                <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'projectuser', 'managers') ?></li>
+            <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
+                <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'ProjectUserOverviewController', 'managers') ?></li>
             <?php endif ?>
             <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
                 <li><i class="fa fa-sliders fa-fw"></i><?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?></li>
@@ -20,7 +20,7 @@
                 <th class="column-8"><?= $paginator->order(t('Start date'), 'start_date') ?></th>
                 <th class="column-8"><?= $paginator->order(t('End date'), 'end_date') ?></th>
                 <th class="column-15"><?= $paginator->order(t('Owner'), 'owner_id') ?></th>
-                <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
+                <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
                     <th class="column-10"><?= t('Users') ?></th>
                 <?php endif ?>
                 <th><?= t('Columns') ?></th>
@@ -64,10 +64,10 @@
                         <?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?>
                     <?php endif ?>
                 </td>
-                <?php if ($this->user->hasAccess('projectuser', 'managers')): ?>
+                <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
                     <td>
                         <i class="fa fa-users fa-fw"></i>
-                        <span class="tooltip" title="<?= t('Members') ?>" data-href="<?= $this->url->href('Projectuser', 'users', array('project_id' => $project['id'])) ?>"><?= t('Members') ?></span>
+                        <span class="tooltip" title="<?= t('Members') ?>" data-href="<?= $this->url->href('ProjectUserOverviewController', 'users', array('project_id' => $project['id'])) ?>"><?= t('Members') ?></span>
                     </td>
                 <?php endif ?>
                 <td class="dashboard-project-stats">

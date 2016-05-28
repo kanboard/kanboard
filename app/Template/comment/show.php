@@ -26,11 +26,11 @@
                 <?php if ($editable && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
                     <li>
                         <i class="fa fa-remove fa-fw"></i>
-                        <?= $this->url->link(t('remove'), 'comment', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
+                        <?= $this->url->link(t('remove'), 'CommentController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
                     </li>
                     <li>
                         <i class="fa fa-edit fa-fw"></i>
-                        <?= $this->url->link(t('edit'), 'comment', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
+                        <?= $this->url->link(t('edit'), 'CommentController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id']), false, 'popover') ?>
                     </li>
                 <?php endif ?>
             </ul>

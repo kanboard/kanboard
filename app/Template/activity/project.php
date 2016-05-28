@@ -1,5 +1,5 @@
 <section id="main">
-    <?= $this->projectHeader->render($project, 'Analytic', $this->app->getRouterAction()) ?>
+    <?= $this->projectHeader->render($project, 'AnalyticController', $this->app->getRouterAction()) ?>
 
     <?php if ($project['is_public']): ?>
     <div class="menu-inline pull-right">

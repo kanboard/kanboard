@@ -8,6 +8,7 @@ use Kanboard\Core\Base;
  * Class AppController
  *
  * @package Kanboard\Controller
+ * @author  Frederic Guillot
  */
 class AppController extends Base
 {

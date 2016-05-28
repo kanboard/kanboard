@@ -2,7 +2,7 @@
     <h2><?= t('Edit column "%s"', $column['title']) ?></h2>
 </div>
 
-<form class="popover-form" method="post" action="<?= $this->url->href('column', 'update', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('ColumnController', 'update', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -21,6 +21,6 @@
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'column', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
+        <?= $this->url->link(t('cancel'), 'ColumnController', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
     </div>
 </form>

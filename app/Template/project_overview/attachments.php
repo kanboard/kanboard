@@ -3,9 +3,9 @@
         <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Attachments') ?></h3>
     </div>
     <div class="accordion-content">
-        <?php if ($this->user->hasProjectAccess('ProjectFile', 'create', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('ProjectFileController', 'create', $project['id'])): ?>
         <div class="buttons-header">
-            <?= $this->url->button('fa-plus', t('Upload a file'), 'ProjectFile', 'create', array('project_id' => $project['id']), 'popover') ?>
+            <?= $this->url->button('fa-plus', t('Upload a file'), 'ProjectFileController', 'create', array('project_id' => $project['id']), 'popover') ?>
         </div>
         <?php endif ?>
 

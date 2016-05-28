@@ -7,11 +7,11 @@
         </li>
         <li>
             <i class="fa fa-calendar fa-fw"></i>
-            <?= $this->url->link(t('Calendar'), 'calendar', 'show', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('Calendar'), 'CalendarController', 'show', array('project_id' => $project['id'])) ?>
         </li>
         <li>
             <i class="fa fa-list fa-fw"></i>
-            <?= $this->url->link(t('Listing'), 'listing', 'show', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('Listing'), 'TaskListController', 'show', array('project_id' => $project['id'])) ?>
         </li>
         <?php if ($this->user->hasProjectAccess('Gantt', 'project', $project['id'])): ?>
         <li>
@@ -22,13 +22,13 @@
 
         <li>
             <i class="fa fa-dashboard fa-fw"></i>&nbsp;
-            <?= $this->url->link(t('Activity'), 'activity', 'project', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('Activity'), 'ActivityController', 'project', array('project_id' => $project['id'])) ?>
         </li>
 
-        <?php if ($this->user->hasProjectAccess('analytic', 'tasks', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('AnalyticController', 'tasks', $project['id'])): ?>
             <li>
                 <i class="fa fa-line-chart fa-fw"></i>&nbsp;
-                <?= $this->url->link(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Analytics'), 'AnalyticController', 'tasks', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 

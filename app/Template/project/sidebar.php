@@ -4,9 +4,9 @@
         <li <?= $this->app->checkMenuSelection('ProjectViewController', 'show') ?>>
             <?= $this->url->link(t('Summary'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
         </li>
-        <?php if ($this->user->hasProjectAccess('customfilter', 'index', $project['id'])): ?>
-        <li <?= $this->app->checkMenuSelection('customfilter') ?>>
-            <?= $this->url->link(t('Custom filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
+        <?php if ($this->user->hasProjectAccess('CustomFilterController', 'index', $project['id'])): ?>
+        <li <?= $this->app->checkMenuSelection('CustomFilterController') ?>>
+            <?= $this->url->link(t('Custom filters'), 'CustomFilterController', 'index', array('project_id' => $project['id'])) ?>
         </li>
         <?php endif ?>
 
@@ -23,22 +23,22 @@
             <li <?= $this->app->checkMenuSelection('ProjectViewController', 'integrations') ?>>
                 <?= $this->url->link(t('Integrations'), 'ProjectViewController', 'integrations', array('project_id' => $project['id'])) ?>
             </li>
-            <li <?= $this->app->checkMenuSelection('column') ?>>
-                <?= $this->url->link(t('Columns'), 'column', 'index', array('project_id' => $project['id'])) ?>
+            <li <?= $this->app->checkMenuSelection('ColumnController') ?>>
+                <?= $this->url->link(t('Columns'), 'ColumnController', 'index', array('project_id' => $project['id'])) ?>
             </li>
-            <li <?= $this->app->checkMenuSelection('swimlane') ?>>
-                <?= $this->url->link(t('Swimlanes'), 'swimlane', 'index', array('project_id' => $project['id'])) ?>
+            <li <?= $this->app->checkMenuSelection('SwimlaneController') ?>>
+                <?= $this->url->link(t('Swimlanes'), 'SwimlaneController', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <li <?= $this->app->checkMenuSelection('category') ?>>
-                <?= $this->url->link(t('Categories'), 'category', 'index', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Categories'), 'CategoryController', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($project['is_private'] == 0): ?>
             <li <?= $this->app->checkMenuSelection('ProjectPermissionController') ?>>
                 <?= $this->url->link(t('Permissions'), 'ProjectPermissionController', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php endif ?>
-            <li <?= $this->app->checkMenuSelection('action') ?>>
-                <?= $this->url->link(t('Automatic actions'), 'action', 'index', array('project_id' => $project['id'])) ?>
+            <li <?= $this->app->checkMenuSelection('ActionController') ?>>
+                <?= $this->url->link(t('Automatic actions'), 'ActionController', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <li <?= $this->app->checkMenuSelection('ProjectViewController', 'duplicate') ?>>
                 <?= $this->url->link(t('Duplicate'), 'ProjectViewController', 'duplicate', array('project_id' => $project['id'])) ?>

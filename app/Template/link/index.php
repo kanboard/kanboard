@@ -18,9 +18,9 @@
         </td>
         <td>
             <ul>
-                <?= $this->url->link(t('Edit'), 'link', 'edit', array('link_id' => $link['id'])) ?>
+                <?= $this->url->link(t('Edit'), 'LinkController', 'edit', array('link_id' => $link['id'])) ?>
                 <?= t('or') ?>
-                <?= $this->url->link(t('Remove'), 'link', 'confirm', array('link_id' => $link['id'])) ?>
+                <?= $this->url->link(t('Remove'), 'LinkController', 'confirm', array('link_id' => $link['id'])) ?>
             </ul>
         </td>
     </tr>

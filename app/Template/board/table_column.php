@@ -43,7 +43,7 @@
                                 <?php if ($column['nb_tasks'] > 0): ?>
                                     <li>
                                         <i class="fa fa-close fa-fw"></i>
-                                        <?= $this->url->link(t('Close all tasks of this column'), 'BoardPopover', 'confirmCloseColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                                        <?= $this->url->link(t('Close all tasks of this column'), 'BoardPopoverController', 'confirmCloseColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                                     </li>
                                 <?php endif ?>
                             <?php endif ?>

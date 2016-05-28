@@ -14,7 +14,7 @@
             <span
                 title="<?= t('Description') ?>"
                 class="tooltip"
-                data-href="<?= $this->url->href('BoardTooltip', 'swimlane', array('swimlane_id' => $swimlane['id'], 'project_id' => $project['id'])) ?>">
+                data-href="<?= $this->url->href('BoardTooltipController', 'swimlane', array('swimlane_id' => $swimlane['id'], 'project_id' => $project['id'])) ?>">
                 <i class="fa fa-info-circle"></i>
             </span>
         <?php endif ?>

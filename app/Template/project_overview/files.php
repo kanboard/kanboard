@@ -16,17 +16,17 @@
                             <?php if ($this->file->getPreviewType($file['name']) !== null): ?>
                                 <li>
                                     <i class="fa fa-eye fa-fw"></i>
-                                    <?= $this->url->link(t('View file'), 'FileViewer', 'show', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
+                                    <?= $this->url->link(t('View file'), 'FileViewerController', 'show', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
                                 </li>
                             <?php endif ?>
                             <li>
                                 <i class="fa fa-download fa-fw"></i>
-                                <?= $this->url->link(t('Download'), 'FileViewer', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
+                                <?= $this->url->link(t('Download'), 'FileViewerController', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
                             </li>
-                            <?php if ($this->user->hasProjectAccess('ProjectFile', 'remove', $project['id'])): ?>
+                            <?php if ($this->user->hasProjectAccess('ProjectFileController', 'remove', $project['id'])): ?>
                                 <li>
                                     <i class="fa fa-trash fa-fw"></i>
-                                    <?= $this->url->link(t('Remove'), 'ProjectFile', 'confirm', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
+                                    <?= $this->url->link(t('Remove'), 'ProjectFileController', 'confirm', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
                                 </li>
                             <?php endif ?>
                         </ul>

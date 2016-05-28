@@ -38,7 +38,7 @@
                     </span>
                 <?php endif ?>
 
-                <?php $has_project_creation_access = $this->user->hasAccess('ProjectCreation', 'create'); ?>
+                <?php $has_project_creation_access = $this->user->hasAccess('ProjectCreationController', 'create'); ?>
                 <?php $is_private_project_enabled = $this->app->config('disable_private_project', 0) == 0; ?>
 
                 <?php if ($has_project_creation_access || (!$has_project_creation_access && $is_private_project_enabled)): ?>
@@ -46,11 +46,13 @@
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-plus fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <?php if ($has_project_creation_access): ?>
-                            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('New project'), 'ProjectCreation', 'create', array(), false, 'popover') ?></li>
+                            <li><i class="fa fa-plus fa-fw"></i>
+                            <?= $this->url->link(t('New project'), 'ProjectCreationController', 'create', array(), false, 'popover') ?></li>
                         <?php endif ?>
                         <?php if ($is_private_project_enabled): ?>
                         <li>
-                            <i class="fa fa-lock fa-fw"></i><?= $this->url->link(t('New private project'), 'ProjectCreation', 'createPrivate', array(), false, 'popover') ?>
+                            <i class="fa fa-lock fa-fw"></i>
+                            <?= $this->url->link(t('New private project'), 'ProjectCreationController', 'createPrivate', array(), false, 'popover') ?>
                         </li>
                         <?php endif ?>
                     </ul>
@@ -98,7 +100,7 @@
                         <?php if (! DISABLE_LOGOUT): ?>
                             <li>
                                 <i class="fa fa-sign-out fa-fw"></i>
-                                <?= $this->url->link(t('Logout'), 'auth', 'logout') ?>
+                                <?= $this->url->link(t('Logout'), 'AuthController', 'logout') ?>
                             </li>
                         <?php endif ?>
                     </ul>

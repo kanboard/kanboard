@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Change default swimlane') ?></h2>
 </div>
-<form class="popover-form" method="post" action="<?= $this->url->href('swimlane', 'updateDefault', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form class="popover-form" method="post" action="<?= $this->url->href('SwimlaneController', 'updateDefault', array('project_id' => $project['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
 
@@ -13,6 +13,6 @@
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'Swimlane', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
+        <?= $this->url->link(t('cancel'), 'SwimlaneController', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
     </div>
 </form>

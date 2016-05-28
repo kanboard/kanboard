@@ -39,13 +39,13 @@
 
         <li>
             <i class="fa fa-dashboard fa-fw"></i>
-            <?= $this->url->link(t('Activity'), 'activity', 'project', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('Activity'), 'ActivityController', 'project', array('project_id' => $project['id'])) ?>
         </li>
 
-        <?php if ($this->user->hasProjectAccess('customfilter', 'index', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('CustomFilterController', 'index', $project['id'])): ?>
             <li>
                 <i class="fa fa-filter fa-fw"></i>
-                <?= $this->url->link(t('Custom filters'), 'customfilter', 'index', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Custom filters'), 'CustomFilterController', 'index', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 
@@ -58,17 +58,17 @@
 
         <?= $this->hook->render('template:project:dropdown', array('project' => $project)) ?>
 
-        <?php if ($this->user->hasProjectAccess('analytic', 'tasks', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('AnalyticController', 'tasks', $project['id'])): ?>
             <li>
                 <i class="fa fa-line-chart fa-fw"></i>
-                <?= $this->url->link(t('Analytics'), 'analytic', 'tasks', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Analytics'), 'AnalyticController', 'tasks', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 
-        <?php if ($this->user->hasProjectAccess('export', 'tasks', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('ExportController', 'tasks', $project['id'])): ?>
             <li>
                 <i class="fa fa-download fa-fw"></i>
-                <?= $this->url->link(t('Exports'), 'export', 'tasks', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Exports'), 'ExportController', 'tasks', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 

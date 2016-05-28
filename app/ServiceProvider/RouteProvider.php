@@ -45,24 +45,24 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('search/activity', 'SearchController', 'activity');
 
             // ProjectCreation routes
-            $container['route']->addRoute('project/create', 'ProjectCreation', 'create');
-            $container['route']->addRoute('project/create/private', 'ProjectCreation', 'createPrivate');
+            $container['route']->addRoute('project/create', 'ProjectCreationController', 'create');
+            $container['route']->addRoute('project/create/private', 'ProjectCreationController', 'createPrivate');
 
             // Project routes
             $container['route']->addRoute('projects', 'ProjectListController', 'show');
             $container['route']->addRoute('project/:project_id', 'ProjectViewController', 'show');
             $container['route']->addRoute('p/:project_id', 'ProjectViewController', 'show');
-            $container['route']->addRoute('project/:project_id/customer-filters', 'customfilter', 'index');
+            $container['route']->addRoute('project/:project_id/customer-filters', 'CustomFilterController', 'index');
             $container['route']->addRoute('project/:project_id/share', 'ProjectViewController', 'share');
             $container['route']->addRoute('project/:project_id/notifications', 'ProjectViewController', 'notifications');
             $container['route']->addRoute('project/:project_id/integrations', 'ProjectViewController', 'integrations');
             $container['route']->addRoute('project/:project_id/duplicate', 'ProjectViewController', 'duplicate');
             $container['route']->addRoute('project/:project_id/permissions', 'ProjectPermissionController', 'index');
             $container['route']->addRoute('project/:project_id/import', 'TaskImportController', 'step1');
-            $container['route']->addRoute('project/:project_id/activity', 'activity', 'project');
+            $container['route']->addRoute('project/:project_id/activity', 'ActivityController', 'project');
 
             // Project Overview
-            $container['route']->addRoute('project/:project_id/overview', 'ProjectOverview', 'show');
+            $container['route']->addRoute('project/:project_id/overview', 'ProjectOverviewController', 'show');
 
             // ProjectEdit routes
             $container['route']->addRoute('project/:project_id/edit', 'ProjectEditController', 'edit');
@@ -71,48 +71,48 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/edit/priority', 'ProjectEditController', 'priority');
 
             // ProjectUser routes
-            $container['route']->addRoute('projects/managers/:user_id', 'projectuser', 'managers');
-            $container['route']->addRoute('projects/members/:user_id', 'projectuser', 'members');
-            $container['route']->addRoute('projects/tasks/:user_id/opens', 'projectuser', 'opens');
-            $container['route']->addRoute('projects/tasks/:user_id/closed', 'projectuser', 'closed');
-            $container['route']->addRoute('projects/managers', 'projectuser', 'managers');
+            $container['route']->addRoute('projects/managers/:user_id', 'ProjectUserOverviewController', 'managers');
+            $container['route']->addRoute('projects/members/:user_id', 'ProjectUserOverviewController', 'members');
+            $container['route']->addRoute('projects/tasks/:user_id/opens', 'ProjectUserOverviewController', 'opens');
+            $container['route']->addRoute('projects/tasks/:user_id/closed', 'ProjectUserOverviewController', 'closed');
+            $container['route']->addRoute('projects/managers', 'ProjectUserOverviewController', 'managers');
 
             // Action routes
-            $container['route']->addRoute('project/:project_id/actions', 'action', 'index');
+            $container['route']->addRoute('project/:project_id/actions', 'ActionController', 'index');
 
             // Column routes
-            $container['route']->addRoute('project/:project_id/columns', 'column', 'index');
+            $container['route']->addRoute('project/:project_id/columns', 'ColumnController', 'index');
 
             // Swimlane routes
-            $container['route']->addRoute('project/:project_id/swimlanes', 'swimlane', 'index');
+            $container['route']->addRoute('project/:project_id/swimlanes', 'SwimlaneController', 'index');
 
             // Category routes
-            $container['route']->addRoute('project/:project_id/categories', 'category', 'index');
+            $container['route']->addRoute('project/:project_id/categories', 'CategoryController', 'index');
 
             // Task routes
             $container['route']->addRoute('project/:project_id/task/:task_id', 'TaskViewController', 'show');
             $container['route']->addRoute('t/:task_id', 'TaskViewController', 'show');
             $container['route']->addRoute('public/task/:task_id/:token', 'TaskViewController', 'readonly');
 
-            $container['route']->addRoute('project/:project_id/task/:task_id/activity', 'activity', 'task');
+            $container['route']->addRoute('project/:project_id/task/:task_id/activity', 'ActivityController', 'task');
             $container['route']->addRoute('project/:project_id/task/:task_id/transitions', 'TaskViewController', 'transitions');
             $container['route']->addRoute('project/:project_id/task/:task_id/analytics', 'TaskViewController', 'analytics');
             $container['route']->addRoute('project/:project_id/task/:task_id/time-tracking', 'TaskViewController', 'timetracking');
 
             // Exports
-            $container['route']->addRoute('export/tasks/:project_id', 'export', 'tasks');
-            $container['route']->addRoute('export/subtasks/:project_id', 'export', 'subtasks');
-            $container['route']->addRoute('export/transitions/:project_id', 'export', 'transitions');
-            $container['route']->addRoute('export/summary/:project_id', 'export', 'summary');
+            $container['route']->addRoute('export/tasks/:project_id', 'ExportController', 'tasks');
+            $container['route']->addRoute('export/subtasks/:project_id', 'ExportController', 'subtasks');
+            $container['route']->addRoute('export/transitions/:project_id', 'ExportController', 'transitions');
+            $container['route']->addRoute('export/summary/:project_id', 'ExportController', 'summary');
 
             // Analytics routes
-            $container['route']->addRoute('analytics/tasks/:project_id', 'analytic', 'tasks');
-            $container['route']->addRoute('analytics/users/:project_id', 'analytic', 'users');
-            $container['route']->addRoute('analytics/cfd/:project_id', 'analytic', 'cfd');
-            $container['route']->addRoute('analytics/burndown/:project_id', 'analytic', 'burndown');
-            $container['route']->addRoute('analytics/average-time-column/:project_id', 'analytic', 'averageTimeByColumn');
-            $container['route']->addRoute('analytics/lead-cycle-time/:project_id', 'analytic', 'leadAndCycleTime');
-            $container['route']->addRoute('analytics/estimated-spent-time/:project_id', 'analytic', 'compareHours');
+            $container['route']->addRoute('analytics/tasks/:project_id', 'AnalyticController', 'tasks');
+            $container['route']->addRoute('analytics/users/:project_id', 'AnalyticController', 'users');
+            $container['route']->addRoute('analytics/cfd/:project_id', 'AnalyticController', 'cfd');
+            $container['route']->addRoute('analytics/burndown/:project_id', 'AnalyticController', 'burndown');
+            $container['route']->addRoute('analytics/average-time-column/:project_id', 'AnalyticController', 'averageTimeByColumn');
+            $container['route']->addRoute('analytics/lead-cycle-time/:project_id', 'AnalyticController', 'leadAndCycleTime');
+            $container['route']->addRoute('analytics/estimated-spent-time/:project_id', 'AnalyticController', 'compareHours');
 
             // Board routes
             $container['route']->addRoute('board/:project_id', 'board', 'show');
@@ -120,12 +120,12 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('public/board/:token', 'board', 'readonly');
 
             // Calendar routes
-            $container['route']->addRoute('calendar/:project_id', 'calendar', 'show');
-            $container['route']->addRoute('c/:project_id', 'calendar', 'show');
+            $container['route']->addRoute('calendar/:project_id', 'CalendarController', 'show');
+            $container['route']->addRoute('c/:project_id', 'CalendarController', 'show');
 
             // Listing routes
-            $container['route']->addRoute('list/:project_id', 'listing', 'show');
-            $container['route']->addRoute('l/:project_id', 'listing', 'show');
+            $container['route']->addRoute('list/:project_id', 'TaskListController', 'show');
+            $container['route']->addRoute('l/:project_id', 'TaskListController', 'show');
 
             // Gantt routes
             $container['route']->addRoute('gantt/:project_id', 'gantt', 'project');
@@ -170,7 +170,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('settings/integrations', 'ConfigController', 'integrations');
             $container['route']->addRoute('settings/webhook', 'ConfigController', 'webhook');
             $container['route']->addRoute('settings/api', 'ConfigController', 'api');
-            $container['route']->addRoute('settings/links', 'link', 'index');
+            $container['route']->addRoute('settings/links', 'LinkController', 'index');
             $container['route']->addRoute('settings/currencies', 'CurrencyController', 'index');
 
             // Plugins
@@ -182,12 +182,12 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('documentation', 'DocumentationController', 'show');
 
             // Auth routes
-            $container['route']->addRoute('login', 'auth', 'login');
-            $container['route']->addRoute('logout', 'auth', 'logout');
+            $container['route']->addRoute('login', 'AuthController', 'login');
+            $container['route']->addRoute('logout', 'AuthController', 'logout');
 
             // PasswordReset
-            $container['route']->addRoute('forgot-password', 'PasswordReset', 'create');
-            $container['route']->addRoute('forgot-password/change/:token', 'PasswordReset', 'change');
+            $container['route']->addRoute('forgot-password', 'PasswordResetController', 'create');
+            $container['route']->addRoute('forgot-password/change/:token', 'PasswordResetController', 'change');
         }
 
         return $container;

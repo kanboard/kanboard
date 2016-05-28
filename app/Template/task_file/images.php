@@ -2,7 +2,7 @@
     <div class="file-thumbnails">
         <?php foreach ($images as $file): ?>
             <div class="file-thumbnail">
-                <a href="<?= $this->url->href('FileViewer', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>" class="popover"><img src="<?= $this->url->href('FileViewer', 'thumbnail', array('file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" title="<?= $this->text->e($file['name']) ?>" alt="<?= $this->text->e($file['name']) ?>"></a>
+                <a href="<?= $this->url->href('FileViewerController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>" class="popover"><img src="<?= $this->url->href('FileViewerController', 'thumbnail', array('file_id' => $file['id'], 'project_id' => $task['project_id'], 'task_id' => $file['task_id'])) ?>" title="<?= $this->text->e($file['name']) ?>" alt="<?= $this->text->e($file['name']) ?>"></a>
                 <div class="file-thumbnail-content">
                     <div class="file-thumbnail-title">
                         <div class="dropdown">
@@ -10,12 +10,12 @@
                             <ul>
                                 <li>
                                     <i class="fa fa-download fa-fw"></i>
-                                    <?= $this->url->link(t('Download'), 'FileViewer', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                                    <?= $this->url->link(t('Download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                                 </li>
-                                <?php if ($this->user->hasProjectAccess('TaskFile', 'remove', $task['project_id'])): ?>
+                                <?php if ($this->user->hasProjectAccess('TaskFileController', 'remove', $task['project_id'])): ?>
                                     <li>
                                         <i class="fa fa-trash fa-fw"></i>
-                                        <?= $this->url->link(t('Remove'), 'TaskFile', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
+                                        <?= $this->url->link(t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
                                     </li>
                                 <?php endif ?>
                             </ul>

@@ -97,11 +97,11 @@ class ProjectEditController extends BaseController
     {
         if ($redirect === 'edit') {
             if (isset($values['is_private'])) {
-                if (! $this->helper->user->hasProjectAccess('ProjectCreation', 'create', $project['id'])) {
+                if (! $this->helper->user->hasProjectAccess('ProjectCreationController', 'create', $project['id'])) {
                     unset($values['is_private']);
                 }
             } elseif ($project['is_private'] == 1 && ! isset($values['is_private'])) {
-                if ($this->helper->user->hasProjectAccess('ProjectCreation', 'create', $project['id'])) {
+                if ($this->helper->user->hasProjectAccess('ProjectCreationController', 'create', $project['id'])) {
                     $values += array('is_private' => 0);
                 }
             }

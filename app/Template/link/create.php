@@ -2,7 +2,7 @@
     <h2><?= t('Add a new link') ?></h2>
 </div>
 
-<form action="<?= $this->url->href('link', 'save') ?>" method="post" autocomplete="off">
+<form action="<?= $this->url->href('LinkController', 'save') ?>" method="post" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

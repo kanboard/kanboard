@@ -7,7 +7,7 @@
     <?php endif ?>
 
     <?php if (! HIDE_LOGIN_FORM): ?>
-    <form method="post" action="<?= $this->url->href('auth', 'check') ?>">
+    <form method="post" action="<?= $this->url->href('AuthController', 'check') ?>">
 
         <?= $this->form->csrf() ?>
 
@@ -32,7 +32,7 @@
         </div>
         <?php if ($this->app->config('password_reset') == 1): ?>
             <div class="reset-password">
-                <?= $this->url->link(t('Forgot password?'), 'PasswordReset', 'create') ?>
+                <?= $this->url->link(t('Forgot password?'), 'PasswordResetController', 'create') ?>
             </div>
         <?php endif ?>
     </form>

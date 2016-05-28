@@ -96,7 +96,7 @@ class LayoutHelper extends Base
     public function projectUser($template, array $params)
     {
         $params['filter'] = array('user_id' => $params['user_id']);
-        return $this->subLayout('project_user/layout', 'project_user/sidebar', $template, $params);
+        return $this->subLayout('project_user_overview/layout', 'project_user_overview/sidebar', $template, $params);
     }
 
     /**

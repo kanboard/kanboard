@@ -3,7 +3,7 @@
     <ul>
         <li>
             <i class="fa fa-plus fa-fw"></i>
-            <?= $this->url->link(t('Add a new column'), 'Column', 'create', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->url->link(t('Add a new column'), 'ColumnController', 'create', array('project_id' => $project['id']), false, 'popover') ?>
         </li>
     </ul>
 </div>
@@ -13,7 +13,7 @@
 <?php else: ?>
     <table
         class="columns-table table-stripped"
-        data-save-position-url="<?= $this->url->href('Column', 'move', array('project_id' => $project['id'])) ?>">
+        data-save-position-url="<?= $this->url->href('ColumnController', 'move', array('project_id' => $project['id'])) ?>">
         <thead>
         <tr>
             <th class="column-70"><?= t('Column title') ?></th>
@@ -41,10 +41,10 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
-                        <?= $this->url->link(t('Edit'), 'column', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
+                        <?= $this->url->link(t('Edit'), 'ColumnController', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
                     </li>
                     <li>
-                        <?= $this->url->link(t('Remove'), 'column', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
+                        <?= $this->url->link(t('Remove'), 'ColumnController', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
                     </li>
                 </ul>
                 </div>

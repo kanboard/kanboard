@@ -2,7 +2,7 @@
     <div class="page-header">
         <h2><?= $title ?></h2>
     </div>
-    <form class="popover-form" id="project-creation-form" method="post" action="<?= $this->url->href('ProjectCreation', 'save') ?>" autocomplete="off">
+    <form class="popover-form" id="project-creation-form" method="post" action="<?= $this->url->href('ProjectCreationController', 'save') ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
         <?= $this->form->hidden('is_private', $values) ?>

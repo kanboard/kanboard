@@ -9,9 +9,9 @@
         </p>
 
         <div class="form-actions">
-            <?= $this->url->link(t('Yes'), 'customfilter', 'remove', array('project_id' => $project['id'], 'filter_id' => $filter['id']), true, 'btn btn-red') ?>
+            <?= $this->url->link(t('Yes'), 'CustomFilterController', 'remove', array('project_id' => $project['id'], 'filter_id' => $filter['id']), true, 'btn btn-red') ?>
             <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'customfilter', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
+            <?= $this->url->link(t('cancel'), 'CustomFilterController', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
         </div>
     </div>
 </section>

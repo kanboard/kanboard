@@ -26,8 +26,8 @@
                     <?= $this->url->link('<i class="fa fa-sliders fa-fw"></i>', 'gantt', 'project', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Gantt chart')) ?>
                 <?php endif ?>
 
-                <?= $this->url->link('<i class="fa fa-list"></i>', 'listing', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('List')) ?>&nbsp;
-                <?= $this->url->link('<i class="fa fa-calendar"></i>', 'calendar', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Calendar')) ?>&nbsp;
+                <?= $this->url->link('<i class="fa fa-list"></i>', 'TaskListController', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('List')) ?>&nbsp;
+                <?= $this->url->link('<i class="fa fa-calendar"></i>', 'CalendarController', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Calendar')) ?>&nbsp;
 
                 <?= $this->url->link($this->text->e($project['name']), 'board', 'show', array('project_id' => $project['id'])) ?>
                 <?php if (! empty($project['description'])): ?>

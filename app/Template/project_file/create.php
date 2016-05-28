@@ -4,7 +4,7 @@
 <div id="file-done" style="display:none">
     <p class="alert alert-success">
         <?= t('All files have been uploaded successfully.') ?>
-        <?= $this->url->link(t('View uploaded files'), 'ProjectOverview', 'show', array('project_id' => $project['id'])) ?>
+        <?= $this->url->link(t('View uploaded files'), 'ProjectOverviewController', 'show', array('project_id' => $project['id'])) ?>
     </p>
 </div>
 
@@ -18,7 +18,7 @@
 <div
     id="file-dropzone"
     data-max-size="<?= $max_size ?>"
-    data-url="<?= $this->url->href('ProjectFile', 'save', array('project_id' => $project['id'])) ?>">
+    data-url="<?= $this->url->href('ProjectFileController', 'save', array('project_id' => $project['id'])) ?>">
     <div id="file-dropzone-inner">
         <?= t('Drag and drop your files here') ?> <?= t('or') ?> <a href="#" id="file-browser"><?= t('choose files') ?></a>
     </div>
@@ -29,5 +29,5 @@
 <div class="form-actions">
     <input type="submit" value="<?= t('Upload files') ?>" class="btn btn-blue" id="file-upload-button" disabled>
     <?= t('or') ?>
-    <?= $this->url->link(t('cancel'), 'ProjectOverview', 'show', array('project_id' => $project['id']), false, 'close-popover') ?>
+    <?= $this->url->link(t('cancel'), 'ProjectOverviewController', 'show', array('project_id' => $project['id']), false, 'close-popover') ?>
 </div>

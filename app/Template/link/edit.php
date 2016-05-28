@@ -2,7 +2,7 @@
     <h2><?= t('Link modification') ?></h2>
 </div>
 
-<form action="<?= $this->url->href('link', 'update', array('link_id' => $link['id'])) ?>" method="post" autocomplete="off">
+<form action="<?= $this->url->href('LinkController', 'update', array('link_id' => $link['id'])) ?>" method="post" autocomplete="off">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>

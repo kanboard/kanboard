@@ -3,11 +3,11 @@
     <ul>
         <li>
             <i class="fa fa-plus fa-fw"></i>
-            <?= $this->url->link(t('Add a new action'), 'ActionCreation', 'create', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->url->link(t('Add a new action'), 'ActionCreationController', 'create', array('project_id' => $project['id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-copy fa-fw"></i>
-            <?= $this->url->link(t('Import from another project'), 'ActionProject', 'project', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->url->link(t('Import from another project'), 'ProjectActionDuplicationController', 'show', array('project_id' => $project['id']), false, 'popover') ?>
         </li>
     </ul>
 </div>
@@ -63,7 +63,7 @@
                 </ul>
             </td>
             <td>
-                <?= $this->url->link(t('Remove'), 'action', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id']), false, 'popover') ?>
+                <?= $this->url->link(t('Remove'), 'ActionController', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id']), false, 'popover') ?>
             </td>
         </tr>
         <?php endforeach ?>

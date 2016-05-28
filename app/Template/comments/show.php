@@ -6,7 +6,7 @@
         <?php if (!isset($is_public) || !$is_public): ?>
             <div class="comment-sorting">
                 <i class="fa fa-sort"></i>
-                <?= $this->url->link(t('change sorting'), 'comment', 'toggleSorting', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?= $this->url->link(t('change sorting'), 'CommentController', 'toggleSorting', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </div>
         <?php endif ?>
         <?php foreach ($comments as $comment): ?>

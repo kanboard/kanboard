@@ -46,7 +46,7 @@
     'task' => $task,
     'comments' => $comments,
     'project' => $project,
-    'editable' => $this->user->hasProjectAccess('comment', 'edit', $project['id']),
+    'editable' => $this->user->hasProjectAccess('CommentController', 'edit', $project['id']),
 )) ?>
 
 <?= $this->hook->render('template:task:show:bottom', array('task' => $task, 'project' => $project)) ?>

@@ -6,7 +6,7 @@
     <p class="alert"><?= t('There is no destination project available.') ?></p>
 <?php else: ?>
 
-    <form class="popover-form" method="post" action="<?= $this->url->href('taskduplication', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <form class="popover-form" method="post" action="<?= $this->url->href('TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
         <?= $this->form->hidden('id', $values) ?>
@@ -17,7 +17,7 @@
             $projects_list,
             $values,
             array(),
-            array('data-redirect="'.$this->url->href('taskduplication', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'dst_project_id' => 'PROJECT_ID')).'"'),
+            array('data-redirect="'.$this->url->href('TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'dst_project_id' => 'PROJECT_ID')).'"'),
             'task-reload-project-destination'
         ) ?>
         <span class="loading-icon" style="display: none">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>

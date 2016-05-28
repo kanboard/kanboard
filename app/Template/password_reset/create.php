@@ -1,6 +1,6 @@
 <div class="form-login">
     <h2><?= t('Password Reset') ?></h2>
-    <form method="post" action="<?= $this->url->href('PasswordReset', 'save') ?>">
+    <form method="post" action="<?= $this->url->href('PasswordResetController', 'save') ?>">
         <?= $this->form->csrf() ?>
 
         <?= $this->form->label(t('Username'), 'username') ?>

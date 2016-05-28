@@ -12,7 +12,7 @@
 
 <hr/>
 
-<form method="post" class="form-inline" action="<?= $this->url->href('analytic', 'burndown', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" class="form-inline" action="<?= $this->url->href('AnalyticController', 'burndown', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
