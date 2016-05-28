@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use PDO;
+use Kanboard\Core\Base;
 
 /**
  * Link model

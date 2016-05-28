@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
+
 /**
  * Group Member Model
  *

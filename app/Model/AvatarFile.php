@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use Exception;
+use Kanboard\Core\Base;
 
 /**
  * Avatar File

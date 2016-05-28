@@ -27,7 +27,7 @@
         "eluceo/ical": "0.8.0",
         "erusev/parsedown" : "1.6.0",
         "fguillot/json-rpc" : "1.1.0",
-        "fguillot/picodb" : "1.0.11",
+        "fguillot/picodb" : "1.0.12",
         "fguillot/simpleLogger" : "1.0.1",
         "fguillot/simple-validator" : "1.0.0",
         "fguillot/simple-queue" : "dev-master",

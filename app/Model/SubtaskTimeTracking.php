@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use DateTime;
+use Kanboard\Core\Base;
 
 /**
  * Subtask timesheet

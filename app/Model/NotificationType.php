@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use Pimple\Container;
+use Kanboard\Core\Base;
 
 /**
  * Notification Type

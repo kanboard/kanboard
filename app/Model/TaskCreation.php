@@ -2,6 +2,7 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
 use Kanboard\Event\TaskEvent;
 
 /**
@@ -28,7 +29,7 @@ class TaskCreation extends Base
         $position = empty($values['position']) ? 0 : $values['position'];
 
         $this->prepare($values);
-        $task_id = $this->persist(Task::TABLE, $values);
+        $task_id = $this->db->table(Task::TABLE)->persist($values);
 
         if ($task_id !== false) {
             if ($position > 0 && $values['position'] > 1) {

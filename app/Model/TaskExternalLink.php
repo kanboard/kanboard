@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
+
 /**
  * Task External Link Model
  *
@@ -69,7 +71,7 @@ class TaskExternalLink extends Base
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
 
-        return $this->persist(self::TABLE, $values);
+        return $this->db->table(self::TABLE)->persist($values);
     }
 
     /**

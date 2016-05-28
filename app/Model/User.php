@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use PicoDb\Database;
+use Kanboard\Core\Base;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
@@ -269,7 +270,7 @@ class User extends Base
     public function create(array $values)
     {
         $this->prepare($values);
-        return $this->persist(self::TABLE, $values);
+        return $this->db->table(self::TABLE)->persist($values);
     }
 
     /**

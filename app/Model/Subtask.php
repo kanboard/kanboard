@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use PicoDb\Database;
+use Kanboard\Core\Base;
 use Kanboard\Event\SubtaskEvent;
 
 /**
@@ -215,7 +216,7 @@ class Subtask extends Base
     public function create(array $values)
     {
         $this->prepareCreation($values);
-        $subtask_id = $this->persist(self::TABLE, $values);
+        $subtask_id = $this->db->table(self::TABLE)->persist($values);
 
         if ($subtask_id) {
             $this->container['dispatcher']->dispatch(

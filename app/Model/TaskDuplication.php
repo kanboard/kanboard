@@ -4,6 +4,7 @@ namespace Kanboard\Model;
 
 use DateTime;
 use DateInterval;
+use Kanboard\Core\Base;
 use Kanboard\Event\TaskEvent;
 
 /**

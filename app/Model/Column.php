@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
+
 /**
  * Column Model
  *
@@ -140,7 +142,7 @@ class Column extends Base
             'description' => $description,
         );
 
-        return $this->persist(self::TABLE, $values);
+        return $this->db->table(self::TABLE)->persist($values);
     }
 
     /**

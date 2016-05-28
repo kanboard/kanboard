@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
+
 /**
  * Project File Model
  *

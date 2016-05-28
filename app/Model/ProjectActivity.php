@@ -2,6 +2,7 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
 use PicoDb\Table;
 
 /**

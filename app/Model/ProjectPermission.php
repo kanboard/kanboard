@@ -2,6 +2,7 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Filter\ProjectGroupRoleProjectFilter;
 use Kanboard\Filter\ProjectGroupRoleUsernameFilter;

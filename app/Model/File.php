@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use Exception;
+use Kanboard\Core\Base;
 use Kanboard\Core\Thumbnail;
 use Kanboard\Event\FileEvent;
 use Kanboard\Core\ObjectStorage\ObjectStorageException;

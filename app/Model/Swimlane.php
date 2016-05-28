@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
+
 /**
  * Swimlanes
  *
@@ -225,8 +227,9 @@ class Swimlane extends Base
         if (! $this->project->exists($values['project_id'])) {
             return 0;
         }
+
         $values['position'] = $this->getLastPosition($values['project_id']);
-        return $this->persist(self::TABLE, $values);
+        return $this->db->table(self::TABLE)->persist($values);
     }
 
     /**

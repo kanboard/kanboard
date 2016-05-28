@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
+
 /**
  * Group Model
  *
@@ -97,7 +99,7 @@ class Group extends Base
      */
     public function create($name, $external_id = '')
     {
-        return $this->persist(self::TABLE, array(
+        return $this->db->table(self::TABLE)->persist(array(
             'name' => $name,
             'external_id' => $external_id,
         ));

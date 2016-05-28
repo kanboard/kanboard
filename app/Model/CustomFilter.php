@@ -2,6 +2,8 @@
 
 namespace Kanboard\Model;
 
+use Kanboard\Core\Base;
+
 /**
  * Custom Filter model
  *
@@ -71,7 +73,7 @@ class CustomFilter extends Base
      */
     public function create(array $values)
     {
-        return $this->persist(self::TABLE, $values);
+        return $this->db->table(self::TABLE)->persist($values);
     }
 
     /**

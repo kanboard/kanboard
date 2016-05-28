@@ -4,6 +4,8 @@ namespace Kanboard\Model;
 
 use Kanboard\Event\CommentEvent;
 
+use Kanboard\Core\Base;
+
 /**
  * Comment model
  *
@@ -110,7 +112,7 @@ class Comment extends Base
     public function create(array $values)
     {
         $values['date_creation'] = time();
-        $comment_id = $this->persist(self::TABLE, $values);
+        $comment_id = $this->db->table(self::TABLE)->persist($values);
 
         if ($comment_id) {
             $event = new CommentEvent(array('id' => $comment_id) + $values);
