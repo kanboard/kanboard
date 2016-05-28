@@ -4,7 +4,6 @@ namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Kanboard\Core\Mail\Client as EmailClient;
 use Kanboard\Core\ObjectStorage\FileStorage;
 use Kanboard\Core\Paginator;
 use Kanboard\Core\Http\OAuth2;
@@ -159,14 +158,6 @@ class ClassProvider implements ServiceProviderInterface
 
         $container['objectStorage'] = function () {
             return new FileStorage(FILES_DIR);
-        };
-
-        $container['emailClient'] = function ($container) {
-            $mailer = new EmailClient($container);
-            $mailer->setTransport('smtp', '\Kanboard\Core\Mail\Transport\Smtp');
-            $mailer->setTransport('sendmail', '\Kanboard\Core\Mail\Transport\Sendmail');
-            $mailer->setTransport('mail', '\Kanboard\Core\Mail\Transport\Mail');
-            return $mailer;
         };
 
         $container['cspRules'] = array(
