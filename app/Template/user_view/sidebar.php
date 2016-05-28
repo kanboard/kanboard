@@ -38,7 +38,7 @@
                     <?= $this->url->link(t('Edit profile'), 'UserModificationController', 'show', array('user_id' => $user['id'])) ?>
                 </li>
                 <li <?= $this->app->checkMenuSelection('AvatarFile') ?>>
-                    <?= $this->url->link(t('Avatar'), 'AvatarFile', 'show', array('user_id' => $user['id'])) ?>
+                    <?= $this->url->link(t('Avatar'), 'AvatarFileController', 'show', array('user_id' => $user['id'])) ?>
                 </li>
             <?php endif ?>
 

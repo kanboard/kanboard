@@ -5,12 +5,12 @@ namespace Kanboard\Controller;
 use Kanboard\Filter\TaskProjectsFilter;
 
 /**
- * Search controller
+ * Search Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Search extends BaseController
+class SearchController extends BaseController
 {
     public function index()
     {
@@ -19,7 +19,7 @@ class Search extends BaseController
         $nb_tasks = 0;
 
         $paginator = $this->paginator
-                ->setUrl('search', 'index', array('search' => $search))
+                ->setUrl('SearchController', 'index', array('search' => $search))
                 ->setMax(30)
                 ->setOrder('tasks.id')
                 ->setDirection('DESC');
@@ -39,7 +39,7 @@ class Search extends BaseController
         $this->response->html($this->helper->layout->app('search/index', array(
             'values' => array(
                 'search' => $search,
-                'controller' => 'search',
+                'controller' => 'SearchController',
                 'action' => 'index',
             ),
             'paginator' => $paginator,
@@ -56,7 +56,7 @@ class Search extends BaseController
         $this->response->html($this->helper->layout->app('search/activity', array(
             'values' => array(
                 'search' => $search,
-                'controller' => 'search',
+                'controller' => 'SearchController',
                 'action' => 'activity',
             ),
             'title' => t('Search in activity stream').($nb_events > 0 ? ' ('.$nb_events.')' : ''),

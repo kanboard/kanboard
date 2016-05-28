@@ -19,7 +19,7 @@
 
         <?php if (isset($captcha) && $captcha): ?>
             <?= $this->form->label(t('Enter the text below'), 'captcha') ?>
-            <img src="<?= $this->url->href('Captcha', 'image') ?>"/>
+            <img src="<?= $this->url->href('CaptchaController', 'image') ?>" alt="Captcha">
             <?= $this->form->text('captcha', array(), $errors, array('required')) ?>
         <?php endif ?>
 

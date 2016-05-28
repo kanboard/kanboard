@@ -2,7 +2,7 @@
     <form method="get" action="<?= $this->url->dir() ?>" class="search">
         <?= $this->form->hidden('controller', array('controller' => 'search')) ?>
         <?= $this->form->hidden('action', array('action' => 'index')) ?>
-        <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'form-input-large') ?>
+        <?= $this->form->text('SearchController', array(), array(), array('placeholder="'.t('Search').'"'), 'form-input-large') ?>
         <?= $this->render('app/filters_helper') ?>
     </form>
 </div>

@@ -46,7 +46,7 @@
     </head>
     <body data-status-url="<?= $this->url->href('UserAjaxController', 'status') ?>"
           data-login-url="<?= $this->url->href('auth', 'login') ?>"
-          data-keyboard-shortcut-url="<?= $this->url->href('Doc', 'shortcuts') ?>"
+          data-keyboard-shortcut-url="<?= $this->url->href('DocumentationController', 'shortcuts') ?>"
           data-timezone="<?= $this->app->getTimezone() ?>"
           data-js-lang="<?= $this->app->jsLang() ?>">
 

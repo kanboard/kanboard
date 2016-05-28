@@ -88,12 +88,12 @@
                             </li>
                             <li>
                                 <i class="fa fa-cog fa-fw"></i>
-                                <?= $this->url->link(t('Settings'), 'config', 'index') ?>
+                                <?= $this->url->link(t('Settings'), 'ConfigController', 'index') ?>
                             </li>
                         <?php endif ?>
                         <li>
                             <i class="fa fa-life-ring fa-fw"></i>
-                            <?= $this->url->link(t('Documentation'), 'doc', 'show') ?>
+                            <?= $this->url->link(t('Documentation'), 'DocumentationController', 'show') ?>
                         </li>
                         <?php if (! DISABLE_LOGOUT): ?>
                             <li>

@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Activity stream search'), 'search', 'activity') ?>
+                <?= $this->url->link(t('Activity stream search'), 'SearchController', 'activity') ?>
             </li>
         </ul>
     </div>

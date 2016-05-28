@@ -2,7 +2,7 @@
     <h2><?= t('Calendar settings') ?></h2>
 </div>
 <section>
-<form method="post" action="<?= $this->url->href('config', 'save', array('redirect' => 'calendar')) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('ConfigController', 'save', array('redirect' => 'calendar')) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

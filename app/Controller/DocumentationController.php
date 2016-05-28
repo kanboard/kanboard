@@ -7,10 +7,10 @@ use Parsedown;
 /**
  * Documentation Viewer
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Doc extends BaseController
+class DocumentationController extends BaseController
 {
     public function show()
     {
@@ -71,7 +71,7 @@ class Doc extends BaseController
      */
     public function replaceMarkdownUrl(array $matches)
     {
-        return '('.$this->helper->url->to('doc', 'show', array('file' => str_replace('.markdown', '', $matches[1]))).')';
+        return '('.$this->helper->url->to('DocumentationController', 'show', array('file' => str_replace('.markdown', '', $matches[1]))).')';
     }
 
     /**

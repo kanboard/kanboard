@@ -7,10 +7,10 @@ use Gregwar\Captcha\CaptchaBuilder;
 /**
  * Captcha Controller
  *
- * @package controller
+ * @package Kanboard\Controller
  * @author  Frederic Guillot
  */
-class Captcha extends BaseController
+class CaptchaController extends BaseController
 {
     /**
      * Display captcha image

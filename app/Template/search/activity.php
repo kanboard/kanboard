@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Search tasks'), 'search', 'index') ?>
+                <?= $this->url->link(t('Search tasks'), 'SearchController', 'index') ?>
             </li>
         </ul>
     </div>

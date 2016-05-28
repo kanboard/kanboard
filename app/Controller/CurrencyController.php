@@ -3,12 +3,12 @@
 namespace Kanboard\Controller;
 
 /**
- * Currency controller
+ * Currency Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Currency extends BaseController
+class CurrencyController extends BaseController
 {
     /**
      * Display all currency rates and form
@@ -42,7 +42,7 @@ class Currency extends BaseController
         if ($valid) {
             if ($this->currency->create($values['currency'], $values['rate'])) {
                 $this->flash->success(t('The currency rate have been added successfully.'));
-                return $this->response->redirect($this->helper->url->to('currency', 'index'));
+                return $this->response->redirect($this->helper->url->to('CurrencyController', 'index'));
             } else {
                 $this->flash->failure(t('Unable to add this currency rate.'));
             }
@@ -66,6 +66,6 @@ class Currency extends BaseController
             $this->flash->failure(t('Unable to save your settings.'));
         }
 
-        $this->response->redirect($this->helper->url->to('currency', 'index'));
+        $this->response->redirect($this->helper->url->to('CurrencyController', 'index'));
     }
 }

@@ -8,10 +8,10 @@ use Kanboard\Core\Thumbnail;
 /**
  * Avatar File Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class AvatarFile extends BaseController
+class AvatarFileController extends BaseController
 {
     /**
      * Display avatar page
@@ -36,7 +36,7 @@ class AvatarFile extends BaseController
             $this->flash->failure(t('Unable to upload the file.'));
         }
 
-        $this->response->redirect($this->helper->url->to('AvatarFile', 'show', array('user_id' => $user['id'])));
+        $this->response->redirect($this->helper->url->to('AvatarFileController', 'show', array('user_id' => $user['id'])));
     }
 
     /**
@@ -48,7 +48,7 @@ class AvatarFile extends BaseController
         $user = $this->getUser();
         $this->avatarFile->remove($user['id']);
         $this->userSession->refresh($user['id']);
-        $this->response->redirect($this->helper->url->to('AvatarFile', 'show', array('user_id' => $user['id'])));
+        $this->response->redirect($this->helper->url->to('AvatarFileController', 'show', array('user_id' => $user['id'])));
     }
 
     /**

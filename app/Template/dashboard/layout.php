@@ -15,7 +15,7 @@
             <?php endif ?>
             <li>
                 <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Search'), 'search', 'index') ?>
+                <?= $this->url->link(t('Search'), 'SearchController', 'index') ?>
             </li>
             <li>
                 <i class="fa fa-folder fa-fw"></i>

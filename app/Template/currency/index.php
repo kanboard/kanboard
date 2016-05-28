@@ -24,7 +24,7 @@
 <hr/>
 <h3><?= t('Change reference currency') ?></h3>
 <?php endif ?>
-<form method="post" action="<?= $this->url->href('currency', 'reference') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('CurrencyController', 'reference') ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 
@@ -38,7 +38,7 @@
 
 <hr/>
 <h3><?= t('Add a new currency rate') ?></h3>
-<form method="post" action="<?= $this->url->href('currency', 'create') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('CurrencyController', 'create') ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

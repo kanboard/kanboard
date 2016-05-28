@@ -12,12 +12,12 @@ use Kanboard\Model\Task as TaskModel;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 
 /**
- * iCalendar controller
+ * iCalendar Controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Ical extends BaseController
+class ICalendarController extends BaseController
 {
     /**
      * Get user iCalendar

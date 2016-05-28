@@ -121,18 +121,18 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->setRoleHierarchy(Role::APP_USER, array(Role::APP_PUBLIC));
 
         $acl->add('Auth', array('login', 'check'), Role::APP_PUBLIC);
-        $acl->add('Captcha', '*', Role::APP_PUBLIC);
+        $acl->add('CaptchaController', '*', Role::APP_PUBLIC);
         $acl->add('PasswordReset', '*', Role::APP_PUBLIC);
         $acl->add('Webhook', '*', Role::APP_PUBLIC);
         $acl->add('TaskViewController', 'readonly', Role::APP_PUBLIC);
         $acl->add('Board', 'readonly', Role::APP_PUBLIC);
-        $acl->add('Ical', '*', Role::APP_PUBLIC);
-        $acl->add('Feed', '*', Role::APP_PUBLIC);
-        $acl->add('AvatarFile', 'show', Role::APP_PUBLIC);
+        $acl->add('ICalendarController', '*', Role::APP_PUBLIC);
+        $acl->add('FeedController', '*', Role::APP_PUBLIC);
+        $acl->add('AvatarFileController', 'show', Role::APP_PUBLIC);
 
-        $acl->add('Config', '*', Role::APP_ADMIN);
+        $acl->add('ConfigController', '*', Role::APP_ADMIN);
         $acl->add('PluginController', '*', Role::APP_ADMIN);
-        $acl->add('Currency', '*', Role::APP_ADMIN);
+        $acl->add('CurrencyController', '*', Role::APP_ADMIN);
         $acl->add('Gantt', array('projects', 'saveProjectDate'), Role::APP_MANAGER);
         $acl->add('GroupListController', '*', Role::APP_ADMIN);
         $acl->add('GroupCreationController', '*', Role::APP_ADMIN);

@@ -3,12 +3,12 @@
 namespace Kanboard\Controller;
 
 /**
- * Config controller
+ * Config Controller
  *
- * @package  controller
+ * @package  Kanboard/Controller
  * @author   Frederic Guillot
  */
-class Config extends BaseController
+class ConfigController extends BaseController
 {
     /**
      * Display the about page
@@ -61,7 +61,7 @@ class Config extends BaseController
             $this->flash->failure(t('Unable to save your settings.'));
         }
 
-        $this->response->redirect($this->helper->url->to('config', $redirect));
+        $this->response->redirect($this->helper->url->to('ConfigController', $redirect));
     }
 
     /**
@@ -177,7 +177,7 @@ class Config extends BaseController
         $this->checkCSRFParam();
         $this->config->optimizeDatabase();
         $this->flash->success(t('Database optimization done.'));
-        $this->response->redirect($this->helper->url->to('config', 'index'));
+        $this->response->redirect($this->helper->url->to('ConfigController', 'index'));
     }
 
     /**
@@ -193,6 +193,6 @@ class Config extends BaseController
         $this->config->regenerateToken($type.'_token');
 
         $this->flash->success(t('Token regenerated.'));
-        $this->response->redirect($this->helper->url->to('config', $type));
+        $this->response->redirect($this->helper->url->to('ConfigController', $type));
     }
 }

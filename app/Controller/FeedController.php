@@ -7,10 +7,10 @@ use Kanboard\Core\Controller\AccessForbiddenException;
 /**
  * Atom/RSS Feed controller
  *
- * @package  controller
+ * @package  Kanboard\Controller
  * @author   Frederic Guillot
  */
-class Feed extends BaseController
+class FeedController extends BaseController
 {
     /**
      * RSS feed for a user

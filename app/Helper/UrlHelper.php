@@ -25,7 +25,7 @@ class UrlHelper extends Base
      */
     public function doc($label, $file)
     {
-        return $this->link($label, 'doc', 'show', array('file' => $file), false, '', '', true);
+        return $this->link($label, 'DocumentationController', 'show', array('file' => $file), false, '', '', true);
     }
 
     /**

@@ -2,7 +2,7 @@
     <h2><?= t('Integration with third-party services') ?></h2>
 </div>
 
-<form method="post" action="<?= $this->url->href('config', 'save', array('redirect' => 'integrations')) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('ConfigController', 'save', array('redirect' => 'integrations')) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
     <?= $this->hook->render('template:config:integrations', array('values' => $values)) ?>
 
