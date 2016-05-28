@@ -15,10 +15,10 @@
         <i class="fa fa-list fa-fw"></i>
         <?= $this->url->link(t('List'), 'TaskListController', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-listing', t('Keyboard shortcut: "%s"', 'v l')) ?>
     </li>
-    <?php if ($this->user->hasProjectAccess('gantt', 'project', $project['id'])): ?>
-    <li <?= $this->app->checkMenuSelection('Gantt') ?>>
+    <?php if ($this->user->hasProjectAccess('TaskGanttController', 'show', $project['id'])): ?>
+    <li <?= $this->app->checkMenuSelection('TaskGanttController') ?>>
         <i class="fa fa-sliders fa-fw"></i>
-        <?= $this->url->link(t('Gantt'), 'gantt', 'project', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-gantt', t('Keyboard shortcut: "%s"', 'v g')) ?>
+        <?= $this->url->link(t('Gantt'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-gantt', t('Keyboard shortcut: "%s"', 'v g')) ?>
     </li>
     <?php endif ?>
 </ul>

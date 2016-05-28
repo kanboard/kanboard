@@ -5,10 +5,10 @@
                 <i class="fa fa-folder fa-fw"></i>
                 <?= $this->url->link(t('Projects list'), 'ProjectListController', 'show') ?>
             </li>
-            <?php if ($this->user->hasAccess('gantt', 'projects')): ?>
+            <?php if ($this->user->hasAccess('ProjectGanttController', 'show')): ?>
                 <li>
                     <i class="fa fa-sliders fa-fw"></i>
-                    <?= $this->url->link(t('Projects Gantt chart'), 'gantt', 'projects') ?>
+                    <?= $this->url->link(t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?>
                 </li>
             <?php endif ?>
         </ul>

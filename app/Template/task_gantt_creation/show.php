@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('New task') ?></h2>
 </div>
-<form method="post" action="<?= $this->url->href('gantt', 'saveTask', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('TaskGanttCreationController', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('project_id', $values) ?>
     <?= $this->form->hidden('column_id', $values) ?>
@@ -30,6 +30,6 @@
     <div class="form-actions">
         <button type="submit" class="btn btn-blue" tabindex="15"><?= t('Save') ?></button>
         <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'BoardViewController', 'show', array('project_id' => $values['project_id']), false, 'close-popover') ?>
+        <?= $this->url->link(t('cancel'), 'TaskGanttController', 'show', array('project_id' => $values['project_id']), false, 'close-popover') ?>
     </div>
 </form>

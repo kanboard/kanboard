@@ -13,10 +13,10 @@
             <i class="fa fa-list fa-fw"></i>
             <?= $this->url->link(t('Listing'), 'TaskListController', 'show', array('project_id' => $project['id'])) ?>
         </li>
-        <?php if ($this->user->hasProjectAccess('Gantt', 'project', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('TaskGanttController', 'show', $project['id'])): ?>
         <li>
             <i class="fa fa-sliders fa-fw"></i>
-            <?= $this->url->link(t('Gantt'), 'gantt', 'project', array('project_id' => $project['id'])) ?>
+            <?= $this->url->link(t('Gantt'), 'TaskGanttController', 'show', array('project_id' => $project['id'])) ?>
         </li>
         <?php endif ?>
 

@@ -22,8 +22,8 @@
                 <?php endif ?>
             </td>
             <td>
-                <?php if ($this->user->hasProjectAccess('gantt', 'project', $project['id'])): ?>
-                    <?= $this->url->link('<i class="fa fa-sliders fa-fw"></i>', 'gantt', 'project', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Gantt chart')) ?>
+                <?php if ($this->user->hasProjectAccess('TaskGanttController', 'show', $project['id'])): ?>
+                    <?= $this->url->link('<i class="fa fa-sliders fa-fw"></i>', 'TaskGanttController', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('Gantt chart')) ?>
                 <?php endif ?>
 
                 <?= $this->url->link('<i class="fa fa-list"></i>', 'TaskListController', 'show', array('project_id' => $project['id']), false, 'dashboard-table-link', t('List')) ?>&nbsp;

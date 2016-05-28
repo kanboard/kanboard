@@ -80,7 +80,8 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('CustomFilterController', '*', Role::PROJECT_MEMBER);
         $acl->add('ExportController', '*', Role::PROJECT_MANAGER);
         $acl->add('TaskFileController', array('screenshot', 'create', 'save', 'remove', 'confirm'), Role::PROJECT_MEMBER);
-        $acl->add('Gantt', '*', Role::PROJECT_MANAGER);
+        $acl->add('TaskGanttController', '*', Role::PROJECT_MANAGER);
+        $acl->add('TaskGanttCreationController', '*', Role::PROJECT_MANAGER);
         $acl->add('ProjectViewController', array('share', 'updateSharing', 'integrations', 'updateIntegrations', 'notifications', 'updateNotifications', 'duplicate', 'doDuplication'), Role::PROJECT_MANAGER);
         $acl->add('ProjectPermissionController', '*', Role::PROJECT_MANAGER);
         $acl->add('ProjectEditController', '*', Role::PROJECT_MANAGER);
@@ -132,7 +133,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('ConfigController', '*', Role::APP_ADMIN);
         $acl->add('PluginController', '*', Role::APP_ADMIN);
         $acl->add('CurrencyController', '*', Role::APP_ADMIN);
-        $acl->add('Gantt', array('projects', 'saveProjectDate'), Role::APP_MANAGER);
+        $acl->add('ProjectGanttController', '*', Role::APP_MANAGER);
         $acl->add('GroupListController', '*', Role::APP_ADMIN);
         $acl->add('GroupCreationController', '*', Role::APP_ADMIN);
         $acl->add('GroupModificationController', '*', Role::APP_ADMIN);
